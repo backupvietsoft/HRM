@@ -1,0 +1,171 @@
+﻿<XtraSerializer version="1.0" application="View">
+  <property name="#LayoutVersion" />
+  <property name="#LayoutScaleFactor">@1,Width=1@1,Height=1</property>
+  <property name="OptionsView" isnull="true" iskey="true">
+    <property name="AllowHtmlDrawHeaders">true</property>
+    <property name="ColumnAutoWidth">false</property>
+    <property name="ColumnHeaderAutoHeight">True</property>
+    <property name="RowAutoHeight">true</property>
+    <property name="ShowGroupPanel">false</property>
+  </property>
+  <property name="ActiveFilterEnabled">true</property>
+  <property name="Columns" iskey="true" value="10">
+    <property name="Item1" isnull="true" iskey="true">
+      <property name="Name">colID_NK</property>
+      <property name="Caption">Signer</property>
+      <property name="ImageAlignment">Near</property>
+      <property name="ImageIndex">-1</property>
+      <property name="FieldName">ID_NK</property>
+      <property name="ColumnEditName" />
+      <property name="Width">63</property>
+      <property name="MinWidth">20</property>
+      <property name="MaxWidth">0</property>
+    </property>
+    <property name="Item2" isnull="true" iskey="true">
+      <property name="Name">colHO_TEN</property>
+      <property name="Caption">Full name</property>
+      <property name="ImageAlignment">Near</property>
+      <property name="ImageIndex">-1</property>
+      <property name="FieldName">HO_TEN</property>
+      <property name="ColumnEditName" />
+      <property name="VisibleIndex">0</property>
+      <property name="Visible">true</property>
+      <property name="Width">177</property>
+      <property name="MinWidth">20</property>
+      <property name="MaxWidth">0</property>
+    </property>
+    <property name="Item3" isnull="true" iskey="true">
+      <property name="Name">colCHUC_VU</property>
+      <property name="Caption">Position</property>
+      <property name="ImageAlignment">Near</property>
+      <property name="ImageIndex">-1</property>
+      <property name="FieldName">CHUC_VU</property>
+      <property name="ColumnEditName" />
+      <property name="VisibleIndex">1</property>
+      <property name="Visible">true</property>
+      <property name="Width">132</property>
+      <property name="MinWidth">20</property>
+      <property name="MaxWidth">0</property>
+    </property>
+    <property name="Item4" isnull="true" iskey="true">
+      <property name="Name">colCHUC_VU_A</property>
+      <property name="Caption">Position (Eng)</property>
+      <property name="ImageAlignment">Near</property>
+      <property name="ImageIndex">-1</property>
+      <property name="FieldName">CHUC_VU_A</property>
+      <property name="ColumnEditName" />
+      <property name="Width">136</property>
+      <property name="MinWidth">20</property>
+      <property name="MaxWidth">0</property>
+    </property>
+    <property name="Item5" isnull="true" iskey="true">
+      <property name="Name">colQUOC_TICH</property>
+      <property name="Caption">Nationality</property>
+      <property name="ImageAlignment">Near</property>
+      <property name="ImageIndex">-1</property>
+      <property name="FieldName">QUOC_TICH</property>
+      <property name="ColumnEditName" />
+      <property name="VisibleIndex">2</property>
+      <property name="Visible">true</property>
+      <property name="Width">122</property>
+      <property name="MinWidth">20</property>
+      <property name="MaxWidth">0</property>
+    </property>
+    <property name="Item6" isnull="true" iskey="true">
+      <property name="Name">colNGAY_SINH</property>
+      <property name="Caption">Date of birth</property>
+      <property name="ImageAlignment">Near</property>
+      <property name="ImageIndex">-1</property>
+      <property name="FieldName">NGAY_SINH</property>
+      <property name="ColumnEditName" />
+      <property name="VisibleIndex">3</property>
+      <property name="Visible">true</property>
+      <property name="Width">130</property>
+      <property name="DisplayFormat" isnull="true" iskey="true">
+        <property name="FormatString">d</property>
+        <property name="FormatType">DateTime</property>
+      </property>
+      <property name="MinWidth">20</property>
+      <property name="MaxWidth">0</property>
+    </property>
+    <property name="Item7" isnull="true" iskey="true">
+      <property name="Name">colSO_CMND</property>
+      <property name="Caption">ID-Card No.</property>
+      <property name="ImageAlignment">Near</property>
+      <property name="ImageIndex">-1</property>
+      <property name="FieldName">SO_CMND</property>
+      <property name="ColumnEditName" />
+      <property name="VisibleIndex">4</property>
+      <property name="Visible">true</property>
+      <property name="Width">115</property>
+      <property name="MinWidth">20</property>
+      <property name="MaxWidth">0</property>
+    </property>
+    <property name="Item8" isnull="true" iskey="true">
+      <property name="Name">colCAP_NGAY</property>
+      <property name="Caption">Issued on</property>
+      <property name="ImageAlignment">Near</property>
+      <property name="ImageIndex">-1</property>
+      <property name="FieldName">CAP_NGAY</property>
+      <property name="ColumnEditName" />
+      <property name="VisibleIndex">5</property>
+      <property name="Visible">true</property>
+      <property name="Width">135</property>
+      <property name="DisplayFormat" isnull="true" iskey="true">
+        <property name="FormatString">d</property>
+        <property name="FormatType">DateTime</property>
+      </property>
+      <property name="MinWidth">20</property>
+      <property name="MaxWidth">0</property>
+    </property>
+    <property name="Item9" isnull="true" iskey="true">
+      <property name="Name">colNOI_CAP</property>
+      <property name="Caption">Issued by</property>
+      <property name="ImageAlignment">Near</property>
+      <property name="ImageIndex">-1</property>
+      <property name="FieldName">NOI_CAP</property>
+      <property name="ColumnEditName" />
+      <property name="VisibleIndex">6</property>
+      <property name="Visible">true</property>
+      <property name="Width">163</property>
+      <property name="MinWidth">20</property>
+      <property name="MaxWidth">0</property>
+    </property>
+    <property name="Item10" isnull="true" iskey="true">
+      <property name="Name">colDIA_CHI</property>
+      <property name="Caption">Address</property>
+      <property name="ImageAlignment">Near</property>
+      <property name="ImageIndex">-1</property>
+      <property name="FieldName">DIA_CHI</property>
+      <property name="ColumnEditName" />
+      <property name="VisibleIndex">7</property>
+      <property name="Visible">true</property>
+      <property name="Width">337</property>
+      <property name="MinWidth">20</property>
+      <property name="MaxWidth">0</property>
+    </property>
+  </property>
+  <property name="GroupSummary" iskey="true" value="1">
+    <property name="Item1" isnull="true" iskey="true">
+      <property name="Mode">AllRows</property>
+      <property name="ShowInGroupColumnFooterName" />
+      <property name="Tag" isnull="true" />
+      <property name="FieldName" />
+      <property name="SummaryType">Count</property>
+      <property name="DisplayFormat" />
+    </property>
+  </property>
+  <property name="ActiveFilterString" />
+  <property name="SortInfoState" iskey="true" value="1">
+    <property name="Item1" isnull="true" iskey="true">
+      <property name="Orders">Ascending</property>
+      <property name="Columns">colQUOC_TICH</property>
+    </property>
+    <property name="Content" isnull="true" iskey="true">
+      <property name="GroupCount">0</property>
+    </property>
+  </property>
+  <property name="GroupSummarySortInfoState" />
+  <property name="FindFilterText" />
+  <property name="FindPanelVisible">false</property>
+</XtraSerializer>

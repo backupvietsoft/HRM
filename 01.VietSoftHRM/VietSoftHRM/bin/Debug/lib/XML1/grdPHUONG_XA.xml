@@ -1,0 +1,114 @@
+﻿<XtraSerializer version="1.0" application="View">
+  <property name="#LayoutVersion" />
+  <property name="#LayoutScaleFactor">@1,Width=1@1,Height=1</property>
+  <property name="OptionsView" isnull="true" iskey="true">
+    <property name="AllowHtmlDrawHeaders">true</property>
+    <property name="ColumnAutoWidth">false</property>
+    <property name="ColumnHeaderAutoHeight">True</property>
+    <property name="RowAutoHeight">true</property>
+  </property>
+  <property name="ActiveFilterEnabled">true</property>
+  <property name="Columns" iskey="true" value="6">
+    <property name="Item1" isnull="true" iskey="true">
+      <property name="Name">colID_PX</property>
+      <property name="Caption">Resident ward</property>
+      <property name="ImageAlignment">Near</property>
+      <property name="ImageIndex">-1</property>
+      <property name="FieldName">ID_PX</property>
+      <property name="ColumnEditName" />
+      <property name="Width">60</property>
+      <property name="MinWidth">20</property>
+      <property name="MaxWidth">0</property>
+    </property>
+    <property name="Item2" isnull="true" iskey="true">
+      <property name="Name">colTEN_TP</property>
+      <property name="Caption">Name of Province/City </property>
+      <property name="ImageAlignment">Near</property>
+      <property name="ImageIndex">-1</property>
+      <property name="FieldName">TEN_TP</property>
+      <property name="ColumnEditName" />
+      <property name="VisibleIndex">0</property>
+      <property name="Visible">true</property>
+      <property name="Width">159</property>
+      <property name="MinWidth">20</property>
+      <property name="MaxWidth">0</property>
+    </property>
+    <property name="Item3" isnull="true" iskey="true">
+      <property name="Name">colTEN_QUAN</property>
+      <property name="Caption">District Name</property>
+      <property name="ImageAlignment">Near</property>
+      <property name="ImageIndex">-1</property>
+      <property name="FieldName">TEN_QUAN</property>
+      <property name="ColumnEditName" />
+      <property name="VisibleIndex">0</property>
+      <property name="Visible">true</property>
+      <property name="Width">203</property>
+      <property name="MinWidth">20</property>
+      <property name="MaxWidth">0</property>
+    </property>
+    <property name="Item4" isnull="true" iskey="true">
+      <property name="Name">colTEN_PX</property>
+      <property name="Caption">Name wards</property>
+      <property name="ImageAlignment">Near</property>
+      <property name="ImageIndex">-1</property>
+      <property name="FieldName">TEN_PX</property>
+      <property name="ColumnEditName" />
+      <property name="VisibleIndex">1</property>
+      <property name="Visible">true</property>
+      <property name="Width">328</property>
+      <property name="MinWidth">20</property>
+      <property name="MaxWidth">0</property>
+    </property>
+    <property name="Item5" isnull="true" iskey="true">
+      <property name="Name">colID_QUAN</property>
+      <property name="Caption">District</property>
+      <property name="ImageAlignment">Near</property>
+      <property name="ImageIndex">-1</property>
+      <property name="FieldName">ID_QUAN</property>
+      <property name="ColumnEditName" />
+      <property name="Width">85</property>
+      <property name="MinWidth">20</property>
+      <property name="MaxWidth">0</property>
+    </property>
+    <property name="Item6" isnull="true" iskey="true">
+      <property name="Name">colMS_XA</property>
+      <property name="Caption">Ward/commune code</property>
+      <property name="ImageAlignment">Near</property>
+      <property name="ImageIndex">-1</property>
+      <property name="FieldName">MS_XA</property>
+      <property name="ColumnEditName" />
+      <property name="VisibleIndex">0</property>
+      <property name="Visible">true</property>
+      <property name="Width">186</property>
+      <property name="MinWidth">20</property>
+      <property name="MaxWidth">0</property>
+    </property>
+  </property>
+  <property name="GroupSummary" iskey="true" value="1">
+    <property name="Item1" isnull="true" iskey="true">
+      <property name="Mode">AllRows</property>
+      <property name="ShowInGroupColumnFooterName" />
+      <property name="Tag" isnull="true" />
+      <property name="FieldName" />
+      <property name="SummaryType">Count</property>
+      <property name="DisplayFormat" />
+    </property>
+  </property>
+  <property name="ActiveFilterString" />
+  <property name="SortInfoState" iskey="true" value="2">
+    <property name="Item1" isnull="true" iskey="true">
+      <property name="Orders">Ascending</property>
+      <property name="Columns">colTEN_TP</property>
+    </property>
+    <property name="Item2" isnull="true" iskey="true">
+      <property name="Orders">Ascending</property>
+      <property name="Columns">colTEN_QUAN</property>
+    </property>
+    <property name="Content" isnull="true" iskey="true">
+      <property name="GroupCount">2</property>
+    </property>
+  </property>
+  <property name="GroupSummarySortInfoState" />
+  <property name="FindFilterText" />
+  <property name="FindPanelVisible">false</property>
+</XtraSerializer>

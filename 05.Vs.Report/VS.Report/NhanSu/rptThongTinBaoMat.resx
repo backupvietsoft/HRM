@@ -1,0 +1,171 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="xrLabel41.ExpressionBindings" xml:space="preserve">
+    <value>'Bất kỳ sửa đổi nào đối với Thỏa thuận này sẽ được thực hiện theo thỏa thuận bằng văn bản của cả hai Bên. Thỏa thuận này sẽ có hiệu lực kể từ ngày ký cho đến khi hoàn thành công việc  (hoặc ngày ……………………, tùy theo thời điểm nào đến sau)./.'</value>
+  </data>
+  <data name="xrLabel40.ExpressionBindings" xml:space="preserve">
+    <value>'Any amendment to this Agreement shall be done by mutually and written agreement of both Parties. This Agreement shall stay valid until the completion of the work (or by ……&lt;date&gt;……..………, which ever comes later)./.'</value>
+  </data>
+  <data name="xrLabel39.ExpressionBindings" xml:space="preserve">
+    <value>'Khi có yêu cầu thực hiện trách nhiệm bảo mật thông tin, yêu cầu đó phải được thể hiện bằng văn bản và có đóng dấu (nếu có), có chữ ký của người đại diện theo pháp luật của Khách hàng. Công ty có quyền yêu cầu làm rõ thẩm quyền, nội dung của yêu cầu và các bằng chứng khác có liên quan để làm cơ sở xem xét và xử lý thông tin.'</value>
+  </data>
+  <data name="xrLabel38.ExpressionBindings" xml:space="preserve">
+    <value>'When there is a request for the performance of information confidential responsibilities, such request must be made in stamped (if any) written form with signature of the legal representative of the Client. The Company has the right to request clarification of the authority, content of the request and other relevant evidence as a basis for reviewing and processing information.'</value>
+  </data>
+  <data name="xrLabel37.ExpressionBindings" xml:space="preserve">
+    <value>'Thỏa thuận này chỉ có hiệu lực đối với những Khách hàng mà Công ty cung cấp Thỏa thuận không tiết lộ thông tin này có chữ ký của người đại diện theo pháp luật và con dấu của Công ty. Nó không có giá trị đối với bất kỳ bên thứ ba nào khác. Việc cung cấp bản sao / bản scan từ địa chỉ email chính thức của Công ty (email:……..)  liên quan đến cơ hội hợp tác giữa hai bên sẽ có giá trị như văn bản gốc.'</value>
+  </data>
+  <data name="xrLabel36.Text" xml:space="preserve">
+    <value>This agreement is only valid for Clients which the Company provides this Non-Disclosure Agreement with signature of the legal representative and the Company's stamp. It is of no value to any other third party. The provision of photocopies/scans from the Company's official email address (email:……..) related to the cooperation opportunity between both parties will be as valid as the original document.</value>
+  </data>
+  <data name="xrLabel35.ExpressionBindings" xml:space="preserve">
+    <value>'Thông tin Bảo mật sẽ được Công ty bảo mật trong quá trình thực hiện công việc. Sau khi thời hạn hiệu lực của Thỏa thuận này chấm dứt, trừ khi Công ty nhận được sự cho phép bằng văn bản của Khách hàng để tiết lộ hoặc công khai Thông tin bí mật, mọi nghĩa vụ không tiết lộ quy định trong Thỏa thuận này vẫn được áp dụng. Khi không cần lưu trữ nữa, Công ty sẽ có quyền tiến hành tiêu hủy một phần / toàn bộ Thông tin bảo mật, trừ khi Khách hàng yêu cầu trả lại bằng văn bản trong thời hạn không quá 30 ngày kể từ ngày hoàn thành công việc;'</value>
+  </data>
+  <data name="xrLabel34.ExpressionBindings" xml:space="preserve">
+    <value>'The Confidential Information will be kept confidential by the Company during the performance of the work. After the completion of after the validity period of this Agreement, unless the Company receives written permission from the Client for disclosure or the Confidential Information becomes public, all non-disclosure obligation stipulated  in this Agreement still applied. When storage is no longer needed, the Company will have the right to proceed with the destruction of part/all of the Confidential Information, unless the Customer requests a return in written documents within a period not exceeding 30 days from the completion date the work;'</value>
+  </data>
+  <data name="xrLabel31.Text" xml:space="preserve">
+    <value>Thông tin và tài liệu mà Công ty nhận được hoặc có được từ các nguồn khác mà không có nghĩa vụ bảo mật; thông tin, tài liệu có được theo kiến thức, kinh nghiệm làm việc và quá trình tự nghiên cứu của chính Công ty;</value>
+  </data>
+  <data name="xrLabel32.Text" xml:space="preserve">
+    <value>Các thông tin, tài liệu mà Công ty phải công bố theo quy định của pháp luật hoặc yêu cầu của cơ quan Nhà nước có thẩm quyền. Trong những tình huống như vậy, trước khi tiết lộ thông tin và tài liệu, Công ty phải thông báo cho Khách hàng bằng văn bản</value>
+  </data>
+  <data name="xrLabel20.Text" xml:space="preserve">
+    <value>Information and documents that the Company must disclose in accordance with the law or the request from competent State authorities. In such situations, before disclosing of information and documents, the Company shall notify the Client in writing</value>
+  </data>
+  <data name="xrLabel19.Text" xml:space="preserve">
+    <value>Information and documents that the Company receives or obtains from other sources without obligation of confidentiality; information and documents obtained according to the Company's own knowledge, working experience and self-research process;</value>
+  </data>
+  <data name="xrLabel9.ExpressionBindings" xml:space="preserve">
+    <value>'&lt;i&gt;Trong Thỏa thuận này, Thông tin Bí mật được Công ty và Khách hàng cùng hiểu và nhất trí là TẤT CẢ dữ liệu, thông tin do Khách hàng cung cấp trực tiếp cho Công ty (bao gồm cả nhân viên của Công ty được ủy quyền nhận thông tin), dưới hình thức điện tử (thư điện tử hoặc các phương tiện điện tử khác), fax hoặc bản in ra giấy (sau đây được gọi là &lt;b&gt;“Thông tin bí mật”&lt;/b&gt;). Khi nhận được Thông tin mật, Công ty có trách nhiệm thực hiện các biện pháp cần thiết để bảo mật thông tin một cách nghiêm ngặt;&lt;/i&gt;'</value>
+  </data>
+  <data name="xrLabel8.ExpressionBindings" xml:space="preserve">
+    <value>'In this Agreement, Confidential Information is mutually understood and agreed by the Company and the Client as ALL data, information provided by the Client directly to the Company (including personnel of the Company authorized to receive information), either in electronic forms (e-mail or other electronic means), fax, or hard copies (hereinafter referred to as &lt;b&gt;“Confidential Information”&lt;/b&gt;). Upon receiving Confidential Information, the Company has responsibility to take necessary measures to keep the information strictly confidential;'</value>
+  </data>
+  <data name="xrLabel6.ExpressionBindings" xml:space="preserve">
+    <value>'&lt;i&gt;&lt;b&gt;' + [DATA].[TEN_DV] + '&lt;/b&gt; được thành lập và hoạt động theo quy định pháp luật (bao gồm công ty con và văn phòng đại diện tại Việt Nam), có trụ sở tại &lt;b&gt;' + [DATA].[DIA_CHI_DV] +'&lt;/b&gt; (sau đây gọi là &lt;b&gt;“Công ty”&lt;/b&gt;), xin cam kết với bên cung cấp thông tin - &lt;b&gt;'+ [DATA].[TEN_DV_KH] +'&lt;/b&gt;, tại '+ [DATA].[DIA_CHI_DV_KH] +' (sau đây gọi là &lt;b&gt;“Khách hàng”&lt;/b&gt;) Công ty sẽ tuân thủ các nghĩa vụ bảo mật thông tin đã cung cấp như sau:&lt;/i&gt;'</value>
+  </data>
+  <data name="xrLabel5.ExpressionBindings" xml:space="preserve">
+    <value>'&lt;b&gt;' + [DATA].[TEN_DV] + '&lt;/b&gt; is established and operated under the laws of country ( included subsidiary and representative office in Vietnam), located at &lt;b&gt;' + [DATA].[DIA_CHI_DV] +'&lt;/b&gt; (hereinafter referred to as &lt;b&gt;“Company”&lt;/b&gt;), hereby commit to the information supplier – &lt;b&gt;'+ [DATA].[TEN_DV_KH] +'&lt;/b&gt;, located at '+ [DATA].[DIA_CHI_DV_KH] +' (hereinafter referred to as &lt;b&gt;“Customer/Client”&lt;/b&gt;) that the Company will comply with the obligations to protect the confidentiality of the information provided as follows:'</value>
+  </data>
+  <data name="xrLabel4.ExpressionBindings" xml:space="preserve">
+    <value>'Thỏa thuận bảo mật thông tin này được thực hiện vào ngày '+ FormatString('{0:dd/MM/yyyy}',[DATA].[NGAY_KY]) +' và chỉ áp dụng cho những thông tin thu thập được để đánh giá cơ hội hợp tác giữa hai bên dưới đây:'</value>
+  </data>
+</root>

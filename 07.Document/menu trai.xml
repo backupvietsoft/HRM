@@ -1,0 +1,8 @@
+﻿<XtraSerializer version="1.0" application="AccordionControl">
+  <property name="#LayoutVersion" />
+  <property name="ItemHeight">0</property>
+  <property name="GroupHeight">0</property>
+  <property name="ExpandElementMode">SingleItem</property>
+  <property name="AnimationType">Default</property>
+  <property name="Elements" iskey="true" value="0" />
+</XtraSerializer>

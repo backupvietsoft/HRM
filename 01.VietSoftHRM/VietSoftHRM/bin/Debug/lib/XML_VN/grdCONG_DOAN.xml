@@ -1,0 +1,181 @@
+﻿<XtraSerializer version="1.0" application="View">
+  <property name="#LayoutVersion" />
+  <property name="#LayoutScaleFactor">@1,Width=1@1,Height=1</property>
+  <property name="OptionsView" isnull="true" iskey="true">
+    <property name="AllowHtmlDrawHeaders">true</property>
+    <property name="ColumnAutoWidth">false</property>
+    <property name="ColumnHeaderAutoHeight">True</property>
+    <property name="RowAutoHeight">true</property>
+  </property>
+  <property name="ActiveFilterEnabled">true</property>
+  <property name="Columns" iskey="true" value="11">
+    <property name="Item1" isnull="true" iskey="true">
+      <property name="Name">colID_CD</property>
+      <property name="Caption">@ID_CD@</property>
+      <property name="ImageAlignment">Near</property>
+      <property name="ImageIndex">-1</property>
+      <property name="FieldName">ID_CD</property>
+      <property name="ColumnEditName" />
+      <property name="Width">63</property>
+      <property name="MinWidth">20</property>
+      <property name="MaxWidth">0</property>
+    </property>
+    <property name="Item2" isnull="true" iskey="true">
+      <property name="Name">colTEN_NHH</property>
+      <property name="Caption">Tên nhóm hàng hóa</property>
+      <property name="ImageAlignment">Near</property>
+      <property name="ImageIndex">-1</property>
+      <property name="FieldName">TEN_NHH</property>
+      <property name="ColumnEditName" />
+      <property name="VisibleIndex">0</property>
+      <property name="Visible">true</property>
+      <property name="Width">88</property>
+      <property name="MinWidth">20</property>
+      <property name="MaxWidth">0</property>
+    </property>
+    <property name="Item3" isnull="true" iskey="true">
+      <property name="Name">colTEN_CUM</property>
+      <property name="Caption">Tên cụm</property>
+      <property name="ImageAlignment">Near</property>
+      <property name="ImageIndex">-1</property>
+      <property name="FieldName">TEN_CUM</property>
+      <property name="ColumnEditName" />
+      <property name="VisibleIndex">0</property>
+      <property name="Visible">true</property>
+      <property name="Width">87</property>
+      <property name="MinWidth">20</property>
+      <property name="MaxWidth">0</property>
+    </property>
+    <property name="Item4" isnull="true" iskey="true">
+      <property name="Name">colMS_CD</property>
+      <property name="Caption">MS CĐ</property>
+      <property name="ImageAlignment">Near</property>
+      <property name="ImageIndex">-1</property>
+      <property name="FieldName">MS_CD</property>
+      <property name="ColumnEditName" />
+      <property name="VisibleIndex">0</property>
+      <property name="Visible">true</property>
+      <property name="Width">142</property>
+      <property name="MinWidth">20</property>
+      <property name="MaxWidth">0</property>
+    </property>
+    <property name="Item5" isnull="true" iskey="true">
+      <property name="Name">colTEN_CD</property>
+      <property name="Caption">Tên công đoạn</property>
+      <property name="ImageAlignment">Near</property>
+      <property name="ImageIndex">-1</property>
+      <property name="FieldName">TEN_CD</property>
+      <property name="ColumnEditName" />
+      <property name="VisibleIndex">1</property>
+      <property name="Visible">true</property>
+      <property name="Width">488</property>
+      <property name="MinWidth">20</property>
+      <property name="MaxWidth">0</property>
+    </property>
+    <property name="Item6" isnull="true" iskey="true">
+      <property name="Name">colTEN_BAC_THO</property>
+      <property name="Caption">Tên bậc thợ</property>
+      <property name="ImageAlignment">Near</property>
+      <property name="ImageIndex">-1</property>
+      <property name="FieldName">TEN_BAC_THO</property>
+      <property name="ColumnEditName" />
+      <property name="VisibleIndex">2</property>
+      <property name="Visible">true</property>
+      <property name="Width">119</property>
+      <property name="MinWidth">20</property>
+      <property name="MaxWidth">0</property>
+    </property>
+    <property name="Item7" isnull="true" iskey="true">
+      <property name="Name">colTGTK</property>
+      <property name="Caption">TGLT</property>
+      <property name="ImageAlignment">Near</property>
+      <property name="ImageIndex">-1</property>
+      <property name="FieldName">TGTK</property>
+      <property name="ColumnEditName" />
+      <property name="VisibleIndex">3</property>
+      <property name="Visible">true</property>
+      <property name="Width">57</property>
+      <property name="MinWidth">20</property>
+      <property name="MaxWidth">0</property>
+    </property>
+    <property name="Item8" isnull="true" iskey="true">
+      <property name="Name">colTEN_LOAI_MAY</property>
+      <property name="Caption">Tên loại máy</property>
+      <property name="ImageAlignment">Near</property>
+      <property name="ImageIndex">-1</property>
+      <property name="FieldName">TEN_LOAI_MAY</property>
+      <property name="ColumnEditName" />
+      <property name="VisibleIndex">4</property>
+      <property name="Visible">true</property>
+      <property name="Width">124</property>
+      <property name="MinWidth">20</property>
+      <property name="MaxWidth">0</property>
+    </property>
+    <property name="Item9" isnull="true" iskey="true">
+      <property name="Name">colYEU_CAU_KT</property>
+      <property name="Caption">Yêu cầu kỹ thuật</property>
+      <property name="ImageAlignment">Near</property>
+      <property name="ImageIndex">-1</property>
+      <property name="FieldName">YEU_CAU_KT</property>
+      <property name="ColumnEditName" />
+      <property name="VisibleIndex">5</property>
+      <property name="Visible">true</property>
+      <property name="Width">132</property>
+      <property name="MinWidth">20</property>
+      <property name="MaxWidth">0</property>
+    </property>
+    <property name="Item10" isnull="true" iskey="true">
+      <property name="Name">colCU_GA_LAP</property>
+      <property name="Caption">Cữ gá lắp</property>
+      <property name="ImageAlignment">Near</property>
+      <property name="ImageIndex">-1</property>
+      <property name="FieldName">CU_GA_LAP</property>
+      <property name="ColumnEditName" />
+      <property name="VisibleIndex">6</property>
+      <property name="Visible">true</property>
+      <property name="Width">98</property>
+      <property name="MinWidth">20</property>
+      <property name="MaxWidth">0</property>
+    </property>
+    <property name="Item11" isnull="true" iskey="true">
+      <property name="Name">colNGAY_LAP</property>
+      <property name="Caption">Ngày lập</property>
+      <property name="ImageAlignment">Near</property>
+      <property name="ImageIndex">-1</property>
+      <property name="FieldName">NGAY_LAP</property>
+      <property name="ColumnEditName" />
+      <property name="VisibleIndex">7</property>
+      <property name="Visible">true</property>
+      <property name="Width">92</property>
+      <property name="MinWidth">20</property>
+      <property name="MaxWidth">0</property>
+    </property>
+  </property>
+  <property name="GroupSummary" iskey="true" value="1">
+    <property name="Item1" isnull="true" iskey="true">
+      <property name="Mode">AllRows</property>
+      <property name="ShowInGroupColumnFooterName" />
+      <property name="Tag" isnull="true" />
+      <property name="FieldName" />
+      <property name="SummaryType">Count</property>
+      <property name="DisplayFormat" />
+    </property>
+  </property>
+  <property name="ActiveFilterString" />
+  <property name="SortInfoState" iskey="true" value="2">
+    <property name="Item1" isnull="true" iskey="true">
+      <property name="Orders">Ascending</property>
+      <property name="Columns">colTEN_NHH</property>
+    </property>
+    <property name="Item2" isnull="true" iskey="true">
+      <property name="Orders">Ascending</property>
+      <property name="Columns">colTEN_CUM</property>
+    </property>
+    <property name="Content" isnull="true" iskey="true">
+      <property name="GroupCount">2</property>
+    </property>
+  </property>
+  <property name="GroupSummarySortInfoState" />
+  <property name="FindFilterText" />
+  <property name="FindPanelVisible">false</property>
+</XtraSerializer>

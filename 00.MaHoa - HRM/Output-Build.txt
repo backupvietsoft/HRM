@@ -1,0 +1,3 @@
+﻿1>------ Rebuild All started: Project: MaHoaHRM, Configuration: Debug Any CPU ------
+1>  MaHoaHRM -> D:\01.Code\07.VietSoft HRM\MaHoa - HRM\MaHoaHRM\bin\Debug\MaHoaHRM.exe
+========== Rebuild All: 1 succeeded, 0 failed, 0 skipped ==========

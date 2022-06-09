@@ -1,0 +1,190 @@
+﻿<XtraSerializer version="1.0" application="View">
+  <property name="#LayoutVersion" />
+  <property name="#LayoutScaleFactor">@1,Width=1@1,Height=1</property>
+  <property name="OptionsView" isnull="true" iskey="true">
+    <property name="AllowHtmlDrawHeaders">true</property>
+    <property name="ColumnAutoWidth">false</property>
+    <property name="ColumnHeaderAutoHeight">True</property>
+    <property name="RowAutoHeight">true</property>
+  </property>
+  <property name="ActiveFilterEnabled">true</property>
+  <property name="Columns" iskey="true" value="12">
+    <property name="Item1" isnull="true" iskey="true">
+      <property name="Name">colID_LM</property>
+      <property name="Caption">ID</property>
+      <property name="ImageAlignment">Near</property>
+      <property name="ImageIndex">-1</property>
+      <property name="FieldName">ID_LM</property>
+      <property name="ColumnEditName" />
+      <property name="Width">63</property>
+      <property name="MinWidth">20</property>
+      <property name="MaxWidth">0</property>
+    </property>
+    <property name="Item2" isnull="true" iskey="true">
+      <property name="Name">colMS_LOAI_MAY</property>
+      <property name="Caption">Machine model number</property>
+      <property name="ImageAlignment">Near</property>
+      <property name="ImageIndex">-1</property>
+      <property name="FieldName">MS_LOAI_MAY</property>
+      <property name="ColumnEditName" />
+      <property name="VisibleIndex">0</property>
+      <property name="Visible">true</property>
+      <property name="Width">187</property>
+      <property name="MinWidth">20</property>
+      <property name="MaxWidth">0</property>
+    </property>
+    <property name="Item3" isnull="true" iskey="true">
+      <property name="Name">colTEN_LOAI_MAY</property>
+      <property name="Caption">Machine type name</property>
+      <property name="ImageAlignment">Near</property>
+      <property name="ImageIndex">-1</property>
+      <property name="FieldName">TEN_LOAI_MAY</property>
+      <property name="ColumnEditName" />
+      <property name="VisibleIndex">1</property>
+      <property name="Visible">true</property>
+      <property name="Width">171</property>
+      <property name="MinWidth">20</property>
+      <property name="MaxWidth">0</property>
+    </property>
+    <property name="Item4" isnull="true" iskey="true">
+      <property name="Name">colTEN_LOAI_MAY_A</property>
+      <property name="Caption">Machine type name (Eng)</property>
+      <property name="ImageAlignment">Near</property>
+      <property name="ImageIndex">-1</property>
+      <property name="FieldName">TEN_LOAI_MAY_A</property>
+      <property name="ColumnEditName" />
+      <property name="Width">140</property>
+      <property name="MinWidth">20</property>
+      <property name="MaxWidth">0</property>
+    </property>
+    <property name="Item5" isnull="true" iskey="true">
+      <property name="Name">colTEN_LOAI_MAY_H</property>
+      <property name="Caption">Machine type name (Ch)</property>
+      <property name="ImageAlignment">Near</property>
+      <property name="ImageIndex">-1</property>
+      <property name="FieldName">TEN_LOAI_MAY_H</property>
+      <property name="ColumnEditName" />
+      <property name="Width">141</property>
+      <property name="MinWidth">20</property>
+      <property name="MaxWidth">0</property>
+    </property>
+    <property name="Item6" isnull="true" iskey="true">
+      <property name="Name">colSTT_MAY</property>
+      <property name="Caption">No.</property>
+      <property name="ImageAlignment">Near</property>
+      <property name="ImageIndex">-1</property>
+      <property name="FieldName">STT_MAY</property>
+      <property name="ColumnEditName" />
+      <property name="VisibleIndex">2</property>
+      <property name="Visible">true</property>
+      <property name="Width">83</property>
+      <property name="MinWidth">20</property>
+      <property name="MaxWidth">0</property>
+    </property>
+    <property name="Item7" isnull="true" iskey="true">
+      <property name="Name">colSD_QTCN</property>
+      <property name="Caption">@SD_QTCN@</property>
+      <property name="ImageAlignment">Near</property>
+      <property name="ImageIndex">-1</property>
+      <property name="FieldName">SD_QTCN</property>
+      <property name="ColumnEditName" />
+      <property name="VisibleIndex">3</property>
+      <property name="Visible">true</property>
+      <property name="Width">131</property>
+      <property name="MinWidth">20</property>
+      <property name="MaxWidth">0</property>
+    </property>
+    <property name="Item8" isnull="true" iskey="true">
+      <property name="Name">colCONG_CU</property>
+      <property name="Caption">Tools</property>
+      <property name="ImageAlignment">Near</property>
+      <property name="ImageIndex">-1</property>
+      <property name="FieldName">CONG_CU</property>
+      <property name="ColumnEditName" />
+      <property name="VisibleIndex">4</property>
+      <property name="Visible">true</property>
+      <property name="Width">88</property>
+      <property name="MinWidth">20</property>
+      <property name="MaxWidth">0</property>
+    </property>
+    <property name="Item9" isnull="true" iskey="true">
+      <property name="Name">colKI_HIEU</property>
+      <property name="Caption">Symbol</property>
+      <property name="ImageAlignment">Near</property>
+      <property name="ImageIndex">-1</property>
+      <property name="FieldName">KI_HIEU</property>
+      <property name="ColumnEditName" />
+      <property name="VisibleIndex">5</property>
+      <property name="Visible">true</property>
+      <property name="Width">74</property>
+      <property name="MinWidth">20</property>
+      <property name="MaxWidth">0</property>
+    </property>
+    <property name="Item10" isnull="true" iskey="true">
+      <property name="Name">colTINH_NANG_CO_BAN</property>
+      <property name="Caption">Basic Features</property>
+      <property name="ImageAlignment">Near</property>
+      <property name="ImageIndex">-1</property>
+      <property name="FieldName">TINH_NANG_CO_BAN</property>
+      <property name="ColumnEditName" />
+      <property name="VisibleIndex">6</property>
+      <property name="Visible">true</property>
+      <property name="Width">166</property>
+      <property name="MinWidth">20</property>
+      <property name="MaxWidth">0</property>
+    </property>
+    <property name="Item11" isnull="true" iskey="true">
+      <property name="Name">colTOC_DO_THIET_BI</property>
+      <property name="Caption">Device speed</property>
+      <property name="ImageAlignment">Near</property>
+      <property name="ImageIndex">-1</property>
+      <property name="FieldName">TOC_DO_THIET_BI</property>
+      <property name="ColumnEditName" />
+      <property name="VisibleIndex">7</property>
+      <property name="Visible">true</property>
+      <property name="Width">142</property>
+      <property name="DisplayFormat" isnull="true" iskey="true">
+        <property name="FormatString">n0</property>
+        <property name="FormatType">Numeric</property>
+      </property>
+      <property name="MinWidth">20</property>
+      <property name="MaxWidth">0</property>
+    </property>
+    <property name="Item12" isnull="true" iskey="true">
+      <property name="Name">colSU_DUNG_CONG_DOAN</property>
+      <property name="Caption">Use in the process</property>
+      <property name="ImageAlignment">Near</property>
+      <property name="ImageIndex">-1</property>
+      <property name="FieldName">SU_DUNG_CONG_DOAN</property>
+      <property name="ColumnEditName" />
+      <property name="VisibleIndex">8</property>
+      <property name="Visible">true</property>
+      <property name="Width">184</property>
+      <property name="MinWidth">20</property>
+      <property name="MaxWidth">0</property>
+    </property>
+  </property>
+  <property name="GroupSummary" iskey="true" value="1">
+    <property name="Item1" isnull="true" iskey="true">
+      <property name="Mode">AllRows</property>
+      <property name="ShowInGroupColumnFooterName" />
+      <property name="Tag" isnull="true" />
+      <property name="FieldName" />
+      <property name="SummaryType">Count</property>
+      <property name="DisplayFormat" />
+    </property>
+  </property>
+  <property name="ActiveFilterString" />
+  <property name="SortInfoState" iskey="true" value="1">
+    <property name="Item1" isnull="true" iskey="true">
+      <property name="Orders">Ascending</property>
+      <property name="Columns">colSU_DUNG_CONG_DOAN</property>
+    </property>
+    <property name="Content" isnull="true" iskey="true">
+      <property name="GroupCount">1</property>
+    </property>
+  </property>
+  <property name="GroupSummarySortInfoState" />
+  <property name="FindFilterText">       </property>
+  <property name="FindPanelVisible">false</property>
+</XtraSerializer>

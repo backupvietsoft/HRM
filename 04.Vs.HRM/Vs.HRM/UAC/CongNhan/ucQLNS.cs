@@ -7,6 +7,8 @@ using DevExpress.XtraGrid.Views.Tile;
 using DevExpress.XtraBars.Docking2010;
 using DevExpress.XtraBars.Navigation;
 using DevExpress.XtraLayout.Utils;
+using System.Threading;
+
 namespace Vs.HRM
 {
     public partial class ucQLNS : DevExpress.XtraEditors.XtraUserControl
@@ -141,14 +143,11 @@ namespace Vs.HRM
             }
             catch { }
         }
-
-
         private void tileView1_DoubleClick(object sender, EventArgs e)
         {
 
             grdNS.Visible = false;
             ucCTQLNS dl = new ucCTQLNS(Convert.ToInt64(tileViewCN.GetFocusedRowCellValue(tileViewCN.Columns["ID_CN"])));
-            Commons.Modules.ObjSystems.ShowWaitForm(this);
             dl.Refresh();
             dt = dl.dt;
             navigationFrame1.SelectedPage.Visible = false;
@@ -166,11 +165,30 @@ namespace Vs.HRM
             navigationPage2.Controls.Add(dl);
             dl.Dock = DockStyle.Fill;
             dl.backWindowsUIButtonPanel.ButtonClick += BackWindowsUIButtonPanel_ButtonClick;
-            navigationFrame1.SelectedPage = navigationPage2;
-            accorMenuleft.Visible = false;
-            Commons.Modules.ObjSystems.HideWaitForm();
-        } 
+            Thread thread = new Thread(delegate ()
+            {
+                if (this.InvokeRequired)
+                {
+                    this.Invoke(new MethodInvoker(delegate
+                    {
+                        navigationFrame1.SelectedPage = navigationPage2;
+                    }));
+                }
+            }, 100);
+            thread.Start();
 
+            accorMenuleft.Visible = false;
+        } 
+        private void Selecttab()
+        {
+            if (InvokeRequired)
+            {
+                this.Invoke(new MethodInvoker(delegate
+                {
+                    navigationFrame1.SelectedPage = navigationPage2;
+                }));
+            }
+        }
         public void BackWindowsUIButtonPanel_ButtonClick(object sender, ButtonEventArgs e)
         {
             navigationFrame1.SelectedPage = navigationPage1;
@@ -188,9 +206,7 @@ namespace Vs.HRM
             ItemForTO.Visibility = ItemForTO.Visibility == LayoutVisibility.Never ? LayoutVisibility.Always : LayoutVisibility.Never;
             ItemForTT_HT.Visibility = ItemForTT_HT.Visibility == LayoutVisibility.Never ? LayoutVisibility.Always : LayoutVisibility.Never;
             ItemForXI_NGHIEP.Visibility = ItemForXI_NGHIEP.Visibility == LayoutVisibility.Never ? LayoutVisibility.Always : LayoutVisibility.Never;
-            ItemForSerchControl.Visibility = ItemForSerchControl.Visibility == LayoutVisibility.Never ? LayoutVisibility.Always : LayoutVisibility.Never;
         }
-
         private void grdNS_ProcessGridKey(object sender, KeyEventArgs e)
         {
             if (e.KeyData == Keys.Delete)
@@ -219,7 +235,6 @@ namespace Vs.HRM
         {
             WindowsUIButton btn = e.Button as WindowsUIButton;
             XtraUserControl ctl = new XtraUserControl();
-            if (btn == null || btn.Tag == null) return;
             switch (btn.Tag.ToString())
             {
                 case "them":

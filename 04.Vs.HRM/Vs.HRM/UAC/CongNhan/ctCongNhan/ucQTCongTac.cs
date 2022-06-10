@@ -72,6 +72,7 @@ namespace Vs.HRM
             enableButon(true);
             Commons.Modules.ObjSystems.SetPhanQuyen(windowsUIButton);
             Commons.Modules.sLoad = "";
+
         }
 
         private void grvCongTac_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)

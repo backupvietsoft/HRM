@@ -21,6 +21,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -1601,8 +1602,10 @@ namespace Commons
                 {
                     LayoutControlGroup gro = (LayoutControlGroup)gr;
                     gro.Text = GetNN(dtTmp, gro.Name, frm.Name);
+                    gro.AppearanceGroup.ForeColor = Color.FromArgb(192, 0, 0);
                     gro.DoubleClick += delegate (object a, EventArgs b) { ControlGroup_DoubleClick(gro, b, frm.Name); };
                     LoadNNGroupControl(frm, (LayoutControlGroup)gr, dtTmp);
+
                 }
                 else
                 {
@@ -1645,23 +1648,27 @@ namespace Commons
         {
             //sữa ngon ngữ group
         }
-
-
         public void ThayDoiNN(XtraUserControl frm, LayoutControlGroup group, TabbedControlGroup Tab, WindowsUIButtonPanel btnWinUIB)
         {
             DataTable dtTmp = new DataTable();
             dtTmp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT KEYWORD , CASE " + Modules.TypeLanguage + " WHEN 0 THEN VIETNAM WHEN 1 THEN ENGLISH ELSE CHINESE END AS NN  FROM LANGUAGES WHERE FORM = N'" + frm.Name + "' "));
-            frm.Text = GetNN(dtTmp, frm.Name, frm.Name);
-            LoadNNGroupControl(frm, group, dtTmp);
+            Thread thread11 = new Thread(delegate ()
+            {
+                if (frm.InvokeRequired)
+                {
+                    frm.Invoke(new MethodInvoker(delegate
+                    {
+                        LoadNNGroupControl(frm, group, dtTmp);
+                    }));
+                }
+            }, 2000); thread11.Start();
             Tab.DoubleClick += delegate (object a, EventArgs b) { TabbedControlGroup_DoubleClick(Tab, b, frm.Name); };
 
-            foreach (LayoutControlGroup item in Tab.TabPages)
-            {
-                LoadNNGroupControl(frm, item, dtTmp);
-            }
-            foreach (LayoutGroup item in Tab.TabPages)
+            foreach (LayoutControlGroup item in  Tab.TabPages)
             {
                 item.Text = GetNN(dtTmp, item.Name, frm.Name);
+                item.AppearanceTabPage.Header.ForeColor = Color.FromArgb(192, 0, 0);
+                //LoadNNGroupControl(frm, item, dtTmp);
             }
             try
             {
@@ -1695,8 +1702,9 @@ namespace Commons
                 {
                     LayoutControlGroup gro = (LayoutControlGroup)gr;
                     gro.Text = GetNN(dtTmp, gro.Name, name);
+                    gro.AppearanceGroup.ForeColor = Color.FromArgb(192, 0, 0);
                     gro.DoubleClick += delegate (object a, EventArgs b) { ControlGroup_DoubleClick(gro, b, name); };
-                    LoadNNGroupControl(gro,dtTmp,name);
+                    LoadNNGroupControl(gro, dtTmp, name);
                 }
                 else
                 {
@@ -1805,7 +1813,7 @@ namespace Commons
                                 }
                             }
 
-                         
+
 
                             if (Ctl.GetType().Name.ToString() == "RadioButton")
                             {
@@ -1898,6 +1906,17 @@ namespace Commons
                         {
                             if (Ctl.Name.ToUpper().Substring(0, 4) != "NONN" & Ctl.Name.Length > 4)
                                 Ctl.Text = GetNN(dtNgu, Ctl.Name, frm.Name);// Modules.ObjLanguages.GetLanguage(Modules.ModuleName, frm.Name, Ctl.Name, Modules.TypeLanguage)
+                            if (Ctl.GetType().Name.ToString() == "LabelControl")
+                            {
+                                try
+                                {
+                                    Ctl.MouseDoubleClick += delegate (object a, MouseEventArgs b) { Label_MouseDoubleClick(Ctl, b, frm.Name); };
+
+                                }
+                                catch
+                                {
+                                }
+                            }
                             if (Ctl.GetType().Name.ToString() == "CheckEdit")
                             {
                                 try
@@ -1917,10 +1936,12 @@ namespace Commons
                             }
                             if (Ctl.GetType().Name.ToString() == "GroupControl")
                             {
-                               
                                 try
                                 {
-                                    Ctl.MouseDoubleClick += delegate (object a, MouseEventArgs b) { Gropcontrol_MouseDoubleClick(Ctl, b, frm.Name); };
+                                    GroupControl CtlDev;
+                                    CtlDev = (GroupControl)Ctl;
+                                    CtlDev.AppearanceCaption.ForeColor = Color.FromArgb(192, 0, 0);
+                                    CtlDev.MouseDoubleClick += delegate (object a, MouseEventArgs b) { Gropcontrol_MouseDoubleClick(Ctl, b, frm.Name); };
                                 }
                                 catch
                                 {
@@ -1999,65 +2020,65 @@ namespace Commons
                             break;
                         }
 
-                    //case "GridControl":
-                    //    {
-                    //        DevExpress.XtraGrid.GridControl grid;
-                    //        grid = (DevExpress.XtraGrid.GridControl)Ctl;
-                    //        DevExpress.XtraGrid.Views.Grid.GridView mainView = (DevExpress.XtraGrid.Views.Grid.GridView)grid.MainView;
-                    //        try { Commons.Modules.OXtraGrid.CreateMenuReset(grid); }
-                    //        catch { }
+                        //case "GridControl":
+                        //    {
+                        //        DevExpress.XtraGrid.GridControl grid;
+                        //        grid = (DevExpress.XtraGrid.GridControl)Ctl;
+                        //        DevExpress.XtraGrid.Views.Grid.GridView mainView = (DevExpress.XtraGrid.Views.Grid.GridView)grid.MainView;
+                        //        try { Commons.Modules.OXtraGrid.CreateMenuReset(grid); }
+                        //        catch { }
 
-                    //        foreach (DevExpress.XtraGrid.Views.Base.ColumnView view in grid.ViewCollection)
-                    //        {
-                    //            if ((view) is DevExpress.XtraGrid.Views.Grid.GridView)
-                    //            {
-                    //                foreach (DevExpress.XtraGrid.Columns.GridColumn col in view.Columns)
-                    //                {
-                    //                    if (col.Visible)
-                    //                    {
-                    //                        col.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-                    //                        col.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-                    //                        col.AppearanceHeader.Options.UseTextOptions = true;
-                    //                        col.Caption = GetNN(dtNgu, col.FieldName, frm.Name);
-                    //                        AutoCotDev(col);
-                    //                    }
-                    //                }
-                    //                MVisGrid((DevExpress.XtraGrid.Views.Grid.GridView)view, frm.Name, view.Name.ToString(), Commons.Modules.UserName, true);
-                    //                try
-                    //                {
-                    //                    //view.MouseUp -= this.GridView_MouseUp;
-                    //                }
-                    //                catch
-                    //                {
-                    //                }
-                    //                try
-                    //                {
-                    //                    //view.MouseUp += this.GridView_MouseUp;
-                    //                }
-                    //                catch
-                    //                {
-                    //                }
+                        //        foreach (DevExpress.XtraGrid.Views.Base.ColumnView view in grid.ViewCollection)
+                        //        {
+                        //            if ((view) is DevExpress.XtraGrid.Views.Grid.GridView)
+                        //            {
+                        //                foreach (DevExpress.XtraGrid.Columns.GridColumn col in view.Columns)
+                        //                {
+                        //                    if (col.Visible)
+                        //                    {
+                        //                        col.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+                        //                        col.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+                        //                        col.AppearanceHeader.Options.UseTextOptions = true;
+                        //                        col.Caption = GetNN(dtNgu, col.FieldName, frm.Name);
+                        //                        AutoCotDev(col);
+                        //                    }
+                        //                }
+                        //                MVisGrid((DevExpress.XtraGrid.Views.Grid.GridView)view, frm.Name, view.Name.ToString(), Commons.Modules.UserName, true);
+                        //                try
+                        //                {
+                        //                    //view.MouseUp -= this.GridView_MouseUp;
+                        //                }
+                        //                catch
+                        //                {
+                        //                }
+                        //                try
+                        //                {
+                        //                    //view.MouseUp += this.GridView_MouseUp;
+                        //                }
+                        //                catch
+                        //                {
+                        //                }
 
-                    //                try
-                    //                {
-                    //                    //view.DoubleClick -= this.GridView_DoubleClick;
-                    //                }
-                    //                catch
-                    //                {
-                    //                }
+                        //                try
+                        //                {
+                        //                    //view.DoubleClick -= this.GridView_DoubleClick;
+                        //                }
+                        //                catch
+                        //                {
+                        //                }
 
-                    //                try
-                    //                {
-                    //                    //view.DoubleClick += this.GridView_DoubleClick;
-                    //                }
-                    //                catch
-                    //                {
-                    //                }
-                    //            }
-                    //        }
+                        //                try
+                        //                {
+                        //                    //view.DoubleClick += this.GridView_DoubleClick;
+                        //                }
+                        //                catch
+                        //                {
+                        //                }
+                        //            }
+                        //        }
 
-                    //        break;
-                    //    }
+                        //        break;
+                        //    }
 
                 }
             }
@@ -2093,7 +2114,7 @@ namespace Commons
                             if (Ctl.Name.ToUpper().Substring(0, 4) != "NONN" & Ctl.Name.Length >= 4)
                                 Ctl.Text = GetNN(dtNgu, Ctl.Name, frm.Name);// Modules.ObjLanguages.GetLanguage(Modules.ModuleName, frm.Name, Ctl.Name, Modules.TypeLanguage)
 
-                            if (Ctl.GetType().Name.ToString() == "Label")
+                            if (Ctl.GetType().Name.ToString() == "LabelControl")
                             {
                                 try
                                 {
@@ -2104,12 +2125,14 @@ namespace Commons
                                 {
                                 }
                             }
-
                             if (Ctl.GetType().Name.ToString() == "GroupControl")
                             {
                                 try
                                 {
-                                    Ctl.MouseDoubleClick += delegate (object a, MouseEventArgs b) { Gropcontrol_MouseDoubleClick(Ctl, b, frm.Name); };
+                                    GroupControl CtlDev;
+                                    CtlDev = (GroupControl)Ctl;
+                                    CtlDev.AppearanceCaption.ForeColor = Color.FromArgb(192, 0, 0);
+                                    CtlDev.MouseDoubleClick += delegate (object a, MouseEventArgs b) { Gropcontrol_MouseDoubleClick(Ctl, b, frm.Name); };
                                 }
                                 catch
                                 {
@@ -2226,65 +2249,65 @@ namespace Commons
                             break;
                         }
 
-                    //case "GridControl":
-                    //    {
-                    //        DevExpress.XtraGrid.GridControl grid;
-                    //        grid = (DevExpress.XtraGrid.GridControl)Ctl;
-                    //        DevExpress.XtraGrid.Views.Grid.GridView mainView = (DevExpress.XtraGrid.Views.Grid.GridView)grid.MainView;
-                    //        try { Commons.Modules.OXtraGrid.CreateMenuReset(grid); } catch { }
+                        //case "GridControl":
+                        //    {
+                        //        DevExpress.XtraGrid.GridControl grid;
+                        //        grid = (DevExpress.XtraGrid.GridControl)Ctl;
+                        //        DevExpress.XtraGrid.Views.Grid.GridView mainView = (DevExpress.XtraGrid.Views.Grid.GridView)grid.MainView;
+                        //        try { Commons.Modules.OXtraGrid.CreateMenuReset(grid); } catch { }
 
-                    //        foreach (DevExpress.XtraGrid.Views.Base.ColumnView view in grid.ViewCollection)
-                    //        {
-                    //            if ((view) is DevExpress.XtraGrid.Views.Grid.GridView)
-                    //            {
-                    //                foreach (DevExpress.XtraGrid.Columns.GridColumn col in view.Columns)
-                    //                {
-                    //                    if (col.Visible)
-                    //                    {
-                    //                        col.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-                    //                        col.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-                    //                        col.AppearanceHeader.Options.UseTextOptions = true;
-                    //                        col.Caption = GetNN(dtNgu, col.FieldName, frm.Name);      // Modules.ObjLanguages.GetLanguage(Modules.ModuleName, frm.Name, col.Name, Modules.TypeLanguage),
+                        //        foreach (DevExpress.XtraGrid.Views.Base.ColumnView view in grid.ViewCollection)
+                        //        {
+                        //            if ((view) is DevExpress.XtraGrid.Views.Grid.GridView)
+                        //            {
+                        //                foreach (DevExpress.XtraGrid.Columns.GridColumn col in view.Columns)
+                        //                {
+                        //                    if (col.Visible)
+                        //                    {
+                        //                        col.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+                        //                        col.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+                        //                        col.AppearanceHeader.Options.UseTextOptions = true;
+                        //                        col.Caption = GetNN(dtNgu, col.FieldName, frm.Name);      // Modules.ObjLanguages.GetLanguage(Modules.ModuleName, frm.Name, col.Name, Modules.TypeLanguage),
 
-                    //                        AutoCotDev(col);
-                    //                    }
-                    //                }
-                    //                MVisGrid((DevExpress.XtraGrid.Views.Grid.GridView)view, frm.Name, view.Name.ToString(), Commons.Modules.UserName, true);
-                    //                try
-                    //                {
-                    //                    //view.MouseUp -= this.GridView_MouseUp;
-                    //                }
-                    //                catch
-                    //                {
-                    //                }
-                    //                try
-                    //                {
-                    //                    //view.MouseUp += this.GridView_MouseUp;
-                    //                }
-                    //                catch
-                    //                {
-                    //                }
+                        //                        AutoCotDev(col);
+                        //                    }
+                        //                }
+                        //                MVisGrid((DevExpress.XtraGrid.Views.Grid.GridView)view, frm.Name, view.Name.ToString(), Commons.Modules.UserName, true);
+                        //                try
+                        //                {
+                        //                    //view.MouseUp -= this.GridView_MouseUp;
+                        //                }
+                        //                catch
+                        //                {
+                        //                }
+                        //                try
+                        //                {
+                        //                    //view.MouseUp += this.GridView_MouseUp;
+                        //                }
+                        //                catch
+                        //                {
+                        //                }
 
-                    //                try
-                    //                {
-                    //                    //view.DoubleClick -= this.GridView_DoubleClick;
-                    //                }
-                    //                catch
-                    //                {
-                    //                }
+                        //                try
+                        //                {
+                        //                    //view.DoubleClick -= this.GridView_DoubleClick;
+                        //                }
+                        //                catch
+                        //                {
+                        //                }
 
-                    //                try
-                    //                {
-                    //                    //view.DoubleClick += this.GridView_DoubleClick;
-                    //                }
-                    //                catch
-                    //                {
-                    //                }
-                    //            }
-                    //        }
+                        //                try
+                        //                {
+                        //                    //view.DoubleClick += this.GridView_DoubleClick;
+                        //                }
+                        //                catch
+                        //                {
+                        //                }
+                        //            }
+                        //        }
 
-                    //        break;
-                    //    }
+                        //        break;
+                        //    }
 
                         //case "DataGridView":
                         //    {
@@ -2377,7 +2400,7 @@ namespace Commons
             }
         }
 
-        private void RadGroup_DoubleClick(object sender, EventArgs e,string sName)
+        private void RadGroup_DoubleClick(object sender, EventArgs e, string sName)
         {
             //sữa ngon ngữ radio group
             if (Form.ModifierKeys == Keys.Control)
@@ -2431,7 +2454,7 @@ namespace Commons
             }
         }
 
-        private void Gropcontrol_MouseDoubleClick(object sender, MouseEventArgs e,string sName)
+        private void Gropcontrol_MouseDoubleClick(object sender, MouseEventArgs e, string sName)
         {
             if (Form.ModifierKeys == Keys.Control & e.Button == MouseButtons.Left)
             {
@@ -2439,7 +2462,8 @@ namespace Commons
                 string sText = "";
                 Ctl = (GroupControl)sender;
                 try
-                { 
+                {
+                    sText = XtraInputBox.Show(Ctl.Text, "Sửa ngôn ngữ", "");
                     if (sText == "")
                         return;
                     else

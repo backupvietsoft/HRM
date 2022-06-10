@@ -899,7 +899,7 @@
             this.tabbedControlGroup2.AppearanceItemCaption.Options.UseForeColor = true;
             this.tabbedControlGroup2.Location = new System.Drawing.Point(0, 237);
             this.tabbedControlGroup2.Name = "tabbedControlGroup2";
-            this.tabbedControlGroup2.SelectedTabPage = this.grpLyDo;
+            this.tabbedControlGroup2.SelectedTabPage = this.layoutControlGroup3;
             this.tabbedControlGroup2.Size = new System.Drawing.Size(917, 360);
             this.tabbedControlGroup2.TabPages.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.grpLyDo,

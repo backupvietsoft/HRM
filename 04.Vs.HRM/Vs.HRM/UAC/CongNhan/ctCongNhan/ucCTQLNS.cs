@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace Vs.HRM
@@ -47,6 +48,7 @@ namespace Vs.HRM
                 var lable = sender as LabelControl;
                 if (Commons.Modules.iCongNhan == 0 && lable.Name != "labLyLich") return;
                 if (tab == lable.Name) return;
+                Commons.Modules.ObjSystems.ShowWaitForm(this);
                 foreach (LabelControl lc in List)
                 {
                     if (lable.Name == lc.Name)
@@ -62,10 +64,25 @@ namespace Vs.HRM
                         //lc.Appearance.Font = this.Font;
                     }
                 }
+                Commons.Modules.ObjSystems.HideWaitForm();
             }
             catch
             {
             }
+        }
+        private void Selecttab(NavigationPage page)
+        {
+
+            Thread thread = new Thread(delegate ()
+            {
+                if (this.InvokeRequired)
+                {
+                    this.Invoke(new MethodInvoker(delegate
+                    {
+                        navigationFrame1.SelectedPage = page;
+                    }));
+                }
+            }, 100); thread.Start();
         }
         private void LoaduacCongNhan(string tenlable)
         {
@@ -79,7 +96,7 @@ namespace Vs.HRM
                             ll.Dock = DockStyle.Fill;
                             navigationPage1.Controls.Add(ll);
                         }
-                        navigationFrame1.SelectedPage = navigationPage1;
+                        Selecttab(navigationPage1);
                         break;
                     }
                 case "labCongTac":
@@ -90,7 +107,7 @@ namespace Vs.HRM
                             ct.Dock = DockStyle.Fill;
                             navigationPage2.Controls.Add(ct);
                         }
-                        navigationFrame1.SelectedPage = navigationPage2;
+                        Selecttab(navigationPage2);
                         break;
                     }
                 case "labTienLuong":
@@ -101,7 +118,7 @@ namespace Vs.HRM
                             tl.Dock = DockStyle.Fill;
                             navigationPage3.Controls.Add(tl);
                         }
-                        navigationFrame1.SelectedPage = navigationPage3;
+                        Selecttab(navigationPage3);
                         break;
                     }
                 case "labHopDong":
@@ -112,7 +129,8 @@ namespace Vs.HRM
                             hd.Dock = DockStyle.Fill;
                             navigationPage4.Controls.Add(hd);
                         }
-                        navigationFrame1.SelectedPage = navigationPage4;
+                        Selecttab(navigationPage4);
+      
                         break;
                     }
                
@@ -124,7 +142,7 @@ namespace Vs.HRM
                             kt.Dock = DockStyle.Fill;
                             navigationPage5.Controls.Add(kt);
                         }
-                        navigationFrame1.SelectedPage = navigationPage5;
+                        Selecttab(navigationPage5);
                         break;
                     }
                 case "labTaiNan":
@@ -135,8 +153,7 @@ namespace Vs.HRM
                             tn.Dock = DockStyle.Fill;
                             navigationPage6.Controls.Add(tn);
                         }
-                        navigationFrame1.SelectedPage = navigationPage6;
-
+                        Selecttab(navigationPage6);
                         break;
                     }
                 case "labDanhGia":
@@ -147,7 +164,8 @@ namespace Vs.HRM
                             dg.Dock = DockStyle.Fill;
                             navigationPage7.Controls.Add(dg);
                         }
-                        navigationFrame1.SelectedPage = navigationPage7;
+                        Selecttab(navigationPage7);
+
                         break;
                     }
                 case "labBangCap":
@@ -158,7 +176,7 @@ namespace Vs.HRM
                             ll.Dock = DockStyle.Fill;
                             navigationPage8.Controls.Add(ll);
                         }
-                        navigationFrame1.SelectedPage = navigationPage8;
+                        Selecttab(navigationPage8);
                         break;
                     }
                 default:

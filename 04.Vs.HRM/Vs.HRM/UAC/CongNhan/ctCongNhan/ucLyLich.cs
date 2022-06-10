@@ -8,8 +8,7 @@ using DevExpress.XtraBars.Docking2010;
 using System.Windows.Forms;
 using DevExpress.XtraBars.Navigation;
 using Vs.Report;
-using System.Collections.Generic;
-using DevExpress.XtraLayout;
+using System.Threading;
 
 namespace Vs.HRM
 {
@@ -23,16 +22,12 @@ namespace Vs.HRM
         public ucLyLich(Int64 id)
         {
             InitializeComponent();
-            //LoadNgonNgu();
             Commons.Modules.ObjSystems.ThayDoiNN(this, Root, Tab, windowsUIButton);
-            Commons.Modules.ObjSystems.ThayDoiNN(this);
             idcn = id;
         }
-
         private void ucLyLich_Load(object sender, EventArgs e)
         {
             Commons.Modules.sLoad = "0Load";
-
             //format date tiem
             Commons.OSystems.SetDateEditFormat(NGAY_SINHDateEdit);
             Commons.OSystems.SetDateEditFormat(NGAY_HOC_VIECDateEdit);

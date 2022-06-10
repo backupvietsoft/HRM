@@ -30,7 +30,6 @@ namespace Vs.HRM
         {
             InitializeComponent();
             Commons.Modules.ObjSystems.ThayDoiNN(this, new List<LayoutControlGroup>() { Root }, windowsUIButton);
-
         }
         private void ucKeHoachNghiPhep_Load(object sender, EventArgs e)
         {

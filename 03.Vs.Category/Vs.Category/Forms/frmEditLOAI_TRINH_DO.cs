@@ -35,13 +35,14 @@ namespace Vs.Category
         {
             try
             {
-                string sSql = "SELECT ID_LOAI_TD, TEN_LOAI_TD, TEN_LOAI_TD_A, TEN_LOAI_TD_H, STT " +
+                string sSql = "SELECT ID_LOAI_TD, TEN_LOAI_TD, TEN_LOAI_TD_A, TEN_LOAI_TD_H, KY_HIEU , STT " +
                     "FROM LOAI_TRINH_DO WHERE ID_LOAI_TD = " + Id.ToString();
                 DataTable dtTmp = new DataTable();
                 dtTmp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSql));
                 TEN_LOAI_TDTextEdit.EditValue = dtTmp.Rows[0]["TEN_LOAI_TD"].ToString();
                 TEN_LOAI_TD_ATextEdit.EditValue = dtTmp.Rows[0]["TEN_LOAI_TD_A"].ToString();
                 TEN_LOAI_TD_HTextEdit.EditValue = dtTmp.Rows[0]["TEN_LOAI_TD_H"].ToString();
+                txtKY_HIEU.EditValue = dtTmp.Rows[0]["KY_HIEU"].ToString();
                 txtSTT.EditValue = dtTmp.Rows[0]["STT"].ToString();
             }
             catch (Exception EX)
@@ -58,6 +59,7 @@ namespace Vs.Category
                 TEN_LOAI_TD_ATextEdit.EditValue = String.Empty;
                 TEN_LOAI_TD_HTextEdit.EditValue = String.Empty;
                 txtSTT.EditValue = 1;
+                txtKY_HIEU.EditValue = string.Empty;
                 TEN_LOAI_TDTextEdit.Focus();
             }
             catch { }
@@ -75,7 +77,7 @@ namespace Vs.Category
                             if (!dxValidationProvider1.Validate()) return;
                             if (bKiemTrung()) return;
                             Commons.Modules.sId = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spUpdateLOAI_TRINH_DO", (AddEdit ? -1 : Id),
-                                TEN_LOAI_TDTextEdit.EditValue, TEN_LOAI_TD_ATextEdit.EditValue, TEN_LOAI_TD_HTextEdit.EditValue, (txtSTT.EditValue == null) ? 0 : txtSTT.EditValue).ToString();
+                                TEN_LOAI_TDTextEdit.EditValue, TEN_LOAI_TD_ATextEdit.EditValue, TEN_LOAI_TD_HTextEdit.EditValue, txtKY_HIEU.EditValue ,(txtSTT.EditValue == null) ? 0 : txtSTT.EditValue).ToString();
                             if (AddEdit)
                             {
                                 if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_ThemThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo) == DialogResult.Yes)

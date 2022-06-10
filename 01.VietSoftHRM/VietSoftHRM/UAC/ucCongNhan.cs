@@ -24,7 +24,7 @@ namespace VietSoftHRM
         private void LoadCongNhan()
         {
             DataTable dt = new DataTable();
-            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetMenuLeft", Commons.Modules.UserName, Commons.Modules.TypeLanguage, iLoai));
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetMenuLeft", Commons.Modules.UserName, Commons.Modules.TypeLanguage, iLoai, Commons.Modules.sHideMenu));
             foreach (DataRow item in dt.Rows)
             {
                 AccordionControlElement element = new AccordionControlElement();
@@ -35,7 +35,7 @@ namespace VietSoftHRM
                 accorMenuleft.Elements.Add(element);
                 element.Click += Element_Click;
                 DataTable dtchill = new DataTable();
-                dtchill.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetMenuLeft", Commons.Modules.UserName, Commons.Modules.TypeLanguage, Convert.ToInt32(item["ID_MENU"])));
+                dtchill.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetMenuLeft", Commons.Modules.UserName, Commons.Modules.TypeLanguage, Convert.ToInt32(item["ID_MENU"]), Commons.Modules.sHideMenu));
                 if (dtchill.Rows.Count > 0)
                 {
                     foreach (DataRow itemchill in dtchill.Rows)

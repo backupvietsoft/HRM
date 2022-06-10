@@ -11,6 +11,7 @@ namespace Commons
     {
         public SubReportHeader()
         {
+
             InitializeComponent();
             DataTable dt = Commons.Modules.ObjSystems.DataThongTinChung();
             this.DataSource = dt;
@@ -27,3 +28,5 @@ namespace Commons
         }
     }
 }
+
+

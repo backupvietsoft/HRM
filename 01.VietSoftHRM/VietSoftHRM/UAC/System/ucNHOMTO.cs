@@ -93,7 +93,7 @@ namespace VietSoftHRM
                             treeListNhomTo.PostEditor();
                             treeListNhomTo.RefreshDataSource();
                             Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, "tabdata" + Commons.Modules.UserName, (DataTable)treeListNhomTo.DataSource, "");
-                            string sSql = "DELETE FROM dbo.NHOM_TO WHERE ID_NHOM = "+Convert.ToInt32(Commons.Modules.sIdHT) +" INSERT INTO dbo.NHOM_TO( ID_NHOM, ID_TO ) SELECT "+ Commons.Modules.sId + ", ID FROM tabdata"+Commons.Modules.UserName+" WHERE CHON = 1 AND ID_TO LIKE 'TO%'";
+                            string sSql = "DELETE FROM dbo.NHOM_TO WHERE ID_NHOM = "+Convert.ToInt32(Commons.Modules.sIdHT) +" INSERT INTO dbo.NHOM_TO( ID_NHOM, ID_TO ) SELECT "+ Commons.Modules.sIdHT + ", ID FROM tabdata"+Commons.Modules.UserName+" WHERE CHON = 1 AND ID_TO LIKE 'TO%'";
                             SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, sSql);
                             Commons.Modules.ObjSystems.XoaTable("tabdata" + Commons.Modules.UserName);
                         }

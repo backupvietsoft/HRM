@@ -29,6 +29,8 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
+using static System.Net.Mime.MediaTypeNames;
+
 namespace Commons
 {
     public class OSystems
@@ -3609,6 +3611,22 @@ namespace Commons
                 XtraMessageBox.Show(ex.Message.ToString());
             }
         }
+        #endregion
+
+        #region hinh
+        //public byte[] SaveHinh(Image inImg)
+        //{
+        //    System.Drawing.ImageConverter imgCon = new System.Drawing.ImageConverter();
+        //    return (byte[])imgCon.ConvertTo(inImg, typeof(byte[]));
+        //}
+        //public Image LoadHinh(Byte[] hinh)
+        //{
+        //    Byte[] data = new Byte[0];
+        //    data = (Byte[])(hinh);
+        //    MemoryStream mem = new MemoryStream(data);
+        //    return Image.FromStream(mem);
+        //}
+
         #endregion
         public void LoadCboTTHD(SearchLookUpEdit cboSearch_TTHD)
         {

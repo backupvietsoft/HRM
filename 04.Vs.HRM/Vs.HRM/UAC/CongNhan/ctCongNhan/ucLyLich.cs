@@ -124,6 +124,13 @@ namespace Vs.HRM
             DataTable dt_Phai = new DataTable();
             dt_Phai.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboPhai", Commons.Modules.TypeLanguage));
             Commons.Modules.ObjSystems.MLoadLookUpEditN(PHAILookupEdit, dt_Phai, "ID_PHAI", "PHAI", "PHAI", "");
+
+            // KHU_VUCLookUpEdit
+            DataTable dt_kv = new DataTable();
+            dt_kv.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboKHU_VUC", Commons.Modules.UserName, Commons.Modules.TypeLanguage,0));
+            Commons.Modules.ObjSystems.MLoadLookUpEditN(cboID_KV, dt_kv, "ID_KV", "TEN_KV", "TEN_KV", "");
+
+
             enableButon(true);
             Tab.SelectedTabPage = groupThongTinBoXung;
             Commons.Modules.ObjSystems.SetPhanQuyen(windowsUIButton);
@@ -515,7 +522,7 @@ namespace Vs.HRM
                 TENTextEdit.EditValue = "";
                 TEN_KHONG_DAUTextEdit.EditValue = "";
                 NGAY_SINHDateEdit.EditValue = null;
-                NAM_SINHDateEdit.EditValue = null;
+                txtNamSinh.EditValue = null;
                 PHAILookupEdit.EditValue = 0;
                 ID_TOLookupEdit.EditValue = null;
                 ID_CVLookUpEdit.EditValue = null;
@@ -566,6 +573,7 @@ namespace Vs.HRM
                 ID_QUAN_TAM_TRULookUpEdit.EditValue = null;
                 ID_PX_TAM_TRULookUpEdit.EditValue = null;
                 THON_XOM_TAM_TRUTextEdit.EditValue = "";
+                cboID_KV.EditValue = null;
 
                 SO_BHXHTextEdit.EditValue = "";
                 NGAY_DBHXHDateEdit.EditValue = null;
@@ -609,7 +617,7 @@ namespace Vs.HRM
                     TENTextEdit.EditValue = dt.Rows[0]["TEN"];
                     TEN_KHONG_DAUTextEdit.EditValue = dt.Rows[0]["TEN_KHONG_DAU"];
                     NGAY_SINHDateEdit.EditValue = dt.Rows[0]["NGAY_SINH"];
-                    NAM_SINHDateEdit.EditValue = Convert.ToDateTime("01/01/" + dt.Rows[0]["NAM_SINH"].ToString());
+                    txtNamSinh.EditValue = dt.Rows[0]["NAM_SINH"].ToString();
                     PHAILookupEdit.EditValue = Convert.ToInt32(dt.Rows[0]["PHAI"]);
                     ID_DVLookUpEdit.EditValue = dt.Rows[0]["ID_DV"];
                     ID_XNLookUpEdit.EditValue = dt.Rows[0]["ID_XN"];
@@ -661,6 +669,7 @@ namespace Vs.HRM
                     ID_QUAN_TAM_TRULookUpEdit.EditValue = dt.Rows[0]["ID_QUAN_TAM_TRU"];
                     ID_PX_TAM_TRULookUpEdit.EditValue = dt.Rows[0]["ID_PX_TAM_TRU"];
                     THON_XOM_TAM_TRUTextEdit.EditValue = dt.Rows[0]["THON_XOM_TAM_TRU"];
+                    cboID_KV.EditValue = dt.Rows[0]["ID_KV"];
 
                     SO_BHXHTextEdit.EditValue = dt.Rows[0]["SO_BHXH"];
                     NGAY_DBHXHDateEdit.EditValue = dt.Rows[0]["NGAY_DBHXH"];
@@ -708,7 +717,7 @@ namespace Vs.HRM
             TEN_KHONG_DAUTextEdit.Properties.ReadOnly = visible;
             VAO_LAM_LAICheckEdit.Properties.ReadOnly = visible;
             NGAY_SINHDateEdit.Enabled = !visible;
-            NAM_SINHDateEdit.Enabled = !visible;
+            txtNamSinh.Enabled = !visible;
             PHAILookupEdit.Properties.ReadOnly = visible;
             ID_XNLookUpEdit.Properties.ReadOnly = visible;
             ID_DVLookUpEdit.Properties.ReadOnly = visible;
@@ -756,6 +765,7 @@ namespace Vs.HRM
             ID_QUAN_TAM_TRULookUpEdit.Properties.ReadOnly = visible;
             ID_PX_TAM_TRULookUpEdit.Properties.ReadOnly = visible;
             THON_XOM_TAM_TRUTextEdit.Properties.ReadOnly = visible;
+            cboID_KV.Properties.ReadOnly = visible;
 
             SO_BHXHTextEdit.Properties.ReadOnly = visible;
             NGAY_DBHXHDateEdit.Enabled = !visible;
@@ -823,7 +833,7 @@ namespace Vs.HRM
                 TENTextEdit.EditValue,
                 TEN_KHONG_DAUTextEdit.EditValue,
                 NGAY_SINHDateEdit.EditValue,
-                NAM_SINHDateEdit.DateTime.Year,
+                Convert.ToInt32(txtNamSinh.EditValue),
                 PHAILookupEdit.EditValue,
                 ID_TOLookupEdit.Text.ToString() == "" ? DBNull.Value : ID_TOLookupEdit.EditValue,
                 ID_CVLookUpEdit.Text.ToString() == "" ? DBNull.Value : ID_CVLookUpEdit.EditValue,
@@ -883,6 +893,7 @@ namespace Vs.HRM
                 CAP_GIAY_PHEPLookUpEdit.Text.ToString() == "" ? DBNull.Value : CAP_GIAY_PHEPLookUpEdit.EditValue,
                 NGAY_HH_GPDateEdit.Text.ToString() == "" ? DBNull.Value : NGAY_HH_GPDateEdit.EditValue,
                 LD_GIAM_LDNNLookUpEdit.Text.ToString() == "" ? DBNull.Value : LD_GIAM_LDNNLookUpEdit.EditValue,
+                cboID_KV.Text.ToString() == "" ? DBNull.Value : cboID_KV.EditValue,
                 cothem));
                 return true;
             }

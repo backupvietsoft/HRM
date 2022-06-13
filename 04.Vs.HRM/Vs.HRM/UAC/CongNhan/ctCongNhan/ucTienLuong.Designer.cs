@@ -43,7 +43,6 @@
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule5 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule6 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule7 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
-            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule8 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             this.windowsUIButton = new DevExpress.XtraBars.Docking2010.WindowsUIButtonPanel();
             this.searchControl = new DevExpress.XtraEditors.SearchControl();
             this.dataLayoutControl1 = new DevExpress.XtraDataLayout.DataLayoutControl();
@@ -65,7 +64,6 @@
             this.PC_SINH_HOATTextEdit = new DevExpress.XtraEditors.TextEdit();
             this.PC_CON_NHOTextEdit = new DevExpress.XtraEditors.TextEdit();
             this.GHI_CHUTextEdit = new DevExpress.XtraEditors.MemoEdit();
-            this.NGACH_LUONGLookUpEdit = new DevExpress.XtraEditors.LookUpEdit();
             this.BAC_LUONGLookUpEdit = new DevExpress.XtraEditors.LookUpEdit();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
@@ -91,6 +89,8 @@
             this.ItemForPC_CON_NHO = new DevExpress.XtraLayout.LayoutControlItem();
             this.ItemForMUC_LUONG_THUC = new DevExpress.XtraLayout.LayoutControlItem();
             this.dxValidationProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
+            this.NGACH_LUONGLookUpEdit = new DevExpress.XtraEditors.SearchLookUpEdit();
+            this.searchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.windowsUIButton.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.searchControl.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataLayoutControl1)).BeginInit();
@@ -115,7 +115,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.PC_SINH_HOATTextEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PC_CON_NHOTextEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GHI_CHUTextEdit.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NGACH_LUONGLookUpEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BAC_LUONGLookUpEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
@@ -141,6 +140,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.ItemForPC_CON_NHO)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForMUC_LUONG_THUC)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NGACH_LUONGLookUpEdit.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).BeginInit();
             this.SuspendLayout();
             // 
             // windowsUIButton
@@ -224,8 +225,8 @@
             this.dataLayoutControl1.Controls.Add(this.PC_SINH_HOATTextEdit);
             this.dataLayoutControl1.Controls.Add(this.PC_CON_NHOTextEdit);
             this.dataLayoutControl1.Controls.Add(this.GHI_CHUTextEdit);
-            this.dataLayoutControl1.Controls.Add(this.NGACH_LUONGLookUpEdit);
             this.dataLayoutControl1.Controls.Add(this.BAC_LUONGLookUpEdit);
+            this.dataLayoutControl1.Controls.Add(this.NGACH_LUONGLookUpEdit);
             this.dataLayoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataLayoutControl1.Location = new System.Drawing.Point(0, 0);
             this.dataLayoutControl1.Name = "dataLayoutControl1";
@@ -492,22 +493,6 @@
             this.GHI_CHUTextEdit.StyleController = this.dataLayoutControl1;
             this.GHI_CHUTextEdit.TabIndex = 17;
             // 
-            // NGACH_LUONGLookUpEdit
-            // 
-            this.NGACH_LUONGLookUpEdit.Location = new System.Drawing.Point(175, 68);
-            this.NGACH_LUONGLookUpEdit.Name = "NGACH_LUONGLookUpEdit";
-            this.NGACH_LUONGLookUpEdit.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.NGACH_LUONGLookUpEdit.Properties.NullText = "";
-            this.NGACH_LUONGLookUpEdit.Size = new System.Drawing.Size(187, 26);
-            this.NGACH_LUONGLookUpEdit.StyleController = this.dataLayoutControl1;
-            this.NGACH_LUONGLookUpEdit.TabIndex = 11;
-            conditionValidationRule7.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule7.ErrorText = "This value is not valid";
-            conditionValidationRule7.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.Critical;
-            this.dxValidationProvider1.SetValidationRule(this.NGACH_LUONGLookUpEdit, conditionValidationRule7);
-            this.NGACH_LUONGLookUpEdit.EditValueChanged += new System.EventHandler(this.NGACH_LUONGLookUpEdit_EditValueChanged);
-            // 
             // BAC_LUONGLookUpEdit
             // 
             this.BAC_LUONGLookUpEdit.Location = new System.Drawing.Point(527, 68);
@@ -518,10 +503,10 @@
             this.BAC_LUONGLookUpEdit.Size = new System.Drawing.Size(164, 26);
             this.BAC_LUONGLookUpEdit.StyleController = this.dataLayoutControl1;
             this.BAC_LUONGLookUpEdit.TabIndex = 12;
-            conditionValidationRule8.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule8.ErrorText = "This value is not valid";
-            conditionValidationRule8.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.Critical;
-            this.dxValidationProvider1.SetValidationRule(this.BAC_LUONGLookUpEdit, conditionValidationRule8);
+            conditionValidationRule7.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule7.ErrorText = "This value is not valid";
+            conditionValidationRule7.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.Critical;
+            this.dxValidationProvider1.SetValidationRule(this.BAC_LUONGLookUpEdit, conditionValidationRule7);
             this.BAC_LUONGLookUpEdit.EditValueChanged += new System.EventHandler(this.BAC_LUONGLookUpEdit_EditValueChanged);
             // 
             // Root
@@ -768,6 +753,26 @@
             this.ItemForMUC_LUONG_THUC.Text = "MUC_LUONG_THUC";
             this.ItemForMUC_LUONG_THUC.TextSize = new System.Drawing.Size(160, 20);
             // 
+            // NGACH_LUONGLookUpEdit
+            // 
+            this.NGACH_LUONGLookUpEdit.Location = new System.Drawing.Point(175, 68);
+            this.NGACH_LUONGLookUpEdit.Name = "NGACH_LUONGLookUpEdit";
+            this.NGACH_LUONGLookUpEdit.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.NGACH_LUONGLookUpEdit.Properties.NullText = "";
+            this.NGACH_LUONGLookUpEdit.Properties.PopupView = this.searchLookUpEdit1View;
+            this.NGACH_LUONGLookUpEdit.Size = new System.Drawing.Size(187, 26);
+            this.NGACH_LUONGLookUpEdit.StyleController = this.dataLayoutControl1;
+            this.NGACH_LUONGLookUpEdit.TabIndex = 11;
+            this.NGACH_LUONGLookUpEdit.EditValueChanged += new System.EventHandler(this.NGACH_LUONGLookUpEdit_EditValueChanged);
+            // 
+            // searchLookUpEdit1View
+            // 
+            this.searchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            this.searchLookUpEdit1View.Name = "searchLookUpEdit1View";
+            this.searchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.searchLookUpEdit1View.OptionsView.ShowGroupPanel = false;
+            // 
             // ucTienLuong
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -801,7 +806,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.PC_SINH_HOATTextEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PC_CON_NHOTextEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.GHI_CHUTextEdit.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NGACH_LUONGLookUpEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.BAC_LUONGLookUpEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
@@ -827,6 +831,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.ItemForPC_CON_NHO)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForMUC_LUONG_THUC)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NGACH_LUONGLookUpEdit.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -876,9 +882,10 @@
         private DevExpress.XtraEditors.MemoEdit GHI_CHUTextEdit;
         private DevExpress.XtraLayout.LayoutControlItem ItemForPC_CON_NHO;
         private DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider dxValidationProvider1;
-        private DevExpress.XtraEditors.LookUpEdit NGACH_LUONGLookUpEdit;
         private DevExpress.XtraEditors.LookUpEdit BAC_LUONGLookUpEdit;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup2;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup3;
+        private DevExpress.XtraEditors.SearchLookUpEdit NGACH_LUONGLookUpEdit;
+        private DevExpress.XtraGrid.Views.Grid.GridView searchLookUpEdit1View;
     }
 }

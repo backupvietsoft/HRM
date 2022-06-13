@@ -21,6 +21,7 @@ namespace Vs.HRM
 {
     public partial class ucTroCapBHXH : DevExpress.XtraEditors.XtraUserControl
     {
+        int ID_LDVTemp;
         public static ucTroCapBHXH _instance;
         public static ucTroCapBHXH Instance
         {
@@ -170,8 +171,51 @@ namespace Vs.HRM
 
                 Commons.Modules.ObjSystems.MLoadXtraGrid(grdTroCapBHXH, grvTroCapBHXH, dt, false, true, false, true, true, this.Name);
                 Commons.Modules.ObjSystems.AddCombXtra("ID_CN", "TEN_CN", grvTroCapBHXH, Commons.Modules.ObjSystems.DataCongNhan(false), "ID_CN", "CONG_NHAN");
-                Commons.Modules.ObjSystems.AddCombXtra("ID_LDV", "TEN_LDV", grvTroCapBHXH, Commons.Modules.ObjSystems.DataLyDoVang(false), "ID_LDV", "LY_DO_VANG");
-                Commons.Modules.ObjSystems.AddCombXtra("ID_HTNTC", "NOI_DUNG", grvTroCapBHXH, Commons.Modules.ObjSystems.DataHinhThucTroCap(-1, false), "ID_HTNTC", "HINH_THUC_NHAN_TRO_CAP");
+                
+                // Ly do vang
+                DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit cboID_LDV = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
+                cboID_LDV.NullText = "";
+                cboID_LDV.ValueMember = "ID_LDV";
+                cboID_LDV.DisplayMember = "TEN_LDV";
+                cboID_LDV.DataSource = Commons.Modules.ObjSystems.DataLyDoVang(false);
+                cboID_LDV.Columns.Clear();
+                cboID_LDV.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID_LDV"));
+                cboID_LDV.Columns["ID_LDV"].Caption = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "ID_LDV");
+                //cboID_CN.Columns["ID_CN"].Visible = false;
+
+                cboID_LDV.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("TEN_LDV"));
+                cboID_LDV.Columns["TEN_LDV"].Caption = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "TEN_LDV");
+
+                cboID_LDV.AppearanceDropDownHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+                cboID_LDV.AppearanceDropDownHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+                cboID_LDV.Columns["ID_LDV"].Visible = false;
+                grvTroCapBHXH.Columns["ID_LDV"].ColumnEdit = cboID_LDV;
+                cboID_LDV.BeforePopup += CboID_TP_BeforePopup;
+                cboID_LDV.EditValueChanged += CboID_TP_EditValueChanged;
+
+                // ho tro nhan tro cap
+                DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit cboID_HTNTC = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
+                cboID_HTNTC.NullText = "";
+                cboID_HTNTC.ValueMember = "ID_HTNTC";
+                cboID_HTNTC.DisplayMember = "NOI_DUNG";
+                cboID_HTNTC.DataSource = Commons.Modules.ObjSystems.DataHinhThucTroCap(-1, false);
+                cboID_HTNTC.Columns.Clear();
+                cboID_HTNTC.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID_HTNTC"));
+                cboID_HTNTC.Columns["ID_HTNTC"].Caption = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "ID_HTNTC");
+                //cboID_CN.Columns["ID_CN"].Visible = false;
+
+                cboID_HTNTC.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("NOI_DUNG"));
+                cboID_HTNTC.Columns["NOI_DUNG"].Caption = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "NOI_DUNG");
+
+                cboID_HTNTC.AppearanceDropDownHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+                cboID_HTNTC.AppearanceDropDownHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+                cboID_HTNTC.Columns["ID_HTNTC"].Visible = false;
+                grvTroCapBHXH.Columns["ID_HTNTC"].ColumnEdit = cboID_HTNTC;
+                cboID_HTNTC.BeforePopup += CboID_HTNTC_BeforePopup;
+                cboID_HTNTC.EditValueChanged += CboID_HTNTC_EditValueChanged;
+
+                //Commons.Modules.ObjSystems.AddCombXtra("ID_LDV", "TEN_LDV", grvTroCapBHXH, Commons.Modules.ObjSystems.DataLyDoVang(false), "ID_LDV", "LY_DO_VANG");
+                //Commons.Modules.ObjSystems.AddCombXtra("ID_HTNTC", "NOI_DUNG", grvTroCapBHXH, Commons.Modules.ObjSystems.DataHinhThucTroCap(-1, false), "ID_HTNTC", "HINH_THUC_NHAN_TRO_CAP");
 
                 grvTroCapBHXH.Columns["MS_CN"].OptionsColumn.ReadOnly = true;
                 grvTroCapBHXH.Columns["PHAN_TRAM_TRO_CAP"].OptionsColumn.ReadOnly = true;
@@ -212,6 +256,46 @@ namespace Vs.HRM
 
             }
             catch (Exception ex) { }
+        }
+
+        private void CboID_TP_EditValueChanged(object sender, EventArgs e)
+        {
+            LookUpEdit lookUp = sender as LookUpEdit;
+
+            //string id = lookUp.get;
+
+            // Access the currently selected data row
+            DataRowView dataRow = lookUp.GetSelectedDataRow() as DataRowView;
+
+            grvTroCapBHXH.SetFocusedRowCellValue("ID_LDV", (dataRow.Row[0]));
+            ID_LDVTemp = Convert.ToInt32(dataRow.Row[0]);
+        }
+        private void CboID_TP_BeforePopup(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CboID_HTNTC_EditValueChanged(object sender, EventArgs e)
+        {
+            LookUpEdit lookUp = sender as LookUpEdit;
+
+            //string id = lookUp.get;
+
+            // Access the currently selected data row
+            DataRowView dataRow = lookUp.GetSelectedDataRow() as DataRowView;
+
+            grvTroCapBHXH.SetFocusedRowCellValue("ID_HTNTC", (dataRow.Row[0]));
+        }
+        private void CboID_HTNTC_BeforePopup(object sender, EventArgs e)
+        {
+            LookUpEdit lookUp = sender as LookUpEdit;
+
+            //string id = lookUp.get;
+
+            // Access the currently selected data row
+            //DataRowView dataRow = lookUp.Properties.DataSource as DataRowView;
+
+            lookUp.Properties.DataSource = Commons.Modules.ObjSystems.DataHinhThucTroCap(ID_LDVTemp, false);
         }
 
         private void windowsUIButton_ButtonClick(object sender, DevExpress.XtraBars.Docking2010.ButtonEventArgs e)

@@ -37,14 +37,12 @@
             DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions6 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.COT_CAP_NHATlookUpEdit = new DevExpress.XtraEditors.LookUpEdit();
-            this.ID_NLlookUpEdit = new DevExpress.XtraEditors.LookUpEdit();
             this.chkLuongCoBan = new DevExpress.XtraEditors.CheckEdit();
             this.chkNLuong = new DevExpress.XtraEditors.CheckEdit();
             this.chkCOT_CAP_NHAT = new DevExpress.XtraEditors.CheckEdit();
             this.chkBLuong = new DevExpress.XtraEditors.CheckEdit();
             this.chkNgayHieuLuc = new DevExpress.XtraEditors.CheckEdit();
             this.radBoloc = new DevExpress.XtraEditors.RadioGroup();
-            this.BAC_CVlookUpEdit = new DevExpress.XtraEditors.LookUpEdit();
             this.BAC_HDlookUpEdit = new DevExpress.XtraEditors.LookUpEdit();
             this.grdCapNhatLCB = new DevExpress.XtraGrid.GridControl();
             this.grvCapNhatLCB = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -91,17 +89,19 @@
             this.windowsUIButton = new DevExpress.XtraBars.Docking2010.WindowsUIButtonPanel();
             this.searchControl = new DevExpress.XtraEditors.SearchControl();
             this.dxValidationProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
+            this.BAC_CVlookUpEdit = new DevExpress.XtraEditors.SearchLookUpEdit();
+            this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.ID_NLlookUpEdit = new DevExpress.XtraEditors.SearchLookUpEdit();
+            this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.COT_CAP_NHATlookUpEdit.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ID_NLlookUpEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkLuongCoBan.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkNLuong.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkCOT_CAP_NHAT.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkBLuong.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkNgayHieuLuc.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radBoloc.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.BAC_CVlookUpEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BAC_HDlookUpEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdCapNhatLCB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grvCapNhatLCB)).BeginInit();
@@ -149,19 +149,21 @@
             this.windowsUIButton.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.searchControl.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BAC_CVlookUpEdit.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ID_NLlookUpEdit.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
             // 
             this.layoutControl1.Controls.Add(this.COT_CAP_NHATlookUpEdit);
-            this.layoutControl1.Controls.Add(this.ID_NLlookUpEdit);
             this.layoutControl1.Controls.Add(this.chkLuongCoBan);
             this.layoutControl1.Controls.Add(this.chkNLuong);
             this.layoutControl1.Controls.Add(this.chkCOT_CAP_NHAT);
             this.layoutControl1.Controls.Add(this.chkBLuong);
             this.layoutControl1.Controls.Add(this.chkNgayHieuLuc);
             this.layoutControl1.Controls.Add(this.radBoloc);
-            this.layoutControl1.Controls.Add(this.BAC_CVlookUpEdit);
             this.layoutControl1.Controls.Add(this.BAC_HDlookUpEdit);
             this.layoutControl1.Controls.Add(this.grdCapNhatLCB);
             this.layoutControl1.Controls.Add(this.cboTo);
@@ -174,6 +176,8 @@
             this.layoutControl1.Controls.Add(this.LUONG_CO_BANtextEdit);
             this.layoutControl1.Controls.Add(this.ID_BLlookUpEdit);
             this.layoutControl1.Controls.Add(this.NOI_DUNGtextEdit);
+            this.layoutControl1.Controls.Add(this.BAC_CVlookUpEdit);
+            this.layoutControl1.Controls.Add(this.ID_NLlookUpEdit);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl1.Location = new System.Drawing.Point(0, 0);
             this.layoutControl1.Name = "layoutControl1";
@@ -193,18 +197,6 @@
             this.COT_CAP_NHATlookUpEdit.Size = new System.Drawing.Size(155, 26);
             this.COT_CAP_NHATlookUpEdit.StyleController = this.layoutControl1;
             this.COT_CAP_NHATlookUpEdit.TabIndex = 24;
-            // 
-            // ID_NLlookUpEdit
-            // 
-            this.ID_NLlookUpEdit.Location = new System.Drawing.Point(510, 146);
-            this.ID_NLlookUpEdit.Name = "ID_NLlookUpEdit";
-            this.ID_NLlookUpEdit.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.ID_NLlookUpEdit.Properties.NullText = "";
-            this.ID_NLlookUpEdit.Size = new System.Drawing.Size(155, 26);
-            this.ID_NLlookUpEdit.StyleController = this.layoutControl1;
-            this.ID_NLlookUpEdit.TabIndex = 22;
-            this.ID_NLlookUpEdit.EditValueChanged += new System.EventHandler(this.ID_NLlookUpEdit_EditValueChanged);
             // 
             // chkLuongCoBan
             // 
@@ -271,18 +263,6 @@
             this.radBoloc.TabIndex = 12;
             this.radBoloc.SelectedIndexChanged += new System.EventHandler(this.cboTo_EditValueChanged);
             this.radBoloc.EditValueChanged += new System.EventHandler(this.radBoloc_EditValueChanged);
-            // 
-            // BAC_CVlookUpEdit
-            // 
-            this.BAC_CVlookUpEdit.Location = new System.Drawing.Point(143, 87);
-            this.BAC_CVlookUpEdit.Name = "BAC_CVlookUpEdit";
-            this.BAC_CVlookUpEdit.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.BAC_CVlookUpEdit.Properties.NullText = "";
-            this.BAC_CVlookUpEdit.Size = new System.Drawing.Size(200, 26);
-            this.BAC_CVlookUpEdit.StyleController = this.layoutControl1;
-            this.BAC_CVlookUpEdit.TabIndex = 11;
-            this.BAC_CVlookUpEdit.EditValueChanged += new System.EventHandler(this.BAC_CVlookUpEdit_EditValueChanged);
             // 
             // BAC_HDlookUpEdit
             // 
@@ -806,6 +786,46 @@
             this.searchControl.Size = new System.Drawing.Size(220, 26);
             this.searchControl.TabIndex = 11;
             // 
+            // BAC_CVlookUpEdit
+            // 
+            this.BAC_CVlookUpEdit.Location = new System.Drawing.Point(143, 87);
+            this.BAC_CVlookUpEdit.Name = "BAC_CVlookUpEdit";
+            this.BAC_CVlookUpEdit.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.BAC_CVlookUpEdit.Properties.NullText = "";
+            this.BAC_CVlookUpEdit.Properties.PopupView = this.gridView1;
+            this.BAC_CVlookUpEdit.Size = new System.Drawing.Size(200, 26);
+            this.BAC_CVlookUpEdit.StyleController = this.layoutControl1;
+            this.BAC_CVlookUpEdit.TabIndex = 11;
+            this.BAC_CVlookUpEdit.EditValueChanged += new System.EventHandler(this.BAC_CVlookUpEdit_EditValueChanged);
+            // 
+            // gridView1
+            // 
+            this.gridView1.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            this.gridView1.Name = "gridView1";
+            this.gridView1.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.gridView1.OptionsView.ShowGroupPanel = false;
+            // 
+            // ID_NLlookUpEdit
+            // 
+            this.ID_NLlookUpEdit.Location = new System.Drawing.Point(510, 146);
+            this.ID_NLlookUpEdit.Name = "ID_NLlookUpEdit";
+            this.ID_NLlookUpEdit.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.ID_NLlookUpEdit.Properties.NullText = "";
+            this.ID_NLlookUpEdit.Properties.PopupView = this.gridView2;
+            this.ID_NLlookUpEdit.Size = new System.Drawing.Size(155, 26);
+            this.ID_NLlookUpEdit.StyleController = this.layoutControl1;
+            this.ID_NLlookUpEdit.TabIndex = 22;
+            this.ID_NLlookUpEdit.EditValueChanged += new System.EventHandler(this.ID_NLlookUpEdit_EditValueChanged);
+            // 
+            // gridView2
+            // 
+            this.gridView2.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            this.gridView2.Name = "gridView2";
+            this.gridView2.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.gridView2.OptionsView.ShowGroupPanel = false;
+            // 
             // ucCapNhatLCB
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -818,14 +838,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.COT_CAP_NHATlookUpEdit.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ID_NLlookUpEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkLuongCoBan.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkNLuong.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkCOT_CAP_NHAT.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkBLuong.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkNgayHieuLuc.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radBoloc.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.BAC_CVlookUpEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.BAC_HDlookUpEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdCapNhatLCB)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grvCapNhatLCB)).EndInit();
@@ -873,6 +891,10 @@
             this.windowsUIButton.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.searchControl.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BAC_CVlookUpEdit.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ID_NLlookUpEdit.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -893,7 +915,6 @@
         private DevExpress.XtraLayout.LayoutControlItem ItemForTO;
         private DevExpress.XtraLayout.LayoutControlItem ItemForDON_VI;
         private DevExpress.XtraLayout.LayoutControlItem ItemForXI_NGHIEP;
-        private DevExpress.XtraEditors.LookUpEdit BAC_CVlookUpEdit;
         private DevExpress.XtraEditors.LookUpEdit BAC_HDlookUpEdit;
         private DevExpress.XtraLayout.LayoutControlItem ItemForBAC_HD;
         private DevExpress.XtraLayout.LayoutControlItem ItemForBAC_CV;
@@ -901,7 +922,6 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem5;
         private DevExpress.XtraEditors.CheckEdit chkNgayHieuLuc;
         private DevExpress.XtraEditors.LookUpEdit COT_CAP_NHATlookUpEdit;
-        private DevExpress.XtraEditors.LookUpEdit ID_NLlookUpEdit;
         private DevExpress.XtraEditors.CheckEdit chkLuongCoBan;
         private DevExpress.XtraEditors.CheckEdit chkNLuong;
         private DevExpress.XtraEditors.CheckEdit chkCOT_CAP_NHAT;
@@ -935,5 +955,9 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem6;
         private DevExpress.XtraEditors.TextEdit NOI_DUNGtextEdit;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
+        private DevExpress.XtraEditors.SearchLookUpEdit BAC_CVlookUpEdit;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
+        private DevExpress.XtraEditors.SearchLookUpEdit ID_NLlookUpEdit;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridView2;
     }
 }

@@ -334,7 +334,7 @@ namespace Vs.TimeAttendance
         {
             string datetime = "01/01/" + Convert.ToString(lk_Nam.EditValue);
             DateTime tungay = Convert.ToDateTime(datetime);
-            datetime = "31/12/" + Convert.ToString(lk_Nam.EditValue);
+            try { datetime = "31/12/" + Convert.ToString(lk_Nam.EditValue); } catch { }
             DateTime denngay = Convert.ToDateTime(datetime);
             int iType = rdo_DiTreVeSom.SelectedIndex;
 

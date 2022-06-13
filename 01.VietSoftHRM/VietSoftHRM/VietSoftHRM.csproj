@@ -201,6 +201,12 @@
     <Compile Include="Form\frmPopUp.Designer.cs">
       <DependentUpon>frmPopUp.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form\frmImportHinhCN.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\frmImportHinhCN.Designer.cs">
+      <DependentUpon>frmImportHinhCN.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form\frmThongTinChung.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -331,6 +337,9 @@
     </Compile>
     <EmbeddedResource Include="Form\frmPopUp.resx">
       <DependentUpon>frmPopUp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\frmImportHinhCN.resx">
+      <DependentUpon>frmImportHinhCN.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\frmThongTinChung.resx">
       <DependentUpon>frmThongTinChung.cs</DependentUpon>

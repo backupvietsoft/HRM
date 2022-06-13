@@ -94,7 +94,7 @@ namespace Commons
                 string strSQL = "SELECT KY_HIEU FROM dbo.DON_VI WHERE ID_DV = " + Convert.ToInt64(ID_DV) + "";
                 KyHieuDV = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, string.IsNullOrEmpty(strSQL) ? "" : strSQL).ToString();
             }
-            catch { return KyHieuDV; }
+            catch { return KyHieuDV = "SB"; }
             return KyHieuDV;
         }
 
@@ -1654,23 +1654,13 @@ namespace Commons
         {
             DataTable dtTmp = new DataTable();
             dtTmp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT KEYWORD , CASE " + Modules.TypeLanguage + " WHEN 0 THEN VIETNAM WHEN 1 THEN ENGLISH ELSE CHINESE END AS NN  FROM LANGUAGES WHERE FORM = N'" + frm.Name + "' "));
-            Thread thread11 = new Thread(delegate ()
-            {
-                if (frm.InvokeRequired)
-                {
-                    frm.Invoke(new MethodInvoker(delegate
-                    {
-                        LoadNNGroupControl(frm, group, dtTmp);
-                    }));
-                }
-            }, 2000); thread11.Start();
+            LoadNNGroupControl(frm, group, dtTmp);
             Tab.DoubleClick += delegate (object a, EventArgs b) { TabbedControlGroup_DoubleClick(Tab, b, frm.Name); };
-
-            foreach (LayoutControlGroup item in  Tab.TabPages)
+            foreach (LayoutControlGroup item in Tab.TabPages)
             {
                 item.Text = GetNN(dtTmp, item.Name, frm.Name);
                 item.AppearanceTabPage.Header.ForeColor = Color.FromArgb(192, 0, 0);
-                //LoadNNGroupControl(frm, item, dtTmp);
+                LoadNNGroupControl(frm, item, dtTmp);
             }
             try
             {
@@ -4182,7 +4172,14 @@ namespace Commons
         }
         public void HideWaitForm()
         {
-            splashScreenManager1.CloseWaitForm();
+            try
+            {
+                splashScreenManager1.CloseWaitForm();
+
+            }
+            catch 
+            {
+            }
         }
     }
 }

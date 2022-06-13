@@ -316,7 +316,7 @@ namespace Vs.HRM
                 else
                 {
                     Hinh_CNpictureEdit.EditValue = "";
-                    Hinh_CNpictureEdit.Properties.NullText = "No current image to display";
+                    Hinh_CNpictureEdit.Properties.NullText = Commons.Modules.TypeLanguage == 1 ? "No current image to display" : "Không có hình";
                 }
 
             }
@@ -334,9 +334,9 @@ namespace Vs.HRM
                     SO_QDTextEdit.EditValue = row["SO_QD"];
                     NGAY_NHAN_DONDateEdit.EditValue = row["NGAY_NHAN_DON"];
                     LUONG_TINH_TRO_CAPTextEdit.EditValue = row["HS_LUONG"];
-                    TIEN_TRO_CAPTextEdit.EditValue = row["TIEN_TRO_CAP"];
+                    TIEN_TRO_CAPTextEdit.EditValue = row["TIEN_TRO_CAP"].ToString() == "" ? 0 : Convert.ToDouble(row["TIEN_TRO_CAP"]);
                     NGAY_KYDateEdit.EditValue = row["NGAY_KY"];
-                    TIEN_PHEPTextEdit.EditValue = row["TIEN_PHEP"];
+                    TIEN_PHEPTextEdit.EditValue = row["TIEN_PHEP"].ToString() == "" ? 0 : Convert.ToDouble(row["TIEN_PHEP"]);
                     TONG_CONGTextEdit.EditValue = row["TONG_CONG"];
                     ID_LD_TVLookUpEdit.EditValue = row["ID_LD_TV"];
                     SO_PHEP_HUONGTextEdit.EditValue = row["NGAY_PHEP"];

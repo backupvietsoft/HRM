@@ -41,10 +41,9 @@ namespace VietSoftHRM
         {
             try
             {
-                string sSql = "SELECT MS_IMPORT AS MA_SO, CASE " + Commons.Modules.TypeLanguage + " WHEN 0 THEN[TEN_IMPORT] WHEN 1 THEN[TEN_IMPORT_A] ELSE[TEN_IMPORT_H] END TEN FROM DS_IMPORT WHERE MS_IMPORT_CHA = MS_IMPORT AND[SU_DUNG] = 1 AND IMPORT = 1 ORDER BY[TEN]";
+                string sSql = "SELECT MS_IMPORT AS MA_SO, CASE " + Commons.Modules.TypeLanguage + " WHEN 0 THEN[TEN_IMPORT] WHEN 1 THEN[TEN_IMPORT_A] ELSE[TEN_IMPORT_H] END TEN FROM DS_IMPORT WHERE MS_IMPORT_CHA = MS_IMPORT AND[SU_DUNG] = 1 AND IMPORT = 1 ORDER BY MS_IMPORT";
                 DataTable dt = new DataTable();
                 Commons.Modules.ObjSystems.MLoadLookUpEdit(cboMenuImport, sSql, "MA_SO", "TEN", lblDanhMucImport.Text);
-
             }
             catch
             {
@@ -55,7 +54,7 @@ namespace VietSoftHRM
         {
             try
             {
-                string sSql = "SELECT [MS_IMPORT] AS MA_SO , CASE 0 WHEN 0 THEN [TEN_IMPORT] WHEN 1 THEN [TEN_IMPORT_A] ELSE [TEN_IMPORT_H] END TEN FROM[DS_IMPORT] T1 WHERE[SU_DUNG] = 1 AND IMPORT = 1 AND MS_IMPORT_CHA = " + msCha + " ORDER BY[MA_SO]";
+                string sSql = "SELECT [MS_IMPORT] AS MA_SO , CASE 0 WHEN 0 THEN [TEN_IMPORT] WHEN 1 THEN [TEN_IMPORT_A] ELSE [TEN_IMPORT_H] END TEN FROM[DS_IMPORT] T1 WHERE[SU_DUNG] = 1 AND IMPORT = 1 AND MS_IMPORT_CHA = " + msCha + " AND MS_IMPORT != " + msCha + " ORDER BY[MA_SO]";
                 DataTable dt = new DataTable();
                 dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSql));
                 Commons.Modules.ObjSystems.MLoadLookUpEdit(cboDanhMucImport, sSql, "MA_SO", "TEN", lblDanhMucImport.Text);
@@ -411,6 +410,7 @@ namespace VietSoftHRM
                     if (string.IsNullOrEmpty(sDLKiem))
                     {
                         dr.SetColumnError(grvData.Columns[iCot].FieldName.ToString(), Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgKhongDuocTrong"));
+                        dr["XOA"] = 1;
                         return false;
                     }
                     else
@@ -418,6 +418,7 @@ namespace VietSoftHRM
                         if (KiemKyTu(sDLKiem, ChuoiKT))  //KiemKyTu
                         {
                             dr.SetColumnError(grvData.Columns[iCot].FieldName.ToString(), Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgCoChuaKyTuDB"));
+                            dr["XOA"] = 1;
                             return false;
                         }
                     }
@@ -429,6 +430,7 @@ namespace VietSoftHRM
                         if (KiemKyTu(sDLKiem, ChuoiKT))  //KiemKyTu
                         {
                             dr.SetColumnError(grvData.Columns[iCot].FieldName.ToString(), Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgCoChuaKyTuDB"));
+                            dr["XOA"] = 1;
                             return false;
                         }
                     }
@@ -445,6 +447,7 @@ namespace VietSoftHRM
             catch
             {
                 dr.SetColumnError(grvData.Columns[iCot].FieldName.ToString(), "error");
+                dr["XOA"] = 1;
                 return false;
             }
             return true;
@@ -460,6 +463,7 @@ namespace VietSoftHRM
                 {
                     sTenKTra = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgTrungDLLuoi");
                     dr.SetColumnError(grvData.Columns[iCot].FieldName.ToString(), sTenKTra);
+                    dr["XOA"] = 1;
                     return false;
                 }
                 else
@@ -469,6 +473,7 @@ namespace VietSoftHRM
 
                         sTenKTra = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgTrungDLCSDL");
                         dr.SetColumnError(grvData.Columns[iCot].FieldName.ToString(), sTenKTra);
+                        dr["XOA"] = 1;
                         return false;
                     }
                 }
@@ -477,6 +482,7 @@ namespace VietSoftHRM
             catch (Exception ex)
             {
                 dr.SetColumnError(grvData.Columns[iCot].FieldName.ToString(), sTenKTra);
+                dr["XOA"] = 1;
                 return false;
             }
         }
@@ -496,6 +502,7 @@ namespace VietSoftHRM
                     if (Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT COUNT(*) FROM dbo." + tabName + " WHERE " + ColName + " = N'" + sDLKiem + "'")) == 0)
                     {
                         dr.SetColumnError(grvData.Columns[iCot].FieldName.ToString(), Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgChuaTonTaiCSDL"));
+                        dr["XOA"] = 1;
                         return false;
                     }
                 }
@@ -507,6 +514,7 @@ namespace VietSoftHRM
                     if (Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT COUNT(*) FROM dbo." + tabName + " WHERE " + ColName + " = N'" + sDLKiem + "'")) == 0)
                     {
                         dr.SetColumnError(grvData.Columns[iCot].FieldName.ToString(), Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgChuaTonTaiCSDL"));
+                        dr["XOA"] = 1;
                         return false;
                     }
                 }
@@ -528,6 +536,7 @@ namespace VietSoftHRM
                     if (string.IsNullOrEmpty(sDLKiem))
                     {
                         dr.SetColumnError(grvData.Columns[iCot].FieldName.ToString(), Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgKhongduocTrong"));
+                        dr["XOA"] = 1;
                         return false;
                     }
                     else
@@ -536,6 +545,7 @@ namespace VietSoftHRM
                         if (!DateTime.TryParse(sDLKiem, out DLKiem))
                         {
                             dr.SetColumnError(grvData.Columns[iCot].FieldName.ToString(), Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgKhongPhaiNgay"));
+                            dr["XOA"] = 1;
                             return false;
                         }
 
@@ -548,6 +558,7 @@ namespace VietSoftHRM
                         if (!DateTime.TryParse(sDLKiem, out DLKiem))
                         {
                             dr.SetColumnError(grvData.Columns[iCot].FieldName.ToString(), Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgKhongPhaiNgay"));
+                            dr["XOA"] = 1;
                             return false;
                         }
                     }
@@ -556,6 +567,7 @@ namespace VietSoftHRM
             catch
             {
                 dr.SetColumnError(grvData.Columns[iCot].FieldName.ToString(), Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgKhongPhaiNgay"));
+                dr["XOA"] = 1;
                 return false;
             }
             return true;
@@ -581,6 +593,7 @@ namespace VietSoftHRM
                     if (string.IsNullOrEmpty(sDLKiem))
                     {
                         dr.SetColumnError(grvData.Columns[iCot].FieldName.ToString(), sTenKTra + " không được để trống");
+                        dr["XOA"] = 1;
                         return false;
                     }
                     else
@@ -588,6 +601,7 @@ namespace VietSoftHRM
                         if (!DateTime.TryParse(sDLKiem, out DLKiem))
                         {
                             dr.SetColumnError(grvData.Columns[iCot].FieldName.ToString(), sTenKTra + " phải là datetime");
+                            dr["XOA"] = 1;
                             return false;
                         }
                         else
@@ -601,6 +615,7 @@ namespace VietSoftHRM
                                     if (DLKiem == DLSSanh)
                                     {
                                         dr.SetColumnError(grvData.Columns[iCot].FieldName.ToString(), sTenKTra + " không được bằng " + DLSSanh.ToShortDateString());
+                                        dr["XOA"] = 1;
                                         return false;
                                     }
                                 }
@@ -610,6 +625,7 @@ namespace VietSoftHRM
                                     if (DLKiem < DLSSanh)
                                     {
                                         dr.SetColumnError(grvData.Columns[iCot].FieldName.ToString(), sTenKTra + " không được nhỏ hơn " + DLSSanh.ToShortDateString());
+                                        dr["XOA"] = 1;
                                         return false;
                                     }
                                 }
@@ -619,6 +635,7 @@ namespace VietSoftHRM
                                     if (DLKiem <= DLSSanh)
                                     {
                                         dr.SetColumnError(grvData.Columns[iCot].FieldName.ToString(), sTenKTra + " không được nhỏ hơn hay bằng " + DLSSanh.ToShortDateString());
+                                        dr["XOA"] = 1;
                                         return false;
                                     }
                                 }
@@ -628,6 +645,7 @@ namespace VietSoftHRM
                                     if (DLKiem > DLSSanh)
                                     {
                                         dr.SetColumnError(grvData.Columns[iCot].FieldName.ToString(), sTenKTra + " không được lớn hơn " + DLSSanh.ToShortDateString());
+                                        dr["XOA"] = 1;
                                         return false;
                                     }
                                 }
@@ -637,6 +655,7 @@ namespace VietSoftHRM
                                     if (DLKiem < DLSSanh)
                                     {
                                         dr.SetColumnError(grvData.Columns[iCot].FieldName.ToString(), sTenKTra + " không được lớn hơn hay bằng " + DLSSanh.ToShortDateString());
+                                        dr["XOA"] = 1;
                                         return false;
                                     }
                                 }
@@ -653,6 +672,7 @@ namespace VietSoftHRM
                         if (!DateTime.TryParse(sDLKiem, out DLKiem))
                         {
                             dr.SetColumnError(grvData.Columns[iCot].FieldName.ToString(), sTenKTra + " phải là datetime");
+                            dr["XOA"] = 1;
                             return false;
                         }
                         else
@@ -666,6 +686,7 @@ namespace VietSoftHRM
                                     if (DLKiem == DLSSanh)
                                     {
                                         dr.SetColumnError(grvData.Columns[iCot].FieldName.ToString(), sTenKTra + " không được bằng " + DLSSanh.ToShortDateString());
+                                        dr["XOA"] = 1;
                                         return false;
                                     }
                                 }
@@ -675,6 +696,7 @@ namespace VietSoftHRM
                                     if (DLKiem < DLSSanh)
                                     {
                                         dr.SetColumnError(grvData.Columns[iCot].FieldName.ToString(), sTenKTra + " không được nhỏ hơn " + DLSSanh.ToShortDateString());
+                                        dr["XOA"] = 1;
                                         return false;
                                     }
                                 }
@@ -684,6 +706,7 @@ namespace VietSoftHRM
                                     if (DLKiem <= DLSSanh)
                                     {
                                         dr.SetColumnError(grvData.Columns[iCot].FieldName.ToString(), sTenKTra + " không được nhỏ hơn hay bằng " + DLSSanh.ToShortDateString());
+                                        dr["XOA"] = 1;
                                         return false;
                                     }
                                 }
@@ -693,6 +716,7 @@ namespace VietSoftHRM
                                     if (DLKiem > DLSSanh)
                                     {
                                         dr.SetColumnError(grvData.Columns[iCot].FieldName.ToString(), sTenKTra + " không được lớn hơn " + DLSSanh.ToShortDateString());
+                                        dr["XOA"] = 1;
                                         return false;
                                     }
                                 }
@@ -702,6 +726,7 @@ namespace VietSoftHRM
                                     if (DLKiem < DLSSanh)
                                     {
                                         dr.SetColumnError(grvData.Columns[iCot].FieldName.ToString(), sTenKTra + " không được lớn hơn hay bằng " + DLSSanh.ToShortDateString());
+                                        dr["XOA"] = 1;
                                         return false;
                                     }
                                 }
@@ -714,6 +739,7 @@ namespace VietSoftHRM
             catch
             {
                 dr.SetColumnError(grvData.Columns[iCot].FieldName.ToString(), sTenKTra + " phải là datetime");
+                dr["XOA"] = 1;
                 return false;
             }
             return true;
@@ -835,6 +861,7 @@ namespace VietSoftHRM
                 if (string.IsNullOrEmpty(sTenKTra))
                 {
                     dr.SetColumnError(grvData.Columns[iCot].FieldName.ToString(), Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgKhongduocTrong"));
+                    dr["XOA"] = 1;
                     return false;
                 }
                 else
@@ -842,6 +869,7 @@ namespace VietSoftHRM
                     if (!double.TryParse(sTenKTra, out DLKiem))
                     {
                         dr.SetColumnError(grvData.Columns[iCot].FieldName.ToString(), sTenKTra + Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgKhongPhaiSo"));
+                        dr["XOA"] = 1;
                         return false;
                     }
                     else
@@ -852,6 +880,7 @@ namespace VietSoftHRM
                             {
                                 dr.SetColumnError(grvData.Columns[iCot].FieldName.ToString(), sTenKTra + Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgKhongNhoHon") +
                                     GTSoSanh.ToString() + Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgVaLonHon") + GTTKhoang.ToString());
+                                dr["XOA"] = 1;
                                 return false;
                             }
                         }
@@ -872,6 +901,7 @@ namespace VietSoftHRM
                     if (!double.TryParse(sTenKTra, out DLKiem))
                     {
                         dr.SetColumnError(grvData.Columns[iCot].FieldName.ToString(), sTenKTra + Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgKhongPhaiSo"));
+                        dr["XOA"] = 1;
                         return false;
                     }
                     else
@@ -882,6 +912,7 @@ namespace VietSoftHRM
                             {
                                 dr.SetColumnError(grvData.Columns[iCot].FieldName.ToString(), sTenKTra + Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgKhongNhoHon") +
                                        GTSoSanh.ToString() + Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgVaLonHon") + GTTKhoang.ToString());
+                                dr["XOA"] = 1;
                                 return false;
                             }
                         }
@@ -1002,6 +1033,54 @@ namespace VietSoftHRM
                                     ExportLoaiKTKL(sPath);
                                     break;
                                 }
+                            case 20:
+                                {
+                                    //export nhóm chấm công
+                                    ExportNhomChamCong(sPath);
+                                    break;
+                                }
+                            case 21:
+                                {
+                                    //export ngày nghĩ lể
+                                    ExportNgayNghiLe(sPath);
+                                    break;
+                                }
+                            case 22:
+                                {
+                                    //export ngày nghĩ lể
+                                    ExportNoiDungQuiDinh(sPath);
+                                    break;
+                                }
+                            case 30:
+                                {
+                                    //export đơn gia giây
+                                    ExportDonGiaGiay(sPath);
+                                    break;
+                                }
+                            case 31:
+                                {
+                                    //export Loại máy
+                                    ExportLoaiMay(sPath);
+                                    break;
+                                }
+                            case 32:
+                                {
+                                    //export Cụm
+                                    ExportCum(sPath);
+                                    break;
+                                }
+                            case 33:
+                                {
+                                    //export Hệ số bậc thợ
+                                    ExportBacTho(sPath);
+                                    break;
+                                }
+                            case 34:
+                                {
+                                    //export Chuyền
+                                    ExportChuyen(sPath);
+                                    break;
+                                }
                             default: break;
                         }
                         Commons.Modules.ObjSystems.HideWaitForm();
@@ -1011,6 +1090,9 @@ namespace VietSoftHRM
                     {
                         try
                         {
+                            grvData.PostEditor();
+                            grvData.UpdateCurrentRow();
+                            Commons.Modules.ObjSystems.MChooseGrid(false, "XOA", grvData);
                             DataTable dtSource = Commons.Modules.ObjSystems.ConvertDatatable(grdData);
                             if (cboDanhMucImport.Text == "" || dtSource == null || dtSource.Rows.Count <= 0)
                             {
@@ -1114,6 +1196,60 @@ namespace VietSoftHRM
                                         ImportLoaiKTKL(dtSource);
                                         break;
                                     }
+                                case 16:
+                                    {
+                                        //import nhóm chấm công
+                                        ImportNhomChamCong(dtSource);
+                                        break;
+                                    }
+                                case 20:
+                                    {
+                                        //import nhóm chấm công
+                                        ImportNhomChamCong(dtSource);
+                                        break;
+                                    }
+                                case 21:
+                                    {
+                                        //import ngày nghĩ lể
+                                        ImportNgayNghiLe(dtSource);
+                                        break;
+                                    }
+                                case 22:
+                                    {
+                                        //import ngày nghĩ lể
+                                        ImportNoiDungQuiDinh(dtSource);
+                                        break;
+                                    }
+                                case 30:
+                                    {
+                                        //import đơn gia giây
+                                        ImportDonGiaGiay(dtSource);
+                                        break;
+                                    }
+                                case 31:
+                                    {
+                                        //import loại máy
+                                        ImportLoaiMay(dtSource);
+                                        break;
+                                    }
+                                case 32:
+                                    {
+                                        //import Cụm
+                                        ImportCum(dtSource);
+                                        break;
+                                    }
+                                case 33:
+                                    {
+                                        //import Cụm
+                                        ImportBacTho(dtSource);
+                                        break;
+                                    }
+                                case 34:
+                                    {
+                                        //import chuyền
+                                        ImportChuyen(dtSource);
+                                        break;
+                                    }
                                 default: break;
                             }
                         }
@@ -1138,6 +1274,7 @@ namespace VietSoftHRM
         {
             throw new NotImplementedException();
         }
+        #region nhân sự
 
         #region Đơn vị
         private void ImportDonVi(DataTable dtSource)
@@ -1281,7 +1418,7 @@ namespace VietSoftHRM
         private void ExportDonVi(string sPath)
         {
             DataTable dtTmp = new DataTable();
-            string SQL = "SELECT TOP 10 MSDV as [Mã ĐV],TEN_DV as [Tên ĐV],TEN_DV_A as [Tên ĐVA],TEN_NGAN as [Tên Ngắn],DIA_CHI as [Địa Chỉ],DIEN_THOAI as [Điện Thoại],FAX,SO_TAI_KHOAN as [Số Tài Khoản],TEN_NGAN_HANG as [Tên Ngân Hàng],TINH_THANH as [Tỉnh Thành] FROM dbo.DON_VI";
+            string SQL = "SELECT  MSDV as [Mã ĐV],TEN_DV as [Tên ĐV],TEN_DV_A as [Tên ĐVA],TEN_NGAN as [Tên Ngắn],DIA_CHI as [Địa Chỉ],DIEN_THOAI as [Điện Thoại],FAX,SO_TAI_KHOAN as [Số Tài Khoản],TEN_NGAN_HANG as [Tên Ngân Hàng],TINH_THANH as [Tỉnh Thành] FROM dbo.DON_VI";
 
             dtTmp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, SQL));
 
@@ -1400,7 +1537,7 @@ namespace VietSoftHRM
         private void ExporXiNghiep(string sPath)
         {
             DataTable dtTmp = new DataTable();
-            string SQL = " SELECT TOP 10 A.TEN_DV as [Tên ĐV], B.MS_XN as [Mã XN], B.TEN_XN as [Tên XN], B.TEN_XN_A as [Tên XNA], B.STT_XN as STT FROM dbo.DON_VI A INNER JOIN dbo.XI_NGHIEP B ON B.ID_DV = A.ID_DV ORDER BY B.STT_XN";
+            string SQL = " SELECT  A.TEN_DV as [Tên ĐV], B.MS_XN as [Mã XN], B.TEN_XN as [Tên XN], B.TEN_XN_A as [Tên XNA], B.STT_XN as STT FROM dbo.DON_VI A INNER JOIN dbo.XI_NGHIEP B ON B.ID_DV = A.ID_DV ORDER BY B.STT_XN";
             dtTmp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, SQL));
 
             //export datatable to excel
@@ -1533,7 +1670,7 @@ namespace VietSoftHRM
         private void ExportTo(string sPath)
         {
             DataTable dtTmp = new DataTable();
-            string SQL = "SELECT TOP 10 A.TEN_DV AS [Tên ĐV],B.TEN_XN AS [Tên XN],C.MS_TO AS [Mã Tổ],C.TEN_TO AS [Tên Tổ],C.PHAN_BO AS [Phân Bổ],C.TEN_TO_A AS [Tên Tổ A],C.STT_TO AS [STT] FROM dbo.DON_VI A INNER JOIN dbo.XI_NGHIEP B ON B.ID_DV = A.ID_DV INNER JOIN dbo.[TO] C ON C.ID_XN = B.ID_XN";
+            string SQL = "SELECT  A.TEN_DV AS [Tên ĐV],B.TEN_XN AS [Tên XN],C.MS_TO AS [Mã Tổ],C.TEN_TO AS [Tên Tổ],C.PHAN_BO AS [Phân Bổ],C.TEN_TO_A AS [Tên Tổ A],C.STT_TO AS [STT] FROM dbo.DON_VI A INNER JOIN dbo.XI_NGHIEP B ON B.ID_DV = A.ID_DV INNER JOIN dbo.[TO] C ON C.ID_XN = B.ID_XN";
             dtTmp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, SQL));
             //export datatable to excel
             Workbook book = new Spire.Xls.Workbook();
@@ -1624,7 +1761,7 @@ namespace VietSoftHRM
         private void ExportLoaiChucVu(string sPath)
         {
             DataTable dtTmp = new DataTable();
-            string SQL = "SELECT TOP 10 TEN_LOAI_CV AS [Tên Loại CV] FROM dbo.LOAI_CHUC_VU ORDER BY TEN_LOAI_CV";
+            string SQL = "SELECT  TEN_LOAI_CV AS [Tên Loại CV] FROM dbo.LOAI_CHUC_VU ORDER BY TEN_LOAI_CV";
             dtTmp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, SQL));
             //export datatable to excel
             Workbook book = new Spire.Xls.Workbook();
@@ -1738,7 +1875,7 @@ namespace VietSoftHRM
         private void ExportChucVu(string sPath)
         {
             DataTable dtTmp = new DataTable();
-            string SQL = "SELECT TOP 10 A.TEN_LOAI_CV AS [Loại chức vụ],B.MS_CV AS [Mã chức vụ],B.TEN_CV AS [Tên chức vụ],B.TEN_CV_A AS [Tên chức vụ A],B.STT_IN_CV AS [STT] FROM dbo.LOAI_CHUC_VU A INNER JOIN dbo.CHUC_VU B ON B.ID_LOAI_CV = A.ID_LOAI_CV";
+            string SQL = "SELECT  A.TEN_LOAI_CV AS [Loại chức vụ],B.MS_CV AS [Mã chức vụ],B.TEN_CV AS [Tên chức vụ],B.TEN_CV_A AS [Tên chức vụ A],B.STT_IN_CV AS [STT] FROM dbo.LOAI_CHUC_VU A INNER JOIN dbo.CHUC_VU B ON B.ID_LOAI_CV = A.ID_LOAI_CV";
             dtTmp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, SQL));
             //export datatable to excel
             Workbook book = new Spire.Xls.Workbook();
@@ -2033,7 +2170,7 @@ namespace VietSoftHRM
         private void ExportCheDoNghi(string sPath)
         {
             DataTable dtTmp = new DataTable();
-            string SQL = "SELECT TOP 10 TEN_CHE_DO AS [Tên chế độ] FROM dbo.CHE_DO_NGHI ORDER BY TEN_CHE_DO";
+            string SQL = "SELECT  TEN_CHE_DO AS [Tên chế độ] FROM dbo.CHE_DO_NGHI ORDER BY TEN_CHE_DO";
             dtTmp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, SQL));
             //export datatable to excel
             Workbook book = new Spire.Xls.Workbook();
@@ -2182,7 +2319,7 @@ namespace VietSoftHRM
         private void ExportLyDoNghi(string sPath)
         {
             DataTable dtTmp = new DataTable();
-            string SQL = "SELECT TOP 10 B.TEN_CHE_DO AS [Tên Chế Độ],A.MS_LDV AS [Mã LDV],A.TEN_LDV AS [Tên LDV],A.TEN_LDV_A AS [Tên LDV A],A.PHEP AS [Phép],A.TINH_BHXH AS [Tính BHXH],A.PHAN_TRAM_TRO_CAP AS [PT hưởng BHXH],A.TINH_LUONG AS [Tính lương],C.TEN_TT_HT AS [Tình Trạng] ,A.STT_LDV AS [STT] FROM dbo.LY_DO_VANG A INNER JOIN dbo.CHE_DO_NGHI B ON B.ID_CHE_DO = A.ID_CHE_DO LEFT JOIN dbo.TINH_TRANG_HT C ON C.ID_TT_HT = A.ID_TT_HT";
+            string SQL = "SELECT  B.TEN_CHE_DO AS [Tên Chế Độ],A.MS_LDV AS [Mã LDV],A.TEN_LDV AS [Tên LDV],A.TEN_LDV_A AS [Tên LDV A],A.PHEP AS [Phép],A.TINH_BHXH AS [Tính BHXH],A.PHAN_TRAM_TRO_CAP AS [PT hưởng BHXH],A.TINH_LUONG AS [Tính lương],C.TEN_TT_HT AS [Tình Trạng] ,A.STT_LDV AS [STT] FROM dbo.LY_DO_VANG A INNER JOIN dbo.CHE_DO_NGHI B ON B.ID_CHE_DO = A.ID_CHE_DO LEFT JOIN dbo.TINH_TRANG_HT C ON C.ID_TT_HT = A.ID_TT_HT";
             dtTmp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, SQL));
             //export datatable to excel
             Workbook book = new Spire.Xls.Workbook();
@@ -2293,7 +2430,7 @@ namespace VietSoftHRM
         private void ExportLoaiCongViec(string sPath)
         {
             DataTable dtTmp = new DataTable();
-            string SQL = "SELECT TOP 10 TEN_LCV AS [Tên loại công việc],TEN_LCV_A AS [Tên loại công việc A],DOC_HAI AS [Độc hại],PHEP_CT AS [Phép cộng thêm] FROM dbo.LOAI_CONG_VIEC ORDER BY TEN_LCV";
+            string SQL = "SELECT  TEN_LCV AS [Tên loại công việc],TEN_LCV_A AS [Tên loại công việc A],DOC_HAI AS [Độc hại],PHEP_CT AS [Phép cộng thêm] FROM dbo.LOAI_CONG_VIEC ORDER BY TEN_LCV";
             dtTmp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, SQL));
             //export datatable to excel
             Workbook book = new Spire.Xls.Workbook();
@@ -2411,7 +2548,7 @@ namespace VietSoftHRM
         private void ExportLoaiHDLD(string sPath)
         {
             DataTable dtTmp = new DataTable();
-            string SQL = "SELECT TOP 10 A.TEN_LHDLD AS [Tên loại HĐLĐ],A.TEN_LHDLD_A AS [Tên loại HĐLĐ A],A.SO_THANG AS  [Số tháng],A.SO_NGAY AS [Số ngày],A.STT AS [STT],B.TEN_TT_HD AS [Tên tình trạng HĐ] FROM dbo.LOAI_HDLD A INNER JOIN dbo.TINH_TRANG_HD B ON B.ID_TT_HD = A.ID_TT_HD ORDER BY A.TEN_LHDLD";
+            string SQL = "SELECT  A.TEN_LHDLD AS [Tên loại HĐLĐ],A.TEN_LHDLD_A AS [Tên loại HĐLĐ A],A.SO_THANG AS  [Số tháng],A.SO_NGAY AS [Số ngày],A.STT AS [STT],B.TEN_TT_HD AS [Tên tình trạng HĐ] FROM dbo.LOAI_HDLD A INNER JOIN dbo.TINH_TRANG_HD B ON B.ID_TT_HD = A.ID_TT_HD ORDER BY A.TEN_LHDLD";
             dtTmp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, SQL));
             //export datatable to excel
             Workbook book = new Spire.Xls.Workbook();
@@ -2562,7 +2699,7 @@ namespace VietSoftHRM
         private void ExportNguoiKy(string sPath)
         {
             DataTable dtTmp = new DataTable();
-            string SQL = "SELECT TOP 10 HO_TEN AS [Họ tên],CHUC_VU AS [Chức vụ],CHUC_VU_A AS [Chức vụ anh],QUOC_TICH AS [Quốc tịch],NGAY_SINH AS [Ngày sinh],NOI_SINH AS [Nơi sinh],SO_CMND AS [CMND/CC],CAP_NGAY AS [Ngày cấp],NOI_CAP AS [Nơi cấp],DIA_CHI AS [Địa chỉ],STT FROM dbo.NGUOI_KY_GIAY_TO ORDER BY HO_TEN";
+            string SQL = "SELECT  HO_TEN AS [Họ tên],CHUC_VU AS [Chức vụ],CHUC_VU_A AS [Chức vụ anh],QUOC_TICH AS [Quốc tịch],NGAY_SINH AS [Ngày sinh],NOI_SINH AS [Nơi sinh],SO_CMND AS [CMND/CC],CAP_NGAY AS [Ngày cấp],NOI_CAP AS [Nơi cấp],DIA_CHI AS [Địa chỉ],STT FROM dbo.NGUOI_KY_GIAY_TO ORDER BY HO_TEN";
             dtTmp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, SQL));
             //export datatable to excel
             Workbook book = new Spire.Xls.Workbook();
@@ -2665,7 +2802,7 @@ namespace VietSoftHRM
         private void ExportNgachLuong(string sPath)
         {
             DataTable dtTmp = new DataTable();
-            string SQL = "SELECT TOP 10 MS_NL AS [Mã ngạch lương],TEN_NL AS [Tên ngạch lương] FROM dbo.NGACH_LUONG";
+            string SQL = "SELECT  MS_NL AS [Mã ngạch lương],TEN_NL AS [Tên ngạch lương] FROM dbo.NGACH_LUONG";
             dtTmp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, SQL));
             //export datatable to excel
             Workbook book = new Spire.Xls.Workbook();
@@ -2816,7 +2953,7 @@ namespace VietSoftHRM
         private void ExportBacLuong(string sPath)
         {
             DataTable dtTmp = new DataTable();
-            string SQL = "SELECT TOP 10 B.TEN_DV AS [Tên ĐV],C.TEN_NL AS [Tên ngạch lương],NGAY_QD AS [Ngày quyết định], TEN_BL AS [Tên bậc lương], MUC_LUONG AS [Mức lương],PC_DH AS [Phụ cấp Độc hại], PC_SINH_HOAT AS [Phụ cấp sinh hoạt], PC_KY_NANG AS [Phụ cấp kỹ năng], THUONG_CV_CC AS [Thưởng chuyên cần], THUONG_TC AS [Thưởng trợ cấp] FROM dbo.BAC_LUONG A INNER JOIN dbo.DON_VI B ON B.ID_DV = A.ID_DV INNER JOIN  dbo.NGACH_LUONG C ON C.ID_NL = A.ID_NL ORDER BY B.TEN_DV,C.TEN_NL,A.TEN_BL";
+            string SQL = "SELECT  B.TEN_DV AS [Tên ĐV],C.TEN_NL AS [Tên ngạch lương],NGAY_QD AS [Ngày quyết định], TEN_BL AS [Tên bậc lương], MUC_LUONG AS [Mức lương],PC_DH AS [Phụ cấp Độc hại], PC_SINH_HOAT AS [Phụ cấp sinh hoạt], PC_KY_NANG AS [Phụ cấp kỹ năng], THUONG_CV_CC AS [Thưởng chuyên cần], THUONG_TC AS [Thưởng trợ cấp] FROM dbo.BAC_LUONG A INNER JOIN dbo.DON_VI B ON B.ID_DV = A.ID_DV INNER JOIN  dbo.NGACH_LUONG C ON C.ID_NL = A.ID_NL ORDER BY B.TEN_DV,C.TEN_NL,A.TEN_BL";
             dtTmp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, SQL));
             //export datatable to excel
             Workbook book = new Spire.Xls.Workbook();
@@ -2910,7 +3047,7 @@ namespace VietSoftHRM
         private void ExportLoaiKTKL(string sPath)
         {
             DataTable dtTmp = new DataTable();
-            string SQL = "SELECT TOP 10 TEN_LOAI_KT AS [Tên khen thưởng/Kỹ luật],TEN_LOAI_KT_A AS [Tên khen thưởng/Kỹ luật A] FROM dbo.LOAI_KHEN_THUONG ORDER BY TEN_LOAI_KT";
+            string SQL = "SELECT  TEN_LOAI_KT AS [Tên khen thưởng/Kỹ luật],TEN_LOAI_KT_A AS [Tên khen thưởng/Kỹ luật A] FROM dbo.LOAI_KHEN_THUONG ORDER BY TEN_LOAI_KT";
             dtTmp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, SQL));
             //export datatable to excel
             Workbook book = new Spire.Xls.Workbook();
@@ -2929,6 +3066,888 @@ namespace VietSoftHRM
             book.SaveToFile(sPath);
             System.Diagnostics.Process.Start(sPath);
         }
+        #endregion
+
+        #endregion
+
+        #region Chấm công
+  
+        #region Nhóm Chấm công
+        private void ImportNhomChamCong(DataTable dtSource)
+        {
+            int count = grvData.RowCount;
+            int col = 0;
+            int errorCount = 0;
+
+            #region kiểm tra dữ liệu
+            foreach (DataRow dr in dtSource.Rows)
+            {
+                dr.ClearErrors();
+
+                col = 0;
+                //tên nhóm chấm công
+                string sNhomCC = dr[grvData.Columns[col].FieldName.ToString()].ToString();
+                if (!KiemDuLieu(dr, col, true, 50))
+                {
+                    errorCount++;
+                }
+                else
+                {
+                    if (!KiemTrungDL(dtSource, dr, col, sNhomCC, "NHOM_CHAM_CONG", "TEN_NHOM"))
+                    {
+                        errorCount++;
+                    }
+                }
+
+                //nhóm chấm công anh
+                if (!KiemDuLieu(dr, col, false, 50))
+                {
+                    errorCount++;
+                }
+            }
+            #endregion
+            Commons.Modules.ObjSystems.HideWaitForm();
+            if (errorCount != 0)
+            {
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgDuLieuChuaHopLe"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            else
+            {
+                DialogResult res = XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgDuLieuSanSangImport"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (res == DialogResult.Yes)
+                {
+                    SqlConnection conn = new SqlConnection(Commons.IConnections.CNStr);
+                    if (conn.State != ConnectionState.Open) conn.Open();
+                    SqlTransaction sTrans = conn.BeginTransaction();
+                    try
+                    {
+                        //tạo bảm tạm trên lưới
+                        string sbt = "sBTNhomCC" + Commons.Modules.UserName;
+                        Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sbt, Commons.Modules.ObjSystems.ConvertDatatable(grvData), "");
+
+                        string sSql = "INSERT INTO dbo.NHOM_CHAM_CONG(TEN_NHOM,TEN_NHOM_A) SELECT [" + grvData.Columns[0].FieldName.ToString() + "],[" + grvData.Columns[1].FieldName.ToString() + "] FROM " + sbt;
+                        SqlHelper.ExecuteNonQuery(sTrans, CommandType.Text, sSql);
+                        Commons.Modules.ObjSystems.XoaTable(sbt);
+                        sTrans.Commit();
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgImportDuLieuThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    catch (Exception ex)
+                    {
+                        sTrans.Rollback();
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgImportKhongThanhCong") + " error(" + ex.ToString() + ")", Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    if (conn.State != ConnectionState.Closed) conn.Close();
+                }
+            }
+        }
+
+        private void ExportNhomChamCong(string sPath)
+        {
+            DataTable dtTmp = new DataTable();
+            string SQL = "SELECT  TEN_NHOM AS [Tên nhóm],TEN_NHOM_A AS [Tên nhóm A] FROM dbo.NHOM_CHAM_CONG ORDER BY TEN_NHOM";
+            dtTmp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, SQL));
+            //export datatable to excel
+            Workbook book = new Spire.Xls.Workbook();
+            Worksheet sheet = book.Worksheets[0];
+            sheet.DefaultColumnWidth = 20;
+
+            sheet.Range[1, 1, 1, 2].Style.WrapText = true;
+            sheet.Range[1, 1, 1, 2].Style.VerticalAlignment = VerticalAlignType.Center;
+            sheet.Range[1, 1, 1, 2].Style.HorizontalAlignment = HorizontalAlignType.Center;
+            sheet.Range[1, 1, 1, 2].Style.Font.IsBold = true;
+
+            sheet.Range[1, 2].Style.Font.Color = Color.Red;
+
+            sheet.InsertDataTable(dtTmp, true, 1, 1);
+
+            book.SaveToFile(sPath);
+            System.Diagnostics.Process.Start(sPath);
+        }
+        #endregion
+
+        #region Ngày nghĩ lễ
+        private void ImportNgayNghiLe(DataTable dtSource)
+        {
+            int count = grvData.RowCount;
+            int col = 0;
+            int errorCount = 0;
+
+            #region kiểm tra dữ liệu
+            foreach (DataRow dr in dtSource.Rows)
+            {
+                dr.ClearErrors();
+
+                col = 0;
+                //Ngày
+                if (!KiemDuLieuNgay(dr, col,true))
+                {
+                    errorCount++;
+                }
+                col = 1;
+                string sLyDo = dr[grvData.Columns[col].FieldName.ToString()].ToString();
+                if (!KiemDuLieu(dr, col, true, 50))
+                {
+                    errorCount++;
+                }
+                else
+                {
+                    if (!KiemTrungDL(dtSource, dr, col, sLyDo, "NGAY_NGHI_LE", "LY_DO"))
+                    {
+                        errorCount++;
+                    }
+                }
+            }
+            #endregion
+            Commons.Modules.ObjSystems.HideWaitForm();
+            if (errorCount != 0)
+            {
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgDuLieuChuaHopLe"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            else
+            {
+                DialogResult res = XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgDuLieuSanSangImport"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (res == DialogResult.Yes)
+                {
+                    SqlConnection conn = new SqlConnection(Commons.IConnections.CNStr);
+                    if (conn.State != ConnectionState.Open) conn.Open();
+                    SqlTransaction sTrans = conn.BeginTransaction();
+                    try
+                    {
+                        //tạo bảm tạm trên lưới
+                        string sbt = "sBTNgayNL" + Commons.Modules.UserName;
+                        Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sbt, Commons.Modules.ObjSystems.ConvertDatatable(grvData), "");
+                        string sSql = "INSERT INTO dbo.NGAY_NGHI_LE(NGAY,LY_DO) SELECT CONVERT(datetime,[" + grvData.Columns[0].FieldName.ToString() + "],103),[" + grvData.Columns[1].FieldName.ToString() + "] FROM " + sbt;
+                        SqlHelper.ExecuteNonQuery(sTrans, CommandType.Text, sSql);
+                        Commons.Modules.ObjSystems.XoaTable(sbt);
+                        sTrans.Commit();
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgImportDuLieuThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    catch (Exception ex)
+                    {
+                        sTrans.Rollback();
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgImportKhongThanhCong") + " error(" + ex.ToString() + ")", Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    if (conn.State != ConnectionState.Closed) conn.Close();
+                }
+            }
+        }
+
+        private void ExportNgayNghiLe(string sPath)
+        {
+            DataTable dtTmp = new DataTable();
+            string SQL = "SELECT  NGAY AS [Ngày],LY_DO AS [Lý do] FROM dbo.NGAY_NGHI_LE ORDER BY NGAY";
+            dtTmp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, SQL));
+            //export datatable to excel
+            Workbook book = new Spire.Xls.Workbook();
+            Worksheet sheet = book.Worksheets[0];
+            sheet.DefaultColumnWidth = 20;
+
+            sheet.Range[1, 1, 1, 2].Style.WrapText = true;
+            sheet.Range[1, 1, 1, 2].Style.VerticalAlignment = VerticalAlignType.Center;
+            sheet.Range[1, 1, 1, 2].Style.HorizontalAlignment = HorizontalAlignType.Center;
+            sheet.Range[1, 1, 1, 2].Style.Font.IsBold = true;
+
+            sheet.Range[1, 2].Style.Font.Color = Color.Red;
+            sheet.InsertDataTable(dtTmp, true, 1, 1);
+            sheet.InsertDataTable(dtTmp, true, 1, 2);
+
+            book.SaveToFile(sPath);
+            System.Diagnostics.Process.Start(sPath);
+        }
+        #endregion
+
+        #region Nội dung qui định
+        private void ImportNoiDungQuiDinh(DataTable dtSource)
+        {
+            int count = grvData.RowCount;
+            int col = 0;
+            int errorCount = 0;
+
+            #region kiểm tra dữ liệu
+            foreach (DataRow dr in dtSource.Rows)
+            {
+                dr.ClearErrors();
+
+                col = 0;
+                //tên nhóm chấm công
+                string sNoiDung = dr[grvData.Columns[col].FieldName.ToString()].ToString();
+                if (!KiemDuLieu(dr, col, true, 250))
+                {
+                    errorCount++;
+                }
+                else
+                {
+                    if (!KiemTrungDL(dtSource, dr, col, sNoiDung, "NOI_QUY_LAO_DONG", "NOI_DUNG"))
+                    {
+                        errorCount++;
+                    }
+                }
+            }
+            #endregion
+            Commons.Modules.ObjSystems.HideWaitForm();
+            if (errorCount != 0)
+            {
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgDuLieuChuaHopLe"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            else
+            {
+                DialogResult res = XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgDuLieuSanSangImport"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (res == DialogResult.Yes)
+                {
+                    SqlConnection conn = new SqlConnection(Commons.IConnections.CNStr);
+                    if (conn.State != ConnectionState.Open) conn.Open();
+                    SqlTransaction sTrans = conn.BeginTransaction();
+                    try
+                    {
+                        //tạo bảm tạm trên lưới
+                        string sbt = "sBTNNoiQuiLD" + Commons.Modules.UserName;
+                        Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sbt, Commons.Modules.ObjSystems.ConvertDatatable(grvData), "");
+
+                        string sSql = "INSERT INTO dbo.NOI_QUY_LAO_DONG(NOI_DUNG) SELECT[" + grvData.Columns[0].FieldName.ToString() + "] FROM " + sbt;
+                        SqlHelper.ExecuteNonQuery(sTrans, CommandType.Text, sSql);
+                        Commons.Modules.ObjSystems.XoaTable(sbt);
+                        sTrans.Commit();
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgImportDuLieuThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    catch (Exception ex)
+                    {
+                        sTrans.Rollback();
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgImportKhongThanhCong") + " error(" + ex.ToString() + ")", Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    if (conn.State != ConnectionState.Closed) conn.Close();
+                }
+            }
+        }
+
+        private void ExportNoiDungQuiDinh(string sPath)
+        {
+            DataTable dtTmp = new DataTable();
+            string SQL = "SELECT  NOI_DUNG AS [Nội dung] FROM dbo.NOI_QUY_LAO_DONG ORDER BY NOI_DUNG";
+            dtTmp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, SQL));
+            //export datatable to excel
+            Workbook book = new Spire.Xls.Workbook();
+            Worksheet sheet = book.Worksheets[0];
+            sheet.DefaultColumnWidth = 20;
+
+            sheet.Range[1, 1, 1, 1].Style.WrapText = true;
+            sheet.Range[1, 1, 1, 1].Style.VerticalAlignment = VerticalAlignType.Center;
+            sheet.Range[1, 1, 1, 1].Style.HorizontalAlignment = HorizontalAlignType.Center;
+            sheet.Range[1, 1, 1, 1].Style.Font.IsBold = true;
+
+            sheet.Range[1, 1].Style.Font.Color = Color.Red;
+
+            sheet.InsertDataTable(dtTmp, true, 1, 1);
+
+            book.SaveToFile(sPath);
+            System.Diagnostics.Process.Start(sPath);
+        }
+        #endregion
+
+        #endregion
+
+        #region Tính lương
+        #region Đơn giá giây
+        private void ImportDonGiaGiay(DataTable dtSource)
+        {
+            int count = grvData.RowCount;
+            int col = 0;
+            int errorCount = 0;
+
+            #region kiểm tra dữ liệu
+            foreach (DataRow dr in dtSource.Rows)
+            {
+                dr.ClearErrors();
+                col = 0;
+                //Ngày
+                string sngay = Convert.ToDateTime(dr[grvData.Columns[col].FieldName.ToString()]).ToString("dd/MM/yyyy");
+                if (!KiemDuLieuNgay(dr, col, true))
+                {
+                    errorCount++;
+                }
+                else
+                {
+                    //kiểm tra ngày tồn tại
+                    int n = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT COUNT(*) FROM dbo.DON_GIA_GIAY WHERE CONVERT(NVARCHAR(20),NGAY_QD,103) ='"+ sngay + "'"));
+                    if(n > 0)
+                    {
+                        dr.SetColumnError(grvData.Columns[col].FieldName.ToString(), Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgChuaTonTaiCSDL"));
+                        dr["XOA"] = 1;
+                        errorCount++;
+                    }
+                }
+
+                col = 1;
+                //Hệ số
+                string heso = dr[grvData.Columns[col].FieldName.ToString()].ToString();
+                if (!KiemDuLieuSo(dr, col, heso, -999999, -999999,true))
+                {
+                    errorCount++;
+                }
+            }
+            #endregion
+            Commons.Modules.ObjSystems.HideWaitForm();
+            if (errorCount != 0)
+            {
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgDuLieuChuaHopLe"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            else
+            {
+                DialogResult res = XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgDuLieuSanSangImport"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (res == DialogResult.Yes)
+                {
+                    SqlConnection conn = new SqlConnection(Commons.IConnections.CNStr);
+                    if (conn.State != ConnectionState.Open) conn.Open();
+                    SqlTransaction sTrans = conn.BeginTransaction();
+                    try
+                    {
+                        //tạo bảm tạm trên lưới
+                        string sbt = "sBTDonGiaGiay" + Commons.Modules.UserName;
+                        Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sbt, Commons.Modules.ObjSystems.ConvertDatatable(grvData), "");
+                        string sSql = "INSERT INTO dbo.DON_GIA_GIAY(NGAY_QD,HS_DG_GIAY) SELECT CONVERT(datetime,[" + grvData.Columns[0].FieldName.ToString() + "],103),[" + grvData.Columns[1].FieldName.ToString() + "] FROM " + sbt;
+                        SqlHelper.ExecuteNonQuery(sTrans, CommandType.Text, sSql);
+                        Commons.Modules.ObjSystems.XoaTable(sbt);
+                        sTrans.Commit();
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgImportDuLieuThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    catch (Exception ex)
+                    {
+                        sTrans.Rollback();
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgImportKhongThanhCong") + " error(" + ex.ToString() + ")", Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    if (conn.State != ConnectionState.Closed) conn.Close();
+                }
+            }
+        }
+
+        private void ExportDonGiaGiay(string sPath)
+        {
+            DataTable dtTmp = new DataTable();
+            string SQL = "SELECT  NGAY_QD AS [Ngày QĐ],HS_DG_GIAY AS [Hệ số đơn giá] FROM dbo.DON_GIA_GIAY ORDER BY NGAY_QD";
+            dtTmp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, SQL));
+            //export datatable to excel
+            Workbook book = new Spire.Xls.Workbook();
+            Worksheet sheet = book.Worksheets[0];
+            sheet.DefaultColumnWidth = 20;
+
+            sheet.Range[1, 1, 1, 2].Style.WrapText = true;
+            sheet.Range[1, 1, 1, 2].Style.VerticalAlignment = VerticalAlignType.Center;
+            sheet.Range[1, 1, 1, 2].Style.HorizontalAlignment = HorizontalAlignType.Center;
+            sheet.Range[1, 1, 1, 2].Style.Font.IsBold = true;
+
+            sheet.Range[1, 1].Style.Font.Color = Color.Red;
+            sheet.Range[1, 2].Style.Font.Color = Color.Red;
+
+            sheet.InsertDataTable(dtTmp, true, 1, 1);
+
+            book.SaveToFile(sPath);
+            System.Diagnostics.Process.Start(sPath);
+        }
+        #endregion
+
+        #region Loại Máy
+        private void ImportLoaiMay(DataTable dtSource)
+        {
+            int count = grvData.RowCount;
+            int col = 0;
+            int errorCount = 0;
+
+            #region kiểm tra dữ liệu
+            foreach (DataRow dr in dtSource.Rows)
+            {
+                dr.ClearErrors();
+                col = 0;
+                //Mã số 
+                string sMaSo = dr[grvData.Columns[col].FieldName.ToString()].ToString();
+                if (!KiemDuLieu(dr, col, true, 7))
+                {
+                    errorCount++;
+                }
+                else
+                {
+                    if (!KiemTrungDL(dtSource, dr, col, sMaSo, "LOAI_MAY", "MS_LOAI_MAY"))
+                    {
+                        errorCount++;
+                    }
+                }
+                col = 1;
+                //Tên loại máy 
+                string sTenLoai = dr[grvData.Columns[col].FieldName.ToString()].ToString();
+                if (!KiemDuLieu(dr, col, true, 35))
+                {
+                    errorCount++;
+                }
+                else
+                {
+                    if (!KiemTrungDL(dtSource, dr, col, sTenLoai, "LOAI_MAY", "TEN_LOAI_MAY"))
+                    {
+                        errorCount++;
+                    }
+                }
+                col = 2;
+                //STT 
+                string stt = dr[grvData.Columns[col].FieldName.ToString()].ToString();
+                if (!KiemDuLieuSo(dr, col, stt, -999999, -999999, false))
+                {
+                    errorCount++;
+                }
+                col = 3;
+                //SD QTCN 
+                string sSD = dr[grvData.Columns[col].FieldName.ToString()].ToString();
+                if (!KiemDuLieuBool(dr, col, sSD, "0"))
+                {
+                    errorCount++;
+                }
+                col = 4;
+                //Công cụ
+                string sCC = dr[grvData.Columns[col].FieldName.ToString()].ToString();
+                if (!KiemDuLieuBool(dr, col, sCC, "0"))
+                {
+                    errorCount++;
+                }
+                col = 5;
+                //Ký hiệu
+                if (!KiemDuLieu(dr, col, false, 200))
+                {
+                    errorCount++;
+                }
+                col = 6;
+                //Tính năng cơ bản    
+                if (!KiemDuLieu(dr, col, false, 400))
+                {
+                    errorCount++;
+                }
+                col = 7;
+                //Tốc độ thiết bị
+                string sTD = dr[grvData.Columns[col].FieldName.ToString()].ToString();
+                if (!KiemDuLieuSo(dr, col, sTD, -999999, 0, false, -999999))
+                {
+                    errorCount++;
+                }
+                col = 8;
+                //Sử dụng công đoạn
+                if (!KiemDuLieu(dr, col, false, 200))
+                {
+                    errorCount++;
+                }
+
+
+            }
+            #endregion
+            Commons.Modules.ObjSystems.HideWaitForm();
+            if (errorCount != 0)
+            {
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgDuLieuChuaHopLe"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            else
+            {
+                DialogResult res = XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgDuLieuSanSangImport"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (res == DialogResult.Yes)
+                {
+                    SqlConnection conn = new SqlConnection(Commons.IConnections.CNStr);
+                    if (conn.State != ConnectionState.Open) conn.Open();
+                    SqlTransaction sTrans = conn.BeginTransaction();
+                    try
+                    {
+                        //tạo bảm tạm trên lưới
+                        string sbt = "sBTLoaiMay" + Commons.Modules.UserName;
+                        Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sbt, Commons.Modules.ObjSystems.ConvertDatatable(grvData), "");
+                        string sSql = "INSERT INTO dbo.LOAI_MAY(MS_LOAI_MAY,TEN_LOAI_MAY,STT_MAY,SD_QTCN,CONG_CU,KI_HIEU,TINH_NANG_CO_BAN,TOC_DO_THIET_BI,SU_DUNG_CONG_DOAN) SELECT [" + grvData.Columns[0].FieldName.ToString() + "],[" + grvData.Columns[1].FieldName.ToString() + "],[" + grvData.Columns[2].FieldName.ToString() + "],[" + grvData.Columns[3].FieldName.ToString() + "],[" + grvData.Columns[4].FieldName.ToString() + "],[" + grvData.Columns[5].FieldName.ToString() + "],[" + grvData.Columns[6].FieldName.ToString() + "],[" + grvData.Columns[7].FieldName.ToString() + "],[" + grvData.Columns[8].FieldName.ToString() + "] FROM " + sbt;
+                        SqlHelper.ExecuteNonQuery(sTrans, CommandType.Text, sSql);
+                        Commons.Modules.ObjSystems.XoaTable(sbt);
+                        sTrans.Commit();
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgImportDuLieuThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    catch (Exception ex)
+                    {
+                        sTrans.Rollback();
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgImportKhongThanhCong") + " error(" + ex.ToString() + ")", Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    if (conn.State != ConnectionState.Closed) conn.Close();
+                }
+            }
+        }
+
+        private void ExportLoaiMay(string sPath)
+        {
+            DataTable dtTmp = new DataTable();
+            string SQL = "SELECT  MS_LOAI_MAY [Mã số],TEN_LOAI_MAY [Tên loại máy],STT_MAY [STT],SD_QTCN [SD QTCN], CONG_CU [Công cụ],KI_HIEU [Kí hiệu],TINH_NANG_CO_BAN [Tính năng cơ bản],TOC_DO_THIET_BI[Tốc độ thiết bị],SU_DUNG_CONG_DOAN[Sử dụng công đoạn] FROM dbo.LOAI_MAY ORDER BY TEN_LOAI_MAY";
+            dtTmp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, SQL));
+            //export datatable to excel
+            Workbook book = new Spire.Xls.Workbook();
+            Worksheet sheet = book.Worksheets[0];
+            sheet.DefaultColumnWidth = 20;
+
+            sheet.Range[1, 1, 1, 9].Style.WrapText = true;
+            sheet.Range[1, 1, 1, 9].Style.VerticalAlignment = VerticalAlignType.Center;
+            sheet.Range[1, 1, 1, 9].Style.HorizontalAlignment = HorizontalAlignType.Center;
+            sheet.Range[1, 1, 1, 9].Style.Font.IsBold = true;
+
+            sheet.Range[1, 1].Style.Font.Color = Color.Red;
+            sheet.Range[1, 2].Style.Font.Color = Color.Red;
+
+            sheet.InsertDataTable(dtTmp, true, 1, 1);
+
+            book.SaveToFile(sPath);
+            System.Diagnostics.Process.Start(sPath);
+        }
+        #endregion
+
+        #region Cụm
+        private void ImportCum(DataTable dtSource)
+        {
+            int count = grvData.RowCount;
+            int col = 0;
+            int errorCount = 0;
+
+            #region kiểm tra dữ liệu
+            foreach (DataRow dr in dtSource.Rows)
+            {
+                dr.ClearErrors();
+                col = 0;
+                //Mã cụm 
+                string sMaSo = dr[grvData.Columns[col].FieldName.ToString()].ToString();
+                if (!KiemDuLieu(dr, col, true, 10))
+                {
+                    errorCount++;
+                }
+                else
+                {
+                    if (!KiemTrungDL(dtSource, dr, col, sMaSo, "CUM", "MS_CUM"))
+                    {
+                        errorCount++;
+                    }
+                }
+                col = 1;
+                //Tên cụm
+                string sTenCum = dr[grvData.Columns[col].FieldName.ToString()].ToString();
+                if (!KiemDuLieu(dr, col, true, 100))
+                {
+                    errorCount++;
+                }
+                else
+                {
+                    if (!KiemTrungDL(dtSource, dr, col, sTenCum, "CUM", "TEN_CUM"))
+                    {
+                        errorCount++;
+                    }
+                }
+                col = 2;
+                //STT 
+                string stt = dr[grvData.Columns[col].FieldName.ToString()].ToString();
+                if (!KiemDuLieuSo(dr, col, stt, -999999, -999999, false))
+                {
+                    errorCount++;
+                }
+                col = 3;
+                //Nhóm hàng hóa 
+                string sNhomHH = dr[grvData.Columns[col].FieldName.ToString()].ToString();
+                if (!KiemTonTai(dr, col, sNhomHH, "NHOM_HANG_HOA", "TEN_NHH"))
+                {
+                    errorCount++;
+                }
+
+                col = 4;
+                //Tính thời gian
+                string stTG = dr[grvData.Columns[col].FieldName.ToString()].ToString();
+                if (!KiemDuLieuBool(dr, col, stTG, "0"))
+                {
+                    errorCount++;
+                }
+                col = 5;
+                //Loại cụm
+                string sLoaiCum = dr[grvData.Columns[col].FieldName.ToString()].ToString();
+                if (!KiemTonTai(dr, col, sLoaiCum, "LOAI_CUM", "TEN_LOAI_CUM"))
+                {
+                    errorCount++;
+                }
+                col = 6;
+                //Cụm ps
+                string sCumPS = dr[grvData.Columns[col].FieldName.ToString()].ToString();
+                if (!KiemDuLieuBool(dr, col, sCumPS, "0"))
+                {
+                    errorCount++;
+                }
+                col = 7;
+                //Cụm cuối
+                string sCumCuoi = dr[grvData.Columns[col].FieldName.ToString()].ToString();
+                if (!KiemDuLieuBool(dr, col, sCumCuoi, "0"))
+                {
+                    errorCount++;
+                }
+            }
+            #endregion
+            Commons.Modules.ObjSystems.HideWaitForm();
+            if (errorCount != 0)
+            {
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgDuLieuChuaHopLe"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            else
+            {
+                DialogResult res = XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgDuLieuSanSangImport"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (res == DialogResult.Yes)
+                {
+                    SqlConnection conn = new SqlConnection(Commons.IConnections.CNStr);
+                    if (conn.State != ConnectionState.Open) conn.Open();
+                    SqlTransaction sTrans = conn.BeginTransaction();
+                    try
+                    {
+                        //tạo bảm tạm trên lưới
+                        string sbt = "sBTCum" + Commons.Modules.UserName;
+                        //A.[" + grvData.Columns[0].FieldName.ToString() + "]
+                        Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sbt, Commons.Modules.ObjSystems.ConvertDatatable(grvData), "");
+                        string sSql = "INSERT INTO dbo.CUM(MS_CUM,TEN_CUM,STT,ID_NHH,TINH_TG,LOAI_CUM,CUM_PS,CUM_CUOI) SELECT A.[" + grvData.Columns[0].FieldName.ToString() + "],A.[" + grvData.Columns[1].FieldName.ToString() + "],A.[" + grvData.Columns[2].FieldName.ToString() + "],(SELECT TOP 1 ID_NHH FROM dbo.NHOM_HANG_HOA WHERE TEN_NHH = A.[" + grvData.Columns[3].FieldName.ToString() + "]),A.[" + grvData.Columns[4].FieldName.ToString() + "],(SELECT TOP 1 LOAI_CUM FROM dbo.LOAI_CUM WHERE TEN_LOAI_CUM = A.[" + grvData.Columns[5].FieldName.ToString() + "]),A.[" + grvData.Columns[6].FieldName.ToString() + "],A.[" + grvData.Columns[7].FieldName.ToString() + "] FROM " + sbt +" as A";
+                        SqlHelper.ExecuteNonQuery(sTrans, CommandType.Text, sSql);
+                        Commons.Modules.ObjSystems.XoaTable(sbt);
+                        sTrans.Commit();
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgImportDuLieuThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    catch (Exception ex)
+                    {
+                        sTrans.Rollback();
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgImportKhongThanhCong") + " error(" + ex.ToString() + ")", Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    if (conn.State != ConnectionState.Closed) conn.Close();
+                }
+            }
+        }
+
+        private void ExportCum(string sPath)
+        {
+            DataTable dtTmp = new DataTable();
+            string SQL = "SELECT A.MS_CUM AS [Mã cụm], A.TEN_CUM AS [Tên cụm],A.STT AS [STT],B.TEN_NHH AS [Nhóm hàng hóa],A.TINH_TG AS [Tính TG],C.TEN_LOAI_CUM AS [Loại cụm],A.CUM_PS AS[Cụm PS],A.CUM_CUOI AS [Cụm cuối] FROM dbo.CUM A INNER JOIN  dbo.NHOM_HANG_HOA B ON B.ID_NHH = A.ID_NHH INNER JOIN  dbo.LOAI_CUM C ON C.LOAI_CUM = A.LOAI_CUM ORDER BY A.TEN_CUM";
+            dtTmp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, SQL));
+            //export datatable to excel
+            Workbook book = new Spire.Xls.Workbook();
+            Worksheet sheet = book.Worksheets[0];
+            sheet.DefaultColumnWidth = 20;
+
+            sheet.Range[1, 1, 1, 9].Style.WrapText = true;
+            sheet.Range[1, 1, 1, 9].Style.VerticalAlignment = VerticalAlignType.Center;
+            sheet.Range[1, 1, 1, 9].Style.HorizontalAlignment = HorizontalAlignType.Center;
+            sheet.Range[1, 1, 1, 9].Style.Font.IsBold = true;
+
+            sheet.Range[1, 1].Style.Font.Color = Color.Red;
+            sheet.Range[1, 2].Style.Font.Color = Color.Red;
+
+            sheet.InsertDataTable(dtTmp, true, 1, 1);
+
+            book.SaveToFile(sPath);
+            System.Diagnostics.Process.Start(sPath);
+        }
+        #endregion
+
+        #region bậc thợ
+        private void ImportBacTho(DataTable dtSource)
+        {
+            int count = grvData.RowCount;
+            int col = 0;
+            int errorCount = 0;
+
+            #region kiểm tra dữ liệu
+            foreach (DataRow dr in dtSource.Rows)
+            {
+                dr.ClearErrors();
+                col = 0;
+                //Tên bậc thợ
+                string sTenBT = dr[grvData.Columns[col].FieldName.ToString()].ToString();
+                if (!KiemDuLieu(dr, col, true, 40))
+                {
+                    errorCount++;
+                }
+                else
+                {
+                    if (!KiemTrungDL(dtSource, dr, col, sTenBT, "HSBT", "TEN_BAC_THO"))
+                    {
+                        errorCount++;
+                    }
+                }
+
+                col = 1;
+                //Hệ số
+                string heso = dr[grvData.Columns[col].FieldName.ToString()].ToString();
+                if (!KiemDuLieuSo(dr, col, heso, -999999, -999999, true))
+                {
+                    errorCount++;
+                }
+            }
+            #endregion
+            Commons.Modules.ObjSystems.HideWaitForm();
+            if (errorCount != 0)
+            {
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgDuLieuChuaHopLe"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            else
+            {
+                DialogResult res = XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgDuLieuSanSangImport"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (res == DialogResult.Yes)
+                {
+                    SqlConnection conn = new SqlConnection(Commons.IConnections.CNStr);
+                    if (conn.State != ConnectionState.Open) conn.Open();
+                    SqlTransaction sTrans = conn.BeginTransaction();
+                    try
+                    {
+                        //tạo bảm tạm trên lưới
+                        string sbt = "sBTHSBT" + Commons.Modules.UserName;
+                        Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sbt, Commons.Modules.ObjSystems.ConvertDatatable(grvData), "");
+                        string sSql = "INSERT INTO dbo.HSBT(TEN_BAC_THO,HE_SO_BAC_THO) SELECT [" + grvData.Columns[0].FieldName.ToString() + "],[" + grvData.Columns[1].FieldName.ToString() + "] FROM " + sbt;
+                        SqlHelper.ExecuteNonQuery(sTrans, CommandType.Text, sSql);
+                        Commons.Modules.ObjSystems.XoaTable(sbt);
+                        sTrans.Commit();
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgImportDuLieuThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    catch (Exception ex)
+                    {
+                        sTrans.Rollback();
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgImportKhongThanhCong") + " error(" + ex.ToString() + ")", Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    if (conn.State != ConnectionState.Closed) conn.Close();
+                }
+            }
+        }
+
+        private void ExportBacTho(string sPath)
+        {
+            DataTable dtTmp = new DataTable();
+            string SQL = "SELECT TEN_BAC_THO AS [Tên bậc thợ],HE_SO_BAC_THO AS [Hệ số bậc thợ] FROM dbo.HSBT ORDER BY TEN_BAC_THO";
+            dtTmp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, SQL));
+            //export datatable to excel
+            Workbook book = new Spire.Xls.Workbook();
+            Worksheet sheet = book.Worksheets[0];
+            sheet.DefaultColumnWidth = 20;
+
+            sheet.Range[1, 1, 1, 2].Style.WrapText = true;
+            sheet.Range[1, 1, 1, 2].Style.VerticalAlignment = VerticalAlignType.Center;
+            sheet.Range[1, 1, 1, 2].Style.HorizontalAlignment = HorizontalAlignType.Center;
+            sheet.Range[1, 1, 1, 2].Style.Font.IsBold = true;
+
+            sheet.Range[1, 1].Style.Font.Color = Color.Red;
+            sheet.Range[1, 2].Style.Font.Color = Color.Red;
+
+            sheet.InsertDataTable(dtTmp, true, 1, 1);
+
+            book.SaveToFile(sPath);
+            System.Diagnostics.Process.Start(sPath);
+        }
+        #endregion
+
+        #region Chuyền
+        private void ImportChuyen(DataTable dtSource)
+        {
+            int count = grvData.RowCount;
+            int col = 0;
+            int errorCount = 0;
+
+            #region kiểm tra dữ liệu
+            foreach (DataRow dr in dtSource.Rows)
+            {
+                dr.ClearErrors();
+                col = 0;
+                //tên tổ
+                string sTenTo = dr[grvData.Columns[col].FieldName.ToString()].ToString();
+                if (!KiemTonTai(dr, col, sTenTo, "[TO]", "TEN_TO"))
+                {
+                    errorCount++;
+                }
+                col = 1;
+                //mã chuyền
+                string sMaSo = dr[grvData.Columns[col].FieldName.ToString()].ToString();
+                if (!KiemDuLieu(dr, col, true, 20))
+                {
+                    errorCount++;
+                }
+                else
+                {
+                    if (!KiemTrungDL(dtSource, dr, col, sMaSo, "CHUYEN", "MS_CHUYEN"))
+                    {
+                        errorCount++;
+                    }
+                }
+                col = 2;
+                //Tên chuyền
+                string sTenCum = dr[grvData.Columns[col].FieldName.ToString()].ToString();
+                if (!KiemDuLieu(dr, col, true, 50))
+                {
+                    errorCount++;
+                }
+                else
+                {
+                    if (!KiemTrungDL(dtSource, dr, col, sTenCum, "CHUYEN", "TEN_CHUYEN"))
+                    {
+                        errorCount++;
+                    }
+                }
+          
+            }
+            #endregion
+            Commons.Modules.ObjSystems.HideWaitForm();
+            if (errorCount != 0)
+            {
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgDuLieuChuaHopLe"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            else
+            {
+                DialogResult res = XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgDuLieuSanSangImport"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (res == DialogResult.Yes)
+                {
+                    SqlConnection conn = new SqlConnection(Commons.IConnections.CNStr);
+                    if (conn.State != ConnectionState.Open) conn.Open();
+                    SqlTransaction sTrans = conn.BeginTransaction();
+                    try
+                    {
+                        //tạo bảm tạm trên lưới
+                        string sbt = "sBTCum" + Commons.Modules.UserName;
+                        Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sbt, Commons.Modules.ObjSystems.ConvertDatatable(grvData), "");
+                        string sSql = "INSERT INTO dbo.CHUYEN(ID_TO,MS_CHUYEN,TEN_CHUYEN) SELECT (SELECT ID_TO FROM dbo.[TO] WHERE TEN_TO = A.[" + grvData.Columns[0].FieldName.ToString() + "]),A.[" + grvData.Columns[1].FieldName.ToString() + "],A.[" + grvData.Columns[2].FieldName.ToString() + "] FROM " + sbt + " as A";
+                        SqlHelper.ExecuteNonQuery(sTrans, CommandType.Text, sSql);
+                        Commons.Modules.ObjSystems.XoaTable(sbt);
+                        sTrans.Commit();
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgImportDuLieuThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    catch (Exception ex)
+                    {
+                        sTrans.Rollback();
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgImportKhongThanhCong") + " error(" + ex.ToString() + ")", Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    if (conn.State != ConnectionState.Closed) conn.Close();
+                }
+            }
+        }
+
+        private void ExportChuyen(string sPath)
+        {
+            DataTable dtTmp = new DataTable();
+            string SQL = "SELECT B.TEN_TO AS [Tên Tổ],A.MS_CHUYEN AS [Ms chuyền],A.TEN_CHUYEN AS [Tên Chuyền] FROM dbo.CHUYEN A INNER JOIN dbo.[TO] B ON B.ID_TO = A.ID_TO";
+            dtTmp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, SQL));
+            Workbook book = new Spire.Xls.Workbook();
+            Worksheet sheet = book.Worksheets[0];
+            sheet.DefaultColumnWidth = 20;
+
+            sheet.Range[1, 1, 1, 3].Style.WrapText = true;
+            sheet.Range[1, 1, 1, 3].Style.VerticalAlignment = VerticalAlignType.Center;
+            sheet.Range[1, 1, 1, 3].Style.HorizontalAlignment = HorizontalAlignType.Center;
+            sheet.Range[1, 1, 1, 3].Style.Font.IsBold = true;
+
+            sheet.Range[1, 1].Style.Font.Color = Color.Red;
+            sheet.Range[1, 2].Style.Font.Color = Color.Red;
+            sheet.Range[1, 3].Style.Font.Color = Color.Red;
+
+            sheet.InsertDataTable(dtTmp, true, 1, 1);
+
+            book.SaveToFile(sPath);
+            System.Diagnostics.Process.Start(sPath);
+        }
+        #endregion
+
+
+
         #endregion
 
         //private void grvData_CustomDrawRowIndicator(object sender, RowIndicatorCustomDrawEventArgs e)
@@ -3027,11 +4046,32 @@ namespace VietSoftHRM
                             }
                             break;
                         }
+                    case 32:
+                        {
+                            if (col == 3)
+                            {
+                                KiemData("NHOM_HANG_HOA", "TEN_NHH", info.RowHandle, col, row);
+                            }
+                            if (col == 5)
+                            {
+                                KiemData("LOAI_CUM", "TEN_LOAI_CUM", info.RowHandle, col, row);
+                            }
+                            break;
+                        }
+                    case 34:
+                        {
+                            if (col == 0)
+                            {
+                                KiemData("[TO]", "TEN_TO", info.RowHandle, col, row);
+                            }
+                            break;
+                        }
                 }
             }
             catch
             {
             }
+            grvData.UpdateCurrentRow();
         }
         private void KiemData(string Table, string Field, int dong, int Cot, DataRow row)
         {

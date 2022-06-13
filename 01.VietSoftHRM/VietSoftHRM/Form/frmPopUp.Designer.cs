@@ -158,6 +158,7 @@
             this.Controls.Add(this.dataLayoutControl1);
             this.Controls.Add(this.windowsUIButton);
             this.Name = "frmPopUp";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "frmPopUp";
             this.Load += new System.EventHandler(this.frmPopUp_Load);
             this.windowsUIButton.ResumeLayout(false);

@@ -41,7 +41,6 @@ namespace Vs.HRM
             {
                 Commons.Modules.ObjSystems.MLoadXtraGrid(grdKhenThuong, grvKhenThuong, dt, false, false, true, false, true, this.Name);
                 //grvKhenThuong.Columns["SO_QUYET_DINH"].AppearanceHeader.ForeColor = Color.Red;
-
                 grvKhenThuong.Columns["ID_KTHUONG"].Visible = false;
                 grvKhenThuong.Columns["ID_CN"].Visible = false;
                 grvKhenThuong.Columns["ID_NK"].Visible = false;

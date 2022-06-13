@@ -37,9 +37,9 @@ namespace Commons
                 DevExpress.XtraGrid.Menu.GridViewMenu headerMenu = (DevExpress.XtraGrid.Menu.GridViewMenu)e.Menu;
                 if (headerMenu.Items.Count > 11) return;
 
-                DevExpress.Utils.Menu.DXMenuItem menuItem = new DevExpress.Utils.Menu.DXMenuItem("Reset Layout Grid", new EventHandler(MyMenuItem));
-                DevExpress.Utils.Menu.DXMenuItem menuSave = new DevExpress.Utils.Menu.DXMenuItem("Save Layout Grid", new EventHandler(MenuSave));
-                DevExpress.Utils.Menu.DXMenuItem menuItemClear = new DevExpress.Utils.Menu.DXMenuItem("Clear Layout Grid", new EventHandler(MenuClear));
+                DevExpress.Utils.Menu.DXMenuItem menuItem = new DevExpress.Utils.Menu.DXMenuItem("Reset Grid", new EventHandler(MyMenuItem));
+                DevExpress.Utils.Menu.DXMenuItem menuSave = new DevExpress.Utils.Menu.DXMenuItem("Save Grid", new EventHandler(MenuSave));
+                DevExpress.Utils.Menu.DXMenuItem menuItemClear = new DevExpress.Utils.Menu.DXMenuItem("Clear Grid", new EventHandler(MenuClear));
                 menuItem.BeginGroup = true;
                 menuItem.Tag = e.Menu;
                 menuItem.BeginGroup = true;

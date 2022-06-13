@@ -1496,3 +1496,4 @@ G:\2022\02.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.csproj.CoreCompileInputs.cache
 G:\2022\02.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.csproj.CopyComplete
 G:\2022\02.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.exe
 G:\2022\02.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.pdb
+G:\2022\02.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\ICSharpCode.SharpZipLib.dll

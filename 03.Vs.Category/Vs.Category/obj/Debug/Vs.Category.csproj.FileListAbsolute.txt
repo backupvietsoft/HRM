@@ -870,3 +870,4 @@ G:\2022\02.HRM\03.Vs.Category\Vs.Category\obj\Debug\Vs.Category.csproj.CoreCompi
 G:\2022\02.HRM\03.Vs.Category\Vs.Category\obj\Debug\Vs.Category.csproj.CopyComplete
 G:\2022\02.HRM\03.Vs.Category\Vs.Category\obj\Debug\Vs.Category.dll
 G:\2022\02.HRM\03.Vs.Category\Vs.Category\obj\Debug\Vs.Category.pdb
+G:\2022\02.HRM\03.Vs.Category\Vs.Category\bin\Debug\ICSharpCode.SharpZipLib.dll

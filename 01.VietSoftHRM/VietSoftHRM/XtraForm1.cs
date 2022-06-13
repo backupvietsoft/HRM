@@ -27,17 +27,16 @@ namespace VietSoftHRM
         {
             //CapNhapHinh();
 
-            //VietSoftHRM.ucNHOM ns = new ucNHOM();
-            //this.Controls.Clear();
-            //this.Controls.Add(ns);
-            //ns.Dock = DockStyle.Fill;
+            VietSoftHRM.ucImportExcel ns = new ucImportExcel();
+            this.Controls.Clear();
+            this.Controls.Add(ns);
+            ns.Dock = DockStyle.Fill;
 
             //LoadNS();
         }
 
         private void xtraTabPage1_DoubleClick(object sender, EventArgs e)
         {
-
         }
 
         private void xtraTabControl1_DoubleClick(object sender, EventArgs e)

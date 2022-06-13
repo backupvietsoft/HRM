@@ -1482,3 +1482,4 @@ G:\2022\02.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.csproj.CoreCompileInpu
 G:\2022\02.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.csproj.CopyComplete
 G:\2022\02.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.dll
 G:\2022\02.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.pdb
+G:\2022\02.HRM\08.Payroll\Vs.Payroll\bin\Debug\ICSharpCode.SharpZipLib.dll

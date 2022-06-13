@@ -325,3 +325,4 @@ G:\2022\02.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.Recruit.csproj.C
 G:\2022\02.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.Recruit.csproj.CopyComplete
 G:\2022\02.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.Recruit.dll
 G:\2022\02.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.Recruit.pdb
+G:\2022\02.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\ICSharpCode.SharpZipLib.dll

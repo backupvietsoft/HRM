@@ -862,9 +862,7 @@ namespace Commons
                 SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "UPDATE dbo.DINH_DANG_LUOI SET DINH_DANG = '" + text + "' WHERE TEN_GRID = '" + grv.Name + "' AND TEN_FORM ='" + fName + "'");
                 //UPDATE dbo.DINH_DANG_LUOI SET DINH_DANG = '" + text + "' WHERE TEN_GRID = '" + grv.Name + "' AND TEN_FORM = '" + fName + "'
             }
-
         }
-
         public bool MLoadXtraGridDM(DevExpress.XtraGrid.GridControl grd, DevExpress.XtraGrid.Views.Grid.GridView grv, DataTable dtTmp, bool MEditable, bool MPopulateColumns, bool MColumnAutoWidth, bool MBestFitColumns, bool MloadNNgu, string fName)
         {
             try
@@ -879,7 +877,8 @@ namespace Commons
                 grv.OptionsView.AllowHtmlDrawHeaders = true;
                 grv.Appearance.HeaderPanel.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
                 grv.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.True;
-
+                grv.DoubleClick += delegate (object a, EventArgs b) { Grv_DoubleClickDM(a, b, fName
+                    ); };
                 if (MBestFitColumns)
                     grv.BestFitColumns();
 
@@ -953,6 +952,47 @@ namespace Commons
                 return false;
             }
         }
+        private void Grv_DoubleClickDM(object sender, EventArgs e, string sName)
+        {
+            if (Form.ModifierKeys == Keys.Control)
+            {
+                try
+                {
+                    DevExpress.XtraGrid.Views.Grid.GridView View;
+                    string sText = "";
+                    View = (DevExpress.XtraGrid.Views.Grid.GridView)sender;
+                    DevExpress.Utils.DXMouseEventArgs dxMouseEventArgs = e as DevExpress.Utils.DXMouseEventArgs;
+                    DevExpress.XtraGrid.Views.Grid.ViewInfo.GridHitInfo hitInfo = View.CalcHitInfo(dxMouseEventArgs.Location);
+                    if (hitInfo.InColumn)
+                    {
+                        try
+                        {
+                            sText = XtraInputBox.Show(hitInfo.Column.GetTextCaption(), "Sửa ngôn ngữ", "");
+                            if (sText == "")
+                                return;
+                            else if (sText == "Windows.Forms.DialogResult.Retry")
+                            {
+                                sText = "";
+                                CapNhapNN(sName, hitInfo.Column.FieldName, sText, true);
+                            }
+                            else
+                                CapNhapNN(sName, hitInfo.Column.FieldName, sText, false);
+                            sText = " SELECT TOP 1 " + (Commons.Modules.TypeLanguage == 0 ? "VIETNAM" : "ENGLISH") + " FROM LANGUAGES WHERE FORM = '" + sName + "' AND KEYWORD = '" + hitInfo.Column.FieldName + "' AND MS_MODULE = 'VS_HRM' ";
+                            sText = Convert.ToString(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, sText));
+                            hitInfo.Column.Caption = sText;
+                        }
+                        catch
+                        {
+                        }
+                    }
+                    Commons.Modules.OXtraGrid.SaveXmlGrid(View.GridControl);
+                }
+                catch
+                {
+                }
+            }
+        }
+
         private void Grv_DoubleClick(object sender, EventArgs e, string sName)
         {
             if (Form.ModifierKeys == Keys.Control)
@@ -1668,14 +1708,10 @@ namespace Commons
             {
                 item.Text = GetNN(dtTmp, item.Name, frm.Name);
                 item.AppearanceTabPage.Header.ForeColor = Color.FromArgb(192, 0, 0);
-                //LoadNNGroupControl(frm, item, dtTmp);
+                LoadNNGroupControl(frm, item, dtTmp);
             }
             try
             {
-                //foreach (WindowsUIButton btn in btnWinUIB.Buttons.but)
-                //{
-                //    btn.Caption = GetNN(dtTmp, btn.Tag.ToString(), frm.Name);
-                //}
                 for (int i = 0; i < btnWinUIB.Buttons.Count; i++)
                 {
                     try
@@ -4091,7 +4127,7 @@ namespace Commons
                     grv.UpdateCurrentRow();
                 }
             }
-            catch (Exception ex)
+            catch
             {
             }
         }

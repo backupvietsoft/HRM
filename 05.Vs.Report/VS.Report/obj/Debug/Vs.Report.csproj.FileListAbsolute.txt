@@ -1500,3 +1500,4 @@ G:\2022\02.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.csproj.CoreCompileInpu
 G:\2022\02.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.csproj.CopyComplete
 G:\2022\02.HRM\05.Vs.Report\Vs.Report\obj\Debug\VS.Report.dll
 G:\2022\02.HRM\05.Vs.Report\Vs.Report\obj\Debug\VS.Report.pdb
+G:\2022\02.HRM\05.Vs.Report\Vs.Report\bin\Debug\ICSharpCode.SharpZipLib.dll

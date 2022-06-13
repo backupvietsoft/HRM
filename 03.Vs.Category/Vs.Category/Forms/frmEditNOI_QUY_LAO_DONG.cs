@@ -28,7 +28,7 @@ namespace Vs.Category
         {
             if (!AddEdit) LoadText();
             Commons.Modules.ObjSystems.ThayDoiNN(this, layoutControlGroup1, btnALL);
-            lblNoiDung.Name = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "lblNoiDung");
+            //lblNoiDung.Name = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "lblNoiDung");
         }
         private void frmEditNOI_QUY_LAO_DONG_Resize(object sender, EventArgs e) => dataLayoutControl1.Refresh();
 

@@ -30,7 +30,7 @@
       <property name="ColumnEditName" />
       <property name="VisibleIndex">0</property>
       <property name="Visible">true</property>
-      <property name="Width">307</property>
+      <property name="Width">367</property>
       <property name="MinWidth">20</property>
       <property name="MaxWidth">0</property>
     </property>
@@ -43,7 +43,7 @@
       <property name="ColumnEditName" />
       <property name="VisibleIndex">1</property>
       <property name="Visible">true</property>
-      <property name="Width">120</property>
+      <property name="Width">182</property>
       <property name="MinWidth">20</property>
       <property name="MaxWidth">0</property>
     </property>

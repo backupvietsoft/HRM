@@ -2,10 +2,8 @@
   <property name="#LayoutVersion" />
   <property name="#LayoutScaleFactor">@1,Width=1@1,Height=1</property>
   <property name="OptionsView" isnull="true" iskey="true">
-    <property name="AllowHtmlDrawHeaders">true</property>
-    <property name="ColumnAutoWidth">false</property>
-    <property name="ColumnHeaderAutoHeight">True</property>
     <property name="RowAutoHeight">true</property>
+    <property name="ShowAutoFilterRow">true</property>
     <property name="ShowGroupPanel">false</property>
   </property>
   <property name="ActiveFilterEnabled">true</property>
@@ -17,7 +15,7 @@
       <property name="ImageIndex">-1</property>
       <property name="FieldName">ID_NNL</property>
       <property name="ColumnEditName" />
-      <property name="Width">72</property>
+      <property name="Width">69</property>
       <property name="MinWidth">20</property>
       <property name="MaxWidth">0</property>
     </property>
@@ -30,7 +28,7 @@
       <property name="ColumnEditName" />
       <property name="VisibleIndex">0</property>
       <property name="Visible">true</property>
-      <property name="Width">146</property>
+      <property name="Width">196</property>
       <property name="MinWidth">20</property>
       <property name="MaxWidth">0</property>
     </property>
@@ -43,21 +41,12 @@
       <property name="ColumnEditName" />
       <property name="VisibleIndex">1</property>
       <property name="Visible">true</property>
-      <property name="Width">259</property>
+      <property name="Width">1443</property>
       <property name="MinWidth">20</property>
       <property name="MaxWidth">0</property>
     </property>
   </property>
-  <property name="GroupSummary" iskey="true" value="1">
-    <property name="Item1" isnull="true" iskey="true">
-      <property name="Mode">AllRows</property>
-      <property name="ShowInGroupColumnFooterName" />
-      <property name="Tag" isnull="true" />
-      <property name="FieldName" />
-      <property name="SummaryType">Count</property>
-      <property name="DisplayFormat" />
-    </property>
-  </property>
+  <property name="GroupSummary" iskey="true" value="0" />
   <property name="ActiveFilterString" />
   <property name="GroupSummarySortInfoState" />
   <property name="FindFilterText" />

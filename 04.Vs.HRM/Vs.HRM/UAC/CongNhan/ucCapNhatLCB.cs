@@ -40,10 +40,10 @@ namespace Vs.HRM
             Commons.Modules.ObjSystems.LoadCboDonVi(cboDV);
             Commons.Modules.ObjSystems.LoadCboXiNghiep(cboDV, cboXN);
             Commons.Modules.ObjSystems.LoadCboTo(cboDV, cboXN, cboTo);
-            Commons.Modules.ObjSystems.MLoadLookUpEdit(BAC_CVlookUpEdit, Commons.Modules.ObjSystems.DataNgachLuong(true), "ID_NL", "TEN_NL", "TEN_NL");
-            Commons.Modules.ObjSystems.MLoadLookUpEdit(BAC_HDlookUpEdit, Commons.Modules.ObjSystems.DataBacLuong(Convert.ToInt64(BAC_CVlookUpEdit.EditValue), Convert.ToDateTime(NGAY_HIEU_LUCdateEdit.EditValue), true), "ID_BL", "TEN_BL", "TEN_BL");
-            Commons.Modules.ObjSystems.MLoadLookUpEdit(ID_NLlookUpEdit, Commons.Modules.ObjSystems.DataNgachLuong(false), "ID_NL", "TEN_NL", "TEN_NL");
-            Commons.Modules.ObjSystems.MLoadLookUpEdit(ID_BLlookUpEdit, Commons.Modules.ObjSystems.DataBacLuong(Convert.ToInt64(ID_NLlookUpEdit.EditValue), Convert.ToDateTime(NGAY_HIEU_LUCdateEdit.EditValue), false), "ID_BL", "TEN_BL", "TEN_BL");
+            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(BAC_CVlookUpEdit, Commons.Modules.ObjSystems.DataNgachLuong(true), "ID_NL", "MS_NL", "MS_NL");
+            Commons.Modules.ObjSystems.MLoadLookUpEdit(BAC_HDlookUpEdit, Commons.Modules.ObjSystems.DataBacLuong(Convert.ToInt64(BAC_CVlookUpEdit.EditValue), Convert.ToDateTime(NGAY_HIEU_LUCdateEdit.EditValue), false), "ID_BL", "TEN_BL", "TEN_BL");
+            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(ID_NLlookUpEdit, Commons.Modules.ObjSystems.DataNgachLuong(false), "ID_NL", "MS_NL", "MS_NL");
+            Commons.Modules.ObjSystems.MLoadLookUpEdit(ID_BLlookUpEdit, Commons.Modules.ObjSystems.DataBacLuong(Convert.ToInt64(ID_NLlookUpEdit.EditValue), Convert.ToDateTime(NGAY_HIEU_LUCdateEdit.EditValue), true), "ID_BL", "TEN_BL", "TEN_BL");
             LoadGrdCapNhatLCB();
             Commons.Modules.ObjSystems.MLoadLookUpEdit(COT_CAP_NHATlookUpEdit, Commons.Modules.ObjSystems.DataCotCapNhat(false), "ID_COT", "TEN_COT", "TEN_COT");
             radBoloc_EditValueChanged(null, null);
@@ -174,7 +174,7 @@ namespace Vs.HRM
         {
             if (Commons.Modules.sLoad == "0Load") return;
             Commons.Modules.sLoad = "0Load";
-            Commons.Modules.ObjSystems.MLoadLookUpEdit(BAC_HDlookUpEdit, Commons.Modules.ObjSystems.DataBacLuong(Convert.ToInt64(BAC_CVlookUpEdit.EditValue), Convert.ToDateTime(NGAY_HIEU_LUCdateEdit.EditValue), true), "ID_BL", "TEN_BL", "TEN_BL");
+            Commons.Modules.ObjSystems.MLoadLookUpEdit(BAC_HDlookUpEdit, Commons.Modules.ObjSystems.DataBacLuong(Convert.ToInt64(BAC_CVlookUpEdit.EditValue), Convert.ToDateTime(NGAY_HIEU_LUCdateEdit.EditValue), false), "ID_BL", "TEN_BL", "TEN_BL");
             LoadGrdCapNhatLCB();
             Commons.Modules.sLoad = "";
         }

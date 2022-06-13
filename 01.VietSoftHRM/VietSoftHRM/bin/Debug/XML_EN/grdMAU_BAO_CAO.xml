@@ -12,13 +12,11 @@
   <property name="Columns" iskey="true" value="4">
     <property name="Item1" isnull="true" iskey="true">
       <property name="Name">colID_MBC</property>
-      <property name="Caption">@ID_MBC@</property>
+      <property name="Caption">Template ID</property>
       <property name="ImageAlignment">Near</property>
       <property name="ImageIndex">-1</property>
       <property name="FieldName">ID_MBC</property>
       <property name="ColumnEditName" />
-      <property name="VisibleIndex">0</property>
-      <property name="Visible">true</property>
       <property name="Width">71</property>
       <property name="MinWidth">20</property>
       <property name="MaxWidth">0</property>
@@ -30,7 +28,7 @@
       <property name="ImageIndex">-1</property>
       <property name="FieldName">TEN_NGAN</property>
       <property name="ColumnEditName" />
-      <property name="VisibleIndex">1</property>
+      <property name="VisibleIndex">0</property>
       <property name="Visible">true</property>
       <property name="Width">94</property>
       <property name="MinWidth">20</property>
@@ -42,7 +40,7 @@
       <property name="ImageIndex">-1</property>
       <property name="FieldName">STT_MAU</property>
       <property name="ColumnEditName" />
-      <property name="VisibleIndex">2</property>
+      <property name="VisibleIndex">1</property>
       <property name="Visible">true</property>
       <property name="Width">82</property>
       <property name="MinWidth">20</property>
@@ -50,14 +48,14 @@
     </property>
     <property name="Item4" isnull="true" iskey="true">
       <property name="Name">colPARAGRAP_1</property>
-      <property name="Caption">@PARAGRAP_1@</property>
+      <property name="Caption">Paragraph</property>
       <property name="ImageAlignment">Near</property>
       <property name="ImageIndex">-1</property>
       <property name="FieldName">PARAGRAP_1</property>
       <property name="ColumnEditName" />
-      <property name="VisibleIndex">3</property>
+      <property name="VisibleIndex">2</property>
       <property name="Visible">true</property>
-      <property name="Width">1134</property>
+      <property name="Width">1313</property>
       <property name="MinWidth">20</property>
       <property name="MaxWidth">0</property>
     </property>

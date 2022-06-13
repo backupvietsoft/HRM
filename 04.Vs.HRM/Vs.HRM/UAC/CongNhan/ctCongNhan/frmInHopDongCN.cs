@@ -25,10 +25,10 @@ namespace Vs.HRM
         {
             chkChuaThamGia.Checked = true;
             rdo_ChonBaoCao.SelectedIndex = 0;
-            //if (Commons.Modules.ObjSystems.KyHieuDV_CN(Convert.ToInt64(Commons.Modules.iCongNhan)) == "MT")
-            //{
-            //    rdo_ChonBaoCao.Properties.Items.RemoveAt(2);
-            //}
+            if (Commons.Modules.ObjSystems.KyHieuDV_CN(Convert.ToInt64(Commons.Modules.iCongNhan)) == "SB")
+            {
+                rdo_ChonBaoCao.Properties.Items.RemoveAt(3);
+            }
             dNgayIn.EditValue = DateTime.Today;
             Commons.OSystems.SetDateEditFormat(dNgayIn);
             Commons.Modules.sLoad = "";
@@ -100,6 +100,11 @@ namespace Vs.HRM
                                                 HopDongThuViecCNQC();
                                                 break;
                                             }
+                                        case "SB":
+                                            {
+                                                HopDongThoiVu_SB();
+                                                break;
+                                            }
                                         default:
                                             HopDongThuViecCNQC();
                                             break;
@@ -114,6 +119,12 @@ namespace Vs.HRM
                                         case "MT":
                                             {
                                                 HopDongDaoTao();
+                                                break;
+                                            }
+
+                                        case "SB":
+                                            {
+                                                HopDongThoiVu_SB();
                                                 break;
                                             }
                                         default:
@@ -403,6 +414,45 @@ namespace Vs.HRM
                 conn1.Open();
 
                 System.Data.SqlClient.SqlCommand cmd1 = new System.Data.SqlClient.SqlCommand("rptHopDongThuViec_SB", conn1);
+                cmd1.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                cmd1.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                cmd1.Parameters.Add("@ID_CN", SqlDbType.Int).Value = idCN;
+                cmd1.Parameters.Add("@ID_SQD", SqlDbType.Int).Value = idHD;
+                cmd1.CommandType = CommandType.StoredProcedure;
+
+                System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd1);
+                DataSet ds = new DataSet();
+                adp.Fill(ds);
+                dt = new DataTable();
+                dt = ds.Tables[0].Copy();
+                dt.TableName = "DATA";
+                frm.AddDataSource(dt);
+
+                dtbc = new DataTable();
+                dtbc = ds.Tables[1].Copy();
+                dtbc.TableName = "NOI_DUNG";
+                frm.AddDataSource(dtbc);
+
+                frm.ShowDialog();
+            }
+            catch { }
+        }
+
+        private void HopDongThoiVu_SB()
+        {
+            DataTable dt = new DataTable();
+            DataTable dtbc = new DataTable();
+            try
+            {
+                System.Data.SqlClient.SqlConnection conn1;
+                dt = new DataTable();
+                frmViewReport frm = new frmViewReport();
+                frm.rpt = new rptHopDongThoiVu_SB(dNgayIn.DateTime);
+
+                conn1 = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                conn1.Open();
+
+                System.Data.SqlClient.SqlCommand cmd1 = new System.Data.SqlClient.SqlCommand("rptHopDongThoiVu_SB", conn1);
                 cmd1.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
                 cmd1.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
                 cmd1.Parameters.Add("@ID_CN", SqlDbType.Int).Value = idCN;

@@ -53,7 +53,7 @@
       <property name="ImageIndex">-1</property>
       <property name="FieldName">TEN_LOAI_CV</property>
       <property name="ColumnEditName" />
-      <property name="VisibleIndex">2</property>
+      <property name="VisibleIndex">1</property>
       <property name="Visible">true</property>
       <property name="Width">188</property>
       <property name="MinWidth">20</property>
@@ -102,7 +102,7 @@
     </property>
     <property name="Item2" isnull="true" iskey="true">
       <property name="Orders">Ascending</property>
-      <property name="Columns">colMS_CV</property>
+      <property name="Columns">colSTT_IN_CV</property>
     </property>
     <property name="Content" isnull="true" iskey="true">
       <property name="GroupCount">1</property>

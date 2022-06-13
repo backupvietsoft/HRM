@@ -28,7 +28,7 @@ namespace Vs.HRM
         private void Loaddatatable()
         {
             tableTTC_CN.Clear();
-            tableTTC_CN.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT * FROM dbo.funQuaTrinhCongTac(" + idcn + "," + Commons.Modules.TypeLanguage + ")"));
+            tableTTC_CN.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT * FROM dbo.funQuaTrinhCongTac(" + Commons.Modules.iCongNhan + "," + Commons.Modules.TypeLanguage + ")"));
         }
 
         #region sự kiệm form
@@ -265,7 +265,7 @@ namespace Vs.HRM
             try
             {
                 int n = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spUpdateQuaTrinhCongTac",
-                idQTCT, idcn,
+                idQTCT, Commons.Modules.iCongNhan,
                 ID_LQDLookUpEdit.EditValue,
                 ID_NKLookUpEdit.EditValue,
                 ID_TOLookUpEdit.EditValue,
@@ -359,7 +359,7 @@ namespace Vs.HRM
                             return;
                         }
                         idQTCT = Convert.ToInt32(grvCongTac.GetFocusedRowCellValue("ID_QTCT"));
-                        frmInQTCT InQTCT = new frmInQTCT(idcn, idQTCT, ID_CNTextEdit.EditValue.ToString());
+                        frmInQTCT InQTCT = new frmInQTCT(Commons.Modules.iCongNhan, idQTCT, ID_CNTextEdit.EditValue.ToString());
                         InQTCT.ShowDialog();
                         break;
                     }
@@ -402,7 +402,7 @@ namespace Vs.HRM
                         }
                         System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spkiemtrungQuaTrinhCongTac", conn);
                         cmd.Parameters.Add("@ID_QTCT", SqlDbType.BigInt).Value = idQTCT;
-                        cmd.Parameters.Add("@ID_CN", SqlDbType.BigInt).Value = idcn;
+                        cmd.Parameters.Add("@ID_CN", SqlDbType.BigInt).Value = Commons.Modules.iCongNhan;
                         cmd.Parameters.Add("@SO_QUYET_DINH", SqlDbType.NVarChar).Value = SO_QUYET_DINHTextEdit.Text;
                         cmd.CommandType = CommandType.StoredProcedure;
                         if (Convert.ToInt16(cmd.ExecuteScalar()) == 1)
@@ -420,7 +420,16 @@ namespace Vs.HRM
                     {
                         enableButon(true);
                         Bindingdata(false);
-                        dxValidationProvider1.Validate();
+                        dxValidationProvider1.ValidateHiddenControls = false;
+                        dxValidationProvider1.RemoveControlError(SO_QUYET_DINHTextEdit);
+                        dxValidationProvider1.RemoveControlError(ID_LQDLookUpEdit);
+                        dxValidationProvider1.RemoveControlError(DON_VILookUpEdit);
+                        dxValidationProvider1.RemoveControlError(XI_NGHIEPLookUpEdit);
+                        dxValidationProvider1.RemoveControlError(ID_TOLookUpEdit);
+                        dxValidationProvider1.RemoveControlError(ID_CVLookUpEdit);
+                        dxValidationProvider1.RemoveControlError(ID_LCVLookUpEdit);
+
+                        //dxValidationProvider1.Validate();
                         break;
                     }
                 case "thoat":

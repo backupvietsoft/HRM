@@ -252,7 +252,7 @@ namespace Vs.HRM
                 Commons.Modules.ObjSystems.MLoadXtraGrid(grdThang, grvThang, dtthang, false, false, true, true, true, this.Name);
                 grvThang.Columns["M"].Visible = false;
                 grvThang.Columns["Y"].Visible = false;
-                cboThang.Text = grvThang.GetFocusedRowCellValue("THANG").ToString();
+                cboThang.Text = grvThang.GetFocusedRowCellValue("THANG").ToString(); 
                 LoadDot(Convert.ToDateTime(cboThang.EditValue));
             }
             catch (Exception ex)

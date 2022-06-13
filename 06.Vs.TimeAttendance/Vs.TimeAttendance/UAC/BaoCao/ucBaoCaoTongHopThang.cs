@@ -101,7 +101,6 @@ namespace Vs.TimeAttendance
                                         case "SB":
                                             {
                                                 BangChamCongThang_SB2();
-
                                                 //BangChamCongThang_SB();
                                                 break;
                                             }

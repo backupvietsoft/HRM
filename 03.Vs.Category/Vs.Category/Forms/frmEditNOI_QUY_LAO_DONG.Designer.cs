@@ -31,28 +31,27 @@
             this.components = new System.ComponentModel.Container();
             DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions1 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
             DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions2 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule1 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             this.btnALL = new DevExpress.XtraBars.Docking2010.WindowsUIButtonPanel();
             this.tablePanel1 = new DevExpress.Utils.Layout.TablePanel();
             this.dataLayoutControl1 = new DevExpress.XtraDataLayout.DataLayoutControl();
-            this.txtNoiDung = new DevExpress.XtraEditors.MemoEdit();
+            this.txtSTT = new DevExpress.XtraEditors.TextEdit();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.lblNoiDung = new DevExpress.XtraLayout.LayoutControlItem();
-            this.dxValidationProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
-            this.txtSTT = new DevExpress.XtraEditors.TextEdit();
             this.ItemForSTT = new DevExpress.XtraLayout.LayoutControlItem();
+            this.dxValidationProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
+            this.txtNoiDung = new DevExpress.XtraEditors.TextEdit();
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).BeginInit();
             this.tablePanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataLayoutControl1)).BeginInit();
             this.dataLayoutControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtNoiDung.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtSTT.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblNoiDung)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtSTT.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForSTT)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtNoiDung.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // btnALL
@@ -121,26 +120,20 @@
             this.dataLayoutControl1.TabIndex = 0;
             this.dataLayoutControl1.Text = "dataLayoutControl1";
             // 
-            // txtNoiDung
+            // txtSTT
             // 
-            this.txtNoiDung.Location = new System.Drawing.Point(86, 6);
-            this.txtNoiDung.Name = "txtNoiDung";
-            this.txtNoiDung.Size = new System.Drawing.Size(548, 170);
-            this.txtNoiDung.StyleController = this.dataLayoutControl1;
-            this.txtNoiDung.TabIndex = 4;
-            conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule1.ErrorText = "This value is not valid";
-            conditionValidationRule1.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.Critical;
-            this.dxValidationProvider1.SetValidationRule(this.txtNoiDung, conditionValidationRule1);
+            this.txtSTT.Location = new System.Drawing.Point(86, 34);
+            this.txtSTT.Name = "txtSTT";
+            this.txtSTT.Size = new System.Drawing.Size(548, 26);
+            this.txtSTT.StyleController = this.dataLayoutControl1;
+            this.txtSTT.TabIndex = 5;
             // 
             // Root
             // 
             this.Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
             this.Root.GroupBordersVisible = false;
             this.Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlGroup1,
-            this.lblNoiDung,
-            this.ItemForSTT});
+            this.layoutControlGroup1});
             this.Root.Name = "Root";
             this.Root.Size = new System.Drawing.Size(640, 323);
             this.Root.TextVisible = false;
@@ -149,33 +142,36 @@
             // 
             this.layoutControlGroup1.AllowDrawBackground = false;
             this.layoutControlGroup1.GroupBordersVisible = false;
-            this.layoutControlGroup1.Location = new System.Drawing.Point(0, 200);
+            this.layoutControlGroup1.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.lblNoiDung,
+            this.ItemForSTT});
+            this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "autoGeneratedGroup0";
-            this.layoutControlGroup1.Size = new System.Drawing.Size(630, 113);
+            this.layoutControlGroup1.Size = new System.Drawing.Size(630, 313);
             // 
             // lblNoiDung
             // 
             this.lblNoiDung.Control = this.txtNoiDung;
             this.lblNoiDung.Location = new System.Drawing.Point(0, 0);
             this.lblNoiDung.Name = "lblNoiDung";
-            this.lblNoiDung.Size = new System.Drawing.Size(630, 172);
+            this.lblNoiDung.Size = new System.Drawing.Size(630, 28);
             this.lblNoiDung.TextSize = new System.Drawing.Size(77, 20);
-            // 
-            // txtSTT
-            // 
-            this.txtSTT.Location = new System.Drawing.Point(86, 178);
-            this.txtSTT.Name = "txtSTT";
-            this.txtSTT.Size = new System.Drawing.Size(548, 26);
-            this.txtSTT.StyleController = this.dataLayoutControl1;
-            this.txtSTT.TabIndex = 5;
             // 
             // ItemForSTT
             // 
             this.ItemForSTT.Control = this.txtSTT;
-            this.ItemForSTT.Location = new System.Drawing.Point(0, 172);
+            this.ItemForSTT.Location = new System.Drawing.Point(0, 28);
             this.ItemForSTT.Name = "ItemForSTT";
-            this.ItemForSTT.Size = new System.Drawing.Size(630, 28);
+            this.ItemForSTT.Size = new System.Drawing.Size(630, 285);
             this.ItemForSTT.TextSize = new System.Drawing.Size(77, 20);
+            // 
+            // txtNoiDung
+            // 
+            this.txtNoiDung.Location = new System.Drawing.Point(86, 6);
+            this.txtNoiDung.Name = "txtNoiDung";
+            this.txtNoiDung.Size = new System.Drawing.Size(548, 26);
+            this.txtNoiDung.StyleController = this.dataLayoutControl1;
+            this.txtNoiDung.TabIndex = 4;
             // 
             // frmEditNOI_QUY_LAO_DONG
             // 
@@ -193,13 +189,13 @@
             this.tablePanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataLayoutControl1)).EndInit();
             this.dataLayoutControl1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.txtNoiDung.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtSTT.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblNoiDung)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtSTT.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForSTT)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtNoiDung.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -212,9 +208,9 @@
         private DevExpress.XtraLayout.LayoutControlGroup Root;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup1;
         private DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider dxValidationProvider1;
-        private DevExpress.XtraEditors.MemoEdit txtNoiDung;
         private DevExpress.XtraLayout.LayoutControlItem lblNoiDung;
         private DevExpress.XtraEditors.TextEdit txtSTT;
         private DevExpress.XtraLayout.LayoutControlItem ItemForSTT;
+        private DevExpress.XtraEditors.TextEdit txtNoiDung;
     }
 }

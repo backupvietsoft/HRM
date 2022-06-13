@@ -8,12 +8,16 @@ using DevExpress.XtraLayout;
 using System.Threading;
 using Microsoft.ApplicationBlocks.Data;
 using DevExpress.XtraEditors.Repository;
+using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraGrid.Columns;
 
 namespace Vs.HRM
 {
     public partial class ucBaoHiemYTe : DevExpress.XtraEditors.XtraUserControl
     {
         public static ucBaoHiemYTe _instance;
+        DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit cboID_BV;
+        int MS_TINH;
         public static ucBaoHiemYTe Instance
         {
             get
@@ -185,8 +189,54 @@ namespace Vs.HRM
                 grdBHYT.DataSource = dt;
             }
 
-            Commons.Modules.ObjSystems.AddCombXtra("ID_TP", "TEN_TP", grvNgungDongBHXH, Commons.Modules.ObjSystems.DataThanhPho(-1, false), "ID_TP", "THANH_PHO");
-            Commons.Modules.ObjSystems.AddCombXtra("ID_BV", "TEN_BV", grvNgungDongBHXH, Commons.Modules.ObjSystems.DataBenhVien(false), "ID_BV", "DANH_SACH_BENH_VIEN");
+            DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit cboID_TP = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
+            DataTable dID_NHOM = new DataTable();
+            dID_NHOM.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboThanhPho", -1, Commons.Modules.UserName, Commons.Modules.TypeLanguage, 0));
+            cboID_TP.NullText = "";
+            cboID_TP.ValueMember = "ID_TP";
+            cboID_TP.DisplayMember = "TEN_TP";
+            cboID_TP.DataSource = dID_NHOM;
+            cboID_TP.Columns.Clear();
+            cboID_TP.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID_TP"));
+            cboID_TP.Columns["ID_TP"].Caption = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "ID_TP");
+            //cboID_CN.Columns["ID_CN"].Visible = false;
+
+            cboID_TP.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("TEN_TP"));
+            cboID_TP.Columns["TEN_TP"].Caption = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "TEN_TP");
+
+            cboID_TP.AppearanceDropDownHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            cboID_TP.AppearanceDropDownHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            cboID_TP.Columns["ID_TP"].Visible = false;
+            grvNgungDongBHXH.Columns["ID_TP"].ColumnEdit = cboID_TP;
+            cboID_TP.BeforePopup += CboID_TP_BeforePopup;
+            cboID_TP.EditValueChanged += CboID_TP_EditValueChanged;
+
+
+            //Danh sach benh vien
+            cboID_BV = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
+            DataTable dID_BV = new DataTable();
+            dID_BV.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboBenhVien", Commons.Modules.UserName, Commons.Modules.TypeLanguage, 0));
+            cboID_BV.NullText = "";
+            cboID_BV.ValueMember = "ID_BV";
+            cboID_BV.DisplayMember = "TEN_BV";
+            cboID_BV.DataSource = dID_BV;
+            cboID_BV.Columns.Clear();
+            cboID_BV.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID_BV"));
+            cboID_BV.Columns["ID_BV"].Caption = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "ID_BV");
+            //cboID_CN.Columns["ID_CN"].Visible = false;
+
+            cboID_BV.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("TEN_BV"));
+            cboID_BV.Columns["TEN_BV"].Caption = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "TEN_BV");
+
+            cboID_BV.AppearanceDropDownHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            cboID_BV.AppearanceDropDownHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            cboID_BV.Columns["ID_BV"].Visible = false;
+            grvNgungDongBHXH.Columns["ID_BV"].ColumnEdit = cboID_BV;
+            cboID_BV.BeforePopup += CboID_BV_BeforePopup;
+            cboID_BV.EditValueChanged += CboID_BV_EditValueChanged;
+
+            //Commons.Modules.ObjSystems.AddCombXtra("ID_TP", "TEN_TP", grvNgungDongBHXH, Commons.Modules.ObjSystems.DataThanhPho(-1, false), "ID_TP", "THANH_PHO");
+            //Commons.Modules.ObjSystems.AddCombXtra("ID_BV", "TEN_BV", grvNgungDongBHXH, Commons.Modules.ObjSystems.DataBenhVien(false), "ID_BV", "DANH_SACH_BENH_VIEN");
             grvNgungDongBHXH.Columns["MS_CN"].OptionsColumn.ReadOnly = true;
             //grvNgungDongBHXH.Columns["MS_CN"].Width = 50;
             //grvNgungDongBHXH.Columns["HO_TEN"].Width = 100;
@@ -197,6 +247,52 @@ namespace Vs.HRM
             Commons.OSystems.SetDateRepositoryItemDateEdit(dEditN);
             grvNgungDongBHXH.Columns["NGAY_HET_HAN"].ColumnEdit = dEditN;
         }
+        private void CboID_TP_EditValueChanged(object sender, EventArgs e)
+        {
+            LookUpEdit lookUp = sender as LookUpEdit;
+
+            //string id = lookUp.get;
+
+            // Access the currently selected data row
+            DataRowView dataRow = lookUp.GetSelectedDataRow() as DataRowView;
+
+            grvNgungDongBHXH.SetFocusedRowCellValue("ID_TP", (dataRow.Row[0]));
+
+            string strSQL = "SELECT MS_TINH FROM THANH_PHO WHERE ID_TP = " + Convert.ToInt32(dataRow.Row[0]) + "";
+            MS_TINH = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, strSQL));
+            Commons.Modules.sLoad = "";
+            //DataTable dID = new DataTable();
+            //dID.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboBenhVien_Loc", MS_TINH, Commons.Modules.UserName, Commons.Modules.TypeLanguage, 0));
+            //grvNgungDongBHXH.SetFocusedRowCellValue("ID_BV", dID);
+            //cboID_BV.DataSource = dID;
+        }
+        private void CboID_TP_BeforePopup(object sender, EventArgs e)
+        {
+        }
+        private void CboID_BV_BeforePopup(object sender, EventArgs e)
+        {
+            LookUpEdit lookUp = sender as LookUpEdit;
+
+            //string id = lookUp.get;
+
+            // Access the currently selected data row
+            //DataRowView dataRow = lookUp.Properties.DataSource as DataRowView;
+
+            DataTable dID = new DataTable();
+            dID.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboBenhVien_Loc", MS_TINH, Commons.Modules.UserName, Commons.Modules.TypeLanguage, 0));
+            lookUp.Properties.DataSource = dID;
+        }
+        private void CboID_BV_EditValueChanged(object sender, EventArgs e)
+        {
+            LookUpEdit lookUp = sender as LookUpEdit;
+
+            //string id = lookUp.get;
+
+            // Access the currently selected data row
+            DataRowView dataRow = lookUp.GetSelectedDataRow() as DataRowView;
+
+            grvNgungDongBHXH.SetFocusedRowCellValue("ID_BV", (dataRow.Row[0]));
+        }
         private void Savedata()
         {
             try
@@ -204,10 +300,9 @@ namespace Vs.HRM
                 //tạo một datatable 
                 string sBTBHTY = "sBTBHYT" + Commons.Modules.UserName;
                 Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBTBHTY, Commons.Modules.ObjSystems.ConvertDatatable(grvNgungDongBHXH), "");
-                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr,"spSaveBaoHiemYTe", sBTBHTY);
-                Commons.Modules.ObjSystems.XoaTable(sBTBHTY);
+                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spSaveBaoHiemYTe", sBTBHTY);
             }
-            catch 
+            catch
             {
 
             }
@@ -240,5 +335,23 @@ namespace Vs.HRM
         }
         #endregion
 
+        private void grvNgungDongBHXH_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
+        {
+            GridView view = sender as GridView;
+            //GridColumn colTuNgay = view.Columns["NGHI_TU_NGAY"];
+            //GridColumn colDenNgay = view.Columns["NGHI_DEN_NGAY"];
+
+            //GridColumn colThang = view.Columns["THANG"];
+            //GridColumn colThangChuyen = view.Columns["THANG_CHUYEN"];
+
+            //GridColumn colDot = view.Columns["DOT"];
+            //GridColumn colDotChuyen = view.Columns["DOT_CHUYEN"];
+            if (e.Column.Name == "colID_TP")
+            {
+
+                
+                //view.SetRowCellValue(e.RowHandle, view.Columns["ID_BV"], 1);
+            }
+        }
     }
 }

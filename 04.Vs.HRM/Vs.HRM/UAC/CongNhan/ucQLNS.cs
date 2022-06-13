@@ -241,7 +241,6 @@ namespace Vs.HRM
                     {
                         grdNS.Visible = false;
                         ucCTQLNS dl = new ucCTQLNS(-1);
-                        Commons.Modules.ObjSystems.ShowWaitForm(this);
                         dl.Refresh();
                         dt = dl.dt;
                         navigationFrame1.SelectedPage.Visible = false;
@@ -261,7 +260,6 @@ namespace Vs.HRM
                         dl.backWindowsUIButtonPanel.ButtonClick += BackWindowsUIButtonPanel_ButtonClick;
                         navigationFrame1.SelectedPage = navigationPage2;
                         accorMenuleft.Visible = false;
-                        Commons.Modules.ObjSystems.HideWaitForm();
                         break;
                     }
                 case "sua":

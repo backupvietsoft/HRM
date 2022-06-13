@@ -227,7 +227,7 @@
             this.ClientSize = new System.Drawing.Size(523, 279);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.windowsUIButton);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Name = "frmChangePass";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmChangePass";

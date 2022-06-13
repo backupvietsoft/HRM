@@ -178,7 +178,7 @@ namespace VietSoftHRM
                     try
                     {
                         Byte[] data = new Byte[0];
-                        data = (Byte[])(dt.Rows[0]["Hinh_CN"]);
+                        data = (Byte[])(dt.Rows[0]["LOGO"]);
                         System.IO.MemoryStream mem = new System.IO.MemoryStream(data);
                         pteLogo.EditValue = Image.FromStream(mem);
                         //pteLogo.EditValue = Commons.Modules.OS.LoadHinh((byte[])dt.Rows[0]["LOGO"]);

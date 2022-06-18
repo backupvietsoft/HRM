@@ -116,8 +116,8 @@
             this.tablePanel1.Location = new System.Drawing.Point(0, 0);
             this.tablePanel1.Name = "tablePanel1";
             this.tablePanel1.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] {
-            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 8F),
-            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 100F)});
+            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 5F),
+            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 95F)});
             this.tablePanel1.Size = new System.Drawing.Size(774, 368);
             this.tablePanel1.TabIndex = 10;
             // 
@@ -130,29 +130,29 @@
             this.dataLayoutControl1.Controls.Add(this.TEN_TDVH_HTextEdit);
             this.dataLayoutControl1.Controls.Add(this.ID_LOAI_TDSearchLookUpEdit);
             this.dataLayoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataLayoutControl1.Location = new System.Drawing.Point(81, 13);
+            this.dataLayoutControl1.Location = new System.Drawing.Point(81, 23);
             this.dataLayoutControl1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.dataLayoutControl1.Name = "dataLayoutControl1";
             this.dataLayoutControl1.Root = this.Root;
             this.tablePanel1.SetRow(this.dataLayoutControl1, 1);
-            this.dataLayoutControl1.Size = new System.Drawing.Size(611, 350);
+            this.dataLayoutControl1.Size = new System.Drawing.Size(611, 340);
             this.dataLayoutControl1.TabIndex = 0;
             this.dataLayoutControl1.Text = "dataLayoutControl1";
             // 
             // txtSTT
             // 
-            this.txtSTT.Location = new System.Drawing.Point(98, 118);
+            this.txtSTT.Location = new System.Drawing.Point(104, 132);
             this.txtSTT.Name = "txtSTT";
-            this.txtSTT.Size = new System.Drawing.Size(507, 26);
+            this.txtSTT.Size = new System.Drawing.Size(495, 26);
             this.txtSTT.StyleController = this.dataLayoutControl1;
             this.txtSTT.TabIndex = 8;
             // 
             // TEN_TDVHTextEdit
             // 
-            this.TEN_TDVHTextEdit.Location = new System.Drawing.Point(98, 34);
+            this.TEN_TDVHTextEdit.Location = new System.Drawing.Point(104, 42);
             this.TEN_TDVHTextEdit.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.TEN_TDVHTextEdit.Name = "TEN_TDVHTextEdit";
-            this.TEN_TDVHTextEdit.Size = new System.Drawing.Size(507, 26);
+            this.TEN_TDVHTextEdit.Size = new System.Drawing.Size(495, 26);
             this.TEN_TDVHTextEdit.StyleController = this.dataLayoutControl1;
             this.TEN_TDVHTextEdit.TabIndex = 4;
             conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
@@ -161,25 +161,25 @@
             // 
             // TEN_TDVH_ATextEdit
             // 
-            this.TEN_TDVH_ATextEdit.Location = new System.Drawing.Point(98, 62);
+            this.TEN_TDVH_ATextEdit.Location = new System.Drawing.Point(104, 72);
             this.TEN_TDVH_ATextEdit.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.TEN_TDVH_ATextEdit.Name = "TEN_TDVH_ATextEdit";
-            this.TEN_TDVH_ATextEdit.Size = new System.Drawing.Size(507, 26);
+            this.TEN_TDVH_ATextEdit.Size = new System.Drawing.Size(495, 26);
             this.TEN_TDVH_ATextEdit.StyleController = this.dataLayoutControl1;
             this.TEN_TDVH_ATextEdit.TabIndex = 5;
             // 
             // TEN_TDVH_HTextEdit
             // 
-            this.TEN_TDVH_HTextEdit.Location = new System.Drawing.Point(98, 90);
+            this.TEN_TDVH_HTextEdit.Location = new System.Drawing.Point(104, 102);
             this.TEN_TDVH_HTextEdit.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.TEN_TDVH_HTextEdit.Name = "TEN_TDVH_HTextEdit";
-            this.TEN_TDVH_HTextEdit.Size = new System.Drawing.Size(507, 26);
+            this.TEN_TDVH_HTextEdit.Size = new System.Drawing.Size(495, 26);
             this.TEN_TDVH_HTextEdit.StyleController = this.dataLayoutControl1;
             this.TEN_TDVH_HTextEdit.TabIndex = 6;
             // 
             // ID_LOAI_TDSearchLookUpEdit
             // 
-            this.ID_LOAI_TDSearchLookUpEdit.Location = new System.Drawing.Point(98, 6);
+            this.ID_LOAI_TDSearchLookUpEdit.Location = new System.Drawing.Point(104, 12);
             this.ID_LOAI_TDSearchLookUpEdit.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.ID_LOAI_TDSearchLookUpEdit.Name = "ID_LOAI_TDSearchLookUpEdit";
             this.ID_LOAI_TDSearchLookUpEdit.Properties.Appearance.Options.UseTextOptions = true;
@@ -188,7 +188,7 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.ID_LOAI_TDSearchLookUpEdit.Properties.NullText = "";
             this.ID_LOAI_TDSearchLookUpEdit.Properties.PopupView = this.searchLookUpEdit1View;
-            this.ID_LOAI_TDSearchLookUpEdit.Size = new System.Drawing.Size(507, 26);
+            this.ID_LOAI_TDSearchLookUpEdit.Size = new System.Drawing.Size(495, 26);
             this.ID_LOAI_TDSearchLookUpEdit.StyleController = this.dataLayoutControl1;
             this.ID_LOAI_TDSearchLookUpEdit.TabIndex = 7;
             conditionValidationRule2.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
@@ -211,7 +211,7 @@
             this.Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlGroup1});
             this.Root.Name = "Root";
-            this.Root.Size = new System.Drawing.Size(611, 350);
+            this.Root.Size = new System.Drawing.Size(611, 340);
             this.Root.TextVisible = false;
             // 
             // layoutControlGroup1
@@ -226,54 +226,54 @@
             this.ItemForSTT});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "autoGeneratedGroup0";
-            this.layoutControlGroup1.Size = new System.Drawing.Size(601, 340);
+            this.layoutControlGroup1.Size = new System.Drawing.Size(591, 320);
             // 
             // ItemForTEN_TDVH
             // 
-            this.ItemForTEN_TDVH.AppearanceItemCaption.FontStyleDelta = System.Drawing.FontStyle.Bold;
-            this.ItemForTEN_TDVH.AppearanceItemCaption.Options.UseFont = true;
+            this.ItemForTEN_TDVH.AppearanceItemCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.ItemForTEN_TDVH.AppearanceItemCaption.Options.UseForeColor = true;
             this.ItemForTEN_TDVH.Control = this.TEN_TDVHTextEdit;
-            this.ItemForTEN_TDVH.Location = new System.Drawing.Point(0, 28);
+            this.ItemForTEN_TDVH.Location = new System.Drawing.Point(0, 30);
             this.ItemForTEN_TDVH.Name = "ItemForTEN_TDVH";
-            this.ItemForTEN_TDVH.Size = new System.Drawing.Size(601, 28);
+            this.ItemForTEN_TDVH.Size = new System.Drawing.Size(591, 30);
             this.ItemForTEN_TDVH.Text = "TEN_TDVH";
             this.ItemForTEN_TDVH.TextSize = new System.Drawing.Size(89, 20);
             // 
             // ItemForTEN_TDVH_A
             // 
             this.ItemForTEN_TDVH_A.Control = this.TEN_TDVH_ATextEdit;
-            this.ItemForTEN_TDVH_A.Location = new System.Drawing.Point(0, 56);
+            this.ItemForTEN_TDVH_A.Location = new System.Drawing.Point(0, 60);
             this.ItemForTEN_TDVH_A.Name = "ItemForTEN_TDVH_A";
-            this.ItemForTEN_TDVH_A.Size = new System.Drawing.Size(601, 28);
+            this.ItemForTEN_TDVH_A.Size = new System.Drawing.Size(591, 30);
             this.ItemForTEN_TDVH_A.Text = "TEN_TDVH_A";
             this.ItemForTEN_TDVH_A.TextSize = new System.Drawing.Size(89, 20);
             // 
             // ItemForTEN_TDVH_H
             // 
             this.ItemForTEN_TDVH_H.Control = this.TEN_TDVH_HTextEdit;
-            this.ItemForTEN_TDVH_H.Location = new System.Drawing.Point(0, 84);
+            this.ItemForTEN_TDVH_H.Location = new System.Drawing.Point(0, 90);
             this.ItemForTEN_TDVH_H.Name = "ItemForTEN_TDVH_H";
-            this.ItemForTEN_TDVH_H.Size = new System.Drawing.Size(601, 28);
+            this.ItemForTEN_TDVH_H.Size = new System.Drawing.Size(591, 30);
             this.ItemForTEN_TDVH_H.Text = "TEN_TDVH_H";
             this.ItemForTEN_TDVH_H.TextSize = new System.Drawing.Size(89, 20);
             // 
             // ItemForID_LOAI_TD
             // 
-            this.ItemForID_LOAI_TD.AppearanceItemCaption.FontStyleDelta = System.Drawing.FontStyle.Bold;
-            this.ItemForID_LOAI_TD.AppearanceItemCaption.Options.UseFont = true;
+            this.ItemForID_LOAI_TD.AppearanceItemCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.ItemForID_LOAI_TD.AppearanceItemCaption.Options.UseForeColor = true;
             this.ItemForID_LOAI_TD.Control = this.ID_LOAI_TDSearchLookUpEdit;
             this.ItemForID_LOAI_TD.Location = new System.Drawing.Point(0, 0);
             this.ItemForID_LOAI_TD.Name = "ItemForID_LOAI_TD";
-            this.ItemForID_LOAI_TD.Size = new System.Drawing.Size(601, 28);
+            this.ItemForID_LOAI_TD.Size = new System.Drawing.Size(591, 30);
             this.ItemForID_LOAI_TD.Text = "ID_LOAI_TD";
             this.ItemForID_LOAI_TD.TextSize = new System.Drawing.Size(89, 20);
             // 
             // ItemForSTT
             // 
             this.ItemForSTT.Control = this.txtSTT;
-            this.ItemForSTT.Location = new System.Drawing.Point(0, 112);
+            this.ItemForSTT.Location = new System.Drawing.Point(0, 120);
             this.ItemForSTT.Name = "ItemForSTT";
-            this.ItemForSTT.Size = new System.Drawing.Size(601, 228);
+            this.ItemForSTT.Size = new System.Drawing.Size(591, 200);
             this.ItemForSTT.TextSize = new System.Drawing.Size(89, 20);
             // 
             // frmEditTRINH_DO_VAN_HOA

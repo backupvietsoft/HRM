@@ -45,6 +45,10 @@
             this.ItemForNGAY = new DevExpress.XtraLayout.LayoutControlItem();
             this.ItemForSTT = new DevExpress.XtraLayout.LayoutControlItem();
             this.tablePanel1 = new DevExpress.Utils.Layout.TablePanel();
+            this.LY_DO_ATextEdit = new DevExpress.XtraEditors.TextEdit();
+            this.ItemForLY_DO_A = new DevExpress.XtraLayout.LayoutControlItem();
+            this.LY_DO_HTextEdit = new DevExpress.XtraEditors.TextEdit();
+            this.ItemForLY_DO_H = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NGAYDateEdit.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NGAYDateEdit.Properties)).BeginInit();
@@ -59,6 +63,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.ItemForSTT)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).BeginInit();
             this.tablePanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.LY_DO_ATextEdit.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForLY_DO_A)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.LY_DO_HTextEdit.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForLY_DO_H)).BeginInit();
             this.SuspendLayout();
             // 
             // btnALL
@@ -99,7 +107,7 @@
             // NGAYDateEdit
             // 
             this.NGAYDateEdit.EditValue = null;
-            this.NGAYDateEdit.Location = new System.Drawing.Point(84, 6);
+            this.NGAYDateEdit.Location = new System.Drawing.Point(126, 12);
             this.NGAYDateEdit.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.NGAYDateEdit.Name = "NGAYDateEdit";
             this.NGAYDateEdit.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -107,7 +115,7 @@
             this.NGAYDateEdit.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.NGAYDateEdit.Properties.Mask.UseMaskAsDisplayFormat = true;
-            this.NGAYDateEdit.Size = new System.Drawing.Size(302, 26);
+            this.NGAYDateEdit.Size = new System.Drawing.Size(258, 26);
             this.NGAYDateEdit.StyleController = this.dataLayoutControl1;
             this.NGAYDateEdit.TabIndex = 6;
             conditionValidationRule2.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
@@ -117,34 +125,36 @@
             // dataLayoutControl1
             // 
             this.tablePanel1.SetColumn(this.dataLayoutControl1, 1);
+            this.dataLayoutControl1.Controls.Add(this.LY_DO_HTextEdit);
+            this.dataLayoutControl1.Controls.Add(this.LY_DO_ATextEdit);
             this.dataLayoutControl1.Controls.Add(this.txtSTT);
             this.dataLayoutControl1.Controls.Add(this.NGAYDateEdit);
             this.dataLayoutControl1.Controls.Add(this.LY_DOTextEdit);
             this.dataLayoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataLayoutControl1.Location = new System.Drawing.Point(88, 13);
+            this.dataLayoutControl1.Location = new System.Drawing.Point(88, 24);
             this.dataLayoutControl1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.dataLayoutControl1.Name = "dataLayoutControl1";
             this.dataLayoutControl1.Root = this.Root;
             this.tablePanel1.SetRow(this.dataLayoutControl1, 1);
-            this.dataLayoutControl1.Size = new System.Drawing.Size(666, 357);
+            this.dataLayoutControl1.Size = new System.Drawing.Size(666, 346);
             this.dataLayoutControl1.TabIndex = 0;
             this.dataLayoutControl1.Text = "dataLayoutControl1";
             // 
             // txtSTT
             // 
-            this.txtSTT.Location = new System.Drawing.Point(466, 6);
+            this.txtSTT.Location = new System.Drawing.Point(502, 12);
             this.txtSTT.Name = "txtSTT";
-            this.txtSTT.Size = new System.Drawing.Size(194, 26);
+            this.txtSTT.Size = new System.Drawing.Size(152, 26);
             this.txtSTT.StyleController = this.dataLayoutControl1;
             this.txtSTT.TabIndex = 8;
             // 
             // LY_DOTextEdit
             // 
             this.LY_DOTextEdit.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.LY_DOTextEdit.Location = new System.Drawing.Point(84, 34);
+            this.LY_DOTextEdit.Location = new System.Drawing.Point(126, 42);
             this.LY_DOTextEdit.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.LY_DOTextEdit.Name = "LY_DOTextEdit";
-            this.LY_DOTextEdit.Size = new System.Drawing.Size(576, 26);
+            this.LY_DOTextEdit.Size = new System.Drawing.Size(528, 26);
             this.LY_DOTextEdit.StyleController = this.dataLayoutControl1;
             this.LY_DOTextEdit.TabIndex = 7;
             conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
@@ -158,7 +168,7 @@
             this.Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlGroup1});
             this.Root.Name = "Root";
-            this.Root.Size = new System.Drawing.Size(666, 357);
+            this.Root.Size = new System.Drawing.Size(666, 346);
             this.Root.TextVisible = false;
             // 
             // layoutControlGroup1
@@ -168,40 +178,42 @@
             this.layoutControlGroup1.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.ItemForLY_DO,
             this.ItemForNGAY,
-            this.ItemForSTT});
+            this.ItemForSTT,
+            this.ItemForLY_DO_A,
+            this.ItemForLY_DO_H});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "autoGeneratedGroup0";
-            this.layoutControlGroup1.Size = new System.Drawing.Size(656, 347);
+            this.layoutControlGroup1.Size = new System.Drawing.Size(646, 326);
             // 
             // ItemForLY_DO
             // 
-            this.ItemForLY_DO.AppearanceItemCaption.FontStyleDelta = System.Drawing.FontStyle.Bold;
-            this.ItemForLY_DO.AppearanceItemCaption.Options.UseFont = true;
+            this.ItemForLY_DO.AppearanceItemCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.ItemForLY_DO.AppearanceItemCaption.Options.UseForeColor = true;
             this.ItemForLY_DO.Control = this.LY_DOTextEdit;
-            this.ItemForLY_DO.Location = new System.Drawing.Point(0, 28);
+            this.ItemForLY_DO.Location = new System.Drawing.Point(0, 30);
             this.ItemForLY_DO.Name = "ItemForLY_DO";
-            this.ItemForLY_DO.Size = new System.Drawing.Size(656, 319);
+            this.ItemForLY_DO.Size = new System.Drawing.Size(646, 30);
             this.ItemForLY_DO.Text = "LY_DO";
-            this.ItemForLY_DO.TextSize = new System.Drawing.Size(75, 20);
+            this.ItemForLY_DO.TextSize = new System.Drawing.Size(111, 20);
             // 
             // ItemForNGAY
             // 
-            this.ItemForNGAY.AppearanceItemCaption.FontStyleDelta = System.Drawing.FontStyle.Bold;
-            this.ItemForNGAY.AppearanceItemCaption.Options.UseFont = true;
+            this.ItemForNGAY.AppearanceItemCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.ItemForNGAY.AppearanceItemCaption.Options.UseForeColor = true;
             this.ItemForNGAY.Control = this.NGAYDateEdit;
             this.ItemForNGAY.Location = new System.Drawing.Point(0, 0);
             this.ItemForNGAY.Name = "ItemForNGAY";
-            this.ItemForNGAY.Size = new System.Drawing.Size(382, 28);
+            this.ItemForNGAY.Size = new System.Drawing.Size(376, 30);
             this.ItemForNGAY.Text = "NGAY";
-            this.ItemForNGAY.TextSize = new System.Drawing.Size(75, 20);
+            this.ItemForNGAY.TextSize = new System.Drawing.Size(111, 20);
             // 
             // ItemForSTT
             // 
             this.ItemForSTT.Control = this.txtSTT;
-            this.ItemForSTT.Location = new System.Drawing.Point(382, 0);
+            this.ItemForSTT.Location = new System.Drawing.Point(376, 0);
             this.ItemForSTT.Name = "ItemForSTT";
-            this.ItemForSTT.Size = new System.Drawing.Size(274, 28);
-            this.ItemForSTT.TextSize = new System.Drawing.Size(75, 20);
+            this.ItemForSTT.Size = new System.Drawing.Size(270, 30);
+            this.ItemForSTT.TextSize = new System.Drawing.Size(111, 20);
             // 
             // tablePanel1
             // 
@@ -214,10 +226,42 @@
             this.tablePanel1.Location = new System.Drawing.Point(0, 0);
             this.tablePanel1.Name = "tablePanel1";
             this.tablePanel1.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] {
-            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 8F),
-            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 100F)});
+            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 5F),
+            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 95F)});
             this.tablePanel1.Size = new System.Drawing.Size(843, 375);
             this.tablePanel1.TabIndex = 12;
+            // 
+            // LY_DO_ATextEdit
+            // 
+            this.LY_DO_ATextEdit.Location = new System.Drawing.Point(126, 72);
+            this.LY_DO_ATextEdit.Name = "LY_DO_ATextEdit";
+            this.LY_DO_ATextEdit.Size = new System.Drawing.Size(528, 26);
+            this.LY_DO_ATextEdit.StyleController = this.dataLayoutControl1;
+            this.LY_DO_ATextEdit.TabIndex = 9;
+            // 
+            // ItemForLY_DO_A
+            // 
+            this.ItemForLY_DO_A.Control = this.LY_DO_ATextEdit;
+            this.ItemForLY_DO_A.Location = new System.Drawing.Point(0, 60);
+            this.ItemForLY_DO_A.Name = "ItemForLY_DO_A";
+            this.ItemForLY_DO_A.Size = new System.Drawing.Size(646, 30);
+            this.ItemForLY_DO_A.TextSize = new System.Drawing.Size(111, 20);
+            // 
+            // LY_DO_HTextEdit
+            // 
+            this.LY_DO_HTextEdit.Location = new System.Drawing.Point(126, 102);
+            this.LY_DO_HTextEdit.Name = "LY_DO_HTextEdit";
+            this.LY_DO_HTextEdit.Size = new System.Drawing.Size(528, 26);
+            this.LY_DO_HTextEdit.StyleController = this.dataLayoutControl1;
+            this.LY_DO_HTextEdit.TabIndex = 10;
+            // 
+            // ItemForLY_DO_H
+            // 
+            this.ItemForLY_DO_H.Control = this.LY_DO_HTextEdit;
+            this.ItemForLY_DO_H.Location = new System.Drawing.Point(0, 90);
+            this.ItemForLY_DO_H.Name = "ItemForLY_DO_H";
+            this.ItemForLY_DO_H.Size = new System.Drawing.Size(646, 236);
+            this.ItemForLY_DO_H.TextSize = new System.Drawing.Size(111, 20);
             // 
             // frmEditNGAY_NGHI_LE
             // 
@@ -245,6 +289,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.ItemForSTT)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).EndInit();
             this.tablePanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.LY_DO_ATextEdit.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForLY_DO_A)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.LY_DO_HTextEdit.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForLY_DO_H)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -263,5 +311,9 @@
         private DevExpress.XtraLayout.LayoutControlItem ItemForLY_DO;
         private DevExpress.XtraEditors.TextEdit txtSTT;
         private DevExpress.XtraLayout.LayoutControlItem ItemForSTT;
+        private DevExpress.XtraEditors.TextEdit LY_DO_HTextEdit;
+        private DevExpress.XtraEditors.TextEdit LY_DO_ATextEdit;
+        private DevExpress.XtraLayout.LayoutControlItem ItemForLY_DO_A;
+        private DevExpress.XtraLayout.LayoutControlItem ItemForLY_DO_H;
     }
 }

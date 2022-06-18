@@ -71,7 +71,6 @@ namespace Vs.Category
                 PHEPCheckEdit.EditValue = dtTmp.Rows[0]["PHEP"];
                 PHAN_TRAM_TRO_CAPTextEdit.EditValue = dtTmp.Rows[0]["PHAN_TRAM_TRO_CAP"].ToString();
                 TINH_BHXHCheckEdit.EditValue = dtTmp.Rows[0]["TINH_BHXH"];
-                KY_HIEUTextEdit.EditValue = dtTmp.Rows[0]["KY_HIEU"].ToString();
                 TINH_LUONGCheckEdit.EditValue = dtTmp.Rows[0]["TINH_LUONG"];
                 STT_LDVTextEdit.EditValue = dtTmp.Rows[0]["STT_LDV"].ToString();
                 ID_CHE_DOSearchLookUpEdit.EditValue = dtTmp.Rows[0]["ID_CHE_DO"];
@@ -92,7 +91,6 @@ namespace Vs.Category
                 TEN_LDV_ATextEdit.EditValue = String.Empty;
                 TEN_LDV_HTextEdit.EditValue = String.Empty;
                 PHAN_TRAM_TRO_CAPTextEdit.EditValue = 0;
-                KY_HIEUTextEdit.EditValue = String.Empty;
                 STT_LDVTextEdit.EditValue = String.Empty;
                 PHEPCheckEdit.EditValue = false;
                 TINH_BHXHCheckEdit.EditValue = false;
@@ -124,9 +122,8 @@ namespace Vs.Category
                                 PHEPCheckEdit.EditValue,
                                 (PHAN_TRAM_TRO_CAPTextEdit.EditValue == null) ? 0 : PHAN_TRAM_TRO_CAPTextEdit.EditValue,
                                 TINH_BHXHCheckEdit.EditValue,
-                                KY_HIEUTextEdit.EditValue,
                                 TINH_LUONGCheckEdit.EditValue,
-                                (STT_LDVTextEdit.EditValue == "") ? STT_LDVTextEdit.EditValue = null : STT_LDVTextEdit.EditValue, cboID_TT_HT.Text.ToString() == "" ? cboID_TT_HT.EditValue = null : cboID_TT_HT.EditValue).ToString();
+                                (STT_LDVTextEdit.Text == "") ? STT_LDVTextEdit.EditValue = null : STT_LDVTextEdit.EditValue, cboID_TT_HT.Text.ToString() == "" ? cboID_TT_HT.EditValue = null : cboID_TT_HT.EditValue).ToString();
                             if (AddEdit)
                             {
                                 if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_ThemThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo) == DialogResult.Yes)

@@ -114,6 +114,15 @@ namespace VietSoftHRM
                         break;
                     }
 
+                case "mnuKTTenKhongDauSTK":
+                    {
+                        ucThongTinChuyenKhoan tc = new ucThongTinChuyenKhoan();
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(tc);
+                        tc.Dock = DockStyle.Fill;
+                        break;
+                    }
+
 
 
                 default:
@@ -183,6 +192,16 @@ namespace VietSoftHRM
                         ns.Dock = DockStyle.Fill;
                         break;
                     }
+
+                case "mnuKTTenKhongDauSTK":
+                    {
+                        ucThongTinChuyenKhoan tc = new ucThongTinChuyenKhoan();
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(tc);
+                        tc.Dock = DockStyle.Fill;
+                        break;
+                    }
+
                 case "mnuTroCap":
                     {
                         ucTroCapBHXH tc = new ucTroCapBHXH();
@@ -231,6 +250,8 @@ namespace VietSoftHRM
                         tc.Dock = DockStyle.Fill;
                         break;
                     }
+
+
                 case "mnuXepLoaiKhenThuong":
                     {
                         ucXepLoaiKhenThuong tc = new ucXepLoaiKhenThuong();

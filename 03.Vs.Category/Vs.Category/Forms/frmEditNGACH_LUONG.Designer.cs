@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions3 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions4 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule4 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions1 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions2 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule1 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule2 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
+            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule3 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             this.btnALL = new DevExpress.XtraBars.Docking2010.WindowsUIButtonPanel();
             this.tablePanel1 = new DevExpress.Utils.Layout.TablePanel();
             this.dataLayoutControl1 = new DevExpress.XtraDataLayout.DataLayoutControl();
@@ -47,8 +47,8 @@
             this.ItemForMS_NL = new DevExpress.XtraLayout.LayoutControlItem();
             this.ItemForTEN_NL = new DevExpress.XtraLayout.LayoutControlItem();
             this.ItemForTEN_NL_A = new DevExpress.XtraLayout.LayoutControlItem();
-            this.ItemForTEN_NL_H = new DevExpress.XtraLayout.LayoutControlItem();
             this.ItemForSTT = new DevExpress.XtraLayout.LayoutControlItem();
+            this.ItemForTEN_NL_H = new DevExpress.XtraLayout.LayoutControlItem();
             this.dxValidationProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).BeginInit();
             this.tablePanel1.SuspendLayout();
@@ -64,8 +64,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.ItemForMS_NL)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForTEN_NL)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForTEN_NL_A)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemForTEN_NL_H)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForSTT)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForTEN_NL_H)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -86,11 +86,11 @@
             this.btnALL.AppearanceButton.Pressed.Options.UseFont = true;
             this.btnALL.AppearanceButton.Pressed.Options.UseImage = true;
             this.btnALL.AppearanceButton.Pressed.Options.UseTextOptions = true;
-            windowsUIButtonImageOptions3.ImageUri.Uri = "SaveAll";
-            windowsUIButtonImageOptions4.ImageUri.Uri = "richedit/clearheaderandfooter";
+            windowsUIButtonImageOptions1.ImageUri.Uri = "SaveAll";
+            windowsUIButtonImageOptions2.ImageUri.Uri = "richedit/clearheaderandfooter";
             this.btnALL.Buttons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] {
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions3, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "luu", -1, false),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions4, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "thoat", -1, false)});
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions1, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "luu", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions2, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "thoat", -1, false)});
             this.btnALL.ContentAlignment = System.Drawing.ContentAlignment.MiddleRight;
             this.btnALL.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnALL.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -115,8 +115,8 @@
             this.tablePanel1.Location = new System.Drawing.Point(0, 0);
             this.tablePanel1.Name = "tablePanel1";
             this.tablePanel1.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] {
-            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 8F),
-            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 100F)});
+            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 5F),
+            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 95F)});
             this.tablePanel1.Size = new System.Drawing.Size(810, 370);
             this.tablePanel1.TabIndex = 10;
             // 
@@ -129,66 +129,66 @@
             this.dataLayoutControl1.Controls.Add(this.TEN_NL_HTextEdit);
             this.dataLayoutControl1.Controls.Add(this.txtSTT);
             this.dataLayoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataLayoutControl1.Location = new System.Drawing.Point(85, 13);
+            this.dataLayoutControl1.Location = new System.Drawing.Point(85, 24);
             this.dataLayoutControl1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.dataLayoutControl1.Name = "dataLayoutControl1";
             this.dataLayoutControl1.Root = this.Root;
             this.tablePanel1.SetRow(this.dataLayoutControl1, 1);
-            this.dataLayoutControl1.Size = new System.Drawing.Size(640, 352);
+            this.dataLayoutControl1.Size = new System.Drawing.Size(640, 341);
             this.dataLayoutControl1.TabIndex = 0;
             this.dataLayoutControl1.Text = "dataLayoutControl1";
             // 
             // MS_NLTextEdit
             // 
-            this.MS_NLTextEdit.Location = new System.Drawing.Point(84, 6);
+            this.MS_NLTextEdit.Location = new System.Drawing.Point(90, 12);
             this.MS_NLTextEdit.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.MS_NLTextEdit.Name = "MS_NLTextEdit";
-            this.MS_NLTextEdit.Size = new System.Drawing.Size(550, 26);
+            this.MS_NLTextEdit.Size = new System.Drawing.Size(538, 26);
             this.MS_NLTextEdit.StyleController = this.dataLayoutControl1;
             this.MS_NLTextEdit.TabIndex = 4;
-            conditionValidationRule4.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule4.ErrorText = "This value is not valid";
-            this.dxValidationProvider1.SetValidationRule(this.MS_NLTextEdit, conditionValidationRule4);
+            conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule1.ErrorText = "This value is not valid";
+            this.dxValidationProvider1.SetValidationRule(this.MS_NLTextEdit, conditionValidationRule1);
             // 
             // TEN_NLTextEdit
             // 
-            this.TEN_NLTextEdit.Location = new System.Drawing.Point(84, 34);
+            this.TEN_NLTextEdit.Location = new System.Drawing.Point(90, 42);
             this.TEN_NLTextEdit.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.TEN_NLTextEdit.Name = "TEN_NLTextEdit";
-            this.TEN_NLTextEdit.Size = new System.Drawing.Size(550, 26);
+            this.TEN_NLTextEdit.Size = new System.Drawing.Size(538, 26);
             this.TEN_NLTextEdit.StyleController = this.dataLayoutControl1;
             this.TEN_NLTextEdit.TabIndex = 5;
-            conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule1.ErrorText = "This value is not valid";
-            this.dxValidationProvider1.SetValidationRule(this.TEN_NLTextEdit, conditionValidationRule1);
+            conditionValidationRule2.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule2.ErrorText = "This value is not valid";
+            this.dxValidationProvider1.SetValidationRule(this.TEN_NLTextEdit, conditionValidationRule2);
             // 
             // TEN_NL_ATextEdit
             // 
-            this.TEN_NL_ATextEdit.Location = new System.Drawing.Point(84, 62);
+            this.TEN_NL_ATextEdit.Location = new System.Drawing.Point(90, 72);
             this.TEN_NL_ATextEdit.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.TEN_NL_ATextEdit.Name = "TEN_NL_ATextEdit";
-            this.TEN_NL_ATextEdit.Size = new System.Drawing.Size(550, 26);
+            this.TEN_NL_ATextEdit.Size = new System.Drawing.Size(538, 26);
             this.TEN_NL_ATextEdit.StyleController = this.dataLayoutControl1;
             this.TEN_NL_ATextEdit.TabIndex = 6;
-            conditionValidationRule2.ErrorText = "This value is not valid";
-            this.dxValidationProvider1.SetValidationRule(this.TEN_NL_ATextEdit, conditionValidationRule2);
+            conditionValidationRule3.ErrorText = "This value is not valid";
+            this.dxValidationProvider1.SetValidationRule(this.TEN_NL_ATextEdit, conditionValidationRule3);
             // 
             // TEN_NL_HTextEdit
             // 
-            this.TEN_NL_HTextEdit.Location = new System.Drawing.Point(84, 90);
+            this.TEN_NL_HTextEdit.Location = new System.Drawing.Point(90, 102);
             this.TEN_NL_HTextEdit.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.TEN_NL_HTextEdit.Name = "TEN_NL_HTextEdit";
-            this.TEN_NL_HTextEdit.Size = new System.Drawing.Size(550, 26);
+            this.TEN_NL_HTextEdit.Size = new System.Drawing.Size(538, 26);
             this.TEN_NL_HTextEdit.StyleController = this.dataLayoutControl1;
             this.TEN_NL_HTextEdit.TabIndex = 7;
             // 
             // txtSTT
             // 
             this.txtSTT.EditValue = "";
-            this.txtSTT.Location = new System.Drawing.Point(84, 118);
+            this.txtSTT.Location = new System.Drawing.Point(90, 132);
             this.txtSTT.Name = "txtSTT";
             this.txtSTT.Properties.EditValueChangedFiringMode = DevExpress.XtraEditors.Controls.EditValueChangedFiringMode.Buffered;
-            this.txtSTT.Size = new System.Drawing.Size(550, 26);
+            this.txtSTT.Size = new System.Drawing.Size(538, 26);
             this.txtSTT.StyleController = this.dataLayoutControl1;
             this.txtSTT.TabIndex = 8;
             // 
@@ -199,7 +199,7 @@
             this.Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlGroup1});
             this.Root.Name = "Root";
-            this.Root.Size = new System.Drawing.Size(640, 352);
+            this.Root.Size = new System.Drawing.Size(640, 341);
             this.Root.TextVisible = false;
             // 
             // layoutControlGroup1
@@ -214,55 +214,55 @@
             this.ItemForTEN_NL_H});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "autoGeneratedGroup0";
-            this.layoutControlGroup1.Size = new System.Drawing.Size(630, 342);
+            this.layoutControlGroup1.Size = new System.Drawing.Size(620, 321);
             // 
             // ItemForMS_NL
             // 
-            this.ItemForMS_NL.AppearanceItemCaption.FontStyleDelta = System.Drawing.FontStyle.Bold;
-            this.ItemForMS_NL.AppearanceItemCaption.Options.UseFont = true;
+            this.ItemForMS_NL.AppearanceItemCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.ItemForMS_NL.AppearanceItemCaption.Options.UseForeColor = true;
             this.ItemForMS_NL.Control = this.MS_NLTextEdit;
             this.ItemForMS_NL.Location = new System.Drawing.Point(0, 0);
             this.ItemForMS_NL.Name = "ItemForMS_NL";
-            this.ItemForMS_NL.Size = new System.Drawing.Size(630, 28);
+            this.ItemForMS_NL.Size = new System.Drawing.Size(620, 30);
             this.ItemForMS_NL.Text = "MS_NL";
             this.ItemForMS_NL.TextSize = new System.Drawing.Size(75, 20);
             // 
             // ItemForTEN_NL
             // 
-            this.ItemForTEN_NL.AppearanceItemCaption.FontStyleDelta = System.Drawing.FontStyle.Bold;
-            this.ItemForTEN_NL.AppearanceItemCaption.Options.UseFont = true;
+            this.ItemForTEN_NL.AppearanceItemCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.ItemForTEN_NL.AppearanceItemCaption.Options.UseForeColor = true;
             this.ItemForTEN_NL.Control = this.TEN_NLTextEdit;
-            this.ItemForTEN_NL.Location = new System.Drawing.Point(0, 28);
+            this.ItemForTEN_NL.Location = new System.Drawing.Point(0, 30);
             this.ItemForTEN_NL.Name = "ItemForTEN_NL";
-            this.ItemForTEN_NL.Size = new System.Drawing.Size(630, 28);
+            this.ItemForTEN_NL.Size = new System.Drawing.Size(620, 30);
             this.ItemForTEN_NL.Text = "TEN_NL";
             this.ItemForTEN_NL.TextSize = new System.Drawing.Size(75, 20);
             // 
             // ItemForTEN_NL_A
             // 
             this.ItemForTEN_NL_A.Control = this.TEN_NL_ATextEdit;
-            this.ItemForTEN_NL_A.Location = new System.Drawing.Point(0, 56);
+            this.ItemForTEN_NL_A.Location = new System.Drawing.Point(0, 60);
             this.ItemForTEN_NL_A.Name = "ItemForTEN_NL_A";
-            this.ItemForTEN_NL_A.Size = new System.Drawing.Size(630, 28);
+            this.ItemForTEN_NL_A.Size = new System.Drawing.Size(620, 30);
             this.ItemForTEN_NL_A.Text = "TEN_NL_A";
             this.ItemForTEN_NL_A.TextSize = new System.Drawing.Size(75, 20);
-            // 
-            // ItemForTEN_NL_H
-            // 
-            this.ItemForTEN_NL_H.Control = this.TEN_NL_HTextEdit;
-            this.ItemForTEN_NL_H.Location = new System.Drawing.Point(0, 84);
-            this.ItemForTEN_NL_H.Name = "ItemForTEN_NL_H";
-            this.ItemForTEN_NL_H.Size = new System.Drawing.Size(630, 28);
-            this.ItemForTEN_NL_H.Text = "TEN_NL_H";
-            this.ItemForTEN_NL_H.TextSize = new System.Drawing.Size(75, 20);
             // 
             // ItemForSTT
             // 
             this.ItemForSTT.Control = this.txtSTT;
-            this.ItemForSTT.Location = new System.Drawing.Point(0, 112);
+            this.ItemForSTT.Location = new System.Drawing.Point(0, 120);
             this.ItemForSTT.Name = "ItemForSTT";
-            this.ItemForSTT.Size = new System.Drawing.Size(630, 230);
+            this.ItemForSTT.Size = new System.Drawing.Size(620, 201);
             this.ItemForSTT.TextSize = new System.Drawing.Size(75, 20);
+            // 
+            // ItemForTEN_NL_H
+            // 
+            this.ItemForTEN_NL_H.Control = this.TEN_NL_HTextEdit;
+            this.ItemForTEN_NL_H.Location = new System.Drawing.Point(0, 90);
+            this.ItemForTEN_NL_H.Name = "ItemForTEN_NL_H";
+            this.ItemForTEN_NL_H.Size = new System.Drawing.Size(620, 30);
+            this.ItemForTEN_NL_H.Text = "TEN_NL_H";
+            this.ItemForTEN_NL_H.TextSize = new System.Drawing.Size(75, 20);
             // 
             // frmEditNGACH_LUONG
             // 
@@ -290,8 +290,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.ItemForMS_NL)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForTEN_NL)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForTEN_NL_A)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemForTEN_NL_H)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForSTT)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForTEN_NL_H)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).EndInit();
             this.ResumeLayout(false);
 

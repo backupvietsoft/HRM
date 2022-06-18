@@ -72,32 +72,12 @@ namespace Vs.Payroll
                             if (!dxValidationProvider1.Validate()) return;
                             if (KiemTrung()) return;
 
-
-
-                            #region Them
-                            System.Data.SqlClient.SqlConnection conn;
-                            conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
-                            conn.Open();
-                            System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spUpdateHSBT", conn);
-                            if (AddEdit)
-                            {
-                                cmd.Parameters.Add("@ID_BAC_THO", SqlDbType.Int).Value = -1;
-                            }
-                            else
-                            {
-                                cmd.Parameters.Add("@ID_BAC_THO", SqlDbType.Int).Value = Id;
-                            }
-
-                            cmd.Parameters.Add("@TEN_BAC_THO", SqlDbType.NVarChar).Value = TEN_BAC_THOTextEdit.Text;
-                            cmd.Parameters.Add("@TEN_BAC_THO_A", SqlDbType.NVarChar).Value = TEN_BAC_THO_ATextEdit.Text;
-                            cmd.Parameters.Add("@TEN_BAC_THO_H", SqlDbType.NVarChar).Value = TEN_BAC_THO_HTextEdit.Text;
-                            cmd.Parameters.Add("@HE_SO_BAC_THO", SqlDbType.Float).Value = (HSBTTextEdit.Text);
-                            cmd.Parameters.Add("@STT", SqlDbType.Int).Value = (txtSTT.EditValue == "") ? txtSTT.EditValue = null : txtSTT.EditValue;
-
-
-                            cmd.CommandType = CommandType.StoredProcedure;
-                            Commons.Modules.sId = Convert.ToString(cmd.ExecuteScalar());
-                            Commons.Modules.sId = (-1).ToString();
+                            Commons.Modules.sId = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spUpdateHSBT", (AddEdit ? -1 : Id),
+                                TEN_BAC_THOTextEdit.Text,
+                                TEN_BAC_THO_ATextEdit.Text,
+                                TEN_BAC_THO_HTextEdit.Text,
+                                HSBTTextEdit.Text,
+                                txtSTT.Text == "" ? txtSTT.EditValue = null : txtSTT.EditValue).ToString();
                             if (AddEdit)
                             {
                                 if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_ThemThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo) == DialogResult.Yes)
@@ -106,10 +86,6 @@ namespace Vs.Payroll
                                     return;
                                 }
                             }
-
-                            #endregion
-
-
                             this.DialogResult = DialogResult.OK;
                             this.Close();
                             break;
@@ -137,7 +113,7 @@ namespace Vs.Payroll
                 {
                     tenSql = "SELECT TEN_BAC_THO FROM HSBT WHERE TEN_BAC_THO = '" + TEN_BAC_THOTextEdit.EditValue + "'";
 
-                    if (Convert.ToString(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, tenSql)) == Convert.ToString((TEN_BAC_THOTextEdit.EditValue)))
+                    if (Convert.ToString(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, tenSql)) == (Convert.ToString((TEN_BAC_THOTextEdit.EditValue)) == "" ?  "-1" : Convert.ToString((TEN_BAC_THOTextEdit.EditValue))))
                     {
                         XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_MaSoTrung"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"));
 
@@ -149,7 +125,7 @@ namespace Vs.Payroll
                 {
                     tenSql = "SELECT TEN_BAC_THO_A FROM HSBT WHERE TEN_BAC_THO_A = '" + TEN_BAC_THO_ATextEdit.EditValue + "'";
 
-                    if (Convert.ToString(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, tenSql)) == Convert.ToString((TEN_BAC_THO_ATextEdit.EditValue)))
+                    if (Convert.ToString(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, tenSql)) == (Convert.ToString((TEN_BAC_THO_ATextEdit.EditValue)) == "" ?  "-1" : Convert.ToString((TEN_BAC_THO_ATextEdit.EditValue))))
                     {
                         XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_MaSoTrung"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"));
 
@@ -161,7 +137,7 @@ namespace Vs.Payroll
                 {
                     tenSql = "SELECT TEN_BAC_THO_H FROM HSBT WHERE TEN_BAC_THO_H = '" + TEN_BAC_THO_HTextEdit.EditValue + "'";
 
-                    if (Convert.ToString(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, tenSql)) == Convert.ToString((TEN_BAC_THO_HTextEdit.EditValue)))
+                    if (Convert.ToString(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, tenSql)) == (Convert.ToString((TEN_BAC_THO_HTextEdit.EditValue)) == "" ? "-1" : Convert.ToString((TEN_BAC_THO_HTextEdit.EditValue))))
                     {
                         XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_MaSoTrung"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"));
 

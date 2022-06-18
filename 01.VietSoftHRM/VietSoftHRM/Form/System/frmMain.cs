@@ -352,7 +352,7 @@ namespace VietSoftHRM
         }
         private void LoadNN(int NNgu)
         {
-            if (Commons.Modules.sPS == "0Load") return;
+            if (Commons.Modules.sLoad == "0Load") return;
             if (Commons.Modules.TypeLanguage == NNgu)
             {
                 LoadNNMenu();
@@ -375,7 +375,7 @@ namespace VietSoftHRM
 
         private void LoadNNMenu()
         {
-            Commons.Modules.sPS = "0Load";
+            Commons.Modules.sLoad = "0Load";
             switch (Commons.Modules.TypeLanguage)
             {
                 case 0:
@@ -404,7 +404,7 @@ namespace VietSoftHRM
                     }
                 default: break;
             }
-            Commons.Modules.sPS = "";
+            Commons.Modules.sLoad = "";
         }
 
         public Control FindFocusedControl(Control control)

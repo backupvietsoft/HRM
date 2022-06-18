@@ -29,10 +29,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule1 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions1 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
             DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions2 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule1 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             this.tablePanel1 = new DevExpress.Utils.Layout.TablePanel();
+            this.btnALL = new DevExpress.XtraBars.Docking2010.WindowsUIButtonPanel();
             this.dataLayoutControl1 = new DevExpress.XtraDataLayout.DataLayoutControl();
             this.txtSTT = new DevExpress.XtraEditors.TextEdit();
             this.txtTEN_CTY_DAY_DU = new DevExpress.XtraEditors.TextEdit();
@@ -44,7 +45,6 @@
             this.lblTEN_CTY_DAY_DU = new DevExpress.XtraLayout.LayoutControlItem();
             this.ItemForSTT = new DevExpress.XtraLayout.LayoutControlItem();
             this.dxValidationProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
-            this.btnALL = new DevExpress.XtraBars.Docking2010.WindowsUIButtonPanel();
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).BeginInit();
             this.tablePanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataLayoutControl1)).BeginInit();
@@ -73,109 +73,11 @@
             this.tablePanel1.Location = new System.Drawing.Point(0, 0);
             this.tablePanel1.Name = "tablePanel1";
             this.tablePanel1.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] {
-            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 8F),
+            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 5F),
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 90F),
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 46F)});
             this.tablePanel1.Size = new System.Drawing.Size(800, 450);
             this.tablePanel1.TabIndex = 2;
-            // 
-            // dataLayoutControl1
-            // 
-            this.tablePanel1.SetColumn(this.dataLayoutControl1, 1);
-            this.dataLayoutControl1.Controls.Add(this.txtSTT);
-            this.dataLayoutControl1.Controls.Add(this.txtTEN_CTY_DAY_DU);
-            this.dataLayoutControl1.Controls.Add(this.txtTEN_NGAN);
-            this.dataLayoutControl1.Controls.Add(this.txtMA_SO);
-            this.dataLayoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataLayoutControl1.Location = new System.Drawing.Point(83, 11);
-            this.dataLayoutControl1.Name = "dataLayoutControl1";
-            this.dataLayoutControl1.Root = this.layoutControlGroup1;
-            this.tablePanel1.SetRow(this.dataLayoutControl1, 1);
-            this.dataLayoutControl1.Size = new System.Drawing.Size(634, 390);
-            this.dataLayoutControl1.TabIndex = 0;
-            this.dataLayoutControl1.Text = "dataLayoutControl1";
-            // 
-            // txtSTT
-            // 
-            this.txtSTT.Location = new System.Drawing.Point(146, 90);
-            this.txtSTT.Name = "txtSTT";
-            this.txtSTT.Size = new System.Drawing.Size(482, 26);
-            this.txtSTT.StyleController = this.dataLayoutControl1;
-            this.txtSTT.TabIndex = 8;
-            // 
-            // txtTEN_CTY_DAY_DU
-            // 
-            this.txtTEN_CTY_DAY_DU.Location = new System.Drawing.Point(146, 62);
-            this.txtTEN_CTY_DAY_DU.Name = "txtTEN_CTY_DAY_DU";
-            this.txtTEN_CTY_DAY_DU.Size = new System.Drawing.Size(482, 26);
-            this.txtTEN_CTY_DAY_DU.StyleController = this.dataLayoutControl1;
-            this.txtTEN_CTY_DAY_DU.TabIndex = 6;
-            // 
-            // txtTEN_NGAN
-            // 
-            this.txtTEN_NGAN.Location = new System.Drawing.Point(146, 34);
-            this.txtTEN_NGAN.Name = "txtTEN_NGAN";
-            this.txtTEN_NGAN.Size = new System.Drawing.Size(482, 26);
-            this.txtTEN_NGAN.StyleController = this.dataLayoutControl1;
-            this.txtTEN_NGAN.TabIndex = 5;
-            // 
-            // txtMA_SO
-            // 
-            this.txtMA_SO.Location = new System.Drawing.Point(146, 6);
-            this.txtMA_SO.Name = "txtMA_SO";
-            this.txtMA_SO.Size = new System.Drawing.Size(482, 26);
-            this.txtMA_SO.StyleController = this.dataLayoutControl1;
-            this.txtMA_SO.TabIndex = 4;
-            conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule1.ErrorText = "This value is not valid";
-            this.dxValidationProvider1.SetValidationRule(this.txtMA_SO, conditionValidationRule1);
-            // 
-            // layoutControlGroup1
-            // 
-            this.layoutControlGroup1.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
-            this.layoutControlGroup1.GroupBordersVisible = false;
-            this.layoutControlGroup1.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.lblMA_SO,
-            this.lblTEN_NGAN,
-            this.lblTEN_CTY_DAY_DU,
-            this.ItemForSTT});
-            this.layoutControlGroup1.Name = "layoutControlGroup1";
-            this.layoutControlGroup1.Size = new System.Drawing.Size(634, 390);
-            this.layoutControlGroup1.TextVisible = false;
-            // 
-            // lblMA_SO
-            // 
-            this.lblMA_SO.AppearanceItemCaption.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMA_SO.AppearanceItemCaption.Options.UseFont = true;
-            this.lblMA_SO.Control = this.txtMA_SO;
-            this.lblMA_SO.Location = new System.Drawing.Point(0, 0);
-            this.lblMA_SO.Name = "lblMA_SO";
-            this.lblMA_SO.Size = new System.Drawing.Size(624, 28);
-            this.lblMA_SO.TextSize = new System.Drawing.Size(137, 20);
-            // 
-            // lblTEN_NGAN
-            // 
-            this.lblTEN_NGAN.Control = this.txtTEN_NGAN;
-            this.lblTEN_NGAN.Location = new System.Drawing.Point(0, 28);
-            this.lblTEN_NGAN.Name = "lblTEN_NGAN";
-            this.lblTEN_NGAN.Size = new System.Drawing.Size(624, 28);
-            this.lblTEN_NGAN.TextSize = new System.Drawing.Size(137, 20);
-            // 
-            // lblTEN_CTY_DAY_DU
-            // 
-            this.lblTEN_CTY_DAY_DU.Control = this.txtTEN_CTY_DAY_DU;
-            this.lblTEN_CTY_DAY_DU.Location = new System.Drawing.Point(0, 56);
-            this.lblTEN_CTY_DAY_DU.Name = "lblTEN_CTY_DAY_DU";
-            this.lblTEN_CTY_DAY_DU.Size = new System.Drawing.Size(624, 28);
-            this.lblTEN_CTY_DAY_DU.TextSize = new System.Drawing.Size(137, 20);
-            // 
-            // ItemForSTT
-            // 
-            this.ItemForSTT.Control = this.txtSTT;
-            this.ItemForSTT.Location = new System.Drawing.Point(0, 84);
-            this.ItemForSTT.Name = "ItemForSTT";
-            this.ItemForSTT.Size = new System.Drawing.Size(624, 296);
-            this.ItemForSTT.TextSize = new System.Drawing.Size(137, 20);
             // 
             // btnALL
             // 
@@ -212,6 +114,106 @@
             this.btnALL.Text = "btnALLPanel1";
             this.btnALL.UseButtonBackgroundImages = false;
             this.btnALL.ButtonClick += new DevExpress.XtraBars.Docking2010.ButtonEventHandler(this.btnALL_ButtonClick);
+            // 
+            // dataLayoutControl1
+            // 
+            this.tablePanel1.SetColumn(this.dataLayoutControl1, 1);
+            this.dataLayoutControl1.Controls.Add(this.txtSTT);
+            this.dataLayoutControl1.Controls.Add(this.txtTEN_CTY_DAY_DU);
+            this.dataLayoutControl1.Controls.Add(this.txtTEN_NGAN);
+            this.dataLayoutControl1.Controls.Add(this.txtMA_SO);
+            this.dataLayoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataLayoutControl1.Location = new System.Drawing.Point(83, 24);
+            this.dataLayoutControl1.Name = "dataLayoutControl1";
+            this.dataLayoutControl1.Root = this.layoutControlGroup1;
+            this.tablePanel1.SetRow(this.dataLayoutControl1, 1);
+            this.dataLayoutControl1.Size = new System.Drawing.Size(634, 377);
+            this.dataLayoutControl1.TabIndex = 0;
+            this.dataLayoutControl1.Text = "dataLayoutControl1";
+            // 
+            // txtSTT
+            // 
+            this.txtSTT.Location = new System.Drawing.Point(152, 102);
+            this.txtSTT.Name = "txtSTT";
+            this.txtSTT.Size = new System.Drawing.Size(470, 26);
+            this.txtSTT.StyleController = this.dataLayoutControl1;
+            this.txtSTT.TabIndex = 8;
+            // 
+            // txtTEN_CTY_DAY_DU
+            // 
+            this.txtTEN_CTY_DAY_DU.Location = new System.Drawing.Point(152, 72);
+            this.txtTEN_CTY_DAY_DU.Name = "txtTEN_CTY_DAY_DU";
+            this.txtTEN_CTY_DAY_DU.Size = new System.Drawing.Size(470, 26);
+            this.txtTEN_CTY_DAY_DU.StyleController = this.dataLayoutControl1;
+            this.txtTEN_CTY_DAY_DU.TabIndex = 6;
+            // 
+            // txtTEN_NGAN
+            // 
+            this.txtTEN_NGAN.Location = new System.Drawing.Point(152, 42);
+            this.txtTEN_NGAN.Name = "txtTEN_NGAN";
+            this.txtTEN_NGAN.Size = new System.Drawing.Size(470, 26);
+            this.txtTEN_NGAN.StyleController = this.dataLayoutControl1;
+            this.txtTEN_NGAN.TabIndex = 5;
+            // 
+            // txtMA_SO
+            // 
+            this.txtMA_SO.Location = new System.Drawing.Point(152, 12);
+            this.txtMA_SO.Name = "txtMA_SO";
+            this.txtMA_SO.Size = new System.Drawing.Size(470, 26);
+            this.txtMA_SO.StyleController = this.dataLayoutControl1;
+            this.txtMA_SO.TabIndex = 4;
+            conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule1.ErrorText = "This value is not valid";
+            this.dxValidationProvider1.SetValidationRule(this.txtMA_SO, conditionValidationRule1);
+            // 
+            // layoutControlGroup1
+            // 
+            this.layoutControlGroup1.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
+            this.layoutControlGroup1.GroupBordersVisible = false;
+            this.layoutControlGroup1.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.lblMA_SO,
+            this.lblTEN_NGAN,
+            this.lblTEN_CTY_DAY_DU,
+            this.ItemForSTT});
+            this.layoutControlGroup1.Name = "layoutControlGroup1";
+            this.layoutControlGroup1.Size = new System.Drawing.Size(634, 377);
+            this.layoutControlGroup1.TextVisible = false;
+            // 
+            // lblMA_SO
+            // 
+            this.lblMA_SO.AppearanceItemCaption.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMA_SO.AppearanceItemCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.lblMA_SO.AppearanceItemCaption.Options.UseFont = true;
+            this.lblMA_SO.AppearanceItemCaption.Options.UseForeColor = true;
+            this.lblMA_SO.Control = this.txtMA_SO;
+            this.lblMA_SO.Location = new System.Drawing.Point(0, 0);
+            this.lblMA_SO.Name = "lblMA_SO";
+            this.lblMA_SO.Size = new System.Drawing.Size(614, 30);
+            this.lblMA_SO.TextSize = new System.Drawing.Size(137, 20);
+            // 
+            // lblTEN_NGAN
+            // 
+            this.lblTEN_NGAN.Control = this.txtTEN_NGAN;
+            this.lblTEN_NGAN.Location = new System.Drawing.Point(0, 30);
+            this.lblTEN_NGAN.Name = "lblTEN_NGAN";
+            this.lblTEN_NGAN.Size = new System.Drawing.Size(614, 30);
+            this.lblTEN_NGAN.TextSize = new System.Drawing.Size(137, 20);
+            // 
+            // lblTEN_CTY_DAY_DU
+            // 
+            this.lblTEN_CTY_DAY_DU.Control = this.txtTEN_CTY_DAY_DU;
+            this.lblTEN_CTY_DAY_DU.Location = new System.Drawing.Point(0, 60);
+            this.lblTEN_CTY_DAY_DU.Name = "lblTEN_CTY_DAY_DU";
+            this.lblTEN_CTY_DAY_DU.Size = new System.Drawing.Size(614, 30);
+            this.lblTEN_CTY_DAY_DU.TextSize = new System.Drawing.Size(137, 20);
+            // 
+            // ItemForSTT
+            // 
+            this.ItemForSTT.Control = this.txtSTT;
+            this.ItemForSTT.Location = new System.Drawing.Point(0, 90);
+            this.ItemForSTT.Name = "ItemForSTT";
+            this.ItemForSTT.Size = new System.Drawing.Size(614, 267);
+            this.ItemForSTT.TextSize = new System.Drawing.Size(137, 20);
             // 
             // frmEditDOI_TAC
             // 

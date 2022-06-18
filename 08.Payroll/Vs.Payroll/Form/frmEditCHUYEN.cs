@@ -45,6 +45,8 @@ namespace Vs.Payroll
 
             TOLookUpEdit.EditValue = dtTmp.Rows[0]["ID_TO"];
             TEN_CHUYENTextEdit.EditValue = dtTmp.Rows[0]["TEN_CHUYEN"];
+            TEN_CHUYEN_ATextEdit.EditValue = dtTmp.Rows[0]["TEN_CHUYEN_A"];
+            TEN_CHUYEN_HTextEdit.EditValue = dtTmp.Rows[0]["TEN_CHUYEN_H"];
             TEN = dtTmp.Rows[0]["TEN_CHUYEN"].ToString();
             STT_CHUYENTextEdit.EditValue = dtTmp.Rows[0]["MS_CHUYEN"];
             txtSTT.EditValue = dtTmp.Rows[0]["STT"].ToString();
@@ -71,10 +73,20 @@ namespace Vs.Payroll
                             if (bKiemTrung()) return;
                             Commons.Modules.sId = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spUpdateCHUYEN", (bAddEditTo ? -1 : iIdTo),
                                 STT_CHUYENTextEdit.EditValue,
-                                TEN_CHUYENTextEdit.EditValue, 
+                                TEN_CHUYENTextEdit.EditValue,
+                                TEN_CHUYEN_ATextEdit.EditValue,
+                                TEN_CHUYEN_HTextEdit.EditValue,
                                 TOLookUpEdit.EditValue,
-                                (txtSTT.EditValue == "") ? txtSTT.EditValue = null : txtSTT.EditValue
+                                (txtSTT.Text == "") ? txtSTT.EditValue = null : txtSTT.EditValue
                                 ).ToString();
+                            if (bAddEditTo)
+                            {
+                                if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_ThemThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo) == DialogResult.Yes)
+                                {
+                                    LoadTextNull();
+                                    return;
+                                }
+                            }
                             this.DialogResult = DialogResult.OK;
                             this.Close();
                             break;
@@ -129,7 +141,20 @@ namespace Vs.Payroll
             return false;
         }
         private void frmEditCHUYEN_Resize(object sender, EventArgs e) => dataLayoutControl1.Refresh();
-
+        private void LoadTextNull()
+        {
+            try
+            {
+                STT_CHUYENTextEdit.EditValue = String.Empty;
+                TEN_CHUYENTextEdit.EditValue = String.Empty;
+                TEN_CHUYEN_ATextEdit.EditValue = String.Empty;
+                TEN_CHUYEN_HTextEdit.EditValue = String.Empty;
+                TOLookUpEdit.EditValue = null;
+                txtSTT.EditValue = null;
+                STT_CHUYENTextEdit.Focus();
+            }
+            catch { }
+        }
     }
 
 }

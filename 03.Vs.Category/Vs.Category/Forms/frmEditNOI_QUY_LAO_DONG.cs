@@ -36,10 +36,12 @@ namespace Vs.Category
         {
             try
             {
-                string sSql = "SELECT ID_NQLD, NOI_DUNG, STT FROM NOI_QUY_LAO_DONG WHERE ID_NQLD = " + Id.ToString();
+                string sSql = "SELECT ID_NQLD, NOI_DUNG,NOI_DUNG_A, NOI_DUNG_H, STT FROM NOI_QUY_LAO_DONG WHERE ID_NQLD = " + Id.ToString();
                 DataTable dtTmp = new DataTable();
                 dtTmp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSql));
                 txtNoiDung.EditValue = dtTmp.Rows[0]["NOI_DUNG"].ToString();
+                txtNoiDung_A.EditValue = dtTmp.Rows[0]["NOI_DUNG_A"].ToString();
+                txtNoiDung_H.EditValue = dtTmp.Rows[0]["NOI_DUNG_H"].ToString();
                 txtSTT.EditValue = dtTmp.Rows[0]["STT"].ToString();
             }
             catch (Exception EX)

@@ -83,6 +83,7 @@ namespace Vs.Category
             {
                 //SELECT DISTINCT T1.ID_DV,MSDV, T2.TEN_DV,T1.DIA_CHI,T1.DIEN_THOAI,T1.FAX,T1.SO_TAI_KHOAN,T1.TEN_NGAN_HANG ,T1.MAC_DINH
                 ID_NLSearchLookUpEdit.Properties.View.Columns["ID_NL"].Visible = false;
+                ID_NLSearchLookUpEdit.Properties.View.Columns["MS_NL"].Visible = false;
                 ID_NLSearchLookUpEdit.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.None;
 
                 ID_NLSearchLookUpEdit.Properties.View.Columns["TEN_NL"].Caption = Commons.Modules.ObjLanguages.GetLanguage("ucListDMuc", "TEN_NL");

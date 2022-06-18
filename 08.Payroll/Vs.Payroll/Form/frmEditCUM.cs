@@ -31,6 +31,9 @@ namespace Vs.Payroll
             try
             {
                 Commons.Modules.ObjSystems.MLoadLookUpEdit(TEN_LOAI_SAN_PHAMLookUpEdit, Commons.Modules.ObjSystems.DataNhomHangHoa(false),"ID_NHH", "TEN_NHH",Commons.Modules.ObjLanguages.GetLanguage(this.Name, "TEN_NHH"),false);
+                DataTable dt = new DataTable();
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboLOAI_CUM",Commons.Modules.UserName, Commons.Modules.TypeLanguage, false));
+                Commons.Modules.ObjSystems.MLoadLookUpEdit(cboID_LOAI_CUM, dt, "LOAI_CUM", "TEN_LOAI_CUM", Commons.Modules.ObjLanguages.GetLanguage(this.Name, "TEN_LOAI_CUM"), false);
             }
             catch
             {
@@ -53,7 +56,7 @@ namespace Vs.Payroll
             TEN_CUM_HTextEdit.EditValue = dtTmp.Rows[0]["TEN_CUM_H"];
             STT_CUMTextEdit.EditValue = dtTmp.Rows[0]["STT"];
             TINH_TGCheckEdit.EditValue = dtTmp.Rows[0]["TINH_TG"];
-            LOAI_CUMTextEdit.EditValue = dtTmp.Rows[0]["LOAI_CUM"];
+            cboID_LOAI_CUM.EditValue = dtTmp.Rows[0]["LOAI_CUM"];
             CUM_PSCheckEdit.EditValue = dtTmp.Rows[0]["CUM_PS"];
             CUM_CUOICheckEdit.EditValue = dtTmp.Rows[0]["CUM_CUOI"];
 
@@ -90,7 +93,7 @@ namespace Vs.Payroll
                             cmd.Parameters.Add("@TEN_CUM_H", SqlDbType.NVarChar).Value = TEN_CUM_HTextEdit.Text;
                             cmd.Parameters.Add("@STT", SqlDbType.SmallInt).Value = STT_CUMTextEdit.Text==""? STT_CUMTextEdit.EditValue = null : STT_CUMTextEdit.EditValue;
                             cmd.Parameters.Add("@ID_LSP", SqlDbType.Int).Value =TEN_LOAI_SAN_PHAMLookUpEdit.EditValue;
-                            cmd.Parameters.Add("@LOAI_CUM", SqlDbType.NVarChar).Value = LOAI_CUMTextEdit.Text;
+                            cmd.Parameters.Add("@LOAI_CUM", SqlDbType.NVarChar).Value = cboID_LOAI_CUM.EditValue;
 
                             cmd.Parameters.Add("@TINH_TG", SqlDbType.Bit).Value = TINH_TGCheckEdit.Checked == true ? true : false;
                             cmd.Parameters.Add("@CUM_PS", SqlDbType.Bit).Value = CUM_PSCheckEdit.Checked == true ? true : false;

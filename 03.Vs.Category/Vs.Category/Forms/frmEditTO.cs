@@ -16,7 +16,6 @@ namespace Vs.Category
         public frmEditTO(Int64 iId, Boolean bAddEdit)
         {
             InitializeComponent();
-            Commons.Modules.ObjSystems.ThayDoiNN(this, layoutControlGroup1, btnALL);
             iIdTo = iId;
             bAddEditTo = bAddEdit;
         }
@@ -24,8 +23,7 @@ namespace Vs.Category
         {
             LoadXiNghiep();
             if (!bAddEditTo) LoadText();
-            
-
+            Commons.Modules.ObjSystems.ThayDoiNN(this, layoutControlGroup1, btnALL);
         }
         private void LoadXiNghiep()
         {

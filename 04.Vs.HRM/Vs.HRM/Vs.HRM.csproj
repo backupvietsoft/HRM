@@ -426,6 +426,12 @@
     <Compile Include="UAC\CongNhan\ctCongNhan\frmInQTCT.Designer.cs">
       <DependentUpon>frmInQTCT.cs</DependentUpon>
     </Compile>
+    <Compile Include="UAC\CongNhan\ucThongTinChuyenKhoan.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UAC\CongNhan\ucThongTinChuyenKhoan.Designer.cs">
+      <DependentUpon>ucThongTinChuyenKhoan.cs</DependentUpon>
+    </Compile>
     <Compile Include="UAC\CongNhan\ucKeHoachNghiPhep.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -706,6 +712,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UAC\CongNhan\ctCongNhan\frmInQTCT.resx">
       <DependentUpon>frmInQTCT.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UAC\CongNhan\ucThongTinChuyenKhoan.resx">
+      <DependentUpon>ucThongTinChuyenKhoan.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UAC\CongNhan\ucCapNhatLCB.resx">
       <DependentUpon>ucCapNhatLCB.cs</DependentUpon>

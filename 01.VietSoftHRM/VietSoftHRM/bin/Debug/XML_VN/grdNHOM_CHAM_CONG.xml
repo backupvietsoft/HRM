@@ -6,7 +6,6 @@
     <property name="ColumnAutoWidth">false</property>
     <property name="ColumnHeaderAutoHeight">True</property>
     <property name="RowAutoHeight">true</property>
-    <property name="ShowAutoFilterRow">true</property>
     <property name="ShowGroupPanel">false</property>
   </property>
   <property name="ActiveFilterEnabled">true</property>
@@ -18,8 +17,6 @@
       <property name="ImageIndex">-1</property>
       <property name="FieldName">ID_NHOM</property>
       <property name="ColumnEditName" />
-      <property name="VisibleIndex">0</property>
-      <property name="Visible">true</property>
       <property name="Width">86</property>
       <property name="MinWidth">20</property>
       <property name="MaxWidth">0</property>
@@ -31,9 +28,9 @@
       <property name="ImageIndex">-1</property>
       <property name="FieldName">TEN_NHOM</property>
       <property name="ColumnEditName" />
-      <property name="VisibleIndex">1</property>
+      <property name="VisibleIndex">0</property>
       <property name="Visible">true</property>
-      <property name="Width">126</property>
+      <property name="Width">489</property>
       <property name="MinWidth">20</property>
       <property name="MaxWidth">0</property>
     </property>
@@ -44,9 +41,9 @@
       <property name="ImageIndex">-1</property>
       <property name="FieldName">CA_TU_DONG</property>
       <property name="ColumnEditName" />
-      <property name="VisibleIndex">2</property>
+      <property name="VisibleIndex">1</property>
       <property name="Visible">true</property>
-      <property name="Width">111</property>
+      <property name="Width">153</property>
       <property name="MinWidth">20</property>
       <property name="MaxWidth">0</property>
     </property>

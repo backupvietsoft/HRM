@@ -1847,7 +1847,7 @@ namespace Commons
                     try
                     {
                         LayoutControlItem control1 = (LayoutControlItem)gr;
-                        control1.Text = GetNN(dtTmp, control1.Name, name);
+                        control1.Text = GetNN(dtTmp, control1.Name, name) + "  ";
                         control1.DoubleClick += delegate (object a, EventArgs b) { Control1_DoubleClick(control1, b, name); };
                         control1.Padding = new DevExpress.XtraLayout.Utils.Padding(5, 5, 2, 2);
                         ((DevExpress.XtraEditors.BaseEdit)control1.Control).EnterMoveNextControl = true;

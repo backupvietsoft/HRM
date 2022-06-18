@@ -36,30 +36,27 @@
             this.grdData = new DevExpress.XtraGrid.GridControl();
             this.grvData = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.ItemForNHOM_CHAM_CONG = new DevExpress.XtraLayout.LayoutControlItem();
-            this.cboNhomChamCong = new DevExpress.XtraEditors.SearchLookUpEdit();
-            this.searchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.layoutControl = new DevExpress.XtraLayout.LayoutControl();
+            this.ItemForNGAY = new DevExpress.XtraLayout.LayoutControlItem();
+            this.cboNgay = new Commons.MPopupContainerEdit();
             this.popListNgay = new DevExpress.XtraEditors.PopupContainerControl();
             this.grdNgay = new DevExpress.XtraGrid.GridControl();
             this.grvNgay = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.popNgay = new DevExpress.XtraEditors.PopupContainerControl();
             this.calNgay = new DevExpress.XtraEditors.Controls.CalendarControl();
-            this.cboNgay = new Commons.MPopupContainerEdit();
-            this.ItemForNGAY = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControl = new DevExpress.XtraLayout.LayoutControl();
+            this.cboNhomChamCong = new DevExpress.XtraEditors.SearchLookUpEdit();
+            this.searchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.ItemForNHOM_CHAM_CONG = new DevExpress.XtraLayout.LayoutControlItem();
+            this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
+            this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.btnALL = new DevExpress.XtraBars.Docking2010.WindowsUIButtonPanel();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.searchControl1 = new DevExpress.XtraEditors.SearchControl();
+            this.panel1 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.grdData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grvData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemForNHOM_CHAM_CONG)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cboNhomChamCong.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControl)).BeginInit();
-            this.layoutControl.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForNGAY)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cboNgay.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.popListNgay)).BeginInit();
             this.popListNgay.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdNgay)).BeginInit();
@@ -67,19 +64,24 @@
             ((System.ComponentModel.ISupportInitialize)(this.popNgay)).BeginInit();
             this.popNgay.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.calNgay.CalendarTimeProperties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cboNgay.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemForNGAY)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControl)).BeginInit();
+            this.layoutControl.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cboNhomChamCong.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForNHOM_CHAM_CONG)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             this.btnALL.SuspendLayout();
-            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.searchControl1.Properties)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // grdData
             // 
-            this.grdData.Location = new System.Drawing.Point(12, 42);
+            this.grdData.Location = new System.Drawing.Point(12, 52);
             this.grdData.MainView = this.grvData;
             this.grdData.Name = "grdData";
-            this.grdData.Size = new System.Drawing.Size(791, 366);
+            this.grdData.Size = new System.Drawing.Size(791, 356);
             this.grdData.TabIndex = 3;
             this.grdData.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grvData});
@@ -106,68 +108,45 @@
             this.Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
             this.Root.GroupBordersVisible = false;
             this.Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlItem1,
+            this.ItemForNGAY,
             this.ItemForNHOM_CHAM_CONG,
-            this.ItemForNGAY});
+            this.emptySpaceItem1,
+            this.layoutControlItem1});
             this.Root.Name = "Root";
             this.Root.Size = new System.Drawing.Size(815, 420);
             this.Root.TextVisible = false;
             // 
-            // layoutControlItem1
+            // ItemForNGAY
             // 
-            this.layoutControlItem1.Control = this.grdData;
-            this.layoutControlItem1.Location = new System.Drawing.Point(0, 30);
-            this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(795, 370);
-            this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem1.TextVisible = false;
+            this.ItemForNGAY.Control = this.cboNgay;
+            this.ItemForNGAY.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
+            this.ItemForNGAY.CustomizationFormText = "NGAY";
+            this.ItemForNGAY.Location = new System.Drawing.Point(397, 0);
+            this.ItemForNGAY.Name = "ItemForNGAY";
+            this.ItemForNGAY.Size = new System.Drawing.Size(398, 30);
+            this.ItemForNGAY.Text = "NGAY";
+            this.ItemForNGAY.TextSize = new System.Drawing.Size(142, 20);
             // 
-            // ItemForNHOM_CHAM_CONG
+            // cboNgay
             // 
-            this.ItemForNHOM_CHAM_CONG.Control = this.cboNhomChamCong;
-            this.ItemForNHOM_CHAM_CONG.CustomizationFormText = "ItemForNHOM_CHAM_CONG";
-            this.ItemForNHOM_CHAM_CONG.Location = new System.Drawing.Point(397, 0);
-            this.ItemForNHOM_CHAM_CONG.Name = "ItemForNHOM_CHAM_CONG";
-            this.ItemForNHOM_CHAM_CONG.Size = new System.Drawing.Size(398, 30);
-            this.ItemForNHOM_CHAM_CONG.Text = "NHOM_CHAM_CONG";
-            this.ItemForNHOM_CHAM_CONG.TextSize = new System.Drawing.Size(142, 20);
-            // 
-            // cboNhomChamCong
-            // 
-            this.cboNhomChamCong.EditValue = "\\";
-            this.cboNhomChamCong.Location = new System.Drawing.Point(554, 12);
-            this.cboNhomChamCong.Name = "cboNhomChamCong";
-            this.cboNhomChamCong.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cboNhomChamCong.Properties.PopupView = this.searchLookUpEdit1View;
-            this.cboNhomChamCong.Size = new System.Drawing.Size(249, 26);
-            this.cboNhomChamCong.StyleController = this.layoutControl;
-            this.cboNhomChamCong.TabIndex = 0;
-            this.cboNhomChamCong.Visible = false;
-            this.cboNhomChamCong.EditValueChanged += new System.EventHandler(this.cboNhomChamCong_EditValueChanged);
-            // 
-            // searchLookUpEdit1View
-            // 
-            this.searchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
-            this.searchLookUpEdit1View.Name = "searchLookUpEdit1View";
-            this.searchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
-            this.searchLookUpEdit1View.OptionsView.ShowGroupPanel = false;
-            // 
-            // layoutControl
-            // 
-            this.layoutControl.Controls.Add(this.popListNgay);
-            this.layoutControl.Controls.Add(this.popNgay);
-            this.layoutControl.Controls.Add(this.grdData);
-            this.layoutControl.Controls.Add(this.cboNhomChamCong);
-            this.layoutControl.Controls.Add(this.cboNgay);
-            this.layoutControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.layoutControl.Location = new System.Drawing.Point(0, 0);
-            this.layoutControl.Name = "layoutControl";
-            this.layoutControl.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(367, 0, 650, 400);
-            this.layoutControl.Root = this.Root;
-            this.layoutControl.Size = new System.Drawing.Size(815, 420);
-            this.layoutControl.TabIndex = 3;
-            this.layoutControl.Text = "layoutControl1";
+            this.cboNgay.Location = new System.Drawing.Point(554, 12);
+            this.cboNgay.Name = "cboNgay";
+            this.cboNgay.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo),
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+            this.cboNgay.Properties.DefaultActionButtonIndex = 0;
+            this.cboNgay.Properties.DefaultPopupControl = this.popListNgay;
+            this.cboNgay.Properties.DifferentActionButtonIndex = 1;
+            this.cboNgay.Properties.DifferentPopupControl = this.popNgay;
+            this.cboNgay.Properties.DisplayFormat.FormatString = "dd/MM/yyyy";
+            this.cboNgay.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
+            this.cboNgay.Properties.EditFormat.FormatString = "dd/MM/yyyy";
+            this.cboNgay.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Custom;
+            this.cboNgay.Properties.Mask.EditMask = "dd/MM/yyyy";
+            this.cboNgay.Size = new System.Drawing.Size(249, 26);
+            this.cboNgay.StyleController = this.layoutControl;
+            this.cboNgay.TabIndex = 18;
+            this.cboNgay.EditValueChanged += new System.EventHandler(this.cboNgay_EditValueChanged);
             // 
             // popListNgay
             // 
@@ -225,37 +204,73 @@
             this.calNgay.TabIndex = 1;
             this.calNgay.DateTimeCommit += new System.EventHandler(this.calNgay_DateTimeCommit);
             // 
-            // cboNgay
+            // layoutControl
             // 
-            this.cboNgay.Location = new System.Drawing.Point(157, 12);
-            this.cboNgay.Name = "cboNgay";
-            this.cboNgay.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo),
-            new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.cboNgay.Properties.DefaultActionButtonIndex = 0;
-            this.cboNgay.Properties.DefaultPopupControl = this.popListNgay;
-            this.cboNgay.Properties.DifferentActionButtonIndex = 1;
-            this.cboNgay.Properties.DifferentPopupControl = this.popNgay;
-            this.cboNgay.Properties.DisplayFormat.FormatString = "dd/MM/yyyy";
-            this.cboNgay.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
-            this.cboNgay.Properties.EditFormat.FormatString = "dd/MM/yyyy";
-            this.cboNgay.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Custom;
-            this.cboNgay.Properties.Mask.EditMask = "dd/MM/yyyy";
-            this.cboNgay.Size = new System.Drawing.Size(248, 26);
-            this.cboNgay.StyleController = this.layoutControl;
-            this.cboNgay.TabIndex = 18;
-            this.cboNgay.EditValueChanged += new System.EventHandler(this.cboNgay_EditValueChanged);
+            this.layoutControl.Controls.Add(this.popListNgay);
+            this.layoutControl.Controls.Add(this.popNgay);
+            this.layoutControl.Controls.Add(this.grdData);
+            this.layoutControl.Controls.Add(this.cboNhomChamCong);
+            this.layoutControl.Controls.Add(this.cboNgay);
+            this.layoutControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.layoutControl.Location = new System.Drawing.Point(0, 0);
+            this.layoutControl.Name = "layoutControl";
+            this.layoutControl.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(367, 0, 650, 400);
+            this.layoutControl.Root = this.Root;
+            this.layoutControl.Size = new System.Drawing.Size(815, 420);
+            this.layoutControl.TabIndex = 3;
+            this.layoutControl.Text = "layoutControl1";
             // 
-            // ItemForNGAY
+            // cboNhomChamCong
             // 
-            this.ItemForNGAY.Control = this.cboNgay;
-            this.ItemForNGAY.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
-            this.ItemForNGAY.CustomizationFormText = "NGAY";
-            this.ItemForNGAY.Location = new System.Drawing.Point(0, 0);
-            this.ItemForNGAY.Name = "ItemForNGAY";
-            this.ItemForNGAY.Size = new System.Drawing.Size(397, 30);
-            this.ItemForNGAY.Text = "NGAY";
-            this.ItemForNGAY.TextSize = new System.Drawing.Size(142, 20);
+            this.cboNhomChamCong.EditValue = "\\";
+            this.cboNhomChamCong.Location = new System.Drawing.Point(157, 12);
+            this.cboNhomChamCong.Name = "cboNhomChamCong";
+            this.cboNhomChamCong.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cboNhomChamCong.Properties.NullText = "";
+            this.cboNhomChamCong.Properties.PopupView = this.searchLookUpEdit1View;
+            this.cboNhomChamCong.Size = new System.Drawing.Size(248, 26);
+            this.cboNhomChamCong.StyleController = this.layoutControl;
+            this.cboNhomChamCong.TabIndex = 0;
+            this.cboNhomChamCong.Visible = false;
+            this.cboNhomChamCong.EditValueChanged += new System.EventHandler(this.cboNhomChamCong_EditValueChanged);
+            // 
+            // searchLookUpEdit1View
+            // 
+            this.searchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            this.searchLookUpEdit1View.Name = "searchLookUpEdit1View";
+            this.searchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.searchLookUpEdit1View.OptionsView.ShowGroupPanel = false;
+            // 
+            // ItemForNHOM_CHAM_CONG
+            // 
+            this.ItemForNHOM_CHAM_CONG.Control = this.cboNhomChamCong;
+            this.ItemForNHOM_CHAM_CONG.CustomizationFormText = "ItemForNHOM_CHAM_CONG";
+            this.ItemForNHOM_CHAM_CONG.Location = new System.Drawing.Point(0, 0);
+            this.ItemForNHOM_CHAM_CONG.Name = "ItemForNHOM_CHAM_CONG";
+            this.ItemForNHOM_CHAM_CONG.Size = new System.Drawing.Size(397, 30);
+            this.ItemForNHOM_CHAM_CONG.Text = "NHOM_CHAM_CONG";
+            this.ItemForNHOM_CHAM_CONG.TextSize = new System.Drawing.Size(142, 20);
+            // 
+            // emptySpaceItem1
+            // 
+            this.emptySpaceItem1.AllowHotTrack = false;
+            this.emptySpaceItem1.Location = new System.Drawing.Point(0, 30);
+            this.emptySpaceItem1.MaxSize = new System.Drawing.Size(0, 10);
+            this.emptySpaceItem1.MinSize = new System.Drawing.Size(10, 10);
+            this.emptySpaceItem1.Name = "emptySpaceItem1";
+            this.emptySpaceItem1.Size = new System.Drawing.Size(795, 10);
+            this.emptySpaceItem1.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
+            // 
+            // layoutControlItem1
+            // 
+            this.layoutControlItem1.Control = this.grdData;
+            this.layoutControlItem1.Location = new System.Drawing.Point(0, 40);
+            this.layoutControlItem1.Name = "layoutControlItem1";
+            this.layoutControlItem1.Size = new System.Drawing.Size(795, 360);
+            this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem1.TextVisible = false;
             // 
             // btnALL
             // 
@@ -300,6 +315,21 @@
             this.btnALL.UseButtonBackgroundImages = false;
             this.btnALL.ButtonClick += new DevExpress.XtraBars.Docking2010.ButtonEventHandler(this.windowsUIButtonPanel1_ButtonClick);
             // 
+            // searchControl1
+            // 
+            this.searchControl1.Client = this.grdData;
+            this.searchControl1.Location = new System.Drawing.Point(4, 6);
+            this.searchControl1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.searchControl1.MaximumSize = new System.Drawing.Size(0, 30);
+            this.searchControl1.MinimumSize = new System.Drawing.Size(0, 30);
+            this.searchControl1.Name = "searchControl1";
+            this.searchControl1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Repository.ClearButton(),
+            new DevExpress.XtraEditors.Repository.SearchButton()});
+            this.searchControl1.Properties.Client = this.grdData;
+            this.searchControl1.Size = new System.Drawing.Size(226, 30);
+            this.searchControl1.TabIndex = 0;
+            // 
             // panel1
             // 
             this.panel1.Controls.Add(this.layoutControl);
@@ -308,19 +338,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(815, 420);
             this.panel1.TabIndex = 7;
-            // 
-            // searchControl1
-            // 
-            this.searchControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.searchControl1.Client = this.grdData;
-            this.searchControl1.Location = new System.Drawing.Point(0, 14);
-            this.searchControl1.Name = "searchControl1";
-            this.searchControl1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Repository.ClearButton(),
-            new DevExpress.XtraEditors.Repository.SearchButton()});
-            this.searchControl1.Properties.Client = this.grdData;
-            this.searchControl1.Size = new System.Drawing.Size(220, 26);
-            this.searchControl1.TabIndex = 0;
             // 
             // ucCheDoLamViec
             // 
@@ -334,13 +351,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.grdData)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grvData)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemForNHOM_CHAM_CONG)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cboNhomChamCong.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControl)).EndInit();
-            this.layoutControl.ResumeLayout(false);
-            this.layoutControl.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForNGAY)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cboNgay.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.popListNgay)).EndInit();
             this.popListNgay.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.grdNgay)).EndInit();
@@ -349,11 +361,17 @@
             this.popNgay.ResumeLayout(false);
             this.popNgay.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.calNgay.CalendarTimeProperties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cboNgay.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemForNGAY)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControl)).EndInit();
+            this.layoutControl.ResumeLayout(false);
+            this.layoutControl.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cboNhomChamCong.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForNHOM_CHAM_CONG)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             this.btnALL.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.searchControl1.Properties)).EndInit();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -377,5 +395,6 @@
         private Commons.MPopupContainerEdit cboNgay;
         private DevExpress.XtraLayout.LayoutControlItem ItemForNGAY;
         private DevExpress.XtraEditors.SearchControl searchControl1;
+        private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem1;
     }
 }

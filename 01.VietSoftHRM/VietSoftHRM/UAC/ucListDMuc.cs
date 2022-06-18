@@ -326,8 +326,8 @@ namespace VietSoftHRM
                 ctl.StartPosition = FormStartPosition.CenterParent;
                 ctl.MinimizeBox = false;
                 double iW, iH;
-                iW = Screen.PrimaryScreen.WorkingArea.Width / 1.5;
-                iH = Screen.PrimaryScreen.WorkingArea.Height / 1.5;
+                iW = Screen.PrimaryScreen.WorkingArea.Width / 2.2;
+                iH = Screen.PrimaryScreen.WorkingArea.Height / 2.2;
                 if (iW < 800)
                 {
                     iW = iW * 1.2;

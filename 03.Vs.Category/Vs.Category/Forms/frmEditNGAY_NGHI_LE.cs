@@ -30,12 +30,14 @@ namespace Vs.Category
         {
             try
             {
-                string sSql = "SELECT ID_NNL,NGAY, LY_DO, STT " +
+                string sSql = "SELECT ID_NNL,NGAY, LY_DO, LY_DO_A, LY_DO_H, STT " +
                     "FROM NGAY_NGHI_LE WHERE ID_NNL = " + Id ;
                 DataTable dtTmp = new DataTable();
                 dtTmp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSql));
                 NGAYDateEdit.EditValue = dtTmp.Rows[0]["NGAY"];
                 LY_DOTextEdit.EditValue = dtTmp.Rows[0]["LY_DO"].ToString();
+                LY_DO_ATextEdit.EditValue = dtTmp.Rows[0]["LY_DO_A"].ToString();
+                LY_DO_HTextEdit.EditValue = dtTmp.Rows[0]["LY_DO_H"].ToString();
                 txtSTT.EditValue = dtTmp.Rows[0]["STT"].ToString();
             }
             catch (Exception EX)
@@ -52,6 +54,8 @@ namespace Vs.Category
                 txtSTT.EditValue = 1;
                 NGAYDateEdit.Focus();
                 LY_DOTextEdit.EditValue = String.Empty;
+                LY_DO_ATextEdit.EditValue = String.Empty;
+                LY_DO_HTextEdit.EditValue = String.Empty;
             }
             catch { }
         }
@@ -71,7 +75,7 @@ namespace Vs.Category
                             try
                             {
                                 DataTable dt = new DataTable();
-                                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spUpdateNGAY_NGHI_LE", (AddEdit ? 1 : 0), NGAYDateEdit.EditValue, LY_DOTextEdit.EditValue.ToString(), (txtSTT.EditValue == "") ? txtSTT.EditValue = null : txtSTT.EditValue));
+                                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spUpdateNGAY_NGHI_LE", (AddEdit ? 1 : 0), NGAYDateEdit.EditValue, LY_DOTextEdit.EditValue.ToString(), (txtSTT.Text == "") ? txtSTT.EditValue = null : txtSTT.EditValue));
 
                                 if (AddEdit)
                                 {

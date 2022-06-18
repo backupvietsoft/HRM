@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions1 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
             DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions2 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule1 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             this.btnALL = new DevExpress.XtraBars.Docking2010.WindowsUIButtonPanel();
             this.tablePanel1 = new DevExpress.Utils.Layout.TablePanel();
             this.dataLayoutControl1 = new DevExpress.XtraDataLayout.DataLayoutControl();
@@ -79,11 +80,11 @@
             this.btnALL.ContentAlignment = System.Drawing.ContentAlignment.MiddleRight;
             this.btnALL.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnALL.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.btnALL.Location = new System.Drawing.Point(0, 330);
+            this.btnALL.Location = new System.Drawing.Point(0, 412);
             this.btnALL.Margin = new System.Windows.Forms.Padding(0);
             this.btnALL.Name = "btnALL";
-            this.btnALL.Padding = new System.Windows.Forms.Padding(0, 9, 0, 0);
-            this.btnALL.Size = new System.Drawing.Size(810, 40);
+            this.btnALL.Padding = new System.Windows.Forms.Padding(0, 11, 0, 0);
+            this.btnALL.Size = new System.Drawing.Size(1114, 50);
             this.btnALL.TabIndex = 10;
             this.btnALL.Text = "btnALLPanel1";
             this.btnALL.UseButtonBackgroundImages = false;
@@ -98,11 +99,12 @@
             this.tablePanel1.Controls.Add(this.dataLayoutControl1);
             this.tablePanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tablePanel1.Location = new System.Drawing.Point(0, 0);
+            this.tablePanel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tablePanel1.Name = "tablePanel1";
             this.tablePanel1.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] {
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 8F),
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 100F)});
-            this.tablePanel1.Size = new System.Drawing.Size(810, 370);
+            this.tablePanel1.Size = new System.Drawing.Size(1114, 462);
             this.tablePanel1.TabIndex = 10;
             // 
             // dataLayoutControl1
@@ -111,30 +113,36 @@
             this.dataLayoutControl1.Controls.Add(this.txtSTT);
             this.dataLayoutControl1.Controls.Add(this.txtNoiDung);
             this.dataLayoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataLayoutControl1.Location = new System.Drawing.Point(85, 13);
-            this.dataLayoutControl1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.dataLayoutControl1.Location = new System.Drawing.Point(117, 16);
+            this.dataLayoutControl1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.dataLayoutControl1.Name = "dataLayoutControl1";
             this.dataLayoutControl1.Root = this.Root;
             this.tablePanel1.SetRow(this.dataLayoutControl1, 1);
-            this.dataLayoutControl1.Size = new System.Drawing.Size(640, 352);
+            this.dataLayoutControl1.Size = new System.Drawing.Size(879, 440);
             this.dataLayoutControl1.TabIndex = 0;
             this.dataLayoutControl1.Text = "dataLayoutControl1";
             // 
             // txtSTT
             // 
-            this.txtSTT.Location = new System.Drawing.Point(86, 34);
+            this.txtSTT.Location = new System.Drawing.Point(109, 41);
+            this.txtSTT.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtSTT.Name = "txtSTT";
-            this.txtSTT.Size = new System.Drawing.Size(548, 26);
+            this.txtSTT.Size = new System.Drawing.Size(762, 32);
             this.txtSTT.StyleController = this.dataLayoutControl1;
             this.txtSTT.TabIndex = 5;
             // 
             // txtNoiDung
             // 
-            this.txtNoiDung.Location = new System.Drawing.Point(86, 6);
+            this.txtNoiDung.Location = new System.Drawing.Point(109, 7);
+            this.txtNoiDung.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtNoiDung.Name = "txtNoiDung";
-            this.txtNoiDung.Size = new System.Drawing.Size(548, 26);
+            this.txtNoiDung.Size = new System.Drawing.Size(762, 32);
             this.txtNoiDung.StyleController = this.dataLayoutControl1;
             this.txtNoiDung.TabIndex = 4;
+            conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule1.ErrorText = "This value is not valid";
+            conditionValidationRule1.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.Critical;
+            this.dxValidationProvider1.SetValidationRule(this.txtNoiDung, conditionValidationRule1);
             // 
             // Root
             // 
@@ -143,7 +151,7 @@
             this.Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlGroup1});
             this.Root.Name = "Root";
-            this.Root.Size = new System.Drawing.Size(640, 352);
+            this.Root.Size = new System.Drawing.Size(879, 440);
             this.Root.TextVisible = false;
             // 
             // layoutControlGroup1
@@ -155,32 +163,34 @@
             this.ItemForSTT});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "autoGeneratedGroup0";
-            this.layoutControlGroup1.Size = new System.Drawing.Size(630, 342);
+            this.layoutControlGroup1.Size = new System.Drawing.Size(865, 428);
             // 
             // lblNoiDung
             // 
+            this.lblNoiDung.AppearanceItemCaption.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNoiDung.AppearanceItemCaption.Options.UseFont = true;
             this.lblNoiDung.Control = this.txtNoiDung;
             this.lblNoiDung.Location = new System.Drawing.Point(0, 0);
             this.lblNoiDung.Name = "lblNoiDung";
-            this.lblNoiDung.Size = new System.Drawing.Size(630, 28);
-            this.lblNoiDung.TextSize = new System.Drawing.Size(77, 20);
+            this.lblNoiDung.Size = new System.Drawing.Size(865, 34);
+            this.lblNoiDung.TextSize = new System.Drawing.Size(97, 25);
             // 
             // ItemForSTT
             // 
             this.ItemForSTT.Control = this.txtSTT;
-            this.ItemForSTT.Location = new System.Drawing.Point(0, 28);
+            this.ItemForSTT.Location = new System.Drawing.Point(0, 34);
             this.ItemForSTT.Name = "ItemForSTT";
-            this.ItemForSTT.Size = new System.Drawing.Size(630, 314);
-            this.ItemForSTT.TextSize = new System.Drawing.Size(77, 20);
+            this.ItemForSTT.Size = new System.Drawing.Size(865, 394);
+            this.ItemForSTT.TextSize = new System.Drawing.Size(97, 25);
             // 
             // frmEditNOI_QUY_LAO_DONG
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(810, 370);
+            this.ClientSize = new System.Drawing.Size(1114, 462);
             this.Controls.Add(this.btnALL);
             this.Controls.Add(this.tablePanel1);
-            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.Name = "frmEditNOI_QUY_LAO_DONG";
             this.Text = "frmEditNOI_QUY_LAO_DONG";
             this.Load += new System.EventHandler(this.frmEditNOI_QUY_LAO_DONG_Load);

@@ -126,7 +126,7 @@ namespace Vs.Category
                                 TINH_BHXHCheckEdit.EditValue,
                                 KY_HIEUTextEdit.EditValue,
                                 TINH_LUONGCheckEdit.EditValue,
-                                (STT_LDVTextEdit.EditValue == "") ? STT_LDVTextEdit.EditValue = null : STT_LDVTextEdit.EditValue, Convert.ToInt64(cboID_TT_HT.EditValue)).ToString();
+                                (STT_LDVTextEdit.EditValue == "") ? STT_LDVTextEdit.EditValue = null : STT_LDVTextEdit.EditValue, cboID_TT_HT.Text.ToString() == "" ? cboID_TT_HT.EditValue = null : cboID_TT_HT.EditValue).ToString();
                             if (AddEdit)
                             {
                                 if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_ThemThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo) == DialogResult.Yes)
@@ -162,7 +162,7 @@ namespace Vs.Category
                 Int16 iKiem = 0;
 
                 iKiem = Convert.ToInt16(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spCheckData", "ID_LDV",
-                    (AddEdit ? "-1" : Id.ToString()), "LY_DO_VANG", "TEN_LDV", TEN_LDVTextEdit.EditValue.ToString(),
+                    (AddEdit ? "-1" : Id.ToString()), "LY_DO_VANG", "TEN_LDV", TEN_LDVTextEdit.Text.ToString(),
                     "", "", "", ""));
                 if (iKiem > 0)
                 {
@@ -176,7 +176,7 @@ namespace Vs.Category
                 if (!string.IsNullOrEmpty(TEN_LDV_ATextEdit.Text))
                 {
                     iKiem = Convert.ToInt16(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spCheckData", "ID_LDV",
-                        (AddEdit ? "-1" : Id.ToString()), "LY_DO_VANG", "TEN_LDV_A", TEN_LDV_ATextEdit.EditValue.ToString(),
+                        (AddEdit ? "-1" : Id.ToString()), "LY_DO_VANG", "TEN_LDV_A", TEN_LDV_ATextEdit.Text.ToString(),
                         "", "", "", ""));
                     if (iKiem > 0)
                     {
@@ -190,7 +190,7 @@ namespace Vs.Category
                 if (!string.IsNullOrEmpty(TEN_LDV_HTextEdit.Text))
                 {
                     iKiem = Convert.ToInt16(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spCheckData", "ID_LDV",
-                        (AddEdit ? "-1" : Id.ToString()), "LY_DO_VANG", "TEN_LDV_H", TEN_LDV_HTextEdit.EditValue.ToString(),
+                        (AddEdit ? "-1" : Id.ToString()), "LY_DO_VANG", "TEN_LDV_H", TEN_LDV_HTextEdit.Text.ToString(),
                         "", "", "", ""));
                     if (iKiem > 0)
                     {

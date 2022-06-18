@@ -103,7 +103,7 @@ namespace Vs.Category
                 Int16 iKiem = 0;
 
                 iKiem = Convert.ToInt16(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spCheckData", "ID_DT",
-                    (AddEdit ? "-1" : Id.ToString()), "DAN_TOC", "TEN_DT", TEN_DTTextEdit.EditValue.ToString(),
+                    (AddEdit ? "-1" : Id.ToString()), "DAN_TOC", "TEN_DT", TEN_DTTextEdit.Text.ToString(),
                     "", "", "", ""));
                 if (iKiem > 0)
                 {
@@ -117,7 +117,7 @@ namespace Vs.Category
                 if (!string.IsNullOrEmpty(TEN_DT_ATextEdit.Text))
                 {
                     iKiem = Convert.ToInt16(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spCheckData", "ID_DT",
-                        (AddEdit ? "-1" : Id.ToString()), "DAN_TOC", "TEN_DT_A", TEN_DT_ATextEdit.EditValue.ToString(),
+                        (AddEdit ? "-1" : Id.ToString()), "DAN_TOC", "TEN_DT_A", TEN_DT_ATextEdit.Text.ToString(),
                         "", "", "", ""));
                     if (iKiem > 0)
                     {
@@ -131,7 +131,7 @@ namespace Vs.Category
                 if (!string.IsNullOrEmpty(TEN_DT_HTextEdit.Text))
                 {
                     iKiem = Convert.ToInt16(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spCheckData", "ID_DT",
-                        (AddEdit ? "-1" : Id.ToString()), "DAN_TOC", "TEN_DT_H", TEN_DT_HTextEdit.EditValue.ToString(),
+                        (AddEdit ? "-1" : Id.ToString()), "DAN_TOC", "TEN_DT_H", TEN_DT_HTextEdit.Text.ToString(),
                         "", "", "", ""));
                     if (iKiem > 0)
                     {

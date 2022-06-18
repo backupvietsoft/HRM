@@ -110,7 +110,7 @@ namespace Vs.Category
                 Int16 iKiem = 0;
 
                 iKiem = Convert.ToInt16(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spCheckData", "ID_NL",
-                    (AddEdit ? "-1" : Id.ToString()), "NGACH_LUONG", "MS_NL", MS_NLTextEdit.EditValue.ToString(),
+                    (AddEdit ? "-1" : Id.ToString()), "NGACH_LUONG", "MS_NL", MS_NLTextEdit.Text.ToString(),
                     "", "", "", ""));
                 if (iKiem > 0)
                 {
@@ -123,7 +123,7 @@ namespace Vs.Category
                 if (!string.IsNullOrEmpty(TEN_NLTextEdit.Text.ToString()))
                 {
                     iKiem = Convert.ToInt16(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spCheckData", "ID_NL", 
-                        (AddEdit ? "-1" : Id.ToString()), "NGACH_LUONG", "TEN_NL", TEN_NLTextEdit.EditValue.ToString(),
+                        (AddEdit ? "-1" : Id.ToString()), "NGACH_LUONG", "TEN_NL", TEN_NLTextEdit.Text.ToString(),
                         "", "", "", ""));
                     if (iKiem > 0)
                     {
@@ -136,7 +136,7 @@ namespace Vs.Category
                 if (!string.IsNullOrEmpty(TEN_NL_ATextEdit.Text.ToString()))
                 {
                     iKiem = Convert.ToInt16(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spCheckData", "ID_NL",
-                        (AddEdit ? "-1" : Id.ToString()), "NGACH_LUONG", "TEN_NL_A", TEN_NL_ATextEdit.EditValue.ToString(),
+                        (AddEdit ? "-1" : Id.ToString()), "NGACH_LUONG", "TEN_NL_A", TEN_NL_ATextEdit.Text.ToString(),
                         "", "", "", ""));
                     if (iKiem > 0)
                     {
@@ -149,7 +149,7 @@ namespace Vs.Category
                 if (!string.IsNullOrEmpty(TEN_NL_HTextEdit.Text.ToString()))
                 {
                     iKiem = Convert.ToInt16(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spCheckData", "ID_NL",
-                        (AddEdit ? "-1" : Id.ToString()), "NGACH_LUONG", "TEN_NL_H", TEN_NL_HTextEdit.EditValue.ToString(),
+                        (AddEdit ? "-1" : Id.ToString()), "NGACH_LUONG", "TEN_NL_H", TEN_NL_HTextEdit.Text.ToString(),
                         "", "", "", ""));
                     if (iKiem > 0)
                     {

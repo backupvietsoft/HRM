@@ -109,7 +109,7 @@ namespace Vs.Category
                 Int16 iKiem = 0;
 
                 iKiem = Convert.ToInt16(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spCheckData", "ID_QH",
-                    (AddEdit ? "-1" : Id.ToString()), "QUAN_HE_GD", "TEN_QH", TEN_QHTextEdit.EditValue.ToString(),
+                    (AddEdit ? "-1" : Id.ToString()), "QUAN_HE_GD", "TEN_QH", TEN_QHTextEdit.Text.ToString(),
                     "", "", "", ""));
                 if (iKiem > 0)
                 {
@@ -123,7 +123,7 @@ namespace Vs.Category
                 if (!string.IsNullOrEmpty(TEN_QH_ATextEdit.Text))
                 {
                     iKiem = Convert.ToInt16(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spCheckData", "ID_QH",
-                        (AddEdit ? "-1" : Id.ToString()), "QUAN_HE_GD", "TEN_QH_A", TEN_QH_ATextEdit.EditValue.ToString(),
+                        (AddEdit ? "-1" : Id.ToString()), "QUAN_HE_GD", "TEN_QH_A", TEN_QH_ATextEdit.Text.ToString(),
                         "", "", "", ""));
                     if (iKiem > 0)
                     {
@@ -137,7 +137,7 @@ namespace Vs.Category
                 if (!string.IsNullOrEmpty(TEN_QH_HTextEdit.Text))
                 {
                     iKiem = Convert.ToInt16(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spCheckData", "ID_QH",
-                        (AddEdit ? "-1" : Id.ToString()), "QUAN_HE_GD", "TEN_QH_H", TEN_QH_HTextEdit.EditValue.ToString(),
+                        (AddEdit ? "-1" : Id.ToString()), "QUAN_HE_GD", "TEN_QH_H", TEN_QH_HTextEdit.Text.ToString(),
                         "", "", "", ""));
                     if (iKiem > 0)
                     {

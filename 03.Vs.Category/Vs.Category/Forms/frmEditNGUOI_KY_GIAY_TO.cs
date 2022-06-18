@@ -146,7 +146,7 @@ namespace Vs.Category
                 Int16 iKiem = 0;
 
                 iKiem = Convert.ToInt16(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spCheckData", "ID_NK",
-                    (AddEdit ? "-1" : Id.ToString()), "NGUOI_KY_GIAY_TO", "HO_TEN", HO_TENTextEdit.EditValue.ToString(),
+                    (AddEdit ? "-1" : Id.ToString()), "NGUOI_KY_GIAY_TO", "HO_TEN", HO_TENTextEdit.Text.ToString(),
                     "", "", "", ""));
                 if (iKiem > 0)
                 {

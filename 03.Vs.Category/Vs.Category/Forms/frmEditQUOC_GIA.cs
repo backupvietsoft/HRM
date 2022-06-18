@@ -123,7 +123,7 @@ namespace Vs.Category
                 string tenSql = "";
                 if (bAddEdit || Ma != MA_QGTextEdit.EditValue.ToString())
                 {
-                    sSql = "SELECT COUNT(*) FROM QUOC_GIA WHERE MA_QG = '" + MA_QGTextEdit.EditValue + "'";
+                    sSql = "SELECT COUNT(*) FROM QUOC_GIA WHERE MA_QG = '" + MA_QGTextEdit.Text + "'";
 
                     if (Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, sSql)) != 0)
                     {
@@ -134,8 +134,8 @@ namespace Vs.Category
                 }
                 if (bAddEdit || Ten != TEN_QGTextEdit.EditValue.ToString())
                 {
-                    tenSql = "SELECT TEN_QG FROM QUOC_GIA WHERE TEN_QG = '" + TEN_QGTextEdit.EditValue + "'";
-                    if (Convert.ToString(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, tenSql)) == Convert.ToString((TEN_QGTextEdit.EditValue)))
+                    tenSql = "SELECT TEN_QG FROM QUOC_GIA WHERE TEN_QG = '" + TEN_QGTextEdit.Text + "'";
+                    if (Convert.ToString(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, tenSql)) == Convert.ToString((TEN_QGTextEdit.Text)))
                     {
                         XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_TenTrung"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"));
                         return true;

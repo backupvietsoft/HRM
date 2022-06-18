@@ -116,7 +116,7 @@ namespace Vs.Category
                 Int16 iKiem = 0;
 
                 iKiem = Convert.ToInt16(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spCheckData", "ID_NHOM",
-                    (AddEdit ? "-1" : Id.ToString()), "NHOM_CHAM_CONG", "TEN_NHOM", TEN_NHOMTextEdit.EditValue.ToString(),
+                    (AddEdit ? "-1" : Id.ToString()), "NHOM_CHAM_CONG", "TEN_NHOM", TEN_NHOMTextEdit.Text.ToString(),
                     "", "", "", ""));
                 if (iKiem > 0)
                 {
@@ -130,7 +130,7 @@ namespace Vs.Category
                 if (!string.IsNullOrEmpty(TEN_NHOM_ATextEdit.Text))
                 {
                     iKiem = Convert.ToInt16(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spCheckData", "ID_NHOM",
-                        (AddEdit ? "-1" : Id.ToString()), "NHOM_CHAM_CONG", "TEN_NHOM_A", TEN_NHOM_ATextEdit.EditValue.ToString(),
+                        (AddEdit ? "-1" : Id.ToString()), "NHOM_CHAM_CONG", "TEN_NHOM_A", TEN_NHOM_ATextEdit.Text.ToString(),
                         "", "", "", ""));
                     if (iKiem > 0)
                     {
@@ -144,7 +144,7 @@ namespace Vs.Category
                 if (!string.IsNullOrEmpty(TEN_NHOM_HTextEdit.Text))
                 {
                     iKiem = Convert.ToInt16(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spCheckData", "ID_NHOM",
-                        (AddEdit ? "-1" : Id.ToString()), "NHOM_CHAM_CONG", "TEN_NHOM_H", TEN_NHOM_HTextEdit.EditValue.ToString(),
+                        (AddEdit ? "-1" : Id.ToString()), "NHOM_CHAM_CONG", "TEN_NHOM_H", TEN_NHOM_HTextEdit.Text.ToString(),
                         "", "", "", ""));
                     if (iKiem > 0)
                     {

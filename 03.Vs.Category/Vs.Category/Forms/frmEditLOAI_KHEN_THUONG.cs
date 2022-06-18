@@ -106,7 +106,7 @@ namespace Vs.Category
                 Int16 iKiem = 0;
 
                 iKiem = Convert.ToInt16(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spCheckData", "ID_LOAI_KT",
-                    (AddEdit ? "-1" : Id.ToString()), "LOAI_KHEN_THUONG", "TEN_LOAI_KT", TEN_LOAI_KTTextEdit.EditValue.ToString(),
+                    (AddEdit ? "-1" : Id.ToString()), "LOAI_KHEN_THUONG", "TEN_LOAI_KT", TEN_LOAI_KTTextEdit.Text.ToString(),
                     "", "", "", ""));
                 if (iKiem > 0)
                 {
@@ -120,7 +120,7 @@ namespace Vs.Category
                 if (!string.IsNullOrEmpty(TEN_LOAI_KT_ATextEdit.Text))
                 {
                     iKiem = Convert.ToInt16(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spCheckData", "ID_LOAI_KT",
-                        (AddEdit ? "-1" : Id.ToString()), "LOAI_KHEN_THUONG", "TEN_LOAI_KT_A", TEN_LOAI_KT_ATextEdit.EditValue.ToString(),
+                        (AddEdit ? "-1" : Id.ToString()), "LOAI_KHEN_THUONG", "TEN_LOAI_KT_A", TEN_LOAI_KT_ATextEdit.Text.ToString(),
                         "", "", "", ""));
                     if (iKiem > 0)
                     {
@@ -134,7 +134,7 @@ namespace Vs.Category
                 if (!string.IsNullOrEmpty(TEN_LOAI_KT_HTextEdit.Text))
                 {
                     iKiem = Convert.ToInt16(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spCheckData", "ID_LOAI_KT",
-                        (AddEdit ? "-1" : Id.ToString()), "LOAI_KHEN_THUONG", "TEN_LOAI_KT_H", TEN_LOAI_KT_HTextEdit.EditValue.ToString(),
+                        (AddEdit ? "-1" : Id.ToString()), "LOAI_KHEN_THUONG", "TEN_LOAI_KT_H", TEN_LOAI_KT_HTextEdit.Text.ToString(),
                         "", "", "", ""));
                     if (iKiem > 0)
                     {

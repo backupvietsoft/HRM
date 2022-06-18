@@ -35,7 +35,7 @@ namespace Vs.HRM
         }
         private void XuLyTab()
         {
-            List = new List<LabelControl>() { labLyLich, labCongTac, labHopDong, labTienLuong, labKhanThuong, labTaiNan, labDanhGia, labBangCap };
+            List = new List<LabelControl>() { labLyLich, labCongTac, labHopDong, labTienLuong, labKhanThuong, labTaiNan, labDanhGia};
             foreach (LabelControl lb in List)
             {
                 lb.Click += Lb_Click;
@@ -173,17 +173,17 @@ namespace Vs.HRM
 
                         break;
                     }
-                case "labBangCap":
-                    {
-                        if (navigationPage8.Controls.Count == 0)
-                        {
-                            ucBangCap ll = new ucBangCap(Commons.Modules.iCongNhan);
-                            ll.Dock = DockStyle.Fill;
-                            navigationPage8.Controls.Add(ll);
-                        }
-                        Selecttab(navigationPage8);
-                        break;
-                    }
+                //case "labBangCap":
+                //    {
+                //        if (navigationPage8.Controls.Count == 0)
+                //        {
+                //            ucBangCap ll = new ucBangCap(Commons.Modules.iCongNhan);
+                //            ll.Dock = DockStyle.Fill;
+                //            navigationPage8.Controls.Add(ll);
+                //        }
+                //        Selecttab(navigationPage8);
+                //        break;
+                //    }
                 default:
                     break;
             }

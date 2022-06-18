@@ -287,7 +287,7 @@ namespace Vs.Category
                 
 
                 iKiem = 0;
-                iKiem = Convert.ToInt16(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spCheckData", "ID_QUAN", (bAddEdit ? "-1" : iId.ToString()), "QUAN", "TEN_QUAN",TEN_QUANTextEdit.EditValue,"","","","").ToString());
+                iKiem = Convert.ToInt16(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spCheckData", "ID_QUAN", (bAddEdit ? "-1" : iId.ToString()), "QUAN", "TEN_QUAN",TEN_QUANTextEdit.Text,"","","","").ToString());
                 if (iKiem > 0)
                 {
                     XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_TenTrung"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"));
@@ -299,7 +299,7 @@ namespace Vs.Category
                 iKiem = 0;
                 if (!string.IsNullOrEmpty(TEN_QUANTextEdit.EditValue.ToString()))
                 {     
-                    iKiem = Convert.ToInt16(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spCheckData", "ID_QUAN", (bAddEdit ? "-1" : iId.ToString()), "QUAN", "TEN_QUAN_A", TEN_QUAN_ATextEdit.EditValue, "", "", "", "").ToString());
+                    iKiem = Convert.ToInt16(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spCheckData", "ID_QUAN", (bAddEdit ? "-1" : iId.ToString()), "QUAN", "TEN_QUAN_A", TEN_QUAN_ATextEdit.Text, "", "", "", "").ToString());
                     if (iKiem > 0)
                     {
                         XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_TenTrung"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"));
@@ -310,7 +310,7 @@ namespace Vs.Category
                 iKiem = 0;
                 if (!string.IsNullOrEmpty(TEN_QUAN_HTextEdit.EditValue.ToString()))
                 {
-                    iKiem = Convert.ToInt16(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spCheckData", "ID_QUAN", (bAddEdit ? "-1" : iId.ToString()), "QUAN", "TEN_QUAN_H", TEN_QUAN_HTextEdit.EditValue, "", "", "", "").ToString());
+                    iKiem = Convert.ToInt16(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spCheckData", "ID_QUAN", (bAddEdit ? "-1" : iId.ToString()), "QUAN", "TEN_QUAN_H", TEN_QUAN_HTextEdit.Text, "", "", "", "").ToString());
                     if (iKiem > 0)
                     {
                         XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_TenTrung"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"));

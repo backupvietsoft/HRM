@@ -200,7 +200,7 @@ namespace Vs.Category
                 string sSql = "";
                 if (AddEdit || MS!= MS_XATextEdit.EditValue.ToString() || TEN != TEN_PXTextEdit.EditValue.ToString())
                 {
-                    sSql = "SELECT COUNT(*) FROM PHUONG_XA WHERE MS_XA = '" + MS_XATextEdit.EditValue + "' AND ID_QUAN = "+ ID_QUANSearchLookUpEdit.EditValue + "";
+                    sSql = "SELECT COUNT(*) FROM PHUONG_XA WHERE MS_XA = '" + MS_XATextEdit.Text + "' AND ID_QUAN = "+ ID_QUANSearchLookUpEdit.EditValue + "";
 
                     if (Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, sSql)) != 0)
                     {
@@ -210,7 +210,7 @@ namespace Vs.Category
                     }
                 }
                 iKiem = Convert.ToInt16(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spCheckData", "ID_PX",
-                    (AddEdit ? "-1" : Id.ToString()), "PHUONG_XA", "TEN_PX", TEN_PXTextEdit.EditValue.ToString(),
+                    (AddEdit ? "-1" : Id.ToString()), "PHUONG_XA", "TEN_PX", TEN_PXTextEdit.Text.ToString(),
                     "", "", "", ""));
                 if (iKiem > 0)
                 {
@@ -224,7 +224,7 @@ namespace Vs.Category
                 if (!string.IsNullOrEmpty(TEN_PX_ATextEdit.Text))
                 {
                     iKiem = Convert.ToInt16(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spCheckData", "ID_PX",
-                        (AddEdit ? "-1" : Id.ToString()), "PHUONG_XA", "TEN_PX_A", TEN_PX_ATextEdit.EditValue.ToString(),
+                        (AddEdit ? "-1" : Id.ToString()), "PHUONG_XA", "TEN_PX_A", TEN_PX_ATextEdit.Text.ToString(),
                         "", "", "", ""));
                     if (iKiem > 0)
                     {
@@ -238,7 +238,7 @@ namespace Vs.Category
                 if (!string.IsNullOrEmpty(TEN_PX_HTextEdit.Text))
                 {
                     iKiem = Convert.ToInt16(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spCheckData", "ID_PX",
-                        (AddEdit ? "-1" : Id.ToString()), "PHUONG_XA", "TEN_PX_H", TEN_PX_HTextEdit.EditValue.ToString(),
+                        (AddEdit ? "-1" : Id.ToString()), "PHUONG_XA", "TEN_PX_H", TEN_PX_HTextEdit.Text.ToString(),
                         "", "", "", ""));
                     if (iKiem > 0)
                     {

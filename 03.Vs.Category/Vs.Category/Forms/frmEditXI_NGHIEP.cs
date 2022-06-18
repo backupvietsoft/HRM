@@ -172,15 +172,15 @@ namespace Vs.Category
                 string tenSql = "";
                 if (bAddEdit || MS != MS_XNTextEdit.EditValue.ToString())
                 {
-                    sSql = "SELECT COUNT(*) FROM XI_NGHIEP WHERE MS_XN = '" + MS_XNTextEdit.EditValue + "'";
-                    tenSql = "SELECT TEN_XN FROM XI_NGHIEP WHERE TEN_XN = N'" + TEN_XNTextEdit.EditValue + "'";
+                    sSql = "SELECT COUNT(*) FROM XI_NGHIEP WHERE MS_XN = '" + MS_XNTextEdit.Text + "'";
+                    tenSql = "SELECT TEN_XN FROM XI_NGHIEP WHERE TEN_XN = N'" + TEN_XNTextEdit.Text + "'";
                     if (Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, sSql)) != 0)
                     {
                         XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_MaSoTrung"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"));
                         MS_XNTextEdit.Focus();
                         return true;
                     }
-                    if (Convert.ToString(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, tenSql)) == Convert.ToString((TEN_XNTextEdit.EditValue)))
+                    if (Convert.ToString(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, tenSql)) == Convert.ToString((TEN_XNTextEdit.Text)))
                     {
                         XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_TenTrung"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"));
                         TEN_XNTextEdit.Focus();

@@ -152,15 +152,15 @@ namespace Vs.Category
                 string tenSql = "";
                 if (bAddEditDV || MS != MSDVTextEdit.EditValue.ToString())
                 {
-                    sSql = "SELECT COUNT(*) FROM DON_VI WHERE MSDV = '" + MSDVTextEdit.EditValue + "'";
-                    tenSql = "SELECT TEN_DV FROM DON_VI WHERE TEN_DV = N'" + TEN_DON_VITextEdit.EditValue + "'";
+                    sSql = "SELECT COUNT(*) FROM DON_VI WHERE MSDV = '" + MSDVTextEdit.Text + "'";
+                    tenSql = "SELECT TEN_DV FROM DON_VI WHERE TEN_DV = N'" + TEN_DON_VITextEdit.Text + "'";
                     if (Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, sSql)) != 0)
                     {
                         XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_MaSoTrung"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"));
                         MSDVTextEdit.Focus();
                         return true;
                     }
-                    if (Convert.ToString(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, tenSql)) == Convert.ToString((TEN_DON_VITextEdit.EditValue)))
+                    if (Convert.ToString(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, tenSql)) == Convert.ToString((TEN_DON_VITextEdit.Text)))
                     {
                         XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_TenTrung"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"));
                         TEN_DON_VITextEdit.Focus();

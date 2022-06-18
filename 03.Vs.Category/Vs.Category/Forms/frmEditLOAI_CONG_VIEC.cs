@@ -146,7 +146,7 @@ namespace Vs.Category
                 Int16 iKiem = 0;
 
                 iKiem = Convert.ToInt16(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spCheckData", "ID_LCV",
-                    (AddEdit ? "-1" : Id.ToString()), "LOAI_CONG_VIEC", "TEN_LCV", TEN_LCVTextEdit.EditValue.ToString(),
+                    (AddEdit ? "-1" : Id.ToString()), "LOAI_CONG_VIEC", "TEN_LCV", TEN_LCVTextEdit.Text.ToString(),
                     "", "", "", ""));
                 if (iKiem > 0)
                 {
@@ -160,7 +160,7 @@ namespace Vs.Category
                 if (!string.IsNullOrEmpty(TEN_LCV_ATextEdit.Text))
                 {
                     iKiem = Convert.ToInt16(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spCheckData", "ID_LCV",
-                        (AddEdit ? "-1" : Id.ToString()), "LOAI_CONG_VIEC", "TEN_LCV_A", TEN_LCV_ATextEdit.EditValue.ToString(),
+                        (AddEdit ? "-1" : Id.ToString()), "LOAI_CONG_VIEC", "TEN_LCV_A", TEN_LCV_ATextEdit.Text.ToString(),
                         "", "", "", ""));
                     if (iKiem > 0)
                     {
@@ -174,7 +174,7 @@ namespace Vs.Category
                 if (!string.IsNullOrEmpty(TEN_LCV_HTextEdit.Text))
                 {
                     iKiem = Convert.ToInt16(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spCheckData", "ID_LCV",
-                        (AddEdit ? "-1" : Id.ToString()), "LOAI_CONG_VIEC", "TEN_LCV_H", TEN_LCV_HTextEdit.EditValue.ToString(),
+                        (AddEdit ? "-1" : Id.ToString()), "LOAI_CONG_VIEC", "TEN_LCV_H", TEN_LCV_HTextEdit.Text.ToString(),
                         "", "", "", ""));
                     if (iKiem > 0)
                     {

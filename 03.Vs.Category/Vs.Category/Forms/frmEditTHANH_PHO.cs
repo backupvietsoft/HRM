@@ -124,7 +124,7 @@ namespace Vs.Category
                 Int16 iKiem = 0;
 
                 iKiem = Convert.ToInt16(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spCheckData", "ID_TP",
-                    (AddEdit ? "-1" : Id.ToString()), "THANH_PHO", "TEN_TP", TEN_TPTextEdit.EditValue.ToString(),
+                    (AddEdit ? "-1" : Id.ToString()), "THANH_PHO", "TEN_TP", TEN_TPTextEdit.Text.ToString(),
                     "", "", "", ""));
                 if (iKiem > 0)
                 {
@@ -137,7 +137,7 @@ namespace Vs.Category
                 string sSql = "";
                 if (AddEdit || Ma!= MS_TINHTextEdit.EditValue.ToString())
                 {
-                    sSql = "SELECT COUNT(*) FROM THANH_PHO WHERE MS_TINH = '" + MS_TINHTextEdit.EditValue + "'";
+                    sSql = "SELECT COUNT(*) FROM THANH_PHO WHERE MS_TINH = '" + MS_TINHTextEdit.Text + "'";
 
                     if (Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, sSql)) != 0)
                     {
@@ -148,7 +148,7 @@ namespace Vs.Category
                 if (!string.IsNullOrEmpty(TEN_TP_ATextEdit.Text))
                 {
                     iKiem = Convert.ToInt16(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spCheckData", "ID_TP",
-                        (AddEdit ? "-1" : Id.ToString()), "THANH_PHO", "TEN_TP_A", TEN_TP_ATextEdit.EditValue.ToString(),
+                        (AddEdit ? "-1" : Id.ToString()), "THANH_PHO", "TEN_TP_A", TEN_TP_ATextEdit.Text.ToString(),
                         "", "", "", ""));
                     if (iKiem > 0)
                     {
@@ -162,7 +162,7 @@ namespace Vs.Category
                 if (!string.IsNullOrEmpty(TEN_TP_HTextEdit.Text))
                 {
                     iKiem = Convert.ToInt16(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spCheckData", "ID_TP",
-                        (AddEdit ? "-1" : Id.ToString()), "THANH_PHO", "TEN_TP_H", TEN_TP_HTextEdit.EditValue.ToString(),
+                        (AddEdit ? "-1" : Id.ToString()), "THANH_PHO", "TEN_TP_H", TEN_TP_HTextEdit.Text.ToString(),
                         "", "", "", ""));
                     if (iKiem > 0)
                     {

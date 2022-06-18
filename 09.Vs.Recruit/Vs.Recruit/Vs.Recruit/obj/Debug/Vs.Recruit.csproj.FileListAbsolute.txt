@@ -276,7 +276,6 @@ G:\2022\02.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\Vs.Recruit.pdb
 G:\2022\02.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\Commons.dll
 G:\2022\02.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\Commons.Fakes.dll
 G:\2022\02.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\Microsoft.QualityTools.Testing.Fakes.dll
-G:\2022\02.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\Vs.HRM.exe
 G:\2022\02.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\VS.Report.dll
 G:\2022\02.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\EPPlus.dll
 G:\2022\02.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\NPOI.dll
@@ -287,7 +286,6 @@ G:\2022\02.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\NPOI.OpenXml4Net.dl
 G:\2022\02.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\Commons.pdb
 G:\2022\02.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\Commons.dll.config
 G:\2022\02.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\Vs.HRM.pdb
-G:\2022\02.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\Vs.HRM.exe.config
 G:\2022\02.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\VS.Report.pdb
 G:\2022\02.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\VS.Report.dll.config
 G:\2022\02.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\Commons.Fakes.xml
@@ -325,7 +323,6 @@ G:\2022\02.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.Recruit.csproj.C
 G:\2022\02.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.Recruit.csproj.CopyComplete
 G:\2022\02.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.Recruit.dll
 G:\2022\02.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.Recruit.pdb
-G:\2022\02.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\ICSharpCode.SharpZipLib.dll
 F:\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\Template\TemplateGiamLaoDong.xlsx
 F:\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\Template\TemplateTaiNanLaoDong.xlsx
 F:\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\Template\TemplateTangLaoDong.xlsx
@@ -443,3 +440,6 @@ H:\Lamviec\Lamviec\HRM\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.R
 H:\Lamviec\Lamviec\HRM\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.Recruit.csproj.CopyComplete
 H:\Lamviec\Lamviec\HRM\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.Recruit.dll
 H:\Lamviec\Lamviec\HRM\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.Recruit.pdb
+G:\2022\02.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\Microsoft.ApplicationBlocks.Data.dll
+G:\2022\02.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\Vs.HRM.dll
+G:\2022\02.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\Vs.HRM.dll.config

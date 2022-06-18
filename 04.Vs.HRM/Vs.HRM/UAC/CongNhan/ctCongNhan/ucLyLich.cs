@@ -33,7 +33,6 @@ namespace Vs.HRM
             Commons.OSystems.SetDateEditFormat(NGAY_HOC_VIECDateEdit);
             Commons.OSystems.SetDateEditFormat(NGAY_THU_VIECDateEdit);
             Commons.OSystems.SetDateEditFormat(NGAY_VAO_LAMDateEdit);
-            Commons.OSystems.SetDateEditFormat(NGAY_NGHI_VIECDateEdit);
 
             Commons.OSystems.SetDateEditFormat(NGAY_CAPDateEdit);
             Commons.OSystems.SetDateEditFormat(NGAY_CAP_GPDateEdit);
@@ -78,8 +77,8 @@ namespace Vs.HRM
             //ID_LCVLookUpEdit
             Commons.Modules.ObjSystems.MLoadLookUpEditN(ID_LCVLookUpEdit, Commons.Modules.ObjSystems.DataLoaiCV(false), "ID_LCV", "TEN_LCV", "TEN_LCV", "", true);
 
-            //ID_LHDLDLookUpEdit
-            Commons.Modules.ObjSystems.MLoadLookUpEditN(ID_LHDLDLookUpEdit, Commons.Modules.ObjSystems.DataLoaiHDLD(false), "ID_LHDLD", "TEN_LHDLD", "TEN_LHDLD", "", true);
+            ////ID_LHDLDLookUpEdit
+            //Commons.Modules.ObjSystems.MLoadLookUpEditN(ID_LHDLDLookUpEdit, Commons.Modules.ObjSystems.DataLoaiHDLD(false), "ID_LHDLD", "TEN_LHDLD", "TEN_LHDLD", "", true);
 
             //ID_TT_HDLookUpEdit
             Commons.Modules.ObjSystems.MLoadLookUpEditN(ID_TT_HDLookUpEdit, Commons.Modules.ObjSystems.DataTinHTrangHD(false), "ID_TT_HD", "TEN_TT_HD", "TEN_TT_HD", "", true);
@@ -87,8 +86,8 @@ namespace Vs.HRM
             //ID_TT_HTLookUpEdit
             Commons.Modules.ObjSystems.MLoadLookUpEditN(ID_TT_HTLookUpEdit, Commons.Modules.ObjSystems.DataTinHTrangHT(false), "ID_TT_HT", "TEN_TT_HT", "TEN_TT_HT", "", true);
 
-            //ID_LD_TVLookUpEdit
-            Commons.Modules.ObjSystems.MLoadLookUpEditN(ID_LD_TVLookUpEdit, Commons.Modules.ObjSystems.DataLyDoThoiViec(), "ID_LD_TV", "TEN_LD_TV", "TEN_LD_TV", "");
+            ////ID_LD_TVLookUpEdit
+            //Commons.Modules.ObjSystems.MLoadLookUpEditN(ID_LD_TVLookUpEdit, Commons.Modules.ObjSystems.DataLyDoThoiViec(), "ID_LD_TV", "TEN_LD_TV", "TEN_LD_TV", "");
 
             //ID_DTLookUpEdit
             Commons.Modules.ObjSystems.MLoadLookUpEditN(ID_DTLookUpEdit, Commons.Modules.ObjSystems.DataDanToc(false), "ID_DT", "TEN_DT", "TEN_DT", "");
@@ -137,6 +136,7 @@ namespace Vs.HRM
             if (Commons.Modules.iCongNhan == -1)
                 cothem = true;
             BinDingData(cothem);
+            LoadgrdBangCap();
             Commons.Modules.sLoad = "";
         }
 
@@ -282,10 +282,9 @@ namespace Vs.HRM
                         cothem = true;
                         idcn = -1;
                         LoadCmbLoc(1);
-
-
                         BinDingData(true);
                         enableButon(false);
+                        Commons.Modules.ObjSystems.AddnewRow(grvBangCapCN, true);
                         break;
                     }
                 case "sua":
@@ -298,8 +297,8 @@ namespace Vs.HRM
                         cothem = false;
                         idcn = Commons.Modules.iCongNhan;
                         LoadCmbLoc(2);
-
                         enableButon(false);
+                        Commons.Modules.ObjSystems.AddnewRow(grvBangCapCN, true);
                         break;
                     }
 
@@ -327,6 +326,7 @@ namespace Vs.HRM
                             BinDingData(false);
                             enableButon(true);
                         }
+                        Commons.Modules.ObjSystems.DeleteAddRow(grvBangCapCN);
                         break;
                     }
                 case "khongluu":
@@ -336,6 +336,7 @@ namespace Vs.HRM
                         BinDingData(false);
                         enableButon(true);
                         dxValidationProvider1.Validate();
+                        Commons.Modules.ObjSystems.DeleteAddRow(grvBangCapCN);
                         Commons.Modules.sLoad = "";
                         break;
                     }
@@ -535,7 +536,7 @@ namespace Vs.HRM
                 NGAY_VAO_LAMDateEdit.EditValue = null;
                 ID_TT_HDLookUpEdit.EditValue = null;
                 ID_TT_HTLookUpEdit.EditValue = null;
-                ID_LHDLDLookUpEdit.EditValue = null;
+                ID_LHDLDLookUpEdit.EditValue = "";
                 HINH_THUC_TUYENTextEdit.EditValue = "";
                 LD_TINHCheckEdit.EditValue = false;
                 LAO_DONG_CNCheckEdit.EditValue = false;
@@ -558,8 +559,8 @@ namespace Vs.HRM
                 DT_DI_DONGTextEdit.EditValue = "";
                 DT_NHATextEdit.EditValue = "";
                 DT_NGUOI_THANTextEdit.EditValue = "";
-                NGAY_NGHI_VIECDateEdit.EditValue = null;
-                ID_LD_TVLookUpEdit.EditValue = null;
+                NGAY_NGHI_VIECDateEdit.EditValue = "";
+                ID_LD_TVLookUpEdit.EditValue = "";
 
                 NOI_SINHTextEdit.EditValue = "";
                 NGUYEN_QUANTextEdit.EditValue = "";
@@ -596,7 +597,6 @@ namespace Vs.HRM
             else
             {
                 //lấy danh sách chi tiết công nhân 
-
                 dt = new DataTable();
                 dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetListCTCongNhan", Commons.Modules.iCongNhan, Commons.Modules.UserName, Commons.Modules.TypeLanguage));
                 if (dt.Rows.Count == 0) return;
@@ -692,6 +692,29 @@ namespace Vs.HRM
                 catch (Exception)
                 {
                 }
+
+                //load lưới bằng cấp
+            }
+        }
+        private void LoadgrdBangCap()
+        {
+            DataTable dt = new DataTable();
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetListBangCap", idcn, Commons.Modules.UserName, Commons.Modules.TypeLanguage));
+            if (grdBangCapCN.DataSource == null)
+            {
+                Commons.Modules.ObjSystems.MLoadXtraGrid(grdBangCapCN, grvBangCapCN, dt, false,false, true, true, true, this.Name);
+                Commons.Modules.ObjSystems.AddComboAnID("ID_LOAI_TD", "TEN_LOAI_TD",grvBangCapCN, Commons.Modules.ObjSystems.DataLoaiTrinhDo(false));
+                grvBangCapCN.Columns["TEN_BANG"].Visible = false;
+                grvBangCapCN.Columns["XEP_LOAI"].Visible = false;
+                grvBangCapCN.Columns["NGUOI_KY"].Visible = false;
+                grvBangCapCN.Columns["NOI_CAP"].Visible = false;
+                grvBangCapCN.Columns["GHI_CHU"].Visible = false;
+                grvBangCapCN.Columns["NGAY_KY"].Visible = false;
+                grvBangCapCN.Columns["ID_BC"].Visible = false;
+            }
+            else
+            {
+                grdBangCapCN.DataSource = dt;
             }
         }
 
@@ -825,6 +848,9 @@ namespace Vs.HRM
             //test();
             try
             {
+                //tạo bảng tạm bằng cấp
+
+                Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, "sbtBC" + Commons.Modules.UserName,Commons.Modules.ObjSystems.ConvertDatatable(grvBangCapCN),"");
                 Commons.Modules.iCongNhan = Convert.ToInt64(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spUpdateCongNhan",
                 Commons.Modules.iCongNhan,
                 imgToByteConverter(HINH_CNPictureEdit.Image),
@@ -896,7 +922,7 @@ namespace Vs.HRM
                 NGAY_HH_GPDateEdit.Text.ToString() == "" ? DBNull.Value : NGAY_HH_GPDateEdit.EditValue,
                 LD_GIAM_LDNNLookUpEdit.Text.ToString() == "" ? LD_GIAM_LDNNLookUpEdit.EditValue = null : LD_GIAM_LDNNLookUpEdit.EditValue,
                 cboID_KV.Text.ToString() == "" ? cboID_KV.EditValue = null : cboID_KV.EditValue,
-                cothem));
+                cothem, "sbtBC" + Commons.Modules.UserName));
                 return true;
 
             }

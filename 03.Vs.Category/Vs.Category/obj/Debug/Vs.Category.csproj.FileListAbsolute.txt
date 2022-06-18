@@ -870,7 +870,6 @@ G:\2022\02.HRM\03.Vs.Category\Vs.Category\obj\Debug\Vs.Category.csproj.CoreCompi
 G:\2022\02.HRM\03.Vs.Category\Vs.Category\obj\Debug\Vs.Category.csproj.CopyComplete
 G:\2022\02.HRM\03.Vs.Category\Vs.Category\obj\Debug\Vs.Category.dll
 G:\2022\02.HRM\03.Vs.Category\Vs.Category\obj\Debug\Vs.Category.pdb
-G:\2022\02.HRM\03.Vs.Category\Vs.Category\bin\Debug\ICSharpCode.SharpZipLib.dll
 F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\Vs.Category.dll.config
 F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\Vs.Category.dll
 F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\Vs.Category.pdb
@@ -1372,3 +1371,4 @@ H:\Lamviec\Lamviec\HRM\01.HRM\03.Vs.Category\Vs.Category\obj\Debug\Vs.Category.c
 H:\Lamviec\Lamviec\HRM\01.HRM\03.Vs.Category\Vs.Category\obj\Debug\Vs.Category.csproj.CopyComplete
 H:\Lamviec\Lamviec\HRM\01.HRM\03.Vs.Category\Vs.Category\obj\Debug\Vs.Category.dll
 H:\Lamviec\Lamviec\HRM\01.HRM\03.Vs.Category\Vs.Category\obj\Debug\Vs.Category.pdb
+G:\2022\02.HRM\03.Vs.Category\Vs.Category\obj\Debug\Vs.Category.frmEditKHU_VUC.resources

@@ -1147,7 +1147,6 @@ G:\2022\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\DevExpress.XtraVerticalGrid.
 G:\2022\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Microsoft.ApplicationBlocks.Data.dll
 G:\2022\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Newtonsoft.Json.dll
 G:\2022\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Vs.Category.dll
-G:\2022\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Vs.HRM.exe
 G:\2022\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Vs.Payroll.dll
 G:\2022\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Vs.Recruit.dll
 G:\2022\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\VS.Report.dll
@@ -1165,7 +1164,6 @@ G:\2022\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Commons.dll.config
 G:\2022\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Vs.Category.pdb
 G:\2022\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Vs.Category.dll.config
 G:\2022\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Vs.HRM.pdb
-G:\2022\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Vs.HRM.exe.config
 G:\2022\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\VS.Report.pdb
 G:\2022\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\VS.Report.dll.config
 G:\2022\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Vs.TimeAttendance.pdb
@@ -2029,3 +2027,8 @@ H:\Lamviec\Lamviec\HRM\01.HRM\01.VietSoftHRM\VietSoftHRM\obj\Debug\VietSoftHRM.c
 H:\Lamviec\Lamviec\HRM\01.HRM\01.VietSoftHRM\VietSoftHRM\obj\Debug\VietSoftHRM.csproj.CopyComplete
 H:\Lamviec\Lamviec\HRM\01.HRM\01.VietSoftHRM\VietSoftHRM\obj\Debug\VietSoftHRM.exe
 H:\Lamviec\Lamviec\HRM\01.HRM\01.VietSoftHRM\VietSoftHRM\obj\Debug\VietSoftHRM.pdb
+G:\2022\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Vs.HRM.dll
+G:\2022\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Microsoft.mshtml.dll
+G:\2022\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Vs.HRM.dll.config
+G:\2022\02.HRM\01.VietSoftHRM\VietSoftHRM\obj\Debug\VietSoftHRM.frmImportHinhCN.resources
+G:\2022\02.HRM\01.VietSoftHRM\VietSoftHRM\obj\Debug\VietSoftHRM.frmThongTinChung.resources

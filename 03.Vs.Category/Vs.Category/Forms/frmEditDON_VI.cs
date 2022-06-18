@@ -52,10 +52,7 @@ namespace Vs.Category
                 ItemForMS_BHXH.Control.Text = dtTmp.Rows[0]["MS_BHXH"].ToString();
                 ItemForSO_TAI_KHOAN.Control.Text = dtTmp.Rows[0]["SO_TAI_KHOAN"].ToString();
                 ItemForTEN_NGAN_HANG.Control.Text = dtTmp.Rows[0]["TEN_NGAN_HANG"].ToString();
-                ItemForKY_HIEU.Control.Text = dtTmp.Rows[0]["KY_HIEU"].ToString();
                 ItemForNGUOI_DAI_DIEN.Control.Text = dtTmp.Rows[0]["NGUOI_DAI_DIEN"].ToString();
-                ItemForCHUC_VU.Control.Text = dtTmp.Rows[0]["CHUC_VU"].ToString();
-                ItemForSO_HS.Control.Text = dtTmp.Rows[0]["SO_HS"].ToString();
                 ItemForSTT_DV.Control.Text = dtTmp.Rows[0]["STT_DV"].ToString();
                if (bAddEditDV)
                 {
@@ -91,10 +88,7 @@ namespace Vs.Category
                 ItemForMS_BHXH.Control.Text = String.Empty;
                 ItemForSO_TAI_KHOAN.Control.Text = String.Empty;
                 ItemForTEN_NGAN_HANG.Control.Text = String.Empty;
-                ItemForKY_HIEU.Control.Text = String.Empty;
                 ItemForNGUOI_DAI_DIEN.Control.Text = String.Empty;
-                ItemForCHUC_VU.Control.Text = String.Empty;
-                ItemForSO_HS.Control.Text = String.Empty;
                 ItemForSTT_DV.Control.Text = String.Empty;
                 MSDVTextEdit.Focus();
 
@@ -121,8 +115,8 @@ namespace Vs.Category
                                     ItemForTEN_DON_VI.Control.Text, ItemForTEN_DON_VI_A.Control.Text, ItemForTEN_DON_VI_H.Control.Text, ItemForTEN_NGAN.Control.Text, 
                                     ItemForDIA_CHI.Control.Text, Convert.ToBoolean(MAC_DINHCheckEdit.EditValue), ItemForCHU_QUAN.Control.Text, ItemForDIEN_THOAI.Control.Text, 
                                     ItemForFAX.Control.Text, ItemForMS_BHYT.Control.Text, ItemForMS_BHXH.Control.Text, ItemForSO_TAI_KHOAN.Control.Text, 
-                                    ItemForTEN_NGAN_HANG.Control.Text, ItemForKY_HIEU.Control.Text, ItemForNGUOI_DAI_DIEN.Control.Text, ItemForCHUC_VU.Control.Text, 
-                                    ItemForSO_HS.Control.Text, ItemForSTT_DV.Control.Text).ToString();
+                                    ItemForTEN_NGAN_HANG.Control.Text,  ItemForNGUOI_DAI_DIEN.Control.Text, 
+                                     ItemForSTT_DV.Control.Text == "" ? ItemForSTT_DV.Control.Text = null : ItemForSTT_DV.Control.Text).ToString();
 
                             if (bAddEditDV)
                             {

@@ -64,7 +64,6 @@ namespace Vs.Payroll
                             cmd.Parameters.Add("@ID_NHH", SqlDbType.Int).Value = cboID_NHH.EditValue;
                             cmd.Parameters.Add("@ID_LHH", SqlDbType.Int).Value = cboID_LHH.EditValue;
                             cmd.Parameters.Add("@ID_DT_MH", SqlDbType.BigInt).Value = cboID_DT.EditValue;
-                            cmd.Parameters.Add("@INACTIVE", SqlDbType.Bit).Value = chkINACTIVE.EditValue;
                             cmd.Parameters.Add("@MO_TA", SqlDbType.NVarChar).Value = txtMOTA.Text;
                             cmd.CommandType = CommandType.StoredProcedure;
                             Commons.Modules.sId = Convert.ToString(cmd.ExecuteScalar());
@@ -111,7 +110,6 @@ namespace Vs.Payroll
                 cboID_NHH.EditValue = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT T2.ID_NHH FROM HANG_HOA T1, NHOM_HANG_HOA T2 WHERE " + Id + " = T1.ID_HH AND T1.ID_NHH=T2.ID_NHH"));
                 cboID_LHH.EditValue = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT T2.ID_LHH FROM HANG_HOA T1, LOAI_HANG_HOA T2 WHERE " + Id + " = T1.ID_HH AND T1.ID_LHH=T2.ID_LHH"));
                 cboID_DT.EditValue = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT T2.ID_DT FROM HANG_HOA T1, DOI_TAC T2 WHERE " + Id + " = T1.ID_HH AND T1.ID_DT_MH=T2.ID_DT"));
-                chkINACTIVE.Checked = bool.Parse(dtTmp.Rows[0]["INACTIVE"].ToString());
                 txtMOTA.EditValue = dtTmp.Rows[0]["MOTA"].ToString();
             }
             catch (Exception EX)
@@ -156,7 +154,6 @@ namespace Vs.Payroll
                 txtMS_HIEN_THI.EditValue = String.Empty;
                 txtTEN_HH.EditValue = String.Empty;
                 txtTEN_HH_A.EditValue = String.Empty;
-                chkINACTIVE.Checked = false;
                 cboID_LHH.EditValue = String.Empty;
                 cboID_DT.EditValue = String.Empty;
                 txtMOTA.EditValue = String.Empty;

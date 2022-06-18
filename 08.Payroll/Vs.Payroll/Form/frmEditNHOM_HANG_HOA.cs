@@ -44,7 +44,7 @@ namespace Vs.Payroll
                             if (bKiemTrung()) return;
 
 
-                            Commons.Modules.sId = Convert.ToString(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spUpdateNHOM_HANG_HOA", (AddEdit ? -1 : Id), txtTEN_NHH.EditValue.ToString(), txtTEN_NHH_A.EditValue.ToString(), txtTEN_NHH_H.EditValue.ToString(), txtTHU_TU.EditValue, txtNOTE.EditValue.ToString()));
+                            Commons.Modules.sId = Convert.ToString(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spUpdateNHOM_HANG_HOA", (AddEdit ? -1 : Id), txtTEN_NHH.EditValue.ToString(), txtTEN_NHH_A.EditValue.ToString(), txtTEN_NHH_H.EditValue.ToString(), txtTHU_TU.EditValue == "" ? txtTHU_TU.EditValue = null : txtTHU_TU.EditValue, txtNOTE.EditValue.ToString()));
                             if (AddEdit)
                             {
                                 if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_ThemThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo) == DialogResult.Yes)

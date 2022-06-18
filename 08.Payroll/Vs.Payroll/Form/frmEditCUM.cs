@@ -88,7 +88,7 @@ namespace Vs.Payroll
                             cmd.Parameters.Add("@TEN_CUM", SqlDbType.NVarChar).Value = TEN_CUMTextEdit.Text;
                             cmd.Parameters.Add("@TEN_CUM_A", SqlDbType.NVarChar).Value = TEN_CUM_ATextEdit.Text;
                             cmd.Parameters.Add("@TEN_CUM_H", SqlDbType.NVarChar).Value = TEN_CUM_HTextEdit.Text;
-                            cmd.Parameters.Add("@STT", SqlDbType.SmallInt).Value = STT_CUMTextEdit.Text==""? 1: STT_CUMTextEdit.EditValue;
+                            cmd.Parameters.Add("@STT", SqlDbType.SmallInt).Value = STT_CUMTextEdit.Text==""? STT_CUMTextEdit.EditValue = null : STT_CUMTextEdit.EditValue;
                             cmd.Parameters.Add("@ID_LSP", SqlDbType.Int).Value =TEN_LOAI_SAN_PHAMLookUpEdit.EditValue;
                             cmd.Parameters.Add("@LOAI_CUM", SqlDbType.NVarChar).Value = LOAI_CUMTextEdit.Text;
 

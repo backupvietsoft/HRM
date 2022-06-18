@@ -38,7 +38,7 @@ namespace Vs.Category
         {
             try
             {
-                string sSql = "SELECT ID_NK, HO_TEN, CHUC_VU, CHUC_VU_A, QUOC_TICH, NGAY_SINH, " +
+                string sSql = "SELECT ID_NK, HO_TEN, CHUC_VU, CHUC_VU_A, CHUC_VU_H, QUOC_TICH, NGAY_SINH, " +
                     "SO_CMND, CAP_NGAY, NOI_CAP, DIA_CHI, STT " +
                     "FROM NGUOI_KY_GIAY_TO WHERE ID_NK = " + Id.ToString();
                 DataTable dtTmp = new DataTable();
@@ -46,6 +46,7 @@ namespace Vs.Category
                 HO_TENTextEdit.EditValue = dtTmp.Rows[0]["HO_TEN"].ToString();
                 CHUC_VUTextEdit.EditValue = dtTmp.Rows[0]["CHUC_VU"].ToString();
                 CHUC_VU_ATextEdit.EditValue = dtTmp.Rows[0]["CHUC_VU_A"].ToString();
+                txtCHUC_VU_H.EditValue = dtTmp.Rows[0]["CHUC_VU_H"].ToString();
                 QUOC_TICHTextEdit.EditValue = dtTmp.Rows[0]["QUOC_TICH"].ToString();
     
                 if (string.IsNullOrEmpty(dtTmp.Rows[0]["NGAY_SINH"].ToString()))
@@ -69,7 +70,6 @@ namespace Vs.Category
                 }
                 NOI_CAPTextEdit.EditValue = dtTmp.Rows[0]["NOI_CAP"].ToString();
                 DIA_CHITextEdit.EditValue = dtTmp.Rows[0]["DIA_CHI"].ToString();
-                txtSTT.EditValue = Convert.ToInt32(dtTmp.Rows[0]["STT"]);
             }
             catch 
             {
@@ -84,13 +84,13 @@ namespace Vs.Category
                 HO_TENTextEdit.EditValue = String.Empty;
                 CHUC_VUTextEdit.EditValue = String.Empty;
                 CHUC_VU_ATextEdit.EditValue = String.Empty;
+                txtCHUC_VU_H.EditValue = String.Empty;
                 QUOC_TICHTextEdit.EditValue = String.Empty;
                 NGAY_SINHDateEdit.EditValue = String.Empty;
                 SO_CMNDTextEdit.EditValue = String.Empty;
                 CAP_NGAYDateEdit.EditValue = String.Empty;
                 NOI_CAPTextEdit.EditValue = String.Empty;
                 DIA_CHITextEdit.EditValue = String.Empty;
-                txtSTT.EditValue = 1;
                 HO_TENTextEdit.Focus();
             }
             catch { }
@@ -109,10 +109,10 @@ namespace Vs.Category
                             if (!dxValidationProvider1.Validate()) return;
                             if (bKiemTrung()) return;
                             Commons.Modules.sId = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spUpdateNGUOI_KY_GIAY_TO", (AddEdit ? -1 : Id),
-                                HO_TENTextEdit.EditValue, CHUC_VUTextEdit.EditValue, CHUC_VU_ATextEdit.EditValue,
+                                HO_TENTextEdit.EditValue, CHUC_VUTextEdit.EditValue, CHUC_VU_ATextEdit.EditValue, txtCHUC_VU_H.EditValue,
                                 QUOC_TICHTextEdit.EditValue, NGAY_SINHDateEdit.Text == "" ? null : NGAY_SINHDateEdit.EditValue,
                                 SO_CMNDTextEdit.EditValue, CAP_NGAYDateEdit.Text == "" ? null : CAP_NGAYDateEdit.EditValue, NOI_CAPTextEdit.EditValue, 
-                                DIA_CHITextEdit.EditValue, (txtSTT.EditValue == null) ? 0 : txtSTT.EditValue).ToString();
+                                DIA_CHITextEdit.EditValue).ToString();
                             if (AddEdit)
                             {
                                 if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_ThemThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo) == DialogResult.Yes)

@@ -94,7 +94,17 @@ namespace Commons
                 string strSQL = "SELECT KY_HIEU FROM dbo.DON_VI WHERE ID_DV = " + Convert.ToInt64(ID_DV) + "";
                 KyHieuDV = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, string.IsNullOrEmpty(strSQL) ? "" : strSQL).ToString();
             }
-            catch { return KyHieuDV = "SB"; }
+            catch
+            {
+                if (Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString() == "MT")
+                {
+                    return KyHieuDV = "MT";
+                }
+                else
+                {
+                    return KyHieuDV = "SB";
+                }
+            }
             return KyHieuDV;
         }
 
@@ -830,6 +840,36 @@ namespace Commons
             }
         }
 
+        private void Grv_DM_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e, GridView grv)
+        {
+            if (e.MenuType != DevExpress.XtraGrid.Views.Grid.GridMenuType.Column)
+                return;
+            try
+            {
+                DevExpress.XtraGrid.Menu.GridViewMenu headerMenu = (DevExpress.XtraGrid.Menu.GridViewMenu)e.Menu;
+
+                if (headerMenu.Items.Count(x => x.Caption.Equals("Reset Grid")) > 0)
+                {
+                    return;
+                }
+                // menu resetgrid
+                DevExpress.Utils.Menu.DXMenuItem menuItem = new DevExpress.Utils.Menu.DXMenuItem("Reset Grid");
+                menuItem.BeginGroup = true;
+                menuItem.Tag = e.Menu;
+                menuItem.Click += delegate (object a, EventArgs b) { MenuItemReset(null, null, grv, Commons.Modules.sPS.Replace("spGetList", "frm")); };
+                headerMenu.Items.Add(menuItem);
+                // menu resetgrid
+                DevExpress.Utils.Menu.DXMenuItem menuSave = new DevExpress.Utils.Menu.DXMenuItem("Save Grid");
+                menuSave.BeginGroup = true;
+                menuSave.Tag = e.Menu;
+                menuSave.Click += delegate (object a, EventArgs b) { MyMenuItemSave(null, null, grv, Commons.Modules.sPS.Replace("spGetList", "frm")); };
+                headerMenu.Items.Add(menuSave);
+            }
+            catch
+            {
+            }
+        }
+
         public void MenuItemReset(System.Object sender, System.EventArgs e, GridView grv, string fName)
         {
             if (Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT COUNT(*) FROM dbo.DINH_DANG_LUOI WHERE TEN_GRID ='" + grv.Name + "' AND TEN_FORM = '" + fName + "' ")) == 1)
@@ -865,37 +905,42 @@ namespace Commons
                 //UPDATE dbo.DINH_DANG_LUOI SET DINH_DANG = '" + text + "' WHERE TEN_GRID = '" + grv.Name + "' AND TEN_FORM = '" + fName + "'
             }
         }
-        public bool MLoadXtraGridDM(DevExpress.XtraGrid.GridControl grd, DevExpress.XtraGrid.Views.Grid.GridView grv, DataTable dtTmp, bool MEditable, bool MPopulateColumns, bool MColumnAutoWidth, bool MBestFitColumns, bool MloadNNgu, string fName)
-        {
-            try
-            {
-                grd.DataSource = dtTmp;
-                grv.OptionsBehavior.Editable = MEditable;
-                grv.OptionsView.RowAutoHeight = true;
+        //public bool MLoadXtraGridDM(DevExpress.XtraGrid.GridControl grd, DevExpress.XtraGrid.Views.Grid.GridView grv, DataTable dtTmp, bool MEditable, bool MPopulateColumns, bool MColumnAutoWidth, bool MBestFitColumns, bool MloadNNgu, string fName)
+        //{
+        //    try
+        //    {
+        //        grd.DataSource = dtTmp;
+        //        grv.OptionsBehavior.Editable = MEditable;
+        //        grv.OptionsView.RowAutoHeight = true;
 
-                if (MPopulateColumns == true)
-                    grv.PopulateColumns();
-                grv.OptionsView.ColumnAutoWidth = MColumnAutoWidth;
-                grv.OptionsView.AllowHtmlDrawHeaders = true;
-                grv.Appearance.HeaderPanel.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-                grv.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.True;
-                grv.DoubleClick += delegate (object a, EventArgs b) { Grv_DoubleClickDM(a, b, fName
-                    ); };
-                if (MBestFitColumns)
-                    grv.BestFitColumns();
+        //        if (MPopulateColumns == true)
+        //            grv.PopulateColumns();
+        //        grv.OptionsView.ColumnAutoWidth = MColumnAutoWidth;
+        //        grv.OptionsView.AllowHtmlDrawHeaders = true;
+        //        grv.Appearance.HeaderPanel.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+        //        grv.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.True;
+        //        if (Commons.Modules.UserName == "admin")
+        //        {
+        //            grv.DoubleClick += delegate (object a, EventArgs b)
+        //            {
+        //                Grv_DoubleClickDM(a, b, fName);
+        //            };
+        //        }
+        //        if (MBestFitColumns)
+        //            grv.BestFitColumns();
 
-                if (MloadNNgu)
-                    MLoadNNXtraGrid(grv, fName);
+        //        if (MloadNNgu)
+        //            MLoadNNXtraGrid(grv, fName);
 
-                grv.OptionsBehavior.FocusLeaveOnTab = true;
-                //Commons.Modules.OXtraGrid.loadXmlgrd(grd);
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-        }
+        //        grv.OptionsBehavior.FocusLeaveOnTab = true;
+        //        //Commons.Modules.OXtraGrid.loadXmlgrd(grd);
+        //        return true;
+        //    }
+        //    catch
+        //    {
+        //        return false;
+        //    }
+        //}
 
         public bool MLoadXtraGrid(DevExpress.XtraGrid.GridControl grd, DevExpress.XtraGrid.Views.Grid.GridView grv, DataTable dtTmp, bool MEditable, bool MPopulateColumns, bool MColumnAutoWidth, bool MBestFitColumns, bool MloadNNgu, string fName)
         {
@@ -911,7 +956,10 @@ namespace Commons
                 grv.OptionsView.AllowHtmlDrawHeaders = true;
                 grv.Appearance.HeaderPanel.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
                 grv.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.True;
-                grv.DoubleClick += delegate (object a, EventArgs b) { Grv_DoubleClick(a, b, fName); };
+                if (Commons.Modules.UserName == "admin")
+                {
+                    grv.DoubleClick += delegate (object a, EventArgs b) { Grv_DoubleClick(a, b, fName); };
+                }
                 if (MBestFitColumns)
                     grv.BestFitColumns();
 
@@ -944,6 +992,66 @@ namespace Commons
 
                 if (MloadNNgu)
                     MLoadNNXtraGrid(grv, fName);
+
+                grv.OptionsBehavior.FocusLeaveOnTab = true;
+                //Commons.Modules.OXtraGrid.loadXmlgrd(grd);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        public bool MLoadXtraGridDM(DevExpress.XtraGrid.GridControl grd, DevExpress.XtraGrid.Views.Grid.GridView grv, DataTable dtTmp, bool MEditable, bool MPopulateColumns, bool MColumnAutoWidth, bool MBestFitColumns, bool MloadNNgu)
+        {
+            try
+            {
+                grd.DataSource = dtTmp;
+                grv.OptionsBehavior.Editable = MEditable;
+                grv.OptionsView.RowAutoHeight = true;
+
+                if (MPopulateColumns == true)
+                    grv.PopulateColumns();
+                grv.OptionsView.ColumnAutoWidth = MColumnAutoWidth;
+                grv.OptionsView.AllowHtmlDrawHeaders = true;
+                grv.Appearance.HeaderPanel.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+                grv.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.True;
+                if (Commons.Modules.UserName == "admin")
+                {
+                    grv.DoubleClick += delegate (object a, EventArgs b) { Grv_DoubleClick(a, b, Commons.Modules.sPS.Replace("spGetList", "frm")); };
+                }
+                if (MBestFitColumns)
+                    grv.BestFitColumns();
+
+                //kiểm tra có trong table định dạng lưới chưa có thì load
+                if (Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT COUNT(*) FROM dbo.DINH_DANG_LUOI WHERE TEN_GRID ='" + grv.Name + "' AND TEN_FORM = '" + Commons.Modules.sPS.Replace("spGetList", "frm") + "' ")) == 1)
+                {
+                    //Co roi thi lay dinh dang dem vao
+                    string text = (Convert.ToString(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT DINH_DANG FROM dbo.DINH_DANG_LUOI WHERE TEN_GRID ='" + grv.Name + "' AND TEN_FORM = '" + Commons.Modules.sPS.Replace("spGetList", "frm") + "'")));
+                    byte[] byteArray = Encoding.ASCII.GetBytes(text);
+                    MemoryStream stream = new MemoryStream(byteArray);
+                    grv.RestoreLayoutFromStream(stream);
+                }
+                else
+                {
+                    //chua co thi luu vao dinh dang voi mac dinh
+                    Stream str = new System.IO.MemoryStream();
+                    grv.SaveLayoutToStream(str);
+                    str.Seek(0, System.IO.SeekOrigin.Begin);
+                    StreamReader reader = new StreamReader(str);
+                    string text = reader.ReadToEnd();
+                    SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "INSERT INTO dbo.DINH_DANG_LUOI(TEN_FORM,TEN_GRID,DINH_DANG,MAC_DINH)VALUES(N'" + Commons.Modules.sPS.Replace("spGetList", "frm") + "',N'" + grv.Name + "',N'" + text + "',N'" + text + "')");
+                }
+
+                if (Commons.Modules.UserName.ToLower() == "admin")
+                {
+                    grv.PopupMenuShowing += delegate (object a, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs b) { Grv_DM_PopupMenuShowing(grv, b, grv); };
+                }
+
+
+
+                if (MloadNNgu)
+                    MLoadNNXtraGrid(grv, Commons.Modules.sPS.Replace("spGetList", "frm"));
 
                 grv.OptionsBehavior.FocusLeaveOnTab = true;
                 //Commons.Modules.OXtraGrid.loadXmlgrd(grd);
@@ -1471,12 +1579,12 @@ namespace Commons
                         LayoutControlItem control1 = (LayoutControlItem)gr;
                         try
                         {
-                            if (control1.Control.GetType().Name.ToLower() == "checkedit")
-                            {
-                                control1.Control.Text = GetNN(dtTmp, control1.Name, frm.Name);
-                                control1.Control.DoubleClick += delegate (object a, EventArgs b) { CheckEdit_DoubleClick(control1.Control, b, frm.Name); };
-                            }
-                            else
+                        //    if (control1.Control.GetType().Name.ToLower() == "checkedit")
+                        //    {
+                        //        control1.Control.Text = GetNN(dtTmp, control1.Name, frm.Name);
+                        //        control1.Control.DoubleClick += delegate (object a, EventArgs b) { CheckEdit_DoubleClick(control1.Control, b, frm.Name); };
+                        //    }
+                        //    else
                             if (control1.Control.GetType().Name.ToLower() == "radiogroup")
                             {
                                 DoiNN(control1.Control, frm, dtTmp);
@@ -1484,7 +1592,7 @@ namespace Commons
 
                             else
                             {
-                                control1.Text = GetNN(dtTmp, control1.Name, frm.Name);
+                                control1.Text = GetNN(dtTmp, control1.Name, frm.Name) +"  ";
                                 control1.DoubleClick += delegate (object a, EventArgs b) { Control1_DoubleClick(control1, b, frm.Name); };
 
                             }
@@ -1656,12 +1764,12 @@ namespace Commons
                         LayoutControlItem control1 = (LayoutControlItem)gr;
                         try
                         {
-                            if (control1.Control.GetType().Name.ToLower() == "checkedit")
-                            {
-                                control1.Control.Text = GetNN(dtTmp, control1.Name, frm.Name);
-                                control1.Control.DoubleClick += delegate (object a, EventArgs b) { CheckEdit_DoubleClick(control1.Control, b, frm.Name); };
-                            }
-                            else
+                            //if (control1.Control.GetType().Name.ToLower() == "checkedit")
+                            //{
+                            //    control1.Control.Text = GetNN(dtTmp, control1.Name, frm.Name);
+                            //    control1.Control.DoubleClick += delegate (object a, EventArgs b) { CheckEdit_DoubleClick(control1.Control, b, frm.Name); };
+                            //}
+                            //else
                             if (control1.Control.GetType().Name.ToLower() == "radiogroup")
                             {
                                 DoiNN(control1.Control, frm, dtTmp);
@@ -1949,14 +2057,7 @@ namespace Commons
                             {
                                 try
                                 {
-                                    //Ctl.MouseDoubleClick -= this.CheckEdit_MouseDoubleClick;
-                                }
-                                catch
-                                {
-                                }
-                                try
-                                {
-                                    //Ctl.MouseDoubleClick += this.CheckEdit_MouseDoubleClick;
+                                    Ctl.MouseDoubleClick += delegate (object a, MouseEventArgs b) { CheckEdit_MouseDoubleClick(Ctl, b, frm.Name); };
                                 }
                                 catch
                                 {
@@ -2454,6 +2555,31 @@ namespace Commons
                     sText = "";
                 }
 
+            }
+        }
+
+        private void CheckEdit_MouseDoubleClick(object sender, MouseEventArgs e, string sName)
+        {
+            if (Form.ModifierKeys == Keys.Control & e.Button == MouseButtons.Left)
+            {
+                CheckEdit Ctl;
+                string sText = "";
+                Ctl = (CheckEdit)sender;
+                try
+                {
+                    sText = XtraInputBox.Show(Ctl.Text, "Sửa ngôn ngữ", "");
+                    if (sText == "")
+                        return;
+                    else
+                        CapNhapNN(sName, Ctl.Name, sText, false);
+                    sText = " SELECT TOP 1 " + (Commons.Modules.TypeLanguage == 0 ? "VIETNAM" : "ENGLISH") + " FROM LANGUAGES WHERE FORM = '" + sName + "' AND KEYWORD = '" + Ctl.Name + "' AND MS_MODULE = 'VS_HRM'";
+                    sText = Convert.ToString(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, sText));
+                    Ctl.Text = sText;
+                }
+                catch
+                {
+                    sText = "";
+                }
             }
         }
 
@@ -4213,7 +4339,7 @@ namespace Commons
                 splashScreenManager1.CloseWaitForm();
 
             }
-            catch 
+            catch
             {
             }
         }

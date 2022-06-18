@@ -170,7 +170,7 @@ namespace Vs.Category
                                     (THUONG_CV_CCTextEdit.EditValue == null) ? 0 : THUONG_CV_CCTextEdit.EditValue,
                                     (PC_SINH_HOATTextEdit.EditValue == null) ? 0 : PC_SINH_HOATTextEdit.EditValue,
                                     (PC_KY_NANGTextEdit.EditValue == null) ? 0 : PC_KY_NANGTextEdit.EditValue,
-                                    (txtSTT.EditValue == null) ? 0 : txtSTT.EditValue
+                                    (txtSTT.EditValue == "") ? txtSTT.EditValue = null : txtSTT.EditValue
                                     ).ToString();
                             }
                             catch 

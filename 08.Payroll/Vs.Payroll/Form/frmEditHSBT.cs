@@ -35,6 +35,8 @@ namespace Vs.Payroll
                 DataTable dtTmp = new DataTable();
                 dtTmp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSql));
                 TEN_BAC_THOTextEdit.EditValue = dtTmp.Rows[0]["TEN_BAC_THO"];
+                TEN_BAC_THO_ATextEdit.EditValue = dtTmp.Rows[0]["TEN_BAC_THO_A"];
+                TEN_BAC_THO_HTextEdit.EditValue = dtTmp.Rows[0]["TEN_BAC_THO_H"];
                 hsbt = dtTmp.Rows[0]["TEN_BAC_THO"].ToString();
                 HSBTTextEdit.EditValue = dtTmp.Rows[0]["HE_SO_BAC_THO"].ToString();
                 txtSTT.EditValue = dtTmp.Rows[0]["STT"].ToString();
@@ -50,6 +52,8 @@ namespace Vs.Payroll
             try
             {
                 TEN_BAC_THOTextEdit.EditValue = String.Empty;
+                TEN_BAC_THO_ATextEdit.EditValue = String.Empty;
+                TEN_BAC_THO_HTextEdit.EditValue = String.Empty;
                 HSBTTextEdit.EditValue = String.Empty;
             }
             catch { }
@@ -85,8 +89,10 @@ namespace Vs.Payroll
                             }
 
                             cmd.Parameters.Add("@TEN_BAC_THO", SqlDbType.NVarChar).Value = TEN_BAC_THOTextEdit.Text;
+                            cmd.Parameters.Add("@TEN_BAC_THO_A", SqlDbType.NVarChar).Value = TEN_BAC_THO_ATextEdit.Text;
+                            cmd.Parameters.Add("@TEN_BAC_THO_H", SqlDbType.NVarChar).Value = TEN_BAC_THO_HTextEdit.Text;
                             cmd.Parameters.Add("@HE_SO_BAC_THO", SqlDbType.Float).Value = (HSBTTextEdit.Text);
-                            cmd.Parameters.Add("@STT", SqlDbType.Int).Value = (txtSTT.EditValue == null) ? 0 : txtSTT.EditValue;
+                            cmd.Parameters.Add("@STT", SqlDbType.Int).Value = (txtSTT.EditValue == "") ? txtSTT.EditValue = null : txtSTT.EditValue;
 
 
                             cmd.CommandType = CommandType.StoredProcedure;
@@ -132,6 +138,30 @@ namespace Vs.Payroll
                     tenSql = "SELECT TEN_BAC_THO FROM HSBT WHERE TEN_BAC_THO = '" + TEN_BAC_THOTextEdit.EditValue + "'";
 
                     if (Convert.ToString(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, tenSql)) == Convert.ToString((TEN_BAC_THOTextEdit.EditValue)))
+                    {
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_MaSoTrung"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"));
+
+                        return true;
+                    }
+                }
+
+                if (AddEdit || hsbt != TEN_BAC_THO_ATextEdit.EditValue.ToString())
+                {
+                    tenSql = "SELECT TEN_BAC_THO_A FROM HSBT WHERE TEN_BAC_THO_A = '" + TEN_BAC_THO_ATextEdit.EditValue + "'";
+
+                    if (Convert.ToString(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, tenSql)) == Convert.ToString((TEN_BAC_THO_ATextEdit.EditValue)))
+                    {
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_MaSoTrung"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"));
+
+                        return true;
+                    }
+                }
+
+                if (AddEdit || hsbt != TEN_BAC_THO_HTextEdit.EditValue.ToString())
+                {
+                    tenSql = "SELECT TEN_BAC_THO_H FROM HSBT WHERE TEN_BAC_THO_H = '" + TEN_BAC_THO_HTextEdit.EditValue + "'";
+
+                    if (Convert.ToString(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, tenSql)) == Convert.ToString((TEN_BAC_THO_HTextEdit.EditValue)))
                     {
                         XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_MaSoTrung"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"));
 

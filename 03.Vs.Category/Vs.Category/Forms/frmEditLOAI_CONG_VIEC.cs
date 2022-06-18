@@ -109,7 +109,7 @@ namespace Vs.Category
                                 TEN_LCV_HTextEdit.EditValue, DOC_HAICheckEdit.EditValue,
                                 (PHEP_CTTextEdit.EditValue == null) ? 0 : PHEP_CTTextEdit.EditValue,
                                 ID_LTSearchLookUpEdit.EditValue,
-                                (txtSTT.EditValue == null) ? 0 : txtSTT.EditValue
+                                (txtSTT.EditValue == "") ? txtSTT.EditValue = null : txtSTT.EditValue
                                 ).ToString();
                             if (AddEdit)
                             {

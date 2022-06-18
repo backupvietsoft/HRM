@@ -126,7 +126,7 @@ namespace Vs.Category
                                 TINH_BHXHCheckEdit.EditValue,
                                 KY_HIEUTextEdit.EditValue,
                                 TINH_LUONGCheckEdit.EditValue,
-                                (STT_LDVTextEdit.EditValue == null) ? 0 : STT_LDVTextEdit.EditValue, Convert.ToInt64(cboID_TT_HT.EditValue)).ToString();
+                                (STT_LDVTextEdit.EditValue == "") ? STT_LDVTextEdit.EditValue = null : STT_LDVTextEdit.EditValue, Convert.ToInt64(cboID_TT_HT.EditValue)).ToString();
                             if (AddEdit)
                             {
                                 if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_ThemThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo) == DialogResult.Yes)

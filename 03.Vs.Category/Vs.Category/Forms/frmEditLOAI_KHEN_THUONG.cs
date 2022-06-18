@@ -72,7 +72,7 @@ namespace Vs.Category
                             if (!dxValidationProvider1.Validate()) return;
                             if (bKiemTrung()) return;
                             Commons.Modules.sId = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spUpdateLOAI_KHEN_THUONG", (AddEdit ? -1 : Id),
-                                TEN_LOAI_KTTextEdit.EditValue, TEN_LOAI_KT_ATextEdit.EditValue, TEN_LOAI_KT_HTextEdit.EditValue, (txtSTT.EditValue == null) ? 0 : txtSTT.EditValue).ToString();
+                                TEN_LOAI_KTTextEdit.EditValue, TEN_LOAI_KT_ATextEdit.EditValue, TEN_LOAI_KT_HTextEdit.EditValue, (txtSTT.EditValue == "") ? txtSTT.EditValue = null : txtSTT.EditValue).ToString();
                             if (AddEdit)
                             {
                                 if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_ThemThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo) == DialogResult.Yes)

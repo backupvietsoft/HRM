@@ -71,6 +71,11 @@ namespace Vs.HRM
                                     {
                                         case "MT":
                                             {
+                                                DSNVDiTreVeSomGiaiDoan();
+                                                break;
+                                            }
+                                        case "SB":
+                                            {
                                                 BCCThangGioDenGioVe_SB();
                                                 break;
                                             }
@@ -86,6 +91,7 @@ namespace Vs.HRM
                                     {
                                         case "MT":
                                             {
+                                                DSVangDauGioGiaiDoan();
                                                 break;
                                             }
                                         default:
@@ -101,6 +107,7 @@ namespace Vs.HRM
                                     {
                                         case "MT":
                                             {
+                                                DSChamVangGiaiDoan();
                                                 break;
                                             }
                                         default:
@@ -115,6 +122,7 @@ namespace Vs.HRM
                                     {
                                         case "MT":
                                             {
+                                                DSChamCongVangLuyKe();
                                                 break;
                                             }
                                         default:
@@ -129,6 +137,7 @@ namespace Vs.HRM
                                     {
                                         case "MT":
                                             {
+                                                XacNhanQuetThe();
                                                 break;
                                             }
                                         case "SB":
@@ -150,6 +159,7 @@ namespace Vs.HRM
                                     {
                                         case "MT":
                                             {
+                                                ChamCongChiTietCN();
                                                 break;
                                             }
                                         default:

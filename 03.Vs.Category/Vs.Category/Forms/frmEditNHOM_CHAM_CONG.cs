@@ -79,7 +79,7 @@ namespace Vs.Category
                             if (!dxValidationProvider1.Validate()) return;
                             if (bKiemTrung()) return;
                             Commons.Modules.sId = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spUpdateNHOM_CHAM_CONG", (AddEdit ? -1 : Id),
-                                TEN_NHOMTextEdit.EditValue, TEN_NHOM_ATextEdit.EditValue, TEN_NHOM_HTextEdit.EditValue, CA_TU_DONGCheckEdit.EditValue, (txtSTT.EditValue == null) ? 0 : txtSTT.EditValue).ToString();
+                                TEN_NHOMTextEdit.EditValue, TEN_NHOM_ATextEdit.EditValue, TEN_NHOM_HTextEdit.EditValue, CA_TU_DONGCheckEdit.EditValue, (txtSTT.EditValue == "") ? txtSTT.EditValue = null : txtSTT.EditValue).ToString();
 
                             if (AddEdit)
                             {

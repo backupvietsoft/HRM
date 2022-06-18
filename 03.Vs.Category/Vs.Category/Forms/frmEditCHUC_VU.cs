@@ -101,7 +101,7 @@ namespace Vs.Category
                             if (KiemTrung()) return;
                             Commons.Modules.sId = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spUpdateCHUC_VU", (bAddEditCV ? -1 : Convert.ToInt32(iIdCV)), 
                                 MS_CVTextEdit.EditValue, TEN_CVTextEdit.EditValue, TEN_CV_ATextEdit.EditValue, 
-                                TEN_CV_HTextEdit.EditValue, ID_LOAI_CVSearchLookUpEdit.EditValue, (STT_IN_CVTextEdit.EditValue == null) ? 0 : STT_IN_CVTextEdit.EditValue).ToString();
+                                TEN_CV_HTextEdit.EditValue, ID_LOAI_CVSearchLookUpEdit.EditValue, (STT_IN_CVTextEdit.EditValue == "") ? STT_IN_CVTextEdit.EditValue = null : STT_IN_CVTextEdit.EditValue).ToString();
                             this.DialogResult = DialogResult.OK;
                             this.Close();
                             break;

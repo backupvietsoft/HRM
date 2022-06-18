@@ -48,7 +48,7 @@ namespace Vs.Payroll
                             if (!dxValidationProvider1.Validate()) return;
                             if (bKiemTrung()) return;
 
-                            Commons.Modules.sId = Convert.ToString(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spUpdateDOI_TAC", (AddEdit ? -1 : Id), txtMA_SO.EditValue.ToString(), txtTEN_NGAN.EditValue.ToString(), txtTEN_CTY_DAY_DU.EditValue.ToString(), chkINACTIVE.EditValue, (txtSTT.EditValue == null) ? 0 : txtSTT.EditValue));
+                            Commons.Modules.sId = Convert.ToString(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spUpdateDOI_TAC", (AddEdit ? -1 : Id), txtMA_SO.EditValue.ToString(), txtTEN_NGAN.EditValue.ToString(), txtTEN_CTY_DAY_DU.EditValue.ToString(),  (txtSTT.EditValue == "") ? txtSTT.EditValue = null : txtSTT.EditValue));
                             if (AddEdit)
                             {
                                 if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_ThemThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo) == DialogResult.Yes)
@@ -88,7 +88,6 @@ namespace Vs.Payroll
                 txtMA_SO.EditValue = dtTmp.Rows[0]["MA_SO"].ToString();
                 txtTEN_NGAN.EditValue = dtTmp.Rows[0]["TEN_NGAN"].ToString();
                 txtTEN_CTY_DAY_DU.EditValue = dtTmp.Rows[0]["TEN_CTY_DAY_DU"].ToString();
-                chkINACTIVE.Checked = bool.Parse(dtTmp.Rows[0]["INACTIVE"].ToString());
                 txtSTT.EditValue = dtTmp.Rows[0]["STT"].ToString();
             }
             catch (Exception EX)
@@ -103,7 +102,6 @@ namespace Vs.Payroll
                 txtMA_SO.EditValue = String.Empty;
                 txtTEN_NGAN.EditValue = String.Empty;
                 txtTEN_CTY_DAY_DU.EditValue = String.Empty;
-                chkINACTIVE.Checked = false;
                 txtSTT.EditValue = 1;
                 txtMA_SO.Focus();
             }

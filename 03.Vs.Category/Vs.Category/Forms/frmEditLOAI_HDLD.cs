@@ -90,7 +90,7 @@ namespace Vs.Category
                             }
                             Commons.Modules.sId = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spUpdateLOAI_HDLD", (bAddEditLHD ? -1 : iIdLHD),
                                 TEN_LHDLDTextEdit.EditValue, TEN_LHDLD_ATextEdit.EditValue,
-                                TEN_LHDLD_HTextEdit.EditValue, SO_THANGTextEdit.EditValue, Convert.ToInt64(cboID_TT_HT.EditValue), (txtSTT.EditValue == null) ? 0 : txtSTT.EditValue).ToString();
+                                TEN_LHDLD_HTextEdit.EditValue, SO_THANGTextEdit.EditValue, Convert.ToInt64(cboID_TT_HT.EditValue), (txtSTT.EditValue == "") ? txtSTT.EditValue = null : txtSTT.EditValue).ToString();
                             if (bAddEditLHD)
                             {
                                 if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_ThemThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo) == DialogResult.Yes)

@@ -1,0 +1,13 @@
+<?xml version="1.0" standalone="yes"?>
+<Import>
+  <Row>
+    <S>27.74.240.29</S>
+    <D>VS_HRM_CHINH</D>
+    <U>sa</U>
+    <P>codaikadaiku</P>
+    <M>baotritoandien@gmail.com</M>
+    <PM>namviet123</PM>
+    <SMTP>smtp.gmail.com</SMTP>
+    <PORT>587</PORT>
+  </Row>
+</Import>

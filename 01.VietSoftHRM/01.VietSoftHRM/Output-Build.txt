@@ -1,0 +1,19 @@
+﻿1>------ Rebuild All started: Project: Commons, Configuration: Debug Any CPU ------
+1>  Commons -> D:\02.HRM\02.Common\Common\bin\Debug\Commons.dll
+2>------ Rebuild All started: Project: Vs.Category, Configuration: Debug Any CPU ------
+3>------ Rebuild All started: Project: Vs.HRM, Configuration: Debug Any CPU ------
+2>D:\02.HRM\03.Vs.Category\Vs.Category\frmEditQUAN.cs(21,23,21,26): warning CS0414: The field 'frmEditQUAN.sQG' is assigned but its value is never used
+2>  Vs.Category -> D:\02.HRM\03.Vs.Category\Vs.Category\bin\Debug\Vs.Category.dll
+3>C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets(2106,5): warning MSB3270: There was a mismatch between the processor architecture of the project being built "MSIL" and the processor architecture of the reference "D:\02.HRM\02.Common\Common\bin\Debug\Commons.dll", "x86". This mismatch may cause runtime failures. Please consider changing the targeted processor architecture of your project through the Configuration Manager so as to align the processor architectures between your project and references, or take a dependency on references with a processor architecture that matches the targeted processor architecture of your project.
+3>  Vs.HRM -> D:\02.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\Vs.HRM.exe
+4>------ Rebuild All started: Project: VietSoftHRM, Configuration: Debug Any CPU ------
+4>D:\02.HRM\01.VietSoftHRM\VietSoftHRM\Class\clsXuLy.cs(32,54,32,71): warning CS0618: 'GridMenuEventArgs' is obsolete: 'You should use the 'PopupMenuShowingEventArgs' instead'
+4>D:\02.HRM\01.VietSoftHRM\VietSoftHRM\Class\clsXuLy.cs(29,13,29,29): warning CS0618: 'GridView.ShowGridMenu' is obsolete: 'You should use the 'PopupMenuShowing' instead'
+4>D:\02.HRM\01.VietSoftHRM\VietSoftHRM\UAC\System\ucListUsers.cs(62,30,62,32): warning CS0168: The variable 'ex' is declared but never used
+4>D:\02.HRM\01.VietSoftHRM\VietSoftHRM\UAC\System\ucNHOMTO.cs(71,29,71,31): warning CS0168: The variable 'ex' is declared but never used
+4>D:\02.HRM\01.VietSoftHRM\VietSoftHRM\UAC\System\ucNHOM.cs(201,30,201,32): warning CS0168: The variable 'EX' is declared but never used
+4>D:\02.HRM\01.VietSoftHRM\VietSoftHRM\UAC\ucCongNhan.cs(107,30,107,32): warning CS0168: The variable 'ex' is declared but never used
+4>D:\02.HRM\01.VietSoftHRM\VietSoftHRM\UAC\ucSystems.cs(155,30,155,32): warning CS0168: The variable 'ex' is declared but never used
+4>D:\02.HRM\01.VietSoftHRM\VietSoftHRM\UAC\System\ucNHOM.cs(279,30,279,32): warning CS0168: The variable 'ex' is declared but never used
+4>  VietSoftHRM -> D:\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\VietSoftHRM.exe
+========== Rebuild All: 4 succeeded, 0 failed, 0 skipped ==========

@@ -69,7 +69,7 @@ namespace Vs.Category
                         {
                             if (!dxValidationProvider1.Validate()) return;
                             Commons.Modules.sId = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spUpdateNOI_QUY_LAO_DONG", (AddEdit ? -1 : Id),
-                                txtNoiDung.EditValue, (txtSTT.EditValue == null) ? 0 : txtSTT.EditValue).ToString();
+                                txtNoiDung.EditValue, (txtSTT.EditValue == "") ? txtSTT.EditValue = null : txtSTT.EditValue).ToString();
                             if (AddEdit)
                             {
                                 if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_ThemThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo) == DialogResult.Yes)

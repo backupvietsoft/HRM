@@ -1118,7 +1118,7 @@
             // 
             this.lb4.Dpi = 254F;
             this.lb4.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[NOI_DUNG].[15]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[NOI_DUNG].[15] + \' \' + [DATA].[TEN_DV]")});
             this.lb4.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Italic);
             this.lb4.LocationFloat = new DevExpress.Utils.PointFloat(0.0004037221F, 758.366F);
             this.lb4.Multiline = true;

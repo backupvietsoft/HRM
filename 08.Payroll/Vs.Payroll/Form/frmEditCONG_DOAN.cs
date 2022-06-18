@@ -137,7 +137,7 @@ namespace Vs.Payroll
 
                             cmd.Parameters.Add("@YEU_CAU_KT", SqlDbType.NVarChar).Value = YC_KTTextEdit.Text;
                             cmd.Parameters.Add("@NGAY_LAP", SqlDbType.DateTime).Value = NGAY_LAPDateEdit.DateTime;
-                            cmd.Parameters.Add("@STT", SqlDbType.Int).Value = (txtSTT.EditValue == null) ? 0 : txtSTT.EditValue;
+                            cmd.Parameters.Add("@STT", SqlDbType.Int).Value = (txtSTT.EditValue == "") ? txtSTT.EditValue = null : txtSTT.EditValue;
 
                             //cmd.Parameters.Add("@CHON", SqlDbType.Bit).Value = CHONCheckEdit.Checked == true ? true : false;
                             //cmd.Parameters.Add("@DA_SU_DUNG", SqlDbType.Bit).Value = DA_SDCheckEdit.Checked == true ? true : false;

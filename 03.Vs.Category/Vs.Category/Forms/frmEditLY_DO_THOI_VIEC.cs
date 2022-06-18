@@ -88,7 +88,7 @@ namespace Vs.Category
                             }
                             Commons.Modules.sId = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spUpdateLY_DO_THOI_VIEC", (AddEdit ? -1 : Id),
                                 TEN_LD_TVTextEdit.EditValue, TEN_LD_TV_ATextEdit.EditValue, TEN_LD_TV_HTextEdit.EditValue, 
-                                (HE_SOTextEdit.EditValue == null) ? 0 : HE_SOTextEdit.EditValue, Convert.ToInt64(cboID_TT_HT.EditValue), (txtSTT.EditValue == null) ? 0 : txtSTT.EditValue).ToString();
+                                (HE_SOTextEdit.EditValue == null) ? 0 : HE_SOTextEdit.EditValue, Convert.ToInt64(cboID_TT_HT.EditValue), (txtSTT.EditValue == "") ? txtSTT.EditValue = null : txtSTT.EditValue).ToString();
                             if (AddEdit)
                             {
                                 if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_ThemThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo) == DialogResult.Yes)

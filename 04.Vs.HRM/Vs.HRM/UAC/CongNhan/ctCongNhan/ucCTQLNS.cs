@@ -84,6 +84,7 @@ namespace Vs.HRM
                 }
             }, 100); thread.Start();
         }
+        private ucLyLich ll;
         private void LoaduacCongNhan(string tenlable)
         {
             switch (tenlable)
@@ -92,9 +93,13 @@ namespace Vs.HRM
                     {
                         if (navigationPage1.Controls.Count == 0)
                         {
-                            ucLyLich ll = new ucLyLich(Commons.Modules.iCongNhan);
+                            ll = new ucLyLich(Commons.Modules.iCongNhan);
                             ll.Dock = DockStyle.Fill;
                             navigationPage1.Controls.Add(ll);
+                        }
+                        else
+                        {
+                            ll.BinDingData(false);
                         }
                         Selecttab(navigationPage1);
                         break;

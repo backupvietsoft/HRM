@@ -77,7 +77,7 @@ namespace Vs.Category
                             if (bKiemTrung()) return;
 
                             Commons.Modules.sId = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spUpdateTINH_TRANG_HT", (bAddEditTTHT ? -1 : iIdTTHT),
-                                TEN_TT_HTTextEdit.EditValue, TEN_TT_HT_ATextEdit.EditValue, TEN_TT_HT_HTextEdit.EditValue, (STTTextEdit.EditValue == null) ? 0 : STTTextEdit.EditValue).ToString();
+                                TEN_TT_HTTextEdit.EditValue, TEN_TT_HT_ATextEdit.EditValue, TEN_TT_HT_HTextEdit.EditValue, (STTTextEdit.EditValue == "") ? STTTextEdit.EditValue = null : STTTextEdit.EditValue).ToString();
                             if (bAddEditTTHT)
                             {
                                 if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_ThemThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo) == DialogResult.Yes)

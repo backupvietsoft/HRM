@@ -40,6 +40,7 @@
             this.txtTEN_NHH_H = new DevExpress.XtraEditors.TextEdit();
             this.txtTEN_NHH_A = new DevExpress.XtraEditors.TextEdit();
             this.txtTEN_NHH = new DevExpress.XtraEditors.TextEdit();
+            this.txtNOTE = new DevExpress.XtraEditors.TextEdit();
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.lblTEN_NHH = new DevExpress.XtraLayout.LayoutControlItem();
             this.lblTEN_NHH_A = new DevExpress.XtraLayout.LayoutControlItem();
@@ -47,7 +48,6 @@
             this.lblNOTE = new DevExpress.XtraLayout.LayoutControlItem();
             this.lblTEN_NHH_H = new DevExpress.XtraLayout.LayoutControlItem();
             this.dxValidationProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
-            this.txtNOTE = new DevExpress.XtraEditors.TextEdit();
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).BeginInit();
             this.tablePanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataLayoutControl1)).BeginInit();
@@ -56,6 +56,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtTEN_NHH_H.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTEN_NHH_A.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTEN_NHH.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtNOTE.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblTEN_NHH)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblTEN_NHH_A)).BeginInit();
@@ -63,15 +64,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.lblNOTE)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblTEN_NHH_H)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtNOTE.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // tablePanel1
             // 
             this.tablePanel1.Columns.AddRange(new DevExpress.Utils.Layout.TablePanelColumn[] {
-            new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 10F),
-            new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 100F),
-            new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 10F)});
+            new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 10F),
+            new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 80F),
+            new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 10F)});
             this.tablePanel1.Controls.Add(this.btnALL);
             this.tablePanel1.Controls.Add(this.dataLayoutControl1);
             this.tablePanel1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -79,7 +79,7 @@
             this.tablePanel1.Name = "tablePanel1";
             this.tablePanel1.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] {
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 8F),
-            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 90F),
+            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 100F),
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 46F)});
             this.tablePanel1.Size = new System.Drawing.Size(800, 450);
             this.tablePanel1.TabIndex = 2;
@@ -128,11 +128,11 @@
             this.dataLayoutControl1.Controls.Add(this.txtTEN_NHH);
             this.dataLayoutControl1.Controls.Add(this.txtNOTE);
             this.dataLayoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataLayoutControl1.Location = new System.Drawing.Point(13, 11);
+            this.dataLayoutControl1.Location = new System.Drawing.Point(83, 11);
             this.dataLayoutControl1.Name = "dataLayoutControl1";
             this.dataLayoutControl1.Root = this.layoutControlGroup1;
             this.tablePanel1.SetRow(this.dataLayoutControl1, 1);
-            this.dataLayoutControl1.Size = new System.Drawing.Size(774, 390);
+            this.dataLayoutControl1.Size = new System.Drawing.Size(634, 390);
             this.dataLayoutControl1.TabIndex = 0;
             this.dataLayoutControl1.Text = "dataLayoutControl1";
             // 
@@ -143,21 +143,21 @@
             0,
             0,
             0});
-            this.txtTHU_TU.Location = new System.Drawing.Point(666, 12);
+            this.txtTHU_TU.Location = new System.Drawing.Point(565, 6);
             this.txtTHU_TU.Name = "txtTHU_TU";
             this.txtTHU_TU.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.txtTHU_TU.Properties.Mask.EditMask = "N0";
             this.txtTHU_TU.Properties.Mask.UseMaskAsDisplayFormat = true;
-            this.txtTHU_TU.Size = new System.Drawing.Size(96, 26);
+            this.txtTHU_TU.Size = new System.Drawing.Size(63, 26);
             this.txtTHU_TU.StyleController = this.dataLayoutControl1;
             this.txtTHU_TU.TabIndex = 7;
             // 
             // txtTEN_NHH_H
             // 
-            this.txtTEN_NHH_H.Location = new System.Drawing.Point(492, 42);
+            this.txtTEN_NHH_H.Location = new System.Drawing.Point(109, 62);
             this.txtTEN_NHH_H.Name = "txtTEN_NHH_H";
-            this.txtTEN_NHH_H.Size = new System.Drawing.Size(270, 26);
+            this.txtTEN_NHH_H.Size = new System.Drawing.Size(519, 26);
             this.txtTEN_NHH_H.StyleController = this.dataLayoutControl1;
             this.txtTEN_NHH_H.TabIndex = 6;
             conditionValidationRule1.ErrorText = "This value is not valid";
@@ -165,22 +165,30 @@
             // 
             // txtTEN_NHH_A
             // 
-            this.txtTEN_NHH_A.Location = new System.Drawing.Point(115, 42);
+            this.txtTEN_NHH_A.Location = new System.Drawing.Point(109, 34);
             this.txtTEN_NHH_A.Name = "txtTEN_NHH_A";
-            this.txtTEN_NHH_A.Size = new System.Drawing.Size(270, 26);
+            this.txtTEN_NHH_A.Size = new System.Drawing.Size(519, 26);
             this.txtTEN_NHH_A.StyleController = this.dataLayoutControl1;
             this.txtTEN_NHH_A.TabIndex = 5;
             // 
             // txtTEN_NHH
             // 
-            this.txtTEN_NHH.Location = new System.Drawing.Point(115, 12);
+            this.txtTEN_NHH.Location = new System.Drawing.Point(109, 6);
             this.txtTEN_NHH.Name = "txtTEN_NHH";
-            this.txtTEN_NHH.Size = new System.Drawing.Size(444, 26);
+            this.txtTEN_NHH.Size = new System.Drawing.Size(351, 26);
             this.txtTEN_NHH.StyleController = this.dataLayoutControl1;
             this.txtTEN_NHH.TabIndex = 4;
             conditionValidationRule2.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
             conditionValidationRule2.ErrorText = "This value is not valid";
             this.dxValidationProvider1.SetValidationRule(this.txtTEN_NHH, conditionValidationRule2);
+            // 
+            // txtNOTE
+            // 
+            this.txtNOTE.Location = new System.Drawing.Point(109, 90);
+            this.txtNOTE.Name = "txtNOTE";
+            this.txtNOTE.Size = new System.Drawing.Size(519, 26);
+            this.txtNOTE.StyleController = this.dataLayoutControl1;
+            this.txtNOTE.TabIndex = 8;
             // 
             // layoutControlGroup1
             // 
@@ -193,58 +201,50 @@
             this.lblNOTE,
             this.lblTEN_NHH_H});
             this.layoutControlGroup1.Name = "Root";
-            this.layoutControlGroup1.Size = new System.Drawing.Size(774, 390);
+            this.layoutControlGroup1.Size = new System.Drawing.Size(634, 390);
             this.layoutControlGroup1.TextVisible = false;
             // 
             // lblTEN_NHH
             // 
-            this.lblTEN_NHH.AppearanceItemCaption.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTEN_NHH.AppearanceItemCaption.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTEN_NHH.AppearanceItemCaption.Options.UseFont = true;
             this.lblTEN_NHH.Control = this.txtTEN_NHH;
             this.lblTEN_NHH.Location = new System.Drawing.Point(0, 0);
             this.lblTEN_NHH.Name = "lblTEN_NHH";
-            this.lblTEN_NHH.Size = new System.Drawing.Size(551, 30);
-            this.lblTEN_NHH.TextSize = new System.Drawing.Size(100, 13);
+            this.lblTEN_NHH.Size = new System.Drawing.Size(456, 28);
+            this.lblTEN_NHH.TextSize = new System.Drawing.Size(100, 20);
             // 
             // lblTEN_NHH_A
             // 
             this.lblTEN_NHH_A.Control = this.txtTEN_NHH_A;
-            this.lblTEN_NHH_A.Location = new System.Drawing.Point(0, 30);
+            this.lblTEN_NHH_A.Location = new System.Drawing.Point(0, 28);
             this.lblTEN_NHH_A.Name = "lblTEN_NHH_A";
-            this.lblTEN_NHH_A.Size = new System.Drawing.Size(377, 30);
+            this.lblTEN_NHH_A.Size = new System.Drawing.Size(624, 28);
             this.lblTEN_NHH_A.TextSize = new System.Drawing.Size(100, 20);
             // 
             // lblTHU_TU
             // 
             this.lblTHU_TU.Control = this.txtTHU_TU;
-            this.lblTHU_TU.Location = new System.Drawing.Point(551, 0);
+            this.lblTHU_TU.Location = new System.Drawing.Point(456, 0);
             this.lblTHU_TU.Name = "lblTHU_TU";
-            this.lblTHU_TU.Size = new System.Drawing.Size(203, 30);
+            this.lblTHU_TU.Size = new System.Drawing.Size(168, 28);
             this.lblTHU_TU.TextSize = new System.Drawing.Size(100, 20);
             // 
             // lblNOTE
             // 
             this.lblNOTE.Control = this.txtNOTE;
-            this.lblNOTE.Location = new System.Drawing.Point(0, 60);
+            this.lblNOTE.Location = new System.Drawing.Point(0, 84);
             this.lblNOTE.Name = "lblNOTE";
-            this.lblNOTE.Size = new System.Drawing.Size(754, 310);
+            this.lblNOTE.Size = new System.Drawing.Size(624, 296);
             this.lblNOTE.TextSize = new System.Drawing.Size(100, 20);
             // 
             // lblTEN_NHH_H
             // 
             this.lblTEN_NHH_H.Control = this.txtTEN_NHH_H;
-            this.lblTEN_NHH_H.Location = new System.Drawing.Point(377, 30);
+            this.lblTEN_NHH_H.Location = new System.Drawing.Point(0, 56);
             this.lblTEN_NHH_H.Name = "lblTEN_NHH_H";
-            this.lblTEN_NHH_H.Size = new System.Drawing.Size(377, 30);
+            this.lblTEN_NHH_H.Size = new System.Drawing.Size(624, 28);
             this.lblTEN_NHH_H.TextSize = new System.Drawing.Size(100, 20);
-            // 
-            // txtNOTE
-            // 
-            this.txtNOTE.Location = new System.Drawing.Point(115, 72);
-            this.txtNOTE.Name = "txtNOTE";
-            this.txtNOTE.Size = new System.Drawing.Size(647, 26);
-            this.txtNOTE.StyleController = this.dataLayoutControl1;
-            this.txtNOTE.TabIndex = 8;
             // 
             // frmEditNHOM_HANG_HOA
             // 
@@ -263,6 +263,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtTEN_NHH_H.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTEN_NHH_A.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTEN_NHH.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtNOTE.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblTEN_NHH)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblTEN_NHH_A)).EndInit();
@@ -270,7 +271,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.lblNOTE)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblTEN_NHH_H)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtNOTE.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }

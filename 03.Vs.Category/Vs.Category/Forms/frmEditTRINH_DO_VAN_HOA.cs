@@ -95,7 +95,7 @@ namespace Vs.Category
                             if (bKiemTrung()) return;
                             Commons.Modules.sId = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spUpdateTRINH_DO_VAN_HOA", (AddEdit ? -1 : Id),
                                 TEN_TDVHTextEdit.EditValue, TEN_TDVH_ATextEdit.EditValue,
-                                TEN_TDVH_HTextEdit.EditValue, ID_LOAI_TDSearchLookUpEdit.EditValue, txtSTT.EditValue).ToString();
+                                TEN_TDVH_HTextEdit.EditValue, ID_LOAI_TDSearchLookUpEdit.EditValue, txtSTT.EditValue == "" ? txtSTT.EditValue = null : txtSTT.EditValue).ToString();
                             if (AddEdit)
                             {
                                 if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_ThemThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo) == DialogResult.Yes)

@@ -26,8 +26,16 @@ namespace Vs.Payroll
 
         private void frmEditLOAI_MAY_Load(object sender, EventArgs e)
         {
-           // LoadCheDoNghi();
-            if (!AddEdit) LoadText();
+            // LoadCheDoNghi();
+            if (!AddEdit)
+            {
+                LoadText();
+            }
+            else
+            {
+                SD_TRONG_QTCNCheckEdit.Checked = true;
+            }
+
             Commons.Modules.ObjSystems.ThayDoiNN(this, layoutControlGroup1, btnALL);
         }
         private void frmEditLOAI_MAY_Resize(object sender, EventArgs e) => dataLayoutControl1.Refresh();
@@ -45,12 +53,7 @@ namespace Vs.Payroll
                 TEN_LOAI_MAY_HTextEdit.EditValue = dtTmp.Rows[0]["TEN_LOAI_MAY_H"].ToString();
                 KY_HIEUTextEdit.EditValue = dtTmp.Rows[0]["KI_HIEU"].ToString();
                 SD_TRONG_QTCNCheckEdit.EditValue = dtTmp.Rows[0]["SD_QTCN"];
-                TOC_DO_THIET_BITextEdit.EditValue = dtTmp.Rows[0]["TOC_DO_THIET_BI"].ToString();
-                CONG_CUCheckEdit.EditValue = dtTmp.Rows[0]["CONG_CU"];
-                SU_DUNG_CONG_DOANTextEdit.EditValue = dtTmp.Rows[0]["SU_DUNG_CONG_DOAN"].ToString();
                 THU_TU_MAYTextEdit.EditValue = dtTmp.Rows[0]["STT_MAY"].ToString();
-                MA_SO_LOAI_MAYTextEdit.EditValue = dtTmp.Rows[0]["MS_LOAI_MAY"];
-                TINH_NANG_CO_BANTextEdit.EditValue = dtTmp.Rows[0]["TINH_NANG_CO_BAN"].ToString();
             }
             catch (Exception EX)
             {
@@ -66,12 +69,8 @@ namespace Vs.Payroll
                 TEN_LOAI_MAY_ATextEdit.EditValue = String.Empty;
                 TEN_LOAI_MAY_HTextEdit.EditValue = String.Empty;
                 KY_HIEUTextEdit.EditValue = String.Empty;
-                TOC_DO_THIET_BITextEdit.EditValue = 0;
-                SU_DUNG_CONG_DOANTextEdit.EditValue = String.Empty;
-                TINH_NANG_CO_BANTextEdit.EditValue = String.Empty;
                 THU_TU_MAYTextEdit.EditValue = String.Empty;
                 SD_TRONG_QTCNCheckEdit.EditValue = false;
-                CONG_CUCheckEdit.EditValue = false;
                 TEN_LOAI_MAYTextEdit.Focus();
             }
             catch { }
@@ -91,17 +90,12 @@ namespace Vs.Payroll
                             if (!dxValidationProvider1.Validate()) return;
                            
                             Commons.Modules.sId = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spUpdateLOAI_MAY", (AddEdit ? -1 : Id),
-                                MA_SO_LOAI_MAYTextEdit.EditValue,
                                 TEN_LOAI_MAYTextEdit.EditValue,
                                 TEN_LOAI_MAY_ATextEdit.EditValue,
                                 TEN_LOAI_MAY_HTextEdit.EditValue,
-                                (THU_TU_MAYTextEdit.EditValue == null) ? 0 : THU_TU_MAYTextEdit.EditValue,
+                                (THU_TU_MAYTextEdit.EditValue == "") ? THU_TU_MAYTextEdit.EditValue = null : THU_TU_MAYTextEdit.EditValue,
                                 SD_TRONG_QTCNCheckEdit.EditValue,
-                                KY_HIEUTextEdit.EditValue,
-                                TINH_NANG_CO_BANTextEdit.EditValue,
-                                (TOC_DO_THIET_BITextEdit.EditValue == null) ? 0 : TOC_DO_THIET_BITextEdit.EditValue,
-                                CONG_CUCheckEdit.EditValue,
-                                SU_DUNG_CONG_DOANTextEdit.EditValue
+                                KY_HIEUTextEdit.EditValue
                                 ).ToString();
                             if (AddEdit)
                             {

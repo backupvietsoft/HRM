@@ -65,6 +65,7 @@ namespace Vs.TimeAttendance
                                     {
                                         case "MT":
                                             {
+                                                TheoDoiPhepNamThucTe();
                                                 break;
                                             }
                                         default:
@@ -79,6 +80,7 @@ namespace Vs.TimeAttendance
                                     {
                                         case "MT":
                                             {
+                                                ThanhToanPhepNam();
                                                 break;
                                             }
                                         default:
@@ -93,6 +95,7 @@ namespace Vs.TimeAttendance
                                     {
                                         case "MT":
                                             {
+                                                TongHopTienPhep();
                                                 break;
                                             }
                                         default:
@@ -107,6 +110,7 @@ namespace Vs.TimeAttendance
                                     {
                                         case "MT":
                                             {
+                                                PhieuTienPhep();
                                                 break;
                                             }
                                         default:

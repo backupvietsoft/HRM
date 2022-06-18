@@ -70,7 +70,7 @@ namespace Vs.Payroll
                             try
                             {
                                 DataTable dt = new DataTable();
-                                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spUpdateDON_GIA_GIAY", (AddEdit ? 1 : 0), NGAY_QDDateEdit.EditValue, HS_DG_GIAYTextEdit.EditValue.ToString(), (txtSTT.EditValue == null) ? 0 : txtSTT.EditValue));
+                                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spUpdateDON_GIA_GIAY", (AddEdit ? 1 : 0), NGAY_QDDateEdit.EditValue, HS_DG_GIAYTextEdit.EditValue.ToString(), (txtSTT.EditValue == "") ? txtSTT.EditValue = null : txtSTT.EditValue));
 
                                 if (AddEdit)
                                 {

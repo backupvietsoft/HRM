@@ -303,83 +303,65 @@ namespace Vs.TimeAttendance
             Boolean caNgayHS;
             try
             {
-                if(DateTime.TryParse(view.GetFocusedRowCellValue("GIO_BD").ToString(), out gioBD))
-                {
-                    gioBD = DateTime.Parse(view.GetFocusedRowCellValue("GIO_BD").ToString());
-                    phutBD = gioBD.Hour * 60 + gioBD.Minute;
-                }
-
-                if (DateTime.TryParse(view.GetFocusedRowCellValue("GIO_KT").ToString(), out gioKT))
-                {
-                    gioKT = DateTime.Parse(view.GetFocusedRowCellValue("GIO_KT").ToString());
-                    phutKT = gioKT.Hour * 60 + gioKT.Minute;
-                }
-                Boolean.TryParse(view.GetFocusedRowCellValue("NGAY_HOM_SAU").ToString(), out ngayHomSau);
-                Boolean.TryParse(view.GetFocusedRowCellValue("CA_NGAY_HOM_SAU").ToString(), out caNgayHS);
+                var row = view.GetFocusedDataRow();
 
                 if (e.Column.FieldName == "GIO_BD")
                 {
-                    if (ngayHomSau == true)
+                    gioBD = DateTime.Parse(row["GIO_BD"].ToString());
+                    phutBD = gioBD.Hour * 60 + gioBD.Minute;
+                    if (!row["GIO_KT"].ToString().Equals(""))
                     {
-                        phutBD = phutBD + 1440;
-                    }
-
-                    if (caNgayHS == true)
-                    {
-                        phutBD = phutBD + 1440;
-                    }
-                    view.SetFocusedRowCellValue("PHUT_BD", phutBD);
-                }
-                if (e.Column.FieldName == "GIO_KT")
-                {
-                    if (ngayHomSau == true)
-                    {
-                        phutKT = phutKT + 1440;
-                    }
-
-                    if (caNgayHS == true)
-                    {
-                        phutKT = phutKT + 1440;
-                    }
-                    view.SetFocusedRowCellValue("PHUT_KT", phutKT);
-                }
-                if (e.Column.FieldName == "PHUT_BD" || e.Column.FieldName == "PHUT_KT")
-                {
-                    if (phutBD > 0)
-                        view.SetFocusedRowCellValue("SO_PHUT", phutKT - phutBD);
-                }
-                if (e.Column.FieldName == "NGAY_HOM_SAU" || e.Column.FieldName == "CA_NGAY_HOM_SAU")
-                {
-                    if (ngayHomSau == true)
-                    {
-                        if (caNgayHS == true)
-                        {
-                            view.SetFocusedRowCellValue("PHUT_BD", phutBD + 1440 + 1440);
-                            view.SetFocusedRowCellValue("PHUT_KT", phutKT + 1440 + 1440);
-                            view.SetFocusedRowCellValue("SO_PHUT", phutKT - phutBD);
-                        }
-                        else
-                        {
-                            view.SetFocusedRowCellValue("PHUT_BD", phutBD + 1440);
-                            view.SetFocusedRowCellValue("PHUT_KT", phutKT + 1440);
-                            view.SetFocusedRowCellValue("SO_PHUT", phutKT - phutBD);
-                        }
+                        gioKT = DateTime.Parse(row["GIO_KT"].ToString());
+                        phutKT = gioKT.Hour * 60 + gioKT.Minute;
                     }
                     else
                     {
-                        if (caNgayHS == true)
-                        {
-                            view.SetFocusedRowCellValue("PHUT_BD", phutBD + 1440);
-                            view.SetFocusedRowCellValue("PHUT_KT", phutKT + 1440);
-                            view.SetFocusedRowCellValue("SO_PHUT", phutKT - phutBD);
-                        }
-                        else
-                        {
-                            view.SetFocusedRowCellValue("PHUT_BD", phutBD);
-                            view.SetFocusedRowCellValue("PHUT_KT", phutKT);
-                            view.SetFocusedRowCellValue("SO_PHUT", phutKT - phutBD);
-                        }
+                        phutKT = 0;
                     }
+
+                    Boolean.TryParse(row["NGAY_HOM_SAU"].ToString(), out ngayHomSau);
+
+                    if (ngayHomSau == true)
+                    {
+                        phutBD = phutBD + 1440;
+                    }
+                    row["PHUT_BD"] = phutBD;
+                    row["SO_PHUT"] = phutKT - phutBD;
+                }
+
+                if (e.Column.FieldName == "GIO_KT")
+                {
+                    if (!row["GIO_BD"].ToString().Equals(""))
+                    {
+                        gioBD = DateTime.Parse(row["GIO_BD"].ToString());
+                        phutBD = gioBD.Hour * 60 + gioBD.Minute;
+                    }
+                    else
+                    {
+                        phutBD = 0;
+                    }
+
+                    gioKT = DateTime.Parse(row["GIO_KT"].ToString());
+                    phutKT = gioKT.Hour * 60 + gioKT.Minute;
+                    Boolean.TryParse(row["NGAY_HOM_SAU"].ToString(), out ngayHomSau);
+                    if (ngayHomSau == true)
+                    {
+                        phutKT = phutKT + 1440;
+                    }
+                    row["PHUT_KT"] = phutKT;
+                    row["SO_PHUT"] = phutKT - phutBD;
+                }
+
+                // Calculating the dicsount % and detect if the cellvalue change in certain column  
+                if (e.Column.FieldName == "NGAY_HOM_SAU" || e.Column.FieldName == "CA_NGAY_HOM_SAU")
+                {
+                    gioBD = DateTime.Parse(row["GIO_BD"].ToString());
+                    phutBD = gioBD.Hour * 60 + gioBD.Minute;
+                    gioKT = DateTime.Parse(row["GIO_KT"].ToString());
+                    phutKT = gioKT.Hour * 60 + gioKT.Minute;
+                    phutKT = phutKT + 1440;
+                    row["PHUT_KT"] = phutKT;
+                    row["SO_PHUT"] = phutKT - phutBD;
                 }
             }
             catch { }

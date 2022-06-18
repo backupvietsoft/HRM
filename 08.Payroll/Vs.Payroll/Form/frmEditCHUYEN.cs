@@ -73,7 +73,7 @@ namespace Vs.Payroll
                                 STT_CHUYENTextEdit.EditValue,
                                 TEN_CHUYENTextEdit.EditValue, 
                                 TOLookUpEdit.EditValue,
-                                (txtSTT.EditValue == null) ? 0 : txtSTT.EditValue
+                                (txtSTT.EditValue == "") ? txtSTT.EditValue = null : txtSTT.EditValue
                                 ).ToString();
                             this.DialogResult = DialogResult.OK;
                             this.Close();

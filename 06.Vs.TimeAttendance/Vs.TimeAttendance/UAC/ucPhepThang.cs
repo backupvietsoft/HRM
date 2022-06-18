@@ -763,12 +763,12 @@ namespace Vs.TimeAttendance
                             formatRange = oSheet.get_Range("I6", "I" + rowCnt.ToString());
                             formatRange.NumberFormat = "#,##0";
                             formatRange.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
-                            formatRange.TextToColumns(Type.Missing, Excel.XlTextParsingType.xlDelimited, Excel.XlTextQualifier.xlTextQualifierDoubleQuote);
+                            try { formatRange.TextToColumns(Type.Missing, Excel.XlTextParsingType.xlDelimited, Excel.XlTextQualifier.xlTextQualifierDoubleQuote); } catch { }
 
                             formatRange = oSheet.get_Range("J6", "J" + rowCnt.ToString());
                             formatRange.NumberFormat = "#,##0";
                             formatRange.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
-                            formatRange.TextToColumns(Type.Missing, Excel.XlTextParsingType.xlDelimited, Excel.XlTextQualifier.xlTextQualifierDoubleQuote);
+                            try { formatRange.TextToColumns(Type.Missing, Excel.XlTextParsingType.xlDelimited, Excel.XlTextQualifier.xlTextQualifierDoubleQuote); } catch { }
 
 
                             //formatRange = oSheet.get_Range("L6", "L" + rowCnt.ToString());
@@ -783,7 +783,7 @@ namespace Vs.TimeAttendance
                                 formatRange = oSheet.get_Range(CurrentColumn + "6", CurrentColumn + rowCnt.ToString());
                                 formatRange.NumberFormat = "#,##0.0;(#,##0.0); ; ";
                                 formatRange.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
-                                formatRange.TextToColumns(Type.Missing, Excel.XlTextParsingType.xlDelimited, Excel.XlTextQualifier.xlTextQualifierDoubleQuote);
+                                try { formatRange.TextToColumns(Type.Missing, Excel.XlTextParsingType.xlDelimited, Excel.XlTextQualifier.xlTextQualifierDoubleQuote); } catch { }
                             }
 
                         }

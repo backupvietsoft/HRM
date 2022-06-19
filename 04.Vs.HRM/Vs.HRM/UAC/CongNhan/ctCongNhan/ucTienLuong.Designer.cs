@@ -501,9 +501,9 @@
             this.BAC_LUONGLookUpEdit.Size = new System.Drawing.Size(164, 26);
             this.BAC_LUONGLookUpEdit.StyleController = this.dataLayoutControl1;
             this.BAC_LUONGLookUpEdit.TabIndex = 12;
-            conditionValidationRule7.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
             conditionValidationRule7.ErrorText = "This value is not valid";
-            conditionValidationRule7.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.Critical;
+            conditionValidationRule7.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.None;
+            conditionValidationRule7.Value1 = "";
             this.dxValidationProvider1.SetValidationRule(this.BAC_LUONGLookUpEdit, conditionValidationRule7);
             this.BAC_LUONGLookUpEdit.EditValueChanged += new System.EventHandler(this.BAC_LUONGLookUpEdit_EditValueChanged);
             // 
@@ -586,8 +586,8 @@
             // 
             // ItemForSO_QUYET_DINH
             // 
-            this.ItemForSO_QUYET_DINH.AppearanceItemCaption.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold);
-            this.ItemForSO_QUYET_DINH.AppearanceItemCaption.Options.UseFont = true;
+            this.ItemForSO_QUYET_DINH.AppearanceItemCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.ItemForSO_QUYET_DINH.AppearanceItemCaption.Options.UseForeColor = true;
             this.ItemForSO_QUYET_DINH.Control = this.SO_QUYET_DINHTextEdit;
             this.ItemForSO_QUYET_DINH.Location = new System.Drawing.Point(0, 0);
             this.ItemForSO_QUYET_DINH.Name = "ItemForSO_QUYET_DINH";
@@ -597,8 +597,8 @@
             // 
             // ItemForNGAY_HIEU_LUC
             // 
-            this.ItemForNGAY_HIEU_LUC.AppearanceItemCaption.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold);
-            this.ItemForNGAY_HIEU_LUC.AppearanceItemCaption.Options.UseFont = true;
+            this.ItemForNGAY_HIEU_LUC.AppearanceItemCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.ItemForNGAY_HIEU_LUC.AppearanceItemCaption.Options.UseForeColor = true;
             this.ItemForNGAY_HIEU_LUC.Control = this.NGAY_HIEU_LUCDateEdit;
             this.ItemForNGAY_HIEU_LUC.Location = new System.Drawing.Point(352, 0);
             this.ItemForNGAY_HIEU_LUC.Name = "ItemForNGAY_HIEU_LUC";
@@ -608,8 +608,8 @@
             // 
             // ItemForNGACH_LUONG
             // 
-            this.ItemForNGACH_LUONG.AppearanceItemCaption.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold);
-            this.ItemForNGACH_LUONG.AppearanceItemCaption.Options.UseFont = true;
+            this.ItemForNGACH_LUONG.AppearanceItemCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.ItemForNGACH_LUONG.AppearanceItemCaption.Options.UseForeColor = true;
             this.ItemForNGACH_LUONG.Control = this.NGACH_LUONGLookUpEdit;
             this.ItemForNGACH_LUONG.Location = new System.Drawing.Point(0, 56);
             this.ItemForNGACH_LUONG.Name = "ItemForNGACH_LUONG";
@@ -619,8 +619,8 @@
             // 
             // ItemForBAC_LUONG
             // 
-            this.ItemForBAC_LUONG.AppearanceItemCaption.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold);
-            this.ItemForBAC_LUONG.AppearanceItemCaption.Options.UseFont = true;
+            this.ItemForBAC_LUONG.AppearanceItemCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.ItemForBAC_LUONG.AppearanceItemCaption.Options.UseForeColor = true;
             this.ItemForBAC_LUONG.Control = this.BAC_LUONGLookUpEdit;
             this.ItemForBAC_LUONG.Location = new System.Drawing.Point(352, 56);
             this.ItemForBAC_LUONG.Name = "ItemForBAC_LUONG";
@@ -630,8 +630,8 @@
             // 
             // ItemForID_TO
             // 
-            this.ItemForID_TO.AppearanceItemCaption.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold);
-            this.ItemForID_TO.AppearanceItemCaption.Options.UseFont = true;
+            this.ItemForID_TO.AppearanceItemCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.ItemForID_TO.AppearanceItemCaption.Options.UseForeColor = true;
             this.ItemForID_TO.Control = this.ID_TOLookUpEdit;
             this.ItemForID_TO.Location = new System.Drawing.Point(352, 84);
             this.ItemForID_TO.Name = "ItemForID_TO";
@@ -641,8 +641,8 @@
             // 
             // ItemForID_CV
             // 
-            this.ItemForID_CV.AppearanceItemCaption.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold);
-            this.ItemForID_CV.AppearanceItemCaption.Options.UseFont = true;
+            this.ItemForID_CV.AppearanceItemCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.ItemForID_CV.AppearanceItemCaption.Options.UseForeColor = true;
             this.ItemForID_CV.Control = this.ID_CVLookUpEdit;
             this.ItemForID_CV.Location = new System.Drawing.Point(0, 84);
             this.ItemForID_CV.Name = "ItemForID_CV";
@@ -652,8 +652,8 @@
             // 
             // ItemForNGAY_KY
             // 
-            this.ItemForNGAY_KY.AppearanceItemCaption.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold);
-            this.ItemForNGAY_KY.AppearanceItemCaption.Options.UseFont = true;
+            this.ItemForNGAY_KY.AppearanceItemCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.ItemForNGAY_KY.AppearanceItemCaption.Options.UseForeColor = true;
             this.ItemForNGAY_KY.Control = this.NGAY_KYDateEdit;
             this.ItemForNGAY_KY.Location = new System.Drawing.Point(0, 28);
             this.ItemForNGAY_KY.Name = "ItemForNGAY_KY";
@@ -698,8 +698,8 @@
             // 
             // ItemForHS_LUONG
             // 
-            this.ItemForHS_LUONG.AppearanceItemCaption.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold);
-            this.ItemForHS_LUONG.AppearanceItemCaption.Options.UseFont = true;
+            this.ItemForHS_LUONG.AppearanceItemCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.ItemForHS_LUONG.AppearanceItemCaption.Options.UseForeColor = true;
             this.ItemForHS_LUONG.Control = this.HS_LUONGTextEdit;
             this.ItemForHS_LUONG.Location = new System.Drawing.Point(0, 28);
             this.ItemForHS_LUONG.Name = "ItemForHS_LUONG";

@@ -302,7 +302,17 @@ namespace Vs.HRM
                     }
                 case "luu":
                     {
+
                         if (!dxValidationProvider1.Validate()) return;
+                        if (BAC_LUONGLookUpEdit.Text.Trim() == "")
+                        {
+                            BAC_LUONGLookUpEdit.ErrorText = "This value is not valid";
+                            return;
+                        }
+                        else
+                        {
+                            BAC_LUONGLookUpEdit.ErrorText = "";
+                        }    
                         //kiem trung
                         System.Data.SqlClient.SqlConnection conn;
                         conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
@@ -369,7 +379,7 @@ namespace Vs.HRM
             Commons.Modules.ObjSystems.MLoadLookUpEdit(ID_NKLookUpEdit, Commons.Modules.ObjSystems.DataNguoiKy(), "ID_NK", "HO_TEN", "HO_TEN");
             Commons.Modules.ObjSystems.MLoadLookUpEdit(ID_CVLookUpEdit, Commons.Modules.ObjSystems.DataChucVu(false), "ID_CV", "TEN_CV", "TEN_CV");
             Commons.Modules.sLoad = "0Load";
-            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(NGACH_LUONGLookUpEdit, Commons.Modules.ObjSystems.DataNgachLuong(false), "ID_NL", "MS_NL", "MS_NL",true);
+            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(NGACH_LUONGLookUpEdit, Commons.Modules.ObjSystems.DataNgachLuong(false), "ID_NL", "TEN_NL", "TEN_NL",true);
             Commons.Modules.ObjSystems.MLoadLookUpEdit(BAC_LUONGLookUpEdit, Commons.Modules.ObjSystems.DataBacLuong(-1, DateTime.Today,true), "ID_BL", "TEN_BL", "TEN_BL",true);
             enableButon(true);
             Commons.Modules.ObjSystems.SetPhanQuyen(windowsUIButton);

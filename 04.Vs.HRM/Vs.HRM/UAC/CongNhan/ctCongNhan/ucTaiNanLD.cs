@@ -175,19 +175,19 @@ namespace Vs.HRM
             ID_NGHE_NGHIEPLookUpEdit.Properties.ReadOnly = visible;
             ID_MUCDOLookUpEdit.Properties.ReadOnly = visible;
 
-            NGAY_BI_TAI_NANDateEdit.Enabled = !visible;
-            GIO_BI_TAI_NANTimeEdit.Enabled = !visible;
+            NGAY_BI_TAI_NANDateEdit.Properties.ReadOnly = visible;
+            GIO_BI_TAI_NANTimeEdit.Properties.ReadOnly = visible;
             NOI_XAY_RATextEdit.Properties.ReadOnly = visible;
             TINH_TRANGTextEdit.Properties.ReadOnly = visible;
             GIAI_QUYETTextEdit.Properties.ReadOnly = visible;
-            NGAY_CAP_CUU_TAI_CHODateEdit.Enabled = !visible;
-            GIO_CAP_CUU_TAI_CHOTimeEdit.Enabled = !visible;
+            NGAY_CAP_CUU_TAI_CHODateEdit.Properties.ReadOnly = visible;
+            GIO_CAP_CUU_TAI_CHOTimeEdit.Properties.ReadOnly = visible;
             PHUONG_PHAP_CAP_CUUTextEdit.Properties.ReadOnly = visible;
             SO_NGAY_NGHITextEdit.Properties.ReadOnly = visible;
             KET_QUA_QDINHTextEdit.Properties.ReadOnly = visible;
             GTRI_TB_THIET_HAITextEdit.Properties.ReadOnly = visible;
-            NGAY_VAO_VIENDateEdit.Enabled = !visible;
-            NGAY_RA_VIENDateEdit.Enabled = !visible;
+            NGAY_VAO_VIENDateEdit.Properties.ReadOnly = visible;
+            NGAY_RA_VIENDateEdit.Properties.ReadOnly = visible;
             DIEN_GIAITextEdit.Properties.ReadOnly = visible;
             CP_Y_TETextEdit.Properties.ReadOnly = visible;
             TRA_LUONGTextEdit.Properties.ReadOnly = visible;

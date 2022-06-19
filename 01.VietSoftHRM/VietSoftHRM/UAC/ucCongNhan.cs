@@ -110,6 +110,8 @@ namespace VietSoftHRM
                         ns.accorMenuleft = accorMenuleft;
                         panel2.Controls.Clear();
                         panel2.Controls.Add(ns);
+                        ns.labelNV = NONNlab_Link;
+                        ns.labelNV.Tag = NONNlab_Link.Text;
                         ns.Dock = DockStyle.Fill;
                         break;
                     }

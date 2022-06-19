@@ -64,13 +64,13 @@
             this.lLoai = new DevExpress.XtraLayout.LayoutControlItem();
             this.laTienQuyDinh = new DevExpress.XtraLayout.LayoutControlItem();
             this.laSoThang = new DevExpress.XtraLayout.LayoutControlItem();
-            this.laSoTien = new DevExpress.XtraLayout.LayoutControlItem();
-            this.laToiThieu = new DevExpress.XtraLayout.LayoutControlItem();
-            this.laLyDo = new DevExpress.XtraLayout.LayoutControlItem();
+            this.lbChonNgay = new DevExpress.XtraLayout.LayoutControlItem();
             this.laDonVi = new DevExpress.XtraLayout.LayoutControlItem();
             this.laXiNghiep = new DevExpress.XtraLayout.LayoutControlItem();
             this.laTo = new DevExpress.XtraLayout.LayoutControlItem();
-            this.lbChonNgay = new DevExpress.XtraLayout.LayoutControlItem();
+            this.laToiThieu = new DevExpress.XtraLayout.LayoutControlItem();
+            this.laSoTien = new DevExpress.XtraLayout.LayoutControlItem();
+            this.laLyDo = new DevExpress.XtraLayout.LayoutControlItem();
             this.windowsUIButton.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.searchControl.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdChung)).BeginInit();
@@ -102,13 +102,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.lLoai)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.laTienQuyDinh)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.laSoThang)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.laSoTien)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.laToiThieu)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.laLyDo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lbChonNgay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.laDonVi)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.laXiNghiep)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.laTo)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lbChonNgay)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.laToiThieu)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.laSoTien)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.laLyDo)).BeginInit();
             this.SuspendLayout();
             // 
             // windowsUIButton
@@ -381,12 +381,12 @@
             // 
             // txSoThang
             // 
-            this.txSoThang.Location = new System.Drawing.Point(543, 90);
+            this.txSoThang.Location = new System.Drawing.Point(453, 90);
             this.txSoThang.Name = "txSoThang";
             this.txSoThang.Properties.Mask.EditMask = "n2";
             this.txSoThang.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.txSoThang.Properties.Mask.UseMaskAsDisplayFormat = true;
-            this.txSoThang.Size = new System.Drawing.Size(409, 26);
+            this.txSoThang.Size = new System.Drawing.Size(499, 26);
             this.txSoThang.StyleController = this.dataLayoutControl1;
             this.txSoThang.TabIndex = 25;
             // 
@@ -399,7 +399,7 @@
             this.raCacTinh.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] {
             new DevExpress.XtraEditors.Controls.RadioGroupItem("TienQuyDinh", "Tiền nhập vào", true, "TienQuyDinh"),
             new DevExpress.XtraEditors.Controls.RadioGroupItem("ThangTinh", "Tính theo tháng", true, "ThangTinh")});
-            this.raCacTinh.Size = new System.Drawing.Size(351, 58);
+            this.raCacTinh.Size = new System.Drawing.Size(261, 58);
             this.raCacTinh.StyleController = this.dataLayoutControl1;
             this.raCacTinh.TabIndex = 23;
             this.raCacTinh.SelectedIndexChanged += new System.EventHandler(this.raCacTinh_SelectedIndexChanged);
@@ -407,12 +407,12 @@
             // 
             // txTienQuyDinh
             // 
-            this.txTienQuyDinh.Location = new System.Drawing.Point(543, 62);
+            this.txTienQuyDinh.Location = new System.Drawing.Point(453, 62);
             this.txTienQuyDinh.Name = "txTienQuyDinh";
             this.txTienQuyDinh.Properties.Mask.EditMask = "n2";
             this.txTienQuyDinh.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.txTienQuyDinh.Properties.Mask.UseMaskAsDisplayFormat = true;
-            this.txTienQuyDinh.Size = new System.Drawing.Size(409, 26);
+            this.txTienQuyDinh.Size = new System.Drawing.Size(499, 26);
             this.txTienQuyDinh.StyleController = this.dataLayoutControl1;
             this.txTienQuyDinh.TabIndex = 19;
             // 
@@ -468,54 +468,36 @@
             this.lLoai.Control = this.raCacTinh;
             this.lLoai.Location = new System.Drawing.Point(0, 56);
             this.lLoai.Name = "lLoai";
-            this.lLoai.Size = new System.Drawing.Size(445, 60);
+            this.lLoai.Size = new System.Drawing.Size(355, 60);
             this.lLoai.Text = "Loại";
             this.lLoai.TextSize = new System.Drawing.Size(89, 20);
             // 
             // laTienQuyDinh
             // 
             this.laTienQuyDinh.Control = this.txTienQuyDinh;
-            this.laTienQuyDinh.Location = new System.Drawing.Point(445, 56);
+            this.laTienQuyDinh.Location = new System.Drawing.Point(355, 56);
             this.laTienQuyDinh.Name = "laTienQuyDinh";
-            this.laTienQuyDinh.Size = new System.Drawing.Size(503, 28);
+            this.laTienQuyDinh.Size = new System.Drawing.Size(593, 28);
             this.laTienQuyDinh.Text = "Tiền quy định";
             this.laTienQuyDinh.TextSize = new System.Drawing.Size(89, 20);
             // 
             // laSoThang
             // 
             this.laSoThang.Control = this.txSoThang;
-            this.laSoThang.Location = new System.Drawing.Point(445, 84);
+            this.laSoThang.Location = new System.Drawing.Point(355, 84);
             this.laSoThang.Name = "laSoThang";
-            this.laSoThang.Size = new System.Drawing.Size(503, 32);
+            this.laSoThang.Size = new System.Drawing.Size(593, 32);
             this.laSoThang.Text = "Số tháng";
             this.laSoThang.TextSize = new System.Drawing.Size(89, 20);
             // 
-            // laSoTien
+            // lbChonNgay
             // 
-            this.laSoTien.Control = this.txSoTien;
-            this.laSoTien.Location = new System.Drawing.Point(355, 116);
-            this.laSoTien.Name = "laSoTien";
-            this.laSoTien.Size = new System.Drawing.Size(334, 28);
-            this.laSoTien.Text = "Số tiền";
-            this.laSoTien.TextSize = new System.Drawing.Size(89, 20);
-            // 
-            // laToiThieu
-            // 
-            this.laToiThieu.Control = this.txSoToiThieu;
-            this.laToiThieu.Location = new System.Drawing.Point(689, 116);
-            this.laToiThieu.Name = "laToiThieu";
-            this.laToiThieu.Size = new System.Drawing.Size(259, 28);
-            this.laToiThieu.Text = "Tối thiểu";
-            this.laToiThieu.TextSize = new System.Drawing.Size(89, 20);
-            // 
-            // laLyDo
-            // 
-            this.laLyDo.Control = this.cbNoiDung;
-            this.laLyDo.Location = new System.Drawing.Point(0, 116);
-            this.laLyDo.Name = "laLyDo";
-            this.laLyDo.Size = new System.Drawing.Size(355, 28);
-            this.laLyDo.Text = "Lý do";
-            this.laLyDo.TextSize = new System.Drawing.Size(89, 20);
+            this.lbChonNgay.Control = this.cboThang;
+            this.lbChonNgay.Location = new System.Drawing.Point(0, 28);
+            this.lbChonNgay.Name = "lbChonNgay";
+            this.lbChonNgay.Size = new System.Drawing.Size(355, 28);
+            this.lbChonNgay.Text = "Chọn ngày";
+            this.lbChonNgay.TextSize = new System.Drawing.Size(89, 20);
             // 
             // laDonVi
             // 
@@ -544,14 +526,32 @@
             this.laTo.Text = "Tổ";
             this.laTo.TextSize = new System.Drawing.Size(89, 20);
             // 
-            // lbChonNgay
+            // laToiThieu
             // 
-            this.lbChonNgay.Control = this.cboThang;
-            this.lbChonNgay.Location = new System.Drawing.Point(0, 28);
-            this.lbChonNgay.Name = "lbChonNgay";
-            this.lbChonNgay.Size = new System.Drawing.Size(355, 28);
-            this.lbChonNgay.Text = "Chọn ngày";
-            this.lbChonNgay.TextSize = new System.Drawing.Size(89, 20);
+            this.laToiThieu.Control = this.txSoToiThieu;
+            this.laToiThieu.Location = new System.Drawing.Point(689, 116);
+            this.laToiThieu.Name = "laToiThieu";
+            this.laToiThieu.Size = new System.Drawing.Size(259, 28);
+            this.laToiThieu.Text = "Tối thiểu";
+            this.laToiThieu.TextSize = new System.Drawing.Size(89, 20);
+            // 
+            // laSoTien
+            // 
+            this.laSoTien.Control = this.txSoTien;
+            this.laSoTien.Location = new System.Drawing.Point(355, 116);
+            this.laSoTien.Name = "laSoTien";
+            this.laSoTien.Size = new System.Drawing.Size(334, 28);
+            this.laSoTien.Text = "Số tiền";
+            this.laSoTien.TextSize = new System.Drawing.Size(89, 20);
+            // 
+            // laLyDo
+            // 
+            this.laLyDo.Control = this.cbNoiDung;
+            this.laLyDo.Location = new System.Drawing.Point(0, 116);
+            this.laLyDo.Name = "laLyDo";
+            this.laLyDo.Size = new System.Drawing.Size(355, 28);
+            this.laLyDo.Text = "Lý do";
+            this.laLyDo.TextSize = new System.Drawing.Size(89, 20);
             // 
             // ucThuongKhacLuong
             // 
@@ -595,13 +595,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.lLoai)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.laTienQuyDinh)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.laSoThang)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.laSoTien)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.laToiThieu)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.laLyDo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lbChonNgay)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.laDonVi)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.laXiNghiep)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.laTo)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lbChonNgay)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.laToiThieu)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.laSoTien)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.laLyDo)).EndInit();
             this.ResumeLayout(false);
 
         }

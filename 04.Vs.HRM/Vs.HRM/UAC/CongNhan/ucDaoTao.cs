@@ -521,13 +521,13 @@ namespace Vs.HRM
             dt.Columns["TEN_CN"].ReadOnly = true;
             if (cochon == false)
             {
-                Commons.Modules.ObjSystems.MLoadXtraGrid(grdDSCN, grvDSCN, dt, false, false, true, true, true, this.Name);
+                Commons.Modules.ObjSystems.MLoadXtraGrid(grdDSCN, grvDSCN, dt, false, false, false, true, true, this.Name);
                 grvDSCN.OptionsSelection.ShowCheckBoxSelectorInColumnHeader = DevExpress.Utils.DefaultBoolean.False;
                 grvDSCN.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.RowSelect;
             }
             else
             {
-                Commons.Modules.ObjSystems.MLoadXtraGrid(grdDSCN, grvDSCN, dt, true, false, true, true, true, this.Name);
+                Commons.Modules.ObjSystems.MLoadXtraGrid(grdDSCN, grvDSCN, dt, true, false,false, true, true, this.Name);
                 grvDSCN.OptionsSelection.ShowCheckBoxSelectorInColumnHeader = DevExpress.Utils.DefaultBoolean.True;
                 grvDSCN.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CheckBoxRowSelect;
                 grvDSCN.OptionsSelection.CheckBoxSelectorField = "CHON";

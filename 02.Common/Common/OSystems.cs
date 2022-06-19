@@ -3950,7 +3950,7 @@ namespace Commons
         }
         public DataTable DataBacLuong(Int64 idnl, DateTime ngayQD, bool coAll)
         {
-            //ID_CV,TEN_CV
+            //ID_BL, T1.TEN_BL
             DataTable dt = new DataTable();
             dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboBacLuong", idnl, ngayQD, Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll));
             return dt;
@@ -4099,6 +4099,14 @@ namespace Commons
             //ID_LCV,TEN_LCV
             DataTable dt = new DataTable();
             dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboLoaiCV", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll));
+            return dt;
+        }
+
+        public DataTable DataCTL(bool coAll)
+        {
+            //ID_CTL,TEN_CTL
+            DataTable dt = new DataTable();
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr,CommandType.Text, "SELECT ID_CTL,TEN as TEN_CTL FROM dbo.CACH_TINH_LUONG ORDER BY TEN"));
             return dt;
         }
 

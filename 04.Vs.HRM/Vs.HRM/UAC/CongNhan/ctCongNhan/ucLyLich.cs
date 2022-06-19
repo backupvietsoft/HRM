@@ -9,6 +9,8 @@ using System.Windows.Forms;
 using DevExpress.XtraBars.Navigation;
 using Vs.Report;
 using System.Threading;
+using DevExpress.XtraGrid;
+using DevExpress.XtraGrid.Views.Grid;
 
 namespace Vs.HRM
 {
@@ -122,7 +124,7 @@ namespace Vs.HRM
             Commons.Modules.ObjSystems.MLoadLookUpEditN(PHAILookupEdit, dt_Phai, "ID_PHAI", "PHAI", "PHAI", "");
 
             ItemForKHU_VUC.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
-            if (Commons.Modules.ObjSystems.KyHieuDV_CN(Commons.Modules.iCongNhan) ==  "SB")
+            if (Commons.Modules.ObjSystems.KyHieuDV_CN(Commons.Modules.iCongNhan) == "SB")
             {
                 // KHU_VUCLookUpEdit
                 DataTable dt_kv = new DataTable();
@@ -285,6 +287,8 @@ namespace Vs.HRM
                         BinDingData(true);
                         enableButon(false);
                         Commons.Modules.ObjSystems.AddnewRow(grvBangCapCN, true);
+                        THAM_GIA_BHXHCheckEdit_CheckedChanged(null, null);
+                        LD_NNCheckEdit_CheckedChanged(null, null);
                         break;
                     }
                 case "sua":
@@ -299,9 +303,10 @@ namespace Vs.HRM
                         LoadCmbLoc(2);
                         enableButon(false);
                         Commons.Modules.ObjSystems.AddnewRow(grvBangCapCN, true);
+                        THAM_GIA_BHXHCheckEdit_CheckedChanged(null, null);
+                        LD_NNCheckEdit_CheckedChanged(null, null);
                         break;
                     }
-
                 case "xoa":
                     {
                         if (Commons.Modules.iCongNhan == -1)
@@ -321,7 +326,7 @@ namespace Vs.HRM
                         if (MS_CNTextEdit.Text != "") if (!kiemtrung(1)) return;
                         if (MS_THE_CCTextEdit.Text != "") if (!kiemtrung(2)) return;
                         if (!kiemtrung(3)) return;
-                        if(SaveData())
+                        if (SaveData())
                         {
                             BinDingData(false);
                             enableButon(true);
@@ -702,8 +707,8 @@ namespace Vs.HRM
             dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetListBangCap", idcn, Commons.Modules.UserName, Commons.Modules.TypeLanguage));
             if (grdBangCapCN.DataSource == null)
             {
-                Commons.Modules.ObjSystems.MLoadXtraGrid(grdBangCapCN, grvBangCapCN, dt, false,false, true, true, true, this.Name);
-                Commons.Modules.ObjSystems.AddComboAnID("ID_LOAI_TD", "TEN_LOAI_TD",grvBangCapCN, Commons.Modules.ObjSystems.DataLoaiTrinhDo(false));
+                Commons.Modules.ObjSystems.MLoadXtraGrid(grdBangCapCN, grvBangCapCN, dt, false, false, true, true, true, this.Name);
+                Commons.Modules.ObjSystems.AddComboAnID("ID_LOAI_TD", "TEN_LOAI_TD", grvBangCapCN, Commons.Modules.ObjSystems.DataLoaiTrinhDo(false));
                 grvBangCapCN.Columns["TEN_BANG"].Visible = false;
                 grvBangCapCN.Columns["XEP_LOAI"].Visible = false;
                 grvBangCapCN.Columns["NGUOI_KY"].Visible = false;
@@ -741,8 +746,8 @@ namespace Vs.HRM
             TENTextEdit.Properties.ReadOnly = visible;
             TEN_KHONG_DAUTextEdit.Properties.ReadOnly = visible;
             VAO_LAM_LAICheckEdit.Properties.ReadOnly = visible;
-            NGAY_SINHDateEdit.Enabled = !visible;
-            NAM_SINHDateEdit.Enabled = !visible;
+            NGAY_SINHDateEdit.ReadOnly = visible;
+            NAM_SINHDateEdit.ReadOnly = visible;
             PHAILookupEdit.Properties.ReadOnly = visible;
             ID_XNLookUpEdit.Properties.ReadOnly = visible;
             ID_DVLookUpEdit.Properties.ReadOnly = visible;
@@ -750,9 +755,9 @@ namespace Vs.HRM
             ID_CVLookUpEdit.Properties.ReadOnly = visible;
             ID_LCVLookUpEdit.Properties.ReadOnly = visible;
             PHEP_CTTextEdit.Properties.ReadOnly = visible;
-            NGAY_HOC_VIECDateEdit.Enabled = !visible;
-            NGAY_THU_VIECDateEdit.Enabled = !visible;
-            NGAY_VAO_LAMDateEdit.Enabled = !visible;
+            NGAY_HOC_VIECDateEdit.ReadOnly = visible;
+            NGAY_THU_VIECDateEdit.ReadOnly = visible;
+            NGAY_VAO_LAMDateEdit.ReadOnly = visible;
             ID_TT_HDLookUpEdit.Properties.ReadOnly = visible;
             ID_TT_HTLookUpEdit.Properties.ReadOnly = visible;
             HINH_THUC_TUYENTextEdit.Properties.ReadOnly = visible;
@@ -761,7 +766,7 @@ namespace Vs.HRM
             TRUC_TIEP_SXCheckEdit.Properties.ReadOnly = visible;
 
             SO_CMNDTextEdit.Properties.ReadOnly = visible;
-            NGAY_CAPDateEdit.Enabled = !visible;
+            NGAY_CAPDateEdit.ReadOnly = visible;
             txtNOI_CAP.Properties.ReadOnly = visible;
             ID_TT_HNLookUpEdit.Properties.ReadOnly = visible;
             MS_THUETextEdit.Properties.ReadOnly = visible;
@@ -792,10 +797,11 @@ namespace Vs.HRM
             THON_XOM_TAM_TRUTextEdit.Properties.ReadOnly = visible;
             cboID_KV.Properties.ReadOnly = visible;
 
-            SO_BHXHTextEdit.Properties.ReadOnly = visible;
-            NGAY_DBHXHDateEdit.Enabled = !visible;
-            NGAY_CHAM_DUT_NOP_BHXHDateEdit.Enabled = !visible;
+
             THAM_GIA_BHXHCheckEdit.Properties.ReadOnly = visible;
+            SO_BHXHTextEdit.Properties.ReadOnly = visible;
+            NGAY_DBHXHDateEdit.ReadOnly = visible;
+            NGAY_CHAM_DUT_NOP_BHXHDateEdit.ReadOnly = visible;
             SO_THE_BHYTTextEdit.Properties.ReadOnly = visible;
             NGAY_HET_HANDateEdit.Properties.ReadOnly = visible;
             TINH_THANHLookUpEdit.Properties.ReadOnly = visible;
@@ -850,7 +856,7 @@ namespace Vs.HRM
             {
                 //tạo bảng tạm bằng cấp
 
-                Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, "sbtBC" + Commons.Modules.UserName,Commons.Modules.ObjSystems.ConvertDatatable(grvBangCapCN),"");
+                Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, "sbtBC" + Commons.Modules.UserName, Commons.Modules.ObjSystems.ConvertDatatable(grvBangCapCN), "");
                 Commons.Modules.iCongNhan = Convert.ToInt64(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spUpdateCongNhan",
                 Commons.Modules.iCongNhan,
                 imgToByteConverter(HINH_CNPictureEdit.Image),
@@ -1048,6 +1054,60 @@ namespace Vs.HRM
             catch (Exception)
             {
                 PHEP_CTTextEdit.Text = "0";
+            }
+        }
+
+        private void grdBangCapCN_ProcessGridKey(object sender, KeyEventArgs e)
+        {
+            var grid = sender as GridControl;
+            var view = grid.FocusedView as GridView;
+            if (e.KeyData == Keys.Delete && windowsUIButton.Buttons[5].Properties.Visible == true)
+            {
+                XoaUser();
+            }
+        }
+
+        private void XoaUser()
+        {
+            if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgDeleteUser"), Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgTieuDeXoa"), MessageBoxButtons.YesNo) == DialogResult.No) return;
+            //xóa
+            try
+            {
+                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "DELETE dbo.BANG_CAP WHERE ID_BC  = " + grvBangCapCN.GetFocusedRowCellValue("ID_BC") + "");
+                grvBangCapCN.DeleteSelectedRows();
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgDelDangSuDung") + "\n" + ex.Message.ToString());
+            }
+        }
+
+        private void THAM_GIA_BHXHCheckEdit_CheckedChanged(object sender, EventArgs e)
+        {
+            if (windowsUIButton.Buttons[5].Properties.Visible == false)
+            {
+                     bool visible = THAM_GIA_BHXHCheckEdit.Checked;
+                    SO_BHXHTextEdit.Properties.ReadOnly = !visible;
+                    NGAY_DBHXHDateEdit.ReadOnly = !visible;
+                    NGAY_CHAM_DUT_NOP_BHXHDateEdit.ReadOnly = !visible;
+                    SO_THE_BHYTTextEdit.Properties.ReadOnly = !visible;
+                    NGAY_HET_HANDateEdit.Properties.ReadOnly = !visible;
+                    TINH_THANHLookUpEdit.Properties.ReadOnly = !visible;
+                    BENH_VIENLookUpEdit.Properties.ReadOnly = !visible;
+            }
+        }
+
+        private void LD_NNCheckEdit_CheckedChanged(object sender, EventArgs e)
+        {
+            if (windowsUIButton.Buttons[5].Properties.Visible == false)
+            {
+                bool visible = LD_NNCheckEdit.Checked;
+                SO_GIAY_PHEPTextEdit.Properties.ReadOnly = !visible;
+                NGAY_CAP_GPDateEdit.Properties.ReadOnly = !visible;
+                LOAI_QUOC_TICHLookUpEdit.Properties.ReadOnly = !visible;
+                CAP_GIAY_PHEPLookUpEdit.Properties.ReadOnly = !visible;
+                NGAY_HH_GPDateEdit.Properties.ReadOnly = !visible;
+                LD_GIAM_LDNNLookUpEdit.Properties.ReadOnly = !visible;
             }
         }
     }

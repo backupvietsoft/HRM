@@ -1744,3 +1744,4 @@ H:\Lamviec\Lamviec\HRM\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\V
 H:\Lamviec\Lamviec\HRM\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.TimeAttendance.dll
 H:\Lamviec\Lamviec\HRM\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.TimeAttendance.pdb
 H:\Lamviec\Lamviec\HRM\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.TimeAttendance.frmLinkDuLieuChamCong1.resources
+F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.TimeAttendance.frmLinkDuLieuChamCong1.resources

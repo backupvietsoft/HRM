@@ -3810,10 +3810,10 @@ namespace Commons
         }
 
         #region data combobox hay dùng
-        public DataTable DataLyDoVang(bool coAll)
+        public DataTable DataLyDoVang(bool coAll, int tinhBH = -1)
         {
             DataTable dt = new DataTable();
-            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboLDV", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll));
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboLDV", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll,tinhBH));
             return dt;
         }
         public DataTable DataLoaiDieuChinh(bool coAll)

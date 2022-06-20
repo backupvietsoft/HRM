@@ -570,7 +570,6 @@ G:\2022\02.HRM\02.Common\Common\obj\Debug\Commons.csproj.CoreCompileInputs.cache
 G:\2022\02.HRM\02.Common\Common\obj\Debug\Commons.csproj.CopyComplete
 G:\2022\02.HRM\02.Common\Common\obj\Debug\Commons.dll
 G:\2022\02.HRM\02.Common\Common\obj\Debug\Commons.pdb
-G:\2022\02.HRM\02.Common\Common\bin\Debug\ICSharpCode.SharpZipLib.dll
 F:\01.HRM\02.Common\Common\bin\Debug\Commons.dll.config
 F:\01.HRM\02.Common\Common\bin\Debug\Commons.dll
 F:\01.HRM\02.Common\Common\bin\Debug\Commons.pdb

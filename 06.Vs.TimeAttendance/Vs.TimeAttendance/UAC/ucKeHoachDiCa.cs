@@ -18,6 +18,7 @@ namespace Vs.TimeAttendance
     public partial class ucKeHoachDiCa : DevExpress.XtraEditors.XtraUserControl
     {
         public static ucKeHoachDiCa _instance;
+        private bool them = false;
         public static ucKeHoachDiCa Instance
         {
             get
@@ -41,7 +42,7 @@ namespace Vs.TimeAttendance
             Commons.Modules.ObjSystems.LoadCboXiNghiep(cboDV, cboXN);
             Commons.Modules.ObjSystems.LoadCboTo(cboDV, cboXN, cboTo);
             dateNam.DateTime = DateTime.Now;
-            LoadGrdCongNhan();
+            LoadGrdCongNhan(them);
             radTinHTrang_SelectedIndexChanged(null, null);
             LoadgrdKeHoachDiCa();
             grvCongNhan_FocusedRowChanged(null, null);
@@ -67,7 +68,8 @@ namespace Vs.TimeAttendance
             Commons.Modules.sLoad = "0Load";
             Commons.Modules.ObjSystems.LoadCboXiNghiep(cboDV, cboXN);
             Commons.Modules.ObjSystems.LoadCboTo(cboDV, cboXN, cboTo);
-            LoadGrdCongNhan();
+            LoadGrdCongNhan(them);
+            LoadgrdKeHoachDiCa();
             grvCongNhan_FocusedRowChanged(null, null);
             Commons.Modules.sLoad = "";
         }
@@ -76,7 +78,8 @@ namespace Vs.TimeAttendance
             if (Commons.Modules.sLoad == "0Load") return;
             Commons.Modules.sLoad = "0Load";
             Commons.Modules.ObjSystems.LoadCboTo(cboDV, cboXN, cboTo);
-            LoadGrdCongNhan();
+            LoadGrdCongNhan(them);
+            LoadgrdKeHoachDiCa();
             grvCongNhan_FocusedRowChanged(null, null);
             Commons.Modules.sLoad = "";
         }
@@ -84,7 +87,8 @@ namespace Vs.TimeAttendance
         {
             if (Commons.Modules.sLoad == "0Load") return;
             Commons.Modules.sLoad = "0Load";
-            LoadGrdCongNhan();
+            LoadGrdCongNhan(them);
+            LoadgrdKeHoachDiCa();
             grvCongNhan_FocusedRowChanged(null, null);
             Commons.Modules.sLoad = "";
         }
@@ -126,20 +130,22 @@ namespace Vs.TimeAttendance
             XtraUserControl ctl = new XtraUserControl();
             switch (btn.Tag.ToString())
             {
-                case "Capnhatnhom":
+                //case "Capnhatnhom":
 
-                    {
-                        frmDangKyKeHoachDiCa frm = new frmDangKyKeHoachDiCa();
-                        frm.ShowDialog();
-                        break;
-                    }
+                //    {
+                //        frmDangKyKeHoachDiCa frm = new frmDangKyKeHoachDiCa();
+                //        frm.ShowDialog();
+                //        break;
+                //    }
                 case "themsua":
                     {
-                        if (grvCongNhan.RowCount == 0)
-                        {
-                            Commons.Modules.ObjSystems.msgChung(Commons.ThongBao.msgBanChuaChonDuLieu);
-                            return;
-                        }
+                        //if (grvCongNhan.RowCount == 0)
+                        //{
+                        //    Commons.Modules.ObjSystems.msgChung(Commons.ThongBao.msgBanChuaChonDuLieu);
+                        //    return;
+                        //}
+                        them = true;
+                        LoadGrdCongNhan(them);
                         Commons.Modules.ObjSystems.AddnewRow(grvKeHoachDiCa, true);
                         enableButon(false);
                         break;
@@ -164,6 +170,8 @@ namespace Vs.TimeAttendance
                             Commons.Modules.ObjSystems.msgChung(Commons.ThongBao.msgDuLieuDangSuDung);
                         }
                         Commons.Modules.ObjSystems.DeleteAddRow(grvKeHoachDiCa);
+                        them = false;
+                        LoadGrdCongNhan(them);
                         LoadgrdKeHoachDiCa();
                         grvCongNhan_FocusedRowChanged(null, null);
                         enableButon(true);
@@ -173,6 +181,8 @@ namespace Vs.TimeAttendance
                 case "khongluu":
                     {
                         Commons.Modules.ObjSystems.DeleteAddRow(grvKeHoachDiCa);
+                        them = false;
+                        LoadGrdCongNhan(them);
                         LoadgrdKeHoachDiCa();
                         grvCongNhan_FocusedRowChanged(null, null);
                         enableButon(true);
@@ -187,21 +197,58 @@ namespace Vs.TimeAttendance
         }
 
         #region hàm xử lý dữ liệu
-        private void LoadGrdCongNhan()
+        private void LoadGrdCongNhan(bool them)
         {
+            //try
+            //{
+            //    Commons.Modules.sLoad = "0Load";
+            //    DataTable dt = new DataTable();
+            //    dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetCongNhanTheoTT", cboDV.EditValue, cboXN.EditValue, cboTo.EditValue, Commons.Modules.UserName, Commons.Modules.TypeLanguage, 1));
+            //    Commons.Modules.ObjSystems.MLoadXtraGrid(grdCongNhan, grvCongNhan, dt, false, false, true, true, true, this.Name);
+            //    grvCongNhan.Columns["ID_CN"].Visible = false;
+            //    grvCongNhan.Columns["TINH_TRANG"].Visible = false;
+            //    //grvCongNhan.Appearance.HeaderPanel.BackColor = Color.FromArgb(240, 128, 25);
+            //    //for (int i = 0; i < grvCongNhan.Columns.Count; i++)
+            //    //{
+            //    //    grvCongNhan.Columns[i].AppearanceHeader.BackColor = Color.FromArgb(200, 200, 200);
+            //    //}
+            //    Commons.Modules.sLoad = "";
+            //}
+            //catch (Exception ex)
+            //{
+            //}
+
             try
             {
                 Commons.Modules.sLoad = "0Load";
                 DataTable dt = new DataTable();
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetCongNhanTheoTT", cboDV.EditValue, cboXN.EditValue, cboTo.EditValue, Commons.Modules.UserName, Commons.Modules.TypeLanguage, 1));
-                Commons.Modules.ObjSystems.MLoadXtraGrid(grdCongNhan, grvCongNhan, dt, false, false, true, true, true, this.Name);
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetListCN_KeHoachDiCa", dateNam.Text, cboDV.EditValue, cboXN.EditValue, cboTo.EditValue, Commons.Modules.UserName, Commons.Modules.TypeLanguage, them));
+                dt.Columns["CHON"].ReadOnly = false;
+                Commons.Modules.ObjSystems.MLoadXtraGrid(grdCongNhan, grvCongNhan, dt, true, false, true, true, true, this.Name);
                 grvCongNhan.Columns["ID_CN"].Visible = false;
                 grvCongNhan.Columns["TINH_TRANG"].Visible = false;
+                grvCongNhan.Columns["MS_CN"].OptionsColumn.AllowEdit = false;
+                grvCongNhan.Columns["HO_TEN"].OptionsColumn.AllowEdit = false;
+
+                if (them == false)
+                {
+                    grvCongNhan.Columns["CHON"].Visible = false;
+                }
+                else
+                {
+                    grvCongNhan.Columns["CHON"].Visible = true;
+                }
                 //grvCongNhan.Appearance.HeaderPanel.BackColor = Color.FromArgb(240, 128, 25);
                 //for (int i = 0; i < grvCongNhan.Columns.Count; i++)
                 //{
                 //    grvCongNhan.Columns[i].AppearanceHeader.BackColor = Color.FromArgb(200, 200, 200);
                 //}
+                try
+                {
+                    grvCongNhan.OptionsSelection.CheckBoxSelectorField = "CHON";
+                    grvCongNhan.Columns["CHON"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
+                }
+                catch { }
                 Commons.Modules.sLoad = "";
             }
             catch (Exception ex)
@@ -217,7 +264,7 @@ namespace Vs.TimeAttendance
                 //string select = "SELECT ID_CN,ID_NHOM,CA,TU_NGAY,DEN_NGAY,GHI_CHU FROM KE_HOACH_DI_CA  WHERE ID_CN = " + (grvCongNhan.GetFocusedRowCellValue("ID_CN")==null?-1 : grvCongNhan.GetFocusedRowCellValue("ID_CN")) + " AND YEAR(TU_NGAY) = " + dateNam.Text + "";
                 //string select = "SELECT ID_CN, ID_NHOM, CA, TU_NGAY, DEN_NGAY, GHI_CHU FROM KE_HOACH_DI_CA  WHERE YEAR(TU_NGAY) = " + dateNam.Text + "";
                 string select = "SELECT ID_CN, ID_NHOM, CA, TU_NGAY, DEN_NGAY, GHI_CHU FROM KE_HOACH_DI_CA  WHERE YEAR(TU_NGAY) = " + dateNam.DateTime.Year + "";
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, select));
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetListKeHoachDiCa", dateNam.DateTime.Year, cboDV.EditValue, cboXN.EditValue, cboTo.EditValue, Commons.Modules.UserName, Commons.Modules.TypeLanguage));
                 if (grdKeHoachDiCa.DataSource == null)
                 {
                     Commons.Modules.ObjSystems.MLoadXtraGrid(grdKeHoachDiCa, grvKeHoachDiCa, dt, false, false, true, true, true, this.Name);
@@ -309,10 +356,8 @@ namespace Vs.TimeAttendance
             windowsUIButton.Buttons[3].Properties.Visible = visible;
             windowsUIButton.Buttons[4].Properties.Visible = visible;
             windowsUIButton.Buttons[5].Properties.Visible = visible;
-            windowsUIButton.Buttons[6].Properties.Visible = visible;
-            windowsUIButton.Buttons[7].Properties.Visible = visible;
-            windowsUIButton.Buttons[8].Properties.Visible = !visible;
-            windowsUIButton.Buttons[9].Properties.Visible = !visible;
+            windowsUIButton.Buttons[6].Properties.Visible = !visible;
+            windowsUIButton.Buttons[7].Properties.Visible = !visible;
             searchControl.Visible = visible;
         }
         private void XoaKeHoachDiCa()
@@ -340,8 +385,8 @@ namespace Vs.TimeAttendance
             try
             {
                 dtTmp = (DataTable)grdCongNhan.DataSource;
-                if (radTinHTrang.SelectedIndex == 1) sdkien = "(TINH_TRANG = 1)";
-                if (radTinHTrang.SelectedIndex == 2) sdkien = "(TINH_TRANG = 0)";
+                if (radTinHTrang.SelectedIndex == 0) sdkien = "(TINH_TRANG = 1)";
+                if (radTinHTrang.SelectedIndex == 1) sdkien = "(TINH_TRANG = 0)";
                 dtTmp.DefaultView.RowFilter = sdkien;
             }
             catch
@@ -366,9 +411,16 @@ namespace Vs.TimeAttendance
                 string sDK = "";
                 sIDCN = "-1";
                 try { sIDCN = grvCongNhan.GetFocusedRowCellValue("ID_CN").ToString(); } catch { }
-                if (sIDCN != "-1") sDK = " ID_CN = '" + sIDCN + "' ";
+                if (sIDCN != "-1")
+                {
+                    sDK = " ID_CN = '" + sIDCN + "' ";
+                    dtTmp.DefaultView.RowFilter = sDK;
+                }
+                else
+                {
+                    grdKeHoachDiCa.Hide();
+                }
 
-                dtTmp.DefaultView.RowFilter = sDK;
             }
             catch { }
         }
@@ -415,6 +467,7 @@ namespace Vs.TimeAttendance
         private void dateNam_EditValueChanged(object sender, EventArgs e)
         {
             if (Commons.Modules.sLoad == "0Load") return;
+            LoadGrdCongNhan(them);
             LoadgrdKeHoachDiCa();
             grvCongNhan_FocusedRowChanged(null, null);
         }

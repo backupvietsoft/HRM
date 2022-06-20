@@ -1908,7 +1908,6 @@ namespace Commons
             catch
             { }
         }
-
         public void DoiNN(Control Ctl, Form frm, DataTable dtNgu)
         {
             // iFontsize
@@ -2240,6 +2239,7 @@ namespace Commons
                     case "CheckBox":
 
                         {
+                            // CheckEdit
                             if (Ctl.Name.ToUpper().Substring(0, 4) != "NONN" & Ctl.Name.Length >= 4)
                                 Ctl.Text = GetNN(dtNgu, Ctl.Name, frm.Name);// Modules.ObjLanguages.GetLanguage(Modules.ModuleName, frm.Name, Ctl.Name, Modules.TypeLanguage)
 

@@ -72,6 +72,11 @@ namespace Vs.TimeAttendance
             Commons.Modules.ObjSystems.LoadCboXiNghiep(cboDonVi, cboXiNghiep);
             Commons.Modules.ObjSystems.LoadCboTo(cboDonVi, cboXiNghiep, cboTo);
 
+            DataTable dtNCC = new DataTable();
+            dtNCC.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboNhomChamCong",Commons.Modules.UserName, Commons.Modules.TypeLanguage, false));
+            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_NCC, dtNCC, "ID_NHOM", "TEN_NHOM", "TEN_NHOM");
+
+
             LoadGridCongNhan();
             LoadGrdDSLamThem();
 

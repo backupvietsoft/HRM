@@ -109,6 +109,12 @@
     <Compile Include="Form\frmInKehoachdica.Designer.cs">
       <DependentUpon>frmInKehoachdica.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form\frmLinkDuLieuChamCong1.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Form\frmLinkDuLieuChamCong1.Designer.cs">
+      <DependentUpon>frmLinkDuLieuChamCong1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form\frmLinkDuLieuChamCong.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -503,6 +509,9 @@
     </Compile>
     <EmbeddedResource Include="Form\frmInKehoachdica.resx">
       <DependentUpon>frmInKehoachdica.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\frmLinkDuLieuChamCong1.resx">
+      <DependentUpon>frmLinkDuLieuChamCong1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\frmLinkDuLieuChamCong.resx">
       <DependentUpon>frmLinkDuLieuChamCong.cs</DependentUpon>

@@ -252,7 +252,7 @@ namespace VietSoftHRM
                     }
                 case "mnuLinkDuLieuChamCong":
                     {
-                        frmLinkDuLieuChamCong tmp = new frmLinkDuLieuChamCong();
+                        frmLinkDuLieuChamCong1 tmp = new frmLinkDuLieuChamCong1();
                         panel2.Controls.Clear();
                         panel2.Controls.Add(tmp);
                         tmp.Dock = DockStyle.Fill;

@@ -54,6 +54,8 @@
             this.ID_KT_KLLookUpEdit = new DevExpress.XtraEditors.LookUpEdit();
             this.ID_NKLookUpEdit = new DevExpress.XtraEditors.LookUpEdit();
             this.LOAI_KTLookUpEdit = new DevExpress.XtraEditors.LookUpEdit();
+            this.NOI_DUNGTextEdit = new DevExpress.XtraEditors.TextEdit();
+            this.GHI_CHUTextEdit = new DevExpress.XtraEditors.TextEdit();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.ItemForNGAY_HIEU_LUC = new DevExpress.XtraLayout.LayoutControlItem();
@@ -72,8 +74,6 @@
             this.ItemForKH_SUA_DOI = new DevExpress.XtraLayout.LayoutControlItem();
             this.ItemForNOI_DUNG = new DevExpress.XtraLayout.LayoutControlItem();
             this.dxValidationProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
-            this.NOI_DUNGTextEdit = new DevExpress.XtraEditors.TextEdit();
-            this.GHI_CHUTextEdit = new DevExpress.XtraEditors.TextEdit();
             this.windowsUIButton.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.searchControl.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdKhenThuong)).BeginInit();
@@ -94,6 +94,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.ID_KT_KLLookUpEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ID_NKLookUpEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.LOAI_KTLookUpEdit.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NOI_DUNGTextEdit.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.GHI_CHUTextEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForNGAY_HIEU_LUC)).BeginInit();
@@ -112,8 +114,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.ItemForKH_SUA_DOI)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForNOI_DUNG)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NOI_DUNGTextEdit.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.GHI_CHUTextEdit.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // windowsUIButton
@@ -347,6 +347,22 @@
             this.LOAI_KTLookUpEdit.StyleController = this.dataLayoutControl1;
             this.LOAI_KTLookUpEdit.TabIndex = 14;
             // 
+            // NOI_DUNGTextEdit
+            // 
+            this.NOI_DUNGTextEdit.Location = new System.Drawing.Point(171, 174);
+            this.NOI_DUNGTextEdit.Name = "NOI_DUNGTextEdit";
+            this.NOI_DUNGTextEdit.Size = new System.Drawing.Size(858, 26);
+            this.NOI_DUNGTextEdit.StyleController = this.dataLayoutControl1;
+            this.NOI_DUNGTextEdit.TabIndex = 15;
+            // 
+            // GHI_CHUTextEdit
+            // 
+            this.GHI_CHUTextEdit.Location = new System.Drawing.Point(171, 202);
+            this.GHI_CHUTextEdit.Name = "GHI_CHUTextEdit";
+            this.GHI_CHUTextEdit.Size = new System.Drawing.Size(858, 26);
+            this.GHI_CHUTextEdit.StyleController = this.dataLayoutControl1;
+            this.GHI_CHUTextEdit.TabIndex = 15;
+            // 
             // Root
             // 
             this.Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
@@ -383,8 +399,8 @@
             // 
             // ItemForNGAY_HIEU_LUC
             // 
-            this.ItemForNGAY_HIEU_LUC.AppearanceItemCaption.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold);
-            this.ItemForNGAY_HIEU_LUC.AppearanceItemCaption.Options.UseFont = true;
+            this.ItemForNGAY_HIEU_LUC.AppearanceItemCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.ItemForNGAY_HIEU_LUC.AppearanceItemCaption.Options.UseForeColor = true;
             this.ItemForNGAY_HIEU_LUC.Control = this.NGAY_HIEU_LUCDateEdit;
             this.ItemForNGAY_HIEU_LUC.Location = new System.Drawing.Point(512, 28);
             this.ItemForNGAY_HIEU_LUC.Name = "ItemForNGAY_HIEU_LUC";
@@ -412,8 +428,8 @@
             // 
             // ItemForSO_QUYET_DINH
             // 
-            this.ItemForSO_QUYET_DINH.AppearanceItemCaption.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold);
-            this.ItemForSO_QUYET_DINH.AppearanceItemCaption.Options.UseFont = true;
+            this.ItemForSO_QUYET_DINH.AppearanceItemCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.ItemForSO_QUYET_DINH.AppearanceItemCaption.Options.UseForeColor = true;
             this.ItemForSO_QUYET_DINH.Control = this.SO_QUYET_DINHTextEdit;
             this.ItemForSO_QUYET_DINH.Location = new System.Drawing.Point(0, 0);
             this.ItemForSO_QUYET_DINH.Name = "ItemForSO_QUYET_DINH";
@@ -423,8 +439,8 @@
             // 
             // ItemForID_KT_KL
             // 
-            this.ItemForID_KT_KL.AppearanceItemCaption.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold);
-            this.ItemForID_KT_KL.AppearanceItemCaption.Options.UseFont = true;
+            this.ItemForID_KT_KL.AppearanceItemCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.ItemForID_KT_KL.AppearanceItemCaption.Options.UseForeColor = true;
             this.ItemForID_KT_KL.Control = this.ID_KT_KLLookUpEdit;
             this.ItemForID_KT_KL.Location = new System.Drawing.Point(512, 0);
             this.ItemForID_KT_KL.Name = "ItemForID_KT_KL";
@@ -434,8 +450,8 @@
             // 
             // ItemForNGAY_KY
             // 
-            this.ItemForNGAY_KY.AppearanceItemCaption.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold);
-            this.ItemForNGAY_KY.AppearanceItemCaption.Options.UseFont = true;
+            this.ItemForNGAY_KY.AppearanceItemCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.ItemForNGAY_KY.AppearanceItemCaption.Options.UseForeColor = true;
             this.ItemForNGAY_KY.Control = this.NGAY_KYDateEdit;
             this.ItemForNGAY_KY.Location = new System.Drawing.Point(0, 28);
             this.ItemForNGAY_KY.Name = "ItemForNGAY_KY";
@@ -445,8 +461,8 @@
             // 
             // ItemForLOAI_KT
             // 
-            this.ItemForLOAI_KT.AppearanceItemCaption.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold);
-            this.ItemForLOAI_KT.AppearanceItemCaption.Options.UseFont = true;
+            this.ItemForLOAI_KT.AppearanceItemCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.ItemForLOAI_KT.AppearanceItemCaption.Options.UseForeColor = true;
             this.ItemForLOAI_KT.Control = this.LOAI_KTLookUpEdit;
             this.ItemForLOAI_KT.Location = new System.Drawing.Point(512, 56);
             this.ItemForLOAI_KT.Name = "ItemForLOAI_KT";
@@ -523,22 +539,6 @@
             this.ItemForNOI_DUNG.Text = "NOI_DUNG";
             this.ItemForNOI_DUNG.TextSize = new System.Drawing.Size(162, 20);
             // 
-            // NOI_DUNGTextEdit
-            // 
-            this.NOI_DUNGTextEdit.Location = new System.Drawing.Point(171, 174);
-            this.NOI_DUNGTextEdit.Name = "NOI_DUNGTextEdit";
-            this.NOI_DUNGTextEdit.Size = new System.Drawing.Size(858, 26);
-            this.NOI_DUNGTextEdit.StyleController = this.dataLayoutControl1;
-            this.NOI_DUNGTextEdit.TabIndex = 15;
-            // 
-            // GHI_CHUTextEdit
-            // 
-            this.GHI_CHUTextEdit.Location = new System.Drawing.Point(171, 202);
-            this.GHI_CHUTextEdit.Name = "GHI_CHUTextEdit";
-            this.GHI_CHUTextEdit.Size = new System.Drawing.Size(858, 26);
-            this.GHI_CHUTextEdit.StyleController = this.dataLayoutControl1;
-            this.GHI_CHUTextEdit.TabIndex = 15;
-            // 
             // ucKhenThuong
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -568,6 +568,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.ID_KT_KLLookUpEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ID_NKLookUpEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.LOAI_KTLookUpEdit.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NOI_DUNGTextEdit.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.GHI_CHUTextEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForNGAY_HIEU_LUC)).EndInit();
@@ -586,8 +588,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.ItemForKH_SUA_DOI)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForNOI_DUNG)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NOI_DUNGTextEdit.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.GHI_CHUTextEdit.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }

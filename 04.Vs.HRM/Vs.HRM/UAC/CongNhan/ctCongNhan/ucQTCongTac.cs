@@ -67,6 +67,13 @@ namespace Vs.HRM
             //ID_LCV_CULookUpEdit.EditValue = "";
             Commons.Modules.ObjSystems.MLoadLookUpEdit(ID_LCV_CULookUpEdit, Commons.Modules.ObjSystems.DataLoaiCV(false), "ID_LCV", "TEN_LCV", "TEN_LCV", true);
 
+            //ID_CTL_CULookUpEdit.EditValue = "";
+            Commons.Modules.ObjSystems.MLoadLookUpEdit(ID_CTL_CULookUpEdit, Commons.Modules.ObjSystems.DataCTL(false), "ID_CTL", "TEN_CTL", "TEN_CTL", true);
+
+            //ID_CTLookUpEdit.EditValue = "";
+            Commons.Modules.ObjSystems.MLoadLookUpEdit(ID_CTLLookUpEdit, Commons.Modules.ObjSystems.DataCTL(false), "ID_CTL", "TEN_CTL", "TEN_CTL", true);
+          
+
             LoadgrdCongTac(-1);
 
             enableButon(true);
@@ -132,6 +139,9 @@ namespace Vs.HRM
             grvCongTac.Columns["GHI_CHU"].Visible = false;
             grvCongTac.Columns["NGAY_KY"].Visible = false;
             grvCongTac.Columns["TEN_CN"].Visible = false;
+            grvCongTac.Columns["ID_CTL_CU"].Visible = false;
+            grvCongTac.Columns["ID_CTL"].Visible = false;
+
 
 
             //format column
@@ -164,10 +174,10 @@ namespace Vs.HRM
             grdCongTac.Enabled = visible;
             //SO_HIEU_BANGTextEdit.Properties.ReadOnly = visible;
             SO_QUYET_DINHTextEdit.Properties.ReadOnly = visible;
-            NGAY_KYDateEdit.Enabled = !visible;
-            NGAY_HIEU_LUCDateEdit.Enabled = !visible;
+            NGAY_KYDateEdit.Properties.ReadOnly = visible;
+            NGAY_HIEU_LUCDateEdit.Properties.ReadOnly = visible;
             ID_LQDLookUpEdit.Properties.ReadOnly = visible;
-            ID_CNTextEdit.Properties.ReadOnly = true;
+        
             ID_NKLookUpEdit.Properties.ReadOnly = visible;
             ID_CV_CULookUpEdit.Properties.ReadOnly = visible;
             DON_VI_CUTextEdit.Properties.ReadOnly = true;
@@ -177,6 +187,7 @@ namespace Vs.HRM
             NHIEM_VUMemoEdit.Properties.ReadOnly = visible;
             MUC_LUONG_CUTextEdit.Properties.ReadOnly = visible;
             ID_LCV_CULookUpEdit.Properties.ReadOnly = visible;
+            ID_CTL_CULookUpEdit.Properties.ReadOnly = visible;
 
             DON_VILookUpEdit.Properties.ReadOnly = visible;
             XI_NGHIEPLookUpEdit.Properties.ReadOnly = visible;
@@ -185,6 +196,7 @@ namespace Vs.HRM
             ID_LCVLookUpEdit.Properties.ReadOnly = visible;
             MUC_LUONGTextEdit.Properties.ReadOnly = visible;
             GHI_CHUTextEdit.Properties.ReadOnly = visible;
+            ID_CTLLookUpEdit.Properties.ReadOnly = visible;
 
         }
 
@@ -216,7 +228,10 @@ namespace Vs.HRM
                     ID_CV_CULookUpEdit.EditValue = tableTTC_CN.Rows[0]["ID_CV"];
                     ID_LCV_CULookUpEdit.EditValue = tableTTC_CN.Rows[0]["ID_LCV"];
                     ID_CVLookUpEdit.EditValue = tableTTC_CN.Rows[0]["ID_CV"];
-                    ID_LCVLookUpEdit.EditValue = tableTTC_CN.Rows[0]["ID_LCV"];
+                    ID_LCVLookUpEdit.EditValue = tableTTC_CN.Rows[0]["ID_LCV_CU"];
+                    ID_CTL_CULookUpEdit.EditValue = tableTTC_CN.Rows[0]["ID_CTL"];
+                    ID_CTLLookUpEdit.EditValue = tableTTC_CN.Rows[0]["ID_CTL"];
+
                     DON_VILookUpEdit.EditValue = null;
                     XI_NGHIEPLookUpEdit.EditValue = null;
                     ID_TOLookUpEdit.EditValue = null;
@@ -249,12 +264,14 @@ namespace Vs.HRM
                     ID_NKLookUpEdit.EditValue = grvCongTac.GetFocusedRowCellValue("ID_NK");
                     ID_CV_CULookUpEdit.EditValue = grvCongTac.GetFocusedRowCellValue("ID_CV_CU");
                     ID_LCV_CULookUpEdit.EditValue = grvCongTac.GetFocusedRowCellValue("ID_LCV_CU");
+                    ID_CTL_CULookUpEdit.EditValue = grvCongTac.GetFocusedRowCellValue("ID_CTL_CU");
 
                     DON_VILookUpEdit.EditValue = grvCongTac.GetFocusedRowCellValue("ID_DV");
                     XI_NGHIEPLookUpEdit.EditValue = grvCongTac.GetFocusedRowCellValue("ID_XN");
                     ID_TOLookUpEdit.EditValue = grvCongTac.GetFocusedRowCellValue("ID_TO");
                     ID_CVLookUpEdit.EditValue = grvCongTac.GetFocusedRowCellValue("ID_CV");
                     ID_LCVLookUpEdit.EditValue = grvCongTac.GetFocusedRowCellValue("ID_LCV");
+                    ID_CTLLookUpEdit.EditValue = grvCongTac.GetFocusedRowCellValue("ID_CTL");
                 }
                 catch { }
             }
@@ -274,6 +291,8 @@ namespace Vs.HRM
                 idToCu,
                 ID_CV_CULookUpEdit.EditValue,
                 ID_LCV_CULookUpEdit.EditValue,
+                ID_CTLLookUpEdit.EditValue,
+                ID_CTL_CULookUpEdit.EditValue,
                 SO_QUYET_DINHTextEdit.EditValue,
                 NGAY_KYDateEdit.EditValue,
                 NGAY_HIEU_LUCDateEdit.EditValue,

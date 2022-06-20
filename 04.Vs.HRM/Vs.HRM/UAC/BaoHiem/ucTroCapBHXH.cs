@@ -177,7 +177,7 @@ namespace Vs.HRM
                 cboID_LDV.NullText = "";
                 cboID_LDV.ValueMember = "ID_LDV";
                 cboID_LDV.DisplayMember = "TEN_LDV";
-                cboID_LDV.DataSource = Commons.Modules.ObjSystems.DataLyDoVang(false);
+                cboID_LDV.DataSource = Commons.Modules.ObjSystems.DataLyDoVang(false,1);
                 cboID_LDV.Columns.Clear();
                 cboID_LDV.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID_LDV"));
                 cboID_LDV.Columns["ID_LDV"].Caption = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "ID_LDV");
@@ -2408,7 +2408,7 @@ namespace Vs.HRM
                 }
                 Commons.Modules.ObjSystems.MLoadXtraGrid(grdDCTroCapBHXH, grvDCTroCapBHXH, dt, false, false, false, true, true, this.Name);
                 Commons.Modules.ObjSystems.AddCombXtra("ID_CN", "TEN_CN", grvDCTroCapBHXH, "spGetCongNhan", "ID_CN", "CONG_NHAN");
-                Commons.Modules.ObjSystems.AddCombXtra("ID_LDV", "TEN_LDV", grvDCTroCapBHXH, Commons.Modules.ObjSystems.DataLyDoVang(false), "ID_LDV", "LY_DO_VANG");
+                Commons.Modules.ObjSystems.AddCombXtra("ID_LDV", "TEN_LDV", grvDCTroCapBHXH, Commons.Modules.ObjSystems.DataLyDoVang(false,1), "ID_LDV", "LY_DO_VANG");
 
                 grvDCTroCapBHXH.Columns["ID_HTC"].Visible = false;
 
@@ -2544,7 +2544,7 @@ namespace Vs.HRM
                 dt.Columns["CHON"].ReadOnly = false;
                 Commons.Modules.ObjSystems.MLoadXtraGrid(grdChonTroCapBHXH, grvChonTroCapBHXH, dt, false, false, true, true, true, this.Name);
                 Commons.Modules.ObjSystems.AddCombXtra("ID_CN", "TEN_CN", grvChonTroCapBHXH, "spGetCongNhan");
-                Commons.Modules.ObjSystems.AddCombo("ID_LDV", "TEN_LDV", grvChonTroCapBHXH, Commons.Modules.ObjSystems.DataLyDoVang(false));
+                Commons.Modules.ObjSystems.AddCombo("ID_LDV", "TEN_LDV", grvChonTroCapBHXH, Commons.Modules.ObjSystems.DataLyDoVang(false,1));
                 grvChonTroCapBHXH.Columns["PHAN_TRAM_TRO_CAP"].Visible = false;
                 grvChonTroCapBHXH.Columns["CHON"].Visible = false;
                 grvChonTroCapBHXH.Columns["CHON"].Width = 100;

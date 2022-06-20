@@ -658,8 +658,8 @@
             // 
             // ItemForHO_TEN
             // 
-            this.ItemForHO_TEN.AppearanceItemCaption.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold);
-            this.ItemForHO_TEN.AppearanceItemCaption.Options.UseFont = true;
+            this.ItemForHO_TEN.AppearanceItemCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.ItemForHO_TEN.AppearanceItemCaption.Options.UseForeColor = true;
             this.ItemForHO_TEN.Control = this.HO_TENTextEdit;
             this.ItemForHO_TEN.Location = new System.Drawing.Point(0, 0);
             this.ItemForHO_TEN.Name = "ItemForHO_TEN";
@@ -728,8 +728,8 @@
             // 
             // ItemForID_QH
             // 
-            this.ItemForID_QH.AppearanceItemCaption.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold);
-            this.ItemForID_QH.AppearanceItemCaption.Options.UseFont = true;
+            this.ItemForID_QH.AppearanceItemCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.ItemForID_QH.AppearanceItemCaption.Options.UseForeColor = true;
             this.ItemForID_QH.Control = this.ID_QHLookUpEdit;
             this.ItemForID_QH.Location = new System.Drawing.Point(448, 84);
             this.ItemForID_QH.Name = "ItemForID_QH";

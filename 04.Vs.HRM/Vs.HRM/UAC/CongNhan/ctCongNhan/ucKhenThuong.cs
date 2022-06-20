@@ -92,8 +92,8 @@ namespace Vs.HRM
             windowsUIButton.Buttons[8].Properties.Visible = visible;
             grdKhenThuong.Enabled = visible;
             SO_QUYET_DINHTextEdit.Properties.ReadOnly = visible;
-            NGAY_HIEU_LUCDateEdit.Enabled = !visible;
-            NGAY_KYDateEdit.Enabled = !visible;
+            NGAY_HIEU_LUCDateEdit.Properties.ReadOnly = visible;
+            NGAY_KYDateEdit.Properties.ReadOnly = visible;
             ID_NKLookUpEdit.Properties.ReadOnly = visible;
             NOI_DUNGTextEdit.Properties.ReadOnly = visible;
             ID_KT_KLLookUpEdit.Properties.ReadOnly = visible;

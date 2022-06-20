@@ -85,6 +85,7 @@
             this.NONNlab_Link.Location = new System.Drawing.Point(0, 0);
             this.NONNlab_Link.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.NONNlab_Link.Name = "NONNlab_Link";
+            this.NONNlab_Link.Padding = new System.Windows.Forms.Padding(15, 0, 0, 0);
             this.NONNlab_Link.Size = new System.Drawing.Size(800, 22);
             this.NONNlab_Link.TabIndex = 2;
             this.NONNlab_Link.Text = "labelControl1";

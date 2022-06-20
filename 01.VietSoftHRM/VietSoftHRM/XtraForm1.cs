@@ -27,10 +27,10 @@ namespace VietSoftHRM
         {
             //CapNhapHinh();
 
-            VietSoftHRM.ucImportExcel ns = new ucImportExcel();
-            this.Controls.Clear();
-            this.Controls.Add(ns);
-            ns.Dock = DockStyle.Fill;
+            //VietSoftHRM.ucImportExcel ns = new ucImportExcel();
+            //this.Controls.Clear();
+            //this.Controls.Add(ns);
+            //ns.Dock = DockStyle.Fill;
 
             //LoadNS();
         }

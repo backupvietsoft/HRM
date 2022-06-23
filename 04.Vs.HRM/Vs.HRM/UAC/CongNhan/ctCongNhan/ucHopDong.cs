@@ -31,7 +31,7 @@ namespace Vs.HRM
             Commons.Modules.ObjSystems.MLoadLookUpEdit(NGUOI_KY_GIA_HANLookUpEdit, Commons.Modules.ObjSystems.DataNguoiKy(), "ID_NK", "HO_TEN", "HO_TEN");
             Commons.Modules.ObjSystems.MLoadLookUpEdit(NGUOI_KY_GIA_HANLookUpEdit, Commons.Modules.ObjSystems.DataNguoiKy(), "ID_NK", "HO_TEN", "HO_TEN");
             Commons.Modules.ObjSystems.MLoadLookUpEdit(cboTinhTrang, Commons.Modules.ObjSystems.DataTinhTrang(false), "ID_TT", "TenTT", "TenTT");
-            Commons.Modules.ObjSystems.MLoadLookUpEdit(cboNgachLuong, Commons.Modules.ObjSystems.DataNgachLuong(false), "ID_NL", "TEN_NL", "TEN_NL");
+            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboNgachLuong, Commons.Modules.ObjSystems.DataNgachLuong(false), "ID_NL", "MS_NL", "MS_NL", true);
             LoadgrdHopDong(-1);
             enableButon(true);
             Commons.Modules.sLoad = "";
@@ -490,11 +490,36 @@ namespace Vs.HRM
             try
             {
                 if (Commons.Modules.sLoad == "0Load")return;
-                Commons.Modules.ObjSystems.MLoadLookUpEdit(cboBAC_LUONG, Commons.Modules.ObjSystems.DataBacLuong(Convert.ToInt64(cboNgachLuong.EditValue), DateTime.Now, false), "ID_BL", "TEN_BL", "TEN_BL");
                 ngayhethan(Convert.ToInt32(ID_LHDLDLookUpEdit.EditValue));
+                Commons.Modules.ObjSystems.MLoadLookUpEdit(cboBAC_LUONG, Commons.Modules.ObjSystems.DataBacLuong(Convert.ToInt64(cboNgachLuong.EditValue), DateTime.Now, false), "ID_BL", "TEN_BL", "TEN_BL");
             }
             catch
             {
+            }
+        }
+
+        private void cboBAC_LUONG_EditValueChanged(object sender, EventArgs e)
+        {
+
+            if (Commons.Modules.sLoad == "0Load") return;
+            string strSQL = "SELECT T1.MUC_LUONG, T1.PC_DH, T1.PC_KY_NANG FROM BAC_LUONG T1 WHERE T1.ID_BL = "+Convert.ToInt64(cboBAC_LUONG.EditValue)+"";
+            DataTable dt = new DataTable();
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, strSQL));
+            try
+            {
+
+            double PCDH = string.IsNullOrEmpty(dt.Rows[0]["PC_DH"].ToString()) ? 0 : Convert.ToDouble(dt.Rows[0]["PC_DH"]);
+            double PCKY_NANG = string.IsNullOrEmpty(dt.Rows[0]["PC_KY_NANG"].ToString()) ? 0 : Convert.ToDouble(dt.Rows[0]["PC_KY_NANG"]);
+
+            MUC_LUONG_CHINHTextEdit.EditValue = string.IsNullOrEmpty(dt.Rows[0]["MUC_LUONG"].ToString()) ? 0 : Convert.ToDouble(dt.Rows[0]["MUC_LUONG"]);
+            CHI_SO_PHU_CAPTextEdit.EditValue = PCDH + PCKY_NANG;
+            MUC_LUONG_THUC_LINHTextEdit.EditValue = Convert.ToDouble(MUC_LUONG_CHINHTextEdit.EditValue) + Convert.ToDouble(CHI_SO_PHU_CAPTextEdit.EditValue);
+            }
+            catch
+            {
+                MUC_LUONG_CHINHTextEdit.EditValue = 0;
+                CHI_SO_PHU_CAPTextEdit.EditValue = 0;
+                MUC_LUONG_THUC_LINHTextEdit.EditValue = 0;
             }
         }
     }

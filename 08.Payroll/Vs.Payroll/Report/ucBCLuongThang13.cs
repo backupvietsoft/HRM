@@ -947,11 +947,11 @@ namespace Vs.Payroll
                     {
                         if (MaSo == "SP" || MaSo == "TG" || MaSo == "LN" || MaSo == "LK")
                         {
-                            sPath = "\\lib\\Template\\TemplatePhieuLuongT13CN_MT.xlsx";
+                            sPath = "\\Template\\TemplatePhieuLuongT13CN_MT.xlsx";
                         }
                         else
                         {
-                            sPath = "\\lib\\Template\\TemplatePhieuLuongT13CB_MT.xlsx";
+                            sPath = "\\Template\\TemplatePhieuLuongT13CB_MT.xlsx";
                         }
                         Commons.TemplateExcel.FillReport(saveFileDialog.FileName, System.Windows.Forms.Application.StartupPath + sPath, ds, new string[] { "{", "}" });
                         Process.Start(saveFileDialog.FileName);

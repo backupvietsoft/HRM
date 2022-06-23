@@ -23,6 +23,8 @@ namespace Vs.HRM
         //sự kiên load form
         private void formInHopDongCN_Load(object sender, EventArgs e)
         {
+            chkChuaThamGia.Visible = false;
+            chkDaThamGia.Visible = false;
             chkChuaThamGia.Checked = true;
             rdo_ChonBaoCao.SelectedIndex = 0;
             if (Commons.Modules.ObjSystems.KyHieuDV_CN(Convert.ToInt64(Commons.Modules.iCongNhan)) == "SB")

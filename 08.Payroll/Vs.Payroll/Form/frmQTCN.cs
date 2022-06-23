@@ -34,7 +34,6 @@ namespace Vs.Payroll
             optHT.Properties.Items[1].Description = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "rdoHoanThanh");
             try
             {
-                Commons.OSystems.SetDateEditFormat(dNgayLap);
 
                 LoadCbo();
                 LoadHD(0);
@@ -188,11 +187,11 @@ namespace Vs.Payroll
             }
             try
             {
-                dNgayLap.EditValue = Convert.ToDateTime(dt.Rows[0]["NGAY_LAP"]).ToString("dd/MM/yyyy");
+                txtNgayLap.EditValue = dt.Rows[0]["NGAY_LAP"].ToString();
             }
             catch
             {
-                dNgayLap.EditValue = null;
+                txtNgayLap.EditValue = null;
             }
 
             dtCD = new DataTable();
@@ -329,12 +328,12 @@ namespace Vs.Payroll
                     DataTable dtdgg = new DataTable();
                     try
                     {
-                        dtdgg.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT NGAY_QD, HS_DG_GIAY FROM DON_GIA_GIAY WHERE NGAY_QD <= " + Convert.ToDateTime(dNgayLap.EditValue).ToString("yyyy/MM/dd") + " ORDER BY NGAY_QD DESC"));
+                        dtdgg.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT NGAY_QD, HS_DG_GIAY FROM DON_GIA_GIAY WHERE NGAY_QD <= " + Convert.ToDateTime(txtNgayLap.EditValue).ToString("yyyy/MM/dd") + " ORDER BY NGAY_QD DESC"));
                         txtDG.Text = dtdgg.Rows[0]["HS_DG_GIAY"].ToString();
                     }
                     catch
                     {
-                        dtdgg.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT NGAY_QD, HS_DG_GIAY FROM DON_GIA_GIAY WHERE NGAY_QD >= " + Convert.ToDateTime(dNgayLap.EditValue).ToString("yyyy/MM/dd") + " ORDER BY NGAY_QD ASC"));
+                        dtdgg.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT NGAY_QD, HS_DG_GIAY FROM DON_GIA_GIAY WHERE NGAY_QD >= " + Convert.ToDateTime(txtNgayLap.EditValue).ToString("yyyy/MM/dd") + " ORDER BY NGAY_QD ASC"));
                         txtDG.Text = dtdgg.Rows[0]["HS_DG_GIAY"].ToString();
                     }
 
@@ -385,7 +384,7 @@ namespace Vs.Payroll
             cboLMH.Enabled = !isAdd;
             cboOrd.Enabled = !isAdd;
             cboChuyen.Enabled = !isAdd;
-            dNgayLap.Enabled = !isAdd;
+            txtNgayLap.Enabled = !isAdd;
             txtSLCN.Enabled = !isAdd;
             cboCum.Enabled = !isAdd;
 

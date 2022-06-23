@@ -44,7 +44,6 @@
             this.grdHopDong = new DevExpress.XtraGrid.GridControl();
             this.grvHopDong = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.dataLayoutControl1 = new DevExpress.XtraDataLayout.DataLayoutControl();
-            this.cboNgachLuong = new DevExpress.XtraEditors.LookUpEdit();
             this.cboTinhTrang = new DevExpress.XtraEditors.LookUpEdit();
             this.cboBAC_LUONG = new DevExpress.XtraEditors.LookUpEdit();
             this.SO_HDLDTextEdit = new DevExpress.XtraEditors.TextEdit();
@@ -66,11 +65,12 @@
             this.LUONG_THU_VIECTextEdit = new DevExpress.XtraEditors.TextEdit();
             this.NGUOI_KY_GIA_HANLookUpEdit = new DevExpress.XtraEditors.LookUpEdit();
             this.txtTaiLieu = new DevExpress.XtraEditors.ButtonEdit();
+            this.cboNgachLuong = new DevExpress.XtraEditors.SearchLookUpEdit();
+            this.searchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.ItemForID_LHDLD = new DevExpress.XtraLayout.LayoutControlItem();
             this.ItemForSO_HDLD = new DevExpress.XtraLayout.LayoutControlItem();
-            this.ItemForCHI_SO_PHU_CAP = new DevExpress.XtraLayout.LayoutControlItem();
             this.ItemForMUC_LUONG_CHINH = new DevExpress.XtraLayout.LayoutControlItem();
             this.ItemForDIA_DIEM_LAM_VIEC = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -85,13 +85,14 @@
             this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.ItemForCONG_VIEC = new DevExpress.XtraLayout.LayoutControlItem();
             this.ItemForID_CV = new DevExpress.XtraLayout.LayoutControlItem();
-            this.ItemForSO_NGAY_PHEP = new DevExpress.XtraLayout.LayoutControlItem();
             this.ItemForMUC_LUONG_THUC_LINH = new DevExpress.XtraLayout.LayoutControlItem();
-            this.ItemForBAC_LUONG = new DevExpress.XtraLayout.LayoutControlItem();
             this.ItemForDIA_CHI_NOI_LAM_VIEC = new DevExpress.XtraLayout.LayoutControlItem();
             this.ItemForTaiLieu = new DevExpress.XtraLayout.LayoutControlItem();
-            this.ItemForTinhTrang = new DevExpress.XtraLayout.LayoutControlItem();
+            this.ItemForSO_NGAY_PHEP = new DevExpress.XtraLayout.LayoutControlItem();
             this.ItemForNL = new DevExpress.XtraLayout.LayoutControlItem();
+            this.ItemForBAC_LUONG = new DevExpress.XtraLayout.LayoutControlItem();
+            this.ItemForTinhTrang = new DevExpress.XtraLayout.LayoutControlItem();
+            this.ItemForCHI_SO_PHU_CAP = new DevExpress.XtraLayout.LayoutControlItem();
             this.dxValidationProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
             this.windowsUIButton.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.searchControl.Properties)).BeginInit();
@@ -99,7 +100,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.grvHopDong)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataLayoutControl1)).BeginInit();
             this.dataLayoutControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.cboNgachLuong.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboTinhTrang.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboBAC_LUONG.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SO_HDLDTextEdit.Properties)).BeginInit();
@@ -126,11 +126,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.LUONG_THU_VIECTextEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NGUOI_KY_GIA_HANLookUpEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTaiLieu.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cboNgachLuong.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForID_LHDLD)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForSO_HDLD)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemForCHI_SO_PHU_CAP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForMUC_LUONG_CHINH)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForDIA_DIEM_LAM_VIEC)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
@@ -145,13 +146,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForCONG_VIEC)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForID_CV)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemForSO_NGAY_PHEP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForMUC_LUONG_THUC_LINH)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemForBAC_LUONG)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForDIA_CHI_NOI_LAM_VIEC)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForTaiLieu)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemForTinhTrang)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForSO_NGAY_PHEP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForNL)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForBAC_LUONG)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForTinhTrang)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForCHI_SO_PHU_CAP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -244,7 +246,6 @@
             // 
             // dataLayoutControl1
             // 
-            this.dataLayoutControl1.Controls.Add(this.cboNgachLuong);
             this.dataLayoutControl1.Controls.Add(this.cboTinhTrang);
             this.dataLayoutControl1.Controls.Add(this.cboBAC_LUONG);
             this.dataLayoutControl1.Controls.Add(this.grdHopDong);
@@ -267,6 +268,7 @@
             this.dataLayoutControl1.Controls.Add(this.LUONG_THU_VIECTextEdit);
             this.dataLayoutControl1.Controls.Add(this.NGUOI_KY_GIA_HANLookUpEdit);
             this.dataLayoutControl1.Controls.Add(this.txtTaiLieu);
+            this.dataLayoutControl1.Controls.Add(this.cboNgachLuong);
             this.dataLayoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataLayoutControl1.Location = new System.Drawing.Point(0, 0);
             this.dataLayoutControl1.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
@@ -275,18 +277,6 @@
             this.dataLayoutControl1.Size = new System.Drawing.Size(1220, 581);
             this.dataLayoutControl1.TabIndex = 7;
             this.dataLayoutControl1.Text = "dataLayoutControl1";
-            // 
-            // cboNgachLuong
-            // 
-            this.cboNgachLuong.Location = new System.Drawing.Point(749, 84);
-            this.cboNgachLuong.Name = "cboNgachLuong";
-            this.cboNgachLuong.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cboNgachLuong.Properties.NullText = "";
-            this.cboNgachLuong.Size = new System.Drawing.Size(162, 24);
-            this.cboNgachLuong.StyleController = this.dataLayoutControl1;
-            this.cboNgachLuong.TabIndex = 77;
-            this.cboNgachLuong.EditValueChanged += new System.EventHandler(this.NGAY_BAT_DAU_HDDateEdit_EditValueChanged);
             // 
             // cboTinhTrang
             // 
@@ -309,6 +299,7 @@
             this.cboBAC_LUONG.Size = new System.Drawing.Size(163, 24);
             this.cboBAC_LUONG.StyleController = this.dataLayoutControl1;
             this.cboBAC_LUONG.TabIndex = 74;
+            this.cboBAC_LUONG.EditValueChanged += new System.EventHandler(this.cboBAC_LUONG_EditValueChanged);
             // 
             // SO_HDLDTextEdit
             // 
@@ -559,6 +550,26 @@
             this.txtTaiLieu.StyleController = this.dataLayoutControl1;
             this.txtTaiLieu.TabIndex = 75;
             // 
+            // cboNgachLuong
+            // 
+            this.cboNgachLuong.Location = new System.Drawing.Point(749, 84);
+            this.cboNgachLuong.Name = "cboNgachLuong";
+            this.cboNgachLuong.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cboNgachLuong.Properties.NullText = "";
+            this.cboNgachLuong.Properties.PopupView = this.searchLookUpEdit1View;
+            this.cboNgachLuong.Size = new System.Drawing.Size(162, 24);
+            this.cboNgachLuong.StyleController = this.dataLayoutControl1;
+            this.cboNgachLuong.TabIndex = 77;
+            this.cboNgachLuong.EditValueChanged += new System.EventHandler(this.NGAY_BAT_DAU_HDDateEdit_EditValueChanged);
+            // 
+            // searchLookUpEdit1View
+            // 
+            this.searchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            this.searchLookUpEdit1View.Name = "searchLookUpEdit1View";
+            this.searchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.searchLookUpEdit1View.OptionsView.ShowGroupPanel = false;
+            // 
             // Root
             // 
             this.Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
@@ -621,15 +632,6 @@
             this.ItemForSO_HDLD.Size = new System.Drawing.Size(302, 26);
             this.ItemForSO_HDLD.Text = "SO_HDLD";
             this.ItemForSO_HDLD.TextSize = new System.Drawing.Size(135, 17);
-            // 
-            // ItemForCHI_SO_PHU_CAP
-            // 
-            this.ItemForCHI_SO_PHU_CAP.Control = this.CHI_SO_PHU_CAPTextEdit;
-            this.ItemForCHI_SO_PHU_CAP.Location = new System.Drawing.Point(302, 104);
-            this.ItemForCHI_SO_PHU_CAP.Name = "ItemForCHI_SO_PHU_CAP";
-            this.ItemForCHI_SO_PHU_CAP.Size = new System.Drawing.Size(303, 26);
-            this.ItemForCHI_SO_PHU_CAP.Text = "CHI_SO_PHU_CAP";
-            this.ItemForCHI_SO_PHU_CAP.TextSize = new System.Drawing.Size(135, 17);
             // 
             // ItemForMUC_LUONG_CHINH
             // 
@@ -757,15 +759,6 @@
             this.ItemForID_CV.Text = "ID_CV";
             this.ItemForID_CV.TextSize = new System.Drawing.Size(135, 17);
             // 
-            // ItemForSO_NGAY_PHEP
-            // 
-            this.ItemForSO_NGAY_PHEP.Control = this.SO_NGAY_PHEPTextEdit;
-            this.ItemForSO_NGAY_PHEP.Location = new System.Drawing.Point(907, 52);
-            this.ItemForSO_NGAY_PHEP.Name = "ItemForSO_NGAY_PHEP";
-            this.ItemForSO_NGAY_PHEP.Size = new System.Drawing.Size(303, 26);
-            this.ItemForSO_NGAY_PHEP.Text = "SO_NGAY_PHEP";
-            this.ItemForSO_NGAY_PHEP.TextSize = new System.Drawing.Size(135, 17);
-            // 
             // ItemForMUC_LUONG_THUC_LINH
             // 
             this.ItemForMUC_LUONG_THUC_LINH.Control = this.MUC_LUONG_THUC_LINHTextEdit;
@@ -774,16 +767,6 @@
             this.ItemForMUC_LUONG_THUC_LINH.Size = new System.Drawing.Size(302, 26);
             this.ItemForMUC_LUONG_THUC_LINH.Text = "MUC_LUONG";
             this.ItemForMUC_LUONG_THUC_LINH.TextSize = new System.Drawing.Size(135, 17);
-            // 
-            // ItemForBAC_LUONG
-            // 
-            this.ItemForBAC_LUONG.Control = this.cboBAC_LUONG;
-            this.ItemForBAC_LUONG.CustomizationFormText = "BAC_LUONG";
-            this.ItemForBAC_LUONG.Location = new System.Drawing.Point(907, 78);
-            this.ItemForBAC_LUONG.Name = "ItemForBAC_LUONG";
-            this.ItemForBAC_LUONG.Size = new System.Drawing.Size(303, 26);
-            this.ItemForBAC_LUONG.Text = "BAC_LUONG";
-            this.ItemForBAC_LUONG.TextSize = new System.Drawing.Size(135, 17);
             // 
             // ItemForDIA_CHI_NOI_LAM_VIEC
             // 
@@ -803,14 +786,14 @@
             this.ItemForTaiLieu.Text = "TaiLieu";
             this.ItemForTaiLieu.TextSize = new System.Drawing.Size(135, 17);
             // 
-            // ItemForTinhTrang
+            // ItemForSO_NGAY_PHEP
             // 
-            this.ItemForTinhTrang.Control = this.cboTinhTrang;
-            this.ItemForTinhTrang.Location = new System.Drawing.Point(907, 104);
-            this.ItemForTinhTrang.Name = "ItemForTinhTrang";
-            this.ItemForTinhTrang.Size = new System.Drawing.Size(303, 26);
-            this.ItemForTinhTrang.Text = "TINH_TRANG";
-            this.ItemForTinhTrang.TextSize = new System.Drawing.Size(135, 17);
+            this.ItemForSO_NGAY_PHEP.Control = this.SO_NGAY_PHEPTextEdit;
+            this.ItemForSO_NGAY_PHEP.Location = new System.Drawing.Point(907, 52);
+            this.ItemForSO_NGAY_PHEP.Name = "ItemForSO_NGAY_PHEP";
+            this.ItemForSO_NGAY_PHEP.Size = new System.Drawing.Size(303, 26);
+            this.ItemForSO_NGAY_PHEP.Text = "SO_NGAY_PHEP";
+            this.ItemForSO_NGAY_PHEP.TextSize = new System.Drawing.Size(135, 17);
             // 
             // ItemForNL
             // 
@@ -820,6 +803,34 @@
             this.ItemForNL.Size = new System.Drawing.Size(302, 26);
             this.ItemForNL.Text = "NGACH_LUONG";
             this.ItemForNL.TextSize = new System.Drawing.Size(135, 17);
+            // 
+            // ItemForBAC_LUONG
+            // 
+            this.ItemForBAC_LUONG.Control = this.cboBAC_LUONG;
+            this.ItemForBAC_LUONG.CustomizationFormText = "BAC_LUONG";
+            this.ItemForBAC_LUONG.Location = new System.Drawing.Point(907, 78);
+            this.ItemForBAC_LUONG.Name = "ItemForBAC_LUONG";
+            this.ItemForBAC_LUONG.Size = new System.Drawing.Size(303, 26);
+            this.ItemForBAC_LUONG.Text = "BAC_LUONG";
+            this.ItemForBAC_LUONG.TextSize = new System.Drawing.Size(135, 17);
+            // 
+            // ItemForTinhTrang
+            // 
+            this.ItemForTinhTrang.Control = this.cboTinhTrang;
+            this.ItemForTinhTrang.Location = new System.Drawing.Point(907, 104);
+            this.ItemForTinhTrang.Name = "ItemForTinhTrang";
+            this.ItemForTinhTrang.Size = new System.Drawing.Size(303, 26);
+            this.ItemForTinhTrang.Text = "TINH_TRANG";
+            this.ItemForTinhTrang.TextSize = new System.Drawing.Size(135, 17);
+            // 
+            // ItemForCHI_SO_PHU_CAP
+            // 
+            this.ItemForCHI_SO_PHU_CAP.Control = this.CHI_SO_PHU_CAPTextEdit;
+            this.ItemForCHI_SO_PHU_CAP.Location = new System.Drawing.Point(302, 104);
+            this.ItemForCHI_SO_PHU_CAP.Name = "ItemForCHI_SO_PHU_CAP";
+            this.ItemForCHI_SO_PHU_CAP.Size = new System.Drawing.Size(303, 26);
+            this.ItemForCHI_SO_PHU_CAP.Text = "CHI_SO_PHU_CAP";
+            this.ItemForCHI_SO_PHU_CAP.TextSize = new System.Drawing.Size(135, 17);
             // 
             // ucHopDong
             // 
@@ -837,7 +848,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.grvHopDong)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataLayoutControl1)).EndInit();
             this.dataLayoutControl1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.cboNgachLuong.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboTinhTrang.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboBAC_LUONG.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.SO_HDLDTextEdit.Properties)).EndInit();
@@ -864,11 +874,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.LUONG_THU_VIECTextEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NGUOI_KY_GIA_HANLookUpEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTaiLieu.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cboNgachLuong.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForID_LHDLD)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForSO_HDLD)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemForCHI_SO_PHU_CAP)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForMUC_LUONG_CHINH)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForDIA_DIEM_LAM_VIEC)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
@@ -883,13 +894,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForCONG_VIEC)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForID_CV)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemForSO_NGAY_PHEP)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForMUC_LUONG_THUC_LINH)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemForBAC_LUONG)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForDIA_CHI_NOI_LAM_VIEC)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForTaiLieu)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemForTinhTrang)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForSO_NGAY_PHEP)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForNL)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForBAC_LUONG)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForTinhTrang)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForCHI_SO_PHU_CAP)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).EndInit();
             this.ResumeLayout(false);
 
@@ -949,7 +961,8 @@
         private DevExpress.XtraEditors.ButtonEdit txtTaiLieu;
         private DevExpress.XtraLayout.LayoutControlItem ItemForTaiLieu;
         private DevExpress.XtraLayout.LayoutControlItem ItemForTinhTrang;
-        private DevExpress.XtraEditors.LookUpEdit cboNgachLuong;
         private DevExpress.XtraLayout.LayoutControlItem ItemForNL;
+        private DevExpress.XtraEditors.SearchLookUpEdit cboNgachLuong;
+        private DevExpress.XtraGrid.Views.Grid.GridView searchLookUpEdit1View;
     }
 }

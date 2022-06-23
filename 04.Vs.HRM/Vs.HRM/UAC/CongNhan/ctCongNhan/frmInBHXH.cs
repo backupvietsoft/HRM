@@ -77,11 +77,12 @@ namespace Vs.HRM
                                     // If the file name is not an empty string open it for saving.
                                     if (res == DialogResult.OK)
                                     {
-                                        Commons.TemplateExcel.FillReport(saveFileDialog.FileName, System.Windows.Forms.Application.StartupPath + "\\lib\\Template\\TemplateTangLaoDong.xlsx", ds, new string[] { "{", "}" });
+                                        Commons.TemplateExcel.FillReport(saveFileDialog.FileName, System.Windows.Forms.Application.StartupPath + "\\Template\\TemplateTangLaoDong.xlsx", ds, new string[] { "{", "}" });
                                         Process.Start(saveFileDialog.FileName);
                                     }
                                 }
-                                catch
+                                catch (Exception EX
+                                )
                                 {
 
                                 }
@@ -102,17 +103,19 @@ namespace Vs.HRM
                                     adp.Fill(ds);
                                     ds.Tables[0].TableName = "GiamLaoDong";
                                     SaveFileDialog saveFileDialog = new SaveFileDialog();
-                                    saveFileDialog.Filter = "Excel Files(.xls)|*.xls| Excel Files(.xlsx)| *.xlsx";
+                                    saveFileDialog.Filter = "Excel file (*.xlsx)|*.xlsx";
                                     saveFileDialog.FilterIndex = 0;
                                     saveFileDialog.RestoreDirectory = true;
-                                    saveFileDialog.CreatePrompt = true;
+                                    //saveFileDialog.CreatePrompt = true;
+                                    saveFileDialog.CheckFileExists = false;
+                                    saveFileDialog.CheckPathExists = false;
                                     saveFileDialog.Title = "Export Excel File To";
                                     // If the file name is not an empty string open it for saving.
                                     if (saveFileDialog.ShowDialog() == DialogResult.OK)
                                     {
                                         if (saveFileDialog.FileName != "")
                                         {
-                                            Commons.TemplateExcel.FillReport(saveFileDialog.FileName, System.Windows.Forms.Application.StartupPath + "\\lib\\Template\\TemplateGiamLaoDong.xlsx", ds, new string[] { "{", "}" });
+                                            Commons.TemplateExcel.FillReport(saveFileDialog.FileName, System.Windows.Forms.Application.StartupPath + "\\Template\\TemplateGiamLaoDong.xlsx", ds, new string[] { "{", "}" });
                                             //Commons.TemplateExcel.FillReport(saveFileDialog.FileName, Application.StartupPath + "\\lib\\Template\\TemplateGiamLaoDong.xlsx", ds, new string[] { "{", "}" });
                                             Process.Start(saveFileDialog.FileName);
                                         }

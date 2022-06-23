@@ -41,6 +41,7 @@ namespace Vs.TimeAttendance
         private void ucCheDoChamCongNhanVien_Load(object sender, EventArgs e)
         {
             Commons.Modules.sPS = "0Load";
+            calNgay.EditValue = DateTime.Now;
             EnableButon();
             try
             {

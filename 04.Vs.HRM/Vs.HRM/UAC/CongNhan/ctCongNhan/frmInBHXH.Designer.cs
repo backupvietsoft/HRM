@@ -68,11 +68,11 @@
             this.windowsUIButton.ContentAlignment = System.Drawing.ContentAlignment.MiddleRight;
             this.windowsUIButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.windowsUIButton.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.windowsUIButton.Location = new System.Drawing.Point(0, 246);
-            this.windowsUIButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.windowsUIButton.Location = new System.Drawing.Point(0, 209);
+            this.windowsUIButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.windowsUIButton.Name = "windowsUIButton";
-            this.windowsUIButton.Padding = new System.Windows.Forms.Padding(5);
-            this.windowsUIButton.Size = new System.Drawing.Size(650, 40);
+            this.windowsUIButton.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.windowsUIButton.Size = new System.Drawing.Size(569, 34);
             this.windowsUIButton.TabIndex = 8;
             this.windowsUIButton.Text = "windowsUIButtonPanel1";
             this.windowsUIButton.UseButtonBackgroundImages = false;
@@ -100,31 +100,31 @@
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F),
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 100F),
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F)});
-            this.tablePanel1.Size = new System.Drawing.Size(650, 246);
+            this.tablePanel1.Size = new System.Drawing.Size(569, 209);
             this.tablePanel1.TabIndex = 9;
             // 
             // dNgayIn
             // 
             this.tablePanel1.SetColumn(this.dNgayIn, 4);
             this.dNgayIn.EditValue = null;
-            this.dNgayIn.Location = new System.Drawing.Point(482, 28);
+            this.dNgayIn.Location = new System.Drawing.Point(422, 24);
             this.dNgayIn.Name = "dNgayIn";
             this.dNgayIn.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.dNgayIn.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.tablePanel1.SetRow(this.dNgayIn, 1);
-            this.dNgayIn.Size = new System.Drawing.Size(148, 26);
+            this.dNgayIn.Size = new System.Drawing.Size(128, 24);
             this.dNgayIn.TabIndex = 3;
             // 
             // lbNgayIn
             // 
             this.tablePanel1.SetColumn(this.lbNgayIn, 3);
             this.lbNgayIn.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbNgayIn.Location = new System.Drawing.Point(328, 28);
+            this.lbNgayIn.Location = new System.Drawing.Point(288, 24);
             this.lbNgayIn.Name = "lbNgayIn";
             this.tablePanel1.SetRow(this.lbNgayIn, 1);
-            this.lbNgayIn.Size = new System.Drawing.Size(148, 24);
+            this.lbNgayIn.Size = new System.Drawing.Size(128, 20);
             this.lbNgayIn.TabIndex = 2;
             this.lbNgayIn.Text = "Ngày in";
             // 
@@ -133,15 +133,15 @@
             this.tablePanel1.SetColumn(this.rdo_ChonBaoCao, 1);
             this.tablePanel1.SetColumnSpan(this.rdo_ChonBaoCao, 3);
             this.rdo_ChonBaoCao.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rdo_ChonBaoCao.Location = new System.Drawing.Point(21, 84);
+            this.rdo_ChonBaoCao.Location = new System.Drawing.Point(19, 72);
             this.rdo_ChonBaoCao.Name = "rdo_ChonBaoCao";
             this.rdo_ChonBaoCao.Properties.Columns = 1;
             this.rdo_ChonBaoCao.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] {
-            new DevExpress.XtraEditors.Controls.RadioGroupItem("rdo_DanhSachTangBHXH_", "Danh sách lao động tăng BHXH, BHYT, BHTN"),
-            new DevExpress.XtraEditors.Controls.RadioGroupItem("rdo_DanhSachLaoDongGiamBHXH_", "Danh sách lao động giảm BHXH, BHYT, BHTN"),
+            new DevExpress.XtraEditors.Controls.RadioGroupItem("rdo_DanhSachTangBHXH_", "Danh sách lao động tăng BHXH, BHYT, BHTN", true, "rdo_DanhSachTangBHXH_"),
+            new DevExpress.XtraEditors.Controls.RadioGroupItem("rdo_DanhSachLaoDongGiamBHXH_", "Danh sách lao động giảm BHXH, BHYT, BHTN", true, "rdo_DanhSachLaoDongGiamBHXH_"),
             new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Danh sách tham gia BHXH, BHYT, BHTN", true, "rdo_DanhSachThamGiaBH")});
             this.tablePanel1.SetRow(this.rdo_ChonBaoCao, 3);
-            this.rdo_ChonBaoCao.Size = new System.Drawing.Size(455, 94);
+            this.rdo_ChonBaoCao.Size = new System.Drawing.Size(397, 79);
             this.rdo_ChonBaoCao.TabIndex = 1;
             // 
             // NONN_HoTenCN
@@ -155,18 +155,18 @@
             this.tablePanel1.SetColumnSpan(this.NONN_HoTenCN, 4);
             this.NONN_HoTenCN.Dock = System.Windows.Forms.DockStyle.Fill;
             this.NONN_HoTenCN.LineStyle = System.Drawing.Drawing2D.DashStyle.Dot;
-            this.NONN_HoTenCN.Location = new System.Drawing.Point(21, 3);
+            this.NONN_HoTenCN.Location = new System.Drawing.Point(19, 3);
             this.NONN_HoTenCN.Name = "NONN_HoTenCN";
             this.tablePanel1.SetRow(this.NONN_HoTenCN, 0);
-            this.NONN_HoTenCN.Size = new System.Drawing.Size(609, 19);
+            this.NONN_HoTenCN.Size = new System.Drawing.Size(531, 15);
             this.NONN_HoTenCN.TabIndex = 0;
             this.NONN_HoTenCN.Text = "Chọn báo cáo";
             // 
             // frmInBHXH
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(650, 286);
+            this.ClientSize = new System.Drawing.Size(569, 243);
             this.Controls.Add(this.tablePanel1);
             this.Controls.Add(this.windowsUIButton);
             this.Name = "frmInBHXH";

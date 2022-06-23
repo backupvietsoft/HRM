@@ -50,6 +50,7 @@
             this.ItemForTO = new DevExpress.XtraLayout.LayoutControlItem();
             this.windowsUIButton = new DevExpress.XtraBars.Docking2010.WindowsUIButtonPanel();
             this.searchControl = new DevExpress.XtraEditors.SearchControl();
+            this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
             ((System.ComponentModel.ISupportInitialize)(this.grdBHYT)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grvNgungDongBHXH)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
@@ -67,16 +68,16 @@
             ((System.ComponentModel.ISupportInitialize)(this.ItemForTO)).BeginInit();
             this.windowsUIButton.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.searchControl.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).BeginInit();
             this.SuspendLayout();
             // 
             // grdBHYT
             // 
-            this.grdBHYT.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(8, 5, 8, 5);
-            this.grdBHYT.Location = new System.Drawing.Point(6, 40);
+            this.grdBHYT.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.grdBHYT.Location = new System.Drawing.Point(12, 55);
             this.grdBHYT.MainView = this.grvNgungDongBHXH;
-            this.grdBHYT.Margin = new System.Windows.Forms.Padding(4);
             this.grdBHYT.Name = "grdBHYT";
-            this.grdBHYT.Size = new System.Drawing.Size(1447, 638);
+            this.grdBHYT.Size = new System.Drawing.Size(904, 398);
             this.grdBHYT.TabIndex = 9;
             this.grdBHYT.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grvNgungDongBHXH});
@@ -84,7 +85,7 @@
             // 
             // grvNgungDongBHXH
             // 
-            this.grvNgungDongBHXH.DetailHeight = 436;
+            this.grvNgungDongBHXH.DetailHeight = 297;
             this.grvNgungDongBHXH.GridControl = this.grdBHYT;
             this.grvNgungDongBHXH.Name = "grvNgungDongBHXH";
             this.grvNgungDongBHXH.OptionsView.ShowGroupPanel = false;
@@ -98,30 +99,29 @@
             this.layoutControl1.Controls.Add(this.cboTo);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl1.Location = new System.Drawing.Point(0, 0);
-            this.layoutControl1.Margin = new System.Windows.Forms.Padding(6);
+            this.layoutControl1.Margin = new System.Windows.Forms.Padding(4);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.Root = this.Root;
-            this.layoutControl1.Size = new System.Drawing.Size(1459, 684);
+            this.layoutControl1.Size = new System.Drawing.Size(928, 465);
             this.layoutControl1.TabIndex = 11;
             this.layoutControl1.Text = "layoutControl1";
             // 
             // cboDV
             // 
-            this.cboDV.Location = new System.Drawing.Point(99, 6);
-            this.cboDV.Margin = new System.Windows.Forms.Padding(4);
+            this.cboDV.Location = new System.Drawing.Point(76, 12);
             this.cboDV.Name = "cboDV";
             this.cboDV.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cboDV.Properties.NullText = "";
             this.cboDV.Properties.PopupView = this.searchLookUpEdit1View;
-            this.cboDV.Size = new System.Drawing.Size(389, 32);
+            this.cboDV.Size = new System.Drawing.Size(235, 24);
             this.cboDV.StyleController = this.layoutControl1;
             this.cboDV.TabIndex = 7;
             this.cboDV.EditValueChanged += new System.EventHandler(this.cboDV_EditValueChanged);
             // 
             // searchLookUpEdit1View
             // 
-            this.searchLookUpEdit1View.DetailHeight = 436;
+            this.searchLookUpEdit1View.DetailHeight = 297;
             this.searchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
             this.searchLookUpEdit1View.Name = "searchLookUpEdit1View";
             this.searchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
@@ -129,21 +129,20 @@
             // 
             // cboXN
             // 
-            this.cboXN.Location = new System.Drawing.Point(583, 6);
-            this.cboXN.Margin = new System.Windows.Forms.Padding(4);
+            this.cboXN.Location = new System.Drawing.Point(379, 12);
             this.cboXN.Name = "cboXN";
             this.cboXN.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cboXN.Properties.NullText = "";
             this.cboXN.Properties.PopupView = this.searchLookUpEdit2View;
-            this.cboXN.Size = new System.Drawing.Size(383, 32);
+            this.cboXN.Size = new System.Drawing.Size(231, 24);
             this.cboXN.StyleController = this.layoutControl1;
             this.cboXN.TabIndex = 8;
             this.cboXN.EditValueChanged += new System.EventHandler(this.cboXN_EditValueChanged);
             // 
             // searchLookUpEdit2View
             // 
-            this.searchLookUpEdit2View.DetailHeight = 436;
+            this.searchLookUpEdit2View.DetailHeight = 297;
             this.searchLookUpEdit2View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
             this.searchLookUpEdit2View.Name = "searchLookUpEdit2View";
             this.searchLookUpEdit2View.OptionsSelection.EnableAppearanceFocusedCell = false;
@@ -151,21 +150,20 @@
             // 
             // cboTo
             // 
-            this.cboTo.Location = new System.Drawing.Point(1061, 6);
-            this.cboTo.Margin = new System.Windows.Forms.Padding(4);
+            this.cboTo.Location = new System.Drawing.Point(678, 12);
             this.cboTo.Name = "cboTo";
             this.cboTo.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cboTo.Properties.NullText = "";
             this.cboTo.Properties.PopupView = this.searchLookUpEdit3View;
-            this.cboTo.Size = new System.Drawing.Size(392, 32);
+            this.cboTo.Size = new System.Drawing.Size(238, 24);
             this.cboTo.StyleController = this.layoutControl1;
             this.cboTo.TabIndex = 9;
             this.cboTo.EditValueChanged += new System.EventHandler(this.cboTo_EditValueChanged);
             // 
             // searchLookUpEdit3View
             // 
-            this.searchLookUpEdit3View.DetailHeight = 436;
+            this.searchLookUpEdit3View.DetailHeight = 297;
             this.searchLookUpEdit3View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
             this.searchLookUpEdit3View.Name = "searchLookUpEdit3View";
             this.searchLookUpEdit3View.OptionsSelection.EnableAppearanceFocusedCell = false;
@@ -179,9 +177,10 @@
             this.ItemForDON_VI,
             this.ItemForXI_NGHIEP,
             this.layoutControlItem1,
-            this.ItemForTO});
+            this.ItemForTO,
+            this.emptySpaceItem1});
             this.Root.Name = "Root";
-            this.Root.Size = new System.Drawing.Size(1459, 684);
+            this.Root.Size = new System.Drawing.Size(928, 465);
             this.Root.TextVisible = false;
             // 
             // ItemForDON_VI
@@ -190,26 +189,26 @@
             this.ItemForDON_VI.CustomizationFormText = "ItemForDON_VI";
             this.ItemForDON_VI.Location = new System.Drawing.Point(0, 0);
             this.ItemForDON_VI.Name = "ItemForDON_VI";
-            this.ItemForDON_VI.Size = new System.Drawing.Size(484, 34);
+            this.ItemForDON_VI.Size = new System.Drawing.Size(303, 28);
             this.ItemForDON_VI.Text = "DON_VI";
-            this.ItemForDON_VI.TextSize = new System.Drawing.Size(90, 25);
+            this.ItemForDON_VI.TextSize = new System.Drawing.Size(61, 17);
             // 
             // ItemForXI_NGHIEP
             // 
             this.ItemForXI_NGHIEP.Control = this.cboXN;
             this.ItemForXI_NGHIEP.CustomizationFormText = "ItemForXI_NGHIEP";
-            this.ItemForXI_NGHIEP.Location = new System.Drawing.Point(484, 0);
+            this.ItemForXI_NGHIEP.Location = new System.Drawing.Point(303, 0);
             this.ItemForXI_NGHIEP.Name = "ItemForXI_NGHIEP";
-            this.ItemForXI_NGHIEP.Size = new System.Drawing.Size(478, 34);
+            this.ItemForXI_NGHIEP.Size = new System.Drawing.Size(299, 28);
             this.ItemForXI_NGHIEP.Text = "XI_NGHIEP";
-            this.ItemForXI_NGHIEP.TextSize = new System.Drawing.Size(90, 25);
+            this.ItemForXI_NGHIEP.TextSize = new System.Drawing.Size(61, 17);
             // 
             // layoutControlItem1
             // 
             this.layoutControlItem1.Control = this.grdBHYT;
-            this.layoutControlItem1.Location = new System.Drawing.Point(0, 34);
+            this.layoutControlItem1.Location = new System.Drawing.Point(0, 43);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(1449, 640);
+            this.layoutControlItem1.Size = new System.Drawing.Size(908, 402);
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
             // 
@@ -217,11 +216,11 @@
             // 
             this.ItemForTO.Control = this.cboTo;
             this.ItemForTO.CustomizationFormText = "ItemForTO";
-            this.ItemForTO.Location = new System.Drawing.Point(962, 0);
+            this.ItemForTO.Location = new System.Drawing.Point(602, 0);
             this.ItemForTO.Name = "ItemForTO";
-            this.ItemForTO.Size = new System.Drawing.Size(487, 34);
+            this.ItemForTO.Size = new System.Drawing.Size(306, 28);
             this.ItemForTO.Text = "TO";
-            this.ItemForTO.TextSize = new System.Drawing.Size(90, 25);
+            this.ItemForTO.TextSize = new System.Drawing.Size(61, 17);
             // 
             // windowsUIButton
             // 
@@ -259,11 +258,11 @@
             this.windowsUIButton.Controls.Add(this.searchControl);
             this.windowsUIButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.windowsUIButton.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.windowsUIButton.Location = new System.Drawing.Point(0, 684);
-            this.windowsUIButton.Margin = new System.Windows.Forms.Padding(6);
+            this.windowsUIButton.Location = new System.Drawing.Point(0, 465);
+            this.windowsUIButton.Margin = new System.Windows.Forms.Padding(4);
             this.windowsUIButton.Name = "windowsUIButton";
-            this.windowsUIButton.Padding = new System.Windows.Forms.Padding(7, 6, 7, 6);
-            this.windowsUIButton.Size = new System.Drawing.Size(1459, 50);
+            this.windowsUIButton.Padding = new System.Windows.Forms.Padding(4);
+            this.windowsUIButton.Size = new System.Drawing.Size(928, 34);
             this.windowsUIButton.TabIndex = 15;
             this.windowsUIButton.Text = "windowsUIButtonPanel1";
             this.windowsUIButton.UseButtonBackgroundImages = false;
@@ -273,29 +272,38 @@
             // 
             this.searchControl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.searchControl.Client = this.grdBHYT;
-            this.searchControl.Location = new System.Drawing.Point(3, 12);
-            this.searchControl.Margin = new System.Windows.Forms.Padding(6);
+            this.searchControl.Location = new System.Drawing.Point(13, 9);
+            this.searchControl.Margin = new System.Windows.Forms.Padding(4);
             this.searchControl.Name = "searchControl";
-            this.searchControl.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 12.75F);
-            this.searchControl.Properties.Appearance.Options.UseFont = true;
             this.searchControl.Properties.AutoHeight = false;
             this.searchControl.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Repository.ClearButton(),
             new DevExpress.XtraEditors.Repository.SearchButton()});
             this.searchControl.Properties.Client = this.grdBHYT;
             this.searchControl.Properties.FindDelay = 100;
-            this.searchControl.Size = new System.Drawing.Size(302, 32);
+            this.searchControl.Size = new System.Drawing.Size(192, 22);
             this.searchControl.TabIndex = 10;
+            // 
+            // emptySpaceItem1
+            // 
+            this.emptySpaceItem1.AllowHotTrack = false;
+            this.emptySpaceItem1.Location = new System.Drawing.Point(0, 28);
+            this.emptySpaceItem1.MaxSize = new System.Drawing.Size(0, 15);
+            this.emptySpaceItem1.MinSize = new System.Drawing.Size(10, 15);
+            this.emptySpaceItem1.Name = "emptySpaceItem1";
+            this.emptySpaceItem1.Size = new System.Drawing.Size(908, 15);
+            this.emptySpaceItem1.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
             // 
             // ucBaoHiemYTe
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 25F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.layoutControl1);
             this.Controls.Add(this.windowsUIButton);
-            this.Margin = new System.Windows.Forms.Padding(6);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ucBaoHiemYTe";
-            this.Size = new System.Drawing.Size(1459, 734);
+            this.Size = new System.Drawing.Size(928, 499);
             this.Load += new System.EventHandler(this.ucBaoHiemYTe_Load);
             ((System.ComponentModel.ISupportInitialize)(this.grdBHYT)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grvNgungDongBHXH)).EndInit();
@@ -314,6 +322,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.ItemForTO)).EndInit();
             this.windowsUIButton.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.searchControl.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -335,5 +344,6 @@
         private DevExpress.XtraBars.Docking2010.WindowsUIButtonPanel windowsUIButton;
         private DevExpress.XtraEditors.SearchControl searchControl;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
+        private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem1;
     }
 }

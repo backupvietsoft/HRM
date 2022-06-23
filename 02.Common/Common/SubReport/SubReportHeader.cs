@@ -1,8 +1,5 @@
-﻿using System;
+﻿ using System;
 using System.Drawing;
-using System.Collections;
-using System.ComponentModel;
-using DevExpress.XtraReports.UI;
 using System.Data;
 
 namespace Commons
@@ -11,7 +8,6 @@ namespace Commons
     {
         public SubReportHeader()
         {
-
             InitializeComponent();
             DataTable dt = Commons.Modules.ObjSystems.DataThongTinChung();
             this.DataSource = dt;
@@ -24,7 +20,6 @@ namespace Commons
             catch(Exception ex)
             {
             }
-            
         }
     }
 }

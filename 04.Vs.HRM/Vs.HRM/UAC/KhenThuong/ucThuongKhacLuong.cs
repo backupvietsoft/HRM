@@ -711,20 +711,20 @@ namespace Vs.HRM
         {
             if (raCacTinh.SelectedIndex == -1 || raCacTinh.SelectedIndex == 0)
             {
-                txTienQuyDinh.Enabled = true;
+                txTienQuyDinh.Properties.ReadOnly = false;
                 txTienQuyDinh.Focus();
-                txSoThang.Enabled = false;
+                txSoThang.Properties.ReadOnly = true;
                 txSoThang.EditValue = 0;
-                txSoTien.Enabled = false;
+                txSoTien.Properties.ReadOnly = true;
                 txSoTien.EditValue = 0;
             }
             else 
             {
-                txTienQuyDinh.Enabled = false;
+                txTienQuyDinh.Properties.ReadOnly = true;
                 txTienQuyDinh.EditValue = 0;
-                txSoThang.Enabled = true;
+                txSoThang.Properties.ReadOnly = false;
                 txSoThang.Focus();
-                txSoTien.Enabled = true;
+                txSoTien.Properties.ReadOnly = false;
             }
         }
 

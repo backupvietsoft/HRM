@@ -186,8 +186,7 @@ namespace Vs.HRM
                 DataTable dt = new DataTable();
                 dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetListKeHoachNghiPhep", dateNam.DateTime.Year, grvDSCN.GetFocusedRowCellValue("ID_CN"), Commons.Modules.UserName, Commons.Modules.TypeLanguage));
                 Commons.Modules.ObjSystems.MLoadXtraGrid(grdKHNP, grvKHNP, dt, false, false, false, false, true, this.Name);
-                Commons.Modules.ObjSystems.AddCombXtra("ID_LDV", "TEN_LDV", grvKHNP, "spGetComboLDV", "ID_LDV", this.Name);
-
+                Commons.Modules.ObjSystems.AddCombXtra("ID_LDV", "TEN_LDV", grvKHNP,Commons.Modules.ObjSystems.DataLyDoVang(false,-1), "ID_LDV", this.Name);
                 RepositoryItemDateEdit dEditN = new RepositoryItemDateEdit();
                 Commons.OSystems.SetDateRepositoryItemDateEdit(dEditN);
 

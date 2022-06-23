@@ -28,7 +28,6 @@ namespace VietSoftHRM
                 Application.Run(new frmLogin());
                 //Application.Run(new frmThongTinChung(1));
                 //Application.Run(new frmImportHinhCN(1));
-                //Application.Run(new XtraForm1());
             }
             catch (Exception ex)
             {

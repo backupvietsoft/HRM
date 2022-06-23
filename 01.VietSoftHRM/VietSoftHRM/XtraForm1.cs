@@ -33,6 +33,8 @@ namespace VietSoftHRM
             //ns.Dock = DockStyle.Fill;
 
             //LoadNS();
+
+            //gridView1.ShowFindPanel();
         }
 
         private void xtraTabPage1_DoubleClick(object sender, EventArgs e)
@@ -42,6 +44,42 @@ namespace VietSoftHRM
         private void xtraTabControl1_DoubleClick(object sender, EventArgs e)
         {
 
+        }
+        string strDuongDan = "";
+        private void LayDuongDan()
+        {
+            string strPath_DH = txtDescription.Text;
+            strDuongDan = ofdChonHinh.FileName;
+            var strDuongDanTmp = Commons.Modules.ObjSystems.CapnhatTL("HH");
+            string[] sFile;
+            string TenFile;
+            int i = 1;
+
+            TenFile = "PT_" + ofdChonHinh.SafeFileName.ToString();
+            sFile = System.IO.Directory.GetFiles(strDuongDanTmp);
+
+            if (Commons.Modules.ObjSystems.KiemFileTonTai(strDuongDanTmp + @"\" + "MH_" + ofdChonHinh.SafeFileName.ToString()) == false)
+                txtDescription.Text = strDuongDanTmp + @"\" + "MH_" + ofdChonHinh.SafeFileName.ToString();
+            else
+            {
+                TenFile = Commons.Modules.ObjSystems.STTFileCungThuMuc(strDuongDanTmp, TenFile);
+                txtDescription.Text = strDuongDanTmp + @"\" + TenFile;
+            }
+        }
+        private void buttonEdit1_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+            try
+            {
+                ofdChonHinh.ShowDialog();
+                LayDuongDan();
+                Commons.Modules.ObjSystems.LuuDuongDan(strDuongDan, txtDescription.Text);
+
+
+
+            }
+            catch
+            {
+            }
         }
         //private void LoadNS()
         //{

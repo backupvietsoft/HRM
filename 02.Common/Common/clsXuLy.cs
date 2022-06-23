@@ -170,5 +170,35 @@ namespace Commons
                 loadXmlgrd(grdDanhMuc);
             }
         }
+
+
+        public  void MFieldRequest(DevExpress.XtraEditors.LabelControl Mlayout)
+        { ////red, green, blue
+            //int R = 156, G = 97, B = 65;
+            //try { R = int.Parse(VS.ERP.Properties.Settings.Default["ApplicationColorRed"].ToString()); } catch { R = 156; }
+            //try { G = int.Parse(VS.ERP.Properties.Settings.Default["ApplicationColorGreen"].ToString()); } catch { G = 97; }
+            //try { B = int.Parse(VS.ERP.Properties.Settings.Default["ApplicationColorBlue"].ToString()); } catch { B = 65; }
+
+            //Mlayout.AppearanceItemCaption.ForeColor = System.Drawing.Color.FromArgb(R, G, B);
+            //Mlayout.AppearanceItemCaption.Options.UseForeColor = true;
+            try
+            {
+
+                Mlayout.Appearance.Font = new System.Drawing.Font(DevExpress.Utils.AppearanceObject.DefaultFont.ToString(), DevExpress.Utils.AppearanceObject.DefaultFont.Size + 1, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                //Mlayout.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+                Mlayout.Appearance.Options.UseFont = true;
+                Mlayout.Appearance.Options.UseForeColor = true;
+                //Mlayout.AppearanceItemCaption.Font = new System.Drawing.Font(VS.ERP.Properties.Settings.Default["ApplicationFontRequestName"].ToString(), float.Parse(VS.ERP.Properties.Settings.Default["ApplicationFontRequestSize"].ToString()), (VS.ERP.Properties.Settings.Default["ApplicationFontRequestBold"].ToString().ToUpper() == "TRUE" ? System.Drawing.FontStyle.Bold : System.Drawing.FontStyle.Regular) | (VS.ERP.Properties.Settings.Default["ApplicationFontRequestItalic"].ToString().ToUpper() == "TRUE" ? System.Drawing.FontStyle.Italic : System.Drawing.FontStyle.Regular));
+            }
+            catch { Mlayout.Appearance.Font = new System.Drawing.Font("Segoe UI", float.Parse("11")); }
+
+
+            //System.Drawing.FontStyle = new System.Drawing.FontStyle(Settings.Default["ApplicationFontRequestName"].ToString(), float.Parse(Settings.Default["ApplicationFontRequestSize"].ToString()));
+
+            //Font font = new Font(VS.ERP.Properties.Settings.Default["ApplicationFontRequestName"].ToString(), FontStyle.Bold | FontStyle.Underline);
+
+
+        }
+
     }
 }

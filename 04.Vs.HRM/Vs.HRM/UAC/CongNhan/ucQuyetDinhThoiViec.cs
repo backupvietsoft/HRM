@@ -157,7 +157,7 @@ namespace Vs.HRM
                         TONG_CONGTextEdit.EditValue,
                         NGAY_KYDateEdit.EditValue,
                         ID_LD_TVLookUpEdit.EditValue,
-                        NGAY_VAO_CTYTextEdit.EditValue,
+                        NGAY_VAO_LAMdateEdit.EditValue,
                         SO_PHEP_HUONGTextEdit.EditValue,
                         NGUYEN_NHANTextEdit.EditValue,
                         ID_NKLookUpEdit.EditValue,
@@ -297,34 +297,6 @@ namespace Vs.HRM
             TEN_CNtextEdit.EditValue = grvCongNhan.GetFocusedRowCellValue("HO_TEN");
             try
             {
-                string sSql = "SELECT Hinh_CN, NGAY_SINH, DT_DI_DONG, NGUYEN_QUAN, NGAY_VAO_CTY, NGAY_VAO_LAM FROM dbo.CONG_NHAN WHERE ID_CN = " + grvCongNhan.GetFocusedRowCellValue("ID_CN") + "";
-                DataTable dt = new DataTable();
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSql));
-                DataRow row = dt.Rows[0];
-                NGAY_SINHTextEdit.EditValue = Convert.ToDateTime(row["NGAY_SINH"]).ToString("dd/MM/yyyy");
-                NGAY_VAO_CTYTextEdit.EditValue = Convert.ToDateTime(row["NGAY_VAO_CTY"]).ToString("dd/MM/yyyy");
-                SO_DTtextEdit.EditValue = row["DT_DI_DONG"];
-                NGUYEN_QUANtextEdit.EditValue = row["NGUYEN_QUAN"];
-                NGAY_VAO_LAMdateEdit.EditValue = Convert.ToDateTime(row["NGAY_VAO_LAM"]).ToString("dd/MM/yyyy");
-                if (row["Hinh_CN"] != DBNull.Value)
-                {
-                    Byte[] data = new Byte[0];
-                    data = (Byte[])(row["Hinh_CN"]);
-                    MemoryStream mem = new MemoryStream(data);
-                    Hinh_CNpictureEdit.Image = Image.FromStream(mem);
-                }
-                else
-                {
-                    Hinh_CNpictureEdit.EditValue = "";
-                    Hinh_CNpictureEdit.Properties.NullText = Commons.Modules.TypeLanguage == 1 ? "No current image to display" : "Không có hình";
-                }
-
-            }
-            catch (Exception ex)
-            {
-            }
-            try
-            {
                 if (grvCongNhan.GetFocusedRowCellValue("ID_QDTV").ToString() != string.Empty)
                 {
                     string sSql = "SELECT * FROM dbo.QUYET_DINH_THOI_VIEC WHERE ID_QDTV = " + grvCongNhan.GetFocusedRowCellValue("ID_QDTV") + "";
@@ -390,14 +362,9 @@ namespace Vs.HRM
             {
                 GetTienPhep();
                 GetTienTroCap();
-                //LUONG_TINH_TRO_CAPTextEdit.EditValue = Commons.Modules.ObjSystems.TienTroCap(Convert.ToInt32(grvCongNhan.GetFocusedRowCellValue("ID_CN")), NGAY_THOI_VIECDateEdit.DateTime, Convert.ToInt32(ID_LD_TVLookUpEdit.EditValue))["LUONG_TRO_CAP"];
-                //TIEN_TRO_CAPTextEdit.EditValue = Commons.Modules.ObjSystems.TienTroCap(Convert.ToInt32(grvCongNhan.GetFocusedRowCellValue("ID_CN")), NGAY_THOI_VIECDateEdit.DateTime, Convert.ToInt32(ID_LD_TVLookUpEdit.EditValue))["TIEN_TRO_CAP"];
-                //SO_PHEP_HUONGTextEdit.EditValue = Commons.Modules.ObjSystems.TienPhep(Convert.ToInt32(grvCongNhan.GetFocusedRowCellValue("ID_CN")), NGAY_THOI_VIECDateEdit.DateTime)["SO_NGAY_PHEP"];
-                //LUONG_TINH_PHEPTextEdit.EditValue = Commons.Modules.ObjSystems.TienPhep(Convert.ToInt32(grvCongNhan.GetFocusedRowCellValue("ID_CN")), NGAY_THOI_VIECDateEdit.DateTime)["LUONG_TP"];
-                //TIEN_PHEPTextEdit.EditValue = Commons.Modules.ObjSystems.TienPhep(Convert.ToInt32(grvCongNhan.GetFocusedRowCellValue("ID_CN")), NGAY_THOI_VIECDateEdit.DateTime)["TIEN_PHEP"];
                 TONG_CONGTextEdit.EditValue = Convert.ToDouble(TIEN_TRO_CAPTextEdit.EditValue) + Convert.ToDouble(TIEN_PHEPTextEdit.EditValue);
             }
-            catch (Exception ex)
+            catch 
             {
 
             }

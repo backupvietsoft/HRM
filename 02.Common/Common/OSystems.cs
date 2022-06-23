@@ -53,6 +53,18 @@ namespace Commons
             dateEdit.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.DateTimeAdvancingCaret;
             dateEdit.Properties.Mask.EditMask = "dd/MM/yyyy";
         }
+        public bool KiemFileTonTai(string sFile)
+        {
+            try
+            {
+                return (System.IO.File.Exists(sFile));
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
         public string OpenFiles(string MFilter)
         {
             try
@@ -76,6 +88,178 @@ namespace Commons
                 return "";
             }
         }
+        public string LocKyTuDB(string sChuoi)
+        {
+            if (sChuoi.Length > 0)
+                sChuoi = sChuoi.Replace("/", "-");
+            if (sChuoi.Length > 0)
+                sChuoi = sChuoi.Replace(@"\", "-");
+            if (sChuoi.Length > 0)
+                sChuoi = sChuoi.Replace("*", "-");
+            if (sChuoi.Length > 0)
+                sChuoi = sChuoi.Replace("-", "-");
+            if (sChuoi.Length > 0)
+                sChuoi = sChuoi.Replace(".", "-");
+            if (sChuoi.Length > 0)
+                sChuoi = sChuoi.Replace("!", "-");
+            if (sChuoi.Length > 0)
+                sChuoi = sChuoi.Replace("@", "-");
+            if (sChuoi.Length > 0)
+                sChuoi = sChuoi.Replace("#", "-");
+            return sChuoi;
+        }
+        public string LayDuoiFile(string strFile)
+        {
+            string[] FILE_NAMEArr, arr;
+            string FILE_NAME = "";
+            FILE_NAMEArr = strFile.Split('\\');
+            FILE_NAME = FILE_NAMEArr[FILE_NAMEArr.Length - 1];
+            arr = FILE_NAME.Split('.');
+            return "." + arr[arr.Length - 1];
+        }
+
+        public string STTFileCungThuMuc(string sThuMuc, string sFile)
+        {
+            string TenFile = sFile;
+            string DuoiFile;
+            try
+            {
+                DuoiFile = LayDuoiFile(sFile);
+            }
+            catch (Exception ex)
+            {
+                DuoiFile = "";
+            }
+
+
+            try
+            {
+                string[] sTongFile;
+                int i = 1;
+
+                TenFile = sFile;
+                sTongFile = System.IO.Directory.GetFiles(sThuMuc);
+
+
+                for (i = 1; i <= sTongFile.Length + 1; i++)
+                {
+                    if (System.IO.File.Exists(sThuMuc + @"\" + TenFile) == true)
+                    {
+                        if (i.ToString().Length == 1)
+                            TenFile = sFile.Replace(DuoiFile, "-00" + i.ToString()) + DuoiFile;
+                        else if (i.ToString().Length == 2)
+                            TenFile = sFile.Replace(DuoiFile, "-0" + i.ToString()) + DuoiFile;
+                        else
+                            TenFile = sFile.Replace(DuoiFile, "-" + i.ToString()) + DuoiFile;
+                    }
+                    else
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                TenFile = "";
+            }
+
+            return TenFile;
+        }
+        public void OpenHinh(string strDuongdan)
+        {
+            if (strDuongdan.Equals(""))
+                return;
+            if (System.IO.File.Exists(strDuongdan))
+            {
+                try
+                {
+                    System.Diagnostics.Process.Start(strDuongdan);
+                }
+                catch (Exception ex)
+                {
+                }
+            }
+        }
+        public string CapnhatTL(string strMS_MAY)
+        {
+            strMS_MAY = LocKyTuDB(strMS_MAY);
+            string SERVER_FOLDER_PATH = "";
+            string SERVER_PATH = "";
+            SERVER_PATH = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT TOP 1 DUONG_DAN_TL FROM dbo.THONG_TIN_CHUNG").ToString();
+            if (!System.IO.Directory.Exists(SERVER_PATH))
+                SERVER_PATH = "";
+            if (!SERVER_PATH.EndsWith(@"\"))
+                SERVER_PATH = SERVER_PATH + @"\";
+            SERVER_FOLDER_PATH = SERVER_PATH;
+            if (System.IO.Directory.Exists(SERVER_PATH))
+            {
+                string[] FILE_TEMPArr;
+                FILE_TEMPArr = System.IO.Directory.GetFileSystemEntries(SERVER_PATH);
+                int i = 0;
+                string[] arr;
+                while (i < FILE_TEMPArr.Length) // tài liệu
+                {
+                    arr = FILE_TEMPArr[i].Split('\\');
+                    if (arr[arr.Length - 1].Equals("Tai_Lieu_MH"))
+                    {
+                        SERVER_FOLDER_PATH = SERVER_FOLDER_PATH + arr[arr.Length - 1];
+                        // kiểm tra folder MS_MAY đã tồn tại chưa
+                        string[] FILE_TEMPArr1;
+                        FILE_TEMPArr1 = System.IO.Directory.GetFileSystemEntries(SERVER_FOLDER_PATH);
+                        int j = 0; // MS_MAY
+                        while (j < FILE_TEMPArr1.Length)
+                        {
+                            arr = FILE_TEMPArr1[j].Split('\\');
+                            if (arr[arr.Length - 1].Equals(strMS_MAY))
+                            {
+                                SERVER_FOLDER_PATH = SERVER_FOLDER_PATH + @"\" + arr[arr.Length - 1];
+                                break; // MS_MAY
+                            }
+                            j = j + 1;
+                        } // MS_MAY
+                        if (j == FILE_TEMPArr1.Length)
+                        {
+                            SERVER_FOLDER_PATH = SERVER_FOLDER_PATH + @"\" + strMS_MAY;
+                            System.IO.Directory.CreateDirectory(SERVER_FOLDER_PATH);
+                        }
+                        break; // tài liệu
+                    }
+                    i = i + 1;
+                } // tài liệu
+                if (i == FILE_TEMPArr.Length)
+                {
+                    // nếu chưa tồn tại folder bảo trì thì tạo mới folder bảo trì và các folder hình máy và tài liệu máy
+                    SERVER_FOLDER_PATH = SERVER_FOLDER_PATH + @"Tai_Lieu_MH\" + strMS_MAY;
+                    System.IO.Directory.CreateDirectory(SERVER_FOLDER_PATH);
+                }
+            }
+            else
+            {
+            }
+            return SERVER_FOLDER_PATH;
+        }
+        public void LuuDuongDan(string strDUONG_DAN, string strHINH)
+        {
+            if (strHINH.Equals(""))
+                return;
+
+
+            if (System.IO.File.Exists(strDUONG_DAN) & !System.IO.File.Exists(strHINH))
+            {
+                try
+                {
+                    DirectoryInfo dir = new DirectoryInfo(System.IO.Path.GetDirectoryName(strHINH));
+                    foreach (FileInfo item in dir.EnumerateFiles())
+                    {
+                        item.Delete();
+                    }
+
+                    System.IO.File.Copy(strDUONG_DAN, strHINH);
+                }
+                catch (Exception ex)
+                {
+                }
+            }
+        }
+
         public static void SetTimeEditFormat(TimeEdit timeEdit)
         {
             timeEdit.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
@@ -1579,12 +1763,12 @@ namespace Commons
                         LayoutControlItem control1 = (LayoutControlItem)gr;
                         try
                         {
-                        //    if (control1.Control.GetType().Name.ToLower() == "checkedit")
-                        //    {
-                        //        control1.Control.Text = GetNN(dtTmp, control1.Name, frm.Name);
-                        //        control1.Control.DoubleClick += delegate (object a, EventArgs b) { CheckEdit_DoubleClick(control1.Control, b, frm.Name); };
-                        //    }
-                        //    else
+                            //    if (control1.Control.GetType().Name.ToLower() == "checkedit")
+                            //    {
+                            //        control1.Control.Text = GetNN(dtTmp, control1.Name, frm.Name);
+                            //        control1.Control.DoubleClick += delegate (object a, EventArgs b) { CheckEdit_DoubleClick(control1.Control, b, frm.Name); };
+                            //    }
+                            //    else
                             if (control1.Control.GetType().Name.ToLower() == "radiogroup")
                             {
                                 DoiNN(control1.Control, frm, dtTmp);
@@ -1592,7 +1776,7 @@ namespace Commons
 
                             else
                             {
-                                control1.Text = GetNN(dtTmp, control1.Name, frm.Name) +"  ";
+                                control1.Text = GetNN(dtTmp, control1.Name, frm.Name) + "  ";
                                 control1.DoubleClick += delegate (object a, EventArgs b) { Control1_DoubleClick(control1, b, frm.Name); };
 
                             }
@@ -1752,7 +1936,7 @@ namespace Commons
                 {
                     LayoutControlGroup gro = (LayoutControlGroup)gr;
                     gro.Text = GetNN(dtTmp, gro.Name, frm.Name);
-                    gro.AppearanceGroup.ForeColor = Color.FromArgb(192, 0, 0);
+                    gro.AppearanceGroup.ForeColor = Color.FromArgb(0, 0, 192);
                     gro.DoubleClick += delegate (object a, EventArgs b) { ControlGroup_DoubleClick(gro, b, frm.Name); };
                     LoadNNGroupControl(frm, (LayoutControlGroup)gr, dtTmp);
 
@@ -1804,10 +1988,10 @@ namespace Commons
             dtTmp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT KEYWORD , CASE " + Modules.TypeLanguage + " WHEN 0 THEN VIETNAM WHEN 1 THEN ENGLISH ELSE CHINESE END AS NN  FROM LANGUAGES WHERE FORM = N'" + frm.Name + "' "));
             LoadNNGroupControl(frm, group, dtTmp);
             Tab.DoubleClick += delegate (object a, EventArgs b) { TabbedControlGroup_DoubleClick(Tab, b, frm.Name); };
+            Tab.AppearanceTabPage.HeaderActive.ForeColor = Color.FromArgb(0, 0, 192);
             foreach (LayoutControlGroup item in Tab.TabPages)
             {
                 item.Text = GetNN(dtTmp, item.Name, frm.Name);
-                item.AppearanceTabPage.Header.ForeColor = Color.FromArgb(192, 0, 0);
                 LoadNNGroupControl(frm, item, dtTmp);
             }
             try
@@ -1838,7 +2022,7 @@ namespace Commons
                 {
                     LayoutControlGroup gro = (LayoutControlGroup)gr;
                     gro.Text = GetNN(dtTmp, gro.Name, name);
-                    gro.AppearanceGroup.ForeColor = Color.FromArgb(192, 0, 0);
+                    gro.AppearanceGroup.ForeColor = Color.FromArgb(0, 0, 192);
                     gro.DoubleClick += delegate (object a, EventArgs b) { ControlGroup_DoubleClick(gro, b, name); };
                     LoadNNGroupControl(gro, dtTmp, name);
                 }
@@ -2035,7 +2219,7 @@ namespace Commons
 
                     case "LabelControl":
                     case "CheckButton":
-                    case "CheckEdit":
+                    //case "CheckEdit":
                     case "XtraTabPage":
                     case "GroupControl":
                         {
@@ -2068,7 +2252,7 @@ namespace Commons
                                 {
                                     GroupControl CtlDev;
                                     CtlDev = (GroupControl)Ctl;
-                                    CtlDev.AppearanceCaption.ForeColor = Color.FromArgb(192, 0, 0);
+                                    CtlDev.AppearanceCaption.ForeColor = Color.FromArgb(0, 0, 192);
                                     CtlDev.MouseDoubleClick += delegate (object a, MouseEventArgs b) { Gropcontrol_MouseDoubleClick(Ctl, b, frm.Name); };
                                 }
                                 catch
@@ -2235,7 +2419,7 @@ namespace Commons
                     case "GroupControl":
                     case "TextBoxMaskBox":
                     case "RadioButton":
-                    case "CheckEdit":
+                    //case "CheckEdit":
                     case "CheckBox":
 
                         {
@@ -2260,7 +2444,7 @@ namespace Commons
                                 {
                                     GroupControl CtlDev;
                                     CtlDev = (GroupControl)Ctl;
-                                    CtlDev.AppearanceCaption.ForeColor = Color.FromArgb(192, 0, 0);
+                                    CtlDev.AppearanceCaption.ForeColor = Color.FromArgb(0, 0, 192);
                                     CtlDev.MouseDoubleClick += delegate (object a, MouseEventArgs b) { Gropcontrol_MouseDoubleClick(Ctl, b, frm.Name); };
                                 }
                                 catch
@@ -3813,7 +3997,7 @@ namespace Commons
         public DataTable DataLyDoVang(bool coAll, int tinhBH = -1)
         {
             DataTable dt = new DataTable();
-            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboLDV", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll,tinhBH));
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboLDV", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll, tinhBH));
             return dt;
         }
         public DataTable DataLoaiDieuChinh(bool coAll)
@@ -4001,6 +4185,13 @@ namespace Commons
             dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboNguoiKy", Commons.Modules.UserName));
             return dt;
         }
+        public DataTable DataTinhTrang(bool coAll)
+        {
+            //ID_TT, TenTT
+            DataTable dt = new DataTable();
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboTinhTrang", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll));
+            return dt;
+        }
         public DataTable DataCongNhanTheoDK(bool coAll, Int32 ID_DV, Int32 ID_XN, Int32 ID_TO, DateTime TNgay, DateTime DNgay)
         {
             try
@@ -4106,7 +4297,7 @@ namespace Commons
         {
             //ID_CTL,TEN_CTL
             DataTable dt = new DataTable();
-            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr,CommandType.Text, "SELECT ID_CTL,TEN as TEN_CTL FROM dbo.CACH_TINH_LUONG ORDER BY TEN"));
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT ID_CTL,TEN as TEN_CTL FROM dbo.CACH_TINH_LUONG ORDER BY TEN"));
             return dt;
         }
 

@@ -52,7 +52,7 @@ namespace Vs.TimeAttendance
         {
             try
             {
-          //      Application.Run(new frmLinkDuLieuChamCong());
+                //Application.Run(new frmLinkDuLieuChamCong(1));
             }
             catch (Exception ex)
             {

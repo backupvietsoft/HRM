@@ -1300,8 +1300,6 @@ F:\HRM_06062022\HRM_05062022\01.VS_HRM\01.VS_HRM\01.VS_HRM\04.Vs.HRM\Vs.HRM\obj\
 G:\2022\02.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\Template\TemplateGiamLaoDong.xlsx
 G:\2022\02.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\Template\TemplateTaiNanLaoDong.xlsx
 G:\2022\02.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\Template\TemplateTangLaoDong.xlsx
-G:\2022\02.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\Vs.HRM.exe.config
-G:\2022\02.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\Vs.HRM.exe
 G:\2022\02.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\Vs.HRM.pdb
 G:\2022\02.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\Commons.dll
 G:\2022\02.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\DevExpress.BonusSkins.v20.1.dll
@@ -1491,12 +1489,9 @@ G:\2022\02.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.ucXepLoaiKhenThuong.resources
 G:\2022\02.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.ucBHXHThang.resources
 G:\2022\02.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.XtraForm1.resources
 G:\2022\02.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.csproj.GenerateResource.cache
-G:\2022\02.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.exe.licenses
 G:\2022\02.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.csproj.CoreCompileInputs.cache
 G:\2022\02.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.csproj.CopyComplete
-G:\2022\02.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.exe
 G:\2022\02.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.pdb
-G:\2022\02.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\ICSharpCode.SharpZipLib.dll
 F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\Template\TemplateGiamLaoDong.xlsx
 F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\Template\TemplateTaiNanLaoDong.xlsx
 F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\Template\TemplateTangLaoDong.xlsx
@@ -2400,3 +2395,8 @@ H:\Lamviec\Lamviec\HRM\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.dll
 H:\Lamviec\Lamviec\HRM\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.pdb
 F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.ucThongTinChuyenKhoan.resources
 H:\Lamviec\Lamviec\HRM\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.ucThongTinChuyenKhoan.resources
+G:\2022\02.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\Vs.HRM.dll.config
+G:\2022\02.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\Vs.HRM.dll
+G:\2022\02.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.ucThongTinChuyenKhoan.resources
+G:\2022\02.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.dll.licenses
+G:\2022\02.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.dll

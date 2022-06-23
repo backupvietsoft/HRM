@@ -153,9 +153,15 @@ namespace Vs.HRM
                 {
                     dt.Rows[dt.Rows.Count - 1]["TU_THANG"] = dt.Rows[dt.Rows.Count - 1]["DEN_THANG"].ToString() == "" ? dt.Rows[dt.Rows.Count - 1]["TU_THANG"] : dt.Rows[dt.Rows.Count - 1]["DEN_THANG"];
                 }
+                try
+                {
                     dt.Rows[dt.Rows.Count - 1]["DEN_THANG"] = DateTime.Today.AddMonths(-1).ToString("MM/yyyy");
                     dt.Rows[dt.Rows.Count - 1]["NAM_DONG"] = SoNam(dt.Rows[dt.Rows.Count - 1]["TU_THANG"].ToString(), dt.Rows[dt.Rows.Count - 1]["DEN_THANG"].ToString(), out resulst);
                     dt.Rows[dt.Rows.Count - 1]["THANG_DONG"] = resulst;
+                }
+                catch
+                {
+                }
                 Commons.Modules.ObjSystems.MLoadXtraGrid(grdThamGiaBHXH, grvThamGiaBHXH, dt, false, false, true, true, true, this.Name);
                 grvThamGiaBHXH.Columns["ID_CN"].Visible = false;
                 grvThamGiaBHXH.Columns["NGAY_HIEU_LUC"].Visible = false;
@@ -163,7 +169,7 @@ namespace Vs.HRM
                 grvThamGiaBHXH.Columns["MUC_LUONG_DONG"].DisplayFormat.FormatType = FormatType.Numeric;
                 grvThamGiaBHXH.Columns["MUC_LUONG_DONG"].DisplayFormat.FormatString = Commons.Modules.sSoLeTT;
             }
-            catch 
+            catch
             {
                 grdThamGiaBHXH.DataSource = null;
             }

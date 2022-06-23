@@ -114,11 +114,10 @@
             this.layoutControl1.Controls.Add(this.labDanhGia);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl1.Location = new System.Drawing.Point(0, 0);
-            this.layoutControl1.Margin = new System.Windows.Forms.Padding(4);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(716, 115, 650, 400);
             this.layoutControl1.Root = this.Root;
-            this.layoutControl1.Size = new System.Drawing.Size(1437, 626);
+            this.layoutControl1.Size = new System.Drawing.Size(914, 426);
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
             // 
@@ -133,8 +132,7 @@
             this.navigationFrame1.Controls.Add(this.navigationPage6);
             this.navigationFrame1.Controls.Add(this.navigationPage7);
             this.navigationFrame1.Controls.Add(this.navigationPage8);
-            this.navigationFrame1.Location = new System.Drawing.Point(6, 58);
-            this.navigationFrame1.Margin = new System.Windows.Forms.Padding(4);
+            this.navigationFrame1.Location = new System.Drawing.Point(2, 38);
             this.navigationFrame1.Name = "navigationFrame1";
             this.navigationFrame1.Pages.AddRange(new DevExpress.XtraBars.Navigation.NavigationPageBase[] {
             this.navigationPage1,
@@ -146,102 +144,83 @@
             this.navigationPage7,
             this.navigationPage8});
             this.navigationFrame1.SelectedPage = this.navigationPage2;
-            this.navigationFrame1.Size = new System.Drawing.Size(1425, 562);
+            this.navigationFrame1.Size = new System.Drawing.Size(910, 386);
             this.navigationFrame1.TabIndex = 25;
             this.navigationFrame1.Text = "navigationFrame1";
             // 
             // navigationPage2
             // 
             this.navigationPage2.Caption = "navigationPage2";
-            this.navigationPage2.Margin = new System.Windows.Forms.Padding(4);
             this.navigationPage2.Name = "navigationPage2";
-            this.navigationPage2.Size = new System.Drawing.Size(1425, 562);
+            this.navigationPage2.Size = new System.Drawing.Size(910, 386);
             // 
             // navigationPage1
             // 
             this.navigationPage1.Caption = "navigationPage1";
-            this.navigationPage1.Margin = new System.Windows.Forms.Padding(4);
             this.navigationPage1.Name = "navigationPage1";
-            this.navigationPage1.Size = new System.Drawing.Size(1425, 562);
+            this.navigationPage1.Size = new System.Drawing.Size(910, 386);
             // 
             // navigationPage3
             // 
             this.navigationPage3.Caption = "navigationPage3";
-            this.navigationPage3.Margin = new System.Windows.Forms.Padding(4);
             this.navigationPage3.Name = "navigationPage3";
-            this.navigationPage3.Size = new System.Drawing.Size(1425, 562);
+            this.navigationPage3.Size = new System.Drawing.Size(910, 386);
             // 
             // navigationPage4
             // 
             this.navigationPage4.Caption = "navigationPage4";
-            this.navigationPage4.Margin = new System.Windows.Forms.Padding(4);
             this.navigationPage4.Name = "navigationPage4";
-            this.navigationPage4.Size = new System.Drawing.Size(1425, 562);
+            this.navigationPage4.Size = new System.Drawing.Size(910, 386);
             // 
             // navigationPage5
             // 
             this.navigationPage5.Caption = "navigationPage5";
-            this.navigationPage5.Margin = new System.Windows.Forms.Padding(4);
             this.navigationPage5.Name = "navigationPage5";
-            this.navigationPage5.Size = new System.Drawing.Size(1425, 562);
+            this.navigationPage5.Size = new System.Drawing.Size(910, 386);
             // 
             // navigationPage6
             // 
             this.navigationPage6.Caption = "navigationPage6";
-            this.navigationPage6.Margin = new System.Windows.Forms.Padding(4);
             this.navigationPage6.Name = "navigationPage6";
-            this.navigationPage6.Size = new System.Drawing.Size(1425, 562);
+            this.navigationPage6.Size = new System.Drawing.Size(910, 386);
             // 
             // navigationPage7
             // 
             this.navigationPage7.Caption = "navigationPage7";
-            this.navigationPage7.Margin = new System.Windows.Forms.Padding(4);
             this.navigationPage7.Name = "navigationPage7";
-            this.navigationPage7.Size = new System.Drawing.Size(1425, 562);
+            this.navigationPage7.Size = new System.Drawing.Size(910, 386);
             // 
             // navigationPage8
             // 
             this.navigationPage8.Caption = "navigationPage8";
-            this.navigationPage8.Margin = new System.Windows.Forms.Padding(4);
             this.navigationPage8.Name = "navigationPage8";
-            this.navigationPage8.Size = new System.Drawing.Size(1425, 562);
+            this.navigationPage8.Size = new System.Drawing.Size(910, 386);
             // 
             // labLyLich
             // 
-            this.labLyLich.Appearance.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold);
-            this.labLyLich.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.labLyLich.Appearance.Options.UseFont = true;
-            this.labLyLich.Appearance.Options.UseForeColor = true;
             this.labLyLich.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.labLyLich.Location = new System.Drawing.Point(93, 25);
-            this.labLyLich.Margin = new System.Windows.Forms.Padding(4);
+            this.labLyLich.Location = new System.Drawing.Point(57, 14);
             this.labLyLich.Name = "labLyLich";
-            this.labLyLich.Size = new System.Drawing.Size(54, 25);
+            this.labLyLich.Size = new System.Drawing.Size(34, 17);
             this.labLyLich.StyleController = this.layoutControl1;
             this.labLyLich.TabIndex = 22;
             this.labLyLich.Text = "Lý lịch";
             // 
             // labCongTac
             // 
-            this.labCongTac.Appearance.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold);
-            this.labCongTac.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.labCongTac.Appearance.Options.UseFont = true;
-            this.labCongTac.Appearance.Options.UseForeColor = true;
             this.labCongTac.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.labCongTac.Location = new System.Drawing.Point(313, 25);
-            this.labCongTac.Margin = new System.Windows.Forms.Padding(4);
+            this.labCongTac.Location = new System.Drawing.Point(197, 14);
             this.labCongTac.Name = "labCongTac";
-            this.labCongTac.Size = new System.Drawing.Size(79, 25);
+            this.labCongTac.Size = new System.Drawing.Size(52, 17);
             this.labCongTac.StyleController = this.layoutControl1;
             this.labCongTac.TabIndex = 23;
             this.labCongTac.Text = "Công tác";
             // 
             // NONNlabelControl2
             // 
-            this.NONNlabelControl2.Location = new System.Drawing.Point(163, 25);
-            this.NONNlabelControl2.Margin = new System.Windows.Forms.Padding(4);
+            this.NONNlabelControl2.Location = new System.Drawing.Point(101, 14);
             this.NONNlabelControl2.Name = "NONNlabelControl2";
-            this.NONNlabelControl2.Size = new System.Drawing.Size(5, 25);
+            this.NONNlabelControl2.Size = new System.Drawing.Size(3, 17);
             this.NONNlabelControl2.StyleController = this.layoutControl1;
             this.NONNlabelControl2.TabIndex = 24;
             this.NONNlabelControl2.Text = "|";
@@ -256,11 +235,11 @@
             windowsUIButtonImageOptions1.ImageUri.Uri = "hybriddemo_back%20button;Svg";
             this.backWindowsUIButtonPanel.Buttons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] {
             new DevExpress.XtraBars.Docking2010.WindowsUIButton("", false, windowsUIButtonImageOptions1, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, null, -1, true)});
-            this.backWindowsUIButtonPanel.Location = new System.Drawing.Point(6, 6);
-            this.backWindowsUIButtonPanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.backWindowsUIButtonPanel.Location = new System.Drawing.Point(2, 2);
+            this.backWindowsUIButtonPanel.Margin = new System.Windows.Forms.Padding(2);
             this.backWindowsUIButtonPanel.Name = "backWindowsUIButtonPanel";
             this.backWindowsUIButtonPanel.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.backWindowsUIButtonPanel.Size = new System.Drawing.Size(78, 50);
+            this.backWindowsUIButtonPanel.Size = new System.Drawing.Size(48, 32);
             this.backWindowsUIButtonPanel.TabIndex = 1;
             this.backWindowsUIButtonPanel.Text = "backWindowsUIButtonPanel";
             this.backWindowsUIButtonPanel.UseButtonBackgroundImages = false;
@@ -272,134 +251,104 @@
             this.labelControl11.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(82)))), ((int)(((byte)(163)))));
             this.labelControl11.Appearance.Options.UseFont = true;
             this.labelControl11.Appearance.Options.UseForeColor = true;
-            this.labelControl11.Location = new System.Drawing.Point(984, 6);
-            this.labelControl11.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.labelControl11.Location = new System.Drawing.Point(630, 2);
+            this.labelControl11.Margin = new System.Windows.Forms.Padding(2);
             this.labelControl11.Name = "labelControl11";
-            this.labelControl11.Size = new System.Drawing.Size(447, 50);
+            this.labelControl11.Size = new System.Drawing.Size(282, 32);
             this.labelControl11.StyleController = this.layoutControl1;
             this.labelControl11.TabIndex = 1;
             // 
             // labHopDong
             // 
-            this.labHopDong.Appearance.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold);
-            this.labHopDong.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.labHopDong.Appearance.Options.UseFont = true;
-            this.labHopDong.Appearance.Options.UseForeColor = true;
             this.labHopDong.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.labHopDong.Location = new System.Drawing.Point(184, 25);
-            this.labHopDong.Margin = new System.Windows.Forms.Padding(4);
+            this.labHopDong.Location = new System.Drawing.Point(114, 14);
             this.labHopDong.Name = "labHopDong";
-            this.labHopDong.Size = new System.Drawing.Size(92, 25);
+            this.labHopDong.Size = new System.Drawing.Size(60, 17);
             this.labHopDong.StyleController = this.layoutControl1;
             this.labHopDong.TabIndex = 23;
             this.labHopDong.Text = "Hợp đồng";
             // 
             // NONNlabelControl21
             // 
-            this.NONNlabelControl21.Location = new System.Drawing.Point(292, 25);
-            this.NONNlabelControl21.Margin = new System.Windows.Forms.Padding(4);
+            this.NONNlabelControl21.Location = new System.Drawing.Point(184, 14);
             this.NONNlabelControl21.Name = "NONNlabelControl21";
-            this.NONNlabelControl21.Size = new System.Drawing.Size(5, 25);
+            this.NONNlabelControl21.Size = new System.Drawing.Size(3, 17);
             this.NONNlabelControl21.StyleController = this.layoutControl1;
             this.NONNlabelControl21.TabIndex = 24;
             this.NONNlabelControl21.Text = "|";
             // 
             // NONNlabelControl22
             // 
-            this.NONNlabelControl22.Location = new System.Drawing.Point(408, 25);
-            this.NONNlabelControl22.Margin = new System.Windows.Forms.Padding(4);
+            this.NONNlabelControl22.Location = new System.Drawing.Point(259, 14);
             this.NONNlabelControl22.Name = "NONNlabelControl22";
-            this.NONNlabelControl22.Size = new System.Drawing.Size(5, 25);
+            this.NONNlabelControl22.Size = new System.Drawing.Size(3, 17);
             this.NONNlabelControl22.StyleController = this.layoutControl1;
             this.NONNlabelControl22.TabIndex = 24;
             this.NONNlabelControl22.Text = "|";
             // 
             // labTienLuong
             // 
-            this.labTienLuong.Appearance.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold);
-            this.labTienLuong.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.labTienLuong.Appearance.Options.UseFont = true;
-            this.labTienLuong.Appearance.Options.UseForeColor = true;
             this.labTienLuong.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.labTienLuong.Location = new System.Drawing.Point(429, 25);
-            this.labTienLuong.Margin = new System.Windows.Forms.Padding(4);
+            this.labTienLuong.Location = new System.Drawing.Point(272, 14);
             this.labTienLuong.Name = "labTienLuong";
-            this.labTienLuong.Size = new System.Drawing.Size(97, 25);
+            this.labTienLuong.Size = new System.Drawing.Size(62, 17);
             this.labTienLuong.StyleController = this.layoutControl1;
             this.labTienLuong.TabIndex = 23;
             this.labTienLuong.Text = "Tiền lương";
             // 
             // NONNlabelControl221
             // 
-            this.NONNlabelControl221.Location = new System.Drawing.Point(542, 25);
-            this.NONNlabelControl221.Margin = new System.Windows.Forms.Padding(4);
+            this.NONNlabelControl221.Location = new System.Drawing.Point(344, 14);
             this.NONNlabelControl221.Name = "NONNlabelControl221";
-            this.NONNlabelControl221.Size = new System.Drawing.Size(5, 25);
+            this.NONNlabelControl221.Size = new System.Drawing.Size(3, 17);
             this.NONNlabelControl221.StyleController = this.layoutControl1;
             this.NONNlabelControl221.TabIndex = 24;
             this.NONNlabelControl221.Text = "|";
             // 
             // labKhanThuong
             // 
-            this.labKhanThuong.Appearance.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold);
-            this.labKhanThuong.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.labKhanThuong.Appearance.Options.UseFont = true;
-            this.labKhanThuong.Appearance.Options.UseForeColor = true;
             this.labKhanThuong.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.labKhanThuong.Location = new System.Drawing.Point(679, 25);
-            this.labKhanThuong.Margin = new System.Windows.Forms.Padding(4);
+            this.labKhanThuong.Location = new System.Drawing.Point(357, 14);
             this.labKhanThuong.Name = "labKhanThuong";
-            this.labKhanThuong.Size = new System.Drawing.Size(196, 25);
+            this.labKhanThuong.Size = new System.Drawing.Size(127, 17);
             this.labKhanThuong.StyleController = this.layoutControl1;
             this.labKhanThuong.TabIndex = 23;
             this.labKhanThuong.Text = "Khen thưởng - Kỷ luật";
             // 
             // NONNlabelControl2211
             // 
-            this.NONNlabelControl2211.Location = new System.Drawing.Point(658, 25);
-            this.NONNlabelControl2211.Margin = new System.Windows.Forms.Padding(4);
+            this.NONNlabelControl2211.Location = new System.Drawing.Point(494, 14);
             this.NONNlabelControl2211.Name = "NONNlabelControl2211";
-            this.NONNlabelControl2211.Size = new System.Drawing.Size(5, 25);
+            this.NONNlabelControl2211.Size = new System.Drawing.Size(3, 17);
             this.NONNlabelControl2211.StyleController = this.layoutControl1;
             this.NONNlabelControl2211.TabIndex = 24;
             this.NONNlabelControl2211.Text = "|";
             // 
             // labTaiNan
             // 
-            this.labTaiNan.Appearance.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold);
-            this.labTaiNan.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.labTaiNan.Appearance.Options.UseFont = true;
-            this.labTaiNan.Appearance.Options.UseForeColor = true;
             this.labTaiNan.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.labTaiNan.Location = new System.Drawing.Point(912, 25);
-            this.labTaiNan.Margin = new System.Windows.Forms.Padding(4);
+            this.labTaiNan.Location = new System.Drawing.Point(582, 14);
             this.labTaiNan.Name = "labTaiNan";
-            this.labTaiNan.Size = new System.Drawing.Size(63, 25);
+            this.labTaiNan.Size = new System.Drawing.Size(41, 17);
             this.labTaiNan.StyleController = this.layoutControl1;
             this.labTaiNan.TabIndex = 23;
             this.labTaiNan.Text = "Tai nạn";
             // 
             // NONNlabelControl22111
             // 
-            this.NONNlabelControl22111.Location = new System.Drawing.Point(891, 25);
-            this.NONNlabelControl22111.Margin = new System.Windows.Forms.Padding(4);
+            this.NONNlabelControl22111.Location = new System.Drawing.Point(569, 14);
             this.NONNlabelControl22111.Name = "NONNlabelControl22111";
-            this.NONNlabelControl22111.Size = new System.Drawing.Size(5, 25);
+            this.NONNlabelControl22111.Size = new System.Drawing.Size(3, 17);
             this.NONNlabelControl22111.StyleController = this.layoutControl1;
             this.NONNlabelControl22111.TabIndex = 24;
             this.NONNlabelControl22111.Text = "|";
             // 
             // labDanhGia
             // 
-            this.labDanhGia.Appearance.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold);
-            this.labDanhGia.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.labDanhGia.Appearance.Options.UseFont = true;
-            this.labDanhGia.Appearance.Options.UseForeColor = true;
             this.labDanhGia.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.labDanhGia.Location = new System.Drawing.Point(563, 25);
-            this.labDanhGia.Margin = new System.Windows.Forms.Padding(4);
+            this.labDanhGia.Location = new System.Drawing.Point(507, 14);
             this.labDanhGia.Name = "labDanhGia";
-            this.labDanhGia.Size = new System.Drawing.Size(79, 25);
+            this.labDanhGia.Size = new System.Drawing.Size(52, 17);
             this.labDanhGia.StyleController = this.layoutControl1;
             this.labDanhGia.TabIndex = 23;
             this.labDanhGia.Text = "Đánh giá";
@@ -422,11 +371,12 @@
             this.lciNotes1,
             this.lciNotes,
             this.lciNotes2,
+            this.lciNotes4,
             this.lciNotes5,
-            this.lciNotes3,
-            this.lciNotes4});
+            this.lciNotes3});
             this.Root.Name = "Root";
-            this.Root.Size = new System.Drawing.Size(1437, 626);
+            this.Root.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
+            this.Root.Size = new System.Drawing.Size(914, 426);
             this.Root.TextVisible = false;
             // 
             // layoutControlItem1
@@ -434,11 +384,11 @@
             this.layoutControlItem1.Control = this.backWindowsUIButtonPanel;
             this.layoutControlItem1.CustomizationFormText = "layoutControlItem5";
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlItem1.MinSize = new System.Drawing.Size(69, 31);
+            this.layoutControlItem1.MinSize = new System.Drawing.Size(44, 21);
             this.layoutControlItem1.Name = "layoutControlItem1";
             this.layoutControlItem1.OptionsPrint.AppearanceItem.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.layoutControlItem1.OptionsPrint.AppearanceItem.Options.UseFont = true;
-            this.layoutControlItem1.Size = new System.Drawing.Size(80, 52);
+            this.layoutControlItem1.Size = new System.Drawing.Size(52, 36);
             this.layoutControlItem1.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlItem1.Text = "layoutControlItem5";
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
@@ -448,12 +398,12 @@
             // 
             this.layoutControlItem9.Control = this.labelControl11;
             this.layoutControlItem9.CustomizationFormText = "Full Name";
-            this.layoutControlItem9.Location = new System.Drawing.Point(978, 0);
-            this.layoutControlItem9.MinSize = new System.Drawing.Size(120, 27);
+            this.layoutControlItem9.Location = new System.Drawing.Point(628, 0);
+            this.layoutControlItem9.MinSize = new System.Drawing.Size(76, 19);
             this.layoutControlItem9.Name = "layoutControlItem9";
             this.layoutControlItem9.OptionsPrint.AppearanceItem.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.layoutControlItem9.OptionsPrint.AppearanceItem.Options.UseFont = true;
-            this.layoutControlItem9.Size = new System.Drawing.Size(449, 52);
+            this.layoutControlItem9.Size = new System.Drawing.Size(286, 36);
             this.layoutControlItem9.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlItem9.Text = "Full Name";
             this.layoutControlItem9.TextSize = new System.Drawing.Size(0, 0);
@@ -463,12 +413,12 @@
             // 
             this.lciTasks.Control = this.labLyLich;
             this.lciTasks.CustomizationFormText = "lciTasks";
-            this.lciTasks.Location = new System.Drawing.Point(80, 0);
+            this.lciTasks.Location = new System.Drawing.Point(52, 0);
             this.lciTasks.Name = "lciTasks";
             this.lciTasks.OptionsPrint.AppearanceItem.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.lciTasks.OptionsPrint.AppearanceItem.Options.UseFont = true;
-            this.lciTasks.Padding = new DevExpress.XtraLayout.Utils.Padding(8, 8, 20, 7);
-            this.lciTasks.Size = new System.Drawing.Size(70, 52);
+            this.lciTasks.Padding = new DevExpress.XtraLayout.Utils.Padding(5, 5, 14, 5);
+            this.lciTasks.Size = new System.Drawing.Size(44, 36);
             this.lciTasks.TextSize = new System.Drawing.Size(0, 0);
             this.lciTasks.TextVisible = false;
             // 
@@ -476,12 +426,12 @@
             // 
             this.NONNlayoutControlItem12.Control = this.NONNlabelControl2;
             this.NONNlayoutControlItem12.CustomizationFormText = "layoutControlItem12";
-            this.NONNlayoutControlItem12.Location = new System.Drawing.Point(150, 0);
+            this.NONNlayoutControlItem12.Location = new System.Drawing.Point(96, 0);
             this.NONNlayoutControlItem12.Name = "NONNlayoutControlItem12";
             this.NONNlayoutControlItem12.OptionsPrint.AppearanceItem.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.NONNlayoutControlItem12.OptionsPrint.AppearanceItem.Options.UseFont = true;
-            this.NONNlayoutControlItem12.Padding = new DevExpress.XtraLayout.Utils.Padding(8, 8, 20, 7);
-            this.NONNlayoutControlItem12.Size = new System.Drawing.Size(21, 52);
+            this.NONNlayoutControlItem12.Padding = new DevExpress.XtraLayout.Utils.Padding(5, 5, 14, 5);
+            this.NONNlayoutControlItem12.Size = new System.Drawing.Size(13, 36);
             this.NONNlayoutControlItem12.TextSize = new System.Drawing.Size(0, 0);
             this.NONNlayoutControlItem12.TextVisible = false;
             // 
@@ -489,12 +439,12 @@
             // 
             this.NONNlayoutControlItem2.Control = this.NONNlabelControl21;
             this.NONNlayoutControlItem2.CustomizationFormText = "layoutControlItem12";
-            this.NONNlayoutControlItem2.Location = new System.Drawing.Point(279, 0);
+            this.NONNlayoutControlItem2.Location = new System.Drawing.Point(179, 0);
             this.NONNlayoutControlItem2.Name = "NONNlayoutControlItem2";
             this.NONNlayoutControlItem2.OptionsPrint.AppearanceItem.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.NONNlayoutControlItem2.OptionsPrint.AppearanceItem.Options.UseFont = true;
-            this.NONNlayoutControlItem2.Padding = new DevExpress.XtraLayout.Utils.Padding(8, 8, 20, 7);
-            this.NONNlayoutControlItem2.Size = new System.Drawing.Size(21, 52);
+            this.NONNlayoutControlItem2.Padding = new DevExpress.XtraLayout.Utils.Padding(5, 5, 14, 5);
+            this.NONNlayoutControlItem2.Size = new System.Drawing.Size(13, 36);
             this.NONNlayoutControlItem2.Text = "layoutControlItem12";
             this.NONNlayoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
             this.NONNlayoutControlItem2.TextVisible = false;
@@ -503,12 +453,12 @@
             // 
             this.NONNlayoutControlItem3.Control = this.NONNlabelControl22;
             this.NONNlayoutControlItem3.CustomizationFormText = "layoutControlItem12";
-            this.NONNlayoutControlItem3.Location = new System.Drawing.Point(395, 0);
+            this.NONNlayoutControlItem3.Location = new System.Drawing.Point(254, 0);
             this.NONNlayoutControlItem3.Name = "NONNlayoutControlItem3";
             this.NONNlayoutControlItem3.OptionsPrint.AppearanceItem.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.NONNlayoutControlItem3.OptionsPrint.AppearanceItem.Options.UseFont = true;
-            this.NONNlayoutControlItem3.Padding = new DevExpress.XtraLayout.Utils.Padding(8, 8, 20, 7);
-            this.NONNlayoutControlItem3.Size = new System.Drawing.Size(21, 52);
+            this.NONNlayoutControlItem3.Padding = new DevExpress.XtraLayout.Utils.Padding(5, 5, 14, 5);
+            this.NONNlayoutControlItem3.Size = new System.Drawing.Size(13, 36);
             this.NONNlayoutControlItem3.Text = "layoutControlItem12";
             this.NONNlayoutControlItem3.TextSize = new System.Drawing.Size(0, 0);
             this.NONNlayoutControlItem3.TextVisible = false;
@@ -517,12 +467,12 @@
             // 
             this.layoutControlItem4.Control = this.NONNlabelControl221;
             this.layoutControlItem4.CustomizationFormText = "layoutControlItem12";
-            this.layoutControlItem4.Location = new System.Drawing.Point(529, 0);
+            this.layoutControlItem4.Location = new System.Drawing.Point(339, 0);
             this.layoutControlItem4.Name = "layoutControlItem4";
             this.layoutControlItem4.OptionsPrint.AppearanceItem.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.layoutControlItem4.OptionsPrint.AppearanceItem.Options.UseFont = true;
-            this.layoutControlItem4.Padding = new DevExpress.XtraLayout.Utils.Padding(8, 8, 20, 7);
-            this.layoutControlItem4.Size = new System.Drawing.Size(21, 52);
+            this.layoutControlItem4.Padding = new DevExpress.XtraLayout.Utils.Padding(5, 5, 14, 5);
+            this.layoutControlItem4.Size = new System.Drawing.Size(13, 36);
             this.layoutControlItem4.Text = "layoutControlItem12";
             this.layoutControlItem4.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem4.TextVisible = false;
@@ -531,12 +481,12 @@
             // 
             this.layoutControlItem5.Control = this.NONNlabelControl2211;
             this.layoutControlItem5.CustomizationFormText = "layoutControlItem12";
-            this.layoutControlItem5.Location = new System.Drawing.Point(645, 0);
+            this.layoutControlItem5.Location = new System.Drawing.Point(489, 0);
             this.layoutControlItem5.Name = "layoutControlItem5";
             this.layoutControlItem5.OptionsPrint.AppearanceItem.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.layoutControlItem5.OptionsPrint.AppearanceItem.Options.UseFont = true;
-            this.layoutControlItem5.Padding = new DevExpress.XtraLayout.Utils.Padding(8, 8, 20, 7);
-            this.layoutControlItem5.Size = new System.Drawing.Size(21, 52);
+            this.layoutControlItem5.Padding = new DevExpress.XtraLayout.Utils.Padding(5, 5, 14, 5);
+            this.layoutControlItem5.Size = new System.Drawing.Size(13, 36);
             this.layoutControlItem5.Text = "layoutControlItem12";
             this.layoutControlItem5.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem5.TextVisible = false;
@@ -545,12 +495,12 @@
             // 
             this.layoutControlItem6.Control = this.NONNlabelControl22111;
             this.layoutControlItem6.CustomizationFormText = "layoutControlItem12";
-            this.layoutControlItem6.Location = new System.Drawing.Point(878, 0);
+            this.layoutControlItem6.Location = new System.Drawing.Point(564, 0);
             this.layoutControlItem6.Name = "layoutControlItem6";
             this.layoutControlItem6.OptionsPrint.AppearanceItem.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.layoutControlItem6.OptionsPrint.AppearanceItem.Options.UseFont = true;
-            this.layoutControlItem6.Padding = new DevExpress.XtraLayout.Utils.Padding(8, 8, 20, 7);
-            this.layoutControlItem6.Size = new System.Drawing.Size(21, 52);
+            this.layoutControlItem6.Padding = new DevExpress.XtraLayout.Utils.Padding(5, 5, 14, 5);
+            this.layoutControlItem6.Size = new System.Drawing.Size(13, 36);
             this.layoutControlItem6.Text = "layoutControlItem12";
             this.layoutControlItem6.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem6.TextVisible = false;
@@ -558,9 +508,9 @@
             // layoutControlItem8
             // 
             this.layoutControlItem8.Control = this.navigationFrame1;
-            this.layoutControlItem8.Location = new System.Drawing.Point(0, 52);
+            this.layoutControlItem8.Location = new System.Drawing.Point(0, 36);
             this.layoutControlItem8.Name = "layoutControlItem8";
-            this.layoutControlItem8.Size = new System.Drawing.Size(1427, 564);
+            this.layoutControlItem8.Size = new System.Drawing.Size(914, 390);
             this.layoutControlItem8.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem8.TextVisible = false;
             // 
@@ -568,12 +518,12 @@
             // 
             this.lciNotes1.Control = this.labHopDong;
             this.lciNotes1.CustomizationFormText = "lciNotes";
-            this.lciNotes1.Location = new System.Drawing.Point(171, 0);
+            this.lciNotes1.Location = new System.Drawing.Point(109, 0);
             this.lciNotes1.Name = "lciNotes1";
             this.lciNotes1.OptionsPrint.AppearanceItem.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.lciNotes1.OptionsPrint.AppearanceItem.Options.UseFont = true;
-            this.lciNotes1.Padding = new DevExpress.XtraLayout.Utils.Padding(8, 8, 20, 7);
-            this.lciNotes1.Size = new System.Drawing.Size(108, 52);
+            this.lciNotes1.Padding = new DevExpress.XtraLayout.Utils.Padding(5, 5, 14, 5);
+            this.lciNotes1.Size = new System.Drawing.Size(70, 36);
             this.lciNotes1.Text = "lciNotes";
             this.lciNotes1.TextSize = new System.Drawing.Size(0, 0);
             this.lciNotes1.TextVisible = false;
@@ -582,12 +532,12 @@
             // 
             this.lciNotes.Control = this.labCongTac;
             this.lciNotes.CustomizationFormText = "lciNotes";
-            this.lciNotes.Location = new System.Drawing.Point(300, 0);
+            this.lciNotes.Location = new System.Drawing.Point(192, 0);
             this.lciNotes.Name = "lciNotes";
             this.lciNotes.OptionsPrint.AppearanceItem.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.lciNotes.OptionsPrint.AppearanceItem.Options.UseFont = true;
-            this.lciNotes.Padding = new DevExpress.XtraLayout.Utils.Padding(8, 8, 20, 7);
-            this.lciNotes.Size = new System.Drawing.Size(95, 52);
+            this.lciNotes.Padding = new DevExpress.XtraLayout.Utils.Padding(5, 5, 14, 5);
+            this.lciNotes.Size = new System.Drawing.Size(62, 36);
             this.lciNotes.TextSize = new System.Drawing.Size(0, 0);
             this.lciNotes.TextVisible = false;
             // 
@@ -595,12 +545,12 @@
             // 
             this.lciNotes2.Control = this.labTienLuong;
             this.lciNotes2.CustomizationFormText = "lciNotes";
-            this.lciNotes2.Location = new System.Drawing.Point(416, 0);
+            this.lciNotes2.Location = new System.Drawing.Point(267, 0);
             this.lciNotes2.Name = "lciNotes2";
             this.lciNotes2.OptionsPrint.AppearanceItem.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.lciNotes2.OptionsPrint.AppearanceItem.Options.UseFont = true;
-            this.lciNotes2.Padding = new DevExpress.XtraLayout.Utils.Padding(8, 8, 20, 7);
-            this.lciNotes2.Size = new System.Drawing.Size(113, 52);
+            this.lciNotes2.Padding = new DevExpress.XtraLayout.Utils.Padding(5, 5, 14, 5);
+            this.lciNotes2.Size = new System.Drawing.Size(72, 36);
             this.lciNotes2.Text = "lciNotes";
             this.lciNotes2.TextSize = new System.Drawing.Size(0, 0);
             this.lciNotes2.TextVisible = false;
@@ -609,12 +559,12 @@
             // 
             this.lciNotes5.Control = this.labDanhGia;
             this.lciNotes5.CustomizationFormText = "lciNotes";
-            this.lciNotes5.Location = new System.Drawing.Point(550, 0);
+            this.lciNotes5.Location = new System.Drawing.Point(502, 0);
             this.lciNotes5.Name = "lciNotes5";
             this.lciNotes5.OptionsPrint.AppearanceItem.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.lciNotes5.OptionsPrint.AppearanceItem.Options.UseFont = true;
-            this.lciNotes5.Padding = new DevExpress.XtraLayout.Utils.Padding(8, 8, 20, 7);
-            this.lciNotes5.Size = new System.Drawing.Size(95, 52);
+            this.lciNotes5.Padding = new DevExpress.XtraLayout.Utils.Padding(5, 5, 14, 5);
+            this.lciNotes5.Size = new System.Drawing.Size(62, 36);
             this.lciNotes5.Text = "lciNotes";
             this.lciNotes5.TextSize = new System.Drawing.Size(0, 0);
             this.lciNotes5.TextVisible = false;
@@ -623,12 +573,12 @@
             // 
             this.lciNotes3.Control = this.labKhanThuong;
             this.lciNotes3.CustomizationFormText = "lciNotes";
-            this.lciNotes3.Location = new System.Drawing.Point(666, 0);
+            this.lciNotes3.Location = new System.Drawing.Point(352, 0);
             this.lciNotes3.Name = "lciNotes3";
             this.lciNotes3.OptionsPrint.AppearanceItem.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.lciNotes3.OptionsPrint.AppearanceItem.Options.UseFont = true;
-            this.lciNotes3.Padding = new DevExpress.XtraLayout.Utils.Padding(8, 8, 20, 7);
-            this.lciNotes3.Size = new System.Drawing.Size(212, 52);
+            this.lciNotes3.Padding = new DevExpress.XtraLayout.Utils.Padding(5, 5, 14, 5);
+            this.lciNotes3.Size = new System.Drawing.Size(137, 36);
             this.lciNotes3.Text = "lciNotes";
             this.lciNotes3.TextSize = new System.Drawing.Size(0, 0);
             this.lciNotes3.TextVisible = false;
@@ -637,24 +587,23 @@
             // 
             this.lciNotes4.Control = this.labTaiNan;
             this.lciNotes4.CustomizationFormText = "lciNotes";
-            this.lciNotes4.Location = new System.Drawing.Point(899, 0);
+            this.lciNotes4.Location = new System.Drawing.Point(577, 0);
             this.lciNotes4.Name = "lciNotes4";
             this.lciNotes4.OptionsPrint.AppearanceItem.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.lciNotes4.OptionsPrint.AppearanceItem.Options.UseFont = true;
-            this.lciNotes4.Padding = new DevExpress.XtraLayout.Utils.Padding(8, 8, 20, 7);
-            this.lciNotes4.Size = new System.Drawing.Size(79, 52);
+            this.lciNotes4.Padding = new DevExpress.XtraLayout.Utils.Padding(5, 5, 14, 5);
+            this.lciNotes4.Size = new System.Drawing.Size(51, 36);
             this.lciNotes4.Text = "lciNotes";
             this.lciNotes4.TextSize = new System.Drawing.Size(0, 0);
             this.lciNotes4.TextVisible = false;
             // 
             // ucCTQLNS
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 25F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.layoutControl1);
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ucCTQLNS";
-            this.Size = new System.Drawing.Size(1437, 626);
+            this.Size = new System.Drawing.Size(914, 426);
             this.Load += new System.EventHandler(this.ucCTQLNS_Load);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);

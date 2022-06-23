@@ -1,6 +1,4 @@
-﻿
-using DevExpress.Skins;
-using DevExpress.XtraBars.Navigation;
+﻿using DevExpress.XtraBars.Navigation;
 using DevExpress.XtraEditors;
 using System;
 using System.Collections.Generic;
@@ -20,7 +18,13 @@ namespace Vs.HRM
         public ucCTQLNS(Int64 iIdCN)
         {
             InitializeComponent();
-
+            //Commons.Modules.OXtraGrid.MFieldRequest(labLyLich);
+            //Commons.Modules.OXtraGrid.MFieldRequest(labHopDong);
+            //Commons.Modules.OXtraGrid.MFieldRequest(labCongTac);
+            //Commons.Modules.OXtraGrid.MFieldRequest(labTienLuong);
+            //Commons.Modules.OXtraGrid.MFieldRequest(labDanhGia);
+            //Commons.Modules.OXtraGrid.MFieldRequest(labKhanThuong);
+            //Commons.Modules.OXtraGrid.MFieldRequest(labTaiNan);
             navigationFrame1.AllowTransitionAnimation = DevExpress.Utils.DefaultBoolean.True;
             navigationFrame1.TransitionAnimationProperties.FrameCount = 0;
             navigationFrame1.TransitionAnimationProperties.FrameInterval = 0;
@@ -53,7 +57,7 @@ namespace Vs.HRM
                 {
                     if (lable.Name == lc.Name)
                     {
-                        lc.Appearance.ForeColor = Color.FromArgb(240, 128, 25);   //CommonColors.GetQuestionColor(DevExpress.LookAndFeel.UserLookAndFeel.Default);
+                        lc.Appearance.ForeColor = Color.FromArgb(0, 0, 192);   //CommonColors.GetQuestionColor(DevExpress.LookAndFeel.UserLookAndFeel.Default);
                         LoaduacCongNhan(lc.Name);
                         tab = lable.Name;
                         //return;

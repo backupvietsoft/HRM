@@ -34,13 +34,18 @@ namespace Vs.HRM
         {
             try
             {
+                Commons.Modules.sLoad = "0Load";
                 int year = DateTime.Now.Year;
                 DateTime firstDay = new DateTime(year, 1, 1);
                 DateTime lastDay = new DateTime(year, 12, 31);
-
+                Commons.Modules.ObjSystems.LoadCboDonVi(cboSearch_DV);
+                Commons.Modules.ObjSystems.LoadCboXiNghiep(cboSearch_DV, cboSearch_XN);
+                Commons.Modules.ObjSystems.LoadCboTo(cboSearch_DV, cboSearch_XN, cboSearch_TO);
+                //LoadGridKeHoachDaoTao(them);
+                tabbedControlGroup1.SelectedTabPageIndex = 0;
                 TU_NGAYDateEdit.DateTime = firstDay;
                 DEN_NGAYDateEdit.EditValue = lastDay;
-
+                Commons.Modules.sLoad = "";
                 LoadGridControl(-1);
                 LoadCboNoiDaoTao();
                 LoadCboTheoYC();
@@ -48,12 +53,12 @@ namespace Vs.HRM
                 LoadNoiDung();
 
                 //Format datatiem
-                Commons.OSystems.SetDateEditFormat(TU_NGAYDateEdit);
-                Commons.OSystems.SetDateEditFormat(DEN_NGAYDateEdit);
-                Commons.OSystems.SetDateEditFormat(NGAY_BDDateEdit);
-                Commons.OSystems.SetDateEditFormat(NGAY_KTDateEdit);
-                Commons.OSystems.SetTimeEditFormat(GIO_BDTimeEdit);
-                Commons.OSystems.SetTimeEditFormat(GIO_KTtimeEdit);
+                //Commons.OSystems.SetDateEditFormat(TU_NGAYDateEdit);
+                //Commons.OSystems.SetDateEditFormat(DEN_NGAYDateEdit);
+                //Commons.OSystems.SetDateEditFormat(NGAY_BDDateEdit);
+                //Commons.OSystems.SetDateEditFormat(NGAY_KTDateEdit);
+                //Commons.OSystems.SetTimeEditFormat(GIO_BDTimeEdit);
+                //Commons.OSystems.SetTimeEditFormat(GIO_KTtimeEdit);
 
                 //Commons.Modules.ObjSystems.MAutoCompleteTextEdit(HINH_THUC_DTTextEdit, Commons.Modules.ObjSystems.ConvertDatatable(grdKhoaHoc), "HINH_THUC_DT");
                 //Commons.Modules.ObjSystems.MAutoCompleteTextEdit(LINH_VUC_DTTextEdit, Commons.Modules.ObjSystems.ConvertDatatable(grdKhoaHoc), "LINH_VUC_DT");
@@ -61,13 +66,7 @@ namespace Vs.HRM
                 //Commons.Modules.ObjSystems.MAutoCompleteTextEdit(GIAO_VIENTextEdit, Commons.Modules.ObjSystems.ConvertDatatable(grdKhoaHoc), "GIAO_VIEN");
                 //Commons.Modules.ObjSystems.MAutoCompleteTextEdit(DIA_DIEMTextEdit, Commons.Modules.ObjSystems.ConvertDatatable(grdKhoaHoc), "DIA_DIEM");
 
-                Commons.Modules.sLoad = "0Load";
-                Commons.Modules.ObjSystems.LoadCboDonVi(cboSearch_DV);
-                Commons.Modules.ObjSystems.LoadCboXiNghiep(cboSearch_DV, cboSearch_XN);
-                Commons.Modules.ObjSystems.LoadCboTo(cboSearch_DV, cboSearch_XN, cboSearch_TO);
-                LoadGridKeHoachDaoTao(them);
-                tabbedControlGroup1.SelectedTabPageIndex = 0;
-                Commons.Modules.sLoad = "";
+             
 
                 //load tab 1
                 //Commons.Modules.ObjSystems.LoadCboDonVi(cboSearch_DV);
@@ -83,6 +82,7 @@ namespace Vs.HRM
         #region Các hàm load tab 0
         private void LoadGridControl(int ID)
         {
+            if (Commons.Modules.sLoad == "0Load") return;
             try
             {
                 DataTable dt = new DataTable();
@@ -589,14 +589,14 @@ namespace Vs.HRM
 
         private void searchControl1_TextChanged(object sender, EventArgs e)
         {
-            if (windowsUIButton.Buttons[0].Properties.Visible == false)
-            {
-                searchControl1.Client = grdDSCN;
-            }
-            else
-            {
-                searchControl1.Client = grdKhoaHoc;
-            }
+            //if (windowsUIButton.Buttons[0].Properties.Visible == false)
+            //{
+            //    searchControl1.Client = grdDSCN;
+            //}
+            //else
+            //{
+            //    searchControl1.Client = grdKhoaHoc;
+            //}
         }
 
         private void DiemtextEdit_EditValueChanged(object sender, EventArgs e)

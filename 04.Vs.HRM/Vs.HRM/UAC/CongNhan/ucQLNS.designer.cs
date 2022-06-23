@@ -144,106 +144,132 @@
             // 
             this.MS_CN.Caption = "MS_CN";
             this.MS_CN.FieldName = "MS_CN";
+            this.MS_CN.MinWidth = 17;
             this.MS_CN.Name = "MS_CN";
             this.MS_CN.OptionsEditForm.Caption = "MS_CN";
             this.MS_CN.Visible = true;
             this.MS_CN.VisibleIndex = 0;
+            this.MS_CN.Width = 66;
             // 
             // HO_TEN
             // 
             this.HO_TEN.Caption = "HO_TEN";
             this.HO_TEN.FieldName = "HO_TEN";
+            this.HO_TEN.MinWidth = 17;
             this.HO_TEN.Name = "HO_TEN";
             this.HO_TEN.Visible = true;
             this.HO_TEN.VisibleIndex = 1;
+            this.HO_TEN.Width = 66;
             // 
             // MS_THE_CC
             // 
             this.MS_THE_CC.Caption = "MS_THE_CC";
             this.MS_THE_CC.FieldName = "MS_THE_CC";
+            this.MS_THE_CC.MinWidth = 17;
             this.MS_THE_CC.Name = "MS_THE_CC";
             this.MS_THE_CC.Visible = true;
             this.MS_THE_CC.VisibleIndex = 3;
+            this.MS_THE_CC.Width = 66;
             // 
             // TEN_TT_HD
             // 
             this.TEN_TT_HD.Caption = "TEN_TT_HD";
             this.TEN_TT_HD.FieldName = "TEN_TT_HD";
+            this.TEN_TT_HD.MinWidth = 17;
             this.TEN_TT_HD.Name = "TEN_TT_HD";
             this.TEN_TT_HD.Visible = true;
             this.TEN_TT_HD.VisibleIndex = 5;
+            this.TEN_TT_HD.Width = 66;
             // 
             // TEN_TT_HT
             // 
             this.TEN_TT_HT.Caption = "TEN_TT_HT";
             this.TEN_TT_HT.FieldName = "TEN_TT_HT";
+            this.TEN_TT_HT.MinWidth = 17;
             this.TEN_TT_HT.Name = "TEN_TT_HT";
             this.TEN_TT_HT.Visible = true;
             this.TEN_TT_HT.VisibleIndex = 6;
+            this.TEN_TT_HT.Width = 66;
             // 
             // TEN_CV
             // 
             this.TEN_CV.Caption = "TEN_CV";
             this.TEN_CV.FieldName = "TEN_CV";
+            this.TEN_CV.MinWidth = 17;
             this.TEN_CV.Name = "TEN_CV";
             this.TEN_CV.Visible = true;
             this.TEN_CV.VisibleIndex = 7;
+            this.TEN_CV.Width = 66;
             // 
             // TEN_XN
             // 
             this.TEN_XN.Caption = "TEN_XN";
             this.TEN_XN.FieldName = "TEN_XN";
+            this.TEN_XN.MinWidth = 17;
             this.TEN_XN.Name = "TEN_XN";
             this.TEN_XN.Visible = true;
             this.TEN_XN.VisibleIndex = 8;
+            this.TEN_XN.Width = 66;
             // 
             // colTO
             // 
             this.colTO.Caption = "colTO";
             this.colTO.FieldName = "colTO";
+            this.colTO.MinWidth = 17;
             this.colTO.Name = "colTO";
             this.colTO.Visible = true;
             this.colTO.VisibleIndex = 16;
+            this.colTO.Width = 66;
             // 
             // colXN
             // 
             this.colXN.Caption = "colXN";
             this.colXN.FieldName = "colXN";
+            this.colXN.MinWidth = 17;
             this.colXN.Name = "colXN";
             this.colXN.Visible = true;
             this.colXN.VisibleIndex = 15;
+            this.colXN.Width = 66;
             // 
             // colCV
             // 
             this.colCV.Caption = "colCV";
             this.colCV.FieldName = "colCV";
+            this.colCV.MinWidth = 17;
             this.colCV.Name = "colCV";
             this.colCV.Visible = true;
             this.colCV.VisibleIndex = 14;
+            this.colCV.Width = 66;
             // 
             // colTTLV
             // 
             this.colTTLV.Caption = "colTTLV";
             this.colTTLV.FieldName = "colTTLV";
+            this.colTTLV.MinWidth = 17;
             this.colTTLV.Name = "colTTLV";
             this.colTTLV.Visible = true;
             this.colTTLV.VisibleIndex = 13;
+            this.colTTLV.Width = 66;
             // 
             // colTTHD
             // 
             this.colTTHD.Caption = "colTTHD";
             this.colTTHD.FieldName = "colTTHD";
+            this.colTTHD.MinWidth = 17;
             this.colTTHD.Name = "colTTHD";
             this.colTTHD.Visible = true;
             this.colTTHD.VisibleIndex = 12;
+            this.colTTHD.Width = 66;
             // 
             // colMSCC
             // 
             this.colMSCC.Caption = "colMSCC";
             this.colMSCC.FieldName = "colMSCC";
+            this.colMSCC.MinWidth = 17;
             this.colMSCC.Name = "colMSCC";
             this.colMSCC.Visible = true;
             this.colMSCC.VisibleIndex = 11;
+            this.colMSCC.Width = 66;
             // 
             // HINH_CN
             // 
@@ -251,37 +277,43 @@
             this.HINH_CN.AppearanceHeader.Options.UseImage = true;
             this.HINH_CN.Caption = "HINH_CN";
             this.HINH_CN.FieldName = "HINH_CN";
+            this.HINH_CN.MinWidth = 17;
             this.HINH_CN.Name = "HINH_CN";
             this.HINH_CN.Visible = true;
             this.HINH_CN.VisibleIndex = 2;
+            this.HINH_CN.Width = 66;
             // 
             // TEN_TO
             // 
             this.TEN_TO.Caption = "TEN_TO";
             this.TEN_TO.FieldName = "TEN_TO";
+            this.TEN_TO.MinWidth = 17;
             this.TEN_TO.Name = "TEN_TO";
             this.TEN_TO.Visible = true;
             this.TEN_TO.VisibleIndex = 4;
+            this.TEN_TO.Width = 66;
             // 
             // colPC
             // 
             this.colPC.Caption = "colPC";
             this.colPC.FieldName = "colPC";
+            this.colPC.MinWidth = 17;
             this.colPC.Name = "colPC";
             this.colPC.Visible = true;
             this.colPC.VisibleIndex = 17;
+            this.colPC.Width = 66;
             // 
             // grdNS
             // 
-            this.grdNS.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.grdNS.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             gridLevelNode1.RelationName = "Level1";
             this.grdNS.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
             gridLevelNode1});
-            this.grdNS.Location = new System.Drawing.Point(6, 72);
+            this.grdNS.Location = new System.Drawing.Point(2, 73);
             this.grdNS.MainView = this.tileViewCN;
-            this.grdNS.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.grdNS.Margin = new System.Windows.Forms.Padding(4);
             this.grdNS.Name = "grdNS";
-            this.grdNS.Size = new System.Drawing.Size(1255, 568);
+            this.grdNS.Size = new System.Drawing.Size(1105, 467);
             this.grdNS.TabIndex = 8;
             this.grdNS.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.tileViewCN,
@@ -309,7 +341,7 @@
             this.colXN,
             this.colTO,
             this.colPC});
-            this.tileViewCN.DetailHeight = 223;
+            this.tileViewCN.DetailHeight = 190;
             this.tileViewCN.FocusBorderColor = System.Drawing.Color.LightSkyBlue;
             this.tileViewCN.GridControl = this.grdNS;
             this.tileViewCN.Name = "tileViewCN";
@@ -319,27 +351,27 @@
             this.tileViewCN.OptionsTiles.IndentBetweenItems = 6;
             this.tileViewCN.OptionsTiles.ItemBorderVisibility = DevExpress.XtraEditors.TileItemBorderVisibility.Always;
             this.tileViewCN.OptionsTiles.ItemPadding = new System.Windows.Forms.Padding(0);
-            this.tileViewCN.OptionsTiles.ItemSize = new System.Drawing.Size(396, 192);
+            this.tileViewCN.OptionsTiles.ItemSize = new System.Drawing.Size(384, 176);
             this.tileViewCN.OptionsTiles.Padding = new System.Windows.Forms.Padding(0);
-            this.tileViewCN.OptionsTiles.RowCount = 3;
+            this.tileViewCN.OptionsTiles.RowCount = 5;
             this.tileViewCN.OptionsTiles.VerticalContentAlignment = DevExpress.Utils.VertAlignment.Top;
-            tableColumnDefinition1.Length.Value = 154D;
-            tableColumnDefinition2.Length.Value = 7D;
-            tableColumnDefinition3.Length.Value = 110D;
+            tableColumnDefinition1.Length.Value = 131D;
+            tableColumnDefinition2.Length.Value = 8D;
+            tableColumnDefinition3.Length.Value = 115D;
             tableColumnDefinition4.Length.Value = 7D;
-            tableColumnDefinition5.Length.Value = 140D;
+            tableColumnDefinition5.Length.Value = 123D;
             this.tileViewCN.TileColumns.Add(tableColumnDefinition1);
             this.tileViewCN.TileColumns.Add(tableColumnDefinition2);
             this.tileViewCN.TileColumns.Add(tableColumnDefinition3);
             this.tileViewCN.TileColumns.Add(tableColumnDefinition4);
             this.tileViewCN.TileColumns.Add(tableColumnDefinition5);
-            tableRowDefinition1.Length.Value = 25D;
-            tableRowDefinition2.Length.Value = 25D;
-            tableRowDefinition3.Length.Value = 25D;
-            tableRowDefinition4.Length.Value = 25D;
-            tableRowDefinition5.Length.Value = 25D;
-            tableRowDefinition6.Length.Value = 25D;
-            tableRowDefinition7.Length.Value = 25D;
+            tableRowDefinition1.Length.Value = 20D;
+            tableRowDefinition2.Length.Value = 20D;
+            tableRowDefinition3.Length.Value = 20D;
+            tableRowDefinition4.Length.Value = 20D;
+            tableRowDefinition5.Length.Value = 20D;
+            tableRowDefinition6.Length.Value = 20D;
+            tableRowDefinition7.Length.Value = 20D;
             this.tileViewCN.TileRows.Add(tableRowDefinition1);
             this.tileViewCN.TileRows.Add(tableRowDefinition2);
             this.tileViewCN.TileRows.Add(tableRowDefinition3);
@@ -537,21 +569,25 @@
             // 
             this.MAU_TT.Caption = "MAU_TT";
             this.MAU_TT.FieldName = "MAU_TT";
+            this.MAU_TT.MinWidth = 17;
             this.MAU_TT.Name = "MAU_TT";
             this.MAU_TT.Visible = true;
             this.MAU_TT.VisibleIndex = 9;
+            this.MAU_TT.Width = 66;
             // 
             // ID_CN
             // 
             this.ID_CN.Caption = "ID_CN";
             this.ID_CN.FieldName = "ID_CN";
+            this.ID_CN.MinWidth = 17;
             this.ID_CN.Name = "ID_CN";
             this.ID_CN.Visible = true;
             this.ID_CN.VisibleIndex = 10;
+            this.ID_CN.Width = 66;
             // 
             // gridView1
             // 
-            this.gridView1.DetailHeight = 349;
+            this.gridView1.DetailHeight = 297;
             this.gridView1.GridControl = this.grdNS;
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsBehavior.KeepFocusedRowOnUpdate = false;
@@ -570,7 +606,7 @@
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(716, 298, 650, 400);
             this.layoutControl1.Root = this.Root;
-            this.layoutControl1.Size = new System.Drawing.Size(1267, 680);
+            this.layoutControl1.Size = new System.Drawing.Size(1109, 578);
             this.layoutControl1.TabIndex = 7;
             this.layoutControl1.Text = "layoutControl1";
             // 
@@ -604,10 +640,10 @@
             this.windowsUIButton.ContentAlignment = System.Drawing.ContentAlignment.MiddleRight;
             this.windowsUIButton.Controls.Add(this.searchControl1);
             this.windowsUIButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.windowsUIButton.Location = new System.Drawing.Point(6, 642);
-            this.windowsUIButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.windowsUIButton.Location = new System.Drawing.Point(2, 544);
+            this.windowsUIButton.Margin = new System.Windows.Forms.Padding(4);
             this.windowsUIButton.Name = "windowsUIButton";
-            this.windowsUIButton.Size = new System.Drawing.Size(1255, 32);
+            this.windowsUIButton.Size = new System.Drawing.Size(1105, 32);
             this.windowsUIButton.TabIndex = 17;
             this.windowsUIButton.Text = "S";
             this.windowsUIButton.UseButtonBackgroundImages = false;
@@ -616,42 +652,43 @@
             // searchControl1
             // 
             this.searchControl1.Client = this.grdNS;
-            this.searchControl1.Location = new System.Drawing.Point(2, 3);
+            this.searchControl1.Location = new System.Drawing.Point(2, 5);
             this.searchControl1.Name = "searchControl1";
             this.searchControl1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Repository.ClearButton(),
             new DevExpress.XtraEditors.Repository.SearchButton()});
             this.searchControl1.Properties.Client = this.grdNS;
-            this.searchControl1.Size = new System.Drawing.Size(220, 26);
+            this.searchControl1.Size = new System.Drawing.Size(192, 24);
             this.searchControl1.TabIndex = 2;
             // 
             // cbo_TTHT
             // 
-            this.cbo_TTHT.Location = new System.Drawing.Point(131, 34);
+            this.cbo_TTHT.Location = new System.Drawing.Point(110, 30);
             this.cbo_TTHT.Name = "cbo_TTHT";
             this.cbo_TTHT.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cbo_TTHT.Properties.NullText = "";
-            this.cbo_TTHT.Size = new System.Drawing.Size(291, 26);
+            this.cbo_TTHT.Size = new System.Drawing.Size(257, 24);
             this.cbo_TTHT.StyleController = this.layoutControl1;
             this.cbo_TTHT.TabIndex = 10;
             this.cbo_TTHT.EditValueChanged += new System.EventHandler(this.cboTo_EditValueChanged);
             // 
             // cboTo
             // 
-            this.cboTo.Location = new System.Drawing.Point(968, 6);
+            this.cboTo.Location = new System.Drawing.Point(848, 2);
             this.cboTo.Name = "cboTo";
             this.cboTo.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cboTo.Properties.NullText = "";
             this.cboTo.Properties.PopupView = this.searchLookUpEdit3View;
-            this.cboTo.Size = new System.Drawing.Size(293, 26);
+            this.cboTo.Size = new System.Drawing.Size(259, 24);
             this.cboTo.StyleController = this.layoutControl1;
             this.cboTo.TabIndex = 9;
             this.cboTo.EditValueChanged += new System.EventHandler(this.cboTo_EditValueChanged);
             // 
             // searchLookUpEdit3View
             // 
+            this.searchLookUpEdit3View.DetailHeight = 297;
             this.searchLookUpEdit3View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
             this.searchLookUpEdit3View.Name = "searchLookUpEdit3View";
             this.searchLookUpEdit3View.OptionsSelection.EnableAppearanceFocusedCell = false;
@@ -659,19 +696,20 @@
             // 
             // cboXN
             // 
-            this.cboXN.Location = new System.Drawing.Point(549, 6);
+            this.cboXN.Location = new System.Drawing.Point(479, 2);
             this.cboXN.Name = "cboXN";
             this.cboXN.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cboXN.Properties.NullText = "";
             this.cboXN.Properties.PopupView = this.searchLookUpEdit2View;
-            this.cboXN.Size = new System.Drawing.Size(292, 26);
+            this.cboXN.Size = new System.Drawing.Size(257, 24);
             this.cboXN.StyleController = this.layoutControl1;
             this.cboXN.TabIndex = 8;
             this.cboXN.EditValueChanged += new System.EventHandler(this.cboXN_EditValueChanged);
             // 
             // searchLookUpEdit2View
             // 
+            this.searchLookUpEdit2View.DetailHeight = 297;
             this.searchLookUpEdit2View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
             this.searchLookUpEdit2View.Name = "searchLookUpEdit2View";
             this.searchLookUpEdit2View.OptionsSelection.EnableAppearanceFocusedCell = false;
@@ -679,19 +717,20 @@
             // 
             // cboDV
             // 
-            this.cboDV.Location = new System.Drawing.Point(131, 6);
+            this.cboDV.Location = new System.Drawing.Point(110, 2);
             this.cboDV.Name = "cboDV";
             this.cboDV.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cboDV.Properties.NullText = "";
             this.cboDV.Properties.PopupView = this.searchLookUpEdit1View;
-            this.cboDV.Size = new System.Drawing.Size(291, 26);
+            this.cboDV.Size = new System.Drawing.Size(257, 24);
             this.cboDV.StyleController = this.layoutControl1;
             this.cboDV.TabIndex = 7;
             this.cboDV.EditValueChanged += new System.EventHandler(this.cboDV_EditValueChanged);
             // 
             // searchLookUpEdit1View
             // 
+            this.searchLookUpEdit1View.DetailHeight = 297;
             this.searchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
             this.searchLookUpEdit1View.Name = "searchLookUpEdit1View";
             this.searchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
@@ -711,7 +750,8 @@
             this.emptySpaceItem2,
             this.emptySpaceItem3});
             this.Root.Name = "Root";
-            this.Root.Size = new System.Drawing.Size(1267, 680);
+            this.Root.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
+            this.Root.Size = new System.Drawing.Size(1109, 578);
             this.Root.TextVisible = false;
             // 
             // ItemForDON_VI
@@ -719,16 +759,16 @@
             this.ItemForDON_VI.Control = this.cboDV;
             this.ItemForDON_VI.Location = new System.Drawing.Point(0, 0);
             this.ItemForDON_VI.Name = "ItemForDON_VI";
-            this.ItemForDON_VI.Size = new System.Drawing.Size(418, 28);
-            this.ItemForDON_VI.TextSize = new System.Drawing.Size(122, 20);
+            this.ItemForDON_VI.Size = new System.Drawing.Size(369, 28);
+            this.ItemForDON_VI.TextSize = new System.Drawing.Size(105, 17);
             // 
             // layoutControlItem1
             // 
             this.layoutControlItem1.Control = this.grdNS;
-            this.layoutControlItem1.Location = new System.Drawing.Point(0, 66);
-            this.layoutControlItem1.MinSize = new System.Drawing.Size(101, 22);
+            this.layoutControlItem1.Location = new System.Drawing.Point(0, 71);
+            this.layoutControlItem1.MinSize = new System.Drawing.Size(88, 19);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(1257, 570);
+            this.layoutControlItem1.Size = new System.Drawing.Size(1109, 471);
             this.layoutControlItem1.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
@@ -736,53 +776,53 @@
             // ItemForXI_NGHIEP
             // 
             this.ItemForXI_NGHIEP.Control = this.cboXN;
-            this.ItemForXI_NGHIEP.Location = new System.Drawing.Point(418, 0);
+            this.ItemForXI_NGHIEP.Location = new System.Drawing.Point(369, 0);
             this.ItemForXI_NGHIEP.Name = "ItemForXI_NGHIEP";
-            this.ItemForXI_NGHIEP.Size = new System.Drawing.Size(419, 28);
-            this.ItemForXI_NGHIEP.TextSize = new System.Drawing.Size(122, 20);
+            this.ItemForXI_NGHIEP.Size = new System.Drawing.Size(369, 28);
+            this.ItemForXI_NGHIEP.TextSize = new System.Drawing.Size(105, 17);
             // 
             // ItemForTT_HT
             // 
             this.ItemForTT_HT.Control = this.cbo_TTHT;
             this.ItemForTT_HT.Location = new System.Drawing.Point(0, 28);
             this.ItemForTT_HT.Name = "ItemForTT_HT";
-            this.ItemForTT_HT.Size = new System.Drawing.Size(418, 28);
-            this.ItemForTT_HT.TextSize = new System.Drawing.Size(122, 20);
+            this.ItemForTT_HT.Size = new System.Drawing.Size(369, 28);
+            this.ItemForTT_HT.TextSize = new System.Drawing.Size(105, 17);
             // 
             // layoutControlItem2
             // 
             this.layoutControlItem2.Control = this.windowsUIButton;
-            this.layoutControlItem2.Location = new System.Drawing.Point(0, 636);
+            this.layoutControlItem2.Location = new System.Drawing.Point(0, 542);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(1257, 34);
+            this.layoutControlItem2.Size = new System.Drawing.Size(1109, 36);
             this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem2.TextVisible = false;
             // 
             // ItemForTO
             // 
             this.ItemForTO.Control = this.cboTo;
-            this.ItemForTO.Location = new System.Drawing.Point(837, 0);
+            this.ItemForTO.Location = new System.Drawing.Point(738, 0);
             this.ItemForTO.Name = "ItemForTO";
-            this.ItemForTO.Size = new System.Drawing.Size(420, 28);
-            this.ItemForTO.TextSize = new System.Drawing.Size(122, 20);
+            this.ItemForTO.Size = new System.Drawing.Size(371, 28);
+            this.ItemForTO.TextSize = new System.Drawing.Size(105, 17);
             // 
             // emptySpaceItem2
             // 
             this.emptySpaceItem2.AllowHotTrack = false;
             this.emptySpaceItem2.Location = new System.Drawing.Point(0, 56);
-            this.emptySpaceItem2.MaxSize = new System.Drawing.Size(0, 10);
-            this.emptySpaceItem2.MinSize = new System.Drawing.Size(10, 10);
+            this.emptySpaceItem2.MaxSize = new System.Drawing.Size(0, 15);
+            this.emptySpaceItem2.MinSize = new System.Drawing.Size(10, 15);
             this.emptySpaceItem2.Name = "emptySpaceItem2";
-            this.emptySpaceItem2.Size = new System.Drawing.Size(1257, 10);
+            this.emptySpaceItem2.Size = new System.Drawing.Size(1109, 15);
             this.emptySpaceItem2.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.emptySpaceItem2.TextSize = new System.Drawing.Size(0, 0);
             // 
             // emptySpaceItem3
             // 
             this.emptySpaceItem3.AllowHotTrack = false;
-            this.emptySpaceItem3.Location = new System.Drawing.Point(418, 28);
+            this.emptySpaceItem3.Location = new System.Drawing.Point(369, 28);
             this.emptySpaceItem3.Name = "emptySpaceItem3";
-            this.emptySpaceItem3.Size = new System.Drawing.Size(839, 28);
+            this.emptySpaceItem3.Size = new System.Drawing.Size(740, 28);
             this.emptySpaceItem3.TextSize = new System.Drawing.Size(0, 0);
             // 
             // navigationFrame1
@@ -797,7 +837,7 @@
             this.navigationPage1,
             this.navigationPage2});
             this.navigationFrame1.SelectedPage = this.navigationPage1;
-            this.navigationFrame1.Size = new System.Drawing.Size(1267, 680);
+            this.navigationFrame1.Size = new System.Drawing.Size(1109, 578);
             this.navigationFrame1.TabIndex = 8;
             this.navigationFrame1.Text = "navigationFrame1";
             // 
@@ -806,21 +846,21 @@
             this.navigationPage1.Caption = "navigationPage1";
             this.navigationPage1.Controls.Add(this.layoutControl1);
             this.navigationPage1.Name = "navigationPage1";
-            this.navigationPage1.Size = new System.Drawing.Size(1267, 680);
+            this.navigationPage1.Size = new System.Drawing.Size(1109, 578);
             // 
             // navigationPage2
             // 
             this.navigationPage2.Caption = "navigationPage2";
             this.navigationPage2.Name = "navigationPage2";
-            this.navigationPage2.Size = new System.Drawing.Size(1267, 680);
+            this.navigationPage2.Size = new System.Drawing.Size(1109, 578);
             // 
             // ucQLNS
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.navigationFrame1);
             this.Name = "ucQLNS";
-            this.Size = new System.Drawing.Size(1267, 680);
+            this.Size = new System.Drawing.Size(1109, 578);
             this.Load += new System.EventHandler(this.ucQLNS_Load);
             ((System.ComponentModel.ISupportInitialize)(this.grdNS)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tileViewCN)).EndInit();

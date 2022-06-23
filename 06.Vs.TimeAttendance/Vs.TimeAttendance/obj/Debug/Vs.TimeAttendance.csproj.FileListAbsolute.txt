@@ -1278,7 +1278,6 @@ G:\2022\02.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.TimeAttendanc
 G:\2022\02.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.TimeAttendance.csproj.CopyComplete
 G:\2022\02.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.TimeAttendance.dll
 G:\2022\02.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.TimeAttendance.pdb
-G:\2022\02.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\ICSharpCode.SharpZipLib.dll
 F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\Vs.TimeAttendance.dll.config
 F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\Vs.TimeAttendance.dll
 F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\Vs.TimeAttendance.pdb
@@ -1745,3 +1744,4 @@ H:\Lamviec\Lamviec\HRM\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\V
 H:\Lamviec\Lamviec\HRM\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.TimeAttendance.pdb
 H:\Lamviec\Lamviec\HRM\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.TimeAttendance.frmLinkDuLieuChamCong1.resources
 F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.TimeAttendance.frmLinkDuLieuChamCong1.resources
+G:\2022\02.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.TimeAttendance.frmLinkDuLieuChamCong1.resources

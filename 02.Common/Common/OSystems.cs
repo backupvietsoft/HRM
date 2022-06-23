@@ -1579,12 +1579,12 @@ namespace Commons
                         LayoutControlItem control1 = (LayoutControlItem)gr;
                         try
                         {
-                        //    if (control1.Control.GetType().Name.ToLower() == "checkedit")
-                        //    {
-                        //        control1.Control.Text = GetNN(dtTmp, control1.Name, frm.Name);
-                        //        control1.Control.DoubleClick += delegate (object a, EventArgs b) { CheckEdit_DoubleClick(control1.Control, b, frm.Name); };
-                        //    }
-                        //    else
+                            //    if (control1.Control.GetType().Name.ToLower() == "checkedit")
+                            //    {
+                            //        control1.Control.Text = GetNN(dtTmp, control1.Name, frm.Name);
+                            //        control1.Control.DoubleClick += delegate (object a, EventArgs b) { CheckEdit_DoubleClick(control1.Control, b, frm.Name); };
+                            //    }
+                            //    else
                             if (control1.Control.GetType().Name.ToLower() == "radiogroup")
                             {
                                 DoiNN(control1.Control, frm, dtTmp);
@@ -1592,7 +1592,7 @@ namespace Commons
 
                             else
                             {
-                                control1.Text = GetNN(dtTmp, control1.Name, frm.Name) +"  ";
+                                control1.Text = GetNN(dtTmp, control1.Name, frm.Name) + "  ";
                                 control1.DoubleClick += delegate (object a, EventArgs b) { Control1_DoubleClick(control1, b, frm.Name); };
 
                             }
@@ -2109,11 +2109,12 @@ namespace Commons
                             radGroup = (DevExpress.XtraEditors.RadioGroup)Ctl;
                             for (int i = 0; i <= radGroup.Properties.Items.Count - 1; i++)
                             {
-                                if (string.IsNullOrEmpty(radGroup.Properties.Items[i].Value.ToString()))
-                                    radGroup.Properties.Items[i].Value = radGroup.Properties.Items[i].Description;
-                                radGroup.Properties.Items[i].Description = GetNN(dtNgu, radGroup.Properties.Items[i].Value.ToString(), frm.Name);          // Modules.ObjLanguages.GetLanguage(Modules.ModuleName, frm.Name, radGroup.Properties.Items(i).Description, Modules.TypeLanguage)
+                                if (string.IsNullOrEmpty(radGroup.Properties.Items[i].Tag.ToString()))
+                                    radGroup.Properties.Items[i].Tag = radGroup.Properties.Items[i].Description;
+                                radGroup.Properties.Items[i].Description = GetNN(dtNgu, radGroup.Properties.Items[i].Tag.ToString(), frm.Name);
+                                radGroup.DoubleClick += delegate (object a, EventArgs b) { RadGroup_DoubleClick(radGroup, b, frm.Name); };
+                                // Modules.ObjLanguages.GetLanguage(Modules.ModuleName, frm.Name, radGroup.Properties.Items(i).Description, Modules.TypeLanguage)
                             }
-                            /*
                             try
                             {
                                 if (radGroup.SelectedIndex == -1)
@@ -2122,7 +2123,6 @@ namespace Commons
                             catch
                             {
                             }
-                            */
                             break;
                         }
 
@@ -3813,7 +3813,7 @@ namespace Commons
         public DataTable DataLyDoVang(bool coAll, int tinhBH = -1)
         {
             DataTable dt = new DataTable();
-            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboLDV", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll,tinhBH));
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboLDV", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll, tinhBH));
             return dt;
         }
         public DataTable DataLoaiDieuChinh(bool coAll)
@@ -4106,7 +4106,7 @@ namespace Commons
         {
             //ID_CTL,TEN_CTL
             DataTable dt = new DataTable();
-            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr,CommandType.Text, "SELECT ID_CTL,TEN as TEN_CTL FROM dbo.CACH_TINH_LUONG ORDER BY TEN"));
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT ID_CTL,TEN as TEN_CTL FROM dbo.CACH_TINH_LUONG ORDER BY TEN"));
             return dt;
         }
 

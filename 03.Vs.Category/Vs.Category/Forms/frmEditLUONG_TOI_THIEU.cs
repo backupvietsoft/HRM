@@ -37,14 +37,14 @@ namespace Vs.Category
                 dtTmp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSql));
                 NGAY_QDDateEdit.EditValue = Convert.ToDateTime(dtTmp.Rows[0]["NGAY_QD"].ToString());
                 ID_DVSearchLookUpEdit.EditValue = dtTmp.Rows[0]["ID_DV"].ToString();
-                LUONG_TOI_THIEUTextEdit.EditValue = dtTmp.Rows[0]["LUONG_TOI_THIEU"].ToString();
-                LUONG_TOI_THIEU_NNTextEdit.EditValue = dtTmp.Rows[0]["LUONG_TOI_THIEU_NN"].ToString();
-                BHXH_CNTextEdit.EditValue = dtTmp.Rows[0]["BHXH_CN"].ToString();
-                BHYT_CNTextEdit.EditValue = dtTmp.Rows[0]["BHYT_CN"].ToString();
-                BHTN_CNTextEdit.EditValue = dtTmp.Rows[0]["BHTN_CN"].ToString();
-                BHXH_CTTextEdit.EditValue = dtTmp.Rows[0]["BHXH_CT"].ToString();
-                BHYT_CTTextEdit.EditValue = dtTmp.Rows[0]["BHYT_CT"].ToString();
-                BHTN_CTTextEdit.EditValue = dtTmp.Rows[0]["BHTN_CT"].ToString();
+                LUONG_TOI_THIEUTextEdit.EditValue = string.IsNullOrEmpty(dtTmp.Rows[0]["LUONG_TOI_THIEU"].ToString()) ? 0 : Convert.ToDecimal(dtTmp.Rows[0]["LUONG_TOI_THIEU"]);
+                LUONG_TOI_THIEU_NNTextEdit.EditValue = string.IsNullOrEmpty(dtTmp.Rows[0]["LUONG_TOI_THIEU_NN"].ToString()) ? 0 : Convert.ToDecimal(dtTmp.Rows[0]["LUONG_TOI_THIEU_NN"]);
+                BHXH_CNTextEdit.EditValue = string.IsNullOrEmpty(dtTmp.Rows[0]["BHXH_CN"].ToString()) ? 0 : Convert.ToDouble(dtTmp.Rows[0]["BHXH_CN"]);
+                BHYT_CNTextEdit.EditValue = string.IsNullOrEmpty(dtTmp.Rows[0]["BHYT_CN"].ToString()) ? 0 : Convert.ToDouble(dtTmp.Rows[0]["BHYT_CN"]);
+                BHTN_CNTextEdit.EditValue = string.IsNullOrEmpty(dtTmp.Rows[0]["BHTN_CN"].ToString()) ? 0 : Convert.ToDouble(dtTmp.Rows[0]["BHTN_CN"]);
+                BHXH_CTTextEdit.EditValue = string.IsNullOrEmpty(dtTmp.Rows[0]["BHXH_CT"].ToString()) ? 0 : Convert.ToDouble(dtTmp.Rows[0]["BHXH_CT"]);
+                BHYT_CTTextEdit.EditValue = string.IsNullOrEmpty(dtTmp.Rows[0]["BHYT_CT"].ToString()) ? 0 : Convert.ToDouble(dtTmp.Rows[0]["BHYT_CT"]);
+                BHTN_CTTextEdit.EditValue = string.IsNullOrEmpty(dtTmp.Rows[0]["BHTN_CT"].ToString()) ? 0 : Convert.ToDouble(dtTmp.Rows[0]["BHTN_CT"]);
             }
             catch (Exception EX)
             {
@@ -125,16 +125,16 @@ namespace Vs.Category
                             if (bKiemTrung()) return;
                             Commons.Modules.sId = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spUpdateLUONG_TOI_THIEU", (AddEdit ? -1 : Id),
                                 NGAY_QDDateEdit.EditValue, ID_DVSearchLookUpEdit.EditValue, 
-                                (LUONG_TOI_THIEUTextEdit.EditValue == null) ? 0 : LUONG_TOI_THIEUTextEdit.EditValue,
-                                (LUONG_TOI_THIEU_NNTextEdit.EditValue == null) ? 0 : LUONG_TOI_THIEU_NNTextEdit.EditValue,
-                                (BHXH_CNTextEdit.EditValue == null) ? 0 : BHXH_CNTextEdit.EditValue,
-                                (BHYT_CNTextEdit.EditValue == null) ? 0 : BHYT_CNTextEdit.EditValue,
-                                (BHTN_CNTextEdit.EditValue == null) ? 0 : BHTN_CNTextEdit.EditValue,
-                                (BHXH_CTTextEdit.EditValue == null) ? 0 : BHXH_CTTextEdit.EditValue,                              
-                                (BHYT_CTTextEdit.EditValue == null) ? 0 : BHYT_CTTextEdit.EditValue,
-                                (BHTN_CTTextEdit.EditValue == null) ? 0 : BHTN_CTTextEdit.EditValue
+                                (string.IsNullOrEmpty(LUONG_TOI_THIEUTextEdit.Text)) ? 0 : LUONG_TOI_THIEUTextEdit.EditValue,
+                                (string.IsNullOrEmpty(LUONG_TOI_THIEU_NNTextEdit.Text)) ? 0 : LUONG_TOI_THIEU_NNTextEdit.EditValue,
+                                (string.IsNullOrEmpty(BHXH_CNTextEdit.Text)) ? 0 : BHXH_CNTextEdit.EditValue,
+                                (string.IsNullOrEmpty(BHYT_CNTextEdit.Text)) ? 0 : BHYT_CNTextEdit.EditValue,
+                                (string.IsNullOrEmpty(BHTN_CNTextEdit.Text)) ? 0 : BHTN_CNTextEdit.EditValue,
+                                (string.IsNullOrEmpty(BHXH_CTTextEdit.Text)) ? 0 : BHXH_CTTextEdit.EditValue,                              
+                                (string.IsNullOrEmpty(BHYT_CTTextEdit.Text)) ? 0 : BHYT_CTTextEdit.EditValue,
+                                (string.IsNullOrEmpty(BHTN_CTTextEdit.Text)) ? 0 : BHTN_CTTextEdit.EditValue
                                 ).ToString();
-                            
+
                             this.DialogResult = DialogResult.OK;
                             this.Close();
                             break;

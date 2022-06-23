@@ -129,8 +129,30 @@ namespace Vs.Payroll
             btnALL.Buttons[4].Properties.Visible = visible;
             btnALL.Buttons[5].Properties.Visible = visible;
             cboDonVi.Enabled = !visible;
+            cboThang.Enabled = !visible;
             //cboNgay.Enabled = !visible;
         }
+
+        //public void LoadThang()
+        //{
+        //    try
+        //    {
+
+        //        //ItemForDateThang.Visibility = LayoutVisibility.Never;
+        //        DataTable dtthang = new DataTable();
+        //        string sSql = "SELECT disTINCT SUBSTRING(CONVERT(VARCHAR(10),THANG,103),4,2) as M, RIGHT(CONVERT(VARCHAR(10),THANG,103),4) AS Y ,RIGHT(CONVERT(VARCHAR(10),THANG,103),7) AS THANG FROM dbo.THAM_NIEN ORDER BY Y DESC , M DESC";
+        //        dtthang.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSql));
+        //        Commons.Modules.ObjSystems.MLoadXtraGrid(grdThang, grvThang, dtthang, false, true, true, true, true, this.Name);
+        //        grvThang.Columns["M"].Visible = false;
+        //        grvThang.Columns["Y"].Visible = false;
+
+        //        cboThang.Text = grvThang.GetFocusedRowCellValue("THANG").ToString();
+        //    }
+        //    catch
+        //    {
+        //        cboThang.Text = DateTime.Now.ToString("MM/yyyy");
+        //    }
+        //}
 
         private void XoaCheDoLV()
         {

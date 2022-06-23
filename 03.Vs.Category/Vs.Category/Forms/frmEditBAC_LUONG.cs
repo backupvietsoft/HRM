@@ -165,12 +165,12 @@ namespace Vs.Category
                                 Commons.Modules.sId = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spUpdateBAC_LUONG", (AddEdit ? -1 : Id).ToString(),
                                     ID_DVSearchLookUpEdit.EditValue, ID_NLSearchLookUpEdit.EditValue,
                                     NGAY_QDDateEdit.EditValue, TEN_BLTextEdit.EditValue,
-                                    (MUC_LUONGTextEdit.EditValue == null) ? 0 : MUC_LUONGTextEdit.EditValue,
-                                    (PC_DHTextEdit.EditValue == null) ? 0 : PC_DHTextEdit.EditValue,
-                                    (THUONG_TCTextEdit.EditValue == null) ? 0 : THUONG_TCTextEdit.EditValue,
-                                    (THUONG_CV_CCTextEdit.EditValue == null) ? 0 : THUONG_CV_CCTextEdit.EditValue,
-                                    (PC_SINH_HOATTextEdit.EditValue == null) ? 0 : PC_SINH_HOATTextEdit.EditValue,
-                                    (PC_KY_NANGTextEdit.EditValue == null) ? 0 : PC_KY_NANGTextEdit.EditValue,
+                                    (string.IsNullOrEmpty(Convert.ToString(MUC_LUONGTextEdit.EditValue))) ? 0 : Convert.ToDouble(MUC_LUONGTextEdit.EditValue),
+                                    (string.IsNullOrEmpty(Convert.ToString(PC_DHTextEdit.EditValue))) ? 0 : Convert.ToDouble(PC_DHTextEdit.EditValue),
+                                    (string.IsNullOrEmpty(Convert.ToString(THUONG_TCTextEdit.EditValue))) ? 0 : Convert.ToDouble(THUONG_TCTextEdit.EditValue),
+                                    (string.IsNullOrEmpty(Convert.ToString(THUONG_CV_CCTextEdit.EditValue))) ? 0 : Convert.ToDouble(THUONG_CV_CCTextEdit.EditValue),
+                                    (string.IsNullOrEmpty(Convert.ToString(PC_SINH_HOATTextEdit.EditValue))) ? 0 : Convert.ToDouble(PC_SINH_HOATTextEdit.EditValue),
+                                    (string.IsNullOrEmpty(Convert.ToString(PC_KY_NANGTextEdit.EditValue))) ? 0 : Convert.ToDouble(PC_KY_NANGTextEdit.EditValue),
                                     (txtSTT.Text == "") ? txtSTT.EditValue = null : txtSTT.EditValue
                                     ).ToString();
                             }

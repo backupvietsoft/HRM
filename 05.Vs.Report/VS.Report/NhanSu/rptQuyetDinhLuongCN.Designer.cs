@@ -847,7 +847,7 @@
             this.lb0.Multiline = true;
             this.lb0.Name = "lb0";
             this.lb0.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
-            this.lb0.SizeF = new System.Drawing.SizeF(625.6891F, 118.8334F);
+            this.lb0.SizeF = new System.Drawing.SizeF(750.0432F, 118.8334F);
             this.lb0.StylePriority.UseFont = false;
             this.lb0.StylePriority.UseTextAlignment = false;
             this.lb0.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
@@ -927,7 +927,7 @@
             this.xrLabel8.Multiline = true;
             this.xrLabel8.Name = "xrLabel8";
             this.xrLabel8.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
-            this.xrLabel8.SizeF = new System.Drawing.SizeF(225.6892F, 59.41676F);
+            this.xrLabel8.SizeF = new System.Drawing.SizeF(350.0434F, 59.41676F);
             this.xrLabel8.StylePriority.UseFont = false;
             this.xrLabel8.StylePriority.UseTextAlignment = false;
             this.xrLabel8.Text = "/QĐ-TCHC";

@@ -21,7 +21,6 @@ namespace Vs.HRM
             iID_QDTV = ID_QDTV;
             dtNgayThoiViec = ngaythoiviec;
 
-            Commons.Modules.ObjSystems.ThayDoiNN(this);
         }
 
 
@@ -43,6 +42,7 @@ namespace Vs.HRM
                 this.Size = new Size(500, 250);
             }
             rdo_ChonBaoCao.SelectedIndex = 0;
+            Commons.Modules.ObjSystems.ThayDoiNN(this);
         }
         //sự kiện các nút xử lí
         private void windowsUIButton_ButtonClick(object sender, DevExpress.XtraBars.Docking2010.ButtonEventArgs e)

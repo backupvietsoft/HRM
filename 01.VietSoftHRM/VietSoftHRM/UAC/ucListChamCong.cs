@@ -124,6 +124,17 @@ namespace VietSoftHRM
             }
             switch (button.Name)
             {
+                case "mnuKHNghiPhep":
+                    {
+                        if (!panel2.Controls.Contains(ucKeHoachNghiPhep.Instance))
+                        {
+                            panel2.Controls.Clear();
+                            panel2.Controls.Add(ucKeHoachNghiPhep.Instance);
+                            ucKeHoachNghiPhep.Instance.Dock = DockStyle.Fill;
+                            ucKeHoachNghiPhep.Instance.BringToFront();
+                        }
+                        break;
+                    }
                 case "mnuDangKiLamThem":
                     {
                         ucDangKiLamThem tmp = new ucDangKiLamThem();

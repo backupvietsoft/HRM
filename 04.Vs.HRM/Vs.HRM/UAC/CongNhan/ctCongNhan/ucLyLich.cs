@@ -855,8 +855,12 @@ namespace Vs.HRM
             try
             {
                 //tạo bảng tạm bằng cấp
-
-                Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, "sbtBC" + Commons.Modules.UserName, Commons.Modules.ObjSystems.ConvertDatatable(grvBangCapCN), "");
+                string sTBBangCap = "sbtBC" + Commons.Modules.UserName;
+                if(Commons.Modules.ObjSystems.ConvertDatatable(grvBangCapCN) == null)
+                {
+                    sTBBangCap = "";
+                }
+                Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sTBBangCap, Commons.Modules.ObjSystems.ConvertDatatable(grvBangCapCN), "");
                 Commons.Modules.iCongNhan = Convert.ToInt64(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spUpdateCongNhan",
                 Commons.Modules.iCongNhan,
                 imgToByteConverter(HINH_CNPictureEdit.Image),
@@ -928,9 +932,8 @@ namespace Vs.HRM
                 NGAY_HH_GPDateEdit.Text.ToString() == "" ? DBNull.Value : NGAY_HH_GPDateEdit.EditValue,
                 LD_GIAM_LDNNLookUpEdit.Text.ToString() == "" ? LD_GIAM_LDNNLookUpEdit.EditValue = null : LD_GIAM_LDNNLookUpEdit.EditValue,
                 cboID_KV.Text.ToString() == "" ? cboID_KV.EditValue = null : cboID_KV.EditValue,
-                cothem, "sbtBC" + Commons.Modules.UserName));
+                cothem, sTBBangCap));
                 return true;
-
             }
             catch (Exception ex)
             {

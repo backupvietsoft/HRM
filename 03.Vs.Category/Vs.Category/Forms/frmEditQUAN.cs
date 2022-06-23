@@ -297,7 +297,7 @@ namespace Vs.Category
 
 
                 iKiem = 0;
-                if (!string.IsNullOrEmpty(TEN_QUANTextEdit.EditValue.ToString()))
+                if (!string.IsNullOrEmpty(TEN_QUAN_ATextEdit.EditValue.ToString()))
                 {     
                     iKiem = Convert.ToInt16(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spCheckData", "ID_QUAN", (bAddEdit ? "-1" : iId.ToString()), "QUAN", "TEN_QUAN_A", TEN_QUAN_ATextEdit.Text, "", "", "", "").ToString());
                     if (iKiem > 0)

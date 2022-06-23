@@ -134,7 +134,7 @@ namespace Vs.TimeAttendance
                 case "luu":
                     {
                         Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, "tabTMPVachTheLoi" + Commons.Modules.UserName,Commons.Modules.ObjSystems.ConvertDatatable(grvCongNhan),"");
-                        SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spSaveVachTheLoi", datNgayChamCong.DateTime.Date, "tabTMPVachTheLoi" + Commons.Modules.UserName);
+                        try { SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spSaveVachTheLoi", datNgayChamCong.DateTime.Date, "tabTMPVachTheLoi" + Commons.Modules.UserName); } catch (Exception EX) {  }
                         enableButon(true);
                         LoadGrdCongNhan();
                         break;

@@ -74,17 +74,7 @@ namespace VietSoftHRM
             NONNlab_Link.Text = slinkcha + "/" + button.Text;
             switch (button.Name)
             {
-                case "mnuKHNghiPhep":
-                    {
-                        if (!panel2.Controls.Contains(ucKeHoachNghiPhep.Instance))
-                        {
-                            panel2.Controls.Clear();
-                            panel2.Controls.Add(ucKeHoachNghiPhep.Instance);
-                            ucKeHoachNghiPhep.Instance.Dock = DockStyle.Fill;
-                            ucKeHoachNghiPhep.Instance.BringToFront();
-                        }
-                        break;
-                    }
+                
                 case "mnuDaoTao":
                     {
                         if (!panel2.Controls.Contains(ucDaoTao.Instance))
@@ -144,22 +134,6 @@ namespace VietSoftHRM
             NONNlab_Link.Text = slinkcha + "/" + button.Text;
             switch (button.Name)
             {
-                case "mnuKHNghiPhep":
-                    {
-                        //if (!panel2.Controls.Contains(ucKeHoachNghiPhep.Instance))
-                        //{
-                        //    panel2.Controls.Clear();
-                        //    panel2.Controls.Add(ucKeHoachNghiPhep.Instance);
-                        //    ucKeHoachNghiPhep.Instance.Dock = DockStyle.Fill;
-                        //    ucKeHoachNghiPhep.Instance.BringToFront();
-                        //}
-                        //break;
-                        ucKeHoachNghiPhep kehoachnghiphep = new ucKeHoachNghiPhep();
-                        panel2.Controls.Clear();
-                        panel2.Controls.Add(kehoachnghiphep);
-                        kehoachnghiphep.Dock = DockStyle.Fill;
-                        break;
-                    }
                 case "mnuDaoTao":
                     {
                         //if (!panel2.Controls.Contains(ucDaoTao.Instance))
@@ -187,7 +161,8 @@ namespace VietSoftHRM
                 case "mnuNhanSu":
                     {
                         ucQLNS ns = new ucQLNS();
-                        
+                        ns.labelNV = NONNlab_Link;
+                        ns.labelNV.Tag = NONNlab_Link.Text;
                         ns.accorMenuleft = accorMenuleft;
                         panel2.Controls.Clear();
                         panel2.Controls.Add(ns);

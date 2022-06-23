@@ -210,7 +210,7 @@ namespace Vs.Category
                     }
                 }
                 iKiem = Convert.ToInt16(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spCheckData", "ID_PX",
-                    (AddEdit ? "-1" : Id.ToString()), "PHUONG_XA", "TEN_PX", TEN_PXTextEdit.Text.ToString(),
+                    (AddEdit ? "-1" : Id.ToString()), "PHUONG_XA", "TEN_PX", TEN_PXTextEdit.Text,
                     "", "", "", ""));
                 if (iKiem > 0)
                 {

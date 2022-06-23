@@ -67,46 +67,46 @@ namespace VietSoftHRM
         }
         public static bool CheckServer()
         {
-            string resulst = "";
-            //2.kiểm tra HHD
-            resulst = Commons.Modules.ObjSystems.GetAPI("HDD");
-            if (resulst.Split('!')[0].ToString() != "TRUE")
-            {
-                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgSaiHDD"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "sThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
+            //string resulst = "";
+            ////2.kiểm tra HHD
+            //resulst = Commons.Modules.ObjSystems.GetAPI("HDD");
+            //if (resulst.Split('!')[0].ToString() != "TRUE")
+            //{
+            //    XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgSaiHDD"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "sThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //    return false;
+            //}
             String sSql = "";
-            sSql = resulst.Split('!')[2];
-            try
-            {
-                var items = sSql.Split('|');
-                if (items.Length > 2)
-                {
-                    for (int i = 1; i < items.Length; i++)
-                    {
-                        string sTmp = items[i].ToString();
-                        //if (sTmp.Contains(" VietSoftHRM~") == true)
-                        //{
-                            Commons.Modules.iLic = Commons.Modules.ObjSystems.MCot(sTmp.Split('~')[1].ToString());
-                            break;
-                        //}
-                    }
-                }
-                else
-                    Commons.Modules.iLic = Commons.Modules.ObjSystems.MCot(items[1].ToString().Split('~')[1].ToString());
-            }
-            catch { }
-            if (sSql.Split('|')[0].ToUpper() == "DEMO")
-            {
-                //5.kiểm tra hết hạn
-                DateTime Ngay = DateTime.ParseExact(resulst.Split('!')[1], "yyyyMMdd", CultureInfo.InvariantCulture);
-                DateTime date = Convert.ToDateTime(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT GETDATE()"));
-                if (Ngay.Date < date.Date)
-                {
-                    XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgHetHanSuDung"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "sThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return false;
-                }
-            }
+            //sSql = resulst.Split('!')[2];
+            //try
+            //{
+            //    var items = sSql.Split('|');
+            //    if (items.Length > 2)
+            //    {
+            //        for (int i = 1; i < items.Length; i++)
+            //        {
+            //            string sTmp = items[i].ToString();
+            //            //if (sTmp.Contains(" VietSoftHRM~") == true)
+            //            //{
+            //                Commons.Modules.iLic = Commons.Modules.ObjSystems.MCot(sTmp.Split('~')[1].ToString());
+            //                break;
+            //            //}
+            //        }
+            //    }
+            //    else
+            //        Commons.Modules.iLic = Commons.Modules.ObjSystems.MCot(items[1].ToString().Split('~')[1].ToString());
+            //}
+            //catch { }
+            //if (sSql.Split('|')[0].ToUpper() == "DEMO")
+            //{
+            //    //5.kiểm tra hết hạn
+            //    DateTime Ngay = DateTime.ParseExact(resulst.Split('!')[1], "yyyyMMdd", CultureInfo.InvariantCulture);
+            //    DateTime date = Convert.ToDateTime(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT GETDATE()"));
+            //    if (Ngay.Date < date.Date)
+            //    {
+            //        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgHetHanSuDung"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "sThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //        return false;
+            //    }
+            //}
             //lấy trên net
             if (Commons.Modules.iLOAI_CN == 2)
             {

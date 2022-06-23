@@ -2293,11 +2293,12 @@ namespace Commons
                             radGroup = (DevExpress.XtraEditors.RadioGroup)Ctl;
                             for (int i = 0; i <= radGroup.Properties.Items.Count - 1; i++)
                             {
-                                if (string.IsNullOrEmpty(radGroup.Properties.Items[i].Value.ToString()))
-                                    radGroup.Properties.Items[i].Value = radGroup.Properties.Items[i].Description;
-                                radGroup.Properties.Items[i].Description = GetNN(dtNgu, radGroup.Properties.Items[i].Value.ToString(), frm.Name);          // Modules.ObjLanguages.GetLanguage(Modules.ModuleName, frm.Name, radGroup.Properties.Items(i).Description, Modules.TypeLanguage)
+                                if (string.IsNullOrEmpty(radGroup.Properties.Items[i].Tag.ToString()))
+                                    radGroup.Properties.Items[i].Tag = radGroup.Properties.Items[i].Description;
+                                radGroup.Properties.Items[i].Description = GetNN(dtNgu, radGroup.Properties.Items[i].Tag.ToString(), frm.Name);
+                                radGroup.DoubleClick += delegate (object a, EventArgs b) { RadGroup_DoubleClick(radGroup, b, frm.Name); };
+                                // Modules.ObjLanguages.GetLanguage(Modules.ModuleName, frm.Name, radGroup.Properties.Items(i).Description, Modules.TypeLanguage)
                             }
-                            /*
                             try
                             {
                                 if (radGroup.SelectedIndex == -1)
@@ -2306,7 +2307,6 @@ namespace Commons
                             catch
                             {
                             }
-                            */
                             break;
                         }
 

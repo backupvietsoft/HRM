@@ -146,7 +146,7 @@ namespace Vs.HRM
         }
         private void tileView1_DoubleClick(object sender, EventArgs e)
         {
-            labelNV.Text = tileViewCN.GetFocusedRowCellValue(tileViewCN.Columns["MS_CN"]).ToString() +" - "+ tileViewCN.GetFocusedRowCellValue(tileViewCN.Columns["HO_TEN"]).ToString();
+            try { labelNV.Text = tileViewCN.GetFocusedRowCellValue(tileViewCN.Columns["MS_CN"]).ToString() + " - " + tileViewCN.GetFocusedRowCellValue(tileViewCN.Columns["HO_TEN"]).ToString(); } catch (Exception ex) { }
             grdNS.Visible = false;
             ucCTQLNS dl = new ucCTQLNS(Convert.ToInt64(tileViewCN.GetFocusedRowCellValue(tileViewCN.Columns["ID_CN"])));
             dl.Refresh();
@@ -192,7 +192,7 @@ namespace Vs.HRM
         }
         public void BackWindowsUIButtonPanel_ButtonClick(object sender, ButtonEventArgs e)
         {
-            labelNV.Text = labelNV.Tag.ToString();
+            try { labelNV.Text = labelNV.Tag.ToString(); } catch { }
             navigationFrame1.SelectedPage = navigationPage1;
             navigationPage2.Controls[0].Visible = false;
             navigationPage2.Controls[0].Dispose();

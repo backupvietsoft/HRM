@@ -125,17 +125,16 @@ namespace Vs.Payroll
             try
             {
                 DataTable dtthang = new DataTable();
-                string sSql = "SELECT DISTINCT CONVERT(NVARCHAR(10), NGAY_AD, 103) AS NGAY FROM QUY_DINH_TIEN_PC";
+                string sSql = "SELECT disTINCT SUBSTRING(CONVERT(VARCHAR(10),NGAY_AD,103),4,2) as M, RIGHT(CONVERT(VARCHAR(10),NGAY_AD,103),4) AS Y ,RIGHT(CONVERT(VARCHAR(10),NGAY_AD,103),7) AS THANG FROM dbo.QUY_DINH_TIEN_PC ORDER BY Y DESC , M DESC";
                 dtthang.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSql));
                 Commons.Modules.ObjSystems.MLoadXtraGrid(grdThang, grvThang, dtthang, false, true, true, true, true, this.Name);
-
-                cboNgay.Text = grvThang.GetFocusedRowCellValue("NGAY").ToString();
-
-
+                grvThang.Columns["M"].Visible = false;
+                grvThang.Columns["Y"].Visible = false;
+                cboNgay.Text = grvThang.GetFocusedRowCellValue("THANG").ToString();
             }
             catch
             {
-                cboNgay.Text = DateTime.Now.ToString("dd/MM/yyyy");
+                cboNgay.Text = DateTime.Now.ToString("MM/yyyy");
             }
         }
 

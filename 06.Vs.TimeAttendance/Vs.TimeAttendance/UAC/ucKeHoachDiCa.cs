@@ -130,21 +130,23 @@ namespace Vs.TimeAttendance
             XtraUserControl ctl = new XtraUserControl();
             switch (btn.Tag.ToString())
             {
-                //case "Capnhatnhom":
-
-                //    {
-                //        frmDangKyKeHoachDiCa frm = new frmDangKyKeHoachDiCa();
-                //        frm.ShowDialog();
-                //        break;
-                //    }
+                case "capnhat":
+                    {
+                        if(!Validate()) return;
+                        if (grvCongNhan.HasColumnErrors) return;
+                        if (XtraMessageBox.Show("Bạn có muốn cập nhật nhóm: " + grvKeHoachDiCa.GetFocusedRowCellDisplayText("ID_NHOM") + ", ca: " + grvKeHoachDiCa.GetFocusedRowCellDisplayText("CA") + " cho các nhân viên được chọn", "", MessageBoxButtons.YesNo) == DialogResult.No)
+                        {
+                            return;
+                        }
+                        CapNhatNhom();
+                        break;
+                    }
+              
                 case "themsua":
                     {
-                        //if (grvCongNhan.RowCount == 0)
-                        //{
-                        //    Commons.Modules.ObjSystems.msgChung(Commons.ThongBao.msgBanChuaChonDuLieu);
-                        //    return;
-                        //}
+                       
                         them = true;
+
                         LoadGrdCongNhan(them);
                         Commons.Modules.ObjSystems.AddnewRow(grvKeHoachDiCa, true);
                         enableButon(false);
@@ -163,7 +165,7 @@ namespace Vs.TimeAttendance
                     }
                 case "luu":
                     {
-                        Validate();
+                        if (!Validate()) return;
                         if (grvKeHoachDiCa.HasColumnErrors) return;
                         if (Savedata() == false)
                         {
@@ -173,8 +175,8 @@ namespace Vs.TimeAttendance
                         them = false;
                         LoadGrdCongNhan(them);
                         LoadgrdKeHoachDiCa();
-                        grvCongNhan_FocusedRowChanged(null, null);
                         enableButon(true);
+                        grvCongNhan_FocusedRowChanged(null, null);
 
                         break;
                     }
@@ -184,8 +186,8 @@ namespace Vs.TimeAttendance
                         them = false;
                         LoadGrdCongNhan(them);
                         LoadgrdKeHoachDiCa();
-                        grvCongNhan_FocusedRowChanged(null, null);
                         enableButon(true);
+                        grvCongNhan_FocusedRowChanged(null, null);
                         break;
                     }
                 case "thoat":
@@ -199,25 +201,6 @@ namespace Vs.TimeAttendance
         #region hàm xử lý dữ liệu
         private void LoadGrdCongNhan(bool them)
         {
-            //try
-            //{
-            //    Commons.Modules.sLoad = "0Load";
-            //    DataTable dt = new DataTable();
-            //    dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetCongNhanTheoTT", cboDV.EditValue, cboXN.EditValue, cboTo.EditValue, Commons.Modules.UserName, Commons.Modules.TypeLanguage, 1));
-            //    Commons.Modules.ObjSystems.MLoadXtraGrid(grdCongNhan, grvCongNhan, dt, false, false, true, true, true, this.Name);
-            //    grvCongNhan.Columns["ID_CN"].Visible = false;
-            //    grvCongNhan.Columns["TINH_TRANG"].Visible = false;
-            //    //grvCongNhan.Appearance.HeaderPanel.BackColor = Color.FromArgb(240, 128, 25);
-            //    //for (int i = 0; i < grvCongNhan.Columns.Count; i++)
-            //    //{
-            //    //    grvCongNhan.Columns[i].AppearanceHeader.BackColor = Color.FromArgb(200, 200, 200);
-            //    //}
-            //    Commons.Modules.sLoad = "";
-            //}
-            //catch (Exception ex)
-            //{
-            //}
-
             try
             {
                 Commons.Modules.sLoad = "0Load";
@@ -238,11 +221,7 @@ namespace Vs.TimeAttendance
                 {
                     grvCongNhan.Columns["CHON"].Visible = true;
                 }
-                //grvCongNhan.Appearance.HeaderPanel.BackColor = Color.FromArgb(240, 128, 25);
-                //for (int i = 0; i < grvCongNhan.Columns.Count; i++)
-                //{
-                //    grvCongNhan.Columns[i].AppearanceHeader.BackColor = Color.FromArgb(200, 200, 200);
-                //}
+               
                 try
                 {
                     grvCongNhan.OptionsSelection.CheckBoxSelectorField = "CHON";
@@ -337,6 +316,7 @@ namespace Vs.TimeAttendance
             try
             {
                 Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, stbKeHoachDiCa, (DataTable)grdKeHoachDiCa.DataSource, "");
+
                 SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spSaveKeHoachDiCa", dateNam.Text, stbKeHoachDiCa);
                 Commons.Modules.ObjSystems.XoaTable(stbKeHoachDiCa);
                 return true;
@@ -355,7 +335,8 @@ namespace Vs.TimeAttendance
             windowsUIButton.Buttons[2].Properties.Visible = visible;
             windowsUIButton.Buttons[3].Properties.Visible = visible;
             windowsUIButton.Buttons[4].Properties.Visible = visible;
-            windowsUIButton.Buttons[5].Properties.Visible = visible;
+            windowsUIButton.Buttons[8].Properties.Visible = visible;
+            windowsUIButton.Buttons[5].Properties.Visible = !visible;
             windowsUIButton.Buttons[6].Properties.Visible = !visible;
             windowsUIButton.Buttons[7].Properties.Visible = !visible;
             searchControl.Visible = visible;
@@ -411,16 +392,19 @@ namespace Vs.TimeAttendance
                 string sDK = "";
                 sIDCN = "-1";
                 try { sIDCN = grvCongNhan.GetFocusedRowCellValue("ID_CN").ToString(); } catch { }
+
+                //if (windowsUIButton.Buttons[0].Properties.Visible == false)
+                //{
+                //    sDK = "1 = 0";
+                //}
+                //else
+                //{
                 if (sIDCN != "-1")
                 {
                     sDK = " ID_CN = '" + sIDCN + "' ";
-                    dtTmp.DefaultView.RowFilter = sDK;
                 }
-                else
-                {
-                    grdKeHoachDiCa.Hide();
-                }
-
+                //}
+                dtTmp.DefaultView.RowFilter = sDK;
             }
             catch { }
         }
@@ -520,6 +504,7 @@ namespace Vs.TimeAttendance
             //thêm defaulst khi add một dòng mới
             try
             {
+
                 GridView view = sender as GridView;
                 view.SetFocusedRowCellValue("TU_NGAY", Convert.ToDateTime(DateTime.Now.Date));
                 view.SetFocusedRowCellValue("DEN_NGAY", Convert.ToDateTime(DateTime.Now.Date));
@@ -552,6 +537,169 @@ namespace Vs.TimeAttendance
             {
                 XtraMessageBox.Show(ex.Message.ToString());
             }
+        }
+
+        //private void CapNhatNhom()
+        //{
+        //    try
+        //    {
+        //        grvKeHoachDiCa.CloseEditor();
+        //        grvKeHoachDiCa.UpdateCurrentRow();
+
+        //        DataTable dtTemp = new DataTable();
+        //        //lấy lướng công nhân được chọn
+        //        DataTable dt = Commons.Modules.ObjSystems.ConvertDatatable(grdCongNhan);
+        //        dt = dt.AsEnumerable().Where(x => x["CHON"].ToString().ToLower() == "true").CopyToDataTable();
+        //        //lấy lưới làm thêm đã có dữ liệu 
+        //        DataTable dtLT = Commons.Modules.ObjSystems.ConvertDatatable(grdKeHoachDiCa);
+        //        dtTemp = dtLT.Copy();
+        //        //lấy table của lưới lưới cần cập nhật
+        //        DataTable tableLT = Commons.Modules.ObjSystems.ConvertDatatable(grdKeHoachDiCa);
+        //        DataTable data = new DataTable();
+        //        data = tableLT.Copy();
+        //        //lấy data dữ liệu của làm thêm cần cập nhập
+        //        string sID_NHOM, sTuNgay, sDNgay, sID_CA, sGhiChu;
+
+
+        //        int MaxRow = data.Rows.Count - 1;
+
+        //        //sID_NHOM = ""; sTuNgay = ""; sDNgay = ""; sGhiChu = "";
+        //        //try { sID_NHOM = grvKeHoachDiCa.GetFocusedRowCellValue("ID_NHOM").ToString(); } catch { }
+        //        //try { sID_CA = grvKeHoachDiCa.GetFocusedRowCellValue("CA").ToString(); } catch { }
+        //        //try { sTuNgay = Convert.ToDateTime(grvKeHoachDiCa.GetFocusedRowCellValue("TU_NGAY").ToString()).ToString("dd/MM/yyyy"); } catch { }
+        //        //try { sDNgay = Convert.ToDateTime(grvKeHoachDiCa.GetFocusedRowCellValue("DEN_NGAY").ToString()).ToString("dd/MM/yyyy"); } catch { }
+        //        //try { sGhiChu = grvKeHoachDiCa.GetFocusedRowCellValue("GHI_CHU").ToString(); } catch { }
+
+        //        //try { sID_NHOM = data.Rows[MaxRow]["ID_NHOM"].ToString(); } catch { }
+        //        //try { sID_CA = grvKeHoachDiCa.GetFocusedRowCellValue("CA").ToString(); } catch { }
+        //        //try { sTuNgay = Convert.ToDateTime(grvKeHoachDiCa.GetFocusedRowCellValue("TU_NGAY").ToString()).ToString("dd/MM/yyyy"); } catch { }
+        //        //try { sDNgay = Convert.ToDateTime(grvKeHoachDiCa.GetFocusedRowCellValue("DEN_NGAY").ToString()).ToString("dd/MM/yyyy"); } catch { }
+        //        //try { sGhiChu = grvKeHoachDiCa.GetFocusedRowCellValue("GHI_CHU").ToString(); } catch { }
+
+
+        //        foreach (DataRow dr in dt.Rows)
+        //        {
+        //            string sDK = " 1 = 1 ";
+        //            string sID_CN = "";
+        //            try { sID_CN = dr["ID_CN"].ToString(); } catch { }
+        //            DataTable dtTM = new DataTable();
+        //            //dtTM = data.AsEnumerable().Where(x => x["ID_CN"].ToString().ToLower() == sID_CN).CopyToDataTable();
+        //            data.DefaultView.RowFilter = " ID_CN= '" + sID_CN + "' ";
+        //            if (data.DefaultView.ToTable().Rows.Count == 0)
+        //            {
+        //                //data.DefaultView.RowFilter = "";
+        //                //try
+        //                //{
+        //                //    if (sID_CN != "") sDK = sDK + " AND ID_CN = '" + sID_CN + "' ";
+
+
+        //                //    if (sID_NHOM != "") sDK = sDK + " AND ID_NHOM = '" + sID_NHOM + "' ";
+        //                //    if (sID_CA != "") sDK = sDK + " AND CA = '" + sID_CA + "' ";
+        //                //    if (sNgay != "") sDK = sDK + " AND NGAY  = '" + sNgay + "' ";
+
+
+        //                //    data.DefaultView.RowFilter = sDK;
+        //                //}
+        //                //catch { }
+        //                //if (data.DefaultView.ToTable().Rows.Count == 0)
+        //                //{
+
+        //                DataRow newRow = data.NewRow();
+        //                newRow.SetField("ID_CN", dr["ID_CN"]);
+        //                //newRow.SetField("ID_NHOM", grvKeHoachDiCa.GetFocusedRowCellValue("ID_NHOM"));
+        //                //newRow.SetField("CA", grvKeHoachDiCa.GetFocusedRowCellValue("CA"));
+        //                //newRow.SetField("TU_NGAY", grvKeHoachDiCa.GetFocusedRowCellValue("TU_NGAY"));
+        //                //newRow.SetField("DEN_NGAY", grvKeHoachDiCa.GetFocusedRowCellValue("DEN_NGAY"));
+        //                //newRow.SetField("GHI_CHU", grvKeHoachDiCa.GetFocusedRowCellValue("GHI_CHU"));
+
+        //                newRow.SetField("ID_NHOM", data.Rows[MaxRow]["ID_NHOM"]);
+        //                newRow.SetField("CA", data.Rows[MaxRow]["CA"]);
+        //                newRow.SetField("TU_NGAY", data.Rows[MaxRow]["TU_NGAY"]);
+        //                newRow.SetField("DEN_NGAY", data.Rows[MaxRow]["DEN_NGAY"]);
+        //                newRow.SetField("GHI_CHU", data.Rows[MaxRow]["GHI_CHU"]);
+
+
+        //                //newRow.SetField("GIO_BD", grvKeHoachDiCa.GetFocusedRowCellValue("GIO_BD"));
+        //                //newRow.SetField("GIO_KT", grvKeHoachDiCa.GetFocusedRowCellValue("GIO_KT"));
+        //                //newRow.SetField("COM_CA", grvKeHoachDiCa.GetFocusedRowCellValue("COM_CA"));
+        //                //newRow.SetField("PHUT_BD", grvKeHoachDiCa.GetFocusedRowCellValue("PHUT_BD"));
+        //                //newRow.SetField("PHUT_KT", grvKeHoachDiCa.GetFocusedRowCellValue("PHUT_KT"));
+        //                data.Rows.Add(newRow);
+        //                data.AcceptChanges();
+        //                //};
+        //            }
+        //        }
+        //        data.DefaultView.RowFilter = "";
+
+        //        grdKeHoachDiCa.DataSource = null;
+        //        grdKeHoachDiCa.DataSource = data;
+        //        grvCongNhan_FocusedRowChanged(null, null);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //    }
+        //    //
+        //}
+
+        private void CapNhatNhom()
+        {
+            try
+            {
+                grvKeHoachDiCa.CloseEditor();
+                grvKeHoachDiCa.UpdateCurrentRow();
+                //lấy lướng công nhân được chọn
+                DataTable dt = Commons.Modules.ObjSystems.ConvertDatatable(grdCongNhan);
+                //dt = dt.AsEnumerable().Where(x => x["CHON"].ToString().ToLower() == "true").CopyToDataTable();
+                //lấy lưới làm thêm đã có dữ liệu 
+                DataTable dtLT = Commons.Modules.ObjSystems.ConvertDatatable(grdKeHoachDiCa);
+                DataTable dt_capnhat = new DataTable();
+                //dt_capnhat = ((DataTable)grdLamThem.DataSource).DefaultView.ToTable().Copy();
+                DataRow dr = grvKeHoachDiCa.GetDataRow(grvKeHoachDiCa.FocusedRowHandle);
+                dt_capnhat = ((DataTable)grdKeHoachDiCa.DataSource).Clone();
+                DataRow row = dt_capnhat.NewRow();
+                row["ID_CN"] = dr["ID_CN"];
+                row["ID_NHOM"] = dr["ID_NHOM"];
+                row["CA"] = dr["CA"];
+                row["TU_NGAY"] = dr["TU_NGAY"];
+                row["DEN_NGAY"] = dr["DEN_NGAY"];
+                row["GHI_CHU"] = dr["GHI_CHU"];
+
+                dt_capnhat.Rows.Add(row);
+
+
+
+                string stbCN_temP = "grvCongNhanKHDC" + Commons.Modules.UserName;
+                string stbLamThemGio_temP = "grvKHDC" + Commons.Modules.UserName;
+                string stbLamThemCu_temP = "grvKHDCCu" + Commons.Modules.UserName;
+
+                Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, stbCN_temP, dt, "");
+                Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, stbLamThemGio_temP, dt_capnhat, "");
+                Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, stbLamThemCu_temP, dtLT, "");
+
+                DateTime dNgay;
+                //dNgay = DateTime.ParseExact(cboNgay.Text, "dd/MM/yyyy", cultures);
+                grdKeHoachDiCa.DataSource = ((DataTable)grdKeHoachDiCa.DataSource).Clone();
+                try
+                {
+                    DataTable dt_temp = new DataTable();
+                    dt_temp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spCapNhatKHDC", stbCN_temP, stbLamThemGio_temP, stbLamThemCu_temP));
+                    //dt_temp.Columns["ID_CDLV"].ReadOnly = false;
+                    //dt_temp.Columns["COM_CA"].ReadOnly = false;
+                    grdKeHoachDiCa.DataSource = dt_temp;
+                    grvCongNhan_FocusedRowChanged(null, null);
+                }
+                catch (Exception ex)
+                {
+                    Commons.Modules.ObjSystems.XoaTable(stbCN_temP);
+                    Commons.Modules.ObjSystems.XoaTable(stbLamThemGio_temP);
+                    Commons.Modules.ObjSystems.XoaTable(stbLamThemCu_temP);
+                }
+
+            }
+            catch (Exception ex)
+            {
+            }
+            //
         }
     }
 }

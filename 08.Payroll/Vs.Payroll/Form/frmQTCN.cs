@@ -97,6 +97,7 @@ namespace Vs.Payroll
                 if (iLoad == 0 || iLoad == 1 || iLoad == 2)
                 {
                     Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboMH, dt, "ID_HH", "TEN_HH", "TEN_HH", true);
+                    cboMH.Properties.View.Columns["ID_NHH"].Visible = false;
                     id_NHH = Convert.ToInt32(dt.Rows[0]["ID_NHH"].ToString());
                 }
 

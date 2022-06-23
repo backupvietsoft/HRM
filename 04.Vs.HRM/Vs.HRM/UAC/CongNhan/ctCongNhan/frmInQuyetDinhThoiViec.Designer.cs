@@ -33,12 +33,12 @@
             DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions2 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
             this.btnALL = new DevExpress.XtraBars.Docking2010.WindowsUIButtonPanel();
             this.tablePanel1 = new DevExpress.Utils.Layout.TablePanel();
-            this.rdo_ChonBaoCao = new DevExpress.XtraEditors.RadioGroup();
             this.chkTiengAnh = new DevExpress.XtraEditors.CheckEdit();
+            this.rdo_ChonBaoCao = new DevExpress.XtraEditors.RadioGroup();
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).BeginInit();
             this.tablePanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.rdo_ChonBaoCao.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkTiengAnh.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rdo_ChonBaoCao.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // btnALL
@@ -95,24 +95,6 @@
             this.tablePanel1.Size = new System.Drawing.Size(596, 203);
             this.tablePanel1.TabIndex = 9;
             // 
-            // rdo_ChonBaoCao
-            // 
-            this.tablePanel1.SetColumn(this.rdo_ChonBaoCao, 1);
-            this.rdo_ChonBaoCao.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rdo_ChonBaoCao.Location = new System.Drawing.Point(57, 16);
-            this.rdo_ChonBaoCao.Name = "rdo_ChonBaoCao";
-            this.rdo_ChonBaoCao.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] {
-            new DevExpress.XtraEditors.Controls.RadioGroupItem("rdo_QuyetDinhThoiViec", "Quyết định thôi việc"),
-            new DevExpress.XtraEditors.Controls.RadioGroupItem("rdo_QuyetDinhSaThai", "Quyết định sa thải"),
-            new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Thanh lý hợp đồng trước 2008"),
-            new DevExpress.XtraEditors.Controls.RadioGroupItem("rdo_QuyetDinhThoiViecCoTroCap", "Thanh lý hợp đồng sau 2008 có trợ cấp"),
-            new DevExpress.XtraEditors.Controls.RadioGroupItem("rdo_QuyetDinhSaThaiCoTroCap", "Quyết định sa thải có trợ cấp"),
-            new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Quyết định thôi việc vi phạm thời gian báo trước", true, "rdo_QDThoiViecViPhamThoiGianBaoTruoc")});
-            this.tablePanel1.SetRow(this.rdo_ChonBaoCao, 1);
-            this.tablePanel1.SetRowSpan(this.rdo_ChonBaoCao, 2);
-            this.rdo_ChonBaoCao.Size = new System.Drawing.Size(352, 184);
-            this.rdo_ChonBaoCao.TabIndex = 1;
-            // 
             // chkTiengAnh
             // 
             this.tablePanel1.SetColumn(this.chkTiengAnh, 2);
@@ -122,6 +104,24 @@
             this.tablePanel1.SetRow(this.chkTiengAnh, 1);
             this.chkTiengAnh.Size = new System.Drawing.Size(114, 24);
             this.chkTiengAnh.TabIndex = 2;
+            // 
+            // rdo_ChonBaoCao
+            // 
+            this.tablePanel1.SetColumn(this.rdo_ChonBaoCao, 1);
+            this.rdo_ChonBaoCao.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rdo_ChonBaoCao.Location = new System.Drawing.Point(57, 16);
+            this.rdo_ChonBaoCao.Name = "rdo_ChonBaoCao";
+            this.rdo_ChonBaoCao.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] {
+            new DevExpress.XtraEditors.Controls.RadioGroupItem("rdo_QuyetDinhThoiViec", "Quyết định thôi việc", true, "rdo_QuyetDinhThoiViec"),
+            new DevExpress.XtraEditors.Controls.RadioGroupItem("rdo_QuyetDinhSaThai", "Quyết định sa thải", true, "rdo_QuyetDinhSaThai"),
+            new DevExpress.XtraEditors.Controls.RadioGroupItem("rdo_ThanhLyHDTruoc2008", "Thanh lý hợp đồng trước 2008", true, "rdo_ThanhLyHDTruoc2008"),
+            new DevExpress.XtraEditors.Controls.RadioGroupItem("rdo_QuyetDinhThoiViecCoTroCap", "Thanh lý hợp đồng sau 2008 có trợ cấp", true, "rdo_QuyetDinhThoiViecCoTroCap"),
+            new DevExpress.XtraEditors.Controls.RadioGroupItem("rdo_QuyetDinhSaThaiCoTroCap", "Quyết định sa thải có trợ cấp", true, "rdo_QuyetDinhSaThaiCoTroCap"),
+            new DevExpress.XtraEditors.Controls.RadioGroupItem("rdo_QDThoiViecViPhamThoiGianBaoTruoc", "Quyết định thôi việc vi phạm thời gian báo trước", true, "rdo_QDThoiViecViPhamThoiGianBaoTruoc")});
+            this.tablePanel1.SetRow(this.rdo_ChonBaoCao, 1);
+            this.tablePanel1.SetRowSpan(this.rdo_ChonBaoCao, 2);
+            this.rdo_ChonBaoCao.Size = new System.Drawing.Size(352, 184);
+            this.rdo_ChonBaoCao.TabIndex = 1;
             // 
             // frmInQuyetDinhThoiViec
             // 
@@ -136,8 +136,8 @@
             this.Load += new System.EventHandler(this.frmInQuyetDinhThoiViec_Load);
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).EndInit();
             this.tablePanel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.rdo_ChonBaoCao.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkTiengAnh.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rdo_ChonBaoCao.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }

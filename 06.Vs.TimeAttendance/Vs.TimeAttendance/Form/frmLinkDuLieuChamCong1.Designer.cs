@@ -30,27 +30,28 @@ namespace Vs.TimeAttendance
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions11 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions12 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions13 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions14 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions15 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions16 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions17 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions1 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions2 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions3 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions4 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions5 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions6 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions7 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmLinkDuLieuChamCong1));
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions18 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions19 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions20 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions8 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions9 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions10 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
             this.dxValidationProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
             this.searchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.cboSearch_XNView = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.cboSearch_TOView = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridView4 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
-            this.windowsUIButton = new DevExpress.XtraBars.Docking2010.WindowsUIButtonPanel();
+            this.lbTimKiem = new DevExpress.XtraEditors.SearchControl();
             this.grdDSCN = new DevExpress.XtraGrid.GridControl();
             this.grvDSCN = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridView3 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.windowsUIButton = new DevExpress.XtraBars.Docking2010.WindowsUIButtonPanel();
             this.grdChamCong = new DevExpress.XtraGrid.GridControl();
             this.grvChamCong = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -77,7 +78,6 @@ namespace Vs.TimeAttendance
             this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.ItemForSumNhanVien = new DevExpress.XtraLayout.SimpleLabelItem();
-            this.lbTimKiem = new DevExpress.XtraEditors.SearchControl();
             this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).BeginInit();
@@ -86,6 +86,7 @@ namespace Vs.TimeAttendance
             ((System.ComponentModel.ISupportInitialize)(this.gridView4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.lbTimKiem.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdDSCN)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grvDSCN)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView3)).BeginInit();
@@ -116,7 +117,6 @@ namespace Vs.TimeAttendance
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForSumNhanVien)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lbTimKiem.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
             this.SuspendLayout();
             // 
@@ -171,64 +171,23 @@ namespace Vs.TimeAttendance
             this.layoutControl1.TabIndex = 2;
             this.layoutControl1.Text = "layoutControl1";
             // 
-            // windowsUIButton
+            // lbTimKiem
             // 
-            this.windowsUIButton.AppearanceButton.Hovered.FontSizeDelta = -1;
-            this.windowsUIButton.AppearanceButton.Hovered.ForeColor = System.Drawing.Color.Gray;
-            this.windowsUIButton.AppearanceButton.Hovered.Options.UseFont = true;
-            this.windowsUIButton.AppearanceButton.Hovered.Options.UseForeColor = true;
-            this.windowsUIButton.AppearanceButton.Normal.FontSizeDelta = -1;
-            this.windowsUIButton.AppearanceButton.Normal.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.windowsUIButton.AppearanceButton.Normal.Options.UseFont = true;
-            this.windowsUIButton.AppearanceButton.Normal.Options.UseForeColor = true;
-            this.windowsUIButton.AppearanceButton.Pressed.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.windowsUIButton.AppearanceButton.Pressed.FontSizeDelta = -1;
-            this.windowsUIButton.AppearanceButton.Pressed.Options.UseBackColor = true;
-            this.windowsUIButton.AppearanceButton.Pressed.Options.UseBorderColor = true;
-            this.windowsUIButton.AppearanceButton.Pressed.Options.UseFont = true;
-            this.windowsUIButton.AppearanceButton.Pressed.Options.UseImage = true;
-            this.windowsUIButton.AppearanceButton.Pressed.Options.UseTextOptions = true;
-            windowsUIButtonImageOptions11.Image = global::Vs.TimeAttendance.Properties.Resources.iconxoa;
-            windowsUIButtonImageOptions12.ImageUri.Uri = "AddItem";
-            windowsUIButtonImageOptions13.ImageUri.Uri = "Edit;Size32x32;GrayScaled";
-            windowsUIButtonImageOptions14.ImageUri.Uri = "snap/snapdeletelist";
-            windowsUIButtonImageOptions15.ImageUri.Uri = "SaveAll";
-            windowsUIButtonImageOptions16.ImageUri.Uri = "SaveAndClose";
-            windowsUIButtonImageOptions17.Image = ((System.Drawing.Image)(resources.GetObject("windowsUIButtonImageOptions17.Image")));
-            windowsUIButtonImageOptions18.Image = ((System.Drawing.Image)(resources.GetObject("windowsUIButtonImageOptions18.Image")));
-            windowsUIButtonImageOptions19.Image = ((System.Drawing.Image)(resources.GetObject("windowsUIButtonImageOptions19.Image")));
-            windowsUIButtonImageOptions20.ImageUri.Uri = "richedit/clearheaderandfooter";
-            this.windowsUIButton.Buttons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] {
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions11, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "xoangay", -1, false),
-            new DevExpress.XtraBars.Docking2010.WindowsUISeparator(),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions12, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "them", -1, false),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions13, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "sua", -1, false),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions14, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "xoa", -1, false),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions15, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "luu", -1, false),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions16, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "khongluu", -1, false),
-            new DevExpress.XtraBars.Docking2010.WindowsUISeparator(),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions17, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "TongHopThongTin", -1, false),
-            new DevExpress.XtraBars.Docking2010.WindowsUISeparator(),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions18, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "LinkTay", -1, false),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions19, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "LinkDuLieu", -1, false),
-            new DevExpress.XtraBars.Docking2010.WindowsUISeparator(),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions20, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "thoat", -1, false)});
-            this.windowsUIButton.ContentAlignment = System.Drawing.ContentAlignment.MiddleRight;
-            this.windowsUIButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.windowsUIButton.Location = new System.Drawing.Point(6, 442);
-            this.windowsUIButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.windowsUIButton.Name = "windowsUIButton";
-            this.windowsUIButton.Padding = new System.Windows.Forms.Padding(5);
-            this.windowsUIButton.Size = new System.Drawing.Size(715, 32);
-            this.windowsUIButton.TabIndex = 44;
-            this.windowsUIButton.Text = "windowsUIButtonPanel1";
-            this.windowsUIButton.UseButtonBackgroundImages = false;
-            this.windowsUIButton.ButtonClick += new DevExpress.XtraBars.Docking2010.ButtonEventHandler(this.windowsUIButton_ButtonClick);
+            this.lbTimKiem.Client = this.grdDSCN;
+            this.lbTimKiem.Location = new System.Drawing.Point(242, 346);
+            this.lbTimKiem.Name = "lbTimKiem";
+            this.lbTimKiem.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Repository.ClearButton(),
+            new DevExpress.XtraEditors.Repository.SearchButton()});
+            this.lbTimKiem.Properties.Client = this.grdDSCN;
+            this.lbTimKiem.Size = new System.Drawing.Size(179, 26);
+            this.lbTimKiem.StyleController = this.layoutControl1;
+            this.lbTimKiem.TabIndex = 45;
             // 
             // grdDSCN
             // 
             this.grdDSCN.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2);
-            this.grdDSCN.Location = new System.Drawing.Point(242, 72);
+            this.grdDSCN.Location = new System.Drawing.Point(242, 77);
             this.grdDSCN.MainView = this.grvDSCN;
             this.grdDSCN.Name = "grdDSCN";
             this.grdDSCN.Size = new System.Drawing.Size(479, 267);
@@ -251,13 +210,67 @@ namespace Vs.TimeAttendance
             this.gridView3.GridControl = this.grdDSCN;
             this.gridView3.Name = "gridView3";
             // 
+            // windowsUIButton
+            // 
+            this.windowsUIButton.AppearanceButton.Hovered.FontSizeDelta = -1;
+            this.windowsUIButton.AppearanceButton.Hovered.ForeColor = System.Drawing.Color.Gray;
+            this.windowsUIButton.AppearanceButton.Hovered.Options.UseFont = true;
+            this.windowsUIButton.AppearanceButton.Hovered.Options.UseForeColor = true;
+            this.windowsUIButton.AppearanceButton.Normal.FontSizeDelta = -1;
+            this.windowsUIButton.AppearanceButton.Normal.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.windowsUIButton.AppearanceButton.Normal.Options.UseFont = true;
+            this.windowsUIButton.AppearanceButton.Normal.Options.UseForeColor = true;
+            this.windowsUIButton.AppearanceButton.Pressed.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.windowsUIButton.AppearanceButton.Pressed.FontSizeDelta = -1;
+            this.windowsUIButton.AppearanceButton.Pressed.Options.UseBackColor = true;
+            this.windowsUIButton.AppearanceButton.Pressed.Options.UseBorderColor = true;
+            this.windowsUIButton.AppearanceButton.Pressed.Options.UseFont = true;
+            this.windowsUIButton.AppearanceButton.Pressed.Options.UseImage = true;
+            this.windowsUIButton.AppearanceButton.Pressed.Options.UseTextOptions = true;
+            windowsUIButtonImageOptions1.Image = global::Vs.TimeAttendance.Properties.Resources.iconxoa;
+            windowsUIButtonImageOptions2.ImageUri.Uri = "AddItem";
+            windowsUIButtonImageOptions3.ImageUri.Uri = "Edit;Size32x32;GrayScaled";
+            windowsUIButtonImageOptions4.ImageUri.Uri = "snap/snapdeletelist";
+            windowsUIButtonImageOptions5.ImageUri.Uri = "SaveAll";
+            windowsUIButtonImageOptions6.ImageUri.Uri = "SaveAndClose";
+            windowsUIButtonImageOptions7.Image = ((System.Drawing.Image)(resources.GetObject("windowsUIButtonImageOptions7.Image")));
+            windowsUIButtonImageOptions8.Image = ((System.Drawing.Image)(resources.GetObject("windowsUIButtonImageOptions8.Image")));
+            windowsUIButtonImageOptions9.Image = ((System.Drawing.Image)(resources.GetObject("windowsUIButtonImageOptions9.Image")));
+            windowsUIButtonImageOptions10.ImageUri.Uri = "richedit/clearheaderandfooter";
+            this.windowsUIButton.Buttons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] {
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions1, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "xoangay", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUISeparator(),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions2, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "them", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions3, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "sua", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions4, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "xoa", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions5, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "luu", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions6, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "khongluu", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUISeparator(),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions7, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "TongHopThongTin", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUISeparator(),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions8, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "LinkTay", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions9, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "LinkDuLieu", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUISeparator(),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions10, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "thoat", -1, false)});
+            this.windowsUIButton.ContentAlignment = System.Drawing.ContentAlignment.MiddleRight;
+            this.windowsUIButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.windowsUIButton.Location = new System.Drawing.Point(6, 442);
+            this.windowsUIButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.windowsUIButton.Name = "windowsUIButton";
+            this.windowsUIButton.Padding = new System.Windows.Forms.Padding(5);
+            this.windowsUIButton.Size = new System.Drawing.Size(715, 32);
+            this.windowsUIButton.TabIndex = 44;
+            this.windowsUIButton.Text = "windowsUIButtonPanel1";
+            this.windowsUIButton.UseButtonBackgroundImages = false;
+            this.windowsUIButton.ButtonClick += new DevExpress.XtraBars.Docking2010.ButtonEventHandler(this.windowsUIButton_ButtonClick);
+            // 
             // grdChamCong
             // 
             this.grdChamCong.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2);
-            this.grdChamCong.Location = new System.Drawing.Point(242, 369);
+            this.grdChamCong.Location = new System.Drawing.Point(242, 374);
             this.grdChamCong.MainView = this.grvChamCong;
             this.grdChamCong.Name = "grdChamCong";
-            this.grdChamCong.Size = new System.Drawing.Size(479, 71);
+            this.grdChamCong.Size = new System.Drawing.Size(479, 66);
             this.grdChamCong.TabIndex = 42;
             this.grdChamCong.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grvChamCong,
@@ -279,10 +292,10 @@ namespace Vs.TimeAttendance
             // grdNgay
             // 
             this.grdNgay.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2);
-            this.grdNgay.Location = new System.Drawing.Point(6, 72);
+            this.grdNgay.Location = new System.Drawing.Point(6, 77);
             this.grdNgay.MainView = this.grvNgay;
             this.grdNgay.Name = "grdNgay";
-            this.grdNgay.Size = new System.Drawing.Size(234, 368);
+            this.grdNgay.Size = new System.Drawing.Size(234, 363);
             this.grdNgay.TabIndex = 39;
             this.grdNgay.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grvNgay,
@@ -399,10 +412,10 @@ namespace Vs.TimeAttendance
             // 
             this.emptySpaceItem2.AllowHotTrack = false;
             this.emptySpaceItem2.Location = new System.Drawing.Point(0, 56);
-            this.emptySpaceItem2.MaxSize = new System.Drawing.Size(0, 10);
-            this.emptySpaceItem2.MinSize = new System.Drawing.Size(10, 10);
+            this.emptySpaceItem2.MaxSize = new System.Drawing.Size(0, 15);
+            this.emptySpaceItem2.MinSize = new System.Drawing.Size(10, 15);
             this.emptySpaceItem2.Name = "emptySpaceItem2";
-            this.emptySpaceItem2.Size = new System.Drawing.Size(717, 10);
+            this.emptySpaceItem2.Size = new System.Drawing.Size(717, 15);
             this.emptySpaceItem2.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.emptySpaceItem2.TextSize = new System.Drawing.Size(0, 0);
             // 
@@ -475,16 +488,16 @@ namespace Vs.TimeAttendance
             // layoutControlItem2
             // 
             this.layoutControlItem2.Control = this.grdNgay;
-            this.layoutControlItem2.Location = new System.Drawing.Point(0, 66);
+            this.layoutControlItem2.Location = new System.Drawing.Point(0, 71);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(236, 370);
+            this.layoutControlItem2.Size = new System.Drawing.Size(236, 365);
             this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem2.TextVisible = false;
             // 
             // layoutControlItem3
             // 
             this.layoutControlItem3.Control = this.grdDSCN;
-            this.layoutControlItem3.Location = new System.Drawing.Point(236, 66);
+            this.layoutControlItem3.Location = new System.Drawing.Point(236, 71);
             this.layoutControlItem3.Name = "layoutControlItem3";
             this.layoutControlItem3.Size = new System.Drawing.Size(481, 269);
             this.layoutControlItem3.TextSize = new System.Drawing.Size(0, 0);
@@ -493,7 +506,7 @@ namespace Vs.TimeAttendance
             // emptySpaceItem3
             // 
             this.emptySpaceItem3.AllowHotTrack = false;
-            this.emptySpaceItem3.Location = new System.Drawing.Point(417, 335);
+            this.emptySpaceItem3.Location = new System.Drawing.Point(417, 340);
             this.emptySpaceItem3.Name = "emptySpaceItem3";
             this.emptySpaceItem3.Size = new System.Drawing.Size(300, 28);
             this.emptySpaceItem3.TextSize = new System.Drawing.Size(0, 0);
@@ -501,9 +514,9 @@ namespace Vs.TimeAttendance
             // layoutControlItem5
             // 
             this.layoutControlItem5.Control = this.grdChamCong;
-            this.layoutControlItem5.Location = new System.Drawing.Point(236, 363);
+            this.layoutControlItem5.Location = new System.Drawing.Point(236, 368);
             this.layoutControlItem5.Name = "layoutControlItem5";
-            this.layoutControlItem5.Size = new System.Drawing.Size(481, 73);
+            this.layoutControlItem5.Size = new System.Drawing.Size(481, 68);
             this.layoutControlItem5.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem5.TextVisible = false;
             // 
@@ -528,23 +541,10 @@ namespace Vs.TimeAttendance
             this.ItemForSumNhanVien.Text = "SumNhanVien";
             this.ItemForSumNhanVien.TextSize = new System.Drawing.Size(112, 20);
             // 
-            // lbTimKiem
-            // 
-            this.lbTimKiem.Client = this.grdDSCN;
-            this.lbTimKiem.Location = new System.Drawing.Point(242, 341);
-            this.lbTimKiem.Name = "lbTimKiem";
-            this.lbTimKiem.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Repository.ClearButton(),
-            new DevExpress.XtraEditors.Repository.SearchButton()});
-            this.lbTimKiem.Properties.Client = this.grdDSCN;
-            this.lbTimKiem.Size = new System.Drawing.Size(179, 26);
-            this.lbTimKiem.StyleController = this.layoutControl1;
-            this.lbTimKiem.TabIndex = 45;
-            // 
             // layoutControlItem4
             // 
             this.layoutControlItem4.Control = this.lbTimKiem;
-            this.layoutControlItem4.Location = new System.Drawing.Point(236, 335);
+            this.layoutControlItem4.Location = new System.Drawing.Point(236, 340);
             this.layoutControlItem4.MaxSize = new System.Drawing.Size(181, 28);
             this.layoutControlItem4.MinSize = new System.Drawing.Size(181, 28);
             this.layoutControlItem4.Name = "layoutControlItem4";
@@ -569,6 +569,7 @@ namespace Vs.TimeAttendance
             ((System.ComponentModel.ISupportInitialize)(this.gridView4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.lbTimKiem.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdDSCN)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grvDSCN)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView3)).EndInit();
@@ -599,7 +600,6 @@ namespace Vs.TimeAttendance
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForSumNhanVien)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lbTimKiem.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
             this.ResumeLayout(false);
 

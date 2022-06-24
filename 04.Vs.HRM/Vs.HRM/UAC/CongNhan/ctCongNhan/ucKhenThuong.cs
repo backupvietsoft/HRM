@@ -15,6 +15,7 @@ namespace Vs.HRM
         static Int64 idcn = 0;
         Int64 id_kT=-1;
         bool cothem = false;
+        string strDuongDan = "";
         public ucKhenThuong(Int64 id)
         {
             InitializeComponent();
@@ -28,6 +29,7 @@ namespace Vs.HRM
             Commons.Modules.ObjSystems.MLoadLookUpEdit(ID_KT_KLLookUpEdit, Commons.Modules.ObjSystems.DataKhenThuongKyLuat(false), "ID_KT_KL", "TEN_KT_KL", "TEN_KT_KL");
             Commons.Modules.ObjSystems.MLoadLookUpEdit(LOAI_KTLookUpEdit, Commons.Modules.ObjSystems.DataLoaiKhenThuong(false), "ID_LOAI_KT", "TEN_LOAI_KT", "TEN_LOAI_KT");
             Commons.Modules.ObjSystems.MLoadLookUpEdit(ID_NKLookUpEdit, Commons.Modules.ObjSystems.DataNguoiKy(), "ID_NK", "HO_TEN", "HO_TEN");
+            Commons.Modules.ObjSystems.MLoadLookUpEdit(cboTinhTrang, Commons.Modules.ObjSystems.DataTinhTrang(false), "ID_TT", "TenTT", "TenTT");
             enableButon(true);
             Commons.Modules.ObjSystems.SetPhanQuyen(windowsUIButton);
             LoadgrdKhenThuong(-1);
@@ -54,6 +56,8 @@ namespace Vs.HRM
                 grvKhenThuong.Columns["THOI_HAN_DC"].Visible = false;
                 grvKhenThuong.Columns["KH_SUA_DOI"].Visible = false;
                 grvKhenThuong.Columns["THOI_HAN_SD"].Visible = false;
+                grvKhenThuong.Columns["ID_TT"].Visible = false;
+                grvKhenThuong.Columns["TAI_LIEU"].Visible = false;
             }
             else
             {
@@ -105,6 +109,7 @@ namespace Vs.HRM
             txtVP_TRUOC_DO.Properties.ReadOnly = visible;
             txtKH_SUA_DOI.Properties.ReadOnly = visible;
             chkDINH_CHI.Properties.ReadOnly = visible;
+            cboTinhTrang.Properties.ReadOnly = visible;
 
         }
         private void Bindingdata(bool bthem)
@@ -121,6 +126,7 @@ namespace Vs.HRM
                 txtTHOI_HAN_SD.EditValue = "";
                 NOI_DUNGTextEdit.EditValue = "";
                 GHI_CHUTextEdit.EditValue = "";
+                cboTinhTrang.EditValue = 1;
 
             }
             else
@@ -139,6 +145,8 @@ namespace Vs.HRM
                 txtTHOI_HAN_DC.EditValue = grvKhenThuong.GetFocusedRowCellValue("THOI_HAN_DC");
                 txtTHOI_HAN_SD.EditValue = grvKhenThuong.GetFocusedRowCellValue("THOI_HAN_SD");
                 txtKH_SUA_DOI.EditValue = grvKhenThuong.GetFocusedRowCellValue("KH_SUA_DOI");
+                cboTinhTrang.EditValue = Convert.ToInt32(grvKhenThuong.GetFocusedRowCellValue("ID_TT"));
+                txtTaiLieu.EditValue = grvKhenThuong.GetFocusedRowCellValue("TAI_LIEU");
             }
         }
         private void SaveData()
@@ -161,7 +169,7 @@ namespace Vs.HRM
                         txtVP_TRUOC_DO.EditValue,
                         txtTHOI_HAN_DC.EditValue,
                         txtKH_SUA_DOI.EditValue,
-                        txtTHOI_HAN_SD.EditValue,
+                        txtTHOI_HAN_SD.EditValue, cboTinhTrang.EditValue, txtTaiLieu.EditValue,
                           cothem));
                 LoadgrdKhenThuong(n);
             }
@@ -228,6 +236,7 @@ namespace Vs.HRM
                             XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgChonDongCanXuLy"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                             return;
                         }
+                        Commons.Modules.ObjSystems.Xoahinh(txtTaiLieu.Text);
                         DeleteData();
                         break;
                     }
@@ -263,6 +272,7 @@ namespace Vs.HRM
                             return;
                         }
                         SaveData();
+                        Commons.Modules.ObjSystems.LuuDuongDan(strDuongDan, txtTaiLieu.Text);
                         enableButon(true);
                         break;
                     }
@@ -270,8 +280,7 @@ namespace Vs.HRM
                     {
                         enableButon(true);
                         Bindingdata(false);
-                        dxValidationProvider1.ValidateHiddenControls = true;
-                        dxValidationProvider1.RemoveControlError(SO_QUYET_DINHTextEdit);
+                        Commons.Modules.ObjSystems.ClearValidationProvider(dxValidationProvider1);
                         break;
                     }
                 case "thoat":
@@ -281,6 +290,46 @@ namespace Vs.HRM
                     }
                 default:
                     break;
+            }
+        }
+        private void LayDuongDan()
+        {
+            string strPath_DH = txtTaiLieu.Text;
+            strDuongDan = ofdfile.FileName;
+
+            var strDuongDanTmp = Commons.Modules.ObjSystems.CapnhatTL("Tai_Lieu_KT");
+            string[] sFile;
+            string TenFile;
+
+            TenFile = ofdfile.SafeFileName.ToString();
+            sFile = System.IO.Directory.GetFiles(strDuongDanTmp);
+
+            if (Commons.Modules.ObjSystems.KiemFileTonTai(strDuongDanTmp + @"\" + ofdfile.SafeFileName.ToString()) == false)
+                txtTaiLieu.Text = strDuongDanTmp + @"\" + ofdfile.SafeFileName.ToString();
+            else
+            {
+                TenFile = Commons.Modules.ObjSystems.STTFileCungThuMuc(strDuongDanTmp, TenFile);
+                txtTaiLieu.Text = strDuongDanTmp + @"\" + TenFile;
+            }
+        }
+        private void txtTaiLieu_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+            try
+            {
+                if (windowsUIButton.Buttons[6].Properties.Visible)
+                {
+                    ofdfile.ShowDialog();
+                    LayDuongDan();
+                }
+                else
+                {
+                    if (txtTaiLieu.Text == "")
+                        return;
+                    Commons.Modules.ObjSystems.OpenHinh(txtTaiLieu.Text);
+                }
+            }
+            catch
+            {
             }
         }
     }

@@ -80,7 +80,14 @@ namespace Vs.HRM
 
                 case "thuchien":
                     {
-                        if (Commons.Modules.ObjSystems.ConvertDatatable(grvCapNhatLCB).AsEnumerable().Count(x => x.Field<bool>("CHON").Equals(true)) == 0)
+                        try
+                        {
+                            if (Commons.Modules.ObjSystems.ConvertDatatable(grvCapNhatLCB).AsEnumerable().Count(x => x.Field<bool>("CHON").Equals(true)) == 0)
+                            {
+                                Commons.Modules.ObjSystems.msgChung(Commons.ThongBao.msgBanChuaChonDuLieu); return;
+                            }
+                        }
+                        catch 
                         {
                             Commons.Modules.ObjSystems.msgChung(Commons.ThongBao.msgBanChuaChonDuLieu); return;
                         }

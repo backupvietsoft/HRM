@@ -2,8 +2,8 @@
 using Microsoft.ApplicationBlocks.Data;
 using System;
 using System.Data;
-using System.Globalization;
 using System.IO;
+using System.Net;
 using System.Windows.Forms;
 
 namespace VietSoftHRM
@@ -23,6 +23,11 @@ namespace VietSoftHRM
                 Commons.IConnections.Server = Commons.Modules.ObjSystems.Decrypt(ds.Tables[0].Rows[0]["S"].ToString(), true);
                 Commons.IConnections.Database = ds.Tables[0].Rows[0]["D"].ToString();
                 Commons.IConnections.Password = Commons.Modules.ObjSystems.Decrypt(ds.Tables[0].Rows[0]["P"].ToString(), true);
+
+
+                Commons.IConnections.Server = @".\SQL2017";
+                Commons.IConnections.Password = "123";
+
                 Commons.Modules.sIP = Commons.Modules.ObjSystems.Decrypt(ds.Tables[0].Rows[0]["IP"].ToString(), true);
                 Commons.Modules.ChangLanguage = false;
                 ds = new DataSet();
@@ -45,9 +50,7 @@ namespace VietSoftHRM
             }
             catch
             {
-
             }
-
         }
         public static void setTTC()
         {
@@ -59,6 +62,17 @@ namespace VietSoftHRM
                 Commons.Modules.iCustomerID = Convert.ToInt32(dt.Rows[0]["CustomerID"]);
                 Commons.Modules.iLOAI_CN = Convert.ToInt32(dt.Rows[0]["LOAI_CN"]);//1 cập nhật trên server//2 cập nhật net.
                 Commons.Modules.sHideMenu = Commons.Modules.ObjSystems.Decrypt(dt.Rows[0]["HIDE_MENU"].ToString(), true);
+                try
+                {
+                    using (new ConnectToSharedFolder(dt.Rows[0]["DUONG_DAN_TL"].ToString(), new NetworkCredential(dt.Rows[0]["USER_TL"].ToString(), dt.Rows[0]["PASS_TL"].ToString())))
+                    {
+                    }
+                }
+                catch
+                {
+                    if (Commons.Modules.iLOAI_CN == 2)
+                        Commons.Modules.iLOAI_CN = 0;
+                }
             }
             catch
             {

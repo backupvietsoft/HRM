@@ -340,7 +340,7 @@ namespace Vs.HRM
                         LoadCmbLoc(3);
                         BinDingData(false);
                         enableButon(true);
-                        dxValidationProvider1.Validate();
+                        Commons.Modules.ObjSystems.ClearValidationProvider(dxValidationProvider1);
                         Commons.Modules.ObjSystems.DeleteAddRow(grvBangCapCN);
                         Commons.Modules.sLoad = "";
                         break;

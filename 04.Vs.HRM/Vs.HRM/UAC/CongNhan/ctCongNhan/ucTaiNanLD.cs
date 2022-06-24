@@ -6,7 +6,6 @@ using DevExpress.XtraEditors;
 using DevExpress.XtraBars.Docking2010;
 using Microsoft.ApplicationBlocks.Data;
 using DevExpress.XtraLayout;
-using System.Drawing;
 
 namespace Vs.HRM
 {
@@ -102,7 +101,7 @@ namespace Vs.HRM
                     {
                         enableButon(true);
                         Bindingdata(false);
-                        //dxValidationProvider1.Validate();
+                        Commons.Modules.ObjSystems.ClearValidationProvider(dxValidationProvider1);
                         break;
                     }
                 case "thoat":

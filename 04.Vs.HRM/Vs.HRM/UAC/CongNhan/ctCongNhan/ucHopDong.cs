@@ -16,6 +16,7 @@ namespace Vs.HRM
         Int64 id_HD;
         bool cothem = false;
         DataTable tableTTC_CN = new DataTable();
+        string strDuongDan = "";
         public ucHopDong(Int64 id)
         {
             InitializeComponent();
@@ -31,7 +32,7 @@ namespace Vs.HRM
             Commons.Modules.ObjSystems.MLoadLookUpEdit(NGUOI_KY_GIA_HANLookUpEdit, Commons.Modules.ObjSystems.DataNguoiKy(), "ID_NK", "HO_TEN", "HO_TEN");
             Commons.Modules.ObjSystems.MLoadLookUpEdit(NGUOI_KY_GIA_HANLookUpEdit, Commons.Modules.ObjSystems.DataNguoiKy(), "ID_NK", "HO_TEN", "HO_TEN");
             Commons.Modules.ObjSystems.MLoadLookUpEdit(cboTinhTrang, Commons.Modules.ObjSystems.DataTinhTrang(false), "ID_TT", "TenTT", "TenTT");
-            Commons.Modules.ObjSystems.MLoadLookUpEdit(cboNgachLuong, Commons.Modules.ObjSystems.DataNgachLuong(false), "ID_NL", "TEN_NL", "TEN_NL");
+            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboNgachLuong, Commons.Modules.ObjSystems.DataNgachLuong(false), "ID_NL", "MS_NL", "MS_NL", true);
             LoadgrdHopDong(-1);
             enableButon(true);
             Commons.Modules.sLoad = "";
@@ -90,7 +91,6 @@ namespace Vs.HRM
             SO_NGAY_PHEPTextEdit.Properties.ReadOnly = visible;
             NGUOI_KY_GIA_HANLookUpEdit.Properties.ReadOnly = visible;
             cboTinhTrang.Properties.ReadOnly = visible;
-            txtTaiLieu.Properties.ReadOnly = visible;
         }
 
         private void Loaddatatable()
@@ -185,10 +185,8 @@ namespace Vs.HRM
                     NGUOI_KY_GIA_HANLookUpEdit.EditValue = Convert.ToInt32(grvHopDong.GetFocusedRowCellValue("NGUOI_KY_GIA_HAN"));
                     cboTinhTrang.EditValue = Convert.ToInt32(grvHopDong.GetFocusedRowCellValue("ID_TT"));
                     txtTaiLieu.EditValue = grvHopDong.GetFocusedRowCellValue("TAI_LIEU");
-
-
                 }
-                catch (Exception ex)
+                catch
                 {
                 }
             }
@@ -218,7 +216,7 @@ namespace Vs.HRM
                 CONG_VIECTextEdit.EditValue,
                 ID_CVLookUpEdit.EditValue,
                 SO_NGAY_PHEPTextEdit.EditValue,
-                NGUOI_KY_GIA_HANLookUpEdit.EditValue,cboTinhTrang.EditValue,txtTaiLieu.EditValue,
+                NGUOI_KY_GIA_HANLookUpEdit.EditValue, cboTinhTrang.EditValue, txtTaiLieu.EditValue,
                 cothem
                     ));
                 LoadgrdHopDong(n);
@@ -298,7 +296,6 @@ namespace Vs.HRM
                 DeleteData();
             }
         }
-
         private void ID_LHDLDLookUpEdit_EditValueChanged(object sender, EventArgs e)
         {
             ngayhethan(Convert.ToInt32(ID_LHDLDLookUpEdit.EditValue));
@@ -359,7 +356,7 @@ namespace Vs.HRM
                     }
                 case "sua":
                     {
-                        if(Convert.ToInt32(cboTinhTrang.EditValue) == 2 || Convert.ToInt32(cboTinhTrang.EditValue) == 3)
+                        if (Convert.ToInt32(cboTinhTrang.EditValue) == 2 || Convert.ToInt32(cboTinhTrang.EditValue) == 3)
                         {
                             XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgTinhTrangKhongSuaDuoc"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                             return;
@@ -383,6 +380,7 @@ namespace Vs.HRM
                             return;
                         }
                         if (grvHopDong.RowCount == 0) return;
+                        Commons.Modules.ObjSystems.Xoahinh(txtTaiLieu.Text);
                         DeleteData();
                         break;
                     }
@@ -421,6 +419,7 @@ namespace Vs.HRM
                         conn.Close();
                         if (SaveData())
                         {
+                            Commons.Modules.ObjSystems.LuuDuongDan(strDuongDan, txtTaiLieu.Text);
                             enableButon(true);
                         }
                         else
@@ -489,9 +488,49 @@ namespace Vs.HRM
         {
             try
             {
-                if (Commons.Modules.sLoad == "0Load")return;
+                if (Commons.Modules.sLoad == "0Load") return;
                 Commons.Modules.ObjSystems.MLoadLookUpEdit(cboBAC_LUONG, Commons.Modules.ObjSystems.DataBacLuong(Convert.ToInt64(cboNgachLuong.EditValue), DateTime.Now, false), "ID_BL", "TEN_BL", "TEN_BL");
                 ngayhethan(Convert.ToInt32(ID_LHDLDLookUpEdit.EditValue));
+            }
+            catch
+            {
+            }
+        }
+        private void LayDuongDan()
+        {
+            string strPath_DH = txtTaiLieu.Text;
+            strDuongDan = ofdfile.FileName;
+
+            var strDuongDanTmp = Commons.Modules.ObjSystems.CapnhatTL("Tai_Lieu_HD");
+            string[] sFile;
+            string TenFile;
+
+            TenFile =  ofdfile.SafeFileName.ToString();
+            sFile = System.IO.Directory.GetFiles(strDuongDanTmp);
+
+            if (Commons.Modules.ObjSystems.KiemFileTonTai(strDuongDanTmp + @"\" +  ofdfile.SafeFileName.ToString()) == false)
+                txtTaiLieu.Text = strDuongDanTmp + @"\" + ofdfile.SafeFileName.ToString();
+            else
+            {
+                TenFile = Commons.Modules.ObjSystems.STTFileCungThuMuc(strDuongDanTmp, TenFile);
+                txtTaiLieu.Text = strDuongDanTmp + @"\" + TenFile;
+            }
+        }
+        private void txtTaiLieu_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+            try
+            {
+                if (windowsUIButton.Buttons[8].Properties.Visible)
+                {
+                    ofdfile.ShowDialog();
+                    LayDuongDan();
+                }
+                else
+                {
+                    if (txtTaiLieu.Text == "")
+                        return;
+                    Commons.Modules.ObjSystems.OpenHinh(txtTaiLieu.Text);
+                }
             }
             catch
             {

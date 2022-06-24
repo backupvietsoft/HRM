@@ -28,15 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions9 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions10 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions11 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions12 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions13 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions14 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions15 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions16 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            DevExpress.XtraGrid.GridLevelNode gridLevelNode2 = new DevExpress.XtraGrid.GridLevelNode();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions1 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions2 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions3 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions4 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions5 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions6 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions7 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions8 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraGrid.GridLevelNode gridLevelNode1 = new DevExpress.XtraGrid.GridLevelNode();
             this.windowsUIButton = new DevExpress.XtraBars.Docking2010.WindowsUIButtonPanel();
             this.searchControl = new DevExpress.XtraEditors.SearchControl();
             this.grdChung = new DevExpress.XtraGrid.GridControl();
@@ -122,27 +122,27 @@
             this.windowsUIButton.AppearanceButton.Pressed.Options.UseFont = true;
             this.windowsUIButton.AppearanceButton.Pressed.Options.UseImage = true;
             this.windowsUIButton.AppearanceButton.Pressed.Options.UseTextOptions = true;
-            windowsUIButtonImageOptions9.ImageUri.Uri = "chart/charttype_steparea3d";
-            windowsUIButtonImageOptions10.ImageUri.Uri = "Refresh";
-            windowsUIButtonImageOptions11.ImageUri.Uri = "AddItem";
-            windowsUIButtonImageOptions12.ImageUri.Uri = "snap/snapdeletelist";
-            windowsUIButtonImageOptions13.ImageUri.Uri = "print";
-            windowsUIButtonImageOptions14.ImageUri.Uri = "SaveAll";
-            windowsUIButtonImageOptions15.ImageUri.Uri = "SaveAndClose";
-            windowsUIButtonImageOptions16.ImageUri.Uri = "richedit/clearheaderandfooter";
+            windowsUIButtonImageOptions1.ImageUri.Uri = "chart/charttype_steparea3d";
+            windowsUIButtonImageOptions2.ImageUri.Uri = "Refresh";
+            windowsUIButtonImageOptions3.ImageUri.Uri = "AddItem";
+            windowsUIButtonImageOptions4.ImageUri.Uri = "snap/snapdeletelist";
+            windowsUIButtonImageOptions5.ImageUri.Uri = "print";
+            windowsUIButtonImageOptions6.ImageUri.Uri = "SaveAll";
+            windowsUIButtonImageOptions7.ImageUri.Uri = "SaveAndClose";
+            windowsUIButtonImageOptions8.ImageUri.Uri = "richedit/clearheaderandfooter";
             this.windowsUIButton.Buttons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] {
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions9, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "LoaIXL", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions1, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "LoaIXL", -1, false),
             new DevExpress.XtraBars.Docking2010.WindowsUISeparator(),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions10, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "CNLXL", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions2, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "CNLXL", -1, false),
             new DevExpress.XtraBars.Docking2010.WindowsUISeparator(),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions11, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "them", -1, false),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions12, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "xoa", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions3, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "them", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions4, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "xoa", -1, false),
             new DevExpress.XtraBars.Docking2010.WindowsUISeparator(),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions13, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "in", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions5, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "in", -1, false),
             new DevExpress.XtraBars.Docking2010.WindowsUISeparator(),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions14, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "luu", -1, false),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions15, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "khongluu", -1, false),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions16, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "thoat", -1, false)});
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions6, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "luu", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions7, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "khongluu", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions8, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "thoat", -1, false)});
             this.windowsUIButton.ContentAlignment = System.Drawing.ContentAlignment.MiddleRight;
             this.windowsUIButton.Controls.Add(this.searchControl);
             this.windowsUIButton.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -176,10 +176,10 @@
             // grdChung
             // 
             this.grdChung.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.grdChung.Location = new System.Drawing.Point(12, 92);
+            this.grdChung.Location = new System.Drawing.Point(6, 82);
             this.grdChung.MainView = this.grvChung;
             this.grdChung.Name = "grdChung";
-            this.grdChung.Size = new System.Drawing.Size(910, 360);
+            this.grdChung.Size = new System.Drawing.Size(922, 376);
             this.grdChung.TabIndex = 4;
             this.grdChung.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grvChung});
@@ -266,9 +266,9 @@
             this.tablePanel1.SetColumn(this.grdLXL, 0);
             this.tablePanel1.SetColumnSpan(this.grdLXL, 3);
             this.grdLXL.Dock = System.Windows.Forms.DockStyle.Fill;
-            gridLevelNode2.RelationName = "Level1";
+            gridLevelNode1.RelationName = "Level1";
             this.grdLXL.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
-            gridLevelNode2});
+            gridLevelNode1});
             this.grdLXL.Location = new System.Drawing.Point(3, 3);
             this.grdLXL.MainView = this.grvLXL;
             this.grdLXL.Name = "grdLXL";
@@ -316,22 +316,22 @@
             // lblTongCong
             // 
             this.lblTongCong.Font = new System.Drawing.Font("Segoe UI", 9.75F);
-            this.lblTongCong.Location = new System.Drawing.Point(12, 68);
+            this.lblTongCong.Location = new System.Drawing.Point(6, 58);
             this.lblTongCong.Name = "lblTongCong";
-            this.lblTongCong.Size = new System.Drawing.Size(910, 20);
+            this.lblTongCong.Size = new System.Drawing.Size(922, 22);
             this.lblTongCong.TabIndex = 9;
             this.lblTongCong.Text = "label1";
             this.lblTongCong.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // cboDV
             // 
-            this.cboDV.Location = new System.Drawing.Point(70, 12);
+            this.cboDV.Location = new System.Drawing.Point(64, 6);
             this.cboDV.Name = "cboDV";
             this.cboDV.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cboDV.Properties.NullText = "";
             this.cboDV.Properties.PopupView = this.searchLookUpEdit1View;
-            this.cboDV.Size = new System.Drawing.Size(242, 24);
+            this.cboDV.Size = new System.Drawing.Size(247, 24);
             this.cboDV.StyleController = this.dataLayoutControl1;
             this.cboDV.TabIndex = 8;
             this.cboDV.EditValueChanged += new System.EventHandler(this.cboDV_EditValueChanged);
@@ -393,14 +393,14 @@
             this.calThang.MinimumSize = new System.Drawing.Size(339, 265);
             this.calThang.Name = "calThang";
             this.calThang.Padding = new System.Windows.Forms.Padding(0);
-            this.calThang.Size = new System.Drawing.Size(339, 265);
+            this.calThang.Size = new System.Drawing.Size(352, 265);
             this.calThang.TabIndex = 1;
             this.calThang.VistaCalendarViewStyle = DevExpress.XtraEditors.VistaCalendarViewStyle.YearView;
             this.calThang.DateTimeCommit += new System.EventHandler(this.calThang_DateTimeCommit);
             // 
             // cboThang
             // 
-            this.cboThang.Location = new System.Drawing.Point(70, 40);
+            this.cboThang.Location = new System.Drawing.Point(64, 32);
             this.cboThang.Name = "cboThang";
             this.cboThang.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo),
@@ -409,35 +409,35 @@
             this.cboThang.Properties.DefaultPopupControl = this.popListThang;
             this.cboThang.Properties.DifferentActionButtonIndex = 1;
             this.cboThang.Properties.DifferentPopupControl = this.popThang;
-            this.cboThang.Size = new System.Drawing.Size(242, 24);
+            this.cboThang.Size = new System.Drawing.Size(247, 24);
             this.cboThang.StyleController = this.dataLayoutControl1;
             this.cboThang.TabIndex = 0;
             this.cboThang.EditValueChanged += new System.EventHandler(this.cboThang_EditValueChanged);
             // 
             // cboXN
             // 
-            this.cboXN.Location = new System.Drawing.Point(374, 12);
+            this.cboXN.Location = new System.Drawing.Point(371, 6);
             this.cboXN.Name = "cboXN";
             this.cboXN.Properties.Appearance.Options.UseTextOptions = true;
             this.cboXN.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             this.cboXN.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cboXN.Properties.NullText = "";
-            this.cboXN.Size = new System.Drawing.Size(230, 24);
+            this.cboXN.Size = new System.Drawing.Size(235, 24);
             this.cboXN.StyleController = this.dataLayoutControl1;
             this.cboXN.TabIndex = 2;
             this.cboXN.EditValueChanged += new System.EventHandler(this.cboXN_EditValueChanged);
             // 
             // cboTo
             // 
-            this.cboTo.Location = new System.Drawing.Point(666, 12);
+            this.cboTo.Location = new System.Drawing.Point(666, 6);
             this.cboTo.Name = "cboTo";
             this.cboTo.Properties.Appearance.Options.UseTextOptions = true;
             this.cboTo.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             this.cboTo.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cboTo.Properties.NullText = "";
-            this.cboTo.Size = new System.Drawing.Size(256, 24);
+            this.cboTo.Size = new System.Drawing.Size(262, 24);
             this.cboTo.StyleController = this.dataLayoutControl1;
             this.cboTo.TabIndex = 3;
             this.cboTo.EditValueChanged += new System.EventHandler(this.cboThang_EditValueChanged);
@@ -466,14 +466,14 @@
             this.lblThang});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "autoGeneratedGroup0";
-            this.layoutControlGroup1.Size = new System.Drawing.Size(914, 444);
+            this.layoutControlGroup1.Size = new System.Drawing.Size(924, 454);
             // 
             // layoutControlItem1
             // 
             this.layoutControlItem1.Control = this.grdChung;
-            this.layoutControlItem1.Location = new System.Drawing.Point(0, 80);
+            this.layoutControlItem1.Location = new System.Drawing.Point(0, 76);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(914, 364);
+            this.layoutControlItem1.Size = new System.Drawing.Size(924, 378);
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
             // 
@@ -482,16 +482,16 @@
             this.lblDonVi.Control = this.cboDV;
             this.lblDonVi.Location = new System.Drawing.Point(0, 0);
             this.lblDonVi.Name = "lblDonVi";
-            this.lblDonVi.Size = new System.Drawing.Size(304, 28);
+            this.lblDonVi.Size = new System.Drawing.Size(307, 26);
             this.lblDonVi.TextSize = new System.Drawing.Size(55, 17);
             // 
             // ItemForID_XN
             // 
             this.ItemForID_XN.Control = this.cboXN;
-            this.ItemForID_XN.Location = new System.Drawing.Point(304, 0);
+            this.ItemForID_XN.Location = new System.Drawing.Point(307, 0);
             this.ItemForID_XN.MinSize = new System.Drawing.Size(103, 24);
             this.ItemForID_XN.Name = "ItemForID_XN";
-            this.ItemForID_XN.Size = new System.Drawing.Size(292, 28);
+            this.ItemForID_XN.Size = new System.Drawing.Size(295, 26);
             this.ItemForID_XN.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.ItemForID_XN.Text = "Xí nghiệp";
             this.ItemForID_XN.TextSize = new System.Drawing.Size(55, 17);
@@ -499,28 +499,28 @@
             // ItemForID_TO
             // 
             this.ItemForID_TO.Control = this.cboTo;
-            this.ItemForID_TO.Location = new System.Drawing.Point(596, 0);
+            this.ItemForID_TO.Location = new System.Drawing.Point(602, 0);
             this.ItemForID_TO.Name = "ItemForID_TO";
-            this.ItemForID_TO.Size = new System.Drawing.Size(318, 28);
+            this.ItemForID_TO.Size = new System.Drawing.Size(322, 26);
             this.ItemForID_TO.Text = "ID_TO";
             this.ItemForID_TO.TextSize = new System.Drawing.Size(55, 17);
             // 
             // emptySpaceItem3
             // 
             this.emptySpaceItem3.AllowHotTrack = false;
-            this.emptySpaceItem3.Location = new System.Drawing.Point(304, 28);
+            this.emptySpaceItem3.Location = new System.Drawing.Point(307, 26);
             this.emptySpaceItem3.Name = "emptySpaceItem3";
-            this.emptySpaceItem3.Size = new System.Drawing.Size(610, 28);
+            this.emptySpaceItem3.Size = new System.Drawing.Size(617, 26);
             this.emptySpaceItem3.TextSize = new System.Drawing.Size(0, 0);
             // 
             // layoutControlItem2
             // 
             this.layoutControlItem2.Control = this.lblTongCong;
-            this.layoutControlItem2.Location = new System.Drawing.Point(0, 56);
+            this.layoutControlItem2.Location = new System.Drawing.Point(0, 52);
             this.layoutControlItem2.MaxSize = new System.Drawing.Size(0, 24);
             this.layoutControlItem2.MinSize = new System.Drawing.Size(19, 24);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(914, 24);
+            this.layoutControlItem2.Size = new System.Drawing.Size(924, 24);
             this.layoutControlItem2.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem2.TextVisible = false;
@@ -528,9 +528,9 @@
             // lblThang
             // 
             this.lblThang.Control = this.cboThang;
-            this.lblThang.Location = new System.Drawing.Point(0, 28);
+            this.lblThang.Location = new System.Drawing.Point(0, 26);
             this.lblThang.Name = "lblThang";
-            this.lblThang.Size = new System.Drawing.Size(304, 28);
+            this.lblThang.Size = new System.Drawing.Size(307, 26);
             this.lblThang.TextSize = new System.Drawing.Size(55, 17);
             // 
             // ucXepLoaiKhenThuong

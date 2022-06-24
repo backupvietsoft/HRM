@@ -179,10 +179,10 @@
             // grdChung
             // 
             this.grdChung.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.grdChung.Location = new System.Drawing.Point(12, 105);
+            this.grdChung.Location = new System.Drawing.Point(6, 99);
             this.grdChung.MainView = this.grvChung;
             this.grdChung.Name = "grdChung";
-            this.grdChung.Size = new System.Drawing.Size(881, 360);
+            this.grdChung.Size = new System.Drawing.Size(893, 372);
             this.grdChung.TabIndex = 5;
             this.grdChung.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grvChung});
@@ -286,7 +286,7 @@
             // dtDenThang
             // 
             this.dtDenThang.EditValue = null;
-            this.dtDenThang.Location = new System.Drawing.Point(704, 40);
+            this.dtDenThang.Location = new System.Drawing.Point(705, 32);
             this.dtDenThang.Name = "dtDenThang";
             this.dtDenThang.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -301,14 +301,14 @@
             this.dtDenThang.Properties.Mask.EditMask = "MM/yyyy";
             this.dtDenThang.Properties.Mask.UseMaskAsDisplayFormat = true;
             this.dtDenThang.Properties.VistaCalendarViewStyle = DevExpress.XtraEditors.VistaCalendarViewStyle.YearView;
-            this.dtDenThang.Size = new System.Drawing.Size(189, 24);
+            this.dtDenThang.Size = new System.Drawing.Size(194, 24);
             this.dtDenThang.StyleController = this.dataLayoutControl1;
             this.dtDenThang.TabIndex = 21;
             // 
             // dtTuThang
             // 
             this.dtTuThang.EditValue = null;
-            this.dtTuThang.Location = new System.Drawing.Point(408, 40);
+            this.dtTuThang.Location = new System.Drawing.Point(405, 32);
             this.dtTuThang.Name = "dtTuThang";
             this.dtTuThang.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -325,54 +325,54 @@
             this.dtTuThang.Properties.Mask.EditMask = "MM/yyyy";
             this.dtTuThang.Properties.Mask.UseMaskAsDisplayFormat = true;
             this.dtTuThang.Properties.VistaCalendarViewStyle = DevExpress.XtraEditors.VistaCalendarViewStyle.YearView;
-            this.dtTuThang.Size = new System.Drawing.Size(190, 24);
+            this.dtTuThang.Size = new System.Drawing.Size(196, 24);
             this.dtTuThang.StyleController = this.dataLayoutControl1;
             this.dtTuThang.TabIndex = 20;
             // 
             // txtTongTien
             // 
-            this.txtTongTien.Location = new System.Drawing.Point(704, 68);
+            this.txtTongTien.Location = new System.Drawing.Point(705, 58);
             this.txtTongTien.Name = "txtTongTien";
             this.txtTongTien.Properties.Appearance.Options.UseTextOptions = true;
             this.txtTongTien.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.txtTongTien.Properties.Mask.EditMask = "n2";
             this.txtTongTien.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.txtTongTien.Properties.Mask.UseMaskAsDisplayFormat = true;
-            this.txtTongTien.Size = new System.Drawing.Size(189, 24);
+            this.txtTongTien.Size = new System.Drawing.Size(194, 24);
             this.txtTongTien.StyleController = this.dataLayoutControl1;
             this.txtTongTien.TabIndex = 19;
             // 
             // cboTo
             // 
-            this.cboTo.Location = new System.Drawing.Point(704, 12);
+            this.cboTo.Location = new System.Drawing.Point(705, 6);
             this.cboTo.Name = "cboTo";
             this.cboTo.Properties.Appearance.Options.UseTextOptions = true;
             this.cboTo.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             this.cboTo.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cboTo.Properties.NullText = "";
-            this.cboTo.Size = new System.Drawing.Size(189, 24);
+            this.cboTo.Size = new System.Drawing.Size(194, 24);
             this.cboTo.StyleController = this.dataLayoutControl1;
             this.cboTo.TabIndex = 17;
             this.cboTo.EditValueChanged += new System.EventHandler(this.cboThang_EditValueChanged);
             // 
             // cboDV
             // 
-            this.cboDV.Location = new System.Drawing.Point(114, 12);
+            this.cboDV.Location = new System.Drawing.Point(108, 6);
             this.cboDV.Name = "cboDV";
             this.cboDV.Properties.Appearance.Options.UseTextOptions = true;
             this.cboDV.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             this.cboDV.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cboDV.Properties.NullText = "";
-            this.cboDV.Size = new System.Drawing.Size(188, 24);
+            this.cboDV.Size = new System.Drawing.Size(193, 24);
             this.cboDV.StyleController = this.dataLayoutControl1;
             this.cboDV.TabIndex = 15;
             this.cboDV.EditValueChanged += new System.EventHandler(this.cboDV_EditValueChanged);
             // 
             // cboThang
             // 
-            this.cboThang.Location = new System.Drawing.Point(114, 40);
+            this.cboThang.Location = new System.Drawing.Point(108, 32);
             this.cboThang.Name = "cboThang";
             this.cboThang.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo),
@@ -381,30 +381,30 @@
             this.cboThang.Properties.DefaultPopupControl = this.popListThang;
             this.cboThang.Properties.DifferentActionButtonIndex = 1;
             this.cboThang.Properties.DifferentPopupControl = this.popThang;
-            this.cboThang.Size = new System.Drawing.Size(188, 24);
+            this.cboThang.Size = new System.Drawing.Size(193, 24);
             this.cboThang.StyleController = this.dataLayoutControl1;
             this.cboThang.TabIndex = 14;
             this.cboThang.EditValueChanged += new System.EventHandler(this.cboThang_EditValueChanged);
             // 
             // cboXN
             // 
-            this.cboXN.Location = new System.Drawing.Point(408, 12);
+            this.cboXN.Location = new System.Drawing.Point(405, 6);
             this.cboXN.Name = "cboXN";
             this.cboXN.Properties.Appearance.Options.UseTextOptions = true;
             this.cboXN.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             this.cboXN.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cboXN.Properties.NullText = "";
-            this.cboXN.Size = new System.Drawing.Size(190, 24);
+            this.cboXN.Size = new System.Drawing.Size(196, 24);
             this.cboXN.StyleController = this.dataLayoutControl1;
             this.cboXN.TabIndex = 16;
             this.cboXN.EditValueChanged += new System.EventHandler(this.cboXN_EditValueChanged);
             // 
             // txtTDBC
             // 
-            this.txtTDBC.Location = new System.Drawing.Point(114, 68);
+            this.txtTDBC.Location = new System.Drawing.Point(108, 58);
             this.txtTDBC.Name = "txtTDBC";
-            this.txtTDBC.Size = new System.Drawing.Size(484, 24);
+            this.txtTDBC.Size = new System.Drawing.Size(493, 24);
             this.txtTDBC.StyleController = this.dataLayoutControl1;
             this.txtTDBC.TabIndex = 22;
             // 
@@ -432,16 +432,16 @@
             this.layoutControlItem1.Control = this.grdChung;
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 93);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(885, 364);
+            this.layoutControlItem1.Size = new System.Drawing.Size(895, 374);
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
             // 
             // lblThang
             // 
             this.lblThang.Control = this.cboThang;
-            this.lblThang.Location = new System.Drawing.Point(0, 28);
+            this.lblThang.Location = new System.Drawing.Point(0, 26);
             this.lblThang.Name = "lblThang";
-            this.lblThang.Size = new System.Drawing.Size(294, 28);
+            this.lblThang.Size = new System.Drawing.Size(297, 26);
             this.lblThang.Text = "Tháng";
             this.lblThang.TextSize = new System.Drawing.Size(99, 17);
             // 
@@ -450,71 +450,71 @@
             this.lblDV.Control = this.cboDV;
             this.lblDV.Location = new System.Drawing.Point(0, 0);
             this.lblDV.Name = "lblDV";
-            this.lblDV.Size = new System.Drawing.Size(294, 28);
+            this.lblDV.Size = new System.Drawing.Size(297, 26);
             this.lblDV.Text = "Don Vi";
             this.lblDV.TextSize = new System.Drawing.Size(99, 17);
             // 
             // lblXN
             // 
             this.lblXN.Control = this.cboXN;
-            this.lblXN.Location = new System.Drawing.Point(294, 0);
+            this.lblXN.Location = new System.Drawing.Point(297, 0);
             this.lblXN.Name = "lblXN";
-            this.lblXN.Size = new System.Drawing.Size(296, 28);
+            this.lblXN.Size = new System.Drawing.Size(300, 26);
             this.lblXN.Text = "Xi Nghiep";
             this.lblXN.TextSize = new System.Drawing.Size(99, 17);
             // 
             // lblTo
             // 
             this.lblTo.Control = this.cboTo;
-            this.lblTo.Location = new System.Drawing.Point(590, 0);
+            this.lblTo.Location = new System.Drawing.Point(597, 0);
             this.lblTo.Name = "lblTo";
-            this.lblTo.Size = new System.Drawing.Size(295, 28);
+            this.lblTo.Size = new System.Drawing.Size(298, 26);
             this.lblTo.Text = "To";
             this.lblTo.TextSize = new System.Drawing.Size(99, 17);
             // 
             // lblTuThang
             // 
             this.lblTuThang.Control = this.dtTuThang;
-            this.lblTuThang.Location = new System.Drawing.Point(294, 28);
+            this.lblTuThang.Location = new System.Drawing.Point(297, 26);
             this.lblTuThang.Name = "lblTuThang";
-            this.lblTuThang.Size = new System.Drawing.Size(296, 28);
+            this.lblTuThang.Size = new System.Drawing.Size(300, 26);
             this.lblTuThang.Text = "Tu Thang";
             this.lblTuThang.TextSize = new System.Drawing.Size(99, 17);
             // 
             // lblDenThang
             // 
             this.lblDenThang.Control = this.dtDenThang;
-            this.lblDenThang.Location = new System.Drawing.Point(590, 28);
+            this.lblDenThang.Location = new System.Drawing.Point(597, 26);
             this.lblDenThang.Name = "lblDenThang";
-            this.lblDenThang.Size = new System.Drawing.Size(295, 28);
+            this.lblDenThang.Size = new System.Drawing.Size(298, 26);
             this.lblDenThang.Text = "Den Tháng";
             this.lblDenThang.TextSize = new System.Drawing.Size(99, 17);
             // 
             // emptySpaceItem1
             // 
             this.emptySpaceItem1.AllowHotTrack = false;
-            this.emptySpaceItem1.Location = new System.Drawing.Point(0, 84);
-            this.emptySpaceItem1.MaxSize = new System.Drawing.Size(0, 9);
-            this.emptySpaceItem1.MinSize = new System.Drawing.Size(9, 9);
+            this.emptySpaceItem1.Location = new System.Drawing.Point(0, 78);
+            this.emptySpaceItem1.MaxSize = new System.Drawing.Size(0, 15);
+            this.emptySpaceItem1.MinSize = new System.Drawing.Size(10, 15);
             this.emptySpaceItem1.Name = "emptySpaceItem1";
-            this.emptySpaceItem1.Size = new System.Drawing.Size(885, 9);
+            this.emptySpaceItem1.Size = new System.Drawing.Size(895, 15);
             this.emptySpaceItem1.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
             // 
             // lblTieuDeBaoCao
             // 
             this.lblTieuDeBaoCao.Control = this.txtTDBC;
-            this.lblTieuDeBaoCao.Location = new System.Drawing.Point(0, 56);
+            this.lblTieuDeBaoCao.Location = new System.Drawing.Point(0, 52);
             this.lblTieuDeBaoCao.Name = "lblTieuDeBaoCao";
-            this.lblTieuDeBaoCao.Size = new System.Drawing.Size(590, 28);
+            this.lblTieuDeBaoCao.Size = new System.Drawing.Size(597, 26);
             this.lblTieuDeBaoCao.TextSize = new System.Drawing.Size(99, 17);
             // 
             // lblTienThuong
             // 
             this.lblTienThuong.Control = this.txtTongTien;
-            this.lblTienThuong.Location = new System.Drawing.Point(590, 56);
+            this.lblTienThuong.Location = new System.Drawing.Point(597, 52);
             this.lblTienThuong.Name = "lblTienThuong";
-            this.lblTienThuong.Size = new System.Drawing.Size(295, 28);
+            this.lblTienThuong.Size = new System.Drawing.Size(298, 26);
             this.lblTienThuong.Text = "Tien Thuong";
             this.lblTienThuong.TextSize = new System.Drawing.Size(99, 17);
             // 

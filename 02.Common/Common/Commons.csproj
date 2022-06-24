@@ -91,6 +91,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="clsXuLy.cs" />
+    <Compile Include="ConnectToSharedFolder.cs" />
     <Compile Include="frmWaitForm.cs">
       <SubType>Form</SubType>
     </Compile>

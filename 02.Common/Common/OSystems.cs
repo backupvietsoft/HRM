@@ -5,6 +5,7 @@ using DevExpress.XtraBars.Docking2010;
 using DevExpress.XtraBars.Navigation;
 using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Controls;
+using DevExpress.XtraEditors.DXErrorProvider;
 using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Columns;
@@ -25,6 +26,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
@@ -163,6 +165,19 @@ namespace Commons
 
             return TenFile;
         }
+        public void Xoahinh(string strDuongdan)
+        {
+            if (System.IO.File.Exists(strDuongdan))
+            {
+                try
+                {
+                    System.IO.File.Delete(strDuongdan);
+                }
+                catch (Exception ex)
+                {
+                }
+            }
+        }
         public void OpenHinh(string strDuongdan)
         {
             if (strDuongdan.Equals(""))
@@ -178,9 +193,9 @@ namespace Commons
                 }
             }
         }
-        public string CapnhatTL(string strMS_MAY)
+        public string CapnhatTL(string strFile)
         {
-            strMS_MAY = LocKyTuDB(strMS_MAY);
+            strFile = LocKyTuDB(strFile);
             string SERVER_FOLDER_PATH = "";
             string SERVER_PATH = "";
             SERVER_PATH = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT TOP 1 DUONG_DAN_TL FROM dbo.THONG_TIN_CHUNG").ToString();
@@ -188,51 +203,10 @@ namespace Commons
                 SERVER_PATH = "";
             if (!SERVER_PATH.EndsWith(@"\"))
                 SERVER_PATH = SERVER_PATH + @"\";
-            SERVER_FOLDER_PATH = SERVER_PATH;
-            if (System.IO.Directory.Exists(SERVER_PATH))
+            SERVER_FOLDER_PATH = SERVER_PATH + strFile;
+            if (!System.IO.Directory.Exists(SERVER_FOLDER_PATH))
             {
-                string[] FILE_TEMPArr;
-                FILE_TEMPArr = System.IO.Directory.GetFileSystemEntries(SERVER_PATH);
-                int i = 0;
-                string[] arr;
-                while (i < FILE_TEMPArr.Length) // tài liệu
-                {
-                    arr = FILE_TEMPArr[i].Split('\\');
-                    if (arr[arr.Length - 1].Equals("Tai_Lieu_MH"))
-                    {
-                        SERVER_FOLDER_PATH = SERVER_FOLDER_PATH + arr[arr.Length - 1];
-                        // kiểm tra folder MS_MAY đã tồn tại chưa
-                        string[] FILE_TEMPArr1;
-                        FILE_TEMPArr1 = System.IO.Directory.GetFileSystemEntries(SERVER_FOLDER_PATH);
-                        int j = 0; // MS_MAY
-                        while (j < FILE_TEMPArr1.Length)
-                        {
-                            arr = FILE_TEMPArr1[j].Split('\\');
-                            if (arr[arr.Length - 1].Equals(strMS_MAY))
-                            {
-                                SERVER_FOLDER_PATH = SERVER_FOLDER_PATH + @"\" + arr[arr.Length - 1];
-                                break; // MS_MAY
-                            }
-                            j = j + 1;
-                        } // MS_MAY
-                        if (j == FILE_TEMPArr1.Length)
-                        {
-                            SERVER_FOLDER_PATH = SERVER_FOLDER_PATH + @"\" + strMS_MAY;
-                            System.IO.Directory.CreateDirectory(SERVER_FOLDER_PATH);
-                        }
-                        break; // tài liệu
-                    }
-                    i = i + 1;
-                } // tài liệu
-                if (i == FILE_TEMPArr.Length)
-                {
-                    // nếu chưa tồn tại folder bảo trì thì tạo mới folder bảo trì và các folder hình máy và tài liệu máy
-                    SERVER_FOLDER_PATH = SERVER_FOLDER_PATH + @"Tai_Lieu_MH\" + strMS_MAY;
-                    System.IO.Directory.CreateDirectory(SERVER_FOLDER_PATH);
-                }
-            }
-            else
-            {
+                System.IO.Directory.CreateDirectory(SERVER_FOLDER_PATH);
             }
             return SERVER_FOLDER_PATH;
         }
@@ -246,15 +220,17 @@ namespace Commons
             {
                 try
                 {
-                    DirectoryInfo dir = new DirectoryInfo(System.IO.Path.GetDirectoryName(strHINH));
-                    foreach (FileInfo item in dir.EnumerateFiles())
+                    //DirectoryInfo dir = new DirectoryInfo(System.IO.Path.GetDirectoryName(strHINH));
+                    //foreach (FileInfo item in dir.EnumerateFiles())
+                    //{
+                    //    item.Delete();
+                    //}
+                    if (!System.IO.File.Exists(strHINH))
                     {
-                        item.Delete();
+                        System.IO.File.Copy(strDUONG_DAN, strHINH);
                     }
-
-                    System.IO.File.Copy(strDUONG_DAN, strHINH);
                 }
-                catch (Exception ex)
+                catch
                 {
                 }
             }
@@ -3477,6 +3453,18 @@ namespace Commons
         #endregion
 
         #region add combobox search
+
+        public void ClearValidationProvider(DXValidationProvider validationProvider)
+        {
+            FieldInfo fi = typeof(DXValidationProvider).GetField("errorProvider", BindingFlags.NonPublic | BindingFlags.Instance);
+            DXErrorProvider errorProvier = fi.GetValue(validationProvider) as DXErrorProvider;
+            foreach (Control c in validationProvider.InvalidControls)
+            {
+                errorProvier.SetError(c, null);
+            }
+
+        }
+
         public void AddCombSearchLookUpEdit(RepositoryItemSearchLookUpEdit cboSearch, string Value, string Display, GridView grv, DataTable dtTmp)
         {
             cboSearch.NullText = "";

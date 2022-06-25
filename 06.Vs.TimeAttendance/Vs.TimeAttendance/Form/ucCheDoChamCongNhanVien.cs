@@ -16,11 +16,13 @@ using System.Xml.Linq;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraEditors.Mask;
 using DevExpress.XtraLayout;
+using System.Globalization;
 
 namespace Vs.TimeAttendance
 {
     public partial class ucCheDoChamCongNhanVien : DevExpress.XtraEditors.XtraUserControl
     {
+        private static DataTable dt_Temp; // Lưu data cũ khi bấm nút thêm
         private static Boolean isAdd = false;
         public static ucCheDoChamCongNhanVien _instance;
         public static ucCheDoChamCongNhanVien Instance
@@ -32,6 +34,8 @@ namespace Vs.TimeAttendance
                 return _instance;
             }
         }
+        CultureInfo cultures = new CultureInfo("en-US");
+
         public ucCheDoChamCongNhanVien()
         {
             InitializeComponent();
@@ -56,7 +60,6 @@ namespace Vs.TimeAttendance
             Commons.Modules.ObjSystems.LoadCboXiNghiep(cboDonVi, cboXiNghiep);
             Commons.Modules.ObjSystems.LoadCboTo(cboDonVi, cboXiNghiep, cboTo);
 
-            LoadGrdCDCCNV();
             LoadGrdCDCCNV();
             Commons.Modules.sPS = "";
 
@@ -135,8 +138,11 @@ namespace Vs.TimeAttendance
                 DataTable dt = new DataTable();
                 if (isAdd)
                 {
+
                     dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetListEditCDCCNV", cboNgay.EditValue, cboDonVi.EditValue, cboXiNghiep.EditValue, cboTo.EditValue, Commons.Modules.UserName, Commons.Modules.TypeLanguage));
+                    dt_Temp = new DataTable();
                     Commons.Modules.ObjSystems.MLoadXtraGrid(grdData, grvCDCCNV, dt, true, false, true, false, true, this.Name);
+                    dt_Temp = ((DataTable)grdData.DataSource).Copy();
                     dt.Columns["NGAY_AD"].ReadOnly = false;
                 }
                 else
@@ -156,7 +162,7 @@ namespace Vs.TimeAttendance
                 MessageBox.Show(ex.Message.ToString());
             }
             grvCDCCNV.Columns["ID_CN"].Visible = false;
-            grvCDCCNV.Columns["NGAY_AD"].Visible = false;
+            //grvCDCCNV.Columns["NGAY_AD"].Visible = false;
         }
 
         private void cboDonVi_EditValueChanged(object sender, EventArgs e)
@@ -226,6 +232,8 @@ namespace Vs.TimeAttendance
                     }
                 case "ghi":
                     {
+                        grvCDCCNV.CloseEditor();
+                        grvCDCCNV.UpdateCurrentRow();
                         //if (grvCDCCNV.HasColumnErrors) return;
                         if (Savedata() == false)
                         {
@@ -389,12 +397,15 @@ namespace Vs.TimeAttendance
         private bool Savedata()
         {
             string sTB = "CDCC_NV_TMP" + Commons.Modules.UserName;
+            string sTB_CU = "CDCC_CU" + Commons.Modules.UserName;
             string sSql = "";
             try
             {
                 Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sTB, Commons.Modules.ObjSystems.ConvertDatatable(grdData), "");
-               
-                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spSaveCheDoChamCongNV", sTB);
+                Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sTB_CU, dt_Temp, "");
+                DateTime dNgay;
+                dNgay = DateTime.ParseExact(cboNgay.Text, "dd/MM/yyyy", cultures);
+                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spSaveCheDoChamCongNV", dNgay, sTB_CU, sTB);
                 Commons.Modules.ObjSystems.XoaTable(sTB);
                 return true;
             }

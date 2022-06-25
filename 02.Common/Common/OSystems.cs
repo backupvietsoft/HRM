@@ -2219,7 +2219,22 @@ namespace Commons
 
                     case "LabelControl":
                     case "CheckButton":
-                    //case "CheckEdit":
+                    case "CheckEdit":
+                        {
+                            if (Ctl.Name.ToUpper().Substring(0, 4) != "NONN" & Ctl.Name.Length > 4)
+                                Ctl.Text = GetNN(dtNgu, Ctl.Name, frm.Name);
+                            if (Ctl.GetType().Name.ToString() == "CheckEdit")
+                            {
+                                try
+                                {
+                                    Ctl.MouseDoubleClick += delegate (object a, MouseEventArgs b) { CheckEdit_MouseDoubleClick(Ctl, b, frm.Name); };
+                                }
+                                catch
+                                {
+                                }
+                            }
+                            break;
+                        }
                     case "XtraTabPage":
                     case "GroupControl":
                        {

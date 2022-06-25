@@ -44,7 +44,7 @@ namespace Vs.Payroll
             {
                 Commons.Modules.sPS = "0Load";
                 Commons.Modules.sLoad = "0Short";
-                optXCLP.SelectedIndex = 0;
+                //optXCLP.SelectedIndex = 0;
                 Commons.Modules.ObjSystems.LoadCboDonVi(cboDV);
                 Commons.Modules.ObjSystems.LoadCboXiNghiep(cboDV, cboXN);
                 Commons.Modules.ObjSystems.LoadCboTo(cboDV, cboXN, cboTo);
@@ -138,7 +138,7 @@ namespace Vs.Payroll
                 //optXCLP.SelectedIndex = 0  XEM CU
                 DataTable dt = new DataTable();
                 dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spPCDHDMH", Commons.Modules.UserName, Commons.Modules.TypeLanguage, cboDV.EditValue, cboXN.EditValue, cboTo.EditValue,
-                         cboChuyen.EditValue, optXCLP.SelectedIndex, dtNgay));
+                         cboChuyen.EditValue, -1, dtNgay));
                 Commons.Modules.ObjSystems.MLoadXtraGrid(grdPCD, grvPCD, dt, false, false, true, true, true, this.Name);
                 dt.PrimaryKey = new DataColumn[] { dt.Columns["ID_TEMP"] };
                 if (grvPCD.RowCount != 0)
@@ -182,7 +182,7 @@ namespace Vs.Payroll
 
                 DataTable dt = new DataTable();
                 dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spPCDGetCNhan", cboDV.EditValue, cboXN.EditValue, cboTo.EditValue, Commons.Modules.UserName,
-                        Commons.Modules.TypeLanguage, optXCLP.SelectedIndex, iChuyen, iOrd, dtNgay));
+                        Commons.Modules.TypeLanguage, -1, iChuyen, iOrd, dtNgay));
                 dt.PrimaryKey = new DataColumn[] { dt.Columns["ID_CN"] };
                 //Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboCN, dt, "MS_CN", "LMS", "LMS");
                 if(grdTo.DataSource == null)
@@ -293,7 +293,7 @@ namespace Vs.Payroll
 
                 DataTable dt = new DataTable();
                 dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spPCDGetCNhan", cboDV.EditValue, cboXN.EditValue, cboTo.EditValue, Commons.Modules.UserName,
-                        Commons.Modules.TypeLanguage, optXCLP.SelectedIndex, iChuyen, iOrd, dtNgay));
+                        Commons.Modules.TypeLanguage, -1, iChuyen, iOrd, dtNgay));
                 if (cboMSCN.Properties.DataSource == null)
                 {
                     //Commons.Modules.ObjSystems.MLoadLookUpEditN(cboMSCN, dt, "ID_CN", "MS_CN", "MS_CN", "");
@@ -413,21 +413,21 @@ namespace Vs.Payroll
 
         private void optXCLP_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (Commons.Modules.sPS == "0Load") return;
-            btnTSua.Enabled = true;
-            if (optXCLP.SelectedIndex == 1)
-            {
-                cboNgay_EditValueChanged_1(null, null);
-            }
-            else
-            {
-                LoadPCD();
-                LoadCD();
-                LoadCN();
-                LoadCboMSCN();
-                cboNgay_EditValueChanged_1(null, null);
-            }
-            LoadThang();
+            //if (Commons.Modules.sPS == "0Load") return;
+            //btnTSua.Enabled = true;
+            //if (optXCLP.SelectedIndex == 1)
+            //{
+            //    cboNgay_EditValueChanged_1(null, null);
+            //}
+            //else
+            //{
+            //    LoadPCD();
+            //    LoadCD();
+            //    LoadCN();
+            //    LoadCboMSCN();
+            //    cboNgay_EditValueChanged_1(null, null);
+            //}
+            //LoadThang();
         }
 
         private void cboDV_EditValueChanged(object sender, EventArgs e)

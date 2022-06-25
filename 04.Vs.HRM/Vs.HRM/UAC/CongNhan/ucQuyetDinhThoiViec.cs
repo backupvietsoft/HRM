@@ -49,7 +49,7 @@ namespace Vs.HRM
             dDNgay.EditValue = dDenNgay;
             Commons.OSystems.SetDateEditFormat(dTNgay);
             Commons.OSystems.SetDateEditFormat(dDNgay);
-
+            NGAY_VAO_LAMdateEdit.Properties.ReadOnly = true;
             LoadGridCongNhan(-1);
             Commons.Modules.sPS = "";
             LoadCboLyDoThoiViec();
@@ -299,7 +299,7 @@ namespace Vs.HRM
             {
                 if (grvCongNhan.GetFocusedRowCellValue("ID_QDTV").ToString() != string.Empty)
                 {
-                    string sSql = "SELECT * FROM dbo.QUYET_DINH_THOI_VIEC WHERE ID_QDTV = " + grvCongNhan.GetFocusedRowCellValue("ID_QDTV") + "";
+                    string sSql = "SELECT *,CN.NGAY_VAO_LAM FROM dbo.QUYET_DINH_THOI_VIEC QDTV INNER JOIN dbo.CONG_NHAN CN ON CN.ID_CN = QDTV.ID_CN WHERE ID_QDTV = " + grvCongNhan.GetFocusedRowCellValue("ID_QDTV") + "";
                     DataTable dt = new DataTable();
                     dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSql));
                     DataRow row = dt.Rows[0];
@@ -320,6 +320,7 @@ namespace Vs.HRM
                     NGAY_PHEP_COTextEdit.EditValue = row["NGAY_PHEP_CO"];
                     NGAY_PHEP_NGHITextEdit.EditValue = row["NGAY_PHEP_NGHI"];
                     NGAY_THOI_VIECDateEdit.EditValue = row["NGAY_THOI_VIEC"];
+                    NGAY_VAO_LAMdateEdit.EditValue = row["NGAY_VAO_LAM"];
                 }
                 else
                 {

@@ -66,7 +66,7 @@
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 32F),
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 32F),
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 45F)});
-            this.tablePanel1.Size = new System.Drawing.Size(373, 246);
+            this.tablePanel1.Size = new System.Drawing.Size(364, 226);
             this.tablePanel1.TabIndex = 9;
             this.tablePanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.tablePanel1_Paint);
             // 
@@ -97,12 +97,12 @@
             this.windowsUIButton.ContentAlignment = System.Drawing.ContentAlignment.MiddleRight;
             this.windowsUIButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.windowsUIButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.windowsUIButton.Location = new System.Drawing.Point(22, 197);
-            this.windowsUIButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.windowsUIButton.Location = new System.Drawing.Point(20, 167);
+            this.windowsUIButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.windowsUIButton.Name = "windowsUIButton";
-            this.windowsUIButton.Padding = new System.Windows.Forms.Padding(5);
+            this.windowsUIButton.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tablePanel1.SetRow(this.windowsUIButton, 6);
-            this.windowsUIButton.Size = new System.Drawing.Size(330, 44);
+            this.windowsUIButton.Size = new System.Drawing.Size(324, 55);
             this.windowsUIButton.TabIndex = 9;
             this.windowsUIButton.Text = "windowsUIButtonPanel1";
             this.windowsUIButton.UseButtonBackgroundImages = false;
@@ -111,11 +111,11 @@
             // lbNgayIn
             // 
             this.tablePanel1.SetColumn(this.lbNgayIn, 1);
-            this.lbNgayIn.Location = new System.Drawing.Point(36, 38);
-            this.lbNgayIn.Margin = new System.Windows.Forms.Padding(18, 3, 3, 3);
+            this.lbNgayIn.Location = new System.Drawing.Point(32, 33);
+            this.lbNgayIn.Margin = new System.Windows.Forms.Padding(16, 3, 3, 3);
             this.lbNgayIn.Name = "lbNgayIn";
             this.tablePanel1.SetRow(this.lbNgayIn, 1);
-            this.lbNgayIn.Size = new System.Drawing.Size(90, 20);
+            this.lbNgayIn.Size = new System.Drawing.Size(78, 17);
             this.lbNgayIn.TabIndex = 5;
             this.lbNgayIn.Text = "labelControl1";
             // 
@@ -123,14 +123,14 @@
             // 
             this.tablePanel1.SetColumn(this.dNgayIn, 2);
             this.dNgayIn.EditValue = null;
-            this.dNgayIn.Location = new System.Drawing.Point(190, 35);
+            this.dNgayIn.Location = new System.Drawing.Point(185, 30);
             this.dNgayIn.Name = "dNgayIn";
             this.dNgayIn.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.dNgayIn.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.tablePanel1.SetRow(this.dNgayIn, 1);
-            this.dNgayIn.Size = new System.Drawing.Size(163, 26);
+            this.dNgayIn.Size = new System.Drawing.Size(160, 24);
             this.dNgayIn.TabIndex = 3;
             // 
             // rdo_ChonBaoCao
@@ -138,15 +138,15 @@
             this.tablePanel1.SetColumn(this.rdo_ChonBaoCao, 1);
             this.tablePanel1.SetColumnSpan(this.rdo_ChonBaoCao, 2);
             this.rdo_ChonBaoCao.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rdo_ChonBaoCao.Location = new System.Drawing.Point(21, 77);
+            this.rdo_ChonBaoCao.Location = new System.Drawing.Point(19, 66);
             this.rdo_ChonBaoCao.Name = "rdo_ChonBaoCao";
             this.rdo_ChonBaoCao.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] {
-            new DevExpress.XtraEditors.Controls.RadioGroupItem("rdo_QuyetDinhDieuChuyen", "Quyết định điều chuyển"),
+            new DevExpress.XtraEditors.Controls.RadioGroupItem("rdo_QuyetDinhDieuChuyen", "Quyết định điều chuyển", true, "rdo_QuyetDinhDieuChuyen"),
             new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Quyết định tuyển dụng", true, "rdo_QuyetDinhTuyenDung"),
-            new DevExpress.XtraEditors.Controls.RadioGroupItem("rdo_QuaTrinhCongTacCN", "Quá trình công tác cá nhân")});
+            new DevExpress.XtraEditors.Controls.RadioGroupItem("rdo_QuaTrinhCongTacCN", "Quá trình công tác cá nhân", true, "rdo_QuaTrinhCongTacCN")});
             this.tablePanel1.SetRow(this.rdo_ChonBaoCao, 3);
             this.tablePanel1.SetRowSpan(this.rdo_ChonBaoCao, 3);
-            this.rdo_ChonBaoCao.Size = new System.Drawing.Size(332, 112);
+            this.rdo_ChonBaoCao.Size = new System.Drawing.Size(326, 94);
             this.rdo_ChonBaoCao.TabIndex = 1;
             // 
             // NONN_HoTenCN
@@ -160,18 +160,18 @@
             this.tablePanel1.SetColumnSpan(this.NONN_HoTenCN, 2);
             this.NONN_HoTenCN.Dock = System.Windows.Forms.DockStyle.Fill;
             this.NONN_HoTenCN.LineStyle = System.Drawing.Drawing2D.DashStyle.Dot;
-            this.NONN_HoTenCN.Location = new System.Drawing.Point(21, 3);
+            this.NONN_HoTenCN.Location = new System.Drawing.Point(19, 3);
             this.NONN_HoTenCN.Name = "NONN_HoTenCN";
             this.tablePanel1.SetRow(this.NONN_HoTenCN, 0);
-            this.NONN_HoTenCN.Size = new System.Drawing.Size(332, 26);
+            this.NONN_HoTenCN.Size = new System.Drawing.Size(326, 21);
             this.NONN_HoTenCN.TabIndex = 0;
             this.NONN_HoTenCN.Text = "labelControl1";
             // 
             // frmInQTCT
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(373, 246);
+            this.ClientSize = new System.Drawing.Size(364, 226);
             this.Controls.Add(this.tablePanel1);
             this.MaximizeBox = false;
             this.Name = "frmInQTCT";

@@ -1755,7 +1755,7 @@ namespace Vs.Payroll
                 // If the file name is not an empty string open it for saving.
                 if (res == DialogResult.OK)
                 {
-                    Commons.TemplateExcel.FillReport(saveFileDialog.FileName, System.Windows.Forms.Application.StartupPath + "\\lib\\Template\\TemplatePhieuNhanLuong.xlsx", ds, new string[] { "{", "}" });
+                    Commons.TemplateExcel.FillReport(saveFileDialog.FileName, System.Windows.Forms.Application.StartupPath + "\\Template\\TemplatePhieuNhanLuong.xlsx", ds, new string[] { "{", "}" });
                     Process.Start(saveFileDialog.FileName);
                 }
             }
@@ -1799,7 +1799,7 @@ namespace Vs.Payroll
                 // If the file name is not an empty string open it for saving.
                 if (res == DialogResult.OK)
                 {
-                    Commons.TemplateExcel.FillReport(saveFileDialog.FileName, System.Windows.Forms.Application.StartupPath + "\\lib\\Template\\TemplatePhieuLuong_GT.xlsx", ds, new string[] { "{", "}" });
+                    Commons.TemplateExcel.FillReport(saveFileDialog.FileName, System.Windows.Forms.Application.StartupPath + "\\Template\\TemplatePhieuLuong_GT.xlsx", ds, new string[] { "{", "}" });
                     Process.Start(saveFileDialog.FileName);
                 }
             }
@@ -1843,7 +1843,7 @@ namespace Vs.Payroll
                 // If the file name is not an empty string open it for saving.
                 if (res == DialogResult.OK)
                 {
-                    Commons.TemplateExcel.FillReport(saveFileDialog.FileName, System.Windows.Forms.Application.StartupPath + "\\lib\\Template\\TemplatePhieuLuongQC.xlsx", ds, new string[] { "{", "}" });
+                    Commons.TemplateExcel.FillReport(saveFileDialog.FileName, System.Windows.Forms.Application.StartupPath + "\\Template\\TemplatePhieuLuongQC.xlsx", ds, new string[] { "{", "}" });
                     Process.Start(saveFileDialog.FileName);
                 }
             }

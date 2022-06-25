@@ -162,7 +162,7 @@ namespace Vs.HRM
                                         {
                                             if (saveFileDialog.FileName != "")
                                             {
-                                                Commons.TemplateExcel.FillReport(saveFileDialog.FileName, Application.StartupPath + "\\lib\\Template\\TemplateTaiNanLaoDong.xlsx", ds, new string[] { "{", "}" });
+                                                Commons.TemplateExcel.FillReport(saveFileDialog.FileName, Application.StartupPath + "\\Template\\TemplateTaiNanLaoDong.xlsx", ds, new string[] { "{", "}" });
                                                 Process.Start(saveFileDialog.FileName);
                                             }
                                         }

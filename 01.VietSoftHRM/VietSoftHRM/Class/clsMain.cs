@@ -25,8 +25,6 @@ namespace VietSoftHRM
                 Commons.IConnections.Password = Commons.Modules.ObjSystems.Decrypt(ds.Tables[0].Rows[0]["P"].ToString(), true);
 
 
-                Commons.IConnections.Server = @".\SQL2017";
-                Commons.IConnections.Password = "123";
 
                 Commons.Modules.sIP = Commons.Modules.ObjSystems.Decrypt(ds.Tables[0].Rows[0]["IP"].ToString(), true);
                 Commons.Modules.ChangLanguage = false;

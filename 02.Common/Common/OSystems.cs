@@ -2195,10 +2195,25 @@ namespace Commons
 
                     case "LabelControl":
                     case "CheckButton":
-                    //case "CheckEdit":
+                    case "CheckEdit":
+                        {
+                            if (Ctl.Name.ToUpper().Substring(0, 4) != "NONN" & Ctl.Name.Length > 4)
+                                Ctl.Text = GetNN(dtNgu, Ctl.Name, frm.Name);
+                            if (Ctl.GetType().Name.ToString() == "CheckEdit")
+                            {
+                                try
+                                {
+                                    Ctl.MouseDoubleClick += delegate (object a, MouseEventArgs b) { CheckEdit_MouseDoubleClick(Ctl, b, frm.Name); };
+                                }
+                                catch
+                                {
+                                }
+                            }
+                            break;
+                        }
                     case "XtraTabPage":
                     case "GroupControl":
-                        {
+                       {
                             if (Ctl.Name.ToUpper().Substring(0, 4) != "NONN" & Ctl.Name.Length > 4)
                                 Ctl.Text = GetNN(dtNgu, Ctl.Name, frm.Name);// Modules.ObjLanguages.GetLanguage(Modules.ModuleName, frm.Name, Ctl.Name, Modules.TypeLanguage)
                             if (Ctl.GetType().Name.ToString() == "LabelControl")
@@ -3898,7 +3913,7 @@ namespace Commons
             try
             {
                 DataTable dt = new DataTable();
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboLDV", Commons.Modules.UserName, Commons.Modules.TypeLanguage, 1));
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboLDV", Commons.Modules.UserName, Commons.Modules.TypeLanguage, 1, -1));
                 Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboSearch_LDV, dt, "ID_LDV", "TEN_LDV", "TEN_LDV");
                 cboSearch_LDV.EditValue = -1;
             }

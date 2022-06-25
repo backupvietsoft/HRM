@@ -489,8 +489,8 @@ namespace Vs.HRM
             try
             {
                 if (Commons.Modules.sLoad == "0Load") return;
-                Commons.Modules.ObjSystems.MLoadLookUpEdit(cboBAC_LUONG, Commons.Modules.ObjSystems.DataBacLuong(Convert.ToInt64(cboNgachLuong.EditValue), DateTime.Now, false), "ID_BL", "TEN_BL", "TEN_BL");
                 ngayhethan(Convert.ToInt32(ID_LHDLDLookUpEdit.EditValue));
+                Commons.Modules.ObjSystems.MLoadLookUpEdit(cboBAC_LUONG, Commons.Modules.ObjSystems.DataBacLuong(Convert.ToInt64(cboNgachLuong.EditValue), DateTime.Now, false), "ID_BL", "TEN_BL", "TEN_BL");
             }
             catch
             {
@@ -534,6 +534,25 @@ namespace Vs.HRM
             }
             catch
             {
+            }
+        }
+
+        private void cboBAC_LUONG_EditValueChanged(object sender, EventArgs e)
+        {
+            if (Commons.Modules.sLoad == "0Load") return;
+            try
+            {
+                string strSQL = "SELECT MUC_LUONG, PC_DH + PC_KY_NANG PHU_CAP FROM dbo.BAC_LUONG WHERE ID_BL = " + cboBAC_LUONG.EditValue + "";
+                DataTable dt = new DataTable();
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr,CommandType.Text,strSQL));
+                MUC_LUONG_CHINHTextEdit.EditValue = string.IsNullOrEmpty(dt.Rows[0]["MUC_LUONG"].ToString()) ? 0 : Convert.ToDouble(dt.Rows[0]["MUC_LUONG"]);
+                CHI_SO_PHU_CAPTextEdit.EditValue = string.IsNullOrEmpty(dt.Rows[0]["PHU_CAP"].ToString()) ? 0 : Convert.ToDouble(dt.Rows[0]["PHU_CAP"]);
+            }
+            catch
+            {
+                MUC_LUONG_CHINHTextEdit.EditValue = 0;
+                CHI_SO_PHU_CAPTextEdit.EditValue = 0;
+                MUC_LUONG_THUC_LINHTextEdit.EditValue = 0;
             }
         }
     }

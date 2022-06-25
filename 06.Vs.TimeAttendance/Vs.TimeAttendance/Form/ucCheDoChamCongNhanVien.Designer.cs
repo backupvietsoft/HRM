@@ -256,7 +256,6 @@
             this.calNgay.ShowClearButton = true;
             this.calNgay.Size = new System.Drawing.Size(315, 280);
             this.calNgay.TabIndex = 1;
-            this.calNgay.VistaCalendarViewStyle = DevExpress.XtraEditors.VistaCalendarViewStyle.YearView;
             this.calNgay.DateTimeCommit += new System.EventHandler(this.calNgay_DateTimeCommit);
             // 
             // cboNgay

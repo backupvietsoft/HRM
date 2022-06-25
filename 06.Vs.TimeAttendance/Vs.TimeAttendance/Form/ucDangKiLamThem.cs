@@ -54,7 +54,7 @@ namespace Vs.TimeAttendance
         /// <param name="e"></param>
         private void ucDangKiLamThem_Load(object sender, EventArgs e)
         {
-            Commons.Modules.sPS = "0Load";
+            Commons.Modules.sLoad = "0Load";
 
             repositoryItemTimeEdit1.TimeEditStyle = TimeEditStyle.TouchUI;
             repositoryItemTimeEdit1.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.DateTimeAdvancingCaret;
@@ -72,9 +72,9 @@ namespace Vs.TimeAttendance
             Commons.Modules.ObjSystems.LoadCboXiNghiep(cboDonVi, cboXiNghiep);
             Commons.Modules.ObjSystems.LoadCboTo(cboDonVi, cboXiNghiep, cboTo);
 
-            DataTable dtNCC = new DataTable();
-            dtNCC.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboNhomChamCong", Commons.Modules.UserName, Commons.Modules.TypeLanguage, false));
-            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_NCC, dtNCC, "ID_NHOM", "TEN_NHOM", "TEN_NHOM");
+            //DataTable dtNCC = new DataTable();
+            //dtNCC.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboNhomChamCong", Commons.Modules.UserName, Commons.Modules.TypeLanguage, false));
+            //Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_NCC, dtNCC, "ID_NHOM", "TEN_NHOM", "TEN_NHOM");
 
             LoadGridCongNhan();
             LoadGrdDSLamThem();
@@ -113,7 +113,7 @@ namespace Vs.TimeAttendance
             cboCa.EditValueChanged += CboCa_EditValueChanged;
             //cboCa.ButtonClick += CboCa_EditValueChanged;
             //cboCa.Click += CboCa_EditValueChanged;
-            Commons.Modules.sPS = "";
+            Commons.Modules.sLoad = "";
             grvCongNhan_FocusedRowChanged(null, null);
         }
 
@@ -264,7 +264,15 @@ namespace Vs.TimeAttendance
                 grvCongNhan.Columns["ID_CN"].Visible = false;
                 grvCongNhan.Columns["MS_CN"].OptionsColumn.AllowEdit = false;
                 grvCongNhan.Columns["HO_TEN"].OptionsColumn.AllowEdit = false;
+                grvCongNhan.Columns["TEN_NHOM"].OptionsColumn.AllowEdit = false;
+                grvCongNhan.Columns["CA"].OptionsColumn.AllowEdit = false;
+                grvCongNhan.Columns["HO_TEN"].OptionsColumn.AllowEdit = false;
                 grvCongNhan.Columns["CHON"].Visible = false;
+                grvCongNhan.Columns["ID_NHOM"].Visible = false;
+                grvCongNhan.Columns["GIO_BD"].ColumnEdit = this.repositoryItemTimeEdit1;
+                grvCongNhan.Columns["GIO_KT"].ColumnEdit = this.repositoryItemTimeEdit1;
+                grvCongNhan.Columns["GIO_BD"].OptionsColumn.AllowEdit = false;
+                grvCongNhan.Columns["GIO_KT"].OptionsColumn.AllowEdit = false;
                 if (isAdd == false)
                 {
                     grvCongNhan.OptionsSelection.MultiSelect = false;
@@ -303,13 +311,13 @@ namespace Vs.TimeAttendance
         /// <param name="e"></param>
         private void cboDonVi_EditValueChanged(object sender, EventArgs e)
         {
-            if (Commons.Modules.sPS == "0Load") return;
-            Commons.Modules.sPS = "0Load";
+            if (Commons.Modules.sLoad == "0Load") return;
+            Commons.Modules.sLoad = "0Load";
             Commons.Modules.ObjSystems.LoadCboXiNghiep(cboDonVi, cboXiNghiep);
             Commons.Modules.ObjSystems.LoadCboTo(cboDonVi, cboXiNghiep, cboTo);
             LoadGridCongNhan();
             LoadGrdDSLamThem();
-            Commons.Modules.sPS = "";
+            Commons.Modules.sLoad = "";
             grvCongNhan_FocusedRowChanged(null, null);
         }
 
@@ -320,12 +328,12 @@ namespace Vs.TimeAttendance
         /// <param name="e"></param>
         private void cboXiNghiep_EditValueChanged(object sender, EventArgs e)
         {
-            if (Commons.Modules.sPS == "0Load") return;
-            Commons.Modules.sPS = "0Load";
+            if (Commons.Modules.sLoad == "0Load") return;
+            Commons.Modules.sLoad = "0Load";
             Commons.Modules.ObjSystems.LoadCboTo(cboDonVi, cboXiNghiep, cboTo);
             LoadGridCongNhan();
             LoadGrdDSLamThem();
-            Commons.Modules.sPS = "";
+            Commons.Modules.sLoad = "";
             grvCongNhan_FocusedRowChanged(null, null);
             if (grvCongNhan.RowCount == 0)
                 grdLamThem.DataSource = null;
@@ -338,12 +346,12 @@ namespace Vs.TimeAttendance
         /// <param name="e"></param>
         private void cboTo_EditValueChanged(object sender, EventArgs e)
         {
-            if (Commons.Modules.sPS == "0Load") return;
-            Commons.Modules.sPS = "0Load";
+            if (Commons.Modules.sLoad == "0Load") return;
+            Commons.Modules.sLoad = "0Load";
             LoadGridCongNhan();
             LoadGrdDSLamThem();
 
-            Commons.Modules.sPS = "";
+            Commons.Modules.sLoad = "";
             grvCongNhan_FocusedRowChanged(null, null);
             if (grvCongNhan.RowCount == 0)
                 grdLamThem.DataSource = null;
@@ -356,11 +364,11 @@ namespace Vs.TimeAttendance
         /// <param name="e"></param>
         private void cboNgay_EditValueChanged(object sender, EventArgs e)
         {
-            if (Commons.Modules.sPS == "0Load") return;
-            Commons.Modules.sPS = "0Load";
+            if (Commons.Modules.sLoad == "0Load") return;
+            Commons.Modules.sLoad = "0Load";
             LoadGridCongNhan();
             LoadGrdDSLamThem();
-            Commons.Modules.sPS = "";
+            Commons.Modules.sLoad = "";
             grvCongNhan_FocusedRowChanged(null, null);
         }
         #endregion
@@ -864,7 +872,7 @@ namespace Vs.TimeAttendance
 
         private void grvCongNhan_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
-            if (Commons.Modules.sPS == "0Load") return;
+            if (Commons.Modules.sLoad == "0Load") return;
             DataTable dtTmp = new DataTable();
             String sIDCN;
             try

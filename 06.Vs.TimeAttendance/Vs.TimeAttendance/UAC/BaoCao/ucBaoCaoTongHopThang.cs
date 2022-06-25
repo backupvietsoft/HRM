@@ -945,9 +945,9 @@ namespace Vs.TimeAttendance
                 dtBCThang = new DataTable();
                 dtBCThang = ds.Tables[0].Copy();
 
-                DataTable dtSLXN = new DataTable(); // Lấy số lượng xí nghiệp
-                dtSLXN = ds.Tables[1].Copy();
-                int slxn = Convert.ToInt32(dtSLXN.Rows[0][0]);
+                DataTable dtSLTO = new DataTable(); // Lấy số lượng xí nghiệp
+                dtSLTO = ds.Tables[1].Copy();
+                int slTO = Convert.ToInt32(dtSLTO.Rows[0][0]);
 
                 SaveExcelFile = SaveFiles("Excel Workbook |*.xlsx|Excel 97-2003 Workbook |*.xls|Word Document |*.docx|Rich Text Format |*.rtf|PDF File |*.pdf|Web Page |*.html|Single File Web Page |*.mht");
                 if (SaveExcelFile == "")
@@ -1143,18 +1143,18 @@ namespace Vs.TimeAttendance
                 int rowBD = 7;
                 string cotCN_A = "";
                 string cotCN_B = "";
-                string[] TEN_XN = dtBCThang.AsEnumerable().Select(r => r.Field<string>("TEN_XN")).Distinct().ToArray();
+                string[] TEN_TO = dtBCThang.AsEnumerable().Select(r => r.Field<string>("TEN_TO")).Distinct().ToArray();
                 string chanVongDau = "Chan";// chặn lần đầu để lần đầu tiên sẽ load data từ cột số 7 trở đi, các vòng lặp tiếp theo bỏ chặn
                 DataTable dt_temp = new DataTable();
                 dt_temp = ds.Tables[0].Copy(); // Dữ row count data
 
 
-                for (int i = 0; i < TEN_XN.Count(); i++)
+                for (int i = 0; i < TEN_TO.Count(); i++)
                 {
 
 
                     dtBCThang = ds.Tables[0].Copy();
-                    dtBCThang = dtBCThang.AsEnumerable().Where(r => r.Field<string>("TEN_XN") == TEN_XN[i]).CopyToDataTable().Copy();
+                    dtBCThang = dtBCThang.AsEnumerable().Where(r => r.Field<string>("TEN_TO") == TEN_TO[i]).CopyToDataTable().Copy();
                     DataRow[] dr = dtBCThang.Select();
                     current_dr = dr.Count();
                     string[,] rowData = new string[dr.Count(), dtBCThang.Columns.Count];
@@ -1169,7 +1169,7 @@ namespace Vs.TimeAttendance
                                     //cotCN = cotCN + (col + 1) + ",";
                                     cotCN_A = CharacterIncrement(col);
                                     cotCN_B = CharacterIncrement(col + 1);
-                                    Range ToMau = oSheet.get_Range("" + cotCN_A + "5", cotCN_B + "" + (dt_temp.Rows.Count + 6 + (slxn * 2)) + ""); //vi du slxn = 3 , 3 dong ten xi + 3 dong tong cua xi nghiep do nen 3*2
+                                    Range ToMau = oSheet.get_Range("" + cotCN_A + "5", cotCN_B + "" + (dt_temp.Rows.Count + 6 + (slTO * 2)) + ""); //vi du slxn = 3 , 3 dong ten xi + 3 dong tong cua xi nghiep do nen 3*2
                                     ToMau.Interior.Color = Color.FromArgb(255, 128, 0);
                                     //ToMau.NumberFormat = "#,##0.0;(#,##0.0); ; ";
                                 }
@@ -1198,10 +1198,10 @@ namespace Vs.TimeAttendance
                     // Tạo group xí nghiệp
                     Range row_groupXI_NGHIEP_Format = oSheet.get_Range("A" + rowBD + "".ToString(), lastColumn + "" + rowBD + "".ToString()); //27 + 31
                     row_groupXI_NGHIEP_Format.Interior.Color = Color.FromArgb(0, 255, 255);
-                    oSheet.Cells[rowBD, 1] = "BỘ PHẬN";
+                    oSheet.Cells[rowBD, 1] = "TỔ";
                     oSheet.Range[oSheet.Cells[Convert.ToInt32(rowBD), 1], oSheet.Cells[Convert.ToInt32(rowBD), 2]].Merge();
                     oSheet.Range[oSheet.Cells[Convert.ToInt32(rowBD), 1], oSheet.Cells[Convert.ToInt32(rowBD), 2]].Font.Bold = true;
-                    oSheet.Cells[rowBD, 3] = TEN_XN[i].ToString();
+                    oSheet.Cells[rowBD, 3] = TEN_TO[i].ToString();
 
                     //Đổ dữ liệu của xí nghiệp
                     oSheet.get_Range("A" + (rowBD + 1) + "", lastColumn + (rowCnt + 1).ToString()).Value2 = rowData;

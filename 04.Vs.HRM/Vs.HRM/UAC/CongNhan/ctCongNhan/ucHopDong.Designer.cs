@@ -300,6 +300,7 @@
             this.cboBAC_LUONG.Size = new System.Drawing.Size(163, 24);
             this.cboBAC_LUONG.StyleController = this.dataLayoutControl1;
             this.cboBAC_LUONG.TabIndex = 74;
+            this.cboBAC_LUONG.EditValueChanged += new System.EventHandler(this.cboBAC_LUONG_EditValueChanged);
             // 
             // SO_HDLDTextEdit
             // 

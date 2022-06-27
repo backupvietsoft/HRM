@@ -127,18 +127,18 @@
             // layoutControlItem1
             // 
             this.layoutControlItem1.Control = this.grpLamThem;
-            this.layoutControlItem1.Location = new System.Drawing.Point(346, 71);
+            this.layoutControlItem1.Location = new System.Drawing.Point(422, 71);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(445, 266);
+            this.layoutControlItem1.Size = new System.Drawing.Size(369, 266);
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
             // 
             // grpLamThem
             // 
             this.grpLamThem.Controls.Add(this.grdLamThem);
-            this.grpLamThem.Location = new System.Drawing.Point(352, 77);
+            this.grpLamThem.Location = new System.Drawing.Point(428, 77);
             this.grpLamThem.Name = "grpLamThem";
-            this.grpLamThem.Size = new System.Drawing.Size(443, 264);
+            this.grpLamThem.Size = new System.Drawing.Size(367, 264);
             this.grpLamThem.TabIndex = 19;
             this.grpLamThem.Text = "groupLamThem";
             // 
@@ -149,7 +149,7 @@
             this.grdLamThem.Location = new System.Drawing.Point(2, 21);
             this.grdLamThem.MainView = this.grvLamThem;
             this.grdLamThem.Name = "grdLamThem";
-            this.grdLamThem.Size = new System.Drawing.Size(439, 241);
+            this.grdLamThem.Size = new System.Drawing.Size(363, 241);
             this.grdLamThem.TabIndex = 13;
             this.grdLamThem.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grvLamThem});
@@ -170,7 +170,7 @@
             this.layoutControlItem2.Control = this.grpCongNhan;
             this.layoutControlItem2.Location = new System.Drawing.Point(0, 71);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(346, 266);
+            this.layoutControlItem2.Size = new System.Drawing.Size(422, 266);
             this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem2.TextVisible = false;
             // 
@@ -181,7 +181,7 @@
             this.grpCongNhan.Controls.Add(this.grdCongNhan);
             this.grpCongNhan.Location = new System.Drawing.Point(6, 77);
             this.grpCongNhan.Name = "grpCongNhan";
-            this.grpCongNhan.Size = new System.Drawing.Size(344, 264);
+            this.grpCongNhan.Size = new System.Drawing.Size(420, 264);
             this.grpCongNhan.TabIndex = 0;
             this.grpCongNhan.Text = "groupCongNhan";
             // 
@@ -252,7 +252,7 @@
             this.grdCongNhan.Location = new System.Drawing.Point(2, 21);
             this.grdCongNhan.MainView = this.grvCongNhan;
             this.grdCongNhan.Name = "grdCongNhan";
-            this.grdCongNhan.Size = new System.Drawing.Size(340, 241);
+            this.grdCongNhan.Size = new System.Drawing.Size(416, 241);
             this.grdCongNhan.TabIndex = 4;
             this.grdCongNhan.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grvCongNhan,

@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions1 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions2 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule1 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions3 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions4 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule2 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             this.tablePanel1 = new DevExpress.Utils.Layout.TablePanel();
             this.btnALL = new DevExpress.XtraBars.Docking2010.WindowsUIButtonPanel();
             this.dataLayoutControl1 = new DevExpress.XtraDataLayout.DataLayoutControl();
@@ -96,11 +96,11 @@
             this.btnALL.AppearanceButton.Pressed.Options.UseFont = true;
             this.btnALL.AppearanceButton.Pressed.Options.UseImage = true;
             this.btnALL.AppearanceButton.Pressed.Options.UseTextOptions = true;
-            windowsUIButtonImageOptions1.ImageUri.Uri = "SaveAll";
-            windowsUIButtonImageOptions2.ImageUri.Uri = "richedit/clearheaderandfooter";
+            windowsUIButtonImageOptions3.ImageUri.Uri = "SaveAll";
+            windowsUIButtonImageOptions4.ImageUri.Uri = "richedit/clearheaderandfooter";
             this.btnALL.Buttons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] {
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions1, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "luu", -1, false),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions2, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "huy", -1, false)});
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions3, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "luu", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions4, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "huy", -1, false)});
             this.tablePanel1.SetColumn(this.btnALL, 0);
             this.tablePanel1.SetColumnSpan(this.btnALL, 3);
             this.btnALL.ContentAlignment = System.Drawing.ContentAlignment.MiddleRight;
@@ -133,38 +133,42 @@
             // 
             // txtSTT
             // 
-            this.txtSTT.Location = new System.Drawing.Point(152, 102);
+            this.txtSTT.Location = new System.Drawing.Point(126, 84);
             this.txtSTT.Name = "txtSTT";
-            this.txtSTT.Size = new System.Drawing.Size(470, 26);
+            this.txtSTT.Properties.Appearance.Options.UseTextOptions = true;
+            this.txtSTT.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.txtSTT.Properties.Mask.EditMask = "N0";
+            this.txtSTT.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
+            this.txtSTT.Size = new System.Drawing.Size(502, 24);
             this.txtSTT.StyleController = this.dataLayoutControl1;
             this.txtSTT.TabIndex = 8;
             // 
             // txtTEN_CTY_DAY_DU
             // 
-            this.txtTEN_CTY_DAY_DU.Location = new System.Drawing.Point(152, 72);
+            this.txtTEN_CTY_DAY_DU.Location = new System.Drawing.Point(126, 58);
             this.txtTEN_CTY_DAY_DU.Name = "txtTEN_CTY_DAY_DU";
-            this.txtTEN_CTY_DAY_DU.Size = new System.Drawing.Size(470, 26);
+            this.txtTEN_CTY_DAY_DU.Size = new System.Drawing.Size(502, 24);
             this.txtTEN_CTY_DAY_DU.StyleController = this.dataLayoutControl1;
             this.txtTEN_CTY_DAY_DU.TabIndex = 6;
             // 
             // txtTEN_NGAN
             // 
-            this.txtTEN_NGAN.Location = new System.Drawing.Point(152, 42);
+            this.txtTEN_NGAN.Location = new System.Drawing.Point(126, 32);
             this.txtTEN_NGAN.Name = "txtTEN_NGAN";
-            this.txtTEN_NGAN.Size = new System.Drawing.Size(470, 26);
+            this.txtTEN_NGAN.Size = new System.Drawing.Size(502, 24);
             this.txtTEN_NGAN.StyleController = this.dataLayoutControl1;
             this.txtTEN_NGAN.TabIndex = 5;
             // 
             // txtMA_SO
             // 
-            this.txtMA_SO.Location = new System.Drawing.Point(152, 12);
+            this.txtMA_SO.Location = new System.Drawing.Point(126, 6);
             this.txtMA_SO.Name = "txtMA_SO";
-            this.txtMA_SO.Size = new System.Drawing.Size(470, 26);
+            this.txtMA_SO.Size = new System.Drawing.Size(502, 24);
             this.txtMA_SO.StyleController = this.dataLayoutControl1;
             this.txtMA_SO.TabIndex = 4;
-            conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule1.ErrorText = "This value is not valid";
-            this.dxValidationProvider1.SetValidationRule(this.txtMA_SO, conditionValidationRule1);
+            conditionValidationRule2.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule2.ErrorText = "This value is not valid";
+            this.dxValidationProvider1.SetValidationRule(this.txtMA_SO, conditionValidationRule2);
             // 
             // layoutControlGroup1
             // 
@@ -188,32 +192,32 @@
             this.lblMA_SO.Control = this.txtMA_SO;
             this.lblMA_SO.Location = new System.Drawing.Point(0, 0);
             this.lblMA_SO.Name = "lblMA_SO";
-            this.lblMA_SO.Size = new System.Drawing.Size(614, 30);
-            this.lblMA_SO.TextSize = new System.Drawing.Size(137, 20);
+            this.lblMA_SO.Size = new System.Drawing.Size(624, 26);
+            this.lblMA_SO.TextSize = new System.Drawing.Size(117, 20);
             // 
             // lblTEN_NGAN
             // 
             this.lblTEN_NGAN.Control = this.txtTEN_NGAN;
-            this.lblTEN_NGAN.Location = new System.Drawing.Point(0, 30);
+            this.lblTEN_NGAN.Location = new System.Drawing.Point(0, 26);
             this.lblTEN_NGAN.Name = "lblTEN_NGAN";
-            this.lblTEN_NGAN.Size = new System.Drawing.Size(614, 30);
-            this.lblTEN_NGAN.TextSize = new System.Drawing.Size(137, 20);
+            this.lblTEN_NGAN.Size = new System.Drawing.Size(624, 26);
+            this.lblTEN_NGAN.TextSize = new System.Drawing.Size(117, 17);
             // 
             // lblTEN_CTY_DAY_DU
             // 
             this.lblTEN_CTY_DAY_DU.Control = this.txtTEN_CTY_DAY_DU;
-            this.lblTEN_CTY_DAY_DU.Location = new System.Drawing.Point(0, 60);
+            this.lblTEN_CTY_DAY_DU.Location = new System.Drawing.Point(0, 52);
             this.lblTEN_CTY_DAY_DU.Name = "lblTEN_CTY_DAY_DU";
-            this.lblTEN_CTY_DAY_DU.Size = new System.Drawing.Size(614, 30);
-            this.lblTEN_CTY_DAY_DU.TextSize = new System.Drawing.Size(137, 20);
+            this.lblTEN_CTY_DAY_DU.Size = new System.Drawing.Size(624, 26);
+            this.lblTEN_CTY_DAY_DU.TextSize = new System.Drawing.Size(117, 17);
             // 
             // ItemForSTT
             // 
             this.ItemForSTT.Control = this.txtSTT;
-            this.ItemForSTT.Location = new System.Drawing.Point(0, 90);
+            this.ItemForSTT.Location = new System.Drawing.Point(0, 78);
             this.ItemForSTT.Name = "ItemForSTT";
-            this.ItemForSTT.Size = new System.Drawing.Size(614, 267);
-            this.ItemForSTT.TextSize = new System.Drawing.Size(137, 20);
+            this.ItemForSTT.Size = new System.Drawing.Size(624, 289);
+            this.ItemForSTT.TextSize = new System.Drawing.Size(117, 17);
             // 
             // frmEditDOI_TAC
             // 

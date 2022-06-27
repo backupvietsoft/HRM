@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using Microsoft.ApplicationBlocks.Data;
 using DevExpress.XtraBars.Navigation;
 using Vs.HRM;
+using Vs.Payroll;
 
 namespace VietSoftHRM
 {
@@ -116,6 +117,16 @@ namespace VietSoftHRM
                         break;
                     }
 
+                case "mnuDangKyBHXH":
+                    {
+                        ucDangKyBHXH ttn = new ucDangKyBHXH();
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(ttn);
+                        Commons.Modules.ObjSystems.HideWaitForm();
+                        ttn.Dock = DockStyle.Fill;
+                        break;
+                    }
+
                 case "mnuKTTenKhongDauSTK":
                     {
                         ucThongTinChuyenKhoan tc = new ucThongTinChuyenKhoan();
@@ -182,6 +193,16 @@ namespace VietSoftHRM
                         panel2.Controls.Clear();
                         panel2.Controls.Add(thoiviec);
                         thoiviec.Dock = DockStyle.Fill;
+                        break;
+                    }
+
+                case "mnuDangKyBHXH":
+                    {
+                        ucDangKyBHXH ttn = new ucDangKyBHXH();
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(ttn);
+                        Commons.Modules.ObjSystems.HideWaitForm();
+                        ttn.Dock = DockStyle.Fill;
                         break;
                     }
                 case "mnuNhanSu":

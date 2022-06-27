@@ -84,9 +84,9 @@
             // 
             // TEN_QUANTextEdit
             // 
-            this.TEN_QUANTextEdit.Location = new System.Drawing.Point(108, 72);
+            this.TEN_QUANTextEdit.Location = new System.Drawing.Point(88, 57);
             this.TEN_QUANTextEdit.Name = "TEN_QUANTextEdit";
-            this.TEN_QUANTextEdit.Size = new System.Drawing.Size(432, 26);
+            this.TEN_QUANTextEdit.Size = new System.Drawing.Size(390, 24);
             this.TEN_QUANTextEdit.StyleController = this.dataLayoutControl1;
             this.TEN_QUANTextEdit.TabIndex = 4;
             conditionValidationRule4.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
@@ -105,35 +105,35 @@
             this.dataLayoutControl1.Controls.Add(this.ID_QGSearchLookUpEdit);
             this.dataLayoutControl1.Controls.Add(this.ID_TPSearchLookUpEdit);
             this.dataLayoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataLayoutControl1.Location = new System.Drawing.Point(73, 21);
+            this.dataLayoutControl1.Location = new System.Drawing.Point(64, 18);
             this.dataLayoutControl1.Name = "dataLayoutControl1";
             this.dataLayoutControl1.Root = this.Root;
             this.tablePanel1.SetRow(this.dataLayoutControl1, 1);
-            this.dataLayoutControl1.Size = new System.Drawing.Size(552, 340);
+            this.dataLayoutControl1.Size = new System.Drawing.Size(483, 288);
             this.dataLayoutControl1.TabIndex = 0;
             this.dataLayoutControl1.Text = "dataLayoutControl1";
             // 
             // TEN_QUAN_ATextEdit
             // 
-            this.TEN_QUAN_ATextEdit.Location = new System.Drawing.Point(108, 102);
+            this.TEN_QUAN_ATextEdit.Location = new System.Drawing.Point(88, 83);
             this.TEN_QUAN_ATextEdit.Name = "TEN_QUAN_ATextEdit";
-            this.TEN_QUAN_ATextEdit.Size = new System.Drawing.Size(432, 26);
+            this.TEN_QUAN_ATextEdit.Size = new System.Drawing.Size(390, 24);
             this.TEN_QUAN_ATextEdit.StyleController = this.dataLayoutControl1;
             this.TEN_QUAN_ATextEdit.TabIndex = 5;
             // 
             // TEN_QUAN_HTextEdit
             // 
-            this.TEN_QUAN_HTextEdit.Location = new System.Drawing.Point(108, 132);
+            this.TEN_QUAN_HTextEdit.Location = new System.Drawing.Point(88, 109);
             this.TEN_QUAN_HTextEdit.Name = "TEN_QUAN_HTextEdit";
-            this.TEN_QUAN_HTextEdit.Size = new System.Drawing.Size(432, 26);
+            this.TEN_QUAN_HTextEdit.Size = new System.Drawing.Size(390, 24);
             this.TEN_QUAN_HTextEdit.StyleController = this.dataLayoutControl1;
             this.TEN_QUAN_HTextEdit.TabIndex = 6;
             // 
             // MS_QUANTextEdit
             // 
-            this.MS_QUANTextEdit.Location = new System.Drawing.Point(108, 42);
+            this.MS_QUANTextEdit.Location = new System.Drawing.Point(88, 31);
             this.MS_QUANTextEdit.Name = "MS_QUANTextEdit";
-            this.MS_QUANTextEdit.Size = new System.Drawing.Size(432, 26);
+            this.MS_QUANTextEdit.Size = new System.Drawing.Size(390, 24);
             this.MS_QUANTextEdit.StyleController = this.dataLayoutControl1;
             this.MS_QUANTextEdit.TabIndex = 8;
             conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
@@ -142,13 +142,13 @@
             // 
             // ID_QGSearchLookUpEdit
             // 
-            this.ID_QGSearchLookUpEdit.Location = new System.Drawing.Point(108, 12);
+            this.ID_QGSearchLookUpEdit.Location = new System.Drawing.Point(88, 5);
             this.ID_QGSearchLookUpEdit.Name = "ID_QGSearchLookUpEdit";
             this.ID_QGSearchLookUpEdit.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.ID_QGSearchLookUpEdit.Properties.NullText = "";
             this.ID_QGSearchLookUpEdit.Properties.PopupView = this.gridView1;
-            this.ID_QGSearchLookUpEdit.Size = new System.Drawing.Size(165, 26);
+            this.ID_QGSearchLookUpEdit.Size = new System.Drawing.Size(152, 24);
             this.ID_QGSearchLookUpEdit.StyleController = this.dataLayoutControl1;
             this.ID_QGSearchLookUpEdit.TabIndex = 7;
             conditionValidationRule2.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
@@ -158,7 +158,7 @@
             // 
             // gridView1
             // 
-            this.gridView1.DetailHeight = 538;
+            this.gridView1.DetailHeight = 457;
             this.gridView1.FixedLineWidth = 3;
             this.gridView1.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
             this.gridView1.Name = "gridView1";
@@ -167,13 +167,13 @@
             // 
             // ID_TPSearchLookUpEdit
             // 
-            this.ID_TPSearchLookUpEdit.Location = new System.Drawing.Point(373, 12);
+            this.ID_TPSearchLookUpEdit.Location = new System.Drawing.Point(325, 5);
             this.ID_TPSearchLookUpEdit.Name = "ID_TPSearchLookUpEdit";
             this.ID_TPSearchLookUpEdit.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.ID_TPSearchLookUpEdit.Properties.NullText = "";
             this.ID_TPSearchLookUpEdit.Properties.PopupView = this.searchLookUpEdit1View;
-            this.ID_TPSearchLookUpEdit.Size = new System.Drawing.Size(167, 26);
+            this.ID_TPSearchLookUpEdit.Size = new System.Drawing.Size(153, 24);
             this.ID_TPSearchLookUpEdit.StyleController = this.dataLayoutControl1;
             this.ID_TPSearchLookUpEdit.TabIndex = 7;
             conditionValidationRule3.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
@@ -182,7 +182,7 @@
             // 
             // searchLookUpEdit1View
             // 
-            this.searchLookUpEdit1View.DetailHeight = 538;
+            this.searchLookUpEdit1View.DetailHeight = 457;
             this.searchLookUpEdit1View.FixedLineWidth = 3;
             this.searchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
             this.searchLookUpEdit1View.Name = "searchLookUpEdit1View";
@@ -196,7 +196,7 @@
             this.Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlGroup1});
             this.Root.Name = "Root";
-            this.Root.Size = new System.Drawing.Size(552, 340);
+            this.Root.Size = new System.Drawing.Size(483, 288);
             this.Root.TextVisible = false;
             // 
             // layoutControlGroup1
@@ -212,47 +212,47 @@
             this.ItemForMS_QUAN});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "autoGeneratedGroup0";
-            this.layoutControlGroup1.Size = new System.Drawing.Size(532, 320);
+            this.layoutControlGroup1.Size = new System.Drawing.Size(475, 280);
             // 
             // ItemForTEN_QUAN
             // 
             this.ItemForTEN_QUAN.AppearanceItemCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.ItemForTEN_QUAN.AppearanceItemCaption.Options.UseForeColor = true;
             this.ItemForTEN_QUAN.Control = this.TEN_QUANTextEdit;
-            this.ItemForTEN_QUAN.Location = new System.Drawing.Point(0, 60);
+            this.ItemForTEN_QUAN.Location = new System.Drawing.Point(0, 52);
             this.ItemForTEN_QUAN.Name = "ItemForTEN_QUAN";
-            this.ItemForTEN_QUAN.Size = new System.Drawing.Size(532, 30);
+            this.ItemForTEN_QUAN.Size = new System.Drawing.Size(475, 26);
             this.ItemForTEN_QUAN.Text = "TEN_QUAN";
-            this.ItemForTEN_QUAN.TextSize = new System.Drawing.Size(93, 20);
+            this.ItemForTEN_QUAN.TextSize = new System.Drawing.Size(80, 17);
             // 
             // ItemForTEN_QUAN_A
             // 
             this.ItemForTEN_QUAN_A.Control = this.TEN_QUAN_ATextEdit;
-            this.ItemForTEN_QUAN_A.Location = new System.Drawing.Point(0, 90);
+            this.ItemForTEN_QUAN_A.Location = new System.Drawing.Point(0, 78);
             this.ItemForTEN_QUAN_A.Name = "ItemForTEN_QUAN_A";
-            this.ItemForTEN_QUAN_A.Size = new System.Drawing.Size(532, 30);
+            this.ItemForTEN_QUAN_A.Size = new System.Drawing.Size(475, 26);
             this.ItemForTEN_QUAN_A.Text = "TEN_QUAN_A";
-            this.ItemForTEN_QUAN_A.TextSize = new System.Drawing.Size(93, 20);
+            this.ItemForTEN_QUAN_A.TextSize = new System.Drawing.Size(80, 17);
             // 
             // ItemForTEN_QUAN_H
             // 
             this.ItemForTEN_QUAN_H.Control = this.TEN_QUAN_HTextEdit;
-            this.ItemForTEN_QUAN_H.Location = new System.Drawing.Point(0, 120);
+            this.ItemForTEN_QUAN_H.Location = new System.Drawing.Point(0, 104);
             this.ItemForTEN_QUAN_H.Name = "ItemForTEN_QUAN_H";
-            this.ItemForTEN_QUAN_H.Size = new System.Drawing.Size(532, 200);
+            this.ItemForTEN_QUAN_H.Size = new System.Drawing.Size(475, 176);
             this.ItemForTEN_QUAN_H.Text = "TEN_QUAN_H";
-            this.ItemForTEN_QUAN_H.TextSize = new System.Drawing.Size(93, 20);
+            this.ItemForTEN_QUAN_H.TextSize = new System.Drawing.Size(80, 17);
             // 
             // ItemForID_TP
             // 
             this.ItemForID_TP.AppearanceItemCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.ItemForID_TP.AppearanceItemCaption.Options.UseForeColor = true;
             this.ItemForID_TP.Control = this.ID_TPSearchLookUpEdit;
-            this.ItemForID_TP.Location = new System.Drawing.Point(265, 0);
+            this.ItemForID_TP.Location = new System.Drawing.Point(237, 0);
             this.ItemForID_TP.Name = "ItemForID_TP";
-            this.ItemForID_TP.Size = new System.Drawing.Size(267, 30);
+            this.ItemForID_TP.Size = new System.Drawing.Size(238, 26);
             this.ItemForID_TP.Text = "ID_TP";
-            this.ItemForID_TP.TextSize = new System.Drawing.Size(93, 20);
+            this.ItemForID_TP.TextSize = new System.Drawing.Size(80, 17);
             // 
             // ItemForID_QG
             // 
@@ -261,19 +261,19 @@
             this.ItemForID_QG.Control = this.ID_QGSearchLookUpEdit;
             this.ItemForID_QG.Location = new System.Drawing.Point(0, 0);
             this.ItemForID_QG.Name = "ItemForID_QG";
-            this.ItemForID_QG.Size = new System.Drawing.Size(265, 30);
-            this.ItemForID_QG.TextSize = new System.Drawing.Size(93, 20);
+            this.ItemForID_QG.Size = new System.Drawing.Size(237, 26);
+            this.ItemForID_QG.TextSize = new System.Drawing.Size(80, 17);
             // 
             // ItemForMS_QUAN
             // 
             this.ItemForMS_QUAN.AppearanceItemCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.ItemForMS_QUAN.AppearanceItemCaption.Options.UseForeColor = true;
             this.ItemForMS_QUAN.Control = this.MS_QUANTextEdit;
-            this.ItemForMS_QUAN.Location = new System.Drawing.Point(0, 30);
+            this.ItemForMS_QUAN.Location = new System.Drawing.Point(0, 26);
             this.ItemForMS_QUAN.Name = "ItemForMS_QUAN";
-            this.ItemForMS_QUAN.Size = new System.Drawing.Size(532, 30);
+            this.ItemForMS_QUAN.Size = new System.Drawing.Size(475, 26);
             this.ItemForMS_QUAN.Text = "MS_HUYEN";
-            this.ItemForMS_QUAN.TextSize = new System.Drawing.Size(93, 20);
+            this.ItemForMS_QUAN.TextSize = new System.Drawing.Size(80, 17);
             // 
             // btnWDUI
             // 
@@ -300,11 +300,10 @@
             this.btnWDUI.ContentAlignment = System.Drawing.ContentAlignment.MiddleRight;
             this.btnWDUI.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnWDUI.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.btnWDUI.Location = new System.Drawing.Point(0, 324);
+            this.btnWDUI.Location = new System.Drawing.Point(0, 275);
             this.btnWDUI.Margin = new System.Windows.Forms.Padding(0);
             this.btnWDUI.Name = "btnWDUI";
-            this.btnWDUI.Padding = new System.Windows.Forms.Padding(0, 9, 0, 0);
-            this.btnWDUI.Size = new System.Drawing.Size(698, 40);
+            this.btnWDUI.Size = new System.Drawing.Size(611, 34);
             this.btnWDUI.TabIndex = 10;
             this.btnWDUI.Text = "btnWDUIPanel1";
             this.btnWDUI.UseButtonBackgroundImages = false;
@@ -323,14 +322,14 @@
             this.tablePanel1.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] {
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 5F),
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 95F)});
-            this.tablePanel1.Size = new System.Drawing.Size(698, 364);
+            this.tablePanel1.Size = new System.Drawing.Size(611, 309);
             this.tablePanel1.TabIndex = 10;
             // 
             // frmEditQUAN
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(698, 364);
+            this.ClientSize = new System.Drawing.Size(611, 309);
             this.Controls.Add(this.btnWDUI);
             this.Controls.Add(this.tablePanel1);
             this.Name = "frmEditQUAN";

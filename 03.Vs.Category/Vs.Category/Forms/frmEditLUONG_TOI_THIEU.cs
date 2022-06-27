@@ -71,6 +71,8 @@ namespace Vs.Category
                 ID_DVSearchLookUpEdit.Properties.View.Columns["FAX"].Visible = false;
                 ID_DVSearchLookUpEdit.Properties.View.Columns["SO_TAI_KHOAN"].Visible = false;
                 ID_DVSearchLookUpEdit.Properties.View.Columns["TEN_NGAN_HANG"].Visible = false;
+                ID_DVSearchLookUpEdit.Properties.View.Columns["PC_CN"].Visible = false;
+                ID_DVSearchLookUpEdit.Properties.View.Columns["STT_DV"].Visible = false;
                 ID_DVSearchLookUpEdit.Properties.View.Columns["MAC_DINH"].Visible = false;
 
                 ID_DVSearchLookUpEdit.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.None;

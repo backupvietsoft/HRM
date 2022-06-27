@@ -86,11 +86,10 @@
             this.btnALL.ContentAlignment = System.Drawing.ContentAlignment.MiddleRight;
             this.btnALL.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnALL.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.btnALL.Location = new System.Drawing.Point(0, 363);
+            this.btnALL.Location = new System.Drawing.Point(0, 309);
             this.btnALL.Margin = new System.Windows.Forms.Padding(0);
             this.btnALL.Name = "btnALL";
-            this.btnALL.Padding = new System.Windows.Forms.Padding(0, 14, 0, 0);
-            this.btnALL.Size = new System.Drawing.Size(844, 40);
+            this.btnALL.Size = new System.Drawing.Size(738, 34);
             this.btnALL.TabIndex = 10;
             this.btnALL.Text = "btnALLPanel1";
             this.btnALL.UseButtonBackgroundImages = false;
@@ -99,15 +98,15 @@
             // NGAY_QDDateEdit
             // 
             this.NGAY_QDDateEdit.EditValue = null;
-            this.NGAY_QDDateEdit.Location = new System.Drawing.Point(124, 12);
-            this.NGAY_QDDateEdit.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.NGAY_QDDateEdit.Location = new System.Drawing.Point(104, 5);
+            this.NGAY_QDDateEdit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.NGAY_QDDateEdit.Name = "NGAY_QDDateEdit";
             this.NGAY_QDDateEdit.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.NGAY_QDDateEdit.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.NGAY_QDDateEdit.Properties.Mask.UseMaskAsDisplayFormat = true;
-            this.NGAY_QDDateEdit.Size = new System.Drawing.Size(531, 26);
+            this.NGAY_QDDateEdit.Size = new System.Drawing.Size(473, 24);
             this.NGAY_QDDateEdit.StyleController = this.dataLayoutControl1;
             this.NGAY_QDDateEdit.TabIndex = 6;
             conditionValidationRule2.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
@@ -121,29 +120,33 @@
             this.dataLayoutControl1.Controls.Add(this.NGAY_QDDateEdit);
             this.dataLayoutControl1.Controls.Add(this.HS_DG_GIAYTextEdit);
             this.dataLayoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataLayoutControl1.Location = new System.Drawing.Point(88, 23);
-            this.dataLayoutControl1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.dataLayoutControl1.Location = new System.Drawing.Point(78, 19);
+            this.dataLayoutControl1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dataLayoutControl1.Name = "dataLayoutControl1";
             this.dataLayoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(630, 281, 650, 400);
             this.dataLayoutControl1.Root = this.Root;
             this.tablePanel1.SetRow(this.dataLayoutControl1, 1);
-            this.dataLayoutControl1.Size = new System.Drawing.Size(667, 335);
+            this.dataLayoutControl1.Size = new System.Drawing.Size(582, 286);
             this.dataLayoutControl1.TabIndex = 0;
             this.dataLayoutControl1.Text = "dataLayoutControl1";
             // 
             // txtSTT
             // 
-            this.txtSTT.Location = new System.Drawing.Point(124, 72);
+            this.txtSTT.Location = new System.Drawing.Point(104, 57);
             this.txtSTT.Name = "txtSTT";
-            this.txtSTT.Size = new System.Drawing.Size(531, 26);
+            this.txtSTT.Properties.Appearance.Options.UseTextOptions = true;
+            this.txtSTT.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.txtSTT.Properties.Mask.EditMask = "N0";
+            this.txtSTT.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
+            this.txtSTT.Size = new System.Drawing.Size(473, 24);
             this.txtSTT.StyleController = this.dataLayoutControl1;
             this.txtSTT.TabIndex = 8;
             // 
             // HS_DG_GIAYTextEdit
             // 
             this.HS_DG_GIAYTextEdit.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.HS_DG_GIAYTextEdit.Location = new System.Drawing.Point(124, 42);
-            this.HS_DG_GIAYTextEdit.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.HS_DG_GIAYTextEdit.Location = new System.Drawing.Point(104, 31);
+            this.HS_DG_GIAYTextEdit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.HS_DG_GIAYTextEdit.Name = "HS_DG_GIAYTextEdit";
             this.HS_DG_GIAYTextEdit.Properties.DisplayFormat.FormatString = "N2";
             this.HS_DG_GIAYTextEdit.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
@@ -151,7 +154,7 @@
             this.HS_DG_GIAYTextEdit.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.HS_DG_GIAYTextEdit.Properties.Mask.EditMask = "n2";
             this.HS_DG_GIAYTextEdit.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
-            this.HS_DG_GIAYTextEdit.Size = new System.Drawing.Size(531, 26);
+            this.HS_DG_GIAYTextEdit.Size = new System.Drawing.Size(473, 24);
             this.HS_DG_GIAYTextEdit.StyleController = this.dataLayoutControl1;
             this.HS_DG_GIAYTextEdit.TabIndex = 7;
             conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
@@ -165,7 +168,7 @@
             this.Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlGroup1});
             this.Root.Name = "Root";
-            this.Root.Size = new System.Drawing.Size(667, 335);
+            this.Root.Size = new System.Drawing.Size(582, 286);
             this.Root.TextVisible = false;
             // 
             // layoutControlGroup1
@@ -178,18 +181,18 @@
             this.ItemForSTT});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "autoGeneratedGroup0";
-            this.layoutControlGroup1.Size = new System.Drawing.Size(647, 315);
+            this.layoutControlGroup1.Size = new System.Drawing.Size(574, 278);
             // 
             // ItemForHS_DG_GIAY
             // 
             this.ItemForHS_DG_GIAY.AppearanceItemCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.ItemForHS_DG_GIAY.AppearanceItemCaption.Options.UseForeColor = true;
             this.ItemForHS_DG_GIAY.Control = this.HS_DG_GIAYTextEdit;
-            this.ItemForHS_DG_GIAY.Location = new System.Drawing.Point(0, 30);
+            this.ItemForHS_DG_GIAY.Location = new System.Drawing.Point(0, 26);
             this.ItemForHS_DG_GIAY.Name = "ItemForHS_DG_GIAY";
-            this.ItemForHS_DG_GIAY.Size = new System.Drawing.Size(647, 30);
+            this.ItemForHS_DG_GIAY.Size = new System.Drawing.Size(574, 26);
             this.ItemForHS_DG_GIAY.Text = "Hệ số đơn giá";
-            this.ItemForHS_DG_GIAY.TextSize = new System.Drawing.Size(109, 20);
+            this.ItemForHS_DG_GIAY.TextSize = new System.Drawing.Size(96, 17);
             // 
             // ItemForNGAY_QD
             // 
@@ -198,17 +201,17 @@
             this.ItemForNGAY_QD.Control = this.NGAY_QDDateEdit;
             this.ItemForNGAY_QD.Location = new System.Drawing.Point(0, 0);
             this.ItemForNGAY_QD.Name = "ItemForNGAY_QD";
-            this.ItemForNGAY_QD.Size = new System.Drawing.Size(647, 30);
+            this.ItemForNGAY_QD.Size = new System.Drawing.Size(574, 26);
             this.ItemForNGAY_QD.Text = "Ngày quyết định";
-            this.ItemForNGAY_QD.TextSize = new System.Drawing.Size(109, 20);
+            this.ItemForNGAY_QD.TextSize = new System.Drawing.Size(96, 17);
             // 
             // ItemForSTT
             // 
             this.ItemForSTT.Control = this.txtSTT;
-            this.ItemForSTT.Location = new System.Drawing.Point(0, 60);
+            this.ItemForSTT.Location = new System.Drawing.Point(0, 52);
             this.ItemForSTT.Name = "ItemForSTT";
-            this.ItemForSTT.Size = new System.Drawing.Size(647, 255);
-            this.ItemForSTT.TextSize = new System.Drawing.Size(109, 20);
+            this.ItemForSTT.Size = new System.Drawing.Size(574, 226);
+            this.ItemForSTT.TextSize = new System.Drawing.Size(96, 17);
             // 
             // tablePanel1
             // 
@@ -223,17 +226,17 @@
             this.tablePanel1.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] {
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 5F),
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 95F)});
-            this.tablePanel1.Size = new System.Drawing.Size(844, 363);
+            this.tablePanel1.Size = new System.Drawing.Size(738, 309);
             this.tablePanel1.TabIndex = 12;
             // 
             // frmEditDON_GIA_GIAY
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(844, 403);
+            this.ClientSize = new System.Drawing.Size(738, 343);
             this.Controls.Add(this.tablePanel1);
             this.Controls.Add(this.btnALL);
-            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "frmEditDON_GIA_GIAY";
             this.Text = "frmEditDonGiaGiay";
             this.Load += new System.EventHandler(this.frmEditDonGiaGiay_Load);

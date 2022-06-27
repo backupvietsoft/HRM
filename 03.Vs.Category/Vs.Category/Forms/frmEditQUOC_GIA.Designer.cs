@@ -89,11 +89,10 @@
             this.btnWDUI.ContentAlignment = System.Drawing.ContentAlignment.MiddleRight;
             this.btnWDUI.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnWDUI.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.btnWDUI.Location = new System.Drawing.Point(0, 340);
+            this.btnWDUI.Location = new System.Drawing.Point(0, 289);
             this.btnWDUI.Margin = new System.Windows.Forms.Padding(0);
             this.btnWDUI.Name = "btnWDUI";
-            this.btnWDUI.Padding = new System.Windows.Forms.Padding(0, 9, 0, 0);
-            this.btnWDUI.Size = new System.Drawing.Size(868, 40);
+            this.btnWDUI.Size = new System.Drawing.Size(760, 34);
             this.btnWDUI.TabIndex = 10;
             this.btnWDUI.Text = "btnWDUIPanel1";
             this.btnWDUI.UseButtonBackgroundImages = false;
@@ -112,7 +111,7 @@
             this.tablePanel1.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] {
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 5F),
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 95F)});
-            this.tablePanel1.Size = new System.Drawing.Size(868, 380);
+            this.tablePanel1.Size = new System.Drawing.Size(760, 323);
             this.tablePanel1.TabIndex = 10;
             // 
             // dataLayoutControl1
@@ -125,21 +124,21 @@
             this.dataLayoutControl1.Controls.Add(this.TEN_QG_ATextEdit);
             this.dataLayoutControl1.Controls.Add(this.TEN_QG_HTextEdit);
             this.dataLayoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataLayoutControl1.Location = new System.Drawing.Point(91, 24);
-            this.dataLayoutControl1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.dataLayoutControl1.Location = new System.Drawing.Point(80, 20);
+            this.dataLayoutControl1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dataLayoutControl1.Name = "dataLayoutControl1";
             this.dataLayoutControl1.Root = this.Root;
             this.tablePanel1.SetRow(this.dataLayoutControl1, 1);
-            this.dataLayoutControl1.Size = new System.Drawing.Size(686, 351);
+            this.dataLayoutControl1.Size = new System.Drawing.Size(600, 299);
             this.dataLayoutControl1.TabIndex = 0;
             this.dataLayoutControl1.Text = "dataLayoutControl1";
             // 
             // MA_QGTextEdit
             // 
-            this.MA_QGTextEdit.Location = new System.Drawing.Point(86, 12);
-            this.MA_QGTextEdit.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.MA_QGTextEdit.Location = new System.Drawing.Point(70, 5);
+            this.MA_QGTextEdit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MA_QGTextEdit.Name = "MA_QGTextEdit";
-            this.MA_QGTextEdit.Size = new System.Drawing.Size(588, 26);
+            this.MA_QGTextEdit.Size = new System.Drawing.Size(525, 24);
             this.MA_QGTextEdit.StyleController = this.dataLayoutControl1;
             this.MA_QGTextEdit.TabIndex = 4;
             conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
@@ -149,10 +148,10 @@
             // 
             // TEN_QGTextEdit
             // 
-            this.TEN_QGTextEdit.Location = new System.Drawing.Point(86, 42);
-            this.TEN_QGTextEdit.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.TEN_QGTextEdit.Location = new System.Drawing.Point(70, 31);
+            this.TEN_QGTextEdit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.TEN_QGTextEdit.Name = "TEN_QGTextEdit";
-            this.TEN_QGTextEdit.Size = new System.Drawing.Size(588, 26);
+            this.TEN_QGTextEdit.Size = new System.Drawing.Size(525, 24);
             this.TEN_QGTextEdit.StyleController = this.dataLayoutControl1;
             this.TEN_QGTextEdit.TabIndex = 5;
             conditionValidationRule2.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
@@ -162,19 +161,19 @@
             // 
             // TEN_QG_ATextEdit
             // 
-            this.TEN_QG_ATextEdit.Location = new System.Drawing.Point(86, 72);
-            this.TEN_QG_ATextEdit.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.TEN_QG_ATextEdit.Location = new System.Drawing.Point(70, 57);
+            this.TEN_QG_ATextEdit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.TEN_QG_ATextEdit.Name = "TEN_QG_ATextEdit";
-            this.TEN_QG_ATextEdit.Size = new System.Drawing.Size(588, 26);
+            this.TEN_QG_ATextEdit.Size = new System.Drawing.Size(525, 24);
             this.TEN_QG_ATextEdit.StyleController = this.dataLayoutControl1;
             this.TEN_QG_ATextEdit.TabIndex = 6;
             // 
             // TEN_QG_HTextEdit
             // 
-            this.TEN_QG_HTextEdit.Location = new System.Drawing.Point(86, 102);
-            this.TEN_QG_HTextEdit.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.TEN_QG_HTextEdit.Location = new System.Drawing.Point(70, 83);
+            this.TEN_QG_HTextEdit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.TEN_QG_HTextEdit.Name = "TEN_QG_HTextEdit";
-            this.TEN_QG_HTextEdit.Size = new System.Drawing.Size(588, 26);
+            this.TEN_QG_HTextEdit.Size = new System.Drawing.Size(525, 24);
             this.TEN_QG_HTextEdit.StyleController = this.dataLayoutControl1;
             this.TEN_QG_HTextEdit.TabIndex = 7;
             // 
@@ -185,7 +184,7 @@
             this.Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlGroup1});
             this.Root.Name = "Root";
-            this.Root.Size = new System.Drawing.Size(686, 351);
+            this.Root.Size = new System.Drawing.Size(600, 299);
             this.Root.TextVisible = false;
             // 
             // layoutControlGroup1
@@ -199,7 +198,7 @@
             this.ItemForTEN_QG_H});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "autoGeneratedGroup0";
-            this.layoutControlGroup1.Size = new System.Drawing.Size(666, 331);
+            this.layoutControlGroup1.Size = new System.Drawing.Size(592, 291);
             // 
             // ItemForMA_QG
             // 
@@ -208,47 +207,47 @@
             this.ItemForMA_QG.Control = this.MA_QGTextEdit;
             this.ItemForMA_QG.Location = new System.Drawing.Point(0, 0);
             this.ItemForMA_QG.Name = "ItemForMA_QG";
-            this.ItemForMA_QG.Size = new System.Drawing.Size(666, 30);
+            this.ItemForMA_QG.Size = new System.Drawing.Size(592, 26);
             this.ItemForMA_QG.Text = "MA_QG";
-            this.ItemForMA_QG.TextSize = new System.Drawing.Size(71, 20);
+            this.ItemForMA_QG.TextSize = new System.Drawing.Size(62, 17);
             // 
             // ItemForTEN_QG
             // 
             this.ItemForTEN_QG.AppearanceItemCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.ItemForTEN_QG.AppearanceItemCaption.Options.UseForeColor = true;
             this.ItemForTEN_QG.Control = this.TEN_QGTextEdit;
-            this.ItemForTEN_QG.Location = new System.Drawing.Point(0, 30);
+            this.ItemForTEN_QG.Location = new System.Drawing.Point(0, 26);
             this.ItemForTEN_QG.Name = "ItemForTEN_QG";
-            this.ItemForTEN_QG.Size = new System.Drawing.Size(666, 30);
+            this.ItemForTEN_QG.Size = new System.Drawing.Size(592, 26);
             this.ItemForTEN_QG.Text = "TEN_QG";
-            this.ItemForTEN_QG.TextSize = new System.Drawing.Size(71, 20);
+            this.ItemForTEN_QG.TextSize = new System.Drawing.Size(62, 17);
             // 
             // ItemForTEN_QG_A
             // 
             this.ItemForTEN_QG_A.Control = this.TEN_QG_ATextEdit;
-            this.ItemForTEN_QG_A.Location = new System.Drawing.Point(0, 60);
+            this.ItemForTEN_QG_A.Location = new System.Drawing.Point(0, 52);
             this.ItemForTEN_QG_A.Name = "ItemForTEN_QG_A";
-            this.ItemForTEN_QG_A.Size = new System.Drawing.Size(666, 30);
+            this.ItemForTEN_QG_A.Size = new System.Drawing.Size(592, 26);
             this.ItemForTEN_QG_A.Text = "TEN_QG_A";
-            this.ItemForTEN_QG_A.TextSize = new System.Drawing.Size(71, 20);
+            this.ItemForTEN_QG_A.TextSize = new System.Drawing.Size(62, 17);
             // 
             // ItemForTEN_QG_H
             // 
             this.ItemForTEN_QG_H.Control = this.TEN_QG_HTextEdit;
-            this.ItemForTEN_QG_H.Location = new System.Drawing.Point(0, 90);
+            this.ItemForTEN_QG_H.Location = new System.Drawing.Point(0, 78);
             this.ItemForTEN_QG_H.Name = "ItemForTEN_QG_H";
-            this.ItemForTEN_QG_H.Size = new System.Drawing.Size(666, 241);
+            this.ItemForTEN_QG_H.Size = new System.Drawing.Size(592, 213);
             this.ItemForTEN_QG_H.Text = "TEN_QG_H";
-            this.ItemForTEN_QG_H.TextSize = new System.Drawing.Size(71, 20);
+            this.ItemForTEN_QG_H.TextSize = new System.Drawing.Size(62, 17);
             // 
             // frmEditQUOC_GIA
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(868, 380);
+            this.ClientSize = new System.Drawing.Size(760, 323);
             this.Controls.Add(this.btnWDUI);
             this.Controls.Add(this.tablePanel1);
-            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "frmEditQUOC_GIA";
             this.Text = "frmEditQUOC_GIA";
             this.Load += new System.EventHandler(this.frmEditQUOC_GIA_Load);

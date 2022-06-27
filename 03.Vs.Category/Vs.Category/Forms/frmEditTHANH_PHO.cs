@@ -50,9 +50,9 @@ namespace Vs.Category
             {
 
                 ID_QGSearchLookUpEdit.Properties.View.Columns["ID_QG"].Visible = false;
-            //    ID_QGSearchLookUpEdit.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.None;
-            //    ID_QGSearchLookUpEdit.Properties.View.Columns["TEN_QG"].Caption = Commons.Modules.ObjLanguages.GetLanguage("ucListDMuc", "TEN_QG");
-             //   ID_QGSearchLookUpEdit.Properties.View.Columns["TEN_QG"].AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+                //    ID_QGSearchLookUpEdit.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.None;
+                //    ID_QGSearchLookUpEdit.Properties.View.Columns["TEN_QG"].Caption = Commons.Modules.ObjLanguages.GetLanguage("ucListDMuc", "TEN_QG");
+                //   ID_QGSearchLookUpEdit.Properties.View.Columns["TEN_QG"].AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
                 string sSql = "";
 
                 if (AddEdit)

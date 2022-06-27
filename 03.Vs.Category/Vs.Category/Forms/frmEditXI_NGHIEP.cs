@@ -56,6 +56,8 @@ namespace Vs.Category
                 ID_DVSearchLookUpEdit.Properties.View.Columns["FAX"].Visible = false;
                 ID_DVSearchLookUpEdit.Properties.View.Columns["SO_TAI_KHOAN"].Visible = false;
                 ID_DVSearchLookUpEdit.Properties.View.Columns["TEN_NGAN_HANG"].Visible = false;
+                ID_DVSearchLookUpEdit.Properties.View.Columns["PC_CN"].Visible = false;
+                ID_DVSearchLookUpEdit.Properties.View.Columns["STT_DV"].Visible = false;
                 ID_DVSearchLookUpEdit.Properties.View.Columns["MAC_DINH"].Visible = false;
 
                 ID_DVSearchLookUpEdit.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.None;
@@ -168,25 +170,34 @@ namespace Vs.Category
         {
             try
             {
-                string sSql = "";
-                string tenSql = "";
-                if (bAddEdit || MS != MS_XNTextEdit.EditValue.ToString())
+                DataTable dtTmp = new DataTable();
+                Int16 iKiem = 0;
+
+                iKiem = Convert.ToInt16(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spCheckData", "ID_XN",
+                    (bAddEdit ? "-1" : iId.ToString()), "XI_NGHIEP", "MS_XN", MS_XNTextEdit.Text.ToString(),
+                    "", "", "", ""));
+                if (iKiem > 0)
                 {
-                    sSql = "SELECT COUNT(*) FROM XI_NGHIEP WHERE MS_XN = '" + MS_XNTextEdit.Text + "'";
-                    tenSql = "SELECT TEN_XN FROM XI_NGHIEP WHERE TEN_XN = N'" + TEN_XNTextEdit.Text + "'";
-                    if (Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, sSql)) != 0)
-                    {
-                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_MaSoTrung"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"));
-                        MS_XNTextEdit.Focus();
-                        return true;
-                    }
-                    if (Convert.ToString(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, tenSql)) == Convert.ToString((TEN_XNTextEdit.Text)))
+                    XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_TenTrung"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"));
+                    MS_XNTextEdit.Focus();
+                    return true;
+                }
+
+                iKiem = 0;
+
+                if (!string.IsNullOrEmpty(TEN_XNTextEdit.Text))
+                {
+                    iKiem = Convert.ToInt16(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spCheckData", "ID_XN",
+                        (bAddEdit ? "-1" : iId.ToString()), "XI_NGHIEP", "TEN_XN", TEN_XNTextEdit.Text.ToString(),
+                        "", "", "", ""));
+                    if (iKiem > 0)
                     {
                         XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_TenTrung"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"));
                         TEN_XNTextEdit.Focus();
                         return true;
                     }
                 }
+
             }
             catch (Exception ex)
             {

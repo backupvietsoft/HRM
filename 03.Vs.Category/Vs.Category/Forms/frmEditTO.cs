@@ -39,6 +39,7 @@ namespace Vs.Category
                 
                 ID_XNLookUpEdit.Properties.View.Columns["ID_XN"].Visible = false;
                 ID_XNLookUpEdit.Properties.View.Columns["ID_DV"].Visible = false;
+                ID_XNLookUpEdit.Properties.View.Columns["TEN_DV"].Visible = false;
                 ID_XNLookUpEdit.Properties.View.Columns["MS_XN"].Visible = false;
                 ID_XNLookUpEdit.Properties.View.Columns["STT_XN"].Visible = false;
                 ID_XNLookUpEdit.Properties.View.Columns["GOP_PB"].Visible = false;
@@ -46,7 +47,6 @@ namespace Vs.Category
                 ID_XNLookUpEdit.Properties.View.Columns["STT_DV"].Visible = false;
                 ID_XNLookUpEdit.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.None;
                 
-                ID_XNLookUpEdit.Properties.View.Columns["TEN_DV"].Caption = Commons.Modules.ObjLanguages.GetLanguage("ucListDMuc", "TEN_DV");
                 ID_XNLookUpEdit.Properties.View.Columns["TEN_XN"].Caption = Commons.Modules.ObjLanguages.GetLanguage("ucListDMuc", "TEN_XN");
 
                 ID_XNLookUpEdit.Properties.View.Columns["TEN_XN"].AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
@@ -154,19 +154,27 @@ namespace Vs.Category
         {
             try
             {
-                string sSql = "";
-                string tenSql = "";
-                if (bAddEditTo || MSTO != MS_TOTextEdit.EditValue.ToString())
+                DataTable dtTmp = new DataTable();
+                Int16 iKiem = 0;
+
+                iKiem = Convert.ToInt16(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spCheckData", "ID_TO",
+                    (bAddEditTo ? "-1" : iIdTo.ToString()), "[TO]", "MS_TO", MS_TOTextEdit.Text.ToString(),
+                    "", "", "", ""));
+                if (iKiem > 0)
                 {
-                    sSql = "SELECT COUNT(*) FROM [TO] WHERE MS_TO = '" + MS_TOTextEdit.Text + "'";
-                    tenSql = "SELECT TEN_TO FROM [TO] WHERE TEN_TO = N'" + TEN_TOTextEdit.Text + "'";
-                    if (Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, sSql)) != 0)
-                    {
-                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_MaSoTrung"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"));
-                        MS_TOTextEdit.Focus();
-                        return true;
-                    }
-                    if (Convert.ToString(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, tenSql)) == Convert.ToString((TEN_TOTextEdit.Text)))
+                    XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_TenTrung"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"));
+                    MS_TOTextEdit.Focus();
+                    return true;
+                }
+
+                iKiem = 0;
+
+                if (!string.IsNullOrEmpty(TEN_TOTextEdit.Text))
+                {
+                    iKiem = Convert.ToInt16(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spCheckData", "ID_TO",
+                        (bAddEditTo ? "-1" : iIdTo.ToString()), "[TO]", "TEN_TO", TEN_TOTextEdit.Text.ToString(),
+                        "", "", "", ""));
+                    if (iKiem > 0)
                     {
                         XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_TenTrung"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"));
                         TEN_TOTextEdit.Focus();

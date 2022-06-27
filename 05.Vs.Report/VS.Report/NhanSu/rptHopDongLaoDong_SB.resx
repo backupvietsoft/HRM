@@ -123,7 +123,7 @@
 </value>
   </data>
   <data name="xrLabel84.ExpressionBindings" xml:space="preserve">
-    <value>'- Hợp đồng lao động này làm thành 02 bản có giá trị ngang nhau, mỗi bên giữ một bản và có hiệu lực từ ngày ' + GetDay([DATA].[NGAY_BAT_DAU_HD]) + ' tháng ' + GetMonth([DATA].[NGAY_BAT_DAU_HD]) + ' năm ' + GetYear([DATA].[NGAY_BAT_DAU_HD]) + '   đến ngày   ' + GetDay([DATA].[NGAY_HET_HD]) + ' tháng ' + GetMonth([DATA].[NGAY_HET_HD]) + ' năm ' + GetYear([DATA].[NGAY_HET_HD])
+    <value>'- Hợp đồng lao động này làm thành 02 bản có giá trị ngang nhau, mỗi bên giữ một bản và có hiệu lực từ ngày ' + GetDay([DATA].[NGAY_BAT_DAU_HD]) + ' tháng ' + GetMonth([DATA].[NGAY_BAT_DAU_HD]) + ' năm ' + GetYear([DATA].[NGAY_BAT_DAU_HD]) + '   đến ngày   ' + GetDay([DATA].[NGAY_HET_HD]) + ' tháng ' + GetMonth([DATA].[NGAY_HET_HD]) + ' năm ' + GetYear([DATA].[NGAY_HET_HD]) + '. Khi hai bên ' + [NOI_DUNG].[24]
 </value>
   </data>
   <data name="xrLabel6.ExpressionBindings" xml:space="preserve">

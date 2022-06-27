@@ -198,55 +198,64 @@ namespace Vs.Category
                 DataTable dtTmp = new DataTable();
                 Int16 iKiem = 0;
                 string sSql = "";
-                if (AddEdit || MS!= MS_XATextEdit.EditValue.ToString() || TEN != TEN_PXTextEdit.EditValue.ToString())
+                if (AddEdit || MS != MS_XATextEdit.EditValue.ToString() || TEN != TEN_PXTextEdit.EditValue.ToString())
                 {
-                    sSql = "SELECT COUNT(*) FROM PHUONG_XA WHERE MS_XA = '" + MS_XATextEdit.Text + "' AND ID_QUAN = "+ ID_QUANSearchLookUpEdit.EditValue + "";
+                    sSql = "SELECT COUNT(*) FROM PHUONG_XA WHERE MS_XA = '" + MS_XATextEdit.Text + "' AND ID_QUAN = " + ID_QUANSearchLookUpEdit.EditValue + " AND ID_PX <> "+Id+"";
 
                     if (Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, sSql)) != 0)
                     {
                         XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_MaSoTrung"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"));
-
+                        MS_XATextEdit.Focus();
                         return true;
                     }
-                }
-                iKiem = Convert.ToInt16(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spCheckData", "ID_PX",
-                    (AddEdit ? "-1" : Id.ToString()), "PHUONG_XA", "TEN_PX", TEN_PXTextEdit.Text,
-                    "", "", "", ""));
-                if (iKiem > 0)
-                {
-                    XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_TenTrung"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"));
-                    TEN_PXTextEdit.Focus();
-                    return true;
-                }
-
-                iKiem = 0;
-                
-                if (!string.IsNullOrEmpty(TEN_PX_ATextEdit.Text))
-                {
-                    iKiem = Convert.ToInt16(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spCheckData", "ID_PX",
-                        (AddEdit ? "-1" : Id.ToString()), "PHUONG_XA", "TEN_PX_A", TEN_PX_ATextEdit.Text.ToString(),
-                        "", "", "", ""));
-                    if (iKiem > 0)
+                    sSql = "";
+                    sSql = "SELECT COUNT(*) FROM PHUONG_XA WHERE TEN_PX = N'" + TEN_PXTextEdit.Text + "' AND ID_QUAN = " + ID_QUANSearchLookUpEdit.EditValue + " AND ID_PX <> " + Id + "";
+                    if (Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, sSql)) != 0)
                     {
                         XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_TenTrung"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"));
-                        TEN_PX_ATextEdit.Focus();
+                        TEN_PXTextEdit.Focus();
                         return true;
                     }
                 }
 
-                iKiem = 0;
-                if (!string.IsNullOrEmpty(TEN_PX_HTextEdit.Text))
-                {
-                    iKiem = Convert.ToInt16(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spCheckData", "ID_PX",
-                        (AddEdit ? "-1" : Id.ToString()), "PHUONG_XA", "TEN_PX_H", TEN_PX_HTextEdit.Text.ToString(),
-                        "", "", "", ""));
-                    if (iKiem > 0)
-                    {
-                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_TenTrung"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"));
-                        TEN_PX_HTextEdit.Focus();
-                        return true;
-                    }
-                }
+                //iKiem = Convert.ToInt16(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spCheckData", "ID_PX",
+                //    (AddEdit ? "-1" : Id.ToString()), "PHUONG_XA", "TEN_PX", TEN_PXTextEdit.Text,
+                //    "", "", "", ""));
+                //if (iKiem > 0)
+                //{
+                //    XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_TenTrung"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"));
+                //    TEN_PXTextEdit.Focus();
+                //    return true;
+                //}
+
+                //iKiem = 0;
+
+                //if (!string.IsNullOrEmpty(TEN_PX_ATextEdit.Text))
+                //{
+                //    iKiem = Convert.ToInt16(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spCheckData", "ID_PX",
+                //        (AddEdit ? "-1" : Id.ToString()), "PHUONG_XA", "TEN_PX_A", TEN_PX_ATextEdit.Text.ToString(),
+                //        "", "", "", ""));
+                //    if (iKiem > 0)
+                //    {
+                //        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_TenTrung"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"));
+                //        TEN_PX_ATextEdit.Focus();
+                //        return true;
+                //    }
+                //}
+
+                //iKiem = 0;
+                //if (!string.IsNullOrEmpty(TEN_PX_HTextEdit.Text))
+                //{
+                //    iKiem = Convert.ToInt16(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spCheckData", "ID_PX",
+                //        (AddEdit ? "-1" : Id.ToString()), "PHUONG_XA", "TEN_PX_H", TEN_PX_HTextEdit.Text.ToString(),
+                //        "", "", "", ""));
+                //    if (iKiem > 0)
+                //    {
+                //        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_TenTrung"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"));
+                //        TEN_PX_HTextEdit.Focus();
+                //        return true;
+                //    }
+                //}
             }
             catch (Exception ex)
             {

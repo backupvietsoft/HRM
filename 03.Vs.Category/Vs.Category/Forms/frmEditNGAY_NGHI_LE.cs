@@ -75,7 +75,7 @@ namespace Vs.Category
                             try
                             {
                                 DataTable dt = new DataTable();
-                                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spUpdateNGAY_NGHI_LE", (AddEdit ? 1 : 0), NGAYDateEdit.EditValue, LY_DOTextEdit.EditValue.ToString(), (txtSTT.Text == "") ? txtSTT.EditValue = null : txtSTT.EditValue));
+                                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spUpdateNGAY_NGHI_LE", (AddEdit ? 1 : 0), NGAYDateEdit.EditValue, LY_DOTextEdit.EditValue.ToString(), LY_DO_ATextEdit.Text, LY_DO_HTextEdit.Text ,(txtSTT.Text == "") ? txtSTT.EditValue = null : txtSTT.EditValue));
 
                                 if (AddEdit)
                                 {

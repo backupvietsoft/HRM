@@ -269,9 +269,9 @@ namespace Vs.TimeAttendance
         }
         private void cboMSCN_EditValueChanged(object sender, EventArgs e)
         {
-            DataTable dt = Commons.Modules.ObjSystems.ConvertDatatable(grdCongNhan);
-            int index = dt.Rows.IndexOf(dt.Rows.Find(cboMSCN.EditValue));
-            grvCongNhan.FocusedRowHandle = index;
+            //DataTable dt = Commons.Modules.ObjSystems.ConvertDatatable(grdCongNhan);
+            //int index = dt.Rows.IndexOf(dt.Rows.Find(cboMSCN.EditValue));
+            //grvCongNhan.FocusedRowHandle = index;
         }
         //cập nhật all
         private void btnGhiAll_Click(object sender, EventArgs e)

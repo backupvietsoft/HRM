@@ -321,7 +321,7 @@ namespace VietSoftHRM
 
                 //object o1 = Activator.CreateInstance(newType, int.Parse(Commons.Modules.sId), AddEdit);
                 object o1;
-                o1 = Activator.CreateInstance(newType, grvDanhMuc.GetFocusedRowCellValue(grvDanhMuc.Columns[0].FieldName), AddEdit);
+                o1 = Activator.CreateInstance(newType, AddEdit ? -1 : grvDanhMuc.GetFocusedRowCellValue(grvDanhMuc.Columns[0].FieldName), AddEdit);
                 ctl = o1 as XtraForm;
                 ctl.StartPosition = FormStartPosition.CenterParent;
                 ctl.MinimizeBox = false;

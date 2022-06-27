@@ -249,18 +249,23 @@ namespace Vs.HRM
         }
         private void CboID_TP_EditValueChanged(object sender, EventArgs e)
         {
-            LookUpEdit lookUp = sender as LookUpEdit;
+            try
+            {
 
-            //string id = lookUp.get;
+                LookUpEdit lookUp = sender as LookUpEdit;
 
-            // Access the currently selected data row
-            DataRowView dataRow = lookUp.GetSelectedDataRow() as DataRowView;
+                //string id = lookUp.get;
 
-            grvNgungDongBHXH.SetFocusedRowCellValue("ID_TP", (dataRow.Row[0]));
+                // Access the currently selected data row
+                DataRowView dataRow = lookUp.GetSelectedDataRow() as DataRowView;
 
-            string strSQL = "SELECT MS_TINH FROM THANH_PHO WHERE ID_TP = " + Convert.ToInt32(dataRow.Row[0]) + "";
-            MS_TINH = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, strSQL));
-            Commons.Modules.sLoad = "";
+                grvNgungDongBHXH.SetFocusedRowCellValue("ID_TP", (dataRow.Row[0]));
+
+                string strSQL = "SELECT MS_TINH FROM THANH_PHO WHERE ID_TP = " + Convert.ToInt32(dataRow.Row[0]) + "";
+                MS_TINH = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, strSQL));
+                Commons.Modules.sLoad = "";
+            }
+            catch { }
             //DataTable dID = new DataTable();
             //dID.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboBenhVien_Loc", MS_TINH, Commons.Modules.UserName, Commons.Modules.TypeLanguage, 0));
             //grvNgungDongBHXH.SetFocusedRowCellValue("ID_BV", dID);
@@ -271,16 +276,21 @@ namespace Vs.HRM
         }
         private void CboID_BV_BeforePopup(object sender, EventArgs e)
         {
-            LookUpEdit lookUp = sender as LookUpEdit;
+            try
+            {
 
-            //string id = lookUp.get;
+                LookUpEdit lookUp = sender as LookUpEdit;
 
-            // Access the currently selected data row
-            //DataRowView dataRow = lookUp.Properties.DataSource as DataRowView;
+                //string id = lookUp.get;
 
-            DataTable dID = new DataTable();
-            dID.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboBenhVien_Loc", MS_TINH, Commons.Modules.UserName, Commons.Modules.TypeLanguage, 0));
-            lookUp.Properties.DataSource = dID;
+                // Access the currently selected data row
+                //DataRowView dataRow = lookUp.Properties.DataSource as DataRowView;
+
+                DataTable dID = new DataTable();
+                dID.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboBenhVien_Loc", MS_TINH, Commons.Modules.UserName, Commons.Modules.TypeLanguage, 0));
+                lookUp.Properties.DataSource = dID;
+            }
+            catch { }
         }
         private void CboID_BV_EditValueChanged(object sender, EventArgs e)
         {
@@ -349,7 +359,7 @@ namespace Vs.HRM
             if (e.Column.Name == "colID_TP")
             {
 
-                
+
                 //view.SetRowCellValue(e.RowHandle, view.Columns["ID_BV"], 1);
             }
         }

@@ -387,7 +387,6 @@
             this.SO_TIENtextEdit.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.SO_TIENtextEdit.Properties.Mask.EditMask = "N0";
             this.SO_TIENtextEdit.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
-            this.SO_TIENtextEdit.Properties.Mask.UseMaskAsDisplayFormat = true;
             this.SO_TIENtextEdit.Size = new System.Drawing.Size(215, 24);
             this.SO_TIENtextEdit.StyleController = this.layoutControl1;
             this.SO_TIENtextEdit.TabIndex = 19;
@@ -425,7 +424,6 @@
             this.LUONG_CO_BANtextEdit.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.LUONG_CO_BANtextEdit.Properties.Mask.EditMask = "N0";
             this.LUONG_CO_BANtextEdit.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
-            this.LUONG_CO_BANtextEdit.Properties.Mask.UseMaskAsDisplayFormat = true;
             this.LUONG_CO_BANtextEdit.Size = new System.Drawing.Size(215, 24);
             this.LUONG_CO_BANtextEdit.StyleController = this.layoutControl1;
             this.LUONG_CO_BANtextEdit.TabIndex = 23;

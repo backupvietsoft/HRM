@@ -76,19 +76,19 @@ namespace Vs.Category
             dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetListNGACH_LUONG", Commons.Modules.UserName, Commons.Modules.TypeLanguage));
             ID_NLSearchLookUpEdit.Properties.DataSource = dt;
             ID_NLSearchLookUpEdit.Properties.ValueMember = "ID_NL";
-            ID_NLSearchLookUpEdit.Properties.DisplayMember = "TEN_NL";
+            ID_NLSearchLookUpEdit.Properties.DisplayMember = "MS_NL";
             ID_NLSearchLookUpEdit.Properties.PopulateViewColumns();
 
             try
             {
                 //SELECT DISTINCT T1.ID_DV,MSDV, T2.TEN_DV,T1.DIA_CHI,T1.DIEN_THOAI,T1.FAX,T1.SO_TAI_KHOAN,T1.TEN_NGAN_HANG ,T1.MAC_DINH
                 ID_NLSearchLookUpEdit.Properties.View.Columns["ID_NL"].Visible = false;
-                ID_NLSearchLookUpEdit.Properties.View.Columns["MS_NL"].Visible = false;
                 ID_NLSearchLookUpEdit.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.None;
 
                 ID_NLSearchLookUpEdit.Properties.View.Columns["TEN_NL"].Caption = Commons.Modules.ObjLanguages.GetLanguage("ucListDMuc", "TEN_NL");
+                ID_NLSearchLookUpEdit.Properties.View.Columns["MS_NL"].Caption = Commons.Modules.ObjLanguages.GetLanguage("ucListDMuc", "MS_NL");
 
-                ID_NLSearchLookUpEdit.Properties.View.Columns["TEN_NL"].AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+                //ID_NLSearchLookUpEdit.Properties.View.Columns["TEN_NL"].AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             }
             catch (Exception EX)
             {
@@ -114,6 +114,8 @@ namespace Vs.Category
                 ID_DVSearchLookUpEdit.Properties.View.Columns["DIEN_THOAI"].Visible = false;
                 ID_DVSearchLookUpEdit.Properties.View.Columns["FAX"].Visible = false;
                 ID_DVSearchLookUpEdit.Properties.View.Columns["SO_TAI_KHOAN"].Visible = false;
+                ID_DVSearchLookUpEdit.Properties.View.Columns["PC_CN"].Visible = false;
+                ID_DVSearchLookUpEdit.Properties.View.Columns["STT_DV"].Visible = false;
                 ID_DVSearchLookUpEdit.Properties.View.Columns["TEN_NGAN_HANG"].Visible = false;
                 ID_DVSearchLookUpEdit.Properties.View.Columns["MAC_DINH"].Visible = false;
 

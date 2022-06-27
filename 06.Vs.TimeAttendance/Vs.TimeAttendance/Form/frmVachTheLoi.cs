@@ -201,7 +201,6 @@ namespace Vs.TimeAttendance
                 Commons.Modules.sPS = "0Load";
                 DataTable dt = new DataTable();
                 dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetDuLieuQuetTheLoi", cboDV.EditValue, cboXN.EditValue, cboTo.EditValue, datNgayChamCong.DateTime, Commons.Modules.UserName, Commons.Modules.TypeLanguage));
-                dt.PrimaryKey = new DataColumn[] { dt.Columns["ID_CN"] };
                 for (int i = 0; i < dt.Columns.Count; i++)
                 {
                     dt.Columns[i].ReadOnly = false;

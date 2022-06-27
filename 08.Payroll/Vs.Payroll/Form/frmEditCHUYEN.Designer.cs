@@ -34,6 +34,8 @@
             DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions1 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
             DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions2 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
             this.dataLayoutControl1 = new DevExpress.XtraDataLayout.DataLayoutControl();
+            this.TEN_CHUYEN_HTextEdit = new DevExpress.XtraEditors.TextEdit();
+            this.TEN_CHUYEN_ATextEdit = new DevExpress.XtraEditors.TextEdit();
             this.txtSTT = new DevExpress.XtraEditors.TextEdit();
             this.TEN_CHUYENTextEdit = new DevExpress.XtraEditors.TextEdit();
             this.TOLookUpEdit = new DevExpress.XtraEditors.LookUpEdit();
@@ -44,16 +46,16 @@
             this.ItemForTEN_CHUYEN = new DevExpress.XtraLayout.LayoutControlItem();
             this.ItemForSTT_CHUYEN = new DevExpress.XtraLayout.LayoutControlItem();
             this.ItemForSTT = new DevExpress.XtraLayout.LayoutControlItem();
+            this.ItemForTEN_CHUYEN_A = new DevExpress.XtraLayout.LayoutControlItem();
+            this.ItemForTEN_CHUYEN_H = new DevExpress.XtraLayout.LayoutControlItem();
             this.tablePanel1 = new DevExpress.Utils.Layout.TablePanel();
             this.btnALL = new DevExpress.XtraBars.Docking2010.WindowsUIButtonPanel();
             this.dxValidationProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
             this.dxValidationProvider11 = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
-            this.TEN_CHUYEN_ATextEdit = new DevExpress.XtraEditors.TextEdit();
-            this.ItemForTEN_CHUYEN_A = new DevExpress.XtraLayout.LayoutControlItem();
-            this.TEN_CHUYEN_HTextEdit = new DevExpress.XtraEditors.TextEdit();
-            this.ItemForTEN_CHUYEN_H = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataLayoutControl1)).BeginInit();
             this.dataLayoutControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.TEN_CHUYEN_HTextEdit.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TEN_CHUYEN_ATextEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSTT.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.TEN_CHUYENTextEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.TOLookUpEdit.Properties)).BeginInit();
@@ -64,14 +66,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.ItemForTEN_CHUYEN)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForSTT_CHUYEN)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForSTT)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForTEN_CHUYEN_A)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForTEN_CHUYEN_H)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).BeginInit();
             this.tablePanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider11)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.TEN_CHUYEN_ATextEdit.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemForTEN_CHUYEN_A)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.TEN_CHUYEN_HTextEdit.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemForTEN_CHUYEN_H)).BeginInit();
             this.SuspendLayout();
             // 
             // dataLayoutControl1
@@ -84,27 +84,47 @@
             this.dataLayoutControl1.Controls.Add(this.TOLookUpEdit);
             this.dataLayoutControl1.Controls.Add(this.STT_CHUYENTextEdit);
             this.dataLayoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataLayoutControl1.Location = new System.Drawing.Point(84, 24);
+            this.dataLayoutControl1.Location = new System.Drawing.Point(74, 21);
             this.dataLayoutControl1.Name = "dataLayoutControl1";
             this.dataLayoutControl1.Root = this.Root;
             this.tablePanel1.SetRow(this.dataLayoutControl1, 1);
-            this.dataLayoutControl1.Size = new System.Drawing.Size(644, 386);
+            this.dataLayoutControl1.Size = new System.Drawing.Size(563, 327);
             this.dataLayoutControl1.TabIndex = 0;
             this.dataLayoutControl1.Text = "dataLayoutControl1";
             // 
+            // TEN_CHUYEN_HTextEdit
+            // 
+            this.TEN_CHUYEN_HTextEdit.Location = new System.Drawing.Point(146, 92);
+            this.TEN_CHUYEN_HTextEdit.Name = "TEN_CHUYEN_HTextEdit";
+            this.TEN_CHUYEN_HTextEdit.Size = new System.Drawing.Size(411, 24);
+            this.TEN_CHUYEN_HTextEdit.StyleController = this.dataLayoutControl1;
+            this.TEN_CHUYEN_HTextEdit.TabIndex = 14;
+            // 
+            // TEN_CHUYEN_ATextEdit
+            // 
+            this.TEN_CHUYEN_ATextEdit.Location = new System.Drawing.Point(146, 66);
+            this.TEN_CHUYEN_ATextEdit.Name = "TEN_CHUYEN_ATextEdit";
+            this.TEN_CHUYEN_ATextEdit.Size = new System.Drawing.Size(411, 24);
+            this.TEN_CHUYEN_ATextEdit.StyleController = this.dataLayoutControl1;
+            this.TEN_CHUYEN_ATextEdit.TabIndex = 13;
+            // 
             // txtSTT
             // 
-            this.txtSTT.Location = new System.Drawing.Point(173, 168);
+            this.txtSTT.Location = new System.Drawing.Point(146, 148);
             this.txtSTT.Name = "txtSTT";
-            this.txtSTT.Size = new System.Drawing.Size(459, 26);
+            this.txtSTT.Properties.Appearance.Options.UseTextOptions = true;
+            this.txtSTT.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.txtSTT.Properties.Mask.EditMask = "N0";
+            this.txtSTT.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
+            this.txtSTT.Size = new System.Drawing.Size(411, 24);
             this.txtSTT.StyleController = this.dataLayoutControl1;
             this.txtSTT.TabIndex = 12;
             // 
             // TEN_CHUYENTextEdit
             // 
-            this.TEN_CHUYENTextEdit.Location = new System.Drawing.Point(178, 45);
+            this.TEN_CHUYENTextEdit.Location = new System.Drawing.Point(151, 38);
             this.TEN_CHUYENTextEdit.Name = "TEN_CHUYENTextEdit";
-            this.TEN_CHUYENTextEdit.Size = new System.Drawing.Size(449, 26);
+            this.TEN_CHUYENTextEdit.Size = new System.Drawing.Size(401, 24);
             this.TEN_CHUYENTextEdit.StyleController = this.dataLayoutControl1;
             this.TEN_CHUYENTextEdit.TabIndex = 7;
             conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
@@ -115,20 +135,20 @@
             // TOLookUpEdit
             // 
             this.TOLookUpEdit.EditValue = "[Not null]";
-            this.TOLookUpEdit.Location = new System.Drawing.Point(178, 137);
+            this.TOLookUpEdit.Location = new System.Drawing.Point(151, 120);
             this.TOLookUpEdit.Name = "TOLookUpEdit";
             this.TOLookUpEdit.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.TOLookUpEdit.Properties.NullText = "";
-            this.TOLookUpEdit.Size = new System.Drawing.Size(449, 26);
+            this.TOLookUpEdit.Size = new System.Drawing.Size(401, 24);
             this.TOLookUpEdit.StyleController = this.dataLayoutControl1;
             this.TOLookUpEdit.TabIndex = 11;
             // 
             // STT_CHUYENTextEdit
             // 
-            this.STT_CHUYENTextEdit.Location = new System.Drawing.Point(178, 13);
+            this.STT_CHUYENTextEdit.Location = new System.Drawing.Point(151, 8);
             this.STT_CHUYENTextEdit.Name = "STT_CHUYENTextEdit";
-            this.STT_CHUYENTextEdit.Size = new System.Drawing.Size(449, 26);
+            this.STT_CHUYENTextEdit.Size = new System.Drawing.Size(401, 24);
             this.STT_CHUYENTextEdit.StyleController = this.dataLayoutControl1;
             this.STT_CHUYENTextEdit.TabIndex = 7;
             conditionValidationRule2.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
@@ -143,7 +163,7 @@
             this.Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlGroup1});
             this.Root.Name = "Root";
-            this.Root.Size = new System.Drawing.Size(644, 386);
+            this.Root.Size = new System.Drawing.Size(563, 327);
             this.Root.TextVisible = false;
             // 
             // layoutControlGroup1
@@ -159,31 +179,31 @@
             this.ItemForTEN_CHUYEN_H});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "autoGeneratedGroup0";
-            this.layoutControlGroup1.Size = new System.Drawing.Size(624, 366);
+            this.layoutControlGroup1.Size = new System.Drawing.Size(553, 317);
             // 
             // ItemForTO
             // 
             this.ItemForTO.AppearanceItemCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.ItemForTO.AppearanceItemCaption.Options.UseForeColor = true;
             this.ItemForTO.Control = this.TOLookUpEdit;
-            this.ItemForTO.Location = new System.Drawing.Point(0, 124);
+            this.ItemForTO.Location = new System.Drawing.Point(0, 112);
             this.ItemForTO.Name = "ItemForTO";
-            this.ItemForTO.Padding = new DevExpress.XtraLayout.Utils.Padding(7, 7, 3, 3);
-            this.ItemForTO.Size = new System.Drawing.Size(624, 32);
+            this.ItemForTO.Padding = new DevExpress.XtraLayout.Utils.Padding(6, 6, 3, 3);
+            this.ItemForTO.Size = new System.Drawing.Size(553, 30);
             this.ItemForTO.Text = "TO";
-            this.ItemForTO.TextSize = new System.Drawing.Size(158, 20);
+            this.ItemForTO.TextSize = new System.Drawing.Size(137, 17);
             // 
             // ItemForTEN_CHUYEN
             // 
             this.ItemForTEN_CHUYEN.AppearanceItemCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.ItemForTEN_CHUYEN.AppearanceItemCaption.Options.UseForeColor = true;
             this.ItemForTEN_CHUYEN.Control = this.TEN_CHUYENTextEdit;
-            this.ItemForTEN_CHUYEN.Location = new System.Drawing.Point(0, 32);
+            this.ItemForTEN_CHUYEN.Location = new System.Drawing.Point(0, 30);
             this.ItemForTEN_CHUYEN.Name = "ItemForTEN_CHUYEN";
-            this.ItemForTEN_CHUYEN.Padding = new DevExpress.XtraLayout.Utils.Padding(7, 7, 3, 3);
-            this.ItemForTEN_CHUYEN.Size = new System.Drawing.Size(624, 32);
+            this.ItemForTEN_CHUYEN.Padding = new DevExpress.XtraLayout.Utils.Padding(6, 6, 3, 3);
+            this.ItemForTEN_CHUYEN.Size = new System.Drawing.Size(553, 30);
             this.ItemForTEN_CHUYEN.Text = "TEN_CHUYEN";
-            this.ItemForTEN_CHUYEN.TextSize = new System.Drawing.Size(158, 20);
+            this.ItemForTEN_CHUYEN.TextSize = new System.Drawing.Size(137, 17);
             // 
             // ItemForSTT_CHUYEN
             // 
@@ -194,18 +214,34 @@
             this.ItemForSTT_CHUYEN.CustomizationFormText = "TEN_CHUYEN";
             this.ItemForSTT_CHUYEN.Location = new System.Drawing.Point(0, 0);
             this.ItemForSTT_CHUYEN.Name = "ItemForSTT_CHUYEN";
-            this.ItemForSTT_CHUYEN.Padding = new DevExpress.XtraLayout.Utils.Padding(7, 7, 3, 3);
-            this.ItemForSTT_CHUYEN.Size = new System.Drawing.Size(624, 32);
+            this.ItemForSTT_CHUYEN.Padding = new DevExpress.XtraLayout.Utils.Padding(6, 6, 3, 3);
+            this.ItemForSTT_CHUYEN.Size = new System.Drawing.Size(553, 30);
             this.ItemForSTT_CHUYEN.Text = "STT_CHUYEN";
-            this.ItemForSTT_CHUYEN.TextSize = new System.Drawing.Size(158, 20);
+            this.ItemForSTT_CHUYEN.TextSize = new System.Drawing.Size(137, 17);
             // 
             // ItemForSTT
             // 
             this.ItemForSTT.Control = this.txtSTT;
-            this.ItemForSTT.Location = new System.Drawing.Point(0, 156);
+            this.ItemForSTT.Location = new System.Drawing.Point(0, 142);
             this.ItemForSTT.Name = "ItemForSTT";
-            this.ItemForSTT.Size = new System.Drawing.Size(624, 210);
-            this.ItemForSTT.TextSize = new System.Drawing.Size(158, 20);
+            this.ItemForSTT.Size = new System.Drawing.Size(553, 175);
+            this.ItemForSTT.TextSize = new System.Drawing.Size(137, 17);
+            // 
+            // ItemForTEN_CHUYEN_A
+            // 
+            this.ItemForTEN_CHUYEN_A.Control = this.TEN_CHUYEN_ATextEdit;
+            this.ItemForTEN_CHUYEN_A.Location = new System.Drawing.Point(0, 60);
+            this.ItemForTEN_CHUYEN_A.Name = "ItemForTEN_CHUYEN_A";
+            this.ItemForTEN_CHUYEN_A.Size = new System.Drawing.Size(553, 26);
+            this.ItemForTEN_CHUYEN_A.TextSize = new System.Drawing.Size(137, 17);
+            // 
+            // ItemForTEN_CHUYEN_H
+            // 
+            this.ItemForTEN_CHUYEN_H.Control = this.TEN_CHUYEN_HTextEdit;
+            this.ItemForTEN_CHUYEN_H.Location = new System.Drawing.Point(0, 86);
+            this.ItemForTEN_CHUYEN_H.Name = "ItemForTEN_CHUYEN_H";
+            this.ItemForTEN_CHUYEN_H.Size = new System.Drawing.Size(553, 26);
+            this.ItemForTEN_CHUYEN_H.TextSize = new System.Drawing.Size(137, 17);
             // 
             // tablePanel1
             // 
@@ -220,7 +256,7 @@
             this.tablePanel1.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] {
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 5F),
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 95F)});
-            this.tablePanel1.Size = new System.Drawing.Size(813, 413);
+            this.tablePanel1.Size = new System.Drawing.Size(711, 351);
             this.tablePanel1.TabIndex = 7;
             // 
             // btnALL
@@ -248,53 +284,19 @@
             this.btnALL.ContentAlignment = System.Drawing.ContentAlignment.MiddleRight;
             this.btnALL.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnALL.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.btnALL.Location = new System.Drawing.Point(0, 413);
-            this.btnALL.Margin = new System.Windows.Forms.Padding(0);
+            this.btnALL.Location = new System.Drawing.Point(0, 351);
             this.btnALL.Name = "btnALL";
-            this.btnALL.Padding = new System.Windows.Forms.Padding(0, 14, 0, 0);
-            this.btnALL.Size = new System.Drawing.Size(813, 40);
+            this.btnALL.Size = new System.Drawing.Size(711, 34);
             this.btnALL.TabIndex = 10;
             this.btnALL.Text = "btnALLPanel1";
             this.btnALL.UseButtonBackgroundImages = false;
             this.btnALL.ButtonClick += new DevExpress.XtraBars.Docking2010.ButtonEventHandler(this.windowsUIButtonPanel2_ButtonClick);
             // 
-            // TEN_CHUYEN_ATextEdit
-            // 
-            this.TEN_CHUYEN_ATextEdit.Location = new System.Drawing.Point(173, 76);
-            this.TEN_CHUYEN_ATextEdit.Name = "TEN_CHUYEN_ATextEdit";
-            this.TEN_CHUYEN_ATextEdit.Size = new System.Drawing.Size(459, 26);
-            this.TEN_CHUYEN_ATextEdit.StyleController = this.dataLayoutControl1;
-            this.TEN_CHUYEN_ATextEdit.TabIndex = 13;
-            // 
-            // ItemForTEN_CHUYEN_A
-            // 
-            this.ItemForTEN_CHUYEN_A.Control = this.TEN_CHUYEN_ATextEdit;
-            this.ItemForTEN_CHUYEN_A.Location = new System.Drawing.Point(0, 64);
-            this.ItemForTEN_CHUYEN_A.Name = "ItemForTEN_CHUYEN_A";
-            this.ItemForTEN_CHUYEN_A.Size = new System.Drawing.Size(624, 30);
-            this.ItemForTEN_CHUYEN_A.TextSize = new System.Drawing.Size(158, 20);
-            // 
-            // TEN_CHUYEN_HTextEdit
-            // 
-            this.TEN_CHUYEN_HTextEdit.Location = new System.Drawing.Point(173, 106);
-            this.TEN_CHUYEN_HTextEdit.Name = "TEN_CHUYEN_HTextEdit";
-            this.TEN_CHUYEN_HTextEdit.Size = new System.Drawing.Size(459, 26);
-            this.TEN_CHUYEN_HTextEdit.StyleController = this.dataLayoutControl1;
-            this.TEN_CHUYEN_HTextEdit.TabIndex = 14;
-            // 
-            // ItemForTEN_CHUYEN_H
-            // 
-            this.ItemForTEN_CHUYEN_H.Control = this.TEN_CHUYEN_HTextEdit;
-            this.ItemForTEN_CHUYEN_H.Location = new System.Drawing.Point(0, 94);
-            this.ItemForTEN_CHUYEN_H.Name = "ItemForTEN_CHUYEN_H";
-            this.ItemForTEN_CHUYEN_H.Size = new System.Drawing.Size(624, 30);
-            this.ItemForTEN_CHUYEN_H.TextSize = new System.Drawing.Size(158, 20);
-            // 
             // frmEditCHUYEN
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(813, 453);
+            this.ClientSize = new System.Drawing.Size(711, 385);
             this.Controls.Add(this.tablePanel1);
             this.Controls.Add(this.btnALL);
             this.Name = "frmEditCHUYEN";
@@ -302,6 +304,8 @@
             this.Resize += new System.EventHandler(this.frmEditCHUYEN_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.dataLayoutControl1)).EndInit();
             this.dataLayoutControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.TEN_CHUYEN_HTextEdit.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TEN_CHUYEN_ATextEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSTT.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.TEN_CHUYENTextEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.TOLookUpEdit.Properties)).EndInit();
@@ -312,14 +316,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.ItemForTEN_CHUYEN)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForSTT_CHUYEN)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForSTT)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForTEN_CHUYEN_A)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForTEN_CHUYEN_H)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).EndInit();
             this.tablePanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider11)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.TEN_CHUYEN_ATextEdit.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemForTEN_CHUYEN_A)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.TEN_CHUYEN_HTextEdit.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemForTEN_CHUYEN_H)).EndInit();
             this.ResumeLayout(false);
 
         }

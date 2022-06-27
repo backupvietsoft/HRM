@@ -273,11 +273,11 @@ namespace Vs.HRM
             chkNLuong.EditValue = false;
 
             NGAY_HIEU_LUCdateEdit.EditValue = DateTime.Now;
-            LUONG_CO_BANtextEdit.ResetText();
-            ID_NLlookUpEdit.ResetText();
-            ID_BLlookUpEdit.ResetText();
-            SO_TIENtextEdit.ResetText();
-            NOI_DUNGtextEdit.ResetText();
+            LUONG_CO_BANtextEdit.EditValue = null;
+            ID_NLlookUpEdit.EditValue = null;
+            ID_BLlookUpEdit.EditValue = null;
+            SO_TIENtextEdit.EditValue = null;
+            NOI_DUNGtextEdit.EditValue = "";
         }
         private bool CapNhapTheoDieuKien()
         {
@@ -303,8 +303,8 @@ namespace Vs.HRM
 
             dtC = new DataColumn();
             dtC.DataType = typeof(string);
-            dtC.ColumnName = "TEN_NL";
-            dtC.Caption = "TEN_NL";
+            dtC.ColumnName = "MS_NL";
+            dtC.Caption = "MS_NL";
             dtC.ReadOnly = false;
             dtC.Unique = true;
             dtDLCN.Columns.Add(dtC);
@@ -350,7 +350,7 @@ namespace Vs.HRM
             if (chkNLuong.Checked == true)
             {
                 dtR["ID_NL"] = ID_NLlookUpEdit.EditValue.ToString();
-                dtR["TEN_NL"] = ID_NLlookUpEdit.Text.ToString();
+                dtR["MS_NL"] = ID_NLlookUpEdit.Text.ToString();
 
             }
             if (chkBLuong.Checked == true)
@@ -378,6 +378,7 @@ namespace Vs.HRM
                 DataTable dtCN = new DataTable();
                 dtCN = (DataTable)grdCapNhatLCB.DataSource;
 
+                try { 
                 string sBT = "sBTDLCN" + Commons.Modules.UserName;
                 string sBT1 = "sBTCongNhan" + Commons.Modules.UserName;
                 Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBT, dtDLCN, "");
@@ -396,23 +397,12 @@ namespace Vs.HRM
                 da.Fill(ds);
                 DataTable dt = new DataTable();
                 dt = ds.Tables[0].Copy();
-                //Commons.Modules.ObjSystems.XoaTable(sBT);
                 grdCapNhatLCB.DataSource = dt;
-                //grdData.DataSource = ds.Tables[0].Copy();
-                //DataTable dt_CHON = new DataTable();
-                //dt_CHON = dt.AsEnumerable().Where(r => r.Field<Boolean>("CHON") == true).CopyToDataTable().Copy();
-
-                //for (int i = 0; i < grvCapNhatLCB.RowCount; i++)
-                //{
-                //    if (Convert.ToBoolean(grvCapNhatLCB.GetRowCellValue(i, "CHON")) == false) continue;
-                //    for (int j = 0; j < list.Count; j++)
-                //    {
-
-                //        grvCapNhatLCB.SetRowCellValue(i, list[j].col, list[j].val);
-                //        grvCapNhatLCB.UpdateCurrentRow();
-                //    }
-                //}
-
+                }
+                catch
+                {
+                    return false;
+                }
 
                 return true;
             }

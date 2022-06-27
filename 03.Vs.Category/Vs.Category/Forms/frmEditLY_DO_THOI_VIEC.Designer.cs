@@ -101,7 +101,6 @@
             this.btnALL.Location = new System.Drawing.Point(0, 302);
             this.btnALL.Margin = new System.Windows.Forms.Padding(0);
             this.btnALL.Name = "btnALL";
-            this.btnALL.Padding = new System.Windows.Forms.Padding(0, 12, 0, 0);
             this.btnALL.Size = new System.Drawing.Size(668, 34);
             this.btnALL.TabIndex = 10;
             this.btnALL.Text = "btnALLPanel1";
@@ -135,7 +134,7 @@
             this.dataLayoutControl1.Controls.Add(this.txtSTT);
             this.dataLayoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataLayoutControl1.Location = new System.Drawing.Point(71, 21);
-            this.dataLayoutControl1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dataLayoutControl1.Margin = new System.Windows.Forms.Padding(4);
             this.dataLayoutControl1.Name = "dataLayoutControl1";
             this.dataLayoutControl1.Root = this.Root;
             this.tablePanel1.SetRow(this.dataLayoutControl1, 1);
@@ -146,13 +145,13 @@
             // cboID_TT_HT
             // 
             this.cboID_TT_HT.EditValue = "";
-            this.cboID_TT_HT.Location = new System.Drawing.Point(116, 109);
+            this.cboID_TT_HT.Location = new System.Drawing.Point(117, 110);
             this.cboID_TT_HT.Name = "cboID_TT_HT";
             this.cboID_TT_HT.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cboID_TT_HT.Properties.NullText = "";
             this.cboID_TT_HT.Properties.PopupView = this.searchLookUpEdit1View;
-            this.cboID_TT_HT.Size = new System.Drawing.Size(405, 24);
+            this.cboID_TT_HT.Size = new System.Drawing.Size(403, 24);
             this.cboID_TT_HT.StyleController = this.dataLayoutControl1;
             this.cboID_TT_HT.TabIndex = 8;
             // 
@@ -166,10 +165,10 @@
             // 
             // TEN_LD_TVTextEdit
             // 
-            this.TEN_LD_TVTextEdit.Location = new System.Drawing.Point(116, 5);
-            this.TEN_LD_TVTextEdit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TEN_LD_TVTextEdit.Location = new System.Drawing.Point(117, 6);
+            this.TEN_LD_TVTextEdit.Margin = new System.Windows.Forms.Padding(4);
             this.TEN_LD_TVTextEdit.Name = "TEN_LD_TVTextEdit";
-            this.TEN_LD_TVTextEdit.Size = new System.Drawing.Size(405, 24);
+            this.TEN_LD_TVTextEdit.Size = new System.Drawing.Size(403, 24);
             this.TEN_LD_TVTextEdit.StyleController = this.dataLayoutControl1;
             this.TEN_LD_TVTextEdit.TabIndex = 4;
             conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
@@ -178,44 +177,46 @@
             // 
             // TEN_LD_TV_ATextEdit
             // 
-            this.TEN_LD_TV_ATextEdit.Location = new System.Drawing.Point(116, 31);
-            this.TEN_LD_TV_ATextEdit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TEN_LD_TV_ATextEdit.Location = new System.Drawing.Point(117, 32);
+            this.TEN_LD_TV_ATextEdit.Margin = new System.Windows.Forms.Padding(4);
             this.TEN_LD_TV_ATextEdit.Name = "TEN_LD_TV_ATextEdit";
-            this.TEN_LD_TV_ATextEdit.Size = new System.Drawing.Size(405, 24);
+            this.TEN_LD_TV_ATextEdit.Size = new System.Drawing.Size(403, 24);
             this.TEN_LD_TV_ATextEdit.StyleController = this.dataLayoutControl1;
             this.TEN_LD_TV_ATextEdit.TabIndex = 5;
             // 
             // TEN_LD_TV_HTextEdit
             // 
-            this.TEN_LD_TV_HTextEdit.Location = new System.Drawing.Point(116, 57);
-            this.TEN_LD_TV_HTextEdit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TEN_LD_TV_HTextEdit.Location = new System.Drawing.Point(117, 58);
+            this.TEN_LD_TV_HTextEdit.Margin = new System.Windows.Forms.Padding(4);
             this.TEN_LD_TV_HTextEdit.Name = "TEN_LD_TV_HTextEdit";
-            this.TEN_LD_TV_HTextEdit.Size = new System.Drawing.Size(405, 24);
+            this.TEN_LD_TV_HTextEdit.Size = new System.Drawing.Size(403, 24);
             this.TEN_LD_TV_HTextEdit.StyleController = this.dataLayoutControl1;
             this.TEN_LD_TV_HTextEdit.TabIndex = 6;
             // 
             // HE_SOTextEdit
             // 
-            this.HE_SOTextEdit.Location = new System.Drawing.Point(116, 83);
-            this.HE_SOTextEdit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.HE_SOTextEdit.Location = new System.Drawing.Point(117, 84);
+            this.HE_SOTextEdit.Margin = new System.Windows.Forms.Padding(4);
             this.HE_SOTextEdit.Name = "HE_SOTextEdit";
             this.HE_SOTextEdit.Properties.Appearance.Options.UseTextOptions = true;
             this.HE_SOTextEdit.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.HE_SOTextEdit.Properties.Mask.EditMask = "F";
             this.HE_SOTextEdit.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.HE_SOTextEdit.Properties.Mask.UseMaskAsDisplayFormat = true;
-            this.HE_SOTextEdit.Size = new System.Drawing.Size(405, 24);
+            this.HE_SOTextEdit.Size = new System.Drawing.Size(403, 24);
             this.HE_SOTextEdit.StyleController = this.dataLayoutControl1;
             this.HE_SOTextEdit.TabIndex = 7;
             // 
             // txtSTT
             // 
             this.txtSTT.EditValue = "";
-            this.txtSTT.Location = new System.Drawing.Point(116, 135);
+            this.txtSTT.Location = new System.Drawing.Point(117, 136);
             this.txtSTT.Name = "txtSTT";
             this.txtSTT.Properties.Appearance.Options.UseTextOptions = true;
             this.txtSTT.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.txtSTT.Size = new System.Drawing.Size(405, 24);
+            this.txtSTT.Properties.Mask.EditMask = "N0";
+            this.txtSTT.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
+            this.txtSTT.Size = new System.Drawing.Size(403, 24);
             this.txtSTT.StyleController = this.dataLayoutControl1;
             this.txtSTT.TabIndex = 9;
             // 
@@ -242,7 +243,7 @@
             this.ItemForSTT});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "autoGeneratedGroup0";
-            this.layoutControlGroup1.Size = new System.Drawing.Size(518, 303);
+            this.layoutControlGroup1.Size = new System.Drawing.Size(516, 301);
             // 
             // ItemForTEN_LD_TV
             // 
@@ -251,7 +252,7 @@
             this.ItemForTEN_LD_TV.Control = this.TEN_LD_TVTextEdit;
             this.ItemForTEN_LD_TV.Location = new System.Drawing.Point(0, 0);
             this.ItemForTEN_LD_TV.Name = "ItemForTEN_LD_TV";
-            this.ItemForTEN_LD_TV.Size = new System.Drawing.Size(518, 26);
+            this.ItemForTEN_LD_TV.Size = new System.Drawing.Size(516, 26);
             this.ItemForTEN_LD_TV.Text = "TEN_LD_TV";
             this.ItemForTEN_LD_TV.TextSize = new System.Drawing.Size(108, 17);
             // 
@@ -260,7 +261,7 @@
             this.ItemForTEN_LD_TV_A.Control = this.TEN_LD_TV_ATextEdit;
             this.ItemForTEN_LD_TV_A.Location = new System.Drawing.Point(0, 26);
             this.ItemForTEN_LD_TV_A.Name = "ItemForTEN_LD_TV_A";
-            this.ItemForTEN_LD_TV_A.Size = new System.Drawing.Size(518, 26);
+            this.ItemForTEN_LD_TV_A.Size = new System.Drawing.Size(516, 26);
             this.ItemForTEN_LD_TV_A.Text = "TEN_LD_TV_A";
             this.ItemForTEN_LD_TV_A.TextSize = new System.Drawing.Size(108, 17);
             // 
@@ -269,7 +270,7 @@
             this.ItemForTEN_LD_TV_H.Control = this.TEN_LD_TV_HTextEdit;
             this.ItemForTEN_LD_TV_H.Location = new System.Drawing.Point(0, 52);
             this.ItemForTEN_LD_TV_H.Name = "ItemForTEN_LD_TV_H";
-            this.ItemForTEN_LD_TV_H.Size = new System.Drawing.Size(518, 26);
+            this.ItemForTEN_LD_TV_H.Size = new System.Drawing.Size(516, 26);
             this.ItemForTEN_LD_TV_H.Text = "TEN_LD_TV_H";
             this.ItemForTEN_LD_TV_H.TextSize = new System.Drawing.Size(108, 17);
             // 
@@ -278,7 +279,7 @@
             this.ItemForTEN_TT_HT.Control = this.cboID_TT_HT;
             this.ItemForTEN_TT_HT.Location = new System.Drawing.Point(0, 104);
             this.ItemForTEN_TT_HT.Name = "ItemForTEN_TT_HT";
-            this.ItemForTEN_TT_HT.Size = new System.Drawing.Size(518, 26);
+            this.ItemForTEN_TT_HT.Size = new System.Drawing.Size(516, 26);
             this.ItemForTEN_TT_HT.TextSize = new System.Drawing.Size(108, 17);
             // 
             // ItemForHE_SO
@@ -286,7 +287,7 @@
             this.ItemForHE_SO.Control = this.HE_SOTextEdit;
             this.ItemForHE_SO.Location = new System.Drawing.Point(0, 78);
             this.ItemForHE_SO.Name = "ItemForHE_SO";
-            this.ItemForHE_SO.Size = new System.Drawing.Size(518, 26);
+            this.ItemForHE_SO.Size = new System.Drawing.Size(516, 26);
             this.ItemForHE_SO.Text = "HE_SO";
             this.ItemForHE_SO.TextSize = new System.Drawing.Size(108, 17);
             // 
@@ -295,7 +296,7 @@
             this.ItemForSTT.Control = this.txtSTT;
             this.ItemForSTT.Location = new System.Drawing.Point(0, 130);
             this.ItemForSTT.Name = "ItemForSTT";
-            this.ItemForSTT.Size = new System.Drawing.Size(518, 173);
+            this.ItemForSTT.Size = new System.Drawing.Size(516, 171);
             this.ItemForSTT.TextSize = new System.Drawing.Size(108, 17);
             // 
             // frmEditLY_DO_THOI_VIEC
@@ -305,7 +306,7 @@
             this.ClientSize = new System.Drawing.Size(668, 336);
             this.Controls.Add(this.btnALL);
             this.Controls.Add(this.tablePanel1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmEditLY_DO_THOI_VIEC";
             this.Text = "frmEditLY_DO_THOI_VIEC";
             this.Load += new System.EventHandler(this.frmEditLY_DO_THOI_VIEC_Load);

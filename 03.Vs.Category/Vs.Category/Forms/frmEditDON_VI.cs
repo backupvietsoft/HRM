@@ -27,7 +27,7 @@ namespace Vs.Category
             //myNewThread.Start();
 
             Commons.Modules.ObjSystems.ThayDoiNN(this, layoutControlGroup1, btnALL);
-          
+
         }
 
         private void LoadText()
@@ -54,7 +54,7 @@ namespace Vs.Category
                 ItemForTEN_NGAN_HANG.Control.Text = dtTmp.Rows[0]["TEN_NGAN_HANG"].ToString();
                 ItemForNGUOI_DAI_DIEN.Control.Text = dtTmp.Rows[0]["NGUOI_DAI_DIEN"].ToString();
                 ItemForSTT_DV.Control.Text = dtTmp.Rows[0]["STT_DV"].ToString();
-               if (bAddEditDV)
+                if (bAddEditDV)
                 {
                     sSql = "SELECT ISNULL(MAX(STT_DV),0) + 1 FROM dbo.[DON_VI] ";
                     sSql = (String)SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, sSql).ToString();
@@ -111,11 +111,11 @@ namespace Vs.Category
                             if (!dxValidationProvider1.Validate()) return;
                             if (bKiemTrung()) return;
                             Commons.Modules.sId =
-                            SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spUpdateDonVi", (bAddEditDV ? -1 : iIdDV), ItemForMSDV.Control.Text, 
-                                    ItemForTEN_DON_VI.Control.Text, ItemForTEN_DON_VI_A.Control.Text, ItemForTEN_DON_VI_H.Control.Text, ItemForTEN_NGAN.Control.Text, 
-                                    ItemForDIA_CHI.Control.Text, Convert.ToBoolean(MAC_DINHCheckEdit.EditValue), ItemForCHU_QUAN.Control.Text, ItemForDIEN_THOAI.Control.Text, 
-                                    ItemForFAX.Control.Text, ItemForMS_BHYT.Control.Text, ItemForMS_BHXH.Control.Text, ItemForSO_TAI_KHOAN.Control.Text, 
-                                    ItemForTEN_NGAN_HANG.Control.Text,  ItemForNGUOI_DAI_DIEN.Control.Text, 
+                            SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spUpdateDonVi", (bAddEditDV ? -1 : iIdDV), ItemForMSDV.Control.Text,
+                                    ItemForTEN_DON_VI.Control.Text, ItemForTEN_DON_VI_A.Control.Text, ItemForTEN_DON_VI_H.Control.Text, ItemForTEN_NGAN.Control.Text,
+                                    ItemForDIA_CHI.Control.Text, Convert.ToBoolean(MAC_DINHCheckEdit.EditValue), ItemForCHU_QUAN.Control.Text, ItemForDIEN_THOAI.Control.Text,
+                                    ItemForFAX.Control.Text, ItemForMS_BHYT.Control.Text, ItemForMS_BHXH.Control.Text, ItemForSO_TAI_KHOAN.Control.Text,
+                                    ItemForTEN_NGAN_HANG.Control.Text, ItemForNGUOI_DAI_DIEN.Control.Text,
                                      ItemForSTT_DV.Control.Text == "" ? ItemForSTT_DV.Control.Text = null : ItemForSTT_DV.Control.Text).ToString();
 
                             if (bAddEditDV)
@@ -148,19 +148,27 @@ namespace Vs.Category
         {
             try
             {
-                string sSql = "";
-                string tenSql = "";
-                if (bAddEditDV || MS != MSDVTextEdit.EditValue.ToString())
+                DataTable dtTmp = new DataTable();
+                Int16 iKiem = 0;
+
+                iKiem = Convert.ToInt16(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spCheckData", "ID_DV",
+                    (bAddEditDV ? "-1" : iIdDV.ToString()), "DON_VI", "MSDV", MSDVTextEdit.Text.ToString(),
+                    "", "", "", ""));
+                if (iKiem > 0)
                 {
-                    sSql = "SELECT COUNT(*) FROM DON_VI WHERE MSDV = '" + MSDVTextEdit.Text + "'";
-                    tenSql = "SELECT TEN_DV FROM DON_VI WHERE TEN_DV = N'" + TEN_DON_VITextEdit.Text + "'";
-                    if (Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, sSql)) != 0)
-                    {
-                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_MaSoTrung"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"));
-                        MSDVTextEdit.Focus();
-                        return true;
-                    }
-                    if (Convert.ToString(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, tenSql)) == Convert.ToString((TEN_DON_VITextEdit.Text)))
+                    XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_TenTrung"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"));
+                    MSDVTextEdit.Focus();
+                    return true;
+                }
+
+                iKiem = 0;
+
+                if (!string.IsNullOrEmpty(TEN_DON_VITextEdit.Text))
+                {
+                    iKiem = Convert.ToInt16(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spCheckData", "ID_DV",
+                        (bAddEditDV ? "-1" : iIdDV.ToString()), "DON_VI", "TEN_DV", TEN_DON_VITextEdit.Text.ToString(),
+                        "", "", "", ""));
+                    if (iKiem > 0)
                     {
                         XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_TenTrung"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"));
                         TEN_DON_VITextEdit.Focus();

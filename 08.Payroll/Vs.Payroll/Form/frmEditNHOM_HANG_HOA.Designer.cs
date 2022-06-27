@@ -138,9 +138,9 @@
             // 
             // txtTEN_NHH_H
             // 
-            this.txtTEN_NHH_H.Location = new System.Drawing.Point(115, 72);
+            this.txtTEN_NHH_H.Location = new System.Drawing.Point(94, 58);
             this.txtTEN_NHH_H.Name = "txtTEN_NHH_H";
-            this.txtTEN_NHH_H.Size = new System.Drawing.Size(507, 26);
+            this.txtTEN_NHH_H.Size = new System.Drawing.Size(534, 24);
             this.txtTEN_NHH_H.StyleController = this.dataLayoutControl1;
             this.txtTEN_NHH_H.TabIndex = 6;
             conditionValidationRule1.ErrorText = "This value is not valid";
@@ -148,17 +148,17 @@
             // 
             // txtTEN_NHH_A
             // 
-            this.txtTEN_NHH_A.Location = new System.Drawing.Point(115, 42);
+            this.txtTEN_NHH_A.Location = new System.Drawing.Point(94, 32);
             this.txtTEN_NHH_A.Name = "txtTEN_NHH_A";
-            this.txtTEN_NHH_A.Size = new System.Drawing.Size(507, 26);
+            this.txtTEN_NHH_A.Size = new System.Drawing.Size(534, 24);
             this.txtTEN_NHH_A.StyleController = this.dataLayoutControl1;
             this.txtTEN_NHH_A.TabIndex = 5;
             // 
             // txtTEN_NHH
             // 
-            this.txtTEN_NHH.Location = new System.Drawing.Point(115, 12);
+            this.txtTEN_NHH.Location = new System.Drawing.Point(94, 6);
             this.txtTEN_NHH.Name = "txtTEN_NHH";
-            this.txtTEN_NHH.Size = new System.Drawing.Size(342, 26);
+            this.txtTEN_NHH.Size = new System.Drawing.Size(366, 24);
             this.txtTEN_NHH.StyleController = this.dataLayoutControl1;
             this.txtTEN_NHH.TabIndex = 4;
             conditionValidationRule2.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
@@ -167,18 +167,22 @@
             // 
             // txtNOTE
             // 
-            this.txtNOTE.Location = new System.Drawing.Point(115, 102);
+            this.txtNOTE.Location = new System.Drawing.Point(94, 84);
             this.txtNOTE.Name = "txtNOTE";
-            this.txtNOTE.Size = new System.Drawing.Size(507, 26);
+            this.txtNOTE.Size = new System.Drawing.Size(534, 24);
             this.txtNOTE.StyleController = this.dataLayoutControl1;
             this.txtNOTE.TabIndex = 8;
             // 
             // txtTHU_TU
             // 
             this.txtTHU_TU.EditValue = "";
-            this.txtTHU_TU.Location = new System.Drawing.Point(564, 12);
+            this.txtTHU_TU.Location = new System.Drawing.Point(550, 6);
             this.txtTHU_TU.Name = "txtTHU_TU";
-            this.txtTHU_TU.Size = new System.Drawing.Size(58, 26);
+            this.txtTHU_TU.Properties.Appearance.Options.UseTextOptions = true;
+            this.txtTHU_TU.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.txtTHU_TU.Properties.Mask.EditMask = "N0";
+            this.txtTHU_TU.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
+            this.txtTHU_TU.Size = new System.Drawing.Size(78, 24);
             this.txtTHU_TU.StyleController = this.dataLayoutControl1;
             this.txtTHU_TU.TabIndex = 7;
             // 
@@ -200,44 +204,45 @@
             // 
             this.lblTEN_NHH.AppearanceItemCaption.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTEN_NHH.AppearanceItemCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.lblTEN_NHH.AppearanceItemCaption.Options.UseFont = true;
             this.lblTEN_NHH.AppearanceItemCaption.Options.UseForeColor = true;
             this.lblTEN_NHH.Control = this.txtTEN_NHH;
             this.lblTEN_NHH.Location = new System.Drawing.Point(0, 0);
             this.lblTEN_NHH.Name = "lblTEN_NHH";
-            this.lblTEN_NHH.Size = new System.Drawing.Size(449, 30);
-            this.lblTEN_NHH.TextSize = new System.Drawing.Size(100, 20);
+            this.lblTEN_NHH.Size = new System.Drawing.Size(456, 26);
+            this.lblTEN_NHH.TextSize = new System.Drawing.Size(85, 20);
             // 
             // lblTEN_NHH_A
             // 
             this.lblTEN_NHH_A.Control = this.txtTEN_NHH_A;
-            this.lblTEN_NHH_A.Location = new System.Drawing.Point(0, 30);
+            this.lblTEN_NHH_A.Location = new System.Drawing.Point(0, 26);
             this.lblTEN_NHH_A.Name = "lblTEN_NHH_A";
-            this.lblTEN_NHH_A.Size = new System.Drawing.Size(614, 30);
-            this.lblTEN_NHH_A.TextSize = new System.Drawing.Size(100, 20);
+            this.lblTEN_NHH_A.Size = new System.Drawing.Size(624, 26);
+            this.lblTEN_NHH_A.TextSize = new System.Drawing.Size(85, 17);
             // 
             // lblTHU_TU
             // 
             this.lblTHU_TU.Control = this.txtTHU_TU;
-            this.lblTHU_TU.Location = new System.Drawing.Point(449, 0);
+            this.lblTHU_TU.Location = new System.Drawing.Point(456, 0);
             this.lblTHU_TU.Name = "lblTHU_TU";
-            this.lblTHU_TU.Size = new System.Drawing.Size(165, 30);
-            this.lblTHU_TU.TextSize = new System.Drawing.Size(100, 20);
+            this.lblTHU_TU.Size = new System.Drawing.Size(168, 26);
+            this.lblTHU_TU.TextSize = new System.Drawing.Size(85, 17);
             // 
             // lblNOTE
             // 
             this.lblNOTE.Control = this.txtNOTE;
-            this.lblNOTE.Location = new System.Drawing.Point(0, 90);
+            this.lblNOTE.Location = new System.Drawing.Point(0, 78);
             this.lblNOTE.Name = "lblNOTE";
-            this.lblNOTE.Size = new System.Drawing.Size(614, 269);
-            this.lblNOTE.TextSize = new System.Drawing.Size(100, 20);
+            this.lblNOTE.Size = new System.Drawing.Size(624, 291);
+            this.lblNOTE.TextSize = new System.Drawing.Size(85, 17);
             // 
             // lblTEN_NHH_H
             // 
             this.lblTEN_NHH_H.Control = this.txtTEN_NHH_H;
-            this.lblTEN_NHH_H.Location = new System.Drawing.Point(0, 60);
+            this.lblTEN_NHH_H.Location = new System.Drawing.Point(0, 52);
             this.lblTEN_NHH_H.Name = "lblTEN_NHH_H";
-            this.lblTEN_NHH_H.Size = new System.Drawing.Size(614, 30);
-            this.lblTEN_NHH_H.TextSize = new System.Drawing.Size(100, 20);
+            this.lblTEN_NHH_H.Size = new System.Drawing.Size(624, 26);
+            this.lblTEN_NHH_H.TextSize = new System.Drawing.Size(85, 17);
             // 
             // frmEditNHOM_HANG_HOA
             // 

@@ -129,16 +129,18 @@ namespace Vs.Category
                 string tenSql = "";
                 if (bAddEditCV || MS != MS_CVTextEdit.EditValue.ToString()|| TEN != TEN_CVTextEdit.EditValue.ToString())
                 {
-                    sSql = "SELECT COUNT(*) FROM CHUC_VU WHERE MS_CV = '" + MS_CVTextEdit.Text + "' AND ID_LOAI_CV ="+ ID_LOAI_CVSearchLookUpEdit.EditValue;
-                    tenSql = "SELECT TEN_CV FROM CHUC_VU WHERE TEN_CV = N'" + TEN_CVTextEdit.Text + "'";
+                    sSql = "SELECT COUNT(*) FROM CHUC_VU WHERE MS_CV = '" + MS_CVTextEdit.Text + "' AND ID_LOAI_CV ="+ ID_LOAI_CVSearchLookUpEdit.EditValue + " AND ID_CV <> "+iIdCV+"";
+                    tenSql = "SELECT COUNT(*) FROM CHUC_VU WHERE TEN_CV = N'" + TEN_CVTextEdit.Text + "' AND ID_LOAI_CV =" + ID_LOAI_CVSearchLookUpEdit.EditValue + " AND ID_CV <> " + iIdCV + "";
                     if (Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, sSql)) != 0)
                     {
                         XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_MaSoTrung"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"));
+                        MS_CVTextEdit.Focus();
                         return true;
                     }
-                    if (Convert.ToString(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, tenSql)) == Convert.ToString((TEN_CVTextEdit.Text)))
+                    if (Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, tenSql)) != 0)
                     {
                         XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_TenTrung"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"));
+                        TEN_CVTextEdit.Focus();
                         return true;
                     }
                 }

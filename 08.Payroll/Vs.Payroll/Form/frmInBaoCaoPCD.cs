@@ -37,7 +37,7 @@ namespace Vs.Payroll.Form
                 datTNgay.EditValue = Convert.ToDateTime(DateTime.Now.AddDays(-60));
                 datDNgay.EditValue = DateTime.Now;
                 Commons.Modules.sLoad = "0Load";
-                
+
                 //LoadCboMaQL();
                 //LoadCboCNThucHienCD();
                 Commons.Modules.sLoad = "";
@@ -72,7 +72,7 @@ namespace Vs.Payroll.Form
                                 {
                                     if (cboMaQL.Text.Trim() == "")
                                     {
-                                        XtraMessageBox.Show(lblCongDoan.Text + " " + Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgKhongDuocTrong"));
+                                        XtraMessageBox.Show(lblCongDoan.Text + " " + Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgKhongDuocTrong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                                         cboMaQL.Focus();
                                         return;
                                     }
@@ -83,7 +83,7 @@ namespace Vs.Payroll.Form
                                 {
                                     if (cboID_CN.Text.Trim() == "")
                                     {
-                                        XtraMessageBox.Show(lblCongNhan.Text + " " + Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgKhongDuocTrong"));
+                                        XtraMessageBox.Show(lblCongNhan.Text + " " + Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgKhongDuocTrong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                                         cboID_CN.Focus();
                                         return;
                                     }
@@ -188,7 +188,7 @@ namespace Vs.Payroll.Form
 
                 dt = new DataTable();
                 dt = ds.Tables[0].Copy();
-                if(cboMaQL.Properties.DataSource == null)
+                if (cboMaQL.Properties.DataSource == null)
                 {
                     Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboMaQL, dt, "ID_CD", "TEN_CD", "TEN_CD", false);
                     cboMaQL.Properties.View.PopulateColumns(cboMaQL.Properties.DataSource);
@@ -257,7 +257,7 @@ namespace Vs.Payroll.Form
         {
             System.Data.SqlClient.SqlConnection conn;
             frmViewReport frm = new frmViewReport();
-            frm.rpt = new rptBangTongHopCongDoan(DateTime.Now,Convert.ToDateTime(datTNgay.EditValue),Convert.ToDateTime(datDNgay.EditValue));
+            frm.rpt = new rptBangTongHopCongDoan(DateTime.Now, Convert.ToDateTime(datTNgay.EditValue), Convert.ToDateTime(datDNgay.EditValue));
             try
             {
                 conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
@@ -400,6 +400,6 @@ namespace Vs.Payroll.Form
 
         #endregion
 
-       
+
     }
 }

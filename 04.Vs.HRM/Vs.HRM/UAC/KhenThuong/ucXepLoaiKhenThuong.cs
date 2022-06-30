@@ -59,7 +59,7 @@ namespace Vs.HRM
         }
         private void ItemDelete_Click(object sender, System.EventArgs e)
         {
-            if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgCapNhapNullLoaiXepLoai"), "", MessageBoxButtons.YesNo) == DialogResult.No) return;
+            if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgCapNhapNullLoaiXepLoai"),  Commons.Modules.ObjLanguages.GetLanguage("frmChung", "sThongBao"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) return;
             try
             {
 
@@ -523,7 +523,7 @@ namespace Vs.HRM
             {
                 string sT = grvLXL.GetFocusedRowCellValue("TEN_LXL").ToString();
                 if (sT != "") sT = " : " + sT;
-                if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgCapNhapLoaiXepLoai") + sT, Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) return;
+                if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgCapNhapLoaiXepLoai") + sT, Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) return;
 
                 int iLXL = int.Parse(grvLXL.GetFocusedRowCellValue("ID_LXL").ToString());
                 DataTable dtTmp = new DataTable();
@@ -550,7 +550,7 @@ namespace Vs.HRM
             try { iIdCN = int.Parse(grvChung.GetFocusedRowCellValue("ID_CN").ToString()); } catch { }
             if (iIdCN == -1)
             {
-                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgKhongCoDuLieuXoa"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgKhongCoDuLieuXoa"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
             DeleteData(iIdCN);
@@ -560,7 +560,7 @@ namespace Vs.HRM
         {
             if (grvChung.RowCount == 0)
             {
-                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgKhongCoDuLieuXoa"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgKhongCoDuLieuXoa"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -595,7 +595,7 @@ namespace Vs.HRM
             }
             catch (Exception ex)
             {
-                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgDelDangSuDung") + "\n" + ex.Message.ToString(), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDelDangSuDung") + "\n" + ex.Message.ToString(), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
         }

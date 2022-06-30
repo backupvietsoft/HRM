@@ -81,25 +81,25 @@ namespace Vs.Payroll
                             if (!dxValidationProvider1.Validate()) return;
                             if (TEN_LOAI_SAN_PHAMLookUpEdit.Text == "")
                             {
-                                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgchuachonloaisp"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"));
+                                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgchuachonloaisp"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 TEN_LOAI_SAN_PHAMLookUpEdit.Focus();
                                 return;
                             }
                             if (CUMLookUpEdit.Text == "")
                             {
-                                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgchuachoncum"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"));
+                                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgchuachoncum"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 CUMLookUpEdit.Focus();
                                 return;
                             }
                             if (LOAI_MAYLookUpEdit.Text == "")
                             {
-                                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgchuachonloaimay"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"));
+                                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgchuachonloaimay"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 LOAI_MAYLookUpEdit.Focus();
                                 return;
                             }
                             if (BAC_THOLookUpEdit.Text == "")
                             {
-                                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgchuachonbactho"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"));
+                                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgchuachonbactho"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 BAC_THOLookUpEdit.Focus();
                                 return;
                             }
@@ -181,8 +181,7 @@ namespace Vs.Payroll
 
                     if (Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, sSql)) != 0)
                     {
-                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_MaSoTrung"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"));
-
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msg_TenTrung"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return true;
                     }
                 }
@@ -194,8 +193,7 @@ namespace Vs.Payroll
 
                     if (Convert.ToString(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, tenSql)) == Convert.ToString((TEN_CDTextEdit.EditValue)))
                     {
-                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_TenTrung"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"));
-
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msg_TenTrung"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return true;
                     }
                 }

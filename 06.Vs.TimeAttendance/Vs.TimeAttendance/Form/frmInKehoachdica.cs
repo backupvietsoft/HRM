@@ -82,26 +82,26 @@ namespace Vs.TimeAttendance.Form
         {
             if (cboID_nhom.Text == "")
             {
-                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "messchuanhapNhom"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgChuaNhapNhom"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                 cboID_nhom.Focus();
                 return false;
             }
             if (cboCa.Text == "")
             {
-                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "messchuanhapca"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgChuaNhapCa"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                 cboCa.Focus();
                 return false;
             }
 
             if (txtTngay.Text == "")
             {
-                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "messchuanhapngay_bd"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgChuaNhapNgay_BD"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                 txtTngay.Focus();
                 return false;
             }
             if (txtDngay.Text == "")
             {
-                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "messchuanhapngay_kt"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgChuaNhapNgay_KT"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                 txtDngay.Focus();
                 return false;
             }

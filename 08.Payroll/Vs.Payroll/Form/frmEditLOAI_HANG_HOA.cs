@@ -48,7 +48,7 @@ namespace Vs.Payroll
                             Commons.Modules.sId = Convert.ToString(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spUpdateLOAI_HANG_HOA", (AddEdit ? -1 : Id),Convert.ToInt32(cboID_NHH.EditValue) ,txtTEN_LHH.EditValue.ToString(), txtTEN_LHH_A.EditValue.ToString(), txtTEN_LHH_H.EditValue.ToString(), txtTHU_TU.EditValue == "" ? txtTHU_TU.EditValue = null : txtTHU_TU.EditValue));
                             if (AddEdit)
                             {
-                                if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_ThemThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo) == DialogResult.Yes)
+                                if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msg_ThemThanhCongBanCoMuonTiepTuc"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                                 {
                                     LoadTextNull();
                                     return;
@@ -131,7 +131,7 @@ namespace Vs.Payroll
                     "", "", "", ""));
                 if (iKiem > 0)
                 {
-                    XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_TenTrung"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"));
+                    XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msg_TenTrung"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                     txtTEN_LHH.Focus();
                     return true;
                 }
@@ -145,7 +145,7 @@ namespace Vs.Payroll
                         "", "", "", ""));
                     if (iKiem > 0)
                     {
-                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_TenTrung"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"));
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msg_TenTrung"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                         txtTEN_LHH_A.Focus();
                         return true;
                     }
@@ -159,7 +159,7 @@ namespace Vs.Payroll
                         "", "", "", ""));
                     if (iKiem > 0)
                     {
-                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_TenTrung"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"));
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msg_TenTrung"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                         txtTEN_LHH_H.Focus();
                         return true;
                     }

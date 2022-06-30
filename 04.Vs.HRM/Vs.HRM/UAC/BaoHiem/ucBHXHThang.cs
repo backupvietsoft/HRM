@@ -839,12 +839,36 @@ namespace Vs.HRM
         private void XoaDieuChinhBHXH()
         {
             //xóa
-            if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgDeleteDieuChinhBHXH"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) return;
+            if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDeleteDieuChinhBHXH"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) return;
             //xóa
             try
             {
                 SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "DELETE FROM dbo.DIEU_CHINH_BHXH WHERE THANG = '" + Convert.ToDateTime(grvDieuChinh.GetFocusedRowCellValue("THANG")).ToString("yyyy-MM-dd") + "' AND DOT = " + grvDieuChinh.GetFocusedRowCellValue("DOT") + " AND ID_CN = " + grvDieuChinh.GetFocusedRowCellValue("ID_CN") + "");
                 grvDieuChinh.DeleteSelectedRows();
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show(ex.Message.ToString());
+            }
+        }
+
+        private void grvTrongThang_RowCountChanged(object sender, EventArgs e)
+        {
+            GridView view = sender as GridView;
+            try
+            {
+                int index = ItemForSumNhanVien.Text.IndexOf(':');
+                if (index > 0)
+                {
+                    if (view.RowCount > 0)
+                    {
+                        ItemForSumNhanVien.Text = ItemForSumNhanVien.Text.Substring(0, index) + ": " + view.RowCount.ToString();
+                    }
+                    else
+                    {
+                        ItemForSumNhanVien.Text = ItemForSumNhanVien.Text.Substring(0, index) + ": 0";
+                    }
+                }
             }
             catch (Exception ex)
             {

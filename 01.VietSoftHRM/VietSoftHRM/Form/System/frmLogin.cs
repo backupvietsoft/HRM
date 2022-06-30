@@ -113,21 +113,21 @@ namespace VietSoftHRM
             sSql = "SELECT COUNT(*) FROM dbo.USERS WHERE USER_NAME = '"+txt_user.EditValue.ToString().Trim()+"'";
             if(Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr,CommandType.Text,sSql)) == 0)
             {
-                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgTaiKhoanChuaDangKy"), this.Name, MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgTaiKhoanChuaDangKy"),  Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
             //kiểm tra mật khẩu có đúng hay không
             sSql = "SELECT PASSWORD FROM dbo.USERS WHERE USER_NAME = '" + txt_user.EditValue.ToString().Trim() + "'";
             if (Commons.Modules.ObjSystems.Decrypt(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, sSql).ToString(), true).ToString() != txt_pass.EditValue.ToString().Trim()) 
             {
-                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgsaiPassword"), this.Name, MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgsaiPassword"),  Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
             //kiểm tra tài khoảng có được active hay chưa
             sSql = "SELECT ACTIVE FROM dbo.USERS WHERE USER_NAME ='"+ txt_user.EditValue.ToString().Trim() + "'";
             if (Convert.ToBoolean(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, sSql)) != true)
             {
-                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgTaiKhoanChuaKichHoat"), this.Name, MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgTaiKhoanChuaKichHoat"),  Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
             try
@@ -136,13 +136,13 @@ namespace VietSoftHRM
                 sSql = "SELECT USER_PQ FROM dbo.USERS WHERE USER_NAME = '" + txt_user.EditValue.ToString().Trim() + "'";
                 if (Convert.ToBoolean(Commons.Modules.ObjSystems.Decrypt(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, sSql).ToString(), true).Replace(txt_user.EditValue.ToString().Trim(), "")) != true)
                 {
-                    XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgUserChuaDangKyLincense"), this.Name, MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+                    XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgUserChuaDangKyLincense"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return false;
                 }
             }
             catch
             {
-                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgUserChuaDangKyLincense"), this.Name, MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgUserChuaDangKyLincense"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
             
@@ -150,7 +150,7 @@ namespace VietSoftHRM
             ////kiểm tra user đã đăng nhập
             if(Commons.Modules.ObjSystems.checkExitsUser(txt_user.EditValue.ToString().Trim()) == false)
             {
-                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgUserDaDuocDangNhap"), this.Name, MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgUserDaDuocDangNhap"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
 

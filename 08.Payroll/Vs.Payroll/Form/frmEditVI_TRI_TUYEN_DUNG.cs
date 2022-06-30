@@ -78,7 +78,7 @@ namespace Vs.Payroll
 
                                 if (AddEdit)
                                 {
-                                    if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMain", "msgThemThanhCongBanMuonThemTiep"), "", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                                    if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msg_ThemThanhCongBanCoMuonTiepTuc"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                                     {
                                         LoadTextNull();
                                         return;
@@ -118,7 +118,7 @@ namespace Vs.Payroll
                     sSql = "SELECT COUNT(*) FROM VI_TRI_TUYEN_DUNG WHERE MS_VTTD = '" + txtMS_VTTD.EditValue +"'";
                     if (Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, sSql)) != 0)
                     {
-                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgMS_MSvttdNayDaTonTai"));
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msg_MaSoTrung"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                         
                         return true;
                     }

@@ -51,7 +51,7 @@ namespace Vs.HRM
                     }
                 case "sua":
                     {
-                        if (grv_TTLL.RowCount == 0) { XtraMessageBox.Show("Chưa có dữ liệu", Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Hand); break; }
+                        if (grv_TTLL.RowCount == 0) { XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgChuaCoDuLieu"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Hand); break; }
                         enableButon(false);
                         Commons.Modules.ObjSystems.AddnewRow(grv_TTLL, false);
                         grv_TTLL.OptionsBehavior.ReadOnly = false;
@@ -72,7 +72,7 @@ namespace Vs.HRM
                         }
                         if (fag == false)
                         {
-                            XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msstrungmasoThongTin"));
+                            XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgtrungmasoThongTin"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                             return;
                         }
                         Commons.Modules.ObjSystems.DeleteAddRow(grv_TTLL);
@@ -124,7 +124,7 @@ namespace Vs.HRM
         }
         private void DeleteData()
         {
-            if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgDeleteThongTinLienHe"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) return;
+            if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDeleteThongTinLienHe"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) return;
             //xóa
             try
             {
@@ -153,7 +153,7 @@ namespace Vs.HRM
             SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, sSql);
             Commons.Modules.ObjSystems.XoaTable("TMP" + Commons.Modules.UserName);
 
-                XtraMessageBox.Show("Cập nhật thông tin liên lạc của nhân viên thành công", Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgCapNhatThongTinLienLacCuaNhanVienThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
             catch (Exception ex)
             {
@@ -176,7 +176,7 @@ namespace Vs.HRM
             int ms = -1;
             if(view.GetRowCellValue(e.RowHandle, view.Columns["MASO"].ToString())=="")
             {
-                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msschuanhapms"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"),MessageBoxButtons.OK,MessageBoxIcon.Information);
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msschuanhapms"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"),MessageBoxButtons.OK,MessageBoxIcon.Information);
                 return;
             }
             else

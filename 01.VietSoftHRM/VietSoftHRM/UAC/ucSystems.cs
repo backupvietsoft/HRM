@@ -165,7 +165,7 @@ namespace VietSoftHRM
             bool resulst = false;
             if (Convert.ToInt64(Commons.Modules.sIdHT) < 1)
             {
-                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgBanPhaiVaoNhomTruoc"), Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgTieuDeChuY"), MessageBoxButtons.OK);
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgBanPhaiVaoNhomTruoc"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK,MessageBoxIcon.Information);
                 resulst = true;
             }
             return resulst;

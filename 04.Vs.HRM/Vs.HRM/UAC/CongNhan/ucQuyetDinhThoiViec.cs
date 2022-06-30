@@ -10,6 +10,7 @@ using System.IO;
 using System.Collections.Generic;
 using DevExpress.XtraLayout;
 using Vs.Report;
+using DevExpress.XtraGrid.Views.Grid;
 
 namespace Vs.HRM
 {
@@ -37,7 +38,7 @@ namespace Vs.HRM
         {
             enableButon(true);
             formatText();
-            Commons.Modules.sPS = "0Load";
+            Commons.Modules.sLoad = "0Load";
             Commons.Modules.ObjSystems.LoadCboDonVi(cboSearch_DV);
             Commons.Modules.ObjSystems.LoadCboXiNghiep(cboSearch_DV, cboSearch_XN);
             Commons.Modules.ObjSystems.LoadCboTo(cboSearch_DV, cboSearch_XN, cboSearch_TO);
@@ -51,9 +52,10 @@ namespace Vs.HRM
             Commons.OSystems.SetDateEditFormat(dDNgay);
             NGAY_VAO_LAMdateEdit.Properties.ReadOnly = true;
             LoadGridCongNhan(-1);
-            Commons.Modules.sPS = "";
             LoadCboLyDoThoiViec();
             LoadNguoiKy();
+            Commons.Modules.sLoad = "";
+
         }
         private void formatText()
         {
@@ -293,6 +295,7 @@ namespace Vs.HRM
         }
         private void LoadText()
         {
+            Commons.Modules.sLoad = "0Load";
             MS_CNtextEdit.EditValue = grvCongNhan.GetFocusedRowCellValue("MS_CN");
             TEN_CNtextEdit.EditValue = grvCongNhan.GetFocusedRowCellValue("HO_TEN");
             try
@@ -337,6 +340,7 @@ namespace Vs.HRM
             catch (Exception ex)
             {
             }
+            Commons.Modules.sLoad = "";
         }
         private void navigationFrame_SelectedPageChanging(object sender, SelectedPageChangingEventArgs e)
         {
@@ -344,7 +348,7 @@ namespace Vs.HRM
             {
                 if (grvCongNhan.RowCount == 0)
                 {
-                    XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgBanCoChuaChonCongNhan"), Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgBanCoChuaChonCongNhan"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     e.Cancel = true;
                 }
                 else
@@ -361,6 +365,7 @@ namespace Vs.HRM
             //tính lương
             try
             {
+                if (Commons.Modules.sLoad == "0Load") return;
                 GetTienPhep();
                 GetTienTroCap();
                 TONG_CONGTextEdit.EditValue = Convert.ToDouble(TIEN_TRO_CAPTextEdit.EditValue) + Convert.ToDouble(TIEN_PHEPTextEdit.EditValue);
@@ -373,6 +378,7 @@ namespace Vs.HRM
 
         private void TRO_CAP_KHACTextEdit_EditValueChanged(object sender, EventArgs e)
         {
+            if (Commons.Modules.sLoad == "0Load") return;
             TONG_CONGTextEdit.EditValue = Convert.ToDouble(TIEN_TRO_CAPTextEdit.EditValue) + Convert.ToDouble(TIEN_PHEPTextEdit.EditValue);
         }
 
@@ -399,7 +405,7 @@ namespace Vs.HRM
                 TimeSpan time = dDNgay.DateTime - dTNgay.DateTime;
                 if (time.Days < 0)
                 {
-                    XtraMessageBox.Show("Từ ngày phải nhỏ hơn đến ngày", Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgTuNgayPhaiNhoHonDenNgay"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     e.Cancel = true;
                     dTNgay.ErrorText = "Dữ liệu không hợp lệ";
                 }
@@ -413,7 +419,7 @@ namespace Vs.HRM
                 TimeSpan time = dDNgay.DateTime - dTNgay.DateTime;
                 if (time.Days < 0)
                 {
-                    XtraMessageBox.Show("Đến ngày phải lớn hơn từ ngày", Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDenNayPhaiLonHonTuNgay"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     e.Cancel = true;
                     dDNgay.ErrorText = "Dữ liệu không hợp lệ";
                 }
@@ -469,5 +475,29 @@ namespace Vs.HRM
             }
         }
 
+        private void grvCongNhan_RowCountChanged(object sender, EventArgs e)
+        {
+            GridView view = sender as GridView;
+            try
+            {
+                int index = ItemForSumNhanVien.Text.IndexOf(':');
+                if (index > 0)
+                {
+                    if (view.RowCount > 0)
+                    {
+                        ItemForSumNhanVien.Text = ItemForSumNhanVien.Text.Substring(0, index) + ": " + view.RowCount.ToString();
+                    }
+                    else
+                    {
+                        ItemForSumNhanVien.Text = ItemForSumNhanVien.Text.Substring(0, index) + ": 0";
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show(ex.Message.ToString());
+            }
+        }
     }
 }

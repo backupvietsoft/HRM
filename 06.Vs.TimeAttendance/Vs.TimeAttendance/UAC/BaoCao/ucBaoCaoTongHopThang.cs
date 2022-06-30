@@ -69,8 +69,7 @@ namespace Vs.TimeAttendance
             else
             {
                 rdo_ChonBaoCao.Properties.Items.RemoveAt(5);
-                rdo_ChonBaoCao.Properties.Items.RemoveAt(4);
-
+                //rdo_ChonBaoCao.Properties.Items.RemoveAt(4);
             }
 
             LK_Thang.EditValue = DateTime.Today;
@@ -118,7 +117,8 @@ namespace Vs.TimeAttendance
                                     {
                                         case "MT":
                                             {
-                                                BangChamCongThang_MT();
+                                                //BangChamCongThang_MT();
+                                                BangChamCongThang();
                                                 break;
                                             }
                                         case "SB":
@@ -138,7 +138,8 @@ namespace Vs.TimeAttendance
                                     {
                                         case "MT":
                                             {
-                                                BangChamCongTangCaThang_MT();
+                                                //BangChamCongTangCaThang_MT();
+                                                BangChamCongTangCaThang();
                                                 break;
                                             }
                                         case "SB":

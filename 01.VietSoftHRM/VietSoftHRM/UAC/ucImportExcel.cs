@@ -1096,9 +1096,8 @@ namespace VietSoftHRM
                             DataTable dtSource = Commons.Modules.ObjSystems.ConvertDatatable(grdData);
                             if (cboDanhMucImport.Text == "" || dtSource == null || dtSource.Rows.Count <= 0)
                             {
-                                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(Commons.Modules.ModuleName,
-                                        "frmImportExcel", "KhongCoDuLieuImport", Commons.Modules.TypeLanguage), this.Text,
-                                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "KhongCoDuLieuImport"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"),
+                                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                 return;
                             }
                             grvData.Columns.View.ClearColumnErrors();
@@ -1256,7 +1255,7 @@ namespace VietSoftHRM
                         catch (Exception ex)
                         {
                             Commons.Modules.ObjSystems.HideWaitForm();
-                            XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgImportKhongThanhCong") + " error(" + ex.ToString() + ")", Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgImportKhongThanhCong") + " error(" + ex.ToString() + ")", Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                         break;
                     }
@@ -1381,12 +1380,12 @@ namespace VietSoftHRM
             if (errorCount != 0)
             {
 
-                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgDuLieuChuaHopLe"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDuLieuChuaHopLe"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             else
             {
-                DialogResult res = XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgDuLieuSanSangImport"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult res = XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDuLieuSanSangImport"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (res == DialogResult.Yes)
                 {
                     SqlConnection conn = new SqlConnection(Commons.IConnections.CNStr);
@@ -1402,12 +1401,12 @@ namespace VietSoftHRM
                         SqlHelper.ExecuteNonQuery(sTrans, CommandType.Text, sSql);
                         Commons.Modules.ObjSystems.XoaTable(sbt);
                         sTrans.Commit();
-                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgImportDuLieuThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgImportDuLieuThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     catch (Exception ex)
                     {
                         sTrans.Rollback();
-                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgImportKhongThanhCong") + " error(" + ex.ToString() + ")", Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgImportKhongThanhCong") + " error(" + ex.ToString() + ")", Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                     if (conn.State != ConnectionState.Closed) conn.Close();
 
@@ -1500,12 +1499,12 @@ namespace VietSoftHRM
             Commons.Modules.ObjSystems.HideWaitForm();
             if (errorCount != 0)
             {
-                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgDuLieuChuaHopLe"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDuLieuChuaHopLe"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             else
             {
-                DialogResult res = XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgDuLieuSanSangImport"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult res = XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDuLieuSanSangImport"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (res == DialogResult.Yes)
                 {
                     SqlConnection conn = new SqlConnection(Commons.IConnections.CNStr);
@@ -1521,12 +1520,12 @@ namespace VietSoftHRM
                         SqlHelper.ExecuteNonQuery(sTrans, CommandType.Text, sSql);
                         Commons.Modules.ObjSystems.XoaTable(sbt);
                         sTrans.Commit();
-                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgImportDuLieuThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgImportDuLieuThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     catch (Exception ex)
                     {
                         sTrans.Rollback();
-                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgImportKhongThanhCong") + " error(" + ex.ToString() + ")", Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgImportKhongThanhCong") + " error(" + ex.ToString() + ")", Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                     if (conn.State != ConnectionState.Closed) conn.Close();
 
@@ -1634,12 +1633,12 @@ namespace VietSoftHRM
             Commons.Modules.ObjSystems.HideWaitForm();
             if (errorCount != 0)
             {
-                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgDuLieuChuaHopLe"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDuLieuChuaHopLe"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             else
             {
-                DialogResult res = XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgDuLieuSanSangImport"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult res = XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDuLieuSanSangImport"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (res == DialogResult.Yes)
                 {
                     SqlConnection conn = new SqlConnection(Commons.IConnections.CNStr);
@@ -1655,12 +1654,12 @@ namespace VietSoftHRM
                         SqlHelper.ExecuteNonQuery(sTrans, CommandType.Text, sSql);
                         Commons.Modules.ObjSystems.XoaTable(sbt);
                         sTrans.Commit();
-                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgImportDuLieuThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgImportDuLieuThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     catch (Exception ex)
                     {
                         sTrans.Rollback();
-                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgImportKhongThanhCong") + " error(" + ex.ToString() + ")", Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgImportKhongThanhCong") + " error(" + ex.ToString() + ")", Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                     if (conn.State != ConnectionState.Closed) conn.Close();
                 }
@@ -1725,12 +1724,12 @@ namespace VietSoftHRM
             Commons.Modules.ObjSystems.HideWaitForm();
             if (errorCount != 0)
             {
-                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgDuLieuChuaHopLe"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDuLieuChuaHopLe"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             else
             {
-                DialogResult res = XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgDuLieuSanSangImport"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult res = XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDuLieuSanSangImport"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (res == DialogResult.Yes)
                 {
                     SqlConnection conn = new SqlConnection(Commons.IConnections.CNStr);
@@ -1746,12 +1745,12 @@ namespace VietSoftHRM
                         SqlHelper.ExecuteNonQuery(sTrans, CommandType.Text, sSql);
                         Commons.Modules.ObjSystems.XoaTable(sbt);
                         sTrans.Commit();
-                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgImportDuLieuThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgImportDuLieuThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     catch (Exception ex)
                     {
                         sTrans.Rollback();
-                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgImportKhongThanhCong") + " error(" + ex.ToString() + ")", Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgImportKhongThanhCong") + " error(" + ex.ToString() + ")", Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                     if (conn.State != ConnectionState.Closed) conn.Close();
                 }
@@ -1838,12 +1837,12 @@ namespace VietSoftHRM
             Commons.Modules.ObjSystems.HideWaitForm();
             if (errorCount != 0)
             {
-                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgDuLieuChuaHopLe"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDuLieuChuaHopLe"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             else
             {
-                DialogResult res = XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgDuLieuSanSangImport"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult res = XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDuLieuSanSangImport"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (res == DialogResult.Yes)
                 {
                     SqlConnection conn = new SqlConnection(Commons.IConnections.CNStr);
@@ -1859,12 +1858,12 @@ namespace VietSoftHRM
                         SqlHelper.ExecuteNonQuery(sTrans, CommandType.Text, sSql);
                         Commons.Modules.ObjSystems.XoaTable(sbt);
                         sTrans.Commit();
-                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgImportDuLieuThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgImportDuLieuThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     catch (Exception ex)
                     {
                         sTrans.Rollback();
-                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgImportKhongThanhCong") + " error(" + ex.ToString() + ")", Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgImportKhongThanhCong") + " error(" + ex.ToString() + ")", Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                     if (conn.State != ConnectionState.Closed) conn.Close();
 
@@ -1942,12 +1941,12 @@ namespace VietSoftHRM
             Commons.Modules.ObjSystems.HideWaitForm();
             if (errorCount != 0)
             {
-                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgDuLieuChuaHopLe"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDuLieuChuaHopLe"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             else
             {
-                DialogResult res = XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgDuLieuSanSangImport"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult res = XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDuLieuSanSangImport"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (res == DialogResult.Yes)
                 {
                     SqlConnection conn = new SqlConnection(Commons.IConnections.CNStr);
@@ -1963,12 +1962,12 @@ namespace VietSoftHRM
                         SqlHelper.ExecuteNonQuery(sTrans, CommandType.Text, sSql);
                         Commons.Modules.ObjSystems.XoaTable(sbt);
                         sTrans.Commit();
-                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgImportDuLieuThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgImportDuLieuThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     catch (Exception ex)
                     {
                         sTrans.Rollback();
-                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgImportKhongThanhCong") + " error(" + ex.ToString() + ")", Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgImportKhongThanhCong") + " error(" + ex.ToString() + ")", Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                     if (conn.State != ConnectionState.Closed) conn.Close();
 
@@ -2044,12 +2043,12 @@ namespace VietSoftHRM
             Commons.Modules.ObjSystems.HideWaitForm();
             if (errorCount != 0)
             {
-                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgDuLieuChuaHopLe"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDuLieuChuaHopLe"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             else
             {
-                DialogResult res = XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgDuLieuSanSangImport"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult res = XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDuLieuSanSangImport"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (res == DialogResult.Yes)
                 {
                     SqlConnection conn = new SqlConnection(Commons.IConnections.CNStr);
@@ -2065,12 +2064,12 @@ namespace VietSoftHRM
                         SqlHelper.ExecuteNonQuery(sTrans, CommandType.Text, sSql);
                         Commons.Modules.ObjSystems.XoaTable(sbt);
                         sTrans.Commit();
-                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgImportDuLieuThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgImportDuLieuThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     catch (Exception ex)
                     {
                         sTrans.Rollback();
-                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgImportKhongThanhCong") + " error(" + ex.ToString() + ")", Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgImportKhongThanhCong") + " error(" + ex.ToString() + ")", Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                     if (conn.State != ConnectionState.Closed) conn.Close();
 
@@ -2134,12 +2133,12 @@ namespace VietSoftHRM
             Commons.Modules.ObjSystems.HideWaitForm();
             if (errorCount != 0)
             {
-                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgDuLieuChuaHopLe"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDuLieuChuaHopLe"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             else
             {
-                DialogResult res = XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgDuLieuSanSangImport"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult res = XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDuLieuSanSangImport"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (res == DialogResult.Yes)
                 {
                     SqlConnection conn = new SqlConnection(Commons.IConnections.CNStr);
@@ -2155,12 +2154,12 @@ namespace VietSoftHRM
                         SqlHelper.ExecuteNonQuery(sTrans, CommandType.Text, sSql);
                         Commons.Modules.ObjSystems.XoaTable(sbt);
                         sTrans.Commit();
-                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgImportDuLieuThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgImportDuLieuThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     catch (Exception ex)
                     {
                         sTrans.Rollback();
-                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgImportKhongThanhCong") + " error(" + ex.ToString() + ")", Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgImportKhongThanhCong") + " error(" + ex.ToString() + ")", Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                     if (conn.State != ConnectionState.Closed) conn.Close();
                 }
@@ -2282,12 +2281,12 @@ namespace VietSoftHRM
             Commons.Modules.ObjSystems.HideWaitForm();
             if (errorCount != 0)
             {
-                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgDuLieuChuaHopLe"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDuLieuChuaHopLe"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             else
             {
-                DialogResult res = XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgDuLieuSanSangImport"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult res = XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDuLieuSanSangImport"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (res == DialogResult.Yes)
                 {
                     SqlConnection conn = new SqlConnection(Commons.IConnections.CNStr);
@@ -2303,12 +2302,12 @@ namespace VietSoftHRM
                         SqlHelper.ExecuteNonQuery(sTrans, CommandType.Text, sSql);
                         Commons.Modules.ObjSystems.XoaTable(sbt);
                         sTrans.Commit();
-                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgImportDuLieuThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgImportDuLieuThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     catch (Exception ex)
                     {
                         sTrans.Rollback();
-                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgImportKhongThanhCong") + " error(" + ex.ToString() + ")", Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgImportKhongThanhCong") + " error(" + ex.ToString() + ")", Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                     if (conn.State != ConnectionState.Closed) conn.Close();
 
@@ -2392,12 +2391,12 @@ namespace VietSoftHRM
             Commons.Modules.ObjSystems.HideWaitForm();
             if (errorCount != 0)
             {
-                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgDuLieuChuaHopLe"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDuLieuChuaHopLe"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             else
             {
-                DialogResult res = XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgDuLieuSanSangImport"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult res = XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDuLieuSanSangImport"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (res == DialogResult.Yes)
                 {
                     SqlConnection conn = new SqlConnection(Commons.IConnections.CNStr);
@@ -2413,12 +2412,12 @@ namespace VietSoftHRM
                         SqlHelper.ExecuteNonQuery(sTrans, CommandType.Text, sSql);
                         Commons.Modules.ObjSystems.XoaTable(sbt);
                         sTrans.Commit();
-                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgImportDuLieuThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgImportDuLieuThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     catch (Exception ex)
                     {
                         sTrans.Rollback();
-                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgImportKhongThanhCong") + " error(" + ex.ToString() + ")", Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgImportKhongThanhCong") + " error(" + ex.ToString() + ")", Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                     }
                     if (conn.State != ConnectionState.Closed) conn.Close();
@@ -2510,12 +2509,12 @@ namespace VietSoftHRM
             Commons.Modules.ObjSystems.HideWaitForm();
             if (errorCount != 0)
             {
-                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgDuLieuChuaHopLe"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDuLieuChuaHopLe"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             else
             {
-                DialogResult res = XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgDuLieuSanSangImport"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult res = XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDuLieuSanSangImport"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (res == DialogResult.Yes)
                 {
                     SqlConnection conn = new SqlConnection(Commons.IConnections.CNStr);
@@ -2531,12 +2530,12 @@ namespace VietSoftHRM
                         SqlHelper.ExecuteNonQuery(sTrans, CommandType.Text, sSql);
                         Commons.Modules.ObjSystems.XoaTable(sbt);
                         sTrans.Commit();
-                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgImportDuLieuThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgImportDuLieuThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     catch (Exception ex)
                     {
                         sTrans.Rollback();
-                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgImportKhongThanhCong") + " error(" + ex.ToString() + ")", Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgImportKhongThanhCong") + " error(" + ex.ToString() + ")", Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                     }
                     if (conn.State != ConnectionState.Closed) conn.Close();
@@ -2660,12 +2659,12 @@ namespace VietSoftHRM
             Commons.Modules.ObjSystems.HideWaitForm();
             if (errorCount != 0)
             {
-                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgDuLieuChuaHopLe"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDuLieuChuaHopLe"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             else
             {
-                DialogResult res = XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgDuLieuSanSangImport"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult res = XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDuLieuSanSangImport"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (res == DialogResult.Yes)
                 {
                     SqlConnection conn = new SqlConnection(Commons.IConnections.CNStr);
@@ -2681,12 +2680,12 @@ namespace VietSoftHRM
                         SqlHelper.ExecuteNonQuery(sTrans, CommandType.Text, sSql);
                         Commons.Modules.ObjSystems.XoaTable(sbt);
                         sTrans.Commit();
-                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgImportDuLieuThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgImportDuLieuThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     catch (Exception ex)
                     {
                         sTrans.Rollback();
-                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgImportKhongThanhCong") + " error(" + ex.ToString() + ")", Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgImportKhongThanhCong") + " error(" + ex.ToString() + ")", Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                     }
                     if (conn.State != ConnectionState.Closed) conn.Close();
@@ -2765,12 +2764,12 @@ namespace VietSoftHRM
             Commons.Modules.ObjSystems.HideWaitForm();
             if (errorCount != 0)
             {
-                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgDuLieuChuaHopLe"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDuLieuChuaHopLe"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             else
             {
-                DialogResult res = XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgDuLieuSanSangImport"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult res = XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDuLieuSanSangImport"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (res == DialogResult.Yes)
                 {
                     SqlConnection conn = new SqlConnection(Commons.IConnections.CNStr);
@@ -2786,12 +2785,12 @@ namespace VietSoftHRM
                         SqlHelper.ExecuteNonQuery(sTrans, CommandType.Text, sSql);
                         Commons.Modules.ObjSystems.XoaTable(sbt);
                         sTrans.Commit();
-                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgImportDuLieuThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgImportDuLieuThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     catch (Exception ex)
                     {
                         sTrans.Rollback();
-                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgImportKhongThanhCong") + " error(" + ex.ToString() + ")", Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgImportKhongThanhCong") + " error(" + ex.ToString() + ")", Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                     if (conn.State != ConnectionState.Closed) conn.Close();
 
@@ -2916,12 +2915,12 @@ namespace VietSoftHRM
             Commons.Modules.ObjSystems.HideWaitForm();
             if (errorCount != 0)
             {
-                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgDuLieuChuaHopLe"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDuLieuChuaHopLe"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             else
             {
-                DialogResult res = XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgDuLieuSanSangImport"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult res = XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDuLieuSanSangImport"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (res == DialogResult.Yes)
                 {
                     SqlConnection conn = new SqlConnection(Commons.IConnections.CNStr);
@@ -2937,12 +2936,12 @@ namespace VietSoftHRM
                         SqlHelper.ExecuteNonQuery(sTrans, CommandType.Text, sSql);
                         Commons.Modules.ObjSystems.XoaTable(sbt);
                         sTrans.Commit();
-                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgImportDuLieuThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgImportDuLieuThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     catch (Exception ex)
                     {
                         sTrans.Rollback();
-                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgImportKhongThanhCong") + " error(" + ex.ToString() + ")", Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgImportKhongThanhCong") + " error(" + ex.ToString() + ")", Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                     if (conn.State != ConnectionState.Closed) conn.Close();
 
@@ -3012,12 +3011,12 @@ namespace VietSoftHRM
             Commons.Modules.ObjSystems.HideWaitForm();
             if (errorCount != 0)
             {
-                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgDuLieuChuaHopLe"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDuLieuChuaHopLe"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             else
             {
-                DialogResult res = XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgDuLieuSanSangImport"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult res = XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDuLieuSanSangImport"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (res == DialogResult.Yes)
                 {
                     SqlConnection conn = new SqlConnection(Commons.IConnections.CNStr);
@@ -3033,12 +3032,12 @@ namespace VietSoftHRM
                         SqlHelper.ExecuteNonQuery(sTrans, CommandType.Text, sSql);
                         Commons.Modules.ObjSystems.XoaTable(sbt);
                         sTrans.Commit();
-                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgImportDuLieuThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgImportDuLieuThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     catch (Exception ex)
                     {
                         sTrans.Rollback();
-                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgImportKhongThanhCong") + " error(" + ex.ToString() + ")", Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgImportKhongThanhCong") + " error(" + ex.ToString() + ")", Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                     if (conn.State != ConnectionState.Closed) conn.Close();
                 }
@@ -3109,12 +3108,12 @@ namespace VietSoftHRM
             Commons.Modules.ObjSystems.HideWaitForm();
             if (errorCount != 0)
             {
-                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgDuLieuChuaHopLe"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDuLieuChuaHopLe"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             else
             {
-                DialogResult res = XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgDuLieuSanSangImport"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult res = XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDuLieuSanSangImport"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (res == DialogResult.Yes)
                 {
                     SqlConnection conn = new SqlConnection(Commons.IConnections.CNStr);
@@ -3130,12 +3129,12 @@ namespace VietSoftHRM
                         SqlHelper.ExecuteNonQuery(sTrans, CommandType.Text, sSql);
                         Commons.Modules.ObjSystems.XoaTable(sbt);
                         sTrans.Commit();
-                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgImportDuLieuThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgImportDuLieuThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     catch (Exception ex)
                     {
                         sTrans.Rollback();
-                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgImportKhongThanhCong") + " error(" + ex.ToString() + ")", Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgImportKhongThanhCong") + " error(" + ex.ToString() + ")", Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                     if (conn.State != ConnectionState.Closed) conn.Close();
                 }
@@ -3202,12 +3201,12 @@ namespace VietSoftHRM
             Commons.Modules.ObjSystems.HideWaitForm();
             if (errorCount != 0)
             {
-                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgDuLieuChuaHopLe"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDuLieuChuaHopLe"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             else
             {
-                DialogResult res = XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgDuLieuSanSangImport"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult res = XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDuLieuSanSangImport"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (res == DialogResult.Yes)
                 {
                     SqlConnection conn = new SqlConnection(Commons.IConnections.CNStr);
@@ -3222,12 +3221,12 @@ namespace VietSoftHRM
                         SqlHelper.ExecuteNonQuery(sTrans, CommandType.Text, sSql);
                         Commons.Modules.ObjSystems.XoaTable(sbt);
                         sTrans.Commit();
-                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgImportDuLieuThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgImportDuLieuThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     catch (Exception ex)
                     {
                         sTrans.Rollback();
-                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgImportKhongThanhCong") + " error(" + ex.ToString() + ")", Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgImportKhongThanhCong") + " error(" + ex.ToString() + ")", Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                     if (conn.State != ConnectionState.Closed) conn.Close();
                 }
@@ -3289,12 +3288,12 @@ namespace VietSoftHRM
             Commons.Modules.ObjSystems.HideWaitForm();
             if (errorCount != 0)
             {
-                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgDuLieuChuaHopLe"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDuLieuChuaHopLe"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             else
             {
-                DialogResult res = XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgDuLieuSanSangImport"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult res = XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDuLieuSanSangImport"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (res == DialogResult.Yes)
                 {
                     SqlConnection conn = new SqlConnection(Commons.IConnections.CNStr);
@@ -3310,12 +3309,12 @@ namespace VietSoftHRM
                         SqlHelper.ExecuteNonQuery(sTrans, CommandType.Text, sSql);
                         Commons.Modules.ObjSystems.XoaTable(sbt);
                         sTrans.Commit();
-                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgImportDuLieuThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgImportDuLieuThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     catch (Exception ex)
                     {
                         sTrans.Rollback();
-                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgImportKhongThanhCong") + " error(" + ex.ToString() + ")", Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgImportKhongThanhCong") + " error(" + ex.ToString() + ")", Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                     if (conn.State != ConnectionState.Closed) conn.Close();
                 }
@@ -3391,12 +3390,12 @@ namespace VietSoftHRM
             Commons.Modules.ObjSystems.HideWaitForm();
             if (errorCount != 0)
             {
-                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgDuLieuChuaHopLe"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDuLieuChuaHopLe"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             else
             {
-                DialogResult res = XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgDuLieuSanSangImport"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult res = XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDuLieuSanSangImport"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (res == DialogResult.Yes)
                 {
                     SqlConnection conn = new SqlConnection(Commons.IConnections.CNStr);
@@ -3411,12 +3410,12 @@ namespace VietSoftHRM
                         SqlHelper.ExecuteNonQuery(sTrans, CommandType.Text, sSql);
                         Commons.Modules.ObjSystems.XoaTable(sbt);
                         sTrans.Commit();
-                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgImportDuLieuThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgImportDuLieuThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     catch (Exception ex)
                     {
                         sTrans.Rollback();
-                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgImportKhongThanhCong") + " error(" + ex.ToString() + ")", Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgImportKhongThanhCong") + " error(" + ex.ToString() + ")", Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                     if (conn.State != ConnectionState.Closed) conn.Close();
                 }
@@ -3540,12 +3539,12 @@ namespace VietSoftHRM
             Commons.Modules.ObjSystems.HideWaitForm();
             if (errorCount != 0)
             {
-                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgDuLieuChuaHopLe"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDuLieuChuaHopLe"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             else
             {
-                DialogResult res = XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgDuLieuSanSangImport"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult res = XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDuLieuSanSangImport"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (res == DialogResult.Yes)
                 {
                     SqlConnection conn = new SqlConnection(Commons.IConnections.CNStr);
@@ -3560,12 +3559,12 @@ namespace VietSoftHRM
                         SqlHelper.ExecuteNonQuery(sTrans, CommandType.Text, sSql);
                         Commons.Modules.ObjSystems.XoaTable(sbt);
                         sTrans.Commit();
-                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgImportDuLieuThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgImportDuLieuThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     catch (Exception ex)
                     {
                         sTrans.Rollback();
-                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgImportKhongThanhCong") + " error(" + ex.ToString() + ")", Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgImportKhongThanhCong") + " error(" + ex.ToString() + ")", Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                     if (conn.State != ConnectionState.Closed) conn.Close();
                 }
@@ -3684,12 +3683,12 @@ namespace VietSoftHRM
             Commons.Modules.ObjSystems.HideWaitForm();
             if (errorCount != 0)
             {
-                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgDuLieuChuaHopLe"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDuLieuChuaHopLe"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             else
             {
-                DialogResult res = XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgDuLieuSanSangImport"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult res = XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDuLieuSanSangImport"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (res == DialogResult.Yes)
                 {
                     SqlConnection conn = new SqlConnection(Commons.IConnections.CNStr);
@@ -3705,12 +3704,12 @@ namespace VietSoftHRM
                         SqlHelper.ExecuteNonQuery(sTrans, CommandType.Text, sSql);
                         Commons.Modules.ObjSystems.XoaTable(sbt);
                         sTrans.Commit();
-                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgImportDuLieuThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgImportDuLieuThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     catch (Exception ex)
                     {
                         sTrans.Rollback();
-                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgImportKhongThanhCong") + " error(" + ex.ToString() + ")", Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgImportKhongThanhCong") + " error(" + ex.ToString() + ")", Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                     if (conn.State != ConnectionState.Closed) conn.Close();
                 }
@@ -3780,12 +3779,12 @@ namespace VietSoftHRM
             Commons.Modules.ObjSystems.HideWaitForm();
             if (errorCount != 0)
             {
-                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgDuLieuChuaHopLe"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDuLieuChuaHopLe"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             else
             {
-                DialogResult res = XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgDuLieuSanSangImport"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult res = XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDuLieuSanSangImport"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (res == DialogResult.Yes)
                 {
                     SqlConnection conn = new SqlConnection(Commons.IConnections.CNStr);
@@ -3800,12 +3799,12 @@ namespace VietSoftHRM
                         SqlHelper.ExecuteNonQuery(sTrans, CommandType.Text, sSql);
                         Commons.Modules.ObjSystems.XoaTable(sbt);
                         sTrans.Commit();
-                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgImportDuLieuThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgImportDuLieuThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     catch (Exception ex)
                     {
                         sTrans.Rollback();
-                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgImportKhongThanhCong") + " error(" + ex.ToString() + ")", Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgImportKhongThanhCong") + " error(" + ex.ToString() + ")", Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                     if (conn.State != ConnectionState.Closed) conn.Close();
                 }
@@ -3889,12 +3888,12 @@ namespace VietSoftHRM
             Commons.Modules.ObjSystems.HideWaitForm();
             if (errorCount != 0)
             {
-                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgDuLieuChuaHopLe"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDuLieuChuaHopLe"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             else
             {
-                DialogResult res = XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgDuLieuSanSangImport"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult res = XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDuLieuSanSangImport"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (res == DialogResult.Yes)
                 {
                     SqlConnection conn = new SqlConnection(Commons.IConnections.CNStr);
@@ -3909,12 +3908,12 @@ namespace VietSoftHRM
                         SqlHelper.ExecuteNonQuery(sTrans, CommandType.Text, sSql);
                         Commons.Modules.ObjSystems.XoaTable(sbt);
                         sTrans.Commit();
-                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgImportDuLieuThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgImportDuLieuThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     catch (Exception ex)
                     {
                         sTrans.Rollback();
-                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgImportKhongThanhCong") + " error(" + ex.ToString() + ")", Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgImportKhongThanhCong") + " error(" + ex.ToString() + ")", Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                     if (conn.State != ConnectionState.Closed) conn.Close();
                 }
@@ -4092,7 +4091,7 @@ namespace VietSoftHRM
 
             if (e.KeyCode == Keys.Delete)
             {
-                if (MessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgBanCoMuonXoaDuLieu"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgThongBao"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+                if (MessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgBanCoMuonXoaDuLieu"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
                     return;
                 DevExpress.XtraGrid.Views.Grid.GridView view = sender as DevExpress.XtraGrid.Views.Grid.GridView;
                 if (view.SelectedRowsCount != 0)

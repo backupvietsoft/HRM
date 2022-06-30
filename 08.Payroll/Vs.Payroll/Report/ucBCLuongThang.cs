@@ -60,7 +60,7 @@ namespace Vs.Payroll
             DataTable dt = new DataTable();
             dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboCACH_TINH_LUONG", Commons.Modules.UserName, Commons.Modules.TypeLanguage, -1));
             Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboCachTinhLuong, dt, "ID_CTL", "TEN", "TEN");
-            cboCachTinhLuong.EditValue = 2; 
+            cboCachTinhLuong.EditValue = 2;
             lk_NgayIn.EditValue = DateTime.Today;
         }
 
@@ -143,7 +143,7 @@ namespace Vs.Payroll
 
                                         if (xlApp == null)
                                         {
-                                            MessageBox.Show("Lỗi không thể sử dụng được thư viện EXCEL");
+                                            MessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgKhongTheSuDungThuVienEXCEL"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                             return;
                                         }
                                         object misValue = System.Reflection.Missing.Value;
@@ -155,7 +155,8 @@ namespace Vs.Payroll
 
                                         if (ws == null)
                                         {
-                                            MessageBox.Show("Không thể tạo được WorkSheet");
+
+                                            MessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgTaoTheTaoWorkSheet"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                             return;
                                         }
 
@@ -353,7 +354,7 @@ namespace Vs.Payroll
 
                                         if (xlApp == null)
                                         {
-                                            MessageBox.Show("Lỗi không thể sử dụng được thư viện EXCEL");
+                                            MessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgKhongTheSuDungThuVienEXCEL"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                             return;
                                         }
                                         object misValue = System.Reflection.Missing.Value;
@@ -365,7 +366,7 @@ namespace Vs.Payroll
 
                                         if (ws == null)
                                         {
-                                            MessageBox.Show("Không thể tạo được WorkSheet");
+                                            MessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgTaoTheTaoWorkSheet"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                             return;
                                         }
 
@@ -549,7 +550,7 @@ namespace Vs.Payroll
 
                                         if (xlApp == null)
                                         {
-                                            MessageBox.Show("Lỗi không thể sử dụng được thư viện EXCEL");
+                                            MessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgKhongTheSuDungThuVienEXCEL"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                             return;
                                         }
                                         object misValue = System.Reflection.Missing.Value;
@@ -561,7 +562,7 @@ namespace Vs.Payroll
 
                                         if (ws == null)
                                         {
-                                            MessageBox.Show("Không thể tạo được WorkSheet");
+                                            MessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgTaoTheTaoWorkSheet"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                             return;
                                         }
 
@@ -745,7 +746,7 @@ namespace Vs.Payroll
 
                                         if (xlApp == null)
                                         {
-                                            MessageBox.Show("Lỗi không thể sử dụng được thư viện EXCEL");
+                                            MessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgKhongTheSuDungThuVienEXCEL"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                             return;
                                         }
                                         object misValue = System.Reflection.Missing.Value;
@@ -757,7 +758,7 @@ namespace Vs.Payroll
 
                                         if (ws == null)
                                         {
-                                            MessageBox.Show("Không thể tạo được WorkSheet");
+                                            MessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgTaoTheTaoWorkSheet"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                             return;
                                         }
 
@@ -940,7 +941,7 @@ namespace Vs.Payroll
 
                                         if (xlApp == null)
                                         {
-                                            MessageBox.Show("Lỗi không thể sử dụng được thư viện EXCEL");
+                                            MessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgKhongTheSuDungThuVienEXCEL"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                             return;
                                         }
                                         object misValue = System.Reflection.Missing.Value;
@@ -952,7 +953,7 @@ namespace Vs.Payroll
 
                                         if (ws == null)
                                         {
-                                            MessageBox.Show("Không thể tạo được WorkSheet");
+                                            MessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgTaoTheTaoWorkSheet"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                             return;
                                         }
 
@@ -1135,7 +1136,7 @@ namespace Vs.Payroll
 
                                         if (xlApp == null)
                                         {
-                                            MessageBox.Show("Lỗi không thể sử dụng được thư viện EXCEL");
+                                            MessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgKhongTheSuDungThuVienEXCEL"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                             return;
                                         }
                                         object misValue = System.Reflection.Missing.Value;
@@ -1147,7 +1148,7 @@ namespace Vs.Payroll
 
                                         if (ws == null)
                                         {
-                                            MessageBox.Show("Không thể tạo được WorkSheet");
+                                            MessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgTaoTheTaoWorkSheet"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                             return;
                                         }
 
@@ -1446,7 +1447,7 @@ namespace Vs.Payroll
 
                                         if (xlApp == null)
                                         {
-                                            MessageBox.Show("Lỗi không thể sử dụng được thư viện EXCEL");
+                                            MessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgKhongTheSuDungThuVienEXCEL"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                             return;
                                         }
                                         object misValue = System.Reflection.Missing.Value;
@@ -1458,7 +1459,7 @@ namespace Vs.Payroll
 
                                         if (ws == null)
                                         {
-                                            MessageBox.Show("Không thể tạo được WorkSheet");
+                                            MessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgTaoTheTaoWorkSheet"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                             return;
                                         }
 

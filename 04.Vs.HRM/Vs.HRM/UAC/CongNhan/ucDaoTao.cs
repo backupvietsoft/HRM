@@ -8,6 +8,7 @@ using System.Data;
 using System.Windows.Forms;
 using Microsoft.ApplicationBlocks.Data;
 using Vs.Report;
+using DevExpress.XtraGrid.Views.Grid;
 
 namespace Vs.HRM
 {
@@ -322,7 +323,7 @@ namespace Vs.HRM
                         {
                             if (grvKhoaHoc.RowCount == 0)
                             {
-                                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgChuaChonKhoaHoc"));
+                                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgChuaChonKhoaHoc"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 enableButon(true);
                                 them = false;
                                 bthem = false;
@@ -442,7 +443,7 @@ namespace Vs.HRM
             }
             else
             {
-                if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgDeleteKhoaDaoTao"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) return;
+                if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDeleteKhoaDaoTao"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) return;
                 try
                 {
                     SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "DELETE dbo.KHOA_DAO_TAO WHERE ID_KDT = " + grvKhoaHoc.GetFocusedRowCellValue("ID_KDT") + "");
@@ -450,14 +451,14 @@ namespace Vs.HRM
                 }
                 catch (Exception ex)
                 {
-                    XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgDelDangSuDung") + "\n" + ex.Message.ToString());
+                    XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDelDangSuDung") + "\n" + ex.Message.ToString(), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
         }
 
         private void XoaKeHoachKhoaDaoTao()
         {
-            if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgDeleteKeHoachDaoTao"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) return;
+            if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDeleteKeHoachDaoTao"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) return;
             //xóa
             try
             {
@@ -466,7 +467,7 @@ namespace Vs.HRM
             }
             catch (Exception ex)
             {
-                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgDelDangSuDung") + "\n" + ex.Message.ToString());
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDelDangSuDung") + "\n" + ex.Message.ToString(), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
         private void grdKhoaHoc_ProcessGridKey(object sender, KeyEventArgs e)
@@ -602,6 +603,31 @@ namespace Vs.HRM
         private void DiemtextEdit_EditValueChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void grvDSCN_RowCountChanged(object sender, EventArgs e)
+        {
+            //GridView view = sender as GridView;
+            //try
+            //{
+            //    int index = ItemForSumNhanVien.Text.IndexOf(':');
+            //    if (index > 0)
+            //    {
+            //        if (view.RowCount > 0)
+            //        {
+            //            ItemForSumNhanVien.Text = ItemForSumNhanVien.Text.Substring(0, index) + ": " + view.RowCount.ToString();
+            //        }
+            //        else
+            //        {
+            //            ItemForSumNhanVien.Text = ItemForSumNhanVien.Text.Substring(0, index) + ": 0";
+            //        }
+
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    XtraMessageBox.Show(ex.Message.ToString());
+            //}
         }
     }
 }

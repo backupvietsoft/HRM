@@ -40,20 +40,20 @@ namespace VietSoftHRM
                 string sPass = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT PASSWORD FROM dbo.USERS WHERE USER_NAME ='" + USER_NAMETextEdit.EditValue + "'").ToString();
                 if (PASSWORDOLDtextEdit.EditValue.ToString() != Commons.Modules.ObjSystems.Decrypt(sPass, true))
                 {
-                    XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgPassWorkkhongdung"), Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgChangePassword"), MessageBoxButtons.OK, MessageBoxIcon.Error); return;
+                    XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgPassWorkkhongdung"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error); return;
                 }
                 if (PASSWORDtextEdit.EditValue.ToString() != PASSWORDNEWtextEdit.EditValue.ToString())
                 {
-                    XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgPassWordKhongKhop"), Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgChangePassword"), MessageBoxButtons.OK, MessageBoxIcon.Error); return;
+                    XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgPassWordKhongKhop"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error); return;
                 }
                 //update password
                 SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "UPDATE dbo.USERS SET PASSWORD = '" + Commons.Modules.ObjSystems.Encrypt(PASSWORDNEWtextEdit.EditValue.ToString(), true) + "' WHERE USER_NAME = '" + USER_NAMETextEdit.EditValue + "'");
-                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgSaveThanhCong"), Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgChangePassword"), MessageBoxButtons.OK, MessageBoxIcon.Information); this.Close();
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgSaveThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information); this.Close();
                 //kiểm tra pass mới có giống nhâu không
             }
             catch
             {
-                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgPassWorkkhongdung"), Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgChangePassword"), MessageBoxButtons.OK, MessageBoxIcon.Error); return;
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgPassWorkkhongdung"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error); return;
             }
         }
         private void windowsUIButton_ButtonClick(object sender, DevExpress.XtraBars.Docking2010.ButtonEventArgs e)

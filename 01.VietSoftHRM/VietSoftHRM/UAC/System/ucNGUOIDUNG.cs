@@ -43,17 +43,17 @@ namespace VietSoftHRM
                 {
                     if (grvNguoiDung.RowCount == 0)
                     {
-                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgKhongCoDuLieuDeXoa"), "msgXoa", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgKhongCoDuLieuDeXoa"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption") , MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return;
                     }
-                    if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgDeleteUser"), ",msgXoa", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) return;
+                    if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDeleteUser"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) return;
                     //xóa
                     SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "DELETE FROM	dbo.USERS WHERE ID_USER = " + grvNguoiDung.GetFocusedRowCellValue("ID_USER") + " ");
                     view.DeleteSelectedRows();
                 }
                 catch (Exception ex)
                 {
-                    XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgDelDangSuDung") + "\n" + ex.Message.ToString(), "msgXoa", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDelDangSuDung") + "\n" + ex.Message.ToString(), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 }
 
@@ -95,7 +95,7 @@ namespace VietSoftHRM
                                 int lic = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT COUNT(*) FROM dbo.USERS WHERE LIC = 1 AND ID_USER != " + grvNguoiDung.GetFocusedRowCellValue("ID_USER") + ""));
                                 if(lic >= Commons.Modules.iLic)
                                 {
-                                    XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgLincenseDaHet"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "sThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgLincenseDaHet"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                                     return;
                                 }
                             }

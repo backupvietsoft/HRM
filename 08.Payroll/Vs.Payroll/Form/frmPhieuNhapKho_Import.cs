@@ -141,7 +141,7 @@ namespace VS.ERP
         }
         private void btnXoa_Click(object sender, EventArgs e)
         {
-            DialogResult res = XtraMessageBox.Show("Bạn có chắc xóa dữ liệu?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult res = XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDellPhieuNhapKho"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (res == DialogResult.No) return;
             DataTable dtTmp = new DataTable();
             dtTmp = (DataTable)grdChung.DataSource;
@@ -163,7 +163,7 @@ namespace VS.ERP
             }
             catch
             {
-                XtraMessageBox.Show("Không xóa được. Bạn vui lòng kiểm tra lại dữ liệu !", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgKhongXoaDuocVuiLongKiemTraLai"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
 
             }
             dtTmp.AcceptChanges();

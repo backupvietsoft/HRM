@@ -122,7 +122,7 @@ namespace Vs.TimeAttendance
 
                         cmd.ExecuteNonQuery();
 
-                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "messCapNhatOk"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "megCapNhatThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                         break;
                     }
                 case "xoa":
@@ -143,7 +143,7 @@ namespace Vs.TimeAttendance
 
                         cmd.ExecuteNonQuery();
 
-                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "messCapNhatOk"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "mesgDellThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                         break;
                     }
                 case "thoat":
@@ -158,26 +158,26 @@ namespace Vs.TimeAttendance
         {
             if (cboNhom.Text == "")
             {
-                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "messchuanhapNhom"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgChuaNhapNhom"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                 cboNhom.Focus();
                 return false;
             }
             if (cboCA.Text=="")
             {
-                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "messchuanhapca"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgChuaNhapCa"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                 cboCA.Focus();
                 return false;
             }
 
             if(dttTu_ngay.Text=="")
             {
-                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "messchuanhapngay_bd"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgChuaNhapNgay_BD"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                 dttTu_ngay.Focus();
                 return false;
             }
             if(dttDen_ngay.Text=="")
             {
-                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "messchuanhapngay_kt"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgChuaNhapNgay_KT"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                 dttDen_ngay.Focus();
                 return false;
             }

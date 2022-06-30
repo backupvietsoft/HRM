@@ -138,7 +138,7 @@ namespace Vs.TimeAttendance
                         }
                         else
                         {
-                           if(XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name,"MsgDuLieuCoBanCoMuonCapNhatLai"),
+                           if(XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "MsgDuLieuCoBanCoMuonCapNhatLai"),
                             (Commons.Modules.TypeLanguage == 0 ? ThongBao.msgTBV.ToString() : ThongBao.msgTBA), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                             {
                                 Commons.Modules.ObjSystems.ShowWaitForm(this);
@@ -976,5 +976,29 @@ namespace Vs.TimeAttendance
             { GC.Collect(); }
         }
 
+        private void grvPhepThang_RowCountChanged(object sender, EventArgs e)
+        {
+            GridView view = sender as GridView;
+            try
+            {
+                int index = ItemForSumNhanVien.Text.IndexOf(':');
+                if (index > 0)
+                {
+                    if (view.RowCount > 0)
+                    {
+                        ItemForSumNhanVien.Text = ItemForSumNhanVien.Text.Substring(0, index) + ": " + view.RowCount.ToString();
+                    }
+                    else
+                    {
+                        ItemForSumNhanVien.Text = ItemForSumNhanVien.Text.Substring(0, index) + ": 0";
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show(ex.Message.ToString());
+            }
+        }
     }
 }

@@ -13,7 +13,7 @@ namespace Vs.HRM
     public partial class ucKhenThuong : DevExpress.XtraEditors.XtraUserControl
     {
         static Int64 idcn = 0;
-        Int64 id_kT=-1;
+        Int64 id_kT = -1;
         bool cothem = false;
         string strDuongDan = "";
         public ucKhenThuong(Int64 id)
@@ -63,7 +63,7 @@ namespace Vs.HRM
             {
                 grdKhenThuong.DataSource = dt;
             }
-            
+
 
             if (id != -1)
             {
@@ -80,7 +80,7 @@ namespace Vs.HRM
 
         }
 
-        
+
 
         #region function dung chung
         private void enableButon(bool visible)
@@ -145,7 +145,7 @@ namespace Vs.HRM
                 txtTHOI_HAN_DC.EditValue = grvKhenThuong.GetFocusedRowCellValue("THOI_HAN_DC");
                 txtTHOI_HAN_SD.EditValue = grvKhenThuong.GetFocusedRowCellValue("THOI_HAN_SD");
                 txtKH_SUA_DOI.EditValue = grvKhenThuong.GetFocusedRowCellValue("KH_SUA_DOI");
-                cboTinhTrang.EditValue = Convert.ToInt32(grvKhenThuong.GetFocusedRowCellValue("ID_TT"));
+                cboTinhTrang.EditValue = string.IsNullOrEmpty(grvKhenThuong.GetFocusedRowCellValue("ID_TT").ToString()) ? cboTinhTrang.EditValue : Convert.ToInt32(grvKhenThuong.GetFocusedRowCellValue("ID_TT"));
                 txtTaiLieu.EditValue = grvKhenThuong.GetFocusedRowCellValue("TAI_LIEU");
             }
         }
@@ -173,12 +173,13 @@ namespace Vs.HRM
                           cothem));
                 LoadgrdKhenThuong(n);
             }
-            catch 
+            catch
             { }
         }
         private void DeleteData()
         {
-            if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgDeleteKhenThuong"), Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgTieuDeXoa"), MessageBoxButtons.YesNo) == DialogResult.No) return;
+
+            if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDeleteKhenThuong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) return;
             //xóa
             try
             {
@@ -187,7 +188,7 @@ namespace Vs.HRM
             }
             catch (Exception ex)
             {
-                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgDelKhongThanhCong") + "\n" + ex.Message.ToString(), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDelDangSuDung") + "\n" + ex.Message.ToString(), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
         #endregion
@@ -208,7 +209,7 @@ namespace Vs.HRM
                     {
                         if (Commons.Modules.iCongNhan == -1)
                         {
-                            XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgChuaChonCongNhan"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgChuaChonCongNhan"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                             return;
                         }
                         id_kT = -1;
@@ -219,9 +220,15 @@ namespace Vs.HRM
                     }
                 case "sua":
                     {
+
+                        if ((Convert.ToInt32(cboTinhTrang.EditValue) == 2 && Commons.Modules.UserName != "admin") || (Convert.ToInt32(cboTinhTrang.EditValue) == 3 && Commons.Modules.UserName != "admin"))
+                        {
+                            XtraMessageBox.Show(cboTinhTrang.Text + Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgTinhTrangKhongSuaDuoc"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "sThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
                         if (grvKhenThuong.RowCount == 0)
                         {
-                            XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgChonDongCanXuLy"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgChonDongCanXuLy"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                             return;
                         }
                         cothem = false;
@@ -233,7 +240,8 @@ namespace Vs.HRM
                     {
                         if (grvKhenThuong.RowCount == 0)
                         {
-                            XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgChonDongCanXuLy"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                            XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgChonDongCanXuLy"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                             return;
                         }
                         Commons.Modules.ObjSystems.Xoahinh(txtTaiLieu.Text);
@@ -242,7 +250,7 @@ namespace Vs.HRM
                     }
                 case "In":
                     {
-                        frmInKhenThuongKyLuatCN InKTKLCN = new frmInKhenThuongKyLuatCN(idcn, "",Convert.ToInt64(grvKhenThuong.GetFocusedRowCellValue("ID_KTHUONG")));
+                        frmInKhenThuongKyLuatCN InKTKLCN = new frmInKhenThuongKyLuatCN(idcn, "", Convert.ToInt64(grvKhenThuong.GetFocusedRowCellValue("ID_KTHUONG")));
                         InKTKLCN.ShowDialog();
                         break;
                     }
@@ -266,7 +274,7 @@ namespace Vs.HRM
                         cmd.CommandType = CommandType.StoredProcedure;
                         if (Convert.ToInt16(cmd.ExecuteScalar()) == 1)
                         {
-                            XtraMessageBox.Show(ItemForSO_QUYET_DINH.Text + " " + Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgSoQD_NayDaTonTai"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            XtraMessageBox.Show(ItemForSO_QUYET_DINH.Text + " " + Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgSoQD_NayDaTonTai"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                             SO_QUYET_DINHTextEdit.Focus();
 
                             return;

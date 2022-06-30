@@ -102,6 +102,14 @@ namespace Vs.Category
                             Commons.Modules.sId = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spUpdateCHUC_VU", (bAddEditCV ? -1 : Convert.ToInt32(iIdCV)), 
                                 MS_CVTextEdit.EditValue, TEN_CVTextEdit.EditValue, TEN_CV_ATextEdit.EditValue, 
                                 TEN_CV_HTextEdit.EditValue, ID_LOAI_CVSearchLookUpEdit.EditValue, (STT_IN_CVTextEdit.EditValue == "") ? STT_IN_CVTextEdit.EditValue = null : STT_IN_CVTextEdit.EditValue).ToString();
+                            if (bAddEditCV)
+                            {
+                                if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msg_ThemThanhCongBanCoMuonTiepTuc"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                                {
+                                    LoadTextNull();
+                                    return;
+                                }
+                            }
                             this.DialogResult = DialogResult.OK;
                             this.Close();
                             break;
@@ -121,6 +129,20 @@ namespace Vs.Category
             }
 
         }
+        private void LoadTextNull()
+        {
+            try
+            {
+                ID_LOAI_CVSearchLookUpEdit.EditValue = null;
+                MS_CVTextEdit.EditValue = String.Empty;
+                STT_IN_CVTextEdit.EditValue = String.Empty;
+                TEN_CVTextEdit.EditValue = String.Empty;
+                TEN_CV_ATextEdit.EditValue = String.Empty;
+                TEN_CV_HTextEdit.EditValue = String.Empty;
+                TEN_CVTextEdit.Focus();
+            }
+            catch { }
+        }
         private bool KiemTrung()
         {
             try
@@ -133,13 +155,13 @@ namespace Vs.Category
                     tenSql = "SELECT COUNT(*) FROM CHUC_VU WHERE TEN_CV = N'" + TEN_CVTextEdit.Text + "' AND ID_LOAI_CV =" + ID_LOAI_CVSearchLookUpEdit.EditValue + " AND ID_CV <> " + iIdCV + "";
                     if (Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, sSql)) != 0)
                     {
-                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_MaSoTrung"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"));
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msg_MaSoTrung"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                         MS_CVTextEdit.Focus();
                         return true;
                     }
                     if (Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, tenSql)) != 0)
                     {
-                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_TenTrung"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"));
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msg_TenTrung"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                         TEN_CVTextEdit.Focus();
                         return true;
                     }

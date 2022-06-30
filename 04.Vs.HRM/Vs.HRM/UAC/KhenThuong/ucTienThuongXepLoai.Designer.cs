@@ -68,6 +68,7 @@
             this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.lblTieuDeBaoCao = new DevExpress.XtraLayout.LayoutControlItem();
             this.lblTienThuong = new DevExpress.XtraLayout.LayoutControlItem();
+            this.ItemForSumNhanVien = new DevExpress.XtraLayout.SimpleLabelItem();
             this.windowsUIButton.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.searchControl.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdChung)).BeginInit();
@@ -104,6 +105,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblTieuDeBaoCao)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblTienThuong)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForSumNhanVien)).BeginInit();
             this.SuspendLayout();
             // 
             // windowsUIButton
@@ -179,10 +181,10 @@
             // grdChung
             // 
             this.grdChung.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.grdChung.Location = new System.Drawing.Point(6, 99);
+            this.grdChung.Location = new System.Drawing.Point(6, 118);
             this.grdChung.MainView = this.grvChung;
             this.grdChung.Name = "grdChung";
-            this.grdChung.Size = new System.Drawing.Size(893, 372);
+            this.grdChung.Size = new System.Drawing.Size(893, 353);
             this.grdChung.TabIndex = 5;
             this.grdChung.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grvChung});
@@ -196,6 +198,7 @@
             this.grvChung.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.True;
             this.grvChung.OptionsView.ShowAutoFilterRow = true;
             this.grvChung.OptionsView.ShowGroupPanel = false;
+            this.grvChung.RowCountChanged += new System.EventHandler(this.grvChung_RowCountChanged);
             // 
             // gridView1
             // 
@@ -422,7 +425,8 @@
             this.lblDenThang,
             this.emptySpaceItem1,
             this.lblTieuDeBaoCao,
-            this.lblTienThuong});
+            this.lblTienThuong,
+            this.ItemForSumNhanVien});
             this.Root.Name = "Root";
             this.Root.Size = new System.Drawing.Size(905, 477);
             this.Root.TextVisible = false;
@@ -430,9 +434,9 @@
             // layoutControlItem1
             // 
             this.layoutControlItem1.Control = this.grdChung;
-            this.layoutControlItem1.Location = new System.Drawing.Point(0, 93);
+            this.layoutControlItem1.Location = new System.Drawing.Point(0, 112);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(895, 374);
+            this.layoutControlItem1.Size = new System.Drawing.Size(895, 355);
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
             // 
@@ -518,6 +522,17 @@
             this.lblTienThuong.Text = "Tien Thuong";
             this.lblTienThuong.TextSize = new System.Drawing.Size(99, 17);
             // 
+            // ItemForSumNhanVien
+            // 
+            this.ItemForSumNhanVien.AllowHotTrack = false;
+            this.ItemForSumNhanVien.AppearanceItemCaption.Options.UseTextOptions = true;
+            this.ItemForSumNhanVien.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.ItemForSumNhanVien.Location = new System.Drawing.Point(0, 93);
+            this.ItemForSumNhanVien.Name = "ItemForSumNhanVien";
+            this.ItemForSumNhanVien.Size = new System.Drawing.Size(895, 19);
+            this.ItemForSumNhanVien.Text = "SumNhanVien";
+            this.ItemForSumNhanVien.TextSize = new System.Drawing.Size(99, 17);
+            // 
             // ucTienThuongXepLoai
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -565,6 +580,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblTieuDeBaoCao)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblTienThuong)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForSumNhanVien)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -601,5 +617,6 @@
         private DevExpress.XtraEditors.TextEdit txtTDBC;
         private DevExpress.XtraLayout.LayoutControlItem lblTieuDeBaoCao;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem1;
+        private DevExpress.XtraLayout.SimpleLabelItem ItemForSumNhanVien;
     }
 }

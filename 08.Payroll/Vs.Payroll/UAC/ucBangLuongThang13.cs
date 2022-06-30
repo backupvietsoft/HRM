@@ -210,7 +210,7 @@ namespace Vs.Payroll
                         {
                             if (grvData.RowCount == 0)
                             {
-                                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgChonDongCanXuLy"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgChonDongCanXuLy"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 return;
                             }
 
@@ -254,7 +254,7 @@ namespace Vs.Payroll
                     {
                         if (grvData.RowCount == 0)
                         {
-                            XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgChuaCoDuLieu"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgChuaCoDuLieu"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                             return;
                         }
                         if (KiemTrong_grvData()) return;
@@ -267,7 +267,7 @@ namespace Vs.Payroll
                     {
                         if (grvData.RowCount == 0)
                         {
-                            XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgChuaCoDuLieu"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgChuaCoDuLieu"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                             return;
                         }
                         if (KiemTrong_grvData()) return;
@@ -280,7 +280,7 @@ namespace Vs.Payroll
                     {
                         if (grvData.RowCount == 0)
                         {
-                            XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgChuaCoDuLieu"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgChuaCoDuLieu"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                             return;
                         }
                         Validate();
@@ -409,7 +409,7 @@ namespace Vs.Payroll
             {
                 if (string.IsNullOrEmpty(txtPT_TT13.Text))
                 {
-                    XtraMessageBox.Show(ItemForThuong13.Text + " " + Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgKhongDuocTrong"));
+                    XtraMessageBox.Show(ItemForThuong13.Text + " " + Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgKhongDuocTrong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                     txtPT_TT13.Focus();
                     return;
                 }
@@ -424,7 +424,7 @@ namespace Vs.Payroll
             {
                 if (string.IsNullOrEmpty(txtPT_THUONG_HQKD.Text))
                 {
-                    XtraMessageBox.Show(ItemForThuongHieuQuaKD.Text + " " + Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgKhongDuocTrong"));
+                    XtraMessageBox.Show(ItemForThuongHieuQuaKD.Text + " " + Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgKhongDuocTrong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                     txtPT_THUONG_HQKD.Focus();
                     return;
                 }
@@ -441,7 +441,7 @@ namespace Vs.Payroll
                 dt1 = (DataTable)grdData.DataSource;
                 if (dt1 == null || dt1.Rows.Count == 0)
                 {
-                    XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgChonDongCanXuLy"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgChonDongCanXuLy"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
 
@@ -505,7 +505,7 @@ namespace Vs.Payroll
                     {
                         if (grvData.Columns[j].FieldName == "PT_TL" && (grvData.GetRowCellValue(i, grvData.Columns[j])).ToString() == "")
                         {
-                            XtraMessageBox.Show(grvData.Columns[j].Caption + " " + Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgKhongDuocTrong"));
+                            XtraMessageBox.Show(grvData.Columns[j].Caption + " " + Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgKhongDuocTrong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             grvData.FocusedRowHandle = i;
                             grvData.FocusedColumn = grvData.Columns[j];
                             return true;
@@ -513,7 +513,7 @@ namespace Vs.Payroll
 
                         if (grvData.Columns[j].FieldName == "PT_HQ_KD" && (grvData.GetRowCellValue(i, grvData.Columns[j])).ToString() == "")
                         {
-                            XtraMessageBox.Show(grvData.Columns[j].Caption + " " + Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgKhongDuocTrong"));
+                            XtraMessageBox.Show(grvData.Columns[j].Caption + " " + Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgKhongDuocTrong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             grvData.FocusedRowHandle = i;
                             grvData.FocusedColumn = grvData.Columns[j];
                             return true;

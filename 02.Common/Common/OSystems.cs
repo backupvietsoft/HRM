@@ -954,6 +954,9 @@ namespace Commons
                 if (MPopulateColumns == true)
                     grv.PopulateColumns();
                 grv.OptionsView.ColumnAutoWidth = MColumnAutoWidth;
+                grv.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+                grv.Appearance.HeaderPanel.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+                grv.Appearance.HeaderPanel.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
                 //grv.OptionsView.AllowHtmlDrawHeaders = true;
                 //grv.Appearance.HeaderPanel.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
                 grv.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.True;
@@ -1148,8 +1151,9 @@ namespace Commons
                     grv.PopupMenuShowing += delegate (object a, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs b) { Grv_PopupMenuShowing(grv, b, grv, fName); };
                 }
 
-
-
+                grv.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+                grv.Appearance.HeaderPanel.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+                grv.Appearance.HeaderPanel.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
                 if (MloadNNgu)
                     MLoadNNXtraGrid(grv, fName);
 
@@ -1209,6 +1213,9 @@ namespace Commons
                 }
 
 
+                grv.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+                grv.Appearance.HeaderPanel.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+                grv.Appearance.HeaderPanel.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
 
                 if (MloadNNgu)
                     MLoadNNXtraGrid(grv, Commons.Modules.sPS.Replace("spGetList", "frm"));
@@ -1330,10 +1337,14 @@ namespace Commons
                     //if (col.ColumnType.ToString() == "System.String")
                     //    col.ColumnEdit = repoMemo;
                     //col.AppearanceHeader.Options.UseTextOptions = true;
-                    col.AppearanceHeader.TextOptions.HAlignment = HorzAlignment.Center;
-                    col.AppearanceHeader.TextOptions.Trimming = DevExpress.Utils.Trimming.None;
-                    col.AppearanceHeader.TextOptions.VAlignment = VertAlignment.Center;
-                    col.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+
+
+                    //col.AppearanceHeader.TextOptions.HAlignment = HorzAlignment.Center;
+                    //col.AppearanceHeader.TextOptions.Trimming = DevExpress.Utils.Trimming.None;
+                    //col.AppearanceHeader.TextOptions.VAlignment = VertAlignment.Center;
+                    //col.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+
+
                     //col.Caption = "aaaa";
                     //Modules.ObjLanguages.GetLanguage(Modules.ModuleName, fName, col.FieldName, Modules.TypeLanguage);
                     col.Caption = GetNN(dtTmp, col.FieldName, fName);

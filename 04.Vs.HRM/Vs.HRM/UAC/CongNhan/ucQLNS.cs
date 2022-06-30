@@ -8,6 +8,9 @@ using DevExpress.XtraBars.Docking2010;
 using DevExpress.XtraBars.Navigation;
 using DevExpress.XtraLayout.Utils;
 using System.Threading;
+using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraLayout;
+using System.Collections.Generic;
 
 namespace Vs.HRM
 {
@@ -19,7 +22,7 @@ namespace Vs.HRM
         public ucQLNS()
         {
             InitializeComponent();
-            Commons.Modules.ObjSystems.ThayDoiNN(this, Root);
+            Commons.Modules.ObjSystems.ThayDoiNN(this, new List<LayoutControlGroup>() { Root }, windowsUIButton);
         }
 
         private void ucQLNS_Load(object sender, EventArgs e)
@@ -146,7 +149,13 @@ namespace Vs.HRM
         }
         private void tileView1_DoubleClick(object sender, EventArgs e)
         {
-            try { labelNV.Text = tileViewCN.GetFocusedRowCellValue(tileViewCN.Columns["MS_CN"]).ToString() + " - " + tileViewCN.GetFocusedRowCellValue(tileViewCN.Columns["HO_TEN"]).ToString(); } catch (Exception ex) { }
+            try
+            {
+                labelNV.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                labelNV.ForeColor = System.Drawing.Color.FromArgb(0,0,255);
+                labelNV.Text = tileViewCN.GetFocusedRowCellValue(tileViewCN.Columns["MS_CN"]).ToString() + " - " + tileViewCN.GetFocusedRowCellValue(tileViewCN.Columns["HO_TEN"]).ToString();
+            }
+            catch (Exception ex) { }
             grdNS.Visible = false;
             ucCTQLNS dl = new ucCTQLNS(Convert.ToInt64(tileViewCN.GetFocusedRowCellValue(tileViewCN.Columns["ID_CN"])));
             dl.Refresh();
@@ -179,7 +188,7 @@ namespace Vs.HRM
             thread.Start();
 
             accorMenuleft.Visible = false;
-        } 
+        }
         private void Selecttab()
         {
             if (InvokeRequired)
@@ -196,8 +205,8 @@ namespace Vs.HRM
             navigationFrame1.SelectedPage = navigationPage1;
             navigationPage2.Controls[0].Visible = false;
             navigationPage2.Controls[0].Dispose();
-        //    navigationPage2.SelectedPage.Visible = false;
-       //     navigationPage2.Controls.RemoveAt(0);
+            //    navigationPage2.SelectedPage.Visible = false;
+            //     navigationPage2.Controls.RemoveAt(0);
 
             accorMenuleft.Visible = true;
             LoadNhanSu(Commons.Modules.iCongNhan);
@@ -218,7 +227,7 @@ namespace Vs.HRM
         }
         private void DeleteData()
         {
-            if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgDeleteCongNhan"), Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgTieuDeXoa"), MessageBoxButtons.YesNo) == DialogResult.No) return;
+            if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDeleteCongNhan"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "sThongBao"),MessageBoxButtons.YesNo,MessageBoxIcon.Question) == DialogResult.No) return;
             //xóa
             try
             {
@@ -227,9 +236,7 @@ namespace Vs.HRM
             }
             catch (Exception ex)
             {
-                //XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgDelDangSuDung") + "\n" + ex.Message.ToString());
-                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgDelDangSuDung"));
-
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDelDangSuDung"));
             }
         }
 
@@ -268,7 +275,7 @@ namespace Vs.HRM
                     {
                         if (tileViewCN.RowCount == 0)
                         {
-                            XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgChonDongCanXuLy"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgChonDongCanXuLy"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "sThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                             return;
                         }
                         Int64 iIDCN = Convert.ToInt64(tileViewCN.GetFocusedRowCellValue("ID_CN"));
@@ -307,7 +314,7 @@ namespace Vs.HRM
                     {
                         if (tileViewCN.RowCount == 0)
                         {
-                            XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgChonDongCanXuLy"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgChonDongCanXuLy"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "sThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                             return;
                         }
                         DeleteData();
@@ -320,6 +327,31 @@ namespace Vs.HRM
                     }
                 default:
                     break;
+            }
+        }
+
+        private void tileViewCN_RowCountChanged(object sender, EventArgs e)
+        {
+            TileView view = sender as TileView;
+            try
+            {
+                int index = ItemForSumNhanVien.Text.IndexOf(':');
+                if (index > 0)
+                {
+                    if (view.RowCount > 0)
+                    {
+                        ItemForSumNhanVien.Text = ItemForSumNhanVien.Text.Substring(0, index) + ": " + view.RowCount.ToString();
+                    }
+                    else
+                    {
+                        ItemForSumNhanVien.Text = ItemForSumNhanVien.Text.Substring(0, index) + ": 0";
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show(ex.Message.ToString());
             }
         }
     }

@@ -75,7 +75,7 @@ namespace Vs.Payroll
                                 Commons.Modules.sId = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spUpdateKINH_NGHIEM_LV", (AddEdit ? -1 : Id), txtMS_KNLV.EditValue, txtKNLV.EditValue, txtKNLV_A.EditValue, txtKNLV_H.EditValue, txtGHI_CHU.EditValue).ToString();
                                 if (AddEdit)
                                 {
-                                    if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMain", "msgThemThanhCongBanMuonThemTiep"), "", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                                    if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msg_ThemThanhCongBanCoMuonTiepTuc"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                                     {
                                         LoadTextNull();
                                         return;
@@ -115,7 +115,7 @@ namespace Vs.Payroll
                     sSql = "SELECT COUNT(*) FROM KINH_NGHIEM_LV WHERE MS_KNLV = '" + txtMS_KNLV.EditValue +"'";
                     if (Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, sSql)) != 0)
                     {
-                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgMS_MSkNLvNayDaTonTai"));
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msg_MaSoTrung"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                         
                         return true;
                     }

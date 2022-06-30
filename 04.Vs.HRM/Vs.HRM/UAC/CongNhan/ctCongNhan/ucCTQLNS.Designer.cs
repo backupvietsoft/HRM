@@ -68,9 +68,10 @@
             this.lciNotes1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.lciNotes = new DevExpress.XtraLayout.LayoutControlItem();
             this.lciNotes2 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.lciNotes4 = new DevExpress.XtraLayout.LayoutControlItem();
             this.lciNotes5 = new DevExpress.XtraLayout.LayoutControlItem();
             this.lciNotes3 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.lciNotes4 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.navigationFrame1)).BeginInit();
@@ -89,9 +90,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.lciNotes1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lciNotes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lciNotes2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lciNotes4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lciNotes5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lciNotes3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lciNotes4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
@@ -132,7 +134,7 @@
             this.navigationFrame1.Controls.Add(this.navigationPage6);
             this.navigationFrame1.Controls.Add(this.navigationPage7);
             this.navigationFrame1.Controls.Add(this.navigationPage8);
-            this.navigationFrame1.Location = new System.Drawing.Point(2, 38);
+            this.navigationFrame1.Location = new System.Drawing.Point(1, 37);
             this.navigationFrame1.Name = "navigationFrame1";
             this.navigationFrame1.Pages.AddRange(new DevExpress.XtraBars.Navigation.NavigationPageBase[] {
             this.navigationPage1,
@@ -144,62 +146,61 @@
             this.navigationPage7,
             this.navigationPage8});
             this.navigationFrame1.SelectedPage = this.navigationPage2;
-            this.navigationFrame1.Size = new System.Drawing.Size(910, 386);
+            this.navigationFrame1.Size = new System.Drawing.Size(912, 388);
             this.navigationFrame1.TabIndex = 25;
             this.navigationFrame1.Text = "navigationFrame1";
             // 
             // navigationPage2
             // 
-            this.navigationPage2.Caption = "navigationPage2";
             this.navigationPage2.Name = "navigationPage2";
-            this.navigationPage2.Size = new System.Drawing.Size(910, 386);
+            this.navigationPage2.Size = new System.Drawing.Size(912, 388);
             // 
             // navigationPage1
             // 
             this.navigationPage1.Caption = "navigationPage1";
             this.navigationPage1.Name = "navigationPage1";
-            this.navigationPage1.Size = new System.Drawing.Size(910, 386);
+            this.navigationPage1.Size = new System.Drawing.Size(912, 388);
             // 
             // navigationPage3
             // 
             this.navigationPage3.Caption = "navigationPage3";
             this.navigationPage3.Name = "navigationPage3";
-            this.navigationPage3.Size = new System.Drawing.Size(910, 386);
+            this.navigationPage3.Size = new System.Drawing.Size(912, 388);
             // 
             // navigationPage4
             // 
             this.navigationPage4.Caption = "navigationPage4";
             this.navigationPage4.Name = "navigationPage4";
-            this.navigationPage4.Size = new System.Drawing.Size(910, 386);
+            this.navigationPage4.Size = new System.Drawing.Size(912, 388);
             // 
             // navigationPage5
             // 
             this.navigationPage5.Caption = "navigationPage5";
             this.navigationPage5.Name = "navigationPage5";
-            this.navigationPage5.Size = new System.Drawing.Size(910, 386);
+            this.navigationPage5.Size = new System.Drawing.Size(912, 388);
             // 
             // navigationPage6
             // 
             this.navigationPage6.Caption = "navigationPage6";
             this.navigationPage6.Name = "navigationPage6";
-            this.navigationPage6.Size = new System.Drawing.Size(910, 386);
+            this.navigationPage6.Size = new System.Drawing.Size(912, 388);
             // 
             // navigationPage7
             // 
             this.navigationPage7.Caption = "navigationPage7";
             this.navigationPage7.Name = "navigationPage7";
-            this.navigationPage7.Size = new System.Drawing.Size(910, 386);
+            this.navigationPage7.Size = new System.Drawing.Size(912, 388);
             // 
             // navigationPage8
             // 
             this.navigationPage8.Caption = "navigationPage8";
             this.navigationPage8.Name = "navigationPage8";
-            this.navigationPage8.Size = new System.Drawing.Size(910, 386);
+            this.navigationPage8.Size = new System.Drawing.Size(912, 388);
             // 
             // labLyLich
             // 
             this.labLyLich.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.labLyLich.Location = new System.Drawing.Point(57, 14);
+            this.labLyLich.Location = new System.Drawing.Point(47, 14);
             this.labLyLich.Name = "labLyLich";
             this.labLyLich.Size = new System.Drawing.Size(34, 17);
             this.labLyLich.StyleController = this.layoutControl1;
@@ -209,7 +210,7 @@
             // labCongTac
             // 
             this.labCongTac.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.labCongTac.Location = new System.Drawing.Point(197, 14);
+            this.labCongTac.Location = new System.Drawing.Point(187, 14);
             this.labCongTac.Name = "labCongTac";
             this.labCongTac.Size = new System.Drawing.Size(52, 17);
             this.labCongTac.StyleController = this.layoutControl1;
@@ -218,7 +219,7 @@
             // 
             // NONNlabelControl2
             // 
-            this.NONNlabelControl2.Location = new System.Drawing.Point(101, 14);
+            this.NONNlabelControl2.Location = new System.Drawing.Point(91, 14);
             this.NONNlabelControl2.Name = "NONNlabelControl2";
             this.NONNlabelControl2.Size = new System.Drawing.Size(3, 17);
             this.NONNlabelControl2.StyleController = this.layoutControl1;
@@ -232,14 +233,17 @@
             this.backWindowsUIButtonPanel.AppearanceButton.Pressed.BackColor = System.Drawing.Color.Black;
             this.backWindowsUIButtonPanel.AppearanceButton.Pressed.Options.UseBackColor = true;
             this.backWindowsUIButtonPanel.ButtonInterval = 0;
-            windowsUIButtonImageOptions1.ImageUri.Uri = "hybriddemo_back%20button;Svg";
+            windowsUIButtonImageOptions1.ImageUri.Uri = "Backward;Size32x32;Office2013";
+            windowsUIButtonImageOptions1.SvgImageSize = new System.Drawing.Size(15, 15);
             this.backWindowsUIButtonPanel.Buttons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] {
             new DevExpress.XtraBars.Docking2010.WindowsUIButton("", false, windowsUIButtonImageOptions1, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, null, -1, true)});
-            this.backWindowsUIButtonPanel.Location = new System.Drawing.Point(2, 2);
+            this.backWindowsUIButtonPanel.ContentAlignment = System.Drawing.ContentAlignment.BottomCenter;
+            this.backWindowsUIButtonPanel.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.backWindowsUIButtonPanel.Location = new System.Drawing.Point(9, 1);
             this.backWindowsUIButtonPanel.Margin = new System.Windows.Forms.Padding(2);
             this.backWindowsUIButtonPanel.Name = "backWindowsUIButtonPanel";
             this.backWindowsUIButtonPanel.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.backWindowsUIButtonPanel.Size = new System.Drawing.Size(48, 32);
+            this.backWindowsUIButtonPanel.Size = new System.Drawing.Size(32, 34);
             this.backWindowsUIButtonPanel.TabIndex = 1;
             this.backWindowsUIButtonPanel.Text = "backWindowsUIButtonPanel";
             this.backWindowsUIButtonPanel.UseButtonBackgroundImages = false;
@@ -251,17 +255,17 @@
             this.labelControl11.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(82)))), ((int)(((byte)(163)))));
             this.labelControl11.Appearance.Options.UseFont = true;
             this.labelControl11.Appearance.Options.UseForeColor = true;
-            this.labelControl11.Location = new System.Drawing.Point(630, 2);
+            this.labelControl11.Location = new System.Drawing.Point(619, 1);
             this.labelControl11.Margin = new System.Windows.Forms.Padding(2);
             this.labelControl11.Name = "labelControl11";
-            this.labelControl11.Size = new System.Drawing.Size(282, 32);
+            this.labelControl11.Size = new System.Drawing.Size(294, 23);
             this.labelControl11.StyleController = this.layoutControl1;
             this.labelControl11.TabIndex = 1;
             // 
             // labHopDong
             // 
             this.labHopDong.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.labHopDong.Location = new System.Drawing.Point(114, 14);
+            this.labHopDong.Location = new System.Drawing.Point(104, 14);
             this.labHopDong.Name = "labHopDong";
             this.labHopDong.Size = new System.Drawing.Size(60, 17);
             this.labHopDong.StyleController = this.layoutControl1;
@@ -270,7 +274,7 @@
             // 
             // NONNlabelControl21
             // 
-            this.NONNlabelControl21.Location = new System.Drawing.Point(184, 14);
+            this.NONNlabelControl21.Location = new System.Drawing.Point(174, 14);
             this.NONNlabelControl21.Name = "NONNlabelControl21";
             this.NONNlabelControl21.Size = new System.Drawing.Size(3, 17);
             this.NONNlabelControl21.StyleController = this.layoutControl1;
@@ -279,7 +283,7 @@
             // 
             // NONNlabelControl22
             // 
-            this.NONNlabelControl22.Location = new System.Drawing.Point(259, 14);
+            this.NONNlabelControl22.Location = new System.Drawing.Point(249, 14);
             this.NONNlabelControl22.Name = "NONNlabelControl22";
             this.NONNlabelControl22.Size = new System.Drawing.Size(3, 17);
             this.NONNlabelControl22.StyleController = this.layoutControl1;
@@ -289,7 +293,7 @@
             // labTienLuong
             // 
             this.labTienLuong.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.labTienLuong.Location = new System.Drawing.Point(272, 14);
+            this.labTienLuong.Location = new System.Drawing.Point(262, 14);
             this.labTienLuong.Name = "labTienLuong";
             this.labTienLuong.Size = new System.Drawing.Size(62, 17);
             this.labTienLuong.StyleController = this.layoutControl1;
@@ -298,7 +302,7 @@
             // 
             // NONNlabelControl221
             // 
-            this.NONNlabelControl221.Location = new System.Drawing.Point(344, 14);
+            this.NONNlabelControl221.Location = new System.Drawing.Point(334, 14);
             this.NONNlabelControl221.Name = "NONNlabelControl221";
             this.NONNlabelControl221.Size = new System.Drawing.Size(3, 17);
             this.NONNlabelControl221.StyleController = this.layoutControl1;
@@ -308,7 +312,7 @@
             // labKhanThuong
             // 
             this.labKhanThuong.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.labKhanThuong.Location = new System.Drawing.Point(357, 14);
+            this.labKhanThuong.Location = new System.Drawing.Point(347, 14);
             this.labKhanThuong.Name = "labKhanThuong";
             this.labKhanThuong.Size = new System.Drawing.Size(127, 17);
             this.labKhanThuong.StyleController = this.layoutControl1;
@@ -317,7 +321,7 @@
             // 
             // NONNlabelControl2211
             // 
-            this.NONNlabelControl2211.Location = new System.Drawing.Point(494, 14);
+            this.NONNlabelControl2211.Location = new System.Drawing.Point(484, 14);
             this.NONNlabelControl2211.Name = "NONNlabelControl2211";
             this.NONNlabelControl2211.Size = new System.Drawing.Size(3, 17);
             this.NONNlabelControl2211.StyleController = this.layoutControl1;
@@ -327,7 +331,7 @@
             // labTaiNan
             // 
             this.labTaiNan.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.labTaiNan.Location = new System.Drawing.Point(582, 14);
+            this.labTaiNan.Location = new System.Drawing.Point(572, 14);
             this.labTaiNan.Name = "labTaiNan";
             this.labTaiNan.Size = new System.Drawing.Size(41, 17);
             this.labTaiNan.StyleController = this.layoutControl1;
@@ -336,7 +340,7 @@
             // 
             // NONNlabelControl22111
             // 
-            this.NONNlabelControl22111.Location = new System.Drawing.Point(569, 14);
+            this.NONNlabelControl22111.Location = new System.Drawing.Point(559, 14);
             this.NONNlabelControl22111.Name = "NONNlabelControl22111";
             this.NONNlabelControl22111.Size = new System.Drawing.Size(3, 17);
             this.NONNlabelControl22111.StyleController = this.layoutControl1;
@@ -346,7 +350,7 @@
             // labDanhGia
             // 
             this.labDanhGia.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.labDanhGia.Location = new System.Drawing.Point(507, 14);
+            this.labDanhGia.Location = new System.Drawing.Point(497, 14);
             this.labDanhGia.Name = "labDanhGia";
             this.labDanhGia.Size = new System.Drawing.Size(52, 17);
             this.labDanhGia.StyleController = this.layoutControl1;
@@ -373,7 +377,8 @@
             this.lciNotes2,
             this.lciNotes4,
             this.lciNotes5,
-            this.lciNotes3});
+            this.lciNotes3,
+            this.emptySpaceItem1});
             this.Root.Name = "Root";
             this.Root.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
             this.Root.Size = new System.Drawing.Size(914, 426);
@@ -383,13 +388,11 @@
             // 
             this.layoutControlItem1.Control = this.backWindowsUIButtonPanel;
             this.layoutControlItem1.CustomizationFormText = "layoutControlItem5";
-            this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlItem1.MinSize = new System.Drawing.Size(44, 21);
+            this.layoutControlItem1.Location = new System.Drawing.Point(8, 0);
             this.layoutControlItem1.Name = "layoutControlItem1";
             this.layoutControlItem1.OptionsPrint.AppearanceItem.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.layoutControlItem1.OptionsPrint.AppearanceItem.Options.UseFont = true;
-            this.layoutControlItem1.Size = new System.Drawing.Size(52, 36);
-            this.layoutControlItem1.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            this.layoutControlItem1.Size = new System.Drawing.Size(34, 36);
             this.layoutControlItem1.Text = "layoutControlItem5";
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
@@ -398,13 +401,11 @@
             // 
             this.layoutControlItem9.Control = this.labelControl11;
             this.layoutControlItem9.CustomizationFormText = "Full Name";
-            this.layoutControlItem9.Location = new System.Drawing.Point(628, 0);
-            this.layoutControlItem9.MinSize = new System.Drawing.Size(76, 19);
+            this.layoutControlItem9.Location = new System.Drawing.Point(618, 0);
             this.layoutControlItem9.Name = "layoutControlItem9";
             this.layoutControlItem9.OptionsPrint.AppearanceItem.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.layoutControlItem9.OptionsPrint.AppearanceItem.Options.UseFont = true;
-            this.layoutControlItem9.Size = new System.Drawing.Size(286, 36);
-            this.layoutControlItem9.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            this.layoutControlItem9.Size = new System.Drawing.Size(296, 36);
             this.layoutControlItem9.Text = "Full Name";
             this.layoutControlItem9.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem9.TextVisible = false;
@@ -413,7 +414,7 @@
             // 
             this.lciTasks.Control = this.labLyLich;
             this.lciTasks.CustomizationFormText = "lciTasks";
-            this.lciTasks.Location = new System.Drawing.Point(52, 0);
+            this.lciTasks.Location = new System.Drawing.Point(42, 0);
             this.lciTasks.Name = "lciTasks";
             this.lciTasks.OptionsPrint.AppearanceItem.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.lciTasks.OptionsPrint.AppearanceItem.Options.UseFont = true;
@@ -426,7 +427,7 @@
             // 
             this.NONNlayoutControlItem12.Control = this.NONNlabelControl2;
             this.NONNlayoutControlItem12.CustomizationFormText = "layoutControlItem12";
-            this.NONNlayoutControlItem12.Location = new System.Drawing.Point(96, 0);
+            this.NONNlayoutControlItem12.Location = new System.Drawing.Point(86, 0);
             this.NONNlayoutControlItem12.Name = "NONNlayoutControlItem12";
             this.NONNlayoutControlItem12.OptionsPrint.AppearanceItem.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.NONNlayoutControlItem12.OptionsPrint.AppearanceItem.Options.UseFont = true;
@@ -439,7 +440,7 @@
             // 
             this.NONNlayoutControlItem2.Control = this.NONNlabelControl21;
             this.NONNlayoutControlItem2.CustomizationFormText = "layoutControlItem12";
-            this.NONNlayoutControlItem2.Location = new System.Drawing.Point(179, 0);
+            this.NONNlayoutControlItem2.Location = new System.Drawing.Point(169, 0);
             this.NONNlayoutControlItem2.Name = "NONNlayoutControlItem2";
             this.NONNlayoutControlItem2.OptionsPrint.AppearanceItem.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.NONNlayoutControlItem2.OptionsPrint.AppearanceItem.Options.UseFont = true;
@@ -453,7 +454,7 @@
             // 
             this.NONNlayoutControlItem3.Control = this.NONNlabelControl22;
             this.NONNlayoutControlItem3.CustomizationFormText = "layoutControlItem12";
-            this.NONNlayoutControlItem3.Location = new System.Drawing.Point(254, 0);
+            this.NONNlayoutControlItem3.Location = new System.Drawing.Point(244, 0);
             this.NONNlayoutControlItem3.Name = "NONNlayoutControlItem3";
             this.NONNlayoutControlItem3.OptionsPrint.AppearanceItem.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.NONNlayoutControlItem3.OptionsPrint.AppearanceItem.Options.UseFont = true;
@@ -467,7 +468,7 @@
             // 
             this.layoutControlItem4.Control = this.NONNlabelControl221;
             this.layoutControlItem4.CustomizationFormText = "layoutControlItem12";
-            this.layoutControlItem4.Location = new System.Drawing.Point(339, 0);
+            this.layoutControlItem4.Location = new System.Drawing.Point(329, 0);
             this.layoutControlItem4.Name = "layoutControlItem4";
             this.layoutControlItem4.OptionsPrint.AppearanceItem.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.layoutControlItem4.OptionsPrint.AppearanceItem.Options.UseFont = true;
@@ -481,7 +482,7 @@
             // 
             this.layoutControlItem5.Control = this.NONNlabelControl2211;
             this.layoutControlItem5.CustomizationFormText = "layoutControlItem12";
-            this.layoutControlItem5.Location = new System.Drawing.Point(489, 0);
+            this.layoutControlItem5.Location = new System.Drawing.Point(479, 0);
             this.layoutControlItem5.Name = "layoutControlItem5";
             this.layoutControlItem5.OptionsPrint.AppearanceItem.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.layoutControlItem5.OptionsPrint.AppearanceItem.Options.UseFont = true;
@@ -495,7 +496,7 @@
             // 
             this.layoutControlItem6.Control = this.NONNlabelControl22111;
             this.layoutControlItem6.CustomizationFormText = "layoutControlItem12";
-            this.layoutControlItem6.Location = new System.Drawing.Point(564, 0);
+            this.layoutControlItem6.Location = new System.Drawing.Point(554, 0);
             this.layoutControlItem6.Name = "layoutControlItem6";
             this.layoutControlItem6.OptionsPrint.AppearanceItem.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.layoutControlItem6.OptionsPrint.AppearanceItem.Options.UseFont = true;
@@ -518,7 +519,7 @@
             // 
             this.lciNotes1.Control = this.labHopDong;
             this.lciNotes1.CustomizationFormText = "lciNotes";
-            this.lciNotes1.Location = new System.Drawing.Point(109, 0);
+            this.lciNotes1.Location = new System.Drawing.Point(99, 0);
             this.lciNotes1.Name = "lciNotes1";
             this.lciNotes1.OptionsPrint.AppearanceItem.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.lciNotes1.OptionsPrint.AppearanceItem.Options.UseFont = true;
@@ -532,7 +533,7 @@
             // 
             this.lciNotes.Control = this.labCongTac;
             this.lciNotes.CustomizationFormText = "lciNotes";
-            this.lciNotes.Location = new System.Drawing.Point(192, 0);
+            this.lciNotes.Location = new System.Drawing.Point(182, 0);
             this.lciNotes.Name = "lciNotes";
             this.lciNotes.OptionsPrint.AppearanceItem.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.lciNotes.OptionsPrint.AppearanceItem.Options.UseFont = true;
@@ -545,7 +546,7 @@
             // 
             this.lciNotes2.Control = this.labTienLuong;
             this.lciNotes2.CustomizationFormText = "lciNotes";
-            this.lciNotes2.Location = new System.Drawing.Point(267, 0);
+            this.lciNotes2.Location = new System.Drawing.Point(257, 0);
             this.lciNotes2.Name = "lciNotes2";
             this.lciNotes2.OptionsPrint.AppearanceItem.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.lciNotes2.OptionsPrint.AppearanceItem.Options.UseFont = true;
@@ -555,11 +556,25 @@
             this.lciNotes2.TextSize = new System.Drawing.Size(0, 0);
             this.lciNotes2.TextVisible = false;
             // 
+            // lciNotes4
+            // 
+            this.lciNotes4.Control = this.labTaiNan;
+            this.lciNotes4.CustomizationFormText = "lciNotes";
+            this.lciNotes4.Location = new System.Drawing.Point(567, 0);
+            this.lciNotes4.Name = "lciNotes4";
+            this.lciNotes4.OptionsPrint.AppearanceItem.Font = new System.Drawing.Font("Segoe UI", 11F);
+            this.lciNotes4.OptionsPrint.AppearanceItem.Options.UseFont = true;
+            this.lciNotes4.Padding = new DevExpress.XtraLayout.Utils.Padding(5, 5, 14, 5);
+            this.lciNotes4.Size = new System.Drawing.Size(51, 36);
+            this.lciNotes4.Text = "lciNotes";
+            this.lciNotes4.TextSize = new System.Drawing.Size(0, 0);
+            this.lciNotes4.TextVisible = false;
+            // 
             // lciNotes5
             // 
             this.lciNotes5.Control = this.labDanhGia;
             this.lciNotes5.CustomizationFormText = "lciNotes";
-            this.lciNotes5.Location = new System.Drawing.Point(502, 0);
+            this.lciNotes5.Location = new System.Drawing.Point(492, 0);
             this.lciNotes5.Name = "lciNotes5";
             this.lciNotes5.OptionsPrint.AppearanceItem.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.lciNotes5.OptionsPrint.AppearanceItem.Options.UseFont = true;
@@ -573,7 +588,7 @@
             // 
             this.lciNotes3.Control = this.labKhanThuong;
             this.lciNotes3.CustomizationFormText = "lciNotes";
-            this.lciNotes3.Location = new System.Drawing.Point(352, 0);
+            this.lciNotes3.Location = new System.Drawing.Point(342, 0);
             this.lciNotes3.Name = "lciNotes3";
             this.lciNotes3.OptionsPrint.AppearanceItem.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.lciNotes3.OptionsPrint.AppearanceItem.Options.UseFont = true;
@@ -583,19 +598,15 @@
             this.lciNotes3.TextSize = new System.Drawing.Size(0, 0);
             this.lciNotes3.TextVisible = false;
             // 
-            // lciNotes4
+            // emptySpaceItem1
             // 
-            this.lciNotes4.Control = this.labTaiNan;
-            this.lciNotes4.CustomizationFormText = "lciNotes";
-            this.lciNotes4.Location = new System.Drawing.Point(577, 0);
-            this.lciNotes4.Name = "lciNotes4";
-            this.lciNotes4.OptionsPrint.AppearanceItem.Font = new System.Drawing.Font("Segoe UI", 11F);
-            this.lciNotes4.OptionsPrint.AppearanceItem.Options.UseFont = true;
-            this.lciNotes4.Padding = new DevExpress.XtraLayout.Utils.Padding(5, 5, 14, 5);
-            this.lciNotes4.Size = new System.Drawing.Size(51, 36);
-            this.lciNotes4.Text = "lciNotes";
-            this.lciNotes4.TextSize = new System.Drawing.Size(0, 0);
-            this.lciNotes4.TextVisible = false;
+            this.emptySpaceItem1.AllowHotTrack = false;
+            this.emptySpaceItem1.Location = new System.Drawing.Point(0, 0);
+            this.emptySpaceItem1.MinSize = new System.Drawing.Size(5, 10);
+            this.emptySpaceItem1.Name = "emptySpaceItem1";
+            this.emptySpaceItem1.Size = new System.Drawing.Size(8, 36);
+            this.emptySpaceItem1.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
             // 
             // ucCTQLNS
             // 
@@ -623,9 +634,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.lciNotes1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lciNotes)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lciNotes2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lciNotes4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lciNotes5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lciNotes3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lciNotes4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -638,7 +650,6 @@
         private DevExpress.XtraEditors.LabelControl NONNlabelControl2;
         private DevExpress.XtraEditors.LabelControl labelControl11;
         private DevExpress.XtraLayout.LayoutControlGroup Root;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem9;
         private DevExpress.XtraLayout.LayoutControlItem lciTasks;
         private DevExpress.XtraLayout.LayoutControlItem NONNlayoutControlItem12;
@@ -663,7 +674,6 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem6;
         private DevExpress.XtraEditors.LabelControl labDanhGia;
         private DevExpress.XtraLayout.LayoutControlItem lciNotes5;
-        public DevExpress.XtraBars.Docking2010.WindowsUIButtonPanel backWindowsUIButtonPanel;
         private DevExpress.XtraBars.Navigation.NavigationFrame navigationFrame1;
         private DevExpress.XtraBars.Navigation.NavigationPage navigationPage1;
         private DevExpress.XtraBars.Navigation.NavigationPage navigationPage2;
@@ -674,5 +684,8 @@
         private DevExpress.XtraBars.Navigation.NavigationPage navigationPage6;
         private DevExpress.XtraBars.Navigation.NavigationPage navigationPage7;
         private DevExpress.XtraBars.Navigation.NavigationPage navigationPage8;
+        public DevExpress.XtraBars.Docking2010.WindowsUIButtonPanel backWindowsUIButtonPanel;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
+        private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem1;
     }
 }

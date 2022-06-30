@@ -126,7 +126,7 @@ namespace Vs.TimeAttendance
                     }
                 case "xoa":
                     {
-                        if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgDeleteNVVPQT"), Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgTieuDeXoa"), MessageBoxButtons.YesNo) == DialogResult.No) return;
+                        if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDeleteNVVPQT"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo,MessageBoxIcon.Question) == DialogResult.No) return;
                         //enableButon();
                         XoaData();
                         LoadGridVPQuetThe();
@@ -169,7 +169,7 @@ namespace Vs.TimeAttendance
                 Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, stbVPQuetThe, Commons.Modules.ObjSystems.ConvertDatatable(grvVPQuetThe), "");
                 SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spUpdateViPhamQuetThe", Convert.ToDateTime(cboNgay.EditValue), stbVPQuetThe);
                 Commons.Modules.ObjSystems.XoaTable(stbVPQuetThe);
-                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_CapNhatThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msg_CapNhatThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception EX)
             {
@@ -415,5 +415,6 @@ namespace Vs.TimeAttendance
         {
             e.ExceptionMode = DevExpress.XtraEditors.Controls.ExceptionMode.NoAction;
         }
+
     }
 }

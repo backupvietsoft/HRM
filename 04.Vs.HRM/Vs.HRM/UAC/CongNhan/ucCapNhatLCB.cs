@@ -8,6 +8,7 @@ using DevExpress.Utils;
 using DevExpress.XtraBars.Docking2010;
 using DevExpress.XtraLayout;
 using System.Threading;
+using DevExpress.XtraGrid.Views.Grid;
 
 namespace Vs.HRM
 {
@@ -67,6 +68,11 @@ namespace Vs.HRM
             if (btn == null || btn.Tag == null) return;
             switch (btn.Tag.ToString())
             {
+                case "themsua":
+                    {
+                        enableButon(false);
+                        break;
+                    }
                 case "chonall":
                     {
                         Commons.Modules.ObjSystems.MChooseGrid(true, "CHON", grvCapNhatLCB);
@@ -253,13 +259,12 @@ namespace Vs.HRM
         }
         private void enableButon(bool visible)
         {
-            windowsUIButton.Buttons[0].Properties.Visible = false;
-            windowsUIButton.Buttons[1].Properties.Visible = false;
+            windowsUIButton.Buttons[0].Properties.Visible = visible;
             windowsUIButton.Buttons[2].Properties.Visible = visible;
-            windowsUIButton.Buttons[3].Properties.Visible = visible;
+            windowsUIButton.Buttons[1].Properties.Visible = !visible;
+            windowsUIButton.Buttons[3].Properties.Visible = !visible;
             windowsUIButton.Buttons[4].Properties.Visible = !visible;
             windowsUIButton.Buttons[5].Properties.Visible = !visible;
-            windowsUIButton.Buttons[6].Properties.Visible = !visible;
             groChonDuLieu.Enabled = visible;
             searchControl.Visible = visible;
         }
@@ -432,7 +437,7 @@ namespace Vs.HRM
             if (Commons.Modules.sLoad == "0Load") return;
             Commons.Modules.sLoad = "0Load";
             Commons.Modules.ObjSystems.MLoadLookUpEdit(ID_BLlookUpEdit, Commons.Modules.ObjSystems.DataBacLuong(Convert.ToInt64(ID_NLlookUpEdit.EditValue), Convert.ToDateTime(NGAY_HIEU_LUCdateEdit.EditValue), false), "ID_BL", "TEN_BL", "TEN_BL");
-            LoadGrdCapNhatLCB();
+            //LoadGrdCapNhatLCB();
             Commons.Modules.sLoad = "";
         }
 
@@ -473,6 +478,30 @@ namespace Vs.HRM
             }
             //put a breakpoint here and check datatable
             return dataTable;
+        }
+
+        private void grvCapNhatLCB_RowCountChanged(object sender, EventArgs e)
+        {
+            GridView view = sender as GridView;
+            try
+            {
+                int index = ItemForSumNhanVien.Text.IndexOf(':');
+                if (index > 0)
+                {
+                    if (view.RowCount > 0)
+                    {
+                        ItemForSumNhanVien.Text = ItemForSumNhanVien.Text.Substring(0, index) + ": " + view.RowCount.ToString();
+                    }
+                    else
+                    {
+                        ItemForSumNhanVien.Text = ItemForSumNhanVien.Text.Substring(0, index) + ": 0";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show(ex.Message.ToString());
+            }
         }
     }
 }

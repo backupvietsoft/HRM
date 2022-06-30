@@ -349,7 +349,7 @@ namespace Vs.Payroll
         {
             try
             {
-                if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Xoa"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo) == DialogResult.Yes)
+                if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msg_Xoa"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     String sSql = " DELETE FROM dbo.NANG_SUAT_CHUYEN_THANG WHERE ID_TO = " + grvData.GetFocusedRowCellValue("ID_TO").ToString() + " AND   THANG = convert(varchar, " + Convert.ToDateTime(cboThang.EditValue).ToString("yyyyMMdd") + " ,111) ";
 

@@ -228,11 +228,11 @@ namespace Vs.Payroll
         {
             try
             {
-                if (cboHD.EditValue.ToString() == "-1" || string.IsNullOrEmpty(cboChuTH.Text)) { XtraMessageBox.Show("Bạn chưa chọn hợp đồng. Vui lòng kiểm tra lại"); cboHD.Focus(); return; }
-                if (cboMH.EditValue.ToString() == "-1" || string.IsNullOrEmpty(cboMH.Text)) { XtraMessageBox.Show("Bạn chưa chọn mã hàng. Vui lòng kiểm tra lại"); cboMH.Focus(); return; }
-                if (cboOrd.EditValue.ToString() == "-1" || string.IsNullOrEmpty(cboOrd.Text)) { XtraMessageBox.Show("Bạn chưa chọn order. Vui lòng kiểm tra lại"); cboOrd.Focus(); return; }
-                if (cboChuSD.EditValue.ToString() == "-1" || string.IsNullOrEmpty(cboChuSD.Text)) { XtraMessageBox.Show("Bạn chưa chọn chuyền sữ dụng QTCN. Vui lòng kiểm tra lại"); cboChuSD.Focus(); return; }
-                if (cboChuTH.EditValue.ToString() == "-1" || string.IsNullOrEmpty(cboChuTH.Text)) { XtraMessageBox.Show("Bạn chưa chọn chuyền thực hiện. Vui lòng kiểm tra lại"); cboChuTH.Focus(); return; }
+                if (cboHD.EditValue.ToString() == "-1" || string.IsNullOrEmpty(cboChuTH.Text)) { XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgBanChuaChonHopDong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning); cboHD.Focus(); return; }
+                if (cboMH.EditValue.ToString() == "-1" || string.IsNullOrEmpty(cboMH.Text)) { XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgBanChuaChonMaHang"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning); cboMH.Focus(); return; }
+                if (cboOrd.EditValue.ToString() == "-1" || string.IsNullOrEmpty(cboOrd.Text)) { XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgBanChuaChonOrder"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning); cboOrd.Focus(); return; }
+                if (cboChuSD.EditValue.ToString() == "-1" || string.IsNullOrEmpty(cboChuSD.Text)) { XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgBanChuaChuyenSuDungQTCN"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning); cboChuSD.Focus(); return; }
+                if (cboChuTH.EditValue.ToString() == "-1" || string.IsNullOrEmpty(cboChuTH.Text)) { XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgBanChuaChonChuyenThucHien"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning); cboChuTH.Focus(); return; }
 
                 iHD = Convert.ToInt32(cboHD.EditValue.ToString());
                 iMH = Convert.ToInt32(cboMH.EditValue.ToString());
@@ -260,7 +260,7 @@ namespace Vs.Payroll
                 {
                     SLCHOT = SLDH - SLDaChot;
                 }
-                else { XtraMessageBox.Show("Order này đã được phân bổ hết cho các chuyền.\n Vui lòng chọn Order khác"); return; }
+                else { XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgOrderDaDuocPhanBoHetVuiLongChonLai"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning); return; }
 
                 sSql = "INSERT INTO PHIEU_CONG_DOAN_CHOT_THANG (THANG, ID_CHUYEN, ID_CHUYEN_SD, ID_ORD, SL_CHOT, CHON) "
                     + "SELECT '" + dThang.ToString("MM/dd/yyyy") + "',  " + iChuyen + ", " + iChuyenSuDung + ", " + iOrd + ", " + SLCHOT + ", 1";

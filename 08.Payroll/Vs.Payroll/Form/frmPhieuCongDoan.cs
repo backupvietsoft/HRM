@@ -21,6 +21,7 @@ namespace Vs.Payroll
         int iChuyenSuDung = -1;
         int iOrd = -1;
         int iCN = -1;
+        int XemCu = 0;
         DataTable dtMQL = new DataTable();
         private LookUpEdit lookUp;
 
@@ -138,7 +139,7 @@ namespace Vs.Payroll
                 //optXCLP.SelectedIndex = 0  XEM CU
                 DataTable dt = new DataTable();
                 dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spPCDHDMH", Commons.Modules.UserName, Commons.Modules.TypeLanguage, cboDV.EditValue, cboXN.EditValue, cboTo.EditValue,
-                         cboChuyen.EditValue, -1, dtNgay));
+                         cboChuyen.EditValue, XemCu, dtNgay));
                 Commons.Modules.ObjSystems.MLoadXtraGrid(grdPCD, grvPCD, dt, false, false, true, true, true, this.Name);
                 dt.PrimaryKey = new DataColumn[] { dt.Columns["ID_TEMP"] };
                 if (grvPCD.RowCount != 0)
@@ -182,7 +183,7 @@ namespace Vs.Payroll
 
                 DataTable dt = new DataTable();
                 dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spPCDGetCNhan", cboDV.EditValue, cboXN.EditValue, cboTo.EditValue, Commons.Modules.UserName,
-                        Commons.Modules.TypeLanguage, -1, iChuyen, iOrd, dtNgay));
+                        Commons.Modules.TypeLanguage, XemCu, iChuyen, iOrd, dtNgay));
                 dt.PrimaryKey = new DataColumn[] { dt.Columns["ID_CN"] };
                 //Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboCN, dt, "MS_CN", "LMS", "LMS");
                 if(grdTo.DataSource == null)
@@ -293,7 +294,7 @@ namespace Vs.Payroll
 
                 DataTable dt = new DataTable();
                 dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spPCDGetCNhan", cboDV.EditValue, cboXN.EditValue, cboTo.EditValue, Commons.Modules.UserName,
-                        Commons.Modules.TypeLanguage, -1, iChuyen, iOrd, dtNgay));
+                        Commons.Modules.TypeLanguage, XemCu, iChuyen, iOrd, dtNgay));
                 if (cboMSCN.Properties.DataSource == null)
                 {
                     //Commons.Modules.ObjSystems.MLoadLookUpEditN(cboMSCN, dt, "ID_CN", "MS_CN", "MS_CN", "");
@@ -390,10 +391,12 @@ namespace Vs.Payroll
             windowsUIButton.Buttons[3].Properties.Visible = !TSua;
             windowsUIButton.Buttons[4].Properties.Visible = !TSua;
             windowsUIButton.Buttons[5].Properties.Visible = !TSua;
-            windowsUIButton.Buttons[7].Properties.Visible = !TSua;
+            windowsUIButton.Buttons[6].Properties.Visible = !TSua;
+            windowsUIButton.Buttons[9].Properties.Visible = !TSua;
 
-            windowsUIButton.Buttons[5].Properties.Visible = TSua;
-            windowsUIButton.Buttons[6].Properties.Visible = TSua;
+
+            windowsUIButton.Buttons[7].Properties.Visible = TSua;
+            windowsUIButton.Buttons[8].Properties.Visible = TSua;
 
         }
 
@@ -401,7 +404,7 @@ namespace Vs.Payroll
         {
             if (string.IsNullOrEmpty(cboNgay.Text))
             {
-                XtraMessageBox.Show("Bạn chưa chọn ngày");
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgBanChuaChonNgay"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             frmPCDHDMHChot frm = new frmPCDHDMHChot();
@@ -572,7 +575,7 @@ namespace Vs.Payroll
                     //Kiểm tra số lượng công đoạn đang nhập có vượt số lượng chốt hay không
                     if (Convert.ToInt32(dt.Rows[0]["SL_NHAP"]) > Convert.ToInt32(grvPCD.GetFocusedRowCellValue("SL_CHOT")))
                     {
-                        if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_VuotSLChot"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo) == DialogResult.No)
+                        if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msg_VuotSLChot"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo,MessageBoxIcon.Question) == DialogResult.No)
                         {
                             e.Valid = false;
                             e.ErrorText = "So luong da vuot so luong chot";
@@ -602,7 +605,13 @@ namespace Vs.Payroll
             XtraUserControl ctl = new XtraUserControl();
             switch (btn.Tag.ToString())
             {
-
+                case "them":
+                    {
+                        XemCu = 1;
+                        cboNgay_EditValueChanged_1(null, null);
+                        TSua(true);
+                        break;
+                    }
                 case "thuathieu":
                     {
                         DataTable dt = new DataTable();
@@ -649,7 +658,7 @@ namespace Vs.Payroll
                     {
                         if (string.IsNullOrEmpty(cboNgay.Text))
                         {
-                            XtraMessageBox.Show("Bạn chưa chọn ngày");
+                            XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgBanChuaChonNgay"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             return;
                         }
                         frmPCDHDMHChot frm = new frmPCDHDMHChot();
@@ -710,6 +719,7 @@ namespace Vs.Payroll
                 case "khongluu":
                     {
                         TSua(false);
+                        XemCu = 0;
                         Commons.Modules.ObjSystems.DeleteAddRow(grvCD);
                         grvCD.UpdateCurrentRow();
                         LoadCD();

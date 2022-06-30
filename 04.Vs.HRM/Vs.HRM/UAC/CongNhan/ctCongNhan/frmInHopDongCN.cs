@@ -25,7 +25,6 @@ namespace Vs.HRM
         {
             //chkChuaThamGia.Visible = false;
             //chkDaThamGia.Visible = false;
-            chkChuaThamGia.Checked = true;
             rdo_ChonBaoCao.SelectedIndex = 0;
             if (Commons.Modules.ObjSystems.KyHieuDV_CN(Convert.ToInt64(Commons.Modules.iCongNhan)) == "SB")
             {
@@ -139,11 +138,6 @@ namespace Vs.HRM
 
                             case 4:
                                 {
-                                    if (chkChuaThamGia.Checked == false && chkDaThamGia.Checked == false)
-                                    {
-                                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgChuaChonLoaiThamGia"));
-                                        return;
-                                    }
                                     ToKhaiCapSoBHXH();
                                 }
                                 break;
@@ -488,39 +482,21 @@ namespace Vs.HRM
             {
                 case 4:
                     chkDaThamGia.Enabled = true;
-                    chkChuaThamGia.Enabled = true;
                     break;
                 default:
                     chkDaThamGia.Enabled = false;
-                    chkChuaThamGia.Enabled = false;
                     break;
             }
         }
 
         private void chkDaThamGia_CheckedChanged(object sender, EventArgs e)
         {
-            if (Commons.Modules.sLoad == "0Load") return;
-            Commons.Modules.sLoad = "0Load";
-            chkChuaThamGia.Checked = false;
-            Commons.Modules.sLoad = "";
-            //if(chkDaThamGia.Checked == true)
-            //{
-            //    chkChuaThamGia.Checked = false;
-            //    return;
-            //}
-            //else
-            //{
-            //    chkChuaThamGia.Checked = true;
-            //    return;
-            //}
+            
         }
 
         private void chkChuaThamGia_CheckedChanged(object sender, EventArgs e)
         {
-            if (Commons.Modules.sLoad == "0Load") return;
-            Commons.Modules.sLoad = "0Load";
-            chkDaThamGia.Checked = false;
-            Commons.Modules.sLoad = "";
+           
         }
     }
 }

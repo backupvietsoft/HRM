@@ -43,14 +43,14 @@ namespace Vs.Payroll
                     {
                         if (string.IsNullOrEmpty(cboSheet.Text.Trim()))
                         {
-                            XtraMessageBox.Show(lblSheet.Text + " " + Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgKhongDuocTrong"));
+                            XtraMessageBox.Show(lblSheet.Text + " " + Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgKhongDuocTrong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                             cboSheet.Focus();
                             return;
                         }
 
                         if (string.IsNullOrEmpty(cboCotLayDL.Text.Trim()))
                         {
-                            XtraMessageBox.Show(lblCotLayDL.Text + " " + Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgKhongDuocTrong"));
+                            XtraMessageBox.Show(lblCotLayDL.Text + " " + Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgKhongDuocTrong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                             cboCotLayDL.Focus();
                             return;
                         }

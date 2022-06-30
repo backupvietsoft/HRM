@@ -140,7 +140,7 @@ namespace Vs.HRM
                                 dt1 = (DataTable)grdBHYT.DataSource;
                                 if (dt1 == null || dt1.Rows.Count == 0)
                                 {
-                                    XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgChonDongCanXuLy"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgChonDongCanXuLy"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                                     return;
                                 }
 
@@ -358,9 +358,31 @@ namespace Vs.HRM
             //GridColumn colDotChuyen = view.Columns["DOT_CHUYEN"];
             if (e.Column.Name == "colID_TP")
             {
-
-
                 //view.SetRowCellValue(e.RowHandle, view.Columns["ID_BV"], 1);
+            }
+        }
+
+        private void grvNgungDongBHXH_RowCountChanged(object sender, EventArgs e)
+        {
+            GridView view = sender as GridView;
+            try
+            {
+                int index = ItemForSumNhanVien.Text.IndexOf(':');
+                if (index > 0)
+                {
+                    if (view.RowCount > 0)
+                    {
+                        ItemForSumNhanVien.Text = ItemForSumNhanVien.Text.Substring(0, index) + ": " + view.RowCount.ToString();
+                    }
+                    else
+                    {
+                        ItemForSumNhanVien.Text = ItemForSumNhanVien.Text.Substring(0, index) + ": 0";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show(ex.Message.ToString());
             }
         }
     }

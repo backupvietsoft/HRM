@@ -17,13 +17,14 @@ using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraEditors.Mask;
 using DevExpress.XtraLayout;
 using DevExpress.Utils;
+using DevExpress.Utils.Menu;
 
 namespace Vs.Payroll
 {
     public partial class ucGiamTruGiaCanh : DevExpress.XtraEditors.XtraUserControl
     {
         private static bool isAdd = false;
-        
+
         public static ucGiamTruGiaCanh _instance;
         public static ucGiamTruGiaCanh Instance
         {
@@ -40,7 +41,7 @@ namespace Vs.Payroll
         {
             InitializeComponent();
             Commons.Modules.ObjSystems.ThayDoiNN(this, new List<LayoutControlGroup>() { Root }, btnALL);
-           
+
         }
 
         private void ucGiamTruGiaCanh_Load(object sender, EventArgs e)
@@ -51,7 +52,7 @@ namespace Vs.Payroll
             Commons.Modules.ObjSystems.LoadCboXiNghiep(cboDonVi, cboXiNghiep);
             Commons.Modules.ObjSystems.LoadCboTo(cboDonVi, cboXiNghiep, cboTo);
             LoadGrdGTGC();
-            EnableButon(isAdd); 
+            EnableButon(isAdd);
             Commons.Modules.sLoad = "";
         }
 
@@ -69,7 +70,7 @@ namespace Vs.Payroll
                     dt.Columns["TEN_TO"].ReadOnly = true;
 
                     Commons.Modules.ObjSystems.MLoadXtraGrid(grdData, grvData, dt, false, false, true, true, true, this.Name);
-                    
+
                 }
                 else
                 {
@@ -77,8 +78,8 @@ namespace Vs.Payroll
                                                 cboDonVi.EditValue, cboXiNghiep.EditValue, cboTo.EditValue, Commons.Modules.UserName, Commons.Modules.TypeLanguage));
                     Commons.Modules.ObjSystems.MLoadXtraGrid(grdData, grvData, dt, false, false, true, true, true, this.Name);
                 }
-                
-                
+
+
             }
             catch
             {
@@ -94,7 +95,7 @@ namespace Vs.Payroll
 
         }
 
-        
+
 
         public void LoadThang()
         {
@@ -116,7 +117,7 @@ namespace Vs.Payroll
             }
         }
 
-       
+
 
         private void windowsUIButtonPanel1_ButtonClick(object sender, DevExpress.XtraBars.Docking2010.ButtonEventArgs e)
         {
@@ -128,10 +129,10 @@ namespace Vs.Payroll
                     {
                         isAdd = true;
                         LoadGrdGTGC();
-                        Commons.Modules.ObjSystems.AddnewRow(grvData,false);
+                        Commons.Modules.ObjSystems.AddnewRow(grvData, false);
                         EnableButon(isAdd);
                         break;
-                        
+
                     }
                 case "xoa":
                     {
@@ -148,7 +149,7 @@ namespace Vs.Payroll
                         }
                         isAdd = false;
                         LoadGrdGTGC();
-                        
+
                         EnableButon(isAdd);
                         Commons.Modules.ObjSystems.DeleteAddRow(grvData);
                         break;
@@ -157,7 +158,7 @@ namespace Vs.Payroll
                     {
                         Commons.Modules.ObjSystems.DeleteAddRow(grvData);
                         isAdd = false;
-                        LoadGrdGTGC();                        
+                        LoadGrdGTGC();
                         EnableButon(isAdd);
                         break;
                     }
@@ -181,7 +182,6 @@ namespace Vs.Payroll
             cboThang.Enabled = !visible;
             cboDonVi.Enabled = !visible;
             cboXiNghiep.Enabled = !visible;
-            textEdit1.Enabled = visible;
         }
 
         private void XoaCheDoLV()
@@ -233,7 +233,7 @@ namespace Vs.Payroll
             string sTB = "GTGC_Tam" + Commons.Modules.UserName;
             try
             {
-                
+
                 Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sTB, Commons.Modules.ObjSystems.ConvertDatatable(grvData), "");
                 SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spSaveGiamTruGiaCanh", sTB);
                 Commons.Modules.ObjSystems.XoaTable(sTB);
@@ -245,14 +245,14 @@ namespace Vs.Payroll
                 return false;
             }
         }
-       
+
         private void grvData_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
-            {
+        {
             GridView view = sender as GridView;
-          
+
         }
 
-        
+
         private void grvNgay_RowCellClick(object sender, RowCellClickEventArgs e)
         {
             try
@@ -262,7 +262,7 @@ namespace Vs.Payroll
             }
             catch { }
             cboThang.ClosePopup();
-            
+
         }
 
         private void cboNgay_EditValueChanged(object sender, EventArgs e)
@@ -323,36 +323,88 @@ namespace Vs.Payroll
             //EnableButon(true);
             Commons.Modules.sLoad = "";
         }
-
-        private void textEdit1_KeyDown(object sender, KeyEventArgs e)
+        #region chuotphai
+        class RowInfo
         {
-            if (e.KeyCode == Keys.Enter)
+            public RowInfo(DevExpress.XtraGrid.Views.Grid.GridView view, int rowHandle)
             {
-                SuaSoTien();
-                Commons.Modules.ObjSystems.AddnewRow(grvData, false);
+                this.RowHandle = rowHandle;
+                this.View = view;
             }
+
+
+            public DevExpress.XtraGrid.Views.Grid.GridView View;
+            public int RowHandle;
         }
-        private bool SuaSoTien()
+        //Nhap ung vien
+        public DXMenuItem MCreateMenuNhapUngVien(DevExpress.XtraGrid.Views.Grid.GridView view, int rowHandle)
         {
-            string sTB = "GTGC_SuaTien" + Commons.Modules.UserName;
+            string sStr = Commons.Modules.ObjLanguages.GetLanguage(Commons.Modules.ModuleName, "ucGiamTruGiaCanh", "CapNhatSoTienAll", Commons.Modules.TypeLanguage);
+            DXMenuItem menuCapNhatSoTienAll = new DXMenuItem(sStr, new EventHandler(CapNhatSoTienAll));
+            menuCapNhatSoTienAll.Tag = new RowInfo(view, rowHandle);
+            return menuCapNhatSoTienAll;
+        }
+        public void CapNhatSoTienAll(object sender, EventArgs e)
+        {
             try
             {
-                Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sTB, Commons.Modules.ObjSystems.ConvertDatatable(grvData), "");
+                string sCotCN = grvData.FocusedColumn.FieldName;
+                if (grvData.GetFocusedRowCellValue("SO_TIEN").ToString() == "") return;
+                string sBTCongNhan = "sBTCongNhan" + Commons.Modules.UserName;
+                Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBTCongNhan, (DataTable)grdData.DataSource, "");
 
                 DataTable dt = new DataTable();
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spSuaSoTienGiamTruGiaCanh", textEdit1.EditValue, sTB));
-                dt.Columns["MS_CN"].ReadOnly = true;
-                dt.Columns["HO_TEN"].ReadOnly = true;
-                dt.Columns["TEN_TO"].ReadOnly = true;
-                dt.Columns["SO_TIEN"].ReadOnly = false;
-                Commons.Modules.ObjSystems.MLoadXtraGrid(grdData, grvData, dt, false, false, true, true, true, this.Name);
-                
-                Commons.Modules.ObjSystems.XoaTable(sTB);
-                return true;
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spUpdateSO_TIEN", sBTCongNhan, sCotCN, Convert.ToDouble(grvData.GetFocusedRowCellValue("SO_TIEN"))));
+                grdData.DataSource = dt;
+            }
+            catch  { }
+        }
+
+        private void grvData_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
+        {
+            try
+            {
+                if (btnALL.Buttons[0].Properties.Visible == true) return;
+                if (grvData.FocusedColumn.FieldName != "SO_TIEN") return;
+                DevExpress.XtraGrid.Views.Grid.GridView view = sender as DevExpress.XtraGrid.Views.Grid.GridView;
+                if (e.MenuType == DevExpress.XtraGrid.Views.Grid.GridMenuType.Row)
+                {
+                    int irow = e.HitInfo.RowHandle;
+                    e.Menu.Items.Clear();
+
+                    DevExpress.Utils.Menu.DXMenuItem itemNhap = MCreateMenuNhapUngVien(view, irow);
+                    e.Menu.Items.Add(itemNhap);
+                }
             }
             catch
             {
-                return false;
+            }
+        }
+
+        #endregion
+
+        private void grvData_RowCountChanged(object sender, EventArgs e)
+        {
+            GridView view = sender as GridView;
+            try
+            {
+                int index = ItemForSumNhanVien.Text.IndexOf(':');
+                if (index > 0)
+                {
+                    if (view.RowCount > 0)
+                    {
+                        ItemForSumNhanVien.Text = ItemForSumNhanVien.Text.Substring(0, index) + ": " + view.RowCount.ToString();
+                    }
+                    else
+                    {
+                        ItemForSumNhanVien.Text = ItemForSumNhanVien.Text.Substring(0, index) + ": 0";
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show(ex.Message.ToString());
             }
         }
     }

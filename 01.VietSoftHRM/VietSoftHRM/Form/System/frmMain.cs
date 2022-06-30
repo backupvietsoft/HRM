@@ -506,7 +506,7 @@ namespace VietSoftHRM
                     Thread thread = new Thread(delegate ()
                     {
                         timer1.Stop();
-                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgPhanMemTuDongThoatsau5p"), this.Name, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgPhanMemTuDongThoatsau5p"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         Thread.Sleep(300000);//chi nghỉ 5 phút
                         if (this.InvokeRequired)
                         {

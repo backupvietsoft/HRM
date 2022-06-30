@@ -18,6 +18,7 @@ using DevExpress.XtraEditors.Mask;
 using DevExpress.XtraLayout;
 using DevExpress.Utils;
 using System.Globalization;
+using DevExpress.Utils.Menu;
 
 namespace Vs.Payroll
 {
@@ -120,7 +121,6 @@ namespace Vs.Payroll
             grvData.Columns["COT_PC9"].DisplayFormat.FormatString = "N0";
             grvData.Columns["COT_PC10"].DisplayFormat.FormatType = FormatType.Numeric;
             grvData.Columns["COT_PC10"].DisplayFormat.FormatString = "N0";
-            lblTongCN.Text = Convert.ToString(grvData.RowCount);
         }
 
         public void LoadThang()
@@ -227,7 +227,6 @@ namespace Vs.Payroll
             cboThang.Enabled = !visible;
             cboDonVi.Enabled = !visible;
             cboXiNghiep.Enabled = !visible;
-            txtNhapNhanh.Enabled = visible;
         }
 
         private void XoaCheDoLV()
@@ -241,7 +240,6 @@ namespace Vs.Payroll
                 SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spPhuCapLuong", iIDPCL, Convert.ToDateTime(cboThang.EditValue), Commons.Modules.UserName,
                       Commons.Modules.TypeLanguage, cboDonVi.EditValue, cboXiNghiep.EditValue, cboTo.EditValue, -1, 3, "");
                 grvData.DeleteSelectedRows();
-                lblTongCN.Text = Convert.ToString(grvData.RowCount);
             }
             catch
             {
@@ -358,77 +356,88 @@ namespace Vs.Payroll
             //EnableButon(true);
             Commons.Modules.sPS = "";
         }
-
-        private void NhapNhanh()
-
+        #region chuotphai
+        class RowInfo
         {
-            string Nhap = grvData.FocusedColumn.FieldName.ToString();
-            DataTable dt = new DataTable();
-            dt = grvData.DataSource as DataTable;
+            public RowInfo(DevExpress.XtraGrid.Views.Grid.GridView view, int rowHandle)
+            {
+                this.RowHandle = rowHandle;
+                this.View = view;
+            }
 
+
+            public DevExpress.XtraGrid.Views.Grid.GridView View;
+            public int RowHandle;
+        }
+        //Nhap ung vien
+        public DXMenuItem MCreateMenuNhapUngVien(DevExpress.XtraGrid.Views.Grid.GridView view, int rowHandle)
+        {
+            string sStr = Commons.Modules.ObjLanguages.GetLanguage(Commons.Modules.ModuleName, "ucPhuCapLuong", "CapNhatPhuCap", Commons.Modules.TypeLanguage);
+            DXMenuItem menuCapNhat = new DXMenuItem(sStr, new EventHandler(CapNhat));
+            menuCapNhat.Tag = new RowInfo(view, rowHandle);
+            return menuCapNhat;
+        }
+        public void CapNhat(object sender, EventArgs e)
+        {
             try
             {
-                int i;
-                i = 0;
-                for (i = 0; i <= grvData.RowCount; i++)
+                string sCotCN = grvData.FocusedColumn.FieldName;
+                if (grvData.GetFocusedRowCellValue(grvData.FocusedColumn.FieldName).ToString() == "") return;
+                string sBTCongNhan = "sBTCongNhan" + Commons.Modules.UserName;
+                Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBTCongNhan, (DataTable)grdData.DataSource, "");
+
+                DataTable dt = new DataTable();
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spUpdateChuotPhaiPCL", sBTCongNhan, sCotCN, Convert.ToDouble(grvData.GetFocusedRowCellValue(grvData.FocusedColumn.FieldName))));
+                grdData.DataSource = dt;
+            }
+            catch { }
+        }
+
+        private void grvData_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
+        {
+            try
+            {
+                if (btnALL.Buttons[0].Properties.Visible == true) return;
+                if (grvData.FocusedColumn.FieldName.Substring(0,6) != "COT_PC") return;
+                DevExpress.XtraGrid.Views.Grid.GridView view = sender as DevExpress.XtraGrid.Views.Grid.GridView;
+                if (e.MenuType == DevExpress.XtraGrid.Views.Grid.GridMenuType.Row)
                 {
-                    grvData.SetRowCellValue(i, Nhap, float.Parse(txtNhapNhanh.Text));
-                    grvData.UpdateCurrentRow();
+                    int irow = e.HitInfo.RowHandle;
+                    e.Menu.Items.Clear();
+
+                    DevExpress.Utils.Menu.DXMenuItem itemNhap = MCreateMenuNhapUngVien(view, irow);
+                    e.Menu.Items.Add(itemNhap);
+                }
+            }
+            catch
+            {
+            }
+        }
+        #endregion
+
+        private void grvData_RowCountChanged(object sender, EventArgs e)
+        {
+            GridView view = sender as GridView;
+            try
+            {
+                int index = ItemForSumNhanVien.Text.IndexOf(':');
+                if (index > 0)
+                {
+                    if (view.RowCount > 0)
+                    {
+                        ItemForSumNhanVien.Text = ItemForSumNhanVien.Text.Substring(0, index) + ": " + view.RowCount.ToString();
+                    }
+                    else
+                    {
+                        ItemForSumNhanVien.Text = ItemForSumNhanVien.Text.Substring(0, index) + ": 0";
+                    }
+
                 }
             }
             catch (Exception ex)
             {
+                XtraMessageBox.Show(ex.Message.ToString());
             }
-        }
-
-        private void txtNhapNhanh_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                NhapNhanh();
-            }
-        }
-
-        private void grvData_FocusedColumnChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedColumnChangedEventArgs e)
-        {
-            string i = grvData.FocusedColumn.Name.ToString().Substring(3);
-            switch (i)
-            {
-                case "COT_PC1":
-                    txtNhapNhanh.ReadOnly = false;
-                    break;
-                case "COT_PC2":
-                    txtNhapNhanh.ReadOnly = false;
-                    break;
-                case "COT_PC3":
-                    txtNhapNhanh.ReadOnly = false;
-                    break;
-                case "COT_PC4":
-                    txtNhapNhanh.ReadOnly = false;
-                    break;
-                case "COT_PC5":
-                    txtNhapNhanh.ReadOnly = false;
-                    break;
-                case "COT_PC6":
-                    txtNhapNhanh.ReadOnly = false;
-                    break;
-                case "COT_PC7":
-                    txtNhapNhanh.ReadOnly = false;
-                    break;
-                case "COT_PC8":
-                    txtNhapNhanh.ReadOnly = false;
-                    break;
-                case "COT_PC9":
-                    txtNhapNhanh.ReadOnly = false;
-                    break;
-                case "COT_PC10":
-                    txtNhapNhanh.ReadOnly = false;
-                    break;
-                default:
-                    txtNhapNhanh.ReadOnly = true;
-                    break;
-            }
-            
         }
     }
 }

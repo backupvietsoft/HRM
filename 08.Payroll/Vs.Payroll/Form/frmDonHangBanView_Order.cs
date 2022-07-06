@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
+using Microsoft.ApplicationBlocks.Data;
 
 namespace Vs.Payroll
 {
@@ -19,6 +20,7 @@ namespace Vs.Payroll
         private List<Int64> iList_ID_BGB = new List<Int64>();
         public DataTable dt_frmDonHangBanView_Order_CTBG;
         private bool bLoadData = false;
+        private int iID_Temp = -1;
         public frmDonHangBanView_Order(int PQ, string SP, Int64 ID_DT)
         {
             iPQ = PQ;
@@ -42,6 +44,27 @@ namespace Vs.Payroll
             XtraUserControl ctl = new XtraUserControl();
             switch (btn.Tag.ToString())
             {
+                case "themmahang":
+                    {
+                        frmEditHANG_HOA frm = new frmEditHANG_HOA(-1, true);
+                        frm.StartPosition = FormStartPosition.CenterParent;
+                        frm.MinimizeBox = false;
+                        double iW, iH;
+                        iW = Screen.PrimaryScreen.WorkingArea.Width / 2.2;
+                        iH = Screen.PrimaryScreen.WorkingArea.Height / 2.2;
+                        if (iW < 800)
+                        {
+                            iW = iW * 1.2;
+                            iH = iH * 1.2;
+                        }
+                        frm.Size = new Size((int)iW, (int)iH);
+                        if (frm.ShowDialog() == DialogResult.OK)
+                        {
+                            LoadData();
+                        }
+                        else { LoadData(); }
+                        break;
+                    }
                 case "ghi":
                     {
                         grdChung.MainView.CloseEditor();
@@ -175,7 +198,7 @@ namespace Vs.Payroll
 
                 DataTable dt = new DataTable();
                 dt = ds.Tables[0].Copy();
-
+                dt.PrimaryKey = new DataColumn[] { dt.Columns["ID_HH"] };
                 Commons.Modules.ObjSystems.MLoadXtraGrid(grdChung, grvChung, dt, true, false, true, false, true, this.Name);
                 grvChung.Columns["ID_HH"].Visible = false;
 
@@ -184,6 +207,15 @@ namespace Vs.Payroll
                     grvChung.Columns[i].OptionsColumn.AllowEdit = false;
                 }
                 grvChung.Columns["SO_ORDER"].OptionsColumn.AllowEdit = true;
+
+                if (iID_Temp != -1)
+                {
+                    int index = dt.Rows.IndexOf(dt.Rows.Find(iID_Temp));
+                    grvChung.FocusedRowHandle = grvChung.GetRowHandle(index);
+                    grvChung.ClearSelection();
+                    grvChung.SelectRow(index);
+                }
+
             }
             catch (Exception ex)
             {
@@ -193,5 +225,48 @@ namespace Vs.Payroll
 
         #endregion
 
+        private void grvChung_DoubleClick(object sender, EventArgs e)
+        {
+            frmEditHANG_HOA frm = new frmEditHANG_HOA(Convert.ToInt64(grvChung.GetFocusedRowCellValue("ID_HH")), false);
+            iID_Temp = Convert.ToInt32(grvChung.GetFocusedRowCellValue("ID_HH"));
+            frm.StartPosition = FormStartPosition.CenterParent;
+            frm.MinimizeBox = false;
+            double iW, iH;
+            iW = Screen.PrimaryScreen.WorkingArea.Width / 2.2;
+            iH = Screen.PrimaryScreen.WorkingArea.Height / 2.2;
+            if (iW < 800)
+            {
+                iW = iW * 1.2;
+                iH = iH * 1.2;
+            }
+            frm.Size = new Size((int)iW, (int)iH);
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                LoadData();
+            }
+            else { LoadData(); }
+        }
+
+        private void grvChung_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete)
+            {
+                
+                    try
+                    {
+                        if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgXoa"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo) == DialogResult.No)
+                        {
+                            return;
+                        }
+                        SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "DELETE dbo.HANG_HOA WHERE ID_HH =" + Convert.ToInt64(grvChung.GetFocusedRowCellValue("ID_HH")) + "");
+                        grvChung.DeleteSelectedRows();
+                    }
+                    catch 
+                    {
+                        Commons.Modules.ObjSystems.msgChung(Commons.ThongBao.msgDuLieuDangSuDung);
+                    }
+                ((DataTable)grdChung.DataSource).AcceptChanges();
+            }
+        }
     }
 }

@@ -48,9 +48,6 @@
             this.tiNxrTableCell19 = new DevExpress.XtraReports.UI.XRTableCell();
             this.tiNxrTableCell200 = new DevExpress.XtraReports.UI.XRTableCell();
             this.ReportHeader = new DevExpress.XtraReports.UI.ReportHeaderBand();
-            this.tiNlblCONG_TY = new DevExpress.XtraReports.UI.XRLabel();
-            this.tiNlblDIA_CHI = new DevExpress.XtraReports.UI.XRLabel();
-            this.tiNxrLabel88 = new DevExpress.XtraReports.UI.XRLabel();
             this.lblTIEU_DE = new DevExpress.XtraReports.UI.XRLabel();
             this.GroupHeader1 = new DevExpress.XtraReports.UI.GroupHeaderBand();
             this.xrTable2 = new DevExpress.XtraReports.UI.XRTable();
@@ -87,6 +84,7 @@
             this.ReportFooter = new DevExpress.XtraReports.UI.ReportFooterBand();
             this.lbNguoiLapBieu = new DevExpress.XtraReports.UI.XRLabel();
             this.lblNgay = new DevExpress.XtraReports.UI.XRLabel();
+            this.xrSubreport1 = new DevExpress.XtraReports.UI.XRSubreport();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
@@ -149,10 +147,12 @@
             // 
             this.tiNxrTableCell8.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "sumRecordNumber()")});
-            this.tiNxrTableCell8.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tiNxrTableCell8.Font = new System.Drawing.Font("Times New Roman", 9F);
             this.tiNxrTableCell8.Multiline = true;
             this.tiNxrTableCell8.Name = "tiNxrTableCell8";
+            this.tiNxrTableCell8.Padding = new DevExpress.XtraPrinting.PaddingInfo(10, 10, 10, 10, 100F);
             this.tiNxrTableCell8.StylePriority.UseFont = false;
+            this.tiNxrTableCell8.StylePriority.UsePadding = false;
             xrSummary1.Running = DevExpress.XtraReports.UI.SummaryRunning.Report;
             this.tiNxrTableCell8.Summary = xrSummary1;
             this.tiNxrTableCell8.Text = "tiNxrTableCell1";
@@ -162,10 +162,12 @@
             // 
             this.tiNxrTableCell9.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[DATA].[MS_cN]")});
-            this.tiNxrTableCell9.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tiNxrTableCell9.Font = new System.Drawing.Font("Times New Roman", 9F);
             this.tiNxrTableCell9.Multiline = true;
             this.tiNxrTableCell9.Name = "tiNxrTableCell9";
+            this.tiNxrTableCell9.Padding = new DevExpress.XtraPrinting.PaddingInfo(10, 10, 10, 10, 100F);
             this.tiNxrTableCell9.StylePriority.UseFont = false;
+            this.tiNxrTableCell9.StylePriority.UsePadding = false;
             this.tiNxrTableCell9.Text = "tiNxrTableCell2";
             this.tiNxrTableCell9.Weight = 5.8363439709133091D;
             // 
@@ -173,10 +175,10 @@
             // 
             this.tiNxrTableCell10.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[DATA].[HO_TEN]")});
-            this.tiNxrTableCell10.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tiNxrTableCell10.Font = new System.Drawing.Font("Times New Roman", 9F);
             this.tiNxrTableCell10.Multiline = true;
             this.tiNxrTableCell10.Name = "tiNxrTableCell10";
-            this.tiNxrTableCell10.Padding = new DevExpress.XtraPrinting.PaddingInfo(10, 10, 0, 0, 100F);
+            this.tiNxrTableCell10.Padding = new DevExpress.XtraPrinting.PaddingInfo(10, 10, 10, 10, 100F);
             this.tiNxrTableCell10.StylePriority.UseFont = false;
             this.tiNxrTableCell10.StylePriority.UsePadding = false;
             this.tiNxrTableCell10.StylePriority.UseTextAlignment = false;
@@ -188,10 +190,12 @@
             // 
             this.tiNxrTableCell11.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[DATA].[NGAY_VL]")});
-            this.tiNxrTableCell11.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tiNxrTableCell11.Font = new System.Drawing.Font("Times New Roman", 9F);
             this.tiNxrTableCell11.Multiline = true;
             this.tiNxrTableCell11.Name = "tiNxrTableCell11";
+            this.tiNxrTableCell11.Padding = new DevExpress.XtraPrinting.PaddingInfo(10, 10, 10, 10, 100F);
             this.tiNxrTableCell11.StylePriority.UseFont = false;
+            this.tiNxrTableCell11.StylePriority.UsePadding = false;
             this.tiNxrTableCell11.Text = "tiNxrTableCell4";
             this.tiNxrTableCell11.TextFormatString = "{0:dd/MM/yyyy}";
             this.tiNxrTableCell11.Weight = 5.7642865383926321D;
@@ -200,10 +204,12 @@
             // 
             this.tiNxrTableCell12.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[DATA].[COT_1]")});
-            this.tiNxrTableCell12.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tiNxrTableCell12.Font = new System.Drawing.Font("Times New Roman", 9F);
             this.tiNxrTableCell12.Multiline = true;
             this.tiNxrTableCell12.Name = "tiNxrTableCell12";
+            this.tiNxrTableCell12.Padding = new DevExpress.XtraPrinting.PaddingInfo(10, 10, 10, 10, 100F);
             this.tiNxrTableCell12.StylePriority.UseFont = false;
+            this.tiNxrTableCell12.StylePriority.UsePadding = false;
             this.tiNxrTableCell12.TextFormatString = "{0:0.0;0.-0;#}";
             this.tiNxrTableCell12.Weight = 5.3139536739573678D;
             // 
@@ -211,10 +217,12 @@
             // 
             this.tiNxrTableCell13.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[DATA].[COT_2]")});
-            this.tiNxrTableCell13.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tiNxrTableCell13.Font = new System.Drawing.Font("Times New Roman", 9F);
             this.tiNxrTableCell13.Multiline = true;
             this.tiNxrTableCell13.Name = "tiNxrTableCell13";
+            this.tiNxrTableCell13.Padding = new DevExpress.XtraPrinting.PaddingInfo(10, 10, 10, 10, 100F);
             this.tiNxrTableCell13.StylePriority.UseFont = false;
+            this.tiNxrTableCell13.StylePriority.UsePadding = false;
             this.tiNxrTableCell13.TextFormatString = "{0:0.0;0.-0;#}";
             this.tiNxrTableCell13.Weight = 5.3139539893985042D;
             // 
@@ -222,10 +230,12 @@
             // 
             this.tiNxrTableCell14.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[DATA].[COT_3]")});
-            this.tiNxrTableCell14.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tiNxrTableCell14.Font = new System.Drawing.Font("Times New Roman", 9F);
             this.tiNxrTableCell14.Multiline = true;
             this.tiNxrTableCell14.Name = "tiNxrTableCell14";
+            this.tiNxrTableCell14.Padding = new DevExpress.XtraPrinting.PaddingInfo(10, 10, 10, 10, 100F);
             this.tiNxrTableCell14.StylePriority.UseFont = false;
+            this.tiNxrTableCell14.StylePriority.UsePadding = false;
             this.tiNxrTableCell14.TextFormatString = "{0:0.0;0.-0;#}";
             this.tiNxrTableCell14.Weight = 5.3139539893985077D;
             // 
@@ -233,10 +243,12 @@
             // 
             this.tiNxrTableCell15.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[DATA].[COT_4]")});
-            this.tiNxrTableCell15.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tiNxrTableCell15.Font = new System.Drawing.Font("Times New Roman", 9F);
             this.tiNxrTableCell15.Multiline = true;
             this.tiNxrTableCell15.Name = "tiNxrTableCell15";
+            this.tiNxrTableCell15.Padding = new DevExpress.XtraPrinting.PaddingInfo(10, 10, 10, 10, 100F);
             this.tiNxrTableCell15.StylePriority.UseFont = false;
+            this.tiNxrTableCell15.StylePriority.UsePadding = false;
             this.tiNxrTableCell15.TextFormatString = "{0:0.0;0.-0;#}";
             this.tiNxrTableCell15.Weight = 5.3139539893985042D;
             // 
@@ -244,10 +256,12 @@
             // 
             this.tiNxrTableCell16.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[DATA].[COT_5]")});
-            this.tiNxrTableCell16.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tiNxrTableCell16.Font = new System.Drawing.Font("Times New Roman", 9F);
             this.tiNxrTableCell16.Multiline = true;
             this.tiNxrTableCell16.Name = "tiNxrTableCell16";
+            this.tiNxrTableCell16.Padding = new DevExpress.XtraPrinting.PaddingInfo(10, 10, 10, 10, 100F);
             this.tiNxrTableCell16.StylePriority.UseFont = false;
+            this.tiNxrTableCell16.StylePriority.UsePadding = false;
             this.tiNxrTableCell16.TextFormatString = "{0:0.0;0.-0;#}";
             this.tiNxrTableCell16.Weight = 5.3139539893985059D;
             // 
@@ -255,10 +269,12 @@
             // 
             this.tiNxrTableCell17.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[DATA].[COT_6]")});
-            this.tiNxrTableCell17.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tiNxrTableCell17.Font = new System.Drawing.Font("Times New Roman", 9F);
             this.tiNxrTableCell17.Multiline = true;
             this.tiNxrTableCell17.Name = "tiNxrTableCell17";
+            this.tiNxrTableCell17.Padding = new DevExpress.XtraPrinting.PaddingInfo(10, 10, 10, 10, 100F);
             this.tiNxrTableCell17.StylePriority.UseFont = false;
+            this.tiNxrTableCell17.StylePriority.UsePadding = false;
             this.tiNxrTableCell17.TextFormatString = "{0:0.0;0.-0;#}";
             this.tiNxrTableCell17.Weight = 5.3139539893985051D;
             // 
@@ -266,10 +282,12 @@
             // 
             this.tiNxrTableCell18.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[DATA].[COT_7]")});
-            this.tiNxrTableCell18.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tiNxrTableCell18.Font = new System.Drawing.Font("Times New Roman", 9F);
             this.tiNxrTableCell18.Multiline = true;
             this.tiNxrTableCell18.Name = "tiNxrTableCell18";
+            this.tiNxrTableCell18.Padding = new DevExpress.XtraPrinting.PaddingInfo(10, 10, 10, 10, 100F);
             this.tiNxrTableCell18.StylePriority.UseFont = false;
+            this.tiNxrTableCell18.StylePriority.UsePadding = false;
             this.tiNxrTableCell18.TextFormatString = "{0:0.0;0.-0;#}";
             this.tiNxrTableCell18.Weight = 5.3139539893985059D;
             // 
@@ -277,10 +295,12 @@
             // 
             this.tiNxrTableCell19.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[DATA].[TONG_CONG]")});
-            this.tiNxrTableCell19.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tiNxrTableCell19.Font = new System.Drawing.Font("Times New Roman", 9F);
             this.tiNxrTableCell19.Multiline = true;
             this.tiNxrTableCell19.Name = "tiNxrTableCell19";
+            this.tiNxrTableCell19.Padding = new DevExpress.XtraPrinting.PaddingInfo(10, 10, 10, 10, 100F);
             this.tiNxrTableCell19.StylePriority.UseFont = false;
+            this.tiNxrTableCell19.StylePriority.UsePadding = false;
             this.tiNxrTableCell19.TextFormatString = "{0:0.0;0.-0;#}";
             this.tiNxrTableCell19.Weight = 5.3139539893985059D;
             // 
@@ -295,68 +315,15 @@
             // ReportHeader
             // 
             this.ReportHeader.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
-            this.tiNlblCONG_TY,
-            this.tiNlblDIA_CHI,
-            this.tiNxrLabel88,
+            this.xrSubreport1,
             this.lblTIEU_DE});
-            this.ReportHeader.HeightF = 162.9397F;
+            this.ReportHeader.HeightF = 71.27304F;
             this.ReportHeader.Name = "ReportHeader";
-            // 
-            // tiNlblCONG_TY
-            // 
-            this.tiNlblCONG_TY.AllowMarkupText = true;
-            this.tiNlblCONG_TY.AutoWidth = true;
-            this.tiNlblCONG_TY.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[DATA].[TEN_DV]")});
-            this.tiNlblCONG_TY.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tiNlblCONG_TY.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
-            this.tiNlblCONG_TY.Multiline = true;
-            this.tiNlblCONG_TY.Name = "tiNlblCONG_TY";
-            this.tiNlblCONG_TY.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.tiNlblCONG_TY.SizeF = new System.Drawing.SizeF(1089F, 27.55906F);
-            this.tiNlblCONG_TY.StylePriority.UseFont = false;
-            this.tiNlblCONG_TY.StylePriority.UsePadding = false;
-            this.tiNlblCONG_TY.StylePriority.UseTextAlignment = false;
-            this.tiNlblCONG_TY.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            // 
-            // tiNlblDIA_CHI
-            // 
-            this.tiNlblDIA_CHI.AllowMarkupText = true;
-            this.tiNlblDIA_CHI.AutoWidth = true;
-            this.tiNlblDIA_CHI.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[DATA].[DIA_CHI_DV]")});
-            this.tiNlblDIA_CHI.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tiNlblDIA_CHI.LocationFloat = new DevExpress.Utils.PointFloat(0.0001589457F, 27.55901F);
-            this.tiNlblDIA_CHI.Multiline = true;
-            this.tiNlblDIA_CHI.Name = "tiNlblDIA_CHI";
-            this.tiNlblDIA_CHI.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.tiNlblDIA_CHI.SizeF = new System.Drawing.SizeF(1089F, 27.55906F);
-            this.tiNlblDIA_CHI.StylePriority.UseFont = false;
-            this.tiNlblDIA_CHI.StylePriority.UsePadding = false;
-            this.tiNlblDIA_CHI.StylePriority.UseTextAlignment = false;
-            this.tiNlblDIA_CHI.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            // 
-            // tiNxrLabel88
-            // 
-            this.tiNxrLabel88.AllowMarkupText = true;
-            this.tiNxrLabel88.AutoWidth = true;
-            this.tiNxrLabel88.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "\'Tel: \' + [TTC].[DIEN_THOAI] + \' - Fax: \' + [TTC].[FAX]")});
-            this.tiNxrLabel88.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tiNxrLabel88.LocationFloat = new DevExpress.Utils.PointFloat(0F, 55.11808F);
-            this.tiNxrLabel88.Multiline = true;
-            this.tiNxrLabel88.Name = "tiNxrLabel88";
-            this.tiNxrLabel88.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.tiNxrLabel88.SizeF = new System.Drawing.SizeF(1089F, 27.55906F);
-            this.tiNxrLabel88.StylePriority.UseFont = false;
-            this.tiNxrLabel88.StylePriority.UsePadding = false;
-            this.tiNxrLabel88.StylePriority.UseTextAlignment = false;
-            this.tiNxrLabel88.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
             // 
             // lblTIEU_DE
             // 
             this.lblTIEU_DE.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTIEU_DE.LocationFloat = new DevExpress.Utils.PointFloat(0.0001589457F, 112.3246F);
+            this.lblTIEU_DE.LocationFloat = new DevExpress.Utils.PointFloat(0.0001220703F, 26.90792F);
             this.lblTIEU_DE.Multiline = true;
             this.lblTIEU_DE.Name = "lblTIEU_DE";
             this.lblTIEU_DE.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
@@ -403,7 +370,7 @@
             // lbPhongBan
             // 
             this.lbPhongBan.Borders = ((DevExpress.XtraPrinting.BorderSide)((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top)));
-            this.lbPhongBan.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbPhongBan.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Bold);
             this.lbPhongBan.Multiline = true;
             this.lbPhongBan.Name = "lbPhongBan";
             this.lbPhongBan.Padding = new DevExpress.XtraPrinting.PaddingInfo(10, 2, 0, 0, 100F);
@@ -420,7 +387,7 @@
             this.tiNxrTableCell100.Borders = ((DevExpress.XtraPrinting.BorderSide)((DevExpress.XtraPrinting.BorderSide.Top | DevExpress.XtraPrinting.BorderSide.Right)));
             this.tiNxrTableCell100.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[DATA].[TEN_XN]")});
-            this.tiNxrTableCell100.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tiNxrTableCell100.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Bold);
             this.tiNxrTableCell100.Multiline = true;
             this.tiNxrTableCell100.Name = "tiNxrTableCell100";
             this.tiNxrTableCell100.StylePriority.UseBorders = false;
@@ -462,7 +429,7 @@
             // 
             // tiSTT
             // 
-            this.tiSTT.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tiSTT.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Bold);
             this.tiSTT.Multiline = true;
             this.tiSTT.Name = "tiSTT";
             this.tiSTT.RowSpan = 2;
@@ -472,7 +439,7 @@
             // 
             // tiMSCN
             // 
-            this.tiMSCN.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tiMSCN.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Bold);
             this.tiMSCN.Multiline = true;
             this.tiMSCN.Name = "tiMSCN";
             this.tiMSCN.RowSpan = 2;
@@ -482,7 +449,7 @@
             // 
             // tiHoTen
             // 
-            this.tiHoTen.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tiHoTen.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Bold);
             this.tiHoTen.Multiline = true;
             this.tiHoTen.Name = "tiHoTen";
             this.tiHoTen.RowSpan = 2;
@@ -492,7 +459,7 @@
             // 
             // lbNgayVL
             // 
-            this.lbNgayVL.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbNgayVL.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Bold);
             this.lbNgayVL.Multiline = true;
             this.lbNgayVL.Name = "lbNgayVL";
             this.lbNgayVL.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 100F);
@@ -504,7 +471,7 @@
             // 
             // tiVang
             // 
-            this.tiVang.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tiVang.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Bold);
             this.tiVang.Multiline = true;
             this.tiVang.Name = "tiVang";
             this.tiVang.StylePriority.UseFont = false;
@@ -513,7 +480,7 @@
             // 
             // tiKyTen
             // 
-            this.tiKyTen.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tiKyTen.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Bold);
             this.tiKyTen.Multiline = true;
             this.tiKyTen.Name = "tiKyTen";
             this.tiKyTen.Padding = new DevExpress.XtraPrinting.PaddingInfo(10, 10, 0, 0, 100F);
@@ -580,7 +547,7 @@
             // 
             // tiXNghiKP
             // 
-            this.tiXNghiKP.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tiXNghiKP.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Bold);
             this.tiXNghiKP.Multiline = true;
             this.tiXNghiKP.Name = "tiXNghiKP";
             this.tiXNghiKP.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 100F);
@@ -591,7 +558,7 @@
             // 
             // tiXNghiOm
             // 
-            this.tiXNghiOm.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tiXNghiOm.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Bold);
             this.tiXNghiOm.Multiline = true;
             this.tiXNghiOm.Name = "tiXNghiOm";
             this.tiXNghiOm.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 100F);
@@ -602,7 +569,7 @@
             // 
             // tiXNghiViecRKL
             // 
-            this.tiXNghiViecRKL.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tiXNghiViecRKL.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Bold);
             this.tiXNghiViecRKL.Multiline = true;
             this.tiXNghiViecRKL.Name = "tiXNghiViecRKL";
             this.tiXNghiViecRKL.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 100F);
@@ -613,7 +580,7 @@
             // 
             // tiXNghiViecRCL
             // 
-            this.tiXNghiViecRCL.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tiXNghiViecRCL.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Bold);
             this.tiXNghiViecRCL.Multiline = true;
             this.tiXNghiViecRCL.Name = "tiXNghiViecRCL";
             this.tiXNghiViecRCL.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 100F);
@@ -624,7 +591,7 @@
             // 
             // tiXPhep
             // 
-            this.tiXPhep.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tiXPhep.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Bold);
             this.tiXPhep.Multiline = true;
             this.tiXPhep.Name = "tiXPhep";
             this.tiXPhep.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 100F);
@@ -635,7 +602,7 @@
             // 
             // tiXLeTet
             // 
-            this.tiXLeTet.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tiXLeTet.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Bold);
             this.tiXLeTet.Multiline = true;
             this.tiXLeTet.Name = "tiXLeTet";
             this.tiXLeTet.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 100F);
@@ -646,7 +613,7 @@
             // 
             // tiXNghiKhac
             // 
-            this.tiXNghiKhac.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tiXNghiKhac.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Bold);
             this.tiXNghiKhac.Multiline = true;
             this.tiXNghiKhac.Name = "tiXNghiKhac";
             this.tiXNghiKhac.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 100F);
@@ -657,7 +624,7 @@
             // 
             // tiXTongCong
             // 
-            this.tiXTongCong.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tiXTongCong.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Bold);
             this.tiXTongCong.Multiline = true;
             this.tiXTongCong.Name = "tiXTongCong";
             this.tiXTongCong.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 100F);
@@ -713,7 +680,7 @@
             // lbTo
             // 
             this.lbTo.Borders = ((DevExpress.XtraPrinting.BorderSide)((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Bottom)));
-            this.lbTo.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbTo.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Bold);
             this.lbTo.Multiline = true;
             this.lbTo.Name = "lbTo";
             this.lbTo.Padding = new DevExpress.XtraPrinting.PaddingInfo(10, 2, 0, 0, 100F);
@@ -730,7 +697,7 @@
             this.tiNxrTableCell7.Borders = ((DevExpress.XtraPrinting.BorderSide)((DevExpress.XtraPrinting.BorderSide.Right | DevExpress.XtraPrinting.BorderSide.Bottom)));
             this.tiNxrTableCell7.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[DATA].[TEN_TO]")});
-            this.tiNxrTableCell7.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tiNxrTableCell7.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Bold);
             this.tiNxrTableCell7.Multiline = true;
             this.tiNxrTableCell7.Name = "tiNxrTableCell7";
             this.tiNxrTableCell7.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
@@ -751,7 +718,7 @@
             // 
             // lbNguoiLapBieu
             // 
-            this.lbNguoiLapBieu.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbNguoiLapBieu.Font = new System.Drawing.Font("Times New Roman", 9F);
             this.lbNguoiLapBieu.LocationFloat = new DevExpress.Utils.PointFloat(771.0004F, 32.99993F);
             this.lbNguoiLapBieu.Multiline = true;
             this.lbNguoiLapBieu.Name = "lbNguoiLapBieu";
@@ -765,7 +732,7 @@
             // 
             // lblNgay
             // 
-            this.lblNgay.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNgay.Font = new System.Drawing.Font("Times New Roman", 9F);
             this.lblNgay.LocationFloat = new DevExpress.Utils.PointFloat(691.0003F, 9.999974F);
             this.lblNgay.Multiline = true;
             this.lblNgay.Name = "lblNgay";
@@ -776,6 +743,13 @@
             this.lblNgay.StylePriority.UseTextAlignment = false;
             this.lblNgay.Text = "Tiền Giang, ngày 06 tháng 05 năm 2022";
             this.lblNgay.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
+            // 
+            // xrSubreport1
+            // 
+            this.xrSubreport1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
+            this.xrSubreport1.LockedInUserDesigner = true;
+            this.xrSubreport1.Name = "xrSubreport1";
+            this.xrSubreport1.SizeF = new System.Drawing.SizeF(1088F, 16.90513F);
             // 
             // rptBangTongHopCongVangNam
             // 
@@ -809,9 +783,6 @@
         private DevExpress.XtraReports.UI.BottomMarginBand BottomMargin;
         private DevExpress.XtraReports.UI.DetailBand Detail;
         private DevExpress.XtraReports.UI.ReportHeaderBand ReportHeader;
-        private DevExpress.XtraReports.UI.XRLabel tiNlblCONG_TY;
-        private DevExpress.XtraReports.UI.XRLabel tiNlblDIA_CHI;
-        private DevExpress.XtraReports.UI.XRLabel tiNxrLabel88;
         private DevExpress.XtraReports.UI.XRLabel lblTIEU_DE;
         private DevExpress.XtraReports.UI.GroupHeaderBand GroupHeader1;
         private DevExpress.XtraReports.UI.XRTable xrTable1;
@@ -863,5 +834,6 @@
         private DevExpress.XtraReports.UI.ReportFooterBand ReportFooter;
         private DevExpress.XtraReports.UI.XRLabel lbNguoiLapBieu;
         private DevExpress.XtraReports.UI.XRLabel lblNgay;
+        private DevExpress.XtraReports.UI.XRSubreport xrSubreport1;
     }
 }

@@ -4,6 +4,7 @@ using System.Collections;
 using System.ComponentModel;
 using DevExpress.XtraReports.UI;
 using System.Data;
+using Commons;
 
 namespace Vs.Report
 {
@@ -14,6 +15,7 @@ namespace Vs.Report
 
             InitializeComponent();
             Commons.Modules.ObjSystems.ThayDoiNN(this);
+            xrSubreport1.ReportSource = new SubReportHeader();
             NONlblTIEU_DE.Text = tieuDe;
             DataTable dtNgu = new DataTable();
             dtNgu.Load(Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT KEYWORD, CASE " + Commons.Modules.TypeLanguage + " WHEN 0 THEN VIETNAM WHEN 1 THEN ENGLISH ELSE CHINESE END AS NN  FROM LANGUAGES WHERE FORM = N'NgayThangNam' "));

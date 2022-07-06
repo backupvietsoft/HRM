@@ -18,6 +18,7 @@ using DevExpress.XtraEditors.Mask;
 using DevExpress.XtraLayout;
 using DevExpress.Utils;
 using System.Globalization;
+using DevExpress.Utils.Menu;
 
 namespace Vs.Payroll
 {
@@ -71,8 +72,8 @@ namespace Vs.Payroll
                     dt.Columns["MS_CN"].ReadOnly = true;
                     dt.Columns["HO_TEN"].ReadOnly = true;
                     dt.Columns["SO_TIEN"].ReadOnly = false;
-                    dt.Columns["NGAY_CONG"].ReadOnly = false;
-                    dt.Columns["MUC_LUONG"].ReadOnly = false;
+                    dt.Columns["NGAY_CONG"].ReadOnly = true;
+                    dt.Columns["MUC_LUONG"].ReadOnly = true;
                     Commons.Modules.ObjSystems.MLoadXtraGrid(grdData, grvData, dt, false, false, true, true, true, this.Name);
                     
                 }
@@ -84,8 +85,8 @@ namespace Vs.Payroll
                     dt.Columns["MS_CN"].ReadOnly = true;
                     dt.Columns["HO_TEN"].ReadOnly = true;
                     dt.Columns["SO_TIEN"].ReadOnly = false;
-                    dt.Columns["NGAY_CONG"].ReadOnly = false;
-                    dt.Columns["MUC_LUONG"].ReadOnly = false;
+                    dt.Columns["NGAY_CONG"].ReadOnly = true;
+                    dt.Columns["MUC_LUONG"].ReadOnly = true;
                     Commons.Modules.ObjSystems.MLoadXtraGrid(grdData, grvData, dt, false, false, true, true, true, this.Name);
                 }
                 
@@ -103,7 +104,6 @@ namespace Vs.Payroll
             grvData.Columns["SO_TIEN"].DisplayFormat.FormatString = "N0";
             grvData.Columns["MUC_LUONG"].DisplayFormat.FormatType = FormatType.Numeric;
             grvData.Columns["MUC_LUONG"].DisplayFormat.FormatString = "N0";
-            lblTongCN.Text= Convert.ToString(grvData.RowCount);
             //grvData.Columns["THANG"].Visible = false;
             int tt =0;
             for (int i = 0; i < dt.Rows.Count; i++)
@@ -116,8 +116,6 @@ namespace Vs.Payroll
                                  "{0:0,0}", tt);
 
         }
-
-        
 
         public void LoadThang()
         {
@@ -244,7 +242,6 @@ namespace Vs.Payroll
             cboDonVi.Enabled = !visible;
             cboXiNghiep.Enabled = !visible;
             cboDot.Enabled = !visible;
-            txtSoTien.Enabled = visible;
         }
 
         private void XoaCheDoLV()
@@ -400,18 +397,18 @@ namespace Vs.Payroll
             string sTB = "DSTU_SuaTien" + Commons.Modules.UserName;
             try
             {
-                Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sTB, Commons.Modules.ObjSystems.ConvertDatatable(grvData), "");
+                //Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sTB, Commons.Modules.ObjSystems.ConvertDatatable(grvData), "");
 
-                DataTable dt = new DataTable();
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spSuaSoTienDanhSachTamUng", txtSoTien.EditValue, sTB));
-                dt.Columns["MS_CN"].ReadOnly = true;
-                dt.Columns["HO_TEN"].ReadOnly = true;
-                dt.Columns["SO_TIEN"].ReadOnly = false;
-                dt.Columns["NGAY_CONG"].ReadOnly = false;
-                dt.Columns["MUC_LUONG"].ReadOnly = false;
-                Commons.Modules.ObjSystems.MLoadXtraGrid(grdData, grvData, dt, false, false, true, true, true, this.Name);
+                //DataTable dt = new DataTable();
+                //dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spSuaSoTienDanhSachTamUng", txtSoTien.EditValue, sTB));
+                //dt.Columns["MS_CN"].ReadOnly = true;
+                //dt.Columns["HO_TEN"].ReadOnly = true;
+                //dt.Columns["SO_TIEN"].ReadOnly = false;
+                //dt.Columns["NGAY_CONG"].ReadOnly = false;
+                //dt.Columns["MUC_LUONG"].ReadOnly = false;
+                //Commons.Modules.ObjSystems.MLoadXtraGrid(grdData, grvData, dt, false, false, true, true, true, this.Name);
 
-                Commons.Modules.ObjSystems.XoaTable(sTB);
+                //Commons.Modules.ObjSystems.XoaTable(sTB);
                 return true;
             }
             catch
@@ -428,5 +425,89 @@ namespace Vs.Payroll
                 Commons.Modules.ObjSystems.AddnewRow(grvData, false);
             }
         }
+
+        private void grvData_RowCountChanged(object sender, EventArgs e)
+        {
+            GridView view = sender as GridView;
+            try
+            {
+                int index = ItemForSumNhanVien.Text.IndexOf(':');
+                if (index > 0)
+                {
+                    if (view.RowCount > 0)
+                    {
+                        ItemForSumNhanVien.Text = ItemForSumNhanVien.Text.Substring(0, index) + ": " + view.RowCount.ToString();
+                    }
+                    else
+                    {
+                        ItemForSumNhanVien.Text = ItemForSumNhanVien.Text.Substring(0, index) + ": 0";
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show(ex.Message.ToString());
+            }
+        }
+
+        #region chuotphai
+        class RowInfo
+        {
+            public RowInfo(DevExpress.XtraGrid.Views.Grid.GridView view, int rowHandle)
+            {
+                this.RowHandle = rowHandle;
+                this.View = view;
+            }
+
+
+            public DevExpress.XtraGrid.Views.Grid.GridView View;
+            public int RowHandle;
+        }
+        //Nhap ung vien
+        public DXMenuItem MCreateMenuNhapUngVien(DevExpress.XtraGrid.Views.Grid.GridView view, int rowHandle)
+        {
+            string sStr = Commons.Modules.ObjLanguages.GetLanguage(Commons.Modules.ModuleName, "ucDanhSachTamUng", "CapNhatTamUng", Commons.Modules.TypeLanguage);
+            DXMenuItem menuCapNhat = new DXMenuItem(sStr, new EventHandler(CapNhat));
+            menuCapNhat.Tag = new RowInfo(view, rowHandle);
+            return menuCapNhat;
+        }
+        public void CapNhat(object sender, EventArgs e)
+        {
+            try
+            {
+                string sCotCN = grvData.FocusedColumn.FieldName;
+                if (grvData.GetFocusedRowCellValue(grvData.FocusedColumn.FieldName).ToString() == "") return;
+                string sBTCongNhan = "sBTCongNhan" + Commons.Modules.UserName;
+                Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBTCongNhan, (DataTable)grdData.DataSource, "");
+
+                DataTable dt = new DataTable();
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spUpdateChuotPhaiTAM_UNG", sBTCongNhan, sCotCN, Convert.ToDouble(grvData.GetFocusedRowCellValue(grvData.FocusedColumn.FieldName))));
+                grdData.DataSource = dt;
+            }
+            catch { }
+        }
+
+        private void grvData_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
+        {
+            try
+            {
+                if (btnALL.Buttons[0].Properties.Visible == true) return;
+                if (grvData.FocusedColumn.FieldName != "SO_TIEN") return;
+                DevExpress.XtraGrid.Views.Grid.GridView view = sender as DevExpress.XtraGrid.Views.Grid.GridView;
+                if (e.MenuType == DevExpress.XtraGrid.Views.Grid.GridMenuType.Row)
+                {
+                    int irow = e.HitInfo.RowHandle;
+                    e.Menu.Items.Clear();
+
+                    DevExpress.Utils.Menu.DXMenuItem itemNhap = MCreateMenuNhapUngVien(view, irow);
+                    e.Menu.Items.Add(itemNhap);
+                }
+            }
+            catch
+            {
+            }
+        }
+        #endregion
     }
 }

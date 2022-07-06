@@ -251,7 +251,8 @@ namespace Commons
             string KyHieuDV = "";
             try
             {
-                string strSQL = "SELECT KY_HIEU FROM dbo.DON_VI WHERE ID_DV = " + Convert.ToInt64(ID_DV) + "";
+
+                string strSQL = "SELECT TOP 1 KY_HIEU FROM dbo.DON_VI WHERE (ID_DV = " + Convert.ToInt64(ID_DV) + " OR " + Convert.ToInt64(ID_DV) + " = -1)";
                 KyHieuDV = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, string.IsNullOrEmpty(strSQL) ? "" : strSQL).ToString();
             }
             catch

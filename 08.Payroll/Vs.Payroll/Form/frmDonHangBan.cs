@@ -87,6 +87,7 @@ namespace Vs.Payroll
         {
             WindowsUIButton btn = e.Button as WindowsUIButton;
             XtraUserControl ctl = new XtraUserControl();
+            if (btn == null) return;
             switch (btn.Tag.ToString())
             {
                 case "them":
@@ -462,8 +463,10 @@ namespace Vs.Payroll
         #region Function
         public void LoadNN()
         {
-            Commons.Modules.ObjSystems.ThayDoiNN(this, new List<DevExpress.XtraLayout.LayoutControlGroup>() { Root, lcgChiTietHopDong }, windowsUIButton);
-            Commons.Modules.ObjSystems.MLoadNNXtraGrid(grvChiTiet, this.Name);
+            Commons.Modules.ObjSystems.ThayDoiNN(this, Root, tcgChung, windowsUIButton);
+
+            //Commons.Modules.ObjSystems.ThayDoiNN(this, new List<DevExpress.XtraLayout.LayoutControlGroup>() { Root, lcgChiTietHopDong }, windowsUIButton);
+            //Commons.Modules.ObjSystems.MLoadNNXtraGrid(grvChiTiet, this.Name);
             //Commons.Modulesules.ObjSystems.MLoadNNXtraGrid(grvDuyet, this.Name);
         }
         private void Bindingdata(bool them)
@@ -505,7 +508,7 @@ namespace Vs.Payroll
             grvChiTiet.OptionsBehavior.Editable = !visible;
 
             //txtSO_DHB.Properties.ReadOnly = visible;
-            datNGAY_LAP.Enabled = !visible;
+            datNGAY_LAP.Properties.ReadOnly = visible;
             cboTRANG_THAI.Properties.ReadOnly = visible;
             txtSO_PO_KHACH.Properties.ReadOnly = visible;
             txtGHI_CHU.Properties.ReadOnly = visible;
@@ -851,14 +854,14 @@ namespace Vs.Payroll
 
         public static void MFieldRequest(DevExpress.XtraLayout.LayoutControlItem Mlayout)
         { ////red, green, blue
-            int R = 156, G = 97, B = 65;
-            try { R = int.Parse(Vs.Payroll.Properties.Settings.Default["ApplicationColorRed"].ToString()); } catch { R = 156; }
-            try { G = int.Parse(Vs.Payroll.Properties.Settings.Default["ApplicationColorGreen"].ToString()); } catch { G = 97; }
-            try { B = int.Parse(Vs.Payroll.Properties.Settings.Default["ApplicationColorBlue"].ToString()); } catch { B = 65; }
+            //int R = 156, G = 97, B = 65;
+            //try { R = int.Parse(Vs.Payroll.Properties.Settings.Default["ApplicationColorRed"].ToString()); } catch { R = 156; }
+            //try { G = int.Parse(Vs.Payroll.Properties.Settings.Default["ApplicationColorGreen"].ToString()); } catch { G = 97; }
+            //try { B = int.Parse(Vs.Payroll.Properties.Settings.Default["ApplicationColorBlue"].ToString()); } catch { B = 65; }
 
 
-            Mlayout.AppearanceItemCaption.ForeColor = System.Drawing.Color.FromArgb(R, G, B);
-            Mlayout.AppearanceItemCaption.Options.UseForeColor = true;
+            //Mlayout.AppearanceItemCaption.ForeColor = System.Drawing.Color.FromArgb(R, G, B);
+            //Mlayout.AppearanceItemCaption.Options.UseForeColor = true;
 
 
             //try

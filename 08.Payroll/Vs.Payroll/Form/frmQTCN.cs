@@ -129,9 +129,9 @@ namespace Vs.Payroll
                 cboChuyen.Properties.View.Columns[0].AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
 
                 //sSql = "SELECT ID_NHH, TEN_NHH FROM NHOM_HANG_HOA UNION SELECT '-1', '' FROM NHOM_HANG_HOA ORDER BY TEN_NHH";
-                dt = new DataTable();
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboNhomHangHoa", Commons.Modules.UserName, Commons.Modules.TypeLanguage, 1));
-                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboLMH, dt, "ID_NHH", "TEN_NHH", "TEN_NHH");
+                //dt = new DataTable();
+                //dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboNhomHangHoa", Commons.Modules.UserName, Commons.Modules.TypeLanguage, 1));
+                //Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboLMH, dt, "ID_NHH", "TEN_NHH", "TEN_NHH");
                 LoadCboCum(id_NHH);
             }
             catch { }
@@ -143,7 +143,7 @@ namespace Vs.Payroll
             {
                 //string sSql = "SELECT ID_CUM, TEN_CUM FROM CUM WHERE ID_NHH = " + cboLMH.EditValue + " UNION SELECT '-1','' FROM CUM ";
                 DataTable dt = new DataTable();
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboCUM", Convert.ToInt64(cboLMH.EditValue), Commons.Modules.UserName, Commons.Modules.TypeLanguage, 1));
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboCUM", Convert.ToInt64(cboMH.EditValue), Commons.Modules.UserName, Commons.Modules.TypeLanguage, 1));
                 if (cboCum.Properties.DataSource == null)
                 {
                     Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboCum, dt, "ID_CUM", "TEN_CUM", "TEN_CUM");
@@ -256,12 +256,12 @@ namespace Vs.Payroll
         {
             //if (Commons.Modules.sLoad == "0LoadCbo") return;
             LoadHD(3);
-
-            GridView view = cboMH.Properties.View;
-            int rowHandle = view.FocusedRowHandle;
-            string fieldName = "ID_NHH"; // or other field name  
-            object value = view.GetRowCellValue(rowHandle, fieldName);
-            cboLMH.EditValue = Convert.ToInt32(value);
+            LoadCboCum(0);
+            //GridView view = cboMH.Properties.View;
+            //int rowHandle = view.FocusedRowHandle;
+            //string fieldName = "ID_NHH"; // or other field name  
+            //object value = view.GetRowCellValue(rowHandle, fieldName);
+            //cboLMH.EditValue = Convert.ToInt32(value);
             //LoadCbo();
             LoadLuoi();
             Commons.Modules.sLoad = "";
@@ -381,7 +381,7 @@ namespace Vs.Payroll
             cboKH.Enabled = !isAdd;
             cboHD.Enabled = !isAdd;
             cboMH.Enabled = !isAdd;
-            cboLMH.Enabled = !isAdd;
+            //cboLMH.Enabled = !isAdd;
             cboOrd.Enabled = !isAdd;
             cboChuyen.Enabled = !isAdd;
             txtNgayLap.Enabled = !isAdd;

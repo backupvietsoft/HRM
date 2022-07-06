@@ -43,8 +43,7 @@ namespace Vs.Payroll
             //Commons.Modules.sPS = "0Load";
             try
             {
-                Commons.Modules.sPS = "0Load";
-                Commons.Modules.sLoad = "0Short";
+                Commons.Modules.sLoad = "0Load";
                 //optXCLP.SelectedIndex = 0;
                 Commons.Modules.ObjSystems.LoadCboDonVi(cboDV);
                 Commons.Modules.ObjSystems.LoadCboXiNghiep(cboDV, cboXN);
@@ -56,7 +55,7 @@ namespace Vs.Payroll
                 LoadCN();
                 LoadCD();
                 LoadCboMSCN();
-                Commons.Modules.sPS = "";
+                Commons.Modules.sLoad = "";
 
                 grvTo_FocusedRowChanged(null, null);
 
@@ -186,7 +185,7 @@ namespace Vs.Payroll
                         Commons.Modules.TypeLanguage, XemCu, iChuyen, iOrd, dtNgay));
                 dt.PrimaryKey = new DataColumn[] { dt.Columns["ID_CN"] };
                 //Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboCN, dt, "MS_CN", "LMS", "LMS");
-                if(grdTo.DataSource == null)
+                if (grdTo.DataSource == null)
                 {
                     Commons.Modules.ObjSystems.MLoadXtraGrid(grdTo, grvTo, dt, false, false, true, true, true, this.Name);
                     grvTo.Columns["ID_CN"].Visible = false;
@@ -195,8 +194,15 @@ namespace Vs.Payroll
                 {
                     grdTo.DataSource = dt;
                 }
+                if (iCN != -1)
+                {
+                    int index = dt.Rows.IndexOf(dt.Rows.Find(iCN));
+                    grvTo.FocusedRowHandle = grvTo.GetRowHandle(index);
+                    grvTo.ClearSelection();
+                    grvTo.SelectRow(index);
+                }
             }
-            catch  { }
+            catch { }
         }
 
         private void LoadCD()
@@ -273,7 +279,7 @@ namespace Vs.Payroll
                 //{
                 //    grvCD.Columns["TEN_CD"].OptionsColumn.AllowEdit = false;
                 //}
-                
+
             }
             catch
             { }
@@ -337,7 +343,7 @@ namespace Vs.Payroll
 
         private void grvPCD_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
-            if (Commons.Modules.sPS == "0Load") return;
+            if (Commons.Modules.sLoad == "0Load") return;
             grvCD.UpdateCurrentRow();
             if (grvPCD.RowCount != 0)
             {
@@ -353,7 +359,7 @@ namespace Vs.Payroll
 
         private void grvTo_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
-            if (Commons.Modules.sPS == "0Load") return;
+            if (Commons.Modules.sLoad == "0Load") return;
             DataTable dtTmp = new DataTable();
             dtTmp = (DataTable)grdCD.DataSource;
             String sIDCN;
@@ -361,7 +367,11 @@ namespace Vs.Payroll
             {
                 string sDK = "";
                 sIDCN = "-1";
-                try { sIDCN = grvTo.GetFocusedRowCellValue("ID_CN").ToString(); } catch { }
+                try
+                {
+                    sIDCN = grvTo.GetFocusedRowCellValue("ID_CN").ToString();
+                }
+                catch { }
                 if (sIDCN != "-1") sDK = " ID_CN = '" + sIDCN + "' ";
 
                 dtTmp.DefaultView.RowFilter = sDK;
@@ -379,6 +389,12 @@ namespace Vs.Payroll
                 txtTEN_CN.EditValue = string.IsNullOrEmpty(grvTo.GetFocusedRowCellValue("HO_TEN").ToString()) ? null : grvTo.GetFocusedRowCellValue("HO_TEN").ToString();
             }
             catch { }
+
+            if (Commons.Modules.sPS != "0Focus")
+            {
+                iCN = Convert.ToInt32(grvTo.GetFocusedRowCellValue("ID_CN"));
+            }
+            else return;
         }
 
         private void TSua(Boolean TSua)
@@ -391,12 +407,17 @@ namespace Vs.Payroll
             windowsUIButton.Buttons[3].Properties.Visible = !TSua;
             windowsUIButton.Buttons[4].Properties.Visible = !TSua;
             windowsUIButton.Buttons[5].Properties.Visible = !TSua;
-            windowsUIButton.Buttons[6].Properties.Visible = !TSua;
-            windowsUIButton.Buttons[9].Properties.Visible = !TSua;
+            windowsUIButton.Buttons[8].Properties.Visible = !TSua;
 
-
+            windowsUIButton.Buttons[6].Properties.Visible = TSua;
             windowsUIButton.Buttons[7].Properties.Visible = TSua;
-            windowsUIButton.Buttons[8].Properties.Visible = TSua;
+
+
+            cboDV.Properties.ReadOnly = TSua;
+            cboXN.Properties.ReadOnly = TSua;
+            cboTo.Properties.ReadOnly = TSua;
+            cboChuyen.Properties.ReadOnly = TSua;
+            cboNgay.Properties.ReadOnly = TSua;
 
         }
 
@@ -435,20 +456,20 @@ namespace Vs.Payroll
 
         private void cboDV_EditValueChanged(object sender, EventArgs e)
         {
-            if (Commons.Modules.sPS == "0Load") return;
+            if (Commons.Modules.sLoad == "0Load") return;
             Commons.Modules.ObjSystems.LoadCboXiNghiep(cboDV, cboXN);
             Commons.Modules.ObjSystems.LoadCboTo(cboDV, cboXN, cboTo);
         }
 
         private void cboXN_EditValueChanged(object sender, EventArgs e)
         {
-            if (Commons.Modules.sPS == "0Load") return;
+            if (Commons.Modules.sLoad == "0Load") return;
             Commons.Modules.ObjSystems.LoadCboTo(cboDV, cboXN, cboTo);
         }
 
         private void cboTo_EditValueChanged(object sender, EventArgs e)
         {
-            if (Commons.Modules.sPS == "0Load") return;
+            if (Commons.Modules.sLoad == "0Load") return;
             LoadCN();
             LoadCboMSCN();
             LoadCD();
@@ -456,7 +477,7 @@ namespace Vs.Payroll
 
         private void cboNgay_EditValueChanged_1(object sender, EventArgs e)
         {
-            if (Commons.Modules.sPS == "0Load") return;
+            if (Commons.Modules.sLoad == "0Load") return;
             LoadPCD();
             LoadCD();
             LoadCN();
@@ -527,7 +548,7 @@ namespace Vs.Payroll
                 if (Commons.Modules.ObjSystems.ConvertDatatable(grdCD).AsEnumerable().Where(x => x["ID_CN"].ToString().Trim().Equals(grvTo.GetFocusedRowCellValue("ID_CN").ToString().Trim())).Count(x => x["ID_CD"].ToString().Trim().Equals(e.Value.ToString().Trim())) >= 1)
                 {
                     e.Valid = false;
-                    e.ErrorText = "trung";
+                    e.ErrorText = Commons.Modules.TypeLanguage == 0 ? "Trùng" : "Duplicate";
                     view.SetColumnError(view.Columns["ID_CD"], e.ErrorText);
                     return;
                 }
@@ -575,10 +596,10 @@ namespace Vs.Payroll
                     //Kiểm tra số lượng công đoạn đang nhập có vượt số lượng chốt hay không
                     if (Convert.ToInt32(dt.Rows[0]["SL_NHAP"]) > Convert.ToInt32(grvPCD.GetFocusedRowCellValue("SL_CHOT")))
                     {
-                        if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msg_VuotSLChot"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo,MessageBoxIcon.Question) == DialogResult.No)
+                        if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msg_VuotSLChot"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
                         {
                             e.Valid = false;
-                            e.ErrorText = "So luong da vuot so luong chot";
+                            e.ErrorText = Commons.Modules.TypeLanguage == 0 ? "Số lượng đã vượt số lượng chốt" : "The number has exceeded the number of pins";
                             view.SetColumnError(view.Columns["SO_LUONG"], e.ErrorText);
                             return;
                         }
@@ -605,13 +626,6 @@ namespace Vs.Payroll
             XtraUserControl ctl = new XtraUserControl();
             switch (btn.Tag.ToString())
             {
-                case "them":
-                    {
-                        XemCu = 1;
-                        cboNgay_EditValueChanged_1(null, null);
-                        TSua(true);
-                        break;
-                    }
                 case "thuathieu":
                     {
                         DataTable dt = new DataTable();
@@ -668,8 +682,11 @@ namespace Vs.Payroll
                         frm.ShowDialog();
                         break;
                     }
-                case "sua":
+                case "themsua":
                     {
+                        Commons.Modules.sPS = "0Focus";
+                        XemCu = 1;
+                        cboNgay_EditValueChanged_1(null, null);
                         Commons.Modules.ObjSystems.AddnewRow(grvCD, true);
                         TSua(true);
                         break;
@@ -718,11 +735,16 @@ namespace Vs.Payroll
                     }
                 case "khongluu":
                     {
+                        Commons.Modules.sPS = "";
                         TSua(false);
                         XemCu = 0;
                         Commons.Modules.ObjSystems.DeleteAddRow(grvCD);
                         grvCD.UpdateCurrentRow();
+                        LoadPCD();
                         LoadCD();
+                        LoadCN();
+                        LoadCboMSCN();
+                        cboNgay_EditValueChanged_1(null, null);
                         grvTo_FocusedRowChanged(null, null);
                         break;
                     }

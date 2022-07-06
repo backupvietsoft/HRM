@@ -117,8 +117,7 @@ namespace Vs.TimeAttendance
                                     {
                                         case "MT":
                                             {
-                                                //BangChamCongThang_MT();
-                                                BangChamCongThang();
+                                                BangChamCongThang_MT();
                                                 break;
                                             }
                                         case "SB":
@@ -138,8 +137,7 @@ namespace Vs.TimeAttendance
                                     {
                                         case "MT":
                                             {
-                                                //BangChamCongTangCaThang_MT();
-                                                BangChamCongTangCaThang();
+                                                BangChamCongTangCaThang_MT();
                                                 break;
                                             }
                                         case "SB":

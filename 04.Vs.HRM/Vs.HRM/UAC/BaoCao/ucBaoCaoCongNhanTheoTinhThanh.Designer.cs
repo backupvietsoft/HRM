@@ -101,11 +101,11 @@
             this.windowsUIButton.ContentAlignment = System.Drawing.ContentAlignment.MiddleRight;
             this.windowsUIButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.windowsUIButton.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.windowsUIButton.Location = new System.Drawing.Point(0, 624);
-            this.windowsUIButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.windowsUIButton.Location = new System.Drawing.Point(0, 530);
+            this.windowsUIButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.windowsUIButton.Name = "windowsUIButton";
-            this.windowsUIButton.Padding = new System.Windows.Forms.Padding(5);
-            this.windowsUIButton.Size = new System.Drawing.Size(1124, 40);
+            this.windowsUIButton.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.windowsUIButton.Size = new System.Drawing.Size(984, 34);
             this.windowsUIButton.TabIndex = 16;
             this.windowsUIButton.Text = "windowsUIButtonPanel1";
             this.windowsUIButton.UseButtonBackgroundImages = false;
@@ -117,10 +117,10 @@
             this.layoutControl1.Controls.Add(this.tablePanel1);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl1.Location = new System.Drawing.Point(0, 0);
-            this.layoutControl1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.layoutControl1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.Root = this.Root;
-            this.layoutControl1.Size = new System.Drawing.Size(1124, 624);
+            this.layoutControl1.Size = new System.Drawing.Size(984, 530);
             this.layoutControl1.TabIndex = 17;
             this.layoutControl1.Text = "layoutControl1";
             // 
@@ -155,13 +155,13 @@
             this.tablePanel1.Controls.Add(this.lbQuocGia);
             this.tablePanel1.Controls.Add(this.LK_QuocGia);
             this.tablePanel1.Controls.Add(this.lbNguyenQuan);
-            this.tablePanel1.Location = new System.Drawing.Point(6, 6);
-            this.tablePanel1.Margin = new System.Windows.Forms.Padding(70, 3, 3, 3);
+            this.tablePanel1.Location = new System.Drawing.Point(11, 10);
+            this.tablePanel1.Margin = new System.Windows.Forms.Padding(61, 3, 3, 3);
             this.tablePanel1.Name = "tablePanel1";
             this.tablePanel1.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] {
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 32F),
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 32F),
-            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 32F),
+            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 36F),
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 32F),
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 32F),
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 32F),
@@ -171,42 +171,42 @@
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 32F),
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 32F),
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.AutoSize, 26F)});
-            this.tablePanel1.Size = new System.Drawing.Size(1112, 612);
+            this.tablePanel1.Size = new System.Drawing.Size(962, 510);
             this.tablePanel1.TabIndex = 4;
             // 
             // rdo_ChonBaoCao
             // 
             this.tablePanel1.SetColumn(this.rdo_ChonBaoCao, 1);
             this.tablePanel1.SetColumnSpan(this.rdo_ChonBaoCao, 2);
-            this.rdo_ChonBaoCao.Location = new System.Drawing.Point(31, 67);
+            this.rdo_ChonBaoCao.Location = new System.Drawing.Point(28, 57);
             this.rdo_ChonBaoCao.Name = "rdo_ChonBaoCao";
             this.rdo_ChonBaoCao.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] {
             new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Tổng hợp", true, "rdo_TongHop"),
             new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Chi tiết", true, "rdo_ChiTiet")});
             this.tablePanel1.SetRow(this.rdo_ChonBaoCao, 2);
-            this.rdo_ChonBaoCao.Size = new System.Drawing.Size(325, 26);
+            this.rdo_ChonBaoCao.Size = new System.Drawing.Size(280, 25);
             this.rdo_ChonBaoCao.TabIndex = 12;
             // 
             // lbTo
             // 
             this.tablePanel1.SetColumn(this.lbTo, 5);
             this.lbTo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbTo.Location = new System.Drawing.Point(753, 35);
-            this.lbTo.Margin = new System.Windows.Forms.Padding(32, 3, 3, 3);
+            this.lbTo.Location = new System.Drawing.Point(652, 30);
+            this.lbTo.Margin = new System.Windows.Forms.Padding(28, 3, 3, 3);
             this.lbTo.Name = "lbTo";
             this.tablePanel1.SetRow(this.lbTo, 1);
-            this.lbTo.Size = new System.Drawing.Size(146, 26);
+            this.lbTo.Size = new System.Drawing.Size(126, 21);
             this.lbTo.TabIndex = 11;
             this.lbTo.Text = "Tổ";
             // 
             // lbXiNghiep
             // 
             this.tablePanel1.SetColumn(this.lbXiNghiep, 3);
-            this.lbXiNghiep.Location = new System.Drawing.Point(391, 40);
-            this.lbXiNghiep.Margin = new System.Windows.Forms.Padding(32, 3, 3, 3);
+            this.lbXiNghiep.Location = new System.Drawing.Point(339, 34);
+            this.lbXiNghiep.Margin = new System.Windows.Forms.Padding(28, 3, 3, 3);
             this.lbXiNghiep.Name = "lbXiNghiep";
             this.tablePanel1.SetRow(this.lbXiNghiep, 1);
-            this.lbXiNghiep.Size = new System.Drawing.Size(63, 20);
+            this.lbXiNghiep.Size = new System.Drawing.Size(55, 17);
             this.lbXiNghiep.TabIndex = 10;
             this.lbXiNghiep.Text = "Xí nghiệp";
             // 
@@ -214,10 +214,10 @@
             // 
             this.tablePanel1.SetColumn(this.lbDonVi, 1);
             this.lbDonVi.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbDonVi.Location = new System.Drawing.Point(31, 35);
+            this.lbDonVi.Location = new System.Drawing.Point(28, 30);
             this.lbDonVi.Name = "lbDonVi";
             this.tablePanel1.SetRow(this.lbDonVi, 1);
-            this.lbDonVi.Size = new System.Drawing.Size(144, 26);
+            this.lbDonVi.Size = new System.Drawing.Size(123, 21);
             this.lbDonVi.TabIndex = 9;
             this.lbDonVi.Text = "Đơn vị";
             // 
@@ -225,11 +225,11 @@
             // 
             this.tablePanel1.SetColumn(this.lbNgay, 5);
             this.lbNgay.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbNgay.Location = new System.Drawing.Point(753, 67);
-            this.lbNgay.Margin = new System.Windows.Forms.Padding(32, 3, 3, 3);
+            this.lbNgay.Location = new System.Drawing.Point(652, 57);
+            this.lbNgay.Margin = new System.Windows.Forms.Padding(28, 3, 3, 3);
             this.lbNgay.Name = "lbNgay";
             this.tablePanel1.SetRow(this.lbNgay, 2);
-            this.lbNgay.Size = new System.Drawing.Size(146, 26);
+            this.lbNgay.Size = new System.Drawing.Size(126, 25);
             this.lbNgay.TabIndex = 7;
             this.lbNgay.Text = "lbNgay";
             // 
@@ -237,28 +237,28 @@
             // 
             this.tablePanel1.SetColumn(this.lk_NgayIn, 6);
             this.lk_NgayIn.EditValue = null;
-            this.lk_NgayIn.Location = new System.Drawing.Point(907, 69);
-            this.lk_NgayIn.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.lk_NgayIn.Location = new System.Drawing.Point(785, 58);
+            this.lk_NgayIn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.lk_NgayIn.Name = "lk_NgayIn";
             this.lk_NgayIn.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.lk_NgayIn.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.tablePanel1.SetRow(this.lk_NgayIn, 2);
-            this.lk_NgayIn.Size = new System.Drawing.Size(173, 26);
+            this.lk_NgayIn.Size = new System.Drawing.Size(149, 24);
             this.lk_NgayIn.TabIndex = 5;
             // 
             // LK_XI_NGHIEP
             // 
             this.tablePanel1.SetColumn(this.LK_XI_NGHIEP, 4);
             this.LK_XI_NGHIEP.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.LK_XI_NGHIEP.Location = new System.Drawing.Point(544, 37);
-            this.LK_XI_NGHIEP.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.LK_XI_NGHIEP.Location = new System.Drawing.Point(471, 31);
+            this.LK_XI_NGHIEP.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.LK_XI_NGHIEP.Name = "LK_XI_NGHIEP";
             this.LK_XI_NGHIEP.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.tablePanel1.SetRow(this.LK_XI_NGHIEP, 1);
-            this.LK_XI_NGHIEP.Size = new System.Drawing.Size(173, 26);
+            this.LK_XI_NGHIEP.Size = new System.Drawing.Size(149, 24);
             this.LK_XI_NGHIEP.TabIndex = 3;
             this.LK_XI_NGHIEP.EditValueChanged += new System.EventHandler(this.LK_XI_NGHIEP_EditValueChanged);
             // 
@@ -266,31 +266,31 @@
             // 
             this.tablePanel1.SetColumn(this.LK_DON_VI, 2);
             this.LK_DON_VI.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.LK_DON_VI.Location = new System.Drawing.Point(181, 35);
+            this.LK_DON_VI.Location = new System.Drawing.Point(157, 30);
             this.LK_DON_VI.Name = "LK_DON_VI";
             this.LK_DON_VI.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.tablePanel1.SetRow(this.LK_DON_VI, 1);
-            this.LK_DON_VI.Size = new System.Drawing.Size(175, 26);
+            this.LK_DON_VI.Size = new System.Drawing.Size(151, 24);
             this.LK_DON_VI.TabIndex = 1;
             this.LK_DON_VI.EditValueChanged += new System.EventHandler(this.LK_DON_VI_EditValueChanged);
             // 
             // LK_TO
             // 
             this.tablePanel1.SetColumn(this.LK_TO, 6);
-            this.LK_TO.Location = new System.Drawing.Point(906, 35);
+            this.LK_TO.Location = new System.Drawing.Point(784, 30);
             this.LK_TO.Name = "LK_TO";
             this.LK_TO.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.tablePanel1.SetRow(this.LK_TO, 1);
-            this.LK_TO.Size = new System.Drawing.Size(175, 26);
+            this.LK_TO.Size = new System.Drawing.Size(151, 24);
             this.LK_TO.TabIndex = 3;
             // 
             // rdo_NguyenQuan
             // 
             this.tablePanel1.SetColumn(this.rdo_NguyenQuan, 1);
             this.tablePanel1.SetColumnSpan(this.rdo_NguyenQuan, 2);
-            this.rdo_NguyenQuan.Location = new System.Drawing.Point(31, 99);
+            this.rdo_NguyenQuan.Location = new System.Drawing.Point(28, 88);
             this.rdo_NguyenQuan.Name = "rdo_NguyenQuan";
             this.rdo_NguyenQuan.Properties.Columns = 1;
             this.rdo_NguyenQuan.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] {
@@ -298,31 +298,31 @@
             new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Nơi thường trú", true, "rdo_NoiThuongTru")});
             this.tablePanel1.SetRow(this.rdo_NguyenQuan, 3);
             this.tablePanel1.SetRowSpan(this.rdo_NguyenQuan, 2);
-            this.rdo_NguyenQuan.Size = new System.Drawing.Size(325, 58);
+            this.rdo_NguyenQuan.Size = new System.Drawing.Size(280, 48);
             this.rdo_NguyenQuan.TabIndex = 12;
             this.rdo_NguyenQuan.SelectedIndexChanged += new System.EventHandler(this.radioGroup1_SelectedIndexChanged);
             // 
             // LK_NguyenQuan
             // 
             this.tablePanel1.SetColumn(this.LK_NguyenQuan, 4);
-            this.LK_NguyenQuan.Location = new System.Drawing.Point(544, 69);
-            this.LK_NguyenQuan.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.LK_NguyenQuan.Location = new System.Drawing.Point(471, 58);
+            this.LK_NguyenQuan.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.LK_NguyenQuan.Name = "LK_NguyenQuan";
             this.LK_NguyenQuan.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.tablePanel1.SetRow(this.LK_NguyenQuan, 2);
-            this.LK_NguyenQuan.Size = new System.Drawing.Size(173, 26);
+            this.LK_NguyenQuan.Size = new System.Drawing.Size(149, 24);
             this.LK_NguyenQuan.TabIndex = 3;
             // 
             // LK_TinhThanh
             // 
             this.tablePanel1.SetColumn(this.LK_TinhThanh, 6);
-            this.LK_TinhThanh.Location = new System.Drawing.Point(906, 99);
+            this.LK_TinhThanh.Location = new System.Drawing.Point(784, 88);
             this.LK_TinhThanh.Name = "LK_TinhThanh";
             this.LK_TinhThanh.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.tablePanel1.SetRow(this.LK_TinhThanh, 3);
-            this.LK_TinhThanh.Size = new System.Drawing.Size(175, 26);
+            this.LK_TinhThanh.Size = new System.Drawing.Size(151, 24);
             this.LK_TinhThanh.TabIndex = 3;
             this.LK_TinhThanh.EditValueChanged += new System.EventHandler(this.LK_TinhThanh_EditValueChanged);
             this.LK_TinhThanh.Validated += new System.EventHandler(this.LK_TinhThanh_Validated);
@@ -330,12 +330,12 @@
             // LK_QuanHuyen
             // 
             this.tablePanel1.SetColumn(this.LK_QuanHuyen, 4);
-            this.LK_QuanHuyen.Location = new System.Drawing.Point(543, 131);
+            this.LK_QuanHuyen.Location = new System.Drawing.Point(470, 115);
             this.LK_QuanHuyen.Name = "LK_QuanHuyen";
             this.LK_QuanHuyen.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.tablePanel1.SetRow(this.LK_QuanHuyen, 4);
-            this.LK_QuanHuyen.Size = new System.Drawing.Size(175, 26);
+            this.LK_QuanHuyen.Size = new System.Drawing.Size(151, 24);
             this.LK_QuanHuyen.TabIndex = 3;
             this.LK_QuanHuyen.EditValueChanged += new System.EventHandler(this.LK_QuanHuyen_EditValueChanged);
             this.LK_QuanHuyen.Validated += new System.EventHandler(this.LK_QuanHuyen_Validated);
@@ -343,68 +343,68 @@
             // LK_PhuongXa
             // 
             this.tablePanel1.SetColumn(this.LK_PhuongXa, 6);
-            this.LK_PhuongXa.Location = new System.Drawing.Point(906, 131);
+            this.LK_PhuongXa.Location = new System.Drawing.Point(784, 115);
             this.LK_PhuongXa.Name = "LK_PhuongXa";
             this.LK_PhuongXa.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.tablePanel1.SetRow(this.LK_PhuongXa, 4);
-            this.LK_PhuongXa.Size = new System.Drawing.Size(175, 26);
+            this.LK_PhuongXa.Size = new System.Drawing.Size(151, 24);
             this.LK_PhuongXa.TabIndex = 3;
             // 
             // lbTinhThanh
             // 
             this.tablePanel1.SetColumn(this.lbTinhThanh, 5);
-            this.lbTinhThanh.Location = new System.Drawing.Point(753, 102);
-            this.lbTinhThanh.Margin = new System.Windows.Forms.Padding(32, 3, 3, 3);
+            this.lbTinhThanh.Location = new System.Drawing.Point(652, 91);
+            this.lbTinhThanh.Margin = new System.Windows.Forms.Padding(28, 3, 3, 3);
             this.lbTinhThanh.Name = "lbTinhThanh";
             this.tablePanel1.SetRow(this.lbTinhThanh, 3);
-            this.lbTinhThanh.Size = new System.Drawing.Size(69, 20);
+            this.lbTinhThanh.Size = new System.Drawing.Size(60, 17);
             this.lbTinhThanh.TabIndex = 11;
             this.lbTinhThanh.Text = "Tỉnh thành";
             // 
             // lbQuanHuyen
             // 
             this.tablePanel1.SetColumn(this.lbQuanHuyen, 3);
-            this.lbQuanHuyen.Location = new System.Drawing.Point(391, 134);
-            this.lbQuanHuyen.Margin = new System.Windows.Forms.Padding(32, 3, 3, 3);
+            this.lbQuanHuyen.Location = new System.Drawing.Point(339, 118);
+            this.lbQuanHuyen.Margin = new System.Windows.Forms.Padding(28, 3, 3, 3);
             this.lbQuanHuyen.Name = "lbQuanHuyen";
             this.tablePanel1.SetRow(this.lbQuanHuyen, 4);
-            this.lbQuanHuyen.Size = new System.Drawing.Size(78, 20);
+            this.lbQuanHuyen.Size = new System.Drawing.Size(69, 17);
             this.lbQuanHuyen.TabIndex = 11;
             this.lbQuanHuyen.Text = "Quận huyện";
             // 
             // lbPhuongXa
             // 
             this.tablePanel1.SetColumn(this.lbPhuongXa, 5);
-            this.lbPhuongXa.Location = new System.Drawing.Point(753, 134);
-            this.lbPhuongXa.Margin = new System.Windows.Forms.Padding(32, 3, 3, 3);
+            this.lbPhuongXa.Location = new System.Drawing.Point(652, 118);
+            this.lbPhuongXa.Margin = new System.Windows.Forms.Padding(28, 3, 3, 3);
             this.lbPhuongXa.Name = "lbPhuongXa";
             this.tablePanel1.SetRow(this.lbPhuongXa, 4);
-            this.lbPhuongXa.Size = new System.Drawing.Size(70, 20);
+            this.lbPhuongXa.Size = new System.Drawing.Size(62, 17);
             this.lbPhuongXa.TabIndex = 11;
             this.lbPhuongXa.Text = "Phường xã";
             // 
             // lbQuocGia
             // 
             this.tablePanel1.SetColumn(this.lbQuocGia, 3);
-            this.lbQuocGia.Location = new System.Drawing.Point(391, 104);
-            this.lbQuocGia.Margin = new System.Windows.Forms.Padding(32, 3, 3, 3);
+            this.lbQuocGia.Location = new System.Drawing.Point(339, 92);
+            this.lbQuocGia.Margin = new System.Windows.Forms.Padding(28, 3, 3, 3);
             this.lbQuocGia.Name = "lbQuocGia";
             this.tablePanel1.SetRow(this.lbQuocGia, 3);
-            this.lbQuocGia.Size = new System.Drawing.Size(60, 20);
+            this.lbQuocGia.Size = new System.Drawing.Size(53, 17);
             this.lbQuocGia.TabIndex = 11;
             this.lbQuocGia.Text = "Quốc gia";
             // 
             // LK_QuocGia
             // 
             this.tablePanel1.SetColumn(this.LK_QuocGia, 4);
-            this.LK_QuocGia.Location = new System.Drawing.Point(544, 101);
-            this.LK_QuocGia.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.LK_QuocGia.Location = new System.Drawing.Point(471, 89);
+            this.LK_QuocGia.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.LK_QuocGia.Name = "LK_QuocGia";
             this.LK_QuocGia.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.tablePanel1.SetRow(this.LK_QuocGia, 3);
-            this.LK_QuocGia.Size = new System.Drawing.Size(173, 26);
+            this.LK_QuocGia.Size = new System.Drawing.Size(149, 24);
             this.LK_QuocGia.TabIndex = 3;
             this.LK_QuocGia.EditValueChanged += new System.EventHandler(this.LK_QuocGia_EditValueChanged);
             this.LK_QuocGia.Validated += new System.EventHandler(this.LK_QuocGia_Validated);
@@ -412,11 +412,11 @@
             // lbNguyenQuan
             // 
             this.tablePanel1.SetColumn(this.lbNguyenQuan, 3);
-            this.lbNguyenQuan.Location = new System.Drawing.Point(391, 72);
-            this.lbNguyenQuan.Margin = new System.Windows.Forms.Padding(32, 3, 3, 3);
+            this.lbNguyenQuan.Location = new System.Drawing.Point(339, 61);
+            this.lbNguyenQuan.Margin = new System.Windows.Forms.Padding(28, 3, 3, 3);
             this.lbNguyenQuan.Name = "lbNguyenQuan";
             this.tablePanel1.SetRow(this.lbNguyenQuan, 2);
-            this.lbNguyenQuan.Size = new System.Drawing.Size(88, 20);
+            this.lbNguyenQuan.Size = new System.Drawing.Size(78, 17);
             this.lbNguyenQuan.TabIndex = 11;
             this.lbNguyenQuan.Text = "Nguyên quán";
             // 
@@ -427,7 +427,7 @@
             this.Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlItem1});
             this.Root.Name = "Root";
-            this.Root.Size = new System.Drawing.Size(1124, 624);
+            this.Root.Size = new System.Drawing.Size(984, 530);
             this.Root.TextVisible = false;
             // 
             // layoutControlItem1
@@ -435,7 +435,7 @@
             this.layoutControlItem1.Control = this.tablePanel1;
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(1114, 614);
+            this.layoutControlItem1.Size = new System.Drawing.Size(966, 514);
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
             // 
@@ -458,13 +458,13 @@
             // 
             // ucBaoCaoCongNhanTheoTinhThanh
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.layoutControl1);
             this.Controls.Add(this.windowsUIButton);
-            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "ucBaoCaoCongNhanTheoTinhThanh";
-            this.Size = new System.Drawing.Size(1124, 664);
+            this.Size = new System.Drawing.Size(984, 564);
             this.Load += new System.EventHandler(this.ucBaoCaoCongNhanTheoTinhThanh_Load);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);

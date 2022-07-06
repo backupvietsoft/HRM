@@ -92,7 +92,6 @@ namespace Vs.TimeAttendance
                                         case "MT":
                                             {
                                                 DSDiTreVeSomNgay();
-                                                //DSDiTreVeSomNgay_MT();
                                                 break;
                                             }
                                         default:

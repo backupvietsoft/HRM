@@ -65,7 +65,7 @@ namespace Vs.TimeAttendance
 
             DataTable dCa = new DataTable();
             RepositoryItemLookUpEdit cboCa = new RepositoryItemLookUpEdit();
-            dCa.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT DISTINCT ID_CDLV, CA,GIO_BD,GIO_KT FROM CHE_DO_LAM_VIEC"));
+            dCa.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT DISTINCT ID_CDLV, CA ,GIO_BD,GIO_KT FROM CHE_DO_LAM_VIEC"));
 
             cboCa.NullText = "";
             cboCa.ValueMember = "ID_CDLV";
@@ -144,6 +144,7 @@ namespace Vs.TimeAttendance
                     Commons.Modules.ObjSystems.MLoadXtraGrid(grdData, grvCDCCNV, dt, true, false, true, false, true, this.Name);
                     dt_Temp = ((DataTable)grdData.DataSource).Copy();
                     dt.Columns["NGAY_AD"].ReadOnly = false;
+                    dt.Columns["CA"].ReadOnly = false;
                 }
                 else
                 {
@@ -494,7 +495,10 @@ namespace Vs.TimeAttendance
 
         private void cboNgay_EditValueChanged(object sender, EventArgs e)
         {
+            if (Commons.Modules.sPS == "0Load") return;
+            Commons.Modules.sPS = "0Load";
             LoadGrdCDCCNV();
+            Commons.Modules.sPS = "";
         }
 
         private void grvCDCCNV_RowCountChanged(object sender, EventArgs e)

@@ -118,9 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="xrLabel80.ExpressionBindings" xml:space="preserve">
-    <value>'- Thử việc từ ngày ' + GetDay([DATA].[NGAY_BAT_DAU_HD]) + ' Tháng ' + GetMonth([DATA].[NGAY_BAT_DAU_HD]) + ' Năm ' + GetYear([DATA].[NGAY_BAT_DAU_HD]) + '   đến ngày   ' + GetDay([DATA].[NGAY_HET_HD]) + ' tháng ' + GetMonth([DATA].[NGAY_HET_HD]) + ' năm ' + GetYear([DATA].[NGAY_HET_HD])
-
-</value>
+    <value>'- Thử việc từ ngày ' + GetDay([DATA].[NGAY_BD_THU_VIEC]) + ' Tháng ' + GetMonth([DATA].[NGAY_BD_THU_VIEC]) + ' Năm ' + GetYear([DATA].[NGAY_BD_THU_VIEC]) + '   đến ngày   ' + GetDay([DATA].[NGAY_KT_THU_VIEC]) + ' tháng ' + GetMonth([DATA].[NGAY_KT_THU_VIEC]) + ' năm ' + GetYear([DATA].[NGAY_KT_THU_VIEC])</value>
   </data>
   <data name="xrLabel84.ExpressionBindings" xml:space="preserve">
     <value>'- Hợp đồng lao động này làm thành 02 bản có giá trị ngang nhau, mỗi bên giữ một bản và có hiệu lực từ ngày ' + GetDay([DATA].[NGAY_BAT_DAU_HD]) + ' tháng ' + GetMonth([DATA].[NGAY_BAT_DAU_HD]) + ' năm ' + GetYear([DATA].[NGAY_BAT_DAU_HD]) + '   đến ngày   ' + GetDay([DATA].[NGAY_HET_HD]) + ' tháng ' + GetMonth([DATA].[NGAY_HET_HD]) + ' năm ' + GetYear([DATA].[NGAY_HET_HD]) + '. Khi hai bên ' + [NOI_DUNG].[24]

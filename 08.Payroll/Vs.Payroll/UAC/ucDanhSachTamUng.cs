@@ -25,7 +25,8 @@ namespace Vs.Payroll
     public partial class ucDanhSachTamUng : DevExpress.XtraEditors.XtraUserControl
     {
         private static bool isAdd = false;
-        
+        private static int type = 1;
+
         public static ucDanhSachTamUng _instance;
         public static ucDanhSachTamUng Instance
         {
@@ -45,16 +46,23 @@ namespace Vs.Payroll
 
         private void ucDanhSachTamUng_Load(object sender, EventArgs e)
         {
-            Commons.Modules.sPS = "0Load";
-            LoadThang();
-            LoadDot();
-            Commons.Modules.ObjSystems.LoadCboDonVi(cboDonVi);
-            Commons.Modules.ObjSystems.LoadCboXiNghiep(cboDonVi, cboXiNghiep);
-            Commons.Modules.ObjSystems.LoadCboTo(cboDonVi, cboXiNghiep, cboTo);
-            LoadDanhSachTamUng();
-            
-            EnableButon(isAdd); 
-            Commons.Modules.sPS = "";
+            try
+            {
+
+                Commons.Modules.sPS = "0Load";
+                LoadThang();
+                LoadDot();
+                string strSQL = "SELECT DISTINCT NGAY_TINH_CONG FROM dbo.TAM_UNG WHERE THANG = '" + Convert.ToDateTime(cboThang.EditValue).ToString("MM/dd/yyyy") + "' AND DOT = " + cboDot.EditValue + "";
+                try { datTINH_CONG_DN.EditValue = Convert.ToDateTime(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, strSQL)) == DateTime.MinValue ? DateTime.Now : Convert.ToDateTime(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, strSQL)); } catch { datTINH_CONG_DN.EditValue = DateTime.Now; }
+                Commons.Modules.ObjSystems.LoadCboDonVi(cboDonVi);
+                Commons.Modules.ObjSystems.LoadCboXiNghiep(cboDonVi, cboXiNghiep);
+                Commons.Modules.ObjSystems.LoadCboTo(cboDonVi, cboXiNghiep, cboTo);
+                LoadDanhSachTamUng();
+
+                EnableButon(isAdd);
+                Commons.Modules.sPS = "";
+            }
+            catch { }
         }
 
         private void LoadDanhSachTamUng()
@@ -65,9 +73,8 @@ namespace Vs.Payroll
                 
                 if (isAdd)
                 {
-
-                    dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spAddDanhSachTamUng", Convert.ToDateTime(cboThang.EditValue),
-                                                cboDonVi.EditValue, cboXiNghiep.EditValue, cboTo.EditValue, cboDot.EditValue, Commons.Modules.UserName, Commons.Modules.TypeLanguage));
+                    dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spAddDanhSachTamUng", Convert.ToDateTime(cboThang.EditValue), Convert.ToDateTime(datTINH_CONG_DN.EditValue),
+                                                cboDonVi.EditValue, cboXiNghiep.EditValue, cboTo.EditValue, cboDot.EditValue, Commons.Modules.UserName, Commons.Modules.TypeLanguage, type));
 
                     dt.Columns["MS_CN"].ReadOnly = true;
                     dt.Columns["HO_TEN"].ReadOnly = true;
@@ -161,9 +168,18 @@ namespace Vs.Payroll
             XtraUserControl ctl = new XtraUserControl();
             switch (btn.Tag.ToString())
             {
+                case "tinhtamung":
+                    {
+                        isAdd = true;
+                        EnableButon(isAdd);
+                        type = 2;
+                        LoadDanhSachTamUng();
+                        break;
+                    }
                 case "them":
                     {
                         isAdd = true;
+                        type = 1;
                         LoadDanhSachTamUng();
                         Commons.Modules.ObjSystems.AddnewRow(grvData,false);
                         EnableButon(isAdd);
@@ -232,11 +248,13 @@ namespace Vs.Payroll
             btnALL.Buttons[1].Properties.Visible = !visible;
             btnALL.Buttons[2].Properties.Visible = !visible;
             btnALL.Buttons[3].Properties.Visible = !visible;
-            btnALL.Buttons[4].Properties.Visible = visible;
-            btnALL.Buttons[5].Properties.Visible = visible;
-            btnALL.Buttons[6].Properties.Visible = !visible;
-            btnALL.Buttons[7].Properties.Visible = !visible;
+            btnALL.Buttons[4].Properties.Visible = !visible;
+            btnALL.Buttons[5].Properties.Visible = !visible;
+            btnALL.Buttons[6].Properties.Visible = visible;
+            btnALL.Buttons[7].Properties.Visible = visible;
             btnALL.Buttons[8].Properties.Visible = !visible;
+            btnALL.Buttons[9].Properties.Visible = !visible;
+            btnALL.Buttons[10].Properties.Visible = !visible;
             cboTo.Enabled = !visible;
             cboThang.Enabled = !visible;
             cboDonVi.Enabled = !visible;
@@ -282,12 +300,12 @@ namespace Vs.Payroll
             {
                 
                 Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sTB, Commons.Modules.ObjSystems.ConvertDatatable(grvData), "");
-                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spSaveDanhSachTamUng", sTB);
+                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spSaveDanhSachTamUng", sTB, Convert.ToDateTime(cboThang.EditValue),cboDot.EditValue, Convert.ToDateTime(datTINH_CONG_DN.EditValue));
                 Commons.Modules.ObjSystems.XoaTable(sTB);
 
                 return true;
             }
-            catch
+            catch (Exception ex)
             {
                 return false;
             }
@@ -317,6 +335,8 @@ namespace Vs.Payroll
             if (Commons.Modules.sPS == "0Load") return;
             Commons.Modules.sPS = "0Load";
             LoadDanhSachTamUng();
+            string strSQL = "SELECT DISTINCT NGAY_TINH_CONG FROM dbo.TAM_UNG WHERE THANG = '" + Convert.ToDateTime(cboThang.EditValue).ToString("MM/dd/yyyy") + "' AND DOT = " + cboDot.EditValue + "";
+            datTINH_CONG_DN.EditValue = Convert.ToDateTime(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, strSQL)) == DateTime.MinValue ? DateTime.Now : Convert.ToDateTime(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, strSQL));
             //EnableButon(true);
             Commons.Modules.sPS = "";
         }
@@ -388,6 +408,8 @@ namespace Vs.Payroll
             if (Commons.Modules.sPS == "0Load") return;
             Commons.Modules.sPS = "0Load";
             LoadDanhSachTamUng();
+            string strSQL = "SELECT DISTINCT NGAY_TINH_CONG FROM dbo.TAM_UNG WHERE THANG = '"+Convert.ToDateTime(cboThang.EditValue).ToString("MM/dd/yyyy")+"' AND DOT = "+cboDot.EditValue+"";
+            datTINH_CONG_DN.EditValue = Convert.ToDateTime(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, strSQL)) == DateTime.MinValue ? DateTime.Now : Convert.ToDateTime(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, strSQL));
             Commons.Modules.sPS = "";
         }
 

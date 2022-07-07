@@ -68,7 +68,7 @@
             this.grdDanhMuc.MainView = this.grvDanhMuc;
             this.grdDanhMuc.Margin = new System.Windows.Forms.Padding(2);
             this.grdDanhMuc.Name = "grdDanhMuc";
-            this.grdDanhMuc.Size = new System.Drawing.Size(883, 403);
+            this.grdDanhMuc.Size = new System.Drawing.Size(770, 340);
             this.grdDanhMuc.TabIndex = 2;
             this.grdDanhMuc.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grvDanhMuc});
@@ -79,7 +79,7 @@
             // grvDanhMuc
             // 
             this.grvDanhMuc.ColumnPanelRowHeight = 1;
-            this.grvDanhMuc.DetailHeight = 227;
+            this.grvDanhMuc.DetailHeight = 193;
             this.grvDanhMuc.FixedLineWidth = 1;
             this.grvDanhMuc.GridControl = this.grdDanhMuc;
             this.grvDanhMuc.Name = "grvDanhMuc";
@@ -90,7 +90,6 @@
             this.grvDanhMuc.OptionsPrint.AllowMultilineHeaders = true;
             this.grvDanhMuc.OptionsScrollAnnotations.ShowCustomAnnotations = DevExpress.Utils.DefaultBoolean.True;
             this.grvDanhMuc.OptionsScrollAnnotations.ShowErrors = DevExpress.Utils.DefaultBoolean.True;
-            this.grvDanhMuc.OptionsScrollAnnotations.ShowFocusedRow = DevExpress.Utils.DefaultBoolean.True;
             this.grvDanhMuc.OptionsScrollAnnotations.ShowSelectedRows = DevExpress.Utils.DefaultBoolean.True;
             this.grvDanhMuc.OptionsView.RowAutoHeight = true;
             this.grvDanhMuc.OptionsView.ShowAutoFilterRow = true;
@@ -107,7 +106,7 @@
             this.NONNlab_Link.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             this.NONNlab_Link.Location = new System.Drawing.Point(1, -1);
             this.NONNlab_Link.Name = "NONNlab_Link";
-            this.NONNlab_Link.Size = new System.Drawing.Size(1133, 22);
+            this.NONNlab_Link.Size = new System.Drawing.Size(991, 19);
             this.NONNlab_Link.StyleController = this.layoutControl1;
             this.NONNlab_Link.TabIndex = 1;
             this.NONNlab_Link.Text = "labelControl1";
@@ -121,7 +120,7 @@
             this.layoutControl1.Margin = new System.Windows.Forms.Padding(2);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.Root = this.Root;
-            this.layoutControl1.Size = new System.Drawing.Size(1135, 467);
+            this.layoutControl1.Size = new System.Drawing.Size(993, 397);
             this.layoutControl1.TabIndex = 5;
             this.layoutControl1.Text = "layoutControl1";
             // 
@@ -130,10 +129,10 @@
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Controls.Add(this.windowsUIButton);
             this.panel1.Controls.Add(this.accorMenuleft);
-            this.panel1.Location = new System.Drawing.Point(1, 23);
+            this.panel1.Location = new System.Drawing.Point(2, 21);
             this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1133, 443);
+            this.panel1.Size = new System.Drawing.Size(989, 374);
             this.panel1.TabIndex = 3;
             // 
             // panel2
@@ -141,9 +140,9 @@
             this.panel2.Controls.Add(this.panel3);
             this.panel2.Controls.Add(this.grdDanhMuc);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(250, 0);
+            this.panel2.Location = new System.Drawing.Point(219, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(883, 403);
+            this.panel2.Size = new System.Drawing.Size(770, 340);
             this.panel2.TabIndex = 12;
             // 
             // panel3
@@ -151,7 +150,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(883, 403);
+            this.panel3.Size = new System.Drawing.Size(770, 340);
             this.panel3.TabIndex = 5;
             // 
             // windowsUIButton
@@ -175,7 +174,7 @@
             windowsUIButtonImageOptions1.ImageUri.Uri = "AddItem";
             windowsUIButtonImageOptions2.ImageUri.Uri = "Edit;Size32x32;GrayScaled";
             windowsUIButtonImageOptions3.ImageUri.Uri = "snap/snapdeletelist";
-            windowsUIButtonImageOptions4.ImageUri.Uri = "Preview;Size32x32;GrayScaled";
+            windowsUIButtonImageOptions4.ImageUri.Uri = "ExportToXLSX";
             windowsUIButtonImageOptions5.ImageUri.Uri = "richedit/clearheaderandfooter";
             this.windowsUIButton.Buttons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] {
             new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions1, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "them", -1, false),
@@ -189,12 +188,12 @@
             this.windowsUIButton.Controls.Add(this.searchControl1);
             this.windowsUIButton.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.windowsUIButton.ForeColor = System.Drawing.Color.White;
-            this.windowsUIButton.Location = new System.Drawing.Point(250, 403);
-            this.windowsUIButton.Margin = new System.Windows.Forms.Padding(5, 8, 5, 8);
-            this.windowsUIButton.MaximumSize = new System.Drawing.Size(0, 92);
-            this.windowsUIButton.MinimumSize = new System.Drawing.Size(10, 10);
+            this.windowsUIButton.Location = new System.Drawing.Point(219, 340);
+            this.windowsUIButton.Margin = new System.Windows.Forms.Padding(4, 7, 4, 7);
+            this.windowsUIButton.MaximumSize = new System.Drawing.Size(0, 78);
+            this.windowsUIButton.MinimumSize = new System.Drawing.Size(9, 9);
             this.windowsUIButton.Name = "windowsUIButton";
-            this.windowsUIButton.Size = new System.Drawing.Size(883, 40);
+            this.windowsUIButton.Size = new System.Drawing.Size(770, 34);
             this.windowsUIButton.TabIndex = 11;
             this.windowsUIButton.Text = "windowsUIButtonPanel";
             this.windowsUIButton.UseButtonBackgroundImages = false;
@@ -204,13 +203,13 @@
             // 
             this.searchControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.searchControl1.Client = this.grdDanhMuc;
-            this.searchControl1.Location = new System.Drawing.Point(3, 11);
+            this.searchControl1.Location = new System.Drawing.Point(3, 9);
             this.searchControl1.Name = "searchControl1";
             this.searchControl1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Repository.ClearButton(),
             new DevExpress.XtraEditors.Repository.SearchButton()});
             this.searchControl1.Properties.Client = this.grdDanhMuc;
-            this.searchControl1.Size = new System.Drawing.Size(220, 26);
+            this.searchControl1.Size = new System.Drawing.Size(192, 24);
             this.searchControl1.TabIndex = 0;
             // 
             // accorMenuleft
@@ -227,7 +226,7 @@
             this.accorMenuleft.ScrollBarMode = DevExpress.XtraBars.Navigation.ScrollBarMode.Auto;
             this.accorMenuleft.ShowFilterControl = DevExpress.XtraBars.Navigation.ShowFilterControl.Always;
             this.accorMenuleft.ShowItemExpandButtons = false;
-            this.accorMenuleft.Size = new System.Drawing.Size(250, 443);
+            this.accorMenuleft.Size = new System.Drawing.Size(219, 374);
             this.accorMenuleft.TabIndex = 3;
             this.accorMenuleft.ViewType = DevExpress.XtraBars.Navigation.AccordionControlViewType.HamburgerMenu;
             // 
@@ -240,15 +239,15 @@
             this.layoutControlItem2});
             this.Root.Name = "Root";
             this.Root.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            this.Root.Size = new System.Drawing.Size(1135, 467);
+            this.Root.Size = new System.Drawing.Size(993, 397);
             this.Root.TextVisible = false;
             // 
             // layoutControlItem1
             // 
             this.layoutControlItem1.Control = this.panel1;
-            this.layoutControlItem1.Location = new System.Drawing.Point(0, 22);
+            this.layoutControlItem1.Location = new System.Drawing.Point(0, 19);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(1135, 445);
+            this.layoutControlItem1.Size = new System.Drawing.Size(993, 378);
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
             // 
@@ -256,21 +255,21 @@
             // 
             this.layoutControlItem2.Control = this.NONNlab_Link;
             this.layoutControlItem2.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlItem2.MinSize = new System.Drawing.Size(94, 22);
+            this.layoutControlItem2.MinSize = new System.Drawing.Size(82, 19);
             this.layoutControlItem2.Name = "layoutControlItem2";
             this.layoutControlItem2.Padding = new DevExpress.XtraLayout.Utils.Padding(1, 1, -1, 1);
-            this.layoutControlItem2.Size = new System.Drawing.Size(1135, 22);
+            this.layoutControlItem2.Size = new System.Drawing.Size(993, 19);
             this.layoutControlItem2.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem2.TextVisible = false;
             // 
             // ucListDMuc
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.layoutControl1);
             this.Name = "ucListDMuc";
-            this.Size = new System.Drawing.Size(1135, 467);
+            this.Size = new System.Drawing.Size(993, 397);
             this.Load += new System.EventHandler(this.ucListUser_Load);
             this.Resize += new System.EventHandler(this.ucListDMuc_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.grdDanhMuc)).EndInit();

@@ -23,7 +23,15 @@ namespace Vs.Payroll
         private void frmEditCHUYEN_Load(object sender, EventArgs e)
         {
             LoadCombobox();
-            if (!bAddEditTo) LoadText();
+            if (!bAddEditTo)
+            {
+                LoadText();
+            }
+            else
+            {
+                string strSQL = "SELECT MAX(STT) FROM dbo.CHUYEN";
+                txtSTT.EditValue = (string.IsNullOrEmpty(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, strSQL).ToString()) ? 0 : Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, strSQL))) + 1;
+            }
         }
         private void LoadCombobox()
         {

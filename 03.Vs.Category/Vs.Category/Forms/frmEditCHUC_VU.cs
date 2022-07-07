@@ -22,7 +22,15 @@ namespace Vs.Category
         private void frmEditCHUC_VU_Load(object sender, EventArgs e)
         {
             LoadLoaiCV();
-            if (!bAddEditCV) LoadText();
+            if (!bAddEditCV)
+            {
+                LoadText();
+            }
+            else
+            {
+                string strSQL = "SELECT MAX(STT_IN_CV) FROM dbo.CHUC_VU";
+                STT_IN_CVTextEdit.EditValue = (string.IsNullOrEmpty(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, strSQL).ToString()) ? 0 : Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, strSQL))) + 1;
+            }
             Commons.Modules.ObjSystems.ThayDoiNN(this, layoutControlGroup1, btnALL);
 
         }

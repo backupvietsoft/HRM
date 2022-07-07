@@ -28,7 +28,15 @@ namespace Vs.Category
         {
             LoadCombo();
             LoadCheDoNghi();
-            if (!AddEdit) LoadText();
+            if (!AddEdit)
+            {
+                LoadText();
+            }
+            else
+            {
+                string strSQL = "SELECT MAX(STT_LDV) FROM dbo.LY_DO_VANG";
+                STT_LDVTextEdit.EditValue = (string.IsNullOrEmpty(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, strSQL).ToString()) ? 0 : Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, strSQL))) + 1;
+            }
             Commons.Modules.ObjSystems.ThayDoiNN(this, layoutControlGroup1, btnALL);
         }
         private void frmEditLY_DO_VANG_Resize(object sender, EventArgs e) => dataLayoutControl1.Refresh();

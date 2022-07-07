@@ -26,7 +26,15 @@ namespace Vs.Category
 
         private void frmEditTINH_TRANG_HT_Load(object sender, EventArgs e)
         {
-            if (!bAddEditTTHT) LoadText();
+            if (!bAddEditTTHT)
+            {
+                LoadText();
+            }
+            else
+            {
+                string strSQL = "SELECT MAX(STT) FROM dbo.TINH_TRANG_HT";
+                STTTextEdit.EditValue = (string.IsNullOrEmpty(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, strSQL).ToString()) ? 0 : Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, strSQL))) + 1;
+            }
             Commons.Modules.ObjSystems.ThayDoiNN(this, layoutControlGroup1, btnALL);
         }
         private void frmEditTINH_TRANG_HT_Resize(object sender, EventArgs e) => dataLayoutControl1.Refresh();

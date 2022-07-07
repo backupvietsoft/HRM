@@ -22,7 +22,15 @@ namespace Vs.Category
         private void frmEditTO_Load(object sender, EventArgs e)
         {
             LoadXiNghiep();
-            if (!bAddEditTo) LoadText();
+            if (!bAddEditTo)
+            {
+                LoadText();
+            }
+            else
+            {
+                string strSQL = "SELECT MAX(STT_TO) FROM dbo.[TO]";
+                STT_TOTextEdit.EditValue = (string.IsNullOrEmpty(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, strSQL).ToString()) ? 0 : Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, strSQL))) + 1;
+            }
             Commons.Modules.ObjSystems.ThayDoiNN(this, layoutControlGroup1, btnALL);
         }
         private void LoadXiNghiep()

@@ -21,7 +21,15 @@ namespace Vs.Category
         
         private void frmEditLOAI_KHEN_THUONG_Load(object sender, EventArgs e)
         {
-            if (!AddEdit) LoadText();
+            if (!AddEdit)
+            {
+                LoadText();
+            }
+            else
+            {
+                string strSQL = "SELECT MAX(STT) FROM dbo.LOAI_KHEN_THUONG";
+                txtSTT.EditValue = (string.IsNullOrEmpty(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, strSQL).ToString()) ? 0 : Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, strSQL))) + 1;
+            }
             Commons.Modules.ObjSystems.ThayDoiNN(this, layoutControlGroup1, btnALL);
         }
 

@@ -107,7 +107,10 @@ namespace Vs.Category
         private void frmEditLUONG_TOI_THIEU_Load(object sender, EventArgs e)
         {
             LoadDonVi();
-            if (!AddEdit) LoadText();
+            if (!AddEdit)
+            {
+                LoadText();
+            }
             Commons.Modules.ObjSystems.ThayDoiNN(this, layoutControlGroup1, btnALL);
             Commons.OSystems.SetDateEditFormat(NGAY_QDDateEdit);
         }

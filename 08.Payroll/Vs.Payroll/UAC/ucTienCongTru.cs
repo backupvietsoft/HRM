@@ -17,6 +17,7 @@ using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraEditors.Mask;
 using DevExpress.XtraLayout;
 using DevExpress.Utils;
+using DevExpress.Utils.Menu;
 
 namespace Vs.Payroll
 {
@@ -268,7 +269,6 @@ namespace Vs.Payroll
             cboThang.Enabled = !visible;
             cboDonVi.Enabled = !visible;
             cboXiNghiep.Enabled = !visible;
-            textEdit1.Enabled = visible;
         }
 
         private void XoaCheDoLV()
@@ -412,52 +412,21 @@ namespace Vs.Payroll
             //EnableButon(true);
             Commons.Modules.sLoad = "";
         }
-
-        private void textEdit1_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                NhapNhanh();
-                Commons.Modules.ObjSystems.AddnewRow(grvData, false);
-            }
-        }
-        private void NhapNhanh()
-
-        {
-            string Nhap = grvData.FocusedColumn.FieldName.ToString();
-            DataTable dt = new DataTable();
-            dt = grvData.DataSource as DataTable;
-
-            try
-            {
-                int i;
-                i = 0;
-                for (i = 0; i < grvData.RowCount; i++)
-                {
-                    grvData.SetRowCellValue(i, Nhap, float.Parse(textEdit1.Text));
-                    grvData.UpdateCurrentRow();
-                }
-            }
-            catch (Exception ex)
-            {
-            }
-        }
-
         private void grvData_RowCountChanged(object sender, EventArgs e)
         {
             GridView view = sender as GridView;
             try
             {
-                int index = sumNV.Text.IndexOf(':');
+                int index = ItemForSumNhanVien.Text.IndexOf(':');
                 if (index > 0)
                 {
                     if (view.RowCount > 0)
                     {
-                        sumNV.Text = sumNV.Text.Substring(0, index) + ": " + view.RowCount.ToString();
+                        ItemForSumNhanVien.Text = ItemForSumNhanVien.Text.Substring(0, index) + ": " + view.RowCount.ToString();
                     }
                     else
                     {
-                        sumNV.Text = sumNV.Text.Substring(0, index) + ": 0";
+                        ItemForSumNhanVien.Text = ItemForSumNhanVien.Text.Substring(0, index) + ": 0";
                     }
 
                 }
@@ -467,5 +436,64 @@ namespace Vs.Payroll
                 XtraMessageBox.Show(ex.Message.ToString());
             }
         }
+
+        #region chuotphai
+        class RowInfo
+        {
+            public RowInfo(DevExpress.XtraGrid.Views.Grid.GridView view, int rowHandle)
+            {
+                this.RowHandle = rowHandle;
+                this.View = view;
+            }
+
+
+            public DevExpress.XtraGrid.Views.Grid.GridView View;
+            public int RowHandle;
+        }
+        //Nhap ung vien
+        public DXMenuItem MCreateMenuNhapUngVien(DevExpress.XtraGrid.Views.Grid.GridView view, int rowHandle)
+        {
+            string sStr = Commons.Modules.ObjLanguages.GetLanguage(Commons.Modules.ModuleName, "ucTienCongTru", "CapNhatTien", Commons.Modules.TypeLanguage);
+            DXMenuItem menuCapNhat = new DXMenuItem(sStr, new EventHandler(CapNhat));
+            menuCapNhat.Tag = new RowInfo(view, rowHandle);
+            return menuCapNhat;
+        }
+        public void CapNhat(object sender, EventArgs e)
+        {
+            try
+            {
+                string sCotCN = grvData.FocusedColumn.FieldName;
+                if (grvData.GetFocusedRowCellValue(grvData.FocusedColumn.FieldName).ToString() == "") return;
+                string sBTCongNhan = "sBTCongNhan" + Commons.Modules.UserName;
+                Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBTCongNhan, (DataTable)grdData.DataSource, "");
+
+                DataTable dt = new DataTable();
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spUpdateChuotPhaiTIEN_CONG_TRU", sBTCongNhan, sCotCN, Convert.ToDouble(grvData.GetFocusedRowCellValue(grvData.FocusedColumn.FieldName))));
+                grdData.DataSource = dt;
+            }
+            catch (Exception EX) { }
+        }
+
+        private void grvData_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
+        {
+            try
+            {
+                if (btnALL.Buttons[0].Properties.Visible == true) return;
+                if (grvData.FocusedColumn.FieldName == "THANG" || grvData.FocusedColumn.FieldName == "MS_CN" || grvData.FocusedColumn.FieldName == "HO_TEN" || grvData.FocusedColumn.FieldName == "CONG_KHAC_TM") return;
+                DevExpress.XtraGrid.Views.Grid.GridView view = sender as DevExpress.XtraGrid.Views.Grid.GridView;
+                if (e.MenuType == DevExpress.XtraGrid.Views.Grid.GridMenuType.Row)
+                {
+                    int irow = e.HitInfo.RowHandle;
+                    e.Menu.Items.Clear();
+
+                    DevExpress.Utils.Menu.DXMenuItem itemNhap = MCreateMenuNhapUngVien(view, irow);
+                    e.Menu.Items.Add(itemNhap);
+                }
+            }
+            catch
+            {
+            }
+        }
+        #endregion
     }
 }

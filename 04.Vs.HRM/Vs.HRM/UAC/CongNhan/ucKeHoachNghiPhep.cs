@@ -278,10 +278,10 @@ namespace Vs.HRM
         private void UpdateKeHoachNghiPhep()
         {
 
-            Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, "tabKHNP" + Commons.Modules.UserName, Commons.Modules.ObjSystems.ConvertDatatable(grdKHNP), "");
-            string sSql = "UPDATE A set A.TU_NGAY = B.TU_NGAY, A.DEN_NGAY = B.DEN_NGAY,A.NGAY_VAO_LAM_LAI = b.NGAY_VAO_LAM_LAI,SO_GIO = b.SO_GIO,a.GHI_CHU = b.GHI_CHU from dbo.KE_HOACH_NGHI_PHEP A, dbo.tabKHNP" + Commons.Modules.UserName + " B where B.ID_KHNP = A.ID_KHNP and A.ID_CN = " + grvDSCN.GetFocusedRowCellValue("ID_CN") + " INSERT INTO dbo.KE_HOACH_NGHI_PHEP(ID_LDV, ID_CN, TU_NGAY, DEN_NGAY, NGAY_VAO_LAM_LAI, SO_NGAY, SO_GIO, GHI_CHU) SELECT ID_LDV," + grvDSCN.GetFocusedRowCellValue("ID_CN") + ",TU_NGAY,DEN_NGAY,NGAY_VAO_LAM_LAI,NULL,SO_GIO,GHI_CHU FROM tabKHNP" + Commons.Modules.UserName + " WHERE ID_KHNP NOT IN(SELECT ID_KHNP FROM dbo.KE_HOACH_NGHI_PHEP WHERE ID_CN = " + grvDSCN.GetFocusedRowCellValue("ID_CN") + ")";
-            SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, sSql);
-            Commons.Modules.ObjSystems.XoaTable("tabKHNP" + Commons.Modules.UserName);
+            Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, "tabKHNP" + Commons.Modules.iIDUser, Commons.Modules.ObjSystems.ConvertDatatable(grdKHNP), "");
+            string sSql = "UPDATE A set A.TU_NGAY = B.TU_NGAY, A.DEN_NGAY = B.DEN_NGAY,A.NGAY_VAO_LAM_LAI = b.NGAY_VAO_LAM_LAI,SO_GIO = b.SO_GIO,a.GHI_CHU = b.GHI_CHU from dbo.KE_HOACH_NGHI_PHEP A, dbo.tabKHNP" + Commons.Modules.iIDUser + " B where B.ID_KHNP = A.ID_KHNP and A.ID_CN = " + grvDSCN.GetFocusedRowCellValue("ID_CN") + " INSERT INTO dbo.KE_HOACH_NGHI_PHEP(ID_LDV, ID_CN, TU_NGAY, DEN_NGAY, NGAY_VAO_LAM_LAI, SO_NGAY, SO_GIO, GHI_CHU) SELECT ID_LDV," + grvDSCN.GetFocusedRowCellValue("ID_CN") + ",TU_NGAY,DEN_NGAY,NGAY_VAO_LAM_LAI,NULL,SO_GIO,GHI_CHU FROM tabKHNP" + Commons.Modules.iIDUser + " WHERE ID_KHNP NOT IN(SELECT ID_KHNP FROM dbo.KE_HOACH_NGHI_PHEP WHERE ID_CN = " + grvDSCN.GetFocusedRowCellValue("ID_CN") + ")";
+            SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spUpdateKHNP", "tabKHNP" + Commons.Modules.iIDUser,Convert.ToInt64(grvDSCN.GetFocusedRowCellValue("ID_CN")));
+            Commons.Modules.ObjSystems.XoaTable("tabKHNP" + Commons.Modules.iIDUser);
             //LoadGrdKHNP();
         }
         private void LoadCapNhatPhep()
@@ -425,13 +425,11 @@ namespace Vs.HRM
                     {
                         try
                         {
-
-
-                            grvKHNP.PostEditor();
+                            grvKHNP.CloseEditor();
                             grvKHNP.UpdateCurrentRow();
                             int idcn = Convert.ToInt32(grvDSCN.GetFocusedRowCellValue("ID_CN"));
                             DataTable dt = new DataTable();
-                            dt = Commons.Modules.ObjSystems.ConvertDatatable(grdKHNP).AsEnumerable().OrderBy(x => x.Field<DateTime>("TU_NGAY")).CopyToDataTable();
+                            dt = Commons.Modules.ObjSystems.ConvertDatatable(grvKHNP).AsEnumerable().Where(x=>x["TU_NGAY"].ToString()!="").OrderBy(x => x.Field<DateTime>("TU_NGAY")).CopyToDataTable();
                             bool kt = true;
                             if (dt.Columns["ID_LDV"].ToString() == "")
                             {
@@ -454,8 +452,9 @@ namespace Vs.HRM
                                     }
                                 }
                             }
-                            catch (Exception)
+                            catch (Exception ex)
                             {
+                                kt = false;
                             }
 
 
@@ -469,7 +468,7 @@ namespace Vs.HRM
                                 grvKHNP.RefreshData();
                                 enableButon(true);
                                 UpdateKeHoachNghiPhep();
-                                DeleteAddRow(grvKHNP);
+                                Commons.Modules.ObjSystems.DeleteAddRow(grvKHNP);
                             }
 
                             UpdateTinhTrangNghiPhep(Convert.ToInt32(grvDSCN.GetFocusedRowCellValue("ID_CN")));
@@ -824,7 +823,7 @@ namespace Vs.HRM
 
         private void grvKHNP_InvalidValueException(object sender, DevExpress.XtraEditors.Controls.InvalidValueExceptionEventArgs e)
         {
-            //e.ExceptionMode = DevExpress.XtraEditors.Controls.ExceptionMode.NoAction;
+            e.ExceptionMode = DevExpress.XtraEditors.Controls.ExceptionMode.NoAction;
         }
 
         private void grvDSCN_RowCountChanged(object sender, EventArgs e)

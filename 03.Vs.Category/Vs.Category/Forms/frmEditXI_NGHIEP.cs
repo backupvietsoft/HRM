@@ -32,6 +32,11 @@ namespace Vs.Category
                 LoadText();
                
             }
+            else
+            {
+                string strSQL = "SELECT MAX(STT_XN) FROM dbo.XI_NGHIEP";
+                STT_XNTextEdit.EditValue = (string.IsNullOrEmpty(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, strSQL).ToString()) ? 0 : Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, strSQL))) + 1;
+            }
             Commons.Modules.ObjSystems.ThayDoiNN(this, layoutControlGroup1, btnALL);
 
         }

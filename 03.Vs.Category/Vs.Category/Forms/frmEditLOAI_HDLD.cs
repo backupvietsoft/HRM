@@ -28,7 +28,15 @@ namespace Vs.Category
         private void frmEditLOAI_HDLD_Load(object sender, EventArgs e)
         {
             LoadCombo();
-            if (!bAddEditLHD) LoadText();
+            if (!bAddEditLHD)
+            {
+                LoadText();
+            }
+            else
+            {
+                string strSQL = "SELECT MAX(STT) FROM dbo.LOAI_HDLD";
+                txtSTT.EditValue = (string.IsNullOrEmpty(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, strSQL).ToString()) ? 0 : Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, strSQL))) + 1;
+            }
             Commons.Modules.ObjSystems.ThayDoiNN(this, layoutControlGroup1, btnALL);
         }
         private void frmEditLOAI_HDLD_Resize(object sender, EventArgs e) => dataLayoutControl1.Refresh();

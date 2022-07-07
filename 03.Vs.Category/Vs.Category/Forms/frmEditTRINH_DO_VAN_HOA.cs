@@ -27,7 +27,15 @@ namespace Vs.Category
         private void frmEditTRINH_DO_VAN_HOA_Load(object sender, EventArgs e)
         {
             LoadLoaiTD();
-            if (!AddEdit) LoadText();
+            if (!AddEdit)
+            {
+                LoadText();
+            }
+            else
+            {
+                string strSQL = "SELECT MAX(STT) FROM dbo.TRINH_DO_VAN_HOA";
+                txtSTT.EditValue = (string.IsNullOrEmpty(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, strSQL).ToString()) ? 0 : Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, strSQL))) + 1;
+            }
             Commons.Modules.ObjSystems.ThayDoiNN(this, layoutControlGroup1, btnALL);
         }
 

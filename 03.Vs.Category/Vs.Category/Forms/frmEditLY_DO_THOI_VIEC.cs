@@ -27,7 +27,15 @@ namespace Vs.Category
         private void frmEditLY_DO_THOI_VIEC_Load(object sender, EventArgs e)
         {
             LoadCombo();
-            if (!AddEdit) LoadText();
+            if (!AddEdit)
+            {
+                LoadText();
+            }
+            else
+            {
+                string strSQL = "SELECT MAX(STT) FROM dbo.LY_DO_THOI_VIEC";
+                txtSTT.EditValue = (string.IsNullOrEmpty(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, strSQL).ToString()) ? 0 : Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, strSQL))) + 1;
+            }
             Commons.Modules.ObjSystems.ThayDoiNN(this, layoutControlGroup1, btnALL);
         }
         private void frmEditLY_DO_THOI_VIEC_Resize(object sender, EventArgs e) => dataLayoutControl1.Refresh();

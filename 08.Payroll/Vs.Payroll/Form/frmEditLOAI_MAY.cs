@@ -34,6 +34,8 @@ namespace Vs.Payroll
             else
             {
                 SD_TRONG_QTCNCheckEdit.Checked = true;
+                string strSQL = "SELECT MAX(STT_MAY) FROM dbo.LOAI_MAY";
+                THU_TU_MAYTextEdit.EditValue = (string.IsNullOrEmpty(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, strSQL).ToString()) ? 0 : Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, strSQL))) + 1;
             }
 
             Commons.Modules.ObjSystems.ThayDoiNN(this, layoutControlGroup1, btnALL);

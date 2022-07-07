@@ -28,7 +28,7 @@ namespace Vs.HRM
         //sự kiên load form
         private void frmInQuyetDinhThoiViec_Load(object sender, EventArgs e)
         {
-            if (Commons.Modules.ObjSystems.KyHieuDV_CN(Convert.ToInt64(iID_CN)) != "MT")
+            if (Commons.Modules.ObjSystems.KyHieuDV_CN(Convert.ToInt64(iID_CN)) == "SB")
             {
                 rdo_ChonBaoCao.Properties.Items.RemoveAt(5);
                 rdo_ChonBaoCao.Properties.Items.RemoveAt(4);

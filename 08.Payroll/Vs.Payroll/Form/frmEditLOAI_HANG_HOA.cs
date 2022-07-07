@@ -27,7 +27,15 @@ namespace Vs.Payroll
         private void frmEditLOAI_HANG_HOA_Load(object sender, EventArgs e)
         {
             LoadcboID_NHH();
-            if (!AddEdit) LoadText();
+            if (!AddEdit)
+            {
+                LoadText();
+            }
+            else
+            {
+                string strSQL = "SELECT MAX(THU_TU) FROM dbo.LOAI_HANG_HOA";
+                txtTHU_TU.EditValue = (string.IsNullOrEmpty(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, strSQL).ToString()) ? 0 : Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, strSQL))) + 1;
+            }
             Commons.Modules.ObjSystems.ThayDoiNN(this, layoutControlGroup1, btnALL);
         }
         private void btnALL_ButtonClick(object sender, DevExpress.XtraBars.Docking2010.ButtonEventArgs e)

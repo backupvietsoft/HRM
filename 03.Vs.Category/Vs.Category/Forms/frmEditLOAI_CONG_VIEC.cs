@@ -29,7 +29,15 @@ namespace Vs.Category
         private void frmEditLOAI_CONG_VIEC_Load(object sender, EventArgs e)
         {
             LoadLoaiTO();
-            if (!AddEdit) LoadText();
+            if (!AddEdit)
+            {
+                LoadText();
+            }
+            else
+            {
+                string strSQL = "SELECT MAX(STT) FROM dbo.LOAI_CONG_VIEC";
+                txtSTT.EditValue = (string.IsNullOrEmpty(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, strSQL).ToString()) ? 0 : Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, strSQL))) + 1;
+            }
         }
 
         private void frmEditLOAI_CONG_VIEC_Resize(object sender, EventArgs e) => dataLayoutControl1.Refresh();

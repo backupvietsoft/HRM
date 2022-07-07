@@ -22,7 +22,15 @@ namespace Vs.Category
 
         private void frmEditDON_VI_Load(object sender, EventArgs e)
         {
-            if (!bAddEditDV) LoadText();
+            if (!bAddEditDV)
+            {
+                LoadText();
+            }
+            else
+            {
+                string strSQL = "SELECT MAX(STT_DV) FROM dbo.DON_VI";
+                STT_DVTextEdit.EditValue = (string.IsNullOrEmpty(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, strSQL).ToString()) ? 0 : Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, strSQL))) + 1;
+            }
             //System.Threading.Thread myNewThread = new System.Threading.Thread(() => Commons.Modules.ObjSystems.ThayDoiNN(this, layoutControlGroup1, btnALL));
             //myNewThread.Start();
 

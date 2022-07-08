@@ -169,7 +169,6 @@ namespace Vs.HRM
 
                                 }
                                 break;
-
                         }
 
                         break;
@@ -404,16 +403,14 @@ namespace Vs.HRM
             DataTable dt;
             System.Data.SqlClient.SqlConnection conn;
             dt = new DataTable();
-            string sTieuDe = "DANH SÁCH NHÂN VIÊN ĐI TRỄ VỀ SỚM THEO GIAI ĐOẠN";
-
-            frm.rpt = new rptDSDiTreVeSomGiaiDoan(lk_TuNgay.DateTime, lk_DenNgay.DateTime, lk_NgayIn.DateTime, sTieuDe);
+            frm.rpt = new rptDSDiTreVeSomGiaiDoan(lk_TuNgay.DateTime, lk_DenNgay.DateTime, lk_NgayIn.DateTime);
 
             try
             {
                 conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
                 conn.Open();
 
-                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptDSDiTreVeSomGiaiDoan", conn);
+                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand(Commons.Modules.ObjSystems.returnSps(Commons.Modules.chamCongK, "rptDSDiTreVeSomGiaiDoan"), conn);
 
                 cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
                 cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
@@ -446,15 +443,14 @@ namespace Vs.HRM
             DataTable dt;
             System.Data.SqlClient.SqlConnection conn1;
             dt = new DataTable();
-            string sTieuDe1 = "DANH SÁCH VẮNG ĐẦU GIỜ THEO GIAI ĐOẠN";
-            frm.rpt = new rptDSVangDauGioGiaiDoan(lk_TuNgay.DateTime, lk_DenNgay.DateTime, sTieuDe1);
+            frm.rpt = new rptDSVangDauGioGiaiDoan(lk_TuNgay.DateTime, lk_DenNgay.DateTime);
 
             try
             {
                 conn1 = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
                 conn1.Open();
 
-                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptDSVangDauGioGiaiDoan", conn1);
+                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand(Commons.Modules.ObjSystems.returnSps(Commons.Modules.chamCongK, "rptDSVangDauGioGiaiDoan"), conn1);
 
                 cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
                 cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
@@ -520,15 +516,14 @@ namespace Vs.HRM
 
             System.Data.SqlClient.SqlConnection conn2;
             dt = new DataTable();
-            string sTieuDe2 = "DANH SÁCH CHẤM VẮNG THEO GIAI ĐOẠN";
-            frm.rpt = new rptDSChamCongVang(lk_TuNgay.DateTime, lk_DenNgay.DateTime, lk_NgayIn.DateTime, sTieuDe2);
+            frm.rpt = new rptDSChamCongVang(lk_TuNgay.DateTime, lk_DenNgay.DateTime, lk_NgayIn.DateTime);
 
             try
             {
                 conn2 = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
                 conn2.Open();
 
-                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptDSChamCongVang", conn2);
+                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand(Commons.Modules.ObjSystems.returnSps(Commons.Modules.chamCongK, "rptDSChamCongVang"), conn2);
 
                 cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
                 cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
@@ -593,15 +588,14 @@ namespace Vs.HRM
             }
             System.Data.SqlClient.SqlConnection conn2;
             dt = new DataTable();
-            string sTieuDe2 = "DANH SÁCH CHẤM CÔNG VẮNG LŨY KẾ";
-            frm.rpt = new rptDSChamCongVangLuyKe(lk_TuNgay.DateTime, lk_DenNgay.DateTime, lk_NgayIn.DateTime, sTieuDe2);
+            frm.rpt = new rptDSChamCongVangLuyKe(lk_TuNgay.DateTime, lk_DenNgay.DateTime, lk_NgayIn.DateTime);
 
             try
             {
                 conn2 = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
                 conn2.Open();
 
-                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptDSChamCongVangLuyKe", conn2);
+                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand(Commons.Modules.ObjSystems.returnSps(Commons.Modules.chamCongK, "rptDSChamCongVangLuyKe"), conn2);
 
                 cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
                 cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
@@ -638,7 +632,7 @@ namespace Vs.HRM
                 conn.Open();
                 DataTable dtBCGaiDoan;
 
-                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptBangXacNhanGioQuetThe", conn);
+                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand(Commons.Modules.ObjSystems.returnSps(Commons.Modules.chamCongK, "rptBangXacNhanGioQuetThe"), conn);
 
                 cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
                 cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
@@ -852,15 +846,14 @@ namespace Vs.HRM
             DataTable dt;
             System.Data.SqlClient.SqlConnection conn2;
             dt = new DataTable();
-            string sTieuDe2 = "CHẤM CÔNG CHI TIẾT CÔNG NHÂN THEO GIAI ĐOẠN";
-            frm.rpt = new rptBangCCTheoGD(lk_TuNgay.DateTime, lk_DenNgay.DateTime, sTieuDe2, lk_NgayIn.DateTime);
+            frm.rpt = new rptBangCCTheoGD(lk_TuNgay.DateTime, lk_DenNgay.DateTime, lk_NgayIn.DateTime);
 
             try
             {
                 conn2 = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
                 conn2.Open();
 
-                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptChiTietQuetTheCNGD", conn2);
+                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand(Commons.Modules.ObjSystems.returnSps(Commons.Modules.chamCongK, "rptChiTietQuetTheCNGD"), conn2);
 
                 cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
                 cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
@@ -1201,6 +1194,14 @@ namespace Vs.HRM
         }
 
         #endregion
+
+        private void lk_TuNgay_EditValueChanged(object sender, EventArgs e)
+        {
+            DateTime tungay = Convert.ToDateTime(lk_TuNgay.EditValue);
+            //DateTime denngay = Convert.ToDateTime(LK_Thang.EditValue).AddMonths(+1);
+            //lk_TuNgay.EditValue = Convert.ToDateTime("01/" + tungay.Month + "/" + tungay.Year);
+            lk_DenNgay.EditValue = Convert.ToDateTime(DateTime.DaysInMonth(tungay.Year, tungay.Month)+ "/" + tungay.Month + "/" + tungay.Year);
+        }
     }
 
 }

@@ -23,7 +23,7 @@ namespace Vs.Payroll
     public partial class ucQuyDinhTamUng : DevExpress.XtraEditors.XtraUserControl
     {
         private static bool isAdd = false;
-        
+
         public static ucQuyDinhTamUng _instance;
         public static ucQuyDinhTamUng Instance
         {
@@ -38,37 +38,40 @@ namespace Vs.Payroll
         {
             InitializeComponent();
             Commons.Modules.ObjSystems.ThayDoiNN(this, new List<LayoutControlGroup>() { Root }, btnALL);
-            
+
         }
 
         private void ucQuyDinhTamUng_Load(object sender, EventArgs e)
         {
-            Commons.Modules.sPS = "0Load";
+            Commons.Modules.sLoad = "0Load";
+            LoadThang();
             Commons.Modules.ObjSystems.LoadCboDonViKO(cboDonVi);
             LoadGrdQuyDinhTamUng();
             //LoadGrdQuyDinhTamUng();
-            EnableButon(isAdd); 
-            Commons.Modules.sPS = "";
+            EnableButon(isAdd);
+            Commons.Modules.sLoad = "";
         }
 
         private void LoadGrdQuyDinhTamUng()
         {
-            DataTable dt = new DataTable();
             try
             {
-                    dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetListQuyDinhTamUng", cboDonVi.EditValue,  Commons.Modules.TypeLanguage));
-                    Commons.Modules.ObjSystems.MLoadXtraGrid(grdData, grvData, dt, false, false, false, false, true, this.Name);
-                    dt.Columns["TT"].ReadOnly = false;
+                DataTable dt = new DataTable();
+
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetListQuyDinhTamUng", cboDonVi.EditValue, Commons.Modules.TypeLanguage, Convert.ToDateTime(cboThang.EditValue)));
+                Commons.Modules.ObjSystems.MLoadXtraGrid(grdData, grvData, dt, false, false, false, false, true, this.Name);
+                dt.Columns["TT"].ReadOnly = false;
+
+                grvData.Columns["ID_QDTU"].Visible = false;
+                grvData.Columns["ID_DV"].Visible = false;
+                //grvData.Columns["THANG"].Visible = false;
+                grvData.Columns["TT"].Visible = false;
+                grvData.Columns["SO_TIEN"].DisplayFormat.FormatType = FormatType.Numeric;
+                grvData.Columns["SO_TIEN"].DisplayFormat.FormatString = "N0";
             }
             catch
             {
             }
-            grvData.Columns["ID_QDTU"].Visible = false;
-            grvData.Columns["ID_DV"].Visible = false;
-            //grvData.Columns["THANG"].Visible = false;
-            grvData.Columns["TT"].Visible = false;
-            grvData.Columns["SO_TIEN"].DisplayFormat.FormatType = FormatType.Numeric;
-            grvData.Columns["SO_TIEN"].DisplayFormat.FormatString = "N0";
 
         }
         private void windowsUIButtonPanel1_ButtonClick(object sender, DevExpress.XtraBars.Docking2010.ButtonEventArgs e)
@@ -83,7 +86,7 @@ namespace Vs.Payroll
                         isAdd = true;
                         EnableButon(isAdd);
                         break;
-                        
+
                     }
                 case "xoa":
                     {
@@ -133,26 +136,26 @@ namespace Vs.Payroll
             //cboNgay.Enabled = !visible;
         }
 
-        //public void LoadThang()
-        //{
-        //    try
-        //    {
+        public void LoadThang()
+        {
+            try
+            {
 
-        //        //ItemForDateThang.Visibility = LayoutVisibility.Never;
-        //        DataTable dtthang = new DataTable();
-        //        string sSql = "SELECT disTINCT SUBSTRING(CONVERT(VARCHAR(10),THANG,103),4,2) as M, RIGHT(CONVERT(VARCHAR(10),THANG,103),4) AS Y ,RIGHT(CONVERT(VARCHAR(10),THANG,103),7) AS THANG FROM dbo.THAM_NIEN ORDER BY Y DESC , M DESC";
-        //        dtthang.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSql));
-        //        Commons.Modules.ObjSystems.MLoadXtraGrid(grdThang, grvThang, dtthang, false, true, true, true, true, this.Name);
-        //        grvThang.Columns["M"].Visible = false;
-        //        grvThang.Columns["Y"].Visible = false;
+                //ItemForDateThang.Visibility = LayoutVisibility.Never;
+                DataTable dtthang = new DataTable();
+                string sSql = "SELECT disTINCT SUBSTRING(CONVERT(VARCHAR(10),THANG,103),4,2) as M, RIGHT(CONVERT(VARCHAR(10),THANG,103),4) AS Y ,RIGHT(CONVERT(VARCHAR(10),THANG,103),7) AS THANG FROM dbo.QUY_DINH_TAM_UNG ORDER BY Y DESC , M DESC";
+                dtthang.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSql));
+                Commons.Modules.ObjSystems.MLoadXtraGrid(grdThang, grvThang, dtthang, false, true, true, true, true, this.Name);
+                grvThang.Columns["M"].Visible = false;
+                grvThang.Columns["Y"].Visible = false;
 
-        //        cboThang.Text = grvThang.GetFocusedRowCellValue("THANG").ToString();
-        //    }
-        //    catch
-        //    {
-        //        cboThang.Text = DateTime.Now.ToString("MM/yyyy");
-        //    }
-        //}
+                cboThang.Text = string.IsNullOrEmpty(grvThang.GetFocusedRowCellValue("THANG").ToString()) ? DateTime.Now.ToString("MM/yyyy") : grvThang.GetFocusedRowCellValue("THANG").ToString();
+            }
+            catch
+            {
+                cboThang.Text = DateTime.Now.ToString("MM/yyyy");
+            }
+        }
 
         private void XoaCheDoLV()
         {
@@ -180,7 +183,7 @@ namespace Vs.Payroll
                 //view.SetFocusedRowCellValue("THANG", cboNgay.EditValue);
                 view.SetFocusedRowCellValue("TT", true);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 XtraMessageBox.Show(ex.Message.ToString());
             }
@@ -207,7 +210,7 @@ namespace Vs.Payroll
             {
 
                 Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sTB, Commons.Modules.ObjSystems.ConvertDatatable(grvData), "");
-                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spSaveQuyDinhTamUng", sTB);
+                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spSaveQuyDinhTamUng", sTB, Convert.ToDateTime(cboThang.EditValue));
                 Commons.Modules.ObjSystems.XoaTable(sTB);
                 return true;
             }
@@ -219,33 +222,57 @@ namespace Vs.Payroll
 
         private void grvData_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
         {
-            
+
         }
 
-        
+
         private void grvNgay_RowCellClick(object sender, RowCellClickEventArgs e)
         {
-            
-            
+            try
+            {
+                GridView grv = (GridView)sender;
+                cboThang.Text = grvThang.GetFocusedRowCellValue("THANG").ToString();
+            }
+            catch { }
+            cboThang.ClosePopup();
         }
 
         private void cboNgay_EditValueChanged(object sender, EventArgs e)
         {
-            
+            if (Commons.Modules.sLoad == "0Load") return;
+            Commons.Modules.sLoad = "0Load";
+            LoadGrdQuyDinhTamUng();
+            //EnableButon(true);
+            Commons.Modules.sLoad = "";
         }
 
         private void calThang_DateTimeCommit(object sender, EventArgs e)
         {
-           
+            try
+            {
+                cboThang.Text = calThang.DateTime.ToString("MM/yyyy");
+                DataTable dtTmp = Commons.Modules.ObjSystems.ConvertDatatable(grdThang);
+                DataRow[] dr;
+                dr = dtTmp.Select("NGAY_TTXL" + "='" + cboThang.Text + "'", "NGAY_TTXL", DataViewRowState.CurrentRows);
+                if (dr.Count() == 1)
+                {
+                }
+                else { }
+            }
+            catch (Exception ex)
+            {
+                cboThang.Text = calThang.DateTime.ToString("MM/yyyy");
+            }
+            cboThang.ClosePopup();
         }
 
         private void cboDonVi_EditValueChanged(object sender, EventArgs e)
         {
-            if (Commons.Modules.sPS == "0Load") return;
-            Commons.Modules.sPS = "0Load";
+            if (Commons.Modules.sLoad == "0Load") return;
+            Commons.Modules.sLoad = "0Load";
             LoadGrdQuyDinhTamUng();
             //EnableButon(true);
-            Commons.Modules.sPS = "";
+            Commons.Modules.sLoad = "";
         }
 
         private void grdData_Validated(object sender, EventArgs e)

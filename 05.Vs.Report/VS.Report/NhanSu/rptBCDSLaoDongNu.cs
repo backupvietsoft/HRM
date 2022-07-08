@@ -15,7 +15,7 @@ namespace Vs.Report
 
             InitializeComponent();
             Commons.Modules.ObjSystems.ThayDoiNN(this);
-            xrSubreport1.ReportSource = new SubReportHeader();
+            tiNxrSubreport1.ReportSource = new SubReportHeader();
 
             DataTable dtNgu = new DataTable();
         //    NONlbGiaiDoan.Text = "Từ ngày " + TuNgay.ToString("dd/MM/yyyy") + " đến ngày " + DenNgay.ToString("dd/MM/yyyy");
@@ -31,11 +31,6 @@ namespace Vs.Report
                 Commons.Modules.ObjSystems.GetNN(dtNgu, "Thang", "NgayThangNam") + " " + Thang.Substring(Thang.Length - 2, 2) + " " +
                 Commons.Modules.ObjSystems.GetNN(dtNgu, "Nam", "NgayThangNam") + " " + Nam.Substring(Nam.Length - 4, 4);
             
-        }
-
-        private void lblTIEU_DE_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
-        {
-
         }
     }
 }

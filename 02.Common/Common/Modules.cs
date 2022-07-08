@@ -246,6 +246,48 @@ namespace Commons
             }
         }
 
+        //định nghĩa số giờ làm tăng ca trong ngày cho chấm công khách
+        private static int _iSNNgay;
+        public static int iSNNgay
+        {
+            get
+            {
+                return _iSNNgay;
+            }
+            set
+            {
+                _iSNNgay = value;
+            }
+        }
+
+        //định nghĩa số giờ làm tăng ca trong tuần cho chấm công khách
+        private static int _iSNTuan;
+        public static int iSNTuan
+        {
+            get
+            {
+                return _iSNTuan;
+            }
+            set
+            {
+                _iSNTuan = value;
+            }
+        }
+
+        //định nghĩa số giờ làm tăng ca trong tháng cho chấm công khách
+        private static int _iSNThang;
+        public static int iSNThang
+        {
+            get
+            {
+                return _iSNThang;
+            }
+            set
+            {
+                _iSNThang = value;
+            }
+        }
+
         //định nghĩa ngày nghĩ ngày làm việc(0:không nghĩ---------- 1: nghĩ chủ nhật, 2----- nghĩ thứ 7,chủ nhật)
         private static int _iNNghi;
         public static int iNNghi

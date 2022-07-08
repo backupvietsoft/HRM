@@ -18,6 +18,7 @@ using DevExpress.XtraEditors.Mask;
 using DevExpress.XtraLayout;
 using DevExpress.Utils;
 using Microsoft.Office.Interop;
+using DevExpress.Utils.Menu;
 
 namespace Vs.Payroll
 {
@@ -115,7 +116,6 @@ namespace Vs.Payroll
                 {
                     grdData.DataSource = dt;
                 }
-                lblTongNV.Text = Convert.ToString(grvData.RowCount);
             }
             catch
             {
@@ -143,7 +143,6 @@ namespace Vs.Payroll
                             DataTable dt = new DataTable();
                             dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetTinhLuongThang13", Commons.Modules.UserName, Commons.Modules.TypeLanguage, Convert.ToInt32(cboDonVi.EditValue), Convert.ToInt32(cboXiNghiep.EditValue), Convert.ToInt32(cboTo.EditValue), Convert.ToDateTime(datNam.EditValue).Year));
                             grdData.DataSource = dt;
-                            lblTongNV.Text = Convert.ToString(grvData.RowCount);
                             EnableButon(false);
                         }
                         catch 
@@ -154,8 +153,6 @@ namespace Vs.Payroll
                     }
                 case "sua":
                     {
-                        txtPT_TT13.EditValue = string.Empty;
-                        txtPT_THUONG_HQKD.EditValue = string.Empty;
                         EnableButon(false);
                         break;
 
@@ -296,8 +293,6 @@ namespace Vs.Payroll
                 case "khongghi":
                     {
                         LoadData();
-                        txtPT_TT13.EditValue = string.Empty;
-                        txtPT_THUONG_HQKD.EditValue = string.Empty;
                         EnableButon(true);
                         break;
                     }
@@ -330,8 +325,6 @@ namespace Vs.Payroll
             datNam.Enabled = visible;
             cboDonVi.Enabled = visible;
             cboXiNghiep.Enabled = visible;
-            txtPT_TT13.Enabled = !visible;
-            txtPT_THUONG_HQKD.Enabled = !visible;
         }
         private void grvData_InvalidRowException(object sender, DevExpress.XtraGrid.Views.Base.InvalidRowExceptionEventArgs e)
         {
@@ -401,73 +394,6 @@ namespace Vs.Payroll
             LoadData();
             //EnableButon(true);
         }
-
-        private void txtPT_TT13_KeyDown(object sender, KeyEventArgs e)
-        {
-
-            if (e.KeyCode == Keys.Enter)
-            {
-                if (string.IsNullOrEmpty(txtPT_TT13.Text))
-                {
-                    XtraMessageBox.Show(ItemForThuong13.Text + " " + Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgKhongDuocTrong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    txtPT_TT13.Focus();
-                    return;
-                }
-                ColFlag = true;
-                UpdatePTAll();
-            }
-        }
-
-        private void txtPT_THUONG_HQKD_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                if (string.IsNullOrEmpty(txtPT_THUONG_HQKD.Text))
-                {
-                    XtraMessageBox.Show(ItemForThuongHieuQuaKD.Text + " " + Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgKhongDuocTrong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    txtPT_THUONG_HQKD.Focus();
-                    return;
-                }
-                ColFlag = false;
-                UpdatePTAll();
-            }
-        }
-
-        private void UpdatePTAll()
-        {
-            try
-            {
-                DataTable dt1 = new DataTable();
-                dt1 = (DataTable)grdData.DataSource;
-                if (dt1 == null || dt1.Rows.Count == 0)
-                {
-                    XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgChonDongCanXuLy"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return;
-                }
-
-                string sBT = "sBTBangLuong" + Commons.Modules.UserName;
-                Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBT, dt1, "");
-
-                System.Data.SqlClient.SqlConnection conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
-                conn.Open();
-
-                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spCapNhatPTLuongT13", conn);
-                cmd.Parameters.Add("@sBT", SqlDbType.NVarChar).Value = sBT;
-                cmd.Parameters.Add("@PT_TL", SqlDbType.Float).Value = string.IsNullOrEmpty(txtPT_TT13.EditValue.ToString()) ? -1 : Convert.ToDecimal(txtPT_TT13.EditValue);
-                cmd.Parameters.Add("@PT_HQ_KD", SqlDbType.Float).Value = string.IsNullOrEmpty(txtPT_THUONG_HQKD.EditValue.ToString()) ? -1 : Convert.ToDecimal(txtPT_THUONG_HQKD.EditValue);
-                cmd.Parameters.Add("@ColFlag", SqlDbType.Bit).Value = ColFlag;
-                cmd.CommandType = CommandType.StoredProcedure;
-                System.Data.SqlClient.SqlDataAdapter da = new System.Data.SqlClient.SqlDataAdapter(cmd);
-                DataSet ds = new DataSet();
-                da.Fill(ds);
-                grdData.DataSource = ds.Tables[0].Copy();
-            }
-            catch (Exception ex)
-            {
-
-            }
-        }
-
         private void TinhTongLuongThueTNCN()
         {
             try
@@ -493,7 +419,6 @@ namespace Vs.Payroll
             }
             catch (Exception ex) { }
         }
-
         private bool KiemTrong_grvData()
         {
             try
@@ -568,5 +493,89 @@ namespace Vs.Payroll
             }
             sRange.Value = rawData;
         }
+
+        private void grvData_RowCountChanged(object sender, EventArgs e)
+        {
+            GridView view = sender as GridView;
+            try
+            {
+                int index = ItemForSumNhanVien.Text.IndexOf(':');
+                if (index > 0)
+                {
+                    if (view.RowCount > 0)
+                    {
+                        ItemForSumNhanVien.Text = ItemForSumNhanVien.Text.Substring(0, index) + ": " + view.RowCount.ToString();
+                    }
+                    else
+                    {
+                        ItemForSumNhanVien.Text = ItemForSumNhanVien.Text.Substring(0, index) + ": 0";
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show(ex.Message.ToString());
+            }
+        }
+
+        #region chuotphai
+        class RowInfo
+        {
+            public RowInfo(DevExpress.XtraGrid.Views.Grid.GridView view, int rowHandle)
+            {
+                this.RowHandle = rowHandle;
+                this.View = view;
+            }
+
+
+            public DevExpress.XtraGrid.Views.Grid.GridView View;
+            public int RowHandle;
+        }
+        //Nhap ung vien
+        public DXMenuItem MCreateMenuNhapUngVien(DevExpress.XtraGrid.Views.Grid.GridView view, int rowHandle)
+        {
+            string sStr = Commons.Modules.ObjLanguages.GetLanguage(Commons.Modules.ModuleName, "ucBangLuongThang13", "CapNhatPhamTramThuong", Commons.Modules.TypeLanguage);
+            DXMenuItem menuCapNhat = new DXMenuItem(sStr, new EventHandler(CapNhat));
+            menuCapNhat.Tag = new RowInfo(view, rowHandle);
+            return menuCapNhat;
+        }
+        public void CapNhat(object sender, EventArgs e)
+        {
+            try
+            {
+                string sCotCN = grvData.FocusedColumn.FieldName;
+                if (grvData.GetFocusedRowCellValue(grvData.FocusedColumn.FieldName).ToString() == "") return;
+                string sBTCongNhan = "sBTCongNhan" + Commons.Modules.UserName;
+                Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBTCongNhan, (DataTable)grdData.DataSource, "");
+
+                DataTable dt = new DataTable();
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spUpdateChuotPhaiLUONG_T13", sBTCongNhan, sCotCN, Convert.ToDouble(grvData.GetFocusedRowCellValue(grvData.FocusedColumn.FieldName))));
+                grdData.DataSource = dt;
+            }
+            catch (Exception EX) { }
+        }
+
+        private void grvData_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
+        {
+            try
+            {
+                if (btnALL.Buttons[0].Properties.Visible == true) return;
+                if (grvData.FocusedColumn.FieldName.Substring(0,3) != "PT_") return;
+                DevExpress.XtraGrid.Views.Grid.GridView view = sender as DevExpress.XtraGrid.Views.Grid.GridView;
+                if (e.MenuType == DevExpress.XtraGrid.Views.Grid.GridMenuType.Row)
+                {
+                    int irow = e.HitInfo.RowHandle;
+                    e.Menu.Items.Clear();
+
+                    DevExpress.Utils.Menu.DXMenuItem itemNhap = MCreateMenuNhapUngVien(view, irow);
+                    e.Menu.Items.Add(itemNhap);
+                }
+            }
+            catch
+            {
+            }
+        }
+        #endregion
     }
 }

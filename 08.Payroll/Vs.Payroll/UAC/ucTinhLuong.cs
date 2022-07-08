@@ -363,24 +363,21 @@ namespace Vs.Payroll
             Commons.Modules.sPS = "";
         }
 
-       
-      
-
         private void grvData_RowCountChanged(object sender, EventArgs e)
         {
             GridView view = sender as GridView;
             try
             {
-                int index = sumNV.Text.IndexOf(':');
+                int index = ItemForSumNhanVien.Text.IndexOf(':');
                 if (index > 0)
                 {
                     if (view.RowCount > 0)
                     {
-                        sumNV.Text = sumNV.Text.Substring(0, index) + ": " + view.RowCount.ToString();
+                        ItemForSumNhanVien.Text = ItemForSumNhanVien.Text.Substring(0, index) + ": " + view.RowCount.ToString();
                     }
                     else
                     {
-                        sumNV.Text = sumNV.Text.Substring(0, index) + ": 0";
+                        ItemForSumNhanVien.Text = ItemForSumNhanVien.Text.Substring(0, index) + ": 0";
                     }
 
                 }

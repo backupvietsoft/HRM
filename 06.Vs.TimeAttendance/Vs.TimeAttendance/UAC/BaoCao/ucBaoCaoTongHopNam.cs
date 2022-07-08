@@ -428,7 +428,7 @@ namespace Vs.TimeAttendance
                     conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
                     conn.Open();
 
-                    System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptBangCongNam_MT", conn);
+                    System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand(Commons.Modules.ObjSystems.returnSps(Commons.Modules.chamCongK, "rptBangCongNam_MT"), conn);
 
                     cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
                     cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
@@ -468,7 +468,7 @@ namespace Vs.TimeAttendance
                     conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
                     conn.Open();
 
-                    System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptBangCongTangCaNam_MT", conn);
+                    System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand(Commons.Modules.ObjSystems.returnSps(Commons.Modules.chamCongK, "rptBangCongTangCaNam_MT"), conn);
 
                     cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
                     cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
@@ -508,7 +508,7 @@ namespace Vs.TimeAttendance
                     conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
                     conn.Open();
 
-                    System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptBangCongVangNam_MT", conn);
+                    System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand(Commons.Modules.ObjSystems.returnSps(Commons.Modules.chamCongK, "rptBangCongVangNam_MT"), conn);
 
                     cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
                     cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;

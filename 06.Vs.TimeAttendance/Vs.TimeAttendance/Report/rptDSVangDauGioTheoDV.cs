@@ -10,14 +10,13 @@ namespace Vs.TimeAttendance
 {
     public partial class rptDSVangDauGioTheoDV : DevExpress.XtraReports.UI.XtraReport
     {
-        public rptDSVangDauGioTheoDV(DateTime ngayin, string tieuDe, DateTime ngayXemBC)
+        public rptDSVangDauGioTheoDV(DateTime ngayin, DateTime ngayXemBC)
         {
 
             InitializeComponent();
             Commons.Modules.ObjSystems.ThayDoiNN(this);
             xrSubreport1.ReportSource = new SubReportHeader();
 
-            NONlblTIEU_DE.Text = tieuDe;
             DataTable dtNgu = new DataTable();
             dtNgu.Load(Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT KEYWORD, CASE " + Commons.Modules.TypeLanguage + " WHEN 0 THEN VIETNAM WHEN 1 THEN ENGLISH ELSE CHINESE END AS NN  FROM LANGUAGES WHERE FORM = N'NgayThangNam' "));
 

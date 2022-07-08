@@ -95,7 +95,8 @@ namespace VietSoftHRM
             {
                 SaveLogin();
                 SaveDatabase();
-                if(txt_user.Text.Trim() == "admink")
+                string strSQL = "SELECT ISNULL(USER_KHACH,0) USER_KHACH FROM dbo.USERS WHERE [USER_NAME] = '" + txt_user.Text.Trim() + "'";
+                if (Convert.ToBoolean(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr,CommandType.Text,strSQL)) == true)
                 {
                     Commons.Modules.chamCongK = true;
                 }
@@ -145,10 +146,9 @@ namespace VietSoftHRM
                 XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgUserChuaDangKyLincense"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
-            
 
             ////kiểm tra user đã đăng nhập
-            if(Commons.Modules.ObjSystems.checkExitsUser(txt_user.EditValue.ToString().Trim()) == false)
+            if (Commons.Modules.ObjSystems.checkExitsUser(txt_user.EditValue.ToString().Trim()) == false)
             {
                 XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgUserDaDuocDangNhap"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;

@@ -10,7 +10,7 @@ namespace Vs.Report
 {
     public partial class rptBangTongHopCongNam : DevExpress.XtraReports.UI.XtraReport
     {
-        public rptBangTongHopCongNam(string sTieuDe , DateTime TNgay, DateTime DNgay)
+        public rptBangTongHopCongNam( DateTime TNgay, DateTime DNgay)
         {
             InitializeComponent();
             Commons.Modules.ObjSystems.ThayDoiNN(this);
@@ -27,7 +27,6 @@ namespace Vs.Report
             //string NamXem = "00" + ngayin.Year;
 
             tiNtime.Text = (Commons.Modules.TypeLanguage == 0 ? "Từ tháng " : "From month ") + TNgay.ToString("MM/yyyy") + (Commons.Modules.TypeLanguage == 0 ? " đến tháng " : " to the month ") + DNgay.ToString("MM/yyyy");
-            lblTIEU_DE.Text = sTieuDe;
             lblNgay.Text = "Tiền Giang, " + Commons.Modules.ObjSystems.GetNN(dtNgu, "Ngay", "NgayThangNam").ToLower() + " " + Ngay.Substring(Ngay.Length - 2, 2) + " " +
                 Commons.Modules.ObjSystems.GetNN(dtNgu, "Thang", "NgayThangNam") + " " + Thang.Substring(Thang.Length - 2, 2) + " " +
                 Commons.Modules.ObjSystems.GetNN(dtNgu, "Nam", "NgayThangNam") + " " + Nam.Substring(Nam.Length - 4, 4);

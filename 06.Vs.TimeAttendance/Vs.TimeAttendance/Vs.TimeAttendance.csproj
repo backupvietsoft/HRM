@@ -285,6 +285,12 @@
     <Compile Include="Report\rptBaoCaoNghiBoViecThang.Designer.cs">
       <DependentUpon>rptBaoCaoNghiBoViecThang.cs</DependentUpon>
     </Compile>
+    <Compile Include="Report\rptDKLamThemGio_DM.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\rptDKLamThemGio_DM.Designer.cs">
+      <DependentUpon>rptDKLamThemGio_DM.cs</DependentUpon>
+    </Compile>
     <Compile Include="Report\rptDSChuyenCongTac.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -607,6 +613,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Report\rptBaoCaoNghiBoViecThang.resx">
       <DependentUpon>rptBaoCaoNghiBoViecThang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\rptDKLamThemGio_DM.resx">
+      <DependentUpon>rptDKLamThemGio_DM.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\rptDSChuyenCongTac.resx">
       <DependentUpon>rptDSChuyenCongTac.cs</DependentUpon>

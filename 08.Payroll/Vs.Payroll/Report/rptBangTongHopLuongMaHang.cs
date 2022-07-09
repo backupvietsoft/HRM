@@ -17,8 +17,7 @@ namespace Vs.Payroll
             Commons.Modules.ObjSystems.ThayDoiNN(this);
             xrSubreport1.ReportSource = new SubReportHeader();
 
-            lbltungay.Text = "Từ ngày " + tngay.ToString("dd/MM/yyyy");
-            lbldenngay.Text = "Đến ngày " + dngay.ToString("dd/MM/yyyy");
+            xrTlbltungay.Text = Commons.Modules.ObjLanguages.GetLanguage("rptBangTongHopLuongMaHang", "lblTNgay") + " " + tngay.ToString("dd/MM/yyyy") + " " +Commons.Modules.ObjLanguages.GetLanguage("rptBangTongHopLuongMaHang", "lblDNgay") + " " + dngay.ToString("dd/MM/yyyy");
 
             DataTable dtNgu = new DataTable();
             dtNgu.Load(Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT KEYWORD, CASE " + Commons.Modules.TypeLanguage + " WHEN 0 THEN VIETNAM WHEN 1 THEN ENGLISH ELSE CHINESE END AS NN  FROM LANGUAGES WHERE FORM = N'NgayThangNam' "));

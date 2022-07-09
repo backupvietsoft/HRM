@@ -556,8 +556,8 @@ namespace Vs.TimeAttendance
             frmViewReport frm = new frmViewReport();
             DataTable dt;
             dt = new DataTable();
-            string sTieuDe = "DANH SÁCH TIỀN PHÉP " + lk_Nam.EditValue;
-            frm.rpt = new rptDSTienPhep(Convert.ToDateTime(lk_DenNgay.EditValue), sTieuDe);
+            string sTieuDe = Commons.Modules.ObjLanguages.GetLanguage("rptDSTienPhep","lblTIEU_DE") + " " + lk_Nam.EditValue;
+            frm.rpt = new rptDSTienPhep(Convert.ToDateTime(lk_DenNgay.EditValue),sTieuDe);
             try
             {
                 System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand(Commons.Modules.ObjSystems.returnSps(Commons.Modules.chamCongK, "spGetTheoDoiPhepNam"), conn);
@@ -600,7 +600,7 @@ namespace Vs.TimeAttendance
             frmViewReport frm = new frmViewReport();
             DataTable dt;
             dt = new DataTable();
-            string sTieuDe = "BẢNG TỔNG HỢP TIỀN PHÉP " + lk_Nam.EditValue;
+            string sTieuDe = Commons.Modules.ObjLanguages.GetLanguage("rptBCTHTienPhep", "lblTIEU_DE") + " " + lk_Nam.EditValue;
             frm.rpt = new rptBCTHTienPhep(Convert.ToDateTime(lk_DenNgay.EditValue), sTieuDe);
             try
             {

@@ -157,7 +157,8 @@ namespace Vs.TimeAttendance
                                                 break;
                                             }
                                         default:
-                                            BieuMauDangKyLamThemGio();
+                                            BieuMauDangKyLamThemGio_DM();
+                                            //BieuMauDangKyLamThemGio();
                                             break;
                                     }
                                     break;
@@ -722,6 +723,44 @@ namespace Vs.TimeAttendance
                 frm.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung());
             }
             catch (Exception ex)
+            { }
+            frm.ShowDialog();
+        }
+        private void BieuMauDangKyLamThemGio_DM()
+        {
+            frmViewReport frm = new frmViewReport();
+            DataTable dt;
+            System.Data.SqlClient.SqlConnection conn;
+            dt = new DataTable();
+            frm.rpt = new rptDKLamThemGio_DM(lk_NgayIn.DateTime, LK_XI_NGHIEP.Text.ToString());
+
+            try
+            {
+                conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                conn.Open();
+
+                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptBieuMauDangKyLamThemGio_DM", conn);
+
+                cmd.Parameters.Add("@ID_DV", SqlDbType.Int).Value = LK_DON_VI.EditValue;
+                cmd.Parameters.Add("@ID_XN", SqlDbType.Int).Value = LK_XI_NGHIEP.EditValue;
+                cmd.Parameters.Add("@ID_TO", SqlDbType.Int).Value = LK_TO.EditValue;
+                cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                cmd.Parameters.Add("@Ngay", SqlDbType.Date).Value = Convert.ToDateTime(lk_NgayIn.EditValue);
+
+                cmd.CommandType = CommandType.StoredProcedure;
+                System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+
+                //DataSet ds = new DataSet();
+                dt = new DataTable();
+                adp.Fill(dt);
+
+                //dt = ds.Tables[0].Copy();
+                dt.TableName = "DA_TA";
+                frm.AddDataSource(dt);
+                frm.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung());
+            }
+            catch 
             { }
             frm.ShowDialog();
         }

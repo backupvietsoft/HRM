@@ -421,8 +421,7 @@ namespace Vs.TimeAttendance
                 DataTable dt = new DataTable();
                 System.Data.SqlClient.SqlConnection conn;
                 dt = new DataTable();
-                string sTieuDe = "BẢNG CHẤM CÔNG NĂM";
-                frm.rpt = new rptBangTongHopCongNam(sTieuDe, Convert.ToDateTime(datTThang.EditValue), Convert.ToDateTime(datDThang.EditValue));
+                frm.rpt = new rptBangTongHopCongNam( Convert.ToDateTime(datTThang.EditValue), Convert.ToDateTime(datDThang.EditValue));
                 try
                 {
                     conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
@@ -462,7 +461,7 @@ namespace Vs.TimeAttendance
                 System.Data.SqlClient.SqlConnection conn;
                 dt = new DataTable();
                 string sTieuDe = "BẢNG CHẤM CÔNG";
-                frm.rpt = new rptBangTongHopTangCaNam(sTieuDe, Convert.ToDateTime(datTThang.EditValue), Convert.ToDateTime(datDThang.EditValue));
+                frm.rpt = new rptBangTongHopTangCaNam( Convert.ToDateTime(datTThang.EditValue), Convert.ToDateTime(datDThang.EditValue));
                 try
                 {
                     conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
@@ -501,7 +500,8 @@ namespace Vs.TimeAttendance
                 DataTable dt = new DataTable();
                 System.Data.SqlClient.SqlConnection conn;
                 dt = new DataTable();
-                string sTieuDe = (Commons.Modules.TypeLanguage == 0 ? "TỔNG NGÀY NGHỈ TRONG NĂM TỪ " : "TOTAL NUMBER OF HOLIDAYS IN THE YEAR ") + Convert.ToDateTime(datTThang.EditValue).ToString("MM/yyyy") + (Commons.Modules.TypeLanguage == 0 ? " ĐẾN " : " TO ") + Convert.ToDateTime(datDThang.EditValue).ToString("MM/yyyy") + "" ;
+                string sTieuDe = Commons.Modules.ObjLanguages.GetLanguage("rptBangTongHopCongVangNam", "lblTIEU_DE") + " " + Convert.ToDateTime(datTThang.EditValue).ToString("MM/yyyy") + " " + Commons.Modules.ObjLanguages.GetLanguage("rptBangTongHopCongVangNam","lblDenNGay") + " " + Convert.ToDateTime(datDThang.EditValue).ToString("MM/yyyy");
+                //"TỔNG NGÀY NGHỈ TRONG NĂM TỪ " : "TOTAL NUMBER OF HOLIDAYS IN THE YEAR ") +Convert.ToDateTime(datTThang.EditValue).ToString("MM/yyyy") + (Commons.Modules.TypeLanguage == 0 ? " ĐẾN " : " TO ") + Convert.ToDateTime(datDThang.EditValue).ToString("MM/yyyy") + "";
                 frm.rpt = new rptBangTongHopCongVangNam(sTieuDe);
                 try
                 {

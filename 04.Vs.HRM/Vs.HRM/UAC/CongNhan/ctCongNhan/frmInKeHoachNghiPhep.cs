@@ -13,7 +13,7 @@ namespace Vs.HRM
             InitializeComponent();
             Commons.Modules.ObjSystems.ThayDoiNN(this);
         }
- 
+
         //sự kiên load form
         private void formInKeHoachNghiPhep_Load(object sender, EventArgs e)
         {
@@ -28,7 +28,7 @@ namespace Vs.HRM
             //LoadCboLDV();
             dTuNgay.EditValue = Convert.ToDateTime((DateTime.Today.Month + "/01/" + DateTime.Today.Year)).ToShortDateString();
             dDenNgay.EditValue = Convert.ToDateTime((DateTime.Today.Month + "/01/" + DateTime.Today.Year)).AddMonths(1).AddDays(-1).ToShortDateString();
-            int SoNgay = DateTime.Today.Day-1;
+            int SoNgay = DateTime.Today.Day - 1;
             dTuNgay.EditValue = DateTime.Today.AddDays(-SoNgay);
             dNgayIn.EditValue = DateTime.Today;
             Commons.OSystems.SetDateEditFormat(dNgayIn);
@@ -62,53 +62,53 @@ namespace Vs.HRM
 
                         try
                         {
-                                System.Data.SqlClient.SqlConnection conn;
-                                DataTable dt = new DataTable();
-                                frmViewReport frm = new frmViewReport();
-                                String tieude;
-                                if (rdo_ChonBaoCao.SelectedIndex==0)
-                                {
+                            System.Data.SqlClient.SqlConnection conn;
+                            DataTable dt = new DataTable();
+                            frmViewReport frm = new frmViewReport();
+                            String tieude;
+                            if (rdo_ChonBaoCao.SelectedIndex == 0)
+                            {
 
-                                    tieude = "DANH SÁCH NHÂN VIÊN NGHỈ PHÉP THEO KẾ HOẠCH";
-                                }
-                                else
-                                {
+                                tieude = Commons.Modules.ObjLanguages.GetLanguage("rptBCKeHoachNghiPhep", "lblTieuDe_DSNVNGHIPHEPTHEOKH");
+                            }
+                            else
+                            {
 
-                                    tieude = "DANH SÁCH NHÂN VIÊN ĐI LÀM LẠI THEO KẾ HOẠCH";
-                                }
-                                frm.rpt = new rptBCKeHoachNghiPhep(dNgayIn.DateTime, dTuNgay.DateTime, dDenNgay.DateTime,tieude);
+                                tieude = Commons.Modules.ObjLanguages.GetLanguage("rptBCKeHoachNghiPhep", "lblTieuDe_DSNVDILAMLAITHEOKH");
+                            }
+                            frm.rpt = new rptBCKeHoachNghiPhep(dNgayIn.DateTime, dTuNgay.DateTime, dDenNgay.DateTime, tieude);
 
-                                conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
-                                conn.Open();
+                            conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                            conn.Open();
 
-                                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptBCKeHoachNghiPhep", conn);
-                                cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
-                                cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
-                                cmd.Parameters.Add("@Dvi", SqlDbType.Int).Value = slkDonVi.EditValue;
-                                cmd.Parameters.Add("@XN", SqlDbType.Int).Value = slkXiNghiep.EditValue;
-                                cmd.Parameters.Add("@TO", SqlDbType.Int).Value = slkTo.EditValue;
-                                cmd.Parameters.Add("@ID_CN", SqlDbType.BigInt).Value = slkCN.EditValue;
-                                cmd.Parameters.Add("@ID_LDV", SqlDbType.BigInt).Value = slkLDV.EditValue;
-                                cmd.Parameters.Add("@TNgay", SqlDbType.Date).Value = dTuNgay.EditValue;
-                                cmd.Parameters.Add("@DNgay", SqlDbType.Date).Value = dDenNgay.EditValue;
-                                
-                                cmd.Parameters.Add("@Loai", SqlDbType.Int).Value = rdo_ChonBaoCao.SelectedIndex;
-                                cmd.CommandType = CommandType.StoredProcedure;
+                            System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptBCKeHoachNghiPhep", conn);
+                            cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                            cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                            cmd.Parameters.Add("@Dvi", SqlDbType.Int).Value = slkDonVi.EditValue;
+                            cmd.Parameters.Add("@XN", SqlDbType.Int).Value = slkXiNghiep.EditValue;
+                            cmd.Parameters.Add("@TO", SqlDbType.Int).Value = slkTo.EditValue;
+                            cmd.Parameters.Add("@ID_CN", SqlDbType.BigInt).Value = slkCN.EditValue;
+                            cmd.Parameters.Add("@ID_LDV", SqlDbType.BigInt).Value = slkLDV.EditValue;
+                            cmd.Parameters.Add("@TNgay", SqlDbType.Date).Value = dTuNgay.EditValue;
+                            cmd.Parameters.Add("@DNgay", SqlDbType.Date).Value = dDenNgay.EditValue;
 
-                                System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
-                                   DataSet ds = new DataSet();
+                            cmd.Parameters.Add("@Loai", SqlDbType.Int).Value = rdo_ChonBaoCao.SelectedIndex;
+                            cmd.CommandType = CommandType.StoredProcedure;
+
+                            System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+                            DataSet ds = new DataSet();
                             adp.Fill(ds);
                             dt = new DataTable();
                             dt = ds.Tables[0].Copy();
                             dt.TableName = "DA_TA";
                             frm.AddDataSource(dt);
 
-                                frm.ShowDialog();
+                            frm.ShowDialog();
                             break;
                         }
-                         catch
+                        catch
                         { }
-                        
+
                         break;
                     }
                 case "thoat":

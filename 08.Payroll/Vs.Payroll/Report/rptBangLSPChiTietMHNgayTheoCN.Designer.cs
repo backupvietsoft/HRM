@@ -42,8 +42,7 @@
             this.lblNgay = new DevExpress.XtraReports.UI.XRLabel();
             this.ReportHeader = new DevExpress.XtraReports.UI.ReportHeaderBand();
             this.xrSubreport1 = new DevExpress.XtraReports.UI.XRSubreport();
-            this.lbltungay = new DevExpress.XtraReports.UI.XRLabel();
-            this.lbldenngay = new DevExpress.XtraReports.UI.XRLabel();
+            this.xrTlbltungay = new DevExpress.XtraReports.UI.XRLabel();
             this.lblLuongSanPhamChiTiet = new DevExpress.XtraReports.UI.XRLabel();
             this.Detail = new DevExpress.XtraReports.UI.DetailBand();
             this.xrTable1 = new DevExpress.XtraReports.UI.XRTable();
@@ -228,8 +227,7 @@
             // 
             this.ReportHeader.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
             this.xrSubreport1,
-            this.lbltungay,
-            this.lbldenngay,
+            this.xrTlbltungay,
             this.lblLuongSanPhamChiTiet});
             this.ReportHeader.Dpi = 96F;
             this.ReportHeader.HeightF = 112.9F;
@@ -243,35 +241,20 @@
             this.xrSubreport1.Name = "xrSubreport1";
             this.xrSubreport1.SizeF = new System.Drawing.SizeF(1086.504F, 16.22893F);
             // 
-            // lbltungay
+            // xrTlbltungay
             // 
-            this.lbltungay.Dpi = 96F;
-            this.lbltungay.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbltungay.LocationFloat = new DevExpress.Utils.PointFloat(177F, 71.32199F);
-            this.lbltungay.Multiline = true;
-            this.lbltungay.Name = "lbltungay";
-            this.lbltungay.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 96F);
-            this.lbltungay.SizeF = new System.Drawing.SizeF(353.7787F, 26.79527F);
-            this.lbltungay.StylePriority.UseFont = false;
-            this.lbltungay.StylePriority.UsePadding = false;
-            this.lbltungay.StylePriority.UseTextAlignment = false;
-            this.lbltungay.Text = "Từ ngày : 05/06/2020";
-            this.lbltungay.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
-            // 
-            // lbldenngay
-            // 
-            this.lbldenngay.Dpi = 96F;
-            this.lbldenngay.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbldenngay.LocationFloat = new DevExpress.Utils.PointFloat(541.0001F, 71.32199F);
-            this.lbldenngay.Multiline = true;
-            this.lbldenngay.Name = "lbldenngay";
-            this.lbldenngay.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 96F);
-            this.lbldenngay.SizeF = new System.Drawing.SizeF(365.8504F, 26.79527F);
-            this.lbldenngay.StylePriority.UseFont = false;
-            this.lbldenngay.StylePriority.UsePadding = false;
-            this.lbldenngay.StylePriority.UseTextAlignment = false;
-            this.lbldenngay.Text = "Đến ngày : 05/06/2020";
-            this.lbldenngay.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
+            this.xrTlbltungay.Dpi = 96F;
+            this.xrTlbltungay.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.xrTlbltungay.LocationFloat = new DevExpress.Utils.PointFloat(0F, 59.32201F);
+            this.xrTlbltungay.Multiline = true;
+            this.xrTlbltungay.Name = "xrTlbltungay";
+            this.xrTlbltungay.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 96F);
+            this.xrTlbltungay.SizeF = new System.Drawing.SizeF(1086.504F, 26.79527F);
+            this.xrTlbltungay.StylePriority.UseFont = false;
+            this.xrTlbltungay.StylePriority.UsePadding = false;
+            this.xrTlbltungay.StylePriority.UseTextAlignment = false;
+            this.xrTlbltungay.Text = "Từ ngày : 05/06/2020";
+            this.xrTlbltungay.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
             // 
             // lblLuongSanPhamChiTiet
             // 
@@ -966,8 +949,7 @@
         private DevExpress.XtraReports.UI.GroupFooterBand GroupFooter1;
         private DevExpress.XtraReports.UI.GroupHeaderBand GroupHeader1;
         private DevExpress.XtraReports.UI.XRLabel lblLuongSanPhamChiTiet;
-        private DevExpress.XtraReports.UI.XRLabel lbltungay;
-        private DevExpress.XtraReports.UI.XRLabel lbldenngay;
+        private DevExpress.XtraReports.UI.XRLabel xrTlbltungay;
         private DevExpress.XtraReports.UI.XRTable xrTable6;
         private DevExpress.XtraReports.UI.XRTableRow xrTableRow12;
         private DevExpress.XtraReports.UI.XRTableCell lbMSNV;

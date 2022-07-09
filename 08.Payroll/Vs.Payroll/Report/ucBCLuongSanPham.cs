@@ -175,7 +175,6 @@ namespace Vs.Payroll
                                 {
                                     System.Data.SqlClient.SqlConnection conn;
                                     dt = new DataTable();
-                                    //string sTieuDe = "DANH SÁCH NHÂN VIÊN ĐI TRỄ VỀ SỚM THEO GIAI ĐOẠN";
 
                                     frm.rpt = new rptBangLSPTongHopTheoCN(lk_TuNgay.DateTime, lk_DenNgay.DateTime);
 

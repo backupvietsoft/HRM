@@ -4396,6 +4396,15 @@ namespace Commons
             dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetCongNhan", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll));
             return dt;
         }
+
+        public DataTable DataCongNhan(bool coAll, int TT)
+        {
+            //1 còn làm
+            //2 đã nghĩ
+            DataTable dt = new DataTable();
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetCongNhanTheoTT", Commons.Modules.UserName,TT, Commons.Modules.TypeLanguage, coAll));
+            return dt;
+        }
         public DataTable DataDonVi(bool coAll)
         {
             DataTable dt = new DataTable();

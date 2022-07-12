@@ -1,11 +1,8 @@
 ﻿using DevExpress.XtraBars.Docking2010;
-using DevExpress.XtraBars.Navigation;
 using DevExpress.XtraEditors;
 using Microsoft.ApplicationBlocks.Data;
 using System;
 using System.Data;
-using System.Linq;
-using System.Windows.Forms;
 
 namespace Vs.Recruit.UAC
 {
@@ -28,7 +25,6 @@ namespace Vs.Recruit.UAC
             BindingData(false);
             enableButon(true);
         }
-
         private void LoadgrdPYC()
         {
             try
@@ -214,7 +210,10 @@ namespace Vs.Recruit.UAC
         }
         private void LoadCbo()
         {
-           
+            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboNguoiYC, Commons.Modules.ObjSystems.DataCongNhan(false),"ID_CN","TEN_CN","TEN_CN",true,true);
+
+            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboBPYC, Commons.Modules.ObjSystems.DataTo(-1,-1,false), "ID_TO", "TEN_TO", "TEN_TO", true, true);
+
         }
         private void BindingData(bool them)
         {

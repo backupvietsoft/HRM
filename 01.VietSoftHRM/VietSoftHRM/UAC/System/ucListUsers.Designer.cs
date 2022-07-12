@@ -52,27 +52,26 @@
             // 
             this.searchControl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.searchControl.Client = this.grdListUser;
-            this.searchControl.Location = new System.Drawing.Point(0, 10);
-            this.searchControl.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.searchControl.Location = new System.Drawing.Point(2, 8);
+            this.searchControl.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.searchControl.Name = "searchControl";
-            this.searchControl.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchControl.Properties.Appearance.Options.UseFont = true;
+            this.searchControl.Properties.AutoHeight = false;
             this.searchControl.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Repository.ClearButton(),
             new DevExpress.XtraEditors.Repository.SearchButton()});
             this.searchControl.Properties.Client = this.grdListUser;
             this.searchControl.Properties.FindDelay = 100;
-            this.searchControl.Size = new System.Drawing.Size(220, 30);
+            this.searchControl.Size = new System.Drawing.Size(192, 24);
             this.searchControl.TabIndex = 10;
             // 
             // grdListUser
             // 
             this.grdListUser.ContextMenuStrip = this.contextMenuStrip1;
             this.grdListUser.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.grdListUser.Location = new System.Drawing.Point(2, 27);
+            this.grdListUser.Location = new System.Drawing.Point(2, 24);
             this.grdListUser.MainView = this.grvListUser;
             this.grdListUser.Name = "grdListUser";
-            this.grdListUser.Size = new System.Drawing.Size(904, 366);
+            this.grdListUser.Size = new System.Drawing.Size(790, 310);
             this.grdListUser.TabIndex = 0;
             this.grdListUser.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grvListUser});
@@ -84,25 +83,26 @@
             this.tsmiResetPassword,
             this.tsmiKick});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 70);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(129, 48);
             this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             // 
             // tsmiResetPassword
             // 
             this.tsmiResetPassword.Name = "tsmiResetPassword";
-            this.tsmiResetPassword.Size = new System.Drawing.Size(180, 22);
+            this.tsmiResetPassword.Size = new System.Drawing.Size(128, 22);
             this.tsmiResetPassword.Text = "Reset pass";
             this.tsmiResetPassword.Click += new System.EventHandler(this.tsmiResetPassword_Click);
             // 
             // tsmiKick
             // 
             this.tsmiKick.Name = "tsmiKick";
-            this.tsmiKick.Size = new System.Drawing.Size(180, 22);
+            this.tsmiKick.Size = new System.Drawing.Size(128, 22);
             this.tsmiKick.Text = "Kick out";
             this.tsmiKick.Click += new System.EventHandler(this.tsmiKick_Click);
             // 
             // grvListUser
             // 
+            this.grvListUser.DetailHeight = 297;
             this.grvListUser.GridControl = this.grdListUser;
             this.grvListUser.Name = "grvListUser";
             this.grvListUser.OptionsView.ShowGroupPanel = false;
@@ -136,11 +136,11 @@
             this.windowsUIButton.Controls.Add(this.searchControl);
             this.windowsUIButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.windowsUIButton.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.windowsUIButton.Location = new System.Drawing.Point(0, 395);
-            this.windowsUIButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.windowsUIButton.Location = new System.Drawing.Point(0, 336);
+            this.windowsUIButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.windowsUIButton.Name = "windowsUIButton";
-            this.windowsUIButton.Padding = new System.Windows.Forms.Padding(5);
-            this.windowsUIButton.Size = new System.Drawing.Size(908, 40);
+            this.windowsUIButton.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.windowsUIButton.Size = new System.Drawing.Size(794, 34);
             this.windowsUIButton.TabIndex = 4;
             this.windowsUIButton.Text = "windowsUIButtonPanel1";
             this.windowsUIButton.UseButtonBackgroundImages = false;
@@ -152,17 +152,17 @@
             this.groupListUsers.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupListUsers.Location = new System.Drawing.Point(0, 0);
             this.groupListUsers.Name = "groupListUsers";
-            this.groupListUsers.Size = new System.Drawing.Size(908, 395);
+            this.groupListUsers.Size = new System.Drawing.Size(794, 336);
             this.groupListUsers.TabIndex = 5;
             // 
             // ucListUsers
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.groupListUsers);
             this.Controls.Add(this.windowsUIButton);
             this.Name = "ucListUsers";
-            this.Size = new System.Drawing.Size(908, 435);
+            this.Size = new System.Drawing.Size(794, 370);
             ((System.ComponentModel.ISupportInitialize)(this.searchControl.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdListUser)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);

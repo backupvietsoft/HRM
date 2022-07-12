@@ -62,11 +62,11 @@
             this.windowsUIButton.Controls.Add(this.searchControl);
             this.windowsUIButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.windowsUIButton.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.windowsUIButton.Location = new System.Drawing.Point(0, 360);
-            this.windowsUIButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.windowsUIButton.Location = new System.Drawing.Point(0, 306);
+            this.windowsUIButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.windowsUIButton.Name = "windowsUIButton";
-            this.windowsUIButton.Padding = new System.Windows.Forms.Padding(5);
-            this.windowsUIButton.Size = new System.Drawing.Size(800, 40);
+            this.windowsUIButton.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.windowsUIButton.Size = new System.Drawing.Size(700, 34);
             this.windowsUIButton.TabIndex = 2;
             this.windowsUIButton.Text = "windowsUIButtonPanel1";
             this.windowsUIButton.UseButtonBackgroundImages = false;
@@ -76,37 +76,38 @@
             // 
             this.searchControl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.searchControl.Client = this.treeListNhomTo;
-            this.searchControl.Location = new System.Drawing.Point(0, 10);
-            this.searchControl.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.searchControl.Location = new System.Drawing.Point(4, 8);
+            this.searchControl.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.searchControl.Name = "searchControl";
-            this.searchControl.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchControl.Properties.Appearance.Options.UseFont = true;
+            this.searchControl.Properties.AutoHeight = false;
             this.searchControl.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Repository.ClearButton(),
             new DevExpress.XtraEditors.Repository.SearchButton()});
             this.searchControl.Properties.Client = this.treeListNhomTo;
             this.searchControl.Properties.FindDelay = 100;
-            this.searchControl.Size = new System.Drawing.Size(286, 30);
+            this.searchControl.Size = new System.Drawing.Size(192, 24);
             this.searchControl.TabIndex = 10;
             // 
             // treeListNhomTo
             // 
             this.treeListNhomTo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeListNhomTo.Location = new System.Drawing.Point(0, 0);
+            this.treeListNhomTo.MinWidth = 17;
             this.treeListNhomTo.Name = "treeListNhomTo";
             this.treeListNhomTo.OptionsBehavior.AllowBoundCheckBoxesInVirtualMode = true;
             this.treeListNhomTo.OptionsBehavior.AllowRecursiveNodeChecking = true;
-            this.treeListNhomTo.Size = new System.Drawing.Size(800, 360);
+            this.treeListNhomTo.Size = new System.Drawing.Size(700, 306);
             this.treeListNhomTo.TabIndex = 3;
+            this.treeListNhomTo.TreeLevelWidth = 16;
             // 
             // ucNHOMTO
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.treeListNhomTo);
             this.Controls.Add(this.windowsUIButton);
             this.Name = "ucNHOMTO";
-            this.Size = new System.Drawing.Size(800, 400);
+            this.Size = new System.Drawing.Size(700, 340);
             this.Load += new System.EventHandler(this.ucNHOMTO_Load);
             this.windowsUIButton.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.searchControl.Properties)).EndInit();

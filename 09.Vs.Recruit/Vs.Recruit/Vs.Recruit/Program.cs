@@ -26,9 +26,8 @@ namespace Vs.Recruit
             //ds.ReadXml(AppDomain.CurrentDomain.BaseDirectory + "\\vsconfig.xml");
             Commons.IConnections.Username = "sa";
             Commons.IConnections.Server = @"27.74.240.29";
-            Commons.IConnections.Database = "VS_HRM_CHINH";
+            Commons.IConnections.Database = "VS_HRM_DM";
             Commons.IConnections.Password = "codaikadaiku";
-
             Commons.Modules.sPrivate = @"PILMICO";
             //Commons.Modules.sPrivate = @"ADC";
 
@@ -55,13 +54,8 @@ namespace Vs.Recruit
             try
             {
                 Application.Run(new Form1());
-
                 //Application.Run(new frmEditTHONG_BAO_TUYEN_DUNG_VIEW(-1));
-
-
                 //Application.Run(new frmEditVI_TRI_TUYEN_DUNG(-1,-1,-1,true));
-
-
             }
             catch (Exception ex)
             {

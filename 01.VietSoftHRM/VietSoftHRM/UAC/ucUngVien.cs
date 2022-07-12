@@ -127,7 +127,6 @@ namespace VietSoftHRM
                 case "mnuYCTD":
                     {
                         ucYeuCauTuyenDung ns = new ucYeuCauTuyenDung();
-                        ns.accorMenuleft = accorMenuleft;
                         panel2.Controls.Clear();
                         panel2.Controls.Add(ns);
                         ns.Dock = DockStyle.Fill;
@@ -187,6 +186,15 @@ namespace VietSoftHRM
                         ns.Dock = DockStyle.Fill;
                         break;
                     }
+                case "mnuDinhBien":
+                    {
+                        ucDinhBienLD ns = new ucDinhBienLD();
+                        //ns.accorMenuleft = accorMenuleft;
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(ns);
+                        ns.Dock = DockStyle.Fill;
+                        break;
+                    }
                 case "mnuKHTD":
                     {
                         ucKeHoachTuyenDung ns = new ucKeHoachTuyenDung();
@@ -207,7 +215,6 @@ namespace VietSoftHRM
                 case "mnuYCTD":
                     {
                         ucYeuCauTuyenDung ns = new ucYeuCauTuyenDung();
-                        ns.accorMenuleft = accorMenuleft;
                         panel2.Controls.Clear();
                         panel2.Controls.Add(ns);
                         ns.Dock = DockStyle.Fill;

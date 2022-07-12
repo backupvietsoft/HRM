@@ -1,0 +1,24 @@
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'spGetListPhieuYeuCau')
+   exec('CREATE PROCEDURE spGetListPhieuYeuCau AS BEGIN SET NOCOUNT ON; END')
+GO
+ALTER PROCEDURE spGetListPhieuYeuCau
+    @TNgay DATETIME,
+	@DNgay DATETIME,
+	@UserName NVARCHAR(500),
+	@NNgu INT
+AS
+BEGIN
+	--SELECT ID_CN,MS_CN INTO #CN FROM dbo.MGetListNhanSu(-1,-1,-1,-1,@UserName,@NNgu);
+	SELECT A.ID_YCTD,
+           A.MA_YCTD,
+           A.ID_TO,
+		 CASE @NNgu WHEN 0 THEN B.TEN_TO WHEN 1 THEN ISNULL(NULLIF(B.TEN_TO_A,''),B.TEN_TO) ELSE ISNULL(NULLIF(B.TEN_TO_H,''),B.TEN_TO) END AS TEN_TO , 
+           A.ID_CN,
+		   C.TEN,
+           A.NGAY_YEU_CAU,
+           A.NGAY_NHAN_DON,
+           A.GHI_CHU FROM dbo.YEU_CAU_TUYEN_DUNG A INNER JOIN dbo.[TO] B ON B.ID_TO = A.ID_TO
+		   INNER JOIN dbo.CONG_NHAN C ON C.ID_CN = A.ID_CN
+		   ORDER BY A.MA_YCTD
+END
+

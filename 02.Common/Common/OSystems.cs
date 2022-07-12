@@ -31,7 +31,6 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace Commons
 {
@@ -894,10 +893,10 @@ namespace Commons
             {
                 if (CoNull)
                     dtTmp.Rows.Add(-99, "");
-
                 cbo.Properties.DataSource = null;
                 cbo.Properties.DisplayMember = "";
                 cbo.Properties.ValueMember = "";
+                //cbo.BindingContext = new BindingContext();
                 cbo.Properties.DataSource = dtTmp;
                 cbo.Properties.DisplayMember = Ten;
                 cbo.Properties.ValueMember = Ma;
@@ -919,6 +918,10 @@ namespace Commons
 
                 cbo.Properties.PopulateViewColumns();
                 cbo.Properties.View.Columns[0].Visible = false;
+                cbo.Properties.View.Columns[Ten].SortOrder = DevExpress.Data.ColumnSortOrder.Ascending;
+                cbo.Properties.View.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+                cbo.Properties.View.Appearance.HeaderPanel.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+                cbo.Properties.View.Appearance.HeaderPanel.Options.UseTextOptions = true;
                 if (isNgonNgu)
                 {
                     DevExpress.XtraGrid.Views.Grid.GridView grv = (DevExpress.XtraGrid.Views.Grid.GridView)cbo.Properties.PopupView;
@@ -926,10 +929,6 @@ namespace Commons
                     {
                         if (col.Visible)
                         {
-
-                            col.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-                            col.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-                            col.AppearanceHeader.Options.UseTextOptions = true;
                             col.Caption = Modules.ObjLanguages.GetLanguage(Modules.ModuleName, "SearchLookUpEdit", col.FieldName, Modules.TypeLanguage);
                         }
                     }
@@ -1110,6 +1109,7 @@ namespace Commons
         {
             try
             {
+                grd.BindingContext = new BindingContext();
                 grd.DataSource = dtTmp;
                 grv.OptionsBehavior.Editable = MEditable;
                 grv.OptionsView.RowAutoHeight = true;
@@ -1154,7 +1154,6 @@ namespace Commons
 
                 grv.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
                 grv.Appearance.HeaderPanel.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-                grv.Appearance.HeaderPanel.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
                 if (MloadNNgu)
                     MLoadNNXtraGrid(grv, fName);
 
@@ -1323,33 +1322,16 @@ namespace Commons
 
         public void MLoadNNXtraGrid(DevExpress.XtraGrid.Views.Grid.GridView grv, string fName)
         {
-            //DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit repoMemo = new DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit();
-            //repoMemo.WordWrap = true;
+
             grv.OptionsView.RowAutoHeight = true;
 
             DataTable dtTmp = new DataTable();
             dtTmp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT DISTINCT KEYWORD , CASE " + Modules.TypeLanguage + " WHEN 0 THEN VIETNAM WHEN 1 THEN ENGLISH ELSE CHINESE END AS NN  FROM LANGUAGES WHERE FORM = N'" + fName + "' "));
-
-
             foreach (DevExpress.XtraGrid.Columns.GridColumn col in grv.Columns)
             {
                 if (col.Visible)
                 {
-                    //if (col.ColumnType.ToString() == "System.String")
-                    //    col.ColumnEdit = repoMemo;
-                    //col.AppearanceHeader.Options.UseTextOptions = true;
-
-
-                    //col.AppearanceHeader.TextOptions.HAlignment = HorzAlignment.Center;
-                    //col.AppearanceHeader.TextOptions.Trimming = DevExpress.Utils.Trimming.None;
-                    //col.AppearanceHeader.TextOptions.VAlignment = VertAlignment.Center;
-                    //col.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-
-
-                    //col.Caption = "aaaa";
-                    //Modules.ObjLanguages.GetLanguage(Modules.ModuleName, fName, col.FieldName, Modules.TypeLanguage);
                     col.Caption = GetNN(dtTmp, col.FieldName, fName);
-
                 }
             }
         }
@@ -3566,8 +3548,10 @@ namespace Commons
             grv.Columns[Value].ColumnEdit = cbo;
         }
 
-        public void AddCombXtra(string Value, string Display, GridView grv, DataTable dt, string cotan, string fName)
+        public void AddCombXtra(string Value, string Display, GridView grv, DataTable dt, string cotan, string fName, bool CoNull = false)
         {
+            if (CoNull)
+                dt.Rows.Add(-99, "");
             RepositoryItemSearchLookUpEdit cbo = new RepositoryItemSearchLookUpEdit();
             cbo.NullText = "";
             cbo.ValueMember = Value;
@@ -3576,14 +3560,17 @@ namespace Commons
             cbo.BestFitMode = BestFitMode.BestFitResizePopup;
             grv.Columns[Value].ColumnEdit = cbo;
             cbo.View.PopulateColumns(cbo.DataSource);
+            cbo.View.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            cbo.View.Appearance.HeaderPanel.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            cbo.View.Columns[Display].SortOrder = DevExpress.Data.ColumnSortOrder.Ascending;
             Commons.Modules.ObjSystems.MLoadNNXtraGrid(cbo.View, fName);
             cbo.View.Columns[cotan].Visible = false;
-
         }
 
-
-        public void AddCombXtra(string Value, string Display, GridView grv, DataTable tempt, bool Search, string cotan, string form)
+        public void AddCombXtra(string Value, string Display, GridView grv, DataTable tempt, bool Search, string cotan, string fName, bool CoNull = false)
         {
+            if (CoNull)
+                tempt.Rows.Add(-99, "");
             if (Search == true)
             {
                 RepositoryItemSearchLookUpEdit cbo = new RepositoryItemSearchLookUpEdit();
@@ -3591,7 +3578,12 @@ namespace Commons
                 cbo.ValueMember = Value;
                 cbo.DisplayMember = Display;
                 cbo.DataSource = tempt;
-                Commons.Modules.ObjSystems.MLoadNNXtraGrid(cbo.View, form);
+                cbo.View.PopulateColumns(cbo.DataSource);
+                cbo.View.Columns[cotan].Visible = false;
+                cbo.View.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+                cbo.View.Appearance.HeaderPanel.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+                cbo.View.Columns[Display].SortOrder = DevExpress.Data.ColumnSortOrder.Ascending;
+                Commons.Modules.ObjSystems.MLoadNNXtraGrid(cbo.View, fName);
                 grv.Columns[Value].ColumnEdit = cbo;
             }
             else
@@ -3604,7 +3596,11 @@ namespace Commons
                 grv.Columns[Value].ColumnEdit = cbo;
                 cbo.PopulateColumns();
                 cbo.Columns[cotan].Visible = false;
-                cbo.Columns[Display].Caption = Commons.Modules.ObjLanguages.GetLanguage(form, Display);
+                cbo.SortColumnIndex = 1;
+                cbo.Columns[Display].SortOrder = DevExpress.Data.ColumnSortOrder.Ascending;
+                cbo.AppearanceDropDownHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+                cbo.AppearanceDropDownHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+                cbo.Columns[Display].Caption = Commons.Modules.ObjLanguages.GetLanguage(fName, Display);
             }
         }
 
@@ -4207,6 +4203,14 @@ namespace Commons
             dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboTinhTrang", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll));
             return dt;
         }
+        public DataTable DataTinhTrangDuyet(bool coAll)
+        {
+            //ID_TTD,TEN_TT_DUYET
+            DataTable dt = new DataTable();
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboTinhTrangDuyet", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll));
+            return dt;
+        }
+
         public DataTable DataCongNhanTheoDK(bool coAll, Int32 ID_DV, Int32 ID_XN, Int32 ID_TO, DateTime TNgay, DateTime DNgay)
         {
             try
@@ -4305,6 +4309,37 @@ namespace Commons
             //ID_LCV,TEN_LCV
             DataTable dt = new DataTable();
             dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboLoaiCV", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll));
+            return dt;
+        }
+
+        public DataTable DataLoaiHinhCV(bool coAll)
+        {
+            //ID_LHCV,TEN_LHCV
+            DataTable dt = new DataTable();
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboLoaiHinhCV", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll));
+            return dt;
+        }
+
+        public DataTable DataKinhNghiemLV(bool coAll)
+        {
+            //ID_KNLV,TEN_KNLV
+            DataTable dt = new DataTable();
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboKinhNghiemLV", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll));
+            return dt;
+        }
+        public DataTable DataLoaiTuyen(bool coAll)
+        {
+            //ID_LOAI_TUYEN,TEN_LOAI_TUYEN
+            DataTable dt = new DataTable();
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboLoaiTuyen", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll));
+            return dt;
+        }
+
+        public DataTable DataNganhTD(bool coAll)
+        {
+            //ID_NGANH_TD,TEN_NGANH_TD
+            DataTable dt = new DataTable();
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboNganhTD", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll));
             return dt;
         }
 
@@ -4463,6 +4498,25 @@ namespace Commons
         }
 
         #endregion
+
+        public bool IsnullorEmpty(object input)
+        {
+            bool resust = false;
+            try
+            {
+                if (input.ToString() == "" || input.ToString() == "0")
+                {
+                    resust = true;
+                }
+            }
+            catch (Exception)
+            {
+                resust = true;
+            }
+            return resust;
+        }
+
+
         public void MChooseGrid(bool bChose, string sCot, DevExpress.XtraGrid.Views.Grid.GridView grv)
         {
             try

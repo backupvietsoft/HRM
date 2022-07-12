@@ -620,8 +620,9 @@ namespace VietSoftHRM
 
             if (Convert.ToInt64(Commons.Modules.sIdHT) < 1)
             {
-                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgBanPhaiVaoNhomTruoc"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK,MessageBoxIcon.Information);
-                resulst = true;
+                //XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgBanPhaiVaoNhomTruoc"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK,MessageBoxIcon.Information);
+                Commons.Modules.sIdHT = "1";
+                resulst = false;
             }
             return resulst;
         }

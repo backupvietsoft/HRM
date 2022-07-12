@@ -88,10 +88,10 @@
             // 
             this.gridSplitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridSplitContainer1.Grid = this.grdNhom;
-            this.gridSplitContainer1.Location = new System.Drawing.Point(2, 21);
+            this.gridSplitContainer1.Location = new System.Drawing.Point(2, 24);
             this.gridSplitContainer1.Name = "gridSplitContainer1";
             this.gridSplitContainer1.Panel1.Controls.Add(this.grdNhom);
-            this.gridSplitContainer1.Size = new System.Drawing.Size(281, 453);
+            this.gridSplitContainer1.Size = new System.Drawing.Size(281, 450);
             this.gridSplitContainer1.TabIndex = 0;
             // 
             // grdNhom
@@ -100,7 +100,7 @@
             this.grdNhom.Location = new System.Drawing.Point(0, 0);
             this.grdNhom.MainView = this.grvNhom;
             this.grdNhom.Name = "grdNhom";
-            this.grdNhom.Size = new System.Drawing.Size(281, 453);
+            this.grdNhom.Size = new System.Drawing.Size(281, 450);
             this.grdNhom.TabIndex = 0;
             this.grdNhom.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grvNhom});
@@ -123,17 +123,17 @@
             this.grpUser.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grpUser.Location = new System.Drawing.Point(0, 0);
             this.grpUser.Name = "grpUser";
-            this.grpUser.Size = new System.Drawing.Size(709, 476);
+            this.grpUser.Size = new System.Drawing.Size(713, 476);
             this.grpUser.TabIndex = 0;
             this.grpUser.Text = "Danh sách User theo Nhóm";
             // 
             // grdUser
             // 
             this.grdUser.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.grdUser.Location = new System.Drawing.Point(2, 21);
+            this.grdUser.Location = new System.Drawing.Point(2, 24);
             this.grdUser.MainView = this.grvUser;
             this.grdUser.Name = "grdUser";
-            this.grdUser.Size = new System.Drawing.Size(705, 453);
+            this.grdUser.Size = new System.Drawing.Size(709, 450);
             this.grdUser.TabIndex = 1;
             this.grdUser.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grvUser});
@@ -176,9 +176,9 @@
             this.windowsUIButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.windowsUIButton.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.windowsUIButton.Location = new System.Drawing.Point(0, 476);
-            this.windowsUIButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.windowsUIButton.Margin = new System.Windows.Forms.Padding(4);
             this.windowsUIButton.Name = "windowsUIButton";
-            this.windowsUIButton.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.windowsUIButton.Padding = new System.Windows.Forms.Padding(4);
             this.windowsUIButton.Size = new System.Drawing.Size(1004, 34);
             this.windowsUIButton.TabIndex = 1;
             this.windowsUIButton.Text = "windowsUIButtonPanel1";
@@ -189,17 +189,16 @@
             // 
             this.searchControl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.searchControl.Client = this.grdUser;
-            this.searchControl.Location = new System.Drawing.Point(2, 7);
-            this.searchControl.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.searchControl.Location = new System.Drawing.Point(3, 7);
+            this.searchControl.Margin = new System.Windows.Forms.Padding(4);
             this.searchControl.Name = "searchControl";
-            this.searchControl.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchControl.Properties.Appearance.Options.UseFont = true;
+            this.searchControl.Properties.AutoHeight = false;
             this.searchControl.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Repository.ClearButton(),
             new DevExpress.XtraEditors.Repository.SearchButton()});
             this.searchControl.Properties.Client = this.grdUser;
             this.searchControl.Properties.FindDelay = 100;
-            this.searchControl.Size = new System.Drawing.Size(192, 30);
+            this.searchControl.Size = new System.Drawing.Size(192, 24);
             this.searchControl.TabIndex = 10;
             // 
             // panelControl1

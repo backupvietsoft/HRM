@@ -55,11 +55,9 @@ namespace Vs.TimeAttendance
         private void ucDangKiLamThem_Load(object sender, EventArgs e)
         {
             Commons.Modules.sLoad = "0Load";
-
             repositoryItemTimeEdit1.TimeEditStyle = TimeEditStyle.TouchUI;
             repositoryItemTimeEdit1.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.DateTimeAdvancingCaret;
             repositoryItemTimeEdit1.Mask.EditMask = "HH:mm";
-
             repositoryItemTimeEdit1.NullText = "00:00";
             repositoryItemTimeEdit1.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             repositoryItemTimeEdit1.DisplayFormat.FormatString = "HH:mm";

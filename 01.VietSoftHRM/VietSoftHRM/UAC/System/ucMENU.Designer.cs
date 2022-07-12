@@ -71,11 +71,11 @@
             this.windowButton.Controls.Add(this.searchControl);
             this.windowButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.windowButton.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.windowButton.Location = new System.Drawing.Point(0, 560);
-            this.windowButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.windowButton.Location = new System.Drawing.Point(0, 476);
+            this.windowButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.windowButton.Name = "windowButton";
-            this.windowButton.Padding = new System.Windows.Forms.Padding(5, 5, 5, 5);
-            this.windowButton.Size = new System.Drawing.Size(800, 40);
+            this.windowButton.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.windowButton.Size = new System.Drawing.Size(700, 34);
             this.windowButton.TabIndex = 2;
             this.windowButton.Text = "windowsUIButtonPanel1";
             this.windowButton.UseButtonBackgroundImages = false;
@@ -85,17 +85,16 @@
             // 
             this.searchControl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.searchControl.Client = this.treeListMenu;
-            this.searchControl.Location = new System.Drawing.Point(0, 8);
-            this.searchControl.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.searchControl.Location = new System.Drawing.Point(4, 7);
+            this.searchControl.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.searchControl.Name = "searchControl";
-            this.searchControl.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchControl.Properties.Appearance.Options.UseFont = true;
+            this.searchControl.Properties.AutoHeight = false;
             this.searchControl.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Repository.ClearButton(),
             new DevExpress.XtraEditors.Repository.SearchButton()});
             this.searchControl.Properties.Client = this.treeListMenu;
             this.searchControl.Properties.FindDelay = 100;
-            this.searchControl.Size = new System.Drawing.Size(220, 30);
+            this.searchControl.Size = new System.Drawing.Size(192, 24);
             this.searchControl.TabIndex = 10;
             // 
             // treeListMenu
@@ -103,23 +102,23 @@
             this.treeListMenu.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeListMenu.FixedLineWidth = 1;
             this.treeListMenu.Location = new System.Drawing.Point(0, 0);
-            this.treeListMenu.MinWidth = 21;
+            this.treeListMenu.MinWidth = 18;
             this.treeListMenu.Name = "treeListMenu";
             this.treeListMenu.OptionsBehavior.AllowBoundCheckBoxesInVirtualMode = true;
             this.treeListMenu.OptionsBehavior.AllowRecursiveNodeChecking = true;
-            this.treeListMenu.Size = new System.Drawing.Size(800, 560);
+            this.treeListMenu.Size = new System.Drawing.Size(700, 476);
             this.treeListMenu.TabIndex = 3;
-            this.treeListMenu.TreeLevelWidth = 17;
+            this.treeListMenu.TreeLevelWidth = 15;
             this.treeListMenu.RowCellClick += new DevExpress.XtraTreeList.RowCellClickEventHandler(this.treeListMenu_RowCellClick);
             // 
             // ucMENU
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.treeListMenu);
             this.Controls.Add(this.windowButton);
             this.Name = "ucMENU";
-            this.Size = new System.Drawing.Size(800, 600);
+            this.Size = new System.Drawing.Size(700, 510);
             this.Load += new System.EventHandler(this.ucMENU_Load);
             this.windowButton.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.searchControl.Properties)).EndInit();

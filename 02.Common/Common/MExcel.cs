@@ -454,6 +454,24 @@ public class MExcel
         }
     }
 
+    public void MReleaseObject(object obj)
+    {
+        try
+        {
+            System.Runtime.InteropServices.Marshal.ReleaseComObject(obj);
+            obj = null;
+        }
+        catch
+        {
+            obj = null;
+        }
+        finally
+        {
+            GC.Collect();
+        }
+    }
+
+
     public Excel.Range GetRange(Excel.Worksheet MWsheet, int DongBD, int CotBD, int DongKT, int CotKT)
     {
         try

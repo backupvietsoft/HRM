@@ -17,29 +17,9 @@ namespace Vs.Recruit
         public Form1()
         {
             InitializeComponent();
-            //if (iID == 1)
-            //{
-            //    ucTHONG_BAO_TUYEN_DUNG uac = new ucTHONG_BAO_TUYEN_DUNG();
-            //    this.Controls.Add(uac);
-            //    uac.Dock = DockStyle.Fill;
-            //}
-            //else
-            //{
-            //    ucPhongVan ucpv = new ucPhongVan(-1);
-            //    this.Controls.Add(ucpv);
-            //    ucpv.Dock = DockStyle.Fill;
-            //}
-
-            ucQLUV uac = new ucQLUV();
+            ucYeuCauTuyenDung uac = new ucYeuCauTuyenDung();
             this.Controls.Add(uac);
             uac.Dock = DockStyle.Fill;
-
-
-        }
-
-        private void xtraTabPage1_DoubleClick(object sender, EventArgs e)
-        {
-
         }
     }
 }

@@ -29,6 +29,7 @@ namespace Vs.Category
         private void frmEditLOAI_CONG_VIEC_Load(object sender, EventArgs e)
         {
             LoadLoaiTO();
+            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(ID_CVSearchLookUpEdit, Commons.Modules.ObjSystems.DataChucVu(false), "ID_CV", "TEN_CV", "TEN_CV",true,true);
             if (!AddEdit)
             {
                 LoadText();
@@ -46,19 +47,11 @@ namespace Vs.Category
         {
             DataTable dt = new DataTable();
             dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetListLOAI_TO", Commons.Modules.UserName, Commons.Modules.TypeLanguage));
-            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(ID_LTSearchLookUpEdit, dt, "ID_LT", "TEN_LT", "TEN_LT");
-        //    ID_LTSearchLookUpEdit.Properties.DataSource = dt;
-        //    ID_LTSearchLookUpEdit.Properties.ValueMember = "ID_LT";
-        //    ID_LTSearchLookUpEdit.Properties.DisplayMember = "TEN_LT";
-        //    ID_LTSearchLookUpEdit.Properties.PopulateViewColumns();
-
+            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(ID_LTSearchLookUpEdit, dt, "ID_LT", "TEN_LT", "TEN_LT",true,true);
             try
             {
 
                 if(ID_LTSearchLookUpEdit.Properties.View.Columns["ID_LT"]!=null) ID_LTSearchLookUpEdit.Properties.View.Columns["ID_LT"].Visible = false;
-             //   ID_LTSearchLookUpEdit.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.None;
-            //    ID_LTSearchLookUpEdit.Properties.View.Columns["TEN_LT"].Caption = Commons.Modules.ObjLanguages.GetLanguage("ucListDMuc", "TEN_LT");
-            //    ID_LTSearchLookUpEdit.Properties.View.Columns["TEN_LT"].AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             }
             catch (Exception EX)
             {
@@ -79,6 +72,7 @@ namespace Vs.Category
                 DOC_HAICheckEdit.EditValue = Convert.ToBoolean(dtTmp.Rows[0]["DOC_HAI"]);
                 PHEP_CTTextEdit.EditValue = dtTmp.Rows[0]["PHEP_CT"].ToString();
                 ID_LTSearchLookUpEdit.EditValue = dtTmp.Rows[0]["ID_LT"];
+                ID_CVSearchLookUpEdit.EditValue = dtTmp.Rows[0]["ID_CV"];
                 txtSTT.EditValue = Convert.ToInt32(dtTmp.Rows[0]["STT"]);
             }
             catch 
@@ -116,7 +110,7 @@ namespace Vs.Category
                                 TEN_LCVTextEdit.EditValue, TEN_LCV_ATextEdit.EditValue,
                                 TEN_LCV_HTextEdit.EditValue, DOC_HAICheckEdit.EditValue,
                                 (PHEP_CTTextEdit.EditValue == null) ? 0 : PHEP_CTTextEdit.EditValue,
-                                ID_LTSearchLookUpEdit.EditValue,
+                                ID_LTSearchLookUpEdit.EditValue,ID_CVSearchLookUpEdit.EditValue,
                                 (txtSTT.Text == "") ? txtSTT.EditValue = null : txtSTT.EditValue
                                 ).ToString();
                             if (AddEdit)

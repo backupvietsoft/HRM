@@ -197,7 +197,7 @@ namespace Commons
             strFile = LocKyTuDB(strFile);
             string SERVER_FOLDER_PATH = "";
             string SERVER_PATH = "";
-            SERVER_PATH = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT TOP 1 DUONG_DAN_TL FROM dbo.THONG_TIN_CHUNG").ToString();
+            SERVER_PATH = Commons.Modules.sDDTaiLieu;
             if (!System.IO.Directory.Exists(SERVER_PATH))
                 SERVER_PATH = "";
             if (!SERVER_PATH.EndsWith(@"\"))
@@ -209,6 +209,31 @@ namespace Commons
             }
             return SERVER_FOLDER_PATH;
         }
+
+        public bool LuuDuongDan(string strDUONG_DAN, string strHINH, string FormThuMuc)
+        {
+            String server = Environment.UserName;
+            string folderLocation = Commons.Modules.sDDTaiLieu + '\\' + FormThuMuc;
+            string folderLocationFile = folderLocation + '\\' + strHINH;
+            bool exists = System.IO.Directory.Exists(folderLocation);
+            if (!exists)
+            {
+                System.IO.Directory.CreateDirectory(folderLocation);
+            }
+            if (!File.Exists(folderLocationFile))
+            {
+                if (System.IO.File.Exists(strDUONG_DAN))
+                {
+                    System.IO.File.Copy(strDUONG_DAN, folderLocation + '\\' + strHINH, true);
+                }
+            }
+            else
+            {
+                return false;
+            }
+            return true;
+        }
+
         public void LuuDuongDan(string strDUONG_DAN, string strHINH)
         {
             if (strHINH.Equals(""))
@@ -2207,7 +2232,7 @@ namespace Commons
                         }
                     case "XtraTabPage":
                     case "GroupControl":
-                       {
+                        {
                             if (Ctl.Name.ToUpper().Substring(0, 4) != "NONN" & Ctl.Name.Length > 4)
                                 Ctl.Text = GetNN(dtNgu, Ctl.Name, frm.Name);// Modules.ObjLanguages.GetLanguage(Modules.ModuleName, frm.Name, Ctl.Name, Modules.TypeLanguage)
                             if (Ctl.GetType().Name.ToString() == "LabelControl")
@@ -3714,6 +3739,85 @@ namespace Commons
             cbo.DataSource = tempt;
             tree.Columns[Value].ColumnEdit = cbo;
         }
+        public void AddButonEdit(string Value, GridView view, OpenFileDialog ofdfile, string follder)
+        {
+            RepositoryItemButtonEdit txtfile = new RepositoryItemButtonEdit();
+            view.Columns[Value].ColumnEdit = txtfile;
+            txtfile.ButtonClick += delegate (object a, ButtonPressedEventArgs b) { txtfile_ButtonClick(txtfile, null, ofdfile, follder); };
+            txtfile.DoubleClick += delegate (object a, EventArgs b) { Txtfile_DoubleClick(txtfile, null, ofdfile, follder); };
+        }
+
+        private void Txtfile_DoubleClick(object sender, EventArgs e,OpenFileDialog ofileDialog, string follder)
+        {
+            try
+            {
+                ButtonEdit a = sender as ButtonEdit;
+                Commons.Modules.ObjSystems.OpenHinh(Commons.Modules.sDDTaiLieu + '\\' + follder +'\\' + a.Text);
+            }
+            catch
+            {
+            }
+        }
+        private void LayDuongDan(OpenFileDialog ofdfile, ButtonEdit txtTaiLieu, string follder)
+        {
+            try
+            {
+                var strDuongDanTmp = Commons.Modules.ObjSystems.CapnhatTL(follder);
+                string[] sFile;
+                string TenFile;
+
+                TenFile = ofdfile.SafeFileName.ToString();
+                sFile = System.IO.Directory.GetFiles(strDuongDanTmp);
+
+                if (Commons.Modules.ObjSystems.KiemFileTonTai(strDuongDanTmp + @"\" + ofdfile.SafeFileName.ToString()) == false)
+                    txtTaiLieu.Text = strDuongDanTmp + @"\" + ofdfile.SafeFileName.ToString();
+                else
+                {
+                    TenFile = Commons.Modules.ObjSystems.STTFileCungThuMuc(strDuongDanTmp, TenFile);
+                    txtTaiLieu.Text = strDuongDanTmp + @"\" + TenFile;
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+        private void txtfile_ButtonClick(object sender, ButtonPressedEventArgs e, OpenFileDialog ofileDialog, string follder)
+        {
+            try
+            {
+                ButtonEdit a = (ButtonEdit)sender ;
+                if (ofileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    if (ofileDialog.FileName.ToString().Trim() == "") return;
+                    Commons.Modules.ObjSystems.LuuDuongDan(ofileDialog.FileName, ofileDialog.SafeFileName, follder);
+                    //a.Text = ofileDialog.SafeFileName;
+                }
+            }
+            catch
+            {
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgBanKhongCoQuyenTruyCapDD"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgfrmThongBao"), MessageBoxButtons.OK);
+            }
+        }
+
+        public void RowFilter(GridControl grid, GridColumn column, string value)
+        {
+            GridControl _grid = grid;
+            GridView _view = grid.MainView as GridView;
+            GridColumn _column = column;
+            DataTable dt = new DataTable();
+            dt = (DataTable)_grid.DataSource;
+            if (dt == null) return;
+            try
+            {
+                dt.DefaultView.RowFilter = column.FieldName + " = " + value;
+                _view.SelectRow(0);
+            }
+            catch
+            {
+                dt.DefaultView.RowFilter = "1 = 0";
+            }
+        }
+
         #endregion
         public void AddnewRow(GridView view, bool add)
         {
@@ -4402,7 +4506,7 @@ namespace Commons
             //1 còn làm
             //2 đã nghĩ
             DataTable dt = new DataTable();
-            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetCongNhanTheoTT", Commons.Modules.UserName,TT, Commons.Modules.TypeLanguage, coAll));
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetCongNhanTheoTT", Commons.Modules.UserName, TT, Commons.Modules.TypeLanguage, coAll));
             return dt;
         }
         public DataTable DataDonVi(bool coAll)

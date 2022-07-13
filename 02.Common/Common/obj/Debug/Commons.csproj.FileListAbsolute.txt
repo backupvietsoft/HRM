@@ -1089,3 +1089,4 @@ D:\01.SourceCode\02.HRM\02.Common\Common\obj\Debug\Commons.csproj.CoreCompileInp
 D:\01.SourceCode\02.HRM\02.Common\Common\obj\Debug\Commons.csproj.CopyComplete
 D:\01.SourceCode\02.HRM\02.Common\Common\obj\Debug\Commons.dll
 D:\01.SourceCode\02.HRM\02.Common\Common\obj\Debug\Commons.pdb
+G:\2022\02.HRM\02.Common\Common\obj\Debug\Commons.csprojAssemblyReference.cache

@@ -2333,3 +2333,4 @@ G:\2022\02.HRM\01.VietSoftHRM\VietSoftHRM\obj\Debug\VietSoftHRM.csproj.CoreCompi
 G:\2022\02.HRM\01.VietSoftHRM\VietSoftHRM\obj\Debug\VietSoftHRM.csproj.CopyComplete
 G:\2022\02.HRM\01.VietSoftHRM\VietSoftHRM\obj\Debug\VietSoftHRM.exe
 G:\2022\02.HRM\01.VietSoftHRM\VietSoftHRM\obj\Debug\VietSoftHRM.pdb
+G:\2022\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\DevExpress.RichEdit.v20.1.Export.dll

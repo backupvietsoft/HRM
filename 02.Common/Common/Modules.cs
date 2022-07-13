@@ -230,7 +230,18 @@ namespace Commons
                 _sHideMenu = value;
             }
         }
-
+        private static string _sDDTaiLieu;
+        public static string sDDTaiLieu
+        {
+            get
+            {
+                return _sDDTaiLieu;
+            }
+            set
+            {
+                _sDDTaiLieu = value;
+            }
+        }
 
         //định nghĩa làm tròn giờ
         private static int _iLamTronGio;

@@ -62,12 +62,12 @@
             this.datDenNgay = new DevExpress.XtraEditors.DateEdit();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.tab = new DevExpress.XtraLayout.TabbedControlGroup();
+            this.tabFile = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             this.tabViTri = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem13 = new DevExpress.XtraLayout.LayoutControlItem();
             this.groNVThayThe = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.tabFile = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             this.splitterItem1 = new DevExpress.XtraLayout.SplitterItem();
             this.lblTuNgay = new DevExpress.XtraLayout.LayoutControlItem();
             this.lblDenNgay = new DevExpress.XtraLayout.LayoutControlItem();
@@ -111,12 +111,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.datDenNgay.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tab)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tabFile)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabViTri)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem13)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groNVThayThe)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tabFile)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitterItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblTuNgay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblDenNgay)).BeginInit();
@@ -255,7 +255,6 @@
             this.grvThayThe.OptionsView.ShowGroupPanel = false;
             this.grvThayThe.InitNewRow += new DevExpress.XtraGrid.Views.Grid.InitNewRowEventHandler(this.grvThayThe_InitNewRow);
             this.grvThayThe.CellValueChanged += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.grvThayThe_CellValueChanged);
-            this.grvThayThe.CellValueChanging += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.grvThayThe_CellValueChanging);
             // 
             // txtLyDo
             // 
@@ -444,6 +443,26 @@
             this.tab.Text = "File đính kèm";
             this.tab.SelectedPageChanged += new DevExpress.XtraLayout.LayoutTabPageChangedEventHandler(this.tab_SelectedPageChanged);
             // 
+            // tabFile
+            // 
+            this.tabFile.AppearanceTabPage.Header.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.tabFile.AppearanceTabPage.Header.Options.UseForeColor = true;
+            this.tabFile.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItem3});
+            this.tabFile.Location = new System.Drawing.Point(0, 0);
+            this.tabFile.Name = "tabFile";
+            this.tabFile.Size = new System.Drawing.Size(759, 417);
+            this.tabFile.Text = "File đính kèm";
+            // 
+            // layoutControlItem3
+            // 
+            this.layoutControlItem3.Control = this.grdFileDK;
+            this.layoutControlItem3.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlItem3.Name = "layoutControlItem3";
+            this.layoutControlItem3.Size = new System.Drawing.Size(759, 417);
+            this.layoutControlItem3.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem3.TextVisible = false;
+            // 
             // tabViTri
             // 
             this.tabViTri.AppearanceTabPage.Header.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
@@ -492,26 +511,6 @@
             this.layoutControlItem2.Size = new System.Drawing.Size(735, 163);
             this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem2.TextVisible = false;
-            // 
-            // tabFile
-            // 
-            this.tabFile.AppearanceTabPage.Header.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.tabFile.AppearanceTabPage.Header.Options.UseForeColor = true;
-            this.tabFile.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlItem3});
-            this.tabFile.Location = new System.Drawing.Point(0, 0);
-            this.tabFile.Name = "tabFile";
-            this.tabFile.Size = new System.Drawing.Size(759, 417);
-            this.tabFile.Text = "File đính kèm";
-            // 
-            // layoutControlItem3
-            // 
-            this.layoutControlItem3.Control = this.grdFileDK;
-            this.layoutControlItem3.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Size = new System.Drawing.Size(759, 417);
-            this.layoutControlItem3.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem3.TextVisible = false;
             // 
             // splitterItem1
             // 
@@ -722,12 +721,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.datDenNgay.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tab)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tabFile)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabViTri)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem13)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groNVThayThe)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tabFile)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitterItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblTuNgay)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblDenNgay)).EndInit();

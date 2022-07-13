@@ -3846,7 +3846,7 @@ namespace Commons
             view.PostEditor();
             view.UpdateCurrentRow();
             DataView dt = (DataView)view.DataSource;
-            if (dt == null || dt.Count == 0)
+            if (dt == null)
                 return null;
             DataTable tempt = dt.ToTable();
             return tempt;

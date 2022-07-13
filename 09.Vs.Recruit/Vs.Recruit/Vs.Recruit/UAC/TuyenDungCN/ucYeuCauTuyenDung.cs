@@ -25,6 +25,7 @@ namespace Vs.Recruit.UAC
             LoadgrdPYC();
             LoadgrdViTri();
             LoadgrdThayThe();
+            LoadgrdFileDinhKem();
             BindingData(false);
             enableButon(true);
         }
@@ -187,7 +188,7 @@ namespace Vs.Recruit.UAC
                     a.Text = ofileDialog.SafeFileName;
                 }
             }
-            catch
+            catch(Exception ex)
             {
                 XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgBanKhongCoQuyenTruyCapDD"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgfrmThongBao"), MessageBoxButtons.OK);
             }
@@ -223,7 +224,9 @@ namespace Vs.Recruit.UAC
 
                 case "luu":
                     {
-                        if (!SaveData()) return;
+                        if (!SaveData())
+                            return;
+                        LoadgrdPYC();
                         Commons.Modules.ObjSystems.DeleteAddRow(grvViTri);
                         Commons.Modules.ObjSystems.DeleteAddRow(grvThayThe);
                         Commons.Modules.ObjSystems.DeleteAddRow(grvFileDK);
@@ -251,11 +254,15 @@ namespace Vs.Recruit.UAC
         {
             try
             {
-                Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, "sBTVT" + Commons.Modules.UserName, Commons.Modules.ObjSystems.ConvertDatatable(grvViTri), "");
+                Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, "sBTVT" + Commons.Modules.UserName, Commons.Modules.ObjSystems.ConvertDatatable(grvViTri),"");
                 Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, "sBTThayThe" + Commons.Modules.UserName, Commons.Modules.ObjSystems.ConvertDatatable(grvThayThe), "");
                 Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, "sBTFile" + Commons.Modules.UserName, Commons.Modules.ObjSystems.ConvertDatatable(grvFileDK), "");
-                iID_YCTD = Convert.ToInt64(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spSaveYeuCauTuyenDung", iID_YCTD, txtMA_YCTD.EditValue, cboBPYC.EditValue, cboNguoiYC.EditValue, datNgayYC.DateTime,  datNgayNhanDon.EditValue, txtLyDo.EditValue, grvViTri.RowCount == 0 ? "" : "sBTVT" + Commons.Modules.UserName, grvThayThe.RowCount == 0 ? "" : "sBTThayThe" + Commons.Modules.UserName, grvFileDK.RowCount == 0 ?"": "sBTFile" + Commons.Modules.UserName));
-                return true;
+                iID_YCTD = Convert.ToInt64(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spSaveYeuCauTuyenDung", iID_YCTD, txtMA_YCTD.EditValue, cboBPYC.EditValue, cboNguoiYC.EditValue, datNgayYC.DateTime, datNgayNhanDon.EditValue, txtLyDo.EditValue,"sBTVT" + Commons.Modules.UserName, "sBTThayThe" + Commons.Modules.UserName,"sBTFile" + Commons.Modules.UserName));
+
+                if (iID_YCTD != -1)
+                    return true;
+                else
+                    return false;
             }
             catch(Exception ex)
             {
@@ -426,30 +433,6 @@ namespace Vs.Recruit.UAC
             {
             }
         }
-
-        private void grvThayThe_CellValueChanging(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
-        {
-            //if (Commons.Modules.sLoad == "0Load") return;
-            //if (e.Column.FieldName == "ID_CN")
-            //{
-            //    try
-            //    {
-            //        string sSql = "SELECT TOP 1 ID_LCV,NGAY_NGHI_VIEC,CASE 0 WHEN 0 THEN B.TEN_LD_TV ELSE B.TEN_LD_TV_A END TEN_LD_TV FROM dbo.CONG_NHAN A LEFT JOIN dbo.LY_DO_THOI_VIEC B ON B.ID_LD_TV = A.ID_LD_TV WHERE ID_CN = " + e.Value + " ";
-            //        DataTable dt = new DataTable();
-            //        dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSql));
-            //        grvThayThe.SetFocusedRowCellValue("ID_VTTD", dt.Rows[0]["ID_LCV"]);
-            //        grvThayThe.SetFocusedRowCellValue("NGAY_LV_CUOI", dt.Rows[0]["NGAY_NGHI_VIEC"]);
-            //        grvThayThe.SetFocusedRowCellValue("LY_DO_NGHI", dt.Rows[0]["TEN_LD_TV"]);
-            //        Commons.Modules.sLoad = "0Load";
-            //        grvThayThe.SetFocusedRowCellValue("ID_CN", e.Value);
-            //        Commons.Modules.sLoad = "";
-            //    }
-            //    catch
-            //    {
-            //    }
-            //}
-        }
-
         private void grvThayThe_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
         {
             if (e.Column.FieldName == "ID_CN")

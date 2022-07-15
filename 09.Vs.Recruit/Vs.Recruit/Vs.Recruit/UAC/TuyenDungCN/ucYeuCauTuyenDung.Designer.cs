@@ -1,4 +1,4 @@
-﻿namespace Vs.Recruit.UAC
+﻿namespace Vs.Recruit
 {
     partial class ucYeuCauTuyenDung
     {
@@ -62,12 +62,12 @@
             this.datDenNgay = new DevExpress.XtraEditors.DateEdit();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.tab = new DevExpress.XtraLayout.TabbedControlGroup();
-            this.tabFile = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             this.tabViTri = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem13 = new DevExpress.XtraLayout.LayoutControlItem();
             this.groNVThayThe = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.tabFile = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             this.splitterItem1 = new DevExpress.XtraLayout.SplitterItem();
             this.lblTuNgay = new DevExpress.XtraLayout.LayoutControlItem();
             this.lblDenNgay = new DevExpress.XtraLayout.LayoutControlItem();
@@ -111,12 +111,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.datDenNgay.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tab)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tabFile)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabViTri)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem13)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groNVThayThe)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tabFile)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitterItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblTuNgay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblDenNgay)).BeginInit();
@@ -197,6 +197,7 @@
             this.searchControl1.Size = new System.Drawing.Size(256, 24);
             this.searchControl1.StyleController = this.dataLayoutControl1;
             this.searchControl1.TabIndex = 55;
+            this.searchControl1.Validating += new System.ComponentModel.CancelEventHandler(this.searchControl1_Validating);
             // 
             // grdPYC
             // 
@@ -207,12 +208,14 @@
             this.grdPYC.TabIndex = 54;
             this.grdPYC.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grvPYC});
+            this.grdPYC.ProcessGridKey += new System.Windows.Forms.KeyEventHandler(this.grdPYC_ProcessGridKey);
             // 
             // grvPYC
             // 
             this.grvPYC.GridControl = this.grdPYC;
             this.grvPYC.Name = "grvPYC";
             this.grvPYC.OptionsView.ShowGroupPanel = false;
+            this.grvPYC.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.grvPYC_FocusedRowChanged);
             // 
             // grdFileDK
             // 
@@ -225,6 +228,7 @@
             this.grdFileDK.TabIndex = 50;
             this.grdFileDK.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grvFileDK});
+            this.grdFileDK.ProcessGridKey += new System.Windows.Forms.KeyEventHandler(this.grdFileDK_ProcessGridKey);
             // 
             // grvFileDK
             // 
@@ -233,6 +237,7 @@
             this.grvFileDK.GridControl = this.grdFileDK;
             this.grvFileDK.Name = "grvFileDK";
             this.grvFileDK.OptionsView.ShowGroupPanel = false;
+            this.grvFileDK.DoubleClick += new System.EventHandler(this.grvFileDK_DoubleClick);
             // 
             // grdThayThe
             // 
@@ -245,6 +250,7 @@
             this.grdThayThe.TabIndex = 44;
             this.grdThayThe.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grvThayThe});
+            this.grdThayThe.ProcessGridKey += new System.Windows.Forms.KeyEventHandler(this.grdThayThe_ProcessGridKey);
             // 
             // grvThayThe
             // 
@@ -255,6 +261,9 @@
             this.grvThayThe.OptionsView.ShowGroupPanel = false;
             this.grvThayThe.InitNewRow += new DevExpress.XtraGrid.Views.Grid.InitNewRowEventHandler(this.grvThayThe_InitNewRow);
             this.grvThayThe.CellValueChanged += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.grvThayThe_CellValueChanged);
+            this.grvThayThe.InvalidRowException += new DevExpress.XtraGrid.Views.Base.InvalidRowExceptionEventHandler(this.grvThayThe_InvalidRowException);
+            this.grvThayThe.ValidatingEditor += new DevExpress.XtraEditors.Controls.BaseContainerValidateEditorEventHandler(this.grvThayThe_ValidatingEditor);
+            this.grvThayThe.InvalidValueException += new DevExpress.XtraEditors.Controls.InvalidValueExceptionEventHandler(this.grvThayThe_InvalidValueException);
             // 
             // txtLyDo
             // 
@@ -276,6 +285,7 @@
             this.grdViTri.TabIndex = 18;
             this.grdViTri.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grvViTri});
+            this.grdViTri.ProcessGridKey += new System.Windows.Forms.KeyEventHandler(this.grdViTri_ProcessGridKey);
             // 
             // grvViTri
             // 
@@ -288,6 +298,8 @@
             this.grvViTri.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.grvViTri_FocusedRowChanged);
             this.grvViTri.CellValueChanging += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.grvViTri_CellValueChanging);
             this.grvViTri.InvalidRowException += new DevExpress.XtraGrid.Views.Base.InvalidRowExceptionEventHandler(this.grvViTri_InvalidRowException);
+            this.grvViTri.DoubleClick += new System.EventHandler(this.grvViTri_DoubleClick);
+            this.grvViTri.ValidatingEditor += new DevExpress.XtraEditors.Controls.BaseContainerValidateEditorEventHandler(this.grvViTri_ValidatingEditor);
             this.grvViTri.InvalidValueException += new DevExpress.XtraEditors.Controls.InvalidValueExceptionEventHandler(this.grvViTri_InvalidValueException);
             // 
             // cboBPYC
@@ -322,6 +334,7 @@
             this.txtMA_YCTD.Location = new System.Drawing.Point(401, 12);
             this.txtMA_YCTD.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtMA_YCTD.Name = "txtMA_YCTD";
+            this.txtMA_YCTD.Properties.ReadOnly = true;
             this.txtMA_YCTD.Size = new System.Drawing.Size(148, 24);
             this.txtMA_YCTD.StyleController = this.dataLayoutControl1;
             this.txtMA_YCTD.TabIndex = 51;
@@ -389,6 +402,7 @@
             this.datTuNgay.Size = new System.Drawing.Size(181, 24);
             this.datTuNgay.StyleController = this.dataLayoutControl1;
             this.datTuNgay.TabIndex = 52;
+            this.datTuNgay.EditValueChanged += new System.EventHandler(this.datTuNgay_EditValueChanged);
             // 
             // datDenNgay
             // 
@@ -402,6 +416,7 @@
             this.datDenNgay.Size = new System.Drawing.Size(181, 24);
             this.datDenNgay.StyleController = this.dataLayoutControl1;
             this.datDenNgay.TabIndex = 53;
+            this.datDenNgay.EditValueChanged += new System.EventHandler(this.datTuNgay_EditValueChanged);
             // 
             // Root
             // 
@@ -442,26 +457,6 @@
             this.tabFile});
             this.tab.Text = "File đính kèm";
             this.tab.SelectedPageChanged += new DevExpress.XtraLayout.LayoutTabPageChangedEventHandler(this.tab_SelectedPageChanged);
-            // 
-            // tabFile
-            // 
-            this.tabFile.AppearanceTabPage.Header.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.tabFile.AppearanceTabPage.Header.Options.UseForeColor = true;
-            this.tabFile.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlItem3});
-            this.tabFile.Location = new System.Drawing.Point(0, 0);
-            this.tabFile.Name = "tabFile";
-            this.tabFile.Size = new System.Drawing.Size(759, 417);
-            this.tabFile.Text = "File đính kèm";
-            // 
-            // layoutControlItem3
-            // 
-            this.layoutControlItem3.Control = this.grdFileDK;
-            this.layoutControlItem3.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Size = new System.Drawing.Size(759, 417);
-            this.layoutControlItem3.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem3.TextVisible = false;
             // 
             // tabViTri
             // 
@@ -511,6 +506,26 @@
             this.layoutControlItem2.Size = new System.Drawing.Size(735, 163);
             this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem2.TextVisible = false;
+            // 
+            // tabFile
+            // 
+            this.tabFile.AppearanceTabPage.Header.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.tabFile.AppearanceTabPage.Header.Options.UseForeColor = true;
+            this.tabFile.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItem3});
+            this.tabFile.Location = new System.Drawing.Point(0, 0);
+            this.tabFile.Name = "tabFile";
+            this.tabFile.Size = new System.Drawing.Size(759, 417);
+            this.tabFile.Text = "File đính kèm";
+            // 
+            // layoutControlItem3
+            // 
+            this.layoutControlItem3.Control = this.grdFileDK;
+            this.layoutControlItem3.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlItem3.Name = "layoutControlItem3";
+            this.layoutControlItem3.Size = new System.Drawing.Size(759, 417);
+            this.layoutControlItem3.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem3.TextVisible = false;
             // 
             // splitterItem1
             // 
@@ -721,12 +736,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.datDenNgay.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tab)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tabFile)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabViTri)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem13)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groNVThayThe)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tabFile)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitterItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblTuNgay)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblDenNgay)).EndInit();

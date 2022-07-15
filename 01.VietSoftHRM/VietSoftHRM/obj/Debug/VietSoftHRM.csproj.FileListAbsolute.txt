@@ -2221,7 +2221,6 @@ G:\2022\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Newtonsoft.Json.dll
 G:\2022\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Vs.Category.dll
 G:\2022\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Vs.HRM.dll
 G:\2022\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Vs.Payroll.dll
-G:\2022\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Vs.Recruit.exe
 G:\2022\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\VS.Report.dll
 G:\2022\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Vs.TimeAttendance.dll
 G:\2022\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\EPPlus.dll
@@ -2246,7 +2245,6 @@ G:\2022\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Vs.TimeAttendance.dll.config
 G:\2022\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Vs.Payroll.pdb
 G:\2022\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Vs.Payroll.dll.config
 G:\2022\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Vs.Recruit.pdb
-G:\2022\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Vs.Recruit.exe.config
 G:\2022\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\DevExpress.Dashboard.v20.1.Core.xml
 G:\2022\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\DevExpress.Dashboard.v20.1.Win.xml
 G:\2022\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\DevExpress.Data.v20.1.xml
@@ -2334,3 +2332,5 @@ G:\2022\02.HRM\01.VietSoftHRM\VietSoftHRM\obj\Debug\VietSoftHRM.csproj.CopyCompl
 G:\2022\02.HRM\01.VietSoftHRM\VietSoftHRM\obj\Debug\VietSoftHRM.exe
 G:\2022\02.HRM\01.VietSoftHRM\VietSoftHRM\obj\Debug\VietSoftHRM.pdb
 G:\2022\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\DevExpress.RichEdit.v20.1.Export.dll
+G:\2022\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Vs.Recruit.exe
+G:\2022\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Vs.Recruit.exe.config

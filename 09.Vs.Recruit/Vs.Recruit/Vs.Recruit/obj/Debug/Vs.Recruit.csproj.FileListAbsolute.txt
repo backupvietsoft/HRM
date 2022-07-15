@@ -439,8 +439,6 @@ F:\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.Recruit.pdb
 G:\2022\02.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\Template\TemplateGiamLaoDong.xlsx
 G:\2022\02.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\Template\TemplateTaiNanLaoDong.xlsx
 G:\2022\02.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\Template\TemplateTangLaoDong.xlsx
-G:\2022\02.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\Vs.Recruit.exe.config
-G:\2022\02.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\Vs.Recruit.exe
 G:\2022\02.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\Vs.Recruit.pdb
 G:\2022\02.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\Commons.dll
 G:\2022\02.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\Commons.Fakes.dll
@@ -487,12 +485,9 @@ G:\2022\02.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.Recruit.ucQLUV.r
 G:\2022\02.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.Recruit.ucTuyenDung.resources
 G:\2022\02.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.Recruit.ucTHONG_BAO_TUYEN_DUNG.resources
 G:\2022\02.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.Recruit.Properties.Resources.resources
-G:\2022\02.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.Recruit.UAC.ucYeuCauTuyenDung.resources
 G:\2022\02.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.Recruit.csproj.GenerateResource.cache
-G:\2022\02.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.Recruit.exe.licenses
 G:\2022\02.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.Recruit.csproj.CoreCompileInputs.cache
 G:\2022\02.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.Recruit.csproj.CopyComplete
-G:\2022\02.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.Recruit.exe
 G:\2022\02.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.Recruit.pdb
 D:\01.SourceCode\02.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.Recruit.csproj.AssemblyReference.cache
 D:\01.SourceCode\02.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.Recruit.Form1.resources
@@ -556,3 +551,8 @@ F:\2022\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.Recruit.exe.lice
 F:\2022\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.Recruit.exe
 F:\2022\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\Vs.Recruit.exe.config
 F:\2022\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\Vs.Recruit.exe
+G:\2022\02.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\Vs.Recruit.exe.config
+G:\2022\02.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\Vs.Recruit.exe
+G:\2022\02.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.Recruit.exe.licenses
+G:\2022\02.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.Recruit.exe
+G:\2022\02.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.Recruit.ucYeuCauTuyenDung.resources

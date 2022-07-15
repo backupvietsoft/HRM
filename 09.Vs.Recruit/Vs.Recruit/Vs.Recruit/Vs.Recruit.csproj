@@ -289,10 +289,10 @@
     <Compile Include="UAC\TuyenDungCN\ucDinhBienLD.Designer.cs">
       <DependentUpon>ucDinhBienLD.cs</DependentUpon>
     </Compile>
-    <Compile Include="UAC\ucKeHoachTuyenDung.cs">
+    <Compile Include="UAC\TuyenDungCN\ucKeHoachTuyenDung.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UAC\ucKeHoachTuyenDung.Designer.cs">
+    <Compile Include="UAC\TuyenDungCN\ucKeHoachTuyenDung.Designer.cs">
       <DependentUpon>ucKeHoachTuyenDung.cs</DependentUpon>
     </Compile>
     <Compile Include="UAC\ucTiepNhanUngVien.cs">
@@ -414,7 +414,7 @@
     <EmbeddedResource Include="UAC\TuyenDungCN\ucDinhBienLD.resx">
       <DependentUpon>ucDinhBienLD.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UAC\ucKeHoachTuyenDung.resx">
+    <EmbeddedResource Include="UAC\TuyenDungCN\ucKeHoachTuyenDung.resx">
       <DependentUpon>ucKeHoachTuyenDung.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UAC\ucTiepNhanUngVien.resx">

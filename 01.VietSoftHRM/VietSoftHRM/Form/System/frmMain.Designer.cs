@@ -83,7 +83,7 @@
             this.navigationFrame.RibbonAndBarsMergeStyle = DevExpress.XtraBars.Docking2010.Views.RibbonAndBarsMergeStyle.Always;
             this.tablePanel1.SetRow(this.navigationFrame, 3);
             this.navigationFrame.SelectedPage = this.navigationPageHome;
-            this.navigationFrame.Size = new System.Drawing.Size(1057, 542);
+            this.navigationFrame.Size = new System.Drawing.Size(1057, 534);
             this.navigationFrame.TabIndex = 5;
             this.navigationFrame.Text = "navigationFrame1";
             this.navigationFrame.TransitionAnimationProperties.FrameInterval = 5000;
@@ -93,7 +93,7 @@
             // 
             this.navigationPageHome.Controls.Add(this.pictureBox1);
             this.navigationPageHome.Name = "navigationPageHome";
-            this.navigationPageHome.Size = new System.Drawing.Size(1057, 542);
+            this.navigationPageHome.Size = new System.Drawing.Size(1057, 534);
             // 
             // pictureBox1
             // 
@@ -102,7 +102,7 @@
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(1057, 542);
+            this.pictureBox1.Size = new System.Drawing.Size(1057, 534);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
@@ -267,9 +267,9 @@
             // 
             this.barDockControlBottom.CausesValidation = false;
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.barDockControlBottom.Location = new System.Drawing.Point(0, 605);
+            this.barDockControlBottom.Location = new System.Drawing.Point(0, 597);
             this.barDockControlBottom.Manager = this.barManager1;
-            this.barDockControlBottom.Size = new System.Drawing.Size(1065, 20);
+            this.barDockControlBottom.Size = new System.Drawing.Size(1065, 28);
             // 
             // barDockControlLeft
             // 
@@ -277,7 +277,7 @@
             this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.barDockControlLeft.Location = new System.Drawing.Point(0, 0);
             this.barDockControlLeft.Manager = this.barManager1;
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 605);
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 597);
             // 
             // barDockControlRight
             // 
@@ -285,7 +285,7 @@
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
             this.barDockControlRight.Location = new System.Drawing.Point(1065, 0);
             this.barDockControlRight.Manager = this.barManager1;
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 605);
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 597);
             // 
             // barInfo
             // 
@@ -347,7 +347,7 @@
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 35F),
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 11F),
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 100F)});
-            this.tablePanel1.Size = new System.Drawing.Size(1065, 605);
+            this.tablePanel1.Size = new System.Drawing.Size(1065, 597);
             this.tablePanel1.TabIndex = 0;
             // 
             // panel1
@@ -367,8 +367,7 @@
             // 
             // frmMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(1065, 625);
             this.Controls.Add(this.tablePanel1);
             this.Controls.Add(this.barDockControlLeft);

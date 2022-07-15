@@ -177,6 +177,20 @@ namespace Commons
                 }
             }
         }
+        public void DeleteDirectory(string strDuongdan)
+        {
+            if (System.IO.Directory.Exists(strDuongdan))
+            {
+                try
+                {
+                    System.IO.Directory.Delete(strDuongdan,true);
+                }
+                catch (Exception ex)
+                {
+                }
+            }
+        }
+
         public void OpenHinh(string strDuongdan)
         {
             if (strDuongdan.Equals(""))
@@ -3818,6 +3832,24 @@ namespace Commons
             }
         }
 
+        public void RowFilter(GridControl grid, GridColumn column1, GridColumn column2, string value1,string value2)
+        {
+            GridControl _grid = grid;
+            GridView _view = grid.MainView as GridView;
+            DataTable dt = new DataTable();
+            dt = (DataTable)_grid.DataSource;
+            if (dt == null) return;
+            try
+            {
+                dt.DefaultView.RowFilter = column1.FieldName + " = " + value1 + " AND " + column2.FieldName + " = " + value2;
+                _view.SelectRow(0);
+            }
+            catch
+            {
+                dt.DefaultView.RowFilter = "1 = 0";
+            }
+        }
+
         #endregion
         public void AddnewRow(GridView view, bool add)
         {
@@ -4444,6 +4476,14 @@ namespace Commons
             //ID_NGANH_TD,TEN_NGANH_TD
             DataTable dt = new DataTable();
             dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboNganhTD", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll));
+            return dt;
+        }
+
+        public DataTable DataNguonTD(bool coAll)
+        {
+            //ID_NTD,TEN_NTD
+            DataTable dt = new DataTable();
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboNguonTD", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll));
             return dt;
         }
 

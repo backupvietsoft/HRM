@@ -44,82 +44,198 @@ namespace Vs.HRM
             {
                 case "In":
                     {
+                        System.Data.SqlClient.SqlConnection conn;
+                        DataTable dtTTC = new DataTable(); // Lấy ký hiệu đơn vị trong thông tin chung
+
+                        dtTTC = Commons.Modules.ObjSystems.DataThongTinChung();
                         switch (rdo_ChonBaoCao.SelectedIndex)
                         {
                             case 0:
-                                System.Data.SqlClient.SqlConnection conn;
-                                DataTable dt = new DataTable();
-                                try
+                               
+                                switch (dtTTC.Rows[0]["KY_HIEU_DV"].ToString())
                                 {
+                                    case "SB":
+                                        {
+                                            try
+                                            {
+                                                conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                                                conn.Open();
+                                                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptBCLaoDongTangBHXH_SB", conn);
+                                                cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                                                cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                                                cmd.Parameters.Add("@Thang", SqlDbType.Date).Value = Convert.ToDateTime(ThangBC).ToString("yyyy-MM-dd");
+                                                cmd.Parameters.Add("@Dot", SqlDbType.Int).Value = Convert.ToInt32(DotBC);
+                                                cmd.CommandType = CommandType.StoredProcedure;
+                                                System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+                                                DataSet ds = new DataSet();
+                                                adp.Fill(ds);
+                                                ds.Tables[0].TableName = "TangLaoDong";
+                                                //SaveFileDialog saveFileDialog = new SaveFileDialog();
+                                                //saveFileDialog.Filter = "Excel Workbook |*.xlsx|Excel 97-2003 Workbook |*.xls|Word Document |*.docx|Rich Text Format |*.rtf|PDF File |*.pdf|Web Page |*.html|Single File Web Page |*.mht";
+                                                //saveFileDialog.FilterIndex = 0;
+                                                //saveFileDialog.RestoreDirectory = true;
+                                                ////saveFileDialog.CreatePrompt = true;
+                                                //saveFileDialog.CheckFileExists = false;
+                                                //saveFileDialog.CheckPathExists = false;
+                                                //saveFileDialog.FileName = DateTime.Now.ToString("yyyyMMdd_HHmmss");
+                                                //saveFileDialog.Title = "Export Excel File To";
+                                                //DialogResult res = saveFileDialog.ShowDialog();
+                                                //// If the file name is not an empty string open it for saving.
+                                                //if (res == DialogResult.OK)
+                                                //{
+                                                //    Commons.TemplateExcel.FillReport(saveFileDialog.FileName, System.Windows.Forms.Application.StartupPath + "\\Template\\TangLaoDong..xls", ds, new string[] { "{", "}" });
+                                                //    Process.Start(saveFileDialog.FileName);
+                                                //}
+                                                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                                                saveFileDialog.Filter = "Excel file (*.xlsx)|*.xlsx";
+                                                saveFileDialog.FilterIndex = 0;
+                                                saveFileDialog.RestoreDirectory = true;
+                                                //saveFileDialog.CreatePrompt = true;
+                                                saveFileDialog.CheckFileExists = false;
+                                                saveFileDialog.CheckPathExists = false;
+                                                saveFileDialog.FileName = DateTime.Now.ToString("yyyyMMdd_HHmmss");
+                                                saveFileDialog.Title = "Export Excel File To";
+                                                // If the file name is not an empty string open it for saving.
+                                                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                                                {
+                                                    if (saveFileDialog.FileName != "")
+                                                    {
+                                                        DataTable dt1 = new DataTable();
+                                                        dt1 = ds.Tables[0].Copy();
+                                                        dt1.Columns.Count.ToString();
+                                                        Commons.TemplateExcel.FillReport(saveFileDialog.FileName, System.Windows.Forms.Application.StartupPath + "\\Template\\TemplateTangLaoDong_SB.xlsx", ds, new string[] { "{", "}" });
+                                                        //Commons.TemplateExcel.FillReport(saveFileDialog.FileName, Application.StartupPath + "\\lib\\Template\\TemplateGiamLaoDong.xlsx", ds, new string[] { "{", "}" });
+                                                        Process.Start(saveFileDialog.FileName);
+                                                    }
+                                                }
+                                            }
+                                            catch (Exception EX
+                                            )
+                                            {
 
-                                    conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
-                                    conn.Open();
-                                    System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptBCLaoDongTangBHXH", conn);
-                                    cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
-                                    cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
-                                    cmd.Parameters.Add("@Thang", SqlDbType.Date).Value = Convert.ToDateTime(ThangBC).ToString("yyyy-MM-dd");
-                                    cmd.Parameters.Add("@Dot", SqlDbType.Int).Value = Convert.ToInt32(DotBC);
-                                    cmd.CommandType = CommandType.StoredProcedure;
-                                    System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
-                                    DataSet ds = new DataSet();
-                                    adp.Fill(ds);
-                                    ds.Tables[0].TableName = "TangLaoDong";
-                                    SaveFileDialog saveFileDialog = new SaveFileDialog();
-                                    saveFileDialog.Filter = "Excel file (*.xlsx)|*.xlsx";
-                                    saveFileDialog.FilterIndex = 0;
-                                    saveFileDialog.RestoreDirectory = true;
-                                    //saveFileDialog.CreatePrompt = true;
-                                    saveFileDialog.CheckFileExists = false;
-                                    saveFileDialog.CheckPathExists = false;
-                                    saveFileDialog.FileName = DateTime.Now.ToString("yyyyMMdd_HHmmss");
-                                    saveFileDialog.Title = "Export Excel File To";
-                                    DialogResult res = saveFileDialog.ShowDialog();
-                                    // If the file name is not an empty string open it for saving.
-                                    if (res == DialogResult.OK)
-                                    {
-                                        Commons.TemplateExcel.FillReport(saveFileDialog.FileName, System.Windows.Forms.Application.StartupPath + "\\Template\\TemplateTangLaoDong.xlsx", ds, new string[] { "{", "}" });
-                                        Process.Start(saveFileDialog.FileName);
-                                    }
-                                }
-                                catch (Exception EX
-                                )
-                                {
+                                            }
+                                            break;
+                                        }
+                                    default:
+                                        DataTable dt = new DataTable();
+                                        try
+                                        {
 
+                                            conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                                            conn.Open();
+                                            System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptBCLaoDongTangBHXH", conn);
+                                            cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                                            cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                                            cmd.Parameters.Add("@Thang", SqlDbType.Date).Value = Convert.ToDateTime(ThangBC).ToString("yyyy-MM-dd");
+                                            cmd.Parameters.Add("@Dot", SqlDbType.Int).Value = Convert.ToInt32(DotBC);
+                                            cmd.CommandType = CommandType.StoredProcedure;
+                                            System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+                                            DataSet ds = new DataSet();
+                                            adp.Fill(ds);
+                                            ds.Tables[0].TableName = "TangLaoDong";
+                                            SaveFileDialog saveFileDialog = new SaveFileDialog();
+                                            saveFileDialog.Filter = "Excel file (*.xlsx)|*.xlsx";
+                                            saveFileDialog.FilterIndex = 0;
+                                            saveFileDialog.RestoreDirectory = true;
+                                            //saveFileDialog.CreatePrompt = true;
+                                            saveFileDialog.CheckFileExists = false;
+                                            saveFileDialog.CheckPathExists = false;
+                                            saveFileDialog.FileName = DateTime.Now.ToString("yyyyMMdd_HHmmss");
+                                            saveFileDialog.Title = "Export Excel File To";
+                                            DialogResult res = saveFileDialog.ShowDialog();
+                                            // If the file name is not an empty string open it for saving.
+                                            if (res == DialogResult.OK)
+                                            {
+                                                Commons.TemplateExcel.FillReport(saveFileDialog.FileName, System.Windows.Forms.Application.StartupPath + "\\Template\\TemplateTangLaoDong.xlsx", ds, new string[] { "{", "}" });
+                                                Process.Start(saveFileDialog.FileName);
+                                            }
+                                        }
+                                        catch (Exception EX
+                                        )
+                                        {
+
+                                        }
+                                        break;
                                 }
+
                                 break;
                             case 1:
                                 try
                                 {
-                                    conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
-                                    conn.Open();
-                                    System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptBCLaoDongGiamBHXH", conn);
-                                    cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
-                                    cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
-                                    cmd.Parameters.Add("@Thang", SqlDbType.Date).Value = Convert.ToDateTime(ThangBC).ToString("yyyy-MM-dd");
-                                    cmd.Parameters.Add("@Dot", SqlDbType.Int).Value = Convert.ToInt32(DotBC);
-                                    cmd.CommandType = CommandType.StoredProcedure;
-                                    System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
-                                    DataSet ds = new DataSet();
-                                    adp.Fill(ds);
-                                    ds.Tables[0].TableName = "GiamLaoDong";
-                                    SaveFileDialog saveFileDialog = new SaveFileDialog();
-                                    saveFileDialog.Filter = "Excel file (*.xlsx)|*.xlsx";
-                                    saveFileDialog.FilterIndex = 0;
-                                    saveFileDialog.RestoreDirectory = true;
-                                    //saveFileDialog.CreatePrompt = true;
-                                    saveFileDialog.CheckFileExists = false;
-                                    saveFileDialog.CheckPathExists = false;
-                                    saveFileDialog.Title = "Export Excel File To";
-                                    // If the file name is not an empty string open it for saving.
-                                    if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                                    switch (dtTTC.Rows[0]["KY_HIEU_DV"].ToString())
                                     {
-                                        if (saveFileDialog.FileName != "")
-                                        {
-                                            Commons.TemplateExcel.FillReport(saveFileDialog.FileName, System.Windows.Forms.Application.StartupPath + "\\Template\\TemplateGiamLaoDong.xlsx", ds, new string[] { "{", "}" });
-                                            //Commons.TemplateExcel.FillReport(saveFileDialog.FileName, Application.StartupPath + "\\lib\\Template\\TemplateGiamLaoDong.xlsx", ds, new string[] { "{", "}" });
-                                            Process.Start(saveFileDialog.FileName);
-                                        }
+                                        case "SB":
+                                            {
+                                                conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                                                conn.Open();
+                                                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptBCLaoDongGiamBHXH_SB", conn);
+                                                cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                                                cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                                                cmd.Parameters.Add("@Thang", SqlDbType.Date).Value = Convert.ToDateTime(ThangBC).ToString("yyyy-MM-dd");
+                                                cmd.Parameters.Add("@Dot", SqlDbType.Int).Value = Convert.ToInt32(DotBC);
+                                                cmd.CommandType = CommandType.StoredProcedure;
+                                                System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+                                                DataSet ds = new DataSet();
+                                                adp.Fill(ds);
+                                                ds.Tables[0].TableName = "GiamLaoDong";
+                                                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                                                saveFileDialog.Filter = "Excel file (*.xlsx)|*.xlsx";
+                                                saveFileDialog.FilterIndex = 0;
+                                                saveFileDialog.RestoreDirectory = true;
+                                                //saveFileDialog.CreatePrompt = true;
+                                                saveFileDialog.CheckFileExists = false;
+                                                saveFileDialog.CheckPathExists = false;
+                                                saveFileDialog.FileName = DateTime.Now.ToString("yyyyMMdd_HHmmss");
+                                                saveFileDialog.Title = "Export Excel File To";
+                                                // If the file name is not an empty string open it for saving.
+                                                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                                                {
+                                                    if (saveFileDialog.FileName != "")
+                                                    {
+                                                        Commons.TemplateExcel.FillReport(saveFileDialog.FileName, System.Windows.Forms.Application.StartupPath + "\\Template\\TemplateGiamLaoDong_SB.xlsx", ds, new string[] { "{", "}" });
+                                                        //Commons.TemplateExcel.FillReport(saveFileDialog.FileName, Application.StartupPath + "\\lib\\Template\\TemplateGiamLaoDong.xlsx", ds, new string[] { "{", "}" });
+                                                        Process.Start(saveFileDialog.FileName);
+                                                    }
+                                                }
+                                                break;
+                                            }
+                                        default:
+                                            {
+                                                conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                                                conn.Open();
+                                                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptBCLaoDongGiamBHXH", conn);
+                                                cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                                                cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                                                cmd.Parameters.Add("@Thang", SqlDbType.Date).Value = Convert.ToDateTime(ThangBC).ToString("yyyy-MM-dd");
+                                                cmd.Parameters.Add("@Dot", SqlDbType.Int).Value = Convert.ToInt32(DotBC);
+                                                cmd.CommandType = CommandType.StoredProcedure;
+                                                System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+                                                DataSet ds = new DataSet();
+                                                adp.Fill(ds);
+                                                ds.Tables[0].TableName = "GiamLaoDong";
+                                                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                                                saveFileDialog.Filter = "Excel file (*.xlsx)|*.xlsx";
+                                                saveFileDialog.FilterIndex = 0;
+                                                saveFileDialog.RestoreDirectory = true;
+                                                //saveFileDialog.CreatePrompt = true;
+                                                saveFileDialog.CheckFileExists = false;
+                                                saveFileDialog.CheckPathExists = false;
+                                                saveFileDialog.FileName = DateTime.Now.ToString("yyyyMMdd_HHmmss");
+                                                saveFileDialog.Title = "Export Excel File To";
+                                                // If the file name is not an empty string open it for saving.
+                                                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                                                {
+                                                    if (saveFileDialog.FileName != "")
+                                                    {
+                                                        Commons.TemplateExcel.FillReport(saveFileDialog.FileName, System.Windows.Forms.Application.StartupPath + "\\Template\\TemplateGiamLaoDong.xlsx", ds, new string[] { "{", "}" });
+                                                        //Commons.TemplateExcel.FillReport(saveFileDialog.FileName, Application.StartupPath + "\\lib\\Template\\TemplateGiamLaoDong.xlsx", ds, new string[] { "{", "}" });
+                                                        Process.Start(saveFileDialog.FileName);
+                                                    }
+                                                }
+                                                break;
+                                            }
                                     }
+
                                 }
                                 catch
                                 {
@@ -127,7 +243,7 @@ namespace Vs.HRM
                                 }
                                 break;
                             case 2:
-                                if(Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString() == "SB")
+                                if (Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString() == "SB")
                                 {
                                     InDanhSachThamGiaBH_SB();
                                 }
@@ -260,7 +376,7 @@ namespace Vs.HRM
                 row4_TieuDe_BaoCao.Cells.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
                 row4_TieuDe_BaoCao.Cells.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
                 row4_TieuDe_BaoCao.RowHeight = 20;
-                row4_TieuDe_BaoCao.Value2 = "DANH SÁCH LAO ĐỘNG SỐ : "+DotBC+" THÁNG "+ ThangBC.Month + " NĂM "+ThangBC.Year+"";
+                row4_TieuDe_BaoCao.Value2 = "DANH SÁCH LAO ĐỘNG SỐ : " + DotBC + " THÁNG " + ThangBC.Month + " NĂM " + ThangBC.Year + "";
 
                 Range row5_TieuDe_BaoCao = oSheet.get_Range("A5", lastColumn + "5");
                 row5_TieuDe_BaoCao.Merge();
@@ -559,7 +675,7 @@ namespace Vs.HRM
                 oSheet.get_Range("A" + (keepRowCnt + 1) + "", lastColumn + ((keepRowCnt + rowCnt)).ToString()).Value2 = rowData4;
                 keepRowCnt = keepRowCnt + rowCnt + 2;
 
-               
+
 
                 Range row11_CongGiam = oSheet.get_Range("B" + keepRowCnt + "");
                 row11_CongGiam.Font.Bold = true;
@@ -639,7 +755,7 @@ namespace Vs.HRM
                 row11_Ngayin.Font.Size = fontSizeNoiDung;
                 row11_Ngayin.Cells.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
                 row11_Ngayin.Cells.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
-                row11_Ngayin.Value2 = "Ngày …"+dNgayIn.DateTime.Day+".. tháng "+ dNgayIn.DateTime.Month+ " năm "+ dNgayIn.DateTime.Year+ "";
+                row11_Ngayin.Value2 = "Ngày …" + dNgayIn.DateTime.Day + ".. tháng " + dNgayIn.DateTime.Month + " năm " + dNgayIn.DateTime.Year + "";
 
                 keepRowCnt++;
 
@@ -679,8 +795,8 @@ namespace Vs.HRM
                 row11_NguoiKy2.Cells.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
                 row11_NguoiKy2.Cells.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
                 row11_NguoiKy2.Value2 = "Ký, ghi rõ họ tên, đóng dấu";
-                
-                
+
+
 
                 oXL.Visible = true;
                 oXL.UserControl = true;

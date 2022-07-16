@@ -2162,6 +2162,10 @@ G:\2022\02.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.csproj.CoreCompileInpu
 G:\2022\02.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.csproj.CopyComplete
 G:\2022\02.HRM\05.Vs.Report\Vs.Report\obj\Debug\VS.Report.dll
 G:\2022\02.HRM\05.Vs.Report\Vs.Report\obj\Debug\VS.Report.pdb
+F:\01.HRM\05.Vs.Report\Vs.Report\bin\Debug\DevExpress.PivotGrid.v20.1.Core.dll
+F:\01.HRM\05.Vs.Report\Vs.Report\bin\Debug\DevExpress.PivotGrid.v20.1.Core.xml
+F:\01.HRM\05.Vs.Report\Vs.Report\bin\Debug\DevExpress.XtraCharts.v20.1.Wizard.xml
+F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\VS.Report.dll
 F:\01.HRM\05.Vs.Report\Vs.Report\bin\Debug\VS.Report.dll.config
 F:\01.HRM\05.Vs.Report\Vs.Report\bin\Debug\VS.Report.dll
 F:\01.HRM\05.Vs.Report\Vs.Report\bin\Debug\VS.Report.pdb
@@ -2175,7 +2179,6 @@ F:\01.HRM\05.Vs.Report\Vs.Report\bin\Debug\DevExpress.Data.v20.1.dll
 F:\01.HRM\05.Vs.Report\Vs.Report\bin\Debug\DevExpress.DataAccess.v20.1.dll
 F:\01.HRM\05.Vs.Report\Vs.Report\bin\Debug\DevExpress.Office.v20.1.Core.dll
 F:\01.HRM\05.Vs.Report\Vs.Report\bin\Debug\DevExpress.Pdf.v20.1.Core.dll
-F:\01.HRM\05.Vs.Report\Vs.Report\bin\Debug\DevExpress.PivotGrid.v20.1.Core.dll
 F:\01.HRM\05.Vs.Report\Vs.Report\bin\Debug\DevExpress.Printing.v20.1.Core.dll
 F:\01.HRM\05.Vs.Report\Vs.Report\bin\Debug\DevExpress.RichEdit.v20.1.Core.dll
 F:\01.HRM\05.Vs.Report\Vs.Report\bin\Debug\DevExpress.RichEdit.v20.1.Export.dll
@@ -2221,7 +2224,6 @@ F:\01.HRM\05.Vs.Report\Vs.Report\bin\Debug\DevExpress.Data.v20.1.xml
 F:\01.HRM\05.Vs.Report\Vs.Report\bin\Debug\DevExpress.DataAccess.v20.1.xml
 F:\01.HRM\05.Vs.Report\Vs.Report\bin\Debug\DevExpress.Office.v20.1.Core.xml
 F:\01.HRM\05.Vs.Report\Vs.Report\bin\Debug\DevExpress.Pdf.v20.1.Core.xml
-F:\01.HRM\05.Vs.Report\Vs.Report\bin\Debug\DevExpress.PivotGrid.v20.1.Core.xml
 F:\01.HRM\05.Vs.Report\Vs.Report\bin\Debug\DevExpress.RichEdit.v20.1.Core.xml
 F:\01.HRM\05.Vs.Report\Vs.Report\bin\Debug\DevExpress.Data.Desktop.v20.1.xml
 F:\01.HRM\05.Vs.Report\Vs.Report\bin\Debug\DevExpress.Utils.v20.1.xml
@@ -2245,7 +2247,6 @@ F:\01.HRM\05.Vs.Report\Vs.Report\bin\Debug\DevExpress.Map.v20.1.Core.xml
 F:\01.HRM\05.Vs.Report\Vs.Report\bin\Debug\DevExpress.TreeMap.v20.1.Core.xml
 F:\01.HRM\05.Vs.Report\Vs.Report\bin\Debug\DevExpress.XtraRichEdit.v20.1.xml
 F:\01.HRM\05.Vs.Report\Vs.Report\bin\Debug\DevExpress.XtraVerticalGrid.v20.1.xml
-F:\01.HRM\05.Vs.Report\Vs.Report\bin\Debug\DevExpress.XtraCharts.v20.1.Wizard.xml
 F:\01.HRM\05.Vs.Report\Vs.Report\bin\Debug\DevExpress.Pdf.v20.1.Drawing.xml
 F:\01.HRM\05.Vs.Report\Vs.Report\bin\Debug\DevExpress.DataAccess.v20.1.UI.xml
 F:\01.HRM\05.Vs.Report\Vs.Report\bin\Debug\DevExpress.XtraNavBar.v20.1.xml
@@ -2375,5 +2376,4 @@ F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.csproj.GenerateResource.cac
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\VS.Report.dll.licenses
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.csproj.CoreCompileInputs.cache
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.csproj.CopyComplete
-F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\VS.Report.dll
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\VS.Report.pdb

@@ -187,7 +187,7 @@ namespace Vs.HRM
                     luongthucold = Convert.ToDouble(grvTienLuong.GetFocusedRowCellValue("MUC_LUONG_THUC"));
                 }
             }
-            catch
+            catch (Exception ex)
             {
                 luongthucold = 0;
             }

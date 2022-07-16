@@ -96,10 +96,14 @@ namespace VietSoftHRM
                 SaveLogin();
                 SaveDatabase();
                 string strSQL = "SELECT ISNULL(USER_KHACH,0) USER_KHACH FROM dbo.USERS WHERE [USER_NAME] = '" + txt_user.Text.Trim() + "'";
-                if (Convert.ToBoolean(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr,CommandType.Text,strSQL)) == true)
+                try
                 {
-                    Commons.Modules.chamCongK = true;
+                    if (Convert.ToBoolean(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, strSQL)) == true)
+                    {
+                        Commons.Modules.chamCongK = true;
+                    }
                 }
+                catch {  }
                 //add user
                 this.Hide();
                 frmMain form2 = new frmMain();
@@ -251,10 +255,10 @@ namespace VietSoftHRM
         }
         private void frmLogin_Shown(object sender, EventArgs e)
         {
-            if (!clsMain.CheckServer())
-            {
-                Application.Exit();
-            }
+            //if (!clsMain.CheckServer())
+            //{
+            //    Application.Exit();
+            //}
         }
 
         private void pic_database_DoubleClick(object sender, EventArgs e)

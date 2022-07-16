@@ -3,6 +3,7 @@ using Microsoft.ApplicationBlocks.Data;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 
 namespace Vs.Recruit
 {
@@ -79,12 +80,10 @@ namespace Vs.Recruit
         {
             try
             {
-                Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, "sBTVT" + Commons.Modules.UserName, Commons.Modules.ObjSystems.ConvertDatatable(grvTuan), "");
-                Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, "sBTThayThe" + Commons.Modules.UserName, Commons.Modules.ObjSystems.ConvertDatatable(grdNguonTuyen), "");
-                if (iID_YCTD != -1)
-                    return true;
-                else
-                    return false;
+                Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, "sBTKHT" + Commons.Modules.UserName, Commons.Modules.ObjSystems.ConvertDatatable(grdTuan), "");
+                Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, "sBTNT" + Commons.Modules.UserName, Commons.Modules.ObjSystems.ConvertDatatable(grdNguonTuyen), "");
+                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spSaveKeHoachTuyenDung", datThang.DateTime, "sBTKHT" + Commons.Modules.UserName, "sBTNT" + Commons.Modules.UserName);
+                return true;
             }
             catch
             {
@@ -95,10 +94,9 @@ namespace Vs.Recruit
         {
             btnALL.Buttons[0].Properties.Visible = visible;
             btnALL.Buttons[1].Properties.Visible = visible;
-            btnALL.Buttons[2].Properties.Visible = visible;
+            btnALL.Buttons[2].Properties.Visible = !visible;
             btnALL.Buttons[3].Properties.Visible = !visible;
-            btnALL.Buttons[4].Properties.Visible = !visible;
-            btnALL.Buttons[5].Properties.Visible = visible;
+            btnALL.Buttons[4].Properties.Visible = visible;
 
             grvNguonTuyen.OptionsBehavior.Editable = !visible;
             grvTuan.OptionsBehavior.Editable = !visible;
@@ -106,19 +104,19 @@ namespace Vs.Recruit
 
         private void LoadgrdVTYC()
         {
-            DateTime TN = datThang.DateTime.Date.AddDays(- datThang.DateTime.Date.Day + 1);
+            DateTime TN = datThang.DateTime.Date.AddDays(-datThang.DateTime.Date.Day + 1);
             DateTime DN = TN.AddMonths(1).AddDays(-1);
             try
             {
                 Commons.Modules.sLoad = "0Load";
                 //tạo bảng tạm tuần trong tháng
-                Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, "sBTTuan" + Commons.Modules.UserName,TinhSoTuanCuaTHang(TN,DN),"");
+                Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, "sBTTuan" + Commons.Modules.UserName, TinhSoTuanCuaTHang(TN, DN), "");
                 DataSet set = new DataSet();
-                set =SqlHelper.ExecuteDataset(Commons.IConnections.CNStr, "spGetListKeHoachTuyenDung",TN,DN,Commons.Modules.UserName, Commons.Modules.TypeLanguage, "sBTTuan" + Commons.Modules.UserName);
+                set = SqlHelper.ExecuteDataset(Commons.IConnections.CNStr, "spGetListKeHoachTuyenDung", TN, DN, Commons.Modules.UserName, Commons.Modules.TypeLanguage, "sBTTuan" + Commons.Modules.UserName);
                 DataTable dt = set.Tables[0];
                 if (grdVTYC.DataSource == null)
                 {
-                    Commons.Modules.ObjSystems.MLoadXtraGrid(grdVTYC, grvVTYC,dt,false,false, true, true, true, this.Name);
+                    Commons.Modules.ObjSystems.MLoadXtraGrid(grdVTYC, grvVTYC, dt, false, false, true, true, true, this.Name);
                     grvVTYC.Columns["ID_YCTD"].Visible = false;
                     grvVTYC.Columns["ID_VTTD"].Visible = false;
                 }
@@ -140,7 +138,7 @@ namespace Vs.Recruit
                     grdTuan.DataSource = set.Tables[1];
                 }
                 Commons.Modules.sLoad = "";
-                grvVTYC_FocusedRowChanged(null,null);
+                grvVTYC_FocusedRowChanged(null, null);
 
 
                 if (grdNguonTuyen.DataSource == null)
@@ -155,7 +153,7 @@ namespace Vs.Recruit
                     grdTuan.DataSource = set.Tables[1];
                 }
             }
-            catch 
+            catch
             {
             }
         }
@@ -178,7 +176,7 @@ namespace Vs.Recruit
             WindowsUIButton btn = e.Button as WindowsUIButton;
             switch (btn.Tag.ToString())
             {
-       
+
                 case "sua":
                     {
                         Commons.Modules.ObjSystems.AddnewRow(grvTuan, false);
@@ -188,6 +186,7 @@ namespace Vs.Recruit
                     }
                 case "xoa":
                     {
+
                         break;
                     }
 
@@ -234,12 +233,53 @@ namespace Vs.Recruit
             catch
             {
             }
-
         }
 
         private void searchControl1_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
             grvVTYC_FocusedRowChanged(null, null);
+        }
+
+        private void grvNguonTuyen_ValidatingEditor(object sender, DevExpress.XtraEditors.Controls.BaseContainerValidateEditorEventArgs e)
+        {
+            grvNguonTuyen.ClearColumnErrors();
+            try
+            {
+                DataTable dt = new DataTable();
+                if (grvNguonTuyen == null) return;
+                if (grvNguonTuyen.FocusedColumn.FieldName == "ID_NTD")
+                {//kiểm tra máy không được để trống
+                    if (string.IsNullOrEmpty(e.Value.ToString()))
+                    {
+                        e.Valid = false;
+                        e.ErrorText = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "erMayKhongTrong");
+                        grvNguonTuyen.SetColumnError(grvNguonTuyen.Columns["ID_NTD"], e.ErrorText);
+                        return;
+                    }
+                    else
+                    {
+                        dt = new DataTable();
+                        dt = Commons.Modules.ObjSystems.ConvertDatatable(grvNguonTuyen);
+                        if (dt.AsEnumerable().Count(x => x.Field<Int64>("ID_NTD").Equals(e.Value)) > 0)
+                        {
+                            e.Valid = false;
+                            e.ErrorText = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "erTrungDuLieu");
+                            grvNguonTuyen.SetColumnError(grvNguonTuyen.Columns["ID_NTD"], e.ErrorText);
+                            return;
+                        }
+                    }
+                }
+            }
+            catch
+            { }
+        }
+
+        private void grdNguonTuyen_ProcessGridKey(object sender, System.Windows.Forms.KeyEventArgs e)
+        {
+            if (btnALL.Buttons[0].Properties.Visible == false && e.KeyData == System.Windows.Forms.Keys.Delete)
+            {
+                grvNguonTuyen.DeleteSelectedRows();
+            }
         }
     }
 }

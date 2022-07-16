@@ -3869,6 +3869,8 @@ namespace Commons
         #region lấy table từ grid
         public DataTable ConvertDatatable(GridControl grid)
         {
+            grid.Views[0].PostEditor();
+            grid.Views[0].UpdateCurrentRow();
             DataTable dt = new DataTable();
             dt = (DataTable)grid.DataSource;
             return dt;

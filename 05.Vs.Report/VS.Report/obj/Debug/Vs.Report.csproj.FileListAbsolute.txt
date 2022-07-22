@@ -2377,3 +2377,6 @@ F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\VS.Report.dll.licenses
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.csproj.CoreCompileInputs.cache
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.csproj.CopyComplete
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\VS.Report.pdb
+F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptQuyetDinhThayDoiLuong_SB.resources
+F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptHopDongLaoDongThuViec_DM.resources
+F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptHopDongLaoDong_DM.resources

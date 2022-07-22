@@ -15,7 +15,7 @@ namespace VietSoftHRM
         {
             clsMain.setConfig();
             clsMain.setTTC();
-            //clsMain.CheckUpdate();
+            clsMain.CheckUpdate();
             Application.EnableVisualStyles();
             Thread t = new Thread(new ThreadStart(MRunForm));
             t.SetApartmentState(ApartmentState.STA);
@@ -26,6 +26,8 @@ namespace VietSoftHRM
             try
             {
                 Application.Run(new frmLogin());
+                //Application.Run(new frmThongTinChung(1));
+
             }
             catch (Exception ex)
             {

@@ -1754,3 +1754,5 @@ F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\de\DevExpress.Snap.v2
 F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\es\DevExpress.Snap.v20.1.Core.resources.dll
 F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\ja\DevExpress.Snap.v20.1.Core.resources.dll
 F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\ru\DevExpress.Snap.v20.1.Core.resources.dll
+F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.Report.rptThongTinNhomCaThang_DM.resources
+F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.Report.rptBCSLXacNhanCongThang_DM.resources

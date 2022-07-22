@@ -2344,3 +2344,4 @@ F:\01.HRM\08.Payroll\Vs.Payroll\bin\Debug\ru\DevExpress.Diagram.v20.1.Core.resou
 F:\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.csproj.CopyComplete
 F:\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.dll
 F:\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.pdb
+F:\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.ucDKThoiGianKhongLamSP.resources

@@ -69,12 +69,12 @@ namespace Vs.TimeAttendance
             else
             {
                 rdo_ChonBaoCao.Properties.Items.RemoveAt(5);
-                //rdo_ChonBaoCao.Properties.Items.RemoveAt(4);
             }
 
             LK_Thang.EditValue = DateTime.Today;
             Commons.OSystems.SetDateEditFormat(lk_TuNgay);
             Commons.OSystems.SetDateEditFormat(lk_DenNgay);
+            chkThayDoiCa.Checked = true;
             //LoadTinhTrangHopDong();
             Commons.Modules.sLoad = "";
             LoadNgay();
@@ -99,7 +99,7 @@ namespace Vs.TimeAttendance
                     {
 
                         int n = rdo_ChonBaoCao.SelectedIndex;
-                        if (rdo_ChonBaoCao.Properties.Items.Count < 8)
+                        if (rdo_ChonBaoCao.Properties.Items.Count < 10)
                         {
                             if(Commons.Modules.ObjSystems.KyHieuDV(Convert.ToInt64(LK_DON_VI.EditValue)) != "SB")
                             {
@@ -127,8 +127,8 @@ namespace Vs.TimeAttendance
                                                 break;
                                             }
                                         default:
-                                            BaoCaoTongHopThang_DM();
-                                            //BangChamCongThang();
+                                            //BaoCaoTongHopThang_DM();
+                                            BangChamCongThang();
                                             break;
                                     }
                                 }
@@ -257,6 +257,83 @@ namespace Vs.TimeAttendance
                                     }
                                     break;
                                 }
+                            case 8:
+                                {
+                                    frmViewReport frm = new frmViewReport();
+                                    DataTable dt;
+                                    System.Data.SqlClient.SqlConnection conn;
+                                    dt = new DataTable();
+                                    frm.rpt = new rptThongTinNhomCaThang_DM(Convert.ToDateTime(lk_TuNgay.EditValue), Convert.ToDateTime(lk_DenNgay.EditValue), Convert.ToDateTime(NgayIn.EditValue));
+                                    try
+                                    {
+                                        conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                                        conn.Open();
+
+                                        System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand(Commons.Modules.ObjSystems.returnSps(Commons.Modules.chamCongK, "rptBCNhomCaTheoThang_DM"), conn);
+
+                                        cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                                        cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                                        cmd.Parameters.Add("@DVi", SqlDbType.Int).Value = LK_DON_VI.EditValue;
+                                        cmd.Parameters.Add("@XN", SqlDbType.Int).Value = LK_XI_NGHIEP.EditValue;
+                                        cmd.Parameters.Add("@TO", SqlDbType.Int).Value = LK_TO.EditValue;
+                                        cmd.Parameters.Add("@TuNgay", SqlDbType.Date).Value = Convert.ToDateTime(lk_TuNgay.EditValue);
+                                        cmd.Parameters.Add("@DenNgay", SqlDbType.Date).Value = Convert.ToDateTime(lk_DenNgay.EditValue);
+                                        cmd.Parameters.Add("@KiemTra", SqlDbType.Bit).Value = chkThayDoiCa.Checked;
+                                        cmd.CommandType = CommandType.StoredProcedure;
+                                        System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+
+                                        DataSet ds = new DataSet();
+                                        adp.Fill(ds);
+                                        dt = new DataTable();
+                                        dt = ds.Tables[0].Copy();
+                                        dt.TableName = "DATA";
+                                        frm.AddDataSource(dt);
+                                        frm.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung());
+                                    }
+                                    catch
+                                    { }
+                                    frm.ShowDialog();
+                                    break;
+                                }
+
+                            case 9:
+                                {
+                                    frmViewReport frm = new frmViewReport();
+                                    DataTable dt;
+                                    System.Data.SqlClient.SqlConnection conn;
+                                    dt = new DataTable();
+                                    string sTieuDe = Commons.Modules.ObjLanguages.GetLanguage("rptBCSLXacNhanCongThang_DM", "lblTIEU_DE") + " " + Convert.ToDateTime(lk_TuNgay.EditValue).ToString("MM/yyyy");
+                                    frm.rpt = new rptBCSLXacNhanCongThang_DM(Convert.ToDateTime(lk_TuNgay.EditValue), Convert.ToDateTime(lk_DenNgay.EditValue), Convert.ToDateTime(NgayIn.EditValue), sTieuDe);
+                                    try
+                                    {
+                                        conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                                        conn.Open();
+
+                                        System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand(Commons.Modules.ObjSystems.returnSps(Commons.Modules.chamCongK, "rptBaoCaoSLXacNhanCong"), conn);
+
+                                        cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                                        cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                                        cmd.Parameters.Add("@DVi", SqlDbType.Int).Value = LK_DON_VI.EditValue;
+                                        cmd.Parameters.Add("@XN", SqlDbType.Int).Value = LK_XI_NGHIEP.EditValue;
+                                        cmd.Parameters.Add("@TO", SqlDbType.Int).Value = LK_TO.EditValue;
+                                        cmd.Parameters.Add("@TNgay", SqlDbType.Date).Value = Convert.ToDateTime(lk_TuNgay.EditValue);
+                                        cmd.Parameters.Add("@DNgay", SqlDbType.Date).Value = Convert.ToDateTime(lk_DenNgay.EditValue);
+                                        cmd.CommandType = CommandType.StoredProcedure;
+                                        System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+
+                                        DataSet ds = new DataSet();
+                                        adp.Fill(ds);
+                                        dt = new DataTable();
+                                        dt = ds.Tables[0].Copy();
+                                        dt.TableName = "DATA";
+                                        frm.AddDataSource(dt);
+                                        frm.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung());
+                                    }
+                                    catch
+                                    { }
+                                    frm.ShowDialog();
+                                    break;
+                                }
                         }
                         break;
                     }
@@ -285,39 +362,66 @@ namespace Vs.TimeAttendance
                 case 0:
                     {
                         rdo_DiTreVeSom.Visible = false;
-
+                        chkThayDoiCa.Enabled = false;
+                        lblThayDoiCa.Enabled = false;
                     }
                     break;
                 case 1:
                     {
                         rdo_DiTreVeSom.Visible = false;
+                        chkThayDoiCa.Enabled = false;
+                        lblThayDoiCa.Enabled = false;
                     }
                     break;
                 case 2:
                     {
                         rdo_DiTreVeSom.Visible = true;
+                        chkThayDoiCa.Enabled = false;
+                        lblThayDoiCa.Enabled = false;
                     }
                     break;
                 case 3:
                     {
                         rdo_DiTreVeSom.Visible = false;
+                        chkThayDoiCa.Enabled = false;
+                        lblThayDoiCa.Enabled = false;
                     }
                     break;
                 case 4:
                     {
                         rdo_DiTreVeSom.Visible = false;
+                        chkThayDoiCa.Enabled = false;
+                        lblThayDoiCa.Enabled = false;
                     }
                     break;
                 case 5:
                     {
                         rdo_DiTreVeSom.Visible = false;
+                        chkThayDoiCa.Enabled = false;
+                        lblThayDoiCa.Enabled = false;
                     }
                     break;
                 case 6:
                     {
                         rdo_DiTreVeSom.Visible = false;
+                        chkThayDoiCa.Enabled = false;
+                        lblThayDoiCa.Enabled = false;
+                        break;
                     }
-                    break;
+                case 7:
+                    {
+                        rdo_DiTreVeSom.Visible = false;
+                        chkThayDoiCa.Enabled = true;
+                        lblThayDoiCa.Enabled = true;
+                        break;
+                    }
+                case 8:
+                    {
+                        rdo_DiTreVeSom.Visible = false;
+                        chkThayDoiCa.Enabled = false;
+                        lblThayDoiCa.Enabled = false;
+                        break;
+                    }
                 default:
                     break;
             }
@@ -968,8 +1072,8 @@ namespace Vs.TimeAttendance
                 Excel.Workbook oWB;
                 Excel.Worksheet oSheet;
                 oXL = new Excel.Application();
-                oXL.Visible = true;
-
+                oXL.Visible = false;
+                
                 oWB = (Excel.Workbook)(oXL.Workbooks.Add(Missing.Value));
                 oSheet = (Excel.Worksheet)oWB.ActiveSheet;
 
@@ -1395,7 +1499,7 @@ namespace Vs.TimeAttendance
                 Excel._Worksheet oSheet;
 
                 oXL = new Excel.Application();
-                oXL.Visible = true;
+                oXL.Visible = false;
 
                 oWB = (Excel._Workbook)(oXL.Workbooks.Add(Missing.Value));
                 oSheet = (Excel._Worksheet)oWB.ActiveSheet;
@@ -1606,7 +1710,7 @@ namespace Vs.TimeAttendance
         private void BangChamCongTangCaThang_MT()
         {
             frmViewReport frm = new frmViewReport();
-            string sTieuDe = "BẢNG CHẤM CÔNG NGOÀI GIỜ THÁNG " + LK_Thang.EditValue.ToString();
+            string sTieuDe = Commons.Modules.ObjLanguages.GetLanguage("rptBangCongTangCaThang_MT", "lblTIEU_DE") + " " + LK_Thang.EditValue.ToString(); // BẢNG CÔNG TĂNG CA THÁNG
             frm.rpt = new rptBangCongTangCaThang_MT(sTieuDe, Convert.ToDateTime(NgayIn.EditValue), Convert.ToDateTime(lk_TuNgay.EditValue), Convert.ToDateTime(lk_DenNgay.EditValue));
             try
             {
@@ -1716,7 +1820,7 @@ namespace Vs.TimeAttendance
                 Excel._Worksheet oSheet;
 
                 oXL = new Excel.Application();
-                oXL.Visible = true;
+                oXL.Visible = false;
 
                 oWB = (Excel._Workbook)(oXL.Workbooks.Add(Missing.Value));
                 oSheet = (Excel._Worksheet)oWB.ActiveSheet;
@@ -2126,6 +2230,8 @@ namespace Vs.TimeAttendance
                   AccessMode: Excel.XlSaveAsAccessMode.xlShared);
                 }
 
+                oXL.Visible = true;
+
             }
             catch (Exception ex)
             {
@@ -2179,7 +2285,7 @@ namespace Vs.TimeAttendance
                 Excel._Worksheet oSheet;
 
                 oXL = new Excel.Application();
-                oXL.Visible = true;
+                oXL.Visible = false;
 
                 oWB = (Excel._Workbook)(oXL.Workbooks.Add(Missing.Value));
                 oSheet = (Excel._Worksheet)oWB.ActiveSheet;
@@ -2432,6 +2538,7 @@ namespace Vs.TimeAttendance
                 formatRange.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
                 oWB.SaveAs(SaveExcelFile,
                 AccessMode: Excel.XlSaveAsAccessMode.xlShared);
+                oXL.Visible = true;
             }
             catch
             {
@@ -2614,7 +2721,7 @@ namespace Vs.TimeAttendance
                 Excel.Workbook oWB;
                 Excel.Worksheet oSheet;
                 oXL = new Excel.Application();
-                oXL.Visible = true;
+                oXL.Visible = false;
 
 
                 //OfficeOpenXml.ExcelPackage ExcelPkg = new OfficeOpenXml.ExcelPackage();
@@ -3536,8 +3643,8 @@ namespace Vs.TimeAttendance
                 Excel._Worksheet oSheet;
 
                 oXL = new Excel.Application();
-                oXL.Visible = true;
-
+                oXL.Visible = false;
+                oXL.Cursor = XlMousePointer.xlWait;
                 oWB = (Excel._Workbook)(oXL.Workbooks.Add(Missing.Value));
                 oSheet = (Excel._Worksheet)oWB.ActiveSheet;
 
@@ -3781,13 +3888,13 @@ namespace Vs.TimeAttendance
                 formatRange.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
                 oWB.SaveAs(SaveExcelFile,
                 AccessMode: Excel.XlSaveAsAccessMode.xlShared);
+                oXL.Visible = true;
             }
             catch
             {
 
             }
         }
-
         #endregion
 
         private void lk_TuNgay_EditValueChanged(object sender, EventArgs e)

@@ -448,9 +448,11 @@ namespace Vs.HRM
                             string btKHNP = "TMPPRORUN" + Commons.Modules.UserName;
                             Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, btKHNP, Commons.Modules.ObjSystems.ConvertDatatable(grvKHNP), "");
 
+                            DataTable dt1 = new DataTable();
+                            dt1 = (DataTable)grdKHNP.DataSource;
                             try
                             {
-                                for (int i = 0; i < grvKHNP.RowCount; i++)
+                                for (int i = 0; i < dt1.Rows.Count; i++)
                                 {
                                     int n = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spKiemTraKHNP", btKHNP, grvDSCN.GetFocusedRowCellValue("ID_CN"), Convert.ToDateTime(Convert.ToDateTime(grvKHNP.GetRowCellValue(i, "TU_NGAY").ToString()).ToShortDateString()), Convert.ToDateTime(grvKHNP.GetRowCellValue(i, "DEN_NGAY"))));
                                     if (n > 1)

@@ -455,6 +455,18 @@
     <Compile Include="Report\rptBCDSDK_tangCa.designer.cs">
       <DependentUpon>rptBCDSDK_tangCa.cs</DependentUpon>
     </Compile>
+    <Compile Include="Report\rptBCSLXacNhanCongThang_DM.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\rptBCSLXacNhanCongThang_DM.Designer.cs">
+      <DependentUpon>rptBCSLXacNhanCongThang_DM.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Report\rptThongTinNhomCaThang_DM.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\rptThongTinNhomCaThang_DM.Designer.cs">
+      <DependentUpon>rptThongTinNhomCaThang_DM.cs</DependentUpon>
+    </Compile>
     <Compile Include="UAC\BaoCao\ucBaoCaoGiaiDoan.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -702,6 +714,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Report\rptBCDSDK_tangCa.resx">
       <DependentUpon>rptBCDSDK_tangCa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\rptBCSLXacNhanCongThang_DM.resx">
+      <DependentUpon>rptBCSLXacNhanCongThang_DM.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\rptThongTinNhomCaThang_DM.resx">
+      <DependentUpon>rptThongTinNhomCaThang_DM.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UAC\BaoCao\ucBaoCaoGiaiDoan.resx">
       <DependentUpon>ucBaoCaoGiaiDoan.cs</DependentUpon>

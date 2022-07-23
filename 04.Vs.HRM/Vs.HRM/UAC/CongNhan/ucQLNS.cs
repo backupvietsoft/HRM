@@ -186,7 +186,6 @@ namespace Vs.HRM
                 }
             }, 100);
             thread.Start();
-
             accorMenuleft.Visible = false;
         }
         private void Selecttab()
@@ -205,9 +204,6 @@ namespace Vs.HRM
             navigationFrame1.SelectedPage = navigationPage1;
             navigationPage2.Controls[0].Visible = false;
             navigationPage2.Controls[0].Dispose();
-            //    navigationPage2.SelectedPage.Visible = false;
-            //     navigationPage2.Controls.RemoveAt(0);
-
             accorMenuleft.Visible = true;
             LoadNhanSu(Commons.Modules.iCongNhan);
         }

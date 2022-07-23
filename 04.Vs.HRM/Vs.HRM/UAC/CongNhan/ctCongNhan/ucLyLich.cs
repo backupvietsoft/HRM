@@ -6,9 +6,7 @@ using Microsoft.ApplicationBlocks.Data;
 using System.IO;
 using DevExpress.XtraBars.Docking2010;
 using System.Windows.Forms;
-using DevExpress.XtraBars.Navigation;
 using Vs.Report;
-using System.Threading;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
 
@@ -18,7 +16,6 @@ namespace Vs.HRM
     {
         bool cothem = false;
         Int64 idcn = -1;
-        public NavigationFrame back;
         public DataTable dt;
 
         public ucLyLich(Int64 id)
@@ -316,9 +313,6 @@ namespace Vs.HRM
                             return;
                         }
                         DeleteData();
-                        //var x = back;
-                        //back.SelectedPage = (INavigationPage)back.Pages[back.Pages.Count - 2];
-                        //back.Refresh();
                         break;
                     }
                 case "luu":
@@ -840,7 +834,7 @@ namespace Vs.HRM
                     Bitmap fullSizeBitmap = new Bitmap(fullsizeImage, new Size((int)(fullsizeImage.Width * scale), (int)(fullsizeImage.Height * scale)));
                     MemoryStream resultStream = new MemoryStream();
 
-                    fullSizeBitmap.Save(resultStream, fullsizeImage.RawFormat);
+                    fullSizeBitmap.Save(resultStream,fullsizeImage.RawFormat);
 
                     currentByteImageArray = resultStream.ToArray();
                     resultStream.Dispose();

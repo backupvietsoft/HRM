@@ -203,6 +203,26 @@
     <Reference Include="Microsoft.QualityTools.Testing.Fakes, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
     </Reference>
+    <Reference Include="NPOI, Version=2.3.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\01.VietSoftHRM\VietSoftHRM\bin\Debug\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OOXML, Version=2.3.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\01.VietSoftHRM\VietSoftHRM\bin\Debug\NPOI.OOXML.dll</HintPath>
+    </Reference>
+    <Reference Include="Spire.License, Version=1.3.5.35, Culture=neutral, PublicKeyToken=b1144360237c8b3f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\Spire.License.dll</HintPath>
+    </Reference>
+    <Reference Include="Spire.Pdf, Version=3.6.230.55035, Culture=neutral, PublicKeyToken=663f351905198cb3, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\Spire.Pdf.dll</HintPath>
+    </Reference>
+    <Reference Include="Spire.XLS, Version=7.9.0.55035, Culture=neutral, PublicKeyToken=663f351905198cb3, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\Spire.XLS.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
@@ -228,6 +248,12 @@
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form\frmImportUngVien.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\frmImportUngVien.Designer.cs">
+      <DependentUpon>frmImportUngVien.cs</DependentUpon>
     </Compile>
     <Compile Include="Form\frmChonUngVien.cs">
       <SubType>Form</SubType>
@@ -355,12 +381,6 @@
     <Compile Include="UAC\ucPhongVan.Designer.cs">
       <DependentUpon>ucPhongVan.cs</DependentUpon>
     </Compile>
-    <Compile Include="UAC\ctUngVien\ucQLUV.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UAC\ctUngVien\ucQLUV.designer.cs">
-      <DependentUpon>ucQLUV.cs</DependentUpon>
-    </Compile>
     <Compile Include="UAC\ctUngVien\ucTuyenDung.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -381,8 +401,17 @@
     <Compile Include="UAC\TuyenDungCN\ucYeuCauTuyenDung.Designer.cs">
       <DependentUpon>ucYeuCauTuyenDung.cs</DependentUpon>
     </Compile>
+    <Compile Include="UAC\TuyenDungCN\ucQLUV.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UAC\TuyenDungCN\ucQLUV.Designer.cs">
+      <DependentUpon>ucQLUV.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\frmImportUngVien.resx">
+      <DependentUpon>frmImportUngVien.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\frmChonUngVien.resx">
       <DependentUpon>frmChonUngVien.cs</DependentUpon>
@@ -447,9 +476,6 @@
     <EmbeddedResource Include="UAC\ucPhongVan.resx">
       <DependentUpon>ucPhongVan.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UAC\ctUngVien\ucQLUV.resx">
-      <DependentUpon>ucQLUV.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="UAC\ctUngVien\ucTuyenDung.resx">
       <DependentUpon>ucTuyenDung.cs</DependentUpon>
     </EmbeddedResource>
@@ -469,7 +495,9 @@
     <EmbeddedResource Include="UAC\TuyenDungCN\ucYeuCauTuyenDung.resx">
       <DependentUpon>ucYeuCauTuyenDung.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="ClassDiagram1.cd" />
+    <EmbeddedResource Include="UAC\TuyenDungCN\ucQLUV.resx">
+      <DependentUpon>ucQLUV.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

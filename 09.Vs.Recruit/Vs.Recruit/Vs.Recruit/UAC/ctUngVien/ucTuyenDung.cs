@@ -14,8 +14,6 @@ namespace Vs.Recruit
     public partial class ucTuyenDung : DevExpress.XtraEditors.XtraUserControl
     {
         static Int64 iduv = -1;
-        Int64 idtb = -1;
-        private Int64 iIDTB_TMP;
         public ucTuyenDung(Int64 id)
         {
             InitializeComponent();
@@ -26,9 +24,8 @@ namespace Vs.Recruit
         private void LoadgrvKeHoachTD()
         {
             DataTable dtKHTD = new DataTable();
-            dtKHTD.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetKeHoachTD", Commons.Modules.UserName ,Commons.Modules.TypeLanguage));
-            Commons.Modules.ObjSystems.MLoadXtraGrid(grdKeHoachTD, grvKeHoachTD, dtKHTD, false, true, true, false, true, this.Name);
-            grvKeHoachTD.Columns["ID_KHTD"].Visible = false;
+            dtKHTD.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetKeHoachTD", iduv, Commons.Modules.UserName, Commons.Modules.TypeLanguage));
+            Commons.Modules.ObjSystems.MLoadXtraGrid(grdKeHoachTD, grvKeHoachTD, dtKHTD, false, false, true, true, true, this.Name);
         }
 
         private void LoadgrvPhongVan()
@@ -36,13 +33,12 @@ namespace Vs.Recruit
             try
             {
                 DataTable dtUVPV = new DataTable();
-            
-                dtUVPV.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetPhongVan_UV", Commons.Modules.UserName, Commons.Modules.TypeLanguage));
-               
+
+                dtUVPV.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetPhongVan_UV", iduv, Commons.Modules.UserName, Commons.Modules.TypeLanguage));
+
                 if (grdPhongVan.DataSource == null)
                 {
-                    Commons.Modules.ObjSystems.MLoadXtraGrid(grdPhongVan, grvPhongVan, dtUVPV, false, true, false, false, false, this.Name);
-                    grvPhongVan.Columns["ID_PV"].Visible = false;
+                    Commons.Modules.ObjSystems.MLoadXtraGrid(grdPhongVan, grvPhongVan, dtUVPV, false, false, true, true, true, this.Name);
                 }
                 else
                 {
@@ -51,11 +47,6 @@ namespace Vs.Recruit
             }
             catch
             { }
-        }
-
-        private void LoadNN()
-        {
-            Commons.Modules.ObjSystems.ThayDoiNN(this, new List<LayoutControlGroup>() { Root, layoutControlGroup1 }, windowsUIButton);
         }
         #endregion
 
@@ -85,8 +76,7 @@ namespace Vs.Recruit
             }
             LoadgrvKeHoachTD();
             LoadgrvPhongVan();
-            Commons.Modules.ObjSystems.SetPhanQuyen(windowsUIButton);
-            LoadNN();
+            Commons.Modules.ObjSystems.ThayDoiNN(this, new List<LayoutControlGroup>() { Root, layoutControlGroup1 }, windowsUIButton);
         }
 
         private void windowsUIButton_ButtonClick(object sender, DevExpress.XtraBars.Docking2010.ButtonEventArgs e)
@@ -124,6 +114,6 @@ namespace Vs.Recruit
             }
         }
         #endregion
-        
+
     }
 }

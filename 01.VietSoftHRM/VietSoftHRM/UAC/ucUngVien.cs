@@ -112,6 +112,8 @@ namespace VietSoftHRM
                         ns.accorMenuleft = accorMenuleft;
                         panel2.Controls.Clear();
                         panel2.Controls.Add(ns);
+                        ns.lblUV = NONNlab_Link;
+                        ns.lblUV.Tag = NONNlab_Link.Text;
                         ns.Dock = DockStyle.Fill;
                         break;
                     }
@@ -182,6 +184,8 @@ namespace VietSoftHRM
                         ns.accorMenuleft = accorMenuleft;
                         panel2.Controls.Clear();
                         panel2.Controls.Add(ns);
+                        ns.lblUV = NONNlab_Link;
+                        ns.lblUV.Tag = NONNlab_Link.Text;
                         ns.Dock = DockStyle.Fill;
                         break;
                     }

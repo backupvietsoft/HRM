@@ -183,7 +183,7 @@ namespace Commons
             {
                 try
                 {
-                    System.IO.Directory.Delete(strDuongdan,true);
+                    System.IO.Directory.Delete(strDuongdan, true);
                 }
                 catch (Exception ex)
                 {
@@ -281,8 +281,8 @@ namespace Commons
             timeEdit.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             timeEdit.Properties.EditFormat.FormatString = "HH:mm:ss";
             timeEdit.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.DateTimeAdvancingCaret;
-            //timeEdit.Properties.Mask.EditMask = "00:00:00";
         }
+  
 
         public string KyHieuDV(Int64 ID_DV)
         {
@@ -2511,7 +2511,7 @@ namespace Commons
 
                     case "TabPage":
                         {
-                            Ctl.Text = GetNN(dtNgu, Ctl.Name, frm.Name);          // Modules.ObjLanguages.GetLanguage(Modules.ModuleName, frm.Name, Ctl.Name, Modules.TypeLanguage)
+                            Ctl.Text = GetNN(dtNgu, Ctl.Name, frm.Name); 
                             break;
                         }
                     case "Button":
@@ -3664,6 +3664,7 @@ namespace Commons
                 grv.Columns[Value].ColumnEdit = cbo;
             }
         }
+
         public void AddCombo(string Value, string Display, GridView grv, DataTable tempt)
         {
             try
@@ -3679,10 +3680,8 @@ namespace Commons
                 cbo.SearchMode = SearchMode.AutoComplete;
                 cbo.AutoSearchColumnIndex = 1;
                 cbo.PopulateColumns();
-
                 grv.Columns[Value].ColumnEdit = cbo;
                 grv.BestFitColumns();
-
             }
             catch (Exception ex)
             {
@@ -3709,12 +3708,9 @@ namespace Commons
                 cbo.Columns[1].Caption = Commons.Modules.ObjLanguages.GetLanguage("frmDanhgia", "Ten_NDDG");
                 grv.Columns[Value].ColumnEdit = cbo;
                 grv.BestFitColumns();
-
             }
-            catch (Exception ex)
+            catch
             {
-
-                throw;
             }
         }
         public void AddCombo(string Value, string Display, GridView grv, DataTable tempt, bool FontVni)
@@ -3723,7 +3719,6 @@ namespace Commons
             {
                 RepositoryItemLookUpEdit cbo = new RepositoryItemLookUpEdit();
                 cbo.AppearanceDropDown.Options.UseFont = true;
-                //cbo.AppearanceDropDown.Font = new System.Drawing.Font("", 12);
                 cbo.NullText = "";
                 cbo.ValueMember = Value;
                 cbo.DisplayMember = Display;
@@ -3734,14 +3729,11 @@ namespace Commons
                 cbo.AutoSearchColumnIndex = 1;
                 cbo.PopulateColumns();
                 cbo.Columns[0].Visible = false;
-
                 grv.Columns[Value].ColumnEdit = cbo;
                 grv.BestFitColumns();
             }
-            catch (Exception ex)
+            catch
             {
-
-                throw;
             }
         }
         public void AddCombobyTree(string Value, string Display, TreeList tree, DataTable tempt)
@@ -3761,12 +3753,12 @@ namespace Commons
             txtfile.DoubleClick += delegate (object a, EventArgs b) { Txtfile_DoubleClick(txtfile, null, ofdfile, follder); };
         }
 
-        private void Txtfile_DoubleClick(object sender, EventArgs e,OpenFileDialog ofileDialog, string follder)
+        private void Txtfile_DoubleClick(object sender, EventArgs e, OpenFileDialog ofileDialog, string follder)
         {
             try
             {
                 ButtonEdit a = sender as ButtonEdit;
-                Commons.Modules.ObjSystems.OpenHinh(Commons.Modules.sDDTaiLieu + '\\' + follder +'\\' + a.Text);
+                Commons.Modules.ObjSystems.OpenHinh(Commons.Modules.sDDTaiLieu + '\\' + follder + '\\' + a.Text);
             }
             catch
             {
@@ -3799,7 +3791,7 @@ namespace Commons
         {
             try
             {
-                ButtonEdit a = (ButtonEdit)sender ;
+                ButtonEdit a = (ButtonEdit)sender;
                 if (ofileDialog.ShowDialog() == DialogResult.OK)
                 {
                     if (ofileDialog.FileName.ToString().Trim() == "") return;
@@ -3832,7 +3824,7 @@ namespace Commons
             }
         }
 
-        public void RowFilter(GridControl grid, GridColumn column1, GridColumn column2, string value1,string value2)
+        public void RowFilter(GridControl grid, GridColumn column1, GridColumn column2, string value1, string value2)
         {
             GridControl _grid = grid;
             GridView _view = grid.MainView as GridView;
@@ -3875,6 +3867,17 @@ namespace Commons
             dt = (DataTable)grid.DataSource;
             return dt;
         }
+
+        public string ConvertCombototext(DataTable dt)
+        {
+            string resulst = "Giá trị nhập vào :";
+            foreach (DataRow item in dt.Rows)
+            {
+                resulst += '\n' + item[1].ToString().Trim();
+            }
+            return resulst;
+        }
+
         public DataTable ConvertDatatable(GridView view)
         {
             view.PostEditor();
@@ -4267,6 +4270,15 @@ namespace Commons
             dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboChucVu", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll));
             return dt;
         }
+
+        public DataTable DataXepLoai(bool coAll)
+        {
+            //ID_XL,TEN_XL
+            DataTable dt = new DataTable();
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboXepLoai", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll));
+            return dt;
+        }
+
         public DataTable DataNgachLuong(bool coAll)
         {
             //"ID_NL","TEN_NL"
@@ -4334,11 +4346,42 @@ namespace Commons
             dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboNguoiKy", Commons.Modules.UserName));
             return dt;
         }
+
+        public DataTable DataYeuCauTD(bool coAll, int TT)
+        {
+            //ID_YCTD,MA_YCTD
+            DataTable dt = new DataTable();
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboYeuCauTD", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll, TT));
+            return dt;
+        }
+
+        public DataTable DataKeHoachPV(bool coAll)
+        {
+            //ID_KHPV,SO_KHPV
+            DataTable dt = new DataTable();
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboKeHoachPV", coAll));
+            return dt;
+        }
+
         public DataTable DataTinhTrang(bool coAll)
         {
             //ID_TT, TenTT
             DataTable dt = new DataTable();
             dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboTinhTrang", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll));
+            return dt;
+        }
+        public DataTable DataTinhTrangTD(bool coAll)
+        {
+            //ID_TTTD, Ten_TTTD
+            DataTable dt = new DataTable();
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboTinhTrangTD", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll));
+            return dt;
+        }
+        public DataTable DataTinhTrangYC(bool coAll)
+        {
+            //ID_TTYC, Ten_TTYC
+            DataTable dt = new DataTable();
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboTinhTrangYC", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll));
             return dt;
         }
         public DataTable DataTinhTrangDuyet(bool coAll)
@@ -4440,6 +4483,18 @@ namespace Commons
             dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboNoiDungDanhGia", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll));
             return dt;
         }
+        public DataTable DataPhai()
+        {
+            DataTable dt = new DataTable();
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboPhai", Commons.Modules.TypeLanguage));
+            return dt;
+        }
+        public DataTable DataHinhThucTuyen(bool coAll)
+        {
+            DataTable dt = new DataTable();
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboHinhThucTuyen", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll));
+            return dt;
+        }
 
 
         public DataTable DataLoaiCV(bool coAll)
@@ -4447,6 +4502,14 @@ namespace Commons
             //ID_LCV,TEN_LCV
             DataTable dt = new DataTable();
             dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboLoaiCV", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll));
+            return dt;
+        }
+
+        public DataTable DataDanhGiaTayNghe(bool coAll)
+        {
+            //ID_DGTN,TEN_DGTN
+            DataTable dt = new DataTable();
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboDanhGiaTayNge", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll));
             return dt;
         }
 
@@ -4706,9 +4769,7 @@ namespace Commons
                                 tb.SelectedItem = tb.GetTileGroupByName("titlegroup").GetTileItemByName("58");
                             }
                         }
-
                     }
-
                 }
             }
             catch (Exception ex) { }

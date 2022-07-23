@@ -46,6 +46,7 @@ namespace Vs.Recruit
                     grvPYC.Columns["ID_YCTD"].Visible = false;
                     grvPYC.Columns["ID_TO"].Visible = false;
                     grvPYC.Columns["ID_CN"].Visible = false;
+                    grvPYC.Columns["ID_TT"].Visible = false;
                     grvPYC.Columns["NGAY_YEU_CAU"].Visible = false;
                     grvPYC.Columns["NGAY_NHAN_DON"].Visible = false;
                     grvPYC.Columns["GHI_CHU"].Visible = false;
@@ -94,7 +95,7 @@ namespace Vs.Recruit
                     grvViTri.Columns["DUONG_DAN_TL"].OptionsColumn.AllowEdit = true;
                     btnEdit.ButtonClick += BtnEdit_ButtonClick;
                     grvViTri.Columns["DUONG_DAN_TL"].OptionsColumn.ReadOnly = false;
-                   grvViTri.Columns["ID_LCV"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
+                    grvViTri.Columns["ID_LCV"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
 
                     //this.Name.Replace("uc", "") + '\\' + txtMA_YCTD.Text
                 }
@@ -110,7 +111,7 @@ namespace Vs.Recruit
         }
         private void LoadgrdThayThe()
         {
-            
+
             try
             {
                 DataTable dt = new DataTable();
@@ -256,8 +257,7 @@ namespace Vs.Recruit
                 Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, "sBTVT" + Commons.Modules.UserName, Commons.Modules.ObjSystems.ConvertDatatable(grvViTri), "");
                 Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, "sBTThayThe" + Commons.Modules.UserName, Commons.Modules.ObjSystems.ConvertDatatable(grdThayThe), "");
                 Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, "sBTFile" + Commons.Modules.UserName, Commons.Modules.ObjSystems.ConvertDatatable(grvFileDK), "");
-
-                iID_YCTD = Convert.ToInt64(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spSaveYeuCauTuyenDung", iID_YCTD, txtMA_YCTD.EditValue, cboBPYC.EditValue, cboNguoiYC.EditValue, datNgayYC.DateTime, datNgayNhanDon.Text.ToString() == "" ? DBNull.Value : datNgayNhanDon.EditValue, txtLyDo.EditValue, "sBTVT" + Commons.Modules.UserName, "sBTThayThe" + Commons.Modules.UserName, grvFileDK.DataSource == null ? "" : "sBTFile" + Commons.Modules.UserName));
+                iID_YCTD = Convert.ToInt64(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spSaveYeuCauTuyenDung", iID_YCTD, txtMA_YCTD.EditValue, cboBPYC.EditValue, cboNguoiYC.EditValue, cboTinhTrang.EditValue, datNgayYC.DateTime, datNgayNhanDon.Text.ToString() == "" ? DBNull.Value : datNgayNhanDon.EditValue, txtLyDo.EditValue, "sBTVT" + Commons.Modules.UserName, "sBTThayThe" + Commons.Modules.UserName, grvFileDK.DataSource == null ? "" : "sBTFile" + Commons.Modules.UserName));
 
                 if (iID_YCTD != -1)
                     return true;
@@ -268,13 +268,9 @@ namespace Vs.Recruit
             {
                 return false;
             }
-
         }
-
         #endregion
-
         #region function 
-
         private void enableButon(bool visible)
         {
             btnALL.Buttons[0].Properties.Visible = visible;
@@ -293,6 +289,7 @@ namespace Vs.Recruit
             cboBPYC.Properties.ReadOnly = visible;
             datNgayYC.Properties.ReadOnly = visible;
             cboNguoiYC.Properties.ReadOnly = visible;
+            cboTinhTrang.Properties.ReadOnly = visible;
             datNgayNhanDon.Properties.ReadOnly = visible;
             txtLyDo.Properties.ReadOnly = visible;
 
@@ -302,10 +299,16 @@ namespace Vs.Recruit
         }
         private void LoadCbo()
         {
-            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboNguoiYC, Commons.Modules.ObjSystems.DataCongNhan(false), "ID_CN", "TEN_CN", "TEN_CN", true, true);
-
-            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboBPYC, Commons.Modules.ObjSystems.DataTo(-1, -1, false), "ID_TO", "TEN_TO", "TEN_TO", true, true);
-
+            try
+            {
+                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboNguoiYC, Commons.Modules.ObjSystems.DataCongNhan(false), "ID_CN", "TEN_CN", "TEN_CN", true, true);
+                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboBPYC, Commons.Modules.ObjSystems.DataTo(-1, -1, false), "ID_TO", "TEN_TO", "TEN_TO", true, true);
+                //ID_TTYC, Ten_TTYC
+                Commons.Modules.ObjSystems.MLoadLookUpEdit(cboTinhTrang, Commons.Modules.ObjSystems.DataTinhTrangYC(false), "ID_TTYC", "Ten_TTYC", "Ten_TTYC");
+            }
+            catch (Exception exx)
+            {
+            }
         }
         private void BindingData(bool them)
         {
@@ -317,6 +320,7 @@ namespace Vs.Recruit
                 cboNguoiYC.EditValue = -1;
                 datNgayNhanDon.EditValue = "";
                 txtLyDo.EditValue = "";
+                cboTinhTrang.EditValue = 1;
                 iID_YCTD = -1;
                 LoadgrdViTri();
                 LoadgrdThayThe();
@@ -331,6 +335,7 @@ namespace Vs.Recruit
                 {
                     txtMA_YCTD.EditValue = grvPYC.GetFocusedRowCellValue("MA_YCTD").ToString();
                     cboBPYC.EditValue = Convert.ToInt64(grvPYC.GetFocusedRowCellValue("ID_TO"));
+                    cboTinhTrang.EditValue = Convert.ToInt64(grvPYC.GetFocusedRowCellValue("ID_TT"));
                     datNgayYC.EditValue = Convert.ToDateTime(grvPYC.GetFocusedRowCellValue("NGAY_YEU_CAU"));
                     cboNguoiYC.EditValue = Convert.ToInt64(grvPYC.GetFocusedRowCellValue("ID_CN"));
                     try
@@ -351,7 +356,7 @@ namespace Vs.Recruit
                     }
                     grvViTri_FocusedRowChanged(null, null);
                 }
-                catch
+                catch(Exception ex)
                 {
                     BindingData(true);
                 }
@@ -635,7 +640,7 @@ namespace Vs.Recruit
                 {
                     Commons.Modules.ObjSystems.OpenHinh(Commons.Modules.sDDTaiLieu + '\\' + this.Name.Replace("uc", "") + '\\' + txtMA_YCTD.Text + '\\' + grvViTri.GetFocusedRowCellValue("DUONG_DAN_TL"));
                 }
-                catch 
+                catch
                 {
                 }
             }

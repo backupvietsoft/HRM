@@ -1,11 +1,11 @@
 ﻿
-using DevExpress.Skins;
 using DevExpress.XtraBars.Navigation;
 using DevExpress.XtraEditors;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace Vs.Recruit
@@ -14,21 +14,11 @@ namespace Vs.Recruit
     {
         List<LabelControl> List;
         private string tab = "";
-        public DataTable dt;
-        public bool flag = false;
-        public bool flag_Open = false; // flag = true uc mở bằng double click từ các form khác ,  flag = false ứng viên được mở từ danh sách ứng viên
-
-
         public Int64 iIDTB = -1;
-        //public Int64 iID_UV = -1;
         public ucCTQLUV(Int64 iIdUV)
         {
             InitializeComponent();
-
-            navigationFrame1.AllowTransitionAnimation = DevExpress.Utils.DefaultBoolean.True;
-            navigationFrame1.TransitionAnimationProperties.FrameCount = 0;
-            navigationFrame1.TransitionAnimationProperties.FrameInterval = 0;
-
+       
             Commons.Modules.ObjSystems.ThayDoiNN(this);
             Commons.Modules.iUngVien = iIdUV;
         }
@@ -56,76 +46,70 @@ namespace Vs.Recruit
                 {
                     if (lable.Name == lc.Name)
                     {
-                        lc.Appearance.ForeColor = Color.FromArgb(240, 128, 25);   //CommonColors.GetQuestionColor(DevExpress.LookAndFeel.UserLookAndFeel.Default);
+                        lc.Appearance.ForeColor = Color.FromArgb(0, 0, 192);
                         LoaduacCongNhan(lc.Name);
                         tab = lable.Name;
-                        //return;
                     }
                     if(lable.Name!=lc.Name)
                     {
                         lc.Appearance.ForeColor = Color.Empty;
-                        //lc.Appearance.Font = this.Font;
                     }
                 }
+                Commons.Modules.ObjSystems.HideWaitForm();
             }
             catch
             {
             }
-        } 
+        }
+        private void Selecttab(NavigationPage page)
+        {
+
+            Thread thread = new Thread(delegate ()
+            {
+                if (this.InvokeRequired)
+                {
+                    this.Invoke(new MethodInvoker(delegate
+                    {
+                        navigationFrame1.SelectedPage = page;
+                    }));
+                }
+            }, 100); thread.Start();
+        }
+        private ucLyLichUV ll;
         private void LoaduacCongNhan(string tenlable)
         {
-            
             switch (tenlable)
             {
                 case "labLyLich":
                     {
-                        ucLyLichUV ll = new ucLyLichUV(Commons.Modules.iUngVien);
-                        dt = ll.dt;
-                        ll.flag_Open = flag_Open;
-                        ll.iIDTB = iIDTB;
-                        LoadUac(ll);
-                        ll.back = navigationFrame1;
+                        if (pageLylich.Controls.Count == 0)
+                        {
+                            ll = new ucLyLichUV(Commons.Modules.iUngVien);
+                            ll.Dock = DockStyle.Fill;
+                            pageLylich.Controls.Add(ll);
+                        }
+                        else
+                        {
+                            ll.BinDingData(false);
+                        }
+                        Selecttab(pageLylich);
                         break;
                     }
-                //case "labBangCap":
-                //    {
-                //        ucBangCapUV bc = new ucBangCapUV(Commons.Modules.iUngVien);
-                //        LoadUac(bc);
-                //        break;
-                //    }
+
                 case "labLSTuyenDung":
                     {
-                        ucTuyenDung td = new ucTuyenDung(Commons.Modules.iUngVien);
-                        LoadUac(td);
+                        if (pageLSTD.Controls.Count == 0)
+                        {
+                            ucTuyenDung ct = new ucTuyenDung(Commons.Modules.iUngVien);
+                            ct.Dock = DockStyle.Fill;
+                            pageLSTD.Controls.Add(ct);
+                        }
+                        Selecttab(pageLSTD);
                         break;
                     }
                 default:
                     break;
             }
         }
-        private void LoadUac(XtraUserControl uac)
-        {
-            uac.Dock = DockStyle.Fill;
-            NavigationPage page = new NavigationPage();
-            page.Tag = uac.Name;
-            page.Controls.Add(uac);
-            navigationFrame1.Pages.Add(page);
-            navigationFrame1.Dock = DockStyle.Fill;
-            navigationFrame1.SelectedPageIndex = navigationFrame1.Pages.Count;
-        }
-        private NavigationPage checkfameexits(string tab)
-        {
-            NavigationPage page = new NavigationPage();
-            foreach (NavigationPage item in navigationFrame1.Pages)
-            {
-                if (item.Tag == tab)
-                {
-                    page = item;
-                }
-
-            }
-            return page;
-        }
-
     }
 }

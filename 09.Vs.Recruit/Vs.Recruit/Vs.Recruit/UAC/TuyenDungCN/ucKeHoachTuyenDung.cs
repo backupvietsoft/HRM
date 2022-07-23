@@ -1,4 +1,5 @@
 ﻿using DevExpress.XtraBars.Docking2010;
+using DevExpress.XtraGrid.Views.Grid;
 using Microsoft.ApplicationBlocks.Data;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,6 @@ namespace Vs.Recruit
 {
     public partial class ucKeHoachTuyenDung : DevExpress.XtraEditors.XtraUserControl
     {
-        private Int64 iID_YCTD = 0;
         public ucKeHoachTuyenDung()
         {
             InitializeComponent();
@@ -144,6 +144,7 @@ namespace Vs.Recruit
                 if (grdNguonTuyen.DataSource == null)
                 {
                     Commons.Modules.ObjSystems.MLoadXtraGrid(grdNguonTuyen, grvNguonTuyen, set.Tables[2], false, false, true, true, true, this.Name);
+                    grvNguonTuyen.OptionsView.NewItemRowPosition = NewItemRowPosition.None;
                     grvNguonTuyen.Columns["ID_YCTD"].Visible = false;
                     grvNguonTuyen.Columns["ID_VTTD"].Visible = false;
                     Commons.Modules.ObjSystems.AddCombXtra("ID_NTD", "TEN_NTD", grvNguonTuyen, Commons.Modules.ObjSystems.DataNguonTD(false), false, "ID_NTD", this.Name, true);
@@ -193,8 +194,11 @@ namespace Vs.Recruit
                 case "luu":
                     {
                         if (grvNguonTuyen.HasColumnErrors) return;
+                        int n = grvVTYC.FocusedRowHandle;
                         if (!SaveData()) return;
                         LoadgrdVTYC();
+                        grvVTYC.FocusedRowHandle = n;
+                        grvVTYC.SelectRow(n);
                         Commons.Modules.ObjSystems.DeleteAddRow(grvTuan);
                         Commons.Modules.ObjSystems.DeleteAddRow(grvNguonTuyen);
                         enableButon(true);

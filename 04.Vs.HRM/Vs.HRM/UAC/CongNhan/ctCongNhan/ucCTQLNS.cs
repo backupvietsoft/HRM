@@ -192,10 +192,6 @@ namespace Vs.HRM
                     break;
             }
         }
-        private void LoadUac(XtraUserControl uac, NavigationPage page)
-        {
- 
-        }
         private NavigationPage checkfameexits(string tab)
         {
             try

@@ -255,12 +255,10 @@ namespace Vs.Recruit
         }
         public void NhapUngVien(object sender, EventArgs e)
         {
-            ucUV = new ucCTQLUV(-1);
+            ucCTQLUV ucUV = new ucCTQLUV(-1);
             ucUV.Dock = DockStyle.Fill;
             Commons.Modules.ObjSystems.ShowWaitForm(this);
             ucUV.Refresh();
-            bool flagTBTD = true; // Flag = true thì Ứng viên được nhập từ form này sẽ được add tự động vào Thông báo tuyển dụng đang chọn
-            ucUV.flag = flagTBTD;
             ucUV.iIDTB = Id;
             //ns.accorMenuleft = accorMenuleft;
             tablePanel1.Hide();

@@ -14,6 +14,7 @@ using DataTable = System.Data.DataTable;
 using System.Reflection;
 using NPOI.HSSF.UserModel;
 using NPOI.XSSF.UserModel;
+using DevExpress.XtraGrid.Views.Grid;
 
 public class MExcel
 {
@@ -61,7 +62,7 @@ public class MExcel
                 return "";
             }
         }
-        catch (Exception )
+        catch (Exception)
         {
             return "";
         }
@@ -86,7 +87,7 @@ public class MExcel
                 sTmp = sTmp + Convert.ToString(Dong);
             return sTmp;
         }
-        catch (Exception )
+        catch (Exception)
         {
             return "";
         }
@@ -153,12 +154,12 @@ public class MExcel
             MWsheet.Cells[DongBD, CotBD].Font.Bold = MFontBold;
             MWsheet.Cells[DongBD, CotBD].NumberFormat = MNumberFormat;
         }
-        catch (Exception )
+        catch (Exception)
         {
         }
     }
 
-    
+
 
     public void MFuntion(Excel.Worksheet MWsheet, string MFuntion, int DongBD, int CotBD, int DongBDFuntion, int CotBDFuntion, float MFontSize, bool MFontBold, float MColumnWidth, string MNumberFormat, Excel.XlHAlign MHAlign, Excel.XlVAlign MVAlign)
     {
@@ -173,7 +174,7 @@ public class MExcel
             MWsheet.Cells[DongBD, CotBD].HorizontalAlignment = MHAlign;
             MWsheet.Cells[DongBD, CotBD].VerticalAlignment = MVAlign;
         }
-        catch (Exception )
+        catch (Exception)
         {
         }
     }
@@ -191,7 +192,7 @@ public class MExcel
             MRange.Font.Bold = MFontBold;
             MRange.NumberFormat = MNumberFormat;
         }
-        catch (Exception )
+        catch (Exception)
         {
         }
     }
@@ -210,7 +211,7 @@ public class MExcel
             MRange.HorizontalAlignment = MHAlign;
             MRange.VerticalAlignment = MVAlign;
         }
-        catch (Exception )
+        catch (Exception)
         {
         }
     }
@@ -224,7 +225,7 @@ public class MExcel
             System.Drawing.Image img = System.Drawing.Image.FromStream(stream);
             img.Save(strPath);
         }
-        catch (Exception )
+        catch (Exception)
         {
         }
     }
@@ -307,7 +308,7 @@ public class MExcel
         {
             System.Data.DataTable dtTmp = new System.Data.DataTable();
             string sSql = "";
-                sSql = " SELECT CASE WHEN " + Commons.Modules.TypeLanguage + "=0 " + " THEN TEN_CTY_TIENG_VIET ELSE TEN_CTY_TIENG_ANH END AS TEN_CTY,LOGO, " + " CASE WHEN " + Commons.Modules.TypeLanguage + "=0 THEN DIA_CHI_VIET  ELSE DIA_CHI_ANH  END AS DIA_CHI,Phone," + " Fax,EMAIL FROM THONG_TIN_CHUNG ";
+            sSql = " SELECT CASE WHEN " + Commons.Modules.TypeLanguage + "=0 " + " THEN TEN_CTY_TIENG_VIET ELSE TEN_CTY_TIENG_ANH END AS TEN_CTY,LOGO, " + " CASE WHEN " + Commons.Modules.TypeLanguage + "=0 THEN DIA_CHI_VIET  ELSE DIA_CHI_ANH  END AS DIA_CHI,Phone," + " Fax,EMAIL FROM THONG_TIN_CHUNG ";
             dtTmp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, System.Data.CommandType.Text, sSql));
 
             if (dtTmp.Rows.Count == 0 & Commons.Modules.sPrivate.ToUpper() == "GREENFEED")
@@ -328,13 +329,13 @@ public class MExcel
             CurCell.HorizontalAlignment = Excel.XlHAlign.xlHAlignRight;
             CurCell.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
 
-            CurCell = MWsheet.Range[MWsheet.Cells[DongBD, CotBD], MWsheet.Cells[DongKT, CotKT-3]];
+            CurCell = MWsheet.Range[MWsheet.Cells[DongBD, CotBD], MWsheet.Cells[DongKT, CotKT - 3]];
             CurCell.Merge(true);
             CurCell.Font.Bold = true;
             CurCell.Borders.LineStyle = 0;
             CurCell.Value2 = dtTmp.Rows[0]["TEN_CTY"];
 
-   
+
 
             DongBD += 1;
             DongKT += 1;
@@ -635,7 +636,7 @@ public class MExcel
         }
     }
 
-    public void DinhDang(Excel.Worksheet MWsheet, string NoiDung, int Dong, int Cot, String MNumberFormat, float MFontSize, bool MFontBold, Excel.XlHAlign MHAlign, Excel.XlVAlign MVAlign, bool MMerge, int MDongMerge, int MCotMerge,int MRowHeight)
+    public void DinhDang(Excel.Worksheet MWsheet, string NoiDung, int Dong, int Cot, String MNumberFormat, float MFontSize, bool MFontBold, Excel.XlHAlign MHAlign, Excel.XlVAlign MVAlign, bool MMerge, int MDongMerge, int MCotMerge, int MRowHeight)
     {
         try
         {
@@ -716,7 +717,7 @@ public class MExcel
         }
         else
         {
-            object[,] rawData = new object[dtTmp.Rows.Count, dtTmp.Columns.Count ];
+            object[,] rawData = new object[dtTmp.Rows.Count, dtTmp.Columns.Count];
             for (var col = 0; col <= dtTmp.Columns.Count - 1; col++)
             {
                 for (var row = 0; row <= dtTmp.Rows.Count - 1; row++)
@@ -1387,8 +1388,71 @@ public class MExcel
         else
             allCells.Value = Commons.Modules.ObjLanguages.GetLanguage(Commons.Modules.ModuleName, sBC, sKeyWord, Commons.Modules.TypeLanguage);
     }
+    public bool MGetSheetNames(string sFilePath, LookUpEdit cboChonSheet)
+    {
 
-    public DataTable MGetData2xls(String Path,string sheet)
+        try
+        {
+            DataTable dt = new DataTable();
+            DataColumn dtColID = new DataColumn();
+            dtColID.DataType = System.Type.GetType("System.Int16");
+            dtColID.ColumnName = "ID";
+            dt.Columns.Add(dtColID);
+
+            DataColumn dtColName = new DataColumn();
+            dtColName.DataType = System.Type.GetType("System.String");
+            dtColName.ColumnName = "Name";
+            dt.Columns.Add(dtColName);
+
+            dt.Rows.Add(-1, "");
+
+
+
+            byte[] CSVBytes = File.ReadAllBytes(sFilePath);
+            var excelStream = new MemoryStream(CSVBytes);
+            string FileName = Path.GetFileName(sFilePath);
+            var FileExt = Path.GetExtension(FileName);
+
+
+            if (FileExt == ".xls")
+            {
+                HSSFWorkbook hssfwb = new HSSFWorkbook(excelStream);
+                for (int i = 0; i < hssfwb.NumberOfSheets; i++)
+                {
+                    string SheetName = hssfwb.GetSheetName(i);
+                    if (!string.IsNullOrEmpty(SheetName))
+                        dt.Rows.Add(i, SheetName);
+                }
+            }
+            else if (FileExt == ".xlsx")
+            {
+                XSSFWorkbook hssfwb = new XSSFWorkbook(excelStream);
+                for (int i = 0; i < hssfwb.NumberOfSheets; i++)
+                {
+                    string SheetName = hssfwb.GetSheetName(i);
+                    if (!string.IsNullOrEmpty(SheetName))
+                        dt.Rows.Add(i, SheetName);
+                }
+            }
+
+            Commons.Modules.sLoad = "0Load";
+            if (dt.Rows.Count > 0)
+                Commons.Modules.ObjSystems.MLoadLookUpEdit(cboChonSheet, dt, "ID", "Name", "");
+
+            Commons.Modules.sLoad = "";
+            return true;
+        }
+        catch (Exception ex)
+        {
+            cboChonSheet.Properties.DataSource = null;
+            Commons.Modules.sLoad = "";
+            XtraMessageBox.Show(ex.Message.ToString());
+            return false;
+        }
+
+    }
+
+    public DataTable MGetData2xls(String Path, string sheet)
     {
         HSSFWorkbook wb;
         HSSFSheet sh;
@@ -1547,7 +1611,7 @@ public class MExcel
         }
     }
 
-    public DataTable MGetData2xlsx(String Path,string sheet)
+    public DataTable MGetData2xlsx(String Path, string sheet)
     {
         XSSFWorkbook wb;
         XSSFSheet sh;
@@ -1680,5 +1744,587 @@ public class MExcel
         }
     }
 
+    #region kiểm dữ liệu
+
+    public int CheckLen(GridView grvData, DataRow dr, int col, int giatri, int chieudai, string thongbao)
+    {
+        try
+        {
+            if (dr[grvData.Columns[col].FieldName.ToString()] == DBNull.Value || dr[grvData.Columns[col].FieldName.ToString()].ToString() == String.Empty)
+            { giatri += 1; }
+            else
+                if (dr[grvData.Columns[col].FieldName.ToString()].ToString().Length > chieudai)
+            {
+                dr.SetColumnError(grvData.Columns[col].FieldName.ToString(), thongbao + " dài hơn " + chieudai + " ký tự." + "(" + dr[grvData.Columns[col].FieldName.ToString()].ToString().Length.ToString() + ")");
+                dr["XOA"] = 1;
+            }
+            else
+                giatri += 1;
+            return giatri;
+        }
+        catch { return giatri; }
+    }
+    private string ChuoiKT = "";
+    public bool KiemKyTu(string strInput, string strChuoi)
+    {
+
+        if (strChuoi == "") strChuoi = ChuoiKT;
+
+        for (int i = 0; i < strInput.Length; i++)
+        {
+            for (int j = 0; j < strChuoi.Length; j++)
+            {
+                if (strInput[i] == strChuoi[j])
+                {
+                    return true;
+                }
+            }
+        }
+        if (strInput.Contains("//"))
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public bool KiemDuLieu(GridView grvData, DataRow dr, int iCot, Boolean bKiemNull, int iDoDaiKiem, string sform)
+    {
+        string sDLKiem;
+        try
+        {
+            sDLKiem = dr[grvData.Columns[iCot].FieldName.ToString()].ToString();
+            if (bKiemNull)
+            {
+                if (string.IsNullOrEmpty(sDLKiem))
+                {
+                    dr.SetColumnError(grvData.Columns[iCot].FieldName.ToString(), Commons.Modules.ObjLanguages.GetLanguage(sform, "msgKhongDuocTrong"));
+                    dr["XOA"] = 1;
+                    return false;
+                }
+                else
+                {
+                    if (KiemKyTu(sDLKiem, ChuoiKT))  //KiemKyTu
+                    {
+                        dr.SetColumnError(grvData.Columns[iCot].FieldName.ToString(), Commons.Modules.ObjLanguages.GetLanguage(sform, "msgCoChuaKyTuDB"));
+                        dr["XOA"] = 1;
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                if (!string.IsNullOrEmpty(sDLKiem))
+                {
+                    if (KiemKyTu(sDLKiem, ChuoiKT))  //KiemKyTu
+                    {
+                        dr.SetColumnError(grvData.Columns[iCot].FieldName.ToString(), Commons.Modules.ObjLanguages.GetLanguage(sform, "msgCoChuaKyTuDB"));
+                        dr["XOA"] = 1;
+                        return false;
+                    }
+                }
+            }
+            if (iDoDaiKiem != 0)
+            {
+                if (sDLKiem.Length > iDoDaiKiem)
+                {
+                    dr.SetColumnError(grvData.Columns[iCot].FieldName.ToString(), Commons.Modules.ObjLanguages.GetLanguage(sform, "msgDoDaiKyTuVuocQua " + iDoDaiKiem));
+                    return false;
+                }
+            }
+        }
+        catch
+        {
+            dr.SetColumnError(grvData.Columns[iCot].FieldName.ToString(), "error");
+            dr["XOA"] = 1;
+            return false;
+        }
+        return true;
+    }
+
+    public bool KiemTrungDL(GridView grvData, DataTable dt, DataRow dr, int iCot, string sDLKiem, string tabName, string ColName, string sform)
+    {
+        string sTenKTra = Commons.Modules.ObjLanguages.GetLanguage(sform, "msgTrungDL");
+        try
+        {
+
+            if (dt.AsEnumerable().Where(x => x[iCot].Equals(sDLKiem)).CopyToDataTable().Rows.Count > 1)
+            {
+                sTenKTra = Commons.Modules.ObjLanguages.GetLanguage(sform, "msgTrungDLLuoi");
+                dr.SetColumnError(grvData.Columns[iCot].FieldName.ToString(), sTenKTra);
+                dr["XOA"] = 1;
+                return false;
+            }
+            else
+            {
+                if (Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT COUNT(*) FROM dbo.[" + tabName + "] WHERE " + ColName + " = N'" + sDLKiem + "'")) > 0)
+                {
+
+                    sTenKTra = Commons.Modules.ObjLanguages.GetLanguage(sform, "msgTrungDLCSDL");
+                    dr.SetColumnError(grvData.Columns[iCot].FieldName.ToString(), sTenKTra);
+                    dr["XOA"] = 1;
+                    return false;
+                }
+            }
+            return true;
+        }
+        catch (Exception ex)
+        {
+            dr.SetColumnError(grvData.Columns[iCot].FieldName.ToString(), sTenKTra);
+            dr["XOA"] = 1;
+            return false;
+        }
+    }
+    public bool KiemTonTai(GridView grvData, DataRow dr, int iCot, string sDLKiem, string tabName, string ColName, Boolean bKiemNull = true, string sform = "")
+    {
+        //null không kiểm
+        if (bKiemNull)
+        {//nếu null
+            if (string.IsNullOrEmpty(sDLKiem))
+            {
+                dr.SetColumnError(grvData.Columns[iCot].FieldName.ToString(), Commons.Modules.ObjLanguages.GetLanguage(sform, "msgKhongduocTrong"));
+                dr["XOA"] = 1;
+                return false;
+            }
+            //khác null
+            {
+                if (Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT COUNT(*) FROM dbo." + tabName + " WHERE " + ColName + " = N'" + sDLKiem + "'")) == 0)
+                {
+                    dr.SetColumnError(grvData.Columns[iCot].FieldName.ToString(), Commons.Modules.ObjLanguages.GetLanguage(sform, "msgChuaTonTaiCSDL"));
+                    dr["XOA"] = 1;
+                    return false;
+                }
+            }
+        }
+        else
+        {
+            if (!string.IsNullOrEmpty(sDLKiem))
+            {
+                if (Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT COUNT(*) FROM dbo." + tabName + " WHERE " + ColName + " = N'" + sDLKiem + "'")) == 0)
+                {
+                    dr.SetColumnError(grvData.Columns[iCot].FieldName.ToString(), Commons.Modules.ObjLanguages.GetLanguage(sform, "msgChuaTonTaiCSDL"));
+                    dr["XOA"] = 1;
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public bool KiemTonTai(GridView grvData, DataRow dr, int iCot, string sDLKiem, string tabName, string ColName, string ColName1,string sform)
+    {
+        //null không kiểm
+        if (!string.IsNullOrEmpty(sDLKiem))
+        {
+            if (Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT COUNT(*) FROM dbo." + tabName + " WHERE " + ColName + " "+ ColName1 + " = N'" + sDLKiem + "'")) == 0)
+            {
+                dr.SetColumnError(grvData.Columns[iCot].FieldName.ToString(), Commons.Modules.ObjLanguages.GetLanguage(sform, "msgChuaTonTaiCSDL"));
+                dr["XOA"] = 1;
+                return false;
+            }
+        }
+        return true;
+    }
+
+
+    public bool KiemDuLieuNgay(GridView grvData, DataRow dr, int iCot, Boolean bKiemNull, string sform)
+    {
+        string sDLKiem;
+        sDLKiem = dr[grvData.Columns[iCot].FieldName.ToString()].ToString();
+        DateTime DLKiem;
+
+        try
+        {
+
+            if (bKiemNull)
+            {
+                if (string.IsNullOrEmpty(sDLKiem))
+                {
+                    dr.SetColumnError(grvData.Columns[iCot].FieldName.ToString(), Commons.Modules.ObjLanguages.GetLanguage(sform, "msgKhongduocTrong"));
+                    dr["XOA"] = 1;
+                    return false;
+                }
+                else
+                {
+                    //sDLKiem = DateTime.ParseExact(sDLKiem, "dd/MM/yyyy", CultureInfo.InvariantCulture).ToString();
+                    if (!DateTime.TryParse(sDLKiem, out DLKiem))
+                    {
+                        dr.SetColumnError(grvData.Columns[iCot].FieldName.ToString(), Commons.Modules.ObjLanguages.GetLanguage(sform, "msgKhongPhaiNgay"));
+                        dr["XOA"] = 1;
+                        return false;
+                    }
+
+                }
+            }
+            else
+            {
+                if (!string.IsNullOrEmpty(sDLKiem))
+                {
+                    if (!DateTime.TryParse(sDLKiem, out DLKiem))
+                    {
+                        dr.SetColumnError(grvData.Columns[iCot].FieldName.ToString(), Commons.Modules.ObjLanguages.GetLanguage(sform, "msgKhongPhaiNgay"));
+                        dr["XOA"] = 1;
+                        return false;
+                    }
+                }
+            }
+        }
+        catch
+        {
+            dr.SetColumnError(grvData.Columns[iCot].FieldName.ToString(), Commons.Modules.ObjLanguages.GetLanguage(sform, "msgKhongPhaiNgay"));
+            dr["XOA"] = 1;
+            return false;
+        }
+        return true;
+    }
+
+    public bool KiemDuLieuNgay(GridView grvData, DataRow dr, int iCot, string sTenKTra, Boolean bKiemNull, string GTSoSanh, int iKieuSS)
+    {
+        // iKieuSS = 1 la so sanh = 
+        // iKieuSS = 2 la so sanh nho hon giá trị so sanh
+        // iKieuSS = 3 la so sanh nho hon hoac bang
+        // iKieuSS = 4 la so sanh lon hon
+        // iKieuSS = 5 la so sanh lon hon hoac bang
+        try
+        {
+            string sDLKiem;
+            sDLKiem = DateTime.Parse(dr[grvData.Columns[iCot].FieldName.ToString()].ToString()).ToString("dd/MM/yyyy HH:mm:ss");
+            DateTime DLKiem;
+            DateTime DLSSanh;
+            DateTime.TryParse(GTSoSanh, out DLSSanh);
+
+            if (bKiemNull)
+            {
+                if (string.IsNullOrEmpty(sDLKiem))
+                {
+                    dr.SetColumnError(grvData.Columns[iCot].FieldName.ToString(), sTenKTra + " không được để trống");
+                    dr["XOA"] = 1;
+                    return false;
+                }
+                else
+                {
+                    if (!DateTime.TryParse(sDLKiem, out DLKiem))
+                    {
+                        dr.SetColumnError(grvData.Columns[iCot].FieldName.ToString(), sTenKTra + " phải là datetime");
+                        dr["XOA"] = 1;
+                        return false;
+                    }
+                    else
+                    {
+                        if (DateTime.Parse(GTSoSanh) != DateTime.Parse("01/01/1900"))
+                        {
+                            #region Giá trị so sánh
+                            //iKieuSS = 1 la so sanh = 
+                            if (iKieuSS == 1)
+                            {
+                                if (DLKiem == DLSSanh)
+                                {
+                                    dr.SetColumnError(grvData.Columns[iCot].FieldName.ToString(), sTenKTra + " không được bằng " + DLSSanh.ToShortDateString());
+                                    dr["XOA"] = 1;
+                                    return false;
+                                }
+                            }
+                            // iKieuSS = 2 la so sanh nho hon giá trị so sanh
+                            if (iKieuSS == 2)
+                            {
+                                if (DLKiem < DLSSanh)
+                                {
+                                    dr.SetColumnError(grvData.Columns[iCot].FieldName.ToString(), sTenKTra + " không được nhỏ hơn " + DLSSanh.ToShortDateString());
+                                    dr["XOA"] = 1;
+                                    return false;
+                                }
+                            }
+                            // iKieuSS = 3 la so sanh nho hon hoac bang
+                            if (iKieuSS == 3)
+                            {
+                                if (DLKiem <= DLSSanh)
+                                {
+                                    dr.SetColumnError(grvData.Columns[iCot].FieldName.ToString(), sTenKTra + " không được nhỏ hơn hay bằng " + DLSSanh.ToShortDateString());
+                                    dr["XOA"] = 1;
+                                    return false;
+                                }
+                            }
+                            // iKieuSS = 4 la so sanh lon hon
+                            if (iKieuSS == 4)
+                            {
+                                if (DLKiem > DLSSanh)
+                                {
+                                    dr.SetColumnError(grvData.Columns[iCot].FieldName.ToString(), sTenKTra + " không được lớn hơn " + DLSSanh.ToShortDateString());
+                                    dr["XOA"] = 1;
+                                    return false;
+                                }
+                            }
+                            // iKieuSS = 5 la so sanh lon hon hoac bang
+                            if (iKieuSS >= 5)
+                            {
+                                if (DLKiem < DLSSanh)
+                                {
+                                    dr.SetColumnError(grvData.Columns[iCot].FieldName.ToString(), sTenKTra + " không được lớn hơn hay bằng " + DLSSanh.ToShortDateString());
+                                    dr["XOA"] = 1;
+                                    return false;
+                                }
+                            }
+                            #endregion
+                        }
+                    }
+
+                }
+            }
+            else
+            {
+                if (!string.IsNullOrEmpty(sDLKiem))
+                {
+                    if (!DateTime.TryParse(sDLKiem, out DLKiem))
+                    {
+                        dr.SetColumnError(grvData.Columns[iCot].FieldName.ToString(), sTenKTra + " phải là datetime");
+                        dr["XOA"] = 1;
+                        return false;
+                    }
+                    else
+                    {
+                        if (GTSoSanh != "01/01/1900")
+                        {
+                            #region Giá trị so sánh
+                            //iKieuSS = 1 la so sanh = 
+                            if (iKieuSS == 1)
+                            {
+                                if (DLKiem == DLSSanh)
+                                {
+                                    dr.SetColumnError(grvData.Columns[iCot].FieldName.ToString(), sTenKTra + " không được bằng " + DLSSanh.ToShortDateString());
+                                    dr["XOA"] = 1;
+                                    return false;
+                                }
+                            }
+                            // iKieuSS = 2 la so sanh nho hon giá trị so sanh
+                            if (iKieuSS == 2)
+                            {
+                                if (DLKiem < DLSSanh)
+                                {
+                                    dr.SetColumnError(grvData.Columns[iCot].FieldName.ToString(), sTenKTra + " không được nhỏ hơn " + DLSSanh.ToShortDateString());
+                                    dr["XOA"] = 1;
+                                    return false;
+                                }
+                            }
+                            // iKieuSS = 3 la so sanh nho hon hoac bang
+                            if (iKieuSS == 3)
+                            {
+                                if (DLKiem <= DLSSanh)
+                                {
+                                    dr.SetColumnError(grvData.Columns[iCot].FieldName.ToString(), sTenKTra + " không được nhỏ hơn hay bằng " + DLSSanh.ToShortDateString());
+                                    dr["XOA"] = 1;
+                                    return false;
+                                }
+                            }
+                            // iKieuSS = 4 la so sanh lon hon
+                            if (iKieuSS == 4)
+                            {
+                                if (DLKiem > DLSSanh)
+                                {
+                                    dr.SetColumnError(grvData.Columns[iCot].FieldName.ToString(), sTenKTra + " không được lớn hơn " + DLSSanh.ToShortDateString());
+                                    dr["XOA"] = 1;
+                                    return false;
+                                }
+                            }
+                            // iKieuSS = 5 la so sanh lon hon hoac bang
+                            if (iKieuSS >= 5)
+                            {
+                                if (DLKiem < DLSSanh)
+                                {
+                                    dr.SetColumnError(grvData.Columns[iCot].FieldName.ToString(), sTenKTra + " không được lớn hơn hay bằng " + DLSSanh.ToShortDateString());
+                                    dr["XOA"] = 1;
+                                    return false;
+                                }
+                            }
+                            #endregion
+                        }
+                    }
+                }
+            }
+        }
+        catch
+        {
+            dr.SetColumnError(grvData.Columns[iCot].FieldName.ToString(), sTenKTra + " phải là datetime");
+            dr["XOA"] = 1;
+            return false;
+        }
+        return true;
+    }
+
+    public bool KiemDuLieuSo(GridView grvData, DataRow dr, int iCot, string sTenKTra, double GTSoSanh, double GTMacDinh, Boolean bKiemNull, string sForm)
+    {
+        string sDLKiem;
+        sDLKiem = dr[grvData.Columns[iCot].FieldName.ToString()].ToString();
+        double DLKiem;
+        if (bKiemNull)
+        {
+            if (string.IsNullOrEmpty(sDLKiem))
+            {
+                dr.SetColumnError(grvData.Columns[iCot].FieldName.ToString(), Commons.Modules.ObjLanguages.GetLanguage(sForm, "msgKhongduocTrong"));
+                dr["XOA"] = 1;
+                return false;
+            }
+            else
+            {
+                if (!double.TryParse(dr[grvData.Columns[iCot].FieldName.ToString()].ToString(), out DLKiem))
+                {
+                    dr.SetColumnError(grvData.Columns[iCot].FieldName.ToString(), Commons.Modules.ObjLanguages.GetLanguage(sForm, "msgKhongPhaiSo"));
+                    dr["XOA"] = 1;
+                    return false;
+                }
+                else
+                {
+                    if (GTSoSanh != -999999)
+                    {
+                        if (DLKiem < GTSoSanh)
+                        {
+                            dr.SetColumnError(grvData.Columns[iCot].FieldName.ToString(), sTenKTra + Commons.Modules.ObjLanguages.GetLanguage(sForm, "msgKhongNhoHon") + GTSoSanh.ToString());
+                            dr["XOA"] = 1;
+                            return false;
+                        }
+
+                        DLKiem = Math.Round(DLKiem, 8);
+                        dr[grvData.Columns[iCot].FieldName.ToString()] = DLKiem.ToString();
+
+                    }
+                }
+            }
+        }
+        else
+        {
+            if (string.IsNullOrEmpty(sDLKiem) && GTMacDinh != -999999)
+            {
+                dr[grvData.Columns[iCot].FieldName.ToString()] = GTMacDinh;
+                DLKiem = GTMacDinh;
+                sDLKiem = GTMacDinh.ToString();
+            }
+
+            if (!string.IsNullOrEmpty(sDLKiem))
+            {
+                if (!double.TryParse(dr[grvData.Columns[iCot].FieldName.ToString()].ToString(), out DLKiem))
+                {
+                    dr.SetColumnError(grvData.Columns[iCot].FieldName.ToString(), sTenKTra + Commons.Modules.ObjLanguages.GetLanguage(sForm, "msgKhongPhaiSo"));
+                    dr["XOA"] = 1;
+                    return false;
+                }
+                else
+                {
+                    if (GTSoSanh != -999999)
+                    {
+                        if (DLKiem < GTSoSanh)
+                        {
+                            dr.SetColumnError(grvData.Columns[iCot].FieldName.ToString(), sTenKTra + Commons.Modules.ObjLanguages.GetLanguage(sForm, "msgKhongNhoHon") + GTSoSanh.ToString());
+                            dr["XOA"] = 1;
+                            return false;
+                        }
+
+                        DLKiem = Math.Round(DLKiem, 8);
+                        dr[grvData.Columns[iCot].FieldName.ToString()] = DLKiem.ToString();
+                    }
+
+                }
+            }
+
+
+        }
+
+
+
+        return true;
+    }
+
+    public bool KiemDuLieuBool(GridView grvData, DataRow dr, int iCot, string sTenKTra, string GTMacDinh)
+    {
+        if (string.IsNullOrEmpty(sTenKTra))
+        {
+            dr[grvData.Columns[iCot].FieldName.ToString()] = GTMacDinh;
+            sTenKTra = GTMacDinh.ToString();
+            dr[grvData.Columns[iCot].FieldName.ToString()] = sTenKTra;
+
+        }
+
+        if (!string.IsNullOrEmpty(sTenKTra))
+        {
+            try
+            {
+                sTenKTra = sTenKTra.Trim() == "1" ? "True" : "False";
+            }
+            catch
+            {
+                dr.SetColumnError(grvData.Columns[iCot].FieldName.ToString(), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "KhongPhaiKieuBool"));
+                dr["XOA"] = 1;
+                return false; ;
+            }
+        }
+        return true;
+    }
+
+    public bool KiemDuLieuSo(GridView grvData, DataRow dr, int iCot, string sTenKTra, double GTSoSanh, double GTMacDinh, Boolean bKiemNull, double GTTKhoang, string sForm)
+    {
+        double DLKiem;
+        if (bKiemNull)
+        {
+            if (string.IsNullOrEmpty(sTenKTra))
+            {
+                dr.SetColumnError(grvData.Columns[iCot].FieldName.ToString(), Commons.Modules.ObjLanguages.GetLanguage(sForm, "msgKhongduocTrong"));
+                dr["XOA"] = 1;
+                return false;
+            }
+            else
+            {
+                if (!double.TryParse(sTenKTra, out DLKiem))
+                {
+                    dr.SetColumnError(grvData.Columns[iCot].FieldName.ToString(), sTenKTra + Commons.Modules.ObjLanguages.GetLanguage(sForm, "msgKhongPhaiSo"));
+                    dr["XOA"] = 1;
+                    return false;
+                }
+                else
+                {
+                    if (GTSoSanh != -999999)
+                    {
+                        if (DLKiem < GTSoSanh || DLKiem > GTTKhoang)
+                        {
+                            dr.SetColumnError(grvData.Columns[iCot].FieldName.ToString(), sTenKTra + Commons.Modules.ObjLanguages.GetLanguage(sForm, "msgKhongNhoHon") +
+                                GTSoSanh.ToString() + Commons.Modules.ObjLanguages.GetLanguage(sForm, "msgVaLonHon") + GTTKhoang.ToString());
+                            dr["XOA"] = 1;
+                            return false;
+                        }
+                    }
+                }
+            }
+        }
+        else
+        {
+            if (string.IsNullOrEmpty(sTenKTra) && GTMacDinh != -999999)
+            {
+                dr[grvData.Columns[iCot].FieldName.ToString()] = GTMacDinh;
+                DLKiem = GTMacDinh;
+                sTenKTra = GTMacDinh.ToString();
+            }
+
+            if (!string.IsNullOrEmpty(sTenKTra))
+            {
+                if (!double.TryParse(sTenKTra, out DLKiem))
+                {
+                    dr.SetColumnError(grvData.Columns[iCot].FieldName.ToString(), sTenKTra + Commons.Modules.ObjLanguages.GetLanguage(sForm, "msgKhongPhaiSo"));
+                    dr["XOA"] = 1;
+                    return false;
+                }
+                else
+                {
+                    if (GTSoSanh != -999999)
+                    {
+                        if (DLKiem < GTSoSanh || DLKiem > GTTKhoang)
+                        {
+                            dr.SetColumnError(grvData.Columns[iCot].FieldName.ToString(), sTenKTra + Commons.Modules.ObjLanguages.GetLanguage(sForm, "msgKhongNhoHon") +
+                                   GTSoSanh.ToString() + Commons.Modules.ObjLanguages.GetLanguage(sForm, "msgVaLonHon") + GTTKhoang.ToString());
+                            dr["XOA"] = 1;
+                            return false;
+                        }
+                    }
+                }
+            }
+        }
+        return true;
+    }
+    #endregion
 
 }

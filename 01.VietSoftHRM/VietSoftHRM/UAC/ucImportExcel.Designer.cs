@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions10 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions40 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ucImportExcel));
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions11 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions12 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions41 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions42 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
             this.windowsUIButton = new DevExpress.XtraBars.Docking2010.WindowsUIButtonPanel();
             this.searchControl = new DevExpress.XtraEditors.SearchControl();
             this.dataLayoutControl1 = new DevExpress.XtraDataLayout.DataLayoutControl();
@@ -86,24 +86,24 @@
             this.windowsUIButton.AppearanceButton.Pressed.Options.UseFont = true;
             this.windowsUIButton.AppearanceButton.Pressed.Options.UseImage = true;
             this.windowsUIButton.AppearanceButton.Pressed.Options.UseTextOptions = true;
-            windowsUIButtonImageOptions10.ImageUri.Uri = "Edit;Size32x32;GrayScaled";
-            windowsUIButtonImageOptions10.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("windowsUIButtonImageOptions10.SvgImage")));
-            windowsUIButtonImageOptions11.ImageUri.Uri = "SaveAll";
-            windowsUIButtonImageOptions11.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("windowsUIButtonImageOptions11.SvgImage")));
-            windowsUIButtonImageOptions12.ImageUri.Uri = "richedit/clearheaderandfooter";
+            windowsUIButtonImageOptions40.ImageUri.Uri = "Edit;Size32x32;GrayScaled";
+            windowsUIButtonImageOptions40.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("windowsUIButtonImageOptions40.SvgImage")));
+            windowsUIButtonImageOptions41.ImageUri.Uri = "SaveAll";
+            windowsUIButtonImageOptions41.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("windowsUIButtonImageOptions41.SvgImage")));
+            windowsUIButtonImageOptions42.ImageUri.Uri = "richedit/clearheaderandfooter";
             this.windowsUIButton.Buttons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] {
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions10, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "export", -1, false),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions11, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "import", -1, false),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions12, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "thoat", -1, false)});
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions40, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "export", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions41, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "import", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions42, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "thoat", -1, false)});
             this.windowsUIButton.ContentAlignment = System.Drawing.ContentAlignment.MiddleRight;
             this.windowsUIButton.Controls.Add(this.searchControl);
             this.windowsUIButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.windowsUIButton.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.windowsUIButton.Location = new System.Drawing.Point(0, 506);
-            this.windowsUIButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.windowsUIButton.Location = new System.Drawing.Point(0, 430);
+            this.windowsUIButton.Margin = new System.Windows.Forms.Padding(4);
             this.windowsUIButton.Name = "windowsUIButton";
-            this.windowsUIButton.Padding = new System.Windows.Forms.Padding(5);
-            this.windowsUIButton.Size = new System.Drawing.Size(990, 40);
+            this.windowsUIButton.Padding = new System.Windows.Forms.Padding(4);
+            this.windowsUIButton.Size = new System.Drawing.Size(866, 34);
             this.windowsUIButton.TabIndex = 4;
             this.windowsUIButton.Text = "windowsUIButtonPanel1";
             this.windowsUIButton.UseButtonBackgroundImages = false;
@@ -112,16 +112,14 @@
             // searchControl
             // 
             this.searchControl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.searchControl.Location = new System.Drawing.Point(2, 8);
-            this.searchControl.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.searchControl.Location = new System.Drawing.Point(3, 7);
+            this.searchControl.Margin = new System.Windows.Forms.Padding(4);
             this.searchControl.Name = "searchControl";
-            this.searchControl.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 12.75F);
-            this.searchControl.Properties.Appearance.Options.UseFont = true;
             this.searchControl.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Repository.ClearButton(),
             new DevExpress.XtraEditors.Repository.SearchButton()});
             this.searchControl.Properties.FindDelay = 100;
-            this.searchControl.Size = new System.Drawing.Size(220, 30);
+            this.searchControl.Size = new System.Drawing.Size(192, 24);
             this.searchControl.TabIndex = 10;
             // 
             // dataLayoutControl1
@@ -135,29 +133,30 @@
             this.dataLayoutControl1.Location = new System.Drawing.Point(0, 0);
             this.dataLayoutControl1.Name = "dataLayoutControl1";
             this.dataLayoutControl1.Root = this.Root;
-            this.dataLayoutControl1.Size = new System.Drawing.Size(990, 506);
+            this.dataLayoutControl1.Size = new System.Drawing.Size(866, 430);
             this.dataLayoutControl1.TabIndex = 5;
             this.dataLayoutControl1.Text = "dataLayoutControl1";
             // 
             // grdData
             // 
-            this.grdData.Location = new System.Drawing.Point(24, 158);
+            this.grdData.Location = new System.Drawing.Point(24, 148);
             this.grdData.MainView = this.grvData;
             this.grdData.Name = "grdData";
-            this.grdData.Size = new System.Drawing.Size(942, 324);
+            this.grdData.Size = new System.Drawing.Size(818, 258);
             this.grdData.TabIndex = 9;
             this.grdData.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grvData});
             // 
             // grvData
             // 
+            this.grvData.DetailHeight = 297;
             this.grvData.GridControl = this.grdData;
             this.grvData.Name = "grvData";
             this.grvData.OptionsCustomization.AllowFilter = false;
             this.grvData.OptionsFilter.AllowFilterEditor = false;
             this.grvData.OptionsFind.AllowFindPanel = false;
             this.grvData.OptionsFind.ShowFindButton = false;
-            this.grvData.OptionsSelection.CheckBoxSelectorColumnWidth = 100;
+            this.grvData.OptionsSelection.CheckBoxSelectorColumnWidth = 87;
             this.grvData.OptionsSelection.MultiSelect = true;
             this.grvData.OptionsSelection.ShowCheckBoxSelectorInColumnHeader = DevExpress.Utils.DefaultBoolean.True;
             this.grvData.OptionsView.ShowGroupPanel = false;
@@ -166,46 +165,46 @@
             // 
             // cboDanhMucImport
             // 
-            this.cboDanhMucImport.Location = new System.Drawing.Point(625, 79);
+            this.cboDanhMucImport.Location = new System.Drawing.Point(546, 74);
             this.cboDanhMucImport.Name = "cboDanhMucImport";
             this.cboDanhMucImport.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cboDanhMucImport.Properties.NullText = "";
-            this.cboDanhMucImport.Size = new System.Drawing.Size(341, 26);
+            this.cboDanhMucImport.Size = new System.Drawing.Size(296, 24);
             this.cboDanhMucImport.StyleController = this.dataLayoutControl1;
             this.cboDanhMucImport.TabIndex = 8;
             // 
             // cboMenuImport
             // 
-            this.cboMenuImport.Location = new System.Drawing.Point(152, 79);
+            this.cboMenuImport.Location = new System.Drawing.Point(135, 74);
             this.cboMenuImport.Name = "cboMenuImport";
             this.cboMenuImport.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cboMenuImport.Properties.NullText = "";
-            this.cboMenuImport.Size = new System.Drawing.Size(341, 26);
+            this.cboMenuImport.Size = new System.Drawing.Size(296, 24);
             this.cboMenuImport.StyleController = this.dataLayoutControl1;
             this.cboMenuImport.TabIndex = 7;
             this.cboMenuImport.EditValueChanged += new System.EventHandler(this.cboMenuImport_EditValueChanged);
             // 
             // cboChonSheet
             // 
-            this.cboChonSheet.Location = new System.Drawing.Point(625, 49);
+            this.cboChonSheet.Location = new System.Drawing.Point(546, 46);
             this.cboChonSheet.Name = "cboChonSheet";
             this.cboChonSheet.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cboChonSheet.Properties.NullText = "";
-            this.cboChonSheet.Size = new System.Drawing.Size(341, 26);
+            this.cboChonSheet.Size = new System.Drawing.Size(296, 24);
             this.cboChonSheet.StyleController = this.dataLayoutControl1;
             this.cboChonSheet.TabIndex = 6;
             this.cboChonSheet.EditValueChanged += new System.EventHandler(this.cboChonSheet_EditValueChanged);
             // 
             // btnFile
             // 
-            this.btnFile.Location = new System.Drawing.Point(152, 49);
+            this.btnFile.Location = new System.Drawing.Point(135, 46);
             this.btnFile.Name = "btnFile";
             this.btnFile.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.btnFile.Size = new System.Drawing.Size(341, 26);
+            this.btnFile.Size = new System.Drawing.Size(296, 24);
             this.btnFile.StyleController = this.dataLayoutControl1;
             this.btnFile.TabIndex = 0;
             this.btnFile.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.txtChonFile_ButtonClick);
@@ -218,7 +217,7 @@
             this.groThongTinImport,
             this.groDLImport});
             this.Root.Name = "Root";
-            this.Root.Size = new System.Drawing.Size(990, 506);
+            this.Root.Size = new System.Drawing.Size(866, 430);
             this.Root.TextVisible = false;
             // 
             // groThongTinImport
@@ -230,65 +229,65 @@
             this.lblDanhMucImport});
             this.groThongTinImport.Location = new System.Drawing.Point(0, 0);
             this.groThongTinImport.Name = "groThongTinImport";
-            this.groThongTinImport.Size = new System.Drawing.Size(970, 109);
+            this.groThongTinImport.Size = new System.Drawing.Size(846, 102);
             // 
             // lblChonFile
             // 
             this.lblChonFile.Control = this.btnFile;
             this.lblChonFile.Location = new System.Drawing.Point(0, 0);
             this.lblChonFile.Name = "lblChonFile";
-            this.lblChonFile.Size = new System.Drawing.Size(473, 30);
-            this.lblChonFile.TextSize = new System.Drawing.Size(125, 20);
+            this.lblChonFile.Size = new System.Drawing.Size(411, 28);
+            this.lblChonFile.TextSize = new System.Drawing.Size(108, 17);
             // 
             // lblChonSheet
             // 
             this.lblChonSheet.Control = this.cboChonSheet;
-            this.lblChonSheet.Location = new System.Drawing.Point(473, 0);
+            this.lblChonSheet.Location = new System.Drawing.Point(411, 0);
             this.lblChonSheet.Name = "lblChonSheet";
-            this.lblChonSheet.Size = new System.Drawing.Size(473, 30);
-            this.lblChonSheet.TextSize = new System.Drawing.Size(125, 20);
+            this.lblChonSheet.Size = new System.Drawing.Size(411, 28);
+            this.lblChonSheet.TextSize = new System.Drawing.Size(108, 17);
             // 
             // lblMenuImport
             // 
             this.lblMenuImport.Control = this.cboMenuImport;
-            this.lblMenuImport.Location = new System.Drawing.Point(0, 30);
+            this.lblMenuImport.Location = new System.Drawing.Point(0, 28);
             this.lblMenuImport.Name = "lblMenuImport";
-            this.lblMenuImport.Size = new System.Drawing.Size(473, 30);
-            this.lblMenuImport.TextSize = new System.Drawing.Size(125, 20);
+            this.lblMenuImport.Size = new System.Drawing.Size(411, 28);
+            this.lblMenuImport.TextSize = new System.Drawing.Size(108, 17);
             // 
             // lblDanhMucImport
             // 
             this.lblDanhMucImport.Control = this.cboDanhMucImport;
-            this.lblDanhMucImport.Location = new System.Drawing.Point(473, 30);
+            this.lblDanhMucImport.Location = new System.Drawing.Point(411, 28);
             this.lblDanhMucImport.Name = "lblDanhMucImport";
-            this.lblDanhMucImport.Size = new System.Drawing.Size(473, 30);
-            this.lblDanhMucImport.TextSize = new System.Drawing.Size(125, 20);
+            this.lblDanhMucImport.Size = new System.Drawing.Size(411, 28);
+            this.lblDanhMucImport.TextSize = new System.Drawing.Size(108, 17);
             // 
             // groDLImport
             // 
             this.groDLImport.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlItem2});
-            this.groDLImport.Location = new System.Drawing.Point(0, 109);
+            this.groDLImport.Location = new System.Drawing.Point(0, 102);
             this.groDLImport.Name = "groDLImport";
-            this.groDLImport.Size = new System.Drawing.Size(970, 377);
+            this.groDLImport.Size = new System.Drawing.Size(846, 308);
             // 
             // layoutControlItem2
             // 
             this.layoutControlItem2.Control = this.grdData;
             this.layoutControlItem2.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(946, 328);
+            this.layoutControlItem2.Size = new System.Drawing.Size(822, 262);
             this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem2.TextVisible = false;
             // 
             // ucImportExcel
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.dataLayoutControl1);
             this.Controls.Add(this.windowsUIButton);
             this.Name = "ucImportExcel";
-            this.Size = new System.Drawing.Size(990, 546);
+            this.Size = new System.Drawing.Size(866, 464);
             this.Load += new System.EventHandler(this.ucImportExcel_Load);
             this.windowsUIButton.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.searchControl.Properties)).EndInit();

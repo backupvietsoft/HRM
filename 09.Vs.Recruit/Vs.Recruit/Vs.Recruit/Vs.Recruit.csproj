@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{EF26D657-B988-4B7A-BD04-E7A282A49D6C}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Library</OutputType>
     <RootNamespace>Vs.Recruit</RootNamespace>
     <AssemblyName>Vs.Recruit</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
@@ -330,29 +330,45 @@
     <Compile Include="UAC\ctUngVien\frmUpdateTTUV.Designer.cs">
       <DependentUpon>frmUpdateTTUV.cs</DependentUpon>
     </Compile>
-    <Compile Include="UAC\TuyenDungCN\ucDinhBienLD.cs">
-      <SubType>UserControl</SubType>
+    <Compile Include="UAC\PhongVan\ucKeHoachPhongVan.cs" />
+    <Compile Include="UAC\PhongVan\ucKeHoachPhongVan.Designer.cs">
+      <DependentUpon>ucKeHoachPhongVan.cs</DependentUpon>
     </Compile>
-    <Compile Include="UAC\TuyenDungCN\ucDinhBienLD.Designer.cs">
-      <DependentUpon>ucDinhBienLD.cs</DependentUpon>
+    <Compile Include="UAC\PhongVan\ucPhongVan.cs" />
+    <Compile Include="UAC\PhongVan\ucPhongVan.Designer.cs">
+      <DependentUpon>ucPhongVan.cs</DependentUpon>
     </Compile>
-    <Compile Include="UAC\TuyenDungCN\ucKeHoachTuyenDung.cs">
-      <SubType>UserControl</SubType>
+    <Compile Include="UAC\PhongVan\ucTHONG_BAO_TUYEN_DUNG.cs" />
+    <Compile Include="UAC\PhongVan\ucTHONG_BAO_TUYEN_DUNG.Designer.cs">
+      <DependentUpon>ucTHONG_BAO_TUYEN_DUNG.cs</DependentUpon>
     </Compile>
-    <Compile Include="UAC\TuyenDungCN\ucKeHoachTuyenDung.Designer.cs">
-      <DependentUpon>ucKeHoachTuyenDung.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UAC\ucTiepNhanUngVien.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UAC\ucTiepNhanUngVien.Designer.cs">
+    <Compile Include="UAC\PhongVan\ucTiepNhanUngVien.cs" />
+    <Compile Include="UAC\PhongVan\ucTiepNhanUngVien.Designer.cs">
       <DependentUpon>ucTiepNhanUngVien.cs</DependentUpon>
     </Compile>
-    <Compile Include="UAC\ucVI_TRI_TUYEN_DUNG.cs">
-      <SubType>UserControl</SubType>
+    <Compile Include="UAC\PhongVan\ucUngVien.cs" />
+    <Compile Include="UAC\PhongVan\ucUngVien.Designer.cs">
+      <DependentUpon>ucUngVien.cs</DependentUpon>
     </Compile>
-    <Compile Include="UAC\ucVI_TRI_TUYEN_DUNG.Designer.cs">
+    <Compile Include="UAC\PhongVan\ucVI_TRI_TUYEN_DUNG.cs" />
+    <Compile Include="UAC\PhongVan\ucVI_TRI_TUYEN_DUNG.Designer.cs">
       <DependentUpon>ucVI_TRI_TUYEN_DUNG.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UAC\TuyenDung\ucDinhBienLD.cs" />
+    <Compile Include="UAC\TuyenDung\ucDinhBienLD.Designer.cs">
+      <DependentUpon>ucDinhBienLD.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UAC\TuyenDung\ucKeHoachTuyenDung.cs" />
+    <Compile Include="UAC\TuyenDung\ucKeHoachTuyenDung.Designer.cs">
+      <DependentUpon>ucKeHoachTuyenDung.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UAC\TuyenDung\ucQLUV.cs" />
+    <Compile Include="UAC\TuyenDung\ucQLUV.Designer.cs">
+      <DependentUpon>ucQLUV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UAC\TuyenDung\ucYeuCauTuyenDung.cs" />
+    <Compile Include="UAC\TuyenDung\ucYeuCauTuyenDung.Designer.cs">
+      <DependentUpon>ucYeuCauTuyenDung.cs</DependentUpon>
     </Compile>
     <Compile Include="Form\frmXemDSUngVien.cs">
       <SubType>Form</SubType>
@@ -396,38 +412,14 @@
     <Compile Include="UAC\ctUngVien\ucLyLichUV.Designer.cs">
       <DependentUpon>ucLyLichUV.cs</DependentUpon>
     </Compile>
-    <Compile Include="UAC\ucPhongVan.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UAC\ucPhongVan.Designer.cs">
-      <DependentUpon>ucPhongVan.cs</DependentUpon>
-    </Compile>
     <Compile Include="UAC\ctUngVien\ucTuyenDung.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UAC\ctUngVien\ucTuyenDung.Designer.cs">
       <DependentUpon>ucTuyenDung.cs</DependentUpon>
     </Compile>
-    <Compile Include="UAC\ucTHONG_BAO_TUYEN_DUNG.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UAC\ucTHONG_BAO_TUYEN_DUNG.Designer.cs">
-      <DependentUpon>ucTHONG_BAO_TUYEN_DUNG.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UAC\TuyenDungCN\ucYeuCauTuyenDung.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UAC\TuyenDungCN\ucYeuCauTuyenDung.Designer.cs">
-      <DependentUpon>ucYeuCauTuyenDung.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UAC\TuyenDungCN\ucQLUV.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UAC\TuyenDungCN\ucQLUV.Designer.cs">
-      <DependentUpon>ucQLUV.cs</DependentUpon>
-    </Compile>
     <Compile Include="XtraReport1.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -470,17 +462,35 @@
     <EmbeddedResource Include="UAC\ctUngVien\frmUpdateTTUV.resx">
       <DependentUpon>frmUpdateTTUV.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UAC\TuyenDungCN\ucDinhBienLD.resx">
-      <DependentUpon>ucDinhBienLD.cs</DependentUpon>
+    <EmbeddedResource Include="UAC\PhongVan\ucKeHoachPhongVan.resx">
+      <DependentUpon>ucKeHoachPhongVan.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UAC\TuyenDungCN\ucKeHoachTuyenDung.resx">
-      <DependentUpon>ucKeHoachTuyenDung.cs</DependentUpon>
+    <EmbeddedResource Include="UAC\PhongVan\ucPhongVan.resx">
+      <DependentUpon>ucPhongVan.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UAC\ucTiepNhanUngVien.resx">
+    <EmbeddedResource Include="UAC\PhongVan\ucTHONG_BAO_TUYEN_DUNG.resx">
+      <DependentUpon>ucTHONG_BAO_TUYEN_DUNG.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UAC\PhongVan\ucTiepNhanUngVien.resx">
       <DependentUpon>ucTiepNhanUngVien.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UAC\ucVI_TRI_TUYEN_DUNG.resx">
+    <EmbeddedResource Include="UAC\PhongVan\ucUngVien.resx">
+      <DependentUpon>ucUngVien.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UAC\PhongVan\ucVI_TRI_TUYEN_DUNG.resx">
       <DependentUpon>ucVI_TRI_TUYEN_DUNG.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UAC\TuyenDung\ucDinhBienLD.resx">
+      <DependentUpon>ucDinhBienLD.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UAC\TuyenDung\ucKeHoachTuyenDung.resx">
+      <DependentUpon>ucKeHoachTuyenDung.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UAC\TuyenDung\ucQLUV.resx">
+      <DependentUpon>ucQLUV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UAC\TuyenDung\ucYeuCauTuyenDung.resx">
+      <DependentUpon>ucYeuCauTuyenDung.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\frmXemDSUngVien.resx">
       <DependentUpon>frmXemDSUngVien.cs</DependentUpon>
@@ -503,14 +513,8 @@
     <EmbeddedResource Include="UAC\ctUngVien\ucLyLichUV.resx">
       <DependentUpon>ucLyLichUV.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UAC\ucPhongVan.resx">
-      <DependentUpon>ucPhongVan.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="UAC\ctUngVien\ucTuyenDung.resx">
       <DependentUpon>ucTuyenDung.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UAC\ucTHONG_BAO_TUYEN_DUNG.resx">
-      <DependentUpon>ucTHONG_BAO_TUYEN_DUNG.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -522,12 +526,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="UAC\TuyenDungCN\ucYeuCauTuyenDung.resx">
-      <DependentUpon>ucYeuCauTuyenDung.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UAC\TuyenDungCN\ucQLUV.resx">
-      <DependentUpon>ucQLUV.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="XtraReport1.resx">
       <DependentUpon>XtraReport1.cs</DependentUpon>
     </EmbeddedResource>

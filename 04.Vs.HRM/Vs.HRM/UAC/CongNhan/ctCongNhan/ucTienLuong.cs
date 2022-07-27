@@ -180,7 +180,7 @@ namespace Vs.HRM
                 if (cothem == true)
                 {
                     luongthucold = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT MUC_LUONG_THUC FROM dbo.LUONG_CO_BAN WHERE ID_CN = " + Commons.Modules.iCongNhan + " AND  NGAY_HIEU_LUC = (SELECT MAX(NGAY_HIEU_LUC) FROM dbo.LUONG_CO_BAN WHERE ID_CN = " + Commons.Modules.iCongNhan + ")"));
-                    SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spPhatSinhPhuLucHopDong", Commons.Modules.TypeLanguage, Convert.ToInt32(Commons.Modules.iCongNhan), Convert.ToDateTime(NGAY_HIEU_LUCDateEdit.EditValue), Convert.ToDecimal(HS_LUONGTextEdit.EditValue));
+                    SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spPhatSinhPhuLucHopDong_DM", Commons.Modules.TypeLanguage, Convert.ToInt32(Commons.Modules.iCongNhan), Convert.ToDateTime(NGAY_HIEU_LUCDateEdit.EditValue), Convert.ToDecimal(HS_LUONGTextEdit.EditValue));
                 }
                 else
                 {

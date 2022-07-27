@@ -251,7 +251,7 @@
             this.xrTableCell21.StylePriority.UseFont = false;
             this.xrTableCell21.StylePriority.UsePadding = false;
             this.xrTableCell21.TextFormatString = "{0:0.0;0.-0;#}";
-            this.xrTableCell21.Weight = 1.1117754330898158D;
+            this.xrTableCell21.Weight = 1.0673044173724222D;
             // 
             // xrTableCell22
             // 
@@ -264,7 +264,7 @@
             this.xrTableCell22.StylePriority.UseFont = false;
             this.xrTableCell22.StylePriority.UsePadding = false;
             this.xrTableCell22.TextFormatString = "{0:0.0;0.-0;#}";
-            this.xrTableCell22.Weight = 1.1117753925419114D;
+            this.xrTableCell22.Weight = 1.0673043768245178D;
             // 
             // xrTableCell23
             // 
@@ -277,7 +277,7 @@
             this.xrTableCell23.StylePriority.UseFont = false;
             this.xrTableCell23.StylePriority.UsePadding = false;
             this.xrTableCell23.TextFormatString = "{0:0.0;0.-0;#}";
-            this.xrTableCell23.Weight = 1.1117753770979679D;
+            this.xrTableCell23.Weight = 1.0673043613805744D;
             // 
             // xrTableCell24
             // 
@@ -290,7 +290,7 @@
             this.xrTableCell24.StylePriority.UseFont = false;
             this.xrTableCell24.StylePriority.UsePadding = false;
             this.xrTableCell24.TextFormatString = "{0:0.0;0.-0;#}";
-            this.xrTableCell24.Weight = 1.1117753938787545D;
+            this.xrTableCell24.Weight = 1.0673043781613609D;
             // 
             // xrTableCell25
             // 
@@ -303,7 +303,7 @@
             this.xrTableCell25.StylePriority.UseFont = false;
             this.xrTableCell25.StylePriority.UsePadding = false;
             this.xrTableCell25.TextFormatString = "{0:0.0;0.-0;#}";
-            this.xrTableCell25.Weight = 1.1117753741482037D;
+            this.xrTableCell25.Weight = 1.0673043584308102D;
             // 
             // xrTableCell26
             // 
@@ -316,7 +316,7 @@
             this.xrTableCell26.StylePriority.UseFont = false;
             this.xrTableCell26.StylePriority.UsePadding = false;
             this.xrTableCell26.TextFormatString = "{0:0.0;0.-0;#}";
-            this.xrTableCell26.Weight = 1.1117753749969157D;
+            this.xrTableCell26.Weight = 1.0673043592795222D;
             // 
             // xrTableCell27
             // 
@@ -329,7 +329,7 @@
             this.xrTableCell27.StylePriority.UseFont = false;
             this.xrTableCell27.StylePriority.UsePadding = false;
             this.xrTableCell27.TextFormatString = "{0:0.0;0.-0;#}";
-            this.xrTableCell27.Weight = 1.111775380896443D;
+            this.xrTableCell27.Weight = 1.0673043651790495D;
             // 
             // xrTableCell28
             // 
@@ -342,7 +342,7 @@
             this.xrTableCell28.StylePriority.UseFont = false;
             this.xrTableCell28.StylePriority.UsePadding = false;
             this.xrTableCell28.TextFormatString = "{0:0.0;0.-0;#}";
-            this.xrTableCell28.Weight = 1.1117754195007008D;
+            this.xrTableCell28.Weight = 1.0673044037833073D;
             // 
             // xrTableCell29
             // 
@@ -355,7 +355,7 @@
             this.xrTableCell29.StylePriority.UseFont = false;
             this.xrTableCell29.StylePriority.UsePadding = false;
             this.xrTableCell29.TextFormatString = "{0:0.0;0.-0;#}";
-            this.xrTableCell29.Weight = 1.1117753667112196D;
+            this.xrTableCell29.Weight = 1.067304350993826D;
             // 
             // xrTableCell30
             // 
@@ -368,7 +368,7 @@
             this.xrTableCell30.StylePriority.UseFont = false;
             this.xrTableCell30.StylePriority.UsePadding = false;
             this.xrTableCell30.TextFormatString = "{0:0.0;0.-0;#}";
-            this.xrTableCell30.Weight = 1.1117753800477319D;
+            this.xrTableCell30.Weight = 1.0673043643303384D;
             // 
             // xrTableCell31
             // 
@@ -381,7 +381,7 @@
             this.xrTableCell31.StylePriority.UseFont = false;
             this.xrTableCell31.StylePriority.UsePadding = false;
             this.xrTableCell31.TextFormatString = "{0:0.0;0.-0;#}";
-            this.xrTableCell31.Weight = 1.1117753896835578D;
+            this.xrTableCell31.Weight = 1.0142253945188204D;
             // 
             // xrTableCell32
             // 
@@ -394,7 +394,7 @@
             this.xrTableCell32.StylePriority.UseFont = false;
             this.xrTableCell32.StylePriority.UsePadding = false;
             this.xrTableCell32.TextFormatString = "{0:0.0;0.-0;#}";
-            this.xrTableCell32.Weight = 1.1117754136093043D;
+            this.xrTableCell32.Weight = 1.0673043978919108D;
             // 
             // xrTableCell33
             // 
@@ -407,7 +407,7 @@
             this.xrTableCell33.StylePriority.UseFont = false;
             this.xrTableCell33.StylePriority.UsePadding = false;
             this.xrTableCell33.TextFormatString = "{0:0.0;0.-0;#}";
-            this.xrTableCell33.Weight = 1.5120144693809419D;
+            this.xrTableCell33.Weight = 2.0987456374370081D;
             // 
             // ReportHeader
             // 
@@ -599,7 +599,7 @@
             this.tiT1.Name = "tiT1";
             this.tiT1.StylePriority.UseFont = false;
             this.tiT1.Text = "1";
-            this.tiT1.Weight = 1.1117754353175411D;
+            this.tiT1.Weight = 1.0673044164527064D;
             // 
             // tiT2
             // 
@@ -608,7 +608,7 @@
             this.tiT2.Name = "tiT2";
             this.tiT2.StylePriority.UseFont = false;
             this.tiT2.Text = "2";
-            this.tiT2.Weight = 1.1117754714356591D;
+            this.tiT2.Weight = 1.0673044525708249D;
             // 
             // tiT3
             // 
@@ -617,7 +617,7 @@
             this.tiT3.Name = "tiT3";
             this.tiT3.StylePriority.UseFont = false;
             this.tiT3.Text = "3";
-            this.tiT3.Weight = 1.1117754714356594D;
+            this.tiT3.Weight = 1.0673044525708246D;
             // 
             // tiT4
             // 
@@ -626,7 +626,7 @@
             this.tiT4.Name = "tiT4";
             this.tiT4.StylePriority.UseFont = false;
             this.tiT4.Text = "4";
-            this.tiT4.Weight = 1.1117754579978976D;
+            this.tiT4.Weight = 1.0673044391330633D;
             // 
             // tiT5
             // 
@@ -635,7 +635,7 @@
             this.tiT5.Name = "tiT5";
             this.tiT5.StylePriority.UseFont = false;
             this.tiT5.Text = "5";
-            this.tiT5.Weight = 1.111775457997898D;
+            this.tiT5.Weight = 1.0673044391330633D;
             // 
             // tiT6
             // 
@@ -644,7 +644,7 @@
             this.tiT6.Name = "tiT6";
             this.tiT6.StylePriority.UseFont = false;
             this.tiT6.Text = "6";
-            this.tiT6.Weight = 1.1117754579978973D;
+            this.tiT6.Weight = 1.0673044391330626D;
             // 
             // tiT7
             // 
@@ -653,7 +653,7 @@
             this.tiT7.Name = "tiT7";
             this.tiT7.StylePriority.UseFont = false;
             this.tiT7.Text = "7";
-            this.tiT7.Weight = 1.1117754579978982D;
+            this.tiT7.Weight = 1.0673044391330637D;
             // 
             // tiT8
             // 
@@ -662,7 +662,7 @@
             this.tiT8.Name = "tiT8";
             this.tiT8.StylePriority.UseFont = false;
             this.tiT8.Text = "8";
-            this.tiT8.Weight = 1.1117754927348718D;
+            this.tiT8.Weight = 1.067304473870037D;
             // 
             // tiT9
             // 
@@ -671,7 +671,7 @@
             this.tiT9.Name = "tiT9";
             this.tiT9.StylePriority.UseFont = false;
             this.tiT9.Text = "9";
-            this.tiT9.Weight = 1.1117754701213085D;
+            this.tiT9.Weight = 1.067304451256474D;
             // 
             // tiT10
             // 
@@ -680,7 +680,7 @@
             this.tiT10.Name = "tiT10";
             this.tiT10.StylePriority.UseFont = false;
             this.tiT10.Text = "10";
-            this.tiT10.Weight = 1.1117755083404597D;
+            this.tiT10.Weight = 1.067304489475625D;
             // 
             // tiT11
             // 
@@ -689,7 +689,7 @@
             this.tiT11.Name = "tiT11";
             this.tiT11.StylePriority.UseFont = false;
             this.tiT11.Text = "11";
-            this.tiT11.Weight = 1.1117754936898878D;
+            this.tiT11.Weight = 1.0142247282254053D;
             // 
             // tiT12
             // 
@@ -698,7 +698,7 @@
             this.tiT12.Name = "tiT12";
             this.tiT12.StylePriority.UseFont = false;
             this.tiT12.Text = "12";
-            this.tiT12.Weight = 1.1117754936898872D;
+            this.tiT12.Weight = 1.0673044748250526D;
             // 
             // tiTong
             // 
@@ -707,7 +707,7 @@
             this.tiTong.Name = "tiTong";
             this.tiTong.StylePriority.UseFont = false;
             this.tiTong.Text = "Tổng";
-            this.tiTong.Weight = 1.5120155903953954D;
+            this.tiTong.Weight = 2.0987475633730579D;
             // 
             // GroupHeader2
             // 
@@ -893,7 +893,7 @@
             xrSummary2.Running = DevExpress.XtraReports.UI.SummaryRunning.Group;
             this.xrTableCell5.Summary = xrSummary2;
             this.xrTableCell5.TextFormatString = "{0:0.0;0.-0;#}";
-            this.xrTableCell5.Weight = 0.93564641008992888D;
+            this.xrTableCell5.Weight = 0.89822055473039875D;
             // 
             // xrTableCell6
             // 
@@ -908,7 +908,7 @@
             xrSummary3.Running = DevExpress.XtraReports.UI.SummaryRunning.Group;
             this.xrTableCell6.Summary = xrSummary3;
             this.xrTableCell6.TextFormatString = "{0:0.0;0.-0;#}";
-            this.xrTableCell6.Weight = 0.93564639446984754D;
+            this.xrTableCell6.Weight = 0.8982205391103173D;
             // 
             // xrTableCell7
             // 
@@ -923,7 +923,7 @@
             xrSummary4.Running = DevExpress.XtraReports.UI.SummaryRunning.Group;
             this.xrTableCell7.Summary = xrSummary4;
             this.xrTableCell7.TextFormatString = "{0:0.0;0.-0;#}";
-            this.xrTableCell7.Weight = 0.93564639446985176D;
+            this.xrTableCell7.Weight = 0.89822053911032163D;
             // 
             // xrTableCell8
             // 
@@ -938,7 +938,7 @@
             xrSummary5.Running = DevExpress.XtraReports.UI.SummaryRunning.Group;
             this.xrTableCell8.Summary = xrSummary5;
             this.xrTableCell8.TextFormatString = "{0:0.0;0.-0;#}";
-            this.xrTableCell8.Weight = 0.93564639446985043D;
+            this.xrTableCell8.Weight = 0.89822053911032018D;
             // 
             // xrTableCell9
             // 
@@ -953,7 +953,7 @@
             xrSummary6.Running = DevExpress.XtraReports.UI.SummaryRunning.Group;
             this.xrTableCell9.Summary = xrSummary6;
             this.xrTableCell9.TextFormatString = "{0:0.0;0.-0;#}";
-            this.xrTableCell9.Weight = 0.935646389451943D;
+            this.xrTableCell9.Weight = 0.89822053409241287D;
             // 
             // xrTableCell101
             // 
@@ -968,7 +968,7 @@
             xrSummary7.Running = DevExpress.XtraReports.UI.SummaryRunning.Group;
             this.xrTableCell101.Summary = xrSummary7;
             this.xrTableCell101.TextFormatString = "{0:0.0;0.-0;#}";
-            this.xrTableCell101.Weight = 0.93564638945193646D;
+            this.xrTableCell101.Weight = 0.89822053409240621D;
             // 
             // xrTableCell11
             // 
@@ -983,7 +983,7 @@
             xrSummary8.Running = DevExpress.XtraReports.UI.SummaryRunning.Group;
             this.xrTableCell11.Summary = xrSummary8;
             this.xrTableCell11.TextFormatString = "{0:0.0;0.-0;#}";
-            this.xrTableCell11.Weight = 0.93564635366566329D;
+            this.xrTableCell11.Weight = 0.89822049830613315D;
             // 
             // xrTableCell12
             // 
@@ -998,7 +998,7 @@
             xrSummary9.Running = DevExpress.XtraReports.UI.SummaryRunning.Group;
             this.xrTableCell12.Summary = xrSummary9;
             this.xrTableCell12.TextFormatString = "{0:0.0;0.-0;#}";
-            this.xrTableCell12.Weight = 0.93564635876929358D;
+            this.xrTableCell12.Weight = 0.89822050340976334D;
             // 
             // xrTableCell13
             // 
@@ -1013,7 +1013,7 @@
             xrSummary10.Running = DevExpress.XtraReports.UI.SummaryRunning.Group;
             this.xrTableCell13.Summary = xrSummary10;
             this.xrTableCell13.TextFormatString = "{0:0.0;0.-0;#}";
-            this.xrTableCell13.Weight = 0.93564639447002329D;
+            this.xrTableCell13.Weight = 0.898220503418416D;
             // 
             // xrTableCell14
             // 
@@ -1028,7 +1028,7 @@
             xrSummary11.Running = DevExpress.XtraReports.UI.SummaryRunning.Group;
             this.xrTableCell14.Summary = xrSummary11;
             this.xrTableCell14.TextFormatString = "{0:0.0;0.-0;#}";
-            this.xrTableCell14.Weight = 0.93564639446698816D;
+            this.xrTableCell14.Weight = 0.89822050341538084D;
             // 
             // xrTableCell15
             // 
@@ -1043,7 +1043,7 @@
             xrSummary12.Running = DevExpress.XtraReports.UI.SummaryRunning.Group;
             this.xrTableCell15.Summary = xrSummary12;
             this.xrTableCell15.TextFormatString = "{0:0.0;0.-0;#}";
-            this.xrTableCell15.Weight = 0.9356463944698532D;
+            this.xrTableCell15.Weight = 0.85350732530817974D;
             // 
             // xrTableCell16
             // 
@@ -1058,7 +1058,7 @@
             xrSummary13.Running = DevExpress.XtraReports.UI.SummaryRunning.Group;
             this.xrTableCell16.Summary = xrSummary13;
             this.xrTableCell16.TextFormatString = "{0:0.0;0.-0;#}";
-            this.xrTableCell16.Weight = 0.93564638793944388D;
+            this.xrTableCell16.Weight = 0.89821839105529211D;
             // 
             // xrTableCell17
             // 
@@ -1073,7 +1073,7 @@
             xrSummary14.Running = DevExpress.XtraReports.UI.SummaryRunning.Group;
             this.xrTableCell17.Summary = xrSummary14;
             this.xrTableCell17.TextFormatString = "{0:0.0;0.-0;#}";
-            this.xrTableCell17.Weight = 1.2724783057075184D;
+            this.xrTableCell17.Weight = 1.7663039967327994D;
             // 
             // rptBangTongHopCongNam
             // 

@@ -475,12 +475,6 @@
     <Compile Include="UAC\ucDangKyBHXH.Designer.cs">
       <DependentUpon>ucDangKyBHXH.cs</DependentUpon>
     </Compile>
-    <Compile Include="UAC\ucDKThoiGianKhongLamSP.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UAC\ucDKThoiGianKhongLamSP.Designer.cs">
-      <DependentUpon>ucDKThoiGianKhongLamSP.cs</DependentUpon>
-    </Compile>
     <Compile Include="UAC\ucNangSuatChuyen.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -755,9 +749,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UAC\ucDangKyBHXH.resx">
       <DependentUpon>ucDangKyBHXH.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UAC\ucDKThoiGianKhongLamSP.resx">
-      <DependentUpon>ucDKThoiGianKhongLamSP.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UAC\ucNangSuatChuyen.resx">
       <DependentUpon>ucNangSuatChuyen.cs</DependentUpon>

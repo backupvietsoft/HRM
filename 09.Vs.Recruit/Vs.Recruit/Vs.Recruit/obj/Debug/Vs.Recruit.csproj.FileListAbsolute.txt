@@ -275,7 +275,6 @@ H:\Lamviec\Lamviec\HRM\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\Vs.R
 H:\Lamviec\Lamviec\HRM\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\Vs.Recruit.pdb
 H:\Lamviec\Lamviec\HRM\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\Commons.dll
 H:\Lamviec\Lamviec\HRM\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\Commons.Fakes.dll
-H:\Lamviec\Lamviec\HRM\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\Microsoft.ApplicationBlocks.Data.dll
 H:\Lamviec\Lamviec\HRM\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\Vs.HRM.dll
 H:\Lamviec\Lamviec\HRM\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\VS.Report.dll
 H:\Lamviec\Lamviec\HRM\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\EPPlus.dll

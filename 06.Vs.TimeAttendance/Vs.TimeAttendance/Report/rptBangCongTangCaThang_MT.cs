@@ -12,7 +12,7 @@ namespace Vs.Report
         public rptBangCongTangCaThang_MT(string TieuDe, DateTime ngayin, DateTime TNgay, DateTime DNgay)
         {
             InitializeComponent();
-            this.Tag = "rptBangCongTangCaThang_MT";
+
             DataTable dtNgu = new DataTable();
             dtNgu.Load(Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT KEYWORD, CASE " + Commons.Modules.TypeLanguage + " WHEN 0 THEN VIETNAM WHEN 1 THEN ENGLISH ELSE CHINESE END AS NN  FROM LANGUAGES WHERE FORM = N'NgayThangNam' "));
 

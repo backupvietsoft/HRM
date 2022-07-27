@@ -147,17 +147,6 @@ namespace VietSoftHRM
                         ctl.Dock = DockStyle.Fill;
                         break;
                     }
-
-                case "mnuDKTGKhongLamSP":
-                    {
-                        ucDKThoiGianKhongLamSP ctl = new ucDKThoiGianKhongLamSP();
-                        panel2.Controls.Clear();
-                        panel2.Controls.Add(ctl);
-                        Commons.Modules.ObjSystems.HideWaitForm();
-                        ctl.Dock = DockStyle.Fill;
-                        break;
-                    }
-
                 case "mnuTinhLuongThang":
                     {
                         ucTinhLuong ctl = new ucTinhLuong();

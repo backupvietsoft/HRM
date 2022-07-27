@@ -97,7 +97,8 @@ namespace Vs.Payroll
             try
             {
                 cboSheet.Properties.Items.Clear();
-                Workbook workbook =  new Workbook();
+                Workbook workbook = new Workbook();
+
                 string ext = System.IO.Path.GetExtension(sPath);
                 if (ext.ToLower() == ".xlsx")
                     workbook.LoadDocument(txtChonFile.Text, DevExpress.Spreadsheet.DocumentFormat.Xlsx);

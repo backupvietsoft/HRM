@@ -25,8 +25,6 @@ namespace Vs.Report
             Commons.IConnections.Server = @"mashimaro";
             Commons.IConnections.Database = "VS_HRM_DEMO";
             Commons.IConnections.Password = "123";
-            Application.Run(new XtraForm1());
-            //Application.Run(new frmInXiNghiep());
             //Application.Run(new frmInTo());
             //Application.Run(new frmInGiaDinh());
            // Application.Run(new frmInLaoDongTo());

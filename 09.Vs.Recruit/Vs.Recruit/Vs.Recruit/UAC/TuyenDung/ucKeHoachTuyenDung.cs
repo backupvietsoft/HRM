@@ -116,7 +116,7 @@ namespace Vs.Recruit
                 DataTable dt = set.Tables[0];
                 if (grdVTYC.DataSource == null)
                 {
-                    Commons.Modules.ObjSystems.MLoadXtraGrid(grdVTYC, grvVTYC, dt, false, false, true, true, true, this.Name);
+                    Commons.Modules.ObjSystems.MLoadXtraGrid(grdVTYC, grvVTYC, dt, false, false, false, true, true, this.Name);
                     grvVTYC.Columns["ID_YCTD"].Visible = false;
                     grvVTYC.Columns["ID_VTTD"].Visible = false;
                 }

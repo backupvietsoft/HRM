@@ -42,7 +42,7 @@ namespace Vs.Recruit
                 dt.PrimaryKey = new DataColumn[] { dt.Columns["ID_YCTD"] };
                 if (grdPYC.DataSource == null)
                 {
-                    Commons.Modules.ObjSystems.MLoadXtraGrid(grdPYC, grvPYC, dt, false, false, true, true, true, this.Name);
+                    Commons.Modules.ObjSystems.MLoadXtraGrid(grdPYC, grvPYC, dt, false, false, false, true, true, this.Name);
                     grvPYC.Columns["ID_YCTD"].Visible = false;
                     grvPYC.Columns["ID_TO"].Visible = false;
                     grvPYC.Columns["ID_CN"].Visible = false;
@@ -379,7 +379,6 @@ namespace Vs.Recruit
                 {
                     Commons.Modules.ObjSystems.DeleteAddRow(grvFileDK);
                 }
-
             }
         }
         private void datNgayYC_EditValueChanged(object sender, EventArgs e)

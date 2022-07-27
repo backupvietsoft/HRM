@@ -1328,6 +1328,7 @@
             // PageHeader
             // 
             this.PageHeader.Dpi = 254F;
+            this.PageHeader.Expanded = false;
             this.PageHeader.HeightF = 0F;
             this.PageHeader.Name = "PageHeader";
             // 

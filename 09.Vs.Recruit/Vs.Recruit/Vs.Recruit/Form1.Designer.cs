@@ -28,13 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.richEditControl1 = new DevExpress.XtraRichEdit.RichEditControl();
             this.SuspendLayout();
+            // 
+            // richEditControl1
+            // 
+            this.richEditControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richEditControl1.Location = new System.Drawing.Point(0, 0);
+            this.richEditControl1.Name = "richEditControl1";
+            this.richEditControl1.Options.ClipboardFormats.AllowHtml = true;
+            this.richEditControl1.Options.Printing.PrintPreviewFormKind = DevExpress.XtraRichEdit.PrintPreviewFormKind.Bars;
+            this.richEditControl1.Size = new System.Drawing.Size(1057, 600);
+            this.richEditControl1.TabIndex = 1;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1057, 478);
+            this.ClientSize = new System.Drawing.Size(1057, 600);
+            this.Controls.Add(this.richEditControl1);
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -45,5 +57,7 @@
         }
 
         #endregion
+
+        private DevExpress.XtraRichEdit.RichEditControl richEditControl1;
     }
 }

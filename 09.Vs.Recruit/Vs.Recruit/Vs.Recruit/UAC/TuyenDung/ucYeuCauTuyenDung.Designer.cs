@@ -42,6 +42,7 @@
             DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions6 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
             this.datNgayYC = new DevExpress.XtraEditors.DateEdit();
             this.dataLayoutControl1 = new DevExpress.XtraDataLayout.DataLayoutControl();
+            this.cboTinhTrang = new DevExpress.XtraEditors.LookUpEdit();
             this.searchControl1 = new DevExpress.XtraEditors.SearchControl();
             this.grdPYC = new DevExpress.XtraGrid.GridControl();
             this.grvPYC = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -81,15 +82,15 @@
             this.lblBPYC = new DevExpress.XtraLayout.LayoutControlItem();
             this.lblNgayNhanDon = new DevExpress.XtraLayout.LayoutControlItem();
             this.lblNgayYC = new DevExpress.XtraLayout.LayoutControlItem();
+            this.lblTinhTrang = new DevExpress.XtraLayout.LayoutControlItem();
             this.btnALL = new DevExpress.XtraBars.Docking2010.WindowsUIButtonPanel();
             this.dxValidationProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
             this.ofileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.cboTinhTrang = new DevExpress.XtraEditors.LookUpEdit();
-            this.lblTinhTrang = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.datNgayYC.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.datNgayYC.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataLayoutControl1)).BeginInit();
             this.dataLayoutControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cboTinhTrang.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchControl1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdPYC)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grvPYC)).BeginInit();
@@ -132,9 +133,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.lblBPYC)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblNgayNhanDon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblNgayYC)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cboTinhTrang.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblTinhTrang)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // datNgayYC
@@ -188,6 +188,17 @@
             this.dataLayoutControl1.Size = new System.Drawing.Size(1093, 559);
             this.dataLayoutControl1.TabIndex = 0;
             this.dataLayoutControl1.Text = "dataLayoutControl1";
+            // 
+            // cboTinhTrang
+            // 
+            this.cboTinhTrang.Location = new System.Drawing.Point(903, 40);
+            this.cboTinhTrang.Name = "cboTinhTrang";
+            this.cboTinhTrang.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cboTinhTrang.Properties.NullText = "";
+            this.cboTinhTrang.Size = new System.Drawing.Size(178, 24);
+            this.cboTinhTrang.StyleController = this.dataLayoutControl1;
+            this.cboTinhTrang.TabIndex = 56;
             // 
             // searchControl1
             // 
@@ -659,6 +670,14 @@
             this.lblNgayYC.Text = "Ngày yêu cầu";
             this.lblNgayYC.TextSize = new System.Drawing.Size(96, 17);
             // 
+            // lblTinhTrang
+            // 
+            this.lblTinhTrang.Control = this.cboTinhTrang;
+            this.lblTinhTrang.Location = new System.Drawing.Point(792, 28);
+            this.lblTinhTrang.Name = "lblTinhTrang";
+            this.lblTinhTrang.Size = new System.Drawing.Size(281, 28);
+            this.lblTinhTrang.TextSize = new System.Drawing.Size(96, 17);
+            // 
             // btnALL
             // 
             this.btnALL.AppearanceButton.Hovered.FontSizeDelta = -1;
@@ -708,25 +727,6 @@
             // 
             this.ofileDialog.FileName = "openFileDialog1";
             // 
-            // cboTinhTrang
-            // 
-            this.cboTinhTrang.Location = new System.Drawing.Point(903, 40);
-            this.cboTinhTrang.Name = "cboTinhTrang";
-            this.cboTinhTrang.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cboTinhTrang.Properties.NullText = "";
-            this.cboTinhTrang.Size = new System.Drawing.Size(178, 24);
-            this.cboTinhTrang.StyleController = this.dataLayoutControl1;
-            this.cboTinhTrang.TabIndex = 56;
-            // 
-            // lblTinhTrang
-            // 
-            this.lblTinhTrang.Control = this.cboTinhTrang;
-            this.lblTinhTrang.Location = new System.Drawing.Point(792, 28);
-            this.lblTinhTrang.Name = "lblTinhTrang";
-            this.lblTinhTrang.Size = new System.Drawing.Size(281, 28);
-            this.lblTinhTrang.TextSize = new System.Drawing.Size(96, 17);
-            // 
             // ucYeuCauTuyenDung
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -741,6 +741,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.datNgayYC.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataLayoutControl1)).EndInit();
             this.dataLayoutControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.cboTinhTrang.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchControl1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdPYC)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grvPYC)).EndInit();
@@ -783,9 +784,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.lblBPYC)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblNgayNhanDon)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblNgayYC)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cboTinhTrang.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblTinhTrang)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).EndInit();
             this.ResumeLayout(false);
 
         }

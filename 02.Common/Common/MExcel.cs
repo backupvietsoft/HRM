@@ -1915,7 +1915,7 @@ public class MExcel
         //null không kiểm
         if (!string.IsNullOrEmpty(sDLKiem))
         {
-            if (Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT COUNT(*) FROM dbo." + tabName + " WHERE " + ColName + " "+ ColName1 + " = N'" + sDLKiem + "'")) == 0)
+            if (Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT COUNT(*) FROM dbo." + tabName + " WHERE " + ColName + "+ ' ' +" + ColName1 + " = N'" + sDLKiem + "'")) == 0)
             {
                 dr.SetColumnError(grvData.Columns[iCot].FieldName.ToString(), Commons.Modules.ObjLanguages.GetLanguage(sform, "msgChuaTonTaiCSDL"));
                 dr["XOA"] = 1;
@@ -2325,6 +2325,36 @@ public class MExcel
         }
         return true;
     }
+
+    public void KiemData(string Table, string Field, int dong, int Cot, DataRow row)
+    {
+        try
+        {
+            Commons.frmPopUp frmPopUp = new Commons.frmPopUp();
+            DataTable dt = new DataTable();
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "select * from " + Table));
+            frmPopUp.TableSource = dt;
+            if (frmPopUp.ShowDialog() == DialogResult.OK)
+                row[Cot] = frmPopUp.RowSelected[Field].ToString();
+        }
+        catch { }
+    }
+
+    public void KiemData(string squery, string Field, int Cot, DataRow row)
+    {
+        try
+        {
+            Commons.frmPopUp frmPopUp = new Commons.frmPopUp();
+            DataTable dt = new DataTable();
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, squery));
+            frmPopUp.TableSource = dt;
+            if (frmPopUp.ShowDialog() == DialogResult.OK)
+                row[Cot] = frmPopUp.RowSelected[Field].ToString();
+        }
+        catch { }
+    }
+
+
     #endregion
 
 }

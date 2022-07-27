@@ -225,6 +225,7 @@
             this.cboYeuCauTD.Size = new System.Drawing.Size(115, 24);
             this.cboYeuCauTD.StyleController = this.layoutControl1;
             this.cboYeuCauTD.TabIndex = 19;
+            this.cboYeuCauTD.EditValueChanged += new System.EventHandler(this.cboDA_TUYEN_DUNG_EditValueChanged);
             // 
             // searchLookUpEdit2View1
             // 

@@ -8,6 +8,7 @@ using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Vs.Report;
 
 namespace Vs.Recruit
 {
@@ -18,8 +19,8 @@ namespace Vs.Recruit
         /// </summary>
         [STAThread]
         static void Main()
-        {
-            Application.EnableVisualStyles();
+       {
+           Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             BonusSkins.Register();
             Commons.Modules.ModuleName = "HRM";
@@ -82,7 +83,11 @@ namespace Vs.Recruit
         {
             try
             {
-                Application.Run(new Form1());
+                //Application.Run(new Form1());
+                frmViewReport frm = new frmViewReport();
+                XtraReport1 fpt = new XtraReport1();
+                frm.rpt = fpt;
+                frm.ShowDialog();
                 //Application.Run(new frmEditTHONG_BAO_TUYEN_DUNG_VIEW(-1));
                 //Application.Run(new frmEditVI_TRI_TUYEN_DUNG(-1,-1,-1,true));
             }

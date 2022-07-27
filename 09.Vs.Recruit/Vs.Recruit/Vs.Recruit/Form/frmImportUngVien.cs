@@ -1,5 +1,6 @@
 ﻿using DevExpress.XtraBars.Docking2010;
 using DevExpress.XtraEditors;
+using DevExpress.XtraGrid.Views.Grid;
 using Microsoft.ApplicationBlocks.Data;
 using System;
 using System.Data;
@@ -138,6 +139,17 @@ namespace Vs.Recruit
                                 }
                             case 1:
                                 {
+                                    ImportBangCap(dtSource);
+                                    break;
+                                }
+                            case 2:
+                                {
+                                    ImportKinhNghiem(dtSource);
+                                    break;
+                                }
+                            case 3:
+                                {
+                                    ImportThongTinKhac(dtSource);
                                     break;
                                 }
                             default:
@@ -180,7 +192,7 @@ namespace Vs.Recruit
                 }
                 col = 1;
                 //Họ 
-                if (!Commons.Modules.MExcel.KiemDuLieu(grvData,dr, col,true, 50,this.Name))
+                if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, true, 50, this.Name))
                 {
                     errorCount++;
                 }
@@ -193,13 +205,13 @@ namespace Vs.Recruit
                 col = 3;
                 //Giới tính
                 string sGioiTinh = dr[grvData.Columns[col].FieldName.ToString()].ToString();
-                if (!Commons.Modules.MExcel.KiemDuLieuBool(grvData,dr, col, sGioiTinh, "0"))
+                if (!Commons.Modules.MExcel.KiemDuLieuBool(grvData, dr, col, sGioiTinh, "0"))
                 {
                     errorCount++;
                 }
                 col = 4;
                 //Ngày sinh   
-                if (!Commons.Modules.MExcel.KiemDuLieuNgay(grvData,dr, col, false,this.Name))
+                if (!Commons.Modules.MExcel.KiemDuLieuNgay(grvData, dr, col, false, this.Name))
                 {
                     errorCount++;
                 }
@@ -229,8 +241,8 @@ namespace Vs.Recruit
                 }
                 col = 9;
                 //Tình trạng HN
-                string sTinhTrangHN= dr[grvData.Columns[col].FieldName.ToString()].ToString();
-                if (!Commons.Modules.MExcel.KiemTonTai(grvData,dr, col, sTinhTrangHN, "TT_HON_NHAN", "TEN_TT_HN"))
+                string sTinhTrangHN = dr[grvData.Columns[col].FieldName.ToString()].ToString();
+                if (!Commons.Modules.MExcel.KiemTonTai(grvData, dr, col, sTinhTrangHN, "TT_HON_NHAN", "TEN_TT_HN",false,this.Name))
                 {
                     errorCount++;
                 }
@@ -249,7 +261,7 @@ namespace Vs.Recruit
                 col = 12;
                 //Số con
                 string sSoCon = dr[grvData.Columns[col].FieldName.ToString()].ToString();
-                if (!Commons.Modules.MExcel.KiemDuLieuSo(grvData,dr, col, sSoCon, -999999, -999999, false,this.Name))
+                if (!Commons.Modules.MExcel.KiemDuLieuSo(grvData, dr, col, sSoCon, -999999, -999999, false, this.Name))
                 {
                     errorCount++;
                 }
@@ -286,7 +298,7 @@ namespace Vs.Recruit
                 col = 18;
                 //Thành phố   
                 string sThanhPho = dr[grvData.Columns[col].FieldName.ToString()].ToString();
-                if (!Commons.Modules.MExcel.KiemTonTai(grvData, dr, col, sThanhPho, "THANH_PHO", "TEN_TP", false,this.Name))
+                if (!Commons.Modules.MExcel.KiemTonTai(grvData, dr, col, sThanhPho, "THANH_PHO", "TEN_TP", false, this.Name))
                 {
                     errorCount++;
                 }
@@ -347,7 +359,7 @@ namespace Vs.Recruit
                 col = 27;
                 //Kinh nghiệm 
                 string sKinhNghiem = dr[grvData.Columns[col].FieldName.ToString()].ToString();
-                if (!Commons.Modules.MExcel.KiemTonTai(grvData, dr, col, sKinhNghiem, "TEN_KNLV", "KINH_NGHIEM_LV", false, this.Name))
+                if (!Commons.Modules.MExcel.KiemTonTai(grvData, dr, col, sKinhNghiem, "KINH_NGHIEM_LV", "TEN_KNLV", false, this.Name))
                 {
                     errorCount++;
                 }
@@ -470,7 +482,7 @@ namespace Vs.Recruit
         #endregion
 
         #region  Ứng viên bằng cấp
-        private void ImportLoaiChucVu(DataTable dtSource)
+        private void ImportBangCap(DataTable dtSource)
         {
             int count = grvData.RowCount;
             int col = 0;
@@ -483,7 +495,7 @@ namespace Vs.Recruit
                 //Mã số   
                 col = 0;
                 string sMaSo = dr[grvData.Columns[col].FieldName.ToString()].ToString();
-                if (!Commons.Modules.MExcel.KiemTonTai(grvData, dr, col, sMaSo, "UNG_VIEN", "MS_UV",true, this.Name))
+                if (!Commons.Modules.MExcel.KiemTonTai(grvData, dr, col, sMaSo, "UNG_VIEN", "MS_UV", true, this.Name))
                 {
                     errorCount++;
                 }
@@ -503,7 +515,7 @@ namespace Vs.Recruit
                 //Từ năm  
                 col = 3;
                 string sTuNam = dr[grvData.Columns[col].FieldName.ToString()].ToString();
-                if (!Commons.Modules.MExcel.KiemDuLieuSo(grvData, dr, col, sTuNam,-999999, -999999, false, this.Name))
+                if (!Commons.Modules.MExcel.KiemDuLieuSo(grvData, dr, col, sTuNam, -999999, -999999, false, this.Name))
                 {
                     errorCount++;
                 }
@@ -517,7 +529,7 @@ namespace Vs.Recruit
                 //Xếp loại
                 col = 5;
                 string sXepLoai = dr[grvData.Columns[col].FieldName.ToString()].ToString();
-                if (!Commons.Modules.MExcel.KiemTonTai(grvData, dr, col, sMaSo, "XEP_LOAI", "TEN_XL", true, this.Name))
+                if (!Commons.Modules.MExcel.KiemTonTai(grvData, dr, col, sXepLoai, "XEP_LOAI", "TEN_XL", true, this.Name))
                 {
                     errorCount++;
                 }
@@ -540,10 +552,10 @@ namespace Vs.Recruit
                     try
                     {
                         //tạo bảm tạm trên lưới
-                        string sbt = "sBTLoaiUVBC" + Commons.Modules.UserName;
+                        string sbt = "sBTUVBC" + Commons.Modules.UserName;
                         Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sbt, Commons.Modules.ObjSystems.ConvertDatatable(grvData), "");
 
-                        string sSql = "INSERT INTO dbo.LOAI_CHUC_VU(TEN_LOAI_CV) SELECT [" + grvData.Columns[0].FieldName.ToString() + "] FROM " + sbt;
+                        string sSql = "INSERT INTO dbo.UNG_VIEN_BANG_CAP(ID_UV,TEN_BANG,TEN_TRUONG,TU_NAM,DEN_NAM,ID_XL) SELECT (SELECT TOP 1 ID_UV FROM dbo.UNG_VIEN WHERE MS_UV = A.[" + grvData.Columns[0].FieldName.ToString() + "]),A.[" + grvData.Columns[1].FieldName.ToString() + "],A.[" + grvData.Columns[2].FieldName.ToString() + "],A.[" + grvData.Columns[3].FieldName.ToString() + "],A.[" + grvData.Columns[4].FieldName.ToString() + "],(SELECT TOP 1 ID_XL FROM dbo.XEP_LOAI WHERE TEN_XL = A.[" + grvData.Columns[5].FieldName.ToString() + "]) FROM " + sbt + " AS A";
                         SqlHelper.ExecuteNonQuery(sTrans, CommandType.Text, sSql);
                         Commons.Modules.ObjSystems.XoaTable(sbt);
                         sTrans.Commit();
@@ -559,7 +571,302 @@ namespace Vs.Recruit
             }
         }
 
-        #endregion
+        private void ImportKinhNghiem(DataTable dtSource)
+        {
+            int count = grvData.RowCount;
+            int col = 0;
+            int errorCount = 0;
 
+            #region kiểm tra dữ liệu
+            foreach (DataRow dr in dtSource.Rows)
+            {
+                dr.ClearErrors();
+                //Mã số   
+                col = 0;
+                string sMaSo = dr[grvData.Columns[col].FieldName.ToString()].ToString();
+                if (!Commons.Modules.MExcel.KiemTonTai(grvData, dr, col, sMaSo, "UNG_VIEN", "MS_UV", true, this.Name))
+                {
+                    errorCount++;
+                }
+                //Tên công ty    
+                col = 1;
+                if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, false, 250, this.Name))
+                {
+                    errorCount++;
+                }
+
+                //chức vụ  
+                col = 2;
+                if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, false, 200, this.Name))
+                {
+                    errorCount++;
+                }
+                //Mức lương
+                col = 3;
+                string sMucLuong = dr[grvData.Columns[col].FieldName.ToString()].ToString();
+                if (!Commons.Modules.MExcel.KiemDuLieuSo(grvData, dr, col, sMucLuong, 0, 0, false, this.Name))
+                {
+                    errorCount++;
+                }
+                //từ năm
+                col = 4;
+                string sTuNam = dr[grvData.Columns[col].FieldName.ToString()].ToString();
+                if (!Commons.Modules.MExcel.KiemDuLieuSo(grvData, dr, col, sTuNam, 0, -999999, false, this.Name))
+                {
+                    errorCount++;
+                }
+                //Đến năm 
+                col = 5;
+                string sDenNam = dr[grvData.Columns[col].FieldName.ToString()].ToString();
+                if (!Commons.Modules.MExcel.KiemDuLieuSo(grvData, dr, col, sDenNam, 0, -999999, false, this.Name))
+                {
+                    errorCount++;
+                }
+                //lý do nghĩ
+                col = 6;
+                if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, false, 250, this.Name))
+                {
+                    errorCount++;
+                }
+            }
+            #endregion
+            Commons.Modules.ObjSystems.HideWaitForm();
+            if (errorCount != 0)
+            {
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDuLieuChuaHopLe"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            else
+            {
+                DialogResult res = XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDuLieuSanSangImport"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (res == DialogResult.Yes)
+                {
+                    SqlConnection conn = new SqlConnection(Commons.IConnections.CNStr);
+                    if (conn.State != ConnectionState.Open) conn.Open();
+                    SqlTransaction sTrans = conn.BeginTransaction();
+                    try
+                    {
+                        //tạo bảm tạm trên lưới
+                        string sbt = "sBTUVKN" + Commons.Modules.UserName;
+                        Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sbt, Commons.Modules.ObjSystems.ConvertDatatable(grvData), "");
+
+                        string sSql = "INSERT INTO dbo.UNG_VIEN_KINH_NGHIEM(ID_UV,TEN_CONG_TY,CHUC_VU,MUC_LUONG,TU_NAM,DEN_NAM,LD_NGHI_VIEC) SELECT (SELECT TOP 1 ID_UV FROM dbo.UNG_VIEN WHERE MS_UV = A.[" + grvData.Columns[0].FieldName.ToString() + "]),A.[" + grvData.Columns[1].FieldName.ToString() + "],A.[" + grvData.Columns[2].FieldName.ToString() + "],A.[" + grvData.Columns[3].FieldName.ToString() + "],A.[" + grvData.Columns[4].FieldName.ToString() + "],A.[" + grvData.Columns[5].FieldName.ToString() + "],A.[" + grvData.Columns[6].FieldName.ToString() + "] FROM " + sbt + " AS A";
+                        SqlHelper.ExecuteNonQuery(sTrans, CommandType.Text, sSql);
+                        Commons.Modules.ObjSystems.XoaTable(sbt);
+                        sTrans.Commit();
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgImportDuLieuThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    catch (Exception ex)
+                    {
+                        sTrans.Rollback();
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgImportKhongThanhCong") + " error(" + ex.ToString() + ")", Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    if (conn.State != ConnectionState.Closed) conn.Close();
+                }
+            }
+        }
+
+        private void ImportThongTinKhac(DataTable dtSource)
+        {
+            int count = grvData.RowCount;
+            int col = 0;
+            int errorCount = 0;
+
+            #region kiểm tra dữ liệu
+            foreach (DataRow dr in dtSource.Rows)
+            {
+                dr.ClearErrors();
+                //Mã số   
+                col = 0;
+                string sMaSo = dr[grvData.Columns[col].FieldName.ToString()].ToString();
+                if (!Commons.Modules.MExcel.KiemTonTai(grvData, dr, col, sMaSo, "UNG_VIEN", "MS_UV", true, this.Name))
+                {
+                    errorCount++;
+                }
+                //Nội dung  
+                col = 1;
+                if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, false, 250, this.Name))
+                {
+                    errorCount++;
+                }
+                //Xếp loại
+                col = 2;
+                string sXepLoai = dr[grvData.Columns[col].FieldName.ToString()].ToString();
+                if (!Commons.Modules.MExcel.KiemTonTai(grvData, dr, col, sXepLoai, "XEP_LOAI", "TEN_XL", true, this.Name))
+                {
+                    errorCount++;
+                }
+            }
+            #endregion
+            Commons.Modules.ObjSystems.HideWaitForm();
+            if (errorCount != 0)
+            {
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDuLieuChuaHopLe"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            else
+            {
+                DialogResult res = XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDuLieuSanSangImport"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (res == DialogResult.Yes)
+                {
+                    SqlConnection conn = new SqlConnection(Commons.IConnections.CNStr);
+                    if (conn.State != ConnectionState.Open) conn.Open();
+                    SqlTransaction sTrans = conn.BeginTransaction();
+                    try
+                    {
+                        //tạo bảm tạm trên lưới
+                        string sbt = "sBTTK" + Commons.Modules.UserName;
+                        Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sbt, Commons.Modules.ObjSystems.ConvertDatatable(grvData), "");
+
+                        string sSql = "INSERT INTO dbo.UNG_VIEN_THONG_TIN_KHAC(ID_UV,NOI_DUNG,ID_XL) SELECT (SELECT TOP 1 ID_UV FROM dbo.UNG_VIEN WHERE MS_UV = A.[" + grvData.Columns[0].FieldName.ToString() + "]),A.[" + grvData.Columns[1].FieldName.ToString() + "],(SELECT TOP 1 ID_XL FROM dbo.XEP_LOAI WHERE TEN_XL = A.[" + grvData.Columns[2].FieldName.ToString() + "]) FROM " + sbt + " AS A";
+                        SqlHelper.ExecuteNonQuery(sTrans, CommandType.Text, sSql);
+                        Commons.Modules.ObjSystems.XoaTable(sbt);
+                        sTrans.Commit();
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgImportDuLieuThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    catch (Exception ex)
+                    {
+                        sTrans.Rollback();
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgImportKhongThanhCong") + " error(" + ex.ToString() + ")", Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    if (conn.State != ConnectionState.Closed) conn.Close();
+                }
+            }
+        }
+        #endregion
+        private void grvData_ShownEditor(object sender, EventArgs e)
+        {
+            try
+            {
+                ptChung = grvData.GridControl.PointToClient(Control.MousePosition);
+                grvData.ActiveEditor.DoubleClick += new EventHandler(ActiveEditor_DoubleClick);
+            }
+            catch
+            { }
+        }
+        private void ActiveEditor_DoubleClick(object sender, EventArgs e)
+        {
+            try
+            {
+                DoRowDoubleClick(grvData, ptChung);
+                grvData.RefreshData();
+            }
+            catch
+            {}
+        }
+        private void DoRowDoubleClick(GridView view, Point pt)
+        {
+            if (cboChonSheet.Text == "") return;
+            DataTable dtTmp = new DataTable();
+            try
+            {
+                DevExpress.XtraGrid.Views.Grid.ViewInfo.GridHitInfo info = grvData.CalcHitInfo(pt);
+                int col = -1;
+                col = info.Column.AbsoluteIndex;
+                if (col == -1)
+                    return;
+                int iSheet;
+                iSheet = int.Parse(cboChonSheet.EditValue.ToString());
+                System.Data.DataRow row = grvData.GetDataRow(info.RowHandle);
+                switch (iSheet)
+                {
+                    case 0:
+                        {
+                            if (col == 9)
+                            {
+                                Commons.Modules.MExcel.KiemData("TT_HON_NHAN", "TEN_TT_HN", info.RowHandle, col, row);
+                            }
+                            if (col == 18)
+                            {
+                                Commons.Modules.MExcel.KiemData("THANH_PHO", "TEN_TP", info.RowHandle, col, row);
+                            }
+                            if (col == 19)
+                            {
+                                Commons.Modules.MExcel.KiemData("QUAN", "TEN_QUAN", info.RowHandle, col, row);
+                            }
+                            if (col == 20)
+                            {
+                                Commons.Modules.MExcel.KiemData("PHUONG_XA", "TEN_PX", info.RowHandle, col, row);
+                            }
+                            if (col == 23)
+                            {
+                                Commons.Modules.MExcel.KiemData("NGUON_TUYEN_DUNG", "TEN_NTD", info.RowHandle, col, row);
+                            }
+                            //Người giới thiệu
+                            if(col == 24)
+                            {
+                                Commons.Modules.MExcel.KiemData("SELECT MS_CN,HO + ' '+ TEN AS HO_TEN,PHAI,NGAY_SINH FROM dbo.CONG_NHAN ORDER BY MS_CN", "HO_TEN", col, row);
+                            }
+                            if (col == 25)
+                            {
+                                Commons.Modules.MExcel.KiemData("HINH_THUC_TUYEN", "TEN_HT_TUYEN", info.RowHandle, col, row);
+                            }
+                            if (col == 26)
+                            {
+                                Commons.Modules.MExcel.KiemData("TRINH_DO_VAN_HOA", "TEN_TDVH", info.RowHandle, col, row);
+                            }
+                            if (col == 27)
+                            {
+                                Commons.Modules.MExcel.KiemData("KINH_NGHIEM_LV", "TEN_KNLV", info.RowHandle, col, row);
+                            }
+                            if (col == 28)
+                            {
+                                Commons.Modules.MExcel.KiemData("DANH_GIA_TAY_NGHE", "TEN_DGTN", info.RowHandle, col, row);
+                            }
+                            if (col == 29)
+                            {
+                                Commons.Modules.MExcel.KiemData("LOAI_CONG_VIEC", "TEN_LCV", info.RowHandle, col, row);
+                            }
+                            if (col == 30)
+                            {
+                                Commons.Modules.MExcel.KiemData("LOAI_CONG_VIEC", "TEN_LCV", info.RowHandle, col, row);
+                            }
+                            break;
+                        }
+                    case 1:
+                        {
+                            if (col == 0)
+                            {
+                                Commons.Modules.MExcel.KiemData("SELECT MS_UV,HO + ' '+ TEN,PHAI,NGAY_SINH FROM dbo.UNG_VIEN ORDER BY MS_UV", "MS_UV", col, row);
+                            }
+                            if (col == 5)
+                            {
+                                Commons.Modules.MExcel.KiemData("XEP_LOAI", "TEN_XL", info.RowHandle, col, row);
+                            }
+                            break;
+                        }
+                    case 2:
+                        {
+                            if (col == 0)
+                            {
+                                Commons.Modules.MExcel.KiemData("SELECT MS_UV,HO + ' '+ TEN,PHAI,NGAY_SINH FROM dbo.UNG_VIEN ORDER BY MS_UV", "MS_UV", col, row);
+
+                            }
+                            break;
+                        }
+                    case 3:
+                        {
+                            if (col == 0)
+                            {
+                                Commons.Modules.MExcel.KiemData("SELECT MS_UV,HO + ' '+ TEN,PHAI,NGAY_SINH FROM dbo.UNG_VIEN ORDER BY MS_UV", "MS_UV", col, row);
+                            }
+                            if (col == 2)
+                            {
+                                Commons.Modules.MExcel.KiemData("XEP_LOAI", "TEN_XL", info.RowHandle, col, row);
+                            }
+                            break;
+                        }
+
+
+                    default: break;
+                }
+            }
+            catch
+            {
+            }
+            grvData.UpdateCurrentRow();
+        }
+
+      
     }
 }

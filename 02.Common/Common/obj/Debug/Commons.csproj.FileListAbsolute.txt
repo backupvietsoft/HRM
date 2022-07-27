@@ -1090,3 +1090,4 @@ G:\2022\02.HRM\02.Common\Common\obj\Debug\Commons.csproj.CoreCompileInputs.cache
 G:\2022\02.HRM\02.Common\Common\obj\Debug\Commons.csproj.CopyComplete
 G:\2022\02.HRM\02.Common\Common\obj\Debug\Commons.dll
 G:\2022\02.HRM\02.Common\Common\obj\Debug\Commons.pdb
+D:\01.SourceCode\02.HRM\02.Common\Common\obj\Debug\Commons.frmPopUp.resources

@@ -170,6 +170,7 @@ namespace Vs.Recruit
             this.grvData.OptionsSelection.MultiSelect = true;
             this.grvData.OptionsSelection.ShowCheckBoxSelectorInColumnHeader = DevExpress.Utils.DefaultBoolean.True;
             this.grvData.OptionsView.ShowGroupPanel = false;
+            this.grvData.ShownEditor += new System.EventHandler(this.grvData_ShownEditor);
             // 
             // Root
             // 

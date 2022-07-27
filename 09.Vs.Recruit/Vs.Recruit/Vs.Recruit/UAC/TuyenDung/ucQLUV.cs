@@ -6,7 +6,6 @@ using Microsoft.ApplicationBlocks.Data;
 using DevExpress.XtraBars.Docking2010;
 using DevExpress.XtraBars.Navigation;
 using System.Threading;
-using Microsoft.Office.Interop.Excel;
 using Spire.Xls;
 using DataTable = System.Data.DataTable;
 using Workbook = Spire.Xls.Workbook;
@@ -30,8 +29,8 @@ namespace Vs.Recruit
         {
             Commons.Modules.sLoad = "0Load";
             LoadCombo();
-            LoadUNG_VIEN(-1);
             Commons.Modules.sLoad = "";
+            LoadUNG_VIEN(-1);
         }
         private void windowsUIButton_ButtonClick(object sender, ButtonEventArgs e)
         {
@@ -184,13 +183,13 @@ namespace Vs.Recruit
                 sheet3.Range[1, 3].Text = "Chức vụ";
                 sheet3.Range[1, 4].Text = "Mức lương";
                 sheet3.Range[1, 5].Text = "Từ năm";
-                sheet3.Range[1, 6].Text = "Từ năm";
-                sheet3.Range[1, 6].Text = "Lý do nghĩ";
+                sheet3.Range[1, 6].Text = "Đến năm";
+                sheet3.Range[1, 7].Text = "Lý do nghĩ";
 
-                sheet3.Range[1, 1, 1, 6].Style.WrapText = true;
-                sheet3.Range[1, 1, 1, 6].Style.VerticalAlignment = VerticalAlignType.Center;
-                sheet3.Range[1, 1, 1, 6].Style.HorizontalAlignment = HorizontalAlignType.Center;
-                sheet3.Range[1, 1, 1, 6].Style.Font.IsBold = true;
+                sheet3.Range[1, 1, 1, 7].Style.WrapText = true;
+                sheet3.Range[1, 1, 1, 7].Style.VerticalAlignment = VerticalAlignType.Center;
+                sheet3.Range[1, 1, 1, 7].Style.HorizontalAlignment = HorizontalAlignType.Center;
+                sheet3.Range[1, 1, 1, 7].Style.Font.IsBold = true;
 
                 Worksheet sheet4 = book.Worksheets.Add("04-Thông tin khác");
                 sheet4.DefaultColumnWidth = 20;
@@ -232,6 +231,7 @@ namespace Vs.Recruit
         {
             try
             {
+                if (Commons.Modules.sLoad == "0Load") return;
                 DataTable dtTmp = new DataTable();
                 dtTmp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetListUngVien", Commons.Modules.UserName, Commons.Modules.TypeLanguage, cboDA_TUYEN_DUNG.EditValue, cboYeuCauTD.EditValue, cboID_KHPV.EditValue, cboID_VTTD.EditValue));
                 dtTmp.PrimaryKey = new DataColumn[] { dtTmp.Columns["ID_UV"] };
@@ -279,19 +279,7 @@ namespace Vs.Recruit
 
         private void cboDA_TUYEN_DUNG_EditValueChanged(object sender, EventArgs e)
         {
-            //if (Commons.Modules.sLoad == "0Load") return;
-            //Commons.Modules.sLoad = "0Load";
-            //if(Convert.ToInt32(cboDA_TUYEN_DUNG.EditValue) == 2)
-            //{
-            //    cboID_TB.EditValue = -1;
-            //    cboID_TB.Enabled = false;
-            //}
-            //else
-            //{
-            //    cboID_TB.Enabled = true;
-            //}
-            //LoadUNG_VIEN(-1);
-            //Commons.Modules.sLoad = "";
+            LoadUNG_VIEN(-1);
         }
 
         private void grvUngVien_DoubleClick(object sender, EventArgs e)

@@ -157,7 +157,8 @@ namespace Vs.TimeAttendance
                                                 break;
                                             }
                                         default:
-                                            BieuMauDangKyLamThemGio();
+                                            BieuMauDangKyLamThemGio_DM();
+                                            //BieuMauDangKyLamThemGio();
                                             break;
                                     }
                                     break;
@@ -375,16 +376,13 @@ namespace Vs.TimeAttendance
             DataTable dt;
             System.Data.SqlClient.SqlConnection conn;
             dt = new DataTable();
-            string sTieuDe = "DANH SÁCH VẮNG ĐẦU GIỜ THEO NGÀY VÀ ĐƠN VỊ";
-            frm.rpt = new rptDSVangDauGioTheoDV(lk_NgayIn.DateTime, sTieuDe, Convert.ToDateTime(LK_NgayXemBaoCao.EditValue));
+            frm.rpt = new rptDSVangDauGioTheoDV(lk_NgayIn.DateTime,  Convert.ToDateTime(LK_NgayXemBaoCao.EditValue));
 
             try
             {
                 conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
                 conn.Open();
-
-                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptDSVangNgayDV", conn);
-
+                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand(Commons.Modules.ObjSystems.returnSps(Commons.Modules.chamCongK, "rptDSVangNgayDV"), conn);
                 cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
                 cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
                 cmd.Parameters.Add("@Dvi", SqlDbType.Int).Value = LK_DON_VI.EditValue;
@@ -417,15 +415,14 @@ namespace Vs.TimeAttendance
             DataTable dt;
             System.Data.SqlClient.SqlConnection conn1;
             dt = new DataTable();
-            string sTieuDe1 = "DANH SÁCH CÔNG NHÂN VẮNG ĐẦU GIỜ NGÀY";
-            frm.rpt = new rptDSVangDauGioTheoNgay(lk_NgayIn.DateTime, sTieuDe1, Convert.ToDateTime(LK_NgayXemBaoCao.EditValue));
+            frm.rpt = new rptDSVangDauGioTheoNgay(lk_NgayIn.DateTime,  Convert.ToDateTime(LK_NgayXemBaoCao.EditValue));
 
             try
             {
                 conn1 = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
                 conn1.Open();
 
-                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptDSVangNgayDV", conn1);
+                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand(Commons.Modules.ObjSystems.returnSps(Commons.Modules.chamCongK, "rptDSVangNgayDV"), conn1);
 
                 cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
                 cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
@@ -462,15 +459,14 @@ namespace Vs.TimeAttendance
             DataTable dt;
             System.Data.SqlClient.SqlConnection conn2;
             dt = new DataTable();
-            string sTieuDe2 = "DANH SÁCH NHÂN VIÊN THIẾU NHÓM CA";
-            frm.rpt = new rptDSNVThieuNhomCa(Convert.ToDateTime(LK_NgayXemBaoCao.EditValue), sTieuDe2);
+            frm.rpt = new rptDSNVThieuNhomCa(Convert.ToDateTime(LK_NgayXemBaoCao.EditValue));
 
             try
             {
                 conn2 = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
                 conn2.Open();
 
-                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptDSNVThieuNhomCa", conn2);
+                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand(Commons.Modules.ObjSystems.returnSps(Commons.Modules.chamCongK, "rptDSNVThieuNhomCa"), conn2);
 
                 cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
                 cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
@@ -511,17 +507,17 @@ namespace Vs.TimeAttendance
             {
                 case 0:
                     {
-                        sTieuDe2 = "DANH SÁCH NHÂN VIÊN ĐI TRỄ";
+                        sTieuDe2 = Commons.Modules.ObjLanguages.GetLanguage("rptDSDiTreVeSom", "lblDSNhanVienDiTre");
                     }
                     break;
                 case 1:
                     {
-                        sTieuDe2 = "DANH SÁCH NHÂN VIÊN VỀ SỚM";
+                        sTieuDe2 = Commons.Modules.ObjLanguages.GetLanguage("rptDSDiTreVeSom", "lblDSNhanVienVeSom");
                     }
                     break;
                 case 2:
                     {
-                        sTieuDe2 = "DANH SÁCH NHÂN VIÊN ĐI TRỄ, VỀ SỚM";
+                        sTieuDe2 = Commons.Modules.ObjLanguages.GetLanguage("rptDSDiTreVeSom", "lblDSNhanVienDiTreVeSom");
                     }
                     break;
                 default:
@@ -534,9 +530,7 @@ namespace Vs.TimeAttendance
             {
                 conn2 = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
                 conn2.Open();
-
-                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptDSDiTreVeSom", conn2);
-
+                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand(Commons.Modules.ObjSystems.returnSps(Commons.Modules.chamCongK, "rptDSDiTreVeSom"), conn2);
                 cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
                 cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
                 cmd.Parameters.Add("@DVi", SqlDbType.Int).Value = LK_DON_VI.EditValue;
@@ -594,13 +588,13 @@ namespace Vs.TimeAttendance
             DataTable dt;
             System.Data.SqlClient.SqlConnection conn;
             dt = new DataTable();
-            string sTieuDe = "DANH SÁCH NHÂN VIÊN TRÙNG GIỜ THEO NGÀY";
+            string sTieuDe = Commons.Modules.ObjLanguages.GetLanguage("rptDSNVTrungGio", "lblDSNhanVienTrungGioTheoNgay");;
             frm.rpt = new rptDSNVTrungGio(Convert.ToDateTime(LK_NgayXemBaoCao.EditValue), lk_NgayIn.DateTime, sTieuDe);
             try
             {
                 conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
                 conn.Open();
-                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptDSNVTrungGio", conn);
+                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand(Commons.Modules.ObjSystems.returnSps(Commons.Modules.chamCongK, "rptDSNVTrungGio"), conn);
                 cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
                 cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
                 cmd.Parameters.Add("@Dvi", SqlDbType.Int).Value = LK_DON_VI.EditValue;
@@ -628,15 +622,14 @@ namespace Vs.TimeAttendance
             DataTable dt;
             System.Data.SqlClient.SqlConnection conn;
             dt = new DataTable();
-            string sTieuDe = "DANH SÁCH NHÂN VIÊN CÓ TRÊN 2 CẶP GIỜ";
-            frm.rpt = new rptDSNVCoTren2CapGio(Convert.ToDateTime(LK_NgayXemBaoCao.EditValue), Convert.ToDateTime(lk_NgayIn.EditValue), sTieuDe);
+            frm.rpt = new rptDSNVCoTren2CapGio(Convert.ToDateTime(LK_NgayXemBaoCao.EditValue), Convert.ToDateTime(lk_NgayIn.EditValue));
 
             try
             {
                 conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
                 conn.Open();
 
-                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptDSNVCoTren2CapGio", conn);
+                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand(Commons.Modules.ObjSystems.returnSps(Commons.Modules.chamCongK, "rptDSNVCoTren2CapGio"), conn);
 
                 cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
                 cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
@@ -665,15 +658,13 @@ namespace Vs.TimeAttendance
             DataTable dt;
             System.Data.SqlClient.SqlConnection conn;
             dt = new DataTable();
-            string sTieuDe = "DANH SÁCH NHÂN VIÊN CHƯA ĐỦ DỮ LIỆU";
             frm.rpt = new rptDSNVVachTheLoi(Convert.ToDateTime(LK_NgayXemBaoCao.EditValue), lk_NgayIn.DateTime);
-
             try
             {
                 conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
                 conn.Open();
 
-                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptDSNVVachTheLoi", conn);
+                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand(Commons.Modules.ObjSystems.returnSps(Commons.Modules.chamCongK, "rptDSNVVachTheLoi"), conn);
 
                 cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
                 cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
@@ -703,8 +694,7 @@ namespace Vs.TimeAttendance
             DataTable dt;
             System.Data.SqlClient.SqlConnection conn;
             dt = new DataTable();
-            string sTieuDe = "ĐĂNG KÝ LÀM THÊM GIỜ";
-            frm.rpt = new rptDKLamThemGio(lk_NgayIn.DateTime, sTieuDe, LK_XI_NGHIEP.Text.ToString());
+            frm.rpt = new rptDKLamThemGio(lk_NgayIn.DateTime,  LK_XI_NGHIEP.Text.ToString());
 
             try
             {
@@ -736,21 +726,58 @@ namespace Vs.TimeAttendance
             { }
             frm.ShowDialog();
         }
-        private void DSNVTangCaNgay()
+        private void BieuMauDangKyLamThemGio_DM()
         {
             frmViewReport frm = new frmViewReport();
             DataTable dt;
             System.Data.SqlClient.SqlConnection conn;
             dt = new DataTable();
-            string sTieuDe = "DANH SÁCH NHÂN VIÊN TĂNG CA";
-            frm.rpt = new rptDSNVTangCaTheoNgay(Convert.ToDateTime(datNgayTangCa.EditValue), lk_NgayIn.DateTime, sTieuDe);
+            frm.rpt = new rptDKLamThemGio_DM(lk_NgayIn.DateTime, LK_XI_NGHIEP.Text.ToString());
 
             try
             {
                 conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
                 conn.Open();
 
-                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptDSTangCaNgay", conn);
+                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptBieuMauDangKyLamThemGio_DM", conn);
+
+                cmd.Parameters.Add("@ID_DV", SqlDbType.Int).Value = LK_DON_VI.EditValue;
+                cmd.Parameters.Add("@ID_XN", SqlDbType.Int).Value = LK_XI_NGHIEP.EditValue;
+                cmd.Parameters.Add("@ID_TO", SqlDbType.Int).Value = LK_TO.EditValue;
+                cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                cmd.Parameters.Add("@Ngay", SqlDbType.Date).Value = Convert.ToDateTime(lk_NgayIn.EditValue);
+
+                cmd.CommandType = CommandType.StoredProcedure;
+                System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+
+                //DataSet ds = new DataSet();
+                dt = new DataTable();
+                adp.Fill(dt);
+
+                //dt = ds.Tables[0].Copy();
+                dt.TableName = "DA_TA";
+                frm.AddDataSource(dt);
+                frm.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung());
+            }
+            catch 
+            { }
+            frm.ShowDialog();
+        }
+        private void DSNVTangCaNgay()
+        {
+            frmViewReport frm = new frmViewReport();
+            DataTable dt;
+            System.Data.SqlClient.SqlConnection conn;
+            dt = new DataTable();
+            frm.rpt = new rptDSNVTangCaTheoNgay(Convert.ToDateTime(datNgayTangCa.EditValue), lk_NgayIn.DateTime);
+
+            try
+            {
+                conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                conn.Open();
+
+                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand(Commons.Modules.ObjSystems.returnSps(Commons.Modules.chamCongK, "rptDSTangCaNgay"), conn);
 
                 cmd.Parameters.Add("@DVi", SqlDbType.Int).Value = LK_DON_VI.EditValue;
                 cmd.Parameters.Add("@XN", SqlDbType.Int).Value = LK_XI_NGHIEP.EditValue;

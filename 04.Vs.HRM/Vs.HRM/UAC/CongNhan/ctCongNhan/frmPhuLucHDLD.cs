@@ -74,6 +74,11 @@ namespace Vs.HRM
                                     InPLHD_SB();
                                     break;
                                 }
+                            case "DM":
+                                {
+                                    InPLHD_DM();
+                                    break;
+                                }
                             default:
                                 {
                                     InPLHD_MT();
@@ -253,6 +258,45 @@ namespace Vs.HRM
                 conn.Open();
 
                 System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptPhuLucHopDong_SB", conn);
+                cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                cmd.Parameters.Add("@ID_HDLD", SqlDbType.Int).Value = idhdld;
+                cmd.Parameters.Add("@SO_PLHD", SqlDbType.NVarChar, 30).Value = SO_PLHDTextEdit.EditValue;
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+                DataSet ds = new DataSet();
+                adp.Fill(ds);
+                dt = new DataTable();
+                dt = ds.Tables[0].Copy();
+                dt.TableName = "DA_TA";
+                frm.AddDataSource(dt);
+
+                DataTable dt1 = new DataTable();
+                dt1 = ds.Tables[1].Copy();
+                dt1.TableName = "NOI_DUNG";
+                frm.AddDataSource(dt1);
+
+                frm.ShowDialog();
+            }
+            catch
+            {
+
+            }
+        }
+        private void InPLHD_DM()
+        {
+            try
+            {
+                System.Data.SqlClient.SqlConnection conn;
+                DataTable dt = new DataTable();
+                frmViewReport frm = new frmViewReport();
+                frm.rpt = new rptPhuLucHopDongLaoDong_DM(NGAY_KYDateEdit.DateTime);
+
+                conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                conn.Open();
+
+                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptPhuLucHopDong_DM", conn);
                 cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
                 cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
                 cmd.Parameters.Add("@ID_HDLD", SqlDbType.Int).Value = idhdld;

@@ -10,7 +10,7 @@ namespace Vs.Report
 {
     public partial class rptDSVangDauGioTheoNgay : DevExpress.XtraReports.UI.XtraReport
     {
-        public rptDSVangDauGioTheoNgay(DateTime ngayin,string tieuDe, DateTime ngayXemBC)
+        public rptDSVangDauGioTheoNgay(DateTime ngayin,DateTime ngayXemBC)
         {
 
             InitializeComponent();
@@ -28,7 +28,7 @@ namespace Vs.Report
             string ThangXemBC = "0" + ngayXemBC.Month;
             string NamXemBC = "00" + ngayXemBC.Year;
 
-            lblTIEU_DE.Text = tieuDe;
+            //lblTIEU_DE.Text = tieuDe;
 
             lblNgay.Text = Commons.Modules.ObjSystems.GetNN(dtNgu, "Ngay","NgayThangNam") + " " + Ngay.Substring(Ngay.Length - 2, 2) + " " +
                 Commons.Modules.ObjSystems.GetNN(dtNgu, "Thang", "NgayThangNam") + " " + Thang.Substring(Thang.Length - 2, 2) + " " +

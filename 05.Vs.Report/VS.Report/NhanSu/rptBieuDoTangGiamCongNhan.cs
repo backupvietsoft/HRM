@@ -28,7 +28,7 @@ namespace VS.Report.NhanSu
             xrChart1.Titles.Clear();
 
             xrChart1.SizeF = new SizeF(650F, 600F);
-            xrChart1.Titles.Add(new ChartTitle() { Text = Commons.Modules.TypeLanguage == 1 ? "APPOINTED AND RESIGNED EMPLOYEES COMPARISON OF" : "BIỂU ĐỒ TĂNG GIẢM CÔNG NHÂN "+Nam+"" });
+            xrChart1.Titles.Add(new ChartTitle() { Text = Commons.Modules.ObjLanguages.GetLanguage("rptBieuDoTangGiamCongNhan","lblBieuDoTangGiamCNNam") + " " +Nam});
             // Create a pie series.
 
             Series series1 = new Series("Appointed", ViewType.Bar);

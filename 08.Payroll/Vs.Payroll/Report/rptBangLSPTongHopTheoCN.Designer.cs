@@ -47,7 +47,7 @@
             this.tiStt = new DevExpress.XtraReports.UI.XRTableCell();
             this.tiMSCN = new DevExpress.XtraReports.UI.XRTableCell();
             this.tiHoTen = new DevExpress.XtraReports.UI.XRTableCell();
-            this.xrTableCell11 = new DevExpress.XtraReports.UI.XRTableCell();
+            this.tiXiNghiep = new DevExpress.XtraReports.UI.XRTableCell();
             this.tiTo = new DevExpress.XtraReports.UI.XRTableCell();
             this.tiSoLuong = new DevExpress.XtraReports.UI.XRTableCell();
             this.tiThanhTien = new DevExpress.XtraReports.UI.XRTableCell();
@@ -193,7 +193,7 @@
             this.tiStt,
             this.tiMSCN,
             this.tiHoTen,
-            this.xrTableCell11,
+            this.tiXiNghiep,
             this.tiTo,
             this.tiSoLuong,
             this.tiThanhTien,
@@ -235,15 +235,15 @@
             this.tiHoTen.Text = "ho ten";
             this.tiHoTen.Weight = 9.98989933523818D;
             // 
-            // xrTableCell11
+            // tiXiNghiep
             // 
-            this.xrTableCell11.Dpi = 254F;
-            this.xrTableCell11.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.xrTableCell11.Multiline = true;
-            this.xrTableCell11.Name = "xrTableCell11";
-            this.xrTableCell11.StylePriority.UseFont = false;
-            this.xrTableCell11.Text = "tiXiNghiep";
-            this.xrTableCell11.Weight = 6.5752626942442269D;
+            this.tiXiNghiep.Dpi = 254F;
+            this.tiXiNghiep.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tiXiNghiep.Multiline = true;
+            this.tiXiNghiep.Name = "tiXiNghiep";
+            this.tiXiNghiep.StylePriority.UseFont = false;
+            this.tiXiNghiep.Text = "tiXiNghiep";
+            this.tiXiNghiep.Weight = 6.5752626942442269D;
             // 
             // tiTo
             // 
@@ -727,7 +727,7 @@
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell15;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell16;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell20;
-        private DevExpress.XtraReports.UI.XRTableCell xrTableCell11;
+        private DevExpress.XtraReports.UI.XRTableCell tiXiNghiep;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell13;
         private DevExpress.XtraReports.UI.XRTableRow xrTableRow4;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell5;

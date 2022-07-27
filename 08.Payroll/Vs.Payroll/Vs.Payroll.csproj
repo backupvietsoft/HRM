@@ -445,10 +445,10 @@
       <DependentUpon>ucBCLuongSanPham.cs</DependentUpon>
     </Compile>
     <Compile Include="Settings.cs" />
-    <Compile Include="UAC\ucBaoCaoDMCD.cs">
+    <Compile Include="Report\ucBaoCaoDMCD.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UAC\ucBaoCaoDMCD.Designer.cs">
+    <Compile Include="Report\ucBaoCaoDMCD.Designer.cs">
       <DependentUpon>ucBaoCaoDMCD.cs</DependentUpon>
     </Compile>
     <Compile Include="UAC\ucCachTinhLuong.cs">
@@ -735,7 +735,7 @@
     <EmbeddedResource Include="Report\ucBCLuongSanPham.resx">
       <DependentUpon>ucBCLuongSanPham.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UAC\ucBaoCaoDMCD.resx">
+    <EmbeddedResource Include="Report\ucBaoCaoDMCD.resx">
       <DependentUpon>ucBaoCaoDMCD.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UAC\ucCachTinhLuong.resx">

@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using Microsoft.ApplicationBlocks.Data;
 using DevExpress.XtraBars.Docking2010;
+using DevExpress.XtraGrid.Views.Grid;
 
 namespace Vs.TimeAttendance
 {
@@ -66,7 +67,7 @@ namespace Vs.TimeAttendance
         private void LoadGridCongNhan()
         {
             DataTable dt = new DataTable();
-            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetCongLinkChamCongTay", cboDV.EditValue, cboXN.EditValue, cboTo.EditValue, datNgayCC.EditValue, Commons.Modules.UserName, Commons.Modules.TypeLanguage));
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetCongLinkChamCongTay", cboDV.EditValue, cboXN.EditValue, cboTo.EditValue, datNgayCC.EditValue, Commons.Modules.UserName, Commons.Modules.TypeLanguage,Commons.Modules.chamCongK));
             dt.Columns["CHON"].ReadOnly = false;
             for (int i = 1; i < dt.Columns.Count; i++)
             {
@@ -91,7 +92,6 @@ namespace Vs.TimeAttendance
             {
                 grdChamCongTay.DataSource = dt;
             }
-            lblTong.Text = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgTongSoCN") + grvChamCongTay.RowCount.ToString();
         }
 
         private void cboDV_EditValueChanged(object sender, EventArgs e)
@@ -163,7 +163,7 @@ namespace Vs.TimeAttendance
                     {
                         try
                         {
-                            string sBT = "BTKinkTay" + Commons.Modules.UserName;
+                            string sBT = "BTKinkTay" + Commons.Modules.sId;
                             Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBT, Commons.Modules.ObjSystems.ConvertDatatable(grvChamCongTay), "");
                             SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spThemDuLieuQuetTheTay",
                              cboNhomCC.EditValue, cboHS.EditValue, datNgayDen.DateTime, timGioDen.EditValue, datNgayVe.DateTime, timGioVe.EditValue, sBT);
@@ -193,10 +193,10 @@ namespace Vs.TimeAttendance
                                 return;
                             }
 
-                            string sBT = "BTKinkTay" + Commons.Modules.UserName;
+                            string sBT = "BTKinkTay" + Commons.Modules.sId;
                             Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBT, Commons.Modules.ObjSystems.ConvertDatatable(grvChamCongTay), "");
 
-                            SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spSaveDuLieuQuetTheTay", datNgayCC.DateTime, sBT);
+                            SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spSaveDuLieuQuetTheTay", datNgayCC.DateTime, sBT,Commons.Modules.chamCongK);
 
                             LoadGridCongNhan();
                         }
@@ -213,5 +213,29 @@ namespace Vs.TimeAttendance
             }
         }
 
+        private void grvChamCongTay_RowCountChanged(object sender, EventArgs e)
+        {
+            GridView view = sender as GridView;
+            try
+            {
+                int index = ItemForSumNhanVien.Text.IndexOf(':');
+                if (index > 0)
+                {
+                    if (view.RowCount > 0)
+                    {
+                        ItemForSumNhanVien.Text = ItemForSumNhanVien.Text.Substring(0, index) + ": " + view.RowCount.ToString();
+                    }
+                    else
+                    {
+                        ItemForSumNhanVien.Text = ItemForSumNhanVien.Text.Substring(0, index) + ": 0";
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show(ex.Message.ToString());
+            }
+        }
     }
 }

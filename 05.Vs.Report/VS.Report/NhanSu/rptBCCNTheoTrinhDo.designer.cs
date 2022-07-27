@@ -414,7 +414,7 @@
             this.lbNguoiLapBieu,
             this.lblNgay});
             this.ReportFooter.Dpi = 254F;
-            this.ReportFooter.HeightF = 152.4233F;
+            this.ReportFooter.HeightF = 236.6315F;
             this.ReportFooter.Name = "ReportFooter";
             // 
             // lbNguoiLapBieu
@@ -423,7 +423,7 @@
             this.lbNguoiLapBieu.AutoWidth = true;
             this.lbNguoiLapBieu.Dpi = 254F;
             this.lbNguoiLapBieu.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Bold);
-            this.lbNguoiLapBieu.LocationFloat = new DevExpress.Utils.PointFloat(2018.013F, 88.71164F);
+            this.lbNguoiLapBieu.LocationFloat = new DevExpress.Utils.PointFloat(2018.013F, 147.9198F);
             this.lbNguoiLapBieu.Multiline = true;
             this.lbNguoiLapBieu.Name = "lbNguoiLapBieu";
             this.lbNguoiLapBieu.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
@@ -439,7 +439,7 @@
             this.lblNgay.AutoWidth = true;
             this.lblNgay.Dpi = 254F;
             this.lblNgay.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Bold);
-            this.lblNgay.LocationFloat = new DevExpress.Utils.PointFloat(2018.013F, 25.00001F);
+            this.lblNgay.LocationFloat = new DevExpress.Utils.PointFloat(2018.013F, 84.20815F);
             this.lblNgay.Multiline = true;
             this.lblNgay.Name = "lblNgay";
             this.lblNgay.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
@@ -516,7 +516,7 @@
             this.lbTrinhDo.StylePriority.UseTextAlignment = false;
             this.lbTrinhDo.Text = "Trình độ";
             this.lbTrinhDo.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            this.lbTrinhDo.Weight = 0.72505643177482781D;
+            this.lbTrinhDo.Weight = 0.77961937500327527D;
             // 
             // xrTableCell17
             // 
@@ -534,7 +534,7 @@
             this.xrTableCell17.StylePriority.UseTextAlignment = false;
             this.xrTableCell17.Text = "xrTableCell7";
             this.xrTableCell17.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            this.xrTableCell17.Weight = 3.9881083825251729D;
+            this.xrTableCell17.Weight = 3.9335454392967253D;
             // 
             // lbTongSoCongNhan
             // 

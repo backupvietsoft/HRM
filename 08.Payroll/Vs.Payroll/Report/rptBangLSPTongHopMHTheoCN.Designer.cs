@@ -44,8 +44,7 @@
             this.lblNgay = new DevExpress.XtraReports.UI.XRLabel();
             this.ReportHeader = new DevExpress.XtraReports.UI.ReportHeaderBand();
             this.xrSubreport1 = new DevExpress.XtraReports.UI.XRSubreport();
-            this.lbltungay = new DevExpress.XtraReports.UI.XRLabel();
-            this.lbldenngay = new DevExpress.XtraReports.UI.XRLabel();
+            this.xrTlbltungay = new DevExpress.XtraReports.UI.XRLabel();
             this.xrTableCell2 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell4 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell1 = new DevExpress.XtraReports.UI.XRTableCell();
@@ -259,8 +258,7 @@
             // 
             this.ReportHeader.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
             this.xrSubreport1,
-            this.lbltungay,
-            this.lbldenngay,
+            this.xrTlbltungay,
             this.lblLuongSanPhamChiTiet});
             this.ReportHeader.Dpi = 254F;
             this.ReportHeader.HeightF = 265.0479F;
@@ -274,35 +272,20 @@
             this.xrSubreport1.Name = "xrSubreport1";
             this.xrSubreport1.SizeF = new System.Drawing.SizeF(2880F, 42.93904F);
             // 
-            // lbltungay
+            // xrTlbltungay
             // 
-            this.lbltungay.Dpi = 254F;
-            this.lbltungay.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbltungay.LocationFloat = new DevExpress.Utils.PointFloat(468.3126F, 172.8312F);
-            this.lbltungay.Multiline = true;
-            this.lbltungay.Name = "lbltungay";
-            this.lbltungay.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 254F);
-            this.lbltungay.SizeF = new System.Drawing.SizeF(936.0396F, 70.89581F);
-            this.lbltungay.StylePriority.UseFont = false;
-            this.lbltungay.StylePriority.UsePadding = false;
-            this.lbltungay.StylePriority.UseTextAlignment = false;
-            this.lbltungay.Text = "Từ ngày : 05/06/2020";
-            this.lbltungay.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
-            // 
-            // lbldenngay
-            // 
-            this.lbldenngay.Dpi = 254F;
-            this.lbldenngay.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbldenngay.LocationFloat = new DevExpress.Utils.PointFloat(1431.396F, 172.8312F);
-            this.lbldenngay.Multiline = true;
-            this.lbldenngay.Name = "lbldenngay";
-            this.lbldenngay.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 254F);
-            this.lbldenngay.SizeF = new System.Drawing.SizeF(967.9792F, 70.89581F);
-            this.lbldenngay.StylePriority.UseFont = false;
-            this.lbldenngay.StylePriority.UsePadding = false;
-            this.lbldenngay.StylePriority.UseTextAlignment = false;
-            this.lbldenngay.Text = "Đến ngày : 05/06/2020";
-            this.lbldenngay.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
+            this.xrTlbltungay.Dpi = 254F;
+            this.xrTlbltungay.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.xrTlbltungay.LocationFloat = new DevExpress.Utils.PointFloat(0F, 172.8312F);
+            this.xrTlbltungay.Multiline = true;
+            this.xrTlbltungay.Name = "xrTlbltungay";
+            this.xrTlbltungay.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 254F);
+            this.xrTlbltungay.SizeF = new System.Drawing.SizeF(2880F, 70.89583F);
+            this.xrTlbltungay.StylePriority.UseFont = false;
+            this.xrTlbltungay.StylePriority.UsePadding = false;
+            this.xrTlbltungay.StylePriority.UseTextAlignment = false;
+            this.xrTlbltungay.Text = "Từ ngày : 05/06/2020";
+            this.xrTlbltungay.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
             // 
             // xrTableCell2
             // 
@@ -1108,8 +1091,7 @@
         private DevExpress.XtraReports.UI.XRTableCell tiTongCong;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell16;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell18;
-        private DevExpress.XtraReports.UI.XRLabel lbltungay;
-        private DevExpress.XtraReports.UI.XRLabel lbldenngay;
+        private DevExpress.XtraReports.UI.XRLabel xrTlbltungay;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell11;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell10;
         private DevExpress.XtraReports.UI.GroupHeaderBand GroupHeader1;

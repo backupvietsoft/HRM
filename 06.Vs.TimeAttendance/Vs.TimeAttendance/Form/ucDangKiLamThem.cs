@@ -18,6 +18,9 @@ using DevExpress.XtraEditors.Mask;
 using DevExpress.XtraLayout;
 using Vs.Report;
 using System.Globalization;
+using DevExpress.DataAccess.Excel;
+using DevExpress.ClipboardSource.SpreadsheetML;
+using System.Collections;
 
 namespace Vs.TimeAttendance
 {
@@ -182,7 +185,6 @@ namespace Vs.TimeAttendance
                 Commons.Modules.ObjSystems.AddCombXtra("ID_NHOM", "TEN_NHOM", grvLamThem, dID_NHOM, false, "ID_NHOM", "NHOM_CHAM_CONG");
 
                 grvLamThem.OptionsBehavior.Editable = true;
-
 
                 FormatGrvLamThem();
 
@@ -375,6 +377,111 @@ namespace Vs.TimeAttendance
             XtraUserControl ctl = new XtraUserControl();
             switch (btn.Tag.ToString())
             {
+                case "export":
+                    {
+                        try
+                        {
+                            string sPath = "";
+                            sPath = SaveFiles("Excel file (*.xlsx)|*.xlsx");
+                            if (sPath == "") return;
+                            Microsoft.Office.Interop.Excel.Application excelApplication = new Microsoft.Office.Interop.Excel.Application();
+                            excelApplication.DisplayAlerts = true;
+
+                            excelApplication.Visible = false;
+
+
+                            System.Globalization.CultureInfo oldCultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture;
+                            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
+
+                            Microsoft.Office.Interop.Excel.Workbooks excelWorkbooks = excelApplication.Workbooks;
+                            object misValue = System.Reflection.Missing.Value;
+                            Microsoft.Office.Interop.Excel.Workbook excelWorkbook = excelApplication.Workbooks.Add(misValue);
+
+                            excelWorkbook.SaveAs(sPath);
+
+                            Microsoft.Office.Interop.Excel.Worksheet excelWorkSheet = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Sheets[1];
+
+                            DataTable dt = new DataTable();
+                            dt = ((DataTable)grdCongNhan.DataSource).Copy();
+                            dt.DefaultView.RowFilter = "";
+                            DataView dv = dt.DefaultView;
+
+                            DataTable dt1 = new DataTable();
+                            dt1 = dv.ToTable(false, "MS_CN", "ID_NHOM", "TEN_NHOM", "CA", "GIO_BD", "GIO_KT");
+                            Microsoft.Office.Interop.Excel.Range Ranges1 = excelWorkSheet.Range[excelWorkSheet.Cells[1, 1], excelWorkSheet.Cells[dt1.Rows.Count + 1, dt1.Columns.Count]];
+                            Ranges1.ColumnWidth = 20;
+                            MExportExcel(dt1, excelWorkSheet, Ranges1);
+
+                            excelApplication.Visible = true;
+                            excelWorkbook.Save();
+                        }
+                        catch (Exception ex) { XtraMessageBox.Show(ex.Message); }
+                        break;
+                    }
+                case "import":
+                    {
+                        DataTable dt_old = new DataTable();
+                        dt_old = (DataTable)grdCongNhan.DataSource;
+                        string sBT_Old = "sBTCongNhanOld" + Commons.Modules.iIDUser;
+                        string sBT_import = "sBTCongNhanImport" + Commons.Modules.iIDUser;
+                        string sPath = "";
+                        sPath = Commons.Modules.ObjSystems.OpenFiles("All Excel Files (*.xls;*.xlsx)|*.xls;*.xlsx|" + "All Files (*.*)|*.*");
+
+                        DataTable dt = new DataTable();
+                        if (sPath == "") return;
+                        try
+                        {
+
+                            var source = new ExcelDataSource();
+                            source.FileName = sPath;
+                            var worksheetSettings = new ExcelWorksheetSettings("Sheet1");
+                            source.SourceOptions = new ExcelSourceOptions(worksheetSettings);
+                            source.Fill();
+                            dt = new DataTable();
+                            dt = ToDataTable(source);
+
+                            Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBT_Old, (DataTable)grdCongNhan.DataSource, "");
+                            Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBT_import, dt, "");
+
+                            DateTime dNgay;
+                            dNgay = DateTime.ParseExact(cboNgay.Text, "dd/MM/yyyy", cultures);
+                            DataTable dt_temp = new DataTable();
+                            dt_temp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spImportDKLT", sBT_Old, sBT_import));
+                            grdCongNhan.DataSource = dt_temp;
+                            DataTable dtTemp2 = new DataTable();
+                            dtTemp2 = dt_temp;
+
+                            decimal idCongNhan = -1;
+
+                            grdLamThem.DataSource = null;
+                            if (grvCongNhan.FocusedRowHandle >= 0)
+                            {
+                                decimal.TryParse(grvCongNhan.GetFocusedRowCellValue("ID_CN").ToString(), out idCongNhan);
+                            }
+                            dtTemp2.Columns["COM_CA"].ReadOnly = false;
+                            Commons.Modules.ObjSystems.MLoadXtraGrid(grdLamThem, grvLamThem, dtTemp2, false, false, false, false, true, this.Name);
+
+                            DataTable dID_NHOM = new DataTable();
+                            dID_NHOM.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetNhomCC", cboNgay.EditValue, Commons.Modules.UserName, Commons.Modules.TypeLanguage));
+                            Commons.Modules.ObjSystems.AddCombXtra("ID_NHOM", "TEN_NHOM", grvLamThem, dID_NHOM, false, "ID_NHOM", "NHOM_CHAM_CONG");
+
+                            grvLamThem.OptionsBehavior.Editable = true;
+
+                            FormatGrvLamThem();
+                            //grvCongNhan_FocusedRowChanged(null, null);
+
+                            //ColName = cboCotLayDL.EditValue.ToString();
+                            //dtemp.Columns.Add("XOA", System.Type.GetType("System.Boolean"));
+                            ////grdChung.DataSource = dtemp;
+
+                            ////Commons.Mod.OS.MLoadXtraGrid(grdChung, grvChung, dtemp, true, true, false, true);
+                            //this.DialogResult = DialogResult.OK;
+                            //this.Close();
+                        }
+                        catch (Exception ex)
+                        { XtraMessageBox.Show(ex.Message); }
+                        break;
+                    }
                 case "themsua":
                     {
                         isAdd = true;
@@ -764,18 +871,21 @@ namespace Vs.TimeAttendance
         /// <param name="visible"></param>
         private void EnableButon()
         {
-            btnALL.Buttons[0].Properties.Visible = !isAdd;
-            btnALL.Buttons[1].Properties.Visible = !isAdd;
-            btnALL.Buttons[2].Properties.Visible = !isAdd;
+
             btnALL.Buttons[3].Properties.Visible = !isAdd;
             btnALL.Buttons[4].Properties.Visible = !isAdd;
-            btnALL.Buttons[10].Properties.Visible = !isAdd;
+            btnALL.Buttons[5].Properties.Visible = !isAdd;
+            btnALL.Buttons[6].Properties.Visible = !isAdd;
+            btnALL.Buttons[12].Properties.Visible = !isAdd;
 
-            btnALL.Buttons[5].Properties.Visible = isAdd;
-            btnALL.Buttons[6].Properties.Visible = isAdd;
+            btnALL.Buttons[0].Properties.Visible = isAdd;
+            btnALL.Buttons[1].Properties.Visible = isAdd;
+            btnALL.Buttons[2].Properties.Visible = isAdd;
             btnALL.Buttons[7].Properties.Visible = isAdd;
             btnALL.Buttons[8].Properties.Visible = isAdd;
             btnALL.Buttons[9].Properties.Visible = isAdd;
+            btnALL.Buttons[10].Properties.Visible = isAdd;
+            btnALL.Buttons[11].Properties.Visible = isAdd;
 
             cboNgay.Enabled = !isAdd;
             cboDonVi.Enabled = !isAdd;
@@ -941,7 +1051,42 @@ namespace Vs.TimeAttendance
             catch { }
 
         }
-
+        public string SaveFiles(string MFilter)
+        {
+            try
+            {
+                SaveFileDialog f = new SaveFileDialog();
+                f.Filter = MFilter;
+                f.FileName = DateTime.Now.ToString("yyyyMMdd_HHmmss");
+                try
+                {
+                    DialogResult res = f.ShowDialog();
+                    if (res == DialogResult.OK)
+                        return f.FileName;
+                    return "";
+                }
+                catch
+                {
+                    return "";
+                }
+            }
+            catch
+            {
+                return "";
+            }
+        }
+        private void MExportExcel(DataTable dtTmp, Microsoft.Office.Interop.Excel.Worksheet ExcelSheets, Microsoft.Office.Interop.Excel.Range sRange)
+        {
+            object[,] rawData = new object[dtTmp.Rows.Count + 1, dtTmp.Columns.Count - 1 + 1];
+            for (var col = 0; col <= dtTmp.Columns.Count - 1; col++)
+                rawData[0, col] = dtTmp.Columns[col].Caption;
+            for (var col = 0; col <= dtTmp.Columns.Count - 1; col++)
+            {
+                for (var row = 0; row <= dtTmp.Rows.Count - 1; row++)
+                    rawData[row + 1, col] = dtTmp.Rows[row][col].ToString();
+            }
+            sRange.Value = rawData;
+        }
         private void grvLamThem_InitNewRow(object sender, InitNewRowEventArgs e)
         {
             try { grvLamThem.SetFocusedRowCellValue("COM_CA", 0); } catch { }
@@ -985,7 +1130,35 @@ namespace Vs.TimeAttendance
                 XtraMessageBox.Show(ex.Message.ToString());
             }
         }
-
+        public DataTable ToDataTable(ExcelDataSource excelDataSource)
+        {
+            IList list = ((IListSource)excelDataSource).GetList();
+            DevExpress.DataAccess.Native.Excel.DataView dataView = (DevExpress.DataAccess.Native.Excel.DataView)list;
+            List<PropertyDescriptor> props = dataView.Columns.ToList<PropertyDescriptor>();
+            DataTable table = new DataTable();
+            for (int i = 0; i < props.Count; i++)
+            {
+                PropertyDescriptor prop = props[i];
+                table.Columns.Add(prop.Name.Trim(), prop.PropertyType);
+            }
+            object[] values = new object[props.Count];
+            foreach (DevExpress.DataAccess.Native.Excel.ViewRow item in list)
+            {
+                for (int i = 0; i < values.Length; i++)
+                {
+                    if (props[i].Name == "GIO_BD" || props[i].Name == "GIO_KT")
+                    {
+                        values[i] = cboNgay.Text + " " + Convert.ToDateTime(props[i].GetValue(item)).TimeOfDay;
+                    }
+                    else
+                    {
+                        values[i] = props[i].GetValue(item);
+                    }
+                }
+                table.Rows.Add(values);
+            }
+            return table;
+        }
         private void grvLamThem_InvalidValueException(object sender, InvalidValueExceptionEventArgs e)
         {
             e.ExceptionMode = DevExpress.XtraEditors.Controls.ExceptionMode.NoAction;

@@ -130,7 +130,7 @@ namespace Vs.HRM
             try
             {
                 DataTable dt = new DataTable();
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboLDV", Commons.Modules.UserName, Commons.Modules.TypeLanguage, 0,-1));
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboLDV", Commons.Modules.UserName, Commons.Modules.TypeLanguage, 0, -1));
                 Commons.Modules.ObjSystems.MLoadLookUpEdit(cboLDV, dt, "ID_LDV", "TEN_LDV", "TEN_LDV");
 
                 Commons.Modules.sPrivate = "0LOAD";
@@ -186,7 +186,7 @@ namespace Vs.HRM
                 DataTable dt = new DataTable();
                 dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetListKeHoachNghiPhep", dateNam.DateTime.Year, grvDSCN.GetFocusedRowCellValue("ID_CN"), Commons.Modules.UserName, Commons.Modules.TypeLanguage));
                 Commons.Modules.ObjSystems.MLoadXtraGrid(grdKHNP, grvKHNP, dt, false, false, false, false, true, this.Name);
-                Commons.Modules.ObjSystems.AddCombXtra("ID_LDV", "TEN_LDV", grvKHNP,Commons.Modules.ObjSystems.DataLyDoVang(false,-1), "ID_LDV", this.Name);
+                Commons.Modules.ObjSystems.AddCombXtra("ID_LDV", "TEN_LDV", grvKHNP, Commons.Modules.ObjSystems.DataLyDoVang(false, -1), "ID_LDV", this.Name);
                 RepositoryItemDateEdit dEditN = new RepositoryItemDateEdit();
                 Commons.OSystems.SetDateRepositoryItemDateEdit(dEditN);
 
@@ -277,12 +277,19 @@ namespace Vs.HRM
 
         private void UpdateKeHoachNghiPhep()
         {
+            try
+            {
 
-            Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, "tabKHNP" + Commons.Modules.iIDUser, Commons.Modules.ObjSystems.ConvertDatatable(grdKHNP), "");
-            string sSql = "UPDATE A set A.TU_NGAY = B.TU_NGAY, A.DEN_NGAY = B.DEN_NGAY,A.NGAY_VAO_LAM_LAI = b.NGAY_VAO_LAM_LAI,SO_GIO = b.SO_GIO,a.GHI_CHU = b.GHI_CHU from dbo.KE_HOACH_NGHI_PHEP A, dbo.tabKHNP" + Commons.Modules.iIDUser + " B where B.ID_KHNP = A.ID_KHNP and A.ID_CN = " + grvDSCN.GetFocusedRowCellValue("ID_CN") + " INSERT INTO dbo.KE_HOACH_NGHI_PHEP(ID_LDV, ID_CN, TU_NGAY, DEN_NGAY, NGAY_VAO_LAM_LAI, SO_NGAY, SO_GIO, GHI_CHU) SELECT ID_LDV," + grvDSCN.GetFocusedRowCellValue("ID_CN") + ",TU_NGAY,DEN_NGAY,NGAY_VAO_LAM_LAI,NULL,SO_GIO,GHI_CHU FROM tabKHNP" + Commons.Modules.iIDUser + " WHERE ID_KHNP NOT IN(SELECT ID_KHNP FROM dbo.KE_HOACH_NGHI_PHEP WHERE ID_CN = " + grvDSCN.GetFocusedRowCellValue("ID_CN") + ")";
-            SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spUpdateKHNP", "tabKHNP" + Commons.Modules.iIDUser,Convert.ToInt64(grvDSCN.GetFocusedRowCellValue("ID_CN")));
-            Commons.Modules.ObjSystems.XoaTable("tabKHNP" + Commons.Modules.iIDUser);
-            //LoadGrdKHNP();
+                Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, "tabKHNP" + Commons.Modules.iIDUser, Commons.Modules.ObjSystems.ConvertDatatable(grdKHNP), "");
+                //string sSql = "UPDATE A set A.TU_NGAY = B.TU_NGAY, A.DEN_NGAY = B.DEN_NGAY,A.NGAY_VAO_LAM_LAI = b.NGAY_VAO_LAM_LAI,SO_GIO = b.SO_GIO,a.GHI_CHU = b.GHI_CHU from dbo.KE_HOACH_NGHI_PHEP A, dbo.tabKHNP" + Commons.Modules.iIDUser + " B where B.ID_KHNP = A.ID_KHNP and A.ID_CN = " + grvDSCN.GetFocusedRowCellValue("ID_CN") + " INSERT INTO dbo.KE_HOACH_NGHI_PHEP(ID_LDV, ID_CN, TU_NGAY, DEN_NGAY, NGAY_VAO_LAM_LAI, SO_NGAY, SO_GIO, GHI_CHU) SELECT ID_LDV," + grvDSCN.GetFocusedRowCellValue("ID_CN") + ",TU_NGAY,DEN_NGAY,NGAY_VAO_LAM_LAI,NULL,SO_GIO,GHI_CHU FROM tabKHNP" + Commons.Modules.iIDUser + " WHERE ID_KHNP NOT IN(SELECT ID_KHNP FROM dbo.KE_HOACH_NGHI_PHEP WHERE ID_CN = " + grvDSCN.GetFocusedRowCellValue("ID_CN") + ")";
+                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spUpdateKHNP", "tabKHNP" + Commons.Modules.iIDUser, Convert.ToInt64(grvDSCN.GetFocusedRowCellValue("ID_CN")));
+                Commons.Modules.ObjSystems.XoaTable("tabKHNP" + Commons.Modules.iIDUser);
+                //LoadGrdKHNP();
+            }
+            catch
+            {
+                Commons.Modules.ObjSystems.XoaTable("tabKHNP" + Commons.Modules.iIDUser);
+            }
         }
         private void LoadCapNhatPhep()
         {
@@ -429,7 +436,7 @@ namespace Vs.HRM
                             grvKHNP.UpdateCurrentRow();
                             int idcn = Convert.ToInt32(grvDSCN.GetFocusedRowCellValue("ID_CN"));
                             DataTable dt = new DataTable();
-                            dt = Commons.Modules.ObjSystems.ConvertDatatable(grvKHNP).AsEnumerable().Where(x=>x["TU_NGAY"].ToString()!="").OrderBy(x => x.Field<DateTime>("TU_NGAY")).CopyToDataTable();
+                            dt = Commons.Modules.ObjSystems.ConvertDatatable(grvKHNP).AsEnumerable().Where(x => x["TU_NGAY"].ToString() != "").OrderBy(x => x.Field<DateTime>("TU_NGAY")).CopyToDataTable();
                             bool kt = true;
                             if (dt.Columns["ID_LDV"].ToString() == "")
                             {
@@ -441,9 +448,11 @@ namespace Vs.HRM
                             string btKHNP = "TMPPRORUN" + Commons.Modules.UserName;
                             Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, btKHNP, Commons.Modules.ObjSystems.ConvertDatatable(grvKHNP), "");
 
+                            DataTable dt1 = new DataTable();
+                            dt1 = (DataTable)grdKHNP.DataSource;
                             try
                             {
-                                for (int i = 0; i < grvKHNP.RowCount; i++)
+                                for (int i = 0; i < dt1.Rows.Count; i++)
                                 {
                                     int n = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spKiemTraKHNP", btKHNP, grvDSCN.GetFocusedRowCellValue("ID_CN"), Convert.ToDateTime(Convert.ToDateTime(grvKHNP.GetRowCellValue(i, "TU_NGAY").ToString()).ToShortDateString()), Convert.ToDateTime(grvKHNP.GetRowCellValue(i, "DEN_NGAY"))));
                                     if (n > 1)
@@ -517,7 +526,7 @@ namespace Vs.HRM
                             LoadGrdCongNhan(false);
                             enableButon(true);
                         }
-                        
+
                         break;
                     }
                 case "trove":

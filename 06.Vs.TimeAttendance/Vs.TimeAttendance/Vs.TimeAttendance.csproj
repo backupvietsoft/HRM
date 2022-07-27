@@ -57,6 +57,10 @@
     <Reference Include="DevExpress.RichEdit.v20.1.Core, Version=20.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.RichEdit.v20.1.Export, Version=20.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Sparkline.v20.1.Core, Version=20.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Spreadsheet.v20.1.Core, Version=20.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\08.Payroll\Vs.Payroll\bin\Debug\DevExpress.Spreadsheet.v20.1.Core.dll</HintPath>
+    </Reference>
     <Reference Include="DevExpress.Utils.v20.1, Version=20.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Xpo.v20.1, Version=20.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraBars.v20.1, Version=20.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
@@ -284,6 +288,12 @@
     </Compile>
     <Compile Include="Report\rptBaoCaoNghiBoViecThang.Designer.cs">
       <DependentUpon>rptBaoCaoNghiBoViecThang.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Report\rptDKLamThemGio_DM.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\rptDKLamThemGio_DM.Designer.cs">
+      <DependentUpon>rptDKLamThemGio_DM.cs</DependentUpon>
     </Compile>
     <Compile Include="Report\rptDSChuyenCongTac.cs">
       <SubType>Component</SubType>
@@ -607,6 +617,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Report\rptBaoCaoNghiBoViecThang.resx">
       <DependentUpon>rptBaoCaoNghiBoViecThang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\rptDKLamThemGio_DM.resx">
+      <DependentUpon>rptDKLamThemGio_DM.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\rptDSChuyenCongTac.resx">
       <DependentUpon>rptDSChuyenCongTac.cs</DependentUpon>

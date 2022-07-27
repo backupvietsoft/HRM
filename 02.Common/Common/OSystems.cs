@@ -206,6 +206,15 @@ namespace Commons
                 }
             }
         }
+
+        public string returnSps (bool khach, string sPs)
+        {
+            if(khach == true)
+            {
+                sPs = sPs + "_K";
+            }
+            return sPs;
+        }
         public string CapnhatTL(string strFile)
         {
             strFile = LocKyTuDB(strFile);
@@ -1437,7 +1446,7 @@ namespace Commons
                                 {
                                     try
                                     {
-                                        if (cell.Name.Substring(0, 3).ToString() == "tiN") break;
+                                        if (cell.Name.Substring(0, 3).ToString() == "xrT") break;
                                         cell.Text = GetNN(dtTmp, cell.Name, report.Tag.ToString());// translation processing here
 
                                     }
@@ -1468,7 +1477,7 @@ namespace Commons
                                 try
                                 {
 
-                                    if (cell.Name.Substring(0, 3).ToString() == "tiN") break;
+                                    if (cell.Name.Substring(0, 3).ToString() == "xrT") break;
                                     cell.Text = GetNN(dtTmp, cell.Name, report.Tag.ToString());// translation processing here
 
                                 }

@@ -78,6 +78,7 @@ namespace Vs.TimeAttendance
             //LoadTinhTrangHopDong();
             Commons.Modules.sLoad = "";
             LoadNgay();
+            
             //lk_DenNgay.EditValue = DateTime.Today;
             //DateTime dtTN = DateTime.Today;
             //DateTime dtDN = DateTime.Today;
@@ -462,9 +463,18 @@ namespace Vs.TimeAttendance
                 {
                     grdThang.DataSource = dtthang;
                 }
-
-                grvThang.FocusedRowHandle = grvThang.GetRowHandle(index);
-                LK_Thang.Text = grvThang.GetFocusedRowCellValue("THANG").ToString();
+                if(index == -1)
+                {
+                    DataTable dt = new DataTable();
+                    dt = (DataTable)grdThang.DataSource;
+                    LK_Thang.EditValue = dt.Rows[DateTime.Now.Month - 1]["THANG"];
+                }
+                else
+                {
+                    grvThang.FocusedRowHandle = grvThang.GetRowHandle(index);
+                    LK_Thang.Text = grvThang.GetFocusedRowCellValue("THANG").ToString();
+                }
+                
             }
             catch (Exception ex)
             {
@@ -578,7 +588,7 @@ namespace Vs.TimeAttendance
                 conn.Open();
                 DataTable dtBCThang;
 
-                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptBangCongThang", conn);
+                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand(Commons.Modules.ObjSystems.returnSps(Commons.Modules.chamCongK, "rptBangCongThang"), conn);
 
                 cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
                 cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
@@ -1287,8 +1297,7 @@ namespace Vs.TimeAttendance
                 System.Data.SqlClient.SqlConnection conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
                 conn.Open();
 
-                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptBangCongThang_MT", conn);
-
+                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand(Commons.Modules.ObjSystems.returnSps(Commons.Modules.chamCongK, "rptBangCongThang_MT"), conn);
                 cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
                 cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
                 cmd.Parameters.Add("@DVi", SqlDbType.Int).Value = LK_DON_VI.EditValue;
@@ -1358,7 +1367,7 @@ namespace Vs.TimeAttendance
                 conn.Open();
                 DataTable dtBCThang;
 
-                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptBangCongTCThang", conn);
+                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand(Commons.Modules.ObjSystems.returnSps(Commons.Modules.chamCongK, "rptBangCongTCThang"), conn);
 
                 cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
                 cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
@@ -1603,7 +1612,7 @@ namespace Vs.TimeAttendance
                 System.Data.SqlClient.SqlConnection conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
                 conn.Open();
 
-                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptBangCongThangTangCa_MT", conn);
+                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand(Commons.Modules.ObjSystems.returnSps(Commons.Modules.chamCongK, "rptBangCongThangTangCa_MT"), conn);
 
                 cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
                 cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
@@ -1675,7 +1684,7 @@ namespace Vs.TimeAttendance
                 //System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptBangXacNhanGioQuetThe", conn);
 
 
-                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptBangTHDiTreVeSomThang", conn);
+                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand(Commons.Modules.ObjSystems.returnSps(Commons.Modules.chamCongK, "rptBangCongThangTangCa_MT"), conn);
 
                 cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
                 cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
@@ -2138,7 +2147,7 @@ namespace Vs.TimeAttendance
                 //System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptBangXacNhanGioQuetThe", conn);
 
 
-                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptBangTongCongThang", conn);
+                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand(Commons.Modules.ObjSystems.returnSps(Commons.Modules.chamCongK, "rptBangTongCongThang"), conn);
 
                 cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
                 cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
@@ -2491,7 +2500,7 @@ namespace Vs.TimeAttendance
                 conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
                 conn.Open();
 
-                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptDanhSachChuyenCongTac", conn);
+                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand(Commons.Modules.ObjSystems.returnSps(Commons.Modules.chamCongK, "rptDanhSachChuyenCongTac"), conn);
 
                 cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
                 cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
@@ -3168,5 +3177,10 @@ namespace Vs.TimeAttendance
 
         #endregion
 
+        private void lk_TuNgay_EditValueChanged(object sender, EventArgs e)
+        {
+            DateTime tungay = Convert.ToDateTime(lk_TuNgay.EditValue);
+            lk_DenNgay.EditValue = Convert.ToDateTime(DateTime.DaysInMonth(tungay.Year, tungay.Month) + "/" + tungay.Month + "/" + tungay.Year);
+        }
     }
 }

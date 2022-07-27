@@ -17,7 +17,7 @@ namespace Vs.Payroll
             Commons.Modules.ObjSystems.ThayDoiNN(this);
             xrSubreport1.ReportSource = new SubReportHeader();
 
-            time.Text = "Từ ngày " + tngay.ToString("dd/MM/yyyy") + "  Đến ngày " + dngay.ToString("dd/MM/yyyy");
+            time.Text = Commons.Modules.ObjLanguages.GetLanguage("rptBangLSPTongHopTheoCN","lblTNgay")  + " " + tngay.ToString("dd/MM/yyyy") + " " + Commons.Modules.ObjLanguages.GetLanguage("rptBangLSPTongHopTheoCN", "lblDNgay") + " " + dngay.ToString("dd/MM/yyyy");
         }
 
     }

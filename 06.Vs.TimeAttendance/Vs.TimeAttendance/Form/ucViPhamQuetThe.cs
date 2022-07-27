@@ -15,6 +15,7 @@ namespace Vs.TimeAttendance
     public partial class ucViPhamQuetThe : DevExpress.XtraEditors.XtraUserControl
     {
         private bool isAdd = false;
+        private bool bAddOK = true;
         public static ucViPhamQuetThe _instance;
         public static ucViPhamQuetThe Instance
         {
@@ -110,6 +111,14 @@ namespace Vs.TimeAttendance
                     {
                         UpdateTimekeeping(Convert.ToDateTime(cboNgay.EditValue));
                         LoadGridVPQuetThe();
+                        if(bAddOK == true)
+                        {
+                            XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msg_CapNhatThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        else
+                        {
+                            XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msg_CapKhongNhatThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
                         break;
                     }
                 case "in":
@@ -169,10 +178,11 @@ namespace Vs.TimeAttendance
                 Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, stbVPQuetThe, Commons.Modules.ObjSystems.ConvertDatatable(grvVPQuetThe), "");
                 SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spUpdateViPhamQuetThe", Convert.ToDateTime(cboNgay.EditValue), stbVPQuetThe);
                 Commons.Modules.ObjSystems.XoaTable(stbVPQuetThe);
-                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msg_CapNhatThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                bAddOK = true;
             }
             catch (Exception EX)
             {
+                bAddOK = false;
                 XtraMessageBox.Show(EX.Message.ToString());
             }
         }
@@ -270,10 +280,11 @@ namespace Vs.TimeAttendance
             windowsUIButton.Buttons[1].Properties.Visible = !isAdd;
             windowsUIButton.Buttons[2].Properties.Visible = !isAdd;
             windowsUIButton.Buttons[3].Properties.Visible = !isAdd;
-            windowsUIButton.Buttons[4].Properties.Visible = isAdd;
+            windowsUIButton.Buttons[4].Properties.Visible = !isAdd;
+            windowsUIButton.Buttons[7].Properties.Visible = !isAdd;
+
             windowsUIButton.Buttons[5].Properties.Visible = isAdd;
             windowsUIButton.Buttons[6].Properties.Visible = isAdd;
-            windowsUIButton.Buttons[7].Properties.Visible = isAdd;
         }
         #endregion
 

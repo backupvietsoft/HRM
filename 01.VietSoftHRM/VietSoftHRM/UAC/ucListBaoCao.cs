@@ -164,6 +164,14 @@ namespace VietSoftHRM
                         InBDTangGiamCN.Dock = DockStyle.Fill;
                         break;
                     }
+                case "mnuBCThongKeCNTheoBD":
+                    {
+                        ucBaoCaoThongKeCongNhanBD temp = new ucBaoCaoThongKeCongNhanBD();
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(temp);
+                        temp.Dock = DockStyle.Fill;
+                        break;
+                    }
                 case "mnuBCLDTo":
                     {
                         ucBaoCaoLaoDongTo InLDTo = new ucBaoCaoLaoDongTo();

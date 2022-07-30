@@ -25,6 +25,7 @@ namespace VietSoftHRM
         {
             try
             {
+
                 Application.Run(new frmLogin());
                 //Application.Run(new frmThongTinChung(1));
                 //Application.Run(new frmImportHinhCN(1));

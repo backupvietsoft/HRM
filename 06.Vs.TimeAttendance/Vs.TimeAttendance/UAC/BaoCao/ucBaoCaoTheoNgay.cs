@@ -46,10 +46,10 @@ namespace Vs.TimeAttendance
                                         case "MT":
                                             {
                                                 DSVangDauGioTheoNgay();
-                                                //BangChamCongNgay_DM();
                                                 break;
                                             }
                                         default:
+                                            //BangChamCongNgay_DM();
                                             DSVangDauGioTheoNgay();
                                             break;
                                     }
@@ -242,7 +242,6 @@ namespace Vs.TimeAttendance
         {
             switch (rdo_ChonBaoCao.SelectedIndex)
             {
-
                 case 3:
                     {
                         rdo_DiTreVeSom.Visible = true;
@@ -251,9 +250,9 @@ namespace Vs.TimeAttendance
                 case 8:
                     {
                         datNgayTangCa.Enabled = true;
+                        rdo_DiTreVeSom.Visible = false;
                         break;
                     }
-
                 default:
                     rdo_DiTreVeSom.Visible = false;
                     datNgayTangCa.Enabled = false;

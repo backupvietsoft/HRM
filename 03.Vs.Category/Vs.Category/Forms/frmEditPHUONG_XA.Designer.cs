@@ -55,6 +55,8 @@
             this.ItemForID_TP = new DevExpress.XtraLayout.LayoutControlItem();
             this.ItemForMS_XA = new DevExpress.XtraLayout.LayoutControlItem();
             this.dxValidationProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
+            this.txtKhoangCach = new DevExpress.XtraEditors.TextEdit();
+            this.ItemFor_KHOANG_CACH = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).BeginInit();
             this.tablePanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataLayoutControl1)).BeginInit();
@@ -76,6 +78,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.ItemForID_TP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForMS_XA)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtKhoangCach.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemFor_KHOANG_CACH)).BeginInit();
             this.SuspendLayout();
             // 
             // btnALL
@@ -131,6 +135,7 @@
             // dataLayoutControl1
             // 
             this.tablePanel1.SetColumn(this.dataLayoutControl1, 1);
+            this.dataLayoutControl1.Controls.Add(this.txtKhoangCach);
             this.dataLayoutControl1.Controls.Add(this.ID_TPSearchLookUpEdit);
             this.dataLayoutControl1.Controls.Add(this.TEN_PXTextEdit);
             this.dataLayoutControl1.Controls.Add(this.TEN_PX_ATextEdit);
@@ -139,7 +144,7 @@
             this.dataLayoutControl1.Controls.Add(this.MS_XATextEdit);
             this.dataLayoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataLayoutControl1.Location = new System.Drawing.Point(76, 22);
-            this.dataLayoutControl1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dataLayoutControl1.Margin = new System.Windows.Forms.Padding(4);
             this.dataLayoutControl1.Name = "dataLayoutControl1";
             this.dataLayoutControl1.Root = this.Root;
             this.tablePanel1.SetRow(this.dataLayoutControl1, 1);
@@ -149,8 +154,8 @@
             // 
             // ID_TPSearchLookUpEdit
             // 
-            this.ID_TPSearchLookUpEdit.Location = new System.Drawing.Point(66, 5);
-            this.ID_TPSearchLookUpEdit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ID_TPSearchLookUpEdit.Location = new System.Drawing.Point(150, 6);
+            this.ID_TPSearchLookUpEdit.Margin = new System.Windows.Forms.Padding(4);
             this.ID_TPSearchLookUpEdit.Name = "ID_TPSearchLookUpEdit";
             this.ID_TPSearchLookUpEdit.Properties.Appearance.Options.UseTextOptions = true;
             this.ID_TPSearchLookUpEdit.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
@@ -158,7 +163,7 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.ID_TPSearchLookUpEdit.Properties.NullText = "";
             this.ID_TPSearchLookUpEdit.Properties.PopupView = this.gridView1;
-            this.ID_TPSearchLookUpEdit.Size = new System.Drawing.Size(494, 24);
+            this.ID_TPSearchLookUpEdit.Size = new System.Drawing.Size(409, 24);
             this.ID_TPSearchLookUpEdit.StyleController = this.dataLayoutControl1;
             this.ID_TPSearchLookUpEdit.TabIndex = 8;
             conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
@@ -176,10 +181,10 @@
             // 
             // TEN_PXTextEdit
             // 
-            this.TEN_PXTextEdit.Location = new System.Drawing.Point(66, 83);
-            this.TEN_PXTextEdit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TEN_PXTextEdit.Location = new System.Drawing.Point(150, 84);
+            this.TEN_PXTextEdit.Margin = new System.Windows.Forms.Padding(4);
             this.TEN_PXTextEdit.Name = "TEN_PXTextEdit";
-            this.TEN_PXTextEdit.Size = new System.Drawing.Size(494, 24);
+            this.TEN_PXTextEdit.Size = new System.Drawing.Size(409, 24);
             this.TEN_PXTextEdit.StyleController = this.dataLayoutControl1;
             this.TEN_PXTextEdit.TabIndex = 4;
             conditionValidationRule2.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
@@ -188,26 +193,26 @@
             // 
             // TEN_PX_ATextEdit
             // 
-            this.TEN_PX_ATextEdit.Location = new System.Drawing.Point(66, 109);
-            this.TEN_PX_ATextEdit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TEN_PX_ATextEdit.Location = new System.Drawing.Point(150, 110);
+            this.TEN_PX_ATextEdit.Margin = new System.Windows.Forms.Padding(4);
             this.TEN_PX_ATextEdit.Name = "TEN_PX_ATextEdit";
-            this.TEN_PX_ATextEdit.Size = new System.Drawing.Size(494, 24);
+            this.TEN_PX_ATextEdit.Size = new System.Drawing.Size(409, 24);
             this.TEN_PX_ATextEdit.StyleController = this.dataLayoutControl1;
             this.TEN_PX_ATextEdit.TabIndex = 5;
             // 
             // TEN_PX_HTextEdit
             // 
-            this.TEN_PX_HTextEdit.Location = new System.Drawing.Point(66, 135);
-            this.TEN_PX_HTextEdit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TEN_PX_HTextEdit.Location = new System.Drawing.Point(150, 136);
+            this.TEN_PX_HTextEdit.Margin = new System.Windows.Forms.Padding(4);
             this.TEN_PX_HTextEdit.Name = "TEN_PX_HTextEdit";
-            this.TEN_PX_HTextEdit.Size = new System.Drawing.Size(494, 24);
+            this.TEN_PX_HTextEdit.Size = new System.Drawing.Size(409, 24);
             this.TEN_PX_HTextEdit.StyleController = this.dataLayoutControl1;
             this.TEN_PX_HTextEdit.TabIndex = 6;
             // 
             // ID_QUANSearchLookUpEdit
             // 
-            this.ID_QUANSearchLookUpEdit.Location = new System.Drawing.Point(66, 31);
-            this.ID_QUANSearchLookUpEdit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ID_QUANSearchLookUpEdit.Location = new System.Drawing.Point(150, 32);
+            this.ID_QUANSearchLookUpEdit.Margin = new System.Windows.Forms.Padding(4);
             this.ID_QUANSearchLookUpEdit.Name = "ID_QUANSearchLookUpEdit";
             this.ID_QUANSearchLookUpEdit.Properties.Appearance.Options.UseTextOptions = true;
             this.ID_QUANSearchLookUpEdit.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
@@ -215,7 +220,7 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.ID_QUANSearchLookUpEdit.Properties.NullText = "";
             this.ID_QUANSearchLookUpEdit.Properties.PopupView = this.searchLookUpEdit1View;
-            this.ID_QUANSearchLookUpEdit.Size = new System.Drawing.Size(494, 24);
+            this.ID_QUANSearchLookUpEdit.Size = new System.Drawing.Size(409, 24);
             this.ID_QUANSearchLookUpEdit.StyleController = this.dataLayoutControl1;
             this.ID_QUANSearchLookUpEdit.TabIndex = 7;
             conditionValidationRule3.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
@@ -232,10 +237,10 @@
             // 
             // MS_XATextEdit
             // 
-            this.MS_XATextEdit.Location = new System.Drawing.Point(66, 57);
-            this.MS_XATextEdit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.MS_XATextEdit.Location = new System.Drawing.Point(150, 58);
+            this.MS_XATextEdit.Margin = new System.Windows.Forms.Padding(4);
             this.MS_XATextEdit.Name = "MS_XATextEdit";
-            this.MS_XATextEdit.Size = new System.Drawing.Size(494, 24);
+            this.MS_XATextEdit.Size = new System.Drawing.Size(409, 24);
             this.MS_XATextEdit.StyleController = this.dataLayoutControl1;
             this.MS_XATextEdit.TabIndex = 8;
             conditionValidationRule4.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
@@ -263,10 +268,11 @@
             this.ItemForTEN_PX_H,
             this.ItemForID_QUAN,
             this.ItemForID_TP,
-            this.ItemForMS_XA});
+            this.ItemForMS_XA,
+            this.ItemFor_KHOANG_CACH});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "autoGeneratedGroup0";
-            this.layoutControlGroup1.Size = new System.Drawing.Size(557, 317);
+            this.layoutControlGroup1.Size = new System.Drawing.Size(555, 315);
             // 
             // ItemForTEN_PX
             // 
@@ -275,27 +281,27 @@
             this.ItemForTEN_PX.Control = this.TEN_PXTextEdit;
             this.ItemForTEN_PX.Location = new System.Drawing.Point(0, 78);
             this.ItemForTEN_PX.Name = "ItemForTEN_PX";
-            this.ItemForTEN_PX.Size = new System.Drawing.Size(557, 26);
+            this.ItemForTEN_PX.Size = new System.Drawing.Size(555, 26);
             this.ItemForTEN_PX.Text = "TEN_PX";
-            this.ItemForTEN_PX.TextSize = new System.Drawing.Size(58, 17);
+            this.ItemForTEN_PX.TextSize = new System.Drawing.Size(141, 17);
             // 
             // ItemForTEN_PX_A
             // 
             this.ItemForTEN_PX_A.Control = this.TEN_PX_ATextEdit;
             this.ItemForTEN_PX_A.Location = new System.Drawing.Point(0, 104);
             this.ItemForTEN_PX_A.Name = "ItemForTEN_PX_A";
-            this.ItemForTEN_PX_A.Size = new System.Drawing.Size(557, 26);
+            this.ItemForTEN_PX_A.Size = new System.Drawing.Size(555, 26);
             this.ItemForTEN_PX_A.Text = "TEN_PX_A";
-            this.ItemForTEN_PX_A.TextSize = new System.Drawing.Size(58, 17);
+            this.ItemForTEN_PX_A.TextSize = new System.Drawing.Size(141, 17);
             // 
             // ItemForTEN_PX_H
             // 
             this.ItemForTEN_PX_H.Control = this.TEN_PX_HTextEdit;
             this.ItemForTEN_PX_H.Location = new System.Drawing.Point(0, 130);
             this.ItemForTEN_PX_H.Name = "ItemForTEN_PX_H";
-            this.ItemForTEN_PX_H.Size = new System.Drawing.Size(557, 187);
+            this.ItemForTEN_PX_H.Size = new System.Drawing.Size(555, 26);
             this.ItemForTEN_PX_H.Text = "TEN_PX_H";
-            this.ItemForTEN_PX_H.TextSize = new System.Drawing.Size(58, 17);
+            this.ItemForTEN_PX_H.TextSize = new System.Drawing.Size(141, 17);
             // 
             // ItemForID_QUAN
             // 
@@ -304,9 +310,9 @@
             this.ItemForID_QUAN.Control = this.ID_QUANSearchLookUpEdit;
             this.ItemForID_QUAN.Location = new System.Drawing.Point(0, 26);
             this.ItemForID_QUAN.Name = "ItemForID_QUAN";
-            this.ItemForID_QUAN.Size = new System.Drawing.Size(557, 26);
+            this.ItemForID_QUAN.Size = new System.Drawing.Size(555, 26);
             this.ItemForID_QUAN.Text = "ID_QUAN";
-            this.ItemForID_QUAN.TextSize = new System.Drawing.Size(58, 17);
+            this.ItemForID_QUAN.TextSize = new System.Drawing.Size(141, 17);
             // 
             // ItemForID_TP
             // 
@@ -315,9 +321,9 @@
             this.ItemForID_TP.Control = this.ID_TPSearchLookUpEdit;
             this.ItemForID_TP.Location = new System.Drawing.Point(0, 0);
             this.ItemForID_TP.Name = "ItemForID_TP";
-            this.ItemForID_TP.Size = new System.Drawing.Size(557, 26);
+            this.ItemForID_TP.Size = new System.Drawing.Size(555, 26);
             this.ItemForID_TP.Text = "ID_TP";
-            this.ItemForID_TP.TextSize = new System.Drawing.Size(58, 17);
+            this.ItemForID_TP.TextSize = new System.Drawing.Size(141, 17);
             // 
             // ItemForMS_XA
             // 
@@ -328,9 +334,25 @@
             this.ItemForMS_XA.Control = this.MS_XATextEdit;
             this.ItemForMS_XA.Location = new System.Drawing.Point(0, 52);
             this.ItemForMS_XA.Name = "ItemForMS_XA";
-            this.ItemForMS_XA.Size = new System.Drawing.Size(557, 26);
+            this.ItemForMS_XA.Size = new System.Drawing.Size(555, 26);
             this.ItemForMS_XA.Text = "MS_XA";
-            this.ItemForMS_XA.TextSize = new System.Drawing.Size(58, 20);
+            this.ItemForMS_XA.TextSize = new System.Drawing.Size(141, 20);
+            // 
+            // txtKhoangCach
+            // 
+            this.txtKhoangCach.Location = new System.Drawing.Point(150, 162);
+            this.txtKhoangCach.Name = "txtKhoangCach";
+            this.txtKhoangCach.Size = new System.Drawing.Size(409, 24);
+            this.txtKhoangCach.StyleController = this.dataLayoutControl1;
+            this.txtKhoangCach.TabIndex = 9;
+            // 
+            // ItemFor_KHOANG_CACH
+            // 
+            this.ItemFor_KHOANG_CACH.Control = this.txtKhoangCach;
+            this.ItemFor_KHOANG_CACH.Location = new System.Drawing.Point(0, 156);
+            this.ItemFor_KHOANG_CACH.Name = "ItemFor_KHOANG_CACH";
+            this.ItemFor_KHOANG_CACH.Size = new System.Drawing.Size(555, 159);
+            this.ItemFor_KHOANG_CACH.TextSize = new System.Drawing.Size(141, 17);
             // 
             // frmEditPHUONG_XA
             // 
@@ -339,7 +361,7 @@
             this.ClientSize = new System.Drawing.Size(716, 351);
             this.Controls.Add(this.btnALL);
             this.Controls.Add(this.tablePanel1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmEditPHUONG_XA";
             this.Text = "frmEditPHUONG_XA";
             this.Load += new System.EventHandler(this.frmEditPHUONG_XA_Load);
@@ -365,6 +387,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.ItemForID_TP)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForMS_XA)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtKhoangCach.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemFor_KHOANG_CACH)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -391,5 +415,7 @@
         private DevExpress.XtraEditors.SearchLookUpEdit ID_TPSearchLookUpEdit;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
         private DevExpress.XtraLayout.LayoutControlItem ItemForID_TP;
+        private DevExpress.XtraEditors.TextEdit txtKhoangCach;
+        private DevExpress.XtraLayout.LayoutControlItem ItemFor_KHOANG_CACH;
     }
 }

@@ -23,7 +23,7 @@ namespace Vs.Recruit
             //ucQLUV uac = new ucQLUV();
             //this.Controls.Add(uac);
             //uac.Dock = DockStyle.Fill;
-            //LoadAA();
+            LoadAA();
         }
         private void LoadAA()
         {
@@ -606,6 +606,11 @@ style='font-family:Times New Roman,serif'>&#272;T liên h&#7879;: 0228.6556.777
         }
 
         private void button1_Click(object sender, EventArgs e)
+        {
+            string s = richEditControl1.HtmlText;
+        }
+
+        private void simpleButton1_Click(object sender, EventArgs e)
         {
             string s = richEditControl1.HtmlText;
         }

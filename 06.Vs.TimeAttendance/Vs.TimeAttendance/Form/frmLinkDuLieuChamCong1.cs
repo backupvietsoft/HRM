@@ -1180,6 +1180,7 @@ namespace Vs.TimeAttendance
             {
                 XtraMessageBox.Show(ex.Message.ToString());
             }
+            grvDSCN_FocusedRowChanged(null, null);
         }
         public DataTable ToDataTable(ExcelDataSource excelDataSource)
         {

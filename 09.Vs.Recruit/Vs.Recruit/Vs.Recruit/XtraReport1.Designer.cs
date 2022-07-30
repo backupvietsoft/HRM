@@ -44,7 +44,7 @@ namespace Vs.Recruit
             // 
             // BottomMargin
             // 
-            this.BottomMargin.HeightF = 35.70833F;
+            this.BottomMargin.HeightF = 36.45833F;
             this.BottomMargin.Name = "BottomMargin";
             // 
             // Detail
@@ -59,11 +59,11 @@ namespace Vs.Recruit
             this.xrRichText1.AnchorHorizontal = ((DevExpress.XtraReports.UI.HorizontalAnchorStyles)((DevExpress.XtraReports.UI.HorizontalAnchorStyles.Left | DevExpress.XtraReports.UI.HorizontalAnchorStyles.Right)));
             this.xrRichText1.CanShrink = true;
             this.xrRichText1.Font = new System.Drawing.Font("Arial", 9.75F);
-            this.xrRichText1.LocationFloat = new DevExpress.Utils.PointFloat(10.00001F, 10.00001F);
+            this.xrRichText1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 10.00001F);
             this.xrRichText1.Name = "xrRichText1";
             this.xrRichText1.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
             this.xrRichText1.SerializableRtfString = resources.GetString("xrRichText1.SerializableRtfString");
-            this.xrRichText1.SizeF = new System.Drawing.SizeF(790F, 21.95829F);
+            this.xrRichText1.SizeF = new System.Drawing.SizeF(786.9999F, 21.95829F);
             // 
             // XtraReport1
             // 
@@ -73,6 +73,9 @@ namespace Vs.Recruit
             this.Detail});
             this.Font = new System.Drawing.Font("Arial", 9.75F);
             this.Margins = new System.Drawing.Printing.Margins(18, 22, 32, 36);
+            this.PageHeight = 1169;
+            this.PageWidth = 827;
+            this.PaperKind = System.Drawing.Printing.PaperKind.A4;
             this.Version = "20.1";
             this.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.XtraReport1_BeforePrint);
             ((System.ComponentModel.ISupportInitialize)(this.xrRichText1)).EndInit();

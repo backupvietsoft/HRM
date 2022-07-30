@@ -64,8 +64,12 @@ namespace Vs.HRM
                                                 HopDongLaoDong_SB();
                                                 break;
                                             }
+                                        case "DM":
+                                            {
+                                                HopDongLaoDong_DM();
+                                                break;
+                                            }
                                         default:
-                                            //HopDongLaoDong_DM();
                                             HopDongLaoDong();
                                             break;
                                     }
@@ -86,8 +90,12 @@ namespace Vs.HRM
                                                 HopDongThuViec_SB();
                                                 break;
                                             }
+                                        case "DM":
+                                            {
+                                                HopDongThuViec_DM();
+                                                break;
+                                            }
                                         default:
-                                            //HopDongThuViec_DM();
                                             HopDongThuViecCDDH();
                                             break;
                                     }

@@ -232,7 +232,7 @@
             this.Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
             this.Root.GroupBordersVisible = false;
             this.Root.Name = "Root";
-            this.Root.Size = new System.Drawing.Size(65, 20);
+            this.Root.Size = new System.Drawing.Size(65, 10);
             this.Root.TextVisible = false;
             // 
             // lblCongDoan

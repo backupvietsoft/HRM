@@ -241,6 +241,18 @@
     <Compile Include="NhanSu\rptBCXepLoaiKhenThuongThang.designer.cs">
       <DependentUpon>rptBCXepLoaiKhenThuongThang.cs</DependentUpon>
     </Compile>
+    <Compile Include="NhanSu\rptBieuDoChiaTheoDiaLy.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptBieuDoChiaTheoDiaLy.Designer.cs">
+      <DependentUpon>rptBieuDoChiaTheoDiaLy.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\rptBieuDoPhanLoai.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptBieuDoPhanLoai.Designer.cs">
+      <DependentUpon>rptBieuDoPhanLoai.cs</DependentUpon>
+    </Compile>
     <Compile Include="NhanSu\rptDSXNgioquetthetheongay.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -709,6 +721,30 @@
     <Compile Include="NhanSu\rptToKhaiBHXH.designer.cs">
       <DependentUpon>rptToKhaiBHXH.cs</DependentUpon>
     </Compile>
+    <Compile Include="NhanSu\srptBDCNTheoHuyen.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\srptBDCNTheoHuyen.Designer.cs">
+      <DependentUpon>srptBDCNTheoHuyen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\srptBDIDD.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\srptBDIDD.Designer.cs">
+      <DependentUpon>srptBDIDD.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\srptBDGioiTinh.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\srptBDGioiTinh.Designer.cs">
+      <DependentUpon>srptBDGioiTinh.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\srptBDLoaiCV.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\srptBDLoaiCV.Designer.cs">
+      <DependentUpon>srptBDLoaiCV.cs</DependentUpon>
+    </Compile>
     <Compile Include="NhanSu\srptToKhaiBaoHiemXaHoi.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -890,6 +926,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="NhanSu\rptBCXepLoaiKhenThuongThang.resx">
       <DependentUpon>rptBCXepLoaiKhenThuongThang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\rptBieuDoChiaTheoDiaLy.resx">
+      <DependentUpon>rptBieuDoChiaTheoDiaLy.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\rptBieuDoPhanLoai.resx">
+      <DependentUpon>rptBieuDoPhanLoai.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NhanSu\rptDSXNgioquetthetheongay.resx">
       <DependentUpon>rptDSXNgioquetthetheongay.cs</DependentUpon>
@@ -1124,6 +1166,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="NhanSu\rptToKhaiBHXH.resx">
       <DependentUpon>rptToKhaiBHXH.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\srptBDCNTheoHuyen.resx">
+      <DependentUpon>srptBDCNTheoHuyen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\srptBDIDD.resx">
+      <DependentUpon>srptBDIDD.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\srptBDGioiTinh.resx">
+      <DependentUpon>srptBDGioiTinh.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\srptBDLoaiCV.resx">
+      <DependentUpon>srptBDLoaiCV.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NhanSu\srptToKhaiBaoHiemXaHoi.resx">
       <DependentUpon>srptToKhaiBaoHiemXaHoi.cs</DependentUpon>

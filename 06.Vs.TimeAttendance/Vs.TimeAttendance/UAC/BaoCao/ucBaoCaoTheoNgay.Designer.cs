@@ -317,7 +317,7 @@
             new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Danh sách nhân viên vạch thẻ lỗi ngày", true, "rdo_DSNVLoiTheNgay"),
             new DevExpress.XtraEditors.Controls.RadioGroupItem("rdo_BieuMauDangKyLamThem", "Biểu mẫu đăng ký làm thêm giờ", true, "rdo_BieuMauDangKyLamThem"),
             new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Danh sách nhân viên tăng ca ngày", true, "rdo_DanhSachNVTangCaNgay"),
-            new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Danh sách nhân viên nghỉ ngày", true, "rdo_DanhSachNhanVienNghiNgay")});
+            new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Báo cáo nhân sự ngày", true, "rdo_BaoCaoNhanSuNgay")});
             this.tablePanel1.SetRow(this.rdo_ChonBaoCao, 4);
             this.tablePanel1.SetRowSpan(this.rdo_ChonBaoCao, 7);
             this.rdo_ChonBaoCao.Size = new System.Drawing.Size(445, 246);

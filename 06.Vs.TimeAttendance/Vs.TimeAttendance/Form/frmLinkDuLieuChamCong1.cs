@@ -1,4 +1,6 @@
-﻿using DevExpress.Utils;
+﻿using DevExpress.DataAccess.Excel;
+using DevExpress.Spreadsheet;
+using DevExpress.Utils;
 using DevExpress.XtraBars.Docking2010;
 using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Repository;
@@ -6,10 +8,13 @@ using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraLayout;
 using Microsoft.ApplicationBlocks.Data;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Data.OleDb;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace Vs.TimeAttendance
@@ -100,6 +105,7 @@ namespace Vs.TimeAttendance
         private void windowsUIButton_ButtonClick(object sender, DevExpress.XtraBars.Docking2010.ButtonEventArgs e)
         {
             WindowsUIButton btn = e.Button as WindowsUIButton;
+            if (btn == null) return;
             XtraUserControl ctl = new XtraUserControl();
             switch (btn.Tag.ToString())
             {
@@ -141,7 +147,7 @@ namespace Vs.TimeAttendance
                         conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
                         conn.Open();
                         string sPS = "spDeleteDLChamCongNgay";
-                        if(Commons.Modules.chamCongK == true) sPS = "spDeleteDLChamCongNgay_K";
+                        if (Commons.Modules.chamCongK == true) sPS = "spDeleteDLChamCongNgay_K";
                         System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand(sPS, conn);
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("@UName", Commons.Modules.UserName);
@@ -459,6 +465,135 @@ namespace Vs.TimeAttendance
                         }
                         break;
                     }
+                case "DM":
+                    {
+
+                        Int64 iIdCN = -1;
+                        //kiem tra du lieu link da co chua
+                        if (KiemDL())
+                        {
+                            if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msg_KiemTraDuLieuLink"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) return;
+                        }
+
+                        if (NONN_TheoNhanVienCheckEdit.Checked)
+                        {
+                            iIdCN = Convert.ToInt64(grvDSCN.GetFocusedRowCellValue("ID_CN").ToString());
+                        }
+
+                        tbDLQT.Columns.Add(new DataColumn("MS_THE_CC", typeof(string)));
+                        tbDLQT.Columns.Add(new DataColumn("NGAY", typeof(DateTime)));
+                        //load excel
+                        string sPath = "";
+                        sPath = Commons.Modules.ObjSystems.OpenFiles("All Excel Files (*.xls;*.xlsx)|*.xls;*.xlsx|" + "All Files (*.*)|*.*");
+                        string sBTNgay = "sBTNgay" + Commons.Modules.iIDUser;
+
+                        if (sPath == "") return;
+                        try
+                        {
+
+                            //Lấy đường dẫn
+                            var source = new ExcelDataSource();
+                            source.FileName = sPath;
+
+                            //Lấy worksheet
+                            Workbook workbook = new Workbook();
+                            string ext = System.IO.Path.GetExtension(sPath);
+                            if (ext.ToLower() == ".xlsx")
+                                workbook.LoadDocument(sPath, DevExpress.Spreadsheet.DocumentFormat.Xlsx);
+                            else
+                                workbook.LoadDocument(sPath, DevExpress.Spreadsheet.DocumentFormat.Xls);
+                            List<string> wSheet = new List<string>();
+                            for (int i = 0; i < workbook.Worksheets.Count; i++)
+                            {
+                                wSheet.Add(workbook.Worksheets[i].Name.ToString());
+                            }
+                            //Load worksheet
+                            XtraInputBoxArgs args = new XtraInputBoxArgs();
+                            // set required Input Box options
+                            args.Caption = "Chọn sheet cần nhập dữ liệu";
+                            args.Prompt = "Chọn sheet cần nhập dữ liệu";
+                            args.DefaultButtonIndex = 0;
+
+                            // initialize a DateEdit editor with custom settings
+                            ComboBoxEdit editor = new ComboBoxEdit();
+                            editor.Properties.Items.AddRange(wSheet);
+                            editor.EditValue = wSheet[0].ToString();
+
+                            args.Editor = editor;
+                            // a default DateEdit value
+                            args.DefaultResponse = wSheet[0].ToString();
+                            // display an Input Box with the custom editor
+                            var result = XtraInputBox.Show(args);
+                            if (result == null || result.ToString() == "") return;
+
+                            var worksheetSettings = new ExcelWorksheetSettings(result.ToString());
+                            source.SourceOptions = new ExcelSourceOptions(worksheetSettings);
+                            source.Fill();
+
+
+                            DataTable dt = new DataTable();
+                            dt = new DataTable();
+                            dt = ToDataTable(source);
+                            //dt.AsEnumerable().Where(x => x["NGAY"].ToString() == "" + dtNgayChamCong.EditValue + "").CopyToDataTable();
+                            try
+                            {
+                                dt = dt.AsEnumerable().Where(x => x["NGAY"].Equals(dtNgayChamCong.EditValue)).CopyToDataTable();
+                            }
+                            catch { dt = dt.Clone(); }
+                            Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBTNgay, dt, "");
+                            tbDLQT.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spUpdatetbDLQT", sBTNgay, Convert.ToInt32((dt.Columns.Count - 2) / 2)));
+                        }
+                        catch (Exception ex)
+                        {
+                            XtraMessageBox.Show(ex.Message);
+                            bLinkOK = false;
+                            Commons.Modules.ObjSystems.XoaTable(sBTNgay);
+                            return;
+                        }
+
+                        System.Data.SqlClient.SqlConnection conn;
+                        conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                        conn.Open();
+
+                        System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("usp_InsertDLQT", conn);
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@tableDLQT", tbDLQT);
+                        cmd.Parameters.AddWithValue("@UName", Commons.Modules.UserName);
+                        cmd.Parameters.AddWithValue("@NNgu", Commons.Modules.TypeLanguage);
+                        cmd.Parameters.AddWithValue("@DVi", cbDonVi.EditValue);
+                        cmd.Parameters.AddWithValue("@XN", cbXiNghiep.EditValue);
+                        cmd.Parameters.AddWithValue("@TO", cbTo.EditValue);
+                        cmd.Parameters.AddWithValue("@ID_CN", iIdCN);
+                        cmd.Parameters.AddWithValue("@Ngay", dtNgayChamCong.DateTime);
+                        cmd.ExecuteNonQuery();
+
+                        if (KiemQuetTheLoi())
+                        {
+                            if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msg_QuetTheLoi"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                            {
+                                Commons.Modules.bolLinkCC = true;
+                                Commons.Modules.dLinkCC = dtNgayChamCong.DateTime;
+                                frmVachTheLoi frm = new frmVachTheLoi();
+                                frm.ShowDialog();
+
+                                Commons.Modules.bolLinkCC = false;
+                            }
+                        }
+
+                        LoadLuoiNgay(dtNgayChamCong.DateTime);
+                        grvDSCN_FocusedRowChanged(null, null);
+                        if (KiemDL())
+                        {
+                            bLinkOK = true;
+                        }
+                        else
+                        {
+                            XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msg_KhongCoDuLieuLink"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            bLinkOK = false;
+                        }
+                       
+                        break;
+                    }
                 //case 2:
                 //    {
                 //        //load access
@@ -662,7 +797,6 @@ namespace Vs.TimeAttendance
                 string[] items = r.Split(delimiter.ToCharArray());
                 dt.Rows.Add(items[0], items[1]);
             }
-
         }
 
         #region Cac Ham kiem tra
@@ -1045,6 +1179,117 @@ namespace Vs.TimeAttendance
             catch (Exception ex)
             {
                 XtraMessageBox.Show(ex.Message.ToString());
+            }
+            grvDSCN_FocusedRowChanged(null, null);
+        }
+        public DataTable ToDataTable(ExcelDataSource excelDataSource)
+        {
+            DevExpress.DataAccess.Native.Excel.DataView dv_temp = ((IListSource)excelDataSource).GetList() as DevExpress.DataAccess.Native.Excel.DataView;
+
+            excelDataSource.SourceOptions = new CsvSourceOptions() { CellRange = "A3:" + CharacterIncrement(dv_temp.Columns.Count - 1) + "" + dv_temp.Count + "" };
+            excelDataSource.SourceOptions.SkipEmptyRows = false;
+            excelDataSource.SourceOptions.UseFirstRowAsHeader = true;
+            excelDataSource.Fill();
+            DevExpress.DataAccess.Native.Excel.DataView dv = ((IListSource)excelDataSource).GetList() as DevExpress.DataAccess.Native.Excel.DataView;
+            for (int i = 0; i < dv.Count; i++)
+            {
+                DevExpress.DataAccess.Native.Excel.ViewRow row = dv[i] as DevExpress.DataAccess.Native.Excel.ViewRow;
+                foreach (DevExpress.DataAccess.Native.Excel.ViewColumn col in dv.Columns)
+                {
+                    object val = col.GetValue(row);
+                }
+            }
+
+            IList list = ((IListSource)excelDataSource).GetList();
+            DevExpress.DataAccess.Native.Excel.DataView dataView = (DevExpress.DataAccess.Native.Excel.DataView)list;
+            List<PropertyDescriptor> props = dataView.Columns.ToList<PropertyDescriptor>();
+            DataTable table = new DataTable();
+            int cotGio = 6;
+            int soCot = 1; // số cột giờ vào giờ ra
+            for (int i = 0; i < props.Count; i++)
+            {
+                PropertyDescriptor prop = props[i];
+                string sTenCot = "";
+                switch (i)
+                {
+                    case 0:
+                        {
+                            sTenCot = "MS_CN";
+                            table.Columns.Add(sTenCot.Trim(), prop.PropertyType);
+                            break;
+                        }
+                    case 4:
+                        {
+                            sTenCot = "NGAY";
+                            table.Columns.Add(sTenCot.Trim(), prop.PropertyType);
+                            break;
+                        }
+                    default:
+                        {
+                            if (cotGio == i)
+                            {
+                                sTenCot = "GV_" + soCot + "";
+                                table.Columns.Add(sTenCot.Trim(), typeof(DateTime));
+                                cotGio++;
+                                i++;
+                                sTenCot = "GR_" + soCot + "";
+                                table.Columns.Add(sTenCot.Trim(), typeof(DateTime));
+                                soCot++;
+                                cotGio++;
+                            }
+                            break;
+                        }
+                }
+            }
+            object[] values = new object[props.Count - 4];
+            int sCot = 0;
+            foreach (DevExpress.DataAccess.Native.Excel.ViewRow item in list)
+            {
+                for (int i = 0; i < values.Length + 4; i++)
+                {
+                    if (props[i] != props[1] && props[i] != props[2] && props[i] != props[3] && props[i] != props[5])
+                    {
+                        if(props[i] != props[0] && props[i] != props[4])
+                        {
+                            values[sCot] = dtNgayChamCong.Text + " " + (props[i].GetValue(item) == "" ? DateTime.MinValue.TimeOfDay : Convert.ToDateTime(props[i].GetValue(item)).TimeOfDay);
+                        }
+                        else
+                        {
+                            values[sCot] = props[i].GetValue(item);
+                        }
+                        sCot++;
+                    }
+                }
+                table.Rows.Add(values);
+                sCot = 0;
+            }
+            return table;
+        }
+        static string CharacterIncrement(int colCount)
+        {
+            int TempCount = 0;
+            string returnCharCount = string.Empty;
+
+            if (colCount <= 25)
+            {
+                TempCount = colCount;
+                char CharCount = Convert.ToChar((Convert.ToInt32('A') + TempCount));
+                returnCharCount += CharCount;
+                return returnCharCount;
+            }
+            else
+            {
+                var rev = 0;
+
+                while (colCount >= 26)
+                {
+                    colCount = colCount - 26;
+                    rev++;
+                }
+
+                returnCharCount += CharacterIncrement(rev - 1);
+                returnCharCount += CharacterIncrement(colCount);
+                return returnCharCount;
             }
         }
     }

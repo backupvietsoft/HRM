@@ -53,7 +53,7 @@ namespace VietSoftHRM
         }
         private void Txt_pass_Validated(object sender, EventArgs e)
         {
-            if(string.IsNullOrEmpty(txt_pass.Text))
+            if (string.IsNullOrEmpty(txt_pass.Text))
             {
                 txt_pass.Text = "Password";
             }
@@ -95,18 +95,16 @@ namespace VietSoftHRM
             {
                 SaveLogin();
                 SaveDatabase();
+                string strSQL = "SELECT ISNULL(USER_KHACH,0) USER_KHACH FROM dbo.USERS WHERE [USER_NAME] = '" + txt_user.Text.Trim() + "'";
                 try
                 {
-                    string strSQL = "SELECT ISNULL(USER_KHACH,0) USER_KHACH FROM dbo.USERS WHERE [USER_NAME] = '" + txt_user.Text.Trim() + "'";
+
                     if (Convert.ToBoolean(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, strSQL)) == true)
                     {
                         Commons.Modules.chamCongK = true;
                     }
                 }
-                catch
-                {
-                }
-             
+                catch { }
                 //add user
                 this.Hide();
                 frmMain form2 = new frmMain();
@@ -118,24 +116,24 @@ namespace VietSoftHRM
         {
             string sSql;
             //kiểm tra user đã có hay chưa
-            sSql = "SELECT COUNT(*) FROM dbo.USERS WHERE USER_NAME = '"+txt_user.EditValue.ToString().Trim()+"'";
-            if(Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr,CommandType.Text,sSql)) == 0)
+            sSql = "SELECT COUNT(*) FROM dbo.USERS WHERE USER_NAME = '" + txt_user.EditValue.ToString().Trim() + "'";
+            if (Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, sSql)) == 0)
             {
-                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgTaiKhoanChuaDangKy"),  Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgTaiKhoanChuaDangKy"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
             //kiểm tra mật khẩu có đúng hay không
             sSql = "SELECT PASSWORD FROM dbo.USERS WHERE USER_NAME = '" + txt_user.EditValue.ToString().Trim() + "'";
-            if (Commons.Modules.ObjSystems.Decrypt(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, sSql).ToString(), true).ToString() != txt_pass.EditValue.ToString().Trim()) 
+            if (Commons.Modules.ObjSystems.Decrypt(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, sSql).ToString(), true).ToString() != txt_pass.EditValue.ToString().Trim())
             {
-                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgsaiPassword"),  Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgsaiPassword"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
             //kiểm tra tài khoảng có được active hay chưa
-            sSql = "SELECT ACTIVE FROM dbo.USERS WHERE USER_NAME ='"+ txt_user.EditValue.ToString().Trim() + "'";
+            sSql = "SELECT ACTIVE FROM dbo.USERS WHERE USER_NAME ='" + txt_user.EditValue.ToString().Trim() + "'";
             if (Convert.ToBoolean(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, sSql)) != true)
             {
-                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgTaiKhoanChuaKichHoat"),  Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgTaiKhoanChuaKichHoat"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
             try
@@ -251,7 +249,7 @@ namespace VietSoftHRM
         }
         private void frmLogin_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.KeyCode == Keys.Enter)
+            if (e.KeyCode == Keys.Enter)
             {
                 btn_login_Click(null, null);
             }
@@ -268,7 +266,7 @@ namespace VietSoftHRM
         {
             try
             {
-                string strSQL = "USE "+cbo_database.Text+" DELETE dbo.LOGIN WHERE USER_LOGIN = '" + txt_user.Text + "'";
+                string strSQL = "USE " + cbo_database.Text + " DELETE dbo.LOGIN WHERE USER_LOGIN = '" + txt_user.Text + "'";
                 SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, strSQL);
                 MessageBox.Show("Xoa User Thanh Cong");
             }
@@ -276,7 +274,7 @@ namespace VietSoftHRM
             {
                 MessageBox.Show("Khong Xoa Duoc");
             }
-            
+
         }
     }
 }

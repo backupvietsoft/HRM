@@ -2,30 +2,26 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using Microsoft.ApplicationBlocks.Data;
 using DevExpress.XtraBars.Docking2010;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraEditors.Repository;
-using System.Xml.Linq;
 using DevExpress.XtraEditors.Controls;
-using DevExpress.XtraEditors.Mask;
 using DevExpress.XtraLayout;
 using Vs.Report;
 using System.Globalization;
 using DevExpress.DataAccess.Excel;
-using DevExpress.ClipboardSource.SpreadsheetML;
 using System.Collections;
+using DevExpress.Spreadsheet;
 
 namespace Vs.TimeAttendance
 {
     public partial class ucDangKiLamThem : DevExpress.XtraEditors.XtraUserControl
     {
+        private int vitriLoi = -1;
         private static bool isAdd = false;
         public static ucDangKiLamThem _instance;
         public static ucDangKiLamThem Instance
@@ -58,9 +54,11 @@ namespace Vs.TimeAttendance
         private void ucDangKiLamThem_Load(object sender, EventArgs e)
         {
             Commons.Modules.sLoad = "0Load";
+
             repositoryItemTimeEdit1.TimeEditStyle = TimeEditStyle.TouchUI;
             repositoryItemTimeEdit1.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.DateTimeAdvancingCaret;
             repositoryItemTimeEdit1.Mask.EditMask = "HH:mm";
+
             repositoryItemTimeEdit1.NullText = "00:00";
             repositoryItemTimeEdit1.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             repositoryItemTimeEdit1.DisplayFormat.FormatString = "HH:mm";
@@ -407,9 +405,20 @@ namespace Vs.TimeAttendance
                             DataView dv = dt.DefaultView;
 
                             DataTable dt1 = new DataTable();
-                            dt1 = dv.ToTable(false, "MS_CN", "ID_NHOM", "TEN_NHOM", "CA", "GIO_BD", "GIO_KT");
+                            dt1 = dv.ToTable(false, "MS_CN", "HO_TEN", "TEN_NHOM", "CA", "GIO_BD", "GIO_KT");
+                            dt1.Columns["MS_CN"].ColumnName = "MSCN";
+                            dt1.Columns["HO_TEN"].ColumnName = "Họ và tên";
+                            dt1.Columns["TEN_NHOM"].ColumnName = "Tên nhóm";
+                            dt1.Columns["CA"].ColumnName = "Ca";
+                            dt1.Columns["GIO_BD"].ColumnName = "Giờ bắt đầu";
+                            dt1.Columns["GIO_KT"].ColumnName = "Giờ kết thúc";
                             Microsoft.Office.Interop.Excel.Range Ranges1 = excelWorkSheet.Range[excelWorkSheet.Cells[1, 1], excelWorkSheet.Cells[dt1.Rows.Count + 1, dt1.Columns.Count]];
+                            Ranges1.Range["A1:F1"].Font.Bold = true;
+                            Ranges1.Range["A1:F1"].HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                            Ranges1.Range["A1:F1"].Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+
                             Ranges1.ColumnWidth = 20;
+                            Ranges1.Range["B1"].ColumnWidth = 30;
                             MExportExcel(dt1, excelWorkSheet, Ranges1);
 
                             excelApplication.Visible = true;
@@ -424,6 +433,7 @@ namespace Vs.TimeAttendance
                         dt_old = (DataTable)grdCongNhan.DataSource;
                         string sBT_Old = "sBTCongNhanOld" + Commons.Modules.iIDUser;
                         string sBT_import = "sBTCongNhanImport" + Commons.Modules.iIDUser;
+                        string SBT_grvLamThem = "SBT_grvLamThem" + Commons.Modules.iIDUser;
                         string sPath = "";
                         sPath = Commons.Modules.ObjSystems.OpenFiles("All Excel Files (*.xls;*.xlsx)|*.xls;*.xlsx|" + "All Files (*.*)|*.*");
 
@@ -431,44 +441,82 @@ namespace Vs.TimeAttendance
                         if (sPath == "") return;
                         try
                         {
-
+                            //Lấy đường dẫn
                             var source = new ExcelDataSource();
                             source.FileName = sPath;
-                            var worksheetSettings = new ExcelWorksheetSettings("Sheet1");
+
+                            //Lấy worksheet
+                            Workbook workbook = new Workbook();
+                            string ext = System.IO.Path.GetExtension(sPath);
+                            if (ext.ToLower() == ".xlsx")
+                                workbook.LoadDocument(sPath, DevExpress.Spreadsheet.DocumentFormat.Xlsx);
+                            else
+                                workbook.LoadDocument(sPath, DevExpress.Spreadsheet.DocumentFormat.Xls);
+                            List<string> wSheet = new List<string>();
+                            for (int i = 0; i < workbook.Worksheets.Count; i++)
+                            {
+                                wSheet.Add(workbook.Worksheets[i].Name.ToString());
+                            }
+                            //Load worksheet
+                            XtraInputBoxArgs args = new XtraInputBoxArgs();
+                            // set required Input Box options
+                            args.Caption = "Chọn sheet cần nhập dữ liệu";
+                            args.Prompt = "Chọn sheet cần nhập dữ liệu";
+                            args.DefaultButtonIndex = 0;
+
+                            // initialize a DateEdit editor with custom settings
+                            ComboBoxEdit editor = new ComboBoxEdit();
+                            editor.Properties.Items.AddRange(wSheet);
+                            editor.EditValue = wSheet[0].ToString();
+
+                            args.Editor = editor;
+                            // a default DateEdit value
+                            args.DefaultResponse = wSheet[0].ToString();
+                            // display an Input Box with the custom editor
+                            var result = XtraInputBox.Show(args);
+                            if (result == null || result.ToString() == "") return;
+
+
+                            var worksheetSettings = new ExcelWorksheetSettings(result.ToString());
                             source.SourceOptions = new ExcelSourceOptions(worksheetSettings);
                             source.Fill();
                             dt = new DataTable();
                             dt = ToDataTable(source);
-
+                            if (dt == null) return;
                             Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBT_Old, (DataTable)grdCongNhan.DataSource, "");
                             Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBT_import, dt, "");
+                            Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, SBT_grvLamThem, (DataTable)grdLamThem.DataSource, "");
 
                             DateTime dNgay;
                             dNgay = DateTime.ParseExact(cboNgay.Text, "dd/MM/yyyy", cultures);
+
+                            System.Data.SqlClient.SqlConnection conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                            conn.Open();
+
+                            System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spImportDKLT", conn);
+
+                            cmd.Parameters.Add("@sBT_Old", SqlDbType.NVarChar, 50).Value = sBT_Old;
+                            cmd.Parameters.Add("@sBT_Import", SqlDbType.NVarChar, 50).Value = sBT_import;
+                            cmd.Parameters.Add("@sBT_grvLamThem", SqlDbType.NVarChar, 50).Value = SBT_grvLamThem;
+                            cmd.Parameters.Add("@Ngay", SqlDbType.DateTime).Value = dNgay;
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+
+                            DataSet ds = new DataSet();
+                            adp.Fill(ds);
                             DataTable dt_temp = new DataTable();
-                            dt_temp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spImportDKLT", sBT_Old, sBT_import));
+                            dt_temp = ds.Tables[0].Copy();
+
+                            DataTable dt_temp2 = new DataTable();
+                            dt_temp2 = ds.Tables[1].Copy();
+                            //dt_temp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spImportDKLT", sBT_Old, sBT_import, SBT_grvLamThem));
                             grdCongNhan.DataSource = dt_temp;
-                            DataTable dtTemp2 = new DataTable();
-                            dtTemp2 = dt_temp;
+                            //DataTable dtTemp2 = new DataTable();
+                            //dtTemp2 = dt_temp.Copy();
+                            grdLamThem.DataSource = dt_temp2;
 
-                            decimal idCongNhan = -1;
 
-                            grdLamThem.DataSource = null;
-                            if (grvCongNhan.FocusedRowHandle >= 0)
-                            {
-                                decimal.TryParse(grvCongNhan.GetFocusedRowCellValue("ID_CN").ToString(), out idCongNhan);
-                            }
-                            dtTemp2.Columns["COM_CA"].ReadOnly = false;
-                            Commons.Modules.ObjSystems.MLoadXtraGrid(grdLamThem, grvLamThem, dtTemp2, false, false, false, false, true, this.Name);
-
-                            DataTable dID_NHOM = new DataTable();
-                            dID_NHOM.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetNhomCC", cboNgay.EditValue, Commons.Modules.UserName, Commons.Modules.TypeLanguage));
-                            Commons.Modules.ObjSystems.AddCombXtra("ID_NHOM", "TEN_NHOM", grvLamThem, dID_NHOM, false, "ID_NHOM", "NHOM_CHAM_CONG");
-
-                            grvLamThem.OptionsBehavior.Editable = true;
-
-                            FormatGrvLamThem();
-                            //grvCongNhan_FocusedRowChanged(null, null);
+                            grvCongNhan_FocusedRowChanged(null, null);
 
                             //ColName = cboCotLayDL.EditValue.ToString();
                             //dtemp.Columns.Add("XOA", System.Type.GetType("System.Boolean"));
@@ -1089,7 +1137,11 @@ namespace Vs.TimeAttendance
         }
         private void grvLamThem_InitNewRow(object sender, InitNewRowEventArgs e)
         {
-            try { grvLamThem.SetFocusedRowCellValue("COM_CA", 0); } catch { }
+            try
+            {
+                grvLamThem.SetFocusedRowCellValue("COM_CA", 0);
+            }
+            catch { }
         }
 
         private void grvLamThem_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
@@ -1135,20 +1187,73 @@ namespace Vs.TimeAttendance
             IList list = ((IListSource)excelDataSource).GetList();
             DevExpress.DataAccess.Native.Excel.DataView dataView = (DevExpress.DataAccess.Native.Excel.DataView)list;
             List<PropertyDescriptor> props = dataView.Columns.ToList<PropertyDescriptor>();
+
             DataTable table = new DataTable();
             for (int i = 0; i < props.Count; i++)
             {
                 PropertyDescriptor prop = props[i];
-                table.Columns.Add(prop.Name.Trim(), prop.PropertyType);
+                string sTenCot = "";
+                switch (i)
+                {
+                    case 0:
+                        {
+                            sTenCot = "MS_CN";
+                            break;
+                        }
+                    case 1:
+                        {
+                            sTenCot = "HO_TEN";
+                            break;
+                        }
+                    case 2:
+                        {
+                            sTenCot = "TEN_NHOM";
+                            break;
+                        }
+                    case 3:
+                        {
+                            sTenCot = "CA";
+                            break;
+                        }
+                    case 4:
+                        {
+                            sTenCot = "GIO_BD";
+                            break;
+                        }
+                    case 5:
+                        {
+                            sTenCot = "GIO_KT";
+                            break;
+                        }
+                    default:
+                        {
+                            break;
+                        }
+                }
+                table.Columns.Add(sTenCot.Trim(), prop.PropertyType);
             }
             object[] values = new object[props.Count];
             foreach (DevExpress.DataAccess.Native.Excel.ViewRow item in list)
             {
+
                 for (int i = 0; i < values.Length; i++)
                 {
-                    if (props[i].Name == "GIO_BD" || props[i].Name == "GIO_KT")
+                    if (i == 4 || i == 5)
                     {
-                        values[i] = cboNgay.Text + " " + Convert.ToDateTime(props[i].GetValue(item)).TimeOfDay;
+                        try
+                        {
+                            if((props[i].GetValue(item) == null ? DateTime.MaxValue : Convert.ToDateTime(props[i].GetValue(item)))  == DateTime.MinValue)
+                            {
+                                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgCot") + " " + props[i].Name + " " + Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgCuaNhanVien") + " " + values[0] + "-" + values[1] + " " + Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgKhongChinhXac"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return null;
+                            }
+                            values[i] = cboNgay.Text + " " + Convert.ToDateTime(props[i].GetValue(item)).TimeOfDay;
+                        }
+                        catch (Exception ex)
+                        {
+                            XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgCot") + " " + props[i].Name + " " + Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgCuaNhanVien") + " " + values[0] + "-"+ values[1] + " " + Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgKhongChinhXac"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return null;
+                        }
                     }
                     else
                     {

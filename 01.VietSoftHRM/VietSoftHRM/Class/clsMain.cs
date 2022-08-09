@@ -42,7 +42,7 @@ namespace VietSoftHRM
                 Commons.Modules.iSoLeTT = 0;
                 Commons.Modules.iGio = 8;
                 Commons.Modules.iNNghi = 1;
-                Commons.Modules.iLamTronGio = 1;
+                Commons.Modules.iLamTronGio = 0;
                 Commons.Modules.sSoLeSL = Commons.Modules.ObjSystems.sDinhDangSoLe(Commons.Modules.iSoLeSL);
                 Commons.Modules.sSoLeDG = Commons.Modules.ObjSystems.sDinhDangSoLe(Commons.Modules.iSoLeDG);
                 Commons.Modules.sSoLeTT = Commons.Modules.ObjSystems.sDinhDangSoLe(Commons.Modules.iSoLeTT);

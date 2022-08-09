@@ -28,7 +28,11 @@ namespace Vs.Category
 
         private void frmEditPHUONG_XA_Load(object sender, EventArgs e)
         {
-            
+
+            if(Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString() != "DM")
+            {
+                ItemFor_KHOANG_CACH.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+            }
             LoadTHANH_PHO();
             bLoad = false;
             try
@@ -76,7 +80,7 @@ namespace Vs.Category
         {
             try
             {
-                string sSql = "SELECT T1.ID_PX, T1.ID_QUAN, T2.ID_TP, T1.TEN_PX, T1.TEN_PX_A, T1.TEN_PX_H, T1.MS_XA " +
+                string sSql = "SELECT T1.ID_PX, T1.ID_QUAN, T2.ID_TP, T1.TEN_PX, T1.TEN_PX_A, T1.TEN_PX_H, KHOANG_CACH, T1.MS_XA " +
                     "FROM PHUONG_XA T1 INNER JOIN QUAN T2 ON T1.ID_QUAN = T2.ID_QUAN " +
                     "WHERE T1.ID_PX =	" + Id.ToString();
                 DataTable dtTmp = new DataTable();
@@ -87,14 +91,13 @@ namespace Vs.Category
                 TEN_PX_HTextEdit.EditValue = dtTmp.Rows[0]["TEN_PX_H"].ToString();
                 MS_XATextEdit.EditValue = dtTmp.Rows[0]["MS_XA"].ToString();
                 MS = dtTmp.Rows[0]["MS_XA"].ToString();
-
                 ID_TPSearchLookUpEdit.EditValue = dtTmp.Rows[0]["ID_TP"];
                 LoadQuan(Int64.Parse(ID_TPSearchLookUpEdit.EditValue.ToString()));
                 ID_QUANSearchLookUpEdit.EditValue = dtTmp.Rows[0]["ID_QUAN"];
+                try { txtKhoangCach.Text = dtTmp.Rows[0]["KHOANG_CACH"].ToString(); } catch { }
             }
             catch (Exception EX)
             {
-
                 XtraMessageBox.Show(EX.Message.ToString());
             }
         }
@@ -141,7 +144,7 @@ namespace Vs.Category
                 TEN_PX_ATextEdit.EditValue = String.Empty;
                 TEN_PX_HTextEdit.EditValue = String.Empty;
                 MS_XATextEdit.EditValue = String.Empty;
-
+                txtKhoangCach.Text = string.Empty;
                 TEN_PXTextEdit.Focus();
             }
             catch { }
@@ -162,7 +165,7 @@ namespace Vs.Category
                             if (bKiemTrung()) return;
                             Commons.Modules.sId = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spUpdatePHUONG_XA", (AddEdit ? -1 : Id),
                                 MS_XATextEdit.EditValue, TEN_PXTextEdit.EditValue, TEN_PX_ATextEdit.EditValue,
-                                TEN_PX_HTextEdit.EditValue, ID_QUANSearchLookUpEdit.EditValue
+                                TEN_PX_HTextEdit.EditValue, ID_QUANSearchLookUpEdit.EditValue, txtKhoangCach.Text
                                 ).ToString();
                             if (AddEdit)
                             {

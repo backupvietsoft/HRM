@@ -25,14 +25,17 @@ namespace VietSoftHRM
         {
             try
             {
+
                 Application.Run(new frmLogin());
+                //Vs.Report.frmViewReport frm = new Vs.Report.frmViewReport();
+                //frm.rpt = new VS.Report.NhanSu.XtraReport1();
+                //frm.ShowDialog();
                 //Application.Run(new frmThongTinChung(1));
                 //Application.Run(new frmImportHinhCN(1));
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-
             }
         }
 

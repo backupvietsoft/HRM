@@ -136,6 +136,12 @@
     <Compile Include="frmHelp_View.designer.cs">
       <DependentUpon>frmHelp_View.cs</DependentUpon>
     </Compile>
+    <Compile Include="UAC\BaoCao\ucBaoCaoThongKeCongNhanBD.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UAC\BaoCao\ucBaoCaoThongKeCongNhanBD.designer.cs">
+      <DependentUpon>ucBaoCaoThongKeCongNhanBD.cs</DependentUpon>
+    </Compile>
     <Compile Include="UAC\BaoCao\ucBaoCaoSoYeuLyLich.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -556,6 +562,9 @@
       <DependentUpon>frmHelp_View.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="UAC\BaoCao\ucBaoCaoThongKeCongNhanBD.resx">
+      <DependentUpon>ucBaoCaoThongKeCongNhanBD.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UAC\BaoCao\ucBaoCaoSoYeuLyLich.resx">
       <DependentUpon>ucBaoCaoSoYeuLyLich.cs</DependentUpon>
     </EmbeddedResource>

@@ -71,6 +71,9 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
       <HintPath>..\..\01.VietSoftHRM\VietSoftHRM\bin\Debug\Microsoft.Office.Interop.Excel.dll</HintPath>
     </Reference>
+    <Reference Include="RtfPipe, Version=2.0.7677.4303, Culture=neutral, PublicKeyToken=5f6ab4ce530296d2, processorArchitecture=MSIL">
+      <HintPath>..\..\01.VietSoftHRM\packages\RtfPipe.2.0.7677.4303\lib\net45\RtfPipe.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -745,6 +748,12 @@
     <Compile Include="NhanSu\srptBDLoaiCV.Designer.cs">
       <DependentUpon>srptBDLoaiCV.cs</DependentUpon>
     </Compile>
+    <Compile Include="NhanSu\srptTest.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\srptTest.Designer.cs">
+      <DependentUpon>srptTest.cs</DependentUpon>
+    </Compile>
     <Compile Include="NhanSu\srptToKhaiBaoHiemXaHoi.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -1178,6 +1187,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="NhanSu\srptBDLoaiCV.resx">
       <DependentUpon>srptBDLoaiCV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\srptTest.resx">
+      <DependentUpon>srptTest.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NhanSu\srptToKhaiBaoHiemXaHoi.resx">
       <DependentUpon>srptToKhaiBaoHiemXaHoi.cs</DependentUpon>

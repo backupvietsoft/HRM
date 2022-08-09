@@ -121,6 +121,7 @@ F:\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.Recruit.csproj.Genera
 F:\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.Recruit.csproj.CoreCompileInputs.cache
 F:\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.Recruit.csproj.CopyComplete
 F:\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.Recruit.pdb
+F:\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\RtfPipe.dll
 F:\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\Vs.Recruit.dll.config
 F:\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\Vs.Recruit.dll
 F:\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.Recruit.dll.licenses

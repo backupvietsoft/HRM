@@ -193,7 +193,7 @@ namespace Vs.HRM
             LoadCboXiNghiep();
             LoadCboTo();
 
-            if (Commons.Modules.ObjSystems.KyHieuDV(Convert.ToInt64(LK_DON_VI.EditValue)).ToString() != "DM" && Commons.Modules.ObjSystems.KyHieuDV(Convert.ToInt64(LK_DON_VI.EditValue)).ToString() != "VS")
+            if (Commons.Modules.ObjSystems.KyHieuDV(Convert.ToInt64(LK_DON_VI.EditValue)).ToString() != "DM")
             {
                 rdo_ChonBaoCao.Properties.Items.RemoveAt(6);
             }
@@ -647,7 +647,7 @@ namespace Vs.HRM
                 Excel._Worksheet oSheet;
 
                 oXL = new Excel.Application();
-                oXL.Visible = true;
+                oXL.Visible = false;
 
                 oWB = (Excel._Workbook)(oXL.Workbooks.Add(Missing.Value));
                 oSheet = (Excel._Worksheet)oWB.ActiveSheet;
@@ -1212,7 +1212,7 @@ namespace Vs.HRM
                 Excel.Workbook oWB;
                 Excel.Worksheet oSheet;
                 oXL = new Excel.Application();
-                oXL.Visible = true;
+                oXL.Visible = false;
 
                 oWB = (Excel.Workbook)(oXL.Workbooks.Add(Missing.Value));
                 oSheet = (Excel.Worksheet)oWB.ActiveSheet;
@@ -1852,6 +1852,7 @@ namespace Vs.HRM
             return rng.get_AddressLocal(false, false, Excel.XlReferenceStyle.xlA1,
                    missing, missing);
         }
+
     }
 
 }

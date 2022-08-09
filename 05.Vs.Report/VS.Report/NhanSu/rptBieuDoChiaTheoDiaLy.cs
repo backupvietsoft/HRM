@@ -73,7 +73,6 @@ namespace Vs.Report
             xrChart1.Series.Clear();
             xrChart1.Titles.Clear();
             xrChart1.Parameters.Add(new XRControlParameter("TEN_QUAN", null, "DATA_PX.TEN_QUAN"));
-            //xrChart1.Titles.Add(new ChartTitle() { Text = series1.FilterCriteria.ToString(), Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0))) });
             // Create the first side-by-side bar series and add points to it.
             Series series1 = new Series("", ViewType.Bar);
             series1.DataSource = dt;
@@ -83,33 +82,38 @@ namespace Vs.Report
             series1.FilterString = "DATA_PX.TEN_QUAN = ?TEN_QUAN";
             // Set up a filter to show products from the specified category only. Use the created parameter's name in the filter string.
             series1.FilterCriteria = DevExpress.Data.Filtering.CriteriaOperator.Parse("DATA_PX.TEN_QUAN = ?TEN_QUAN");
-
-            //// Create the second side-by-side bar series and add points to it.
-            //Series series2 = new Series("Side-by-Side Bar Series 2", ViewType.Bar);
-            //series2.Points.Add(new SeriesPoint("A", 15));
-            //series2.Points.Add(new SeriesPoint("B", 18));
-            //series2.Points.Add(new SeriesPoint("C", 25));
-            //series2.Points.Add(new SeriesPoint("D", 33));
-            //DataRowView row = series1.Points[0].Tag as DataRowView;
-            //object a = row["TEN_QUAN"];
-
+            //xrChart1.Series[0].Label.TextPattern = "{A}: {V:F2}";
             // Add the series to the chart.
             xrChart1.Series.Add(series1);
-            
-            //xrChart1.Series.Add(series2);
+            ExpressionBinding expressionBinding = new ExpressionBinding("BeforePrint", "Text", "[DATA_PX].[TEN_QUAN]");
+            //xrTableCell8.ExpressionBindings.Add(expressionBinding);
+            //xrChart1.Titles.Add(new ChartTitle() { Text =  
+            //    , Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0))) });
 
             // Hide the legend (if necessary).
             xrChart1.Legend.Visibility = DevExpress.Utils.DefaultBoolean.False;
+            ((BarSeriesLabel)series1.Label).Position = BarSeriesLabelPosition.Top;
+            ((BarSeriesLabel)series1.Label).LineVisibility = DevExpress.Utils.DefaultBoolean.False;
+            ((BarSeriesLabel)series1.Label).Border.Visibility = DevExpress.Utils.DefaultBoolean.False;
+            ((BarSeriesLabel)series1.Label).Border.Color = Color.FromArgb(255,255,255);
+            ((BarSeriesLabel)series1.Label).TextColor= Color.FromArgb(0, 0, 0);
+            ((BarSeriesLabel)series1.Label).Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+
 
             // Rotate the diagram (if necessary).
             ((XYDiagram)xrChart1.Diagram).Rotated = true;
-
+            XYDiagram diagram = (XYDiagram)xrChart1.Diagram;
+            diagram.AxisY.Visibility = DevExpress.Utils.DefaultBoolean.False;
+            diagram.AxisX.Label.Font  = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            //diagram.AxisX.LabelPosition = AxisLabelPosition.Inside;
+            SideBySideBarSeriesView view = series1.View as SideBySideBarSeriesView;
+            view.BarWidth = 0.2;
+            view.Border.Visibility = DevExpress.Utils.DefaultBoolean.False;
             // Add a title to the chart (if necessary).
             ChartTitle chartTitle1 = new ChartTitle();
             //chartTitle1.Visibility = DevExpress.Utils.DefaultBoolean.True;\
             string s = series1.FilterCriteria.ToString();
             chartTitle1.Text = "123";
-
             // Add the chart to the form.
             //xrChart1.Dock = DockStyle.Fill;
             //this.Controls.Add(xrChart1);
@@ -120,6 +124,7 @@ namespace Vs.Report
         {
             Commons.Modules.sLoad = "0Load";
             xrSubreport2.ReportSource = new srptBDCNTheoHuyen(dt);
+
             loadchartQUAN(dt);
             loadcharTPX(dt1);
             Commons.Modules.sLoad = "";
@@ -136,6 +141,11 @@ namespace Vs.Report
             //        ((SideBySideBarSeriesView)series.View).StackedGroup = row["TEN_QUAN"];
             //    }
             //}
+        }
+
+        private void rptBieuDoChiaTheoDiaLy_AfterPrint(object sender, EventArgs e)
+        {
+            string s = (string) GetCurrentColumnValue("TEN_QUAN");
         }
     }
 }

@@ -3193,3 +3193,6 @@ F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.srptBDIDD.resources
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.srptBDGioiTinh.resources
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.srptBDCNTheoHuyen.resources
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptBieuDoChiaTheoDiaLy.resources
+F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\VS.Report.NhanSu.srptTest.resources
+F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\VS.Report.NhanSu.XtraReport1.resources
+F:\01.HRM\05.Vs.Report\Vs.Report\bin\Debug\RtfPipe.dll

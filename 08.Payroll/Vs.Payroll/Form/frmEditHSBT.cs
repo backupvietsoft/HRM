@@ -13,6 +13,9 @@ namespace Vs.Payroll
         static Int64 Id = -1;
         static Boolean AddEdit = true;  // true la add false la edit
         string hsbt = "";
+        string hsbt_A = "";
+        string hsbt_H = "";
+
 
         public frmEditHSBT(Int64 iId, Boolean bAddEdit)
         {
@@ -46,6 +49,8 @@ namespace Vs.Payroll
                 TEN_BAC_THO_ATextEdit.EditValue = dtTmp.Rows[0]["TEN_BAC_THO_A"];
                 TEN_BAC_THO_HTextEdit.EditValue = dtTmp.Rows[0]["TEN_BAC_THO_H"];
                 hsbt = dtTmp.Rows[0]["TEN_BAC_THO"].ToString();
+                hsbt_A = dtTmp.Rows[0]["TEN_BAC_THO_A"].ToString();
+                hsbt_H = dtTmp.Rows[0]["TEN_BAC_THO_H"].ToString();
                 HSBTTextEdit.EditValue = dtTmp.Rows[0]["HE_SO_BAC_THO"].ToString();
                 txtSTT.EditValue = dtTmp.Rows[0]["STT"].ToString();
             }
@@ -128,7 +133,7 @@ namespace Vs.Payroll
                     }
                 }
 
-                if (AddEdit || hsbt != TEN_BAC_THO_ATextEdit.EditValue.ToString())
+                if (AddEdit || hsbt_A != TEN_BAC_THO_ATextEdit.EditValue.ToString())
                 {
                     tenSql = "SELECT TEN_BAC_THO_A FROM HSBT WHERE TEN_BAC_THO_A = '" + TEN_BAC_THO_ATextEdit.EditValue + "'";
 
@@ -139,7 +144,7 @@ namespace Vs.Payroll
                     }
                 }
 
-                if (AddEdit || hsbt != TEN_BAC_THO_HTextEdit.EditValue.ToString())
+                if (AddEdit || hsbt_H != TEN_BAC_THO_HTextEdit.EditValue.ToString())
                 {
                     tenSql = "SELECT TEN_BAC_THO_H FROM HSBT WHERE TEN_BAC_THO_H = '" + TEN_BAC_THO_HTextEdit.EditValue + "'";
 

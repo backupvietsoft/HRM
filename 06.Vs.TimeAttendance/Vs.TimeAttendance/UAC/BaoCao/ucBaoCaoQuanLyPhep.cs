@@ -68,9 +68,13 @@ namespace Vs.TimeAttendance
                                                 TheoDoiPhepNamThucTe();
                                                 break;
                                             }
+                                        case "SB":
+                                            {
+                                                TheoDoiPhepNamThucTe_SB();
+                                                break;
+                                            }
                                         default:
-                                            //TheoDoiPhepNamThucTe();
-                                            TheoDoiPhepNamThucTe_SB();
+                                            TheoDoiPhepNamThucTe();
                                             break;
                                     }
                                 }
@@ -556,7 +560,7 @@ namespace Vs.TimeAttendance
             try
             {
 
-                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand(Commons.Modules.ObjSystems.returnSps(Commons.Modules.chamCongK, "spGetTheoDoiPhepNam"), conn);
+                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand(Commons.Modules.ObjSystems.returnSps(Commons.Modules.chamCongK, "spGetTheoDoiPhepNam_SB"), conn);
                 cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
                 cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
                 cmd.Parameters.Add("@Dvi", SqlDbType.Int).Value = LK_DON_VI.EditValue;
@@ -578,7 +582,7 @@ namespace Vs.TimeAttendance
                 Excel._Worksheet oSheet;
 
                 oXL = new Excel.Application();
-                oXL.Visible = true;
+                oXL.Visible = false;
 
                 oWB = (Excel._Workbook)(oXL.Workbooks.Add(Missing.Value));
                 oSheet = (Excel._Worksheet)oWB.ActiveSheet;
@@ -592,8 +596,8 @@ namespace Vs.TimeAttendance
 
                 string lastColumn = string.Empty;
                 //lastColumn = CharacterIncrement(dtBCGaiDoan.Columns.Count - 1);
-                lastColumn = "Z";
-                Range row2_TieuDe_BaoCao0 = oSheet.get_Range("A2", "Z2");
+                lastColumn = "Y";
+                Range row2_TieuDe_BaoCao0 = oSheet.get_Range("A2", "Y2");
                 row2_TieuDe_BaoCao0.Merge();
                 row2_TieuDe_BaoCao0.Font.Size = fontSizeTieuDe;
                 row2_TieuDe_BaoCao0.Font.Name = fontName;
@@ -721,21 +725,35 @@ namespace Vs.TimeAttendance
                 string[,] rowData = new string[dr.Length, dtBCPhep.Columns.Count];
 
                 int rowCnt = 0;
+                int rowCntY = 6; //Dùng để tính tổng cột Y
+                Excel.Range formatRange1;
                 foreach (DataRow row in dr)
                 {
                     for (col = 0; col < dtBCPhep.Columns.Count; col++)
                     {
                         rowData[rowCnt, col] = row[col].ToString();
                     }
-
+                    //formatRange1 = oSheet.get_Range("Y" + rowCntY.ToString());
+                    //formatRange1.Value2 = "X"+ rowCntY + "-W"+ rowCntY + "";
+                    //oSheet.get_Range("Y"+ rowCntY + "").Value2 = "=X"+ rowCntY + " - W"+ rowCntY + "";
+                    //rowCntY++;
                     rowCnt++;
                 }
+
+                
+
                 rowCnt = rowCnt + 4;
-                oSheet.get_Range("A6", "Z" + rowCnt.ToString()).Value2 = rowData;
-                oSheet.get_Range("A6", "Z" + rowCnt.ToString()).Font.Name = fontName;
-                oSheet.get_Range("A6", "Z" + rowCnt.ToString()).Font.Size = fontSizeNoiDung;
+                oSheet.get_Range("A6", "Y" + rowCnt.ToString()).Value2 = rowData;
+                oSheet.get_Range("A6", "Y" + rowCnt.ToString()).Font.Name = fontName;
+                oSheet.get_Range("A6", "Y" + rowCnt.ToString()).Font.Size = fontSizeNoiDung;
                 ////Kẻ khung toàn bộ
                 BorderAround(oSheet.get_Range("A4", "Y" + rowCnt.ToString()));
+
+                for (int row = 6; row <= rowCnt; row++)
+                {
+                    formatRange1 = oSheet.get_Range("Y" + row.ToString());
+                    formatRange1.Value = "=X" + row + "-W" + row + "";
+                }
 
                 Excel.Range formatRange;
                 formatRange = oSheet.get_Range("A6", "A" + rowCnt.ToString());
@@ -771,10 +789,9 @@ namespace Vs.TimeAttendance
                 }
 
                 formatRange = oSheet.get_Range("Y6", "Y" + rowCnt.ToString());
-                formatRange.NumberFormat = "#,##0";
+                formatRange.NumberFormat = "#,##0.0";
                 formatRange.TextToColumns(Type.Missing, Excel.XlTextParsingType.xlDelimited, Excel.XlTextQualifier.xlTextQualifierDoubleQuote);
-
-
+                oXL.Visible = true;
             }
             catch
             {

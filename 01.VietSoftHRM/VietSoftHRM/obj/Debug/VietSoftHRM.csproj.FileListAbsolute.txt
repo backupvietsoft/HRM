@@ -2769,3 +2769,4 @@ F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\ja\DevExpress.Diagram.v20.1.Core.
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\ru\DevExpress.Diagram.v20.1.Core.resources.dll
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Vs.Recruit.dll
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Vs.Recruit.dll.config
+F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\RtfPipe.dll

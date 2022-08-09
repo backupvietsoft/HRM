@@ -49,7 +49,6 @@ namespace Vs.TimeAttendance
                                                 break;
                                             }
                                         default:
-                                            //BangChamCongNgay_DM();
                                             DSVangDauGioTheoNgay();
                                             break;
                                     }

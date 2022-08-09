@@ -43,6 +43,7 @@
             this.windowsUIButton = new DevExpress.XtraBars.Docking2010.WindowsUIButtonPanel();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.Table = new DevExpress.Utils.Layout.TablePanel();
+            this.lblThayDoiCa = new DevExpress.XtraEditors.LabelControl();
             this.chkThayDoiCa = new DevExpress.XtraEditors.CheckEdit();
             this.NgayIn = new DevExpress.XtraEditors.DateEdit();
             this.lbNgayIn = new DevExpress.XtraEditors.LabelControl();
@@ -69,7 +70,6 @@
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.searchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.lblThayDoiCa = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Table)).BeginInit();
@@ -194,6 +194,17 @@
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F)});
             this.Table.Size = new System.Drawing.Size(975, 513);
             this.Table.TabIndex = 4;
+            // 
+            // lblThayDoiCa
+            // 
+            this.Table.SetColumn(this.lblThayDoiCa, 1);
+            this.lblThayDoiCa.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblThayDoiCa.Location = new System.Drawing.Point(31, 111);
+            this.lblThayDoiCa.Name = "lblThayDoiCa";
+            this.Table.SetRow(this.lblThayDoiCa, 3);
+            this.lblThayDoiCa.Size = new System.Drawing.Size(147, 30);
+            this.lblThayDoiCa.TabIndex = 32;
+            this.lblThayDoiCa.Text = "Thay đổi ca";
             // 
             // chkThayDoiCa
             // 
@@ -372,8 +383,8 @@
             new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Báo cáo số lần xác nhận công tháng", true, "rdo_BCSoLanXacNhanCongThang")});
             this.rdo_ChonBaoCao.Properties.ItemsLayout = DevExpress.XtraEditors.RadioGroupItemsLayout.Column;
             this.Table.SetRow(this.rdo_ChonBaoCao, 5);
-            this.Table.SetRowSpan(this.rdo_ChonBaoCao, 6);
-            this.rdo_ChonBaoCao.Size = new System.Drawing.Size(453, 208);
+            this.Table.SetRowSpan(this.rdo_ChonBaoCao, 7);
+            this.rdo_ChonBaoCao.Size = new System.Drawing.Size(453, 244);
             this.rdo_ChonBaoCao.TabIndex = 22;
             this.rdo_ChonBaoCao.SelectedIndexChanged += new System.EventHandler(this.rdo_ChonBaoCao_SelectedIndexChanged);
             // 
@@ -524,17 +535,6 @@
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsSelection.EnableAppearanceFocusedCell = false;
             this.gridView1.OptionsView.ShowGroupPanel = false;
-            // 
-            // lblThayDoiCa
-            // 
-            this.Table.SetColumn(this.lblThayDoiCa, 1);
-            this.lblThayDoiCa.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblThayDoiCa.Location = new System.Drawing.Point(31, 111);
-            this.lblThayDoiCa.Name = "lblThayDoiCa";
-            this.Table.SetRow(this.lblThayDoiCa, 3);
-            this.lblThayDoiCa.Size = new System.Drawing.Size(147, 30);
-            this.lblThayDoiCa.TabIndex = 32;
-            this.lblThayDoiCa.Text = "Thay đổi ca";
             // 
             // ucBaoCaoTongHopThang
             // 

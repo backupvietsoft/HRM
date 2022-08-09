@@ -61,7 +61,6 @@ namespace Vs.TimeAttendance
             LoadCboDonVi();
             LoadCboXiNghiep();
             LoadCboTo();
-
             if (Commons.Modules.ObjSystems.KyHieuDV(Convert.ToInt64(LK_DON_VI.EditValue)) == "SB")
             {
                 rdo_ChonBaoCao.Properties.Items.RemoveAt(4);
@@ -126,8 +125,12 @@ namespace Vs.TimeAttendance
                                                 BangChamCongThang_SB2();
                                                 break;
                                             }
+                                        case "DM":
+                                            {
+                                                BaoCaoTongHopThang_DM();
+                                                break;
+                                            }
                                         default:
-                                            //BaoCaoTongHopThang_DM();
                                             BangChamCongThang();
                                             break;
                                     }
@@ -720,7 +723,7 @@ namespace Vs.TimeAttendance
                 Excel._Worksheet oSheet;
 
                 oXL = new Excel.Application();
-                oXL.Visible = true;
+                oXL.Visible = false;
 
                 oWB = (Excel._Workbook)(oXL.Workbooks.Add(Missing.Value));
                 oSheet = (Excel._Worksheet)oWB.ActiveSheet;
@@ -1265,8 +1268,6 @@ namespace Vs.TimeAttendance
 
                 for (int i = 0; i < TEN_TO.Count(); i++)
                 {
-
-
                     dtBCThang = ds.Tables[0].Copy();
                     dtBCThang = dtBCThang.AsEnumerable().Where(r => r.Field<string>("TEN_TO") == TEN_TO[i]).CopyToDataTable().Copy();
                     DataRow[] dr = dtBCThang.Select();
@@ -1798,7 +1799,7 @@ namespace Vs.TimeAttendance
                 cmd.Parameters.Add("@TO", SqlDbType.Int).Value = LK_TO.EditValue;
                 cmd.Parameters.Add("@TNgay", SqlDbType.Date).Value = Convert.ToDateTime(lk_TuNgay.EditValue);
                 cmd.Parameters.Add("@DNgay", SqlDbType.Date).Value = Convert.ToDateTime(lk_DenNgay.EditValue);
-                cmd.Parameters.Add("@Loai", SqlDbType.Int).Value = rdo_DiTreVeSom.SelectedIndex;
+                //cmd.Parameters.Add("@Loai", SqlDbType.Int).Value = rdo_DiTreVeSom.SelectedIndex;
                 cmd.CommandType = CommandType.StoredProcedure;
                 System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
                 if (Convert.ToDateTime(lk_TuNgay.EditValue).Month != Convert.ToDateTime(lk_DenNgay.EditValue).Month)
@@ -2181,7 +2182,7 @@ namespace Vs.TimeAttendance
                 //row5_TieuDe_Format.Interior.Color = Color.Yellow;
 
                 ////Kẻ khung toàn bộ
-                formatRange = oSheet.get_Range("A4", lastColumn + rowCnt.ToString());
+                formatRange = oSheet.get_Range("A4", "BU" + rowCnt.ToString());
                 formatRange.Borders.Color = Color.Black;
                 //dữ liệu
                 formatRange = oSheet.get_Range("A7", lastColumn + rowCnt.ToString());
@@ -2840,7 +2841,10 @@ namespace Vs.TimeAttendance
                 Range row5_TieuDe_CODE = oSheet.get_Range("C5");
                 row5_TieuDe_CODE.Value2 = "CODE";
 
-                int col = 4;
+                Range row5_TieuDe_gioitinh = oSheet.get_Range("D5");
+                row5_TieuDe_gioitinh.Value2 = "Giới tính";
+
+                int col = 5;
                 while (iTNgay <= iDNgay)
                 {
                     oSheet.Cells[5, col] = iTNgay;
@@ -2934,7 +2938,7 @@ namespace Vs.TimeAttendance
                 //Commons.Modules.MExcel.ThemDong(oSheet, Microsoft.Office.Interop.Excel.XlInsertShiftDirection.xlShiftDown, 1, 7);
 
                 string CurentColumn = string.Empty;
-                int colBD = 4;
+                int colBD = 5;
                 int colKT = dtBCThang.Columns.Count;
                 //format
 

@@ -2632,8 +2632,6 @@ D:\01.SourceCode\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\ja\DevExpress.Snap.
 D:\01.SourceCode\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\ru\DevExpress.Snap.v20.1.Core.resources.dll
 D:\01.SourceCode\02.HRM\01.VietSoftHRM\VietSoftHRM\obj\Debug\VietSoftHRM.csproj.CoreCompileInputs.cache
 D:\01.SourceCode\02.HRM\01.VietSoftHRM\VietSoftHRM\obj\Debug\VietSoftHRM.csproj.CopyComplete
-D:\01.SourceCode\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Vs.Recruit.dll
-D:\01.SourceCode\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Vs.Recruit.dll.config
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\DevExpress.RichEdit.v20.1.Export.dll
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\de\DevExpress.Dashboard.v20.1.Core.resources.dll
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\es\DevExpress.Dashboard.v20.1.Core.resources.dll
@@ -2770,3 +2768,5 @@ F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\ru\DevExpress.Diagram.v20.1.Core.
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Vs.Recruit.dll
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Vs.Recruit.dll.config
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\RtfPipe.dll
+D:\01.SourceCode\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Vs.Recruit.dll
+D:\01.SourceCode\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Vs.Recruit.dll.config

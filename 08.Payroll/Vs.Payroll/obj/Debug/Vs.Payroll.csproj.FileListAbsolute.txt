@@ -2771,3 +2771,4 @@ F:\01.HRM\08.Payroll\Vs.Payroll\bin\Debug\es\DevExpress.Snap.v20.1.Core.resource
 F:\01.HRM\08.Payroll\Vs.Payroll\bin\Debug\ja\DevExpress.Snap.v20.1.Core.resources.dll
 F:\01.HRM\08.Payroll\Vs.Payroll\bin\Debug\ru\DevExpress.Snap.v20.1.Core.resources.dll
 F:\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.ucDKThoiGianKhongLamSP.resources
+D:\01.SourceCode\02.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.ucDKThoiGianKhongLamSP.resources

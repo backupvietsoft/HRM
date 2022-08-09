@@ -29,9 +29,9 @@ namespace Vs.Recruit
         /// </summary>
         private void InitializeComponent()
         {
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions3 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions1 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmChonUngVien));
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions4 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions2 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
             this.tablePanel1 = new DevExpress.Utils.Layout.TablePanel();
             this.dataLayoutControl1 = new DevExpress.XtraDataLayout.DataLayoutControl();
             this.grdChonUV = new DevExpress.XtraGrid.GridControl();
@@ -107,10 +107,10 @@ namespace Vs.Recruit
             // 
             // grdChonUV
             // 
-            this.grdChonUV.Location = new System.Drawing.Point(12, 68);
+            this.grdChonUV.Location = new System.Drawing.Point(12, 88);
             this.grdChonUV.MainView = this.grvChonUV;
             this.grdChonUV.Name = "grdChonUV";
-            this.grdChonUV.Size = new System.Drawing.Size(948, 395);
+            this.grdChonUV.Size = new System.Drawing.Size(948, 375);
             this.grdChonUV.TabIndex = 5;
             this.grdChonUV.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grvChonUV});
@@ -132,13 +132,13 @@ namespace Vs.Recruit
             // 
             // cboID_VTTD
             // 
-            this.cboID_VTTD.Location = new System.Drawing.Point(138, 12);
+            this.cboID_VTTD.Location = new System.Drawing.Point(201, 12);
             this.cboID_VTTD.Name = "cboID_VTTD";
             this.cboID_VTTD.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cboID_VTTD.Properties.NullText = "";
             this.cboID_VTTD.Properties.PopupView = this.searchLookUpEdit1View;
-            this.cboID_VTTD.Size = new System.Drawing.Size(345, 24);
+            this.cboID_VTTD.Size = new System.Drawing.Size(282, 34);
             this.cboID_VTTD.StyleController = this.dataLayoutControl1;
             this.cboID_VTTD.TabIndex = 1;
             this.cboID_VTTD.EditValueChanged += new System.EventHandler(this.cboID_VTTD_EditValueChanged);
@@ -152,36 +152,36 @@ namespace Vs.Recruit
             // 
             // cboID_NTD
             // 
-            this.cboID_NTD.Location = new System.Drawing.Point(613, 12);
+            this.cboID_NTD.Location = new System.Drawing.Point(676, 12);
             this.cboID_NTD.Name = "cboID_NTD";
             this.cboID_NTD.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cboID_NTD.Properties.NullText = "";
-            this.cboID_NTD.Size = new System.Drawing.Size(347, 24);
+            this.cboID_NTD.Size = new System.Drawing.Size(284, 34);
             this.cboID_NTD.StyleController = this.dataLayoutControl1;
             this.cboID_NTD.TabIndex = 2;
             this.cboID_NTD.EditValueChanged += new System.EventHandler(this.cboID_VTTD_EditValueChanged);
             // 
             // cboID_TD
             // 
-            this.cboID_TD.Location = new System.Drawing.Point(138, 40);
+            this.cboID_TD.Location = new System.Drawing.Point(201, 50);
             this.cboID_TD.Name = "cboID_TD";
             this.cboID_TD.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cboID_TD.Properties.NullText = "";
-            this.cboID_TD.Size = new System.Drawing.Size(345, 24);
+            this.cboID_TD.Size = new System.Drawing.Size(282, 34);
             this.cboID_TD.StyleController = this.dataLayoutControl1;
             this.cboID_TD.TabIndex = 3;
             this.cboID_TD.EditValueChanged += new System.EventHandler(this.cboID_VTTD_EditValueChanged);
             // 
             // cboID_KNLV
             // 
-            this.cboID_KNLV.Location = new System.Drawing.Point(613, 40);
+            this.cboID_KNLV.Location = new System.Drawing.Point(676, 50);
             this.cboID_KNLV.Name = "cboID_KNLV";
             this.cboID_KNLV.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cboID_KNLV.Properties.NullText = "";
-            this.cboID_KNLV.Size = new System.Drawing.Size(347, 24);
+            this.cboID_KNLV.Size = new System.Drawing.Size(284, 34);
             this.cboID_KNLV.StyleController = this.dataLayoutControl1;
             this.cboID_KNLV.TabIndex = 4;
             this.cboID_KNLV.EditValueChanged += new System.EventHandler(this.cboID_VTTD_EditValueChanged);
@@ -205,43 +205,43 @@ namespace Vs.Recruit
             this.lblID_VTTD.Control = this.cboID_VTTD;
             this.lblID_VTTD.Location = new System.Drawing.Point(0, 0);
             this.lblID_VTTD.Name = "lblID_VTTD";
-            this.lblID_VTTD.Size = new System.Drawing.Size(475, 28);
+            this.lblID_VTTD.Size = new System.Drawing.Size(475, 38);
             this.lblID_VTTD.Text = "Vị trí tuyển dụng";
-            this.lblID_VTTD.TextSize = new System.Drawing.Size(123, 17);
+            this.lblID_VTTD.TextSize = new System.Drawing.Size(186, 28);
             // 
             // lblID_NTD
             // 
             this.lblID_NTD.Control = this.cboID_NTD;
             this.lblID_NTD.Location = new System.Drawing.Point(475, 0);
             this.lblID_NTD.Name = "lblID_NTD";
-            this.lblID_NTD.Size = new System.Drawing.Size(477, 28);
+            this.lblID_NTD.Size = new System.Drawing.Size(477, 38);
             this.lblID_NTD.Text = "Nguồn tuyển dụng";
-            this.lblID_NTD.TextSize = new System.Drawing.Size(123, 17);
+            this.lblID_NTD.TextSize = new System.Drawing.Size(186, 28);
             // 
             // lblID_TD
             // 
             this.lblID_TD.Control = this.cboID_TD;
-            this.lblID_TD.Location = new System.Drawing.Point(0, 28);
+            this.lblID_TD.Location = new System.Drawing.Point(0, 38);
             this.lblID_TD.Name = "lblID_TD";
-            this.lblID_TD.Size = new System.Drawing.Size(475, 28);
+            this.lblID_TD.Size = new System.Drawing.Size(475, 38);
             this.lblID_TD.Text = "Trình độ";
-            this.lblID_TD.TextSize = new System.Drawing.Size(123, 17);
+            this.lblID_TD.TextSize = new System.Drawing.Size(186, 28);
             // 
             // lblID_KNLV
             // 
             this.lblID_KNLV.Control = this.cboID_KNLV;
-            this.lblID_KNLV.Location = new System.Drawing.Point(475, 28);
+            this.lblID_KNLV.Location = new System.Drawing.Point(475, 38);
             this.lblID_KNLV.Name = "lblID_KNLV";
-            this.lblID_KNLV.Size = new System.Drawing.Size(477, 28);
+            this.lblID_KNLV.Size = new System.Drawing.Size(477, 38);
             this.lblID_KNLV.Text = "Kinh nghiệm làm việc";
-            this.lblID_KNLV.TextSize = new System.Drawing.Size(123, 17);
+            this.lblID_KNLV.TextSize = new System.Drawing.Size(186, 28);
             // 
             // layoutControlItem5
             // 
             this.layoutControlItem5.Control = this.grdChonUV;
-            this.layoutControlItem5.Location = new System.Drawing.Point(0, 56);
+            this.layoutControlItem5.Location = new System.Drawing.Point(0, 76);
             this.layoutControlItem5.Name = "layoutControlItem5";
-            this.layoutControlItem5.Size = new System.Drawing.Size(952, 399);
+            this.layoutControlItem5.Size = new System.Drawing.Size(952, 379);
             this.layoutControlItem5.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem5.TextVisible = false;
             // 
@@ -262,11 +262,11 @@ namespace Vs.Recruit
             this.btnALL.AppearanceButton.Pressed.Options.UseFont = true;
             this.btnALL.AppearanceButton.Pressed.Options.UseImage = true;
             this.btnALL.AppearanceButton.Pressed.Options.UseTextOptions = true;
-            windowsUIButtonImageOptions3.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("windowsUIButtonImageOptions3.SvgImage")));
-            windowsUIButtonImageOptions4.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("windowsUIButtonImageOptions4.SvgImage")));
+            windowsUIButtonImageOptions1.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("windowsUIButtonImageOptions1.SvgImage")));
+            windowsUIButtonImageOptions2.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("windowsUIButtonImageOptions2.SvgImage")));
             this.btnALL.Buttons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] {
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions3, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "ghi", -1, false),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions4, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "khongghi", -1, false)});
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions1, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "ghi", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions2, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "khongghi", -1, false)});
             this.tablePanel1.SetColumn(this.btnALL, 0);
             this.tablePanel1.SetColumnSpan(this.btnALL, 3);
             this.btnALL.ContentAlignment = System.Drawing.ContentAlignment.MiddleRight;
@@ -289,7 +289,7 @@ namespace Vs.Recruit
             this.searchControl1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Repository.ClearButton(),
             new DevExpress.XtraEditors.Repository.SearchButton()});
-            this.searchControl1.Size = new System.Drawing.Size(208, 24);
+            this.searchControl1.Size = new System.Drawing.Size(208, 34);
             this.searchControl1.TabIndex = 0;
             // 
             // frmChonUngVien

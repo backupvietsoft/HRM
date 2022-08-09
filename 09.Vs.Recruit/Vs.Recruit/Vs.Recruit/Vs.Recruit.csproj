@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{EF26D657-B988-4B7A-BD04-E7A282A49D6C}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Library</OutputType>
     <RootNamespace>Vs.Recruit</RootNamespace>
     <AssemblyName>Vs.Recruit</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>

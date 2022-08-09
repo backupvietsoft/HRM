@@ -143,15 +143,15 @@ namespace VietSoftHRM
                     }
                 case "mnuPhongVan":
                     {
-                        ucPhongVan ns = new ucPhongVan(-1);
-                        ns.accorMenuleft = accorMenuleft;
-                        panel2.Controls.Clear();
-                        panel2.Controls.Add(ns);
-                        ns.Dock = DockStyle.Fill;
+                        //ucPhongVan ns = new ucPhongVan(-1);
+                        //ns.accorMenuleft = accorMenuleft;
+                        //panel2.Controls.Clear();
+                        //panel2.Controls.Add(ns);
+                        //ns.Dock = DockStyle.Fill;
                         break;
                     }
 
-                case "mnuTiepNhanUV":
+                case "mnuKeHoachPV":
                     {
                         ucTiepNhanUngVien ns = new ucTiepNhanUngVien();
                         ns.accorMenuleft = accorMenuleft;
@@ -224,18 +224,16 @@ namespace VietSoftHRM
                     }
                 case "mnuPhongVan":
                     {
-                        ucPhongVan ns = new ucPhongVan(-1);
-                        ns.accorMenuleft = accorMenuleft;
+                        ucPhongVan ns = new ucPhongVan();
                         panel2.Controls.Clear();
                         panel2.Controls.Add(ns);
                         ns.Dock = DockStyle.Fill;
                         break;
                     }
 
-                case "mnuTiepNhanUV":
+                case "mnuKeHoachPV":
                     {
-                        ucTiepNhanUngVien ns = new ucTiepNhanUngVien();
-                        ns.accorMenuleft = accorMenuleft;
+                        ucKeHoachPhongVan ns = new ucKeHoachPhongVan();
                         panel2.Controls.Clear();
                         panel2.Controls.Add(ns);
                         ns.Dock = DockStyle.Fill;

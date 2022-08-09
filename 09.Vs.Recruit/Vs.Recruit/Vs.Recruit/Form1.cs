@@ -18,11 +18,11 @@ namespace Vs.Recruit
         public Form1()
         {
             InitializeComponent();
-            TinhSoTuanCuaTHang();
-            //Commons.Modules.iUngVien = -1;
-            //ucQLUV uac = new ucQLUV();
-            //this.Controls.Add(uac);
-            //uac.Dock = DockStyle.Fill;
+            //TinhSoTuanCuaTHang();
+            Commons.Modules.iUngVien = -1;
+            ucYeuCauTuyenDung uac = new ucYeuCauTuyenDung();
+            this.Controls.Add(uac);
+            uac.Dock = DockStyle.Fill;
             //LoadAA();
         }
         private void LoadAA()
@@ -547,10 +547,8 @@ style='font-family:Times New Roman,serif'>&#272;T liên h&#7879;: 0228.6556.777
             {
                 //CultureInfo _culture = (CultureInfo)CultureInfo.CurrentCulture.Clone();
                 //CultureInfo _uiculture = (CultureInfo)CultureInfo.CurrentUICulture.Clone();
-
                 //_culture.DateTimeFormat.FirstDayOfWeek = DayOfWeek.Monday;
                 //_uiculture.DateTimeFormat.FirstDayOfWeek = DayOfWeek.Monday;
-
                 //System.Threading.Thread.CurrentThread.CurrentCulture = _culture;
                 //System.Threading.Thread.CurrentThread.CurrentUICulture = _uiculture;
 
@@ -565,10 +563,10 @@ style='font-family:Times New Roman,serif'>&#272;T liên h&#7879;: 0228.6556.777
                 TN = DateTime.Now.Date.AddDays(-DateTime.Now.Date.Day + 1);
                 DN = TN.AddMonths(1).AddDays(-1);
                 //kiểm tra ngày bắc đầu có phải thứ 2 không
-             
+
                 for (int i = 1; i <= 4; i++)
                 {
-                    if(i == 1)
+                    if (i == 1)
                     {
                         if (TN.DayOfWeek == DayOfWeek.Monday)
                         {
@@ -583,13 +581,13 @@ style='font-family:Times New Roman,serif'>&#272;T liên h&#7879;: 0228.6556.777
                             continue;
                         }
                     }
-                    if(i == 2 || i == 3)
+                    if (i == 2 || i == 3)
                     {
                         dt.Rows.Add(i, TN, TN.AddDays(6));
                         TN = TN.AddDays(7);
                         continue;
                     }
-                    if (i==4)
+                    if (i == 4)
                     {
                         dt.Rows.Add(i, TN, DN);
                         break;
@@ -607,7 +605,7 @@ style='font-family:Times New Roman,serif'>&#272;T liên h&#7879;: 0228.6556.777
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string s = richEditControl1.HtmlText;
+            //string s = richEditControl1.HtmlText;
         }
     }
 }

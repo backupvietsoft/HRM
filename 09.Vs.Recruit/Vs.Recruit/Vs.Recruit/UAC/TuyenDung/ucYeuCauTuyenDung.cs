@@ -31,6 +31,7 @@ namespace Vs.Recruit
             Commons.Modules.sLoad = "";
             grvPYC_FocusedRowChanged(null, null);
             enableButon(true);
+            radioGroup1_SelectedIndexChanged(null, null);
             Commons.Modules.ObjSystems.SetPhanQuyen(btnALL);
         }
         private void LoadgrdPYC(Int64 iID)
@@ -205,6 +206,7 @@ namespace Vs.Recruit
                     }
                 case "sua":
                     {
+                        if (txtMA_YCTD.EditValue.ToString() == "") return;
                         Commons.Modules.ObjSystems.AddnewRow(grvViTri, true);
                         Commons.Modules.ObjSystems.AddnewRow(grvThayThe, true);
                         Commons.Modules.ObjSystems.AddnewRow(grvFileDK, true);
@@ -280,7 +282,6 @@ namespace Vs.Recruit
             btnALL.Buttons[4].Properties.Visible = !visible;
             btnALL.Buttons[5].Properties.Visible = !visible;
             btnALL.Buttons[6].Properties.Visible = visible;
-
             grvThayThe.OptionsBehavior.Editable = !visible;
             grvViTri.OptionsBehavior.Editable = !visible;
             grvFileDK.OptionsBehavior.Editable = !visible;
@@ -303,18 +304,17 @@ namespace Vs.Recruit
             {
                 Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboNguoiYC, Commons.Modules.ObjSystems.DataCongNhan(false), "ID_CN", "TEN_CN", "TEN_CN", true, true);
                 Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboBPYC, Commons.Modules.ObjSystems.DataTo(-1, -1, false), "ID_TO", "TEN_TO", "TEN_TO", true, true);
-                //ID_TTYC, Ten_TTYC
                 Commons.Modules.ObjSystems.MLoadLookUpEdit(cboTinhTrang, Commons.Modules.ObjSystems.DataTinhTrangYC(false), "ID_TTYC", "Ten_TTYC", "Ten_TTYC");
             }
-            catch (Exception exx)
+            catch (Exception ex)
             {
             }
         }
         private void BindingData(bool them)
         {
-            if (them == true)
+             if (them == true)
             {
-                txtMA_YCTD.EditValue = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.AUTO_CREATE_SO_YCTD(GETDATE())").ToString();
+                txtMA_YCTD.EditValue = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.AUTO_CREATE_SO_YCTD(" + datNgayYC.DateTime.ToString("MM/dd/yyyy") + ")").ToString();
                 cboBPYC.EditValue = -1;
                 datNgayYC.EditValue = DateTime.Now;
                 cboNguoiYC.EditValue = -1;
@@ -322,8 +322,6 @@ namespace Vs.Recruit
                 txtLyDo.EditValue = "";
                 cboTinhTrang.EditValue = 1;
                 iID_YCTD = -1;
-                LoadgrdViTri();
-                LoadgrdThayThe();
                 if (tab.SelectedTabPageIndex == 1)
                 {
                     LoadgrdFileDinhKem();
@@ -348,18 +346,24 @@ namespace Vs.Recruit
                     }
                     txtLyDo.EditValue = grvPYC.GetFocusedRowCellValue("GHI_CHU").ToString();
                     iID_YCTD = Convert.ToInt64(grvPYC.GetFocusedRowCellValue("ID_YCTD"));
-                    LoadgrdViTri();
-                    LoadgrdThayThe();
                     if (tab.SelectedTabPageIndex == 1)
                     {
                         LoadgrdFileDinhKem();
                     }
                     grvViTri_FocusedRowChanged(null, null);
                 }
-                catch(Exception ex)
+                catch
                 {
-                    BindingData(true);
+                    cboBPYC.EditValue = -1;
+                    txtMA_YCTD.EditValue = "";
+                    cboNguoiYC.EditValue = -1;
+                    datNgayNhanDon.EditValue = "";
+                    txtLyDo.EditValue = "";
+                    cboTinhTrang.EditValue = 1;
+                    iID_YCTD = -1;
                 }
+                LoadgrdViTri();
+                LoadgrdThayThe();
             }
         }
         #endregion
@@ -385,7 +389,7 @@ namespace Vs.Recruit
         {
             if (iID_YCTD == -1)
             {
-                txtMA_YCTD.EditValue = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.AUTO_CREATE_SO_YCTD(GETDATE())").ToString();
+                txtMA_YCTD.EditValue = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.AUTO_CREATE_SO_YCTD(" + datNgayYC.DateTime.ToString("MM/dd/yyyy") + ")").ToString();
             }
         }
         private void grvViTri_InitNewRow(object sender, DevExpress.XtraGrid.Views.Grid.InitNewRowEventArgs e)
@@ -505,8 +509,8 @@ namespace Vs.Recruit
                     else
                     {
                         dt = new DataTable();
-                        dt = Commons.Modules.ObjSystems.ConvertDatatable(grdViTri);
-                        if (dt.AsEnumerable().Count(x => x.Field<Int64>("ID_LCV").Equals(e.Value)) > 0)
+                        dt = Commons.Modules.ObjSystems.ConvertDatatable(grvViTri);
+                        if (dt.AsEnumerable().Count(x => x.Field<Int64>("ID_LCV").Equals(e.Value)) > 1)
                         {
                             e.Valid = false;
                             e.ErrorText = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "erTrungDuLieu");
@@ -576,7 +580,7 @@ namespace Vs.Recruit
                 SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "DELETE dbo.VI_TRI_FILE WHERE ID_YCTD = " + iID_YCTD + "");
                 SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "DELETE dbo.YCTD_THAY_THE_CN WHERE ID_YCTD = " + iID_YCTD + "");
                 SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "DELETE dbo.YCTD_VI_TRI_TUYEN WHERE ID_YCTD = " + iID_YCTD + "");
-                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "DELETE dbo.YEU_CAU_TUYEN_DUNG WHERE ID_YCTD = " + iID_YCTD + "");
+                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "DBCC CHECKIDENT (YEU_CAU_TUYEN_DUNG,RESEED,0)DBCC CHECKIDENT (YEU_CAU_TUYEN_DUNG,RESEED) DELETE dbo.YEU_CAU_TUYEN_DUNG WHERE ID_YCTD = " + iID_YCTD + "");
                 //xóa file trên server
                 Commons.Modules.ObjSystems.DeleteDirectory(Commons.Modules.sDDTaiLieu + '\\' + this.Name.Replace("uc", "") + '\\' + txtMA_YCTD.Text);
                 grvPYC.DeleteSelectedRows();
@@ -663,6 +667,11 @@ namespace Vs.Recruit
         private void grvViTri_InvalidValueException(object sender, DevExpress.XtraEditors.Controls.InvalidValueExceptionEventArgs e)
         {
             e.ExceptionMode = DevExpress.XtraEditors.Controls.ExceptionMode.NoAction;
+        }
+
+        private void radioGroup1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Commons.Modules.ObjSystems.RowFilter(grdPYC, grvPYC.Columns["ID_TT"], (radioGroup1.SelectedIndex + 1).ToString());
         }
     }
 }

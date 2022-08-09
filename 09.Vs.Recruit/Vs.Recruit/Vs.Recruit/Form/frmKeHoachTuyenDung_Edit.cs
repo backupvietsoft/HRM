@@ -79,8 +79,8 @@ namespace Vs.Recruit
                 {
                     case "chonUV":
                         {
-                            frmChonUngVien frm = new frmChonUngVien();
-                            frm.ShowDialog();
+                            //frmChonUngVien frm = new frmChonUngVien();
+                            //frm.ShowDialog();
                             break;
                         }
                     case "them":

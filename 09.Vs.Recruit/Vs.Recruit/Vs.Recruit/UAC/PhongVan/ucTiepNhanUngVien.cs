@@ -100,8 +100,6 @@ namespace Vs.Recruit.UAC
                 {
                     case "inthe":
                         {
-                            frmChonUngVien frm = new frmChonUngVien();
-                            frm.ShowDialog();
                             break;
                         }
                     case "chuyenDuLieu":

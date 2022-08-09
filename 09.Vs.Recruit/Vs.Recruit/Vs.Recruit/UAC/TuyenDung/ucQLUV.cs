@@ -219,7 +219,7 @@ namespace Vs.Recruit
             {
                 Commons.Modules.ObjSystems.MLoadLookUpEdit(cboDA_TUYEN_DUNG, Commons.Modules.ObjSystems.DataTinhTrangTD(true), "ID_TTTD", "Ten_TTTD", "Ten_TTTD");
                 Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboYeuCauTD, Commons.Modules.ObjSystems.DataYeuCauTD(true, 1), "ID_YCTD", "MA_YCTD", "MA_YCTD");
-                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_KHPV, Commons.Modules.ObjSystems.DataKeHoachPV(true), "ID_KHPV", "SO_KHPV", "SO_KHPV");
+                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_KHPV, Commons.Modules.ObjSystems.DataKeHoachPV(true,-1), "ID_KHPV", "SO_KHPV", "SO_KHPV");
                 Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_VTTD, Commons.Modules.ObjSystems.DataLoaiCV(true), "ID_LCV", "TEN_LCV", "TEN_LCV");
             }
             catch

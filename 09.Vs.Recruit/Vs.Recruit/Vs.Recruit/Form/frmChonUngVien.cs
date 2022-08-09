@@ -1,34 +1,21 @@
-﻿using DevExpress.Utils.Menu;
-using DevExpress.XtraBars.Docking2010;
+﻿using DevExpress.XtraBars.Docking2010;
 using DevExpress.XtraBars.Navigation;
 using DevExpress.XtraEditors;
+using DevExpress.XtraGrid;
 using Microsoft.ApplicationBlocks.Data;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Vs.Report;
 
 namespace Vs.Recruit
 {
     public partial class frmChonUngVien : DevExpress.XtraEditors.XtraForm
     {
-        Int64 iID_TB = -1;
-        Int64 iID_UV = -1;
-        private DataTable dt_CHON;
         private ucCTQLUV ucUV;
-
-        string strChuyenMon = "";
-        string strTrinhDo = "";
-        string strKNLV = "";
-        string strBangCap = "";
-
         public AccordionControl accorMenuleft;
+        public Int64 iID_VTTD = 0;
+        public Int64 iID_YCTD = 0;
         public frmChonUngVien()
         {
             InitializeComponent();
@@ -37,26 +24,23 @@ namespace Vs.Recruit
         #region even
         private void frmChonUngVien_Load(object sender, EventArgs e)
         {
-            //Vi Tri Tuyen Dung
-            DataTable dt_VTTD = new DataTable();
-            dt_VTTD.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboViTriTuyenDung",Commons.Modules.UserName, Commons.Modules.TypeLanguage, 1));
-            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_VTTD, dt_VTTD, "ID_VTTD", "TEN_VTTD", "TEN_VTTD");
-
-            //Nguon tuyen dung
-            DataTable dt_NTD = new DataTable();
-            dt_NTD.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboNguonTuyenDung", Commons.Modules.UserName, Commons.Modules.TypeLanguage, 1));
-            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_NTD, dt_NTD, "ID_NTD", "TEN_NTD", "TEN_NTD");
-
-            // Trinh do
-            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_TD, Commons.Modules.ObjSystems.DataTDVH(Convert.ToInt32(-1), true), "ID_TDVH", "TEN_TDVH", "TEN_TDVH");
-
-            // Kinh nghiem lam viec
-            DataTable dt_knlv = new DataTable();
-            dt_knlv.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboID_KNLV", Commons.Modules.UserName, Commons.Modules.TypeLanguage, true));
-            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_KNLV, dt_knlv, "ID_KNLV", "TEN_KNLV", "TEN_KNLV");
-
+            LoadCombo();
+            cboID_VTTD.EditValue = iID_VTTD;
             LoadData();
         }
+
+        private void LoadCombo()
+        {
+            //Vi Tri Tuyen Dung 
+            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_VTTD, Commons.Modules.ObjSystems.DataLoaiCV(true), "ID_LCV", "TEN_LCV", "TEN_LCV");
+            //Nguon tuyen dung
+            Commons.Modules.ObjSystems.MLoadLookUpEdit(cboID_NTD , Commons.Modules.ObjSystems.DataNguonTD(true), "ID_NTD", "TEN_NTD", "TEN_NTD");
+            // Trinh do//ID_TDVH,TEN_TDVH
+            Commons.Modules.ObjSystems.MLoadLookUpEdit(cboID_TD, Commons.Modules.ObjSystems.DataTDVH(-1, true), "ID_TDVH", "TEN_TDVH", "TEN_TDVH");
+            // Kinh nghiem lam việc//ID_KNLV,TEN_KNLV
+            Commons.Modules.ObjSystems.MLoadLookUpEdit(cboID_KNLV, Commons.Modules.ObjSystems.DataKinhNghiemLV(true), "ID_KNLV", "TEN_KNLV", "TEN_KNLV");
+        }
+
         private void btnALL_ButtonClick(object sender, DevExpress.XtraBars.Docking2010.ButtonEventArgs e)
         {
             try
@@ -65,61 +49,31 @@ namespace Vs.Recruit
                 XtraUserControl ctl = new XtraUserControl();
                 switch (btn.Tag.ToString())
                 {
-                    #region in
-                    //case "in":
-                    //    {
-                    //        try
-                    //        {
-                    //            dt_CHON = new DataTable();
-                    //            DataTable dt_temp = ((DataTable)grdChonUV.DataSource);
-                    //            DataTable dt1 = new DataTable();
-                    //            try
-                    //            {
-                    //                if (dt_temp.AsEnumerable().Where(r => r.Field<Boolean>("CHON") == true).Count() > 0)
-                    //                {
-                    //                    dt_CHON = dt_temp.AsEnumerable().Where(r => r.Field<Boolean>("CHON") == true).CopyToDataTable().Copy();
-                    //                    string strSQL = "SELECT SO_TB, TIEU_DE FROM dbo.THONG_BAO_TUYEN_DUNG WHERE ID_TB = " + iID_TB + "";
-
-                    //                    frmViewReport frm = new frmViewReport();
-                    //                    frm.rpt = new rptDSUngVien();
-                    //                    dt_CHON.TableName = "DA_TA";
-                    //                    frm.AddDataSource(dt_CHON);
-
-                    //                    DataTable dt = new DataTable();
-                    //                    dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, strSQL));
-                    //                    dt.TableName = "DA_TA1";
-                    //                    frm.AddDataSource(dt);
-                    //                    frm.ShowDialog();
-                    //                }
-                    //                else
-                    //                {
-                    //                    XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgChuaChonUV"));
-                    //                    return;
-                    //                }
-                    //            }
-                    //            catch
-                    //            {
-                    //                //Trong truong hop ma no where khong ra thi no se bi catch, nen cho nay minh dung Clone()
-                    //                dt_CHON = dt_temp.Clone();
-                    //            }
-                    //        }
-                    //        catch
-                    //        { }
-                    //        break;
-                    //    }
-                    #endregion
                     case "ghi":
                         {
+                            DataTable dt = Commons.Modules.ObjSystems.ConvertDatatable(grdChonUV);
+                            if(dt.AsEnumerable().Count(x=>Convert.ToBoolean(x["CHON"]) == true)== 0)
+                            {
+                                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgChuaChonUV"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                return;
+                            }
+                            //lưu dữ liệu chọn lại và cập nhật vào bảng tạm
+                            Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, "sBTUV" + Commons.Modules.UserName, dt, "");
+
+                            DialogResult =DialogResult.OK;
                             break;
                         }
                     case "khongghi":
                         {
+                            DialogResult = DialogResult.Cancel;
                             this.Close();
                             break;
                         }
                 }
             }
-            catch { }
+            catch
+            {
+            }
         }
         #endregion
 
@@ -129,13 +83,15 @@ namespace Vs.Recruit
             try
             {
                 DataTable dt = new DataTable();
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetListUngVienChon",Commons.Modules.UserName, Commons.Modules.TypeLanguage, string.IsNullOrEmpty(cboID_VTTD.Text) ? -1 : Convert.ToInt64(cboID_VTTD.EditValue), string.IsNullOrEmpty(cboID_NTD.Text) ? -1 : Convert.ToInt64(cboID_NTD.EditValue), string.IsNullOrEmpty(cboID_TD.Text) ? -1 : Convert.ToInt64(cboID_TD.EditValue), string.IsNullOrEmpty(cboID_KNLV.Text) ? -1 : Convert.ToInt64(cboID_KNLV.EditValue)));
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetListUngVienChon",iID_YCTD,iID_VTTD,Commons.Modules.UserName,Commons.Modules.TypeLanguage, "sBTChonUV"+Commons.Modules.UserName));
+                dt.Columns["CHON"].ReadOnly = false;
                 Commons.Modules.ObjSystems.MLoadXtraGrid(grdChonUV, grvChonUV, dt, false, true, true, false, true, this.Name);
-                grvChonUV.Columns["ID_VTTD_1"].Visible = false;
-                grvChonUV.Columns["ID_VTTD_2"].Visible = false;
                 grvChonUV.Columns["ID_TDVH"].Visible = false;
                 grvChonUV.Columns["ID_KNLV"].Visible = false;
                 grvChonUV.Columns["ID_NTD"].Visible = false;
+                grvChonUV.OptionsSelection.ShowCheckBoxSelectorInColumnHeader = DevExpress.Utils.DefaultBoolean.True;
+                grvChonUV.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CheckBoxRowSelect;
+                grvChonUV.OptionsSelection.CheckBoxSelectorField = "CHON";
             }
             catch { }
         }
@@ -151,12 +107,10 @@ namespace Vs.Recruit
             ucUV = new ucCTQLUV(Convert.ToInt64(grvChonUV.GetFocusedRowCellValue("ID_UV")));
             Commons.Modules.ObjSystems.ShowWaitForm(this);
             ucUV.Refresh();
-            //ns.accorMenuleft = accorMenuleft;
             tablePanel1.Hide();
             this.Controls.Add(ucUV);
             ucUV.Dock = DockStyle.Fill;
             ucUV.backWindowsUIButtonPanel.ButtonClick += BackWindowsUIButtonPanel_ButtonClick;
-            //accorMenuleft.Visible = false;
             Commons.Modules.ObjSystems.HideWaitForm();
         }
 
@@ -166,20 +120,22 @@ namespace Vs.Recruit
             ucUV.Hide();
             tablePanel1.Show();
             LoadData();
+        }
 
-            //DataTable dtmp = new DataTable();
-            //dtmp = (DataTable)grdChonUV.DataSource;
-            //if (dtmp.Rows.Count == 0) return;
-            //string chuoiIDUV_tmp = "";
-            //for (int i = 0; i < dtmp.Rows.Count; i++)
-            //{
-            //    chuoiIDUV_tmp += dtmp.Rows[i]["ID_UV"].ToString() + ",";
-            //}
-            //string chuoiIDUV = chuoiIDUV_tmp.Remove(chuoiIDUV_tmp.Length - 1);
-
-            //LoadData(true, chuoiIDUV, iIDPV);
-            //accorMenuleft.Visible = true;
-
+        private void cboID_VTTD_EditValueChanged(object sender, EventArgs e)
+        {
+            DataTable dt = new DataTable();
+            dt = Commons.Modules.ObjSystems.ConvertDatatable(grdChonUV);
+            if (dt == null) return;
+            try
+            {
+                dt.DefaultView.RowFilter = "((VI_TRI1 = '" + cboID_VTTD.Text.ToString()+ "' OR VI_TRI2 = '" + cboID_VTTD.Text.ToString()+"') OR "+ cboID_VTTD.EditValue + " = -1) AND (ID_NTD = " + cboID_NTD.EditValue + " OR " + cboID_NTD.EditValue + " = -1) AND (ID_TDVH = " + cboID_TD.EditValue + " OR " + cboID_TD.EditValue + " = -1) AND (ID_KNLV = " + cboID_KNLV.EditValue + "OR " + cboID_KNLV.EditValue + " = -1)";
+                grvChonUV.SelectRow(0);
+            }
+            catch
+            {
+                dt.DefaultView.RowFilter = "";
+            }
         }
     }
 }

@@ -83,11 +83,11 @@ namespace Vs.Recruit
         {
             try
             {
-                //Application.Run(new Form1());
+                Application.Run(new Form1());
                 frmViewReport frm = new frmViewReport();
-                XtraReport1 fpt = new XtraReport1();
-                frm.rpt = fpt;
-                frm.ShowDialog();
+                //XtraReport1 fpt = new XtraReport1();
+                //frm.rpt = fpt;
+                //frm.ShowDialog();
                 //Application.Run(new frmEditTHONG_BAO_TUYEN_DUNG_VIEW(-1));
                 //Application.Run(new frmEditVI_TRI_TUYEN_DUNG(-1,-1,-1,true));
             }

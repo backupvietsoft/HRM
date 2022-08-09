@@ -3652,6 +3652,45 @@ namespace Commons
             }
         }
 
+
+        public void AddCombXtra(string Value, string Display,string Cot, GridView grv, DataTable tempt, bool Search, string cotan, string fName, bool CoNull = false)
+        {
+            if (CoNull)
+                tempt.Rows.Add(-99, "");
+            if (Search == true)
+            {
+                RepositoryItemSearchLookUpEdit cbo = new RepositoryItemSearchLookUpEdit();
+                cbo.NullText = "";
+                cbo.ValueMember = Value;
+                cbo.DisplayMember = Display;
+                cbo.DataSource = tempt;
+                cbo.View.PopulateColumns(cbo.DataSource);
+                cbo.View.Columns[cotan].Visible = false;
+                cbo.View.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+                cbo.View.Appearance.HeaderPanel.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+                cbo.View.Columns[Display].SortOrder = DevExpress.Data.ColumnSortOrder.Ascending;
+                Commons.Modules.ObjSystems.MLoadNNXtraGrid(cbo.View, fName);
+                grv.Columns[Cot].ColumnEdit = cbo;
+            }
+            else
+            {
+                RepositoryItemLookUpEdit cbo = new RepositoryItemLookUpEdit();
+                cbo.NullText = "";
+                cbo.ValueMember = Value;
+                cbo.DisplayMember = Display;
+                cbo.DataSource = tempt;
+                grv.Columns[Cot].ColumnEdit = cbo;
+                cbo.PopulateColumns();
+                cbo.Columns[cotan].Visible = false;
+                cbo.SortColumnIndex = 1;
+                cbo.Columns[Display].SortOrder = DevExpress.Data.ColumnSortOrder.Ascending;
+                cbo.AppearanceDropDownHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+                cbo.AppearanceDropDownHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+                cbo.Columns[Display].Caption = Commons.Modules.ObjLanguages.GetLanguage(fName, Display);
+            }
+        }
+
+
         public void AddCombXtra(string Value, string Display, GridView grv, DataTable tempt, bool Search)
         {
             if (Search == true)
@@ -4364,11 +4403,11 @@ namespace Commons
             return dt;
         }
 
-        public DataTable DataKeHoachPV(bool coAll)
+        public DataTable DataKeHoachPV(bool coAll,int TT)
         {
             //ID_KHPV,SO_KHPV
             DataTable dt = new DataTable();
-            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboKeHoachPV", coAll));
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboKeHoachPV", coAll,TT));
             return dt;
         }
 
@@ -4384,6 +4423,13 @@ namespace Commons
             //ID_TTTD, Ten_TTTD
             DataTable dt = new DataTable();
             dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboTinhTrangTD", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll));
+            return dt;
+        }
+        public DataTable DataTinhTrangPV(bool coAll)
+        {
+            //ID_TT_KHPV, TEN_TT_KHPV
+            DataTable dt = new DataTable();
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboTinhTrangPV", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll));
             return dt;
         }
         public DataTable DataTinhTrangYC(bool coAll)
@@ -4514,6 +4560,14 @@ namespace Commons
             return dt;
         }
 
+        public DataTable DataViTri(Int64 iID_YCTD)
+        {
+            //ID_VTTD,TEN_VTTD
+            DataTable dt = new DataTable();
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboViTriTheoYeuCau",iID_YCTD, Commons.Modules.UserName, Commons.Modules.TypeLanguage));
+            return dt;
+        }
+
         public DataTable DataDanhGiaTayNghe(bool coAll)
         {
             //ID_DGTN,TEN_DGTN
@@ -4621,6 +4675,14 @@ namespace Commons
             //2 đã nghĩ
             DataTable dt = new DataTable();
             dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetCongNhanTheoTT", Commons.Modules.UserName, TT, Commons.Modules.TypeLanguage, coAll));
+            return dt;
+        }
+        public DataTable DataUngVienTheoTT(bool coAll, int TT)
+        {
+            //1 chưa truyển
+            //2 đã tuyển
+            DataTable dt = new DataTable();
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboUngVienTheoTT", Commons.Modules.UserName, TT, Commons.Modules.TypeLanguage, coAll));
             return dt;
         }
         public DataTable DataDonVi(bool coAll)

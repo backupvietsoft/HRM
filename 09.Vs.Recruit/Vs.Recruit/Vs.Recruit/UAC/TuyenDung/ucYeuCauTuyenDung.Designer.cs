@@ -86,6 +86,8 @@
             this.btnALL = new DevExpress.XtraBars.Docking2010.WindowsUIButtonPanel();
             this.dxValidationProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
             this.ofileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.radioGroup1 = new DevExpress.XtraEditors.RadioGroup();
+            this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.datNgayYC.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.datNgayYC.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataLayoutControl1)).BeginInit();
@@ -135,6 +137,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.lblNgayYC)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblTinhTrang)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radioGroup1.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             this.SuspendLayout();
             // 
             // datNgayYC
@@ -165,6 +169,7 @@
             // 
             // dataLayoutControl1
             // 
+            this.dataLayoutControl1.Controls.Add(this.radioGroup1);
             this.dataLayoutControl1.Controls.Add(this.cboTinhTrang);
             this.dataLayoutControl1.Controls.Add(this.searchControl1);
             this.dataLayoutControl1.Controls.Add(this.grdPYC);
@@ -217,10 +222,10 @@
             // 
             // grdPYC
             // 
-            this.grdPYC.Location = new System.Drawing.Point(24, 102);
+            this.grdPYC.Location = new System.Drawing.Point(24, 133);
             this.grdPYC.MainView = this.grvPYC;
             this.grdPYC.Name = "grdPYC";
-            this.grdPYC.Size = new System.Drawing.Size(256, 415);
+            this.grdPYC.Size = new System.Drawing.Size(256, 384);
             this.grdPYC.TabIndex = 54;
             this.grdPYC.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grvPYC});
@@ -572,7 +577,8 @@
             this.groDSPYC.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlItem5,
             this.layoutControlItem6,
-            this.emptySpaceItem2});
+            this.emptySpaceItem2,
+            this.layoutControlItem1});
             this.groDSPYC.Location = new System.Drawing.Point(0, 56);
             this.groDSPYC.Name = "groDSPYC";
             this.groDSPYC.Size = new System.Drawing.Size(284, 493);
@@ -580,10 +586,10 @@
             // layoutControlItem5
             // 
             this.layoutControlItem5.Control = this.grdPYC;
-            this.layoutControlItem5.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlItem5.Location = new System.Drawing.Point(0, 31);
             this.layoutControlItem5.MinSize = new System.Drawing.Size(104, 24);
             this.layoutControlItem5.Name = "layoutControlItem5";
-            this.layoutControlItem5.Size = new System.Drawing.Size(260, 419);
+            this.layoutControlItem5.Size = new System.Drawing.Size(260, 388);
             this.layoutControlItem5.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlItem5.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem5.TextVisible = false;
@@ -727,6 +733,30 @@
             // 
             this.ofileDialog.FileName = "openFileDialog1";
             // 
+            // radioGroup1
+            // 
+            this.radioGroup1.Location = new System.Drawing.Point(24, 102);
+            this.radioGroup1.Name = "radioGroup1";
+            this.radioGroup1.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] {
+            new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "rdoDangTH", true, "rdoDangTH"),
+            new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "rdoDaKhoa", true, "rdoDaKhoa")});
+            this.radioGroup1.Size = new System.Drawing.Size(256, 27);
+            this.radioGroup1.StyleController = this.dataLayoutControl1;
+            this.radioGroup1.TabIndex = 57;
+            this.radioGroup1.SelectedIndexChanged += new System.EventHandler(this.radioGroup1_SelectedIndexChanged);
+            // 
+            // layoutControlItem1
+            // 
+            this.layoutControlItem1.Control = this.radioGroup1;
+            this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlItem1.MaxSize = new System.Drawing.Size(0, 31);
+            this.layoutControlItem1.MinSize = new System.Drawing.Size(54, 31);
+            this.layoutControlItem1.Name = "layoutControlItem1";
+            this.layoutControlItem1.Size = new System.Drawing.Size(260, 31);
+            this.layoutControlItem1.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem1.TextVisible = false;
+            // 
             // ucYeuCauTuyenDung
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -786,6 +816,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.lblNgayYC)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblTinhTrang)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radioGroup1.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -838,5 +870,7 @@
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem2;
         private DevExpress.XtraEditors.LookUpEdit cboTinhTrang;
         private DevExpress.XtraLayout.LayoutControlItem lblTinhTrang;
+        private DevExpress.XtraEditors.RadioGroup radioGroup1;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
     }
 }

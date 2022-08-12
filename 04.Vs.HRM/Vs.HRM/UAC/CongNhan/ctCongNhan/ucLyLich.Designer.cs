@@ -32,16 +32,17 @@ namespace Vs.HRM
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions1 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions2 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions3 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions4 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions5 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions6 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions7 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions8 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions9 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions10 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions11 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions12 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions13 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions14 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions15 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions16 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions17 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions18 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions19 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions20 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule13 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule1 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule2 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule3 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
@@ -53,7 +54,6 @@ namespace Vs.HRM
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule9 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule10 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule11 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
-            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule12 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             this.dt = new System.Data.DataTable();
             this.windowsUIButton = new DevExpress.XtraBars.Docking2010.WindowsUIButtonPanel();
             this.dataLayoutControl1 = new DevExpress.XtraDataLayout.DataLayoutControl();
@@ -427,30 +427,30 @@ namespace Vs.HRM
             this.windowsUIButton.AppearanceButton.Pressed.Options.UseFont = true;
             this.windowsUIButton.AppearanceButton.Pressed.Options.UseImage = true;
             this.windowsUIButton.AppearanceButton.Pressed.Options.UseTextOptions = true;
-            windowsUIButtonImageOptions1.ImageUri.Uri = "icon%20builder/business_phone";
-            windowsUIButtonImageOptions2.ImageUri.Uri = "richedit/reviewers";
-            windowsUIButtonImageOptions3.ImageUri.Uri = "icon%20builder/business_world";
-            windowsUIButtonImageOptions4.ImageUri.Uri = "AddItem";
-            windowsUIButtonImageOptions5.ImageUri.Uri = "Edit;Size32x32;GrayScaled";
-            windowsUIButtonImageOptions6.ImageUri.Uri = "snap/snapdeletelist";
-            windowsUIButtonImageOptions7.ImageUri.Uri = "Print";
-            windowsUIButtonImageOptions8.ImageUri.Uri = "SaveAll";
-            windowsUIButtonImageOptions9.ImageUri.Uri = "SaveAndClose";
-            windowsUIButtonImageOptions10.ImageUri.Uri = "richedit/clearheaderandfooter";
+            windowsUIButtonImageOptions11.ImageUri.Uri = "icon%20builder/business_phone";
+            windowsUIButtonImageOptions12.ImageUri.Uri = "richedit/reviewers";
+            windowsUIButtonImageOptions13.ImageUri.Uri = "icon%20builder/business_world";
+            windowsUIButtonImageOptions14.ImageUri.Uri = "AddItem";
+            windowsUIButtonImageOptions15.ImageUri.Uri = "Edit;Size32x32;GrayScaled";
+            windowsUIButtonImageOptions16.ImageUri.Uri = "snap/snapdeletelist";
+            windowsUIButtonImageOptions17.ImageUri.Uri = "Print";
+            windowsUIButtonImageOptions18.ImageUri.Uri = "SaveAll";
+            windowsUIButtonImageOptions19.ImageUri.Uri = "SaveAndClose";
+            windowsUIButtonImageOptions20.ImageUri.Uri = "richedit/clearheaderandfooter";
             this.windowsUIButton.Buttons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] {
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions1, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "lienlac", -1, false),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions2, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "giadinh", -1, false),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions3, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "doanthe", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions11, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "lienlac", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions12, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "giadinh", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions13, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "doanthe", -1, false),
             new DevExpress.XtraBars.Docking2010.WindowsUISeparator(),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions4, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "them", -1, false),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions5, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "sua", -1, false),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions6, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "xoa", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions14, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "them", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions15, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "sua", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions16, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "xoa", -1, false),
             new DevExpress.XtraBars.Docking2010.WindowsUISeparator(),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions7, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "in", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions17, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "in", -1, false),
             new DevExpress.XtraBars.Docking2010.WindowsUISeparator(),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions8, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "luu", -1, false),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions9, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "khongluu", -1, false),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions10, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "thoat", -1, false)});
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions18, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "luu", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions19, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "khongluu", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions20, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "thoat", -1, false)});
             this.windowsUIButton.ContentAlignment = System.Drawing.ContentAlignment.MiddleRight;
             this.windowsUIButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.windowsUIButton.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -586,11 +586,11 @@ namespace Vs.HRM
             this.ID_XNLookUpEdit.Size = new System.Drawing.Size(161, 24);
             this.ID_XNLookUpEdit.StyleController = this.dataLayoutControl1;
             this.ID_XNLookUpEdit.TabIndex = 75;
-            conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.Greater;
-            conditionValidationRule1.ErrorText = "This value is not valid";
-            conditionValidationRule1.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.Critical;
-            conditionValidationRule1.Value1 = 0;
-            this.dxValidationProvider1.SetValidationRule(this.ID_XNLookUpEdit, conditionValidationRule1);
+            conditionValidationRule13.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.Greater;
+            conditionValidationRule13.ErrorText = "This value is not valid";
+            conditionValidationRule13.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.Critical;
+            conditionValidationRule13.Value1 = 0;
+            this.dxValidationProvider1.SetValidationRule(this.ID_XNLookUpEdit, conditionValidationRule13);
             this.ID_XNLookUpEdit.EditValueChanged += new System.EventHandler(this.ID_XNLookUpEdit_EditValueChanged);
             // 
             // searchLookUpEdit2View
@@ -612,11 +612,11 @@ namespace Vs.HRM
             this.ID_DVLookUpEdit.Size = new System.Drawing.Size(161, 24);
             this.ID_DVLookUpEdit.StyleController = this.dataLayoutControl1;
             this.ID_DVLookUpEdit.TabIndex = 74;
-            conditionValidationRule2.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.Greater;
-            conditionValidationRule2.ErrorText = "This value is not valid";
-            conditionValidationRule2.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.Critical;
-            conditionValidationRule2.Value1 = 0;
-            this.dxValidationProvider1.SetValidationRule(this.ID_DVLookUpEdit, conditionValidationRule2);
+            conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.Greater;
+            conditionValidationRule1.ErrorText = "This value is not valid";
+            conditionValidationRule1.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.Critical;
+            conditionValidationRule1.Value1 = 0;
+            this.dxValidationProvider1.SetValidationRule(this.ID_DVLookUpEdit, conditionValidationRule1);
             this.ID_DVLookUpEdit.EditValueChanged += new System.EventHandler(this.ID_DVLookUpEdit_EditValueChanged);
             // 
             // searchLookUpEdit1View
@@ -643,10 +643,10 @@ namespace Vs.HRM
             this.MS_CNTextEdit.Size = new System.Drawing.Size(161, 24);
             this.MS_CNTextEdit.StyleController = this.dataLayoutControl1;
             this.MS_CNTextEdit.TabIndex = 5;
-            conditionValidationRule3.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule3.ErrorText = "This value is not valid";
-            conditionValidationRule3.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.Critical;
-            this.dxValidationProvider1.SetValidationRule(this.MS_CNTextEdit, conditionValidationRule3);
+            conditionValidationRule2.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule2.ErrorText = "This value is not valid";
+            conditionValidationRule2.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.Critical;
+            this.dxValidationProvider1.SetValidationRule(this.MS_CNTextEdit, conditionValidationRule2);
             // 
             // MS_THE_CCTextEdit
             // 
@@ -655,10 +655,10 @@ namespace Vs.HRM
             this.MS_THE_CCTextEdit.Size = new System.Drawing.Size(161, 24);
             this.MS_THE_CCTextEdit.StyleController = this.dataLayoutControl1;
             this.MS_THE_CCTextEdit.TabIndex = 6;
-            conditionValidationRule4.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule4.ErrorText = "This value is not valid";
-            conditionValidationRule4.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.Critical;
-            this.dxValidationProvider1.SetValidationRule(this.MS_THE_CCTextEdit, conditionValidationRule4);
+            conditionValidationRule3.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule3.ErrorText = "This value is not valid";
+            conditionValidationRule3.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.Critical;
+            this.dxValidationProvider1.SetValidationRule(this.MS_THE_CCTextEdit, conditionValidationRule3);
             // 
             // VAO_LAM_LAICheckEdit
             // 
@@ -676,10 +676,10 @@ namespace Vs.HRM
             this.HOTextEdit.Size = new System.Drawing.Size(161, 24);
             this.HOTextEdit.StyleController = this.dataLayoutControl1;
             this.HOTextEdit.TabIndex = 8;
-            conditionValidationRule5.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule5.ErrorText = "This value is not valid";
-            conditionValidationRule5.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.Critical;
-            this.dxValidationProvider1.SetValidationRule(this.HOTextEdit, conditionValidationRule5);
+            conditionValidationRule4.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule4.ErrorText = "This value is not valid";
+            conditionValidationRule4.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.Critical;
+            this.dxValidationProvider1.SetValidationRule(this.HOTextEdit, conditionValidationRule4);
             // 
             // TENTextEdit
             // 
@@ -688,10 +688,10 @@ namespace Vs.HRM
             this.TENTextEdit.Size = new System.Drawing.Size(161, 24);
             this.TENTextEdit.StyleController = this.dataLayoutControl1;
             this.TENTextEdit.TabIndex = 9;
-            conditionValidationRule6.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule6.ErrorText = "This value is not valid";
-            conditionValidationRule6.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.Critical;
-            this.dxValidationProvider1.SetValidationRule(this.TENTextEdit, conditionValidationRule6);
+            conditionValidationRule5.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule5.ErrorText = "This value is not valid";
+            conditionValidationRule5.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.Critical;
+            this.dxValidationProvider1.SetValidationRule(this.TENTextEdit, conditionValidationRule5);
             // 
             // NGAY_SINHDateEdit
             // 
@@ -705,9 +705,10 @@ namespace Vs.HRM
             this.NGAY_SINHDateEdit.Size = new System.Drawing.Size(161, 24);
             this.NGAY_SINHDateEdit.StyleController = this.dataLayoutControl1;
             this.NGAY_SINHDateEdit.TabIndex = 11;
-            conditionValidationRule7.ErrorText = "This value is not valid";
-            conditionValidationRule7.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.None;
-            this.dxValidationProvider1.SetValidationRule(this.NGAY_SINHDateEdit, conditionValidationRule7);
+            conditionValidationRule6.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule6.ErrorText = "This value is not valid";
+            conditionValidationRule6.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.Critical;
+            this.dxValidationProvider1.SetValidationRule(this.NGAY_SINHDateEdit, conditionValidationRule6);
             this.NGAY_SINHDateEdit.Visible = false;
             // 
             // NGAY_HOC_VIECDateEdit
@@ -1007,11 +1008,11 @@ namespace Vs.HRM
             this.ID_QGLookUpEdit.Size = new System.Drawing.Size(161, 24);
             this.ID_QGLookUpEdit.StyleController = this.dataLayoutControl1;
             this.ID_QGLookUpEdit.TabIndex = 10;
-            conditionValidationRule8.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.Greater;
-            conditionValidationRule8.ErrorText = "This value is not valid";
-            conditionValidationRule8.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.Critical;
-            conditionValidationRule8.Value1 = 0;
-            this.dxValidationProvider1.SetValidationRule(this.ID_QGLookUpEdit, conditionValidationRule8);
+            conditionValidationRule7.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.Greater;
+            conditionValidationRule7.ErrorText = "This value is not valid";
+            conditionValidationRule7.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.Critical;
+            conditionValidationRule7.Value1 = 0;
+            this.dxValidationProvider1.SetValidationRule(this.ID_QGLookUpEdit, conditionValidationRule7);
             this.ID_QGLookUpEdit.EditValueChanged += new System.EventHandler(this.ID_QGLookUpEdit_EditValueChanged);
             // 
             // ID_TOLookupEdit
@@ -1025,11 +1026,11 @@ namespace Vs.HRM
             this.ID_TOLookupEdit.Size = new System.Drawing.Size(161, 24);
             this.ID_TOLookupEdit.StyleController = this.dataLayoutControl1;
             this.ID_TOLookupEdit.TabIndex = 14;
-            conditionValidationRule9.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.Greater;
-            conditionValidationRule9.ErrorText = "This value is not valid";
-            conditionValidationRule9.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.Critical;
-            conditionValidationRule9.Value1 = 0;
-            this.dxValidationProvider1.SetValidationRule(this.ID_TOLookupEdit, conditionValidationRule9);
+            conditionValidationRule8.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.Greater;
+            conditionValidationRule8.ErrorText = "This value is not valid";
+            conditionValidationRule8.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.Critical;
+            conditionValidationRule8.Value1 = 0;
+            this.dxValidationProvider1.SetValidationRule(this.ID_TOLookupEdit, conditionValidationRule8);
             // 
             // ID_TOLookupEditView
             // 
@@ -1049,11 +1050,11 @@ namespace Vs.HRM
             this.ID_TT_HDLookUpEdit.Size = new System.Drawing.Size(161, 24);
             this.ID_TT_HDLookUpEdit.StyleController = this.dataLayoutControl1;
             this.ID_TT_HDLookUpEdit.TabIndex = 21;
-            conditionValidationRule10.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.Greater;
-            conditionValidationRule10.ErrorText = "This value is not valid";
-            conditionValidationRule10.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.Critical;
-            conditionValidationRule10.Value1 = 0;
-            this.dxValidationProvider1.SetValidationRule(this.ID_TT_HDLookUpEdit, conditionValidationRule10);
+            conditionValidationRule9.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.Greater;
+            conditionValidationRule9.ErrorText = "This value is not valid";
+            conditionValidationRule9.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.Critical;
+            conditionValidationRule9.Value1 = 0;
+            this.dxValidationProvider1.SetValidationRule(this.ID_TT_HDLookUpEdit, conditionValidationRule9);
             // 
             // ID_TT_HTLookUpEdit
             // 
@@ -1065,11 +1066,11 @@ namespace Vs.HRM
             this.ID_TT_HTLookUpEdit.Size = new System.Drawing.Size(161, 24);
             this.ID_TT_HTLookUpEdit.StyleController = this.dataLayoutControl1;
             this.ID_TT_HTLookUpEdit.TabIndex = 22;
-            conditionValidationRule11.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.Greater;
-            conditionValidationRule11.ErrorText = "This value is not valid";
-            conditionValidationRule11.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.Critical;
-            conditionValidationRule11.Value1 = 0;
-            this.dxValidationProvider1.SetValidationRule(this.ID_TT_HTLookUpEdit, conditionValidationRule11);
+            conditionValidationRule10.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.Greater;
+            conditionValidationRule10.ErrorText = "This value is not valid";
+            conditionValidationRule10.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.Critical;
+            conditionValidationRule10.Value1 = 0;
+            this.dxValidationProvider1.SetValidationRule(this.ID_TT_HTLookUpEdit, conditionValidationRule10);
             // 
             // ID_CVLookUpEdit
             // 
@@ -1269,10 +1270,10 @@ namespace Vs.HRM
             this.NGAY_VAO_LAMDateEdit.Size = new System.Drawing.Size(161, 24);
             this.NGAY_VAO_LAMDateEdit.StyleController = this.dataLayoutControl1;
             this.NGAY_VAO_LAMDateEdit.TabIndex = 20;
-            conditionValidationRule12.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule12.ErrorText = "This value is not valid";
-            conditionValidationRule12.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.Critical;
-            this.dxValidationProvider1.SetValidationRule(this.NGAY_VAO_LAMDateEdit, conditionValidationRule12);
+            conditionValidationRule11.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule11.ErrorText = "This value is not valid";
+            conditionValidationRule11.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.Critical;
+            this.dxValidationProvider1.SetValidationRule(this.NGAY_VAO_LAMDateEdit, conditionValidationRule11);
             // 
             // HINH_THUC_TUYENTextEdit
             // 
@@ -1394,6 +1395,7 @@ namespace Vs.HRM
             this.NAM_SINHDateEdit.Size = new System.Drawing.Size(161, 24);
             this.NAM_SINHDateEdit.StyleController = this.dataLayoutControl1;
             this.NAM_SINHDateEdit.TabIndex = 12;
+            this.NAM_SINHDateEdit.TextChanged += new System.EventHandler(this.NAM_SINHDateEdit_TextChanged);
             // 
             // txtNOI_CAP
             // 
@@ -1570,6 +1572,8 @@ namespace Vs.HRM
             // 
             // ItemForNGAY_SINH
             // 
+            this.ItemForNGAY_SINH.AppearanceItemCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.ItemForNGAY_SINH.AppearanceItemCaption.Options.UseForeColor = true;
             this.ItemForNGAY_SINH.Control = this.NGAY_SINHDateEdit;
             this.ItemForNGAY_SINH.Location = new System.Drawing.Point(170, 56);
             this.ItemForNGAY_SINH.Name = "ItemForNGAY_SINH";

@@ -571,10 +571,9 @@ namespace Vs.Payroll
             }
             if (view.FocusedColumn.FieldName == "SO_LUONG")
             {
+                string sBT_CD = "sBT_CD" + Commons.Modules.UserName;
                 try
                 {
-                    string sBT_CD = "sBT_CD" + Commons.Modules.UserName;
-
                     Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBT_CD, dtCD, "");
                     System.Data.SqlClient.SqlConnection conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
                     conn.Open();
@@ -590,6 +589,7 @@ namespace Vs.Payroll
                     DataSet ds = new DataSet();
                     da.Fill(ds);
 
+
                     DataTable dt = new DataTable();
                     dt = ds.Tables[0].Copy();
 
@@ -604,10 +604,11 @@ namespace Vs.Payroll
                             return;
                         }
                     }
+                    Commons.Modules.ObjSystems.XoaTable(sBT_CD);
                 }
                 catch
                 {
-
+                    Commons.Modules.ObjSystems.XoaTable(sBT_CD);
                 }
             }
         }

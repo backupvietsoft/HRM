@@ -158,7 +158,7 @@ namespace Vs.HRM
                                 DataSet ds = new DataSet();
                                 da.Fill(ds);
                                 grdBHYT.DataSource = ds.Tables[0].Copy();
-
+                                Commons.Modules.ObjSystems.XoaTable(sBT);
                                 //string sSql = "UPDATE dbo.BAO_HIEM_Y_TE SET NGAY_HET_HAN ='" + Convert.ToDateTime(result).ToString("MM/dd/yyyy") + "'";
                                 //SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, sSql);
                                 //LoadGridBaoHiemYTe();

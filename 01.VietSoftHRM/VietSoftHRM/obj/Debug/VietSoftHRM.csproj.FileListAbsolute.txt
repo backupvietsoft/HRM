@@ -2118,7 +2118,6 @@ F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\DevExpress.XtraTreeMap.v20.1.xml
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\DevExpress.XtraVerticalGrid.v20.1.xml
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Newtonsoft.Json.xml
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\DevExpress.XtraReports.v20.1.Extensions.xml
-F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\DevExpress.Docs.v20.1.xml
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\DevExpress.XtraDiagram.v20.1.xml
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\DevExpress.Diagram.v20.1.Core.xml
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\DevExpress.Pdf.v20.1.Drawing.xml
@@ -2767,6 +2766,5 @@ F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\ja\DevExpress.Diagram.v20.1.Core.
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\ru\DevExpress.Diagram.v20.1.Core.resources.dll
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Vs.Recruit.dll
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Vs.Recruit.dll.config
-F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\RtfPipe.dll
 D:\01.SourceCode\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Vs.Recruit.dll
 D:\01.SourceCode\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Vs.Recruit.dll.config

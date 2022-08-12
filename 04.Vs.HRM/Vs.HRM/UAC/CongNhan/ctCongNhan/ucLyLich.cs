@@ -1117,5 +1117,14 @@ namespace Vs.HRM
                 LD_GIAM_LDNNLookUpEdit.Properties.ReadOnly = !visible;
             }
         }
+
+        private void NAM_SINHDateEdit_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                NGAY_SINHDateEdit.EditValue = Convert.ToDateTime("01/01/" + NAM_SINHDateEdit.Text);
+            }
+            catch { }
+        }
     }
 }

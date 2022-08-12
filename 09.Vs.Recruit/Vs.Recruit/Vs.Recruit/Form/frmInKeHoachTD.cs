@@ -68,7 +68,7 @@ namespace Vs.Recruit
             DataSet set = new DataSet();
 
             set = SqlHelper.ExecuteDataset(Commons.IConnections.CNStr, "spGetListKeHoachTuyenDung", TN, DN, Commons.Modules.UserName, Commons.Modules.TypeLanguage, "sBTTuan" + Commons.Modules.UserName);
-
+            Commons.Modules.ObjSystems.XoaTable("sBTTuanThang" + Commons.Modules.UserName);
             return null;
         }
 

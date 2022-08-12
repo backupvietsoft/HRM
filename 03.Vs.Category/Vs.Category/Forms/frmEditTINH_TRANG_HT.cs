@@ -43,13 +43,14 @@ namespace Vs.Category
         {
             try
             {
-                string sSql = "SELECT ID_TT_HT, TEN_TT_HT, TEN_TT_HT_A, TEN_TT_HT_H, STT " +
+                string sSql = "SELECT ID_TT_HT, TEN_TT_HT, TEN_TT_HT_A, TEN_TT_HT_H, KY_HIEU ,STT " +
                     "FROM TINH_TRANG_HT WHERE ID_TT_HT = " + iIdTTHT.ToString();
                 DataTable dtTmp = new DataTable();
                 dtTmp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSql));
                 TEN_TT_HTTextEdit.EditValue = dtTmp.Rows[0]["TEN_TT_HT"].ToString();
                 TEN_TT_HT_ATextEdit.EditValue = dtTmp.Rows[0]["TEN_TT_HT_A"].ToString();
                 TEN_TT_HT_HTextEdit.EditValue = dtTmp.Rows[0]["TEN_TT_HT_H"].ToString();
+                txtKyHieu.Text = dtTmp.Rows[0]["KY_HIEU"].ToString();
                 STTTextEdit.EditValue = dtTmp.Rows[0]["STT"].ToString();
             }
             catch (Exception EX)
@@ -66,6 +67,7 @@ namespace Vs.Category
                 TEN_TT_HT_ATextEdit.EditValue = String.Empty;
                 TEN_TT_HT_HTextEdit.EditValue = String.Empty;
                 STTTextEdit.EditValue = String.Empty;
+                txtKyHieu.Text = String.Empty;
                 TEN_TT_HTTextEdit.Focus();
             }
             catch { }
@@ -85,7 +87,7 @@ namespace Vs.Category
                             if (bKiemTrung()) return;
 
                             Commons.Modules.sId = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spUpdateTINH_TRANG_HT", (bAddEditTTHT ? -1 : iIdTTHT),
-                                TEN_TT_HTTextEdit.EditValue, TEN_TT_HT_ATextEdit.EditValue, TEN_TT_HT_HTextEdit.EditValue, (STTTextEdit.EditValue == "") ? STTTextEdit.EditValue = null : STTTextEdit.EditValue).ToString();
+                                TEN_TT_HTTextEdit.EditValue, TEN_TT_HT_ATextEdit.EditValue, TEN_TT_HT_HTextEdit.EditValue, txtKyHieu.Text ,(STTTextEdit.EditValue == "") ? STTTextEdit.EditValue = null : STTTextEdit.EditValue).ToString();
                             if (bAddEditTTHT)
                             {
                                 if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msg_ThemThanhCongBanCoMuonTiepTuc"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)

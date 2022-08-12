@@ -26,6 +26,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Sockets;
 using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
@@ -3319,29 +3320,51 @@ namespace Commons
         {
             //iHD = 1 là thêm = 2 xóa.
             string sSql = "";
-            if (iHD == 1)
-            {
-                sSql = "INSERT INTO dbo.LOGIN(USER_LOGIN,TIME_LOGIN,ID)VALUES('" + User + "',GETDATE()," + Commons.Modules.iIDUser + ")";
-            }
-            if (iHD == 2)
-            {
-                sSql = "DELETE dbo.LOGIN WHERE USER_LOGIN = '" + User + "'";
-            }
-            if (iHD == 3)
-            {
-                sSql = "UPDATE dbo.LOGIN SET TIME_LOGIN = GETDATE() WHERE USER_LOGIN = '" + User + "'";
-            }
+            //if (iHD == 1)
+            //{
+            //    sSql = "INSERT INTO dbo.LOGIN(USER_LOGIN,TIME_LOGIN,ID)VALUES('" + User + "',GETDATE()," + Commons.Modules.iIDUser + ")";
+            //}
+            //if (iHD == 2)
+            //{
+            //    sSql = "DELETE dbo.LOGIN WHERE USER_LOGIN = '" + User + "'";
+            //}
+            //if (iHD == 3)
+            //{
+            //    sSql = "UPDATE dbo.LOGIN SET TIME_LOGIN = GETDATE() WHERE USER_LOGIN = '" + User + "'";
+            //}
+            //try
+            //{
+            //    SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, sSql);
+            //    return true;
+            //}
+            //catch
+            //{
+            //    return false;
+            //}
+
+
+
+            string MName = "";
+            try { MName = Environment.MachineName; } catch { }
+            sSql = "DELETE FROM dbo.LOGIN WHERE USER_LOGIN = '" + User + "' ";
+            SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, sSql);
+
+            sSql = "INSERT dbo.LOGIN(USER_LOGIN, TIME_LOGIN, ID,[USER_NAME],[M_NAME]) VALUES(N'" + User + "',GETDATE(), " + Commons.Modules.iIDUser.ToString() + " , N'" + LoadIPLocal() + "', N'" + MName + "' )";
+            SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, sSql);
+            return true;
+
+        }
+        public String LoadIPLocal()
+        {
             try
             {
-                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, sSql);
-                return true;
+                string ipAddress = "";
+                IPHostEntry ipHostInfo = Dns.GetHostEntry(Dns.GetHostName());
+                ipAddress = Convert.ToString(ipHostInfo.AddressList.FirstOrDefault(address => address.AddressFamily == AddressFamily.InterNetwork));
+                return ipAddress;
             }
-            catch
-            {
-                return false;
-            }
+            catch { return "1.2.3.4"; }
         }
-
         #endregion
 
         #region creatbt

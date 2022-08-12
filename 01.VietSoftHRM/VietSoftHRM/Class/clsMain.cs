@@ -26,7 +26,6 @@ namespace VietSoftHRM
                 Commons.IConnections.Password = Commons.Modules.ObjSystems.Decrypt(ds.Tables[0].Rows[0]["P"].ToString(), true);
 
 
-
                 Commons.Modules.sIP = Commons.Modules.ObjSystems.Decrypt(ds.Tables[0].Rows[0]["IP"].ToString(), true);
                 Commons.Modules.ChangLanguage = false;
                 ds = new DataSet();

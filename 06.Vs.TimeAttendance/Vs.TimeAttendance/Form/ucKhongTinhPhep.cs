@@ -33,12 +33,13 @@ namespace Vs.TimeAttendance
             try
             {
 
-                Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, tbTemp , Commons.Modules.ObjSystems.ConvertDatatable(grvKTP), "");
+                Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, tbTemp, Commons.Modules.ObjSystems.ConvertDatatable(grvKTP), "");
                 SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "DELETE FROM " + tbTemp);
-                
+                Commons.Modules.ObjSystems.XoaTable(tbTemp);
             }
             catch
             {
+                Commons.Modules.ObjSystems.XoaTable(tbTemp);
             }
             return tbTemp;
         }
@@ -46,7 +47,7 @@ namespace Vs.TimeAttendance
         public ucKhongTinhPhep()
         {
             InitializeComponent();
-            Commons.Modules.ObjSystems.ThayDoiNN(this,new List<LayoutControlGroup>{ Root}, windowsUIButton);
+            Commons.Modules.ObjSystems.ThayDoiNN(this, new List<LayoutControlGroup> { Root }, windowsUIButton);
         }
         #region Mã thẻ chấm công
         private void ucKhongTinhPhep_Load(object sender, EventArgs e)
@@ -141,7 +142,7 @@ namespace Vs.TimeAttendance
                         themSua = false;
                         enableButon(true);
                         LoadGridKhongTinhPhep();
-                        
+
                         break;
                     }
                 case "thoat":
@@ -152,7 +153,7 @@ namespace Vs.TimeAttendance
                 default:
                     break;
             }
-            
+
         }
         #endregion
 
@@ -164,8 +165,8 @@ namespace Vs.TimeAttendance
             //xóa
             try
             {
-                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "DELETE dbo.SO_THANG_KHONG_TP WHERE ID_CN = " 
-                                         + grvKTP.GetFocusedRowCellValue("ID_CN") + " AND CONVERT(NVARCHAR(10),THANG,112) ='" 
+                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "DELETE dbo.SO_THANG_KHONG_TP WHERE ID_CN = "
+                                         + grvKTP.GetFocusedRowCellValue("ID_CN") + " AND CONVERT(NVARCHAR(10),THANG,112) ='"
                                          + Convert.ToDateTime(cboThang.EditValue).ToString("yyyyMMdd") + "'" + "");
                 LoadGridKhongTinhPhep();
             }
@@ -175,13 +176,13 @@ namespace Vs.TimeAttendance
             }
         }
         private void LoadGridKhongTinhPhep()
-            {
+        {
             DataTable dt = new DataTable();
-            GetDayFromTo(out dTNgay,out dDNgay);
+            GetDayFromTo(out dTNgay, out dDNgay);
 
             if (tinhThangTH)
-            {               
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spTinhThangKhongTinhPhep", Commons.Modules.UserName, Commons.Modules.TypeLanguage,cboDV.EditValue,
+            {
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spTinhThangKhongTinhPhep", Commons.Modules.UserName, Commons.Modules.TypeLanguage, cboDV.EditValue,
                                                                               cboXN.EditValue, cboTo.EditValue, dTNgay, dDNgay));
                 Commons.Modules.ObjSystems.MLoadXtraGrid(grdKTP, grvKTP, dt, true, true, true, true, true, this.Name);
             }
@@ -193,7 +194,7 @@ namespace Vs.TimeAttendance
             }
             else
             {
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetListKhongTinhPhep", cboThang.EditValue, 
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetListKhongTinhPhep", cboThang.EditValue,
                     cboDV.EditValue, cboXN.EditValue, cboTo.EditValue, Commons.Modules.UserName, Commons.Modules.TypeLanguage));
                 Commons.Modules.ObjSystems.MLoadXtraGrid(grdKTP, grvKTP, dt, false, true, true, true, true, this.Name);
             }
@@ -205,7 +206,7 @@ namespace Vs.TimeAttendance
         }
 
 
-        private void GetDayFromTo(out DateTime _dTNgay, out DateTime _dDNgay )
+        private void GetDayFromTo(out DateTime _dTNgay, out DateTime _dDNgay)
         {
             var date = Convert.ToDateTime(cboThang.EditValue);
             var dateInMonth = DateTime.DaysInMonth(date.Year, date.Month);
@@ -220,9 +221,9 @@ namespace Vs.TimeAttendance
                 //tạo một datatable 
                 Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, stbTemp, Commons.Modules.ObjSystems.ConvertDatatable(grvKTP), "");
                 string sSql = "DELETE FROM SO_THANG_KHONG_TP WHERE LEFT(CONVERT(NVARCHAR(6),THANG, 112), 6) = '"
-                              + Convert.ToDateTime(cboThang.EditValue).ToString("yyyyMM") + "' AND ID_CN IN (SELECT ID_CN FROM "+ stbTemp
+                              + Convert.ToDateTime(cboThang.EditValue).ToString("yyyyMM") + "' AND ID_CN IN (SELECT ID_CN FROM " + stbTemp
                               + ")INSERT INTO SO_THANG_KHONG_TP (ID_CN,THANG,SO_THANG,THANG_HT,"
-                              + "TONG_ST, GHI_CHU) SELECT ID_CN, '" + Convert.ToDateTime(cboThang.EditValue).ToString("yyyyMMdd") 
+                              + "TONG_ST, GHI_CHU) SELECT ID_CN, '" + Convert.ToDateTime(cboThang.EditValue).ToString("yyyyMMdd")
                               + "' THANG, SO_THANG, THANG_HT, TONG_ST, GHI_CHU FROM " + stbTemp + " WHERE TONG_ST > 0";
                 SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, sSql);
                 Commons.Modules.ObjSystems.XoaTable(stbTemp);
@@ -297,7 +298,7 @@ namespace Vs.TimeAttendance
                 grvThang.Columns["M"].Visible = false;
                 grvThang.Columns["Y"].Visible = false;
 
-                if(dtthang.Rows.Count > 0)
+                if (dtthang.Rows.Count > 0)
                 {
                     cboThang.EditValue = dtthang.Rows[0][2];
                 }

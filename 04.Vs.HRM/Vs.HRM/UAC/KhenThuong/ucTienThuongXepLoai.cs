@@ -204,34 +204,38 @@ namespace Vs.HRM
             }
             if (iThemSua == 2) //2 - Load Grid Cap nhap so tien
             {
-                try
-                { dThang = dtTuThang.DateTime.Date; 
-
-                DateTime dDThang = Convert.ToDateTime("01/01/1900");
-                try { dDThang = dtDenThang.DateTime.Date; } catch { }
-                float fTong = 0;
-                try { float.TryParse(txtTongTien.Text, out fTong); } catch { }
-
                 string sBT = "TTXLTien" + Commons.Modules.UserName;
-                Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBT, (DataTable)grdChung.DataSource, "");
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spTienThuongXepLoai", dThang, dDThang, fTong, -1, -1, Commons.Modules.UserName, Commons.Modules.TypeLanguage, sBT, "TienThuong"));
-
-                dt.PrimaryKey = new DataColumn[] { dt.Columns["ID_CN"] };
-
-
-                if (grdChung.DataSource == null)
+                try
                 {
-                    Commons.Modules.ObjSystems.MLoadXtraGrid(grdChung, grvChung, dt, true, true, true, true, true, this.Name);
-                    grvChung.Columns["TIEN_THUONG"].Width = 50;
-                    grvChung.Columns["MS_CN"].Width = 50;
-                    grvChung.Columns["NGAY_VAO_LAM"].Width = 80;
-                    grvChung.Columns["TIEN_THUONG"].DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-                    grvChung.Columns["TIEN_THUONG"].DisplayFormat.FormatString = Commons.Modules.sSoLeTT;
+                    dThang = dtTuThang.DateTime.Date;
+
+                    DateTime dDThang = Convert.ToDateTime("01/01/1900");
+                    try { dDThang = dtDenThang.DateTime.Date; } catch { }
+                    float fTong = 0;
+                    try { float.TryParse(txtTongTien.Text, out fTong); } catch { }
+
+                    Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBT, (DataTable)grdChung.DataSource, "");
+                    dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spTienThuongXepLoai", dThang, dDThang, fTong, -1, -1, Commons.Modules.UserName, Commons.Modules.TypeLanguage, sBT, "TienThuong"));
+                    dt.PrimaryKey = new DataColumn[] { dt.Columns["ID_CN"] };
+
+                    if (grdChung.DataSource == null)
+                    {
+                        Commons.Modules.ObjSystems.MLoadXtraGrid(grdChung, grvChung, dt, true, true, true, true, true, this.Name);
+                        grvChung.Columns["TIEN_THUONG"].Width = 50;
+                        grvChung.Columns["MS_CN"].Width = 50;
+                        grvChung.Columns["NGAY_VAO_LAM"].Width = 80;
+                        grvChung.Columns["TIEN_THUONG"].DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+                        grvChung.Columns["TIEN_THUONG"].DisplayFormat.FormatString = Commons.Modules.sSoLeTT;
+                    }
+                    else
+                        Commons.Modules.ObjSystems.MLoadXtraGrid(grdChung, grvChung, dt, true, false, true, false, false, this.Name);
+                    Commons.Modules.ObjSystems.XoaTable(sBT);
+
                 }
-                else
-                    Commons.Modules.ObjSystems.MLoadXtraGrid(grdChung, grvChung, dt, true, false, true, false, false, this.Name);
+                catch
+                {
+                    Commons.Modules.ObjSystems.XoaTable(sBT);
                 }
-                catch(Exception ex) { }
             }
 
             grvChung.Columns["ID_CN"].Visible = false;
@@ -312,7 +316,7 @@ namespace Vs.HRM
                         {
                             int idLUONG = Convert.ToInt32(grvChung.GetFocusedRowCellValue("ID_LCB"));
                             frmInNhanTienThuongXepLoai InLuongCN = new frmInNhanTienThuongXepLoai(dtDenThang.DateTime);
-                           InLuongCN.ShowDialog();
+                            InLuongCN.ShowDialog();
                             break;
                         }
                     case "CapNhap":
@@ -537,7 +541,7 @@ namespace Vs.HRM
             }
             catch (Exception ex)
             {
-                
+
             }
 
             frm.ShowDialog();

@@ -220,9 +220,9 @@ namespace Vs.TimeAttendance
 
         private bool Savedata()
         {
+            string sBT = "sBTDiemThang" + Commons.Modules.UserName;
             try
             {
-                string sBT = "sBTDiemThang" + Commons.Modules.UserName;
                 Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBT, Commons.Modules.ObjSystems.ConvertDatatable(grvDiemThang), "");
                 SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spSaveTinhDiemThang", sBT, Convert.ToDateTime(cboThang.EditValue));
                 Commons.Modules.ObjSystems.XoaTable(sBT);
@@ -230,6 +230,7 @@ namespace Vs.TimeAttendance
             }
             catch (Exception ex)
             {
+                Commons.Modules.ObjSystems.XoaTable(sBT);
                 return false;
             }
         }

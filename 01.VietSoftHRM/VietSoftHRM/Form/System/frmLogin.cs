@@ -159,7 +159,32 @@ namespace VietSoftHRM
                 return false;
             }
 
-            return true;
+            //kiem tra coi có user tồn tại đúng IP máy hay chua?
+            sSql = "SELECT USER_NAME FROM dbo.LOGIN WHERE USER_LOGIN = N'" + txt_user.Text + "'  ";
+            sSql = Convert.ToString(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, sSql));
+            if (sSql == "")
+                return true;
+            else
+            {
+                if (Commons.Modules.ObjSystems.LoadIPLocal() == sSql)
+                    return true;
+                else
+                {
+
+                    string MName = "";
+                    try
+                    {
+                        MName = "SELECT M_NAME FROM dbo.LOGIN WHERE USER_LOGIN = N'" + txt_user.Text + "'  ";
+                        MName = " - " + Convert.ToString(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, sSql));
+                    }
+                    catch { MName = ""; }
+                    XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgUserDangDangNhapMayCoIp") + " : " + sSql + MName, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+
+            }
+
+            
         }
         private void SaveLogin()
         {

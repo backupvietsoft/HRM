@@ -150,7 +150,6 @@ namespace Vs.Recruit
 
             Microsoft.Office.Interop.Excel.Range title;
             Microsoft.Office.Interop.Excel.Range title1;
-            //Microsoft.Office.Interop.Excel.FormatCondition condition;
 
             int TCot = grvDinhBienLD.Columns.Count;
             int TDong = grvDinhBienLD.RowCount;

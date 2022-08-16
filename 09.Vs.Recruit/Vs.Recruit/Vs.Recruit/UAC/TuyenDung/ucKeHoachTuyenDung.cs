@@ -1,10 +1,12 @@
 ﻿using DevExpress.XtraBars.Docking2010;
+using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Grid;
 using Microsoft.ApplicationBlocks.Data;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Windows.Forms;
 
 namespace Vs.Recruit
 {
@@ -94,9 +96,10 @@ namespace Vs.Recruit
         {
             btnALL.Buttons[0].Properties.Visible = visible;
             btnALL.Buttons[1].Properties.Visible = visible;
-            btnALL.Buttons[2].Properties.Visible = !visible;
+            btnALL.Buttons[2].Properties.Visible = visible;
             btnALL.Buttons[3].Properties.Visible = !visible;
-            btnALL.Buttons[4].Properties.Visible = visible;
+            btnALL.Buttons[4].Properties.Visible = !visible;
+            btnALL.Buttons[5].Properties.Visible = visible;
 
             grvNguonTuyen.OptionsBehavior.Editable = !visible;
             grvTuan.OptionsBehavior.Editable = !visible;
@@ -194,7 +197,13 @@ namespace Vs.Recruit
                     }
                 case "xoa":
                     {
-
+                        XoaKeHoach();
+                        break;
+                    }
+                case "in":
+                    {
+                        frmInKeHoachTD frm = new frmInKeHoachTD();
+                        frm.ShowDialog();
                         break;
                     }
 
@@ -290,6 +299,28 @@ namespace Vs.Recruit
             if (btnALL.Buttons[0].Properties.Visible == false && e.KeyData == System.Windows.Forms.Keys.Delete)
             {
                 grvNguonTuyen.DeleteSelectedRows();
+            }
+        }
+        private void XoaKeHoach()
+        {
+            if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDeleteYeuCauTuyenDung"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) return;
+            //xóa
+            try
+            {
+                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "DELETE dbo.KHTD_TUAN WHERE ID_YCTD = "+ grvVTYC.GetFocusedRowCellValue("ID_YCTD") +" AND ID_VTTD = "+ grvVTYC.GetFocusedRowCellValue("ID_VTTD") + "");
+                LoadgrdVTYC();
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDelDangSuDung") + "\n" + ex.Message.ToString(), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void grdVTYC_ProcessGridKey(object sender, System.Windows.Forms.KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Delete)
+            {
+                XoaKeHoach();
             }
         }
     }

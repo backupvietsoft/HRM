@@ -143,6 +143,13 @@ public class MExcel
         }
         return sTmp;
     }
+    public string getValueCell(Excel.Worksheet MWsheet,int DongBD, int CotBD)
+    {
+        string resulst = MWsheet.Cells[DongBD, CotBD].Value;
+        MWsheet.Cells[DongBD, CotBD].Value2 ="";
+        return resulst;
+
+    }    
     public void MFuntion(Excel.Worksheet MWsheet, string MFuntion, int DongBD, int CotBD, int DongBDFuntion, int CotBDFuntion, float MFontSize, bool MFontBold, float MColumnWidth, string MNumberFormat)
     {
         try
@@ -254,6 +261,19 @@ public class MExcel
             Excel.Range MRange = MWsheet.Range[MWsheet.Cells[DongBDThem, 1], MWsheet.Cells[DongBDThem, 1]];
             for (int i = 1; i <= SoDongThem; i++)
                 MRange.EntireRow.Insert(DangThem);
+        }
+        catch
+        {
+        }
+    }
+
+    public void ThemCot(Excel.Worksheet MWsheet, Microsoft.Office.Interop.Excel.XlInsertShiftDirection DangThem, int SoCotThem, int CotBDThem)
+    {
+        try
+        {
+            Excel.Range MRange = MWsheet.Range[MWsheet.Cells[1, CotBDThem], MWsheet.Cells[1, CotBDThem]];
+            for (int i = 1; i <= SoCotThem; i++)
+                MRange.EntireColumn.Insert(DangThem);
         }
         catch
         {

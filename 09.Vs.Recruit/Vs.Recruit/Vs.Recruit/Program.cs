@@ -83,8 +83,8 @@ namespace Vs.Recruit
         {
             try
             {
-                Application.Run(new Form1());
-                frmViewReport frm = new frmViewReport();
+                Application.Run(new frmInKeHoachTD());
+                //frmViewReport frm = new frmViewReport();
                 //XtraReport1 fpt = new XtraReport1();
                 //frm.rpt = fpt;
                 //frm.ShowDialog();

@@ -2173,14 +2173,12 @@ D:\01.SourceCode\02.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\Commons
 D:\01.SourceCode\02.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\DevExpress.Data.Desktop.v20.1.xml
 D:\01.SourceCode\02.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\DevExpress.Data.v20.1.xml
 D:\01.SourceCode\02.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\DevExpress.DataAccess.v20.1.xml
-D:\01.SourceCode\02.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\DevExpress.Docs.v20.1.xml
 D:\01.SourceCode\02.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\DevExpress.Office.v20.1.Core.xml
 D:\01.SourceCode\02.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\DevExpress.Pdf.v20.1.Core.xml
 D:\01.SourceCode\02.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\DevExpress.PivotGrid.v20.1.Core.xml
 D:\01.SourceCode\02.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\DevExpress.Printing.v20.1.Core.xml
 D:\01.SourceCode\02.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\DevExpress.RichEdit.v20.1.Core.xml
 D:\01.SourceCode\02.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\DevExpress.Sparkline.v20.1.Core.xml
-D:\01.SourceCode\02.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\DevExpress.Spreadsheet.v20.1.Core.xml
 D:\01.SourceCode\02.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\DevExpress.Utils.v20.1.xml
 D:\01.SourceCode\02.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\DevExpress.Xpo.v20.1.xml
 D:\01.SourceCode\02.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\DevExpress.XtraBars.v20.1.xml
@@ -2237,10 +2235,6 @@ D:\01.SourceCode\02.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\de\DevE
 D:\01.SourceCode\02.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\es\DevExpress.Sparkline.v20.1.Core.resources.dll
 D:\01.SourceCode\02.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\ja\DevExpress.Sparkline.v20.1.Core.resources.dll
 D:\01.SourceCode\02.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\ru\DevExpress.Sparkline.v20.1.Core.resources.dll
-D:\01.SourceCode\02.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\de\DevExpress.Spreadsheet.v20.1.Core.resources.dll
-D:\01.SourceCode\02.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\es\DevExpress.Spreadsheet.v20.1.Core.resources.dll
-D:\01.SourceCode\02.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\ja\DevExpress.Spreadsheet.v20.1.Core.resources.dll
-D:\01.SourceCode\02.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\ru\DevExpress.Spreadsheet.v20.1.Core.resources.dll
 D:\01.SourceCode\02.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\de\DevExpress.Utils.v20.1.resources.dll
 D:\01.SourceCode\02.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\es\DevExpress.Utils.v20.1.resources.dll
 D:\01.SourceCode\02.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\ja\DevExpress.Utils.v20.1.resources.dll

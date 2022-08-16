@@ -28,10 +28,10 @@ namespace Vs.Recruit
             datDenNgay.DateTime = datTuNgay.DateTime.AddMonths(1).AddDays(-1);
             LoadCbo();
             LoadgrdPYC(-1);
+            radioGroup1_SelectedIndexChanged(null, null);
             Commons.Modules.sLoad = "";
             grvPYC_FocusedRowChanged(null, null);
             enableButon(true);
-            radioGroup1_SelectedIndexChanged(null, null);
             Commons.Modules.ObjSystems.SetPhanQuyen(btnALL);
         }
         private void LoadgrdPYC(Int64 iID)
@@ -290,7 +290,6 @@ namespace Vs.Recruit
             cboBPYC.Properties.ReadOnly = visible;
             datNgayYC.Properties.ReadOnly = visible;
             cboNguoiYC.Properties.ReadOnly = visible;
-            cboTinhTrang.Properties.ReadOnly = visible;
             datNgayNhanDon.Properties.ReadOnly = visible;
             txtLyDo.Properties.ReadOnly = visible;
 
@@ -333,7 +332,7 @@ namespace Vs.Recruit
                 {
                     txtMA_YCTD.EditValue = grvPYC.GetFocusedRowCellValue("MA_YCTD").ToString();
                     cboBPYC.EditValue = Convert.ToInt64(grvPYC.GetFocusedRowCellValue("ID_TO"));
-                    cboTinhTrang.EditValue = Convert.ToInt64(grvPYC.GetFocusedRowCellValue("ID_TT"));
+                    cboTinhTrang.EditValue = Convert.ToInt32(grvPYC.GetFocusedRowCellValue("ID_TT"));
                     datNgayYC.EditValue = Convert.ToDateTime(grvPYC.GetFocusedRowCellValue("NGAY_YEU_CAU"));
                     cboNguoiYC.EditValue = Convert.ToInt64(grvPYC.GetFocusedRowCellValue("ID_CN"));
                     try

@@ -208,9 +208,9 @@ namespace Commons
             }
         }
 
-        public string returnSps (bool khach, string sPs)
+        public string returnSps(bool khach, string sPs)
         {
-            if(khach == true)
+            if (khach == true)
             {
                 sPs = sPs + "_K";
             }
@@ -292,7 +292,7 @@ namespace Commons
             timeEdit.Properties.EditFormat.FormatString = "HH:mm:ss";
             timeEdit.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.DateTimeAdvancingCaret;
         }
-  
+
 
         public string KyHieuDV(Int64 ID_DV)
         {
@@ -2521,7 +2521,7 @@ namespace Commons
 
                     case "TabPage":
                         {
-                            Ctl.Text = GetNN(dtNgu, Ctl.Name, frm.Name); 
+                            Ctl.Text = GetNN(dtNgu, Ctl.Name, frm.Name);
                             break;
                         }
                     case "Button":
@@ -3320,14 +3320,36 @@ namespace Commons
         {
             //iHD = 1 là thêm = 2 xóa.
             string sSql = "";
+            string MName = "";
+            try { MName = Environment.MachineName; } catch { }
             //if (iHD == 1)
             //{
             //    sSql = "INSERT INTO dbo.LOGIN(USER_LOGIN,TIME_LOGIN,ID)VALUES('" + User + "',GETDATE()," + Commons.Modules.iIDUser + ")";
             //}
-            //if (iHD == 2)
-            //{
-            //    sSql = "DELETE dbo.LOGIN WHERE USER_LOGIN = '" + User + "'";
-            //}
+            try
+            {
+
+
+                if (iHD == 2)
+                {
+                    sSql = "DELETE FROM dbo.LOGIN WHERE USER_LOGIN = '" + User + "' ";
+                    SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, sSql);
+                    return true;
+                }
+                else
+                {
+                    sSql = "DELETE FROM dbo.LOGIN WHERE USER_LOGIN = '" + User + "' ";
+                    SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, sSql);
+
+                    sSql = "INSERT dbo.LOGIN(USER_LOGIN, TIME_LOGIN, ID,[USER_NAME],[M_NAME]) VALUES(N'" + User + "',GETDATE(), " + Commons.Modules.iIDUser.ToString() + " , N'" + LoadIPLocal() + "', N'" + MName + "' )";
+                    SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, sSql);
+                    return true;
+                }
+            }
+            catch
+            {
+                return false;
+            }
             //if (iHD == 3)
             //{
             //    sSql = "UPDATE dbo.LOGIN SET TIME_LOGIN = GETDATE() WHERE USER_LOGIN = '" + User + "'";
@@ -3342,16 +3364,6 @@ namespace Commons
             //    return false;
             //}
 
-
-
-            string MName = "";
-            try { MName = Environment.MachineName; } catch { }
-            sSql = "DELETE FROM dbo.LOGIN WHERE USER_LOGIN = '" + User + "' ";
-            SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, sSql);
-
-            sSql = "INSERT dbo.LOGIN(USER_LOGIN, TIME_LOGIN, ID,[USER_NAME],[M_NAME]) VALUES(N'" + User + "',GETDATE(), " + Commons.Modules.iIDUser.ToString() + " , N'" + LoadIPLocal() + "', N'" + MName + "' )";
-            SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, sSql);
-            return true;
 
         }
         public String LoadIPLocal()
@@ -3676,7 +3688,7 @@ namespace Commons
         }
 
 
-        public void AddCombXtra(string Value, string Display,string Cot, GridView grv, DataTable tempt, bool Search, string cotan, string fName, bool CoNull = false)
+        public void AddCombXtra(string Value, string Display, string Cot, GridView grv, DataTable tempt, bool Search, string cotan, string fName, bool CoNull = false)
         {
             if (CoNull)
                 tempt.Rows.Add(-99, "");
@@ -4426,11 +4438,11 @@ namespace Commons
             return dt;
         }
 
-        public DataTable DataKeHoachPV(bool coAll,int TT)
+        public DataTable DataKeHoachPV(bool coAll, int TT)
         {
             //ID_KHPV,SO_KHPV
             DataTable dt = new DataTable();
-            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboKeHoachPV", coAll,TT));
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboKeHoachPV", coAll, TT));
             return dt;
         }
 
@@ -4587,7 +4599,7 @@ namespace Commons
         {
             //ID_VTTD,TEN_VTTD
             DataTable dt = new DataTable();
-            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboViTriTheoYeuCau",iID_YCTD, Commons.Modules.UserName, Commons.Modules.TypeLanguage));
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboViTriTheoYeuCau", iID_YCTD, Commons.Modules.UserName, Commons.Modules.TypeLanguage));
             return dt;
         }
 

@@ -81,6 +81,8 @@
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.dxValidationProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
+            this.lblGroup = new DevExpress.XtraEditors.LabelControl();
+            this.chkGroup = new DevExpress.XtraEditors.CheckEdit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).BeginInit();
@@ -120,6 +122,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chkGroup.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
@@ -188,6 +191,8 @@
             new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 20F),
             new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 20F),
             new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 28F)});
+            this.tablePanel1.Controls.Add(this.chkGroup);
+            this.tablePanel1.Controls.Add(this.lblGroup);
             this.tablePanel1.Controls.Add(this.grdMauBC);
             this.tablePanel1.Controls.Add(this.lblNgaySinh);
             this.tablePanel1.Controls.Add(this.cboLoaiCongViec);
@@ -726,6 +731,28 @@
             this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem2.TextVisible = false;
             // 
+            // lblGroup
+            // 
+            this.tablePanel1.SetColumn(this.lblGroup, 3);
+            this.lblGroup.Location = new System.Drawing.Point(335, 177);
+            this.lblGroup.Margin = new System.Windows.Forms.Padding(28, 3, 3, 3);
+            this.lblGroup.Name = "lblGroup";
+            this.tablePanel1.SetRow(this.lblGroup, 6);
+            this.lblGroup.Size = new System.Drawing.Size(65, 17);
+            this.lblGroup.TabIndex = 27;
+            this.lblGroup.Text = "labelGroup";
+            // 
+            // chkGroup
+            // 
+            this.tablePanel1.SetColumn(this.chkGroup, 4);
+            this.chkGroup.Location = new System.Drawing.Point(470, 176);
+            this.chkGroup.Margin = new System.Windows.Forms.Padding(12, 3, 3, 3);
+            this.chkGroup.Name = "chkGroup";
+            this.chkGroup.Properties.Caption = "";
+            this.tablePanel1.SetRow(this.chkGroup, 6);
+            this.chkGroup.Size = new System.Drawing.Size(35, 20);
+            this.chkGroup.TabIndex = 28;
+            // 
             // ucBaoCaoCongNhan
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -775,6 +802,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chkGroup.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -826,5 +854,7 @@
         private DevExpress.XtraEditors.LabelControl lblNgaySinh;
         private DevExpress.XtraGrid.GridControl grdMauBC;
         private DevExpress.XtraGrid.Views.Grid.GridView grvMauBC;
+        private DevExpress.XtraEditors.LabelControl lblGroup;
+        private DevExpress.XtraEditors.CheckEdit chkGroup;
     }
 }

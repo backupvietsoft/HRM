@@ -145,7 +145,7 @@ namespace Vs.Payroll
                             grdData.DataSource = dt;
                             EnableButon(false);
                         }
-                        catch 
+                        catch
                         {
 
                         }
@@ -396,12 +396,12 @@ namespace Vs.Payroll
         }
         private void TinhTongLuongThueTNCN()
         {
+            string sBT = "sBTBangTam" + Commons.Modules.UserName;
             try
             {
                 DataTable dt1 = new DataTable();
                 dt1 = (DataTable)grdData.DataSource;
 
-                string sBT = "sBTBangTam" + Commons.Modules.UserName;
                 Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBT, dt1, "");
 
                 System.Data.SqlClient.SqlConnection conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
@@ -416,8 +416,12 @@ namespace Vs.Payroll
                 DataSet ds = new DataSet();
                 da.Fill(ds);
                 grdData.DataSource = ds.Tables[0].Copy();
+                Commons.Modules.ObjSystems.XoaTable(sBT);
             }
-            catch (Exception ex) { }
+            catch (Exception ex)
+            {
+                Commons.Modules.ObjSystems.XoaTable(sBT);
+            }
         }
         private bool KiemTrong_grvData()
         {
@@ -561,7 +565,7 @@ namespace Vs.Payroll
             try
             {
                 if (btnALL.Buttons[0].Properties.Visible == true) return;
-                if (grvData.FocusedColumn.FieldName.Substring(0,3) != "PT_") return;
+                if (grvData.FocusedColumn.FieldName.Substring(0, 3) != "PT_") return;
                 DevExpress.XtraGrid.Views.Grid.GridView view = sender as DevExpress.XtraGrid.Views.Grid.GridView;
                 if (e.MenuType == DevExpress.XtraGrid.Views.Grid.GridMenuType.Row)
                 {

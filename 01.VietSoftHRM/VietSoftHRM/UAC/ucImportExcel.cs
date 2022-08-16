@@ -1390,10 +1390,10 @@ namespace VietSoftHRM
                     SqlConnection conn = new SqlConnection(Commons.IConnections.CNStr);
                     if (conn.State != ConnectionState.Open) conn.Open();
                     SqlTransaction sTrans = conn.BeginTransaction();
+                    string sbt = "sBTDV" + Commons.Modules.UserName;
                     try
                     {
                         //tạo bảm tạm trên lưới
-                        string sbt = "sBTDV" + Commons.Modules.UserName;
                         Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sbt, Commons.Modules.ObjSystems.ConvertDatatable(grvData), "");
 
                         string sSql = "INSERT INTO dbo.DON_VI(MSDV,TEN_DV,TEN_DV_A,TEN_NGAN,DIA_CHI,DIEN_THOAI,FAX,SO_TAI_KHOAN,TEN_NGAN_HANG,TINH_THANH)SELECT [" + grvData.Columns[0].FieldName.ToString() + "],[" + grvData.Columns[1].FieldName.ToString() + "],[" + grvData.Columns[2].FieldName.ToString() + "],[" + grvData.Columns[3].FieldName.ToString() + "],[" + grvData.Columns[4].FieldName.ToString() + "],[" + grvData.Columns[5].FieldName.ToString() + "],[" + grvData.Columns[6].FieldName.ToString() + "],[" + grvData.Columns[7].FieldName.ToString() + "],[" + grvData.Columns[8].FieldName.ToString() + "],[" + grvData.Columns[9].FieldName.ToString() + "] FROM " + sbt;
@@ -1404,6 +1404,7 @@ namespace VietSoftHRM
                     }
                     catch (Exception ex)
                     {
+                        Commons.Modules.ObjSystems.XoaTable(sbt);
                         sTrans.Rollback();
                         XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgImportKhongThanhCong") + " error(" + ex.ToString() + ")", Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
@@ -3400,10 +3401,10 @@ namespace VietSoftHRM
                     SqlConnection conn = new SqlConnection(Commons.IConnections.CNStr);
                     if (conn.State != ConnectionState.Open) conn.Open();
                     SqlTransaction sTrans = conn.BeginTransaction();
+                    string sbt = "sBTDonGiaGiay" + Commons.Modules.UserName;
                     try
                     {
                         //tạo bảm tạm trên lưới
-                        string sbt = "sBTDonGiaGiay" + Commons.Modules.UserName;
                         Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sbt, Commons.Modules.ObjSystems.ConvertDatatable(grvData), "");
                         string sSql = "INSERT INTO dbo.DON_GIA_GIAY(NGAY_QD,HS_DG_GIAY) SELECT CONVERT(datetime,[" + grvData.Columns[0].FieldName.ToString() + "],103),[" + grvData.Columns[1].FieldName.ToString() + "] FROM " + sbt;
                         SqlHelper.ExecuteNonQuery(sTrans, CommandType.Text, sSql);
@@ -3413,6 +3414,7 @@ namespace VietSoftHRM
                     }
                     catch (Exception ex)
                     {
+                        Commons.Modules.ObjSystems.XoaTable(sbt);
                         sTrans.Rollback();
                         XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgImportKhongThanhCong") + " error(" + ex.ToString() + ")", Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }

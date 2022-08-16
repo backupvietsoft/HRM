@@ -11,6 +11,20 @@ namespace VietSoftHRM
 {
     public static class clsMain
     {
+        public static string GetLocalIPAddress()
+        {
+            var host = Dns.GetHostEntry(Dns.GetHostName());
+
+            //foreach (var ip in host.AddressList)
+            //{
+            //    if (ip.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+            //    {
+            //        return ip.ToString();
+            //    }
+            //}
+            //throw new Exception("No network adapters with an IPv4 address in the system!");
+            return host.HostName.ToString();
+        }
 
         public static void setConfig()
         {
@@ -24,8 +38,6 @@ namespace VietSoftHRM
                 Commons.IConnections.Server = Commons.Modules.ObjSystems.Decrypt(ds.Tables[0].Rows[0]["S"].ToString(), true);
                 Commons.IConnections.Database = ds.Tables[0].Rows[0]["D"].ToString();
                 Commons.IConnections.Password = Commons.Modules.ObjSystems.Decrypt(ds.Tables[0].Rows[0]["P"].ToString(), true);
-
-
 
                 Commons.Modules.sIP = Commons.Modules.ObjSystems.Decrypt(ds.Tables[0].Rows[0]["IP"].ToString(), true);
                 Commons.Modules.ChangLanguage = false;
@@ -50,6 +62,7 @@ namespace VietSoftHRM
                 Commons.Modules.iSNNgay = 4;
                 Commons.Modules.iSNTuan = 12;
                 Commons.Modules.iSNThang = 40;
+                Commons.Modules.connect = "Server=27.74.240.29;database=DATA_CHAM_CONG_DM2;uid=sa;pwd=codaikadaiku;Connect Timeout=9999;";
             }
             catch
             {
@@ -84,6 +97,14 @@ namespace VietSoftHRM
         }
         public static bool CheckServer()
         {
+            //string hostName = clsMain.GetLocalIPAddress();
+            //if (hostName != "NHAT-HR")
+            //{
+            //    XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgSaiHDD"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "sThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //    return false;
+            //}
+
+
             string resulst = "";
             //2.kiểm tra HHD
             resulst = Commons.Modules.ObjSystems.GetAPI("HDD");

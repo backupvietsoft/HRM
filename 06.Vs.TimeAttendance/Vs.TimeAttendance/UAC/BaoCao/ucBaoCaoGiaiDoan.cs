@@ -149,7 +149,8 @@ namespace Vs.HRM
                                                 break;
                                             }
                                         default:
-                                            XacNhanQuetThe();
+                                            XacNhanQuetThe_DM();
+                                            //XacNhanQuetThe();
                                             break;
                                     }
                                 }
@@ -186,8 +187,8 @@ namespace Vs.HRM
 
         private void ucBaoCaoGiaiDoan_Load(object sender, EventArgs e)
         {
-            
-           
+
+
             Commons.Modules.sLoad = "0Load";
             LoadCboDonVi();
             LoadCboXiNghiep();
@@ -260,7 +261,7 @@ namespace Vs.HRM
                         grdCN.Visible = true;
                         break;
                     }
-                
+
                 default:
                     {
                         chkInTheoCongNhan.Enabled = false;
@@ -823,6 +824,213 @@ namespace Vs.HRM
                 //CẠNH giữa côt động
                 formatRange = oSheet.get_Range("F4", lastColumn + rowCnt.ToString());
                 formatRange.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
+
+                oXL.Visible = true;
+                oXL.UserControl = true;
+
+                oWB.SaveAs(SaveExcelFile,
+                    AccessMode: Excel.XlSaveAsAccessMode.xlExclusive);
+                //oWB.SaveAs("D:\\BangCongThang.xlsx",
+                //AccessMode: Excel.XlSaveAsAccessMode.xlShared);
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+        private void XacNhanQuetThe_DM()
+        {
+            try
+            {
+                System.Data.SqlClient.SqlConnection conn;
+                conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                conn.Open();
+                DataTable dtBCGaiDoan;
+
+                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand(Commons.Modules.ObjSystems.returnSps(Commons.Modules.chamCongK, "rptBangXacNhanGioQuetThe"), conn);
+
+                cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                cmd.Parameters.Add("@Dvi", SqlDbType.Int).Value = LK_DON_VI.EditValue;
+                cmd.Parameters.Add("@XN", SqlDbType.Int).Value = LK_XI_NGHIEP.EditValue;
+                cmd.Parameters.Add("@TO", SqlDbType.Int).Value = LK_TO.EditValue;
+                cmd.Parameters.Add("@TNgay", SqlDbType.Date).Value = Convert.ToDateTime(lk_TuNgay.EditValue);
+                cmd.Parameters.Add("@DNgay", SqlDbType.Date).Value = Convert.ToDateTime(lk_DenNgay.EditValue);
+                cmd.CommandType = CommandType.StoredProcedure;
+                System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+
+                DataSet ds = new DataSet();
+                adp.Fill(ds);
+                dtBCGaiDoan = new DataTable();
+                dtBCGaiDoan = ds.Tables[0].Copy();
+
+
+                Excel.Application oXL;
+                Excel._Workbook oWB;
+                Excel._Worksheet oSheet;
+
+                oXL = new Excel.Application();
+                oXL.Visible = false;
+
+                oWB = (Excel._Workbook)(oXL.Workbooks.Add(Missing.Value));
+                oSheet = (Excel._Worksheet)oWB.ActiveSheet;
+
+                string fontName = "Times New Roman";
+                int fontSizeTieuDe = 16;
+                int fontSizeNoiDung = 12;
+                int iTNgay = Convert.ToDateTime(lk_TuNgay.EditValue).Day;
+                int iDNgay = Convert.ToDateTime(lk_DenNgay.EditValue).Day;
+                int iSoNgay = (iDNgay - iTNgay);
+
+                string lastColumn = string.Empty;
+                lastColumn = CharacterIncrement(dtBCGaiDoan.Columns.Count - 1);
+
+                //=====
+
+                Excel.Range row2_TieuDe_BaoCao = oSheet.get_Range("A2", lastColumn + "2");
+                row2_TieuDe_BaoCao.Merge();
+                row2_TieuDe_BaoCao.Font.Size = fontSizeTieuDe;
+                row2_TieuDe_BaoCao.Font.Name = fontName;
+                row2_TieuDe_BaoCao.Font.Bold = true;
+                row2_TieuDe_BaoCao.Cells.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
+                row2_TieuDe_BaoCao.Cells.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
+                row2_TieuDe_BaoCao.RowHeight = 50;
+                row2_TieuDe_BaoCao.Value2 = "CHI TIẾT CHẤM CÔNG";
+
+
+
+
+                Excel.Range row2_TieuDe_TUNGAY = oSheet.get_Range("A3", lastColumn + "3");
+                row2_TieuDe_TUNGAY.Merge();
+                row2_TieuDe_TUNGAY.Font.Size = fontSizeTieuDe;
+                row2_TieuDe_TUNGAY.Font.Name = fontName;
+                row2_TieuDe_TUNGAY.Font.Bold = true;
+                row2_TieuDe_TUNGAY.Cells.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
+                row2_TieuDe_TUNGAY.Cells.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
+                row2_TieuDe_TUNGAY.RowHeight = 30;
+                row2_TieuDe_TUNGAY.Value2 = "Từ ngày " + Convert.ToDateTime(lk_TuNgay.EditValue).ToString("dd/MM/yyyy") + " đến ngày " + Convert.ToDateTime(lk_DenNgay.EditValue).ToString("dd/MM/yyyy") + "";
+
+                Excel.Range row2_Format_TieuDe = oSheet.get_Range("A4", lastColumn + "5");
+                row2_Format_TieuDe.Font.Size = 12;
+                row2_Format_TieuDe.Font.Name = fontName;
+                row2_Format_TieuDe.Font.Bold = true;
+                row2_Format_TieuDe.Cells.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
+                row2_Format_TieuDe.Cells.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
+                row2_Format_TieuDe.Interior.Color = Color.Yellow;
+
+
+                Excel.Range row5_TieuDe = oSheet.get_Range("A4", "A5");
+                row5_TieuDe.Merge();
+                row5_TieuDe.Value2 = "Stt";
+
+                Excel.Range row5_TieuDe1 = oSheet.get_Range("B4", "B5");
+                row5_TieuDe1.Merge();
+                row5_TieuDe1.Interior.Color = Color.Yellow;
+
+                row5_TieuDe1.Value2 = "Mã số NV";
+
+                Excel.Range row5_TieuDe2 = oSheet.get_Range("C4", "C5");
+                row5_TieuDe2.Merge();
+                row5_TieuDe2.Value2 = "Họ tên";
+
+
+                Excel.Range row5_TieuDe3 = oSheet.get_Range("D4", "D5");
+                row5_TieuDe3.Merge();
+                row5_TieuDe3.Value2 = "Phòng ban";
+
+                Excel.Range row5_TieuDe4 = oSheet.get_Range("E4", "E5");
+                row5_TieuDe4.Merge();
+                row5_TieuDe4.Value2 = "Chức vụ";
+
+                Excel.Range row5_TieuDe5 = oSheet.get_Range("F4", "F5");
+                row5_TieuDe5.Merge();
+                row5_TieuDe5.Value2 = "Ngày";
+
+                Excel.Range row5_TieuDe6 = oSheet.get_Range("G4", "G5");
+                row5_TieuDe6.Merge();
+                row5_TieuDe6.Value2 = "Thứ";
+
+                //tô màu
+                //Range range = oSheet.get_Range("A" + redRows.ToString(), "J" + redRows.ToString());
+                //range.Cells.Interior.Color = System.Drawing.Color.Red;
+
+
+                Excel.Range formatRange;
+                int col = 8;
+                int colvr = 1;
+                while (col < dtBCGaiDoan.Columns.Count)
+                {
+                    formatRange = oSheet.get_Range("" + CharacterIncrement(col - 1) + "4", ""+CharacterIncrement(col -1)+"5");
+                    formatRange.Merge();
+                    formatRange.Value = "Vào " + colvr.ToString();
+
+                    formatRange = oSheet.get_Range("" + CharacterIncrement(col) + "4", "" + CharacterIncrement(col) + "5");
+                    formatRange.Merge();
+                    formatRange.Value = "Ra " + colvr.ToString();
+                    //oSheet.Cells[4, col] = "Vào " + colvr.ToString();
+                    //oSheet.Cells[4, col + 1] = "Ra " + colvr.ToString();
+
+                    col = col + 2;
+                    colvr++;
+                }
+
+                DataRow[] dr = dtBCGaiDoan.Select();
+                string[,] rowData = new string[dr.Length, dtBCGaiDoan.Columns.Count];
+
+                int rowCnt = 0;
+                //int redRows = 7;
+                foreach (DataRow row in dr)
+                {
+                    for (col = 0; col < dtBCGaiDoan.Columns.Count; col++)
+                    {
+                        rowData[rowCnt, col] = row[col].ToString();
+                    }
+
+                    rowCnt++;
+                }
+                rowCnt = rowCnt + 5;
+                oSheet.get_Range("A6", lastColumn + rowCnt.ToString()).Value2 = rowData;
+
+
+                ////Kẻ khung toàn bộ
+                formatRange = oSheet.get_Range("A4", lastColumn + rowCnt.ToString());
+                formatRange.Borders.Color = Color.Black;
+                //dữ liệu
+                formatRange = oSheet.get_Range("A6", lastColumn + rowCnt.ToString());
+                formatRange.Font.Name = fontName;
+                formatRange.Font.Size = fontSizeNoiDung;
+
+                //stt
+                formatRange = oSheet.get_Range("A5", "A" + rowCnt.ToString());
+                formatRange.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
+                formatRange.ColumnWidth = 5;
+                //ma nv
+                formatRange = oSheet.get_Range("B6", "B" + rowCnt.ToString());
+                formatRange.HorizontalAlignment = Excel.XlHAlign.xlHAlignLeft;
+                formatRange.ColumnWidth = 15;
+                //ho ten
+                formatRange = oSheet.get_Range("C5", "C" + rowCnt.ToString());
+                formatRange.HorizontalAlignment = Excel.XlHAlign.xlHAlignLeft;
+                formatRange.ColumnWidth = 35;
+                //xí nghiệp
+                formatRange = oSheet.get_Range("D5", "D" + rowCnt.ToString());
+                formatRange.HorizontalAlignment = Excel.XlHAlign.xlHAlignLeft;
+                formatRange.ColumnWidth = 20;
+                //tổ
+                formatRange = oSheet.get_Range("E5", "E" + rowCnt.ToString());
+                formatRange.HorizontalAlignment = Excel.XlHAlign.xlHAlignLeft;
+                formatRange.ColumnWidth = 20;
+
+                //CẠNH giữa côt động
+                formatRange = oSheet.get_Range("F4", lastColumn + rowCnt.ToString());
+                formatRange.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
+
+                oXL.Visible = true;
+                oXL.UserControl = true;
+
+                oWB.SaveAs(SaveExcelFile,
+                    AccessMode: Excel.XlSaveAsAccessMode.xlExclusive);
                 //oWB.SaveAs("D:\\BangCongThang.xlsx",
                 //AccessMode: Excel.XlSaveAsAccessMode.xlShared);
 
@@ -1163,8 +1371,8 @@ namespace Vs.HRM
                 oXL.Visible = true;
                 oXL.UserControl = true;
 
-                //oWB.SaveAs(SaveExcelFile,
-                //    AccessMode: Excel.XlSaveAsAccessMode.xlShared);
+                oWB.SaveAs(SaveExcelFile,
+                    AccessMode: Excel.XlSaveAsAccessMode.xlExclusive);
             }
             catch (Exception ex)
             {

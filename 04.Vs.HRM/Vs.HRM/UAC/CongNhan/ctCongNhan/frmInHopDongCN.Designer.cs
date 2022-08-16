@@ -158,6 +158,7 @@
             new DevExpress.XtraEditors.Controls.RadioGroupItem("rdo_HopDongThuViec", "Hợp đồng thử việc CD, DH", true, "rdo_HopDongThuViec"),
             new DevExpress.XtraEditors.Controls.RadioGroupItem("rdo_HopDongThucViecCN_QC", "Hợp đồng thử việc CN, QC", true, "rdo_HopDongThucViecCN_QC"),
             new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Hợp đồng đào tạo", true, "rdo_HopDongDaoTao"),
+            new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Hợp đồng lao động khoáng", true, "rdo_HopDongLaoDongKhoang"),
             new DevExpress.XtraEditors.Controls.RadioGroupItem("rdo_ToKhaiBHXH", "Tờ khai cấp sổ BHXH", true, "rdo_ToKhaiBHXH")});
             this.tablePanel1.SetRow(this.rdo_ChonBaoCao, 3);
             this.tablePanel1.SetRowSpan(this.rdo_ChonBaoCao, 3);

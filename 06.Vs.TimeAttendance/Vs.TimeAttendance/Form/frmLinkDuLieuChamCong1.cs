@@ -23,7 +23,7 @@ namespace Vs.TimeAttendance
     {
         private bool them = false;
         private bool bLinkOK = false;
-
+        private int loaiLink = 1; // 1 Link bằng SQL, 2 Link bằng excel
         public static frmLinkDuLieuChamCong1 _instance;
         public static frmLinkDuLieuChamCong1 Instance
         {
@@ -57,7 +57,6 @@ namespace Vs.TimeAttendance
                 repositoryItemTimeEdit1.DisplayFormat.FormatString = "HH:mm:ss";
                 repositoryItemTimeEdit1.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
                 repositoryItemTimeEdit1.EditFormat.FormatString = "HH:mm:ss";
-
 
                 Commons.Modules.sPS = "0Load";
                 Commons.Modules.ObjSystems.LoadCboDonVi(cbDonVi);
@@ -97,8 +96,16 @@ namespace Vs.TimeAttendance
             windowsUIButton.Buttons[9].Properties.Visible = visible;
             windowsUIButton.Buttons[10].Properties.Visible = visible;
             windowsUIButton.Buttons[11].Properties.Visible = visible;
-            windowsUIButton.Buttons[12].Properties.Visible = visible;
+            if (Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString() == "DM")
+            {
+                windowsUIButton.Buttons[12].Properties.Visible = visible;
+            }
+            else
+            {
+                windowsUIButton.Buttons[12].Properties.Visible = false;
+            }
             windowsUIButton.Buttons[13].Properties.Visible = visible;
+            windowsUIButton.Buttons[14].Properties.Visible = visible;
             //      groupDanhSachKhoaHoc.Enabled = visible;
         }
 
@@ -219,6 +226,22 @@ namespace Vs.TimeAttendance
                     }
                 case "LinkDuLieu":
                     {
+                        loaiLink = 1;
+                        LinkDuLieu();
+
+                        if (bLinkOK)
+                        {
+                            XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msg_LinkThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        else
+                        {
+                            XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msg_LinkKhongThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        break;
+                    }
+                case "linkExcel":
+                    {
+                        loaiLink = 2;
                         LinkDuLieu();
 
                         if (bLinkOK)
@@ -482,84 +505,87 @@ namespace Vs.TimeAttendance
                         tbDLQT.Columns.Add(new DataColumn("MS_THE_CC", typeof(string)));
                         tbDLQT.Columns.Add(new DataColumn("NGAY", typeof(DateTime)));
                         //load csdl
-                        //Server = 192.168.2.5; database = abriDBHRPro7; uid = sa; pwd = 123; Connect Timeout = 9999
-                        tbDLQT.Load(SqlHelper.ExecuteReader(Commons.Modules.connect, CommandType.Text, "SELECT RIGHT(UserEnrollNumber,5) AS	MS_THE_CC,TimeStr  AS NGAY FROM dbo.CheckInOut WHERE CONVERT(NVARCHAR(13),TimeStr,103) = '" + dtNgayChamCong.Text + "'"));
-                        
-                        //#region LinkExcel
-                        //string sPath = "";
-                        //sPath = Commons.Modules.ObjSystems.OpenFiles("All Excel Files (*.xls;*.xlsx)|*.xls;*.xlsx|" + "All Files (*.*)|*.*");
-                        //string sBTNgay = "sBTNgay" + Commons.Modules.iIDUser;
+                        if (loaiLink == 1)
+                        {
+                            tbDLQT.Load(SqlHelper.ExecuteReader(Commons.Modules.connect, CommandType.Text, "SELECT RIGHT(UserEnrollNumber,5) AS	MS_THE_CC,TimeStr  AS NGAY FROM dbo.CheckInOut WHERE CONVERT(NVARCHAR(13),TimeStr,103) = '" + dtNgayChamCong.Text + "'"));
+                        }
+                        else
+                        {
 
-                        //if (sPath == "") return;
-                        //try
-                        //{
+                        #region LinkExcel
+                        string sPath = "";
+                        sPath = Commons.Modules.ObjSystems.OpenFiles("All Excel Files (*.xls;*.xlsx)|*.xls;*.xlsx|" + "All Files (*.*)|*.*");
+                        string sBTNgay = "sBTNgay" + Commons.Modules.iIDUser;
 
-                        //    //Lấy đường dẫn
-                        //    var source = new ExcelDataSource();
-                        //    source.FileName = sPath;
+                        if (sPath == "") return;
+                        try
+                        {
+                            //Lấy đường dẫn
+                            var source = new ExcelDataSource();
+                            source.FileName = sPath;
 
-                        //    //Lấy worksheet
-                        //    Workbook workbook = new Workbook();
-                        //    string ext = System.IO.Path.GetExtension(sPath);
-                        //    if (ext.ToLower() == ".xlsx")
-                        //        workbook.LoadDocument(sPath, DevExpress.Spreadsheet.DocumentFormat.Xlsx);
-                        //    else
-                        //        workbook.LoadDocument(sPath, DevExpress.Spreadsheet.DocumentFormat.Xls);
-                        //    List<string> wSheet = new List<string>();
-                        //    for (int i = 0; i < workbook.Worksheets.Count; i++)
-                        //    {
-                        //        wSheet.Add(workbook.Worksheets[i].Name.ToString());
-                        //    }
-                        //    //Load worksheet
-                        //    XtraInputBoxArgs args = new XtraInputBoxArgs();
-                        //    // set required Input Box options
-                        //    args.Caption = "Chọn sheet cần nhập dữ liệu";
-                        //    args.Prompt = "Chọn sheet cần nhập dữ liệu";
-                        //    args.DefaultButtonIndex = 0;
+                            //Lấy worksheet
+                            Workbook workbook = new Workbook();
+                            string ext = System.IO.Path.GetExtension(sPath);
+                            if (ext.ToLower() == ".xlsx")
+                                workbook.LoadDocument(sPath, DevExpress.Spreadsheet.DocumentFormat.Xlsx);
+                            else
+                                workbook.LoadDocument(sPath, DevExpress.Spreadsheet.DocumentFormat.Xls);
+                            List<string> wSheet = new List<string>();
+                            for (int i = 0; i < workbook.Worksheets.Count; i++)
+                            {
+                                wSheet.Add(workbook.Worksheets[i].Name.ToString());
+                            }
+                            //Load worksheet
+                            XtraInputBoxArgs args = new XtraInputBoxArgs();
+                            // set required Input Box options
+                            args.Caption = "Chọn sheet cần nhập dữ liệu";
+                            args.Prompt = "Chọn sheet cần nhập dữ liệu";
+                            args.DefaultButtonIndex = 0;
 
-                        //    // initialize a DateEdit editor with custom settings
-                        //    ComboBoxEdit editor = new ComboBoxEdit();
-                        //    editor.Properties.Items.AddRange(wSheet);
-                        //    editor.EditValue = wSheet[0].ToString();
+                            // initialize a DateEdit editor with custom settings
+                            ComboBoxEdit editor = new ComboBoxEdit();
+                            editor.Properties.Items.AddRange(wSheet);
+                            editor.EditValue = wSheet[0].ToString();
 
-                        //    args.Editor = editor;
-                        //    // a default DateEdit value
-                        //    args.DefaultResponse = wSheet[0].ToString();
-                        //    // display an Input Box with the custom editor
-                        //    var result = XtraInputBox.Show(args);
-                        //    if (result == null || result.ToString() == "") return;
+                            args.Editor = editor;
+                            // a default DateEdit value
+                            args.DefaultResponse = wSheet[0].ToString();
+                            // display an Input Box with the custom editor
+                            var result = XtraInputBox.Show(args);
+                            if (result == null || result.ToString() == "") return;
 
-                        //    var worksheetSettings = new ExcelWorksheetSettings(result.ToString());
-                        //    source.SourceOptions = new ExcelSourceOptions(worksheetSettings);
-                        //    source.Fill();
+                            var worksheetSettings = new ExcelWorksheetSettings(result.ToString());
+                            source.SourceOptions = new ExcelSourceOptions(worksheetSettings);
+                            source.Fill();
 
 
-                        //    DataTable dt = new DataTable();
-                        //    dt = new DataTable();
-                        //    dt = ToDataTable(source);
-                        //    //dt.AsEnumerable().Where(x => x["NGAY"].ToString() == "" + dtNgayChamCong.EditValue + "").CopyToDataTable();
-                        //    try
-                        //    {
-                        //        dt = dt.AsEnumerable().Where(x => x["NGAY"].Equals(dtNgayChamCong.EditValue)).CopyToDataTable();
-                        //    }
-                        //    catch { dt = dt.Clone(); }
-                        //    Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBTNgay, dt, "");
-                        //    tbDLQT.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spUpdatetbDLQT", sBTNgay, Convert.ToInt32((dt.Columns.Count - 2) / 2)));
-                        //}
-                        //catch (Exception ex)
-                        //{
-                        //    XtraMessageBox.Show(ex.Message);
-                        //    bLinkOK = false;
-                        //    Commons.Modules.ObjSystems.XoaTable(sBTNgay);
-                        //    return;
-                        //}
-                        //#endregion
+                            DataTable dt = new DataTable();
+                            dt = new DataTable();
+                            dt = ToDataTable(source);
+                            //dt.AsEnumerable().Where(x => x["NGAY"].ToString() == "" + dtNgayChamCong.EditValue + "").CopyToDataTable();
+                            try
+                            {
+                                dt = dt.AsEnumerable().Where(x => x["NGAY"].Equals(dtNgayChamCong.EditValue)).CopyToDataTable();
+                            }
+                            catch (Exception ex) { dt = dt.Clone(); }
+                            Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBTNgay, dt, "");
+                            tbDLQT.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spUpdatetbDLQT", sBTNgay, Convert.ToInt32((dt.Columns.Count - 2) / 2)));
+                        }
+                        catch (Exception ex)
+                        {
+                            XtraMessageBox.Show(ex.Message);
+                            bLinkOK = false;
+                            Commons.Modules.ObjSystems.XoaTable(sBTNgay);
+                            return;
+                        }
+                        #endregion
+                        }
 
                         System.Data.SqlClient.SqlConnection conn;
                         conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
                         conn.Open();
-
-                        System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("usp_InsertDLQT", conn);
+                        System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand(loaiLink == 1 ? "usp_InsertDLQT" : "usp_InsertDLQT_Excel", conn);
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("@tableDLQT", tbDLQT);
                         cmd.Parameters.AddWithValue("@UName", Commons.Modules.UserName);
@@ -595,7 +621,7 @@ namespace Vs.TimeAttendance
                             XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msg_KhongCoDuLieuLink"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                             bLinkOK = false;
                         }
-                       
+
                         break;
                     }
 
@@ -715,7 +741,6 @@ namespace Vs.TimeAttendance
                     break;
             }
         }
-
         private void LinkDL_KHACH()
         {
             try
@@ -1255,7 +1280,7 @@ namespace Vs.TimeAttendance
                 {
                     if (props[i] != props[1] && props[i] != props[2] && props[i] != props[3] && props[i] != props[5])
                     {
-                        if(props[i] != props[0] && props[i] != props[4])
+                        if (props[i] != props[0] && props[i] != props[4])
                         {
                             values[sCot] = dtNgayChamCong.Text + " " + (props[i].GetValue(item) == "" ? DateTime.MinValue.TimeOfDay : Convert.ToDateTime(props[i].GetValue(item)).TimeOfDay);
                         }

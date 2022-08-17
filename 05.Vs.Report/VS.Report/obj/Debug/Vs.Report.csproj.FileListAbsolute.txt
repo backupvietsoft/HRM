@@ -3068,6 +3068,7 @@ F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.frmViewReport.resources
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptTienThuongXepLoai.resources
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptTienThuongKhacLuongTH.resources
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptTienThuongXepLoaiTH.resources
+F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptBanCamKet_HN.resources
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptBangLuongThangNhanVien.resources
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptBaoCaoLaoDongThang.resources
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\VS.Report.rptBCBienBanCanhCao.resources
@@ -3090,8 +3091,10 @@ F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptBieuDoChiaTheoDiaLy.reso
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptBieuDoPhanLoai.resources
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptDSXNgioquetthetheongay.resources
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptHopDongLaoDongKhoang.resources
+F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptHopDongThoiVu_HN.resources
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptHopDongThuViec_HN.resources
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptHopDongLaoDong_HN.resources
+F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptKetThucHopDong_HN.resources
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptPhuLucHopDongLaoDong_DM.resources
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptHopDongLaoDong_DM.resources
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptHopDongLaoDongThuViec_DM.resources
@@ -3141,6 +3144,9 @@ F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptHoSoCapCuu.resources
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptPhuLucHopDongLaoDong_SB.resources
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptPhuLucHopDongLaoDong.resources
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptQuyetDinhChamDutHDLD_DM.resources
+F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptQuyetDinhDieuChuyen_HN.resources
+F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptQuyetDinhLuongTapThe_HN.resources
+F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptQuyetDinhLuongCN_HN.resources
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptQuyetDinhNangLuong_DM.resources
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptQuyetDinhBoNhiem_DM.resources
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptQuyetDinhDieuChuyen_DM.resources
@@ -3198,9 +3204,3 @@ F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.csproj.CoreCompileInputs.ca
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.csproj.CopyComplete
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\VS.Report.dll
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\VS.Report.pdb
-F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptHopDongThoiVu_HN.resources
-F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptBanCamKet_HN.resources
-F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptKetThucHopDong_HN.resources
-F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptQuyetDinhDieuChuyen_HN.resources
-F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptQuyetDinhLuongTapThe_HN.resources
-F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptQuyetDinhLuongCN_HN.resources

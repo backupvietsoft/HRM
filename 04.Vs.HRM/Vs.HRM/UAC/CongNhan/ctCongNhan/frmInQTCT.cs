@@ -113,6 +113,42 @@ namespace Vs.HRM
             }
             catch { }
         }
+        private void InQuyetDinhDieuChuyen_NB()
+        {
+            try
+            {
+                System.Data.SqlClient.SqlConnection conn;
+                DataTable dt = new DataTable();
+                frmViewReport frm = new frmViewReport();
+                frm.rpt = new rptQuyetDinhDieuChuyen_NB(dNgayIn.DateTime);
+
+                conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                conn.Open();
+
+                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptQuyetDinhDieuChuyen_NB", conn);
+                cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                cmd.Parameters.Add("@ID_CN", SqlDbType.Int).Value = idCN;
+                cmd.Parameters.Add("@ID_SQD", SqlDbType.Int).Value = idCT;
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+                DataSet ds = new DataSet();
+                adp.Fill(ds);
+                dt = new DataTable();
+                dt = ds.Tables[0].Copy();
+                dt.TableName = "DATA";
+                frm.AddDataSource(dt);
+
+                DataTable dt1 = new DataTable();
+                dt1 = ds.Tables[1].Copy();
+                dt1.TableName = "NOI_DUNG";
+                frm.AddDataSource(dt1);
+
+                frm.ShowDialog();
+            }
+            catch { }
+        }
         private void InQuyetDinhDieuChuyen_DM()
         {
             try
@@ -212,6 +248,11 @@ namespace Vs.HRM
                                                 InQuyetDinhDieuChuyen_DM();
                                                 break;
                                             }
+                                        case "NB":
+                                            {
+                                                InQuyetDinhDieuChuyen_NB();
+                                                break;
+                                            }
                                         default:
                                             InQuyetDinhDieuChuyen_MT();
                                             break;
@@ -236,34 +277,46 @@ namespace Vs.HRM
                                             InQuyetDinhTuyenDung_SB();
                                             break;
                                     }
-                                    
+
                                     break;
                                 }
                             case 2:
                                 {
-                                    System.Data.SqlClient.SqlConnection conn;
-                                    DataTable dt = new DataTable();
-                                    frmViewReport frm = new frmViewReport();
-                                    frm.rpt = new rptBCQuaTrinhCongTacCN(dNgayIn.DateTime);
+                                    switch (Commons.Modules.ObjSystems.KyHieuDV_CN(idCN))
+                                    {
+                                        case "NB":
+                                            {
+                                                break;
+                                            }
+                                        default:
+                                            {
+                                                System.Data.SqlClient.SqlConnection conn;
+                                                DataTable dt = new DataTable();
+                                                frmViewReport frm = new frmViewReport();
+                                                frm.rpt = new rptBCQuaTrinhCongTacCN(dNgayIn.DateTime);
 
-                                    conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
-                                    conn.Open();
+                                                conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                                                conn.Open();
 
-                                    System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptQuaTrinhCongTacCN", conn);
-                                    cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
-                                    cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
-                                    cmd.Parameters.Add("@ID_CN", SqlDbType.Int).Value = idCN;
-                                    cmd.CommandType = CommandType.StoredProcedure;
+                                                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptQuaTrinhCongTacCN", conn);
+                                                cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                                                cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                                                cmd.Parameters.Add("@ID_CN", SqlDbType.Int).Value = idCN;
+                                                cmd.CommandType = CommandType.StoredProcedure;
 
-                                    System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
-                                    DataSet ds = new DataSet();
-                                    adp.Fill(ds);
-                                    dt = new DataTable();
-                                    dt = ds.Tables[0].Copy();
-                                    dt.TableName = "DA_TA";
-                                    frm.AddDataSource(dt);
+                                                System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+                                                DataSet ds = new DataSet();
+                                                adp.Fill(ds);
+                                                dt = new DataTable();
+                                                dt = ds.Tables[0].Copy();
+                                                dt.TableName = "DA_TA";
+                                                frm.AddDataSource(dt);
 
-                                    frm.ShowDialog();
+                                                frm.ShowDialog();
+                                                break;
+                                            }
+                                    }
+                                    
                                     break;
                                 }
                         }

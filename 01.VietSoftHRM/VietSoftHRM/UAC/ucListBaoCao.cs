@@ -8,6 +8,7 @@ using Vs.HRM;
 using Vs.TimeAttendance;
 using Vs.Report;
 using Vs.Payroll;
+using Vs.Recruit;
 
 namespace VietSoftHRM
 {
@@ -416,6 +417,14 @@ namespace VietSoftHRM
                 case "mnuBCLuongThang13":
                     {
                         ucBCLuongThang13 tmp = new ucBCLuongThang13();
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(tmp);
+                        tmp.Dock = DockStyle.Fill;
+                        break;
+                    }
+                case "mnuBCDSUVTuyenDung":
+                    {
+                        ucBaoCaoDSUVThamGiaTD tmp = new ucBaoCaoDSUVThamGiaTD();
                         panel2.Controls.Clear();
                         panel2.Controls.Add(tmp);
                         tmp.Dock = DockStyle.Fill;

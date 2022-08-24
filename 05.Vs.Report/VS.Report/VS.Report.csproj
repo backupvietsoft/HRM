@@ -10,8 +10,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>VS.Report</RootNamespace>
     <AssemblyName>VS.Report</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -36,33 +37,34 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DevExpress.BonusSkins.v20.1" />
-    <Reference Include="DevExpress.Charts.v20.1.Core, Version=20.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.CodeParser.v20.1, Version=20.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.Dashboard.v20.1.Core, Version=20.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.Data.v20.1" />
-    <Reference Include="DevExpress.DataAccess.v20.1, Version=20.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.Office.v20.1.Core, Version=20.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.Pdf.v20.1.Core, Version=20.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.PivotGrid.v20.1.Core, Version=20.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.RichEdit.v20.1.Core, Version=20.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.RichEdit.v20.1.Export, Version=20.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.Data.Desktop.v20.1" />
-    <Reference Include="DevExpress.Utils.v20.1" />
-    <Reference Include="DevExpress.Sparkline.v20.1.Core" />
-    <Reference Include="DevExpress.Utils.v20.1.UI, Version=20.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.Xpo.v20.1, Version=20.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.XtraBars.v20.1, Version=20.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.XtraCharts.v20.1, Version=20.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.XtraCharts.v20.1.UI, Version=20.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.XtraEditors.v20.1" />
-    <Reference Include="DevExpress.Printing.v20.1.Core" />
-    <Reference Include="DevExpress.XtraGauges.v20.1.Core, Version=20.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.XtraGrid.v20.1, Version=20.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.XtraLayout.v20.1, Version=20.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.XtraPrinting.v20.1, Version=20.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.XtraReports.v20.1, Version=20.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.XtraReports.v20.1.Extensions, Version=20.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.BonusSkins.v22.1" />
+    <Reference Include="DevExpress.Charts.v22.1.Core, Version=22.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.CodeParser.v22.1, Version=22.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Dashboard.v22.1.Core, Version=22.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Drawing.v22.1" />
+    <Reference Include="DevExpress.Data.v22.1" />
+    <Reference Include="DevExpress.DataAccess.v22.1, Version=22.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Office.v22.1.Core, Version=22.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Pdf.v22.1.Core, Version=22.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.PivotGrid.v22.1.Core, Version=22.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.RichEdit.v22.1.Core, Version=22.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.RichEdit.v22.1.Export, Version=22.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Data.Desktop.v22.1" />
+    <Reference Include="DevExpress.Utils.v22.1" />
+    <Reference Include="DevExpress.Sparkline.v22.1.Core" />
+    <Reference Include="DevExpress.Utils.v22.1.UI, Version=22.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Xpo.v22.1, Version=22.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraBars.v22.1, Version=22.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraCharts.v22.1, Version=22.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraCharts.v22.1.UI, Version=22.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraEditors.v22.1" />
+    <Reference Include="DevExpress.Printing.v22.1.Core" />
+    <Reference Include="DevExpress.XtraGauges.v22.1.Core, Version=22.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraGrid.v22.1, Version=22.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraLayout.v22.1, Version=22.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraPrinting.v22.1, Version=22.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraReports.v22.1, Version=22.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraReports.v22.1.Extensions, Version=22.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="Microsoft.ApplicationBlocks.Data, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\01.VietSoftHRM\packages\Microsoft.ApplicationBlocks.Data.2.0.0\lib\net45\Microsoft.ApplicationBlocks.Data.dll</HintPath>
     </Reference>
@@ -154,6 +156,12 @@
     <Compile Include="NhanSu\rptBaoCaoLaoDongThang.designer.cs">
       <DependentUpon>rptBaoCaoLaoDongThang.cs</DependentUpon>
     </Compile>
+    <Compile Include="NhanSu\rptBCBangCapCN.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptBCBangCapCN.Designer.cs">
+      <DependentUpon>rptBCBangCapCN.cs</DependentUpon>
+    </Compile>
     <Compile Include="NhanSu\rptBCBienBanCanhCao.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -196,6 +204,12 @@
     <Compile Include="NhanSu\rptBCCNTheoTrinhDo.designer.cs">
       <DependentUpon>rptBCCNTheoTrinhDo.cs</DependentUpon>
     </Compile>
+    <Compile Include="NhanSu\rptBCDanhGiaCN.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptBCDanhGiaCN.Designer.cs">
+      <DependentUpon>rptBCDanhGiaCN.cs</DependentUpon>
+    </Compile>
     <Compile Include="NhanSu\rptBCDanhGiaTrinhDo.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -214,17 +228,131 @@
     <Compile Include="NhanSu\rptBCDSLaoDongNu.designer.cs">
       <DependentUpon>rptBCDSLaoDongNu.cs</DependentUpon>
     </Compile>
+    <Compile Include="NhanSu\rptBCGiamLaoDongThang.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptBCGiamLaoDongThang.Designer.cs">
+      <DependentUpon>rptBCGiamLaoDongThang.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\rptBCGiamLaoDongThang_NB.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptBCGiamLaoDongThang_NB.Designer.cs">
+      <DependentUpon>rptBCGiamLaoDongThang_NB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\rptBCHopDongHetHan.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptBCHopDongHetHan.Designer.cs">
+      <DependentUpon>rptBCHopDongHetHan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\rptBCKeHoachNghiPhep.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptBCKeHoachNghiPhep.Designer.cs">
+      <DependentUpon>rptBCKeHoachNghiPhep.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\rptBCKetQuaDaoTao.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptBCKetQuaDaoTao.designer.cs">
+      <DependentUpon>rptBCKetQuaDaoTao.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\rptBCKhenThuongKyLuat.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptBCKhenThuongKyLuat.Designer.cs">
+      <DependentUpon>rptBCKhenThuongKyLuat.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\rptBCKhenThuongKyLuatBP.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptBCKhenThuongKyLuatBP.designer.cs">
+      <DependentUpon>rptBCKhenThuongKyLuatBP.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\rptBCKhenThuongKyLuatCN.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptBCKhenThuongKyLuatCN.Designer.cs">
+      <DependentUpon>rptBCKhenThuongKyLuatCN.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\rptBCKhenThuongKyLuatTH.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptBCKhenThuongKyLuatTH.designer.cs">
+      <DependentUpon>rptBCKhenThuongKyLuatTH.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\rptBCLaoDongThang.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptBCLaoDongThang.Designer.cs">
+      <DependentUpon>rptBCLaoDongThang.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\rptBCLaoDongTinh.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptBCLaoDongTinh.Designer.cs">
+      <DependentUpon>rptBCLaoDongTinh.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\rptBCLaoDongTo.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptBCLaoDongTo.Designer.cs">
+      <DependentUpon>rptBCLaoDongTo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\rptBCLaoDongVeHuu.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptBCLaoDongVeHuu.Designer.cs">
+      <DependentUpon>rptBCLaoDongVeHuu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\rptBCLDNuocNgoaiKhongCapGP.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptBCLDNuocNgoaiKhongCapGP.designer.cs">
+      <DependentUpon>rptBCLDNuocNgoaiKhongCapGP.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\rptBCQuaTrinhCongTacCN.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptBCQuaTrinhCongTacCN.Designer.cs">
+      <DependentUpon>rptBCQuaTrinhCongTacCN.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\rptBCQuaTrinhCongTacTH.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptBCQuaTrinhCongTacTH.designer.cs">
+      <DependentUpon>rptBCQuaTrinhCongTacTH.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\rptBCQuaTrinhCongTacTH_NB.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptBCQuaTrinhCongTacTH_NB.designer.cs">
+      <DependentUpon>rptBCQuaTrinhCongTacTH_NB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\rptBCQuaTrinhDaoTaoCNV.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptBCQuaTrinhDaoTaoCNV.Designer.cs">
+      <DependentUpon>rptBCQuaTrinhDaoTaoCNV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\rptBCQuaTrinhLuongCN.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptBCQuaTrinhLuongCN.Designer.cs">
+      <DependentUpon>rptBCQuaTrinhLuongCN.cs</DependentUpon>
+    </Compile>
     <Compile Include="NhanSu\rptBCQuaTrinhLuongCN_SB.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="NhanSu\rptBCQuaTrinhLuongCN_SB.Designer.cs">
       <DependentUpon>rptBCQuaTrinhLuongCN_SB.cs</DependentUpon>
     </Compile>
-    <Compile Include="NhanSu\rptBCToiHanKyHopDongLaoDong.cs">
+    <Compile Include="NhanSu\rptBCQuaTrinhLuongTH.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="NhanSu\rptBCToiHanKyHopDongLaoDong.Designer.cs">
-      <DependentUpon>rptBCToiHanKyHopDongLaoDong.cs</DependentUpon>
+    <Compile Include="NhanSu\rptBCQuaTrinhLuongTH.designer.cs">
+      <DependentUpon>rptBCQuaTrinhLuongTH.cs</DependentUpon>
     </Compile>
     <Compile Include="NhanSu\rptBCTaiKyHopDongLaoDong.cs">
       <SubType>Component</SubType>
@@ -232,11 +360,47 @@
     <Compile Include="NhanSu\rptBCTaiKyHopDongLaoDong.Designer.cs">
       <DependentUpon>rptBCTaiKyHopDongLaoDong.cs</DependentUpon>
     </Compile>
-    <Compile Include="NhanSu\rptBCHopDongHetHan.cs">
+    <Compile Include="NhanSu\rptBCTangGiamLD6Thang.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="NhanSu\rptBCHopDongHetHan.Designer.cs">
-      <DependentUpon>rptBCHopDongHetHan.cs</DependentUpon>
+    <Compile Include="NhanSu\rptBCTangGiamLD6Thang.Designer.cs">
+      <DependentUpon>rptBCTangGiamLD6Thang.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\rptBCTangLaoDongThang.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptBCTangLaoDongThang.Designer.cs">
+      <DependentUpon>rptBCTangLaoDongThang.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\rptBCThongKeDaoTao.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptBCThongKeDaoTao.designer.cs">
+      <DependentUpon>rptBCThongKeDaoTao.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\rptBCTinhHinhSDLDNuocNgoai.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptBCTinhHinhSDLDNuocNgoai.designer.cs">
+      <DependentUpon>rptBCTinhHinhSDLDNuocNgoai.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\rptBCTinhHinhSDLDTaiThoidDem.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptBCTinhHinhSDLDTaiThoidDem.designer.cs">
+      <DependentUpon>rptBCTinhHinhSDLDTaiThoidDem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\rptBCTinhHinhSuDungLaoDong.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptBCTinhHinhSuDungLaoDong.designer.cs">
+      <DependentUpon>rptBCTinhHinhSuDungLaoDong.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\rptBCToiHanKyHopDongLaoDong.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptBCToiHanKyHopDongLaoDong.Designer.cs">
+      <DependentUpon>rptBCToiHanKyHopDongLaoDong.cs</DependentUpon>
     </Compile>
     <Compile Include="NhanSu\rptBCXepLoaiKhenThuongNam.cs">
       <SubType>Component</SubType>
@@ -262,239 +426,11 @@
     <Compile Include="NhanSu\rptBieuDoPhanLoai.Designer.cs">
       <DependentUpon>rptBieuDoPhanLoai.cs</DependentUpon>
     </Compile>
-    <Compile Include="NhanSu\rptDSXNgioquetthetheongay.cs">
+    <Compile Include="NhanSu\rptBieuDoTangGiamCongNhan.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="NhanSu\rptDSXNgioquetthetheongay.Designer.cs">
-      <DependentUpon>rptDSXNgioquetthetheongay.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NhanSu\rptHopDongLaoDongKhoang.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="NhanSu\rptHopDongLaoDongKhoang.Designer.cs">
-      <DependentUpon>rptHopDongLaoDongKhoang.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NhanSu\rptHopDongThoiVu_HN.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="NhanSu\rptHopDongThoiVu_HN.Designer.cs">
-      <DependentUpon>rptHopDongThoiVu_HN.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NhanSu\rptHopDongThuViec_HN.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="NhanSu\rptHopDongThuViec_HN.Designer.cs">
-      <DependentUpon>rptHopDongThuViec_HN.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NhanSu\rptHopDongLaoDong_HN.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="NhanSu\rptHopDongLaoDong_HN.Designer.cs">
-      <DependentUpon>rptHopDongLaoDong_HN.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NhanSu\rptKetThucHopDong_HN.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="NhanSu\rptKetThucHopDong_HN.Designer.cs">
-      <DependentUpon>rptKetThucHopDong_HN.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NhanSu\rptPhuLucHopDongLaoDong_DM.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="NhanSu\rptPhuLucHopDongLaoDong_DM.Designer.cs">
-      <DependentUpon>rptPhuLucHopDongLaoDong_DM.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NhanSu\rptHopDongLaoDong_DM.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="NhanSu\rptHopDongLaoDong_DM.Designer.cs">
-      <DependentUpon>rptHopDongLaoDong_DM.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NhanSu\rptHopDongLaoDongThuViec_DM.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="NhanSu\rptHopDongLaoDongThuViec_DM.Designer.cs">
-      <DependentUpon>rptHopDongLaoDongThuViec_DM.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NhanSu\rptHopDongThoiVu_SB.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="NhanSu\rptHopDongThoiVu_SB.Designer.cs">
-      <DependentUpon>rptHopDongThoiVu_SB.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NhanSu\rptHopDongLaoDong_SB.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="NhanSu\rptHopDongLaoDong_SB.Designer.cs">
-      <DependentUpon>rptHopDongLaoDong_SB.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NhanSu\rptHopDongLaoDongThuViec_SB.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="NhanSu\rptHopDongLaoDongThuViec_SB.Designer.cs">
-      <DependentUpon>rptHopDongLaoDongThuViec_SB.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NhanSu\rptHopDongLaoDong_MT.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="NhanSu\rptHopDongLaoDong_MT.Designer.cs">
-      <DependentUpon>rptHopDongLaoDong_MT.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NhanSu\rptHopDongDaoTao.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="NhanSu\rptHopDongDaoTao.Designer.cs">
-      <DependentUpon>rptHopDongDaoTao.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NhanSu\rptHopDongThuViec_CNQC.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="NhanSu\rptHopDongThuViec_CNQC.Designer.cs">
-      <DependentUpon>rptHopDongThuViec_CNQC.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NhanSu\rptHopDongThuViec_CDDH.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="NhanSu\rptHopDongThuViec_CDDH.Designer.cs">
-      <DependentUpon>rptHopDongThuViec_CDDH.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NhanSu\rptKeHoachDaoTao.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="NhanSu\rptKeHoachDaoTao.Designer.cs">
-      <DependentUpon>rptKeHoachDaoTao.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NhanSu\rptBCQuaTrinhDaoTaoCNV.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="NhanSu\rptBCQuaTrinhDaoTaoCNV.Designer.cs">
-      <DependentUpon>rptBCQuaTrinhDaoTaoCNV.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NhanSu\rptBCThongKeDaoTao.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="NhanSu\rptBCThongKeDaoTao.designer.cs">
-      <DependentUpon>rptBCThongKeDaoTao.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NhanSu\rptBCKhenThuongKyLuatBP.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="NhanSu\rptBCKhenThuongKyLuatBP.designer.cs">
-      <DependentUpon>rptBCKhenThuongKyLuatBP.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NhanSu\rptBCKhenThuongKyLuat.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="NhanSu\rptBCKhenThuongKyLuat.Designer.cs">
-      <DependentUpon>rptBCKhenThuongKyLuat.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NhanSu\rptBCKetQuaDaoTao.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="NhanSu\rptBCKetQuaDaoTao.designer.cs">
-      <DependentUpon>rptBCKetQuaDaoTao.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NhanSu\rptBCKhenThuongKyLuatTH.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="NhanSu\rptBCKhenThuongKyLuatTH.designer.cs">
-      <DependentUpon>rptBCKhenThuongKyLuatTH.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NhanSu\rptBCLaoDongThang.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="NhanSu\rptBCLaoDongThang.Designer.cs">
-      <DependentUpon>rptBCLaoDongThang.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NhanSu\rptBCLDNuocNgoaiKhongCapGP.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="NhanSu\rptBCLDNuocNgoaiKhongCapGP.designer.cs">
-      <DependentUpon>rptBCLDNuocNgoaiKhongCapGP.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NhanSu\rptBCQuaTrinhCongTacTH.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="NhanSu\rptBCQuaTrinhCongTacTH.designer.cs">
-      <DependentUpon>rptBCQuaTrinhCongTacTH.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NhanSu\rptBCQuaTrinhLuongTH.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="NhanSu\rptBCQuaTrinhLuongTH.designer.cs">
-      <DependentUpon>rptBCQuaTrinhLuongTH.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NhanSu\rptBCTangGiamLD6Thang.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="NhanSu\rptBCTangGiamLD6Thang.Designer.cs">
-      <DependentUpon>rptBCTangGiamLD6Thang.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NhanSu\rptBCDanhGiaCN.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="NhanSu\rptBCDanhGiaCN.Designer.cs">
-      <DependentUpon>rptBCDanhGiaCN.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NhanSu\rptBCGiamLaoDongThang.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="NhanSu\rptBCGiamLaoDongThang.Designer.cs">
-      <DependentUpon>rptBCGiamLaoDongThang.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NhanSu\rptBCTangLaoDongThang.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="NhanSu\rptBCTangLaoDongThang.Designer.cs">
-      <DependentUpon>rptBCTangLaoDongThang.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NhanSu\rptBCKhenThuongKyLuatCN.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="NhanSu\rptBCKhenThuongKyLuatCN.Designer.cs">
-      <DependentUpon>rptBCKhenThuongKyLuatCN.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NhanSu\rptBCBangCapCN.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="NhanSu\rptBCBangCapCN.Designer.cs">
-      <DependentUpon>rptBCBangCapCN.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NhanSu\rptBCKeHoachNghiPhep.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="NhanSu\rptBCKeHoachNghiPhep.Designer.cs">
-      <DependentUpon>rptBCKeHoachNghiPhep.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NhanSu\rptBCQuaTrinhLuongCN.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="NhanSu\rptBCQuaTrinhLuongCN.Designer.cs">
-      <DependentUpon>rptBCQuaTrinhLuongCN.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NhanSu\rptBCQuaTrinhCongTacCN.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="NhanSu\rptBCQuaTrinhCongTacCN.Designer.cs">
-      <DependentUpon>rptBCQuaTrinhCongTacCN.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NhanSu\rptBCTinhHinhSDLDNuocNgoai.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="NhanSu\rptBCTinhHinhSDLDNuocNgoai.designer.cs">
-      <DependentUpon>rptBCTinhHinhSDLDNuocNgoai.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NhanSu\rptBCTinhHinhSDLDTaiThoidDem.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="NhanSu\rptBCTinhHinhSDLDTaiThoidDem.designer.cs">
-      <DependentUpon>rptBCTinhHinhSDLDTaiThoidDem.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NhanSu\rptBCTinhHinhSuDungLaoDong.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="NhanSu\rptBCTinhHinhSuDungLaoDong.designer.cs">
-      <DependentUpon>rptBCTinhHinhSuDungLaoDong.cs</DependentUpon>
+    <Compile Include="NhanSu\rptBieuDoTangGiamCongNhan.Designer.cs">
+      <DependentUpon>rptBieuDoTangGiamCongNhan.cs</DependentUpon>
     </Compile>
     <Compile Include="NhanSu\rptDSCBNVDieuChuyen.cs">
       <SubType>Component</SubType>
@@ -520,29 +456,11 @@
     <Compile Include="NhanSu\rptDSGiaDinh.Designer.cs">
       <DependentUpon>rptDSGiaDinh.cs</DependentUpon>
     </Compile>
-    <Compile Include="NhanSu\rptBCLaoDongTinh.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="NhanSu\rptBCLaoDongTinh.Designer.cs">
-      <DependentUpon>rptBCLaoDongTinh.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NhanSu\rptBCLaoDongVeHuu.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="NhanSu\rptBCLaoDongVeHuu.Designer.cs">
-      <DependentUpon>rptBCLaoDongVeHuu.cs</DependentUpon>
-    </Compile>
     <Compile Include="NhanSu\rptDSNhanVienThayDoiLuongGD.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="NhanSu\rptDSNhanVienThayDoiLuongGD.designer.cs">
       <DependentUpon>rptDSNhanVienThayDoiLuongGD.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NhanSu\rptDSThamNien.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="NhanSu\rptDSThamNien.Designer.cs">
-      <DependentUpon>rptDSThamNien.cs</DependentUpon>
     </Compile>
     <Compile Include="NhanSu\rptDSQuanLy.cs">
       <SubType>Component</SubType>
@@ -556,131 +474,23 @@
     <Compile Include="NhanSu\rptDSThamGiaCongDoan.Designer.cs">
       <DependentUpon>rptDSThamGiaCongDoan.cs</DependentUpon>
     </Compile>
-    <Compile Include="NhanSu\rptBCLaoDongTo.cs">
+    <Compile Include="NhanSu\rptDSThamNien.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="NhanSu\rptBCLaoDongTo.Designer.cs">
-      <DependentUpon>rptBCLaoDongTo.cs</DependentUpon>
+    <Compile Include="NhanSu\rptDSThamNien.Designer.cs">
+      <DependentUpon>rptDSThamNien.cs</DependentUpon>
     </Compile>
-    <Compile Include="NhanSu\rptHopDongThuViec.cs">
+    <Compile Include="NhanSu\rptDSXNgioquetthetheongay.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="NhanSu\rptHopDongThuViec.Designer.cs">
-      <DependentUpon>rptHopDongThuViec.cs</DependentUpon>
+    <Compile Include="NhanSu\rptDSXNgioquetthetheongay.Designer.cs">
+      <DependentUpon>rptDSXNgioquetthetheongay.cs</DependentUpon>
     </Compile>
-    <Compile Include="NhanSu\rptHoSoCapCuu.cs">
+    <Compile Include="NhanSu\rptHopDongDaoTao.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="NhanSu\rptHoSoCapCuu.designer.cs">
-      <DependentUpon>rptHoSoCapCuu.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NhanSu\rptPhuLucHopDongLaoDong_SB.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="NhanSu\rptPhuLucHopDongLaoDong_SB.Designer.cs">
-      <DependentUpon>rptPhuLucHopDongLaoDong_SB.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NhanSu\rptPhuLucHopDongLaoDong.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="NhanSu\rptPhuLucHopDongLaoDong.Designer.cs">
-      <DependentUpon>rptPhuLucHopDongLaoDong.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NhanSu\rptQuyetDinhChamDutHDLD_DM.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="NhanSu\rptQuyetDinhChamDutHDLD_DM.Designer.cs">
-      <DependentUpon>rptQuyetDinhChamDutHDLD_DM.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NhanSu\rptQuyetDinhDieuChuyen_HN.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="NhanSu\rptQuyetDinhDieuChuyen_HN.Designer.cs">
-      <DependentUpon>rptQuyetDinhDieuChuyen_HN.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NhanSu\rptQuyetDinhLuongTapThe_HN.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="NhanSu\rptQuyetDinhLuongTapThe_HN.Designer.cs">
-      <DependentUpon>rptQuyetDinhLuongTapThe_HN.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NhanSu\rptQuyetDinhLuongCN_HN.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="NhanSu\rptQuyetDinhLuongCN_HN.Designer.cs">
-      <DependentUpon>rptQuyetDinhLuongCN_HN.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NhanSu\rptQuyetDinhNangLuong_DM.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="NhanSu\rptQuyetDinhNangLuong_DM.Designer.cs">
-      <DependentUpon>rptQuyetDinhNangLuong_DM.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NhanSu\rptQuyetDinhBoNhiem_DM.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="NhanSu\rptQuyetDinhBoNhiem_DM.Designer.cs">
-      <DependentUpon>rptQuyetDinhBoNhiem_DM.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NhanSu\rptQuyetDinhDieuChuyen_DM.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="NhanSu\rptQuyetDinhDieuChuyen_DM.Designer.cs">
-      <DependentUpon>rptQuyetDinhDieuChuyen_DM.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NhanSu\rptQuyetDinhThayDoiLuong_SB.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="NhanSu\rptQuyetDinhThayDoiLuong_SB.Designer.cs">
-      <DependentUpon>rptQuyetDinhThayDoiLuong_SB.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NhanSu\rptQuyetDinhThoiViecBoViec_SB.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="NhanSu\rptQuyetDinhThoiViecBoViec_SB.Designer.cs">
-      <DependentUpon>rptQuyetDinhThoiViecBoViec_SB.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NhanSu\rptQuyetDinhThoiViecBoViecTiengAnh_SB.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="NhanSu\rptQuyetDinhThoiViecBoViecTiengAnh_SB.Designer.cs">
-      <DependentUpon>rptQuyetDinhThoiViecBoViecTiengAnh_SB.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NhanSu\rptQuyetDinhThoiViecTiengAnh_SB.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="NhanSu\rptQuyetDinhThoiViecTiengAnh_SB.Designer.cs">
-      <DependentUpon>rptQuyetDinhThoiViecTiengAnh_SB.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NhanSu\rptQuyetDinhThoiViecTroCapTiengAnh_SB.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="NhanSu\rptQuyetDinhThoiViecTroCapTiengAnh_SB.Designer.cs">
-      <DependentUpon>rptQuyetDinhThoiViecTroCapTiengAnh_SB.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NhanSu\rptQuyetDinhTuyenDung_SB.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="NhanSu\rptQuyetDinhTuyenDung_SB.Designer.cs">
-      <DependentUpon>rptQuyetDinhTuyenDung_SB.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NhanSu\rptQuyetDinhDieuChuyen_SB.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="NhanSu\rptQuyetDinhDieuChuyen_SB.Designer.cs">
-      <DependentUpon>rptQuyetDinhDieuChuyen_SB.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NhanSu\rptQuyetDinhDieuChuyen_MT.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="NhanSu\rptQuyetDinhDieuChuyen_MT.Designer.cs">
-      <DependentUpon>rptQuyetDinhDieuChuyen_MT.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NhanSu\rptQuyetDinhDieuChuyen.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="NhanSu\rptQuyetDinhDieuChuyen.Designer.cs">
-      <DependentUpon>rptQuyetDinhDieuChuyen.cs</DependentUpon>
+    <Compile Include="NhanSu\rptHopDongDaoTao.Designer.cs">
+      <DependentUpon>rptHopDongDaoTao.cs</DependentUpon>
     </Compile>
     <Compile Include="NhanSu\rptHopDongLaoDong.cs">
       <SubType>Component</SubType>
@@ -688,53 +498,209 @@
     <Compile Include="NhanSu\rptHopDongLaoDong.Designer.cs">
       <DependentUpon>rptHopDongLaoDong.cs</DependentUpon>
     </Compile>
+    <Compile Include="NhanSu\rptHopDongLaoDongKhoang.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptHopDongLaoDongKhoang.Designer.cs">
+      <DependentUpon>rptHopDongLaoDongKhoang.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\rptHopDongLaoDongThuViec_DM.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptHopDongLaoDongThuViec_DM.Designer.cs">
+      <DependentUpon>rptHopDongLaoDongThuViec_DM.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\rptHopDongLaoDongThuViec_NB.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptHopDongLaoDongThuViec_NB.Designer.cs">
+      <DependentUpon>rptHopDongLaoDongThuViec_NB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\rptHopDongLaoDongThuViec_SB.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptHopDongLaoDongThuViec_SB.Designer.cs">
+      <DependentUpon>rptHopDongLaoDongThuViec_SB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\rptHopDongLaoDong_DM.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptHopDongLaoDong_DM.Designer.cs">
+      <DependentUpon>rptHopDongLaoDong_DM.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\rptHopDongLaoDong_HN.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptHopDongLaoDong_HN.Designer.cs">
+      <DependentUpon>rptHopDongLaoDong_HN.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\rptHopDongLaoDong_MT.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptHopDongLaoDong_MT.Designer.cs">
+      <DependentUpon>rptHopDongLaoDong_MT.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\rptHopDongLaoDong_NB.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptHopDongLaoDong_NB.Designer.cs">
+      <DependentUpon>rptHopDongLaoDong_NB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\rptHopDongLaoDong_SB.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptHopDongLaoDong_SB.Designer.cs">
+      <DependentUpon>rptHopDongLaoDong_SB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\rptHopDongThoiVu_HN.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptHopDongThoiVu_HN.Designer.cs">
+      <DependentUpon>rptHopDongThoiVu_HN.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\rptHopDongThoiVu_SB.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptHopDongThoiVu_SB.Designer.cs">
+      <DependentUpon>rptHopDongThoiVu_SB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\rptHopDongThuViec.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptHopDongThuViec.Designer.cs">
+      <DependentUpon>rptHopDongThuViec.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\rptHopDongThuViec_CDDH.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptHopDongThuViec_CDDH.Designer.cs">
+      <DependentUpon>rptHopDongThuViec_CDDH.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\rptHopDongThuViec_CNQC.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptHopDongThuViec_CNQC.Designer.cs">
+      <DependentUpon>rptHopDongThuViec_CNQC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\rptHopDongThuViec_HN.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptHopDongThuViec_HN.Designer.cs">
+      <DependentUpon>rptHopDongThuViec_HN.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\rptHoSoCapCuu.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptHoSoCapCuu.designer.cs">
+      <DependentUpon>rptHoSoCapCuu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\rptKeHoachDaoTao.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptKeHoachDaoTao.Designer.cs">
+      <DependentUpon>rptKeHoachDaoTao.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\rptKetThucHopDong_HN.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptKetThucHopDong_HN.Designer.cs">
+      <DependentUpon>rptKetThucHopDong_HN.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\rptPhuLucHopDongLaoDong.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptPhuLucHopDongLaoDong.Designer.cs">
+      <DependentUpon>rptPhuLucHopDongLaoDong.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\rptPhuLucHopDongLaoDong_DM.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptPhuLucHopDongLaoDong_DM.Designer.cs">
+      <DependentUpon>rptPhuLucHopDongLaoDong_DM.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\rptPhuLucHopDongLaoDong_SB.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptPhuLucHopDongLaoDong_SB.Designer.cs">
+      <DependentUpon>rptPhuLucHopDongLaoDong_SB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\rptQuyetDinhBoNhiem_DM.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptQuyetDinhBoNhiem_DM.Designer.cs">
+      <DependentUpon>rptQuyetDinhBoNhiem_DM.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\rptQuyetDinhChamDutHDLD_DM.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptQuyetDinhChamDutHDLD_DM.Designer.cs">
+      <DependentUpon>rptQuyetDinhChamDutHDLD_DM.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\rptQuyetDinhDieuChuyen.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptQuyetDinhDieuChuyen.Designer.cs">
+      <DependentUpon>rptQuyetDinhDieuChuyen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\rptQuyetDinhDieuChuyen_DM.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptQuyetDinhDieuChuyen_DM.Designer.cs">
+      <DependentUpon>rptQuyetDinhDieuChuyen_DM.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\rptQuyetDinhDieuChuyen_HN.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptQuyetDinhDieuChuyen_HN.Designer.cs">
+      <DependentUpon>rptQuyetDinhDieuChuyen_HN.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\rptQuyetDinhDieuChuyen_MT.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptQuyetDinhDieuChuyen_MT.Designer.cs">
+      <DependentUpon>rptQuyetDinhDieuChuyen_MT.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\rptQuyetDinhDieuChuyen_NB.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptQuyetDinhDieuChuyen_NB.Designer.cs">
+      <DependentUpon>rptQuyetDinhDieuChuyen_NB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\rptQuyetDinhDieuChuyen_SB.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptQuyetDinhDieuChuyen_SB.Designer.cs">
+      <DependentUpon>rptQuyetDinhDieuChuyen_SB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\rptQuyetDinhLuongCN.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptQuyetDinhLuongCN.Designer.cs">
+      <DependentUpon>rptQuyetDinhLuongCN.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\rptQuyetDinhLuongCN_HN.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptQuyetDinhLuongCN_HN.Designer.cs">
+      <DependentUpon>rptQuyetDinhLuongCN_HN.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\rptQuyetDinhLuongTapThe_HN.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptQuyetDinhLuongTapThe_HN.Designer.cs">
+      <DependentUpon>rptQuyetDinhLuongTapThe_HN.cs</DependentUpon>
+    </Compile>
     <Compile Include="NhanSu\rptQuyetDinhNangLuongCN.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="NhanSu\rptQuyetDinhNangLuongCN.Designer.cs">
       <DependentUpon>rptQuyetDinhNangLuongCN.cs</DependentUpon>
     </Compile>
-    <Compile Include="NhanSu\rptQuyetDinhThanhLyHDTruoc2008.cs">
+    <Compile Include="NhanSu\rptQuyetDinhNangLuong_DM.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="NhanSu\rptQuyetDinhThanhLyHDTruoc2008.Designer.cs">
-      <DependentUpon>rptQuyetDinhThanhLyHDTruoc2008.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NhanSu\rptQuyetDinhThoiViec_SB.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="NhanSu\rptQuyetDinhThoiViec_SB.Designer.cs">
-      <DependentUpon>rptQuyetDinhThoiViec_SB.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NhanSu\rptQuyetDinhThoiViecTroCap_SB.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="NhanSu\rptQuyetDinhThoiViecTroCap_SB.Designer.cs">
-      <DependentUpon>rptQuyetDinhThoiViecTroCap_SB.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NhanSu\rptQuyetDinhViPhamTGHopDong.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="NhanSu\rptQuyetDinhViPhamTGHopDong.Designer.cs">
-      <DependentUpon>rptQuyetDinhViPhamTGHopDong.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NhanSu\rptQuyetDinhThoiViecTroCap.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="NhanSu\rptQuyetDinhThoiViecTroCap.Designer.cs">
-      <DependentUpon>rptQuyetDinhThoiViecTroCap.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NhanSu\rptQuyetDinhThoiViec.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="NhanSu\rptQuyetDinhThoiViec.Designer.cs">
-      <DependentUpon>rptQuyetDinhThoiViec.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NhanSu\rptQuyetDinhSaThaiTroCap.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="NhanSu\rptQuyetDinhSaThaiTroCap.Designer.cs">
-      <DependentUpon>rptQuyetDinhSaThaiTroCap.cs</DependentUpon>
+    <Compile Include="NhanSu\rptQuyetDinhNangLuong_DM.Designer.cs">
+      <DependentUpon>rptQuyetDinhNangLuong_DM.cs</DependentUpon>
     </Compile>
     <Compile Include="NhanSu\rptQuyetDinhSaThai.cs">
       <SubType>Component</SubType>
@@ -742,11 +708,107 @@
     <Compile Include="NhanSu\rptQuyetDinhSaThai.Designer.cs">
       <DependentUpon>rptQuyetDinhSaThai.cs</DependentUpon>
     </Compile>
+    <Compile Include="NhanSu\rptQuyetDinhSaThaiTroCap.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptQuyetDinhSaThaiTroCap.Designer.cs">
+      <DependentUpon>rptQuyetDinhSaThaiTroCap.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\rptQuyetDinhThanhLyHDTruoc2008.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptQuyetDinhThanhLyHDTruoc2008.Designer.cs">
+      <DependentUpon>rptQuyetDinhThanhLyHDTruoc2008.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\rptQuyetDinhThayDoiLuong_SB.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptQuyetDinhThayDoiLuong_SB.Designer.cs">
+      <DependentUpon>rptQuyetDinhThayDoiLuong_SB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\rptQuyetDinhThoiViec.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptQuyetDinhThoiViec.Designer.cs">
+      <DependentUpon>rptQuyetDinhThoiViec.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\rptQuyetDinhThoiViecBoViecTiengAnh_SB.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptQuyetDinhThoiViecBoViecTiengAnh_SB.Designer.cs">
+      <DependentUpon>rptQuyetDinhThoiViecBoViecTiengAnh_SB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\rptQuyetDinhThoiViecBoViec_SB.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptQuyetDinhThoiViecBoViec_SB.Designer.cs">
+      <DependentUpon>rptQuyetDinhThoiViecBoViec_SB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\rptQuyetDinhThoiViecTiengAnh_SB.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptQuyetDinhThoiViecTiengAnh_SB.Designer.cs">
+      <DependentUpon>rptQuyetDinhThoiViecTiengAnh_SB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\rptQuyetDinhThoiViecTroCap.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptQuyetDinhThoiViecTroCap.Designer.cs">
+      <DependentUpon>rptQuyetDinhThoiViecTroCap.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\rptQuyetDinhThoiViecTroCapTiengAnh_SB.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptQuyetDinhThoiViecTroCapTiengAnh_SB.Designer.cs">
+      <DependentUpon>rptQuyetDinhThoiViecTroCapTiengAnh_SB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\rptQuyetDinhThoiViecTroCap_SB.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptQuyetDinhThoiViecTroCap_SB.Designer.cs">
+      <DependentUpon>rptQuyetDinhThoiViecTroCap_SB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\rptQuyetDinhThoiViec_NB.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptQuyetDinhThoiViec_NB.Designer.cs">
+      <DependentUpon>rptQuyetDinhThoiViec_NB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\rptQuyetDinhThoiViec_SB.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptQuyetDinhThoiViec_SB.Designer.cs">
+      <DependentUpon>rptQuyetDinhThoiViec_SB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\rptQuyetDinhTuyenDung_SB.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptQuyetDinhTuyenDung_SB.Designer.cs">
+      <DependentUpon>rptQuyetDinhTuyenDung_SB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\rptQuyetDinhViPhamTGHopDong.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptQuyetDinhViPhamTGHopDong.Designer.cs">
+      <DependentUpon>rptQuyetDinhViPhamTGHopDong.cs</DependentUpon>
+    </Compile>
     <Compile Include="NhanSu\rptSoYeuLyLich.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="NhanSu\rptSoYeuLyLich.designer.cs">
       <DependentUpon>rptSoYeuLyLich.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\rptTheNhanVien.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptTheNhanVien.Designer.cs">
+      <DependentUpon>rptTheNhanVien.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\rptThongBaoKetThucHDLD_NB.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptThongBaoKetThucHDLD_NB.Designer.cs">
+      <DependentUpon>rptThongBaoKetThucHDLD_NB.cs</DependentUpon>
     </Compile>
     <Compile Include="NhanSu\rptThongKeTaiNan.cs">
       <SubType>Component</SubType>
@@ -766,17 +828,17 @@
     <Compile Include="NhanSu\rptToKhaiBaoHiemXaHoi.Designer.cs">
       <DependentUpon>rptToKhaiBaoHiemXaHoi.cs</DependentUpon>
     </Compile>
-    <Compile Include="NhanSu\rptToKhaiBHXH_SB.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="NhanSu\rptToKhaiBHXH_SB.designer.cs">
-      <DependentUpon>rptToKhaiBHXH_SB.cs</DependentUpon>
-    </Compile>
     <Compile Include="NhanSu\rptToKhaiBHXH.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="NhanSu\rptToKhaiBHXH.designer.cs">
       <DependentUpon>rptToKhaiBHXH.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\rptToKhaiBHXH_SB.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptToKhaiBHXH_SB.designer.cs">
+      <DependentUpon>rptToKhaiBHXH_SB.cs</DependentUpon>
     </Compile>
     <Compile Include="NhanSu\srptBDCNTheoHuyen.cs">
       <SubType>Component</SubType>
@@ -784,23 +846,71 @@
     <Compile Include="NhanSu\srptBDCNTheoHuyen.Designer.cs">
       <DependentUpon>srptBDCNTheoHuyen.cs</DependentUpon>
     </Compile>
-    <Compile Include="NhanSu\srptBDIDD.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="NhanSu\srptBDIDD.Designer.cs">
-      <DependentUpon>srptBDIDD.cs</DependentUpon>
-    </Compile>
     <Compile Include="NhanSu\srptBDGioiTinh.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="NhanSu\srptBDGioiTinh.Designer.cs">
       <DependentUpon>srptBDGioiTinh.cs</DependentUpon>
     </Compile>
+    <Compile Include="NhanSu\srptBDIDD.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\srptBDIDD.Designer.cs">
+      <DependentUpon>srptBDIDD.cs</DependentUpon>
+    </Compile>
     <Compile Include="NhanSu\srptBDLoaiCV.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="NhanSu\srptBDLoaiCV.Designer.cs">
       <DependentUpon>srptBDLoaiCV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\srptHopDongLaoDong.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\srptHopDongLaoDong.designer.cs">
+      <DependentUpon>srptHopDongLaoDong.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\srptQuanHeGiaDinh.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\srptQuanHeGiaDinh.designer.cs">
+      <DependentUpon>srptQuanHeGiaDinh.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\srptQuaTrinhDanhGia.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\srptQuaTrinhDanhGia.designer.cs">
+      <DependentUpon>srptQuaTrinhDanhGia.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\srptQuaTrinhDaoTao.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\srptQuaTrinhDaoTao.designer.cs">
+      <DependentUpon>srptQuaTrinhDaoTao.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\srptQuaTrinhKhenThuong.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\srptQuaTrinhKhenThuong.designer.cs">
+      <DependentUpon>srptQuaTrinhKhenThuong.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\srptQuaTrinhKyLuat.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\srptQuaTrinhKyLuat.designer.cs">
+      <DependentUpon>srptQuaTrinhKyLuat.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\srptQuaTrinhLamViec.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\srptQuaTrinhLamViec.designer.cs">
+      <DependentUpon>srptQuaTrinhLamViec.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\srptQuaTrinhLuong.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\srptQuaTrinhLuong.designer.cs">
+      <DependentUpon>srptQuaTrinhLuong.cs</DependentUpon>
     </Compile>
     <Compile Include="NhanSu\srptTest.cs">
       <SubType>Component</SubType>
@@ -813,60 +923,6 @@
     </Compile>
     <Compile Include="NhanSu\srptToKhaiBaoHiemXaHoi.Designer.cs">
       <DependentUpon>srptToKhaiBaoHiemXaHoi.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NhanSu\srptQuanHeGiaDinh.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="NhanSu\srptQuanHeGiaDinh.designer.cs">
-      <DependentUpon>srptQuanHeGiaDinh.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NhanSu\srptQuaTrinhDaoTao.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="NhanSu\srptQuaTrinhDaoTao.designer.cs">
-      <DependentUpon>srptQuaTrinhDaoTao.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NhanSu\srptHopDongLaoDong.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="NhanSu\srptHopDongLaoDong.designer.cs">
-      <DependentUpon>srptHopDongLaoDong.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NhanSu\srptQuaTrinhDanhGia.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="NhanSu\srptQuaTrinhDanhGia.designer.cs">
-      <DependentUpon>srptQuaTrinhDanhGia.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NhanSu\srptQuaTrinhKyLuat.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="NhanSu\srptQuaTrinhKyLuat.designer.cs">
-      <DependentUpon>srptQuaTrinhKyLuat.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NhanSu\srptQuaTrinhKhenThuong.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="NhanSu\srptQuaTrinhKhenThuong.designer.cs">
-      <DependentUpon>srptQuaTrinhKhenThuong.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NhanSu\srptQuaTrinhLuong.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="NhanSu\srptQuaTrinhLuong.designer.cs">
-      <DependentUpon>srptQuaTrinhLuong.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NhanSu\srptQuaTrinhLamViec.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="NhanSu\srptQuaTrinhLamViec.designer.cs">
-      <DependentUpon>srptQuaTrinhLamViec.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NhanSu\rptBieuDoTangGiamCongNhan.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="NhanSu\rptBieuDoTangGiamCongNhan.Designer.cs">
-      <DependentUpon>rptBieuDoTangGiamCongNhan.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -881,12 +937,6 @@
     </Compile>
     <Compile Include="rptDV.Designer.cs">
       <DependentUpon>rptDV.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NhanSu\rptQuyetDinhLuongCN.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="NhanSu\rptQuyetDinhLuongCN.Designer.cs">
-      <DependentUpon>rptQuyetDinhLuongCN.cs</DependentUpon>
     </Compile>
     <Compile Include="rptThongTinChung.cs">
       <SubType>Component</SubType>
@@ -945,6 +995,9 @@
     <EmbeddedResource Include="NhanSu\rptBaoCaoLaoDongThang.resx">
       <DependentUpon>rptBaoCaoLaoDongThang.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\rptBCBangCapCN.resx">
+      <DependentUpon>rptBCBangCapCN.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="NhanSu\rptBCBienBanCanhCao.resx">
       <DependentUpon>rptBCBienBanCanhCao.cs</DependentUpon>
     </EmbeddedResource>
@@ -966,6 +1019,9 @@
     <EmbeddedResource Include="NhanSu\rptBCCNTheoTrinhDo.resx">
       <DependentUpon>rptBCCNTheoTrinhDo.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\rptBCDanhGiaCN.resx">
+      <DependentUpon>rptBCDanhGiaCN.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="NhanSu\rptBCDanhGiaTrinhDo.resx">
       <DependentUpon>rptBCDanhGiaTrinhDo.cs</DependentUpon>
     </EmbeddedResource>
@@ -975,17 +1031,92 @@
     <EmbeddedResource Include="NhanSu\rptBCDSLaoDongNu.resx">
       <DependentUpon>rptBCDSLaoDongNu.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\rptBCGiamLaoDongThang.resx">
+      <DependentUpon>rptBCGiamLaoDongThang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\rptBCGiamLaoDongThang_NB.resx">
+      <DependentUpon>rptBCGiamLaoDongThang_NB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\rptBCHopDongHetHan.resx">
+      <DependentUpon>rptBCHopDongHetHan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\rptBCKeHoachNghiPhep.resx">
+      <DependentUpon>rptBCKeHoachNghiPhep.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\rptBCKetQuaDaoTao.resx">
+      <DependentUpon>rptBCKetQuaDaoTao.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\rptBCKhenThuongKyLuat.resx">
+      <DependentUpon>rptBCKhenThuongKyLuat.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\rptBCKhenThuongKyLuatBP.resx">
+      <DependentUpon>rptBCKhenThuongKyLuatBP.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\rptBCKhenThuongKyLuatCN.resx">
+      <DependentUpon>rptBCKhenThuongKyLuatCN.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\rptBCKhenThuongKyLuatTH.resx">
+      <DependentUpon>rptBCKhenThuongKyLuatTH.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\rptBCLaoDongThang.resx">
+      <DependentUpon>rptBCLaoDongThang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\rptBCLaoDongTinh.resx">
+      <DependentUpon>rptBCLaoDongTinh.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\rptBCLaoDongTo.resx">
+      <DependentUpon>rptBCLaoDongTo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\rptBCLaoDongVeHuu.resx">
+      <DependentUpon>rptBCLaoDongVeHuu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\rptBCLDNuocNgoaiKhongCapGP.resx">
+      <DependentUpon>rptBCLDNuocNgoaiKhongCapGP.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\rptBCQuaTrinhCongTacCN.resx">
+      <DependentUpon>rptBCQuaTrinhCongTacCN.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\rptBCQuaTrinhCongTacTH.resx">
+      <DependentUpon>rptBCQuaTrinhCongTacTH.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\rptBCQuaTrinhCongTacTH_NB.resx">
+      <DependentUpon>rptBCQuaTrinhCongTacTH_NB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\rptBCQuaTrinhDaoTaoCNV.resx">
+      <DependentUpon>rptBCQuaTrinhDaoTaoCNV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\rptBCQuaTrinhLuongCN.resx">
+      <DependentUpon>rptBCQuaTrinhLuongCN.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="NhanSu\rptBCQuaTrinhLuongCN_SB.resx">
       <DependentUpon>rptBCQuaTrinhLuongCN_SB.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="NhanSu\rptBCToiHanKyHopDongLaoDong.resx">
-      <DependentUpon>rptBCToiHanKyHopDongLaoDong.cs</DependentUpon>
+    <EmbeddedResource Include="NhanSu\rptBCQuaTrinhLuongTH.resx">
+      <DependentUpon>rptBCQuaTrinhLuongTH.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NhanSu\rptBCTaiKyHopDongLaoDong.resx">
       <DependentUpon>rptBCTaiKyHopDongLaoDong.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="NhanSu\rptBCHopDongHetHan.resx">
-      <DependentUpon>rptBCHopDongHetHan.cs</DependentUpon>
+    <EmbeddedResource Include="NhanSu\rptBCTangGiamLD6Thang.resx">
+      <DependentUpon>rptBCTangGiamLD6Thang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\rptBCTangLaoDongThang.resx">
+      <DependentUpon>rptBCTangLaoDongThang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\rptBCThongKeDaoTao.resx">
+      <DependentUpon>rptBCThongKeDaoTao.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\rptBCTinhHinhSDLDNuocNgoai.resx">
+      <DependentUpon>rptBCTinhHinhSDLDNuocNgoai.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\rptBCTinhHinhSDLDTaiThoidDem.resx">
+      <DependentUpon>rptBCTinhHinhSDLDTaiThoidDem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\rptBCTinhHinhSuDungLaoDong.resx">
+      <DependentUpon>rptBCTinhHinhSuDungLaoDong.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\rptBCToiHanKyHopDongLaoDong.resx">
+      <DependentUpon>rptBCToiHanKyHopDongLaoDong.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NhanSu\rptBCXepLoaiKhenThuongNam.resx">
       <DependentUpon>rptBCXepLoaiKhenThuongNam.cs</DependentUpon>
@@ -999,122 +1130,8 @@
     <EmbeddedResource Include="NhanSu\rptBieuDoPhanLoai.resx">
       <DependentUpon>rptBieuDoPhanLoai.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="NhanSu\rptDSXNgioquetthetheongay.resx">
-      <DependentUpon>rptDSXNgioquetthetheongay.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NhanSu\rptHopDongLaoDongKhoang.resx">
-      <DependentUpon>rptHopDongLaoDongKhoang.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NhanSu\rptHopDongThoiVu_HN.resx">
-      <DependentUpon>rptHopDongThoiVu_HN.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NhanSu\rptHopDongThuViec_HN.resx">
-      <DependentUpon>rptHopDongThuViec_HN.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NhanSu\rptHopDongLaoDong_HN.resx">
-      <DependentUpon>rptHopDongLaoDong_HN.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NhanSu\rptKetThucHopDong_HN.resx">
-      <DependentUpon>rptKetThucHopDong_HN.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NhanSu\rptPhuLucHopDongLaoDong_DM.resx">
-      <DependentUpon>rptPhuLucHopDongLaoDong_DM.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NhanSu\rptHopDongLaoDong_DM.resx">
-      <DependentUpon>rptHopDongLaoDong_DM.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NhanSu\rptHopDongLaoDongThuViec_DM.resx">
-      <DependentUpon>rptHopDongLaoDongThuViec_DM.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NhanSu\rptHopDongThoiVu_SB.resx">
-      <DependentUpon>rptHopDongThoiVu_SB.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NhanSu\rptHopDongLaoDong_SB.resx">
-      <DependentUpon>rptHopDongLaoDong_SB.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NhanSu\rptHopDongLaoDongThuViec_SB.resx">
-      <DependentUpon>rptHopDongLaoDongThuViec_SB.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NhanSu\rptHopDongLaoDong_MT.resx">
-      <DependentUpon>rptHopDongLaoDong_MT.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NhanSu\rptHopDongDaoTao.resx">
-      <DependentUpon>rptHopDongDaoTao.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NhanSu\rptHopDongThuViec_CNQC.resx">
-      <DependentUpon>rptHopDongThuViec_CNQC.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NhanSu\rptHopDongThuViec_CDDH.resx">
-      <DependentUpon>rptHopDongThuViec_CDDH.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NhanSu\rptKeHoachDaoTao.resx">
-      <DependentUpon>rptKeHoachDaoTao.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NhanSu\rptBCQuaTrinhDaoTaoCNV.resx">
-      <DependentUpon>rptBCQuaTrinhDaoTaoCNV.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NhanSu\rptBCThongKeDaoTao.resx">
-      <DependentUpon>rptBCThongKeDaoTao.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NhanSu\rptBCKhenThuongKyLuatBP.resx">
-      <DependentUpon>rptBCKhenThuongKyLuatBP.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NhanSu\rptBCKhenThuongKyLuat.resx">
-      <DependentUpon>rptBCKhenThuongKyLuat.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NhanSu\rptBCKetQuaDaoTao.resx">
-      <DependentUpon>rptBCKetQuaDaoTao.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NhanSu\rptBCKhenThuongKyLuatTH.resx">
-      <DependentUpon>rptBCKhenThuongKyLuatTH.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NhanSu\rptBCLaoDongThang.resx">
-      <DependentUpon>rptBCLaoDongThang.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NhanSu\rptBCLDNuocNgoaiKhongCapGP.resx">
-      <DependentUpon>rptBCLDNuocNgoaiKhongCapGP.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NhanSu\rptBCQuaTrinhCongTacTH.resx">
-      <DependentUpon>rptBCQuaTrinhCongTacTH.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NhanSu\rptBCQuaTrinhLuongTH.resx">
-      <DependentUpon>rptBCQuaTrinhLuongTH.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NhanSu\rptBCTangGiamLD6Thang.resx">
-      <DependentUpon>rptBCTangGiamLD6Thang.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NhanSu\rptBCDanhGiaCN.resx">
-      <DependentUpon>rptBCDanhGiaCN.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NhanSu\rptBCGiamLaoDongThang.resx">
-      <DependentUpon>rptBCGiamLaoDongThang.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NhanSu\rptBCTangLaoDongThang.resx">
-      <DependentUpon>rptBCTangLaoDongThang.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NhanSu\rptBCKhenThuongKyLuatCN.resx">
-      <DependentUpon>rptBCKhenThuongKyLuatCN.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NhanSu\rptBCBangCapCN.resx">
-      <DependentUpon>rptBCBangCapCN.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NhanSu\rptBCKeHoachNghiPhep.resx">
-      <DependentUpon>rptBCKeHoachNghiPhep.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NhanSu\rptBCQuaTrinhLuongCN.resx">
-      <DependentUpon>rptBCQuaTrinhLuongCN.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NhanSu\rptBCQuaTrinhCongTacCN.resx">
-      <DependentUpon>rptBCQuaTrinhCongTacCN.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NhanSu\rptBCTinhHinhSDLDNuocNgoai.resx">
-      <DependentUpon>rptBCTinhHinhSDLDNuocNgoai.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NhanSu\rptBCTinhHinhSDLDTaiThoidDem.resx">
-      <DependentUpon>rptBCTinhHinhSDLDTaiThoidDem.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NhanSu\rptBCTinhHinhSuDungLaoDong.resx">
-      <DependentUpon>rptBCTinhHinhSuDungLaoDong.cs</DependentUpon>
+    <EmbeddedResource Include="NhanSu\rptBieuDoTangGiamCongNhan.resx">
+      <DependentUpon>rptBieuDoTangGiamCongNhan.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NhanSu\rptDSCBNVDieuChuyen.resx">
       <DependentUpon>rptDSCBNVDieuChuyen.cs</DependentUpon>
@@ -1128,17 +1145,8 @@
     <EmbeddedResource Include="NhanSu\rptDSGiaDinh.resx">
       <DependentUpon>rptDSGiaDinh.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="NhanSu\rptBCLaoDongTinh.resx">
-      <DependentUpon>rptBCLaoDongTinh.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NhanSu\rptBCLaoDongVeHuu.resx">
-      <DependentUpon>rptBCLaoDongVeHuu.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="NhanSu\rptDSNhanVienThayDoiLuongGD.resx">
       <DependentUpon>rptDSNhanVienThayDoiLuongGD.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NhanSu\rptDSThamNien.resx">
-      <DependentUpon>rptDSThamNien.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NhanSu\rptDSQuanLy.resx">
       <DependentUpon>rptDSQuanLy.cs</DependentUpon>
@@ -1146,104 +1154,176 @@
     <EmbeddedResource Include="NhanSu\rptDSThamGiaCongDoan.resx">
       <DependentUpon>rptDSThamGiaCongDoan.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="NhanSu\rptBCLaoDongTo.resx">
-      <DependentUpon>rptBCLaoDongTo.cs</DependentUpon>
+    <EmbeddedResource Include="NhanSu\rptDSThamNien.resx">
+      <DependentUpon>rptDSThamNien.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\rptDSXNgioquetthetheongay.resx">
+      <DependentUpon>rptDSXNgioquetthetheongay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\rptHopDongDaoTao.resx">
+      <DependentUpon>rptHopDongDaoTao.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\rptHopDongLaoDong.resx">
+      <DependentUpon>rptHopDongLaoDong.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\rptHopDongLaoDongKhoang.resx">
+      <DependentUpon>rptHopDongLaoDongKhoang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\rptHopDongLaoDongThuViec_DM.resx">
+      <DependentUpon>rptHopDongLaoDongThuViec_DM.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\rptHopDongLaoDongThuViec_NB.resx">
+      <DependentUpon>rptHopDongLaoDongThuViec_NB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\rptHopDongLaoDongThuViec_SB.resx">
+      <DependentUpon>rptHopDongLaoDongThuViec_SB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\rptHopDongLaoDong_DM.resx">
+      <DependentUpon>rptHopDongLaoDong_DM.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\rptHopDongLaoDong_HN.resx">
+      <DependentUpon>rptHopDongLaoDong_HN.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\rptHopDongLaoDong_MT.resx">
+      <DependentUpon>rptHopDongLaoDong_MT.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\rptHopDongLaoDong_NB.resx">
+      <DependentUpon>rptHopDongLaoDong_NB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\rptHopDongLaoDong_SB.resx">
+      <DependentUpon>rptHopDongLaoDong_SB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\rptHopDongThoiVu_HN.resx">
+      <DependentUpon>rptHopDongThoiVu_HN.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\rptHopDongThoiVu_SB.resx">
+      <DependentUpon>rptHopDongThoiVu_SB.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NhanSu\rptHopDongThuViec.resx">
       <DependentUpon>rptHopDongThuViec.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\rptHopDongThuViec_CDDH.resx">
+      <DependentUpon>rptHopDongThuViec_CDDH.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\rptHopDongThuViec_CNQC.resx">
+      <DependentUpon>rptHopDongThuViec_CNQC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\rptHopDongThuViec_HN.resx">
+      <DependentUpon>rptHopDongThuViec_HN.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="NhanSu\rptHoSoCapCuu.resx">
       <DependentUpon>rptHoSoCapCuu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\rptKeHoachDaoTao.resx">
+      <DependentUpon>rptKeHoachDaoTao.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\rptKetThucHopDong_HN.resx">
+      <DependentUpon>rptKetThucHopDong_HN.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\rptPhuLucHopDongLaoDong.resx">
+      <DependentUpon>rptPhuLucHopDongLaoDong.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\rptPhuLucHopDongLaoDong_DM.resx">
+      <DependentUpon>rptPhuLucHopDongLaoDong_DM.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NhanSu\rptPhuLucHopDongLaoDong_SB.resx">
       <DependentUpon>rptPhuLucHopDongLaoDong_SB.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="NhanSu\rptPhuLucHopDongLaoDong.resx">
-      <DependentUpon>rptPhuLucHopDongLaoDong.cs</DependentUpon>
+    <EmbeddedResource Include="NhanSu\rptQuyetDinhBoNhiem_DM.resx">
+      <DependentUpon>rptQuyetDinhBoNhiem_DM.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NhanSu\rptQuyetDinhChamDutHDLD_DM.resx">
       <DependentUpon>rptQuyetDinhChamDutHDLD_DM.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="NhanSu\rptQuyetDinhDieuChuyen_HN.resx">
-      <DependentUpon>rptQuyetDinhDieuChuyen_HN.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NhanSu\rptQuyetDinhLuongTapThe_HN.resx">
-      <DependentUpon>rptQuyetDinhLuongTapThe_HN.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NhanSu\rptQuyetDinhLuongCN_HN.resx">
-      <DependentUpon>rptQuyetDinhLuongCN_HN.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NhanSu\rptQuyetDinhNangLuong_DM.resx">
-      <DependentUpon>rptQuyetDinhNangLuong_DM.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NhanSu\rptQuyetDinhBoNhiem_DM.resx">
-      <DependentUpon>rptQuyetDinhBoNhiem_DM.cs</DependentUpon>
+    <EmbeddedResource Include="NhanSu\rptQuyetDinhDieuChuyen.resx">
+      <DependentUpon>rptQuyetDinhDieuChuyen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NhanSu\rptQuyetDinhDieuChuyen_DM.resx">
       <DependentUpon>rptQuyetDinhDieuChuyen_DM.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="NhanSu\rptQuyetDinhThayDoiLuong_SB.resx">
-      <DependentUpon>rptQuyetDinhThayDoiLuong_SB.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NhanSu\rptQuyetDinhThoiViecBoViec_SB.resx">
-      <DependentUpon>rptQuyetDinhThoiViecBoViec_SB.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NhanSu\rptQuyetDinhThoiViecBoViecTiengAnh_SB.resx">
-      <DependentUpon>rptQuyetDinhThoiViecBoViecTiengAnh_SB.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NhanSu\rptQuyetDinhThoiViecTiengAnh_SB.resx">
-      <DependentUpon>rptQuyetDinhThoiViecTiengAnh_SB.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NhanSu\rptQuyetDinhThoiViecTroCapTiengAnh_SB.resx">
-      <DependentUpon>rptQuyetDinhThoiViecTroCapTiengAnh_SB.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NhanSu\rptQuyetDinhTuyenDung_SB.resx">
-      <DependentUpon>rptQuyetDinhTuyenDung_SB.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NhanSu\rptQuyetDinhDieuChuyen_SB.resx">
-      <DependentUpon>rptQuyetDinhDieuChuyen_SB.cs</DependentUpon>
+    <EmbeddedResource Include="NhanSu\rptQuyetDinhDieuChuyen_HN.resx">
+      <DependentUpon>rptQuyetDinhDieuChuyen_HN.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NhanSu\rptQuyetDinhDieuChuyen_MT.resx">
       <DependentUpon>rptQuyetDinhDieuChuyen_MT.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="NhanSu\rptQuyetDinhDieuChuyen.resx">
-      <DependentUpon>rptQuyetDinhDieuChuyen.cs</DependentUpon>
+    <EmbeddedResource Include="NhanSu\rptQuyetDinhDieuChuyen_NB.resx">
+      <DependentUpon>rptQuyetDinhDieuChuyen_NB.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="NhanSu\rptHopDongLaoDong.resx">
-      <DependentUpon>rptHopDongLaoDong.cs</DependentUpon>
+    <EmbeddedResource Include="NhanSu\rptQuyetDinhDieuChuyen_SB.resx">
+      <DependentUpon>rptQuyetDinhDieuChuyen_SB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\rptQuyetDinhLuongCN.resx">
+      <DependentUpon>rptQuyetDinhLuongCN.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\rptQuyetDinhLuongCN_HN.resx">
+      <DependentUpon>rptQuyetDinhLuongCN_HN.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\rptQuyetDinhLuongTapThe_HN.resx">
+      <DependentUpon>rptQuyetDinhLuongTapThe_HN.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NhanSu\rptQuyetDinhNangLuongCN.resx">
       <DependentUpon>rptQuyetDinhNangLuongCN.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="NhanSu\rptQuyetDinhThanhLyHDTruoc2008.resx">
-      <DependentUpon>rptQuyetDinhThanhLyHDTruoc2008.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NhanSu\rptQuyetDinhThoiViec_SB.resx">
-      <DependentUpon>rptQuyetDinhThoiViec_SB.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NhanSu\rptQuyetDinhThoiViecTroCap_SB.resx">
-      <DependentUpon>rptQuyetDinhThoiViecTroCap_SB.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NhanSu\rptQuyetDinhViPhamTGHopDong.resx">
-      <DependentUpon>rptQuyetDinhViPhamTGHopDong.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NhanSu\rptQuyetDinhThoiViecTroCap.resx">
-      <DependentUpon>rptQuyetDinhThoiViecTroCap.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NhanSu\rptQuyetDinhThoiViec.resx">
-      <DependentUpon>rptQuyetDinhThoiViec.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NhanSu\rptQuyetDinhSaThaiTroCap.resx">
-      <DependentUpon>rptQuyetDinhSaThaiTroCap.cs</DependentUpon>
-      <SubType>Designer</SubType>
+    <EmbeddedResource Include="NhanSu\rptQuyetDinhNangLuong_DM.resx">
+      <DependentUpon>rptQuyetDinhNangLuong_DM.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NhanSu\rptQuyetDinhSaThai.resx">
       <DependentUpon>rptQuyetDinhSaThai.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\rptQuyetDinhSaThaiTroCap.resx">
+      <DependentUpon>rptQuyetDinhSaThaiTroCap.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\rptQuyetDinhThanhLyHDTruoc2008.resx">
+      <DependentUpon>rptQuyetDinhThanhLyHDTruoc2008.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\rptQuyetDinhThayDoiLuong_SB.resx">
+      <DependentUpon>rptQuyetDinhThayDoiLuong_SB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\rptQuyetDinhThoiViec.resx">
+      <DependentUpon>rptQuyetDinhThoiViec.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\rptQuyetDinhThoiViecBoViecTiengAnh_SB.resx">
+      <DependentUpon>rptQuyetDinhThoiViecBoViecTiengAnh_SB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\rptQuyetDinhThoiViecBoViec_SB.resx">
+      <DependentUpon>rptQuyetDinhThoiViecBoViec_SB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\rptQuyetDinhThoiViecTiengAnh_SB.resx">
+      <DependentUpon>rptQuyetDinhThoiViecTiengAnh_SB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\rptQuyetDinhThoiViecTroCap.resx">
+      <DependentUpon>rptQuyetDinhThoiViecTroCap.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\rptQuyetDinhThoiViecTroCapTiengAnh_SB.resx">
+      <DependentUpon>rptQuyetDinhThoiViecTroCapTiengAnh_SB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\rptQuyetDinhThoiViecTroCap_SB.resx">
+      <DependentUpon>rptQuyetDinhThoiViecTroCap_SB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\rptQuyetDinhThoiViec_NB.resx">
+      <DependentUpon>rptQuyetDinhThoiViec_NB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\rptQuyetDinhThoiViec_SB.resx">
+      <DependentUpon>rptQuyetDinhThoiViec_SB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\rptQuyetDinhTuyenDung_SB.resx">
+      <DependentUpon>rptQuyetDinhTuyenDung_SB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\rptQuyetDinhViPhamTGHopDong.resx">
+      <DependentUpon>rptQuyetDinhViPhamTGHopDong.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="NhanSu\rptSoYeuLyLich.resx">
       <DependentUpon>rptSoYeuLyLich.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\rptTheNhanVien.resx">
+      <DependentUpon>rptTheNhanVien.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\rptThongBaoKetThucHDLD_NB.resx">
+      <DependentUpon>rptThongBaoKetThucHDLD_NB.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NhanSu\rptThongKeTaiNan.resx">
       <DependentUpon>rptThongKeTaiNan.cs</DependentUpon>
@@ -1254,56 +1334,53 @@
     <EmbeddedResource Include="NhanSu\rptToKhaiBaoHiemXaHoi.resx">
       <DependentUpon>rptToKhaiBaoHiemXaHoi.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="NhanSu\rptToKhaiBHXH_SB.resx">
-      <DependentUpon>rptToKhaiBHXH_SB.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="NhanSu\rptToKhaiBHXH.resx">
       <DependentUpon>rptToKhaiBHXH.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\rptToKhaiBHXH_SB.resx">
+      <DependentUpon>rptToKhaiBHXH_SB.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NhanSu\srptBDCNTheoHuyen.resx">
       <DependentUpon>srptBDCNTheoHuyen.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="NhanSu\srptBDIDD.resx">
-      <DependentUpon>srptBDIDD.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="NhanSu\srptBDGioiTinh.resx">
       <DependentUpon>srptBDGioiTinh.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\srptBDIDD.resx">
+      <DependentUpon>srptBDIDD.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="NhanSu\srptBDLoaiCV.resx">
       <DependentUpon>srptBDLoaiCV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\srptHopDongLaoDong.resx">
+      <DependentUpon>srptHopDongLaoDong.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\srptQuanHeGiaDinh.resx">
+      <DependentUpon>srptQuanHeGiaDinh.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\srptQuaTrinhDanhGia.resx">
+      <DependentUpon>srptQuaTrinhDanhGia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\srptQuaTrinhDaoTao.resx">
+      <DependentUpon>srptQuaTrinhDaoTao.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\srptQuaTrinhKhenThuong.resx">
+      <DependentUpon>srptQuaTrinhKhenThuong.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\srptQuaTrinhKyLuat.resx">
+      <DependentUpon>srptQuaTrinhKyLuat.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\srptQuaTrinhLamViec.resx">
+      <DependentUpon>srptQuaTrinhLamViec.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\srptQuaTrinhLuong.resx">
+      <DependentUpon>srptQuaTrinhLuong.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NhanSu\srptTest.resx">
       <DependentUpon>srptTest.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NhanSu\srptToKhaiBaoHiemXaHoi.resx">
       <DependentUpon>srptToKhaiBaoHiemXaHoi.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NhanSu\srptQuanHeGiaDinh.resx">
-      <DependentUpon>srptQuanHeGiaDinh.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NhanSu\srptQuaTrinhDaoTao.resx">
-      <DependentUpon>srptQuaTrinhDaoTao.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NhanSu\srptHopDongLaoDong.resx">
-      <DependentUpon>srptHopDongLaoDong.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NhanSu\srptQuaTrinhDanhGia.resx">
-      <DependentUpon>srptQuaTrinhDanhGia.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NhanSu\srptQuaTrinhKyLuat.resx">
-      <DependentUpon>srptQuaTrinhKyLuat.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NhanSu\srptQuaTrinhKhenThuong.resx">
-      <DependentUpon>srptQuaTrinhKhenThuong.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NhanSu\srptQuaTrinhLuong.resx">
-      <DependentUpon>srptQuaTrinhLuong.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NhanSu\srptQuaTrinhLamViec.resx">
-      <DependentUpon>srptQuaTrinhLamViec.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NhanSu\rptBieuDoTangGiamCongNhan.resx">
-      <DependentUpon>rptBieuDoTangGiamCongNhan.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -1314,15 +1391,13 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="DanhMuc\rptDSDonVi.resx">
       <DependentUpon>rptDSDonVi.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="rptDV.resx">
       <DependentUpon>rptDV.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NhanSu\rptQuyetDinhLuongCN.resx">
-      <DependentUpon>rptQuyetDinhLuongCN.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="rptThongTinChung.resx">
       <DependentUpon>rptThongTinChung.cs</DependentUpon>

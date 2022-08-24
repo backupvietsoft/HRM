@@ -146,7 +146,6 @@ namespace Vs.TimeAttendance
                     {
                        
                         them = true;
-
                         LoadGrdCongNhan(them);
                         Commons.Modules.ObjSystems.AddnewRow(grvKeHoachDiCa, true);
                         enableButon(false);

@@ -55,7 +55,7 @@ namespace Vs.TimeAttendance
             repositoryItemTimeEdit1.DisplayFormat.FormatString = "HH:mm";
             repositoryItemTimeEdit1.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             repositoryItemTimeEdit1.EditFormat.FormatString = "HH:mm";
-
+            
             LoaddNgayApDung();
             LoadcboNhomChamCong(cboNhomChamCong);
             LoadGrdChedochamcong();
@@ -99,10 +99,10 @@ namespace Vs.TimeAttendance
             try
             {
                 DataTable dt = new DataTable();
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboNhomChamCong", Commons.Modules.UserName, Commons.Modules.TypeLanguage,false));
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboNhomChamCong", Commons.Modules.UserName, Commons.Modules.TypeLanguage, false));
                 Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboNhomChamCong, dt, "ID_NHOM", "TEN_NHOM", "TEN_NHOM");
             }
-            catch(Exception  ex)
+            catch (Exception ex)
             {
             }
         }
@@ -123,7 +123,7 @@ namespace Vs.TimeAttendance
                     Commons.Modules.ObjSystems.MLoadXtraGrid(grdNgay, grvNgay, dt, false, false, true, false, false, this.Name);
                 }
 
-                if(dt.Rows.Count == 0)
+                if (dt.Rows.Count == 0)
                 {
                     cboNgay.Text = DateTime.Now.ToString("dd/MM/yyyy");
                 }
@@ -239,7 +239,6 @@ namespace Vs.TimeAttendance
                 view.SetFocusedRowCellValue("TRU_CUOI_GIO", 0);
                 view.SetFocusedRowCellValue("PHUT_VE_SOM", 0);
                 view.SetFocusedRowCellValue("PHUT_TRUOC_CA", 0);
-
                 view.SetFocusedRowCellValue("TANG_CA", false);
                 view.SetFocusedRowCellValue("CA_DEM", false);
                 view.SetFocusedRowCellValue("NGAY_HOM_SAU", false);
@@ -247,7 +246,7 @@ namespace Vs.TimeAttendance
                 view.SetFocusedRowCellValue("KIEM_TRA", false);
                 view.SetFocusedRowCellValue("CHE_DO", false);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 XtraMessageBox.Show(ex.Message.ToString());
             }
@@ -270,30 +269,32 @@ namespace Vs.TimeAttendance
         private bool Savedata()
         {
             string sTB = "CDLV_TMP" + Commons.Modules.UserName;
-            string sSql = "" ;
+            string sSql = "";
             try
             {
                 Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sTB, Commons.Modules.ObjSystems.ConvertDatatable(grvData), "");
-                sSql = "DELETE CHE_DO_LAM_VIEC WHERE CONVERT(NVARCHAR, NGAY, 112) = '" + Convert.ToDateTime(cboNgay.EditValue).ToString("yyyyMMdd") + 
-                       "' AND ID_NHOM = "+ cboNhomChamCong.EditValue + 
-                       " INSERT INTO CHE_DO_LAM_VIEC([ID_NHOM],[CA],[NGAY],[GIO_BD],[GIO_KT],[PHUT_BD],[PHUT_KT],[SO_PHUT],[HE_SO_NGAY_THUONG],"+
-                       "[HE_SO_NGAY_CN],[HE_SO_NGAY_LE],[TRU_DAU_GIO],[TRU_CUOI_GIO],[PHUT_VE_SOM],[TANG_CA],[TC_DEM],[KIEM_TRA],[NGAY_HOM_SAU],[CA_NGAY_HOM_SAU],"+
-                       "[CA_DEM],[PHUT_TRUOC_CA],[CHE_DO]) SELECT " + cboNhomChamCong.EditValue + " AS [ID_NHOM],[CA],[NGAY],[GIO_BD],[GIO_KT],[PHUT_BD]," +
-                       "[PHUT_KT],[SO_PHUT],[HE_SO_NGAY_THUONG],[HE_SO_NGAY_CN],[HE_SO_NGAY_LE],[TRU_DAU_GIO],[TRU_CUOI_GIO],[PHUT_VE_SOM],[TANG_CA],[TC_DEM]," +
-                       "[KIEM_TRA],[NGAY_HOM_SAU],[CA_NGAY_HOM_SAU],[CA_DEM],[PHUT_TRUOC_CA],[CHE_DO] FROM " + sTB + " WHERE CA IS NOT NULL " + "";
                 
-                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, sSql);
+                //sSql = "DELETE CHE_DO_LAM_VIEC WHERE CONVERT(NVARCHAR, NGAY, 112) = '" + Convert.ToDateTime(cboNgay.EditValue).ToString("yyyyMMdd") +
+                //       "' AND ID_NHOM = " + cboNhomChamCong.EditValue +
+                //       " INSERT INTO CHE_DO_LAM_VIEC([ID_NHOM],[CA],[NGAY],[GIO_BD],[GIO_KT],[PHUT_BD],[PHUT_KT],[SO_PHUT],[HE_SO_NGAY_THUONG]," +
+                //       "[HE_SO_NGAY_CN],[HE_SO_NGAY_LE],[TRU_DAU_GIO],[TRU_CUOI_GIO],[PHUT_VE_SOM],[TANG_CA],[TC_DEM],[KIEM_TRA],[NGAY_HOM_SAU],[CA_NGAY_HOM_SAU]," +
+                //       "[CA_DEM],[PHUT_TRUOC_CA],[CHE_DO]) SELECT " + cboNhomChamCong.EditValue + " AS [ID_NHOM],[CA],[NGAY],[GIO_BD],[GIO_KT],[PHUT_BD]," +
+                //       "[PHUT_KT],[SO_PHUT],[HE_SO_NGAY_THUONG],[HE_SO_NGAY_CN],[HE_SO_NGAY_LE],[TRU_DAU_GIO],[TRU_CUOI_GIO],[PHUT_VE_SOM],[TANG_CA],[TC_DEM]," +
+                //       "[KIEM_TRA],[NGAY_HOM_SAU],[CA_NGAY_HOM_SAU],[CA_DEM],[PHUT_TRUOC_CA],[CHE_DO] FROM " + sTB + " WHERE CA IS NOT NULL " + "";
+
+                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spSaveCheDoLamViec",Commons.Modules.UserName,Commons.Modules.TypeLanguage, cboNhomChamCong.EditValue,sTB, Convert.ToDateTime(cboNgay.EditValue).ToString("MM/dd/yyyy"));
                 Commons.Modules.ObjSystems.XoaTable(sTB);
                 return true;
             }
-            catch
-            {
+            catch 
+            { 
+                Commons.Modules.ObjSystems.XoaTable(sTB);
                 return false;
             }
         }
 
         private void grvData_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
-            {
+        {
             GridView view = sender as GridView;
             DateTime gioBD;
             DateTime gioKT;
@@ -307,11 +308,13 @@ namespace Vs.TimeAttendance
 
                 if (e.Column.FieldName == "GIO_BD")
                 {
-                    gioBD = DateTime.Parse(row["GIO_BD"].ToString());
+                    //gioBD = DateTime.Parse(row["GIO_BD"].ToString());
+                    gioBD = Convert.ToDateTime("1900-01-01 " + DateTime.Parse(row["GIO_BD"].ToString()).TimeOfDay);
                     phutBD = gioBD.Hour * 60 + gioBD.Minute;
                     if (!row["GIO_KT"].ToString().Equals(""))
                     {
-                        gioKT = DateTime.Parse(row["GIO_KT"].ToString());
+                        //gioKT = DateTime.Parse(row["GIO_KT"].ToString());
+                        gioKT = Convert.ToDateTime("1900-01-01 " + DateTime.Parse(row["GIO_KT"].ToString()).TimeOfDay);
                         phutKT = gioKT.Hour * 60 + gioKT.Minute;
                     }
                     else
@@ -333,15 +336,16 @@ namespace Vs.TimeAttendance
                 {
                     if (!row["GIO_BD"].ToString().Equals(""))
                     {
-                        gioBD = DateTime.Parse(row["GIO_BD"].ToString());
+                        //gioBD = DateTime.Parse(row["GIO_BD"].ToString());
+                        gioBD = Convert.ToDateTime("1900-01-01 " + DateTime.Parse(row["GIO_BD"].ToString()).TimeOfDay);
                         phutBD = gioBD.Hour * 60 + gioBD.Minute;
                     }
                     else
                     {
                         phutBD = 0;
                     }
-
-                    gioKT = DateTime.Parse(row["GIO_KT"].ToString());
+                    gioKT = Convert.ToDateTime("1900-01-01 " + DateTime.Parse(row["GIO_KT"].ToString()).TimeOfDay);
+                    //gioKT = DateTime.Parse(row["GIO_KT"].ToString());
                     phutKT = gioKT.Hour * 60 + gioKT.Minute;
                     Boolean.TryParse(row["NGAY_HOM_SAU"].ToString(), out ngayHomSau);
                     if (ngayHomSau == true)
@@ -355,9 +359,11 @@ namespace Vs.TimeAttendance
                 // Calculating the dicsount % and detect if the cellvalue change in certain column  
                 if (e.Column.FieldName == "NGAY_HOM_SAU" || e.Column.FieldName == "CA_NGAY_HOM_SAU")
                 {
-                    gioBD = DateTime.Parse(row["GIO_BD"].ToString());
+                    //gioBD = DateTime.Parse(row["GIO_BD"].ToString());
+                    gioBD = Convert.ToDateTime("1900-01-01 " + DateTime.Parse(row["GIO_BD"].ToString()).TimeOfDay);
                     phutBD = gioBD.Hour * 60 + gioBD.Minute;
-                    gioKT = DateTime.Parse(row["GIO_KT"].ToString());
+                    gioKT = Convert.ToDateTime("1900-01-01 " + DateTime.Parse(row["GIO_KT"].ToString()).TimeOfDay);
+                    //gioKT = DateTime.Parse(row["GIO_KT"].ToString());
                     phutKT = gioKT.Hour * 60 + gioKT.Minute;
                     phutKT = phutKT + 1440;
                     row["PHUT_KT"] = phutKT;

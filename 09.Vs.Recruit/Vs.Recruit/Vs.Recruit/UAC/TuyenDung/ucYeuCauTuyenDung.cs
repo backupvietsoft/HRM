@@ -9,6 +9,7 @@ using System;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
+using Vs.Report;
 
 namespace Vs.Recruit
 {
@@ -219,6 +220,12 @@ namespace Vs.Recruit
                         break;
                     }
 
+                case "In":
+                    {
+                        
+                        break;
+                    }
+
                 case "luu":
                     {
                         if (!dxValidationProvider1.Validate()) return;
@@ -279,10 +286,13 @@ namespace Vs.Recruit
             btnALL.Buttons[1].Properties.Visible = visible;
             btnALL.Buttons[2].Properties.Visible = visible;
             btnALL.Buttons[3].Properties.Visible = visible;
-            btnALL.Buttons[4].Properties.Visible = !visible;
-            btnALL.Buttons[5].Properties.Visible = !visible;
-            btnALL.Buttons[6].Properties.Visible = visible;
+            btnALL.Buttons[4].Properties.Visible = visible;
+            btnALL.Buttons[5].Properties.Visible = visible;
+            btnALL.Buttons[6].Properties.Visible = !visible;
+            btnALL.Buttons[7].Properties.Visible = !visible;
+            btnALL.Buttons[8].Properties.Visible = visible;
             grvThayThe.OptionsBehavior.Editable = !visible;
+
             grvViTri.OptionsBehavior.Editable = !visible;
             grvFileDK.OptionsBehavior.Editable = !visible;
 
@@ -311,7 +321,7 @@ namespace Vs.Recruit
         }
         private void BindingData(bool them)
         {
-             if (them == true)
+            if (them == true)
             {
                 txtMA_YCTD.EditValue = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.AUTO_CREATE_SO_YCTD(" + datNgayYC.DateTime.ToString("MM/dd/yyyy") + ")").ToString();
                 cboBPYC.EditValue = -1;
@@ -324,6 +334,10 @@ namespace Vs.Recruit
                 if (tab.SelectedTabPageIndex == 1)
                 {
                     LoadgrdFileDinhKem();
+                }
+                else
+                {
+                    LoadgrdViTri();
                 }
             }
             else // Load data vao text

@@ -45,16 +45,15 @@ namespace Vs.Category
 
             try
             {
-                string sSql = "SELECT ID_NHOM, TEN_NHOM, TEN_NHOM_A, TEN_NHOM_H, CA_TU_DONG, STT " +
+                string sSql = "SELECT ID_NHOM, TEN_NHOM, TEN_NHOM_A, TEN_NHOM_H, CA_TU_DONG, NHOM_CHE_DO ,STT " +
                     "FROM NHOM_CHAM_CONG WHERE ID_NHOM = " + Id.ToString();
                 DataTable dtTmp = new DataTable();
                 dtTmp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSql));
                 TEN_NHOMTextEdit.EditValue = dtTmp.Rows[0]["TEN_NHOM"].ToString();
                 TEN_NHOM_ATextEdit.EditValue = dtTmp.Rows[0]["TEN_NHOM_A"].ToString();
                 TEN_NHOM_HTextEdit.EditValue = dtTmp.Rows[0]["TEN_NHOM_H"].ToString();
-                CA_TU_DONGCheckEdit.EditValue = dtTmp.Rows[0]["CA_TU_DONG"];
                 txtSTT.EditValue = dtTmp.Rows[0]["STT"];
-
+                chkNhomCheDo.Checked = Convert.ToBoolean(dtTmp.Rows[0]["NHOM_CHE_DO"]);
             }
             catch (Exception EX)
             {
@@ -69,7 +68,7 @@ namespace Vs.Category
                 TEN_NHOM_ATextEdit.EditValue = String.Empty;
                 TEN_NHOM_HTextEdit.EditValue = String.Empty;
                 txtSTT.EditValue = 1;
-                CA_TU_DONGCheckEdit.EditValue = false;
+                chkNhomCheDo.Checked = false;
             }
             catch { }
         }
@@ -87,7 +86,7 @@ namespace Vs.Category
                             if (!dxValidationProvider1.Validate()) return;
                             if (bKiemTrung()) return;
                             Commons.Modules.sId = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spUpdateNHOM_CHAM_CONG", (AddEdit ? -1 : Id),
-                                TEN_NHOMTextEdit.EditValue, TEN_NHOM_ATextEdit.EditValue, TEN_NHOM_HTextEdit.EditValue, CA_TU_DONGCheckEdit.EditValue, (txtSTT.EditValue == "") ? txtSTT.EditValue = null : txtSTT.EditValue).ToString();
+                                TEN_NHOMTextEdit.EditValue, TEN_NHOM_ATextEdit.EditValue, TEN_NHOM_HTextEdit.EditValue, Convert.ToBoolean(chkNhomCheDo.Checked), (txtSTT.EditValue == "") ? txtSTT.EditValue = null : txtSTT.EditValue).ToString();
 
                             if (AddEdit)
                             {

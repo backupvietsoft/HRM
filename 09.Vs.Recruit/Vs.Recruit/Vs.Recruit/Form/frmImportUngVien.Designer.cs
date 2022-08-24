@@ -126,23 +126,23 @@ namespace Vs.Recruit
             // 
             // btnFile
             // 
-            this.btnFile.Location = new System.Drawing.Point(103, 46);
+            this.btnFile.Location = new System.Drawing.Point(104, 46);
             this.btnFile.Name = "btnFile";
             this.btnFile.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.btnFile.Size = new System.Drawing.Size(394, 24);
+            this.btnFile.Size = new System.Drawing.Size(393, 24);
             this.btnFile.StyleController = this.layoutControl1;
             this.btnFile.TabIndex = 0;
             this.btnFile.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.btnFile_ButtonClick);
             // 
             // cboChonSheet
             // 
-            this.cboChonSheet.Location = new System.Drawing.Point(580, 46);
+            this.cboChonSheet.Location = new System.Drawing.Point(581, 46);
             this.cboChonSheet.Name = "cboChonSheet";
             this.cboChonSheet.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cboChonSheet.Properties.NullText = "";
-            this.cboChonSheet.Size = new System.Drawing.Size(394, 24);
+            this.cboChonSheet.Size = new System.Drawing.Size(393, 24);
             this.cboChonSheet.StyleController = this.layoutControl1;
             this.cboChonSheet.TabIndex = 6;
             this.cboChonSheet.EditValueChanged += new System.EventHandler(this.cboChonSheet_EditValueChanged);
@@ -242,6 +242,7 @@ namespace Vs.Recruit
             this.Name = "frmImportUngVien";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Chọn ứng viên";
+            this.Load += new System.EventHandler(this.frmImportUngVien_Load);
             this.windowsUIButton.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.searchControl.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();

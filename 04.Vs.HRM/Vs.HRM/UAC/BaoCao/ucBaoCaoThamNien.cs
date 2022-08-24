@@ -29,45 +29,50 @@ namespace Vs.HRM
             {
                 case "Print":
                     {
-                        if (Commons.Modules.ObjSystems.KyHieuDV(Convert.ToInt64(LK_DON_VI.EditValue)) == "HN")
+                        switch(rdoChonBaoCao.SelectedIndex)
                         {
-                            BaoCaoTongHopThamNien_HN();
-                        }
-                        else
-                        {
-                            System.Data.SqlClient.SqlConnection conn;
-                            DataTable dt = new DataTable();
-                            frmViewReport frm = new frmViewReport();
-                            frm.rpt = new rptDSThamNien(lk_NgayIn.DateTime);
+                            case 0:
+                                {
+                                    System.Data.SqlClient.SqlConnection conn;
+                                    DataTable dt = new DataTable();
+                                    frmViewReport frm = new frmViewReport();
+                                    frm.rpt = new rptDSThamNien(lk_NgayIn.DateTime);
 
-                            try
-                            {
-                                conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
-                                conn.Open();
+                                    try
+                                    {
+                                        conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                                        conn.Open();
 
-                                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptDSThamNien", conn);
+                                        System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptDSThamNien", conn);
 
-                                cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
-                                cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
-                                cmd.Parameters.Add("@Dvi", SqlDbType.Int).Value = LK_DON_VI.EditValue;
-                                cmd.Parameters.Add("@XN", SqlDbType.Int).Value = LK_XI_NGHIEP.EditValue;
-                                cmd.Parameters.Add("@TO", SqlDbType.Int).Value = LK_TO.EditValue;
-                                cmd.Parameters.Add("@Ngay", SqlDbType.Date).Value = lk_NgayIn.EditValue;
-                                cmd.Parameters.Add("@Tu", SqlDbType.Int).Value = txtTu.EditValue;
-                                cmd.Parameters.Add("@Den", SqlDbType.Int).Value = txtDen.EditValue;
-                                cmd.CommandType = CommandType.StoredProcedure;
-                                System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+                                        cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                                        cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                                        cmd.Parameters.Add("@Dvi", SqlDbType.Int).Value = LK_DON_VI.EditValue;
+                                        cmd.Parameters.Add("@XN", SqlDbType.Int).Value = LK_XI_NGHIEP.EditValue;
+                                        cmd.Parameters.Add("@TO", SqlDbType.Int).Value = LK_TO.EditValue;
+                                        cmd.Parameters.Add("@Ngay", SqlDbType.Date).Value = lk_NgayIn.EditValue;
+                                        cmd.Parameters.Add("@Tu", SqlDbType.Int).Value = txtTu.EditValue;
+                                        cmd.Parameters.Add("@Den", SqlDbType.Int).Value = txtDen.EditValue;
+                                        cmd.CommandType = CommandType.StoredProcedure;
+                                        System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
 
-                                DataSet ds = new DataSet();
-                                adp.Fill(ds);
-                                dt = new DataTable();
-                                dt = ds.Tables[0].Copy();
-                                dt.TableName = "DA_TA";
-                                frm.AddDataSource(dt);
-                            }
-                            catch
-                            { }
-                            frm.ShowDialog();
+                                        DataSet ds = new DataSet();
+                                        adp.Fill(ds);
+                                        dt = new DataTable();
+                                        dt = ds.Tables[0].Copy();
+                                        dt.TableName = "DA_TA";
+                                        frm.AddDataSource(dt);
+                                    }
+                                    catch
+                                    { }
+                                    frm.ShowDialog();
+                                    break;
+                                }
+                            case 1:
+                                {
+                                    BaoCaoTongHopThamNien_HN();
+                                    break;
+                                }
                         }
                         break;
                     }

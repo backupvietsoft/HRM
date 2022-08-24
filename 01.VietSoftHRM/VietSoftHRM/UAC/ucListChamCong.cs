@@ -278,6 +278,16 @@ namespace VietSoftHRM
                         break;
                     }
 
+                case "mnuDKTGKhongLamSP":
+                    {
+                        ucDKThoiGianKhongLamSP ctl = new ucDKThoiGianKhongLamSP();
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(ctl);
+                        Commons.Modules.ObjSystems.HideWaitForm();
+                        ctl.Dock = DockStyle.Fill;
+                        break;
+                    }
+
                 default:
                     {
                         ucBlank tmp = new ucBlank();

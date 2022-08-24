@@ -83,8 +83,6 @@ namespace Vs.Payroll
             //grvData.Columns["LUONG_KHOAN"].DisplayFormat.FormatString = "N0";
         }
 
-
-
         public void LoadThang()
         {
             try

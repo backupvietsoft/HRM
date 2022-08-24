@@ -28,39 +28,86 @@ namespace Vs.HRM
                         {
                             case 0:
                                 {
-                                    System.Data.SqlClient.SqlConnection conn;
-                                    DataTable dt = new DataTable();
-                                    frm = new frmViewReport();
-                                    frm.rpt = new rptBCGiamLaoDongThang(lk_NgayIn.DateTime, dtTuNgay.DateTime, dtDenNgay.DateTime);
-
-                                    try
+                                    switch (Commons.Modules.ObjSystems.KyHieuDV(Convert.ToInt64(LK_DON_VI.EditValue)))
                                     {
-                                        conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
-                                        conn.Open();
+                                        case "NB":
+                                            {
+                                                DateTime firstDateTime = new DateTime(Convert.ToDateTime(txNam.EditValue).Year, 1, 1);
+                                                DateTime secondDateTime = new DateTime(Convert.ToDateTime(txNam.EditValue).Year, 6, 30);
 
-                                        System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptBCGiamLaoDongThang", conn);
+                                                System.Data.SqlClient.SqlConnection conn1;
+                                                System.Data.DataTable dt = new System.Data.DataTable();
+                                                frm = new frmViewReport();
+                                                frm.rpt = new rptBCGiamLaoDongThang_NB(lk_NgayIn.DateTime, dtTuNgay.DateTime, dtDenNgay.DateTime);
 
-                                        cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
-                                        cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
-                                        cmd.Parameters.Add("@Dvi", SqlDbType.Int).Value = LK_DON_VI.EditValue;
-                                        cmd.Parameters.Add("@XN", SqlDbType.Int).Value = LK_XI_NGHIEP.EditValue;
-                                        cmd.Parameters.Add("@TO", SqlDbType.Int).Value = LK_TO.EditValue;
-                                        cmd.Parameters.Add("@TNgay", SqlDbType.Date).Value = dtTuNgay.EditValue;
-                                        cmd.Parameters.Add("@DNgay", SqlDbType.Date).Value = dtDenNgay.EditValue;
-                                        cmd.CommandType = CommandType.StoredProcedure;
-                                        System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
-                                        DataSet ds = new DataSet();
-                                        adp.Fill(ds);
-                                        dt = new DataTable();
-                                        dt = ds.Tables[0].Copy();
-                                        dt.TableName = "DA_TA";
-                                        frm.AddDataSource(dt);
+                                                try
+                                                {
+                                                    conn1 = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                                                    conn1.Open();
+
+                                                    System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptBCGiamLaoDongThang_NB", conn1);
+
+                                                    cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                                                    cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                                                    cmd.Parameters.Add("@Dvi", SqlDbType.Int).Value = LK_DON_VI.EditValue;
+                                                    cmd.Parameters.Add("@XN", SqlDbType.Int).Value = LK_XI_NGHIEP.EditValue;
+                                                    cmd.Parameters.Add("@TO", SqlDbType.Int).Value = LK_TO.EditValue;
+                                                    cmd.Parameters.Add("@TNgay", SqlDbType.Date).Value = firstDateTime;
+                                                    cmd.Parameters.Add("@DNgay", SqlDbType.Date).Value = secondDateTime;
+                                                    cmd.Parameters.Add("@Loai", SqlDbType.Int).Value = 0;
+                                                    cmd.CommandType = CommandType.StoredProcedure;
+                                                    System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+
+                                                    DataSet ds = new DataSet();
+                                                    adp.Fill(ds);
+                                                    dt = new System.Data.DataTable();
+                                                    dt = ds.Tables[0].Copy();
+                                                    dt.TableName = "DA_TA";
+                                                    frm.AddDataSource(dt);
+
+                                                    frm.ShowDialog();
+                                                }
+                                                catch
+                                                { }
+                                                break;
+                                            }
+                                        default:
+                                            {
+                                                System.Data.SqlClient.SqlConnection conn;
+                                                DataTable dt = new DataTable();
+                                                frm = new frmViewReport();
+                                                frm.rpt = new rptBCGiamLaoDongThang(lk_NgayIn.DateTime, dtTuNgay.DateTime, dtDenNgay.DateTime);
+
+                                                try
+                                                {
+                                                    conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                                                    conn.Open();
+
+                                                    System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptBCGiamLaoDongThang", conn);
+
+                                                    cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                                                    cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                                                    cmd.Parameters.Add("@Dvi", SqlDbType.Int).Value = LK_DON_VI.EditValue;
+                                                    cmd.Parameters.Add("@XN", SqlDbType.Int).Value = LK_XI_NGHIEP.EditValue;
+                                                    cmd.Parameters.Add("@TO", SqlDbType.Int).Value = LK_TO.EditValue;
+                                                    cmd.Parameters.Add("@TNgay", SqlDbType.Date).Value = dtTuNgay.EditValue;
+                                                    cmd.Parameters.Add("@DNgay", SqlDbType.Date).Value = dtDenNgay.EditValue;
+                                                    cmd.CommandType = CommandType.StoredProcedure;
+                                                    System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+                                                    DataSet ds = new DataSet();
+                                                    adp.Fill(ds);
+                                                    dt = new DataTable();
+                                                    dt = ds.Tables[0].Copy();
+                                                    dt.TableName = "DA_TA";
+                                                    frm.AddDataSource(dt);
+                                                }
+                                                catch
+                                                { }
+                                                frm.ShowDialog();
+                                                break;
+                                            }
                                     }
-                                    catch
-                                    { }
-                               
-
-                                frm.ShowDialog(); }
+                                     }
                                 break;
                             case 1:
                                 {

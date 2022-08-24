@@ -103,7 +103,7 @@ namespace Vs.Recruit
                     cboViTri.ValueMember = "ID_VTTD";
                     cboViTri.DisplayMember = "TEN_VTTD";
                     //ID_VTTD,TEN_VTTD
-                    cboViTri.DataSource = Commons.Modules.ObjSystems.DataViTri(-1);
+                    cboViTri.DataSource = Commons.Modules.ObjSystems.DataViTri(-1,false);
                     cboViTri.Columns.Clear();
                     cboViTri.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID_VTTD"));
                     cboViTri.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("TEN_VTTD"));
@@ -142,7 +142,7 @@ namespace Vs.Recruit
             try
             {
                 LookUpEdit lookUp = sender as LookUpEdit;
-                lookUp.Properties.DataSource = Commons.Modules.ObjSystems.DataViTri(Convert.ToInt64(grvViTri.GetFocusedRowCellValue("ID_YCTD")));
+                lookUp.Properties.DataSource = Commons.Modules.ObjSystems.DataViTri(Convert.ToInt64(grvViTri.GetFocusedRowCellValue("ID_YCTD")),false);
             }
             catch { }
         }
@@ -168,7 +168,7 @@ namespace Vs.Recruit
                 }
                 if (grdUVPV.DataSource == null)
                 {
-                    Commons.Modules.ObjSystems.MLoadXtraGrid(grdUVPV, grvUVPV, dt, false, false, true, true, true, this.Name);
+                    Commons.Modules.ObjSystems.MLoadXtraGrid(grdUVPV, grvUVPV, dt, true, false, true, true, true, this.Name);
                     grvUVPV.Columns["ID_KHPV"].Visible = false;
                     grvUVPV.Columns["ID_YCTD"].Visible = false;
                     grvUVPV.Columns["ID_VTTD"].Visible = false;
@@ -325,6 +325,7 @@ namespace Vs.Recruit
             btnALL.Buttons[7].Properties.Visible = visible;
 
             grvViTri.OptionsBehavior.Editable = !visible;
+            grvUVPV.OptionsBehavior.Editable = !visible;
 
             txtTieuDe.Properties.ReadOnly = visible;
             datNgayLap.Properties.ReadOnly = visible;
@@ -362,7 +363,12 @@ namespace Vs.Recruit
                 cboNguoiPV1.EditValue = -1;
                 cboNguoiPV2.EditValue = -1;
                 txtGhiChu.EditValue = "";
+                txtTieuDe.EditValue = "";
+                chkKieuPV.EditValue = false;
+                datTuNgay.DateTime = DateTime.Now.Date.AddDays(-DateTime.Now.Date.Day + 1);
+                datDenNgay.DateTime = datTuNgay.DateTime.AddMonths(1).AddDays(-1);
                 cboTinhTrang.EditValue = 1;
+                datNgayPV.DateTime = DateTime.Now;
                 iID_KHPV = -1;
             }
             else // Load data vao text
@@ -395,6 +401,12 @@ namespace Vs.Recruit
                     cboNguoiPV2.EditValue = -1;
                     txtGhiChu.EditValue = "";
                     cboTinhTrang.EditValue = 1;
+                    txtTieuDe.EditValue = "";
+                    chkKieuPV.EditValue = false;
+                    datTuNgay.DateTime = DateTime.Now.Date.AddDays(-DateTime.Now.Date.Day + 1);
+                    datDenNgay.DateTime = datTuNgay.DateTime.AddMonths(1).AddDays(-1);
+                    datNgayLap.DateTime = DateTime.Now;
+                    datNgayPV.DateTime = DateTime.Now;
                     iID_KHPV = -1;
                 }
             }

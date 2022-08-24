@@ -24,14 +24,18 @@ namespace Vs.Recruit
         #region even
         private void frmChonUngVien_Load(object sender, EventArgs e)
         {
+            Commons.Modules.sLoad = "0Load";
             LoadCombo();
             cboID_VTTD.EditValue = iID_VTTD;
+            Commons.Modules.sLoad = "";
             LoadData();
+            cboID_VTTD_EditValueChanged(null, null);
         }
 
         private void LoadCombo()
         {
             //Vi Tri Tuyen Dung 
+    
             Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_VTTD, Commons.Modules.ObjSystems.DataLoaiCV(true), "ID_LCV", "TEN_LCV", "TEN_LCV");
             //Nguon tuyen dung
             Commons.Modules.ObjSystems.MLoadLookUpEdit(cboID_NTD , Commons.Modules.ObjSystems.DataNguonTD(true), "ID_NTD", "TEN_NTD", "TEN_NTD");
@@ -39,6 +43,7 @@ namespace Vs.Recruit
             Commons.Modules.ObjSystems.MLoadLookUpEdit(cboID_TD, Commons.Modules.ObjSystems.DataTDVH(-1, true), "ID_TDVH", "TEN_TDVH", "TEN_TDVH");
             // Kinh nghiem lam việc//ID_KNLV,TEN_KNLV
             Commons.Modules.ObjSystems.MLoadLookUpEdit(cboID_KNLV, Commons.Modules.ObjSystems.DataKinhNghiemLV(true), "ID_KNLV", "TEN_KNLV", "TEN_KNLV");
+
         }
 
         private void btnALL_ButtonClick(object sender, DevExpress.XtraBars.Docking2010.ButtonEventArgs e)
@@ -124,13 +129,14 @@ namespace Vs.Recruit
 
         private void cboID_VTTD_EditValueChanged(object sender, EventArgs e)
         {
+            if (Commons.Modules.sLoad == "0Load") return;
             DataTable dt = new DataTable();
             dt = Commons.Modules.ObjSystems.ConvertDatatable(grdChonUV);
             if (dt == null) return;
             try
             {
                 dt.DefaultView.RowFilter = "((VI_TRI1 = '" + cboID_VTTD.Text.ToString()+ "' OR VI_TRI2 = '" + cboID_VTTD.Text.ToString()+"') OR "+ cboID_VTTD.EditValue + " = -1) AND (ID_NTD = " + cboID_NTD.EditValue + " OR " + cboID_NTD.EditValue + " = -1) AND (ID_TDVH = " + cboID_TD.EditValue + " OR " + cboID_TD.EditValue + " = -1) AND (ID_KNLV = " + cboID_KNLV.EditValue + "OR " + cboID_KNLV.EditValue + " = -1)";
-                grvChonUV.SelectRow(0);
+                //grvChonUV.SelectRow(0);
             }
             catch
             {

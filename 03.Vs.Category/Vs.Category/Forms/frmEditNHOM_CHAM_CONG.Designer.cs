@@ -39,7 +39,6 @@
             this.TEN_NHOMTextEdit = new DevExpress.XtraEditors.TextEdit();
             this.TEN_NHOM_ATextEdit = new DevExpress.XtraEditors.TextEdit();
             this.TEN_NHOM_HTextEdit = new DevExpress.XtraEditors.TextEdit();
-            this.CA_TU_DONGCheckEdit = new DevExpress.XtraEditors.CheckEdit();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.ItemForTEN_NHOM = new DevExpress.XtraLayout.LayoutControlItem();
@@ -47,8 +46,9 @@
             this.ItemForTEN_NHOM_H = new DevExpress.XtraLayout.LayoutControlItem();
             this.ItemForSTT = new DevExpress.XtraLayout.LayoutControlItem();
             this.emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
-            this.ItemForPHEP = new DevExpress.XtraLayout.LayoutControlItem();
             this.dxValidationProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
+            this.chkNhomCheDo = new DevExpress.XtraEditors.CheckEdit();
+            this.ItemForNhomCheDo = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).BeginInit();
             this.tablePanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataLayoutControl1)).BeginInit();
@@ -57,7 +57,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.TEN_NHOMTextEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.TEN_NHOM_ATextEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.TEN_NHOM_HTextEdit.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.CA_TU_DONGCheckEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForTEN_NHOM)).BeginInit();
@@ -65,8 +64,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.ItemForTEN_NHOM_H)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForSTT)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemForPHEP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chkNhomCheDo.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForNhomCheDo)).BeginInit();
             this.SuspendLayout();
             // 
             // btnALL
@@ -121,11 +121,11 @@
             // dataLayoutControl1
             // 
             this.tablePanel1.SetColumn(this.dataLayoutControl1, 1);
+            this.dataLayoutControl1.Controls.Add(this.chkNhomCheDo);
             this.dataLayoutControl1.Controls.Add(this.txtSTT);
             this.dataLayoutControl1.Controls.Add(this.TEN_NHOMTextEdit);
             this.dataLayoutControl1.Controls.Add(this.TEN_NHOM_ATextEdit);
             this.dataLayoutControl1.Controls.Add(this.TEN_NHOM_HTextEdit);
-            this.dataLayoutControl1.Controls.Add(this.CA_TU_DONGCheckEdit);
             this.dataLayoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataLayoutControl1.Location = new System.Drawing.Point(75, 18);
             this.dataLayoutControl1.Margin = new System.Windows.Forms.Padding(4);
@@ -138,22 +138,22 @@
             // 
             // txtSTT
             // 
-            this.txtSTT.Location = new System.Drawing.Point(93, 84);
+            this.txtSTT.Location = new System.Drawing.Point(137, 84);
             this.txtSTT.Name = "txtSTT";
             this.txtSTT.Properties.Appearance.Options.UseTextOptions = true;
             this.txtSTT.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.txtSTT.Properties.Mask.EditMask = "N0";
             this.txtSTT.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
-            this.txtSTT.Size = new System.Drawing.Size(184, 24);
+            this.txtSTT.Size = new System.Drawing.Size(140, 24);
             this.txtSTT.StyleController = this.dataLayoutControl1;
             this.txtSTT.TabIndex = 10;
             // 
             // TEN_NHOMTextEdit
             // 
-            this.TEN_NHOMTextEdit.Location = new System.Drawing.Point(93, 6);
+            this.TEN_NHOMTextEdit.Location = new System.Drawing.Point(137, 6);
             this.TEN_NHOMTextEdit.Margin = new System.Windows.Forms.Padding(4);
             this.TEN_NHOMTextEdit.Name = "TEN_NHOMTextEdit";
-            this.TEN_NHOMTextEdit.Size = new System.Drawing.Size(458, 24);
+            this.TEN_NHOMTextEdit.Size = new System.Drawing.Size(414, 24);
             this.TEN_NHOMTextEdit.StyleController = this.dataLayoutControl1;
             this.TEN_NHOMTextEdit.TabIndex = 5;
             conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
@@ -162,33 +162,21 @@
             // 
             // TEN_NHOM_ATextEdit
             // 
-            this.TEN_NHOM_ATextEdit.Location = new System.Drawing.Point(93, 32);
+            this.TEN_NHOM_ATextEdit.Location = new System.Drawing.Point(137, 32);
             this.TEN_NHOM_ATextEdit.Margin = new System.Windows.Forms.Padding(4);
             this.TEN_NHOM_ATextEdit.Name = "TEN_NHOM_ATextEdit";
-            this.TEN_NHOM_ATextEdit.Size = new System.Drawing.Size(458, 24);
+            this.TEN_NHOM_ATextEdit.Size = new System.Drawing.Size(414, 24);
             this.TEN_NHOM_ATextEdit.StyleController = this.dataLayoutControl1;
             this.TEN_NHOM_ATextEdit.TabIndex = 6;
             // 
             // TEN_NHOM_HTextEdit
             // 
-            this.TEN_NHOM_HTextEdit.Location = new System.Drawing.Point(93, 58);
+            this.TEN_NHOM_HTextEdit.Location = new System.Drawing.Point(137, 58);
             this.TEN_NHOM_HTextEdit.Margin = new System.Windows.Forms.Padding(4);
             this.TEN_NHOM_HTextEdit.Name = "TEN_NHOM_HTextEdit";
-            this.TEN_NHOM_HTextEdit.Size = new System.Drawing.Size(458, 24);
+            this.TEN_NHOM_HTextEdit.Size = new System.Drawing.Size(414, 24);
             this.TEN_NHOM_HTextEdit.StyleController = this.dataLayoutControl1;
             this.TEN_NHOM_HTextEdit.TabIndex = 7;
-            // 
-            // CA_TU_DONGCheckEdit
-            // 
-            this.CA_TU_DONGCheckEdit.Location = new System.Drawing.Point(364, 86);
-            this.CA_TU_DONGCheckEdit.Margin = new System.Windows.Forms.Padding(4);
-            this.CA_TU_DONGCheckEdit.Name = "CA_TU_DONGCheckEdit";
-            this.CA_TU_DONGCheckEdit.Properties.Caption = "";
-            this.CA_TU_DONGCheckEdit.Properties.GlyphAlignment = DevExpress.Utils.HorzAlignment.Default;
-            this.CA_TU_DONGCheckEdit.Properties.GlyphVerticalAlignment = DevExpress.Utils.VertAlignment.Bottom;
-            this.CA_TU_DONGCheckEdit.Size = new System.Drawing.Size(187, 20);
-            this.CA_TU_DONGCheckEdit.StyleController = this.dataLayoutControl1;
-            this.CA_TU_DONGCheckEdit.TabIndex = 9;
             // 
             // Root
             // 
@@ -210,7 +198,7 @@
             this.ItemForTEN_NHOM_H,
             this.ItemForSTT,
             this.emptySpaceItem2,
-            this.ItemForPHEP});
+            this.ItemForNhomCheDo});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "autoGeneratedGroup0";
             this.layoutControlGroup1.Size = new System.Drawing.Size(547, 256);
@@ -224,7 +212,7 @@
             this.ItemForTEN_NHOM.Name = "ItemForTEN_NHOM";
             this.ItemForTEN_NHOM.Size = new System.Drawing.Size(547, 26);
             this.ItemForTEN_NHOM.Text = "TEN_NHOM";
-            this.ItemForTEN_NHOM.TextSize = new System.Drawing.Size(84, 17);
+            this.ItemForTEN_NHOM.TextSize = new System.Drawing.Size(119, 17);
             // 
             // ItemForTEN_NHOM_A
             // 
@@ -233,7 +221,7 @@
             this.ItemForTEN_NHOM_A.Name = "ItemForTEN_NHOM_A";
             this.ItemForTEN_NHOM_A.Size = new System.Drawing.Size(547, 26);
             this.ItemForTEN_NHOM_A.Text = "TEN_NHOM_A";
-            this.ItemForTEN_NHOM_A.TextSize = new System.Drawing.Size(84, 17);
+            this.ItemForTEN_NHOM_A.TextSize = new System.Drawing.Size(119, 17);
             // 
             // ItemForTEN_NHOM_H
             // 
@@ -242,7 +230,7 @@
             this.ItemForTEN_NHOM_H.Name = "ItemForTEN_NHOM_H";
             this.ItemForTEN_NHOM_H.Size = new System.Drawing.Size(547, 26);
             this.ItemForTEN_NHOM_H.Text = "TEN_NHOM_H";
-            this.ItemForTEN_NHOM_H.TextSize = new System.Drawing.Size(84, 17);
+            this.ItemForTEN_NHOM_H.TextSize = new System.Drawing.Size(119, 17);
             // 
             // ItemForSTT
             // 
@@ -250,7 +238,7 @@
             this.ItemForSTT.Location = new System.Drawing.Point(0, 78);
             this.ItemForSTT.Name = "ItemForSTT";
             this.ItemForSTT.Size = new System.Drawing.Size(273, 26);
-            this.ItemForSTT.TextSize = new System.Drawing.Size(84, 17);
+            this.ItemForSTT.TextSize = new System.Drawing.Size(119, 17);
             // 
             // emptySpaceItem2
             // 
@@ -260,18 +248,22 @@
             this.emptySpaceItem2.Size = new System.Drawing.Size(547, 152);
             this.emptySpaceItem2.TextSize = new System.Drawing.Size(0, 0);
             // 
-            // ItemForPHEP
+            // chkNhomCheDo
             // 
-            this.ItemForPHEP.ContentVertAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.ItemForPHEP.Control = this.CA_TU_DONGCheckEdit;
-            this.ItemForPHEP.Location = new System.Drawing.Point(273, 78);
-            this.ItemForPHEP.Name = "ItemForPHEP";
-            this.ItemForPHEP.Size = new System.Drawing.Size(274, 26);
-            this.ItemForPHEP.Text = "CA_TU_DONG";
-            this.ItemForPHEP.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.AutoSize;
-            this.ItemForPHEP.TextLocation = DevExpress.Utils.Locations.Left;
-            this.ItemForPHEP.TextSize = new System.Drawing.Size(80, 17);
-            this.ItemForPHEP.TextToControlDistance = 5;
+            this.chkNhomCheDo.Location = new System.Drawing.Point(410, 84);
+            this.chkNhomCheDo.Name = "chkNhomCheDo";
+            this.chkNhomCheDo.Properties.Caption = "";
+            this.chkNhomCheDo.Size = new System.Drawing.Size(141, 20);
+            this.chkNhomCheDo.StyleController = this.dataLayoutControl1;
+            this.chkNhomCheDo.TabIndex = 11;
+            // 
+            // ItemForNhomCheDo
+            // 
+            this.ItemForNhomCheDo.Control = this.chkNhomCheDo;
+            this.ItemForNhomCheDo.Location = new System.Drawing.Point(273, 78);
+            this.ItemForNhomCheDo.Name = "ItemForNhomCheDo";
+            this.ItemForNhomCheDo.Size = new System.Drawing.Size(274, 26);
+            this.ItemForNhomCheDo.TextSize = new System.Drawing.Size(119, 17);
             // 
             // frmEditNHOM_CHAM_CONG
             // 
@@ -293,7 +285,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.TEN_NHOMTextEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.TEN_NHOM_ATextEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.TEN_NHOM_HTextEdit.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.CA_TU_DONGCheckEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForTEN_NHOM)).EndInit();
@@ -301,8 +292,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.ItemForTEN_NHOM_H)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForSTT)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemForPHEP)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chkNhomCheDo.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForNhomCheDo)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -317,14 +309,14 @@
         private DevExpress.XtraEditors.TextEdit TEN_NHOMTextEdit;
         private DevExpress.XtraEditors.TextEdit TEN_NHOM_ATextEdit;
         private DevExpress.XtraEditors.TextEdit TEN_NHOM_HTextEdit;
-        private DevExpress.XtraEditors.CheckEdit CA_TU_DONGCheckEdit;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup1;
         private DevExpress.XtraLayout.LayoutControlItem ItemForTEN_NHOM;
         private DevExpress.XtraLayout.LayoutControlItem ItemForTEN_NHOM_A;
         private DevExpress.XtraLayout.LayoutControlItem ItemForTEN_NHOM_H;
-        private DevExpress.XtraLayout.LayoutControlItem ItemForPHEP;
         private DevExpress.XtraEditors.TextEdit txtSTT;
         private DevExpress.XtraLayout.LayoutControlItem ItemForSTT;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem2;
+        private DevExpress.XtraEditors.CheckEdit chkNhomCheDo;
+        private DevExpress.XtraLayout.LayoutControlItem ItemForNhomCheDo;
     }
 }

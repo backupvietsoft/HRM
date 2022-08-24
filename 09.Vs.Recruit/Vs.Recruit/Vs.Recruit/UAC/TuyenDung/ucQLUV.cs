@@ -11,6 +11,8 @@ using DataTable = System.Data.DataTable;
 using Workbook = Spire.Xls.Workbook;
 using Worksheet = Spire.Xls.Worksheet;
 using System.Drawing;
+using System.Collections.Generic;
+using DevExpress.XtraLayout;
 
 namespace Vs.Recruit
 {
@@ -22,7 +24,7 @@ namespace Vs.Recruit
         public ucQLUV()
         {
             InitializeComponent();
-            Commons.Modules.ObjSystems.ThayDoiNN(this, Root);
+            Commons.Modules.ObjSystems.ThayDoiNN(this, new List<LayoutControlGroup> { Root }, windowsUIButton);
         }
 
         private void ucQLUV_Load(object sender, EventArgs e)

@@ -1,8 +1,10 @@
 ﻿using DevExpress.XtraBars.Docking2010;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraLayout;
 using Microsoft.ApplicationBlocks.Data;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
@@ -867,6 +869,9 @@ namespace Vs.Recruit
             grvData.UpdateCurrentRow();
         }
 
-      
+        private void frmImportUngVien_Load(object sender, EventArgs e)
+        {
+            Commons.Modules.ObjSystems.ThayDoiNN(this, Root ,windowsUIButton);
+        }
     }
 }

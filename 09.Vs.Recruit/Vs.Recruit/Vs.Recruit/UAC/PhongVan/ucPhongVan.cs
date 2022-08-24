@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
+using Vs.Report;
 
 namespace Vs.Recruit
 {
@@ -84,7 +85,7 @@ namespace Vs.Recruit
                     grvViTri.Columns["ID_PV"].Visible = false;
                     //ID_VTTD,TEN_VTTD
                     Commons.Modules.ObjSystems.AddCombXtra("ID_YCTD", "MA_YCTD", grvViTri, Commons.Modules.ObjSystems.DataYeuCauTD(false, 1), true, "ID_YCTD", this.Name, true);
-                    Commons.Modules.ObjSystems.AddCombXtra("ID_VTTD", "TEN_VTTD", grvViTri, Commons.Modules.ObjSystems.DataViTri(-1), true, "ID_VTTD", this.Name, true);
+                    Commons.Modules.ObjSystems.AddCombXtra("ID_VTTD", "TEN_VTTD", grvViTri, Commons.Modules.ObjSystems.DataViTri(-1,false), true, "ID_VTTD", this.Name, true);
                 }
                 else
                 {
@@ -163,6 +164,44 @@ namespace Vs.Recruit
                         XoaPhongVan();
                         break;
 
+                    }
+                case "In":
+                    {
+                        if (grvPV.RowCount == 0) return;
+                        frmViewReport frm = new frmViewReport();
+                        System.Data.SqlClient.SqlConnection conn;
+                        DataTable dt = new DataTable();
+                        frm.rpt = new rptPhieuPhongVanUngVien();
+                        try
+                        {
+                            conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                            conn.Open();
+
+                            System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptPhongVanTuyenDung", conn);
+                            cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                            cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                            cmd.Parameters.Add("@ID_PV", SqlDbType.BigInt).Value = Convert.ToInt64(grvPV.GetFocusedRowCellValue("ID_PV"));
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+                            DataSet ds = new DataSet();
+                            adp.Fill(ds);
+                            dt = new DataTable();
+                            dt = ds.Tables[0].Copy();
+                            dt.TableName = "DA_TA";
+                            frm.AddDataSource(dt);
+
+                            dt = ds.Tables[1].Copy();
+                            dt.TableName = "NOI_DUNG";
+                            frm.AddDataSource(dt);
+                            frm.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung());
+                        }
+                        catch
+                        {
+                        }
+
+
+                        frm.ShowDialog();
+                        break;
                     }
                 case "refresh":
                     {
@@ -243,10 +282,12 @@ namespace Vs.Recruit
             btnALL.Buttons[1].Properties.Visible = visible;
             btnALL.Buttons[2].Properties.Visible = visible;
             btnALL.Buttons[3].Properties.Visible = visible;
-            btnALL.Buttons[4].Properties.Visible = !visible;
-            btnALL.Buttons[5].Properties.Visible = !visible;
+            btnALL.Buttons[4].Properties.Visible = visible;
+            btnALL.Buttons[5].Properties.Visible = visible;
             btnALL.Buttons[6].Properties.Visible = !visible;
-            btnALL.Buttons[7].Properties.Visible = visible;
+            btnALL.Buttons[7].Properties.Visible = !visible;
+            btnALL.Buttons[8].Properties.Visible = !visible;    
+            btnALL.Buttons[9].Properties.Visible = visible;    
 
             txtSO_PV.Properties.ReadOnly = visible;
             cboSoKeHoach.Properties.ReadOnly = visible;
@@ -366,12 +407,6 @@ namespace Vs.Recruit
             try
             {
                 //kiểm tra ID_KHPV có trong phỏng vấn không
-
-                if (Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT COUNT(*) FROM dbo.PHONG_VAN WHERE ID_KHPV =" + iID_PV + "")) > 0)
-                {
-                    XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDelDangSuDung"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return;
-                }
                 SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "DELETE FROM dbo.UNG_VIEN_PHONG_VAN WHERE ID_PV = " + iID_PV + "");
                 SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "DELETE FROM dbo.PVUV_VTTD WHERE ID_PV = " + iID_PV + "");
                 SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "DBCC CHECKIDENT (PHONG_VAN,RESEED,0)DBCC CHECKIDENT (PHONG_VAN,RESEED) DELETE FROM dbo.PHONG_VAN WHERE ID_PV = " + iID_PV + "");

@@ -150,6 +150,23 @@ namespace VietSoftHRM
                         //ns.Dock = DockStyle.Fill;
                         break;
                     }
+                case "mnuTiepNhanUV":
+                    {
+                        ucTiepNhanUngVien ns = new ucTiepNhanUngVien();
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(ns);
+                        ns.Dock = DockStyle.Fill;
+                        break;
+                    }
+
+                case "mnuDTDinhHuong":
+                    {
+                        ucDaoTaoDinhHuong ns = new ucDaoTaoDinhHuong();
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(ns);
+                        ns.Dock = DockStyle.Fill;
+                        break;
+                    }
 
                 case "mnuKeHoachPV":
                     {
@@ -189,9 +206,18 @@ namespace VietSoftHRM
                         ns.Dock = DockStyle.Fill;
                         break;
                     }
-                case "mnuDinhBien":
+                case "mnuKeHoachLaoDongNam":
                     {
                         ucDinhBienLD ns = new ucDinhBienLD();
+                        //ns.accorMenuleft = accorMenuleft;
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(ns);
+                        ns.Dock = DockStyle.Fill;
+                        break;
+                    }
+                case "mnuDinhBien_LD":
+                    {
+                        ucDinhBien ns = new ucDinhBien();
                         //ns.accorMenuleft = accorMenuleft;
                         panel2.Controls.Clear();
                         panel2.Controls.Add(ns);
@@ -225,6 +251,24 @@ namespace VietSoftHRM
                 case "mnuPhongVan":
                     {
                         ucPhongVan ns = new ucPhongVan();
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(ns);
+                        ns.Dock = DockStyle.Fill;
+                        break;
+                    }
+
+                case "mnuTiepNhanUV":
+                    {
+                        ucTiepNhanUngVien ns = new ucTiepNhanUngVien();
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(ns);
+                        ns.Dock = DockStyle.Fill;
+                        break;
+                    }
+
+                case "mnuDTDinhHuong":
+                    {
+                        ucDaoTaoDinhHuong ns = new ucDaoTaoDinhHuong();
                         panel2.Controls.Clear();
                         panel2.Controls.Add(ns);
                         ns.Dock = DockStyle.Fill;

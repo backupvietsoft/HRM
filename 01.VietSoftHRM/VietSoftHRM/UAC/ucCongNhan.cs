@@ -300,6 +300,14 @@ namespace VietSoftHRM
                         tc.Dock = DockStyle.Fill;
                         break;
                     }
+                case "mnuInNhanVien":
+                    {
+                        ucInNhanVien tc = new ucInNhanVien();
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(tc);
+                        tc.Dock = DockStyle.Fill;
+                        break;
+                    }
 
                 default:
                     break;

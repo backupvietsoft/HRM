@@ -28,39 +28,80 @@ namespace Vs.HRM
                         {
                             case 0:
                                 {
-                                    System.Data.SqlClient.SqlConnection conn;
-                                    DataTable dt = new DataTable();
-                                     frm = new frmViewReport();
-                                    frm.rpt = new rptBCQuaTrinhCongTacTH(lk_NgayIn.DateTime, dTuNgay.DateTime, dDenNgay.DateTime);
-                                    try
+                                    switch (Commons.Modules.ObjSystems.KyHieuDV(Convert.ToInt64(LK_DON_VI.EditValue)))
                                     {
-                                        conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
-                                        conn.Open();
+                                        case "NB":
+                                            {
+                                                System.Data.SqlClient.SqlConnection conn;
+                                                DataTable dt = new DataTable();
+                                                frm = new frmViewReport();
+                                                frm.rpt = new rptBCQuaTrinhCongTacTH_NB(lk_NgayIn.DateTime, dTuNgay.DateTime, dDenNgay.DateTime);
+                                                try
+                                                {
+                                                    conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                                                    conn.Open();
 
-                                        System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptBCQuaTrinhCongTacTH", conn);
+                                                    System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptBCQuaTrinhCongTacTH_NB", conn);
 
-                                        cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
-                                        cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
-                                        cmd.Parameters.Add("@Dvi", SqlDbType.Int).Value = LK_DON_VI.EditValue;
-                                        cmd.Parameters.Add("@XN", SqlDbType.Int).Value = LK_XI_NGHIEP.EditValue;
-                                        cmd.Parameters.Add("@TO", SqlDbType.Int).Value = LK_TO.EditValue;
-                                        cmd.Parameters.Add("@TNgay", SqlDbType.Date).Value = lk_NgayIn.EditValue;
-                                        cmd.CommandType = CommandType.StoredProcedure;
-                                        System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+                                                    cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                                                    cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                                                    cmd.Parameters.Add("@Dvi", SqlDbType.Int).Value = LK_DON_VI.EditValue;
+                                                    cmd.Parameters.Add("@XN", SqlDbType.Int).Value = LK_XI_NGHIEP.EditValue;
+                                                    cmd.Parameters.Add("@TO", SqlDbType.Int).Value = LK_TO.EditValue;
+                                                    cmd.Parameters.Add("@TNgay", SqlDbType.Date).Value = lk_NgayIn.EditValue;
+                                                    cmd.CommandType = CommandType.StoredProcedure;
+                                                    System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
 
-                                        DataSet ds = new DataSet();
-                                        adp.Fill(ds);
-                                        dt = new DataTable();
-                                        dt = ds.Tables[0].Copy();
-                                        dt.TableName = "DA_TA";
-                                        frm.AddDataSource(dt);
+                                                    DataSet ds = new DataSet();
+                                                    adp.Fill(ds);
+                                                    dt = new DataTable();
+                                                    dt = ds.Tables[0].Copy();
+                                                    dt.TableName = "DA_TA";
+                                                    frm.AddDataSource(dt);
+                                                }
+                                                catch (Exception ex)
+                                                {
+                                                }
+                                                frm.ShowDialog();
+                                                break;
+                                            }
+                                        default:
+                                            {
+                                                System.Data.SqlClient.SqlConnection conn;
+                                                DataTable dt = new DataTable();
+                                                frm = new frmViewReport();
+                                                frm.rpt = new rptBCQuaTrinhCongTacTH(lk_NgayIn.DateTime, dTuNgay.DateTime, dDenNgay.DateTime);
+                                                try
+                                                {
+                                                    conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                                                    conn.Open();
+
+                                                    System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptBCQuaTrinhCongTacTH", conn);
+
+                                                    cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                                                    cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                                                    cmd.Parameters.Add("@Dvi", SqlDbType.Int).Value = LK_DON_VI.EditValue;
+                                                    cmd.Parameters.Add("@XN", SqlDbType.Int).Value = LK_XI_NGHIEP.EditValue;
+                                                    cmd.Parameters.Add("@TO", SqlDbType.Int).Value = LK_TO.EditValue;
+                                                    cmd.Parameters.Add("@TNgay", SqlDbType.Date).Value = lk_NgayIn.EditValue;
+                                                    cmd.CommandType = CommandType.StoredProcedure;
+                                                    System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+
+                                                    DataSet ds = new DataSet();
+                                                    adp.Fill(ds);
+                                                    dt = new DataTable();
+                                                    dt = ds.Tables[0].Copy();
+                                                    dt.TableName = "DA_TA";
+                                                    frm.AddDataSource(dt);
+                                                }
+                                                catch (Exception ex)
+                                                {
+                                                }
+                                                frm.ShowDialog();
+                                                break;
+                                            }
                                     }
-                                    catch (Exception ex)
-                                    {
-                                    }
-
-
-                                    frm.ShowDialog();
+                                    
                                 }
                                 break;
                             case 1:

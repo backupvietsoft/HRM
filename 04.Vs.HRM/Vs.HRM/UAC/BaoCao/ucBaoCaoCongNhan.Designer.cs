@@ -38,6 +38,10 @@
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.windowsUIButton = new DevExpress.XtraBars.Docking2010.WindowsUIButtonPanel();
             this.tablePanel1 = new DevExpress.Utils.Layout.TablePanel();
+            this.lblInTatCa = new DevExpress.XtraEditors.LabelControl();
+            this.chkInAll = new DevExpress.XtraEditors.CheckEdit();
+            this.chkGroup = new DevExpress.XtraEditors.CheckEdit();
+            this.lblGroup = new DevExpress.XtraEditors.LabelControl();
             this.grdMauBC = new DevExpress.XtraGrid.GridControl();
             this.grvMauBC = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.lblNgaySinh = new DevExpress.XtraEditors.LabelControl();
@@ -81,12 +85,12 @@
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.dxValidationProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
-            this.lblGroup = new DevExpress.XtraEditors.LabelControl();
-            this.chkGroup = new DevExpress.XtraEditors.CheckEdit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).BeginInit();
             this.tablePanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chkInAll.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chkGroup.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdMauBC)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grvMauBC)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboLoaiCongViec.Properties)).BeginInit();
@@ -122,7 +126,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chkGroup.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
@@ -191,6 +194,8 @@
             new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 20F),
             new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 20F),
             new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 28F)});
+            this.tablePanel1.Controls.Add(this.lblInTatCa);
+            this.tablePanel1.Controls.Add(this.chkInAll);
             this.tablePanel1.Controls.Add(this.chkGroup);
             this.tablePanel1.Controls.Add(this.lblGroup);
             this.tablePanel1.Controls.Add(this.grdMauBC);
@@ -233,20 +238,65 @@
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 32F),
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 32F),
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 32F),
+            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 36F),
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F)});
             this.tablePanel1.Size = new System.Drawing.Size(988, 553);
             this.tablePanel1.TabIndex = 4;
+            // 
+            // lblInTatCa
+            // 
+            this.tablePanel1.SetColumn(this.lblInTatCa, 3);
+            this.lblInTatCa.Location = new System.Drawing.Point(335, 211);
+            this.lblInTatCa.Margin = new System.Windows.Forms.Padding(28, 3, 3, 3);
+            this.lblInTatCa.Name = "lblInTatCa";
+            this.tablePanel1.SetRow(this.lblInTatCa, 7);
+            this.lblInTatCa.Size = new System.Drawing.Size(57, 17);
+            this.lblInTatCa.TabIndex = 30;
+            this.lblInTatCa.Text = "lblInTatCa";
+            // 
+            // chkInAll
+            // 
+            this.tablePanel1.SetColumn(this.chkInAll, 4);
+            this.chkInAll.Location = new System.Drawing.Point(470, 210);
+            this.chkInAll.Margin = new System.Windows.Forms.Padding(12, 3, 3, 3);
+            this.chkInAll.Name = "chkInAll";
+            this.chkInAll.Properties.Caption = "";
+            this.tablePanel1.SetRow(this.chkInAll, 7);
+            this.chkInAll.Size = new System.Drawing.Size(35, 20);
+            this.chkInAll.TabIndex = 29;
+            // 
+            // chkGroup
+            // 
+            this.tablePanel1.SetColumn(this.chkGroup, 4);
+            this.chkGroup.Location = new System.Drawing.Point(470, 176);
+            this.chkGroup.Margin = new System.Windows.Forms.Padding(12, 3, 3, 3);
+            this.chkGroup.Name = "chkGroup";
+            this.chkGroup.Properties.Caption = "";
+            this.tablePanel1.SetRow(this.chkGroup, 6);
+            this.chkGroup.Size = new System.Drawing.Size(35, 20);
+            this.chkGroup.TabIndex = 28;
+            // 
+            // lblGroup
+            // 
+            this.tablePanel1.SetColumn(this.lblGroup, 3);
+            this.lblGroup.Location = new System.Drawing.Point(335, 177);
+            this.lblGroup.Margin = new System.Windows.Forms.Padding(28, 3, 3, 3);
+            this.lblGroup.Name = "lblGroup";
+            this.tablePanel1.SetRow(this.lblGroup, 6);
+            this.lblGroup.Size = new System.Drawing.Size(65, 17);
+            this.lblGroup.TabIndex = 27;
+            this.lblGroup.Text = "labelGroup";
             // 
             // grdMauBC
             // 
             this.tablePanel1.SetColumn(this.grdMauBC, 6);
             this.tablePanel1.SetColumnSpan(this.grdMauBC, 2);
             this.grdMauBC.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.grdMauBC.Location = new System.Drawing.Point(661, 205);
+            this.grdMauBC.Location = new System.Drawing.Point(661, 241);
             this.grdMauBC.MainView = this.grvMauBC;
             this.grdMauBC.Name = "grdMauBC";
-            this.tablePanel1.SetRow(this.grdMauBC, 7);
-            this.grdMauBC.Size = new System.Drawing.Size(296, 345);
+            this.tablePanel1.SetRow(this.grdMauBC, 8);
+            this.grdMauBC.Size = new System.Drawing.Size(296, 309);
             this.grdMauBC.TabIndex = 26;
             this.grdMauBC.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grvMauBC});
@@ -350,7 +400,7 @@
             new DevExpress.XtraEditors.Repository.ClearButton(),
             new DevExpress.XtraEditors.Repository.SearchButton()});
             this.searchControl2.Properties.Client = this.grdChonCot;
-            this.tablePanel1.SetRow(this.searchControl2, 7);
+            this.tablePanel1.SetRow(this.searchControl2, 8);
             this.searchControl2.Size = new System.Drawing.Size(122, 24);
             this.searchControl2.TabIndex = 20;
             // 
@@ -359,11 +409,11 @@
             this.tablePanel1.SetColumn(this.grdChonCot, 1);
             this.tablePanel1.SetColumnSpan(this.grdChonCot, 5);
             this.grdChonCot.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.grdChonCot.Location = new System.Drawing.Point(31, 205);
+            this.grdChonCot.Location = new System.Drawing.Point(31, 241);
             this.grdChonCot.MainView = this.grvChonCot;
             this.grdChonCot.Name = "grdChonCot";
-            this.tablePanel1.SetRow(this.grdChonCot, 7);
-            this.grdChonCot.Size = new System.Drawing.Size(625, 345);
+            this.tablePanel1.SetRow(this.grdChonCot, 8);
+            this.grdChonCot.Size = new System.Drawing.Size(625, 309);
             this.grdChonCot.TabIndex = 8;
             this.grdChonCot.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grvChonCot});
@@ -697,7 +747,7 @@
             this.lbTuNgayNS.Location = new System.Drawing.Point(963, 177);
             this.lbTuNgayNS.Name = "lbTuNgayNS";
             this.tablePanel1.SetRow(this.lbTuNgayNS, 6);
-            this.lbTuNgayNS.Size = new System.Drawing.Size(47, 17);
+            this.lbTuNgayNS.Size = new System.Drawing.Size(22, 17);
             this.lbTuNgayNS.TabIndex = 6;
             this.lbTuNgayNS.Text = "Từ ngày";
             this.lbTuNgayNS.Visible = false;
@@ -731,28 +781,6 @@
             this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem2.TextVisible = false;
             // 
-            // lblGroup
-            // 
-            this.tablePanel1.SetColumn(this.lblGroup, 3);
-            this.lblGroup.Location = new System.Drawing.Point(335, 177);
-            this.lblGroup.Margin = new System.Windows.Forms.Padding(28, 3, 3, 3);
-            this.lblGroup.Name = "lblGroup";
-            this.tablePanel1.SetRow(this.lblGroup, 6);
-            this.lblGroup.Size = new System.Drawing.Size(65, 17);
-            this.lblGroup.TabIndex = 27;
-            this.lblGroup.Text = "labelGroup";
-            // 
-            // chkGroup
-            // 
-            this.tablePanel1.SetColumn(this.chkGroup, 4);
-            this.chkGroup.Location = new System.Drawing.Point(470, 176);
-            this.chkGroup.Margin = new System.Windows.Forms.Padding(12, 3, 3, 3);
-            this.chkGroup.Name = "chkGroup";
-            this.chkGroup.Properties.Caption = "";
-            this.tablePanel1.SetRow(this.chkGroup, 6);
-            this.chkGroup.Size = new System.Drawing.Size(35, 20);
-            this.chkGroup.TabIndex = 28;
-            // 
             // ucBaoCaoCongNhan
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -767,6 +795,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).EndInit();
             this.tablePanel1.ResumeLayout(false);
             this.tablePanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chkInAll.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chkGroup.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdMauBC)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grvMauBC)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboLoaiCongViec.Properties)).EndInit();
@@ -802,7 +832,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chkGroup.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -856,5 +885,7 @@
         private DevExpress.XtraGrid.Views.Grid.GridView grvMauBC;
         private DevExpress.XtraEditors.LabelControl lblGroup;
         private DevExpress.XtraEditors.CheckEdit chkGroup;
+        private DevExpress.XtraEditors.LabelControl lblInTatCa;
+        private DevExpress.XtraEditors.CheckEdit chkInAll;
     }
 }

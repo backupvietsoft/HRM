@@ -39,6 +39,8 @@ namespace Commons
             }
         }
 
+
+
         private static string _sIdHT; // Định nghĩa ID cho các form hệ thống
         public static string sIdHT
         {

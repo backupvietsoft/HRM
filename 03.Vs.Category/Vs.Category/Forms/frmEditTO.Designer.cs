@@ -53,6 +53,9 @@
             this.tablePanel1 = new DevExpress.Utils.Layout.TablePanel();
             this.btnALL = new DevExpress.XtraBars.Docking2010.WindowsUIButtonPanel();
             this.dxValidationProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
+            this.cboID_CN = new DevExpress.XtraEditors.SearchLookUpEdit();
+            this.ItemForToTruong = new DevExpress.XtraLayout.LayoutControlItem();
+            this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             ((System.ComponentModel.ISupportInitialize)(this.dataLayoutControl1)).BeginInit();
             this.dataLayoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ID_XNLookUpEdit.Properties)).BeginInit();
@@ -73,11 +76,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).BeginInit();
             this.tablePanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cboID_CN.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForToTruong)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // dataLayoutControl1
             // 
             this.tablePanel1.SetColumn(this.dataLayoutControl1, 1);
+            this.dataLayoutControl1.Controls.Add(this.cboID_CN);
             this.dataLayoutControl1.Controls.Add(this.ID_XNLookUpEdit);
             this.dataLayoutControl1.Controls.Add(this.MS_TOTextEdit);
             this.dataLayoutControl1.Controls.Add(this.TEN_TOTextEdit);
@@ -96,13 +103,13 @@
             // ID_XNLookUpEdit
             // 
             this.ID_XNLookUpEdit.EditValue = "[Not null]";
-            this.ID_XNLookUpEdit.Location = new System.Drawing.Point(92, 8);
+            this.ID_XNLookUpEdit.Location = new System.Drawing.Point(124, 8);
             this.ID_XNLookUpEdit.Name = "ID_XNLookUpEdit";
             this.ID_XNLookUpEdit.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.ID_XNLookUpEdit.Properties.NullText = "";
             this.ID_XNLookUpEdit.Properties.PopupView = this.searchLookUpEdit1View;
-            this.ID_XNLookUpEdit.Size = new System.Drawing.Size(429, 24);
+            this.ID_XNLookUpEdit.Size = new System.Drawing.Size(397, 24);
             this.ID_XNLookUpEdit.StyleController = this.dataLayoutControl1;
             this.ID_XNLookUpEdit.TabIndex = 11;
             conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
@@ -121,9 +128,9 @@
             // 
             // MS_TOTextEdit
             // 
-            this.MS_TOTextEdit.Location = new System.Drawing.Point(92, 38);
+            this.MS_TOTextEdit.Location = new System.Drawing.Point(124, 38);
             this.MS_TOTextEdit.Name = "MS_TOTextEdit";
-            this.MS_TOTextEdit.Size = new System.Drawing.Size(168, 24);
+            this.MS_TOTextEdit.Size = new System.Drawing.Size(136, 24);
             this.MS_TOTextEdit.StyleController = this.dataLayoutControl1;
             this.MS_TOTextEdit.TabIndex = 6;
             conditionValidationRule2.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
@@ -133,9 +140,9 @@
             // 
             // TEN_TOTextEdit
             // 
-            this.TEN_TOTextEdit.Location = new System.Drawing.Point(92, 68);
+            this.TEN_TOTextEdit.Location = new System.Drawing.Point(124, 68);
             this.TEN_TOTextEdit.Name = "TEN_TOTextEdit";
-            this.TEN_TOTextEdit.Size = new System.Drawing.Size(429, 24);
+            this.TEN_TOTextEdit.Size = new System.Drawing.Size(397, 24);
             this.TEN_TOTextEdit.StyleController = this.dataLayoutControl1;
             this.TEN_TOTextEdit.TabIndex = 7;
             conditionValidationRule3.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
@@ -145,29 +152,29 @@
             // 
             // TEN_TO_ANHTextEdit
             // 
-            this.TEN_TO_ANHTextEdit.Location = new System.Drawing.Point(92, 98);
+            this.TEN_TO_ANHTextEdit.Location = new System.Drawing.Point(124, 98);
             this.TEN_TO_ANHTextEdit.Name = "TEN_TO_ANHTextEdit";
-            this.TEN_TO_ANHTextEdit.Size = new System.Drawing.Size(429, 24);
+            this.TEN_TO_ANHTextEdit.Size = new System.Drawing.Size(397, 24);
             this.TEN_TO_ANHTextEdit.StyleController = this.dataLayoutControl1;
             this.TEN_TO_ANHTextEdit.TabIndex = 8;
             // 
             // TEN_TO_HOATextEdit
             // 
-            this.TEN_TO_HOATextEdit.Location = new System.Drawing.Point(92, 128);
+            this.TEN_TO_HOATextEdit.Location = new System.Drawing.Point(124, 128);
             this.TEN_TO_HOATextEdit.Name = "TEN_TO_HOATextEdit";
-            this.TEN_TO_HOATextEdit.Size = new System.Drawing.Size(429, 24);
+            this.TEN_TO_HOATextEdit.Size = new System.Drawing.Size(397, 24);
             this.TEN_TO_HOATextEdit.StyleController = this.dataLayoutControl1;
             this.TEN_TO_HOATextEdit.TabIndex = 9;
             // 
             // STT_TOTextEdit
             // 
-            this.STT_TOTextEdit.Location = new System.Drawing.Point(353, 38);
+            this.STT_TOTextEdit.Location = new System.Drawing.Point(385, 38);
             this.STT_TOTextEdit.Name = "STT_TOTextEdit";
             this.STT_TOTextEdit.Properties.Appearance.Options.UseTextOptions = true;
             this.STT_TOTextEdit.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.STT_TOTextEdit.Properties.Mask.EditMask = "N0";
             this.STT_TOTextEdit.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
-            this.STT_TOTextEdit.Size = new System.Drawing.Size(168, 24);
+            this.STT_TOTextEdit.Size = new System.Drawing.Size(136, 24);
             this.STT_TOTextEdit.StyleController = this.dataLayoutControl1;
             this.STT_TOTextEdit.TabIndex = 10;
             // 
@@ -191,7 +198,8 @@
             this.ItemForTEN_TO_HOA,
             this.ItemForID_XN,
             this.ItemForMS_TO,
-            this.ItemForSTT_TO});
+            this.ItemForSTT_TO,
+            this.ItemForToTruong});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "autoGeneratedGroup0";
             this.layoutControlGroup1.Size = new System.Drawing.Size(522, 264);
@@ -206,7 +214,7 @@
             this.ItemForTEN_TO.Padding = new DevExpress.XtraLayout.Utils.Padding(6, 6, 3, 3);
             this.ItemForTEN_TO.Size = new System.Drawing.Size(522, 30);
             this.ItemForTEN_TO.Text = "TEN_TO";
-            this.ItemForTEN_TO.TextSize = new System.Drawing.Size(78, 17);
+            this.ItemForTEN_TO.TextSize = new System.Drawing.Size(101, 17);
             // 
             // ItemForTEN_TO_ANH
             // 
@@ -216,7 +224,7 @@
             this.ItemForTEN_TO_ANH.Padding = new DevExpress.XtraLayout.Utils.Padding(6, 6, 3, 3);
             this.ItemForTEN_TO_ANH.Size = new System.Drawing.Size(522, 30);
             this.ItemForTEN_TO_ANH.Text = "TEN_TO_ANH";
-            this.ItemForTEN_TO_ANH.TextSize = new System.Drawing.Size(78, 17);
+            this.ItemForTEN_TO_ANH.TextSize = new System.Drawing.Size(101, 17);
             // 
             // ItemForTEN_TO_HOA
             // 
@@ -224,9 +232,9 @@
             this.ItemForTEN_TO_HOA.Location = new System.Drawing.Point(0, 120);
             this.ItemForTEN_TO_HOA.Name = "ItemForTEN_TO_HOA";
             this.ItemForTEN_TO_HOA.Padding = new DevExpress.XtraLayout.Utils.Padding(6, 6, 3, 3);
-            this.ItemForTEN_TO_HOA.Size = new System.Drawing.Size(522, 144);
+            this.ItemForTEN_TO_HOA.Size = new System.Drawing.Size(522, 30);
             this.ItemForTEN_TO_HOA.Text = "TEN_TO_HOA";
-            this.ItemForTEN_TO_HOA.TextSize = new System.Drawing.Size(78, 17);
+            this.ItemForTEN_TO_HOA.TextSize = new System.Drawing.Size(101, 17);
             // 
             // ItemForID_XN
             // 
@@ -238,7 +246,7 @@
             this.ItemForID_XN.Padding = new DevExpress.XtraLayout.Utils.Padding(6, 6, 3, 3);
             this.ItemForID_XN.Size = new System.Drawing.Size(522, 30);
             this.ItemForID_XN.Text = "ID_XN";
-            this.ItemForID_XN.TextSize = new System.Drawing.Size(78, 17);
+            this.ItemForID_XN.TextSize = new System.Drawing.Size(101, 17);
             // 
             // ItemForMS_TO
             // 
@@ -250,7 +258,7 @@
             this.ItemForMS_TO.Padding = new DevExpress.XtraLayout.Utils.Padding(6, 6, 3, 3);
             this.ItemForMS_TO.Size = new System.Drawing.Size(261, 30);
             this.ItemForMS_TO.Text = "MS_TO";
-            this.ItemForMS_TO.TextSize = new System.Drawing.Size(78, 17);
+            this.ItemForMS_TO.TextSize = new System.Drawing.Size(101, 17);
             // 
             // ItemForSTT_TO
             // 
@@ -260,7 +268,7 @@
             this.ItemForSTT_TO.Padding = new DevExpress.XtraLayout.Utils.Padding(6, 6, 3, 3);
             this.ItemForSTT_TO.Size = new System.Drawing.Size(261, 30);
             this.ItemForSTT_TO.Text = "STT_TO";
-            this.ItemForSTT_TO.TextSize = new System.Drawing.Size(78, 17);
+            this.ItemForSTT_TO.TextSize = new System.Drawing.Size(101, 17);
             // 
             // tablePanel1
             // 
@@ -312,6 +320,33 @@
             this.btnALL.UseButtonBackgroundImages = false;
             this.btnALL.ButtonClick += new DevExpress.XtraBars.Docking2010.ButtonEventHandler(this.windowsUIButtonPanel2_ButtonClick);
             // 
+            // cboID_CN
+            // 
+            this.cboID_CN.Location = new System.Drawing.Point(119, 156);
+            this.cboID_CN.Name = "cboID_CN";
+            this.cboID_CN.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cboID_CN.Properties.NullText = "";
+            this.cboID_CN.Properties.PopupView = this.gridView1;
+            this.cboID_CN.Size = new System.Drawing.Size(407, 24);
+            this.cboID_CN.StyleController = this.dataLayoutControl1;
+            this.cboID_CN.TabIndex = 12;
+            // 
+            // ItemForToTruong
+            // 
+            this.ItemForToTruong.Control = this.cboID_CN;
+            this.ItemForToTruong.Location = new System.Drawing.Point(0, 150);
+            this.ItemForToTruong.Name = "ItemForToTruong";
+            this.ItemForToTruong.Size = new System.Drawing.Size(522, 114);
+            this.ItemForToTruong.TextSize = new System.Drawing.Size(101, 17);
+            // 
+            // gridView1
+            // 
+            this.gridView1.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            this.gridView1.Name = "gridView1";
+            this.gridView1.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.gridView1.OptionsView.ShowGroupPanel = false;
+            // 
             // frmEditTO
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -342,6 +377,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).EndInit();
             this.tablePanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cboID_CN.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForToTruong)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -367,5 +405,8 @@
         private DevExpress.XtraEditors.SearchLookUpEdit ID_XNLookUpEdit;
         private DevExpress.XtraGrid.Views.Grid.GridView searchLookUpEdit1View;
         private DevExpress.XtraLayout.LayoutControlItem ItemForID_XN;
+        private DevExpress.XtraEditors.SearchLookUpEdit cboID_CN;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
+        private DevExpress.XtraLayout.LayoutControlItem ItemForToTruong;
     }
 }

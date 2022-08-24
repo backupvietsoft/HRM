@@ -293,7 +293,8 @@ namespace VietSoftHRM
             {
                 string strSQL = "USE " + cbo_database.Text + " DELETE dbo.LOGIN WHERE USER_LOGIN = '" + txt_user.Text + "'";
                 SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, strSQL);
-                MessageBox.Show("Xoa User Thanh Cong");
+                btn_login_Click(null, null);
+                //MessageBox.Show("Xoa User Thanh Cong");
             }
             catch
             {

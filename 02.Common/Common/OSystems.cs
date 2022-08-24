@@ -1788,11 +1788,14 @@ namespace Commons
                             //        control1.Control.DoubleClick += delegate (object a, EventArgs b) { CheckEdit_DoubleClick(control1.Control, b, frm.Name); };
                             //    }
                             //    else
+                            if (control1.AppearanceItemCaption.ForeColor == Color.FromArgb(192, 0, 0))
+                            {
+                                control1.AppearanceItemCaption.ForeColor = Color.FromArgb(128, 0, 0);
+                            }
                             if (control1.Control.GetType().Name.ToLower() == "radiogroup")
                             {
                                 DoiNN(control1.Control, frm, dtTmp);
                             }
-
                             else
                             {
                                 control1.Text = GetNN(dtTmp, control1.Name, frm.Name) + "  ";
@@ -1959,6 +1962,7 @@ namespace Commons
                     gro.DoubleClick += delegate (object a, EventArgs b) { ControlGroup_DoubleClick(gro, b, frm.Name); };
                     LoadNNGroupControl(frm, (LayoutControlGroup)gr, dtTmp);
 
+
                 }
                 else
                 {
@@ -1973,11 +1977,14 @@ namespace Commons
                             //    control1.Control.DoubleClick += delegate (object a, EventArgs b) { CheckEdit_DoubleClick(control1.Control, b, frm.Name); };
                             //}
                             //else
+                            if (control1.AppearanceItemCaption.ForeColor == Color.FromArgb(192, 0, 0))
+                            {
+                                control1.AppearanceItemCaption.ForeColor = Color.FromArgb(128, 0, 0);
+                            }
                             if (control1.Control.GetType().Name.ToLower() == "radiogroup")
                             {
                                 DoiNN(control1.Control, frm, dtTmp);
                             }
-
                             else
                             {
                                 control1.Text = GetNN(dtTmp, control1.Name, frm.Name);
@@ -2050,6 +2057,10 @@ namespace Commons
                     try
                     {
                         LayoutControlItem control1 = (LayoutControlItem)gr;
+                        if (control1.AppearanceItemCaption.ForeColor == Color.FromArgb(192, 0, 0))
+                        {
+                            control1.AppearanceItemCaption.ForeColor = Color.FromArgb(128, 0, 0);
+                        }
                         control1.Text = GetNN(dtTmp, control1.Name, name) + "  ";
                         control1.DoubleClick += delegate (object a, EventArgs b) { Control1_DoubleClick(control1, b, name); };
                         control1.Padding = new DevExpress.XtraLayout.Utils.Padding(5, 5, 2, 2);
@@ -2759,7 +2770,7 @@ namespace Commons
                 try
                 {
                     sText = XtraInputBox.Show(Ctl.Description.ToString(), "Sửa ngôn ngữ", "");
-                    if (sText == "")
+                    if (sText == "" || sText == null)
                         return;
                     else
                         CapNhapNN(sName, Ctl.Tag.ToString(), sText, false);
@@ -4595,11 +4606,11 @@ namespace Commons
             return dt;
         }
 
-        public DataTable DataViTri(Int64 iID_YCTD)
+        public DataTable DataViTri(Int64 iID_YCTD,bool ColAll)
         {
             //ID_VTTD,TEN_VTTD
             DataTable dt = new DataTable();
-            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboViTriTheoYeuCau", iID_YCTD, Commons.Modules.UserName, Commons.Modules.TypeLanguage));
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboViTriTheoYeuCau", iID_YCTD, Commons.Modules.UserName, Commons.Modules.TypeLanguage, ColAll));
             return dt;
         }
 
@@ -4608,6 +4619,13 @@ namespace Commons
             //ID_DGTN,TEN_DGTN
             DataTable dt = new DataTable();
             dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboDanhGiaTayNge", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll));
+            return dt;
+        }
+        public DataTable DataDanhNoiDungDT(bool coAll)
+        {
+            //ID_DGTN,TEN_DGTN
+            DataTable dt = new DataTable();
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboNoiDungDT", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll));
             return dt;
         }
 

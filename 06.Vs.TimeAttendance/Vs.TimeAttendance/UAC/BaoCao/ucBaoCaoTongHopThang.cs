@@ -3929,7 +3929,6 @@ namespace Vs.TimeAttendance
                 Excel.Worksheet oSheet;
                 oXL = new Excel.Application();
                 oXL.Visible = false;
-                oXL.Cursor = XlMousePointer.xlWait;
 
                 //OfficeOpenXml.ExcelPackage ExcelPkg = new OfficeOpenXml.ExcelPackage();
                 //OfficeOpenXml.ExcelWorksheet wsSheet1 = ExcelPkg.Workbook.Worksheets.Add("Sheet1");
@@ -4358,14 +4357,14 @@ namespace Vs.TimeAttendance
                 {
                     for (col = 0; col < dtBCThang.Columns.Count; col++)
                     {
-                        if (col == 10 && row[10].ToString() != "")
-                        {
-                            sTenCot = CharacterIncrement(6);
-                            Excel.Range formatRange7;
-                            formatRange7 = oSheet.get_Range(sTenCot + ((rowCnt + 1) + 6).ToString());
-                            formatRange7.Interior.Color = Color.FromArgb(255, 204, 204);
-                            formatRange7.Font.Color = Color.FromArgb(156, 0, 6);
-                        }
+                        //if (col == 10 && row[10].ToString() != "")
+                        //{
+                        //    sTenCot = CharacterIncrement(6);
+                        //    Excel.Range formatRange7;
+                        //    formatRange7 = oSheet.get_Range(sTenCot + ((rowCnt + 1) + 6).ToString());
+                        //    formatRange7.Interior.Color = Color.FromArgb(255, 204, 204);
+                        //    formatRange7.Font.Color = Color.FromArgb(156, 0, 6);
+                        //}
                         rowData[rowCnt, col] = row[col].ToString();
                     }
 

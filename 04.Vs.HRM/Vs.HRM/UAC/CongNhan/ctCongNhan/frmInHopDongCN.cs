@@ -88,6 +88,11 @@ namespace Vs.HRM
                                                 HopDongLaoDong_HN();
                                                 break;
                                             }
+                                        case "NB":
+                                            {
+                                                HopDongLaoDong_NB();
+                                                break;
+                                            }
                                         default:
                                             HopDongLaoDong();
                                             break;
@@ -119,6 +124,11 @@ namespace Vs.HRM
                                                 HopDongThuViec_HN();
                                                 break;
                                             }
+                                        case "NB":
+                                            {
+                                                HopDongThuViec_NB();
+                                                break;
+                                            }
                                         default:
                                             HopDongThuViecCDDH();
                                             break;
@@ -143,6 +153,11 @@ namespace Vs.HRM
                                         case "HN":
                                             {
                                                 HopDongThoiVu_HN();
+                                                break;
+                                            }
+                                        case "NB":
+                                            {
+                                                ThongBaoKetThucHDLD();
                                                 break;
                                             }
                                         default:
@@ -476,6 +491,44 @@ namespace Vs.HRM
             }
             catch { }
         }
+        private void HopDongThuViec_NB()
+        {
+            DataTable dt = new DataTable();
+            DataTable dtbc = new DataTable();
+            try
+            {
+                System.Data.SqlClient.SqlConnection conn1;
+                dt = new DataTable();
+                frmViewReport frm = new frmViewReport();
+                frm.rpt = new rptHopDongLaoDongThuViec_NB(dNgayIn.DateTime);
+
+                conn1 = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                conn1.Open();
+
+                System.Data.SqlClient.SqlCommand cmd1 = new System.Data.SqlClient.SqlCommand("rptHopDongThuViec_NB", conn1);
+                cmd1.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                cmd1.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                cmd1.Parameters.Add("@ID_CN", SqlDbType.Int).Value = idCN;
+                cmd1.Parameters.Add("@ID_SQD", SqlDbType.Int).Value = idHD;
+                cmd1.CommandType = CommandType.StoredProcedure;
+
+                System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd1);
+                DataSet ds = new DataSet();
+                adp.Fill(ds);
+                dt = new DataTable();
+                dt = ds.Tables[0].Copy();
+                dt.TableName = "DATA";
+                frm.AddDataSource(dt);
+
+                dtbc = new DataTable();
+                dtbc = ds.Tables[1].Copy();
+                dtbc.TableName = "NOI_DUNG";
+                frm.AddDataSource(dtbc);
+
+                frm.ShowDialog();
+            }
+            catch { }
+        }
         private void HopDongLaoDong_DM()
         {
             DataTable dt = new DataTable();
@@ -700,6 +753,44 @@ namespace Vs.HRM
             }
             catch { }
         }
+        private void HopDongLaoDong_NB()
+        {
+            DataTable dt = new DataTable();
+            DataTable dtbc = new DataTable();
+            try
+            {
+                System.Data.SqlClient.SqlConnection conn1;
+                dt = new DataTable();
+                frmViewReport frm = new frmViewReport();
+                frm.rpt = new rptHopDongLaoDong_NB(dNgayIn.DateTime);
+
+                conn1 = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                conn1.Open();
+
+                System.Data.SqlClient.SqlCommand cmd1 = new System.Data.SqlClient.SqlCommand("rptHopDongLaoDong_NB", conn1);
+                cmd1.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                cmd1.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                cmd1.Parameters.Add("@ID_CN", SqlDbType.Int).Value = idCN;
+                cmd1.Parameters.Add("@ID_SQD", SqlDbType.Int).Value = idHD;
+                cmd1.CommandType = CommandType.StoredProcedure;
+
+                System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd1);
+                DataSet ds = new DataSet();
+                adp.Fill(ds);
+                dt = new DataTable();
+                dt = ds.Tables[0].Copy();
+                dt.TableName = "DATA";
+                frm.AddDataSource(dt);
+
+                dtbc = new DataTable();
+                dtbc = ds.Tables[1].Copy();
+                dtbc.TableName = "NOI_DUNG";
+                frm.AddDataSource(dtbc);
+
+                frm.ShowDialog();
+            }
+            catch { }
+        }
         private void HopDongThuViec_HN()
         {
             DataTable dt = new DataTable();
@@ -737,6 +828,40 @@ namespace Vs.HRM
                 frm.ShowDialog();
             }
             catch { }
+        }
+        private void ThongBaoKetThucHDLD()
+        {
+            DataTable dt = new DataTable();
+            DataTable dtbc = new DataTable();
+            System.Data.SqlClient.SqlConnection conn;
+            dt = new DataTable();
+            frmViewReport frm = new frmViewReport();
+            frm.rpt = new rptThongBaoKetThucHDLD_NB(dNgayIn.DateTime);
+
+            conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+            conn.Open();
+
+            System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptThongBaoKetThucHDLD_NB", conn);
+            cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+            cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+            cmd.Parameters.Add("@ID_CN", SqlDbType.Int).Value = idCN;
+            cmd.Parameters.Add("@ID_HD", SqlDbType.Int).Value = idHD;
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+            DataSet ds = new DataSet();
+            adp.Fill(ds);
+            dt = new DataTable();
+            dt = ds.Tables[0].Copy();
+            dt.TableName = "DATA";
+            frm.AddDataSource(dt);
+
+            dtbc = new DataTable();
+            dtbc = ds.Tables[1].Copy();
+            dtbc.TableName = "NOI_DUNG";
+            frm.AddDataSource(dtbc);
+
+            frm.ShowDialog();
         }
         private void rdo_ChonBaoCao_SelectedIndexChanged(object sender, EventArgs e)
         {

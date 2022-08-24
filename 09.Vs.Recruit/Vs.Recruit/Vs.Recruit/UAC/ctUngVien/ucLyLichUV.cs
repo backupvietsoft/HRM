@@ -518,7 +518,7 @@ namespace Vs.Recruit
             cboID_CN.Text.ToString() == "" ? DBNull.Value : cboID_CN.EditValue,
             chkDA_GIOI_THIEU.EditValue,
             datNGAY_NHAN_VIEC.Text.ToString() == "" ? DBNull.Value : datNGAY_NHAN_VIEC.EditValue,
-            datNGAY_CO_THE_DI_LAM.Text.ToString() == "" ? DBNull.Value : datNGAY_CO_THE_DI_LAM.EditValue,
+            datNGAY_HEN_DL.Text.ToString() == "" ? DBNull.Value : datNGAY_HEN_DL.EditValue,
             chkXAC_NHAN_DL.EditValue,
             chkHUY_TUYEN_DUNG.EditValue,
             chkDA_CHUYEN.EditValue,

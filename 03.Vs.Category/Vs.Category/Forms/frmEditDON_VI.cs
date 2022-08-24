@@ -17,23 +17,35 @@ namespace Vs.Category
             InitializeComponent();
             iIdDV = iId;
             bAddEditDV = bAddEdit;
-
         }
 
         private void frmEditDON_VI_Load(object sender, EventArgs e)
         {
-            if (!bAddEditDV)
+            try
             {
-                LoadText();
-            }
-            else
-            {
-                string strSQL = "SELECT MAX(STT_DV) FROM dbo.DON_VI";
-                STT_DVTextEdit.EditValue = (string.IsNullOrEmpty(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, strSQL).ToString()) ? 0 : Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, strSQL))) + 1;
-            }
-            //System.Threading.Thread myNewThread = new System.Threading.Thread(() => Commons.Modules.ObjSystems.ThayDoiNN(this, layoutControlGroup1, btnALL));
-            //myNewThread.Start();
+                ItemForTruongDonVi.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                if (Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString() == "DM")
+                {
+                    DataTable dt = new DataTable();
+                    dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboCongNhan", Commons.Modules.UserName, Commons.Modules.TypeLanguage, 3));
+                    Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_CN, dt, "ID_CN", "HO_TEN", "HO_TEN");
+                    ItemForTruongDonVi.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+                }
+                if (!bAddEditDV)
+                {
+                    LoadText();
+                }
+                else
+                {
+                    string strSQL = "SELECT MAX(STT_DV) FROM dbo.DON_VI";
+                    STT_DVTextEdit.EditValue = (string.IsNullOrEmpty(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, strSQL).ToString()) ? 0 : Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, strSQL))) + 1;
+                }
 
+
+                //System.Threading.Thread myNewThread = new System.Threading.Thread(() => Commons.Modules.ObjSystems.ThayDoiNN(this, layoutControlGroup1, btnALL));
+                //myNewThread.Start();
+            }
+            catch { }
             Commons.Modules.ObjSystems.ThayDoiNN(this, layoutControlGroup1, btnALL);
 
         }
@@ -42,7 +54,7 @@ namespace Vs.Category
         {
             try
             {
-                string sSql = "SELECT ID_DV ,MSDV ,TEN_DV ,TEN_DV_A ,TEN_DV_H ,TEN_NGAN ,DIA_CHI ,MAC_DINH ,CHU_QUAN ,DIEN_THOAI ,FAX ,MS_BHYT ,MS_BHXH ,SO_TAI_KHOAN ,TEN_NGAN_HANG ,KY_HIEU ,NGUOI_DAI_DIEN ,CHUC_VU ,SO_HS,STT_DV FROM dbo.DON_VI WHERE ID_DV =	" + iIdDV.ToString();
+                string sSql = "SELECT ID_DV ,MSDV ,TEN_DV ,TEN_DV_A ,TEN_DV_H ,TEN_NGAN ,DIA_CHI ,MAC_DINH ,CHU_QUAN ,DIEN_THOAI ,FAX ,MS_BHYT ,MS_BHXH ,SO_TAI_KHOAN ,TEN_NGAN_HANG ,KY_HIEU ,NGUOI_DAI_DIEN ,CHUC_VU ,SO_HS,STT_DV, ID_CN FROM dbo.DON_VI WHERE ID_DV =	" + iIdDV.ToString();
                 DataTable dtTmp = new DataTable();
                 dtTmp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSql));
                 ItemForMSDV.Control.Text = dtTmp.Rows[0]["MSDV"].ToString();
@@ -62,6 +74,7 @@ namespace Vs.Category
                 ItemForTEN_NGAN_HANG.Control.Text = dtTmp.Rows[0]["TEN_NGAN_HANG"].ToString();
                 ItemForNGUOI_DAI_DIEN.Control.Text = dtTmp.Rows[0]["NGUOI_DAI_DIEN"].ToString();
                 ItemForSTT_DV.Control.Text = dtTmp.Rows[0]["STT_DV"].ToString();
+                cboID_CN.EditValue = dtTmp.Rows[0]["ID_CN"].ToString() == "" ? -1 : Convert.ToInt64(dtTmp.Rows[0]["ID_CN"]);
                 if (bAddEditDV)
                 {
                     sSql = "SELECT ISNULL(MAX(STT_DV),0) + 1 FROM dbo.[DON_VI] ";
@@ -98,6 +111,7 @@ namespace Vs.Category
                 ItemForTEN_NGAN_HANG.Control.Text = String.Empty;
                 ItemForNGUOI_DAI_DIEN.Control.Text = String.Empty;
                 ItemForSTT_DV.Control.Text = String.Empty;
+                cboID_CN.EditValue = -1;
                 MSDVTextEdit.Focus();
 
             }
@@ -124,7 +138,7 @@ namespace Vs.Category
                                     ItemForDIA_CHI.Control.Text, Convert.ToBoolean(MAC_DINHCheckEdit.EditValue), ItemForCHU_QUAN.Control.Text, ItemForDIEN_THOAI.Control.Text,
                                     ItemForFAX.Control.Text, ItemForMS_BHYT.Control.Text, ItemForMS_BHXH.Control.Text, ItemForSO_TAI_KHOAN.Control.Text,
                                     ItemForTEN_NGAN_HANG.Control.Text, ItemForNGUOI_DAI_DIEN.Control.Text,
-                                     ItemForSTT_DV.Control.Text == "" ? ItemForSTT_DV.Control.Text = null : ItemForSTT_DV.Control.Text).ToString();
+                                     ItemForSTT_DV.Control.Text == "" ? ItemForSTT_DV.Control.Text = null : ItemForSTT_DV.Control.Text, Convert.ToInt64(cboID_CN.Text == "" ? cboID_CN.EditValue = null : cboID_CN.EditValue)).ToString();
 
                             if (bAddEditDV)
                             {

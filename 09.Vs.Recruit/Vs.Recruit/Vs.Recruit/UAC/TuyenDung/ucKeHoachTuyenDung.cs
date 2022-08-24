@@ -154,7 +154,7 @@ namespace Vs.Recruit
                 }
                 else
                 {
-                    grdTuan.DataSource = set.Tables[1];
+                    grdNguonTuyen.DataSource = set.Tables[2];
                 }
             }
             catch
@@ -278,9 +278,10 @@ namespace Vs.Recruit
                     }
                     else
                     {
+                        grvNguonTuyen.SetFocusedRowCellValue("ID_NTD", e.Value);
                         dt = new DataTable();
-                        dt = Commons.Modules.ObjSystems.ConvertDatatable(grvNguonTuyen);
-                        if (dt.AsEnumerable().Count(x => x.Field<Int64>("ID_NTD").Equals(e.Value)) > 0)
+                        dt = Commons.Modules.ObjSystems.ConvertDatatable(grdNguonTuyen);
+                        if (dt.AsEnumerable().Count(x => x.Field<Int64>("ID_NTD").Equals(e.Value)) > 1)
                         {
                             e.Valid = false;
                             e.ErrorText = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "erTrungDuLieu");
@@ -290,7 +291,7 @@ namespace Vs.Recruit
                     }
                 }
             }
-            catch
+            catch  (Exception ex)
             { }
         }
 
@@ -322,6 +323,11 @@ namespace Vs.Recruit
             {
                 XoaKeHoach();
             }
+        }
+
+        private void grvNguonTuyen_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
+        {
+            
         }
     }
 }

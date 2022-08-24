@@ -371,41 +371,49 @@ namespace Vs.HRM
                     }
                 case "in":
                     {
-                        frmViewReport frm = new frmViewReport();
-                        frm.rpt = new rptSoYeuLyLich(DateTime.Now);
-                        System.Data.SqlClient.SqlConnection conn;
-                        DataTable dt = new DataTable();
-                        try
+                        if (Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString() == "NB")
                         {
-                            conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
-                            conn.Open();
-
-                            System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptSoYeuLyLich", conn);
-
-                            cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
-                            cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
-                            //    cmd.Parameters.Add("@Dvi", SqlDbType.Int).Value = -1;
-                            //     cmd.Parameters.Add("@XN", SqlDbType.Int).Value = -1;
-                            //    cmd.Parameters.Add("@TO", SqlDbType.Int).Value = -1;
-                            cmd.Parameters.Add("@ID_CN", SqlDbType.BigInt).Value = Commons.Modules.iCongNhan;
-                            cmd.CommandType = CommandType.StoredProcedure;
-                            System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
-
-                            DataSet ds = new DataSet();
-                            adp.Fill(ds);
-
-                            dt = new DataTable();
-                            dt = ds.Tables[0].Copy();
-                            dt.TableName = "DATA";
-                            frm.AddDataSource(dt);
-                            //DataTable dtQTLV, DataTable dtQTLuong, DataTable dtQTDT, DataTable dtHDLD, DataTable dtQTKT, DataTable dtQTKL, DataTable dtQTDG, DataTable dtQHGD
-
+                            frmInLyLichCN InLyLichCN = new frmInLyLichCN(Commons.Modules.iCongNhan);
+                            InLyLichCN.ShowDialog();
                         }
-                        catch (Exception ex)
+                        else
                         {
-                        }
+                            frmViewReport frm = new frmViewReport();
+                            frm.rpt = new rptSoYeuLyLich(DateTime.Now);
+                            System.Data.SqlClient.SqlConnection conn;
+                            DataTable dt = new DataTable();
+                            try
+                            {
+                                conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                                conn.Open();
 
-                        frm.ShowDialog();
+                                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptSoYeuLyLich", conn);
+
+                                cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                                cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                                //    cmd.Parameters.Add("@Dvi", SqlDbType.Int).Value = -1;
+                                //     cmd.Parameters.Add("@XN", SqlDbType.Int).Value = -1;
+                                //    cmd.Parameters.Add("@TO", SqlDbType.Int).Value = -1;
+                                cmd.Parameters.Add("@ID_CN", SqlDbType.BigInt).Value = Commons.Modules.iCongNhan;
+                                cmd.CommandType = CommandType.StoredProcedure;
+                                System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+
+                                DataSet ds = new DataSet();
+                                adp.Fill(ds);
+
+                                dt = new DataTable();
+                                dt = ds.Tables[0].Copy();
+                                dt.TableName = "DATA";
+                                frm.AddDataSource(dt);
+                                //DataTable dtQTLV, DataTable dtQTLuong, DataTable dtQTDT, DataTable dtHDLD, DataTable dtQTKT, DataTable dtQTKL, DataTable dtQTDG, DataTable dtQHGD
+
+                            }
+                            catch (Exception ex)
+                            {
+                            }
+
+                            frm.ShowDialog();
+                        }
                         break;
                     }
                 default:
@@ -834,7 +842,7 @@ namespace Vs.HRM
                     Bitmap fullSizeBitmap = new Bitmap(fullsizeImage, new Size((int)(fullsizeImage.Width * scale), (int)(fullsizeImage.Height * scale)));
                     MemoryStream resultStream = new MemoryStream();
 
-                    fullSizeBitmap.Save(resultStream,fullsizeImage.RawFormat);
+                    fullSizeBitmap.Save(resultStream, fullsizeImage.RawFormat);
 
                     currentByteImageArray = resultStream.ToArray();
                     resultStream.Dispose();
@@ -857,7 +865,7 @@ namespace Vs.HRM
             {
                 //tạo bảng tạm bằng cấp
                 string sTBBangCap = "sbtBC" + Commons.Modules.UserName;
-                if(Commons.Modules.ObjSystems.ConvertDatatable(grvBangCapCN) == null)
+                if (Commons.Modules.ObjSystems.ConvertDatatable(grvBangCapCN) == null)
                 {
                     sTBBangCap = "";
                 }
@@ -1093,14 +1101,14 @@ namespace Vs.HRM
         {
             if (windowsUIButton.Buttons[5].Properties.Visible == false)
             {
-                     bool visible = THAM_GIA_BHXHCheckEdit.Checked;
-                    SO_BHXHTextEdit.Properties.ReadOnly = !visible;
-                    NGAY_DBHXHDateEdit.ReadOnly = !visible;
-                    NGAY_CHAM_DUT_NOP_BHXHDateEdit.ReadOnly = !visible;
-                    SO_THE_BHYTTextEdit.Properties.ReadOnly = !visible;
-                    NGAY_HET_HANDateEdit.Properties.ReadOnly = !visible;
-                    TINH_THANHLookUpEdit.Properties.ReadOnly = !visible;
-                    BENH_VIENLookUpEdit.Properties.ReadOnly = !visible;
+                bool visible = THAM_GIA_BHXHCheckEdit.Checked;
+                SO_BHXHTextEdit.Properties.ReadOnly = !visible;
+                NGAY_DBHXHDateEdit.ReadOnly = !visible;
+                NGAY_CHAM_DUT_NOP_BHXHDateEdit.ReadOnly = !visible;
+                SO_THE_BHYTTextEdit.Properties.ReadOnly = !visible;
+                NGAY_HET_HANDateEdit.Properties.ReadOnly = !visible;
+                TINH_THANHLookUpEdit.Properties.ReadOnly = !visible;
+                BENH_VIENLookUpEdit.Properties.ReadOnly = !visible;
             }
         }
 

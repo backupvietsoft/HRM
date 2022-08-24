@@ -197,27 +197,27 @@ namespace Vs.HRM
 
         private void cboSearch_TO_EditValueChanged(object sender, EventArgs e)
         {
-            if (Commons.Modules.sPS == "0Load") return;
-            Commons.Modules.sPS = "0Load";
+            if (Commons.Modules.sLoad == "0Load") return;
+            Commons.Modules.sLoad = "0Load";
             LoadGridCongNhan(-1);
-            Commons.Modules.sPS = "";
+            Commons.Modules.sLoad = "";
         }
         private void cboSearch_DV_EditValueChanged(object sender, EventArgs e)
         {
-            if (Commons.Modules.sPS == "0Load") return;
-            Commons.Modules.sPS = "0Load";
+            if (Commons.Modules.sLoad == "0Load") return;
+            Commons.Modules.sLoad = "0Load";
             Commons.Modules.ObjSystems.LoadCboXiNghiep(cboSearch_DV, cboSearch_XN);
             Commons.Modules.ObjSystems.LoadCboTo(cboSearch_DV, cboSearch_XN, cboSearch_TO);
             LoadGridCongNhan(-1);
-            Commons.Modules.sPS = "";
+            Commons.Modules.sLoad = "";
         }
         private void cboSearch_XN_EditValueChanged(object sender, EventArgs e)
         {
-            if (Commons.Modules.sPS == "0Load") return;
-            Commons.Modules.sPS = "0Load";
+            if (Commons.Modules.sLoad == "0Load") return;
+            Commons.Modules.sLoad = "0Load";
             Commons.Modules.ObjSystems.LoadCboTo(cboSearch_DV, cboSearch_XN, cboSearch_TO);
             LoadGridCongNhan(-1);
-            Commons.Modules.sPS = "";
+            Commons.Modules.sLoad = "";
         }
         private void LoadGridCongNhan(int idCN)
         {
@@ -327,7 +327,7 @@ namespace Vs.HRM
                 }
                 else
                 {
-                    //Commons.Modules.sPS = "0Load";
+                    //Commons.Modules.sLoad = "0Load";
                     SO_QDTextEdit.EditValue = "";
                     NGAY_NHAN_DONDateEdit.EditValue = DateTime.Today;
                     NGAY_THOI_VIECDateEdit.EditValue = DateTime.Today;
@@ -392,10 +392,10 @@ namespace Vs.HRM
 
         private void radChonXem_EditValueChanged(object sender, EventArgs e)
         {
-            if (Commons.Modules.sPS == "0Load") return;
-            Commons.Modules.sPS = "0Load";
+            if (Commons.Modules.sLoad == "0Load") return;
+            Commons.Modules.sLoad = "0Load";
             LoadGridCongNhan(-1);
-            Commons.Modules.sPS = "";
+            Commons.Modules.sLoad = "";
         }
 
         private void dTNgay_Validating(object sender, System.ComponentModel.CancelEventArgs e)

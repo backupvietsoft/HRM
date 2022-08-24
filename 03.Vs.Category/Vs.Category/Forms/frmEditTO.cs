@@ -21,6 +21,15 @@ namespace Vs.Category
         }
         private void frmEditTO_Load(object sender, EventArgs e)
         {
+            ItemForToTruong.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+            if (Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString() == "DM")
+            {
+                DataTable dt = new DataTable();
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboCongNhan", Commons.Modules.UserName, Commons.Modules.TypeLanguage, 3));
+                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_CN, dt, "ID_CN", "HO_TEN", "HO_TEN");
+                ItemForToTruong.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+            }
+
             LoadXiNghiep();
             if (!bAddEditTo)
             {
@@ -91,7 +100,7 @@ namespace Vs.Category
         private void LoadText()
         {
             string sSql = "";
-            sSql = "SELECT ID_TO,ID_XN,MS_TO,TEN_TO,TEN_TO_A,TEN_TO_H,STT_TO FROM dbo.[TO] WHERE ID_TO = " + iIdTo.ToString();
+            sSql = "SELECT ID_TO,ID_XN,MS_TO,TEN_TO,TEN_TO_A,TEN_TO_H,STT_TO,ID_CN FROM dbo.[TO] WHERE ID_TO = " + iIdTo.ToString();
             DataTable dtTmp = new DataTable();
             dtTmp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSql));
             if (dtTmp.Rows.Count <= 0) return;
@@ -103,6 +112,7 @@ namespace Vs.Category
             TEN_TO_ANHTextEdit.EditValue = dtTmp.Rows[0]["TEN_TO_A"];
             TEN_TO_HOATextEdit.EditValue = dtTmp.Rows[0]["TEN_TO_H"];
             STT_TOTextEdit.EditValue = dtTmp.Rows[0]["STT_TO"];
+            cboID_CN.EditValue = dtTmp.Rows[0]["ID_CN"].ToString() == "" ? -1 : Convert.ToInt64(dtTmp.Rows[0]["ID_CN"]);
         }
 
         private void LoadTextNull()
@@ -115,6 +125,7 @@ namespace Vs.Category
                 TEN_TO_ANHTextEdit.EditValue = String.Empty;
                 TEN_TO_HOATextEdit.EditValue = String.Empty;
                 STT_TOTextEdit.EditValue = String.Empty;
+                cboID_CN.EditValue = -1;
                 MS_TOTextEdit.Focus();
             }
             catch { }
@@ -132,7 +143,7 @@ namespace Vs.Category
                         {
                             if (!dxValidationProvider1.Validate()) return;
                             if (KiemTrung()) return;
-                            Commons.Modules.sId = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spUpdateTo", (bAddEditTo ? -1 : iIdTo), ID_XNLookUpEdit.EditValue, MS_TOTextEdit.EditValue, TEN_TOTextEdit.EditValue, TEN_TO_ANHTextEdit.EditValue, TEN_TO_HOATextEdit.EditValue, STT_TOTextEdit.EditValue, Commons.Modules.UserName).ToString();
+                            Commons.Modules.sId = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spUpdateTo", (bAddEditTo ? -1 : iIdTo), ID_XNLookUpEdit.EditValue, MS_TOTextEdit.EditValue, TEN_TOTextEdit.EditValue, TEN_TO_ANHTextEdit.EditValue, TEN_TO_HOATextEdit.EditValue, STT_TOTextEdit.EditValue, Convert.ToInt64(cboID_CN.Text == "" ? cboID_CN.EditValue = null : cboID_CN.EditValue), Commons.Modules.UserName).ToString();
                             if (bAddEditTo)
                             {
                                 if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msg_ThemThanhCongBanCoMuonTiepTuc"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)

@@ -62,7 +62,7 @@ namespace Vs.HRM
                                         frm.AddDataSource(dt);
                                         frm.rpt = new VS.Report.NhanSu.rptBieuDoTangGiamCongNhan(dt1, datNam.DateTime.Year);
                                     }
-                                    catch
+                                    catch(Exception ex)
                                     { }
                                     break;
                                 }

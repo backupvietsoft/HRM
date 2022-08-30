@@ -153,6 +153,14 @@ namespace VietSoftHRM
                         tc.Dock = DockStyle.Fill;
                         break;
                     }
+                case "mnuCTSDTC":
+                    {
+                        ucTO tc = new ucTO();
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(tc);
+                        tc.Dock = DockStyle.Fill;
+                        break;
+                    }
 
 
 
@@ -339,6 +347,14 @@ namespace VietSoftHRM
                 case "mnuInNhanVien":
                     {
                         ucInNhanVien tc = new ucInNhanVien();
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(tc);
+                        tc.Dock = DockStyle.Fill;
+                        break;
+                    }
+                case "mnuCTSDTC":
+                    {
+                        ucTO tc = new ucTO();
                         panel2.Controls.Clear();
                         panel2.Controls.Add(tc);
                         tc.Dock = DockStyle.Fill;

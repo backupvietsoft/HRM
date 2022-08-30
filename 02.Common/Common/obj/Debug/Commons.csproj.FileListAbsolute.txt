@@ -1021,6 +1021,10 @@ D:\01.SourceCode\02.HRM\02.Common\Common\obj\Debug\Commons.csproj.CoreCompileInp
 D:\01.SourceCode\02.HRM\02.Common\Common\obj\Debug\Commons.csproj.CopyComplete
 D:\01.SourceCode\02.HRM\02.Common\Common\obj\Debug\Commons.dll
 D:\01.SourceCode\02.HRM\02.Common\Common\obj\Debug\Commons.pdb
+F:\01.HRM\02.Common\Common\bin\Debug\DevExpress.XtraLayout.v22.1.dll
+F:\01.HRM\02.Common\Common\bin\Debug\DevExpress.XtraLayout.v22.1.xml
+F:\01.HRM\02.Common\Common\bin\Debug\de\DevExpress.Xpo.v22.1.resources.dll
+F:\01.HRM\02.Common\Common\bin\Debug\es\DevExpress.RichEdit.v22.1.Core.resources.dll
 F:\01.HRM\02.Common\Common\bin\Debug\Commons.dll.config
 F:\01.HRM\02.Common\Common\bin\Debug\Commons.dll
 F:\01.HRM\02.Common\Common\bin\Debug\Commons.pdb
@@ -1036,7 +1040,6 @@ F:\01.HRM\02.Common\Common\bin\Debug\DevExpress.XtraBars.v22.1.dll
 F:\01.HRM\02.Common\Common\bin\Debug\DevExpress.XtraCharts.v22.1.dll
 F:\01.HRM\02.Common\Common\bin\Debug\DevExpress.XtraEditors.v22.1.dll
 F:\01.HRM\02.Common\Common\bin\Debug\DevExpress.XtraGrid.v22.1.dll
-F:\01.HRM\02.Common\Common\bin\Debug\DevExpress.XtraLayout.v22.1.dll
 F:\01.HRM\02.Common\Common\bin\Debug\DevExpress.XtraNavBar.v22.1.dll
 F:\01.HRM\02.Common\Common\bin\Debug\DevExpress.XtraReports.v22.1.dll
 F:\01.HRM\02.Common\Common\bin\Debug\DevExpress.XtraTreeList.v22.1.dll
@@ -1066,7 +1069,6 @@ F:\01.HRM\02.Common\Common\bin\Debug\DevExpress.XtraBars.v22.1.xml
 F:\01.HRM\02.Common\Common\bin\Debug\DevExpress.XtraEditors.v22.1.xml
 F:\01.HRM\02.Common\Common\bin\Debug\DevExpress.Printing.v22.1.Core.xml
 F:\01.HRM\02.Common\Common\bin\Debug\DevExpress.XtraGrid.v22.1.xml
-F:\01.HRM\02.Common\Common\bin\Debug\DevExpress.XtraLayout.v22.1.xml
 F:\01.HRM\02.Common\Common\bin\Debug\DevExpress.XtraNavBar.v22.1.xml
 F:\01.HRM\02.Common\Common\bin\Debug\DevExpress.Charts.v22.1.Core.xml
 F:\01.HRM\02.Common\Common\bin\Debug\DevExpress.XtraCharts.v22.1.xml
@@ -1124,7 +1126,6 @@ F:\01.HRM\02.Common\Common\bin\Debug\ja\DevExpress.Pdf.v22.1.Core.resources.dll
 F:\01.HRM\02.Common\Common\bin\Debug\de\DevExpress.XtraPrinting.v22.1.resources.dll
 F:\01.HRM\02.Common\Common\bin\Debug\es\DevExpress.XtraPrinting.v22.1.resources.dll
 F:\01.HRM\02.Common\Common\bin\Debug\ja\DevExpress.XtraPrinting.v22.1.resources.dll
-F:\01.HRM\02.Common\Common\bin\Debug\de\DevExpress.Xpo.v22.1.resources.dll
 F:\01.HRM\02.Common\Common\bin\Debug\es\DevExpress.Xpo.v22.1.resources.dll
 F:\01.HRM\02.Common\Common\bin\Debug\ja\DevExpress.Xpo.v22.1.resources.dll
 F:\01.HRM\02.Common\Common\bin\Debug\de\DevExpress.DataAccess.v22.1.resources.dll
@@ -1137,7 +1138,6 @@ F:\01.HRM\02.Common\Common\bin\Debug\de\DevExpress.XtraGauges.v22.1.Core.resourc
 F:\01.HRM\02.Common\Common\bin\Debug\es\DevExpress.XtraGauges.v22.1.Core.resources.dll
 F:\01.HRM\02.Common\Common\bin\Debug\ja\DevExpress.XtraGauges.v22.1.Core.resources.dll
 F:\01.HRM\02.Common\Common\bin\Debug\de\DevExpress.RichEdit.v22.1.Core.resources.dll
-F:\01.HRM\02.Common\Common\bin\Debug\es\DevExpress.RichEdit.v22.1.Core.resources.dll
 F:\01.HRM\02.Common\Common\bin\Debug\ja\DevExpress.RichEdit.v22.1.Core.resources.dll
 F:\01.HRM\02.Common\Common\bin\Debug\de\DevExpress.Office.v22.1.Core.resources.dll
 F:\01.HRM\02.Common\Common\bin\Debug\es\DevExpress.Office.v22.1.Core.resources.dll

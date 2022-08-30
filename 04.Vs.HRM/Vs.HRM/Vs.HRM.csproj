@@ -467,6 +467,12 @@
     <Compile Include="UAC\CongNhan\ucInNhanVien.Designer.cs">
       <DependentUpon>ucInNhanVien.cs</DependentUpon>
     </Compile>
+    <Compile Include="UAC\CongNhan\ucTO.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UAC\CongNhan\ucTO.Designer.cs">
+      <DependentUpon>ucTO.cs</DependentUpon>
+    </Compile>
     <Compile Include="UAC\CongNhan\ucThongTinChuyenKhoan.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -771,6 +777,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UAC\CongNhan\ucInNhanVien.resx">
       <DependentUpon>ucInNhanVien.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UAC\CongNhan\ucTO.resx">
+      <DependentUpon>ucTO.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UAC\CongNhan\ucThongTinChuyenKhoan.resx">
       <DependentUpon>ucThongTinChuyenKhoan.cs</DependentUpon>

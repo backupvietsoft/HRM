@@ -1,4 +1,4 @@
-﻿namespace Vs.HRM
+﻿namespace Vs.Payroll
 {
     partial class frmInBaoCaoHTTienDo
     {

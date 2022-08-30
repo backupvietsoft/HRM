@@ -12,17 +12,11 @@ using Microsoft.ApplicationBlocks.Data;
 using DevExpress.XtraBars.Docking2010;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraEditors.Repository;
-using System.Xml.Linq;
-using DevExpress.XtraEditors.Controls;
-using DevExpress.XtraEditors.Mask;
 using DevExpress.XtraLayout;
 using DevExpress.Utils;
 using DevExpress.Utils.Menu;
 using DataTable = System.Data.DataTable;
-using DevExpress.DataAccess.Excel;
 using DevExpress.Spreadsheet;
-using Microsoft.Office.Interop.Excel;
-using Borders = Microsoft.Office.Interop.Excel.Borders;
 
 namespace Vs.Payroll
 {
@@ -142,7 +136,8 @@ namespace Vs.Payroll
                     }
                 case "In":
                     {
-
+                        frmInBaoCaoHTTienDo frm = new frmInBaoCaoHTTienDo(Commons.Modules.ObjSystems.ConvertDatatable(grvData),Convert.ToDateTime(cboThang.EditValue).ToString("MM/yyyy"));
+                        frm.ShowDialog();
                         break;
                     }
                 case "ghi":
@@ -198,7 +193,7 @@ namespace Vs.Payroll
             //xóa
             try
             {
-                string sSql = "DELETE dbo.DSCN_HO_TRO_TIEN_DO WHERE ID_CN = " + grvData.GetFocusedRowCellValue("ID_CN") + " AND THANG = '"+Commons.Modules.ObjSystems.ConvertDateTime(cboThang.Text).ToString("MM/dd/yyyy")+"'";
+                string sSql = "DELETE dbo.DSCN_HO_TRO_TIEN_DO WHERE ID_CN = " + grvData.GetFocusedRowCellValue("ID_CN") + " AND THANG = '" + Commons.Modules.ObjSystems.ConvertDateTime(cboThang.Text).ToString("MM/dd/yyyy") + "'";
                 SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, sSql);
                 grvData.DeleteSelectedRows();
             }
@@ -241,7 +236,7 @@ namespace Vs.Payroll
             {
 
                 Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sTB, Commons.Modules.ObjSystems.ConvertDatatable(grvData), "");
-                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spSaveHoTroTienDo", sTB,Commons.Modules.ObjSystems.ConvertDateTime(cboThang.Text));
+                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spSaveHoTroTienDo", sTB, Commons.Modules.ObjSystems.ConvertDateTime(cboThang.Text));
                 Commons.Modules.ObjSystems.XoaTable(sTB);
                 return true;
             }
@@ -409,56 +404,6 @@ namespace Vs.Payroll
             }
         }
 
-        #region excel
-        public string SaveFiles(string MFilter)
-        {
-            try
-            {
-                SaveFileDialog f = new SaveFileDialog();
-                f.Filter = MFilter;
-                f.FileName = DateTime.Now.ToString("yyyyMMdd_HHmmss");
-                try
-                {
-                    DialogResult res = f.ShowDialog();
-                    if (res == DialogResult.OK)
-                        return f.FileName;
-                    return "";
-                }
-                catch
-                {
-                    return "";
-                }
-            }
-            catch
-            {
-                return "";
-            }
-        }
-        private void MExportExcel(DataTable dtTmp, Microsoft.Office.Interop.Excel.Worksheet ExcelSheets, Microsoft.Office.Interop.Excel.Range sRange)
-        {
-            object[,] rawData = new object[dtTmp.Rows.Count + 1, dtTmp.Columns.Count - 1 + 1];
-            for (var col = 0; col <= dtTmp.Columns.Count - 1; col++)
-                rawData[0, col] = dtTmp.Columns[col].Caption;
-            for (var col = 0; col <= dtTmp.Columns.Count - 1; col++)
-            {
-                for (var row = 0; row <= dtTmp.Rows.Count - 1; row++)
-                    rawData[row + 1, col] = dtTmp.Rows[row][col].ToString();
-            }
-            sRange.Value = rawData;
-        }
-        private void BorderAround(Range range)
-        {
-            Borders borders = range.Borders;
-            borders[XlBordersIndex.xlEdgeLeft].LineStyle = XlLineStyle.xlContinuous;
-            borders[XlBordersIndex.xlEdgeTop].LineStyle = XlLineStyle.xlContinuous;
-            borders[XlBordersIndex.xlEdgeBottom].LineStyle = XlLineStyle.xlContinuous;
-            borders[XlBordersIndex.xlEdgeRight].LineStyle = XlLineStyle.xlContinuous;
-            borders.Color = Color.Black;
-            borders[XlBordersIndex.xlInsideVertical].LineStyle = XlLineStyle.xlContinuous;
-            borders[XlBordersIndex.xlInsideHorizontal].LineStyle = XlLineStyle.xlContinuous;
-            borders[XlBordersIndex.xlDiagonalUp].LineStyle = XlLineStyle.xlLineStyleNone;
-            borders[XlBordersIndex.xlDiagonalDown].LineStyle = XlLineStyle.xlLineStyleNone;
-        }
-        #endregion  
+        
     }
 }

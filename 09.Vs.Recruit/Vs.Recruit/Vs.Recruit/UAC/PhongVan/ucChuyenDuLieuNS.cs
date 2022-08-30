@@ -123,6 +123,9 @@ namespace Vs.Recruit
                 }
                 else
                 {
+                    grvDSUngVien.Columns["ID_YCTD"].Visible = false;
+                    grvDSUngVien.Columns["ID_VTTD"].Visible = false;
+
                     grvDSUngVien.OptionsSelection.MultiSelect = true;
                     grvDSUngVien.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CheckBoxRowSelect;
 
@@ -488,7 +491,7 @@ namespace Vs.Recruit
                 Commons.Modules.ObjSystems.XoaTable(sBTUngVien);
                 return true;
             }
-            catch
+            catch (Exception ex)
             {
                 Commons.Modules.ObjSystems.XoaTable(sBTUngVien);
                 return false;

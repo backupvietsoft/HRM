@@ -11,25 +11,37 @@ namespace VietSoftHRM
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
-        public static string mUserName = "h.tc";
-        public static string miIDUser = "45";
-        public static string mDatabase = "VS_HRM";
 
         [STAThread]
         static void Main(string[] args)
         {
             clsMain.setConfig();
+            Thread t;
+
+            if (args.Length > 0)
+            {
+
+                //System.Diagnostics.Process.Start("VietSoftHRM.exe", Com.Mod.Server + " " + Com.Mod.UserDB + " " + Com.Mod.Password + " " + Com.Mod.Database + " " + Com.Mod.UserID.ToString() + " " + Com.Mod.UName.ToString
+                Commons.IConnections.Server = args[0].ToString();
+                Commons.IConnections.Database = args[1].ToString();
+                Commons.IConnections.Username = args[2].ToString(); 
+                Commons.IConnections.Password = args[3].ToString();
+
+                Commons.Modules.iIDUser = Convert.ToInt32(args[4]);
+                Commons.Modules.UserName = args[5].ToString();
+                //System.Diagnostics.Process.Start("VietSoftHRM.exe", Com.Mod.Server + " " + Com.Mod.UserDB + " " + Com.Mod.Password + " " + Com.Mod.Database + " " + Com.Mod.UserID.ToString() + " " + Com.Mod.UName.ToString());
+
+                //insert vao user
+                //MessageBox.Show(Commons.Modules.UserName + " : " + Commons.Modules.iIDUser.ToString() + " : " + Commons.IConnections.Database + "\n" + Commons.IConnections.CNStr);
+                
+            }
             clsMain.setTTC();
             clsMain.CheckUpdate();
             Application.EnableVisualStyles();
-            Thread t;
+            
             if (args.Length > 0)
             {
-                Commons.Modules.UserName = mUserName;
-                Commons.Modules.iIDUser = Convert.ToUInt32(miIDUser);
-                Commons.IConnections.Database = mDatabase;
-                //insert vao user
-                //MessageBox.Show(Commons.Modules.UserName + " : " + Commons.Modules.iIDUser.ToString() + " : " + Commons.IConnections.Database + "\n" + Commons.IConnections.CNStr);
+
                 Commons.Modules.ObjSystems.User(Commons.Modules.UserName, 1);
                 t = new Thread(new ThreadStart(MRunInt));
             }

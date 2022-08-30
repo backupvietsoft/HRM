@@ -2668,6 +2668,7 @@ F:\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.frmDonHangBan.resources
 F:\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.frmDonHangBanView.resources
 F:\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\VS.OEE.frmImport.resources
 F:\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.Form.frmInBaoCaoPCD.resources
+F:\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.frmInBaoCaoHTTienDo.resources
 F:\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.frmLayDuLieuLuongT13.resources
 F:\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\VS.ERP.frmPhieuNhapKho_Import.resources
 F:\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.frmQTCN_View.resources
@@ -2721,6 +2722,7 @@ F:\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.ucBangLuongThang13.resource
 F:\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.ucDanhSachTamUng.resources
 F:\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.ucDangKyBHXH.resources
 F:\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.ucDKThoiGianKhongLamSP.resources
+F:\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.ucDSCNHoTroTienDo.resources
 F:\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.ucNangSuatChuyen.resources
 F:\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.ucTinhLuong.resources
 F:\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.ucLayChamCong.resources
@@ -2743,4 +2745,3 @@ F:\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.csproj.CoreCompileInputs.ca
 F:\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.csproj.CopyComplete
 F:\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.dll
 F:\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.pdb
-F:\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.ucDSCNHoTroTienDo.resources

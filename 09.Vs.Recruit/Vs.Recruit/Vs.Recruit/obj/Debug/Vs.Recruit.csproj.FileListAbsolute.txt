@@ -257,7 +257,6 @@ F:\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.Recruit.UAC.ctUngVien
 F:\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.Recruit.ucPhongVan.resources
 F:\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.Recruit.ucKeHoachPhongVan.resources
 F:\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.Recruit.ucTHONG_BAO_TUYEN_DUNG.resources
-F:\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.Recruit.UAC.ucTiepNhanUngVien.resources
 F:\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.Recruit.ucUngVien.resources
 F:\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.Recruit.ucVI_TRI_TUYEN_DUNG.resources
 F:\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.Recruit.frmXemDSUngVien.resources
@@ -285,3 +284,7 @@ F:\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.Recruit.ucBaoCaoDSUVT
 F:\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.Recruit.rptThongBaoTuyenDung.resources
 F:\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.Recruit.rptPhieuPhongVanUngVien.resources
 F:\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.Recruit.ucDaoTaoDinhHuong.resources
+F:\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.Recruit.rptGiayHenDiLam.resources
+F:\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.Recruit.ucChuyenDuLieuNS.resources
+F:\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.Recruit.ucTiepNhanUngVien.resources
+F:\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.Report.rptTheNhanVien_DM.resources

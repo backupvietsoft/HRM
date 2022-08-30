@@ -2743,3 +2743,4 @@ F:\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.csproj.CoreCompileInputs.ca
 F:\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.csproj.CopyComplete
 F:\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.dll
 F:\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.pdb
+F:\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.ucDSCNHoTroTienDo.resources

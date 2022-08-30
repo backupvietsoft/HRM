@@ -176,6 +176,16 @@ namespace VietSoftHRM
                     windowsUIButton.Visible = false;
                     //Commons.Modules.ObjSystems.HideWaitForm();
                 }
+                else if (Commons.Modules.sPS == "spGetListMUC_THUONG_CHUYEN_CAN")
+                {
+                    Vs.TimeAttendance.ucMucThuongChuyenCan ctl = new Vs.TimeAttendance.ucMucThuongChuyenCan();
+                    panel3.Show();
+                    //Commons.Modules.ObjSystems.ShowWaitForm(this);
+                    panel3.Controls.Clear();
+                    panel3.Controls.Add(ctl);
+                    ctl.Dock = DockStyle.Fill;
+                    windowsUIButton.Visible = false;
+                }
                 else if (Commons.Modules.sPS.IndexOf("_HThong") != -1)
                 {
                     XtraUserControl ctl;

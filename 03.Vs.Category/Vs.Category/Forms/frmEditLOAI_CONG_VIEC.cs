@@ -28,6 +28,17 @@ namespace Vs.Category
 
         private void frmEditLOAI_CONG_VIEC_Load(object sender, EventArgs e)
         {
+            ItemForTEN_CV.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+            //ItemForTEN_XN.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+            if (Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString() == "DM")
+            {
+                //DataTable dt = new DataTable();
+                //dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboCongNhan", Commons.Modules.UserName, Commons.Modules.TypeLanguage, 3));
+                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboChucVu, Commons.Modules.ObjSystems.DataChucVu(false) , "ID_CV", "TEN_CV", "TEN_CV");
+                //Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboChucVu, Commons.Modules.ObjSystems.DataXiNghiep(-1,false) , "ID_XN", "TEN_XN", "TEN_XN");
+                ItemForTEN_CV.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+            }
+
             LoadLoaiTO();
             //Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(ID_CVSearchLookUpEdit, Commons.Modules.ObjSystems.DataChucVu(false), "ID_CV", "TEN_CV", "TEN_CV", true, true);
             if (!AddEdit)
@@ -62,7 +73,7 @@ namespace Vs.Category
         {
             try
             {
-                string sSql = "SELECT ID_LCV, TEN_LCV, TEN_LCV_A, TEN_LCV_H, DOC_HAI, PHEP_CT, ID_LT, STT " +
+                string sSql = "SELECT ID_LCV, TEN_LCV, TEN_LCV_A, TEN_LCV_H, DOC_HAI, PHEP_CT, ID_LT,ID_CV, STT " +
                     "FROM LOAI_CONG_VIEC WHERE ID_LCV =	" + Id.ToString();
                 DataTable dtTmp = new DataTable();
                 dtTmp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSql));
@@ -72,6 +83,7 @@ namespace Vs.Category
                 DOC_HAICheckEdit.EditValue = Convert.ToBoolean(dtTmp.Rows[0]["DOC_HAI"]);
                 PHEP_CTTextEdit.EditValue = dtTmp.Rows[0]["PHEP_CT"].ToString();
                 ID_LTSearchLookUpEdit.EditValue = dtTmp.Rows[0]["ID_LT"];
+                cboChucVu.EditValue = dtTmp.Rows[0]["ID_CV"].ToString() == "" ? -1 : Convert.ToInt64(dtTmp.Rows[0]["ID_CV"]);
                 txtSTT.EditValue = Convert.ToInt32(dtTmp.Rows[0]["STT"]);
             }
             catch
@@ -88,6 +100,7 @@ namespace Vs.Category
                 DOC_HAICheckEdit.EditValue = false;
                 PHEP_CTTextEdit.EditValue = 0;
                 TEN_LCVTextEdit.Focus();
+                cboChucVu.EditValue = -1;
                 txtSTT.EditValue = 1;
             }
             catch { }
@@ -110,6 +123,7 @@ namespace Vs.Category
                                 TEN_LCV_HTextEdit.EditValue, DOC_HAICheckEdit.EditValue,
                                 (PHEP_CTTextEdit.EditValue == null) ? 0 : PHEP_CTTextEdit.EditValue,
                                 ID_LTSearchLookUpEdit.Text.Trim() == "" ? ID_LTSearchLookUpEdit.EditValue = null : ID_LTSearchLookUpEdit.EditValue,
+                                Convert.ToInt64(cboChucVu.Text == "" ? cboChucVu.EditValue = null : cboChucVu.EditValue),
                                 (txtSTT.Text == "") ? txtSTT.EditValue = null : txtSTT.EditValue
                                 ).ToString();
                             if (AddEdit)

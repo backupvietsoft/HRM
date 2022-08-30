@@ -420,6 +420,7 @@ namespace Vs.HRM
                             }
                             DeleteCapNhatPhep(dt);
                         }
+                        grvDSCN_FocusedRowChanged(null, null);
                         break;
                     }
                 case "In":
@@ -482,6 +483,7 @@ namespace Vs.HRM
 
                             UpdateTinhTrangNghiPhep(Convert.ToInt32(grvDSCN.GetFocusedRowCellValue("ID_CN")));
                             LoadGrdCongNhan(false);
+                            grvDSCN_FocusedRowChanged(null, null);
                         }
                         catch (Exception ex)
                         {

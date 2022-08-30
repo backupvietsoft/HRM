@@ -119,7 +119,7 @@ namespace Vs.TimeAttendance
                         try
                         {
                             DataTable dt = new DataTable();
-                            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spTinhDiemThang", Commons.Modules.UserName, Commons.Modules.TypeLanguage, Convert.ToInt32(cboDV.EditValue), Convert.ToInt32(cboXN.EditValue), Convert.ToInt32(cboTo.EditValue), Convert.ToInt32(txtNgayCongQD.EditValue) ,Convert.ToDateTime(cboThang.EditValue)));
+                            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString() == "DM" ? "spTinhThuongChuyenCanThang_DM" : "spTinhDiemThang", Commons.Modules.UserName, Commons.Modules.TypeLanguage, Convert.ToInt32(cboDV.EditValue), Convert.ToInt32(cboXN.EditValue), Convert.ToInt32(cboTo.EditValue), Convert.ToInt32(txtNgayCongQD.EditValue) ,Convert.ToDateTime(cboThang.EditValue)));
                             grdDiemThang.DataSource = dt;
                             enableButon(false);
                         }
@@ -171,7 +171,7 @@ namespace Vs.TimeAttendance
             {
                 Commons.Modules.sLoad = "0Load";
                 DataTable dt = new DataTable();
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetListDiemThang", Commons.Modules.UserName, Commons.Modules.TypeLanguage, Convert.ToInt32(cboDV.EditValue), Convert.ToInt32(cboXN.EditValue), Convert.ToInt32(cboTo.EditValue), Convert.ToDateTime(cboThang.EditValue)));
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString() == "DM" ? "spGetListDiemThang_DM" : "spGetListDiemThang", Commons.Modules.UserName, Commons.Modules.TypeLanguage, Convert.ToInt32(cboDV.EditValue), Convert.ToInt32(cboXN.EditValue), Convert.ToInt32(cboTo.EditValue), Convert.ToDateTime(cboThang.EditValue)));
 
                 for (int i = 4; i < dt.Columns.Count; i++)
                 {
@@ -224,7 +224,7 @@ namespace Vs.TimeAttendance
             try
             {
                 Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBT, Commons.Modules.ObjSystems.ConvertDatatable(grvDiemThang), "");
-                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spSaveTinhDiemThang", sBT, Convert.ToDateTime(cboThang.EditValue));
+                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString() == "DM" ? "spSaveTinhDiemThang_DM" : "spSaveTinhDiemThang", sBT, Convert.ToDateTime(cboThang.EditValue));
                 Commons.Modules.ObjSystems.XoaTable(sBT);
                 return true;
             }

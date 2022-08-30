@@ -46,7 +46,7 @@ namespace Vs.Recruit
                 {
                     Commons.Modules.ObjSystems.MLoadXtraGrid(grdPYC, grvPYC, dt, false, false, false, true, true, this.Name);
                     grvPYC.Columns["ID_YCTD"].Visible = false;
-                    grvPYC.Columns["ID_TO"].Visible = false;
+                    grvPYC.Columns["ID_XN"].Visible = false;
                     grvPYC.Columns["ID_CN"].Visible = false;
                     grvPYC.Columns["ID_TT"].Visible = false;
                     grvPYC.Columns["NGAY_YEU_CAU"].Visible = false;
@@ -85,7 +85,7 @@ namespace Vs.Recruit
                     Commons.Modules.ObjSystems.AddCombXtra("ID_LOAI_TUYEN", "TEN_LOAI_TUYEN", grvViTri, Commons.Modules.ObjSystems.DataLoaiTuyen(false), false, "ID_LOAI_TUYEN", this.Name, true);
                     Commons.Modules.ObjSystems.AddCombXtra("ID_TTD", "TEN_TT_DUYET", grvViTri, Commons.Modules.ObjSystems.DataTinhTrangDuyet(false), false, "ID_TTD", this.Name, true);
 
-                    grvViTri.Columns["SL_TUYEN"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvViTri.Columns["SL_TUYEN"].DisplayFormat.FormatType = FormatType.None;
                     grvViTri.Columns["SL_TUYEN"].DisplayFormat.FormatString = Commons.Modules.sSoLeSL;
                     grvViTri.Columns["MUC_LUONG_DK"].DisplayFormat.FormatType = FormatType.Numeric;
                     grvViTri.Columns["MUC_LUONG_DK"].DisplayFormat.FormatString = Commons.Modules.sSoLeTT;
@@ -165,6 +165,7 @@ namespace Vs.Recruit
         {
             try
             {
+
                 ButtonEdit a = sender as ButtonEdit;
                 Commons.Modules.ObjSystems.OpenHinh(Commons.Modules.sDDTaiLieu + '\\' + this.Name.Replace("uc", "") + '\\' + txtMA_YCTD.Text + '\\' + a.Text);
             }
@@ -177,9 +178,13 @@ namespace Vs.Recruit
             try
             {
                 ButtonEdit a = sender as ButtonEdit;
+                ofileDialog.Filter = "All Files|*.txt;*.docx;*.doc;*.pdf*.xls;*.xlsx;*.pptx;*.ppt|Text File (.txt)|*.txt|Word File (.docx ,.doc)|*.docx;*.doc|Spreadsheet (.xls ,.xlsx)|  *.xls ;*.xlsx";
+                //ofileDialog.Filter = "Excel Files|*.xls;*.xlsx;*.xlsm|Word Documents(*.doc)|*.doc";
                 if (ofileDialog.ShowDialog() == DialogResult.OK)
                 {
+                    string sduongDan = ofileDialog.FileName.ToString().Trim();
                     if (ofileDialog.FileName.ToString().Trim() == "") return;
+                    //if (sduongDan.Substring(sduongDan.IndexOf('.'), 4).ToString() == ".xlsx") return;
                     Commons.Modules.ObjSystems.LuuDuongDan(ofileDialog.FileName, ofileDialog.SafeFileName, this.Name.Replace("uc", "") + '\\' + txtMA_YCTD.Text);
                     a.Text = ofileDialog.SafeFileName;
                 }
@@ -222,7 +227,39 @@ namespace Vs.Recruit
 
                 case "In":
                     {
-                        
+                        if (grvPYC.RowCount == 0) return;
+                        frmViewReport frm = new frmViewReport();
+                        System.Data.SqlClient.SqlConnection conn;
+                        DataTable dt = new DataTable();
+                        frm.rpt = new rptThongBaoTuyenDung();
+                        try
+                        {
+                            conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                            conn.Open();
+
+                            System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptThongBaoTuyenDung", conn);
+                            cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                            cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                            cmd.Parameters.Add("@ID_YCTD", SqlDbType.BigInt).Value = Convert.ToInt64(grvPYC.GetFocusedRowCellValue("ID_YCTD"));
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+                            DataSet ds = new DataSet();
+                            adp.Fill(ds);
+                            dt = new DataTable();
+                            dt = ds.Tables[0].Copy();
+                            dt.TableName = "DA_TA";
+                            frm.AddDataSource(dt);
+
+                            //dt = ds.Tables[1].Copy();
+                            //dt.TableName = "NOI_DUNG";
+                            //frm.AddDataSource(dt);
+                            //frm.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung());
+                        }
+                        catch
+                        {
+                        }
+
+                        frm.ShowDialog();
                         break;
                     }
 
@@ -312,7 +349,7 @@ namespace Vs.Recruit
             try
             {
                 Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboNguoiYC, Commons.Modules.ObjSystems.DataCongNhan(false), "ID_CN", "TEN_CN", "TEN_CN", true, true);
-                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboBPYC, Commons.Modules.ObjSystems.DataTo(-1, -1, false), "ID_TO", "TEN_TO", "TEN_TO", true, true);
+                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboBPYC, Commons.Modules.ObjSystems.DataXiNghiep(-1, false), "ID_XN", "TEN_XN", "TEN_XN", true, true);
                 Commons.Modules.ObjSystems.MLoadLookUpEdit(cboTinhTrang, Commons.Modules.ObjSystems.DataTinhTrangYC(false), "ID_TTYC", "Ten_TTYC", "Ten_TTYC");
             }
             catch (Exception ex)
@@ -345,7 +382,7 @@ namespace Vs.Recruit
                 try
                 {
                     txtMA_YCTD.EditValue = grvPYC.GetFocusedRowCellValue("MA_YCTD").ToString();
-                    cboBPYC.EditValue = Convert.ToInt64(grvPYC.GetFocusedRowCellValue("ID_TO"));
+                    cboBPYC.EditValue = Convert.ToInt64(grvPYC.GetFocusedRowCellValue("ID_XN"));
                     cboTinhTrang.EditValue = Convert.ToInt32(grvPYC.GetFocusedRowCellValue("ID_TT"));
                     datNgayYC.EditValue = Convert.ToDateTime(grvPYC.GetFocusedRowCellValue("NGAY_YEU_CAU"));
                     cboNguoiYC.EditValue = Convert.ToInt64(grvPYC.GetFocusedRowCellValue("ID_CN"));
@@ -388,7 +425,7 @@ namespace Vs.Recruit
             if (tab.SelectedTabPageIndex == 1)
             {
                 LoadgrdFileDinhKem();
-                if (btnALL.Buttons[4].Properties.Visible == true)
+                if (btnALL.Buttons[6].Properties.Visible == true)
                 {
                     Commons.Modules.ObjSystems.AddnewRow(grvFileDK, true);
                 }
@@ -650,15 +687,16 @@ namespace Vs.Recruit
             DXMouseEventArgs ea = e as DXMouseEventArgs;
             GridView view = sender as GridView;
             GridHitInfo info = view.CalcHitInfo(ea.Location);
-            if (info.Column.FieldName == "DUONG_DAN_TL" && info.RowHandle >= 0)
+            try
             {
-                try
+                if (info.Column.FieldName == "DUONG_DAN_TL" && info.RowHandle >= 0)
                 {
+
                     Commons.Modules.ObjSystems.OpenHinh(Commons.Modules.sDDTaiLieu + '\\' + this.Name.Replace("uc", "") + '\\' + txtMA_YCTD.Text + '\\' + grvViTri.GetFocusedRowCellValue("DUONG_DAN_TL"));
                 }
-                catch
-                {
-                }
+            }
+            catch
+            {
             }
         }
         private void grvFileDK_DoubleClick(object sender, EventArgs e)
@@ -666,15 +704,16 @@ namespace Vs.Recruit
             DXMouseEventArgs ea = e as DXMouseEventArgs;
             GridView view = sender as GridView;
             GridHitInfo info = view.CalcHitInfo(ea.Location);
-            if (info.Column.FieldName == "DUONG_DAN" && info.RowHandle >= 0)
+
+            try
             {
-                try
+                if (info.Column.FieldName == "DUONG_DAN" && info.RowHandle >= 0)
                 {
                     Commons.Modules.ObjSystems.OpenHinh(Commons.Modules.sDDTaiLieu + '\\' + this.Name.Replace("uc", "") + '\\' + txtMA_YCTD.Text + '\\' + grvFileDK.GetFocusedRowCellValue("DUONG_DAN"));
                 }
-                catch
-                {
-                }
+            }
+            catch
+            {
             }
         }
         private void grvViTri_InvalidValueException(object sender, DevExpress.XtraEditors.Controls.InvalidValueExceptionEventArgs e)

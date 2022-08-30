@@ -3228,3 +3228,6 @@ F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.dll
 F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.pdb
 F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.ucInNhanVien.resources
 F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.frmInLyLichCN.resources
+F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.ucTaoHopDong.resources
+F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.frmInThuMoi.resources
+F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.ucDanhGiaThuViec.resources

@@ -126,6 +126,24 @@ namespace VietSoftHRM
                         ttn.Dock = DockStyle.Fill;
                         break;
                     }
+                case "mnuHDThuViecAdd":
+                    {
+                        ucTaoHopDong ttn = new ucTaoHopDong();
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(ttn);
+                        Commons.Modules.ObjSystems.HideWaitForm();
+                        ttn.Dock = DockStyle.Fill;
+                        break;
+                    }
+                case "mnuDGThuViec":
+                    {
+                        ucDanhGiaThuViec ttn = new ucDanhGiaThuViec();
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(ttn);
+                        Commons.Modules.ObjSystems.HideWaitForm();
+                        ttn.Dock = DockStyle.Fill;
+                        break;
+                    }
 
                 case "mnuKTTenKhongDauSTK":
                     {
@@ -298,6 +316,24 @@ namespace VietSoftHRM
                         panel2.Controls.Clear();
                         panel2.Controls.Add(tc);
                         tc.Dock = DockStyle.Fill;
+                        break;
+                    }
+                case "mnuHDThuViecAdd":
+                    {
+                        ucTaoHopDong ttn = new ucTaoHopDong();
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(ttn);
+                        Commons.Modules.ObjSystems.HideWaitForm();
+                        ttn.Dock = DockStyle.Fill;
+                        break;
+                    }
+                case "mnuDGThuViec":
+                    {
+                        ucDanhGiaThuViec ttn = new ucDanhGiaThuViec();
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(ttn);
+                        Commons.Modules.ObjSystems.HideWaitForm();
+                        ttn.Dock = DockStyle.Fill;
                         break;
                     }
                 case "mnuInNhanVien":

@@ -3187,3 +3187,5 @@ F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptQuyetDinhDieuChuyen_NB.r
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptQuyetDinhThoiViec_NB.resources
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptTheNhanVien.resources
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptThongBaoKetThucHDLD_NB.resources
+F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptThuMoi.resources
+F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptHopDongLaoDong_AllDM.resources

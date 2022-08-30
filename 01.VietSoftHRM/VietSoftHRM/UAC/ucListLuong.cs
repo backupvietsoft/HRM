@@ -248,6 +248,15 @@ namespace VietSoftHRM
                         ttn.Dock = DockStyle.Fill;
                         break;
                     }
+                case "mnuHoTroTienDo":
+                    {
+                        ucDSCNHoTroTienDo ttn = new ucDSCNHoTroTienDo();
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(ttn);
+                        Commons.Modules.ObjSystems.HideWaitForm();
+                        ttn.Dock = DockStyle.Fill;
+                        break;
+                    }
                 case "mnuCachTinhLuong":
                     {
                         ucCachTinhLuong ctl = new ucCachTinhLuong();

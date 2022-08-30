@@ -22,8 +22,8 @@ namespace Vs.Payroll
 {
     public partial class ucTinhLuong : DevExpress.XtraEditors.XtraUserControl
     {
-        
-        
+
+
         public static ucTinhLuong _instance;
 
         public static ucTinhLuong Instance
@@ -35,7 +35,7 @@ namespace Vs.Payroll
                 return _instance;
             }
         }
-        
+
         public ucTinhLuong()
         {
             InitializeComponent();
@@ -52,7 +52,7 @@ namespace Vs.Payroll
         {
             Commons.Modules.sPS = "0Load";
             LoadThang();
-            LoadGrdGTGC();
+            //LoadGrdGTGC();
             Commons.Modules.sPS = "";
         }
 
@@ -63,7 +63,7 @@ namespace Vs.Payroll
                 DataTable dt = new DataTable();
                 DateTime Tngay = Convert.ToDateTime(cboThang.EditValue);
                 DateTime Dngay = Convert.ToDateTime(cboThang.EditValue).AddMonths(1).AddDays(-1);
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetBangLuong", Commons.Modules.UserName, Commons.Modules.TypeLanguage, cboDonVi.EditValue, cboXiNghiep.EditValue, cboTo.EditValue,Tngay,Dngay));
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetBangLuong", Commons.Modules.UserName, Commons.Modules.TypeLanguage, cboDonVi.EditValue, cboXiNghiep.EditValue, cboTo.EditValue, Tngay, Dngay));
                 if (grdData.DataSource == null)
                 {
                     Commons.Modules.ObjSystems.MLoadXtraGrid(grdData, grvData, dt, false, false, false, true, true, this.Name);
@@ -156,10 +156,11 @@ namespace Vs.Payroll
             //    grvData.Columns[i].DisplayFormat.FormatType = FormatType.Numeric;
             //    grvData.Columns[i].DisplayFormat.FormatString = "N0";
             //}
-           
+
         }
 
         
+
 
         public void LoadThang()
         {
@@ -179,12 +180,12 @@ namespace Vs.Payroll
             catch (Exception ex)
             {
                 DateTime now = DateTime.Now;
-                
-                cboThang.Text =  now.ToString("MM/yyyy");
+
+                cboThang.Text = now.ToString("MM/yyyy");
             }
         }
 
-       
+
 
         private void windowsUIButtonPanel1_ButtonClick(object sender, DevExpress.XtraBars.Docking2010.ButtonEventArgs e)
         {
@@ -199,10 +200,10 @@ namespace Vs.Payroll
                     }
                 case "in":
                     {
-                       
+
                         break;
                     }
-               
+
                 case "tinhluong":
                     {
                         if (grvData.RowCount != 0)
@@ -214,9 +215,9 @@ namespace Vs.Payroll
                         DateTime Tngay = Convert.ToDateTime(cboThang.EditValue);
                         DateTime Dngay = Convert.ToDateTime(cboThang.EditValue).AddMonths(1).AddDays(-1);
                         DataTable dt = new DataTable();
-                        SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetTinhLuongThang", Commons.Modules.UserName, Commons.Modules.TypeLanguage, cboDonVi.EditValue, cboXiNghiep.EditValue, cboTo.EditValue, Convert.ToInt32(txtNgayCongLV.EditValue),  Convert.ToInt32(txtNgayCongChuan.EditValue), Tngay, Dngay);
+                        SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetTinhLuongThang", Commons.Modules.UserName, Commons.Modules.TypeLanguage, cboDonVi.EditValue, cboXiNghiep.EditValue, cboTo.EditValue, Convert.ToInt32(txtNgayCongLV.EditValue), Convert.ToInt32(txtNgayCongChuan.EditValue), Tngay, Dngay);
                         LoadGrdGTGC();
-                        
+
                         break;
                     }
                 case "thoat":
@@ -249,8 +250,8 @@ namespace Vs.Payroll
             try
             {
                 SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "XoaTinhLuongThang", cboDonVi.EditValue, cboXiNghiep.EditValue, cboTo.EditValue, Convert.ToDateTime(cboThang.EditValue));
-                grdData.DataSource= null;
-            
+                grdData.DataSource = null;
+
             }
             catch
             {
@@ -286,12 +287,12 @@ namespace Vs.Payroll
         }
 
         private void grvData_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
-            {
+        {
             GridView view = sender as GridView;
-          
+
         }
 
-        
+
         private void grvNgay_RowCellClick(object sender, RowCellClickEventArgs e)
         {
             try
@@ -301,7 +302,7 @@ namespace Vs.Payroll
             }
             catch { }
             cboThang.ClosePopup();
-            
+
         }
 
         private void cboNgay_EditValueChanged(object sender, EventArgs e)

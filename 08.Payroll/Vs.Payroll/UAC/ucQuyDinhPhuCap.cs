@@ -125,7 +125,7 @@ namespace Vs.Payroll
             try
             {
                 DataTable dtthang = new DataTable();
-                string sSql = "SELECT disTINCT SUBSTRING(CONVERT(VARCHAR(10),NGAY_AD,103),4,2) as M, RIGHT(CONVERT(VARCHAR(10),NGAY_AD,103),4) AS Y ,RIGHT(CONVERT(VARCHAR(10),NGAY_AD,103),7) AS THANG FROM dbo.QUY_DINH_TIEN_PC ORDER BY Y DESC , M DESC";
+                string sSql = "SELECT disTINCT SUBSTRING(CONVERT(VARCHAR(10),THANG,103),4,2) as M, RIGHT(CONVERT(VARCHAR(10),THANG,103),4) AS Y ,RIGHT(CONVERT(VARCHAR(10),THANG,103),7) AS THANG FROM dbo.MUC_THUONG_CHUYEN_CAN ORDER BY Y DESC , M DESC";
                 dtthang.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSql));
                 Commons.Modules.ObjSystems.MLoadXtraGrid(grdThang, grvThang, dtthang, false, true, true, true, true, this.Name);
                 grvThang.Columns["M"].Visible = false;

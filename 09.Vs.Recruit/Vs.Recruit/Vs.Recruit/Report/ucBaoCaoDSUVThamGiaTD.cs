@@ -52,6 +52,11 @@ namespace Vs.Recruit
                                     BaoCaoSoSanh(5);
                                     break;
                                 }
+                            case 4:
+                                {
+                                    DSUngVien(4);
+                                    break;
+                                }
                             default:
                                 {
                                     break;
@@ -73,6 +78,11 @@ namespace Vs.Recruit
             dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT ID_YCTD,MA_YCTD FROM dbo.YEU_CAU_TUYEN_DUNG  ORDER BY MA_YCTD"));
             Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboYeuCauTD, Commons.Modules.ObjSystems.DataYeuCauTD(true, -1), "ID_YCTD", "MA_YCTD", "MA_YCTD");
             Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboTinhTrangYeuCau, Commons.Modules.ObjSystems.DataTinhTrangYC(false), "ID_TTYC", "Ten_TTYC", "Ten_TTYC");
+            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_NTD, Commons.Modules.ObjSystems.DataNguonTD(true), "ID_NTD", "TEN_NTD", "TEN_NTD");
+
+            DataTable dt1 = new DataTable();
+            dt1.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComBoTTTD", Commons.Modules.TypeLanguage));
+            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboTinhTrang, dt1, "ID_TT_TD", "TEN_TT", "TEN_TT");
             cboTinhTrangYeuCau.EditValue = 1;
             //Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboViTriTD, Commons.Modules.ObjSystems.DataViTri(Convert.ToInt64(cboViTriTD.EditValue)), "ID_YCTD", "MA_YCTD", "MA_YCTD");
 
@@ -425,7 +435,7 @@ namespace Vs.Recruit
                 row2_TieuDe_BaoCao.NumberFormat = "@";
                 row2_TieuDe_BaoCao.Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
                 row2_TieuDe_BaoCao.Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
-                row2_TieuDe_BaoCao.Value2 = "DANH SÁCH ỨNG VIÊN THAM GIA TUYỂN DỤNG";
+                row2_TieuDe_BaoCao.Value2 = "DANH SÁCH ỨNG VIÊN " + cboTinhTrang.Text.ToUpper();
 
                 Range row4_Sub_TieuDe_BaoCao = oSheet.get_Range("A3", lastColumn + "3"); //A3 - V21
                 row4_Sub_TieuDe_BaoCao.Merge();
@@ -886,12 +896,13 @@ namespace Vs.Recruit
                 cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
                 cmd.Parameters.Add("@TNgay", SqlDbType.DateTime).Value = Convert.ToDateTime(dTuNgay.EditValue);
                 cmd.Parameters.Add("@DNgay", SqlDbType.DateTime).Value = Convert.ToDateTime(dDenNgay.EditValue);
-                cmd.Parameters.Add("@ID_YCTD", SqlDbType.BigInt).Value = Convert.ToInt64(cboYeuCauTD.EditValue);
                 cmd.Parameters.Add("@ID_VTTD", SqlDbType.BigInt).Value = Convert.ToInt64(cboViTriTD.EditValue);
-                cmd.Parameters.Add("@ID_TTYC", SqlDbType.BigInt).Value = Convert.ToInt64(cboTinhTrangYeuCau.EditValue);
                 cmd.Parameters.Add("@LOAI_BC", SqlDbType.Int).Value = LoaiBaoCao;
+                cmd.Parameters.Add("@ID_NTD", SqlDbType.BigInt).Value = Convert.ToInt64(cboID_NTD.EditValue);
+                cmd.Parameters.Add("@TINH_TRANG", SqlDbType.Int).Value = Convert.ToInt32(cboTinhTrang.EditValue);
 
 
+                
                 cmd.CommandType = CommandType.StoredProcedure;
                 System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
 
@@ -1338,7 +1349,7 @@ namespace Vs.Recruit
                 for (int i = 0; i < rowCnt - 5; i++)
                 {
                     formatRange = oSheet.get_Range("J" + cotJ.ToString() + "");
-                    formatRange.Value = "=IFERROR(I" + cotJ+"/H"+ cotJ + ",0)";
+                    formatRange.Value = "=IFERROR(I" + cotJ + "/H" + cotJ + ",0)";
                     cotJ++;
                 }
                 //rowCnt = keepRowCnt + 2;
@@ -1544,6 +1555,29 @@ namespace Vs.Recruit
             int t = DateTime.DaysInMonth(dTuNgay.DateTime.Year, dTuNgay.DateTime.Month);
             DateTime secondDateTime = new DateTime(dTuNgay.DateTime.Year, Convert.ToInt32(dTuNgay.DateTime.Month), t);
             dDenNgay.EditValue = secondDateTime;
+        }
+
+        private void radioGroup1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (radioGroup1.SelectedIndex)
+            {
+                case 4:
+                    {
+                        lblTEN_NTD.Visible = true;
+                        cboID_NTD.Visible = true;
+                        lblTinhTrang.Visible = true;
+                        cboTinhTrang.Visible = true;
+                        break;
+                    }
+                default:
+                    {
+                        lblTEN_NTD.Visible = false;
+                        cboID_NTD.Visible = false;
+                        lblTinhTrang.Visible = false;
+                        cboTinhTrang.Visible = false;
+                        break;
+                    }
+            }
         }
     }
 }

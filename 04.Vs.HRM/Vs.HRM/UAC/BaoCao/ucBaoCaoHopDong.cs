@@ -461,7 +461,7 @@ namespace Vs.HRM
                 Excel._Worksheet oSheet;
 
                 oXL = new Excel.Application();
-                oXL.Visible = false;
+                oXL.Visible = true;
 
                 oWB = (Excel._Workbook)(oXL.Workbooks.Add(Missing.Value));
                 oSheet = (Excel._Worksheet)oWB.ActiveSheet;
@@ -727,6 +727,29 @@ namespace Vs.HRM
                 ////Kẻ khung toàn bộ
 
                 BorderAround(oSheet.get_Range("A5", lastColumn + rowCnt.ToString()));
+
+                rowCnt = rowCnt + 2;
+                formatRange = oSheet.get_Range("H" + rowCnt + "", "I" + rowCnt);
+                formatRange.Merge();
+                formatRange.Font.Size = fontSizeNoiDung;
+                formatRange.Font.Name = fontName;
+                formatRange.Value2 = dtBCPhep.Rows[0]["CHUC_VU"].ToString();
+                formatRange.Cells.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
+                formatRange.Cells.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
+                formatRange.WrapText = false;
+
+
+                rowCnt = rowCnt + 5;
+                formatRange = oSheet.get_Range("H" + rowCnt + "", "I" + rowCnt);
+                formatRange.Merge();
+                formatRange.Font.Size = fontSizeNoiDung;
+                formatRange.Font.Name = fontName;
+                formatRange.Font.Bold = true;
+                formatRange.Value2 = dtBCPhep.Rows[0]["NK"].ToString();
+                formatRange.Cells.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
+                formatRange.Cells.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
+                formatRange.WrapText = false;
+
                 oXL.Visible = true;
                 oXL.UserControl = true;
                 oWB.SaveAs(SaveExcelFile,

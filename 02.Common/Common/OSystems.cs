@@ -119,7 +119,6 @@ namespace Commons
             arr = FILE_NAME.Split('.');
             return "." + arr[arr.Length - 1];
         }
-
         public string STTFileCungThuMuc(string sThuMuc, string sFile)
         {
             string TenFile = sFile;
@@ -189,6 +188,23 @@ namespace Commons
                 catch (Exception ex)
                 {
                 }
+            }
+        }
+
+        public DateTime ConvertDateTime(string sDate)
+        {
+            System.Globalization.CultureInfo cultures = new System.Globalization.CultureInfo("en-US");
+            DateTime ngay;
+            try
+            {
+                ngay = DateTime.ParseExact(sDate, "dd/MM/yyyy", cultures);
+
+                return ngay;
+            }
+            catch
+            {
+                ngay = DateTime.ParseExact("01/" + sDate, "dd/MM/yyyy", cultures);
+                return ngay;
             }
         }
 
@@ -1827,7 +1843,7 @@ namespace Commons
                 try
                 {
                     sText = XtraInputBox.Show(Ctl.Text, "Sửa ngôn ngữ", "");
-                    if (sText == "")
+                    if (sText == "" || sText == null)
                         return;
                     else
                         CapNhapNN(sName, Ctl.Name.ToUpper().Replace("ItemFor".ToUpper(), ""), sText, false);
@@ -1907,7 +1923,7 @@ namespace Commons
                 try
                 {
                     sText = XtraInputBox.Show(Ctl.Text, "Sửa ngôn ngữ", "");
-                    if (sText == "")
+                    if (sText == "" || sText == null)
                         return;
                     else if (sText == "Windows.Forms.DialogResult.Retry")
                     {
@@ -4606,7 +4622,7 @@ namespace Commons
             return dt;
         }
 
-        public DataTable DataViTri(Int64 iID_YCTD,bool ColAll)
+        public DataTable DataViTri(Int64 iID_YCTD, bool ColAll)
         {
             //ID_VTTD,TEN_VTTD
             DataTable dt = new DataTable();

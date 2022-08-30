@@ -86,8 +86,8 @@ namespace VietSoftHRM
                 }
                 catch
                 {
-                    if (Commons.Modules.iLOAI_CN == 2)
-                        Commons.Modules.iLOAI_CN = 0;
+                    //if (Commons.Modules.iLOAI_CN == 2)
+                    //    Commons.Modules.iLOAI_CN = 0;
                 }
             }
             catch

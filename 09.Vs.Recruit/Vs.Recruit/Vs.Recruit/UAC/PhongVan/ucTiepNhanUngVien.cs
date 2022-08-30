@@ -12,8 +12,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Vs.Report;
 
-namespace Vs.Recruit.UAC
+namespace Vs.Recruit
 {
     public partial class ucTiepNhanUngVien : DevExpress.XtraEditors.XtraUserControl
     {
@@ -210,11 +211,9 @@ namespace Vs.Recruit.UAC
             btnALL.Buttons[0].Properties.Visible = visible;
             btnALL.Buttons[1].Properties.Visible = visible;
             btnALL.Buttons[2].Properties.Visible = visible;
-            btnALL.Buttons[3].Properties.Visible = visible;
-            btnALL.Buttons[4].Properties.Visible = visible;
-            btnALL.Buttons[5].Properties.Visible = !visible;
-            btnALL.Buttons[6].Properties.Visible = !visible;
-            btnALL.Buttons[7].Properties.Visible = visible;
+            btnALL.Buttons[3].Properties.Visible = !visible;
+            btnALL.Buttons[4].Properties.Visible = !visible;
+            btnALL.Buttons[5].Properties.Visible = visible;
 
             grvDSUngVien.OptionsBehavior.Editable = !visible;
             grvNoiDung.OptionsBehavior.Editable = !visible;
@@ -229,14 +228,6 @@ namespace Vs.Recruit.UAC
                 XtraUserControl ctl = new XtraUserControl();
                 switch (btn.Tag.ToString())
                 {
-                    case "inthe":
-                        {
-                            break;
-                        }
-                    case "chuyenDuLieu":
-                        {
-                            break;
-                        }
                     case "them":
                         {
                             enabel(false);
@@ -246,6 +237,41 @@ namespace Vs.Recruit.UAC
                         {
                             enabel(false);
                             Commons.Modules.ObjSystems.AddnewRow(grvNoiDung, true);
+                            break;
+                        }
+                    case "Ingiayhen":
+                        {
+                            if (grvDSUngVien.RowCount == 0) return;
+                            frmViewReport frm = new frmViewReport();
+                            System.Data.SqlClient.SqlConnection conn;
+                            DataTable dt = new DataTable();
+                            frm.rpt = new rptGiayHenDiLam();
+                            try
+                            {
+                                conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                                conn.Open();
+
+                                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptGiayHenDiLam", conn);
+                                cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                                cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                                cmd.Parameters.Add("@ID_PV", SqlDbType.Int).Value = Convert.ToInt64(cboID_PV.EditValue);
+                                cmd.Parameters.Add("@TNgay", SqlDbType.DateTime).Value = Convert.ToDateTime(datTNgay.EditValue);
+                                cmd.Parameters.Add("@DNgay", SqlDbType.DateTime).Value = Convert.ToDateTime(datDNgay.EditValue);
+                                cmd.CommandType = CommandType.StoredProcedure;
+                                System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+                                DataSet ds = new DataSet();
+                                adp.Fill(ds);
+                                dt = new DataTable();
+                                dt = ds.Tables[0].Copy();
+                                dt.TableName = "DATA";
+                                frm.AddDataSource(dt);
+
+                            }
+                            catch
+                            {
+                            }
+
+                            frm.ShowDialog();
                             break;
                         }
                     case "xoa":

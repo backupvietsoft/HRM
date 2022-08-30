@@ -217,7 +217,6 @@
             this.cboTinhTrang.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cboTinhTrang.Properties.NullText = "";
-            this.cboTinhTrang.Properties.ReadOnly = true;
             this.cboTinhTrang.Size = new System.Drawing.Size(121, 24);
             this.cboTinhTrang.StyleController = this.dataLayoutControl1;
             this.cboTinhTrang.TabIndex = 56;

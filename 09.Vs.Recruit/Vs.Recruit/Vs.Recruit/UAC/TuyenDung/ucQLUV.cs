@@ -284,6 +284,22 @@ namespace Vs.Recruit
             LoadUNG_VIEN(-1);
         }
 
+        private void grdUngVien_ProcessGridKey(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Delete)
+            {
+                if (grvUngVien.RowCount == 0)
+                {
+                    XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgChonDongCanXuLy"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+                if (DeleteData())
+                {
+                    LoadUNG_VIEN(-1);
+                }
+            }
+        }
+
         private void grvUngVien_DoubleClick(object sender, EventArgs e)
         {
             try
@@ -310,22 +326,6 @@ namespace Vs.Recruit
             }, 100);
             thread.Start();
             accorMenuleft.Visible = false;
-        }
-
-        private void grdUngVien_ProcessGridKey(object sender, KeyEventArgs e)
-        {
-            if (e.KeyData == Keys.Delete)
-            {
-                if (grvUngVien.RowCount == 0)
-                {
-                    XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgChonDongCanXuLy"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return;
-                }
-                if (DeleteData())
-                {
-                    LoadUNG_VIEN(-1);
-                }
-            }
         }
     }
 }

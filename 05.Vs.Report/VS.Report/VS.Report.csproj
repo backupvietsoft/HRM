@@ -522,6 +522,12 @@
     <Compile Include="NhanSu\rptHopDongLaoDongThuViec_SB.Designer.cs">
       <DependentUpon>rptHopDongLaoDongThuViec_SB.cs</DependentUpon>
     </Compile>
+    <Compile Include="NhanSu\rptHopDongLaoDong_AllDM.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptHopDongLaoDong_AllDM.Designer.cs">
+      <DependentUpon>rptHopDongLaoDong_AllDM.cs</DependentUpon>
+    </Compile>
     <Compile Include="NhanSu\rptHopDongLaoDong_DM.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -821,6 +827,12 @@
     </Compile>
     <Compile Include="NhanSu\rptThongTinBaoMat.Designer.cs">
       <DependentUpon>rptThongTinBaoMat.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\rptThuMoi.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptThuMoi.designer.cs">
+      <DependentUpon>rptThuMoi.cs</DependentUpon>
     </Compile>
     <Compile Include="NhanSu\rptToKhaiBaoHiemXaHoi.cs">
       <SubType>Component</SubType>
@@ -1178,6 +1190,9 @@
     <EmbeddedResource Include="NhanSu\rptHopDongLaoDongThuViec_SB.resx">
       <DependentUpon>rptHopDongLaoDongThuViec_SB.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\rptHopDongLaoDong_AllDM.resx">
+      <DependentUpon>rptHopDongLaoDong_AllDM.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="NhanSu\rptHopDongLaoDong_DM.resx">
       <DependentUpon>rptHopDongLaoDong_DM.cs</DependentUpon>
     </EmbeddedResource>
@@ -1330,6 +1345,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="NhanSu\rptThongTinBaoMat.resx">
       <DependentUpon>rptThongTinBaoMat.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\rptThuMoi.resx">
+      <DependentUpon>rptThuMoi.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NhanSu\rptToKhaiBaoHiemXaHoi.resx">
       <DependentUpon>rptToKhaiBaoHiemXaHoi.cs</DependentUpon>

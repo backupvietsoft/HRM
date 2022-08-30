@@ -327,6 +327,12 @@
     <Compile Include="UAC\CongNhan\ctCongNhan\frmInLyLichCN.Designer.cs">
       <DependentUpon>frmInLyLichCN.cs</DependentUpon>
     </Compile>
+    <Compile Include="UAC\CongNhan\ctCongNhan\frmInThuMoi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UAC\CongNhan\ctCongNhan\frmInThuMoi.Designer.cs">
+      <DependentUpon>frmInThuMoi.cs</DependentUpon>
+    </Compile>
     <Compile Include="UAC\CongNhan\ctCongNhan\frmInQuyetDinhThoiViec.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -442,6 +448,18 @@
     </Compile>
     <Compile Include="UAC\CongNhan\ctCongNhan\frmInQTCT.Designer.cs">
       <DependentUpon>frmInQTCT.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UAC\CongNhan\ucDanhGiaThuViec.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UAC\CongNhan\ucDanhGiaThuViec.Designer.cs">
+      <DependentUpon>ucDanhGiaThuViec.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UAC\CongNhan\ucTaoHopDong.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UAC\CongNhan\ucTaoHopDong.Designer.cs">
+      <DependentUpon>ucTaoHopDong.cs</DependentUpon>
     </Compile>
     <Compile Include="UAC\CongNhan\ucInNhanVien.cs">
       <SubType>UserControl</SubType>
@@ -675,6 +693,9 @@
     <EmbeddedResource Include="UAC\CongNhan\ctCongNhan\frmInLyLichCN.resx">
       <DependentUpon>frmInLyLichCN.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UAC\CongNhan\ctCongNhan\frmInThuMoi.resx">
+      <DependentUpon>frmInThuMoi.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UAC\CongNhan\ctCongNhan\frmInQuyetDinhThoiViec.resx">
       <DependentUpon>frmInQuyetDinhThoiViec.cs</DependentUpon>
     </EmbeddedResource>
@@ -741,6 +762,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UAC\CongNhan\ctCongNhan\frmInQTCT.resx">
       <DependentUpon>frmInQTCT.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UAC\CongNhan\ucDanhGiaThuViec.resx">
+      <DependentUpon>ucDanhGiaThuViec.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UAC\CongNhan\ucTaoHopDong.resx">
+      <DependentUpon>ucTaoHopDong.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UAC\CongNhan\ucInNhanVien.resx">
       <DependentUpon>ucInNhanVien.cs</DependentUpon>

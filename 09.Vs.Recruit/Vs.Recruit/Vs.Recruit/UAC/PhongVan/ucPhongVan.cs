@@ -299,6 +299,7 @@ namespace Vs.Recruit
             //chkKieuPV.Properties.ReadOnly = visible;
             txtThongTin.Properties.ReadOnly = visible;
             txtNDPV.Properties.ReadOnly = visible;
+            cboTinhTrang.Properties.ReadOnly = visible;
             //txtBuocPV.Properties.ReadOnly = visible;
 
             rdoDK.Properties.ReadOnly = !visible;

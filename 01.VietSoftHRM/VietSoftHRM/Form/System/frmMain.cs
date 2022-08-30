@@ -47,7 +47,7 @@ namespace VietSoftHRM
                 DataTable dt = new DataTable();
                 dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT ISNULL(LOAI_LINK,1) AS LINK,CON_NECT,HIDE_MENU FROM dbo.THONG_TIN_CHUNG"));
                 Commons.Modules.iLink = Convert.ToInt32(dt.Rows[0]["LINK"]);
-                Commons.Modules.connect = dt.Rows[0]["CON_NECT"].ToString();
+                //Commons.Modules.connect = dt.Rows[0]["CON_NECT"].ToString();
                 Commons.Modules.sHideMenu = Commons.Modules.ObjSystems.Decrypt(dt.Rows[0]["HIDE_MENU"].ToString(), true);
             }
             catch
@@ -520,7 +520,7 @@ namespace VietSoftHRM
                                 this.Close();
                             }));
                         }
-                    }, 1000);
+                    }, 5000);
                     thread.Start();
                 }
             }

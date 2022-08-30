@@ -169,6 +169,12 @@
     <Compile Include="Form\frmInBaoCaoPCD.Designer.cs">
       <DependentUpon>frmInBaoCaoPCD.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form\frmInBaoCaoHTTienDo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\frmInBaoCaoHTTienDo.Designer.cs">
+      <DependentUpon>frmInBaoCaoHTTienDo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form\frmLayDuLieuLuongT13.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -484,6 +490,12 @@
     <Compile Include="UAC\ucDKThoiGianKhongLamSP.Designer.cs">
       <DependentUpon>ucDKThoiGianKhongLamSP.cs</DependentUpon>
     </Compile>
+    <Compile Include="UAC\ucDSCNHoTroTienDo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UAC\ucDSCNHoTroTienDo.Designer.cs">
+      <DependentUpon>ucDSCNHoTroTienDo.cs</DependentUpon>
+    </Compile>
     <Compile Include="UAC\ucNangSuatChuyen.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -594,6 +606,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form\frmInBaoCaoPCD.resx">
       <DependentUpon>frmInBaoCaoPCD.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\frmInBaoCaoHTTienDo.resx">
+      <DependentUpon>frmInBaoCaoHTTienDo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\frmLayDuLieuLuongT13.resx">
       <DependentUpon>frmLayDuLieuLuongT13.cs</DependentUpon>
@@ -761,6 +776,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UAC\ucDKThoiGianKhongLamSP.resx">
       <DependentUpon>ucDKThoiGianKhongLamSP.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UAC\ucDSCNHoTroTienDo.resx">
+      <DependentUpon>ucDSCNHoTroTienDo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UAC\ucNangSuatChuyen.resx">
       <DependentUpon>ucNangSuatChuyen.cs</DependentUpon>

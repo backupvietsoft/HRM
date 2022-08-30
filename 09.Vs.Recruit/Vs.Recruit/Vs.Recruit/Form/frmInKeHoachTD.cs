@@ -33,8 +33,11 @@ namespace Vs.Recruit
             {
                 case "In":
                     {
-                        
-                        InKeHoachTD(Datain());
+                        try
+                        {
+                            InKeHoachTD(Datain());
+                        }
+                        catch { }
                         break;
                     }
                 case "thoat":
@@ -210,23 +213,23 @@ namespace Vs.Recruit
                 title.Font.Bold = true;
                 title.WrapText = true;
 
-              
+
 
                 //insert cottong
                 int j = 2;
-                for (int i = COT; i <= TCot+ 1; i++)
+                for (int i = COT; i <= TCot + 1; i++)
                 {
                     if ((i - COT) % 8 == 0 && i != COT)
                     {
-                        Commons.Modules.MExcel.ThemCot(excelWorkSheet, Microsoft.Office.Interop.Excel.XlInsertShiftDirection.xlShiftToRight, 1, i -(j-2));
+                        Commons.Modules.MExcel.ThemCot(excelWorkSheet, Microsoft.Office.Interop.Excel.XlInsertShiftDirection.xlShiftToRight, 1, i - (j - 2));
                         title = excelWorkSheet.Cells[DONG, i - (j - 2)];
                         title.Value2 = "Total Actual";
-                        title.WrapText = true;  
+                        title.WrapText = true;
 
-                        title1 = Commons.Modules.MExcel.GetRange(excelWorkSheet, DONG - 1, i -j, DONG - 1, i -j);
-                        title = excelWorkSheet.Cells[DONG - 1,i - (j - 2)];
+                        title1 = Commons.Modules.MExcel.GetRange(excelWorkSheet, DONG - 1, i - j, DONG - 1, i - j);
+                        title = excelWorkSheet.Cells[DONG - 1, i - (j - 2)];
                         string s = title1.Value;
-                        title.Value2 = "Tháng " + s.Substring(s.Length -3,2);
+                        title.Value2 = "Tháng " + s.Substring(s.Length - 3, 2);
                         title.Font.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.Red);
 
 

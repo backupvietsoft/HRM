@@ -160,8 +160,12 @@ namespace VietSoftHRM
             }
 
             //kiem tra coi có user tồn tại đúng IP máy hay chua?
-            sSql = "SELECT USER_NAME FROM dbo.LOGIN WHERE USER_LOGIN = N'" + txt_user.Text + "'  ";
-            sSql = Convert.ToString(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, sSql));
+            try
+            {
+                sSql = "SELECT USER_NAME FROM dbo.LOGIN WHERE USER_LOGIN = N'" + txt_user.Text + "'  ";
+                sSql = Convert.ToString(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, sSql));
+            }
+            catch { }
             if (sSql == "")
                 return true;
             else
@@ -184,7 +188,7 @@ namespace VietSoftHRM
 
             }
 
-            
+
         }
         private void SaveLogin()
         {

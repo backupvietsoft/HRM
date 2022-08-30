@@ -153,14 +153,14 @@
             // 
             // cboID_VTTD
             // 
-            this.cboID_VTTD.Location = new System.Drawing.Point(852, 7);
+            this.cboID_VTTD.Location = new System.Drawing.Point(853, 7);
             this.cboID_VTTD.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cboID_VTTD.Name = "cboID_VTTD";
             this.cboID_VTTD.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cboID_VTTD.Properties.NullText = "";
             this.cboID_VTTD.Properties.PopupView = this.gridView11;
-            this.cboID_VTTD.Size = new System.Drawing.Size(115, 24);
+            this.cboID_VTTD.Size = new System.Drawing.Size(114, 24);
             this.cboID_VTTD.StyleController = this.layoutControl1;
             this.cboID_VTTD.TabIndex = 18;
             this.cboID_VTTD.EditValueChanged += new System.EventHandler(this.cboDA_TUYEN_DUNG_EditValueChanged);
@@ -177,14 +177,14 @@
             // cboID_KHPV
             // 
             this.cboID_KHPV.EditValue = "";
-            this.cboID_KHPV.Location = new System.Drawing.Point(612, 7);
+            this.cboID_KHPV.Location = new System.Drawing.Point(613, 7);
             this.cboID_KHPV.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cboID_KHPV.Name = "cboID_KHPV";
             this.cboID_KHPV.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cboID_KHPV.Properties.NullText = "";
             this.cboID_KHPV.Properties.PopupView = this.searchLookUpEdit2View;
-            this.cboID_KHPV.Size = new System.Drawing.Size(113, 24);
+            this.cboID_KHPV.Size = new System.Drawing.Size(112, 24);
             this.cboID_KHPV.StyleController = this.layoutControl1;
             this.cboID_KHPV.TabIndex = 19;
             this.cboID_KHPV.EditValueChanged += new System.EventHandler(this.cboDA_TUYEN_DUNG_EditValueChanged);
@@ -201,13 +201,13 @@
             // cboDA_TUYEN_DUNG
             // 
             this.cboDA_TUYEN_DUNG.EditValue = false;
-            this.cboDA_TUYEN_DUNG.Location = new System.Drawing.Point(130, 7);
+            this.cboDA_TUYEN_DUNG.Location = new System.Drawing.Point(131, 7);
             this.cboDA_TUYEN_DUNG.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.cboDA_TUYEN_DUNG.Name = "cboDA_TUYEN_DUNG";
             this.cboDA_TUYEN_DUNG.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cboDA_TUYEN_DUNG.Properties.NullText = "";
-            this.cboDA_TUYEN_DUNG.Size = new System.Drawing.Size(113, 24);
+            this.cboDA_TUYEN_DUNG.Size = new System.Drawing.Size(112, 24);
             this.cboDA_TUYEN_DUNG.StyleController = this.layoutControl1;
             this.cboDA_TUYEN_DUNG.TabIndex = 11;
             this.cboDA_TUYEN_DUNG.EditValueChanged += new System.EventHandler(this.cboDA_TUYEN_DUNG_EditValueChanged);
@@ -215,14 +215,14 @@
             // cboYeuCauTD
             // 
             this.cboYeuCauTD.EditValue = "";
-            this.cboYeuCauTD.Location = new System.Drawing.Point(370, 7);
+            this.cboYeuCauTD.Location = new System.Drawing.Point(371, 7);
             this.cboYeuCauTD.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cboYeuCauTD.Name = "cboYeuCauTD";
             this.cboYeuCauTD.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cboYeuCauTD.Properties.NullText = "";
             this.cboYeuCauTD.Properties.PopupView = this.searchLookUpEdit2View1;
-            this.cboYeuCauTD.Size = new System.Drawing.Size(115, 24);
+            this.cboYeuCauTD.Size = new System.Drawing.Size(114, 24);
             this.cboYeuCauTD.StyleController = this.layoutControl1;
             this.cboYeuCauTD.TabIndex = 19;
             this.cboYeuCauTD.EditValueChanged += new System.EventHandler(this.cboDA_TUYEN_DUNG_EditValueChanged);

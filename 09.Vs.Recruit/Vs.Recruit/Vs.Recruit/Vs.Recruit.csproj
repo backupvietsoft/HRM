@@ -291,11 +291,23 @@
     <Compile Include="Form\frmDanhSachYCTD.Designer.cs">
       <DependentUpon>frmDanhSachYCTD.cs</DependentUpon>
     </Compile>
+    <Compile Include="Report\rptGiayHenDiLam.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\rptGiayHenDiLam.designer.cs">
+      <DependentUpon>rptGiayHenDiLam.cs</DependentUpon>
+    </Compile>
     <Compile Include="Report\rptPhieuPhongVanUngVien.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Report\rptPhieuPhongVanUngVien.designer.cs">
       <DependentUpon>rptPhieuPhongVanUngVien.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Report\rptTheNhanVien_DM.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\rptTheNhanVien_DM.Designer.cs">
+      <DependentUpon>rptTheNhanVien_DM.cs</DependentUpon>
     </Compile>
     <Compile Include="Report\rptThongBaoTuyenDung.cs">
       <SubType>Component</SubType>
@@ -338,6 +350,12 @@
     </Compile>
     <Compile Include="UAC\PhongVan\ucTHONG_BAO_TUYEN_DUNG.Designer.cs">
       <DependentUpon>ucTHONG_BAO_TUYEN_DUNG.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UAC\PhongVan\ucChuyenDuLieuNS.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UAC\PhongVan\ucChuyenDuLieuNS.Designer.cs">
+      <DependentUpon>ucChuyenDuLieuNS.cs</DependentUpon>
     </Compile>
     <Compile Include="UAC\PhongVan\ucTiepNhanUngVien.cs">
       <SubType>UserControl</SubType>
@@ -476,8 +494,14 @@
     <EmbeddedResource Include="Form\frmDanhSachYCTD.resx">
       <DependentUpon>frmDanhSachYCTD.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Report\rptGiayHenDiLam.resx">
+      <DependentUpon>rptGiayHenDiLam.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Report\rptPhieuPhongVanUngVien.resx">
       <DependentUpon>rptPhieuPhongVanUngVien.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\rptTheNhanVien_DM.resx">
+      <DependentUpon>rptTheNhanVien_DM.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\rptThongBaoTuyenDung.resx">
       <DependentUpon>rptThongBaoTuyenDung.cs</DependentUpon>
@@ -499,6 +523,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UAC\PhongVan\ucTHONG_BAO_TUYEN_DUNG.resx">
       <DependentUpon>ucTHONG_BAO_TUYEN_DUNG.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UAC\PhongVan\ucChuyenDuLieuNS.resx">
+      <DependentUpon>ucChuyenDuLieuNS.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UAC\PhongVan\ucTiepNhanUngVien.resx">
       <DependentUpon>ucTiepNhanUngVien.cs</DependentUpon>

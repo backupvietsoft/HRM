@@ -259,6 +259,7 @@ namespace Vs.Recruit
                         Commons.Modules.ObjSystems.XoaTable("sBTChonUV" + Commons.Modules.UserName);
                         Commons.Modules.ObjSystems.XoaTable("sBTUV" + Commons.Modules.UserName);
                         LoadgrdKHPV(iID_KHPV);
+                        radioGroup1_SelectedIndexChanged(null, null);
                         Commons.Modules.ObjSystems.DeleteAddRow(grvViTri);
                         enableButon(true);
                         break;
@@ -334,6 +335,7 @@ namespace Vs.Recruit
             datNgayPV.Properties.ReadOnly = visible;
             chkKieuPV.Properties.ReadOnly = visible;
             txtGhiChu.Properties.ReadOnly = visible;
+            cboTinhTrang.Properties.ReadOnly = visible;
 
             //cboTinhTrang.Properties.ReadOnly = visible;
 
@@ -587,7 +589,7 @@ namespace Vs.Recruit
         private void radioGroup1_SelectedIndexChanged(object sender, EventArgs e)
         {
             Commons.Modules.ObjSystems.RowFilter(grdKHPV, grvKHPV.Columns["TINH_TRANG"],(rdoDK.SelectedIndex + 1).ToString());
-
+            grvKHPV_FocusedRowChanged(null, null);
         }
     }
 }

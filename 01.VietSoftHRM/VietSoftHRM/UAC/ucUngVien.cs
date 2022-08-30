@@ -167,6 +167,14 @@ namespace VietSoftHRM
                         ns.Dock = DockStyle.Fill;
                         break;
                     }
+                case "mnuChuyenDLUV":
+                    {
+                        ucChuyenDuLieuNS ns = new ucChuyenDuLieuNS();
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(ns);
+                        ns.Dock = DockStyle.Fill;
+                        break;
+                    }
 
                 case "mnuKeHoachPV":
                     {
@@ -269,6 +277,14 @@ namespace VietSoftHRM
                 case "mnuDTDinhHuong":
                     {
                         ucDaoTaoDinhHuong ns = new ucDaoTaoDinhHuong();
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(ns);
+                        ns.Dock = DockStyle.Fill;
+                        break;
+                    }
+                case "mnuChuyenDLUV":
+                    {
+                        ucChuyenDuLieuNS ns = new ucChuyenDuLieuNS();
                         panel2.Controls.Clear();
                         panel2.Controls.Add(ns);
                         ns.Dock = DockStyle.Fill;

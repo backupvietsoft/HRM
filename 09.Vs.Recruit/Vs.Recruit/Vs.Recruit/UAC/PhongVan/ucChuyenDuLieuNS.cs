@@ -118,6 +118,7 @@ namespace Vs.Recruit
 
                 if (iAdd == 0)
                 {
+                    grvDSUngVien.Columns["ID_XN"].Visible = false;
                     grvDSUngVien.OptionsSelection.MultiSelect = false;
                     grvDSUngVien.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.RowSelect;
                 }
@@ -397,7 +398,7 @@ namespace Vs.Recruit
                             }
                             break;
                         }
-                    case "sua":
+                    case "themsua":
                         {
                             iAdd = 1;
                             LoadData();
@@ -432,8 +433,10 @@ namespace Vs.Recruit
                         }
                     case "khongghi":
                         {
+                            Commons.Modules.sLoad = "0Load";
                             iAdd = 0;
                             LoadData();
+                            Commons.Modules.sLoad = "";
                             grvDSUngVien_FocusedRowChanged(null, null);
                             enabel(true);
                             break;
@@ -563,7 +566,7 @@ namespace Vs.Recruit
         {
             try
             {
-
+                if (Commons.Modules.sLoad == "0Load") return;
                 //int ngay = 0;
                 DevExpress.XtraGrid.Views.Grid.GridView View = (DevExpress.XtraGrid.Views.Grid.GridView)sender;
 
@@ -580,24 +583,27 @@ namespace Vs.Recruit
                 {
                     flag = true;
                     e.Valid = false;
+                    XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgToKhongDuocTrong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                     View.SetColumnError(idTo, "Tổ không được bỏ trống"); return;
                 }
                 if (View.GetRowCellValue(e.RowHandle, MS_CN).ToString() == "")
                 {
                     flag = true;
                     e.Valid = false;
+                    XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgMSCNKhongDuocTrong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                     View.SetColumnError(MS_CN, "Mã công nhân không được bỏ trống"); return;
                 }
                 if (View.GetRowCellValue(e.RowHandle, MS_THE_CC).ToString() == "")
                 {
                     flag = true;
                     e.Valid = false;
+                    XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgMTCCKhongDuocTrong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                     View.SetColumnError(MS_THE_CC, "Mã số thẻ chấm công không được bỏ trống"); return;
                 }
 
                 string strSQL = "SELECT COUNT(*) FROM dbo.CONG_NHAN WHERE MS_CN = '" + View.GetRowCellValue(e.RowHandle, MS_CN).ToString().Trim() + "'";
-                int iSL = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr,CommandType.Text,strSQL));
-                if(iSL > 0)
+                int iSL = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, strSQL));
+                if (iSL > 0)
                 {
                     flag = true;
                     e.Valid = false;

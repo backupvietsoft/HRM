@@ -26,7 +26,11 @@ namespace Vs.HRM
             rdo_ChonBaoCao.SelectedIndex = 0;
             dNgayIn.EditValue = DateTime.Today;
             Commons.OSystems.SetDateEditFormat(dNgayIn);
-            if (Commons.Modules.ObjSystems.KyHieuDV_CN(Commons.Modules.iCongNhan) != "SB")
+            if (Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString() == "DM" || Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString() == "SB")
+            {
+                return;
+            }
+            else
             {
                 rdo_ChonBaoCao.Properties.Items.RemoveAt(1);
             }
@@ -273,6 +277,11 @@ namespace Vs.HRM
                                                 InQuyetDinhTuyenDung_SB();
                                                 break;
                                             }
+                                        case "DM":
+                                            {
+                                                InQuyetDinhBoNhiem_DM();
+                                                break;
+                                            }
                                         default:
                                             InQuyetDinhTuyenDung_SB();
                                             break;
@@ -328,6 +337,42 @@ namespace Vs.HRM
                         break;
                     }
             }
+        }
+        private void InQuyetDinhBoNhiem_DM()
+        {
+            try
+            {
+                System.Data.SqlClient.SqlConnection conn;
+                DataTable dt = new DataTable();
+                frmViewReport frm = new frmViewReport();
+                frm.rpt = new rptQuyetDinhBoNhiem_DM(dNgayIn.DateTime);
+
+                conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                conn.Open();
+
+                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptQuyetDinhBoNhiem_DM", conn);
+                cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                cmd.Parameters.Add("@ID_CN", SqlDbType.Int).Value = idCN;
+                cmd.Parameters.Add("@ID_SQD", SqlDbType.Int).Value = idCT;
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+                DataSet ds = new DataSet();
+                adp.Fill(ds);
+                dt = new DataTable();
+                dt = ds.Tables[0].Copy();
+                dt.TableName = "DA_TA";
+                frm.AddDataSource(dt);
+
+                //DataTable dt1 = new DataTable();
+                //dt1 = ds.Tables[1].Copy();
+                //dt1.TableName = "NOI_DUNG";
+                //frm.AddDataSource(dt1);
+
+                frm.ShowDialog();
+            }
+            catch { }
         }
     }
 }

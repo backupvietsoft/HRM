@@ -406,10 +406,15 @@ namespace Vs.Recruit
                     row1_TieuDe.Font.Size = fontSizeTieuDe;
                     row1_TieuDe.Font.Name = fontName;
                     row1_TieuDe.Font.Bold = true;
-                    row1_TieuDe.Value2 = "CÔNG TY CỔ PHẦN MAY DUY MINH";
+                    row1_TieuDe.Value2 = "BÁO CÁO ĐÀO TẠO ĐỊNH HƯỚNG THÁNG " + cboThang.Text;
                     row1_TieuDe.WrapText = false;
                     row1_TieuDe.Style.VerticalAlignment = Excel.XlHAlign.xlHAlignCenter;
 
+                    Range row2_TenCTY = oSheet.get_Range("A2","E2");
+                    row2_TenCTY.Merge();
+                    row2_TenCTY.Font.Size = fontSizeNoiDung;
+                    row2_TenCTY.Font.Name = fontName;
+                    row2_TenCTY.Value2 = "CÔNG TY CỔ PHẦN MAY DUY MINH";
 
                     Range row5_TieuDe_Format = oSheet.get_Range("A3", lastColumn + "4"); //27 + 31
                     row5_TieuDe_Format.Font.Size = fontSizeNoiDung;
@@ -560,7 +565,7 @@ namespace Vs.Recruit
                     formatRange.Font.Size = fontSizeNoiDung;
 
                     rowCnt++;
-                    formatRange = oSheet.get_Range("L"+rowCnt+"", "N" + rowCnt.ToString());
+                    formatRange = oSheet.get_Range("L" + rowCnt + "", "N" + rowCnt.ToString());
                     formatRange.Merge();
                     formatRange.Value = "Người đào tạo";
                     formatRange.Font.Name = fontName;

@@ -170,9 +170,8 @@ namespace Vs.Recruit
                 string lastColumn = string.Empty;
                 lastColumn = CharacterIncrement(dtBCThang.Columns.Count - 2);
 
-                Range row1_TieuDe = oSheet.get_Range("A1", "G1");
+                Range row1_TieuDe = oSheet.get_Range("A1", "E1");
                 row1_TieuDe.Merge();
-
                 row1_TieuDe.Font.Bold = true;
                 row1_TieuDe.Value2 = "CÔNG TY CỔ PHẦN MAY DUY MINH";
                 row1_TieuDe.Font.Size = fontSizeTieuDe;
@@ -181,7 +180,7 @@ namespace Vs.Recruit
                 row1_TieuDe.Cells.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
                 row1_TieuDe.Cells.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
 
-                Range row2_TieuDe = oSheet.get_Range("A2", "G3");
+                Range row2_TieuDe = oSheet.get_Range("A2", "E3");
                 row2_TieuDe.Merge();
                 row2_TieuDe.Font.Size = fontSizeTieuDe;
                 row2_TieuDe.Font.Name = fontName;
@@ -193,7 +192,7 @@ namespace Vs.Recruit
 
 
 
-                Range row5_TieuDe_Format = oSheet.get_Range("A4", lastColumn + "4"); //27 + 31
+                Range row5_TieuDe_Format = oSheet.get_Range("A4", "E4"); //27 + 31
                 row5_TieuDe_Format.Font.Size = fontSizeNoiDung;
                 row5_TieuDe_Format.Font.Name = fontName;
                 row5_TieuDe_Format.Font.Bold = true;
@@ -212,27 +211,16 @@ namespace Vs.Recruit
                 row5_TieuDe_MaSo.Font.Color = Color.FromArgb(255, 0, 0);
 
                 Range row6_TieuDe_MaSo = oSheet.get_Range("C4");
-                row6_TieuDe_MaSo.Value2 = "Số lượng chuyền";
+                row6_TieuDe_MaSo.Value2 = "Định biên";
                 row6_TieuDe_MaSo.ColumnWidth = 12;
 
                 Range row5_TieuDe_HoTen = oSheet.get_Range("D4");
-                row5_TieuDe_HoTen.Value2 = "Định biên";
+                row5_TieuDe_HoTen.Value2 = "Số lượng hiện tại";
                 row5_TieuDe_HoTen.ColumnWidth = 15;
 
                 Range row6_TieuDe_HoTen = oSheet.get_Range("E4");
-                row6_TieuDe_HoTen.Value2 = "Tổng số";
+                row6_TieuDe_HoTen.Value2 = "Thừa thiếu";
                 row6_TieuDe_HoTen.ColumnWidth = 15;
-
-
-
-                Range row5_TieuDe_XiNgiep = oSheet.get_Range("F4");
-                row5_TieuDe_XiNgiep.Value2 = "Số lượng hiện tại";
-                row5_TieuDe_XiNgiep.ColumnWidth = 15;
-
-
-                Range row5_TieuDe_To = oSheet.get_Range("G4");
-                row5_TieuDe_To.Value2 = "Thừa thiếu";
-                row5_TieuDe_To.ColumnWidth = 15;
 
                 int col = 0;
                 int rowCnt = 0;
@@ -289,14 +277,14 @@ namespace Vs.Recruit
                     oSheet.get_Range("A" + (rowBD + 1) + "", lastColumn + (rowCnt + 1).ToString()).Value2 = rowData;
 
 
-                    for (int colSUM = 3; colSUM < dtBCThang.Columns.Count; colSUM++)
+                    for (int colSUM = 3; colSUM < dtBCThang.Columns.Count - 1; colSUM++)
                     {
                         oSheet.Cells[rowBD, colSUM] = "=SUM(" + CellAddress(oSheet, rowBD + 1, colSUM) + ":" + CellAddress(oSheet, (rowBD + current_dr), colSUM) + ")";
                     }
 
                     for (int rowG = rowBD; rowG < (rowBD + current_dr + 1); rowG++)
                     {
-                        oSheet.Cells[rowG, 7] = "=E" + rowG + "-F" + rowG + "";
+                        oSheet.Cells[rowG, 5] = "=C" + rowG + "-D" + rowG + "";
                     }
                     dr_Cu = current_dr;
                     keepRowCnt = rowCnt;

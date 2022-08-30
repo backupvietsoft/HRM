@@ -21,14 +21,13 @@ public class ConnectToSharedFolder : IDisposable
             ? credentials.UserName
             : string.Format(@"{0}\{1}", credentials.Domain, credentials.UserName);
 
-        var result = WNetAddConnection2(
-            netResource,
-            credentials.Password,
-            userName,
-            0);
+        //var result = WNetAddConnection2(
+        //    netResource,
+        //    credentials.Password,
+        //    userName,
+        //    0);
 
-         //result = 1;
-
+        var result = 1;
         if (result != 0)
         {
             throw new Win32Exception(result, "Error connecting to remote share");

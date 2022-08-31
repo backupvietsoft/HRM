@@ -58,6 +58,7 @@
             this.xrLabel12 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel9 = new DevExpress.XtraReports.UI.XRLabel();
             this.GroupHeader1 = new DevExpress.XtraReports.UI.GroupHeaderBand();
+            this.xrLabel13 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel22 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel26 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel70 = new DevExpress.XtraReports.UI.XRLabel();
@@ -66,7 +67,6 @@
             this.xrLabel8 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel7 = new DevExpress.XtraReports.UI.XRLabel();
             this.lblTieuDe = new DevExpress.XtraReports.UI.XRLabel();
-            this.xrLabel13 = new DevExpress.XtraReports.UI.XRLabel();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             // 
             // TopMargin
@@ -186,7 +186,6 @@
             // xrLabel46
             // 
             this.xrLabel46.AllowMarkupText = true;
-            this.xrLabel46.AutoWidth = true;
             this.xrLabel46.Dpi = 254F;
             this.xrLabel46.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[DATA].[TEN_XN]")});
@@ -319,7 +318,6 @@
             // xrLabel39
             // 
             this.xrLabel39.AllowMarkupText = true;
-            this.xrLabel39.AutoWidth = true;
             this.xrLabel39.Dpi = 254F;
             this.xrLabel39.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[DATA].[NGAY_SINH]")});
@@ -560,6 +558,22 @@
             this.GroupHeader1.HeightF = 517.9687F;
             this.GroupHeader1.Name = "GroupHeader1";
             // 
+            // xrLabel13
+            // 
+            this.xrLabel13.AllowMarkupText = true;
+            this.xrLabel13.AutoWidth = true;
+            this.xrLabel13.Dpi = 254F;
+            this.xrLabel13.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.xrLabel13.LocationFloat = new DevExpress.Utils.PointFloat(0.005006155F, 58.42001F);
+            this.xrLabel13.Multiline = true;
+            this.xrLabel13.Name = "xrLabel13";
+            this.xrLabel13.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
+            this.xrLabel13.SizeF = new System.Drawing.SizeF(802.3659F, 69.99992F);
+            this.xrLabel13.StylePriority.UseFont = false;
+            this.xrLabel13.StylePriority.UseTextAlignment = false;
+            this.xrLabel13.Text = "--------------o0o--------------";
+            this.xrLabel13.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
+            // 
             // xrLabel22
             // 
             this.xrLabel22.AllowMarkupText = true;
@@ -660,7 +674,6 @@
             // xrLabel7
             // 
             this.xrLabel7.AllowMarkupText = true;
-            this.xrLabel7.AutoWidth = true;
             this.xrLabel7.Dpi = 254F;
             this.xrLabel7.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "\'Số (No) : \' + [DATA].[SO_QUYET_DINH] + \'-QĐ- DMT\'")});
@@ -688,22 +701,6 @@
             this.lblTieuDe.StylePriority.UseTextAlignment = false;
             this.lblTieuDe.Text = "QUYẾT ĐỊNH";
             this.lblTieuDe.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
-            // 
-            // xrLabel13
-            // 
-            this.xrLabel13.AllowMarkupText = true;
-            this.xrLabel13.AutoWidth = true;
-            this.xrLabel13.Dpi = 254F;
-            this.xrLabel13.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.xrLabel13.LocationFloat = new DevExpress.Utils.PointFloat(0.005006155F, 58.42001F);
-            this.xrLabel13.Multiline = true;
-            this.xrLabel13.Name = "xrLabel13";
-            this.xrLabel13.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
-            this.xrLabel13.SizeF = new System.Drawing.SizeF(802.3659F, 69.99992F);
-            this.xrLabel13.StylePriority.UseFont = false;
-            this.xrLabel13.StylePriority.UseTextAlignment = false;
-            this.xrLabel13.Text = "--------------o0o--------------";
-            this.xrLabel13.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
             // 
             // rptQuyetDinhChamDutHDLD_DM
             // 

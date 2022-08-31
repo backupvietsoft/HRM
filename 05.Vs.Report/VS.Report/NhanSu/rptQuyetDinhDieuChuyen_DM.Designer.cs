@@ -932,7 +932,6 @@
             // xrLabel7
             // 
             this.xrLabel7.AllowMarkupText = true;
-            this.xrLabel7.AutoWidth = true;
             this.xrLabel7.Dpi = 254F;
             this.xrLabel7.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "\'Số (No) : \' + [DATA].[SO_QUYET_DINH]")});

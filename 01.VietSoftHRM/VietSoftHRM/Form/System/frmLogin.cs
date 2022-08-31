@@ -103,8 +103,11 @@ namespace VietSoftHRM
                     {
                         Commons.Modules.chamCongK = true;
                     }
+                    string sSetUp = "SELECT  ISNULL(N.SET_UP,0) SET_UP FROM dbo.USERS US INNER JOIN dbo.NHOM N ON N.ID_NHOM = US.ID_NHOM WHERE US.[USER_NAME] = '" + txt_user.Text.Trim().ToLower() + "'";
+                    Commons.Modules.bSetUp = Convert.ToBoolean(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, sSetUp));
                 }
                 catch { }
+
                 //add user
                 this.Hide();
                 frmMain form2 = new frmMain();

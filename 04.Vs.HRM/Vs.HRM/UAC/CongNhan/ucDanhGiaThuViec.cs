@@ -28,6 +28,8 @@ namespace Vs.HRM
             Commons.Modules.ObjSystems.LoadCboDonVi(cboDonVi);
             Commons.Modules.ObjSystems.LoadCboXiNghiep(cboDonVi, cboXiNghiep);
             Commons.Modules.ObjSystems.LoadCboTo(cboDonVi, cboXiNghiep, cboTo);
+
+            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboNguoiDanhGia, Commons.Modules.ObjSystems.TruongBoPhan(), "ID_CN", "HO_TEN", "HO_TEN", true, true);
             //Commons.OSystems.SetDateEditFormat(datThang);
             //datThang.EditValue = DateTime.Now;
             LoadThang();
@@ -375,7 +377,7 @@ namespace Vs.HRM
             {
                 Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, "sBTDSCongNhan" + Commons.Modules.iIDUser, Commons.Modules.ObjSystems.ConvertDatatable(grdDSCongNhan), "");
                 Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, "sBTNDDG" + Commons.Modules.iIDUser, Commons.Modules.ObjSystems.ConvertDatatable(grdNDDanhGia), "");
-                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spSaveDanhGiaThuViec", "sBTDSCongNhan" + Commons.Modules.iIDUser, "sBTNDDG" + Commons.Modules.iIDUser, Commons.Modules.ObjSystems.ConvertDateTime(datThang.Text), Add);
+                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spSaveDanhGiaThuViec", "sBTDSCongNhan" + Commons.Modules.iIDUser, "sBTNDDG" + Commons.Modules.iIDUser, Commons.Modules.ObjSystems.ConvertDateTime(datThang.Text), cboNguoiDanhGia.Text == "" ? cboNguoiDanhGia.EditValue = null : Convert.ToInt64(cboNguoiDanhGia.EditValue) ,Add);
                 Commons.Modules.ObjSystems.XoaTable("sBTDSCongNhan" + Commons.Modules.iIDUser);
                 Commons.Modules.ObjSystems.XoaTable("sBTNDDG" + Commons.Modules.iIDUser);
                 return true;

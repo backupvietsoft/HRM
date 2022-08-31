@@ -33,7 +33,8 @@ namespace Vs.Recruit
                 Commons.OSystems.SetDateEditFormat(datTNgay);
                 Commons.OSystems.SetDateEditFormat(datDNgay);
                 Commons.Modules.sLoad = "";
-                datTNgay.EditValue = Convert.ToDateTime(("01/" + DateTime.Today.Month + "/" + DateTime.Today.Year));
+                datTNgay.EditValue = Convert.ToDateTime(("01/" + DateTime.Now.Month + "/" + DateTime.Now.Year));
+                //datTNgay.EditValue = DateTime.Now;
                 LoadCbo();
                 LoadData();
                 LoadLuoiND();
@@ -327,9 +328,11 @@ namespace Vs.Recruit
 
         private void datTNgay_EditValueChanged(object sender, EventArgs e)
         {
+            
             if (Commons.Modules.sLoad == "0Load") return;
+            Commons.Modules.ObjSystems.ConvertDateTime(datTNgay.Text);
             int t = DateTime.DaysInMonth(datTNgay.DateTime.Year, datTNgay.DateTime.Month);
-            DateTime secondDateTime = new DateTime(datTNgay.DateTime.Year, Convert.ToInt32(datTNgay.DateTime.Month), t);
+            DateTime secondDateTime = new DateTime(datTNgay.DateTime.Year, datTNgay.DateTime.Month, t);
             datDNgay.EditValue = secondDateTime;
             LoadCbo();
             //cboID_KHPV_EditValueChanged(null, null);

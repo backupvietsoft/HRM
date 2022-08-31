@@ -1147,7 +1147,7 @@ namespace Commons
         //        grv.OptionsView.AllowHtmlDrawHeaders = true;
         //        grv.Appearance.HeaderPanel.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
         //        grv.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.True;
-        //        if (Commons.Modules.UserName == "admin")
+        //        if (Commons.Modules.bSetUp == true)
         //        {
         //            grv.DoubleClick += delegate (object a, EventArgs b)
         //            {
@@ -1185,7 +1185,7 @@ namespace Commons
                 grv.OptionsView.AllowHtmlDrawHeaders = true;
                 grv.Appearance.HeaderPanel.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
                 grv.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.True;
-                if (Commons.Modules.UserName == "admin")
+                if (Commons.Modules.bSetUp == true)
                 {
                     grv.DoubleClick += delegate (object a, EventArgs b) { Grv_DoubleClick(a, b, fName); };
                 }
@@ -1212,7 +1212,7 @@ namespace Commons
                     SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "INSERT INTO dbo.DINH_DANG_LUOI(TEN_FORM,TEN_GRID,DINH_DANG,MAC_DINH)VALUES(N'" + fName + "',N'" + grv.Name + "',N'" + text + "',N'" + text + "')");
                 }
 
-                if (Commons.Modules.UserName.ToLower() == "admin")
+                if (Commons.Modules.bSetUp == true)
                 {
                     grv.PopupMenuShowing += delegate (object a, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs b) { Grv_PopupMenuShowing(grv, b, grv, fName); };
                 }
@@ -1245,7 +1245,7 @@ namespace Commons
                 grv.OptionsView.AllowHtmlDrawHeaders = true;
                 grv.Appearance.HeaderPanel.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
                 grv.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.True;
-                if (Commons.Modules.UserName == "admin")
+                if (Commons.Modules.bSetUp == true)
                 {
                     grv.DoubleClick += delegate (object a, EventArgs b) { Grv_DoubleClick(a, b, Commons.Modules.sPS.Replace("spGetList", "frm")); };
                 }
@@ -1272,7 +1272,7 @@ namespace Commons
                     SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "INSERT INTO dbo.DINH_DANG_LUOI(TEN_FORM,TEN_GRID,DINH_DANG,MAC_DINH)VALUES(N'" + Commons.Modules.sPS.Replace("spGetList", "frm") + "',N'" + grv.Name + "',N'" + text + "',N'" + text + "')");
                 }
 
-                if (Commons.Modules.UserName.ToLower() == "admin")
+                if (Commons.Modules.bSetUp == true)
                 {
                     grv.PopupMenuShowing += delegate (object a, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs b) { Grv_DM_PopupMenuShowing(grv, b, grv); };
                 }
@@ -1310,7 +1310,7 @@ namespace Commons
                         try
                         {
                             sText = XtraInputBox.Show(hitInfo.Column.GetTextCaption(), "Sửa ngôn ngữ", "");
-                            if (sText == "")
+                            if (sText == "" || sText == null)
                                 return;
                             else if (sText == "Windows.Forms.DialogResult.Retry")
                             {
@@ -1351,7 +1351,7 @@ namespace Commons
                         try
                         {
                             sText = XtraInputBox.Show(hitInfo.Column.GetTextCaption(), "Sửa ngôn ngữ", "");
-                            if (sText == "")
+                            if (sText == "" || sText == null)
                                 return;
                             else if (sText == "Windows.Forms.DialogResult.Retry")
                             {
@@ -1870,7 +1870,7 @@ namespace Commons
                 try
                 {
                     sText = XtraInputBox.Show(Ctl.Text, "Sửa ngôn ngữ", "");
-                    if (sText == "")
+                    if (sText == "" || sText == null)
                         return;
                     else
                         CapNhapNN(sName, Ctl.Name.ToUpper().Replace("ItemFor".ToUpper(), ""), sText, false);
@@ -1896,7 +1896,7 @@ namespace Commons
                 try
                 {
                     sText = XtraInputBox.Show(Ctl.Text, "Sửa ngôn ngữ", "");
-                    if (sText == "")
+                    if (sText == "" || sText == null)
                         return;
                     else
                         CapNhapNN(sName, Ctl.Name.ToUpper().Replace("ItemFor".ToUpper(), ""), sText, false);
@@ -2753,7 +2753,7 @@ namespace Commons
                 try
                 {
                     sText = XtraInputBox.Show(Ctl.Text, "Sửa ngôn ngữ", "");
-                    if (sText == "")
+                    if (sText == "" || sText == null)
                         return;
                     else if (sText == "Windows.Forms.DialogResult.Retry")
                     {
@@ -2813,7 +2813,7 @@ namespace Commons
                 try
                 {
                     sText = XtraInputBox.Show(Ctl.Text, "Sửa ngôn ngữ", "");
-                    if (sText == "")
+                    if (sText == "" || sText == null)
                         return;
                     else
                         CapNhapNN(sName, Ctl.Name, sText, false);
@@ -2838,7 +2838,7 @@ namespace Commons
                 try
                 {
                     sText = XtraInputBox.Show(Ctl.Text, "Sửa ngôn ngữ", "");
-                    if (sText == "")
+                    if (sText == "" || sText == null)
                         return;
                     else
                         CapNhapNN(sName, Ctl.Name, sText, false);
@@ -2863,7 +2863,7 @@ namespace Commons
                 try
                 {
                     sText = XtraInputBox.Show(Ctl.Text, "Sửa ngôn ngữ", "");
-                    if (sText == "")
+                    if (sText == "" || sText == null)
                         return;
                     else
                         CapNhapNN(sName, Ctl.Name, sText, false);
@@ -2904,7 +2904,7 @@ namespace Commons
                     if (sName.Trim().ToString() == "")
                         sName = GetParentForm(Ctl).Name.ToString();
                     sText = XtraInputBox.Show(Ctl.Text, "Sửa ngôn ngữ", "");
-                    if (sText == "")
+                    if (sText == "" || sText == null)
                         return;
                     else
                         sText = " SELECT TOP 1 " + (Commons.Modules.TypeLanguage == 0 ? "VIETNAM" : "ENGLISH") + " FROM LANGUAGES WHERE FORM = '" + sName + "' AND KEYWORD = '" + Ctl.Name + "' AND MS_MODULE = 'VS_HRM'";
@@ -4735,6 +4735,12 @@ namespace Commons
         {
             DataTable dt = new DataTable();
             dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetCongNhan", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll));
+            return dt;
+        }
+        public DataTable TruongBoPhan()
+        {
+            DataTable dt = new DataTable();
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComBoTruongBoPhan", Commons.Modules.TypeLanguage));
             return dt;
         }
 

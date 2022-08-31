@@ -66,6 +66,19 @@ namespace Commons
                 _chamCongK = value;
             }
         }
+        //SetUP, nếu setup = true thì được phép sửa lưới
+        private static bool _bSetUp;
+        public static bool bSetUp
+        {
+            get
+            {
+                return _bSetUp;
+            }
+            set
+            {
+                _bSetUp = value;
+            }
+        }
 
         private static string _msgTitle;
         public static string msgTitle

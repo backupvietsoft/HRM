@@ -5,6 +5,7 @@ using System.ComponentModel;
 using DevExpress.XtraReports.UI;
 using System.Data;
 using Microsoft.ApplicationBlocks.Data;
+using Commons;
 
 namespace Vs.Report
 {
@@ -21,7 +22,7 @@ namespace Vs.Report
             string Ngay = "0" + ngayin.Day;
             string Thang = "0" + ngayin.Month;
             string Nam = "00" + ngayin.Year;
-
+            xrSubreport9.ReportSource = new SubReportHeader();
         }
 
         private void rptSoYeuLyLich_AfterPrint(object sender, EventArgs e)

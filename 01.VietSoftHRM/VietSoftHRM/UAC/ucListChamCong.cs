@@ -277,14 +277,7 @@ namespace VietSoftHRM
                         tmp.Dock = DockStyle.Fill;
                         break;
                     }
-                case "mnuBCTongHopNam":
-                    {
-                        ucBaoCaoTongHopNam tmp = new ucBaoCaoTongHopNam();
-                        panel2.Controls.Clear();
-                        panel2.Controls.Add(tmp);
-                        tmp.Dock = DockStyle.Fill;
-                        break;
-                    }
+                
                 case "mnuDKTGKhongLamSP":
                     {
                         ucDKThoiGianKhongLamSP ctl = new ucDKThoiGianKhongLamSP();
@@ -294,6 +287,48 @@ namespace VietSoftHRM
                         ctl.Dock = DockStyle.Fill;
                         break;
                     }
+                #region BaoCao
+                case "mnuNhomBCNgay":
+                    {
+                        ucBaoCaoTheoNgay tmp = new ucBaoCaoTheoNgay();
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(tmp);
+                        tmp.Dock = DockStyle.Fill;
+                        break;
+                    }
+                case "mnuBCGiaiDoan":
+                    {
+                        ucBaoCaoGiaiDoan tmp = new ucBaoCaoGiaiDoan();
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(tmp);
+                        tmp.Dock = DockStyle.Fill;
+                        break;
+                    }
+                case "mnuBCTongHopThang":
+                    {
+                        ucBaoCaoTongHopThang tmp = new ucBaoCaoTongHopThang();
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(tmp);
+                        tmp.Dock = DockStyle.Fill;
+                        break;
+                    }
+                case "mnuBCTongHopNam":
+                    {
+                        ucBaoCaoTongHopNam tmp = new ucBaoCaoTongHopNam();
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(tmp);
+                        tmp.Dock = DockStyle.Fill;
+                        break;
+                    }
+                case "mnuBCQuanLyPhep":
+                    {
+                        ucBaoCaoQuanLyPhep tmp = new ucBaoCaoQuanLyPhep();
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(tmp);
+                        tmp.Dock = DockStyle.Fill;
+                        break;
+                    }
+                #endregion
 
                 default:
                     {

@@ -324,6 +324,45 @@ namespace VietSoftHRM
                         ctl.Dock = DockStyle.Fill;
                         break;
                     }
+
+                #region Bao cao
+                case "mnuBCDMCD":
+                    {
+                        ucBaoCaoDMCD tmp = new ucBaoCaoDMCD();
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(tmp);
+                        Commons.Modules.ObjSystems.HideWaitForm();
+                        tmp.Dock = DockStyle.Fill;
+                        break;
+                    }
+                case "mnuBCLuongSanPham":
+                    {
+                        ucBCLuongSanPham tmp = new ucBCLuongSanPham();
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(tmp);
+                        Commons.Modules.ObjSystems.HideWaitForm();
+                        tmp.Dock = DockStyle.Fill;
+                        break;
+                    }
+                case "mnuBCLuongThang":
+                    {
+                        ucBCLuongThang tmp = new ucBCLuongThang();
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(tmp);
+                        Commons.Modules.ObjSystems.HideWaitForm();
+                        tmp.Dock = DockStyle.Fill;
+                        break;
+                    }
+                case "mnuBCLuongThang13":
+                    {
+                        ucBCLuongThang13 tmp = new ucBCLuongThang13();
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(tmp);
+                        Commons.Modules.ObjSystems.HideWaitForm();
+                        tmp.Dock = DockStyle.Fill;
+                        break;
+                    }
+                #endregion
                 default:
                     break;
             }

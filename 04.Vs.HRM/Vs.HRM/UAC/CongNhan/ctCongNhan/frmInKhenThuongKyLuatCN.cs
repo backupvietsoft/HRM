@@ -33,6 +33,12 @@ namespace Vs.HRM
             int SoNgay = DateTime.Today.Day - 1;
             dTuNgay.EditValue = DateTime.Today.AddDays(-SoNgay);
 
+            if (Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString() == "DM")
+            {
+                rdo_ChonBaoCao.Properties.Items.RemoveAt(1);
+                rdo_ChonBaoCao.Properties.Items.RemoveAt(0);
+            }
+
         }
         //sự kiện các nút xử lí
         private void windowsUIButton_ButtonClick(object sender, DevExpress.XtraBars.Docking2010.ButtonEventArgs e)
@@ -47,7 +53,9 @@ namespace Vs.HRM
 
                         try
                         {
-                            switch (rdo_ChonBaoCao.SelectedIndex)
+                            int n = rdo_ChonBaoCao.SelectedIndex;
+                            if (Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString() == "DM") n = 2;
+                            switch (n)
                             {
                                 case 0:
                                     {
@@ -62,7 +70,7 @@ namespace Vs.HRM
                                                 KhenThuong();
                                                 break;
                                         }
-                                        
+
                                         break;
                                     }
                                 case 1:
@@ -78,7 +86,7 @@ namespace Vs.HRM
                                                 KyLuat();
                                                 break;
                                         }
-                                        
+
                                         break;
                                     }
                                 case 2:
@@ -94,7 +102,7 @@ namespace Vs.HRM
                                                 BienBanCanhCao();
                                                 break;
                                         }
-                                        
+
                                         break;
                                     }
                             }
@@ -177,7 +185,7 @@ namespace Vs.HRM
                 frm.AddDataSource(dt);
 
                 frm.ShowDialog();
-                
+
             }
             catch { }
         }

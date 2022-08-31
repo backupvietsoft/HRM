@@ -101,8 +101,6 @@
             this.xrLabel46 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel13 = new DevExpress.XtraReports.UI.XRLabel();
             this.lbHoVaTen = new DevExpress.XtraReports.UI.XRLabel();
-            this.lbTenDV = new DevExpress.XtraReports.UI.XRLabel();
-            this.lbDiaChi = new DevExpress.XtraReports.UI.XRLabel();
             this.lbNgayCap = new DevExpress.XtraReports.UI.XRLabel();
             this.lbQuaTrinhDT = new DevExpress.XtraReports.UI.XRLabel();
             this.lbQuaTrinhLV = new DevExpress.XtraReports.UI.XRLabel();
@@ -153,6 +151,8 @@
             this.xrLabel8 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel2 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel23 = new DevExpress.XtraReports.UI.XRLabel();
+            this.xrSubreport9 = new DevExpress.XtraReports.UI.XRSubreport();
+            this.lblTieuDe = new DevExpress.XtraReports.UI.XRLabel();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             // 
             // TopMargin
@@ -1236,41 +1236,6 @@
             this.lbHoVaTen.Text = "Họ và tên";
             this.lbHoVaTen.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
             // 
-            // lbTenDV
-            // 
-            this.lbTenDV.AllowMarkupText = true;
-            this.lbTenDV.AutoWidth = true;
-            this.lbTenDV.Dpi = 254F;
-            this.lbTenDV.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[DATA].[TEN_DV]")});
-            this.lbTenDV.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbTenDV.LocationFloat = new DevExpress.Utils.PointFloat(0F, 24.85476F);
-            this.lbTenDV.Multiline = true;
-            this.lbTenDV.Name = "lbTenDV";
-            this.lbTenDV.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
-            this.lbTenDV.SizeF = new System.Drawing.SizeF(1941F, 59.41674F);
-            this.lbTenDV.StylePriority.UseFont = false;
-            this.lbTenDV.StylePriority.UseTextAlignment = false;
-            this.lbTenDV.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
-            // 
-            // lbDiaChi
-            // 
-            this.lbDiaChi.AllowMarkupText = true;
-            this.lbDiaChi.AutoWidth = true;
-            this.lbDiaChi.Dpi = 254F;
-            this.lbDiaChi.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[DATA].[DIA_CHI_DV]")});
-            this.lbDiaChi.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbDiaChi.LocationFloat = new DevExpress.Utils.PointFloat(0F, 84.27152F);
-            this.lbDiaChi.Multiline = true;
-            this.lbDiaChi.Name = "lbDiaChi";
-            this.lbDiaChi.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
-            this.lbDiaChi.SizeF = new System.Drawing.SizeF(1941F, 59.41668F);
-            this.lbDiaChi.StylePriority.UseFont = false;
-            this.lbDiaChi.StylePriority.UseTextAlignment = false;
-            this.lbDiaChi.Text = "Độc lập - Tự do - Hạnh phúc";
-            this.lbDiaChi.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
-            // 
             // lbNgayCap
             // 
             this.lbNgayCap.Dpi = 254F;
@@ -1363,6 +1328,8 @@
             // GroupHeader1
             // 
             this.GroupHeader1.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
+            this.lblTieuDe,
+            this.xrSubreport9,
             this.xrSubreport8,
             this.lbQuanHeGD,
             this.lbQuaTrinhDG,
@@ -1478,8 +1445,6 @@
             this.xrLabel23,
             this.xrLabel13,
             this.lbHoVaTen,
-            this.lbTenDV,
-            this.lbDiaChi,
             this.xrLabel71});
             this.GroupHeader1.Dpi = 254F;
             this.GroupHeader1.HeightF = 4098.078F;
@@ -2085,6 +2050,27 @@
             this.xrLabel23.Text = ":";
             this.xrLabel23.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
             // 
+            // xrSubreport9
+            // 
+            this.xrSubreport9.Dpi = 254F;
+            this.xrSubreport9.LocationFloat = new DevExpress.Utils.PointFloat(0.0003875732F, 0F);
+            this.xrSubreport9.Name = "xrSubreport9";
+            this.xrSubreport9.SizeF = new System.Drawing.SizeF(1941F, 58.42F);
+            // 
+            // lblTieuDe
+            // 
+            this.lblTieuDe.Dpi = 254F;
+            this.lblTieuDe.Font = new System.Drawing.Font("Times New Roman", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTieuDe.LocationFloat = new DevExpress.Utils.PointFloat(0.0004037221F, 58.42001F);
+            this.lblTieuDe.Multiline = true;
+            this.lblTieuDe.Name = "lblTieuDe";
+            this.lblTieuDe.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 96F);
+            this.lblTieuDe.SizeF = new System.Drawing.SizeF(1941F, 85.26799F);
+            this.lblTieuDe.StylePriority.UseFont = false;
+            this.lblTieuDe.StylePriority.UseTextAlignment = false;
+            this.lblTieuDe.Text = "LÝ LỊCH NHÂN VIÊN";
+            this.lblTieuDe.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
+            // 
             // rptSoYeuLyLich
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
@@ -2106,7 +2092,7 @@
             this.SnapGridSize = 25F;
             this.Tag = "rptSoYeuLyLich";
             this.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter;
-            this.Version = "20.1";
+            this.Version = "22.1";
             this.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.rptSoYeuLyLich_BeforePrint);
             this.AfterPrint += new System.EventHandler(this.rptSoYeuLyLich_AfterPrint);
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
@@ -2123,8 +2109,6 @@
         private DevExpress.XtraReports.UI.XRLabel xrLabel46;
         private DevExpress.XtraReports.UI.XRPictureBox xrPictureBox1;
         private DevExpress.XtraReports.UI.XRLabel lbMaSoNV;
-        private DevExpress.XtraReports.UI.XRLabel lbTenDV;
-        private DevExpress.XtraReports.UI.XRLabel lbDiaChi;
         private DevExpress.XtraReports.UI.XRLabel lbHoSoNhanVien;
         private DevExpress.XtraReports.UI.XRLine xrLine1;
         private DevExpress.XtraReports.UI.XRLabel xrLabel15;
@@ -2239,5 +2223,7 @@
         private DevExpress.XtraReports.UI.XRLabel xrLabel8;
         private DevExpress.XtraReports.UI.XRLabel xrLabel2;
         private DevExpress.XtraReports.UI.XRLabel xrLabel23;
+        private DevExpress.XtraReports.UI.XRSubreport xrSubreport9;
+        private DevExpress.XtraReports.UI.XRLabel lblTieuDe;
     }
 }

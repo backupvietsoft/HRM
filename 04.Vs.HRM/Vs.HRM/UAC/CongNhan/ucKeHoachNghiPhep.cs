@@ -44,7 +44,7 @@ namespace Vs.HRM
             Commons.Modules.ObjSystems.LoadCboTo(cboSearch_DV, cboSearch_XN, cboSearch_TO);
             LoadGrdCongNhan(false);
             Commons.Modules.sLoad = "";
-            radTinHTrang.SelectedIndex = 1;
+            radTinHTrang.SelectedIndex = 0;
             Commons.OSystems.SetDateEditFormat(datTNgay);
             Commons.OSystems.SetDateEditFormat(datDNgay);
             Commons.OSystems.SetDateEditFormat(datNVao);
@@ -222,8 +222,8 @@ namespace Vs.HRM
             {
                 dtTmp = (DataTable)grdDSCN.DataSource;
 
-                if (radTinHTrang.SelectedIndex == 1) sdkien = "(TinhTrang = 1)";
-                if (radTinHTrang.SelectedIndex == 2) sdkien = "(TinhTrang = 0)";
+                if (radTinHTrang.SelectedIndex == 0) sdkien = "(TinhTrang = 1)";
+                if (radTinHTrang.SelectedIndex == 1) sdkien = "(TinhTrang = 0)";
                 dtTmp.DefaultView.RowFilter = sdkien;
             }
             catch

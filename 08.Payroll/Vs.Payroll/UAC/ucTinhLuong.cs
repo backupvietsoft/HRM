@@ -52,7 +52,7 @@ namespace Vs.Payroll
         {
             Commons.Modules.sPS = "0Load";
             LoadThang();
-            //LoadGrdGTGC();
+            LoadGrdGTGC();
             Commons.Modules.sPS = "";
         }
 

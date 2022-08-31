@@ -207,7 +207,7 @@ namespace Vs.HRM
             grvChung.Columns["TS"].Visible = false;
             try
             {
-                lblTongCong.Text = dt.Rows[0]["TS"].ToString();
+                //lblTongCong.Text = dt.Rows[0]["TS"].ToString();
             }
             catch { }
             if (id != -1)
@@ -608,6 +608,31 @@ namespace Vs.HRM
         private void btnCancel_Click_1(object sender, EventArgs e)
         {
             popLXL.Hide();
+        }
+
+        private void grvChung_RowCountChanged(object sender, EventArgs e)
+        {
+            GridView view = sender as GridView;
+            try
+            {
+                int index = ItemForSumNhanVien.Text.IndexOf(':');
+                if (index > 0)
+                {
+                    if (view.RowCount > 0)
+                    {
+                        ItemForSumNhanVien.Text = ItemForSumNhanVien.Text.Substring(0, index) + ": " + view.RowCount.ToString();
+                    }
+                    else
+                    {
+                        ItemForSumNhanVien.Text = ItemForSumNhanVien.Text.Substring(0, index) + ": 0";
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show(ex.Message.ToString());
+            }
         }
     }
 }

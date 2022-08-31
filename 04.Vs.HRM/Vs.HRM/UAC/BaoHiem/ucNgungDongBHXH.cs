@@ -235,8 +235,8 @@ namespace Vs.HRM
             {
                 dtTmp = (DataTable)grdCongNhan.DataSource;
 
-                if (radTinHTrang.SelectedIndex == 1) sdkien = "(TINH_TRANG = 1)";
-                if (radTinHTrang.SelectedIndex == 2) sdkien = "(TINH_TRANG = 0)";
+                if (radTinHTrang.SelectedIndex == 0) sdkien = "(TINH_TRANG = 1)";
+                if (radTinHTrang.SelectedIndex == 1) sdkien = "(TINH_TRANG = 0)";
                 dtTmp.DefaultView.RowFilter = sdkien;
             }
             catch

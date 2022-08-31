@@ -1498,6 +1498,15 @@ namespace Vs.TimeAttendance
                 row2_TieuDe_BaoCao.RowHeight = 20;
                 row2_TieuDe_BaoCao.Value2 = "BÁO CÁO ĐÁNH GIÁ TÌNH TRẠNG THỬ VIỆC";
 
+                Range rowTuNgay = oSheet.get_Range("E3", "" + lastColumn + "3");
+                rowTuNgay.Merge();
+                rowTuNgay.Font.Size = 12;
+                rowTuNgay.Font.Name = fontName;
+                rowTuNgay.Font.FontStyle = "Bold";
+                rowTuNgay.Cells.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
+                rowTuNgay.Cells.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
+                //rowTuNgay.Value = "Từ ngày "++""
+
 
                 Range row4_TieuDe_Format = oSheet.get_Range("A5", "" + lastColumn + "5"); //27 + 31
                 row4_TieuDe_Format.Font.Size = fontSizeTieuDe;
@@ -1518,15 +1527,15 @@ namespace Vs.TimeAttendance
 
                 Range row5_TieuDe_MSCN = oSheet.get_Range("B5");
                 row5_TieuDe_MSCN.Value2 = "Mã số thẻ";
-                row5_TieuDe_MSCN.ColumnWidth = 10;
+                row5_TieuDe_MSCN.ColumnWidth = 13;
 
                 Range row5_TieuDe_HOTEN = oSheet.get_Range("C5");
                 row5_TieuDe_HOTEN.Value2 = "Họ và tên";
-                row5_TieuDe_HOTEN.ColumnWidth = 15;
+                row5_TieuDe_HOTEN.ColumnWidth = 25;
 
                 Range row5_TieuDe_XN = oSheet.get_Range("D5");
                 row5_TieuDe_XN.Value2 = "Xưởng/Phòng ban";
-                row5_TieuDe_XN.ColumnWidth = 15;
+                row5_TieuDe_XN.ColumnWidth = 20;
 
 
                 Range row5_TieuDe_TO = oSheet.get_Range("E5");
@@ -1535,27 +1544,27 @@ namespace Vs.TimeAttendance
 
                 Range row5_TieuDe_NTV = oSheet.get_Range("F5");
                 row5_TieuDe_NTV.Value2 = "Vị trí công việc";
-                row5_TieuDe_NTV.ColumnWidth = 10;
+                row5_TieuDe_NTV.ColumnWidth = 20;
 
                 Range row5_TieuDe_NVL = oSheet.get_Range("G5");
                 row5_TieuDe_NVL.Value2 = "Loại hợp đồng";
-                row5_TieuDe_NVL.ColumnWidth = 10;
+                row5_TieuDe_NVL.ColumnWidth = 15;
 
                 Range row5_TieuDe_NBD = oSheet.get_Range("H5");
                 row5_TieuDe_NBD.Value2 = "Ngày bắt đầu hiệu lực";
-                row5_TieuDe_NBD.ColumnWidth = 10;
+                row5_TieuDe_NBD.ColumnWidth = 13;
 
                 Range row5_TieuDe_NHHL = oSheet.get_Range("I5");
                 row5_TieuDe_NHHL.Value2 = "Ngày hết hiệu lực";
-                row5_TieuDe_NHHL.ColumnWidth = 10;
+                row5_TieuDe_NHHL.ColumnWidth = 13;
 
                 Range row5_TieuDe_NDG = oSheet.get_Range("J5");
                 row5_TieuDe_NDG.Value2 = "Người đánh giá";
-                row5_TieuDe_NDG.ColumnWidth = 10;
+                row5_TieuDe_NDG.ColumnWidth = 25;
 
                 Range row5_TieuDe_NDGG = oSheet.get_Range("K5");
                 row5_TieuDe_NDGG.Value2 = "Ngày đánh giá";
-                row5_TieuDe_NDGG.ColumnWidth = 10;
+                row5_TieuDe_NDGG.ColumnWidth = 13;
 
                 Range row5_TieuDe_KHD = oSheet.get_Range("L5");
                 row5_TieuDe_KHD.Value2 = "Ký hợp đồng";
@@ -1573,19 +1582,19 @@ namespace Vs.TimeAttendance
                 {
                     Range row5_TieuDe_KTCV = oSheet.get_Range("O5");
                     row5_TieuDe_KTCV.Value2 = "Kiến thức công việc";
-                    row5_TieuDe_KTCV.ColumnWidth = 10;
+                    row5_TieuDe_KTCV.ColumnWidth = 13;
 
                     Range row5_TieuDe_HQCV = oSheet.get_Range("P5");
                     row5_TieuDe_HQCV.Value2 = "Hiệu quả công việc";
-                    row5_TieuDe_HQCV.ColumnWidth = 10;
+                    row5_TieuDe_HQCV.ColumnWidth = 13;
 
                     Range row5_TieuDe_TDCV = oSheet.get_Range("Q5");
                     row5_TieuDe_TDCV.Value2 = "Thái độ công việc";
-                    row5_TieuDe_TDCV.ColumnWidth = 10;
+                    row5_TieuDe_TDCV.ColumnWidth = 13;
 
                     Range row5_TieuDe_TTNQ = oSheet.get_Range("R5");
                     row5_TieuDe_TTNQ.Value2 = "Thái độ công việc";
-                    row5_TieuDe_TTNQ.ColumnWidth = 10;
+                    row5_TieuDe_TTNQ.ColumnWidth = 13;
                 }
 
                 //oSheet.Application.ActiveWindow.SplitColumn = 5;

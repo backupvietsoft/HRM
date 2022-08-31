@@ -547,23 +547,39 @@ namespace Vs.HRM
         }
         private void txtTaiLieu_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
-            try
+            if (e.Button.Index == 0)
             {
-                if (windowsUIButton.Buttons[6].Properties.Visible)
+                try
                 {
-                    ofdfile.ShowDialog();
-                    LayDuongDan();
+                    if (windowsUIButton.Buttons[6].Properties.Visible)
+                    {
+                        ofdfile.ShowDialog();
+                        LayDuongDan();
+                    }
+                    else
+                    {
+                        if (txtTaiLieu.Text == "")
+                            return;
+                        Commons.Modules.ObjSystems.OpenHinh(txtTaiLieu.Text);
+                    }
                 }
-                else
+                catch 
                 {
-                    if (txtTaiLieu.Text == "")
-                        return;
-                    Commons.Modules.ObjSystems.OpenHinh(txtTaiLieu.Text);
                 }
             }
-            catch (Exception ex)
+            else
             {
-            }
+                try
+                {
+                    Commons.Modules.ObjSystems.Xoahinh(txtTaiLieu.Text);
+                    txtTaiLieu.ResetText();
+                    grvTienLuong.SetFocusedRowCellValue("TAI_LIEU", null);
+                    SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "UPDATE dbo.LUONG_CO_BAN SET TAI_LIEU = NULL WHERE ID_LCB =" + grvTienLuong.GetFocusedRowCellValue("ID_LCB") + "");
+                }
+                catch
+                {
+                }
+            }    
         }
     }
 }

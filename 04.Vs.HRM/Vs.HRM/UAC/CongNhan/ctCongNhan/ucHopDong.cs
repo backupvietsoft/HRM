@@ -527,23 +527,41 @@ namespace Vs.HRM
         }
         private void txtTaiLieu_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
-            try
+            
+            if (e.Button.Index == 0)
             {
-                if (windowsUIButton.Buttons[8].Properties.Visible)
+                try
                 {
-                    ofdfile.ShowDialog();
-                    LayDuongDan();
+                    if (windowsUIButton.Buttons[8].Properties.Visible)
+                    {
+                        ofdfile.ShowDialog();
+                        LayDuongDan();
+                    }
+                    else
+                    {
+                        if (txtTaiLieu.Text == "")
+                            return;
+                        Commons.Modules.ObjSystems.OpenHinh(txtTaiLieu.Text);
+                    }
                 }
-                else
+                catch
                 {
-                    if (txtTaiLieu.Text == "")
-                        return;
-                    Commons.Modules.ObjSystems.OpenHinh(txtTaiLieu.Text);
                 }
             }
-            catch
+            else
             {
-            }
+                //xóa dữ liệu
+                try
+                {
+                    Commons.Modules.ObjSystems.Xoahinh(txtTaiLieu.Text);
+                    txtTaiLieu.ResetText();
+                    grvHopDong.SetFocusedRowCellValue("TAI_LIEU",null);
+                    SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr,CommandType.Text, "UPDATE dbo.HOP_DONG_LAO_DONG SET TAI_LIEU = NULL WHERE ID_HDLD =" + grvHopDong.GetFocusedRowCellValue("ID_HDLD") + "");
+                }
+                catch 
+                {
+                }
+            }    
         }
 
         private void cboBAC_LUONG_EditValueChanged(object sender, EventArgs e)
@@ -564,5 +582,7 @@ namespace Vs.HRM
                 MUC_LUONG_THUC_LINHTextEdit.EditValue = 0;
             }
         }
+
+        
     }
 }

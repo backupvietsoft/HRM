@@ -13,9 +13,10 @@ namespace Vs.Recruit
         public XtraReport1()
         {
             InitializeComponent();
-            PrintingSystem.AfterMarginsChange += PrintingSystem_AfterMarginsChange;
-            PrintingSystem.PageSettingsChanged += PrintingSystem_PageSettingsChanged;
-            Loaddata();
+            //PrintingSystem.AfterMarginsChange += PrintingSystem_AfterMarginsChange;
+            //PrintingSystem.PageSettingsChanged += PrintingSystem_PageSettingsChanged;
+           
+            //Loaddata();
         }
         private void Loaddata()
         {

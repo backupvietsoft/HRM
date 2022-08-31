@@ -469,11 +469,6 @@ namespace Vs.HRM
                     break;
             }
         }
-
-        private void b(object sender, EventArgs e)
-        {
-
-        }
         private void LayDuongDan()
         {
             string strPath_DH = txtTaiLieu.Text;
@@ -497,23 +492,40 @@ namespace Vs.HRM
 
         private void txtTaiLieu_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
-            try
+            if (e.Button.Index == 0)
             {
-                if (windowsUIButton.Buttons[6].Properties.Visible)
+                try
                 {
-                    ofdfile.ShowDialog();
-                    LayDuongDan();
+                    if (windowsUIButton.Buttons[6].Properties.Visible)
+                    {
+                        ofdfile.ShowDialog();
+                        LayDuongDan();
+                    }
+                    else
+                    {
+                        if (txtTaiLieu.Text == "")
+                            return;
+                        Commons.Modules.ObjSystems.OpenHinh(txtTaiLieu.Text);
+                    }
                 }
-                else
+                catch
                 {
-                    if (txtTaiLieu.Text == "")
-                        return;
-                    Commons.Modules.ObjSystems.OpenHinh(txtTaiLieu.Text);
                 }
             }
-            catch
+            else
             {
-            }
+                //xóa dữ liệu
+                try
+                {
+                    Commons.Modules.ObjSystems.Xoahinh(txtTaiLieu.Text);
+                    txtTaiLieu.ResetText();
+                    grvCongTac.SetFocusedRowCellValue("TAI_LIEU", null);
+                    SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "UPDATE dbo.QUA_TRINH_CONG_TAC SET TAI_LIEU = NULL WHERE ID_QTCT =" + grvCongTac.GetFocusedRowCellValue("ID_QTCT") + "");
+                }
+                catch
+                {
+                }
+            }    
         }
     }
 }

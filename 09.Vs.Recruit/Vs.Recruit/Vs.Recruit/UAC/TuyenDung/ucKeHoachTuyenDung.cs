@@ -209,6 +209,8 @@ namespace Vs.Recruit
 
                 case "luu":
                     {
+                        Validate();
+                        if (grvTuan.HasColumnErrors) return;
                         if (grvNguonTuyen.HasColumnErrors) return;
                         int n = grvVTYC.FocusedRowHandle;
                         if (!SaveData()) return;
@@ -291,7 +293,7 @@ namespace Vs.Recruit
                     }
                 }
             }
-            catch  (Exception ex)
+            catch (Exception ex)
             { }
         }
 
@@ -308,7 +310,7 @@ namespace Vs.Recruit
             //xóa
             try
             {
-                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "DELETE dbo.KHTD_TUAN WHERE ID_YCTD = "+ grvVTYC.GetFocusedRowCellValue("ID_YCTD") +" AND ID_VTTD = "+ grvVTYC.GetFocusedRowCellValue("ID_VTTD") + "");
+                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "DELETE dbo.KHTD_TUAN WHERE ID_YCTD = " + grvVTYC.GetFocusedRowCellValue("ID_YCTD") + " AND ID_VTTD = " + grvVTYC.GetFocusedRowCellValue("ID_VTTD") + "");
                 LoadgrdVTYC();
             }
             catch (Exception ex)
@@ -327,7 +329,55 @@ namespace Vs.Recruit
 
         private void grvNguonTuyen_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
         {
-            
+
+        }
+
+        private void grvTuan_ValidatingEditor(object sender, DevExpress.XtraEditors.Controls.BaseContainerValidateEditorEventArgs e)
+        {
+            grvTuan.ClearColumnErrors();
+            try
+            {
+                DataTable dt = new DataTable();
+                dt = Commons.Modules.ObjSystems.ConvertDatatable(grvTuan);
+                GridView view = sender as GridView;
+                if (view == null) return;
+                if (view.FocusedColumn.Name == "colSL_KH")
+                {
+                    try
+                    {
+                        int tong = dt.AsEnumerable().Where(x => x.Field<int>("TUAN") != Convert.ToInt32(grvTuan.GetFocusedRowCellValue("TUAN"))).Sum(x => (int)x["SL_KH"]);
+
+                        int n = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT ISNULL(SUM(SL_KH),0) FROM dbo.KHTD_TUAN WHERE ID_YCTD = " + grvVTYC.GetFocusedRowCellValue("ID_YCTD") + " AND ID_VTTD = " + grvVTYC.GetFocusedRowCellValue("ID_VTTD") + " AND RIGHT(CONVERT(NVARCHAR(12),THANG,103),7) != '" + datThang.Text +"'"));
+                        if ((Convert.ToInt32(e.Value) + tong + n) > Convert.ToInt32(grvVTYC.GetFocusedRowCellValue("SL_TUYEN")) ) 
+                        {
+                            view.SetFocusedRowCellValue("SL_KH", e.Value);
+                            e.Valid = false;
+                            e.ErrorText = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "erKhongLuongVuotQuaSLTruyen");
+                            view.SetColumnError(view.Columns["SL_KH"], e.ErrorText);
+                            return;
+                        }
+                    }
+                    catch
+                    {
+                        view.SetFocusedRowCellValue("SL_KH", 0.00);
+                    }
+                }
+            }
+            catch
+            {
+
+            }
+
+        }
+
+        private void grvTuan_InvalidValueException(object sender, DevExpress.XtraEditors.Controls.InvalidValueExceptionEventArgs e)
+        {
+            e.ExceptionMode = DevExpress.XtraEditors.Controls.ExceptionMode.NoAction;
+        }
+
+        private void grvTuan_InvalidRowException(object sender, DevExpress.XtraGrid.Views.Base.InvalidRowExceptionEventArgs e)
+        {
+            e.ExceptionMode = DevExpress.XtraEditors.Controls.ExceptionMode.NoAction;
         }
     }
 }

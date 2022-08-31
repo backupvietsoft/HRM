@@ -102,6 +102,9 @@ namespace Vs.Recruit
         }
         private void InKeHoachTD(int iThang)
         {
+          
+            DateTime TN = datTThang.DateTime.Date.AddDays(-datTThang.DateTime.Date.Day + 1);
+            DateTime DN = datDThang.DateTime.Date.AddDays(-datDThang.DateTime.Date.Day + 1).AddMonths(1).AddDays(-1);
             string sPath = "";
             sPath = Commons.Modules.MExcel.SaveFiles("Excel file (*.xlsx)|*.xlsx");
             if (sPath == "") return;
@@ -141,7 +144,7 @@ namespace Vs.Recruit
 
                 title = Commons.Modules.MExcel.GetRange(excelWorkSheet, DONG, 1, DONG, 18);
                 title.Merge(true);
-                title.Value2 = "BÁO CÁO CHỈ TIÊU TUYỂN DỤNG THEO TUẦN/ THÁNG \n (01/10/2021 - 31/12/2021)";
+                title.Value2 = "BÁO CÁO CHỈ TIÊU TUYỂN DỤNG THEO TUẦN/ THÁNG \n ("+ TN.ToString("dd/MM/yyyy") +" - "+ DN.ToString("dd/MM/yyyy") + ")";
                 title.Font.Size = 18;
                 title.RowHeight = 54;
                 title.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
@@ -270,7 +273,7 @@ namespace Vs.Recruit
                 title.Value2 = "=SUM(" + Commons.Modules.MExcel.TimDiemExcel(DONG - TDong, 6) + ":" + Commons.Modules.MExcel.TimDiemExcel(DONG - 1, 6) + ")";
 
                 title = excelWorkSheet.Cells[DONG, COT];
-                title.Value2 = "=SUM(" + Commons.Modules.MExcel.TimDiemExcel(DONG - TDong, COT + 1) + ":" + Commons.Modules.MExcel.TimDiemExcel(DONG - 1, COT) + ")";
+                title.Value2 = "=SUM(" + Commons.Modules.MExcel.TimDiemExcel(DONG - TDong, COT) + ":" + Commons.Modules.MExcel.TimDiemExcel(DONG - 1, COT) + ")";
 
                 title1 = Commons.Modules.MExcel.GetRange(excelWorkSheet, DONG, COT, DONG, TCot + iThang);
                 title.AutoFill(title1, Microsoft.Office.Interop.Excel.XlAutoFillType.xlFillCopy);

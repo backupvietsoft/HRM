@@ -86,13 +86,51 @@ namespace Vs.HRM
         }
         private void InDuLieu()
         {
-            if(Convert.ToInt64(string.IsNullOrEmpty(grvCongNhan.GetFocusedRowCellValue("ID_QDTV").ToString()) ? 0 : Convert.ToInt64(grvCongNhan.GetFocusedRowCellValue("ID_QDTV"))) == 0)
+            if (Convert.ToInt64(string.IsNullOrEmpty(grvCongNhan.GetFocusedRowCellValue("ID_QDTV").ToString()) ? 0 : Convert.ToInt64(grvCongNhan.GetFocusedRowCellValue("ID_QDTV"))) == 0)
             {
                 return;
             }
-            DateTime datNgayThoiViec = Convert.ToDateTime(grvCongNhan.GetFocusedRowCellValue("NGAY_THOI_VIEC")); 
-            frmInQuyetDinhThoiViec frm = new frmInQuyetDinhThoiViec(Convert.ToInt32(grvCongNhan.GetFocusedRowCellValue("ID_QDTV")),Convert.ToInt32(grvCongNhan.GetFocusedRowCellValue("ID_CN")), datNgayThoiViec);
-            frm.ShowDialog();
+            if (Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString() == "DM")
+            {
+                try
+                {
+                    System.Data.SqlClient.SqlConnection conn;
+                    frmViewReport frm = new frmViewReport();
+                    frm.rpt = new rptQuyetDinhChamDutHDLD_DM(DateTime.Now);
+
+                    conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                    conn.Open();
+
+                    System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptQuyetDinhChamDutHDLD_DM", conn);
+                    cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                    cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                    cmd.Parameters.Add("@ID_SQD", SqlDbType.Int).Value = Convert.ToInt32(grvCongNhan.GetFocusedRowCellValue("ID_QDTV"));
+                    cmd.Parameters.Add("@ID_CN", SqlDbType.Int).Value = Convert.ToInt32(grvCongNhan.GetFocusedRowCellValue("ID_CN"));
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+                    DataSet ds = new DataSet();
+                    adp.Fill(ds);
+                    DataTable dt = new DataTable();
+                    dt = ds.Tables[0].Copy();
+                    dt.TableName = "DATA";
+                    frm.AddDataSource(dt);
+
+                    //DataTable dt1 = new DataTable();
+                    //dt1 = ds.Tables[1].Copy();
+                    //dt1.TableName = "NOI_DUNG";
+                    //frm.AddDataSource(dt1);
+
+                    frm.ShowDialog();
+                }
+                catch (Exception ex) { }
+            }
+            else
+            {
+                DateTime datNgayThoiViec = Convert.ToDateTime(grvCongNhan.GetFocusedRowCellValue("NGAY_THOI_VIEC"));
+                frmInQuyetDinhThoiViec frm = new frmInQuyetDinhThoiViec(Convert.ToInt32(grvCongNhan.GetFocusedRowCellValue("ID_QDTV")), Convert.ToInt32(grvCongNhan.GetFocusedRowCellValue("ID_CN")), datNgayThoiViec);
+                frm.ShowDialog();
+            }
         }
         private void windowsUIButton_ButtonClick(object sender, DevExpress.XtraBars.Docking2010.ButtonEventArgs e)
         {
@@ -370,7 +408,7 @@ namespace Vs.HRM
                 GetTienTroCap();
                 TONG_CONGTextEdit.EditValue = Convert.ToDouble(TIEN_TRO_CAPTextEdit.EditValue) + Convert.ToDouble(TIEN_PHEPTextEdit.EditValue);
             }
-            catch 
+            catch
             {
 
             }
@@ -456,7 +494,7 @@ namespace Vs.HRM
                 TIEN_PHEPTextEdit.EditValue = string.IsNullOrEmpty(dt.Rows[0]["TIEN_PHEP"].ToString()) ? 0 : Convert.ToDecimal(dt.Rows[0]["TIEN_PHEP"]);
                 SoThangPhep = string.IsNullOrEmpty(dt.Rows[0]["SO_THANG_PHEP"].ToString()) ? 0 : Convert.ToDecimal(dt.Rows[0]["SO_THANG_PHEP"]);
             }
-            catch(Exception ex) { }
+            catch (Exception ex) { }
         }
 
         private void GetTienTroCap()

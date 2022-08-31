@@ -26,6 +26,8 @@ namespace Vs.Recruit
         private void ucLyLichUV_Load(object sender, EventArgs e)
         {
             Commons.Modules.sPS = "0Load";
+            windowsUIButton.Buttons[3].Properties.Visible = false;
+            windowsUIButton.Buttons[4].Properties.Visible = false;
             //format date tiem
             Commons.OSystems.SetDateEditFormat(datNGAY_SINH);
             Commons.OSystems.SetDateEditFormat(datNGAY_CAP);
@@ -382,8 +384,8 @@ namespace Vs.Recruit
             windowsUIButton.Buttons[0].Properties.Visible = visible;
             windowsUIButton.Buttons[1].Properties.Visible = visible;
             windowsUIButton.Buttons[2].Properties.Visible = visible;
-            windowsUIButton.Buttons[3].Properties.Visible = visible;
-            windowsUIButton.Buttons[4].Properties.Visible = visible;
+            //windowsUIButton.Buttons[3].Properties.Visible = visible;
+            //windowsUIButton.Buttons[4].Properties.Visible = visible;
             windowsUIButton.Buttons[5].Properties.Visible = visible;
             windowsUIButton.Buttons[6].Properties.Visible = !visible;
             windowsUIButton.Buttons[7].Properties.Visible = !visible;

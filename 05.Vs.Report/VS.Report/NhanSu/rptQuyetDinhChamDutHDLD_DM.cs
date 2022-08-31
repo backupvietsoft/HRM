@@ -18,11 +18,11 @@ namespace Vs.Report
             dtNgu.Load(Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT KEYWORD, CASE " + Commons.Modules.TypeLanguage + " WHEN 0 THEN VIETNAM WHEN 1 THEN ENGLISH ELSE CHINESE END AS NN  FROM LANGUAGES WHERE FORM = N'NgayThangNam' "));
             DataTable dt = Commons.Modules.ObjSystems.DataThongTinChung();
             this.DataSource = dt;
-            try
-            {
-                picLogo.SizeF = new SizeF((float)Convert.ToDecimal(dt.Rows[0]["LG_WITH"]), (float)Convert.ToDecimal(dt.Rows[0]["LG_HEIGHT"]));
-            }
-            catch { }
+            //try
+            //{
+            //    picLogo.SizeF = new SizeF((float)Convert.ToDecimal(dt.Rows[0]["LG_WITH"]), (float)Convert.ToDecimal(dt.Rows[0]["LG_HEIGHT"]));
+            //}
+            //catch { }
             string Ngay = "0" + ngayin.Day;
             string Thang = "0" + ngayin.Month;
             string Nam = "00" + ngayin.Year;

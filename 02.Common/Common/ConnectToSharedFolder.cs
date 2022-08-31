@@ -27,8 +27,7 @@ public class ConnectToSharedFolder : IDisposable
         //    userName,
         //    0);
 
-         var result = 1;
-
+        var result = 1;
         if (result != 0)
         {
             throw new Win32Exception(result, "Error connecting to remote share");

@@ -3185,3 +3185,4 @@ H:\Lamviec\Lamviec\HRM\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.ucTaoHopDong.res
 H:\Lamviec\Lamviec\HRM\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.ucInNhanVien.resources
 H:\Lamviec\Lamviec\HRM\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.ucTO.resources
 H:\Lamviec\Lamviec\HRM\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.ucBaoCaoDanhGiaTTThuViec.resources
+F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.ucBaoCaoDanhGiaTTThuViec.resources

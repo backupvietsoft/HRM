@@ -2692,3 +2692,4 @@ H:\Lamviec\Lamviec\HRM\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.csproj.
 H:\Lamviec\Lamviec\HRM\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.csproj.CopyComplete
 H:\Lamviec\Lamviec\HRM\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.dll
 H:\Lamviec\Lamviec\HRM\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.pdb
+F:\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.rptPhieuLuongThang_DM.resources

@@ -111,7 +111,7 @@ namespace Vs.Payroll
                                     {
                                         case "DM":
                                             {
-                                                PhieuLuongThang_DM();
+                                                BangLuongThang_DM();
                                                 break;
                                             }
                                         default:
@@ -1202,17 +1202,24 @@ namespace Vs.Payroll
                                 break;
                             case 6:
                                 {
+                                    if (Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString() == "DM")
 
-                                    string sMS_CTL = "";
-                                    try
                                     {
-                                        sMS_CTL = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT MA_SO FROM dbo.CACH_TINH_LUONG WHERE ID_CTL = " + Convert.ToInt32(cboCachTinhLuong.EditValue) + "").ToString();
+                                        PhieuLuongThang_DM();
                                     }
-                                    catch
+                                    else
                                     {
+                                        string sMS_CTL = "";
+                                        try
+                                        {
+                                            sMS_CTL = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT MA_SO FROM dbo.CACH_TINH_LUONG WHERE ID_CTL = " + Convert.ToInt32(cboCachTinhLuong.EditValue) + "").ToString();
+                                        }
+                                        catch
+                                        {
 
+                                        }
+                                        InPhieuNhanLuongCNSP(sMS_CTL);
                                     }
-                                    InPhieuNhanLuongCNSP(sMS_CTL);
                                 }
                                 break;
                             case 7:
@@ -1870,7 +1877,7 @@ namespace Vs.Payroll
             catch
             { }
         }
-        private void PhieuLuongThang_DM()
+        private void BangLuongThang_DM()
         {
             string sThang = cboThang.EditValue.ToString();
 
@@ -1879,14 +1886,15 @@ namespace Vs.Payroll
             conn.Open();
             DataTable dt1;
             DataTable dt2;
-
-            System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptBangLuongThang_DM_TEST", conn);
-            //cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
-            //cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
-            //cmd.Parameters.Add("@Dvi", SqlDbType.Int).Value = LK_DON_VI.EditValue;
-            //cmd.Parameters.Add("@XN", SqlDbType.Int).Value = LK_XI_NGHIEP.EditValue;
-            //cmd.Parameters.Add("@TO", SqlDbType.Int).Value = LK_TO.EditValue;
-            //cmd.Parameters.Add("@Thang", SqlDbType.Date).Value = Convert.ToDateTime(cboThang.EditValue).ToString("yyyy-MM-dd");
+            int NgayCuoiThang = DateTime.DaysInMonth(Commons.Modules.ObjSystems.ConvertDateTime(cboThang.Text).Year, Commons.Modules.ObjSystems.ConvertDateTime(cboThang.Text).Month);
+            System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptBangLuongThangCN_DM", conn);
+            cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+            cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+            cmd.Parameters.Add("@DVi", SqlDbType.Int).Value = LK_DON_VI.EditValue;
+            cmd.Parameters.Add("@XN", SqlDbType.Int).Value = LK_XI_NGHIEP.EditValue;
+            cmd.Parameters.Add("@TO", SqlDbType.Int).Value = LK_TO.EditValue;
+            cmd.Parameters.Add("@TNGAY", SqlDbType.DateTime).Value = Commons.Modules.ObjSystems.ConvertDateTime(cboThang.Text);
+            cmd.Parameters.Add("@DNGAY", SqlDbType.DateTime).Value = Commons.Modules.ObjSystems.ConvertDateTime(NgayCuoiThang.ToString() + "/" + cboThang.Text);
             cmd.CommandType = CommandType.StoredProcedure;
             System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
 
@@ -1897,7 +1905,7 @@ namespace Vs.Payroll
             dt1 = ds.Tables[0].Copy();
 
             dt2 = new DataTable();
-            //dt2 = ds.Tables[1].Copy();
+            dt2 = ds.Tables[1].Copy();
 
             try
             {
@@ -1910,7 +1918,7 @@ namespace Vs.Payroll
                 }
                 object misValue = System.Reflection.Missing.Value;
 
-                xlApp.Visible = true;
+                xlApp.Visible = false;
                 Workbook wb = xlApp.Workbooks.Add(misValue);
 
                 Worksheet ws = (Worksheet)wb.Worksheets[1];
@@ -1922,7 +1930,7 @@ namespace Vs.Payroll
                     return;
                 }
 
-                string lastColumn = CharacterIncrement(108);
+                string lastColumn = CharacterIncrement(dt2.Columns.Count);
                 int stt = 0;
                 int col = 0;
                 int row = 8;
@@ -2005,8 +2013,8 @@ namespace Vs.Payroll
 
 
                 Range rowBH = ws.get_Range("CY7", "DD7");
-                rowKHAC.Merge();
-                rowKHAC.Value = "BH , CÔNG ĐOÀN CTY ĐÓNG";
+                rowBH.Merge();
+                rowBH.Value = "BH , CÔNG ĐOÀN CTY ĐÓNG";
 
                 foreach (DataRow rowTitle in dt1.Rows)
                 {
@@ -2016,7 +2024,7 @@ namespace Vs.Payroll
                     ws.Cells[row + 1, col] = col;
                 }
 
-                
+
 
                 ws.Application.ActiveWindow.SplitColumn = 7;
                 ws.Application.ActiveWindow.SplitRow = 9;
@@ -2026,61 +2034,73 @@ namespace Vs.Payroll
                 ws.get_Range("A9", "" + lastColumn + "9").Font.Color = XlRgbColor.rgbRed;
 
                 BorderAround(ws.get_Range("A7", "" + lastColumn + "9"));
-                row = 8;
+                row = 9;
 
                 string TienMat = "";
                 string ATM = "";
 
-                //foreach (DataRow row2 in dt2.Rows)
-                //{
-                //    stt++;
-                //    row++;
+                foreach (DataRow row2 in dt2.Rows)
+                {
+                    stt++;
+                    row++;
 
-                //    TienMat = "";
-                //    ATM = "";
+                    //TienMat = "";
+                    //ATM = "";
 
-                //    if (string.IsNullOrEmpty(row2["MA_THE_ATM"].ToString()))
-                //    {
-                //        TienMat = "=AW" + row;
-                //    }
-                //    else
-                //    {
-                //        ATM = "=AW" + row;
-                //    }
+                    //if (string.IsNullOrEmpty(row2["MA_THE_ATM"].ToString()))
+                    //{
+                    //    TienMat = "=AW" + row;
+                    //}
+                    //else
+                    //{
+                    //    ATM = "=AW" + row;
+                    //}
 
-                //    Range rowDataFDate = ws.get_Range("H" + row, "H" + row);
-                //    rowDataFDate.NumberFormat = "dd/MM/yyyy";
-                //    dynamic[] arr = { row2["MA"].ToString(), stt, row2["MS_CN"].ToString(), row2["HO_TEN"].ToString(), row2["GIOI_TINH"].ToString(), row2["TEN_TO"].ToString(),
-                //                            row2["TEN_CV"].ToString(), row2["NGAY_VL"].ToString(), row2["LUONG_HDLD"].ToString(), row2["NGAY_CONG"].ToString(), row2["GIO_CONG"].ToString(),
-                //                            row2["LSP"].ToString(), row2["TIEN_CDPS"].ToString(), "=SUM(L" + row + ":M" + row +")", row2["PHEP"].ToString(),
-                //                            "=I" + row + "/" + row2["NC_CHUAN"].ToString() + "*O" + row,
-                //                            row2["TC_NT"].ToString(), "=IF(Q"+ row +">0,ROUND(N"+ row +"/(IF(K" + row +">208,208,K"+ row +")+Q"+ row +"+S"+ row +"+W"+ row +")*50%*Q"+ row +",0),0)",
-                //                            row2["TC_226"].ToString(), "=IF(S"+ row +">0,ROUND(N"+ row +"/(IF(K" + row +">208,208,K"+ row +")+Q"+ row +"+S"+ row +"+W"+ row +")*S"+ row +",0),0)",
-                //                            row2["LAM_DEM"].ToString(), "=IF(U"+ row +">0,ROUND(N"+ row +"/(IF(K" + row +">208,208,K"+ row +")+Q"+ row +"+S"+ row +"+W"+ row +")*30%*U"+ row +",0),0)",
-                //                            row2["TC_CN"].ToString(), "=IF(W"+ row +">0,ROUND(N"+ row +"/(IF(K" + row +">208,208,K"+ row +")+Q"+ row +"+S"+ row +"+W"+ row +")*W"+ row +",0),0)",
-                //                            row2["VRCL"].ToString(), "=I" + row + "/" + row2["NC_CHUAN"].ToString() + "*Y" + row, row2["LE_TET"].ToString(), "=I" + row + "/" + row2["NC_CHUAN"].ToString() + "*AA" + row,
-                //                            row2["GIO_CN"].ToString(), "=I" + row + "/" + row2["NC_CHUAN"].ToString() + "8*AC" + row, row2["DIEM_CC"].ToString(), row2["TIEN_CHUYEN_CAN"].ToString(),
-                //                            row2["TIEN_THAM_NIEN"].ToString(), row2["TIEN_DI_LAI"].ToString(), row2["TIEN_CON_NHO"].ToString(), row2["TIEN_NGUYET_SAN"].ToString(),
-                //                            "=IF((("+  row2["MUC_BU_LUONG"].ToString() +"/(" + row2["NC_CHUAN"].ToString() + "*8))*(J"+ row +"*8+O"+ row +"*8+AA"+ row +"*8+Q"+ row +"*1.5))>(N"+ row +"+P"+ row +"+R"+ row +"+AB"+ row +"),(" + row2["MUC_BU_LUONG"].ToString() + "/(" + row2["NC_CHUAN"].ToString() + "*8))*(J"+ row +"*8+AA"+ row +"*8+O"+ row +"*8+Q"+ row +"*1.5)-(N"+ row +"+P"+ row +"+R"+ row +"+AB"+ row +"),0)",
-                //                            row2["TIEN_CONG_KHAC"].ToString(),"=ROUND(N"+ row +"+P"+ row +"+R"+ row +"+T"+ row +"+V"+ row +"+X"+ row +"+Z"+ row +"+AB"+ row +"+AD"+ row +"+SUM(AF"+ row +":AL"+ row +"),0)",
-                //                            row2["TIEN_BHXH"].ToString(),row2["TIEN_THUE"].ToString(),row2["TRICH_NOP_PCD"].ToString(),row2["TAM_UNG"].ToString(),row2["TIEN_TRU_KHAC"].ToString(),
-                //                            "=ROUND(SUM(AN"+ row +":AR"+ row +"),0)","=AM"+ row +"-AS"+ row,row2["PHEP_TT"].ToString(),"=I" + row + "/" + row2["NC_CHUAN"].ToString() + "*AU" + row,
-                //                            "=AT" + row + "+AV" + row, TienMat, ATM };
+                    //Range rowDataFDate = ws.get_Range("H" + row, "H" + row);
+                    //rowDataFDate.NumberFormat = "dd/MM/yyyy";
+                    dynamic[] arr = { stt, row2["HO_TEN"].ToString(), row2["MS_CN"].ToString(), row2["BO_PHAN"].ToString(), row2["PHAN_BO"].ToString(),
+                                            row2["TEN_CTL"].ToString(), row2["TEN_LCV"].ToString(), row2["TEN_TT_HT"].ToString(), row2["GIOI_TINH"].ToString(), row2["NGAY_VAO_LAM"].ToString(),
+                                            row2["NGAY_HD"].ToString(), row2["NGAY_NGHI_VIEC"].ToString(), row2["THAM_NIEN"].ToString(),row2["NGAY_CONG"].ToString(),row2["GIO_CONG"].ToString(),
+                                            row2["NGAY_CONG_CT"].ToString(), row2["NGAY_CONG_TV"].ToString(), row2["GIO_CD"].ToString(), row2["GIO_NGHI_NGAN"].ToString(), row2["GIO_CHU_KY"].ToString(),
+                                            row2["GIO_KTSP"].ToString(),row2["TC_TV_150"].ToString(),row2["TC_CT_150"].ToString(),row2["GIO_KTSP_150"].ToString(),row2["TC_TV_200"].ToString(),
+                                            row2["TC_CT_200"].ToString(),row2["GIO_KTSP_200"].ToString(),row2["TONG_GIO_LV"].ToString(),row2["TONG_GIO_LAM_SP"].ToString(),row2["PHEP_NAM_CT"].ToString(),
+                                            row2["PHEP_NAM_TV"].ToString(),row2["NGHI_HL_CT"].ToString(),row2["NGHI_HL_TV"].ToString(),row2["TONG_NGHI_HL"].ToString(),row2["NGHI_KL"].ToString(),
+                                            row2["GC_TL_SP"].ToString(),row2["SN_TC_2H"].ToString(),row2["LUONG_TV_NC"].ToString(),row2["LUONG_HDLD_NC"].ToString(),row2["LUONG_CD"].ToString(),
+                                            row2["LUONG_NGHI_NGAN"].ToString(),row2["LUONG_CHU_KY"].ToString(),row2["LUONG_KTSP"].ToString(),row2["LUONG_NGHI_HL_CT"].ToString(),row2["LUONG_NGHI_HL_TV"].ToString(),
+                                            row2["LUONG_PHEP_NAM"].ToString(),row2["TONG_LUONG_TG_HC"].ToString(),row2["LUONG_TV_150"].ToString(),row2["LUONG_CT_150"].ToString(),row2["LUONG_TV_200"].ToString(),
+                                            row2["LUONG_CT_200"].ToString(),row2["TONG_LUONG_TC_TG"].ToString(),row2["TONG_LTG_HC_TC"].ToString(),row2["LUONG_SP"].ToString(),row2["PT_HT_LSP"].ToString(),
+                                            row2["LSP_HO_TRO"].ToString(),row2["LSP_BQ_1G_HT"].ToString(),row2["LSP_BQ_1G_KHT"].ToString(),row2["LSP_LAM_HC"].ToString(),row2["LUONG_BP_PHU_CHUYEN"].ToString(),
+                                            row2["LSP_LAM_HC_TG"].ToString(),row2["BU_LUONG"].ToString(),row2["LSP_TC_TV_150"].ToString(),row2["LSP_TC_CT_150"].ToString(),row2["LSP_TC_TV_200"].ToString(),
+                                            row2["LSP_TC_CT_200"].ToString(),row2["LSP_TC_TONG"].ToString(),row2["SS_TC_TG_SP"].ToString(),row2["LUONG_TC_THANG"].ToString(),row2["TONG_BU_LUONG"].ToString(),
+                                            row2["THUONG_CC"].ToString(),row2["THUONG_CN_MOI"].ToString(),row2["XEP_LOAI_HQ_SX"].ToString(),row2["THUONG_HQ_SX"].ToString(),row2["THUONG_HQ_QA"].ToString(),
+                                            row2["THUONG_PHU_CHUYEN"].ToString(),row2["HO_TRO_AN"].ToString(),row2["HO_TRO_HO_SO"].ToString(),row2["HO_TRO_XANG_XE"].ToString(),row2["GIOI_THIEU_CN_MOI"].ToString(),
+                                            row2["ATVSV"].ToString(),row2["PC_CON_NHO"].ToString(),row2["PC_QUA_DO"].ToString(),row2["PC_KHAC"].ToString(),row2["TONG_PHU_CAP"].ToString(),
+                                            row2["TIEN_BHXH"].ToString(),row2["TIEN_BHYT"].ToString(),row2["TIEN_BHTN"].ToString(),row2["TONG_TIEN_BHXH"].ToString(),row2["PHI_CONG_DOAN"].ToString(),
+                                            row2["THU_BHYT"].ToString(),row2["TRU_KHAC"].ToString(),row2["TONG_GIAM_TRU"].ToString(),row2["TL_TRUOC_GIAM_TRU"].ToString(),row2["TL_THUC_NHAN"].ToString(),
+                                            row2["TL_TRUOC_HO_TRO"].ToString(),row2["TL_THUC_NHAN_CUOI"].ToString(),row2["THUC_NHAN_THANG_TRUOC"].ToString(),row2["CHENH_LECH"].ToString(),row2["THUE_TNCN"].ToString(),
+                                            row2["TK_NGAN_HANG"].ToString(),row2["CHI_NHANH"].ToString(),row2["BHXH_CTY_TRA"].ToString(),row2["BHYT_CTY_TRA"].ToString(),row2["BHTN_CTY_TRA"].ToString(),
+                                            row2["BHTNLD_CTY_TRA"].ToString(),row2["TONG_BH_CTY_TRA"].ToString(),row2["QUY_CONG_DOAN"].ToString(),row2["TL_CTY_TRA"].ToString(),row2["BHTN_CTY_TRA"].ToString()};
 
+                    Range rowData = ws.get_Range("A" + row, lastColumn + row);//Lấy dòng thứ row ra để đổ dữ liệu
+                    rowData.Font.Size = fontSizeNoiDung;
+                    rowData.Font.Name = fontName;
+                    rowData.Value2 = arr;
+                }
+                row++;
+                Range FormatTong = ws.get_Range("A" + row + "", lastColumn + row);
+                FormatTong.Interior.Color = Color.FromArgb(146, 208, 80);
+                for (int colSUM = 14; colSUM < dt2.Columns.Count + 2; colSUM++)
+                {
+                    //ws.Cells[row, colSUM] = "=SUBTOTAL(9,N10:N" + (row - 1).ToString() + ")";
+                    ws.Cells[row, colSUM] = "=SUBTOTAL(9," + CellAddress(ws, 10, colSUM) + ":" + CellAddress(ws, row - 1, colSUM) + ")";
+                }
 
-                //    Range rowData = ws.get_Range("A" + row, "AY" + row);//Lấy dòng thứ row ra để đổ dữ liệu
-                //    rowData.Font.Size = fontSizeNoiDung;
-                //    rowData.Font.Name = fontName;
-                //    rowData.Value2 = arr;
-                //}
-                //row++;
-                //for (int colSUM = 9; colSUM < 52; colSUM++)
-                //{
-                //    ws.Cells[row, colSUM] = "=SUM(" + CellAddress(ws, 9, colSUM) + ":" + CellAddress(ws, row - 1, colSUM) + ")";
-                //}
-
-                ////Range colFormat = ws.get_Range("I8", "I" + row);
-                ////colFormat.NumberFormat = "#,##0;(#,##0); ; ";
+                for (int colFormat = 32; colFormat < dt2.Columns.Count + 2; colFormat++)
+                {
+                    ws.get_Range(CellAddress(ws, 10, colFormat), CellAddress(ws, row, colFormat)).NumberFormat = "#,##0;(#,##0); ; ";
+                }
+                //Range colFormat = ws.get_Range("I8", "I" + row);
+                //colFormat.NumberFormat = "#,##0;(#,##0); ; ";
                 //ws.get_Range("I9", "I" + row).NumberFormat = "#,##0;(#,##0); ; ";
                 //ws.get_Range("J9", "J" + row).NumberFormat = "#,##0.0;(#,##0.0); ; ";
                 //ws.get_Range("K9", "N" + row).NumberFormat = "#,##0;(#,##0); ; ";
@@ -2104,31 +2124,55 @@ namespace Vs.Payroll
                 //ws.get_Range("AU9", "AU" + row).NumberFormat = "#,##0.0;(#,##0.0); ; ";
                 //ws.get_Range("AV9", "AY" + row).NumberFormat = "#,##0;(#,##0); ; ";
 
-                //ws.get_Range("A9", "B" + row).HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
-                //ws.get_Range("A9", "B" + row).VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
-                //ws.get_Range("E9", "E" + row).HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
-                //ws.get_Range("E9", "E" + row).VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
-                //ws.get_Range("H9", "H" + row).HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
-                //ws.get_Range("H9", "H" + row).VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
+                ws.get_Range("J10", "J" + row).HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
+                ws.get_Range("K10", "K" + row).HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
+                ws.get_Range("L10", "L" + row).HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
 
                 //Range rowLBTC = ws.get_Range("A" + row, "H" + row);
                 //rowLBTC.Merge();
                 //rowLBTC.Value2 = "Tổng cộng (Total)";
 
-                //Excel.Range myRange = ws.get_Range("A9", lastColumn + (row - 1).ToString());
-                Excel.Range myRange = ws.get_Range("A9", lastColumn + "10");
+
+                Excel.Range myRange = ws.get_Range("A9", lastColumn + (row - 1).ToString());
+                //Excel.Range myRange = ws.get_Range("A9", lastColumn + "10");
                 myRange.AutoFilter("1", "<>", Microsoft.Office.Interop.Excel.XlAutoFilterOperator.xlOr, "", true);
 
-                //Range rowTC = ws.get_Range("A" + row, "AZ" + row);
-                //rowTC.Font.Size = fontSizeNoiDung;
-                //rowTC.Font.Name = fontName;
-                //rowTC.Font.Bold = true;
-                //rowTC.Font.Color = XlRgbColor.rgbBlue;
+                Range rowTC = ws.get_Range("A" + row, lastColumn + row);
+                rowTC.Font.Size = fontSizeNoiDung;
+                rowTC.Font.Name = fontName;
+                rowTC.Font.Bold = true;
 
-                //BorderAround(ws.get_Range("A9", "AZ" + row));
+                BorderAround(ws.get_Range("A9", lastColumn + row));
+
+                xlApp.Visible = true;
             }
-            catch
-            { }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        private void PhieuLuongThang_DM()
+        {
+            DataTable dt = new DataTable();
+            DataTable dtbc = new DataTable();
+            System.Data.SqlClient.SqlConnection conn;
+            dt = new DataTable();
+            frmViewReport frm = new frmViewReport();
+            frm.rpt = new rptPhieuLuongThang_DM(Commons.Modules.ObjSystems.ConvertDateTime(cboThang.Text));
+            conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+            conn.Open();
+
+            System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptPhieuLuongThangDM_TEST", conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+            DataSet ds = new DataSet();
+            adp.Fill(ds);
+            dt = new DataTable();
+            dt = ds.Tables[0].Copy();
+            dt.TableName = "DATA";
+            frm.AddDataSource(dt);
+            frm.ShowDialog();
         }
     }
 }

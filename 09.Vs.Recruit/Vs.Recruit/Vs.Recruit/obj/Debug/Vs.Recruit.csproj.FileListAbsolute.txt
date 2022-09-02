@@ -1038,3 +1038,4 @@ H:\Lamviec\Lamviec\HRM\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.R
 H:\Lamviec\Lamviec\HRM\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.Recruit.csproj.CopyComplete
 H:\Lamviec\Lamviec\HRM\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.Recruit.dll
 H:\Lamviec\Lamviec\HRM\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.Recruit.pdb
+H:\Lamviec\Lamviec\HRM\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.Recruit.ThongTinTiepNhanUV.resources

@@ -198,7 +198,6 @@ namespace Commons
             try
             {
                 ngay = DateTime.ParseExact(sDate, "dd/MM/yyyy", cultures);
-
                 return ngay;
             }
             catch
@@ -3115,7 +3114,14 @@ namespace Commons
             }
             catch
             {
-                sNN = Modules.ObjLanguages.GetLanguage(Modules.ModuleName, sFormName, sKeyWord, Modules.TypeLanguage);
+                if (sKeyWord.Substring(0, 3).ToString().ToLower() == "chk")
+                {
+                    sNN = "";
+                }
+                else
+                {
+                    sNN = Modules.ObjLanguages.GetLanguage(Modules.ModuleName, sFormName, sKeyWord, Modules.TypeLanguage);
+                }
             }
             return sNN;
         }

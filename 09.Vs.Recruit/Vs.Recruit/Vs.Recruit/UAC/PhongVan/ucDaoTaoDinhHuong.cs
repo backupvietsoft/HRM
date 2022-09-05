@@ -213,7 +213,7 @@ namespace Vs.Recruit
 
         private bool Savedata()
         {
-            string sBT = "sBTDTDinhHuong" + Commons.Modules.UserName;
+            string sBT = "sBTDTDinhHuong" + Commons.Modules.iIDUser;
             try
             {
                 //DateTime ngay = DateTime.ParseExact(cboThang.Text, "dd/MM/yyyy", cultures);

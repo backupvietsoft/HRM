@@ -137,7 +137,7 @@
             // datTThang
             // 
             this.datTThang.EditValue = null;
-            this.datTThang.Location = new System.Drawing.Point(157, 58);
+            this.datTThang.Location = new System.Drawing.Point(158, 58);
             this.datTThang.Margin = new System.Windows.Forms.Padding(5);
             this.datTThang.Name = "datTThang";
             this.datTThang.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -148,17 +148,17 @@
             this.datTThang.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.datTThang.Properties.EditFormat.FormatString = "MM/yyyy";
             this.datTThang.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
-            this.datTThang.Properties.Mask.EditMask = "MM/yyyy";
+            this.datTThang.Properties.MaskSettings.Set("mask", "MM/yyyy");
             this.datTThang.Properties.VistaCalendarInitialViewStyle = DevExpress.XtraEditors.VistaCalendarInitialViewStyle.YearView;
             this.datTThang.Properties.VistaCalendarViewStyle = DevExpress.XtraEditors.VistaCalendarViewStyle.YearView;
-            this.datTThang.Size = new System.Drawing.Size(274, 34);
+            this.datTThang.Size = new System.Drawing.Size(273, 34);
             this.datTThang.StyleController = this.dataLayoutControl1;
             this.datTThang.TabIndex = 10;
             // 
             // datDThang
             // 
             this.datDThang.EditValue = null;
-            this.datDThang.Location = new System.Drawing.Point(157, 96);
+            this.datDThang.Location = new System.Drawing.Point(158, 96);
             this.datDThang.Margin = new System.Windows.Forms.Padding(5);
             this.datDThang.Name = "datDThang";
             this.datDThang.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -172,7 +172,7 @@
             this.datDThang.Properties.Mask.EditMask = "MM/yyyy";
             this.datDThang.Properties.VistaCalendarInitialViewStyle = DevExpress.XtraEditors.VistaCalendarInitialViewStyle.YearView;
             this.datDThang.Properties.VistaCalendarViewStyle = DevExpress.XtraEditors.VistaCalendarViewStyle.YearView;
-            this.datDThang.Size = new System.Drawing.Size(274, 34);
+            this.datDThang.Size = new System.Drawing.Size(273, 34);
             this.datDThang.StyleController = this.dataLayoutControl1;
             this.datDThang.TabIndex = 11;
             // 

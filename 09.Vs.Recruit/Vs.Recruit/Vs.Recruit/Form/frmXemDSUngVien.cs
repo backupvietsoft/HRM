@@ -51,7 +51,7 @@ namespace Vs.Recruit
                                 UAC.ctUngVien.frmUpdateTTUV frm = new UAC.ctUngVien.frmUpdateTTUV();
                                 if(frm.ShowDialog() == DialogResult.OK)
                                 {
-                                    string sBT_grvDSUv = "sBT_grvDSUv" + Commons.Modules.UserName;
+                                    string sBT_grvDSUv = "sBT_grvDSUv" + Commons.Modules.iIDUser;
                                     if (dt_CHON == null || dt_CHON.Rows.Count == 0)
                                     {
                                         sBT_grvDSUv = "";

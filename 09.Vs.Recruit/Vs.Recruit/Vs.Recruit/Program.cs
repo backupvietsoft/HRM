@@ -41,11 +41,12 @@ namespace Vs.Recruit
                 Commons.Modules.iCustomerID = Convert.ToInt32(dt.Rows[0]["CustomerID"]);
                 Commons.Modules.iLOAI_CN = Convert.ToInt32(dt.Rows[0]["LOAI_CN"]);//1 cập nhật trên server//2 cập nhật net.
                 Commons.Modules.sHideMenu = Commons.Modules.ObjSystems.Decrypt(dt.Rows[0]["HIDE_MENU"].ToString(), true);
-                Commons.Modules.sDDTaiLieu = dt.Rows[0]["DUONG_DAN_TL"].ToString();
+
                 try
                 {
                     using (new ConnectToSharedFolder(Commons.Modules.sDDTaiLieu, new NetworkCredential(dt.Rows[0]["USER_TL"].ToString(), dt.Rows[0]["PASS_TL"].ToString())))
                     {
+                        Commons.Modules.sDDTaiLieu = dt.Rows[0]["DUONG_DAN_TL"].ToString();
                     }
                 }
                 catch
@@ -83,7 +84,8 @@ namespace Vs.Recruit
         {
             try
             {
-                Application.Run(new Form1());
+                //Application.Run(new Form1());
+                Application.Run(new frmUngVien());
                 //frmViewReport frm = new frmViewReport();
                 //XtraReport1 fpt = new XtraReport1();
                 //frm.rpt = fpt;

@@ -32,7 +32,6 @@
             this.stepProgressBarItem2 = new DevExpress.XtraEditors.StepProgressBarItem();
             this.stepProgressBarItem3 = new DevExpress.XtraEditors.StepProgressBarItem();
             this.richEditControl1 = new DevExpress.XtraRichEdit.RichEditControl();
-            this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             this.SuspendLayout();
             // 
             // stepProgressBarItem1
@@ -52,30 +51,20 @@
             // 
             // richEditControl1
             // 
-            this.richEditControl1.Location = new System.Drawing.Point(441, 81);
+            this.richEditControl1.Location = new System.Drawing.Point(693, 133);
+            this.richEditControl1.Margin = new System.Windows.Forms.Padding(5);
             this.richEditControl1.Name = "richEditControl1";
-            this.richEditControl1.Size = new System.Drawing.Size(578, 434);
+            this.richEditControl1.Size = new System.Drawing.Size(908, 715);
             this.richEditControl1.TabIndex = 0;
-            this.richEditControl1.Text = "richEditControl1";
             this.richEditControl1.Visible = false;
-            // 
-            // simpleButton1
-            // 
-            this.simpleButton1.Location = new System.Drawing.Point(922, 13);
-            this.simpleButton1.Name = "simpleButton1";
-            this.simpleButton1.Size = new System.Drawing.Size(75, 23);
-            this.simpleButton1.TabIndex = 2;
-            this.simpleButton1.Text = "simpleButton1";
-            //this.simpleButton1.Click += new System.EventHandler(this.simpleButton1_Click);
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 28F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1057, 600);
-            this.Controls.Add(this.simpleButton1);
+            this.ClientSize = new System.Drawing.Size(1661, 988);
             this.Controls.Add(this.richEditControl1);
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
@@ -89,6 +78,5 @@
         private DevExpress.XtraEditors.StepProgressBarItem stepProgressBarItem2;
         private DevExpress.XtraEditors.StepProgressBarItem stepProgressBarItem3;
         private DevExpress.XtraRichEdit.RichEditControl richEditControl1;
-        private DevExpress.XtraEditors.SimpleButton simpleButton1;
     }
 }

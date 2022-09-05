@@ -29,12 +29,15 @@ namespace Vs.Recruit
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions1 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmChonUngVien));
             DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions2 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
             this.tablePanel1 = new DevExpress.Utils.Layout.TablePanel();
             this.dataLayoutControl1 = new DevExpress.XtraDataLayout.DataLayoutControl();
             this.grdChonUV = new DevExpress.XtraGrid.GridControl();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.mnuLinkUngVienToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.grvChonUV = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.cboID_VTTD = new DevExpress.XtraEditors.SearchLookUpEdit();
             this.searchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -54,6 +57,7 @@ namespace Vs.Recruit
             ((System.ComponentModel.ISupportInitialize)(this.dataLayoutControl1)).BeginInit();
             this.dataLayoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdChonUV)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grvChonUV)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboID_VTTD.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).BeginInit();
@@ -107,13 +111,29 @@ namespace Vs.Recruit
             // 
             // grdChonUV
             // 
-            this.grdChonUV.Location = new System.Drawing.Point(12, 88);
+            this.grdChonUV.ContextMenuStrip = this.contextMenuStrip1;
+            this.grdChonUV.Location = new System.Drawing.Point(12, 68);
             this.grdChonUV.MainView = this.grvChonUV;
             this.grdChonUV.Name = "grdChonUV";
-            this.grdChonUV.Size = new System.Drawing.Size(948, 375);
+            this.grdChonUV.Size = new System.Drawing.Size(948, 395);
             this.grdChonUV.TabIndex = 5;
             this.grdChonUV.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grvChonUV});
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuLinkUngVienToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(167, 26);
+            // 
+            // mnuLinkUngVienToolStripMenuItem
+            // 
+            this.mnuLinkUngVienToolStripMenuItem.Name = "mnuLinkUngVienToolStripMenuItem";
+            this.mnuLinkUngVienToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.mnuLinkUngVienToolStripMenuItem.Text = "mnuLinkUngVien";
+            this.mnuLinkUngVienToolStripMenuItem.Click += new System.EventHandler(this.mnuLinkUngVienToolStripMenuItem_Click);
             // 
             // grvChonUV
             // 
@@ -128,17 +148,18 @@ namespace Vs.Recruit
             this.grvChonUV.OptionsView.ShowGroupPanel = false;
             this.grvChonUV.RowHeight = 0;
             this.grvChonUV.ViewCaptionHeight = 0;
+            this.grvChonUV.PopupMenuShowing += new DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler(this.grvChonUV_PopupMenuShowing);
             this.grvChonUV.DoubleClick += new System.EventHandler(this.grvChonUV_DoubleClick);
             // 
             // cboID_VTTD
             // 
-            this.cboID_VTTD.Location = new System.Drawing.Point(201, 12);
+            this.cboID_VTTD.Location = new System.Drawing.Point(139, 12);
             this.cboID_VTTD.Name = "cboID_VTTD";
             this.cboID_VTTD.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cboID_VTTD.Properties.NullText = "";
             this.cboID_VTTD.Properties.PopupView = this.searchLookUpEdit1View;
-            this.cboID_VTTD.Size = new System.Drawing.Size(282, 34);
+            this.cboID_VTTD.Size = new System.Drawing.Size(344, 24);
             this.cboID_VTTD.StyleController = this.dataLayoutControl1;
             this.cboID_VTTD.TabIndex = 1;
             this.cboID_VTTD.EditValueChanged += new System.EventHandler(this.cboID_VTTD_EditValueChanged);
@@ -152,36 +173,36 @@ namespace Vs.Recruit
             // 
             // cboID_NTD
             // 
-            this.cboID_NTD.Location = new System.Drawing.Point(676, 12);
+            this.cboID_NTD.Location = new System.Drawing.Point(614, 12);
             this.cboID_NTD.Name = "cboID_NTD";
             this.cboID_NTD.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cboID_NTD.Properties.NullText = "";
-            this.cboID_NTD.Size = new System.Drawing.Size(284, 34);
+            this.cboID_NTD.Size = new System.Drawing.Size(346, 24);
             this.cboID_NTD.StyleController = this.dataLayoutControl1;
             this.cboID_NTD.TabIndex = 2;
             this.cboID_NTD.EditValueChanged += new System.EventHandler(this.cboID_VTTD_EditValueChanged);
             // 
             // cboID_TD
             // 
-            this.cboID_TD.Location = new System.Drawing.Point(201, 50);
+            this.cboID_TD.Location = new System.Drawing.Point(139, 40);
             this.cboID_TD.Name = "cboID_TD";
             this.cboID_TD.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cboID_TD.Properties.NullText = "";
-            this.cboID_TD.Size = new System.Drawing.Size(282, 34);
+            this.cboID_TD.Size = new System.Drawing.Size(344, 24);
             this.cboID_TD.StyleController = this.dataLayoutControl1;
             this.cboID_TD.TabIndex = 3;
             this.cboID_TD.EditValueChanged += new System.EventHandler(this.cboID_VTTD_EditValueChanged);
             // 
             // cboID_KNLV
             // 
-            this.cboID_KNLV.Location = new System.Drawing.Point(676, 50);
+            this.cboID_KNLV.Location = new System.Drawing.Point(614, 40);
             this.cboID_KNLV.Name = "cboID_KNLV";
             this.cboID_KNLV.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cboID_KNLV.Properties.NullText = "";
-            this.cboID_KNLV.Size = new System.Drawing.Size(284, 34);
+            this.cboID_KNLV.Size = new System.Drawing.Size(346, 24);
             this.cboID_KNLV.StyleController = this.dataLayoutControl1;
             this.cboID_KNLV.TabIndex = 4;
             this.cboID_KNLV.EditValueChanged += new System.EventHandler(this.cboID_VTTD_EditValueChanged);
@@ -205,43 +226,43 @@ namespace Vs.Recruit
             this.lblID_VTTD.Control = this.cboID_VTTD;
             this.lblID_VTTD.Location = new System.Drawing.Point(0, 0);
             this.lblID_VTTD.Name = "lblID_VTTD";
-            this.lblID_VTTD.Size = new System.Drawing.Size(475, 38);
+            this.lblID_VTTD.Size = new System.Drawing.Size(475, 28);
             this.lblID_VTTD.Text = "Vị trí tuyển dụng";
-            this.lblID_VTTD.TextSize = new System.Drawing.Size(186, 28);
+            this.lblID_VTTD.TextSize = new System.Drawing.Size(123, 17);
             // 
             // lblID_NTD
             // 
             this.lblID_NTD.Control = this.cboID_NTD;
             this.lblID_NTD.Location = new System.Drawing.Point(475, 0);
             this.lblID_NTD.Name = "lblID_NTD";
-            this.lblID_NTD.Size = new System.Drawing.Size(477, 38);
+            this.lblID_NTD.Size = new System.Drawing.Size(477, 28);
             this.lblID_NTD.Text = "Nguồn tuyển dụng";
-            this.lblID_NTD.TextSize = new System.Drawing.Size(186, 28);
+            this.lblID_NTD.TextSize = new System.Drawing.Size(123, 17);
             // 
             // lblID_TD
             // 
             this.lblID_TD.Control = this.cboID_TD;
-            this.lblID_TD.Location = new System.Drawing.Point(0, 38);
+            this.lblID_TD.Location = new System.Drawing.Point(0, 28);
             this.lblID_TD.Name = "lblID_TD";
-            this.lblID_TD.Size = new System.Drawing.Size(475, 38);
+            this.lblID_TD.Size = new System.Drawing.Size(475, 28);
             this.lblID_TD.Text = "Trình độ";
-            this.lblID_TD.TextSize = new System.Drawing.Size(186, 28);
+            this.lblID_TD.TextSize = new System.Drawing.Size(123, 17);
             // 
             // lblID_KNLV
             // 
             this.lblID_KNLV.Control = this.cboID_KNLV;
-            this.lblID_KNLV.Location = new System.Drawing.Point(475, 38);
+            this.lblID_KNLV.Location = new System.Drawing.Point(475, 28);
             this.lblID_KNLV.Name = "lblID_KNLV";
-            this.lblID_KNLV.Size = new System.Drawing.Size(477, 38);
+            this.lblID_KNLV.Size = new System.Drawing.Size(477, 28);
             this.lblID_KNLV.Text = "Kinh nghiệm làm việc";
-            this.lblID_KNLV.TextSize = new System.Drawing.Size(186, 28);
+            this.lblID_KNLV.TextSize = new System.Drawing.Size(123, 17);
             // 
             // layoutControlItem5
             // 
             this.layoutControlItem5.Control = this.grdChonUV;
-            this.layoutControlItem5.Location = new System.Drawing.Point(0, 76);
+            this.layoutControlItem5.Location = new System.Drawing.Point(0, 56);
             this.layoutControlItem5.Name = "layoutControlItem5";
-            this.layoutControlItem5.Size = new System.Drawing.Size(952, 379);
+            this.layoutControlItem5.Size = new System.Drawing.Size(952, 399);
             this.layoutControlItem5.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem5.TextVisible = false;
             // 
@@ -284,12 +305,15 @@ namespace Vs.Recruit
             // 
             // searchControl1
             // 
+            this.searchControl1.Client = this.grdChonUV;
             this.searchControl1.Location = new System.Drawing.Point(19, 12);
             this.searchControl1.Name = "searchControl1";
             this.searchControl1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Repository.ClearButton(),
             new DevExpress.XtraEditors.Repository.SearchButton()});
-            this.searchControl1.Size = new System.Drawing.Size(208, 34);
+            this.searchControl1.Properties.Client = this.grdChonUV;
+            this.searchControl1.Properties.FindDelay = 100;
+            this.searchControl1.Size = new System.Drawing.Size(208, 24);
             this.searchControl1.TabIndex = 0;
             // 
             // frmChonUngVien
@@ -306,6 +330,7 @@ namespace Vs.Recruit
             ((System.ComponentModel.ISupportInitialize)(this.dataLayoutControl1)).EndInit();
             this.dataLayoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.grdChonUV)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.grvChonUV)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboID_VTTD.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).EndInit();
@@ -343,5 +368,7 @@ namespace Vs.Recruit
         private DevExpress.XtraEditors.LookUpEdit cboID_NTD;
         private DevExpress.XtraEditors.LookUpEdit cboID_TD;
         private DevExpress.XtraEditors.LookUpEdit cboID_KNLV;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem mnuLinkUngVienToolStripMenuItem;
     }
 }

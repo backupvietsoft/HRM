@@ -82,9 +82,9 @@ namespace Vs.Recruit
         {
             try
             {
-                Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, "sBTKHT" + Commons.Modules.UserName, Commons.Modules.ObjSystems.ConvertDatatable(grdTuan), "");
-                Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, "sBTNT" + Commons.Modules.UserName, Commons.Modules.ObjSystems.ConvertDatatable(grdNguonTuyen), "");
-                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spSaveKeHoachTuyenDung", datThang.DateTime, "sBTKHT" + Commons.Modules.UserName, "sBTNT" + Commons.Modules.UserName);
+                Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, "sBTKHT" + Commons.Modules.iIDUser, Commons.Modules.ObjSystems.ConvertDatatable(grdTuan), "");
+                Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, "sBTNT" + Commons.Modules.iIDUser, Commons.Modules.ObjSystems.ConvertDatatable(grdNguonTuyen), "");
+                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spSaveKeHoachTuyenDung", datThang.DateTime,grvVTYC.GetFocusedRowCellValue("ID_YCTD"), grvVTYC.GetFocusedRowCellValue("ID_VTTD"), "sBTKHT" + Commons.Modules.iIDUser, "sBTNT" + Commons.Modules.iIDUser);
                 return true;
             }
             catch
@@ -100,7 +100,7 @@ namespace Vs.Recruit
             btnALL.Buttons[3].Properties.Visible = !visible;
             btnALL.Buttons[4].Properties.Visible = !visible;
             btnALL.Buttons[5].Properties.Visible = visible;
-
+            grdVTYC.Enabled = visible;
             grvNguonTuyen.OptionsBehavior.Editable = !visible;
             grvTuan.OptionsBehavior.Editable = !visible;
         }
@@ -113,15 +113,16 @@ namespace Vs.Recruit
             {
                 Commons.Modules.sLoad = "0Load";
                 //tạo bảng tạm tuần trong tháng
-                Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, "sBTTuan" + Commons.Modules.UserName, TinhSoTuanCuaTHang(TN, DN), "");
+                Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, "sBTTuan" + Commons.Modules.iIDUser, TinhSoTuanCuaTHang(TN, DN), "");
                 DataSet set = new DataSet();
-                set = SqlHelper.ExecuteDataset(Commons.IConnections.CNStr, "spGetListKeHoachTuyenDung", TN, DN, Commons.Modules.UserName, Commons.Modules.TypeLanguage, "sBTTuan" + Commons.Modules.UserName);
+                set = SqlHelper.ExecuteDataset(Commons.IConnections.CNStr, "spGetListKeHoachTuyenDung", TN, DN, Commons.Modules.UserName, Commons.Modules.TypeLanguage, "sBTTuan" + Commons.Modules.iIDUser);
                 DataTable dt = set.Tables[0];
                 if (grdVTYC.DataSource == null)
                 {
                     Commons.Modules.ObjSystems.MLoadXtraGrid(grdVTYC, grvVTYC, dt, false, false, false, true, true, this.Name);
                     grvVTYC.Columns["ID_YCTD"].Visible = false;
                     grvVTYC.Columns["ID_VTTD"].Visible = false;
+                    grvVTYC.Columns["ID_TT"].Visible = false;
                 }
                 else
                 {
@@ -187,9 +188,13 @@ namespace Vs.Recruit
             WindowsUIButton btn = e.Button as WindowsUIButton;
             switch (btn.Tag.ToString())
             {
-
                 case "sua":
                     {
+                        if (Convert.ToInt32(grvVTYC.GetFocusedRowCellValue("ID_TT")) != 1)
+                        {
+                            XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDuLieuDaPhatSinhKhongSua"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
                         Commons.Modules.ObjSystems.AddnewRow(grvTuan, false);
                         Commons.Modules.ObjSystems.AddnewRow(grvNguonTuyen, true);
                         enableButon(false);
@@ -209,6 +214,12 @@ namespace Vs.Recruit
 
                 case "luu":
                     {
+                        if(Convert.ToInt32(grvVTYC.GetFocusedRowCellValue("ID_TT")) != 1 )
+                        {
+                            XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDuLieuDaPhatSinhKhongSua"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }    
+
                         Validate();
                         if (grvTuan.HasColumnErrors) return;
                         if (grvNguonTuyen.HasColumnErrors) return;
@@ -306,6 +317,12 @@ namespace Vs.Recruit
         }
         private void XoaKeHoach()
         {
+            if (Convert.ToInt32(grvVTYC.GetFocusedRowCellValue("ID_TT")) != 1)
+            {
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDuLieuDaPhatSinhKhongXoa"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDeleteYeuCauTuyenDung"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) return;
             //xóa
             try
@@ -350,7 +367,6 @@ namespace Vs.Recruit
                         int n = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT ISNULL(SUM(SL_KH),0) FROM dbo.KHTD_TUAN WHERE ID_YCTD = " + grvVTYC.GetFocusedRowCellValue("ID_YCTD") + " AND ID_VTTD = " + grvVTYC.GetFocusedRowCellValue("ID_VTTD") + " AND RIGHT(CONVERT(NVARCHAR(12),THANG,103),7) != '" + datThang.Text +"'"));
                         if ((Convert.ToInt32(e.Value) + tong + n) > Convert.ToInt32(grvVTYC.GetFocusedRowCellValue("SL_TUYEN")) ) 
                         {
-                            view.SetFocusedRowCellValue("SL_KH", e.Value);
                             e.Valid = false;
                             e.ErrorText = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "erKhongLuongVuotQuaSLTruyen");
                             view.SetColumnError(view.Columns["SL_KH"], e.ErrorText);

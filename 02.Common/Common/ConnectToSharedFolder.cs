@@ -2,6 +2,8 @@
 using System.ComponentModel;
 using System.Runtime.InteropServices;
 using System.Net;
+using System.Threading;
+
 public class ConnectToSharedFolder : IDisposable
 {
     readonly string _networkName;
@@ -20,19 +22,23 @@ public class ConnectToSharedFolder : IDisposable
         var userName = string.IsNullOrEmpty(credentials.Domain)
             ? credentials.UserName
             : string.Format(@"{0}\{1}", credentials.Domain, credentials.UserName);
-
-        //var result = WNetAddConnection2(
-        //    netResource,
-        //    credentials.Password,
-        //    userName,
-        //    0);
-
         var result = 1;
-        if (result != 0)
+        Thread thread = new Thread(() =>
+         {
+             result = WNetAddConnection2(
+            netResource,
+            credentials.Password,
+            userName,
+            0);
+         }, 2000);
+        thread.Start();
+        Thread.Sleep(2000);
+        if (result != 0 && result != 1219)
         {
             throw new Win32Exception(result, "Error connecting to remote share");
         }
     }
+
 
     ~ConnectToSharedFolder()
     {

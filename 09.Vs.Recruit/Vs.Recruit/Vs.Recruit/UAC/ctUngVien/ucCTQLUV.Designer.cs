@@ -43,10 +43,10 @@
             this.NONNlayoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.lciNotes4 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.labTaiNan = new DevExpress.XtraEditors.LabelControl();
-            this.labDanhGia = new DevExpress.XtraEditors.LabelControl();
             this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
+            this.labTaiNan = new DevExpress.XtraEditors.LabelControl();
+            this.labDanhGia = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.navigationFrame1)).BeginInit();
@@ -70,11 +70,11 @@
             this.layoutControl1.Controls.Add(this.labLSTuyenDung);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl1.Location = new System.Drawing.Point(0, 0);
-            this.layoutControl1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.layoutControl1.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(716, 115, 650, 400);
             this.layoutControl1.Root = this.Root;
-            this.layoutControl1.Size = new System.Drawing.Size(1245, 655);
+            this.layoutControl1.Size = new System.Drawing.Size(1956, 1079);
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
             // 
@@ -83,39 +83,40 @@
             this.navigationFrame1.AllowTransitionAnimation = DevExpress.Utils.DefaultBoolean.False;
             this.navigationFrame1.Controls.Add(this.pageLSTD);
             this.navigationFrame1.Controls.Add(this.pageLylich);
-            this.navigationFrame1.Location = new System.Drawing.Point(1, 36);
-            this.navigationFrame1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.navigationFrame1.Location = new System.Drawing.Point(3, 60);
+            this.navigationFrame1.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.navigationFrame1.Name = "navigationFrame1";
             this.navigationFrame1.Pages.AddRange(new DevExpress.XtraBars.Navigation.NavigationPageBase[] {
             this.pageLylich,
             this.pageLSTD});
             this.navigationFrame1.SelectedPage = this.pageLSTD;
-            this.navigationFrame1.Size = new System.Drawing.Size(1243, 618);
+            this.navigationFrame1.Size = new System.Drawing.Size(1950, 1016);
             this.navigationFrame1.TabIndex = 25;
             this.navigationFrame1.Text = "navigationFrame1";
             // 
             // pageLSTD
             // 
-            this.pageLSTD.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.pageLSTD.Caption = "pageLSTD";
+            this.pageLSTD.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.pageLSTD.Name = "pageLSTD";
-            this.pageLSTD.Size = new System.Drawing.Size(1243, 618);
+            this.pageLSTD.Size = new System.Drawing.Size(3064, 1673);
             // 
             // pageLylich
             // 
             this.pageLylich.Caption = "pageLylich";
-            this.pageLylich.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.pageLylich.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.pageLylich.Name = "pageLylich";
-            this.pageLylich.Size = new System.Drawing.Size(1243, 618);
+            this.pageLylich.Size = new System.Drawing.Size(3064, 1673);
             // 
             // labLyLich
             // 
             this.labLyLich.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.labLyLich.Appearance.Options.UseForeColor = true;
             this.labLyLich.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.labLyLich.Location = new System.Drawing.Point(58, 13);
-            this.labLyLich.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.labLyLich.Location = new System.Drawing.Point(92, 21);
+            this.labLyLich.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.labLyLich.Name = "labLyLich";
-            this.labLyLich.Size = new System.Drawing.Size(34, 17);
+            this.labLyLich.Size = new System.Drawing.Size(53, 28);
             this.labLyLich.StyleController = this.layoutControl1;
             this.labLyLich.TabIndex = 22;
             this.labLyLich.Text = "Lý lịch";
@@ -130,21 +131,21 @@
             windowsUIButtonImageOptions1.ImageUri.Uri = "hybriddemo_back%20button;Svg";
             this.backWindowsUIButtonPanel.Buttons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] {
             new DevExpress.XtraBars.Docking2010.WindowsUIButton("", false, windowsUIButtonImageOptions1, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, null, -1, true)});
-            this.backWindowsUIButtonPanel.Location = new System.Drawing.Point(11, 1);
-            this.backWindowsUIButtonPanel.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.backWindowsUIButtonPanel.Location = new System.Drawing.Point(19, 3);
+            this.backWindowsUIButtonPanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.backWindowsUIButtonPanel.Name = "backWindowsUIButtonPanel";
             this.backWindowsUIButtonPanel.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.backWindowsUIButtonPanel.Size = new System.Drawing.Size(41, 33);
+            this.backWindowsUIButtonPanel.Size = new System.Drawing.Size(62, 51);
             this.backWindowsUIButtonPanel.TabIndex = 1;
             this.backWindowsUIButtonPanel.Text = "backWindowsUIButtonPanel";
             this.backWindowsUIButtonPanel.UseButtonBackgroundImages = false;
             // 
             // NONNlabelControl21
             // 
-            this.NONNlabelControl21.Location = new System.Drawing.Point(102, 13);
-            this.NONNlabelControl21.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.NONNlabelControl21.Location = new System.Drawing.Point(161, 21);
+            this.NONNlabelControl21.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.NONNlabelControl21.Name = "NONNlabelControl21";
-            this.NONNlabelControl21.Size = new System.Drawing.Size(3, 17);
+            this.NONNlabelControl21.Size = new System.Drawing.Size(5, 28);
             this.NONNlabelControl21.StyleController = this.layoutControl1;
             this.NONNlabelControl21.TabIndex = 24;
             this.NONNlabelControl21.Text = "|";
@@ -154,10 +155,10 @@
             this.labLSTuyenDung.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.labLSTuyenDung.Appearance.Options.UseForeColor = true;
             this.labLSTuyenDung.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.labLSTuyenDung.Location = new System.Drawing.Point(115, 13);
-            this.labLSTuyenDung.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.labLSTuyenDung.Location = new System.Drawing.Point(182, 21);
+            this.labLSTuyenDung.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.labLSTuyenDung.Name = "labLSTuyenDung";
-            this.labLSTuyenDung.Size = new System.Drawing.Size(109, 17);
+            this.labLSTuyenDung.Size = new System.Drawing.Size(164, 28);
             this.labLSTuyenDung.StyleController = this.layoutControl1;
             this.labLSTuyenDung.TabIndex = 23;
             this.labLSTuyenDung.Text = "Lịch sử tuyển dụng";
@@ -176,20 +177,20 @@
             this.emptySpaceItem2});
             this.Root.Name = "Root";
             this.Root.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            this.Root.Size = new System.Drawing.Size(1245, 655);
+            this.Root.Size = new System.Drawing.Size(1956, 1079);
             this.Root.TextVisible = false;
             // 
             // layoutControlItem1
             // 
             this.layoutControlItem1.Control = this.backWindowsUIButtonPanel;
             this.layoutControlItem1.CustomizationFormText = "layoutControlItem5";
-            this.layoutControlItem1.Location = new System.Drawing.Point(10, 0);
-            this.layoutControlItem1.MaxSize = new System.Drawing.Size(43, 0);
-            this.layoutControlItem1.MinSize = new System.Drawing.Size(43, 21);
+            this.layoutControlItem1.Location = new System.Drawing.Point(16, 0);
+            this.layoutControlItem1.MaxSize = new System.Drawing.Size(68, 0);
+            this.layoutControlItem1.MinSize = new System.Drawing.Size(68, 35);
             this.layoutControlItem1.Name = "layoutControlItem1";
             this.layoutControlItem1.OptionsPrint.AppearanceItem.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.layoutControlItem1.OptionsPrint.AppearanceItem.Options.UseFont = true;
-            this.layoutControlItem1.Size = new System.Drawing.Size(43, 35);
+            this.layoutControlItem1.Size = new System.Drawing.Size(68, 57);
             this.layoutControlItem1.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlItem1.Text = "layoutControlItem5";
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
@@ -199,12 +200,12 @@
             // 
             this.lciTasks.Control = this.labLyLich;
             this.lciTasks.CustomizationFormText = "lciTasks";
-            this.lciTasks.Location = new System.Drawing.Point(53, 0);
+            this.lciTasks.Location = new System.Drawing.Point(84, 0);
             this.lciTasks.Name = "lciTasks";
             this.lciTasks.OptionsPrint.AppearanceItem.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.lciTasks.OptionsPrint.AppearanceItem.Options.UseFont = true;
-            this.lciTasks.Padding = new DevExpress.XtraLayout.Utils.Padding(5, 5, 13, 5);
-            this.lciTasks.Size = new System.Drawing.Size(44, 35);
+            this.lciTasks.Padding = new DevExpress.XtraLayout.Utils.Padding(8, 8, 21, 8);
+            this.lciTasks.Size = new System.Drawing.Size(69, 57);
             this.lciTasks.TextSize = new System.Drawing.Size(0, 0);
             this.lciTasks.TextVisible = false;
             // 
@@ -212,38 +213,59 @@
             // 
             this.NONNlayoutControlItem2.Control = this.NONNlabelControl21;
             this.NONNlayoutControlItem2.CustomizationFormText = "layoutControlItem12";
-            this.NONNlayoutControlItem2.Location = new System.Drawing.Point(97, 0);
+            this.NONNlayoutControlItem2.Location = new System.Drawing.Point(153, 0);
             this.NONNlayoutControlItem2.Name = "NONNlayoutControlItem2";
             this.NONNlayoutControlItem2.OptionsPrint.AppearanceItem.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.NONNlayoutControlItem2.OptionsPrint.AppearanceItem.Options.UseFont = true;
-            this.NONNlayoutControlItem2.Padding = new DevExpress.XtraLayout.Utils.Padding(5, 5, 13, 5);
-            this.NONNlayoutControlItem2.Size = new System.Drawing.Size(13, 35);
+            this.NONNlayoutControlItem2.Padding = new DevExpress.XtraLayout.Utils.Padding(8, 8, 21, 8);
+            this.NONNlayoutControlItem2.Size = new System.Drawing.Size(21, 57);
             this.NONNlayoutControlItem2.Text = "layoutControlItem12";
             this.NONNlayoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
             this.NONNlayoutControlItem2.TextVisible = false;
+            this.NONNlayoutControlItem2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             // 
             // lciNotes4
             // 
             this.lciNotes4.Control = this.labLSTuyenDung;
             this.lciNotes4.CustomizationFormText = "lciNotes";
-            this.lciNotes4.Location = new System.Drawing.Point(110, 0);
+            this.lciNotes4.Location = new System.Drawing.Point(174, 0);
             this.lciNotes4.Name = "lciNotes4";
             this.lciNotes4.OptionsPrint.AppearanceItem.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.lciNotes4.OptionsPrint.AppearanceItem.Options.UseFont = true;
-            this.lciNotes4.Padding = new DevExpress.XtraLayout.Utils.Padding(5, 5, 13, 5);
-            this.lciNotes4.Size = new System.Drawing.Size(119, 35);
+            this.lciNotes4.Padding = new DevExpress.XtraLayout.Utils.Padding(8, 8, 21, 8);
+            this.lciNotes4.Size = new System.Drawing.Size(180, 57);
             this.lciNotes4.Text = "lciNotes";
             this.lciNotes4.TextSize = new System.Drawing.Size(0, 0);
             this.lciNotes4.TextVisible = false;
+            this.lciNotes4.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             // 
             // layoutControlItem8
             // 
             this.layoutControlItem8.Control = this.navigationFrame1;
-            this.layoutControlItem8.Location = new System.Drawing.Point(0, 35);
+            this.layoutControlItem8.Location = new System.Drawing.Point(0, 57);
             this.layoutControlItem8.Name = "layoutControlItem8";
-            this.layoutControlItem8.Size = new System.Drawing.Size(1245, 620);
+            this.layoutControlItem8.Size = new System.Drawing.Size(1956, 1022);
             this.layoutControlItem8.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem8.TextVisible = false;
+            // 
+            // emptySpaceItem1
+            // 
+            this.emptySpaceItem1.AllowHotTrack = false;
+            this.emptySpaceItem1.Location = new System.Drawing.Point(354, 0);
+            this.emptySpaceItem1.Name = "emptySpaceItem1";
+            this.emptySpaceItem1.Size = new System.Drawing.Size(1602, 57);
+            this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
+            // 
+            // emptySpaceItem2
+            // 
+            this.emptySpaceItem2.AllowHotTrack = false;
+            this.emptySpaceItem2.Location = new System.Drawing.Point(0, 0);
+            this.emptySpaceItem2.MaxSize = new System.Drawing.Size(16, 0);
+            this.emptySpaceItem2.MinSize = new System.Drawing.Size(16, 16);
+            this.emptySpaceItem2.Name = "emptySpaceItem2";
+            this.emptySpaceItem2.Size = new System.Drawing.Size(16, 57);
+            this.emptySpaceItem2.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            this.emptySpaceItem2.TextSize = new System.Drawing.Size(0, 0);
             // 
             // labTaiNan
             // 
@@ -275,34 +297,15 @@
             this.labDanhGia.TabIndex = 23;
             this.labDanhGia.Text = "Đánh giá";
             // 
-            // emptySpaceItem1
-            // 
-            this.emptySpaceItem1.AllowHotTrack = false;
-            this.emptySpaceItem1.Location = new System.Drawing.Point(229, 0);
-            this.emptySpaceItem1.Name = "emptySpaceItem1";
-            this.emptySpaceItem1.Size = new System.Drawing.Size(1016, 35);
-            this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
-            // 
-            // emptySpaceItem2
-            // 
-            this.emptySpaceItem2.AllowHotTrack = false;
-            this.emptySpaceItem2.Location = new System.Drawing.Point(0, 0);
-            this.emptySpaceItem2.MaxSize = new System.Drawing.Size(10, 0);
-            this.emptySpaceItem2.MinSize = new System.Drawing.Size(10, 10);
-            this.emptySpaceItem2.Name = "emptySpaceItem2";
-            this.emptySpaceItem2.Size = new System.Drawing.Size(10, 35);
-            this.emptySpaceItem2.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-            this.emptySpaceItem2.TextSize = new System.Drawing.Size(0, 0);
-            // 
             // ucCTQLUV
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 28F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.Controls.Add(this.layoutControl1);
-            this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.Name = "ucCTQLUV";
-            this.Size = new System.Drawing.Size(1245, 655);
+            this.Size = new System.Drawing.Size(1956, 1079);
             this.Load += new System.EventHandler(this.ucCTQLUV_Load);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);

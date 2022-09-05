@@ -239,7 +239,6 @@ namespace Vs.Recruit
                 dtTmp.PrimaryKey = new DataColumn[] { dtTmp.Columns["ID_UV"] };
                 Commons.Modules.ObjSystems.MLoadXtraGrid(grdUngVien, grvUngVien, dtTmp, false, true, false, true, true, this.Name);
                 grvUngVien.Columns["ID_UV"].Visible = false;
-
                 if (iIdUV != -1)
                 {
                     int index = dtTmp.Rows.IndexOf(dtTmp.Rows.Find(iIdUV));

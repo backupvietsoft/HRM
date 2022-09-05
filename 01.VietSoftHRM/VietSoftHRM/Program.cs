@@ -56,8 +56,8 @@ namespace VietSoftHRM
         {
             try
             {
-
-                Application.Run(new frmLogin());
+                MRunInt();
+                //Application.Run(new frmDLTuyenDung());
                 //Vs.Report.frmViewReport frm = new Vs.Report.frmViewReport();
                 //frm.rpt = new VS.Report.NhanSu.XtraReport1();
                 //frm.ShowDialog();
@@ -69,7 +69,6 @@ namespace VietSoftHRM
                 MessageBox.Show(ex.Message);
             }
         }
-
         static void MRunInt()
         {
             try

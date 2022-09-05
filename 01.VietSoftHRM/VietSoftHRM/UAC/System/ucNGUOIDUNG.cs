@@ -9,6 +9,7 @@ using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
 using System.Collections.Generic;
 using DevExpress.XtraLayout;
+using System.Drawing;
 
 namespace VietSoftHRM
 {
@@ -33,7 +34,7 @@ namespace VietSoftHRM
             LoadUser(-1);
             enableButon(true);
             Commons.Modules.sLoad = "";
-            Enablecontrol(DefaultBoolean.True);
+            Enablecontrol(true);
 
 
         }
@@ -74,7 +75,7 @@ namespace VietSoftHRM
                         enableButon(false);
                         Resettest();
                         co = true;
-                        Enablecontrol(DefaultBoolean.False);
+                        Enablecontrol(false);
                         break;
                     }
                 case "xoa":
@@ -85,7 +86,7 @@ namespace VietSoftHRM
                     {
                         enableButon(false);
                         co = false;
-                        Enablecontrol(DefaultBoolean.False);
+                        Enablecontrol(false);
                         break;
                     }
                 case "luu":
@@ -106,13 +107,12 @@ namespace VietSoftHRM
                             }
                             
                             var s = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spGhiUser", (grvNguoiDung.RowCount == 0 ? "" : grvNguoiDung.GetFocusedRowCellValue("ID_USER").ToString()) == "" ?  DBNull.Value : grvNguoiDung.GetFocusedRowCellValue("ID_USER"), ID_NHOMComboBoxEdit.Text == "" ? ID_NHOMComboBoxEdit.EditValue = null : Convert.ToInt64(ID_NHOMComboBoxEdit.EditValue), ID_TOComboBoxEdit.Text == "" ? ID_TOComboBoxEdit.EditValue =null : Convert.ToInt64(ID_TOComboBoxEdit.EditValue), ID_CNSearchLookUpEdit.Text == "" ? ID_CNSearchLookUpEdit.EditValue = null : Convert.ToInt64(ID_CNSearchLookUpEdit.EditValue), USER_NAMETextEdit.EditValue, FULL_NAMETextEdit.EditValue, Commons.Modules.ObjSystems.Encrypt(PASSWORDTextEdit.EditValue.ToString(), true), DESCRIPTIONMemoExEdit.EditValue, USER_MAILTextEdit.EditValue, Convert.ToInt32(ACTIVECheckEdit.EditValue), Convert.ToBoolean(co), Commons.Modules.ObjSystems.Encrypt(USER_NAMETextEdit.EditValue.ToString() + Convert.ToBoolean(chkLIC.EditValue).ToString(), true), Convert.ToBoolean(chkKhach.Checked), Convert.ToBoolean(chkLIC.Checked));
-                            Enablecontrol(DefaultBoolean.True);
+                            Enablecontrol(true);
                             LoadUser(Convert.ToInt32(s));
                             enableButon(true);
                         }
-                        catch (Exception ex)
+                        catch
                         {
-
                         }
 
                         break;
@@ -120,7 +120,7 @@ namespace VietSoftHRM
                 case "khongluu":
                     {
                         grvNguoiDung_FocusedRowChanged(null, null);
-                        Enablecontrol(DefaultBoolean.True);
+                        Enablecontrol(true);
                         enableButon(true);
                         break;
                     }
@@ -157,20 +157,28 @@ namespace VietSoftHRM
             DataTable dt = new DataTable();
             dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetListUser", Commons.Modules.sIdHT, Commons.Modules.UserName, Commons.Modules.TypeLanguage));
             dt.PrimaryKey = new DataColumn[] { dt.Columns["ID_USER"] };
-            Commons.Modules.ObjSystems.MLoadXtraGrid(grdNguoiDung, grvNguoiDung, dt, false, false, true, true, true, this.Name);
-            grvNguoiDung.Columns["ID_USER"].Visible = false;
-            grvNguoiDung.Columns["ID_NHOM"].Visible = false;
-            grvNguoiDung.Columns["ID_TO"].Visible = false;
-            grvNguoiDung.Columns["ID_CN"].Visible = false;
-            grvNguoiDung.Columns["PASSWORD"].Visible = false;
-            grvNguoiDung.Columns["DESCRIPTION"].Visible = false;
-            grvNguoiDung.Columns["ACTIVE"].Visible = false;
-            grvNguoiDung.Columns["USER_MAIL"].Visible = false;
-            grvNguoiDung.Columns["USER_KHACH"].Visible = false;
-            if (iSTT != -1)
+            try
             {
-                int index = dt.Rows.IndexOf(dt.Rows.Find(iSTT));
-                grvNguoiDung.FocusedRowHandle = grvNguoiDung.GetRowHandle(index);
+                Commons.Modules.ObjSystems.MLoadXtraGrid(grdNguoiDung, grvNguoiDung, dt, false, false, true, true, true, this.Name);
+                grvNguoiDung.Columns["ID_USER"].Visible = false;
+                grvNguoiDung.Columns["ID_NHOM"].Visible = false;
+                grvNguoiDung.Columns["ID_TO"].Visible = false;
+                grvNguoiDung.Columns["ID_CN"].Visible = false;
+                grvNguoiDung.Columns["PASSWORD"].Visible = false;
+                grvNguoiDung.Columns["DESCRIPTION"].Visible = false;
+                grvNguoiDung.Columns["ACTIVE"].Visible = false;
+                grvNguoiDung.Columns["USER_MAIL"].Visible = false;
+                grvNguoiDung.Columns["USER_KHACH"].Visible = false;
+                if (iSTT != -1)
+                {
+                    int index = dt.Rows.IndexOf(dt.Rows.Find(iSTT));
+                    grvNguoiDung.FocusedRowHandle = grvNguoiDung.GetRowHandle(index);
+                }
+                grvNguoiDung_FocusedRowChanged(null, null);
+            }
+            catch
+            {
+                grdNguoiDung.DataSource = dt;
             }
         }
         private void LoadComboTo()
@@ -182,9 +190,9 @@ namespace VietSoftHRM
         private void LoadComboNhom()
         {
             DataTable dt = new DataTable();
-            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetNhom", Commons.Modules.UserName, Commons.Modules.TypeLanguage, 0));
-            Commons.Modules.ObjSystems.MLoadLookUpEdit(ID_NHOMComboBoxEdit, dt, "ID_NHOM", "TEN_NHOM", "");
-            ID_NHOMComboBoxEdit.EditValue = Convert.ToInt64(Commons.Modules.sIdHT);
+            Commons.Modules.ObjSystems.MLoadLookUpEdit(ID_NHOMComboBoxEdit, Commons.Modules.ObjSystems.DataNhomUser(false), "ID_NHOM", "TEN_NHOM", "");
+            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboNhomUser, Commons.Modules.ObjSystems.DataNhomUser(false), "ID_NHOM", "TEN_NHOM", "");
+            cboNhomUser.EditValue = Convert.ToInt64(Commons.Modules.sIdHT);
         }
         private void LoadComboCN()
         {
@@ -196,10 +204,21 @@ namespace VietSoftHRM
         #endregion
 
         #region sử lý control
-        private void Enablecontrol(DefaultBoolean enable)
+        private void Enablecontrol(bool enable)
         {
-            dataLayoutControl1.OptionsView.IsReadOnly = enable;
-            grdNguoiDung.Enabled = !Convert.ToBoolean(enable);
+            //dataLayoutControl1.OptionsView.IsReadOnly = enable;
+            USER_NAMETextEdit.Properties.ReadOnly = enable;
+            ACTIVECheckEdit.Properties.ReadOnly = enable;
+            chkLIC.Properties.ReadOnly = enable;
+            ID_NHOMComboBoxEdit.Properties.ReadOnly = enable;
+            ID_TOComboBoxEdit.Properties.ReadOnly = enable;
+            ID_CNSearchLookUpEdit.Properties.ReadOnly = enable;
+            FULL_NAMETextEdit.Properties.ReadOnly = enable;
+            PASSWORDTextEdit.Properties.ReadOnly = enable;
+            USER_MAILTextEdit.Properties.ReadOnly = enable;
+            DESCRIPTIONMemoExEdit.Properties.ReadOnly = enable;
+            grdNguoiDung.Enabled = enable;
+            cboNhomUser.Properties.ReadOnly = !enable;
         }
         private void Resettest()
         {
@@ -246,6 +265,27 @@ namespace VietSoftHRM
             {
                 flag = false;
             }
+        }
+
+        private void grvNguoiDung_RowStyle(object sender, RowStyleEventArgs e)
+        {
+            if (e.RowHandle < 0) return;
+            try
+            {
+                if (grvNguoiDung.GetRowCellValue(e.RowHandle, "TIME_LOGIN").ToString() != "")
+                {
+                    e.Appearance.BackColor = Color.LimeGreen;
+                    e.Appearance.BackColor2 = Color.LightCyan;
+                }
+            }
+            catch
+            {
+            }
+        }
+        private void cboNhomUser_EditValueChanged(object sender, EventArgs e)
+        {
+            Commons.Modules.sIdHT = cboNhomUser.EditValue.ToString();
+            LoadUser(-1);
         }
     }
 }

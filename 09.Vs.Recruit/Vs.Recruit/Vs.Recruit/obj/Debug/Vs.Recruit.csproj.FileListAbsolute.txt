@@ -567,6 +567,7 @@ D:\01.SourceCode\02.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.Recruit
 D:\01.SourceCode\02.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.Recruit.csproj.CoreCompileInputs.cache
 D:\01.SourceCode\02.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.Recruit.csproj.CopyComplete
 D:\01.SourceCode\02.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.Recruit.pdb
+D:\01.SourceCode\02.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.Recruit.frmUngVien.resources
 D:\01.SourceCode\02.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\Vs.Recruit.dll.config
 D:\01.SourceCode\02.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\Vs.Recruit.dll
 D:\01.SourceCode\02.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.Recruit.dll.licenses

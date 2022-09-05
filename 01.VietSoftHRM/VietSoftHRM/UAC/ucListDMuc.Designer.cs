@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions1 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
             DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions2 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
             DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions3 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
@@ -46,6 +47,8 @@
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolDuLieuChoTD = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.grdDanhMuc)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grvDanhMuc)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
@@ -58,6 +61,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // grdDanhMuc
@@ -96,6 +100,7 @@
             this.grvDanhMuc.OptionsView.ShowGroupPanel = false;
             this.grvDanhMuc.RowHeight = 1;
             this.grvDanhMuc.CustomDrawGroupRow += new DevExpress.XtraGrid.Views.Base.RowObjectCustomDrawEventHandler(this.grvDanhMuc_CustomDrawGroupRow);
+            this.grvDanhMuc.PopupMenuShowing += new DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler(this.grvDanhMuc_PopupMenuShowing);
             this.grvDanhMuc.MouseDown += new System.Windows.Forms.MouseEventHandler(this.grvDanhMuc_MouseDown);
             this.grvDanhMuc.DoubleClick += new System.EventHandler(this.grvDanhMuc_DoubleClick);
             // 
@@ -221,11 +226,11 @@
             this.accorMenuleft.Appearance.Item.Pressed.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(229)))), ((int)(((byte)(241)))));
             this.accorMenuleft.Appearance.Item.Pressed.Options.UseBackColor = true;
             this.accorMenuleft.Dock = System.Windows.Forms.DockStyle.Left;
+            this.accorMenuleft.ExpandElementMode = DevExpress.XtraBars.Navigation.ExpandElementMode.Single;
             this.accorMenuleft.Location = new System.Drawing.Point(0, 0);
             this.accorMenuleft.Name = "accorMenuleft";
             this.accorMenuleft.ScrollBarMode = DevExpress.XtraBars.Navigation.ScrollBarMode.Auto;
             this.accorMenuleft.ShowFilterControl = DevExpress.XtraBars.Navigation.ShowFilterControl.Always;
-            this.accorMenuleft.ShowItemExpandButtons = false;
             this.accorMenuleft.Size = new System.Drawing.Size(219, 374);
             this.accorMenuleft.TabIndex = 3;
             this.accorMenuleft.ViewType = DevExpress.XtraBars.Navigation.AccordionControlViewType.HamburgerMenu;
@@ -263,6 +268,20 @@
             this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem2.TextVisible = false;
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolDuLieuChoTD});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(199, 26);
+            // 
+            // toolDuLieuChoTD
+            // 
+            this.toolDuLieuChoTD.Name = "toolDuLieuChoTD";
+            this.toolDuLieuChoTD.Size = new System.Drawing.Size(198, 22);
+            this.toolDuLieuChoTD.Text = "Dữ liệu cho tuyển dụng";
+            this.toolDuLieuChoTD.Click += new System.EventHandler(this.toolDuLieuChoTD_Click);
+            // 
             // ucListDMuc
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -284,6 +303,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -302,5 +322,7 @@
         private System.Windows.Forms.Panel panel2;
         private DevExpress.XtraEditors.SearchControl searchControl1;
         private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem toolDuLieuChoTD;
     }
 }

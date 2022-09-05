@@ -96,7 +96,7 @@ namespace Vs.Recruit
                         if (grvDinhBien.HasColumnErrors) return;
                         try
                         {
-                            string sbt = "sBTDB" + Commons.Modules.UserName;
+                            string sbt = "sBTDB" + Commons.Modules.iIDUser;
                             Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sbt, Commons.Modules.ObjSystems.ConvertDatatable(grvDinhBien), "");
                             SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spGetListDinhBien", datNam.DateTime.Year, cboDV.EditValue, Commons.Modules.UserName, Commons.Modules.TypeLanguage, sbt);
                         }

@@ -33,7 +33,6 @@ namespace Vs.HRM
 
             Commons.Modules.sPrivate = @"PILMICO";
             //Commons.Modules.sPrivate = @"ADC";
-
             Commons.Modules.iSoLeSL = 1;
             Commons.Modules.iSoLeDG = 2;
             Commons.Modules.iSoLeTT = 3;

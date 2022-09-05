@@ -38,9 +38,11 @@ namespace VietSoftHRM
             Element_Click(accorMenuleft.Elements[0].Elements[0], null);
             Commons.Modules.ObjSystems.ThayDoiNN(this, windowsUIButton);
             //Commons.Modules.ObjSystems.MLoadNNXtraGrid(grvDanhMuc, this.Name);
+            foreach (ToolStripMenuItem item in contextMenuStrip1.Items)
+            {
+                item.Text = Commons.Modules.ObjLanguages.GetLanguage(this.Name, item.Name);
+            }
         }
-
-
         //load tất danh mục từ menu
         private void LoadDanhMuc()
         {
@@ -55,7 +57,7 @@ namespace VietSoftHRM
                 element.Tag = item["CONTROLS"].ToString();
                 accorMenuleft.Elements.Add(element);
                 DataTable dtchill = new DataTable();
-                dtchill.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetMenuLeft", Commons.Modules.UserName, Commons.Modules.TypeLanguage, Convert.ToInt32(item["ID_MENU"]),Commons.Modules.sHideMenu));
+                dtchill.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetMenuLeft", Commons.Modules.UserName, Commons.Modules.TypeLanguage, Convert.ToInt32(item["ID_MENU"]), Commons.Modules.sHideMenu));
                 if (dtchill.Rows.Count > 0)
                 {
                     foreach (DataRow itemchill in dtchill.Rows)
@@ -126,7 +128,13 @@ namespace VietSoftHRM
                                 windowsUIButton.Buttons[2].Properties.Visible = false;
                                 break;
                             }
+                        case "spGetListXI_NGHIEP":
+                            {
+                                grdDanhMuc.ContextMenuStrip = contextMenuStrip1;
+                                break;
+                            }
                         default:
+                            grdDanhMuc.ContextMenuStrip = null;
                             break;
                     }
 
@@ -363,10 +371,10 @@ namespace VietSoftHRM
             {
                 if (grvDanhMuc.RowCount == 0)
                 {
-                    XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msg_KhongCoDuLieuXoa"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"),MessageBoxButtons.OK,MessageBoxIcon.Information);
+                    XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msg_KhongCoDuLieuXoa"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
-                if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msg_XoaDong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo,MessageBoxIcon.Question) == DialogResult.No) return;
+                if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msg_XoaDong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) return;
                 //xóa
 
 
@@ -635,6 +643,31 @@ namespace VietSoftHRM
                 resulst = false;
             }
             return resulst;
+        }
+
+        private void toolDuLieuChoTD_Click(object sender, EventArgs e)
+        {
+            frmDLTuyenDung frm = new frmDLTuyenDung();
+            frm.iiD_XN = Convert.ToInt64(grvDanhMuc.GetFocusedRowCellValue("ID_XN"));
+            frm.ShowDialog();
+
+        }
+        private void grvDanhMuc_PopupMenuShowing(object sender, PopupMenuShowingEventArgs e)
+        {
+            try
+            {
+                if (e.HitInfo.InDataRow)
+                {
+                    contextMenuStrip1.Show(Cursor.Position.X, Cursor.Position.Y);
+                }
+                else
+                {
+                    contextMenuStrip1.Hide();
+                }
+            }
+            catch
+            {
+            }
         }
     }
 }

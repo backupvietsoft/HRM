@@ -15,15 +15,8 @@ namespace VietSoftHRM
 {
     public partial class frmPopUp : DevExpress.XtraEditors.XtraForm
     {
-        private DataTable _tbsource = new DataTable();
-        public DataTable TableSource
-        {
-            set
-            {
-                _tbsource = value;
-            }
-        }
         // Dữ liệu được chọn
+        public DataTable TableSource;
         private DataRow _dtrow;
         public DataRow RowSelected
         {
@@ -39,11 +32,7 @@ namespace VietSoftHRM
 
         private void frmPopUp_Load(object sender, EventArgs e)
         {
-            if (_tbsource.Columns.Count < 6)
-                Commons.Modules.ObjSystems.MLoadXtraGrid(grdSource, grvSource, _tbsource, false, true, true, true,true,this.Name);
-            else
-                Commons.Modules.ObjSystems.MLoadXtraGrid(grdSource, grvSource, _tbsource, false, true, false,true, true, this.Name);
-            grvSource.Columns[0].Visible = false;
+            
         }
 
         private void windowsUIButton_ButtonClick(object sender, DevExpress.XtraBars.Docking2010.ButtonEventArgs e)

@@ -2056,6 +2056,40 @@ namespace Commons
             catch
             { }
         }
+
+        public void ThayDoiNN(XtraForm frm, LayoutControlGroup group, TabbedControlGroup Tab, WindowsUIButtonPanel btnWinUIB)
+        {
+            DataTable dtTmp = new DataTable();
+            dtTmp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT KEYWORD , CASE " + Modules.TypeLanguage + " WHEN 0 THEN VIETNAM WHEN 1 THEN ENGLISH ELSE CHINESE END AS NN  FROM LANGUAGES WHERE FORM = N'" + frm.Name + "' "));
+            LoadNNGroupControl(frm, group, dtTmp);
+            Tab.DoubleClick += delegate (object a, EventArgs b) { TabbedControlGroup_DoubleClick(Tab, b, frm.Name); };
+            Tab.AppearanceTabPage.HeaderActive.ForeColor = Color.FromArgb(0, 0, 192);
+            foreach (LayoutControlGroup item in Tab.TabPages)
+            {
+                item.Text = GetNN(dtTmp, item.Name, frm.Name);
+                LoadNNGroupControl(frm, item, dtTmp);
+            }
+            try
+            {
+                for (int i = 0; i < btnWinUIB.Buttons.Count; i++)
+                {
+                    try
+                    {
+                        if (btnWinUIB.Buttons[i].Properties.Tag.ToString() != null)
+                        {
+                            btnWinUIB.Buttons[i].Properties.Caption = "";
+                            btnWinUIB.Buttons[i].Properties.ToolTip = GetNN(dtTmp, btnWinUIB.Buttons[i].Properties.Tag.ToString(), frm.Name);
+                        }
+                    }
+                    catch
+                    {
+                    }
+                }
+            }
+            catch
+            { }
+        }
+
         private void LoadNNGroupControl(LayoutControlGroup group, DataTable dtTmp, string name)
         {
             foreach (var gr in group.Items)
@@ -3997,6 +4031,7 @@ namespace Commons
                 return null;
             DataTable tempt = dt.ToTable();
             return tempt;
+
         }
 
 
@@ -4418,6 +4453,15 @@ namespace Commons
             dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboNhomChamCong", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll));
             return dt;
         }
+
+        public DataTable DataNhomUser(bool coAll)
+        {
+            //ID_NHOM,TEN_NHOM
+            DataTable dt = new DataTable();
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetNhom", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll));
+            return dt;
+        }
+
         public DataTable DataCa(int ID_NHOM)
         {
             //ID_CA,CA

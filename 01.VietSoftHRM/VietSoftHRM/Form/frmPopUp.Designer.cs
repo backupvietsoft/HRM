@@ -75,11 +75,11 @@
             this.windowsUIButton.Controls.Add(this.searchControl);
             this.windowsUIButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.windowsUIButton.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.windowsUIButton.Location = new System.Drawing.Point(0, 668);
-            this.windowsUIButton.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.windowsUIButton.Location = new System.Drawing.Point(0, 454);
+            this.windowsUIButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.windowsUIButton.Name = "windowsUIButton";
-            this.windowsUIButton.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.windowsUIButton.Size = new System.Drawing.Size(1226, 50);
+            this.windowsUIButton.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.windowsUIButton.Size = new System.Drawing.Size(780, 34);
             this.windowsUIButton.TabIndex = 5;
             this.windowsUIButton.Text = "windowsUIButtonPanel1";
             this.windowsUIButton.UseButtonBackgroundImages = false;
@@ -89,31 +89,31 @@
             // 
             this.searchControl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.searchControl.Client = this.grdSource;
-            this.searchControl.Location = new System.Drawing.Point(3, 10);
+            this.searchControl.Location = new System.Drawing.Point(2, 7);
+            this.searchControl.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.searchControl.Name = "searchControl";
             this.searchControl.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Repository.ClearButton(),
             new DevExpress.XtraEditors.Repository.SearchButton()});
             this.searchControl.Properties.Client = this.grdSource;
             this.searchControl.Properties.FindDelay = 100;
-            this.searchControl.Size = new System.Drawing.Size(220, 32);
+            this.searchControl.Size = new System.Drawing.Size(140, 24);
             this.searchControl.TabIndex = 10;
             // 
             // grdSource
             // 
-            this.grdSource.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(9, 6, 9, 6);
-            this.grdSource.Location = new System.Drawing.Point(10, 8);
+            this.grdSource.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.grdSource.Location = new System.Drawing.Point(7, 8);
             this.grdSource.MainView = this.grvSource;
-            this.grdSource.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.grdSource.Name = "grdSource";
-            this.grdSource.Size = new System.Drawing.Size(1206, 652);
+            this.grdSource.Size = new System.Drawing.Size(766, 438);
             this.grdSource.TabIndex = 6;
             this.grdSource.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grvSource});
             // 
             // grvSource
             // 
-            this.grvSource.DetailHeight = 437;
+            this.grvSource.DetailHeight = 297;
             this.grvSource.FixedLineWidth = 1;
             this.grvSource.GridControl = this.grdSource;
             this.grvSource.Name = "grvSource";
@@ -126,10 +126,9 @@
             this.dataLayoutControl1.Controls.Add(this.grdSource);
             this.dataLayoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataLayoutControl1.Location = new System.Drawing.Point(0, 0);
-            this.dataLayoutControl1.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.dataLayoutControl1.Name = "dataLayoutControl1";
             this.dataLayoutControl1.Root = this.Root;
-            this.dataLayoutControl1.Size = new System.Drawing.Size(1226, 668);
+            this.dataLayoutControl1.Size = new System.Drawing.Size(780, 454);
             this.dataLayoutControl1.TabIndex = 7;
             this.dataLayoutControl1.Text = "dataLayoutControl1";
             // 
@@ -140,7 +139,7 @@
             this.Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlItem1});
             this.Root.Name = "Root";
-            this.Root.Size = new System.Drawing.Size(1226, 668);
+            this.Root.Size = new System.Drawing.Size(780, 454);
             this.Root.TextVisible = false;
             // 
             // layoutControlItem1
@@ -148,18 +147,17 @@
             this.layoutControlItem1.Control = this.grdSource;
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(1210, 654);
+            this.layoutControlItem1.Size = new System.Drawing.Size(768, 440);
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
             // 
             // frmPopUp
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 25F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1226, 718);
+            this.ClientSize = new System.Drawing.Size(780, 488);
             this.Controls.Add(this.dataLayoutControl1);
             this.Controls.Add(this.windowsUIButton);
-            this.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.Name = "frmPopUp";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "frmPopUp";

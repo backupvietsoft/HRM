@@ -118,7 +118,7 @@
             this.btnUserName.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleRight;
             this.btnUserName.Location = new System.Drawing.Point(0, 0);
             this.btnUserName.Name = "btnUserName";
-            this.btnUserName.Size = new System.Drawing.Size(135, 23);
+            this.btnUserName.Size = new System.Drawing.Size(100, 23);
             this.btnUserName.TabIndex = 6;
             // 
             // popupMenu1
@@ -319,7 +319,7 @@
             this.tileBar.SelectionColor = System.Drawing.Color.Empty;
             this.tileBar.SelectionColorMode = DevExpress.XtraBars.Navigation.SelectionColorMode.UseItemBackColor;
             this.tileBar.ShowGroupText = false;
-            this.tileBar.Size = new System.Drawing.Size(918, 51);
+            this.tileBar.Size = new System.Drawing.Size(953, 51);
             this.tileBar.TabIndex = 4;
             this.tileBar.Text = "tileBar";
             this.tileBar.VerticalContentAlignment = DevExpress.Utils.VertAlignment.Center;
@@ -334,7 +334,7 @@
             // 
             this.tablePanel1.Columns.AddRange(new DevExpress.Utils.Layout.TablePanelColumn[] {
             new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 100F),
-            new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 141F)});
+            new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 106F)});
             this.tablePanel1.Controls.Add(this.panel1);
             this.tablePanel1.Controls.Add(this.tileBar);
             this.tablePanel1.Controls.Add(this.navigationFrame);
@@ -343,8 +343,8 @@
             this.tablePanel1.Margin = new System.Windows.Forms.Padding(0);
             this.tablePanel1.Name = "tablePanel1";
             this.tablePanel1.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] {
-            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 11F),
-            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 35F),
+            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 8F),
+            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 38F),
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 11F),
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 100F)});
             this.tablePanel1.Size = new System.Drawing.Size(1065, 597);
@@ -354,10 +354,10 @@
             // 
             this.tablePanel1.SetColumn(this.panel1, 1);
             this.panel1.Controls.Add(this.btnUserName);
-            this.panel1.Location = new System.Drawing.Point(927, 17);
+            this.panel1.Location = new System.Drawing.Point(962, 15);
             this.panel1.Name = "panel1";
             this.tablePanel1.SetRow(this.panel1, 1);
-            this.panel1.Size = new System.Drawing.Size(135, 23);
+            this.panel1.Size = new System.Drawing.Size(100, 23);
             this.panel1.TabIndex = 8;
             // 
             // timer1

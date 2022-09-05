@@ -477,9 +477,9 @@ namespace Vs.Recruit
             try
             {
                 //tao bang tam
-                Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, "sBTBC" + Commons.Modules.UserName,Commons.Modules.ObjSystems.ConvertDatatable(grdBangCap),"");
-                Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, "sBTKNLV" + Commons.Modules.UserName, Commons.Modules.ObjSystems.ConvertDatatable(grdKNLV), "");
-                Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, "sBTTTK" + Commons.Modules.UserName, Commons.Modules.ObjSystems.ConvertDatatable(grdTTK), "");
+                Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, "sBTBC" + Commons.Modules.iIDUser,Commons.Modules.ObjSystems.ConvertDatatable(grdBangCap),"");
+                Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, "sBTKNLV" + Commons.Modules.iIDUser, Commons.Modules.ObjSystems.ConvertDatatable(grdKNLV), "");
+                Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, "sBTTTK" + Commons.Modules.iIDUser, Commons.Modules.ObjSystems.ConvertDatatable(grdTTK), "");
 
              iIDUV = Convert.ToInt64(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spUpdateUngVien",
             iIDUV,
@@ -526,7 +526,7 @@ namespace Vs.Recruit
             chkDA_CHUYEN.EditValue,
             cboDanhGiaTayNghe.Text.ToString() == "" ? DBNull.Value : cboDanhGiaTayNghe.EditValue,
             chkXacNhanDTDH.EditValue,
-            cothem,"sBTBC" + Commons.Modules.UserName,"sBTKNLV" + Commons.Modules.UserName, "sBTTTK" + Commons.Modules.UserName));
+            cothem,"sBTBC" + Commons.Modules.iIDUser,"sBTKNLV" + Commons.Modules.iIDUser, "sBTTTK" + Commons.Modules.iIDUser));
                 return true;
             }
             catch (Exception ex)

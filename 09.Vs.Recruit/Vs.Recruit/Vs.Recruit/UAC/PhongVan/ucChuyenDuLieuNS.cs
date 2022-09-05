@@ -350,7 +350,7 @@ namespace Vs.Recruit
                 {
                     case "Inthenv":
                         {
-                            string strSaveThongTinNhanVienDM = "strSaveThongTinNhanVienDM" + Commons.Modules.UserName;
+                            string strSaveThongTinNhanVienDM = "strSaveThongTinNhanVienDM" + Commons.Modules.iIDUser;
                             try
                             {
                                 Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, strSaveThongTinNhanVienDM, Commons.Modules.ObjSystems.ConvertDatatable(grvDSUngVien), "");

@@ -70,10 +70,10 @@ namespace Vs.Recruit
                 iThang++;
             }
 
-            Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, "sBTTuanThang" + Commons.Modules.UserName, dt, "");
+            Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, "sBTTuanThang" + Commons.Modules.iIDUser, dt, "");
 
             dt = new DataTable();
-            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spBaoCaoTuyenDung", datTThang.DateTime.Date.AddDays(-datTThang.DateTime.Date.Day + 1), DN, Commons.Modules.UserName, Commons.Modules.TypeLanguage, "sBTTuanThang" + Commons.Modules.UserName));
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spBaoCaoTuyenDung", datTThang.DateTime.Date.AddDays(-datTThang.DateTime.Date.Day + 1), DN, Commons.Modules.UserName, Commons.Modules.TypeLanguage, "sBTTuanThang" + Commons.Modules.iIDUser));
             Commons.Modules.ObjSystems.MLoadXtraGrid(grdData, grvData, dt, false, true, false, true, false, this.Name);
 
             grvData.Columns[0].Caption = "STT";

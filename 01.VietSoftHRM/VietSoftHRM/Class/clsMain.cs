@@ -84,12 +84,13 @@ namespace VietSoftHRM
                 {
                     using (new ConnectToSharedFolder(dt.Rows[0]["DUONG_DAN_TL"].ToString(), new NetworkCredential(dt.Rows[0]["USER_TL"].ToString(), dt.Rows[0]["PASS_TL"].ToString())))
                     {
+                        Commons.Modules.sDDTaiLieu = dt.Rows[0]["DUONG_DAN_TL"].ToString();
                     }
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
-                    //if (Commons.Modules.iLOAI_CN == 2)
-                    //    Commons.Modules.iLOAI_CN = 0;
+                    Commons.Modules.sDDTaiLieu = "";
+                    Commons.Modules.iLOAI_CN = 0;
                 }
             }
             catch
@@ -209,6 +210,7 @@ namespace VietSoftHRM
                 String link3 = sArr[3];
                 //Khong có loai update thi thoát
                 if (loai <= -1) return;
+                loai = 0;
                 switch (loai)
                 {
                     //Loai 2 xai link1,2 : path link tren dropbox 

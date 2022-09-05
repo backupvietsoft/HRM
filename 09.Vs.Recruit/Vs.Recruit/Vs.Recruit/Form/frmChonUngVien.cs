@@ -30,6 +30,10 @@ namespace Vs.Recruit
             Commons.Modules.sLoad = "";
             LoadData();
             cboID_VTTD_EditValueChanged(null, null);
+            foreach (ToolStripMenuItem item in contextMenuStrip1.Items)
+            {
+                item.Text = Commons.Modules.ObjLanguages.GetLanguage(this.Name, item.Name);
+            }
         }
 
         private void LoadCombo()
@@ -63,7 +67,7 @@ namespace Vs.Recruit
                                 return;
                             }
                             //lưu dữ liệu chọn lại và cập nhật vào bảng tạm
-                            Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, "sBTUV" + Commons.Modules.UserName, dt, "");
+                            Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, "sBTUV" + Commons.Modules.iIDUser, dt, "");
 
                             DialogResult =DialogResult.OK;
                             break;
@@ -88,12 +92,13 @@ namespace Vs.Recruit
             try
             {
                 DataTable dt = new DataTable();
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetListUngVienChon",iID_YCTD,iID_VTTD,Commons.Modules.UserName,Commons.Modules.TypeLanguage, "sBTChonUV"+Commons.Modules.UserName));
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetListUngVienChon",iID_YCTD,iID_VTTD,Commons.Modules.UserName,Commons.Modules.TypeLanguage, "sBTChonUV"+ Commons.Modules.iIDUser));
                 dt.Columns["CHON"].ReadOnly = false;
-                Commons.Modules.ObjSystems.MLoadXtraGrid(grdChonUV, grvChonUV, dt, false, true, true, false, true, this.Name);
+                Commons.Modules.ObjSystems.MLoadXtraGrid(grdChonUV, grvChonUV, dt, false, true, false, false, true, this.Name);
                 grvChonUV.Columns["ID_TDVH"].Visible = false;
                 grvChonUV.Columns["ID_KNLV"].Visible = false;
                 grvChonUV.Columns["ID_NTD"].Visible = false;
+                grvChonUV.Columns["CHON"].Visible = false;
                 grvChonUV.OptionsSelection.ShowCheckBoxSelectorInColumnHeader = DevExpress.Utils.DefaultBoolean.True;
                 grvChonUV.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CheckBoxRowSelect;
                 grvChonUV.OptionsSelection.CheckBoxSelectorField = "CHON";
@@ -141,6 +146,31 @@ namespace Vs.Recruit
             catch
             {
                 dt.DefaultView.RowFilter = "";
+            }
+        }
+
+        private void mnuLinkUngVienToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Commons.Modules.iUngVien = Convert.ToInt64(grvChonUV.GetFocusedRowCellValue("ID_UV"));
+            frmUngVien frm = new frmUngVien();
+            frm.ShowDialog();
+        }
+
+        private void grvChonUV_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
+        {
+            try
+            {
+                if (e.HitInfo.InDataRow)
+                {
+                    contextMenuStrip1.Show(Cursor.Position.X, Cursor.Position.Y);
+                }
+                else
+                {
+                    contextMenuStrip1.Hide();
+                }
+            }
+            catch
+            {
             }
         }
     }

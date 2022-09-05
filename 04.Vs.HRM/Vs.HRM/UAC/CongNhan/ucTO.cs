@@ -56,8 +56,9 @@ namespace Vs.HRM
             {
                 grdTO.DataSource = dt;
             }
+            grvTO.ExpandAllGroups();
         }
-       
+
         #endregion
     }
 }

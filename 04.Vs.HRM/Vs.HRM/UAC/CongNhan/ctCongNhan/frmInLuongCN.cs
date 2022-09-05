@@ -27,6 +27,10 @@ namespace Vs.HRM
             rdo_ChonBaoCao.SelectedIndex = 0;
             dNgayIn.EditValue = DateTime.Today;
             Commons.OSystems.SetDateEditFormat(dNgayIn);
+            if (Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString() == "DM")
+            {
+                rdo_ChonBaoCao.Properties.Items.RemoveAt(1);
+            }
         }
         //sự kiện các nút xử lí
         private void windowsUIButton_ButtonClick(object sender, DevExpress.XtraBars.Docking2010.ButtonEventArgs e)
@@ -38,7 +42,13 @@ namespace Vs.HRM
             {
                 case "In":
                     {
-                        switch (rdo_ChonBaoCao.SelectedIndex)
+                        int n = rdo_ChonBaoCao.SelectedIndex;
+                        if (rdo_ChonBaoCao.Properties.Items.Count < 3)
+                        {
+                            n = (n >= 1 ? n + 1 : n);
+                        }
+
+                        switch (n)
                         {
                             case 0:
                                 {

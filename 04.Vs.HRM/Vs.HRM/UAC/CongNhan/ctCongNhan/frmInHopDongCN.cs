@@ -26,9 +26,15 @@ namespace Vs.HRM
             //chkChuaThamGia.Visible = false;
             //chkDaThamGia.Visible = false;
             rdo_ChonBaoCao.SelectedIndex = 0;
-            if (Commons.Modules.ObjSystems.KyHieuDV_CN(Convert.ToInt64(Commons.Modules.iCongNhan)) == "SB")
+            if (Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString() == "SB")
             {
                 rdo_ChonBaoCao.Properties.Items.RemoveAt(3);
+            }
+            else if (Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString() == "DM")
+            {
+                rdo_ChonBaoCao.Properties.Items.RemoveAt(4);
+                rdo_ChonBaoCao.Properties.Items.RemoveAt(3);
+                rdo_ChonBaoCao.Properties.Items.RemoveAt(2);
             }
             else
             {
@@ -52,9 +58,12 @@ namespace Vs.HRM
                         int n = rdo_ChonBaoCao.SelectedIndex;
                         if (rdo_ChonBaoCao.Properties.Items.Count < 6)
                         {
-                            if (Commons.Modules.ObjSystems.KyHieuDV_CN(Convert.ToInt64(Commons.Modules.iCongNhan)) == "SB")
+                            if (Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString() == "SB")
                             {
                                 n = (n >= 2 ? n + 1 : n);
+                            }
+                            else if (Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString() == "DM") {
+                                n = (n >= 2 ? n + 3 : n);
                             }
                             else
                             {

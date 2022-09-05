@@ -367,7 +367,7 @@
             this.xrLabel130.AllowMarkupText = true;
             this.xrLabel130.Dpi = 254F;
             this.xrLabel130.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "\'Đại diện cho \' + [DATA].[TEN_DV]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "\'Đại diện cho \' + [TTC].[TEN_CTY]")});
             this.xrLabel130.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.xrLabel130.LocationFloat = new DevExpress.Utils.PointFloat(929.9529F, 3165.346F);
             this.xrLabel130.Multiline = true;
@@ -648,7 +648,7 @@
             this.xrLabel36.AllowMarkupText = true;
             this.xrLabel36.Dpi = 254F;
             this.xrLabel36.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "\'<b>1.2. </b>Địa điểm làm việc: \' + [DATA].[TEN_DV] + \'.\'")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "\'<b>1.2. </b>Địa điểm làm việc: \' + [TTC].[TEN_CTY] + \'.\'")});
             this.xrLabel36.Font = new System.Drawing.Font("Times New Roman", 11.25F);
             this.xrLabel36.LocationFloat = new DevExpress.Utils.PointFloat(25.00001F, 1768.777F);
             this.xrLabel36.Multiline = true;
@@ -1462,7 +1462,7 @@
             this.lb11.AllowMarkupText = true;
             this.lb11.Dpi = 254F;
             this.lb11.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[DATA].[TEN_DV]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[TTC].[TEN_CTY]")});
             this.lb11.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb11.LocationFloat = new DevExpress.Utils.PointFloat(355.8745F, 841.9022F);
             this.lb11.Multiline = true;

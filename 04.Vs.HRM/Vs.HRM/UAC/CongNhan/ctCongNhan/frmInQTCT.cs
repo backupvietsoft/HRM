@@ -26,9 +26,13 @@ namespace Vs.HRM
             rdo_ChonBaoCao.SelectedIndex = 0;
             dNgayIn.EditValue = DateTime.Today;
             Commons.OSystems.SetDateEditFormat(dNgayIn);
-            if (Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString() == "DM" || Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString() == "SB")
+            if (Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString() == "SB")
             {
                 return;
+            }
+            else if (Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString() == "DM")
+            {
+                rdo_ChonBaoCao.Properties.Items.RemoveAt(2);
             }
             else
             {
@@ -230,7 +234,12 @@ namespace Vs.HRM
                     {
                         int n = rdo_ChonBaoCao.SelectedIndex;
                         if (rdo_ChonBaoCao.Properties.Items.Count < 3)
-                            n = (n >= 1 ? n + 1 : n);
+                        {
+                            if (Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString() != "DM")
+                            {
+                                n = (n >= 1 ? n + 1 : n);
+                            }
+                        }
                         switch (n)
                         {
                             case 0:
@@ -325,7 +334,7 @@ namespace Vs.HRM
                                                 break;
                                             }
                                     }
-                                    
+
                                     break;
                                 }
                         }

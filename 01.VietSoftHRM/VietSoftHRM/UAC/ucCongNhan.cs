@@ -6,6 +6,7 @@ using Microsoft.ApplicationBlocks.Data;
 using DevExpress.XtraBars.Navigation;
 using Vs.HRM;
 using Vs.Payroll;
+using Vs.TimeAttendance;
 
 namespace VietSoftHRM
 {
@@ -16,7 +17,7 @@ namespace VietSoftHRM
         public int iLoai;
         public int iIDOut;
         public string slinkcha;
-        public string sLoad="";
+        public string sLoad = "";
         public ucCongNhan(TileBar tileBar)
         {
             InitializeComponent();
@@ -300,8 +301,14 @@ namespace VietSoftHRM
                         tc.Dock = DockStyle.Fill;
                         break;
                     }
-
-
+                case "mnuViPhamNoiQuyLD":
+                    {
+                        ucViPhamNoiQuyLD tmp = new ucViPhamNoiQuyLD();
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(tmp);
+                        tmp.Dock = DockStyle.Fill;
+                        break;
+                    }
                 case "mnuXepLoaiKhenThuong":
                     {
                         ucXepLoaiKhenThuong tc = new ucXepLoaiKhenThuong();
@@ -361,11 +368,248 @@ namespace VietSoftHRM
                         break;
                     }
 
+                #region BaoCao
+                case "mnuBCDonVi":
+                    {
+                        ucBaoCaoDonVi InDonVi = new ucBaoCaoDonVi();
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(InDonVi);
+                        InDonVi.Dock = DockStyle.Fill;
+
+                        break;
+                    }
+                case "mnuBCXiNghiep":
+                    {
+                        ucBaoCaoXiNghiep InXiNghiep = new ucBaoCaoXiNghiep();
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(InXiNghiep);
+                        InXiNghiep.Dock = DockStyle.Fill;
+                        break;
+                    }
+                case "mnuBCTo":
+                    {
+                        ucBaoCaoTo InTo = new ucBaoCaoTo();
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(InTo);
+                        InTo.Dock = DockStyle.Fill;
+                        break;
+                    }
+                case "mnuBDTangGiamCN":
+                    {
+                        ucBaoCaoBDTangGiamCN InBDTangGiamCN = new ucBaoCaoBDTangGiamCN();
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(InBDTangGiamCN);
+                        InBDTangGiamCN.Dock = DockStyle.Fill;
+                        break;
+                    }
+                case "mnuBCThongKeCNTheoBD":
+                    {
+                        ucBaoCaoThongKeCongNhanBD temp = new ucBaoCaoThongKeCongNhanBD();
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(temp);
+                        temp.Dock = DockStyle.Fill;
+                        break;
+                    }
+                case "mnuBCLDTo":
+                    {
+                        ucBaoCaoLaoDongTo InLDTo = new ucBaoCaoLaoDongTo();
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(InLDTo);
+                        InLDTo.Dock = DockStyle.Fill;
+                        break;
+                    }
+                case "mnuBCQLy":
+                    {
+                        ucBaoCaoQuanLy InQuanLy = new ucBaoCaoQuanLy();
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(InQuanLy);
+                        InQuanLy.Dock = DockStyle.Fill;
+                        break;
+                    }
+                case "mnuBCCongDoan":
+                    {
+                        ucBaoCaoCongDoan InBCCD = new ucBaoCaoCongDoan();
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(InBCCD);
+                        InBCCD.Dock = DockStyle.Fill;
+                        break;
+                    }
+                case "mnuBCGiaDinh":
+                    {
+                        ucBaoCaoQHGD InBCGD = new ucBaoCaoQHGD();
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(InBCGD);
+                        InBCGD.Dock = DockStyle.Fill;
+                        break;
+                    }
+                case "mnuBCLDTinh":
+                    {
+                        ucBaoCaoLaoDongTinh InLDTinh = new ucBaoCaoLaoDongTinh();
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(InLDTinh);
+                        InLDTinh.Dock = DockStyle.Fill;
+                        break;
+                    }
+                case "mnuBCCongNhan":
+                    {
+                        ucBaoCaoCongNhan InCN = new ucBaoCaoCongNhan();
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(InCN);
+                        InCN.Dock = DockStyle.Fill;
+                        break;
+                    }
+                case "mnuBCLDHuu":
+                    {
+                        ucBaoCaoLaoDongHuu InLDHuu = new ucBaoCaoLaoDongHuu();
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(InLDHuu);
+                        InLDHuu.Dock = DockStyle.Fill;
+                        break;
+                    }
+                case "mnuBCThamNien":
+                    {
+                        ucBaoCaoThamNien InDSTN = new ucBaoCaoThamNien();
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(InDSTN);
+                        InDSTN.Dock = DockStyle.Fill;
+                        break;
+                    }
+                case "mnuBCTangLD":
+                    {
+                        ucBaoCaoTangLaoDong InDSTangLD = new ucBaoCaoTangLaoDong();
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(InDSTangLD);
+                        InDSTangLD.Dock = DockStyle.Fill;
+                        break;
+                    }
+                case "mnuBCGiamLD":
+                    {
+                        ucBaoCaoGiamLaoDong InDSGiamLD = new ucBaoCaoGiamLaoDong();
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(InDSGiamLD);
+                        InDSGiamLD.Dock = DockStyle.Fill;
+                        break;
+                    }
+                case "mnuBCHDLD":
+                    {
+                        ucBaoCaoHopDong InHDLD = new ucBaoCaoHopDong();
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(InHDLD);
+                        InHDLD.Dock = DockStyle.Fill;
+                        break;
+                    }
+                case "mnuBCTHLDThang":
+                    {
+                        ucBaoCaoLaoDongThang InLDT = new ucBaoCaoLaoDongThang();
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(InLDT);
+                        InLDT.Dock = DockStyle.Fill;
+                        break;
+                    }
+                case "mnuBLThang":
+                    {
+                        ucBangLuongThangNhanVien tmp = new ucBangLuongThangNhanVien();
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(tmp);
+                        tmp.Dock = DockStyle.Fill;
+                        break;
+                    }
+                case "mnuBCDSLaoDongNu":
+                    {
+                        ucBaoCaoDanhSachLaoDongNu tmp = new ucBaoCaoDanhSachLaoDongNu();
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(tmp);
+                        tmp.Dock = DockStyle.Fill;
+                        break;
+                    }
+                case "mnuTHSDLDThang":
+                    {
+                        ucBaoCaoTinhHinhSuDungLaoDong tmp = new ucBaoCaoTinhHinhSuDungLaoDong();
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(tmp);
+                        tmp.Dock = DockStyle.Fill;
+                        break;
+                    }
+                case "mnBCCongTac":
+                    {
+                        ucBaoCaoCongTac tmp = new ucBaoCaoCongTac();
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(tmp);
+                        tmp.Dock = DockStyle.Fill;
+                        break;
+                    }
+                case "mnBCDNMuaBHTaiNan":
+                    {
+                        ucBaoCaoBaoHiemTaiNan tmp = new ucBaoCaoBaoHiemTaiNan();
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(tmp);
+                        tmp.Dock = DockStyle.Fill;
+                        break;
+                    }
+
+                case "mnBCKhenThuongKyLuat":
+                    {
+                        ucBaoCaoKhenThuongKyLuat tmp = new ucBaoCaoKhenThuongKyLuat();
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(tmp);
+                        tmp.Dock = DockStyle.Fill;
+                        break;
+                    }
+                case "mnBCDanhGianNV":
+                    {
+                        ucBaoCaoDanhGianNV tmp = new ucBaoCaoDanhGianNV();
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(tmp);
+                        tmp.Dock = DockStyle.Fill;
+                        break;
+                    }
+                case "mnBCLaoDongNN":
+                    {
+                        ucBaoCaoLaoDongNuocNgoai tmp = new ucBaoCaoLaoDongNuocNgoai();
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(tmp);
+                        tmp.Dock = DockStyle.Fill;
+                        break;
+                    }
+                case "mnBCCNTheoTinhThanh":
+                    {
+                        ucBaoCaoCongNhanTheoTinhThanh tmp = new ucBaoCaoCongNhanTheoTinhThanh();
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(tmp);
+                        tmp.Dock = DockStyle.Fill;
+                        break;
+                    }
+                case "mnBCTrinhDoChuyenMon":
+                    {
+                        ucBaoCaoTrinhDoChuyenMon tmp = new ucBaoCaoTrinhDoChuyenMon();
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(tmp);
+                        tmp.Dock = DockStyle.Fill;
+                        break;
+                    }
+                case "mnQuaTrinhDaoTao":
+                    {
+                        ucBaoCaoQuaTrinhDaoTao tmp = new ucBaoCaoQuaTrinhDaoTao();
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(tmp);
+                        tmp.Dock = DockStyle.Fill;
+                        break;
+                    }
+                case "mnuBCDanhGiaThuViec":
+                    {
+                        ucBaoCaoDanhGiaTTThuViec tmp = new ucBaoCaoDanhGiaTTThuViec();
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(tmp);
+                        tmp.Dock = DockStyle.Fill;
+                        break;
+                    }
+                #endregion
+
                 default:
                     break;
             }
             Commons.Modules.ObjSystems.HideWaitForm();
-           // accorMenuleft.OptionsMinimizing.State = DevExpress.XtraBars.Navigation.AccordionControlState.Minimized;
+            // accorMenuleft.OptionsMinimizing.State = DevExpress.XtraBars.Navigation.AccordionControlState.Minimized;
         }
         private void ucCongNhan_Load(object sender, EventArgs e)
         {

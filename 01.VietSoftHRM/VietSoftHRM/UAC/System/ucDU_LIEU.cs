@@ -42,7 +42,6 @@ namespace VietSoftHRM
                 grvTo.Columns["TEN_DV"].GroupIndex = 1;
                 grvTo.Columns["TEN_XN"].GroupIndex = 2;
                 grvTo.ExpandAllGroups();
-                grvTo.ExpandAllGroups();
             }
             catch
             {

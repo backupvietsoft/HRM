@@ -268,11 +268,9 @@ namespace Vs.HRM
             windowsUIButton.Buttons[3].Properties.Visible = visible;
             windowsUIButton.Buttons[4].Properties.Visible = visible;
             windowsUIButton.Buttons[5].Properties.Visible = visible;
-            windowsUIButton.Buttons[6].Properties.Visible = visible;
-            windowsUIButton.Buttons[7].Properties.Visible = visible;
-            windowsUIButton.Buttons[8].Properties.Visible = !visible;
-            windowsUIButton.Buttons[9].Properties.Visible = !visible;
-            windowsUIButton.Buttons[10].Properties.Visible = visible;
+            windowsUIButton.Buttons[6].Properties.Visible = !visible;
+            windowsUIButton.Buttons[7].Properties.Visible = !visible;
+            windowsUIButton.Buttons[8].Properties.Visible = visible;
             Readonlyedit(visible);
         }
         private void Bindingdata(bool bthem)

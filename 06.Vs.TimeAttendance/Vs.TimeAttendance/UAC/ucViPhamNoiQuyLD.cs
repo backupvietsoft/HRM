@@ -210,7 +210,7 @@ namespace Vs.TimeAttendance
             {
                 Commons.Modules.sLoad = "0Load";
                 DataTable dt = new DataTable();
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetCongNhanTheoTT", cboDV.EditValue, cboXN.EditValue, cboTo.EditValue, Commons.Modules.UserName, Commons.Modules.TypeLanguage, 1));
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetCongNhanVPNoiQuy", cboDV.EditValue, cboXN.EditValue, cboTo.EditValue, Commons.Modules.UserName, Commons.Modules.TypeLanguage, 1));
                 Commons.Modules.ObjSystems.MLoadXtraGrid(grdCongNhan, grvCongNhan, dt, false, false, true, true, true, this.Name);
                 grvCongNhan.Columns["ID_CN"].Visible = false;
                 grvCongNhan.Columns["TINH_TRANG"].Visible = false;
@@ -431,8 +431,8 @@ namespace Vs.TimeAttendance
             try
             {
                 dtTmp = (DataTable)grdCongNhan.DataSource;
-                if (radTinHTrang.SelectedIndex == 1) sdkien = "(TINH_TRANG = 1)";
-                if (radTinHTrang.SelectedIndex == 2) sdkien = "(TINH_TRANG = 0)";
+                if (radTinHTrang.SelectedIndex == 0) sdkien = "(TINH_TRANG = 1)";
+                if (radTinHTrang.SelectedIndex == 1) sdkien = "(TINH_TRANG = 0)";
                 dtTmp.DefaultView.RowFilter = sdkien;
             }
             catch
@@ -539,27 +539,27 @@ namespace Vs.TimeAttendance
 
         private void grvCongNhan_RowCountChanged(object sender, EventArgs e)
         {
-            //GridView view = sender as GridView;
-            //try
-            //{
-            //    int index = ItemForSumNhanVien.Text.IndexOf(':');
-            //    if (index > 0)
-            //    {
-            //        if (view.RowCount > 0)
-            //        {
-            //            ItemForSumNhanVien.Text = ItemForSumNhanVien.Text.Substring(0, index) + ": " + view.RowCount.ToString();
-            //        }
-            //        else
-            //        {
-            //            ItemForSumNhanVien.Text = ItemForSumNhanVien.Text.Substring(0, index) + ": 0";
-            //        }
+            GridView view = sender as GridView;
+            try
+            {
+                int index = ItemForSumNhanVien.Text.IndexOf(':');
+                if (index > 0)
+                {
+                    if (view.RowCount > 0)
+                    {
+                        ItemForSumNhanVien.Text = ItemForSumNhanVien.Text.Substring(0, index) + ": " + view.RowCount.ToString();
+                    }
+                    else
+                    {
+                        ItemForSumNhanVien.Text = ItemForSumNhanVien.Text.Substring(0, index) + ": 0";
+                    }
 
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    XtraMessageBox.Show(ex.Message.ToString());
-            //}
+                }
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show(ex.Message.ToString());
+            }
         }
 
         private void grvThang_RowCellClick(object sender, RowCellClickEventArgs e)

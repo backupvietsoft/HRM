@@ -399,6 +399,12 @@
     <Compile Include="Report\rptBangLSPChiTietMHNgayTheoCN.Designer.cs">
       <DependentUpon>rptBangLSPChiTietMHNgayTheoCN.cs</DependentUpon>
     </Compile>
+    <Compile Include="Report\rptPhieuLuongThang_DM.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\rptPhieuLuongThang_DM.Designer.cs">
+      <DependentUpon>rptPhieuLuongThang_DM.cs</DependentUpon>
+    </Compile>
     <Compile Include="Report\rptTongHopTamUng.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -731,6 +737,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Report\rptBangLSPChiTietMHNgayTheoCN.resx">
       <DependentUpon>rptBangLSPChiTietMHNgayTheoCN.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\rptPhieuLuongThang_DM.resx">
+      <DependentUpon>rptPhieuLuongThang_DM.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\rptTongHopTamUng.resx">
       <DependentUpon>rptTongHopTamUng.cs</DependentUpon>

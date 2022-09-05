@@ -36,9 +36,10 @@ namespace Vs.Category
                 ItemForTruongXiNghiep.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
             }
             LoadDonVi();
-            if (!bAddEdit) {
+            if (!bAddEdit)
+            {
                 LoadText();
-               
+
             }
             else
             {
@@ -201,9 +202,11 @@ namespace Vs.Category
 
                 if (!string.IsNullOrEmpty(TEN_XNTextEdit.Text))
                 {
-                    iKiem = Convert.ToInt16(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spCheckData", "ID_XN",
-                        (bAddEdit ? "-1" : iId.ToString()), "XI_NGHIEP", "TEN_XN", TEN_XNTextEdit.Text.ToString(),
-                        "", "", "", ""));
+                    string strSQL = "SELECT COUNT(*) AS SL FROM XI_NGHIEP WHERE (TEN_XN = N'"+TEN_XNTextEdit.EditValue+"') AND (ID_XN <> "+ (bAddEdit ? "-1" : iId.ToString()) + ") AND (ID_DV = " + ID_DVSearchLookUpEdit.EditValue + ")";
+                    //iKiem = Convert.ToInt16(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spCheckData", "ID_XN",
+                    //    (bAddEdit ? "-1" : iId.ToString()), "XI_NGHIEP", "TEN_XN", TEN_XNTextEdit.Text.ToString(),
+                    //    "", "", "", ""));
+                    iKiem = Convert.ToInt16(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, strSQL));
                     if (iKiem > 0)
                     {
                         XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msg_TenTrung"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);

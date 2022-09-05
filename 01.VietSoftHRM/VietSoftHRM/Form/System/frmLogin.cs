@@ -108,6 +108,7 @@ namespace VietSoftHRM
                 }
                 catch { }
 
+
                 //add user
                 this.Hide();
                 frmMain form2 = new frmMain();
@@ -188,10 +189,7 @@ namespace VietSoftHRM
                     XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgUserDangDangNhapMayCoIp") + " : " + sSql + MName, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return false;
                 }
-
             }
-
-
         }
         private void SaveLogin()
         {

@@ -19,10 +19,16 @@ namespace Vs.Recruit
         private int iMS_CV;
         public AccordionControl accorMenuleft;
         private int dem = 0;
-        public ThongTinTiepNhanUV(Int64 idUV, int MS_CV)
+        private string sNGayChuyen = "";
+        private long iID_YCTD = -1;
+        private long iID_VTTD = -1;
+        public ThongTinTiepNhanUV(Int64 idUV, int MS_CV, string ngayChuyen, Int64 ID_YCTD, Int64 ID_VTTD)
         {
             iID_UV = idUV;
             iMS_CV = MS_CV;
+            sNGayChuyen = ngayChuyen;
+            iID_YCTD = ID_YCTD;
+            iID_VTTD = ID_VTTD;
             InitializeComponent();
             Commons.Modules.ObjSystems.ThayDoiNN(this);
             Commons.Modules.ObjSystems.ThayDoiNN(this, layoutControlGroup1);
@@ -40,6 +46,7 @@ namespace Vs.Recruit
                 Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_NGUOI_DT, Commons.Modules.ObjSystems.TruongBoPhan(), "ID_CN", "HO_TEN", "HO_TEN", true, true);
                 Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_NGUOI_CHUYEN, Commons.Modules.ObjSystems.TruongBoPhan(), "ID_CN", "HO_TEN", "HO_TEN", true, true);
                 Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_XN, Commons.Modules.ObjSystems.DataXiNghiep(-1, false), "ID_XN", "TEN_XN", "TEN_XN", true, true);
+                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_NGUOI_CHUYEN, Commons.Modules.ObjSystems.DataCongNhan(false), "ID_CN", "TEN_CN", "TEN_CN", true, true);
 
                 DataTable dt = new DataTable();
                 string strSQL = "SELECT ID_LHDLD, CASE " + Commons.Modules.TypeLanguage + " WHEN 0 THEN TEN_LHDLD ELSE ISNULL(NULLIF(TEN_LHDLD_A,''),TEN_LHDLD) END TEN_LHDLD FROM dbo.LOAI_HDLD WHERE THU_VIEC = 1";
@@ -51,6 +58,7 @@ namespace Vs.Recruit
                 Commons.OSystems.SetDateEditFormat(datNgayHuyTD);
                 Commons.OSystems.SetDateEditFormat(datNgayKTTayNghe);
                 Commons.OSystems.SetDateEditFormat(datNGAY_NHAN_VIEC);
+                EnabelButton(true);
                 BindingData(false);
                 Commons.Modules.sLoad = "";
                 windowsUIButtonPanel1.Buttons[0].Properties.Visible = false;
@@ -59,7 +67,12 @@ namespace Vs.Recruit
                     TabKiemTraTayNghe.PageVisible = false;
                     txtMUC_LUONG_DN.Text = "";
                 }
-                EnabelButton(true);
+                if (sNGayChuyen != "")
+                {
+                    windowsUIButtonPanel1.Buttons[0].Properties.Visible = false;
+                    btnALL.Buttons[0].Properties.Visible = false;
+                    btnALL.Buttons[1].Properties.Visible = false;
+                }
             }
             catch { }
         }
@@ -81,6 +94,7 @@ namespace Vs.Recruit
                             }
                             else if (TabThongTinTiepNhanUV.SelectedTabPage == TabKiemTraTayNghe)
                             {
+                                Commons.Modules.ObjSystems.AddnewRow(grvNDDT, true);
                                 TabThongTinNhanViec.PageEnabled = false;
                                 TabDaoTaoDinhHuong.PageEnabled = false;
                                 TabChuyenSangNS.PageEnabled = false;
@@ -97,41 +111,131 @@ namespace Vs.Recruit
                                 TabKiemTraTayNghe.PageEnabled = false;
                                 TabDaoTaoDinhHuong.PageEnabled = false;
                             }
+                            windowsUIButtonPanel1.Buttons[0].Properties.Visible = false;
                             EnabelButton(false);
                             break;
                         }
                     case "ghi":
                         {
-                            switch (TabThongTinTiepNhanUV.SelectedTabPage.Name)
+                            try
                             {
-                                case "TabThongTinNhanViec":
-                                    {
-                                        System.Data.SqlClient.SqlConnection conn;
-                                        conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
-                                        conn.Open();
-                                        System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spTiepNhanUngVien", conn);
-                                        cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
-                                        cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
-                                        cmd.Parameters.Add("@sDanhMuc", SqlDbType.NVarChar).Value = "TN_UNG_VIEN";
-                                        cmd.Parameters.Add("@Tab", SqlDbType.NVarChar).Value = "THONG_TIN_NV";
-                                        cmd.Parameters.Add("@DNgay2", SqlDbType.DateTime).Value = datNgayHenDL.Text == "" ? datNgayHenDL.EditValue = null : Commons.Modules.ObjSystems.ConvertDateTime(datNgayHenDL.Text);
-                                        cmd.Parameters.Add("@DNgay3", SqlDbType.DateTime).Value = datNgayGioiThieu.Text == "" ? datNgayGioiThieu.EditValue = null : Commons.Modules.ObjSystems.ConvertDateTime(datNgayGioiThieu.Text);
-                                        cmd.Parameters.Add("@DNgay5", SqlDbType.DateTime).Value = datNgayHuyTD.Text == "" ? datNgayHuyTD.EditValue = null : Commons.Modules.ObjSystems.ConvertDateTime(datNgayHuyTD.Text);
-                                        cmd.Parameters.Add("@ID_UV", SqlDbType.BigInt).Value = iID_UV;
-                                        cmd.CommandType = CommandType.StoredProcedure;
-                                        cmd.ExecuteNonQuery();
+                                switch (TabThongTinTiepNhanUV.SelectedTabPage.Name)
+                                {
+                                    case "TabThongTinNhanViec":
+                                        {
+                                            System.Data.SqlClient.SqlConnection conn;
+                                            conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                                            conn.Open();
+                                            System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spTiepNhanUngVien", conn);
+                                            cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                                            cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                                            cmd.Parameters.Add("@sDanhMuc", SqlDbType.NVarChar).Value = "THONG_TIN_TN_UV";
+                                            cmd.Parameters.Add("@Tab", SqlDbType.NVarChar).Value = "THONG_TIN_NV";
+                                            cmd.Parameters.Add("@DNgay2", SqlDbType.DateTime).Value = datNgayHenDL.Text == "" ? datNgayHenDL.EditValue = null : Commons.Modules.ObjSystems.ConvertDateTime(datNgayHenDL.Text);
+                                            cmd.Parameters.Add("@DNgay3", SqlDbType.DateTime).Value = datNgayGioiThieu.Text == "" ? datNgayGioiThieu.EditValue = null : Commons.Modules.ObjSystems.ConvertDateTime(datNgayGioiThieu.Text);
+                                            cmd.Parameters.Add("@DNgay5", SqlDbType.DateTime).Value = datNgayHuyTD.Text == "" ? datNgayHuyTD.EditValue = null : Commons.Modules.ObjSystems.ConvertDateTime(datNgayHuyTD.Text);
+                                            cmd.Parameters.Add("@iCot1", SqlDbType.BigInt).Value = cboID_LHDLD.Text == "" ? cboID_LHDLD.EditValue = null : Convert.ToInt64(cboID_LHDLD.EditValue);
+                                            cmd.Parameters.Add("@fCot1", SqlDbType.Float).Value = txtMUC_LUONG_DN.Text == "" ? txtMUC_LUONG_DN.EditValue == null : txtMUC_LUONG_DN.EditValue;
+                                            cmd.Parameters.Add("@ID_UV", SqlDbType.BigInt).Value = iID_UV;
+                                            cmd.CommandType = CommandType.StoredProcedure;
+                                            cmd.ExecuteNonQuery();
+                                            break;
+                                        }
+                                    case "TabKiemTraTayNghe":
+                                        {
+                                            string sBTNoiDung = "sBTNoiDung" + Commons.Modules.iIDUser;
 
-                                        EnabelButton(true);
-                                        break;
-                                    }
-                                case "TabChuyenSangNS":
-                                    {
-                                        if (!dxValidationProvider11.Validate()) return;
-                                        break;
-                                    }
+                                            Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBTNoiDung, Commons.Modules.ObjSystems.ConvertDatatable(grdNDDT), "");
+                                            System.Data.SqlClient.SqlConnection conn;
+                                            conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                                            conn.Open();
+                                            System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spTiepNhanUngVien", conn);
+                                            cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                                            cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                                            cmd.Parameters.Add("@sDanhMuc", SqlDbType.NVarChar).Value = "THONG_TIN_TN_UV";
+                                            cmd.Parameters.Add("@Tab", SqlDbType.NVarChar).Value = "KIEM_TRA_TAY_NGHE";
+                                            cmd.Parameters.Add("@iLoai", SqlDbType.Int).Value = 2;
+                                            cmd.Parameters.Add("@DNgay1", SqlDbType.DateTime).Value = datNgayKTTayNghe.Text == "" ? datNgayKTTayNghe.EditValue = null : Commons.Modules.ObjSystems.ConvertDateTime(datNgayKTTayNghe.Text);
+                                            cmd.Parameters.Add("@iCot1", SqlDbType.BigInt).Value = cboXepLoai.Text == "" ? cboXepLoai.EditValue = null : Convert.ToInt64(cboXepLoai.EditValue);
+                                            cmd.Parameters.Add("@fCot1", SqlDbType.Float).Value = txtMUC_LUONG_DN.Text == "" ? txtMUC_LUONG_DN.EditValue == null : txtMUC_LUONG_DN.EditValue;
+                                            cmd.Parameters.Add("@sBT1", SqlDbType.NVarChar).Value = sBTNoiDung;
+                                            cmd.Parameters.Add("@ID_UV", SqlDbType.BigInt).Value = iID_UV;
+                                            cmd.CommandType = CommandType.StoredProcedure;
+                                            cmd.ExecuteNonQuery();
+
+                                            Commons.Modules.ObjSystems.XoaTable(sBTNoiDung);
+                                            break;
+                                        }
+                                    case "TabDaoTaoDinhHuong":
+                                        {
+                                            if (datNGAY_DT.Text == "")
+                                            {
+                                                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgNgayDaoTaoKhongDcTrong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning); return;
+                                            }
+
+                                            System.Data.SqlClient.SqlConnection conn;
+                                            conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                                            conn.Open();
+                                            System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spTiepNhanUngVien", conn);
+                                            cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                                            cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                                            cmd.Parameters.Add("@sDanhMuc", SqlDbType.NVarChar).Value = "THONG_TIN_TN_UV";
+                                            cmd.Parameters.Add("@Tab", SqlDbType.NVarChar).Value = "DAO_TAO_DINH_HUONG";
+                                            cmd.Parameters.Add("@DNgay1", SqlDbType.DateTime).Value = datNGAY_DT.Text == "" ? datNGAY_DT.EditValue = null : Commons.Modules.ObjSystems.ConvertDateTime(datNGAY_DT.Text);
+                                            cmd.Parameters.Add("@ID_UV", SqlDbType.BigInt).Value = iID_UV;
+                                            cmd.Parameters.Add("@bCot1", SqlDbType.Bit).Value = chkNQ_LaoDong.EditValue;
+                                            cmd.Parameters.Add("@bCot2", SqlDbType.Bit).Value = chkTienLuongThuong.EditValue;
+                                            cmd.Parameters.Add("@bCot3", SqlDbType.Bit).Value = chkThoaUocLD.EditValue;
+                                            cmd.Parameters.Add("@bCot4", SqlDbType.Bit).Value = chkTieuChuanTNXH.EditValue;
+                                            cmd.Parameters.Add("@bCot5", SqlDbType.Bit).Value = chkGiaiQuyetKN.EditValue;
+                                            cmd.Parameters.Add("@bCot6", SqlDbType.Bit).Value = chkAnToanHC.EditValue;
+                                            cmd.Parameters.Add("@bCot7", SqlDbType.Bit).Value = chkSoCapCuuBD.EditValue;
+                                            cmd.Parameters.Add("@bCot8", SqlDbType.Bit).Value = chkPhanLoaiRacThai.EditValue;
+                                            cmd.Parameters.Add("@bCot9", SqlDbType.Bit).Value = chkNoiQuyPCCC.EditValue;
+                                            cmd.Parameters.Add("@bCot10", SqlDbType.Bit).Value = chkNoiQuyVSATLD.EditValue;
+                                            cmd.Parameters.Add("@bCot11", SqlDbType.Bit).Value = chkThamNhungHL.EditValue;
+                                            cmd.Parameters.Add("@bCot12", SqlDbType.Bit).Value = chkHoanThanhDT.EditValue;
+                                            cmd.Parameters.Add("@iCot1", SqlDbType.BigInt).Value = cboID_NGUOI_DT.Text == "" ? cboID_NGUOI_DT.EditValue == null : cboID_NGUOI_DT.EditValue;
+                                            cmd.Parameters.Add("@DNgay2", SqlDbType.DateTime).Value = datNgayHoanThanh.Text == "" ? datNgayHoanThanh.EditValue = null : Commons.Modules.ObjSystems.ConvertDateTime(datNgayHoanThanh.Text);
+                                            cmd.CommandType = CommandType.StoredProcedure;
+                                            cmd.ExecuteNonQuery();
+                                            break;
+                                        }
+                                    case "TabChuyenSangNS":
+                                        {
+                                            if (!dxValidationProvider11.Validate()) return;
+                                            System.Data.SqlClient.SqlConnection conn;
+                                            conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                                            conn.Open();
+                                            System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spTiepNhanUngVien", conn);
+                                            cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                                            cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                                            cmd.Parameters.Add("@sDanhMuc", SqlDbType.NVarChar).Value = "THONG_TIN_TN_UV";
+                                            cmd.Parameters.Add("@Tab", SqlDbType.NVarChar).Value = "CHUYEN_SANG_NS";
+                                            cmd.Parameters.Add("@iLoai", SqlDbType.Int).Value = 1;
+                                            cmd.Parameters.Add("@ID_UV", SqlDbType.BigInt).Value = iID_UV;
+                                            cmd.Parameters.Add("@DNgay1", SqlDbType.DateTime).Value = datNGAY_NHAN_VIEC.Text == "" ? datNGAY_NHAN_VIEC.EditValue = null : Commons.Modules.ObjSystems.ConvertDateTime(datNGAY_NHAN_VIEC.Text);
+                                            cmd.Parameters.Add("@iCot1", SqlDbType.BigInt).Value = cboID_TO.EditValue;
+                                            cmd.CommandType = CommandType.StoredProcedure;
+                                            cmd.ExecuteNonQuery();
+                                            windowsUIButtonPanel1.Buttons[0].Properties.Visible = true;
+                                            break;
+                                        }
+                                }
+                                TabChuyenSangNS.PageEnabled = true;
+                                TabThongTinNhanViec.PageEnabled = true;
+                                TabKiemTraTayNghe.PageEnabled = true;
+                                TabDaoTaoDinhHuong.PageEnabled = true;
+                                EnabelButton(true);
+                                BindingData(false);
+                            }
+                            catch (Exception ex)
+                            {
+
                             }
                             break;
                         }
+
                     case "khongghi":
                         {
                             TabChuyenSangNS.PageEnabled = true;
@@ -139,12 +243,16 @@ namespace Vs.Recruit
                             TabKiemTraTayNghe.PageEnabled = true;
                             TabDaoTaoDinhHuong.PageEnabled = true;
                             dxValidationProvider11.ValidateHiddenControls = false;
+                            dxValidationProvider11.RemoveControlError(cboID_TO);
+                            dxValidationProvider11.RemoveControlError(datNGAY_NHAN_VIEC);
                             BindingData(false);
+                            windowsUIButtonPanel1.Buttons[0].Properties.Visible = true;
                             EnabelButton(true);
                             break;
                         }
                     case "thoat":
                         {
+                            this.DialogResult = DialogResult.OK;
                             this.Close();
                             break;
                         }
@@ -153,6 +261,63 @@ namespace Vs.Recruit
             catch
             {
             }
+        }
+        private void windowsUIButtonPanel1_ButtonClick(object sender, ButtonEventArgs e)
+        {
+            try
+            {
+                WindowsUIButton btn = e.Button as WindowsUIButton;
+                XtraUserControl ctl = new XtraUserControl();
+                switch (btn.Tag.ToString())
+                {
+                    case "chuyenDL":
+                        {
+                            if (!dxValidationProvider11.Validate()) return;
+                            int iKiem = 0;
+                            iKiem = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT ISNULL(UV.ID_LHDLD,0) ID_LHDLD FROM dbo.UNG_VIEN UV WHERE UV.ID_UV = " + iID_UV + ""));
+                            if (iKiem == 0)
+                            {
+                                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgChuaChonLoaiHopDong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning); return;
+                            }
+                            iKiem = KiemSLTuyen();
+                            if (iKiem == 0)
+                            {
+                                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgSoLuongTuyenDaHet"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning); return;
+                            }
+                            if (iKiem == 2)
+                            {
+                                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgPhieuDaKhoaBanKhongTheChuyen"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning); return;
+                            }
+                            if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgBanCoChacMuonChuyenDuLieu"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) return;
+
+                            System.Data.SqlClient.SqlConnection conn;
+                            conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                            conn.Open();
+                            System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spTiepNhanUngVien", conn);
+                            cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                            cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                            cmd.Parameters.Add("@sDanhMuc", SqlDbType.NVarChar).Value = "THONG_TIN_TN_UV";
+                            cmd.Parameters.Add("@Tab", SqlDbType.NVarChar).Value = "CHUYEN_SANG_NS";
+                            cmd.Parameters.Add("@iLoai", SqlDbType.Int).Value = 2;
+                            cmd.Parameters.Add("@ID_UV", SqlDbType.BigInt).Value = iID_UV;
+                            cmd.Parameters.Add("@sCot1", SqlDbType.NVarChar).Value = txtMS_CN.Text;
+                            cmd.Parameters.Add("@sCot2", SqlDbType.NVarChar).Value = txtMS_THE_CC.Text;
+                            cmd.Parameters.Add("@iCot2", SqlDbType.BigInt).Value = cboID_NGUOI_CHUYEN.Text == "" ? cboID_NGUOI_CHUYEN.EditValue = null : cboID_NGUOI_CHUYEN.EditValue;
+                            cmd.Parameters.Add("@DNgay2", SqlDbType.DateTime).Value = datNGAY_CHUYEN.Text == "" ? datNGAY_CHUYEN.EditValue = null : Commons.Modules.ObjSystems.ConvertDateTime(datNGAY_CHUYEN.Text);
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.ExecuteNonQuery();
+                            XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgChuyenDLThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            sNGayChuyen = datNGAY_CHUYEN.Text;
+                            BindingData(false);
+
+                            windowsUIButtonPanel1.Buttons[0].Properties.Visible = false;
+                            btnALL.Buttons[0].Properties.Visible = false;
+                            btnALL.Buttons[1].Properties.Visible = false;
+                            break;
+                        }
+                }
+            }
+            catch { }
         }
         #endregion
 
@@ -201,27 +366,37 @@ namespace Vs.Recruit
 
         private void TabThongTinTiepNhanUV_Click(object sender, EventArgs e)
         {
+            if (sNGayChuyen != "")
+            {
+                return;
+            }
             switch (TabThongTinTiepNhanUV.SelectedTabPage.Name)
             {
                 case "TabThongTinNhanViec":
                     {
+                        btnALL.Buttons[0].Properties.Visible = true;
                         windowsUIButtonPanel1.Buttons[0].Properties.Visible = false;
                         break;
                     }
                 case "TabKiemTraTayNghe":
                     {
+                        btnALL.Buttons[0].Properties.Visible = true;
                         windowsUIButtonPanel1.Buttons[0].Properties.Visible = false;
                         LoadNDDT();
                         break;
                     }
                 case "TabDaoTaoDinhHuong":
                     {
+                        btnALL.Buttons[0].Properties.Visible = true;
                         windowsUIButtonPanel1.Buttons[0].Properties.Visible = false;
                         break;
                     }
                 case "TabChuyenSangNS":
                     {
-                        windowsUIButtonPanel1.Buttons[0].Properties.Visible = true;
+                        if (sNGayChuyen == "")
+                        {
+                            windowsUIButtonPanel1.Buttons[0].Properties.Visible = true;
+                        }
                         break;
                     }
             }
@@ -364,6 +539,7 @@ namespace Vs.Recruit
                 cboID_XN.EditValue = dtTemp.Rows[0]["ID_XN"];
                 cboID_TO.EditValue = dtTemp.Rows[0]["ID_TO"];
                 cboID_NGUOI_CHUYEN.EditValue = dtTemp.Rows[0]["ID_NGUOI_CHUYEN"];
+
             }
         }
 
@@ -441,18 +617,14 @@ namespace Vs.Recruit
                 && chkThamNhungHL.Checked == true)
             {
                 chkHoanThanhDT.Checked = true;
+                datNgayHoanThanh.DateTime = DateTime.Now;
             }
             else
             {
                 chkHoanThanhDT.Checked = false;
+                datNgayHoanThanh.EditValue = null;
             }
         }
-
-        private void windowsUIButtonPanel1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void cboID_XN_EditValueChanged(object sender, EventArgs e)
         {
             Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_TO, Commons.Modules.ObjSystems.DataTo(-1, Convert.ToInt32(cboID_XN.EditValue), false), "ID_TO", "TEN_TO", "TEN_TO", true, true);
@@ -466,6 +638,79 @@ namespace Vs.Recruit
                 txtSO_NGAY.EditValue = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT ISNULL(SO_NGAY,0) SO_NGAY FROM dbo.LOAI_HDLD WHERE ID_LHDLD = " + cboID_LHDLD.EditValue + "");
             }
             catch { }
+        }
+
+        private void grvNDDT_ValidatingEditor(object sender, DevExpress.XtraEditors.Controls.BaseContainerValidateEditorEventArgs e)
+        {
+            grvNDDT.ClearColumnErrors();
+            try
+            {
+                DataTable dt = new DataTable();
+                if (grvNDDT == null) return;
+                if (grvNDDT.FocusedColumn.FieldName == "ID_NDDT")
+                {//kiểm tra máy không được để trống
+                    if (string.IsNullOrEmpty(e.Value.ToString()))
+                    {
+                        e.Valid = false;
+                        e.ErrorText = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "erMayKhongTrong");
+                        grvNDDT.SetColumnError(grvNDDT.Columns["ID_NDDT"], e.ErrorText);
+                        return;
+                    }
+                    else
+                    {
+                        grvNDDT.SetFocusedRowCellValue("ID_NDDT", e.Value);
+                        dt = new DataTable();
+                        dt = Commons.Modules.ObjSystems.ConvertDatatable(grvNDDT);
+                        if (dt.AsEnumerable().Count(x => x.Field<Int64>("ID_NDDT").Equals(e.Value)) > 1)
+                        {
+                            e.Valid = false;
+                            e.ErrorText = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "erTrungDuLieu");
+                            grvNDDT.SetColumnError(grvNDDT.Columns["ID_NDDT"], e.ErrorText);
+                            return;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            { }
+        }
+
+        private void grdNDDT_ProcessGridKey(object sender, KeyEventArgs e)
+        {
+            if (btnALL.Buttons[0].Properties.Visible == false && e.KeyData == System.Windows.Forms.Keys.Delete)
+            {
+                grvNDDT.DeleteSelectedRows();
+            }
+        }
+
+        private void ThongTinTiepNhanUV_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.DialogResult = DialogResult.OK;
+        }
+        private int KiemSLTuyen()
+        {
+            try
+            {
+                int Kiem = 0;
+                System.Data.SqlClient.SqlConnection conn;
+                conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                conn.Open();
+                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spTiepNhanUngVien", conn);
+                cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                cmd.Parameters.Add("@sDanhMuc", SqlDbType.NVarChar).Value = "THONG_TIN_TN_UV";
+                cmd.Parameters.Add("@Tab", SqlDbType.NVarChar).Value = "CHUYEN_SANG_NS";
+                cmd.Parameters.Add("@iLoai", SqlDbType.Int).Value = 0;
+                cmd.Parameters.Add("@iCot1", SqlDbType.BigInt).Value = iID_YCTD;
+                cmd.Parameters.Add("@iCot2", SqlDbType.BigInt).Value = iID_VTTD;
+                cmd.CommandType = CommandType.StoredProcedure;
+                Kiem = Convert.ToInt32(cmd.ExecuteScalar());
+                return Kiem;
+            }
+            catch
+            {
+                return 3;
+            }
         }
     }
 }

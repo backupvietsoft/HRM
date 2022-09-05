@@ -431,6 +431,7 @@ namespace Vs.HRM
                     }
                 case "luu":
                     {
+                        string btKHNP = "TMPPRORUN" + Commons.Modules.UserName;
                         try
                         {
                             grvKHNP.CloseEditor();
@@ -446,7 +447,6 @@ namespace Vs.HRM
                                 return;
                             }
 
-                            string btKHNP = "TMPPRORUN" + Commons.Modules.UserName;
                             Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, btKHNP, Commons.Modules.ObjSystems.ConvertDatatable(grvKHNP), "");
 
                             DataTable dt1 = new DataTable();
@@ -484,10 +484,11 @@ namespace Vs.HRM
                             UpdateTinhTrangNghiPhep(Convert.ToInt32(grvDSCN.GetFocusedRowCellValue("ID_CN")));
                             LoadGrdCongNhan(false);
                             grvDSCN_FocusedRowChanged(null, null);
+                            Commons.Modules.ObjSystems.XoaTable(btKHNP);
                         }
                         catch (Exception ex)
                         {
-
+                            Commons.Modules.ObjSystems.XoaTable(btKHNP);
                         }
                         break;
                     }
@@ -860,6 +861,7 @@ namespace Vs.HRM
             {
                 XtraMessageBox.Show(ex.Message.ToString());
             }
+            grvDSCN_FocusedRowChanged(null, null);
         }
     }
 }

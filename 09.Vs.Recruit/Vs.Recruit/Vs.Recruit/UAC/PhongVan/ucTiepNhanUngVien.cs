@@ -61,22 +61,30 @@ namespace Vs.Recruit
                 cmd.Parameters.Add("@TNgay", SqlDbType.DateTime).Value = Convert.ToDateTime(datTNgay.EditValue);
                 cmd.Parameters.Add("@DNgay", SqlDbType.DateTime).Value = Convert.ToDateTime(datDNgay.EditValue);
                 cmd.Parameters.Add("@TEN_DK", SqlDbType.NVarChar).Value = cboLocTheoNgay.EditValue;
+                cmd.Parameters.Add("@MS_CV", SqlDbType.NVarChar).Value = cboMS_CV.EditValue;
                 cmd.CommandType = CommandType.StoredProcedure;
                 System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
                 DataSet ds = new DataSet();
                 adp.Fill(ds);
                 DataTable dt = new DataTable();
                 dt = ds.Tables[0].Copy();
-                if (grdDSUngVien.DataSource == null)
+
+                Commons.Modules.ObjSystems.MLoadXtraGrid(grdDSUngVien, grvDSUngVien, dt, false, false, false, true, true, this.Name);
+                grvDSUngVien.Columns["ID_UV"].Visible = false;
+                grvDSUngVien.Columns["MS_CV"].Visible = false;
+                grvDSUngVien.Columns["MS_UV"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
+                grvDSUngVien.Columns["HO_TEN"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
+
+                if (Convert.ToInt32(cboMS_CV.EditValue) == 1)
                 {
-                    Commons.Modules.ObjSystems.MLoadXtraGrid(grdDSUngVien, grvDSUngVien, dt, false, false, false, true, true, this.Name);
-                    grvDSUngVien.Columns["ID_UV"].Visible = false;
-                    grvDSUngVien.Columns["MS_UV"].OptionsColumn.AllowEdit = false;
-                    grvDSUngVien.Columns["HO_TEN"].OptionsColumn.AllowEdit = false;
+                    grvDSUngVien.Columns["NGAY_KT_TAY_NGHE"].Visible = false;
+                    grvDSUngVien.Columns["TEN_DGTN"].Visible = false;
+                    grvDSUngVien.Columns["CAN_DT_KY_NANG"].Visible = false;
                 }
-                else
+                else if (Convert.ToInt32(cboMS_CV.EditValue) == 2 || Convert.ToInt32(cboMS_CV.EditValue) == 3)
                 {
-                    grdDSUngVien.DataSource = dt;
+                    grvDSUngVien.Columns["NGAY_PV"].Visible = false;
+                    grvDSUngVien.Columns["NGAY_CO_THE_DI_LAM"].Visible = false;
                 }
 
                 //DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit cboDGTN = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
@@ -116,7 +124,10 @@ namespace Vs.Recruit
                 adp.Fill(ds);
                 DataTable dt = new DataTable();
                 dt = ds.Tables[0].Copy();
+                DataTable dt1 = new DataTable();
+                dt1 = ds.Tables[1].Copy();
                 Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboLocTheoNgay, dt, "MA_DK", "TEN_DK", "TEN_DK");
+                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboMS_CV, dt1, "MS_CV", "TEN_CV", "TEN_CV");
             }
             catch { }
         }
@@ -199,6 +210,12 @@ namespace Vs.Recruit
             LoadData();
             grvDSUngVien_FocusedRowChanged(null, null);
         }
+        private void cboMS_CV_EditValueChanged(object sender, EventArgs e)
+        {
+            if (Commons.Modules.sLoad == "0Load") return;
+            LoadData();
+            grvDSUngVien_FocusedRowChanged(null, null);
+        }
         #region chuotphai
         class RowInfo
         {
@@ -224,8 +241,8 @@ namespace Vs.Recruit
         {
             try
             {
-                ThongTinTiepNhanUV frm = new ThongTinTiepNhanUV(Convert.ToInt64(grvDSUngVien.GetFocusedRowCellValue("ID_UV")));
-                if(frm.ShowDialog() == DialogResult.OK)
+                ThongTinTiepNhanUV frm = new ThongTinTiepNhanUV(Convert.ToInt64(grvDSUngVien.GetFocusedRowCellValue("ID_UV")),Convert.ToInt32(Convert.ToInt64(grvDSUngVien.GetFocusedRowCellValue("MS_CV"))));
+                if (frm.ShowDialog() == DialogResult.OK)
                 {
                     LoadData();
                 }
@@ -322,5 +339,7 @@ namespace Vs.Recruit
                 flag = false;
             }
         }
+
+
     }
 }

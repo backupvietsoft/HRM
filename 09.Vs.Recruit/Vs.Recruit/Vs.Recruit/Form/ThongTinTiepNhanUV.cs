@@ -16,11 +16,13 @@ namespace Vs.Recruit
     {
         private ucCTQLUV ucUV;
         private long iID_UV;
+        private int iMS_CV;
         public AccordionControl accorMenuleft;
         private int dem = 0;
-        public ThongTinTiepNhanUV(Int64 idUV)
+        public ThongTinTiepNhanUV(Int64 idUV, int MS_CV)
         {
             iID_UV = idUV;
+            iMS_CV = MS_CV;
             InitializeComponent();
             Commons.Modules.ObjSystems.ThayDoiNN(this);
             Commons.Modules.ObjSystems.ThayDoiNN(this, layoutControlGroup1);
@@ -37,18 +39,26 @@ namespace Vs.Recruit
                 Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboXepLoai, Commons.Modules.ObjSystems.DataDanhGiaTayNghe(false), "ID_DGTN", "TEN_DGTN", "TEN_DGTN");
                 Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_NGUOI_DT, Commons.Modules.ObjSystems.TruongBoPhan(), "ID_CN", "HO_TEN", "HO_TEN", true, true);
                 Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_NGUOI_CHUYEN, Commons.Modules.ObjSystems.TruongBoPhan(), "ID_CN", "HO_TEN", "HO_TEN", true, true);
-                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_XN, Commons.Modules.ObjSystems.DataXiNghiep(-1,false), "ID_XN", "TEN_XN", "TEN_XN", true, true);
-                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_TT_HD, Commons.Modules.ObjSystems.DataTinHTrangHD(false), "ID_TT_HD", "TEN_TT_HD", "TEN_TT_HD", true, true);
-                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_TT_HT, Commons.Modules.ObjSystems.DataTinHTrangHT(false), "ID_TT_HT", "TEN_TT_HT", "TEN_TT_HT", true, true);
-                Commons.OSystems.SetDateEditFormat(datNgayCoTheDL);
+                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_XN, Commons.Modules.ObjSystems.DataXiNghiep(-1, false), "ID_XN", "TEN_XN", "TEN_XN", true, true);
+
+                DataTable dt = new DataTable();
+                string strSQL = "SELECT ID_LHDLD, CASE " + Commons.Modules.TypeLanguage + " WHEN 0 THEN TEN_LHDLD ELSE ISNULL(NULLIF(TEN_LHDLD_A,''),TEN_LHDLD) END TEN_LHDLD FROM dbo.LOAI_HDLD WHERE THU_VIEC = 1";
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, strSQL));
+                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_LHDLD, dt, "ID_LHDLD", "TEN_LHDLD", "TEN_LHDLD", true, true);
+
                 Commons.OSystems.SetDateEditFormat(datNgayGioiThieu);
                 Commons.OSystems.SetDateEditFormat(datNgayHenDL);
                 Commons.OSystems.SetDateEditFormat(datNgayHuyTD);
                 Commons.OSystems.SetDateEditFormat(datNgayKTTayNghe);
-                Commons.OSystems.SetDateEditFormat(datNgayNhanViec);
+                Commons.OSystems.SetDateEditFormat(datNGAY_NHAN_VIEC);
                 BindingData(false);
                 Commons.Modules.sLoad = "";
                 windowsUIButtonPanel1.Buttons[0].Properties.Visible = false;
+                if (iMS_CV == 1)
+                {
+                    TabKiemTraTayNghe.PageVisible = false;
+                    txtMUC_LUONG_DN.Text = "";
+                }
                 EnabelButton(true);
             }
             catch { }
@@ -104,10 +114,8 @@ namespace Vs.Recruit
                                         cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
                                         cmd.Parameters.Add("@sDanhMuc", SqlDbType.NVarChar).Value = "TN_UNG_VIEN";
                                         cmd.Parameters.Add("@Tab", SqlDbType.NVarChar).Value = "THONG_TIN_NV";
-                                        cmd.Parameters.Add("@DNgay1", SqlDbType.DateTime).Value = datNgayCoTheDL.Text == "" ? datNgayCoTheDL.EditValue = null : Commons.Modules.ObjSystems.ConvertDateTime(datNgayCoTheDL.Text);
                                         cmd.Parameters.Add("@DNgay2", SqlDbType.DateTime).Value = datNgayHenDL.Text == "" ? datNgayHenDL.EditValue = null : Commons.Modules.ObjSystems.ConvertDateTime(datNgayHenDL.Text);
                                         cmd.Parameters.Add("@DNgay3", SqlDbType.DateTime).Value = datNgayGioiThieu.Text == "" ? datNgayGioiThieu.EditValue = null : Commons.Modules.ObjSystems.ConvertDateTime(datNgayGioiThieu.Text);
-                                        cmd.Parameters.Add("@DNgay4", SqlDbType.DateTime).Value = datNgayNhanViec.Text == "" ? datNgayNhanViec.EditValue = null : Commons.Modules.ObjSystems.ConvertDateTime(datNgayNhanViec.Text);
                                         cmd.Parameters.Add("@DNgay5", SqlDbType.DateTime).Value = datNgayHuyTD.Text == "" ? datNgayHuyTD.EditValue = null : Commons.Modules.ObjSystems.ConvertDateTime(datNgayHuyTD.Text);
                                         cmd.Parameters.Add("@ID_UV", SqlDbType.BigInt).Value = iID_UV;
                                         cmd.CommandType = CommandType.StoredProcedure;
@@ -157,11 +165,12 @@ namespace Vs.Recruit
             btnALL.Buttons[3].Properties.Visible = !visible;
             btnALL.Buttons[4].Properties.Visible = visible;
 
-            datNgayCoTheDL.Properties.ReadOnly = visible;
+            cboID_LHDLD.Properties.ReadOnly = visible;
+            txtSO_NGAY.Properties.ReadOnly = true;
+            txtMUC_LUONG_DN.Properties.ReadOnly = visible;
             datNgayGioiThieu.Properties.ReadOnly = visible;
             datNgayHenDL.Properties.ReadOnly = visible;
             datNgayHuyTD.Properties.ReadOnly = visible;
-            datNgayNhanViec.Properties.ReadOnly = visible;
 
             datNgayKTTayNghe.Properties.ReadOnly = visible;
             txtTienThuong.Properties.ReadOnly = visible;
@@ -184,14 +193,8 @@ namespace Vs.Recruit
             chkHoanThanhDT.Enabled = false;
             datNgayHoanThanh.Properties.ReadOnly = visible;
 
-            datNGAY_CHUYEN.Properties.ReadOnly = visible;
-            cboID_NGUOI_CHUYEN.Properties.ReadOnly = visible;
-            cboID_XN.Properties.ReadOnly = visible;
+            datNGAY_NHAN_VIEC.Properties.ReadOnly = visible;
             cboID_TO.Properties.ReadOnly = visible;
-            txtMS_CN.Properties.ReadOnly = visible;
-            txtMS_THE_CC.Properties.ReadOnly = visible;
-            cboID_TT_HD.Properties.ReadOnly = visible;
-            cboID_TT_HT.Properties.ReadOnly = visible;
         }
 
         #endregion
@@ -323,11 +326,12 @@ namespace Vs.Recruit
                 DataTable dtTemp = new DataTable();
                 dtTemp = LoadThongTinUV();
                 // tap 1
-                datNgayCoTheDL.EditValue = dtTemp.Rows[0]["NGAY_CO_THE_DI_LAM"];
+                cboID_LHDLD.EditValue = dtTemp.Rows[0]["ID_LHDLD"];
+                txtSO_NGAY.EditValue = dtTemp.Rows[0]["SO_NGAY"];
+                txtMUC_LUONG_DN.EditValue = dtTemp.Rows[0]["MUC_LUONG_DN"];
                 datNgayGioiThieu.EditValue = dtTemp.Rows[0]["NGAY_GIOI_THIEU"];
                 datNgayHenDL.EditValue = dtTemp.Rows[0]["NGAY_HEN_DI_LAM"];
                 datNgayHuyTD.EditValue = dtTemp.Rows[0]["NGAY_HUY_TD"];
-                datNgayNhanViec.EditValue = dtTemp.Rows[0]["NGAY_NHAN_VIEC"];
 
                 // tap danh gia tay nghe
                 datNgayKTTayNghe.EditValue = dtTemp.Rows[0]["NGAY_KT_TAY_NGHE"];
@@ -353,13 +357,12 @@ namespace Vs.Recruit
 
 
                 // chuyen nhân sự
+                datNGAY_NHAN_VIEC.EditValue = dtTemp.Rows[0]["NGAY_NHAN_VIEC"];
                 datNGAY_CHUYEN.EditValue = dtTemp.Rows[0]["NGAY_CHUYEN"];
-                txtMS_CN.EditValue  = dtTemp.Rows[0]["MS_CN"];
-                txtMS_THE_CC.EditValue  = dtTemp.Rows[0]["MS_THE_CC"];
-                cboID_XN.EditValue  = dtTemp.Rows[0]["ID_XN"];
-                cboID_TO.EditValue  = dtTemp.Rows[0]["ID_TO"];
-                cboID_TT_HD.EditValue  = dtTemp.Rows[0]["ID_TT_HD"];
-                cboID_TT_HT.EditValue  = dtTemp.Rows[0]["ID_TT_HT"];
+                txtMS_CN.EditValue = dtTemp.Rows[0]["MS_CN"];
+                txtMS_THE_CC.EditValue = dtTemp.Rows[0]["MS_THE_CC"];
+                cboID_XN.EditValue = dtTemp.Rows[0]["ID_XN"];
+                cboID_TO.EditValue = dtTemp.Rows[0]["ID_TO"];
                 cboID_NGUOI_CHUYEN.EditValue = dtTemp.Rows[0]["ID_NGUOI_CHUYEN"];
             }
         }
@@ -433,7 +436,7 @@ namespace Vs.Recruit
 
         private void chkHoanThanhDT_CheckedChanged(object sender, EventArgs e)
         {
-            if(chkNQ_LaoDong.Checked == true && chkTienLuongThuong.Checked == true && chkThoaUocLD.Checked == true && chkTieuChuanTNXH.Checked == true && chkGiaiQuyetKN.Checked == true
+            if (chkNQ_LaoDong.Checked == true && chkTienLuongThuong.Checked == true && chkThoaUocLD.Checked == true && chkTieuChuanTNXH.Checked == true && chkGiaiQuyetKN.Checked == true
                 && chkAnToanHC.Checked == true && chkSoCapCuuBD.Checked == true && chkPhanLoaiRacThai.Checked == true && chkNoiQuyPCCC.Checked == true && chkNoiQuyVSATLD.Checked == true
                 && chkThamNhungHL.Checked == true)
             {
@@ -452,7 +455,17 @@ namespace Vs.Recruit
 
         private void cboID_XN_EditValueChanged(object sender, EventArgs e)
         {
-            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_TO, Commons.Modules.ObjSystems.DataTo(-1, Convert.ToInt32(cboID_XN.EditValue) , false), "ID_TO", "TEN_TO", "TEN_TO", true, true);
+            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_TO, Commons.Modules.ObjSystems.DataTo(-1, Convert.ToInt32(cboID_XN.EditValue), false), "ID_TO", "TEN_TO", "TEN_TO", true, true);
+        }
+
+        private void cboID_LHDLD_EditValueChanged(object sender, EventArgs e)
+        {
+            if (Commons.Modules.sLoad == "0Load") return;
+            try
+            {
+                txtSO_NGAY.EditValue = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT ISNULL(SO_NGAY,0) SO_NGAY FROM dbo.LOAI_HDLD WHERE ID_LHDLD = " + cboID_LHDLD.EditValue + "");
+            }
+            catch { }
         }
     }
 }

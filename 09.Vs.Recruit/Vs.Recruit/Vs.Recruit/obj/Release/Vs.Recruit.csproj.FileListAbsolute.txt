@@ -460,4 +460,6 @@ H:\Lamviec\Lamviec\HRM\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Release\Vs
 H:\Lamviec\Lamviec\HRM\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Release\Vs.Recruit.csproj.CopyComplete
 H:\Lamviec\Lamviec\HRM\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Release\Vs.Recruit.dll
 H:\Lamviec\Lamviec\HRM\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Release\Vs.Recruit.pdb
-F:\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Release\Vs.Recruit.ThongTinTiepNhanUV.resources
+F:\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Release\Vs.Recruit.frmUngVien.resources
+F:\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Release\Vs.Recruit.frmCapNhatNhanh.resources
+F:\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Release\Vs.Recruit.frmThongTinTiepNhanUV.resources

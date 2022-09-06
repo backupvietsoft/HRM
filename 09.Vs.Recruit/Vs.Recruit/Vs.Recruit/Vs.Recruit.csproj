@@ -231,11 +231,17 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form\ThongTinTiepNhanUV.cs">
+    <Compile Include="Form\frmCapNhatNhanh.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form\ThongTinTiepNhanUV.Designer.cs">
-      <DependentUpon>ThongTinTiepNhanUV.cs</DependentUpon>
+    <Compile Include="Form\frmCapNhatNhanh.Designer.cs">
+      <DependentUpon>frmCapNhatNhanh.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form\frmThongTinTiepNhanUV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\frmThongTinTiepNhanUV.Designer.cs">
+      <DependentUpon>frmThongTinTiepNhanUV.cs</DependentUpon>
     </Compile>
     <Compile Include="Form\frmImportUngVien.cs">
       <SubType>Form</SubType>
@@ -476,8 +482,11 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form\ThongTinTiepNhanUV.resx">
-      <DependentUpon>ThongTinTiepNhanUV.cs</DependentUpon>
+    <EmbeddedResource Include="Form\frmCapNhatNhanh.resx">
+      <DependentUpon>frmCapNhatNhanh.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\frmThongTinTiepNhanUV.resx">
+      <DependentUpon>frmThongTinTiepNhanUV.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\frmImportUngVien.resx">
       <DependentUpon>frmImportUngVien.cs</DependentUpon>

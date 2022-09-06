@@ -311,7 +311,7 @@ namespace Vs.Recruit
                 //}
                 //catch { }
                 iID_UV = Convert.ToInt64(grvDSUngVien.GetFocusedRowCellValue("ID_UV"));
-                ThongTinTiepNhanUV frm = new ThongTinTiepNhanUV(Convert.ToInt64(grvDSUngVien.GetFocusedRowCellValue("ID_UV")), Convert.ToInt32(Convert.ToInt64(grvDSUngVien.GetFocusedRowCellValue("MS_CV"))), grvDSUngVien.GetFocusedRowCellValue("NGAY_CHUYEN").ToString(), Convert.ToInt64(grvDSUngVien.GetFocusedRowCellValue("ID_YCTD")), Convert.ToInt64(grvDSUngVien.GetFocusedRowCellValue("ID_VTTD")));
+                frmThongTinTiepNhanUV frm = new frmThongTinTiepNhanUV(Convert.ToInt64(grvDSUngVien.GetFocusedRowCellValue("ID_UV")), Convert.ToInt32(Convert.ToInt64(grvDSUngVien.GetFocusedRowCellValue("MS_CV"))), grvDSUngVien.GetFocusedRowCellValue("NGAY_CHUYEN").ToString(), Convert.ToInt64(grvDSUngVien.GetFocusedRowCellValue("ID_YCTD")), Convert.ToInt64(grvDSUngVien.GetFocusedRowCellValue("ID_VTTD")));
                 if (frm.ShowDialog() == DialogResult.OK)
                 {
                     LoadData();
@@ -331,7 +331,13 @@ namespace Vs.Recruit
         {
             try
             {
-
+                DataTable dt = new DataTable();
+                dt = (DataTable)grdDSUngVien.DataSource;
+                frmCapNhatNhanh frm = new frmCapNhatNhanh(dt);
+                if (frm.ShowDialog() == DialogResult.OK)
+                {
+                    LoadData();
+                }
             }
             catch { }
         }

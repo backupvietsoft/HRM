@@ -1194,7 +1194,7 @@ namespace Commons
                     grv.PopulateColumns();
                 grv.OptionsView.ColumnAutoWidth = MColumnAutoWidth;
                 grv.OptionsView.AllowHtmlDrawHeaders = true;
-                grv.Appearance.HeaderPanel.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+                //grv.Appearance.HeaderPanel.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
                 grv.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.True;
                 if (Commons.Modules.bSetUp == true)
                 {

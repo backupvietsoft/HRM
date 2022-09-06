@@ -2,6 +2,7 @@
 using DevExpress.Utils.Menu;
 using DevExpress.XtraBars.Docking2010;
 using DevExpress.XtraEditors;
+using DevExpress.XtraGrid.Views.Grid;
 using Microsoft.ApplicationBlocks.Data;
 using System;
 using System.Collections.Generic;
@@ -234,12 +235,20 @@ namespace Vs.Recruit
                 if (grdDSUngVien.DataSource == null)
                 {
                     Commons.Modules.ObjSystems.MLoadXtraGrid(grdDSUngVien, grvDSUngVien, dt, false, false, false, true, true, this.Name);
+                    grvDSUngVien.Columns["CHON"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
+                    grvDSUngVien.Columns["MS_UV"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
+                    grvDSUngVien.Columns["HO_TEN"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
+                    grvDSUngVien.Columns["TEN_XN"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
+                    grvDSUngVien.Columns["TEN_LCV"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
+
+                    grvDSUngVien.BestFitColumns();
                 }
                 else
                 {
                     grdDSUngVien.DataSource = dt;
                 }
-                if(them == 0)
+
+                if (them == 0)
                 {
                     grvDSUngVien.Columns["CHON"].Visible = false;
                 }
@@ -247,6 +256,8 @@ namespace Vs.Recruit
                 {
                     grvDSUngVien.Columns["CHON"].Visible = true;
                 }
+                grvDSUngVien.Columns["HOAN_THANH_DT"].OptionsColumn.AllowEdit = false;
+                grvDSUngVien.Columns["NGAY_HOAN_THANH_DT"].OptionsColumn.AllowEdit = false;
                 grvDSUngVien.Columns["MUC_LUONG_DN"].DisplayFormat.FormatType = FormatType.Numeric;
                 grvDSUngVien.Columns["MUC_LUONG_DN"].DisplayFormat.FormatString = "n0";
                 grvDSUngVien.Columns["ID_UV"].Visible = false;
@@ -265,7 +276,8 @@ namespace Vs.Recruit
                 grvDSUngVien.Columns["MS_THE_CC"].Visible = false;
 
                 //DAO TAO DINH HUONG
-                grvDSUngVien.Columns["NGAY_DT"].Visible = false;
+                grvDSUngVien.Columns["HOAN_THANH_DT"].Visible = false;
+                grvDSUngVien.Columns["NGAY_HOAN_THANH_DT"].Visible = false;
                 grvDSUngVien.Columns["NQ_LD"].Visible = false;
                 grvDSUngVien.Columns["TL_THUONG"].Visible = false;
                 grvDSUngVien.Columns["TU_LD"].Visible = false;
@@ -278,8 +290,7 @@ namespace Vs.Recruit
                 grvDSUngVien.Columns["NQ_VSATLD"].Visible = false;
                 grvDSUngVien.Columns["TN_HL"].Visible = false;
                 grvDSUngVien.Columns["ID_NGUOI_DT"].Visible = false;
-                grvDSUngVien.Columns["HOAN_THANH_DT"].Visible = false;
-                grvDSUngVien.Columns["NGAY_HOAN_THANH_DT"].Visible = false;
+                grvDSUngVien.Columns["NGAY_DT"].Visible = false;
                 grvDSUngVien.Columns["ID_VTTD"].Visible = false;
                 grvDSUngVien.Columns["ID_YCTD"].Visible = false;
 
@@ -321,7 +332,7 @@ namespace Vs.Recruit
                             grvDSUngVien.Columns["ID_NGUOI_DT"].Visible = true;
                             grvDSUngVien.Columns["HOAN_THANH_DT"].Visible = true;
                             grvDSUngVien.Columns["NGAY_HOAN_THANH_DT"].Visible = true;
-                            
+
                             break;
                         }
                     case "NGAY_HEN_DI_LAM":
@@ -373,10 +384,10 @@ namespace Vs.Recruit
                             cboTo.BeforePopup += cboTo_BeforePopup;
                             cboTo.EditValueChanged += cboTo_EditValueChanged;
 
-                            grvDSUngVien.Columns["NGAY_NHAN_VIEC"].Visible = true;
                             grvDSUngVien.Columns["ID_TO"].Visible = true;
-                            grvDSUngVien.Columns["MS_CN"].Visible = true;
+                            grvDSUngVien.Columns["NGAY_NHAN_VIEC"].Visible = true;
                             grvDSUngVien.Columns["MS_THE_CC"].Visible = true;
+                            grvDSUngVien.Columns["MS_CN"].Visible = true;
                             break;
                         }
                     case "ID_LHDLD":
@@ -544,7 +555,13 @@ namespace Vs.Recruit
             try
             {
                 if (btnALL.Buttons[0].Properties.Visible == true) return;
-                //if (grvDSUngVien.FocusedColumn.FieldName.Substring(0, 3) != "TG_") return;
+                if (grvDSUngVien.FocusedColumn.FieldName == "CHON") return;
+                if (grvDSUngVien.FocusedColumn.FieldName == "MS_UV") return;
+                if (grvDSUngVien.FocusedColumn.FieldName == "HO_TEN") return;
+                if (grvDSUngVien.FocusedColumn.FieldName == "TEN_XN") return;
+                if (grvDSUngVien.FocusedColumn.FieldName == "TEN_LCV") return;
+                if (grvDSUngVien.FocusedColumn.FieldName == "MS_CN") return;
+                if (grvDSUngVien.FocusedColumn.FieldName == "MS_THE_CC") return;
                 DevExpress.XtraGrid.Views.Grid.GridView view = sender as DevExpress.XtraGrid.Views.Grid.GridView;
                 if (e.MenuType == DevExpress.XtraGrid.Views.Grid.GridMenuType.Row)
                 {
@@ -662,7 +679,35 @@ namespace Vs.Recruit
         {
             try
             {
-
+                if (cboTruongCapNhat.EditValue.ToString() != "DAO_TAO_DINH_HUONG") return;
+                GridView view = sender as GridView;
+                view.SetRowCellValue(e.RowHandle, view.Columns[e.Column.FieldName], e.Value);
+                bool NQ_LD = Convert.ToBoolean(grvDSUngVien.GetFocusedRowCellValue("NQ_LD"));
+                bool TL_THUONG = Convert.ToBoolean(grvDSUngVien.GetFocusedRowCellValue("TL_THUONG"));
+                bool TU_LD = Convert.ToBoolean(grvDSUngVien.GetFocusedRowCellValue("TU_LD"));
+                bool CS_TC = Convert.ToBoolean(grvDSUngVien.GetFocusedRowCellValue("CS_TC"));
+                bool GQ_KN = Convert.ToBoolean(grvDSUngVien.GetFocusedRowCellValue("GQ_KN"));
+                bool AT_HC = Convert.ToBoolean(grvDSUngVien.GetFocusedRowCellValue("AT_HC"));
+                bool SO_CC = Convert.ToBoolean(grvDSUngVien.GetFocusedRowCellValue("SO_CC"));
+                bool PL_RT = Convert.ToBoolean(grvDSUngVien.GetFocusedRowCellValue("PL_RT"));
+                bool NQ_PCCC = Convert.ToBoolean(grvDSUngVien.GetFocusedRowCellValue("NQ_PCCC"));
+                bool NQ_VSATLD = Convert.ToBoolean(grvDSUngVien.GetFocusedRowCellValue("NQ_VSATLD"));
+                bool TN_HL = Convert.ToBoolean(grvDSUngVien.GetFocusedRowCellValue("TN_HL"));
+                if (e.Column.FieldName == "NQ_LD" || e.Column.FieldName == "TL_THUONG" || e.Column.FieldName == "TU_LD" || e.Column.FieldName == "CS_TC" || e.Column.FieldName == "GQ_KN"
+                    || e.Column.FieldName == "AT_HC" || e.Column.FieldName == "SO_CC" || e.Column.FieldName == "PL_RT" || e.Column.FieldName == "NQ_PCCC" || e.Column.FieldName == "NQ_VSATLD" || e.Column.FieldName == "TN_HL")
+                {
+                    if (NQ_LD == true && TL_THUONG == true && TU_LD == true && CS_TC == true && GQ_KN == true && AT_HC == true && SO_CC == true
+                        && PL_RT == true && NQ_PCCC == true && NQ_VSATLD == true && TN_HL == true)
+                    {
+                        view.SetRowCellValue(e.RowHandle, view.Columns["HOAN_THANH_DT"], true);
+                        view.SetRowCellValue(e.RowHandle, view.Columns["NGAY_HOAN_THANH_DT"], DateTime.Now);
+                    }
+                    else
+                    {
+                        view.SetRowCellValue(e.RowHandle, view.Columns["HOAN_THANH_DT"], false);
+                        view.SetRowCellValue(e.RowHandle, view.Columns["NGAY_HOAN_THANH_DT"], null);
+                    }
+                }
             }
             catch { }
         }

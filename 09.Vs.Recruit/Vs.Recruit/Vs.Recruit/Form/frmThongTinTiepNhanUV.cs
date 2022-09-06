@@ -168,11 +168,6 @@ namespace Vs.Recruit
                                         }
                                     case "TabDaoTaoDinhHuong":
                                         {
-                                            if (datNGAY_DT.Text == "")
-                                            {
-                                                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgNgayDaoTaoKhongDcTrong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning); return;
-                                            }
-
                                             System.Data.SqlClient.SqlConnection conn;
                                             conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
                                             conn.Open();

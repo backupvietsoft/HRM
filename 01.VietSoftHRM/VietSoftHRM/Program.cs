@@ -26,7 +26,6 @@ namespace VietSoftHRM
                 Commons.IConnections.Database = args[1].ToString();
                 Commons.IConnections.Username = args[2].ToString(); 
                 Commons.IConnections.Password = args[3].ToString();
-
                 Commons.Modules.iIDUser = Convert.ToInt32(args[4]);
                 Commons.Modules.UserName = args[5].ToString();
                 //System.Diagnostics.Process.Start("VietSoftHRM.exe", Com.Mod.Server + " " + Com.Mod.UserDB + " " + Com.Mod.Password + " " + Com.Mod.Database + " " + Com.Mod.UserID.ToString() + " " + Com.Mod.UName.ToString());
@@ -56,8 +55,8 @@ namespace VietSoftHRM
         {
             try
             {
-                MRunInt();
-                //Application.Run(new frmDLTuyenDung());
+                //MRunInt();
+                Application.Run(new frmLogin());
                 //Vs.Report.frmViewReport frm = new Vs.Report.frmViewReport();
                 //frm.rpt = new VS.Report.NhanSu.XtraReport1();
                 //frm.ShowDialog();

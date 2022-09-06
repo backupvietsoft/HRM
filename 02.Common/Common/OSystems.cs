@@ -1062,6 +1062,14 @@ namespace Commons
                 menuSave.Tag = e.Menu;
                 menuSave.Click += delegate (object a, EventArgs b) { MyMenuItemSave(null, null, grv, fName); };
                 headerMenu.Items.Add(menuSave);
+
+                // menu Delete
+                DevExpress.Utils.Menu.DXMenuItem menuDelete = new DevExpress.Utils.Menu.DXMenuItem("Delete Grid");
+                menuSave.BeginGroup = true;
+                menuSave.Tag = e.Menu;
+                menuSave.Click += delegate (object a, EventArgs b) { MyMenuItemDelete(null, null, grv, fName); };
+                headerMenu.Items.Add(menuDelete);
+
             }
             catch
             {
@@ -1112,6 +1120,10 @@ namespace Commons
         }
 
 
+        public void MyMenuItemDelete(System.Object sender, System.EventArgs e, GridView grv, string fName)
+        {
+            SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "DELETE dbo.DINH_DANG_LUOI WHERE TEN_GRID = '" + grv.Name + "' AND TEN_FORM ='" + fName + "'");
+        }
         public void MyMenuItemSave(System.Object sender, System.EventArgs e, GridView grv, string fName)
         {
             // SAVE  

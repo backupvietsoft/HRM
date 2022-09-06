@@ -85,7 +85,6 @@ namespace Vs.Recruit
                     grvViTri.Columns["SL_TUYEN"].OptionsColumn.AllowEdit = false;
                     //ID_YCTD,MA_YCTD
                     //Commons.Modules.ObjSystems.AddCombXtra("ID_YCTD", "MA_YCTD", grvViTri, Commons.Modules.ObjSystems.DataYeuCauTD(false, 1), true, "ID_YCTD", this.Name, true);
-
                     //Danh sach benh vien
                     DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit cboYCTD = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
                     cboYCTD.NullText = "";
@@ -299,6 +298,7 @@ namespace Vs.Recruit
                         Commons.Modules.ObjSystems.XoaTable("sBTUV" + Commons.Modules.iIDUser);
                         LoadgrdKHPV(iID_KHPV);
                         BindingData(false);
+                        cboTTLoc_EditValueChanged(null, null);
                         Commons.Modules.ObjSystems.DeleteAddRow(grvViTri);
                         enableButon(true);
                         break;

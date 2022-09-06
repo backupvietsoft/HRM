@@ -6,6 +6,8 @@ using Microsoft.ApplicationBlocks.Data;
 using DevExpress.XtraBars.Docking2010;
 using DevExpress.XtraTreeList.Nodes;
 using DevExpress.XtraTreeList.Columns;
+using DevExpress.XtraLayout;
+using System.Collections.Generic;
 
 namespace VietSoftHRM
 {
@@ -17,10 +19,13 @@ namespace VietSoftHRM
         }
         private void ucMENU_Load(object sender, EventArgs e)
         {
+            Commons.Modules.sLoad = "0Load";
             LoadTreeMenu(false);
             enableButon(true);
-            Commons.Modules.ObjSystems.ThayDoiNN(this, windowButton);
-
+            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboNhomUser, Commons.Modules.ObjSystems.DataNhomUser(false), "ID_NHOM", "TEN_NHOM", "");
+            cboNhomUser.EditValue = Convert.ToInt64(Commons.Modules.sIdHT);
+            Commons.Modules.sLoad = "";
+            Commons.Modules.ObjSystems.ThayDoiNN(this, new List<LayoutControlGroup> { Root }, windowButton);
         }
         public void setcheck(TreeListNode node)
         {
@@ -42,7 +47,7 @@ namespace VietSoftHRM
         {
             try
             {
-                if(Commons.Modules.sHideMenu == "0")
+                if (Commons.Modules.sHideMenu == "0")
                 {
                     Commons.Modules.sHideMenu = "-2";
                 }
@@ -155,13 +160,20 @@ namespace VietSoftHRM
             windowButton.Buttons[2].Properties.Visible = visible;
             windowButton.Buttons[3].Properties.Visible = !visible;
             windowButton.Buttons[4].Properties.Visible = !visible;
-
-
+            
+            cboNhomUser.Properties.ReadOnly = !visible;
         }
 
         private void treeListMenu_RowCellClick(object sender, DevExpress.XtraTreeList.RowCellClickEventArgs e)
         {
             // MessageBox.Show("dsds");
+        }
+
+        private void cboNhomUser_EditValueChanged(object sender, EventArgs e)
+        {
+            if (Commons.Modules.sLoad == "0Load") return;
+            Commons.Modules.sIdHT = cboNhomUser.EditValue.ToString();
+            LoadTreeMenu(false);
         }
     }
 }

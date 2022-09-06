@@ -308,7 +308,16 @@ namespace VietSoftHRM
                         ns.Dock = DockStyle.Fill;
                         break;
                     }
-
+                #region Bao cao
+                case "mnuBCDSUVTuyenDung":
+                    {
+                        ucBaoCaoDSUVThamGiaTD tmp = new ucBaoCaoDSUVThamGiaTD();
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(tmp);
+                        tmp.Dock = DockStyle.Fill;
+                        break;
+                    }
+                #endregion
                 default:
                     break;
             }

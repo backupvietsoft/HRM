@@ -159,7 +159,7 @@ namespace VietSoftHRM
             dt.PrimaryKey = new DataColumn[] { dt.Columns["ID_USER"] };
             try
             {
-                Commons.Modules.ObjSystems.MLoadXtraGrid(grdNguoiDung, grvNguoiDung, dt, false, false, true, true, true, this.Name);
+                Commons.Modules.ObjSystems.MLoadXtraGrid(grdNguoiDung, grvNguoiDung, dt, false, false, false, true, true, this.Name);
                 grvNguoiDung.Columns["ID_USER"].Visible = false;
                 grvNguoiDung.Columns["ID_NHOM"].Visible = false;
                 grvNguoiDung.Columns["ID_TO"].Visible = false;
@@ -169,6 +169,10 @@ namespace VietSoftHRM
                 grvNguoiDung.Columns["ACTIVE"].Visible = false;
                 grvNguoiDung.Columns["USER_MAIL"].Visible = false;
                 grvNguoiDung.Columns["USER_KHACH"].Visible = false;
+
+                grvNguoiDung.Columns["TIME_LOGIN"].DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+                grvNguoiDung.Columns["TIME_LOGIN"].DisplayFormat.FormatString = "dd/MM/yyy hh:mm:ss";
+
                 if (iSTT != -1)
                 {
                     int index = dt.Rows.IndexOf(dt.Rows.Find(iSTT));
@@ -284,8 +288,39 @@ namespace VietSoftHRM
         }
         private void cboNhomUser_EditValueChanged(object sender, EventArgs e)
         {
+            if (Commons.Modules.sLoad == "0Load") return;
             Commons.Modules.sIdHT = cboNhomUser.EditValue.ToString();
             LoadUser(-1);
+        }
+
+        private void tsmiResetPassword_Click(object sender, EventArgs e)
+        {
+            frmChangePass change = new frmChangePass(grvNguoiDung.GetFocusedRowCellValue("USER_NAME").ToString());
+            change.ShowDialog();
+        }
+
+        private void tsmiKick_Click(object sender, EventArgs e)
+        {
+            Commons.Modules.ObjSystems.User(grvNguoiDung.GetFocusedRowCellValue("USER_NAME").ToString(), 2);
+            LoadUser(-1);
+        }
+
+        private void grvNguoiDung_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
+        {
+            try
+            {
+                if (e.HitInfo.InDataRow)
+                {
+                    contextMenuStrip1.Show(Cursor.Position.X, Cursor.Position.Y);
+                }
+                else
+                {
+                    contextMenuStrip1.Hide();
+                }
+            }
+            catch
+            {
+            }
         }
     }
 }

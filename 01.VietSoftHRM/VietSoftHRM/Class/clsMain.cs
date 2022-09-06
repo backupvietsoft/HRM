@@ -34,13 +34,11 @@ namespace VietSoftHRM
                 Commons.Modules.UserName = "admin";
                 DataSet ds = new DataSet();
 
-
                 ds.ReadXml(AppDomain.CurrentDomain.BaseDirectory + "\\vsconfig.xml");
                 Commons.IConnections.Username = ds.Tables[0].Rows[0]["U"].ToString();
                 Commons.IConnections.Server = Commons.Modules.ObjSystems.Decrypt(ds.Tables[0].Rows[0]["S"].ToString(), true);
                 Commons.IConnections.Database = ds.Tables[0].Rows[0]["D"].ToString();
                 Commons.IConnections.Password = Commons.Modules.ObjSystems.Decrypt(ds.Tables[0].Rows[0]["P"].ToString(), true);
-
                 Commons.Modules.sIP = Commons.Modules.ObjSystems.Decrypt(ds.Tables[0].Rows[0]["IP"].ToString(), true);
                 Commons.Modules.ChangLanguage = false;
                 ds = new DataSet();
@@ -50,7 +48,6 @@ namespace VietSoftHRM
                     Commons.Modules.TypeLanguage = int.Parse(ds.Tables[0].Rows[0]["N"].ToString());
                 }
                 catch { Commons.Modules.TypeLanguage = 0; }
-
                 Commons.Modules.iSoLeSL = 1;
                 Commons.Modules.iSoLeDG = 2;
                 Commons.Modules.iSoLeTT = 0;

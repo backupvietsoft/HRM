@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using DevExpress.XtraBars.Docking2010;
 using DevExpress.XtraEditors;
+using DevExpress.XtraLayout;
 using Microsoft.ApplicationBlocks.Data;
 namespace VietSoftHRM
 {
@@ -50,9 +52,13 @@ namespace VietSoftHRM
         }
         private void ucDU_LIEU_Load(object sender, EventArgs e)
         {
+            Commons.Modules.sLoad = "0Load";
             LoadTo(false);
             enableButon(true);
-            Commons.Modules.ObjSystems.ThayDoiNN(this,windowsUIButton);
+            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboNhomUser, Commons.Modules.ObjSystems.DataNhomUser(false), "ID_NHOM", "TEN_NHOM", "");
+            cboNhomUser.EditValue = Convert.ToInt64(Commons.Modules.sIdHT);
+            Commons.Modules.sLoad = "";
+            Commons.Modules.ObjSystems.ThayDoiNN(this, new List<LayoutControlGroup> { Root }, windowsUIButton);
         }
 
         private void windowsUIButton_ButtonClick(object sender, DevExpress.XtraBars.Docking2010.ButtonEventArgs e)
@@ -103,7 +109,6 @@ namespace VietSoftHRM
                     break;
             }
         }
-
         private void enableButon(bool visible)
         {
             windowsUIButton.Buttons[0].Properties.Visible = visible;
@@ -111,7 +116,14 @@ namespace VietSoftHRM
             windowsUIButton.Buttons[2].Properties.Visible = !visible;
             windowsUIButton.Buttons[3].Properties.Visible = !visible;
             windowsUIButton.Buttons[4].Properties.Visible = visible;
+            cboNhomUser.Properties.ReadOnly = !visible;
         }
 
+        private void cboNhomUser_EditValueChanged(object sender, EventArgs e)
+        {
+            if (Commons.Modules.sLoad == "0Load") return;
+            Commons.Modules.sIdHT = cboNhomUser.EditValue.ToString();
+            LoadTo(false);
+        }
     }
 }

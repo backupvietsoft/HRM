@@ -228,6 +228,7 @@ namespace Vs.Recruit
                         if (grvViTri.HasColumnErrors) return;
                         if (!SaveData()) return;
                         LoadgrdPV(iID_PV);
+                        cboTTLoc_EditValueChanged(null, null);
                         Commons.Modules.ObjSystems.DeleteAddRow(grvUVPV);
                         enableButon(true);
                         break;
@@ -539,12 +540,12 @@ namespace Vs.Recruit
                 return null;
             }
         }
-
         private void cboTTLoc_EditValueChanged(object sender, EventArgs e)
         {
             try
             {
                 Commons.Modules.ObjSystems.RowFilter(grdPV, grvPV.Columns["TINH_TRANG"], (cboTTLoc.EditValue).ToString());
+                grvKHPV_FocusedRowChanged(null, null);
             }
             catch
             {
@@ -573,6 +574,7 @@ namespace Vs.Recruit
             SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "UPDATE dbo.PHONG_VAN SET TINH_TRANG =" + (Convert.ToInt32(cboTinhTrang.EditValue) == 1 ? "2" : "1") + " WHERE ID_PV = " + iID_PV + "");
             cboTinhTrang.EditValue = Convert.ToInt32(cboTinhTrang.EditValue) == 2 ? 1 : 2;
             //update trạng thái vào đây
+            datTuNgay_EditValueChanged(null, null) ;
 
         }
 

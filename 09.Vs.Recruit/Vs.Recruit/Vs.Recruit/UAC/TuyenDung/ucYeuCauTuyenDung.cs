@@ -317,6 +317,7 @@ namespace Vs.Recruit
                         if (grvViTri.HasColumnErrors || grvThayThe.HasColumnErrors) return;
                         if (!SaveData()) return;
                         LoadgrdPYC(iID_YCTD);
+                        cboTrangThai_EditValueChanged(null, null);
                         Commons.Modules.ObjSystems.DeleteAddRow(grvViTri);
                         Commons.Modules.ObjSystems.DeleteAddRow(grvThayThe);
                         Commons.Modules.ObjSystems.DeleteAddRow(grvFileDK);

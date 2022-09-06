@@ -875,6 +875,8 @@ F:\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\es\DevExpress.XtraVertic
 F:\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\ja\DevExpress.XtraVerticalGrid.v22.1.resources.dll
 F:\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.Recruit.csprojAssemblyReference.cache
 F:\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.Recruit.Form1.resources
+F:\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.Recruit.frmCapNhatNhanh.resources
+F:\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.Recruit.frmThongTinTiepNhanUV.resources
 F:\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.Recruit.frmImportUngVien.resources
 F:\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.Recruit.frmChonUngVien.resources
 F:\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.Recruit.frmDanhSachUngVien.resources
@@ -921,5 +923,3 @@ F:\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.Recruit.csproj.CoreCo
 F:\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.Recruit.csproj.CopyComplete
 F:\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.Recruit.dll
 F:\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.Recruit.pdb
-F:\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.Recruit.frmCapNhatNhanh.resources
-F:\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.Recruit.frmThongTinTiepNhanUV.resources

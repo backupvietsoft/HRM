@@ -427,7 +427,6 @@
             this.xrTableCell6.StylePriority.UseFont = false;
             this.xrTableCell6.StylePriority.UsePadding = false;
             this.xrTableCell6.StylePriority.UseTextAlignment = false;
-            this.xrTableCell6.Text = "NON";
             this.xrTableCell6.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
             this.xrTableCell6.Weight = 4.2778304725539043D;
             // 
@@ -516,7 +515,7 @@
             this.tiTongCong.StylePriority.UseFont = false;
             this.tiTongCong.StylePriority.UsePadding = false;
             this.tiTongCong.StylePriority.UseTextAlignment = false;
-            this.tiTongCong.Text = "Tong cong";
+            this.tiTongCong.Text = "Tổng cộng";
             this.tiTongCong.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
             this.tiTongCong.Weight = 24.28801051101393D;
             // 
@@ -568,7 +567,6 @@
             this.xrTableCell20.StylePriority.UseFont = false;
             this.xrTableCell20.StylePriority.UsePadding = false;
             this.xrTableCell20.StylePriority.UseTextAlignment = false;
-            this.xrTableCell20.Text = "NON";
             this.xrTableCell20.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
             this.xrTableCell20.Weight = 4.018955191041476D;
             // 
@@ -607,7 +605,7 @@
             this.tiBinhQuan.StylePriority.UseFont = false;
             this.tiBinhQuan.StylePriority.UsePadding = false;
             this.tiBinhQuan.StylePriority.UseTextAlignment = false;
-            this.tiBinhQuan.Text = "tiBinhQuan";
+            this.tiBinhQuan.Text = "Bình quân";
             this.tiBinhQuan.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
             this.tiBinhQuan.Weight = 24.288008162444221D;
             // 
@@ -659,7 +657,6 @@
             this.xrTableCell19.StylePriority.UseFont = false;
             this.xrTableCell19.StylePriority.UsePadding = false;
             this.xrTableCell19.StylePriority.UseTextAlignment = false;
-            this.xrTableCell19.Text = "NON";
             this.xrTableCell19.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
             this.xrTableCell19.Weight = 4.0189551910414778D;
             // 
@@ -682,7 +679,7 @@
             this.ReportUnit = DevExpress.XtraReports.UI.ReportUnit.TenthsOfAMillimeter;
             this.SnapGridSize = 25F;
             this.Tag = "rptBangLSPTongHopTheoCN";
-            this.Version = "20.1";
+            this.Version = "22.1";
             ((System.ComponentModel.ISupportInitialize)(this.xrTable3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).EndInit();

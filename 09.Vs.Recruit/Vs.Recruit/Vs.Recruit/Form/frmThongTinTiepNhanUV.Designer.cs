@@ -322,6 +322,10 @@ namespace Vs.Recruit
             // 
             this.txtMUC_LUONG_DN.Location = new System.Drawing.Point(148, 68);
             this.txtMUC_LUONG_DN.Name = "txtMUC_LUONG_DN";
+            this.txtMUC_LUONG_DN.Properties.Appearance.Options.UseTextOptions = true;
+            this.txtMUC_LUONG_DN.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.txtMUC_LUONG_DN.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.NumericMaskManager));
+            this.txtMUC_LUONG_DN.Properties.MaskSettings.Set("MaskManagerSignature", "allowNull=False");
             this.txtMUC_LUONG_DN.Size = new System.Drawing.Size(319, 24);
             this.txtMUC_LUONG_DN.StyleController = this.layoutControl1;
             this.txtMUC_LUONG_DN.TabIndex = 11;
@@ -330,6 +334,8 @@ namespace Vs.Recruit
             // 
             this.txtSO_NGAY.Location = new System.Drawing.Point(607, 40);
             this.txtSO_NGAY.Name = "txtSO_NGAY";
+            this.txtSO_NGAY.Properties.Appearance.Options.UseTextOptions = true;
+            this.txtSO_NGAY.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.txtSO_NGAY.Size = new System.Drawing.Size(321, 24);
             this.txtSO_NGAY.StyleController = this.layoutControl1;
             this.txtSO_NGAY.TabIndex = 10;
@@ -509,6 +515,10 @@ namespace Vs.Recruit
             // 
             this.txtTienThuong.Location = new System.Drawing.Point(620, 40);
             this.txtTienThuong.Name = "txtTienThuong";
+            this.txtTienThuong.Properties.Appearance.Options.UseTextOptions = true;
+            this.txtTienThuong.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.txtTienThuong.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.NumericMaskManager));
+            this.txtTienThuong.Properties.MaskSettings.Set("MaskManagerSignature", "allowNull=False");
             this.txtTienThuong.Size = new System.Drawing.Size(308, 24);
             this.txtTienThuong.StyleController = this.layoutControl2;
             this.txtTienThuong.TabIndex = 6;
@@ -1305,6 +1315,7 @@ namespace Vs.Recruit
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             this.ClientSize = new System.Drawing.Size(998, 535);
             this.Controls.Add(this.tablePanel1);
+            this.MinimizeBox = false;
             this.Name = "frmThongTinTiepNhanUV";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Thông tin tiếp nhận ứng viên";

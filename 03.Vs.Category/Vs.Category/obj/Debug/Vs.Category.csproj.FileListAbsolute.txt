@@ -1575,6 +1575,7 @@ H:\Lamviec\Lamviec\HRM\01.HRM\03.Vs.Category\Vs.Category\obj\Debug\Vs.Category.c
 H:\Lamviec\Lamviec\HRM\01.HRM\03.Vs.Category\Vs.Category\obj\Debug\Vs.Category.csproj.CopyComplete
 H:\Lamviec\Lamviec\HRM\01.HRM\03.Vs.Category\Vs.Category\obj\Debug\Vs.Category.dll
 H:\Lamviec\Lamviec\HRM\01.HRM\03.Vs.Category\Vs.Category\obj\Debug\Vs.Category.pdb
+F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\DevExpress.RichEdit.v22.1.Core.xml
 F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\Vs.Category.dll.config
 F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\Vs.Category.dll
 F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\Vs.Category.pdb
@@ -1635,7 +1636,6 @@ F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\DevExpress.XtraReports.v22.1.xml
 F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\Newtonsoft.Json.xml
 F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\DevExpress.Pdf.v22.1.Core.xml
 F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\DevExpress.Pdf.v22.1.Drawing.xml
-F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\DevExpress.RichEdit.v22.1.Core.xml
 F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\DevExpress.XtraCharts.v22.1.xml
 F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\DevExpress.Xpo.v22.1.xml
 F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\DevExpress.DataAccess.v22.1.xml

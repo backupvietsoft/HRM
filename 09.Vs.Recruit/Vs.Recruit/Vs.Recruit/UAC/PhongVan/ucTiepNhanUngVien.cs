@@ -1,4 +1,5 @@
-﻿using DevExpress.Utils.Menu;
+﻿using DevExpress.Utils;
+using DevExpress.Utils.Menu;
 using DevExpress.XtraBars.Docking2010;
 using DevExpress.XtraBars.Navigation;
 using DevExpress.XtraEditors;
@@ -79,6 +80,8 @@ namespace Vs.Recruit
                 grvDSUngVien.Columns["ID_VTTD"].Visible = false;
                 grvDSUngVien.Columns["MS_UV"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
                 grvDSUngVien.Columns["HO_TEN"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
+                grvDSUngVien.Columns["MUC_LUONG_DN"].DisplayFormat.FormatType = FormatType.Numeric;
+                grvDSUngVien.Columns["MUC_LUONG_DN"].DisplayFormat.FormatString = "n0";
 
                 if (Convert.ToInt32(cboMS_CV.EditValue) == 1)
                 {

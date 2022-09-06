@@ -44,7 +44,7 @@ namespace Vs.Recruit
                 Commons.Modules.sLoad = "0Load";
                 Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboXepLoai, Commons.Modules.ObjSystems.DataDanhGiaTayNghe(false), "ID_DGTN", "TEN_DGTN", "TEN_DGTN");
                 Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_NGUOI_DT, Commons.Modules.ObjSystems.TruongBoPhan(), "ID_CN", "HO_TEN", "HO_TEN", true, true);
-                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_NGUOI_CHUYEN, Commons.Modules.ObjSystems.TruongBoPhan(), "ID_CN", "HO_TEN", "HO_TEN", true, true);
+                //Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_NGUOI_CHUYEN, Commons.Modules.ObjSystems.TruongBoPhan(), "ID_CN", "HO_TEN", "HO_TEN", true, true);
                 Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_XN, Commons.Modules.ObjSystems.DataXiNghiep(-1, false), "ID_XN", "TEN_XN", "TEN_XN", true, true);
                 Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_NGUOI_CHUYEN, Commons.Modules.ObjSystems.DataCongNhan(false), "ID_CN", "TEN_CN", "TEN_CN", true, true);
 

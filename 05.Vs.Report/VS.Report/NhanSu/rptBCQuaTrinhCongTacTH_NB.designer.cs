@@ -63,7 +63,7 @@
             // TopMargin
             // 
             this.TopMargin.Dpi = 254F;
-            this.TopMargin.HeightF = 190F;
+            this.TopMargin.HeightF = 161F;
             this.TopMargin.Name = "TopMargin";
             // 
             // BottomMargin
@@ -71,7 +71,7 @@
             this.BottomMargin.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
             this.NONNpage});
             this.BottomMargin.Dpi = 254F;
-            this.BottomMargin.HeightF = 192F;
+            this.BottomMargin.HeightF = 161F;
             this.BottomMargin.Name = "BottomMargin";
             // 
             // NONNpage
@@ -80,7 +80,7 @@
             this.NONNpage.LocationFloat = new DevExpress.Utils.PointFloat(0F, 68.99998F);
             this.NONNpage.Name = "NONNpage";
             this.NONNpage.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
-            this.NONNpage.SizeF = new System.Drawing.SizeF(2880F, 58.42001F);
+            this.NONNpage.SizeF = new System.Drawing.SizeF(2648F, 58.42001F);
             this.NONNpage.StylePriority.UseTextAlignment = false;
             this.NONNpage.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
             // 
@@ -105,7 +105,7 @@
             this.xrTable1.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
             this.xrTable1.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow1});
-            this.xrTable1.SizeF = new System.Drawing.SizeF(2880F, 75F);
+            this.xrTable1.SizeF = new System.Drawing.SizeF(2648F, 75F);
             this.xrTable1.StylePriority.UseBorders = false;
             this.xrTable1.StylePriority.UseTextAlignment = false;
             this.xrTable1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
@@ -230,7 +230,7 @@
             this.lblTIEU_DE.Multiline = true;
             this.lblTIEU_DE.Name = "lblTIEU_DE";
             this.lblTIEU_DE.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 254F);
-            this.lblTIEU_DE.SizeF = new System.Drawing.SizeF(2880F, 100F);
+            this.lblTIEU_DE.SizeF = new System.Drawing.SizeF(2648F, 100F);
             this.lblTIEU_DE.StylePriority.UseFont = false;
             this.lblTIEU_DE.StylePriority.UsePadding = false;
             this.lblTIEU_DE.StylePriority.UseTextAlignment = false;
@@ -257,7 +257,7 @@
             this.xrTable2.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
             this.xrTable2.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow2});
-            this.xrTable2.SizeF = new System.Drawing.SizeF(2880F, 75F);
+            this.xrTable2.SizeF = new System.Drawing.SizeF(2648F, 75F);
             this.xrTable2.StylePriority.UseBorders = false;
             this.xrTable2.StylePriority.UseFont = false;
             this.xrTable2.StylePriority.UseTextAlignment = false;
@@ -354,11 +354,11 @@
             this.lblNguoiKy.AutoWidth = true;
             this.lblNguoiKy.Dpi = 254F;
             this.lblNguoiKy.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Bold);
-            this.lblNguoiKy.LocationFloat = new DevExpress.Utils.PointFloat(2200.778F, 88.71156F);
+            this.lblNguoiKy.LocationFloat = new DevExpress.Utils.PointFloat(2147.862F, 88.71156F);
             this.lblNguoiKy.Multiline = true;
             this.lblNguoiKy.Name = "lblNguoiKy";
             this.lblNguoiKy.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
-            this.lblNguoiKy.SizeF = new System.Drawing.SizeF(603.25F, 63.7117F);
+            this.lblNguoiKy.SizeF = new System.Drawing.SizeF(475.1384F, 63.71171F);
             this.lblNguoiKy.StylePriority.UseFont = false;
             this.lblNguoiKy.StylePriority.UseTextAlignment = false;
             this.lblNguoiKy.Text = "NGUOI_KY";
@@ -370,11 +370,11 @@
             this.lblNgay.AutoWidth = true;
             this.lblNgay.Dpi = 254F;
             this.lblNgay.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Bold);
-            this.lblNgay.LocationFloat = new DevExpress.Utils.PointFloat(2200.778F, 25.00001F);
+            this.lblNgay.LocationFloat = new DevExpress.Utils.PointFloat(2147.862F, 25.00001F);
             this.lblNgay.Multiline = true;
             this.lblNgay.Name = "lblNgay";
             this.lblNgay.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
-            this.lblNgay.SizeF = new System.Drawing.SizeF(603.25F, 63.71169F);
+            this.lblNgay.SizeF = new System.Drawing.SizeF(475.1384F, 63.71169F);
             this.lblNgay.StylePriority.UseFont = false;
             this.lblNgay.StylePriority.UseTextAlignment = false;
             this.lblNgay.Text = "NGAY";
@@ -395,7 +395,7 @@
             this.xrSubreport1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
             this.xrSubreport1.LockedInUserDesigner = true;
             this.xrSubreport1.Name = "xrSubreport1";
-            this.xrSubreport1.SizeF = new System.Drawing.SizeF(2880F, 42.93904F);
+            this.xrSubreport1.SizeF = new System.Drawing.SizeF(2648F, 42.93904F);
             // 
             // rptBCQuaTrinhCongTacTH_NB
             // 
@@ -409,14 +409,14 @@
             this.Dpi = 254F;
             this.Font = new System.Drawing.Font("Arial", 9.75F);
             this.Landscape = true;
-            this.Margins = new System.Drawing.Printing.Margins(45, 45, 190, 192);
+            this.Margins = new System.Drawing.Printing.Margins(161, 161, 161, 161);
             this.PageHeight = 2100;
             this.PageWidth = 2970;
             this.PaperKind = System.Drawing.Printing.PaperKind.A4;
             this.ReportUnit = DevExpress.XtraReports.UI.ReportUnit.TenthsOfAMillimeter;
             this.SnapGridSize = 25F;
             this.Tag = "rptBCQuaTrinhCongTacTH_NB";
-            this.Version = "20.1";
+            this.Version = "22.1";
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();

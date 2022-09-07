@@ -65,7 +65,7 @@ namespace Vs.Recruit
                 if (iMS_CV == 1)
                 {
                     TabKiemTraTayNghe.PageVisible = false;
-                    txtMUC_LUONG_DN.Text = "";
+                    if (txtMUC_LUONG_DN.Text == "") txtMUC_LUONG_DN.Text = "";
                 }
                 if (sNGayChuyen != "")
                 {
@@ -275,6 +275,7 @@ namespace Vs.Recruit
                                 XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgChuaChonLoaiHopDong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning); return;
                             }
                             iKiem = KiemSLTuyen();
+                            if (iKiem == 3) return;
                             if (iKiem == 0)
                             {
                                 XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgSoLuongTuyenDaHet"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning); return;

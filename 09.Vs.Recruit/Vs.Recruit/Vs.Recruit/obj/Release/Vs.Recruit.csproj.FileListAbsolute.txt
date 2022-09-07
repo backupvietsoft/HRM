@@ -463,3 +463,4 @@ F:\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Release\Vs.Recruit.csproj.Core
 F:\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Release\Vs.Recruit.csproj.CopyComplete
 F:\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Release\Vs.Recruit.dll
 F:\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Release\Vs.Recruit.pdb
+F:\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Release\Vs.Recruit.rptThuMoi.resources

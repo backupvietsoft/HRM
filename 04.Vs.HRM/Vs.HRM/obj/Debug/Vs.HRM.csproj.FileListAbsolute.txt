@@ -2857,6 +2857,7 @@ H:\Lamviec\Lamviec\HRM\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.ucTaoHopDong.res
 H:\Lamviec\Lamviec\HRM\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.ucInNhanVien.resources
 H:\Lamviec\Lamviec\HRM\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.ucTO.resources
 H:\Lamviec\Lamviec\HRM\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.ucBaoCaoDanhGiaTTThuViec.resources
+F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\DevExpress.XtraCharts.v22.1.dll
 F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\Template\TemplateGiamLaoDong.xlsx
 F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\Template\TemplateTaiNanLaoDong.xlsx
 F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\Template\TemplateTangLaoDong.xlsx
@@ -2896,7 +2897,6 @@ F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\DevExpress.Utils.v22.1.dll
 F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\DevExpress.Utils.v22.1.UI.dll
 F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\DevExpress.Xpo.v22.1.dll
 F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\DevExpress.XtraBars.v22.1.dll
-F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\DevExpress.XtraCharts.v22.1.dll
 F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\DevExpress.XtraCharts.v22.1.UI.dll
 F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\DevExpress.XtraCharts.v22.1.Wizard.dll
 F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\DevExpress.XtraEditors.v22.1.dll
@@ -3103,6 +3103,7 @@ F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.csprojAssemblyReference.cache
 F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.csproj.ResolveComReference.cache
 F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.frmHelp_View.resources
 F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.ucBaoCaoDanhGiaTTThuViec.resources
+F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.ucBaoCaoQHGD.resources
 F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.ucBaoCaoThongKeCongNhanBD.resources
 F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.ucBaoCaoSoYeuLyLich.resources
 F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.ucBaoCaoQuaTrinhDaoTao.resources
@@ -3124,7 +3125,6 @@ F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.ucBaoCaoTangLaoDong.resources
 F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.ucBaoCaoThamNien.resources
 F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.ucBaoCaoLaoDongTinh.resources
 F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.ucBaoCaoLaoDongHuu.resources
-F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.ucBaoCaoQHGD.resources
 F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.ucBaoCaoQuanLy.resources
 F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.ucBaoCaoLaoDongTo.resources
 F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.ucBaoCaoTo.resources
@@ -3134,6 +3134,7 @@ F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.ucBaoCaoXiNghiep.resources
 F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.ucBlank.resources
 F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.ucBaoCaoTinhHinhSuDungLaoDong.resources
 F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.ucThamGiaBHXH.resources
+F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.frmInBaoCaoThaiSan.resources
 F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.frmInLyLichCN.resources
 F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.frmInThuMoi.resources
 F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.frmInQuyetDinhThoiViec.resources
@@ -3157,6 +3158,7 @@ F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.ucLyLich.resources
 F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.ucTienLuong.resources
 F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.frmInQTCT.resources
 F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.ucDanhGiaThuViec.resources
+F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.ucKeHoachThaiSan.resources
 F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.ucTaoHopDong.resources
 F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.ucInNhanVien.resources
 F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.ucTO.resources

@@ -204,6 +204,12 @@
     <Compile Include="NhanSu\rptBCCNTheoTrinhDo.designer.cs">
       <DependentUpon>rptBCCNTheoTrinhDo.cs</DependentUpon>
     </Compile>
+    <Compile Include="NhanSu\rptBCDangKyThaiSan_NB.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptBCDangKyThaiSan_NB.Designer.cs">
+      <DependentUpon>rptBCDangKyThaiSan_NB.cs</DependentUpon>
+    </Compile>
     <Compile Include="NhanSu\rptBCDanhGiaCN.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -227,6 +233,12 @@
     </Compile>
     <Compile Include="NhanSu\rptBCDSLaoDongNu.designer.cs">
       <DependentUpon>rptBCDSLaoDongNu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\rptBCDSLaoDong_NB.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptBCDSLaoDong_NB.designer.cs">
+      <DependentUpon>rptBCDSLaoDong_NB.cs</DependentUpon>
     </Compile>
     <Compile Include="NhanSu\rptBCGiamLaoDongThang.cs">
       <SubType>Component</SubType>
@@ -299,6 +311,12 @@
     </Compile>
     <Compile Include="NhanSu\rptBCLaoDongTo.Designer.cs">
       <DependentUpon>rptBCLaoDongTo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\rptBCLaoDongTo_NB.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptBCLaoDongTo_NB.Designer.cs">
+      <DependentUpon>rptBCLaoDongTo_NB.cs</DependentUpon>
     </Compile>
     <Compile Include="NhanSu\rptBCLaoDongVeHuu.cs">
       <SubType>Component</SubType>
@@ -479,6 +497,12 @@
     </Compile>
     <Compile Include="NhanSu\rptDSThamNien.Designer.cs">
       <DependentUpon>rptDSThamNien.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\rptDSTheoDoiCheDoKhamThai_NB.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptDSTheoDoiCheDoKhamThai_NB.Designer.cs">
+      <DependentUpon>rptDSTheoDoiCheDoKhamThai_NB.cs</DependentUpon>
     </Compile>
     <Compile Include="NhanSu\rptDSXNgioquetthetheongay.cs">
       <SubType>Component</SubType>
@@ -828,12 +852,6 @@
     <Compile Include="NhanSu\rptThongTinBaoMat.Designer.cs">
       <DependentUpon>rptThongTinBaoMat.cs</DependentUpon>
     </Compile>
-    <Compile Include="NhanSu\rptThuMoi.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="NhanSu\rptThuMoi.designer.cs">
-      <DependentUpon>rptThuMoi.cs</DependentUpon>
-    </Compile>
     <Compile Include="NhanSu\rptToKhaiBaoHiemXaHoi.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -1031,6 +1049,9 @@
     <EmbeddedResource Include="NhanSu\rptBCCNTheoTrinhDo.resx">
       <DependentUpon>rptBCCNTheoTrinhDo.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\rptBCDangKyThaiSan_NB.resx">
+      <DependentUpon>rptBCDangKyThaiSan_NB.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="NhanSu\rptBCDanhGiaCN.resx">
       <DependentUpon>rptBCDanhGiaCN.cs</DependentUpon>
     </EmbeddedResource>
@@ -1042,6 +1063,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="NhanSu\rptBCDSLaoDongNu.resx">
       <DependentUpon>rptBCDSLaoDongNu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\rptBCDSLaoDong_NB.resx">
+      <DependentUpon>rptBCDSLaoDong_NB.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NhanSu\rptBCGiamLaoDongThang.resx">
       <DependentUpon>rptBCGiamLaoDongThang.cs</DependentUpon>
@@ -1078,6 +1102,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="NhanSu\rptBCLaoDongTo.resx">
       <DependentUpon>rptBCLaoDongTo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\rptBCLaoDongTo_NB.resx">
+      <DependentUpon>rptBCLaoDongTo_NB.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NhanSu\rptBCLaoDongVeHuu.resx">
       <DependentUpon>rptBCLaoDongVeHuu.cs</DependentUpon>
@@ -1168,6 +1195,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="NhanSu\rptDSThamNien.resx">
       <DependentUpon>rptDSThamNien.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\rptDSTheoDoiCheDoKhamThai_NB.resx">
+      <DependentUpon>rptDSTheoDoiCheDoKhamThai_NB.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NhanSu\rptDSXNgioquetthetheongay.resx">
       <DependentUpon>rptDSXNgioquetthetheongay.cs</DependentUpon>
@@ -1345,9 +1375,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="NhanSu\rptThongTinBaoMat.resx">
       <DependentUpon>rptThongTinBaoMat.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NhanSu\rptThuMoi.resx">
-      <DependentUpon>rptThuMoi.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NhanSu\rptToKhaiBaoHiemXaHoi.resx">
       <DependentUpon>rptToKhaiBaoHiemXaHoi.cs</DependentUpon>

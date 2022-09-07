@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Data;
-using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using Microsoft.ApplicationBlocks.Data;
-using System.Diagnostics;
-using Vs.Report;
 using DevExpress.XtraBars.Docking2010;
 
 namespace Vs.Recruit

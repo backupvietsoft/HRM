@@ -174,6 +174,11 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Debug\EPPlus.dll</HintPath>
     </Reference>
+    <Reference Include="Interop.Excel, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>bin\Debug\Interop.Excel.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.ApplicationBlocks.Data">
       <HintPath>..\..\..\..\01.VietSoftHRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Microsoft.ApplicationBlocks.Data.dll</HintPath>
     </Reference>
@@ -185,21 +190,9 @@
     <Reference Include="Microsoft.QualityTools.Testing.Fakes, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
     </Reference>
-    <Reference Include="NPOI, Version=2.3.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\01.VietSoftHRM\VietSoftHRM\bin\Debug\NPOI.dll</HintPath>
-    </Reference>
-    <Reference Include="NPOI.OOXML, Version=2.3.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\01.VietSoftHRM\VietSoftHRM\bin\Debug\NPOI.OOXML.dll</HintPath>
-    </Reference>
     <Reference Include="Spire.License, Version=1.3.5.35, Culture=neutral, PublicKeyToken=b1144360237c8b3f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Debug\Spire.License.dll</HintPath>
-    </Reference>
-    <Reference Include="Spire.Pdf, Version=3.6.230.55035, Culture=neutral, PublicKeyToken=663f351905198cb3, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\Spire.Pdf.dll</HintPath>
     </Reference>
     <Reference Include="Spire.XLS, Version=7.9.0.55035, Culture=neutral, PublicKeyToken=663f351905198cb3, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -332,6 +325,12 @@
     </Compile>
     <Compile Include="Report\rptThongBaoTuyenDung.designer.cs">
       <DependentUpon>rptThongBaoTuyenDung.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Report\rptThuMoi.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\rptThuMoi.designer.cs">
+      <DependentUpon>rptThuMoi.cs</DependentUpon>
     </Compile>
     <Compile Include="Report\ucBaoCaoDSUVThamGiaTD.cs">
       <SubType>UserControl</SubType>
@@ -532,6 +531,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Report\rptThongBaoTuyenDung.resx">
       <DependentUpon>rptThongBaoTuyenDung.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\rptThuMoi.resx">
+      <DependentUpon>rptThuMoi.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\ucBaoCaoDSUVThamGiaTD.resx">
       <DependentUpon>ucBaoCaoDSUVThamGiaTD.cs</DependentUpon>

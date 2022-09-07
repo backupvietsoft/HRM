@@ -93,6 +93,16 @@
     <Reference Include="DevExpress.XtraTreeList.v22.1, Version=22.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraTreeMap.v22.1.UI, Version=22.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.XtraTreeMap.v22.1, Version=22.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="Interop.Excel, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>bin\Debug\Interop.Excel.dll</HintPath>
+    </Reference>
+    <Reference Include="Interop.Office, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>bin\Debug\Interop.Office.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.ApplicationBlocks.Data, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Debug\Microsoft.ApplicationBlocks.Data.dll</HintPath>
@@ -146,6 +156,12 @@
     </Compile>
     <Compile Include="UAC\BaoCao\ucBaoCaoDanhGiaTTThuViec.Designer.cs">
       <DependentUpon>ucBaoCaoDanhGiaTTThuViec.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UAC\BaoCao\ucBaoCaoQHGD.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UAC\BaoCao\ucBaoCaoQHGD.Designer.cs">
+      <DependentUpon>ucBaoCaoQHGD.cs</DependentUpon>
     </Compile>
     <Compile Include="UAC\BaoCao\ucBaoCaoThongKeCongNhanBD.cs">
       <SubType>UserControl</SubType>
@@ -273,12 +289,6 @@
     <Compile Include="UAC\BaoCao\ucBaoCaoLaoDongHuu.Designer.cs">
       <DependentUpon>ucBaoCaoLaoDongHuu.cs</DependentUpon>
     </Compile>
-    <Compile Include="UAC\BaoCao\ucBaoCaoQHGD.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UAC\BaoCao\ucBaoCaoQHGD.Designer.cs">
-      <DependentUpon>ucBaoCaoQHGD.cs</DependentUpon>
-    </Compile>
     <Compile Include="UAC\BaoCao\ucBaoCaoQuanLy.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -326,6 +336,12 @@
     </Compile>
     <Compile Include="UAC\BaoHiem\ucThamGiaBHXH.Designer.cs">
       <DependentUpon>ucThamGiaBHXH.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UAC\CongNhan\ctCongNhan\frmInBaoCaoThaiSan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UAC\CongNhan\ctCongNhan\frmInBaoCaoThaiSan.Designer.cs">
+      <DependentUpon>frmInBaoCaoThaiSan.cs</DependentUpon>
     </Compile>
     <Compile Include="UAC\CongNhan\ctCongNhan\frmInLyLichCN.cs">
       <SubType>Form</SubType>
@@ -460,6 +476,12 @@
     </Compile>
     <Compile Include="UAC\CongNhan\ucDanhGiaThuViec.Designer.cs">
       <DependentUpon>ucDanhGiaThuViec.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UAC\CongNhan\ucKeHoachThaiSan.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UAC\CongNhan\ucKeHoachThaiSan.Designer.cs">
+      <DependentUpon>ucKeHoachThaiSan.cs</DependentUpon>
     </Compile>
     <Compile Include="UAC\CongNhan\ucTaoHopDong.cs">
       <SubType>UserControl</SubType>
@@ -612,6 +634,9 @@
     <EmbeddedResource Include="UAC\BaoCao\ucBaoCaoDanhGiaTTThuViec.resx">
       <DependentUpon>ucBaoCaoDanhGiaTTThuViec.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UAC\BaoCao\ucBaoCaoQHGD.resx">
+      <DependentUpon>ucBaoCaoQHGD.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UAC\BaoCao\ucBaoCaoThongKeCongNhanBD.resx">
       <DependentUpon>ucBaoCaoThongKeCongNhanBD.cs</DependentUpon>
     </EmbeddedResource>
@@ -675,9 +700,6 @@
     <EmbeddedResource Include="UAC\BaoCao\ucBaoCaoLaoDongHuu.resx">
       <DependentUpon>ucBaoCaoLaoDongHuu.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UAC\BaoCao\ucBaoCaoQHGD.resx">
-      <DependentUpon>ucBaoCaoQHGD.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="UAC\BaoCao\ucBaoCaoQuanLy.resx">
       <DependentUpon>ucBaoCaoQuanLy.cs</DependentUpon>
     </EmbeddedResource>
@@ -704,6 +726,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UAC\BaoHiem\ucThamGiaBHXH.resx">
       <DependentUpon>ucThamGiaBHXH.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UAC\CongNhan\ctCongNhan\frmInBaoCaoThaiSan.resx">
+      <DependentUpon>frmInBaoCaoThaiSan.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UAC\CongNhan\ctCongNhan\frmInLyLichCN.resx">
       <DependentUpon>frmInLyLichCN.cs</DependentUpon>
@@ -780,6 +805,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UAC\CongNhan\ucDanhGiaThuViec.resx">
       <DependentUpon>ucDanhGiaThuViec.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UAC\CongNhan\ucKeHoachThaiSan.resx">
+      <DependentUpon>ucKeHoachThaiSan.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UAC\CongNhan\ucTaoHopDong.resx">
       <DependentUpon>ucTaoHopDong.cs</DependentUpon>
@@ -952,6 +980,15 @@
     <None Include="Resources\themsua.png" />
   </ItemGroup>
   <ItemGroup>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>8</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
     <COMReference Include="VBIDE">
       <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
       <VersionMajor>5</VersionMajor>

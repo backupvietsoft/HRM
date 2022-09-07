@@ -1,6 +1,9 @@
-﻿using DevExpress.XtraBars.Docking2010;
+﻿using DevExpress.Utils;
+using DevExpress.Utils.Menu;
+using DevExpress.XtraBars.Docking2010;
 using DevExpress.XtraBars.Navigation;
 using DevExpress.XtraEditors;
+using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraLayout;
 using Microsoft.ApplicationBlocks.Data;
@@ -18,6 +21,7 @@ namespace Vs.HRM
         private bool flag = false;
         private int iAdd = 0;
         public AccordionControl accorMenuleft;
+        private ucCTQLNS ucNS;
         public ucTaoHopDong()
         {
             InitializeComponent();
@@ -120,6 +124,7 @@ namespace Vs.HRM
                 DataTable dt = new DataTable();
                 dt = ds.Tables[0].Copy();
                 dt.Columns["CHON"].ReadOnly = false;
+                dt.Columns["TAI_LIEU"].ReadOnly = true;
                 //dt.Columns["XAC_NHAN_DL"].ReadOnly = false;
                 //dt.Columns["NGAY_CO_THE_DI_LAM"].ReadOnly = false;
                 //dt.Columns["XAC_NHAN_DL"].ReadOnly = false;
@@ -130,13 +135,19 @@ namespace Vs.HRM
                 //dt.Columns["HUY_TUYEN_DUNG"].ReadOnly = false;
 
                 Commons.Modules.ObjSystems.MLoadXtraGrid(grdDSUngVien, grvDSUngVien, dt, true, true, false, true, true, this.Name);
+                grvDSUngVien.BestFitColumns();
                 grvDSUngVien.Columns["CHON"].Visible = false;
                 grvDSUngVien.Columns["MS_CN"].OptionsColumn.AllowEdit = false;
                 grvDSUngVien.Columns["HO_TEN"].OptionsColumn.AllowEdit = false;
                 grvDSUngVien.Columns["NGAY_VAO_LAM"].OptionsColumn.AllowEdit = false;
+                grvDSUngVien.Columns["TAI_LIEU"].OptionsColumn.AllowEdit = true;
                 grvDSUngVien.Columns["MS_CN"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
                 grvDSUngVien.Columns["HO_TEN"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
                 grvDSUngVien.Columns["NGAY_VAO_LAM"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
+                grvDSUngVien.Columns["MUC_LUONG_CHINH"].DisplayFormat.FormatType = FormatType.Numeric;
+                grvDSUngVien.Columns["MUC_LUONG_CHINH"].DisplayFormat.FormatString = "n0";
+                grvDSUngVien.Columns["PHU_CAP"].DisplayFormat.FormatType = FormatType.Numeric;
+                grvDSUngVien.Columns["PHU_CAP"].DisplayFormat.FormatString = "n0";
 
                 if (iAdd == 0)
                 {
@@ -144,9 +155,17 @@ namespace Vs.HRM
                     grvDSUngVien.Columns["ID_UV"].Visible = false;
                     grvDSUngVien.OptionsSelection.MultiSelect = false;
                     grvDSUngVien.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.RowSelect;
+
+                    RepositoryItemButtonEdit btnEdit = new RepositoryItemButtonEdit();
+                    grvDSUngVien.Columns["TAI_LIEU"].ColumnEdit = btnEdit;
+                    btnEdit.ButtonClick += BtnEdit_ButtonClick;
                 }
                 else
                 {
+                    RepositoryItemButtonEdit btnEdit = new RepositoryItemButtonEdit();
+                    grvDSUngVien.Columns["TAI_LIEU"].ColumnEdit = btnEdit;
+                    btnEdit.ButtonClick += BtnEdit_ButtonClick;
+
                     grvDSUngVien.Columns["ID_CN"].Visible = false;
                     grvDSUngVien.OptionsSelection.MultiSelect = true;
                     grvDSUngVien.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CheckBoxRowSelect;
@@ -204,6 +223,22 @@ namespace Vs.HRM
                     cboID_CV.BeforePopup += cboID_CV_BeforePopup;
                     cboID_CV.EditValueChanged += cboID_CV_EditValueChanged;
 
+                    DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit cboID_TT = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
+                    cboID_TT.NullText = "";
+                    cboID_TT.ValueMember = "ID_TT";
+                    cboID_TT.DisplayMember = "TenTT";
+                    //ID_VTTD,TEN_VTTD
+                    cboID_TT.DataSource = Commons.Modules.ObjSystems.DataTinhTrang(false);
+                    cboID_TT.Columns.Clear();
+                    cboID_TT.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID_TT"));
+                    cboID_TT.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("TenTT"));
+                    cboID_TT.Columns["TenTT"].Caption = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "TenTT");
+                    cboID_TT.AppearanceDropDownHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+                    cboID_TT.AppearanceDropDownHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+                    cboID_TT.Columns["ID_TT"].Visible = false;
+                    grvDSUngVien.Columns["ID_TT"].ColumnEdit = cboID_TT;
+                    cboID_TT.BeforePopup += cboID_TT_BeforePopup;
+                    cboID_TT.EditValueChanged += cboID_TT_EditValueChanged;
                 }
                 try
                 {
@@ -214,11 +249,50 @@ namespace Vs.HRM
                 //Commons.Modules.ObjSystems.AddCombXtra("ID_DGTN", "TEN_DGTN", "TEN_DGTN", grvDSUngVien, Commons.Modules.ObjSystems.DataDanhGiaTayNghe(false), true, "ID_DGTN", this.Name, true);
 
                 //ID_YCTD,MA_YCTD
-
-
             }
             catch (Exception ex) { }
         }
+        private void BtnEdit_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+            try
+            {
+                ButtonEdit a = sender as ButtonEdit;
+                ofileDialog.Filter = "All Files|*.txt;*.docx;*.doc;*.pdf*.xls;*.xlsx;*.pptx;*.ppt|Text File (.txt)|*.txt|Word File (.docx ,.doc)|*.docx;*.doc|Spreadsheet (.xls ,.xlsx)|  *.xls ;*.xlsx";
+                //ofileDialog.Filter = "Excel Files|*.xls;*.xlsx;*.xlsm|Word Documents(*.doc)|*.doc";
+                if (ofileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    string sduongDan = ofileDialog.FileName.ToString().Trim();
+                    if (ofileDialog.FileName.ToString().Trim() == "") return;
+                    //if (sduongDan.Substring(sduongDan.IndexOf('.'), 4).ToString() == ".xlsx") return;
+                    Commons.Modules.ObjSystems.LuuDuongDan(ofileDialog.FileName, ofileDialog.SafeFileName, this.Name.Replace("uc", "") + '\\' + grvDSUngVien.GetFocusedRowCellValue("SO_HDLD"));
+                    a.Text = ofileDialog.SafeFileName;
+                }
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgBanKhongCoQuyenTruyCapDD"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgfrmThongBao"), MessageBoxButtons.OK);
+            }
+        }
+        //private void LayDuongDan()
+        //{
+        //    string strPath_DH = txtTaiLieu.Text;
+        //    strDuongDan = ofdfile.FileName;
+
+        //    var strDuongDanTmp = Commons.Modules.ObjSystems.CapnhatTL("Tai_Lieu_HD");
+        //    string[] sFile;
+        //    string TenFile;
+
+        //    TenFile = ofdfile.SafeFileName.ToString();
+        //    sFile = System.IO.Directory.GetFiles(strDuongDanTmp);
+
+        //    if (Commons.Modules.ObjSystems.KiemFileTonTai(strDuongDanTmp + @"\" + ofdfile.SafeFileName.ToString()) == false)
+        //        txtTaiLieu.Text = strDuongDanTmp + @"\" + ofdfile.SafeFileName.ToString();
+        //    else
+        //    {
+        //        TenFile = Commons.Modules.ObjSystems.STTFileCungThuMuc(strDuongDanTmp, TenFile);
+        //        txtTaiLieu.Text = strDuongDanTmp + @"\" + TenFile;
+        //    }
+        //}
         private void cboID_LHDLD_EditValueChanged(object sender, EventArgs e)
         {
             LookUpEdit lookUp = sender as LookUpEdit;
@@ -282,6 +356,21 @@ namespace Vs.HRM
             catch { }
         }
 
+        private void cboID_TT_EditValueChanged(object sender, EventArgs e)
+        {
+            LookUpEdit lookUp = sender as LookUpEdit;
+            DataRowView dataRow = lookUp.GetSelectedDataRow() as DataRowView;
+            grvDSUngVien.SetFocusedRowCellValue("ID_TT", Convert.ToInt64((dataRow.Row[0])));
+        }
+        private void cboID_TT_BeforePopup(object sender, EventArgs e)
+        {
+            try
+            {
+                LookUpEdit lookUp = sender as LookUpEdit;
+                lookUp.Properties.DataSource = Commons.Modules.ObjSystems.DataTinhTrang(false);
+            }
+            catch { }
+        }
 
         private void LoadCbo()
         {
@@ -522,8 +611,69 @@ namespace Vs.HRM
         }
 
         #region function 
-        
 
+        #region chuotphai
+        class RowInfo
+        {
+            public RowInfo(DevExpress.XtraGrid.Views.Grid.GridView view, int rowHandle)
+            {
+                this.RowHandle = rowHandle;
+                this.View = view;
+            }
+            public DevExpress.XtraGrid.Views.Grid.GridView View;
+            public int RowHandle;
+        }
+        //Thong tin nhân sự
+        public DXMenuItem MCreateMenuThongTinNS(DevExpress.XtraGrid.Views.Grid.GridView view, int rowHandle)
+        {
+            string sStr = Commons.Modules.ObjLanguages.GetLanguage(Commons.Modules.ModuleName, this.Name, "lblThongTinNS", Commons.Modules.TypeLanguage);
+            DXMenuItem menuThongTinNS = new DXMenuItem(sStr, new EventHandler(ThongTinNS));
+            menuThongTinNS.Tag = new RowInfo(view, rowHandle);
+            return menuThongTinNS;
+        }
+        public void ThongTinNS(object sender, EventArgs e)
+        {
+            try
+            {
+                ucNS = new HRM.ucCTQLNS(Convert.ToInt64(grvDSUngVien.GetFocusedRowCellValue("ID_CN")));
+                Commons.Modules.ObjSystems.ShowWaitForm(this);
+                ucNS.Refresh();
+
+                //ns.accorMenuleft = accorMenuleft;
+                tableLayoutPanel1.Hide();
+                this.Controls.Add(ucNS);
+                ucNS.Dock = DockStyle.Fill;
+                ucNS.backWindowsUIButtonPanel.ButtonClick += BackWindowsUIButtonPanel_ButtonClick;
+                Commons.Modules.ObjSystems.HideWaitForm();
+            }
+            catch (Exception ex) { }
+        }
+        public void BackWindowsUIButtonPanel_ButtonClick(object sender, ButtonEventArgs e)
+        {
+            ucNS.Hide();
+            tableLayoutPanel1.Show();
+            LoadData();
+        }
+        private void grvDSUngVien_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
+        {
+            try
+            {
+                DevExpress.XtraGrid.Views.Grid.GridView view = sender as DevExpress.XtraGrid.Views.Grid.GridView;
+                if (e.MenuType == DevExpress.XtraGrid.Views.Grid.GridMenuType.Row)
+                {
+                    int irow = e.HitInfo.RowHandle;
+                    e.Menu.Items.Clear();
+                    DevExpress.Utils.Menu.DXMenuItem itemTTNS = MCreateMenuThongTinNS(view, irow);
+                    e.Menu.Items.Add(itemTTNS);
+                    //if (flag == false) return;
+                }
+            }
+            catch
+            {
+            }
+        }
+
+        #endregion
         #endregion
 
     }

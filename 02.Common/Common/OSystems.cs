@@ -211,6 +211,7 @@ namespace Commons
         {
             if (strDuongdan.Equals(""))
                 return;
+            //strDuongdan = strDuongdan.Replace(@"\",@"\");
             if (System.IO.File.Exists(strDuongdan))
             {
                 try

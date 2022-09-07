@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Microsoft.VisualBasic;
 using Microsoft.ApplicationBlocks.Data;
 using OfficeOpenXml;
 using System.Windows.Forms;
@@ -8,10 +7,8 @@ using System.Data;
 using OfficeOpenXml.Style;
 using DevExpress.XtraEditors;
 using System.IO;
-using Excel = Microsoft.Office.Interop.Excel;
 using Microsoft.Office.Interop.Excel;
 using DataTable = System.Data.DataTable;
-using System.Reflection;
 using NPOI.HSSF.UserModel;
 using NPOI.XSSF.UserModel;
 using DevExpress.XtraGrid.Views.Grid;
@@ -143,14 +140,14 @@ public class MExcel
         }
         return sTmp;
     }
-    public string getValueCell(Excel.Worksheet MWsheet,int DongBD, int CotBD)
+    public string getValueCell(Worksheet MWsheet,int DongBD, int CotBD)
     {
         string resulst = MWsheet.Cells[DongBD, CotBD].Value;
         MWsheet.Cells[DongBD, CotBD].Value2 ="";
         return resulst;
 
     }    
-    public void MFuntion(Excel.Worksheet MWsheet, string MFuntion, int DongBD, int CotBD, int DongBDFuntion, int CotBDFuntion, float MFontSize, bool MFontBold, float MColumnWidth, string MNumberFormat)
+    public void MFuntion(Worksheet MWsheet, string MFuntion, int DongBD, int CotBD, int DongBDFuntion, int CotBDFuntion, float MFontSize, bool MFontBold, float MColumnWidth, string MNumberFormat)
     {
         try
         {
@@ -168,7 +165,7 @@ public class MExcel
 
 
 
-    public void MFuntion(Excel.Worksheet MWsheet, string MFuntion, int DongBD, int CotBD, int DongBDFuntion, int CotBDFuntion, float MFontSize, bool MFontBold, float MColumnWidth, string MNumberFormat, Excel.XlHAlign MHAlign, Excel.XlVAlign MVAlign)
+    public void MFuntion(Worksheet MWsheet, string MFuntion, int DongBD, int CotBD, int DongBDFuntion, int CotBDFuntion, float MFontSize, bool MFontBold, float MColumnWidth, string MNumberFormat, XlHAlign MHAlign, XlVAlign MVAlign)
     {
         try
         {
@@ -187,11 +184,11 @@ public class MExcel
     }
 
 
-    public void MFuntion(Excel.Worksheet MWsheet, string MFuntion, int DongBD, int CotBD, int DongKT, int CotKT, int DongBDFuntion, int CotBDFuntion, int DongKTFuntion, int CotKTFuntion, float MFontSize, bool MFontBold, float MColumnWidth, string MNumberFormat)
+    public void MFuntion(Worksheet MWsheet, string MFuntion, int DongBD, int CotBD, int DongKT, int CotKT, int DongBDFuntion, int CotBDFuntion, int DongKTFuntion, int CotKTFuntion, float MFontSize, bool MFontBold, float MColumnWidth, string MNumberFormat)
     {
         try
         {
-            Excel.Range MRange = MWsheet.Range[MWsheet.Cells[DongBD, CotBD], MWsheet.Cells[DongKT, CotKT]];
+            Range MRange = MWsheet.Range[MWsheet.Cells[DongBD, CotBD], MWsheet.Cells[DongKT, CotKT]];
             MRange.Value2 = "=" + MFuntion + "(" + TimDiemExcel(DongBDFuntion, CotBDFuntion) + ":" + TimDiemExcel(DongKTFuntion, CotKTFuntion) + ")";
             if (MFontSize > 0)
                 MRange.Font.Size = MFontSize;
@@ -204,11 +201,11 @@ public class MExcel
         }
     }
 
-    public void MFuntion(Excel.Worksheet MWsheet, string MFuntion, int DongBD, int CotBD, int DongKT, int CotKT, int DongBDFuntion, int CotBDFuntion, int DongKTFuntion, int CotKTFuntion, float MFontSize, bool MFontBold, float MColumnWidth, string MNumberFormat, Excel.XlHAlign MHAlign, Excel.XlVAlign MVAlign)
+    public void MFuntion(Worksheet MWsheet, string MFuntion, int DongBD, int CotBD, int DongKT, int CotKT, int DongBDFuntion, int CotBDFuntion, int DongKTFuntion, int CotKTFuntion, float MFontSize, bool MFontBold, float MColumnWidth, string MNumberFormat, XlHAlign MHAlign, XlVAlign MVAlign)
     {
         try
         {
-            Excel.Range MRange = MWsheet.Range[MWsheet.Cells[DongBD, CotBD], MWsheet.Cells[DongKT, CotKT]];
+            Range MRange = MWsheet.Range[MWsheet.Cells[DongBD, CotBD], MWsheet.Cells[DongKT, CotKT]];
             MRange.Value2 = "=" + MFuntion + "(" + TimDiemExcel(DongBDFuntion, CotBDFuntion) + ":" + TimDiemExcel(DongKTFuntion, CotKTFuntion) + ")";
             if (MFontSize > 0)
                 MRange.Font.Size = MFontSize;
@@ -237,7 +234,7 @@ public class MExcel
         }
     }
 
-    public void TaoLogo(Excel.Worksheet MWsheet, float MLeft, float MTop, float MWidth, float MHeight, string sPath)
+    public void TaoLogo(Worksheet MWsheet, float MLeft, float MTop, float MWidth, float MHeight, string sPath)
     {
         try
         {
@@ -254,11 +251,11 @@ public class MExcel
         {
         }
     }
-    public void ThemDong(Excel.Worksheet MWsheet, Microsoft.Office.Interop.Excel.XlInsertShiftDirection DangThem, int SoDongThem, int DongBDThem)
+    public void ThemDong(Worksheet MWsheet, XlInsertShiftDirection DangThem, int SoDongThem, int DongBDThem)
     {
         try
         {
-            Excel.Range MRange = MWsheet.Range[MWsheet.Cells[DongBDThem, 1], MWsheet.Cells[DongBDThem, 1]];
+            Range MRange = MWsheet.Range[MWsheet.Cells[DongBDThem, 1], MWsheet.Cells[DongBDThem, 1]];
             for (int i = 1; i <= SoDongThem; i++)
                 MRange.EntireRow.Insert(DangThem);
         }
@@ -267,11 +264,11 @@ public class MExcel
         }
     }
 
-    public void ThemCot(Excel.Worksheet MWsheet, Microsoft.Office.Interop.Excel.XlInsertShiftDirection DangThem, int SoCotThem, int CotBDThem)
+    public void ThemCot(Worksheet MWsheet, XlInsertShiftDirection DangThem, int SoCotThem, int CotBDThem)
     {
         try
         {
-            Excel.Range MRange = MWsheet.Range[MWsheet.Cells[1, CotBDThem], MWsheet.Cells[1, CotBDThem]];
+            Range MRange = MWsheet.Range[MWsheet.Cells[1, CotBDThem], MWsheet.Cells[1, CotBDThem]];
             for (int i = 1; i <= SoCotThem; i++)
                 MRange.EntireColumn.Insert(DangThem);
         }
@@ -279,39 +276,12 @@ public class MExcel
         {
         }
     }
-
-    //public void ThemDong(Excel.Worksheet MWsheet, Microsoft.Office.Interop.Excel.XlInsertShiftDirection DangThem, int SoDongThem, int DongBDThem)
-    //{
-    //    try
-    //    {
-    //        Excel.Range MRange = MWsheet.Range[MWsheet.Cells[DongBDThem, 1], MWsheet.Cells[DongBDThem, 1]];
-    //        for (int i = 1; i <= SoDongThem; i++)
-    //            MRange.EntireRow.Insert(DangThem);
-    //    }
-    //    catch
-    //    {
-    //    }
-    //}
-
-    //public void ThemDong(Excel.Worksheet MWsheet, Excel.XlInsertShiftDirection DangThem, int SoDongThem, int DongBDThem)
-    //{
-    //    try
-    //    {
-    //        Excel.Range MRange = MWsheet.Range[MWsheet.Cells[DongBDThem, 1], MWsheet.Cells[DongBDThem, 1]];
-    //        for (int i = 1; i <= SoDongThem; i++)
-    //            MRange.EntireRow.Insert(DangThem);
-    //    }
-    //    catch
-    //    {
-    //    }
-    //}
-
-
-    public void ColumnWidth(Excel.Worksheet MWsheet, float MColumnWidth, string MNumberFormat, bool MWrapText, int DongBD, int CotBD, int DongKT, int CotKT)
+    
+    public void ColumnWidth(Worksheet MWsheet, float MColumnWidth, string MNumberFormat, bool MWrapText, int DongBD, int CotBD, int DongKT, int CotKT)
     {
         try
         {
-            Excel.Range MRange = MWsheet.Range[MWsheet.Cells[DongBD, CotBD], MWsheet.Cells[DongKT, CotKT]];
+            Range MRange = MWsheet.Range[MWsheet.Cells[DongBD, CotBD], MWsheet.Cells[DongKT, CotKT]];
             MRange.ColumnWidth = MColumnWidth;
             if (MNumberFormat != "")
                 MRange.NumberFormat = MNumberFormat;
@@ -322,7 +292,7 @@ public class MExcel
         }
     }
 
-    public int TaoTTChung(Excel.Worksheet MWsheet, int DongBD, int CotBD, int DongKT, int CotKT)
+    public int TaoTTChung(Worksheet MWsheet, int DongBD, int CotBD, int DongKT, int CotKT)
     {
         try
         {
@@ -337,8 +307,8 @@ public class MExcel
                 dtTmp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, System.Data.CommandType.Text, sSql));
             }
 
-            Excel.Range CurCell = MWsheet.Range[MWsheet.Cells[DongBD, 1], MWsheet.Cells[DongKT, 1]];
-            CurCell.EntireRow.Insert(Excel.XlInsertShiftDirection.xlShiftDown);
+            Range CurCell = MWsheet.Range[MWsheet.Cells[DongBD, 1], MWsheet.Cells[DongKT, 1]];
+            CurCell.EntireRow.Insert(XlInsertShiftDirection.xlShiftDown);
 
 
             CurCell = MWsheet.Range[MWsheet.Cells[DongBD, CotKT - 2], MWsheet.Cells[DongKT, CotKT]];
@@ -346,8 +316,8 @@ public class MExcel
             CurCell.Font.Bold = true;
             CurCell.Borders.LineStyle = 0;
             CurCell.Value2 = "Ngày in:" + DateTime.Today.ToString("dd/MM/yyyy");
-            CurCell.HorizontalAlignment = Excel.XlHAlign.xlHAlignRight;
-            CurCell.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
+            CurCell.HorizontalAlignment = XlHAlign.xlHAlignRight;
+            CurCell.VerticalAlignment = XlVAlign.xlVAlignCenter;
 
             CurCell = MWsheet.Range[MWsheet.Cells[DongBD, CotBD], MWsheet.Cells[DongKT, CotKT - 3]];
             CurCell.Merge(true);
@@ -360,7 +330,7 @@ public class MExcel
             DongBD += 1;
             DongKT += 1;
             CurCell = MWsheet.Range[MWsheet.Cells[DongBD, "A"], MWsheet.Cells[DongKT, "A"]];
-            CurCell.EntireRow.Insert(Excel.XlInsertShiftDirection.xlShiftDown);
+            CurCell.EntireRow.Insert(XlInsertShiftDirection.xlShiftDown);
             CurCell = MWsheet.Range[MWsheet.Cells[DongBD, CotBD], MWsheet.Cells[DongKT, CotKT]];
             CurCell.Merge(true);
             CurCell.Font.Bold = true;
@@ -370,7 +340,7 @@ public class MExcel
             DongBD += 1;
             DongKT += 1;
             CurCell = MWsheet.Range[MWsheet.Cells[DongBD, "A"], MWsheet.Cells[DongKT, "A"]];
-            CurCell.EntireRow.Insert(Excel.XlInsertShiftDirection.xlShiftDown);
+            CurCell.EntireRow.Insert(XlInsertShiftDirection.xlShiftDown);
             CurCell = MWsheet.Range[MWsheet.Cells[DongBD, CotBD], MWsheet.Cells[DongKT, CotKT]];
             CurCell.Merge(true);
             CurCell.Font.Bold = true;
@@ -380,7 +350,7 @@ public class MExcel
             DongBD += 1;
             DongKT += 1;
             CurCell = MWsheet.Range[MWsheet.Cells[DongBD, "A"], MWsheet.Cells[DongKT, "A"]];
-            CurCell.EntireRow.Insert(Excel.XlInsertShiftDirection.xlShiftDown);
+            CurCell.EntireRow.Insert(XlInsertShiftDirection.xlShiftDown);
             CurCell = MWsheet.Range[MWsheet.Cells[DongBD, CotBD], MWsheet.Cells[DongKT, CotKT]];
             CurCell.Merge(true);
             CurCell.Font.Bold = true;
@@ -393,34 +363,9 @@ public class MExcel
             return DongBD + 1;
         }
     }
+    
 
-    //public int TaoShape(int DongBD, Excel.Worksheet MWsheet, float MLeft, float MTop, float MWidth, float MHeight, string sText, string MFontName, float MFontSize, bool MFontBold, Excel.XlHAlign MHAlign, Excel.XlVAlign MVAlign)
-    //{
-    //    try
-    //    {
-    //        System.Data.DataTable dtTmp = new System.Data.DataTable();
-    //        dtTmp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, System.Data.CommandType.Text, " SELECT CASE WHEN " + Commons.Modules.TypeLanguage + "=0 " + " THEN TEN_CTY_TIENG_VIET ELSE TEN_CTY_TIENG_ANH END AS TEN_CTY,LOGO, " + " CASE WHEN " + Commons.Modules.TypeLanguage + "=0 THEN DIA_CHI_VIET  ELSE DIA_CHI_ANH  END AS DIA_CHI,Phone," + " Fax,EMAIL FROM THONG_TIN_CHUNG "));
-    //        if (sText == "-1")
-    //            sText = dtTmp.Rows[0]["TEN_CTY"].ToString() + Constants.vbCrLf + (Commons.Modules.ObjLanguages.GetLanguage(Commons.Modules.ModuleName, "frmReportBaoTri_Huda", "diachi", Commons.Modules.TypeLanguage) + " : ") + dtTmp.Rows[0]["DIA_CHI"].ToString() + Constants.vbCrLf + ((Commons.Modules.ObjLanguages.GetLanguage(Commons.Modules.ModuleName, "frmReportBaoTri_Huda", "dienthoai", Commons.Modules.TypeLanguage) + " : ") + dtTmp.Rows[0]["phone"].ToString() + "  " + Commons.Modules.ObjLanguages.GetLanguage(Commons.Modules.ModuleName, "frmReportBaoTri_Huda", "fax", Commons.Modules.TypeLanguage) + " : ") + dtTmp.Rows[0]["FAX"].ToString() + Constants.vbCrLf + "Email : " + dtTmp.Rows[0]["EMAIL"].ToString();
-
-    //        Excel.Shape aaa;
-    //        aaa = MWsheet.Shapes.AddTextbox(Office.MsoTextOrientation.msoTextOrientationHorizontal, MLeft, MTop, MWidth, MHeight);
-    //        aaa.TextFrame.Characters().Text = sText;
-    //        aaa.TextFrame.Characters().Font.Name = MFontName;
-    //        aaa.TextFrame.Characters().Font.Size = MFontSize;
-    //        aaa.TextFrame.VerticalAlignment = MVAlign;
-    //        aaa.TextFrame.HorizontalAlignment = MHAlign;
-    //        aaa.Line.ForeColor.RGB = Information.RGB(255, 255, 255);
-    //        return DongBD + 4;
-    //    }
-    //    catch
-    //    {
-    //        return DongBD + 4;
-    //    }
-    //}
-
-
-    public void ExcelEnd(Excel.Application MApp, Excel.Workbook MWbook, Excel.Worksheet MWsheet, bool MVisible, bool MDisplayGridlines, bool MRowFit, bool MColumnsFit, Excel.XlPaperSize MPaperSize, Excel.XlPageOrientation MOrientation, float MTopMargin, float MBottomMargin, float MLeftMargin, float MRightMargin, float MHeaderMargin, float MFooterMargin, float MZoom)
+    public void ExcelEnd(Microsoft.Office.Interop.Excel.Application MApp, Workbook MWbook, Worksheet MWsheet, bool MVisible, bool MDisplayGridlines, bool MRowFit, bool MColumnsFit, XlPaperSize MPaperSize, XlPageOrientation MOrientation, float MTopMargin, float MBottomMargin, float MLeftMargin, float MRightMargin, float MHeaderMargin, float MFooterMargin, float MZoom)
     {
         try
         {
@@ -453,28 +398,7 @@ public class MExcel
         }
     }
 
-
-    public void ExcelClose(Excel.Application MApp, Excel.Workbook MWbook, Excel.Worksheet MWsheet, bool MVisible, bool MClose)
-    {
-        try
-        {
-            MApp.DisplayAlerts = false;
-            MWbook.Save();
-            MApp.Visible = MVisible;
-            if (MClose == true)
-                MWbook.Close(Type.Missing, Type.Missing, Type.Missing);
-            if (MClose == true)
-                MApp.Quit();
-
-            //Commons.Modules.ObjSystems.MReleaseObject(MWsheet);
-            //Commons.Modules.ObjSystems.MReleaseObject(MWbook);
-            //Commons.Modules.ObjSystems.MReleaseObject(MApp);
-        }
-        catch
-        {
-        }
-    }
-
+    
     public void MReleaseObject(object obj)
     {
         try
@@ -493,12 +417,12 @@ public class MExcel
     }
 
 
-    public Excel.Range GetRange(Excel.Worksheet MWsheet, int DongBD, int CotBD, int DongKT, int CotKT)
+    public Range GetRange(Worksheet MWsheet, int DongBD, int CotBD, int DongKT, int CotKT)
     {
         try
         {
             // Dim allCells = MWsheet.Cells[DongBD, CotBD, DongKT, CotKT]
-            Excel.Range MRange = MWsheet.Range[MWsheet.Cells[DongBD, CotBD], MWsheet.Cells[DongKT, CotKT]];
+            Range MRange = MWsheet.Range[MWsheet.Cells[DongBD, CotBD], MWsheet.Cells[DongKT, CotKT]];
             return MRange;
         }
         catch (Exception)
@@ -507,12 +431,12 @@ public class MExcel
         }
     }
 
-    public void DinhDang(Excel.Worksheet MWsheet, string NoiDung, int Dong, int Cot)
+    public void DinhDang(Worksheet MWsheet, string NoiDung, int Dong, int Cot)
     {
         try
         {
-            Excel.Range MRange = MWsheet.Range[MWsheet.Cells[Dong, Cot], MWsheet.Cells[Dong, Cot]];
-            MRange.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
+            Range MRange = MWsheet.Range[MWsheet.Cells[Dong, Cot], MWsheet.Cells[Dong, Cot]];
+            MRange.VerticalAlignment = XlVAlign.xlVAlignCenter;
             if (NoiDung != "")
                 MWsheet.Cells[Dong, Cot] = NoiDung;
             MRange.Borders.LineStyle = 0;
@@ -522,12 +446,12 @@ public class MExcel
         }
     }
 
-    public void DinhDang(Excel.Worksheet MWsheet, string NoiDung, int Dong, int Cot, String MNumberFormat)
+    public void DinhDang(Worksheet MWsheet, string NoiDung, int Dong, int Cot, String MNumberFormat)
     {
         try
         {
-            Excel.Range MRange = MWsheet.Range[MWsheet.Cells[Dong, Cot], MWsheet.Cells[Dong, Cot]];
-            MRange.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
+            Range MRange = MWsheet.Range[MWsheet.Cells[Dong, Cot], MWsheet.Cells[Dong, Cot]];
+            MRange.VerticalAlignment = XlVAlign.xlVAlignCenter;
             if (NoiDung != "")
                 MWsheet.Cells[Dong, Cot] = NoiDung;
             MRange.Borders.LineStyle = 0;
@@ -537,15 +461,15 @@ public class MExcel
         }
     }
 
-    public void DinhDang(Excel.Worksheet MWsheet, string NoiDung, int Dong, int Cot, String MNumberFormat, float MFontSize)
+    public void DinhDang(Worksheet MWsheet, string NoiDung, int Dong, int Cot, String MNumberFormat, float MFontSize)
     {
         try
         {
-            Excel.Range MRange = MWsheet.Range[MWsheet.Cells[Dong, Cot], MWsheet.Cells[Dong, Cot]];
+            Range MRange = MWsheet.Range[MWsheet.Cells[Dong, Cot], MWsheet.Cells[Dong, Cot]];
             if (MFontSize > 0)
                 MRange.Font.Size = MFontSize;
 
-            MRange.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
+            MRange.VerticalAlignment = XlVAlign.xlVAlignCenter;
             if (NoiDung != "")
                 MWsheet.Cells[Dong, Cot] = NoiDung;
             MRange.Borders.LineStyle = 0;
@@ -555,18 +479,18 @@ public class MExcel
         }
     }
 
-    public void DinhDang(Excel.Worksheet MWsheet, string NoiDung, int Dong, int Cot, String MNumberFormat, float MFontSize, bool MFontBold)
+    public void DinhDang(Worksheet MWsheet, string NoiDung, int Dong, int Cot, String MNumberFormat, float MFontSize, bool MFontBold)
     {
         try
         {
-            Excel.Range MRange = MWsheet.Range[MWsheet.Cells[Dong, Cot], MWsheet.Cells[Dong, Cot]];
+            Range MRange = MWsheet.Range[MWsheet.Cells[Dong, Cot], MWsheet.Cells[Dong, Cot]];
             if (MFontSize > 0)
                 MRange.Font.Size = MFontSize;
             MRange.Font.Bold = MFontBold;
             if (MNumberFormat != "")
                 MRange.NumberFormat = MNumberFormat;
 
-            MRange.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
+            MRange.VerticalAlignment = XlVAlign.xlVAlignCenter;
             if (NoiDung != "")
                 MWsheet.Cells[Dong, Cot] = NoiDung;
             MRange.Borders.LineStyle = 0;
@@ -576,16 +500,16 @@ public class MExcel
         }
     }
 
-    // Sub DinhDang(ByVal MWsheet As Excel.Worksheet, ByVal NoiDung As String, ByVal Dong As Integer, ByVal Cot As Integer, _
+    // Sub DinhDang(ByVal MWsheet As Worksheet, ByVal NoiDung As String, ByVal Dong As Integer, ByVal Cot As Integer, _
     // ByVal MNumberFormat As [String], ByVal MFontSize As float, ByVal MFontBold As Boolean, _
     // ByVal MFontUnderline As Boolean)
     // Try
-    // Dim MRange As Excel.Range = MWsheet.Range[MWsheet.Cells[Dong, Cot), MWsheet.Cells[Dong, Cot))
+    // Dim MRange As Range = MWsheet.Range[MWsheet.Cells[Dong, Cot), MWsheet.Cells[Dong, Cot))
     // If MFontSize > 0 Then MRange.Font.Size = MFontSize
     // MRange.Font.Bold = MFontBold
     // If MNumberFormat <> "" Then MRange.NumberFormat = MNumberFormat
 
-    // MRange.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter
+    // MRange.VerticalAlignment = XlVAlign.xlVAlignCenter
     // If NoiDung <> "" Then MWsheet.Cells[Dong, Cot) = NoiDung
     // MRange.Borders.LineStyle = 0
 
@@ -593,16 +517,16 @@ public class MExcel
     // End Try
     // End Sub
 
-    // Sub DinhDang(ByVal MWsheet As Excel.Worksheet, ByVal NoiDung As String, ByVal Dong As Integer, ByVal Cot As Integer, _
+    // Sub DinhDang(ByVal MWsheet As Worksheet, ByVal NoiDung As String, ByVal Dong As Integer, ByVal Cot As Integer, _
     // ByVal MNumberFormat As [String], ByVal MFontSize As float, ByVal MFontBold As Boolean, _
     // ByVal MFontUnderline As Boolean, ByVal MFontItalic As Boolean)
     // Try
-    // Dim MRange As Excel.Range = MWsheet.Range[MWsheet.Cells[Dong, Cot), MWsheet.Cells[Dong, Cot))
+    // Dim MRange As Range = MWsheet.Range[MWsheet.Cells[Dong, Cot), MWsheet.Cells[Dong, Cot))
     // If MFontSize > 0 Then MRange.Font.Size = MFontSize
     // MRange.Font.Bold = MFontBold
     // If MNumberFormat <> "" Then MRange.NumberFormat = MNumberFormat
 
-    // MRange.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter
+    // MRange.VerticalAlignment = XlVAlign.xlVAlignCenter
     // If NoiDung <> "" Then MWsheet.Cells[Dong, Cot) = NoiDung
     // MRange.Borders.LineStyle = 0
 
@@ -610,11 +534,11 @@ public class MExcel
     // End Try
     // End Sub
 
-    public void DinhDang(Excel.Worksheet MWsheet, string NoiDung, int Dong, int Cot, String MNumberFormat, float MFontSize, bool MFontBold, Excel.XlHAlign MHAlign, Excel.XlVAlign MVAlign)
+    public void DinhDang(Worksheet MWsheet, string NoiDung, int Dong, int Cot, String MNumberFormat, float MFontSize, bool MFontBold, XlHAlign MHAlign, XlVAlign MVAlign)
     {
         try
         {
-            Excel.Range MRange = MWsheet.Range[MWsheet.Cells[Dong, Cot], MWsheet.Cells[Dong, Cot]];
+            Range MRange = MWsheet.Range[MWsheet.Cells[Dong, Cot], MWsheet.Cells[Dong, Cot]];
             if (MFontSize > 0)
                 MRange.Font.Size = MFontSize;
 
@@ -633,11 +557,11 @@ public class MExcel
         }
     }
 
-    public void DinhDang(Excel.Worksheet MWsheet, string NoiDung, int Dong, int Cot, String MNumberFormat, float MFontSize, bool MFontBold, bool MMerge, int MDongMerge, int MCotMerge)
+    public void DinhDang(Worksheet MWsheet, string NoiDung, int Dong, int Cot, String MNumberFormat, float MFontSize, bool MFontBold, bool MMerge, int MDongMerge, int MCotMerge)
     {
         try
         {
-            Excel.Range MRange = MWsheet.Range[MWsheet.Cells[Dong, Cot], MWsheet.Cells[MDongMerge, MCotMerge]];
+            Range MRange = MWsheet.Range[MWsheet.Cells[Dong, Cot], MWsheet.Cells[MDongMerge, MCotMerge]];
             MRange.Merge(MMerge);
             if (MFontSize > 0)
                 MRange.Font.Size = MFontSize;
@@ -656,11 +580,11 @@ public class MExcel
         }
     }
 
-    public void DinhDang(Excel.Worksheet MWsheet, string NoiDung, int Dong, int Cot, String MNumberFormat, float MFontSize, bool MFontBold, Excel.XlHAlign MHAlign, Excel.XlVAlign MVAlign, bool MMerge, int MDongMerge, int MCotMerge, int MRowHeight)
+    public void DinhDang(Worksheet MWsheet, string NoiDung, int Dong, int Cot, String MNumberFormat, float MFontSize, bool MFontBold, XlHAlign MHAlign, XlVAlign MVAlign, bool MMerge, int MDongMerge, int MCotMerge, int MRowHeight)
     {
         try
         {
-            Excel.Range MRange = MWsheet.Range[MWsheet.Cells[Dong, Cot], MWsheet.Cells[MDongMerge, MCotMerge]];
+            Range MRange = MWsheet.Range[MWsheet.Cells[Dong, Cot], MWsheet.Cells[MDongMerge, MCotMerge]];
             MRange.Merge(MMerge);
             if (MFontSize > 0)
                 MRange.Font.Size = MFontSize;
@@ -681,11 +605,11 @@ public class MExcel
         }
     }
 
-    public void DinhDang(Excel.Worksheet MWsheet, string NoiDung, int Dong, int Cot, String MNumberFormat, float MFontSize, bool MFontBold, Excel.XlHAlign MHAlign, Excel.XlVAlign MVAlign, bool MMerge, int MDongMerge, int MCotMerge, bool MFontUnderline, bool MFontItalic)
+    public void DinhDang(Worksheet MWsheet, string NoiDung, int Dong, int Cot, String MNumberFormat, float MFontSize, bool MFontBold, XlHAlign MHAlign, XlVAlign MVAlign, bool MMerge, int MDongMerge, int MCotMerge, bool MFontUnderline, bool MFontItalic)
     {
         try
         {
-            Excel.Range MRange = MWsheet.Range[MWsheet.Cells[Dong, Cot], MWsheet.Cells[MDongMerge, MCotMerge]];
+            Range MRange = MWsheet.Range[MWsheet.Cells[Dong, Cot], MWsheet.Cells[MDongMerge, MCotMerge]];
             MRange.Merge(MMerge);
             if (MFontSize > 0)
                 MRange.Font.Size = MFontSize;
@@ -721,7 +645,7 @@ public class MExcel
         return sTmp;
     }
 
-    public void MExportExcel(DataTable dtTmp, Excel.Worksheet ExcelSheets, Excel.Range sRange, bool bheader)
+    public void MExportExcel(DataTable dtTmp, Worksheet ExcelSheets, Range sRange, bool bheader)
     {
         if (bheader)
         {
@@ -747,7 +671,7 @@ public class MExcel
         }
     }
 
-    public void MExportExcel(DataTable dtTmp, Excel.Worksheet ExcelSheets, Excel.Range sRange, bool loadNN, string form)
+    public void MExportExcel(DataTable dtTmp, Worksheet ExcelSheets, Range sRange, bool loadNN, string form)
     {
         object[,] rawData = new object[dtTmp.Rows.Count + 1, dtTmp.Columns.Count - 1 + 1];
         for (var col = 0; col <= dtTmp.Columns.Count - 1; col++)
@@ -760,11 +684,11 @@ public class MExcel
         sRange.Value = rawData;
     }
 
-    public void MTaoSTT(Excel.Worksheet MWsheet, int DongBD, int Cot, int DongKT)
+    public void MTaoSTT(Worksheet MWsheet, int DongBD, int Cot, int DongKT)
     {
         try
         {
-            Excel.Range MRange = MWsheet.Range[MWsheet.Cells[DongBD, Cot], MWsheet.Cells[DongBD, Cot]];
+            Range MRange = MWsheet.Range[MWsheet.Cells[DongBD, Cot], MWsheet.Cells[DongBD, Cot]];
             MRange.Value2 = 1;
 
             MRange = MWsheet.Range[MWsheet.Cells[DongBD + 1, Cot], MWsheet.Cells[DongKT, Cot]];

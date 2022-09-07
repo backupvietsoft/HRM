@@ -3058,10 +3058,12 @@ F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptBCCNTheoNguyenQuanTH.res
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptBCCNTheoTinhThanh.resources
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptBCCNTheoTinhThanhTH.resources
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptBCCNTheoTrinhDo.resources
+F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptBCDangKyThaiSan_NB.resources
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptBCDanhGiaCN.resources
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptBCDanhGiaTrinhDo.resources
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\VS.Report.rptBCDienBienLuongThangNam.resources
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptBCDSLaoDongNu.resources
+F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptBCDSLaoDong_NB.resources
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptBCGiamLaoDongThang.resources
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptBCGiamLaoDongThang_NB.resources
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptBCHopDongHetHan.resources
@@ -3074,6 +3076,7 @@ F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptBCKhenThuongKyLuatTH.res
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptBCLaoDongThang.resources
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptBCLaoDongTinh.resources
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptBCLaoDongTo.resources
+F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptBCLaoDongTo_NB.resources
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptBCLaoDongVeHuu.resources
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptBCLDNuocNgoaiKhongCapGP.resources
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptBCQuaTrinhCongTacCN.resources
@@ -3104,6 +3107,7 @@ F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptDSNhanVienThayDoiLuongGD
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptDSQuanLy.resources
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptDSThamGiaCongDoan.resources
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptDSThamNien.resources
+F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptDSTheoDoiCheDoKhamThai_NB.resources
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptDSXNgioquetthetheongay.resources
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptHopDongDaoTao.resources
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptHopDongLaoDong.resources
@@ -3162,7 +3166,6 @@ F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptTheNhanVien.resources
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptThongBaoKetThucHDLD_NB.resources
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptThongKeTaiNan.resources
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\VS.Report.NhanSu.rptThongTinBaoMat.resources
-F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptThuMoi.resources
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptToKhaiBaoHiemXaHoi.resources
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptToKhaiBHXH.resources
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptToKhaiBHXH_SB.resources

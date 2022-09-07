@@ -658,3 +658,5 @@ F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Release\Vs.HRM.csproj.CoreCompileInputs.cache
 F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Release\Vs.HRM.csproj.CopyComplete
 F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Release\Vs.HRM.dll
 F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Release\Vs.HRM.pdb
+F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Release\Vs.HRM.frmInBaoCaoThaiSan.resources
+F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Release\Vs.HRM.ucKeHoachThaiSan.resources

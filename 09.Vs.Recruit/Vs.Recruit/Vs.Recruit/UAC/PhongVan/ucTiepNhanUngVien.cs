@@ -431,11 +431,17 @@ namespace Vs.Recruit
                     DevExpress.Utils.Menu.DXMenuItem itemCapNhatNhanh = MCreateMenuCapNhatNhanh(view, irow);
                     e.Menu.Items.Add(itemCapNhatNhanh);
 
-                    DevExpress.Utils.Menu.DXMenuItem itemTTUV = MCreateMenuThongTinUV(view, irow);
-                    e.Menu.Items.Add(itemTTUV);
-                    if (flag == false) return;
-                    DevExpress.Utils.Menu.DXMenuItem itemTTNS = MCreateMenuThongTinNS(view, irow);
-                    e.Menu.Items.Add(itemTTNS);
+                    if (grvDSUngVien.GetFocusedRowCellValue("NGAY_CHUYEN").ToString() == "")
+                    {
+                        DevExpress.Utils.Menu.DXMenuItem itemTTUV = MCreateMenuThongTinUV(view, irow);
+                        e.Menu.Items.Add(itemTTUV);
+                    }
+                    else
+                    {
+                        DevExpress.Utils.Menu.DXMenuItem itemTTNS = MCreateMenuThongTinNS(view, irow);
+                        e.Menu.Items.Add(itemTTNS);
+                    }
+                    //if (flag == false) return;
                 }
             }
             catch

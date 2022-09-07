@@ -5,8 +5,7 @@ using System;
 using System.Data;
 using System.Windows.Forms;
 using Vs.Report;
-using Excel = Microsoft.Office.Interop.Excel;
-using Microsoft.Office.Interop.Excel;
+using Excel ;
 using DataTable = System.Data.DataTable;
 using System.Reflection;
 using System.Drawing;
@@ -584,7 +583,7 @@ namespace Vs.HRM
                 rowCnt = rowCnt + 5;
                 oSheet.get_Range("A6", lastColumn + rowCnt.ToString()).Value2 = rowData;
 
-                Microsoft.Office.Interop.Excel.Range formatRange;
+                Excel.Range formatRange;
                 //int rowCnt = 0;
                 //int keepRowCnt = 0; // Biến này dùng để lưu lại giá trị của biến rowCnt
                 //int dr_Cu = 0; // Count số nhân viên của xí nghiệp đổ dữ liệu trước
@@ -753,7 +752,7 @@ namespace Vs.HRM
                 oXL.Visible = true;
                 oXL.UserControl = true;
                 oWB.SaveAs(SaveExcelFile,
-                    AccessMode: Microsoft.Office.Interop.Excel.XlSaveAsAccessMode.xlExclusive);
+                    AccessMode: Excel.XlSaveAsAccessMode.xlExclusive);
 
             }
             catch (Exception ex)

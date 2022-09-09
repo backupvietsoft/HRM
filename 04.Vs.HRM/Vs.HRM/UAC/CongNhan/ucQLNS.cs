@@ -244,6 +244,15 @@ namespace Vs.HRM
             XtraUserControl ctl = new XtraUserControl();
             switch (btn.Tag.ToString())
             {
+                case "importNhanSu":
+                    {
+                        frmImportNhanSu frm = new frmImportNhanSu();
+                        if(frm.ShowDialog() == DialogResult.OK)
+                        {
+                            LoadNhanSu(-1);
+                        }
+                        break;
+                    }
                 case "them":
                     {
                         grdNS.Visible = false;

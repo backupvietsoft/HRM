@@ -68,10 +68,11 @@
             DevExpress.XtraGrid.Views.Tile.TileViewItemElement tileViewItemElement20 = new DevExpress.XtraGrid.Views.Tile.TileViewItemElement();
             DevExpress.XtraGrid.Views.Tile.TileViewItemElement tileViewItemElement21 = new DevExpress.XtraGrid.Views.Tile.TileViewItemElement();
             DevExpress.XtraGrid.Views.Tile.TileViewItemElement tileViewItemElement22 = new DevExpress.XtraGrid.Views.Tile.TileViewItemElement();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions9 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions10 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions11 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions12 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions1 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions2 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions3 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions4 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions5 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
             this.MS_CN = new DevExpress.XtraGrid.Columns.TileViewColumn();
             this.HO_TEN = new DevExpress.XtraGrid.Columns.TileViewColumn();
             this.MS_THE_CC = new DevExpress.XtraGrid.Columns.TileViewColumn();
@@ -107,14 +108,14 @@
             this.ItemForDON_VI = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.ItemForXI_NGHIEP = new DevExpress.XtraLayout.LayoutControlItem();
-            this.ItemForTT_HT = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.ItemForTO = new DevExpress.XtraLayout.LayoutControlItem();
+            this.ItemForTT_HT = new DevExpress.XtraLayout.LayoutControlItem();
+            this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
+            this.ItemForSumNhanVien = new DevExpress.XtraLayout.SimpleLabelItem();
             this.navigationFrame1 = new DevExpress.XtraBars.Navigation.NavigationFrame();
             this.navigationPage1 = new DevExpress.XtraBars.Navigation.NavigationPage();
             this.navigationPage2 = new DevExpress.XtraBars.Navigation.NavigationPage();
-            this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
-            this.ItemForSumNhanVien = new DevExpress.XtraLayout.SimpleLabelItem();
             ((System.ComponentModel.ISupportInitialize)(this.grdNS)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tileViewCN)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
@@ -133,14 +134,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.ItemForDON_VI)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForXI_NGHIEP)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemForTT_HT)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForTO)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForTT_HT)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForSumNhanVien)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.navigationFrame1)).BeginInit();
             this.navigationFrame1.SuspendLayout();
             this.navigationPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemForSumNhanVien)).BeginInit();
             this.SuspendLayout();
             // 
             // MS_CN
@@ -640,16 +641,19 @@
             this.windowsUIButton.AppearanceButton.Pressed.Options.UseFont = true;
             this.windowsUIButton.AppearanceButton.Pressed.Options.UseImage = true;
             this.windowsUIButton.AppearanceButton.Pressed.Options.UseTextOptions = true;
-            windowsUIButtonImageOptions9.ImageUri.Uri = "AddItem";
-            windowsUIButtonImageOptions10.ImageUri.Uri = "Edit;Size32x32;GrayScaled";
-            windowsUIButtonImageOptions11.ImageUri.Uri = "snap/snapdeletelist";
-            windowsUIButtonImageOptions12.ImageUri.Uri = "richedit/clearheaderandfooter";
+            windowsUIButtonImageOptions1.ImageUri.Uri = "scheduling/import";
+            windowsUIButtonImageOptions2.ImageUri.Uri = "AddItem";
+            windowsUIButtonImageOptions3.ImageUri.Uri = "Edit;Size32x32;GrayScaled";
+            windowsUIButtonImageOptions4.ImageUri.Uri = "snap/snapdeletelist";
+            windowsUIButtonImageOptions5.ImageUri.Uri = "richedit/clearheaderandfooter";
             this.windowsUIButton.Buttons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] {
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions9, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "them", -1, false),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions10, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "sua", -1, false),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions11, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "xoa", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions1, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "importNhanSu", -1, false),
             new DevExpress.XtraBars.Docking2010.WindowsUISeparator(),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions12, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "thoat", -1, false)});
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions2, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "them", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions3, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "sua", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions4, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "xoa", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUISeparator(),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions5, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "thoat", -1, false)});
             this.windowsUIButton.ContentAlignment = System.Drawing.ContentAlignment.MiddleRight;
             this.windowsUIButton.Controls.Add(this.searchControl1);
             this.windowsUIButton.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -676,25 +680,25 @@
             // 
             // cbo_TTHT
             // 
-            this.cbo_TTHT.Location = new System.Drawing.Point(109, 27);
+            this.cbo_TTHT.Location = new System.Drawing.Point(118, 27);
             this.cbo_TTHT.Name = "cbo_TTHT";
             this.cbo_TTHT.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cbo_TTHT.Properties.NullText = "";
-            this.cbo_TTHT.Size = new System.Drawing.Size(260, 24);
+            this.cbo_TTHT.Size = new System.Drawing.Size(251, 24);
             this.cbo_TTHT.StyleController = this.layoutControl1;
             this.cbo_TTHT.TabIndex = 10;
             this.cbo_TTHT.EditValueChanged += new System.EventHandler(this.cboTo_EditValueChanged);
             // 
             // cboTo
             // 
-            this.cboTo.Location = new System.Drawing.Point(848, 1);
+            this.cboTo.Location = new System.Drawing.Point(857, 1);
             this.cboTo.Name = "cboTo";
             this.cboTo.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cboTo.Properties.NullText = "";
             this.cboTo.Properties.PopupView = this.searchLookUpEdit3View;
-            this.cboTo.Size = new System.Drawing.Size(260, 24);
+            this.cboTo.Size = new System.Drawing.Size(251, 24);
             this.cboTo.StyleController = this.layoutControl1;
             this.cboTo.TabIndex = 9;
             this.cboTo.EditValueChanged += new System.EventHandler(this.cboTo_EditValueChanged);
@@ -709,13 +713,13 @@
             // 
             // cboXN
             // 
-            this.cboXN.Location = new System.Drawing.Point(479, 1);
+            this.cboXN.Location = new System.Drawing.Point(488, 1);
             this.cboXN.Name = "cboXN";
             this.cboXN.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cboXN.Properties.NullText = "";
             this.cboXN.Properties.PopupView = this.searchLookUpEdit2View;
-            this.cboXN.Size = new System.Drawing.Size(259, 24);
+            this.cboXN.Size = new System.Drawing.Size(250, 24);
             this.cboXN.StyleController = this.layoutControl1;
             this.cboXN.TabIndex = 8;
             this.cboXN.EditValueChanged += new System.EventHandler(this.cboXN_EditValueChanged);
@@ -730,13 +734,13 @@
             // 
             // cboDV
             // 
-            this.cboDV.Location = new System.Drawing.Point(109, 1);
+            this.cboDV.Location = new System.Drawing.Point(118, 1);
             this.cboDV.Name = "cboDV";
             this.cboDV.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cboDV.Properties.NullText = "";
             this.cboDV.Properties.PopupView = this.searchLookUpEdit1View;
-            this.cboDV.Size = new System.Drawing.Size(260, 24);
+            this.cboDV.Size = new System.Drawing.Size(251, 24);
             this.cboDV.StyleController = this.layoutControl1;
             this.cboDV.TabIndex = 7;
             this.cboDV.EditValueChanged += new System.EventHandler(this.cboDV_EditValueChanged);
@@ -794,14 +798,6 @@
             this.ItemForXI_NGHIEP.Size = new System.Drawing.Size(369, 26);
             this.ItemForXI_NGHIEP.TextSize = new System.Drawing.Size(105, 17);
             // 
-            // ItemForTT_HT
-            // 
-            this.ItemForTT_HT.Control = this.cbo_TTHT;
-            this.ItemForTT_HT.Location = new System.Drawing.Point(0, 26);
-            this.ItemForTT_HT.Name = "ItemForTT_HT";
-            this.ItemForTT_HT.Size = new System.Drawing.Size(370, 26);
-            this.ItemForTT_HT.TextSize = new System.Drawing.Size(105, 17);
-            // 
             // layoutControlItem2
             // 
             this.layoutControlItem2.Control = this.windowsUIButton;
@@ -818,6 +814,33 @@
             this.ItemForTO.Name = "ItemForTO";
             this.ItemForTO.Size = new System.Drawing.Size(370, 26);
             this.ItemForTO.TextSize = new System.Drawing.Size(105, 17);
+            // 
+            // ItemForTT_HT
+            // 
+            this.ItemForTT_HT.Control = this.cbo_TTHT;
+            this.ItemForTT_HT.Location = new System.Drawing.Point(0, 26);
+            this.ItemForTT_HT.Name = "ItemForTT_HT";
+            this.ItemForTT_HT.Size = new System.Drawing.Size(370, 26);
+            this.ItemForTT_HT.TextSize = new System.Drawing.Size(105, 17);
+            // 
+            // emptySpaceItem1
+            // 
+            this.emptySpaceItem1.AllowHotTrack = false;
+            this.emptySpaceItem1.Location = new System.Drawing.Point(370, 26);
+            this.emptySpaceItem1.Name = "emptySpaceItem1";
+            this.emptySpaceItem1.Size = new System.Drawing.Size(739, 26);
+            this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
+            // 
+            // ItemForSumNhanVien
+            // 
+            this.ItemForSumNhanVien.AllowHotTrack = false;
+            this.ItemForSumNhanVien.AppearanceItemCaption.Options.UseTextOptions = true;
+            this.ItemForSumNhanVien.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.ItemForSumNhanVien.Location = new System.Drawing.Point(0, 52);
+            this.ItemForSumNhanVien.Name = "ItemForSumNhanVien";
+            this.ItemForSumNhanVien.Size = new System.Drawing.Size(1109, 19);
+            this.ItemForSumNhanVien.Text = "SumNhanVien";
+            this.ItemForSumNhanVien.TextSize = new System.Drawing.Size(105, 17);
             // 
             // navigationFrame1
             // 
@@ -848,25 +871,6 @@
             this.navigationPage2.Name = "navigationPage2";
             this.navigationPage2.Size = new System.Drawing.Size(1109, 578);
             // 
-            // emptySpaceItem1
-            // 
-            this.emptySpaceItem1.AllowHotTrack = false;
-            this.emptySpaceItem1.Location = new System.Drawing.Point(370, 26);
-            this.emptySpaceItem1.Name = "emptySpaceItem1";
-            this.emptySpaceItem1.Size = new System.Drawing.Size(739, 26);
-            this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
-            // 
-            // ItemForSumNhanVien
-            // 
-            this.ItemForSumNhanVien.AllowHotTrack = false;
-            this.ItemForSumNhanVien.AppearanceItemCaption.Options.UseTextOptions = true;
-            this.ItemForSumNhanVien.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.ItemForSumNhanVien.Location = new System.Drawing.Point(0, 52);
-            this.ItemForSumNhanVien.Name = "ItemForSumNhanVien";
-            this.ItemForSumNhanVien.Size = new System.Drawing.Size(1109, 19);
-            this.ItemForSumNhanVien.Text = "SumNhanVien";
-            this.ItemForSumNhanVien.TextSize = new System.Drawing.Size(105, 17);
-            // 
             // ucQLNS
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -893,14 +897,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.ItemForDON_VI)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForXI_NGHIEP)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemForTT_HT)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForTO)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForTT_HT)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForSumNhanVien)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.navigationFrame1)).EndInit();
             this.navigationFrame1.ResumeLayout(false);
             this.navigationPage1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemForSumNhanVien)).EndInit();
             this.ResumeLayout(false);
 
         }

@@ -1,24 +1,18 @@
-﻿using Commons;
-using DevExpress.XtraBars.Docking2010;
+﻿using DevExpress.XtraBars.Docking2010;
 using DevExpress.XtraEditors;
-using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraLayout;
 using Microsoft.ApplicationBlocks.Data;
 using System;
-using Excel = Microsoft.Office.Interop.Excel;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
 using System.Reflection;
 using System.Drawing;
-using Microsoft.Office.Interop.Excel;
 using DataTable = System.Data.DataTable;
-
-using Vs.Report;
-//using Microsoft.Office.Interop.Excel;
 using System.Globalization;
+using Excel;
 
 namespace Vs.Recruit
 {
@@ -386,8 +380,8 @@ namespace Vs.Recruit
                         return;
                     }
                     Excel.Application oXL;
-                    Excel.Workbook oWB;
-                    Excel.Worksheet oSheet;
+                    Workbook oWB;
+                    Worksheet oSheet;
                     oXL = new Excel.Application();
                     oXL.Visible = false;
 
@@ -624,7 +618,7 @@ namespace Vs.Recruit
                 return "";
             }
         }
-        private void MExportExcel(DataTable dtTmp, Microsoft.Office.Interop.Excel.Worksheet ExcelSheets, Microsoft.Office.Interop.Excel.Range sRange)
+        private void MExportExcel(DataTable dtTmp, Excel.Worksheet ExcelSheets, Excel.Range sRange)
         {
             object[,] rawData = new object[dtTmp.Rows.Count + 1, dtTmp.Columns.Count - 1 + 1];
             for (var col = 0; col <= dtTmp.Columns.Count - 1; col++)

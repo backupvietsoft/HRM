@@ -70,11 +70,11 @@ namespace Vs.HRM
             //ID_PX_TAM_TRULookUpEdit
             Commons.Modules.ObjSystems.MLoadLookUpEditN(ID_PX_TAM_TRULookUpEdit, Commons.Modules.ObjSystems.DataPhuongXa(Convert.ToInt32(-1), false), "ID_PX", "TEN_PX", "TEN_PX", "");
 
-            //ID_CVLookUpEdit
-            Commons.Modules.ObjSystems.MLoadLookUpEditN(ID_CVLookUpEdit, Commons.Modules.ObjSystems.DataChucVu(false), "ID_CV", "TEN_CV", "TEN_CV", "", true);
-
             //ID_LCVLookUpEdit
-            Commons.Modules.ObjSystems.MLoadLookUpEditN(ID_LCVLookUpEdit, Commons.Modules.ObjSystems.DataLoaiCV(false), "ID_LCV", "TEN_LCV", "TEN_LCV", "", true);
+            Commons.Modules.ObjSystems.MLoadLookUpEditN(ID_LCVLookUpEdit, Commons.Modules.ObjSystems.DataLoaiCV(false, Convert.ToInt32(-1)), "ID_LCV", "TEN_LCV", "TEN_LCV", "", true);
+
+            //ID_CVLookUpEdit
+            Commons.Modules.ObjSystems.MLoadLookUpEditN(ID_CVLookUpEdit, Commons.Modules.ObjSystems.DataChucVu(false, Convert.ToInt32(-1)), "ID_CV", "TEN_CV", "TEN_CV", "", true);
 
             ////ID_LHDLDLookUpEdit
             //Commons.Modules.ObjSystems.MLoadLookUpEditN(ID_LHDLDLookUpEdit, Commons.Modules.ObjSystems.DataLoaiHDLD(false), "ID_LHDLD", "TEN_LHDLD", "TEN_LHDLD", "", true);
@@ -151,6 +151,7 @@ namespace Vs.HRM
                         {
                             Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(ID_XNLookUpEdit, Commons.Modules.ObjSystems.DataXiNghiep(Convert.ToInt32(ID_DVLookUpEdit.EditValue), false), "ID_XN", "TEN_XN", "TEN_XN", true, true);
 
+
                             Commons.Modules.ObjSystems.MLoadLookUpEdit(ID_TPLookUpEdit, Commons.Modules.ObjSystems.DataThanhPho(Convert.ToInt32(ID_QGLookUpEdit.EditValue), false), "ID_TP", "TEN_TP", "TEN_TP", true);
 
                             Commons.Modules.ObjSystems.MLoadLookUpEdit(ID_TP_TAM_TRULookUpEdit, Commons.Modules.ObjSystems.DataThanhPho(Convert.ToInt32(ID_QGLookUpEdit.EditValue), false), "ID_TP", "TEN_TP", "TEN_TP", true);
@@ -164,6 +165,12 @@ namespace Vs.HRM
                             Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(ID_XNLookUpEdit, Commons.Modules.ObjSystems.DataXiNghiep(Convert.ToInt32(ID_DVLookUpEdit.EditValue), false), "ID_XN", "TEN_XN", "TEN_XN", true, false, false);
 
                             Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(ID_TOLookupEdit, Commons.Modules.ObjSystems.DataTo(Convert.ToInt32(ID_DVLookUpEdit.EditValue), Convert.ToInt32(ID_XNLookUpEdit.EditValue), false), "ID_TO", "TEN_TO", "TEN_TO", true, false, false);
+
+                            //ID_LCVLookUpEdit
+                            Commons.Modules.ObjSystems.MLoadLookUpEditN(ID_LCVLookUpEdit, Commons.Modules.ObjSystems.DataLoaiCV(false, Convert.ToInt32(ID_XNLookUpEdit.EditValue)), "ID_LCV", "TEN_LCV", "TEN_LCV", "", true);
+
+                            //ID_CVLookUpEdit
+                            Commons.Modules.ObjSystems.MLoadLookUpEditN(ID_CVLookUpEdit, Commons.Modules.ObjSystems.DataChucVu(false, Convert.ToInt32(ID_LCVLookUpEdit.EditValue)), "ID_CV", "TEN_CV", "TEN_CV", "", true);
 
                             if (ID_LOAI_TDLookUpEdit.EditValue.ToString() != "")
                             {
@@ -200,6 +207,8 @@ namespace Vs.HRM
                                 Commons.Modules.ObjSystems.MLoadLookUpEditN(ID_PX_TAM_TRULookUpEdit, Commons.Modules.ObjSystems.DataPhuongXa(Convert.ToInt32(ID_QUAN_TAM_TRULookUpEdit.EditValue), false), "ID_PX", "TEN_PX", "TEN_PX", "");
                             }
 
+
+
                             break;
                         }
 
@@ -210,6 +219,12 @@ namespace Vs.HRM
 
                             //tổ
                             Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(ID_TOLookupEdit, Commons.Modules.ObjSystems.DataTo(Convert.ToInt32(-1), Convert.ToInt32(-1), false), "ID_TO", "TEN_TO", "TEN_TO", true, false, false);
+
+                            //ID_LCVLookUpEdit
+                            Commons.Modules.ObjSystems.MLoadLookUpEditN(ID_LCVLookUpEdit, Commons.Modules.ObjSystems.DataLoaiCV(false, Convert.ToInt32(-1)), "ID_LCV", "TEN_LCV", "TEN_LCV", "", true);
+
+                            //ID_CVLookUpEdit
+                            Commons.Modules.ObjSystems.MLoadLookUpEditN(ID_CVLookUpEdit, Commons.Modules.ObjSystems.DataChucVu(false, Convert.ToInt32(-1)), "ID_CV", "TEN_CV", "TEN_CV", "", true);
 
                             //ID_TPLookUpEdit 
                             Commons.Modules.ObjSystems.MLoadLookUpEditN(ID_TPLookUpEdit, Commons.Modules.ObjSystems.DataThanhPho(Convert.ToInt32(-1), false), "ID_TP", "TEN_TP", "TEN_TP", "");
@@ -244,6 +259,12 @@ namespace Vs.HRM
 
                 //tổ
                 Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(ID_TOLookupEdit, Commons.Modules.ObjSystems.DataTo(Convert.ToInt32(-1), Convert.ToInt32(-1), false), "ID_TO", "TEN_TO", "TEN_TO", true, false, false);
+
+                //ID_LCVLookUpEdit
+                Commons.Modules.ObjSystems.MLoadLookUpEditN(ID_LCVLookUpEdit, Commons.Modules.ObjSystems.DataLoaiCV(false, Convert.ToInt32(ID_XNLookUpEdit.EditValue)), "ID_LCV", "TEN_LCV", "TEN_LCV", "", true);
+
+                ////ID_CVLookUpEdit
+                //Commons.Modules.ObjSystems.MLoadLookUpEditN(ID_CVLookUpEdit, Commons.Modules.ObjSystems.DataChucVu(false, Convert.ToInt32(ID_LCVLookUpEdit.EditValue)), "ID_CV", "TEN_CV", "TEN_CV", "", true);
 
                 //ID_TPLookUpEdit 
                 //Commons.Modules.ObjSystems.MLoadLookUpEditN(ID_TPLookUpEdit, Commons.Modules.ObjSystems.DataThanhPho(Convert.ToInt32(-1), false), "ID_TP", "TEN_TP", "TEN_TP", "");
@@ -1058,6 +1079,9 @@ namespace Vs.HRM
         {
             if (Commons.Modules.sLoad == "0Load") return;
             Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(ID_TOLookupEdit, Commons.Modules.ObjSystems.DataTo(Convert.ToInt32(ID_DVLookUpEdit.EditValue), Convert.ToInt32(ID_XNLookUpEdit.EditValue), false), "ID_TO", "TEN_TO", "TEN_TO", true);
+
+            Commons.Modules.ObjSystems.MLoadLookUpEditN(ID_LCVLookUpEdit, Commons.Modules.ObjSystems.DataLoaiCV(false, Convert.ToInt32(ID_XNLookUpEdit.EditValue)), "ID_LCV", "TEN_LCV", "TEN_LCV", "", true);
+            ID_LCVLookUpEdit.ItemIndex = 0;
         }
 
         private void ID_LCVLookUpEdit_EditValueChanged(object sender, EventArgs e)
@@ -1066,6 +1090,9 @@ namespace Vs.HRM
             try
             {
                 PHEP_CTTextEdit.Text = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT [dbo].[funPhepCongThem](" + ID_LCVLookUpEdit.EditValue + ")").ToString();
+
+                Commons.Modules.ObjSystems.MLoadLookUpEditN(ID_CVLookUpEdit, Commons.Modules.ObjSystems.DataChucVu(false, Convert.ToInt32(ID_LCVLookUpEdit.EditValue)), "ID_CV", "TEN_CV", "TEN_CV", "", true);
+                ID_CVLookUpEdit.ItemIndex = 0;
             }
             catch (Exception)
             {

@@ -8,8 +8,7 @@ using Microsoft.ApplicationBlocks.Data;
 using DevExpress.XtraGrid.Views.Grid;
 using System.Linq;
 using System.Windows.Forms;
-using Excel = Microsoft.Office.Interop.Excel;
-using Microsoft.Office.Interop.Excel;
+using Excel;
 using DataTable = System.Data.DataTable;
 using System.Reflection;
 using System.Drawing;
@@ -49,7 +48,8 @@ namespace Vs.Recruit
                 if (grdDinhBien.DataSource == null)
                 {
                     Commons.Modules.ObjSystems.MLoadXtraGrid(grdDinhBien, grvDinhBien, dt, false, false, false, true, true, this.Name);
-                    Commons.Modules.ObjSystems.AddCombXtra("ID_LCV", "TEN_LCV", grvDinhBien, Commons.Modules.ObjSystems.DataLoaiCV(false), true, "ID_LCV", this.Name);
+
+                    Commons.Modules.ObjSystems.AddCombXtra("ID_LCV", "TEN_LCV", grvDinhBien, Commons.Modules.ObjSystems.DataLoaiCV(false, Convert.ToInt32(-1)), true, "ID_LCV", this.Name);
                     Commons.Modules.ObjSystems.DeleteAddRow(grvDinhBien);
                 }
                 else
@@ -170,7 +170,7 @@ namespace Vs.Recruit
                 string lastColumn = string.Empty;
                 lastColumn = CharacterIncrement(dtBCThang.Columns.Count - 2);
 
-                Range row1_TieuDe = oSheet.get_Range("A1", "E1");
+                Excel.Range row1_TieuDe = oSheet.get_Range("A1", "E1");
                 row1_TieuDe.Merge();
                 row1_TieuDe.Font.Bold = true;
                 row1_TieuDe.Value2 = "CÔNG TY CỔ PHẦN MAY DUY MINH";
@@ -535,11 +535,11 @@ namespace Vs.Recruit
                 return returnCharCount;
             }
         }
-        private string CellAddress(Excel.Worksheet sht, int row, int col)
+        private string CellAddress(Worksheet sht, int row, int col)
         {
             return RangeAddress(sht.Cells[row, col]);
         }
-        private string RangeAddress(Excel.Range rng)
+        private string RangeAddress(Range rng)
         {
             object missing = null;
             return rng.get_AddressLocal(false, false, Excel.XlReferenceStyle.xlA1,

@@ -34,7 +34,9 @@ namespace Vs.Category
             {
                 //DataTable dt = new DataTable();
                 //dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboCongNhan", Commons.Modules.UserName, Commons.Modules.TypeLanguage, 3));
-                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboChucVu, Commons.Modules.ObjSystems.DataChucVu(false) , "ID_CV", "TEN_CV", "TEN_CV");
+
+                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboChucVu, Commons.Modules.ObjSystems.DataChucVu(false,Convert.ToInt32(-1)) , "ID_CV", "TEN_CV", "TEN_CV");
+
                 //Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboChucVu, Commons.Modules.ObjSystems.DataXiNghiep(-1,false) , "ID_XN", "TEN_XN", "TEN_XN");
                 ItemForTEN_CV.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
             }

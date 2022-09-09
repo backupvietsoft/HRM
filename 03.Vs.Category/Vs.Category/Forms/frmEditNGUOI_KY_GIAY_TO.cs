@@ -39,7 +39,7 @@ namespace Vs.Category
             try
             {
                 string sSql = "SELECT ID_NK, HO_TEN, CHUC_VU, CHUC_VU_A, CHUC_VU_H, QUOC_TICH, NGAY_SINH, " +
-                    "SO_CMND, CAP_NGAY, NOI_CAP, DIA_CHI, STT " +
+                    "SO_CMND, CAP_NGAY, NOI_CAP, DIA_CHI, GIAY_UY_QUYEN, STT " +
                     "FROM NGUOI_KY_GIAY_TO WHERE ID_NK = " + Id.ToString();
                 DataTable dtTmp = new DataTable();
                 dtTmp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSql));
@@ -70,6 +70,7 @@ namespace Vs.Category
                 }
                 NOI_CAPTextEdit.EditValue = dtTmp.Rows[0]["NOI_CAP"].ToString();
                 DIA_CHITextEdit.EditValue = dtTmp.Rows[0]["DIA_CHI"].ToString();
+                GIAY_UY_QUYENTextEdit.EditValue = dtTmp.Rows[0]["GIAY_UY_QUYEN"].ToString();
             }
             catch 
             {
@@ -91,6 +92,7 @@ namespace Vs.Category
                 CAP_NGAYDateEdit.EditValue = String.Empty;
                 NOI_CAPTextEdit.EditValue = String.Empty;
                 DIA_CHITextEdit.EditValue = String.Empty;
+                GIAY_UY_QUYENTextEdit.EditValue = String.Empty;
                 HO_TENTextEdit.Focus();
             }
             catch { }
@@ -112,7 +114,7 @@ namespace Vs.Category
                                 HO_TENTextEdit.EditValue, CHUC_VUTextEdit.EditValue, CHUC_VU_ATextEdit.EditValue, txtCHUC_VU_H.EditValue,
                                 QUOC_TICHTextEdit.EditValue, NGAY_SINHDateEdit.Text == "" ? null : NGAY_SINHDateEdit.EditValue,
                                 SO_CMNDTextEdit.EditValue, CAP_NGAYDateEdit.Text == "" ? null : CAP_NGAYDateEdit.EditValue, NOI_CAPTextEdit.EditValue, 
-                                DIA_CHITextEdit.EditValue).ToString();
+                                DIA_CHITextEdit.EditValue, GIAY_UY_QUYENTextEdit.EditValue).ToString();
                             if (AddEdit)
                             {
                                 if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msg_ThemThanhCongBanCoMuonTiepTuc"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)

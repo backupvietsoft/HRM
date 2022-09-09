@@ -211,6 +211,7 @@ namespace Commons
         {
             if (strDuongdan.Equals(""))
                 return;
+            //strDuongdan = strDuongdan.Replace(@"\",@"\");
             if (System.IO.File.Exists(strDuongdan))
             {
                 try
@@ -1202,7 +1203,7 @@ namespace Commons
                     grv.PopulateColumns();
                 grv.OptionsView.ColumnAutoWidth = MColumnAutoWidth;
                 grv.OptionsView.AllowHtmlDrawHeaders = true;
-                grv.Appearance.HeaderPanel.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+                //grv.Appearance.HeaderPanel.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
                 grv.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.True;
                 if (Commons.Modules.bSetUp == true)
                 {
@@ -4327,6 +4328,21 @@ namespace Commons
             dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetListLOAI_DIEU_CHINH", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll));
             return dt;
         }
+        public DataTable DataLoaiCV(bool coAll, int idXN)
+        {
+            //ID_LCV,TEN_LCV
+            DataTable dt = new DataTable();
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboLoaiCV", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll, idXN));
+            return dt;
+        }
+
+        public DataTable DataChucVu(bool coAll, int idLCV)
+        {
+            //ID_CV,TEN_CV
+            DataTable dt = new DataTable();
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboChucVu", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll, idLCV));
+            return dt;
+        }
 
         public DataTable DataDanToc(bool coAll)
         {
@@ -4432,13 +4448,13 @@ namespace Commons
             return dt;
         }
 
-        public DataTable DataChucVu(bool coAll)
-        {
-            //ID_CV,TEN_CV
-            DataTable dt = new DataTable();
-            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboChucVu", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll));
-            return dt;
-        }
+        //public DataTable DataChucVu(bool coAll)
+        //{
+        //    //ID_CV,TEN_CV
+        //    DataTable dt = new DataTable();
+        //    dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboChucVu", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll));
+        //    return dt;
+        //}
 
         public DataTable DataXepLoai(bool coAll)
         {

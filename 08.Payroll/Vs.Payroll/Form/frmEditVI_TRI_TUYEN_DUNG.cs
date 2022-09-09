@@ -21,7 +21,8 @@ namespace Vs.Payroll
 
         private void frmEditVI_TRI_TUYEN_DUNG_Load(object sender, EventArgs e)
         {
-            Commons.Modules.ObjSystems.MLoadLookUpEditN(cboID_CV, Commons.Modules.ObjSystems.DataChucVu(false), "ID_CV", "TEN_CV", "TEN_CV", "", true);
+            Commons.Modules.ObjSystems.MLoadLookUpEditN(cboID_CV, Commons.Modules.ObjSystems.DataChucVu(false, Convert.ToInt32(-1)), "ID_CV", "TEN_CV", "TEN_CV", "", true);
+
             if (!AddEdit) LoadText();
             Commons.Modules.ObjSystems.ThayDoiNN(this, layoutControlGroup1, btnALL);
         }

@@ -5,8 +5,7 @@ using System;
 using System.Data;
 using System.Windows.Forms;
 using Vs.Report;
-using Excel = Microsoft.Office.Interop.Excel;
-using Microsoft.Office.Interop.Excel;
+using Excel;
 using DataTable = System.Data.DataTable;
 using System.Reflection;
 using System.Drawing;
@@ -46,7 +45,7 @@ namespace Vs.HRM
             LoadCboXiNghiep();
             LoadCboTo();
 
-            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_CV, Commons.Modules.ObjSystems.DataChucVu(true), "ID_CV", "TEN_CV", "TEN_CV");
+            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_CV, Commons.Modules.ObjSystems.DataChucVu(true, System.Convert.ToInt32(-1)), "ID_CV", "TEN_CV", "TEN_CV");
             Commons.OSystems.SetDateEditFormat(dTuNgay);
             Commons.OSystems.SetDateEditFormat(dDenNgay);
 

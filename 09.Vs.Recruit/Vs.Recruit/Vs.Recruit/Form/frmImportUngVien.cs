@@ -207,7 +207,7 @@ namespace Vs.Recruit
                 col = 3;
                 //Giới tính
                 string sGioiTinh = dr[grvData.Columns[col].FieldName.ToString()].ToString();
-                if (!Commons.Modules.MExcel.KiemDuLieuBool(grvData, dr, col, sGioiTinh, "0"))
+                if (!Commons.Modules.MExcel.KiemDuLieuBool(grvData, dr, col, sGioiTinh, false))
                 {
                     errorCount++;
                 }
@@ -395,7 +395,7 @@ namespace Vs.Recruit
                 col = 32;
                 //Xác nhận đi làm 
                 string sXNDL = dr[grvData.Columns[col].FieldName.ToString()].ToString();
-                if (!Commons.Modules.MExcel.KiemDuLieuBool(grvData, dr, col, sXNDL, "0"))
+                if (!Commons.Modules.MExcel.KiemDuLieuBool(grvData, dr, col, sXNDL, false))
                 {
                     errorCount++;
                 }
@@ -408,14 +408,14 @@ namespace Vs.Recruit
                 col = 34;
                 //Xác nhận đào tạo định hướng 
                 string sDTDH = dr[grvData.Columns[col].FieldName.ToString()].ToString();
-                if (!Commons.Modules.MExcel.KiemDuLieuBool(grvData, dr, col, sDTDH, "0"))
+                if (!Commons.Modules.MExcel.KiemDuLieuBool(grvData, dr, col, sDTDH, false))
                 {
                     errorCount++;
                 }
                 col = 35;
                 //Chuyển sang nhân sự 
                 string sCNS = dr[grvData.Columns[col].FieldName.ToString()].ToString();
-                if (!Commons.Modules.MExcel.KiemDuLieuBool(grvData, dr, col, sCNS, "0"))
+                if (!Commons.Modules.MExcel.KiemDuLieuBool(grvData, dr, col, sCNS, false))
                 {
                     errorCount++;
                 }
@@ -428,14 +428,14 @@ namespace Vs.Recruit
                 col = 37;
                 //Đã giới thiệu   
                 string sDGT = dr[grvData.Columns[col].FieldName.ToString()].ToString();
-                if (!Commons.Modules.MExcel.KiemDuLieuBool(grvData, dr, col, sDGT, "0"))
+                if (!Commons.Modules.MExcel.KiemDuLieuBool(grvData, dr, col, sDGT, false))
                 {
                     errorCount++;
                 }
                 col = 38;
                 //Hủy tuyển dụng
                 string sHTD = dr[grvData.Columns[col].FieldName.ToString()].ToString();
-                if (!Commons.Modules.MExcel.KiemDuLieuBool(grvData, dr, col, sHTD, "0"))
+                if (!Commons.Modules.MExcel.KiemDuLieuBool(grvData, dr, col, sHTD, false))
                 {
                     errorCount++;
                 }

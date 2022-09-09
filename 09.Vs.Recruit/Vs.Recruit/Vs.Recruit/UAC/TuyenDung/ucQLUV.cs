@@ -147,8 +147,9 @@ namespace Vs.Recruit
                 sheet1.Range[1, 27].Comment.RichText.Text = Commons.Modules.ObjSystems.ConvertCombototext(Commons.Modules.ObjSystems.DataTDVH(-1,false));
                 sheet1.Range[1, 28].Comment.RichText.Text = Commons.Modules.ObjSystems.ConvertCombototext(Commons.Modules.ObjSystems.DataKinhNghiemLV(false));
                 sheet1.Range[1, 29].Comment.RichText.Text = Commons.Modules.ObjSystems.ConvertCombototext(Commons.Modules.ObjSystems.DataDanhGiaTayNghe(false));
-                sheet1.Range[1, 30].Comment.RichText.Text = Commons.Modules.ObjSystems.ConvertCombototext(Commons.Modules.ObjSystems.DataLoaiCV(false));
-                sheet1.Range[1, 31].Comment.RichText.Text = Commons.Modules.ObjSystems.ConvertCombototext(Commons.Modules.ObjSystems.DataLoaiCV(false));
+
+                sheet1.Range[1, 30].Comment.RichText.Text = Commons.Modules.ObjSystems.ConvertCombototext(Commons.Modules.ObjSystems.DataLoaiCV(false,Convert.ToInt32(-1)));
+                sheet1.Range[1, 31].Comment.RichText.Text = Commons.Modules.ObjSystems.ConvertCombototext(Commons.Modules.ObjSystems.DataLoaiCV(false, Convert.ToInt32(-1)));
 
                 sheet1.Range[1, 33].Comment.RichText.Text = "Nếu có thì nhập:1\nkhông thì nhập:0";
                 sheet1.Range[1, 36].Comment.RichText.Text = "Nếu có thì nhập:1\nkhông thì nhập:0";
@@ -222,7 +223,7 @@ namespace Vs.Recruit
                 Commons.Modules.ObjSystems.MLoadLookUpEdit(cboDA_TUYEN_DUNG, Commons.Modules.ObjSystems.DataTinhTrangTD(true), "ID_TTTD", "Ten_TTTD", "Ten_TTTD");
                 Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboYeuCauTD, Commons.Modules.ObjSystems.DataYeuCauTD(true, 1), "ID_YCTD", "MA_YCTD", "MA_YCTD");
                 Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_KHPV, Commons.Modules.ObjSystems.DataKeHoachPV(true,-1), "ID_KHPV", "SO_KHPV", "SO_KHPV");
-                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_VTTD, Commons.Modules.ObjSystems.DataLoaiCV(true), "ID_LCV", "TEN_LCV", "TEN_LCV");
+                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_VTTD, Commons.Modules.ObjSystems.DataLoaiCV(true, Convert.ToInt32(-1)), "ID_LCV", "TEN_LCV", "TEN_LCV");
             }
             catch
             {

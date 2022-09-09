@@ -44,7 +44,7 @@ namespace Vs.Recruit
                 Commons.Modules.sLoad = "0Load";
                 Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboXepLoai, Commons.Modules.ObjSystems.DataDanhGiaTayNghe(false), "ID_DGTN", "TEN_DGTN", "TEN_DGTN");
                 Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_NGUOI_DT, Commons.Modules.ObjSystems.TruongBoPhan(), "ID_CN", "HO_TEN", "HO_TEN", true, true);
-                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_NGUOI_CHUYEN, Commons.Modules.ObjSystems.TruongBoPhan(), "ID_CN", "HO_TEN", "HO_TEN", true, true);
+                //Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_NGUOI_CHUYEN, Commons.Modules.ObjSystems.TruongBoPhan(), "ID_CN", "HO_TEN", "HO_TEN", true, true);
                 Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_XN, Commons.Modules.ObjSystems.DataXiNghiep(-1, false), "ID_XN", "TEN_XN", "TEN_XN", true, true);
                 Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_NGUOI_CHUYEN, Commons.Modules.ObjSystems.DataCongNhan(false), "ID_CN", "TEN_CN", "TEN_CN", true, true);
 
@@ -65,7 +65,7 @@ namespace Vs.Recruit
                 if (iMS_CV == 1)
                 {
                     TabKiemTraTayNghe.PageVisible = false;
-                    txtMUC_LUONG_DN.Text = "";
+                    if (txtMUC_LUONG_DN.Text == "") txtMUC_LUONG_DN.Text = "";
                 }
                 if (sNGayChuyen != "")
                 {
@@ -168,11 +168,6 @@ namespace Vs.Recruit
                                         }
                                     case "TabDaoTaoDinhHuong":
                                         {
-                                            if (datNGAY_DT.Text == "")
-                                            {
-                                                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgNgayDaoTaoKhongDcTrong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning); return;
-                                            }
-
                                             System.Data.SqlClient.SqlConnection conn;
                                             conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
                                             conn.Open();
@@ -280,6 +275,7 @@ namespace Vs.Recruit
                                 XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgChuaChonLoaiHopDong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning); return;
                             }
                             iKiem = KiemSLTuyen();
+                            if (iKiem == 3) return;
                             if (iKiem == 0)
                             {
                                 XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgSoLuongTuyenDaHet"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning); return;

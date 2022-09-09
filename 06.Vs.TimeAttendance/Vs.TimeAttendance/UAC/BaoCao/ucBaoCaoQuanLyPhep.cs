@@ -811,6 +811,11 @@ namespace Vs.TimeAttendance
                     formatRange.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
                     formatRange.TextToColumns(Type.Missing, Excel.XlTextParsingType.xlDelimited, Excel.XlTextQualifier.xlTextQualifierDoubleQuote);
 
+                    formatRange = oSheet.get_Range("B" + (rowBD + 1).ToString() + "", "B" + (rowCnt + 1).ToString());
+                    formatRange.NumberFormat = "@";
+                    formatRange.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
+                    formatRange.TextToColumns(Type.Missing, Excel.XlTextParsingType.xlDelimited, Excel.XlTextQualifier.xlTextQualifierDoubleQuote);
+
                     formatRange = oSheet.get_Range("E" + (rowBD + 1).ToString() + "", "E" + (rowCnt + 1).ToString());
                     formatRange.NumberFormat = "#,##0";
                     formatRange.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;

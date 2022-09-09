@@ -1,4 +1,5 @@
-﻿using DevExpress.Utils.Menu;
+﻿using DevExpress.Utils;
+using DevExpress.Utils.Menu;
 using DevExpress.XtraBars.Docking2010;
 using DevExpress.XtraBars.Navigation;
 using DevExpress.XtraEditors;
@@ -22,6 +23,9 @@ namespace Vs.Recruit
         private bool flag = false;
         public AccordionControl accorMenuleft;
         private long iID_UV = -1;
+        private ucCTQLUV ucUV;
+        private HRM.ucCTQLNS ucNS;
+        private int iLoai = 0; // 1 : link ứng viên, 2 : link nhân sự
         public ucTiepNhanUngVien()
         {
             InitializeComponent();
@@ -79,6 +83,8 @@ namespace Vs.Recruit
                 grvDSUngVien.Columns["ID_VTTD"].Visible = false;
                 grvDSUngVien.Columns["MS_UV"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
                 grvDSUngVien.Columns["HO_TEN"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
+                grvDSUngVien.Columns["MUC_LUONG_DN"].DisplayFormat.FormatType = FormatType.Numeric;
+                grvDSUngVien.Columns["MUC_LUONG_DN"].DisplayFormat.FormatString = "n0";
 
                 if (Convert.ToInt32(cboMS_CV.EditValue) == 1)
                 {
@@ -228,14 +234,14 @@ namespace Vs.Recruit
                                             dt.TableName = "DATA";
                                             frm.AddDataSource(dt);
                                         }
-                                        catch(Exception ex)
+                                        catch (Exception ex)
                                         {
                                         }
                                         frm.ShowDialog();
                                         break;
                                     }
                             }
-                            
+
                             break;
                         }
                     case "thoat":
@@ -353,7 +359,19 @@ namespace Vs.Recruit
         {
             try
             {
+                iLoai = 1;
+                iID_UV = Convert.ToInt64(grvDSUngVien.GetFocusedRowCellValue("ID_UV"));
+                ucUV = new ucCTQLUV(Convert.ToInt64(grvDSUngVien.GetFocusedRowCellValue("ID_UV")));
+                Commons.Modules.ObjSystems.ShowWaitForm(this);
+                //ucUV.Refresh();
+                ucUV.Refresh();
 
+                //ns.accorMenuleft = accorMenuleft;
+                tableLayoutPanel1.Hide();
+                this.Controls.Add(ucUV);
+                ucUV.Dock = DockStyle.Fill;
+                ucUV.backWindowsUIButtonPanel.ButtonClick += BackWindowsUIButtonPanel_ButtonClick;
+                Commons.Modules.ObjSystems.HideWaitForm();
             }
             catch { }
         }
@@ -369,9 +387,33 @@ namespace Vs.Recruit
         {
             try
             {
+                iID_UV = Convert.ToInt64(grvDSUngVien.GetFocusedRowCellValue("ID_UV"));
+                iLoai = 2;
+                ucNS = new HRM.ucCTQLNS(Convert.ToInt64(grvDSUngVien.GetFocusedRowCellValue("ID_CN")));
+                Commons.Modules.ObjSystems.ShowWaitForm(this);
+                ucNS.Refresh();
 
+                //ns.accorMenuleft = accorMenuleft;
+                tableLayoutPanel1.Hide();
+                this.Controls.Add(ucNS);
+                ucNS.Dock = DockStyle.Fill;
+                ucNS.backWindowsUIButtonPanel.ButtonClick += BackWindowsUIButtonPanel_ButtonClick;
+                Commons.Modules.ObjSystems.HideWaitForm();
             }
-            catch { }
+            catch (Exception ex) { }
+        }
+        public void BackWindowsUIButtonPanel_ButtonClick(object sender, ButtonEventArgs e)
+        {
+            if (iLoai == 1)
+            {
+                ucUV.Hide();
+            }
+            else
+            {
+                ucNS.Hide();
+            }
+            tableLayoutPanel1.Show();
+            LoadData();
         }
         private void grvDSUngVien_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
         {
@@ -389,11 +431,17 @@ namespace Vs.Recruit
                     DevExpress.Utils.Menu.DXMenuItem itemCapNhatNhanh = MCreateMenuCapNhatNhanh(view, irow);
                     e.Menu.Items.Add(itemCapNhatNhanh);
 
-                    DevExpress.Utils.Menu.DXMenuItem itemTTUV = MCreateMenuThongTinUV(view, irow);
-                    e.Menu.Items.Add(itemTTUV);
-                    if (flag == false) return;
-                    DevExpress.Utils.Menu.DXMenuItem itemTTNS = MCreateMenuThongTinNS(view, irow);
-                    e.Menu.Items.Add(itemTTNS);
+                    if (grvDSUngVien.GetFocusedRowCellValue("NGAY_CHUYEN").ToString() == "")
+                    {
+                        DevExpress.Utils.Menu.DXMenuItem itemTTUV = MCreateMenuThongTinUV(view, irow);
+                        e.Menu.Items.Add(itemTTUV);
+                    }
+                    else
+                    {
+                        DevExpress.Utils.Menu.DXMenuItem itemTTNS = MCreateMenuThongTinNS(view, irow);
+                        e.Menu.Items.Add(itemTTNS);
+                    }
+                    //if (flag == false) return;
                 }
             }
             catch

@@ -209,7 +209,7 @@ namespace Vs.TimeAttendance
 
         private void ucBaoCaoTheoNgay_Load(object sender, EventArgs e)
         {
-            if (Commons.Modules.ObjSystems.KyHieuDV(Convert.ToInt64(LK_DON_VI.EditValue)) != "DM")
+            if (Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString() != "DM")
             {
                 rdo_ChonBaoCao.Properties.Items.RemoveAt(9);
             }

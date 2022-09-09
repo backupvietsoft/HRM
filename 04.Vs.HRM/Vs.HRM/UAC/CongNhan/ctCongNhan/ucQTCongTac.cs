@@ -54,19 +54,19 @@ namespace Vs.HRM
             Commons.Modules.ObjSystems.MLoadLookUpEdit(ID_LQDLookUpEdit, Commons.Modules.ObjSystems.DataLoaiQuyetDinh(false), "ID_LQD", "TEN_LQD", "TEN_LQD", true);
 
             //ID_CVLookUpEdit.EditValue = "";
-            Commons.Modules.ObjSystems.MLoadLookUpEdit(ID_CVLookUpEdit, Commons.Modules.ObjSystems.DataChucVu(false), "ID_CV", "TEN_CV", "TEN_CV", true);
+            Commons.Modules.ObjSystems.MLoadLookUpEdit(ID_CVLookUpEdit, Commons.Modules.ObjSystems.DataChucVu(false, Convert.ToInt32(-1)), "ID_CV", "TEN_CV", "TEN_CV", true);
 
             //ID_CV_CULookUpEdit.EditValue = "";
-            Commons.Modules.ObjSystems.MLoadLookUpEdit(ID_CV_CULookUpEdit, Commons.Modules.ObjSystems.DataChucVu(false), "ID_CV", "TEN_CV", "TEN_CV", true);
+            Commons.Modules.ObjSystems.MLoadLookUpEdit(ID_CV_CULookUpEdit, Commons.Modules.ObjSystems.DataChucVu(false, Convert.ToInt32(-1)), "ID_CV", "TEN_CV", "TEN_CV", true);
 
             //ID_NKLookUpEdit.EditValue = "";
             Commons.Modules.ObjSystems.MLoadLookUpEdit(ID_NKLookUpEdit, Commons.Modules.ObjSystems.DataNguoiKy(), "ID_NK", "HO_TEN", "HO_TEN");
 
             //ID_LCVLookUpEdit.EditValue = "";
-            Commons.Modules.ObjSystems.MLoadLookUpEdit(ID_LCVLookUpEdit, Commons.Modules.ObjSystems.DataLoaiCV(false), "ID_LCV", "TEN_LCV", "TEN_LCV", true);
+            Commons.Modules.ObjSystems.MLoadLookUpEdit(ID_LCVLookUpEdit, Commons.Modules.ObjSystems.DataLoaiCV(false, Convert.ToInt32(-1)), "ID_LCV", "TEN_LCV", "TEN_LCV", true);
 
             //ID_LCV_CULookUpEdit.EditValue = "";
-            Commons.Modules.ObjSystems.MLoadLookUpEdit(ID_LCV_CULookUpEdit, Commons.Modules.ObjSystems.DataLoaiCV(false), "ID_LCV", "TEN_LCV", "TEN_LCV", true);
+            Commons.Modules.ObjSystems.MLoadLookUpEdit(ID_LCV_CULookUpEdit, Commons.Modules.ObjSystems.DataLoaiCV(false, Convert.ToInt32(-1)), "ID_LCV", "TEN_LCV", "TEN_LCV", true);
 
             //ID_CTL_CULookUpEdit.EditValue = "";
             Commons.Modules.ObjSystems.MLoadLookUpEdit(ID_CTL_CULookUpEdit, Commons.Modules.ObjSystems.DataCTL(false), "ID_CTL", "TEN_CTL", "TEN_CTL", true);
@@ -100,8 +100,28 @@ namespace Vs.HRM
         {
             if (Commons.Modules.sLoad == "0Load") return;
             Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(ID_TOLookUpEdit, Commons.Modules.ObjSystems.DataTo(Convert.ToInt32(DON_VILookUpEdit.EditValue), Convert.ToInt32(XI_NGHIEPLookUpEdit.EditValue), false), "ID_TO", "TEN_TO", "TEN_TO", true, true);
+
+            Commons.Modules.ObjSystems.MLoadLookUpEdit(ID_LCVLookUpEdit, Commons.Modules.ObjSystems.DataLoaiCV(false, Convert.ToInt32(XI_NGHIEPLookUpEdit.EditValue)), "ID_LCV", "TEN_LCV", "TEN_LCV", true);
+            ID_LCVLookUpEdit.ItemIndex = 0;
         }
 
+        private void XI_NGHIEP_CUTextEdit_EditValueChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void ID_LCV_CULookUpEdit_EditValueChanged(object sender, EventArgs e)
+        {
+            if (Commons.Modules.sLoad == "0Load") return;
+            Commons.Modules.ObjSystems.MLoadLookUpEditN(ID_CV_CULookUpEdit, Commons.Modules.ObjSystems.DataChucVu(false, Convert.ToInt32(ID_LCV_CULookUpEdit.EditValue)), "ID_CV", "TEN_CV", "TEN_CV", "", true);
+            ID_CV_CULookUpEdit.ItemIndex = 0;
+        }
+
+        private void ID_LCVLookUpEdit_EditValueChanged(object sender, EventArgs e)
+        {
+            if (Commons.Modules.sLoad == "0Load") return;
+            Commons.Modules.ObjSystems.MLoadLookUpEditN(ID_CVLookUpEdit, Commons.Modules.ObjSystems.DataChucVu(false, Convert.ToInt32(ID_LCVLookUpEdit.EditValue)), "ID_CV", "TEN_CV", "TEN_CV", "", true);
+            ID_CVLookUpEdit.ItemIndex = 0;
+        }
         private void grdCongTac_ProcessGridKey(object sender, KeyEventArgs e)
         {
             if (e.KeyData == Keys.Delete)
@@ -284,6 +304,16 @@ namespace Vs.HRM
             }
             Commons.Modules.sLoad = "";
         }
+
+        private void Load_cboChucVu()
+        {
+            Commons.Modules.ObjSystems.MLoadLookUpEditN(ID_CV_CULookUpEdit, Commons.Modules.ObjSystems.DataChucVu(false, Convert.ToInt32(grvCongTac.GetFocusedRowCellValue("ID_LCV_CU"))), "ID_CV", "TEN_CV", "TEN_CV", "", true);
+            ID_CV_CULookUpEdit.EditValue = grvCongTac.GetFocusedRowCellValue("ID_CV_CU");
+            Commons.Modules.ObjSystems.MLoadLookUpEdit(ID_LCVLookUpEdit, Commons.Modules.ObjSystems.DataLoaiCV(false, Convert.ToInt32(grvCongTac.GetFocusedRowCellValue("ID_XN"))), "ID_LCV", "TEN_LCV", "TEN_LCV", true);
+            ID_LCVLookUpEdit.EditValue = grvCongTac.GetFocusedRowCellValue("ID_LCV");
+            Commons.Modules.ObjSystems.MLoadLookUpEditN(ID_CVLookUpEdit, Commons.Modules.ObjSystems.DataChucVu(false, Convert.ToInt32(ID_LCVLookUpEdit.EditValue)), "ID_CV", "TEN_CV", "TEN_CV", "", true);
+            ID_CVLookUpEdit.EditValue = grvCongTac.GetFocusedRowCellValue("ID_CV");
+        }
         private void SaveData()
         {
             try
@@ -349,6 +379,7 @@ namespace Vs.HRM
                             XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgChuaChonCongNhan"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "sThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                             return;
                         }
+                        Load_cboChucVu();
                         Bindingdata(true);
                         cothem = true;
                         enableButon(false);
@@ -366,6 +397,7 @@ namespace Vs.HRM
                             XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgChonDongCanXuLy"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "sThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                             return;
                         }
+                        Load_cboChucVu();
                         cothem = false;
                         enableButon(false);
                         break;
@@ -525,7 +557,8 @@ namespace Vs.HRM
                 catch
                 {
                 }
-            }    
+            }
         }
+
     }
 }

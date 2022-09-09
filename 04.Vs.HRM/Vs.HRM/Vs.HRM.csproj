@@ -44,6 +44,10 @@
     <Reference Include="DevExpress.CodeParser.v22.1, Version=22.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Dashboard.v22.1.Core, Version=22.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Dashboard.v22.1.Win, Version=22.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Docs.v22.1, Version=22.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\DevExpress.Docs.v22.1.dll</HintPath>
+    </Reference>
     <Reference Include="DevExpress.Drawing.v22.1" />
     <Reference Include="DevExpress.Data.v22.1" />
     <Reference Include="DevExpress.DataAccess.v22.1, Version=22.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
@@ -336,6 +340,18 @@
     </Compile>
     <Compile Include="UAC\BaoHiem\ucThamGiaBHXH.Designer.cs">
       <DependentUpon>ucThamGiaBHXH.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UAC\CongNhan\ctCongNhan\frmImportNhanSu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UAC\CongNhan\ctCongNhan\frmImportNhanSu.Designer.cs">
+      <DependentUpon>frmImportNhanSu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UAC\CongNhan\ctCongNhan\frmImportView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UAC\CongNhan\ctCongNhan\frmImportView.Designer.cs">
+      <DependentUpon>frmImportView.cs</DependentUpon>
     </Compile>
     <Compile Include="UAC\CongNhan\ctCongNhan\frmInBaoCaoThaiSan.cs">
       <SubType>Form</SubType>
@@ -726,6 +742,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UAC\BaoHiem\ucThamGiaBHXH.resx">
       <DependentUpon>ucThamGiaBHXH.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UAC\CongNhan\ctCongNhan\frmImportNhanSu.resx">
+      <DependentUpon>frmImportNhanSu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UAC\CongNhan\ctCongNhan\frmImportView.resx">
+      <DependentUpon>frmImportView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UAC\CongNhan\ctCongNhan\frmInBaoCaoThaiSan.resx">
       <DependentUpon>frmInBaoCaoThaiSan.cs</DependentUpon>

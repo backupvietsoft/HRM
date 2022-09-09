@@ -45,7 +45,7 @@ namespace Vs.HRM
             LoadCboXiNghiep();
             LoadCboTo();
 
-            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_CV, Commons.Modules.ObjSystems.DataChucVu(true), "ID_CV", "TEN_CV", "TEN_CV");
+            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_CV, Commons.Modules.ObjSystems.DataChucVu(true,-1), "ID_CV", "TEN_CV", "TEN_CV");
             Commons.OSystems.SetDateEditFormat(dTuNgay);
             Commons.OSystems.SetDateEditFormat(dDenNgay);
 

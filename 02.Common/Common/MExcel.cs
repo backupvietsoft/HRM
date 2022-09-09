@@ -1791,7 +1791,7 @@ public class MExcel
         try
         {
 
-            if (dt.AsEnumerable().Where(x => x[iCot].Equals(sDLKiem)).CopyToDataTable().Rows.Count > 1)
+            if (dt.AsEnumerable().Where(x => x.Field<string>(iCot).Trim().Equals(sDLKiem)).CopyToDataTable().Rows.Count > 1)
             {
                 sTenKTra = Commons.Modules.ObjLanguages.GetLanguage(sform, "msgTrungDLLuoi");
                 dr.SetColumnError(grvData.Columns[iCot].FieldName.ToString(), sTenKTra);
@@ -2175,7 +2175,7 @@ public class MExcel
         return true;
     }
 
-    public bool KiemDuLieuBool(GridView grvData, DataRow dr, int iCot, string sTenKTra, string GTMacDinh)
+    public bool KiemDuLieuBool(GridView grvData, DataRow dr, int iCot, string sTenKTra, bool GTMacDinh)
     {
         if (string.IsNullOrEmpty(sTenKTra))
         {

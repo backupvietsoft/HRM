@@ -40,7 +40,7 @@ namespace Vs.Recruit
         {
             //Vi Tri Tuyen Dung 
     
-            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_VTTD, Commons.Modules.ObjSystems.DataLoaiCV(true), "ID_LCV", "TEN_LCV", "TEN_LCV");
+            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_VTTD, Commons.Modules.ObjSystems.DataLoaiCV(true,-1), "ID_LCV", "TEN_LCV", "TEN_LCV");
             //Nguon tuyen dung
             Commons.Modules.ObjSystems.MLoadLookUpEdit(cboID_NTD , Commons.Modules.ObjSystems.DataNguonTD(true), "ID_NTD", "TEN_NTD", "TEN_NTD");
             // Trinh do//ID_TDVH,TEN_TDVH

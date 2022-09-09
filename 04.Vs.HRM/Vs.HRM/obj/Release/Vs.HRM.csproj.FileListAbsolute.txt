@@ -660,3 +660,7 @@ F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Release\Vs.HRM.dll
 F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Release\Vs.HRM.pdb
 F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Release\Vs.HRM.frmInBaoCaoThaiSan.resources
 F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Release\Vs.HRM.ucKeHoachThaiSan.resources
+F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Release\DevExpress.Docs.v22.1.dll
+F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Release\DevExpress.Docs.v22.1.xml
+F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Release\Vs.HRM.frmImportNhanSu.resources
+F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Release\Vs.HRM.frmImportView.resources

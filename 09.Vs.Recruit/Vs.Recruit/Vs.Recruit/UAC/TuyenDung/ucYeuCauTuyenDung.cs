@@ -85,7 +85,7 @@ namespace Vs.Recruit
                     cboViTri.ValueMember = "ID_LCV";
                     cboViTri.DisplayMember = "TEN_LCV";
                     //ID_LCV,TEN_LCV
-                    cboViTri.DataSource = Commons.Modules.ObjSystems.DataLoaiCV(false);
+                    cboViTri.DataSource = Commons.Modules.ObjSystems.DataLoaiCV(false,-1);
                     cboViTri.Columns.Clear();
                     cboViTri.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID_LCV"));
                     cboViTri.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("TEN_LCV"));
@@ -165,7 +165,7 @@ namespace Vs.Recruit
                     grvThayThe.Columns["ID_VTTD"].Visible = false;
 
                     Commons.Modules.ObjSystems.AddCombXtra("ID_CN", "TEN_CN", grvThayThe, Commons.Modules.ObjSystems.DataCongNhan(false), true, "ID_CN", this.Name, true);
-                    Commons.Modules.ObjSystems.AddCombXtra("ID_LCV", "TEN_LCV", grvThayThe, Commons.Modules.ObjSystems.DataLoaiCV(false), true, "ID_LCV", this.Name, true);
+                    Commons.Modules.ObjSystems.AddCombXtra("ID_LCV", "TEN_LCV", grvThayThe, Commons.Modules.ObjSystems.DataLoaiCV(false,-1), true, "ID_LCV", this.Name, true);
                 }
                 else
                 {

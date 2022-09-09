@@ -161,8 +161,6 @@ namespace Vs.Payroll
                 BorderAround(oSheet.get_Range("A3", lastColumn + (dt1.Rows.Count + 3).ToString()));
                 MExportExcel(dt1, oSheet, Ranges1);
 
-
-
                 excelApplication.Visible = true;
                 excelWorkbook.Save();
             }

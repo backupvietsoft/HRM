@@ -44,7 +44,7 @@ namespace Vs.Recruit
                 {
                     Commons.Modules.ObjSystems.MLoadXtraGrid(grdDinhBienLD, grvDinhBienLD, dt, false, false, true, true, true, this.Name);
 
-                    Commons.Modules.ObjSystems.AddCombXtra("ID_LCV", "TEN_LCV", grvDinhBienLD, Commons.Modules.ObjSystems.DataLoaiCV(false), true, "ID_LCV", this.Name);
+                    Commons.Modules.ObjSystems.AddCombXtra("ID_LCV", "TEN_LCV", grvDinhBienLD, Commons.Modules.ObjSystems.DataLoaiCV(false,-1), true, "ID_LCV", this.Name);
                     grvDinhBienLD.Columns["ID_LCV"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
                     Commons.Modules.ObjSystems.DeleteAddRow(grvDinhBienLD);
                 }

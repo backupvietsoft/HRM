@@ -56,7 +56,7 @@ namespace Vs.Recruit
                 Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_PX, Commons.Modules.ObjSystems.DataPhuongXa(Convert.ToInt32(-1), false), "ID_PX", "TEN_PX", "TEN_PX", true, true);
 
                 //ID_CVLookUpEdit
-                Commons.Modules.ObjSystems.MLoadLookUpEditN(cboID_TDVH, Commons.Modules.ObjSystems.DataChucVu(false), "ID_CV", "TEN_CV", "TEN_CV", "", true);
+                Commons.Modules.ObjSystems.MLoadLookUpEditN(cboID_TDVH, Commons.Modules.ObjSystems.DataChucVu(false,-1), "ID_CV", "TEN_CV", "TEN_CV", "", true);
 
                 //ID_TT_HNLookUpEdit 
                 Commons.Modules.ObjSystems.MLoadLookUpEditN(cboID_TT_HN, Commons.Modules.ObjSystems.DataTinHTrangHN(false), "ID_TT_HN", "TEN_TT_HN", "TEN_TT_HN", "");
@@ -82,8 +82,8 @@ namespace Vs.Recruit
 
                 //Vi tri tuyen dung
                 //ID_LCV,TEN_LCV
-                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_VTTD_1, Commons.Modules.ObjSystems.DataLoaiCV(false), "ID_LCV", "TEN_LCV", "TEN_LCV", true, true);
-                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_VTTD_2, Commons.Modules.ObjSystems.DataLoaiCV(false), "ID_LCV", "TEN_LCV", "TEN_LCV", true, true);
+                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_VTTD_1, Commons.Modules.ObjSystems.DataLoaiCV(false,-1), "ID_LCV", "TEN_LCV", "TEN_LCV", true, true);
+                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_VTTD_2, Commons.Modules.ObjSystems.DataLoaiCV(false,-1), "ID_LCV", "TEN_LCV", "TEN_LCV", true, true);
                 Commons.Modules.ObjSystems.MLoadLookUpEditN(cboDanhGiaTayNghe, Commons.Modules.ObjSystems.DataDanhGiaTayNghe(false), "ID_DGTN", "TEN_DGTN", "TEN_DGTN", "");
 
                 //nguoi quen

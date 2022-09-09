@@ -1065,9 +1065,9 @@ namespace Commons
 
                 // menu Delete
                 DevExpress.Utils.Menu.DXMenuItem menuDelete = new DevExpress.Utils.Menu.DXMenuItem("Delete Grid");
-                menuSave.BeginGroup = true;
-                menuSave.Tag = e.Menu;
-                menuSave.Click += delegate (object a, EventArgs b) { MyMenuItemDelete(null, null, grv, fName); };
+                menuDelete.BeginGroup = true;
+                menuDelete.Tag = e.Menu;
+                menuDelete.Click += delegate (object a, EventArgs b) { MyMenuItemDelete(null, null, grv, fName); };
                 headerMenu.Items.Add(menuDelete);
 
             }
@@ -4322,6 +4322,21 @@ namespace Commons
             dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetListLOAI_DIEU_CHINH", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll));
             return dt;
         }
+        public DataTable DataLoaiCV(bool coAll, int idXN)
+        {
+            //ID_LCV,TEN_LCV
+            DataTable dt = new DataTable();
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboLoaiCV", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll, idXN));
+            return dt;
+        }
+
+        public DataTable DataChucVu(bool coAll, int idLCV)
+        {
+            //ID_CV,TEN_CV
+            DataTable dt = new DataTable();
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboChucVu", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll, idLCV));
+            return dt;
+        }
 
         public DataTable DataDanToc(bool coAll)
         {
@@ -4427,13 +4442,13 @@ namespace Commons
             return dt;
         }
 
-        public DataTable DataChucVu(bool coAll)
-        {
-            //ID_CV,TEN_CV
-            DataTable dt = new DataTable();
-            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboChucVu", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll));
-            return dt;
-        }
+        //public DataTable DataChucVu(bool coAll)
+        //{
+        //    //ID_CV,TEN_CV
+        //    DataTable dt = new DataTable();
+        //    dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboChucVu", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll));
+        //    return dt;
+        //}
 
         public DataTable DataXepLoai(bool coAll)
         {
@@ -4677,13 +4692,13 @@ namespace Commons
         }
 
 
-        public DataTable DataLoaiCV(bool coAll)
-        {
-            //ID_LCV,TEN_LCV
-            DataTable dt = new DataTable();
-            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboLoaiCV", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll));
-            return dt;
-        }
+        //public DataTable DataLoaiCV(bool coAll)
+        //{
+        //    //ID_LCV,TEN_LCV
+        //    DataTable dt = new DataTable();
+        //    dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboLoaiCV", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll));
+        //    return dt;
+        //}
 
         public DataTable DataViTri(Int64 iID_YCTD, bool ColAll)
         {

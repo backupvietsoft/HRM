@@ -84,7 +84,7 @@ namespace Vs.Payroll
                 cboCV.NullText = "";
                 cboCV.ValueMember = "ID_CV";
                 cboCV.DisplayMember = "TEN_CV";
-                cboCV.DataSource = Commons.Modules.ObjSystems.DataChucVu(false);
+                cboCV.DataSource = Commons.Modules.ObjSystems.DataChucVu(false,-1);
                 cboCV.Columns.Clear();
 
                 cboCV.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("TEN_CV"));

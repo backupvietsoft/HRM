@@ -49,7 +49,7 @@ namespace Vs.Recruit
                 Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_NGUOI_CHUYEN, Commons.Modules.ObjSystems.DataCongNhan(false), "ID_CN", "TEN_CN", "TEN_CN", true, true);
 
                 DataTable dt = new DataTable();
-                string strSQL = "SELECT ID_LHDLD, CASE " + Commons.Modules.TypeLanguage + " WHEN 0 THEN TEN_LHDLD ELSE ISNULL(NULLIF(TEN_LHDLD_A,''),TEN_LHDLD) END TEN_LHDLD FROM dbo.LOAI_HDLD WHERE THU_VIEC = 1";
+                string strSQL = "SELECT ID_LHDLD, CASE " + Commons.Modules.TypeLanguage + " WHEN 0 THEN TEN_LHDLD ELSE ISNULL(NULLIF(TEN_LHDLD_A,''),TEN_LHDLD) END TEN_LHDLD FROM dbo.LOAI_HDLD WHERE ID_LHDLD IN (3,4,7)";
                 dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, strSQL));
                 Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_LHDLD, dt, "ID_LHDLD", "TEN_LHDLD", "TEN_LHDLD", true, true);
 
@@ -74,7 +74,7 @@ namespace Vs.Recruit
                     btnALL.Buttons[1].Properties.Visible = false;
                 }
             }
-            catch { }
+            catch (Exception ex) { }
         }
         private void btnALL_ButtonClick(object sender, DevExpress.XtraBars.Docking2010.ButtonEventArgs e)
         {

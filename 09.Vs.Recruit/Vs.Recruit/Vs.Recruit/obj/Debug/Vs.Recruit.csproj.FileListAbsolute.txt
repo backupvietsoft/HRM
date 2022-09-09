@@ -805,3 +805,15 @@ F:\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\ja\DevExpress.XtraVertic
 F:\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.Recruit.csproj.CopyComplete
 F:\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.Recruit.dll
 F:\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.Recruit.pdb
+F:\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\DevExpress.Docs.v22.1.dll
+F:\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\DevExpress.Spreadsheet.v22.1.Core.dll
+F:\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\DevExpress.Snap.v22.1.Core.dll
+F:\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\DevExpress.Docs.v22.1.xml
+F:\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\DevExpress.Spreadsheet.v22.1.Core.xml
+F:\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\DevExpress.Snap.v22.1.Core.xml
+F:\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\de\DevExpress.Spreadsheet.v22.1.Core.resources.dll
+F:\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\es\DevExpress.Spreadsheet.v22.1.Core.resources.dll
+F:\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\ja\DevExpress.Spreadsheet.v22.1.Core.resources.dll
+F:\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\de\DevExpress.Snap.v22.1.Core.resources.dll
+F:\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\es\DevExpress.Snap.v22.1.Core.resources.dll
+F:\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\ja\DevExpress.Snap.v22.1.Core.resources.dll

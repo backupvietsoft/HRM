@@ -211,7 +211,7 @@ namespace Vs.HRM
                     cboID_CV.ValueMember = "ID_CV";
                     cboID_CV.DisplayMember = "TEN_CV";
                     //ID_VTTD,TEN_VTTD
-                    cboID_CV.DataSource = Commons.Modules.ObjSystems.DataChucVu(false);
+                    cboID_CV.DataSource = Commons.Modules.ObjSystems.DataChucVu(false,-1);
                     cboID_CV.Columns.Clear();
                     cboID_CV.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID_CV"));
                     cboID_CV.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("TEN_CV"));
@@ -351,7 +351,7 @@ namespace Vs.HRM
             try
             {
                 LookUpEdit lookUp = sender as LookUpEdit;
-                lookUp.Properties.DataSource = Commons.Modules.ObjSystems.DataChucVu(false);
+                lookUp.Properties.DataSource = Commons.Modules.ObjSystems.DataChucVu(false,-1);
             }
             catch { }
         }

@@ -32,7 +32,6 @@ namespace Vs.HRM
         public ucBaoHiemYTe()
         {
             InitializeComponent();
-            Commons.Modules.ObjSystems.ThayDoiNN(this, new List<LayoutControlGroup> { Root }, windowsUIButton);
         }
         #region bảo hiểm y tế
         private void ucBaoHiemYTe_Load(object sender, EventArgs e)
@@ -45,6 +44,7 @@ namespace Vs.HRM
             LoadGridBaoHiemYTe();
             Commons.Modules.sPS = "";
             enableButon(true);
+            Commons.Modules.ObjSystems.ThayDoiNN(this, new List<LayoutControlGroup> { Root }, windowsUIButton);
         }
         private void cboDV_EditValueChanged(object sender, EventArgs e)
         {

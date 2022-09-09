@@ -263,6 +263,7 @@ namespace Vs.Recruit
             //xóa
             try
             {
+               
                 Int64 iID = Convert.ToInt64(grvUngVien.GetFocusedRowCellValue("ID_UV"));
                 SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "DELETE dbo.UNG_VIEN_BANG_CAP WHERE ID_UV = " + iID + "");
                 SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "DELETE dbo.UNG_VIEN_KINH_NGHIEM WHERE ID_UV = " + iID + "");
@@ -270,9 +271,9 @@ namespace Vs.Recruit
                 SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "DELETE dbo.UNG_VIEN WHERE ID_UV = " + iID + "");
                 return true;
             }
-            catch (Exception ex)
+            catch
             {
-                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgDelDangSuDung") + "\n" + ex.Message.ToString(), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgDelDangSuDung"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return false;
             }
         }
@@ -301,30 +302,55 @@ namespace Vs.Recruit
 
         private void grvUngVien_DoubleClick(object sender, EventArgs e)
         {
-            try
+            if (grvUngVien.RowCount == 0)
             {
-                lblUV.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-                lblUV.ForeColor = System.Drawing.Color.FromArgb(0, 0, 255);
-                lblUV.Text = grvUngVien.GetFocusedRowCellValue(grvUngVien.Columns["MS_UV"]).ToString() + " - " + grvUngVien.GetFocusedRowCellValue(grvUngVien.Columns["HO_TEN"]).ToString();
-            }
-            catch { }
-            ucCTQLUV dl = new ucCTQLUV(Convert.ToInt64(grvUngVien.GetFocusedRowCellValue(grvUngVien.Columns["ID_UV"])));
-            navigationFrame1.SelectedPage.Visible = false;
-            PageDetails.Controls.Add(dl);
-            dl.Dock = DockStyle.Fill;
-            dl.backWindowsUIButtonPanel.ButtonClick += BackWindowsUIButtonPanel_ButtonClick;
-            Thread thread = new Thread(delegate ()
-            {
-                if (this.InvokeRequired)
+                ucCTQLUV dl = new ucCTQLUV(-1);
+                navigationFrame1.SelectedPage.Visible = false;
+                PageDetails.Controls.Add(dl);
+                dl.Dock = DockStyle.Fill;
+                dl.backWindowsUIButtonPanel.ButtonClick += BackWindowsUIButtonPanel_ButtonClick;
+                Thread thread = new Thread(delegate ()
                 {
-                    this.Invoke(new MethodInvoker(delegate
+                    if (this.InvokeRequired)
                     {
-                        navigationFrame1.SelectedPage = PageDetails;
-                    }));
+                        this.Invoke(new MethodInvoker(delegate
+                        {
+                            navigationFrame1.SelectedPage = PageDetails;
+                        }));
+                    }
+                }, 100);
+                thread.Start();
+                accorMenuleft.Visible = false;
+            }
+            else
+            {
+                try
+                {
+                    lblUV.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                    lblUV.ForeColor = System.Drawing.Color.FromArgb(0, 0, 255);
+                    lblUV.Text = grvUngVien.GetFocusedRowCellValue(grvUngVien.Columns["MS_UV"]).ToString() + " - " + grvUngVien.GetFocusedRowCellValue(grvUngVien.Columns["HO_TEN"]).ToString();
                 }
-            }, 100);
-            thread.Start();
-            accorMenuleft.Visible = false;
+                catch
+                {
+                }
+                ucCTQLUV dl = new ucCTQLUV(Convert.ToInt64(grvUngVien.GetFocusedRowCellValue(grvUngVien.Columns["ID_UV"])));
+                navigationFrame1.SelectedPage.Visible = false;
+                PageDetails.Controls.Add(dl);
+                dl.Dock = DockStyle.Fill;
+                dl.backWindowsUIButtonPanel.ButtonClick += BackWindowsUIButtonPanel_ButtonClick;
+                Thread thread = new Thread(delegate ()
+                {
+                    if (this.InvokeRequired)
+                    {
+                        this.Invoke(new MethodInvoker(delegate
+                        {
+                            navigationFrame1.SelectedPage = PageDetails;
+                        }));
+                    }
+                }, 100);
+                thread.Start();
+                accorMenuleft.Visible = false;
+            }
         }
     }
 }

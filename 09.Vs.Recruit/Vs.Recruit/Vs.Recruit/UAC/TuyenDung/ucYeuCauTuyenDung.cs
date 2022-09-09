@@ -28,9 +28,9 @@ namespace Vs.Recruit
             datTuNgay.DateTime = DateTime.Now.AddDays(-DateTime.Now.Date.Day + 1);
             LoadCbo();
             LoadgrdPYC(-1);
-            cboTrangThai_EditValueChanged(null, null);
             BindingData(false);
             Commons.Modules.sLoad = "";
+            cboTrangThai_EditValueChanged(null, null);
             Commons.Modules.ObjSystems.DeleteAddRow(grvViTri);
             enableButon(true);
             Commons.Modules.ObjSystems.SetPhanQuyen(btnALL);
@@ -536,6 +536,10 @@ namespace Vs.Recruit
 
         private void grvViTri_CellValueChanging(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
         {
+            try
+            {
+
+           
             if (Commons.Modules.sLoad == "0Load") return;
             if (e.Column.FieldName == "ID_LOAI_TUYEN")
             {
@@ -551,6 +555,11 @@ namespace Vs.Recruit
                 Commons.Modules.sLoad = "0Load";
                 grvViTri.SetFocusedRowCellValue("ID_LOAI_TUYEN", e.Value);
                 Commons.Modules.sLoad = "";
+            }
+            }
+            catch 
+            {
+
             }
         }
 
@@ -588,7 +597,6 @@ namespace Vs.Recruit
                 }
             }
         }
-
         private void grvPYC_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
             if (Commons.Modules.sLoad == "0Load") return;
@@ -597,9 +605,10 @@ namespace Vs.Recruit
 
         private void grvViTri_ValidatingEditor(object sender, DevExpress.XtraEditors.Controls.BaseContainerValidateEditorEventArgs e)
         {
-            grvViTri.ClearColumnErrors();
+
             try
-            {
+            {            
+                grvViTri.ClearColumnErrors();
                 DataTable dt = new DataTable();
                 if (grvViTri == null) return;
                 if (grvViTri.FocusedColumn.FieldName == "ID_LCV")
@@ -737,11 +746,6 @@ namespace Vs.Recruit
             LoadgrdPYC(iID_YCTD);
             cboTrangThai_EditValueChanged(null, null);
         }
-        private void searchControl1_Validating(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            grvPYC_FocusedRowChanged(null, null);
-        }
-
         private void grvViTri_DoubleClick(object sender, EventArgs e)
         {
             DXMouseEventArgs ea = e as DXMouseEventArgs;
@@ -829,6 +833,7 @@ namespace Vs.Recruit
 
         private void cboBPYC_QueryPopUp(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            if (btnALL.Buttons[0].Properties.Visible == true) return;
             if (((DataTable)grdViTri.DataSource).Rows.Count > 0)
             {
                 cboBPYC.Properties.ReadOnly = true;
@@ -854,7 +859,7 @@ namespace Vs.Recruit
         private void cboTrangThai_EditValueChanged(object sender, EventArgs e)
         {
             Commons.Modules.ObjSystems.RowFilter(grdPYC, grvPYC.Columns["ID_TT"], (cboTrangThai.EditValue).ToString());
-
+            grvPYC_FocusedRowChanged(null, null);
         }
     }
 }

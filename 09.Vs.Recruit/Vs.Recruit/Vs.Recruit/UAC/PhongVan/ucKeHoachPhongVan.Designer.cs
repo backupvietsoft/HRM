@@ -244,7 +244,6 @@
             this.searchControl1.Size = new System.Drawing.Size(192, 24);
             this.searchControl1.StyleController = this.dataLayoutControl1;
             this.searchControl1.TabIndex = 55;
-            this.searchControl1.Validating += new System.ComponentModel.CancelEventHandler(this.searchControl1_Validating);
             // 
             // grdKHPV
             // 

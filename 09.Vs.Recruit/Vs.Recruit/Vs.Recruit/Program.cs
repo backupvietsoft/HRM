@@ -85,7 +85,7 @@ namespace Vs.Recruit
             try
             {
                 //Application.Run(new Form1());
-                Application.Run(new frmUngVien());
+                //Application.Run(new frmUngVien());
                 //frmViewReport frm = new frmViewReport();
                 //XtraReport1 fpt = new XtraReport1();
                 //frm.rpt = fpt;

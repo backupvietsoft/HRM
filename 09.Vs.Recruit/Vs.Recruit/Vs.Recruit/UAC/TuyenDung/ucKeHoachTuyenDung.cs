@@ -77,14 +77,12 @@ namespace Vs.Recruit
                 return null;
             }
         }
-
         private bool SaveData()
         {
             try
             {
                 Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, "sBTKHT" + Commons.Modules.iIDUser, Commons.Modules.ObjSystems.ConvertDatatable(grdTuan), "");
-                Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, "sBTNT" + Commons.Modules.iIDUser, Commons.Modules.ObjSystems.ConvertDatatable(grdNguonTuyen), "");
-                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spSaveKeHoachTuyenDung", datThang.DateTime,grvVTYC.GetFocusedRowCellValue("ID_YCTD"), grvVTYC.GetFocusedRowCellValue("ID_VTTD"), "sBTKHT" + Commons.Modules.iIDUser, "sBTNT" + Commons.Modules.iIDUser);
+                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spSaveKeHoachTuyenDung", datThang.DateTime, grvVTYC.GetFocusedRowCellValue("ID_YCTD"), grvVTYC.GetFocusedRowCellValue("ID_VTTD"), "sBTKHT" + Commons.Modules.iIDUser);
                 return true;
             }
             catch
@@ -101,8 +99,8 @@ namespace Vs.Recruit
             btnALL.Buttons[4].Properties.Visible = !visible;
             btnALL.Buttons[5].Properties.Visible = visible;
             grdVTYC.Enabled = visible;
-            grvNguonTuyen.OptionsBehavior.Editable = !visible;
             grvTuan.OptionsBehavior.Editable = !visible;
+            searchControl1.Properties.ReadOnly = !visible;
         }
 
         private void LoadgrdVTYC()
@@ -136,6 +134,8 @@ namespace Vs.Recruit
                     grvTuan.Columns["ID_VTTD"].Visible = false;
                     grvTuan.Columns["THANG"].Visible = false;
                     grvTuan.Columns["TUAN"].Visible = false;
+                    grvTuan.Columns["TNgay"].OptionsColumn.ReadOnly = true;
+                    grvTuan.Columns["DNgay"].OptionsColumn.ReadOnly = true;
                 }
                 else
                 {
@@ -145,18 +145,6 @@ namespace Vs.Recruit
                 grvVTYC_FocusedRowChanged(null, null);
 
 
-                if (grdNguonTuyen.DataSource == null)
-                {
-                    Commons.Modules.ObjSystems.MLoadXtraGrid(grdNguonTuyen, grvNguonTuyen, set.Tables[2], false, false, true, true, true, this.Name);
-                    grvNguonTuyen.OptionsView.NewItemRowPosition = NewItemRowPosition.None;
-                    grvNguonTuyen.Columns["ID_YCTD"].Visible = false;
-                    grvNguonTuyen.Columns["ID_VTTD"].Visible = false;
-                    Commons.Modules.ObjSystems.AddCombXtra("ID_NTD", "TEN_NTD", grvNguonTuyen, Commons.Modules.ObjSystems.DataNguonTD(false), false, "ID_NTD", this.Name, true);
-                }
-                else
-                {
-                    grdNguonTuyen.DataSource = set.Tables[2];
-                }
             }
             catch
             {
@@ -167,11 +155,8 @@ namespace Vs.Recruit
         {
             try
             {
-
                 if (Commons.Modules.sLoad == "0Load") return;
                 Commons.Modules.ObjSystems.RowFilter(grdTuan, grvTuan.Columns["ID_YCTD"], grvTuan.Columns["ID_VTTD"], grvVTYC.GetFocusedRowCellValue("ID_YCTD").ToString(), grvVTYC.GetFocusedRowCellValue("ID_VTTD").ToString());
-
-                Commons.Modules.ObjSystems.RowFilter(grdNguonTuyen, grvNguonTuyen.Columns["ID_YCTD"], grvNguonTuyen.Columns["ID_VTTD"], grvVTYC.GetFocusedRowCellValue("ID_YCTD").ToString(), grvVTYC.GetFocusedRowCellValue("ID_VTTD").ToString());
             }
             catch
             {
@@ -190,13 +175,12 @@ namespace Vs.Recruit
             {
                 case "sua":
                     {
-                        if (Convert.ToInt32(grvVTYC.GetFocusedRowCellValue("ID_TT")) != 1)
+                        if (Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr,CommandType.Text, "SELECT COUNT(*) FROM dbo.KHPV_VTTD WHERE ID_YCTD =  "+ grvVTYC.GetFocusedRowCellValue("ID_YCTD") + " AND ID_VTTD = " + grvVTYC.GetFocusedRowCellValue("ID_VTTD") + " ")) > 0)
                         {
                             XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDuLieuDaPhatSinhKhongSua"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             return;
                         }
                         Commons.Modules.ObjSystems.AddnewRow(grvTuan, false);
-                        Commons.Modules.ObjSystems.AddnewRow(grvNguonTuyen, true);
                         enableButon(false);
                         break;
                     }
@@ -214,22 +198,20 @@ namespace Vs.Recruit
 
                 case "luu":
                     {
-                        if(Convert.ToInt32(grvVTYC.GetFocusedRowCellValue("ID_TT")) != 1 )
+                        if (Convert.ToInt32(grvVTYC.GetFocusedRowCellValue("ID_TT")) != 1)
                         {
                             XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDuLieuDaPhatSinhKhongSua"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             return;
-                        }    
+                        }
 
                         Validate();
                         if (grvTuan.HasColumnErrors) return;
-                        if (grvNguonTuyen.HasColumnErrors) return;
                         int n = grvVTYC.FocusedRowHandle;
                         if (!SaveData()) return;
                         LoadgrdVTYC();
                         grvVTYC.FocusedRowHandle = n;
                         grvVTYC.SelectRow(n);
                         Commons.Modules.ObjSystems.DeleteAddRow(grvTuan);
-                        Commons.Modules.ObjSystems.DeleteAddRow(grvNguonTuyen);
                         enableButon(true);
                         break;
                     }
@@ -238,7 +220,6 @@ namespace Vs.Recruit
                         LoadgrdVTYC();
                         enableButon(true);
                         Commons.Modules.ObjSystems.DeleteAddRow(grvTuan);
-                        Commons.Modules.ObjSystems.DeleteAddRow(grvNguonTuyen);
                         break;
                     }
                 case "thoat":
@@ -251,70 +232,6 @@ namespace Vs.Recruit
             }
         }
 
-        private void grvNguonTuyen_InitNewRow(object sender, DevExpress.XtraGrid.Views.Grid.InitNewRowEventArgs e)
-        {
-            try
-            {
-                if (grvVTYC.RowCount == 0)
-                {
-                    grvNguonTuyen.DeleteSelectedRows();
-                    return;
-                }
-                grvNguonTuyen.SetFocusedRowCellValue("ID_YCTD", grvVTYC.GetFocusedRowCellValue("ID_YCTD"));
-                grvNguonTuyen.SetFocusedRowCellValue("ID_VTTD", grvVTYC.GetFocusedRowCellValue("ID_VTTD"));
-            }
-            catch
-            {
-            }
-        }
-
-        private void searchControl1_Validating(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            grvVTYC_FocusedRowChanged(null, null);
-        }
-
-        private void grvNguonTuyen_ValidatingEditor(object sender, DevExpress.XtraEditors.Controls.BaseContainerValidateEditorEventArgs e)
-        {
-            grvNguonTuyen.ClearColumnErrors();
-            try
-            {
-                DataTable dt = new DataTable();
-                if (grvNguonTuyen == null) return;
-                if (grvNguonTuyen.FocusedColumn.FieldName == "ID_NTD")
-                {//kiểm tra máy không được để trống
-                    if (string.IsNullOrEmpty(e.Value.ToString()))
-                    {
-                        e.Valid = false;
-                        e.ErrorText = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "erMayKhongTrong");
-                        grvNguonTuyen.SetColumnError(grvNguonTuyen.Columns["ID_NTD"], e.ErrorText);
-                        return;
-                    }
-                    else
-                    {
-                        grvNguonTuyen.SetFocusedRowCellValue("ID_NTD", e.Value);
-                        dt = new DataTable();
-                        dt = Commons.Modules.ObjSystems.ConvertDatatable(grdNguonTuyen);
-                        if (dt.AsEnumerable().Count(x => x.Field<Int64>("ID_NTD").Equals(e.Value)) > 1)
-                        {
-                            e.Valid = false;
-                            e.ErrorText = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "erTrungDuLieu");
-                            grvNguonTuyen.SetColumnError(grvNguonTuyen.Columns["ID_NTD"], e.ErrorText);
-                            return;
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            { }
-        }
-
-        private void grdNguonTuyen_ProcessGridKey(object sender, System.Windows.Forms.KeyEventArgs e)
-        {
-            if (btnALL.Buttons[0].Properties.Visible == false && e.KeyData == System.Windows.Forms.Keys.Delete)
-            {
-                grvNguonTuyen.DeleteSelectedRows();
-            }
-        }
         private void XoaKeHoach()
         {
             if (Convert.ToInt32(grvVTYC.GetFocusedRowCellValue("ID_TT")) != 1)
@@ -343,12 +260,6 @@ namespace Vs.Recruit
                 XoaKeHoach();
             }
         }
-
-        private void grvNguonTuyen_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
-        {
-
-        }
-
         private void grvTuan_ValidatingEditor(object sender, DevExpress.XtraEditors.Controls.BaseContainerValidateEditorEventArgs e)
         {
             grvTuan.ClearColumnErrors();
@@ -364,8 +275,8 @@ namespace Vs.Recruit
                     {
                         int tong = dt.AsEnumerable().Where(x => x.Field<int>("TUAN") != Convert.ToInt32(grvTuan.GetFocusedRowCellValue("TUAN"))).Sum(x => (int)x["SL_KH"]);
 
-                        int n = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT ISNULL(SUM(SL_KH),0) FROM dbo.KHTD_TUAN WHERE ID_YCTD = " + grvVTYC.GetFocusedRowCellValue("ID_YCTD") + " AND ID_VTTD = " + grvVTYC.GetFocusedRowCellValue("ID_VTTD") + " AND RIGHT(CONVERT(NVARCHAR(12),THANG,103),7) != '" + datThang.Text +"'"));
-                        if ((Convert.ToInt32(e.Value) + tong + n) > Convert.ToInt32(grvVTYC.GetFocusedRowCellValue("SL_TUYEN")) ) 
+                        int n = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT ISNULL(SUM(SL_KH),0) FROM dbo.KHTD_TUAN WHERE ID_YCTD = " + grvVTYC.GetFocusedRowCellValue("ID_YCTD") + " AND ID_VTTD = " + grvVTYC.GetFocusedRowCellValue("ID_VTTD") + " AND RIGHT(CONVERT(NVARCHAR(12),THANG,103),7) != '" + datThang.Text + "'"));
+                        if ((Convert.ToInt32(e.Value) + tong + n) > Convert.ToInt32(grvVTYC.GetFocusedRowCellValue("SL_TUYEN")))
                         {
                             e.Valid = false;
                             e.ErrorText = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "erKhongLuongVuotQuaSLTruyen");

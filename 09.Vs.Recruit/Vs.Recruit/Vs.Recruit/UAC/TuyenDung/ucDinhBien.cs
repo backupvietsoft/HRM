@@ -376,7 +376,7 @@ namespace Vs.Recruit
         private void enableButon(bool visible)
         {
             windowsUIButton.Buttons[0].Properties.Visible = visible;
-            windowsUIButton.Buttons[1].Properties.Visible = visible;
+            windowsUIButton.Buttons[1].Properties.Visible = false;
             windowsUIButton.Buttons[2].Properties.Visible = visible;
             windowsUIButton.Buttons[3].Properties.Visible = visible;
             windowsUIButton.Buttons[4].Properties.Visible = visible;

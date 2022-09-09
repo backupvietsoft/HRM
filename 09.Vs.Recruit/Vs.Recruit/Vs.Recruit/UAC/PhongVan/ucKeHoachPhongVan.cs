@@ -280,7 +280,7 @@ namespace Vs.Recruit
                             string sSql = "DELETE A FROM sBTChonUV" + Commons.Modules.iIDUser + " A WHERE A.ID_YCTD = " + grvViTri.GetFocusedRowCellValue("ID_YCTD") + " AND A.ID_VTTD = " + grvViTri.GetFocusedRowCellValue("ID_VTTD") + " AND NOT EXISTS(SELECT * FROM dbo.sBTUV" + Commons.Modules.iIDUser + " B WHERE B.CHON = 1 AND B.ID_UV = A.ID_UV)";
                             SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, sSql);
 
-                            sSql = "INSERT INTO dbo.sBTChonUV" + Commons.Modules.iIDUser + "(ID_KHPV,ID_YCTD,ID_VTTD,ID_UV,HO_TEN,GHI_CHU,NGUOI_YCTD_CHON)SELECT " + iID_KHPV + "," + grvViTri.GetFocusedRowCellValue("ID_YCTD") + "," + grvViTri.GetFocusedRowCellValue("ID_VTTD") + ",ID_UV,HO_TEN,'',1 FROM dbo.sBTUV" + Commons.Modules.iIDUser + " A WHERE A.CHON = 1 AND NOT EXISTS (SELECT * FROM dbo.sBTChonUV" + Commons.Modules.iIDUser + " B WHERE B.ID_KHPV = " + iID_KHPV + " AND B.ID_YCTD = " + grvViTri.GetFocusedRowCellValue("ID_YCTD") + " AND B.ID_VTTD = " + grvViTri.GetFocusedRowCellValue("ID_VTTD") + " AND B.ID_UV = A.ID_UV)";
+                             sSql = "INSERT INTO dbo.sBTChonUV" + Commons.Modules.iIDUser + "(ID_KHPV,ID_YCTD,ID_VTTD,ID_UV,MS_UV,HO_TEN,GHI_CHU,NGUOI_YCTD_CHON)SELECT " + iID_KHPV + "," + grvViTri.GetFocusedRowCellValue("ID_YCTD") + "," + grvViTri.GetFocusedRowCellValue("ID_VTTD") + ",ID_UV,MS_UV,HO_TEN,'',1 FROM dbo.sBTUV" + Commons.Modules.iIDUser + " A WHERE A.CHON = 1 AND NOT EXISTS (SELECT * FROM dbo.sBTChonUV" + Commons.Modules.iIDUser + " B WHERE B.ID_KHPV = " + iID_KHPV + " AND B.ID_YCTD = " + grvViTri.GetFocusedRowCellValue("ID_YCTD") + " AND B.ID_VTTD = " + grvViTri.GetFocusedRowCellValue("ID_VTTD") + " AND B.ID_UV = A.ID_UV)";
                             SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, sSql);
                             LoadgrdUVPV(true);
                             grvViTri_FocusedRowChanged(null, null);
@@ -558,10 +558,6 @@ namespace Vs.Recruit
             LoadgrdKHPV(iID_KHPV);
             cboTTLoc_EditValueChanged(null,null);
         }
-        private void searchControl1_Validating(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            grvKHPV_FocusedRowChanged(null, null);
-        }
 
         private void grvViTri_InvalidValueException(object sender, DevExpress.XtraEditors.Controls.InvalidValueExceptionEventArgs e)
         {
@@ -690,6 +686,7 @@ namespace Vs.Recruit
 
         private void cboBPYC_QueryPopUp(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            if (btnALL.Buttons[0].Properties.Visible == true) return;
             if (((DataTable)grdViTri.DataSource).Rows.Count > 0)
             {
                 cboBPYC.Properties.ReadOnly = true;

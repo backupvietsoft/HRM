@@ -543,6 +543,7 @@ namespace Commons
             {
                 if (CoNull)
                     dtTmp.Rows.Add(-99, "");
+                dtTmp.DefaultView.Sort = ""+Ma +" ASC ";
                 cbo.Properties.DataSource = null;
                 //cbo.Properties.DisplayMember = "";
                 //cbo.Properties.ValueMember = "";
@@ -1064,9 +1065,9 @@ namespace Commons
 
                 // menu Delete
                 DevExpress.Utils.Menu.DXMenuItem menuDelete = new DevExpress.Utils.Menu.DXMenuItem("Delete Grid");
-                menuSave.BeginGroup = true;
-                menuSave.Tag = e.Menu;
-                menuSave.Click += delegate (object a, EventArgs b) { MyMenuItemDelete(null, null, grv, fName); };
+                menuDelete.BeginGroup = true;
+                menuDelete.Tag = e.Menu;
+                menuDelete.Click += delegate (object a, EventArgs b) { MyMenuItemDelete(null, null, grv, fName); };
                 headerMenu.Items.Add(menuDelete);
 
             }
@@ -1099,6 +1100,13 @@ namespace Commons
                 menuSave.Tag = e.Menu;
                 menuSave.Click += delegate (object a, EventArgs b) { MyMenuItemSave(null, null, grv, Commons.Modules.sPS.Replace("spGetList", "frm")); };
                 headerMenu.Items.Add(menuSave);
+
+                // menu Delete
+                DevExpress.Utils.Menu.DXMenuItem menuDelete = new DevExpress.Utils.Menu.DXMenuItem("Delete Grid");
+                menuDelete.BeginGroup = true;
+                menuDelete.Tag = e.Menu;
+                menuSave.Click += delegate (object a, EventArgs b) { MyMenuItemDelete(null, null, grv, Commons.Modules.sPS.Replace("spGetList", "frm")); };
+                headerMenu.Items.Add(menuDelete);
             }
             catch
             {
@@ -1222,12 +1230,10 @@ namespace Commons
                     string text = reader.ReadToEnd();
                     SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "INSERT INTO dbo.DINH_DANG_LUOI(TEN_FORM,TEN_GRID,DINH_DANG,MAC_DINH)VALUES(N'" + fName + "',N'" + grv.Name + "',N'" + text + "',N'" + text + "')");
                 }
-
                 if (Commons.Modules.bSetUp == true)
                 {
                     grv.PopupMenuShowing += delegate (object a, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs b) { Grv_PopupMenuShowing(grv, b, grv, fName); };
                 }
-
                 grv.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
                 grv.Appearance.HeaderPanel.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
                 if (MloadNNgu)
@@ -4680,9 +4686,17 @@ namespace Commons
         {
             //ID_LCV,TEN_LCV
             DataTable dt = new DataTable();
-            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboLoaiCV", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll));
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboLoaiCV", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll,-1));
             return dt;
         }
+        public DataTable DataMucDoTieng(bool coAll)
+        {
+            //ID_MD,TEN_MD
+            DataTable dt = new DataTable();
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboMucDoTieng", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll));
+            return dt;
+        }
+
 
         public DataTable DataViTri(Int64 iID_YCTD, bool ColAll)
         {

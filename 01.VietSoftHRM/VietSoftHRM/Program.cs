@@ -3,7 +3,6 @@ using System.Windows.Forms;
 using System.Threading;
 using System.Data;
 using Microsoft.ApplicationBlocks.Data;
-
 namespace VietSoftHRM
 {
     static class Program
@@ -29,7 +28,6 @@ namespace VietSoftHRM
                 Commons.Modules.iIDUser = Convert.ToInt32(args[4]);
                 Commons.Modules.UserName = args[5].ToString();
                 //System.Diagnostics.Process.Start("VietSoftHRM.exe", Com.Mod.Server + " " + Com.Mod.UserDB + " " + Com.Mod.Password + " " + Com.Mod.Database + " " + Com.Mod.UserID.ToString() + " " + Com.Mod.UName.ToString());
-
                 //insert vao user
                 //MessageBox.Show(Commons.Modules.UserName + " : " + Commons.Modules.iIDUser.ToString() + " : " + Commons.IConnections.Database + "\n" + Commons.IConnections.CNStr);
                 

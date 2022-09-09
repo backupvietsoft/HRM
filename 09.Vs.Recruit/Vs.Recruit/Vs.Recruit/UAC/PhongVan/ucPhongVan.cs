@@ -331,12 +331,11 @@ namespace Vs.Recruit
             try
             {
                 Commons.Modules.ObjSystems.MLoadLookUpEdit(cboTTLoc, Commons.Modules.ObjSystems.DataTinhTrangPV(false), "ID_TT_KHPV", "TEN_TT_KHPV", "TEN_TT_KHPV");
-
                 Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboNguoiPV1, Commons.Modules.ObjSystems.DataCongNhan(false), "ID_CN", "TEN_CN", "TEN_CN", true, true);
                 Commons.Modules.ObjSystems.MLoadLookUpEdit(cboTinhTrang, Commons.Modules.ObjSystems.DataTinhTrangPV(false), "ID_TT_KHPV", "TEN_TT_KHPV", "TEN_TT_KHPV");
                 Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboNguoiPV2, Commons.Modules.ObjSystems.DataCongNhan(false), "ID_CN", "TEN_CN", "TEN_CN", true, true);
                 //ID_KHPV,SO_KHPV
-                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboSoKeHoach, Commons.Modules.ObjSystems.DataKeHoachPV(false, -1), "ID_KHPV", "SO_KHPV", "SO_KHPV", true, true);
+                //Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboSoKeHoach, Commons.Modules.ObjSystems.DataKeHoachPV(false, -1), "ID_KHPV", "SO_KHPV", "SO_KHPV", true, true);
             }
             catch
             {
@@ -344,6 +343,7 @@ namespace Vs.Recruit
         }
         private void BindingData(bool them)
         {
+            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboSoKeHoach, Commons.Modules.ObjSystems.DataKeHoachPV(false, -1), "ID_KHPV", "SO_KHPV", "SO_KHPV", true, true);
             Commons.Modules.sLoad = "0Load";
             if (them == true)
             {
@@ -456,18 +456,18 @@ namespace Vs.Recruit
 
         private void grdViTri_ProcessGridKey(object sender, KeyEventArgs e)
         {
-            if (btnALL.Buttons[0].Properties.Visible == false && e.KeyData == Keys.Delete)
-            {
-                grvViTri.DeleteSelectedRows();
-            }
+            //if (btnALL.Buttons[0].Properties.Visible == false && e.KeyData == Keys.Delete)
+            //{
+            //    grvViTri.DeleteSelectedRows();
+            //}
         }
 
         private void grdThayThe_ProcessGridKey(object sender, KeyEventArgs e)
         {
-            if (btnALL.Buttons[0].Properties.Visible == false && e.KeyData == Keys.Delete)
-            {
-                grvUVPV.DeleteSelectedRows();
-            }
+            //if (btnALL.Buttons[0].Properties.Visible == false && e.KeyData == Keys.Delete)
+            //{
+            //    grvUVPV.DeleteSelectedRows();
+            //}
         }
 
         private void datTuNgay_EditValueChanged(object sender, EventArgs e)
@@ -475,10 +475,6 @@ namespace Vs.Recruit
             if (Commons.Modules.sLoad == "0Load") return;
             LoadgrdPV(iID_PV);
             cboTTLoc_EditValueChanged(null, null);
-        }
-        private void searchControl1_Validating(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            grvKHPV_FocusedRowChanged(null, null);
         }
 
         private void grvViTri_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
@@ -554,16 +550,8 @@ namespace Vs.Recruit
 
         private void cboSoKeHoach_QueryPopUp(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            //if (((DataTable)grdViTri.DataSource).Rows.Count > 0)
-            //{
-            //    cboSoKeHoach.Properties.ReadOnly = true;
-            //}
-            //else
-            //{
-            //    cboSoKeHoach.Properties.ReadOnly = false;
-            //load lại kế hoạch chỉ lấy kế hoạch
+            if (btnALL.Buttons[0].Properties.Visible == true) return;
             Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboSoKeHoach, Commons.Modules.ObjSystems.DataKeHoachPV(false, 1), "ID_KHPV", "SO_KHPV", "SO_KHPV", true, true);
-            //}
         }
 
         private void cboTinhTrang_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)

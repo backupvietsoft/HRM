@@ -648,6 +648,10 @@ namespace VietSoftHRM
         private void toolDuLieuChoTD_Click(object sender, EventArgs e)
         {
             frmDLTuyenDung frm = new frmDLTuyenDung();
+            double iW, iH;
+            iW = Screen.PrimaryScreen.WorkingArea.Width / 1.5;
+            iH = Screen.PrimaryScreen.WorkingArea.Height / 1.5;
+            frm.Size = new Size((int)iW, (int)iH);
             frm.iiD_XN = Convert.ToInt64(grvDanhMuc.GetFocusedRowCellValue("ID_XN"));
             frm.ShowDialog();
 

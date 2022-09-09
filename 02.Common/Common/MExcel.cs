@@ -1868,8 +1868,6 @@ public class MExcel
         }
         return true;
     }
-
-
     public bool KiemDuLieuNgay(GridView grvData, DataRow dr, int iCot, Boolean bKiemNull, string sform)
     {
         string sDLKiem;
@@ -1920,7 +1918,6 @@ public class MExcel
         }
         return true;
     }
-
     public bool KiemDuLieuNgay(GridView grvData, DataRow dr, int iCot, string sTenKTra, Boolean bKiemNull, string GTSoSanh, int iKieuSS)
     {
         // iKieuSS = 1 la so sanh = 

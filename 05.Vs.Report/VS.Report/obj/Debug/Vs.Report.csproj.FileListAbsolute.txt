@@ -2821,7 +2821,6 @@ H:\Lamviec\Lamviec\HRM\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptTheN
 H:\Lamviec\Lamviec\HRM\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptThongBaoKetThucHDLD_NB.resources
 H:\Lamviec\Lamviec\HRM\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptThongKeTaiNan.resources
 H:\Lamviec\Lamviec\HRM\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\VS.Report.NhanSu.rptThongTinBaoMat.resources
-H:\Lamviec\Lamviec\HRM\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptThuMoi.resources
 H:\Lamviec\Lamviec\HRM\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptToKhaiBaoHiemXaHoi.resources
 H:\Lamviec\Lamviec\HRM\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptToKhaiBHXH.resources
 H:\Lamviec\Lamviec\HRM\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptToKhaiBHXH_SB.resources
@@ -3540,3 +3539,7 @@ F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.csproj.CoreCompileInputs.ca
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.csproj.CopyComplete
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\VS.Report.dll
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\VS.Report.pdb
+H:\Lamviec\Lamviec\HRM\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptBCDangKyThaiSan_NB.resources
+H:\Lamviec\Lamviec\HRM\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptBCDSLaoDong_NB.resources
+H:\Lamviec\Lamviec\HRM\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptBCLaoDongTo_NB.resources
+H:\Lamviec\Lamviec\HRM\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptDSTheoDoiCheDoKhamThai_NB.resources

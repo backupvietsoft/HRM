@@ -400,7 +400,6 @@ H:\Lamviec\Lamviec\HRM\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\Newt
 H:\Lamviec\Lamviec\HRM\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\DevExpress.DataVisualization.v22.1.Core.dll
 H:\Lamviec\Lamviec\HRM\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\NPOI.OpenXmlFormats.dll
 H:\Lamviec\Lamviec\HRM\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\NPOI.OpenXml4Net.dll
-H:\Lamviec\Lamviec\HRM\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\Microsoft.mshtml.dll
 H:\Lamviec\Lamviec\HRM\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\Commons.pdb
 H:\Lamviec\Lamviec\HRM\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\Commons.dll.config
 H:\Lamviec\Lamviec\HRM\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\Vs.HRM.pdb
@@ -1047,3 +1046,16 @@ F:\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.Recruit.csprojAssembl
 F:\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.Recruit.csproj.CopyComplete
 F:\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.Recruit.dll
 F:\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.Recruit.pdb
+H:\Lamviec\Lamviec\HRM\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\DevExpress.Docs.v22.1.dll
+H:\Lamviec\Lamviec\HRM\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\DevExpress.Spreadsheet.v22.1.Core.dll
+H:\Lamviec\Lamviec\HRM\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\DevExpress.Snap.v22.1.Core.dll
+H:\Lamviec\Lamviec\HRM\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\DevExpress.Docs.v22.1.xml
+H:\Lamviec\Lamviec\HRM\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\DevExpress.Spreadsheet.v22.1.Core.xml
+H:\Lamviec\Lamviec\HRM\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\DevExpress.Snap.v22.1.Core.xml
+H:\Lamviec\Lamviec\HRM\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\de\DevExpress.Spreadsheet.v22.1.Core.resources.dll
+H:\Lamviec\Lamviec\HRM\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\es\DevExpress.Spreadsheet.v22.1.Core.resources.dll
+H:\Lamviec\Lamviec\HRM\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\ja\DevExpress.Spreadsheet.v22.1.Core.resources.dll
+H:\Lamviec\Lamviec\HRM\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\de\DevExpress.Snap.v22.1.Core.resources.dll
+H:\Lamviec\Lamviec\HRM\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\es\DevExpress.Snap.v22.1.Core.resources.dll
+H:\Lamviec\Lamviec\HRM\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\ja\DevExpress.Snap.v22.1.Core.resources.dll
+H:\Lamviec\Lamviec\HRM\01.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.Recruit.rptThuMoi.resources

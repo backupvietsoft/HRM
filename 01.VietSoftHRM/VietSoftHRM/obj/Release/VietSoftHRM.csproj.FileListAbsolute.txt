@@ -557,3 +557,4 @@ F:\01.HRM\01.VietSoftHRM\VietSoftHRM\obj\Release\VietSoftHRM.csproj.CoreCompileI
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\obj\Release\VietSoftHRM.csproj.CopyComplete
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\obj\Release\VietSoftHRM.exe
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\obj\Release\VietSoftHRM.pdb
+H:\Lamviec\Lamviec\HRM\01.HRM\01.VietSoftHRM\VietSoftHRM\obj\Release\VietSoftHRM.frmDLTuyenDung.resources

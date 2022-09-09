@@ -3523,3 +3523,9 @@ F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\ja\DevExpress.XtraNavBar.v22.1.resources.dl
 F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.csproj.CopyComplete
 F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.dll
 F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.pdb
+H:\Lamviec\Lamviec\HRM\01.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\DevExpress.Docs.v22.1.dll
+H:\Lamviec\Lamviec\HRM\01.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\DevExpress.Docs.v22.1.xml
+H:\Lamviec\Lamviec\HRM\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.frmImportNhanSu.resources
+H:\Lamviec\Lamviec\HRM\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.frmImportView.resources
+H:\Lamviec\Lamviec\HRM\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.frmInBaoCaoThaiSan.resources
+H:\Lamviec\Lamviec\HRM\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.ucKeHoachThaiSan.resources

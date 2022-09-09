@@ -3187,3 +3187,9 @@ D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.csproj.CoreCompileInpu
 D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.csproj.CopyComplete
 D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.dll
 D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.pdb
+D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\DevExpress.Docs.v22.1.dll
+D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\DevExpress.Docs.v22.1.xml
+D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.frmImportNhanSu.resources
+D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.frmImportView.resources
+D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.frmInBaoCaoThaiSan.resources
+D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.ucKeHoachThaiSan.resources

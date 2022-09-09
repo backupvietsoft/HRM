@@ -1054,7 +1054,7 @@ namespace Vs.Recruit
             // 
             this.tab.Location = new System.Drawing.Point(0, 445);
             this.tab.Name = "tab";
-            this.tab.SelectedTabPage = this.tabKNLV;
+            this.tab.SelectedTabPage = this.tabBangCap;
             this.tab.ShowTabHeader = DevExpress.Utils.DefaultBoolean.True;
             this.tab.Size = new System.Drawing.Size(1812, 229);
             this.tab.TabPages.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
@@ -1076,11 +1076,8 @@ namespace Vs.Recruit
             // 
             this.layoutControlItem19.Control = this.grdKNLV;
             this.layoutControlItem19.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlItem19.MaxSize = new System.Drawing.Size(0, 164);
-            this.layoutControlItem19.MinSize = new System.Drawing.Size(104, 164);
             this.layoutControlItem19.Name = "layoutControlItem19";
             this.layoutControlItem19.Size = new System.Drawing.Size(1784, 164);
-            this.layoutControlItem19.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlItem19.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem19.TextVisible = false;
             // 
@@ -1101,11 +1098,8 @@ namespace Vs.Recruit
             // 
             this.layoutControlItem18.Control = this.grdBangCap;
             this.layoutControlItem18.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlItem18.MaxSize = new System.Drawing.Size(0, 164);
-            this.layoutControlItem18.MinSize = new System.Drawing.Size(104, 164);
             this.layoutControlItem18.Name = "layoutControlItem18";
             this.layoutControlItem18.Size = new System.Drawing.Size(1784, 164);
-            this.layoutControlItem18.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlItem18.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem18.TextVisible = false;
             // 

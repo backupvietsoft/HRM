@@ -3162,7 +3162,6 @@ D:\01.SourceCode\02.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptTheNhanVie
 D:\01.SourceCode\02.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptThongBaoKetThucHDLD_NB.resources
 D:\01.SourceCode\02.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptThongKeTaiNan.resources
 D:\01.SourceCode\02.HRM\05.Vs.Report\Vs.Report\obj\Debug\VS.Report.NhanSu.rptThongTinBaoMat.resources
-D:\01.SourceCode\02.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptThuMoi.resources
 D:\01.SourceCode\02.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptToKhaiBaoHiemXaHoi.resources
 D:\01.SourceCode\02.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptToKhaiBHXH.resources
 D:\01.SourceCode\02.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptToKhaiBHXH_SB.resources
@@ -3193,3 +3192,7 @@ D:\01.SourceCode\02.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.csproj.CoreCo
 D:\01.SourceCode\02.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.csproj.CopyComplete
 D:\01.SourceCode\02.HRM\05.Vs.Report\Vs.Report\obj\Debug\VS.Report.dll
 D:\01.SourceCode\02.HRM\05.Vs.Report\Vs.Report\obj\Debug\VS.Report.pdb
+D:\01.SourceCode\02.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptBCDangKyThaiSan_NB.resources
+D:\01.SourceCode\02.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptBCDSLaoDong_NB.resources
+D:\01.SourceCode\02.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptBCLaoDongTo_NB.resources
+D:\01.SourceCode\02.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptDSTheoDoiCheDoKhamThai_NB.resources

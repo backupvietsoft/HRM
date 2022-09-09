@@ -638,7 +638,6 @@ D:\01.SourceCode\02.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\DevExpress
 D:\01.SourceCode\02.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\DevExpress.DataVisualization.v22.1.Core.dll
 D:\01.SourceCode\02.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\NPOI.OpenXmlFormats.dll
 D:\01.SourceCode\02.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\NPOI.OpenXml4Net.dll
-D:\01.SourceCode\02.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\Microsoft.mshtml.dll
 D:\01.SourceCode\02.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\DevExpress.Printing.v20.1.Core.dll
 D:\01.SourceCode\02.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\DevExpress.Data.Desktop.v20.1.dll
 D:\01.SourceCode\02.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\DevExpress.Sparkline.v20.1.Core.dll
@@ -925,3 +924,16 @@ D:\01.SourceCode\02.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.Recruit
 D:\01.SourceCode\02.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.Recruit.csproj.CopyComplete
 D:\01.SourceCode\02.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.Recruit.dll
 D:\01.SourceCode\02.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.Recruit.pdb
+D:\01.SourceCode\02.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\DevExpress.Docs.v22.1.dll
+D:\01.SourceCode\02.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\DevExpress.Spreadsheet.v22.1.Core.dll
+D:\01.SourceCode\02.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\DevExpress.Snap.v22.1.Core.dll
+D:\01.SourceCode\02.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\DevExpress.Docs.v22.1.xml
+D:\01.SourceCode\02.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\DevExpress.Spreadsheet.v22.1.Core.xml
+D:\01.SourceCode\02.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\DevExpress.Snap.v22.1.Core.xml
+D:\01.SourceCode\02.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\de\DevExpress.Spreadsheet.v22.1.Core.resources.dll
+D:\01.SourceCode\02.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\es\DevExpress.Spreadsheet.v22.1.Core.resources.dll
+D:\01.SourceCode\02.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\ja\DevExpress.Spreadsheet.v22.1.Core.resources.dll
+D:\01.SourceCode\02.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\de\DevExpress.Snap.v22.1.Core.resources.dll
+D:\01.SourceCode\02.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\es\DevExpress.Snap.v22.1.Core.resources.dll
+D:\01.SourceCode\02.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\ja\DevExpress.Snap.v22.1.Core.resources.dll
+D:\01.SourceCode\02.HRM\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\obj\Debug\Vs.Recruit.rptThuMoi.resources

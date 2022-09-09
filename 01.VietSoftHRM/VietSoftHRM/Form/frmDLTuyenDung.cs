@@ -54,7 +54,8 @@ namespace VietSoftHRM
                 {
                     Commons.Modules.ObjSystems.MLoadXtraGrid(grdViTri, grvViTri, dt, false, false, true, true, true, this.Name);
                     grvViTri.Columns["ID_XN"].Visible = false;
-                    Commons.Modules.ObjSystems.AddCombXtra("ID_LCV", "TEN_LCV", grvViTri, Commons.Modules.ObjSystems.DataLoaiCV(false,-1), true, "ID_LCV", this.Name, true);
+
+                    Commons.Modules.ObjSystems.AddCombXtra("ID_LCV", "TEN_LCV", grvViTri, Commons.Modules.ObjSystems.DataLoaiCV(false, Convert.ToInt32(iiD_XN)), true, "ID_LCV", this.Name, true);
                 }
                 else
                 {
@@ -65,6 +66,7 @@ namespace VietSoftHRM
             {
             }
         }
+
         private void LoadNguoiTuyenDung()
         {
             try

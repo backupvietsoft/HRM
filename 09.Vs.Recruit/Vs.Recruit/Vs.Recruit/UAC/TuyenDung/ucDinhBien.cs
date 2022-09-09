@@ -48,7 +48,8 @@ namespace Vs.Recruit
                 if (grdDinhBien.DataSource == null)
                 {
                     Commons.Modules.ObjSystems.MLoadXtraGrid(grdDinhBien, grvDinhBien, dt, false, false, false, true, true, this.Name);
-                    Commons.Modules.ObjSystems.AddCombXtra("ID_LCV", "TEN_LCV", grvDinhBien, Commons.Modules.ObjSystems.DataLoaiCV(false,-1), true, "ID_LCV", this.Name);
+
+                    Commons.Modules.ObjSystems.AddCombXtra("ID_LCV", "TEN_LCV", grvDinhBien, Commons.Modules.ObjSystems.DataLoaiCV(false, Convert.ToInt32(-1)), true, "ID_LCV", this.Name);
                     Commons.Modules.ObjSystems.DeleteAddRow(grvDinhBien);
                 }
                 else

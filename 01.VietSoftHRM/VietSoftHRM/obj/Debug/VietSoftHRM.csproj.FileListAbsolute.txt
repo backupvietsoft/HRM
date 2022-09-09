@@ -2200,8 +2200,6 @@ D:\01.SourceCode\02.HRM\01.VietSoftHRM\VietSoftHRM\obj\Debug\VietSoftHRM.pdb
 D:\01.SourceCode\02.HRM\01.VietSoftHRM\VietSoftHRM\obj\Debug\VietSoftHRM.frmDLTuyenDung.resources
 D:\01.SourceCode\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Vs.Recruit.dll
 D:\01.SourceCode\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Vs.Recruit.dll.config
-F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\VietSoftHRM.exe
-F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Vs.TimeAttendance.dll
 H:\Lamviec\Lamviec\HRM\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\DevExpress.BonusSkins.v22.1.dll
 H:\Lamviec\Lamviec\HRM\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\DevExpress.Charts.v22.1.Core.dll
 H:\Lamviec\Lamviec\HRM\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\DevExpress.CodeParser.v22.1.dll
@@ -2446,6 +2444,7 @@ F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Template\TemplateTaiNanLaoDong.xl
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Template\TemplateTangLaoDong.xlsx
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\lib\vsconfig.xml
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\VietSoftHRM.exe.config
+F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\VietSoftHRM.exe
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\VietSoftHRM.pdb
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Commons.dll
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\DevExpress.BonusSkins.v22.1.dll
@@ -2503,15 +2502,16 @@ F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Vs.HRM.dll
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Vs.Payroll.dll
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Vs.Recruit.dll
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\VS.Report.dll
+F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Vs.TimeAttendance.dll
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\EPPlus.dll
-F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\DevExpress.XtraReports.v22.1.Extensions.dll
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\DevExpress.Docs.v22.1.dll
+F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\DevExpress.XtraReports.v22.1.Extensions.dll
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\DevExpress.XtraDiagram.v22.1.dll
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\DevExpress.Diagram.v22.1.Core.dll
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\DevExpress.Pdf.v22.1.Drawing.dll
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Microsoft.mshtml.dll
-F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\DevExpress.XtraCharts.v22.1.Extensions.dll
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\DevExpress.Snap.v22.1.Core.dll
+F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\DevExpress.XtraCharts.v22.1.Extensions.dll
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Commons.pdb
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Commons.dll.config
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Vs.Category.pdb
@@ -2569,8 +2569,8 @@ F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\DevExpress.XtraTreeMap.v22.1.UI.x
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\DevExpress.XtraTreeMap.v22.1.xml
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\DevExpress.XtraVerticalGrid.v22.1.xml
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Newtonsoft.Json.xml
-F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\DevExpress.XtraReports.v22.1.Extensions.xml
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\DevExpress.Docs.v22.1.xml
+F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\DevExpress.XtraReports.v22.1.Extensions.xml
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\DevExpress.XtraDiagram.v22.1.xml
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\DevExpress.Diagram.v22.1.Core.xml
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\DevExpress.Pdf.v22.1.Drawing.xml

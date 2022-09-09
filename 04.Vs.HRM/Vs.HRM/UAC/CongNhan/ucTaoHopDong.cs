@@ -33,11 +33,14 @@ namespace Vs.HRM
             try
             {
                 Commons.Modules.sLoad = "0Load";
-                LoadThang();
+                Commons.OSystems.SetDateEditFormat(datTNgay);
+                Commons.OSystems.SetDateEditFormat(datDNgay);
                 Commons.Modules.ObjSystems.LoadCboDonVi(cboDV);
                 Commons.Modules.ObjSystems.LoadCboXiNghiep(cboDV, cboXN);
                 Commons.Modules.ObjSystems.LoadCboTo(cboDV, cboXN, cboTo);
                 Commons.Modules.sLoad = "";
+                datTNgay.EditValue = Convert.ToDateTime(("01/" + DateTime.Now.Month + "/" + DateTime.Now.Year));
+
                 LoadData();
                 enabel(true);
             }
@@ -72,33 +75,6 @@ namespace Vs.HRM
 
         }
         #endregion
-        public void LoadThang()
-        {
-            try
-            {
-                //ItemForDateThang.Visibility = LayoutVisibility.Never;
-                DataTable dtthang = new DataTable();
-                string sSql = "SELECT DISTINCT SUBSTRING(CONVERT(VARCHAR(10),NGAY_CHUYEN,103),4,2) as M, RIGHT(CONVERT(VARCHAR(10),NGAY_CHUYEN,103),4) AS Y ,RIGHT(CONVERT(VARCHAR(10),NGAY_CHUYEN,103),10) AS NGAY ,RIGHT(CONVERT(VARCHAR(10),NGAY_CHUYEN,103),7) AS THANG  FROM dbo.UV_CHUYEN_NHAN_SU ORDER BY Y DESC , M DESC";
-                dtthang.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSql));
-                if (grdThang.DataSource == null)
-                {
-                    Commons.Modules.ObjSystems.MLoadXtraGrid(grdThang, grvThang, dtthang, false, true, true, true, true, this.Name);
-                    grvThang.Columns["M"].Visible = false;
-                    grvThang.Columns["Y"].Visible = false;
-                    grvThang.Columns["THANG"].Visible = false;
-                }
-                else
-                {
-                    grdThang.DataSource = dtthang;
-                }
-                cboThang.Text = grvThang.GetFocusedRowCellValue("NGAY").ToString();
-            }
-            catch
-            {
-                DateTime now = DateTime.Now;
-                cboThang.Text = now.ToString("dd/MM/yyyy");
-            }
-        }
         private void LoadData()
         {
             try
@@ -115,8 +91,9 @@ namespace Vs.HRM
                 cmd.Parameters.Add("@DVi", SqlDbType.Int).Value = Convert.ToInt32(cboDV.EditValue);
                 cmd.Parameters.Add("@XN", SqlDbType.Int).Value = Convert.ToInt32(cboXN.EditValue);
                 cmd.Parameters.Add("@TO", SqlDbType.Int).Value = Convert.ToInt32(cboTo.EditValue);
-                cmd.Parameters.Add("@NGAY_CHUYEN", SqlDbType.DateTime).Value = Commons.Modules.ObjSystems.ConvertDateTime(cboThang.Text);
-                cmd.Parameters.Add("@Them", SqlDbType.Int).Value = iAdd;
+                cmd.Parameters.Add("@TNgay", SqlDbType.DateTime).Value = Commons.Modules.ObjSystems.ConvertDateTime(datTNgay.Text);
+                cmd.Parameters.Add("@DNgay", SqlDbType.DateTime).Value = Commons.Modules.ObjSystems.ConvertDateTime(datDNgay.Text);
+                cmd.Parameters.Add("@Them", SqlDbType.Int).Value = rdoChonXem.SelectedIndex;
                 cmd.CommandType = CommandType.StoredProcedure;
                 System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
                 DataSet ds = new DataSet();
@@ -149,7 +126,7 @@ namespace Vs.HRM
                 grvDSUngVien.Columns["PHU_CAP"].DisplayFormat.FormatType = FormatType.Numeric;
                 grvDSUngVien.Columns["PHU_CAP"].DisplayFormat.FormatString = "n0";
 
-                if (iAdd == 0)
+                if (rdoChonXem.SelectedIndex == 0)
                 {
                     grvDSUngVien.Columns["ID_HDLD"].Visible = false;
                     grvDSUngVien.Columns["ID_UV"].Visible = false;
@@ -210,8 +187,10 @@ namespace Vs.HRM
                     cboID_CV.NullText = "";
                     cboID_CV.ValueMember = "ID_CV";
                     cboID_CV.DisplayMember = "TEN_CV";
+
                     //ID_VTTD,TEN_VTTD
-                    cboID_CV.DataSource = Commons.Modules.ObjSystems.DataChucVu(false,-1);
+                    cboID_CV.DataSource = Commons.Modules.ObjSystems.DataChucVu(false, Convert.ToInt32(-1));
+
                     cboID_CV.Columns.Clear();
                     cboID_CV.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID_CV"));
                     cboID_CV.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("TEN_CV"));
@@ -351,7 +330,7 @@ namespace Vs.HRM
             try
             {
                 LookUpEdit lookUp = sender as LookUpEdit;
-                lookUp.Properties.DataSource = Commons.Modules.ObjSystems.DataChucVu(false,-1);
+                lookUp.Properties.DataSource = Commons.Modules.ObjSystems.DataChucVu(false, Convert.ToInt32(-1));
             }
             catch { }
         }
@@ -434,7 +413,7 @@ namespace Vs.HRM
                     case "sua":
                         {
                             iAdd = 1;
-                            LoadData();
+                            //LoadData();
                             enabel(false);
                             break;
                         }
@@ -491,10 +470,10 @@ namespace Vs.HRM
             string sBTCongNhan = "sBTCongNhan" + Commons.Modules.iIDUser;
             try
             {
-                Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBTCongNhan, Commons.Modules.ObjSystems.ConvertDatatable(grvDSUngVien), "");
-                DataTable dt = new DataTable();
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spSaveHopDongThuViec", Commons.Modules.ObjSystems.ConvertDateTime(cboThang.Text), sBTCongNhan));
-                Commons.Modules.ObjSystems.XoaTable(sBTCongNhan);
+                //Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBTCongNhan, Commons.Modules.ObjSystems.ConvertDatatable(grvDSUngVien), "");
+                //DataTable dt = new DataTable();
+                //dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spSaveHopDongThuViec", Commons.Modules.ObjSystems.ConvertDateTime(cboThang.Text), sBTCongNhan));
+                //Commons.Modules.ObjSystems.XoaTable(sBTCongNhan);
                 return true;
             }
             catch (Exception ex)
@@ -528,38 +507,6 @@ namespace Vs.HRM
         {
             grvDSUngVien_FocusedRowChanged(null, null);
         }
-        private void calendarControl1_DateTimeCommit(object sender, EventArgs e)
-        {
-            try
-            {
-                cboThang.Text = calThangc.DateTime.ToString("dd/MM/yyyy");
-                DataTable dtTmp = Commons.Modules.ObjSystems.ConvertDatatable(grvThang);
-                DataRow[] dr;
-                dr = dtTmp.Select("NGAY_TTXL" + "='" + cboThang.Text + "'", "NGAY_TTXL", DataViewRowState.CurrentRows);
-                if (dr.Count() == 1)
-                {
-                }
-                else { }
-            }
-            catch (Exception ex)
-            {
-                cboThang.Text = calThangc.DateTime.ToString("dd/MM/yyyy");
-            }
-            cboThang.ClosePopup();
-        }
-
-        private void grvThang_RowCellClick(object sender, RowCellClickEventArgs e)
-        {
-            try
-            {
-                GridView grv = (GridView)sender;
-                cboThang.Text = grvThang.GetFocusedRowCellValue("NGAY").ToString();
-            }
-            catch { }
-            cboThang.ClosePopup();
-
-        }
-
         private void cboThang_EditValueChanged(object sender, EventArgs e)
         {
             if (Commons.Modules.sLoad == "0Load") return;
@@ -674,7 +621,46 @@ namespace Vs.HRM
         }
 
         #endregion
+
         #endregion
 
+        private void rdoChonXem_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (rdoChonXem.SelectedIndex)
+            {
+                case 0:
+                    {
+                        LoadData();
+                        break;
+                    }
+                case 1:
+                    {
+                        LoadData();
+                        break;
+                    }
+                default:
+                    {
+                        break;
+                    }
+            }
+        }
+
+        private void datTNgay_EditValueChanged(object sender, EventArgs e)
+        {
+            if (Commons.Modules.sLoad == "0Load") return;
+            Commons.Modules.sLoad = "0Load";
+            Commons.Modules.ObjSystems.ConvertDateTime(datTNgay.Text);
+            int t = DateTime.DaysInMonth(datTNgay.DateTime.Year, datTNgay.DateTime.Month);
+            DateTime secondDateTime = new DateTime(datTNgay.DateTime.Year, datTNgay.DateTime.Month, t);
+            datDNgay.EditValue = secondDateTime;
+            LoadData();
+            Commons.Modules.sLoad = "";
+        }
+
+        private void datDNgay_EditValueChanged(object sender, EventArgs e)
+        {
+            if (Commons.Modules.sLoad == "0Load") return;
+            LoadData();
+        }
     }
 }

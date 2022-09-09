@@ -689,15 +689,15 @@ namespace Vs.TimeAttendance
 
                 int col = 8;
                 string currentColumn = string.Empty;
-                int thang = 1;
+
                 while (col <= 21)
                 {
                     currentColumn = CharacterIncrement(col);
                     Range row4_T = oSheet.get_Range(currentColumn + 5);
                     row4_T.ColumnWidth = 8;
                     //row4_T.Merge();
-                    row4_T.Value2 = "THÁNG " + Convert.ToString(thang) + "/" + lk_Nam.Text;
-                    thang++;
+                    row4_T.Value2 = "THÁNG " + Convert.ToString(col - 9) + "/" + lk_Nam.Text;
+
                     col++;
                 }
 

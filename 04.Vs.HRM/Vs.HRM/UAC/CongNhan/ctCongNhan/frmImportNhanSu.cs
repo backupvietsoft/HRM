@@ -2,7 +2,6 @@
 using DevExpress.XtraBars.Docking2010;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Grid;
-using DevExpress.XtraLayout;
 using Microsoft.ApplicationBlocks.Data;
 using System;
 using System.Collections;
@@ -11,11 +10,9 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
-using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using DevExpress.Spreadsheet;
-
 
 namespace Vs.HRM
 {

@@ -537,5 +537,19 @@ namespace Vs.HRM
                 XtraMessageBox.Show(ex.Message.ToString());
             }
         }
+
+        private void radChonXem_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(radChonXem.SelectedIndex == 1)
+            {
+                ItemForTNgay.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                ItemForDNgay.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+            }
+            else
+            {
+                ItemForTNgay.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+                ItemForDNgay.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+            }
+        }
     }
 }

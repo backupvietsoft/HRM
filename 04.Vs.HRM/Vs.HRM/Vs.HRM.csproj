@@ -46,7 +46,7 @@
     <Reference Include="DevExpress.Dashboard.v22.1.Win, Version=22.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Docs.v22.1, Version=22.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\DevExpress.Docs.v22.1.dll</HintPath>
+      <HintPath>..\..\08.Payroll\Vs.Payroll\bin\Debug\DevExpress.Docs.v22.1.dll</HintPath>
     </Reference>
     <Reference Include="DevExpress.Drawing.v22.1" />
     <Reference Include="DevExpress.Data.v22.1" />

@@ -477,6 +477,20 @@ namespace Commons
             }
         }
 
+        private static Int64 _iIDNhom = 0;
+        public static Int64 iIDNhom
+        {
+            get
+            {
+                return _iIDNhom;
+            }
+            set
+            {
+                _iIDNhom = value;
+            }
+        }
+
+
         private static int _TypeLanguage;
         public static int TypeLanguage
         {

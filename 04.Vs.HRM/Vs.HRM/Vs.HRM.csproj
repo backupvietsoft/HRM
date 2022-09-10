@@ -146,6 +146,9 @@
     <Reference Include="UIAutomationClient" />
     <Reference Include="UIAutomationProvider" />
     <Reference Include="UIAutomationTypes" />
+    <Reference Include="Vs.Recruit">
+      <HintPath>..\..\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\bin\Debug\Vs.Recruit.dll</HintPath>
+    </Reference>
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
@@ -487,6 +490,12 @@
     <Compile Include="UAC\CongNhan\ctCongNhan\frmInQTCT.Designer.cs">
       <DependentUpon>frmInQTCT.cs</DependentUpon>
     </Compile>
+    <Compile Include="UAC\CongNhan\ucHoanChinhHSNhanSu.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UAC\CongNhan\ucHoanChinhHSNhanSu.Designer.cs">
+      <DependentUpon>ucHoanChinhHSNhanSu.cs</DependentUpon>
+    </Compile>
     <Compile Include="UAC\CongNhan\ucDanhGiaThuViec.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -824,6 +833,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UAC\CongNhan\ctCongNhan\frmInQTCT.resx">
       <DependentUpon>frmInQTCT.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UAC\CongNhan\ucHoanChinhHSNhanSu.resx">
+      <DependentUpon>ucHoanChinhHSNhanSu.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UAC\CongNhan\ucDanhGiaThuViec.resx">
       <DependentUpon>ucDanhGiaThuViec.cs</DependentUpon>

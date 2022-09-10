@@ -3193,3 +3193,15 @@ D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.frmImportNhanSu.resour
 D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.frmImportView.resources
 D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.frmInBaoCaoThaiSan.resources
 D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.ucKeHoachThaiSan.resources
+F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\DevExpress.Docs.v22.1.dll
+F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\DevExpress.Docs.v22.1.xml
+F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.frmImportNhanSu.resources
+F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.frmImportView.resources
+F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.frmInBaoCaoThaiSan.resources
+F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.ucKeHoachThaiSan.resources
+F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\Vs.Recruit.dll
+F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\Spire.XLS.dll
+F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\Spire.License.dll
+F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\Vs.Recruit.pdb
+F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\Vs.Recruit.dll.config
+F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.ucHoanChinhHSNhanSu.resources

@@ -12,6 +12,7 @@ namespace Vs.HRM
 {
     public partial class ucHopDong : DevExpress.XtraEditors.XtraUserControl
     {
+        public ucCTQLNS ucNS;
         Int64 idcn = 0;
         Int64 id_HD;
         bool cothem = false;
@@ -533,6 +534,8 @@ namespace Vs.HRM
                     }
                 case "thoat":
                     {
+                        //this.Parent.Controls.Remove(this);
+                        //this.Dispose();
                         Commons.Modules.ObjSystems.GotoHome(this);
                         break;
                     }

@@ -283,6 +283,7 @@ namespace Vs.HRM
         #region import ứng viên
         private void ImportUngVien(DataTable dtSource)
         {
+            this.Cursor = Cursors.WaitCursor;
             int count = grvData.RowCount;
             int col = 0;
             int errorCount = 0;
@@ -946,6 +947,7 @@ namespace Vs.HRM
                     errorCount++;
                 }
             }
+            this.Cursor = Cursors.Default;
             #endregion
             Commons.Modules.ObjSystems.HideWaitForm();
             if (errorCount != 0)

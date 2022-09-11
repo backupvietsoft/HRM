@@ -14,7 +14,8 @@ namespace Vs.HRM
         List<LabelControl> List;
         private string tab = "";
         public DataTable dt;
-
+        public bool flag = false;
+        public string sTenLab = "";
         public ucCTQLNS(Int64 iIdCN)
         {
             InitializeComponent();
@@ -35,11 +36,44 @@ namespace Vs.HRM
         private void ucCTQLNS_Load(object sender, EventArgs e)
         {
             XuLyTab();
-            Lb_Click(labLyLich, null);
+            if (flag == true)
+            {
+                switch(sTenLab)
+                {
+                    case "labHopDong":
+                        {
+                            Lb_Click(labHopDong, null);
+                            break;
+                        }
+                    case "labCongTac":
+                        {
+                            Lb_Click(labCongTac, null);
+                            break;
+                        }
+                    case "labTienLuong":
+                        {
+                            Lb_Click(labTienLuong, null);
+                            break;
+                        }
+                    case "LabKhenThuong":
+                        {
+                            Lb_Click(labKhanThuong, null);
+                            break;
+                        }
+                    default:
+                        {
+                            break;
+                        }
+                }
+            }
+            else
+            {
+                Lb_Click(labLyLich, null);
+            }
         }
         private void XuLyTab()
         {
-            List = new List<LabelControl>() { labLyLich, labCongTac, labHopDong, labTienLuong, labKhanThuong, labTaiNan, labDanhGia};
+            List = new List<LabelControl>() { labLyLich, labCongTac, labHopDong, labTienLuong, labKhanThuong, labTaiNan, labDanhGia };
             foreach (LabelControl lb in List)
             {
                 lb.Click += Lb_Click;
@@ -50,7 +84,10 @@ namespace Vs.HRM
             try
             {
                 var lable = sender as LabelControl;
-                if (Commons.Modules.iCongNhan == 0 && lable.Name != "labLyLich") return;
+                if(flag == false)
+                {
+                    if (Commons.Modules.iCongNhan == 0 && lable.Name != "labLyLich") return;
+                }
                 if (tab == lable.Name) return;
                 Commons.Modules.ObjSystems.ShowWaitForm(this);
                 foreach (LabelControl lc in List)
@@ -135,14 +172,15 @@ namespace Vs.HRM
                         if (navigationPage4.Controls.Count == 0)
                         {
                             ucHopDong hd = new ucHopDong(Commons.Modules.iCongNhan);
+                            hd.ucNS = new ucCTQLNS(Commons.Modules.iCongNhan);
                             hd.Dock = DockStyle.Fill;
                             navigationPage4.Controls.Add(hd);
                         }
                         Selecttab(navigationPage4);
-      
+
                         break;
                     }
-               
+
                 case "labKhanThuong":
                     {
                         if (navigationPage5.Controls.Count == 0)

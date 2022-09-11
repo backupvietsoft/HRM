@@ -1244,7 +1244,7 @@ namespace Commons
                 //Commons.Modules.OXtraGrid.loadXmlgrd(grd);
                 return true;
             }
-            catch
+            catch(Exception ex)
             {
                 return false;
             }

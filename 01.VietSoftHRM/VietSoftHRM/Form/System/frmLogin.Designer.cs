@@ -43,6 +43,7 @@
             this.pic_database = new DevExpress.XtraEditors.PictureEdit();
             this.txt_pass = new DevExpress.XtraEditors.TextEdit();
             this.txt_user = new DevExpress.XtraEditors.TextEdit();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cbo_database.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pic_pass.Properties)).BeginInit();
@@ -50,11 +51,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.pic_database.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txt_pass.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txt_user.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.White;
+            this.panel2.Controls.Add(this.pictureBox1);
             this.panel2.Controls.Add(this.lblLogin);
             this.panel2.Controls.Add(this.cbo_database);
             this.panel2.Controls.Add(this.che_Repass);
@@ -71,7 +74,7 @@
             this.panel2.Controls.Add(this.txt_user);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 0);
-            this.panel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel2.Margin = new System.Windows.Forms.Padding(4);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(278, 300);
             this.panel2.TabIndex = 1;
@@ -94,7 +97,7 @@
             // cbo_database
             // 
             this.cbo_database.Location = new System.Drawing.Point(31, 67);
-            this.cbo_database.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbo_database.Margin = new System.Windows.Forms.Padding(4);
             this.cbo_database.Name = "cbo_database";
             this.cbo_database.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.cbo_database.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -110,7 +113,7 @@
             this.che_Repass.AutoSize = true;
             this.che_Repass.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.che_Repass.Location = new System.Drawing.Point(130, 203);
-            this.che_Repass.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.che_Repass.Margin = new System.Windows.Forms.Padding(4);
             this.che_Repass.Name = "che_Repass";
             this.che_Repass.Size = new System.Drawing.Size(148, 21);
             this.che_Repass.TabIndex = 4;
@@ -122,7 +125,7 @@
             this.che_Reuser.AutoSize = true;
             this.che_Reuser.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.che_Reuser.Location = new System.Drawing.Point(9, 203);
-            this.che_Reuser.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.che_Reuser.Margin = new System.Windows.Forms.Padding(4);
             this.che_Reuser.Name = "che_Reuser";
             this.che_Reuser.Size = new System.Drawing.Size(117, 21);
             this.che_Reuser.TabIndex = 3;
@@ -137,7 +140,7 @@
             this.btn_Exit.AppearanceHovered.Options.UseForeColor = true;
             this.btn_Exit.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_Exit.Location = new System.Drawing.Point(5, 269);
-            this.btn_Exit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_Exit.Margin = new System.Windows.Forms.Padding(4);
             this.btn_Exit.Name = "btn_Exit";
             this.btn_Exit.Size = new System.Drawing.Size(266, 26);
             this.btn_Exit.TabIndex = 6;
@@ -157,7 +160,7 @@
             this.btn_login.AppearanceHovered.Options.UseForeColor = true;
             this.btn_login.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_login.Location = new System.Drawing.Point(6, 235);
-            this.btn_login.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_login.Margin = new System.Windows.Forms.Padding(4);
             this.btn_login.Name = "btn_login";
             this.btn_login.Size = new System.Drawing.Size(266, 26);
             this.btn_login.TabIndex = 5;
@@ -168,7 +171,7 @@
             // 
             this.pan_pass.BackColor = System.Drawing.Color.Gray;
             this.pan_pass.Location = new System.Drawing.Point(9, 171);
-            this.pan_pass.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pan_pass.Margin = new System.Windows.Forms.Padding(4);
             this.pan_pass.Name = "pan_pass";
             this.pan_pass.Size = new System.Drawing.Size(262, 2);
             this.pan_pass.TabIndex = 3;
@@ -177,7 +180,7 @@
             // 
             this.pan_user.BackColor = System.Drawing.Color.Gray;
             this.pan_user.Location = new System.Drawing.Point(9, 130);
-            this.pan_user.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pan_user.Margin = new System.Windows.Forms.Padding(4);
             this.pan_user.Name = "pan_user";
             this.pan_user.Size = new System.Drawing.Size(262, 2);
             this.pan_user.TabIndex = 3;
@@ -186,7 +189,7 @@
             // 
             this.pan_database.BackColor = System.Drawing.Color.Gray;
             this.pan_database.Location = new System.Drawing.Point(9, 89);
-            this.pan_database.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pan_database.Margin = new System.Windows.Forms.Padding(4);
             this.pan_database.Name = "pan_database";
             this.pan_database.Size = new System.Drawing.Size(262, 2);
             this.pan_database.TabIndex = 3;
@@ -195,7 +198,7 @@
             // 
             this.pic_pass.EditValue = global::VietSoftHRM.Properties.Resources.icon_pass;
             this.pic_pass.Location = new System.Drawing.Point(6, 145);
-            this.pic_pass.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pic_pass.Margin = new System.Windows.Forms.Padding(4);
             this.pic_pass.Name = "pic_pass";
             this.pic_pass.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.pic_pass.Properties.ShowCameraMenuItem = DevExpress.XtraEditors.Controls.CameraMenuItemVisibility.Auto;
@@ -207,7 +210,7 @@
             // 
             this.pic_user.EditValue = global::VietSoftHRM.Properties.Resources.icon_user;
             this.pic_user.Location = new System.Drawing.Point(5, 103);
-            this.pic_user.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pic_user.Margin = new System.Windows.Forms.Padding(4);
             this.pic_user.Name = "pic_user";
             this.pic_user.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.pic_user.Properties.ShowCameraMenuItem = DevExpress.XtraEditors.Controls.CameraMenuItemVisibility.Auto;
@@ -219,7 +222,7 @@
             // 
             this.pic_database.EditValue = global::VietSoftHRM.Properties.Resources.icon_data;
             this.pic_database.Location = new System.Drawing.Point(6, 67);
-            this.pic_database.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pic_database.Margin = new System.Windows.Forms.Padding(4);
             this.pic_database.Name = "pic_database";
             this.pic_database.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.pic_database.Properties.ShowCameraMenuItem = DevExpress.XtraEditors.Controls.CameraMenuItemVisibility.Auto;
@@ -232,7 +235,7 @@
             // 
             this.txt_pass.EditValue = "Password";
             this.txt_pass.Location = new System.Drawing.Point(31, 151);
-            this.txt_pass.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txt_pass.Margin = new System.Windows.Forms.Padding(4);
             this.txt_pass.Name = "txt_pass";
             this.txt_pass.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.txt_pass.Properties.PasswordChar = '•';
@@ -245,7 +248,7 @@
             // 
             this.txt_user.EditValue = "Username";
             this.txt_user.Location = new System.Drawing.Point(30, 111);
-            this.txt_user.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txt_user.Margin = new System.Windows.Forms.Padding(4);
             this.txt_user.Name = "txt_user";
             this.txt_user.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.txt_user.Properties.Appearance.Options.UseForeColor = true;
@@ -254,6 +257,15 @@
             this.txt_user.TabIndex = 1;
             this.txt_user.Click += new System.EventHandler(this.Txt_user_Click);
             this.txt_user.Validated += new System.EventHandler(this.Txt_user_Validated);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(6, 33);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(15, 12);
+            this.pictureBox1.TabIndex = 13;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.DoubleClick += new System.EventHandler(this.pictureBox1_DoubleClick);
             // 
             // frmLogin
             // 
@@ -269,7 +281,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.InactiveGlowColor = System.Drawing.Color.Black;
             this.KeyPreview = true;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmLogin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmLogin";
@@ -285,6 +297,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pic_database.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txt_pass.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txt_user.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -305,5 +318,6 @@
         private DevExpress.XtraEditors.PictureEdit pic_user;
         private DevExpress.XtraEditors.LookUpEdit cbo_database;
         private DevExpress.XtraEditors.LabelControl lblLogin;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

@@ -72,10 +72,6 @@ F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Release\DevExpress.XtraNavBar.v22.1.dll
 F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Release\DevExpress.XtraCharts.v22.1.Extensions.dll
 F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Release\NPOI.OpenXmlFormats.dll
 F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Release\NPOI.OpenXml4Net.dll
-F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Release\Commons.pdb
-F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Release\Commons.dll.config
-F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Release\VS.Report.pdb
-F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Release\VS.Report.dll.config
 F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Release\DevExpress.Charts.v22.1.Core.xml
 F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Release\DevExpress.Dashboard.v22.1.Core.xml
 F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Release\DevExpress.Dashboard.v22.1.Win.xml
@@ -122,7 +118,6 @@ F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Release\DevExpress.XtraScheduler.v22.1.Core.xml
 F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Release\DevExpress.XtraTreeList.v22.1.xml
 F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Release\DevExpress.XtraTreeMap.v22.1.UI.xml
 F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Release\DevExpress.XtraTreeMap.v22.1.xml
-F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Release\Newtonsoft.Json.xml
 F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Release\DevExpress.XtraDiagram.v22.1.xml
 F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Release\DevExpress.Diagram.v22.1.Core.xml
 F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Release\DevExpress.XtraVerticalGrid.v22.1.xml
@@ -676,3 +671,7 @@ H:\Lamviec\Lamviec\HRM\01.HRM\04.Vs.HRM\Vs.HRM\obj\Release\Vs.HRM.csproj.CoreCom
 H:\Lamviec\Lamviec\HRM\01.HRM\04.Vs.HRM\Vs.HRM\obj\Release\Vs.HRM.csproj.CopyComplete
 H:\Lamviec\Lamviec\HRM\01.HRM\04.Vs.HRM\Vs.HRM\obj\Release\Vs.HRM.dll
 H:\Lamviec\Lamviec\HRM\01.HRM\04.Vs.HRM\Vs.HRM\obj\Release\Vs.HRM.pdb
+F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Release\Vs.Recruit.dll
+F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Release\Spire.XLS.dll
+F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Release\Spire.License.dll
+F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Release\Vs.HRM.ucHoanChinhHSNhanSu.resources

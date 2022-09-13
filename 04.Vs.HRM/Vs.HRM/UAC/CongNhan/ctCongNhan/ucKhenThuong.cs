@@ -16,6 +16,7 @@ namespace Vs.HRM
         Int64 id_kT = -1;
         bool cothem = false;
         string strDuongDan = "";
+        WindowsUIButton btn1 = null;
         public ucKhenThuong(Int64 id)
         {
             InitializeComponent();
@@ -145,7 +146,8 @@ namespace Vs.HRM
                 txtTHOI_HAN_DC.EditValue = grvKhenThuong.GetFocusedRowCellValue("THOI_HAN_DC");
                 txtTHOI_HAN_SD.EditValue = grvKhenThuong.GetFocusedRowCellValue("THOI_HAN_SD");
                 txtKH_SUA_DOI.EditValue = grvKhenThuong.GetFocusedRowCellValue("KH_SUA_DOI");
-                cboTinhTrang.EditValue = string.IsNullOrEmpty(grvKhenThuong.GetFocusedRowCellValue("ID_TT").ToString()) ? cboTinhTrang.EditValue : Convert.ToInt32(grvKhenThuong.GetFocusedRowCellValue("ID_TT"));
+                //cboTinhTrang.EditValue = string.IsNullOrEmpty(grvKhenThuong.GetFocusedRowCellValue("ID_TT").ToString()) ? cboTinhTrang.EditValue : Convert.ToInt32(grvKhenThuong.GetFocusedRowCellValue("ID_TT"));
+                cboTinhTrang.EditValue = (grvKhenThuong.GetFocusedRowCellValue("ID_TT") == null || grvKhenThuong.GetFocusedRowCellValue("ID_TT").ToString().Trim() == "") ? cboTinhTrang.EditValue : Convert.ToInt32(grvKhenThuong.GetFocusedRowCellValue("ID_TT"));
                 txtTaiLieu.EditValue = grvKhenThuong.GetFocusedRowCellValue("TAI_LIEU");
             }
         }
@@ -201,6 +203,7 @@ namespace Vs.HRM
         private void windowsUIButton_ButtonClick_1(object sender, ButtonEventArgs e)
         {
             WindowsUIButton btn = e.Button as WindowsUIButton;
+            btn1 = btn;
             XtraUserControl ctl = new XtraUserControl();
             if (btn == null || btn.Tag == null) return;
             switch (btn.Tag.ToString())
@@ -327,8 +330,18 @@ namespace Vs.HRM
                 {
                     if (windowsUIButton.Buttons[6].Properties.Visible)
                     {
-                        ofdfile.ShowDialog();
-                        LayDuongDan();
+                        if ((cboTinhTrang.EditValue == null || cboTinhTrang.EditValue.ToString().Trim() != "2") && btn1.Tag.ToString() == "sua")
+                        {
+                            if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgTinhTrangHopDong"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "sThongBao"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) return;
+                            if (ofdfile.ShowDialog() == DialogResult.Cancel) return;
+                            LayDuongDan();
+                            cboTinhTrang.EditValue = 2;
+                        }
+                        else
+                        {
+                            ofdfile.ShowDialog();
+                            LayDuongDan();
+                        }
                     }
                     else
                     {
@@ -348,6 +361,7 @@ namespace Vs.HRM
                     Commons.Modules.ObjSystems.Xoahinh(txtTaiLieu.Text);
                     txtTaiLieu.ResetText();
                     grvKhenThuong.SetFocusedRowCellValue("TAI_LIEU", null);
+                    cboTinhTrang.EditValue = 1;
                     SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "UPDATE dbo.KHEN_THUONG SET TAI_LIEU = NULL WHERE ID_KTHUONG =" + grvKhenThuong.GetFocusedRowCellValue("ID_KTHUONG") + "");
                 }
                 catch

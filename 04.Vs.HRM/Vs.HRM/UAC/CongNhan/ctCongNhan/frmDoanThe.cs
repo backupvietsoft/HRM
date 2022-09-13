@@ -151,13 +151,36 @@ namespace Vs.HRM
             windowsUIButton.Buttons[4].Properties.Visible = !visible;
             windowsUIButton.Buttons[5].Properties.Visible = visible;
             //ID_QHLookUpEdit.Properties.ReadOnly = visible;
-            gro_DaNhapNgu.Enabled = !visible;
-            gro_QuanNhanDuBi.Enabled = !visible;
-            gro_GhiChu.Enabled = !visible;
-            gro_TheCongDoan.Enabled = !visible;
-            gro_TheDang.Enabled = !visible;
-            gro_TheDoan.Enabled = !visible;
 
+            //gro_DaNhapNgu.Enabled = !visible;
+            //gro_QuanNhanDuBi.Enabled = !visible;
+            //gro_GhiChu.Enabled = !visible;
+            //gro_TheCongDoan.Enabled = !visible;
+            //gro_TheDang.Enabled = !visible;
+            //gro_TheDoan.Enabled = !visible;
+
+            THE_DANGTextEdit.Properties.ReadOnly = visible;
+            NGAY_KN_DANGDateEdit.Properties.ReadOnly = visible;
+            NGAY_VAO_DANGDateEdit.Properties.ReadOnly = visible;
+            CHUC_VU_DANGTextEdit.Properties.ReadOnly = visible;
+            THE_DOANTextEdit.Properties.ReadOnly = visible;
+            NGAY_VAO_DOANDateEdit.Properties.ReadOnly = visible;
+            CHUC_VU_DOANTextEdit.Properties.ReadOnly = visible;
+            THE_CONG_DOANTextEdit.Properties.ReadOnly = visible;
+            NGAY_VAO_CONG_DOANDateEdit.Properties.ReadOnly = visible;
+            CHUC_VU_CONG_DOANTextEdit.Properties.ReadOnly = visible;
+            NGAY_NHAP_NGUDateEdit.Properties.ReadOnly = visible;
+            CVU_QUAN_NGUTextEdit.Properties.ReadOnly = visible;
+            NGAY_XUAT_NGUDateEdit.Properties.ReadOnly = visible;
+            CHUC_VU_QNDBTextEdit.Properties.ReadOnly = visible;
+            DON_VITextEdit.Properties.ReadOnly = visible;
+            THUONG_BINHCheckEdit.Properties.ReadOnly = visible;
+            HANG_THUONG_BINHTextEdit.Properties.ReadOnly = visible;
+            GIA_DINH_LIET_SICheckEdit.Properties.ReadOnly = visible;
+            GHI_CHUTextEdit.Properties.ReadOnly = visible;
+            CAP_BACTextEdit.Properties.ReadOnly = visible;
+            NGAY_RA_KHOI_DANGDateEdit.Properties.ReadOnly = visible;
+            NGAY_RA_KHOI_DOANDateEdit.Properties.ReadOnly = visible;
         }
         #endregion
         #region hàm sử lý data

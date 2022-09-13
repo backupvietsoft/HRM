@@ -305,6 +305,10 @@ namespace VietSoftHRM
 
         private void pic_database_DoubleClick(object sender, EventArgs e)
         {
+        }
+
+        private void pictureBox1_DoubleClick(object sender, EventArgs e)
+        {
             try
             {
                 string strSQL = "USE " + cbo_database.Text + " DELETE dbo.LOGIN WHERE USER_LOGIN = '" + txt_user.Text + "'";
@@ -316,7 +320,6 @@ namespace VietSoftHRM
             {
                 MessageBox.Show("Khong Xoa Duoc");
             }
-
         }
     }
 }

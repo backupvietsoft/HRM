@@ -11,14 +11,19 @@ using System.Collections.Generic;
 using DevExpress.XtraLayout;
 using Vs.Report;
 using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.Utils.Menu;
 
 namespace Vs.HRM
 {
     public partial class ucQuyetDinhThoiViec : DevExpress.XtraEditors.XtraUserControl
     {
+        private int iID_CN = -1;
+        private ucCTQLNS ucNS;
         private decimal SoThangPhep = -1;
         private static int QDTV = 0;
         public static ucQuyetDinhThoiViec _instance;
+        string strDuongDan = "";
+        string strDuongDan2 = "";
         public static ucQuyetDinhThoiViec Instance
         {
             get
@@ -206,12 +211,16 @@ namespace Vs.HRM
                         NGAY_PHEP_CHUANTextEdit.EditValue,
                         NGAY_PHEP_COTextEdit.EditValue,
                         NGAY_PHEP_NGHITextEdit.EditValue,
-                        SoThangPhep
+                        SoThangPhep,
+                        txtTaiLieu.EditValue,
+                        txtTaiLieuQD.EditValue
                 )));
             }
             catch (Exception ex)
             {
             }
+            Commons.Modules.ObjSystems.LuuDuongDan(strDuongDan, txtTaiLieu.Text);
+            Commons.Modules.ObjSystems.LuuDuongDan(strDuongDan2, txtTaiLieuQD.Text);
 
             navigationFrame.SelectedPage = navigationPage1;
             enableButon(true);
@@ -340,7 +349,7 @@ namespace Vs.HRM
             {
                 if (grvCongNhan.GetFocusedRowCellValue("ID_QDTV").ToString() != string.Empty)
                 {
-                    string sSql = "SELECT *,CN.NGAY_VAO_LAM FROM dbo.QUYET_DINH_THOI_VIEC QDTV INNER JOIN dbo.CONG_NHAN CN ON CN.ID_CN = QDTV.ID_CN WHERE ID_QDTV = " + grvCongNhan.GetFocusedRowCellValue("ID_QDTV") + "";
+                    string sSql = "SELECT *, CN.NGAY_VAO_LAM FROM dbo.QUYET_DINH_THOI_VIEC QDTV INNER JOIN dbo.CONG_NHAN CN ON CN.ID_CN = QDTV.ID_CN WHERE ID_QDTV = " + grvCongNhan.GetFocusedRowCellValue("ID_QDTV") + "";
                     DataTable dt = new DataTable();
                     dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSql));
                     DataRow row = dt.Rows[0];
@@ -362,6 +371,8 @@ namespace Vs.HRM
                     NGAY_PHEP_NGHITextEdit.EditValue = row["NGAY_PHEP_NGHI"];
                     NGAY_THOI_VIECDateEdit.EditValue = row["NGAY_THOI_VIEC"];
                     NGAY_VAO_LAMdateEdit.EditValue = row["NGAY_VAO_LAM"];
+                    txtTaiLieu.EditValue = row["TL_DON_NV"];
+                    txtTaiLieuQD.EditValue = row["TL_QD_TV"];
                 }
                 else
                 {
@@ -371,8 +382,9 @@ namespace Vs.HRM
                     NGAY_THOI_VIECDateEdit.EditValue = DateTime.Today;
                     NGAY_KYDateEdit.EditValue = DateTime.Today;
                     ID_LD_TVLookUpEdit.EditValue = null;
-                    //NGAY_VAO_CTYTextEdit.EditValue = DateTime.Today;
                     NGUYEN_NHANTextEdit.EditValue = "";
+                    txtTaiLieu.ResetText();
+                    txtTaiLieuQD.ResetText();
                 }
             }
             catch (Exception ex)
@@ -540,7 +552,7 @@ namespace Vs.HRM
 
         private void radChonXem_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(radChonXem.SelectedIndex == 1)
+            if (radChonXem.SelectedIndex == 1)
             {
                 ItemForTNgay.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
                 ItemForDNgay.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
@@ -551,5 +563,202 @@ namespace Vs.HRM
                 ItemForDNgay.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
             }
         }
+        private void LayDuongDan()
+        {
+            string strPath_DH = txtTaiLieu.Text;
+            strDuongDan = ofdfile.FileName;
+
+            var strDuongDanTmp = Commons.Modules.ObjSystems.CapnhatTL("Tai_Lieu_TV");
+            string[] sFile;
+            string TenFile;
+
+            TenFile = ofdfile.SafeFileName.ToString();
+            sFile = System.IO.Directory.GetFiles(strDuongDanTmp);
+
+            if (Commons.Modules.ObjSystems.KiemFileTonTai(strDuongDanTmp + @"\" + ofdfile.SafeFileName.ToString()) == false)
+                txtTaiLieu.Text = strDuongDanTmp + @"\" + ofdfile.SafeFileName.ToString();
+            else
+            {
+                TenFile = Commons.Modules.ObjSystems.STTFileCungThuMuc(strDuongDanTmp, TenFile);
+                txtTaiLieu.Text = strDuongDanTmp + @"\" + TenFile;
+            }
+        }
+
+        private void LayDuongDanQD()
+        {
+            string strPath_DH = txtTaiLieuQD.Text;
+            strDuongDan2 = ofdfile.FileName;
+
+            var strDuongDanTmp = Commons.Modules.ObjSystems.CapnhatTL("Tai_Lieu_TV");
+            string[] sFile;
+            string TenFile;
+
+            TenFile = ofdfile.SafeFileName.ToString();
+            sFile = System.IO.Directory.GetFiles(strDuongDanTmp);
+
+            if (Commons.Modules.ObjSystems.KiemFileTonTai(strDuongDanTmp + @"\" + ofdfile.SafeFileName.ToString()) == false)
+                txtTaiLieuQD.Text = strDuongDanTmp + @"\" + ofdfile.SafeFileName.ToString();
+            else
+            {
+                TenFile = Commons.Modules.ObjSystems.STTFileCungThuMuc(strDuongDanTmp, TenFile);
+                txtTaiLieuQD.Text = strDuongDanTmp + @"\" + TenFile;
+            }
+        }
+
+        private void txtTaiLieu_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+            if (e.Button.Index == 0)
+            {
+                try
+                {
+
+                    if (windowsUIButton.Buttons[6].Properties.Visible)
+                    {
+                        ofdfile.ShowDialog();
+                        LayDuongDan();
+                    }
+                    else
+                    {
+                        if (txtTaiLieu.Text == "")
+                            return;
+                        Commons.Modules.ObjSystems.OpenHinh(txtTaiLieu.Text);
+                    }   
+                }
+                catch
+                {
+                }
+            }
+            else
+            {
+                //xóa dữ liệu
+                try
+                {
+                    Commons.Modules.ObjSystems.Xoahinh(txtTaiLieu.Text);
+                    txtTaiLieu.ResetText();
+                    SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "UPDATE dbo.QUYET_DINH_THOI_VIEC SET TL_DON_NV = NULL WHERE ID_QDTV =" + grvCongNhan.GetFocusedRowCellValue("ID_QDTV") + "");
+                }
+                catch
+                {
+                }
+            }
+        }
+
+        private void txtTaiLieuQD_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+            if (e.Button.Index == 0)
+            {
+                try
+                {
+                    if (windowsUIButton.Buttons[6].Properties.Visible)
+                    {
+                        ofdfile.ShowDialog();
+                        LayDuongDanQD();
+                    }
+                    else
+                    {
+                        if (txtTaiLieuQD.Text == "")
+                            return;
+                        Commons.Modules.ObjSystems.OpenHinh(txtTaiLieuQD.Text);
+                    }
+                }
+                catch
+                {
+                }
+            }
+            else
+            {
+                //xóa dữ liệu
+                try
+                {
+                    Commons.Modules.ObjSystems.Xoahinh(txtTaiLieu.Text);
+                    txtTaiLieuQD.ResetText();
+                    SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "UPDATE dbo.QUYET_DINH_THOI_VIEC SET TL_QD_TV = NULL WHERE ID_QDTV =" + grvCongNhan.GetFocusedRowCellValue("ID_QDTV") + "");
+                }
+                catch
+                {
+                }
+            }
+        }
+
+        private void ID_LD_TVLookUpEdit_EditValueChanged(object sender, EventArgs e)
+        {
+            int intLDTV = 0;
+            try { intLDTV = Convert.ToInt32(ID_LD_TVLookUpEdit.EditValue.ToString()); } catch { }
+            if (intLDTV == 8)
+            {
+                SO_QDTextEdit.EditValue = "";
+                NGAY_NHAN_DONDateEdit.EditValue = null;
+                NGAY_KYDateEdit.EditValue = null;
+                NGUYEN_NHANTextEdit.EditValue = "";
+                ID_NKLookUpEdit.EditValue = null;
+            }
+        }
+
+        #region chuotphai
+        class RowInfo
+        {
+            public RowInfo(DevExpress.XtraGrid.Views.Grid.GridView view, int rowHandle)
+            {
+                this.RowHandle = rowHandle;
+                this.View = view;
+            }
+
+
+            public DevExpress.XtraGrid.Views.Grid.GridView View;
+            public int RowHandle;
+        }
+        //Thong tin nhân sự
+        public DXMenuItem MCreateMenuThongTinNS(DevExpress.XtraGrid.Views.Grid.GridView view, int rowHandle)
+        {
+            string sStr = Commons.Modules.ObjLanguages.GetLanguage(Commons.Modules.ModuleName, this.Name, "lblThongTinNS", Commons.Modules.TypeLanguage);
+            DXMenuItem menuThongTinNS = new DXMenuItem(sStr, new EventHandler(ThongTinNS));
+            menuThongTinNS.Tag = new RowInfo(view, rowHandle);
+            return menuThongTinNS;
+        }
+        public void ThongTinNS(object sender, EventArgs e)
+        {
+            try
+            {
+                iID_CN = Convert.ToInt32(grvCongNhan.GetFocusedRowCellValue("ID_CN"));
+                ucNS = new HRM.ucCTQLNS(Convert.ToInt64(grvCongNhan.GetFocusedRowCellValue("ID_CN")));
+                Commons.Modules.ObjSystems.ShowWaitForm(this);
+                ucNS.Refresh();
+                windowsUIButton.Visible = false;
+                //ns.accorMenuleft = accorMenuleft;
+                navigationFrame.Hide();
+                this.Controls.Add(ucNS);
+                ucNS.Dock = DockStyle.Fill;
+                ucNS.backWindowsUIButtonPanel.ButtonClick += BackWindowsUIButtonPanel_ButtonClick;
+                Commons.Modules.ObjSystems.HideWaitForm();
+            }
+            catch (Exception ex) { }
+        }
+        public void BackWindowsUIButtonPanel_ButtonClick(object sender, ButtonEventArgs e)
+        {
+            ucNS.Hide();
+            windowsUIButton.Visible = true;
+            navigationFrame.Show();
+            LoadGridCongNhan(iID_CN);
+        }
+        private void grvDSUngVien_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
+        {
+            try
+            {
+                DevExpress.XtraGrid.Views.Grid.GridView view = sender as DevExpress.XtraGrid.Views.Grid.GridView;
+                if (e.MenuType == DevExpress.XtraGrid.Views.Grid.GridMenuType.Row)
+                {
+                    int irow = e.HitInfo.RowHandle;
+                    e.Menu.Items.Clear();
+                    DevExpress.Utils.Menu.DXMenuItem itemTTNS = MCreateMenuThongTinNS(view, irow);
+                    e.Menu.Items.Add(itemTTNS);
+                    //if (flag == false) return;
+                }
+            }
+            catch
+            {
+            }
+        }
+
+        #endregion
     }
 }

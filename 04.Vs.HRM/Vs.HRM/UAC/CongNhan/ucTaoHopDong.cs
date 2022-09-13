@@ -887,20 +887,8 @@ namespace Vs.HRM
         private void grvDSUngVien_ValidatingEditor(object sender, DevExpress.XtraEditors.Controls.BaseContainerValidateEditorEventArgs e)
         {
             GridView view = sender as GridView;
-            DevExpress.XtraGrid.Columns.GridColumn ngayBDHD = view.Columns["NGAY_BAT_DAU_HD"];
             DevExpress.XtraGrid.Columns.GridColumn ngayBD = view.Columns["NGAY_BD_THU_VIEC"];
             DevExpress.XtraGrid.Columns.GridColumn ngayKT = view.Columns["NGAY_KT_THU_VIEC"];
-
-            if (view.FocusedColumn == view.Columns["NGAY_BAT_DAU_HD"])
-            {
-                DateTime? toDate = view.GetRowCellValue(view.FocusedRowHandle, view.Columns["NGAY_KT_THU_VIEC"]) as DateTime?;
-                DateTime? fromDate = e.Value as DateTime?;
-                if (fromDate > toDate)
-                {
-                    e.Valid = false;
-                    view.SetColumnError(ngayBDHD, "Ngày bắt đầu phải nhỏ hơn ngày kết thúc"); return;
-                }
-            }
 
             if (view.FocusedColumn == view.Columns["NGAY_BD_THU_VIEC"])
             {
@@ -923,6 +911,7 @@ namespace Vs.HRM
                 }
             }
         }
+        #region kiemTra
         private bool KiemTraLuoi(DataTable dtSource)
         {
             int count = grvDSUngVien.RowCount;
@@ -948,12 +937,6 @@ namespace Vs.HRM
 
                     //loại chức vụ
                     if (!KiemDuLieu(grvDSUngVien, dr, "ID_CV", true, 250, this.Name))
-                    {
-                        errorCount++;
-                    }
-
-                    //Ngày bắt đầu hợp đồng
-                    if (!KiemDuLieuNgay(grvDSUngVien, dr, "NGAY_BAT_DAU_HD", true, this.Name))
                     {
                         errorCount++;
                     }
@@ -1252,6 +1235,6 @@ namespace Vs.HRM
                 return false;
             }
         }
-
+        #endregion
     }
 }

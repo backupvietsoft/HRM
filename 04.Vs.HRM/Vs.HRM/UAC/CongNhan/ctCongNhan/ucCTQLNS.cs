@@ -172,7 +172,7 @@ namespace Vs.HRM
                         if (navigationPage4.Controls.Count == 0)
                         {
                             ucHopDong hd = new ucHopDong(Commons.Modules.iCongNhan);
-                            hd.ucNS = new ucCTQLNS(Commons.Modules.iCongNhan);
+                            //hd.ucNS = new ucCTQLNS(Commons.Modules.iCongNhan);
                             hd.Dock = DockStyle.Fill;
                             navigationPage4.Controls.Add(hd);
                         }

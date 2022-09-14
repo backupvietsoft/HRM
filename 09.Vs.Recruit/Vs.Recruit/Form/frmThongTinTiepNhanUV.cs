@@ -73,6 +73,7 @@ namespace Vs.Recruit
                     btnALL.Buttons[0].Properties.Visible = false;
                     btnALL.Buttons[1].Properties.Visible = false;
                 }
+                chkHoanThanhDT_CheckedChanged(null, null);
             }
             catch (Exception ex) { }
         }
@@ -480,7 +481,7 @@ namespace Vs.Recruit
                 dt = ds.Tables[0].Copy();
                 return dt;
             }
-            catch
+            catch (Exception ex)
             {
                 return null;
             }

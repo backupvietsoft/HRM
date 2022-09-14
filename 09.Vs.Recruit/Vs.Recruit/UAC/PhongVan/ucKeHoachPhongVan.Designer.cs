@@ -485,6 +485,7 @@
             conditionValidationRule3.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.Critical;
             conditionValidationRule3.Value1 = ((long)(0));
             this.dxValidationProvider1.SetValidationRule(this.cboBPYC, conditionValidationRule3);
+            this.cboBPYC.BeforePopup += new System.EventHandler(this.cboBPYC_BeforePopup);
             this.cboBPYC.QueryPopUp += new System.ComponentModel.CancelEventHandler(this.cboBPYC_QueryPopUp);
             // 
             // searchLookUpEdit1View

@@ -185,7 +185,7 @@ namespace Vs.Recruit
                 row2_TieuDe.Font.Size = fontSizeTieuDe;
                 row2_TieuDe.Font.Name = fontName;
                 row2_TieuDe.Font.Bold = true;
-                row2_TieuDe.Value2 = "BẢNG ĐỊNH BIÊN LAO ĐỘNG NĂM " + datNam.Text;
+                row2_TieuDe.Value2 = "BẢNG ĐỊNH BIÊN LAO ĐỘNG NĂM " + datNam.Text + " " + cboDV.Text.ToUpper() + "";
                 row2_TieuDe.WrapText = false;
                 row2_TieuDe.Cells.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
                 row2_TieuDe.Cells.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
@@ -220,7 +220,7 @@ namespace Vs.Recruit
 
                 Range row6_TieuDe_HoTen = oSheet.get_Range("E4");
                 row6_TieuDe_HoTen.Value2 = "Thừa thiếu";
-                row6_TieuDe_HoTen.ColumnWidth = 15;
+                row6_TieuDe_HoTen.ColumnWidth = 20;
 
                 int col = 0;
                 int rowCnt = 0;
@@ -419,6 +419,17 @@ namespace Vs.Recruit
                             }
                         }
                     }
+                    if (view.FocusedColumn.Name == "colDINH_BIEN")
+                    {
+                        if (string.IsNullOrEmpty(grvDinhBien.GetFocusedRowCellValue("ID_LCV").ToString()))
+                        {
+                            e.Valid = false;
+                            XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgLCVKhongTrong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            e.ErrorText = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "erLDVKhongTrong");
+                            view.SetColumnError(view.Columns["ID_LCV"], e.ErrorText);
+                            return;
+                        }
+                    }
                 }
                 catch { }
             }
@@ -444,7 +455,7 @@ namespace Vs.Recruit
             //xóa
             try
             {
-                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "DELETE dbo.DINH_BIEN WHERE NAM = " + datNam.DateTime.Year + " AND ID_DV = " + cboDV.EditValue + " AND ID_LCV = " + grvDinhBien.GetFocusedRowCellValue("ID_LCV") + "");
+                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "DELETE dbo.DINH_BIEN WHERE NAM = " + Convert.ToInt32(datNam.DateTime.Year) + " AND ID_DV = " + Convert.ToInt32(cboDV.EditValue) + " AND ID_LCV = " + Convert.ToInt32(grvDinhBien.GetFocusedRowCellValue("ID_LCV")) + "");
                 grvDinhBien.DeleteSelectedRows();
             }
             catch (Exception ex)
@@ -454,14 +465,14 @@ namespace Vs.Recruit
         }
         private void grvDinhBienLD_ValidateRow(object sender, DevExpress.XtraGrid.Views.Base.ValidateRowEventArgs e)
         {
-            DevExpress.XtraGrid.Views.Grid.GridView view = (DevExpress.XtraGrid.Views.Grid.GridView)sender;
-            if (Commons.Modules.ObjSystems.IsnullorEmpty(view.GetRowCellValue(e.RowHandle, "ID_LCV")))
-            {
-                e.Valid = false;
-                e.ErrorText = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "erLDVKhongTrong");
-                view.SetColumnError(view.Columns["ID_LCV"], e.ErrorText);
-                return;
-            }
+            //DevExpress.XtraGrid.Views.Grid.GridView view = (DevExpress.XtraGrid.Views.Grid.GridView)sender;
+            //if (Commons.Modules.ObjSystems.IsnullorEmpty(view.GetRowCellValue(e.RowHandle, "ID_LCV")))
+            //{
+            //    e.Valid = false;
+            //    e.ErrorText = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "erLDVKhongTrong");
+            //    view.SetColumnError(view.Columns["ID_LCV"], e.ErrorText);
+            //    return;
+            //}
         }
         private void grdDinhBienLD_ProcessGridKey(object sender, KeyEventArgs e)
         {

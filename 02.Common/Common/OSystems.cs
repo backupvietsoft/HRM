@@ -3985,7 +3985,7 @@ namespace Commons
             try
             {
                 dt.DefaultView.RowFilter = column.FieldName + " = " + value;
-                _view.SelectRow(0);
+                //_view.SelectRow(0);
             }
             catch
             {

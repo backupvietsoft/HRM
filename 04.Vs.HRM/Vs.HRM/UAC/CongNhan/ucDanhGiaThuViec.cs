@@ -17,6 +17,7 @@ namespace Vs.HRM
     {
         private int iAdd = 0;
         private string ChuoiKT = "";
+        private DataTable dtTemp;
         public ucDanhGiaThuViec()
         {
             InitializeComponent();
@@ -317,6 +318,8 @@ namespace Vs.HRM
             {
                 case "sua":
                     {
+                        dtTemp = new DataTable();
+                        dtTemp = (DataTable)grdDSCongNhan.DataSource;
                         iAdd = 1;
                         int n = grvDSCongNhan.FocusedRowHandle;
                         LoadData();
@@ -654,18 +657,16 @@ namespace Vs.HRM
 
         private void grvDSCongNhan_CellValueChanging(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
         {
-
+            if (rdoChonXem.SelectedIndex == 1) return;
             GridView view = sender as GridView;
-            DataTable dt = new DataTable();
-            dt = (DataTable)grdDSCongNhan.DataSource;
-            if (Convert.ToBoolean(dt.Rows[e.RowHandle]["KT_HOP_DONG"]) == true)
+            if (Convert.ToBoolean(dtTemp.Rows[e.RowHandle]["KT_HOP_DONG"]) == true)
             {
                 XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgHopDongDaKTKhongTheSua"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 view.SetRowCellValue(e.RowHandle, view.Columns["CHON"], false);
-                view.SetRowCellValue(e.RowHandle, view.Columns["KT_HOP_DONG"], dt.Rows[e.RowHandle]["KT_HOP_DONG"]);
-                view.SetRowCellValue(e.RowHandle, view.Columns["NGAY_NGHI_VIEC"], dt.Rows[e.RowHandle]["NGAY_NGHI_VIEC"]);
-                view.SetRowCellValue(e.RowHandle, view.Columns["NGAY_DANH_GIA"], dt.Rows[e.RowHandle]["NGAY_DANH_GIA"]);
-                view.SetRowCellValue(e.RowHandle, view.Columns["ID_NDG"], dt.Rows[e.RowHandle]["ID_NDG"]);
+                view.SetRowCellValue(e.RowHandle, view.Columns["KT_HOP_DONG"], dtTemp.Rows[e.RowHandle]["KT_HOP_DONG"]);
+                view.SetRowCellValue(e.RowHandle, view.Columns["NGAY_NGHI_VIEC"], dtTemp.Rows[e.RowHandle]["NGAY_NGHI_VIEC"]);
+                view.SetRowCellValue(e.RowHandle, view.Columns["NGAY_DANH_GIA"], dtTemp.Rows[e.RowHandle]["NGAY_DANH_GIA"]);
+                view.SetRowCellValue(e.RowHandle, view.Columns["ID_NDG"], dtTemp.Rows[e.RowHandle]["ID_NDG"]);
                 return;
             }
             if (e.Column.FieldName == "KT_HOP_DONG")

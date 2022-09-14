@@ -154,7 +154,7 @@ namespace Vs.Recruit
             }
             else
             {
-                    dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT DISTINCT A.ID_YCTD,MA_YCTD FROM dbo.YEU_CAU_TUYEN_DUNG A INNER JOIN dbo.YCTD_VI_TRI_TUYEN B ON B.ID_YCTD = A.ID_YCTD INNER JOIN dbo.LOAI_CONG_VIEC C ON C.ID_LCV = B.ID_VTTD WHERE ID_TT != 3 AND C.ID_CV = 208 AND A.ID_XN = " + cboBPYC.EditValue + "ORDER BY A.MA_YCTD DESC"));
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT DISTINCT A.ID_YCTD,MA_YCTD FROM dbo.YEU_CAU_TUYEN_DUNG A INNER JOIN dbo.YCTD_VI_TRI_TUYEN B ON B.ID_YCTD = A.ID_YCTD INNER JOIN dbo.LOAI_CONG_VIEC C ON C.ID_LCV = B.ID_VTTD WHERE ID_TT != 3 AND C.ID_CV = 208 AND A.ID_XN = " + cboBPYC.EditValue + "ORDER BY A.MA_YCTD DESC"));
             }
             lookUp.Properties.DataSource = dt;
         }
@@ -171,7 +171,7 @@ namespace Vs.Recruit
                 else
                 {
                     DataTable dt = new DataTable();
-                    dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT DISTINCT A.ID_VTTD,CASE 0 WHEN 0 THEN TEN_LCV WHEN 1 THEN ISNULL(NULLIF(TEN_LCV_A,''),TEN_LCV) ELSE ISNULL(NULLIF(TEN_LCV_H,''),TEN_LCV) END AS TEN_VTTD FROM dbo.YCTD_VI_TRI_TUYEN A INNER JOIN dbo.LOAI_CONG_VIEC B ON B.ID_LCV = A.ID_VTTD WHERE A.ID_YCTD = "+ grvViTri.GetFocusedRowCellValue("ID_YCTD") +" AND B.ID_CV = 208 ORDER BY TEN_VTTD"));
+                    dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT DISTINCT A.ID_VTTD,CASE 0 WHEN 0 THEN TEN_LCV WHEN 1 THEN ISNULL(NULLIF(TEN_LCV_A,''),TEN_LCV) ELSE ISNULL(NULLIF(TEN_LCV_H,''),TEN_LCV) END AS TEN_VTTD FROM dbo.YCTD_VI_TRI_TUYEN A INNER JOIN dbo.LOAI_CONG_VIEC B ON B.ID_LCV = A.ID_VTTD WHERE A.ID_YCTD = " + grvViTri.GetFocusedRowCellValue("ID_YCTD") + " AND B.ID_CV = 208 ORDER BY TEN_VTTD"));
                     lookUp.Properties.DataSource = dt;
                 }
             }
@@ -243,7 +243,7 @@ namespace Vs.Recruit
                     }
                 case "xoa":
                     {
-                        
+
                         XoaKeHoachPhongVan();
                         break;
                     }
@@ -280,7 +280,7 @@ namespace Vs.Recruit
                             string sSql = "DELETE A FROM sBTChonUV" + Commons.Modules.iIDUser + " A WHERE A.ID_YCTD = " + grvViTri.GetFocusedRowCellValue("ID_YCTD") + " AND A.ID_VTTD = " + grvViTri.GetFocusedRowCellValue("ID_VTTD") + " AND NOT EXISTS(SELECT * FROM dbo.sBTUV" + Commons.Modules.iIDUser + " B WHERE B.CHON = 1 AND B.ID_UV = A.ID_UV)";
                             SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, sSql);
 
-                             sSql = "INSERT INTO dbo.sBTChonUV" + Commons.Modules.iIDUser + "(ID_KHPV,ID_YCTD,ID_VTTD,ID_UV,MS_UV,HO_TEN,GHI_CHU,NGUOI_YCTD_CHON)SELECT " + iID_KHPV + "," + grvViTri.GetFocusedRowCellValue("ID_YCTD") + "," + grvViTri.GetFocusedRowCellValue("ID_VTTD") + ",ID_UV,MS_UV,HO_TEN,'',1 FROM dbo.sBTUV" + Commons.Modules.iIDUser + " A WHERE A.CHON = 1 AND NOT EXISTS (SELECT * FROM dbo.sBTChonUV" + Commons.Modules.iIDUser + " B WHERE B.ID_KHPV = " + iID_KHPV + " AND B.ID_YCTD = " + grvViTri.GetFocusedRowCellValue("ID_YCTD") + " AND B.ID_VTTD = " + grvViTri.GetFocusedRowCellValue("ID_VTTD") + " AND B.ID_UV = A.ID_UV)";
+                            sSql = "INSERT INTO dbo.sBTChonUV" + Commons.Modules.iIDUser + "(ID_KHPV,ID_YCTD,ID_VTTD,ID_UV,MS_UV,HO_TEN,GHI_CHU,NGUOI_YCTD_CHON)SELECT " + iID_KHPV + "," + grvViTri.GetFocusedRowCellValue("ID_YCTD") + "," + grvViTri.GetFocusedRowCellValue("ID_VTTD") + ",ID_UV,MS_UV,HO_TEN,'',1 FROM dbo.sBTUV" + Commons.Modules.iIDUser + " A WHERE A.CHON = 1 AND NOT EXISTS (SELECT * FROM dbo.sBTChonUV" + Commons.Modules.iIDUser + " B WHERE B.ID_KHPV = " + iID_KHPV + " AND B.ID_YCTD = " + grvViTri.GetFocusedRowCellValue("ID_YCTD") + " AND B.ID_VTTD = " + grvViTri.GetFocusedRowCellValue("ID_VTTD") + " AND B.ID_UV = A.ID_UV)";
                             SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, sSql);
                             LoadgrdUVPV(true);
                             grvViTri_FocusedRowChanged(null, null);
@@ -392,7 +392,7 @@ namespace Vs.Recruit
                 Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboNguoiPV1, Commons.Modules.ObjSystems.DataCongNhan(false), "ID_CN", "TEN_CN", "TEN_CN", true, true);
                 Commons.Modules.ObjSystems.MLoadLookUpEdit(cboTinhTrang, Commons.Modules.ObjSystems.DataTinhTrangPV(false), "ID_TT_KHPV", "TEN_TT_KHPV", "TEN_TT_KHPV");
                 Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboNguoiPV2, Commons.Modules.ObjSystems.DataCongNhan(false), "ID_CN", "TEN_CN", "TEN_CN", true, true);
-                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboBPYC, Commons.Modules.ObjSystems.DataXiNghiep(-1, false), "ID_XN", "TEN_XN", "TEN_XN", true, true);
+                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboBPYC, Commons.Modules.ObjSystems.DataXiNghiep(-1, false), "ID_XN", "TEN_XN", "TEN_XN", true, false);
             }
             catch
             {
@@ -556,7 +556,7 @@ namespace Vs.Recruit
         {
             if (Commons.Modules.sLoad == "0Load") return;
             LoadgrdKHPV(iID_KHPV);
-            cboTTLoc_EditValueChanged(null,null);
+            cboTTLoc_EditValueChanged(null, null);
         }
 
         private void grvViTri_InvalidValueException(object sender, DevExpress.XtraEditors.Controls.InvalidValueExceptionEventArgs e)
@@ -581,6 +581,7 @@ namespace Vs.Recruit
         private void grvViTri_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
             if (Commons.Modules.sLoad == "0Load") return;
+            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboBPYC, Commons.Modules.ObjSystems.DataXiNghiep(-1, false), "ID_XN", "TEN_XN", "TEN_XN", true, false);
             try
             {
                 Commons.Modules.ObjSystems.RowFilter(grdUVPV, grvUVPV.Columns["ID_YCTD"], grvUVPV.Columns["ID_VTTD"], grvViTri.GetFocusedRowCellValue("ID_YCTD").ToString(), grvViTri.GetFocusedRowCellValue("ID_VTTD").ToString());
@@ -730,6 +731,13 @@ namespace Vs.Recruit
             Commons.Modules.iUngVien = Convert.ToInt64(grvUVPV.GetFocusedRowCellValue("ID_UV"));
             frmUngVien frm = new frmUngVien();
             frm.ShowDialog();
+        }
+
+        private void cboBPYC_BeforePopup(object sender, EventArgs e)
+        {
+            DataTable dt = new DataTable();
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, " SELECT DISTINCT XN.ID_XN , CASE 0 WHEN 0 THEN XN.TEN_XN ELSE ISNULL(NULLIF(XN.TEN_XN_A,''),TEN_XN) END TEN_XN FROM dbo.XI_NGHIEP XN INNER JOIN dbo.YEU_CAU_TUYEN_DUNG T2 ON T2.ID_XN = XN.ID_XN WHERE T2.ID_TT = 1"));
+            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboBPYC, dt, "ID_XN", "TEN_XN", "TEN_XN", true, false);
         }
     }
 }

@@ -200,6 +200,7 @@ namespace Vs.Recruit
                                     case "TabChuyenSangNS":
                                         {
                                             if (!dxValidationProvider11.Validate()) return;
+
                                             System.Data.SqlClient.SqlConnection conn;
                                             conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
                                             conn.Open();
@@ -287,6 +288,22 @@ namespace Vs.Recruit
                             }
                             if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgBanCoChacMuonChuyenDuLieu"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) return;
 
+                            long id_dv = -1;
+                            try
+                            {
+                                id_dv = Convert.ToInt64(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT T3.ID_DV FROM dbo.YEU_CAU_TUYEN_DUNG T1 INNER JOIN dbo.XI_NGHIEP T2 ON  T2.ID_XN = T1.ID_XN INNER JOIN dbo.DON_VI T3 ON T3.ID_DV = T2.ID_DV WHERE T1.ID_YCTD = " + iID_YCTD + ""));
+                            }
+                            catch { id_dv = -1; }
+                            if (!Commons.Modules.ObjSystems.kiemTrungMS("CONG_NHAN", "MS_CN", txtMS_CN.Text))
+                            {
+                                txtMS_CN.Text = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.AUTO_CREATE_SO_CONG_NHAN(" + id_dv + ",1)").ToString();
+                                return;
+                            }
+                            if (!Commons.Modules.ObjSystems.kiemTrungMS("CONG_NHAN", "MS_THE_CC", txtMS_THE_CC.Text))
+                            {
+                                txtMS_THE_CC.Text = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.AUTO_CREATE_SO_CONG_NHAN(" + id_dv + ",2)").ToString();
+                                return;
+                            }
                             System.Data.SqlClient.SqlConnection conn;
                             conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
                             conn.Open();

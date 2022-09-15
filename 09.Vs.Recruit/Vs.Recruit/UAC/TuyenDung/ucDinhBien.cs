@@ -49,7 +49,25 @@ namespace Vs.Recruit
                 {
                     Commons.Modules.ObjSystems.MLoadXtraGrid(grdDinhBien, grvDinhBien, dt, false, false, false, true, true, this.Name);
 
-                    Commons.Modules.ObjSystems.AddCombXtra("ID_LCV", "TEN_LCV", grvDinhBien, Commons.Modules.ObjSystems.DataLoaiCV(false, Convert.ToInt32(-1)), true, "ID_LCV", this.Name);
+
+                    DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit cboLCV = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
+                    cboLCV.NullText = "";
+                    cboLCV.ValueMember = "ID_LCV";
+                    cboLCV.DisplayMember = "TEN_LCV";
+                    //ID_LCV,TEN_LCV
+                    cboLCV.DataSource = Commons.Modules.ObjSystems.DataLoaiCV(false, Convert.ToInt32(-1));
+                    cboLCV.Columns.Clear();
+                    cboLCV.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID_LCV"));
+                    cboLCV.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("TEN_LCV"));
+                    cboLCV.Columns["TEN_LCV"].Caption = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "TEN_LCV");
+                    cboLCV.AppearanceDropDownHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+                    cboLCV.AppearanceDropDownHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+                    cboLCV.Columns["ID_LCV"].Visible = false;
+                    grvDinhBien.Columns["ID_LCV"].ColumnEdit = cboLCV;
+                    cboLCV.BeforePopup += cboLCV_BeforePopup;
+                    cboLCV.EditValueChanged += cboLCV_EditValueChanged;
+
+                    //Commons.Modules.ObjSystems.AddCombXtra("ID_LCV", "TEN_LCV", grvDinhBien, Commons.Modules.ObjSystems.DataLoaiCV(false, Convert.ToInt32(-1)), true, "ID_LCV", this.Name);
                     Commons.Modules.ObjSystems.DeleteAddRow(grvDinhBien);
                 }
                 else
@@ -61,6 +79,48 @@ namespace Vs.Recruit
             {
             }
         }
+        private void cboLCV_EditValueChanged(object sender, EventArgs e)
+        {
+            LookUpEdit lookUp = sender as LookUpEdit;
+            DataRowView dataRow = lookUp.GetSelectedDataRow() as DataRowView;
+            grvDinhBien.SetFocusedRowCellValue("ID_LCV", Convert.ToUInt64((dataRow.Row[0])));
+        }
+        private void cboLCV_BeforePopup(object sender, EventArgs e)
+        {
+            try
+            {
+                LookUpEdit lookUp = sender as LookUpEdit;
+                lookUp.Properties.DataSource = Commons.Modules.ObjSystems.DataLoaiCV(false,Convert.ToInt32(cboDV.EditValue));
+
+                DataTable dt = new DataTable();
+                dt = (DataTable)lookUp.Properties.DataSource;
+                DataTable dtTmp = new DataTable();
+                string sdkien = "( 1 = 1 )";
+                try
+                {
+                    string sID = "";
+                    DataTable dtTemp = new DataTable();
+                    dtTmp = Commons.Modules.ObjSystems.ConvertDatatable(grvDinhBien).Copy();
+                    for (int i = 0; i < dtTmp.Rows.Count; i++)
+                    {
+                        sID = sID + dtTmp.Rows[i]["ID_LCV"].ToString() + ",";
+                    }
+                    sID = sID.Substring(0, sID.Length - 1);
+                    sdkien = "ID_LCV NOT IN ("+sID+")";
+                    dt.DefaultView.RowFilter = sdkien;
+                }
+                catch
+                {
+                    try
+                    {
+                        dtTmp.DefaultView.RowFilter = "";
+                    }
+                    catch { }
+                }
+
+            }
+            catch { }
+        }
 
         private void windowsUIButton_ButtonClick(object sender, ButtonEventArgs e)
         {
@@ -69,10 +129,19 @@ namespace Vs.Recruit
             if (btn == null || btn.Tag == null) return;
             switch (btn.Tag.ToString())
             {
-                case "sua":
+                case "them":
                     {
                         enableButon(false);
                         Commons.Modules.ObjSystems.AddnewRow(grvDinhBien, true);
+                        grvDinhBien.FocusedRowHandle = grvDinhBien.GetRowHandle(grvDinhBien.RowCount - 2);
+                        grvDinhBien.ClearSelection();
+                        grvDinhBien.SelectRow(grvDinhBien.RowCount - 2);
+                        break;
+                    }
+                case "sua":
+                    {
+                        enableButon(false);
+                        Commons.Modules.ObjSystems.AddnewRow(grvDinhBien, false);
                         break;
                     }
                 case "xoa":
@@ -376,13 +445,14 @@ namespace Vs.Recruit
         private void enableButon(bool visible)
         {
             windowsUIButton.Buttons[0].Properties.Visible = visible;
-            windowsUIButton.Buttons[1].Properties.Visible = false;
+            windowsUIButton.Buttons[1].Properties.Visible = visible;
             windowsUIButton.Buttons[2].Properties.Visible = visible;
             windowsUIButton.Buttons[3].Properties.Visible = visible;
             windowsUIButton.Buttons[4].Properties.Visible = visible;
-            windowsUIButton.Buttons[5].Properties.Visible = !visible;
+            windowsUIButton.Buttons[5].Properties.Visible = visible;
             windowsUIButton.Buttons[6].Properties.Visible = !visible;
-            windowsUIButton.Buttons[7].Properties.Visible = visible;
+            windowsUIButton.Buttons[7].Properties.Visible = !visible;
+            windowsUIButton.Buttons[8].Properties.Visible = visible;
             datNam.ReadOnly = !visible;
             cboDV.ReadOnly = !visible;
         }

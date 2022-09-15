@@ -458,17 +458,27 @@ namespace Vs.HRM
 
         private void XoaKeHoachKhoaDaoTao()
         {
-            if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDeleteKeHoachDaoTao"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) return;
-            //xóa
-            try
+            if (Convert.ToInt32(grvDSCN.GetFocusedRowCellValue("ID_CN")) > 1)
             {
-                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "DELETE FROM dbo.KE_HOACH_DAO_TAO WHERE ID_KDT = " + grvDSCN.GetFocusedRowCellValue("ID_KDT") + " AND ID_CN = " + grvDSCN.GetFocusedRowCellValue("ID_CN") + "");
-                grvDSCN.DeleteSelectedRows();
+                if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDeleteKeHoachDaoTao"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) return;
+                //xóa
+                try
+                {
+                    SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "DELETE FROM dbo.KE_HOACH_DAO_TAO WHERE ID_KDT = " + grvDSCN.GetFocusedRowCellValue("ID_KDT") + " AND ID_CN = " + grvDSCN.GetFocusedRowCellValue("ID_CN") + "");
+                    grvDSCN.DeleteSelectedRows();
+                    LoadGridKeHoachDaoTao(them);
+
+                }
+                catch (Exception ex)
+                {
+                    XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDelDangSuDung") + "\n" + ex.Message.ToString(), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
-            catch (Exception ex)
+            else
             {
-                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDelDangSuDung") + "\n" + ex.Message.ToString(), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgChuaChonKhoaHoc"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+           
         }
         private void grdKhoaHoc_ProcessGridKey(object sender, KeyEventArgs e)
         {

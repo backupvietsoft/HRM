@@ -19,6 +19,7 @@ namespace Vs.HRM
     public partial class ucTaoHopDong : DevExpress.XtraEditors.XtraUserControl
     {
         private bool flag = false;
+        private long iID_CN = -1;
         private int iAdd = 0;
         public AccordionControl accorMenuleft;
         private ucCTQLNS ucNS;
@@ -26,7 +27,6 @@ namespace Vs.HRM
         public ucTaoHopDong()
         {
             InitializeComponent();
-            Commons.Modules.ObjSystems.ThayDoiNN(this, new List<LayoutControlGroup> { Root }, btnALL);
         }
         #region even
         private void ucTaoHopDong_Load(object sender, EventArgs e)
@@ -46,6 +46,8 @@ namespace Vs.HRM
                 enabel(true);
                 btnALL.Buttons[0].Properties.Visible = false;
                 btnALL.Buttons[1].Properties.Visible = false;
+
+                Commons.Modules.ObjSystems.ThayDoiNN(this, new List<LayoutControlGroup> { Root }, btnALL);
             }
             catch (Exception ex)
             {
@@ -105,7 +107,10 @@ namespace Vs.HRM
                 DataTable dt = new DataTable();
                 dt = ds.Tables[0].Copy();
                 dt.Columns["CHON"].ReadOnly = false;
-                dt.Columns["TAI_LIEU"].ReadOnly = true;
+                //dt.Columns["TAI_LIEU"].ReadOnly = true;
+                dt.PrimaryKey = new DataColumn[] { dt.Columns["ID_CN"] };
+
+                
 
                 if (grdDSUngVien.DataSource == null)
                 {
@@ -129,6 +134,13 @@ namespace Vs.HRM
                     grdDSUngVien.DataSource = dt;
                 }
 
+                if (iID_CN != -1)
+                {
+                    int index = dt.Rows.IndexOf(dt.Rows.Find(iID_CN));
+                    grvDSUngVien.FocusedRowHandle = grvDSUngVien.GetRowHandle(index);
+                    grvDSUngVien.ClearSelection();
+                }
+
                 if (rdoChonXem.SelectedIndex == 0)
                 {
                     grvDSUngVien.Columns["ID_HDLD"].Visible = false;
@@ -144,6 +156,7 @@ namespace Vs.HRM
                 {
                     RepositoryItemButtonEdit btnEdit = new RepositoryItemButtonEdit();
                     grvDSUngVien.Columns["TAI_LIEU"].ColumnEdit = btnEdit;
+                    dt.Columns["TEN_DV"].ReadOnly = true;
                     btnEdit.ButtonClick += BtnEdit_ButtonClick;
 
                     grvDSUngVien.Columns["ID_CN"].Visible = false;
@@ -267,7 +280,7 @@ namespace Vs.HRM
                 }
                 catch { }
                 //Commons.Modules.ObjSystems.AddCombXtra("ID_DGTN", "TEN_DGTN", "TEN_DGTN", grvDSUngVien, Commons.Modules.ObjSystems.DataDanhGiaTayNghe(false), true, "ID_DGTN", this.Name, true);
-
+                
                 //ID_YCTD,MA_YCTD
             }
             catch (Exception ex) { }
@@ -367,8 +380,10 @@ namespace Vs.HRM
         {
             try
             {
+                DataTable dt = new DataTable();
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT ID_NL, MS_NL, CASE " + Commons.Modules.TypeLanguage + " WHEN 0 THEN TEN_NL WHEN 1 THEN ISNULL(NULLIF(TEN_NL_A,''),TEN_NL) ELSE ISNULL(NULLIF(TEN_NL_H,''),TEN_NL) END AS TEN_NL FROM dbo.NGACH_LUONG ORDER BY MS_NL"));
                 LookUpEdit lookUp = sender as LookUpEdit;
-                lookUp.Properties.DataSource = Commons.Modules.ObjSystems.DataNgachLuong(false);
+                lookUp.Properties.DataSource = dt;
             }
             catch { }
         }
@@ -729,10 +744,12 @@ namespace Vs.HRM
         {
             try
             {
+                iID_CN = Convert.ToInt64(grvDSUngVien.GetFocusedRowCellValue("ID_CN"));
                 ucNS = new HRM.ucCTQLNS(Convert.ToInt64(grvDSUngVien.GetFocusedRowCellValue("ID_CN")));
                 Commons.Modules.ObjSystems.ShowWaitForm(this);
                 ucNS.Refresh();
-
+                ucNS.flag = true;
+                ucNS.sTenLab = "labHopDong";
                 //ns.accorMenuleft = accorMenuleft;
                 tableLayoutPanel1.Hide();
                 this.Controls.Add(ucNS);
@@ -782,7 +799,6 @@ namespace Vs.HRM
         {
             try
             {
-                if (btnALL.Buttons[2].Properties.Visible || btnALL.Buttons[0].Properties.Visible) return;
                 DevExpress.XtraGrid.Views.Grid.GridView view = sender as DevExpress.XtraGrid.Views.Grid.GridView;
                 if (e.MenuType == DevExpress.XtraGrid.Views.Grid.GridMenuType.Row)
                 {
@@ -790,6 +806,8 @@ namespace Vs.HRM
                     e.Menu.Items.Clear();
                     DevExpress.Utils.Menu.DXMenuItem itemTTNS = MCreateMenuThongTinNS(view, irow);
                     e.Menu.Items.Add(itemTTNS);
+                    if (btnALL.Buttons[2].Properties.Visible || btnALL.Buttons[0].Properties.Visible) return;
+                    if (grvDSUngVien.FocusedColumn.FieldName.ToString() == "MS_CN" || grvDSUngVien.FocusedColumn.FieldName.ToString() == "HO_TEN") return;
                     DevExpress.Utils.Menu.DXMenuItem itemCapNhatAll = MCreateMenuCapNhatAll(view, irow);
                     e.Menu.Items.Add(itemCapNhatAll);
                     //if (flag == false) return;
@@ -868,7 +886,9 @@ namespace Vs.HRM
                 {
                     int iNgayTV = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT ISNULL(SO_NGAY,0) SO_NGAY FROM dbo.LOAI_HDLD WHERE ID_LHDLD = " + Convert.ToInt32(grvDSUngVien.GetFocusedRowCellValue("ID_LHDLD")) + ""));
                     NgayBD_HD = Convert.ToDateTime(grvDSUngVien.GetFocusedRowCellValue("NGAY_BD_THU_VIEC"));
+                    DateTime dNgayKT = Convert.ToDateTime(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT [dbo].[fnNgayKetThucHD]('"+ Convert.ToDateTime(NgayBD_HD).ToString("MM/dd/yyyy") + "' ,"+iNgayTV+")"));
                     NgayKT_HD = Convert.ToDateTime(grvDSUngVien.GetFocusedRowCellValue("NGAY_BD_THU_VIEC")).AddDays(iNgayTV);
+                    NgayKT_HD = dNgayKT;
 
                     row["NGAY_BD_THU_VIEC"] = NgayBD_HD;
                     row["NGAY_KT_THU_VIEC"] = NgayKT_HD;
@@ -881,7 +901,7 @@ namespace Vs.HRM
                     row["MUC_LUONG_CHINH"] = MucLuongChinh;
                 }
             }
-            catch { }
+            catch (Exception ex) { }
         }
 
         private void grvDSUngVien_ValidatingEditor(object sender, DevExpress.XtraEditors.Controls.BaseContainerValidateEditorEventArgs e)
@@ -965,17 +985,17 @@ namespace Vs.HRM
                         errorCount++;
                     }
 
-                    //ID_NL
-                    if (!KiemDuLieu(grvDSUngVien, dr, "ID_NL", true, 250, this.Name))
-                    {
-                        errorCount++;
-                    }
+                    ////ID_NL
+                    //if (!KiemDuLieu(grvDSUngVien, dr, "ID_NL", true, 250, this.Name))
+                    //{
+                    //    errorCount++;
+                    //}
 
-                    //ID_BL
-                    if (!KiemDuLieu(grvDSUngVien, dr, "ID_BL", true, 250, this.Name))
-                    {
-                        errorCount++;
-                    }
+                    ////ID_BL
+                    //if (!KiemDuLieu(grvDSUngVien, dr, "ID_BL", true, 250, this.Name))
+                    //{
+                    //    errorCount++;
+                    //}
 
                     //MUC_LUONG_CHINH
                     if (!KiemDuLieuSo(grvDSUngVien, dr, "MUC_LUONG_CHINH", grvDSUngVien.Columns["MUC_LUONG_CHINH"].FieldName.ToString(), 0, 0, true, this.Name))
@@ -983,11 +1003,11 @@ namespace Vs.HRM
                         errorCount++;
                     }
 
-                    //DIA_DIEM_LV
-                    if (!KiemDuLieu(grvDSUngVien, dr, "DIA_DIEM_LAM_VIEC", true, 250, this.Name))
-                    {
-                        errorCount++;
-                    }
+                    ////DIA_DIEM_LV
+                    //if (!KiemDuLieu(grvDSUngVien, dr, "DIA_DIEM_LAM_VIEC", true, 250, this.Name))
+                    //{
+                    //    errorCount++;
+                    //}
                 }
             }
             #endregion

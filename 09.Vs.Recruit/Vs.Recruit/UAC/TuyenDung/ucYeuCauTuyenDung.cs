@@ -148,8 +148,6 @@ namespace Vs.Recruit
             DataRowView dataRow = lookUp.GetSelectedDataRow() as DataRowView;
             grvViTri.SetFocusedRowCellValue("ID_LCV", Convert.ToUInt64((dataRow.Row[0])));
         }
-
-
         private void CboViTri_BeforePopup(object sender, EventArgs e)
         {
             try

@@ -1904,3 +1904,12 @@ F:\01.HRM\03.Vs.Category\Vs.Category\obj\Debug\Vs.Category.csproj.CoreCompileInp
 F:\01.HRM\03.Vs.Category\Vs.Category\obj\Debug\Vs.Category.csproj.CopyComplete
 F:\01.HRM\03.Vs.Category\Vs.Category\obj\Debug\Vs.Category.dll
 F:\01.HRM\03.Vs.Category\Vs.Category\obj\Debug\Vs.Category.pdb
+F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\Commons.dll
+F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\EPPlus.dll
+F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\NPOI.dll
+F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\NPOI.OOXML.dll
+F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\NPOI.OpenXmlFormats.dll
+F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\NPOI.OpenXml4Net.dll
+F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\Commons.pdb
+F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\Commons.dll.config
+F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\Newtonsoft.Json.xml

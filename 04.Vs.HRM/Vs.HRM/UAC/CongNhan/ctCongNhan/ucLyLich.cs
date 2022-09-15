@@ -17,6 +17,10 @@ namespace Vs.HRM
         bool cothem = false;
         Int64 idcn = -1;
         public DataTable dt;
+        bool HopLeMS = true;
+        bool HopLeMT = true;
+        bool HopLeNgaySinh = true;
+        bool isCancel = false;
 
         public ucLyLich(Int64 id)
         {
@@ -41,12 +45,13 @@ namespace Vs.HRM
             Commons.OSystems.SetDateEditFormat(NGAY_HET_HANDateEdit);
 
             //đơn vị 
-            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(ID_DVLookUpEdit, Commons.Modules.ObjSystems.DataDonVi(true), "ID_DV", "TEN_DV", "TEN_DV", true, false, false);
+            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(ID_DVLookUpEdit, Commons.Modules.ObjSystems.DataDonVi(false), "ID_DV", "TEN_DV", "TEN_DV", true, false, false);
 
             //xí nghiệp 
             Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(ID_XNLookUpEdit, Commons.Modules.ObjSystems.DataXiNghiep(Convert.ToInt32(-1), false), "ID_XN", "TEN_XN", "TEN_XN", true, false, false);
 
-            //tổ
+            ////tổ
+            //Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(ID_TOLookupEdit, Commons.Modules.ObjSystems.DataTo(Convert.ToInt32(-1), Convert.ToInt32(-1), false), "ID_TO", "TEN_TO", "TEN_TO", true, false, false);
             Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(ID_TOLookupEdit, Commons.Modules.ObjSystems.DataTo(Convert.ToInt32(-1), Convert.ToInt32(-1), false), "ID_TO", "TEN_TO", "TEN_TO", true, false, false);
 
             //ID_QGLookUpEdit
@@ -70,11 +75,17 @@ namespace Vs.HRM
             //ID_PX_TAM_TRULookUpEdit
             Commons.Modules.ObjSystems.MLoadLookUpEditN(ID_PX_TAM_TRULookUpEdit, Commons.Modules.ObjSystems.DataPhuongXa(Convert.ToInt32(-1), false), "ID_PX", "TEN_PX", "TEN_PX", "");
 
-            //ID_LCVLookUpEdit
-            Commons.Modules.ObjSystems.MLoadLookUpEditN(ID_LCVLookUpEdit, Commons.Modules.ObjSystems.DataLoaiCV(false, Convert.ToInt32(-1)), "ID_LCV", "TEN_LCV", "TEN_LCV", "", true);
+            ////ID_LCVLookUpEdit
+            //Commons.Modules.ObjSystems.MLoadLookUpEditN(ID_LCVLookUpEdit, Commons.Modules.ObjSystems.DataLoaiCV(false, Convert.ToInt32(-1)), "ID_LCV", "TEN_LCV", "TEN_LCV", "", true);
 
-            //ID_CVLookUpEdit
-            Commons.Modules.ObjSystems.MLoadLookUpEditN(ID_CVLookUpEdit, Commons.Modules.ObjSystems.DataChucVu(false, Convert.ToInt32(-1)), "ID_CV", "TEN_CV", "TEN_CV", "", true);
+            ////ID_CVLookUpEdit
+            //Commons.Modules.ObjSystems.MLoadLookUpEditN(ID_CVLookUpEdit, Commons.Modules.ObjSystems.DataChucVu(false, Convert.ToInt32(-1)), "ID_CV", "TEN_CV", "TEN_CV", "", true);
+
+            //ID_LCVLookUpEdit.EditValue = "";
+            Commons.Modules.ObjSystems.MLoadLookUpEdit(ID_LCVLookUpEdit, Commons.Modules.ObjSystems.DataLoaiCV(false, Convert.ToInt32(-1)), "ID_LCV", "TEN_LCV", "TEN_LCV", true);
+
+            //ID_CVLookUpEdit.EditValue = "";
+            Commons.Modules.ObjSystems.MLoadLookUpEdit(ID_CVLookUpEdit, Commons.Modules.ObjSystems.DataChucVu(false, Convert.ToInt32(-1)), "ID_CV", "TEN_CV", "TEN_CV", true);
 
             ////ID_LHDLDLookUpEdit
             //Commons.Modules.ObjSystems.MLoadLookUpEditN(ID_LHDLDLookUpEdit, Commons.Modules.ObjSystems.DataLoaiHDLD(false), "ID_LHDLD", "TEN_LHDLD", "TEN_LHDLD", "", true);
@@ -129,7 +140,16 @@ namespace Vs.HRM
                 Commons.Modules.ObjSystems.MLoadLookUpEditN(cboID_KV, dt_kv, "ID_KV", "TEN_KV", "TEN_KV", "");
                 ItemForKHU_VUC.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
             }
-            enableButon(true);
+
+            if (idcn == -1)
+            {
+                enableButon(false);
+            }
+            else
+            {
+                enableButon(true);
+            }
+
             Tab.SelectedTabPage = groupThongTinBoXung;
             Commons.Modules.ObjSystems.SetPhanQuyen(windowsUIButton);
             if (Commons.Modules.iCongNhan == -1)
@@ -144,12 +164,23 @@ namespace Vs.HRM
             try
             {
 
-
                 switch (intType)
                 {
                     case 1:
                         {
+
+                            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(ID_DVLookUpEdit, Commons.Modules.ObjSystems.DataDonVi(false), "ID_DV", "TEN_DV", "TEN_DV", true, false, false);
+
                             Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(ID_XNLookUpEdit, Commons.Modules.ObjSystems.DataXiNghiep(Convert.ToInt32(ID_DVLookUpEdit.EditValue), false), "ID_XN", "TEN_XN", "TEN_XN", true, true);
+
+                            //tổ
+                            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(ID_TOLookupEdit, Commons.Modules.ObjSystems.DataTo(Convert.ToInt32(ID_DVLookUpEdit.EditValue), Convert.ToInt32(ID_XNLookUpEdit.EditValue), false), "ID_TO", "TEN_TO", "TEN_TO", true, false, false);
+
+                            //ID_LCVLookUpEdit.EditValue = "";
+                            Commons.Modules.ObjSystems.MLoadLookUpEdit(ID_LCVLookUpEdit, Commons.Modules.ObjSystems.DataLoaiCV(false, Convert.ToInt32(ID_XNLookUpEdit.EditValue)), "ID_LCV", "TEN_LCV", "TEN_LCV", true);
+
+                            //ID_CVLookUpEdit.EditValue = "";
+                            Commons.Modules.ObjSystems.MLoadLookUpEdit(ID_CVLookUpEdit, Commons.Modules.ObjSystems.DataChucVu(false, Convert.ToInt32(ID_LCVLookUpEdit.EditValue)), "ID_CV", "TEN_CV", "TEN_CV", true);
 
 
                             Commons.Modules.ObjSystems.MLoadLookUpEdit(ID_TPLookUpEdit, Commons.Modules.ObjSystems.DataThanhPho(Convert.ToInt32(ID_QGLookUpEdit.EditValue), false), "ID_TP", "TEN_TP", "TEN_TP", true);
@@ -162,15 +193,7 @@ namespace Vs.HRM
                         }
                     case 2:
                         {
-                            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(ID_XNLookUpEdit, Commons.Modules.ObjSystems.DataXiNghiep(Convert.ToInt32(ID_DVLookUpEdit.EditValue), false), "ID_XN", "TEN_XN", "TEN_XN", true, false, false);
-
-                            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(ID_TOLookupEdit, Commons.Modules.ObjSystems.DataTo(Convert.ToInt32(ID_DVLookUpEdit.EditValue), Convert.ToInt32(ID_XNLookUpEdit.EditValue), false), "ID_TO", "TEN_TO", "TEN_TO", true, false, false);
-
-                            //ID_LCVLookUpEdit
-                            Commons.Modules.ObjSystems.MLoadLookUpEditN(ID_LCVLookUpEdit, Commons.Modules.ObjSystems.DataLoaiCV(false, Convert.ToInt32(ID_XNLookUpEdit.EditValue)), "ID_LCV", "TEN_LCV", "TEN_LCV", "", true);
-
-                            //ID_CVLookUpEdit
-                            Commons.Modules.ObjSystems.MLoadLookUpEditN(ID_CVLookUpEdit, Commons.Modules.ObjSystems.DataChucVu(false, Convert.ToInt32(ID_LCVLookUpEdit.EditValue)), "ID_CV", "TEN_CV", "TEN_CV", "", true);
+                            Load_cboChucVu();
 
                             if (ID_LOAI_TDLookUpEdit.EditValue.ToString() != "")
                             {
@@ -206,7 +229,6 @@ namespace Vs.HRM
                             {
                                 Commons.Modules.ObjSystems.MLoadLookUpEditN(ID_PX_TAM_TRULookUpEdit, Commons.Modules.ObjSystems.DataPhuongXa(Convert.ToInt32(ID_QUAN_TAM_TRULookUpEdit.EditValue), false), "ID_PX", "TEN_PX", "TEN_PX", "");
                             }
-
 
 
                             break;
@@ -247,27 +269,18 @@ namespace Vs.HRM
                             ////ID_TDVHLookUpEdit ID_TDVH,TEN_TDVH
                             Commons.Modules.ObjSystems.MLoadLookUpEditN(ID_TDVHLookUpEdit, Commons.Modules.ObjSystems.DataTDVH(Convert.ToInt32(-1), false), "ID_TDVH", "TEN_TDVH", "TEN_TDVH", "");
 
+                            //xí nghiệp 
+                            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(ID_XNLookUpEdit, Commons.Modules.ObjSystems.DataXiNghiep(Convert.ToInt32(-1), false), "ID_XN", "TEN_XN", "TEN_XN", true, false, false);
+
+                            //tổ
+                            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(ID_TOLookupEdit, Commons.Modules.ObjSystems.DataTo(Convert.ToInt32(-1), Convert.ToInt32(-1), false), "ID_TO", "TEN_TO", "TEN_TO", true, false, false);
+
                             break;
                         }
                     default:
                         break;
                 }
 
-
-                //xí nghiệp 
-                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(ID_XNLookUpEdit, Commons.Modules.ObjSystems.DataXiNghiep(Convert.ToInt32(-1), false), "ID_XN", "TEN_XN", "TEN_XN", true, false, false);
-
-                //tổ
-                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(ID_TOLookupEdit, Commons.Modules.ObjSystems.DataTo(Convert.ToInt32(-1), Convert.ToInt32(-1), false), "ID_TO", "TEN_TO", "TEN_TO", true, false, false);
-
-                //ID_LCVLookUpEdit
-                Commons.Modules.ObjSystems.MLoadLookUpEditN(ID_LCVLookUpEdit, Commons.Modules.ObjSystems.DataLoaiCV(false, Convert.ToInt32(ID_XNLookUpEdit.EditValue)), "ID_LCV", "TEN_LCV", "TEN_LCV", "", true);
-
-                ////ID_CVLookUpEdit
-                //Commons.Modules.ObjSystems.MLoadLookUpEditN(ID_CVLookUpEdit, Commons.Modules.ObjSystems.DataChucVu(false, Convert.ToInt32(ID_LCVLookUpEdit.EditValue)), "ID_CV", "TEN_CV", "TEN_CV", "", true);
-
-                //ID_TPLookUpEdit 
-                //Commons.Modules.ObjSystems.MLoadLookUpEditN(ID_TPLookUpEdit, Commons.Modules.ObjSystems.DataThanhPho(Convert.ToInt32(-1), false), "ID_TP", "TEN_TP", "TEN_TP", "");
                 //ID_QUANLookEdit
                 Commons.Modules.ObjSystems.MLoadLookUpEditN(ID_QUANLookEdit, Commons.Modules.ObjSystems.DataQuan(Convert.ToInt32(-1), false), "ID_QUAN", "TEN_QUAN", "TEN_QUAN", "");
 
@@ -288,8 +301,56 @@ namespace Vs.HRM
             }
             catch { }
         }
-        //===================Tung sua 14/09/2021
 
+        private bool IsNumber(string pValue)
+        {
+            bool isNumeric = true;
+            foreach (Char c in pValue)
+            {
+                if (!Char.IsNumber(c))
+                {
+                    isNumeric = false;
+                    return isNumeric;
+                }
+            }
+            return isNumeric;
+        }
+
+        /// <summary>
+        /// Clear all of error
+        /// </summary>
+        private void ClearError()
+        {
+            MS_CNTextEdit.ToolTipIconType = DevExpress.Utils.ToolTipIconType.None;
+            MS_CNTextEdit.ErrorText = null;
+            NGAY_SINHDateEdit.ToolTipIconType = DevExpress.Utils.ToolTipIconType.None;
+            NGAY_SINHDateEdit.ErrorText = null;
+            MS_THE_CCTextEdit.ToolTipIconType = DevExpress.Utils.ToolTipIconType.None;
+            MS_THE_CCTextEdit.ErrorText = null;
+        }
+
+        private void Load_cboChucVu()
+        {
+            try
+            {
+                DataTable dt = new DataTable();
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetListCTCongNhan", Commons.Modules.iCongNhan, Commons.Modules.UserName, Commons.Modules.TypeLanguage));
+
+                ID_DVLookUpEdit.EditValue = dt.Rows[0]["ID_DV"];
+                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(ID_XNLookUpEdit, Commons.Modules.ObjSystems.DataXiNghiep(Convert.ToInt32(ID_DVLookUpEdit.EditValue), false), "ID_XN", "TEN_XN", "TEN_XN", true, true);
+                ID_XNLookUpEdit.EditValue = dt.Rows[0]["ID_XN"];
+                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(ID_TOLookupEdit, Commons.Modules.ObjSystems.DataTo(Convert.ToInt32(ID_DVLookUpEdit.EditValue), Convert.ToInt32(ID_XNLookUpEdit.EditValue), false), "ID_TO", "TEN_TO", "TEN_TO", true, false, false);
+                ID_TOLookupEdit.EditValue = dt.Rows[0]["ID_TO"];
+                Commons.Modules.ObjSystems.MLoadLookUpEdit(ID_LCVLookUpEdit, Commons.Modules.ObjSystems.DataLoaiCV(false, Convert.ToInt32(ID_XNLookUpEdit.EditValue)), "ID_LCV", "TEN_LCV", "TEN_LCV", true);
+                ID_LCVLookUpEdit.EditValue = dt.Rows[0]["ID_LCV"];
+                Commons.Modules.ObjSystems.MLoadLookUpEdit(ID_CVLookUpEdit, Commons.Modules.ObjSystems.DataChucVu(false, Convert.ToInt32(ID_LCVLookUpEdit.EditValue)), "ID_CV", "TEN_CV", "TEN_CV", true);
+                ID_CVLookUpEdit.EditValue = dt.Rows[0]["ID_CV"];
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         private void windowsUIButton_ButtonClick(object sender, DevExpress.XtraBars.Docking2010.ButtonEventArgs e)
         {
             WindowsUIButton btn = e.Button as WindowsUIButton;
@@ -320,6 +381,19 @@ namespace Vs.HRM
                         idcn = Commons.Modules.iCongNhan;
                         LoadCmbLoc(2);
                         enableButon(false);
+
+                        int TongSoQTCT = 0;
+                        int TongSoHDLD = 0;
+                        TongSoQTCT = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT COUNT(ID_QTCT) FROM dbo.QUA_TRINH_CONG_TAC WHERE ID_CN =  " + Commons.Modules.iCongNhan + " GROUP BY ID_CN"));
+                        TongSoHDLD = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT COUNT(ID_HDLD) FROM dbo.HOP_DONG_LAO_DONG WHERE ID_CN =  " + Commons.Modules.iCongNhan + " GROUP BY ID_CN"));
+                        if (TongSoQTCT > 0)
+                        {
+                            this.LockTheoQTCT();
+                        }
+                        if (TongSoHDLD > 0)
+                        {
+                            this.LockTheoHDLD();
+                        }
                         Commons.Modules.ObjSystems.AddnewRow(grvBangCapCN, true);
                         THAM_GIA_BHXHCheckEdit_CheckedChanged(null, null);
                         LD_NNCheckEdit_CheckedChanged(null, null);
@@ -339,11 +413,16 @@ namespace Vs.HRM
                 case "luu":
                     {
                         if (!dxValidationProvider1.Validate()) return;
+                        CheckMS();
+                        CheckMT();
+                        if (!HopLeMS || !HopLeMT || !HopLeNgaySinh) return;
                         if (MS_CNTextEdit.Text != "") if (!kiemtrung(1)) return;
                         if (MS_THE_CCTextEdit.Text != "") if (!kiemtrung(2)) return;
                         if (!kiemtrung(3)) return;
+
                         if (SaveData())
                         {
+                            this.ClearError();
                             BinDingData(false);
                             enableButon(true);
                         }
@@ -352,6 +431,7 @@ namespace Vs.HRM
                     }
                 case "khongluu":
                     {
+                        isCancel = true;
                         Commons.Modules.sLoad = "0Load";
                         LoadCmbLoc(3);
                         BinDingData(false);
@@ -359,6 +439,7 @@ namespace Vs.HRM
                         Commons.Modules.ObjSystems.ClearValidationProvider(dxValidationProvider1);
                         Commons.Modules.ObjSystems.DeleteAddRow(grvBangCapCN);
                         Commons.Modules.sLoad = "";
+                        this.ClearError();
                         break;
                     }
                 case "thoat":
@@ -564,6 +645,8 @@ namespace Vs.HRM
                 NGAY_SINHDateEdit.EditValue = null;
                 NAM_SINHDateEdit.EditValue = null;
                 PHAILookupEdit.EditValue = 0;
+                ID_DVLookUpEdit.EditValue = null;
+                ID_XNLookUpEdit.EditValue = null;
                 ID_TOLookupEdit.EditValue = null;
                 ID_CVLookUpEdit.EditValue = null;
                 ID_LCVLookUpEdit.EditValue = null;
@@ -636,7 +719,11 @@ namespace Vs.HRM
                 //lấy danh sách chi tiết công nhân 
                 dt = new DataTable();
                 dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetListCTCongNhan", Commons.Modules.iCongNhan, Commons.Modules.UserName, Commons.Modules.TypeLanguage));
-                if (dt.Rows.Count == 0) return;
+                if (dt.Rows.Count == 0)
+                {
+                    BinDingData(true);
+                    return;
+                }
                 try
                 {
                     Byte[] data = new Byte[0];
@@ -656,7 +743,8 @@ namespace Vs.HRM
                     TENTextEdit.EditValue = dt.Rows[0]["TEN"];
                     TEN_KHONG_DAUTextEdit.EditValue = dt.Rows[0]["TEN_KHONG_DAU"];
                     NGAY_SINHDateEdit.EditValue = dt.Rows[0]["NGAY_SINH"];
-                    NAM_SINHDateEdit.EditValue = dt.Rows[0]["NAM_SINH"].ToString();
+                    //NAM_SINHDateEdit.EditValue = dt.Rows[0]["NAM_SINH"].ToString();
+                    NAM_SINHDateEdit.EditValue = dt.Rows[0]["NAM_SINH"] == null || dt.Rows[0]["NAM_SINH"].ToString().Trim() == "" ? Convert.ToDateTime(NGAY_SINHDateEdit.EditValue).Year.ToString().Trim() : dt.Rows[0]["NAM_SINH"].ToString();
                     PHAILookupEdit.EditValue = Convert.ToInt32(dt.Rows[0]["PHAI"]);
                     ID_DVLookUpEdit.EditValue = dt.Rows[0]["ID_DV"];
                     ID_XNLookUpEdit.EditValue = dt.Rows[0]["ID_XN"];
@@ -728,10 +816,12 @@ namespace Vs.HRM
                 }
                 catch (Exception)
                 {
+                    isCancel = false;
                 }
 
                 //load lưới bằng cấp
             }
+            isCancel = false;
         }
         private void LoadgrdBangCap()
         {
@@ -848,7 +938,22 @@ namespace Vs.HRM
             LD_GIAM_LDNNLookUpEdit.Properties.ReadOnly = visible;
 
         }
+        private void LockTheoQTCT()
+        {
+            ID_XNLookUpEdit.Properties.ReadOnly = true;
+            ID_DVLookUpEdit.Properties.ReadOnly = true;
+            ID_TOLookupEdit.Properties.ReadOnly = true;
+            ID_CVLookUpEdit.Properties.ReadOnly = true;
+            ID_LCVLookUpEdit.Properties.ReadOnly = true;
+        }
 
+        private void LockTheoHDLD()
+        {
+            NGAY_THU_VIECDateEdit.Properties.ReadOnly = true;
+            NGAY_VAO_LAMDateEdit.Properties.ReadOnly = true;
+            ID_TT_HDLookUpEdit.Properties.ReadOnly = true;
+            ID_LHDLDLookUpEdit.Properties.ReadOnly = true;
+        }
         private byte[] imgToByteConverter(Image inImg)
         {
 
@@ -1072,34 +1177,47 @@ namespace Vs.HRM
         private void ID_DVLookUpEdit_EditValueChanged(object sender, EventArgs e)
         {
             if (Commons.Modules.sLoad == "0Load") return;
-            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(ID_XNLookUpEdit, Commons.Modules.ObjSystems.DataXiNghiep(Convert.ToInt32(ID_DVLookUpEdit.EditValue), false), "ID_XN", "TEN_XN", "TEN_XN", true);
+            if (Commons.Modules.iCongNhan == -1 || idcn == -1)
+            {
+                try
+                {
+                    MS_CNTextEdit.Text = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.AUTO_CREATE_SO_CONG_NHAN(" + ID_DVLookUpEdit.EditValue + ",1)").ToString();
+                    MS_THE_CCTextEdit.Text = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.AUTO_CREATE_SO_CONG_NHAN(" + ID_DVLookUpEdit.EditValue + ",2)").ToString();
+                }
+                catch { }
+            }
+            if (isCancel) return;
+            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(ID_XNLookUpEdit, Commons.Modules.ObjSystems.DataXiNghiep(Convert.ToInt32(ID_DVLookUpEdit.EditValue), false), "ID_XN", "TEN_XN", "TEN_XN", true, true);
+            CheckMS();
+            CheckMT();
         }
 
         private void ID_XNLookUpEdit_EditValueChanged(object sender, EventArgs e)
         {
             if (Commons.Modules.sLoad == "0Load") return;
-            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(ID_TOLookupEdit, Commons.Modules.ObjSystems.DataTo(Convert.ToInt32(ID_DVLookUpEdit.EditValue), Convert.ToInt32(ID_XNLookUpEdit.EditValue), false), "ID_TO", "TEN_TO", "TEN_TO", true);
+            if (isCancel) return;
+            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(ID_TOLookupEdit, Commons.Modules.ObjSystems.DataTo(Convert.ToInt32(ID_DVLookUpEdit.EditValue), Convert.ToInt32(ID_XNLookUpEdit.EditValue), false), "ID_TO", "TEN_TO", "TEN_TO", true, true);
+            Commons.Modules.ObjSystems.MLoadLookUpEdit(ID_LCVLookUpEdit, Commons.Modules.ObjSystems.DataLoaiCV(false, Convert.ToInt32(ID_XNLookUpEdit.EditValue)), "ID_LCV", "TEN_LCV", "TEN_LCV", true);
 
-            Commons.Modules.ObjSystems.MLoadLookUpEditN(ID_LCVLookUpEdit, Commons.Modules.ObjSystems.DataLoaiCV(false, Convert.ToInt32(ID_XNLookUpEdit.EditValue)), "ID_LCV", "TEN_LCV", "TEN_LCV", "", true);
-            ID_LCVLookUpEdit.ItemIndex = 0;
         }
 
         private void ID_LCVLookUpEdit_EditValueChanged(object sender, EventArgs e)
         {
             if (Commons.Modules.sLoad == "0Load") return;
+            if (isCancel) return;
             try
             {
                 PHEP_CTTextEdit.Text = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT [dbo].[funPhepCongThem](" + ID_LCVLookUpEdit.EditValue + ")").ToString();
 
-                Commons.Modules.ObjSystems.MLoadLookUpEditN(ID_CVLookUpEdit, Commons.Modules.ObjSystems.DataChucVu(false, Convert.ToInt32(ID_LCVLookUpEdit.EditValue)), "ID_CV", "TEN_CV", "TEN_CV", "", true);
-                ID_CVLookUpEdit.ItemIndex = 0;
+                ID_CVLookUpEdit.Properties.ReadOnly = false;
+                Commons.Modules.ObjSystems.MLoadLookUpEdit(ID_CVLookUpEdit, Commons.Modules.ObjSystems.DataChucVu(false, Convert.ToInt32(ID_LCVLookUpEdit.EditValue)), "ID_CV", "TEN_CV", "TEN_CV", false);
+                ID_CVLookUpEdit.Properties.ReadOnly = true;
             }
             catch (Exception)
             {
                 PHEP_CTTextEdit.Text = "0";
             }
         }
-
         private void grdBangCapCN_ProcessGridKey(object sender, KeyEventArgs e)
         {
             var grid = sender as GridControl;
@@ -1157,11 +1275,325 @@ namespace Vs.HRM
 
         private void NAM_SINHDateEdit_TextChanged(object sender, EventArgs e)
         {
+        }
+
+        private void NGAY_SINHDateEdit_EditValueChanged(object sender, EventArgs e)
+        {
+            NAM_SINHDateEdit.Properties.ReadOnly = false;
+            DateTime NgaySinh = Convert.ToDateTime(NGAY_SINHDateEdit.EditValue);
+            NAM_SINHDateEdit.EditValue = NgaySinh.Year.ToString().Trim();
+            NAM_SINHDateEdit.Text = NgaySinh.Year.ToString().Trim();
+            NAM_SINHDateEdit.Properties.ReadOnly = true;
+        }
+
+        private void SO_CMNDTextEdit_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsDigit(e.KeyChar) && !Char.IsControl(e.KeyChar))
+                e.Handled = true;
+            if (SO_CMNDTextEdit.EditValue.ToString().Trim().Length == 12 && e.KeyChar != '\b')
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void CheckMS()
+        {
             try
             {
-                NGAY_SINHDateEdit.EditValue = Convert.ToDateTime("01/01/" + NAM_SINHDateEdit.Text);
+
+
+                bool isCorrectMS = true;
+                string MS = "";
+                if (MS_CNTextEdit.EditValue != null)
+                {
+                    MS = MS_CNTextEdit.EditValue.ToString().Trim();
+                }
+                if (MS.Length > 9 || MS.Length < 9)
+                {
+                    string DV = "";
+                    if (ID_DVLookUpEdit.EditValue != null)
+                    {
+                        DV = ID_DVLookUpEdit.EditValue.ToString().Trim();
+                    }
+
+                    switch (DV)
+                    {
+                        case "1":
+                            {
+                                MS_CNTextEdit.ToolTipIconType = DevExpress.Utils.ToolTipIconType.Error;
+                                MS_CNTextEdit.ErrorText = "Vui lòng nhập đúng định dạng DMS + 6 số đuôi cho đơn vị Duy Minh 1.";
+                                isCorrectMS = false;
+                                break;
+                            }
+                        case "2":
+                            {
+                                MS_CNTextEdit.ToolTipIconType = DevExpress.Utils.ToolTipIconType.Error;
+                                MS_CNTextEdit.ErrorText = "Vui lòng nhập đúng định dạng DMT + 6 số đuôi cho đơn vị Duy Minh 2.";
+                                isCorrectMS = false;
+                                break;
+                            }
+                        default:
+                            {
+                                MS_CNTextEdit.ToolTipIconType = DevExpress.Utils.ToolTipIconType.Error;
+                                MS_CNTextEdit.ErrorText = "Vui lòng nhập đúng định dạng DMS + 6 số đuôi cho đơn vị Duy Minh 1 hoặc  DMT + 6 số đuôi cho đơn vị Duy Minh 2";
+                                isCorrectMS = false;
+                                break;
+                            }
+                    }
+                }
+                if (MS.Length == 9)
+                {
+                    string DV = "";
+                    if (ID_DVLookUpEdit.EditValue != null)
+                    {
+                        DV = ID_DVLookUpEdit.EditValue.ToString().Trim();
+                    }
+
+                    switch (DV)
+                    {
+                        case "1":
+                            {
+                                if (MS.Substring(0, 3) != "DMS")
+                                {
+                                    MS_CNTextEdit.ToolTipIconType = DevExpress.Utils.ToolTipIconType.Error;
+                                    MS_CNTextEdit.ErrorText = "Vui lòng nhập đúng định dạng DMS + 6 số đuôi cho đơn vị Duy Minh 1.";
+                                    isCorrectMS = false;
+                                }
+                                if (!IsNumber(MS.Substring(3, 6)))
+                                {
+                                    MS_CNTextEdit.ToolTipIconType = DevExpress.Utils.ToolTipIconType.Error;
+                                    MS_CNTextEdit.ErrorText = "Vui lòng nhập đúng định dạng DMS + 6 số đuôi cho đơn vị Duy Minh 1.";
+                                    isCorrectMS = false;
+                                }
+                                break;
+                            }
+                        case "2":
+                            {
+                                if (MS.Substring(0, 3) != "DMT")
+                                {
+                                    MS_CNTextEdit.ToolTipIconType = DevExpress.Utils.ToolTipIconType.Error;
+                                    MS_CNTextEdit.ErrorText = "Vui lòng nhập đúng định dạng DMT + 6 số đuôi cho đơn vị Duy Minh 2.";
+                                    isCorrectMS = false;
+                                }
+                                if (!IsNumber(MS.Substring(3, 6)))
+                                {
+                                    MS_CNTextEdit.ToolTipIconType = DevExpress.Utils.ToolTipIconType.Error;
+                                    MS_CNTextEdit.ErrorText = "Vui lòng nhập đúng định dạng DMT + 6 số đuôi cho đơn vị Duy Minh 2.";
+                                    isCorrectMS = false;
+                                }
+                                break;
+                            }
+                        default:
+                            {
+                                if (MS.Substring(0, 3) != "DMS" && MS.Substring(0, 3) != "DMT")
+                                {
+                                    MS_CNTextEdit.ToolTipIconType = DevExpress.Utils.ToolTipIconType.Error;
+                                    MS_CNTextEdit.ErrorText = "Vui lòng nhập đúng định dạng DMS + 6 số đuôi cho đơn vị Duy Minh 1 hoặc DMT + 6 số đuôi cho đơn vị Duy Minh 2.";
+                                    isCorrectMS = false;
+                                }
+                                if (!IsNumber(MS.Substring(3, 6)))
+                                {
+                                    MS_CNTextEdit.ToolTipIconType = DevExpress.Utils.ToolTipIconType.Error;
+                                    MS_CNTextEdit.ErrorText = "Vui lòng nhập đúng định dạng DMS + 6 số đuôi cho đơn vị Duy Minh 1 hoặc DMT + 6 số đuôi cho đơn vị Duy Minh 2.";
+                                    isCorrectMS = false;
+                                }
+                                break;
+                            }
+                    }
+                }
+
+                HopLeMS = isCorrectMS;
+
+                if (HopLeMS)
+                {
+                    MS_CNTextEdit.ToolTipIconType = DevExpress.Utils.ToolTipIconType.None;
+                    MS_CNTextEdit.ErrorText = null;
+                }
             }
             catch { }
+        }
+
+        private void CheckMT()
+        {
+            try
+            {
+
+
+                bool isCorrectMT = true;
+                string MT = "";
+                if (MS_THE_CCTextEdit.EditValue != null)
+                {
+                    MT = MS_THE_CCTextEdit.EditValue.ToString().Trim();
+                }
+                if (MT.Length > 7 || MT.Length < 7)
+                {
+                    string DV = "";
+                    if (ID_DVLookUpEdit.EditValue != null)
+                    {
+                        DV = ID_DVLookUpEdit.EditValue.ToString().Trim();
+                    }
+
+                    switch (DV)
+                    {
+                        case "1":
+                            {
+                                MS_THE_CCTextEdit.ToolTipIconType = DevExpress.Utils.ToolTipIconType.Error;
+                                MS_THE_CCTextEdit.ErrorText = "Vui lòng nhập đúng định dạng số 1 + 6 số đuôi.";
+                                isCorrectMT = false;
+                                break;
+                            }
+                        case "2":
+                            {
+                                MS_THE_CCTextEdit.ToolTipIconType = DevExpress.Utils.ToolTipIconType.Error;
+                                MS_THE_CCTextEdit.ErrorText = "Vui lòng nhập đúng định dạng số 1 + 6 số đuôi.";
+                                isCorrectMT = false;
+                                break;
+                            }
+                        default:
+                            {
+                                MS_THE_CCTextEdit.ToolTipIconType = DevExpress.Utils.ToolTipIconType.Error;
+                                MS_THE_CCTextEdit.ErrorText = "Vui lòng nhập đúng định dạng số 1 + 6 số đuôi.";
+                                isCorrectMT = false;
+                                break;
+                            }
+                    }
+                }
+                if (MT.Length == 7)
+                {
+                    string DV = "";
+                    if (ID_DVLookUpEdit.EditValue != null)
+                    {
+                        DV = ID_DVLookUpEdit.EditValue.ToString().Trim();
+                    }
+
+                    switch (DV)
+                    {
+                        case "1":
+                            {
+                                if (MT.Substring(0, 1) != "1")
+                                {
+                                    MS_THE_CCTextEdit.ToolTipIconType = DevExpress.Utils.ToolTipIconType.Error;
+                                    MS_THE_CCTextEdit.ErrorText = "Vui lòng nhập đúng định dạng số 0 + 6 số đuôi cho đơn vị Duy Minh 1.";
+                                    isCorrectMT = false;
+                                }
+                                if (!IsNumber(MT.Substring(1, 6)))
+                                {
+                                    MS_THE_CCTextEdit.ToolTipIconType = DevExpress.Utils.ToolTipIconType.Error;
+                                    MS_THE_CCTextEdit.ErrorText = "Vui lòng nhập đúng định dạng số 0 + 6 số đuôi cho đơn vị Duy Minh 1.";
+                                    isCorrectMT = false;
+                                }
+                                break;
+                            }
+                        case "2":
+                            {
+                                if (MT.Substring(0, 1) != "1")
+                                {
+                                    MS_THE_CCTextEdit.ToolTipIconType = DevExpress.Utils.ToolTipIconType.Error;
+                                    MS_THE_CCTextEdit.ErrorText = "Vui lòng nhập đúng định dạng số 1 + 6 số đuôi.";
+                                    isCorrectMT = false;
+                                }
+                                if (!IsNumber(MT.Substring(1, 6)))
+                                {
+                                    MS_THE_CCTextEdit.ToolTipIconType = DevExpress.Utils.ToolTipIconType.Error;
+                                    MS_THE_CCTextEdit.ErrorText = "Vui lòng nhập đúng định dạng số 1 + 6 số đuôi.";
+                                    isCorrectMT = false;
+                                }
+                                break;
+                            }
+                        default:
+                            {
+                                if (MT.Substring(0, 3) != "DMS" && MT.Substring(0, 3) != "DMT")
+                                {
+                                    MS_THE_CCTextEdit.ToolTipIconType = DevExpress.Utils.ToolTipIconType.Error;
+                                    MS_THE_CCTextEdit.ErrorText = "Vui lòng nhập đúng định dạng số 1 + 6 số đuôi.";
+                                    isCorrectMT = false;
+                                }
+                                if (!IsNumber(MT.Substring(3, 6)))
+                                {
+                                    MS_THE_CCTextEdit.ToolTipIconType = DevExpress.Utils.ToolTipIconType.Error;
+                                    MS_THE_CCTextEdit.ErrorText = "Vui lòng nhập đúng định dạng số 1 + 6 số đuôi.";
+                                    isCorrectMT = false;
+                                }
+                                break;
+                            }
+                    }
+                }
+
+                HopLeMT = isCorrectMT;
+                if (HopLeMT)
+                {
+                    MS_THE_CCTextEdit.ToolTipIconType = DevExpress.Utils.ToolTipIconType.None;
+                    MS_THE_CCTextEdit.ErrorText = null;
+                }
+            }
+            catch { }
+        }
+        private void MS_CNTextEdit_Validated(object sender, EventArgs e)
+        {
+            CheckMS();
+        }
+
+        private void MS_THE_CCTextEdit_Validated(object sender, EventArgs e)
+        {
+            CheckMT();
+        }
+
+        private void NGAY_SINHDateEdit_Validated(object sender, EventArgs e)
+        {
+            if (NGAY_SINHDateEdit.EditValue == null) return;
+
+            DateTime NgaySinh = Convert.ToDateTime(NGAY_SINHDateEdit.EditValue);
+
+            var Age = DateTime.Today.Year - NgaySinh.Year;
+
+            if (Age < 16)
+            {
+                NGAY_SINHDateEdit.ToolTipIconType = DevExpress.Utils.ToolTipIconType.Error;
+                NGAY_SINHDateEdit.ErrorText = "Nhân viên phải đủ 16 tuổi.Vui lòng kiểm tra lại!";
+                HopLeNgaySinh = false;
+            }
+            else
+            {
+                HopLeNgaySinh = true;
+                NGAY_SINHDateEdit.ToolTipIconType = DevExpress.Utils.ToolTipIconType.None;
+                NGAY_SINHDateEdit.ErrorText = null;
+            }
+        }
+
+        private void DT_NHATextEdit_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsDigit(e.KeyChar) && !Char.IsControl(e.KeyChar))
+                e.Handled = true;
+            if (DT_NHATextEdit.EditValue.ToString().Trim().Length == 11 && e.KeyChar != '\b')
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void DT_NGUOI_THANTextEdit_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsDigit(e.KeyChar) && !Char.IsControl(e.KeyChar))
+                e.Handled = true;
+            if (DT_NGUOI_THANTextEdit.EditValue.ToString().Trim().Length == 11 && e.KeyChar != '\b')
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void DT_DI_DONGTextEdit_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsDigit(e.KeyChar) && !Char.IsControl(e.KeyChar))
+                e.Handled = true;
+            if (DT_DI_DONGTextEdit.EditValue.ToString().Trim().Length == 11 && e.KeyChar != '\b')
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void MA_THE_ATMTextEdit_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsDigit(e.KeyChar) && !Char.IsControl(e.KeyChar))
+                e.Handled = true;
         }
     }
 }

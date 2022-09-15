@@ -463,7 +463,5 @@ namespace Vs.Recruit
                 flag = false;
             }
         }
-
-
     }
 }

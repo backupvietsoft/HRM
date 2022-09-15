@@ -333,6 +333,23 @@ namespace Commons
             return KyHieuDV;
         }
 
+        public bool kiemTrungMS(string sTableName, string sDieuKien, string sValue)
+        {
+            try
+            {
+                if (Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT COUNT(*) FROM dbo.[" + sTableName + "] WHERE " + sDieuKien + " = N'" + sValue + "'")) > 0)
+                {
+                    return true;
+                }
+                return false;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+  
+
         public string KyHieuDV_CN(Int64 ID_CN)
         {
             string KyHieuDV = "";
@@ -544,7 +561,7 @@ namespace Commons
             {
                 if (CoNull)
                     dtTmp.Rows.Add(-99, "");
-                dtTmp.DefaultView.Sort = ""+Ma +" ASC ";
+                dtTmp.DefaultView.Sort = "" + Ma + " ASC ";
                 cbo.Properties.DataSource = null;
                 //cbo.Properties.DisplayMember = "";
                 //cbo.Properties.ValueMember = "";
@@ -1244,7 +1261,7 @@ namespace Commons
                 //Commons.Modules.OXtraGrid.loadXmlgrd(grd);
                 return true;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return false;
             }
@@ -3432,7 +3449,7 @@ namespace Commons
                     return true;
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return false;
             }
@@ -4702,7 +4719,7 @@ namespace Commons
         {
             //ID_LCV,TEN_LCV
             DataTable dt = new DataTable();
-            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboLoaiCV", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll,-1));
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboLoaiCV", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll, -1));
             return dt;
         }
         public DataTable DataMucDoTieng(bool coAll)

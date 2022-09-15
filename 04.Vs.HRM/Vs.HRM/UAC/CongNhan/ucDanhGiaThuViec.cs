@@ -18,6 +18,8 @@ namespace Vs.HRM
         private int iAdd = 0;
         private string ChuoiKT = "";
         private DataTable dtTemp;
+        private int iID_CN = -1;
+        private ucCTQLNS ucNS;
         public ucDanhGiaThuViec()
         {
             InitializeComponent();
@@ -66,6 +68,7 @@ namespace Vs.HRM
                 DataTable dt = new DataTable();
                 dt = ds.Tables[0].Copy();
                 dt.Columns["CHON"].ReadOnly = false;
+                dt.PrimaryKey = new DataColumn[] { dt.Columns["ID_CN"] };
                 //dt.Columns["XAC_NHAN_DL"].ReadOnly = false;
                 //dt.Columns["NGAY_CO_THE_DI_LAM"].ReadOnly = false;
                 //dt.Columns["XAC_NHAN_DL"].ReadOnly = false;
@@ -129,7 +132,13 @@ namespace Vs.HRM
                 //Commons.Modules.ObjSystems.AddCombXtra("ID_DGTN", "TEN_DGTN", "TEN_DGTN", grvDSCongNhan, Commons.Modules.ObjSystems.DataDanhGiaTayNghe(false), true, "ID_DGTN", this.Name, true);
 
                 //ID_YCTD,MA_YCTD
-
+                if (iID_CN != -1)
+                {
+                    int index = dt.Rows.IndexOf(dt.Rows.Find(iID_CN));
+                    grvDSCongNhan.FocusedRowHandle = grvDSCongNhan.GetRowHandle(index);
+                    grvDSCongNhan.ClearSelection();
+                    grvDSCongNhan.SelectRow(index);
+                }
 
             }
             catch (Exception ex) { }
@@ -657,17 +666,19 @@ namespace Vs.HRM
 
         private void grvDSCongNhan_CellValueChanging(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
         {
-            if (rdoChonXem.SelectedIndex == 1) return;
             GridView view = sender as GridView;
-            if (Convert.ToBoolean(dtTemp.Rows[e.RowHandle]["KT_HOP_DONG"]) == true)
+            if (rdoChonXem.SelectedIndex == 0)
             {
-                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgHopDongDaKTKhongTheSua"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
-                view.SetRowCellValue(e.RowHandle, view.Columns["CHON"], false);
-                view.SetRowCellValue(e.RowHandle, view.Columns["KT_HOP_DONG"], dtTemp.Rows[e.RowHandle]["KT_HOP_DONG"]);
-                view.SetRowCellValue(e.RowHandle, view.Columns["NGAY_NGHI_VIEC"], dtTemp.Rows[e.RowHandle]["NGAY_NGHI_VIEC"]);
-                view.SetRowCellValue(e.RowHandle, view.Columns["NGAY_DANH_GIA"], dtTemp.Rows[e.RowHandle]["NGAY_DANH_GIA"]);
-                view.SetRowCellValue(e.RowHandle, view.Columns["ID_NDG"], dtTemp.Rows[e.RowHandle]["ID_NDG"]);
-                return;
+                if (Convert.ToBoolean(dtTemp.Rows[e.RowHandle]["KT_HOP_DONG"]) == true)
+                {
+                    XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgHopDongDaKTKhongTheSua"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    view.SetRowCellValue(e.RowHandle, view.Columns["CHON"], false);
+                    view.SetRowCellValue(e.RowHandle, view.Columns["KT_HOP_DONG"], dtTemp.Rows[e.RowHandle]["KT_HOP_DONG"]);
+                    view.SetRowCellValue(e.RowHandle, view.Columns["NGAY_NGHI_VIEC"], dtTemp.Rows[e.RowHandle]["NGAY_NGHI_VIEC"]);
+                    view.SetRowCellValue(e.RowHandle, view.Columns["NGAY_DANH_GIA"], dtTemp.Rows[e.RowHandle]["NGAY_DANH_GIA"]);
+                    view.SetRowCellValue(e.RowHandle, view.Columns["ID_NDG"], dtTemp.Rows[e.RowHandle]["ID_NDG"]);
+                    return;
+                }
             }
             if (e.Column.FieldName == "KT_HOP_DONG")
             {
@@ -1074,6 +1085,39 @@ namespace Vs.HRM
             public int RowHandle;
         }
 
+        //Thong tin nhân sự
+        public DXMenuItem MCreateMenuThongTinNS(DevExpress.XtraGrid.Views.Grid.GridView view, int rowHandle)
+        {
+            string sStr = Commons.Modules.ObjLanguages.GetLanguage(Commons.Modules.ModuleName, this.Name, "lblThongTinNS", Commons.Modules.TypeLanguage);
+            DXMenuItem menuThongTinNS = new DXMenuItem(sStr, new EventHandler(ThongTinNS));
+            menuThongTinNS.Tag = new RowInfo(view, rowHandle);
+            return menuThongTinNS;
+        }
+        public void ThongTinNS(object sender, EventArgs e)
+        {
+            try
+            {
+                iID_CN = Convert.ToInt32(grvDSCongNhan.GetFocusedRowCellValue("ID_CN"));
+                ucNS = new HRM.ucCTQLNS(Convert.ToInt64(grvDSCongNhan.GetFocusedRowCellValue("ID_CN")));
+                Commons.Modules.ObjSystems.ShowWaitForm(this);
+                ucNS.Refresh();
+                dataLayoutControl1.Hide();
+                btnALL.Visible = false;
+                this.Controls.Add(ucNS);
+                ucNS.Dock = DockStyle.Fill;
+                ucNS.backWindowsUIButtonPanel.ButtonClick += BackWindowsUIButtonPanel_ButtonClick;
+                Commons.Modules.ObjSystems.HideWaitForm();
+            }
+            catch (Exception ex) { }
+        }
+        public void BackWindowsUIButtonPanel_ButtonClick(object sender, ButtonEventArgs e)
+        {
+            ucNS.Hide();
+            dataLayoutControl1.Show();
+            btnALL.Visible = true;
+            LoadData();
+        }
+
         public DXMenuItem MCreateMenuCapNhatAll(DevExpress.XtraGrid.Views.Grid.GridView view, int rowHandle)
         {
             string sStr = Commons.Modules.ObjLanguages.GetLanguage(Commons.Modules.ModuleName, this.Name, "lblCapNhatAll", Commons.Modules.TypeLanguage);
@@ -1143,17 +1187,22 @@ namespace Vs.HRM
         {
             try
             {
-                if (btnALL.Buttons[2].Properties.Visible || btnALL.Buttons[0].Properties.Visible) return;
                 DevExpress.XtraGrid.Views.Grid.GridView view = sender as DevExpress.XtraGrid.Views.Grid.GridView;
                 if (e.MenuType == DevExpress.XtraGrid.Views.Grid.GridMenuType.Row)
                 {
                     int irow = e.HitInfo.RowHandle;
                     e.Menu.Items.Clear();
+                    DevExpress.Utils.Menu.DXMenuItem itemNS = MCreateMenuThongTinNS(view, irow);
+                    e.Menu.Items.Add(itemNS);
+
+                    if (btnALL.Buttons[2].Properties.Visible || btnALL.Buttons[0].Properties.Visible) return;
                     DevExpress.Utils.Menu.DXMenuItem itemCapNhatAll = MCreateMenuCapNhatAll(view, irow);
                     e.Menu.Items.Add(itemCapNhatAll);
 
                     DevExpress.Utils.Menu.DXMenuItem itemCapNhatND = MCreateMenuCapNhatNoiDung(view, irow);
                     e.Menu.Items.Add(itemCapNhatND);
+
+
                     //if (flag == false) return;
                 }
             }

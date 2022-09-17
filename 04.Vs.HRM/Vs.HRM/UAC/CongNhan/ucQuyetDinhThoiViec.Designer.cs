@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions1 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions2 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions3 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions4 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions5 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions6 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions19 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions20 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions21 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions22 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions23 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions24 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule1 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule2 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             this.windowsUIButton = new DevExpress.XtraBars.Docking2010.WindowsUIButtonPanel();
@@ -55,12 +55,12 @@
             this.ItemForDON_VI = new DevExpress.XtraLayout.LayoutControlItem();
             this.groupDSNhanVien = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.ItemForTO = new DevExpress.XtraLayout.LayoutControlItem();
+            this.ItemForXI_NGHIEP = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             this.ItemForTNgay = new DevExpress.XtraLayout.LayoutControlItem();
             this.ItemForDNgay = new DevExpress.XtraLayout.LayoutControlItem();
             this.ItemForSumNhanVien = new DevExpress.XtraLayout.SimpleLabelItem();
-            this.ItemForTO = new DevExpress.XtraLayout.LayoutControlItem();
-            this.ItemForXI_NGHIEP = new DevExpress.XtraLayout.LayoutControlItem();
             this.navigationFrame = new DevExpress.XtraBars.Navigation.NavigationFrame();
             this.navigationPage2 = new DevExpress.XtraBars.Navigation.NavigationPage();
             this.dataLayoutControl2 = new DevExpress.XtraDataLayout.DataLayoutControl();
@@ -149,12 +149,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.ItemForDON_VI)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupDSNhanVien)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForTO)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForXI_NGHIEP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForTNgay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForDNgay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForSumNhanVien)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemForTO)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemForXI_NGHIEP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.navigationFrame)).BeginInit();
             this.navigationFrame.SuspendLayout();
             this.navigationPage2.SuspendLayout();
@@ -246,21 +246,21 @@
             this.windowsUIButton.AppearanceButton.Pressed.Options.UseFont = true;
             this.windowsUIButton.AppearanceButton.Pressed.Options.UseImage = true;
             this.windowsUIButton.AppearanceButton.Pressed.Options.UseTextOptions = true;
-            windowsUIButtonImageOptions1.ImageUri.Uri = "Edit;Size32x32;GrayScaled";
-            windowsUIButtonImageOptions2.ImageUri.Uri = "snap/snapdeletelist";
-            windowsUIButtonImageOptions3.ImageUri.Uri = "Print";
-            windowsUIButtonImageOptions4.ImageUri.Uri = "SaveAll";
-            windowsUIButtonImageOptions5.ImageUri.Uri = "Reset";
-            windowsUIButtonImageOptions6.ImageUri.Uri = "richedit/clearheaderandfooter";
+            windowsUIButtonImageOptions19.ImageUri.Uri = "Edit;Size32x32;GrayScaled";
+            windowsUIButtonImageOptions20.ImageUri.Uri = "snap/snapdeletelist";
+            windowsUIButtonImageOptions21.ImageUri.Uri = "Print";
+            windowsUIButtonImageOptions22.ImageUri.Uri = "SaveAll";
+            windowsUIButtonImageOptions23.ImageUri.Uri = "Reset";
+            windowsUIButtonImageOptions24.ImageUri.Uri = "richedit/clearheaderandfooter";
             this.windowsUIButton.Buttons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] {
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions1, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "themsua", -1, false),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions2, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "xoa", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions19, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "themsua", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions20, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "xoa", -1, false),
             new DevExpress.XtraBars.Docking2010.WindowsUISeparator(),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions3, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "in", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions21, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "in", -1, false),
             new DevExpress.XtraBars.Docking2010.WindowsUISeparator(),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions4, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "luu", -1, false),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions5, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "trove", -1, false),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions6, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "thoat", -1, false)});
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions22, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "luu", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions23, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "trove", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions24, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "thoat", -1, false)});
             this.windowsUIButton.ContentAlignment = System.Drawing.ContentAlignment.MiddleRight;
             this.windowsUIButton.Controls.Add(this.searchControl);
             this.windowsUIButton.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -484,6 +484,26 @@
             this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem2.TextVisible = false;
             // 
+            // ItemForTO
+            // 
+            this.ItemForTO.Control = this.cboSearch_TO;
+            this.ItemForTO.CustomizationFormText = "ItemForTO";
+            this.ItemForTO.Location = new System.Drawing.Point(602, 0);
+            this.ItemForTO.Name = "ItemForTO";
+            this.ItemForTO.Size = new System.Drawing.Size(304, 26);
+            this.ItemForTO.Text = "TO";
+            this.ItemForTO.TextSize = new System.Drawing.Size(84, 17);
+            // 
+            // ItemForXI_NGHIEP
+            // 
+            this.ItemForXI_NGHIEP.Control = this.cboSearch_XN;
+            this.ItemForXI_NGHIEP.CustomizationFormText = "ItemForXI_NGHIEP";
+            this.ItemForXI_NGHIEP.Location = new System.Drawing.Point(301, 0);
+            this.ItemForXI_NGHIEP.Name = "ItemForXI_NGHIEP";
+            this.ItemForXI_NGHIEP.Size = new System.Drawing.Size(301, 26);
+            this.ItemForXI_NGHIEP.Text = "XI_NGHIEP";
+            this.ItemForXI_NGHIEP.TextSize = new System.Drawing.Size(84, 17);
+            // 
             // layoutControlItem3
             // 
             this.layoutControlItem3.Control = this.radChonXem;
@@ -528,26 +548,6 @@
             this.ItemForSumNhanVien.Size = new System.Drawing.Size(906, 19);
             this.ItemForSumNhanVien.Text = "SumNhanVien";
             this.ItemForSumNhanVien.TextSize = new System.Drawing.Size(84, 17);
-            // 
-            // ItemForTO
-            // 
-            this.ItemForTO.Control = this.cboSearch_TO;
-            this.ItemForTO.CustomizationFormText = "ItemForTO";
-            this.ItemForTO.Location = new System.Drawing.Point(602, 0);
-            this.ItemForTO.Name = "ItemForTO";
-            this.ItemForTO.Size = new System.Drawing.Size(304, 26);
-            this.ItemForTO.Text = "TO";
-            this.ItemForTO.TextSize = new System.Drawing.Size(84, 17);
-            // 
-            // ItemForXI_NGHIEP
-            // 
-            this.ItemForXI_NGHIEP.Control = this.cboSearch_XN;
-            this.ItemForXI_NGHIEP.CustomizationFormText = "ItemForXI_NGHIEP";
-            this.ItemForXI_NGHIEP.Location = new System.Drawing.Point(301, 0);
-            this.ItemForXI_NGHIEP.Name = "ItemForXI_NGHIEP";
-            this.ItemForXI_NGHIEP.Size = new System.Drawing.Size(301, 26);
-            this.ItemForXI_NGHIEP.Text = "XI_NGHIEP";
-            this.ItemForXI_NGHIEP.TextSize = new System.Drawing.Size(84, 17);
             // 
             // navigationFrame
             // 
@@ -948,8 +948,6 @@
             // 
             // ItemForSO_QD
             // 
-            this.ItemForSO_QD.AppearanceItemCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.ItemForSO_QD.AppearanceItemCaption.Options.UseForeColor = true;
             this.ItemForSO_QD.Control = this.SO_QDTextEdit;
             this.ItemForSO_QD.Location = new System.Drawing.Point(0, 0);
             this.ItemForSO_QD.Name = "ItemForSO_QD";
@@ -967,8 +965,6 @@
             // 
             // ItemForNGAY_KY
             // 
-            this.ItemForNGAY_KY.AppearanceItemCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.ItemForNGAY_KY.AppearanceItemCaption.Options.UseForeColor = true;
             this.ItemForNGAY_KY.Control = this.NGAY_KYDateEdit;
             this.ItemForNGAY_KY.Location = new System.Drawing.Point(0, 26);
             this.ItemForNGAY_KY.Name = "ItemForNGAY_KY";
@@ -1043,7 +1039,6 @@
             // ItemForNGAY_NHAN_DON
             // 
             this.ItemForNGAY_NHAN_DON.AppearanceItemCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.ItemForNGAY_NHAN_DON.AppearanceItemCaption.Options.UseForeColor = true;
             this.ItemForNGAY_NHAN_DON.Control = this.NGAY_NHAN_DONDateEdit;
             this.ItemForNGAY_NHAN_DON.Location = new System.Drawing.Point(0, 50);
             this.ItemForNGAY_NHAN_DON.Name = "ItemForNGAY_NHAN_DON";
@@ -1220,8 +1215,6 @@
             // 
             // ItemForTONG_CONG
             // 
-            this.ItemForTONG_CONG.AppearanceItemCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.ItemForTONG_CONG.AppearanceItemCaption.Options.UseForeColor = true;
             this.ItemForTONG_CONG.Control = this.TONG_CONGTextEdit;
             this.ItemForTONG_CONG.Location = new System.Drawing.Point(588, 104);
             this.ItemForTONG_CONG.Name = "ItemForTONG_CONG";
@@ -1323,12 +1316,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.ItemForDON_VI)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupDSNhanVien)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForTO)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForXI_NGHIEP)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForTNgay)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForDNgay)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForSumNhanVien)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemForTO)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemForXI_NGHIEP)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.navigationFrame)).EndInit();
             this.navigationFrame.ResumeLayout(false);
             this.navigationPage2.ResumeLayout(false);

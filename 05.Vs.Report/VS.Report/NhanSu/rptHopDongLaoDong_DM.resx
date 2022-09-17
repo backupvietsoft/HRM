@@ -117,4 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="xrLabel102.ExpressionBindings" xml:space="preserve">
+    <value>'Pursuant to the power of attorney No. 0601/2022UQ-DM of the General Director, effective from June 1, 2022. Authorized recipient: '+[DATA].[GIOI_TINH_NUQ]+' '+[DATA].[TEN_NUQ]+' – HR&amp; Compliance &amp; Salary Manager. Citizen identity card No. '+[DATA].[SO_CMND_NUQ]+''</value>
+  </data>
+  <data name="xrLabel101.ExpressionBindings" xml:space="preserve">
+    <value>'Căn cứ giấy ủy quyền số 0601/2022UQ-DM của TGĐ có hiệu lực ngày 01/06/2022. Người nhận ủy quyền: '+[DATA].[GIOI_TINH_NUQ]+' '+[DATA].[TEN_NUQ]+' – TP Nhân sự tuân thủ &amp; tiền lương. Số CCCD '+[DATA].[SO_CMND_NUQ]+''</value>
+  </data>
+  <data name="xrLabel78.ExpressionBindings" xml:space="preserve">
+    <value>'&lt;b&gt;2.2.2. &lt;/b&gt;' + 'Người lao động làm việc vào ban đêm, thì được trả thêm ít nhất bằng 30% tiền lương tính theo đơn giá tiền lương hoặc tiền lương theo công việc của ngày làm việc bình thường  &lt;i&gt;An employee who performs night work shall be paid an additional amount of at least 30% of the wage calculated according to the wage unit for piece work or piece rate or the wage for the work on a regular working day.  &lt;/i&gt;'</value>
+  </data>
 </root>

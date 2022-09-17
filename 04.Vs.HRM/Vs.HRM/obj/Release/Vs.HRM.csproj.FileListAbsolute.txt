@@ -675,3 +675,8 @@ F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Release\Vs.Recruit.dll
 F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Release\Spire.XLS.dll
 F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Release\Spire.License.dll
 F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Release\Vs.HRM.ucHoanChinhHSNhanSu.resources
+F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Release\Commons.pdb
+F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Release\Commons.dll.config
+F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Release\VS.Report.pdb
+F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Release\VS.Report.dll.config
+F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Release\Newtonsoft.Json.xml

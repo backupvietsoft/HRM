@@ -1,5 +1,6 @@
 ﻿using DevExpress.XtraBars.Docking2010;
 using DevExpress.XtraEditors;
+using Microsoft.ApplicationBlocks.Data;
 using System;
 using System.Data;
 using Vs.Report;
@@ -35,6 +36,7 @@ namespace Vs.HRM
                 rdo_ChonBaoCao.Properties.Items.RemoveAt(4);
                 rdo_ChonBaoCao.Properties.Items.RemoveAt(3);
                 rdo_ChonBaoCao.Properties.Items.RemoveAt(2);
+                rdo_ChonBaoCao.Properties.Items.RemoveAt(1);
             }
             else
             {
@@ -62,8 +64,9 @@ namespace Vs.HRM
                             {
                                 n = (n >= 2 ? n + 1 : n);
                             }
-                            else if (Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString() == "DM") {
-                                n = (n >= 2 ? n + 3 : n);
+                            else if (Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString() == "DM")
+                            {
+                                n = (n >= 1 ? n + 4 : n);
                             }
                             else
                             {
@@ -89,7 +92,15 @@ namespace Vs.HRM
                                             }
                                         case "DM":
                                             {
-                                                HopDongLaoDong_DM();
+                                                bool kiemHD = Convert.ToBoolean(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT ISNULL(HD_GIA_HAN,0) FROM dbo.HOP_DONG_LAO_DONG WHERE ID_HDLD = " + idHD + ""));
+                                                if(kiemHD)
+                                                {
+                                                    HopDongLaoDong_DM();
+                                                }
+                                                else
+                                                {
+                                                    HopDongThuViec_DM();
+                                                }
                                                 break;
                                             }
                                         case "HN":
@@ -558,7 +569,6 @@ namespace Vs.HRM
                 cmd1.Parameters.Add("@ID_CN", SqlDbType.Int).Value = idCN;
                 cmd1.Parameters.Add("@ID_SQD", SqlDbType.Int).Value = idHD;
                 cmd1.CommandType = CommandType.StoredProcedure;
-
                 System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd1);
                 DataSet ds = new DataSet();
                 adp.Fill(ds);

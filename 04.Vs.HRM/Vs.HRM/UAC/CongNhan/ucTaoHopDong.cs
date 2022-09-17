@@ -24,6 +24,7 @@ namespace Vs.HRM
         public AccordionControl accorMenuleft;
         private ucCTQLNS ucNS;
         private string ChuoiKT = "";
+        string strDuongDan = "";
         public ucTaoHopDong()
         {
             InitializeComponent();
@@ -107,11 +108,15 @@ namespace Vs.HRM
                 DataTable dt = new DataTable();
                 dt = ds.Tables[0].Copy();
                 dt.Columns["CHON"].ReadOnly = false;
-                //dt.Columns["TAI_LIEU"].ReadOnly = true;
                 dt.PrimaryKey = new DataColumn[] { dt.Columns["ID_CN"] };
-
-                
-
+                if (rdoChonXem.SelectedIndex == 0)
+                {
+                    dt.Columns["TAI_LIEU"].ReadOnly = true;
+                }
+                else
+                {
+                    dt.Columns["TAI_LIEU"].ReadOnly = false;
+                }
                 if (grdDSUngVien.DataSource == null)
                 {
                     Commons.Modules.ObjSystems.MLoadXtraGrid(grdDSUngVien, grvDSUngVien, dt, true, true, false, true, true, this.Name);
@@ -120,7 +125,6 @@ namespace Vs.HRM
                     grvDSUngVien.Columns["MS_CN"].OptionsColumn.AllowEdit = false;
                     grvDSUngVien.Columns["HO_TEN"].OptionsColumn.AllowEdit = false;
                     grvDSUngVien.Columns["NGAY_VAO_LAM"].OptionsColumn.AllowEdit = false;
-                    grvDSUngVien.Columns["TAI_LIEU"].OptionsColumn.AllowEdit = true;
                     grvDSUngVien.Columns["MS_CN"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
                     grvDSUngVien.Columns["HO_TEN"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
                     grvDSUngVien.Columns["NGAY_VAO_LAM"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
@@ -141,24 +145,31 @@ namespace Vs.HRM
                     grvDSUngVien.ClearSelection();
                 }
 
+
                 if (rdoChonXem.SelectedIndex == 0)
                 {
-                    grvDSUngVien.Columns["ID_HDLD"].Visible = false;
-                    grvDSUngVien.Columns["ID_UV"].Visible = false;
-                    grvDSUngVien.OptionsSelection.MultiSelect = false;
-                    grvDSUngVien.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.RowSelect;
-
                     RepositoryItemButtonEdit btnEdit = new RepositoryItemButtonEdit();
                     grvDSUngVien.Columns["TAI_LIEU"].ColumnEdit = btnEdit;
                     btnEdit.ButtonClick += BtnEdit_ButtonClick;
+
+                    grvDSUngVien.Columns["ID_HDLD"].Visible = false;
+                    grvDSUngVien.Columns["ID_UV"].Visible = false;
+                    for (int i = 0; i < grvDSUngVien.Columns.Count; i++)
+                    {
+                        grvDSUngVien.Columns[grvDSUngVien.Columns[i].FieldName.ToString()].OptionsColumn.AllowEdit = false;
+                    }
+                    grvDSUngVien.Columns["TAI_LIEU"].OptionsColumn.AllowEdit = true;
+                    grvDSUngVien.OptionsSelection.MultiSelect = false;
+                    grvDSUngVien.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.RowSelect;
+
                 }
                 else
                 {
                     RepositoryItemButtonEdit btnEdit = new RepositoryItemButtonEdit();
                     grvDSUngVien.Columns["TAI_LIEU"].ColumnEdit = btnEdit;
-                    dt.Columns["TEN_DV"].ReadOnly = true;
                     btnEdit.ButtonClick += BtnEdit_ButtonClick;
 
+                    dt.Columns["TEN_DV"].ReadOnly = true;
                     grvDSUngVien.Columns["ID_CN"].Visible = false;
                     grvDSUngVien.OptionsSelection.MultiSelect = true;
                     grvDSUngVien.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CheckBoxRowSelect;
@@ -280,8 +291,9 @@ namespace Vs.HRM
                 }
                 catch { }
                 //Commons.Modules.ObjSystems.AddCombXtra("ID_DGTN", "TEN_DGTN", "TEN_DGTN", grvDSUngVien, Commons.Modules.ObjSystems.DataDanhGiaTayNghe(false), true, "ID_DGTN", this.Name, true);
-                
+
                 //ID_YCTD,MA_YCTD
+
             }
             catch (Exception ex) { }
         }
@@ -289,16 +301,35 @@ namespace Vs.HRM
         {
             try
             {
-                ButtonEdit a = sender as ButtonEdit;
-                ofileDialog.Filter = "All Files|*.txt;*.docx;*.doc;*.pdf*.xls;*.xlsx;*.pptx;*.ppt|Text File (.txt)|*.txt|Word File (.docx ,.doc)|*.docx;*.doc|Spreadsheet (.xls ,.xlsx)|  *.xls ;*.xlsx";
-                //ofileDialog.Filter = "Excel Files|*.xls;*.xlsx;*.xlsm|Word Documents(*.doc)|*.doc";
-                if (ofileDialog.ShowDialog() == DialogResult.OK)
+                if (!btnALL.Buttons[2].Properties.Visible)
                 {
-                    string sduongDan = ofileDialog.FileName.ToString().Trim();
-                    if (ofileDialog.FileName.ToString().Trim() == "") return;
-                    //if (sduongDan.Substring(sduongDan.IndexOf('.'), 4).ToString() == ".xlsx") return;
-                    Commons.Modules.ObjSystems.LuuDuongDan(ofileDialog.FileName, ofileDialog.SafeFileName, this.Name.Replace("uc", "") + '\\' + grvDSUngVien.GetFocusedRowCellValue("SO_HDLD"));
-                    a.Text = ofileDialog.SafeFileName;
+                    ButtonEdit a = sender as ButtonEdit;
+                    ofileDialog.Filter = "All Files|*.txt;*.docx;*.doc;*.pdf*.xls;*.xlsx;*.pptx;*.ppt|Text File (.txt)|*.txt|Word File (.docx ,.doc)|*.docx;*.doc|Spreadsheet (.xls ,.xlsx)|  *.xls ;*.xlsx";
+                    //ofileDialog.Filter = "Excel Files|*.xls;*.xlsx;*.xlsm|Word Documents(*.doc)|*.doc";
+                    if (ofileDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        string sduongDan = ofileDialog.FileName.ToString().Trim();
+                        if (ofileDialog.FileName.ToString().Trim() == "") return;
+                        var strDuongDanTmp = Commons.Modules.ObjSystems.CapnhatTL("Tai_Lieu_HD" + '\\' + grvDSUngVien.GetFocusedRowCellValue("MS_CN"), false);
+                        strDuongDan = ofileDialog.FileName;
+                        string[] sFile;
+                        string TenFile;
+                        TenFile = ofileDialog.SafeFileName.ToString();
+                        sFile = System.IO.Directory.GetFiles(strDuongDanTmp);
+                        if (Commons.Modules.ObjSystems.KiemFileTonTai(strDuongDanTmp + @"\" + ofileDialog.SafeFileName.ToString()) == false)
+                            a.Text = strDuongDanTmp + @"\" + ofileDialog.SafeFileName.ToString();
+                        else
+                        {
+                            TenFile = Commons.Modules.ObjSystems.STTFileCungThuMuc(strDuongDanTmp, TenFile);
+                            a.Text = strDuongDanTmp + @"\" + TenFile;
+                        }
+                        Commons.Modules.ObjSystems.LuuDuongDan(strDuongDan, a.Text);
+
+                    }
+                }
+                else
+                {
+                    Commons.Modules.ObjSystems.OpenHinh(grvDSUngVien.GetFocusedRowCellValue("TAI_LIEU").ToString());
                 }
             }
             catch (Exception ex)
@@ -458,9 +489,28 @@ namespace Vs.HRM
             btnALL.Buttons[4].Properties.Visible = !visible;
             btnALL.Buttons[5].Properties.Visible = visible;
 
-            grvDSUngVien.OptionsBehavior.Editable = !visible;
+            //grvDSUngVien.OptionsBehavior.Editable = true;
         }
+        private void LayDuongDan()
+        {
+            //string strPath_DH = txtTaiLieu.Text;
+            //strDuongDan = ofileDialog.FileName;
+            ////Commons.Modules.ObjSystems.LuuDuongDan(strDuongDan, txtTaiLieu.Text, this.Name.Replace("uc", "") + '\\' + grvCongNhan.GetFocusedRowCellValue("MS_CN"));
+            //var strDuongDanTmp = Commons.Modules.ObjSystems.CapnhatTL("Tai_Lieu_TV" + '\\' + grvCongNhan.GetFocusedRowCellValue("MS_CN"), false);
+            //string[] sFile;
+            //string TenFile;
 
+            //TenFile = ofileDialog.SafeFileName.ToString();
+            //sFile = System.IO.Directory.GetFiles(strDuongDanTmp);
+
+            //if (Commons.Modules.ObjSystems.KiemFileTonTai(strDuongDanTmp + @"\" + ofdfile.SafeFileName.ToString()) == false)
+            //    txtTaiLieu.Text = strDuongDanTmp + @"\" + ofdfile.SafeFileName.ToString();
+            //else
+            //{
+            //    TenFile = Commons.Modules.ObjSystems.STTFileCungThuMuc(strDuongDanTmp, TenFile);
+            //    txtTaiLieu.Text = strDuongDanTmp + @"\" + TenFile;
+            //}
+        }
         private void btnALL_ButtonClick(object sender, DevExpress.XtraBars.Docking2010.ButtonEventArgs e)
         {
             try
@@ -606,107 +656,6 @@ namespace Vs.HRM
         }
         private void grvDSUngVien_ValidateRow(object sender, DevExpress.XtraGrid.Views.Base.ValidateRowEventArgs e)
         {
-            //try
-            //{
-            //    if (Commons.Modules.sLoad == "0Load") return;
-            //    //int ngay = 0;
-            //    DevExpress.XtraGrid.Views.Grid.GridView View = (DevExpress.XtraGrid.Views.Grid.GridView)sender;
-            //    DevExpress.XtraGrid.Columns.GridColumn SO_HDLD = View.Columns["SO_HDLD"];
-            //    DevExpress.XtraGrid.Columns.GridColumn ID_CV = View.Columns["ID_CV"];
-            //    DevExpress.XtraGrid.Columns.GridColumn ngayBDHD = View.Columns["NGAY_BAT_DAU_HD"];
-            //    DevExpress.XtraGrid.Columns.GridColumn ngayBD_TV = View.Columns["NGAY_BD_THU_VIEC"];
-            //    DevExpress.XtraGrid.Columns.GridColumn ngayKT_TV = View.Columns["NGAY_KT_THU_VIEC"];
-            //    DevExpress.XtraGrid.Columns.GridColumn LuongThuViec = View.Columns["LUONG_THU_VIEC"];
-            //    DevExpress.XtraGrid.Columns.GridColumn CongViec = View.Columns["CONG_VIEC"];
-            //    DevExpress.XtraGrid.Columns.GridColumn ID_NL = View.Columns["ID_NL"];
-            //    DevExpress.XtraGrid.Columns.GridColumn ID_BL = View.Columns["ID_BL"];
-            //    DevExpress.XtraGrid.Columns.GridColumn ML_CHINH = View.Columns["MUC_LUONG_CHINH"];
-            //    DevExpress.XtraGrid.Columns.GridColumn DIA_DIEM_LAM_VIEC = View.Columns["DIA_DIEM_LAM_VIEC"];
-
-            //    //DevExpress.XtraGrid.Columns.GridColumn MS_CN = View.Columns["MS_CN"];
-            //    //DevExpress.XtraGrid.Columns.GridColumn MS_THE_CC = View.Columns["MS_THE_CC"];
-            //    //DevExpress.XtraGrid.Columns.GridColumn ngayvaolam = View.Columns["NGAY_VAO_LAM_LAI"];
-            //    //if (View.GetRowCellValue(e.RowHandle, mslydovang).ToString() == "")
-            //    //{
-            //    //    e.Valid = false;
-            //    //    View.SetColumnError(mslydovang, Commons.Modules.ObjLanguages.GetLanguage(Commons.Modules.ModuleName, this.Name, "MsgKiemtraTenUserNULL", Commons.Modules.TypeLanguage)); return;
-            //    //}
-            //    if (View.GetRowCellValue(e.RowHandle, SO_HDLD).ToString() == "")
-            //    {
-            //        flag = true;
-            //        e.Valid = false;
-            //        View.SetColumnError(SO_HDLD, "Không được trống"); return;
-            //    }
-            //    if (View.GetRowCellValue(e.RowHandle, ID_CV).ToString() == "")
-            //    {
-            //        flag = true;
-            //        e.Valid = false;
-            //        View.SetColumnError(ID_CV, "Không được trống"); return;
-            //    }
-
-            //    if (View.GetRowCellValue(e.RowHandle, ngayBDHD).ToString() == "")
-            //    {
-            //        flag = true;
-            //        e.Valid = false;
-            //        View.SetColumnError(ngayBDHD, "Không được trống"); return;
-            //    }
-
-            //    if (View.GetRowCellValue(e.RowHandle, ngayBD_TV).ToString() == "")
-            //    {
-            //        flag = true;
-            //        e.Valid = false;
-            //        View.SetColumnError(ngayBD_TV, "Không được trống"); return;
-            //    }
-
-            //    if (View.GetRowCellValue(e.RowHandle, ngayKT_TV).ToString() == "")
-            //    {
-            //        flag = true;
-            //        e.Valid = false;
-            //        View.SetColumnError(ngayKT_TV, "Không được trống"); return;
-            //    }
-
-            //    if (View.GetRowCellValue(e.RowHandle, LuongThuViec).ToString() == "")
-            //    {
-            //        flag = true;
-            //        e.Valid = false;
-            //        View.SetColumnError(LuongThuViec, "Không được trống"); return;
-            //    }
-
-            //    if (View.GetRowCellValue(e.RowHandle, CongViec).ToString() == "")
-            //    {
-            //        flag = true;
-            //        e.Valid = false;
-            //        View.SetColumnError(CongViec, "Không được trống"); return;
-            //    }
-            //    if (View.GetRowCellValue(e.RowHandle, ID_NL).ToString() == "")
-            //    {
-            //        flag = true;
-            //        e.Valid = false;
-            //        View.SetColumnError(ID_NL, "Không được trống"); return;
-            //    }
-            //    if (View.GetRowCellValue(e.RowHandle, ID_BL).ToString() == "")
-            //    {
-            //        flag = true;
-            //        e.Valid = false;
-            //        View.SetColumnError(ID_BL, "Không được trống"); return;
-            //    }
-            //    if (View.GetRowCellValue(e.RowHandle, ML_CHINH).ToString() == "")
-            //    {
-            //        flag = true;
-            //        e.Valid = false;
-            //        View.SetColumnError(ML_CHINH, "Không được trống"); return;
-            //    }
-            //    if (View.GetRowCellValue(e.RowHandle, DIA_DIEM_LAM_VIEC).ToString() == "")
-            //    {
-            //        flag = true;
-            //        e.Valid = false;
-            //        View.SetColumnError(DIA_DIEM_LAM_VIEC, "Không được trống"); return;
-            //    }
-            //    flag = false;
-
-            //    //CheckDuplicateKHNP(grvKHNP, (DataTable)grdKHNP.DataSource, e);
-            //}
-            //catch (Exception ex) { }
         }
 
         private void grvDSUngVien_InvalidRowException(object sender, DevExpress.XtraGrid.Views.Base.InvalidRowExceptionEventArgs e)
@@ -844,7 +793,6 @@ namespace Vs.HRM
                         enabel(false);
                         lblTuNgay.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
                         lblDenNgay.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
-
                         break;
                     }
                 default:
@@ -886,7 +834,7 @@ namespace Vs.HRM
                 {
                     int iNgayTV = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT ISNULL(SO_NGAY,0) SO_NGAY FROM dbo.LOAI_HDLD WHERE ID_LHDLD = " + Convert.ToInt32(grvDSUngVien.GetFocusedRowCellValue("ID_LHDLD")) + ""));
                     NgayBD_HD = Convert.ToDateTime(grvDSUngVien.GetFocusedRowCellValue("NGAY_BD_THU_VIEC"));
-                    DateTime dNgayKT = Convert.ToDateTime(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT [dbo].[fnNgayKetThucHD]('"+ Convert.ToDateTime(NgayBD_HD).ToString("MM/dd/yyyy") + "' ,"+iNgayTV+")"));
+                    DateTime dNgayKT = Convert.ToDateTime(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT [dbo].[fnNgayKetThucHD]('" + Convert.ToDateTime(NgayBD_HD).ToString("MM/dd/yyyy") + "' ," + iNgayTV + ")"));
                     NgayKT_HD = Convert.ToDateTime(grvDSUngVien.GetFocusedRowCellValue("NGAY_BD_THU_VIEC")).AddDays(iNgayTV);
                     NgayKT_HD = dNgayKT;
 

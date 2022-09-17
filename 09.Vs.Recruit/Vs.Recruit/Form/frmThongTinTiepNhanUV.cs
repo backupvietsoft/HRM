@@ -296,11 +296,13 @@ namespace Vs.Recruit
                             catch { id_dv = -1; }
                             if (!Commons.Modules.ObjSystems.kiemTrungMS("CONG_NHAN", "MS_CN", txtMS_CN.Text))
                             {
+                                if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgMSCNDaTrungBanCoMuonTaoMaMoi"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) return;
                                 txtMS_CN.Text = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.AUTO_CREATE_SO_CONG_NHAN(" + id_dv + ",1)").ToString();
                                 return;
                             }
                             if (!Commons.Modules.ObjSystems.kiemTrungMS("CONG_NHAN", "MS_THE_CC", txtMS_THE_CC.Text))
                             {
+                                if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgMSTheCCDaTrungBanCoMuonTaoMaMoi"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) return;
                                 txtMS_THE_CC.Text = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.AUTO_CREATE_SO_CONG_NHAN(" + id_dv + ",2)").ToString();
                                 return;
                             }

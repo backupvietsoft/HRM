@@ -10,6 +10,7 @@ using DevExpress.XtraBars.Navigation;
 using DevExpress.XtraGrid.Views.Grid;
 using System.IO;
 using DevExpress.Utils;
+using Vs.Category;
 
 namespace VietSoftHRM
 {
@@ -183,6 +184,26 @@ namespace VietSoftHRM
                     ctl.Dock = DockStyle.Fill;
                     windowsUIButton.Visible = false;
                     //Commons.Modules.ObjSystems.HideWaitForm();
+                }
+                else if(Commons.Modules.sPS == "spGetListDuyetTL")
+                {
+                    frmXetDuyet ctl = new frmXetDuyet(1);
+                    panel3.Show();
+                    //Commons.Modules.ObjSystems.ShowWaitForm(this);
+                    panel3.Controls.Clear();
+                    panel3.Controls.Add(ctl);
+                    ctl.Dock = DockStyle.Fill;
+                    windowsUIButton.Visible = false;
+                }
+                else if(Commons.Modules.sPS == "spGetListQDDuyet")
+                {
+                    frmDuyetQuyDinh ctl = new frmDuyetQuyDinh(1);
+                    panel3.Show();
+                    //Commons.Modules.ObjSystems.ShowWaitForm(this);
+                    panel3.Controls.Clear();
+                    panel3.Controls.Add(ctl);
+                    ctl.Dock = DockStyle.Fill;
+                    windowsUIButton.Visible = false;
                 }
                 else if (Commons.Modules.sPS == "spGetListMUC_THUONG_CHUYEN_CAN")
                 {

@@ -861,8 +861,16 @@ namespace Vs.HRM
             windowsUIButton.Buttons[11].Properties.Visible = !visible;
             windowsUIButton.Buttons[12].Properties.Visible = visible;
 
-            MS_CNTextEdit.Properties.ReadOnly = visible;
-            MS_THE_CCTextEdit.Properties.ReadOnly = visible;
+            if (ID_DVLookUpEdit.Text == "")
+            {
+                MS_CNTextEdit.Properties.ReadOnly = true;
+                MS_THE_CCTextEdit.Properties.ReadOnly = true;
+            }
+            else
+            {
+                MS_CNTextEdit.Properties.ReadOnly = visible;
+                MS_THE_CCTextEdit.Properties.ReadOnly = visible;
+            }
             ID_QGLookUpEdit.Properties.ReadOnly = visible;
             HOTextEdit.Properties.ReadOnly = visible;
             TENTextEdit.Properties.ReadOnly = visible;
@@ -1118,16 +1126,22 @@ namespace Vs.HRM
                 {
 
                     XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "messMS_CNbitrung"));
+                    if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgMSCNDaTrungBanCoMuonTaoMaMoi"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    {
+                        MS_CNTextEdit.Text = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.AUTO_CREATE_SO_CONG_NHAN(" + Convert.ToInt32(ID_DVLookUpEdit.EditValue) + ",1)").ToString();
+                    }
                     MS_CNTextEdit.Focus();
                 }
                 if (cot == 2)
                 {
-                    XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "messMS_CCbitrung"));
+                    if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgMSTheCCDaTrungBanCoMuonTaoMaMoi"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    {
+                        MS_THE_CCTextEdit.Text = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.AUTO_CREATE_SO_CONG_NHAN(" + Convert.ToInt32(ID_DVLookUpEdit.EditValue) + ",2)").ToString();
+                    }
                     MS_THE_CCTextEdit.Focus();
                 }
                 return false;
             }
-
             return true;
         }
         #endregion
@@ -1183,6 +1197,8 @@ namespace Vs.HRM
                 {
                     MS_CNTextEdit.Text = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.AUTO_CREATE_SO_CONG_NHAN(" + ID_DVLookUpEdit.EditValue + ",1)").ToString();
                     MS_THE_CCTextEdit.Text = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.AUTO_CREATE_SO_CONG_NHAN(" + ID_DVLookUpEdit.EditValue + ",2)").ToString();
+                    MS_CNTextEdit.Properties.ReadOnly = false;
+                    MS_THE_CCTextEdit.Properties.ReadOnly = false;
                 }
                 catch { }
             }
@@ -1502,7 +1518,7 @@ namespace Vs.HRM
                             }
                         default:
                             {
-                                if (MT.Substring(0, 3) != "DMS" && MT.Substring(0, 3) != "DMT")
+                                if (MT.Substring(0,1) != "1")
                                 {
                                     MS_THE_CCTextEdit.ToolTipIconType = DevExpress.Utils.ToolTipIconType.Error;
                                     MS_THE_CCTextEdit.ErrorText = "Vui lòng nhập đúng định dạng số 1 + 6 số đuôi.";

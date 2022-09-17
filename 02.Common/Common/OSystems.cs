@@ -249,6 +249,26 @@ namespace Commons
             }
             return SERVER_FOLDER_PATH;
         }
+        public string CapnhatTL(string strFile,bool locKyTu)
+        {
+            if(locKyTu == true)
+            {
+                strFile = LocKyTuDB(strFile);
+            }
+            string SERVER_FOLDER_PATH = "";
+            string SERVER_PATH = "";
+            SERVER_PATH = Commons.Modules.sDDTaiLieu;
+            if (!System.IO.Directory.Exists(SERVER_PATH))
+                SERVER_PATH = "";
+            if (!SERVER_PATH.EndsWith(@"\"))
+                SERVER_PATH = SERVER_PATH + @"\";
+            SERVER_FOLDER_PATH = SERVER_PATH + strFile;
+            if (!System.IO.Directory.Exists(SERVER_FOLDER_PATH))
+            {
+                System.IO.Directory.CreateDirectory(SERVER_FOLDER_PATH);
+            }
+            return SERVER_FOLDER_PATH;
+        }
 
         public bool LuuDuongDan(string strDUONG_DAN, string strHINH, string FormThuMuc)
         {
@@ -380,6 +400,14 @@ namespace Commons
             sSql = "SELECT [dbo].[fnGetSoNgayTruLeChuNhat]('" + Convert.ToDateTime(TNgay).ToString("yyyyMMdd") + "','" + Convert.ToDateTime(DNgay).ToString("yyyyMMdd") + "')";
             resulst = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, sSql)); //* Commons.Modules.iGio
             return resulst;
+        }
+        public IEnumerable<Control> GetAllConTrol(Control control, IEnumerable<Type> filteringTypes)
+        {
+            var ctrls = control.Controls.Cast<Control>();
+
+            return ctrls.SelectMany(ctrl => GetAllConTrol(ctrl, filteringTypes))
+                        .Concat(ctrls)
+                        .Where(ctl => filteringTypes.Any(t => ctl.GetType() == t));
         }
 
         #region LoadLookupedit
@@ -1021,7 +1049,25 @@ namespace Commons
             }
             catch { }
         }
+        public void AddCombSearchLookUpEdit(RepositoryItemSearchLookUpEdit cboSearch, string Value, string Display, string cot, GridView grv, DataTable dtTmp, string form)
+        {
+            cboSearch.NullText = "";
+            cboSearch.ValueMember = Value;
+            cboSearch.DisplayMember = Display;
+            cboSearch.DataSource = dtTmp;
+            cboSearch.View.PopulateColumns(cboSearch.DataSource);
+            cboSearch.View.Columns[Value].Visible = false;
 
+            Commons.Modules.ObjSystems.MLoadNNXtraGrid(cboSearch.View, form);
+            grv.Columns[cot].ColumnEdit = cboSearch;
+        }
+        public void LocationSizeForm(XtraUserControl frmMain, XtraForm frm)
+        {
+
+            frm.StartPosition = FormStartPosition.CenterParent;
+            frm.Size = new Size((frmMain.Width / 2) + (frm.Width / 2), (frmMain.Height / 2) + (frm.Height / 2));
+
+        }
         #endregion
 
         #region Load xtragrid

@@ -3200,3 +3200,15 @@ F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.csproj.CoreCompileInputs.cache
 F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.csproj.CopyComplete
 F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.dll
 F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.pdb
+F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\Commons.dll
+F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\EPPlus.dll
+F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\NPOI.dll
+F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\NPOI.OOXML.dll
+F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\NPOI.OpenXmlFormats.dll
+F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\NPOI.OpenXml4Net.dll
+F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\Commons.pdb
+F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\Commons.dll.config
+F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\Newtonsoft.Json.xml
+F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\VS.Report.dll
+F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\VS.Report.pdb
+F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\VS.Report.dll.config

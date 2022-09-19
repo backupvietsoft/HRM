@@ -529,6 +529,24 @@
     <None Include="Resources\iconNosave.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="lib\vsconfig.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5.2 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\..\02.Common\Common\Commons.csproj">
       <Project>{375704a9-ba2d-4325-aa66-2fdd8ee246ca}</Project>
       <Name>Commons</Name>
@@ -553,28 +571,10 @@
       <Project>{6903cadb-ec02-45ca-ac93-9e1385fe3bd2}</Project>
       <Name>Vs.Payroll</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\09.Vs.Recruit\Vs.Recruit\Vs.Recruit\Vs.Recruit.csproj">
+    <ProjectReference Include="..\..\09.Vs.Recruit\Vs.Recruit\Vs.Recruit.csproj">
       <Project>{ef26d657-b988-4b7a-bd04-e7a282a49d6c}</Project>
       <Name>Vs.Recruit</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="lib\vsconfig.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <SubType>Designer</SubType>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
-      <Visible>False</Visible>
-      <ProductName>Microsoft .NET Framework 4.5.2 %28x86 and x64%29</ProductName>
-      <Install>true</Install>
-    </BootstrapperPackage>
-    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
-      <Visible>False</Visible>
-      <ProductName>.NET Framework 3.5 SP1</ProductName>
-      <Install>false</Install>
-    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

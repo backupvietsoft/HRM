@@ -16,8 +16,10 @@ namespace Vs.HRM
         int idToCu = -1;
         bool cothem = false;
         string strDuongDan = "";
+        string btnName = "";
 
         DataTable tableTTC_CN = new DataTable();
+        DataTable tableLyLich = new DataTable();
         public ucQTCongTac(Int64 id)
         {
             InitializeComponent();
@@ -53,6 +55,9 @@ namespace Vs.HRM
             //ID_LQDLookUpEdit.EditValue = "";
             Commons.Modules.ObjSystems.MLoadLookUpEdit(ID_LQDLookUpEdit, Commons.Modules.ObjSystems.DataLoaiQuyetDinh(false), "ID_LQD", "TEN_LQD", "TEN_LQD", true);
 
+            //ID_LCVLookUpEdit.EditValue = "";
+            Commons.Modules.ObjSystems.MLoadLookUpEdit(ID_LCVLookUpEdit, Commons.Modules.ObjSystems.DataLoaiCV(false, Convert.ToInt32(-1)), "ID_LCV", "TEN_LCV", "TEN_LCV", true);
+
             //ID_CVLookUpEdit.EditValue = "";
             Commons.Modules.ObjSystems.MLoadLookUpEdit(ID_CVLookUpEdit, Commons.Modules.ObjSystems.DataChucVu(false, Convert.ToInt32(-1)), "ID_CV", "TEN_CV", "TEN_CV", true);
 
@@ -61,9 +66,6 @@ namespace Vs.HRM
 
             //ID_NKLookUpEdit.EditValue = "";
             Commons.Modules.ObjSystems.MLoadLookUpEdit(ID_NKLookUpEdit, Commons.Modules.ObjSystems.DataNguoiKy(), "ID_NK", "HO_TEN", "HO_TEN");
-
-            //ID_LCVLookUpEdit.EditValue = "";
-            Commons.Modules.ObjSystems.MLoadLookUpEdit(ID_LCVLookUpEdit, Commons.Modules.ObjSystems.DataLoaiCV(false, Convert.ToInt32(-1)), "ID_LCV", "TEN_LCV", "TEN_LCV", true);
 
             //ID_LCV_CULookUpEdit.EditValue = "";
             Commons.Modules.ObjSystems.MLoadLookUpEdit(ID_LCV_CULookUpEdit, Commons.Modules.ObjSystems.DataLoaiCV(false, Convert.ToInt32(-1)), "ID_LCV", "TEN_LCV", "TEN_LCV", true);
@@ -77,12 +79,36 @@ namespace Vs.HRM
             Commons.Modules.ObjSystems.MLoadLookUpEdit(cboTinhTrang, Commons.Modules.ObjSystems.DataTinhTrang(false), "ID_TT", "TenTT", "TenTT");
             LoadgrdCongTac(-1);
 
+            if (grvCongTac.RowCount == 0)
+            {
+                this.Load_ChuyenTu();
+            }
+
             enableButon(true);
             Commons.Modules.ObjSystems.SetPhanQuyen(windowsUIButton);
             Commons.Modules.sLoad = "";
 
         }
 
+        private void Load_ChuyenTu()
+        {
+            try
+            {
+                tableLyLich.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT DV.ID_DV, DV.TEN_DV, T.ID_TO, T.TEN_TO, XN.ID_XN, XN.TEN_XN, LCV.ID_LCV, LCV.TEN_LCV, CV.ID_CV, CV.TEN_CV , CASE CV.MS_CV WHEN 2 THEN 2 WHEN 1 THEN 1 ELSE 1 END AS ID_CTL, " +
+                                                                "CASE CV.MS_CV WHEN 2 THEN N'Lương sản phẩm' WHEN 1 THEN N'Lương thời gian' ELSE N'Lương thời gian' END AS TEN_CTL, " +
+                                                                "''" + "NHIEM_VU," + "''" + "NOI_CONG_TAC " +
+                                                                "FROM CONG_NHAN A LEFT JOIN dbo.[TO] T ON T.ID_TO = A.ID_TO LEFT JOIN dbo.XI_NGHIEP XN ON T.ID_XN = XN.ID_XN "
+                                                                + "LEFT JOIN dbo.DON_VI DV ON DV.ID_DV = XN.ID_DV "
+                                                                + "LEFT JOIN dbo.CHUC_VU CV ON CV.ID_CV = A.ID_CV "
+                                                                + " LEFT JOIN dbo.LOAI_CONG_VIEC LCV ON LCV.ID_LCV = A.ID_LCV "
+                                                                + " WHERE A.ID_CN = " + Commons.Modules.iCongNhan));
+                Bindingdata(true);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         private void grvCongTac_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
             Bindingdata(false);
@@ -100,9 +126,7 @@ namespace Vs.HRM
         {
             if (Commons.Modules.sLoad == "0Load") return;
             Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(ID_TOLookUpEdit, Commons.Modules.ObjSystems.DataTo(Convert.ToInt32(DON_VILookUpEdit.EditValue), Convert.ToInt32(XI_NGHIEPLookUpEdit.EditValue), false), "ID_TO", "TEN_TO", "TEN_TO", true, true);
-
             Commons.Modules.ObjSystems.MLoadLookUpEdit(ID_LCVLookUpEdit, Commons.Modules.ObjSystems.DataLoaiCV(false, Convert.ToInt32(XI_NGHIEPLookUpEdit.EditValue)), "ID_LCV", "TEN_LCV", "TEN_LCV", true);
-            ID_LCVLookUpEdit.ItemIndex = 0;
         }
 
         private void XI_NGHIEP_CUTextEdit_EditValueChanged(object sender, EventArgs e)
@@ -112,15 +136,19 @@ namespace Vs.HRM
         private void ID_LCV_CULookUpEdit_EditValueChanged(object sender, EventArgs e)
         {
             if (Commons.Modules.sLoad == "0Load") return;
-            Commons.Modules.ObjSystems.MLoadLookUpEditN(ID_CV_CULookUpEdit, Commons.Modules.ObjSystems.DataChucVu(false, Convert.ToInt32(ID_LCV_CULookUpEdit.EditValue)), "ID_CV", "TEN_CV", "TEN_CV", "", true);
+            ID_CV_CULookUpEdit.Properties.ReadOnly = false;
+            Commons.Modules.ObjSystems.MLoadLookUpEditN(ID_CV_CULookUpEdit, Commons.Modules.ObjSystems.DataChucVu(false, Convert.ToInt32(ID_LCV_CULookUpEdit.EditValue)), "ID_CV", "TEN_CV", "TEN_CV", "", false);
             ID_CV_CULookUpEdit.ItemIndex = 0;
+            ID_CV_CULookUpEdit.Properties.ReadOnly = true;
         }
 
         private void ID_LCVLookUpEdit_EditValueChanged(object sender, EventArgs e)
         {
             if (Commons.Modules.sLoad == "0Load") return;
-            Commons.Modules.ObjSystems.MLoadLookUpEditN(ID_CVLookUpEdit, Commons.Modules.ObjSystems.DataChucVu(false, Convert.ToInt32(ID_LCVLookUpEdit.EditValue)), "ID_CV", "TEN_CV", "TEN_CV", "", true);
+            ID_CVLookUpEdit.Properties.ReadOnly = false;
+            Commons.Modules.ObjSystems.MLoadLookUpEdit(ID_CVLookUpEdit, Commons.Modules.ObjSystems.DataChucVu(false, Convert.ToInt32(ID_LCVLookUpEdit.EditValue)), "ID_CV", "TEN_CV", "TEN_CV", false);
             ID_CVLookUpEdit.ItemIndex = 0;
+            ID_CVLookUpEdit.Properties.ReadOnly = true;
         }
         private void grdCongTac_ProcessGridKey(object sender, KeyEventArgs e)
         {
@@ -193,13 +221,14 @@ namespace Vs.HRM
             windowsUIButton.Buttons[6].Properties.Visible = !visible;
             windowsUIButton.Buttons[7].Properties.Visible = !visible;
             windowsUIButton.Buttons[8].Properties.Visible = visible;
-
+            Commons.Modules.bEnabel = !visible;
             grdCongTac.Enabled = visible;
             //SO_HIEU_BANGTextEdit.Properties.ReadOnly = visible;
             SO_QUYET_DINHTextEdit.Properties.ReadOnly = visible;
             NGAY_KYDateEdit.Properties.ReadOnly = visible;
             NGAY_HIEU_LUCDateEdit.Properties.ReadOnly = visible;
             ID_LQDLookUpEdit.Properties.ReadOnly = visible;
+
 
             ID_NKLookUpEdit.Properties.ReadOnly = visible;
             ID_CV_CULookUpEdit.Properties.ReadOnly = visible;
@@ -208,22 +237,22 @@ namespace Vs.HRM
             ID_TO_CUTextEdit.Properties.ReadOnly = true;
             NOI_CONG_TACTextEdit.Properties.ReadOnly = visible;
             NHIEM_VUMemoEdit.Properties.ReadOnly = visible;
-            MUC_LUONG_CUTextEdit.Properties.ReadOnly = visible;
+            //MUC_LUONG_CUTextEdit.Properties.ReadOnly = visible;
             ID_LCV_CULookUpEdit.Properties.ReadOnly = visible;
             ID_CTL_CULookUpEdit.Properties.ReadOnly = visible;
+
 
             DON_VILookUpEdit.Properties.ReadOnly = visible;
             XI_NGHIEPLookUpEdit.Properties.ReadOnly = visible;
             ID_TOLookUpEdit.Properties.ReadOnly = visible;
-            ID_CVLookUpEdit.Properties.ReadOnly = visible;
+            ID_CVLookUpEdit.Properties.ReadOnly = true;
             ID_LCVLookUpEdit.Properties.ReadOnly = visible;
-            MUC_LUONGTextEdit.Properties.ReadOnly = visible;
+            //MUC_LUONGTextEdit.Properties.ReadOnly = visible;
             GHI_CHUTextEdit.Properties.ReadOnly = visible;
             ID_CTLLookUpEdit.Properties.ReadOnly = visible;
             cboTinhTrang.Properties.ReadOnly = visible;
 
         }
-
         private void Bindingdata(bool bthem)
         {
 
@@ -235,52 +264,76 @@ namespace Vs.HRM
                 try
                 {
                     NGAY_KYDateEdit.EditValue = DateTime.Today;
-                    ID_NKLookUpEdit.EditValue = tableTTC_CN.Rows[0]["ID_NK"];
                     NGAY_HIEU_LUCDateEdit.EditValue = DateTime.Today;
                     SO_QUYET_DINHTextEdit.EditValue = "";
-                    DON_VI_CUTextEdit.EditValue = tableTTC_CN.Rows[0]["TEN_DV"];
-                    XI_NGHIEP_CUTextEdit.EditValue = tableTTC_CN.Rows[0]["TEN_XN"];
-                    ID_TO_CUTextEdit.EditValue = tableTTC_CN.Rows[0]["TEN_TO"];
-                    idToCu = Convert.ToInt32(tableTTC_CN.Rows[0]["ID_TO"]);
-                    MUC_LUONG_CUTextEdit.EditValue = tableTTC_CN.Rows[0]["MUC_LUONG_CU"];
-                    NOI_CONG_TACTextEdit.EditValue = "";
-                    MUC_LUONGTextEdit.EditValue = 0;
+
+                    if(grvCongTac.RowCount > 0)
+                    {
+                        int index = SearchMaxNgayHieuLuc();
+                        ID_NKLookUpEdit.EditValue = tableTTC_CN.Rows[index]["ID_NK"];
+                        idToCu = Convert.ToInt32(tableTTC_CN.Rows[index]["ID_TO"]);
+                        //MUC_LUONG_CUTextEdit.EditValue = tableTTC_CN.Rows[0]["MUC_LUONG_CU"];
+                        DON_VI_CUTextEdit.EditValue = tableTTC_CN.Rows[index]["TEN_DV"];
+                        XI_NGHIEP_CUTextEdit.EditValue = tableTTC_CN.Rows[index]["TEN_XN"];
+                        ID_TO_CUTextEdit.EditValue = tableTTC_CN.Rows[index]["TEN_TO"];
+                        ID_CV_CULookUpEdit.EditValue = tableTTC_CN.Rows[index]["ID_CV"];
+                        ID_LCV_CULookUpEdit.EditValue = tableTTC_CN.Rows[index]["ID_LCV"];
+                        ID_CTL_CULookUpEdit.EditValue = tableTTC_CN.Rows[index]["ID_CTL"];
+                        NHIEM_VUMemoEdit.EditValue = tableTTC_CN.Rows[index]["NHIEM_VU"];
+                        NOI_CONG_TACTextEdit.EditValue = tableTTC_CN.Rows[index]["NOI_CONG_TAC"];
+                    }
+                    else
+                    {
+                        ID_NKLookUpEdit.EditValue = tableTTC_CN.Rows[0]["ID_NK"];
+                        idToCu = Convert.ToInt32(tableLyLich.Rows[0]["ID_TO"]);
+                        //MUC_LUONG_CUTextEdit.EditValue = tableTTC_CN.Rows[0]["MUC_LUONG_CU"];
+                        DON_VI_CUTextEdit.EditValue = tableLyLich.Rows[0]["TEN_DV"];
+                        XI_NGHIEP_CUTextEdit.EditValue = tableLyLich.Rows[0]["TEN_XN"];
+                        ID_TO_CUTextEdit.EditValue = tableLyLich.Rows[0]["TEN_TO"];
+                        ID_CV_CULookUpEdit.EditValue = tableLyLich.Rows[0]["ID_CV"];
+                        ID_LCV_CULookUpEdit.EditValue = tableLyLich.Rows[0]["ID_LCV"];
+                        ID_CTL_CULookUpEdit.EditValue = tableLyLich.Rows[0]["ID_CTL"];
+                        NHIEM_VUMemoEdit.EditValue = tableLyLich.Rows[0]["NHIEM_VU"];
+                        NOI_CONG_TACTextEdit.EditValue = tableLyLich.Rows[0]["NOI_CONG_TAC"];
+                    }
+
+                    //MUC_LUONGTextEdit.EditValue = 0;
                     GHI_CHUTextEdit.EditValue = "";
-                    NHIEM_VUMemoEdit.EditValue = "";
-                    ID_LQDLookUpEdit.EditValue = "";
+                    ID_LQDLookUpEdit.EditValue = null;
+
                     ID_CNTextEdit.EditValue = tableTTC_CN.Rows[0]["HO_TEN"];
-                    ID_CV_CULookUpEdit.EditValue = tableTTC_CN.Rows[0]["ID_CV"];
-                    ID_LCV_CULookUpEdit.EditValue = tableTTC_CN.Rows[0]["ID_LCV"];
-                    ID_CVLookUpEdit.EditValue = tableTTC_CN.Rows[0]["ID_CV"];
-                    ID_LCVLookUpEdit.EditValue = tableTTC_CN.Rows[0]["ID_LCV_CU"];
-                    ID_CTL_CULookUpEdit.EditValue = tableTTC_CN.Rows[0]["ID_CTL"];
-                    ID_CTLLookUpEdit.EditValue = tableTTC_CN.Rows[0]["ID_CTL"];
+                    ID_CVLookUpEdit.EditValue = null;
+                    ID_LCVLookUpEdit.EditValue = null;
+                    ID_CTLLookUpEdit.EditValue = null;
+
                     cboTinhTrang.EditValue = 1;
                     txtTaiLieu.ResetText();
                     DON_VILookUpEdit.EditValue = null;
                     XI_NGHIEPLookUpEdit.EditValue = null;
                     ID_TOLookUpEdit.EditValue = null;
+             
                 }
-                catch
+                catch(Exception ex)
                 {
-
+                    throw ex;
                 }
             }
-            else //load du lieu co trong luoi
+            if(grvCongTac.RowCount > 0 && bthem == false) //load du lieu co trong luoi
             {
                 try
                 {
-
+                    //error: Convert.ToDateTime
                     NGAY_KYDateEdit.EditValue = Convert.ToDateTime(grvCongTac.GetFocusedRowCellValue("NGAY_KY")) == DateTime.MinValue ? NGAY_KYDateEdit.EditValue = null : Convert.ToDateTime(grvCongTac.GetFocusedRowCellValue("NGAY_KY"));
                     NGAY_HIEU_LUCDateEdit.EditValue = Convert.ToDateTime(grvCongTac.GetFocusedRowCellValue("NGAY_HIEU_LUC")) == DateTime.MinValue ? NGAY_HIEU_LUCDateEdit.EditValue = null : Convert.ToDateTime(grvCongTac.GetFocusedRowCellValue("NGAY_HIEU_LUC"));
+
                     SO_QUYET_DINHTextEdit.EditValue = grvCongTac.GetFocusedRowCellValue("SO_QUYET_DINH");
                     DON_VI_CUTextEdit.EditValue = grvCongTac.GetFocusedRowCellValue("TEN_DV");
                     XI_NGHIEP_CUTextEdit.EditValue = grvCongTac.GetFocusedRowCellValue("TEN_XN");
                     ID_TO_CUTextEdit.EditValue = grvCongTac.GetFocusedRowCellValue("TEN_TO");
-                    idToCu = Convert.ToInt32(grvCongTac.GetFocusedRowCellValue("ID_TO_CU"));
-                    MUC_LUONG_CUTextEdit.EditValue = grvCongTac.GetFocusedRowCellValue("MUC_LUONG_CU");
+                    idToCu = (grvCongTac.GetFocusedRowCellValue("ID_TO_CU") == null || grvCongTac.GetFocusedRowCellValue("ID_TO_CU").ToString().Trim() == "") ? -1 :Int32.Parse(grvCongTac.GetFocusedRowCellValue("ID_TO_CU").ToString().Trim());
+                    //MUC_LUONG_CUTextEdit.EditValue = grvCongTac.GetFocusedRowCellValue("MUC_LUONG_CU");
                     NOI_CONG_TACTextEdit.EditValue = grvCongTac.GetFocusedRowCellValue("NOI_CONG_TAC");
-                    MUC_LUONGTextEdit.EditValue = grvCongTac.GetFocusedRowCellValue("MUC_LUONG");
+                    //MUC_LUONGTextEdit.EditValue = grvCongTac.GetFocusedRowCellValue("MUC_LUONG");
                     GHI_CHUTextEdit.EditValue = grvCongTac.GetFocusedRowCellValue("GHI_CHU");
                     NHIEM_VUMemoEdit.EditValue = grvCongTac.GetFocusedRowCellValue("NHIEM_VU");
                     ID_CNTextEdit.EditValue = grvCongTac.GetFocusedRowCellValue("TEN_CN");
@@ -288,7 +341,7 @@ namespace Vs.HRM
                     ID_LQDLookUpEdit.EditValue = grvCongTac.GetFocusedRowCellValue("ID_LQD");
                     ID_NKLookUpEdit.EditValue = grvCongTac.GetFocusedRowCellValue("ID_NK");
                     ID_CV_CULookUpEdit.EditValue = grvCongTac.GetFocusedRowCellValue("ID_CV_CU");
-                    ID_LCV_CULookUpEdit.EditValue = grvCongTac.GetFocusedRowCellValue("ID_LCV_CU");
+                    ID_LCV_CULookUpEdit.EditValue = (grvCongTac.GetFocusedRowCellValue("ID_LCV_CU") == null || grvCongTac.GetFocusedRowCellValue("ID_LCV_CU").ToString().Trim() == "") ? null : grvCongTac.GetFocusedRowCellValue("ID_LCV_CU");
                     ID_CTL_CULookUpEdit.EditValue = grvCongTac.GetFocusedRowCellValue("ID_CTL_CU");
 
                     DON_VILookUpEdit.EditValue = grvCongTac.GetFocusedRowCellValue("ID_DV");
@@ -297,22 +350,83 @@ namespace Vs.HRM
                     ID_CVLookUpEdit.EditValue = grvCongTac.GetFocusedRowCellValue("ID_CV");
                     ID_LCVLookUpEdit.EditValue = grvCongTac.GetFocusedRowCellValue("ID_LCV");
                     ID_CTLLookUpEdit.EditValue = grvCongTac.GetFocusedRowCellValue("ID_CTL");
-                    cboTinhTrang.EditValue = string.IsNullOrEmpty(grvCongTac.GetFocusedRowCellValue("ID_TT").ToString()) ? cboTinhTrang.EditValue = null : Convert.ToInt32(grvCongTac.GetFocusedRowCellValue("ID_TT"));
+
+                    //error: string.IsNullOrEmpt();
+                    //cboTinhTrang.EditValue = string.IsNullOrEmpty(grvCongTac.GetFocusedRowCellValue("ID_TT").ToString()) ? cboTinhTrang.EditValue = null : Convert.ToInt32(grvCongTac.GetFocusedRowCellValue("ID_TT"));
+                    cboTinhTrang.EditValue = (grvCongTac.GetFocusedRowCellValue("ID_TT") == null || grvCongTac.GetFocusedRowCellValue("ID_TT").ToString().Trim() == "") ? cboTinhTrang.EditValue = null : Convert.ToInt32(grvCongTac.GetFocusedRowCellValue("ID_TT"));
+
                     txtTaiLieu.EditValue = grvCongTac.GetFocusedRowCellValue("TAI_LIEU");
                 }
-                catch { }
+                catch(Exception ex)
+                {
+                    throw ex;
+                }
+
+            }
+            if (grvCongTac.RowCount == 0 && bthem == false)
+            {
+                try
+                {
+                    NGAY_KYDateEdit.EditValue = DateTime.Today;
+                    ID_NKLookUpEdit.EditValue = tableTTC_CN.Rows[0]["ID_NK"];
+                    NGAY_HIEU_LUCDateEdit.EditValue = DateTime.Today;
+                    SO_QUYET_DINHTextEdit.EditValue = "";
+
+                    idToCu = Convert.ToInt32(tableLyLich.Rows[0]["ID_TO"]);
+                    //MUC_LUONG_CUTextEdit.EditValue = tableTTC_CN.Rows[0]["MUC_LUONG_CU"];
+                    DON_VI_CUTextEdit.EditValue = tableLyLich.Rows[0]["TEN_DV"];
+                    XI_NGHIEP_CUTextEdit.EditValue = tableLyLich.Rows[0]["TEN_XN"];
+                    ID_TO_CUTextEdit.EditValue = tableLyLich.Rows[0]["TEN_TO"];
+                    ID_CV_CULookUpEdit.EditValue = tableLyLich.Rows[0]["ID_CV"];
+                    ID_LCV_CULookUpEdit.EditValue = tableLyLich.Rows[0]["ID_LCV"];
+                    ID_CTL_CULookUpEdit.EditValue = tableLyLich.Rows[0]["ID_CTL"];
+                    NHIEM_VUMemoEdit.EditValue = tableLyLich.Rows[0]["NHIEM_VU"];
+                    NOI_CONG_TACTextEdit.EditValue = tableLyLich.Rows[0]["NOI_CONG_TAC"];
+
+                    //MUC_LUONGTextEdit.EditValue = 0;
+                    GHI_CHUTextEdit.EditValue = "";
+                    ID_LQDLookUpEdit.EditValue = null;
+
+                    ID_CNTextEdit.EditValue = tableTTC_CN.Rows[0]["HO_TEN"];
+                    ID_CVLookUpEdit.EditValue = null;
+                    ID_LCVLookUpEdit.EditValue = null;
+                    ID_CTLLookUpEdit.EditValue = null;
+
+                    cboTinhTrang.EditValue = 1;
+                    txtTaiLieu.ResetText();
+                    DON_VILookUpEdit.EditValue = null;
+                    XI_NGHIEPLookUpEdit.EditValue = null;
+                    ID_TOLookUpEdit.EditValue = null;
+                }
+                catch(Exception ex)
+                {
+                    throw ex;
+                }
             }
             Commons.Modules.sLoad = "";
         }
 
         private void Load_cboChucVu()
         {
-            Commons.Modules.ObjSystems.MLoadLookUpEditN(ID_CV_CULookUpEdit, Commons.Modules.ObjSystems.DataChucVu(false, Convert.ToInt32(grvCongTac.GetFocusedRowCellValue("ID_LCV_CU"))), "ID_CV", "TEN_CV", "TEN_CV", "", true);
-            ID_CV_CULookUpEdit.EditValue = grvCongTac.GetFocusedRowCellValue("ID_CV_CU");
-            Commons.Modules.ObjSystems.MLoadLookUpEdit(ID_LCVLookUpEdit, Commons.Modules.ObjSystems.DataLoaiCV(false, Convert.ToInt32(grvCongTac.GetFocusedRowCellValue("ID_XN"))), "ID_LCV", "TEN_LCV", "TEN_LCV", true);
-            ID_LCVLookUpEdit.EditValue = grvCongTac.GetFocusedRowCellValue("ID_LCV");
-            Commons.Modules.ObjSystems.MLoadLookUpEditN(ID_CVLookUpEdit, Commons.Modules.ObjSystems.DataChucVu(false, Convert.ToInt32(ID_LCVLookUpEdit.EditValue)), "ID_CV", "TEN_CV", "TEN_CV", "", true);
-            ID_CVLookUpEdit.EditValue = grvCongTac.GetFocusedRowCellValue("ID_CV");
+            try
+            {
+
+                DON_VILookUpEdit.EditValue = grvCongTac.GetFocusedRowCellValue("ID_DV");
+                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(XI_NGHIEPLookUpEdit, Commons.Modules.ObjSystems.DataXiNghiep(Convert.ToInt32(DON_VILookUpEdit.EditValue), false), "ID_XN", "TEN_XN", "TEN_XN", true, true);
+                XI_NGHIEPLookUpEdit.EditValue = grvCongTac.GetFocusedRowCellValue("ID_XN");
+                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(ID_TOLookUpEdit, Commons.Modules.ObjSystems.DataTo(Convert.ToInt32(DON_VILookUpEdit.EditValue), Convert.ToInt32(XI_NGHIEPLookUpEdit.EditValue), false), "ID_TO", "TEN_TO", "TEN_TO", true, true);
+                ID_TOLookUpEdit.EditValue = grvCongTac.GetFocusedRowCellValue("ID_TO");
+                Commons.Modules.ObjSystems.MLoadLookUpEditN(ID_CV_CULookUpEdit, Commons.Modules.ObjSystems.DataChucVu(false, Convert.ToInt32(ID_LCV_CULookUpEdit.EditValue)), "ID_CV", "TEN_CV", "TEN_CV", "", true);
+                ID_CV_CULookUpEdit.EditValue = grvCongTac.GetFocusedRowCellValue("ID_CV_CU");
+                Commons.Modules.ObjSystems.MLoadLookUpEdit(ID_LCVLookUpEdit, Commons.Modules.ObjSystems.DataLoaiCV(false, Convert.ToInt32(XI_NGHIEPLookUpEdit.EditValue)), "ID_LCV", "TEN_LCV", "TEN_LCV", true);
+                ID_LCVLookUpEdit.EditValue = grvCongTac.GetFocusedRowCellValue("ID_LCV");
+                Commons.Modules.ObjSystems.MLoadLookUpEditN(ID_CVLookUpEdit, Commons.Modules.ObjSystems.DataChucVu(false, Convert.ToInt32(ID_LCVLookUpEdit.EditValue)), "ID_CV", "TEN_CV", "TEN_CV", "", true);
+                ID_CVLookUpEdit.EditValue = grvCongTac.GetFocusedRowCellValue("ID_CV");
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
         private void SaveData()
         {
@@ -335,10 +449,11 @@ namespace Vs.HRM
                 NGAY_HIEU_LUCDateEdit.EditValue,
                 NOI_CONG_TACTextEdit.EditValue,
                 NHIEM_VUMemoEdit.EditValue,
-                MUC_LUONGTextEdit.EditValue,
-                MUC_LUONG_CUTextEdit.EditValue,
+                //MUC_LUONGTextEdit.EditValue,
+                //MUC_LUONG_CUTextEdit.EditValue,
                 GHI_CHUTextEdit.EditValue, cboTinhTrang.EditValue, txtTaiLieu.EditValue,
-                cothem
+                cothem,
+                Convert.ToInt32(cboTinhTrang.EditValue)
                 ));
                 LoadgrdCongTac(Convert.ToInt32(Commons.Modules.sId));
             }
@@ -356,7 +471,13 @@ namespace Vs.HRM
             try
             {
                 SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "DELETE dbo.QUA_TRINH_CONG_TAC WHERE ID_QTCT =" + grvCongTac.GetFocusedRowCellValue("ID_QTCT") + "");
-                grvCongTac.DeleteSelectedRows();
+                Loaddatatable();
+                LoadgrdCongTac(-1);
+                if(grvCongTac.RowCount > 0)
+                {
+                    grvCongTac.FocusedRowHandle = grvCongTac.GetRowHandle(0);
+                }
+                //grvCongTac.DeleteSelectedRows();
             }
             catch (Exception ex)
             {
@@ -364,7 +485,113 @@ namespace Vs.HRM
             }
         }
         #endregion
+        private void LockChuyenTu()
+        {
+            ID_LCV_CULookUpEdit.Properties.ReadOnly = true;
+            ID_CV_CULookUpEdit.Properties.ReadOnly = true;
+            //MUC_LUONG_CUTextEdit.Properties.ReadOnly = true;
 
+            ID_CTL_CULookUpEdit.Properties.ReadOnly = true;
+            NOI_CONG_TACTextEdit.Properties.ReadOnly = true;
+            NHIEM_VUMemoEdit.Properties.ReadOnly = true;
+        }
+
+        private bool KiemTraTatCaDaKy()
+        {
+            try
+            {
+                int count = 0;
+                count = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT COUNT(ID_QTCT) FROM dbo.QUA_TRINH_CONG_TAC WHERE ID_CN =  " + Commons.Modules.iCongNhan + " AND ID_TT = 1 GROUP BY ID_CN"));
+                if (count > 0) return false;
+                return true;
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        private void ChuyenTatCaSangDaKy()
+        {
+            try
+            {
+                SqlHelper.ExecuteScalar(Commons.IConnections.CNStr,"spUpdateQTCTtudong",Commons.Modules.iCongNhan);
+                Loaddatatable();
+                LoadgrdCongTac(-1);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        private bool KiemTraNgayHieuLuc(bool isAdd)
+        {
+            try
+            {
+                if (NGAY_HIEU_LUCDateEdit.EditValue == null) return false;
+                DateTime DayHL = System.Convert.ToDateTime(NGAY_HIEU_LUCDateEdit.EditValue.ToString());
+                string SqlStr = " SELECT COUNT(QTCT.ID_CN) FROM QUA_TRINH_CONG_TAC QTCT WHERE QTCT.NGAY_HIEU_LUC = '" + DayHL.ToString("MM/dd/yyyy")+ "' AND QTCT.ID_CN = " + Commons.Modules.iCongNhan + " GROUP BY QTCT.ID_CN";
+                int count = 0;
+                count = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, SqlStr));
+
+                if (isAdd)
+                {
+
+                    if (count > 0)
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        return true;
+                    }
+                }
+                else
+                {
+                    if(count > 1)
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        return true;
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        private int SearchMaxNgayHieuLuc()
+        {
+            try
+            {
+                DataTable newtb = Commons.Modules.ObjSystems.ConvertDatatable(grdCongTac);
+                DateTime MaxDay = Convert.ToDateTime(newtb.Rows[0]["NGAY_HIEU_LUC"].ToString());
+                int index = 0;
+                int i = 0;
+                foreach (DataRow row in newtb.Rows)
+                {
+                    i++;
+                    DateTime NewDay = Convert.ToDateTime(row["NGAY_HIEU_LUC"].ToString());
+                    int compare = DateTime.Compare(MaxDay, NewDay);
+                    if (compare < 0)
+                    {
+                        index = i;
+                        MaxDay = NewDay;
+                    }
+
+                }
+                return index;
+            }
+            catch
+            {
+                return 0;
+            }
+        }
         private void windowsUIButton_ButtonClick_1(object sender, ButtonEventArgs e)
         {
             WindowsUIButton btn = e.Button as WindowsUIButton;
@@ -379,10 +606,36 @@ namespace Vs.HRM
                             XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgChuaChonCongNhan"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "sThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                             return;
                         }
-                        Load_cboChucVu();
-                        Bindingdata(true);
-                        cothem = true;
-                        enableButon(false);
+
+                        if(grvCongTac.RowCount == 0)
+                        {
+                            Bindingdata(true);
+                            cothem = true;
+                            enableButon(false);
+                            LockChuyenTu();
+                        }
+                        else
+                        {
+                            bool DaKy = KiemTraTatCaDaKy();
+                            if(DaKy)
+                            {
+                                Bindingdata(true);
+                                cothem = true;
+                                enableButon(false);
+                                LockChuyenTu();
+                            }
+                            else
+                            {
+                                if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgConHopDongChuaKyKhongDuocThemMoi"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "sThongBao"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) return;
+                                ChuyenTatCaSangDaKy();
+                                Bindingdata(true);
+                                cothem = true;
+                                enableButon(false);
+                                LockChuyenTu();
+                            }
+                        }
+
+                        btnName = "them";
                         break;
                     }
                 case "sua":
@@ -400,14 +653,20 @@ namespace Vs.HRM
                         Load_cboChucVu();
                         cothem = false;
                         enableButon(false);
+                        LockChuyenTu();
+                        btnName = "sua";
                         break;
                     }
 
                 case "xoa":
                     {
+                        if ((Convert.ToInt32(cboTinhTrang.EditValue) == 2 && Commons.Modules.UserName != "admin") || (Convert.ToInt32(cboTinhTrang.EditValue) == 3 && Commons.Modules.UserName != "admin"))
+                        {
+                            XtraMessageBox.Show(cboTinhTrang.Text + Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgTinhTrangKhongSuaDuoc"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "sThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
                         if (grvCongTac.RowCount == 0)
                         {
-
                             XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgChonDongCanXuLy"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                             return;
                         }
@@ -452,6 +711,26 @@ namespace Vs.HRM
                             XtraMessageBox.Show(ItemForID_TO.Text + " " + Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgKhongDuocTrong"));
                             ID_TOLookUpEdit.Focus();
                             return;
+                        }
+                        if(btnName == "them")
+                        {
+                            bool NgayHieuLucHopLe = KiemTraNgayHieuLuc(true);
+                            if (!NgayHieuLucHopLe)
+                            {
+                                XtraMessageBox.Show(NGAY_HIEU_LUCDateEdit.Text + " " + Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgKhongDuocTrungNgayHieuLuc"));
+                                NGAY_HIEU_LUCDateEdit.Focus();
+                                return;
+                            }
+                        }
+                        else
+                        {
+                            bool NgayHieuLucHopLe = KiemTraNgayHieuLuc(false);
+                            if (!NgayHieuLucHopLe)
+                            {
+                                XtraMessageBox.Show(NGAY_HIEU_LUCDateEdit.Text + " " + Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgKhongDuocTrungNgayHieuLuc"));
+                                NGAY_HIEU_LUCDateEdit.Focus();
+                                return;
+                            }
                         }
 
                         //kiem trung ..
@@ -528,21 +807,57 @@ namespace Vs.HRM
             {
                 try
                 {
-                    if (windowsUIButton.Buttons[6].Properties.Visible)
+
+                    if (Convert.ToInt32(cboTinhTrang.EditValue) == 2)
                     {
-                        ofdfile.ShowDialog();
-                        LayDuongDan();
+                        if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgBanCoMuonThemTL"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "sThongBao"), MessageBoxButtons.YesNo) != DialogResult.No)
+                        {
+                            if ((cboTinhTrang.EditValue == null || cboTinhTrang.EditValue.ToString().Trim() != "2") )
+                            {
+                                if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgTinhTrangHopDong"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "sThongBao"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) return;
+                                if (ofdfile.ShowDialog() == DialogResult.Cancel) return;
+                                LayDuongDan();
+                                cboTinhTrang.EditValue = 2;
+                            }
+                            else
+                            {
+                                ofdfile.ShowDialog();
+                                LayDuongDan();
+                            }
+                        }
+                        else
+                        {
+                            if ((cboTinhTrang.EditValue == null || cboTinhTrang.EditValue.ToString().Trim() != "2"))
+                            {
+                                if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgTinhTrangHopDong"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "sThongBao"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) return;
+                                if (ofdfile.ShowDialog() == DialogResult.Cancel) return;
+                                LayDuongDan();
+                                cboTinhTrang.EditValue = 2;
+                            }
+                            else
+                            {
+                                ofdfile.ShowDialog();
+                                LayDuongDan();
+                            }
+                        }
                     }
                     else
                     {
-                        if (txtTaiLieu.Text == "")
-                            return;
-                        Commons.Modules.ObjSystems.OpenHinh(txtTaiLieu.Text);
+                        if ((cboTinhTrang.EditValue == null || cboTinhTrang.EditValue.ToString().Trim() != "2"))
+                        {
+                            if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgTinhTrangHopDong"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "sThongBao"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) return;
+                            if (ofdfile.ShowDialog() == DialogResult.Cancel) return;
+                            LayDuongDan();
+                            cboTinhTrang.EditValue = 2;
+                        }
+                        else
+                        {
+                            ofdfile.ShowDialog();
+                            LayDuongDan();
+                        }
                     }
                 }
-                catch
-                {
-                }
+                catch { }
             }
             else
             {
@@ -558,7 +873,62 @@ namespace Vs.HRM
                 {
                 }
             }
+            ////////    if (e.Button.Index == 0)
+            ////////    {
+            ////////        try
+            ////////        {
+            ////////            if (windowsUIButton.Buttons[6].Properties.Visible)
+            ////////            {
+            ////////                ofdfile.ShowDialog();
+            ////////                LayDuongDan();
+            ////////            }
+            ////////            else
+            ////////            {
+            ////////                if (txtTaiLieu.Text == "")
+            ////////                    return;
+            ////////                Commons.Modules.ObjSystems.OpenHinh(txtTaiLieu.Text);
+            ////////            }
+            ////////        }
+            ////////        catch
+            ////////        {
+            ////////        }
+            ////////    }
+            ////////    else
+            ////////    {
+            ////////        //xóa dữ liệu
+            ////////        try
+            ////////        {
+            ////////            Commons.Modules.ObjSystems.Xoahinh(txtTaiLieu.Text);
+            ////////            txtTaiLieu.ResetText();
+            ////////            grvCongTac.SetFocusedRowCellValue("TAI_LIEU", null);
+            ////////            SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "UPDATE dbo.QUA_TRINH_CONG_TAC SET TAI_LIEU = NULL WHERE ID_QTCT =" + grvCongTac.GetFocusedRowCellValue("ID_QTCT") + "");
+            ////////        }
+            ////////        catch
+            ////////        {
+            ////////        }
+            ////////    }    
         }
 
+        private void ID_CVLookUpEdit_EditValueChanged(object sender, EventArgs e)
+        {
+            if (Commons.Modules.sLoad == "0Load") return;
+            try
+            {
+                //ID_CTLookUpEdit.EditValue = "";
+                Commons.Modules.ObjSystems.MLoadLookUpEdit(ID_CTLLookUpEdit, Commons.Modules.ObjSystems.DataCTL(false), "ID_CTL", "TEN_CTL", "TEN_CTL", true);
+                if (ID_CVLookUpEdit.EditValue != null && int.Parse(ID_CVLookUpEdit.EditValue.ToString()) == 206)
+                {
+                    ID_CTLLookUpEdit.EditValue = 2;
+                }
+                else
+                {
+                    ID_CTLLookUpEdit.EditValue = 1;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

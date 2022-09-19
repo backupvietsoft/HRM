@@ -59,7 +59,10 @@ namespace Vs.TimeAttendance
                 repositoryItemTimeEdit1.EditFormat.FormatString = "HH:mm:ss";
 
                 Commons.Modules.sPS = "0Load";
-                Commons.Modules.ObjSystems.LoadCboDonVi(cbDonVi);
+                DataTable dt1 = new DataTable();
+                dt1.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboDON_VI", Commons.Modules.UserName, Commons.Modules.TypeLanguage, 0));
+                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cbDonVi, dt1, "ID_DV", "TEN_DV", "TEN_DV");
+
                 Commons.Modules.ObjSystems.LoadCboXiNghiep(cbDonVi, cbXiNghiep);
                 Commons.Modules.ObjSystems.LoadCboTo(cbDonVi, cbXiNghiep, cbTo);
                 Commons.Modules.sPS = "";

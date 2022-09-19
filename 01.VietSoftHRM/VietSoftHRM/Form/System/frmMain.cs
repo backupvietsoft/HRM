@@ -520,7 +520,7 @@ namespace VietSoftHRM
                                 this.Close();
                             }));
                         }
-                    }, 5000);
+                    }, Convert.ToInt32(TimeSpan.FromMinutes(5).TotalMilliseconds));
                     thread.Start();
                 }
             }

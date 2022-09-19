@@ -26,6 +26,17 @@ namespace Vs.Category
 
         private void frmEditNGUOI_KY_GIAY_TO_Load(object sender, EventArgs e)
         {
+            DataTable dt = new DataTable();
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboCongNhan", Commons.Modules.UserName, Commons.Modules.TypeLanguage, 3));
+            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_NUQ, dt, "ID_CN", "HO_TEN", "HO_TEN");
+            if (Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString() == "NB")
+            {
+                ItemForGIAY_UY_QUYEN.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+            }
+            else
+            {
+                ItemForGIAY_UY_QUYEN.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+            }
             if (!AddEdit) LoadText();
             Commons.Modules.ObjSystems.ThayDoiNN(this, layoutControlGroup1, btnALL);
             Commons.OSystems.SetDateEditFormat(NGAY_SINHDateEdit);
@@ -39,7 +50,7 @@ namespace Vs.Category
             try
             {
                 string sSql = "SELECT ID_NK, HO_TEN, CHUC_VU, CHUC_VU_A, CHUC_VU_H, QUOC_TICH, NGAY_SINH, " +
-                    "SO_CMND, CAP_NGAY, NOI_CAP, DIA_CHI, GIAY_UY_QUYEN, STT " +
+                    "SO_CMND, CAP_NGAY, NOI_CAP, DIA_CHI, GIAY_UY_QUYEN, STT, ID_NUQ " +
                     "FROM NGUOI_KY_GIAY_TO WHERE ID_NK = " + Id.ToString();
                 DataTable dtTmp = new DataTable();
                 dtTmp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSql));
@@ -48,7 +59,7 @@ namespace Vs.Category
                 CHUC_VU_ATextEdit.EditValue = dtTmp.Rows[0]["CHUC_VU_A"].ToString();
                 txtCHUC_VU_H.EditValue = dtTmp.Rows[0]["CHUC_VU_H"].ToString();
                 QUOC_TICHTextEdit.EditValue = dtTmp.Rows[0]["QUOC_TICH"].ToString();
-    
+
                 if (string.IsNullOrEmpty(dtTmp.Rows[0]["NGAY_SINH"].ToString()))
                 {
                     NGAY_SINHDateEdit.EditValue = null;
@@ -71,10 +82,11 @@ namespace Vs.Category
                 NOI_CAPTextEdit.EditValue = dtTmp.Rows[0]["NOI_CAP"].ToString();
                 DIA_CHITextEdit.EditValue = dtTmp.Rows[0]["DIA_CHI"].ToString();
                 GIAY_UY_QUYENTextEdit.EditValue = dtTmp.Rows[0]["GIAY_UY_QUYEN"].ToString();
+                cboID_NUQ.EditValue = dtTmp.Rows[0]["ID_NUQ"].ToString();
             }
-            catch 
+            catch
             {
-                
+
             }
 
         }
@@ -93,6 +105,7 @@ namespace Vs.Category
                 NOI_CAPTextEdit.EditValue = String.Empty;
                 DIA_CHITextEdit.EditValue = String.Empty;
                 GIAY_UY_QUYENTextEdit.EditValue = String.Empty;
+                cboID_NUQ.EditValue = -1;
                 HO_TENTextEdit.Focus();
             }
             catch { }
@@ -113,8 +126,8 @@ namespace Vs.Category
                             Commons.Modules.sId = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spUpdateNGUOI_KY_GIAY_TO", (AddEdit ? -1 : Id),
                                 HO_TENTextEdit.EditValue, CHUC_VUTextEdit.EditValue, CHUC_VU_ATextEdit.EditValue, txtCHUC_VU_H.EditValue,
                                 QUOC_TICHTextEdit.EditValue, NGAY_SINHDateEdit.Text == "" ? null : NGAY_SINHDateEdit.EditValue,
-                                SO_CMNDTextEdit.EditValue, CAP_NGAYDateEdit.Text == "" ? null : CAP_NGAYDateEdit.EditValue, NOI_CAPTextEdit.EditValue, 
-                                DIA_CHITextEdit.EditValue, GIAY_UY_QUYENTextEdit.EditValue).ToString();
+                                SO_CMNDTextEdit.EditValue, CAP_NGAYDateEdit.Text == "" ? null : CAP_NGAYDateEdit.EditValue, NOI_CAPTextEdit.EditValue,
+                                DIA_CHITextEdit.EditValue, cboID_NUQ.Text == "" ? cboID_NUQ.EditValue = null : cboID_NUQ.EditValue, GIAY_UY_QUYENTextEdit.EditValue).ToString();
                             if (AddEdit)
                             {
                                 if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msg_ThemThanhCongBanCoMuonTiepTuc"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
@@ -164,6 +177,6 @@ namespace Vs.Category
             }
             return false;
         }
-        
+
     }
 }

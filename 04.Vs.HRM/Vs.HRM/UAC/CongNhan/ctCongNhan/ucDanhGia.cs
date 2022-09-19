@@ -271,6 +271,7 @@ namespace Vs.HRM
             windowsUIButton.Buttons[6].Properties.Visible = !visible;
             windowsUIButton.Buttons[7].Properties.Visible = !visible;
             windowsUIButton.Buttons[8].Properties.Visible = visible;
+            Commons.Modules.bEnabel = !visible;
             Readonlyedit(visible);
         }
         private void Bindingdata(bool bthem)

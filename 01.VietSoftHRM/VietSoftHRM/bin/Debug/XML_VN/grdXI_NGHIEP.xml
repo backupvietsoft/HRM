@@ -6,105 +6,119 @@
     <property name="ColumnAutoWidth">false</property>
     <property name="ColumnHeaderAutoHeight">True</property>
     <property name="RowAutoHeight">true</property>
-    <property name="ShowGroupPanel">false</property>
+    <property name="ShowAutoFilterRow">true</property>
   </property>
   <property name="ActiveFilterEnabled">true</property>
   <property name="Columns" iskey="true" value="9">
     <property name="Item1" isnull="true" iskey="true">
       <property name="Name">colID_XN</property>
-      <property name="Caption">X.Nghiệp/P.Ban</property>
+      <property name="Caption">Bộ phận</property>
       <property name="ImageAlignment">Near</property>
       <property name="ImageIndex">-1</property>
       <property name="FieldName">ID_XN</property>
       <property name="ColumnEditName" />
-      <property name="Width">145</property>
+      <property name="VisibleIndex">0</property>
+      <property name="Visible">true</property>
+      <property name="Width">54</property>
       <property name="MinWidth">20</property>
       <property name="MaxWidth">0</property>
+      <property name="UnboundDataTypeName" />
     </property>
     <property name="Item2" isnull="true" iskey="true">
       <property name="Name">colID_DV</property>
-      <property name="Caption">Đơn vị</property>
+      <property name="Caption">Nhà máy</property>
       <property name="ImageAlignment">Near</property>
       <property name="ImageIndex">-1</property>
       <property name="FieldName">ID_DV</property>
       <property name="ColumnEditName" />
-      <property name="Width">63</property>
+      <property name="VisibleIndex">1</property>
+      <property name="Visible">true</property>
+      <property name="Width">53</property>
       <property name="MinWidth">20</property>
       <property name="MaxWidth">0</property>
+      <property name="UnboundDataTypeName" />
     </property>
     <property name="Item3" isnull="true" iskey="true">
       <property name="Name">colTEN_DV</property>
-      <property name="Caption">Tên đơn vị</property>
+      <property name="Caption">Nhà máy</property>
       <property name="ImageAlignment">Near</property>
       <property name="ImageIndex">-1</property>
       <property name="FieldName">TEN_DV</property>
       <property name="ColumnEditName" />
-      <property name="VisibleIndex">0</property>
+      <property name="VisibleIndex">2</property>
       <property name="Visible">true</property>
-      <property name="Width">245</property>
+      <property name="Width">75</property>
       <property name="MinWidth">20</property>
       <property name="MaxWidth">0</property>
+      <property name="UnboundDataTypeName" />
     </property>
     <property name="Item4" isnull="true" iskey="true">
       <property name="Name">colMS_XN</property>
-      <property name="Caption">MS X.Nghiệp/P.Ban</property>
+      <property name="Caption">Mã Xưởng / Phòng ban</property>
       <property name="ImageAlignment">Near</property>
       <property name="ImageIndex">-1</property>
       <property name="FieldName">MS_XN</property>
       <property name="ColumnEditName" />
-      <property name="VisibleIndex">0</property>
+      <property name="VisibleIndex">3</property>
       <property name="Visible">true</property>
-      <property name="Width">214</property>
+      <property name="Width">61</property>
       <property name="MinWidth">20</property>
       <property name="MaxWidth">0</property>
+      <property name="UnboundDataTypeName" />
     </property>
     <property name="Item5" isnull="true" iskey="true">
       <property name="Name">colTEN_XN</property>
-      <property name="Caption">Tên X.Nghiệp/P.Ban</property>
+      <property name="Caption">Bộ phận</property>
       <property name="ImageAlignment">Near</property>
       <property name="ImageIndex">-1</property>
       <property name="FieldName">TEN_XN</property>
       <property name="ColumnEditName" />
-      <property name="VisibleIndex">1</property>
+      <property name="VisibleIndex">4</property>
       <property name="Visible">true</property>
-      <property name="Width">474</property>
+      <property name="Width">239</property>
       <property name="MinWidth">20</property>
       <property name="MaxWidth">0</property>
+      <property name="UnboundDataTypeName" />
     </property>
     <property name="Item6" isnull="true" iskey="true">
       <property name="Name">colSTT_XN</property>
-      <property name="Caption">Stt PB</property>
+      <property name="Caption">Thứ tự sắp xếp</property>
       <property name="ImageAlignment">Near</property>
       <property name="ImageIndex">-1</property>
       <property name="FieldName">STT_XN</property>
       <property name="ColumnEditName" />
-      <property name="VisibleIndex">2</property>
+      <property name="VisibleIndex">5</property>
       <property name="Visible">true</property>
-      <property name="Width">108</property>
+      <property name="Width">63</property>
       <property name="MinWidth">20</property>
       <property name="MaxWidth">0</property>
+      <property name="UnboundDataTypeName" />
     </property>
     <property name="Item7" isnull="true" iskey="true">
       <property name="Name">colGOP_PB</property>
-      <property name="Caption">Gọp PB</property>
+      <property name="Caption">Gộp PB/XN</property>
       <property name="ImageAlignment">Near</property>
       <property name="ImageIndex">-1</property>
       <property name="FieldName">GOP_PB</property>
       <property name="ColumnEditName" />
-      <property name="Width">74</property>
+      <property name="VisibleIndex">6</property>
+      <property name="Visible">true</property>
+      <property name="Width">64</property>
       <property name="MinWidth">20</property>
       <property name="MaxWidth">0</property>
+      <property name="UnboundDataTypeName" />
     </property>
     <property name="Item8" isnull="true" iskey="true">
       <property name="Name">colGOP_TH</property>
-      <property name="Caption">Gọp TH</property>
+      <property name="Caption">Gộp TH</property>
       <property name="ImageAlignment">Near</property>
       <property name="ImageIndex">-1</property>
       <property name="FieldName">GOP_TH</property>
       <property name="ColumnEditName" />
-      <property name="Width">76</property>
+      <property name="Width">66</property>
       <property name="MinWidth">20</property>
       <property name="MaxWidth">0</property>
+      <property name="UnboundDataTypeName" />
     </property>
     <property name="Item9" isnull="true" iskey="true">
       <property name="Name">colSTT_DV</property>
@@ -113,11 +127,10 @@
       <property name="ImageIndex">-1</property>
       <property name="FieldName">STT_DV</property>
       <property name="ColumnEditName" />
-      <property name="VisibleIndex">3</property>
-      <property name="Visible">true</property>
-      <property name="Width">106</property>
+      <property name="Width">62</property>
       <property name="MinWidth">20</property>
       <property name="MaxWidth">0</property>
+      <property name="UnboundDataTypeName" />
     </property>
   </property>
   <property name="GroupSummary" iskey="true" value="1">
@@ -131,15 +144,6 @@
     </property>
   </property>
   <property name="ActiveFilterString" />
-  <property name="SortInfoState" iskey="true" value="1">
-    <property name="Item1" isnull="true" iskey="true">
-      <property name="Orders">Ascending</property>
-      <property name="Columns">colTEN_DV</property>
-    </property>
-    <property name="Content" isnull="true" iskey="true">
-      <property name="GroupCount">1</property>
-    </property>
-  </property>
   <property name="GroupSummarySortInfoState" />
   <property name="FindFilterText" />
   <property name="FindPanelVisible">false</property>

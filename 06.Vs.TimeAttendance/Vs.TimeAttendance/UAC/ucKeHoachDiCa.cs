@@ -147,6 +147,7 @@ namespace Vs.TimeAttendance
                        
                         them = true;
                         LoadGrdCongNhan(them);
+                        grvCongNhan_FocusedRowChanged(null, null);
                         Commons.Modules.ObjSystems.AddnewRow(grvKeHoachDiCa, true);
                         enableButon(false);
                         break;
@@ -166,6 +167,13 @@ namespace Vs.TimeAttendance
                     {
                         if (!Validate()) return;
                         if (grvKeHoachDiCa.HasColumnErrors) return;
+                        DataTable dt_CHON = new DataTable();
+                        dt_CHON = ((DataTable)grdCongNhan.DataSource);
+                        if (dt_CHON.AsEnumerable().Where(r => r.Field<Boolean>("CHON") == true).Count() == 0)
+                        {
+                            XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgChuaChonNhanVien"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
                         if (Savedata() == false)
                         {
                             Commons.Modules.ObjSystems.msgChung(Commons.ThongBao.msgDuLieuDangSuDung);
@@ -310,20 +318,24 @@ namespace Vs.TimeAttendance
         private bool Savedata()
         {
             DataTable dkKeHoachDiCa = new DataTable();
-            string stbKeHoachDiCa = "grvKeHoachDiCa" + Commons.Modules.UserName;
+            string sbtKeHoachDiCa = "grvKeHoachDiCa" + Commons.Modules.iIDUser;
+            string sbtCongNhan = "grvCongNhan" + Commons.Modules.iIDUser;
 
             try
             {
-                Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, stbKeHoachDiCa, (DataTable)grdKeHoachDiCa.DataSource, "");
+                Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sbtKeHoachDiCa, (DataTable)grdKeHoachDiCa.DataSource, "");
+                Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sbtCongNhan, (DataTable)grdCongNhan.DataSource, "");
 
-                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spSaveKeHoachDiCa", dateNam.Text, stbKeHoachDiCa);
-                Commons.Modules.ObjSystems.XoaTable(stbKeHoachDiCa);
+                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spSaveKeHoachDiCa", dateNam.Text, sbtKeHoachDiCa, sbtCongNhan);
+                Commons.Modules.ObjSystems.XoaTable(sbtKeHoachDiCa);
+                Commons.Modules.ObjSystems.XoaTable(sbtCongNhan);
                 return true;
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message.ToString());
-                Commons.Modules.ObjSystems.XoaTable(stbKeHoachDiCa);
+                Commons.Modules.ObjSystems.XoaTable(sbtKeHoachDiCa);
+                Commons.Modules.ObjSystems.XoaTable(sbtCongNhan);
                 return false;
             }
         }
@@ -338,7 +350,7 @@ namespace Vs.TimeAttendance
             windowsUIButton.Buttons[5].Properties.Visible = !visible;
             windowsUIButton.Buttons[6].Properties.Visible = !visible;
             windowsUIButton.Buttons[7].Properties.Visible = !visible;
-            searchControl.Visible = visible;
+            //searchControl.Visible = visible;
         }
         private void XoaKeHoachDiCa()
         {
@@ -402,6 +414,10 @@ namespace Vs.TimeAttendance
                 {
                     sDK = " ID_CN = '" + sIDCN + "' ";
                 }
+                else
+                {
+                    sDK = "1=0";
+                }
                 //}
                 dtTmp.DefaultView.RowFilter = sDK;
             }
@@ -420,14 +436,14 @@ namespace Vs.TimeAttendance
 
             try
             {
-                int n = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spKiemTraKHDiCa", btKHDC, grvKeHoachDiCa.GetFocusedRowCellValue("ID_CN"), grvKeHoachDiCa.GetFocusedRowCellValue("TU_NGAY"), grvKeHoachDiCa.GetFocusedRowCellValue("DEN_NGAY")));
+                int n = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spKiemTraKHDiCa", btKHDC, grvKeHoachDiCa.GetFocusedRowCellValue("ID_CN"), Commons.Modules.ObjSystems.ConvertDateTime(Convert.ToDateTime(grvKeHoachDiCa.GetFocusedRowCellValue("TU_NGAY")).ToString("dd/MM/yyyy")), Commons.Modules.ObjSystems.ConvertDateTime(Convert.ToDateTime(grvKeHoachDiCa.GetFocusedRowCellValue("DEN_NGAY")).ToString("dd/MM/yyyy"))));
                 if (n > 1)
                 {
                     e.Valid = false;
                     View.SetColumnError(ngayngung, Commons.Modules.ObjLanguages.GetLanguage(Commons.Modules.ModuleName, this.Name, "MsgKiemtraNgayKeHoachDiCa", Commons.Modules.TypeLanguage)); return;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
             }
             Commons.Modules.ObjSystems.XoaTable(btKHDC);
@@ -536,6 +552,7 @@ namespace Vs.TimeAttendance
             {
                 XtraMessageBox.Show(ex.Message.ToString());
             }
+            grvCongNhan_FocusedRowChanged(null, null);
         }
 
         //private void CapNhatNhom()

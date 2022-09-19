@@ -87,6 +87,7 @@ namespace Vs.HRM
                     {
                         enableButon(false);
                         Commons.Modules.ObjSystems.AddnewRow(grvNgungDongBHXH, false);
+                        
                         break;
                     }
 

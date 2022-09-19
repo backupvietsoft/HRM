@@ -773,7 +773,6 @@ namespace Vs.TimeAttendance
                 dt_capnhat.Rows.Add(row);
 
 
-
                 string stbCN_temP = "grvCongNhanLamThemGio" + Commons.Modules.UserName;
                 string stbLamThemGio_temP = "grvLamThemGio" + Commons.Modules.UserName;
                 string stbLamThemCu_temP = "grvLamThemCu" + Commons.Modules.UserName;

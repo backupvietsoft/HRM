@@ -176,12 +176,12 @@ namespace Vs.HRM
 
             // Chuc vu
             DataTable dt = new DataTable();
-            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboChucVu", Commons.Modules.UserName, Commons.Modules.TypeLanguage, 1));
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboChucVu", Commons.Modules.UserName, Commons.Modules.TypeLanguage, 1, -1));
             Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboChucVu, dt, "ID_CV", "TEN_CV", "TEN_CV");
 
             // Loai cong viec
             DataTable dt1 = new DataTable();
-            dt1.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboLoaiCV", Commons.Modules.UserName, Commons.Modules.TypeLanguage, 1));
+            dt1.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboLoaiCV", Commons.Modules.UserName, Commons.Modules.TypeLanguage, 1, -1));
             Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboLoaiCongViec
                 , dt1, "ID_LCV", "TEN_LCV", "TEN_LCV");
 
@@ -926,50 +926,50 @@ namespace Vs.HRM
         public void CreateHeaderTable(ref Excel.Worksheet oSheet, string fontName = "Times New Roman", int fontSizeNoiDung = 11)
         {
             int height_Single = 25;
-            Range row5_Header_Table_STT = oSheet.get_Range("A9", "A10"); 
+            Range row5_Header_Table_STT = oSheet.get_Range("A9", "A10");
             FormatTitleTable(ref row5_Header_Table_STT, fontName, fontSizeNoiDung, 9, height_Single, Color.FromArgb(255, 255, 255), true, "Stt");
             row5_Header_Table_STT.ColumnWidth = 10;
-            Range row7_Header_Table_A7 = oSheet.get_Range("A11"); 
+            Range row7_Header_Table_A7 = oSheet.get_Range("A11");
             FormatTitleTable(ref row7_Header_Table_A7, fontName, fontSizeNoiDung, 9, height_Single, Color.FromArgb(255, 255, 255), false, "1");
 
-            Range row5_Header_Table_Ma_The = oSheet.get_Range("B9", "B10"); 
+            Range row5_Header_Table_Ma_The = oSheet.get_Range("B9", "B10");
             FormatTitleTable(ref row5_Header_Table_Ma_The, fontName, fontSizeNoiDung, 9, height_Single, Color.FromArgb(255, 255, 255), true, "Mã thẻ");
-            Range row7_Header_Table_B7 = oSheet.get_Range("B11"); 
+            Range row7_Header_Table_B7 = oSheet.get_Range("B11");
             FormatTitleTable(ref row7_Header_Table_B7, fontName, fontSizeNoiDung, 9, height_Single, Color.FromArgb(255, 255, 255), false, "2");
 
-            Range row5_Header_Table_Bo_Phan = oSheet.get_Range("C9", "C10"); 
+            Range row5_Header_Table_Bo_Phan = oSheet.get_Range("C9", "C10");
             FormatTitleTable(ref row5_Header_Table_Bo_Phan, fontName, fontSizeNoiDung, 15, height_Single, Color.FromArgb(255, 255, 255), true, "Bộ phận");
-            Range row7_Header_Table_C7 = oSheet.get_Range("C11"); 
+            Range row7_Header_Table_C7 = oSheet.get_Range("C11");
             FormatTitleTable(ref row7_Header_Table_C7, fontName, fontSizeNoiDung, 15, height_Single, Color.FromArgb(255, 255, 255), false, "3");
 
 
             Range row5_Header_Table_Ho_Ten = oSheet.get_Range("D9", "D10");
             FormatTitleTable(ref row5_Header_Table_Ho_Ten, fontName, fontSizeNoiDung, 30, height_Single, Color.FromArgb(255, 255, 255), true, "Họ và tên");
-            Range row7_Header_Table_D7 = oSheet.get_Range("D11"); 
+            Range row7_Header_Table_D7 = oSheet.get_Range("D11");
             FormatTitleTable(ref row7_Header_Table_D7, fontName, fontSizeNoiDung, 30, height_Single, Color.FromArgb(255, 255, 255), false, "4");
 
 
-            Range row5_Header_Table_Ngay_Sinh = oSheet.get_Range("E9", "F9"); 
+            Range row5_Header_Table_Ngay_Sinh = oSheet.get_Range("E9", "F9");
             FormatTitleTable(ref row5_Header_Table_Ngay_Sinh, fontName, fontSizeNoiDung, 12, height_Single, Color.FromArgb(255, 255, 255), true, "Ngày sinh");
-            Range row6_Header_Table_Ngay_Sinh = oSheet.get_Range("E10"); 
+            Range row6_Header_Table_Ngay_Sinh = oSheet.get_Range("E10");
             FormatTitleTable(ref row6_Header_Table_Ngay_Sinh, fontName, fontSizeNoiDung, 12, height_Single, Color.FromArgb(255, 255, 255), false, "Ngày,tháng,năm");
-            Range row7_Header_Table_E7 = oSheet.get_Range("E11");  
+            Range row7_Header_Table_E7 = oSheet.get_Range("E11");
             FormatTitleTable(ref row7_Header_Table_E7, fontName, fontSizeNoiDung, 12, height_Single, Color.FromArgb(255, 255, 255), false, "5");
 
 
             Range row6_Header_Table_F = oSheet.get_Range("F10");
             FormatTitleTable(ref row6_Header_Table_F, fontName, fontSizeNoiDung, 9, height_Single, Color.FromArgb(255, 255, 255), false, "Tuổi");
-            Range row7_Header_Table_F7 = oSheet.get_Range("F11"); 
+            Range row7_Header_Table_F7 = oSheet.get_Range("F11");
             FormatTitleTable(ref row7_Header_Table_F7, fontName, fontSizeNoiDung, 9, height_Single, Color.FromArgb(255, 255, 255), false, "6");
 
 
             Range row5_Header_Table_Noi_Sinh = oSheet.get_Range("G9", "G10"); // G5
             FormatTitleTable(ref row5_Header_Table_Noi_Sinh, fontName, fontSizeNoiDung, 20, height_Single, Color.FromArgb(255, 255, 255), true, "Nơi sinh");
-            Range row7_Header_Table_G7 = oSheet.get_Range("G11"); 
+            Range row7_Header_Table_G7 = oSheet.get_Range("G11");
             FormatTitleTable(ref row7_Header_Table_G7, fontName, fontSizeNoiDung, 20, height_Single, Color.FromArgb(255, 255, 255), false, "7");
 
 
-            Range row5_Header_Table_Nguyen_Quan = oSheet.get_Range("H9", "J9"); 
+            Range row5_Header_Table_Nguyen_Quan = oSheet.get_Range("H9", "J9");
             FormatTitleTable(ref row5_Header_Table_Nguyen_Quan, fontName, fontSizeNoiDung, 75, height_Single, Color.FromArgb(255, 255, 255), true, "Nguyên quán");
             Range row6_Header_Table_Xa_Phuong = oSheet.get_Range("H10"); // H6
             FormatTitleTable(ref row6_Header_Table_Xa_Phuong, fontName, fontSizeNoiDung, 25, height_Single, Color.FromArgb(255, 255, 255), false, "Xã/Phường");
@@ -1328,7 +1328,7 @@ namespace Vs.HRM
                 throw ex;
             }
 
-            Range row3_TieuDe_BaoCao = oSheet.get_Range("A6",lastColumn + "6"); // = A6 - BL6
+            Range row3_TieuDe_BaoCao = oSheet.get_Range("A6", lastColumn + "6"); // = A6 - BL6
             FormatTieuDeBaoCao(ref row3_TieuDe_BaoCao, true, true, 18, fontName, "@", XlHAlign.xlHAlignCenter, XlVAlign.xlVAlignCenter, "DANH SÁCH CÁN BỘ CÔNG NHÂN VIÊN NHÀ MÁY");
 
             DateTime ngayin = System.Convert.ToDateTime(NgayIn.EditValue);

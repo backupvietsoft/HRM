@@ -164,6 +164,7 @@ namespace Vs.HRM
         {
             try
             {
+                grdTroCapBHXH.DataSource = null;
                 DateTime dNgay = DateTime.Parse("01/" + cboThang.Text);
                 DataTable dt = new DataTable();
                 dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetListTroCapBHXH", dNgay, cboDot.EditValue, Commons.Modules.UserName, Commons.Modules.TypeLanguage));
@@ -2235,11 +2236,11 @@ namespace Vs.HRM
                     e.Valid = false;
                     View.SetColumnError(ID_LDV, Commons.Modules.ObjLanguages.GetLanguage(Commons.Modules.ModuleName, this.Name, "MsgKiemtraLDVNULL", Commons.Modules.TypeLanguage)); return;
                 }
-                if (View.GetRowCellValue(e.RowHandle, ID_HTNTC).ToString() == "")
-                {
-                    e.Valid = false;
-                    View.SetColumnError(ID_HTNTC, Commons.Modules.ObjLanguages.GetLanguage(Commons.Modules.ModuleName, this.Name, "MsgKiemtraHTNTCNULL", Commons.Modules.TypeLanguage)); return;
-                }
+                //if (View.GetRowCellValue(e.RowHandle, ID_HTNTC).ToString() == "")
+                //{
+                //    e.Valid = false;
+                //    View.SetColumnError(ID_HTNTC, Commons.Modules.ObjLanguages.GetLanguage(Commons.Modules.ModuleName, this.Name, "MsgKiemtraHTNTCNULL", Commons.Modules.TypeLanguage)); return;
+                //}
 
                 if (View.GetRowCellValue(e.RowHandle, NGHI_TU_NGAY).ToString() == "")
                 {
@@ -2732,6 +2733,11 @@ namespace Vs.HRM
             {
                 XtraMessageBox.Show(ex.Message.ToString());
             }
+        }
+
+        private void grvTroCapBHXH_InvalidValueException(object sender, DevExpress.XtraEditors.Controls.InvalidValueExceptionEventArgs e)
+        {
+            e.ExceptionMode = DevExpress.XtraEditors.Controls.ExceptionMode.NoAction;
         }
     }
 }

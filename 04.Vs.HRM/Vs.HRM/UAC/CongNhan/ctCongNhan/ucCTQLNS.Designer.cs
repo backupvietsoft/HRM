@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions1 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions2 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.navigationFrame1 = new DevExpress.XtraBars.Navigation.NavigationFrame();
             this.navigationPage2 = new DevExpress.XtraBars.Navigation.NavigationPage();
@@ -152,6 +152,7 @@
             // 
             // navigationPage2
             // 
+            this.navigationPage2.Caption = "navigationPage2";
             this.navigationPage2.Name = "navigationPage2";
             this.navigationPage2.Size = new System.Drawing.Size(912, 388);
             // 
@@ -233,10 +234,10 @@
             this.backWindowsUIButtonPanel.AppearanceButton.Pressed.BackColor = System.Drawing.Color.Black;
             this.backWindowsUIButtonPanel.AppearanceButton.Pressed.Options.UseBackColor = true;
             this.backWindowsUIButtonPanel.ButtonInterval = 0;
-            windowsUIButtonImageOptions1.ImageUri.Uri = "Backward;Size32x32;Office2013";
-            windowsUIButtonImageOptions1.SvgImageSize = new System.Drawing.Size(15, 15);
+            windowsUIButtonImageOptions2.ImageUri.Uri = "Backward;Size32x32;Office2013";
+            windowsUIButtonImageOptions2.SvgImageSize = new System.Drawing.Size(15, 15);
             this.backWindowsUIButtonPanel.Buttons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] {
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", false, windowsUIButtonImageOptions1, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, null, -1, true)});
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", false, windowsUIButtonImageOptions2, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, null, -1, true)});
             this.backWindowsUIButtonPanel.ContentAlignment = System.Drawing.ContentAlignment.BottomCenter;
             this.backWindowsUIButtonPanel.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.backWindowsUIButtonPanel.Location = new System.Drawing.Point(9, 1);

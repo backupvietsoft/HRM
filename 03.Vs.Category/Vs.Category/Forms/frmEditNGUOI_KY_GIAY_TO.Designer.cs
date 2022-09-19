@@ -45,6 +45,7 @@
             this.CAP_NGAYDateEdit = new DevExpress.XtraEditors.DateEdit();
             this.NOI_CAPTextEdit = new DevExpress.XtraEditors.TextEdit();
             this.DIA_CHITextEdit = new DevExpress.XtraEditors.TextEdit();
+            this.GIAY_UY_QUYENTextEdit = new DevExpress.XtraEditors.TextEdit();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.ItemForHO_TEN = new DevExpress.XtraLayout.LayoutControlItem();
@@ -57,10 +58,12 @@
             this.ItemForNOI_CAP = new DevExpress.XtraLayout.LayoutControlItem();
             this.ItemForDIA_CHI = new DevExpress.XtraLayout.LayoutControlItem();
             this.ItemForCHUC_VU_H = new DevExpress.XtraLayout.LayoutControlItem();
-            this.dxValidationProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
-            this.GIAY_UY_QUYENTextEdit = new DevExpress.XtraEditors.TextEdit();
             this.ItemForGIAY_UY_QUYEN = new DevExpress.XtraLayout.LayoutControlItem();
+            this.dxValidationProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
             this.behaviorManager1 = new DevExpress.Utils.Behaviors.BehaviorManager(this.components);
+            this.cboID_NUQ = new DevExpress.XtraEditors.SearchLookUpEdit();
+            this.lblNGUOI_UY_QUYEN = new DevExpress.XtraLayout.LayoutControlItem();
+            this.searchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).BeginInit();
             this.tablePanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataLayoutControl1)).BeginInit();
@@ -77,6 +80,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.CAP_NGAYDateEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NOI_CAPTextEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DIA_CHITextEdit.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.GIAY_UY_QUYENTextEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForHO_TEN)).BeginInit();
@@ -89,10 +93,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.ItemForNOI_CAP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForDIA_CHI)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForCHUC_VU_H)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.GIAY_UY_QUYENTextEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForGIAY_UY_QUYEN)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.behaviorManager1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cboID_NUQ.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lblNGUOI_UY_QUYEN)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).BeginInit();
             this.SuspendLayout();
             // 
             // btnALL
@@ -148,6 +154,7 @@
             // dataLayoutControl1
             // 
             this.tablePanel1.SetColumn(this.dataLayoutControl1, 1);
+            this.dataLayoutControl1.Controls.Add(this.cboID_NUQ);
             this.dataLayoutControl1.Controls.Add(this.txtCHUC_VU_H);
             this.dataLayoutControl1.Controls.Add(this.HO_TENTextEdit);
             this.dataLayoutControl1.Controls.Add(this.CHUC_VUTextEdit);
@@ -271,6 +278,14 @@
             this.DIA_CHITextEdit.StyleController = this.dataLayoutControl1;
             this.DIA_CHITextEdit.TabIndex = 12;
             // 
+            // GIAY_UY_QUYENTextEdit
+            // 
+            this.GIAY_UY_QUYENTextEdit.Location = new System.Drawing.Point(158, 292);
+            this.GIAY_UY_QUYENTextEdit.Name = "GIAY_UY_QUYENTextEdit";
+            this.GIAY_UY_QUYENTextEdit.Size = new System.Drawing.Size(403, 24);
+            this.GIAY_UY_QUYENTextEdit.StyleController = this.dataLayoutControl1;
+            this.GIAY_UY_QUYENTextEdit.TabIndex = 15;
+            // 
             // Root
             // 
             this.Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
@@ -296,7 +311,8 @@
             this.ItemForNOI_CAP,
             this.ItemForDIA_CHI,
             this.ItemForCHUC_VU_H,
-            this.ItemForGIAY_UY_QUYEN});
+            this.ItemForGIAY_UY_QUYEN,
+            this.lblNGUOI_UY_QUYEN});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "autoGeneratedGroup0";
             this.layoutControlGroup1.Size = new System.Drawing.Size(557, 341);
@@ -392,21 +408,40 @@
             this.ItemForCHUC_VU_H.Size = new System.Drawing.Size(557, 26);
             this.ItemForCHUC_VU_H.TextSize = new System.Drawing.Size(140, 17);
             // 
-            // GIAY_UY_QUYENTextEdit
-            // 
-            this.GIAY_UY_QUYENTextEdit.Location = new System.Drawing.Point(158, 266);
-            this.GIAY_UY_QUYENTextEdit.Name = "GIAY_UY_QUYENTextEdit";
-            this.GIAY_UY_QUYENTextEdit.Size = new System.Drawing.Size(403, 24);
-            this.GIAY_UY_QUYENTextEdit.StyleController = this.dataLayoutControl1;
-            this.GIAY_UY_QUYENTextEdit.TabIndex = 15;
-            // 
             // ItemForGIAY_UY_QUYEN
             // 
             this.ItemForGIAY_UY_QUYEN.Control = this.GIAY_UY_QUYENTextEdit;
-            this.ItemForGIAY_UY_QUYEN.Location = new System.Drawing.Point(0, 260);
+            this.ItemForGIAY_UY_QUYEN.Location = new System.Drawing.Point(0, 286);
             this.ItemForGIAY_UY_QUYEN.Name = "ItemForGIAY_UY_QUYEN";
-            this.ItemForGIAY_UY_QUYEN.Size = new System.Drawing.Size(557, 81);
+            this.ItemForGIAY_UY_QUYEN.Size = new System.Drawing.Size(557, 55);
             this.ItemForGIAY_UY_QUYEN.TextSize = new System.Drawing.Size(140, 17);
+            // 
+            // cboID_NUQ
+            // 
+            this.cboID_NUQ.Location = new System.Drawing.Point(158, 266);
+            this.cboID_NUQ.Name = "cboID_NUQ";
+            this.cboID_NUQ.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cboID_NUQ.Properties.NullText = "";
+            this.cboID_NUQ.Properties.PopupView = this.searchLookUpEdit1View;
+            this.cboID_NUQ.Size = new System.Drawing.Size(403, 24);
+            this.cboID_NUQ.StyleController = this.dataLayoutControl1;
+            this.cboID_NUQ.TabIndex = 16;
+            // 
+            // lblNGUOI_UY_QUYEN
+            // 
+            this.lblNGUOI_UY_QUYEN.Control = this.cboID_NUQ;
+            this.lblNGUOI_UY_QUYEN.Location = new System.Drawing.Point(0, 260);
+            this.lblNGUOI_UY_QUYEN.Name = "lblNGUOI_UY_QUYEN";
+            this.lblNGUOI_UY_QUYEN.Size = new System.Drawing.Size(557, 26);
+            this.lblNGUOI_UY_QUYEN.TextSize = new System.Drawing.Size(140, 17);
+            // 
+            // searchLookUpEdit1View
+            // 
+            this.searchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            this.searchLookUpEdit1View.Name = "searchLookUpEdit1View";
+            this.searchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.searchLookUpEdit1View.OptionsView.ShowGroupPanel = false;
             // 
             // frmEditNGUOI_KY_GIAY_TO
             // 
@@ -436,6 +471,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.CAP_NGAYDateEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NOI_CAPTextEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DIA_CHITextEdit.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.GIAY_UY_QUYENTextEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForHO_TEN)).EndInit();
@@ -448,10 +484,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.ItemForNOI_CAP)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForDIA_CHI)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForCHUC_VU_H)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.GIAY_UY_QUYENTextEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForGIAY_UY_QUYEN)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.behaviorManager1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cboID_NUQ.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lblNGUOI_UY_QUYEN)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -487,5 +525,8 @@
         private DevExpress.XtraEditors.TextEdit GIAY_UY_QUYENTextEdit;
         private DevExpress.XtraLayout.LayoutControlItem ItemForGIAY_UY_QUYEN;
         private DevExpress.Utils.Behaviors.BehaviorManager behaviorManager1;
+        private DevExpress.XtraEditors.SearchLookUpEdit cboID_NUQ;
+        private DevExpress.XtraGrid.Views.Grid.GridView searchLookUpEdit1View;
+        private DevExpress.XtraLayout.LayoutControlItem lblNGUOI_UY_QUYEN;
     }
 }

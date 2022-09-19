@@ -146,6 +146,10 @@
     <Reference Include="UIAutomationClient" />
     <Reference Include="UIAutomationProvider" />
     <Reference Include="UIAutomationTypes" />
+    <Reference Include="Vs.Recruit, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\Vs.Recruit.dll</HintPath>
+    </Reference>
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
@@ -487,6 +491,12 @@
     <Compile Include="UAC\CongNhan\ctCongNhan\frmInQTCT.Designer.cs">
       <DependentUpon>frmInQTCT.cs</DependentUpon>
     </Compile>
+    <Compile Include="UAC\CongNhan\ucHoanChinhHSNhanSu.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UAC\CongNhan\ucHoanChinhHSNhanSu.Designer.cs">
+      <DependentUpon>ucHoanChinhHSNhanSu.cs</DependentUpon>
+    </Compile>
     <Compile Include="UAC\CongNhan\ucDanhGiaThuViec.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -825,6 +835,9 @@
     <EmbeddedResource Include="UAC\CongNhan\ctCongNhan\frmInQTCT.resx">
       <DependentUpon>frmInQTCT.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UAC\CongNhan\ucHoanChinhHSNhanSu.resx">
+      <DependentUpon>ucHoanChinhHSNhanSu.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UAC\CongNhan\ucDanhGiaThuViec.resx">
       <DependentUpon>ucDanhGiaThuViec.cs</DependentUpon>
     </EmbeddedResource>
@@ -923,16 +936,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\02.Common\Common\Commons.csproj">
-      <Project>{375704a9-ba2d-4325-aa66-2fdd8ee246ca}</Project>
-      <Name>Commons</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\05.Vs.Report\Vs.Report\Vs.Report.csproj">
-      <Project>{bf84c4f2-fde2-492a-8175-ba38720d0dbd}</Project>
-      <Name>Vs.Report</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\iconsave.png" />
   </ItemGroup>
   <ItemGroup>
@@ -1023,6 +1026,16 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="UAC\CongNhan\Report\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\02.Common\Common\Commons.csproj">
+      <Project>{375704a9-ba2d-4325-aa66-2fdd8ee246ca}</Project>
+      <Name>Commons</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\05.Vs.Report\Vs.Report\Vs.Report.csproj">
+      <Project>{bf84c4f2-fde2-492a-8175-ba38720d0dbd}</Project>
+      <Name>Vs.Report</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

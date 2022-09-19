@@ -80,6 +80,19 @@ namespace Commons
             }
         }
 
+        private static bool _bEnabel;
+        public static bool bEnabel
+        {
+            get
+            {
+                return _bEnabel;
+            }
+            set
+            {
+                _bEnabel = value;
+            }
+        }
+
         private static string _msgTitle;
         public static string msgTitle
         {

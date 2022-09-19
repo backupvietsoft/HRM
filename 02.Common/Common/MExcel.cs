@@ -2281,6 +2281,8 @@ public class MExcel
         catch { }
     }
 
+
+
     public void KiemData(string squery, string Field, int Cot, DataRow row)
     {
         try

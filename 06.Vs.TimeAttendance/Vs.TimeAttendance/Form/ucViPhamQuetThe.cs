@@ -31,7 +31,7 @@ namespace Vs.TimeAttendance
         public ucViPhamQuetThe()
         {
             InitializeComponent();
-            Commons.Modules.ObjSystems.ThayDoiNN(this,new List<LayoutControlGroup>{ Root}, windowsUIButton);
+            Commons.Modules.ObjSystems.ThayDoiNN(this, new List<LayoutControlGroup> { Root }, windowsUIButton);
         }
         #region Vi phạm quẹt thẻ
 
@@ -39,7 +39,7 @@ namespace Vs.TimeAttendance
         private void ucViPhamQuetThe_Load(object sender, EventArgs e)
         {
             Thread.Sleep(1000);
-            Commons.Modules.sPS = "0Load";
+            Commons.Modules.sLoad = "0Load";
 
             repositoryItemTimeEdit1 = new RepositoryItemTimeEdit();
             repositoryItemTimeEdit1.TimeEditStyle = TimeEditStyle.TouchUI;
@@ -60,46 +60,46 @@ namespace Vs.TimeAttendance
 
             enableButon();
             LoadGridVPQuetThe();
-            Commons.Modules.sPS = "";
+            Commons.Modules.sLoad = "";
         }
         private void cboDV_EditValueChanged(object sender, EventArgs e)
         {
-            if (Commons.Modules.sPS == "0Load") return;
-            Commons.Modules.sPS = "0Load";
+            if (Commons.Modules.sLoad == "0Load") return;
+            Commons.Modules.sLoad = "0Load";
             Commons.Modules.ObjSystems.LoadCboXiNghiep(cboDV, cboXN);
             Commons.Modules.ObjSystems.LoadCboTo(cboDV, cboXN, cboTo);
             LoadGridVPQuetThe();
-            Commons.Modules.sPS = "";
+            Commons.Modules.sLoad = "";
         }
         private void cboXN_EditValueChanged(object sender, EventArgs e)
         {
-            if (Commons.Modules.sPS == "0Load") return;
-            Commons.Modules.sPS = "0Load";
+            if (Commons.Modules.sLoad == "0Load") return;
+            Commons.Modules.sLoad = "0Load";
             Commons.Modules.ObjSystems.LoadCboTo(cboDV, cboXN, cboTo);
             LoadGridVPQuetThe();
-            Commons.Modules.sPS = "";
+            Commons.Modules.sLoad = "";
         }
         private void cboTo_EditValueChanged(object sender, EventArgs e)
         {
-            if (Commons.Modules.sPS == "0Load") return;
-            Commons.Modules.sPS = "0Load";
+            if (Commons.Modules.sLoad == "0Load") return;
+            Commons.Modules.sLoad = "0Load";
             LoadGridVPQuetThe();
-            Commons.Modules.sPS = "";
+            Commons.Modules.sLoad = "";
         }
         private void dNgayXem_EditValueChanged(object sender, EventArgs e)
         {
-            if (Commons.Modules.sPS == "0Load") return;
-            Commons.Modules.sPS = "0Load";
+            if (Commons.Modules.sLoad == "0Load") return;
+            Commons.Modules.sLoad = "0Load";
             LoadGridVPQuetThe();
-            Commons.Modules.sPS = "";
+            Commons.Modules.sLoad = "";
         }
 
         private void cboThang_EditValueChanged(object sender, EventArgs e)
         {
-            if (Commons.Modules.sPS == "0Load") return;
-            Commons.Modules.sPS = "0Load";
+            if (Commons.Modules.sLoad == "0Load") return;
+            Commons.Modules.sLoad = "0Load";
             LoadGridVPQuetThe();
-            Commons.Modules.sPS = "";
+            Commons.Modules.sLoad = "";
         }
         private void windowsUIButton_ButtonClick(object sender, DevExpress.XtraBars.Docking2010.ButtonEventArgs e)
         {
@@ -111,7 +111,7 @@ namespace Vs.TimeAttendance
                     {
                         UpdateTimekeeping(Convert.ToDateTime(cboNgay.EditValue));
                         LoadGridVPQuetThe();
-                        if(bAddOK == true)
+                        if (bAddOK == true)
                         {
                             XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msg_CapNhatThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
@@ -135,7 +135,7 @@ namespace Vs.TimeAttendance
                     }
                 case "xoa":
                     {
-                        if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDeleteNVVPQT"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo,MessageBoxIcon.Question) == DialogResult.No) return;
+                        if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDeleteNVVPQT"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) return;
                         //enableButon();
                         XoaData();
                         LoadGridVPQuetThe();
@@ -226,14 +226,16 @@ namespace Vs.TimeAttendance
                     Commons.Modules.ObjSystems.MLoadXtraGrid(grdVPQuetThe, grvVPQuetThe, dt, true, false, true, true, true, this.Name);
                     dt.Columns["VP_GD"].ReadOnly = false;
                     dt.Columns["VP_GV"].ReadOnly = false;
+                    dt.Columns["VP_GT"].ReadOnly = false;
                     dt.Columns["GIO_DEN"].ReadOnly = false;
                     dt.Columns["GIO_VE"].ReadOnly = false;
+                    dt.Columns["GIO_TRUA"].ReadOnly = false;
                     //grvVPQuetThe.Columns["GIO_DEN"].OptionsColumn.ReadOnly = true;
                     //grvVPQuetThe.Columns["GIO_VE"].OptionsColumn.ReadOnly = true;
                 }
                 else
                 {
-                    dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetListViPhamQuetThe", cboNgay.EditValue, cboDV.EditValue, 
+                    dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetListViPhamQuetThe", cboNgay.EditValue, cboDV.EditValue,
                                                     cboXN.EditValue, cboTo.EditValue, Commons.Modules.UserName, Commons.Modules.TypeLanguage));
                     Commons.Modules.ObjSystems.MLoadXtraGrid(grdVPQuetThe, grvVPQuetThe, dt, false, false, true, true, true, this.Name);
                 }
@@ -249,6 +251,7 @@ namespace Vs.TimeAttendance
 
             grvVPQuetThe.Columns["GIO_DEN"].ColumnEdit = repositoryItemTimeEdit1;
             grvVPQuetThe.Columns["GIO_VE"].ColumnEdit = repositoryItemTimeEdit1;
+            grvVPQuetThe.Columns["GIO_TRUA"].ColumnEdit = repositoryItemTimeEdit1;
         }
 
         private void Savedata()
@@ -259,13 +262,13 @@ namespace Vs.TimeAttendance
                 var test = grvVPQuetThe.RowCount;
                 //tạo một datatable 
                 Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, stbVPQT, Commons.Modules.ObjSystems.ConvertDatatable(grvVPQuetThe), "");
-                string sSql = "DELETE DSCN_VP_QUET_THE WHERE  CONVERT(NVARCHAR,NGAY,112) = '" + Convert.ToDateTime(cboNgay.EditValue).ToString("yyyyMMdd") 
-                             + "' AND ID_CN IN (SELECT ID_CN FROM " + stbVPQT + ")"
-                             + " INSERT INTO DSCN_VP_QUET_THE (NGAY, ID_CN, VP_GV, VP_GD, GIO_DEN, GIO_VE) SELECT '" 
-                             + Convert.ToDateTime(cboNgay.EditValue).ToString("yyyyMMdd") + "' AS NGAY, ID_CN,VP_GV, VP_GD, CASE WHEN VP_GD = 1 THEN GIO_DEN" +
-                             " ELSE '' END AS GIO_DEN,CASE WHEN VP_GV = 1 THEN GIO_VE ELSE '' END AS GIO_VE "
-                             + " FROM "+ stbVPQT + " B WHERE VP_GV = 1 OR VP_GD = 1";
-                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, sSql);
+                //string sSql = "DELETE DSCN_VP_QUET_THE WHERE  CONVERT(NVARCHAR,NGAY,112) = '" + Convert.ToDateTime(cboNgay.EditValue).ToString("yyyyMMdd")
+                //             + "' AND ID_CN IN (SELECT ID_CN FROM " + stbVPQT + ")"
+                //             + " INSERT INTO DSCN_VP_QUET_THE (NGAY, ID_CN, VP_GV, VP_GD, GIO_DEN, GIO_VE) SELECT '"
+                //             + Convert.ToDateTime(cboNgay.EditValue).ToString("yyyyMMdd") + "' AS NGAY, ID_CN,VP_GV, VP_GD, CASE WHEN VP_GD = 1 THEN GIO_DEN" +
+                //             " ELSE '' END AS GIO_DEN,CASE WHEN VP_GV = 1 THEN GIO_VE ELSE '' END AS GIO_VE "
+                //             + " FROM " + stbVPQT + " B WHERE VP_GV = 1 OR VP_GD = 1";
+                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spSaveDSCN_VP_QUET_THE", stbVPQT, Commons.Modules.ObjSystems.ConvertDateTime(cboNgay.Text));
                 Commons.Modules.ObjSystems.XoaTable(stbVPQT);
             }
             catch (Exception ex)
@@ -336,7 +339,7 @@ namespace Vs.TimeAttendance
                 dtNgay.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSql));
                 Commons.Modules.ObjSystems.MLoadXtraGrid(grdThang, grvThang, dtNgay, false, true, true, true, true, this.Name);
 
-                if(dtNgay.Rows.Count > 0)
+                if (dtNgay.Rows.Count > 0)
                 {
                     cboNgay.EditValue = dtNgay.Rows[0][0];
                 }
@@ -363,9 +366,9 @@ namespace Vs.TimeAttendance
         private void grvVPQuetThe_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
         {
             GridView view = sender as GridView;
-            if(e.Column.FieldName == "VP_GD")
+            if (e.Column.FieldName == "VP_GD")
             {
-                if(Convert.ToInt32(e.Value) == 1)  //có check
+                if (Convert.ToInt32(e.Value) == 1)  //có check
                 {
                     grvVPQuetThe.Columns["GIO_DEN"].OptionsColumn.ReadOnly = false;
                 }
@@ -402,7 +405,7 @@ namespace Vs.TimeAttendance
                 if (Convert.ToDateTime(grvVPQuetThe.GetFocusedRowCellValue("GIO_DEN")).ToString("HHmm") == "0000")
                 {
                     e.Valid = false;
-                    View.SetColumnError(gioDen, Commons.Modules.ObjLanguages.GetLanguage(Commons.Modules.ModuleName, 
+                    View.SetColumnError(gioDen, Commons.Modules.ObjLanguages.GetLanguage(Commons.Modules.ModuleName,
                                         this.Name, "MsgGioDenIsRequired", Commons.Modules.TypeLanguage)); return;
                 }
             }
@@ -411,7 +414,7 @@ namespace Vs.TimeAttendance
                 if (Convert.ToDateTime(grvVPQuetThe.GetFocusedRowCellValue("GIO_VE")).ToString("HHmm") == "0000")
                 {
                     e.Valid = false;
-                    View.SetColumnError(gioVe, Commons.Modules.ObjLanguages.GetLanguage(Commons.Modules.ModuleName, this.Name, 
+                    View.SetColumnError(gioVe, Commons.Modules.ObjLanguages.GetLanguage(Commons.Modules.ModuleName, this.Name,
                                         "MsgGioVeIsRequired", Commons.Modules.TypeLanguage)); return;
                 }
             }

@@ -48,9 +48,9 @@
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "ImageSource", "[LOGO]")});
             this.picLogo.ImageAlignment = DevExpress.XtraPrinting.ImageAlignment.MiddleCenter;
             this.picLogo.ImageSource = new DevExpress.XtraPrinting.Drawing.ImageSource("img", resources.GetString("picLogo.ImageSource"));
-            this.picLogo.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
+            this.picLogo.LocationFloat = new DevExpress.Utils.PointFloat(0F, 5.000002F);
             this.picLogo.Name = "picLogo";
-            this.picLogo.SizeF = new System.Drawing.SizeF(146.5615F, 82.67716F);
+            this.picLogo.SizeF = new System.Drawing.SizeF(146.5616F, 86.58646F);
             this.picLogo.Sizing = DevExpress.XtraPrinting.ImageSizeMode.StretchImage;
             // 
             // lblCONG_TY
@@ -63,8 +63,8 @@
             this.lblCONG_TY.LocationFloat = new DevExpress.Utils.PointFloat(146.5615F, 0F);
             this.lblCONG_TY.Multiline = true;
             this.lblCONG_TY.Name = "lblCONG_TY";
-            this.lblCONG_TY.Padding = new DevExpress.XtraPrinting.PaddingInfo(4, 0, 2, 0, 100F);
-            this.lblCONG_TY.SizeF = new System.Drawing.SizeF(580.2102F, 82.67716F);
+            this.lblCONG_TY.Padding = new DevExpress.XtraPrinting.PaddingInfo(4, 0, 0, 0, 100F);
+            this.lblCONG_TY.SizeF = new System.Drawing.SizeF(580.2102F, 91.58646F);
             this.lblCONG_TY.StylePriority.UseFont = false;
             this.lblCONG_TY.StylePriority.UsePadding = false;
             this.lblCONG_TY.StylePriority.UseTextAlignment = false;
@@ -85,7 +85,7 @@
             this.ReportHeader.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
             this.picLogo,
             this.lblCONG_TY});
-            this.ReportHeader.HeightF = 84.71949F;
+            this.ReportHeader.HeightF = 91.67715F;
             this.ReportHeader.Name = "ReportHeader";
             // 
             // SubReportHeader
@@ -101,7 +101,7 @@
             this.PageWidth = 827;
             this.PaperKind = System.Drawing.Printing.PaperKind.A4;
             this.SnapGridSize = 9.84252F;
-            this.Version = "20.1";
+            this.Version = "22.1";
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
 
         }

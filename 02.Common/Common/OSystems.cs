@@ -1169,7 +1169,7 @@ namespace Commons
                 DevExpress.Utils.Menu.DXMenuItem menuDelete = new DevExpress.Utils.Menu.DXMenuItem("Delete Grid");
                 menuDelete.BeginGroup = true;
                 menuDelete.Tag = e.Menu;
-                menuSave.Click += delegate (object a, EventArgs b) { MyMenuItemDelete(null, null, grv, Commons.Modules.sPS.Replace("spGetList", "frm")); };
+                menuDelete.Click += delegate (object a, EventArgs b) { MyMenuItemDelete(null, null, grv, Commons.Modules.sPS.Replace("spGetList", "frm")); };
                 headerMenu.Items.Add(menuDelete);
             }
             catch

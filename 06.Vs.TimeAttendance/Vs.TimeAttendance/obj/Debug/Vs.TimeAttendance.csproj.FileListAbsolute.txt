@@ -2602,3 +2602,11 @@ F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.TimeAttendance.csp
 F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.TimeAttendance.csproj.CopyComplete
 F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.TimeAttendance.dll
 F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.TimeAttendance.pdb
+F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\Commons.dll
+F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\NPOI.dll
+F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\NPOI.OOXML.dll
+F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\NPOI.OpenXmlFormats.dll
+F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\NPOI.OpenXml4Net.dll
+F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\Commons.pdb
+F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\Commons.dll.config
+F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\Newtonsoft.Json.xml

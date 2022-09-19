@@ -642,6 +642,7 @@ namespace Vs.HRM
             // 
             this.MS_CNTextEdit.Location = new System.Drawing.Point(336, 7);
             this.MS_CNTextEdit.Name = "MS_CNTextEdit";
+            this.MS_CNTextEdit.Properties.ReadOnly = true;
             this.MS_CNTextEdit.Size = new System.Drawing.Size(152, 24);
             this.MS_CNTextEdit.StyleController = this.dataLayoutControl1;
             this.MS_CNTextEdit.TabIndex = 5;
@@ -655,6 +656,7 @@ namespace Vs.HRM
             // 
             this.MS_THE_CCTextEdit.Location = new System.Drawing.Point(653, 7);
             this.MS_THE_CCTextEdit.Name = "MS_THE_CCTextEdit";
+            this.MS_THE_CCTextEdit.Properties.ReadOnly = true;
             this.MS_THE_CCTextEdit.Size = new System.Drawing.Size(151, 24);
             this.MS_THE_CCTextEdit.StyleController = this.dataLayoutControl1;
             this.MS_THE_CCTextEdit.TabIndex = 6;

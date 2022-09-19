@@ -221,6 +221,7 @@ namespace Vs.HRM
             windowsUIButton.Buttons[6].Properties.Visible = !visible;
             windowsUIButton.Buttons[7].Properties.Visible = !visible;
             windowsUIButton.Buttons[8].Properties.Visible = visible;
+            Commons.Modules.bEnabel = !visible;
             grdCongTac.Enabled = visible;
             //SO_HIEU_BANGTextEdit.Properties.ReadOnly = visible;
             SO_QUYET_DINHTextEdit.Properties.ReadOnly = visible;

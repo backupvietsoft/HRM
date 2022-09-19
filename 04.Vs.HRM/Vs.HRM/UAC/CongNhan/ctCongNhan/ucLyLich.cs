@@ -21,7 +21,7 @@ namespace Vs.HRM
         bool HopLeMT = true;
         bool HopLeNgaySinh = true;
         bool isCancel = false;
-
+        private ucCTQLNS uc;
         public ucLyLich(Int64 id)
         {
             InitializeComponent();
@@ -413,13 +413,24 @@ namespace Vs.HRM
                 case "luu":
                     {
                         if (!dxValidationProvider1.Validate()) return;
-                        CheckMS();
-                        CheckMT();
+                        //CheckMS();
+                        //CheckMT();
                         if (!HopLeMS || !HopLeMT || !HopLeNgaySinh) return;
                         if (MS_CNTextEdit.Text != "") if (!kiemtrung(1)) return;
                         if (MS_THE_CCTextEdit.Text != "") if (!kiemtrung(2)) return;
                         if (!kiemtrung(3)) return;
-
+                        if (Commons.Modules.ObjSystems.kiemTrungMS("CONG_NHAN", "MS_CN", MS_CNTextEdit.Text))
+                        {
+                            if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgMSCNDaTrungBanCoMuonTaoMaMoi"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) return;
+                            MS_CNTextEdit.Text = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.AUTO_CREATE_SO_CONG_NHAN(" + (ID_DVLookUpEdit.Text == "" ? -1 : Convert.ToInt32(ID_DVLookUpEdit.EditValue)) + ",1)").ToString();
+                            return;
+                        }
+                        if (Commons.Modules.ObjSystems.kiemTrungMS("CONG_NHAN", "MS_THE_CC", MS_THE_CCTextEdit.Text))
+                        {
+                            if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgMSTheCCDaTrungBanCoMuonTaoMaMoi"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) return;
+                            MS_THE_CCTextEdit.Text = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.AUTO_CREATE_SO_CONG_NHAN(" + (ID_DVLookUpEdit.Text == "" ? -1 : Convert.ToInt32(ID_DVLookUpEdit.EditValue)) + ",2)").ToString();
+                            return;
+                        }
                         if (SaveData())
                         {
                             this.ClearError();
@@ -860,17 +871,11 @@ namespace Vs.HRM
             windowsUIButton.Buttons[10].Properties.Visible = !visible;
             windowsUIButton.Buttons[11].Properties.Visible = !visible;
             windowsUIButton.Buttons[12].Properties.Visible = visible;
+            Commons.Modules.bEnabel = !visible;
 
-            if (ID_DVLookUpEdit.Text == "")
-            {
-                MS_CNTextEdit.Properties.ReadOnly = true;
-                MS_THE_CCTextEdit.Properties.ReadOnly = true;
-            }
-            else
-            {
-                MS_CNTextEdit.Properties.ReadOnly = visible;
-                MS_THE_CCTextEdit.Properties.ReadOnly = visible;
-            }
+            //MS_CNTextEdit.Properties.ReadOnly = visible;
+            //MS_THE_CCTextEdit.Properties.ReadOnly = visible;
+
             ID_QGLookUpEdit.Properties.ReadOnly = visible;
             HOTextEdit.Properties.ReadOnly = visible;
             TENTextEdit.Properties.ReadOnly = visible;
@@ -1120,28 +1125,27 @@ namespace Vs.HRM
 
             }
             cmd.CommandType = CommandType.StoredProcedure;
-            if (Convert.ToInt32(cmd.ExecuteScalar()) == 1)
-            {
-                if (cot == 1)
-                {
+            //if (Convert.ToInt32(cmd.ExecuteScalar()) == 1)
+            //{
+            //    if (cot == 1)
+            //    {
 
-                    XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "messMS_CNbitrung"));
-                    if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgMSCNDaTrungBanCoMuonTaoMaMoi"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                    {
-                        MS_CNTextEdit.Text = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.AUTO_CREATE_SO_CONG_NHAN(" + Convert.ToInt32(ID_DVLookUpEdit.EditValue) + ",1)").ToString();
-                    }
-                    MS_CNTextEdit.Focus();
-                }
-                if (cot == 2)
-                {
-                    if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgMSTheCCDaTrungBanCoMuonTaoMaMoi"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                    {
-                        MS_THE_CCTextEdit.Text = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.AUTO_CREATE_SO_CONG_NHAN(" + Convert.ToInt32(ID_DVLookUpEdit.EditValue) + ",2)").ToString();
-                    }
-                    MS_THE_CCTextEdit.Focus();
-                }
-                return false;
-            }
+            //        if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgMSCNDaTrungBanCoMuonTaoMaMoi"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            //        {
+            //            MS_CNTextEdit.Text = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.AUTO_CREATE_SO_CONG_NHAN(" + Convert.ToInt32(ID_DVLookUpEdit.EditValue) + ",1)").ToString();
+            //        }
+            //        MS_CNTextEdit.Focus();
+            //    }
+            //    if (cot == 2)
+            //    {
+            //        if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgMSTheCCDaTrungBanCoMuonTaoMaMoi"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            //        {
+            //            MS_THE_CCTextEdit.Text = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.AUTO_CREATE_SO_CONG_NHAN(" + Convert.ToInt32(ID_DVLookUpEdit.EditValue) + ",2)").ToString();
+            //        }
+            //        MS_THE_CCTextEdit.Focus();
+            //    }
+            //    return false;
+            //}
             return true;
         }
         #endregion
@@ -1197,15 +1201,15 @@ namespace Vs.HRM
                 {
                     MS_CNTextEdit.Text = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.AUTO_CREATE_SO_CONG_NHAN(" + ID_DVLookUpEdit.EditValue + ",1)").ToString();
                     MS_THE_CCTextEdit.Text = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.AUTO_CREATE_SO_CONG_NHAN(" + ID_DVLookUpEdit.EditValue + ",2)").ToString();
-                    MS_CNTextEdit.Properties.ReadOnly = false;
-                    MS_THE_CCTextEdit.Properties.ReadOnly = false;
+                    //MS_CNTextEdit.Properties.ReadOnly = false;
+                    //MS_THE_CCTextEdit.Properties.ReadOnly = false;
                 }
                 catch { }
             }
             if (isCancel) return;
             Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(ID_XNLookUpEdit, Commons.Modules.ObjSystems.DataXiNghiep(Convert.ToInt32(ID_DVLookUpEdit.EditValue), false), "ID_XN", "TEN_XN", "TEN_XN", true, true);
-            CheckMS();
-            CheckMT();
+            //CheckMS();
+            //CheckMT();
         }
 
         private void ID_XNLookUpEdit_EditValueChanged(object sender, EventArgs e)
@@ -1375,11 +1379,19 @@ namespace Vs.HRM
                                     MS_CNTextEdit.ErrorText = "Vui lòng nhập đúng định dạng DMS + 6 số đuôi cho đơn vị Duy Minh 1.";
                                     isCorrectMS = false;
                                 }
+                                else
+                                {
+                                    this.ClearError();
+                                }
                                 if (!IsNumber(MS.Substring(3, 6)))
                                 {
                                     MS_CNTextEdit.ToolTipIconType = DevExpress.Utils.ToolTipIconType.Error;
                                     MS_CNTextEdit.ErrorText = "Vui lòng nhập đúng định dạng DMS + 6 số đuôi cho đơn vị Duy Minh 1.";
                                     isCorrectMS = false;
+                                }
+                                else
+                                {
+                                    this.ClearError();
                                 }
                                 break;
                             }
@@ -1391,11 +1403,19 @@ namespace Vs.HRM
                                     MS_CNTextEdit.ErrorText = "Vui lòng nhập đúng định dạng DMT + 6 số đuôi cho đơn vị Duy Minh 2.";
                                     isCorrectMS = false;
                                 }
+                                else
+                                {
+                                    this.ClearError();
+                                }
                                 if (!IsNumber(MS.Substring(3, 6)))
                                 {
                                     MS_CNTextEdit.ToolTipIconType = DevExpress.Utils.ToolTipIconType.Error;
                                     MS_CNTextEdit.ErrorText = "Vui lòng nhập đúng định dạng DMT + 6 số đuôi cho đơn vị Duy Minh 2.";
                                     isCorrectMS = false;
+                                }
+                                else
+                                {
+                                    this.ClearError();
                                 }
                                 break;
                             }
@@ -1407,11 +1427,19 @@ namespace Vs.HRM
                                     MS_CNTextEdit.ErrorText = "Vui lòng nhập đúng định dạng DMS + 6 số đuôi cho đơn vị Duy Minh 1 hoặc DMT + 6 số đuôi cho đơn vị Duy Minh 2.";
                                     isCorrectMS = false;
                                 }
+                                else
+                                {
+                                    this.ClearError();
+                                }
                                 if (!IsNumber(MS.Substring(3, 6)))
                                 {
                                     MS_CNTextEdit.ToolTipIconType = DevExpress.Utils.ToolTipIconType.Error;
                                     MS_CNTextEdit.ErrorText = "Vui lòng nhập đúng định dạng DMS + 6 số đuôi cho đơn vị Duy Minh 1 hoặc DMT + 6 số đuôi cho đơn vị Duy Minh 2.";
                                     isCorrectMS = false;
+                                }
+                                else
+                                {
+                                    this.ClearError();
                                 }
                                 break;
                             }
@@ -1458,6 +1486,7 @@ namespace Vs.HRM
                                 isCorrectMT = false;
                                 break;
                             }
+
                         case "2":
                             {
                                 MS_THE_CCTextEdit.ToolTipIconType = DevExpress.Utils.ToolTipIconType.Error;
@@ -1492,11 +1521,19 @@ namespace Vs.HRM
                                     MS_THE_CCTextEdit.ErrorText = "Vui lòng nhập đúng định dạng số 0 + 6 số đuôi cho đơn vị Duy Minh 1.";
                                     isCorrectMT = false;
                                 }
+                                else
+                                {
+                                    this.ClearError();
+                                }
                                 if (!IsNumber(MT.Substring(1, 6)))
                                 {
                                     MS_THE_CCTextEdit.ToolTipIconType = DevExpress.Utils.ToolTipIconType.Error;
                                     MS_THE_CCTextEdit.ErrorText = "Vui lòng nhập đúng định dạng số 0 + 6 số đuôi cho đơn vị Duy Minh 1.";
                                     isCorrectMT = false;
+                                }
+                                else
+                                {
+                                    this.ClearError();
                                 }
                                 break;
                             }
@@ -1508,27 +1545,43 @@ namespace Vs.HRM
                                     MS_THE_CCTextEdit.ErrorText = "Vui lòng nhập đúng định dạng số 1 + 6 số đuôi.";
                                     isCorrectMT = false;
                                 }
+                                else
+                                {
+                                    this.ClearError();
+                                }
                                 if (!IsNumber(MT.Substring(1, 6)))
                                 {
                                     MS_THE_CCTextEdit.ToolTipIconType = DevExpress.Utils.ToolTipIconType.Error;
                                     MS_THE_CCTextEdit.ErrorText = "Vui lòng nhập đúng định dạng số 1 + 6 số đuôi.";
                                     isCorrectMT = false;
                                 }
+                                else
+                                {
+                                    this.ClearError();
+                                }
                                 break;
                             }
                         default:
                             {
-                                if (MT.Substring(0,1) != "1")
+                                if (MT.Substring(0, 1) != "1")
                                 {
                                     MS_THE_CCTextEdit.ToolTipIconType = DevExpress.Utils.ToolTipIconType.Error;
                                     MS_THE_CCTextEdit.ErrorText = "Vui lòng nhập đúng định dạng số 1 + 6 số đuôi.";
                                     isCorrectMT = false;
+                                }
+                                else
+                                {
+                                    this.ClearError();
                                 }
                                 if (!IsNumber(MT.Substring(3, 6)))
                                 {
                                     MS_THE_CCTextEdit.ToolTipIconType = DevExpress.Utils.ToolTipIconType.Error;
                                     MS_THE_CCTextEdit.ErrorText = "Vui lòng nhập đúng định dạng số 1 + 6 số đuôi.";
                                     isCorrectMT = false;
+                                }
+                                else
+                                {
+                                    this.ClearError();
                                 }
                                 break;
                             }

@@ -681,6 +681,7 @@ namespace VietSoftHRM
         {
             try
             {
+                if (Commons.Modules.sPS != "spGetListXI_NGHIEP") return;
                 if (e.HitInfo.InDataRow)
                 {
                     contextMenuStrip1.Show(Cursor.Position.X, Cursor.Position.Y);

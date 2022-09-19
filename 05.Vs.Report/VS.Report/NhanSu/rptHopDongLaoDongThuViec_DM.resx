@@ -118,6 +118,6 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="xrLabel101.ExpressionBindings" xml:space="preserve">
-    <value>'Căn cứ giấy ủy quyền số 0601/2022UQ-DM của TGĐ có hiệu lực ngày 01/06/2022. Người nhận ủy quyền: '+[DATA].[GIOI_TINH_NK]+' &lt;b&gt;'+[DATA].[TEN_NK]+'&lt;/b&gt; – TP Nhân sự tuân thủ &amp; tiền lương. Số CCCD '+[DATA].[CMND_NK]+''</value>
+    <value>'Căn cứ giấy ủy quyền số 0601/2022UQ-DM của TGĐ có hiệu lực ngày 01/06/2022. Người nhận ủy quyền: '+[DATA].[GIOI_TINH_NUQ]+' &lt;b&gt;'+[DATA].[TEN_NUQ]+'&lt;/b&gt; – TP Nhân sự tuân thủ &amp; tiền lương. Số CCCD '+[DATA].[SO_CMND_NUQ]+''</value>
   </data>
 </root>

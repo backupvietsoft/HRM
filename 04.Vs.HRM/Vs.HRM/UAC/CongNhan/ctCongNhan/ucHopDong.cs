@@ -69,6 +69,7 @@ namespace Vs.HRM
             windowsUIButton.Buttons[8].Properties.Visible = !visible;
             windowsUIButton.Buttons[9].Properties.Visible = !visible;
             windowsUIButton.Buttons[10].Properties.Visible = visible;
+            Commons.Modules.bEnabel = !visible;
             txtTaiLieu.Properties.ReadOnly = visible;
             grdHopDong.Enabled = visible;
             SO_HDLDTextEdit.Properties.ReadOnly = visible;

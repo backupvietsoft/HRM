@@ -166,7 +166,7 @@ namespace Vs.HRM
             windowsUIButton.Buttons[4].Properties.Visible = !visible;
             windowsUIButton.Buttons[5].Properties.Visible = !visible;
             windowsUIButton.Buttons[6].Properties.Visible = visible;
-
+            Commons.Modules.bEnabel = !visible;
             grdTaiNan.Enabled = visible;
 
             ID_NGUYEN_NHANLookUpEdit.Properties.ReadOnly = visible;

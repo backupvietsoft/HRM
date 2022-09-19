@@ -14,7 +14,7 @@ namespace Vs.HRM
         List<LabelControl> List;
         private string tab = "";
         public DataTable dt;
-        public bool flag = false;
+        public bool flag = false; // flag = false load như bình thường, flag == true thì load theo từng tab được chỉ định
         public string sTenLab = "";
         public ucCTQLNS(Int64 iIdCN)
         {
@@ -32,13 +32,14 @@ namespace Vs.HRM
 
             Commons.Modules.ObjSystems.ThayDoiNN(this);
             Commons.Modules.iCongNhan = iIdCN;
+            Commons.Modules.bEnabel = false; //bEnabel == false load view, bEnabel == true thì ko cho click ở chỗ khác
         }
         private void ucCTQLNS_Load(object sender, EventArgs e)
         {
             XuLyTab();
             if (flag == true)
             {
-                switch(sTenLab)
+                switch (sTenLab)
                 {
                     case "labHopDong":
                         {
@@ -81,10 +82,14 @@ namespace Vs.HRM
         }
         private void Lb_Click(object sender, EventArgs e)
         {
+            if (Commons.Modules.bEnabel == true)
+            {
+                return;
+            }
             try
             {
                 var lable = sender as LabelControl;
-                if(flag == false)
+                if (flag == false)
                 {
                     if (Commons.Modules.iCongNhan == 0 && lable.Name != "labLyLich") return;
                 }

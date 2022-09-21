@@ -2353,6 +2353,7 @@ H:\Lamviec\Lamviec\HRM\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\V
 F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\Vs.TimeAttendance.dll.config
 F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\Vs.TimeAttendance.dll
 F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\Vs.TimeAttendance.pdb
+F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\Commons.dll
 F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\DevExpress.BonusSkins.v22.1.dll
 F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\DevExpress.Charts.v22.1.Core.dll
 F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\DevExpress.CodeParser.v22.1.dll
@@ -2382,10 +2383,14 @@ F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\DevExpress.XtraLayout
 F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\DevExpress.XtraPrinting.v22.1.dll
 F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\DevExpress.XtraReports.v22.1.dll
 F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\DevExpress.XtraTreeList.v22.1.dll
+F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\NPOI.dll
+F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\NPOI.OOXML.dll
 F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\Newtonsoft.Json.dll
 F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\DevExpress.Snap.v22.1.Core.dll
 F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\DevExpress.Pdf.v22.1.Drawing.dll
 F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\DevExpress.XtraReports.v22.1.Extensions.dll
+F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\NPOI.OpenXmlFormats.dll
+F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\NPOI.OpenXml4Net.dll
 F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\DevExpress.Utils.v22.1.UI.dll
 F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\DevExpress.DataAccess.v22.1.UI.dll
 F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\DevExpress.XtraVerticalGrid.v22.1.dll
@@ -2396,6 +2401,8 @@ F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\DevExpress.XtraPivotG
 F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\DevExpress.XtraCharts.v22.1.Extensions.dll
 F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\DevExpress.XtraDiagram.v22.1.dll
 F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\DevExpress.Diagram.v22.1.Core.dll
+F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\Commons.pdb
+F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\Commons.dll.config
 F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\DevExpress.Charts.v22.1.Core.xml
 F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\DevExpress.Data.Desktop.v22.1.xml
 F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\DevExpress.Data.v22.1.xml
@@ -2419,6 +2426,7 @@ F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\DevExpress.XtraLayout
 F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\DevExpress.XtraPrinting.v22.1.xml
 F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\DevExpress.XtraReports.v22.1.xml
 F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\DevExpress.XtraTreeList.v22.1.xml
+F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\Newtonsoft.Json.xml
 F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\DevExpress.Snap.v22.1.Core.xml
 F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\DevExpress.Pdf.v22.1.Drawing.xml
 F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\DevExpress.XtraReports.v22.1.Extensions.xml
@@ -2602,11 +2610,3 @@ F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.TimeAttendance.csp
 F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.TimeAttendance.csproj.CopyComplete
 F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.TimeAttendance.dll
 F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.TimeAttendance.pdb
-F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\Commons.dll
-F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\NPOI.dll
-F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\NPOI.OOXML.dll
-F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\NPOI.OpenXmlFormats.dll
-F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\NPOI.OpenXml4Net.dll
-F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\Commons.pdb
-F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\Commons.dll.config
-F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\Newtonsoft.Json.xml

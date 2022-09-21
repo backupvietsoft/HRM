@@ -382,7 +382,6 @@
             this.searchControl1.Properties.ShowDefaultButtonsMode = DevExpress.XtraEditors.Repository.ShowDefaultButtonsMode.AutoChangeSearchToClear;
             this.searchControl1.Size = new System.Drawing.Size(191, 24);
             this.searchControl1.TabIndex = 2;
-            this.searchControl1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.searchControl1_KeyPress);
             // 
             // ucQLUV
             // 

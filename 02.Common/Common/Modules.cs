@@ -79,7 +79,6 @@ namespace Commons
                 _bSetUp = value;
             }
         }
-
         private static bool _bEnabel;
         public static bool bEnabel
         {

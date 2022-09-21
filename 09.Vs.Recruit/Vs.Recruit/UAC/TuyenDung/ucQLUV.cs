@@ -23,6 +23,7 @@ namespace Vs.Recruit
         public LabelControl lblUV;
         public ucQLUV()
         {
+            DevExpress.Utils.Paint.TextRendererHelper.UseScriptAnalyse = false;
             InitializeComponent();
             Commons.Modules.ObjSystems.ThayDoiNN(this, new List<LayoutControlGroup> { Root }, windowsUIButton);
         }

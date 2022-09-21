@@ -249,9 +249,9 @@ namespace Commons
             }
             return SERVER_FOLDER_PATH;
         }
-        public string CapnhatTL(string strFile,bool locKyTu)
+        public string CapnhatTL(string strFile, bool locKyTu)
         {
-            if(locKyTu == true)
+            if (locKyTu == true)
             {
                 strFile = LocKyTuDB(strFile);
             }
@@ -353,6 +353,38 @@ namespace Commons
             return KyHieuDV;
         }
 
+        public bool setCheckImport(int iLoai) // iLoai = 1 Update khi mở form, 0 UPDATE = NULL  khi tắt form
+        {
+            try
+            {
+                string MName = "";
+                try { MName = Environment.MachineName; } catch { }
+                string strSQL = "";
+                if (iLoai == 1)
+                {
+                    strSQL = "UPDATE dbo.THONG_TIN_CHUNG SET CHECK_IMPORT = CONVERT(NVARCHAR(20),GETDATE(),20) + N'," + MName + "' + N'," + Commons.Modules.UserName + "'";
+                }
+                else
+                {
+                    strSQL = "UPDATE dbo.THONG_TIN_CHUNG SET CHECK_IMPORT = NULL";
+                }
+                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, strSQL);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        public string getCheckImport()
+        {
+            string sName = "";
+            try
+            {
+                return sName = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT CHECK_IMPORT FROM dbo.THONG_TIN_CHUNG").ToString();
+            }
+            catch { return sName = ""; }
+        }
         public bool kiemTrungMS(string sTableName, string sDieuKien, string sValue)
         {
             try
@@ -368,7 +400,7 @@ namespace Commons
                 return false;
             }
         }
-  
+
 
         public string KyHieuDV_CN(Int64 ID_CN)
         {

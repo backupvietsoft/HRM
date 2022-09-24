@@ -127,357 +127,362 @@ namespace Vs.HRM
 
         private void windowsUIButton_ButtonClick(object sender, ButtonEventArgs e)
         {
-            WindowsUIButton btn = e.Button as WindowsUIButton;
-            XtraUserControl ctl = new XtraUserControl();
-            //Commons.Modules.ObjSystems.ShowWaitForm(this);
-            switch (btn.Tag.ToString())
+            try
             {
-                case "export":
-                    {
-                        try
+
+                WindowsUIButton btn = e.Button as WindowsUIButton;
+                XtraUserControl ctl = new XtraUserControl();
+                //Commons.Modules.ObjSystems.ShowWaitForm(this);
+                switch (btn.Tag.ToString())
+                {
+                    case "export":
                         {
-                            string sPath = "";
-                            sPath = SaveFiles("Excel file (*.xlsx)|*.xlsx");
-                            if (sPath == "") return;
-                            Microsoft.Office.Interop.Excel.Application excelApplication = new Microsoft.Office.Interop.Excel.Application();
-                            excelApplication.DisplayAlerts = true;
-
-                            excelApplication.Visible = false;
-
-
-                            System.Globalization.CultureInfo oldCultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture;
-                            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
-
-                            Microsoft.Office.Interop.Excel.Workbooks excelWorkbooks = excelApplication.Workbooks;
-                            object misValue = System.Reflection.Missing.Value;
-                            Microsoft.Office.Interop.Excel.Workbook excelWorkbook = excelApplication.Workbooks.Add(misValue);
-
-                            excelWorkbook.SaveAs(sPath);
-
-                            Microsoft.Office.Interop.Excel.Worksheet excelWorkSheet = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Sheets[1];
-                            excelWorkSheet.Name = "01 - Thông tin nhân viên";
-
-                            DataTable dt = new DataTable();
-                            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spImportNhanSu", Commons.Modules.UserName, Commons.Modules.TypeLanguage));
-                            //dt = ((DataTable)grdData.DataSource).Copy();
-                            string lastColumn = CharacterIncrement(dt.Columns.Count - 1);
-                            string fontName = "Time News Roman";
-                            int fontSizeTieuDe = 13;
-                            int fontSizeNoiDung = 9;
-
-                            dt.DefaultView.RowFilter = "";
-                            for (int i = 0; i < dt.Columns.Count; i++)
+                            try
                             {
-                                //dt.Columns[i].ColumnName = Commons.Modules.ObjLanguages.GetLanguage(this.Name, dt.Columns[i].ColumnName.ToString()); ;
-                                dt.Columns[i].ColumnName = Commons.Modules.ObjLanguages.GetLanguage(this.Name, dt.Columns[i].ColumnName.ToString());
-                            }
-                            Microsoft.Office.Interop.Excel.Range Ranges1 = excelWorkSheet.Range[excelWorkSheet.Cells[1, 1], excelWorkSheet.Cells[dt.Rows.Count + 1, dt.Columns.Count]];
-                            Ranges1.ColumnWidth = 20;
-                            Ranges1.Font.Name = fontName;
-                            Ranges1.Font.Size = fontSizeNoiDung;
-                            Ranges1.Range["A1", "" + lastColumn + "1"].Font.Bold = true;
-                            Ranges1.Range["A1", "" + lastColumn + "1"].HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
-                            Ranges1.Range["A1", "" + lastColumn + "1"].Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
-                            MExportExcel(dt, excelWorkSheet, Ranges1);
+                                string sPath = "";
+                                sPath = SaveFiles("Excel file (*.xlsx)|*.xlsx");
+                                if (sPath == "") return;
+                                Microsoft.Office.Interop.Excel.Application excelApplication = new Microsoft.Office.Interop.Excel.Application();
+                                excelApplication.DisplayAlerts = true;
 
-                            Microsoft.Office.Interop.Excel.Worksheet excelWorkSheet1 = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Sheets[1];
-                            excelWorkSheet1 = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Worksheets.Add(After: excelWorkbook.Sheets[excelWorkbook.Sheets.Count]);
-                            excelWorkSheet1.Name = "02 - Quốc Gia";
-                            dt = new DataTable();
-                            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT MA_QG AS N'Mã quốc gia', TEN_QG AS N'Tên quốc gia' FROM dbo.QUOC_GIA"));
-                            Ranges1 = excelWorkSheet1.Range[excelWorkSheet1.Cells[1, 1], excelWorkSheet1.Cells[dt.Rows.Count + 1, dt.Columns.Count]];
-                            Ranges1.ColumnWidth = 20;
-                            Ranges1.Font.Name = fontName;
-                            Ranges1.Font.Size = fontSizeNoiDung;
-                            lastColumn = CharacterIncrement(dt.Columns.Count - 1);
-                            Ranges1.Range["A1", "" + lastColumn + "1"].Font.Bold = true;
-                            Ranges1.Range["A1", "" + lastColumn + "1"].HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
-                            Ranges1.Range["A1", "" + lastColumn + "1"].Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
-                            MExportExcel(dt, excelWorkSheet1, Ranges1);
-
-                            //Tổ
-                            Microsoft.Office.Interop.Excel.Worksheet excelWorkSheet4 = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Sheets[1];
-                            excelWorkSheet4 = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Worksheets.Add(After: excelWorkbook.Sheets[excelWorkbook.Sheets.Count]);
-                            excelWorkSheet4.Name = "03 - Phòng";
-                            dt = new DataTable();
-                            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT T3.TEN_DV AS N'Tên nhà máy' , T2.TEN_XN AS N'Tên bộ phận' , T1.TEN_TO AS N'Tên Chuyền/Phòng' FROM dbo.[TO] T1 INNER JOIN dbo.XI_NGHIEP T2 ON T2.ID_XN = T1.ID_XN INNER JOIN dbo.DON_VI T3 ON T3.ID_DV = T2.ID_DV"));
-                            Ranges1 = excelWorkSheet4.Range[excelWorkSheet4.Cells[1, 1], excelWorkSheet4.Cells[dt.Rows.Count + 1, dt.Columns.Count]];
-                            Ranges1.ColumnWidth = 20;
-                            Ranges1.Font.Name = fontName;
-                            Ranges1.Font.Size = fontSizeNoiDung;
-                            lastColumn = CharacterIncrement(dt.Columns.Count - 1);
-                            Ranges1.Range["A1", "" + lastColumn + "1"].Font.Bold = true;
-                            Ranges1.Range["A1", "" + lastColumn + "1"].HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
-                            Ranges1.Range["A1", "" + lastColumn + "1"].Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
-                            Microsoft.Office.Interop.Excel.Range myRange = excelWorkSheet4.get_Range("A1", lastColumn + (dt.Rows.Count + 1).ToString());
-                            myRange.AutoFilter("1", "<>", Microsoft.Office.Interop.Excel.XlAutoFilterOperator.xlOr, "", true);
-                            MExportExcel(dt, excelWorkSheet4, Ranges1);
-
-                            //Chức vụ
-                            Microsoft.Office.Interop.Excel.Worksheet excelWorkSheet5 = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Sheets[1];
-                            excelWorkSheet5 = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Worksheets.Add(After: excelWorkbook.Sheets[excelWorkbook.Sheets.Count]);
-                            excelWorkSheet5.Name = "04 - Chức vụ";
-                            dt = new DataTable();
-                            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT TEN_CV AS N'Tên chức vụ' FROM dbo.CHUC_VU"));
-                            Ranges1 = excelWorkSheet5.Range[excelWorkSheet5.Cells[1, 1], excelWorkSheet5.Cells[dt.Rows.Count + 1, dt.Columns.Count]];
-                            Ranges1.ColumnWidth = 20;
-                            Ranges1.Font.Name = fontName;
-                            Ranges1.Font.Size = fontSizeNoiDung;
-                            lastColumn = CharacterIncrement(dt.Columns.Count - 1);
-                            Ranges1.Range["A1", "" + lastColumn + "1"].Font.Bold = true;
-                            Ranges1.Range["A1", "" + lastColumn + "1"].HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
-                            Ranges1.Range["A1", "" + lastColumn + "1"].Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
-                            myRange = excelWorkSheet5.get_Range("A1", lastColumn + (dt.Rows.Count + 1).ToString());
-                            myRange.AutoFilter("1", "<>", Microsoft.Office.Interop.Excel.XlAutoFilterOperator.xlOr, "", true);
-                            MExportExcel(dt, excelWorkSheet5, Ranges1);
-
-                            //Coong viec
-                            Microsoft.Office.Interop.Excel.Worksheet excelWorkSheet6 = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Sheets[1];
-                            excelWorkSheet6 = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Worksheets.Add(After: excelWorkbook.Sheets[excelWorkbook.Sheets.Count]);
-                            excelWorkSheet6.Name = "05 - Công việc";
-                            dt = new DataTable();
-                            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT TEN_LCV AS N'Tên công việc' FROM dbo.LOAI_CONG_VIEC"));
-                            Ranges1 = excelWorkSheet6.Range[excelWorkSheet6.Cells[1, 1], excelWorkSheet6.Cells[dt.Rows.Count + 1, dt.Columns.Count]];
-                            Ranges1.ColumnWidth = 20;
-                            Ranges1.Font.Name = fontName;
-                            Ranges1.Font.Size = fontSizeNoiDung;
-                            lastColumn = CharacterIncrement(dt.Columns.Count - 1);
-                            Ranges1.Range["A1", "" + lastColumn + "1"].Font.Bold = true;
-                            Ranges1.Range["A1", "" + lastColumn + "1"].HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
-                            Ranges1.Range["A1", "" + lastColumn + "1"].Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
-                            myRange = excelWorkSheet6.get_Range("A1", lastColumn + (dt.Rows.Count + 1).ToString());
-                            myRange.AutoFilter("1", "<>", Microsoft.Office.Interop.Excel.XlAutoFilterOperator.xlOr, "", true);
-                            MExportExcel(dt, excelWorkSheet6, Ranges1);
+                                excelApplication.Visible = false;
 
 
-                            //Tình trạng hợp đồng
-                            Microsoft.Office.Interop.Excel.Worksheet excelWorkSheet8 = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Sheets[1];
-                            excelWorkSheet8 = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Worksheets.Add(After: excelWorkbook.Sheets[excelWorkbook.Sheets.Count]);
-                            excelWorkSheet8.Name = "06 - Tình trạng hợp đồng";
-                            dt = new DataTable();
-                            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT TEN_TT_HD AS N'Tên tình trạng HĐ' FROM dbo.TINH_TRANG_HD"));
-                            Ranges1 = excelWorkSheet8.Range[excelWorkSheet8.Cells[1, 1], excelWorkSheet8.Cells[dt.Rows.Count + 1, dt.Columns.Count]];
-                            Ranges1.ColumnWidth = 20;
-                            Ranges1.Font.Name = fontName;
-                            Ranges1.Font.Size = fontSizeNoiDung;
-                            lastColumn = CharacterIncrement(dt.Columns.Count - 1);
-                            Ranges1.Range["A1", "" + lastColumn + "1"].Font.Bold = true;
-                            Ranges1.Range["A1", "" + lastColumn + "1"].HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
-                            Ranges1.Range["A1", "" + lastColumn + "1"].Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
-                            myRange = excelWorkSheet8.get_Range("A1", lastColumn + (dt.Rows.Count + 1).ToString());
-                            myRange.AutoFilter("1", "<>", Microsoft.Office.Interop.Excel.XlAutoFilterOperator.xlOr, "", true);
-                            MExportExcel(dt, excelWorkSheet8, Ranges1);
+                                System.Globalization.CultureInfo oldCultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture;
+                                System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
 
-                            //Tình trạng hiện tại
-                            Microsoft.Office.Interop.Excel.Worksheet excelWorkSheet9 = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Sheets[1];
-                            excelWorkSheet9 = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Worksheets.Add(After: excelWorkbook.Sheets[excelWorkbook.Sheets.Count]);
-                            excelWorkSheet9.Name = "07 - Tình trạng nhân sự";
-                            dt = new DataTable();
-                            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT TEN_TT_HT AS N'Tên tình trạng NS' FROM dbo.TINH_TRANG_HT"));
-                            Ranges1 = excelWorkSheet9.Range[excelWorkSheet9.Cells[1, 1], excelWorkSheet9.Cells[dt.Rows.Count + 1, dt.Columns.Count]];
-                            Ranges1.ColumnWidth = 20;
-                            Ranges1.Font.Name = fontName;
-                            Ranges1.Font.Size = fontSizeNoiDung;
-                            lastColumn = CharacterIncrement(dt.Columns.Count - 1);
-                            Ranges1.Range["A1", "" + lastColumn + "1"].Font.Bold = true;
-                            Ranges1.Range["A1", "" + lastColumn + "1"].HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
-                            Ranges1.Range["A1", "" + lastColumn + "1"].Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
-                            myRange = excelWorkSheet9.get_Range("A1", lastColumn + (dt.Rows.Count + 1).ToString());
-                            myRange.AutoFilter("1", "<>", Microsoft.Office.Interop.Excel.XlAutoFilterOperator.xlOr, "", true);
-                            MExportExcel(dt, excelWorkSheet9, Ranges1);
+                                Microsoft.Office.Interop.Excel.Workbooks excelWorkbooks = excelApplication.Workbooks;
+                                object misValue = System.Reflection.Missing.Value;
+                                Microsoft.Office.Interop.Excel.Workbook excelWorkbook = excelApplication.Workbooks.Add(misValue);
 
-                            //Dân tộc
-                            Microsoft.Office.Interop.Excel.Worksheet excelWorkSheet10 = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Sheets[1];
-                            excelWorkSheet10 = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Worksheets.Add(After: excelWorkbook.Sheets[excelWorkbook.Sheets.Count]);
-                            excelWorkSheet10.Name = "08 - Dân tộc";
-                            dt = new DataTable();
-                            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT TEN_DT AS N'Tên dân tộc' FROM dbo.DAN_TOC"));
-                            Ranges1 = excelWorkSheet10.Range[excelWorkSheet10.Cells[1, 1], excelWorkSheet10.Cells[dt.Rows.Count + 1, dt.Columns.Count]];
-                            Ranges1.ColumnWidth = 20;
-                            Ranges1.Font.Name = fontName;
-                            Ranges1.Font.Size = fontSizeNoiDung;
-                            lastColumn = CharacterIncrement(dt.Columns.Count - 1);
-                            Ranges1.Range["A1", "" + lastColumn + "1"].Font.Bold = true;
-                            Ranges1.Range["A1", "" + lastColumn + "1"].HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
-                            Ranges1.Range["A1", "" + lastColumn + "1"].Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
-                            myRange = excelWorkSheet10.get_Range("A1", lastColumn + (dt.Rows.Count + 1).ToString());
-                            myRange.AutoFilter("1", "<>", Microsoft.Office.Interop.Excel.XlAutoFilterOperator.xlOr, "", true);
-                            MExportExcel(dt, excelWorkSheet10, Ranges1);
+                                excelWorkbook.SaveAs(sPath);
 
-                            //Tình trạng hôn nhân
-                            Microsoft.Office.Interop.Excel.Worksheet excelWorkSheet11 = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Sheets[1];
-                            excelWorkSheet11 = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Worksheets.Add(After: excelWorkbook.Sheets[excelWorkbook.Sheets.Count]);
-                            excelWorkSheet11.Name = "09 - Tình trạng hôn nhân";
-                            dt = new DataTable();
-                            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT TEN_TT_HN AS N'Tên TT hôn nhân' FROM dbo.TT_HON_NHAN"));
-                            Ranges1 = excelWorkSheet11.Range[excelWorkSheet11.Cells[1, 1], excelWorkSheet11.Cells[dt.Rows.Count + 1, dt.Columns.Count]];
-                            Ranges1.ColumnWidth = 20;
-                            Ranges1.Font.Name = fontName;
-                            Ranges1.Font.Size = fontSizeNoiDung;
-                            lastColumn = CharacterIncrement(dt.Columns.Count - 1);
-                            Ranges1.Range["A1", "" + lastColumn + "1"].Font.Bold = true;
-                            Ranges1.Range["A1", "" + lastColumn + "1"].HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
-                            Ranges1.Range["A1", "" + lastColumn + "1"].Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
-                            myRange = excelWorkSheet11.get_Range("A1", lastColumn + (dt.Rows.Count + 1).ToString());
-                            myRange.AutoFilter("1", "<>", Microsoft.Office.Interop.Excel.XlAutoFilterOperator.xlOr, "", true);
-                            MExportExcel(dt, excelWorkSheet11, Ranges1);
+                                Microsoft.Office.Interop.Excel.Worksheet excelWorkSheet = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Sheets[1];
+                                excelWorkSheet.Name = "01 - Thông tin nhân viên";
 
-                            //Tỉnh
-                            Microsoft.Office.Interop.Excel.Worksheet excelWorkSheet12 = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Sheets[1];
-                            excelWorkSheet12 = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Worksheets.Add(After: excelWorkbook.Sheets[excelWorkbook.Sheets.Count]);
-                            excelWorkSheet12.Name = "10 - Tỉnh-Thành phố";
-                            dt = new DataTable();
-                            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT TEN_TP AS N'Tên tỉnh' FROM dbo.THANH_PHO"));
-                            Ranges1 = excelWorkSheet12.Range[excelWorkSheet12.Cells[1, 1], excelWorkSheet12.Cells[dt.Rows.Count + 1, dt.Columns.Count]];
-                            Ranges1.ColumnWidth = 20;
-                            Ranges1.Font.Name = fontName;
-                            Ranges1.Font.Size = fontSizeNoiDung;
-                            lastColumn = CharacterIncrement(dt.Columns.Count - 1);
-                            Ranges1.Range["A1", "" + lastColumn + "1"].Font.Bold = true;
-                            Ranges1.Range["A1", "" + lastColumn + "1"].HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
-                            Ranges1.Range["A1", "" + lastColumn + "1"].Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
-                            myRange = excelWorkSheet12.get_Range("A1", lastColumn + (dt.Rows.Count + 1).ToString());
-                            myRange.AutoFilter("1", "<>", Microsoft.Office.Interop.Excel.XlAutoFilterOperator.xlOr, "", true);
-                            MExportExcel(dt, excelWorkSheet12, Ranges1);
+                                DataTable dt = new DataTable();
+                                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spImportNhanSu", Commons.Modules.UserName, Commons.Modules.TypeLanguage));
+                                //dt = ((DataTable)grdData.DataSource).Copy();
+                                string lastColumn = CharacterIncrement(dt.Columns.Count - 1);
+                                string fontName = "Time News Roman";
+                                int fontSizeTieuDe = 13;
+                                int fontSizeNoiDung = 9;
 
-                            //Quận/huyện
-                            Microsoft.Office.Interop.Excel.Worksheet excelWorkSheet13 = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Sheets[1];
-                            excelWorkSheet13 = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Worksheets.Add(After: excelWorkbook.Sheets[excelWorkbook.Sheets.Count]);
-                            excelWorkSheet13.Name = "11 - Quận-Huyện";
-                            dt = new DataTable();
-                            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT T2.TEN_TP AS N'Tên Tỉnh/Thành phố', T1.TEN_QUAN AS N'Tên Quận/Huyện'  FROM dbo.QUAN T1 INNER JOIN dbo.THANH_PHO T2 ON T2.ID_TP = T1.ID_TP"));
-                            Ranges1 = excelWorkSheet13.Range[excelWorkSheet13.Cells[1, 1], excelWorkSheet13.Cells[dt.Rows.Count + 1, dt.Columns.Count]];
-                            Ranges1.ColumnWidth = 20;
-                            Ranges1.Font.Name = fontName;
-                            Ranges1.Font.Size = fontSizeNoiDung;
-                            lastColumn = CharacterIncrement(dt.Columns.Count - 1);
-                            Ranges1.Range["A1", "" + lastColumn + "1"].Font.Bold = true;
-                            Ranges1.Range["A1", "" + lastColumn + "1"].HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
-                            Ranges1.Range["A1", "" + lastColumn + "1"].Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
-                            myRange = excelWorkSheet13.get_Range("A1", lastColumn + (dt.Rows.Count + 1).ToString());
-                            myRange.AutoFilter("1", "<>", Microsoft.Office.Interop.Excel.XlAutoFilterOperator.xlOr, "", true);
-                            MExportExcel(dt, excelWorkSheet13, Ranges1);
-
-                            //Phường/xã
-                            Microsoft.Office.Interop.Excel.Worksheet excelWorkSheet14 = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Sheets[1];
-                            excelWorkSheet14 = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Worksheets.Add(After: excelWorkbook.Sheets[excelWorkbook.Sheets.Count]);
-                            excelWorkSheet14.Name = "12 - Phường-Xã";
-                            dt = new DataTable();
-                            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT T3.TEN_TP AS N'Tên Tỉnh/Thành phố', T2.TEN_QUAN AS N'Tên Quận/Huyện', T1.TEN_PX AS N'Tên Phường/Xã'  FROM dbo.PHUONG_XA T1 INNER JOIN dbo.QUAN T2 ON T2.ID_QUAN = T1.ID_QUAN INNER JOIN dbo.THANH_PHO T3 ON T3.ID_TP = T2.ID_TP"));
-                            Ranges1 = excelWorkSheet14.Range[excelWorkSheet14.Cells[1, 1], excelWorkSheet14.Cells[dt.Rows.Count + 1, dt.Columns.Count]];
-                            Ranges1.ColumnWidth = 20;
-                            Ranges1.Font.Name = fontName;
-                            Ranges1.Font.Size = fontSizeNoiDung;
-                            lastColumn = CharacterIncrement(dt.Columns.Count - 1);
-                            Ranges1.Range["A1", "" + lastColumn + "1"].Font.Bold = true;
-                            Ranges1.Range["A1", "" + lastColumn + "1"].HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
-                            Ranges1.Range["A1", "" + lastColumn + "1"].Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
-                            myRange = excelWorkSheet14.get_Range("A1", lastColumn + (dt.Rows.Count + 1).ToString());
-                            myRange.AutoFilter("1", "<>", Microsoft.Office.Interop.Excel.XlAutoFilterOperator.xlOr, "", true);
-                            MExportExcel(dt, excelWorkSheet14, Ranges1);
-
-
-                            // Loại trình độ
-                            Microsoft.Office.Interop.Excel.Worksheet excelWorkSheet15 = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Sheets[1];
-                            excelWorkSheet15 = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Worksheets.Add(After: excelWorkbook.Sheets[excelWorkbook.Sheets.Count]);
-                            excelWorkSheet15.Name = "13 - Loại trình độ";
-                            dt = new DataTable();
-                            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT TEN_LOAI_TD AS N'Tên loại trình độ' FROM dbo.LOAI_TRINH_DO"));
-                            Ranges1 = excelWorkSheet15.Range[excelWorkSheet15.Cells[1, 1], excelWorkSheet15.Cells[dt.Rows.Count + 1, dt.Columns.Count]];
-                            Ranges1.ColumnWidth = 20;
-                            Ranges1.Font.Name = fontName;
-                            Ranges1.Font.Size = fontSizeNoiDung;
-                            lastColumn = CharacterIncrement(dt.Columns.Count - 1);
-                            Ranges1.Range["A1", "" + lastColumn + "1"].Font.Bold = true;
-                            Ranges1.Range["A1", "" + lastColumn + "1"].HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
-                            Ranges1.Range["A1", "" + lastColumn + "1"].Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
-                            myRange = excelWorkSheet15.get_Range("A1", lastColumn + (dt.Rows.Count + 1).ToString());
-                            myRange.AutoFilter("1", "<>", Microsoft.Office.Interop.Excel.XlAutoFilterOperator.xlOr, "", true);
-                            MExportExcel(dt, excelWorkSheet15, Ranges1);
-
-                            // Trình độ
-                            Microsoft.Office.Interop.Excel.Worksheet excelWorkSheet16 = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Sheets[1];
-                            excelWorkSheet16 = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Worksheets.Add(After: excelWorkbook.Sheets[excelWorkbook.Sheets.Count]);
-                            excelWorkSheet16.Name = "14 - Trình độ";
-                            dt = new DataTable();
-                            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT CHAR(13)+ TEN_TDVH AS N'Tên trình độ' FROM dbo.TRINH_DO_VAN_HOA "));
-                            Ranges1 = excelWorkSheet16.Range[excelWorkSheet16.Cells[1, 1], excelWorkSheet16.Cells[dt.Rows.Count + 1, dt.Columns.Count]];
-                            Ranges1.ColumnWidth = 20;
-                            Ranges1.Font.Name = fontName;
-                            Ranges1.Font.Size = fontSizeNoiDung;
-                            lastColumn = CharacterIncrement(dt.Columns.Count - 1);
-                            Ranges1.Range["A1", "" + lastColumn + "1"].Font.Bold = true;
-                            Ranges1.Range["A1", "" + lastColumn + "1"].HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
-                            Ranges1.Range["A1", "" + lastColumn + "1"].Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
-                            myRange = excelWorkSheet16.get_Range("A1", lastColumn + (dt.Rows.Count + 1).ToString());
-                            myRange.AutoFilter("1", "<>", Microsoft.Office.Interop.Excel.XlAutoFilterOperator.xlOr, "", true);
-                            MExportExcel(dt, excelWorkSheet16, Ranges1);
-
-                            excelWorkSheet.Activate();
-
-                            excelApplication.Visible = true;
-                            excelWorkbook.Save();
-                        }
-                        catch (Exception ex) { XtraMessageBox.Show(ex.Message); }
-
-                        break;
-                    }
-                case "import":
-                    {
-                        grvData.PostEditor();
-                        grvData.UpdateCurrentRow();
-                        Commons.Modules.ObjSystems.MChooseGrid(false, "XOA", grvData);
-                        DataTable dtSource = Commons.Modules.ObjSystems.ConvertDatatable(grdData);
-                        if (cboChonSheet.Text == "" || dtSource == null || dtSource.Rows.Count <= 0)
-                        {
-                            XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "KhongCoDuLieuImport"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"),
-                                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-                        grvData.Columns.View.ClearColumnErrors();
-                        ImportUngVien(dtSource);
-
-                        break;
-                    }
-                case "xoa":
-                    {
-                        try
-                        {
-                            DataTable dtTmp = new DataTable();
-                            dtTmp = (DataTable)grdData.DataSource;
-
-                            if (dtTmp == null || dtTmp.Select("XOA = 1").Count() == 0) return;
-
-                            DialogResult res = XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgBanCoMuonXoaKhong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"),
-                                    MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                            if (res == DialogResult.No) return;
-
-                            dtTmp.AcceptChanges();
-                            foreach (DataRow dr in dtTmp.Rows)
-                            {
-                                if (dr["XOA"].ToString() == "True")
+                                dt.DefaultView.RowFilter = "";
+                                for (int i = 0; i < dt.Columns.Count; i++)
                                 {
-                                    dr.Delete();
+                                    //dt.Columns[i].ColumnName = Commons.Modules.ObjLanguages.GetLanguage(this.Name, dt.Columns[i].ColumnName.ToString()); ;
+                                    dt.Columns[i].ColumnName = Commons.Modules.ObjLanguages.GetLanguage(this.Name, dt.Columns[i].ColumnName.ToString());
                                 }
+                                Microsoft.Office.Interop.Excel.Range Ranges1 = excelWorkSheet.Range[excelWorkSheet.Cells[1, 1], excelWorkSheet.Cells[dt.Rows.Count + 1, dt.Columns.Count]];
+                                Ranges1.ColumnWidth = 20;
+                                Ranges1.Font.Name = fontName;
+                                Ranges1.Font.Size = fontSizeNoiDung;
+                                Ranges1.Range["A1", "" + lastColumn + "1"].Font.Bold = true;
+                                Ranges1.Range["A1", "" + lastColumn + "1"].HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                                Ranges1.Range["A1", "" + lastColumn + "1"].Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+                                MExportExcel(dt, excelWorkSheet, Ranges1);
+
+                                Microsoft.Office.Interop.Excel.Worksheet excelWorkSheet1 = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Sheets[1];
+                                excelWorkSheet1 = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Worksheets.Add(After: excelWorkbook.Sheets[excelWorkbook.Sheets.Count]);
+                                excelWorkSheet1.Name = "02 - Quốc Gia";
+                                dt = new DataTable();
+                                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT MA_QG AS N'Mã quốc gia', TEN_QG AS N'Tên quốc gia' FROM dbo.QUOC_GIA"));
+                                Ranges1 = excelWorkSheet1.Range[excelWorkSheet1.Cells[1, 1], excelWorkSheet1.Cells[dt.Rows.Count + 1, dt.Columns.Count]];
+                                Ranges1.ColumnWidth = 20;
+                                Ranges1.Font.Name = fontName;
+                                Ranges1.Font.Size = fontSizeNoiDung;
+                                lastColumn = CharacterIncrement(dt.Columns.Count - 1);
+                                Ranges1.Range["A1", "" + lastColumn + "1"].Font.Bold = true;
+                                Ranges1.Range["A1", "" + lastColumn + "1"].HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                                Ranges1.Range["A1", "" + lastColumn + "1"].Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+                                MExportExcel(dt, excelWorkSheet1, Ranges1);
+
+                                //Tổ
+                                Microsoft.Office.Interop.Excel.Worksheet excelWorkSheet4 = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Sheets[1];
+                                excelWorkSheet4 = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Worksheets.Add(After: excelWorkbook.Sheets[excelWorkbook.Sheets.Count]);
+                                excelWorkSheet4.Name = "03 - Phòng";
+                                dt = new DataTable();
+                                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT T3.TEN_DV AS N'Tên nhà máy' , T2.TEN_XN AS N'Tên bộ phận' , T1.TEN_TO AS N'Tên Chuyền/Phòng' FROM dbo.[TO] T1 INNER JOIN dbo.XI_NGHIEP T2 ON T2.ID_XN = T1.ID_XN INNER JOIN dbo.DON_VI T3 ON T3.ID_DV = T2.ID_DV"));
+                                Ranges1 = excelWorkSheet4.Range[excelWorkSheet4.Cells[1, 1], excelWorkSheet4.Cells[dt.Rows.Count + 1, dt.Columns.Count]];
+                                Ranges1.ColumnWidth = 20;
+                                Ranges1.Font.Name = fontName;
+                                Ranges1.Font.Size = fontSizeNoiDung;
+                                lastColumn = CharacterIncrement(dt.Columns.Count - 1);
+                                Ranges1.Range["A1", "" + lastColumn + "1"].Font.Bold = true;
+                                Ranges1.Range["A1", "" + lastColumn + "1"].HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                                Ranges1.Range["A1", "" + lastColumn + "1"].Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+                                Microsoft.Office.Interop.Excel.Range myRange = excelWorkSheet4.get_Range("A1", lastColumn + (dt.Rows.Count + 1).ToString());
+                                myRange.AutoFilter("1", "<>", Microsoft.Office.Interop.Excel.XlAutoFilterOperator.xlOr, "", true);
+                                MExportExcel(dt, excelWorkSheet4, Ranges1);
+
+                                //Chức vụ
+                                Microsoft.Office.Interop.Excel.Worksheet excelWorkSheet5 = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Sheets[1];
+                                excelWorkSheet5 = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Worksheets.Add(After: excelWorkbook.Sheets[excelWorkbook.Sheets.Count]);
+                                excelWorkSheet5.Name = "04 - Chức vụ";
+                                dt = new DataTable();
+                                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT TEN_CV AS N'Tên chức vụ' FROM dbo.CHUC_VU"));
+                                Ranges1 = excelWorkSheet5.Range[excelWorkSheet5.Cells[1, 1], excelWorkSheet5.Cells[dt.Rows.Count + 1, dt.Columns.Count]];
+                                Ranges1.ColumnWidth = 20;
+                                Ranges1.Font.Name = fontName;
+                                Ranges1.Font.Size = fontSizeNoiDung;
+                                lastColumn = CharacterIncrement(dt.Columns.Count - 1);
+                                Ranges1.Range["A1", "" + lastColumn + "1"].Font.Bold = true;
+                                Ranges1.Range["A1", "" + lastColumn + "1"].HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                                Ranges1.Range["A1", "" + lastColumn + "1"].Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+                                myRange = excelWorkSheet5.get_Range("A1", lastColumn + (dt.Rows.Count + 1).ToString());
+                                myRange.AutoFilter("1", "<>", Microsoft.Office.Interop.Excel.XlAutoFilterOperator.xlOr, "", true);
+                                MExportExcel(dt, excelWorkSheet5, Ranges1);
+
+                                //Coong viec
+                                Microsoft.Office.Interop.Excel.Worksheet excelWorkSheet6 = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Sheets[1];
+                                excelWorkSheet6 = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Worksheets.Add(After: excelWorkbook.Sheets[excelWorkbook.Sheets.Count]);
+                                excelWorkSheet6.Name = "05 - Công việc";
+                                dt = new DataTable();
+                                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT TEN_LCV AS N'Tên công việc' FROM dbo.LOAI_CONG_VIEC"));
+                                Ranges1 = excelWorkSheet6.Range[excelWorkSheet6.Cells[1, 1], excelWorkSheet6.Cells[dt.Rows.Count + 1, dt.Columns.Count]];
+                                Ranges1.ColumnWidth = 20;
+                                Ranges1.Font.Name = fontName;
+                                Ranges1.Font.Size = fontSizeNoiDung;
+                                lastColumn = CharacterIncrement(dt.Columns.Count - 1);
+                                Ranges1.Range["A1", "" + lastColumn + "1"].Font.Bold = true;
+                                Ranges1.Range["A1", "" + lastColumn + "1"].HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                                Ranges1.Range["A1", "" + lastColumn + "1"].Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+                                myRange = excelWorkSheet6.get_Range("A1", lastColumn + (dt.Rows.Count + 1).ToString());
+                                myRange.AutoFilter("1", "<>", Microsoft.Office.Interop.Excel.XlAutoFilterOperator.xlOr, "", true);
+                                MExportExcel(dt, excelWorkSheet6, Ranges1);
+
+
+                                //Tình trạng hợp đồng
+                                Microsoft.Office.Interop.Excel.Worksheet excelWorkSheet8 = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Sheets[1];
+                                excelWorkSheet8 = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Worksheets.Add(After: excelWorkbook.Sheets[excelWorkbook.Sheets.Count]);
+                                excelWorkSheet8.Name = "06 - Tình trạng hợp đồng";
+                                dt = new DataTable();
+                                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT TEN_TT_HD AS N'Tên tình trạng HĐ' FROM dbo.TINH_TRANG_HD"));
+                                Ranges1 = excelWorkSheet8.Range[excelWorkSheet8.Cells[1, 1], excelWorkSheet8.Cells[dt.Rows.Count + 1, dt.Columns.Count]];
+                                Ranges1.ColumnWidth = 20;
+                                Ranges1.Font.Name = fontName;
+                                Ranges1.Font.Size = fontSizeNoiDung;
+                                lastColumn = CharacterIncrement(dt.Columns.Count - 1);
+                                Ranges1.Range["A1", "" + lastColumn + "1"].Font.Bold = true;
+                                Ranges1.Range["A1", "" + lastColumn + "1"].HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                                Ranges1.Range["A1", "" + lastColumn + "1"].Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+                                myRange = excelWorkSheet8.get_Range("A1", lastColumn + (dt.Rows.Count + 1).ToString());
+                                myRange.AutoFilter("1", "<>", Microsoft.Office.Interop.Excel.XlAutoFilterOperator.xlOr, "", true);
+                                MExportExcel(dt, excelWorkSheet8, Ranges1);
+
+                                //Tình trạng hiện tại
+                                Microsoft.Office.Interop.Excel.Worksheet excelWorkSheet9 = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Sheets[1];
+                                excelWorkSheet9 = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Worksheets.Add(After: excelWorkbook.Sheets[excelWorkbook.Sheets.Count]);
+                                excelWorkSheet9.Name = "07 - Tình trạng nhân sự";
+                                dt = new DataTable();
+                                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT TEN_TT_HT AS N'Tên tình trạng NS' FROM dbo.TINH_TRANG_HT"));
+                                Ranges1 = excelWorkSheet9.Range[excelWorkSheet9.Cells[1, 1], excelWorkSheet9.Cells[dt.Rows.Count + 1, dt.Columns.Count]];
+                                Ranges1.ColumnWidth = 20;
+                                Ranges1.Font.Name = fontName;
+                                Ranges1.Font.Size = fontSizeNoiDung;
+                                lastColumn = CharacterIncrement(dt.Columns.Count - 1);
+                                Ranges1.Range["A1", "" + lastColumn + "1"].Font.Bold = true;
+                                Ranges1.Range["A1", "" + lastColumn + "1"].HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                                Ranges1.Range["A1", "" + lastColumn + "1"].Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+                                myRange = excelWorkSheet9.get_Range("A1", lastColumn + (dt.Rows.Count + 1).ToString());
+                                myRange.AutoFilter("1", "<>", Microsoft.Office.Interop.Excel.XlAutoFilterOperator.xlOr, "", true);
+                                MExportExcel(dt, excelWorkSheet9, Ranges1);
+
+                                //Dân tộc
+                                Microsoft.Office.Interop.Excel.Worksheet excelWorkSheet10 = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Sheets[1];
+                                excelWorkSheet10 = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Worksheets.Add(After: excelWorkbook.Sheets[excelWorkbook.Sheets.Count]);
+                                excelWorkSheet10.Name = "08 - Dân tộc";
+                                dt = new DataTable();
+                                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT TEN_DT AS N'Tên dân tộc' FROM dbo.DAN_TOC"));
+                                Ranges1 = excelWorkSheet10.Range[excelWorkSheet10.Cells[1, 1], excelWorkSheet10.Cells[dt.Rows.Count + 1, dt.Columns.Count]];
+                                Ranges1.ColumnWidth = 20;
+                                Ranges1.Font.Name = fontName;
+                                Ranges1.Font.Size = fontSizeNoiDung;
+                                lastColumn = CharacterIncrement(dt.Columns.Count - 1);
+                                Ranges1.Range["A1", "" + lastColumn + "1"].Font.Bold = true;
+                                Ranges1.Range["A1", "" + lastColumn + "1"].HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                                Ranges1.Range["A1", "" + lastColumn + "1"].Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+                                myRange = excelWorkSheet10.get_Range("A1", lastColumn + (dt.Rows.Count + 1).ToString());
+                                myRange.AutoFilter("1", "<>", Microsoft.Office.Interop.Excel.XlAutoFilterOperator.xlOr, "", true);
+                                MExportExcel(dt, excelWorkSheet10, Ranges1);
+
+                                //Tình trạng hôn nhân
+                                Microsoft.Office.Interop.Excel.Worksheet excelWorkSheet11 = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Sheets[1];
+                                excelWorkSheet11 = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Worksheets.Add(After: excelWorkbook.Sheets[excelWorkbook.Sheets.Count]);
+                                excelWorkSheet11.Name = "09 - Tình trạng hôn nhân";
+                                dt = new DataTable();
+                                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT TEN_TT_HN AS N'Tên TT hôn nhân' FROM dbo.TT_HON_NHAN"));
+                                Ranges1 = excelWorkSheet11.Range[excelWorkSheet11.Cells[1, 1], excelWorkSheet11.Cells[dt.Rows.Count + 1, dt.Columns.Count]];
+                                Ranges1.ColumnWidth = 20;
+                                Ranges1.Font.Name = fontName;
+                                Ranges1.Font.Size = fontSizeNoiDung;
+                                lastColumn = CharacterIncrement(dt.Columns.Count - 1);
+                                Ranges1.Range["A1", "" + lastColumn + "1"].Font.Bold = true;
+                                Ranges1.Range["A1", "" + lastColumn + "1"].HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                                Ranges1.Range["A1", "" + lastColumn + "1"].Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+                                myRange = excelWorkSheet11.get_Range("A1", lastColumn + (dt.Rows.Count + 1).ToString());
+                                myRange.AutoFilter("1", "<>", Microsoft.Office.Interop.Excel.XlAutoFilterOperator.xlOr, "", true);
+                                MExportExcel(dt, excelWorkSheet11, Ranges1);
+
+                                //Tỉnh
+                                Microsoft.Office.Interop.Excel.Worksheet excelWorkSheet12 = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Sheets[1];
+                                excelWorkSheet12 = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Worksheets.Add(After: excelWorkbook.Sheets[excelWorkbook.Sheets.Count]);
+                                excelWorkSheet12.Name = "10 - Tỉnh-Thành phố";
+                                dt = new DataTable();
+                                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT TEN_TP AS N'Tên tỉnh' FROM dbo.THANH_PHO"));
+                                Ranges1 = excelWorkSheet12.Range[excelWorkSheet12.Cells[1, 1], excelWorkSheet12.Cells[dt.Rows.Count + 1, dt.Columns.Count]];
+                                Ranges1.ColumnWidth = 20;
+                                Ranges1.Font.Name = fontName;
+                                Ranges1.Font.Size = fontSizeNoiDung;
+                                lastColumn = CharacterIncrement(dt.Columns.Count - 1);
+                                Ranges1.Range["A1", "" + lastColumn + "1"].Font.Bold = true;
+                                Ranges1.Range["A1", "" + lastColumn + "1"].HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                                Ranges1.Range["A1", "" + lastColumn + "1"].Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+                                myRange = excelWorkSheet12.get_Range("A1", lastColumn + (dt.Rows.Count + 1).ToString());
+                                myRange.AutoFilter("1", "<>", Microsoft.Office.Interop.Excel.XlAutoFilterOperator.xlOr, "", true);
+                                MExportExcel(dt, excelWorkSheet12, Ranges1);
+
+                                //Quận/huyện
+                                Microsoft.Office.Interop.Excel.Worksheet excelWorkSheet13 = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Sheets[1];
+                                excelWorkSheet13 = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Worksheets.Add(After: excelWorkbook.Sheets[excelWorkbook.Sheets.Count]);
+                                excelWorkSheet13.Name = "11 - Quận-Huyện";
+                                dt = new DataTable();
+                                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT T2.TEN_TP AS N'Tên Tỉnh/Thành phố', T1.TEN_QUAN AS N'Tên Quận/Huyện'  FROM dbo.QUAN T1 INNER JOIN dbo.THANH_PHO T2 ON T2.ID_TP = T1.ID_TP"));
+                                Ranges1 = excelWorkSheet13.Range[excelWorkSheet13.Cells[1, 1], excelWorkSheet13.Cells[dt.Rows.Count + 1, dt.Columns.Count]];
+                                Ranges1.ColumnWidth = 20;
+                                Ranges1.Font.Name = fontName;
+                                Ranges1.Font.Size = fontSizeNoiDung;
+                                lastColumn = CharacterIncrement(dt.Columns.Count - 1);
+                                Ranges1.Range["A1", "" + lastColumn + "1"].Font.Bold = true;
+                                Ranges1.Range["A1", "" + lastColumn + "1"].HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                                Ranges1.Range["A1", "" + lastColumn + "1"].Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+                                myRange = excelWorkSheet13.get_Range("A1", lastColumn + (dt.Rows.Count + 1).ToString());
+                                myRange.AutoFilter("1", "<>", Microsoft.Office.Interop.Excel.XlAutoFilterOperator.xlOr, "", true);
+                                MExportExcel(dt, excelWorkSheet13, Ranges1);
+
+                                //Phường/xã
+                                Microsoft.Office.Interop.Excel.Worksheet excelWorkSheet14 = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Sheets[1];
+                                excelWorkSheet14 = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Worksheets.Add(After: excelWorkbook.Sheets[excelWorkbook.Sheets.Count]);
+                                excelWorkSheet14.Name = "12 - Phường-Xã";
+                                dt = new DataTable();
+                                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT T3.TEN_TP AS N'Tên Tỉnh/Thành phố', T2.TEN_QUAN AS N'Tên Quận/Huyện', T1.TEN_PX AS N'Tên Phường/Xã'  FROM dbo.PHUONG_XA T1 INNER JOIN dbo.QUAN T2 ON T2.ID_QUAN = T1.ID_QUAN INNER JOIN dbo.THANH_PHO T3 ON T3.ID_TP = T2.ID_TP"));
+                                Ranges1 = excelWorkSheet14.Range[excelWorkSheet14.Cells[1, 1], excelWorkSheet14.Cells[dt.Rows.Count + 1, dt.Columns.Count]];
+                                Ranges1.ColumnWidth = 20;
+                                Ranges1.Font.Name = fontName;
+                                Ranges1.Font.Size = fontSizeNoiDung;
+                                lastColumn = CharacterIncrement(dt.Columns.Count - 1);
+                                Ranges1.Range["A1", "" + lastColumn + "1"].Font.Bold = true;
+                                Ranges1.Range["A1", "" + lastColumn + "1"].HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                                Ranges1.Range["A1", "" + lastColumn + "1"].Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+                                myRange = excelWorkSheet14.get_Range("A1", lastColumn + (dt.Rows.Count + 1).ToString());
+                                myRange.AutoFilter("1", "<>", Microsoft.Office.Interop.Excel.XlAutoFilterOperator.xlOr, "", true);
+                                MExportExcel(dt, excelWorkSheet14, Ranges1);
+
+
+                                // Loại trình độ
+                                Microsoft.Office.Interop.Excel.Worksheet excelWorkSheet15 = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Sheets[1];
+                                excelWorkSheet15 = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Worksheets.Add(After: excelWorkbook.Sheets[excelWorkbook.Sheets.Count]);
+                                excelWorkSheet15.Name = "13 - Loại trình độ";
+                                dt = new DataTable();
+                                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT TEN_LOAI_TD AS N'Tên loại trình độ' FROM dbo.LOAI_TRINH_DO"));
+                                Ranges1 = excelWorkSheet15.Range[excelWorkSheet15.Cells[1, 1], excelWorkSheet15.Cells[dt.Rows.Count + 1, dt.Columns.Count]];
+                                Ranges1.ColumnWidth = 20;
+                                Ranges1.Font.Name = fontName;
+                                Ranges1.Font.Size = fontSizeNoiDung;
+                                lastColumn = CharacterIncrement(dt.Columns.Count - 1);
+                                Ranges1.Range["A1", "" + lastColumn + "1"].Font.Bold = true;
+                                Ranges1.Range["A1", "" + lastColumn + "1"].HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                                Ranges1.Range["A1", "" + lastColumn + "1"].Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+                                myRange = excelWorkSheet15.get_Range("A1", lastColumn + (dt.Rows.Count + 1).ToString());
+                                myRange.AutoFilter("1", "<>", Microsoft.Office.Interop.Excel.XlAutoFilterOperator.xlOr, "", true);
+                                MExportExcel(dt, excelWorkSheet15, Ranges1);
+
+                                // Trình độ
+                                Microsoft.Office.Interop.Excel.Worksheet excelWorkSheet16 = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Sheets[1];
+                                excelWorkSheet16 = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Worksheets.Add(After: excelWorkbook.Sheets[excelWorkbook.Sheets.Count]);
+                                excelWorkSheet16.Name = "14 - Trình độ";
+                                dt = new DataTable();
+                                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT CHAR(13)+ TEN_TDVH AS N'Tên trình độ' FROM dbo.TRINH_DO_VAN_HOA "));
+                                Ranges1 = excelWorkSheet16.Range[excelWorkSheet16.Cells[1, 1], excelWorkSheet16.Cells[dt.Rows.Count + 1, dt.Columns.Count]];
+                                Ranges1.ColumnWidth = 20;
+                                Ranges1.Font.Name = fontName;
+                                Ranges1.Font.Size = fontSizeNoiDung;
+                                lastColumn = CharacterIncrement(dt.Columns.Count - 1);
+                                Ranges1.Range["A1", "" + lastColumn + "1"].Font.Bold = true;
+                                Ranges1.Range["A1", "" + lastColumn + "1"].HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                                Ranges1.Range["A1", "" + lastColumn + "1"].Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+                                myRange = excelWorkSheet16.get_Range("A1", lastColumn + (dt.Rows.Count + 1).ToString());
+                                myRange.AutoFilter("1", "<>", Microsoft.Office.Interop.Excel.XlAutoFilterOperator.xlOr, "", true);
+                                MExportExcel(dt, excelWorkSheet16, Ranges1);
+
+                                excelWorkSheet.Activate();
+
+                                excelApplication.Visible = true;
+                                excelWorkbook.Save();
                             }
-                            dtTmp.AcceptChanges();
+                            catch (Exception ex) { XtraMessageBox.Show(ex.Message); }
+
+                            break;
                         }
-                        catch
+                    case "import":
                         {
-                            XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgXoaKhongThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"),
-                                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            grvData.PostEditor();
+                            grvData.UpdateCurrentRow();
+                            Commons.Modules.ObjSystems.MChooseGrid(false, "XOA", grvData);
+                            DataTable dtSource = Commons.Modules.ObjSystems.ConvertDatatable(grdData);
+                            if (cboChonSheet.Text == "" || dtSource == null || dtSource.Rows.Count <= 0)
+                            {
+                                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "KhongCoDuLieuImport"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"),
+                                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                return;
+                            }
+                            grvData.Columns.View.ClearColumnErrors();
+                            ImportUngVien(dtSource);
+
+                            break;
                         }
-                        break;
-                    }
-                case "thoat":
-                    {
-                        this.DialogResult = DialogResult.OK;
-                        Commons.Modules.ObjSystems.setCheckImport(0); //xoa
-                        this.Close();
-                        break;
-                    }
-                default: break;
+                    case "xoa":
+                        {
+                            try
+                            {
+                                DataTable dtTmp = new DataTable();
+                                dtTmp = (DataTable)grdData.DataSource;
+
+                                if (dtTmp == null || dtTmp.Select("XOA = 1").Count() == 0) return;
+
+                                DialogResult res = XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgBanCoMuonXoaKhong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"),
+                                        MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                                if (res == DialogResult.No) return;
+
+                                dtTmp.AcceptChanges();
+                                foreach (DataRow dr in dtTmp.Rows)
+                                {
+                                    if (dr["XOA"].ToString() == "True")
+                                    {
+                                        dr.Delete();
+                                    }
+                                }
+                                dtTmp.AcceptChanges();
+                            }
+                            catch
+                            {
+                                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgXoaKhongThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"),
+                                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+                            break;
+                        }
+                    case "thoat":
+                        {
+                            this.DialogResult = DialogResult.OK;
+                            Commons.Modules.ObjSystems.setCheckImport(0); //xoa
+                            this.Close();
+                            break;
+                        }
+                    default: break;
+                }
             }
+            catch { }
         }
         #region import ứng viên
         private void ImportUngVien(DataTable dtSource)
@@ -1040,8 +1045,6 @@ namespace Vs.HRM
                         }
                         else
                         {
-
-
                             if (Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT COUNT(*) FROM dbo.[CONG_NHAN] WHERE MS_CN = N'" + sMaSo + "'")) > 0)
                             {
                                 if (iID_DV == 1)
@@ -1083,30 +1086,50 @@ namespace Vs.HRM
                                 {
                                     if (sMaSo.Substring(0, 3).ToString() != "DMS")
                                     {
-                                        if (sMaSo.Substring(3, sMaSo.Length - 3).Length != 6)
-                                        {
-                                            string sTEMP = "000000" + sMaSo.Substring(3, sMaSo.Length - 3);
-                                            sMaSo = sMaSo.Substring(0, 3).ToString() + sTEMP.Substring(sTEMP.Length - 6);
-                                        }
+
+                                        //string sTEMP = "000000" + sMaSo.Substring(3, sMaSo.Length - 3);
+                                        //sMaSo = sMaSo.Substring(0, 3).ToString() + sTEMP.Substring(sTEMP.Length - 6);
                                         string strSQL = "UPDATE  A SET A.[" + grvData.Columns[0].FieldName.ToString() + "] = N'" + "DMS" + sMaSo.Substring(3, sMaSo.Length - 3).ToString().Trim() + "' FROM " + sBT + " A WHERE A.[" + grvData.Columns[0].FieldName.ToString() + "] = N'" + dtSource.Rows[i][0].ToString().Trim() + "'";
                                         SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, strSQL);
                                         dtSource.Rows[i][0] = "DMS" + sMaSo.Substring(3, sMaSo.Length - 3);
                                         i--;
+                                    }
+                                    else
+                                    {
+                                        if (sMaSo.Substring(3, sMaSo.Length - 3).Length != 6)
+                                        {
+                                            string sTEMP = "000000" + sMaSo.Substring(3, sMaSo.Length - 3);
+                                            sMaSo = sMaSo.Substring(0, 3).ToString() + sTEMP.Substring(sTEMP.Length - 6);
+                                            string strSQL = "UPDATE  A SET A.[" + grvData.Columns[0].FieldName.ToString() + "] = N'" + "DMS" + sMaSo.Substring(3, sMaSo.Length - 3).ToString().Trim() + "' FROM " + sBT + " A WHERE A.[" + grvData.Columns[0].FieldName.ToString() + "] = N'" + dtSource.Rows[i][0].ToString().Trim() + "'";
+                                            SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, strSQL);
+                                            dtSource.Rows[i][0] = "DMS" + sMaSo.Substring(3, sMaSo.Length - 3);
+                                            i--;
+                                        }
                                     }
                                 }
                                 else
                                 {
                                     if (sMaSo.Substring(0, 3).ToString() != "DMT")
                                     {
-                                        if (sMaSo.Substring(3, sMaSo.Length - 3).Length != 6)
-                                        {
-                                            string sTEMP = "000000" + sMaSo.Substring(3, sMaSo.Length - 3);
-                                            sMaSo = sMaSo.Substring(0, 3).ToString() + sTEMP.Substring(sTEMP.Length - 6);
-                                        }
+
+                                        //string sTEMP = "000000" + sMaSo.Substring(3, sMaSo.Length - 3);
+                                        //sMaSo = sMaSo.Substring(0, 3).ToString() + sTEMP.Substring(sTEMP.Length - 6);
                                         string strSQL = "UPDATE  A SET A.[" + grvData.Columns[0].FieldName.ToString() + "] = N'" + "DMT" + sMaSo.Substring(3, sMaSo.Length - 3).ToString().Trim() + "' FROM " + sBT + " A WHERE A.[" + grvData.Columns[0].FieldName.ToString() + "] = N'" + dtSource.Rows[i][0].ToString().Trim() + "'";
                                         SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, strSQL);
                                         dtSource.Rows[i][0] = "DMT" + sMaSo.Substring(3, sMaSo.Length - 3);
                                         i--;
+                                    }
+                                    else
+                                    {
+                                        if (sMaSo.Substring(3, sMaSo.Length - 3).Length != 6)
+                                        {
+                                            string sTEMP = "000000" + sMaSo.Substring(3, sMaSo.Length - 3);
+                                            sMaSo = sMaSo.Substring(0, 3).ToString() + sTEMP.Substring(sTEMP.Length - 6);
+                                            string strSQL = "UPDATE  A SET A.[" + grvData.Columns[0].FieldName.ToString() + "] = N'" + "DMT" + sMaSo.Substring(3, sMaSo.Length - 3).ToString().Trim() + "' FROM " + sBT + " A WHERE A.[" + grvData.Columns[0].FieldName.ToString() + "] = N'" + dtSource.Rows[i][0].ToString().Trim() + "'";
+                                            SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, strSQL);
+                                            dtSource.Rows[i][0] = "DMT" + sMaSo.Substring(3, sMaSo.Length - 3);
+                                            i--;
+                                        }
                                     }
                                 }
                             }
@@ -1158,10 +1181,10 @@ namespace Vs.HRM
                             "(SELECT TOP 1 ID_QG FROM dbo.QUOC_GIA WHERE TEN_QG = A.[" + grvData.Columns[4].FieldName.ToString() + "]), CONVERT(DATETIME,[A].[" + grvData.Columns[5].FieldName.ToString() + "],103), [A].[" + grvData.Columns[6].FieldName.ToString() + "],  " +
                             "[A].[" + grvData.Columns[7].FieldName.ToString() + "], (SELECT TOP 1 ID_TO FROM dbo.[TO] WHERE TEN_TO = A.[" + grvData.Columns[8].FieldName.ToString() + "]), (SELECT TOP 1 ID_CV FROM dbo.CHUC_VU WHERE TEN_CV = A.[" + grvData.Columns[9].FieldName.ToString() + "]), " +
                             "(SELECT TOP 1 ID_LCV FROM dbo.LOAI_CONG_VIEC WHERE TEN_LCV = A.[" + grvData.Columns[10].FieldName.ToString() + "]), CONVERT(DATETIME,[A].[" + grvData.Columns[11].FieldName.ToString() + "],103), " +
-                            "CONVERT(DATETIME,A.[" + grvData.Columns[12].FieldName.ToString() + "],103), [A].[" + grvData.Columns[13].FieldName.ToString() + "], " +
+                            "CONVERT(DATETIME,A.[" + grvData.Columns[12].FieldName.ToString() + "],103), CONVERT(DATETIME,A.[" + grvData.Columns[12].FieldName.ToString() + "],103) ,[A].[" + grvData.Columns[13].FieldName.ToString() + "], " +
                             "(SELECT TOP 1 ID_TT_HD FROM dbo.TINH_TRANG_HD WHERE TEN_TT_HD = A.[" + grvData.Columns[14].FieldName.ToString() + "]), (SELECT TOP 1 ID_TT_HT FROM dbo.TINH_TRANG_HT WHERE TEN_TT_HT = A.[" + grvData.Columns[15].FieldName.ToString() + "]), [A].[" + grvData.Columns[16].FieldName.ToString() + "], " +
-                            "SELECT PHEP_CT FROM dbo.LOAI_CONG_VIEC WHERE TEN_LCV = A.[" + grvData.Columns[11].FieldName.ToString().Trim() + "], [A].[" + grvData.Columns[17].FieldName.ToString() + "], [A].[" + grvData.Columns[18].FieldName.ToString() + "], A.[" + grvData.Columns[19].FieldName.ToString() + "], " +
-                            ", (SELECT TOP 1 ID_DT FROM dbo.DAN_TOC WHERE TEN_DT = A.[" + grvData.Columns[20].FieldName.ToString() + "]), A.[" + grvData.Columns[21].FieldName.ToString() + "], A.[" + grvData.Columns[22].FieldName.ToString() + "],  " +
+                            "(SELECT PHEP_CT FROM dbo.LOAI_CONG_VIEC WHERE TEN_LCV = A.[" + grvData.Columns[10].FieldName.ToString().Trim() + "]), [A].[" + grvData.Columns[17].FieldName.ToString() + "], [A].[" + grvData.Columns[18].FieldName.ToString() + "], A.[" + grvData.Columns[19].FieldName.ToString() + "], " +
+                            "(SELECT TOP 1 ID_DT FROM dbo.DAN_TOC WHERE TEN_DT = A.[" + grvData.Columns[20].FieldName.ToString() + "]), A.[" + grvData.Columns[21].FieldName.ToString() + "], A.[" + grvData.Columns[22].FieldName.ToString() + "],  " +
                             "A.[" + grvData.Columns[23].FieldName.ToString() + "], A.[" + grvData.Columns[24].FieldName.ToString() + "], CONVERT(DATETIME,A.[" + grvData.Columns[25].FieldName.ToString() + "],103), A.[" + grvData.Columns[26].FieldName.ToString() + "], (SELECT TOP 1 ID_TT_HN FROM dbo.TT_HON_NHAN WHERE TEN_TT_HN = A.[" + grvData.Columns[27].FieldName.ToString() + "]), A.[" + grvData.Columns[28].FieldName.ToString() + "], " +
                             "A.[" + grvData.Columns[29].FieldName.ToString() + "],A.[" + grvData.Columns[30].FieldName.ToString() + "], A.[" + grvData.Columns[31].FieldName.ToString() + "], A.[" + grvData.Columns[32].FieldName.ToString() + "], " +
                             "A.[" + grvData.Columns[33].FieldName.ToString() + "], A.[" + grvData.Columns[34].FieldName.ToString() + "], A.[" + grvData.Columns[35].FieldName.ToString() + "], A." + grvData.Columns[36].FieldName.ToString() + ", A.[" + grvData.Columns[37].FieldName.ToString() + "], " +
@@ -1828,7 +1851,7 @@ namespace Vs.HRM
                 {
                     timer1.Stop();
                     Thread.Sleep(300000);//chi nghỉ 5 phút
-                        if (this.InvokeRequired)
+                    if (this.InvokeRequired)
                     {
                         this.Invoke(new MethodInvoker(delegate
                         {

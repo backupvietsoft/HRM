@@ -273,7 +273,14 @@ namespace VietSoftHRM
                         ns.Dock = DockStyle.Fill;
                         break;
                     }
-
+                case "mnuDanhGiaTN":
+                    {
+                        ucDanhGiaTayNghe ns = new ucDanhGiaTayNghe();
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(ns);
+                        ns.Dock = DockStyle.Fill;
+                        break;
+                    }
                 case "mnuTiepNhanUV":
                     {
                         ucTiepNhanUngVien ns = new ucTiepNhanUngVien();

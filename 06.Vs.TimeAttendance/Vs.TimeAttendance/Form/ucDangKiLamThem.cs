@@ -401,6 +401,11 @@ namespace Vs.TimeAttendance
 
                             DataTable dt = new DataTable();
                             dt = ((DataTable)grdCongNhan.DataSource).Copy();
+                            try
+                            {
+                                dt = dt.AsEnumerable().Where(x => (string.IsNullOrEmpty(Convert.ToString(x["GIO_BD"])) ? "" : Convert.ToString(x["GIO_BD"])) == "").CopyToDataTable();
+                            }
+                            catch (Exception ex) { dt = dt.Clone(); }
                             dt.DefaultView.RowFilter = "";
                             DataView dv = dt.DefaultView;
 

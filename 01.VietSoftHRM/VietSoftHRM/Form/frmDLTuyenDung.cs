@@ -20,7 +20,7 @@ namespace VietSoftHRM
         public frmDLTuyenDung()
         {
             InitializeComponent();
-            Commons.Modules.ObjSystems.ThayDoiNN(this,Root,tabControl, btnALL);
+            Commons.Modules.ObjSystems.ThayDoiNN(this, Root, tabControl, btnALL);
             this.Text = Commons.Modules.ObjLanguages.GetLanguage(this.Name, this.Name);
         }
         private void frmDLTuyenDung_Load(object sender, EventArgs e)
@@ -72,16 +72,18 @@ namespace VietSoftHRM
             try
             {
                 DataTable dt = new DataTable();
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT ID_CN,HO + ' '+TEN AS HO_TEN,YC_TD,PV_TD,GHI_CHU_1 as GHI_CHU FROM dbo.CONG_NHAN WHERE ID_TO IN (SELECT ID_TO FROM dbo.[TO] WHERE ID_XN = " + iiD_XN + ") AND (YC_TD = 1 OR PV_TD = 1) ORDER BY HO_TEN"));
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT T1.ID_CN, T2.HO + ' ' + T2.TEN HO_TEN, ISNULL(T1.PHONG_VAN,0) PHONG_VAN , ISNULL(T1.YEU_CAU,0) YEU_CAU FROM dbo.XI_NGHIEP_NGUOI_TUYEN_DUNG T1 INNER JOIN dbo.CONG_NHAN T2 ON T2.ID_CN = T1.ID_CN WHERE T1.ID_XN = " + iiD_XN + " ORDER BY HO_TEN"));
                 dt.Columns["ID_CN"].ReadOnly = false;
                 dt.Columns["HO_TEN"].ReadOnly = false;
+                dt.Columns["PHONG_VAN"].ReadOnly = false;
+                dt.Columns["YEU_CAU"].ReadOnly = false;
                 if (grdThamGiaTD.DataSource == null)
                 {
                     Commons.Modules.ObjSystems.MLoadXtraGrid(grdThamGiaTD, grvThamGiaTD, dt, false, false, true, true, true, this.Name);
                     DataTable CongNhan = new DataTable();
-                    CongNhan.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT ID_CN,MS_CN,HO + ' '+TEN AS HO_TEN FROM dbo.CONG_NHAN WHERE ID_TO IN (SELECT ID_TO FROM dbo.[TO] WHERE ID_XN = " + iiD_XN + ")  ORDER BY HO_TEN"));
-
-                    Commons.Modules.ObjSystems.AddCombXtra("ID_CN", "MS_CN", grvThamGiaTD, CongNhan, true, "ID_CN", this.Name, true);
+                    dt = new DataTable();
+                    dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboCongNhan", Commons.Modules.UserName, Commons.Modules.TypeLanguage, 3));
+                    Commons.Modules.ObjSystems.AddCombXtra("ID_CN", "MS_CN", grvThamGiaTD, dt, true, "ID_CN", this.Name, true);
                 }
                 else
                 {
@@ -99,6 +101,7 @@ namespace VietSoftHRM
             btnALL.Buttons[1].Properties.Visible = !visible;
             btnALL.Buttons[2].Properties.Visible = !visible;
             btnALL.Buttons[3].Properties.Visible = visible;
+            btnALL.Buttons[4].Properties.Visible = visible;
 
             grvViTri.OptionsBehavior.Editable = !visible;
             grvThamGiaTD.OptionsBehavior.Editable = !visible;
@@ -106,47 +109,55 @@ namespace VietSoftHRM
 
         private void windowsUIButton_ButtonClick(object sender, DevExpress.XtraBars.Docking2010.ButtonEventArgs e)
         {
-            WindowsUIButton btn = e.Button as WindowsUIButton;
-            XtraUserControl ctl = new XtraUserControl();
-            switch (btn.Tag.ToString())
+            try
             {
-                case "sua":
-                    {
-                        Commons.Modules.ObjSystems.AddnewRow(grvViTri, true);
-                        Commons.Modules.ObjSystems.AddnewRow(grvThamGiaTD, true);
-                        enableButon(false);
+                WindowsUIButton btn = e.Button as WindowsUIButton;
+                XtraUserControl ctl = new XtraUserControl();
+                switch (btn.Tag.ToString())
+                {
+                    case "sua":
+                        {
+                            Commons.Modules.ObjSystems.AddnewRow(grvViTri, true);
+                            Commons.Modules.ObjSystems.AddnewRow(grvThamGiaTD, true);
+                            enableButon(false);
+                            break;
+                        }
+                    case "xoa":
+                        {
+                            break;
+                        }
+                    case "luu":
+                        {
+                            Validate();
+                            if (grvViTri.HasColumnErrors) return;
+                            if (grvThamGiaTD.HasColumnErrors) return;
+                            if (!SaveData()) return;
+                            LoadViTri();
+                            LoadNguoiTuyenDung();
+                            Commons.Modules.ObjSystems.DeleteAddRow(grvViTri);
+                            Commons.Modules.ObjSystems.DeleteAddRow(grvThamGiaTD);
+                            enableButon(true);
+                            break;
+                        }
+                    case "khongluu":
+                        {
+                            LoadViTri();
+                            LoadNguoiTuyenDung();
+                            Commons.Modules.ObjSystems.DeleteAddRow(grvViTri);
+                            Commons.Modules.ObjSystems.DeleteAddRow(grvThamGiaTD);
+                            enableButon(true);
+                            break;
+                        }
+                    case "thoat":
+                        {
+                            this.Close();
+                            break;
+                        }
+                    default:
                         break;
-                    }
-                case "luu":
-                    {
-                        Validate();
-                        if (grvViTri.HasColumnErrors) return;
-                        if (grvThamGiaTD.HasColumnErrors) return;
-                        if (!SaveData()) return;
-                        LoadViTri();
-                        LoadNguoiTuyenDung();
-                        Commons.Modules.ObjSystems.DeleteAddRow(grvViTri);
-                        Commons.Modules.ObjSystems.DeleteAddRow(grvThamGiaTD);
-                        enableButon(true);
-                        break;
-                    }
-                case "khongluu":
-                    {
-                        LoadViTri();
-                        LoadNguoiTuyenDung();
-                        Commons.Modules.ObjSystems.DeleteAddRow(grvViTri);
-                        Commons.Modules.ObjSystems.DeleteAddRow(grvThamGiaTD);
-                        enableButon(true);
-                        break;
-                    }
-                case "thoat":
-                    {
-                        this.Close();
-                        break;
-                    }
-                default:
-                    break;
+                }
             }
+            catch { }
         }
 
         private bool SaveData()
@@ -160,10 +171,10 @@ namespace VietSoftHRM
             }
             catch (Exception ex)
             {
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgThemKhongThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
         }
-
         private void grvViTri_InvalidRowException(object sender, DevExpress.XtraGrid.Views.Base.InvalidRowExceptionEventArgs e)
         {
             e.ExceptionMode = DevExpress.XtraEditors.Controls.ExceptionMode.NoAction;
@@ -302,8 +313,9 @@ namespace VietSoftHRM
         {
             if (e.KeyCode == Keys.Delete && btnALL.Buttons[0].Properties.Visible == false)
             {
-                if (MessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDeleteYeuDuLieu"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+                if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDeleteYeuDuLieu"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
                     return;
+
                 if (grvViTri.SelectedRowsCount != 0)
                 {
                     grvViTri.GridControl.BeginUpdate();
@@ -319,7 +331,30 @@ namespace VietSoftHRM
                     grvViTri.DeleteRow(grvViTri.FocusedRowHandle);
                 }
             }
+        }
 
+        private void grdThamGiaTD_ProcessGridKey(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete && btnALL.Buttons[0].Properties.Visible == false)
+            {
+                if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDeleteNguoiThamGiaTD"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+                    return;
+
+                if (grvThamGiaTD.SelectedRowsCount != 0)
+                {
+                    grvThamGiaTD.GridControl.BeginUpdate();
+                    List<int> selectedLogItems = new List<int>(grvThamGiaTD.GetSelectedRows());
+                    for (int i = selectedLogItems.Count - 1; i >= 0; i--)
+                    {
+                        grvThamGiaTD.DeleteRow(selectedLogItems[i]);
+                    }
+                    grvThamGiaTD.GridControl.EndUpdate();
+                }
+                else if (grvThamGiaTD.FocusedRowHandle != GridControl.InvalidRowHandle)
+                {
+                    grvThamGiaTD.DeleteRow(grvThamGiaTD.FocusedRowHandle);
+                }
+            }
         }
     }
 }

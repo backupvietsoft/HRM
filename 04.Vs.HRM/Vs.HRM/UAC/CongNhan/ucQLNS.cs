@@ -152,7 +152,7 @@ namespace Vs.HRM
             try
             {
                 labelNV.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-                labelNV.ForeColor = System.Drawing.Color.FromArgb(0,0,255);
+                labelNV.ForeColor = System.Drawing.Color.FromArgb(0, 0, 255);
                 labelNV.Text = tileViewCN.GetFocusedRowCellValue(tileViewCN.Columns["MS_CN"]).ToString() + " - " + tileViewCN.GetFocusedRowCellValue(tileViewCN.Columns["HO_TEN"]).ToString();
             }
             catch (Exception ex) { }
@@ -223,7 +223,7 @@ namespace Vs.HRM
         }
         private void DeleteData()
         {
-            if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDeleteCongNhan"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "sThongBao"),MessageBoxButtons.YesNo,MessageBoxIcon.Question) == DialogResult.No) return;
+            if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDeleteCongNhan"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "sThongBao"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) return;
             //xóa
             try
             {
@@ -240,101 +240,109 @@ namespace Vs.HRM
 
         private void windowsUIButton_ButtonClick(object sender, ButtonEventArgs e)
         {
-            WindowsUIButton btn = e.Button as WindowsUIButton;
-            XtraUserControl ctl = new XtraUserControl();
-            switch (btn.Tag.ToString())
+            try
             {
-                case "importNhanSu":
-                    {
-                        frmImportNhanSu frm = new frmImportNhanSu();
-                        if(frm.ShowDialog() == DialogResult.OK)
-                        {
-                            LoadNhanSu(-1);
-                        }
-                        break;
-                    }
-                case "them":
-                    {
-                        grdNS.Visible = false;
-                        ucCTQLNS dl = new ucCTQLNS(-1);
-                        dl.Refresh();
-                        dt = dl.dt;
-                        navigationFrame1.SelectedPage.Visible = false;
-                        if (dt != null && dt.Rows.Count > 0)
-                        {
-                            try
-                            {
-                                string str = dt.Rows[0]["HO"] + " " + dt.Rows[0]["TEN"];
-                            }
-                            catch
-                            {
 
-                            }
-                        }
-                        navigationPage2.Controls.Add(dl);
-                        dl.Dock = DockStyle.Fill;
-                        dl.backWindowsUIButtonPanel.ButtonClick += BackWindowsUIButtonPanel_ButtonClick;
-                        navigationFrame1.SelectedPage = navigationPage2;
-                        accorMenuleft.Visible = false;
-                        break;
-                    }
-                case "sua":
-                    {
-                        if (tileViewCN.RowCount == 0)
+                WindowsUIButton btn = e.Button as WindowsUIButton;
+                XtraUserControl ctl = new XtraUserControl();
+                switch (btn.Tag.ToString())
+                {
+                    case "importNhanSu":
                         {
-                            XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgChonDongCanXuLy"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "sThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            return;
-                        }
-                        Int64 iIDCN = Convert.ToInt64(tileViewCN.GetFocusedRowCellValue("ID_CN"));
-                        if (iIDCN == 0)
-                        {
-                            iIDCN = -1;
-                        }
-
-                        grdNS.Visible = false;
-                        ucCTQLNS dl = new ucCTQLNS(iIDCN);
-                        Commons.Modules.ObjSystems.ShowWaitForm(this);
-                        dl.Refresh();
-                        dt = dl.dt;
-                        navigationFrame1.SelectedPage.Visible = false;
-                        if (dt != null && dt.Rows.Count > 0)
-                        {
-                            try
+                            frmImportNhanSu frm = new frmImportNhanSu();
+                            if (frm.ShowDialog() == DialogResult.OK)
                             {
-                                string str = dt.Rows[0]["HO"] + " " + dt.Rows[0]["TEN"];
+                                LoadNhanSu(-1);
                             }
-                            catch
-                            {
-
-                            }
+                            break;
                         }
-                        navigationPage2.Controls.Add(dl);
-                        dl.Dock = DockStyle.Fill;
-                        dl.backWindowsUIButtonPanel.ButtonClick += BackWindowsUIButtonPanel_ButtonClick;
-                        navigationFrame1.SelectedPage = navigationPage2;
-                        accorMenuleft.Visible = false;
-                        Commons.Modules.ObjSystems.HideWaitForm();
-                        break;
-                    }
-
-                case "xoa":
-                    {
-                        if (tileViewCN.RowCount == 0)
+                    case "them":
                         {
-                            XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgChonDongCanXuLy"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "sThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            return;
+                            grdNS.Visible = false;
+                            ucCTQLNS dl = new ucCTQLNS(-1);
+                            dl.Refresh();
+                            dt = dl.dt;
+                            navigationFrame1.SelectedPage.Visible = false;
+                            if (dt != null && dt.Rows.Count > 0)
+                            {
+                                try
+                                {
+                                    string str = dt.Rows[0]["HO"] + " " + dt.Rows[0]["TEN"];
+                                }
+                                catch
+                                {
+
+                                }
+                            }
+                            navigationPage2.Controls.Add(dl);
+                            dl.Dock = DockStyle.Fill;
+                            dl.backWindowsUIButtonPanel.ButtonClick += BackWindowsUIButtonPanel_ButtonClick;
+                            navigationFrame1.SelectedPage = navigationPage2;
+                            accorMenuleft.Visible = false;
+                            break;
                         }
-                        DeleteData();
-                        break;
-                    }
-                case "thoat":
-                    {
-                        Commons.Modules.ObjSystems.GotoHome(this);
-                        break;
-                    }
-                default:
-                    break;
+                    case "sua":
+                        {
+                            if (tileViewCN.RowCount == 0)
+                            {
+                                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgChonDongCanXuLy"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "sThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                return;
+                            }
+                            Int64 iIDCN = Convert.ToInt64(tileViewCN.GetFocusedRowCellValue("ID_CN"));
+                            if (iIDCN == 0)
+                            {
+                                iIDCN = -1;
+                            }
+
+                            grdNS.Visible = false;
+                            ucCTQLNS dl = new ucCTQLNS(iIDCN);
+                            Commons.Modules.ObjSystems.ShowWaitForm(this);
+                            dl.Refresh();
+                            dt = dl.dt;
+                            navigationFrame1.SelectedPage.Visible = false;
+                            if (dt != null && dt.Rows.Count > 0)
+                            {
+                                try
+                                {
+                                    string str = dt.Rows[0]["HO"] + " " + dt.Rows[0]["TEN"];
+                                }
+                                catch
+                                {
+
+                                }
+                            }
+                            navigationPage2.Controls.Add(dl);
+                            dl.Dock = DockStyle.Fill;
+                            dl.backWindowsUIButtonPanel.ButtonClick += BackWindowsUIButtonPanel_ButtonClick;
+                            navigationFrame1.SelectedPage = navigationPage2;
+                            accorMenuleft.Visible = false;
+                            Commons.Modules.ObjSystems.HideWaitForm();
+                            break;
+                        }
+
+                    case "xoa":
+                        {
+                            if (tileViewCN.RowCount == 0)
+                            {
+                                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgChonDongCanXuLy"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "sThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                return;
+                            }
+                            DeleteData();
+                            break;
+                        }
+                    case "thoat":
+                        {
+                            Commons.Modules.ObjSystems.GotoHome(this);
+                            break;
+                        }
+                    default:
+                        {
+                            break;
+                        }
+
+                }
             }
+            catch { }
         }
 
         private void tileViewCN_RowCountChanged(object sender, EventArgs e)

@@ -2683,3 +2683,4 @@ F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\es\DevExpress.Snap.v22.1.Core.res
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\ja\DevExpress.Snap.v22.1.Core.resources.dll
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\obj\Debug\VietSoftHRM.csproj.CopyComplete
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\obj\Debug\VietSoftHRM.pdb
+F:\01.HRM\01.VietSoftHRM\VietSoftHRM\obj\Debug\VietSoftHRM.frmThongBaoTuyenDung.resources

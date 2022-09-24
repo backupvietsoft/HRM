@@ -1879,6 +1879,7 @@ namespace Vs.Payroll
         }
         private void BangLuongThang_DM()
         {
+            this.Cursor = Cursors.WaitCursor;
             string sThang = cboThang.EditValue.ToString();
 
             System.Data.SqlClient.SqlConnection conn;
@@ -2148,8 +2149,11 @@ namespace Vs.Payroll
             }
             catch (Exception ex)
             {
+                this.Cursor = Cursors.Default;
+
                 MessageBox.Show(ex.Message);
             }
+            this.Cursor = Cursors.Default;
         }
         private void PhieuLuongThang_DM()
         {

@@ -243,7 +243,14 @@ namespace Vs.Recruit
                             dxValidationProvider11.RemoveControlError(cboID_TO);
                             dxValidationProvider11.RemoveControlError(datNGAY_NHAN_VIEC);
                             BindingData(false);
-                            windowsUIButtonPanel1.Buttons[0].Properties.Visible = true;
+                            if(TabThongTinTiepNhanUV.SelectedTabPage == TabChuyenSangNS)
+                            {
+                                windowsUIButtonPanel1.Buttons[0].Properties.Visible = true;
+                            }
+                            else
+                            {
+                                windowsUIButtonPanel1.Buttons[0].Properties.Visible = false;
+                            }
                             EnabelButton(true);
                             break;
                         }

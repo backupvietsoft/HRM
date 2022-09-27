@@ -108,7 +108,7 @@ namespace Vs.HRM
                                 break;
                             case 2:
                                 {
-                                    DateTime firstDateTime2 = new DateTime(Convert.ToInt32(txtNam.EditValue), 6, 1);
+                                    DateTime firstDateTime2 = new DateTime(Convert.ToInt32(txtNam.EditValue), 7, 1);
                                     DateTime secondDateTime2 = new DateTime(Convert.ToInt32(txtNam.EditValue), 12, 31);
                                     string sTieuDe2 = "BÁO CÁO TĂNG LAO ĐỘNG 6 THÁNG CUỐI NĂM " + Convert.ToString(txtNam.EditValue);
 

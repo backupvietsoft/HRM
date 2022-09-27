@@ -85,7 +85,7 @@ namespace Vs.HRM
             windowsUIButton.Buttons[6].Properties.Visible = !visible;
             windowsUIButton.Buttons[7].Properties.Visible = !visible;
             windowsUIButton.Buttons[8].Properties.Visible = visible;
-            Commons.Modules.bEnabel = !visible;
+
             grdTienLuong.Enabled = visible;
 
             ID_TOLookUpEdit.Properties.ReadOnly = visible;
@@ -346,6 +346,11 @@ namespace Vs.HRM
                         {
                             BAC_LUONGLookUpEdit.ErrorText = "";
                         }
+                        if((int)cboTinhTrang.EditValue != 2)
+                        {
+                            XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgChuyenSangTinhTrangDaKy"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            return;
+                        }
                         //kiem trung
                         System.Data.SqlClient.SqlConnection conn;
                         conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
@@ -365,7 +370,7 @@ namespace Vs.HRM
                         cmd.CommandType = CommandType.StoredProcedure;
                         if (Convert.ToInt16(cmd.ExecuteScalar()) == 1)
                         {
-                            XtraMessageBox.Show(ItemForSO_QUYET_DINH.Text + " " + Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgSoQD_NayDaTonTai"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "sThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            XtraMessageBox.Show(ItemForSO_QUYET_DINH.Text + " " + Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgSoQD_NayDaTonTai"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "sThongBao"),MessageBoxButtons.OK,MessageBoxIcon.Information);
                             SO_QUYET_DINHTextEdit.Focus();
                             return;
                         }
@@ -408,11 +413,19 @@ namespace Vs.HRM
                 ItemForTHUONG_HT_CV.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
                 ItemForPC_CON_NHO.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             }
+            if (Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString() == "DM")
+            {
+                ItemForLUONG_CO_BAN.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                ItemForPC_SINH_HOAT.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                ItemForTHUONG_CHUYEN_CAN.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                ItemForTHUONG_HT_CV.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                ItemForPC_KY_NANG.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+            }
             formatText();
             Commons.Modules.ObjSystems.MLoadLookUpEdit(ID_TOLookUpEdit, Commons.Modules.ObjSystems.DataTo(-1, -1, false), "ID_TO", "TEN_TO", "TEN_TO");
             Commons.Modules.ObjSystems.MLoadLookUpEdit(ID_NKLookUpEdit, Commons.Modules.ObjSystems.DataNguoiKy(), "ID_NK", "HO_TEN", "HO_TEN");
 
-            Commons.Modules.ObjSystems.MLoadLookUpEdit(ID_CVLookUpEdit, Commons.Modules.ObjSystems.DataChucVu(false, System.Convert.ToInt32(-1)), "ID_CV", "TEN_CV", "TEN_CV");
+            Commons.Modules.ObjSystems.MLoadLookUpEdit(ID_CVLookUpEdit, Commons.Modules.ObjSystems.DataChucVu(false,System.Convert.ToInt32(-1)), "ID_CV", "TEN_CV", "TEN_CV");
 
             Commons.Modules.sLoad = "0Load";
             Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(NGACH_LUONGLookUpEdit, Commons.Modules.ObjSystems.DataNgachLuong(false), "ID_NL", "MS_NL", "MS_NL", true);
@@ -580,7 +593,7 @@ namespace Vs.HRM
                         Commons.Modules.ObjSystems.OpenHinh(txtTaiLieu.Text);
                     }
                 }
-                catch
+                catch 
                 {
                 }
             }
@@ -597,7 +610,7 @@ namespace Vs.HRM
                 catch
                 {
                 }
-            }
+            }    
         }
     }
 }

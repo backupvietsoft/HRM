@@ -10,6 +10,7 @@ using Microsoft.Office.Interop.Excel;
 using DataTable = System.Data.DataTable;
 using System.Drawing;
 using System.Linq;
+using System.Globalization;
 
 namespace Vs.HRM
 {
@@ -20,6 +21,7 @@ namespace Vs.HRM
         {
             InitializeComponent();
             Commons.Modules.ObjSystems.ThayDoiNN(this);
+
         }
 
         private void windowsUIButton_ButtonClick(object sender, ButtonEventArgs e)
@@ -150,6 +152,53 @@ namespace Vs.HRM
             }
         }
 
+        private void LockTheoBieuDoSoCNVaoTheoThang()
+        {
+            LK_DON_VI.Properties.ReadOnly = false;
+            txNam.Properties.ReadOnly = false;
+
+            LK_XI_NGHIEP.Properties.ReadOnly = true;
+            LK_TO.Properties.ReadOnly = true;
+            dtTuNgay.Properties.ReadOnly = true;
+            dtDenNgay.Properties.ReadOnly = true;
+            lk_NgayIn.Properties.ReadOnly = true;
+        }
+
+        private void LockTheoBieuDoBaoCaoSoLaoDong()
+        {
+            LK_DON_VI.Properties.ReadOnly = false;
+            LK_XI_NGHIEP.Properties.ReadOnly = false;
+            LK_TO.Properties.ReadOnly = false;
+            lk_NgayIn.Properties.ReadOnly = false;
+
+            txNam.Properties.ReadOnly = true;
+            dtTuNgay.Properties.ReadOnly = true;
+            dtDenNgay.Properties.ReadOnly = true;
+        }
+
+        private void LockTheoBieuDoChiaTheoDiaLy()
+        {
+            LK_DON_VI.Properties.ReadOnly = false;
+            LK_XI_NGHIEP.Properties.ReadOnly = false;
+            LK_TO.Properties.ReadOnly = false;
+            lk_NgayIn.Properties.ReadOnly = false;
+
+            txNam.Properties.ReadOnly = true;
+            dtTuNgay.Properties.ReadOnly = true;
+            dtDenNgay.Properties.ReadOnly = true;
+        }
+
+        private void LockTheoBieuDoPhanLoai()
+        {
+            LK_DON_VI.Properties.ReadOnly = false;
+            LK_XI_NGHIEP.Properties.ReadOnly = false;
+            LK_TO.Properties.ReadOnly = false;
+            lk_NgayIn.Properties.ReadOnly = false;
+
+            txNam.Properties.ReadOnly = true;
+            dtTuNgay.Properties.ReadOnly = true;
+            dtDenNgay.Properties.ReadOnly = true;
+        }
         private void LoadBieuDoTron(Microsoft.Office.Interop.Excel.Worksheet ExcelSheets, Microsoft.Office.Interop.Excel.XlChartType xlChartType, string sTenCotBD, int iDongBD, string sTenCotKT, int iDongKT, string sTenCotBDTyLe, int iDongBD_TL, string sTenCotKTTyLe, int iDongKT_TL, string sTitle, int iSoLan,
             double iLeft, double iTop, double iWidth, double iHeight, Boolean bTitile)
         {
@@ -354,6 +403,7 @@ namespace Vs.HRM
                 cmd.Parameters.Add("@DVi", SqlDbType.Int).Value = LK_DON_VI.EditValue;
                 cmd.Parameters.Add("@XN", SqlDbType.Int).Value = LK_XI_NGHIEP.EditValue;
                 cmd.Parameters.Add("@TO", SqlDbType.Int).Value = LK_TO.EditValue;
+                cmd.Parameters.Add("@NGAYIN", SqlDbType.Date).Value = lk_NgayIn.EditValue;
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
@@ -630,6 +680,7 @@ namespace Vs.HRM
                 cmd.Parameters.Add("@DVi", SqlDbType.Int).Value = LK_DON_VI.EditValue;
                 cmd.Parameters.Add("@XN", SqlDbType.Int).Value = LK_XI_NGHIEP.EditValue;
                 cmd.Parameters.Add("@TO", SqlDbType.Int).Value = LK_TO.EditValue;
+                cmd.Parameters.Add("@NGAYIN", SqlDbType.Date).Value = lk_NgayIn.EditValue;
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
@@ -969,7 +1020,7 @@ namespace Vs.HRM
                 cmd.Parameters.Add("@DVi", SqlDbType.Int).Value = LK_DON_VI.EditValue;
                 cmd.Parameters.Add("@XN", SqlDbType.Int).Value = LK_XI_NGHIEP.EditValue;
                 cmd.Parameters.Add("@TO", SqlDbType.Int).Value = LK_TO.EditValue;
-                cmd.Parameters.Add("@Ngay", SqlDbType.DateTime).Value = Convert.ToDateTime(dtTuNgay.EditValue);
+                cmd.Parameters.Add("@Ngay", SqlDbType.DateTime).Value = Convert.ToDateTime(lk_NgayIn.EditValue);
                 cmd.CommandType = CommandType.StoredProcedure;
                 System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
 
@@ -1144,13 +1195,13 @@ namespace Vs.HRM
                     rowCnt1++;
                 }
                 rowCnt = rowCnt + 5;
-                oSheet.get_Range("N12", lastColumn + rowCnt.ToString()).Value2 = rowData1;
+                oSheet.get_Range("N12", "P" + rowCnt.ToString()).Value2 = rowData1;
 
                 formatRange = oSheet.get_Range("A5", lastColumn + "" + rowCnt + ""); //27 + 31
                 formatRange.Font.Size = fontSizeNoiDung;
                 formatRange.Font.Name = fontName;
 
-                BorderAround(oSheet.get_Range("N11", lastColumn + rowCnt.ToString()));
+                BorderAround(oSheet.get_Range("N11", "P" + rowCnt.ToString()));
 
                 for (col = 14; col <= 16; col++)
                 {
@@ -1238,9 +1289,10 @@ namespace Vs.HRM
                 cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
                 cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
                 cmd.Parameters.Add("@DVi", SqlDbType.Int).Value = LK_DON_VI.EditValue;
-                cmd.Parameters.Add("@XN", SqlDbType.Int).Value = LK_XI_NGHIEP.EditValue;
-                cmd.Parameters.Add("@TO", SqlDbType.Int).Value = LK_TO.EditValue;
+                //cmd.Parameters.Add("@XN", SqlDbType.Int).Value = LK_XI_NGHIEP.EditValue;
+                //cmd.Parameters.Add("@TO", SqlDbType.Int).Value = LK_TO.EditValue;
                 cmd.Parameters.Add("@Nam", SqlDbType.Int).Value = Convert.ToInt32(txNam.Text);
+                //cmd.Parameters.Add("@NGAYIN", SqlDbType.Date).Value = lk_NgayIn.EditValue;
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
@@ -1543,10 +1595,17 @@ namespace Vs.HRM
             Commons.OSystems.SetDateEditFormat(lk_NgayIn);
 
             lk_NgayIn.EditValue = DateTime.Today;
-            dtTuNgay.EditValue = Convert.ToDateTime(("01/" + DateTime.Today.Month + "/" + DateTime.Today.Year));
-            dtDenNgay.EditValue = Convert.ToDateTime(("01/" + DateTime.Today.Month + "/" + DateTime.Today.Year)).AddMonths(1).AddDays(-1);
+            dtTuNgay.EditValue = Convert.ToDateTime(("01/" + DateTime.Today.Month + "/" + DateTime.Today.Year), new CultureInfo("de-DE"));
+            dtDenNgay.EditValue = Convert.ToDateTime(("01/" + DateTime.Today.Month + "/" + DateTime.Today.Year), new CultureInfo("de-DE")).AddMonths(1).AddDays(-1);
             txNam.Text = (DateTime.Today.Year.ToString());
             Commons.Modules.sLoad = "";
+
+            dtTuNgay.Visible = false;
+            lbTuNgay.Visible = false;
+
+            dtDenNgay.Visible = false;
+            lbDenNgay.Visible = false;
+
 
         }
 
@@ -1561,51 +1620,6 @@ namespace Vs.HRM
         {
             if (Commons.Modules.sLoad == "0Load") return;
             Commons.Modules.ObjSystems.LoadCboTo(LK_DON_VI, LK_XI_NGHIEP, LK_TO);
-        }
-
-        private void rdo_ChonBaoCao_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            //try
-            //{
-            //    switch (rdo_ChonBaoCao.SelectedIndex)
-            //    {
-            //        case 0:
-            //            {
-            //                dtTuNgay.Enabled = true;
-            //                dtDenNgay.Enabled = true;
-            //                txNam.Enabled = false;
-            //            }
-            //            break;
-
-            //        case 1:
-            //            {
-            //                dtTuNgay.EditValue = new DateTime(int.Parse(txNam.Text), 1, 1);
-            //                dtDenNgay.EditValue = new DateTime(int.Parse(txNam.Text), 6, 30);
-            //                dtTuNgay.Enabled = false;
-            //                dtDenNgay.Enabled = false;
-            //                txNam.Enabled = true;
-            //            }
-            //            break;
-            //        case 2:
-            //            {
-            //                dtTuNgay.EditValue = new DateTime(int.Parse(txNam.Text), 7, 1);
-            //                dtDenNgay.EditValue = new DateTime(int.Parse(txNam.Text), 12, 31);
-            //                dtTuNgay.Enabled = false;
-            //                dtDenNgay.Enabled = false;
-            //                txNam.Enabled = true;
-            //            }
-            //            break;
-
-            //        default:
-            //            dtTuNgay.EditValue = Convert.ToDateTime(("01/" + DateTime.Today.Month + "/" + DateTime.Today.Year));
-            //            dtDenNgay.EditValue = Convert.ToDateTime(("01/" + DateTime.Today.Month + "/" + DateTime.Today.Year)).AddMonths(1).AddDays(-1);
-            //            dtTuNgay.Enabled = true;
-            //            dtDenNgay.Enabled = true;
-            //            break;
-            //    }
-            //}
-            //catch
-            //{ }
         }
 
         private void txNam_EditValueChanged(object sender, EventArgs e)
@@ -1637,6 +1651,42 @@ namespace Vs.HRM
             //Microsoft.Office.Interop.Excel.Axis axis = chartPage.Axes(Microsoft.Office.Interop.Excel.XlAxisType.xlValue, Microsoft.Office.Interop.Excel.XlAxisGroup.xlPrimary) as Microsoft.Office.Interop.Excel.Axis;
 
             series1.ApplyDataLabels(Microsoft.Office.Interop.Excel.XlDataLabelsType.xlDataLabelsShowPercent, true, true, false, true, true, true, true, true, true);
+        }
+
+        private void rdoChonBC_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch(rdoChonBC.SelectedIndex)
+            {
+                case 0:
+                    {
+                        LockTheoBieuDoPhanLoai();
+                        break;
+                    }
+                case 1:
+                    {
+                        LockTheoBieuDoChiaTheoDiaLy();
+                        break;
+                    }
+                case 2:
+                    {
+                        LockTheoBieuDoBaoCaoSoLaoDong();
+                        break;
+                    }
+                case 3:
+                    {
+                        LockTheoBieuDoSoCNVaoTheoThang();
+                        break;
+                    }
+                default:
+                    {
+                        break;
+                    }
+            }
+        }
+
+        private void dtTuNgay_EditValueChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

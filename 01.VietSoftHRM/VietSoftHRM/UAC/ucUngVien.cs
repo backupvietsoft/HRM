@@ -150,7 +150,7 @@ namespace VietSoftHRM
                         //ns.Dock = DockStyle.Fill;
                         break;
                     }
-                case "mnuTiepNhanUV":
+                case "mnuTiepNhanUngVien":
                     {
                         ucTiepNhanUngVien ns = new ucTiepNhanUngVien();
                         panel2.Controls.Clear();
@@ -281,7 +281,7 @@ namespace VietSoftHRM
                         ns.Dock = DockStyle.Fill;
                         break;
                     }
-                case "mnuTiepNhanUV":
+                case "mnuTiepNhanUngVien":
                     {
                         ucTiepNhanUngVien ns = new ucTiepNhanUngVien();
                         panel2.Controls.Clear();

@@ -28,19 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions5 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions6 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions1 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmCapNhatNhanh));
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions7 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions8 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions2 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
             this.tablePanel1 = new DevExpress.Utils.Layout.TablePanel();
             this.dataLayoutControl1 = new DevExpress.XtraDataLayout.DataLayoutControl();
             this.grdDSUngVien = new DevExpress.XtraGrid.GridControl();
             this.grvDSUngVien = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.cboTruongCapNhat = new DevExpress.XtraEditors.SearchLookUpEdit();
-            this.searchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.lblTruongCapNhat = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.btnALL = new DevExpress.XtraBars.Docking2010.WindowsUIButtonPanel();
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).BeginInit();
@@ -49,10 +44,7 @@
             this.dataLayoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdDSUngVien)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grvDSUngVien)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cboTruongCapNhat.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lblTruongCapNhat)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             this.SuspendLayout();
             // 
@@ -78,7 +70,6 @@
             // 
             this.tablePanel1.SetColumn(this.dataLayoutControl1, 1);
             this.dataLayoutControl1.Controls.Add(this.grdDSUngVien);
-            this.dataLayoutControl1.Controls.Add(this.cboTruongCapNhat);
             this.dataLayoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataLayoutControl1.Location = new System.Drawing.Point(13, 11);
             this.dataLayoutControl1.Name = "dataLayoutControl1";
@@ -90,10 +81,10 @@
             // 
             // grdDSUngVien
             // 
-            this.grdDSUngVien.Location = new System.Drawing.Point(12, 40);
+            this.grdDSUngVien.Location = new System.Drawing.Point(12, 12);
             this.grdDSUngVien.MainView = this.grvDSUngVien;
             this.grdDSUngVien.Name = "grdDSUngVien";
-            this.grdDSUngVien.Size = new System.Drawing.Size(750, 338);
+            this.grdDSUngVien.Size = new System.Drawing.Size(750, 366);
             this.grdDSUngVien.TabIndex = 5;
             this.grdDSUngVien.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grvDSUngVien});
@@ -109,51 +100,22 @@
             this.grvDSUngVien.ValidateRow += new DevExpress.XtraGrid.Views.Base.ValidateRowEventHandler(this.grvDSUngVien_ValidateRow);
             this.grvDSUngVien.InvalidValueException += new DevExpress.XtraEditors.Controls.InvalidValueExceptionEventHandler(this.grvDSUngVien_InvalidValueException);
             // 
-            // cboTruongCapNhat
-            // 
-            this.cboTruongCapNhat.Location = new System.Drawing.Point(123, 12);
-            this.cboTruongCapNhat.Name = "cboTruongCapNhat";
-            this.cboTruongCapNhat.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cboTruongCapNhat.Properties.NullText = "";
-            this.cboTruongCapNhat.Properties.PopupView = this.searchLookUpEdit1View;
-            this.cboTruongCapNhat.Size = new System.Drawing.Size(639, 24);
-            this.cboTruongCapNhat.StyleController = this.dataLayoutControl1;
-            this.cboTruongCapNhat.TabIndex = 4;
-            this.cboTruongCapNhat.EditValueChanged += new System.EventHandler(this.cboTruongCapNhat_EditValueChanged);
-            // 
-            // searchLookUpEdit1View
-            // 
-            this.searchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
-            this.searchLookUpEdit1View.Name = "searchLookUpEdit1View";
-            this.searchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
-            this.searchLookUpEdit1View.OptionsView.ShowGroupPanel = false;
-            // 
             // Root
             // 
             this.Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
             this.Root.GroupBordersVisible = false;
             this.Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.lblTruongCapNhat,
             this.layoutControlItem2});
             this.Root.Name = "Root";
             this.Root.Size = new System.Drawing.Size(774, 390);
             this.Root.TextVisible = false;
             // 
-            // lblTruongCapNhat
-            // 
-            this.lblTruongCapNhat.Control = this.cboTruongCapNhat;
-            this.lblTruongCapNhat.Location = new System.Drawing.Point(0, 0);
-            this.lblTruongCapNhat.Name = "lblTruongCapNhat";
-            this.lblTruongCapNhat.Size = new System.Drawing.Size(754, 28);
-            this.lblTruongCapNhat.TextSize = new System.Drawing.Size(107, 17);
-            // 
             // layoutControlItem2
             // 
             this.layoutControlItem2.Control = this.grdDSUngVien;
-            this.layoutControlItem2.Location = new System.Drawing.Point(0, 28);
+            this.layoutControlItem2.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(754, 342);
+            this.layoutControlItem2.Size = new System.Drawing.Size(754, 370);
             this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem2.TextVisible = false;
             // 
@@ -174,16 +136,11 @@
             this.btnALL.AppearanceButton.Pressed.Options.UseFont = true;
             this.btnALL.AppearanceButton.Pressed.Options.UseImage = true;
             this.btnALL.AppearanceButton.Pressed.Options.UseTextOptions = true;
-            windowsUIButtonImageOptions5.ImageUri.Uri = "Edit";
-            windowsUIButtonImageOptions6.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("windowsUIButtonImageOptions6.SvgImage")));
-            windowsUIButtonImageOptions7.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("windowsUIButtonImageOptions7.SvgImage")));
-            windowsUIButtonImageOptions8.ImageUri.Uri = "richedit/clearheaderandfooter";
+            windowsUIButtonImageOptions1.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("windowsUIButtonImageOptions1.SvgImage")));
+            windowsUIButtonImageOptions2.ImageUri.Uri = "richedit/clearheaderandfooter";
             this.btnALL.Buttons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] {
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions5, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "sua", -1, false),
-            new DevExpress.XtraBars.Docking2010.WindowsUISeparator(),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions6, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "ghi", -1, false),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions7, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "khongghi", -1, false),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions8, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "thoat", -1, false)});
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions1, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "ghi", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions2, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "thoat", -1, false)});
             this.tablePanel1.SetColumn(this.btnALL, 0);
             this.tablePanel1.SetColumnSpan(this.btnALL, 3);
             this.btnALL.ContentAlignment = System.Drawing.ContentAlignment.MiddleRight;
@@ -215,10 +172,7 @@
             this.dataLayoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.grdDSUngVien)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grvDSUngVien)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cboTruongCapNhat.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lblTruongCapNhat)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             this.ResumeLayout(false);
 
@@ -232,9 +186,6 @@
         private DevExpress.XtraBars.Docking2010.WindowsUIButtonPanel btnALL;
         private DevExpress.XtraGrid.GridControl grdDSUngVien;
         private DevExpress.XtraGrid.Views.Grid.GridView grvDSUngVien;
-        private DevExpress.XtraEditors.SearchLookUpEdit cboTruongCapNhat;
-        private DevExpress.XtraGrid.Views.Grid.GridView searchLookUpEdit1View;
-        private DevExpress.XtraLayout.LayoutControlItem lblTruongCapNhat;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
     }
 }

@@ -28,6 +28,10 @@ namespace Vs.HRM
             InitializeComponent();
             Commons.Modules.ObjSystems.ThayDoiNN(this);
 
+            //Danh cho NB
+            this.chkInAll.Visible = false;
+            this.lblInTatCa.Visible = false;
+
         }
 
         private void windowsUIButton_ButtonClick(object sender, ButtonEventArgs e)
@@ -457,10 +461,17 @@ namespace Vs.HRM
                 int row_dl = 4;
                 for (col = 0; col < dtBCThang.Columns.Count - 1; col++)
                 {
-                    //oSheet.Cells[row_dl, col + 1] =  dtBCThang.Columns[col].ToString();
-                    //oSheet.Cells[row_dl, col + 1] = tableHRow.Cells[col].Text;
-                    oSheet.Cells[row_dl, col + 1] = dt.Rows[col]["DIEN_GIAI"];
-                    oSheet.Cells[row_dl, col + 1].ColumnWidth = dt.Rows[col]["CHIEU_RONG"];
+                    try
+                    {
+                        //oSheet.Cells[row_dl, col + 1] =  dtBCThang.Columns[col].ToString();
+                        //oSheet.Cells[row_dl, col + 1] = tableHRow.Cells[col].Text;
+                        oSheet.Cells[row_dl, col + 1] = dt.Rows[col]["DIEN_GIAI"];
+                        oSheet.Cells[row_dl, col + 1].ColumnWidth = dt.Rows[col]["CHIEU_RONG"];
+                    }
+                    catch(Exception ex)
+                    {
+                        throw ex;
+                    }
                 }
 
                 int rowCnt = 0;
@@ -609,8 +620,16 @@ namespace Vs.HRM
                 formatRange.Font.Size = fontSizeNoiDung;
                 BorderAround(oSheet.get_Range("A4", lastColumn + (rowCnt + 1).ToString()));
 
-                Excel.Range myRange = oSheet.get_Range("A4", lastColumn + (rowCnt - 1).ToString());
-                myRange.AutoFilter("1", "<>", Excel.XlAutoFilterOperator.xlOr, "", true);
+                if(dtBCThang.Rows.Count == 0)
+                {
+                    Excel.Range myRange = oSheet.get_Range("A4", lastColumn + "4");
+                    myRange.AutoFilter("1", "<>", Excel.XlAutoFilterOperator.xlOr, "", true);
+                }
+                else
+                {
+                    Excel.Range myRange = oSheet.get_Range("A4", lastColumn + (rowCnt - 1).ToString());
+                    myRange.AutoFilter("1", "<>", Excel.XlAutoFilterOperator.xlOr, "", true);
+                }
 
                 oXL.Visible = true;
                 oXL.UserControl = true;

@@ -401,6 +401,33 @@ namespace Commons
             }
         }
 
+        public DataTable DataFocusRows(DataTable data, DevExpress.XtraGrid.Views.Grid.GridView grv)
+        {
+            DataTable dt = new DataTable();
+            try
+            {
+                DataRow dr;
+                DataRow row;
+                dt = data.Clone();
+                Int32[] selectedRowHandles = grv.GetSelectedRows();
+                for (int i = 0; i < selectedRowHandles.Length; i++)
+                {
+                    int selectedRowHandle = selectedRowHandles[i];
+                    if (selectedRowHandle >= 0)
+                    {
+                        dr = grv.GetDataRow(selectedRowHandle);
+                        row = dt.NewRow();
+                        for (int j = 0; j < dt.Columns.Count; j++)
+                        {
+                            row[dt.Columns[j].ColumnName] = dr[dt.Columns[j].ColumnName];
+                        }
+                        dt.Rows.Add(row);
+                    }
+                }
+                return dt;
+            }
+            catch { return dt = null; }
+        }
 
         public string KyHieuDV_CN(Int64 ID_CN)
         {

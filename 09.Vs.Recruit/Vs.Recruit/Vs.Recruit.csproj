@@ -232,11 +232,23 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form\frmPhieuDTDH.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\frmPhieuDTDH.Designer.cs">
+      <DependentUpon>frmPhieuDTDH.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form\frmCapNhatNhanh.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form\frmCapNhatNhanh.Designer.cs">
       <DependentUpon>frmCapNhatNhanh.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form\frmInGiayHenDiLam.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\frmInGiayHenDiLam.Designer.cs">
+      <DependentUpon>frmInGiayHenDiLam.cs</DependentUpon>
     </Compile>
     <Compile Include="Form\frmThongTinTiepNhanUV.cs">
       <SubType>Form</SubType>
@@ -495,8 +507,14 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form\frmPhieuDTDH.resx">
+      <DependentUpon>frmPhieuDTDH.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form\frmCapNhatNhanh.resx">
       <DependentUpon>frmCapNhatNhanh.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\frmInGiayHenDiLam.resx">
+      <DependentUpon>frmInGiayHenDiLam.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\frmThongTinTiepNhanUV.resx">
       <DependentUpon>frmThongTinTiepNhanUV.cs</DependentUpon>

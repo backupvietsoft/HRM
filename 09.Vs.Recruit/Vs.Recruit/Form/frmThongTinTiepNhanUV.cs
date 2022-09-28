@@ -76,12 +76,14 @@ namespace Vs.Recruit
                             cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
                             cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
                             cmd.Parameters.Add("@sDanhMuc", SqlDbType.NVarChar).Value = "THONG_TIN_TN_UV";
+                            cmd.Parameters.Add("@iLoai", SqlDbType.Int).Value = 0;
                             cmd.Parameters.Add("@sBT1", SqlDbType.NVarChar).Value = sBT;
                             cmd.Parameters.Add("@DNgay1", SqlDbType.DateTime).Value = datNgayHenDL.Text == "" ? datNgayHenDL.EditValue = null : Commons.Modules.ObjSystems.ConvertDateTime(datNgayHenDL.Text);
                             cmd.Parameters.Add("@DNgay2", SqlDbType.DateTime).Value = datNGAY_NHAN_VIEC.Text == "" ? datNGAY_NHAN_VIEC.EditValue = null : Commons.Modules.ObjSystems.ConvertDateTime(datNGAY_NHAN_VIEC.Text);
                             cmd.Parameters.Add("@iCot1", SqlDbType.BigInt).Value = cboID_LHDLD.Text == "" ? cboID_LHDLD.EditValue = null : Convert.ToInt64(cboID_LHDLD.EditValue);
                             cmd.Parameters.Add("@bCot1", SqlDbType.Bit).Value = chkHOAN_THANH_DT.EditValue;
                             cmd.Parameters.Add("@iCot2", SqlDbType.BigInt).Value = cboNGUOI_DT.Text == "" ? cboNGUOI_DT.EditValue = null : Convert.ToInt64(cboNGUOI_DT.EditValue);
+                            cmd.Parameters.Add("@fCot1", SqlDbType.Float).Value = txtMUC_LUONG_DN.Text == "" ? txtMUC_LUONG_DN.EditValue = null : Convert.ToDouble(txtMUC_LUONG_DN.Text);
                             cmd.CommandType = CommandType.StoredProcedure;
                             cmd.ExecuteNonQuery();
 

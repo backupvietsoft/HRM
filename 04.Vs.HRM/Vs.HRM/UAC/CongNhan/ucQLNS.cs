@@ -89,7 +89,11 @@ namespace Vs.HRM
         private void LoadTinhTrangHienTai()
         {
             DataTable dt = new DataTable();
-            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboTinhTrangHT", Commons.Modules.UserName, Commons.Modules.TypeLanguage, 0));
+            string strSQL = "SELECT T1.ID_TT_HT, T1.TEN_TT_HT FROM (SELECT ID_TT_HT, CASE " + Commons.Modules.TypeLanguage + " WHEN 0 THEN TEN_TT_HT WHEN 1 THEN ISNULL(NULLIF(TEN_TT_HT_A,''),TEN_TT_HT) ELSE ISNULL(NULLIF(TEN_TT_HT_H,''),TEN_TT_HT) END AS TEN_TT_HT, STT " +
+                "FROM dbo.TINH_TRANG_HT " +
+                "UNION SELECT - 1 AS ID_TT_HT, CASE " + Commons.Modules.TypeLanguage + " WHEN 0 THEN VIETNAM WHEN 1 THEN ISNULL(NULLIF (ENGLISH, ''), VIETNAM) ELSE ISNULL(NULLIF (CHINESE, ''), VIETNAM) END AS TEN_DK , 0  " +
+                "FROM dbo.LANGUAGES WHERE(KEYWORD = 'ConDiLam') AND(FORM = 'ucQLNS')) T1 ORDER BY T1.STT, T1.TEN_TT_HT";
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, strSQL));
             Commons.Modules.ObjSystems.MLoadLookUpEdit(cbo_TTHT, dt, "ID_TT_HT", "TEN_TT_HT", "TEN_TT_HT");
         }
         private void cboDV_EditValueChanged(object sender, EventArgs e)

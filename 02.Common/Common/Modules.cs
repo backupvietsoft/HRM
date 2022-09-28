@@ -104,7 +104,6 @@ namespace Commons
                 _msgTitle = value;
             }
         }
-
         //định nghĩa giờ làm mặc định
         private static int _iGio;
         public static int iGio

@@ -331,16 +331,10 @@ namespace Vs.Recruit
                             dt = ds.Tables[0].Copy();
                             dt.TableName = "DA_TA";
                             frm.AddDataSource(dt);
-
-                            //dt = ds.Tables[1].Copy();
-                            //dt.TableName = "NOI_DUNG";
-                            //frm.AddDataSource(dt);
-                            //frm.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung());
                         }
                         catch
                         {
                         }
-
                         frm.ShowDialog();
                         break;
                     }

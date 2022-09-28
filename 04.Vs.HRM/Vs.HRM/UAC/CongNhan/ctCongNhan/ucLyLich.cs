@@ -419,17 +419,21 @@ namespace Vs.HRM
                         if (MS_CNTextEdit.Text != "") if (!kiemtrung(1)) return;
                         if (MS_THE_CCTextEdit.Text != "") if (!kiemtrung(2)) return;
                         if (!kiemtrung(3)) return;
-                        if (Commons.Modules.ObjSystems.kiemTrungMS("CONG_NHAN", "MS_CN", MS_CNTextEdit.Text))
+                        if (Commons.Modules.iCongNhan == -1)
                         {
-                            if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgMSCNDaTrungBanCoMuonTaoMaMoi"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) return;
-                            MS_CNTextEdit.Text = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.AUTO_CREATE_SO_CONG_NHAN(" + (ID_DVLookUpEdit.Text == "" ? -1 : Convert.ToInt32(ID_DVLookUpEdit.EditValue)) + ",1)").ToString();
-                            return;
-                        }
-                        if (Commons.Modules.ObjSystems.kiemTrungMS("CONG_NHAN", "MS_THE_CC", MS_THE_CCTextEdit.Text))
-                        {
-                            if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgMSTheCCDaTrungBanCoMuonTaoMaMoi"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) return;
-                            MS_THE_CCTextEdit.Text = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.AUTO_CREATE_SO_CONG_NHAN(" + (ID_DVLookUpEdit.Text == "" ? -1 : Convert.ToInt32(ID_DVLookUpEdit.EditValue)) + ",2)").ToString();
-                            return;
+
+                            if (Commons.Modules.ObjSystems.kiemTrungMS("CONG_NHAN", "MS_CN", MS_CNTextEdit.Text))
+                            {
+                                if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgMSCNDaTrungBanCoMuonTaoMaMoi"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) return;
+                                MS_CNTextEdit.Text = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.AUTO_CREATE_SO_CONG_NHAN(" + (ID_DVLookUpEdit.Text == "" ? -1 : Convert.ToInt32(ID_DVLookUpEdit.EditValue)) + ",1)").ToString();
+                                return;
+                            }
+                            if (Commons.Modules.ObjSystems.kiemTrungMS("CONG_NHAN", "MS_THE_CC", MS_THE_CCTextEdit.Text))
+                            {
+                                if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgMSTheCCDaTrungBanCoMuonTaoMaMoi"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) return;
+                                MS_THE_CCTextEdit.Text = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.AUTO_CREATE_SO_CONG_NHAN(" + (ID_DVLookUpEdit.Text == "" ? -1 : Convert.ToInt32(ID_DVLookUpEdit.EditValue)) + ",2)").ToString();
+                                return;
+                            }
                         }
                         if (SaveData())
                         {

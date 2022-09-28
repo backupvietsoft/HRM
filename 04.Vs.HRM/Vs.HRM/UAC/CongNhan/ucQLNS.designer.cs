@@ -44,6 +44,7 @@
             DevExpress.XtraEditors.TableLayout.TableRowDefinition tableRowDefinition7 = new DevExpress.XtraEditors.TableLayout.TableRowDefinition();
             DevExpress.XtraEditors.TableLayout.TableRowDefinition tableRowDefinition8 = new DevExpress.XtraEditors.TableLayout.TableRowDefinition();
             DevExpress.XtraEditors.TableLayout.TableRowDefinition tableRowDefinition9 = new DevExpress.XtraEditors.TableLayout.TableRowDefinition();
+            DevExpress.XtraEditors.TableLayout.TableRowDefinition tableRowDefinition10 = new DevExpress.XtraEditors.TableLayout.TableRowDefinition();
             DevExpress.XtraEditors.TableLayout.TableSpan tableSpan1 = new DevExpress.XtraEditors.TableLayout.TableSpan();
             DevExpress.XtraEditors.TableLayout.TableSpan tableSpan2 = new DevExpress.XtraEditors.TableLayout.TableSpan();
             DevExpress.XtraGrid.Views.Tile.TileViewItemElement tileViewItemElement1 = new DevExpress.XtraGrid.Views.Tile.TileViewItemElement();
@@ -68,6 +69,11 @@
             DevExpress.XtraGrid.Views.Tile.TileViewItemElement tileViewItemElement20 = new DevExpress.XtraGrid.Views.Tile.TileViewItemElement();
             DevExpress.XtraGrid.Views.Tile.TileViewItemElement tileViewItemElement21 = new DevExpress.XtraGrid.Views.Tile.TileViewItemElement();
             DevExpress.XtraGrid.Views.Tile.TileViewItemElement tileViewItemElement22 = new DevExpress.XtraGrid.Views.Tile.TileViewItemElement();
+            DevExpress.XtraGrid.Views.Tile.TileViewItemElement tileViewItemElement23 = new DevExpress.XtraGrid.Views.Tile.TileViewItemElement();
+            DevExpress.XtraGrid.Views.Tile.TileViewItemElement tileViewItemElement24 = new DevExpress.XtraGrid.Views.Tile.TileViewItemElement();
+            DevExpress.XtraGrid.Views.Tile.TileViewItemElement tileViewItemElement25 = new DevExpress.XtraGrid.Views.Tile.TileViewItemElement();
+            DevExpress.XtraGrid.Views.Tile.TileViewItemElement tileViewItemElement26 = new DevExpress.XtraGrid.Views.Tile.TileViewItemElement();
+            DevExpress.XtraGrid.Views.Tile.TileViewItemElement tileViewItemElement27 = new DevExpress.XtraGrid.Views.Tile.TileViewItemElement();
             DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions1 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
             DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions2 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
             DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions3 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
@@ -78,7 +84,7 @@
             this.MS_THE_CC = new DevExpress.XtraGrid.Columns.TileViewColumn();
             this.TEN_TT_HD = new DevExpress.XtraGrid.Columns.TileViewColumn();
             this.TEN_TT_HT = new DevExpress.XtraGrid.Columns.TileViewColumn();
-            this.TEN_CV = new DevExpress.XtraGrid.Columns.TileViewColumn();
+            this.TEN_LCV = new DevExpress.XtraGrid.Columns.TileViewColumn();
             this.TEN_XN = new DevExpress.XtraGrid.Columns.TileViewColumn();
             this.colTO = new DevExpress.XtraGrid.Columns.TileViewColumn();
             this.colXN = new DevExpress.XtraGrid.Columns.TileViewColumn();
@@ -89,6 +95,8 @@
             this.HINH_CN = new DevExpress.XtraGrid.Columns.TileViewColumn();
             this.TEN_TO = new DevExpress.XtraGrid.Columns.TileViewColumn();
             this.colPC = new DevExpress.XtraGrid.Columns.TileViewColumn();
+            this.NGAY_VAO_CTY = new DevExpress.XtraGrid.Columns.TileViewColumn();
+            this.colNVL = new DevExpress.XtraGrid.Columns.TileViewColumn();
             this.grdNS = new DevExpress.XtraGrid.GridControl();
             this.tileViewCN = new DevExpress.XtraGrid.Views.Tile.TileView();
             this.MAU_TT = new DevExpress.XtraGrid.Columns.TileViewColumn();
@@ -195,15 +203,15 @@
             this.TEN_TT_HT.VisibleIndex = 6;
             this.TEN_TT_HT.Width = 66;
             // 
-            // TEN_CV
+            // TEN_LCV
             // 
-            this.TEN_CV.Caption = "TEN_CV";
-            this.TEN_CV.FieldName = "TEN_CV";
-            this.TEN_CV.MinWidth = 17;
-            this.TEN_CV.Name = "TEN_CV";
-            this.TEN_CV.Visible = true;
-            this.TEN_CV.VisibleIndex = 7;
-            this.TEN_CV.Width = 66;
+            this.TEN_LCV.Caption = "TEN_LCV";
+            this.TEN_LCV.FieldName = "TEN_LCV";
+            this.TEN_LCV.MinWidth = 17;
+            this.TEN_LCV.Name = "TEN_LCV";
+            this.TEN_LCV.Visible = true;
+            this.TEN_LCV.VisibleIndex = 7;
+            this.TEN_LCV.Width = 66;
             // 
             // TEN_XN
             // 
@@ -307,17 +315,33 @@
             this.colPC.VisibleIndex = 17;
             this.colPC.Width = 66;
             // 
+            // NGAY_VAO_CTY
+            // 
+            this.NGAY_VAO_CTY.Caption = "NGAY_VAO_CTY";
+            this.NGAY_VAO_CTY.FieldName = "NGAY_VAO_CTY";
+            this.NGAY_VAO_CTY.Name = "NGAY_VAO_CTY";
+            this.NGAY_VAO_CTY.Visible = true;
+            this.NGAY_VAO_CTY.VisibleIndex = 18;
+            // 
+            // colNVL
+            // 
+            this.colNVL.Caption = "colNVL";
+            this.colNVL.FieldName = "colNVL";
+            this.colNVL.Name = "colNVL";
+            this.colNVL.Visible = true;
+            this.colNVL.VisibleIndex = 19;
+            // 
             // grdNS
             // 
             this.grdNS.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             gridLevelNode1.RelationName = "Level1";
             this.grdNS.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
             gridLevelNode1});
-            this.grdNS.Location = new System.Drawing.Point(1, 72);
+            this.grdNS.Location = new System.Drawing.Point(2, 79);
             this.grdNS.MainView = this.tileViewCN;
             this.grdNS.Margin = new System.Windows.Forms.Padding(4);
             this.grdNS.Name = "grdNS";
-            this.grdNS.Size = new System.Drawing.Size(1107, 471);
+            this.grdNS.Size = new System.Drawing.Size(1105, 461);
             this.grdNS.TabIndex = 8;
             this.grdNS.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.tileViewCN,
@@ -334,7 +358,7 @@
             this.TEN_TO,
             this.TEN_TT_HD,
             this.TEN_TT_HT,
-            this.TEN_CV,
+            this.TEN_LCV,
             this.TEN_XN,
             this.MAU_TT,
             this.ID_CN,
@@ -344,7 +368,9 @@
             this.colCV,
             this.colXN,
             this.colTO,
-            this.colPC});
+            this.colPC,
+            this.NGAY_VAO_CTY,
+            this.colNVL});
             this.tileViewCN.DetailHeight = 190;
             this.tileViewCN.FocusBorderColor = System.Drawing.Color.LightSkyBlue;
             this.tileViewCN.GridControl = this.grdNS;
@@ -355,31 +381,31 @@
             this.tileViewCN.OptionsTiles.IndentBetweenItems = 6;
             this.tileViewCN.OptionsTiles.ItemBorderVisibility = DevExpress.XtraEditors.TileItemBorderVisibility.Always;
             this.tileViewCN.OptionsTiles.ItemPadding = new System.Windows.Forms.Padding(0);
-            this.tileViewCN.OptionsTiles.ItemSize = new System.Drawing.Size(462, 176);
+            this.tileViewCN.OptionsTiles.ItemSize = new System.Drawing.Size(462, 185);
             this.tileViewCN.OptionsTiles.Padding = new System.Windows.Forms.Padding(0);
             this.tileViewCN.OptionsTiles.RowCount = 5;
             this.tileViewCN.OptionsTiles.VerticalContentAlignment = DevExpress.Utils.VertAlignment.Top;
-            tableColumnDefinition1.Length.Value = 7D;
-            tableColumnDefinition2.Length.Value = 116D;
+            tableColumnDefinition2.Length.Value = 121D;
             tableColumnDefinition3.Length.Value = 7D;
-            tableColumnDefinition4.Length.Value = 141D;
+            tableColumnDefinition4.Length.Value = 143D;
             tableColumnDefinition5.Length.Value = 5D;
-            tableColumnDefinition6.Length.Value = 186D;
+            tableColumnDefinition6.Length.Value = 185D;
             this.tileViewCN.TileColumns.Add(tableColumnDefinition1);
             this.tileViewCN.TileColumns.Add(tableColumnDefinition2);
             this.tileViewCN.TileColumns.Add(tableColumnDefinition3);
             this.tileViewCN.TileColumns.Add(tableColumnDefinition4);
             this.tileViewCN.TileColumns.Add(tableColumnDefinition5);
             this.tileViewCN.TileColumns.Add(tableColumnDefinition6);
-            tableRowDefinition1.Length.Value = 26D;
-            tableRowDefinition2.Length.Value = 5D;
-            tableRowDefinition3.Length.Value = 23D;
+            tableRowDefinition1.Length.Value = 25D;
+            tableRowDefinition2.Length.Value = 0D;
+            tableRowDefinition3.Length.Value = 26D;
             tableRowDefinition4.Length.Value = 23D;
             tableRowDefinition5.Length.Value = 23D;
-            tableRowDefinition6.Length.Value = 23D;
-            tableRowDefinition7.Length.Value = 23D;
+            tableRowDefinition6.Length.Value = 24D;
+            tableRowDefinition7.Length.Value = 24D;
             tableRowDefinition8.Length.Value = 24D;
-            tableRowDefinition9.Length.Value = 6D;
+            tableRowDefinition9.Length.Value = 25D;
+            tableRowDefinition10.Length.Value = 3D;
             this.tileViewCN.TileRows.Add(tableRowDefinition1);
             this.tileViewCN.TileRows.Add(tableRowDefinition2);
             this.tileViewCN.TileRows.Add(tableRowDefinition3);
@@ -389,6 +415,7 @@
             this.tileViewCN.TileRows.Add(tableRowDefinition7);
             this.tileViewCN.TileRows.Add(tableRowDefinition8);
             this.tileViewCN.TileRows.Add(tableRowDefinition9);
+            this.tileViewCN.TileRows.Add(tableRowDefinition10);
             tableSpan1.ColumnIndex = 3;
             tableSpan1.ColumnSpan = 3;
             tableSpan2.ColumnIndex = 1;
@@ -430,22 +457,22 @@
             tileViewItemElement5.ColumnIndex = 5;
             tileViewItemElement5.ImageOptions.ImageAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
             tileViewItemElement5.ImageOptions.ImageScaleMode = DevExpress.XtraEditors.TileItemImageScaleMode.ZoomInside;
-            tileViewItemElement5.RowIndex = 7;
+            tileViewItemElement5.RowIndex = 8;
             tileViewItemElement5.Text = "TEN_TT_HD";
             tileViewItemElement5.TextAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleLeft;
             tileViewItemElement6.Column = this.TEN_TT_HT;
             tileViewItemElement6.ColumnIndex = 5;
             tileViewItemElement6.ImageOptions.ImageAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
             tileViewItemElement6.ImageOptions.ImageScaleMode = DevExpress.XtraEditors.TileItemImageScaleMode.ZoomInside;
-            tileViewItemElement6.RowIndex = 6;
+            tileViewItemElement6.RowIndex = 7;
             tileViewItemElement6.Text = "TEN_TT_HT";
             tileViewItemElement6.TextAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleLeft;
-            tileViewItemElement7.Column = this.TEN_CV;
+            tileViewItemElement7.Column = this.TEN_LCV;
             tileViewItemElement7.ColumnIndex = 5;
             tileViewItemElement7.ImageOptions.ImageAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
             tileViewItemElement7.ImageOptions.ImageScaleMode = DevExpress.XtraEditors.TileItemImageScaleMode.ZoomInside;
             tileViewItemElement7.RowIndex = 5;
-            tileViewItemElement7.Text = "TEN_CV";
+            tileViewItemElement7.Text = "TEN_LCV";
             tileViewItemElement7.TextAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleLeft;
             tileViewItemElement8.Column = this.TEN_XN;
             tileViewItemElement8.ColumnIndex = 5;
@@ -479,14 +506,14 @@
             tileViewItemElement12.ColumnIndex = 3;
             tileViewItemElement12.ImageOptions.ImageAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
             tileViewItemElement12.ImageOptions.ImageScaleMode = DevExpress.XtraEditors.TileItemImageScaleMode.ZoomInside;
-            tileViewItemElement12.RowIndex = 6;
+            tileViewItemElement12.RowIndex = 7;
             tileViewItemElement12.Text = "colTTLV";
             tileViewItemElement12.TextAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleLeft;
             tileViewItemElement13.Column = this.colTTHD;
             tileViewItemElement13.ColumnIndex = 3;
             tileViewItemElement13.ImageOptions.ImageAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
             tileViewItemElement13.ImageOptions.ImageScaleMode = DevExpress.XtraEditors.TileItemImageScaleMode.ZoomInside;
-            tileViewItemElement13.RowIndex = 7;
+            tileViewItemElement13.RowIndex = 8;
             tileViewItemElement13.Text = "colTTHD";
             tileViewItemElement13.TextAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleLeft;
             tileViewItemElement14.Column = this.colMSCC;
@@ -500,7 +527,7 @@
             tileViewItemElement15.ColumnIndex = 1;
             tileViewItemElement15.ImageOptions.ImageAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
             tileViewItemElement15.ImageOptions.ImageScaleMode = DevExpress.XtraEditors.TileItemImageScaleMode.Stretch;
-            tileViewItemElement15.RowIndex = 5;
+            tileViewItemElement15.RowIndex = 7;
             tileViewItemElement15.StretchHorizontal = true;
             tileViewItemElement15.StretchVertical = true;
             tileViewItemElement15.Text = "HINH_CN";
@@ -546,13 +573,44 @@
             tileViewItemElement21.RowIndex = 6;
             tileViewItemElement21.Text = "colPC";
             tileViewItemElement21.TextAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
-            tileViewItemElement22.Column = this.colPC;
-            tileViewItemElement22.ColumnIndex = 4;
+            tileViewItemElement22.Column = this.NGAY_VAO_CTY;
             tileViewItemElement22.ImageOptions.ImageAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
-            tileViewItemElement22.ImageOptions.ImageScaleMode = DevExpress.XtraEditors.TileItemImageScaleMode.ZoomInside;
-            tileViewItemElement22.RowIndex = 7;
-            tileViewItemElement22.Text = "colPC";
+            tileViewItemElement22.ImageOptions.ImageScaleMode = DevExpress.XtraEditors.TileItemImageScaleMode.Squeeze;
+            tileViewItemElement22.Text = "NGAY_VAO_CTY";
             tileViewItemElement22.TextAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
+            tileViewItemElement23.Column = this.colNVL;
+            tileViewItemElement23.ImageOptions.ImageAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
+            tileViewItemElement23.ImageOptions.ImageScaleMode = DevExpress.XtraEditors.TileItemImageScaleMode.Squeeze;
+            tileViewItemElement23.Text = "colNVL";
+            tileViewItemElement23.TextAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
+            tileViewItemElement24.Column = this.colNVL;
+            tileViewItemElement24.ColumnIndex = 3;
+            tileViewItemElement24.ImageOptions.ImageAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
+            tileViewItemElement24.ImageOptions.ImageScaleMode = DevExpress.XtraEditors.TileItemImageScaleMode.Squeeze;
+            tileViewItemElement24.RowIndex = 6;
+            tileViewItemElement24.Text = "colNVL";
+            tileViewItemElement24.TextAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleLeft;
+            tileViewItemElement25.Column = this.NGAY_VAO_CTY;
+            tileViewItemElement25.ColumnIndex = 5;
+            tileViewItemElement25.ImageOptions.ImageAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
+            tileViewItemElement25.ImageOptions.ImageScaleMode = DevExpress.XtraEditors.TileItemImageScaleMode.Squeeze;
+            tileViewItemElement25.RowIndex = 6;
+            tileViewItemElement25.Text = "NGAY_VAO_CTY";
+            tileViewItemElement25.TextAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleLeft;
+            tileViewItemElement26.Column = this.colPC;
+            tileViewItemElement26.ColumnIndex = 4;
+            tileViewItemElement26.ImageOptions.ImageAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
+            tileViewItemElement26.ImageOptions.ImageScaleMode = DevExpress.XtraEditors.TileItemImageScaleMode.Squeeze;
+            tileViewItemElement26.RowIndex = 7;
+            tileViewItemElement26.Text = "colPC";
+            tileViewItemElement26.TextAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
+            tileViewItemElement27.Column = this.colPC;
+            tileViewItemElement27.ColumnIndex = 4;
+            tileViewItemElement27.ImageOptions.ImageAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
+            tileViewItemElement27.ImageOptions.ImageScaleMode = DevExpress.XtraEditors.TileItemImageScaleMode.Squeeze;
+            tileViewItemElement27.RowIndex = 8;
+            tileViewItemElement27.Text = "colPC";
+            tileViewItemElement27.TextAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
             this.tileViewCN.TileTemplate.Add(tileViewItemElement1);
             this.tileViewCN.TileTemplate.Add(tileViewItemElement2);
             this.tileViewCN.TileTemplate.Add(tileViewItemElement3);
@@ -575,6 +633,11 @@
             this.tileViewCN.TileTemplate.Add(tileViewItemElement20);
             this.tileViewCN.TileTemplate.Add(tileViewItemElement21);
             this.tileViewCN.TileTemplate.Add(tileViewItemElement22);
+            this.tileViewCN.TileTemplate.Add(tileViewItemElement23);
+            this.tileViewCN.TileTemplate.Add(tileViewItemElement24);
+            this.tileViewCN.TileTemplate.Add(tileViewItemElement25);
+            this.tileViewCN.TileTemplate.Add(tileViewItemElement26);
+            this.tileViewCN.TileTemplate.Add(tileViewItemElement27);
             this.tileViewCN.ItemCustomize += new DevExpress.XtraGrid.Views.Tile.TileViewItemCustomizeEventHandler(this.tileView1_ItemCustomize);
             this.tileViewCN.DoubleClick += new System.EventHandler(this.tileView1_DoubleClick);
             this.tileViewCN.RowCountChanged += new System.EventHandler(this.tileViewCN_RowCountChanged);
@@ -657,10 +720,10 @@
             this.windowsUIButton.ContentAlignment = System.Drawing.ContentAlignment.MiddleRight;
             this.windowsUIButton.Controls.Add(this.searchControl1);
             this.windowsUIButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.windowsUIButton.Location = new System.Drawing.Point(1, 545);
+            this.windowsUIButton.Location = new System.Drawing.Point(2, 544);
             this.windowsUIButton.Margin = new System.Windows.Forms.Padding(4);
             this.windowsUIButton.Name = "windowsUIButton";
-            this.windowsUIButton.Size = new System.Drawing.Size(1107, 32);
+            this.windowsUIButton.Size = new System.Drawing.Size(1105, 32);
             this.windowsUIButton.TabIndex = 17;
             this.windowsUIButton.Text = "S";
             this.windowsUIButton.UseButtonBackgroundImages = false;
@@ -680,25 +743,25 @@
             // 
             // cbo_TTHT
             // 
-            this.cbo_TTHT.Location = new System.Drawing.Point(118, 27);
+            this.cbo_TTHT.Location = new System.Drawing.Point(111, 30);
             this.cbo_TTHT.Name = "cbo_TTHT";
             this.cbo_TTHT.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cbo_TTHT.Properties.NullText = "";
-            this.cbo_TTHT.Size = new System.Drawing.Size(251, 24);
+            this.cbo_TTHT.Size = new System.Drawing.Size(257, 24);
             this.cbo_TTHT.StyleController = this.layoutControl1;
             this.cbo_TTHT.TabIndex = 10;
             this.cbo_TTHT.EditValueChanged += new System.EventHandler(this.cboTo_EditValueChanged);
             // 
             // cboTo
             // 
-            this.cboTo.Location = new System.Drawing.Point(857, 1);
+            this.cboTo.Location = new System.Drawing.Point(850, 2);
             this.cboTo.Name = "cboTo";
             this.cboTo.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cboTo.Properties.NullText = "";
             this.cboTo.Properties.PopupView = this.searchLookUpEdit3View;
-            this.cboTo.Size = new System.Drawing.Size(251, 24);
+            this.cboTo.Size = new System.Drawing.Size(257, 24);
             this.cboTo.StyleController = this.layoutControl1;
             this.cboTo.TabIndex = 9;
             this.cboTo.EditValueChanged += new System.EventHandler(this.cboTo_EditValueChanged);
@@ -713,13 +776,13 @@
             // 
             // cboXN
             // 
-            this.cboXN.Location = new System.Drawing.Point(488, 1);
+            this.cboXN.Location = new System.Drawing.Point(481, 2);
             this.cboXN.Name = "cboXN";
             this.cboXN.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cboXN.Properties.NullText = "";
             this.cboXN.Properties.PopupView = this.searchLookUpEdit2View;
-            this.cboXN.Size = new System.Drawing.Size(250, 24);
+            this.cboXN.Size = new System.Drawing.Size(256, 24);
             this.cboXN.StyleController = this.layoutControl1;
             this.cboXN.TabIndex = 8;
             this.cboXN.EditValueChanged += new System.EventHandler(this.cboXN_EditValueChanged);
@@ -734,13 +797,13 @@
             // 
             // cboDV
             // 
-            this.cboDV.Location = new System.Drawing.Point(118, 1);
+            this.cboDV.Location = new System.Drawing.Point(111, 2);
             this.cboDV.Name = "cboDV";
             this.cboDV.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cboDV.Properties.NullText = "";
             this.cboDV.Properties.PopupView = this.searchLookUpEdit1View;
-            this.cboDV.Size = new System.Drawing.Size(251, 24);
+            this.cboDV.Size = new System.Drawing.Size(257, 24);
             this.cboDV.StyleController = this.layoutControl1;
             this.cboDV.TabIndex = 7;
             this.cboDV.EditValueChanged += new System.EventHandler(this.cboDV_EditValueChanged);
@@ -776,16 +839,16 @@
             this.ItemForDON_VI.Control = this.cboDV;
             this.ItemForDON_VI.Location = new System.Drawing.Point(0, 0);
             this.ItemForDON_VI.Name = "ItemForDON_VI";
-            this.ItemForDON_VI.Size = new System.Drawing.Size(370, 26);
+            this.ItemForDON_VI.Size = new System.Drawing.Size(370, 28);
             this.ItemForDON_VI.TextSize = new System.Drawing.Size(105, 17);
             // 
             // layoutControlItem1
             // 
             this.layoutControlItem1.Control = this.grdNS;
-            this.layoutControlItem1.Location = new System.Drawing.Point(0, 71);
+            this.layoutControlItem1.Location = new System.Drawing.Point(0, 77);
             this.layoutControlItem1.MinSize = new System.Drawing.Size(88, 19);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(1109, 473);
+            this.layoutControlItem1.Size = new System.Drawing.Size(1109, 465);
             this.layoutControlItem1.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
@@ -795,15 +858,15 @@
             this.ItemForXI_NGHIEP.Control = this.cboXN;
             this.ItemForXI_NGHIEP.Location = new System.Drawing.Point(370, 0);
             this.ItemForXI_NGHIEP.Name = "ItemForXI_NGHIEP";
-            this.ItemForXI_NGHIEP.Size = new System.Drawing.Size(369, 26);
+            this.ItemForXI_NGHIEP.Size = new System.Drawing.Size(369, 28);
             this.ItemForXI_NGHIEP.TextSize = new System.Drawing.Size(105, 17);
             // 
             // layoutControlItem2
             // 
             this.layoutControlItem2.Control = this.windowsUIButton;
-            this.layoutControlItem2.Location = new System.Drawing.Point(0, 544);
+            this.layoutControlItem2.Location = new System.Drawing.Point(0, 542);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(1109, 34);
+            this.layoutControlItem2.Size = new System.Drawing.Size(1109, 36);
             this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem2.TextVisible = false;
             // 
@@ -812,23 +875,23 @@
             this.ItemForTO.Control = this.cboTo;
             this.ItemForTO.Location = new System.Drawing.Point(739, 0);
             this.ItemForTO.Name = "ItemForTO";
-            this.ItemForTO.Size = new System.Drawing.Size(370, 26);
+            this.ItemForTO.Size = new System.Drawing.Size(370, 28);
             this.ItemForTO.TextSize = new System.Drawing.Size(105, 17);
             // 
             // ItemForTT_HT
             // 
             this.ItemForTT_HT.Control = this.cbo_TTHT;
-            this.ItemForTT_HT.Location = new System.Drawing.Point(0, 26);
+            this.ItemForTT_HT.Location = new System.Drawing.Point(0, 28);
             this.ItemForTT_HT.Name = "ItemForTT_HT";
-            this.ItemForTT_HT.Size = new System.Drawing.Size(370, 26);
+            this.ItemForTT_HT.Size = new System.Drawing.Size(370, 28);
             this.ItemForTT_HT.TextSize = new System.Drawing.Size(105, 17);
             // 
             // emptySpaceItem1
             // 
             this.emptySpaceItem1.AllowHotTrack = false;
-            this.emptySpaceItem1.Location = new System.Drawing.Point(370, 26);
+            this.emptySpaceItem1.Location = new System.Drawing.Point(370, 28);
             this.emptySpaceItem1.Name = "emptySpaceItem1";
-            this.emptySpaceItem1.Size = new System.Drawing.Size(739, 26);
+            this.emptySpaceItem1.Size = new System.Drawing.Size(739, 28);
             this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
             // 
             // ItemForSumNhanVien
@@ -836,9 +899,9 @@
             this.ItemForSumNhanVien.AllowHotTrack = false;
             this.ItemForSumNhanVien.AppearanceItemCaption.Options.UseTextOptions = true;
             this.ItemForSumNhanVien.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.ItemForSumNhanVien.Location = new System.Drawing.Point(0, 52);
+            this.ItemForSumNhanVien.Location = new System.Drawing.Point(0, 56);
             this.ItemForSumNhanVien.Name = "ItemForSumNhanVien";
-            this.ItemForSumNhanVien.Size = new System.Drawing.Size(1109, 19);
+            this.ItemForSumNhanVien.Size = new System.Drawing.Size(1109, 21);
             this.ItemForSumNhanVien.Text = "SumNhanVien";
             this.ItemForSumNhanVien.TextSize = new System.Drawing.Size(105, 17);
             // 
@@ -930,7 +993,7 @@
         private DevExpress.XtraGrid.Columns.TileViewColumn TEN_TO;
         private DevExpress.XtraGrid.Columns.TileViewColumn TEN_TT_HD;
         private DevExpress.XtraGrid.Columns.TileViewColumn TEN_TT_HT;
-        private DevExpress.XtraGrid.Columns.TileViewColumn TEN_CV;
+        private DevExpress.XtraGrid.Columns.TileViewColumn TEN_LCV;
         private DevExpress.XtraGrid.Columns.TileViewColumn TEN_XN;
         private DevExpress.XtraGrid.Columns.TileViewColumn MAU_TT;
         private DevExpress.XtraEditors.LookUpEdit cbo_TTHT;
@@ -952,5 +1015,7 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem1;
         private DevExpress.XtraLayout.SimpleLabelItem ItemForSumNhanVien;
+        private DevExpress.XtraGrid.Columns.TileViewColumn NGAY_VAO_CTY;
+        private DevExpress.XtraGrid.Columns.TileViewColumn colNVL;
     }
 }

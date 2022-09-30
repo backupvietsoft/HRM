@@ -34,7 +34,7 @@ namespace Vs.Recruit.UAC.ctUngVien
             Commons.Modules.ObjSystems.MLoadLookUpEditN(ID_TT_HDLookUpEdit, Commons.Modules.ObjSystems.DataTinHTrangHD(false), "ID_TT_HD", "TEN_TT_HD", "TEN_TT_HD", "", true);
 
             //ID_TT_HTLookUpEdit
-            Commons.Modules.ObjSystems.MLoadLookUpEditN(ID_TT_HTLookUpEdit, Commons.Modules.ObjSystems.DataTinHTrangHT(false), "ID_TT_HT", "TEN_TT_HT", "TEN_TT_HT", "", true);
+            Commons.Modules.ObjSystems.MLoadLookUpEditN(ID_TT_HTLookUpEdit, Commons.Modules.ObjSystems.DataTinHTrangHT(-1, false), "ID_TT_HT", "TEN_TT_HT", "TEN_TT_HT", "", true);
             Commons.Modules.sLoad = "";
             LoadNN();
         }

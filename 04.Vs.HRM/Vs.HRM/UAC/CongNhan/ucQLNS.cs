@@ -11,6 +11,7 @@ using System.Threading;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraLayout;
 using System.Collections.Generic;
+using System.Drawing;
 
 namespace Vs.HRM
 {
@@ -31,14 +32,15 @@ namespace Vs.HRM
             dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT TOP 1 MS_CN FROM dbo.CONG_NHAN ORDER BY MS_CN"));
             if (dt.Rows.Count == 0)
             {
-                tileView1_DoubleClick(null, null);
+                grvDSCongNhan_DoubleClick(null, null);
                 return;
             }
             Commons.Modules.sLoad = "0Load";
             LoadCboDonVi();
             LoadCboXiNghiep();
             LoadCboTo();
-            LoadTinhTrangHienTai();
+            Commons.Modules.ObjSystems.MLoadLookUpEdit(cboID_LTTHT, Commons.Modules.ObjSystems.DataLoaiTinHTrangHT(false), "ID_LTTHT", "TEN_LOAI_TTHT", "TEN_LOAI_TTHT");
+            Commons.Modules.ObjSystems.MLoadLookUpEdit(cbo_TTHT, Commons.Modules.ObjSystems.DataTinHTrangHT(Convert.ToInt32(cboID_LTTHT.EditValue), true), "ID_TT_HT", "TEN_TT_HT", "TEN_TT_HT");
             LoadNhanSu(-1);
             Commons.Modules.sLoad = "";
         }
@@ -85,17 +87,6 @@ namespace Vs.HRM
             }
 
         }
-
-        private void LoadTinhTrangHienTai()
-        {
-            DataTable dt = new DataTable();
-            string strSQL = "SELECT T1.ID_TT_HT, T1.TEN_TT_HT FROM (SELECT ID_TT_HT, CASE " + Commons.Modules.TypeLanguage + " WHEN 0 THEN TEN_TT_HT WHEN 1 THEN ISNULL(NULLIF(TEN_TT_HT_A,''),TEN_TT_HT) ELSE ISNULL(NULLIF(TEN_TT_HT_H,''),TEN_TT_HT) END AS TEN_TT_HT, STT " +
-                "FROM dbo.TINH_TRANG_HT " +
-                "UNION SELECT - 1 AS ID_TT_HT, CASE " + Commons.Modules.TypeLanguage + " WHEN 0 THEN VIETNAM WHEN 1 THEN ISNULL(NULLIF (ENGLISH, ''), VIETNAM) ELSE ISNULL(NULLIF (CHINESE, ''), VIETNAM) END AS TEN_DK , 0  " +
-                "FROM dbo.LANGUAGES WHERE(KEYWORD = 'ConDiLam') AND(FORM = 'ucQLNS')) T1 ORDER BY T1.STT, T1.TEN_TT_HT";
-            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, strSQL));
-            Commons.Modules.ObjSystems.MLoadLookUpEdit(cbo_TTHT, dt, "ID_TT_HT", "TEN_TT_HT", "TEN_TT_HT");
-        }
         private void cboDV_EditValueChanged(object sender, EventArgs e)
         {
             if (Commons.Modules.sLoad == "0Load") return;
@@ -128,40 +119,42 @@ namespace Vs.HRM
             {
 
                 DataTable dtTmp = new DataTable();
-                dtTmp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetListNS", cboDV.EditValue, cboXN.EditValue, cboTo.EditValue, cbo_TTHT.EditValue, Commons.Modules.UserName, Commons.Modules.TypeLanguage));
+                dtTmp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetListNS_DanhSach", cboDV.EditValue, cboXN.EditValue, cboTo.EditValue, cbo_TTHT.EditValue, cboID_LTTHT.EditValue, Commons.Modules.UserName, Commons.Modules.TypeLanguage));
                 dtTmp.PrimaryKey = new DataColumn[] { dtTmp.Columns["ID_CN"] };
-                grdNS.DataSource = dtTmp;
-
+                Commons.Modules.ObjSystems.MLoadXtraGrid(grdDSCongNhan, grvDSCongNhan, dtTmp, false, false, false, true, true, this.Name);
+                //grdDSCongNhan.DataSource = dtTmp;
+                grvDSCongNhan.Columns["ID_CN"].Visible = false;
+                grvDSCongNhan.Columns["MAU_TT"].Visible = false;
 
                 if (iIdNs != -1)
                 {
                     int index = dtTmp.Rows.IndexOf(dtTmp.Rows.Find(iIdNs));
-                    tileViewCN.FocusedRowHandle = tileViewCN.GetRowHandle(index);
+                    grvDSCongNhan.FocusedRowHandle = grvDSCongNhan.GetRowHandle(index);
                 }
             }
-            catch { }
+            catch (Exception ex) { }
         }
         private void tileView1_ItemCustomize(object sender, TileViewItemCustomizeEventArgs e)
         {
-            try
-            {
-                if (e.Item == null || e.Item.Elements.Count == 0)
-                    return;
-                e.Item.Elements[0].Appearance.Normal.BackColor = System.Drawing.ColorTranslator.FromHtml(tileViewCN.GetRowCellValue(e.RowHandle, tileViewCN.Columns["MAU_TT"]).ToString());
-            }
-            catch { }
+            //try
+            //{
+            //    if (e.Item == null || e.Item.Elements.Count == 0)
+            //        return;
+            //    e.Item.Elements[0].Appearance.Normal.BackColor = System.Drawing.ColorTranslator.FromHtml(tileViewCN.GetRowCellValue(e.RowHandle, tileViewCN.Columns["MAU_TT"]).ToString());
+            //}
+            //catch { }
         }
-        private void tileView1_DoubleClick(object sender, EventArgs e)
+        private void grvDSCongNhan_DoubleClick(object sender, EventArgs e)
         {
             try
             {
                 labelNV.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
                 labelNV.ForeColor = System.Drawing.Color.FromArgb(0, 0, 255);
-                labelNV.Text = tileViewCN.GetFocusedRowCellValue(tileViewCN.Columns["MS_CN"]).ToString() + " - " + tileViewCN.GetFocusedRowCellValue(tileViewCN.Columns["HO_TEN"]).ToString();
+                labelNV.Text = grvDSCongNhan.GetFocusedRowCellValue(grvDSCongNhan.Columns["MS_CN"]).ToString() + " - " + grvDSCongNhan.GetFocusedRowCellValue(grvDSCongNhan.Columns["HO_TEN"]).ToString();
             }
             catch (Exception ex) { }
-            grdNS.Visible = false;
-            ucCTQLNS dl = new ucCTQLNS(Convert.ToInt64(tileViewCN.GetFocusedRowCellValue(tileViewCN.Columns["ID_CN"])));
+            grdDSCongNhan.Visible = false;
+            ucCTQLNS dl = new ucCTQLNS(Convert.ToInt64(grvDSCongNhan.GetFocusedRowCellValue(grvDSCongNhan.Columns["ID_CN"])));
             dl.Refresh();
             dt = dl.dt;
             navigationFrame1.SelectedPage.Visible = false;
@@ -233,8 +226,8 @@ namespace Vs.HRM
             {
                 SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "DELETE dbo.BAO_HIEM_Y_TE WHERE ID_CN =  " + Commons.Modules.iCongNhan + "");
                 SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "DELETE dbo.BANG_CAP WHERE ID_CN =  " + Commons.Modules.iCongNhan + "");
-                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "DELETE dbo.CONG_NHAN WHERE ID_CN  =" + Convert.ToInt64(tileViewCN.GetFocusedRowCellValue(tileViewCN.Columns["ID_CN"]) + ""));
-                tileViewCN.DeleteSelectedRows();
+                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "DELETE dbo.CONG_NHAN WHERE ID_CN  =" + Convert.ToInt64(grvDSCongNhan.GetFocusedRowCellValue(grvDSCongNhan.Columns["ID_CN"]) + ""));
+                grvDSCongNhan.DeleteSelectedRows();
             }
             catch (Exception ex)
             {
@@ -262,7 +255,7 @@ namespace Vs.HRM
                         }
                     case "them":
                         {
-                            grdNS.Visible = false;
+                            grdDSCongNhan.Visible = false;
                             ucCTQLNS dl = new ucCTQLNS(-1);
                             dl.Refresh();
                             dt = dl.dt;
@@ -287,18 +280,18 @@ namespace Vs.HRM
                         }
                     case "sua":
                         {
-                            if (tileViewCN.RowCount == 0)
+                            if (grvDSCongNhan.RowCount == 0)
                             {
                                 XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgChonDongCanXuLy"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "sThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 return;
                             }
-                            Int64 iIDCN = Convert.ToInt64(tileViewCN.GetFocusedRowCellValue("ID_CN"));
+                            Int64 iIDCN = Convert.ToInt64(grvDSCongNhan.GetFocusedRowCellValue("ID_CN"));
                             if (iIDCN == 0)
                             {
                                 iIDCN = -1;
                             }
 
-                            grdNS.Visible = false;
+                            grdDSCongNhan.Visible = false;
                             ucCTQLNS dl = new ucCTQLNS(iIDCN);
                             Commons.Modules.ObjSystems.ShowWaitForm(this);
                             dl.Refresh();
@@ -326,7 +319,7 @@ namespace Vs.HRM
 
                     case "xoa":
                         {
-                            if (tileViewCN.RowCount == 0)
+                            if (grvDSCongNhan.RowCount == 0)
                             {
                                 XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgChonDongCanXuLy"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "sThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 return;
@@ -349,7 +342,7 @@ namespace Vs.HRM
             catch { }
         }
 
-        private void tileViewCN_RowCountChanged(object sender, EventArgs e)
+        private void grvDSCongNhan_RowCountChanged(object sender, EventArgs e)
         {
             TileView view = sender as TileView;
             try
@@ -368,9 +361,31 @@ namespace Vs.HRM
 
                 }
             }
+            catch
+            {
+            }
+        }
+
+        private void cboID_LTTHT_EditValueChanged(object sender, EventArgs e)
+        {
+            if (Commons.Modules.sLoad == "0Load") return;
+            Commons.Modules.ObjSystems.MLoadLookUpEdit(cbo_TTHT, Commons.Modules.ObjSystems.DataTinHTrangHT(Convert.ToInt32(cboID_LTTHT.EditValue), true), "ID_TT_HT", "TEN_TT_HT", "TEN_TT_HT");
+            LoadNhanSu(-1);
+        }
+
+        private void grvDSCongNhan_RowStyle(object sender, RowStyleEventArgs e)
+        {
+            try
+            {
+                //string sMauTT = grvDSCongNhan.GetRowCellValue(e.RowHandle, "MAU_TT").ToString();
+                e.Appearance.BackColor = System.Drawing.ColorTranslator.FromHtml(grvDSCongNhan.GetRowCellValue(e.RowHandle, grvDSCongNhan.Columns["MAU_TT"]).ToString());
+
+                //Override any other formatting  
+                e.HighPriority = true;
+            }
             catch (Exception ex)
             {
-                XtraMessageBox.Show(ex.Message.ToString());
+
             }
         }
     }

@@ -1005,7 +1005,7 @@ namespace Vs.Payroll
         {
             DevExpress.DataAccess.Native.Excel.DataView dv_temp = ((IListSource)excelDataSource).GetList() as DevExpress.DataAccess.Native.Excel.DataView;
 
-            excelDataSource.SourceOptions = new CsvSourceOptions() { CellRange = "A7:" + "N" + dv_temp.Count + "" };
+            excelDataSource.SourceOptions = new CsvSourceOptions() { CellRange = "A7:" + "N" + (dv_temp.Count + 1) + "" };
             excelDataSource.SourceOptions.SkipEmptyRows = false;
             excelDataSource.SourceOptions.UseFirstRowAsHeader = true;
             excelDataSource.Fill();

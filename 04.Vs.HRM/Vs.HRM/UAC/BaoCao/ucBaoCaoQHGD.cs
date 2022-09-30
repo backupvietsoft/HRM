@@ -774,6 +774,9 @@ namespace Vs.HRM
 
                                 cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
                                 cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                                cmd.Parameters.Add("@DVi", SqlDbType.Int).Value = lkDonVi.EditValue;
+                                cmd.Parameters.Add("@XN", SqlDbType.Int).Value = lkXiNghiep.EditValue;
+                                cmd.Parameters.Add("@TO", SqlDbType.Int).Value = lkTo.EditValue;
                                 cmd.Parameters.Add("@Type", SqlDbType.Int).Value = rdo_ConCongNhan.SelectedIndex;
                                 cmd.Parameters.Add("@Ngay", SqlDbType.Date).Value = lk_NgayTinh.EditValue;
                                 cmd.Parameters.Add("@TuoiTu", SqlDbType.Int).Value = txt_Tu.Text.ToString() == "" ? 0 : txt_Tu.EditValue;
@@ -815,6 +818,9 @@ namespace Vs.HRM
 
                                             cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
                                             cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                                            cmd.Parameters.Add("@DVi", SqlDbType.Int).Value = lkDonVi.EditValue;
+                                            cmd.Parameters.Add("@XN", SqlDbType.Int).Value = lkXiNghiep.EditValue;
+                                            cmd.Parameters.Add("@TO", SqlDbType.Int).Value = lkTo.EditValue;
                                             cmd.Parameters.Add("@Type", SqlDbType.Int).Value = rdo_ConCongNhan.SelectedIndex;
                                             cmd.Parameters.Add("@Ngay", SqlDbType.Date).Value = lk_NgayTinh.EditValue;
                                             cmd.Parameters.Add("@TuoiTu", SqlDbType.Int).Value = txt_Tu.Text.ToString() == "" ? 0 : txt_Tu.EditValue;

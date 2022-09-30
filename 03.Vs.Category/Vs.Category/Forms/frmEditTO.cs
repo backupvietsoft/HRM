@@ -21,13 +21,60 @@ namespace Vs.Category
         }
         private void frmEditTO_Load(object sender, EventArgs e)
         {
+            Commons.Modules.sLoad = "0Load";
             ItemForToTruong.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             if (Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString() == "DM")
             {
-                DataTable dt = new DataTable();
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboCongNhan", Commons.Modules.UserName, Commons.Modules.TypeLanguage, 3));
-                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_CN, dt, "ID_CN", "HO_TEN", "HO_TEN");
-                ItemForToTruong.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+
+                try
+                {
+                    if (iIdTo > 0)
+                    {
+                        Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(ID_DVLookUpEdit, Commons.Modules.ObjSystems.DataDonVi(true), "ID_DV", "TEN_DV", "TEN_DV", true, false, false);
+
+                        string strSQLDV = "SELECT XN.ID_DV FROM [TO] T INNER JOIN XI_NGHIEP XN ON T.ID_XN = XN.ID_XN WHERE ID_TO = " + iIdTo;
+                        int EditValueDV = System.Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, strSQLDV));
+                        ID_DVLookUpEdit.EditValue = EditValueDV;
+
+                        DataTable dt = new DataTable();
+                        dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboCongNhan", Commons.Modules.UserName, Commons.Modules.TypeLanguage, 3));
+                        Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_CN, dt, "ID_CN", "HO_TEN", "HO_TEN");
+                        ItemForToTruong.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+
+                        DataTable dt1 = new DataTable();
+                        dt1.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboPhanBo", Commons.Modules.UserName, Commons.Modules.TypeLanguage, false));
+                        Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(ID_PBLookUpEdit, dt1, "ID_LPB", "TEN_LPB", "TEN_LPB", true, false, false);
+
+                        string strSQLPB = "SELECT T.PHAN_BO FROM dbo.[TO] T WHERE T.ID_TO = " + iIdTo;
+                        var obj = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, strSQLPB);
+                        if(obj == null)
+                        {
+                            ID_PBLookUpEdit.EditValue = -1;
+                        }
+                        else
+                        {
+                            ID_PBLookUpEdit.EditValue = obj;
+                        }
+                    }
+                    else
+                    {
+                        Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(ID_DVLookUpEdit, Commons.Modules.ObjSystems.DataDonVi(true), "ID_DV", "TEN_DV", "TEN_DV", true, false, false);
+                        ID_DVLookUpEdit.EditValue = -1;
+
+                        DataTable dt = new DataTable();
+                        dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboCongNhan", Commons.Modules.UserName, Commons.Modules.TypeLanguage, 3));
+                        Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_CN, dt, "ID_CN", "HO_TEN", "HO_TEN",true, false, false);
+                        ItemForToTruong.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+
+                        DataTable dt1 = new DataTable();
+                        dt1.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboPhanBo", Commons.Modules.UserName, Commons.Modules.TypeLanguage, false));
+                        Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(ID_PBLookUpEdit, dt1, "ID_LPB", "TEN_LPB", "TEN_LPB", true, false, false);
+                    }
+                }
+                catch(Exception ex)
+                {
+                    throw ex;
+                }
             }
 
             LoadXiNghiep();
@@ -41,6 +88,8 @@ namespace Vs.Category
                 STT_TOTextEdit.EditValue = (string.IsNullOrEmpty(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, strSQL).ToString()) ? 0 : Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, strSQL))) + 1;
             }
             Commons.Modules.ObjSystems.ThayDoiNN(this, layoutControlGroup1, btnALL);
+
+            Commons.Modules.sLoad = "";
         }
         private void LoadXiNghiep()
         {
@@ -143,7 +192,7 @@ namespace Vs.Category
                         {
                             if (!dxValidationProvider1.Validate()) return;
                             if (KiemTrung()) return;
-                            Commons.Modules.sId = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spUpdateTo", (bAddEditTo ? -1 : iIdTo), ID_XNLookUpEdit.EditValue, MS_TOTextEdit.EditValue, TEN_TOTextEdit.EditValue, TEN_TO_ANHTextEdit.EditValue, TEN_TO_HOATextEdit.EditValue, STT_TOTextEdit.EditValue, Convert.ToInt64(cboID_CN.Text == "" ? cboID_CN.EditValue = null : cboID_CN.EditValue), Commons.Modules.UserName).ToString();
+                            Commons.Modules.sId = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spUpdateTo", (bAddEditTo ? -1 : iIdTo), ID_XNLookUpEdit.EditValue, ID_PBLookUpEdit.EditValue, MS_TOTextEdit.EditValue, TEN_TOTextEdit.EditValue, TEN_TO_ANHTextEdit.EditValue, TEN_TO_HOATextEdit.EditValue, STT_TOTextEdit.EditValue, Convert.ToInt64(cboID_CN.Text == "" ? cboID_CN.EditValue = null : cboID_CN.EditValue), Commons.Modules.UserName).ToString();
                             if (bAddEditTo)
                             {
                                 if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msg_ThemThanhCongBanCoMuonTiepTuc"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
@@ -210,6 +259,17 @@ namespace Vs.Category
         }
         private void frmEditTO_Resize(object sender, EventArgs e) => dataLayoutControl1.Refresh();
 
+        private void MS_TOTextEdit_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsDigit(e.KeyChar) && e.KeyChar != '\b')
+                e.Handled = true;
+        }
+
+        private void ID_DVLookUpEdit_EditValueChanged(object sender, EventArgs e)
+        {
+            if (Commons.Modules.sLoad == "0Load") return;
+            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(ID_XNLookUpEdit, Commons.Modules.ObjSystems.DataXiNghiep(Convert.ToInt32(ID_DVLookUpEdit.EditValue), false), "ID_XN", "TEN_XN", "TEN_XN", true, true);
+        }
     }
 
 }

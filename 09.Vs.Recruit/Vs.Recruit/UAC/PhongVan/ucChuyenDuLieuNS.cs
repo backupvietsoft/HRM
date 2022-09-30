@@ -171,7 +171,7 @@ namespace Vs.Recruit
                     cboTTHT.ValueMember = "ID_TT_HT";
                     cboTTHT.DisplayMember = "TEN_TT_HT";
                     //ID_VTTD,TEN_VTTD
-                    cboTTHT.DataSource = Commons.Modules.ObjSystems.DataTinHTrangHT(false);
+                    cboTTHT.DataSource = Commons.Modules.ObjSystems.DataTinHTrangHT(-1, false);
                     cboTTHT.Columns.Clear();
                     cboTTHT.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID_TT_HT"));
                     cboTTHT.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("TEN_TT_HT"));
@@ -240,7 +240,7 @@ namespace Vs.Recruit
             try
             {
                 LookUpEdit lookUp = sender as LookUpEdit;
-                lookUp.Properties.DataSource = Commons.Modules.ObjSystems.DataTinHTrangHT(false);
+                lookUp.Properties.DataSource = Commons.Modules.ObjSystems.DataTinHTrangHT(-1, false);
             }
             catch { }
         }

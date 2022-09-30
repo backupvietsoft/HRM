@@ -3,6 +3,7 @@ using DevExpress.XtraEditors;
 using System;
 using System.Data;
 using Vs.Report;
+using System.Globalization;
 
 namespace Vs.HRM
 {
@@ -171,8 +172,8 @@ namespace Vs.HRM
             Commons.OSystems.SetDateEditFormat(dDenNgay);
             Commons.OSystems.SetDateEditFormat(lk_NgayIn);
 
-            dTuNgay.EditValue = Convert.ToDateTime(("01/"+DateTime.Today.Month +"/" + DateTime.Today.Year));
-            dDenNgay.EditValue = Convert.ToDateTime(("01/" + DateTime.Today.Month + "/" + DateTime.Today.Year)).AddMonths(1).AddDays(-1);
+            dTuNgay.EditValue = Convert.ToDateTime(("01/"+DateTime.Today.Month +"/" + DateTime.Today.Year), new CultureInfo("de-DE"));
+            dDenNgay.EditValue = Convert.ToDateTime(("01/" + DateTime.Today.Month + "/" + DateTime.Today.Year), new CultureInfo("de-DE")).AddMonths(1).AddDays(-1);
             txtNam.EditValue = DateTime.Today.Year;
             lk_NgayIn.EditValue = DateTime.Today;
             Commons.Modules.sLoad = "";

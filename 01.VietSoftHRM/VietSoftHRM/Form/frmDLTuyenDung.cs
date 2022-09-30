@@ -128,9 +128,14 @@ namespace VietSoftHRM
                         }
                     case "luu":
                         {
+
                             Validate();
                             if (grvViTri.HasColumnErrors) return;
                             if (grvThamGiaTD.HasColumnErrors) return;
+                            grvViTri.CloseEditor();
+                            grvViTri.UpdateCurrentRow();
+                            grvThamGiaTD.CloseEditor();
+                            grvThamGiaTD.UpdateCurrentRow();
                             if (!SaveData()) return;
                             LoadViTri();
                             LoadNguoiTuyenDung();
@@ -355,6 +360,17 @@ namespace VietSoftHRM
                     grvThamGiaTD.DeleteRow(grvThamGiaTD.FocusedRowHandle);
                 }
             }
+        }
+
+        private void grvThamGiaTD_InitNewRow(object sender, InitNewRowEventArgs e)
+        {
+            try
+            {
+                GridView view = sender as GridView;
+                view.SetFocusedRowCellValue(view.Columns["PHONG_VAN"], false);
+                view.SetFocusedRowCellValue(view.Columns["YEU_CAU"], false);
+            }
+            catch { }
         }
     }
 }

@@ -20,7 +20,7 @@ namespace Vs.HRM
     public partial class ucBaoCaoGiaiDoan : DevExpress.XtraEditors.XtraUserControl
     {
         private string SaveExcelFile;
-
+        string sKyHieuDV = "";
         public string uFontName = "Times New Roman";
         public float uFontSize = 11.25F;
         public ucBaoCaoGiaiDoan()
@@ -65,11 +65,11 @@ namespace Vs.HRM
             {
                 case "Print":
                     {
-                        switch (rdo_ChonBaoCao.SelectedIndex)
+                        switch (rdo_ChonBaoCao.Properties.Items[rdo_ChonBaoCao.SelectedIndex].Tag)
                         {
-                            case 0:
+                            case "rdo_ditrevesomgiaidoan":
                                 {
-                                    switch (Commons.Modules.ObjSystems.KyHieuDV(Convert.ToInt64(LK_DON_VI.EditValue)))
+                                    switch (sKyHieuDV)
                                     {
                                         case "MT":
                                             {
@@ -87,55 +87,25 @@ namespace Vs.HRM
                                     }
                                 }
                                 break;
-                            case 1:
+                            case "rdo_vangdaugiogiaidoan":
                                 {
-                                    switch (Commons.Modules.ObjSystems.KyHieuDV(Convert.ToInt64(LK_DON_VI.EditValue)))
-                                    {
-                                        case "MT":
-                                            {
-                                                DSVangDauGioGiaiDoan();
-                                                break;
-                                            }
-                                        default:
-                                            DSVangDauGioGiaiDoan();
-                                            break;
-                                    }
+                                    DSVangDauGioGiaiDoan();
 
                                 }
                                 break;
-                            case 2:
+                            case "rdo_chamvanggiaidoan":
                                 {
-                                    switch (Commons.Modules.ObjSystems.KyHieuDV(Convert.ToInt64(LK_DON_VI.EditValue)))
-                                    {
-                                        case "MT":
-                                            {
-                                                DSChamVangGiaiDoan();
-                                                break;
-                                            }
-                                        default:
-                                            DSChamVangGiaiDoan();
-                                            break;
-                                    }
+                                    DSChamVangGiaiDoan();
                                 }
                                 break;
-                            case 3:
+                            case "rdo_chamcongvangluyke":
                                 {
-                                    switch (Commons.Modules.ObjSystems.KyHieuDV(Convert.ToInt64(LK_DON_VI.EditValue)))
-                                    {
-                                        case "MT":
-                                            {
-                                                DSChamCongVangLuyKe();
-                                                break;
-                                            }
-                                        default:
-                                            DSChamCongVangLuyKe();
-                                            break;
-                                    }
+                                    DSChamCongVangLuyKe();
                                 }
                                 break;
-                            case 4:
+                            case "rdo_xacnhanquetthe":
                                 {
-                                    switch (Commons.Modules.ObjSystems.KyHieuDV(Convert.ToInt64(LK_DON_VI.EditValue)))
+                                    switch (sKyHieuDV)
                                     {
                                         case "MT":
                                             {
@@ -156,7 +126,7 @@ namespace Vs.HRM
                                 }
 
                                 break;
-                            case 5:
+                            case "rdo_congnhangiaidoan":
                                 {
                                     switch (Commons.Modules.ObjSystems.KyHieuDV(Convert.ToInt64(LK_DON_VI.EditValue)))
                                     {
@@ -171,7 +141,7 @@ namespace Vs.HRM
                                     }
                                     break;
                                 }
-                            case 6:
+                            case "rdo_BaoCaoHangNgayTheoGiaiDoan":
                                 {
                                     BaoCaoHangNgayTheoGiaiDoan_DM();
                                     break;
@@ -194,7 +164,12 @@ namespace Vs.HRM
             LoadCboXiNghiep();
             LoadCboTo();
 
-            if (Commons.Modules.ObjSystems.KyHieuDV(Convert.ToInt64(LK_DON_VI.EditValue)).ToString() != "DM")
+            sKyHieuDV = Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString();
+            if (sKyHieuDV == "DM")
+            {
+                rdo_ChonBaoCao.Properties.Items.RemoveAt(0);
+            }
+            else
             {
                 rdo_ChonBaoCao.Properties.Items.RemoveAt(6);
             }
@@ -253,9 +228,9 @@ namespace Vs.HRM
 
         private void rdo_ChonBaoCao_SelectedIndexChanged(object sender, EventArgs e)
         {
-            switch (rdo_ChonBaoCao.SelectedIndex)
+            switch (rdo_ChonBaoCao.Properties.Items[rdo_ChonBaoCao.SelectedIndex].Tag)
             {
-                case 5:
+                case "rdo_congnhangiaidoan":
                     {
                         chkInTheoCongNhan.Enabled = true;
                         grdCN.Visible = true;

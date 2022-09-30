@@ -19,7 +19,7 @@ namespace Vs.TimeAttendance
     public partial class ucBaoCaoTheoNgay : DevExpress.XtraEditors.XtraUserControl
     {
         private string SaveExcelFile;
-
+        string sKyHieuDV = "";
         public ucBaoCaoTheoNgay()
         {
             InitializeComponent();
@@ -36,120 +36,47 @@ namespace Vs.TimeAttendance
             {
                 case "Print":
                     {
-
-                        switch (rdo_ChonBaoCao.SelectedIndex)
+                        switch (rdo_ChonBaoCao.Properties.Items[rdo_ChonBaoCao.SelectedIndex].Tag)
                         {
-                            case 0:
+                            case "rdo_DSVangDauGioTheoDV":
                                 {
-                                    switch (Commons.Modules.ObjSystems.KyHieuDV(Convert.ToInt64(LK_DON_VI.EditValue)))
-                                    {
-                                        case "MT":
-                                            {
-                                                DSVangDauGioTheoNgay();
-                                                break;
-                                            }
-                                        default:
-                                            DSVangDauGioTheoNgay();
-                                            break;
-                                    }
+                                    DSVangDauGioTheoNgay();
                                 }
                                 break;
-                            case 1:
+                            case "rdo_DSVangDauGioTheoNgay":
                                 {
-                                    switch (Commons.Modules.ObjSystems.KyHieuDV(Convert.ToInt64(LK_DON_VI.EditValue)))
-                                    {
-                                        case "MT":
-                                            {
-                                                DSCongNhanVangDauGioNgay();
-                                                break;
-                                            }
-                                        default:
-                                            DSCongNhanVangDauGioNgay();
-                                            break;
-                                    }
-
+                                    DSCongNhanVangDauGioNgay();
                                 }
                                 break;
-                            case 2:
+                            case "rdo_DSThieuNhomCa":
                                 {
-                                    switch (Commons.Modules.ObjSystems.KyHieuDV(Convert.ToInt64(LK_DON_VI.EditValue)))
-                                    {
-                                        case "MT":
-                                            {
-                                                DSCongNhanThieuNhomCa();
-                                                break;
-                                            }
-                                        default:
-                                            DSCongNhanThieuNhomCa();
-                                            break;
-                                    }
+                                    DSCongNhanThieuNhomCa();
                                 }
                                 break;
-                            case 3:
+                            case "rdo_DSDiTreVeSomTheoNgay":
                                 {
-                                    switch (Commons.Modules.ObjSystems.KyHieuDV(Convert.ToInt64(LK_DON_VI.EditValue)))
-                                    {
-                                        case "MT":
-                                            {
-                                                DSDiTreVeSomNgay();
-                                                break;
-                                            }
-                                        default:
-                                            DSDiTreVeSomNgay();
-                                            break;
-                                    }
-
+                                    DSDiTreVeSomNgay();
                                 }
                                 break;
-                            case 4:
+                            case "rdo_DSNVTrungGioNgay":
                                 {
-                                    switch (Commons.Modules.ObjSystems.KyHieuDV(Convert.ToInt64(LK_DON_VI.EditValue)))
-                                    {
-                                        case "MT":
-                                            {
-                                                DSNVTrungGioNgay();
-                                                break;
-                                            }
-                                        default:
-                                            DSNVTrungGioNgay();
-                                            break;
-                                    }
+                                    DSNVTrungGioNgay();
                                     break;
                                 }
-                            case 5:
+                            case "rdo_DSNVCoTren2CapGioChinhNgay":
                                 {
-                                    switch (Commons.Modules.ObjSystems.KyHieuDV(Convert.ToInt64(LK_DON_VI.EditValue)))
-                                    {
-                                        case "MT":
-                                            {
-                                                DSNVCoTren2CapGioChinh();
-                                                break;
-                                            }
-                                        default:
-                                            DSNVCoTren2CapGioChinh();
-                                            break;
-                                    }
+                                    DSNVCoTren2CapGioChinh();
                                     break;
                                 }
-                            case 6:
+                            case "rdo_DSNVLoiTheNgay":
                                 {
-                                    switch (Commons.Modules.ObjSystems.KyHieuDV(Convert.ToInt64(LK_DON_VI.EditValue)))
-                                    {
-                                        case "MT":
-                                            {
-                                                DSNVVachTheLoiNgay();
-                                                break;
-                                            }
-                                        default:
-                                            DSNVVachTheLoiNgay();
-                                            break;
-                                    }
+                                    DSNVCoTren2CapGioChinh();
                                     break;
                                 }
 
-                            case 7:
+                            case "rdo_BieuMauDangKyLamThem":
                                 {
-                                    switch (Commons.Modules.ObjSystems.KyHieuDV(Convert.ToInt64(LK_DON_VI.EditValue)))
+                                    switch (sKyHieuDV)
                                     {
                                         case "MT":
                                             {
@@ -173,9 +100,9 @@ namespace Vs.TimeAttendance
                                     break;
                                 }
 
-                            case 8:
+                            case "rdo_DanhSachNVTangCaNgay":
                                 {
-                                    switch (Commons.Modules.ObjSystems.KyHieuDV(Convert.ToInt64(LK_DON_VI.EditValue)))
+                                    switch (sKyHieuDV)
                                     {
                                         case "MT":
                                             {
@@ -193,7 +120,7 @@ namespace Vs.TimeAttendance
                                     }
                                     break;
                                 }
-                            case 9:
+                            case "rdo_BaoCaoNhanSuNgay":
                                 {
                                     BangChamCongNgay_DM();
                                     break;
@@ -209,20 +136,31 @@ namespace Vs.TimeAttendance
 
         private void ucBaoCaoTheoNgay_Load(object sender, EventArgs e)
         {
-            if (Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString() != "DM")
+            try
             {
-                rdo_ChonBaoCao.Properties.Items.RemoveAt(9);
+                sKyHieuDV = Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString();
+                if (sKyHieuDV == "DM")
+                {
+                    rdo_ChonBaoCao.Properties.Items.RemoveAt(5);
+                    rdo_ChonBaoCao.Properties.Items.RemoveAt(4);
+                }
+                else
+                {
+                    rdo_ChonBaoCao.Properties.Items.RemoveAt(9);
+                }
+                LoadCboDonVi();
+                LoadCboXiNghiep();
+                LoadCboTo();
+                LoadNgay();
+                LoadTinhTrangHopDong();
+                rdo_DiTreVeSom.Visible = false;
+                datNgayTangCa.Enabled = false;
+                datNgayTangCa.EditValue = DateTime.Now;
+                lk_NgayIn.EditValue = DateTime.Today;
+                Commons.OSystems.SetDateEditFormat(lk_NgayIn);
             }
-            LoadCboDonVi();
-            LoadCboXiNghiep();
-            LoadCboTo();
-            LoadNgay();
-            LoadTinhTrangHopDong();
-            rdo_DiTreVeSom.Visible = false;
-            datNgayTangCa.Enabled = false;
-            datNgayTangCa.EditValue = DateTime.Now;
-            lk_NgayIn.EditValue = DateTime.Today;
-            Commons.OSystems.SetDateEditFormat(lk_NgayIn);
+            catch { }
+
         }
 
 
@@ -239,14 +177,14 @@ namespace Vs.TimeAttendance
 
         private void rdo_ChonBaoCao_SelectedIndexChanged(object sender, EventArgs e)
         {
-            switch (rdo_ChonBaoCao.SelectedIndex)
+            switch (rdo_ChonBaoCao.Properties.Items[rdo_ChonBaoCao.SelectedIndex].Tag)
             {
-                case 3:
+                case "rdo_DSDiTreVeSomTheoNgay":
                     {
                         rdo_DiTreVeSom.Visible = true;
                         break;
                     }
-                case 8:
+                case "rdo_DanhSachNVTangCaNgay":
                     {
                         datNgayTangCa.Enabled = true;
                         rdo_DiTreVeSom.Visible = false;
@@ -1424,11 +1362,12 @@ namespace Vs.TimeAttendance
                 {
                     return;
                 }
+                this.Cursor = Cursors.WaitCursor;
                 Excel.Application oXL;
                 Excel.Workbook oWB;
                 Excel.Worksheet oSheet;
                 oXL = new Excel.Application();
-                oXL.Visible = true;
+                oXL.Visible = false;
 
                 oWB = (Excel.Workbook)(oXL.Workbooks.Add(Missing.Value));
                 oSheet = (Excel.Worksheet)oWB.ActiveSheet;
@@ -1469,7 +1408,7 @@ namespace Vs.TimeAttendance
                 row3_Date.Merge();
                 row3_Date.Font.Size = 12;
                 row3_Date.Font.Name = fontName;
-                row3_Date.Value2 = "Ngày/ Date:19-05-2022";
+                row3_Date.Value2 = "Ngày/ Date:" + LK_NgayXemBaoCao.Text + "";
                 row3_Date.WrapText = false;
                 row3_Date.RowHeight = 24;
                 row3_Date.Style.VerticalAlignment = Excel.XlHAlign.xlHAlignCenter;
@@ -1759,9 +1698,9 @@ namespace Vs.TimeAttendance
                     oSheet.get_Range("B" + (rowBD + 1) + "", lastColumn + (rowCnt + 1).ToString()).Value2 = rowData;
 
                     formatRange10.Value2 = "=D" + rowSum + "+F" + rowSum + "-E" + rowSum + "";
-                    formatRange11.Value2 = "=SUM(I"+rowSum+":K"+rowSum+")";
-                    formatRange12.Value2 = "=G"+ rowSum + "-L"+ rowSum + "-H"+ rowSum + "";
-                    formatRange13.Value2 = "=IFERROR(L"+rowSum+"/G"+rowSum+",0)";
+                    formatRange11.Value2 = "=SUM(I" + rowSum + ":K" + rowSum + ")";
+                    formatRange12.Value2 = "=G" + rowSum + "-L" + rowSum + "-H" + rowSum + "";
+                    formatRange13.Value2 = "=IFERROR(L" + rowSum + "/G" + rowSum + ",0)";
 
 
 
@@ -1782,22 +1721,39 @@ namespace Vs.TimeAttendance
                     rowCnt = 0;
                 }
                 rowCnt = keepRowCnt;
-                Excel.Range formatRange;
-                Excel.Range formatRange1;
+                Excel.Range formatRange; // range hien tai
+                Excel.Range formatRange2; // range truoc
+                Excel.Range formatRange1; // range ke tiep
                 Excel.Range formatRange3;
                 string CurentColumn = string.Empty;
                 int rowbd;
+                int rowDup = 0; // row bat dau của dữ liệu duplicate
                 int colKT = dtBCThang.Columns.Count;
+                bool bChan = false;
                 for (rowbd = 8; rowbd <= rowCnt; rowbd++)
                 {
                     formatRange = oSheet.get_Range("B" + rowbd + "");
                     formatRange1 = oSheet.get_Range("B" + (rowbd + 1).ToString());
 
+                    if (formatRange.Value == null)
+                    {
+                        formatRange = oSheet.get_Range("B" + (rowDup).ToString() + "");
+                    }
                     if (formatRange.Value == formatRange1.Value)
                     {
-                        formatRange1.Value = null;
+                        if (bChan == false)
+                        {
+                            rowDup = rowbd;
+                        }
+                        bChan = true;
+                        formatRange.Value = null;
                         formatRange3 = oSheet.get_Range("B" + rowbd + "", "B" + (rowbd + 1).ToString());
                         formatRange3.Merge();
+                    }
+                    else
+                    {
+                        bChan = false;
+                        rowDup = 0;
                     }
                     //formatRange.NumberFormat = "#,##0.00;(#,##0.00); ; ";
                 }
@@ -1945,12 +1901,13 @@ namespace Vs.TimeAttendance
                 //Excel.Range myRange = oSheet.get_Range("A7", lastColumn + (rowCnt - 1).ToString());
                 //myRange.AutoFilter("1", "<>", Microsoft.Office.Interop.Excel.XlAutoFilterOperator.xlOr, "", true);
 
-                
+                this.Cursor = Cursors.Default;
                 oXL.Visible = true;
                 oXL.UserControl = true;
 
                 oWB.SaveAs(SaveExcelFile,
                     AccessMode: Excel.XlSaveAsAccessMode.xlShared);
+
             }
             catch (Exception ex)
             {

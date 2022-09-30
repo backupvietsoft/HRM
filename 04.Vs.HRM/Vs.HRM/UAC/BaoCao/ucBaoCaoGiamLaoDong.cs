@@ -3,6 +3,7 @@ using DevExpress.XtraEditors;
 using System;
 using System.Data;
 using Vs.Report;
+using System.Globalization;
 
 namespace Vs.HRM
 {
@@ -154,7 +155,7 @@ namespace Vs.HRM
                                 break;
                             case 2:
                                 {
-                                    DateTime firstDateTime2 = new DateTime(Convert.ToDateTime(txNam.EditValue).Year, 6, 1);
+                                    DateTime firstDateTime2 = new DateTime(Convert.ToDateTime(txNam.EditValue).Year, 7, 1);
                                     DateTime secondDateTime2 = new DateTime(Convert.ToDateTime(txNam.EditValue).Year, 12, 31);
                                     string sTieuDe2 = "BÁO CÁO GIẢM LAO ĐỘNG 6 THÁNG CUỐI NĂM " + Convert.ToDateTime(txNam.EditValue).Year;
 
@@ -215,8 +216,8 @@ namespace Vs.HRM
             Commons.OSystems.SetDateEditFormat(dtDenNgay);
             Commons.OSystems.SetDateEditFormat(lk_NgayIn);
 
-            dtTuNgay.EditValue = Convert.ToDateTime(("01/" + DateTime.Today.Month + "/" + DateTime.Today.Year));
-            dtDenNgay.EditValue = Convert.ToDateTime(("01/" + DateTime.Today.Month + "/" + DateTime.Today.Year)).AddMonths(1).AddDays(-1);
+            dtTuNgay.EditValue = Convert.ToDateTime(("01/" + DateTime.Today.Month + "/" + DateTime.Today.Year), new CultureInfo("de-DE"));
+            dtDenNgay.EditValue = Convert.ToDateTime(("01/" + DateTime.Today.Month + "/" + DateTime.Today.Year), new CultureInfo("de-DE")).AddMonths(1).AddDays(-1);
             txNam.EditValue = DateTime.Now;
             lk_NgayIn.EditValue = DateTime.Today;
 

@@ -5,6 +5,7 @@ using System.Data;
 using System.Diagnostics;
 using System.Windows.Forms;
 using Vs.Report;
+using System.Globalization;
 
 namespace Vs.HRM
 {
@@ -197,8 +198,8 @@ namespace Vs.HRM
             Commons.OSystems.SetDateEditFormat(lk_NgayIn);
 
             lk_NgayIn.EditValue = DateTime.Today;
-            dtTuNgay.EditValue = Convert.ToDateTime(("01/" + DateTime.Today.Month + "/" + DateTime.Today.Year));
-            dtDenNgay.EditValue = Convert.ToDateTime(("01/" + DateTime.Today.Month + "/" + DateTime.Today.Year)).AddMonths(1).AddDays(-1);
+            dtTuNgay.EditValue = Convert.ToDateTime(("01/" + DateTime.Today.Month + "/" + DateTime.Today.Year), new CultureInfo("de-DE"));
+            dtDenNgay.EditValue = Convert.ToDateTime(("01/" + DateTime.Today.Month + "/" + DateTime.Today.Year), new CultureInfo("de-DE")).AddMonths(1).AddDays(-1);
             txNam.Text = (DateTime.Today.Year.ToString());
             Commons.Modules.sLoad = "";
 

@@ -421,9 +421,6 @@ F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Release\DevExpress.XtraDiagram.v22.1.xm
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Release\DevExpress.Diagram.v22.1.Core.xml
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Release\DevExpress.Pdf.v22.1.Drawing.xml
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Release\DevExpress.Snap.v22.1.Core.xml
-F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Release\de\DevExpress.XtraReports.v22.1.Extensions.resources.dll
-F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Release\es\DevExpress.XtraReports.v22.1.Extensions.resources.dll
-F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Release\ja\DevExpress.XtraReports.v22.1.Extensions.resources.dll
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\obj\Release\VietSoftHRM.csprojAssemblyReference.cache
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\obj\Release\VietSoftHRM.frmThongBaoTuyenDung.resources
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\obj\Release\VietSoftHRM.frmDLTuyenDung.resources

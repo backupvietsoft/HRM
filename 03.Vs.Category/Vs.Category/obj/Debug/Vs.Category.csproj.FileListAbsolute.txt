@@ -1773,8 +1773,8 @@ F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\NPOI.OOXML.dll
 F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\DevExpress.XtraReports.v22.1.dll
 F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\Newtonsoft.Json.dll
 F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\DevExpress.XtraRichEdit.v22.1.dll
-F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\DevExpress.Xpo.v22.1.dll
 F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\VS.Report.dll
+F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\DevExpress.Xpo.v22.1.dll
 F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\Vs.HRM.dll
 F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\Spire.XLS.dll
 F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\DevExpress.RichEdit.v22.1.Core.dll
@@ -1847,12 +1847,6 @@ F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\DevExpress.XtraPivotGrid.v22.1.xm
 F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\DevExpress.Snap.v22.1.Core.xml
 F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\DevExpress.XtraDiagram.v22.1.xml
 F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\DevExpress.Diagram.v22.1.Core.xml
-F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\de\DevExpress.Spreadsheet.v22.1.Core.resources.dll
-F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\es\DevExpress.Spreadsheet.v22.1.Core.resources.dll
-F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\ja\DevExpress.Spreadsheet.v22.1.Core.resources.dll
-F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\de\DevExpress.Snap.v22.1.Core.resources.dll
-F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\es\DevExpress.Snap.v22.1.Core.resources.dll
-F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\ja\DevExpress.Snap.v22.1.Core.resources.dll
 F:\01.HRM\03.Vs.Category\Vs.Category\obj\Debug\Vs.Category.csprojAssemblyReference.cache
 F:\01.HRM\03.Vs.Category\Vs.Category\obj\Debug\Vs.Category.Form1.resources
 F:\01.HRM\03.Vs.Category\Vs.Category\obj\Debug\VS.ERP.frmDuyet.resources

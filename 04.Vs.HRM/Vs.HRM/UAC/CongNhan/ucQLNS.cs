@@ -43,6 +43,7 @@ namespace Vs.HRM
             Commons.Modules.ObjSystems.MLoadLookUpEdit(cbo_TTHT, Commons.Modules.ObjSystems.DataTinHTrangHT(Convert.ToInt32(cboID_LTTHT.EditValue), true), "ID_TT_HT", "TEN_TT_HT", "TEN_TT_HT");
             LoadNhanSu(-1);
             Commons.Modules.sLoad = "";
+            setMauTT();
         }
 
         private void LoadCboDonVi()
@@ -113,6 +114,13 @@ namespace Vs.HRM
             LoadNhanSu(-1);
             Commons.Modules.sLoad = "";
         }
+        private void cbo_TTHT_EditValueChanged(object sender, EventArgs e)
+        {
+            if (Commons.Modules.sLoad == "0Load") return;
+            Commons.Modules.sLoad = "0Load";
+            LoadNhanSu(-1);
+            Commons.Modules.sLoad = "";
+        }
         private void LoadNhanSu(Int64 iIdNs)
         {
             try
@@ -125,7 +133,7 @@ namespace Vs.HRM
                 //grdDSCongNhan.DataSource = dtTmp;
                 grvDSCongNhan.Columns["ID_CN"].Visible = false;
                 grvDSCongNhan.Columns["MAU_TT"].Visible = false;
-
+                grvDSCongNhan.ExpandAllGroups();
                 if (iIdNs != -1)
                 {
                     int index = dtTmp.Rows.IndexOf(dtTmp.Rows.Find(iIdNs));
@@ -344,7 +352,8 @@ namespace Vs.HRM
 
         private void grvDSCongNhan_RowCountChanged(object sender, EventArgs e)
         {
-            TileView view = sender as TileView;
+            GridView view = sender as GridView;
+
             try
             {
                 int index = ItemForSumNhanVien.Text.IndexOf(':');
@@ -375,12 +384,10 @@ namespace Vs.HRM
 
         private void grvDSCongNhan_RowStyle(object sender, RowStyleEventArgs e)
         {
+            if (Commons.Modules.sPS == "0Load") return;
             try
             {
-                //string sMauTT = grvDSCongNhan.GetRowCellValue(e.RowHandle, "MAU_TT").ToString();
                 e.Appearance.BackColor = System.Drawing.ColorTranslator.FromHtml(grvDSCongNhan.GetRowCellValue(e.RowHandle, grvDSCongNhan.Columns["MAU_TT"]).ToString());
-
-                //Override any other formatting  
                 e.HighPriority = true;
             }
             catch (Exception ex)
@@ -388,5 +395,114 @@ namespace Vs.HRM
 
             }
         }
+        private void setMauTT()
+        {
+            try
+            {
+                DataTable dt = new DataTable();
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT ID_TT_HT, MAU_TT FROM dbo.TINH_TRANG_HT ORDER BY STT"));
+                btnBinhThuong.BackColor = System.Drawing.ColorTranslator.FromHtml(dt.Rows[0]["MAU_TT"].ToString());
+                btnSapNghiViec.BackColor = System.Drawing.ColorTranslator.FromHtml(dt.Rows[1]["MAU_TT"].ToString());
+                btnSapNghiSinh.BackColor = System.Drawing.ColorTranslator.FromHtml(dt.Rows[2]["MAU_TT"].ToString());
+                btnNghiDe.BackColor = System.Drawing.ColorTranslator.FromHtml(dt.Rows[3]["MAU_TT"].ToString());
+                btnCheDo1Nam.BackColor = System.Drawing.ColorTranslator.FromHtml(dt.Rows[4]["MAU_TT"].ToString());
+                btnDaNghiViec.BackColor = System.Drawing.ColorTranslator.FromHtml(dt.Rows[5]["MAU_TT"].ToString());
+                btnBoViec.BackColor = System.Drawing.ColorTranslator.FromHtml(dt.Rows[6]["MAU_TT"].ToString());
+                btnSapHetHanHD.BackColor = System.Drawing.ColorTranslator.FromHtml(dt.Rows[7]["MAU_TT"].ToString());
+            }
+            catch { }
+        }
+        #region click mau
+        private void btnBinhThuong_Click(object sender, EventArgs e)
+        {
+            Commons.Modules.sLoad = "0Load";
+            cboID_LTTHT.EditValue = Convert.ToInt32(1);
+            Commons.Modules.ObjSystems.MLoadLookUpEdit(cbo_TTHT, Commons.Modules.ObjSystems.DataTinHTrangHT(Convert.ToInt32(cboID_LTTHT.EditValue), true), "ID_TT_HT", "TEN_TT_HT", "TEN_TT_HT");
+            Commons.Modules.sLoad = "";
+            cbo_TTHT.EditValue = Convert.ToInt64(1);
+        }
+
+        private void btnSapHetHanHD_Click(object sender, EventArgs e)
+        {
+            Commons.Modules.sLoad = "0Load";
+            cboID_LTTHT.EditValue = Convert.ToInt32(1);
+            Commons.Modules.ObjSystems.MLoadLookUpEdit(cbo_TTHT, Commons.Modules.ObjSystems.DataTinHTrangHT(Convert.ToInt32(cboID_LTTHT.EditValue), true), "ID_TT_HT", "TEN_TT_HT", "TEN_TT_HT");
+            Commons.Modules.sLoad = "";
+            cbo_TTHT.EditValue = Convert.ToInt64(8);
+        }
+
+        private void btnSapNghiViec_Click(object sender, EventArgs e)
+        {
+            Commons.Modules.sLoad = "0Load";
+            cboID_LTTHT.EditValue = Convert.ToInt32(1);
+            Commons.Modules.ObjSystems.MLoadLookUpEdit(cbo_TTHT, Commons.Modules.ObjSystems.DataTinHTrangHT(Convert.ToInt32(cboID_LTTHT.EditValue), true), "ID_TT_HT", "TEN_TT_HT", "TEN_TT_HT");
+            Commons.Modules.sLoad = "";
+            cbo_TTHT.EditValue = Convert.ToInt64(2);
+        }
+
+        private void btnSapNghiSinh_Click(object sender, EventArgs e)
+        {
+            Commons.Modules.sLoad = "0Load";
+            cboID_LTTHT.EditValue = Convert.ToInt32(1);
+            Commons.Modules.ObjSystems.MLoadLookUpEdit(cbo_TTHT, Commons.Modules.ObjSystems.DataTinHTrangHT(Convert.ToInt32(cboID_LTTHT.EditValue), true), "ID_TT_HT", "TEN_TT_HT", "TEN_TT_HT");
+            Commons.Modules.sLoad = "";
+            cbo_TTHT.EditValue = Convert.ToInt64(3);
+        }
+
+        private void btnNghiDe_Click(object sender, EventArgs e)
+        {
+            Commons.Modules.sLoad = "0Load";
+            cboID_LTTHT.EditValue = Convert.ToInt32(1);
+            Commons.Modules.ObjSystems.MLoadLookUpEdit(cbo_TTHT, Commons.Modules.ObjSystems.DataTinHTrangHT(Convert.ToInt32(cboID_LTTHT.EditValue), true), "ID_TT_HT", "TEN_TT_HT", "TEN_TT_HT");
+            Commons.Modules.sLoad = "";
+            cbo_TTHT.EditValue = Convert.ToInt64(4);
+        }
+
+        private void btnCheDo1Nam_Click(object sender, EventArgs e)
+        {
+            Commons.Modules.sLoad = "0Load";
+            cboID_LTTHT.EditValue = Convert.ToInt32(1);
+            Commons.Modules.ObjSystems.MLoadLookUpEdit(cbo_TTHT, Commons.Modules.ObjSystems.DataTinHTrangHT(Convert.ToInt32(cboID_LTTHT.EditValue), true), "ID_TT_HT", "TEN_TT_HT", "TEN_TT_HT");
+            Commons.Modules.sLoad = "";
+            cbo_TTHT.EditValue = Convert.ToInt64(5);
+        }
+
+        private void btnDaNghiViec_Click(object sender, EventArgs e)
+        {
+            Commons.Modules.sLoad = "0Load";
+            cboID_LTTHT.EditValue = Convert.ToInt32(2);
+            Commons.Modules.ObjSystems.MLoadLookUpEdit(cbo_TTHT, Commons.Modules.ObjSystems.DataTinHTrangHT(Convert.ToInt32(cboID_LTTHT.EditValue), true), "ID_TT_HT", "TEN_TT_HT", "TEN_TT_HT");
+            Commons.Modules.sLoad = "";
+            cbo_TTHT.EditValue = Convert.ToInt64(6);
+        }
+
+        private void btnBoViec_Click(object sender, EventArgs e)
+        {
+            Commons.Modules.sLoad = "0Load";
+            cboID_LTTHT.EditValue = Convert.ToInt32(2);
+            Commons.Modules.ObjSystems.MLoadLookUpEdit(cbo_TTHT, Commons.Modules.ObjSystems.DataTinHTrangHT(Convert.ToInt32(cboID_LTTHT.EditValue), true), "ID_TT_HT", "TEN_TT_HT", "TEN_TT_HT");
+            Commons.Modules.sLoad = "";
+            cbo_TTHT.EditValue = Convert.ToInt64(7);
+        }
+        //private void LoadMau()
+        //{
+        //    try
+        //    {
+        //        foreach (DevExpress.XtraGrid.Views.Grid.GridView row in grvDSCongNhan.)
+        //            if (Convert.ToInt32(row.Cells[7].Value) < Convert.ToInt32(row.Cells[10].Value))
+        //            {
+        //                grvDSCon
+        //                row.DefaultCellStyle.BackColor = Color.Red;
+        //            }
+        //        for (int i = 0; i < grvDSCongNhan.RowCount; i++)
+        //        {
+        //            e.Appearance.BackColor = System.Drawing.ColorTranslator.FromHtml(grvDSCongNhan.GetRowCellValue(e.RowHandle, grvDSCongNhan.Columns["MAU_TT"]).ToString());
+        //            e.HighPriority = true;
+        //            grvDSCongNhan.SetRowCellValue(i,"ABC",1)
+        //        }
+        //    }
+        //    catch { }
+        //}
+        #endregion
     }
 }

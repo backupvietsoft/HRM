@@ -47,7 +47,6 @@ namespace Vs.HRM
                 enabel(true);
                 btnALL.Buttons[0].Properties.Visible = false;
                 btnALL.Buttons[1].Properties.Visible = false;
-
                 Commons.Modules.ObjSystems.ThayDoiNN(this, new List<LayoutControlGroup> { Root }, btnALL);
             }
             catch (Exception ex)

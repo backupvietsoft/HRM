@@ -4453,11 +4453,11 @@ namespace Commons
             dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetListLOAI_DIEU_CHINH", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll));
             return dt;
         }
-        public DataTable DataLoaiCV(bool coAll, int idXN)
+        public DataTable DataLoaiCV(bool coAll, Int64 idXN, Int64 iIDDV = -1)
         {
             //ID_LCV,TEN_LCV
             DataTable dt = new DataTable();
-            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboLoaiCV", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll, idXN));
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboLoaiCV", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll, idXN, iIDDV));
             return dt;
         }
 

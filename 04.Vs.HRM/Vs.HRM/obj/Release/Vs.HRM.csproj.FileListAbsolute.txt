@@ -127,8 +127,6 @@ H:\Lamviec\Lamviec\HRM\01.HRM\04.Vs.HRM\Vs.HRM\bin\Release\DevExpress.XtraSchedu
 H:\Lamviec\Lamviec\HRM\01.HRM\04.Vs.HRM\Vs.HRM\bin\Release\DevExpress.XtraTreeList.v22.1.xml
 H:\Lamviec\Lamviec\HRM\01.HRM\04.Vs.HRM\Vs.HRM\bin\Release\DevExpress.XtraTreeMap.v22.1.UI.xml
 H:\Lamviec\Lamviec\HRM\01.HRM\04.Vs.HRM\Vs.HRM\bin\Release\DevExpress.XtraTreeMap.v22.1.xml
-H:\Lamviec\Lamviec\HRM\01.HRM\04.Vs.HRM\Vs.HRM\bin\Release\Vs.Recruit.pdb
-H:\Lamviec\Lamviec\HRM\01.HRM\04.Vs.HRM\Vs.HRM\bin\Release\Vs.Recruit.dll.config
 H:\Lamviec\Lamviec\HRM\01.HRM\04.Vs.HRM\Vs.HRM\bin\Release\Newtonsoft.Json.xml
 H:\Lamviec\Lamviec\HRM\01.HRM\04.Vs.HRM\Vs.HRM\bin\Release\DevExpress.XtraDiagram.v22.1.xml
 H:\Lamviec\Lamviec\HRM\01.HRM\04.Vs.HRM\Vs.HRM\bin\Release\DevExpress.Diagram.v22.1.Core.xml
@@ -564,3 +562,4 @@ F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Release\Vs.HRM.csproj.CoreCompileInputs.cache
 F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Release\Vs.HRM.csproj.CopyComplete
 F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Release\Vs.HRM.dll
 F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Release\Vs.HRM.pdb
+H:\Lamviec\Lamviec\HRM\01.HRM\04.Vs.HRM\Vs.HRM\obj\Release\Vs.HRM.frmTaoHDLD.resources

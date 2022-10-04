@@ -2517,7 +2517,6 @@ D:\01.SourceCode\02.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptDSTheoDoiC
 H:\Lamviec\Lamviec\HRM\01.HRM\05.Vs.Report\Vs.Report\bin\Debug\VS.Report.dll.config
 H:\Lamviec\Lamviec\HRM\01.HRM\05.Vs.Report\Vs.Report\bin\Debug\VS.Report.dll
 H:\Lamviec\Lamviec\HRM\01.HRM\05.Vs.Report\Vs.Report\bin\Debug\VS.Report.pdb
-H:\Lamviec\Lamviec\HRM\01.HRM\05.Vs.Report\Vs.Report\bin\Debug\Commons.dll
 H:\Lamviec\Lamviec\HRM\01.HRM\05.Vs.Report\Vs.Report\bin\Debug\DevExpress.BonusSkins.v22.1.dll
 H:\Lamviec\Lamviec\HRM\01.HRM\05.Vs.Report\Vs.Report\bin\Debug\DevExpress.Charts.v22.1.Core.dll
 H:\Lamviec\Lamviec\HRM\01.HRM\05.Vs.Report\Vs.Report\bin\Debug\DevExpress.CodeParser.v22.1.dll
@@ -2673,9 +2672,6 @@ H:\Lamviec\Lamviec\HRM\01.HRM\05.Vs.Report\Vs.Report\bin\Debug\ja\DevExpress.Xtr
 H:\Lamviec\Lamviec\HRM\01.HRM\05.Vs.Report\Vs.Report\bin\Debug\de\DevExpress.XtraReports.v22.1.Extensions.resources.dll
 H:\Lamviec\Lamviec\HRM\01.HRM\05.Vs.Report\Vs.Report\bin\Debug\es\DevExpress.XtraReports.v22.1.Extensions.resources.dll
 H:\Lamviec\Lamviec\HRM\01.HRM\05.Vs.Report\Vs.Report\bin\Debug\ja\DevExpress.XtraReports.v22.1.Extensions.resources.dll
-H:\Lamviec\Lamviec\HRM\01.HRM\05.Vs.Report\Vs.Report\bin\Debug\de\DevExpress.XtraTreeList.v22.1.resources.dll
-H:\Lamviec\Lamviec\HRM\01.HRM\05.Vs.Report\Vs.Report\bin\Debug\es\DevExpress.XtraTreeList.v22.1.resources.dll
-H:\Lamviec\Lamviec\HRM\01.HRM\05.Vs.Report\Vs.Report\bin\Debug\ja\DevExpress.XtraTreeList.v22.1.resources.dll
 H:\Lamviec\Lamviec\HRM\01.HRM\05.Vs.Report\Vs.Report\bin\Debug\de\DevExpress.Map.v22.1.Core.resources.dll
 H:\Lamviec\Lamviec\HRM\01.HRM\05.Vs.Report\Vs.Report\bin\Debug\es\DevExpress.Map.v22.1.Core.resources.dll
 H:\Lamviec\Lamviec\HRM\01.HRM\05.Vs.Report\Vs.Report\bin\Debug\ja\DevExpress.Map.v22.1.Core.resources.dll

@@ -4834,15 +4834,6 @@ namespace Commons
             dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboHinhThucTuyen", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll));
             return dt;
         }
-
-
-        public DataTable DataLoaiCV(bool coAll)
-        {
-            //ID_LCV,TEN_LCV
-            DataTable dt = new DataTable();
-            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboLoaiCV", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll, -1));
-            return dt;
-        }
         public DataTable DataMucDoTieng(bool coAll)
         {
             //ID_MD,TEN_MD

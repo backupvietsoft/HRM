@@ -54,8 +54,8 @@ namespace VietSoftHRM
             try
             {
                 //MRunInt();
-                Application.Run(new frmLogin());
-                //Application.Run(new frmMain());
+                //Application.Run(new frmLogin());
+                Application.Run(new frmMain());
 
                 //Application.Run(new Vs.HRM.frmImportNhanSu());
 

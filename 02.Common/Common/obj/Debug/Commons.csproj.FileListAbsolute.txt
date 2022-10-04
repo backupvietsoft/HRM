@@ -873,7 +873,6 @@ H:\Lamviec\Lamviec\HRM\01.HRM\02.Common\Common\bin\Debug\DevExpress.XtraLayout.v
 H:\Lamviec\Lamviec\HRM\01.HRM\02.Common\Common\bin\Debug\DevExpress.XtraNavBar.v22.1.dll
 H:\Lamviec\Lamviec\HRM\01.HRM\02.Common\Common\bin\Debug\DevExpress.XtraReports.v22.1.dll
 H:\Lamviec\Lamviec\HRM\01.HRM\02.Common\Common\bin\Debug\DevExpress.XtraTreeList.v22.1.dll
-H:\Lamviec\Lamviec\HRM\01.HRM\02.Common\Common\bin\Debug\EPPlus.dll
 H:\Lamviec\Lamviec\HRM\01.HRM\02.Common\Common\bin\Debug\Microsoft.ApplicationBlocks.Data.dll
 H:\Lamviec\Lamviec\HRM\01.HRM\02.Common\Common\bin\Debug\Newtonsoft.Json.dll
 H:\Lamviec\Lamviec\HRM\01.HRM\02.Common\Common\bin\Debug\NPOI.dll

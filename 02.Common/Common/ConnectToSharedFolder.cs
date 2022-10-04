@@ -31,6 +31,7 @@ public class ConnectToSharedFolder : IDisposable
             userName,
             0);
          }, 2000);
+
         thread.Start();
         Thread.Sleep(2000);
         if (result != 0 && result != 1219)

@@ -423,6 +423,12 @@
     <Compile Include="UAC\CongNhan\ctCongNhan\frmInXepLoaiKhenThuong.Designer.cs">
       <DependentUpon>frmInXepLoaiKhenThuong.cs</DependentUpon>
     </Compile>
+    <Compile Include="UAC\CongNhan\ctCongNhan\frmTaoHDLD.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UAC\CongNhan\ctCongNhan\frmTaoHDLD.Designer.cs">
+      <DependentUpon>frmTaoHDLD.cs</DependentUpon>
+    </Compile>
     <Compile Include="UAC\CongNhan\ctCongNhan\frmNDDanhGia.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -791,6 +797,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UAC\CongNhan\ctCongNhan\frmInXepLoaiKhenThuong.resx">
       <DependentUpon>frmInXepLoaiKhenThuong.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UAC\CongNhan\ctCongNhan\frmTaoHDLD.resx">
+      <DependentUpon>frmTaoHDLD.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UAC\CongNhan\ctCongNhan\frmNDDanhGia.resx">
       <DependentUpon>frmNDDanhGia.cs</DependentUpon>

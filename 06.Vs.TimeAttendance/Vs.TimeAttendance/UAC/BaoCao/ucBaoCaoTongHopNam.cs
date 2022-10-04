@@ -81,8 +81,8 @@ namespace Vs.TimeAttendance
                                                 break;
                                             }
                                         default:
-                                            DanhGiaTinhTrangThuViec_DM();
-                                            //BangTHChamCongNam_MT();
+                                            //DanhGiaTinhTrangThuViec_DM();
+                                            BangTHChamCongNam_MT();
                                             break;
                                     }
                                     break;

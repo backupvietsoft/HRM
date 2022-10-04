@@ -87,8 +87,8 @@ namespace Vs.Recruit
 
                 //Vi tri tuyen dung
                 //ID_LCV,TEN_LCV
-                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_VTTD_1, Commons.Modules.ObjSystems.DataLoaiCV(false), "ID_LCV", "TEN_LCV", "TEN_LCV", true, true);
-                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_VTTD_2, Commons.Modules.ObjSystems.DataLoaiCV(false), "ID_LCV", "TEN_LCV", "TEN_LCV", true, true);
+                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_VTTD_1, Commons.Modules.ObjSystems.DataLoaiCV(false,-1), "ID_LCV", "TEN_LCV", "TEN_LCV", true, true);
+                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_VTTD_2, Commons.Modules.ObjSystems.DataLoaiCV(false,-1), "ID_LCV", "TEN_LCV", "TEN_LCV", true, true);
                 //Commons.Modules.ObjSystems.MLoadLookUpEditN(cboDanhGiaTayNghe, Commons.Modules.ObjSystems.DataDanhGiaTayNghe(false), "ID_DGTN", "TEN_DGTN", "TEN_DGTN", "");
 
                 //nguoi quen

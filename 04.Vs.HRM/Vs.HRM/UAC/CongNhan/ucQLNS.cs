@@ -12,6 +12,7 @@ using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraLayout;
 using System.Collections.Generic;
 using System.Drawing;
+using DevExpress.Utils.Menu;
 
 namespace Vs.HRM
 {
@@ -23,7 +24,7 @@ namespace Vs.HRM
         public ucQLNS()
         {
             InitializeComponent();
-            Commons.Modules.ObjSystems.ThayDoiNN(this, new List<LayoutControlGroup>() { Root }, windowsUIButton);
+            Commons.Modules.ObjSystems.ThayDoiNN(this, new List<LayoutControlGroup>() { Root }, windowsUIButtonPanel1);
         }
 
         private void ucQLNS_Load(object sender, EventArgs e)
@@ -384,13 +385,12 @@ namespace Vs.HRM
 
         private void grvDSCongNhan_RowStyle(object sender, RowStyleEventArgs e)
         {
-            if (Commons.Modules.sPS == "0Load") return;
             try
             {
                 e.Appearance.BackColor = System.Drawing.ColorTranslator.FromHtml(grvDSCongNhan.GetRowCellValue(e.RowHandle, grvDSCongNhan.Columns["MAU_TT"]).ToString());
                 e.HighPriority = true;
             }
-            catch (Exception ex)
+            catch
             {
 
             }
@@ -503,6 +503,62 @@ namespace Vs.HRM
         //    }
         //    catch { }
         //}
+        #endregion
+        #region chuotphai
+        class RowInfo
+        {
+            public RowInfo(DevExpress.XtraGrid.Views.Grid.GridView view, int rowHandle)
+            {
+                this.RowHandle = rowHandle;
+                this.View = view;
+            }
+            public DevExpress.XtraGrid.Views.Grid.GridView View;
+            public int RowHandle;
+        }
+        public DXMenuItem MCreateMenuLapHopDong(DevExpress.XtraGrid.Views.Grid.GridView view, int rowHandle)
+        {
+            string sStr = Commons.Modules.ObjLanguages.GetLanguage(Commons.Modules.ModuleName, this.Name, "lblLapHopDong", Commons.Modules.TypeLanguage);
+            DXMenuItem menuLapHopDong = new DXMenuItem(sStr, new EventHandler(LapHopDong));
+            menuLapHopDong.Tag = new RowInfo(view, rowHandle);
+            return menuLapHopDong;
+        }
+        public void LapHopDong(object sender, EventArgs e)
+        {
+            try
+            {
+                frmTaoHDLD frm = new frmTaoHDLD();
+                frm.dt_temp = new DataTable();
+                frm.dt_temp = (DataTable)grdDSCongNhan.DataSource;
+                if (frm.ShowDialog() == DialogResult.OK)
+                {
+                    LoadNhanSu(-1);
+                }
+                else
+                {
+                    LoadNhanSu(-1);
+                }
+            }
+            catch (Exception ex) { }
+        }
+        private void grvDSCongNhan_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
+        {
+            if (Convert.ToInt32(cbo_TTHT.EditValue) != 8) return;
+            try
+            {
+                DevExpress.XtraGrid.Views.Grid.GridView view = sender as DevExpress.XtraGrid.Views.Grid.GridView;
+                if (e.MenuType == DevExpress.XtraGrid.Views.Grid.GridMenuType.Row)
+                {
+                    int irow = e.HitInfo.RowHandle;
+                    e.Menu.Items.Clear();
+                    DevExpress.Utils.Menu.DXMenuItem itemLapHopDong = MCreateMenuLapHopDong(view, irow);
+                    e.Menu.Items.Add(itemLapHopDong);
+                }
+            }
+            catch
+            {
+            }
+        }
+
         #endregion
     }
 }

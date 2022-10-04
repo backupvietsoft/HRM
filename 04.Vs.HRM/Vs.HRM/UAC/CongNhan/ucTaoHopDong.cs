@@ -368,7 +368,6 @@ namespace Vs.HRM
             }
             catch { }
         }
-
         private void cboTo_EditValueChanged(object sender, EventArgs e)
         {
             LookUpEdit lookUp = sender as LookUpEdit;

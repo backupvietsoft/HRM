@@ -31,6 +31,7 @@ namespace Vs.Recruit
         {
             Commons.Modules.sLoad = "0Load";
             LoadCombo();
+            cboTinhTrangUV.EditValue = 1;
             Commons.Modules.sLoad = "";
             LoadUNG_VIEN(-1);
         }
@@ -223,10 +224,11 @@ namespace Vs.Recruit
         {
             try
             {
-                Commons.Modules.ObjSystems.MLoadLookUpEdit(cboDA_TUYEN_DUNG, Commons.Modules.ObjSystems.DataTinhTrangTD(true), "ID_TTTD", "Ten_TTTD", "Ten_TTTD");
-                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboYeuCauTD, Commons.Modules.ObjSystems.DataYeuCauTD(true, 1), "ID_YCTD", "MA_YCTD", "MA_YCTD");
-                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_KHPV, Commons.Modules.ObjSystems.DataKeHoachPV(true,-1), "ID_KHPV", "SO_KHPV", "SO_KHPV");
-                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_VTTD, Commons.Modules.ObjSystems.DataLoaiCV(true, Convert.ToInt32(-1)), "ID_LCV", "TEN_LCV", "TEN_LCV");
+                datTuNgay.DateTime = DateTime.Now.Date.AddDays(-DateTime.Now.Date.Day + 1);
+                datDenNgay.DateTime = DateTime.Now.Date.AddMonths(1).AddDays(-DateTime.Now.Date.Day);
+                Commons.Modules.ObjSystems.MLoadLookUpEdit(cboTinhTrangUV, Commons.Modules.ObjSystems.DataTinhTrangUV(true), "ID_TT_UV", "TEN_TT_UV", "TEN_TT_UV");
+                Commons.Modules.ObjSystems.MLoadLookUpEdit(cboLoaiCNV, Commons.Modules.ObjSystems.DataCongNhanVien(true), "ID_CV", "TEN_CV", "TEN_CV");
+                Commons.Modules.ObjSystems.MLoadLookUpEdit(cboLocTheo, Commons.Modules.ObjSystems.DataCongTheoNgayUV(), "MA_DK", "TEN_DK", "TEN_DK");
             }
             catch
             {
@@ -239,7 +241,7 @@ namespace Vs.Recruit
             {
                 if (Commons.Modules.sLoad == "0Load") return;
                 DataTable dtTmp = new DataTable();
-                dtTmp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetListUngVien", Commons.Modules.UserName, Commons.Modules.TypeLanguage, cboDA_TUYEN_DUNG.EditValue, cboYeuCauTD.EditValue, cboID_KHPV.EditValue, cboID_VTTD.EditValue));
+                dtTmp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetListUngVien", Commons.Modules.UserName, Commons.Modules.TypeLanguage, cboTinhTrangUV.EditValue, cboLoaiCNV.EditValue,cboLocTheo.EditValue,datTuNgay.EditValue, datDenNgay.EditValue));
                 dtTmp.PrimaryKey = new DataColumn[] { dtTmp.Columns["ID_UV"] };
                 Commons.Modules.ObjSystems.MLoadXtraGrid(grdUngVien, grvUngVien, dtTmp, false, true, false, true, true, this.Name);
                 grvUngVien.Columns["ID_UV"].Visible = false;
@@ -355,6 +357,20 @@ namespace Vs.Recruit
                 thread.Start();
                 accorMenuleft.Visible = false;
             }
+        }
+
+        private void cboLocTheo_EditValueChanged(object sender, EventArgs e)
+        {
+            if(cboLocTheo.EditValue.ToString()  == "-1")
+            {
+                datTuNgay.Properties.ReadOnly = true;
+                datDenNgay.Properties.ReadOnly = true;
+            }    
+            else
+            {
+                datTuNgay.Properties.ReadOnly = false;
+                datDenNgay.Properties.ReadOnly = false;
+            }    
         }
     }
 }

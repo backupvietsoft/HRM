@@ -1,5 +1,4 @@
-﻿
-using DevExpress.Utils;
+﻿using DevExpress.Utils;
 using DevExpress.Utils.Layout;
 using DevExpress.XtraBars.Docking2010;
 using DevExpress.XtraBars.Navigation;
@@ -249,9 +248,9 @@ namespace Commons
             }
             return SERVER_FOLDER_PATH;
         }
-        public string CapnhatTL(string strFile,bool locKyTu)
+        public string CapnhatTL(string strFile, bool locKyTu)
         {
-            if(locKyTu == true)
+            if (locKyTu == true)
             {
                 strFile = LocKyTuDB(strFile);
             }
@@ -270,9 +269,51 @@ namespace Commons
             return SERVER_FOLDER_PATH;
         }
 
+        public string STTFileCungThuMuc(string sThuMuc, string sFile, string sFileGoc)
+        {
+            string TenFile = sFile;
+            string DuoiFile;
+            try
+            {
+                DuoiFile = LayDuoiFile(sFile);
+            }
+            catch
+            {
+                DuoiFile = "";
+            }
+            try
+            {
+                string[] sTongFile;
+                int i = 1;
+
+                TenFile = sFile;
+                try
+                {
+                    sTongFile = System.IO.Directory.GetFiles(sThuMuc);  //truong hop thu muc kg có file nao, catch va lay lun gten file do
+
+
+                    List<string> filterKeywords = new List<string>() { sFileGoc };
+                    List<string> sRe;
+                    var result = from p in sTongFile
+                                 where filterKeywords.Any(val => p.Contains(val))
+                                 select p;
+
+                    sRe = result.ToList();
+                    TenFile = sFileGoc + "." + (sRe.Count + 1).ToString().PadLeft(3, '0') + System.IO.Path.GetExtension(sFile);
+                }
+                catch
+                { }
+            }
+            catch (Exception ex)
+            {
+                TenFile = "";
+            }
+
+            return TenFile;
+        }
+
         public bool LuuDuongDan(string strDUONG_DAN, string strHINH, string FormThuMuc)
         {
-            String server = Environment.UserName;
             string folderLocation = Commons.Modules.sDDTaiLieu + '\\' + FormThuMuc;
             string folderLocationFile = folderLocation + '\\' + strHINH;
             bool exists = System.IO.Directory.Exists(folderLocation);
@@ -368,7 +409,7 @@ namespace Commons
                 return false;
             }
         }
-  
+
 
         public string KyHieuDV_CN(Int64 ID_CN)
         {
@@ -1003,7 +1044,12 @@ namespace Commons
             try
             {
                 if (CoNull)
-                    dtTmp.Rows.Add(-99, "");
+                {
+                    DataRow row = dtTmp.NewRow();
+                    row[0] = -99;
+                    row[1] = "";
+                    dtTmp.Rows.InsertAt(row, 0);
+                }
                 cbo.Properties.DataSource = null;
                 cbo.Properties.DisplayMember = "";
                 cbo.Properties.ValueMember = "";
@@ -1029,7 +1075,7 @@ namespace Commons
 
                 cbo.Properties.PopulateViewColumns();
                 cbo.Properties.View.Columns[0].Visible = false;
-                cbo.Properties.View.Columns[Ten].SortOrder = DevExpress.Data.ColumnSortOrder.Ascending;
+                //cbo.Properties.View.Columns[Ten].SortOrder = DevExpress.Data.ColumnSortOrder.Ascending;
                 cbo.Properties.View.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
                 cbo.Properties.View.Appearance.HeaderPanel.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
                 cbo.Properties.View.Appearance.HeaderPanel.Options.UseTextOptions = true;
@@ -1860,7 +1906,27 @@ namespace Commons
             catch
             { }
         }
+        public void MLoadCheckedComboBoxEdit(DevExpress.XtraEditors.CheckedComboBoxEdit cbo, DataTable dtTmp, string Ma, string Ten, string form, bool isNgonNgu)
 
+        {
+            try
+            {
+                cbo.Properties.DataSource = null;
+                cbo.Properties.DisplayMember = "";
+                cbo.Properties.ValueMember = "";
+
+                cbo.Properties.DataSource = dtTmp;
+                cbo.Properties.DisplayMember = Ten;
+                cbo.Properties.ValueMember = Ma;
+                //cbo.Properties.PopulateViewColumns();
+                //cbo.Properties.View.Columns[0].Visible = false;
+                cbo.Properties.AppearanceDropDown.Font = (Font)cbo.Font.Clone();
+                cbo.Properties.DropDownRows = dtTmp.Rows.Count + 2;
+                cbo.Refresh();
+
+            }
+            catch { }
+        }
         private void LoadNNGroupControl(XtraForm frm, LayoutControlGroup group, DataTable dtTmp)
         {
             foreach (var gr in group.Items)
@@ -3799,10 +3865,15 @@ namespace Commons
             cbo.View.Columns[cotan].Visible = false;
         }
 
-        public void AddCombXtra(string Value, string Display, GridView grv, DataTable tempt, bool Search, string cotan, string fName, bool CoNull = false)
+        public void AddCombXtra(string Value, string Display, GridView grv, DataTable tempt, bool Search, string cotan, string fName, bool CoNull = false, bool sort = true)
         {
             if (CoNull)
-                tempt.Rows.Add(-99, "");
+            {
+                DataRow row = tempt.NewRow();
+                row[0] = -99;
+                row[1] = "";
+                tempt.Rows.InsertAt(row, 0);
+            }
             if (Search == true)
             {
                 RepositoryItemSearchLookUpEdit cbo = new RepositoryItemSearchLookUpEdit();
@@ -3814,7 +3885,10 @@ namespace Commons
                 cbo.View.Columns[cotan].Visible = false;
                 cbo.View.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
                 cbo.View.Appearance.HeaderPanel.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-                cbo.View.Columns[Display].SortOrder = DevExpress.Data.ColumnSortOrder.Ascending;
+                if (sort == true)
+                {
+                    cbo.View.Columns[Display].SortOrder = DevExpress.Data.ColumnSortOrder.Ascending;
+                }
                 Commons.Modules.ObjSystems.MLoadNNXtraGrid(cbo.View, fName);
                 grv.Columns[Value].ColumnEdit = cbo;
             }
@@ -3828,8 +3902,11 @@ namespace Commons
                 grv.Columns[Value].ColumnEdit = cbo;
                 cbo.PopulateColumns();
                 cbo.Columns[cotan].Visible = false;
-                cbo.SortColumnIndex = 1;
-                cbo.Columns[Display].SortOrder = DevExpress.Data.ColumnSortOrder.Ascending;
+                if (sort == true)
+                {
+                    cbo.SortColumnIndex = 1;
+                    cbo.Columns[Display].SortOrder = DevExpress.Data.ColumnSortOrder.Ascending;
+                }
                 cbo.AppearanceDropDownHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
                 cbo.AppearanceDropDownHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
                 cbo.Columns[Display].Caption = Commons.Modules.ObjLanguages.GetLanguage(fName, Display);
@@ -4082,7 +4159,7 @@ namespace Commons
             {
                 view.OptionsView.NewItemRowPosition = NewItemRowPosition.Bottom;
                 view.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.True;
-
+                view.FocusedRowHandle = GridControl.NewItemRowHandle;
             }
         }
         public void DeleteAddRow(GridView view)
@@ -4391,11 +4468,11 @@ namespace Commons
             dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetListLOAI_DIEU_CHINH", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll));
             return dt;
         }
-        public DataTable DataLoaiCV(bool coAll, int idXN)
+        public DataTable DataLoaiCV(bool coAll, Int64 idXN, Int64 iIDDV = -1)
         {
             //ID_LCV,TEN_LCV
             DataTable dt = new DataTable();
-            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboLoaiCV", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll, idXN));
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboLoaiCV", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll, idXN, iIDDV));
             return dt;
         }
 
@@ -4648,6 +4725,15 @@ namespace Commons
             dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboTinhTrangYC", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll));
             return dt;
         }
+
+        public DataTable DataTinhTrangCVYC(bool coAll)
+        {
+            //ID_TT_VT, Ten_TT_VT
+            DataTable dt = new DataTable();
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboDataTinhTrangCVYC", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll));
+            return dt;
+        }
+
         public DataTable DataTinhTrangDuyet(bool coAll)
         {
             //ID_TTD,TEN_TT_DUYET
@@ -4689,6 +4775,37 @@ namespace Commons
             //"ID_TT_HT", "TEN_TT_HT,
             DataTable dt = new DataTable();
             dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboTinHTrangHT", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll));
+            return dt;
+        }
+
+        public DataTable DataTinhTrangUV(bool coAll)
+        {
+            //"ID_TT_UV", "TEN_TT_UV,
+            DataTable dt = new DataTable();
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboTinhTrangUV", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll));
+            return dt;
+        }
+
+        public DataTable DataTinhTrangUVPV(bool coAll)
+        {
+            //"DAT", "TEN_TT_UVPV,
+            DataTable dt = new DataTable();
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboTinhTrangUVPV", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll));
+            return dt;
+        }
+
+        public DataTable DataCongNhanVien(bool coAll)
+        {
+            //"ID_CV", "TEN_CV,
+            DataTable dt = new DataTable();
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboCongNhanVien", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll));
+            return dt;
+        }
+        public DataTable DataCongTheoNgayUV()
+        {
+            //"ID_CV", "TEN_CV,
+            DataTable dt = new DataTable();
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboLocTheoNgayUV", Commons.Modules.UserName, Commons.Modules.TypeLanguage));
             return dt;
         }
 
@@ -4757,6 +4874,22 @@ namespace Commons
         {
             DataTable dt = new DataTable();
             dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboHinhThucTuyen", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll));
+            return dt;
+        }
+
+        public DataTable DataMucUuTienTD(bool coAll)
+        {
+            //ID_MUT,TEN_MUT
+            DataTable dt = new DataTable();
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboMucDoUuTienTD", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll));
+            return dt;
+        }
+
+        public DataTable DataMucLuong(bool coAll)
+        {
+            //ID_ML,TEN_ML
+            DataTable dt = new DataTable();
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboMucLuong", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll));
             return dt;
         }
 
@@ -4892,6 +5025,14 @@ namespace Commons
             dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetCongNhan", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll));
             return dt;
         }
+
+        public DataTable DataCongNhanTheoLoaiCV(Int64 iIDLCV)
+        {
+            DataTable dt = new DataTable();
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetCongNhanTheoLoaiCV", Commons.Modules.UserName, Commons.Modules.TypeLanguage, iIDLCV));
+            return dt;
+        }
+
         public DataTable TruongBoPhan()
         {
             DataTable dt = new DataTable();

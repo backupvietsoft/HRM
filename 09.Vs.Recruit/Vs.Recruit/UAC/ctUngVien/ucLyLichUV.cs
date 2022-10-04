@@ -32,12 +32,20 @@ namespace Vs.Recruit
             //format date tiem
             Commons.OSystems.SetDateEditFormat(datNGAY_SINH);
             Commons.OSystems.SetDateEditFormat(datNGAY_CAP);
+            LoadCombo();
+            Commons.Modules.ObjSystems.SetPhanQuyen(windowsUIButton);
             if (Commons.Modules.iUngVien == -1)
             {
                 cothem = true;
+                BinDingData(cothem);
                 enableButon(false);
             }
-            LoadCombo();
+            else
+            {
+                cothem = false;
+                BinDingData(cothem);
+                enableButon(true);
+            }
             Commons.Modules.sPS = "";
             Commons.Modules.ObjSystems.HideWaitForm();
         }
@@ -96,9 +104,6 @@ namespace Vs.Recruit
                 dt_CN.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboCongNhan", Commons.Modules.UserName, Commons.Modules.TypeLanguage, 0));
                 Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_CN, dt_CN, "ID_CN", "HO_TEN", "HO_TEN");
 
-                enableButon(true);
-                Commons.Modules.ObjSystems.SetPhanQuyen(windowsUIButton);
-                BinDingData(cothem);
             }
             catch
             {
@@ -398,8 +403,8 @@ namespace Vs.Recruit
             windowsUIButton.Buttons[0].Properties.Visible = visible;
             windowsUIButton.Buttons[1].Properties.Visible = visible;
             windowsUIButton.Buttons[2].Properties.Visible = visible;
-            //windowsUIButton.Buttons[3].Properties.Visible = visible;
-            //windowsUIButton.Buttons[4].Properties.Visible = visible;
+            windowsUIButton.Buttons[3].Properties.Visible = visible;
+            windowsUIButton.Buttons[4].Properties.Visible = visible;
             windowsUIButton.Buttons[5].Properties.Visible = visible;
             windowsUIButton.Buttons[6].Properties.Visible = !visible;
             windowsUIButton.Buttons[7].Properties.Visible = !visible;
@@ -427,13 +432,14 @@ namespace Vs.Recruit
             txtMUC_LUONG_MONG_MUON.Properties.ReadOnly = visible;
             datNGAY_CO_THE_DI_LAM.Properties.ReadOnly = visible;
             cboID_CN.Properties.ReadOnly = visible;
-            datNGAY_HEN_DL.Properties.ReadOnly = visible;
-            datNGAY_NHAN_VIEC.Properties.ReadOnly = visible;
-            chkXAC_NHAN_DL.Properties.ReadOnly = visible;
-            chkDA_GIOI_THIEU.Properties.ReadOnly = visible;
-            chkDA_CHUYEN.Properties.ReadOnly = visible;
+            datNGAY_HEN_DL.Properties.ReadOnly = true;
+            datNGAY_HEN_DL.Properties.Buttons[0].Enabled = !datNGAY_HEN_DL.Properties.ReadOnly;
+            datNGAY_NHAN_VIEC.Properties.ReadOnly = true;
+            datNGAY_NHAN_VIEC.Properties.Buttons[0].Enabled = !datNGAY_NHAN_VIEC.Properties.ReadOnly;
+       
             //txtGHI_CHU.Properties.ReadOnly = visible;
             datNGAY_SINH.Properties.ReadOnly = visible;
+            datNGAY_SINH.Properties.Buttons[0].Enabled = !datNGAY_SINH.Properties.ReadOnly;
             PHAILookUpEdit.Properties.ReadOnly = visible;
             //cboHINH_THUC_TUYEN.Properties.ReadOnly = visible;
             //cboID_TDVH.Properties.ReadOnly = visible;
@@ -442,6 +448,7 @@ namespace Vs.Recruit
             txtNOI_SINH.Properties.ReadOnly = visible;
             txtSO_CMND.Properties.ReadOnly = visible;
             datNGAY_CAP.Properties.ReadOnly = visible;
+            datNGAY_CAP.Properties.Buttons[0].Enabled = !datNGAY_CAP.Properties.ReadOnly;
             cboNOI_CAP.Properties.ReadOnly = visible;
             cboID_TT_HN.Properties.ReadOnly = visible;
             txtEmail.Properties.ReadOnly = visible;
@@ -551,7 +558,6 @@ namespace Vs.Recruit
                 XtraMessageBox.Show(ex.Message.ToString());
                 return false;
             }
-
         }
 
         #endregion

@@ -238,6 +238,18 @@
     <Compile Include="Form\frmCapNhatNhanh.Designer.cs">
       <DependentUpon>frmCapNhatNhanh.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form\frmThongBaoTuyenDung.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\frmThongBaoTuyenDung.Designer.cs">
+      <DependentUpon>frmThongBaoTuyenDung.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form\frmUpdateMucUuTien.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\frmUpdateMucUuTien.Designer.cs">
+      <DependentUpon>frmUpdateMucUuTien.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form\frmThongTinTiepNhanUV.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -491,6 +503,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form\frmCapNhatNhanh.resx">
       <DependentUpon>frmCapNhatNhanh.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\frmThongBaoTuyenDung.resx">
+      <DependentUpon>frmThongBaoTuyenDung.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\frmUpdateMucUuTien.resx">
+      <DependentUpon>frmUpdateMucUuTien.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\frmThongTinTiepNhanUV.resx">
       <DependentUpon>frmThongTinTiepNhanUV.cs</DependentUpon>

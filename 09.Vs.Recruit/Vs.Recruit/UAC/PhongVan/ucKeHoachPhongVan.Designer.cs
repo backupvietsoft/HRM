@@ -337,6 +337,7 @@
             this.grvViTri.CellValueChanging += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.grvViTri_CellValueChanging);
             this.grvViTri.InvalidRowException += new DevExpress.XtraGrid.Views.Base.InvalidRowExceptionEventHandler(this.grvViTri_InvalidRowException);
             this.grvViTri.ValidateRow += new DevExpress.XtraGrid.Views.Base.ValidateRowEventHandler(this.grvViTri_ValidateRow);
+            this.grvViTri.RowCountChanged += new System.EventHandler(this.grvViTri_RowCountChanged);
             this.grvViTri.InvalidValueException += new DevExpress.XtraEditors.Controls.InvalidValueExceptionEventHandler(this.grvViTri_InvalidValueException);
             // 
             // txtSO_KH
@@ -486,7 +487,6 @@
             conditionValidationRule3.Value1 = ((long)(0));
             this.dxValidationProvider1.SetValidationRule(this.cboBPYC, conditionValidationRule3);
             this.cboBPYC.BeforePopup += new System.EventHandler(this.cboBPYC_BeforePopup);
-            this.cboBPYC.QueryPopUp += new System.ComponentModel.CancelEventHandler(this.cboBPYC_QueryPopUp);
             // 
             // searchLookUpEdit1View
             // 

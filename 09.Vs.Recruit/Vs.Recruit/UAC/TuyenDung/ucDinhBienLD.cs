@@ -43,10 +43,7 @@ namespace Vs.Recruit
                 if (grdDinhBienLD.DataSource == null)
                 {
                     Commons.Modules.ObjSystems.MLoadXtraGrid(grdDinhBienLD, grvDinhBienLD, dt, false, false, true, true, true, this.Name);
-
-                    int idXN = -1;
-                    Commons.Modules.ObjSystems.AddCombXtra("ID_LCV", "TEN_LCV", grvDinhBienLD, Commons.Modules.ObjSystems.DataLoaiCV(false,idXN), true, "ID_LCV", this.Name);
-
+                    Commons.Modules.ObjSystems.AddCombXtra("ID_LCV", "TEN_LCV", grvDinhBienLD, Commons.Modules.ObjSystems.DataLoaiCV(false,-1), true, "ID_LCV", this.Name);
                     grvDinhBienLD.Columns["ID_LCV"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
                     Commons.Modules.ObjSystems.DeleteAddRow(grvDinhBienLD);
                 }
@@ -164,7 +161,7 @@ namespace Vs.Recruit
             System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
             Microsoft.Office.Interop.Excel.Workbooks excelWorkbooks = excelApplication.Workbooks;
             Microsoft.Office.Interop.Excel.Workbook excelWorkbook = excelWorkbooks.Open(sPath, 0, false, 5, "", "", false, Microsoft.Office.Interop.Excel.XlPlatform.xlWindows, "", false, false, 0, true);
-            Microsoft.Office.Interop.Excel.Worksheet excelWorkSheet = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Sheets[1];
+            Excel.Worksheet excelWorkSheet = (Excel.Worksheet)excelWorkbook.Sheets[1];
             try
             {
                 excelApplication.Cells.Borders.LineStyle = 0;
@@ -224,7 +221,7 @@ namespace Vs.Recruit
 
                     title = Commons.Modules.MExcel.GetRange(excelWorkSheet, DONG, 1, DONG + dt.Rows.Count - 1, dt.Columns.Count);
                     Commons.Modules.MExcel.MExportExcel(dt, excelWorkSheet, title, false);
-
+                    
                     for (int i = 0; i < 11; i++)
                     {
                         title = Commons.Modules.MExcel.GetRange(excelWorkSheet, DONG - 2, TCot + 3 + i, DONG - 2, TCot + 3 + i);

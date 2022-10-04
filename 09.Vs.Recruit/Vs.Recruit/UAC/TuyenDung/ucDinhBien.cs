@@ -12,6 +12,7 @@ using Excel;
 using DataTable = System.Data.DataTable;
 using System.Reflection;
 using System.Drawing;
+using DevExpress.Utils;
 
 namespace Vs.Recruit
 {
@@ -36,36 +37,40 @@ namespace Vs.Recruit
             Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboDV, Commons.Modules.ObjSystems.DataDonVi(false), "ID_DV", "TEN_DV", "TEN_DV");
             Commons.Modules.ObjSystems.ThayDoiNN(this, new List<LayoutControlGroup> { Root }, windowsUIButton);
             Commons.Modules.sLoad = "";
-            LoadGrdDinhBienLD();
+            LoadgrvDinhBien(-1);
         }
-        private void LoadGrdDinhBienLD()
+        private void LoadgrvDinhBien(Int64 iID_LCV)
         {
             try
             {
                 if (Commons.Modules.sLoad == "0Load") return;
                 DataTable dt = new DataTable();
                 dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetListDinhBien", datNam.DateTime.Year, cboDV.EditValue, Commons.Modules.UserName, Commons.Modules.TypeLanguage, ""));
+                dt.PrimaryKey = new DataColumn[] { dt.Columns["ID_LCV"] };
                 if (grdDinhBien.DataSource == null)
                 {
                     Commons.Modules.ObjSystems.MLoadXtraGrid(grdDinhBien, grvDinhBien, dt, false, false, false, true, true, this.Name);
 
 
-                    DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit cboLCV = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
+                    DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit cboLCV = new DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit();
+   
+                    //ID_LCV,TEN_LCV
+                    
                     cboLCV.NullText = "";
                     cboLCV.ValueMember = "ID_LCV";
                     cboLCV.DisplayMember = "TEN_LCV";
-                    //ID_LCV,TEN_LCV
-                    cboLCV.DataSource = Commons.Modules.ObjSystems.DataLoaiCV(false, Convert.ToInt32(-1));
-                    cboLCV.Columns.Clear();
-                    cboLCV.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID_LCV"));
-                    cboLCV.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("TEN_LCV"));
-                    cboLCV.Columns["TEN_LCV"].Caption = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "TEN_LCV");
-                    cboLCV.AppearanceDropDownHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-                    cboLCV.AppearanceDropDownHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-                    cboLCV.Columns["ID_LCV"].Visible = false;
+                    cboLCV.DataSource = Commons.Modules.ObjSystems.DataLoaiCV(false, -1);
+                    cboLCV.View.PopulateColumns(cboLCV.DataSource);
+                    cboLCV.View.Columns["TEN_LCV"].Caption = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "TEN_LCV");
+                    cboLCV.View.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+                    cboLCV.View.Appearance.HeaderPanel.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+                    cboLCV.View.Columns["ID_LCV"].Visible = false;
                     grvDinhBien.Columns["ID_LCV"].ColumnEdit = cboLCV;
                     cboLCV.BeforePopup += cboLCV_BeforePopup;
                     cboLCV.EditValueChanged += cboLCV_EditValueChanged;
+
+                    grvDinhBien.Columns["DINH_BIEN"].DisplayFormat.FormatType = FormatType.None;
+                    grvDinhBien.Columns["DINH_BIEN"].DisplayFormat.FormatString = Commons.Modules.sSoLeSL;
 
                     //Commons.Modules.ObjSystems.AddCombXtra("ID_LCV", "TEN_LCV", grvDinhBien, Commons.Modules.ObjSystems.DataLoaiCV(false, Convert.ToInt32(-1)), true, "ID_LCV", this.Name);
                     Commons.Modules.ObjSystems.DeleteAddRow(grvDinhBien);
@@ -74,6 +79,14 @@ namespace Vs.Recruit
                 {
                     grdDinhBien.DataSource = dt;
                 }
+
+                if (iID_LCV != -1)
+                {
+                    int index = dt.Rows.IndexOf(dt.Rows.Find(iID_LCV));
+                    grvDinhBien.FocusedRowHandle = grvDinhBien.GetRowHandle(index);
+                    grvDinhBien.SelectRow(index);
+                }
+
             }
             catch
             {
@@ -81,17 +94,22 @@ namespace Vs.Recruit
         }
         private void cboLCV_EditValueChanged(object sender, EventArgs e)
         {
-            LookUpEdit lookUp = sender as LookUpEdit;
-            DataRowView dataRow = lookUp.GetSelectedDataRow() as DataRowView;
-            grvDinhBien.SetFocusedRowCellValue("ID_LCV", Convert.ToUInt64((dataRow.Row[0])));
+            try
+            {
+                LookUpEdit lookUp = sender as LookUpEdit;
+                DataRowView dataRow = lookUp.GetSelectedDataRow() as DataRowView;
+                grvDinhBien.SetFocusedRowCellValue("ID_LCV", Convert.ToUInt64((dataRow.Row[0])));
+            }
+            catch
+            {
+            }
         }
         private void cboLCV_BeforePopup(object sender, EventArgs e)
         {
             try
             {
-                LookUpEdit lookUp = sender as LookUpEdit;
-                lookUp.Properties.DataSource = Commons.Modules.ObjSystems.DataLoaiCV(false,Convert.ToInt32(cboDV.EditValue));
-
+                SearchLookUpEdit lookUp = sender as SearchLookUpEdit;
+                lookUp.Properties.DataSource = Commons.Modules.ObjSystems.DataLoaiCV(false,-1,Convert.ToInt64(cboDV.EditValue));
                 DataTable dt = new DataTable();
                 dt = (DataTable)lookUp.Properties.DataSource;
                 DataTable dtTmp = new DataTable();
@@ -106,7 +124,7 @@ namespace Vs.Recruit
                         sID = sID + dtTmp.Rows[i]["ID_LCV"].ToString() + ",";
                     }
                     sID = sID.Substring(0, sID.Length - 1);
-                    sdkien = "ID_LCV NOT IN ("+sID+")";
+                    sdkien = "ID_LCV NOT IN (" + sID + ")";
                     dt.DefaultView.RowFilter = sdkien;
                 }
                 catch
@@ -132,16 +150,34 @@ namespace Vs.Recruit
                 case "them":
                     {
                         enableButon(false);
-                        Commons.Modules.ObjSystems.AddnewRow(grvDinhBien, true);
-                        grvDinhBien.FocusedRowHandle = grvDinhBien.GetRowHandle(grvDinhBien.RowCount - 2);
-                        grvDinhBien.ClearSelection();
-                        grvDinhBien.SelectRow(grvDinhBien.RowCount - 2);
+                        grvDinhBien.Columns["ID_LCV"].OptionsColumn.ReadOnly = false;
+                        if (grvDinhBien.RowCount == 0)
+                        {
+                            try
+                            {
+                                string sSql = "SELECT T2.ID_LCV,CONVERT(FLOAT,0) SL_CHUYEN,CONVERT(FLOAT,0) DINH_BIEN,CONVERT(FLOAT,0) TONG_SO FROM dbo.XI_NGHIEP T1 INNER JOIN LOAI_CONG_VIEC_XI_NGHIEP T2 ON T2.ID_XN = T1.ID_XN INNER JOIN  dbo.LOAI_CONG_VIEC T3 ON T3.ID_LCV = T2.ID_LCV WHERE(T2.ID_XN = " + Convert.ToInt32(cboDV.EditValue) + ") ORDER BY TEN_LCV";
+                                DataTable dt = new DataTable();
+                                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSql));
+                                dt.Columns["DINH_BIEN"].ReadOnly = false;
+                                grdDinhBien.DataSource = dt;
+                                grvDinhBien.OptionsBehavior.Editable = true;
+                                grvDinhBien.Columns["ID_LCV"].OptionsColumn.ReadOnly = true;
+                            }
+                            catch
+                            {
+                            }
+                        }
+                        else
+                        {
+                            Commons.Modules.ObjSystems.AddnewRow(grvDinhBien, true);
+                        }
                         break;
                     }
                 case "sua":
                     {
                         enableButon(false);
                         Commons.Modules.ObjSystems.AddnewRow(grvDinhBien, false);
+                        grvDinhBien.Columns["ID_LCV"].OptionsColumn.ReadOnly = true;
                         break;
                     }
                 case "xoa":
@@ -161,7 +197,7 @@ namespace Vs.Recruit
                     }
                 case "luu":
                     {
-                        grvDinhBien.ValidateEditor();
+                        Validate();
                         if (grvDinhBien.HasColumnErrors) return;
                         try
                         {
@@ -169,19 +205,19 @@ namespace Vs.Recruit
                             Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sbt, Commons.Modules.ObjSystems.ConvertDatatable(grvDinhBien), "");
                             SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spGetListDinhBien", datNam.DateTime.Year, cboDV.EditValue, Commons.Modules.UserName, Commons.Modules.TypeLanguage, sbt);
                         }
-                        catch (Exception ex)
+                        catch
                         {
                             return;
                         }
                         enableButon(true);
                         Commons.Modules.ObjSystems.DeleteAddRow(grvDinhBien);
-                        LoadGrdDinhBienLD();
+                        LoadgrvDinhBien(Convert.ToInt64(grvDinhBien.GetFocusedRowCellValue("ID_LCV")));
                         break;
                     }
                 case "khongluu":
                     {
                         enableButon(true);
-                        LoadGrdDinhBienLD();
+                        LoadgrvDinhBien(Convert.ToInt64(grvDinhBien.GetFocusedRowCellValue("ID_LCV")));
                         Commons.Modules.ObjSystems.DeleteAddRow(grvDinhBien);
                         break;
                     }
@@ -446,7 +482,7 @@ namespace Vs.Recruit
         {
             windowsUIButton.Buttons[0].Properties.Visible = visible;
             windowsUIButton.Buttons[1].Properties.Visible = visible;
-            windowsUIButton.Buttons[2].Properties.Visible = visible;
+            windowsUIButton.Buttons[2].Properties.Visible = false;
             windowsUIButton.Buttons[3].Properties.Visible = visible;
             windowsUIButton.Buttons[4].Properties.Visible = visible;
             windowsUIButton.Buttons[5].Properties.Visible = visible;
@@ -456,68 +492,19 @@ namespace Vs.Recruit
             datNam.ReadOnly = !visible;
             cboDV.ReadOnly = !visible;
         }
-        private void grvDinhBienLD_ValidatingEditor(object sender, DevExpress.XtraEditors.Controls.BaseContainerValidateEditorEventArgs e)
+
+        private void grvDinhBien_InvalidRowException(object sender, DevExpress.XtraGrid.Views.Base.InvalidRowExceptionEventArgs e)
         {
-            //kiểm tra
             try
             {
-                grvDinhBien.ClearColumnErrors();
-                try
-                {
-                    DataTable dt = new DataTable();
-                    GridView view = sender as GridView;
-                    if (view == null) return;
-                    if (view.FocusedColumn.Name == "colID_LCV")
-                    {//kiểm tra máy không được để trống
-                        if (string.IsNullOrEmpty(e.Value.ToString()))
-                        {
-                            e.Valid = false;
-                            e.ErrorText = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "erLDVKhongTrong");
-                            view.SetColumnError(view.Columns["ID_LCV"], e.ErrorText);
-                            return;
-                        }
-                        else
-                        {
-                            dt = new DataTable();
-                            dt = Commons.Modules.ObjSystems.ConvertDatatable(grdDinhBien);
-                            if (dt.AsEnumerable().Count(x => x.Field<Int64>("ID_LCV").Equals(e.Value)) > 0)
-                            {
-                                e.Valid = false;
-                                e.ErrorText = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "erTrungDuLieu");
-                                view.SetColumnError(view.Columns["ID_LCV"], e.ErrorText);
-                                return;
-                            }
-                        }
-                    }
-                    if (view.FocusedColumn.Name == "colDINH_BIEN")
-                    {
-                        if (string.IsNullOrEmpty(grvDinhBien.GetFocusedRowCellValue("ID_LCV").ToString()))
-                        {
-                            e.Valid = false;
-                            XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgLCVKhongTrong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            e.ErrorText = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "erLDVKhongTrong");
-                            view.SetColumnError(view.Columns["ID_LCV"], e.ErrorText);
-                            return;
-                        }
-                    }
-                }
-                catch { }
+                e.ExceptionMode = DevExpress.XtraEditors.Controls.ExceptionMode.NoAction;
             }
             catch
-            {
-            }
-        }
-        private void grvDinhBienLD_InvalidValueException(object sender, DevExpress.XtraEditors.Controls.InvalidValueExceptionEventArgs e)
-        {
-            e.ExceptionMode = DevExpress.XtraEditors.Controls.ExceptionMode.NoAction;
-        }
-        private void grvDinhBienLD_InvalidRowException(object sender, DevExpress.XtraGrid.Views.Base.InvalidRowExceptionEventArgs e)
-        {
-            e.ExceptionMode = DevExpress.XtraEditors.Controls.ExceptionMode.NoAction;
+            { }
         }
         private void datNam_EditValueChanged(object sender, EventArgs e)
         {
-            LoadGrdDinhBienLD();
+            LoadgrvDinhBien(-1);
         }
         private void XoaDinhBien()
         {
@@ -533,18 +520,43 @@ namespace Vs.Recruit
                 XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDelDangSuDung") + "\n" + ex.Message.ToString(), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
-        private void grvDinhBienLD_ValidateRow(object sender, DevExpress.XtraGrid.Views.Base.ValidateRowEventArgs e)
+        private void grvDinhBien_ValidateRow(object sender, DevExpress.XtraGrid.Views.Base.ValidateRowEventArgs e)
         {
-            //DevExpress.XtraGrid.Views.Grid.GridView view = (DevExpress.XtraGrid.Views.Grid.GridView)sender;
-            //if (Commons.Modules.ObjSystems.IsnullorEmpty(view.GetRowCellValue(e.RowHandle, "ID_LCV")))
-            //{
-            //    e.Valid = false;
-            //    e.ErrorText = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "erLDVKhongTrong");
-            //    view.SetColumnError(view.Columns["ID_LCV"], e.ErrorText);
-            //    return;
-            //}
+            try
+            {
+                grvDinhBien.ClearColumnErrors();
+                DevExpress.XtraGrid.Views.Grid.GridView view = (DevExpress.XtraGrid.Views.Grid.GridView)sender;
+                if (Commons.Modules.ObjSystems.IsnullorEmpty(view.GetRowCellValue(e.RowHandle, "ID_LCV")))
+                {
+                    e.Valid = false;
+                    e.ErrorText = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "erLDVKhongTrong");
+                    view.SetColumnError(view.Columns["ID_LCV"], e.ErrorText);
+                    return;
+                }
+                if (Commons.Modules.ObjSystems.IsnullorEmpty(view.GetRowCellValue(e.RowHandle, "DINH_BIEN")))
+                {
+                    e.Valid = false;
+                    e.ErrorText = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "erSoLuongKhongTrong");
+                    view.SetColumnError(view.Columns["DINH_BIEN"], e.ErrorText);
+                    return;
+                }
+                else
+                {
+                    //không nhỏ hơn không
+                    if (Convert.ToInt32(view.GetRowCellValue(e.RowHandle, "DINH_BIEN")) <= 0)
+                    {
+                        e.Valid = false;
+                        e.ErrorText = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "erSoLuongNhoHonKhong");
+                        view.SetColumnError(view.Columns["DINH_BIEN"], e.ErrorText);
+                        return;
+                    }
+                }
+            }
+            catch
+            {
+            }
         }
-        private void grdDinhBienLD_ProcessGridKey(object sender, KeyEventArgs e)
+        private void grdDinhBien_ProcessGridKey(object sender, KeyEventArgs e)
         {
             if (e.KeyData == Keys.Delete)
             {

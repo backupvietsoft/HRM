@@ -1857,7 +1857,6 @@ D:\01.SourceCode\02.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\DevExpr
 D:\01.SourceCode\02.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\DevExpress.XtraPrinting.v22.1.dll
 D:\01.SourceCode\02.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\DevExpress.XtraReports.v22.1.dll
 D:\01.SourceCode\02.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\DevExpress.XtraTreeList.v22.1.dll
-D:\01.SourceCode\02.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\VS.Report.dll
 D:\01.SourceCode\02.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\DevExpress.XtraReports.v22.1.Extensions.dll
 D:\01.SourceCode\02.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\NPOI.dll
 D:\01.SourceCode\02.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\NPOI.OOXML.dll

@@ -8,7 +8,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
-
 namespace Vs.Recruit
 {
     public partial class ucKeHoachPhongVan : DevExpress.XtraEditors.XtraUserControl
@@ -76,21 +75,17 @@ namespace Vs.Recruit
             {
                 if (Commons.Modules.sLoad == "0Load") return;
                 DataTable dt = new DataTable();
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT A.ID_KHPV,A.ID_YCTD,A.ID_VTTD,SUM(B.SL_TUYEN) AS  SL_TUYEN,dbo.fnGetTrangThaiPV(A.ID_YCTD,A.ID_VTTD,0) AS TRANG_THAI FROM dbo.KHPV_VTTD A INNER JOIN YCTD_VI_TRI_TUYEN B ON B.ID_YCTD = A.ID_YCTD AND B.ID_VTTD = A.ID_VTTD AND ID_KHPV = " + iID_KHPV + " GROUP BY A.ID_KHPV, A.ID_YCTD, A.ID_VTTD"));
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spgetListYeuCauTDKH", Commons.Modules.UserName, Commons.Modules.TypeLanguage, iID_KHPV));
                 dt.Columns["SL_TUYEN"].ReadOnly = false;
                 if (grdViTri.DataSource == null)
                 {
                     Commons.Modules.ObjSystems.MLoadXtraGrid(grdViTri, grvViTri, dt, true, false, false, true, true, this.Name);
                     grvViTri.Columns["ID_KHPV"].Visible = false;
                     grvViTri.Columns["SL_TUYEN"].OptionsColumn.AllowEdit = false;
-                    //ID_YCTD,MA_YCTD
-                    //Commons.Modules.ObjSystems.AddCombXtra("ID_YCTD", "MA_YCTD", grvViTri, Commons.Modules.ObjSystems.DataYeuCauTD(false, 1), true, "ID_YCTD", this.Name, true);
-                    //Danh sach benh vien
                     DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit cboYCTD = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
                     cboYCTD.NullText = "";
                     cboYCTD.ValueMember = "ID_YCTD";
                     cboYCTD.DisplayMember = "MA_YCTD";
-                    //ID_YCTD,MA_YCTD
                     cboYCTD.DataSource = Commons.Modules.ObjSystems.DataYeuCauTD(false, -1);
                     cboYCTD.Columns.Clear();
                     cboYCTD.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID_YCTD"));
@@ -148,14 +143,15 @@ namespace Vs.Recruit
         {
             LookUpEdit lookUp = sender as LookUpEdit;
             DataTable dt = new DataTable();
-            if (chkKieuPV.Checked == false)
-            {
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT DISTINCT ID_YCTD,MA_YCTD FROM dbo.YEU_CAU_TUYEN_DUNG WHERE ID_TT != 3 AND ID_XN = " + cboBPYC.EditValue + " ORDER BY MA_YCTD DESC"));
-            }
-            else
-            {
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT DISTINCT A.ID_YCTD,MA_YCTD FROM dbo.YEU_CAU_TUYEN_DUNG A INNER JOIN dbo.YCTD_VI_TRI_TUYEN B ON B.ID_YCTD = A.ID_YCTD INNER JOIN dbo.LOAI_CONG_VIEC C ON C.ID_LCV = B.ID_VTTD WHERE ID_TT != 3 AND C.ID_CV = 208 AND A.ID_XN = " + cboBPYC.EditValue + "ORDER BY A.MA_YCTD DESC"));
-            }
+            //if (chkKieuPV.Checked == false)
+            //{
+            //dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT DISTINCT A.ID_YCTD,MA_YCTD FROM dbo.YEU_CAU_TUYEN_DUNG A INNER JOIN dbo.YCTD_VI_TRI_TUYEN B ON B.ID_YCTD = A.ID_YCTD INNER JOIN dbo.LOAI_CONG_VIEC C ON C.ID_LCV = B.ID_VTTD WHERE ID_TT != 3 AND C.ID_CV = 208 AND B.ID_TT_VT IN(3, 5, 6) AND A.ID_XN = " + cboBPYC.EditValue + "ORDER BY A.MA_YCTD DESC"));
+            //}
+            //else
+            //{
+            //    dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT DISTINCT A.ID_YCTD,MA_YCTD FROM dbo.YEU_CAU_TUYEN_DUNG A INNER JOIN dbo.YCTD_VI_TRI_TUYEN B ON B.ID_YCTD = A.ID_YCTD INNER JOIN dbo.LOAI_CONG_VIEC C ON C.ID_LCV = B.ID_VTTD WHERE ID_TT != 3 AND C.ID_CV = 205 AND B.ID_TT_VT IN(3, 5, 6) AND A.ID_XN = " + cboBPYC.EditValue + "ORDER BY A.MA_YCTD DESC"));
+            //}
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT DISTINCT A.ID_YCTD,MA_YCTD FROM dbo.YEU_CAU_TUYEN_DUNG A INNER JOIN dbo.YCTD_VI_TRI_TUYEN B ON B.ID_YCTD = A.ID_YCTD INNER JOIN dbo.LOAI_CONG_VIEC C ON C.ID_LCV = B.ID_VTTD WHERE ID_TT != 3 AND C.ID_CV != 206 AND B.ID_TT_VT IN(3, 5, 6) AND A.ID_XN = " + cboBPYC.EditValue + "ORDER BY A.MA_YCTD DESC"));
             lookUp.Properties.DataSource = dt;
         }
 
@@ -164,16 +160,16 @@ namespace Vs.Recruit
             try
             {
                 LookUpEdit lookUp = sender as LookUpEdit;
-                if (chkKieuPV.Checked == false)
-                {
-                    lookUp.Properties.DataSource = Commons.Modules.ObjSystems.DataViTri(Convert.ToInt64(grvViTri.GetFocusedRowCellValue("ID_YCTD")), false);
-                }
-                else
-                {
-                    DataTable dt = new DataTable();
-                    dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT DISTINCT A.ID_VTTD,CASE 0 WHEN 0 THEN TEN_LCV WHEN 1 THEN ISNULL(NULLIF(TEN_LCV_A,''),TEN_LCV) ELSE ISNULL(NULLIF(TEN_LCV_H,''),TEN_LCV) END AS TEN_VTTD FROM dbo.YCTD_VI_TRI_TUYEN A INNER JOIN dbo.LOAI_CONG_VIEC B ON B.ID_LCV = A.ID_VTTD WHERE A.ID_YCTD = " + grvViTri.GetFocusedRowCellValue("ID_YCTD") + " AND B.ID_CV = 208 ORDER BY TEN_VTTD"));
-                    lookUp.Properties.DataSource = dt;
-                }
+                //if (chkKieuPV.Checked == false)
+                //{
+                //    lookUp.Properties.DataSource = Commons.Modules.ObjSystems.DataViTri(Convert.ToInt64(grvViTri.GetFocusedRowCellValue("ID_YCTD")), false);
+                //}
+                //else
+                //{
+                DataTable dt = new DataTable();
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT DISTINCT A.ID_VTTD,CASE 0 WHEN 0 THEN TEN_LCV WHEN 1 THEN ISNULL(NULLIF(TEN_LCV_A,''),TEN_LCV) ELSE ISNULL(NULLIF(TEN_LCV_H,''),TEN_LCV) END AS TEN_VTTD FROM dbo.YCTD_VI_TRI_TUYEN A INNER JOIN dbo.LOAI_CONG_VIEC B ON B.ID_LCV = A.ID_VTTD WHERE A.ID_YCTD = " + grvViTri.GetFocusedRowCellValue("ID_YCTD") + " AND B.ID_CV != 206  AND A.ID_TT_VT IN (3,5,6) ORDER BY TEN_VTTD"));
+                lookUp.Properties.DataSource = dt;
+                //}
             }
             catch { }
         }
@@ -227,6 +223,7 @@ namespace Vs.Recruit
                         iID_KHPV = -1;
                         enableButon(false);
                         BindingData(true);
+                        cboBPYC.EditValue = -1;
                         break;
                     }
                 case "sua":
@@ -239,6 +236,7 @@ namespace Vs.Recruit
                         if (txtSO_KH.EditValue.ToString() == "") return;
                         Commons.Modules.ObjSystems.AddnewRow(grvViTri, true);
                         enableButon(false);
+                        grvViTri_RowCountChanged(null, null);
                         break;
                     }
                 case "xoa":
@@ -297,7 +295,7 @@ namespace Vs.Recruit
                         Commons.Modules.ObjSystems.XoaTable("sBTChonUV" + Commons.Modules.iIDUser);
                         Commons.Modules.ObjSystems.XoaTable("sBTUV" + Commons.Modules.iIDUser);
                         LoadgrdKHPV(iID_KHPV);
-                        BindingData(false);
+
                         cboTTLoc_EditValueChanged(null, null);
                         Commons.Modules.ObjSystems.DeleteAddRow(grvViTri);
                         enableButon(true);
@@ -310,6 +308,7 @@ namespace Vs.Recruit
                         Commons.Modules.ObjSystems.XoaTable("sBTUV" + Commons.Modules.iIDUser);
                         BindingData(false);
                         enableButon(true);
+                        grvKHPV_FocusedRowChanged(null, null);
                         Commons.Modules.ObjSystems.DeleteAddRow(grvViTri);
                         break;
                     }
@@ -326,8 +325,18 @@ namespace Vs.Recruit
         {
             try
             {
+                //kiểm tra chọn nhân viên chưa
                 Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, "sBTVT" + Commons.Modules.iIDUser, Commons.Modules.ObjSystems.ConvertDatatable(grvViTri), "");
                 Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, "sBTUVPV" + Commons.Modules.iIDUser, Commons.Modules.ObjSystems.ConvertDatatable(grdUVPV), "");
+
+                //int n = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text ,"SELECT COUNT(*) FROM  "+ "sBTVT" + Commons.Modules.iIDUser + " A WHERE NOT EXISTS(SELECT * FROM  "+ "sBTUVPV" + Commons.Modules.iIDUser + " B WHERE A.ID_YCTD = B.ID_YCTD AND A.ID_VTTD =B.ID_VTTD)"));
+
+                //if(n > 0)
+                //{
+                //    XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgChuaChonUngVien"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //    return false;
+                //}    
+
                 iID_KHPV = Convert.ToInt64(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spSaveKeHoachPhongVan",
                     iID_KHPV,
                     txtSO_KH.EditValue,
@@ -370,9 +379,11 @@ namespace Vs.Recruit
 
             txtTieuDe.Properties.ReadOnly = visible;
             datNgayLap.Properties.ReadOnly = visible;
+            datNgayLap.Properties.Buttons[0].Enabled = !datNgayLap.Properties.ReadOnly;
             cboNguoiPV1.Properties.ReadOnly = visible;
             cboNguoiPV2.Properties.ReadOnly = visible;
             datNgayPV.Properties.ReadOnly = visible;
+            datNgayPV.Properties.Buttons[0].Enabled = !datNgayPV.Properties.ReadOnly;
             chkKieuPV.Properties.ReadOnly = visible;
             txtGhiChu.Properties.ReadOnly = visible;
             cboTinhTrang.Properties.ReadOnly = visible;
@@ -392,7 +403,7 @@ namespace Vs.Recruit
                 Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboNguoiPV1, Commons.Modules.ObjSystems.DataCongNhan(false), "ID_CN", "TEN_CN", "TEN_CN", true, true);
                 Commons.Modules.ObjSystems.MLoadLookUpEdit(cboTinhTrang, Commons.Modules.ObjSystems.DataTinhTrangPV(false), "ID_TT_KHPV", "TEN_TT_KHPV", "TEN_TT_KHPV");
                 Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboNguoiPV2, Commons.Modules.ObjSystems.DataCongNhan(false), "ID_CN", "TEN_CN", "TEN_CN", true, true);
-                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboBPYC, Commons.Modules.ObjSystems.DataXiNghiep(-1, false), "ID_XN", "TEN_XN", "TEN_XN", true, false);
+                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboBPYC, Commons.Modules.ObjSystems.DataXiNghiep(-1, false), "ID_XN", "TEN_XN", "TEN_XN", true, true);
             }
             catch
             {
@@ -406,7 +417,7 @@ namespace Vs.Recruit
                 datNgayLap.EditValue = DateTime.Now;
                 cboNguoiPV1.EditValue = -1;
                 cboNguoiPV2.EditValue = -1;
-                cboBPYC.EditValue = -1;
+                cboBPYC.EditValue = -99;
                 txtGhiChu.EditValue = "";
                 txtTieuDe.EditValue = "";
                 chkKieuPV.EditValue = false;
@@ -489,8 +500,26 @@ namespace Vs.Recruit
 
         private void grvKHPV_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
-            if (Commons.Modules.sLoad == "0Load" || btnALL.Buttons[0].Properties.Visible == false) return;
+            if (Commons.Modules.sLoad == "0Load") return;
+            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboBPYC, Commons.Modules.ObjSystems.DataXiNghiep(-1, false), "ID_XN", "TEN_XN", "TEN_XN", true, false);
+            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboNguoiPV1, Commons.Modules.ObjSystems.DataCongNhan(false), "ID_CN", "TEN_CN", "TEN_CN", true, true);
+            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboNguoiPV2, Commons.Modules.ObjSystems.DataCongNhan(false), "ID_CN", "TEN_CN", "TEN_CN", true, true);
             BindingData(false);
+            //khi ở chế độ view thì thì hiện chuyển duyệt khi tình trạng đang soạn
+            if (Convert.ToInt32(cboTinhTrang.EditValue) == 1)
+            {
+                btnALL.Buttons[0].Properties.Visible = true;
+                btnALL.Buttons[1].Properties.Visible = true;
+                btnALL.Buttons[2].Properties.Visible = true;
+                btnALL.Buttons[3].Properties.Visible = true;
+            }
+            else
+            {
+                btnALL.Buttons[0].Properties.Visible = false;
+                btnALL.Buttons[1].Properties.Visible = false;
+                btnALL.Buttons[2].Properties.Visible = false;
+                btnALL.Buttons[3].Properties.Visible = false;
+            }
         }
 
         private void grvViTri_InvalidRowException(object sender, DevExpress.XtraGrid.Views.Base.InvalidRowExceptionEventArgs e)
@@ -581,7 +610,6 @@ namespace Vs.Recruit
         private void grvViTri_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
             if (Commons.Modules.sLoad == "0Load") return;
-            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboBPYC, Commons.Modules.ObjSystems.DataXiNghiep(-1, false), "ID_XN", "TEN_XN", "TEN_XN", true, false);
             try
             {
                 Commons.Modules.ObjSystems.RowFilter(grdUVPV, grvUVPV.Columns["ID_YCTD"], grvUVPV.Columns["ID_VTTD"], grvViTri.GetFocusedRowCellValue("ID_YCTD").ToString(), grvViTri.GetFocusedRowCellValue("ID_VTTD").ToString());
@@ -626,6 +654,7 @@ namespace Vs.Recruit
                 View.SetColumnError(View.Columns["ID_YCTD"], Commons.Modules.ObjLanguages.GetLanguage(this.Name, "erTrungDuLieu"));
                 View.SetColumnError(View.Columns["ID_VTTD"], Commons.Modules.ObjLanguages.GetLanguage(this.Name, "erTrungDuLieu")); return;
             }
+
         }
 
 
@@ -640,9 +669,27 @@ namespace Vs.Recruit
                 if (e.Column.Name == "colID_VTTD")
                 {
                     //khi change Item thì đổi tên với đơn vị tính với tên mặc hàng lấy từ item
-                    int n = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT SUM(SL_TUYEN) as SL_TUYEN FROM YCTD_VI_TRI_TUYEN WHERE ID_YCTD = " + grvViTri.GetFocusedRowCellValue("ID_YCTD") + " AND ID_VTTD = " + e.Value + " "));
-                    view.SetFocusedRowCellValue(view.Columns["SL_TUYEN"], n);
-                    //DetailsID, PrOID
+                    int SL_TUYEN = 0, SL_DAT = 0;
+                    try
+                    {
+                        SL_TUYEN = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT SUM(SL_TUYEN) as SL_TUYEN FROM YCTD_VI_TRI_TUYEN WHERE ID_YCTD = " + grvViTri.GetFocusedRowCellValue("ID_YCTD") + " AND ID_VTTD = " + e.Value + " "));
+                    }
+                    catch
+                    {
+                        SL_TUYEN = 0;
+                    }
+                    view.SetFocusedRowCellValue(view.Columns["SL_TUYEN"], SL_TUYEN);
+
+                    try
+                    {
+                        SL_DAT = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.fnGetCongNhanDat(" + grvViTri.GetFocusedRowCellValue("ID_YCTD") + "," + e.Value + ")"));
+                    }
+                    catch
+                    {
+                        SL_DAT = 0;
+                    }
+                    view.SetFocusedRowCellValue(view.Columns["SL_PVDAT"], SL_DAT);
+                    //view.SetFocusedRowCellValue(view.Columns["SL_CONPV"], SL_TUYEN - SL_DAT);
                 }
             }
             catch
@@ -657,8 +704,9 @@ namespace Vs.Recruit
             try
             {
                 DataTable dt = new DataTable();
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT T1.ID_CN, T1.MS_CN, T1.HO +' '+ T1.TEN AS TEN_CN FROM dbo.CONG_NHAN T1 WHERE T1.PV_TD = 1 AND T1.ID_TO IN(SELECT ID_TO FROM dbo.[TO] WHERE ID_XN = " + cboBPYC.EditValue + ")"));
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT DISTINCT T1.ID_CN, T1.MS_CN, T1.HO +' '+ T1.TEN AS TEN_CN FROM dbo.CONG_NHAN T1 INNER JOIN dbo.XI_NGHIEP_NGUOI_TUYEN_DUNG T2 ON T2.ID_CN = T1.ID_CN WHERE T2.ID_XN = " + cboBPYC.EditValue + " AND T2.PHONG_VAN = 1 ORDER BY T1.HO + ' ' + T1.TEN"));
                 cboNguoiPV1.Properties.DataSource = dt;
+                cboNguoiPV1.EditValue = -99;
                 cboBPYC.ErrorText = "";
             }
             catch
@@ -677,26 +725,16 @@ namespace Vs.Recruit
             try
             {
                 DataTable dt = new DataTable();
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT T1.ID_CN, T1.MS_CN, T1.HO +' '+ T1.TEN AS TEN_CN FROM dbo.CONG_NHAN T1 WHERE T1.NV_PTD = 1 AND T1.NGAY_NGHI_VIEC IS NULL ORDER BY TEN_CN"));
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT DISTINCT T1.ID_CN, T1.MS_CN, T1.HO +' '+ T1.TEN AS TEN_CN FROM dbo.CONG_NHAN T1 INNER JOIN dbo.XI_NGHIEP_NGUOI_TUYEN_DUNG T2 ON T2.ID_CN = T1.ID_CN INNER JOIN dbo.XI_NGHIEP T3 ON T3.ID_XN = T2.ID_XN WHERE T3.PHONG_TD = 1 AND T2.PHONG_VAN = 1 ORDER BY T1.HO + ' ' + T1.TEN"));
                 cboNguoiPV2.Properties.DataSource = dt;
+                cboNguoiPV2.EditValue = -99;
             }
             catch
             {
             }
         }
 
-        private void cboBPYC_QueryPopUp(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            if (btnALL.Buttons[0].Properties.Visible == true) return;
-            if (((DataTable)grdViTri.DataSource).Rows.Count > 0)
-            {
-                cboBPYC.Properties.ReadOnly = true;
-            }
-            else
-            {
-                cboBPYC.Properties.ReadOnly = false;
-            }
-        }
+
 
         private void cboTinhTrang_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
@@ -733,11 +771,34 @@ namespace Vs.Recruit
             frm.ShowDialog();
         }
 
+
         private void cboBPYC_BeforePopup(object sender, EventArgs e)
         {
             DataTable dt = new DataTable();
-            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, " SELECT DISTINCT XN.ID_XN , CASE 0 WHEN 0 THEN XN.TEN_XN ELSE ISNULL(NULLIF(XN.TEN_XN_A,''),TEN_XN) END TEN_XN FROM dbo.XI_NGHIEP XN INNER JOIN dbo.YEU_CAU_TUYEN_DUNG T2 ON T2.ID_XN = XN.ID_XN WHERE T2.ID_TT = 1"));
-            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboBPYC, dt, "ID_XN", "TEN_XN", "TEN_XN", true, false);
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, " SELECT H.ID_XN,H.TEN_XN FROM (SELECT DISTINCT T.STT_DV, T.STT_XN, T.ID_XN, T.TEN_XN FROM(SELECT DISTINCT XN.STT_DV, XN.STT_XN, T1.ID_XN, XN.TEN_XN FROM dbo.LOAI_CONG_VIEC_XI_NGHIEP T1 INNER JOIN(SELECT DISTINCT ID_XN, TEN_XN, STT_XN, STT_DV FROM MGetToUser('" + Commons.Modules.UserName + "', " + Commons.Modules.TypeLanguage + ")) XN ON XN.ID_XN = T1.ID_XN)AS T INNER JOIN dbo.YEU_CAU_TUYEN_DUNG T2 ON T2.ID_XN = T.ID_XN  INNER JOIN dbo.YCTD_VI_TRI_TUYEN T3 ON T3.ID_YCTD = T2.ID_YCTD INNER JOIN dbo.LOAI_CONG_VIEC T4 ON T4.ID_LCV = T3.ID_VTTD WHERE T2.ID_TT = 2 AND T3.ID_TT_VT IN(3,5,6) AND T4.ID_CV != 206) H ORDER BY H.STT_DV, H.STT_XN"));
+            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboBPYC, dt, "ID_XN", "TEN_XN", "TEN_XN", true, true);
+            cboBPYC.EditValue = -99;
+        }
+
+        private void grvViTri_RowCountChanged(object sender, EventArgs e)
+        {
+            if (btnALL.Buttons[7].Properties.Visible == false)
+            {
+                if (grvViTri.RowCount > 1)
+                {
+                    cboBPYC.Properties.ReadOnly = true;
+                    cboNguoiPV1.Properties.ReadOnly = true;
+                    cboNguoiPV2.Properties.ReadOnly = true;
+                    chkKieuPV.Properties.ReadOnly = true;
+                }
+                else
+                {
+                    cboBPYC.Properties.ReadOnly = false;
+                    cboNguoiPV1.Properties.ReadOnly = false;
+                    cboNguoiPV2.Properties.ReadOnly = false;
+                    chkKieuPV.Properties.ReadOnly = false;
+                }
+            }
         }
     }
 }

@@ -1,15 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Vs.HRM;
-using Vs.Recruit.UAC;
 
 namespace Vs.Recruit
 {
@@ -20,7 +11,7 @@ namespace Vs.Recruit
             InitializeComponent();
             //TinhSoTuanCuaTHang();
             Commons.Modules.iUngVien = -1;
-            ucPhongVan uac = new ucPhongVan();
+            ucKeHoachPhongVan uac = new ucKeHoachPhongVan();
             this.Controls.Add(uac);
             uac.Dock = DockStyle.Fill;
             //LoadAA();

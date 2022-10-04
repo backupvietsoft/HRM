@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.panel2 = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lblLogin = new DevExpress.XtraEditors.LabelControl();
             this.cbo_database = new DevExpress.XtraEditors.LookUpEdit();
             this.che_Repass = new System.Windows.Forms.CheckBox();
@@ -43,15 +44,14 @@
             this.pic_database = new DevExpress.XtraEditors.PictureEdit();
             this.txt_pass = new DevExpress.XtraEditors.TextEdit();
             this.txt_user = new DevExpress.XtraEditors.TextEdit();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbo_database.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pic_pass.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pic_user.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pic_database.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txt_pass.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txt_user.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel2
@@ -78,6 +78,15 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(278, 300);
             this.panel2.TabIndex = 1;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(15, 12);
+            this.pictureBox1.TabIndex = 13;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.DoubleClick += new System.EventHandler(this.pictureBox1_DoubleClick);
             // 
             // lblLogin
             // 
@@ -258,15 +267,6 @@
             this.txt_user.Click += new System.EventHandler(this.Txt_user_Click);
             this.txt_user.Validated += new System.EventHandler(this.Txt_user_Validated);
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Location = new System.Drawing.Point(6, 33);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(15, 12);
-            this.pictureBox1.TabIndex = 13;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.DoubleClick += new System.EventHandler(this.pictureBox1_DoubleClick);
-            // 
             // frmLogin
             // 
             this.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
@@ -291,13 +291,13 @@
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmLogin_KeyDown);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbo_database.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pic_pass.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pic_user.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pic_database.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txt_pass.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txt_user.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }

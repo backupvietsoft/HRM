@@ -3,6 +3,7 @@ using Microsoft.ApplicationBlocks.Data;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Threading;
@@ -23,7 +24,7 @@ namespace Vs.Recruit
            Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             BonusSkins.Register();
-            Commons.Modules.ModuleName = "HRM";
+            Commons.Modules.ModuleName = "VS_HRM";
             Commons.Modules.UserName = "admin";
             DataSet ds = new DataSet();
             //ds.ReadXml(AppDomain.CurrentDomain.BaseDirectory + "\\vsconfig.xml");
@@ -32,7 +33,6 @@ namespace Vs.Recruit
             Commons.IConnections.Database = "VS_HRM_DM";
             Commons.IConnections.Password = "codaikadaiku";
             Commons.Modules.sPrivate = @"PILMICO";
-
             try
             {
                 DataTable dt = new DataTable();
@@ -84,6 +84,10 @@ namespace Vs.Recruit
         {
             try
             {
+                //CultureInfo ciCurr = CultureInfo.CurrentCulture;
+                //int weekNum = ciCurr.Calendar.GetWeekOfYear(Convert.ToDateTime("31/12/2022"), CalendarWeekRule.FirstDay, DayOfWeek.Monday);
+                //int n = DateTime.Now.DayOfYear;
+                //var firstDayWeek = ciCurr.Calendar.
                 Application.Run(new Form1());
                 //frmViewReport frm = new frmViewReport();
                 //XtraReport1 fpt = new XtraReport1();

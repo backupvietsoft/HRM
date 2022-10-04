@@ -122,7 +122,7 @@ namespace Vs.HRM
 
                                             conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
                                             conn.Open();
-                                            System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptBCLaoDongTangBHXH", conn);
+                                            System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptBCLaoDongTangBHXH_DM", conn);
                                             cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
                                             cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
                                             cmd.Parameters.Add("@Thang", SqlDbType.Date).Value = Convert.ToDateTime(ThangBC).ToString("yyyy-MM-dd");
@@ -145,7 +145,7 @@ namespace Vs.HRM
                                             // If the file name is not an empty string open it for saving.
                                             if (res == DialogResult.OK)
                                             {
-                                                Commons.TemplateExcel.FillReport(saveFileDialog.FileName, System.Windows.Forms.Application.StartupPath + "\\Template\\TemplateTangLaoDong.xlsx", ds, new string[] { "{", "}" });
+                                                Commons.TemplateExcel.FillReport(saveFileDialog.FileName, System.Windows.Forms.Application.StartupPath + "\\Template\\TemplateTangLaoDong_DM.xlsx", ds, new string[] { "{", "}" });
                                                 Process.Start(saveFileDialog.FileName);
                                             }
                                         }
@@ -202,7 +202,7 @@ namespace Vs.HRM
                                             {
                                                 conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
                                                 conn.Open();
-                                                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptBCLaoDongGiamBHXH", conn);
+                                                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptBCLaoDongGiamBHXH_DM", conn);
                                                 cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
                                                 cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
                                                 cmd.Parameters.Add("@Thang", SqlDbType.Date).Value = Convert.ToDateTime(ThangBC).ToString("yyyy-MM-dd");
@@ -211,7 +211,7 @@ namespace Vs.HRM
                                                 System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
                                                 DataSet ds = new DataSet();
                                                 adp.Fill(ds);
-                                                ds.Tables[0].TableName = "GiamLaoDong";
+                                                ds.Tables[0].TableName = "TangLaoDong";
                                                 SaveFileDialog saveFileDialog = new SaveFileDialog();
                                                 saveFileDialog.Filter = "Excel file (*.xlsx)|*.xlsx";
                                                 saveFileDialog.FilterIndex = 0;
@@ -226,7 +226,7 @@ namespace Vs.HRM
                                                 {
                                                     if (saveFileDialog.FileName != "")
                                                     {
-                                                        Commons.TemplateExcel.FillReport(saveFileDialog.FileName, System.Windows.Forms.Application.StartupPath + "\\Template\\TemplateGiamLaoDong.xlsx", ds, new string[] { "{", "}" });
+                                                        Commons.TemplateExcel.FillReport(saveFileDialog.FileName, System.Windows.Forms.Application.StartupPath + "\\Template\\TemplateGiamLaoDong_DM.xlsx", ds, new string[] { "{", "}" });
                                                         //Commons.TemplateExcel.FillReport(saveFileDialog.FileName, Application.StartupPath + "\\lib\\Template\\TemplateGiamLaoDong.xlsx", ds, new string[] { "{", "}" });
                                                         Process.Start(saveFileDialog.FileName);
                                                     }

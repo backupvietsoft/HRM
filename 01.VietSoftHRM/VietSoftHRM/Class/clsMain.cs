@@ -207,7 +207,6 @@ namespace VietSoftHRM
                 String link3 = sArr[3];
                 //Khong có loai update thi thoát
                 if (loai <= -1) return;
-                loai = 0;
                 switch (loai)
                 {
                     //Loai 2 xai link1,2 : path link tren dropbox 

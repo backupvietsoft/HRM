@@ -9,6 +9,7 @@ using Microsoft.Office.Interop.Excel;
 using DataTable = System.Data.DataTable;
 using System.Reflection;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace Vs.HRM
 {
@@ -29,7 +30,7 @@ namespace Vs.HRM
             {
                 case "Print":
                     {
-                        switch(rdoChonBaoCao.SelectedIndex)
+                        switch (rdoChonBaoCao.SelectedIndex)
                         {
                             case 0:
                                 {
@@ -132,7 +133,7 @@ namespace Vs.HRM
                 DataSet ds = new DataSet();
                 adp.Fill(ds);
                 dtBCThang = new DataTable();
-                dtBCThang = ds.Tables[1].Copy();
+                dtBCThang = ds.Tables[0].Copy();
 
                 SaveExcelFile = SaveFiles("Excel Workbook |*.xlsx|Excel 97-2003 Workbook |*.xls|Word Document |*.docx|Rich Text Format |*.rtf|PDF File |*.pdf|Web Page |*.html|Single File Web Page |*.mht");
                 if (SaveExcelFile == "")
@@ -185,7 +186,7 @@ namespace Vs.HRM
                 Microsoft.Office.Interop.Excel.Range row5_TieuDe_LDBQ = oSheet.get_Range("B3", "B4");
                 row5_TieuDe_LDBQ.Merge();
                 row5_TieuDe_LDBQ.Value2 = "Chuyền/Phòng";
-                row5_TieuDe_LDBQ.ColumnWidth = 14;
+                row5_TieuDe_LDBQ.ColumnWidth = 30;
 
                 Range row5_TieuDe_LDT = oSheet.get_Range("C3", "C4");
                 row5_TieuDe_LDT.Merge();
@@ -254,13 +255,21 @@ namespace Vs.HRM
                 string sRowBD_XN = ";"; // Lưu lại các dòng của row xí nghiệp
                 int rowBD = 5;
                 string[] TEN_DV = dtBCThang.AsEnumerable().Select(r => r.Field<string>("TEN_DV")).Distinct().ToArray();
-                string[] TEN_XN = dtBCThang.AsEnumerable().Select(r => r.Field<string>("TEN_XN")).Distinct().ToArray();
                 string chanVongDau = "Chan";// chặn lần đầu để lần đầu tiên sẽ load data từ cột số 7 trở đi, các vòng lặp tiếp theo bỏ chặn
                 DataTable dt_temp = new DataTable();
                 dt_temp = ds.Tables[1].Copy(); // Dữ row count data
                 string sRowBD_XN_Temp = "";
                 for (int i = 0; i < TEN_DV.Count(); i++)
                 {
+                    if (chanVongDau == "")
+                    {
+                        rowBD = (keepRowCnt + 3);
+                        chanVongDau = "Chan";
+                    }
+                    DataTable dt = new DataTable();
+                    dtBCThang = ds.Tables[0].Copy();
+                    dt = dtBCThang.AsEnumerable().Where(r => r["TEN_DV"].ToString().Equals(TEN_DV[i])).CopyToDataTable().Copy();
+                    string[] TEN_XN = dt.AsEnumerable().Select(r => r.Field<string>("TEN_XN")).Distinct().ToArray();
                     // Tạo group đơn vị
                     Range row_groupDON_VI_Format = oSheet.get_Range("A" + rowBD + "".ToString(), nameColumn + "" + rowBD + "".ToString()); //27 + 31
                     row_groupDON_VI_Format.Interior.Color = Color.FromArgb(255, 255, 0);
@@ -271,7 +280,7 @@ namespace Vs.HRM
                     rowBD++;
                     for (int j = 0; j < TEN_XN.Count(); j++)
                     {
-                        dtBCThang = ds.Tables[1].Copy();
+                        dtBCThang = ds.Tables[0].Copy();
                         dtBCThang = dtBCThang.AsEnumerable().Where(r => r.Field<string>("TEN_XN") == TEN_XN[j]).CopyToDataTable().Copy();
                         DataRow[] dr = dtBCThang.Select();
                         current_dr = dr.Count();
@@ -332,7 +341,7 @@ namespace Vs.HRM
                     }
 
                     // Tính tổng từng đơn vị
-                    Range rowTOTAL_DON_VI = oSheet.get_Range("A" + (keepRowCnt + 2).ToString() + "".ToString(), lastColumn + "" + (keepRowCnt + 2).ToString() + "".ToString());
+                    Range rowTOTAL_DON_VI = oSheet.get_Range("A" + (keepRowCnt + 2).ToString() + "".ToString(), nameColumn + "" + (keepRowCnt + 2).ToString() + "".ToString());
                     rowTOTAL_DON_VI.Interior.Color = Color.FromArgb(255, 255, 0);
                     rowTOTAL_DON_VI.Font.Bold = true;
                     rowTOTAL_DON_VI.Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
@@ -348,6 +357,7 @@ namespace Vs.HRM
                         oSheet.Cells[keepRowCnt + 2, col] = "=" + sRowBD_XN;
                         sRowBD_XN = sRowBD_XN_Temp;
                     }
+                    sRowBD_XN = ";";
                     sRowBD_XN_Temp = "";
                 }
 
@@ -367,6 +377,10 @@ namespace Vs.HRM
                 formatRange = oSheet.get_Range("A5", "" + lastColumn + "" + rowCnt + "");
                 formatRange.Font.Name = fontName;
                 formatRange.Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                formatRange.Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+
+                formatRange = oSheet.get_Range("B5", "" + "B" + rowCnt + "");
+                formatRange.Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignLeft;
                 formatRange.Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
 
                 BorderAround(oSheet.get_Range("A3", nameColumn + rowCnt.ToString()));

@@ -274,6 +274,7 @@ namespace Vs.HRM
             cboID_QUAN.Properties.ReadOnly = visible;
             cboID_PX.Properties.ReadOnly = visible;
             txtTHON_XOM.Properties.ReadOnly = visible;
+            chkChuHo.Properties.ReadOnly = visible;
 
             grdGiaDinh.Enabled = visible;
             ID_QHLookUpEdit.Properties.ReadOnly = visible;
@@ -329,7 +330,7 @@ namespace Vs.HRM
             cboGIOI_TINH.EditValue,
             flag_CH,
             flag_NT,
-            cothem
+            cothem, chkChuHo.EditValue
                 ));
                 LoadgrdGiaDinh(n);
             }
@@ -389,6 +390,7 @@ namespace Vs.HRM
                 cboID_QUAN.EditValue = dt.Rows[0]["ID_QUAN"].ToString() == "" ? DBNull.Value : dt.Rows[0]["ID_QUAN"];
                 cboID_PX.EditValue = dt.Rows[0]["ID_PX"].ToString() == "" ? DBNull.Value : dt.Rows[0]["ID_PX"];
                 txtTHON_XOM.EditValue = dt.Rows[0]["THON_XOM"].ToString();
+                chkChuHo.EditValue = dt.Rows[0]["CHU_HO"].ToString();
             }
             catch (Exception EX) { }
         }

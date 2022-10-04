@@ -266,10 +266,9 @@ namespace Vs.HRM
         {
             btnALL.Buttons[0].Properties.Visible = visible;
             btnALL.Buttons[1].Properties.Visible = visible;
-            btnALL.Buttons[2].Properties.Visible = visible;
+            btnALL.Buttons[2].Properties.Visible = !visible;
             btnALL.Buttons[3].Properties.Visible = !visible;
-            btnALL.Buttons[4].Properties.Visible = !visible;
-            btnALL.Buttons[5].Properties.Visible = visible;
+            btnALL.Buttons[4].Properties.Visible = visible;
 
             //grvNguonTuyen.OptionsBehavior.Editable = !visible;
             grvDSCongNhan.OptionsBehavior.Editable = !visible;
@@ -733,6 +732,8 @@ namespace Vs.HRM
             {
                 case 0:
                     {
+                        datTuNgay.Properties.ReadOnly = false;
+                        datDenNgay.Properties.ReadOnly = false;
                         iAdd = 0;
                         int n = grvDSCongNhan.FocusedRowHandle;
                         LoadData();
@@ -745,6 +746,8 @@ namespace Vs.HRM
                     }
                 case 1:
                     {
+                        datTuNgay.Properties.ReadOnly = true;
+                        datDenNgay.Properties.ReadOnly = true;
                         iAdd = 1;
                         LoadData();
                         LoadNDDG();

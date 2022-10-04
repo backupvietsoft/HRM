@@ -266,6 +266,12 @@ namespace Vs.Recruit
         }
         private bool DeleteData()
         {
+            //kiểm tra ứng viên
+            if (Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT COUNT(*) FROM dbo.UNG_VIEN_TUYEN_DUNG WHERE ID_UV = " + grvUngVien.GetFocusedRowCellValue("ID_UV") + " ")) > 0)
+            {
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgDelDangSuDung"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return false;
+            }
             if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgDeleteUngVien"), Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgTieuDeXoa"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) return false;
             //xóa
             try
@@ -371,7 +377,8 @@ namespace Vs.Recruit
             {
                 datTuNgay.Properties.ReadOnly = false;
                 datDenNgay.Properties.ReadOnly = false;
-            }    
+            }
+            LoadUNG_VIEN(-1);
         }
     }
 }

@@ -235,12 +235,12 @@ namespace Vs.HRM
                 row5_TieuDe_HOTEN.ColumnWidth = 25;
 
                 Range row5_TieuDe_XN = oSheet.get_Range("D5");
-                row5_TieuDe_XN.Value2 = "Xưởng/Phòng ban";
+                row5_TieuDe_XN.Value2 = "Bộ phận";
                 row5_TieuDe_XN.ColumnWidth = 20;
 
 
                 Range row5_TieuDe_TO = oSheet.get_Range("E5");
-                row5_TieuDe_TO.Value2 = "Tổ";
+                row5_TieuDe_TO.Value2 = "Chuyền/Phòng";
                 row5_TieuDe_TO.ColumnWidth = 15;
 
                 Range row5_TieuDe_NTV = oSheet.get_Range("F5");
@@ -260,19 +260,19 @@ namespace Vs.HRM
                 row5_TieuDe_NHHL.ColumnWidth = 13;
 
                 Range row5_TieuDe_NDG = oSheet.get_Range("J5");
-                row5_TieuDe_NDG.Value2 = "Người đánh giá";
+                row5_TieuDe_NDG.Value2 = "Người đánh giá"; 
                 row5_TieuDe_NDG.ColumnWidth = 25;
 
                 Range row5_TieuDe_NDGG = oSheet.get_Range("K5");
-                row5_TieuDe_NDGG.Value2 = "Ngày đánh giá";
+                row5_TieuDe_NDGG.Value2 = "Ngày đánh giá"; // 
                 row5_TieuDe_NDGG.ColumnWidth = 13;
 
                 Range row5_TieuDe_KHD = oSheet.get_Range("L5");
-                row5_TieuDe_KHD.Value2 = "Ký hợp đồng";
+                row5_TieuDe_KHD.Value2 = "Kết thúc hợp đồng";
                 row5_TieuDe_KHD.ColumnWidth = 10;
 
                 Range row5_TieuDe_M = oSheet.get_Range("M5");
-                row5_TieuDe_M.Value2 = "Kết thúc hợp đồng";
+                row5_TieuDe_M.Value2 = "Ký hợp đồng";
                 row5_TieuDe_M.ColumnWidth = 10;
 
                 Range row5_TieuDe_N = oSheet.get_Range("N5");

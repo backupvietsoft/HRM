@@ -158,7 +158,7 @@
             // 
             this.searchControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.searchControl1.Client = this.grdDinhBien;
-            this.searchControl1.Location = new System.Drawing.Point(5, 4);
+            this.searchControl1.Location = new System.Drawing.Point(1, 5);
             this.searchControl1.Name = "searchControl1";
             this.searchControl1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Repository.ClearButton(),

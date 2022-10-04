@@ -2672,9 +2672,6 @@ D:\01.SourceCode\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\ja\DevExpress.XtraT
 D:\01.SourceCode\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\de\DevExpress.XtraVerticalGrid.v22.1.resources.dll
 D:\01.SourceCode\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\es\DevExpress.XtraVerticalGrid.v22.1.resources.dll
 D:\01.SourceCode\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\ja\DevExpress.XtraVerticalGrid.v22.1.resources.dll
-D:\01.SourceCode\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\de\DevExpress.XtraReports.v22.1.Extensions.resources.dll
-D:\01.SourceCode\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\es\DevExpress.XtraReports.v22.1.Extensions.resources.dll
-D:\01.SourceCode\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\ja\DevExpress.XtraReports.v22.1.Extensions.resources.dll
 D:\01.SourceCode\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\de\DevExpress.Diagram.v22.1.Core.resources.dll
 D:\01.SourceCode\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\es\DevExpress.Diagram.v22.1.Core.resources.dll
 D:\01.SourceCode\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\ja\DevExpress.Diagram.v22.1.Core.resources.dll

@@ -1,4 +1,4 @@
-﻿ using System;
+﻿using System;
 using System.Drawing;
 using System.Data;
 using DevExpress.XtraEditors;
@@ -75,11 +75,15 @@ namespace Vs.HRM
             //ID_PX_TAM_TRULookUpEdit
             Commons.Modules.ObjSystems.MLoadLookUpEditN(ID_PX_TAM_TRULookUpEdit, Commons.Modules.ObjSystems.DataPhuongXa(Convert.ToInt32(-1), false), "ID_PX", "TEN_PX", "TEN_PX", "");
 
-            ////ID_LCVLookUpEdit
-            //Commons.Modules.ObjSystems.MLoadLookUpEditN(ID_LCVLookUpEdit, Commons.Modules.ObjSystems.DataLoaiCV(false, Convert.ToInt32(-1)), "ID_LCV", "TEN_LCV", "TEN_LCV", "", true);
+            //ID_TP_TAM_TRULookUpEdit 
+            Commons.Modules.ObjSystems.MLoadLookUpEditN(cboID_TP_KS, Commons.Modules.ObjSystems.DataThanhPho(Convert.ToInt32(-1), false), "ID_TP", "TEN_TP", "TEN_TP", "");
 
-            ////ID_CVLookUpEdit
-            //Commons.Modules.ObjSystems.MLoadLookUpEditN(ID_CVLookUpEdit, Commons.Modules.ObjSystems.DataChucVu(false, Convert.ToInt32(-1)), "ID_CV", "TEN_CV", "TEN_CV", "", true);
+            //ID_QUAN_TAM_TRULookUpEdit
+            Commons.Modules.ObjSystems.MLoadLookUpEditN(cboID_QUAN_KS, Commons.Modules.ObjSystems.DataQuan(Convert.ToInt32(-1), false), "ID_QUAN", "TEN_QUAN", "TEN_QUAN", "");
+
+            //ID_PX_TAM_TRULookUpEdit
+            Commons.Modules.ObjSystems.MLoadLookUpEditN(cboID_PX_KS, Commons.Modules.ObjSystems.DataPhuongXa(Convert.ToInt32(-1), false), "ID_PX", "TEN_PX", "TEN_PX", "");
+
 
             //ID_LCVLookUpEdit.EditValue = "";
             Commons.Modules.ObjSystems.MLoadLookUpEdit(ID_LCVLookUpEdit, Commons.Modules.ObjSystems.DataLoaiCV(false, Convert.ToInt32(-1)), "ID_LCV", "TEN_LCV", "TEN_LCV", true);
@@ -711,6 +715,10 @@ namespace Vs.HRM
                 ID_QUAN_TAM_TRULookUpEdit.EditValue = null;
                 ID_PX_TAM_TRULookUpEdit.EditValue = null;
                 THON_XOM_TAM_TRUTextEdit.EditValue = "";
+                txtDIA_CHI_KS.Text = "";
+                cboID_TP_KS.EditValue = null;
+                cboID_QUAN_KS.EditValue = null;
+                cboID_PX_KS.EditValue = null;
                 cboID_KV.EditValue = null;
 
                 SO_BHXHTextEdit.EditValue = "";
@@ -811,6 +819,10 @@ namespace Vs.HRM
                     ID_QUAN_TAM_TRULookUpEdit.EditValue = dt.Rows[0]["ID_QUAN_TAM_TRU"];
                     ID_PX_TAM_TRULookUpEdit.EditValue = dt.Rows[0]["ID_PX_TAM_TRU"];
                     THON_XOM_TAM_TRUTextEdit.EditValue = dt.Rows[0]["THON_XOM_TAM_TRU"];
+                    try { txtDIA_CHI_KS.Text = dt.Rows[0]["DC_KHAI_SINH"].ToString(); } catch { }
+                    cboID_TP_KS.EditValue = dt.Rows[0]["ID_TP_KS"];
+                    cboID_QUAN_KS.EditValue = dt.Rows[0]["ID_QUAN_KS"];
+                    cboID_PX_KS.EditValue = dt.Rows[0]["ID_PX_KS"];
                     try { cboID_KV.EditValue = dt.Rows[0]["ID_KV"]; } catch { }
 
                     SO_BHXHTextEdit.EditValue = dt.Rows[0]["SO_BHXH"];
@@ -934,6 +946,11 @@ namespace Vs.HRM
             ID_QUAN_TAM_TRULookUpEdit.Properties.ReadOnly = visible;
             ID_PX_TAM_TRULookUpEdit.Properties.ReadOnly = visible;
             THON_XOM_TAM_TRUTextEdit.Properties.ReadOnly = visible;
+
+            txtDIA_CHI_KS.Properties.ReadOnly = visible;
+            cboID_TP_KS.Properties.ReadOnly = visible;
+            cboID_PX_KS.Properties.ReadOnly = visible;
+            cboID_QUAN_KS.Properties.ReadOnly = visible;
             cboID_KV.Properties.ReadOnly = visible;
 
 
@@ -1086,7 +1103,11 @@ namespace Vs.HRM
                 NGAY_HH_GPDateEdit.Text.ToString() == "" ? DBNull.Value : NGAY_HH_GPDateEdit.EditValue,
                 LD_GIAM_LDNNLookUpEdit.Text.ToString() == "" ? LD_GIAM_LDNNLookUpEdit.EditValue = null : LD_GIAM_LDNNLookUpEdit.EditValue,
                 cboID_KV.Text.ToString() == "" ? cboID_KV.EditValue = null : cboID_KV.EditValue,
-                cothem, sTBBangCap));
+                cothem, sTBBangCap, txtDIA_CHI_KS.Text,
+                cboID_TP_KS.Text.ToString() == "" ? cboID_TP_KS.EditValue = null : cboID_TP_KS.EditValue,
+                cboID_QUAN_KS.Text.ToString() == "" ? cboID_QUAN_KS.EditValue = null : cboID_QUAN_KS.EditValue,
+                cboID_PX_KS.Text.ToString() == "" ? cboID_PX_KS.EditValue = null : cboID_PX_KS.EditValue
+                ));
                 return true;
             }
             catch (Exception ex)
@@ -1667,6 +1688,20 @@ namespace Vs.HRM
         {
             if (!Char.IsDigit(e.KeyChar) && !Char.IsControl(e.KeyChar))
                 e.Handled = true;
+        }
+
+        private void cboID_TP_KS_EditValueChanged(object sender, EventArgs e)
+        {
+            if (Commons.Modules.sLoad == "0Load") return;
+            if (cboID_TP_KS.EditValue == null || cboID_TP_KS.EditValue.ToString() == "") return;
+            Commons.Modules.ObjSystems.MLoadLookUpEdit(cboID_QUAN_KS, Commons.Modules.ObjSystems.DataQuan(Convert.ToInt32(cboID_TP_KS.EditValue), false), "ID_QUAN", "TEN_QUAN", "TEN_QUAN", true);
+        }
+
+        private void cboID_QUAN_KS_EditValueChanged(object sender, EventArgs e)
+        {
+            if (Commons.Modules.sLoad == "0Load") return;
+            if (cboID_QUAN_KS.EditValue == null || cboID_QUAN_KS.EditValue.ToString() == "") return;
+            Commons.Modules.ObjSystems.MLoadLookUpEdit(cboID_PX_KS, Commons.Modules.ObjSystems.DataPhuongXa(Convert.ToInt32(cboID_QUAN_KS.EditValue), false), "ID_PX", "TEN_PX", "TEN_PX", true);
         }
     }
 }

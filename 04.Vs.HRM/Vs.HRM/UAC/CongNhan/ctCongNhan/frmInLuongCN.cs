@@ -42,6 +42,7 @@ namespace Vs.HRM
             {
                 case "In":
                     {
+                        string s = rdo_ChonBaoCao.Tag.ToString();
                         int n = rdo_ChonBaoCao.SelectedIndex;
                         if (rdo_ChonBaoCao.Properties.Items.Count < 3)
                         {

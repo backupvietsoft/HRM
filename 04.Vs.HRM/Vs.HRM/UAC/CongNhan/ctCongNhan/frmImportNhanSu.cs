@@ -13,6 +13,7 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using DevExpress.Spreadsheet;
+using System.Threading;
 
 namespace Vs.HRM
 {
@@ -23,6 +24,7 @@ namespace Vs.HRM
         string ChuoiKT = "";
         DataTable _table = new DataTable();
         DataTable dtemp;
+        string sCheck = "";
         public frmImportNhanSu()
         {
             InitializeComponent();
@@ -91,201 +93,396 @@ namespace Vs.HRM
         private void cboChonSheet_EditValueChanged(object sender, EventArgs e)
         {
             if (Commons.Modules.sLoad == "0Load") return;
-            //try
-            //{
-            //    if (string.IsNullOrEmpty(fileName)) return;
-            //    if (Commons.Modules.sLoad == "0Load") return;
-            //    if (string.IsNullOrEmpty(btnFile.Text)) return;
-            //    this.grdData.DataSource = null;
-            //    grvData.Columns.Clear();
-            //    if (cboChonSheet.EditValue.ToString() == "-1")
-            //        return;
+            string sBT = "sBTCongNhan" + Commons.Modules.iIDUser;
+            try
+            {
+                DataTable dt = new DataTable();
+                var source = new ExcelDataSource();
+                source.FileName = btnFile.Text;
+                var worksheetSettings = new ExcelWorksheetSettings(cboChonSheet.Text);
+                source.SourceOptions = new ExcelSourceOptions(worksheetSettings);
+                source.Fill();
+                dt = new DataTable();
+                dt = ToDataTable(source);
+                dt.Columns.Add("XOA", System.Type.GetType("System.Boolean"));
 
-            //    this.Cursor = Cursors.WaitCursor;
-            //    var FileExt = Path.GetExtension(btnFile.Text);
-            //    _table = new DataTable();
-            //    if (FileExt.ToLower() == ".xls")
-            //        _table = Commons.Modules.MExcel.MGetData2xls(btnFile.Text, cboChonSheet.EditValue.ToString());
-            //    else if (FileExt.ToLower() == ".xlsx")
-            //        _table = Commons.Modules.MExcel.MGetData2xlsx(btnFile.Text, cboChonSheet.EditValue.ToString());
+                //Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBT, dt, "");
+                //dt = new DataTable();
+                //dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spCreateMSImport", sBT));
+                //Commons.Modules.ObjSystems.XoaTable(sBT);
 
-
-
-            //    dtemp = new DataTable();
-            //    dtemp = _table;
-            //    this.grdData.DataSource = null;
-            //    grvData.Columns.Clear();
-            //    if (_table != null)
-            //    {
-            //        dtemp.Columns.Add("XOA", System.Type.GetType("System.Boolean"));
-            //        try
-            //        {
-            //            dtemp.DefaultView.Sort = "[" + dtemp.Columns[0].ColumnName.ToString() + "]";
-            //        }
-            //        catch { }
-
-            //        if (dtemp.Columns.Count <= 13)
-            //            Commons.Modules.ObjSystems.MLoadXtraGridIP(grdData, grvData, dtemp, true, true, false, false);
-            //        else
-            //            Commons.Modules.ObjSystems.MLoadXtraGridIP(grdData, grvData, dtemp, true, true, false, true);
-
-            //        grvData.BestFitColumns();
-
-            //        btnFile.Text = fileName;
-            //        try
-            //        {
-            //            groDLImport.Text = " Total : " + grvData.RowCount.ToString() + " row";
-            //        }
-            //        catch { }
-            //    }
-            //    this.Cursor = Cursors.Default;
-            //}
-            //catch (Exception ex)
-            //{
-            //}
-
-            DataTable dt = new DataTable();
-            var source = new ExcelDataSource();
-            source.FileName = btnFile.Text;
-            var worksheetSettings = new ExcelWorksheetSettings(cboChonSheet.Text);
-            source.SourceOptions = new ExcelSourceOptions(worksheetSettings);
-            source.Fill();
-            dt = new DataTable();
-            dt = ToDataTable(source);
-            dt.Columns.Add("XOA", System.Type.GetType("System.Boolean"));
-            Commons.Modules.ObjSystems.MLoadXtraGrid(grdData, grvData, dt, true, true, false, true, true, this.Name);
-            grvData.Columns[0].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
-            grvData.Columns[1].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
-            grvData.Columns[2].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
-            grvData.Columns[3].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
-
-            grdData.DataSource = dt;
+                Commons.Modules.ObjSystems.MLoadXtraGrid(grdData, grvData, dt, true, true, false, true, true, this.Name);
+                grvData.Columns[0].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
+                grvData.Columns[1].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
+                grvData.Columns[2].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
+                grvData.Columns[3].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
+                grdData.DataSource = dt;
+            }
+            catch
+            {
+                Commons.Modules.ObjSystems.XoaTable(sBT);
+                grdData.DataSource = null;
+            }
         }
 
         private void windowsUIButton_ButtonClick(object sender, ButtonEventArgs e)
         {
-            WindowsUIButton btn = e.Button as WindowsUIButton;
-            XtraUserControl ctl = new XtraUserControl();
-            //Commons.Modules.ObjSystems.ShowWaitForm(this);
-            switch (btn.Tag.ToString())
+            try
             {
-                case "export":
-                    {
-                        try
+
+                WindowsUIButton btn = e.Button as WindowsUIButton;
+                XtraUserControl ctl = new XtraUserControl();
+                //Commons.Modules.ObjSystems.ShowWaitForm(this);
+                switch (btn.Tag.ToString())
+                {
+                    case "export":
                         {
-                            string sPath = "";
-                            sPath = SaveFiles("Excel file (*.xlsx)|*.xlsx");
-                            if (sPath == "") return;
-                            Microsoft.Office.Interop.Excel.Application excelApplication = new Microsoft.Office.Interop.Excel.Application();
-                            excelApplication.DisplayAlerts = true;
-
-                            excelApplication.Visible = true;
-
-
-                            System.Globalization.CultureInfo oldCultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture;
-                            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
-
-                            Microsoft.Office.Interop.Excel.Workbooks excelWorkbooks = excelApplication.Workbooks;
-                            object misValue = System.Reflection.Missing.Value;
-                            Microsoft.Office.Interop.Excel.Workbook excelWorkbook = excelApplication.Workbooks.Add(misValue);
-
-                            excelWorkbook.SaveAs(sPath);
-
-                            Microsoft.Office.Interop.Excel.Worksheet excelWorkSheet = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Sheets[1];
-
-
-                            DataTable dt = new DataTable();
-                            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spImportNhanSu", Commons.Modules.UserName, Commons.Modules.TypeLanguage));
-                            //dt = ((DataTable)grdData.DataSource).Copy();
-                            string lastColumn = CharacterIncrement(dt.Columns.Count - 1);
-                            string fontName = "Time News Roman";
-                            int fontSizeTieuDe = 13;
-                            int fontSizeNoiDung = 9;
-
-                            dt.DefaultView.RowFilter = "";
-                            for (int i = 0; i < dt.Columns.Count; i++)
+                            try
                             {
-                                //dt.Columns[i].ColumnName = Commons.Modules.ObjLanguages.GetLanguage(this.Name, dt.Columns[i].ColumnName.ToString()); ;
-                                dt.Columns[i].ColumnName = Commons.Modules.ObjLanguages.GetLanguage(this.Name, dt.Columns[i].ColumnName.ToString());
-                            }
-                            Microsoft.Office.Interop.Excel.Range Ranges1 = excelWorkSheet.Range[excelWorkSheet.Cells[1, 1], excelWorkSheet.Cells[dt.Rows.Count + 1, dt.Columns.Count]];
-                            Ranges1.ColumnWidth = 20;
-                            Ranges1.Font.Name = fontName;
-                            Ranges1.Font.Size = fontSizeNoiDung;
-                            Ranges1.Range["A1", "" + lastColumn + "1"].Font.Bold = true;
-                            //Ranges1.Range["F2", "F6"].NumberFormat = "dd/MM/yyy";
-                            Ranges1.Range["A1", "" + lastColumn + "1"].HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
-                            Ranges1.Range["A1", "" + lastColumn + "1"].Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+                                string sPath = "";
+                                sPath = SaveFiles("Excel file (*.xlsx)|*.xlsx");
+                                if (sPath == "") return;
+                                Microsoft.Office.Interop.Excel.Application excelApplication = new Microsoft.Office.Interop.Excel.Application();
+                                excelApplication.DisplayAlerts = true;
 
-                            Microsoft.Office.Interop.Excel.Worksheet sheet2 = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Sheets[1];
-                            //Worksheet sheet2 = excelWorkbook.Worksheets[1];
-                            sheet2.Name = "02-Quốc gia";
-                            sheet2.get_Range("A1").Value2 = 20;
+                                excelApplication.Visible = false;
 
-                            MExportExcel(dt, excelWorkSheet, Ranges1);
-                            excelApplication.Visible = true;
-                            excelWorkbook.Save();
-                        }
-                        catch (Exception ex) { XtraMessageBox.Show(ex.Message); }
 
-                        break;
-                    }
-                case "import":
-                    {
-                        grvData.PostEditor();
-                        grvData.UpdateCurrentRow();
-                        Commons.Modules.ObjSystems.MChooseGrid(false, "XOA", grvData);
-                        DataTable dtSource = Commons.Modules.ObjSystems.ConvertDatatable(grdData);
-                        if (cboChonSheet.Text == "" || dtSource == null || dtSource.Rows.Count <= 0)
-                        {
-                            XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "KhongCoDuLieuImport"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"),
-                                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-                        grvData.Columns.View.ClearColumnErrors();
+                                System.Globalization.CultureInfo oldCultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture;
+                                System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
 
-                        ImportUngVien(dtSource);
+                                Microsoft.Office.Interop.Excel.Workbooks excelWorkbooks = excelApplication.Workbooks;
+                                object misValue = System.Reflection.Missing.Value;
+                                Microsoft.Office.Interop.Excel.Workbook excelWorkbook = excelApplication.Workbooks.Add(misValue);
 
-                        break;
-                    }
-                case "xoa":
-                    {
-                        try
-                        {
-                            DataTable dtTmp = new DataTable();
-                            dtTmp = (DataTable)grdData.DataSource;
+                                excelWorkbook.SaveAs(sPath);
 
-                            if (dtTmp == null || dtTmp.Select("XOA = 1").Count() == 0) return;
+                                Microsoft.Office.Interop.Excel.Worksheet excelWorkSheet = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Sheets[1];
+                                excelWorkSheet.Name = "01 - Thông tin nhân viên";
 
-                            DialogResult res = XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgBanCoMuonXoaKhong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"),
-                                    MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                            if (res == DialogResult.No) return;
+                                DataTable dt = new DataTable();
+                                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spImportNhanSu", Commons.Modules.UserName, Commons.Modules.TypeLanguage));
+                                //dt = ((DataTable)grdData.DataSource).Copy();
+                                string lastColumn = CharacterIncrement(dt.Columns.Count - 1);
+                                string fontName = "Time News Roman";
+                                int fontSizeTieuDe = 13;
+                                int fontSizeNoiDung = 9;
 
-                            dtTmp.AcceptChanges();
-                            foreach (DataRow dr in dtTmp.Rows)
-                            {
-                                if (dr["XOA"].ToString() == "True")
+                                dt.DefaultView.RowFilter = "";
+                                for (int i = 0; i < dt.Columns.Count; i++)
                                 {
-                                    dr.Delete();
+                                    //dt.Columns[i].ColumnName = Commons.Modules.ObjLanguages.GetLanguage(this.Name, dt.Columns[i].ColumnName.ToString()); ;
+                                    dt.Columns[i].ColumnName = Commons.Modules.ObjLanguages.GetLanguage(this.Name, dt.Columns[i].ColumnName.ToString());
                                 }
+                                Microsoft.Office.Interop.Excel.Range Ranges1 = excelWorkSheet.Range[excelWorkSheet.Cells[1, 1], excelWorkSheet.Cells[dt.Rows.Count + 1, dt.Columns.Count]];
+                                Ranges1.ColumnWidth = 20;
+                                Ranges1.Font.Name = fontName;
+                                Ranges1.Font.Size = fontSizeNoiDung;
+                                Ranges1.Range["A1", "" + lastColumn + "1"].Font.Bold = true;
+                                Ranges1.Range["A1", "" + lastColumn + "1"].HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                                Ranges1.Range["A1", "" + lastColumn + "1"].Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+                                MExportExcel(dt, excelWorkSheet, Ranges1);
+
+                                Microsoft.Office.Interop.Excel.Worksheet excelWorkSheet1 = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Sheets[1];
+                                excelWorkSheet1 = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Worksheets.Add(After: excelWorkbook.Sheets[excelWorkbook.Sheets.Count]);
+                                excelWorkSheet1.Name = "02 - Quốc Gia";
+                                dt = new DataTable();
+                                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT MA_QG AS N'Mã quốc gia', TEN_QG AS N'Tên quốc gia' FROM dbo.QUOC_GIA"));
+                                Ranges1 = excelWorkSheet1.Range[excelWorkSheet1.Cells[1, 1], excelWorkSheet1.Cells[dt.Rows.Count + 1, dt.Columns.Count]];
+                                Ranges1.ColumnWidth = 20;
+                                Ranges1.Font.Name = fontName;
+                                Ranges1.Font.Size = fontSizeNoiDung;
+                                lastColumn = CharacterIncrement(dt.Columns.Count - 1);
+                                Ranges1.Range["A1", "" + lastColumn + "1"].Font.Bold = true;
+                                Ranges1.Range["A1", "" + lastColumn + "1"].HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                                Ranges1.Range["A1", "" + lastColumn + "1"].Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+                                MExportExcel(dt, excelWorkSheet1, Ranges1);
+
+                                //Tổ
+                                Microsoft.Office.Interop.Excel.Worksheet excelWorkSheet4 = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Sheets[1];
+                                excelWorkSheet4 = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Worksheets.Add(After: excelWorkbook.Sheets[excelWorkbook.Sheets.Count]);
+                                excelWorkSheet4.Name = "03 - Phòng";
+                                dt = new DataTable();
+                                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT T3.TEN_DV AS N'Tên nhà máy' , T2.TEN_XN AS N'Tên bộ phận' , T1.TEN_TO AS N'Tên Chuyền/Phòng' FROM dbo.[TO] T1 INNER JOIN dbo.XI_NGHIEP T2 ON T2.ID_XN = T1.ID_XN INNER JOIN dbo.DON_VI T3 ON T3.ID_DV = T2.ID_DV"));
+                                Ranges1 = excelWorkSheet4.Range[excelWorkSheet4.Cells[1, 1], excelWorkSheet4.Cells[dt.Rows.Count + 1, dt.Columns.Count]];
+                                Ranges1.ColumnWidth = 20;
+                                Ranges1.Font.Name = fontName;
+                                Ranges1.Font.Size = fontSizeNoiDung;
+                                lastColumn = CharacterIncrement(dt.Columns.Count - 1);
+                                Ranges1.Range["A1", "" + lastColumn + "1"].Font.Bold = true;
+                                Ranges1.Range["A1", "" + lastColumn + "1"].HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                                Ranges1.Range["A1", "" + lastColumn + "1"].Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+                                Microsoft.Office.Interop.Excel.Range myRange = excelWorkSheet4.get_Range("A1", lastColumn + (dt.Rows.Count + 1).ToString());
+                                myRange.AutoFilter("1", "<>", Microsoft.Office.Interop.Excel.XlAutoFilterOperator.xlOr, "", true);
+                                MExportExcel(dt, excelWorkSheet4, Ranges1);
+
+                                //Chức vụ
+                                Microsoft.Office.Interop.Excel.Worksheet excelWorkSheet5 = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Sheets[1];
+                                excelWorkSheet5 = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Worksheets.Add(After: excelWorkbook.Sheets[excelWorkbook.Sheets.Count]);
+                                excelWorkSheet5.Name = "04 - Chức vụ";
+                                dt = new DataTable();
+                                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT TEN_CV AS N'Tên chức vụ' FROM dbo.CHUC_VU"));
+                                Ranges1 = excelWorkSheet5.Range[excelWorkSheet5.Cells[1, 1], excelWorkSheet5.Cells[dt.Rows.Count + 1, dt.Columns.Count]];
+                                Ranges1.ColumnWidth = 20;
+                                Ranges1.Font.Name = fontName;
+                                Ranges1.Font.Size = fontSizeNoiDung;
+                                lastColumn = CharacterIncrement(dt.Columns.Count - 1);
+                                Ranges1.Range["A1", "" + lastColumn + "1"].Font.Bold = true;
+                                Ranges1.Range["A1", "" + lastColumn + "1"].HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                                Ranges1.Range["A1", "" + lastColumn + "1"].Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+                                myRange = excelWorkSheet5.get_Range("A1", lastColumn + (dt.Rows.Count + 1).ToString());
+                                myRange.AutoFilter("1", "<>", Microsoft.Office.Interop.Excel.XlAutoFilterOperator.xlOr, "", true);
+                                MExportExcel(dt, excelWorkSheet5, Ranges1);
+
+                                //Coong viec
+                                Microsoft.Office.Interop.Excel.Worksheet excelWorkSheet6 = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Sheets[1];
+                                excelWorkSheet6 = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Worksheets.Add(After: excelWorkbook.Sheets[excelWorkbook.Sheets.Count]);
+                                excelWorkSheet6.Name = "05 - Công việc";
+                                dt = new DataTable();
+                                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT TEN_LCV AS N'Tên công việc' FROM dbo.LOAI_CONG_VIEC"));
+                                Ranges1 = excelWorkSheet6.Range[excelWorkSheet6.Cells[1, 1], excelWorkSheet6.Cells[dt.Rows.Count + 1, dt.Columns.Count]];
+                                Ranges1.ColumnWidth = 20;
+                                Ranges1.Font.Name = fontName;
+                                Ranges1.Font.Size = fontSizeNoiDung;
+                                lastColumn = CharacterIncrement(dt.Columns.Count - 1);
+                                Ranges1.Range["A1", "" + lastColumn + "1"].Font.Bold = true;
+                                Ranges1.Range["A1", "" + lastColumn + "1"].HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                                Ranges1.Range["A1", "" + lastColumn + "1"].Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+                                myRange = excelWorkSheet6.get_Range("A1", lastColumn + (dt.Rows.Count + 1).ToString());
+                                myRange.AutoFilter("1", "<>", Microsoft.Office.Interop.Excel.XlAutoFilterOperator.xlOr, "", true);
+                                MExportExcel(dt, excelWorkSheet6, Ranges1);
+
+
+                                //Tình trạng hợp đồng
+                                Microsoft.Office.Interop.Excel.Worksheet excelWorkSheet8 = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Sheets[1];
+                                excelWorkSheet8 = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Worksheets.Add(After: excelWorkbook.Sheets[excelWorkbook.Sheets.Count]);
+                                excelWorkSheet8.Name = "06 - Tình trạng hợp đồng";
+                                dt = new DataTable();
+                                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT TEN_TT_HD AS N'Tên tình trạng HĐ' FROM dbo.TINH_TRANG_HD"));
+                                Ranges1 = excelWorkSheet8.Range[excelWorkSheet8.Cells[1, 1], excelWorkSheet8.Cells[dt.Rows.Count + 1, dt.Columns.Count]];
+                                Ranges1.ColumnWidth = 20;
+                                Ranges1.Font.Name = fontName;
+                                Ranges1.Font.Size = fontSizeNoiDung;
+                                lastColumn = CharacterIncrement(dt.Columns.Count - 1);
+                                Ranges1.Range["A1", "" + lastColumn + "1"].Font.Bold = true;
+                                Ranges1.Range["A1", "" + lastColumn + "1"].HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                                Ranges1.Range["A1", "" + lastColumn + "1"].Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+                                myRange = excelWorkSheet8.get_Range("A1", lastColumn + (dt.Rows.Count + 1).ToString());
+                                myRange.AutoFilter("1", "<>", Microsoft.Office.Interop.Excel.XlAutoFilterOperator.xlOr, "", true);
+                                MExportExcel(dt, excelWorkSheet8, Ranges1);
+
+                                //Tình trạng hiện tại
+                                Microsoft.Office.Interop.Excel.Worksheet excelWorkSheet9 = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Sheets[1];
+                                excelWorkSheet9 = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Worksheets.Add(After: excelWorkbook.Sheets[excelWorkbook.Sheets.Count]);
+                                excelWorkSheet9.Name = "07 - Tình trạng nhân sự";
+                                dt = new DataTable();
+                                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT TEN_TT_HT AS N'Tên tình trạng NS' FROM dbo.TINH_TRANG_HT"));
+                                Ranges1 = excelWorkSheet9.Range[excelWorkSheet9.Cells[1, 1], excelWorkSheet9.Cells[dt.Rows.Count + 1, dt.Columns.Count]];
+                                Ranges1.ColumnWidth = 20;
+                                Ranges1.Font.Name = fontName;
+                                Ranges1.Font.Size = fontSizeNoiDung;
+                                lastColumn = CharacterIncrement(dt.Columns.Count - 1);
+                                Ranges1.Range["A1", "" + lastColumn + "1"].Font.Bold = true;
+                                Ranges1.Range["A1", "" + lastColumn + "1"].HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                                Ranges1.Range["A1", "" + lastColumn + "1"].Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+                                myRange = excelWorkSheet9.get_Range("A1", lastColumn + (dt.Rows.Count + 1).ToString());
+                                myRange.AutoFilter("1", "<>", Microsoft.Office.Interop.Excel.XlAutoFilterOperator.xlOr, "", true);
+                                MExportExcel(dt, excelWorkSheet9, Ranges1);
+
+                                //Dân tộc
+                                Microsoft.Office.Interop.Excel.Worksheet excelWorkSheet10 = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Sheets[1];
+                                excelWorkSheet10 = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Worksheets.Add(After: excelWorkbook.Sheets[excelWorkbook.Sheets.Count]);
+                                excelWorkSheet10.Name = "08 - Dân tộc";
+                                dt = new DataTable();
+                                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT TEN_DT AS N'Tên dân tộc' FROM dbo.DAN_TOC"));
+                                Ranges1 = excelWorkSheet10.Range[excelWorkSheet10.Cells[1, 1], excelWorkSheet10.Cells[dt.Rows.Count + 1, dt.Columns.Count]];
+                                Ranges1.ColumnWidth = 20;
+                                Ranges1.Font.Name = fontName;
+                                Ranges1.Font.Size = fontSizeNoiDung;
+                                lastColumn = CharacterIncrement(dt.Columns.Count - 1);
+                                Ranges1.Range["A1", "" + lastColumn + "1"].Font.Bold = true;
+                                Ranges1.Range["A1", "" + lastColumn + "1"].HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                                Ranges1.Range["A1", "" + lastColumn + "1"].Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+                                myRange = excelWorkSheet10.get_Range("A1", lastColumn + (dt.Rows.Count + 1).ToString());
+                                myRange.AutoFilter("1", "<>", Microsoft.Office.Interop.Excel.XlAutoFilterOperator.xlOr, "", true);
+                                MExportExcel(dt, excelWorkSheet10, Ranges1);
+
+                                //Tình trạng hôn nhân
+                                Microsoft.Office.Interop.Excel.Worksheet excelWorkSheet11 = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Sheets[1];
+                                excelWorkSheet11 = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Worksheets.Add(After: excelWorkbook.Sheets[excelWorkbook.Sheets.Count]);
+                                excelWorkSheet11.Name = "09 - Tình trạng hôn nhân";
+                                dt = new DataTable();
+                                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT TEN_TT_HN AS N'Tên TT hôn nhân' FROM dbo.TT_HON_NHAN"));
+                                Ranges1 = excelWorkSheet11.Range[excelWorkSheet11.Cells[1, 1], excelWorkSheet11.Cells[dt.Rows.Count + 1, dt.Columns.Count]];
+                                Ranges1.ColumnWidth = 20;
+                                Ranges1.Font.Name = fontName;
+                                Ranges1.Font.Size = fontSizeNoiDung;
+                                lastColumn = CharacterIncrement(dt.Columns.Count - 1);
+                                Ranges1.Range["A1", "" + lastColumn + "1"].Font.Bold = true;
+                                Ranges1.Range["A1", "" + lastColumn + "1"].HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                                Ranges1.Range["A1", "" + lastColumn + "1"].Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+                                myRange = excelWorkSheet11.get_Range("A1", lastColumn + (dt.Rows.Count + 1).ToString());
+                                myRange.AutoFilter("1", "<>", Microsoft.Office.Interop.Excel.XlAutoFilterOperator.xlOr, "", true);
+                                MExportExcel(dt, excelWorkSheet11, Ranges1);
+
+                                //Tỉnh
+                                Microsoft.Office.Interop.Excel.Worksheet excelWorkSheet12 = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Sheets[1];
+                                excelWorkSheet12 = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Worksheets.Add(After: excelWorkbook.Sheets[excelWorkbook.Sheets.Count]);
+                                excelWorkSheet12.Name = "10 - Tỉnh-Thành phố";
+                                dt = new DataTable();
+                                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT TEN_TP AS N'Tên tỉnh' FROM dbo.THANH_PHO"));
+                                Ranges1 = excelWorkSheet12.Range[excelWorkSheet12.Cells[1, 1], excelWorkSheet12.Cells[dt.Rows.Count + 1, dt.Columns.Count]];
+                                Ranges1.ColumnWidth = 20;
+                                Ranges1.Font.Name = fontName;
+                                Ranges1.Font.Size = fontSizeNoiDung;
+                                lastColumn = CharacterIncrement(dt.Columns.Count - 1);
+                                Ranges1.Range["A1", "" + lastColumn + "1"].Font.Bold = true;
+                                Ranges1.Range["A1", "" + lastColumn + "1"].HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                                Ranges1.Range["A1", "" + lastColumn + "1"].Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+                                myRange = excelWorkSheet12.get_Range("A1", lastColumn + (dt.Rows.Count + 1).ToString());
+                                myRange.AutoFilter("1", "<>", Microsoft.Office.Interop.Excel.XlAutoFilterOperator.xlOr, "", true);
+                                MExportExcel(dt, excelWorkSheet12, Ranges1);
+
+                                //Quận/huyện
+                                Microsoft.Office.Interop.Excel.Worksheet excelWorkSheet13 = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Sheets[1];
+                                excelWorkSheet13 = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Worksheets.Add(After: excelWorkbook.Sheets[excelWorkbook.Sheets.Count]);
+                                excelWorkSheet13.Name = "11 - Quận-Huyện";
+                                dt = new DataTable();
+                                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT T2.TEN_TP AS N'Tên Tỉnh/Thành phố', T1.TEN_QUAN AS N'Tên Quận/Huyện'  FROM dbo.QUAN T1 INNER JOIN dbo.THANH_PHO T2 ON T2.ID_TP = T1.ID_TP"));
+                                Ranges1 = excelWorkSheet13.Range[excelWorkSheet13.Cells[1, 1], excelWorkSheet13.Cells[dt.Rows.Count + 1, dt.Columns.Count]];
+                                Ranges1.ColumnWidth = 20;
+                                Ranges1.Font.Name = fontName;
+                                Ranges1.Font.Size = fontSizeNoiDung;
+                                lastColumn = CharacterIncrement(dt.Columns.Count - 1);
+                                Ranges1.Range["A1", "" + lastColumn + "1"].Font.Bold = true;
+                                Ranges1.Range["A1", "" + lastColumn + "1"].HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                                Ranges1.Range["A1", "" + lastColumn + "1"].Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+                                myRange = excelWorkSheet13.get_Range("A1", lastColumn + (dt.Rows.Count + 1).ToString());
+                                myRange.AutoFilter("1", "<>", Microsoft.Office.Interop.Excel.XlAutoFilterOperator.xlOr, "", true);
+                                MExportExcel(dt, excelWorkSheet13, Ranges1);
+
+                                //Phường/xã
+                                Microsoft.Office.Interop.Excel.Worksheet excelWorkSheet14 = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Sheets[1];
+                                excelWorkSheet14 = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Worksheets.Add(After: excelWorkbook.Sheets[excelWorkbook.Sheets.Count]);
+                                excelWorkSheet14.Name = "12 - Phường-Xã";
+                                dt = new DataTable();
+                                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT T3.TEN_TP AS N'Tên Tỉnh/Thành phố', T2.TEN_QUAN AS N'Tên Quận/Huyện', T1.TEN_PX AS N'Tên Phường/Xã'  FROM dbo.PHUONG_XA T1 INNER JOIN dbo.QUAN T2 ON T2.ID_QUAN = T1.ID_QUAN INNER JOIN dbo.THANH_PHO T3 ON T3.ID_TP = T2.ID_TP"));
+                                Ranges1 = excelWorkSheet14.Range[excelWorkSheet14.Cells[1, 1], excelWorkSheet14.Cells[dt.Rows.Count + 1, dt.Columns.Count]];
+                                Ranges1.ColumnWidth = 20;
+                                Ranges1.Font.Name = fontName;
+                                Ranges1.Font.Size = fontSizeNoiDung;
+                                lastColumn = CharacterIncrement(dt.Columns.Count - 1);
+                                Ranges1.Range["A1", "" + lastColumn + "1"].Font.Bold = true;
+                                Ranges1.Range["A1", "" + lastColumn + "1"].HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                                Ranges1.Range["A1", "" + lastColumn + "1"].Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+                                myRange = excelWorkSheet14.get_Range("A1", lastColumn + (dt.Rows.Count + 1).ToString());
+                                myRange.AutoFilter("1", "<>", Microsoft.Office.Interop.Excel.XlAutoFilterOperator.xlOr, "", true);
+                                MExportExcel(dt, excelWorkSheet14, Ranges1);
+
+
+                                // Loại trình độ
+                                Microsoft.Office.Interop.Excel.Worksheet excelWorkSheet15 = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Sheets[1];
+                                excelWorkSheet15 = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Worksheets.Add(After: excelWorkbook.Sheets[excelWorkbook.Sheets.Count]);
+                                excelWorkSheet15.Name = "13 - Loại trình độ";
+                                dt = new DataTable();
+                                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT TEN_LOAI_TD AS N'Tên loại trình độ' FROM dbo.LOAI_TRINH_DO"));
+                                Ranges1 = excelWorkSheet15.Range[excelWorkSheet15.Cells[1, 1], excelWorkSheet15.Cells[dt.Rows.Count + 1, dt.Columns.Count]];
+                                Ranges1.ColumnWidth = 20;
+                                Ranges1.Font.Name = fontName;
+                                Ranges1.Font.Size = fontSizeNoiDung;
+                                lastColumn = CharacterIncrement(dt.Columns.Count - 1);
+                                Ranges1.Range["A1", "" + lastColumn + "1"].Font.Bold = true;
+                                Ranges1.Range["A1", "" + lastColumn + "1"].HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                                Ranges1.Range["A1", "" + lastColumn + "1"].Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+                                myRange = excelWorkSheet15.get_Range("A1", lastColumn + (dt.Rows.Count + 1).ToString());
+                                myRange.AutoFilter("1", "<>", Microsoft.Office.Interop.Excel.XlAutoFilterOperator.xlOr, "", true);
+                                MExportExcel(dt, excelWorkSheet15, Ranges1);
+
+                                // Trình độ
+                                Microsoft.Office.Interop.Excel.Worksheet excelWorkSheet16 = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Sheets[1];
+                                excelWorkSheet16 = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Worksheets.Add(After: excelWorkbook.Sheets[excelWorkbook.Sheets.Count]);
+                                excelWorkSheet16.Name = "14 - Trình độ";
+                                dt = new DataTable();
+                                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT CHAR(13)+ TEN_TDVH AS N'Tên trình độ' FROM dbo.TRINH_DO_VAN_HOA "));
+                                Ranges1 = excelWorkSheet16.Range[excelWorkSheet16.Cells[1, 1], excelWorkSheet16.Cells[dt.Rows.Count + 1, dt.Columns.Count]];
+                                Ranges1.ColumnWidth = 20;
+                                Ranges1.Font.Name = fontName;
+                                Ranges1.Font.Size = fontSizeNoiDung;
+                                lastColumn = CharacterIncrement(dt.Columns.Count - 1);
+                                Ranges1.Range["A1", "" + lastColumn + "1"].Font.Bold = true;
+                                Ranges1.Range["A1", "" + lastColumn + "1"].HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                                Ranges1.Range["A1", "" + lastColumn + "1"].Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+                                myRange = excelWorkSheet16.get_Range("A1", lastColumn + (dt.Rows.Count + 1).ToString());
+                                myRange.AutoFilter("1", "<>", Microsoft.Office.Interop.Excel.XlAutoFilterOperator.xlOr, "", true);
+                                MExportExcel(dt, excelWorkSheet16, Ranges1);
+
+                                excelWorkSheet.Activate();
+
+                                excelApplication.Visible = true;
+                                excelWorkbook.Save();
                             }
-                            dtTmp.AcceptChanges();
+                            catch (Exception ex) { XtraMessageBox.Show(ex.Message); }
+
+                            break;
                         }
-                        catch
+                    case "import":
                         {
-                            XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgXoaKhongThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"),
-                                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            grvData.PostEditor();
+                            grvData.UpdateCurrentRow();
+                            Commons.Modules.ObjSystems.MChooseGrid(false, "XOA", grvData);
+                            DataTable dtSource = Commons.Modules.ObjSystems.ConvertDatatable(grdData);
+                            if (cboChonSheet.Text == "" || dtSource == null || dtSource.Rows.Count <= 0)
+                            {
+                                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "KhongCoDuLieuImport"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"),
+                                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                return;
+                            }
+                            grvData.Columns.View.ClearColumnErrors();
+                            ImportUngVien(dtSource);
+
+                            break;
                         }
-                        break;
-                    }
-                case "thoat":
-                    {
-                        this.DialogResult = DialogResult.OK;
-                        this.Close();
-                        break;
-                    }
-                default: break;
+                    case "xoa":
+                        {
+                            try
+                            {
+                                DataTable dtTmp = new DataTable();
+                                dtTmp = (DataTable)grdData.DataSource;
+
+                                if (dtTmp == null || dtTmp.Select("XOA = 1").Count() == 0) return;
+
+                                DialogResult res = XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgBanCoMuonXoaKhong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"),
+                                        MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                                if (res == DialogResult.No) return;
+
+                                dtTmp.AcceptChanges();
+                                foreach (DataRow dr in dtTmp.Rows)
+                                {
+                                    if (dr["XOA"].ToString() == "True")
+                                    {
+                                        dr.Delete();
+                                    }
+                                }
+                                dtTmp.AcceptChanges();
+                            }
+                            catch
+                            {
+                                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgXoaKhongThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"),
+                                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+                            break;
+                        }
+                    case "thoat":
+                        {
+                            this.DialogResult = DialogResult.OK;
+                            Commons.Modules.ObjSystems.setCheckImport(0); //xoa
+                            this.Close();
+                            break;
+                        }
+                    default: break;
+                }
             }
+            catch { }
         }
         #region import ứng viên
         private void ImportUngVien(DataTable dtSource)
@@ -294,6 +491,7 @@ namespace Vs.HRM
             int count = grvData.RowCount;
             int col = 0;
             int errorCount = 0;
+            int errorMS = 0;
             #region kiểm tra dữ liệu
             foreach (DataRow dr in dtSource.Rows)
             {
@@ -310,6 +508,14 @@ namespace Vs.HRM
                     if (!Commons.Modules.MExcel.KiemTrungDL(grvData, dtSource, dr, col, sMaSo, "CONG_NHAN", "MS_CN", this.Name))
                     {
                         errorCount++;
+                        errorMS++;
+                    }
+                    if (dr[grvData.Columns[col].FieldName.ToString()].ToString().Substring(0, 3) != dr[grvData.Columns[8].FieldName.ToString()].ToString().Substring(0, 3))
+                    {
+                        string sTenKTra = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgKhongDungDinhDang");
+                        dr.SetColumnError(grvData.Columns[col].FieldName.ToString(), sTenKTra);
+                        dr["XOA"] = 1;
+                        errorMS++;
                     }
                 }
 
@@ -326,6 +532,7 @@ namespace Vs.HRM
                     if (!Commons.Modules.MExcel.KiemTrungDL(grvData, dtSource, dr, col, sMS_The_CC, "CONG_NHAN", "MS_THE_CC", this.Name))
                     {
                         errorCount++;
+                        errorMS++;
                     }
                 }
 
@@ -366,7 +573,7 @@ namespace Vs.HRM
 
                 col = 6;
                 //Năm sinh
-                if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, false, 5, this.Name))
+                if (!Commons.Modules.MExcel.KiemDuLieuSo(grvData, dr, col, "Năm sinh ", 0, 0, false, this.Name))
                 {
                     errorCount++;
                 }
@@ -379,38 +586,8 @@ namespace Vs.HRM
                     errorCount++;
                 }
 
-                //Đơn vị   
-                col = 8;
-                string sDonVi = dr[grvData.Columns[col].FieldName.ToString()].ToString();
-                if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, true, 250, this.Name))
-                {
-                    errorCount++;
-                }
-                else
-                {
-                    if (!Commons.Modules.MExcel.KiemTonTai(grvData, dr, col, sDonVi, "DON_VI", "TEN_DV", false, this.Name))
-                    {
-                        errorCount++;
-                    }
-                }
-
-                //Xí nghiệp   
-                col = 9;
-                string sXiNghiep = dr[grvData.Columns[col].FieldName.ToString()].ToString();
-                if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, true, 250, this.Name))
-                {
-                    errorCount++;
-                }
-                else
-                {
-                    if (!Commons.Modules.MExcel.KiemTonTai(grvData, dr, col, sXiNghiep, "XI_NGHIEP", "TEN_XN", false, this.Name))
-                    {
-                        errorCount++;
-                    }
-                }
-
                 //Tổ  
-                col = 10;
+                col = 8;
                 string sTo = dr[grvData.Columns[col].FieldName.ToString()].ToString();
                 if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, true, 250, this.Name))
                 {
@@ -425,7 +602,7 @@ namespace Vs.HRM
                 }
 
                 //Chức vụ  
-                col = 11;
+                col = 9;
                 string sChucVu = dr[grvData.Columns[col].FieldName.ToString()].ToString();
                 if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, true, 250, this.Name))
                 {
@@ -440,7 +617,7 @@ namespace Vs.HRM
                 }
 
                 //Loại công việc
-                col = 12;
+                col = 10;
                 string sLoaiCongViec = dr[grvData.Columns[col].FieldName.ToString()].ToString();
                 if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, true, 250, this.Name))
                 {
@@ -454,44 +631,22 @@ namespace Vs.HRM
                     }
                 }
 
-                //Loại hợp đồng lao động
-                col = 13;
-                string sLoaiHDLD = dr[grvData.Columns[col].FieldName.ToString()].ToString();
-                if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, true, 250, this.Name))
-                {
-                    errorCount++;
-                }
-                else
-                {
-                    if (!Commons.Modules.MExcel.KiemTonTai(grvData, dr, col, sLoaiHDLD, "LOAI_HDLD", "TEN_LHDLD", false, this.Name))
-                    {
-                        errorCount++;
-                    }
-                }
-
-                //Ngày học việc
-                col = 14;
-                if (!Commons.Modules.MExcel.KiemDuLieuNgay(grvData, dr, col, false, this.Name))
-                {
-                    errorCount++;
-                }
-
                 //Ngày thử việc
-                col = 15;
+                col = 11;
                 if (!Commons.Modules.MExcel.KiemDuLieuNgay(grvData, dr, col, false, this.Name))
                 {
                     errorCount++;
                 }
 
                 //Ngày vào làm
-                col = 16;
+                col = 12;
                 if (!Commons.Modules.MExcel.KiemDuLieuNgay(grvData, dr, col, true, this.Name))
                 {
                     errorCount++;
                 }
 
                 //Vào làm lại
-                col = 17;
+                col = 13;
                 string sVaoLamLai = dr[grvData.Columns[col].FieldName.ToString()].ToString();
                 if (!Commons.Modules.MExcel.KiemDuLieuBool(grvData, dr, col, sVaoLamLai, false))
                 {
@@ -499,7 +654,7 @@ namespace Vs.HRM
                 }
 
                 //Tình trạng hợp đồng
-                col = 18;
+                col = 14;
                 string sTinhTrangHD = dr[grvData.Columns[col].FieldName.ToString()].ToString();
                 if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, true, 250, this.Name))
                 {
@@ -514,7 +669,7 @@ namespace Vs.HRM
                 }
 
                 //Tình trạng nhân sự
-                col = 19;
+                col = 15;
                 string sTinhTrangHT = dr[grvData.Columns[col].FieldName.ToString()].ToString();
                 if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, true, 250, this.Name))
                 {
@@ -529,28 +684,14 @@ namespace Vs.HRM
                 }
 
                 //Hình thức tuyển
-                col = 20;
-                if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, false, 250, this.Name))
-                {
-                    errorCount++;
-                }
-
-                //Phép cộng thêm
-                col = 21;
-                if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, false, 250, this.Name))
-                {
-                    errorCount++;
-                }
-
-                //Phép chế độ
-                col = 22;
+                col = 16;
                 if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, false, 250, this.Name))
                 {
                     errorCount++;
                 }
 
                 //Tham gia BHXH
-                col = 23;
+                col = 17;
                 string sThamGiaBHXH = dr[grvData.Columns[col].FieldName.ToString()].ToString();
                 if (!Commons.Modules.MExcel.KiemDuLieuBool(grvData, dr, col, sThamGiaBHXH, false))
                 {
@@ -558,60 +699,22 @@ namespace Vs.HRM
                 }
 
                 //LD Tỉnh
-                col = 24;
+                col = 18;
                 string sLDTinh = dr[grvData.Columns[col].FieldName.ToString()].ToString();
                 if (!Commons.Modules.MExcel.KiemDuLieuBool(grvData, dr, col, sLDTinh, false))
                 {
                     errorCount++;
                 }
 
-                //LD công nhật
-                col = 25;
-                string sLDCongNhat = dr[grvData.Columns[col].FieldName.ToString()].ToString();
-                if (!Commons.Modules.MExcel.KiemDuLieuBool(grvData, dr, col, sLDCongNhat, false))
-                {
-                    errorCount++;
-                }
-
-                //Trực tiếp sản xuất
-                col = 26;
-                string sTTSanXuat = dr[grvData.Columns[col].FieldName.ToString()].ToString();
-                if (!Commons.Modules.MExcel.KiemDuLieuBool(grvData, dr, col, sTTSanXuat, false))
-                {
-                    errorCount++;
-                }
-
-                //Ngày nghỉ việc
-                col = 27;
-                if (!Commons.Modules.MExcel.KiemDuLieuNgay(grvData, dr, col, false, this.Name))
-                {
-                    errorCount++;
-                }
-
-                //Lý do thôi việc
-                col = 28;
-                string sLyDoThoiViec = dr[grvData.Columns[col].FieldName.ToString()].ToString();
-                if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, false, 250, this.Name))
-                {
-                    errorCount++;
-                }
-                else
-                {
-                    if (!Commons.Modules.MExcel.KiemTonTai(grvData, dr, col, sLyDoThoiViec, "LY_DO_THOI_VIEC", "TEN_LD_TV", false, this.Name))
-                    {
-                        errorCount++;
-                    }
-                }
-
                 //Ghi chú
-                col = 29;
+                col = 19;
                 if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, false, 250, this.Name))
                 {
                     errorCount++;
                 }
 
                 //Dân tộc
-                col = 30;
+                col = 20;
                 string sTenDanToc = dr[grvData.Columns[col].FieldName.ToString()].ToString();
                 if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, false, 250, this.Name))
                 {
@@ -626,49 +729,49 @@ namespace Vs.HRM
                 }
 
                 //Tôn giáo
-                col = 31;
+                col = 21;
                 if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, false, 250, this.Name))
                 {
                     errorCount++;
                 }
 
                 //Nơi sinh
-                col = 32;
+                col = 22;
                 if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, false, 250, this.Name))
                 {
                     errorCount++;
                 }
 
                 //Nguyên quán
-                col = 33;
+                col = 23;
                 if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, false, 250, this.Name))
                 {
                     errorCount++;
                 }
 
                 //Số CMND
-                col = 34;
+                col = 24;
                 if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, false, 250, this.Name))
                 {
                     errorCount++;
                 }
 
                 //Ngày cấp
-                col = 35;
+                col = 25;
                 if (!Commons.Modules.MExcel.KiemDuLieuNgay(grvData, dr, col, false, this.Name))
                 {
                     errorCount++;
                 }
 
                 //Nơi cấp
-                col = 36;
+                col = 26;
                 if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, false, 250, this.Name))
                 {
                     errorCount++;
                 }
 
                 //Tình trạng hôn nhân
-                col = 37;
+                col = 27;
                 string sTTHonNhan = dr[grvData.Columns[col].FieldName.ToString()].ToString();
                 if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, false, 250, this.Name))
                 {
@@ -683,35 +786,35 @@ namespace Vs.HRM
                 }
 
                 //Mã thẻ ATM
-                col = 38;
+                col = 28;
                 if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, false, 250, this.Name))
                 {
                     errorCount++;
                 }
 
                 //Số tài khoản
-                col = 39;
+                col = 29;
                 if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, false, 250, this.Name))
                 {
                     errorCount++;
                 }
 
                 //Mã số thuế
-                col = 40;
+                col = 30;
                 if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, false, 250, this.Name))
                 {
                     errorCount++;
                 }
 
                 //Tên không dấu
-                col = 41;
+                col = 31;
                 if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, false, 250, this.Name))
                 {
                     errorCount++;
                 }
 
                 //Lao động nước ngoài
-                col = 42;
+                col = 32;
                 string sLDNuocNgoai = dr[grvData.Columns[col].FieldName.ToString()].ToString();
                 if (!Commons.Modules.MExcel.KiemDuLieuBool(grvData, dr, col, sLDNuocNgoai, false))
                 {
@@ -719,42 +822,42 @@ namespace Vs.HRM
                 }
 
                 //ĐT di động
-                col = 43;
+                col = 33;
                 if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, false, 250, this.Name))
                 {
                     errorCount++;
                 }
 
                 //ĐT nhà
-                col = 44;
+                col = 34;
                 if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, false, 250, this.Name))
                 {
                     errorCount++;
                 }
 
                 //ĐT người thân
-                col = 45;
+                col = 35;
                 if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, false, 250, this.Name))
                 {
                     errorCount++;
                 }
 
                 //Email
-                col = 46;
+                col = 36;
                 if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, false, 250, this.Name))
                 {
                     errorCount++;
                 }
 
                 //Dia chi thuong tru
-                col = 47;
+                col = 37;
                 if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, false, 250, this.Name))
                 {
                     errorCount++;
                 }
 
                 //Thành phố
-                col = 48;
+                col = 38;
                 string sThanhPho = dr[grvData.Columns[col].FieldName.ToString()].ToString();
                 if (!Commons.Modules.MExcel.KiemTonTai(grvData, dr, col, sThanhPho, "THANH_PHO", "TEN_TP", false, this.Name))
                 {
@@ -762,7 +865,7 @@ namespace Vs.HRM
                 }
 
                 //Quận
-                col = 49;
+                col = 39;
                 string sQuan = dr[grvData.Columns[col].FieldName.ToString()].ToString();
                 if (!Commons.Modules.MExcel.KiemTonTai(grvData, dr, col, sQuan, "QUAN", "TEN_QUAN", false, this.Name))
                 {
@@ -770,7 +873,7 @@ namespace Vs.HRM
                 }
 
                 //phường xã
-                col = 50;
+                col = 40;
                 string sPhuongXa = dr[grvData.Columns[col].FieldName.ToString()].ToString();
                 if (!Commons.Modules.MExcel.KiemTonTai(grvData, dr, col, sPhuongXa, "PHUONG_XA", "TEN_PX", false, this.Name))
                 {
@@ -778,21 +881,21 @@ namespace Vs.HRM
                 }
 
                 //Thôn xóm
-                col = 51;
+                col = 41;
                 if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, false, 250, this.Name))
                 {
                     errorCount++;
                 }
 
                 //Địa chỉ tạm trú
-                col = 52;
+                col = 42;
                 if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, false, 250, this.Name))
                 {
                     errorCount++;
                 }
 
                 //Thành phố tạm trú
-                col = 53;
+                col = 43;
                 string sThanhPhoTamTru = dr[grvData.Columns[col].FieldName.ToString()].ToString();
                 if (!Commons.Modules.MExcel.KiemTonTai(grvData, dr, col, sThanhPhoTamTru, "THANH_PHO", "TEN_TP", false, this.Name))
                 {
@@ -800,7 +903,7 @@ namespace Vs.HRM
                 }
 
                 //Quận tạm trú
-                col = 54;
+                col = 44;
                 string sQuanTamTru = dr[grvData.Columns[col].FieldName.ToString()].ToString();
                 if (!Commons.Modules.MExcel.KiemTonTai(grvData, dr, col, sQuanTamTru, "QUAN", "TEN_QUAN", false, this.Name))
                 {
@@ -808,7 +911,7 @@ namespace Vs.HRM
                 }
 
                 //phường xã tạm trú
-                col = 55;
+                col = 45;
                 string sPhuongXaTamTru = dr[grvData.Columns[col].FieldName.ToString()].ToString();
                 if (!Commons.Modules.MExcel.KiemTonTai(grvData, dr, col, sPhuongXaTamTru, "PHUONG_XA", "TEN_PX", false, this.Name))
                 {
@@ -816,49 +919,28 @@ namespace Vs.HRM
                 }
 
                 //Thôn xóm tạm trú
-                col = 56;
+                col = 46;
                 if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, false, 250, this.Name))
                 {
                     errorCount++;
                 }
 
                 //số BHXH
-                col = 57;
+                col = 47;
                 if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, false, 250, this.Name))
                 {
                     errorCount++;
                 }
 
                 //Ngày đóng BHXH
-                col = 58;
+                col = 48;
                 if (!Commons.Modules.MExcel.KiemDuLieuNgay(grvData, dr, col, false, this.Name))
                 {
                     errorCount++;
                 }
 
-                //Ngày đóng BHXH đầu tiên
-                col = 59;
-                if (!Commons.Modules.MExcel.KiemDuLieuNgay(grvData, dr, col, false, this.Name))
-                {
-                    errorCount++;
-                }
-
-                //Ngày chấm dứt BHXH
-                col = 60;
-                if (!Commons.Modules.MExcel.KiemDuLieuNgay(grvData, dr, col, false, this.Name))
-                {
-                    errorCount++;
-                }
-
-                //Ngày thu hồi BHXH
-                col = 61;
-                if (!Commons.Modules.MExcel.KiemDuLieuNgay(grvData, dr, col, false, this.Name))
-                {
-                    errorCount++;
-                }
-
-                //Trình độ văn hóa
-                col = 62;
+                //loại trình độ 
+                col = 49;
 
                 string sLoaiTrinhDo = dr[grvData.Columns[col].FieldName.ToString()].ToString();
                 if (!Commons.Modules.MExcel.KiemTonTai(grvData, dr, col, sLoaiTrinhDo, "LOAI_TRINH_DO", "TEN_LTD", false, this.Name))
@@ -866,8 +948,8 @@ namespace Vs.HRM
                     errorCount++;
                 }
 
-                //loại trình độ
-                col = 63;
+                //Trình độ văn hóa
+                col = 50;
                 string sTDVanHoa = dr[grvData.Columns[col].FieldName.ToString()].ToString();
                 if (!Commons.Modules.MExcel.KiemTonTai(grvData, dr, col, sTDVanHoa, "TRINH_DO_VAN_HOA", "TEN_TDVH", false, this.Name))
                 {
@@ -876,80 +958,29 @@ namespace Vs.HRM
 
 
                 //Chuyên môn
-                col = 64;
+                col = 51;
                 if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, false, 250, this.Name))
                 {
                     errorCount++;
                 }
 
                 //Ngoại ngữ
-                col = 65;
+                col = 52;
                 if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, false, 250, this.Name))
-                {
-                    errorCount++;
-                }
-
-                //Cấp giấy phép
-                col = 66;
-                string sCapGiayPhep = dr[grvData.Columns[col].FieldName.ToString()].ToString();
-                if (!Commons.Modules.MExcel.KiemTonTai(grvData, dr, col, sCapGiayPhep, "CAP_GIAY_PHEP", "TEN_CAP_GIAY_PHEP", false, this.Name))
-                {
-                    errorCount++;
-                }
-
-                //Số giấy phép
-                col = 67;
-                if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, false, 250, this.Name))
-                {
-                    errorCount++;
-                }
-
-                //Ngày cấp giấy phép
-                col = 68;
-                if (!Commons.Modules.MExcel.KiemDuLieuNgay(grvData, dr, col, false, this.Name))
-                {
-                    errorCount++;
-                }
-
-                //Ngày hết hạn giấy phép
-                col = 69;
-                if (!Commons.Modules.MExcel.KiemDuLieuNgay(grvData, dr, col, false, this.Name))
                 {
                     errorCount++;
                 }
 
                 //Ngân hàng
-                col = 70;
+                col = 53;
                 if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, false, 250, this.Name))
                 {
                     errorCount++;
                 }
 
                 //Chi nhánh ngân hàng
-                col = 71;
+                col = 54;
                 if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, false, 250, this.Name))
-                {
-                    errorCount++;
-                }
-
-                //Đánh giá tay nghề
-                col = 72;
-                if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, false, 250, this.Name))
-                {
-                    errorCount++;
-                }
-
-                //Password
-                col = 73;
-                if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, false, 250, this.Name))
-                {
-                    errorCount++;
-                }
-
-                //NV_PTD
-                col = 74;
-                string sNV_PTD = dr[grvData.Columns[col].FieldName.ToString()].ToString();
-                if (!Commons.Modules.MExcel.KiemDuLieuBool(grvData, dr, col, sNV_PTD, false))
                 {
                     errorCount++;
                 }
@@ -957,6 +988,169 @@ namespace Vs.HRM
             this.Cursor = Cursors.Default;
             #endregion
             Commons.Modules.ObjSystems.HideWaitForm();
+            int errorEmpty = 0;
+            int errorExist = 0;
+            string sBT = "sBTImport" + Commons.Modules.iIDUser;
+            if (errorMS != 0)
+            {
+                if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgCoMaSoCongNhanBiLoiBanCoMuonTaoMaMoi"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) return;
+                try
+                {
+                    for (int i = 0; i < dtSource.Rows.Count; i++)
+                    {
+                        if (dtSource.Rows[i][grvData.Columns[8].FieldName.ToString()].ToString() == "")
+                        {
+                            errorEmpty++;
+                        }
+                        else
+                        {
+                            if (Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT COUNT(*) FROM dbo.[TO] A WHERE A.[TEN_TO] = N'" + dtSource.Rows[i][grvData.Columns[8].FieldName.ToString()].ToString() + "'")) == 0)
+                            {
+                                errorExist++;
+                            }
+                        }
+                    }
+                    if (errorEmpty != 0)
+                    {
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgBanPhaiChonToTruoc"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+                    if (errorExist != 0)
+                    {
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgTenToKhongTonTai"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+
+                    string sMaMaxDMS = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.AUTO_CREATE_SO_CONG_NHAN(1, 1)").ToString();
+                    string sMaMaxDMT = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.AUTO_CREATE_SO_CONG_NHAN(2, 1)").ToString();
+
+                    int iMaTemp = 0;
+                    Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBT, Commons.Modules.ObjSystems.ConvertDatatable(grvData), "");
+                    for (int i = 0; i < dtSource.Rows.Count; i++)
+                    {
+                        string sMaSo = dtSource.Rows[i][grvData.Columns[0].FieldName.ToString()].ToString();
+                        string sHo = dtSource.Rows[i][grvData.Columns[2].FieldName.ToString()].ToString();
+                        string sTen = dtSource.Rows[i][grvData.Columns[3].FieldName.ToString()].ToString();
+                        string sNgaySinh = Convert.ToDateTime(dtSource.Rows[i][grvData.Columns[5].FieldName.ToString()]).ToString("MM/dd/yyyy");
+                        string sMaSoTheCC = dtSource.Rows[i][grvData.Columns[1].FieldName.ToString()].ToString();
+                        string sGetID_DV = "SELECT T1.ID_DV FROM dbo.DON_VI T1 INNER JOIN dbo.XI_NGHIEP T2 ON T2.ID_DV = T1.ID_DV INNER JOIN dbo.[TO] T3 ON T3.ID_XN = T2.ID_XN WHERE T3.TEN_TO = N'" + dtSource.Rows[i][grvData.Columns[8].FieldName.ToString()].ToString() + "'";
+                        int iID_DV = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, sGetID_DV));
+
+                        if (dtSource.AsEnumerable().Where(x => x.Field<string>(grvData.Columns[0].FieldName.ToString()).Trim().Equals(sMaSo)).CopyToDataTable().Rows.Count > 1)
+                        {
+                            string strSQL = "UPDATE  A SET A.[" + grvData.Columns[0].FieldName.ToString() + "] = N'" + sMaMaxDMS + "' FROM " + sBT + " A WHERE A.[" + grvData.Columns[0].FieldName.ToString() + "] = N'" + sMaSo + "' AND A.[" + grvData.Columns[2].FieldName.ToString() + "] = N'" + sHo + "' AND A.[" + grvData.Columns[3].FieldName.ToString() + "] = N'" + sTen + "' AND A.[" + grvData.Columns[5].FieldName.ToString() + "] = '" + sNgaySinh + "'";
+                            SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, strSQL);
+                            dtSource.Rows[i][0] = sMaMaxDMS;
+                            i--;
+                        }
+                        else
+                        {
+                            if (Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT COUNT(*) FROM dbo.[CONG_NHAN] WHERE MS_CN = N'" + sMaSo + "'")) > 0)
+                            {
+                                if (iID_DV == 1)
+                                {
+                                    if (Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT COUNT(*) FROM dbo.[" + sBT + "] A WHERE A.[" + grvData.Columns[0].FieldName.ToString() + "] = N'" + sMaMaxDMS + "'")) > 0)
+                                    {
+                                        iMaTemp = Convert.ToInt32(sMaMaxDMS.Substring(3, sMaMaxDMS.Length - 3)) + 1;
+                                        sMaMaxDMS = sMaMaxDMS.Substring(0, sMaMaxDMS.Length - (iMaTemp.ToString().Length)) + iMaTemp.ToString();
+                                        i--;
+                                    }
+                                    else
+                                    {
+                                        string strSQL = "UPDATE  A SET A.[" + grvData.Columns[0].FieldName.ToString() + "] = N'" + sMaMaxDMS + "' FROM " + sBT + " A WHERE A.[" + grvData.Columns[0].FieldName.ToString() + "] = N'" + sMaSo + "'";
+                                        SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, strSQL);
+                                        iMaTemp = Convert.ToInt32(sMaMaxDMS.Substring(3, sMaMaxDMS.Length - 3)) + 1;
+                                        sMaMaxDMS = sMaMaxDMS.Substring(0, sMaMaxDMS.Length - (iMaTemp.ToString().Length)) + iMaTemp.ToString();
+                                    }
+                                }
+                                else
+                                {
+                                    if (Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT COUNT(*) FROM dbo.[" + sBT + "] A WHERE A.[" + grvData.Columns[0].FieldName.ToString() + "] = N'" + sMaMaxDMT + "'")) > 0)
+                                    {
+                                        iMaTemp = Convert.ToInt32(sMaMaxDMT.Substring(3, sMaMaxDMT.Length - 3)) + 1;
+                                        sMaMaxDMT = sMaMaxDMT.Substring(0, sMaMaxDMT.Length - (iMaTemp.ToString().Length)) + iMaTemp.ToString();
+                                        i--;
+                                    }
+                                    else
+                                    {
+                                        string strSQL = "UPDATE  A SET A.[" + grvData.Columns[0].FieldName.ToString() + "] = N'" + sMaMaxDMT + "' FROM " + sBT + " A WHERE A.[" + grvData.Columns[0].FieldName.ToString() + "] = N'" + sMaSo + "'";
+                                        SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, strSQL);
+                                        iMaTemp = Convert.ToInt32(sMaMaxDMT.Substring(3, sMaMaxDMT.Length - 3)) + 1;
+                                        sMaMaxDMT = sMaMaxDMT.Substring(0, sMaMaxDMT.Length - (iMaTemp.ToString().Length)) + iMaTemp.ToString();
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                if (iID_DV == 1)
+                                {
+                                    if (sMaSo.Substring(0, 3).ToString() != "DMS")
+                                    {
+
+                                        //string sTEMP = "000000" + sMaSo.Substring(3, sMaSo.Length - 3);
+                                        //sMaSo = sMaSo.Substring(0, 3).ToString() + sTEMP.Substring(sTEMP.Length - 6);
+                                        string strSQL = "UPDATE  A SET A.[" + grvData.Columns[0].FieldName.ToString() + "] = N'" + "DMS" + sMaSo.Substring(3, sMaSo.Length - 3).ToString().Trim() + "' FROM " + sBT + " A WHERE A.[" + grvData.Columns[0].FieldName.ToString() + "] = N'" + dtSource.Rows[i][0].ToString().Trim() + "'";
+                                        SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, strSQL);
+                                        dtSource.Rows[i][0] = "DMS" + sMaSo.Substring(3, sMaSo.Length - 3);
+                                        i--;
+                                    }
+                                    else
+                                    {
+                                        if (sMaSo.Substring(3, sMaSo.Length - 3).Length != 6)
+                                        {
+                                            string sTEMP = "000000" + sMaSo.Substring(3, sMaSo.Length - 3);
+                                            sMaSo = sMaSo.Substring(0, 3).ToString() + sTEMP.Substring(sTEMP.Length - 6);
+                                            string strSQL = "UPDATE  A SET A.[" + grvData.Columns[0].FieldName.ToString() + "] = N'" + "DMS" + sMaSo.Substring(3, sMaSo.Length - 3).ToString().Trim() + "' FROM " + sBT + " A WHERE A.[" + grvData.Columns[0].FieldName.ToString() + "] = N'" + dtSource.Rows[i][0].ToString().Trim() + "'";
+                                            SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, strSQL);
+                                            dtSource.Rows[i][0] = "DMS" + sMaSo.Substring(3, sMaSo.Length - 3);
+                                            i--;
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    if (sMaSo.Substring(0, 3).ToString() != "DMT")
+                                    {
+
+                                        //string sTEMP = "000000" + sMaSo.Substring(3, sMaSo.Length - 3);
+                                        //sMaSo = sMaSo.Substring(0, 3).ToString() + sTEMP.Substring(sTEMP.Length - 6);
+                                        string strSQL = "UPDATE  A SET A.[" + grvData.Columns[0].FieldName.ToString() + "] = N'" + "DMT" + sMaSo.Substring(3, sMaSo.Length - 3).ToString().Trim() + "' FROM " + sBT + " A WHERE A.[" + grvData.Columns[0].FieldName.ToString() + "] = N'" + dtSource.Rows[i][0].ToString().Trim() + "'";
+                                        SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, strSQL);
+                                        dtSource.Rows[i][0] = "DMT" + sMaSo.Substring(3, sMaSo.Length - 3);
+                                        i--;
+                                    }
+                                    else
+                                    {
+                                        if (sMaSo.Substring(3, sMaSo.Length - 3).Length != 6)
+                                        {
+                                            string sTEMP = "000000" + sMaSo.Substring(3, sMaSo.Length - 3);
+                                            sMaSo = sMaSo.Substring(0, 3).ToString() + sTEMP.Substring(sTEMP.Length - 6);
+                                            string strSQL = "UPDATE  A SET A.[" + grvData.Columns[0].FieldName.ToString() + "] = N'" + "DMT" + sMaSo.Substring(3, sMaSo.Length - 3).ToString().Trim() + "' FROM " + sBT + " A WHERE A.[" + grvData.Columns[0].FieldName.ToString() + "] = N'" + dtSource.Rows[i][0].ToString().Trim() + "'";
+                                            SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, strSQL);
+                                            dtSource.Rows[i][0] = "DMT" + sMaSo.Substring(3, sMaSo.Length - 3);
+                                            i--;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        //MaTheChamCong
+                    }
+
+                    SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "UPDATE T1 SET T1.[" + grvData.Columns[1].FieldName.ToString() + "] = '1' + RIGHT(T1.[" + grvData.Columns[0].FieldName.ToString() + "], 6) FROM " + sBT + " T1");
+                    DataTable dt = new DataTable();
+                    dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT * FROM " + sBT + ""));
+                    grdData.DataSource = dt;
+                    Commons.Modules.ObjSystems.XoaTable(sBT);
+                    return;
+                }
+                catch (Exception ex)
+                {
+                    Commons.Modules.ObjSystems.XoaTable(sBT);
+                    return;
+                }
+            }
             if (errorCount != 0)
             {
                 XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDuLieuChuaHopLe"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -978,31 +1172,28 @@ namespace Vs.HRM
 
                         //string sSql = "INSERT INTO dbo.UNG_VIEN(MS_UV,HO,TEN,PHAI,NGAY_SINH,NOI_SINH,SO_CMND,NGAY_CAP,NOI_CAP,ID_TT_HN,HO_TEN_VC,NGHE_NGHIEP_VC,SO_CON,DT_DI_DONG,EMAIL,NGUOI_LIEN_HE,QUAN_HE,DT_NGUOI_LIEN_HE,ID_TP,ID_QUAN,ID_PX,THON_XOM,DIA_CHI_THUONG_TRU,ID_NTD,ID_CN,HINH_THUC_TUYEN,ID_TDVH,ID_KNLV,ID_DGTN,VI_TRI_TD_1,VI_TRI_TD_2,NGAY_HEN_DI_LAM,XAC_NHAN_DL,NGAY_NHAN_VIEC,XAC_NHAN_DTDH,DA_CHUYEN,GHI_CHU,DA_GIOI_THIEU,HUY_TUYEN_DUNG) SELECT [" + grvData.Columns[0].FieldName.ToString() + "],[" + grvData.Columns[1].FieldName.ToString() + "],[" + grvData.Columns[2].FieldName.ToString() + "],case [" + grvData.Columns[3].FieldName.ToString() + "] when 'Nam' then 1 else 0 end,CONVERT(datetime,[" + grvData.Columns[4].FieldName.ToString() + "],103),[" + grvData.Columns[5].FieldName.ToString() + "],[" + grvData.Columns[6].FieldName.ToString() + "],[" + grvData.Columns[7].FieldName.ToString() + "],[" + grvData.Columns[8].FieldName.ToString() + "],(SELECT TOP 1 ID_TT_HN FROM dbo.TT_HON_NHAN WHERE TEN_TT_HN = A.[" + grvData.Columns[9].FieldName.ToString() + "]),[" + grvData.Columns[10].FieldName.ToString() + "],[" + grvData.Columns[11].FieldName.ToString() + "],[" + grvData.Columns[12].FieldName.ToString() + "],[" + grvData.Columns[13].FieldName.ToString() + "],[" + grvData.Columns[14].FieldName.ToString() + "],[" + grvData.Columns[15].FieldName.ToString() + "],[" + grvData.Columns[16].FieldName.ToString() + "],[" + grvData.Columns[17].FieldName.ToString() + "],(SELECT TOP 1 ID_TP FROM dbo.THANH_PHO WHERE TEN_TP = A.[" + grvData.Columns[18].FieldName.ToString() + "]),(SELECT TOP 1 ID_QUAN FROM dbo.QUAN WHERE TEN_QUAN = A.[" + grvData.Columns[19].FieldName.ToString() + "]),(SELECT TOP 1 ID_PX FROM dbo.PHUONG_XA WHERE TEN_PX = A.[" + grvData.Columns[20].FieldName.ToString() + "]),[" + grvData.Columns[21].FieldName.ToString() + "],[" + grvData.Columns[22].FieldName.ToString() + "],(SELECT TOP 1 ID_NTD FROM dbo.NGUON_TUYEN_DUNG WHERE TEN_NTD= A.[" + grvData.Columns[23].FieldName.ToString() + "]),(SELECT TOP 1 ID_CN FROM dbo.CONG_NHAN WHERE HO +' '+TEN = A.[" + grvData.Columns[24].FieldName.ToString() + "]),(SELECT ID_HTT FROM dbo.HINH_THUC_TUYEN WHERE TEN_HT_TUYEN = A.[" + grvData.Columns[25].FieldName.ToString() + "]),(SELECT TOP 1 ID_TDVH FROM dbo.TRINH_DO_VAN_HOA WHERE TEN_TDVH = A.[" + grvData.Columns[26].FieldName.ToString() + "]),(SELECT TOP 1 ID_KNLV FROM dbo.KINH_NGHIEM_LV WHERE TEN_KNLV = A.[" + grvData.Columns[27].FieldName.ToString() + "]),(SELECT TOP 1 ID_DGTN FROM dbo.DANH_GIA_TAY_NGHE WHERE TEN_DGTN = A.[" + grvData.Columns[28].FieldName.ToString() + "]),(SELECT TOP 1 ID_LCV FROM dbo.LOAI_CONG_VIEC WHERE TEN_LCV = A.[" + grvData.Columns[29].FieldName.ToString() + "]),(SELECT TOP 1 ID_LCV FROM dbo.LOAI_CONG_VIEC WHERE TEN_LCV = A.[" + grvData.Columns[30].FieldName.ToString() + "]),CONVERT(datetime,[" + grvData.Columns[31].FieldName.ToString() + "],103),[" + grvData.Columns[32].FieldName.ToString() + "],CONVERT(datetime,[" + grvData.Columns[33].FieldName.ToString() + "],103),[" + grvData.Columns[34].FieldName.ToString() + "],[" + grvData.Columns[35].FieldName.ToString() + "],[" + grvData.Columns[36].FieldName.ToString() + "],[" + grvData.Columns[37].FieldName.ToString() + "],[" + grvData.Columns[38].FieldName.ToString() + "]  FROM " + sbt + " AS A";
 
-                        string sSql1 = "INSERT INTO	 dbo.CONG_NHAN(MS_CN, MS_THE_CC,  HO, TEN, ID_QG, NGAY_SINH, NAM_SINH, PHAI, ID_TO, ID_CV, ID_LCV, ID_LHDLD, NGAY_HOC_VIEC, NGAY_THU_VIEC, NGAY_VAO_CTY, " +
-                            "NGAY_VAO_LAM, VAO_LAM_LAI ,ID_TT_HD, ID_TT_HT, HINH_THUC_TUYEN, PHEP_CT, PHEP_CD, THAM_GIA_BHXH, LD_TINH, LAO_DONG_CONG_NHAT, TRUC_TIEP_SX, NGAY_NGHI_VIEC, ID_LD_TV, GHI_CHU, ID_DT, " +
+                        string sSql1 = "INSERT INTO	 dbo.CONG_NHAN(MS_CN, MS_THE_CC,  HO, TEN, ID_QG, NGAY_SINH, NAM_SINH, PHAI, ID_TO, ID_CV, ID_LCV,  NGAY_THU_VIEC, NGAY_VAO_CTY, " +
+                            "NGAY_VAO_LAM, VAO_LAM_LAI ,ID_TT_HD, ID_TT_HT, HINH_THUC_TUYEN, PHEP_CT, THAM_GIA_BHXH, LD_TINH, GHI_CHU, ID_DT, " +
                             "TON_GIAO, NOI_SINH, NGUYEN_QUAN, SO_CMND, NGAY_CAP, NOI_CAP, ID_TT_HN, MA_THE_ATM, SO_TAI_KHOAN, MS_THUE, TEN_KHONG_DAU, LD_NN, DT_DI_DONG, DT_NHA, DT_NGUOI_THAN, EMAIL, DIA_CHI_THUONG_TRU," +
-                            " ID_TP, ID_QUAN, ID_PX, THON_XOM, DIA_CHI_TAM_TRU, ID_TP_TAM_TRU, ID_QUAN_TAM_TRU, ID_PX_TAM_TRU, THON_XOM_TAM_TRU, SO_BHXH, NGAY_DBHXH, NGAY_DBHXH_DT, " +
-                            "NGAY_CHAM_DUT_NOP_BHXH, NGAY_THU_HOI_BHYT, ID_LOAI_TD, ID_TDVH, CHUYEN_MON, NGOAI_NGU, CAP_GIAY_PHEP, SO_GIAY_PHEP, NGAY_CAP_GP," +
-                            " NGAY_HH_GP,  NGAN_HANG, CHI_NHANH_NH, DG_TAY_NGHE, PASS_WORD, NV_PTD) " +
+                            " ID_TP, ID_QUAN, ID_PX, THON_XOM, DIA_CHI_TAM_TRU, ID_TP_TAM_TRU, ID_QUAN_TAM_TRU, ID_PX_TAM_TRU, THON_XOM_TAM_TRU, SO_BHXH, NGAY_DBHXH, ID_LOAI_TD, ID_TDVH, CHUYEN_MON, NGOAI_NGU,  NGAN_HANG, CHI_NHANH_NH) " +
 
                             "SELECT A.[" + grvData.Columns[0].FieldName.ToString() + "], A.[" + grvData.Columns[1].FieldName.ToString() + "], A.[" + grvData.Columns[2].FieldName.ToString() + "], A.[" + grvData.Columns[3].FieldName.ToString() + "], " +
                             "(SELECT TOP 1 ID_QG FROM dbo.QUOC_GIA WHERE TEN_QG = A.[" + grvData.Columns[4].FieldName.ToString() + "]), CONVERT(DATETIME,[A].[" + grvData.Columns[5].FieldName.ToString() + "],103), [A].[" + grvData.Columns[6].FieldName.ToString() + "],  " +
-                            "[A].[" + grvData.Columns[7].FieldName.ToString() + "], (SELECT TOP 1 ID_TO FROM dbo.[TO] WHERE TEN_TO = A.[" + grvData.Columns[10].FieldName.ToString() + "]), (SELECT TOP 1 ID_CV FROM dbo.CHUC_VU WHERE TEN_CV = A.[" + grvData.Columns[11].FieldName.ToString() + "]), " +
-                            "(SELECT TOP 1 ID_LCV FROM dbo.LOAI_CONG_VIEC WHERE TEN_LCV = A.[" + grvData.Columns[12].FieldName.ToString() + "]), (SELECT TOP 1 ID_LHDLD FROM dbo.LOAI_HDLD WHERE TEN_LHDLD = A.[" + grvData.Columns[13].FieldName.ToString() + "]), CONVERT(DATETIME,[A].[" + grvData.Columns[14].FieldName.ToString() + "],103), " +
-                            "CONVERT(DATETIME,A.[" + grvData.Columns[15].FieldName.ToString() + "],103), CONVERT(DATETIME,A.[" + grvData.Columns[16].FieldName.ToString() + "],103), CONVERT(DATETIME,[A].[" + grvData.Columns[16].FieldName.ToString() + "],103), [A].[" + grvData.Columns[17].FieldName.ToString() + "], " +
-                            "(SELECT TOP 1 ID_TT_HD FROM dbo.TINH_TRANG_HD WHERE TEN_TT_HD = A.[" + grvData.Columns[18].FieldName.ToString() + "]), (SELECT TOP 1 ID_TT_HT FROM dbo.TINH_TRANG_HT WHERE TEN_TT_HT = A.[" + grvData.Columns[19].FieldName.ToString() + "]), [A].[" + grvData.Columns[20].FieldName.ToString() + "], " +
-                            "[A].[" + grvData.Columns[21].FieldName.ToString() + "], [A].[" + grvData.Columns[22].FieldName.ToString() + "], [A].[" + grvData.Columns[23].FieldName.ToString() + "], A.[" + grvData.Columns[24].FieldName.ToString() + "], A.[" + grvData.Columns[25].FieldName.ToString() + "], A.[" + grvData.Columns[26].FieldName.ToString() + "], CONVERT(DATETIME,A.[" + grvData.Columns[27].FieldName.ToString() + "],103) , " +
-                            "(SELECT TOP 1 ID_LD_TV FROM dbo.LY_DO_THOI_VIEC WHERE TEN_LD_TV = A.[" + grvData.Columns[28].FieldName.ToString() + "]), A.[" + grvData.Columns[29].FieldName.ToString() + "], (SELECT TOP 1 ID_DT FROM dbo.DAN_TOC WHERE TEN_DT = A.[" + grvData.Columns[30].FieldName.ToString() + "]), A.[" + grvData.Columns[31].FieldName.ToString() + "], A.[" + grvData.Columns[32].FieldName.ToString() + "],  " +
-                            "A.[" + grvData.Columns[33].FieldName.ToString() + "], A.[" + grvData.Columns[34].FieldName.ToString() + "], CONVERT(DATETIME,A.[" + grvData.Columns[35].FieldName.ToString() + "],103), A.[" + grvData.Columns[36].FieldName.ToString() + "], (SELECT TOP 1 ID_TT_HN FROM dbo.TT_HON_NHAN WHERE TEN_TT_HN = A.[" + grvData.Columns[37].FieldName.ToString() + "]), A.[" + grvData.Columns[38].FieldName.ToString() + "], " +
-                            "A.[" + grvData.Columns[39].FieldName.ToString() + "],A.[" + grvData.Columns[40].FieldName.ToString() + "], A.[" + grvData.Columns[41].FieldName.ToString() + "], A.[" + grvData.Columns[42].FieldName.ToString() + "], A.[" + grvData.Columns[43].FieldName.ToString() + "], A.[" + grvData.Columns[44].FieldName.ToString() + "], A.[" + grvData.Columns[45].FieldName.ToString() + "], A." + grvData.Columns[46].FieldName.ToString() + ", A.[" + grvData.Columns[47].FieldName.ToString() + "], " +
-                            "(SELECT TOP 1 ID_TP FROM dbo.THANH_PHO WHERE TEN_TP = A.[" + grvData.Columns[48].FieldName.ToString() + "]), (SELECT TOP 1 ID_QUAN FROM  QUAN WHERE TEN_QUAN  = A.[" + grvData.Columns[49].FieldName.ToString() + "]), " +
-                            "(SELECT TOP 1 ID_PX FROM dbo.PHUONG_XA WHERE TEN_PX = A.[" + grvData.Columns[50].FieldName.ToString() + "]), A.[" + grvData.Columns[51].FieldName.ToString() + "], A.[" + grvData.Columns[52].FieldName.ToString() + "], " +
-                            "(SELECT TOP 1 ID_TP FROM dbo.THANH_PHO WHERE TEN_TP = A.[" + grvData.Columns[53].FieldName.ToString() + "]), (SELECT TOP 1 ID_QUAN FROM  QUAN WHERE TEN_QUAN  = A.[" + grvData.Columns[54].FieldName.ToString() + "]), " +
-                            "(SELECT TOP 1 ID_PX FROM dbo.PHUONG_XA WHERE TEN_PX = A.[" + grvData.Columns[55].FieldName.ToString() + "]), A.[" + grvData.Columns[56].FieldName.ToString() + "], A.[" + grvData.Columns[57].FieldName.ToString() + "], CONVERT(DATETIME,A.[" + grvData.Columns[58].FieldName.ToString() + "],103), " +
-                            "CONVERT(DATETIME,A.[" + grvData.Columns[59].FieldName.ToString() + "],103), CONVERT(DATETIME,A.[" + grvData.Columns[60].FieldName.ToString() + "],103), CONVERT(DATETIME,A.[" + grvData.Columns[61].FieldName.ToString() + "],103), " +
-                            "(SELECT TOP 1 ID_LOAI_TD FROM dbo.LOAI_TRINH_DO WHERE TEN_LOAI_TD = A.[" + grvData.Columns[62].FieldName.ToString() + "]), (SELECT TOP 1 ID_TDVH FROM dbo.TRINH_DO_VAN_HOA WHERE TEN_TDVH = A.[" + grvData.Columns[63].FieldName.ToString() + "]), A.[" + grvData.Columns[64].FieldName.ToString() + "], A.[" + grvData.Columns[65].FieldName.ToString() + "]," +
-                            " A.[" + grvData.Columns[66].FieldName.ToString() + "], A.[" + grvData.Columns[67].FieldName.ToString() + "], CONVERT(DATETIME,A.[" + grvData.Columns[68].FieldName.ToString() + "],103), CONVERT(DATETIME,A.[" + grvData.Columns[69].FieldName.ToString() + "],103), A.[" + grvData.Columns[70].FieldName.ToString() + "], A.[" + grvData.Columns[71].FieldName.ToString() + "], A.[" + grvData.Columns[72].FieldName.ToString() + "], " +
-                            "A.[" + grvData.Columns[73].FieldName.ToString() + "], A.[" + grvData.Columns[74].FieldName.ToString() + "]  FROM " + sbt + " AS A";
+                            "[A].[" + grvData.Columns[7].FieldName.ToString() + "], (SELECT TOP 1 ID_TO FROM dbo.[TO] WHERE TEN_TO = A.[" + grvData.Columns[8].FieldName.ToString() + "]), (SELECT TOP 1 ID_CV FROM dbo.CHUC_VU WHERE TEN_CV = A.[" + grvData.Columns[9].FieldName.ToString() + "]), " +
+                            "(SELECT TOP 1 ID_LCV FROM dbo.LOAI_CONG_VIEC WHERE TEN_LCV = A.[" + grvData.Columns[10].FieldName.ToString() + "]), CONVERT(DATETIME,[A].[" + grvData.Columns[11].FieldName.ToString() + "],103), " +
+                            "CONVERT(DATETIME,A.[" + grvData.Columns[12].FieldName.ToString() + "],103), CONVERT(DATETIME,A.[" + grvData.Columns[12].FieldName.ToString() + "],103) ,[A].[" + grvData.Columns[13].FieldName.ToString() + "], " +
+                            "(SELECT TOP 1 ID_TT_HD FROM dbo.TINH_TRANG_HD WHERE TEN_TT_HD = A.[" + grvData.Columns[14].FieldName.ToString() + "]), (SELECT TOP 1 ID_TT_HT FROM dbo.TINH_TRANG_HT WHERE TEN_TT_HT = A.[" + grvData.Columns[15].FieldName.ToString() + "]), [A].[" + grvData.Columns[16].FieldName.ToString() + "], " +
+                            "(SELECT PHEP_CT FROM dbo.LOAI_CONG_VIEC WHERE TEN_LCV = A.[" + grvData.Columns[10].FieldName.ToString().Trim() + "]), [A].[" + grvData.Columns[17].FieldName.ToString() + "], [A].[" + grvData.Columns[18].FieldName.ToString() + "], A.[" + grvData.Columns[19].FieldName.ToString() + "], " +
+                            "(SELECT TOP 1 ID_DT FROM dbo.DAN_TOC WHERE TEN_DT = A.[" + grvData.Columns[20].FieldName.ToString() + "]), A.[" + grvData.Columns[21].FieldName.ToString() + "], A.[" + grvData.Columns[22].FieldName.ToString() + "],  " +
+                            "A.[" + grvData.Columns[23].FieldName.ToString() + "], A.[" + grvData.Columns[24].FieldName.ToString() + "], CONVERT(DATETIME,A.[" + grvData.Columns[25].FieldName.ToString() + "],103), A.[" + grvData.Columns[26].FieldName.ToString() + "], (SELECT TOP 1 ID_TT_HN FROM dbo.TT_HON_NHAN WHERE TEN_TT_HN = A.[" + grvData.Columns[27].FieldName.ToString() + "]), A.[" + grvData.Columns[28].FieldName.ToString() + "], " +
+                            "A.[" + grvData.Columns[29].FieldName.ToString() + "],A.[" + grvData.Columns[30].FieldName.ToString() + "], A.[" + grvData.Columns[31].FieldName.ToString() + "], A.[" + grvData.Columns[32].FieldName.ToString() + "], " +
+                            "A.[" + grvData.Columns[33].FieldName.ToString() + "], A.[" + grvData.Columns[34].FieldName.ToString() + "], A.[" + grvData.Columns[35].FieldName.ToString() + "], A." + grvData.Columns[36].FieldName.ToString() + ", A.[" + grvData.Columns[37].FieldName.ToString() + "], " +
+                            "(SELECT TOP 1 ID_TP FROM dbo.THANH_PHO WHERE TEN_TP = A.[" + grvData.Columns[38].FieldName.ToString() + "]), (SELECT TOP 1 ID_QUAN FROM  QUAN WHERE TEN_QUAN  = A.[" + grvData.Columns[39].FieldName.ToString() + "]), " +
+                            "(SELECT TOP 1 ID_PX FROM dbo.PHUONG_XA WHERE TEN_PX = A.[" + grvData.Columns[40].FieldName.ToString() + "]), A.[" + grvData.Columns[41].FieldName.ToString() + "], A.[" + grvData.Columns[42].FieldName.ToString() + "], " +
+                            "(SELECT TOP 1 ID_TP FROM dbo.THANH_PHO WHERE TEN_TP = A.[" + grvData.Columns[43].FieldName.ToString() + "]), (SELECT TOP 1 ID_QUAN FROM  QUAN WHERE TEN_QUAN  = A.[" + grvData.Columns[44].FieldName.ToString() + "]), " +
+                            "(SELECT TOP 1 ID_PX FROM dbo.PHUONG_XA WHERE TEN_PX = A.[" + grvData.Columns[45].FieldName.ToString() + "]), A.[" + grvData.Columns[46].FieldName.ToString() + "], A.[" + grvData.Columns[47].FieldName.ToString() + "], CONVERT(DATETIME,A.[" + grvData.Columns[48].FieldName.ToString() + "],103), " +
+                            "(SELECT TOP 1 ID_LOAI_TD FROM dbo.LOAI_TRINH_DO WHERE TEN_LOAI_TD = A.[" + grvData.Columns[49].FieldName.ToString() + "]), (SELECT TOP 1 ID_TDVH FROM dbo.TRINH_DO_VAN_HOA WHERE TEN_TDVH = A.[" + grvData.Columns[50].FieldName.ToString() + "]), A.[" + grvData.Columns[51].FieldName.ToString() + "], A.[" + grvData.Columns[52].FieldName.ToString() + "]," +
+                            " A.[" + grvData.Columns[53].FieldName.ToString() + "], A.[" + grvData.Columns[54].FieldName.ToString() + "]  FROM " + sbt + " AS A";
                         SqlHelper.ExecuteNonQuery(sTrans, CommandType.Text, sSql1);
 
                         Commons.Modules.ObjSystems.XoaTable(sbt);
@@ -1341,36 +1532,14 @@ namespace Vs.HRM
                         }
                     case 8:
                         {
-                            sSql = "SELECT MSDV, TEN_DV FROM dbo.DON_VI ORDER BY STT_DV";
-                            drow = GetData("ID_DV", sSql);
-                            sKQ = Convert.ToString(drow["TEN_DV"]);
-                            row.ClearErrors();
-                            break;
-                        }
-                    case 9:
-                        {
-                            string strSQL = "SELECT ISNULL(ID_DV,-1) ID_DV FROM dbo.DON_VI WHERE TEN_DV = N'" + grvData.GetFocusedRowCellValue(grvData.Columns[8]).ToString().Trim() + "'";
-                            int id_dv = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, strSQL));
-                            sSql = "SELECT T2.TEN_DV ,T1.MS_XN, T1.TEN_XN FROM dbo.XI_NGHIEP T1 INNER JOIN dbo.DON_VI T2 ON T2.ID_DV = T1.ID_DV WHERE (T1.ID_DV = " + (id_dv == 0 ? -1 : id_dv) + " OR " + (id_dv == 0 ? -1 : id_dv) + " = -1)  ORDER BY T2.STT_DV, T1.STT_XN";
-                            drow = GetData("ID_XN", sSql);
-                            sKQ = Convert.ToString(drow["TEN_XN"]);
-                            row.ClearErrors();
-                            break;
-                        }
-                    case 10:
-                        {
-                            string strSQL = "SELECT ISNULL(ID_DV,-1) ID_DV FROM dbo.DON_VI WHERE TEN_DV = N'" + grvData.GetFocusedRowCellValue(grvData.Columns[8]).ToString().Trim() + "'";
-                            int id_dv = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, strSQL));
-                            string strSQL1 = "SELECT ISNULL(ID_XN,-1) ID_DV FROM dbo.XI_NGHIEP WHERE TEN_XN = N'" + grvData.GetFocusedRowCellValue(grvData.Columns[9]).ToString().Trim() + "'";
-                            int id_xn = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, strSQL1));
-                            sSql = "SELECT T1.MS_TO, T1.TEN_TO + ' ' + T3.MSDV TEN_TO FROM dbo.[TO] T1 INNER JOIN dbo.XI_NGHIEP T2 ON T2.ID_XN = T1.ID_XN INNER JOIN dbo.DON_VI T3 ON T3.ID_DV = T2.ID_DV WHERE(T3.ID_DV = " + (id_dv == 0 ? -1 : id_dv) + " OR " + (id_dv == 0 ? -1 : id_dv) + " = -1) AND(T2.ID_XN = " + (id_xn == 0 ? -1 : id_xn) + " OR " + (id_xn == 0 ? -1 : id_xn) + " = -1) ORDER BY T3.STT_DV, T2.STT_XN, T1.STT_TO";
+                            sSql = "SELECT T1.MS_TO, T1.TEN_TO + ' ' + T3.MSDV TEN_TO FROM dbo.[TO] T1 INNER JOIN dbo.XI_NGHIEP T2 ON T2.ID_XN = T1.ID_XN INNER JOIN dbo.DON_VI T3 ON T3.ID_DV = T2.ID_DV WHERE(T3.ID_DV = " + -1 + " OR " + -1 + " = -1) AND(T2.ID_XN = " + -1 + " OR " + -1 + " = -1) ORDER BY T3.STT_DV, T2.STT_XN, T1.STT_TO";
                             drow = GetData("ID_TO", sSql);
                             sKQ = Convert.ToString(drow["TEN_TO"]);
                             sKQ = sKQ.Substring(0, sKQ.Length - 3).Trim();
                             row.ClearErrors();
                             break;
                         }
-                    case 11:
+                    case 9:
                         {
                             sSql = "SELECT MS_CV, TEN_CV FROM dbo.CHUC_VU ORDER BY STT_IN_CV";
                             drow = GetData("ID_CV", sSql);
@@ -1379,7 +1548,7 @@ namespace Vs.HRM
                             break;
                         }
 
-                    case 12:
+                    case 10:
                         {
                             sSql = "SELECT TEN_LCV FROM dbo.LOAI_CONG_VIEC ORDER BY STT";
                             drow = GetData("ID_LCV", sSql);
@@ -1388,16 +1557,7 @@ namespace Vs.HRM
                             break;
                         }
 
-                    case 13:
-                        {
-                            sSql = "SELECT TEN_LHDLD, SO_THANG FROM dbo.LOAI_HDLD ORDER BY STT";
-                            drow = GetData("ID_LHDLD", sSql);
-                            sKQ = Convert.ToString(drow["TEN_LHDLD"]);
-                            row.ClearErrors();
-                            break;
-                        }
-
-                    case 18:
+                    case 14:
                         {
                             sSql = "SELECT TEN_TT_HD FROM dbo.TINH_TRANG_HD ORDER BY STT";
                             drow = GetData("ID_TT_HD", sSql);
@@ -1405,7 +1565,7 @@ namespace Vs.HRM
                             row.ClearErrors();
                             break;
                         }
-                    case 19:
+                    case 15:
                         {
                             sSql = "SELECT TEN_TT_HT FROM dbo.TINH_TRANG_HT ORDER BY STT";
                             drow = GetData("ID_TT_HT", sSql);
@@ -1413,17 +1573,7 @@ namespace Vs.HRM
                             row.ClearErrors();
                             break;
                         }
-
-                    case 28:
-                        {
-                            sSql = "SELECT TEN_LD_TV, HE_SO FROM dbo.LY_DO_THOI_VIEC ORDER BY STT";
-                            drow = GetData("ID_LD_TV", sSql);
-                            sKQ = Convert.ToString(drow["TEN_LD_TV"]);
-                            row.ClearErrors();
-                            break;
-                        }
-
-                    case 30:
+                    case 20:
                         {
                             sSql = "SELECT TEN_DT FROM dbo.DAN_TOC";
                             drow = GetData("ID_DT", sSql);
@@ -1432,7 +1582,7 @@ namespace Vs.HRM
                             break;
                         }
 
-                    case 37:
+                    case 27:
                         {
                             sSql = "SELECT TEN_TT_HN FROM dbo.TT_HON_NHAN";
                             drow = GetData("ID_TT_HN", sSql);
@@ -1441,75 +1591,75 @@ namespace Vs.HRM
                             break;
                         }
 
-                    case 48:
+                    case 38:
                         {
                             sSql = "SELECT MS_TINH, TEN_TP FROM dbo.THANH_PHO ORDER BY TEN_TP";
                             drow = GetData("ID_TP", sSql);
                             sKQ = Convert.ToString(drow["TEN_TP"]);
+                            row.ClearErrors();
+                            break;
+                        }
+                    case 39:
+                        {
+                            string strSQL = "SELECT ISNULL(ID_TP,-1) ID_TP FROM dbo.THANH_PHO WHERE TEN_TP = N'" + grvData.GetFocusedRowCellValue(grvData.Columns[38]).ToString().Trim() + "'";
+                            int id_tp = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, strSQL));
+
+                            sSql = "SELECT MS_QUAN, TEN_QUAN FROM dbo.QUAN WHERE ID_TP = " + (id_tp == 0 ? -1 : id_tp) + " OR " + (id_tp == 0 ? -1 : id_tp) + " = -1 ORDER BY TEN_QUAN";
+                            drow = GetData("ID_QUAN", sSql);
+                            sKQ = Convert.ToString(drow["TEN_QUAN"]);
+                            row.ClearErrors();
+                            break;
+                        }
+                    case 40:
+                        {
+                            string strSQL = "SELECT ISNULL(ID_TP,-1) ID_TP FROM dbo.THANH_PHO WHERE TEN_TP = N'" + grvData.GetFocusedRowCellValue(grvData.Columns[38]).ToString().Trim() + "'";
+                            int id_tp = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, strSQL));
+
+                            string strSQL1 = "SELECT ISNULL(ID_QUAN,-1) ID_QUAN FROM dbo.QUAN WHERE TEN_QUAN = N'" + grvData.GetFocusedRowCellValue(grvData.Columns[39]).ToString().Trim() + "'";
+                            int id_quan = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, strSQL1));
+
+
+                            sSql = "SELECT MS_XA, TEN_PX FROM dbo.PHUONG_XA WHERE (ID_QUAN = " + (id_quan == 0 ? -1 : id_quan) + " OR " + (id_quan == 0 ? -1 : id_quan) + " = -1) ORDER BY TEN_PX";
+                            drow = GetData("ID_PX", sSql);
+                            sKQ = Convert.ToString(drow["TEN_PX"]);
+                            row.ClearErrors();
+                            break;
+                        }
+                    case 43:
+                        {
+                            sSql = "SELECT MS_TINH, TEN_TP FROM dbo.THANH_PHO ORDER BY TEN_TP";
+                            drow = GetData("ID_TP", sSql);
+                            sKQ = Convert.ToString(drow["TEN_TP"]);
+                            row.ClearErrors();
+                            break;
+                        }
+                    case 44:
+                        {
+                            string strSQL = "SELECT ISNULL(ID_TP,-1) ID_TP FROM dbo.THANH_PHO WHERE TEN_TP = N'" + grvData.GetFocusedRowCellValue(grvData.Columns[43]).ToString().Trim() + "'";
+                            int id_tp = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, strSQL));
+
+                            sSql = "SELECT MS_QUAN, TEN_QUAN FROM dbo.QUAN WHERE ID_TP = " + (id_tp == 0 ? -1 : id_tp) + " OR " + (id_tp == 0 ? -1 : id_tp) + " = -1 ORDER BY TEN_QUAN";
+                            drow = GetData("ID_QUAN", sSql);
+                            sKQ = Convert.ToString(drow["TEN_QUAN"]);
+                            row.ClearErrors();
+                            break;
+                        }
+                    case 45:
+                        {
+                            string strSQL = "SELECT ISNULL(ID_TP,-1) ID_TP FROM dbo.THANH_PHO WHERE TEN_TP = N'" + grvData.GetFocusedRowCellValue(grvData.Columns[43]).ToString().Trim() + "'";
+                            int id_tp = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, strSQL));
+
+                            string strSQL1 = "SELECT ISNULL(ID_QUAN,-1) ID_QUAN FROM dbo.QUAN WHERE TEN_QUAN = N'" + grvData.GetFocusedRowCellValue(grvData.Columns[44]).ToString().Trim() + "'";
+                            int id_quan = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, strSQL1));
+
+
+                            sSql = "SELECT MS_XA, TEN_PX FROM dbo.PHUONG_XA WHERE (ID_QUAN = " + (id_quan == 0 ? -1 : id_quan) + " OR " + (id_quan == 0 ? -1 : id_quan) + " = -1) ORDER BY TEN_PX";
+                            drow = GetData("ID_PX", sSql);
+                            sKQ = Convert.ToString(drow["TEN_PX"]);
                             row.ClearErrors();
                             break;
                         }
                     case 49:
-                        {
-                            string strSQL = "SELECT ISNULL(ID_TP,-1) ID_TP FROM dbo.THANH_PHO WHERE TEN_TP = N'" + grvData.GetFocusedRowCellValue(grvData.Columns[48]).ToString().Trim() + "'";
-                            int id_tp = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, strSQL));
-
-                            sSql = "SELECT MS_QUAN, TEN_QUAN FROM dbo.QUAN WHERE ID_TP = " + (id_tp == 0 ? -1 : id_tp) + " OR " + (id_tp == 0 ? -1 : id_tp) + " = -1 ORDER BY TEN_QUAN";
-                            drow = GetData("ID_QUAN", sSql);
-                            sKQ = Convert.ToString(drow["TEN_QUAN"]);
-                            row.ClearErrors();
-                            break;
-                        }
-                    case 50:
-                        {
-                            string strSQL = "SELECT ISNULL(ID_TP,-1) ID_TP FROM dbo.THANH_PHO WHERE TEN_TP = N'" + grvData.GetFocusedRowCellValue(grvData.Columns[48]).ToString().Trim() + "'";
-                            int id_tp = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, strSQL));
-
-                            string strSQL1 = "SELECT ISNULL(ID_QUAN,-1) ID_QUAN FROM dbo.QUAN WHERE TEN_QUAN = N'" + grvData.GetFocusedRowCellValue(grvData.Columns[49]).ToString().Trim() + "'";
-                            int id_quan = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, strSQL1));
-
-
-                            sSql = "SELECT MS_XA, TEN_PX FROM dbo.PHUONG_XA WHERE (ID_QUAN = " + (id_quan == 0 ? -1 : id_quan) + " OR " + (id_quan == 0 ? -1 : id_quan) + " = -1) ORDER BY TEN_PX";
-                            drow = GetData("ID_PX", sSql);
-                            sKQ = Convert.ToString(drow["TEN_PX"]);
-                            row.ClearErrors();
-                            break;
-                        }
-                    case 53:
-                        {
-                            sSql = "SELECT MS_TINH, TEN_TP FROM dbo.THANH_PHO ORDER BY TEN_TP";
-                            drow = GetData("ID_TP", sSql);
-                            sKQ = Convert.ToString(drow["TEN_TP"]);
-                            row.ClearErrors();
-                            break;
-                        }
-                    case 54:
-                        {
-                            string strSQL = "SELECT ISNULL(ID_TP,-1) ID_TP FROM dbo.THANH_PHO WHERE TEN_TP = N'" + grvData.GetFocusedRowCellValue(grvData.Columns[48]).ToString().Trim() + "'";
-                            int id_tp = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, strSQL));
-
-                            sSql = "SELECT MS_QUAN, TEN_QUAN FROM dbo.QUAN WHERE ID_TP = " + (id_tp == 0 ? -1 : id_tp) + " OR " + (id_tp == 0 ? -1 : id_tp) + " = -1 ORDER BY TEN_QUAN";
-                            drow = GetData("ID_QUAN", sSql);
-                            sKQ = Convert.ToString(drow["TEN_QUAN"]);
-                            row.ClearErrors();
-                            break;
-                        }
-                    case 55:
-                        {
-                            string strSQL = "SELECT ISNULL(ID_TP,-1) ID_TP FROM dbo.THANH_PHO WHERE TEN_TP = N'" + grvData.GetFocusedRowCellValue(grvData.Columns[48]).ToString().Trim() + "'";
-                            int id_tp = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, strSQL));
-
-                            string strSQL1 = "SELECT ISNULL(ID_QUAN,-1) ID_QUAN FROM dbo.QUAN WHERE TEN_QUAN = N'" + grvData.GetFocusedRowCellValue(grvData.Columns[49]).ToString().Trim() + "'";
-                            int id_quan = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, strSQL1));
-
-
-                            sSql = "SELECT MS_XA, TEN_PX FROM dbo.PHUONG_XA WHERE (ID_QUAN = " + (id_quan == 0 ? -1 : id_quan) + " OR " + (id_quan == 0 ? -1 : id_quan) + " = -1) ORDER BY TEN_PX";
-                            drow = GetData("ID_PX", sSql);
-                            sKQ = Convert.ToString(drow["TEN_PX"]);
-                            row.ClearErrors();
-                            break;
-                        }
-                    case 62:
                         {
                             sSql = "SELECT TEN_LOAI_TD FROM dbo.LOAI_TRINH_DO ORDER BY STT";
                             drow = GetData("ID_LOAI_TD", sSql);
@@ -1517,7 +1667,7 @@ namespace Vs.HRM
                             row.ClearErrors();
                             break;
                         }
-                    case 63:
+                    case 50:
                         {
                             sSql = "SELECT T2.TEN_LOAI_TD, T1.TEN_TDVH FROM dbo.TRINH_DO_VAN_HOA T1 INNER JOIN dbo.LOAI_TRINH_DO T2 ON T2.ID_LOAI_TD = T1.ID_LOAI_TD ORDER BY T2.STT, T1.STT";
                             drow = GetData("ID_TDVH", sSql);
@@ -1549,6 +1699,33 @@ namespace Vs.HRM
         }
         private void frmImportNhanSu_Load(object sender, EventArgs e)
         {
+            try
+            {
+                sCheck = Commons.Modules.ObjSystems.getCheckImport();
+                if (sCheck != "")
+                {
+                    string[] sArray = sCheck.Split(',');
+                    DateTime datOld;
+                    datOld = Convert.ToDateTime(sArray[0]).AddHours(1);
+                    DateTime datCurren = DateTime.Now;
+                    try
+                    {
+                        datCurren = Convert.ToDateTime(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT GETDATE()"));
+                    }
+                    catch { }
+                    if (datOld < datCurren)
+                    {
+                        Commons.Modules.ObjSystems.setCheckImport(0);
+                    }
+                    else
+                    {
+                        XtraMessageBox.Show("User " + sArray[2] + " " + Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgdangimportdulieu"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        this.Close();
+                    }
+                }
+                if (!Commons.Modules.ObjSystems.setCheckImport(1)) this.Close();
+            }
+            catch { }
             Commons.Modules.ObjSystems.ThayDoiNN(this, Root, windowsUIButton);
         }
         public string SaveFiles(string MFilter)
@@ -1662,7 +1839,44 @@ namespace Vs.HRM
         private void frmImportNhanSu_FormClosing(object sender, FormClosingEventArgs e)
         {
             this.DialogResult = DialogResult.OK;
+            Commons.Modules.ObjSystems.setCheckImport(0); //xoa
             this.Close();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            try
+            {
+                Thread thread = new Thread(delegate ()
+                {
+                    timer1.Stop();
+                    Thread.Sleep(300000);//chi nghỉ 5 phút
+                    if (this.InvokeRequired)
+                    {
+                        this.Invoke(new MethodInvoker(delegate
+                        {
+                            this.Hide();
+                            string[] sArray = sCheck.Split(',');
+                            DateTime datOld;
+                            datOld = Convert.ToDateTime(sArray[0]).AddHours(1);
+                            DateTime datCurren = DateTime.Now;
+                            try
+                            {
+                                datCurren = DateTime.Now;
+                            }
+                            catch { }
+                            if (datOld < datCurren)
+                            {
+                                Commons.Modules.ObjSystems.setCheckImport(0);
+                            }
+
+                            this.Close();
+                        }));
+                    }
+                }, Convert.ToInt32(TimeSpan.FromMinutes(5).TotalMilliseconds));
+                thread.Start();
+            }
+            catch { }
         }
         //private void ExportUngVien(string sPath)
         //{

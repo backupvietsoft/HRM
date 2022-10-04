@@ -22,7 +22,7 @@ namespace Vs.Payroll
 {
     public partial class ucTinhLuong : DevExpress.XtraEditors.XtraUserControl
     {
-
+        private string sKyHieuDV = "";
 
         public static ucTinhLuong _instance;
 
@@ -40,20 +40,34 @@ namespace Vs.Payroll
         {
             InitializeComponent();
             Commons.Modules.ObjSystems.ThayDoiNN(this, new List<LayoutControlGroup>() { Root }, btnALL);
-            Commons.Modules.sPS = "0Load";
+            Commons.Modules.sLoad = "0Load";
             Commons.Modules.ObjSystems.LoadCboDonVi(cboDonVi);
             Commons.Modules.ObjSystems.LoadCboXiNghiep(cboDonVi, cboXiNghiep);
             Commons.Modules.ObjSystems.LoadCboTo(cboDonVi, cboXiNghiep, cboTo);
-            Commons.Modules.sPS = "";
-
+            Commons.Modules.sLoad = "";
         }
 
         private void ucTinhLuong_Load(object sender, EventArgs e)
         {
-            Commons.Modules.sPS = "0Load";
-            LoadThang();
-            LoadGrdGTGC();
-            Commons.Modules.sPS = "";
+            try
+            {
+                sKyHieuDV = Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString();
+                Commons.Modules.sLoad = "0Load";
+                LoadThang();
+                if (sKyHieuDV != "DM")
+                {
+                    LoadGrdGTGC();
+                }
+                else
+                {
+                    LoadGrdGTGC_DM();
+                }
+
+                txtNgayCongChuan.Text = getNgayCongChuan().ToString();
+                txtNgayCongLV.Text = getNgayCongChuan().ToString();
+                Commons.Modules.sLoad = "";
+            }
+            catch { }
         }
 
         private void LoadGrdGTGC()
@@ -158,18 +172,206 @@ namespace Vs.Payroll
             //}
 
         }
+        private void LoadGrdGTGC_DM()
+        {
+            try
+            {
+                DataTable dt = new DataTable();
+                DateTime Tngay = Convert.ToDateTime(cboThang.EditValue);
+                DateTime Dngay = Convert.ToDateTime(cboThang.EditValue).AddMonths(1).AddDays(-1);
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetBangLuong_DM", Commons.Modules.UserName, Commons.Modules.TypeLanguage, cboDonVi.EditValue, cboXiNghiep.EditValue, cboTo.EditValue, Tngay, Dngay));
+                if (grdData.DataSource == null)
+                {
+                    Commons.Modules.ObjSystems.MLoadXtraGrid(grdData, grvData, dt, false, false, false, true, true, this.Name);
+                    grvData.Columns["ID_CN"].Visible = false;
+                    grvData.Columns["ID_CTL"].Visible = false;
+                    grvData.Columns["ID_TO"].Visible = false;
+                    grvData.Columns["MS_CN"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
+                    grvData.Columns["HO_TEN"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
+                    grvData.Columns["TEN_TO"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
+                    grvData.Columns["TEN_LPB"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
+                    grvData.Columns["CACH_TL"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
+                    grvData.Columns["TEN_LCV"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
 
-        
+                    grvData.Columns["LUONG_TV_NC"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["LUONG_TV_NC"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["LUONG_HDLD_NC"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["LUONG_HDLD_NC"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["LUONG_CD"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["LUONG_CD"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["LUONG_NGHI_NGAN"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["LUONG_NGHI_NGAN"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["LUONG_CHU_KY"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["LUONG_CHU_KY"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["LUONG_KTSP"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["LUONG_KTSP"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["LUONG_NGHI_HL_CT"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["LUONG_NGHI_HL_CT"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["LUONG_NGHI_HL_TV"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["LUONG_NGHI_HL_TV"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["LUONG_PHEP_NAM"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["LUONG_PHEP_NAM"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["TONG_LUONG_TG_HC"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["TONG_LUONG_TG_HC"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["LUONG_TV_150"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["LUONG_TV_150"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["LUONG_CT_150"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["LUONG_CT_150"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["LUONG_TV_200"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["LUONG_TV_200"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["LUONG_CT_200"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["LUONG_CT_200"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["TONG_LUONG_TC_TG"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["TONG_LUONG_TC_TG"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["TONG_LTG_HC_TC"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["TONG_LTG_HC_TC"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["LUONG_SP"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["LUONG_SP"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["PT_HT_LSP"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["PT_HT_LSP"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["LSP_HO_TRO"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["LSP_HO_TRO"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["LSP_BQ_1G_HT"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["LSP_BQ_1G_HT"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["LSP_BQ_1G_KHT"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["LSP_BQ_1G_KHT"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["LSP_LAM_HC"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["LSP_LAM_HC"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["LUONG_BP_PHU_CHUYEN"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["LUONG_BP_PHU_CHUYEN"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["LSP_LAM_HC_TG"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["LSP_LAM_HC_TG"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["BU_LUONG"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["BU_LUONG"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["LSP_TC_TV_150"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["LSP_TC_TV_150"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["LSP_TC_CT_150"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["LSP_TC_CT_150"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["LSP_TC_TV_200"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["LSP_TC_TV_200"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["LSP_TC_CT_200"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["LSP_TC_CT_200"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["LSP_TC_TONG"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["LSP_TC_TONG"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["SS_TC_TG_SP"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["SS_TC_TG_SP"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["LUONG_TC_THANG"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["LUONG_TC_THANG"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["TONG_BU_LUONG"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["TONG_BU_LUONG"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["THUONG_CC"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["THUONG_CC"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["THUONG_CN_MOI"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["THUONG_CN_MOI"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["XEP_LOAI_HQ_SX"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["XEP_LOAI_HQ_SX"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["THUONG_HQ_SX"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["THUONG_HQ_SX"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["THUONG_HQ_QA"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["THUONG_HQ_QA"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["THUONG_PHU_CHUYEN"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["THUONG_PHU_CHUYEN"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["HO_TRO_AN"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["HO_TRO_AN"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["HO_TRO_HO_SO"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["HO_TRO_HO_SO"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["HO_TRO_XANG_XE"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["HO_TRO_XANG_XE"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["GIOI_THIEU_CN_MOI"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["GIOI_THIEU_CN_MOI"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["ATVSV"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["ATVSV"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["PC_CON_NHO"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["PC_CON_NHO"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["PC_QUA_DO"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["PC_QUA_DO"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["PC_KHAC"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["PC_KHAC"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["TONG_PHU_CAP"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["TONG_PHU_CAP"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["TIEN_BHXH"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["TIEN_BHXH"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["TIEN_BHYT"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["TIEN_BHYT"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["TIEN_BHTN"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["TIEN_BHTN"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["TONG_TIEN_BHXH"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["TONG_TIEN_BHXH"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["PHI_CONG_DOAN"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["PHI_CONG_DOAN"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["THU_BHYT"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["THU_BHYT"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["TRU_KHAC"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["TRU_KHAC"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["TONG_GIAM_TRU"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["TONG_GIAM_TRU"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["TL_TRUOC_GIAM_TRU"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["TL_TRUOC_GIAM_TRU"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["TL_THUC_NHAN"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["TL_THUC_NHAN"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["TL_TRUOC_HO_TRO"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["TL_TRUOC_HO_TRO"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["TL_THUC_NHAN_CUOI"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["TL_THUC_NHAN_CUOI"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["THUC_NHAN_THANG_TRUOC"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["THUC_NHAN_THANG_TRUOC"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["CHENH_LECH"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["CHENH_LECH"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["THUE_TNCN"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["THUE_TNCN"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["TK_NGAN_HANG"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["TK_NGAN_HANG"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["CHI_NHANH"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["CHI_NHANH"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["BHXH_CTY_TRA"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["BHXH_CTY_TRA"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["BHYT_CTY_TRA"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["BHYT_CTY_TRA"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["BHTN_CTY_TRA"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["BHTN_CTY_TRA"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["BHTNLD_CTY_TRA"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["BHTNLD_CTY_TRA"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["TONG_BH_CTY_TRA"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["TONG_BH_CTY_TRA"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["QUY_CONG_DOAN"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["QUY_CONG_DOAN"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["TL_CTY_TRA"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["TL_CTY_TRA"].DisplayFormat.FormatString = "N0";
 
+                }
+                else
+                {
+                    grdData.DataSource = dt;
+                }
+            }
+            catch
+            {
+
+            }
+            //for (int i = 6; i < grvData.Columns.Count; i++)
+            //{
+
+            //    grvData.Columns[i].DisplayFormat.FormatType = FormatType.Numeric;
+            //    grvData.Columns[i].DisplayFormat.FormatString = "N0";
+            //}
+        }
 
         public void LoadThang()
         {
             try
             {
-
+                //string sSql = "SELECT disTINCT SUBSTRING(CONVERT(VARCHAR(10),THANG,103),4,2) as M, RIGHT(CONVERT(VARCHAR(10),THANG,103),4) AS Y ,RIGHT(CONVERT(VARCHAR(10),THANG,103),7) AS THANG FROM dbo." + Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString() == "DM" ? "BANG_LUONG_DM" : "BANG_LUONG" + " ORDER BY Y DESC , M DESC";
+                string sSql = "";
                 //ItemForDateThang.Visibility = LayoutVisibility.Never;
                 DataTable dtthang = new DataTable();
-                string sSql = "SELECT disTINCT SUBSTRING(CONVERT(VARCHAR(10),THANG,103),4,2) as M, RIGHT(CONVERT(VARCHAR(10),THANG,103),4) AS Y ,RIGHT(CONVERT(VARCHAR(10),THANG,103),7) AS THANG FROM dbo.BANG_LUONG ORDER BY Y DESC , M DESC";
+                if (sKyHieuDV == "DM")
+                {
+                    sSql = "SELECT disTINCT SUBSTRING(CONVERT(VARCHAR(10),THANG,103),4,2) as M, RIGHT(CONVERT(VARCHAR(10),THANG,103),4) AS Y ,RIGHT(CONVERT(VARCHAR(10),THANG,103),7) AS THANG FROM dbo.BANG_LUONG_DM ORDER BY Y DESC , M DESC";
+                }
+                else
+                {
+                    sSql = "SELECT disTINCT SUBSTRING(CONVERT(VARCHAR(10),THANG,103),4,2) as M, RIGHT(CONVERT(VARCHAR(10),THANG,103),4) AS Y ,RIGHT(CONVERT(VARCHAR(10),THANG,103),7) AS THANG FROM dbo.BANG_LUONG ORDER BY Y DESC , M DESC";
+                }
                 dtthang.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSql));
                 Commons.Modules.ObjSystems.MLoadXtraGrid(grdThang, grvThang1, dtthang, false, true, true, true, true, this.Name);
                 grvThang1.Columns["M"].Visible = false;
@@ -184,9 +386,6 @@ namespace Vs.Payroll
                 cboThang.Text = now.ToString("MM/yyyy");
             }
         }
-
-
-
         private void windowsUIButtonPanel1_ButtonClick(object sender, DevExpress.XtraBars.Docking2010.ButtonEventArgs e)
         {
             WindowsUIButton btn = e.Button as WindowsUIButton;
@@ -206,17 +405,33 @@ namespace Vs.Payroll
 
                 case "tinhluong":
                     {
-                        if (grvData.RowCount != 0)
+                        try
                         {
-                            if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msg_DaCoLuong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) return;
-                        }
 
-                        grdData.DataSource = null;
-                        DateTime Tngay = Convert.ToDateTime(cboThang.EditValue);
-                        DateTime Dngay = Convert.ToDateTime(cboThang.EditValue).AddMonths(1).AddDays(-1);
-                        DataTable dt = new DataTable();
-                        SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetTinhLuongThang", Commons.Modules.UserName, Commons.Modules.TypeLanguage, cboDonVi.EditValue, cboXiNghiep.EditValue, cboTo.EditValue, Convert.ToInt32(txtNgayCongLV.EditValue), Convert.ToInt32(txtNgayCongChuan.EditValue), Tngay, Dngay);
-                        LoadGrdGTGC();
+                            if (grvData.RowCount != 0)
+                            {
+                                if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msg_DaCoLuong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) return;
+                            }
+                            this.Cursor = Cursors.WaitCursor;
+                            grdData.DataSource = null;
+                            DateTime Tngay = Convert.ToDateTime(cboThang.EditValue);
+                            DateTime Dngay = Convert.ToDateTime(cboThang.EditValue).AddMonths(1).AddDays(-1);
+                            DataTable dt = new DataTable();
+                            SqlHelper.ExecuteReader(Commons.IConnections.CNStr, sKyHieuDV == "DM" ? "spGetTinhLuongThang_DM" : "spGetTinhLuongThang", Commons.Modules.UserName, Commons.Modules.TypeLanguage, cboDonVi.EditValue, cboXiNghiep.EditValue, cboTo.EditValue, Convert.ToInt32(txtNgayCongLV.EditValue), Convert.ToInt32(txtNgayCongChuan.EditValue), Tngay, Dngay);
+                            if (sKyHieuDV != "DM")
+                            {
+                                LoadGrdGTGC();
+                            }
+                            else
+                            {
+                                LoadGrdGTGC_DM();
+                            }
+                            this.Cursor = Cursors.Default;
+                        }
+                        catch
+                        {
+                            this.Cursor = Cursors.Default;
+                        }
 
                         break;
                     }
@@ -242,6 +457,20 @@ namespace Vs.Payroll
             cboXiNghiep.Enabled = !visible;
         }
 
+        private int getNgayCongChuan()
+        {
+            int ngay = 0;
+            try
+            {
+                DateTime Tngay = Commons.Modules.ObjSystems.ConvertDateTime(cboThang.Text);
+                DateTime Dngay = Commons.Modules.ObjSystems.ConvertDateTime(cboThang.Text).AddMonths(1).AddDays(-1);
+                ngay = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.fnGetSoNgayTruLeNgayNghiMacDinh('" + Tngay.ToString("MM/dd/yyyy") + "','" + Dngay.ToString("MM/dd/yyyy") + "')"));
+                return ngay;
+            }
+            catch { return ngay; }
+
+        }
+
         private void XoaCheDoLV()
         {
             if (grvData.RowCount == 0) { Commons.Modules.ObjSystems.msgChung(Commons.ThongBao.msgKhongCoDuLieuXoa); return; }
@@ -249,7 +478,7 @@ namespace Vs.Payroll
             //xóa
             try
             {
-                SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "XoaTinhLuongThang", cboDonVi.EditValue, cboXiNghiep.EditValue, cboTo.EditValue, Convert.ToDateTime(cboThang.EditValue));
+                SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "XoaTinhLuongThang", cboDonVi.EditValue, cboXiNghiep.EditValue, cboTo.EditValue, Convert.ToDateTime(cboThang.EditValue), sKyHieuDV);
                 grdData.DataSource = null;
 
             }
@@ -307,11 +536,20 @@ namespace Vs.Payroll
 
         private void cboNgay_EditValueChanged(object sender, EventArgs e)
         {
-            if (Commons.Modules.sPS == "0Load") return;
-            Commons.Modules.sPS = "0Load";
-            LoadGrdGTGC();
+            if (Commons.Modules.sLoad == "0Load") return;
+            Commons.Modules.sLoad = "0Load";
+            txtNgayCongChuan.Text = getNgayCongChuan().ToString();
+            txtNgayCongLV.Text = getNgayCongChuan().ToString();
+            if (sKyHieuDV != "DM")
+            {
+                LoadGrdGTGC();
+            }
+            else
+            {
+                LoadGrdGTGC_DM();
+            }
             //EnableButon(true);
-            Commons.Modules.sPS = "";
+            Commons.Modules.sLoad = "";
         }
 
         private void calThang_DateTimeCommit(object sender, EventArgs e)
@@ -336,32 +574,53 @@ namespace Vs.Payroll
 
         private void cboTo_EditValueChanged(object sender, EventArgs e)
         {
-            if (Commons.Modules.sPS == "0Load") return;
-            Commons.Modules.sPS = "0Load";
-            LoadGrdGTGC();
+            if (Commons.Modules.sLoad == "0Load") return;
+            Commons.Modules.sLoad = "0Load";
+            if (sKyHieuDV != "DM")
+            {
+                LoadGrdGTGC();
+            }
+            else
+            {
+                LoadGrdGTGC_DM();
+            }
             //EnableButon(true);
-            Commons.Modules.sPS = "";
+            Commons.Modules.sLoad = "";
         }
 
         private void cboDonVi_EditValueChanged(object sender, EventArgs e)
         {
-            if (Commons.Modules.sPS == "0Load") return;
-            Commons.Modules.sPS = "0Load";
+            if (Commons.Modules.sLoad == "0Load") return;
+            Commons.Modules.sLoad = "0Load";
             Commons.Modules.ObjSystems.LoadCboXiNghiep(cboDonVi, cboXiNghiep);
             Commons.Modules.ObjSystems.LoadCboTo(cboDonVi, cboXiNghiep, cboTo);
-            LoadGrdGTGC();
+            if (sKyHieuDV != "DM")
+            {
+                LoadGrdGTGC();
+            }
+            else
+            {
+                LoadGrdGTGC_DM();
+            }
             //EnableButon(true);
-            Commons.Modules.sPS = "";
+            Commons.Modules.sLoad = "";
         }
 
         private void cboXiNghiep_EditValueChanged(object sender, EventArgs e)
         {
-            if (Commons.Modules.sPS == "0Load") return;
-            Commons.Modules.sPS = "0Load";
+            if (Commons.Modules.sLoad == "0Load") return;
+            Commons.Modules.sLoad = "0Load";
             Commons.Modules.ObjSystems.LoadCboTo(cboDonVi, cboXiNghiep, cboTo);
-            LoadGrdGTGC();
+            if (sKyHieuDV != "DM")
+            {
+                LoadGrdGTGC();
+            }
+            else
+            {
+                LoadGrdGTGC_DM();
+            }
             //EnableButon(true);
-            Commons.Modules.sPS = "";
+            Commons.Modules.sLoad = "";
         }
 
         private void grvData_RowCountChanged(object sender, EventArgs e)

@@ -205,6 +205,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class\clsMain.cs" />
+    <Compile Include="Form\frmThongBaoTuyenDung.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\frmThongBaoTuyenDung.Designer.cs">
+      <DependentUpon>frmThongBaoTuyenDung.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form\frmDLTuyenDung.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -351,6 +357,9 @@
     <Compile Include="XtraForm1.Designer.cs">
       <DependentUpon>XtraForm1.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Form\frmThongBaoTuyenDung.resx">
+      <DependentUpon>frmThongBaoTuyenDung.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form\frmDLTuyenDung.resx">
       <DependentUpon>frmDLTuyenDung.cs</DependentUpon>
     </EmbeddedResource>

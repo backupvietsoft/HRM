@@ -59,7 +59,7 @@ namespace Vs.HRM
                                         DataSet ds = new DataSet();
                                         adp.Fill(ds);
                                         dt = new DataTable();
-                                        dt = ds.Tables[0].Copy();
+                                        dt = ds.Tables[1].Copy();
                                         dt.TableName = "DA_TA";
                                         frm.AddDataSource(dt);
                                     }
@@ -132,7 +132,7 @@ namespace Vs.HRM
                 DataSet ds = new DataSet();
                 adp.Fill(ds);
                 dtBCThang = new DataTable();
-                dtBCThang = ds.Tables[0].Copy();
+                dtBCThang = ds.Tables[1].Copy();
 
                 SaveExcelFile = SaveFiles("Excel Workbook |*.xlsx|Excel 97-2003 Workbook |*.xls|Word Document |*.docx|Rich Text Format |*.rtf|PDF File |*.pdf|Web Page |*.html|Single File Web Page |*.mht");
                 if (SaveExcelFile == "")
@@ -150,21 +150,21 @@ namespace Vs.HRM
 
                 string fontName = "Times New Roman";
                 int fontSizeTieuDe = 12;
-                int fontSizeNoiDung = 9;
 
 
                 string lastColumn = string.Empty;
-                lastColumn = CharacterIncrement(dtBCThang.Columns.Count - 3);
+                lastColumn = CharacterIncrement(dtBCThang.Columns.Count - 1);
+                string nameColumn = CharacterIncrement(dtBCThang.Columns.Count - 3);
 
 
                 Range row2_TieuDe_BaoCao = oSheet.get_Range("A1", lastColumn + "1");
                 row2_TieuDe_BaoCao.Merge();
-                row2_TieuDe_BaoCao.Font.Size = 24;
+                row2_TieuDe_BaoCao.Font.Size = 18;
                 row2_TieuDe_BaoCao.Font.Name = fontName;
                 row2_TieuDe_BaoCao.Font.Bold = true;
                 row2_TieuDe_BaoCao.Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
                 row2_TieuDe_BaoCao.Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
-                row2_TieuDe_BaoCao.RowHeight = 50;
+                row2_TieuDe_BaoCao.RowHeight = 30;
                 row2_TieuDe_BaoCao.Value2 = "BÁO CÁO THÂM NIÊN";
 
                 Microsoft.Office.Interop.Excel.Range row5_TieuDe_Format = oSheet.get_Range("A3", lastColumn + "4"); //27 + 31
@@ -184,19 +184,19 @@ namespace Vs.HRM
 
                 Microsoft.Office.Interop.Excel.Range row5_TieuDe_LDBQ = oSheet.get_Range("B3", "B4");
                 row5_TieuDe_LDBQ.Merge();
-                row5_TieuDe_LDBQ.Value2 = "Đơn vị";
+                row5_TieuDe_LDBQ.Value2 = "Chuyền/Phòng";
                 row5_TieuDe_LDBQ.ColumnWidth = 14;
 
                 Range row5_TieuDe_LDT = oSheet.get_Range("C3", "C4");
                 row5_TieuDe_LDT.Merge();
                 row5_TieuDe_LDT.Value2 = "Số lao động";
-                row5_TieuDe_LDT.ColumnWidth = 10;
+                row5_TieuDe_LDT.ColumnWidth = 11;
 
 
                 Range row6_TieuDe_TT = oSheet.get_Range("D3", "E3");
                 row6_TieuDe_TT.Merge();
                 row6_TieuDe_TT.Value2 = "Giới tính";
-                row6_TieuDe_TT.RowHeight = 21;
+                row6_TieuDe_TT.RowHeight = 14;
 
                 Range row5_TieuDe_DT = oSheet.get_Range("D4");
                 row5_TieuDe_DT.Value2 = "Nam";
@@ -209,31 +209,36 @@ namespace Vs.HRM
                 Range row5_TieuDe_LDG = oSheet.get_Range("F3", "J3");
                 row5_TieuDe_LDG.Merge();
                 row5_TieuDe_LDG.Value2 = "Thâm niên";
+                row5_TieuDe_LDG.ColumnWidth = 44;
 
                 Range row6_TieuDe_TG = oSheet.get_Range("F4");
                 row6_TieuDe_TG.Value2 = "0-3 months";
-                row6_TieuDe_TG.ColumnWidth = 8;
+                row6_TieuDe_TG.ColumnWidth = 11;
 
                 Range row6_TieuDe_D1T = oSheet.get_Range("G4");
                 row6_TieuDe_D1T.Value2 = "3-6 months";
-                row6_TieuDe_D1T.ColumnWidth = 8;
+                row6_TieuDe_D1T.ColumnWidth = 11;
 
                 Range row6_TieuDe_1_3_T = oSheet.get_Range("H4");
                 row6_TieuDe_1_3_T.Merge();
                 row6_TieuDe_1_3_T.Value2 = "6-9 months";
-                row6_TieuDe_1_3_T.ColumnWidth = 8;
+                row6_TieuDe_1_3_T.ColumnWidth = 11;
 
                 Range row6_TieuDe_3_6_T = oSheet.get_Range("I4");
                 row6_TieuDe_3_6_T.Value2 = "9-12 months";
-                row6_TieuDe_3_6_T.ColumnWidth = 8;
+                row6_TieuDe_3_6_T.ColumnWidth = 11;
 
                 Range row6_TieuDe_6_9_T = oSheet.get_Range("J4");
                 row6_TieuDe_6_9_T.Value2 = "Trên 1 năm";
-                row6_TieuDe_6_9_T.ColumnWidth = 8;
+                row6_TieuDe_6_9_T.ColumnWidth = 11;
 
                 Range row6_TieuDe_9_12_T = oSheet.get_Range("K4");
                 row6_TieuDe_9_12_T.Value2 = "Ghi chú";
-                row6_TieuDe_9_12_T.ColumnWidth = 23;
+                row6_TieuDe_9_12_T.ColumnWidth = 20;
+
+                Microsoft.Office.Interop.Excel.Range fortmatTitleTable = oSheet.get_Range("A3", "K4");
+                fortmatTitleTable.Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                fortmatTitleTable.Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
 
                 Microsoft.Office.Interop.Excel.Range formatRange;
 
@@ -252,12 +257,12 @@ namespace Vs.HRM
                 string[] TEN_XN = dtBCThang.AsEnumerable().Select(r => r.Field<string>("TEN_XN")).Distinct().ToArray();
                 string chanVongDau = "Chan";// chặn lần đầu để lần đầu tiên sẽ load data từ cột số 7 trở đi, các vòng lặp tiếp theo bỏ chặn
                 DataTable dt_temp = new DataTable();
-                dt_temp = ds.Tables[0].Copy(); // Dữ row count data
+                dt_temp = ds.Tables[1].Copy(); // Dữ row count data
                 string sRowBD_XN_Temp = "";
                 for (int i = 0; i < TEN_DV.Count(); i++)
                 {
                     // Tạo group đơn vị
-                    Range row_groupDON_VI_Format = oSheet.get_Range("A" + rowBD + "".ToString(), lastColumn + "" + rowBD + "".ToString()); //27 + 31
+                    Range row_groupDON_VI_Format = oSheet.get_Range("A" + rowBD + "".ToString(), nameColumn + "" + rowBD + "".ToString()); //27 + 31
                     row_groupDON_VI_Format.Interior.Color = Color.FromArgb(255, 255, 0);
                     oSheet.Cells[rowBD, 1] = TEN_DV[i].ToString();
                     oSheet.Cells[rowBD, 1].Merge();
@@ -266,14 +271,14 @@ namespace Vs.HRM
                     rowBD++;
                     for (int j = 0; j < TEN_XN.Count(); j++)
                     {
-                        dtBCThang = ds.Tables[0].Copy();
+                        dtBCThang = ds.Tables[1].Copy();
                         dtBCThang = dtBCThang.AsEnumerable().Where(r => r.Field<string>("TEN_XN") == TEN_XN[j]).CopyToDataTable().Copy();
                         DataRow[] dr = dtBCThang.Select();
                         current_dr = dr.Count();
                         string[,] rowData = new string[dr.Count(), dtBCThang.Columns.Count];
                         foreach (DataRow row in dr)
                         {
-                            for (col = 0; col < dtBCThang.Columns.Count; col++)
+                            for (col = 0; col < dtBCThang.Columns.Count - 2; col++)
                             {
                                 rowData[rowCnt, col] = row[col].ToString();
                             }
@@ -295,7 +300,7 @@ namespace Vs.HRM
 
 
                         // Tạo group xí nghiệp
-                        Range row_groupXI_NGHIEP_Format = oSheet.get_Range("A" + rowBD + "".ToString(), lastColumn + "" + rowBD + "".ToString()); //27 + 31
+                        Range row_groupXI_NGHIEP_Format = oSheet.get_Range("A" + rowBD + "".ToString(), nameColumn + "" + rowBD + "".ToString()); //27 + 31
                         row_groupXI_NGHIEP_Format.Interior.Color = Color.FromArgb(146, 208, 80);
                         oSheet.Cells[rowBD, 1] = int_to_Roman(j + 1);
                         oSheet.Cells[rowBD, 2] = TEN_XN[j].ToString();
@@ -364,8 +369,7 @@ namespace Vs.HRM
                 formatRange.Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
                 formatRange.Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
 
-
-                BorderAround(oSheet.get_Range("A3", lastColumn + rowCnt.ToString()));
+                BorderAround(oSheet.get_Range("A3", nameColumn + rowCnt.ToString()));
 
                 rowCnt++;
                 rowCnt++;

@@ -308,6 +308,7 @@
             this.grvMauBC.OptionsView.ShowGroupPanel = false;
             this.grvMauBC.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.grvMauBC_FocusedRowChanged);
             this.grvMauBC.KeyDown += new System.Windows.Forms.KeyEventHandler(this.grvMauBC_KeyDown);
+            this.grvMauBC.DoubleClick += new System.EventHandler(this.grvMauBC_DoubleClick);
             this.grvMauBC.RowCountChanged += new System.EventHandler(this.grvMauBC_RowCountChanged);
             // 
             // lblNgaySinh

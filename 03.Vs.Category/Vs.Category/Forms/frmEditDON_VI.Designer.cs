@@ -38,6 +38,8 @@ namespace Vs.Category
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule3 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             this.btnALL = new DevExpress.XtraBars.Docking2010.WindowsUIButtonPanel();
             this.dataLayoutControl1 = new DevExpress.XtraDataLayout.DataLayoutControl();
+            this.cboID_CN = new DevExpress.XtraEditors.SearchLookUpEdit();
+            this.searchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.TEN_NGAN_HANGTextEdit = new DevExpress.XtraEditors.TextEdit();
             this.MAC_DINHCheckEdit = new DevExpress.XtraEditors.CheckEdit();
             this.MSDVTextEdit = new DevExpress.XtraEditors.TextEdit();
@@ -72,13 +74,16 @@ namespace Vs.Category
             this.ItemForMAC_DINH = new DevExpress.XtraLayout.LayoutControlItem();
             this.ItemForSO_TAI_KHOAN = new DevExpress.XtraLayout.LayoutControlItem();
             this.ItemForTEN_NGAN_HANG = new DevExpress.XtraLayout.LayoutControlItem();
+            this.ItemForTruongDonVi = new DevExpress.XtraLayout.LayoutControlItem();
             this.dxValidationProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
             this.tablePanel1 = new DevExpress.Utils.Layout.TablePanel();
-            this.cboID_CN = new DevExpress.XtraEditors.SearchLookUpEdit();
-            this.ItemForTruongDonVi = new DevExpress.XtraLayout.LayoutControlItem();
-            this.searchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.behaviorManager1 = new DevExpress.Utils.Behaviors.BehaviorManager(this.components);
+            this.FBtextEdit = new DevExpress.XtraEditors.TextEdit();
+            this.ItemForFB = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataLayoutControl1)).BeginInit();
             this.dataLayoutControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cboID_CN.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.TEN_NGAN_HANGTextEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.MAC_DINHCheckEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.MSDVTextEdit.Properties)).BeginInit();
@@ -113,12 +118,13 @@ namespace Vs.Category
             ((System.ComponentModel.ISupportInitialize)(this.ItemForMAC_DINH)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForSO_TAI_KHOAN)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForTEN_NGAN_HANG)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForTruongDonVi)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).BeginInit();
             this.tablePanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.cboID_CN.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemForTruongDonVi)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.behaviorManager1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.FBtextEdit.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForFB)).BeginInit();
             this.SuspendLayout();
             // 
             // btnALL
@@ -158,6 +164,7 @@ namespace Vs.Category
             // dataLayoutControl1
             // 
             this.tablePanel1.SetColumn(this.dataLayoutControl1, 1);
+            this.dataLayoutControl1.Controls.Add(this.FBtextEdit);
             this.dataLayoutControl1.Controls.Add(this.cboID_CN);
             this.dataLayoutControl1.Controls.Add(this.TEN_NGAN_HANGTextEdit);
             this.dataLayoutControl1.Controls.Add(this.MAC_DINHCheckEdit);
@@ -185,6 +192,25 @@ namespace Vs.Category
             this.dataLayoutControl1.TabIndex = 6;
             this.dataLayoutControl1.Text = "dataLayoutControl1";
             // 
+            // cboID_CN
+            // 
+            this.cboID_CN.Location = new System.Drawing.Point(139, 126);
+            this.cboID_CN.Name = "cboID_CN";
+            this.cboID_CN.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cboID_CN.Properties.NullText = "";
+            this.cboID_CN.Properties.PopupView = this.searchLookUpEdit1View;
+            this.cboID_CN.Size = new System.Drawing.Size(479, 24);
+            this.cboID_CN.StyleController = this.dataLayoutControl1;
+            this.cboID_CN.TabIndex = 28;
+            // 
+            // searchLookUpEdit1View
+            // 
+            this.searchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            this.searchLookUpEdit1View.Name = "searchLookUpEdit1View";
+            this.searchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.searchLookUpEdit1View.OptionsView.ShowGroupPanel = false;
+            // 
             // TEN_NGAN_HANGTextEdit
             // 
             this.TEN_NGAN_HANGTextEdit.Location = new System.Drawing.Point(139, 302);
@@ -195,11 +221,11 @@ namespace Vs.Category
             // 
             // MAC_DINHCheckEdit
             // 
-            this.MAC_DINHCheckEdit.Location = new System.Drawing.Point(595, 10);
+            this.MAC_DINHCheckEdit.Location = new System.Drawing.Point(533, 10);
             this.MAC_DINHCheckEdit.Name = "MAC_DINHCheckEdit";
             this.MAC_DINHCheckEdit.Properties.Caption = "";
             this.MAC_DINHCheckEdit.Properties.GlyphVerticalAlignment = DevExpress.Utils.VertAlignment.Bottom;
-            this.MAC_DINHCheckEdit.Size = new System.Drawing.Size(23, 20);
+            this.MAC_DINHCheckEdit.Size = new System.Drawing.Size(85, 20);
             this.MAC_DINHCheckEdit.StyleController = this.dataLayoutControl1;
             this.MAC_DINHCheckEdit.TabIndex = 26;
             // 
@@ -208,7 +234,7 @@ namespace Vs.Category
             this.MSDVTextEdit.EnterMoveNextControl = true;
             this.MSDVTextEdit.Location = new System.Drawing.Point(144, 8);
             this.MSDVTextEdit.Name = "MSDVTextEdit";
-            this.MSDVTextEdit.Size = new System.Drawing.Size(162, 24);
+            this.MSDVTextEdit.Size = new System.Drawing.Size(147, 24);
             this.MSDVTextEdit.StyleController = this.dataLayoutControl1;
             this.MSDVTextEdit.TabIndex = 5;
             conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
@@ -309,8 +335,9 @@ namespace Vs.Category
             this.SO_TAI_KHOANTextEdit.EnterMoveNextControl = true;
             this.SO_TAI_KHOANTextEdit.Location = new System.Drawing.Point(451, 274);
             this.SO_TAI_KHOANTextEdit.Name = "SO_TAI_KHOANTextEdit";
-            this.SO_TAI_KHOANTextEdit.Properties.Mask.EditMask = "\\d{0,15}";
-            this.SO_TAI_KHOANTextEdit.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
+            this.SO_TAI_KHOANTextEdit.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.RegExpMaskManager));
+            this.SO_TAI_KHOANTextEdit.Properties.MaskSettings.Set("allowBlankInput", true);
+            this.SO_TAI_KHOANTextEdit.Properties.MaskSettings.Set("mask", "\\d{0,15}");
             this.SO_TAI_KHOANTextEdit.Size = new System.Drawing.Size(162, 24);
             this.SO_TAI_KHOANTextEdit.StyleController = this.dataLayoutControl1;
             this.SO_TAI_KHOANTextEdit.TabIndex = 17;
@@ -329,8 +356,6 @@ namespace Vs.Category
             this.textEdit1.EnterMoveNextControl = true;
             this.textEdit1.Location = new System.Drawing.Point(144, 214);
             this.textEdit1.Name = "textEdit1";
-            this.textEdit1.Properties.Mask.EditMask = "\\d{0,15}";
-            this.textEdit1.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
             this.textEdit1.Size = new System.Drawing.Size(162, 24);
             this.textEdit1.StyleController = this.dataLayoutControl1;
             this.textEdit1.TabIndex = 24;
@@ -338,14 +363,14 @@ namespace Vs.Category
             // STT_DVTextEdit
             // 
             this.STT_DVTextEdit.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.STT_DVTextEdit.Location = new System.Drawing.Point(446, 9);
+            this.STT_DVTextEdit.Location = new System.Drawing.Point(431, 9);
             this.STT_DVTextEdit.Margin = new System.Windows.Forms.Padding(4);
             this.STT_DVTextEdit.Name = "STT_DVTextEdit";
             this.STT_DVTextEdit.Properties.Appearance.Options.UseTextOptions = true;
             this.STT_DVTextEdit.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.STT_DVTextEdit.Properties.Mask.EditMask = "N0";
-            this.STT_DVTextEdit.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
-            this.STT_DVTextEdit.Size = new System.Drawing.Size(78, 24);
+            this.STT_DVTextEdit.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.NumericMaskManager));
+            this.STT_DVTextEdit.Properties.MaskSettings.Set("mask", "N0");
+            this.STT_DVTextEdit.Size = new System.Drawing.Size(31, 24);
             this.STT_DVTextEdit.StyleController = this.dataLayoutControl1;
             this.STT_DVTextEdit.TabIndex = 25;
             conditionValidationRule3.ErrorText = "This value is not valid";
@@ -383,7 +408,8 @@ namespace Vs.Category
             this.ItemForMAC_DINH,
             this.ItemForSO_TAI_KHOAN,
             this.ItemForTEN_NGAN_HANG,
-            this.ItemForTruongDonVi});
+            this.ItemForTruongDonVi,
+            this.ItemForFB});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "autoGeneratedGroup0";
             this.layoutControlGroup1.Size = new System.Drawing.Size(614, 419);
@@ -396,7 +422,7 @@ namespace Vs.Category
             this.ItemForMSDV.Location = new System.Drawing.Point(0, 0);
             this.ItemForMSDV.Name = "ItemForMSDV";
             this.ItemForMSDV.Padding = new DevExpress.XtraLayout.Utils.Padding(6, 6, 3, 3);
-            this.ItemForMSDV.Size = new System.Drawing.Size(307, 30);
+            this.ItemForMSDV.Size = new System.Drawing.Size(292, 30);
             this.ItemForMSDV.Text = "MSDV";
             this.ItemForMSDV.TextSize = new System.Drawing.Size(121, 17);
             // 
@@ -516,11 +542,11 @@ namespace Vs.Category
             this.ItemForSTT_DV.BestFitWeight = 10;
             this.ItemForSTT_DV.ContentVertAlignment = DevExpress.Utils.VertAlignment.Center;
             this.ItemForSTT_DV.Control = this.STT_DVTextEdit;
-            this.ItemForSTT_DV.Location = new System.Drawing.Point(307, 0);
+            this.ItemForSTT_DV.Location = new System.Drawing.Point(292, 0);
             this.ItemForSTT_DV.MaxSize = new System.Drawing.Size(0, 24);
             this.ItemForSTT_DV.MinSize = new System.Drawing.Size(166, 24);
             this.ItemForSTT_DV.Name = "ItemForSTT_DV";
-            this.ItemForSTT_DV.Size = new System.Drawing.Size(213, 30);
+            this.ItemForSTT_DV.Size = new System.Drawing.Size(166, 30);
             this.ItemForSTT_DV.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.ItemForSTT_DV.Text = "STT_DV";
             this.ItemForSTT_DV.TextSize = new System.Drawing.Size(121, 17);
@@ -529,9 +555,9 @@ namespace Vs.Category
             // 
             this.ItemForMAC_DINH.ContentVertAlignment = DevExpress.Utils.VertAlignment.Center;
             this.ItemForMAC_DINH.Control = this.MAC_DINHCheckEdit;
-            this.ItemForMAC_DINH.Location = new System.Drawing.Point(520, 0);
+            this.ItemForMAC_DINH.Location = new System.Drawing.Point(458, 0);
             this.ItemForMAC_DINH.Name = "ItemForMAC_DINH";
-            this.ItemForMAC_DINH.Size = new System.Drawing.Size(94, 30);
+            this.ItemForMAC_DINH.Size = new System.Drawing.Size(156, 30);
             this.ItemForMAC_DINH.Text = "MAC_DINH";
             this.ItemForMAC_DINH.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.AutoSize;
             this.ItemForMAC_DINH.TextLocation = DevExpress.Utils.Locations.Left;
@@ -553,9 +579,17 @@ namespace Vs.Category
             this.ItemForTEN_NGAN_HANG.Control = this.TEN_NGAN_HANGTextEdit;
             this.ItemForTEN_NGAN_HANG.Location = new System.Drawing.Point(0, 296);
             this.ItemForTEN_NGAN_HANG.Name = "ItemForTEN_NGAN_HANG";
-            this.ItemForTEN_NGAN_HANG.Size = new System.Drawing.Size(614, 123);
+            this.ItemForTEN_NGAN_HANG.Size = new System.Drawing.Size(614, 26);
             this.ItemForTEN_NGAN_HANG.Text = "TEN_NGAN_HANG";
             this.ItemForTEN_NGAN_HANG.TextSize = new System.Drawing.Size(121, 17);
+            // 
+            // ItemForTruongDonVi
+            // 
+            this.ItemForTruongDonVi.Control = this.cboID_CN;
+            this.ItemForTruongDonVi.Location = new System.Drawing.Point(0, 120);
+            this.ItemForTruongDonVi.Name = "ItemForTruongDonVi";
+            this.ItemForTruongDonVi.Size = new System.Drawing.Size(614, 26);
+            this.ItemForTruongDonVi.TextSize = new System.Drawing.Size(121, 17);
             // 
             // dxValidationProvider1
             // 
@@ -577,32 +611,21 @@ namespace Vs.Category
             this.tablePanel1.Size = new System.Drawing.Size(788, 459);
             this.tablePanel1.TabIndex = 7;
             // 
-            // cboID_CN
+            // FBtextEdit
             // 
-            this.cboID_CN.Location = new System.Drawing.Point(139, 126);
-            this.cboID_CN.Name = "cboID_CN";
-            this.cboID_CN.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cboID_CN.Properties.NullText = "";
-            this.cboID_CN.Properties.PopupView = this.searchLookUpEdit1View;
-            this.cboID_CN.Size = new System.Drawing.Size(479, 24);
-            this.cboID_CN.StyleController = this.dataLayoutControl1;
-            this.cboID_CN.TabIndex = 28;
+            this.FBtextEdit.Location = new System.Drawing.Point(139, 328);
+            this.FBtextEdit.Name = "FBtextEdit";
+            this.FBtextEdit.Size = new System.Drawing.Size(479, 24);
+            this.FBtextEdit.StyleController = this.dataLayoutControl1;
+            this.FBtextEdit.TabIndex = 29;
             // 
-            // ItemForTruongDonVi
+            // ItemForFB
             // 
-            this.ItemForTruongDonVi.Control = this.cboID_CN;
-            this.ItemForTruongDonVi.Location = new System.Drawing.Point(0, 120);
-            this.ItemForTruongDonVi.Name = "ItemForTruongDonVi";
-            this.ItemForTruongDonVi.Size = new System.Drawing.Size(614, 26);
-            this.ItemForTruongDonVi.TextSize = new System.Drawing.Size(121, 17);
-            // 
-            // searchLookUpEdit1View
-            // 
-            this.searchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
-            this.searchLookUpEdit1View.Name = "searchLookUpEdit1View";
-            this.searchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
-            this.searchLookUpEdit1View.OptionsView.ShowGroupPanel = false;
+            this.ItemForFB.Control = this.FBtextEdit;
+            this.ItemForFB.Location = new System.Drawing.Point(0, 322);
+            this.ItemForFB.Name = "ItemForFB";
+            this.ItemForFB.Size = new System.Drawing.Size(614, 97);
+            this.ItemForFB.TextSize = new System.Drawing.Size(121, 17);
             // 
             // frmEditDON_VI
             // 
@@ -617,6 +640,8 @@ namespace Vs.Category
             this.Resize += new System.EventHandler(this.frmEditDON_VI_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.dataLayoutControl1)).EndInit();
             this.dataLayoutControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.cboID_CN.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.TEN_NGAN_HANGTextEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.MAC_DINHCheckEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.MSDVTextEdit.Properties)).EndInit();
@@ -651,12 +676,13 @@ namespace Vs.Category
             ((System.ComponentModel.ISupportInitialize)(this.ItemForMAC_DINH)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForSO_TAI_KHOAN)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForTEN_NGAN_HANG)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForTruongDonVi)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).EndInit();
             this.tablePanel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.cboID_CN.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemForTruongDonVi)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.behaviorManager1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.FBtextEdit.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForFB)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -706,5 +732,8 @@ namespace Vs.Category
         private DevExpress.XtraEditors.SearchLookUpEdit cboID_CN;
         private DevExpress.XtraGrid.Views.Grid.GridView searchLookUpEdit1View;
         private DevExpress.XtraLayout.LayoutControlItem ItemForTruongDonVi;
+        private DevExpress.Utils.Behaviors.BehaviorManager behaviorManager1;
+        private DevExpress.XtraEditors.TextEdit FBtextEdit;
+        private DevExpress.XtraLayout.LayoutControlItem ItemForFB;
     }
 }

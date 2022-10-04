@@ -286,7 +286,7 @@ namespace Vs.TimeAttendance
                 Commons.Modules.ObjSystems.XoaTable(sTB);
                 return true;
             }
-            catch 
+            catch (Exception ex)
             { 
                 Commons.Modules.ObjSystems.XoaTable(sTB);
                 return false;

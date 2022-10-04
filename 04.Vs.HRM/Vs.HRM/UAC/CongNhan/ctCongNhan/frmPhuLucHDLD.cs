@@ -135,6 +135,11 @@ namespace Vs.HRM
             grvPLHD.Columns["THOI_GIAN_THUC_HIEN"].Visible = false;
             grvPLHD.Columns["GHI_CHU"].Visible = false;
             grvPLHD.Columns["NGUOI_KY"].Visible = false;
+
+            //format column
+            grvPLHD.Columns["NGAY_KY"].DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            grvPLHD.Columns["NGAY_KY"].DisplayFormat.FormatString = "dd/MM/yyyy";
+
             if (id != "-1")
             {
                 int index = dt.Rows.IndexOf(dt.Rows.Find(id));

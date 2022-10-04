@@ -221,7 +221,6 @@ namespace Vs.HRM
             windowsUIButton.Buttons[6].Properties.Visible = !visible;
             windowsUIButton.Buttons[7].Properties.Visible = !visible;
             windowsUIButton.Buttons[8].Properties.Visible = visible;
-            Commons.Modules.bEnabel = !visible;
             grdCongTac.Enabled = visible;
             //SO_HIEU_BANGTextEdit.Properties.ReadOnly = visible;
             SO_QUYET_DINHTextEdit.Properties.ReadOnly = visible;
@@ -473,11 +472,7 @@ namespace Vs.HRM
                 SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "DELETE dbo.QUA_TRINH_CONG_TAC WHERE ID_QTCT =" + grvCongTac.GetFocusedRowCellValue("ID_QTCT") + "");
                 Loaddatatable();
                 LoadgrdCongTac(-1);
-                if(grvCongTac.RowCount > 0)
-                {
-                    grvCongTac.FocusedRowHandle = grvCongTac.GetRowHandle(0);
-                }
-                //grvCongTac.DeleteSelectedRows();
+                Bindingdata(false);
             }
             catch (Exception ex)
             {

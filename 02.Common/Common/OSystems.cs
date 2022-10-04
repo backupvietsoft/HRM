@@ -394,6 +394,38 @@ namespace Commons
             return KyHieuDV;
         }
 
+        public bool setCheckImport(int iLoai) // iLoai = 1 Update khi mở form, 0 UPDATE = NULL  khi tắt form
+        {
+            try
+            {
+                string MName = "";
+                try { MName = Environment.MachineName; } catch { }
+                string strSQL = "";
+                if (iLoai == 1)
+                {
+                    strSQL = "UPDATE dbo.THONG_TIN_CHUNG SET CHECK_IMPORT = CONVERT(NVARCHAR(20),GETDATE(),20) + N'," + MName + "' + N'," + Commons.Modules.UserName + "'";
+                }
+                else
+                {
+                    strSQL = "UPDATE dbo.THONG_TIN_CHUNG SET CHECK_IMPORT = NULL";
+                }
+                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, strSQL);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        public string getCheckImport()
+        {
+            string sName = "";
+            try
+            {
+                return sName = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT CHECK_IMPORT FROM dbo.THONG_TIN_CHUNG").ToString();
+            }
+            catch { return sName = ""; }
+        }
         public bool kiemTrungMS(string sTableName, string sDieuKien, string sValue)
         {
             try
@@ -410,6 +442,33 @@ namespace Commons
             }
         }
 
+        public DataTable DataFocusRows(DataTable data, DevExpress.XtraGrid.Views.Grid.GridView grv)
+        {
+            DataTable dt = new DataTable();
+            try
+            {
+                DataRow dr;
+                DataRow row;
+                dt = data.Clone();
+                Int32[] selectedRowHandles = grv.GetSelectedRows();
+                for (int i = 0; i < selectedRowHandles.Length; i++)
+                {
+                    int selectedRowHandle = selectedRowHandles[i];
+                    if (selectedRowHandle >= 0)
+                    {
+                        dr = grv.GetDataRow(selectedRowHandle);
+                        row = dt.NewRow();
+                        for (int j = 0; j < dt.Columns.Count; j++)
+                        {
+                            row[dt.Columns[j].ColumnName] = dr[dt.Columns[j].ColumnName];
+                        }
+                        dt.Rows.Add(row);
+                    }
+                }
+                return dt;
+            }
+            catch { return dt = null; }
+        }
 
         public string KyHieuDV_CN(Int64 ID_CN)
         {
@@ -1075,7 +1134,10 @@ namespace Commons
 
                 cbo.Properties.PopulateViewColumns();
                 cbo.Properties.View.Columns[0].Visible = false;
-                //cbo.Properties.View.Columns[Ten].SortOrder = DevExpress.Data.ColumnSortOrder.Ascending;
+                if (TenCot != "")
+                {
+                    cbo.Properties.View.Columns[Ten].SortOrder = DevExpress.Data.ColumnSortOrder.Ascending;
+                }
                 cbo.Properties.View.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
                 cbo.Properties.View.Appearance.HeaderPanel.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
                 cbo.Properties.View.Appearance.HeaderPanel.Options.UseTextOptions = true;
@@ -4446,7 +4508,7 @@ namespace Commons
             try
             {
                 DataTable dt = new DataTable();
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboTinhTrangHT", Commons.Modules.UserName, Commons.Modules.TypeLanguage, 1));
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboTinhTrangHT", Commons.Modules.UserName, Commons.Modules.TypeLanguage, -1, 1));
                 Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboSearch_TTHT, dt, "ID_TT_HT", "TEN_TT_HT", "TEN_TT_HT");
             }
             catch (Exception ex)
@@ -4650,8 +4712,13 @@ namespace Commons
             return dt;
         }
 
-
-
+        public DataTable DataPhanBo(bool coAll)
+        {
+            //ID_LPB,TEN_LPB
+            DataTable dt = new DataTable();
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboPhanBo", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll));
+            return dt;
+        }
 
         public DataTable DataThongTinChung()
         {
@@ -4770,11 +4837,19 @@ namespace Commons
             dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboTinHTrangHD", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll));
             return dt;
         }
-        public DataTable DataTinHTrangHT(bool coAll)
+        public DataTable DataLoaiTinHTrangHT(bool coAll)
+        {
+            //"ID_LTTHT", "TEN_LOAI_TTHT,
+            DataTable dt = new DataTable();
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboLoaiTinhTrangHT", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll));
+            return dt;
+        }
+
+        public DataTable DataTinHTrangHT(int ID_LTTHT, bool coAll)
         {
             //"ID_TT_HT", "TEN_TT_HT,
             DataTable dt = new DataTable();
-            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboTinHTrangHT", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll));
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboTinHTrangHT", Commons.Modules.UserName, Commons.Modules.TypeLanguage, ID_LTTHT, coAll));
             return dt;
         }
 

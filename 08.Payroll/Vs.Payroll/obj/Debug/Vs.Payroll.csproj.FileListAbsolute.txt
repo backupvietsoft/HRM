@@ -2881,7 +2881,6 @@ D:\01.SourceCode\02.HRM\08.Payroll\Vs.Payroll\bin\Debug\ja\DevExpress.XtraRichEd
 D:\01.SourceCode\02.HRM\08.Payroll\Vs.Payroll\bin\Debug\de\DevExpress.Diagram.v22.1.Core.resources.dll
 D:\01.SourceCode\02.HRM\08.Payroll\Vs.Payroll\bin\Debug\es\DevExpress.Diagram.v22.1.Core.resources.dll
 D:\01.SourceCode\02.HRM\08.Payroll\Vs.Payroll\bin\Debug\ja\DevExpress.Diagram.v22.1.Core.resources.dll
-D:\01.SourceCode\02.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.csproj.AssemblyReference.cache
 D:\01.SourceCode\02.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.csproj.ResolveComReference.cache
 D:\01.SourceCode\02.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.Form1.resources
 D:\01.SourceCode\02.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.frmDonHangBan.resources

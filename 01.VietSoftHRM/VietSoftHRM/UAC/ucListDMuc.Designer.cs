@@ -49,6 +49,7 @@
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolDuLieuChoTD = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolThongBaoTuyenDung = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.grdDanhMuc)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grvDanhMuc)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
@@ -271,9 +272,10 @@
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolDuLieuChoTD});
+            this.toolDuLieuChoTD,
+            this.toolThongBaoTuyenDung});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(199, 26);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(199, 70);
             // 
             // toolDuLieuChoTD
             // 
@@ -281,6 +283,13 @@
             this.toolDuLieuChoTD.Size = new System.Drawing.Size(198, 22);
             this.toolDuLieuChoTD.Text = "Dữ liệu cho tuyển dụng";
             this.toolDuLieuChoTD.Click += new System.EventHandler(this.toolDuLieuChoTD_Click);
+            // 
+            // toolThongBaoTuyenDung
+            // 
+            this.toolThongBaoTuyenDung.Name = "toolThongBaoTuyenDung";
+            this.toolThongBaoTuyenDung.Size = new System.Drawing.Size(198, 22);
+            this.toolThongBaoTuyenDung.Text = "Thông báo tuyển dụng";
+            this.toolThongBaoTuyenDung.Click += new System.EventHandler(this.toolThongBaoTuyenDung_Click);
             // 
             // ucListDMuc
             // 
@@ -324,5 +333,6 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem toolDuLieuChoTD;
+        private System.Windows.Forms.ToolStripMenuItem toolThongBaoTuyenDung;
     }
 }

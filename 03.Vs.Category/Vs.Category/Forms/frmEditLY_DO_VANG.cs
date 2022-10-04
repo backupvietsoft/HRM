@@ -217,7 +217,7 @@ namespace Vs.Category
         {
             try
             {
-                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_TT_HT, Commons.Modules.ObjSystems.DataTinHTrangHT(false), "ID_TT_HT", "TEN_TT_HT", "TEN_TT_HT", true, true);
+                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_TT_HT, Commons.Modules.ObjSystems.DataTinHTrangHT(-1, false), "ID_TT_HT", "TEN_TT_HT", "TEN_TT_HT", true, true);
             }
             catch { }
         }

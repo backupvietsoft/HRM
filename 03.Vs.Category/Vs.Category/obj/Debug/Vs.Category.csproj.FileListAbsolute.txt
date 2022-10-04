@@ -1839,14 +1839,15 @@ D:\01.SourceCode\02.HRM\03.Vs.Category\Vs.Category\bin\Debug\DevExpress.XtraTree
 D:\01.SourceCode\02.HRM\03.Vs.Category\Vs.Category\bin\Debug\DevExpress.XtraTreeMap.v22.1.dll
 D:\01.SourceCode\02.HRM\03.Vs.Category\Vs.Category\bin\Debug\DevExpress.XtraTreeMap.v22.1.UI.dll
 D:\01.SourceCode\02.HRM\03.Vs.Category\Vs.Category\bin\Debug\Microsoft.ApplicationBlocks.Data.dll
+D:\01.SourceCode\02.HRM\03.Vs.Category\Vs.Category\bin\Debug\Vs.Recruit.dll
 D:\01.SourceCode\02.HRM\03.Vs.Category\Vs.Category\bin\Debug\EPPlus.dll
 D:\01.SourceCode\02.HRM\03.Vs.Category\Vs.Category\bin\Debug\NPOI.dll
 D:\01.SourceCode\02.HRM\03.Vs.Category\Vs.Category\bin\Debug\NPOI.OOXML.dll
 D:\01.SourceCode\02.HRM\03.Vs.Category\Vs.Category\bin\Debug\DevExpress.XtraReports.v22.1.dll
 D:\01.SourceCode\02.HRM\03.Vs.Category\Vs.Category\bin\Debug\Newtonsoft.Json.dll
 D:\01.SourceCode\02.HRM\03.Vs.Category\Vs.Category\bin\Debug\DevExpress.XtraRichEdit.v22.1.dll
-D:\01.SourceCode\02.HRM\03.Vs.Category\Vs.Category\bin\Debug\DevExpress.Xpo.v22.1.dll
 D:\01.SourceCode\02.HRM\03.Vs.Category\Vs.Category\bin\Debug\VS.Report.dll
+D:\01.SourceCode\02.HRM\03.Vs.Category\Vs.Category\bin\Debug\DevExpress.Xpo.v22.1.dll
 D:\01.SourceCode\02.HRM\03.Vs.Category\Vs.Category\bin\Debug\Vs.HRM.dll
 D:\01.SourceCode\02.HRM\03.Vs.Category\Vs.Category\bin\Debug\Spire.XLS.dll
 D:\01.SourceCode\02.HRM\03.Vs.Category\Vs.Category\bin\Debug\DevExpress.RichEdit.v22.1.Core.dll
@@ -2058,5 +2059,3 @@ D:\01.SourceCode\02.HRM\03.Vs.Category\Vs.Category\obj\Debug\Vs.Category.csproj.
 D:\01.SourceCode\02.HRM\03.Vs.Category\Vs.Category\obj\Debug\Vs.Category.csproj.CopyComplete
 D:\01.SourceCode\02.HRM\03.Vs.Category\Vs.Category\obj\Debug\Vs.Category.dll
 D:\01.SourceCode\02.HRM\03.Vs.Category\Vs.Category\obj\Debug\Vs.Category.pdb
-D:\01.SourceCode\02.HRM\03.Vs.Category\Vs.Category\bin\Debug\Vs.Recruit.exe.config
-D:\01.SourceCode\02.HRM\03.Vs.Category\Vs.Category\bin\Debug\Vs.Recruit.dll

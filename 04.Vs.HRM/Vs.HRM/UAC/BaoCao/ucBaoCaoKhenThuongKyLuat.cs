@@ -3,6 +3,7 @@ using DevExpress.XtraEditors;
 using System;
 using System.Data;
 using Vs.Report;
+using System.Globalization;
 
 namespace Vs.HRM
 {
@@ -167,8 +168,8 @@ namespace Vs.HRM
             Commons.OSystems.SetDateEditFormat(lk_NgayIn);
 
 
-            dTuNgay.EditValue = Convert.ToDateTime(("01/" + DateTime.Today.Month + "/" + DateTime.Today.Year));
-            dDenNgay.EditValue = Convert.ToDateTime(("01/" + DateTime.Today.Month + "/" + DateTime.Today.Year)).AddMonths(1).AddDays(-1);
+            dTuNgay.EditValue = Convert.ToDateTime(("01/" + DateTime.Today.Month + "/" + DateTime.Today.Year), new CultureInfo("de-DE"));
+            dDenNgay.EditValue = Convert.ToDateTime(("01/" + DateTime.Today.Month + "/" + DateTime.Today.Year), new CultureInfo("de-DE")).AddMonths(1).AddDays(-1);
             dtThang.EditValue = DateTime.Today;
             Commons.Modules.sLoad = "";
             LoadNhanSu();
@@ -232,8 +233,8 @@ namespace Vs.HRM
 
         private void dtThang_EditValueChanged(object sender, EventArgs e)
         {
-            dTuNgay.EditValue = Convert.ToDateTime(("01/" + dtThang.Text));
-            dDenNgay.EditValue = Convert.ToDateTime(("01/" + dtThang.Text)).AddMonths(1).AddDays(-1);
+            dTuNgay.EditValue = Convert.ToDateTime(("01/" + dtThang.Text), new CultureInfo("de-DE"));
+            dDenNgay.EditValue = Convert.ToDateTime(("01/" + dtThang.Text), new CultureInfo("de-DE")).AddMonths(1).AddDays(-1);
         }
     }
 }

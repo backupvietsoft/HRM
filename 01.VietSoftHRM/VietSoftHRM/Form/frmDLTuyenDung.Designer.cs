@@ -42,10 +42,10 @@
             this.grvViTri = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.tabControl = new DevExpress.XtraLayout.TabbedControlGroup();
-            this.tabVitri = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.tabThamGiaTD = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.tabVitri = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.lblNhaMayBoPhan = new DevExpress.XtraLayout.SimpleLabelItem();
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataLayoutControl1)).BeginInit();
@@ -58,10 +58,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.grvViTri)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tabVitri)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabThamGiaTD)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tabVitri)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblNhaMayBoPhan)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
             this.SuspendLayout();
@@ -73,10 +73,9 @@
             this.dataLayoutControl1.Controls.Add(this.grdViTri);
             this.dataLayoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataLayoutControl1.Location = new System.Drawing.Point(0, 0);
-            this.dataLayoutControl1.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.dataLayoutControl1.Name = "dataLayoutControl1";
             this.dataLayoutControl1.Root = this.Root;
-            this.dataLayoutControl1.Size = new System.Drawing.Size(888, 557);
+            this.dataLayoutControl1.Size = new System.Drawing.Size(565, 338);
             this.dataLayoutControl1.TabIndex = 7;
             this.dataLayoutControl1.Text = "dataLayoutControl1";
             // 
@@ -106,15 +105,16 @@
             new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions1, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "sua", -1, false),
             new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions2, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "luu", -1, false),
             new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions3, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "khongluu", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUISeparator(),
             new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions4, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "thoat", -1, false)});
             this.btnALL.ContentAlignment = System.Drawing.ContentAlignment.MiddleRight;
             this.btnALL.Controls.Add(this.searchControl1);
             this.btnALL.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnALL.Location = new System.Drawing.Point(19, 490);
-            this.btnALL.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
+            this.btnALL.Location = new System.Drawing.Point(6, 300);
+            this.btnALL.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnALL.Name = "btnALL";
-            this.btnALL.Padding = new System.Windows.Forms.Padding(8, 7, 8, 7);
-            this.btnALL.Size = new System.Drawing.Size(850, 48);
+            this.btnALL.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.btnALL.Size = new System.Drawing.Size(553, 32);
             this.btnALL.TabIndex = 34;
             this.btnALL.Text = "S";
             this.btnALL.UseButtonBackgroundImages = false;
@@ -123,47 +123,43 @@
             // searchControl1
             // 
             this.searchControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.searchControl1.Location = new System.Drawing.Point(5, 9);
-            this.searchControl1.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.searchControl1.Location = new System.Drawing.Point(3, -4);
             this.searchControl1.Name = "searchControl1";
             this.searchControl1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Repository.ClearButton(),
             new DevExpress.XtraEditors.Repository.SearchButton()});
             this.searchControl1.Properties.FindDelay = 100;
-            this.searchControl1.Size = new System.Drawing.Size(305, 34);
+            this.searchControl1.Size = new System.Drawing.Size(194, 24);
             this.searchControl1.StyleController = this.dataLayoutControl1;
             this.searchControl1.TabIndex = 56;
             // 
             // grdThamGiaTD
             // 
-            this.grdThamGiaTD.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
-            this.grdThamGiaTD.Location = new System.Drawing.Point(38, 129);
+            this.grdThamGiaTD.Location = new System.Drawing.Point(12, 70);
             this.grdThamGiaTD.MainView = this.grvThamGiaTD;
-            this.grdThamGiaTD.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.grdThamGiaTD.Name = "grdThamGiaTD";
-            this.grdThamGiaTD.Size = new System.Drawing.Size(812, 336);
+            this.grdThamGiaTD.Size = new System.Drawing.Size(541, 222);
             this.grdThamGiaTD.TabIndex = 5;
             this.grdThamGiaTD.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grvThamGiaTD});
+            this.grdThamGiaTD.ProcessGridKey += new System.Windows.Forms.KeyEventHandler(this.grdThamGiaTD_ProcessGridKey);
             // 
             // grvThamGiaTD
             // 
-            this.grvThamGiaTD.DetailHeight = 576;
             this.grvThamGiaTD.GridControl = this.grdThamGiaTD;
             this.grvThamGiaTD.Name = "grvThamGiaTD";
             this.grvThamGiaTD.OptionsView.ShowGroupPanel = false;
+            this.grvThamGiaTD.InitNewRow += new DevExpress.XtraGrid.Views.Grid.InitNewRowEventHandler(this.grvThamGiaTD_InitNewRow);
             this.grvThamGiaTD.InvalidRowException += new DevExpress.XtraGrid.Views.Base.InvalidRowExceptionEventHandler(this.grvThamGiaTD_InvalidRowException);
             this.grvThamGiaTD.ValidatingEditor += new DevExpress.XtraEditors.Controls.BaseContainerValidateEditorEventHandler(this.grvThamGiaTD_ValidatingEditor);
             this.grvThamGiaTD.InvalidValueException += new DevExpress.XtraEditors.Controls.InvalidValueExceptionEventHandler(this.grvThamGiaTD_InvalidValueException);
             // 
             // grdViTri
             // 
-            this.grdViTri.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
-            this.grdViTri.Location = new System.Drawing.Point(38, 129);
+            this.grdViTri.Location = new System.Drawing.Point(12, 70);
             this.grdViTri.MainView = this.grvViTri;
-            this.grdViTri.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.grdViTri.Name = "grdViTri";
-            this.grdViTri.Size = new System.Drawing.Size(812, 336);
+            this.grdViTri.Size = new System.Drawing.Size(541, 222);
             this.grdViTri.TabIndex = 4;
             this.grdViTri.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grvViTri});
@@ -171,7 +167,6 @@
             // 
             // grvViTri
             // 
-            this.grvViTri.DetailHeight = 576;
             this.grvViTri.GridControl = this.grdViTri;
             this.grvViTri.Name = "grvViTri";
             this.grvViTri.OptionsSelection.MultiSelect = true;
@@ -190,36 +185,19 @@
             this.lblNhaMayBoPhan,
             this.layoutControlItem3});
             this.Root.Name = "Root";
-            this.Root.Size = new System.Drawing.Size(888, 557);
+            this.Root.Size = new System.Drawing.Size(565, 338);
             this.Root.TextVisible = false;
             // 
             // tabControl
             // 
-            this.tabControl.Location = new System.Drawing.Point(0, 54);
+            this.tabControl.Location = new System.Drawing.Point(0, 33);
             this.tabControl.Name = "tabControl";
-            this.tabControl.SelectedTabPage = this.tabVitri;
-            this.tabControl.Size = new System.Drawing.Size(856, 417);
+            this.tabControl.SelectedTabPage = this.tabThamGiaTD;
+            this.tabControl.Size = new System.Drawing.Size(555, 261);
             this.tabControl.TabPages.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.tabVitri,
             this.tabThamGiaTD});
             this.tabControl.SelectedPageChanged += new DevExpress.XtraLayout.LayoutTabPageChangedEventHandler(this.tabControl_SelectedPageChanged);
-            // 
-            // tabVitri
-            // 
-            this.tabVitri.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlItem1});
-            this.tabVitri.Location = new System.Drawing.Point(0, 0);
-            this.tabVitri.Name = "tabVitri";
-            this.tabVitri.Size = new System.Drawing.Size(818, 342);
-            // 
-            // layoutControlItem1
-            // 
-            this.layoutControlItem1.Control = this.grdViTri;
-            this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(818, 342);
-            this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem1.TextVisible = false;
             // 
             // tabThamGiaTD
             // 
@@ -227,16 +205,33 @@
             this.layoutControlItem2});
             this.tabThamGiaTD.Location = new System.Drawing.Point(0, 0);
             this.tabThamGiaTD.Name = "tabThamGiaTD";
-            this.tabThamGiaTD.Size = new System.Drawing.Size(818, 342);
+            this.tabThamGiaTD.Size = new System.Drawing.Size(543, 224);
             // 
             // layoutControlItem2
             // 
             this.layoutControlItem2.Control = this.grdThamGiaTD;
             this.layoutControlItem2.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(818, 342);
+            this.layoutControlItem2.Size = new System.Drawing.Size(543, 224);
             this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem2.TextVisible = false;
+            // 
+            // tabVitri
+            // 
+            this.tabVitri.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItem1});
+            this.tabVitri.Location = new System.Drawing.Point(0, 0);
+            this.tabVitri.Name = "tabVitri";
+            this.tabVitri.Size = new System.Drawing.Size(543, 224);
+            // 
+            // layoutControlItem1
+            // 
+            this.layoutControlItem1.Control = this.grdViTri;
+            this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlItem1.Name = "layoutControlItem1";
+            this.layoutControlItem1.Size = new System.Drawing.Size(543, 224);
+            this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem1.TextVisible = false;
             // 
             // lblNhaMayBoPhan
             // 
@@ -250,29 +245,28 @@
             this.lblNhaMayBoPhan.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.lblNhaMayBoPhan.AppearanceItemCaption.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             this.lblNhaMayBoPhan.Location = new System.Drawing.Point(0, 0);
-            this.lblNhaMayBoPhan.MaxSize = new System.Drawing.Size(0, 54);
-            this.lblNhaMayBoPhan.MinSize = new System.Drawing.Size(214, 54);
+            this.lblNhaMayBoPhan.MaxSize = new System.Drawing.Size(0, 33);
+            this.lblNhaMayBoPhan.MinSize = new System.Drawing.Size(136, 33);
             this.lblNhaMayBoPhan.Name = "lblNhaMayBoPhan";
-            this.lblNhaMayBoPhan.Size = new System.Drawing.Size(856, 54);
+            this.lblNhaMayBoPhan.Size = new System.Drawing.Size(555, 33);
             this.lblNhaMayBoPhan.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-            this.lblNhaMayBoPhan.TextSize = new System.Drawing.Size(253, 32);
+            this.lblNhaMayBoPhan.TextSize = new System.Drawing.Size(166, 21);
             // 
             // layoutControlItem3
             // 
             this.layoutControlItem3.Control = this.btnALL;
-            this.layoutControlItem3.Location = new System.Drawing.Point(0, 471);
+            this.layoutControlItem3.Location = new System.Drawing.Point(0, 294);
             this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Size = new System.Drawing.Size(856, 54);
+            this.layoutControlItem3.Size = new System.Drawing.Size(555, 34);
             this.layoutControlItem3.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem3.TextVisible = false;
             // 
             // frmDLTuyenDung
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 28F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(888, 557);
+            this.ClientSize = new System.Drawing.Size(565, 338);
             this.Controls.Add(this.dataLayoutControl1);
-            this.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.Name = "frmDLTuyenDung";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmDLTuyenDung";
@@ -287,10 +281,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.grvViTri)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tabVitri)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabThamGiaTD)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tabVitri)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblNhaMayBoPhan)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
             this.ResumeLayout(false);

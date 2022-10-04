@@ -39,7 +39,7 @@ namespace Vs.HRM
                                     System.Data.SqlClient.SqlConnection conn;
                                     dt = new DataTable();
                                     string sTieuDe = "DANH SÁCH CÔNG NHÂN HỢP ĐỒNG";
-                                    frm.rpt = new rptBCHopDongHetHan(lk_NgayIn.DateTime, sTieuDe, lk_NgayIn.DateTime, lk_NgayIn.DateTime);
+                                    frm.rpt = new rptBCHopDongHetHan(lk_NgayTinh.DateTime, sTieuDe, lk_NgayIn.DateTime, lk_NgayIn.DateTime);
 
                                     try
                                     {
@@ -78,7 +78,7 @@ namespace Vs.HRM
                                     System.Data.SqlClient.SqlConnection conn1;
                                     dt = new DataTable();
                                     string sTieuDe1 = "DANH SÁCH CÔNG NHÂN HẾT HẠN HỢP ĐỒNG";
-                                    frm.rpt = new rptBCHopDongHetHan(lk_NgayIn.DateTime, sTieuDe1, lk_NgayIn.DateTime, lk_NgayIn.DateTime);
+                                    frm.rpt = new rptBCHopDongHetHan(lk_NgayTinh.DateTime, sTieuDe1, lk_NgayIn.DateTime, lk_NgayIn.DateTime);
 
                                     try
                                     {
@@ -92,7 +92,7 @@ namespace Vs.HRM
                                         cmd.Parameters.Add("@Dvi", SqlDbType.Int).Value = LK_DON_VI.EditValue;
                                         cmd.Parameters.Add("@XN", SqlDbType.Int).Value = LK_XI_NGHIEP.EditValue;
                                         cmd.Parameters.Add("@TO", SqlDbType.Int).Value = LK_TO.EditValue;
-                                        cmd.Parameters.Add("@DNgay", SqlDbType.Date).Value = lk_NgayIn.DateTime;
+                                        cmd.Parameters.Add("@DNgay", SqlDbType.Date).Value = lk_NgayTinh.DateTime;
                                         cmd.Parameters.Add("@LoaiHD", SqlDbType.Int).Value = LK_LOAI_HD.EditValue;
                                         cmd.CommandType = CommandType.StoredProcedure;
                                         System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);

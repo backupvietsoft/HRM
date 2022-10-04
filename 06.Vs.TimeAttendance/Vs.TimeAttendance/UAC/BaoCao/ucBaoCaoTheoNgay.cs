@@ -4,7 +4,6 @@ using DevExpress.XtraGrid.Views.Grid;
 using Microsoft.ApplicationBlocks.Data;
 using System;
 using System.Data;
-using Excel = Microsoft.Office.Interop.Excel;
 using Microsoft.Office.Interop.Excel;
 using DataTable = System.Data.DataTable;
 using Vs.Report;
@@ -12,14 +11,13 @@ using System.Reflection;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using System.IO;
 
 namespace Vs.TimeAttendance
 {
     public partial class ucBaoCaoTheoNgay : DevExpress.XtraEditors.XtraUserControl
     {
         private string SaveExcelFile;
-
+        string sKyHieuDV = "";
         public ucBaoCaoTheoNgay()
         {
             InitializeComponent();
@@ -36,120 +34,47 @@ namespace Vs.TimeAttendance
             {
                 case "Print":
                     {
-
-                        switch (rdo_ChonBaoCao.SelectedIndex)
+                        switch (rdo_ChonBaoCao.Properties.Items[rdo_ChonBaoCao.SelectedIndex].Tag)
                         {
-                            case 0:
+                            case "rdo_DSVangDauGioTheoDV":
                                 {
-                                    switch (Commons.Modules.ObjSystems.KyHieuDV(Convert.ToInt64(LK_DON_VI.EditValue)))
-                                    {
-                                        case "MT":
-                                            {
-                                                DSVangDauGioTheoNgay();
-                                                break;
-                                            }
-                                        default:
-                                            DSVangDauGioTheoNgay();
-                                            break;
-                                    }
+                                    DSVangDauGioTheoNgay();
                                 }
                                 break;
-                            case 1:
+                            case "rdo_DSVangDauGioTheoNgay":
                                 {
-                                    switch (Commons.Modules.ObjSystems.KyHieuDV(Convert.ToInt64(LK_DON_VI.EditValue)))
-                                    {
-                                        case "MT":
-                                            {
-                                                DSCongNhanVangDauGioNgay();
-                                                break;
-                                            }
-                                        default:
-                                            DSCongNhanVangDauGioNgay();
-                                            break;
-                                    }
-
+                                    DSCongNhanVangDauGioNgay();
                                 }
                                 break;
-                            case 2:
+                            case "rdo_DSThieuNhomCa":
                                 {
-                                    switch (Commons.Modules.ObjSystems.KyHieuDV(Convert.ToInt64(LK_DON_VI.EditValue)))
-                                    {
-                                        case "MT":
-                                            {
-                                                DSCongNhanThieuNhomCa();
-                                                break;
-                                            }
-                                        default:
-                                            DSCongNhanThieuNhomCa();
-                                            break;
-                                    }
+                                    DSCongNhanThieuNhomCa();
                                 }
                                 break;
-                            case 3:
+                            case "rdo_DSDiTreVeSomTheoNgay":
                                 {
-                                    switch (Commons.Modules.ObjSystems.KyHieuDV(Convert.ToInt64(LK_DON_VI.EditValue)))
-                                    {
-                                        case "MT":
-                                            {
-                                                DSDiTreVeSomNgay();
-                                                break;
-                                            }
-                                        default:
-                                            DSDiTreVeSomNgay();
-                                            break;
-                                    }
-
+                                    DSDiTreVeSomNgay();
                                 }
                                 break;
-                            case 4:
+                            case "rdo_DSNVTrungGioNgay":
                                 {
-                                    switch (Commons.Modules.ObjSystems.KyHieuDV(Convert.ToInt64(LK_DON_VI.EditValue)))
-                                    {
-                                        case "MT":
-                                            {
-                                                DSNVTrungGioNgay();
-                                                break;
-                                            }
-                                        default:
-                                            DSNVTrungGioNgay();
-                                            break;
-                                    }
+                                    DSNVTrungGioNgay();
                                     break;
                                 }
-                            case 5:
+                            case "rdo_DSNVCoTren2CapGioChinhNgay":
                                 {
-                                    switch (Commons.Modules.ObjSystems.KyHieuDV(Convert.ToInt64(LK_DON_VI.EditValue)))
-                                    {
-                                        case "MT":
-                                            {
-                                                DSNVCoTren2CapGioChinh();
-                                                break;
-                                            }
-                                        default:
-                                            DSNVCoTren2CapGioChinh();
-                                            break;
-                                    }
+                                    DSNVCoTren2CapGioChinh();
                                     break;
                                 }
-                            case 6:
+                            case "rdo_DSNVLoiTheNgay":
                                 {
-                                    switch (Commons.Modules.ObjSystems.KyHieuDV(Convert.ToInt64(LK_DON_VI.EditValue)))
-                                    {
-                                        case "MT":
-                                            {
-                                                DSNVVachTheLoiNgay();
-                                                break;
-                                            }
-                                        default:
-                                            DSNVVachTheLoiNgay();
-                                            break;
-                                    }
+                                    DSNVCoTren2CapGioChinh();
                                     break;
                                 }
 
-                            case 7:
+                            case "rdo_BieuMauDangKyLamThem":
                                 {
-                                    switch (Commons.Modules.ObjSystems.KyHieuDV(Convert.ToInt64(LK_DON_VI.EditValue)))
+                                    switch (sKyHieuDV)
                                     {
                                         case "MT":
                                             {
@@ -173,9 +98,9 @@ namespace Vs.TimeAttendance
                                     break;
                                 }
 
-                            case 8:
+                            case "rdo_DanhSachNVTangCaNgay":
                                 {
-                                    switch (Commons.Modules.ObjSystems.KyHieuDV(Convert.ToInt64(LK_DON_VI.EditValue)))
+                                    switch (sKyHieuDV)
                                     {
                                         case "MT":
                                             {
@@ -193,7 +118,7 @@ namespace Vs.TimeAttendance
                                     }
                                     break;
                                 }
-                            case 9:
+                            case "rdo_BaoCaoNhanSuNgay":
                                 {
                                     BangChamCongNgay_DM();
                                     break;
@@ -209,20 +134,31 @@ namespace Vs.TimeAttendance
 
         private void ucBaoCaoTheoNgay_Load(object sender, EventArgs e)
         {
-            if (Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString() != "DM")
+            try
             {
-                rdo_ChonBaoCao.Properties.Items.RemoveAt(9);
+                sKyHieuDV = Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString();
+                if (sKyHieuDV == "DM")
+                {
+                    rdo_ChonBaoCao.Properties.Items.RemoveAt(5);
+                    rdo_ChonBaoCao.Properties.Items.RemoveAt(4);
+                }
+                else
+                {
+                    rdo_ChonBaoCao.Properties.Items.RemoveAt(9);
+                }
+                LoadCboDonVi();
+                LoadCboXiNghiep();
+                LoadCboTo();
+                LoadNgay();
+                LoadTinhTrangHopDong();
+                rdo_DiTreVeSom.Visible = false;
+                datNgayTangCa.Enabled = false;
+                datNgayTangCa.EditValue = DateTime.Now;
+                lk_NgayIn.EditValue = DateTime.Today;
+                Commons.OSystems.SetDateEditFormat(lk_NgayIn);
             }
-            LoadCboDonVi();
-            LoadCboXiNghiep();
-            LoadCboTo();
-            LoadNgay();
-            LoadTinhTrangHopDong();
-            rdo_DiTreVeSom.Visible = false;
-            datNgayTangCa.Enabled = false;
-            datNgayTangCa.EditValue = DateTime.Now;
-            lk_NgayIn.EditValue = DateTime.Today;
-            Commons.OSystems.SetDateEditFormat(lk_NgayIn);
+            catch { }
+
         }
 
 
@@ -239,14 +175,14 @@ namespace Vs.TimeAttendance
 
         private void rdo_ChonBaoCao_SelectedIndexChanged(object sender, EventArgs e)
         {
-            switch (rdo_ChonBaoCao.SelectedIndex)
+            switch (rdo_ChonBaoCao.Properties.Items[rdo_ChonBaoCao.SelectedIndex].Tag)
             {
-                case 3:
+                case "rdo_DSDiTreVeSomTheoNgay":
                     {
                         rdo_DiTreVeSom.Visible = true;
                         break;
                     }
-                case 8:
+                case "rdo_DanhSachNVTangCaNgay":
                     {
                         datNgayTangCa.Enabled = true;
                         rdo_DiTreVeSom.Visible = false;
@@ -853,18 +789,18 @@ namespace Vs.TimeAttendance
                 {
                     return;
                 }
-                Excel.Application oXL;
-                Excel.Workbook oWB;
-                Excel.Worksheet oSheet;
-                oXL = new Excel.Application();
+                Microsoft.Office.Interop.Excel.Application oXL;
+                Microsoft.Office.Interop.Excel.Workbook oWB;
+                Microsoft.Office.Interop.Excel.Worksheet oSheet;
+                oXL = new Microsoft.Office.Interop.Excel.Application();
                 oXL.Visible = true;
 
 
                 //OfficeOpenXml.ExcelPackage ExcelPkg = new OfficeOpenXml.ExcelPackage();
                 //OfficeOpenXml.ExcelWorksheet wsSheet1 = ExcelPkg.Workbook.Worksheets.Add("Sheet1");
 
-                oWB = (Excel.Workbook)(oXL.Workbooks.Add(Missing.Value));
-                oSheet = (Excel.Worksheet)oWB.ActiveSheet;
+                oWB = (Microsoft.Office.Interop.Excel.Workbook)(oXL.Workbooks.Add(Missing.Value));
+                oSheet = (Microsoft.Office.Interop.Excel.Worksheet)oWB.ActiveSheet;
 
                 string fontName = "Times New Roman";
                 int fontSizeTieuDe = 10;
@@ -879,7 +815,7 @@ namespace Vs.TimeAttendance
                 row1_TenDV.Font.Name = fontName;
                 row1_TenDV.Value2 = dtBCThang.Rows[0]["TEN_DV"];
                 row1_TenDV.WrapText = false;
-                row1_TenDV.Style.VerticalAlignment = Excel.XlHAlign.xlHAlignCenter;
+                row1_TenDV.Style.VerticalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
 
 
                 Range row1_DiaChiDV = oSheet.get_Range("B2");
@@ -889,7 +825,7 @@ namespace Vs.TimeAttendance
                 row1_DiaChiDV.Font.Italic = true;
                 row1_DiaChiDV.Value2 = dtBCThang.Rows[0]["DIA_CHI_DV"];
                 row1_DiaChiDV.WrapText = false;
-                row1_DiaChiDV.Style.VerticalAlignment = Excel.XlHAlign.xlHAlignCenter;
+                row1_DiaChiDV.Style.VerticalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
 
 
                 Range row1_TieuDe_BaoCao = oSheet.get_Range("F1", "M1");
@@ -897,8 +833,8 @@ namespace Vs.TimeAttendance
                 row1_TieuDe_BaoCao.Font.Size = fontSizeTieuDe;
                 row1_TieuDe_BaoCao.Font.Name = fontName;
                 row1_TieuDe_BaoCao.Font.Bold = true;
-                row1_TieuDe_BaoCao.Cells.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
-                row1_TieuDe_BaoCao.Cells.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
+                row1_TieuDe_BaoCao.Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                row1_TieuDe_BaoCao.Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
                 row1_TieuDe_BaoCao.RowHeight = 15;
                 row1_TieuDe_BaoCao.Value2 = "STILL NEED MORE HOURS  JUNE " + Convert.ToDateTime(datNgayTangCa.EditValue).Year + "";
                 row1_TieuDe_BaoCao.Font.Color = Color.FromArgb(255, 0, 255);
@@ -908,8 +844,8 @@ namespace Vs.TimeAttendance
                 row2_TieuDe_BaoCao.Font.Size = fontSizeTieuDe;
                 row2_TieuDe_BaoCao.Font.Name = fontName;
                 row2_TieuDe_BaoCao.Font.FontStyle = "Bold Italic";
-                row2_TieuDe_BaoCao.Cells.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
-                row2_TieuDe_BaoCao.Cells.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
+                row2_TieuDe_BaoCao.Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                row2_TieuDe_BaoCao.Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
                 row2_TieuDe_BaoCao.RowHeight = 15;
                 row2_TieuDe_BaoCao.Value2 = " VĂN BẢN THỎA THUẬN LÀM THÊM GIỜ ………/  " + Convert.ToDateTime(datNgayTangCa.EditValue).Month + "  NĂM " + Convert.ToDateTime(datNgayTangCa.EditValue).Year + "";
                 row2_TieuDe_BaoCao.Font.Color = Color.FromArgb(255, 0, 255);
@@ -919,8 +855,8 @@ namespace Vs.TimeAttendance
                 row1_MauSo.Font.Name = fontName;
                 row1_MauSo.Font.Size = 9;
                 row1_MauSo.Value2 = "Mẫu số 01/PLIV";
-                row1_MauSo.Cells.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
-                row1_MauSo.Cells.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
+                row1_MauSo.Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                row1_MauSo.Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
                 row1_MauSo.WrapText = false;
 
                 Range row2_CHXH = oSheet.get_Range("P2", "S2");
@@ -929,8 +865,8 @@ namespace Vs.TimeAttendance
                 row2_CHXH.Font.Name = fontName;
                 row2_CHXH.Value2 = "CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM";
                 row2_CHXH.WrapText = false;
-                row2_CHXH.Cells.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
-                row2_CHXH.Cells.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
+                row2_CHXH.Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                row2_CHXH.Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
 
                 Range row3_DLTDHP = oSheet.get_Range("P3", "S3");
                 row3_DLTDHP.Merge();
@@ -939,8 +875,8 @@ namespace Vs.TimeAttendance
                 row3_DLTDHP.Font.Italic = true;
                 row3_DLTDHP.Value2 = "Độc lập - Tự do - Hạnh phúc";
                 row3_DLTDHP.WrapText = false;
-                row3_DLTDHP.Cells.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
-                row3_DLTDHP.Cells.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
+                row3_DLTDHP.Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                row3_DLTDHP.Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
 
                 Range row4_TieuDe_Format = oSheet.get_Range("A4", "S4"); //27 + 31
                 row4_TieuDe_Format.Font.Size = fontSizeNoiDung;
@@ -948,8 +884,8 @@ namespace Vs.TimeAttendance
                 row4_TieuDe_Format.Font.Bold = true;
                 row4_TieuDe_Format.WrapText = true;
                 row4_TieuDe_Format.NumberFormat = "@";
-                row4_TieuDe_Format.Cells.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
-                row4_TieuDe_Format.Cells.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
+                row4_TieuDe_Format.Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                row4_TieuDe_Format.Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
                 row4_TieuDe_Format.Font.Color = Color.FromArgb(255, 0, 0);
 
                 Range row5_TieuDe_Format = oSheet.get_Range("A5", "S5"); //27 + 31
@@ -958,8 +894,8 @@ namespace Vs.TimeAttendance
                 row5_TieuDe_Format.Font.Bold = true;
                 row5_TieuDe_Format.WrapText = true;
                 row5_TieuDe_Format.NumberFormat = "@";
-                row5_TieuDe_Format.Cells.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
-                row5_TieuDe_Format.Cells.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
+                row5_TieuDe_Format.Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                row5_TieuDe_Format.Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
 
 
                 //Range row7_groupXI_NGHIEP_Format = oSheet.get_Range("A7", lastColumn + "7"); //27 + 31
@@ -1192,8 +1128,8 @@ namespace Vs.TimeAttendance
                     row_20h_Format.Font.Color = Color.FromArgb(0, 0, 0);
                     row_20h_Format.Font.Name = fontName;
                     row_20h_Format.Font.Bold = true;
-                    row_20h_Format.Cells.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
-                    row_20h_Format.Cells.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
+                    row_20h_Format.Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                    row_20h_Format.Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
                     oSheet.Cells[rowBD, 17] = "20h";
 
 
@@ -1201,8 +1137,8 @@ namespace Vs.TimeAttendance
                     row_SangChieu_Format.Font.Name = fontName;
                     row_SangChieu_Format.Font.Color = Color.FromArgb(0, 0, 0);
                     row_SangChieu_Format.Font.Bold = true;
-                    row_SangChieu_Format.Cells.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
-                    row_SangChieu_Format.Cells.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
+                    row_SangChieu_Format.Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                    row_SangChieu_Format.Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
                     oSheet.Cells[rowBD, 19] = "Sáng-Chiều";
 
                     Range row_InDamDongDau_Format = oSheet.get_Range("A" + (rowBD + 1) + "".ToString(), lastColumn + "" + (rowBD + 1) + "".ToString()); //27 + 31
@@ -1329,8 +1265,8 @@ namespace Vs.TimeAttendance
 
                     Range row_KyTen_Col19 = oSheet.get_Range("S" + (rowBD + 13) + "".ToString()); //27 + 31
                     row_KyTen_Col19.Font.Name = fontName;
-                    row_KyTen_Col19.Cells.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
-                    row_KyTen_Col19.Cells.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
+                    row_KyTen_Col19.Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                    row_KyTen_Col19.Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
                     oSheet.Cells[rowBD + 13, 19] = "Ký tên:";
 
 
@@ -1341,7 +1277,7 @@ namespace Vs.TimeAttendance
                     rowCnt = 0;
                 }
 
-                Excel.Range formatRange;
+                Microsoft.Office.Interop.Excel.Range formatRange;
                 rowCnt = keepRowCnt + 2;
 
                 //dịnh dạng
@@ -1384,7 +1320,7 @@ namespace Vs.TimeAttendance
                 oXL.UserControl = true;
 
                 oWB.SaveAs(SaveExcelFile,
-                    AccessMode: Excel.XlSaveAsAccessMode.xlShared);
+                    AccessMode: Microsoft.Office.Interop.Excel.XlSaveAsAccessMode.xlShared);
             }
             catch (Exception ex)
             {
@@ -1424,14 +1360,15 @@ namespace Vs.TimeAttendance
                 {
                     return;
                 }
-                Excel.Application oXL;
-                Excel.Workbook oWB;
-                Excel.Worksheet oSheet;
-                oXL = new Excel.Application();
-                oXL.Visible = true;
+                this.Cursor = Cursors.WaitCursor;
+                Microsoft.Office.Interop.Excel.Application oXL;
+                Microsoft.Office.Interop.Excel.Workbook oWB;
+                Microsoft.Office.Interop.Excel.Worksheet oSheet;
+                oXL = new Microsoft.Office.Interop.Excel.Application();
+                oXL.Visible = false;
 
-                oWB = (Excel.Workbook)(oXL.Workbooks.Add(Missing.Value));
-                oSheet = (Excel.Worksheet)oWB.ActiveSheet;
+                oWB = (Microsoft.Office.Interop.Excel.Workbook)(oXL.Workbooks.Add(Missing.Value));
+                oSheet = (Microsoft.Office.Interop.Excel.Worksheet)oWB.ActiveSheet;
 
                 string fontName = "Times New Roman";
                 int fontSizeTieuDe = 12;
@@ -1459,8 +1396,8 @@ namespace Vs.TimeAttendance
                 row2_TieuDe.Value2 = "BÁO CÁO HÀNG NGÀY/ DAILY ATTENDANCE REPORT";
                 row2_TieuDe.WrapText = false;
                 row2_TieuDe.RowHeight = 33;
-                row2_TieuDe.Cells.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
-                row2_TieuDe.Cells.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
+                row2_TieuDe.Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                row2_TieuDe.Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
                 row2_TieuDe.Interior.Color = Color.FromArgb(248, 203, 173);
 
 
@@ -1469,11 +1406,11 @@ namespace Vs.TimeAttendance
                 row3_Date.Merge();
                 row3_Date.Font.Size = 12;
                 row3_Date.Font.Name = fontName;
-                row3_Date.Value2 = "Ngày/ Date:19-05-2022";
+                row3_Date.Value2 = "Ngày/ Date:" + LK_NgayXemBaoCao.Text + "";
                 row3_Date.WrapText = false;
                 row3_Date.RowHeight = 24;
-                row3_Date.Style.VerticalAlignment = Excel.XlHAlign.xlHAlignCenter;
-                row3_Date.Cells.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
+                row3_Date.Style.VerticalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                row3_Date.Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
 
 
                 Range row4 = oSheet.get_Range("B4");
@@ -1488,8 +1425,8 @@ namespace Vs.TimeAttendance
                 row5_TieuDe_Format.Font.Bold = true;
                 row5_TieuDe_Format.WrapText = true;
                 row5_TieuDe_Format.NumberFormat = "@";
-                row5_TieuDe_Format.Cells.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
-                row5_TieuDe_Format.Cells.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
+                row5_TieuDe_Format.Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                row5_TieuDe_Format.Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
 
 
                 Range row1_TieuDe_Stt = oSheet.get_Range("A1");
@@ -1666,22 +1603,22 @@ namespace Vs.TimeAttendance
                     oSheet.Cells[rowBD, 3] = "Sub-Total " + int_to_Roman(i + 1) + "";
                     oSheet.Cells[rowBD, 3].Font.Bold = true;
                     oSheet.Cells[rowBD, 3].Font.Size = fontSizeNoiDung;
-                    oSheet.Cells[rowBD, 3].Cells.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
-                    oSheet.Cells[rowBD, 3].Cells.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
+                    oSheet.Cells[rowBD, 3].Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                    oSheet.Cells[rowBD, 3].Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
                     oSheet.Cells[rowBD, 3].Font.Name = fontName;
 
                     oSheet.Cells[rowBD, 4] = "=SUM(" + CharacterIncrement(3) + "" + (rowBD + 1) + ":" + CharacterIncrement(3) + "" + (rowCnt + 1) + ")";
                     oSheet.Cells[rowBD, 4].Font.Bold = true;
                     oSheet.Cells[rowBD, 4].Font.Color = Color.FromArgb(255, 0, 0);
                     oSheet.Cells[rowBD, 4].Font.Size = fontSizeNoiDung;
-                    oSheet.Cells[rowBD, 4].Cells.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
-                    oSheet.Cells[rowBD, 4].Cells.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
+                    oSheet.Cells[rowBD, 4].Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                    oSheet.Cells[rowBD, 4].Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
                     oSheet.Cells[rowBD, 4].Font.Name = fontName;
                     sTenCotD = sTenCotD + CharacterIncrement(3) + rowBD + "+";
                     sRowXN = sRowXN + rowBD + ",";
 
                     //Fortmart cột D
-                    Excel.Range formatRange10;
+                    Microsoft.Office.Interop.Excel.Range formatRange10;
                     formatRange10 = oSheet.get_Range("D" + (rowBD + 1) + "", "D" + (rowCnt + 1));
                     formatRange10.Font.Bold = true;
 
@@ -1691,15 +1628,15 @@ namespace Vs.TimeAttendance
                     formatRange10.Font.Color = Color.FromArgb(255, 0, 0);
 
                     //Fortmart cột L
-                    Excel.Range formatRange11;
+                    Microsoft.Office.Interop.Excel.Range formatRange11;
                     formatRange11 = oSheet.get_Range("L" + (rowBD + 1) + "", "L" + (rowCnt + 1));
 
                     //Fortmart cột M
-                    Excel.Range formatRange12;
+                    Microsoft.Office.Interop.Excel.Range formatRange12;
                     formatRange12 = oSheet.get_Range("M" + (rowBD + 1) + "", "M" + (rowCnt + 1));
 
                     //Fortmart cột M
-                    Excel.Range formatRange13;
+                    Microsoft.Office.Interop.Excel.Range formatRange13;
                     formatRange13 = oSheet.get_Range("N" + (rowBD + 1) + "", "N" + (rowCnt + 1));
 
                     oSheet.Cells[rowBD, 5] = "=SUM(" + CharacterIncrement(4) + "" + (rowBD + 1) + ":" + CharacterIncrement(4) + "" + (rowCnt + 1) + ")";
@@ -1759,9 +1696,9 @@ namespace Vs.TimeAttendance
                     oSheet.get_Range("B" + (rowBD + 1) + "", lastColumn + (rowCnt + 1).ToString()).Value2 = rowData;
 
                     formatRange10.Value2 = "=D" + rowSum + "+F" + rowSum + "-E" + rowSum + "";
-                    formatRange11.Value2 = "=SUM(I"+rowSum+":K"+rowSum+")";
-                    formatRange12.Value2 = "=G"+ rowSum + "-L"+ rowSum + "-H"+ rowSum + "";
-                    formatRange13.Value2 = "=IFERROR(L"+rowSum+"/G"+rowSum+",0)";
+                    formatRange11.Value2 = "=SUM(I" + rowSum + ":K" + rowSum + ")";
+                    formatRange12.Value2 = "=G" + rowSum + "-L" + rowSum + "-H" + rowSum + "";
+                    formatRange13.Value2 = "=IFERROR(L" + rowSum + "/G" + rowSum + ",0)";
 
 
 
@@ -1782,22 +1719,39 @@ namespace Vs.TimeAttendance
                     rowCnt = 0;
                 }
                 rowCnt = keepRowCnt;
-                Excel.Range formatRange;
-                Excel.Range formatRange1;
-                Excel.Range formatRange3;
+                Microsoft.Office.Interop.Excel.Range formatRange; // range hien tai
+                Microsoft.Office.Interop.Excel.Range formatRange2; // range truoc
+                Microsoft.Office.Interop.Excel.Range formatRange1; // range ke tiep
+                Microsoft.Office.Interop.Excel.Range formatRange3;
                 string CurentColumn = string.Empty;
                 int rowbd;
+                int rowDup = 0; // row bat dau của dữ liệu duplicate
                 int colKT = dtBCThang.Columns.Count;
+                bool bChan = false;
                 for (rowbd = 8; rowbd <= rowCnt; rowbd++)
                 {
                     formatRange = oSheet.get_Range("B" + rowbd + "");
                     formatRange1 = oSheet.get_Range("B" + (rowbd + 1).ToString());
 
+                    if (formatRange.Value == null)
+                    {
+                        formatRange = oSheet.get_Range("B" + (rowDup).ToString() + "");
+                    }
                     if (formatRange.Value == formatRange1.Value)
                     {
-                        formatRange1.Value = null;
+                        if (bChan == false)
+                        {
+                            rowDup = rowbd;
+                        }
+                        bChan = true;
+                        formatRange.Value = null;
                         formatRange3 = oSheet.get_Range("B" + rowbd + "", "B" + (rowbd + 1).ToString());
                         formatRange3.Merge();
+                    }
+                    else
+                    {
+                        bChan = false;
+                        rowDup = 0;
                     }
                     //formatRange.NumberFormat = "#,##0.00;(#,##0.00); ; ";
                 }
@@ -1873,23 +1827,23 @@ namespace Vs.TimeAttendance
                 oSheet.Cells[rowCnt, 14].Font.Color = Color.FromArgb(255, 0, 0);
 
 
-                Excel.Range formatRange4;
+                Microsoft.Office.Interop.Excel.Range formatRange4;
                 formatRange4 = oSheet.get_Range("D6", "G" + (rowCnt - 1).ToString());
                 formatRange4.Interior.Color = Color.FromArgb(226, 239, 218);
 
-                Excel.Range formatRange5;
+                Microsoft.Office.Interop.Excel.Range formatRange5;
                 formatRange5 = oSheet.get_Range("H6", "L" + (rowCnt - 1).ToString());
                 formatRange5.Interior.Color = Color.FromArgb(255, 230, 153);
 
-                Excel.Range formatRange6;
+                Microsoft.Office.Interop.Excel.Range formatRange6;
                 formatRange6 = oSheet.get_Range("M6", "M" + (rowCnt - 1).ToString());
                 formatRange6.Interior.Color = Color.FromArgb(189, 215, 238);
 
-                Excel.Range formatRange7;
+                Microsoft.Office.Interop.Excel.Range formatRange7;
                 formatRange7 = oSheet.get_Range("N6", "N" + (rowCnt - 1).ToString());
                 formatRange7.Interior.Color = Color.FromArgb(255, 255, 0);
 
-                Excel.Range formatRange8;
+                Microsoft.Office.Interop.Excel.Range formatRange8;
                 sRowXN = sRowXN.Substring(0, sRowXN.Length - 1);
                 string[] strGetRowXN = sRowXN.Split(',');
                 for (int i = 0; i < slXN; i++)
@@ -1899,15 +1853,15 @@ namespace Vs.TimeAttendance
                 }
 
                 //Format All
-                Excel.Range formatRange9;
+                Microsoft.Office.Interop.Excel.Range formatRange9;
                 formatRange9 = oSheet.get_Range("B7", lastColumn + (rowCnt));
                 formatRange9.Font.Size = fontSizeNoiDung;
                 formatRange9.Font.Name = fontName;
                 formatRange9.WrapText = true;
 
                 formatRange9 = oSheet.get_Range("D7", lastColumn + (rowCnt));
-                formatRange9.Cells.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
-                formatRange9.Cells.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
+                formatRange9.Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                formatRange9.Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
                 //formatRange9.NumberFormat = "0";
                 //try { formatRange9.TextToColumns(Type.Missing, Excel.XlTextParsingType.xlDelimited, Excel.XlTextQualifier.xlTextQualifierDoubleQuote); } catch (Exception ex) { }
 
@@ -1918,12 +1872,12 @@ namespace Vs.TimeAttendance
                     formatRange = oSheet.get_Range(CurentColumn + "8", CurentColumn + rowCnt.ToString());
                     //formatRange.NumberFormat = "#,##0.00;(#,##0.00); ; ";
                     formatRange.NumberFormat = "0";
-                    try { formatRange.TextToColumns(Type.Missing, Excel.XlTextParsingType.xlDelimited, Excel.XlTextQualifier.xlTextQualifierDoubleQuote); } catch { }
+                    try { formatRange.TextToColumns(Type.Missing, Microsoft.Office.Interop.Excel.XlTextParsingType.xlDelimited, Microsoft.Office.Interop.Excel.XlTextQualifier.xlTextQualifierDoubleQuote); } catch { }
                 }
 
                 formatRange9 = oSheet.get_Range("N7", lastColumn + (rowCnt));
                 formatRange9.NumberFormat = @"0.0\%";
-                try { formatRange9.TextToColumns(Type.Missing, Excel.XlTextParsingType.xlDelimited, Excel.XlTextQualifier.xlTextQualifierDoubleQuote); } catch { }
+                try { formatRange9.TextToColumns(Type.Missing, Microsoft.Office.Interop.Excel.XlTextParsingType.xlDelimited, Microsoft.Office.Interop.Excel.XlTextQualifier.xlTextQualifierDoubleQuote); } catch { }
 
 
                 //Fortmart cột L
@@ -1945,12 +1899,13 @@ namespace Vs.TimeAttendance
                 //Excel.Range myRange = oSheet.get_Range("A7", lastColumn + (rowCnt - 1).ToString());
                 //myRange.AutoFilter("1", "<>", Microsoft.Office.Interop.Excel.XlAutoFilterOperator.xlOr, "", true);
 
-                
+                this.Cursor = Cursors.Default;
                 oXL.Visible = true;
                 oXL.UserControl = true;
 
                 oWB.SaveAs(SaveExcelFile,
-                    AccessMode: Excel.XlSaveAsAccessMode.xlShared);
+                    AccessMode: Microsoft.Office.Interop.Excel.XlSaveAsAccessMode.xlShared);
+
             }
             catch (Exception ex)
             {
@@ -2021,14 +1976,14 @@ namespace Vs.TimeAttendance
                 return "";
             }
         }
-        private string CellAddress(Excel.Worksheet sht, int row, int col)
+        private string CellAddress(Microsoft.Office.Interop.Excel.Worksheet sht, int row, int col)
         {
             return RangeAddress(sht.Cells[row, col]);
         }
-        private string RangeAddress(Excel.Range rng)
+        private string RangeAddress(Microsoft.Office.Interop.Excel.Range rng)
         {
             object missing = null;
-            return rng.get_AddressLocal(false, false, Excel.XlReferenceStyle.xlA1,
+            return rng.get_AddressLocal(false, false, Microsoft.Office.Interop.Excel.XlReferenceStyle.xlA1,
                    missing, missing);
         }
         public static string int_to_Roman(int n)

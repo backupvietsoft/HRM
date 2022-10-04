@@ -47,7 +47,6 @@ namespace Vs.HRM
                 enabel(true);
                 btnALL.Buttons[0].Properties.Visible = false;
                 btnALL.Buttons[1].Properties.Visible = false;
-
                 Commons.Modules.ObjSystems.ThayDoiNN(this, new List<LayoutControlGroup> { Root }, btnALL);
             }
             catch (Exception ex)
@@ -369,7 +368,6 @@ namespace Vs.HRM
             }
             catch { }
         }
-
         private void cboTo_EditValueChanged(object sender, EventArgs e)
         {
             LookUpEdit lookUp = sender as LookUpEdit;

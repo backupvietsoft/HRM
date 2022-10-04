@@ -12,6 +12,7 @@ using System.Windows.Forms;
 using System.Reflection;
 using System.Linq;
 using System.Drawing;
+using System.Globalization;
 
 namespace Vs.HRM
 {
@@ -28,8 +29,78 @@ namespace Vs.HRM
             InitializeComponent();
             Commons.Modules.ObjSystems.ThayDoiNN(this);
 
+            //Danh cho NB
+            this.chkInAll.Visible = false;
+            this.lblInTatCa.Visible = false;
+
         }
 
+        public void SaveDinhDangBaoCaoCongNhan()
+        {
+            grvMauBC.CloseEditor();
+            grvMauBC.UpdateCurrentRow();
+            string sResult = "";
+            Int64 iID = -1;
+            if (sNameButton == "them")
+            {
+
+                //Load worksheet
+                XtraInputBoxArgs args = new XtraInputBoxArgs();
+                // set required Input Box options
+                args.Caption = "Nhập tên mẫu";
+                args.Prompt = "Nhập tên mẫu";
+                args.DefaultButtonIndex = 0;
+
+                // initialize a DateEdit editor with custom settings
+                TextEdit editor = new TextEdit();
+                //editor.Properties.Items.AddRange(wSheet);
+                //editor.EditValue = wSheet[0].ToString();
+
+                args.Editor = editor;
+                // a default DateEdit value
+                args.DefaultResponse = "";
+                // display an Input Box with the custom editor
+                var result = XtraInputBox.Show(args);
+                if (result == null || result.ToString() == "") return;
+                sResult = result.ToString();
+                string strSQL = "SELECT TOP 1 * FROM MAU_BC_NHAN_SU WHERE TEN_MAU = N'" + sResult.ToString().Trim() + "'";
+                int i = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, strSQL));
+                if (i >= 1)
+                {
+                    XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgTenMauDaTonTai"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+            }
+            else
+            {
+                sResult = grvMauBC.GetFocusedRowCellValue("TEN_MAU").ToString();
+                iID = Convert.ToInt64(grvMauBC.GetFocusedRowCellValue("ID_TPL"));
+            }
+
+            DataTable dt = new DataTable();
+            dt = (DataTable)grdChonCot.DataSource;
+            if (dt.AsEnumerable().Where(x => x["CHON"].ToString() == "1").Count() == 0)
+            {
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgBanChuaChonCotCanLuuDinhDang"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            dt = dt.AsEnumerable().Where(x => x["CHON"].ToString() == "1").CopyToDataTable();
+            string sBT = "BTDinhDang" + Commons.Modules.iIDUser;
+            Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBT, dt, "");
+            try
+            {
+                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spSaveDinhDangBaoCaoCongNhan", Commons.Modules.UserName, Commons.Modules.TypeLanguage, sResult, sBT, iID);
+                if (sNameButton == "them") grdMauBC.Visible = true;
+                iID_Temp = iID;
+                LoadMauBaoCaoCN();
+                EnabledButton(true);
+                Commons.Modules.ObjSystems.XoaTable(sBT);
+            }
+            catch (Exception ex)
+            {
+                Commons.Modules.ObjSystems.XoaTable(sBT);
+            }
+        }
         private void windowsUIButton_ButtonClick(object sender, ButtonEventArgs e)
         {
             WindowsUIButton btn = e.Button as WindowsUIButton;
@@ -94,69 +165,7 @@ namespace Vs.HRM
                     }
                 case "luu":
                     {
-                        grvMauBC.CloseEditor();
-                        grvMauBC.UpdateCurrentRow();
-                        string sResult = "";
-                        Int64 iID = -1;
-                        if (sNameButton == "them")
-                        {
-
-                            //Load worksheet
-                            XtraInputBoxArgs args = new XtraInputBoxArgs();
-                            // set required Input Box options
-                            args.Caption = "Nhập tên mẫu";
-                            args.Prompt = "Nhập tên mẫu";
-                            args.DefaultButtonIndex = 0;
-
-                            // initialize a DateEdit editor with custom settings
-                            TextEdit editor = new TextEdit();
-                            //editor.Properties.Items.AddRange(wSheet);
-                            //editor.EditValue = wSheet[0].ToString();
-
-                            args.Editor = editor;
-                            // a default DateEdit value
-                            args.DefaultResponse = "";
-                            // display an Input Box with the custom editor
-                            var result = XtraInputBox.Show(args);
-                            if (result == null || result.ToString() == "") return;
-                            sResult = result.ToString();
-                            string strSQL = "SELECT TOP 1 * FROM MAU_BC_NHAN_SU WHERE TEN_MAU = N'" + sResult.ToString().Trim() + "'";
-                            int i = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, strSQL));
-                            if (i >= 1)
-                            {
-                                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgTenMauDaTonTai"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                return;
-                            }
-                        }
-                        else
-                        {
-                            sResult = grvMauBC.GetFocusedRowCellValue("TEN_MAU").ToString();
-                            iID = Convert.ToInt64(grvMauBC.GetFocusedRowCellValue("ID_TPL"));
-                        }
-
-                        DataTable dt = new DataTable();
-                        dt = (DataTable)grdChonCot.DataSource;
-                        if (dt.AsEnumerable().Where(x => x["CHON"].ToString() == "1").Count() == 0)
-                        {
-                            XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgBanChuaChonCotCanLuuDinhDang"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-                        dt = dt.AsEnumerable().Where(x => x["CHON"].ToString() == "1").CopyToDataTable();
-                        string sBT = "BTDinhDang" + Commons.Modules.iIDUser;
-                        Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBT, dt, "");
-                        try
-                        {
-                            SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spSaveDinhDangBaoCaoCongNhan", Commons.Modules.UserName, Commons.Modules.TypeLanguage, sResult, sBT, iID);
-                            if (sNameButton == "them") grdMauBC.Visible = true;
-                            iID_Temp = iID;
-                            LoadMauBaoCaoCN();
-                            EnabledButton(true);
-                            Commons.Modules.ObjSystems.XoaTable(sBT);
-                        }
-                        catch (Exception ex)
-                        {
-                            Commons.Modules.ObjSystems.XoaTable(sBT);
-                        }
+                        SaveDinhDangBaoCaoCongNhan();
                         break;
                     }
                 default:
@@ -192,10 +201,10 @@ namespace Vs.HRM
             Commons.OSystems.SetDateEditFormat(NgayIn);
             LoadGrdChonCot();
             LoadMauBaoCaoCN();
-            dTuNgay.EditValue = Convert.ToDateTime(("01/" + DateTime.Today.Month + "/" + DateTime.Today.Year));
-            dDenNgay.EditValue = Convert.ToDateTime(("01/" + DateTime.Today.Month + "/" + DateTime.Today.Year)).AddMonths(1).AddDays(-1);
-            dTuNgayNS.EditValue = Convert.ToDateTime(("01/" + DateTime.Today.Month + "/" + DateTime.Today.Year));
-            dDenNgayNS.EditValue = Convert.ToDateTime(("01/" + DateTime.Today.Month + "/" + DateTime.Today.Year)).AddMonths(1).AddDays(-1);
+            dTuNgay.EditValue = Convert.ToDateTime(("01/" + DateTime.Today.Month + "/" + DateTime.Today.Year), new CultureInfo("de-DE"));
+            dDenNgay.EditValue = Convert.ToDateTime(("01/" + DateTime.Today.Month + "/" + DateTime.Today.Year), new CultureInfo("de-DE")).AddMonths(1).AddDays(-1);
+            dTuNgayNS.EditValue = Convert.ToDateTime(("01/" + DateTime.Today.Month + "/" + DateTime.Today.Year), new CultureInfo("de-DE"));
+            dDenNgayNS.EditValue = Convert.ToDateTime(("01/" + DateTime.Today.Month + "/" + DateTime.Today.Year), new CultureInfo("de-DE")).AddMonths(1).AddDays(-1);
             NgayIn.EditValue = DateTime.Today;
             dTuNgayNS.Enabled = false;
             dDenNgayNS.Enabled = false;
@@ -457,10 +466,17 @@ namespace Vs.HRM
                 int row_dl = 4;
                 for (col = 0; col < dtBCThang.Columns.Count - 1; col++)
                 {
-                    //oSheet.Cells[row_dl, col + 1] =  dtBCThang.Columns[col].ToString();
-                    //oSheet.Cells[row_dl, col + 1] = tableHRow.Cells[col].Text;
-                    oSheet.Cells[row_dl, col + 1] = dt.Rows[col]["DIEN_GIAI"];
-                    oSheet.Cells[row_dl, col + 1].ColumnWidth = dt.Rows[col]["CHIEU_RONG"];
+                    try
+                    {
+                        //oSheet.Cells[row_dl, col + 1] =  dtBCThang.Columns[col].ToString();
+                        //oSheet.Cells[row_dl, col + 1] = tableHRow.Cells[col].Text;
+                        oSheet.Cells[row_dl, col + 1] = dt.Rows[col]["DIEN_GIAI"];
+                        oSheet.Cells[row_dl, col + 1].ColumnWidth = dt.Rows[col]["CHIEU_RONG"];
+                    }
+                    catch(Exception ex)
+                    {
+                        throw ex;
+                    }
                 }
 
                 int rowCnt = 0;
@@ -609,8 +625,16 @@ namespace Vs.HRM
                 formatRange.Font.Size = fontSizeNoiDung;
                 BorderAround(oSheet.get_Range("A4", lastColumn + (rowCnt + 1).ToString()));
 
-                Excel.Range myRange = oSheet.get_Range("A4", lastColumn + (rowCnt - 1).ToString());
-                myRange.AutoFilter("1", "<>", Excel.XlAutoFilterOperator.xlOr, "", true);
+                if(dtBCThang.Rows.Count == 0)
+                {
+                    Excel.Range myRange = oSheet.get_Range("A4", lastColumn + "4");
+                    myRange.AutoFilter("1", "<>", Excel.XlAutoFilterOperator.xlOr, "", true);
+                }
+                else
+                {
+                    Excel.Range myRange = oSheet.get_Range("A4", lastColumn + (rowCnt - 1).ToString());
+                    myRange.AutoFilter("1", "<>", Excel.XlAutoFilterOperator.xlOr, "", true);
+                }
 
                 oXL.Visible = true;
                 oXL.UserControl = true;
@@ -1487,5 +1511,72 @@ namespace Vs.HRM
             }
         }
         #endregion
+
+        private void grvMauBC_DoubleClick(object sender, EventArgs e)
+        {
+            try
+            {
+                LoadGrdChonCot();
+                DataTable dt = new DataTable();
+                DataColumn dtC;
+                DataRow dtR;
+                dtC = new DataColumn();
+                dtC.DataType = typeof(string);
+                dtC.ColumnName = "TEN_FIELD";
+                dt.Columns.Add(dtC);
+
+                dtC = new DataColumn();
+                dtC.DataType = typeof(int);
+                dtC.ColumnName = "CHIEU_RONG";
+                dt.Columns.Add(dtC);
+
+                dtC = new DataColumn();
+                dtC.DataType = typeof(string);
+                dtC.ColumnName = "DINH_DANG";
+                dt.Columns.Add(dtC);
+
+                dtC = new DataColumn();
+                dtC.DataType = typeof(int);
+                dtC.ColumnName = "STT";
+                dt.Columns.Add(dtC);
+
+                string sDinhDang = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT TEN_FIELD FROM MAU_BC_NHAN_SU WHERE ID_TPL = " + Convert.ToInt32(grvMauBC.GetFocusedRowCellValue("ID_TPL")) + "").ToString();
+                string[] strDS = sDinhDang.Split('+');
+                for (int i = 0; i < strDS.Count(); i++)
+                {
+                    string[] strCT = strDS[i].Split(';');
+                    dtR = dt.NewRow();
+                    dtR["TEN_FIELD"] = strCT[0];
+                    dtR["CHIEU_RONG"] = strCT[1];
+                    dtR["DINH_DANG"] = strCT[2];
+                    dtR["STT"] = strCT[3];
+                    dt.Rows.Add(dtR);
+                }
+                DataTable dt1 = new DataTable();
+                dt1 = (DataTable)grdChonCot.DataSource;
+                //dt = dt.AsEnumerable().Where(x => x["CHON"].ToString() == "1").CopyToDataTable();
+                string sBT_Focus = "BTFocus" + Commons.Modules.iIDUser; // Bảng tạm đã có trong dữ liệu
+                Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBT_Focus, dt, "");
+                string sBT = "BTChonCot" + Commons.Modules.iIDUser;
+                Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBT, dt1, "");
+                try
+                {
+                    DataTable dtTemp = new DataTable();
+                    dtTemp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spUpdateBangTempMauDSCN", Commons.Modules.UserName, Commons.Modules.TypeLanguage, sBT_Focus, sBT));
+                    grdChonCot.DataSource = dtTemp;
+                    Commons.Modules.ObjSystems.XoaTable(sBT);
+                    Commons.Modules.ObjSystems.XoaTable(sBT_Focus);
+                }
+                catch (Exception ex)
+                {
+                    Commons.Modules.ObjSystems.XoaTable(sBT);
+                    Commons.Modules.ObjSystems.XoaTable(sBT_Focus);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

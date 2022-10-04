@@ -6,7 +6,7 @@ using System;
 using System.Data;
 using System.Linq;
 using Vs.Report;
-using Excel = Microsoft.Office.Interop.Excel;
+using Excell = Microsoft.Office.Interop.Excel;
 using Microsoft.Office.Interop.Excel;
 using DataTable = System.Data.DataTable;
 using System.Drawing;
@@ -365,15 +365,15 @@ namespace Vs.TimeAttendance
                 dtBCPhep = new DataTable();
                 dtBCPhep = ds.Tables[0].Copy();
 
-                Excel.Application oXL;
-                Excel._Workbook oWB;
-                Excel._Worksheet oSheet;
+                Excell.Application oXL;
+                Excell._Workbook oWB;
+                Excell._Worksheet oSheet;
 
-                oXL = new Excel.Application();
+                oXL = new Excell.Application();
                 oXL.Visible = true;
 
-                oWB = (Excel._Workbook)(oXL.Workbooks.Add(Missing.Value));
-                oSheet = (Excel._Worksheet)oWB.ActiveSheet;
+                oWB = (Excell._Workbook)(oXL.Workbooks.Add(Missing.Value));
+                oSheet = (Excell._Worksheet)oWB.ActiveSheet;
 
                 string fontName = "Times New Roman";
                 int fontSizeTieuDe = 16;
@@ -390,8 +390,8 @@ namespace Vs.TimeAttendance
                 row2_TieuDe_BaoCao0.Font.Size = fontSizeTieuDe;
                 row2_TieuDe_BaoCao0.Font.Name = fontName;
                 row2_TieuDe_BaoCao0.Font.Bold = true;
-                row2_TieuDe_BaoCao0.Cells.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
-                row2_TieuDe_BaoCao0.Cells.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
+                row2_TieuDe_BaoCao0.Cells.HorizontalAlignment = Excell.XlHAlign.xlHAlignCenter;
+                row2_TieuDe_BaoCao0.Cells.VerticalAlignment = Excell.XlVAlign.xlVAlignCenter;
                 row2_TieuDe_BaoCao0.Value2 = "THEO DÕI PHÉP NĂM " + lk_Nam.Text;
 
                 Range row4_TieuDe_Format = oSheet.get_Range("A4", "Z4");
@@ -399,13 +399,13 @@ namespace Vs.TimeAttendance
                 row4_TieuDe_Format.Font.Name = fontName;
                 row4_TieuDe_Format.Font.Bold = true;
                 row4_TieuDe_Format.WrapText = true;
-                row4_TieuDe_Format.Cells.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
-                row4_TieuDe_Format.Cells.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
+                row4_TieuDe_Format.Cells.HorizontalAlignment = Excell.XlHAlign.xlHAlignCenter;
+                row4_TieuDe_Format.Cells.VerticalAlignment = Excell.XlVAlign.xlVAlignCenter;
                 row4_TieuDe_Format.Interior.Color = Color.Yellow;
                 row4_TieuDe_Format.WrapText = true;
 
                 oSheet.get_Range("A4").RowHeight = 45;
-                Excel.Range row4_A = oSheet.get_Range("A4");
+                Excell.Range row4_A = oSheet.get_Range("A4");
                 row4_A.ColumnWidth = 5;
                 row4_A.Value2 = "STT";
 
@@ -495,42 +495,42 @@ namespace Vs.TimeAttendance
                 ////Kẻ khung toàn bộ
                 BorderAround(oSheet.get_Range("A4", "Z" + rowCnt.ToString()));
 
-                Excel.Range formatRange;
+                Excell.Range formatRange;
                 formatRange = oSheet.get_Range("A5", "A" + rowCnt.ToString());
                 formatRange.NumberFormat = "#,##0";
-                formatRange.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
-                formatRange.TextToColumns(Type.Missing, Excel.XlTextParsingType.xlDelimited, Excel.XlTextQualifier.xlTextQualifierDoubleQuote);
+                formatRange.HorizontalAlignment = Excell.XlHAlign.xlHAlignCenter;
+                formatRange.TextToColumns(Type.Missing, Excell.XlTextParsingType.xlDelimited, Excell.XlTextQualifier.xlTextQualifierDoubleQuote);
 
                 formatRange = oSheet.get_Range("G5", "G" + rowCnt.ToString());
                 formatRange.NumberFormat = "#,##0;(#,##0); ; ";
-                formatRange.TextToColumns(Type.Missing, Excel.XlTextParsingType.xlDelimited, Excel.XlTextQualifier.xlTextQualifierDoubleQuote);
+                formatRange.TextToColumns(Type.Missing, Excell.XlTextParsingType.xlDelimited, Excell.XlTextQualifier.xlTextQualifierDoubleQuote);
 
                 formatRange = oSheet.get_Range("H5", "H" + rowCnt.ToString());
                 formatRange.NumberFormat = "dd/MM/yyyy";
-                formatRange.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
-                formatRange.TextToColumns(Type.Missing, Excel.XlTextParsingType.xlDelimited, Excel.XlTextQualifier.xlTextQualifierDoubleQuote);
+                formatRange.HorizontalAlignment = Excell.XlHAlign.xlHAlignCenter;
+                formatRange.TextToColumns(Type.Missing, Excell.XlTextParsingType.xlDelimited, Excell.XlTextQualifier.xlTextQualifierDoubleQuote);
 
                 formatRange = oSheet.get_Range("I5", "I" + rowCnt.ToString());
                 formatRange.NumberFormat = "#,##0";
-                formatRange.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
-                formatRange.TextToColumns(Type.Missing, Excel.XlTextParsingType.xlDelimited, Excel.XlTextQualifier.xlTextQualifierDoubleQuote);
+                formatRange.HorizontalAlignment = Excell.XlHAlign.xlHAlignCenter;
+                formatRange.TextToColumns(Type.Missing, Excell.XlTextParsingType.xlDelimited, Excell.XlTextQualifier.xlTextQualifierDoubleQuote);
 
                 formatRange = oSheet.get_Range("J5", "J" + rowCnt.ToString());
                 formatRange.NumberFormat = "#,##0";
-                formatRange.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
-                formatRange.TextToColumns(Type.Missing, Excel.XlTextParsingType.xlDelimited, Excel.XlTextQualifier.xlTextQualifierDoubleQuote);
+                formatRange.HorizontalAlignment = Excell.XlHAlign.xlHAlignCenter;
+                formatRange.TextToColumns(Type.Missing, Excell.XlTextParsingType.xlDelimited, Excell.XlTextQualifier.xlTextQualifierDoubleQuote);
 
                 for (col = 10; col < dtBCPhep.Columns.Count - 1; col++)
                 {
                     currentColumn = CharacterIncrement(col);
                     formatRange = oSheet.get_Range(currentColumn + "5", currentColumn + rowCnt.ToString());
                     formatRange.NumberFormat = "#,##0.0;(#,##0.0); ; ";
-                    formatRange.TextToColumns(Type.Missing, Excel.XlTextParsingType.xlDelimited, Excel.XlTextQualifier.xlTextQualifierDoubleQuote);
+                    formatRange.TextToColumns(Type.Missing, Excell.XlTextParsingType.xlDelimited, Excell.XlTextQualifier.xlTextQualifierDoubleQuote);
                 }
 
                 formatRange = oSheet.get_Range("Y5", "Y" + rowCnt.ToString());
                 formatRange.NumberFormat = "#,##0;(#,##0); ; ";
-                formatRange.TextToColumns(Type.Missing, Excel.XlTextParsingType.xlDelimited, Excel.XlTextQualifier.xlTextQualifierDoubleQuote);
+                formatRange.TextToColumns(Type.Missing, Excell.XlTextParsingType.xlDelimited, Excell.XlTextQualifier.xlTextQualifierDoubleQuote);
 
 
             }
@@ -577,15 +577,15 @@ namespace Vs.TimeAttendance
                     return;
                 }
 
-                Excel.Application oXL;
-                Excel._Workbook oWB;
-                Excel._Worksheet oSheet;
+                Excell.Application oXL;
+                Excell._Workbook oWB;
+                Excell._Worksheet oSheet;
 
-                oXL = new Excel.Application();
+                oXL = new Excell.Application();
                 oXL.Visible = false;
 
-                oWB = (Excel._Workbook)(oXL.Workbooks.Add(Missing.Value));
-                oSheet = (Excel._Worksheet)oWB.ActiveSheet;
+                oWB = (Excell._Workbook)(oXL.Workbooks.Add(Missing.Value));
+                oSheet = (Excell._Worksheet)oWB.ActiveSheet;
 
                 string fontName = "Times New Roman";
                 int fontSizeTieuDe = 16;
@@ -602,8 +602,8 @@ namespace Vs.TimeAttendance
                 row2_TieuDe_BaoCao0.Font.Size = fontSizeTieuDe;
                 row2_TieuDe_BaoCao0.Font.Name = fontName;
                 row2_TieuDe_BaoCao0.Font.Bold = true;
-                row2_TieuDe_BaoCao0.Cells.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
-                row2_TieuDe_BaoCao0.Cells.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
+                row2_TieuDe_BaoCao0.Cells.HorizontalAlignment = Excell.XlHAlign.xlHAlignCenter;
+                row2_TieuDe_BaoCao0.Cells.VerticalAlignment = Excell.XlVAlign.xlVAlignCenter;
                 row2_TieuDe_BaoCao0.Value2 = "THEO DÕI PHÉP NĂM " + lk_Nam.Text;
 
                 Range row4_TieuDe_Format = oSheet.get_Range("A4", "W5");
@@ -611,13 +611,13 @@ namespace Vs.TimeAttendance
                 row4_TieuDe_Format.Font.Name = fontName;
                 row4_TieuDe_Format.Font.Bold = true;
                 row4_TieuDe_Format.WrapText = true;
-                row4_TieuDe_Format.Cells.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
-                row4_TieuDe_Format.Cells.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
+                row4_TieuDe_Format.Cells.HorizontalAlignment = Excell.XlHAlign.xlHAlignCenter;
+                row4_TieuDe_Format.Cells.VerticalAlignment = Excell.XlVAlign.xlVAlignCenter;
                 row4_TieuDe_Format.Interior.Color = Color.Yellow;
                 row4_TieuDe_Format.WrapText = true;
 
                 oSheet.get_Range("A4").RowHeight = 45;
-                Excel.Range row4_A = oSheet.get_Range("A4", "A5");
+                Excell.Range row4_A = oSheet.get_Range("A4", "A5");
                 row4_A.ColumnWidth = 5;
                 row4_A.Merge();
                 row4_A.Value2 = "STT";
@@ -723,10 +723,9 @@ namespace Vs.TimeAttendance
 
                 //DataRow[] dr = dtBCPhep.Select();
                 //string[,] rowData = new string[dr.Length, dtBCPhep.Columns.Count];
-
                 //int rowCnt = 0;
                 int rowCntY = 6; //Dùng để tính tổng cột Y
-                Excel.Range formatRange1;
+                Excell.Range formatRange1;
                 //foreach (DataRow row in dr)
                 //{
                 //    for (col = 0; col < dtBCPhep.Columns.Count -2; col++)
@@ -742,7 +741,7 @@ namespace Vs.TimeAttendance
                 //rowCnt = rowCnt + 4;
                 //oSheet.get_Range("A6", "W" + rowCnt.ToString()).Value2 = rowData;
 
-                Microsoft.Office.Interop.Excel.Range formatRange;
+                Excell.Range formatRange;
                 int rowCnt = 0;
                 int keepRowCnt = 0; // Biến này dùng để lưu lại giá trị của biến rowCnt
                 int dr_Cu = 0; // Count số nhân viên của xí nghiệp đổ dữ liệu trước
@@ -808,45 +807,45 @@ namespace Vs.TimeAttendance
 
                     formatRange = oSheet.get_Range("A" + (rowBD + 1).ToString() + "", "A" + (rowCnt + 1).ToString());
                     formatRange.NumberFormat = "#,##0";
-                    formatRange.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
-                    formatRange.TextToColumns(Type.Missing, Excel.XlTextParsingType.xlDelimited, Excel.XlTextQualifier.xlTextQualifierDoubleQuote);
+                    formatRange.HorizontalAlignment = Excell.XlHAlign.xlHAlignCenter;
+                    formatRange.TextToColumns(Type.Missing, Excell.XlTextParsingType.xlDelimited, Excell.XlTextQualifier.xlTextQualifierDoubleQuote);
 
                     formatRange = oSheet.get_Range("B" + (rowBD + 1).ToString() + "", "B" + (rowCnt + 1).ToString());
                     formatRange.NumberFormat = "@";
-                    formatRange.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
-                    formatRange.TextToColumns(Type.Missing, Excel.XlTextParsingType.xlDelimited, Excel.XlTextQualifier.xlTextQualifierDoubleQuote);
+                    formatRange.HorizontalAlignment = Excell.XlHAlign.xlHAlignCenter;
+                    formatRange.TextToColumns(Type.Missing, Excell.XlTextParsingType.xlDelimited, Excell.XlTextQualifier.xlTextQualifierDoubleQuote);
 
                     formatRange = oSheet.get_Range("E" + (rowBD + 1).ToString() + "", "E" + (rowCnt + 1).ToString());
                     formatRange.NumberFormat = "#,##0";
-                    formatRange.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
-                    formatRange.TextToColumns(Type.Missing, Excel.XlTextParsingType.xlDelimited, Excel.XlTextQualifier.xlTextQualifierDoubleQuote);
+                    formatRange.HorizontalAlignment = Excell.XlHAlign.xlHAlignCenter;
+                    formatRange.TextToColumns(Type.Missing, Excell.XlTextParsingType.xlDelimited, Excell.XlTextQualifier.xlTextQualifierDoubleQuote);
 
                     formatRange = oSheet.get_Range("F" + (rowBD + 1).ToString() + "", "F" + (rowCnt + 1).ToString());
                     formatRange.NumberFormat = "#,##0";
-                    formatRange.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
-                    formatRange.TextToColumns(Type.Missing, Excel.XlTextParsingType.xlDelimited, Excel.XlTextQualifier.xlTextQualifierDoubleQuote);
+                    formatRange.HorizontalAlignment = Excell.XlHAlign.xlHAlignCenter;
+                    formatRange.TextToColumns(Type.Missing, Excell.XlTextParsingType.xlDelimited, Excell.XlTextQualifier.xlTextQualifierDoubleQuote);
 
                     formatRange = oSheet.get_Range("G" + (rowBD + 1).ToString() + "", "G" + (rowCnt + 1).ToString());
                     formatRange.NumberFormat = "#,##0";
-                    formatRange.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
-                    formatRange.TextToColumns(Type.Missing, Excel.XlTextParsingType.xlDelimited, Excel.XlTextQualifier.xlTextQualifierDoubleQuote);
+                    formatRange.HorizontalAlignment = Excell.XlHAlign.xlHAlignCenter;
+                    formatRange.TextToColumns(Type.Missing, Excell.XlTextParsingType.xlDelimited, Excell.XlTextQualifier.xlTextQualifierDoubleQuote);
 
                     formatRange = oSheet.get_Range("H" + (rowBD + 1).ToString() + "", "H" + (rowCnt + 1).ToString());
                     formatRange.NumberFormat = "#,##0";
-                    formatRange.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
-                    formatRange.TextToColumns(Type.Missing, Excel.XlTextParsingType.xlDelimited, Excel.XlTextQualifier.xlTextQualifierDoubleQuote);
+                    formatRange.HorizontalAlignment = Excell.XlHAlign.xlHAlignCenter;
+                    formatRange.TextToColumns(Type.Missing, Excell.XlTextParsingType.xlDelimited, Excell.XlTextQualifier.xlTextQualifierDoubleQuote);
 
                     for (col = 8; col < dtBCPhep.Columns.Count - 2; col++)
                     {
                         currentColumn = CharacterIncrement(col);
                         formatRange = oSheet.get_Range(currentColumn + "" + (rowBD + 1).ToString() + "", currentColumn + (rowCnt + 1).ToString());
                         formatRange.NumberFormat = "#,##0.0;(#,##0.0); ; ";
-                        try { formatRange.TextToColumns(Type.Missing, Excel.XlTextParsingType.xlDelimited, Excel.XlTextQualifier.xlTextQualifierDoubleQuote); } catch { }
+                        try { formatRange.TextToColumns(Type.Missing, Excell.XlTextParsingType.xlDelimited, Excell.XlTextQualifier.xlTextQualifierDoubleQuote); } catch { }
                     }
 
                     formatRange = oSheet.get_Range("U" + (rowBD + 1).ToString() + "", "W" + (rowCnt + 1).ToString());
                     formatRange.NumberFormat = "#,##0.0";
-                    try { formatRange.TextToColumns(Type.Missing, Excel.XlTextParsingType.xlDelimited, Excel.XlTextQualifier.xlTextQualifierDoubleQuote); } catch { }
+                    try { formatRange.TextToColumns(Type.Missing, Excell.XlTextParsingType.xlDelimited, Excell.XlTextQualifier.xlTextQualifierDoubleQuote); } catch { }
 
                     //// Dữ liệu cột tổng tăng
                     //for (int k = rowBD + 1; k <= rowCnt + 1; k++)
@@ -878,10 +877,10 @@ namespace Vs.TimeAttendance
                 oXL.Visible = true;
                 oXL.UserControl = true;
                 oWB.SaveAs(SaveExcelFile,
-                    AccessMode: Microsoft.Office.Interop.Excel.XlSaveAsAccessMode.xlExclusive);
+                    AccessMode: Excell.XlSaveAsAccessMode.xlExclusive);
 
             }
-            catch (Exception ex)
+            catch
             {
 
             }

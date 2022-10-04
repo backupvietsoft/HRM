@@ -8,7 +8,7 @@ using System.Data;
 using System.Linq;
 using Vs.Payroll;
 using Vs.Report;
-using Excel = Microsoft.Office.Interop.Excel;
+using Excell = Microsoft.Office.Interop.Excel;
 using Microsoft.Office.Interop.Excel;
 using System.Windows.Forms;
 using DataTable = System.Data.DataTable;
@@ -81,8 +81,8 @@ namespace Vs.TimeAttendance
                                                 break;
                                             }
                                         default:
-                                            DanhGiaTinhTrangThuViec_DM();
-                                            //BangTHChamCongNam_MT();
+                                            //DanhGiaTinhTrangThuViec_DM();
+                                            BangTHChamCongNam_MT();
                                             break;
                                     }
                                     break;
@@ -687,18 +687,18 @@ namespace Vs.TimeAttendance
                 {
                     return;
                 }
-                Excel.Application oXL;
-                Excel.Workbook oWB;
-                Excel.Worksheet oSheet;
-                oXL = new Excel.Application();
+                Excell.Application oXL;
+                Excell.Workbook oWB;
+                Excell.Worksheet oSheet;
+                oXL = new Excell.Application();
                 oXL.Visible = true;
 
 
                 //OfficeOpenXml.ExcelPackage ExcelPkg = new OfficeOpenXml.ExcelPackage();
                 //OfficeOpenXml.ExcelWorksheet wsSheet1 = ExcelPkg.Workbook.Worksheets.Add("Sheet1");
 
-                oWB = (Excel.Workbook)(oXL.Workbooks.Add(Missing.Value));
-                oSheet = (Excel.Worksheet)oWB.ActiveSheet;
+                oWB = (Excell.Workbook)(oXL.Workbooks.Add(Missing.Value));
+                oSheet = (Excell.Worksheet)oWB.ActiveSheet;
 
                 string fontName = "Times New Roman";
                 int fontSizeTieuDe = 10;
@@ -712,8 +712,8 @@ namespace Vs.TimeAttendance
                 row2_TieuDe_BaoCao.Font.Size = 16;
                 row2_TieuDe_BaoCao.Font.Name = fontName;
                 row2_TieuDe_BaoCao.Font.FontStyle = "Bold";
-                row2_TieuDe_BaoCao.Cells.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
-                row2_TieuDe_BaoCao.Cells.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
+                row2_TieuDe_BaoCao.Cells.HorizontalAlignment = Excell.XlHAlign.xlHAlignCenter;
+                row2_TieuDe_BaoCao.Cells.VerticalAlignment = Excell.XlVAlign.xlVAlignCenter;
                 row2_TieuDe_BaoCao.RowHeight = 20;
                 row2_TieuDe_BaoCao.Value2 = "BẢNG CHẤM CÔNG THÁNG NGOÀI GIỜ NĂM " + Convert.ToDateTime(datNam.EditValue).Year + "";
 
@@ -724,8 +724,8 @@ namespace Vs.TimeAttendance
                 row4_TieuDe_Format.Font.Bold = true;
                 row4_TieuDe_Format.WrapText = true;
                 row4_TieuDe_Format.NumberFormat = "@";
-                row4_TieuDe_Format.Cells.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
-                row4_TieuDe_Format.Cells.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
+                row4_TieuDe_Format.Cells.HorizontalAlignment = Excell.XlHAlign.xlHAlignCenter;
+                row4_TieuDe_Format.Cells.VerticalAlignment = Excell.XlVAlign.xlVAlignCenter;
                 row4_TieuDe_Format.Interior.Color = Color.FromArgb(255, 255, 0);
 
                 Range row4_TieuDe_TTNV = oSheet.get_Range("A4", "G4");
@@ -858,11 +858,11 @@ namespace Vs.TimeAttendance
                 }
                 rowCnt = rowCnt + 6;
                 oSheet.get_Range("A7", lastColumn + rowCnt.ToString()).Value2 = rowData;
-                Excel.Range formatRange;
+                Excell.Range formatRange;
                 //rowCnt = keepRowCnt + 2;
 
                 ////dịnh dạng
-                ////Commons.Modules.MExcel.ThemDong(oSheet, Microsoft.Office.Interop.Excel.XlInsertShiftDirection.xlShiftDown, 1, 7);
+                ////Commons.Modules.MExcel.ThemDong(oSheet, Microsoft.Office.Interop.Excell.XlInsertShiftDirection.xlShiftDown, 1, 7);
 
                 //string CurentColumn = string.Empty;
                 //int colBD = 4;
@@ -875,14 +875,14 @@ namespace Vs.TimeAttendance
                 //    formatRange = oSheet.get_Range(CurentColumn + "7", CurentColumn + rowCnt.ToString());
                 //    //formatRange.NumberFormat = "#,##0.00;(#,##0.00); ; ";
                 //    formatRange.NumberFormat = "0.00;-0;;@";
-                //    try { formatRange.TextToColumns(Type.Missing, Excel.XlTextParsingType.xlDelimited, Excel.XlTextQualifier.xlTextQualifierDoubleQuote); } catch { }
+                //    try { formatRange.TextToColumns(Type.Missing, Excell.XlTextParsingType.xlDelimited, Excell.XlTextQualifier.xlTextQualifierDoubleQuote); } catch { }
                 //}
 
                 //colKT++;
                 //CurentColumn = CharacterIncrement(colKT);
                 //formatRange = oSheet.get_Range(CurentColumn + "7", CurentColumn + rowCnt.ToString());
                 //formatRange.NumberFormat = "#,##0.00;(#,##0.00); ; ";
-                ////formatRange.TextToColumns(Type.Missing, Excel.XlTextParsingType.xlDelimited, Excel.XlTextQualifier.xlTextQualifierDoubleQuote);
+                ////formatRange.TextToColumns(Type.Missing, Excell.XlTextParsingType.xlDelimited, Excell.XlTextQualifier.xlTextQualifierDoubleQuote);
                 ////Kẻ khung toàn bộ
                 //int ke_khung = -1;
 
@@ -895,8 +895,8 @@ namespace Vs.TimeAttendance
                 formatRange.Font.Size = fontSizeNoiDung;
 
                 formatRange = oSheet.get_Range("F7", "AA" + (rowCnt).ToString());
-                formatRange.Cells.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
-                formatRange.Cells.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
+                formatRange.Cells.HorizontalAlignment = Excell.XlHAlign.xlHAlignCenter;
+                formatRange.Cells.VerticalAlignment = Excell.XlVAlign.xlVAlignCenter;
 
                 BorderAround(oSheet.get_Range("A4", lastColumn + (rowCnt).ToString()));
                 // filter
@@ -905,7 +905,7 @@ namespace Vs.TimeAttendance
                 oXL.UserControl = true;
 
                 oWB.SaveAs(SaveExcelFile,
-                    AccessMode: Excel.XlSaveAsAccessMode.xlShared);
+                    AccessMode: Excell.XlSaveAsAccessMode.xlShared);
             }
             catch (Exception ex)
             {
@@ -943,18 +943,18 @@ namespace Vs.TimeAttendance
                 {
                     return;
                 }
-                Excel.Application oXL;
-                Excel.Workbook oWB;
-                Excel.Worksheet oSheet;
-                oXL = new Excel.Application();
+                Excell.Application oXL;
+                Excell.Workbook oWB;
+                Excell.Worksheet oSheet;
+                oXL = new Excell.Application();
                 oXL.Visible = true;
 
 
                 //OfficeOpenXml.ExcelPackage ExcelPkg = new OfficeOpenXml.ExcelPackage();
                 //OfficeOpenXml.ExcelWorksheet wsSheet1 = ExcelPkg.Workbook.Worksheets.Add("Sheet1");
 
-                oWB = (Excel.Workbook)(oXL.Workbooks.Add(Missing.Value));
-                oSheet = (Excel.Worksheet)oWB.ActiveSheet;
+                oWB = (Excell.Workbook)(oXL.Workbooks.Add(Missing.Value));
+                oSheet = (Excell.Worksheet)oWB.ActiveSheet;
 
                 string fontName = "Times New Roman";
                 int fontSizeTieuDe = 10;
@@ -968,8 +968,8 @@ namespace Vs.TimeAttendance
                 row2_TieuDe_BaoCao.Font.Size = 16;
                 row2_TieuDe_BaoCao.Font.Name = fontName;
                 row2_TieuDe_BaoCao.Font.FontStyle = "Bold";
-                row2_TieuDe_BaoCao.Cells.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
-                row2_TieuDe_BaoCao.Cells.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
+                row2_TieuDe_BaoCao.Cells.HorizontalAlignment = Excell.XlHAlign.xlHAlignCenter;
+                row2_TieuDe_BaoCao.Cells.VerticalAlignment = Excell.XlVAlign.xlVAlignCenter;
                 row2_TieuDe_BaoCao.RowHeight = 20;
                 row2_TieuDe_BaoCao.Value2 = "BẢNG CHẤM CÔNG THÁNG NGOÀI GIỜ NĂM " + Convert.ToDateTime(datNam.EditValue).Year + " THEO QUÝ";
 
@@ -980,8 +980,8 @@ namespace Vs.TimeAttendance
                 row4_TieuDe_Format.Font.Bold = true;
                 row4_TieuDe_Format.WrapText = true;
                 row4_TieuDe_Format.NumberFormat = "@";
-                row4_TieuDe_Format.Cells.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
-                row4_TieuDe_Format.Cells.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
+                row4_TieuDe_Format.Cells.HorizontalAlignment = Excell.XlHAlign.xlHAlignCenter;
+                row4_TieuDe_Format.Cells.VerticalAlignment = Excell.XlVAlign.xlVAlignCenter;
                 row4_TieuDe_Format.Interior.Color = Color.FromArgb(255, 255, 0);
 
                 Range row4_TieuDe_TTNV = oSheet.get_Range("A4", "G4");
@@ -1114,11 +1114,11 @@ namespace Vs.TimeAttendance
                 }
                 rowCnt = rowCnt + 6;
                 oSheet.get_Range("A7", lastColumn + rowCnt.ToString()).Value2 = rowData;
-                Excel.Range formatRange;
+                Excell.Range formatRange;
                 //rowCnt = keepRowCnt + 2;
 
                 ////dịnh dạng
-                ////Commons.Modules.MExcel.ThemDong(oSheet, Microsoft.Office.Interop.Excel.XlInsertShiftDirection.xlShiftDown, 1, 7);
+                ////Commons.Modules.MExcel.ThemDong(oSheet, Microsoft.Office.Interop.Excell.XlInsertShiftDirection.xlShiftDown, 1, 7);
 
                 //string CurentColumn = string.Empty;
                 //int colBD = 4;
@@ -1131,14 +1131,14 @@ namespace Vs.TimeAttendance
                 //    formatRange = oSheet.get_Range(CurentColumn + "7", CurentColumn + rowCnt.ToString());
                 //    //formatRange.NumberFormat = "#,##0.00;(#,##0.00); ; ";
                 //    formatRange.NumberFormat = "0.00;-0;;@";
-                //    try { formatRange.TextToColumns(Type.Missing, Excel.XlTextParsingType.xlDelimited, Excel.XlTextQualifier.xlTextQualifierDoubleQuote); } catch { }
+                //    try { formatRange.TextToColumns(Type.Missing, Excell.XlTextParsingType.xlDelimited, Excell.XlTextQualifier.xlTextQualifierDoubleQuote); } catch { }
                 //}
 
                 //colKT++;
                 //CurentColumn = CharacterIncrement(colKT);
                 //formatRange = oSheet.get_Range(CurentColumn + "7", CurentColumn + rowCnt.ToString());
                 //formatRange.NumberFormat = "#,##0.00;(#,##0.00); ; ";
-                ////formatRange.TextToColumns(Type.Missing, Excel.XlTextParsingType.xlDelimited, Excel.XlTextQualifier.xlTextQualifierDoubleQuote);
+                ////formatRange.TextToColumns(Type.Missing, Excell.XlTextParsingType.xlDelimited, Excell.XlTextQualifier.xlTextQualifierDoubleQuote);
                 ////Kẻ khung toàn bộ
                 //int ke_khung = -1;
 
@@ -1147,8 +1147,8 @@ namespace Vs.TimeAttendance
                 //    ke_khung = 14 - dr_Cu;
                 //}
                 formatRange = oSheet.get_Range("F7", "S" + (rowCnt).ToString());
-                formatRange.Cells.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
-                formatRange.Cells.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
+                formatRange.Cells.HorizontalAlignment = Excell.XlHAlign.xlHAlignCenter;
+                formatRange.Cells.VerticalAlignment = Excell.XlVAlign.xlVAlignCenter;
                 formatRange = oSheet.get_Range("A7", lastColumn + (rowCnt).ToString());
                 formatRange.Font.Name = fontName;
                 formatRange.Font.Size = fontSizeNoiDung;
@@ -1159,7 +1159,7 @@ namespace Vs.TimeAttendance
                 oXL.UserControl = true;
 
                 oWB.SaveAs(SaveExcelFile,
-                    AccessMode: Excel.XlSaveAsAccessMode.xlShared);
+                    AccessMode: Excell.XlSaveAsAccessMode.xlShared);
             }
             catch (Exception ex)
             {
@@ -1197,18 +1197,18 @@ namespace Vs.TimeAttendance
                 {
                     return;
                 }
-                Excel.Application oXL;
-                Excel.Workbook oWB;
-                Excel.Worksheet oSheet;
-                oXL = new Excel.Application();
+                Excell.Application oXL;
+                Excell.Workbook oWB;
+                Excell.Worksheet oSheet;
+                oXL = new Excell.Application();
                 oXL.Visible = true;
 
 
                 //OfficeOpenXml.ExcelPackage ExcelPkg = new OfficeOpenXml.ExcelPackage();
                 //OfficeOpenXml.ExcelWorksheet wsSheet1 = ExcelPkg.Workbook.Worksheets.Add("Sheet1");
 
-                oWB = (Excel.Workbook)(oXL.Workbooks.Add(Missing.Value));
-                oSheet = (Excel.Worksheet)oWB.ActiveSheet;
+                oWB = (Excell.Workbook)(oXL.Workbooks.Add(Missing.Value));
+                oSheet = (Excell.Worksheet)oWB.ActiveSheet;
 
                 string fontName = "Times New Roman";
                 int fontSizeTieuDe = 10;
@@ -1222,8 +1222,8 @@ namespace Vs.TimeAttendance
                 row2_TieuDe_BaoCao.Font.Size = 16;
                 row2_TieuDe_BaoCao.Font.Name = fontName;
                 row2_TieuDe_BaoCao.Font.FontStyle = "Bold";
-                row2_TieuDe_BaoCao.Cells.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
-                row2_TieuDe_BaoCao.Cells.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
+                row2_TieuDe_BaoCao.Cells.HorizontalAlignment = Excell.XlHAlign.xlHAlignCenter;
+                row2_TieuDe_BaoCao.Cells.VerticalAlignment = Excell.XlVAlign.xlVAlignCenter;
                 row2_TieuDe_BaoCao.RowHeight = 20;
                 row2_TieuDe_BaoCao.Value2 = "BẢNG CHẤM CÔNG THÁNG NGOÀI GIỜ NĂM " + Convert.ToDateTime(datNam.EditValue).Year + " THEO TUẦN";
 
@@ -1234,8 +1234,8 @@ namespace Vs.TimeAttendance
                 row4_TieuDe_Format.Font.Bold = true;
                 row4_TieuDe_Format.WrapText = true;
                 row4_TieuDe_Format.NumberFormat = "@";
-                row4_TieuDe_Format.Cells.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
-                row4_TieuDe_Format.Cells.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
+                row4_TieuDe_Format.Cells.HorizontalAlignment = Excell.XlHAlign.xlHAlignCenter;
+                row4_TieuDe_Format.Cells.VerticalAlignment = Excell.XlVAlign.xlVAlignCenter;
                 row4_TieuDe_Format.Interior.Color = Color.FromArgb(255, 255, 0);
 
                 Range row4_TieuDe_TTNV = oSheet.get_Range("A4", "G4");
@@ -1370,12 +1370,12 @@ namespace Vs.TimeAttendance
                 }
                 rowCnt = rowCnt + 6;
                 oSheet.get_Range("A7", lastColumn + rowCnt.ToString()).Value2 = rowData;
-                Excel.Range formatRange;
+                Excell.Range formatRange;
 
                 //rowCnt = keepRowCnt + 2;
 
                 ////dịnh dạng
-                ////Commons.Modules.MExcel.ThemDong(oSheet, Microsoft.Office.Interop.Excel.XlInsertShiftDirection.xlShiftDown, 1, 7);
+                ////Commons.Modules.MExcel.ThemDong(oSheet, Microsoft.Office.Interop.Excell.XlInsertShiftDirection.xlShiftDown, 1, 7);
 
                 //string CurentColumn = string.Empty;
                 //int colBD = 4;
@@ -1388,14 +1388,14 @@ namespace Vs.TimeAttendance
                 //    formatRange = oSheet.get_Range(CurentColumn + "7", CurentColumn + rowCnt.ToString());
                 //    //formatRange.NumberFormat = "#,##0.00;(#,##0.00); ; ";
                 //    formatRange.NumberFormat = "0.00;-0;;@";
-                //    try { formatRange.TextToColumns(Type.Missing, Excel.XlTextParsingType.xlDelimited, Excel.XlTextQualifier.xlTextQualifierDoubleQuote); } catch { }
+                //    try { formatRange.TextToColumns(Type.Missing, Excell.XlTextParsingType.xlDelimited, Excell.XlTextQualifier.xlTextQualifierDoubleQuote); } catch { }
                 //}
 
                 //colKT++;
                 //CurentColumn = CharacterIncrement(colKT);
                 //formatRange = oSheet.get_Range(CurentColumn + "7", CurentColumn + rowCnt.ToString());
                 //formatRange.NumberFormat = "#,##0.00;(#,##0.00); ; ";
-                ////formatRange.TextToColumns(Type.Missing, Excel.XlTextParsingType.xlDelimited, Excel.XlTextQualifier.xlTextQualifierDoubleQuote);
+                ////formatRange.TextToColumns(Type.Missing, Excell.XlTextParsingType.xlDelimited, Excell.XlTextQualifier.xlTextQualifierDoubleQuote);
                 ////Kẻ khung toàn bộ
                 //int ke_khung = -1;
 
@@ -1408,8 +1408,8 @@ namespace Vs.TimeAttendance
                 formatRange.Font.Size = fontSizeNoiDung;
 
                 formatRange = oSheet.get_Range("F7", "BP" + (rowCnt).ToString());
-                formatRange.Cells.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
-                formatRange.Cells.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
+                formatRange.Cells.HorizontalAlignment = Excell.XlHAlign.xlHAlignCenter;
+                formatRange.Cells.VerticalAlignment = Excell.XlVAlign.xlVAlignCenter;
 
                 BorderAround(oSheet.get_Range("A4", lastColumn + (rowCnt).ToString()));
                 // filter
@@ -1418,7 +1418,7 @@ namespace Vs.TimeAttendance
                 oXL.UserControl = true;
 
                 oWB.SaveAs(SaveExcelFile,
-                    AccessMode: Excel.XlSaveAsAccessMode.xlShared);
+                    AccessMode: Excell.XlSaveAsAccessMode.xlShared);
             }
             catch (Exception ex)
             {
@@ -1468,18 +1468,18 @@ namespace Vs.TimeAttendance
                 {
                     return;
                 }
-                Excel.Application oXL;
-                Excel.Workbook oWB;
-                Excel.Worksheet oSheet;
-                oXL = new Excel.Application();
+                Excell.Application oXL;
+                Excell.Workbook oWB;
+                Excell.Worksheet oSheet;
+                oXL = new Excell.Application();
                 oXL.Visible = true;
 
 
                 //OfficeOpenXml.ExcelPackage ExcelPkg = new OfficeOpenXml.ExcelPackage();
                 //OfficeOpenXml.ExcelWorksheet wsSheet1 = ExcelPkg.Workbook.Worksheets.Add("Sheet1");
 
-                oWB = (Excel.Workbook)(oXL.Workbooks.Add(Missing.Value));
-                oSheet = (Excel.Worksheet)oWB.ActiveSheet;
+                oWB = (Excell.Workbook)(oXL.Workbooks.Add(Missing.Value));
+                oSheet = (Excell.Worksheet)oWB.ActiveSheet;
 
                 string fontName = "Times New Roman";
                 int fontSizeTieuDe = 10;
@@ -1493,8 +1493,8 @@ namespace Vs.TimeAttendance
                 row2_TieuDe_BaoCao.Font.Size = 16;
                 row2_TieuDe_BaoCao.Font.Name = fontName;
                 row2_TieuDe_BaoCao.Font.FontStyle = "Bold";
-                row2_TieuDe_BaoCao.Cells.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
-                row2_TieuDe_BaoCao.Cells.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
+                row2_TieuDe_BaoCao.Cells.HorizontalAlignment = Excell.XlHAlign.xlHAlignCenter;
+                row2_TieuDe_BaoCao.Cells.VerticalAlignment = Excell.XlVAlign.xlVAlignCenter;
                 row2_TieuDe_BaoCao.RowHeight = 20;
                 row2_TieuDe_BaoCao.Value2 = "BÁO CÁO ĐÁNH GIÁ TÌNH TRẠNG THỬ VIỆC";
 
@@ -1503,8 +1503,8 @@ namespace Vs.TimeAttendance
                 rowTuNgay.Font.Size = 12;
                 rowTuNgay.Font.Name = fontName;
                 rowTuNgay.Font.FontStyle = "Bold";
-                rowTuNgay.Cells.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
-                rowTuNgay.Cells.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
+                rowTuNgay.Cells.HorizontalAlignment = Excell.XlHAlign.xlHAlignCenter;
+                rowTuNgay.Cells.VerticalAlignment = Excell.XlVAlign.xlVAlignCenter;
                 //rowTuNgay.Value = "Từ ngày "++""
 
 
@@ -1514,8 +1514,8 @@ namespace Vs.TimeAttendance
                 row4_TieuDe_Format.Font.Bold = true;
                 row4_TieuDe_Format.WrapText = true;
                 row4_TieuDe_Format.NumberFormat = "@";
-                row4_TieuDe_Format.Cells.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
-                row4_TieuDe_Format.Cells.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
+                row4_TieuDe_Format.Cells.HorizontalAlignment = Excell.XlHAlign.xlHAlignCenter;
+                row4_TieuDe_Format.Cells.VerticalAlignment = Excell.XlVAlign.xlVAlignCenter;
                 row4_TieuDe_Format.Interior.Color = Color.FromArgb(255, 255, 0);
                
 
@@ -1615,11 +1615,11 @@ namespace Vs.TimeAttendance
                 }
                 rowCnt = rowCnt + 5;
                 oSheet.get_Range("A6", lastColumn + rowCnt.ToString()).Value2 = rowData;
-                Excel.Range formatRange;
+                Excell.Range formatRange;
                 //rowCnt = keepRowCnt + 2;
 
                 ////dịnh dạng
-                ////Commons.Modules.MExcel.ThemDong(oSheet, Microsoft.Office.Interop.Excel.XlInsertShiftDirection.xlShiftDown, 1, 7);
+                ////Commons.Modules.MExcel.ThemDong(oSheet, Microsoft.Office.Interop.Excell.XlInsertShiftDirection.xlShiftDown, 1, 7);
 
                 //string CurentColumn = string.Empty;
                 //int colBD = 4;
@@ -1632,14 +1632,14 @@ namespace Vs.TimeAttendance
                 //    formatRange = oSheet.get_Range(CurentColumn + "7", CurentColumn + rowCnt.ToString());
                 //    //formatRange.NumberFormat = "#,##0.00;(#,##0.00); ; ";
                 //    formatRange.NumberFormat = "0.00;-0;;@";
-                //    try { formatRange.TextToColumns(Type.Missing, Excel.XlTextParsingType.xlDelimited, Excel.XlTextQualifier.xlTextQualifierDoubleQuote); } catch { }
+                //    try { formatRange.TextToColumns(Type.Missing, Excell.XlTextParsingType.xlDelimited, Excell.XlTextQualifier.xlTextQualifierDoubleQuote); } catch { }
                 //}
 
                 //colKT++;
                 //CurentColumn = CharacterIncrement(colKT);
                 //formatRange = oSheet.get_Range(CurentColumn + "7", CurentColumn + rowCnt.ToString());
                 //formatRange.NumberFormat = "#,##0.00;(#,##0.00); ; ";
-                ////formatRange.TextToColumns(Type.Missing, Excel.XlTextParsingType.xlDelimited, Excel.XlTextQualifier.xlTextQualifierDoubleQuote);
+                ////formatRange.TextToColumns(Type.Missing, Excell.XlTextParsingType.xlDelimited, Excell.XlTextQualifier.xlTextQualifierDoubleQuote);
                 ////Kẻ khung toàn bộ
                 //int ke_khung = -1;
 
@@ -1648,8 +1648,8 @@ namespace Vs.TimeAttendance
                 //    ke_khung = 14 - dr_Cu;
                 //}
                 //formatRange = oSheet.get_Range("F7", "S" + (rowCnt).ToString());
-                //formatRange.Cells.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
-                //formatRange.Cells.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
+                //formatRange.Cells.HorizontalAlignment = Excell.XlHAlign.xlHAlignCenter;
+                //formatRange.Cells.VerticalAlignment = Excell.XlVAlign.xlVAlignCenter;
                 formatRange = oSheet.get_Range("A6", lastColumn + (rowCnt).ToString());
                 formatRange.Font.Name = fontName;
                 formatRange.Font.Size = fontSizeNoiDung;
@@ -1660,7 +1660,7 @@ namespace Vs.TimeAttendance
                 oXL.UserControl = true;
 
                 oWB.SaveAs(SaveExcelFile,
-                    AccessMode: Excel.XlSaveAsAccessMode.xlShared);
+                    AccessMode: Excell.XlSaveAsAccessMode.xlShared);
             }
             catch (Exception ex)
             {

@@ -675,25 +675,53 @@ namespace VietSoftHRM
             frm.Size = new Size((int)iW, (int)iH);
             frm.iiD_XN = Convert.ToInt64(grvDanhMuc.GetFocusedRowCellValue("ID_XN"));
             frm.ShowDialog();
-
+        }
+        private void toolThongBaoTuyenDung_Click(object sender, EventArgs e)
+        {
+            frmThongBaoTuyenDung frm = new frmThongBaoTuyenDung();
+            double iW, iH;
+            iW = Screen.PrimaryScreen.WorkingArea.Width / 1.5;
+            iH = Screen.PrimaryScreen.WorkingArea.Height / 1.5;
+            frm.Size = new Size((int)iW, (int)iH);
+            frm.iID_LCV = Convert.ToInt64(grvDanhMuc.GetFocusedRowCellValue("ID_LCV"));
+            frm.ShowDialog();
         }
         private void grvDanhMuc_PopupMenuShowing(object sender, PopupMenuShowingEventArgs e)
         {
             try
             {
-                if (Commons.Modules.sPS != "spGetListXI_NGHIEP") return;
-                if (e.HitInfo.InDataRow)
+                if (Commons.Modules.sPS == "spGetListXI_NGHIEP")
                 {
-                    contextMenuStrip1.Show(Cursor.Position.X, Cursor.Position.Y);
+                    contextMenuStrip1.Items[0].Visible = true;
+                    contextMenuStrip1.Items[1].Visible = false;
+                    if (e.HitInfo.InDataRow)
+                    {
+                        contextMenuStrip1.Show(Cursor.Position.X, Cursor.Position.Y);
+                    }
+                    else
+                    {
+                        contextMenuStrip1.Hide();
+                    }
                 }
-                else
+                if(Commons.Modules.sPS == "spGetListLOAI_CONG_VIEC")
                 {
-                    contextMenuStrip1.Hide();
+                    contextMenuStrip1.Items[0].Visible = false;
+                    contextMenuStrip1.Items[1].Visible = true;
+                    if (e.HitInfo.InDataRow)
+                    {
+                        contextMenuStrip1.Show(Cursor.Position.X, Cursor.Position.Y);
+                    }
+                    else
+                    {
+                        contextMenuStrip1.Hide();
+                    }
                 }
             }
             catch
             {
             }
         }
+
+       
     }
 }

@@ -9,10 +9,11 @@ namespace Vs.Report
 {
     public partial class rptBCLaoDongThang : DevExpress.XtraReports.UI.XtraReport
     {
-        public rptBCLaoDongThang(DateTime ngayin)
+        public rptBCLaoDongThang(DateTime Thang)
         {
             InitializeComponent();
-            lblTieuDe.Text += " " + ngayin.Date.ToString().Substring(3, 7);
+            System.String BCThang = Thang.ToString("dd/MM/yyyy");
+            lblTieuDe.Text += " " + BCThang.Substring(3, 7);
         }
 
     }

@@ -339,7 +339,7 @@
             this.xrLabel73,
             this.NONNtieuDe});
             this.ReportHeader.Dpi = 254F;
-            this.ReportHeader.HeightF = 493.0416F;
+            this.ReportHeader.HeightF = 537.9374F;
             this.ReportHeader.Name = "ReportHeader";
             // 
             // lblNgay
@@ -363,7 +363,7 @@
             this.lbKinhGui.AllowMarkupText = true;
             this.lbKinhGui.Dpi = 254F;
             this.lbKinhGui.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold);
-            this.lbKinhGui.LocationFloat = new DevExpress.Utils.PointFloat(218.7985F, 383.5416F);
+            this.lbKinhGui.LocationFloat = new DevExpress.Utils.PointFloat(220.8413F, 423.2291F);
             this.lbKinhGui.Multiline = true;
             this.lbKinhGui.Name = "lbKinhGui";
             this.lbKinhGui.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
@@ -379,7 +379,7 @@
             this.tiKinhGui.Dpi = 254F;
             this.tiKinhGui.Font = new System.Drawing.Font("Times New Roman", 11.25F, ((System.Drawing.FontStyle)(((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic) 
                 | System.Drawing.FontStyle.Underline))));
-            this.tiKinhGui.LocationFloat = new DevExpress.Utils.PointFloat(0.003189405F, 383.5416F);
+            this.tiKinhGui.LocationFloat = new DevExpress.Utils.PointFloat(2.045983F, 423.2291F);
             this.tiKinhGui.Multiline = true;
             this.tiKinhGui.Name = "tiKinhGui";
             this.tiKinhGui.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
@@ -392,12 +392,12 @@
             // NONNtieuDe2
             // 
             this.NONNtieuDe2.Dpi = 254F;
-            this.NONNtieuDe2.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.NONNtieuDe2.LocationFloat = new DevExpress.Utils.PointFloat(0.003229777F, 325.9166F);
+            this.NONNtieuDe2.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NONNtieuDe2.LocationFloat = new DevExpress.Utils.PointFloat(0.003229777F, 352.3749F);
             this.NONNtieuDe2.Multiline = true;
             this.NONNtieuDe2.Name = "NONNtieuDe2";
             this.NONNtieuDe2.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 254F);
-            this.NONNtieuDe2.SizeF = new System.Drawing.SizeF(1719.997F, 57.62506F);
+            this.NONNtieuDe2.SizeF = new System.Drawing.SizeF(1719.997F, 70.85422F);
             this.NONNtieuDe2.StylePriority.UseFont = false;
             this.NONNtieuDe2.StylePriority.UsePadding = false;
             this.NONNtieuDe2.StylePriority.UseTextAlignment = false;
@@ -409,16 +409,15 @@
             this.xrLabel3.AllowMarkupText = true;
             this.xrLabel3.AutoWidth = true;
             this.xrLabel3.Dpi = 254F;
-            this.xrLabel3.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[TTC].[DIA_CHI]")});
             this.xrLabel3.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.xrLabel3.LocationFloat = new DevExpress.Utils.PointFloat(0F, 78.79158F);
             this.xrLabel3.Multiline = true;
             this.xrLabel3.Name = "xrLabel3";
             this.xrLabel3.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
-            this.xrLabel3.SizeF = new System.Drawing.SizeF(805.6058F, 118.8334F);
+            this.xrLabel3.SizeF = new System.Drawing.SizeF(805.6058F, 59.41672F);
             this.xrLabel3.StylePriority.UseFont = false;
             this.xrLabel3.StylePriority.UseTextAlignment = false;
+            this.xrLabel3.Text = "DT 488 Thôn Thái Lãng, Xã Trực Nội, Huyện Trực Ninh, Tỉnh Nam Định";
             this.xrLabel3.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
             // 
             // xrLabel1
@@ -458,8 +457,6 @@
             this.lb0.AllowMarkupText = true;
             this.lb0.AutoWidth = true;
             this.lb0.Dpi = 254F;
-            this.lb0.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Upper([TTC].[TEN_CTY])")});
             this.lb0.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb0.LocationFloat = new DevExpress.Utils.PointFloat(0F, 19.37487F);
             this.lb0.Multiline = true;
@@ -468,6 +465,7 @@
             this.lb0.SizeF = new System.Drawing.SizeF(805.6058F, 59.41672F);
             this.lb0.StylePriority.UseFont = false;
             this.lb0.StylePriority.UseTextAlignment = false;
+            this.lb0.Text = "CÔNG TY CỔ PHẦN MAY DUY MINH";
             this.lb0.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
             // 
             // xrLabel73
@@ -489,12 +487,12 @@
             // NONNtieuDe
             // 
             this.NONNtieuDe.Dpi = 254F;
-            this.NONNtieuDe.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.NONNtieuDe.LocationFloat = new DevExpress.Utils.PointFloat(0.003229777F, 268.2916F);
+            this.NONNtieuDe.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NONNtieuDe.LocationFloat = new DevExpress.Utils.PointFloat(0F, 286.8123F);
             this.NONNtieuDe.Multiline = true;
             this.NONNtieuDe.Name = "NONNtieuDe";
             this.NONNtieuDe.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 254F);
-            this.NONNtieuDe.SizeF = new System.Drawing.SizeF(1719.997F, 57.62503F);
+            this.NONNtieuDe.SizeF = new System.Drawing.SizeF(1719.997F, 65.56253F);
             this.NONNtieuDe.StylePriority.UseFont = false;
             this.NONNtieuDe.StylePriority.UsePadding = false;
             this.NONNtieuDe.StylePriority.UseTextAlignment = false;
@@ -628,8 +626,6 @@
             // 
             this.xrLabel129.AllowMarkupText = true;
             this.xrLabel129.Dpi = 254F;
-            this.xrLabel129.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Upper([TTC].[TEN_CTY])")});
             this.xrLabel129.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold);
             this.xrLabel129.LocationFloat = new DevExpress.Utils.PointFloat(607.736F, 25.00009F);
             this.xrLabel129.Multiline = true;
@@ -638,6 +634,7 @@
             this.xrLabel129.SizeF = new System.Drawing.SizeF(1112.264F, 71.91724F);
             this.xrLabel129.StylePriority.UseFont = false;
             this.xrLabel129.StylePriority.UseTextAlignment = false;
+            this.xrLabel129.Text = "CÔNG TY CỔ PHẦN MAY DUY MINH";
             this.xrLabel129.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
             // 
             // xrLabel131
@@ -4159,7 +4156,7 @@
             this.TitleStyle});
             this.Tag = "rptQuyetDinhLuongCN";
             this.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter;
-            this.Version = "20.1";
+            this.Version = "22.1";
             this.VerticalContentSplitting = DevExpress.XtraPrinting.VerticalContentSplitting.Smart;
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable3)).EndInit();

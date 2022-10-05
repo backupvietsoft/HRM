@@ -326,7 +326,7 @@ namespace Vs.TimeAttendance
                 Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sbtKeHoachDiCa, (DataTable)grdKeHoachDiCa.DataSource, "");
                 Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sbtCongNhan, (DataTable)grdCongNhan.DataSource, "");
 
-                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "sLoadaveKeHoachDiCa", dateNam.Text, sbtKeHoachDiCa, sbtCongNhan);
+                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "sPsaveKeHoachDiCa", dateNam.Text, sbtKeHoachDiCa, sbtCongNhan);
                 Commons.Modules.ObjSystems.XoaTable(sbtKeHoachDiCa);
                 Commons.Modules.ObjSystems.XoaTable(sbtCongNhan);
                 return true;

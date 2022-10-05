@@ -196,7 +196,7 @@ namespace Vs.TimeAttendance
                             string sBT = "BTKinkTay" + Commons.Modules.sId;
                             Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBT, Commons.Modules.ObjSystems.ConvertDatatable(grvChamCongTay), "");
 
-                            SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "sLoadaveDuLieuQuetTheTay", datNgayCC.DateTime, sBT,Commons.Modules.chamCongK);
+                            SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spSaveDuLieuQuetTheTay", datNgayCC.DateTime, sBT,Commons.Modules.chamCongK);
 
                             LoadGridCongNhan();
                         }

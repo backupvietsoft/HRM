@@ -1,4 +1,5 @@
 ﻿using Commons;
+using DevExpress.Utils;
 using DevExpress.XtraBars.Docking2010;
 using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Repository;
@@ -26,15 +27,17 @@ namespace Vs.TimeAttendance
             }
         }
         string sBT = "tabKeHoachDiCa" + Commons.Modules.ModuleName;
+        RepositoryItemTimeEdit repositoryItemTimeEdit1;
         public ucVachTheLoi()
         {
             InitializeComponent();
             Commons.Modules.ObjSystems.ThayDoiNN(this, new List<LayoutControlGroup>() { Root }, windowsUIButton);
             Commons.Modules.ObjSystems.ThayDoiNN(this, layoutControlGroup1);
-        }
-        RepositoryItemTimeEdit repositoryItemTimeEdit1;
+            repositoryItemTimeEdit1 = new RepositoryItemTimeEdit();
 
-        private void ucKeHoachDiCa_Load(object sender, EventArgs e)
+        }
+
+        private void ucVachTheLoi_Load(object sender, EventArgs e)
         {
             Commons.Modules.sLoad = "0Load";
 
@@ -78,13 +81,21 @@ namespace Vs.TimeAttendance
             {
                 windowsUIButton.Buttons[0].Properties.Visible = false;
                 windowsUIButton.Buttons[1].Properties.Visible = false;
-                windowsUIButton.Buttons[5].Properties.Visible = false;
+                windowsUIButton.Buttons[2].Properties.Visible = false;
                 windowsUIButton.Buttons[6].Properties.Visible = false;
+                windowsUIButton.Buttons[7].Properties.Visible = false;
             }
             else
             {
-                enableButon(true);
-
+                if (Commons.Modules.bolLinkCC)
+                {
+                    Commons.Modules.ObjSystems.MLoadLookUpEdit(cboMSCN, Commons.Modules.ObjSystems.ConvertDatatable(grdCongNhan), "ID_CN", "MS_CN", Commons.Modules.ObjLanguages.GetLanguage(this.Name, "MS_CN"));
+                    enableButon(false);
+                }
+                else
+                {
+                    enableButon(true);
+                }
             }
         }
         private void cboDV_EditValueChanged(object sender, EventArgs e)
@@ -209,7 +220,6 @@ namespace Vs.TimeAttendance
                     }
                 case "thoat":
                     {
-
                         Commons.Modules.ObjSystems.GotoHome(this);
                         break;
                     }
@@ -238,13 +248,14 @@ namespace Vs.TimeAttendance
                     grvCongNhan.Columns["MS_THE_CC"].OptionsColumn.AllowEdit = false;
                     grvCongNhan.Columns["NGAY"].OptionsColumn.AllowEdit = false;
 
-                    grvCongNhan.Columns["GIO_DEN"].ColumnEdit = repositoryItemTimeEdit1;
-                    grvCongNhan.Columns["GIO_VE"].ColumnEdit = repositoryItemTimeEdit1;
-
                     grvCongNhan.Columns["ID_CN"].Visible = false;
                     grvCongNhan.Columns["CHINH_SUA"].Visible = false;
                     grvCongNhan.Columns["GIO_DEN_LUU"].Visible = false;
                     grvCongNhan.Columns["GIO_VE_LUU"].Visible = false;
+
+                    grvCongNhan.Columns["GIO_DEN"].ColumnEdit = this.repositoryItemTimeEdit1;
+                    grvCongNhan.Columns["GIO_VE"].ColumnEdit = this.repositoryItemTimeEdit1;
+
                 }
                 else
                 {
@@ -405,34 +416,48 @@ namespace Vs.TimeAttendance
 
         private void grvCongNhan_ValidatingEditor(object sender, DevExpress.XtraEditors.Controls.BaseContainerValidateEditorEventArgs e)
         {
-            try
-            {
-                GridView view = sender as GridView;
-                DevExpress.XtraGrid.Columns.GridColumn ngayBD = view.Columns["GIO_DEN"];
-                DevExpress.XtraGrid.Columns.GridColumn ngayKT = view.Columns["GIO_VE"];
+            //try
+            //{
+            //    GridView view = sender as GridView;
+            //    DevExpress.XtraGrid.Columns.GridColumn ngayBD = view.Columns["GIO_DEN"];
+            //    DevExpress.XtraGrid.Columns.GridColumn ngayKT = view.Columns["GIO_VE"];
+            //    if (view.FocusedColumn == view.Columns["GIO_DEN"])
+            //    {
+            //        DateTime? fromDate = e.Value as DateTime?;
+            //        DateTime? toDate = Convert.ToDateTime(view.GetRowCellValue(view.FocusedRowHandle, view.Columns["GIO_VE"])) as DateTime?;
+            //        if (fromDate > toDate)
+            //        {
+            //            e.Valid = false;
+            //            view.SetColumnError(ngayBD, "Giờ đến phải nhỏ hơn giờ về"); return;
+            //        }
+            //    }
+            //    if (view.FocusedColumn == view.Columns["GIO_VE"])
+            //    {
+            //        DateTime? fromDate = view.GetRowCellValue(view.FocusedRowHandle, view.Columns["GIO_DEN"]) as DateTime?;
+            //        DateTime? toDate = e.Value as DateTime?;
+            //        if (fromDate > toDate)
+            //        {
+            //            e.Valid = false;
+            //            view.SetColumnError(ngayKT, "Giờ về phải lớn hơn giờ đến"); return;
+            //        }
+            //    }
+            //}
+            //catch { }
+        }
 
-                if (view.FocusedColumn == view.Columns["GIO_DEN"])
-                {
-                    DateTime? fromDate = e.Value as DateTime?;
-                    DateTime? toDate = Convert.ToDateTime((Convert.ToDateTime(view.GetRowCellValue(view.FocusedRowHandle, view.Columns["NGAY_VE"])).ToString("dd/MM/yyyy") + " " + view.GetRowCellValue(view.FocusedRowHandle, view.Columns["GIO_VE"]).ToString())) as DateTime?;
-                    if (fromDate > toDate)
-                    {
-                        e.Valid = false;
-                        view.SetColumnError(ngayBD, "Giờ đến phải nhỏ hơn giờ về"); return;
-                    }
-                }
-                if (view.FocusedColumn == view.Columns["GIO_VE"])
-                {
-                    DateTime? fromDate = view.GetRowCellValue(view.FocusedRowHandle, view.Columns["GIO_DEN"]) as DateTime?;
-                    DateTime? toDate = e.Value as DateTime?;
-                    if (fromDate > toDate)
-                    {
-                        e.Valid = false;
-                        view.SetColumnError(ngayKT, "Giờ về phải lớn hơn giờ đến"); return;
-                    }
-                }
-            }
-            catch { }
+        private void grvCongNhan_InvalidRowException(object sender, DevExpress.XtraGrid.Views.Base.InvalidRowExceptionEventArgs e)
+        {
+            e.ExceptionMode = DevExpress.XtraEditors.Controls.ExceptionMode.NoAction;
+        }
+
+        private void grvCongNhan_InvalidValueException(object sender, DevExpress.XtraEditors.Controls.InvalidValueExceptionEventArgs e)
+        {
+            e.ExceptionMode = DevExpress.XtraEditors.Controls.ExceptionMode.NoAction;
+        }
+
+        private void grvCongNhan_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
+        {
+
         }
     }
 }

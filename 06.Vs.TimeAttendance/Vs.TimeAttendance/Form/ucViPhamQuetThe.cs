@@ -268,7 +268,7 @@ namespace Vs.TimeAttendance
                 //             + Convert.ToDateTime(cboNgay.EditValue).ToString("yyyyMMdd") + "' AS NGAY, ID_CN,VP_GV, VP_GD, CASE WHEN VP_GD = 1 THEN GIO_DEN" +
                 //             " ELSE '' END AS GIO_DEN,CASE WHEN VP_GV = 1 THEN GIO_VE ELSE '' END AS GIO_VE "
                 //             + " FROM " + stbVPQT + " B WHERE VP_GV = 1 OR VP_GD = 1";
-                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "sLoadaveDSCN_VP_QUET_THE", stbVPQT, Commons.Modules.ObjSystems.ConvertDateTime(cboNgay.Text));
+                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "sPsaveDSCN_VP_QUET_THE", stbVPQT, Commons.Modules.ObjSystems.ConvertDateTime(cboNgay.Text));
                 Commons.Modules.ObjSystems.XoaTable(stbVPQT);
             }
             catch (Exception ex)

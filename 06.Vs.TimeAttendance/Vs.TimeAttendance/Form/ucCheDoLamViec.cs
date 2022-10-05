@@ -282,7 +282,7 @@ namespace Vs.TimeAttendance
                 //       "[PHUT_KT],[SO_PHUT],[HE_SO_NGAY_THUONG],[HE_SO_NGAY_CN],[HE_SO_NGAY_LE],[TRU_DAU_GIO],[TRU_CUOI_GIO],[PHUT_VE_SOM],[TANG_CA],[TC_DEM]," +
                 //       "[KIEM_TRA],[NGAY_HOM_SAU],[CA_NGAY_HOM_SAU],[CA_DEM],[PHUT_TRUOC_CA],[CHE_DO] FROM " + sTB + " WHERE CA IS NOT NULL " + "";
 
-                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "sLoadaveCheDoLamViec",Commons.Modules.UserName,Commons.Modules.TypeLanguage, cboNhomChamCong.EditValue,sTB, Convert.ToDateTime(cboNgay.EditValue).ToString("MM/dd/yyyy"));
+                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "sPsaveCheDoLamViec",Commons.Modules.UserName,Commons.Modules.TypeLanguage, cboNhomChamCong.EditValue,sTB, Convert.ToDateTime(cboNgay.EditValue).ToString("MM/dd/yyyy"));
                 Commons.Modules.ObjSystems.XoaTable(sTB);
                 return true;
             }

@@ -484,7 +484,7 @@ namespace Vs.TimeAttendance
             {
 
                 Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sTB, Commons.Modules.ObjSystems.ConvertDatatable(grvData), "");
-                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "sLoadaveDK_TG_KHONG_LAM_SP", sTB);
+                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "sPsaveDK_TG_KHONG_LAM_SP", sTB);
                 Commons.Modules.ObjSystems.XoaTable(sTB);
 
                 return true;

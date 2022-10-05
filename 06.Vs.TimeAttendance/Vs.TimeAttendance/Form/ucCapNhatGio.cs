@@ -42,13 +42,13 @@ namespace Vs.HRM
             repositoryItemTimeEdit1 = new RepositoryItemTimeEdit();
             repositoryItemTimeEdit1.TimeEditStyle = TimeEditStyle.TouchUI;
             repositoryItemTimeEdit1.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.DateTimeAdvancingCaret;
-            repositoryItemTimeEdit1.Mask.EditMask = "HH:mm";
+            repositoryItemTimeEdit1.Mask.EditMask = "HH:mm:ss";
 
-            repositoryItemTimeEdit1.NullText = "00:00";
+            repositoryItemTimeEdit1.NullText = "00:00:00";
             repositoryItemTimeEdit1.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
-            repositoryItemTimeEdit1.DisplayFormat.FormatString = "HH:mm";
+            repositoryItemTimeEdit1.DisplayFormat.FormatString = "HH:mm:ss";
             repositoryItemTimeEdit1.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
-            repositoryItemTimeEdit1.EditFormat.FormatString = "HH:mm";
+            repositoryItemTimeEdit1.EditFormat.FormatString = "HH:mm:ss";
 
             Commons.OSystems.SetDateEditFormat(dTuNgay);
             Commons.OSystems.SetDateEditFormat(dDenNgay);
@@ -123,6 +123,7 @@ namespace Vs.HRM
                                 cmd.Parameters.AddWithValue("@ID_DV", cboDV.EditValue);
                                 cmd.Parameters.AddWithValue("@ID_XN", cboXN.EditValue);
                                 cmd.Parameters.AddWithValue("@ID_TO", cboTo.EditValue);
+                                cmd.Parameters.AddWithValue("@sBT1", sBT);
                                 cmd.Parameters.AddWithValue("@DDate", dt);
                                 cmd.ExecuteNonQuery();
                             }

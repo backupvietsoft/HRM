@@ -310,7 +310,7 @@ namespace Vs.TimeAttendance
             try
             {
                 Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, stbChamCong, Commons.Modules.ObjSystems.ConvertDatatable(grvChamCong), "");
-                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "sLoadaveDuLieuQuetThe", stbChamCong, idcn, Convert.ToDateTime(dtNgayChamCong.EditValue), Commons.Modules.chamCongK);
+                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spSaveDuLieuQuetThe", stbChamCong, idcn, Convert.ToDateTime(dtNgayChamCong.EditValue), Commons.Modules.chamCongK);
                 Commons.Modules.ObjSystems.XoaTable(stbChamCong);
                 return true;
             }
@@ -981,6 +981,7 @@ namespace Vs.TimeAttendance
                 if (them)
                 {
                     dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetDuLieuQuetTheCNCT", dtNgay, idCN, Commons.Modules.chamCongK));
+                    dt.Columns["CHINH_SUA"].ReadOnly = true;
                     Commons.Modules.ObjSystems.MLoadXtraGrid(grdChamCong, grvChamCong, dt, true, false, true, true, true, this.Name);
                     DataTable dID_NHOM = new DataTable();
                     dID_NHOM.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetNhomCC", dtNgayChamCong.EditValue, Commons.Modules.UserName, Commons.Modules.TypeLanguage));
@@ -990,6 +991,7 @@ namespace Vs.TimeAttendance
                 else
                 {
                     dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetDuLieuQuetTheCNCT", dtNgay, idCN, Commons.Modules.chamCongK));
+                    dt.Columns["CHINH_SUA"].ReadOnly = true;
                     Commons.Modules.ObjSystems.MLoadXtraGrid(grdChamCong, grvChamCong, dt, false, false, true, true, true, this.Name);
                     DataTable dID_NHOM = new DataTable();
                     dID_NHOM.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetNhomCC", dtNgayChamCong.EditValue, Commons.Modules.UserName, Commons.Modules.TypeLanguage));
@@ -1013,6 +1015,11 @@ namespace Vs.TimeAttendance
                 grvChamCong.Columns["GIO_DEN"].DisplayFormat.FormatString = "HH:mm:ss";
                 grvChamCong.Columns["GIO_DEN"].ColumnEdit = this.repositoryItemTimeEdit1;
                 grvChamCong.Columns["GIO_VE"].ColumnEdit = this.repositoryItemTimeEdit1;
+
+
+                RepositoryItemSearchLookUpEdit cbo = new RepositoryItemSearchLookUpEdit();
+                Commons.Modules.ObjSystems.AddCombSearchLookUpEdit(cbo, "ID_XNG", "TEN_XNG", "ID_XNG", grvChamCong, Commons.Modules.ObjSystems.DataXacNhanGio(false), this.Name);
+
                 grvChamCong.RefreshData();
             }
             catch (Exception ex)

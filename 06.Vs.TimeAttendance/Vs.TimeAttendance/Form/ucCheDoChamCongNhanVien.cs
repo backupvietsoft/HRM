@@ -406,7 +406,7 @@ namespace Vs.TimeAttendance
                 Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sTB_CU, dt_Temp, "");
                 DateTime dNgay;
                 dNgay = DateTime.ParseExact(cboNgay.Text, "dd/MM/yyyy", cultures);
-                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "sLoadaveCheDoChamCongNV", dNgay, sTB_CU, sTB);
+                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "sPsaveCheDoChamCongNV", dNgay, sTB_CU, sTB);
                 Commons.Modules.ObjSystems.XoaTable(sTB);
                 return true;
             }

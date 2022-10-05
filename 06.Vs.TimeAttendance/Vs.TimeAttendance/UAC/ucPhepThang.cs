@@ -224,7 +224,7 @@ namespace Vs.TimeAttendance
                         string sBT = "sBTPhepThang" + Commons.Modules.UserName;
                         //tạo bảng tạm
                         Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBT, Commons.Modules.ObjSystems.ConvertDatatable(grvPhepThang), "");
-                        SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "sLoadaveTinhPhepThang", sBT, Convert.ToDateTime(cboThang.EditValue));
+                        SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "sPsaveTinhPhepThang", sBT, Convert.ToDateTime(cboThang.EditValue));
                         Commons.Modules.ObjSystems.XoaTable(sBT);
                         LoadThang();
                         LoadGrdPhepThang(false);

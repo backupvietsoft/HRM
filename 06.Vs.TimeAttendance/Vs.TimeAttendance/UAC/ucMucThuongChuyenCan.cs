@@ -224,7 +224,7 @@ namespace Vs.TimeAttendance
             {
 
                 Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sTB, Commons.Modules.ObjSystems.ConvertDatatable(grvData), "");
-                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spSaveMucThuongChuyenCan", sTB,Convert.ToDateTime(cboNgay.EditValue),Convert.ToInt32(cboDonVi.EditValue));
+                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "sLoadaveMucThuongChuyenCan", sTB,Convert.ToDateTime(cboNgay.EditValue),Convert.ToInt32(cboDonVi.EditValue));
                 Commons.Modules.ObjSystems.XoaTable(sTB);
                 return true;
             }

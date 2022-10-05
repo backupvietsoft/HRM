@@ -177,7 +177,7 @@ namespace Vs.TimeAttendance
                                                 Commons.Modules.UserName, Commons.Modules.TypeLanguage));
                 dt.Columns["COM_CA"].ReadOnly = false;
                 Commons.Modules.ObjSystems.MLoadXtraGrid(grdLamThem, grvLamThem, dt, false, false, false, false, true, this.Name);
-
+                grvLamThem.Columns["COM_CA"].Visible = false;
                 DataTable dID_NHOM = new DataTable();
                 dID_NHOM.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetNhomCC", cboNgay.EditValue, Commons.Modules.UserName, Commons.Modules.TypeLanguage));
                 Commons.Modules.ObjSystems.AddCombXtra("ID_NHOM", "TEN_NHOM", grvLamThem, dID_NHOM, false, "ID_NHOM", "NHOM_CHAM_CONG");
@@ -199,7 +199,7 @@ namespace Vs.TimeAttendance
                 dt.Columns["ID_CDLV"].ReadOnly = false;
                 dt.Columns["COM_CA"].ReadOnly = false;
                 Commons.Modules.ObjSystems.MLoadXtraGrid(grdLamThem, grvLamThem, dt, false, false, false, false, true, this.Name);
-
+                grvLamThem.Columns["COM_CA"].Visible = false;
                 DataTable dID_NHOM = new DataTable();
                 dID_NHOM.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetNhomCC", cboNgay.EditValue, Commons.Modules.UserName, Commons.Modules.TypeLanguage));
                 Commons.Modules.ObjSystems.AddCombXtra("ID_NHOM", "TEN_NHOM", grvLamThem, dID_NHOM, false);
@@ -215,9 +215,6 @@ namespace Vs.TimeAttendance
 
         }
 
-        /// <summary>
-        /// Get List CN
-        /// </summary>
         private void LoadGridCongNhan()
         {
 
@@ -234,6 +231,7 @@ namespace Vs.TimeAttendance
                 grvCongNhan.Columns["TEN_NHOM"].OptionsColumn.AllowEdit = false;
                 grvCongNhan.Columns["CA"].OptionsColumn.AllowEdit = false;
                 grvCongNhan.Columns["HO_TEN"].OptionsColumn.AllowEdit = false;
+                grvCongNhan.Columns["PHUT_AN_CA"].OptionsColumn.AllowEdit = false;
                 grvCongNhan.Columns["CHON"].Visible = false;
                 grvCongNhan.Columns["ID_NHOM"].Visible = false;
                 grvCongNhan.Columns["GIO_BD"].ColumnEdit = this.repositoryItemTimeEdit1;
@@ -271,11 +269,6 @@ namespace Vs.TimeAttendance
         }
 
         #region Combobox Changed
-        /// <summary>
-        /// cbo Don vi Change
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void cboDonVi_EditValueChanged(object sender, EventArgs e)
         {
             if (Commons.Modules.sLoad == "0Load") return;
@@ -288,11 +281,6 @@ namespace Vs.TimeAttendance
             grvCongNhan_FocusedRowChanged(null, null);
         }
 
-        /// <summary>
-        /// cbo Xi nghiep Changed
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void cboXiNghiep_EditValueChanged(object sender, EventArgs e)
         {
             if (Commons.Modules.sLoad == "0Load") return;
@@ -306,11 +294,6 @@ namespace Vs.TimeAttendance
             //    grdLamThem.DataSource = null;
         }
 
-        /// <summary>
-        /// cbo To Changed
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void cboTo_EditValueChanged(object sender, EventArgs e)
         {
             if (Commons.Modules.sLoad == "0Load") return;
@@ -324,11 +307,6 @@ namespace Vs.TimeAttendance
             //    grdLamThem.DataSource = null;
         }
 
-        /// <summary>
-        /// combo date change
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void cboNgay_EditValueChanged(object sender, EventArgs e)
         {
             if (Commons.Modules.sLoad == "0Load") return;
@@ -340,9 +318,6 @@ namespace Vs.TimeAttendance
         }
         #endregion
 
-        /// <summary>
-        /// Format Grid
-        /// </summary>
         private void FormatGrvLamThem()
         {
             try
@@ -364,11 +339,6 @@ namespace Vs.TimeAttendance
 
         }
 
-        /// <summary>
-        /// windows button click
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void windowsUIButtonPanel1_ButtonClick(object sender, DevExpress.XtraBars.Docking2010.ButtonEventArgs e)
         {
             WindowsUIButton btn = e.Button as WindowsUIButton;
@@ -382,6 +352,7 @@ namespace Vs.TimeAttendance
                             string sPath = "";
                             sPath = SaveFiles("Excel file (*.xlsx)|*.xlsx");
                             if (sPath == "") return;
+                            this.Cursor = Cursors.WaitCursor;
                             Microsoft.Office.Interop.Excel.Application excelApplication = new Microsoft.Office.Interop.Excel.Application();
                             excelApplication.DisplayAlerts = true;
 
@@ -410,26 +381,32 @@ namespace Vs.TimeAttendance
                             DataView dv = dt.DefaultView;
 
                             DataTable dt1 = new DataTable();
-                            dt1 = dv.ToTable(false, "MS_CN", "HO_TEN", "TEN_NHOM", "CA", "GIO_BD", "GIO_KT");
+                            dt1 = dv.ToTable(false, "MS_CN", "HO_TEN", "TEN_NHOM", "CA", "GIO_BD", "GIO_KT", "PHUT_AN_CA");
                             dt1.Columns["MS_CN"].ColumnName = "MSCN";
                             dt1.Columns["HO_TEN"].ColumnName = "Họ và tên";
                             dt1.Columns["TEN_NHOM"].ColumnName = "Tên nhóm";
                             dt1.Columns["CA"].ColumnName = "Ca";
                             dt1.Columns["GIO_BD"].ColumnName = "Giờ bắt đầu";
                             dt1.Columns["GIO_KT"].ColumnName = "Giờ kết thúc";
+                            dt1.Columns["PHUT_AN_CA"].ColumnName = "Phút ăn ca";
                             Microsoft.Office.Interop.Excel.Range Ranges1 = excelWorkSheet.Range[excelWorkSheet.Cells[1, 1], excelWorkSheet.Cells[dt1.Rows.Count + 1, dt1.Columns.Count]];
-                            Ranges1.Range["A1:F1"].Font.Bold = true;
-                            Ranges1.Range["A1:F1"].HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
-                            Ranges1.Range["A1:F1"].Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+                            Ranges1.Range["A1:G1"].Font.Bold = true;
+                            Ranges1.Range["A1:G1"].HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                            Ranges1.Range["A1:G1"].Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
 
                             Ranges1.ColumnWidth = 20;
                             Ranges1.Range["B1"].ColumnWidth = 30;
                             MExportExcel(dt1, excelWorkSheet, Ranges1);
 
+                            this.Cursor = Cursors.Default;
                             excelApplication.Visible = true;
                             excelWorkbook.Save();
                         }
-                        catch (Exception ex) { XtraMessageBox.Show(ex.Message); }
+                        catch (Exception ex)
+                        {
+                            this.Cursor = Cursors.Default;
+                            XtraMessageBox.Show(ex.Message);
+                        }
                         break;
                     }
                 case "import":
@@ -774,6 +751,8 @@ namespace Vs.TimeAttendance
                 row["GIO_KT"] = dr["GIO_KT"];
                 row["PHUT_BD"] = dr["PHUT_BD"];
                 row["PHUT_KT"] = dr["PHUT_KT"];
+                row["PHUT_AN_CA"] = dr["PHUT_AN_CA"];
+
 
                 dt_capnhat.Rows.Add(row);
 
@@ -812,10 +791,6 @@ namespace Vs.TimeAttendance
             //
         }
 
-        /// <summary>
-        /// Xoa trang nhom 
-        /// </summary>
-        /// <returns></returns>
         private void XoaTrangNhom()
         {
             //int idNhom;
@@ -859,9 +834,6 @@ namespace Vs.TimeAttendance
 
         }
 
-        /// <summary>
-        /// Xoa dong
-        /// </summary>
         private void XoaDangKiGioLamThem()
         {
             if (grvLamThem.RowCount == 0) { Commons.Modules.ObjSystems.msgChung(Commons.ThongBao.msgKhongCoDuLieuXoa); return; }
@@ -883,10 +855,6 @@ namespace Vs.TimeAttendance
             }
         }
 
-        /// <summary>
-        /// Save data
-        /// </summary>
-        /// <returns></returns>
         private bool Savedata()
         {
             DataTable dangKiLamThemGio = new DataTable();
@@ -1229,6 +1197,11 @@ namespace Vs.TimeAttendance
                             sTenCot = "GIO_KT";
                             break;
                         }
+                    case 6:
+                        {
+                            sTenCot = "PHUT_AN_CA";
+                            break;
+                        }
                     default:
                         {
                             break;
@@ -1246,7 +1219,7 @@ namespace Vs.TimeAttendance
                     {
                         try
                         {
-                            if((props[i].GetValue(item) == null ? DateTime.MaxValue : Convert.ToDateTime(props[i].GetValue(item)))  == DateTime.MinValue)
+                            if ((props[i].GetValue(item) == null ? DateTime.MaxValue : Convert.ToDateTime(props[i].GetValue(item))) == DateTime.MinValue)
                             {
                                 XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgCot") + " " + props[i].Name + " " + Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgCuaNhanVien") + " " + values[0] + "-" + values[1] + " " + Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgKhongChinhXac"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 return null;
@@ -1255,7 +1228,19 @@ namespace Vs.TimeAttendance
                         }
                         catch (Exception ex)
                         {
-                            XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgCot") + " " + props[i].Name + " " + Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgCuaNhanVien") + " " + values[0] + "-"+ values[1] + " " + Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgKhongChinhXac"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgCot") + " " + props[i].Name + " " + Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgCuaNhanVien") + " " + values[0] + "-" + values[1] + " " + Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgKhongChinhXac"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return null;
+                        }
+                    }
+                    else if (i == 6)
+                    {
+                        try
+                        {
+                            values[i] = props[i].GetValue(item) == null ? 0 : Convert.ToInt32(props[i].GetValue(item));
+                        }
+                        catch
+                        {
+                            XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgCot") + " " + props[i].Name + " " + Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgCuaNhanVien") + " " + values[0] + "-" + values[1] + " " + Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgKhongChinhXac"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                             return null;
                         }
                     }

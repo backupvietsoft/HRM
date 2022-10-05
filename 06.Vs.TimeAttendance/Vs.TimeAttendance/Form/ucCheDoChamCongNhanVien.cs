@@ -44,7 +44,7 @@ namespace Vs.TimeAttendance
 
         private void ucCheDoChamCongNhanVien_Load(object sender, EventArgs e)
         {
-            Commons.Modules.sPS = "0Load";
+            Commons.Modules.sLoad = "0Load";
             calNgay.EditValue = DateTime.Now;
             EnableButon();
             try
@@ -61,7 +61,7 @@ namespace Vs.TimeAttendance
             Commons.Modules.ObjSystems.LoadCboTo(cboDonVi, cboXiNghiep, cboTo);
 
             LoadGrdCDCCNV();
-            Commons.Modules.sPS = "";
+            Commons.Modules.sLoad = "";
 
             DataTable dCa = new DataTable();
             RepositoryItemLookUpEdit cboCa = new RepositoryItemLookUpEdit();
@@ -134,7 +134,7 @@ namespace Vs.TimeAttendance
         {
             try
             {
-                Commons.Modules.sPS = "0Load";
+                Commons.Modules.sLoad = "0Load";
                 DataTable dt = new DataTable();
                 if (isAdd)
                 {
@@ -156,7 +156,7 @@ namespace Vs.TimeAttendance
                 dID_NHOM.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetNhomCC", cboNgay.EditValue, Commons.Modules.UserName, Commons.Modules.TypeLanguage));
                 Commons.Modules.ObjSystems.AddCombXtra("ID_NHOM", "TEN_NHOM", grvCDCCNV, dID_NHOM, "ID_NHOM", "CHE_DO_LAM_VIEC");
                 FormatGridView();
-                Commons.Modules.sPS = "";
+                Commons.Modules.sLoad = "";
             }
             catch (Exception ex)
             {
@@ -168,37 +168,37 @@ namespace Vs.TimeAttendance
 
         private void cboDonVi_EditValueChanged(object sender, EventArgs e)
         {
-            if (Commons.Modules.sPS == "0Load") return;
-            Commons.Modules.sPS = "0Load";
+            if (Commons.Modules.sLoad == "0Load") return;
+            Commons.Modules.sLoad = "0Load";
             Commons.Modules.ObjSystems.LoadCboXiNghiep(cboDonVi, cboXiNghiep);
             Commons.Modules.ObjSystems.LoadCboTo(cboDonVi, cboXiNghiep, cboTo);
             LoadGrdCDCCNV();
-            Commons.Modules.sPS = "";
+            Commons.Modules.sLoad = "";
         }
 
         private void cboXiNghiep_EditValueChanged(object sender, EventArgs e)
         {
-            if (Commons.Modules.sPS == "0Load") return;
-            Commons.Modules.sPS = "0Load";
+            if (Commons.Modules.sLoad == "0Load") return;
+            Commons.Modules.sLoad = "0Load";
             Commons.Modules.ObjSystems.LoadCboTo(cboDonVi, cboXiNghiep, cboTo);
             LoadGrdCDCCNV();
-            Commons.Modules.sPS = "";
+            Commons.Modules.sLoad = "";
         }
 
         private void cboTo_EditValueChanged(object sender, EventArgs e)
         {
-            if (Commons.Modules.sPS == "0Load") return;
-            Commons.Modules.sPS = "0Load";
+            if (Commons.Modules.sLoad == "0Load") return;
+            Commons.Modules.sLoad = "0Load";
             LoadGrdCDCCNV();
-            Commons.Modules.sPS = "";
+            Commons.Modules.sLoad = "";
         }
 
         private void dNgay_EditValueChanged(object sender, EventArgs e)
         {
-            if (Commons.Modules.sPS == "0Load") return;
-            Commons.Modules.sPS = "0Load";
+            if (Commons.Modules.sLoad == "0Load") return;
+            Commons.Modules.sLoad = "0Load";
             LoadGrdCDCCNV();
-            Commons.Modules.sPS = "";
+            Commons.Modules.sLoad = "";
         }
 
         private void FormatGridView()
@@ -302,7 +302,7 @@ namespace Vs.TimeAttendance
                 dt.Columns["NGAY_AD"].ReadOnly = false;
                 FormatGridView();
                 Commons.Modules.ObjSystems.XoaTable(sTB);
-                Commons.Modules.sPS = "";
+                Commons.Modules.sLoad = "";
 
                 }
             catch
@@ -330,7 +330,7 @@ namespace Vs.TimeAttendance
                 dt.Columns["NGAY_AD"].ReadOnly = false;
                 FormatGridView();
                 Commons.Modules.ObjSystems.XoaTable(sTB);
-                Commons.Modules.sPS = "";
+                Commons.Modules.sLoad = "";
             }
             catch(Exception ex)
             {
@@ -406,7 +406,7 @@ namespace Vs.TimeAttendance
                 Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sTB_CU, dt_Temp, "");
                 DateTime dNgay;
                 dNgay = DateTime.ParseExact(cboNgay.Text, "dd/MM/yyyy", cultures);
-                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spSaveCheDoChamCongNV", dNgay, sTB_CU, sTB);
+                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "sLoadaveCheDoChamCongNV", dNgay, sTB_CU, sTB);
                 Commons.Modules.ObjSystems.XoaTable(sTB);
                 return true;
             }
@@ -495,10 +495,10 @@ namespace Vs.TimeAttendance
 
         private void cboNgay_EditValueChanged(object sender, EventArgs e)
         {
-            if (Commons.Modules.sPS == "0Load") return;
-            Commons.Modules.sPS = "0Load";
+            if (Commons.Modules.sLoad == "0Load") return;
+            Commons.Modules.sLoad = "0Load";
             LoadGrdCDCCNV();
-            Commons.Modules.sPS = "";
+            Commons.Modules.sLoad = "";
         }
 
         private void grvCDCCNV_RowCountChanged(object sender, EventArgs e)

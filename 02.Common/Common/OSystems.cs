@@ -4734,6 +4734,12 @@ namespace Commons
             dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboKhenThuongKyLuat", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll));
             return dt;
         }
+        public DataTable DataXacNhanGio(bool coAll)
+        {
+            DataTable dt = new DataTable();
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComBoXAC_NHAN_GIO", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll));
+            return dt;
+        }
         public DataTable DataLoaiKhenThuong(bool coAll)
         {
             DataTable dt = new DataTable();

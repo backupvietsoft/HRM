@@ -488,7 +488,7 @@ namespace Vs.HRM
                             }
                         case "TY_LE_GT":
                             {
-                                oSheet.Cells[row_dl, col + 1] = "Tỷ lệ";
+                                oSheet.Cells[row_dl, col + 1] = "Phần trăm";
                                 break;
                             }
                         default:
@@ -540,7 +540,7 @@ namespace Vs.HRM
                     {
                         case "TEN_LCV":
                             {
-                                oSheet.Cells[row_dl, col + 6] = "Tỷ lệ CN may";
+                                oSheet.Cells[row_dl, col + 6] = "Phần trăm CN may";
                                 break;
                             }
                         case "TONG_SO_CMN":
@@ -550,7 +550,7 @@ namespace Vs.HRM
                             }
                         case "TY_LE_CNM":
                             {
-                                oSheet.Cells[row_dl, col + 6] = "Tỷ lệ";
+                                oSheet.Cells[row_dl, col + 6] = "Phần trăm";
                                 break;
                             }
                         default:
@@ -608,7 +608,7 @@ namespace Vs.HRM
                             }
                         case "TY_LE_IDD":
                             {
-                                oSheet.Cells[row_dl, col + 11] = "Tỷ lệ";
+                                oSheet.Cells[row_dl, col + 11] = "Phần trăm";
                                 break;
                             }
                         default:
@@ -761,7 +761,7 @@ namespace Vs.HRM
                             }
                         case "TY_LE_QUAN":
                             {
-                                oSheet.Cells[row_dl, col + 1] = "Tỷ lệ";
+                                oSheet.Cells[row_dl, col + 1] = "Phần trăm";
                                 break;
                             }
                         default:
@@ -933,7 +933,7 @@ namespace Vs.HRM
                                 }
                             case "TY_LE_PX":
                                 {
-                                    sheet2.Cells[rowBD, col + 1] = "Tỷ lệ";
+                                    sheet2.Cells[rowBD, col + 1] = "Phần trăm";
                                     sheet2.Cells[rowBD, col + 1].ColumnWidth = 15;
                                     sheet2.Cells[rowBD, col + 1].Interior.Color = Color.FromArgb(255, 255, 0);
                                     break;
@@ -1372,7 +1372,7 @@ namespace Vs.HRM
                 row4_TieuDe_TONG.ColumnWidth = 13;
 
                 Range row4_TieuDe_TYLE = oSheet.get_Range("D4");
-                row4_TieuDe_TYLE.Value = "TỶ LỆ";
+                row4_TieuDe_TYLE.Value = "PHẦN TRĂM";
                 row4_TieuDe_TYLE.ColumnWidth = 13;
                 row4_TieuDe_TYLE.RowHeight = 30;
                 oSheet.Application.ActiveWindow.SplitColumn = 4;

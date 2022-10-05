@@ -602,21 +602,6 @@ namespace Vs.HRM
                 return false;
             }
         }
-
-        private void grvNoiDung_InitNewRow(object sender, DevExpress.XtraGrid.Views.Grid.InitNewRowEventArgs e)
-        {
-            try
-            {
-                if (grvDSUngVien.RowCount == 0)
-                {
-                    return;
-                }
-            }
-            catch
-            {
-            }
-        }
-
         private void cboID_PV_EditValueChanged(object sender, EventArgs e)
         {
             if (Commons.Modules.sLoad == "0Load") return;
@@ -698,7 +683,7 @@ namespace Vs.HRM
                 ucNS.flag = true;
                 ucNS.sTenLab = "labHopDong";
                 //ns.accorMenuleft = accorMenuleft;
-                tableLayoutPanel1.Hide();
+                dataLayoutControl1.Hide();
                 this.Controls.Add(ucNS);
                 ucNS.Dock = DockStyle.Fill;
                 ucNS.backWindowsUIButtonPanel.ButtonClick += BackWindowsUIButtonPanel_ButtonClick;
@@ -739,7 +724,7 @@ namespace Vs.HRM
         public void BackWindowsUIButtonPanel_ButtonClick(object sender, ButtonEventArgs e)
         {
             ucNS.Hide();
-            tableLayoutPanel1.Show();
+            dataLayoutControl1.Show();
             LoadData();
         }
         private void grvDSUngVien_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
@@ -1202,5 +1187,10 @@ namespace Vs.HRM
             }
         }
         #endregion
+
+        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

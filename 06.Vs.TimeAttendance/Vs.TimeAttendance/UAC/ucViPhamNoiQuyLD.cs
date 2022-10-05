@@ -340,7 +340,7 @@ namespace Vs.TimeAttendance
             try
             {
                 Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, stbVPNoiQuyLD, (DataTable)grdViPhamNoiQuyLD.DataSource, "");
-                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spSaveVPNoiQuyLD", stbVPNoiQuyLD);
+                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "sLoadaveVPNoiQuyLD", stbVPNoiQuyLD);
                 Commons.Modules.ObjSystems.XoaTable(stbVPNoiQuyLD);
                 return true;
             }

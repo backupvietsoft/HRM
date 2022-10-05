@@ -49,7 +49,7 @@ namespace Vs.TimeAttendance
         /// <param name="e"></param>
         private void ucDSCongNhanKip_Load(object sender, EventArgs e)
         {
-            Commons.Modules.sPS = "0Load";
+            Commons.Modules.sLoad = "0Load";
             EnableButon(true);
             LoadNgay(Convert.ToDateTime("01/01/1900"));
             Commons.Modules.ObjSystems.LoadCboDonVi(cboDonVi);
@@ -57,7 +57,7 @@ namespace Vs.TimeAttendance
             Commons.Modules.ObjSystems.LoadCboTo(cboDonVi, cboXiNghiep, cboTo);
 
             LoadGrdDSCNKip(isAdd);
-            Commons.Modules.sPS = "";
+            Commons.Modules.sLoad = "";
         }
 
         /// <summary>
@@ -72,7 +72,7 @@ namespace Vs.TimeAttendance
             }
             try
             {
-                Commons.Modules.sPS = "0Load";
+                Commons.Modules.sLoad = "0Load";
                 DataTable dt = new DataTable();
                 dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetListCongNhanKip", cboNgay.EditValue, cboDonVi.EditValue, cboXiNghiep.EditValue, cboTo.EditValue, Commons.Modules.UserName, Commons.Modules.TypeLanguage));
                 Commons.Modules.ObjSystems.MLoadXtraGrid(grdData, grvCNKip, dt, false, false, false, false, true, this.Name);
@@ -82,7 +82,7 @@ namespace Vs.TimeAttendance
                 Commons.Modules.ObjSystems.AddCombXtra("ID_KIP", "TEN_KIP", grvCNKip, dID_KIP, false);
 
                 FormatGridView();
-                Commons.Modules.sPS = "";
+                Commons.Modules.sLoad = "";
             }
             catch (Exception ex)
             {
@@ -98,12 +98,12 @@ namespace Vs.TimeAttendance
         /// <param name="e"></param>
         private void cboDonVi_EditValueChanged(object sender, EventArgs e)
         {
-            if (Commons.Modules.sPS == "0Load") return;
-            Commons.Modules.sPS = "0Load";
+            if (Commons.Modules.sLoad == "0Load") return;
+            Commons.Modules.sLoad = "0Load";
             Commons.Modules.ObjSystems.LoadCboXiNghiep(cboDonVi, cboXiNghiep);
             Commons.Modules.ObjSystems.LoadCboTo(cboDonVi, cboXiNghiep, cboTo);
             LoadGrdDSCNKip(isAdd);
-            Commons.Modules.sPS = "";
+            Commons.Modules.sLoad = "";
         }
 
         /// <summary>
@@ -113,11 +113,11 @@ namespace Vs.TimeAttendance
         /// <param name="e"></param>
         private void cboXiNghiep_EditValueChanged(object sender, EventArgs e)
         {
-            if (Commons.Modules.sPS == "0Load") return;
-            Commons.Modules.sPS = "0Load";
+            if (Commons.Modules.sLoad == "0Load") return;
+            Commons.Modules.sLoad = "0Load";
             Commons.Modules.ObjSystems.LoadCboTo(cboDonVi, cboXiNghiep, cboTo);
             LoadGrdDSCNKip(isAdd);
-            Commons.Modules.sPS = "";
+            Commons.Modules.sLoad = "";
         }
 
         /// <summary>
@@ -127,10 +127,10 @@ namespace Vs.TimeAttendance
         /// <param name="e"></param>
         private void cboTo_EditValueChanged(object sender, EventArgs e)
         {
-            if (Commons.Modules.sPS == "0Load") return;
-            Commons.Modules.sPS = "0Load";
+            if (Commons.Modules.sLoad == "0Load") return;
+            Commons.Modules.sLoad = "0Load";
             LoadGrdDSCNKip(isAdd);
-            Commons.Modules.sPS = "";
+            Commons.Modules.sLoad = "";
         }
 
         /// <summary>
@@ -140,10 +140,10 @@ namespace Vs.TimeAttendance
         /// <param name="e"></param>
         private void cboNgay_EditValueChanged(object sender, EventArgs e)
         {
-            if (Commons.Modules.sPS == "0Load") return;
-            Commons.Modules.sPS = "0Load";
+            if (Commons.Modules.sLoad == "0Load") return;
+            Commons.Modules.sLoad = "0Load";
             LoadGrdDSCNKip(isAdd);
-            Commons.Modules.sPS = "";
+            Commons.Modules.sLoad = "";
         }
         #endregion
 
@@ -233,7 +233,7 @@ namespace Vs.TimeAttendance
         {
             try
             {
-                Commons.Modules.sPS = "0Load";
+                Commons.Modules.sLoad = "0Load";
                 DataTable dt = new DataTable();
                 dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetListEditCNKip", cboNgay.EditValue, cboDonVi.EditValue, cboXiNghiep.EditValue, cboTo.EditValue, Commons.Modules.UserName, Commons.Modules.TypeLanguage));
                 Commons.Modules.ObjSystems.MLoadXtraGrid(grdData, grvCNKip, dt, true, false, false, false, true, this.Name);
@@ -243,7 +243,7 @@ namespace Vs.TimeAttendance
                 Commons.Modules.ObjSystems.AddCombXtra("ID_KIP", "TEN_KIP", grvCNKip, dID_KIP, false);
 
                 FormatGridView();
-                Commons.Modules.sPS = "";
+                Commons.Modules.sLoad = "";
             }
             catch (Exception ex)
             {

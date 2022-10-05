@@ -7,6 +7,9 @@ using DevExpress.XtraBars.Docking2010;
 using DevExpress.XtraLayout;
 using System.Threading;
 using Microsoft.ApplicationBlocks.Data;
+using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraEditors.Repository;
+
 namespace Vs.HRM
 {
     public partial class ucCapNhatGio : DevExpress.XtraEditors.XtraUserControl
@@ -26,53 +29,64 @@ namespace Vs.HRM
         public ucCapNhatGio()
         {
             InitializeComponent();
-            Commons.Modules.ObjSystems.ThayDoiNN(this, windowsUIButton);
+            Commons.Modules.ObjSystems.ThayDoiNN(this, new List<LayoutControlGroup> { Root }, windowsUIButton);
         }
+        RepositoryItemTimeEdit repositoryItemTimeEdit1;
+
         #region Cập nhật giờ
         private void ucCapNhatGio_Load(object sender, EventArgs e)
         {
             Thread.Sleep(1000);
-            Commons.Modules.sPS = "0Load";
-            DateTime dtTN = DateTime.Today;
-            dtTN = dtTN.AddDays(-dtTN.Day + 1);
-            DateTime dtDN = dtTN.AddMonths(1);
-            dtDN = dtDN.AddDays(-1);
-            dTuNgay.EditValue = dtTN;
-            dDenNgay.EditValue = dtDN;
+            Commons.Modules.sLoad = "0Load";
+
+            repositoryItemTimeEdit1 = new RepositoryItemTimeEdit();
+            repositoryItemTimeEdit1.TimeEditStyle = TimeEditStyle.TouchUI;
+            repositoryItemTimeEdit1.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.DateTimeAdvancingCaret;
+            repositoryItemTimeEdit1.Mask.EditMask = "HH:mm";
+
+            repositoryItemTimeEdit1.NullText = "00:00";
+            repositoryItemTimeEdit1.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            repositoryItemTimeEdit1.DisplayFormat.FormatString = "HH:mm";
+            repositoryItemTimeEdit1.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            repositoryItemTimeEdit1.EditFormat.FormatString = "HH:mm";
+
             Commons.OSystems.SetDateEditFormat(dTuNgay);
             Commons.OSystems.SetDateEditFormat(dDenNgay);
 
             Commons.Modules.ObjSystems.LoadCboDonVi(cboDV);
             Commons.Modules.ObjSystems.LoadCboXiNghiep(cboDV, cboXN);
             Commons.Modules.ObjSystems.LoadCboTo(cboDV, cboXN, cboTo);
-            Commons.Modules.sPS = "";
+
+            Commons.Modules.sLoad = "";
+            dTuNgay.EditValue = Convert.ToDateTime(("01/" + DateTime.Now.Month + "/" + DateTime.Now.Year));
         }
         private void cboDV_EditValueChanged(object sender, EventArgs e)
         {
-            if (Commons.Modules.sPS == "0Load") return;
-            Commons.Modules.sPS = "0Load";
+            if (Commons.Modules.sLoad == "0Load") return;
+            Commons.Modules.sLoad = "0Load";
             Commons.Modules.ObjSystems.LoadCboXiNghiep(cboDV, cboXN);
             Commons.Modules.ObjSystems.LoadCboTo(cboDV, cboXN, cboTo);
-            Commons.Modules.sPS = "";
+            LoadData();
+            Commons.Modules.sLoad = "";
         }
         private void cboXN_EditValueChanged(object sender, EventArgs e)
         {
-            if (Commons.Modules.sPS == "0Load") return;
-            Commons.Modules.sPS = "0Load";
+            if (Commons.Modules.sLoad == "0Load") return;
+            Commons.Modules.sLoad = "0Load";
             Commons.Modules.ObjSystems.LoadCboTo(cboDV, cboXN, cboTo);
-            Commons.Modules.sPS = "";
+            LoadData();
+            Commons.Modules.sLoad = "";
         }
         private void cboTo_EditValueChanged(object sender, EventArgs e)
         {
-            if (Commons.Modules.sPS == "0Load") return;
-            Commons.Modules.sPS = "0Load";
-            Commons.Modules.sPS = "";
+            if (Commons.Modules.sLoad == "0Load") return;
+            LoadData();
         }
         private bool kiemtrangay()
         {
             DateTime t = Convert.ToDateTime(dTuNgay.EditValue);
             DateTime d = Convert.ToDateTime(dDenNgay.EditValue);
-            if(t>d)
+            if (t > d)
             {
                 XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msg_TuNgayDenNgay"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                 dDenNgay.Focus();
@@ -98,6 +112,8 @@ namespace Vs.HRM
                             conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
                             conn.Open();
 
+                            string sBT = "sBTCapNhatGio" + Commons.Modules.iIDUser;
+                            Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBT, Commons.Modules.ObjSystems.ConvertDatatable(grvData), "");
                             for (DateTime dt = Convert.ToDateTime(dTuNgay.EditValue); dt <= Convert.ToDateTime(dDenNgay.EditValue); dt = dt.AddDays(1))
                             {
                                 System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spAutoUpdateTimekeeping", conn);
@@ -110,11 +126,13 @@ namespace Vs.HRM
                                 cmd.Parameters.AddWithValue("@DDate", dt);
                                 cmd.ExecuteNonQuery();
                             }
-
-                            XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_CapNhatThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            Commons.Modules.ObjSystems.XoaTable(sBT);
+                            //XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_CapNhatThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            LoadData();
                         }
-                        catch
+                        catch (Exception ex)
                         {
+                            Commons.Modules.ObjSystems.XoaTable("sBTCapNhatGio" + Commons.Modules.iIDUser);
                         }
                         break;
                     }
@@ -125,6 +143,93 @@ namespace Vs.HRM
                     }
             }
         }
+        private void grvData_RowCountChanged(object sender, EventArgs e)
+        {
+            GridView view = sender as GridView;
+            try
+            {
+                int index = ItemForSumNhanVien.Text.IndexOf(':');
+                if (index > 0)
+                {
+                    if (view.RowCount > 0)
+                    {
+                        ItemForSumNhanVien.Text = ItemForSumNhanVien.Text.Substring(0, index) + ": " + view.RowCount.ToString();
+                    }
+                    else
+                    {
+                        ItemForSumNhanVien.Text = ItemForSumNhanVien.Text.Substring(0, index) + ": 0";
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show(ex.Message.ToString());
+            }
+        }
+
         #endregion
+
+        private void LoadData()
+        {
+            try
+            {
+                System.Data.SqlClient.SqlConnection conn;
+                conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                conn.Open();
+                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spCapNhatGioTuDong", conn);
+                cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                cmd.Parameters.Add("@DVi", SqlDbType.Int).Value = Convert.ToInt32(cboDV.EditValue);
+                cmd.Parameters.Add("@XN", SqlDbType.Int).Value = Convert.ToInt32(cboXN.EditValue);
+                cmd.Parameters.Add("@TO", SqlDbType.Int).Value = Convert.ToInt32(cboTo.EditValue);
+                cmd.Parameters.Add("@TNgay", SqlDbType.DateTime).Value = Commons.Modules.ObjSystems.ConvertDateTime(dTuNgay.Text);
+                cmd.Parameters.Add("@DNgay", SqlDbType.DateTime).Value = Commons.Modules.ObjSystems.ConvertDateTime(dDenNgay.Text);
+                cmd.Parameters.Add("@iLoai", SqlDbType.Int).Value = 1;
+                cmd.CommandType = CommandType.StoredProcedure;
+                System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+                DataSet ds = new DataSet();
+                adp.Fill(ds);
+                DataTable dt = new DataTable();
+                dt = ds.Tables[0].Copy();
+                if (grdData.DataSource == null)
+                {
+                    Commons.Modules.ObjSystems.MLoadXtraGrid(grdData, grvData, dt, true, true, false, true, true, this.Name);
+                    grvData.Columns["ID_CN"].Visible = false;
+
+                    grvData.Columns["GIO_DEN"].ColumnEdit = repositoryItemTimeEdit1;
+                    grvData.Columns["GIO_VE"].ColumnEdit = repositoryItemTimeEdit1;
+                    grvData.Columns["MS_CN"].OptionsColumn.AllowEdit = false;
+                    grvData.Columns["HO_TEN"].OptionsColumn.AllowEdit = false;
+                    grvData.Columns["NGAY"].OptionsColumn.AllowEdit = false;
+                    grvData.Columns["GIO_DEN"].OptionsColumn.AllowEdit = false;
+                    grvData.Columns["GIO_VE"].OptionsColumn.AllowEdit = false;
+
+                }
+                else
+                {
+                    grdData.DataSource = dt;
+                }
+            }
+            catch { }
+        }
+
+        private void dTuNgay_EditValueChanged(object sender, EventArgs e)
+        {
+            if (Commons.Modules.sLoad == "0Load") return;
+            Commons.Modules.sLoad = "0Load";
+            Commons.Modules.ObjSystems.ConvertDateTime(dTuNgay.Text);
+            int t = DateTime.DaysInMonth(dTuNgay.DateTime.Year, dTuNgay.DateTime.Month);
+            DateTime secondDateTime = new DateTime(dTuNgay.DateTime.Year, dTuNgay.DateTime.Month, t);
+            dDenNgay.EditValue = secondDateTime;
+            LoadData();
+            Commons.Modules.sLoad = "";
+        }
+
+        private void dDenNgay_EditValueChanged(object sender, EventArgs e)
+        {
+            if (Commons.Modules.sLoad == "0Load") return;
+            LoadData();
+        }
     }
 }

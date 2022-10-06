@@ -35,8 +35,6 @@
             this.popupContainerControl2 = new DevExpress.XtraEditors.PopupContainerControl();
             this.calThang = new DevExpress.XtraEditors.Controls.CalendarControl();
             this.tablePanel1 = new DevExpress.Utils.Layout.TablePanel();
-            this.lblNgayTangCa = new DevExpress.XtraEditors.LabelControl();
-            this.datNgayTangCa = new DevExpress.XtraEditors.DateEdit();
             this.LK_NgayXemBaoCao = new Commons.MPopupContainerEdit();
             this.popupContainerControl1 = new DevExpress.XtraEditors.PopupContainerControl();
             this.grdThang = new DevExpress.XtraGrid.GridControl();
@@ -63,8 +61,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.calThang.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).BeginInit();
             this.tablePanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.datNgayTangCa.Properties.CalendarTimeProperties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.datNgayTangCa.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.LK_NgayXemBaoCao.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.popupContainerControl1)).BeginInit();
             this.popupContainerControl1.SuspendLayout();
@@ -163,8 +159,6 @@
             new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 18F),
             new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 18F),
             new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 28F)});
-            this.tablePanel1.Controls.Add(this.lblNgayTangCa);
-            this.tablePanel1.Controls.Add(this.datNgayTangCa);
             this.tablePanel1.Controls.Add(this.LK_NgayXemBaoCao);
             this.tablePanel1.Controls.Add(this.rdo_DiTreVeSom);
             this.tablePanel1.Controls.Add(this.rdo_ChonBaoCao);
@@ -197,38 +191,6 @@
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F)});
             this.tablePanel1.Size = new System.Drawing.Size(975, 513);
             this.tablePanel1.TabIndex = 4;
-            // 
-            // lblNgayTangCa
-            // 
-            this.tablePanel1.SetColumn(this.lblNgayTangCa, 3);
-            this.lblNgayTangCa.Location = new System.Drawing.Point(351, 55);
-            this.lblNgayTangCa.Margin = new System.Windows.Forms.Padding(28, 7, 3, 3);
-            this.lblNgayTangCa.Name = "lblNgayTangCa";
-            this.tablePanel1.SetRow(this.lblNgayTangCa, 2);
-            this.lblNgayTangCa.Size = new System.Drawing.Size(78, 17);
-            this.lblNgayTangCa.TabIndex = 27;
-            this.lblNgayTangCa.Text = "labelControl1";
-            // 
-            // datNgayTangCa
-            // 
-            this.tablePanel1.SetColumn(this.datNgayTangCa, 4);
-            this.datNgayTangCa.EditValue = null;
-            this.datNgayTangCa.Location = new System.Drawing.Point(482, 52);
-            this.datNgayTangCa.Name = "datNgayTangCa";
-            this.datNgayTangCa.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.datNgayTangCa.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.datNgayTangCa.Properties.DisplayFormat.FormatString = "dd/MM/yyyy";
-            this.datNgayTangCa.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
-            this.datNgayTangCa.Properties.EditFormat.FormatString = "dd/MM/yyyy";
-            this.datNgayTangCa.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
-            this.datNgayTangCa.Properties.Mask.EditMask = "dd/MM/yyyy";
-            this.datNgayTangCa.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.DateTimeAdvancingCaret;
-            this.datNgayTangCa.Properties.Mask.UseMaskAsDisplayFormat = true;
-            this.tablePanel1.SetRow(this.datNgayTangCa, 2);
-            this.datNgayTangCa.Size = new System.Drawing.Size(150, 24);
-            this.datNgayTangCa.TabIndex = 26;
             // 
             // LK_NgayXemBaoCao
             // 
@@ -374,9 +336,9 @@
             // 
             // lbNgay
             // 
-            this.tablePanel1.SetColumn(this.lbNgay, 5);
+            this.tablePanel1.SetColumn(this.lbNgay, 3);
             this.lbNgay.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbNgay.Location = new System.Drawing.Point(663, 53);
+            this.lbNgay.Location = new System.Drawing.Point(351, 53);
             this.lbNgay.Margin = new System.Windows.Forms.Padding(28, 7, 3, 3);
             this.lbNgay.Name = "lbNgay";
             this.tablePanel1.SetRow(this.lbNgay, 2);
@@ -386,9 +348,9 @@
             // 
             // lk_NgayIn
             // 
-            this.tablePanel1.SetColumn(this.lk_NgayIn, 6);
+            this.tablePanel1.SetColumn(this.lk_NgayIn, 4);
             this.lk_NgayIn.EditValue = null;
-            this.lk_NgayIn.Location = new System.Drawing.Point(795, 52);
+            this.lk_NgayIn.Location = new System.Drawing.Point(483, 52);
             this.lk_NgayIn.Margin = new System.Windows.Forms.Padding(4);
             this.lk_NgayIn.Name = "lk_NgayIn";
             this.lk_NgayIn.Properties.Appearance.Options.UseTextOptions = true;
@@ -492,8 +454,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).EndInit();
             this.tablePanel1.ResumeLayout(false);
             this.tablePanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.datNgayTangCa.Properties.CalendarTimeProperties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.datNgayTangCa.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.LK_NgayXemBaoCao.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.popupContainerControl1)).EndInit();
             this.popupContainerControl1.ResumeLayout(false);
@@ -540,7 +500,5 @@
         private DevExpress.XtraGrid.Views.Grid.GridView grvThang;
         private DevExpress.XtraEditors.Controls.CalendarControl calThang;
         private Commons.MPopupContainerEdit LK_NgayXemBaoCao;
-        private DevExpress.XtraEditors.DateEdit datNgayTangCa;
-        private DevExpress.XtraEditors.LabelControl lblNgayTangCa;
     }
 }

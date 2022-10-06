@@ -1,5 +1,6 @@
 ﻿using Commons;
 using DevExpress.Utils;
+using DevExpress.Utils.Menu;
 using DevExpress.XtraBars.Docking2010;
 using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Repository;
@@ -51,7 +52,17 @@ namespace Vs.TimeAttendance
                 datNgayChamCong.EditValue = DateTime.Now.Date;
             }
 
-            repositoryItemTimeEdit1 = new RepositoryItemTimeEdit();
+            //repositoryItemTimeEdit1 = new RepositoryItemTimeEdit();
+            //repositoryItemTimeEdit1.TimeEditStyle = TimeEditStyle.TouchUI;
+            //repositoryItemTimeEdit1.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.DateTimeAdvancingCaret;
+            //repositoryItemTimeEdit1.Mask.EditMask = "HH:mm:ss";
+
+            //repositoryItemTimeEdit1.NullText = "00:00:00";
+            //repositoryItemTimeEdit1.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            //repositoryItemTimeEdit1.DisplayFormat.FormatString = "HH:mm:ss";
+            //repositoryItemTimeEdit1.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            //repositoryItemTimeEdit1.EditFormat.FormatString = "HH:mm:ss";
+
             repositoryItemTimeEdit1.TimeEditStyle = TimeEditStyle.TouchUI;
             repositoryItemTimeEdit1.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.DateTimeAdvancingCaret;
             repositoryItemTimeEdit1.Mask.EditMask = "HH:mm:ss";
@@ -61,6 +72,7 @@ namespace Vs.TimeAttendance
             repositoryItemTimeEdit1.DisplayFormat.FormatString = "HH:mm:ss";
             repositoryItemTimeEdit1.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             repositoryItemTimeEdit1.EditFormat.FormatString = "HH:mm:ss";
+            repositoryItemTimeEdit1.Mask.UseMaskAsDisplayFormat = true;
 
             //dinh dang ngay gio
             Commons.OSystems.SetDateEditFormat(datNgayDen);
@@ -255,7 +267,6 @@ namespace Vs.TimeAttendance
 
                     grvCongNhan.Columns["GIO_DEN"].ColumnEdit = this.repositoryItemTimeEdit1;
                     grvCongNhan.Columns["GIO_VE"].ColumnEdit = this.repositoryItemTimeEdit1;
-
                 }
                 else
                 {
@@ -416,33 +427,35 @@ namespace Vs.TimeAttendance
 
         private void grvCongNhan_ValidatingEditor(object sender, DevExpress.XtraEditors.Controls.BaseContainerValidateEditorEventArgs e)
         {
-            //try
-            //{
-            //    GridView view = sender as GridView;
-            //    DevExpress.XtraGrid.Columns.GridColumn ngayBD = view.Columns["GIO_DEN"];
-            //    DevExpress.XtraGrid.Columns.GridColumn ngayKT = view.Columns["GIO_VE"];
-            //    if (view.FocusedColumn == view.Columns["GIO_DEN"])
-            //    {
-            //        DateTime? fromDate = e.Value as DateTime?;
-            //        DateTime? toDate = Convert.ToDateTime(view.GetRowCellValue(view.FocusedRowHandle, view.Columns["GIO_VE"])) as DateTime?;
-            //        if (fromDate > toDate)
-            //        {
-            //            e.Valid = false;
-            //            view.SetColumnError(ngayBD, "Giờ đến phải nhỏ hơn giờ về"); return;
-            //        }
-            //    }
-            //    if (view.FocusedColumn == view.Columns["GIO_VE"])
-            //    {
-            //        DateTime? fromDate = view.GetRowCellValue(view.FocusedRowHandle, view.Columns["GIO_DEN"]) as DateTime?;
-            //        DateTime? toDate = e.Value as DateTime?;
-            //        if (fromDate > toDate)
-            //        {
-            //            e.Valid = false;
-            //            view.SetColumnError(ngayKT, "Giờ về phải lớn hơn giờ đến"); return;
-            //        }
-            //    }
-            //}
-            //catch { }
+
+            try
+            {
+                GridView view = sender as GridView;
+                DevExpress.XtraGrid.Columns.GridColumn ngayBD = view.Columns["GIO_DEN"];
+                DevExpress.XtraGrid.Columns.GridColumn ngayKT = view.Columns["GIO_VE"];
+                if (view.FocusedColumn == view.Columns["GIO_DEN"])
+                {
+                    DateTime? fromDate = Convert.ToDateTime("1900/01/01 " +  Convert.ToDateTime(e.Value).TimeOfDay) as DateTime?;
+                    DateTime? toDate = Convert.ToDateTime("1900/01/01 "  + Convert.ToDateTime(view.GetRowCellValue(view.FocusedRowHandle, view.Columns["GIO_VE"])).TimeOfDay) as DateTime?;
+                    if (fromDate > toDate)
+                    {
+                        e.Valid = false;
+                        view.SetColumnError(ngayBD, "Giờ đến phải nhỏ hơn giờ về"); return;
+                    }
+                }
+                if (view.FocusedColumn == view.Columns["GIO_VE"])
+                {
+                    DateTime? fromDate = Convert.ToDateTime("1900/01/01 " + Convert.ToDateTime(view.GetRowCellValue(view.FocusedRowHandle, view.Columns["GIO_DEN"])).TimeOfDay) as DateTime?;
+                    DateTime? toDate = Convert.ToDateTime("1900/01/01 " + Convert.ToDateTime(e.Value).TimeOfDay) as DateTime?;
+                    if (fromDate > toDate)
+                    {
+                        e.Valid = false;
+                        view.SetColumnError(ngayKT, "Giờ về phải lớn hơn giờ đến"); return;
+                    }
+                }
+                view.ClearColumnErrors();
+            }
+            catch { }
         }
 
         private void grvCongNhan_InvalidRowException(object sender, DevExpress.XtraGrid.Views.Base.InvalidRowExceptionEventArgs e)
@@ -458,6 +471,96 @@ namespace Vs.TimeAttendance
         private void grvCongNhan_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
         {
 
+        }
+
+
+        #region chuotphai
+        class RowInfo
+        {
+            public RowInfo(DevExpress.XtraGrid.Views.Grid.GridView view, int rowHandle)
+            {
+                this.RowHandle = rowHandle;
+                this.View = view;
+            }
+            public DevExpress.XtraGrid.Views.Grid.GridView View;
+            public int RowHandle;
+        }
+        //Thong tin nhân sự
+        public DXMenuItem MCreateMenuCapNhatAll(DevExpress.XtraGrid.Views.Grid.GridView view, int rowHandle)
+        {
+            string sStr = Commons.Modules.ObjLanguages.GetLanguage(Commons.Modules.ModuleName, this.Name, "lblCapNhatAll", Commons.Modules.TypeLanguage);
+            DXMenuItem menuThongTinNS = new DXMenuItem(sStr, new EventHandler(CapNhatAll));
+            menuThongTinNS.Tag = new RowInfo(view, rowHandle);
+            return menuThongTinNS;
+        }
+        public void CapNhatAll(object sender, EventArgs e)
+        {
+            try
+            {
+                string sCotCN = grvCongNhan.FocusedColumn.FieldName.ToString();
+                try
+                {
+                    if (grvCongNhan.GetFocusedRowCellValue(grvCongNhan.FocusedColumn.FieldName).ToString() == "") return;
+                    string sBTCongNhan = "sBTCongNhan" + Commons.Modules.iIDUser;
+                    Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBTCongNhan, Commons.Modules.ObjSystems.ConvertDatatable(grvCongNhan), "");
+
+                    DataTable dt = new DataTable();
+                    dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spUpdateChuotPhai_TiepNhan", sBTCongNhan, sCotCN, sCotCN.Substring(0, 4) == "NGAY" ? Convert.ToDateTime(grvCongNhan.GetFocusedRowCellValue(grvCongNhan.FocusedColumn.FieldName)).ToString("MM/dd/yyyy") : grvCongNhan.GetFocusedRowCellValue(grvCongNhan.FocusedColumn.FieldName)));
+                    grdCongNhan.DataSource = dt;
+                    Commons.Modules.ObjSystems.XoaTable(sCotCN);
+                }
+                catch (Exception ex)
+                {
+                    Commons.Modules.ObjSystems.XoaTable(sCotCN);
+                }
+            }
+            catch (Exception ex) { }
+        }
+        private void grvDSUngVien_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
+        {
+            try
+            {
+                DevExpress.XtraGrid.Views.Grid.GridView view = sender as DevExpress.XtraGrid.Views.Grid.GridView;
+                if (e.MenuType == DevExpress.XtraGrid.Views.Grid.GridMenuType.Row)
+                {
+                    int irow = e.HitInfo.RowHandle;
+                    e.Menu.Items.Clear();
+                    if (windowsUIButton.Buttons[0].Properties.Visible) return;
+                    if (grvCongNhan.FocusedColumn.FieldName.ToString() != "GIO_DEN" && grvCongNhan.FocusedColumn.FieldName.ToString() != "GIO_VE" && grvCongNhan.FocusedColumn.FieldName.ToString() != "ID_XNG") return;
+                    DevExpress.Utils.Menu.DXMenuItem itemCapNhatAll = MCreateMenuCapNhatAll(view, irow);
+                    e.Menu.Items.Add(itemCapNhatAll);
+                    //if (flag == false) return;
+                }
+            }
+            catch
+            {
+            }
+        }
+
+        #endregion
+
+        private void grdCongNhan_ProcessGridKey(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete)
+            {
+                Int64 idcn = Convert.ToInt64(grvCongNhan.GetFocusedRowCellValue("ID_CN"));
+                if (grvCongNhan.RowCount == 0) { Commons.Modules.ObjSystems.msgChung(Commons.ThongBao.msgKhongCoDuLieuXoa); return; }
+                if (Commons.Modules.ObjSystems.msgHoi(Commons.ThongBao.msgXoa) == DialogResult.No) return;
+                //xóa
+                try
+                {
+                    string sSql = "DELETE dbo.DU_LIEU_QUET_THE WHERE ID_CN = " + idcn + " AND NGAY = '" +
+                        Convert.ToDateTime(grvCongNhan.GetFocusedRowCellValue("NGAY_DEN")).ToString("yyyy/MM/dd") +
+                        "' AND CONVERT(nvarchar(10),GIO_DEN,108) = '" +
+                        Convert.ToDateTime(grvCongNhan.GetFocusedRowCellValue("GIO_DEN")).ToString("HH:mm:ss") + "'";
+                    SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, sSql);
+                    grvCongNhan.DeleteSelectedRows();
+                }
+                catch
+                {
+                    Commons.Modules.ObjSystems.msgChung(Commons.ThongBao.msgKhongCoDuLieuXoa);
+                }
+            }
         }
     }
 }

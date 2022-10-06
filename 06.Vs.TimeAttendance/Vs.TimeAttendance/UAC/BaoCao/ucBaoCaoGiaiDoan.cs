@@ -1760,17 +1760,33 @@ namespace Vs.HRM
                 Excell.Range formatRange4;
                 string CurentColumn = string.Empty;
                 int rowbd;
+                int rowDup = 0; // row bat dau của dữ liệu duplicate
                 int colKT = dtBCThang.Columns.Count;
+                bool bChan = false;
                 for (rowbd = 8; rowbd <= rowCnt; rowbd++)
                 {
                     formatRange = oSheet.get_Range("B" + rowbd + "");
                     formatRange1 = oSheet.get_Range("B" + (rowbd + 1).ToString());
 
+                    if (formatRange.Value == null)
+                    {
+                        formatRange = oSheet.get_Range("B" + (rowDup).ToString() + "");
+                    }
                     if (formatRange.Value == formatRange1.Value)
                     {
-                        formatRange1.Value = null;
+                        if (bChan == false)
+                        {
+                            rowDup = rowbd;
+                        }
+                        bChan = true;
+                        formatRange.Value = null;
                         formatRange3 = oSheet.get_Range("B" + rowbd + "", "B" + (rowbd + 1).ToString());
                         formatRange3.Merge();
+                    }
+                    else
+                    {
+                        bChan = false;
+                        rowDup = 0;
                     }
                     //formatRange.NumberFormat = "#,##0.00;(#,##0.00); ; ";
                 }

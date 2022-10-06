@@ -157,42 +157,53 @@ namespace Vs.HRM
         {
             try
             {
-                labelNV.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-                labelNV.ForeColor = System.Drawing.Color.FromArgb(0, 0, 255);
-                labelNV.Text = grvDSCongNhan.GetFocusedRowCellValue(grvDSCongNhan.Columns["MS_CN"]).ToString() + " - " + grvDSCongNhan.GetFocusedRowCellValue(grvDSCongNhan.Columns["HO_TEN"]).ToString();
-            }
-            catch (Exception ex) { }
-            grdDSCongNhan.Visible = false;
-            ucCTQLNS dl = new ucCTQLNS(Convert.ToInt64(grvDSCongNhan.GetFocusedRowCellValue(grvDSCongNhan.Columns["ID_CN"])));
-            dl.Refresh();
-            dt = dl.dt;
-            navigationFrame1.SelectedPage.Visible = false;
-            if (dt != null && dt.Rows.Count > 0)
-            {
-                try
+                DevExpress.Utils.DXMouseEventArgs ea = e as DevExpress.Utils.DXMouseEventArgs;
+                GridView view = sender as GridView;
+                DevExpress.XtraGrid.Views.Grid.ViewInfo.GridHitInfo info = view.CalcHitInfo(ea.Location);
+                if (info.InRow || info.InRowCell)
                 {
-                    string str = dt.Rows[0]["HO"] + " " + dt.Rows[0]["TEN"];
-                }
-                catch
-                {
-
-                }
-            }
-            navigationPage2.Controls.Add(dl);
-            dl.Dock = DockStyle.Fill;
-            dl.backWindowsUIButtonPanel.ButtonClick += BackWindowsUIButtonPanel_ButtonClick;
-            Thread thread = new Thread(delegate ()
-            {
-                if (this.InvokeRequired)
-                {
-                    this.Invoke(new MethodInvoker(delegate
+                    try
                     {
-                        navigationFrame1.SelectedPage = navigationPage2;
-                    }));
+                        labelNV.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                        labelNV.ForeColor = System.Drawing.Color.FromArgb(0, 0, 255);
+                        labelNV.Text = grvDSCongNhan.GetFocusedRowCellValue(grvDSCongNhan.Columns["MS_CN"]).ToString() + " - " + grvDSCongNhan.GetFocusedRowCellValue(grvDSCongNhan.Columns["HO_TEN"]).ToString();
+                    }
+                    catch (Exception ex) { }
+                    grdDSCongNhan.Visible = false;
+                    ucCTQLNS dl = new ucCTQLNS(Convert.ToInt64(grvDSCongNhan.GetFocusedRowCellValue(grvDSCongNhan.Columns["ID_CN"])));
+                    dl.Refresh();
+                    dt = dl.dt;
+                    navigationFrame1.SelectedPage.Visible = false;
+                    if (dt != null && dt.Rows.Count > 0)
+                    {
+                        try
+                        {
+                            string str = dt.Rows[0]["HO"] + " " + dt.Rows[0]["TEN"];
+                        }
+                        catch
+                        {
+
+                        }
+                    }
+                    navigationPage2.Controls.Add(dl);
+                    dl.Dock = DockStyle.Fill;
+                    dl.backWindowsUIButtonPanel.ButtonClick += BackWindowsUIButtonPanel_ButtonClick;
+                    Thread thread = new Thread(delegate ()
+                    {
+                        if (this.InvokeRequired)
+                        {
+                            this.Invoke(new MethodInvoker(delegate
+                            {
+                                navigationFrame1.SelectedPage = navigationPage2;
+                            }));
+                        }
+                    }, 100);
+                    thread.Start();
+                    accorMenuleft.Visible = false;
                 }
-            }, 100);
-            thread.Start();
-            accorMenuleft.Visible = false;
+            }
+            catch { }
+
         }
         private void Selecttab()
         {

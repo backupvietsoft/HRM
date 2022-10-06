@@ -152,8 +152,6 @@ namespace Vs.TimeAttendance
                 LoadNgay();
                 LoadTinhTrangHopDong();
                 rdo_DiTreVeSom.Visible = false;
-                datNgayTangCa.Enabled = false;
-                datNgayTangCa.EditValue = DateTime.Now;
                 lk_NgayIn.EditValue = DateTime.Today;
                 Commons.OSystems.SetDateEditFormat(lk_NgayIn);
             }
@@ -184,13 +182,11 @@ namespace Vs.TimeAttendance
                     }
                 case "rdo_DanhSachNVTangCaNgay":
                     {
-                        datNgayTangCa.Enabled = true;
                         rdo_DiTreVeSom.Visible = false;
                         break;
                     }
                 default:
                     rdo_DiTreVeSom.Visible = false;
-                    datNgayTangCa.Enabled = false;
                     break;
             }
         }
@@ -723,7 +719,7 @@ namespace Vs.TimeAttendance
             DataTable dt;
             System.Data.SqlClient.SqlConnection conn;
             dt = new DataTable();
-            frm.rpt = new rptDSNVTangCaTheoNgay(Convert.ToDateTime(datNgayTangCa.EditValue), lk_NgayIn.DateTime);
+            frm.rpt = new rptDSNVTangCaTheoNgay(Convert.ToDateTime(LK_NgayXemBaoCao.EditValue), lk_NgayIn.DateTime);
 
             try
             {
@@ -737,7 +733,7 @@ namespace Vs.TimeAttendance
                 cmd.Parameters.Add("@TO", SqlDbType.Int).Value = LK_TO.EditValue;
                 cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
                 cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
-                cmd.Parameters.Add("@NGAY", SqlDbType.Date).Value = Convert.ToDateTime(datNgayTangCa.EditValue);
+                cmd.Parameters.Add("@NGAY", SqlDbType.Date).Value = Commons.Modules.ObjSystems.ConvertDateTime(LK_NgayXemBaoCao.Text);
 
                 cmd.CommandType = CommandType.StoredProcedure;
                 System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
@@ -770,7 +766,7 @@ namespace Vs.TimeAttendance
                 cmd.Parameters.Add("@DVi", SqlDbType.Int).Value = LK_DON_VI.EditValue;
                 cmd.Parameters.Add("@XN", SqlDbType.Int).Value = LK_XI_NGHIEP.EditValue;
                 cmd.Parameters.Add("@TO", SqlDbType.Int).Value = LK_TO.EditValue;
-                cmd.Parameters.Add("@NGAY_TC", SqlDbType.Date).Value = Convert.ToDateTime(datNgayTangCa.EditValue);
+                cmd.Parameters.Add("@NGAY_TC", SqlDbType.Date).Value = Convert.ToDateTime(LK_NgayXemBaoCao.EditValue);
                 cmd.CommandType = CommandType.StoredProcedure;
                 System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
 
@@ -836,7 +832,7 @@ namespace Vs.TimeAttendance
                 row1_TieuDe_BaoCao.Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
                 row1_TieuDe_BaoCao.Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
                 row1_TieuDe_BaoCao.RowHeight = 15;
-                row1_TieuDe_BaoCao.Value2 = "STILL NEED MORE HOURS  JUNE " + Convert.ToDateTime(datNgayTangCa.EditValue).Year + "";
+                row1_TieuDe_BaoCao.Value2 = "STILL NEED MORE HOURS  JUNE " + Convert.ToDateTime(LK_NgayXemBaoCao.EditValue).Year + "";
                 row1_TieuDe_BaoCao.Font.Color = Color.FromArgb(255, 0, 255);
 
                 Range row2_TieuDe_BaoCao = oSheet.get_Range("F2", "M2");
@@ -847,7 +843,7 @@ namespace Vs.TimeAttendance
                 row2_TieuDe_BaoCao.Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
                 row2_TieuDe_BaoCao.Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
                 row2_TieuDe_BaoCao.RowHeight = 15;
-                row2_TieuDe_BaoCao.Value2 = " VĂN BẢN THỎA THUẬN LÀM THÊM GIỜ ………/  " + Convert.ToDateTime(datNgayTangCa.EditValue).Month + "  NĂM " + Convert.ToDateTime(datNgayTangCa.EditValue).Year + "";
+                row2_TieuDe_BaoCao.Value2 = " VĂN BẢN THỎA THUẬN LÀM THÊM GIỜ ………/  " + Convert.ToDateTime(LK_NgayXemBaoCao.EditValue).Month + "  NĂM " + Convert.ToDateTime(LK_NgayXemBaoCao.EditValue).Year + "";
                 row2_TieuDe_BaoCao.Font.Color = Color.FromArgb(255, 0, 255);
 
                 Range row1_MauSo = oSheet.get_Range("R1", "S1");
@@ -1876,7 +1872,7 @@ namespace Vs.TimeAttendance
                 }
 
                 formatRange9 = oSheet.get_Range("N7", lastColumn + (rowCnt));
-                formatRange9.NumberFormat = @"0.0\%";
+                formatRange9.NumberFormat = @"0%";
                 try { formatRange9.TextToColumns(Type.Missing, Microsoft.Office.Interop.Excel.XlTextParsingType.xlDelimited, Microsoft.Office.Interop.Excel.XlTextQualifier.xlTextQualifierDoubleQuote); } catch { }
 
 

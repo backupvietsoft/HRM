@@ -510,79 +510,86 @@ namespace Vs.TimeAttendance
                         //load csdl
                         if (loaiLink == 1)
                         {
-                            tbDLQT.Load(SqlHelper.ExecuteReader(Commons.Modules.connect, CommandType.Text, "SELECT RIGHT(UserEnrollNumber,5) AS	MS_THE_CC,TimeStr  AS NGAY FROM dbo.CheckInOut WHERE CONVERT(NVARCHAR(13),TimeStr,103) = '" + dtNgayChamCong.Text + "'"));
+                            if(Convert.ToInt32(cbDonVi.EditValue) == 1)
+                            {
+                                Commons.Modules.connect = "Server=27.74.240.29;database=DATA_CHAM_CONG_DM1;uid=sa;pwd=codaikadaiku;Connect Timeout=9999;";
+                            }
+                            else
+                            {
+                                Commons.Modules.connect = "Server=27.74.240.29;database=DATA_CHAM_CONG_DM2;uid=sa;pwd=codaikadaiku;Connect Timeout=9999;";
+                            }
+                            tbDLQT.Load(SqlHelper.ExecuteReader(Commons.Modules.connect, CommandType.Text, "SELECT UserEnrollNumber AS MS_THE_CC,TimeStr  AS NGAY FROM dbo.CheckInOut WHERE CONVERT(NVARCHAR(13),TimeStr,103) = '" + dtNgayChamCong.Text + "'"));
                         }
                         else
                         {
+                            #region LinkExcel
+                            string sPath = "";
+                            sPath = Commons.Modules.ObjSystems.OpenFiles("All Excel Files (*.xls;*.xlsx)|*.xls;*.xlsx|" + "All Files (*.*)|*.*");
+                            string sBTNgay = "sBTNgay" + Commons.Modules.iIDUser;
 
-                        #region LinkExcel
-                        string sPath = "";
-                        sPath = Commons.Modules.ObjSystems.OpenFiles("All Excel Files (*.xls;*.xlsx)|*.xls;*.xlsx|" + "All Files (*.*)|*.*");
-                        string sBTNgay = "sBTNgay" + Commons.Modules.iIDUser;
-
-                        if (sPath == "") return;
-                        try
-                        {
-                            //Lấy đường dẫn
-                            var source = new ExcelDataSource();
-                            source.FileName = sPath;
-
-                            //Lấy worksheet
-                            Workbook workbook = new Workbook();
-                            string ext = System.IO.Path.GetExtension(sPath);
-                            if (ext.ToLower() == ".xlsx")
-                                workbook.LoadDocument(sPath, DevExpress.Spreadsheet.DocumentFormat.Xlsx);
-                            else
-                                workbook.LoadDocument(sPath, DevExpress.Spreadsheet.DocumentFormat.Xls);
-                            List<string> wSheet = new List<string>();
-                            for (int i = 0; i < workbook.Worksheets.Count; i++)
-                            {
-                                wSheet.Add(workbook.Worksheets[i].Name.ToString());
-                            }
-                            //Load worksheet
-                            XtraInputBoxArgs args = new XtraInputBoxArgs();
-                            // set required Input Box options
-                            args.Caption = "Chọn sheet cần nhập dữ liệu";
-                            args.Prompt = "Chọn sheet cần nhập dữ liệu";
-                            args.DefaultButtonIndex = 0;
-
-                            // initialize a DateEdit editor with custom settings
-                            ComboBoxEdit editor = new ComboBoxEdit();
-                            editor.Properties.Items.AddRange(wSheet);
-                            editor.EditValue = wSheet[0].ToString();
-
-                            args.Editor = editor;
-                            // a default DateEdit value
-                            args.DefaultResponse = wSheet[0].ToString();
-                            // display an Input Box with the custom editor
-                            var result = XtraInputBox.Show(args);
-                            if (result == null || result.ToString() == "") return;
-
-                            var worksheetSettings = new ExcelWorksheetSettings(result.ToString());
-                            source.SourceOptions = new ExcelSourceOptions(worksheetSettings);
-                            source.Fill();
-
-
-                            DataTable dt = new DataTable();
-                            dt = new DataTable();
-                            dt = ToDataTable(source);
-                            //dt.AsEnumerable().Where(x => x["NGAY"].ToString() == "" + dtNgayChamCong.EditValue + "").CopyToDataTable();
+                            if (sPath == "") return;
                             try
                             {
-                                dt = dt.AsEnumerable().Where(x => x["NGAY"].Equals(dtNgayChamCong.EditValue)).CopyToDataTable();
+                                //Lấy đường dẫn
+                                var source = new ExcelDataSource();
+                                source.FileName = sPath;
+
+                                //Lấy worksheet
+                                Workbook workbook = new Workbook();
+                                string ext = System.IO.Path.GetExtension(sPath);
+                                if (ext.ToLower() == ".xlsx")
+                                    workbook.LoadDocument(sPath, DevExpress.Spreadsheet.DocumentFormat.Xlsx);
+                                else
+                                    workbook.LoadDocument(sPath, DevExpress.Spreadsheet.DocumentFormat.Xls);
+                                List<string> wSheet = new List<string>();
+                                for (int i = 0; i < workbook.Worksheets.Count; i++)
+                                {
+                                    wSheet.Add(workbook.Worksheets[i].Name.ToString());
+                                }
+                                //Load worksheet
+                                XtraInputBoxArgs args = new XtraInputBoxArgs();
+                                // set required Input Box options
+                                args.Caption = "Chọn sheet cần nhập dữ liệu";
+                                args.Prompt = "Chọn sheet cần nhập dữ liệu";
+                                args.DefaultButtonIndex = 0;
+
+                                // initialize a DateEdit editor with custom settings
+                                ComboBoxEdit editor = new ComboBoxEdit();
+                                editor.Properties.Items.AddRange(wSheet);
+                                editor.EditValue = wSheet[0].ToString();
+
+                                args.Editor = editor;
+                                // a default DateEdit value
+                                args.DefaultResponse = wSheet[0].ToString();
+                                // display an Input Box with the custom editor
+                                var result = XtraInputBox.Show(args);
+                                if (result == null || result.ToString() == "") return;
+
+                                var worksheetSettings = new ExcelWorksheetSettings(result.ToString());
+                                source.SourceOptions = new ExcelSourceOptions(worksheetSettings);
+                                source.Fill();
+
+
+                                DataTable dt = new DataTable();
+                                dt = new DataTable();
+                                dt = ToDataTable(source);
+                                //dt.AsEnumerable().Where(x => x["NGAY"].ToString() == "" + dtNgayChamCong.EditValue + "").CopyToDataTable();
+                                try
+                                {
+                                    dt = dt.AsEnumerable().Where(x => x["NGAY"].Equals(dtNgayChamCong.EditValue)).CopyToDataTable();
+                                }
+                                catch (Exception ex) { dt = dt.Clone(); }
+                                Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBTNgay, dt, "");
+                                tbDLQT.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spUpdatetbDLQT", sBTNgay, Convert.ToInt32((dt.Columns.Count - 2) / 2)));
                             }
-                            catch (Exception ex) { dt = dt.Clone(); }
-                            Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBTNgay, dt, "");
-                            tbDLQT.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spUpdatetbDLQT", sBTNgay, Convert.ToInt32((dt.Columns.Count - 2) / 2)));
-                        }
-                        catch (Exception ex)
-                        {
-                            XtraMessageBox.Show(ex.Message);
-                            bLinkOK = false;
-                            Commons.Modules.ObjSystems.XoaTable(sBTNgay);
-                            return;
-                        }
-                        #endregion
+                            catch (Exception ex)
+                            {
+                                XtraMessageBox.Show(ex.Message);
+                                bLinkOK = false;
+                                Commons.Modules.ObjSystems.XoaTable(sBTNgay);
+                                return;
+                            }
+                            #endregion
                         }
 
                         System.Data.SqlClient.SqlConnection conn;

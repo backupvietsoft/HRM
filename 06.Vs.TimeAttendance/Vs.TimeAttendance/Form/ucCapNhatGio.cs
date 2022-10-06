@@ -9,6 +9,7 @@ using System.Threading;
 using Microsoft.ApplicationBlocks.Data;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraEditors.Repository;
+using DevExpress.Utils;
 
 namespace Vs.HRM
 {
@@ -200,6 +201,10 @@ namespace Vs.HRM
 
                     grvData.Columns["GIO_DEN"].ColumnEdit = repositoryItemTimeEdit1;
                     grvData.Columns["GIO_VE"].ColumnEdit = repositoryItemTimeEdit1;
+
+                    grvData.Columns["GIO_DEN"].DisplayFormat.FormatType = FormatType.DateTime;
+                    grvData.Columns["GIO_DEN"].DisplayFormat.FormatString = "HH:mm:ss";
+
                     grvData.Columns["MS_CN"].OptionsColumn.AllowEdit = false;
                     grvData.Columns["HO_TEN"].OptionsColumn.AllowEdit = false;
                     grvData.Columns["NGAY"].OptionsColumn.AllowEdit = false;

@@ -24,13 +24,14 @@ using DevExpress.Spreadsheet;
 using Microsoft.Office.Interop.Excel;
 using Borders = Microsoft.Office.Interop.Excel.Borders;
 using System.Collections;
+using System.Diagnostics;
 
 namespace Vs.TimeAttendance
 {
     public partial class ucDKThoiGianKhongLamSP : DevExpress.XtraEditors.XtraUserControl
     {
         private static bool isAdd = false;
-
+        private string ChuoiKT = "";
         public static ucDKThoiGianKhongLamSP _instance;
         public static ucDKThoiGianKhongLamSP Instance
         {
@@ -69,11 +70,14 @@ namespace Vs.TimeAttendance
                 DataTable dt = new DataTable();
                 dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetlistDK_TG_KHONG_LAM_SP", Convert.ToDateTime(cboThang.EditValue),
                                             cboDonVi.EditValue, cboXiNghiep.EditValue, cboTo.EditValue, Commons.Modules.UserName, Commons.Modules.TypeLanguage, isAdd));
-                Commons.Modules.ObjSystems.MLoadXtraGrid(grdData, grvData, dt, true, false, false, true, true, this.Name);
+                Commons.Modules.ObjSystems.MLoadXtraGrid(grdData, grvData, dt, true, true, false, true, true, this.Name);
                 dt.Columns["MS_CN"].ReadOnly = true;
                 dt.Columns["HO_TEN"].ReadOnly = true;
+                dt.Columns["TEN_XN"].ReadOnly = true;
+                dt.Columns["TEN_TO"].ReadOnly = true;
+
                 grvData.Columns["ID_CN"].Visible = false;
-                grvData.Columns["THANG"].Visible = false;
+                grvData.Columns["NGAY"].Visible = false;
             }
             catch
             {
@@ -90,13 +94,14 @@ namespace Vs.TimeAttendance
 
                 //ItemForDateThang.Visibility = LayoutVisibility.Never;
                 DataTable dtthang = new DataTable();
-                string sSql = "SELECT disTINCT SUBSTRING(CONVERT(VARCHAR(10),THANG,103),4,2) as M, RIGHT(CONVERT(VARCHAR(10),THANG,103),4) AS Y ,RIGHT(CONVERT(VARCHAR(10),THANG,103),7) AS THANG FROM dbo.DK_TG_KHONG_LAM_SP ORDER BY Y DESC , M DESC";
+                string sSql = "SELECT DISTINCT CONVERT(NVARCHAR(10),NGAY,103) NGAY ,SUBSTRING(CONVERT(VARCHAR(10),NGAY,103),4,2) as M, RIGHT(CONVERT(VARCHAR(10),NGAY,103),4) AS Y ,RIGHT(CONVERT(VARCHAR(10),NGAY,103),7) AS THANG FROM dbo.DK_TG_KHONG_LAM_SP ORDER BY Y DESC , M DESC";
                 dtthang.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSql));
                 Commons.Modules.ObjSystems.MLoadXtraGrid(grdThang, grvThang, dtthang, false, true, true, true, true, this.Name);
                 grvThang.Columns["M"].Visible = false;
                 grvThang.Columns["Y"].Visible = false;
+                grvThang.Columns["THANG"].Visible = false;
 
-                cboThang.Text = grvThang.GetFocusedRowCellValue("THANG").ToString();
+                cboThang.Text = grvThang.GetFocusedRowCellValue("NGAY").ToString();
             }
             catch (Exception ex)
             {
@@ -114,160 +119,215 @@ namespace Vs.TimeAttendance
             {
                 case "export":
                     {
+                        //try
+                        //{
+                        //    string sPath = "";
+                        //    sPath = SaveFiles("Excel file (*.xlsx)|*.xlsx");
+                        //    if (sPath == "") return;
+                        //    Microsoft.Office.Interop.Excel.Application excelApplication = new Microsoft.Office.Interop.Excel.Application();
+                        //    excelApplication.DisplayAlerts = true;
+
+                        //    excelApplication.Visible = false;
+
+
+                        //    System.Globalization.CultureInfo oldCultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture;
+                        //    System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
+
+                        //    Microsoft.Office.Interop.Excel.Workbooks excelWorkbooks = excelApplication.Workbooks;
+                        //    object misValue = System.Reflection.Missing.Value;
+                        //    Microsoft.Office.Interop.Excel.Workbook excelWorkbook = excelApplication.Workbooks.Add(misValue);
+
+                        //    excelWorkbook.SaveAs(sPath);
+
+                        //    Microsoft.Office.Interop.Excel.Worksheet excelWorkSheet = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Sheets[1];
+
+                        //    DataTable dt = new DataTable();
+                        //    dt = ((DataTable)grdData.DataSource).Copy();
+                        //    dt.DefaultView.RowFilter = "";
+                        //    DataView dv = dt.DefaultView;
+
+                        //    DataTable dt1 = new DataTable();
+                        //    dt1 = dv.ToTable(false, "MS_CN", "HO_TEN", "TEN_XN", "TEN_TO", "TG_HC", "TG_TC_NT", "TG_TC_CN");
+                        //    dt1.Columns["MS_CN"].ColumnName = "MSCN";
+                        //    dt1.Columns["HO_TEN"].ColumnName = "Họ và tên";
+                        //    dt1.Columns["TEN_XN"].ColumnName = "Xưởng/Phòng ban";
+                        //    dt1.Columns["TEN_TO"].ColumnName = "Tổ";
+                        //    dt1.Columns["TG_HC"].ColumnName = "Giờ hành chính";
+                        //    dt1.Columns["TG_TC_NT"].ColumnName = "Giờ tăng ca ngày thường";
+                        //    dt1.Columns["TG_TC_CN"].ColumnName = "Giờ tăng ca chủ nhật";
+                        //    Microsoft.Office.Interop.Excel.Range Ranges1 = excelWorkSheet.Range[excelWorkSheet.Cells[1, 1], excelWorkSheet.Cells[dt1.Rows.Count + 1, dt1.Columns.Count]];
+                        //    Ranges1.Range["A1:G1"].Font.Bold = true;
+                        //    Ranges1.Range["A1:G1"].HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                        //    Ranges1.Range["A1:G1"].Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+                        //    Ranges1.WrapText = true;
+                        //    Ranges1.ColumnWidth = 20;
+                        //    Ranges1.Range["B1"].ColumnWidth = 30;
+                        //    Ranges1.Range["E2:E" + ((dt1.Rows.Count + 1)) + ""].NumberFormat = "0.0";
+                        //    Ranges1.Range["F2:F" + ((dt1.Rows.Count + 1)) + ""].NumberFormat = "0.0";
+                        //    Ranges1.Range["G2:G" + ((dt1.Rows.Count + 1)) + ""].NumberFormat = "0.0";
+                        //    BorderAround(Ranges1.Range["A1:G" + (dt1.Rows.Count + 1) + ""]);
+                        //    MExportExcel(dt1, excelWorkSheet, Ranges1);
+
+                        //    excelApplication.Visible = true;
+                        //    excelWorkbook.Save();
+                        //}
+                        //catch (Exception ex) { XtraMessageBox.Show(ex.Message); }
+
                         try
                         {
-                            string sPath = "";
-                            sPath = SaveFiles("Excel file (*.xlsx)|*.xlsx");
-                            if (sPath == "") return;
-                            Microsoft.Office.Interop.Excel.Application excelApplication = new Microsoft.Office.Interop.Excel.Application();
-                            excelApplication.DisplayAlerts = true;
-
-                            excelApplication.Visible = false;
-
-
-                            System.Globalization.CultureInfo oldCultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture;
-                            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
-
-                            Microsoft.Office.Interop.Excel.Workbooks excelWorkbooks = excelApplication.Workbooks;
-                            object misValue = System.Reflection.Missing.Value;
-                            Microsoft.Office.Interop.Excel.Workbook excelWorkbook = excelApplication.Workbooks.Add(misValue);
-
-                            excelWorkbook.SaveAs(sPath);
-
-                            Microsoft.Office.Interop.Excel.Worksheet excelWorkSheet = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Sheets[1];
-
-                            DataTable dt = new DataTable();
-                            dt = ((DataTable)grdData.DataSource).Copy();
-                            dt.DefaultView.RowFilter = "";
-                            DataView dv = dt.DefaultView;
-
-                            DataTable dt1 = new DataTable();
-                            dt1 = dv.ToTable(false, "MS_CN", "HO_TEN", "TEN_XN", "TEN_TO", "TG_HC", "TG_TC_NT", "TG_TC_CN");
-                            dt1.Columns["MS_CN"].ColumnName = "MSCN";
-                            dt1.Columns["HO_TEN"].ColumnName = "Họ và tên";
-                            dt1.Columns["TEN_XN"].ColumnName = "Xưởng/Phòng ban";
-                            dt1.Columns["TEN_TO"].ColumnName = "Tổ";
-                            dt1.Columns["TG_HC"].ColumnName = "Giờ hành chính";
-                            dt1.Columns["TG_TC_NT"].ColumnName = "Giờ tăng ca ngày thường";
-                            dt1.Columns["TG_TC_CN"].ColumnName = "Giờ tăng ca chủ nhật";
-                            Microsoft.Office.Interop.Excel.Range Ranges1 = excelWorkSheet.Range[excelWorkSheet.Cells[1, 1], excelWorkSheet.Cells[dt1.Rows.Count + 1, dt1.Columns.Count]];
-                            Ranges1.Range["A1:G1"].Font.Bold = true;
-                            Ranges1.Range["A1:G1"].HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
-                            Ranges1.Range["A1:G1"].Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
-                            Ranges1.WrapText = true;
-                            Ranges1.ColumnWidth = 20;
-                            Ranges1.Range["B1"].ColumnWidth = 30;
-                            Ranges1.Range["E2:E" + ((dt1.Rows.Count + 1)) + ""].NumberFormat = "0.0";
-                            Ranges1.Range["F2:F" + ((dt1.Rows.Count + 1)) + ""].NumberFormat = "0.0";
-                            Ranges1.Range["G2:G" + ((dt1.Rows.Count + 1)) + ""].NumberFormat = "0.0";
-                            BorderAround(Ranges1.Range["A1:G" + (dt1.Rows.Count + 1) + ""]);
-                            MExportExcel(dt1, excelWorkSheet, Ranges1);
-
-                            excelApplication.Visible = true;
-                            excelWorkbook.Save();
+                            System.Data.SqlClient.SqlConnection conn;
+                            conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                            conn.Open();
+                            System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spGetlistDK_TG_KHONG_LAM_SP", conn);
+                            cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                            cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                            cmd.Parameters.Add("@DNgay", SqlDbType.DateTime).Value = Commons.Modules.ObjSystems.ConvertDateTime(cboThang.Text);
+                            cmd.Parameters.Add("@ID_DV", SqlDbType.BigInt).Value = cboDonVi.EditValue;
+                            cmd.Parameters.Add("@ID_XN", SqlDbType.BigInt).Value = cboXiNghiep.EditValue;
+                            cmd.Parameters.Add("@ID_TO", SqlDbType.BigInt).Value = cboTo.EditValue;
+                            cmd.Parameters.Add("@THEM", SqlDbType.Int).Value = 2;
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+                            DataSet ds = new DataSet();
+                            adp.Fill(ds);
+                            ds.Tables[0].TableName = "KhongLamSP";
+                            SaveFileDialog saveFileDialog = new SaveFileDialog();
+                            saveFileDialog.Filter = "Excel file (*.xlsx)|*.xlsx";
+                            saveFileDialog.FilterIndex = 0;
+                            saveFileDialog.RestoreDirectory = true;
+                            //saveFileDialog.CreatePrompt = true;
+                            saveFileDialog.CheckFileExists = false;
+                            saveFileDialog.CheckPathExists = false;
+                            saveFileDialog.FileName = DateTime.Now.ToString("yyyyMMdd_HHmmss");
+                            saveFileDialog.Title = "Export Excel File To";
+                            DialogResult res = saveFileDialog.ShowDialog();
+                            // If the file name is not an empty string open it for saving.
+                            if (res == DialogResult.OK)
+                            {
+                                Commons.TemplateExcel.FillReport(saveFileDialog.FileName, System.Windows.Forms.Application.StartupPath + "\\Template\\TemplateKhongLamRaSP.xlsx", ds, new string[] { "{", "}" });
+                                Process.Start(saveFileDialog.FileName);
+                            }
                         }
-                        catch (Exception ex) { XtraMessageBox.Show(ex.Message); }
+                        catch (Exception EX
+                        )
+                        {
+
+                        }
+
+
+
                         break;
                     }
                 case "import":
                     {
-                        DataTable dt_old = new DataTable();
-                        dt_old = (DataTable)grdData.DataSource;
-                        string sBT_Old = "sBTCongNhanOld" + Commons.Modules.iIDUser;
-                        string sBT_import = "sBTCongNhanImport" + Commons.Modules.iIDUser;
-                        string sPath = "";
-                        sPath = Commons.Modules.ObjSystems.OpenFiles("All Excel Files (*.xls;*.xlsx)|*.xls;*.xlsx|" + "All Files (*.*)|*.*");
+                        //DataTable dt_old = new DataTable();
+                        //dt_old = (DataTable)grdData.DataSource;
+                        //string sBT_Old = "sBTCongNhanOld" + Commons.Modules.iIDUser;
+                        //string sBT_import = "sBTCongNhanImport" + Commons.Modules.iIDUser;
+                        //string sPath = "";
+                        //sPath = Commons.Modules.ObjSystems.OpenFiles("All Excel Files (*.xls;*.xlsx)|*.xls;*.xlsx|" + "All Files (*.*)|*.*");
 
-                        DataTable dt = new DataTable();
-                        if (sPath == "") return;
-                        try
+                        //DataTable dt = new DataTable();
+                        //if (sPath == "") return;
+                        //try
+                        //{
+                        //    //Lấy đường dẫn
+                        //    var source = new ExcelDataSource();
+                        //    source.FileName = sPath;
+
+                        //    //Lấy worksheet
+                        //    DevExpress.Spreadsheet.Workbook workbook = new DevExpress.Spreadsheet.Workbook();
+                        //    string ext = System.IO.Path.GetExtension(sPath);
+                        //    if (ext.ToLower() == ".xlsx")
+                        //        workbook.LoadDocument(sPath, DevExpress.Spreadsheet.DocumentFormat.Xlsx);
+                        //    else
+                        //        workbook.LoadDocument(sPath, DevExpress.Spreadsheet.DocumentFormat.Xls);
+                        //    List<string> wSheet = new List<string>();
+                        //    for (int i = 0; i < workbook.Worksheets.Count; i++)
+                        //    {
+                        //        wSheet.Add(workbook.Worksheets[i].Name.ToString());
+                        //    }
+                        //    //Load worksheet
+                        //    XtraInputBoxArgs args = new XtraInputBoxArgs();
+                        //    // set required Input Box options
+                        //    args.Caption = "Chọn sheet cần nhập dữ liệu";
+                        //    args.Prompt = "Chọn sheet cần nhập dữ liệu";
+                        //    args.DefaultButtonIndex = 0;
+
+                        //    // initialize a DateEdit editor with custom settings
+                        //    ComboBoxEdit editor = new ComboBoxEdit();
+                        //    editor.Properties.Items.AddRange(wSheet);
+                        //    editor.EditValue = wSheet[0].ToString();
+
+                        //    args.Editor = editor;
+                        //    // a default DateEdit value
+                        //    args.DefaultResponse = wSheet[0].ToString();
+                        //    // display an Input Box with the custom editor
+                        //    var result = XtraInputBox.Show(args);
+                        //    if (result == null || result.ToString() == "") return;
+
+
+                        //    var worksheetSettings = new ExcelWorksheetSettings(result.ToString());
+                        //    source.SourceOptions = new ExcelSourceOptions(worksheetSettings);
+                        //    source.Fill();
+                        //    dt = new DataTable();
+                        //    dt = ToDataTable(source);
+                        //    if (dt == null) return;
+                        //    Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBT_Old, Commons.Modules.ObjSystems.ConvertDatatable(grvData), "");
+                        //    Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBT_import, dt, "");
+
+                        //    DateTime dNgay;
+                        //    //dNgay = DateTime.ParseExact(cboThang.Text, "dd/MM/yyyy", cultures);
+
+                        //    System.Data.SqlClient.SqlConnection conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                        //    conn.Open();
+
+                        //    System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spImportDKTGKhongLamSP", conn);
+
+                        //    cmd.Parameters.Add("@sBT_Old", SqlDbType.NVarChar, 50).Value = sBT_Old;
+                        //    cmd.Parameters.Add("@sBT_Import", SqlDbType.NVarChar, 50).Value = sBT_import;
+                        //    cmd.CommandType = CommandType.StoredProcedure;
+                        //    System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+
+                        //    DataSet ds = new DataSet();
+                        //    adp.Fill(ds);
+                        //    DataTable dt_temp = new DataTable();
+                        //    dt_temp = ds.Tables[0].Copy();
+                        //    //dt_temp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spImportDKLT", sBT_Old, sBT_import, SBT_grvLamThem));
+                        //    grdData.DataSource = dt_temp;
+                        //    Commons.Modules.ObjSystems.XoaTable(sBT_Old);
+                        //    Commons.Modules.ObjSystems.XoaTable(sBT_import);
+                        //    //DataTable dtTemp2 = new DataTable();
+                        //    //dtTemp2 = dt_temp.Copy();
+
+
+                        //    //grvCongNhan_FocusedRowChanged(null, null);
+
+                        //    //ColName = cboCotLayDL.EditValue.ToString();
+                        //    //dtemp.Columns.Add("XOA", System.Type.GetType("System.Boolean"));
+                        //    ////grdChung.DataSource = dtemp;
+
+                        //    ////Commons.Mod.OS.MLoadXtraGrid(grdChung, grvChung, dtemp, true, true, false, true);
+                        //    //this.DialogResult = DialogResult.OK;
+                        //    //this.Close();
+                        //}
+                        //catch (Exception ex)
+                        //{
+                        //    Commons.Modules.ObjSystems.XoaTable(sBT_Old);
+                        //    Commons.Modules.ObjSystems.XoaTable(sBT_import);
+                        //    XtraMessageBox.Show(ex.Message);
+                        //}
+
+                        frmImportDangKyKLSP frm = new frmImportDangKyKLSP();
+                        if (frm.ShowDialog() == DialogResult.OK)
                         {
-                            //Lấy đường dẫn
-                            var source = new ExcelDataSource();
-                            source.FileName = sPath;
-
-                            //Lấy worksheet
-                            DevExpress.Spreadsheet.Workbook workbook = new DevExpress.Spreadsheet.Workbook();
-                            string ext = System.IO.Path.GetExtension(sPath);
-                            if (ext.ToLower() == ".xlsx")
-                                workbook.LoadDocument(sPath, DevExpress.Spreadsheet.DocumentFormat.Xlsx);
-                            else
-                                workbook.LoadDocument(sPath, DevExpress.Spreadsheet.DocumentFormat.Xls);
-                            List<string> wSheet = new List<string>();
-                            for (int i = 0; i < workbook.Worksheets.Count; i++)
-                            {
-                                wSheet.Add(workbook.Worksheets[i].Name.ToString());
-                            }
-                            //Load worksheet
-                            XtraInputBoxArgs args = new XtraInputBoxArgs();
-                            // set required Input Box options
-                            args.Caption = "Chọn sheet cần nhập dữ liệu";
-                            args.Prompt = "Chọn sheet cần nhập dữ liệu";
-                            args.DefaultButtonIndex = 0;
-
-                            // initialize a DateEdit editor with custom settings
-                            ComboBoxEdit editor = new ComboBoxEdit();
-                            editor.Properties.Items.AddRange(wSheet);
-                            editor.EditValue = wSheet[0].ToString();
-
-                            args.Editor = editor;
-                            // a default DateEdit value
-                            args.DefaultResponse = wSheet[0].ToString();
-                            // display an Input Box with the custom editor
-                            var result = XtraInputBox.Show(args);
-                            if (result == null || result.ToString() == "") return;
-
-
-                            var worksheetSettings = new ExcelWorksheetSettings(result.ToString());
-                            source.SourceOptions = new ExcelSourceOptions(worksheetSettings);
-                            source.Fill();
-                            dt = new DataTable();
-                            dt = ToDataTable(source);
-                            if (dt == null) return;
-                            Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBT_Old, (DataTable)grdData.DataSource, "");
-                            Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBT_import, dt, "");
-
-                            DateTime dNgay;
-                            //dNgay = DateTime.ParseExact(cboThang.Text, "dd/MM/yyyy", cultures);
-
-                            System.Data.SqlClient.SqlConnection conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
-                            conn.Open();
-
-                            System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spImportDKTGKhongLamSP", conn);
-
-                            cmd.Parameters.Add("@sBT_Old", SqlDbType.NVarChar, 50).Value = sBT_Old;
-                            cmd.Parameters.Add("@sBT_Import", SqlDbType.NVarChar, 50).Value = sBT_import;
-                            cmd.CommandType = CommandType.StoredProcedure;
-                            System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
-
-                            DataSet ds = new DataSet();
-                            adp.Fill(ds);
-                            DataTable dt_temp = new DataTable();
-                            dt_temp = ds.Tables[0].Copy();
-                            //dt_temp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spImportDKLT", sBT_Old, sBT_import, SBT_grvLamThem));
-                            grdData.DataSource = dt_temp;
-                            Commons.Modules.ObjSystems.XoaTable(sBT_Old);
-                            Commons.Modules.ObjSystems.XoaTable(sBT_import);
-                            //DataTable dtTemp2 = new DataTable();
-                            //dtTemp2 = dt_temp.Copy();
-
-
-                            //grvCongNhan_FocusedRowChanged(null, null);
-
-                            //ColName = cboCotLayDL.EditValue.ToString();
-                            //dtemp.Columns.Add("XOA", System.Type.GetType("System.Boolean"));
-                            ////grdChung.DataSource = dtemp;
-
-                            ////Commons.Mod.OS.MLoadXtraGrid(grdChung, grvChung, dtemp, true, true, false, true);
-                            //this.DialogResult = DialogResult.OK;
-                            //this.Close();
+                            LoadData();
                         }
-                        catch (Exception ex)
+                        else
                         {
-                            Commons.Modules.ObjSystems.XoaTable(sBT_Old);
-                            Commons.Modules.ObjSystems.XoaTable(sBT_import);
-                            XtraMessageBox.Show(ex.Message);
+                            LoadData();
                         }
+
                         break;
                     }
                 case "themsua":
@@ -288,6 +348,9 @@ namespace Vs.TimeAttendance
                     {
                         Validate();
                         if (grvData.HasColumnErrors) return;
+                        DataTable dt = new DataTable();
+                        dt = (DataTable)grdData.DataSource;
+                        if (!KiemTraLuoi(dt)) return;
                         if (Savedata() == false)
                         {
                             Commons.Modules.ObjSystems.msgChung(Commons.ThongBao.msgDuLieuDangSuDung);
@@ -316,6 +379,22 @@ namespace Vs.TimeAttendance
         }
         public DataTable ToDataTable(ExcelDataSource excelDataSource)
         {
+            DevExpress.DataAccess.Native.Excel.DataView dv_temp = ((IListSource)excelDataSource).GetList() as DevExpress.DataAccess.Native.Excel.DataView;
+
+            excelDataSource.SourceOptions = new CsvSourceOptions() { CellRange = "A6:" + "N" + (dv_temp.Count + 6) + "" };
+            excelDataSource.SourceOptions.SkipEmptyRows = false;
+            excelDataSource.SourceOptions.UseFirstRowAsHeader = true;
+            excelDataSource.Fill();
+            DevExpress.DataAccess.Native.Excel.DataView dv = ((IListSource)excelDataSource).GetList() as DevExpress.DataAccess.Native.Excel.DataView;
+            for (int i = 0; i < dv.Count; i++)
+            {
+                DevExpress.DataAccess.Native.Excel.ViewRow row = dv[i] as DevExpress.DataAccess.Native.Excel.ViewRow;
+                foreach (DevExpress.DataAccess.Native.Excel.ViewColumn col in dv.Columns)
+                {
+                    object val = col.GetValue(row);
+                }
+            }
+
             IList list = ((IListSource)excelDataSource).GetList();
             DevExpress.DataAccess.Native.Excel.DataView dataView = (DevExpress.DataAccess.Native.Excel.DataView)list;
             List<PropertyDescriptor> props = dataView.Columns.ToList<PropertyDescriptor>();
@@ -329,46 +408,87 @@ namespace Vs.TimeAttendance
                 {
                     case 0:
                         {
-                            sTenCot = "MS_CN";
+                            sTenCot = "NGAY";
                             table.Columns.Add(sTenCot.Trim(), typeof(string));
                             break;
                         }
                     case 1:
                         {
-                            sTenCot = "HO_TEN";
+                            sTenCot = "MS_CN";
                             table.Columns.Add(sTenCot.Trim(), typeof(string));
                             break;
                         }
                     case 2:
                         {
-                            sTenCot = "TEN_XN";
+                            sTenCot = "HO_TEN";
                             table.Columns.Add(sTenCot.Trim(), typeof(string));
                             break;
                         }
                     case 3:
                         {
-                            sTenCot = "TEN_TO";
-                            table.Columns.Add(sTenCot.Trim(), typeof(string));
+                            sTenCot = "COT_1";
+                            table.Columns.Add(sTenCot.Trim(), typeof(float));
                             break;
                         }
                     case 4:
                         {
-                            sTenCot = "TG_HC";
+                            sTenCot = "COT_2";
                             table.Columns.Add(sTenCot.Trim(), typeof(float));
 
                             break;
                         }
                     case 5:
                         {
-                            sTenCot = "TG_TC_NT";
+                            sTenCot = "COT_3";
                             table.Columns.Add(sTenCot.Trim(), typeof(float));
-
                             break;
                         }
                     case 6:
                         {
+                            sTenCot = "COT_4";
+                            table.Columns.Add(sTenCot.Trim(), typeof(float));
+                            break;
+                        }
+                    case 7:
+                        {
+                            sTenCot = "COT_5";
+                            table.Columns.Add(sTenCot.Trim(), typeof(float));
+                            break;
+                        }
+                    case 8:
+                        {
+                            sTenCot = "COT_6";
+                            table.Columns.Add(sTenCot.Trim(), typeof(float));
+                            break;
+                        }
+                    case 9:
+                        {
+                            sTenCot = "COT_7";
+                            table.Columns.Add(sTenCot.Trim(), typeof(float));
+                            break;
+                        }
+                    case 10:
+                        {
+                            sTenCot = "TG_HC";
+                            table.Columns.Add(sTenCot.Trim(), typeof(float));
+                            break;
+                        }
+                    case 11:
+                        {
+                            sTenCot = "TG_TC_NT";
+                            table.Columns.Add(sTenCot.Trim(), typeof(float));
+                            break;
+                        }
+                    case 12:
+                        {
                             sTenCot = "TG_TC_CN";
                             table.Columns.Add(sTenCot.Trim(), typeof(float));
+                            break;
+                        }
+                    case 13:
+                        {
+                            sTenCot = "GHI_CHU";
+                            table.Columns.Add(sTenCot.Trim(), typeof(string));
                             break;
                         }
                     default:
@@ -383,30 +503,30 @@ namespace Vs.TimeAttendance
 
                 for (int i = 0; i < values.Length; i++)
                 {
-                    if (i == 4 || i == 5 || i == 6)
+                    try
                     {
-                        try
+                        if (props[i].GetValue(item) == null || props[i].GetValue(item).ToString() == "")
                         {
-                            //object s =  GetPropValue(props[i].GetValue(item), string.IsNullOrEmpty(Convert.ToString(props[i].GetValue(item))) ? "abc" : Convert.ToString(props[i].GetValue(item)));
-                            //if ((props[i].GetValue(item) == null ? typeof(object) :props[i].GetValue(item).GetType()) == typeof(string))
-                            //{
-                            //    XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgCot") + " " + props[i].Name + " " + Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgCuaNhanVien") + " " + values[0] + "-" + values[1] + " " + Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgKhongChinhXac"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            //    return null;
-                            //}
-                            values[i] = Convert.ToDouble(props[i].GetValue(item));
+                            values[i] = 0;
                         }
-                        catch
+                        else
                         {
-                            //XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgCot") + " " + props[i].Name + " " + Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgCuaNhanVien") + " " + values[0] + "-" + values[1] + " " + Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgKhongChinhXac"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            //return null;
+
+                            values[i] = props[i].GetValue(item);
                         }
+
                     }
-                    else
+                    catch (Exception ex)
                     {
-                        values[i] = props[i].GetValue(item);
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgCot") + " " + props[i].Name + " " + Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgCuaNhanVien") + " " + values[0] + "-" + values[1] + " " + Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgKhongChinhXac"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return null;
                     }
                 }
-                table.Rows.Add(values);
+                try
+                {
+                    table.Rows.Add(values);
+                }
+                catch (Exception ex) { }
             }
             return table;
         }
@@ -508,7 +628,7 @@ namespace Vs.TimeAttendance
             try
             {
                 GridView grv = (GridView)sender;
-                cboThang.Text = grvThang.GetFocusedRowCellValue("THANG").ToString();
+                cboThang.Text = grvThang.GetFocusedRowCellValue("NGAY").ToString();
             }
             catch { }
             cboThang.ClosePopup();
@@ -528,7 +648,7 @@ namespace Vs.TimeAttendance
         {
             try
             {
-                cboThang.Text = calThang.DateTime.ToString("MM/yyyy");
+                cboThang.Text = calThang.DateTime.ToString("dd/MM/yyyy");
                 DataTable dtTmp = Commons.Modules.ObjSystems.ConvertDatatable(grdThang);
                 DataRow[] dr;
                 dr = dtTmp.Select("NGAY_TTXL" + "='" + cboThang.Text + "'", "NGAY_TTXL", DataViewRowState.CurrentRows);
@@ -539,7 +659,7 @@ namespace Vs.TimeAttendance
             }
             catch (Exception ex)
             {
-                cboThang.Text = calThang.DateTime.ToString("MM/yyyy");
+                cboThang.Text = calThang.DateTime.ToString("dd/MM/yyyy");
             }
             cboThang.ClosePopup();
         }
@@ -630,6 +750,10 @@ namespace Vs.TimeAttendance
 
                 DataTable dt = new DataTable();
                 dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spUpdateChuotPhai", sBTCongNhan, sCotCN, Convert.ToDouble(grvData.GetFocusedRowCellValue(grvData.FocusedColumn.FieldName))));
+                dt.Columns["MS_CN"].ReadOnly = true;
+                dt.Columns["HO_TEN"].ReadOnly = true;
+                dt.Columns["TEN_XN"].ReadOnly = true;
+                dt.Columns["TEN_TO"].ReadOnly = true;
                 grdData.DataSource = dt;
             }
             catch { }
@@ -640,7 +764,7 @@ namespace Vs.TimeAttendance
             try
             {
                 if (btnALL.Buttons[3].Properties.Visible == true) return;
-                if (grvData.FocusedColumn.FieldName.Substring(0, 3) != "TG_") return;
+                if (grvData.FocusedColumn.FieldName == "MS_CN" || grvData.FocusedColumn.FieldName == "HO_TEN" || grvData.FocusedColumn.FieldName == "TEN_XN" || grvData.FocusedColumn.FieldName == "TEN_TO") return;
                 DevExpress.XtraGrid.Views.Grid.GridView view = sender as DevExpress.XtraGrid.Views.Grid.GridView;
                 if (e.MenuType == DevExpress.XtraGrid.Views.Grid.GridMenuType.Row)
                 {
@@ -715,7 +839,7 @@ namespace Vs.TimeAttendance
             {
                 if (!Char.IsDigit(input[i]))
                     IsNumber = false;
-                if((input[i] == '.' && Char.IsDigit(input[i - 1]) && Char.IsDigit(input[i + 1])))
+                if ((input[i] == '.' && Char.IsDigit(input[i - 1]) && Char.IsDigit(input[i + 1])))
                     IsNumber = true;
             }
             return IsNumber;
@@ -724,5 +848,307 @@ namespace Vs.TimeAttendance
         {
             return src.GetType().GetProperty(propName).GetValue(src, null);
         }
+
+        #region kiemTra
+        private bool KiemTraLuoi(DataTable dtSource)
+        {
+            int count = grvData.RowCount;
+            int col = 0;
+            int errorCount = 0;
+            #region kiểm tra dữ liệu
+            foreach (DataRow dr in dtSource.Rows)
+            {
+                dr.ClearErrors();
+                col = 0;
+
+                if (!KiemDuLieuSo(grvData, dr, "COT_1", grvData.Columns["COT_1"].FieldName.ToString(), 0, 0, false, this.Name))
+                {
+                    errorCount++;
+                }
+                if (!KiemDuLieuSo(grvData, dr, "COT_2", grvData.Columns["COT_2"].FieldName.ToString(), 0, 0, false, this.Name))
+                {
+                    errorCount++;
+                }
+                if (!KiemDuLieuSo(grvData, dr, "COT_3", grvData.Columns["COT_3"].FieldName.ToString(), 0, 0, false, this.Name))
+                {
+                    errorCount++;
+                }
+                if (!KiemDuLieuSo(grvData, dr, "COT_4", grvData.Columns["COT_4"].FieldName.ToString(), 0, 0, false, this.Name))
+                {
+                    errorCount++;
+                }
+                if (!KiemDuLieuSo(grvData, dr, "COT_5", grvData.Columns["COT_5"].FieldName.ToString(), 0, 0, false, this.Name))
+                {
+                    errorCount++;
+                }
+                if (!KiemDuLieuSo(grvData, dr, "COT_6", grvData.Columns["COT_6"].FieldName.ToString(), 0, 0, false, this.Name))
+                {
+                    errorCount++;
+                }
+                if (!KiemDuLieuSo(grvData, dr, "COT_7", grvData.Columns["COT_7"].FieldName.ToString(), 0, 0, false, this.Name))
+                {
+                    errorCount++;
+                }
+                if (!KiemDuLieuSo(grvData, dr, "TG_HC", grvData.Columns["TG_HC"].FieldName.ToString(), 0, 0, false, this.Name))
+                {
+                    errorCount++;
+                }
+                if (!KiemDuLieuSo(grvData, dr, "TG_TC_CN", grvData.Columns["TG_TC_CN"].FieldName.ToString(), 0, 0, false, this.Name))
+                {
+                    errorCount++;
+                }
+                if (!KiemDuLieuSo(grvData, dr, "TG_TC_CN", grvData.Columns["TG_TC_CN"].FieldName.ToString(), 0, 0, false, this.Name))
+                {
+                    errorCount++;
+                }
+
+            }
+            #endregion
+            Commons.Modules.ObjSystems.HideWaitForm();
+            if (errorCount != 0)
+            {
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDuLieuChuaHopLe"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            else
+            {
+                DialogResult res = XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDuLieuSanSang"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (res == DialogResult.Yes)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+
+                }
+            }
+        }
+        public bool KiemDuLieu(GridView grvData, DataRow dr, string sCot, Boolean bKiemNull, int iDoDaiKiem, string sform)
+        {
+            string sDLKiem;
+            try
+            {
+                sDLKiem = dr[sCot].ToString();
+                if (bKiemNull)
+                {
+                    if (string.IsNullOrEmpty(sDLKiem))
+                    {
+                        dr.SetColumnError(sCot, Commons.Modules.ObjLanguages.GetLanguage(sform, "msgKhongDuocTrong"));
+                        return false;
+                    }
+                    else
+                    {
+                        if (KiemKyTu(sDLKiem, ChuoiKT))  //KiemKyTu
+                        {
+                            dr.SetColumnError(sCot, Commons.Modules.ObjLanguages.GetLanguage(sform, "msgCoChuaKyTuDB"));
+                            return false;
+                        }
+                    }
+                }
+                else
+                {
+                    if (!string.IsNullOrEmpty(sDLKiem))
+                    {
+                        if (KiemKyTu(sDLKiem, ChuoiKT))  //KiemKyTu
+                        {
+                            dr.SetColumnError(sCot, Commons.Modules.ObjLanguages.GetLanguage(sform, "msgCoChuaKyTuDB"));
+                            dr["XOA"] = 1;
+                            return false;
+                        }
+                    }
+                }
+                if (iDoDaiKiem != 0)
+                {
+                    if (sDLKiem.Length > iDoDaiKiem)
+                    {
+                        dr.SetColumnError(sCot, Commons.Modules.ObjLanguages.GetLanguage(sform, "msgDoDaiKyTuVuocQua " + iDoDaiKiem));
+                        return false;
+                    }
+                }
+            }
+            catch
+            {
+                dr.SetColumnError(sCot, "error");
+                return false;
+            }
+            return true;
+        }
+        public bool KiemKyTu(string strInput, string strChuoi)
+        {
+
+            if (strChuoi == "") strChuoi = ChuoiKT;
+
+            for (int i = 0; i < strInput.Length; i++)
+            {
+                for (int j = 0; j < strChuoi.Length; j++)
+                {
+                    if (strInput[i] == strChuoi[j])
+                    {
+                        return true;
+                    }
+                }
+            }
+            if (strInput.Contains("//"))
+            {
+                return true;
+            }
+            return false;
+        }
+        public bool KiemDuLieuNgay(GridView grvData, DataRow dr, string sCot, Boolean bKiemNull, string sform)
+        {
+            string sDLKiem;
+            sDLKiem = dr[sCot].ToString();
+            DateTime DLKiem;
+
+            try
+            {
+
+                if (bKiemNull)
+                {
+                    if (string.IsNullOrEmpty(sDLKiem))
+                    {
+                        dr.SetColumnError(sCot, Commons.Modules.ObjLanguages.GetLanguage(sform, "msgKhongduocTrong"));
+                        return false;
+                    }
+                    else
+                    {
+                        //sDLKiem = DateTime.ParseExact(sDLKiem, "dd/MM/yyyy", CultureInfo.InvariantCulture).ToString();
+                        if (!DateTime.TryParse(sDLKiem, out DLKiem))
+                        {
+                            dr.SetColumnError(sCot, Commons.Modules.ObjLanguages.GetLanguage(sform, "msgKhongPhaiNgay"));
+                            return false;
+                        }
+
+                    }
+                }
+                else
+                {
+                    if (!string.IsNullOrEmpty(sDLKiem))
+                    {
+                        if (!DateTime.TryParse(sDLKiem, out DLKiem))
+                        {
+                            dr.SetColumnError(sCot, Commons.Modules.ObjLanguages.GetLanguage(sform, "msgKhongPhaiNgay"));
+                            return false;
+                        }
+                    }
+                }
+            }
+            catch
+            {
+                dr.SetColumnError(sCot, Commons.Modules.ObjLanguages.GetLanguage(sform, "msgKhongPhaiNgay"));
+                return false;
+            }
+            return true;
+        }
+        public bool KiemDuLieuSo(GridView grvData, DataRow dr, string sCot, string sTenKTra, double GTSoSanh, double GTMacDinh, Boolean bKiemNull, string sForm)
+        {
+            string sDLKiem;
+            sDLKiem = dr[sCot].ToString();
+            double DLKiem;
+            if (bKiemNull)
+            {
+                if (string.IsNullOrEmpty(sDLKiem))
+                {
+                    dr.SetColumnError(sCot, Commons.Modules.ObjLanguages.GetLanguage(sForm, "msgKhongduocTrong"));
+                    return false;
+                }
+                else
+                {
+                    if (!double.TryParse(dr[sCot].ToString(), out DLKiem))
+                    {
+                        dr.SetColumnError(sCot, Commons.Modules.ObjLanguages.GetLanguage(sForm, "msgKhongPhaiSo"));
+                        return false;
+                    }
+                    else
+                    {
+                        if (GTSoSanh != -999999)
+                        {
+                            if (DLKiem < GTSoSanh)
+                            {
+                                dr.SetColumnError(sCot, sTenKTra + Commons.Modules.ObjLanguages.GetLanguage(sForm, "msgKhongNhoHon") + GTSoSanh.ToString());
+                                dr["XOA"] = 1;
+                                return false;
+                            }
+
+                            DLKiem = Math.Round(DLKiem, 8);
+                            dr[sCot] = DLKiem.ToString();
+
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (string.IsNullOrEmpty(sDLKiem) && GTMacDinh != -999999)
+                {
+                    dr[sCot] = GTMacDinh;
+                    DLKiem = GTMacDinh;
+                    sDLKiem = GTMacDinh.ToString();
+                }
+
+                if (!string.IsNullOrEmpty(sDLKiem))
+                {
+                    if (!double.TryParse(dr[sCot].ToString(), out DLKiem))
+                    {
+                        dr.SetColumnError(sCot, sTenKTra + Commons.Modules.ObjLanguages.GetLanguage(sForm, "msgKhongPhaiSo"));
+                        return false;
+                    }
+                    else
+                    {
+                        if (GTSoSanh != -999999)
+                        {
+                            if (DLKiem < GTSoSanh)
+                            {
+                                dr.SetColumnError(sCot, sTenKTra + Commons.Modules.ObjLanguages.GetLanguage(sForm, "msgKhongNhoHon") + GTSoSanh.ToString());
+                                return false;
+                            }
+
+                            DLKiem = Math.Round(DLKiem, 8);
+                            dr[sCot] = DLKiem.ToString();
+                        }
+
+                    }
+                }
+
+
+            }
+
+
+
+            return true;
+        }
+        public bool KiemTrungDL(GridView grvData, DataTable dt, DataRow dr, string sCot, string sDLKiem, string tabName, string ColName, string sform)
+        {
+            string sTenKTra = Commons.Modules.ObjLanguages.GetLanguage(sform, "msgTrungDL");
+            try
+            {
+
+                if (dt.AsEnumerable().Where(x => x.Field<string>(sCot).Trim().Equals(sDLKiem)).CopyToDataTable().Rows.Count > 1)
+                {
+                    sTenKTra = Commons.Modules.ObjLanguages.GetLanguage(sform, "msgTrungDLLuoi");
+                    dr.SetColumnError(sCot, sTenKTra);
+                    return false;
+                }
+                else
+                {
+                    if (Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT COUNT(*) FROM dbo.[" + tabName + "] WHERE " + ColName + " = N'" + sDLKiem + "'")) > 0)
+                    {
+
+                        sTenKTra = Commons.Modules.ObjLanguages.GetLanguage(sform, "msgTrungDLCSDL");
+                        dr.SetColumnError(sCot, sTenKTra);
+                        return false;
+                    }
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                dr.SetColumnError(sCot, sTenKTra);
+                return false;
+            }
+        }
+        #endregion
+
     }
 }

@@ -427,7 +427,6 @@ namespace Vs.TimeAttendance
 
         private void grvCongNhan_ValidatingEditor(object sender, DevExpress.XtraEditors.Controls.BaseContainerValidateEditorEventArgs e)
         {
-
             try
             {
                 GridView view = sender as GridView;

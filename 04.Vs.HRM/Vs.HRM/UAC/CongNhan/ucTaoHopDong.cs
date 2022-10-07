@@ -1187,7 +1187,6 @@ namespace Vs.HRM
             }
         }
         #endregion
-
         private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
         {
 

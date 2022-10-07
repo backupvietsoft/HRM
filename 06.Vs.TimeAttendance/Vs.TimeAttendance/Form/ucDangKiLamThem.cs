@@ -21,7 +21,6 @@ namespace Vs.TimeAttendance
 {
     public partial class ucDangKiLamThem : DevExpress.XtraEditors.XtraUserControl
     {
-        private int vitriLoi = -1;
         private static bool isAdd = false;
         public static ucDangKiLamThem _instance;
         public static ucDangKiLamThem Instance
@@ -53,6 +52,7 @@ namespace Vs.TimeAttendance
         /// <param name="e"></param>
         private void ucDangKiLamThem_Load(object sender, EventArgs e)
         {
+            isAdd = false;
             Commons.Modules.sLoad = "0Load";
 
             repositoryItemTimeEdit1.TimeEditStyle = TimeEditStyle.TouchUI;
@@ -78,38 +78,13 @@ namespace Vs.TimeAttendance
             LoadGridCongNhan();
             LoadGrdDSLamThem();
 
-            DataTable dCa = new DataTable();
-            RepositoryItemLookUpEdit cboCa = new RepositoryItemLookUpEdit();
-            dCa.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT DISTINCT CONCAT(CA, ';', ID_CDLV) AS ID_CDLV, CA, GIO_BD, GIO_KT, PHUT_BD, PHUT_KT  FROM dbo.CHE_DO_LAM_VIEC"));
-            cboCa.NullText = "";
-            cboCa.ValueMember = "ID_CDLV";
-            cboCa.DisplayMember = "CA";
-            cboCa.DataSource = dCa;
-            cboCa.Columns.Clear();
 
-            cboCa.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("CA"));
-            cboCa.Columns["CA"].Caption = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "CA");
-
-            cboCa.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("GIO_BD"));
-            cboCa.Columns["GIO_BD"].Caption = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "GIO_BD");
-            cboCa.Columns["GIO_BD"].FormatType = DevExpress.Utils.FormatType.DateTime;
-            cboCa.Columns["GIO_BD"].FormatString = "HH:mm";
-
-            cboCa.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("GIO_KT"));
-            cboCa.Columns["GIO_KT"].Caption = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "GIO_KT");
-            cboCa.Columns["GIO_KT"].FormatType = DevExpress.Utils.FormatType.DateTime;
-            cboCa.Columns["GIO_KT"].FormatString = "HH:mm";
 
             //cboCa.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID_CDLV"));
             //cboCa.Columns["ID_CDLV"].Caption = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "ID_CDLV");
             //cboCa.Columns["ID_CDLV"].Visible = false;
 
-            cboCa.AppearanceDropDownHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            cboCa.AppearanceDropDownHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            grvLamThem.Columns["ID_CDLV"].ColumnEdit = cboCa;
 
-            cboCa.BeforePopup += cboCa_BeforePopup;
-            cboCa.EditValueChanged += CboCa_EditValueChanged;
             //cboCa.ButtonClick += CboCa_EditValueChanged;
             //cboCa.Click += CboCa_EditValueChanged;
             Commons.Modules.sLoad = "";
@@ -118,6 +93,7 @@ namespace Vs.TimeAttendance
 
         private void CboCa_EditValueChanged(object sender, EventArgs e)
         {
+
             LookUpEdit lookUp = sender as LookUpEdit;
 
             //string id = lookUp.get;
@@ -130,6 +106,7 @@ namespace Vs.TimeAttendance
             grvLamThem.SetFocusedRowCellValue("ID_CDLV", dataRow.Row["ID_CDLV"].ToString());
             //grvLamThem.SetFocusedRowCellValue("PHUT_BD", dataRow.Row["PHUT_BD"]);
             //grvLamThem.SetFocusedRowCellValue("PHUT_KT", dataRow.Row["PHUT_KT"]);
+
         }
 
         DataTable dtCaLV;
@@ -142,8 +119,15 @@ namespace Vs.TimeAttendance
         {
             try
             {
+                DataTable dt = new DataTable();
+                dt = (DataTable)grdCongNhan.DataSource;
+                string sCa = grvCongNhan.GetFocusedRowCellValue("CA").ToString();
+                if (sCa == "")
+                {
+                    sCa = "-1";
+                }
                 dtCaLV = new DataTable();
-                dtCaLV.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetCaLVThem", cboNgay.EditValue, grvLamThem.GetFocusedRowCellValue("ID_NHOM"), Commons.Modules.UserName, Commons.Modules.TypeLanguage));
+                dtCaLV.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetCaLVThem", cboNgay.EditValue, grvCongNhan.GetFocusedRowCellValue("ID_NHOM"), sCa, Commons.Modules.UserName, Commons.Modules.TypeLanguage));
                 if (sender is LookUpEdit cbo)
                 {
                     cbo.Properties.DataSource = null;
@@ -163,56 +147,95 @@ namespace Vs.TimeAttendance
         /// </summary>
         private void LoadGrdDSLamThem()
         {
-            decimal idCongNhan = -1;
-            DataTable dt = new DataTable();
-            if (isAdd)
+            try
             {
+                decimal idCongNhan = -1;
+                DataTable dt = new DataTable();
+
                 //grvLamThem.OptionsBehavior.Editable = true;
                 grdLamThem.DataSource = null;
                 if (grvCongNhan.FocusedRowHandle >= 0)
                 {
                     decimal.TryParse(grvCongNhan.GetFocusedRowCellValue("ID_CN").ToString(), out idCongNhan);
                 }
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetListLamThem", Convert.ToDateTime(cboNgay.EditValue).ToString("yyyyMMdd"),
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetListLamThem", Convert.ToDateTime(cboNgay.EditValue).ToString("yyyyMMdd"), cboDonVi.EditValue, cboXiNghiep.EditValue, cboTo.EditValue,
                                                 Commons.Modules.UserName, Commons.Modules.TypeLanguage));
                 dt.Columns["COM_CA"].ReadOnly = false;
-                Commons.Modules.ObjSystems.MLoadXtraGrid(grdLamThem, grvLamThem, dt, false, false, false, false, true, this.Name);
+                dt.Columns["ID_CDLV"].ReadOnly = false;
+                dt.Columns["ID_NHOM"].ReadOnly = false;
+                dt.Columns["GIO_BD"].ReadOnly = false;
+                dt.Columns["GIO_KT"].ReadOnly = false;
+                Commons.Modules.ObjSystems.MLoadXtraGrid(grdLamThem, grvLamThem, dt, true, true, false, false, true, this.Name);
                 grvLamThem.Columns["COM_CA"].Visible = false;
+
                 DataTable dID_NHOM = new DataTable();
                 dID_NHOM.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetNhomCC", cboNgay.EditValue, Commons.Modules.UserName, Commons.Modules.TypeLanguage));
                 Commons.Modules.ObjSystems.AddCombXtra("ID_NHOM", "TEN_NHOM", grvLamThem, dID_NHOM, false, "ID_NHOM", "NHOM_CHAM_CONG");
 
+                DataTable dCA = new DataTable();
+                dCA.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetNhomCC", cboNgay.EditValue, Commons.Modules.UserName, Commons.Modules.TypeLanguage));
+                Commons.Modules.ObjSystems.AddCombXtra("ID_NHOM", "TEN_NHOM", grvLamThem, dID_NHOM, false, "ID_NHOM", "NHOM_CHAM_CONG");
+
                 grvLamThem.OptionsBehavior.Editable = true;
-
                 FormatGrvLamThem();
+                if (isAdd)
+                {
+                    grvLamThem.OptionsBehavior.Editable = true;
+                }
+                else
+                {
+                    grvLamThem.OptionsBehavior.Editable = false;
+                }
 
-                return;
+                DataTable dCa = new DataTable();
+                RepositoryItemLookUpEdit cboCa = new RepositoryItemLookUpEdit();
+                dCa.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT DISTINCT CONCAT(CA, ';', ID_CDLV) AS ID_CDLV, CA, GIO_BD, GIO_KT, PHUT_BD, PHUT_KT  FROM dbo.CHE_DO_LAM_VIEC"));
+                cboCa.NullText = "";
+                cboCa.ValueMember = "ID_CDLV";
+                cboCa.DisplayMember = "CA";
+                cboCa.DataSource = dCa;
+                cboCa.Columns.Clear();
+
+                cboCa.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("CA"));
+                cboCa.Columns["CA"].Caption = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "CA");
+
+                cboCa.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("GIO_BD"));
+                cboCa.Columns["GIO_BD"].Caption = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "GIO_BD");
+                cboCa.Columns["GIO_BD"].FormatType = DevExpress.Utils.FormatType.DateTime;
+                cboCa.Columns["GIO_BD"].FormatString = "HH:mm";
+
+                cboCa.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("GIO_KT"));
+                cboCa.Columns["GIO_KT"].Caption = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "GIO_KT");
+                cboCa.Columns["GIO_KT"].FormatType = DevExpress.Utils.FormatType.DateTime;
+                cboCa.Columns["GIO_KT"].FormatString = "HH:mm";
+
+                cboCa.AppearanceDropDownHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+                cboCa.AppearanceDropDownHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+                grvLamThem.Columns["ID_CDLV"].ColumnEdit = cboCa;
+
+                cboCa.BeforePopup += cboCa_BeforePopup;
+                cboCa.EditValueChanged += CboCa_EditValueChanged;
             }
+            catch { }
+
+        }
+
+        private void cboID_NHOM_EditValueChanged(object sender, EventArgs e)
+        {
+            LookUpEdit lookUp = sender as LookUpEdit;
+            DataRowView dataRow = lookUp.GetSelectedDataRow() as DataRowView;
+            grvCongNhan.SetFocusedRowCellValue("ID_NHOM", Convert.ToInt64((dataRow.Row[0])));
+        }
+        private void cboID_NHOM_BeforePopup(object sender, EventArgs e)
+        {
             try
             {
-                if (grvCongNhan.FocusedRowHandle >= 0)
-                {
-                    decimal.TryParse(grvCongNhan.GetFocusedRowCellValue("ID_CN").ToString(), out idCongNhan);
-                }
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetListLamThem", Convert.ToDateTime(cboNgay.EditValue).ToString("yyyyMMdd"),
-                                                Commons.Modules.UserName, Commons.Modules.TypeLanguage));
-                dt.Columns["ID_CDLV"].ReadOnly = false;
-                dt.Columns["COM_CA"].ReadOnly = false;
-                Commons.Modules.ObjSystems.MLoadXtraGrid(grdLamThem, grvLamThem, dt, false, false, false, false, true, this.Name);
-                grvLamThem.Columns["COM_CA"].Visible = false;
+                LookUpEdit lookUp = sender as LookUpEdit;
                 DataTable dID_NHOM = new DataTable();
                 dID_NHOM.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetNhomCC", cboNgay.EditValue, Commons.Modules.UserName, Commons.Modules.TypeLanguage));
-                Commons.Modules.ObjSystems.AddCombXtra("ID_NHOM", "TEN_NHOM", grvLamThem, dID_NHOM, false);
-
-                FormatGrvLamThem();
+                lookUp.Properties.DataSource = dID_NHOM;
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message.ToString());
-            }
-
-
-
+            catch { }
         }
 
         private void LoadGridCongNhan()
@@ -519,9 +542,10 @@ namespace Vs.TimeAttendance
                         LoadGridCongNhan();
                         //LoadGrdDSLamThem();
                         //grdLamThem.DataSource = ((DataTable)grdLamThem.DataSource).Clone();
-                        DataTable dID_NHOM = new DataTable();
-                        dID_NHOM.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetNhomCC", cboNgay.EditValue, Commons.Modules.UserName, Commons.Modules.TypeLanguage));
-                        Commons.Modules.ObjSystems.AddCombXtra("ID_NHOM", "TEN_NHOM", grvLamThem, dID_NHOM, false, "ID_NHOM", "NHOM_CHAM_CONG");
+                        //DataTable dID_NHOM = new DataTable();
+                        //dID_NHOM.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetNhomCC", cboNgay.EditValue, Commons.Modules.UserName, Commons.Modules.TypeLanguage));
+                        //Commons.Modules.ObjSystems.AddCombXtra("ID_NHOM", "TEN_NHOM", grvLamThem, dID_NHOM, false, "ID_NHOM", "NHOM_CHAM_CONG");
+                        LoadGrdDSLamThem();
                         Commons.Modules.ObjSystems.AddnewRow(grvLamThem, true);
                         grvCongNhan_FocusedRowChanged(null, null);
                         break;
@@ -752,6 +776,7 @@ namespace Vs.TimeAttendance
                 row["PHUT_BD"] = dr["PHUT_BD"];
                 row["PHUT_KT"] = dr["PHUT_KT"];
                 row["PHUT_AN_CA"] = dr["PHUT_AN_CA"];
+                row["SO_GIO_TC"] = dr["SO_GIO_TC"];
 
 
                 dt_capnhat.Rows.Add(row);
@@ -1112,6 +1137,7 @@ namespace Vs.TimeAttendance
             try
             {
                 grvLamThem.SetFocusedRowCellValue("COM_CA", 0);
+                grvLamThem.SetFocusedRowCellValue("ID_NHOM", grvCongNhan.GetFocusedRowCellValue("ID_NHOM"));
             }
             catch { }
         }
@@ -1122,9 +1148,17 @@ namespace Vs.TimeAttendance
             DateTime gioKT = new DateTime();
             decimal phutBD = 0;
             decimal phutKT = 0;
+            decimal phutAnCom = 0;
             GridView view = sender as GridView;
             try
             {
+                if (e.Column.FieldName == "ID_CDLV")
+                {
+                    gioBD = DateTime.Parse(view.GetFocusedRowCellValue("GIO_BD").ToString());
+                    gioKT = DateTime.Parse(view.GetFocusedRowCellValue("GIO_KT").ToString());
+                    phutAnCom = view.GetFocusedRowCellValue("PHUT_AN_CA").ToString() == "" ? 0 : Convert.ToDecimal(view.GetFocusedRowCellValue("PHUT_AN_CA"));
+                    view.SetRowCellValue(e.RowHandle, view.Columns["SO_GIO_TC"], (gioKT.Hour - gioBD.Hour - (phutAnCom / 60)));
+                }
                 if (e.Column.FieldName == "GIO_BD")
                 {
                     if (DateTime.TryParse(view.GetFocusedRowCellValue("GIO_BD").ToString(), out gioBD))
@@ -1135,10 +1169,27 @@ namespace Vs.TimeAttendance
                         view.SetRowCellValue(e.RowHandle, view.Columns["ID_CN"], grvCongNhan.GetFocusedRowCellValue("ID_CN").ToString());
                         view.SetRowCellValue(e.RowHandle, view.Columns["NGAY"], Convert.ToDateTime(cboNgay.EditValue).ToString());
 
+                        try
+                        {
+                            gioKT = DateTime.Parse(view.GetFocusedRowCellValue("GIO_KT").ToString());
+                            phutAnCom = Convert.ToDecimal(view.GetFocusedRowCellValue("PHUT_AN_CA"));
+                            view.SetRowCellValue(e.RowHandle, view.Columns["SO_GIO_TC"], (gioKT.Hour - gioBD.Hour - (phutAnCom / 60)));
+                        }
+                        catch { }
                     }
 
                 }
-
+                if (e.Column.FieldName == "PHUT_AN_CA")
+                {
+                    try
+                    {
+                        gioBD = DateTime.Parse(view.GetFocusedRowCellValue("GIO_BD").ToString());
+                        gioKT = DateTime.Parse(view.GetFocusedRowCellValue("GIO_KT").ToString());
+                        phutAnCom = Convert.ToDecimal(view.GetFocusedRowCellValue("PHUT_AN_CA"));
+                        view.SetRowCellValue(e.RowHandle, view.Columns["SO_GIO_TC"], (gioKT.Hour - gioBD.Hour - (phutAnCom / 60)));
+                    }
+                    catch { }
+                }
                 if (e.Column.FieldName == "GIO_KT")
                 {
                     if (DateTime.TryParse(view.GetFocusedRowCellValue("GIO_KT").ToString(), out gioKT))
@@ -1146,8 +1197,19 @@ namespace Vs.TimeAttendance
                         gioKT = DateTime.Parse(view.GetFocusedRowCellValue("GIO_KT").ToString());
                         phutKT = gioKT.Hour * 60 + gioKT.Minute;
                         view.SetFocusedRowCellValue("PHUT_KT", phutKT);
+
+                        try
+                        {
+                            gioBD = DateTime.Parse(view.GetFocusedRowCellValue("GIO_BD").ToString());
+                            phutAnCom = Convert.ToDecimal(view.GetFocusedRowCellValue("PHUT_AN_CA"));
+                            view.SetRowCellValue(e.RowHandle, view.Columns["SO_GIO_TC"], (gioKT.Hour - gioBD.Hour - (phutAnCom / 60)));
+                        }
+                        catch { }
+
                     }
                 }
+
+
             }
             catch (Exception ex)
             {
@@ -1261,6 +1323,51 @@ namespace Vs.TimeAttendance
         private void grvLamThem_InvalidRowException(object sender, DevExpress.XtraGrid.Views.Base.InvalidRowExceptionEventArgs e)
         {
             e.ExceptionMode = DevExpress.XtraEditors.Controls.ExceptionMode.NoAction;
+        }
+
+        private void grvLamThem_ValidatingEditor(object sender, BaseContainerValidateEditorEventArgs e)
+        {
+
+        }
+
+        private void grvLamThem_ValidateRow(object sender, DevExpress.XtraGrid.Views.Base.ValidateRowEventArgs e)
+        {
+            try
+            {
+                if (Commons.Modules.sLoad == "0Load") return;
+
+                DevExpress.XtraGrid.Views.Grid.GridView View = (DevExpress.XtraGrid.Views.Grid.GridView)sender;
+                DevExpress.XtraGrid.Columns.GridColumn ID_CDLV = View.Columns["ID_CDLV"];
+
+
+                try
+                {
+                    DataTable dt = new DataTable();
+                    dt = Commons.Modules.ObjSystems.ConvertDatatable(grvLamThem);
+                    string sCa = grvLamThem.GetFocusedRowCellValue("ID_CDLV").ToString();
+                    if (dt.AsEnumerable().Where(x => x.Field<string>("ID_CDLV").Trim().Equals(sCa)).CopyToDataTable().Rows.Count > 1)
+                    {
+                        //string sTenKTra = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgTrungDLLuoi");
+                        string sTenKTra = "Trùng dữ liệu";
+                        grvLamThem.SetColumnError(grvLamThem.Columns["ID_CDLV"], sTenKTra);
+                        e.Valid = false;
+                        View.SetColumnError(ID_CDLV, "Trùng dữ liệu"); return;
+                        //dr.SetColumnError(sCot, sTenKTra);
+                    }
+                }
+                catch { }
+
+                //if (View.GetRowCellValue(e.RowHandle, idTo).ToString() == "")
+                //{
+                //    flag = true;
+                //    e.Valid = false;
+                //    View.SetColumnError(idTo, "Tổ không được bỏ trống"); return;
+                //}
+                //flag = false;
+
+                //CheckDuplicateKHNP(grvKHNP, (DataTable)grdKHNP.DataSource, e);
+            }
+            catch (Exception ex) { }
         }
     }
 }

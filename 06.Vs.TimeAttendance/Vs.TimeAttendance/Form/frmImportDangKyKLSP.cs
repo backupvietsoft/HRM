@@ -117,8 +117,9 @@ namespace Vs.TimeAttendance
                 adp.Fill(ds);
                 dt = new DataTable();
                 dt = ds.Tables[0].Copy();
-
+                Commons.Modules.sLoad = "0Load";
                 Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboNgay, dt, "NGAY_VALUE", "NGAY_VIEW", "NGAY_VIEW");
+                Commons.Modules.sLoad = "";
                 DataTable dt1 = new DataTable();
                 dt1 = ds.Tables[1].Copy();
 
@@ -128,7 +129,6 @@ namespace Vs.TimeAttendance
                 grvData.Columns[0].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
                 grvData.Columns[1].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
                 grvData.Columns[2].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
-                grvData.Columns[3].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
             }
             catch
             {
@@ -241,7 +241,7 @@ namespace Vs.TimeAttendance
                         errorMS++;
                     }
                 }
-                
+
 
                 col = 2;
                 //Tên 
@@ -319,40 +319,16 @@ namespace Vs.TimeAttendance
                     SqlConnection conn = new SqlConnection(Commons.IConnections.CNStr);
                     if (conn.State != ConnectionState.Open) conn.Open();
                     SqlTransaction sTrans = conn.BeginTransaction();
-                    string sbt = "sBTUV" + Commons.Modules.iIDUser;
+                    string sTB = "LK_Tam" + Commons.Modules.UserName;
                     try
                     {
                         //tạo bảm tạm trên lưới
-                        Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sbt, Commons.Modules.ObjSystems.ConvertDatatable(grvData), "");
+                        Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sTB, Commons.Modules.ObjSystems.ConvertDatatable(grvData), "");
 
                         //string sSql = "INSERT INTO dbo.UNG_VIEN(MS_UV,HO,TEN,PHAI,NGAY_SINH,NOI_SINH,SO_CMND,NGAY_CAP,NOI_CAP,ID_TT_HN,HO_TEN_VC,NGHE_NGHIEP_VC,SO_CON,DT_DI_DONG,EMAIL,NGUOI_LIEN_HE,QUAN_HE,DT_NGUOI_LIEN_HE,ID_TP,ID_QUAN,ID_PX,THON_XOM,DIA_CHI_THUONG_TRU,ID_NTD,ID_CN,HINH_THUC_TUYEN,ID_TDVH,ID_KNLV,ID_DGTN,VI_TRI_TD_1,VI_TRI_TD_2,NGAY_HEN_DI_LAM,XAC_NHAN_DL,NGAY_NHAN_VIEC,XAC_NHAN_DTDH,DA_CHUYEN,GHI_CHU,DA_GIOI_THIEU,HUY_TUYEN_DUNG) SELECT [" + grvData.Columns[0].FieldName.ToString() + "],[" + grvData.Columns[1].FieldName.ToString() + "],[" + grvData.Columns[2].FieldName.ToString() + "],case [" + grvData.Columns[3].FieldName.ToString() + "] when 'Nam' then 1 else 0 end,CONVERT(datetime,[" + grvData.Columns[4].FieldName.ToString() + "],103),[" + grvData.Columns[5].FieldName.ToString() + "],[" + grvData.Columns[6].FieldName.ToString() + "],[" + grvData.Columns[7].FieldName.ToString() + "],[" + grvData.Columns[8].FieldName.ToString() + "],(SELECT TOP 1 ID_TT_HN FROM dbo.TT_HON_NHAN WHERE TEN_TT_HN = A.[" + grvData.Columns[9].FieldName.ToString() + "]),[" + grvData.Columns[10].FieldName.ToString() + "],[" + grvData.Columns[11].FieldName.ToString() + "],[" + grvData.Columns[12].FieldName.ToString() + "],[" + grvData.Columns[13].FieldName.ToString() + "],[" + grvData.Columns[14].FieldName.ToString() + "],[" + grvData.Columns[15].FieldName.ToString() + "],[" + grvData.Columns[16].FieldName.ToString() + "],[" + grvData.Columns[17].FieldName.ToString() + "],(SELECT TOP 1 ID_TP FROM dbo.THANH_PHO WHERE TEN_TP = A.[" + grvData.Columns[18].FieldName.ToString() + "]),(SELECT TOP 1 ID_QUAN FROM dbo.QUAN WHERE TEN_QUAN = A.[" + grvData.Columns[19].FieldName.ToString() + "]),(SELECT TOP 1 ID_PX FROM dbo.PHUONG_XA WHERE TEN_PX = A.[" + grvData.Columns[20].FieldName.ToString() + "]),[" + grvData.Columns[21].FieldName.ToString() + "],[" + grvData.Columns[22].FieldName.ToString() + "],(SELECT TOP 1 ID_NTD FROM dbo.NGUON_TUYEN_DUNG WHERE TEN_NTD= A.[" + grvData.Columns[23].FieldName.ToString() + "]),(SELECT TOP 1 ID_CN FROM dbo.CONG_NHAN WHERE HO +' '+TEN = A.[" + grvData.Columns[24].FieldName.ToString() + "]),(SELECT ID_HTT FROM dbo.HINH_THUC_TUYEN WHERE TEN_HT_TUYEN = A.[" + grvData.Columns[25].FieldName.ToString() + "]),(SELECT TOP 1 ID_TDVH FROM dbo.TRINH_DO_VAN_HOA WHERE TEN_TDVH = A.[" + grvData.Columns[26].FieldName.ToString() + "]),(SELECT TOP 1 ID_KNLV FROM dbo.KINH_NGHIEM_LV WHERE TEN_KNLV = A.[" + grvData.Columns[27].FieldName.ToString() + "]),(SELECT TOP 1 ID_DGTN FROM dbo.DANH_GIA_TAY_NGHE WHERE TEN_DGTN = A.[" + grvData.Columns[28].FieldName.ToString() + "]),(SELECT TOP 1 ID_LCV FROM dbo.LOAI_CONG_VIEC WHERE TEN_LCV = A.[" + grvData.Columns[29].FieldName.ToString() + "]),(SELECT TOP 1 ID_LCV FROM dbo.LOAI_CONG_VIEC WHERE TEN_LCV = A.[" + grvData.Columns[30].FieldName.ToString() + "]),CONVERT(datetime,[" + grvData.Columns[31].FieldName.ToString() + "],103),[" + grvData.Columns[32].FieldName.ToString() + "],CONVERT(datetime,[" + grvData.Columns[33].FieldName.ToString() + "],103),[" + grvData.Columns[34].FieldName.ToString() + "],[" + grvData.Columns[35].FieldName.ToString() + "],[" + grvData.Columns[36].FieldName.ToString() + "],[" + grvData.Columns[37].FieldName.ToString() + "],[" + grvData.Columns[38].FieldName.ToString() + "]  FROM " + sbt + " AS A";
 
-                        string sSql1 = "INSERT INTO	 dbo.CONG_NHAN(MS_CN, MS_THE_CC,  HO, TEN, ID_QG, NGAY_SINH, NAM_SINH, PHAI, ID_TO, ID_CV, ID_LCV,  NGAY_THU_VIEC, NGAY_VAO_CTY, " +
-                            "NGAY_VAO_LAM, VAO_LAM_LAI ,ID_TT_HD, ID_TT_HT, HINH_THUC_TUYEN, PHEP_CT, THAM_GIA_BHXH, LD_TINH, GHI_CHU, ID_DT, " +
-                            "TON_GIAO, NOI_SINH, NGUYEN_QUAN, SO_CMND, NGAY_CAP, NOI_CAP, ID_TT_HN, MA_THE_ATM, SO_TAI_KHOAN, MS_THUE, TEN_KHONG_DAU, LD_NN, DT_DI_DONG, DT_NHA, DT_NGUOI_THAN, EMAIL, DIA_CHI_THUONG_TRU," +
-                            " ID_TP, ID_QUAN, ID_PX, THON_XOM, DIA_CHI_TAM_TRU, ID_TP_TAM_TRU, ID_QUAN_TAM_TRU, ID_PX_TAM_TRU, THON_XOM_TAM_TRU, SO_BHXH, NGAY_DBHXH, ID_LOAI_TD, ID_TDVH, CHUYEN_MON, NGOAI_NGU,  NGAN_HANG, CHI_NHANH_NH) " +
-
-                            "SELECT A.[" + grvData.Columns[0].FieldName.ToString() + "], A.[" + grvData.Columns[1].FieldName.ToString() + "], A.[" + grvData.Columns[2].FieldName.ToString() + "], A.[" + grvData.Columns[3].FieldName.ToString() + "], " +
-                            "(SELECT TOP 1 ID_QG FROM dbo.QUOC_GIA WHERE TEN_QG = A.[" + grvData.Columns[4].FieldName.ToString() + "]), CONVERT(DATETIME,[A].[" + grvData.Columns[5].FieldName.ToString() + "],103), [A].[" + grvData.Columns[6].FieldName.ToString() + "],  " +
-                            "[A].[" + grvData.Columns[7].FieldName.ToString() + "], (SELECT TOP 1 ID_TO FROM dbo.[TO] WHERE TEN_TO = A.[" + grvData.Columns[8].FieldName.ToString() + "]), (SELECT TOP 1 ID_CV FROM dbo.CHUC_VU WHERE TEN_CV = A.[" + grvData.Columns[9].FieldName.ToString() + "]), " +
-                            "(SELECT TOP 1 ID_LCV FROM dbo.LOAI_CONG_VIEC WHERE TEN_LCV = A.[" + grvData.Columns[10].FieldName.ToString() + "]), CONVERT(DATETIME,[A].[" + grvData.Columns[11].FieldName.ToString() + "],103), " +
-                            "CONVERT(DATETIME,A.[" + grvData.Columns[12].FieldName.ToString() + "],103), CONVERT(DATETIME,A.[" + grvData.Columns[12].FieldName.ToString() + "],103) ,[A].[" + grvData.Columns[13].FieldName.ToString() + "], " +
-                            "(SELECT TOP 1 ID_TT_HD FROM dbo.TINH_TRANG_HD WHERE TEN_TT_HD = A.[" + grvData.Columns[14].FieldName.ToString() + "]), (SELECT TOP 1 ID_TT_HT FROM dbo.TINH_TRANG_HT WHERE TEN_TT_HT = A.[" + grvData.Columns[15].FieldName.ToString() + "]), [A].[" + grvData.Columns[16].FieldName.ToString() + "], " +
-                            "(SELECT PHEP_CT FROM dbo.LOAI_CONG_VIEC WHERE TEN_LCV = A.[" + grvData.Columns[10].FieldName.ToString().Trim() + "]), [A].[" + grvData.Columns[17].FieldName.ToString() + "], [A].[" + grvData.Columns[18].FieldName.ToString() + "], A.[" + grvData.Columns[19].FieldName.ToString() + "], " +
-                            "(SELECT TOP 1 ID_DT FROM dbo.DAN_TOC WHERE TEN_DT = A.[" + grvData.Columns[20].FieldName.ToString() + "]), A.[" + grvData.Columns[21].FieldName.ToString() + "], A.[" + grvData.Columns[22].FieldName.ToString() + "],  " +
-                            "A.[" + grvData.Columns[23].FieldName.ToString() + "], A.[" + grvData.Columns[24].FieldName.ToString() + "], CONVERT(DATETIME,A.[" + grvData.Columns[25].FieldName.ToString() + "],103), A.[" + grvData.Columns[26].FieldName.ToString() + "], (SELECT TOP 1 ID_TT_HN FROM dbo.TT_HON_NHAN WHERE TEN_TT_HN = A.[" + grvData.Columns[27].FieldName.ToString() + "]), A.[" + grvData.Columns[28].FieldName.ToString() + "], " +
-                            "A.[" + grvData.Columns[29].FieldName.ToString() + "],A.[" + grvData.Columns[30].FieldName.ToString() + "], A.[" + grvData.Columns[31].FieldName.ToString() + "], A.[" + grvData.Columns[32].FieldName.ToString() + "], " +
-                            "A.[" + grvData.Columns[33].FieldName.ToString() + "], A.[" + grvData.Columns[34].FieldName.ToString() + "], A.[" + grvData.Columns[35].FieldName.ToString() + "], A." + grvData.Columns[36].FieldName.ToString() + ", A.[" + grvData.Columns[37].FieldName.ToString() + "], " +
-                            "(SELECT TOP 1 ID_TP FROM dbo.THANH_PHO WHERE TEN_TP = A.[" + grvData.Columns[38].FieldName.ToString() + "]), (SELECT TOP 1 ID_QUAN FROM  QUAN WHERE TEN_QUAN  = A.[" + grvData.Columns[39].FieldName.ToString() + "]), " +
-                            "(SELECT TOP 1 ID_PX FROM dbo.PHUONG_XA WHERE TEN_PX = A.[" + grvData.Columns[40].FieldName.ToString() + "]), A.[" + grvData.Columns[41].FieldName.ToString() + "], A.[" + grvData.Columns[42].FieldName.ToString() + "], " +
-                            "(SELECT TOP 1 ID_TP FROM dbo.THANH_PHO WHERE TEN_TP = A.[" + grvData.Columns[43].FieldName.ToString() + "]), (SELECT TOP 1 ID_QUAN FROM  QUAN WHERE TEN_QUAN  = A.[" + grvData.Columns[44].FieldName.ToString() + "]), " +
-                            "(SELECT TOP 1 ID_PX FROM dbo.PHUONG_XA WHERE TEN_PX = A.[" + grvData.Columns[45].FieldName.ToString() + "]), A.[" + grvData.Columns[46].FieldName.ToString() + "], A.[" + grvData.Columns[47].FieldName.ToString() + "], CONVERT(DATETIME,A.[" + grvData.Columns[48].FieldName.ToString() + "],103), " +
-                            "(SELECT TOP 1 ID_LOAI_TD FROM dbo.LOAI_TRINH_DO WHERE TEN_LOAI_TD = A.[" + grvData.Columns[49].FieldName.ToString() + "]), (SELECT TOP 1 ID_TDVH FROM dbo.TRINH_DO_VAN_HOA WHERE TEN_TDVH = A.[" + grvData.Columns[50].FieldName.ToString() + "]), A.[" + grvData.Columns[51].FieldName.ToString() + "], A.[" + grvData.Columns[52].FieldName.ToString() + "]," +
-                            " A.[" + grvData.Columns[53].FieldName.ToString() + "], A.[" + grvData.Columns[54].FieldName.ToString() + "]  FROM " + sbt + " AS A";
-                        SqlHelper.ExecuteNonQuery(sTrans, CommandType.Text, sSql1);
-
-                        Commons.Modules.ObjSystems.XoaTable(sbt);
-
+                        SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spSaveDK_TG_KHONG_LAM_SP_Import", sTB);
+                        Commons.Modules.ObjSystems.XoaTable(sTB);
                         sTrans.Commit();
                         XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgImportDuLieuThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                         grdData.DataSource = dtSource.Clone();
@@ -361,7 +337,7 @@ namespace Vs.TimeAttendance
                     }
                     catch (Exception ex)
                     {
-                        Commons.Modules.ObjSystems.XoaTable(sbt);
+                        Commons.Modules.ObjSystems.XoaTable(sTB);
                         sTrans.Rollback();
                         XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgImportKhongThanhCong") + " error(" + ex.ToString() + ")", Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
 
@@ -385,7 +361,7 @@ namespace Vs.TimeAttendance
         }
         private void ActiveEditor_DoubleClick(object sender, EventArgs e)
         {
-            
+
         }
         private void frmImportDangKyKLSP_Load(object sender, EventArgs e)
         {
@@ -588,8 +564,14 @@ namespace Vs.TimeAttendance
                         }
                         else
                         {
-
-                            values[i] = props[i].GetValue(item);
+                            if (i == 0)
+                            {
+                                values[i] = Convert.ToDateTime(props[i].GetValue(item)).ToString("dd/MM/yyyy");
+                            }
+                            else
+                            {
+                                values[i] = props[i].GetValue(item);
+                            }
                         }
 
                     }
@@ -783,6 +765,16 @@ namespace Vs.TimeAttendance
                 dr["XOA"] = 1;
                 return false;
             }
+        }
+
+        private void cboNgay_EditValueChanged(object sender, EventArgs e)
+        {
+            try
+            {
+
+            }
+            catch { }
+
         }
     }
 }

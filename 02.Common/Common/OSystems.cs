@@ -4189,7 +4189,7 @@ namespace Commons
                 dt.DefaultView.RowFilter = column.FieldName + " = " + value;
                 //_view.SelectRow(0);
             }
-            catch
+            catch (Exception ex)
             {
                 dt.DefaultView.RowFilter = "1 = 0";
             }

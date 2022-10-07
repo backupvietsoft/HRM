@@ -37,6 +37,8 @@ namespace Vs.TimeAttendance
             this.windowsUIButton = new DevExpress.XtraBars.Docking2010.WindowsUIButtonPanel();
             this.searchControl = new DevExpress.XtraEditors.SearchControl();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            this.cboNgay = new DevExpress.XtraEditors.SearchLookUpEdit();
+            this.searchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.btnFile = new DevExpress.XtraEditors.ButtonEdit();
             this.cboChonSheet = new DevExpress.XtraEditors.LookUpEdit();
             this.grdData = new DevExpress.XtraGrid.GridControl();
@@ -45,16 +47,16 @@ namespace Vs.TimeAttendance
             this.groThongTinImport = new DevExpress.XtraLayout.LayoutControlGroup();
             this.lblChonFile = new DevExpress.XtraLayout.LayoutControlItem();
             this.lblChonSheet = new DevExpress.XtraLayout.LayoutControlItem();
+            this.lblNgay = new DevExpress.XtraLayout.LayoutControlItem();
             this.groDLImport = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.cboNgay = new DevExpress.XtraEditors.SearchLookUpEdit();
-            this.lblNgay = new DevExpress.XtraLayout.LayoutControlItem();
-            this.searchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.windowsUIButton.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.searchControl.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cboNgay.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnFile.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboChonSheet.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdData)).BeginInit();
@@ -63,11 +65,9 @@ namespace Vs.TimeAttendance
             ((System.ComponentModel.ISupportInitialize)(this.groThongTinImport)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblChonFile)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblChonSheet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lblNgay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groDLImport)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cboNgay.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lblNgay)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).BeginInit();
             this.SuspendLayout();
             // 
             // windowsUIButton
@@ -137,35 +137,54 @@ namespace Vs.TimeAttendance
             this.layoutControl1.TabIndex = 6;
             this.layoutControl1.Text = "layoutControl1";
             // 
+            // cboNgay
+            // 
+            this.cboNgay.Location = new System.Drawing.Point(117, 66);
+            this.cboNgay.Name = "cboNgay";
+            this.cboNgay.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cboNgay.Properties.PopupView = this.searchLookUpEdit1View;
+            this.cboNgay.Size = new System.Drawing.Size(381, 28);
+            this.cboNgay.StyleController = this.layoutControl1;
+            this.cboNgay.TabIndex = 10;
+            this.cboNgay.EditValueChanged += new System.EventHandler(this.cboNgay_EditValueChanged);
+            // 
+            // searchLookUpEdit1View
+            // 
+            this.searchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            this.searchLookUpEdit1View.Name = "searchLookUpEdit1View";
+            this.searchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.searchLookUpEdit1View.OptionsView.ShowGroupPanel = false;
+            // 
             // btnFile
             // 
-            this.btnFile.Location = new System.Drawing.Point(100, 31);
+            this.btnFile.Location = new System.Drawing.Point(117, 36);
             this.btnFile.Name = "btnFile";
             this.btnFile.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.btnFile.Size = new System.Drawing.Size(398, 24);
+            this.btnFile.Size = new System.Drawing.Size(381, 28);
             this.btnFile.StyleController = this.layoutControl1;
             this.btnFile.TabIndex = 0;
             this.btnFile.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.btnFile_ButtonClick);
             // 
             // cboChonSheet
             // 
-            this.cboChonSheet.Location = new System.Drawing.Point(588, 31);
+            this.cboChonSheet.Location = new System.Drawing.Point(605, 36);
             this.cboChonSheet.Name = "cboChonSheet";
             this.cboChonSheet.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cboChonSheet.Properties.NullText = "";
-            this.cboChonSheet.Size = new System.Drawing.Size(398, 24);
+            this.cboChonSheet.Size = new System.Drawing.Size(381, 28);
             this.cboChonSheet.StyleController = this.layoutControl1;
             this.cboChonSheet.TabIndex = 6;
             this.cboChonSheet.EditValueChanged += new System.EventHandler(this.cboChonSheet_EditValueChanged);
             // 
             // grdData
             // 
-            this.grdData.Location = new System.Drawing.Point(12, 114);
+            this.grdData.Location = new System.Drawing.Point(12, 132);
             this.grdData.MainView = this.grvData;
             this.grdData.Name = "grdData";
-            this.grdData.Size = new System.Drawing.Size(974, 375);
+            this.grdData.Size = new System.Drawing.Size(974, 357);
             this.grdData.TabIndex = 9;
             this.grdData.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grvData});
@@ -205,7 +224,7 @@ namespace Vs.TimeAttendance
             this.lblNgay});
             this.groThongTinImport.Location = new System.Drawing.Point(0, 0);
             this.groThongTinImport.Name = "groThongTinImport";
-            this.groThongTinImport.Size = new System.Drawing.Size(988, 83);
+            this.groThongTinImport.Size = new System.Drawing.Size(988, 96);
             // 
             // lblChonFile
             // 
@@ -214,8 +233,8 @@ namespace Vs.TimeAttendance
             this.lblChonFile.CustomizationFormText = "lblChonFile";
             this.lblChonFile.Location = new System.Drawing.Point(0, 0);
             this.lblChonFile.Name = "lblChonFile";
-            this.lblChonFile.Size = new System.Drawing.Size(488, 26);
-            this.lblChonFile.TextSize = new System.Drawing.Size(76, 17);
+            this.lblChonFile.Size = new System.Drawing.Size(488, 30);
+            this.lblChonFile.TextSize = new System.Drawing.Size(93, 21);
             // 
             // lblChonSheet
             // 
@@ -224,17 +243,25 @@ namespace Vs.TimeAttendance
             this.lblChonSheet.CustomizationFormText = "lblChonSheet";
             this.lblChonSheet.Location = new System.Drawing.Point(488, 0);
             this.lblChonSheet.Name = "lblChonSheet";
-            this.lblChonSheet.Size = new System.Drawing.Size(488, 52);
-            this.lblChonSheet.TextSize = new System.Drawing.Size(76, 17);
+            this.lblChonSheet.Size = new System.Drawing.Size(488, 60);
+            this.lblChonSheet.TextSize = new System.Drawing.Size(93, 21);
+            // 
+            // lblNgay
+            // 
+            this.lblNgay.Control = this.cboNgay;
+            this.lblNgay.Location = new System.Drawing.Point(0, 30);
+            this.lblNgay.Name = "lblNgay";
+            this.lblNgay.Size = new System.Drawing.Size(488, 30);
+            this.lblNgay.TextSize = new System.Drawing.Size(93, 21);
             // 
             // groDLImport
             // 
             this.groDLImport.CustomizationFormText = "groDLImport";
             this.groDLImport.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlItem2});
-            this.groDLImport.Location = new System.Drawing.Point(0, 83);
+            this.groDLImport.Location = new System.Drawing.Point(0, 96);
             this.groDLImport.Name = "groDLImport";
-            this.groDLImport.Size = new System.Drawing.Size(988, 408);
+            this.groDLImport.Size = new System.Drawing.Size(988, 395);
             // 
             // layoutControlItem2
             // 
@@ -243,7 +270,7 @@ namespace Vs.TimeAttendance
             this.layoutControlItem2.CustomizationFormText = "layoutControlItem2";
             this.layoutControlItem2.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(976, 377);
+            this.layoutControlItem2.Size = new System.Drawing.Size(976, 359);
             this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem2.TextVisible = false;
             // 
@@ -251,32 +278,6 @@ namespace Vs.TimeAttendance
             // 
             this.timer1.Interval = 5000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // cboNgay
-            // 
-            this.cboNgay.Location = new System.Drawing.Point(100, 57);
-            this.cboNgay.Name = "cboNgay";
-            this.cboNgay.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cboNgay.Properties.PopupView = this.searchLookUpEdit1View;
-            this.cboNgay.Size = new System.Drawing.Size(398, 24);
-            this.cboNgay.StyleController = this.layoutControl1;
-            this.cboNgay.TabIndex = 10;
-            // 
-            // lblNgay
-            // 
-            this.lblNgay.Control = this.cboNgay;
-            this.lblNgay.Location = new System.Drawing.Point(0, 26);
-            this.lblNgay.Name = "lblNgay";
-            this.lblNgay.Size = new System.Drawing.Size(488, 26);
-            this.lblNgay.TextSize = new System.Drawing.Size(76, 17);
-            // 
-            // searchLookUpEdit1View
-            // 
-            this.searchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
-            this.searchLookUpEdit1View.Name = "searchLookUpEdit1View";
-            this.searchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
-            this.searchLookUpEdit1View.OptionsView.ShowGroupPanel = false;
             // 
             // frmImportDangKyKLSP
             // 
@@ -293,6 +294,8 @@ namespace Vs.TimeAttendance
             ((System.ComponentModel.ISupportInitialize)(this.searchControl.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.cboNgay.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnFile.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboChonSheet.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdData)).EndInit();
@@ -301,11 +304,9 @@ namespace Vs.TimeAttendance
             ((System.ComponentModel.ISupportInitialize)(this.groThongTinImport)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblChonFile)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblChonSheet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lblNgay)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groDLImport)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cboNgay.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lblNgay)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).EndInit();
             this.ResumeLayout(false);
 
         }

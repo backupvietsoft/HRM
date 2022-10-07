@@ -69,9 +69,18 @@ namespace Vs.Payroll
                 DataTable dt = new DataTable();
                 dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetlistDK_TG_KHONG_LAM_SP", Convert.ToDateTime(cboThang.EditValue),
                                             cboDonVi.EditValue, cboXiNghiep.EditValue, cboTo.EditValue, Commons.Modules.UserName, Commons.Modules.TypeLanguage, isAdd));
-                Commons.Modules.ObjSystems.MLoadXtraGrid(grdData, grvData, dt, true, false, false, true, true, this.Name);
                 dt.Columns["MS_CN"].ReadOnly = true;
                 dt.Columns["HO_TEN"].ReadOnly = true;
+                dt.Columns["TEN_TO"].ReadOnly = true;
+                dt.Columns["TEN_XN"].ReadOnly = true;
+                if (grdData.DataSource == null)
+                {
+                    Commons.Modules.ObjSystems.MLoadXtraGrid(grdData, grvData, dt, true, true, false, true, true, this.Name);
+                }
+                else
+                {
+                    grdData.DataSource = dt;
+                }
                 grvData.Columns["ID_CN"].Visible = false;
                 grvData.Columns["THANG"].Visible = false;
             }
@@ -428,7 +437,7 @@ namespace Vs.Payroll
             cboThang.Enabled = !visible;
             cboDonVi.Enabled = !visible;
             cboXiNghiep.Enabled = !visible;
-            grvData.OptionsBehavior.Editable = visible;
+            grvData.OptionsBehavior.Editable = !visible;
         }
 
         private void XoaCheDoLV()
@@ -439,7 +448,7 @@ namespace Vs.Payroll
             try
             {
                 string sSql = "DELETE dbo.DK_TG_KHONG_LAM_SP WHERE ID_CN = " + grvData.GetFocusedRowCellValue("ID_CN") +
-                                                        " AND THANG = '"
+                                                        " AND NGAY = '"
                                                         + Convert.ToDateTime(cboThang.EditValue).ToString("yyyyMMdd") + "'";
                 SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, sSql);
                 grvData.DeleteSelectedRows();
@@ -630,6 +639,10 @@ namespace Vs.Payroll
 
                 DataTable dt = new DataTable();
                 dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spUpdateChuotPhai", sBTCongNhan, sCotCN, Convert.ToDouble(grvData.GetFocusedRowCellValue(grvData.FocusedColumn.FieldName))));
+                dt.Columns["MS_CN"].ReadOnly = true;
+                dt.Columns["HO_TEN"].ReadOnly = true;
+                dt.Columns["TEN_TO"].ReadOnly = true;
+                dt.Columns["TEN_XN"].ReadOnly = true;
                 grdData.DataSource = dt;
             }
             catch { }
@@ -715,7 +728,7 @@ namespace Vs.Payroll
             {
                 if (!Char.IsDigit(input[i]))
                     IsNumber = false;
-                if((input[i] == '.' && Char.IsDigit(input[i - 1]) && Char.IsDigit(input[i + 1])))
+                if ((input[i] == '.' && Char.IsDigit(input[i - 1]) && Char.IsDigit(input[i + 1])))
                     IsNumber = true;
             }
             return IsNumber;

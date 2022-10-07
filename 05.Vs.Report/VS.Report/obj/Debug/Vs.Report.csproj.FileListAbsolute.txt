@@ -3108,3 +3108,7 @@ F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.csproj.CoreCompileInputs.ca
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.csproj.CopyComplete
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\VS.Report.dll
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\VS.Report.pdb
+H:\Lamviec\Lamviec\HRM\01.HRM\05.Vs.Report\Vs.Report\bin\Debug\Commons.dll
+H:\Lamviec\Lamviec\HRM\01.HRM\05.Vs.Report\Vs.Report\bin\Debug\de\DevExpress.XtraTreeList.v22.1.resources.dll
+H:\Lamviec\Lamviec\HRM\01.HRM\05.Vs.Report\Vs.Report\bin\Debug\es\DevExpress.XtraTreeList.v22.1.resources.dll
+H:\Lamviec\Lamviec\HRM\01.HRM\05.Vs.Report\Vs.Report\bin\Debug\ja\DevExpress.XtraTreeList.v22.1.resources.dll

@@ -16,6 +16,7 @@ namespace Vs.HRM
     public partial class ucCapNhatGio : DevExpress.XtraEditors.XtraUserControl
     {
         public static ucCapNhatGio _instance;
+        private DataTable dtNgayNghiLe;
         public static ucCapNhatGio Instance
         {
             get
@@ -40,6 +41,9 @@ namespace Vs.HRM
             Thread.Sleep(1000);
             Commons.Modules.sLoad = "0Load";
 
+            string sSql = "SELECT * FROM dbo.NGAY_NGHI_LE";
+            dtNgayNghiLe = new DataTable();
+            dtNgayNghiLe.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSql));
             repositoryItemTimeEdit1 = new RepositoryItemTimeEdit();
             repositoryItemTimeEdit1.TimeEditStyle = TimeEditStyle.TouchUI;
             repositoryItemTimeEdit1.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.DateTimeAdvancingCaret;
@@ -103,6 +107,7 @@ namespace Vs.HRM
             {
                 case "chamtudong":
                     {
+                        if (!dxValidationProvider1.Validate()) return;
                         try
                         {
                             if (!kiemtrangay()) return;
@@ -115,21 +120,20 @@ namespace Vs.HRM
 
                             string sBT = "sBTCapNhatGio" + Commons.Modules.iIDUser;
                             Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBT, Commons.Modules.ObjSystems.ConvertDatatable(grvData), "");
-                            for (DateTime dt = Convert.ToDateTime(dTuNgay.EditValue); dt <= Convert.ToDateTime(dDenNgay.EditValue); dt = dt.AddDays(1))
-                            {
-                                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spAutoUpdateTimekeeping", conn);
-                                cmd.CommandType = CommandType.StoredProcedure;
-                                cmd.Parameters.AddWithValue("@UName", Commons.Modules.UserName);
-                                cmd.Parameters.AddWithValue("@NNgu", Commons.Modules.TypeLanguage);
-                                cmd.Parameters.AddWithValue("@ID_DV", cboDV.EditValue);
-                                cmd.Parameters.AddWithValue("@ID_XN", cboXN.EditValue);
-                                cmd.Parameters.AddWithValue("@ID_TO", cboTo.EditValue);
-                                cmd.Parameters.AddWithValue("@sBT1", sBT);
-                                cmd.Parameters.AddWithValue("@DDate", dt);
-                                cmd.ExecuteNonQuery();
-                            }
+
+                            System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spAutoUpdateTimekeeping", conn);
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.Parameters.AddWithValue("@UName", Commons.Modules.UserName);
+                            cmd.Parameters.AddWithValue("@NNgu", Commons.Modules.TypeLanguage);
+                            cmd.Parameters.AddWithValue("@ID_DV", cboDV.EditValue);
+                            cmd.Parameters.AddWithValue("@ID_XN", cboXN.EditValue);
+                            cmd.Parameters.AddWithValue("@ID_TO", cboTo.EditValue);
+                            cmd.Parameters.AddWithValue("@sBT1", sBT);
+                            cmd.Parameters.AddWithValue("@TNgay", dTuNgay.EditValue);
+                            cmd.Parameters.AddWithValue("@DDate", dDenNgay.EditValue);
+                            cmd.ExecuteNonQuery();
                             Commons.Modules.ObjSystems.XoaTable(sBT);
-                            //XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_CapNhatThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_CapNhatThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                             LoadData();
                         }
                         catch (Exception ex)
@@ -222,6 +226,7 @@ namespace Vs.HRM
 
         private void dTuNgay_EditValueChanged(object sender, EventArgs e)
         {
+            if (dxValidationProvider1.Validate()) return;
             if (Commons.Modules.sLoad == "0Load") return;
             Commons.Modules.sLoad = "0Load";
             Commons.Modules.ObjSystems.ConvertDateTime(dTuNgay.Text);
@@ -234,8 +239,23 @@ namespace Vs.HRM
 
         private void dDenNgay_EditValueChanged(object sender, EventArgs e)
         {
+            if (!dxValidationProvider1.Validate()) return;
             if (Commons.Modules.sLoad == "0Load") return;
             LoadData();
+        }
+
+        private void grvData_RowStyle(object sender, RowStyleEventArgs e)
+        {
+            try
+            {
+                if (Convert.ToDateTime(grvData.GetRowCellValue(e.RowHandle, grvData.Columns["NGAY"])).DayOfWeek.ToString() != "Sunday" && Convert.ToDateTime(grvData.GetRowCellValue(e.RowHandle, grvData.Columns["NGAY"])).DayOfWeek.ToString() != "Saturday") return;
+                e.Appearance.BackColor = System.Drawing.ColorTranslator.FromHtml("#A9F5BC");
+                e.HighPriority = true;
+            }
+            catch
+            {
+
+            }
         }
     }
 }

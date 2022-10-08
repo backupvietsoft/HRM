@@ -70,7 +70,7 @@ namespace Vs.TimeAttendance
                 DataTable dt = new DataTable();
                 dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetlistDK_TG_KHONG_LAM_SP", Convert.ToDateTime(cboThang.EditValue),
                                             cboDonVi.EditValue, cboXiNghiep.EditValue, cboTo.EditValue, Commons.Modules.UserName, Commons.Modules.TypeLanguage, isAdd));
-                Commons.Modules.ObjSystems.MLoadXtraGrid(grdData, grvData, dt, true, true, false, true, true, this.Name);
+                Commons.Modules.ObjSystems.MLoadXtraGrid(grdData, grvData, dt, isAdd ? true : false, true, false, true, true, this.Name);
                 dt.Columns["MS_CN"].ReadOnly = true;
                 dt.Columns["HO_TEN"].ReadOnly = true;
                 dt.Columns["TEN_XN"].ReadOnly = true;
@@ -83,6 +83,7 @@ namespace Vs.TimeAttendance
             {
 
             }
+            
             //grvData.Columns["LUONG_KHOAN"].DisplayFormat.FormatType = FormatType.Numeric;
             //grvData.Columns["LUONG_KHOAN"].DisplayFormat.FormatString = "N0";
         }
@@ -321,10 +322,12 @@ namespace Vs.TimeAttendance
                         frmImportDangKyKLSP frm = new frmImportDangKyKLSP();
                         if (frm.ShowDialog() == DialogResult.OK)
                         {
+                            LoadThang();
                             LoadData();
                         }
                         else
                         {
+                            LoadThang();
                             LoadData();
                         }
 
@@ -534,7 +537,7 @@ namespace Vs.TimeAttendance
         private void EnableButon(bool visible)
         {
             btnALL.Buttons[0].Properties.Visible = visible;
-            btnALL.Buttons[1].Properties.Visible = visible;
+            btnALL.Buttons[1].Properties.Visible = !visible;
             btnALL.Buttons[2].Properties.Visible = visible;
 
             btnALL.Buttons[3].Properties.Visible = !visible;
@@ -548,7 +551,6 @@ namespace Vs.TimeAttendance
             cboThang.Enabled = !visible;
             cboDonVi.Enabled = !visible;
             cboXiNghiep.Enabled = !visible;
-            grvData.OptionsBehavior.Editable = visible;
         }
 
         private void XoaCheDoLV()
@@ -559,7 +561,7 @@ namespace Vs.TimeAttendance
             try
             {
                 string sSql = "DELETE dbo.DK_TG_KHONG_LAM_SP WHERE ID_CN = " + grvData.GetFocusedRowCellValue("ID_CN") +
-                                                        " AND THANG = '"
+                                                        " AND NGAY = '"
                                                         + Convert.ToDateTime(cboThang.EditValue).ToString("yyyyMMdd") + "'";
                 SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, sSql);
                 grvData.DeleteSelectedRows();

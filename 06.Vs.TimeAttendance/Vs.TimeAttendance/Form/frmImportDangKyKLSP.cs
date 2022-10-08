@@ -129,6 +129,7 @@ namespace Vs.TimeAttendance
                 grvData.Columns[0].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
                 grvData.Columns[1].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
                 grvData.Columns[2].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
+                cboNgay_EditValueChanged(null, null);
             }
             catch
             {
@@ -152,7 +153,7 @@ namespace Vs.TimeAttendance
                             grvData.PostEditor();
                             grvData.UpdateCurrentRow();
                             Commons.Modules.ObjSystems.MChooseGrid(false, "XOA", grvData);
-                            DataTable dtSource = Commons.Modules.ObjSystems.ConvertDatatable(grdData);
+                            DataTable dtSource = Commons.Modules.ObjSystems.ConvertDatatable(grvData);
                             if (cboChonSheet.Text == "" || dtSource == null || dtSource.Rows.Count <= 0)
                             {
                                 this.Cursor = Cursors.Default;
@@ -331,7 +332,10 @@ namespace Vs.TimeAttendance
                         Commons.Modules.ObjSystems.XoaTable(sTB);
                         sTrans.Commit();
                         XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgImportDuLieuThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        grdData.DataSource = dtSource.Clone();
+                        //grdData.DataSource = dtSource.Clone();
+                        DataTable dt = new DataTable();
+                        dt = Commons.Modules.ObjSystems.ConvertDatatable(grdData).AsEnumerable().Where(x => x["NGAY"].ToString() != cboNgay.Text).CopyToDataTable();
+                        grdData.DataSource = dt;
                         cboChonSheet.Text = string.Empty;
                         btnFile.Text = string.Empty;
                     }
@@ -771,9 +775,21 @@ namespace Vs.TimeAttendance
         {
             try
             {
-
+                DataTable dt = new DataTable();
+                dt = (DataTable)grdData.DataSource;
+                if (dt == null) return;
+                try
+                {
+                    dt.DefaultView.RowFilter = "NGAY = '" + cboNgay.Text + "'";
+                    //_view.SelectRow(0);
+                }
+                catch (Exception ex)
+                {
+                    dt.DefaultView.RowFilter = "1 = 0";
+                }
+                //Commons.Modules.ObjSystems.RowFilter(grdData, grvData.Columns["NGAY"], Convert.ToDateTime(cboNgay.Text).ToString("dd/MM/yyyy"));
             }
-            catch { }
+            catch (Exception ex) { }
 
         }
     }

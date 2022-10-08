@@ -349,7 +349,6 @@ namespace Vs.TimeAttendance
                 grvLamThem.Columns["NGAY"].Visible = false;
                 grvLamThem.Columns["GIO_BD"].ColumnEdit = this.repositoryItemTimeEdit1;
                 grvLamThem.Columns["GIO_KT"].ColumnEdit = this.repositoryItemTimeEdit1;
-                grvLamThem.Columns["GIO_BD"].OptionsColumn.ReadOnly = true;
                 grvLamThem.Columns["PHUT_BD"].Visible = false;
                 grvLamThem.Columns["PHUT_KT"].Visible = false;
             }

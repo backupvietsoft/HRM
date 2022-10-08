@@ -115,7 +115,7 @@ namespace VietSoftHRM
             try
             {
                 String sSql;
-                sSql = "SELECT T3.[ID_MENU],[KEY_MENU],CASE " + Commons.Modules.TypeLanguage.ToString() + " WHEN 0 THEN T3.[TEN_MENU] WHEN 1 THEN ISNULL(NULLIF(T3.[TEN_MENU_A],''),T3.[TEN_MENU]) ELSE ISNULL(NULLIF(T3.[TEN_MENU_H],''),T3.[TEN_MENU]) END AS NAME,[ROOT],[HIDE],[BACK_COLOR],[IMG],[STT_MENU],[CONTROLS],[DROPDOW] FROM NHOM_MENU T1 INNER JOIN dbo.USERS T2 ON T1.ID_NHOM = T2.ID_NHOM INNER JOIN dbo.MENU T3 ON T1.ID_MENU = T3.ID_MENU  WHERE T2.USER_NAME = '" + Commons.Modules.UserName.Trim() + "' AND [ROOT] = 0 AND T3.ID_MENU NOT IN (" + Commons.Modules.sHideMenu + ") ORDER BY[STT_MENU],[NAME]";
+                sSql = "SELECT DISTINCT T3.[ID_MENU],[KEY_MENU],CASE " + Commons.Modules.TypeLanguage.ToString() + " WHEN 0 THEN T3.[TEN_MENU] WHEN 1 THEN ISNULL(NULLIF(T3.[TEN_MENU_A],''),T3.[TEN_MENU]) ELSE ISNULL(NULLIF(T3.[TEN_MENU_H],''),T3.[TEN_MENU]) END AS NAME,[ROOT],[HIDE],[BACK_COLOR],[IMG],[STT_MENU],[CONTROLS],[DROPDOW] FROM NHOM_MENU T1 INNER JOIN dbo.USERS T2 ON T1.ID_NHOM = T2.ID_NHOM INNER JOIN dbo.MENU T3 ON T1.ID_MENU = T3.ID_MENU  WHERE T2.USER_NAME = '" + Commons.Modules.UserName.Trim() + "' AND [ROOT] = 0 AND T3.ID_MENU NOT IN (" + Commons.Modules.sHideMenu + ") ORDER BY[STT_MENU],[NAME]";
                 dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSql));
                 foreach (DataRow item in dt.Rows)
                 {

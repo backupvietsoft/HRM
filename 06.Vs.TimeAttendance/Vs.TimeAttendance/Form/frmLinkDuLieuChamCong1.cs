@@ -1340,5 +1340,19 @@ namespace Vs.TimeAttendance
                 return returnCharCount;
             }
         }
+
+        private void grvDSCN_RowStyle(object sender, RowStyleEventArgs e)
+        {
+            try
+            {
+                if (Convert.ToBoolean(grvDSCN.GetRowCellValue(e.RowHandle, grvDSCN.Columns["CHINH_SUA"].FieldName)) == false) return;
+                e.Appearance.BackColor = System.Drawing.ColorTranslator.FromHtml("#CC99FF");
+                e.HighPriority = true;
+            }
+            catch
+            {
+
+            }
+        }
     }
 }

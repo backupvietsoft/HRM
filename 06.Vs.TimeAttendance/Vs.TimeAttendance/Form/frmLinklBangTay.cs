@@ -163,7 +163,7 @@ namespace Vs.TimeAttendance
                     {
                         try
                         {
-                            string sBT = "BTKinkTay" + Commons.Modules.sId;
+                            string sBT = "BTKinkTay" + Commons.Modules.iIDUser;
                             Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBT, Commons.Modules.ObjSystems.ConvertDatatable(grvChamCongTay), "");
                             SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spThemDuLieuQuetTheTay",
                              cboNhomCC.EditValue, cboHS.EditValue, datNgayDen.DateTime, timGioDen.EditValue, datNgayVe.DateTime, timGioVe.EditValue, sBT);
@@ -175,7 +175,8 @@ namespace Vs.TimeAttendance
                         }
                         catch (Exception ex)
                         {
-                            XtraMessageBox.Show(ex.Message.ToString());
+                            Commons.Modules.ObjSystems.XoaTable("BTKinkTay" + Commons.Modules.iIDUser);
+                            //XtraMessageBox.Show(ex.Message.ToString());
                         }
 
                         break;

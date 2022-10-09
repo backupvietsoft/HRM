@@ -1890,6 +1890,26 @@ namespace Vs.TimeAttendance
                 formatRange9.Font.Bold = true;
                 formatRange9.Font.Color = Color.FromArgb(255, 0, 0);
 
+                formatRange9 = oSheet.get_Range("O7", "O" + (rowCnt - 1));
+
+                //var list = new System.Collections.Generic.List<string>();
+                //list.Add("Charlie");
+                //list.Add("Delta");
+                //list.Add("Echo");
+                //var flatList = string.Join(",", list.ToArray());
+
+                //formatRange9.Validation.Delete();
+                //formatRange9.Validation.Add(
+                //   XlDVType.xlValidateList,
+                //   XlDVAlertStyle.xlValidAlertInformation,
+                //   XlFormatConditionOperator.xlBetween,
+                //   flatList,
+                //   Type.Missing);
+
+                //formatRange9.Validation.IgnoreBlank = true;
+                //formatRange9.Validation.InCellDropdown = true;
+
+
                 BorderAround(oSheet.get_Range("B2", lastColumn + rowCnt.ToString()));
                 //// filter
                 //Excel.Range myRange = oSheet.get_Range("A7", lastColumn + (rowCnt - 1).ToString());

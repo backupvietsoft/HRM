@@ -119,6 +119,12 @@
     <Compile Include="Form\frmImportDangKyKLSP.Designer.cs">
       <DependentUpon>frmImportDangKyKLSP.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form\frmCapNhatNhom.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\frmCapNhatNhom.Designer.cs">
+      <DependentUpon>frmCapNhatNhom.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form\frmInKehoachdica.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -555,6 +561,9 @@
     </Compile>
     <EmbeddedResource Include="Form\frmImportDangKyKLSP.resx">
       <DependentUpon>frmImportDangKyKLSP.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\frmCapNhatNhom.resx">
+      <DependentUpon>frmCapNhatNhom.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\frmInKehoachdica.resx">
       <DependentUpon>frmInKehoachdica.cs</DependentUpon>

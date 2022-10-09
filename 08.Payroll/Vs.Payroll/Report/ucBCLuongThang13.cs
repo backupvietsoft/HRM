@@ -6,7 +6,6 @@ using System;
 using System.Data;
 using Vs.Report;
 using System.IO;
-using Excel = Microsoft.Office.Interop.Excel;
 using System.Linq;
 using System.Drawing;
 using System.Diagnostics;
@@ -144,7 +143,7 @@ namespace Vs.Payroll
                                     try
                                     {
 
-                                        Excel.Application xlApp = new Excel.Application();
+                                        Microsoft.Office.Interop.Excel.Application xlApp = new Microsoft.Office.Interop.Excel.Application();
 
                                         if (xlApp == null)
                                         {
@@ -427,18 +426,18 @@ namespace Vs.Payroll
             }
         }
 
-        private void BorderAround(Excel.Range range)
+        private void BorderAround(Microsoft.Office.Interop.Excel.Range range)
         {
-            Excel.Borders borders = range.Borders;
-            borders[Excel.XlBordersIndex.xlEdgeLeft].LineStyle = Excel.XlLineStyle.xlContinuous;
-            borders[Excel.XlBordersIndex.xlEdgeTop].LineStyle = Excel.XlLineStyle.xlContinuous;
-            borders[Excel.XlBordersIndex.xlEdgeBottom].LineStyle = Excel.XlLineStyle.xlContinuous;
-            borders[Excel.XlBordersIndex.xlEdgeRight].LineStyle = Excel.XlLineStyle.xlContinuous;
+            Microsoft.Office.Interop.Excel.Borders borders = range.Borders;
+            borders[Microsoft.Office.Interop.Excel.XlBordersIndex.xlEdgeLeft].LineStyle = Microsoft.Office.Interop.Excel.XlLineStyle.xlContinuous;
+            borders[Microsoft.Office.Interop.Excel.XlBordersIndex.xlEdgeTop].LineStyle = Microsoft.Office.Interop.Excel.XlLineStyle.xlContinuous;
+            borders[Microsoft.Office.Interop.Excel.XlBordersIndex.xlEdgeBottom].LineStyle = Microsoft.Office.Interop.Excel.XlLineStyle.xlContinuous;
+            borders[Microsoft.Office.Interop.Excel.XlBordersIndex.xlEdgeRight].LineStyle = Microsoft.Office.Interop.Excel.XlLineStyle.xlContinuous;
             borders.Color = Color.Black;
-            borders[Excel.XlBordersIndex.xlInsideVertical].LineStyle = Excel.XlLineStyle.xlContinuous;
-            borders[Excel.XlBordersIndex.xlInsideHorizontal].LineStyle = Excel.XlLineStyle.xlContinuous;
-            borders[Excel.XlBordersIndex.xlDiagonalUp].LineStyle = Excel.XlLineStyle.xlLineStyleNone;
-            borders[Excel.XlBordersIndex.xlDiagonalDown].LineStyle = Excel.XlLineStyle.xlLineStyleNone;
+            borders[Microsoft.Office.Interop.Excel.XlBordersIndex.xlInsideVertical].LineStyle = Microsoft.Office.Interop.Excel.XlLineStyle.xlContinuous;
+            borders[Microsoft.Office.Interop.Excel.XlBordersIndex.xlInsideHorizontal].LineStyle = Microsoft.Office.Interop.Excel.XlLineStyle.xlContinuous;
+            borders[Microsoft.Office.Interop.Excel.XlBordersIndex.xlDiagonalUp].LineStyle = Microsoft.Office.Interop.Excel.XlLineStyle.xlLineStyleNone;
+            borders[Microsoft.Office.Interop.Excel.XlBordersIndex.xlDiagonalDown].LineStyle = Microsoft.Office.Interop.Excel.XlLineStyle.xlLineStyleNone;
         }
         private static void releaseObject(object obj)
         {
@@ -481,13 +480,13 @@ namespace Vs.Payroll
                     break;
             }
         }
-        private string RangeAddress(Excel.Range rng)
+        private string RangeAddress(Microsoft.Office.Interop.Excel.Range rng)
         {
             object missing = null;
-            return rng.get_AddressLocal(false, false, Excel.XlReferenceStyle.xlA1,
+            return rng.get_AddressLocal(false, false, Microsoft.Office.Interop.Excel.XlReferenceStyle.xlA1,
                    missing, missing);
         }
-        private string CellAddress(Excel.Worksheet sht, int row, int col)
+        private string CellAddress(Microsoft.Office.Interop.Excel.Worksheet sht, int row, int col)
         {
             return RangeAddress(sht.Cells[row, col]);
         }
@@ -527,7 +526,7 @@ namespace Vs.Payroll
 
             try
             {
-                Excel.Application xlApp = new Excel.Application();
+                Microsoft.Office.Interop.Excel.Application xlApp = new Microsoft.Office.Interop.Excel.Application();
 
                 if (xlApp == null)
                 {
@@ -685,12 +684,12 @@ namespace Vs.Payroll
                 //ws.get_Range("AU9", "AU" + row).NumberFormat = "#,##0.0;(#,##0.0); ; ";
                 //ws.get_Range("AV9", "AY" + row).NumberFormat = "#,##0;(#,##0); ; ";
 
-                ws.get_Range("E9", "E" + row).HorizontalAlignment = Excel.XlHAlign.xlHAlignRight;
-                ws.get_Range("E9", "E" + row).VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
-                ws.get_Range("D9", "D" + row).HorizontalAlignment = Excel.XlHAlign.xlHAlignLeft;
-                ws.get_Range("D9", "D" + row).VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
-                //ws.get_Range("H9", "H" + row).HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
-                //ws.get_Range("H9", "H" + row).VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
+                ws.get_Range("E9", "E" + row).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignRight;
+                ws.get_Range("E9", "E" + row).VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+                ws.get_Range("D9", "D" + row).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignLeft;
+                ws.get_Range("D9", "D" + row).VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+                //ws.get_Range("H9", "H" + row).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                //ws.get_Range("H9", "H" + row).VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
 
                 Range rowLBTC = ws.get_Range("A" + row, "E" + row);
                 rowLBTC.Merge();
@@ -742,7 +741,7 @@ namespace Vs.Payroll
 
             try
             {
-                Excel.Application xlApp = new Excel.Application();
+                Microsoft.Office.Interop.Excel.Application xlApp = new Microsoft.Office.Interop.Excel.Application();
 
                 if (xlApp == null)
                 {
@@ -885,12 +884,12 @@ namespace Vs.Payroll
                 //ws.get_Range("AU9", "AU" + row).NumberFormat = "#,##0.0;(#,##0.0); ; ";
                 //ws.get_Range("AV9", "AY" + row).NumberFormat = "#,##0;(#,##0); ; ";
 
-                //ws.get_Range("E9", "E" + row).HorizontalAlignment = Excel.XlHAlign.xlHAlignRight;
-                //ws.get_Range("E9", "E" + row).VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
-                //ws.get_Range("D9", "D" + row).HorizontalAlignment = Excel.XlHAlign.xlHAlignLeft;
-                //ws.get_Range("D9", "D" + row).VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
-                //ws.get_Range("H9", "H" + row).HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
-                //ws.get_Range("H9", "H" + row).VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
+                //ws.get_Range("E9", "E" + row).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignRight;
+                //ws.get_Range("E9", "E" + row).VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+                //ws.get_Range("D9", "D" + row).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignLeft;
+                //ws.get_Range("D9", "D" + row).VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+                //ws.get_Range("H9", "H" + row).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                //ws.get_Range("H9", "H" + row).VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
 
                 Range rowLBTC = ws.get_Range("A" + row, "B" + row);
                 rowLBTC.Merge();

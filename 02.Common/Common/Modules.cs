@@ -105,8 +105,8 @@ namespace Commons
             }
         }
         //định nghĩa giờ làm mặc định
-        private static int _iGio;
-        public static int iGio
+        private static double _iGio;
+        public static double iGio
         {
             get
             {

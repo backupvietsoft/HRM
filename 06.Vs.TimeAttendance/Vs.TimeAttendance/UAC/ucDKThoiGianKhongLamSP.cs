@@ -70,14 +70,40 @@ namespace Vs.TimeAttendance
                 DataTable dt = new DataTable();
                 dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetlistDK_TG_KHONG_LAM_SP", Convert.ToDateTime(cboThang.EditValue),
                                             cboDonVi.EditValue, cboXiNghiep.EditValue, cboTo.EditValue, Commons.Modules.UserName, Commons.Modules.TypeLanguage, isAdd));
-                Commons.Modules.ObjSystems.MLoadXtraGrid(grdData, grvData, dt, isAdd ? true : false, true, false, true, true, this.Name);
                 dt.Columns["MS_CN"].ReadOnly = true;
                 dt.Columns["HO_TEN"].ReadOnly = true;
                 dt.Columns["TEN_XN"].ReadOnly = true;
                 dt.Columns["TEN_TO"].ReadOnly = true;
+                if (grdData.DataSource == null)
+                {
+                    Commons.Modules.ObjSystems.MLoadXtraGrid(grdData, grvData, dt, isAdd ? true : false, true, false, true, true, this.Name);
 
-                grvData.Columns["ID_CN"].Visible = false;
-                grvData.Columns["NGAY"].Visible = false;
+                    grvData.Columns["ID_CN"].Visible = false;
+                    grvData.Columns["NGAY"].Visible = false;
+
+                    RepositoryItemTextEdit txtEdit = new RepositoryItemTextEdit();
+                    txtEdit.Properties.DisplayFormat.FormatString = "0.0";
+                    txtEdit.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+                    txtEdit.Properties.EditFormat.FormatString = "0.0";
+                    txtEdit.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+                    txtEdit.Properties.Mask.EditMask = "0.0";
+                    txtEdit.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
+                    txtEdit.Properties.Mask.UseMaskAsDisplayFormat = true;
+                    grvData.Columns["COT_1"].ColumnEdit = txtEdit;
+                    grvData.Columns["COT_2"].ColumnEdit = txtEdit;
+                    grvData.Columns["COT_3"].ColumnEdit = txtEdit;
+                    grvData.Columns["COT_4"].ColumnEdit = txtEdit;
+                    grvData.Columns["COT_5"].ColumnEdit = txtEdit;
+                    grvData.Columns["COT_6"].ColumnEdit = txtEdit;
+                    grvData.Columns["COT_7"].ColumnEdit = txtEdit;
+                    grvData.Columns["TG_HC"].ColumnEdit = txtEdit;
+                    grvData.Columns["TG_TC_NT"].ColumnEdit = txtEdit;
+                    grvData.Columns["TG_TC_CN"].ColumnEdit = txtEdit;
+                }
+                else
+                {
+                    grdData.DataSource = dt;
+                }
             }
             catch
             {
@@ -221,104 +247,7 @@ namespace Vs.TimeAttendance
                     }
                 case "import":
                     {
-                        //DataTable dt_old = new DataTable();
-                        //dt_old = (DataTable)grdData.DataSource;
-                        //string sBT_Old = "sBTCongNhanOld" + Commons.Modules.iIDUser;
-                        //string sBT_import = "sBTCongNhanImport" + Commons.Modules.iIDUser;
-                        //string sPath = "";
-                        //sPath = Commons.Modules.ObjSystems.OpenFiles("All Excel Files (*.xls;*.xlsx)|*.xls;*.xlsx|" + "All Files (*.*)|*.*");
-
-                        //DataTable dt = new DataTable();
-                        //if (sPath == "") return;
-                        //try
-                        //{
-                        //    //Lấy đường dẫn
-                        //    var source = new ExcelDataSource();
-                        //    source.FileName = sPath;
-
-                        //    //Lấy worksheet
-                        //    DevExpress.Spreadsheet.Workbook workbook = new DevExpress.Spreadsheet.Workbook();
-                        //    string ext = System.IO.Path.GetExtension(sPath);
-                        //    if (ext.ToLower() == ".xlsx")
-                        //        workbook.LoadDocument(sPath, DevExpress.Spreadsheet.DocumentFormat.Xlsx);
-                        //    else
-                        //        workbook.LoadDocument(sPath, DevExpress.Spreadsheet.DocumentFormat.Xls);
-                        //    List<string> wSheet = new List<string>();
-                        //    for (int i = 0; i < workbook.Worksheets.Count; i++)
-                        //    {
-                        //        wSheet.Add(workbook.Worksheets[i].Name.ToString());
-                        //    }
-                        //    //Load worksheet
-                        //    XtraInputBoxArgs args = new XtraInputBoxArgs();
-                        //    // set required Input Box options
-                        //    args.Caption = "Chọn sheet cần nhập dữ liệu";
-                        //    args.Prompt = "Chọn sheet cần nhập dữ liệu";
-                        //    args.DefaultButtonIndex = 0;
-
-                        //    // initialize a DateEdit editor with custom settings
-                        //    ComboBoxEdit editor = new ComboBoxEdit();
-                        //    editor.Properties.Items.AddRange(wSheet);
-                        //    editor.EditValue = wSheet[0].ToString();
-
-                        //    args.Editor = editor;
-                        //    // a default DateEdit value
-                        //    args.DefaultResponse = wSheet[0].ToString();
-                        //    // display an Input Box with the custom editor
-                        //    var result = XtraInputBox.Show(args);
-                        //    if (result == null || result.ToString() == "") return;
-
-
-                        //    var worksheetSettings = new ExcelWorksheetSettings(result.ToString());
-                        //    source.SourceOptions = new ExcelSourceOptions(worksheetSettings);
-                        //    source.Fill();
-                        //    dt = new DataTable();
-                        //    dt = ToDataTable(source);
-                        //    if (dt == null) return;
-                        //    Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBT_Old, Commons.Modules.ObjSystems.ConvertDatatable(grvData), "");
-                        //    Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBT_import, dt, "");
-
-                        //    DateTime dNgay;
-                        //    //dNgay = DateTime.ParseExact(cboThang.Text, "dd/MM/yyyy", cultures);
-
-                        //    System.Data.SqlClient.SqlConnection conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
-                        //    conn.Open();
-
-                        //    System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spImportDKTGKhongLamSP", conn);
-
-                        //    cmd.Parameters.Add("@sBT_Old", SqlDbType.NVarChar, 50).Value = sBT_Old;
-                        //    cmd.Parameters.Add("@sBT_Import", SqlDbType.NVarChar, 50).Value = sBT_import;
-                        //    cmd.CommandType = CommandType.StoredProcedure;
-                        //    System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
-
-                        //    DataSet ds = new DataSet();
-                        //    adp.Fill(ds);
-                        //    DataTable dt_temp = new DataTable();
-                        //    dt_temp = ds.Tables[0].Copy();
-                        //    //dt_temp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spImportDKLT", sBT_Old, sBT_import, SBT_grvLamThem));
-                        //    grdData.DataSource = dt_temp;
-                        //    Commons.Modules.ObjSystems.XoaTable(sBT_Old);
-                        //    Commons.Modules.ObjSystems.XoaTable(sBT_import);
-                        //    //DataTable dtTemp2 = new DataTable();
-                        //    //dtTemp2 = dt_temp.Copy();
-
-
-                        //    //grvCongNhan_FocusedRowChanged(null, null);
-
-                        //    //ColName = cboCotLayDL.EditValue.ToString();
-                        //    //dtemp.Columns.Add("XOA", System.Type.GetType("System.Boolean"));
-                        //    ////grdChung.DataSource = dtemp;
-
-                        //    ////Commons.Mod.OS.MLoadXtraGrid(grdChung, grvChung, dtemp, true, true, false, true);
-                        //    //this.DialogResult = DialogResult.OK;
-                        //    //this.Close();
-                        //}
-                        //catch (Exception ex)
-                        //{
-                        //    Commons.Modules.ObjSystems.XoaTable(sBT_Old);
-                        //    Commons.Modules.ObjSystems.XoaTable(sBT_import);
-                        //    XtraMessageBox.Show(ex.Message);
-                        //}
-
+                        
                         frmImportDangKyKLSP frm = new frmImportDangKyKLSP();
                         if (frm.ShowDialog() == DialogResult.OK)
                         {

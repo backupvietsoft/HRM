@@ -173,6 +173,12 @@
     <Compile Include="Form\frmImport.Designer.cs">
       <DependentUpon>frmImport.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form\frmImportTienThuongPhuCap.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\frmImportTienThuongPhuCap.Designer.cs">
+      <DependentUpon>frmImportTienThuongPhuCap.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form\frmInBaoCaoPCD.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -622,6 +628,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form\frmImport.resx">
       <DependentUpon>frmImport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\frmImportTienThuongPhuCap.resx">
+      <DependentUpon>frmImportTienThuongPhuCap.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\frmInBaoCaoPCD.resx">
       <DependentUpon>frmInBaoCaoPCD.cs</DependentUpon>

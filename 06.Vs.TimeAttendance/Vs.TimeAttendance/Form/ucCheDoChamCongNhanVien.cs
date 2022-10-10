@@ -103,11 +103,11 @@ namespace Vs.TimeAttendance
             // Access the currently selected data row
             DataRowView dataRow = lookUp.GetSelectedDataRow() as DataRowView;
 
-            if (grvCDCCNV.GetFocusedRowCellValue("NGAY_AD").ToString()=="")
+            if (grvCDCCNV.GetFocusedRowCellValue("NGAY_AD").ToString() == "")
             {
                 grvCDCCNV.SetFocusedRowCellValue("NGAY_AD", cboNgay.EditValue.ToString());
             }
-            
+
             grvCDCCNV.SetFocusedRowCellValue("CA", dataRow.Row["ID_CDLV"]);
             //grvLamThem.SetFocusedRowCellValue("PHUT_KT", dataRow.Row["PHUT_KT"]);
         }
@@ -116,7 +116,7 @@ namespace Vs.TimeAttendance
             try
             {
                 DataTable dt = new DataTable();
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetCaLV", cboNgay.EditValue, grvCDCCNV.GetFocusedRowCellValue("ID_NHOM") , Commons.Modules.UserName, Commons.Modules.TypeLanguage));
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetCaLV", cboNgay.EditValue, grvCDCCNV.GetFocusedRowCellValue("ID_NHOM"), Commons.Modules.UserName, Commons.Modules.TypeLanguage));
 
                 if (sender is LookUpEdit cbo)
                 {
@@ -248,7 +248,7 @@ namespace Vs.TimeAttendance
                     }
                 case "khongghi":
                     {
-                        
+
                         isAdd = false;
                         EnableButon();
                         LockControl(true);
@@ -292,7 +292,7 @@ namespace Vs.TimeAttendance
             try
             {
                 Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sTB, Commons.Modules.ObjSystems.ConvertDatatable(grdData), "");
-                sSql = " SELECT '" + Convert.ToDateTime(grvCDCCNV.GetFocusedRowCellValue("NGAY_AD")).ToString("dd/MM/yyyy")+ "' AS NGAY_AD, ID_CN, MS_CN, HO_TEN, " + grvCDCCNV.GetFocusedRowCellValue("ID_NHOM") + " AS ID_NHOM, " + grvCDCCNV.GetFocusedRowCellValue("CA") + " AS CA, TEN_XN, TEN_TO FROM " + sTB + "";
+                sSql = " SELECT '" + Convert.ToDateTime(grvCDCCNV.GetFocusedRowCellValue("NGAY_AD")).ToString("dd/MM/yyyy") + "' AS NGAY_AD, ID_CN, MS_CN, HO_TEN, " + grvCDCCNV.GetFocusedRowCellValue("ID_NHOM") + " AS ID_NHOM, " + grvCDCCNV.GetFocusedRowCellValue("CA") + " AS CA, TEN_XN, TEN_TO FROM " + sTB + "";
 
                 dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSql));
                 Commons.Modules.ObjSystems.MLoadXtraGrid(grdData, grvCDCCNV, dt, true, false, true, false, true, this.Name);
@@ -304,7 +304,7 @@ namespace Vs.TimeAttendance
                 Commons.Modules.ObjSystems.XoaTable(sTB);
                 Commons.Modules.sLoad = "";
 
-                }
+            }
             catch
             {
             }
@@ -317,9 +317,9 @@ namespace Vs.TimeAttendance
             string sSql = "";
             try
             {
-               
+
                 Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sTB, Commons.Modules.ObjSystems.ConvertDatatable(grvCDCCNV), "");
-               
+
                 sSql = " SELECT NGAY_AD, ID_CN, MS_CN, HO_TEN, NULL ID_NHOM, NULL CA, TEN_XN, TEN_TO FROM " + sTB + "";
 
                 dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSql));
@@ -332,7 +332,7 @@ namespace Vs.TimeAttendance
                 Commons.Modules.ObjSystems.XoaTable(sTB);
                 Commons.Modules.sLoad = "";
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
             }
         }
@@ -358,8 +358,8 @@ namespace Vs.TimeAttendance
             //xóa
             try
             {
-                
-                String dele= "DELETE dbo.CHE_DO_CHAM_CONG_NHAN_VIEN WHERE ID_CN = "+ grvCDCCNV.GetFocusedRowCellValue("ID_CN") + "AND ID_NHOM ="+grvCDCCNV.GetFocusedRowCellValue("ID_NHOM")+" AND NGAY_AD = '" +Convert.ToDateTime(cboNgay.EditValue).ToString("yyyyMMdd") + "'";
+
+                String dele = "DELETE dbo.CHE_DO_CHAM_CONG_NHAN_VIEN WHERE ID_CN = " + grvCDCCNV.GetFocusedRowCellValue("ID_CN") + "AND ID_NHOM =" + grvCDCCNV.GetFocusedRowCellValue("ID_NHOM") + " AND NGAY_AD = '" + Convert.ToDateTime(cboNgay.EditValue).ToString("yyyyMMdd") + "'";
                 SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, dele);
                 grvCDCCNV.DeleteSelectedRows();
             }
@@ -405,13 +405,16 @@ namespace Vs.TimeAttendance
                 Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sTB, Commons.Modules.ObjSystems.ConvertDatatable(grdData), "");
                 Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sTB_CU, dt_Temp, "");
                 DateTime dNgay;
-                dNgay = DateTime.ParseExact(cboNgay.Text, "dd/MM/yyyy", cultures);
+                dNgay = DateTime.ParseExact("01/" + cboNgay.Text, "dd/MM/yyyy", cultures);
                 SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "sPsaveCheDoChamCongNV", dNgay, sTB_CU, sTB);
                 Commons.Modules.ObjSystems.XoaTable(sTB);
+                Commons.Modules.ObjSystems.XoaTable(sTB_CU);
                 return true;
             }
             catch (Exception ex)
             {
+                Commons.Modules.ObjSystems.XoaTable(sTB);
+                Commons.Modules.ObjSystems.XoaTable(sTB_CU);
                 MessageBox.Show(ex.Message.ToString());
                 return false;
             }
@@ -430,7 +433,7 @@ namespace Vs.TimeAttendance
             else
                 Commons.Modules.ObjSystems.MLoadXtraGrid(grdNgay, grvNgay, dt, false, false, true, false, false, this.Name);
 
-            if (dt.Rows.Count <=0)
+            if (dt.Rows.Count <= 0)
             {
                 cboNgay.EditValue = DateTime.Today;
             }
@@ -463,12 +466,12 @@ namespace Vs.TimeAttendance
                 cboTo.Enabled = oLock;
                 cboNgay.Enabled = oLock;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 XtraMessageBox.Show(ex.Message.ToString());
             }
         }
-            
+
         private void LoadNull()
         {
             try
@@ -525,5 +528,5 @@ namespace Vs.TimeAttendance
                 XtraMessageBox.Show(ex.Message.ToString());
             }
         }
-   }
+    }
 }

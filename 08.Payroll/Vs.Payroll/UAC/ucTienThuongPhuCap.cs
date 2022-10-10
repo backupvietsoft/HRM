@@ -93,18 +93,24 @@ namespace Vs.Payroll
                     Commons.Modules.ObjSystems.MLoadXtraGrid(grdData, grvData, dt, true, true, false, true, true, this.Name);
                     grvData.Columns["ID_CN"].Visible = false;
                     grvData.Columns["ID_TTCT"].Visible = false;
-                    grvData.Columns["MS_CN"].OptionsColumn.AllowEdit = false;
-                    grvData.Columns["HO_TEN"].OptionsColumn.AllowEdit = false;
-                    grvData.Columns["TEN_TO"].OptionsColumn.AllowEdit = false;
-                    grvData.Columns["NGAY_VAO_LAM"].OptionsColumn.AllowEdit = false;
-                    grvData.Columns["NGAY_BAT_DAU_HD"].OptionsColumn.AllowEdit = false;
-
                 }
                 else
                 {
                     grdData.DataSource = dt;
                 }
-
+                if (isAdd)
+                {
+                    grvData.OptionsBehavior.Editable = true;
+                    grvData.Columns["MS_CN"].OptionsColumn.AllowEdit = false;
+                    grvData.Columns["HO_TEN"].OptionsColumn.AllowEdit = false;
+                    grvData.Columns["TEN_TO"].OptionsColumn.AllowEdit = false;
+                    grvData.Columns["NGAY_VAO_LAM"].OptionsColumn.AllowEdit = false;
+                    grvData.Columns["NGAY_BAT_DAU_HD"].OptionsColumn.AllowEdit = false;
+                }
+                else
+                {
+                    grvData.OptionsBehavior.Editable = false;
+                }
                 RepositoryItemSearchLookUpEdit cbo = new RepositoryItemSearchLookUpEdit();
                 Commons.Modules.ObjSystems.AddCombSearchLookUpEdit(cbo, "ID", "TEN_TIEN_THUONG", "ID_DM_LTT", grvData, Commons.Modules.ObjSystems.DataLoaiTienThuong(false), this.Name);
                 grvData.Columns["SO_TIEN"].DisplayFormat.FormatType = FormatType.Numeric;
@@ -188,114 +194,20 @@ namespace Vs.Payroll
                         }
                     case "import":
                         {
-                            //DataTable dt_old = new DataTable();
-                            //dt_old = (DataTable)grdData.DataSource;
-                            //string sBT_Old = "sBTCongNhanOld" + Commons.Modules.iIDUser;
-                            //string sBT_import = "sBTCongNhanImport" + Commons.Modules.iIDUser;
-                            //string sPath = "";
-                            //sPath = Commons.Modules.ObjSystems.OpenFiles("All Excel Files (*.xls;*.xlsx)|*.xls;*.xlsx|" + "All Files (*.*)|*.*");
-
-                            //DataTable dt = new DataTable();
-                            //if (sPath == "") return;
-                            //try
-                            //{
-                            //    //Lấy đường dẫn
-                            //    var source = new ExcelDataSource();
-                            //    source.FileName = sPath;
-
-                            //    //Lấy worksheet
-                            //    DevExpress.Spreadsheet.Workbook workbook = new DevExpress.Spreadsheet.Workbook();
-                            //    string ext = System.IO.Path.GetExtension(sPath);
-                            //    if (ext.ToLower() == ".xlsx")
-                            //        workbook.LoadDocument(sPath, DevExpress.Spreadsheet.DocumentFormat.Xlsx);
-                            //    else
-                            //        workbook.LoadDocument(sPath, DevExpress.Spreadsheet.DocumentFormat.Xls);
-                            //    List<string> wSheet = new List<string>();
-                            //    for (int i = 0; i < workbook.Worksheets.Count; i++)
-                            //    {
-                            //        wSheet.Add(workbook.Worksheets[i].Name.ToString());
-                            //    }
-                            //    //Load worksheet
-                            //    XtraInputBoxArgs args = new XtraInputBoxArgs();
-                            //    // set required Input Box options
-                            //    args.Caption = "Chọn sheet cần nhập dữ liệu";
-                            //    args.Prompt = "Chọn sheet cần nhập dữ liệu";
-                            //    args.DefaultButtonIndex = 0;
-
-                            //    // initialize a DateEdit editor with custom settings
-                            //    ComboBoxEdit editor = new ComboBoxEdit();
-                            //    editor.Properties.Items.AddRange(wSheet);
-                            //    editor.EditValue = wSheet[0].ToString();
-
-                            //    args.Editor = editor;
-                            //    // a default DateEdit value
-                            //    args.DefaultResponse = wSheet[0].ToString();
-                            //    // display an Input Box with the custom editor
-                            //    var result = XtraInputBox.Show(args);
-                            //    if (result == null || result.ToString() == "") return;
-
-
-                            //    var worksheetSettings = new ExcelWorksheetSettings(result.ToString());
-                            //    source.SourceOptions = new ExcelSourceOptions(worksheetSettings);
-                            //    source.Fill();
-                            //    dt = new DataTable();
-                            //    dt = ToDataTable(source);
-                            //    if (dt == null) return;
-                            //    Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBT_Old, Commons.Modules.ObjSystems.ConvertDatatable(grvData), "");
-                            //    Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBT_import, dt, "");
-
-                            //    DateTime dNgay;
-                            //    //dNgay = DateTime.ParseExact(cboThang.Text, "dd/MM/yyyy", cultures);
-
-                            //    System.Data.SqlClient.SqlConnection conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
-                            //    conn.Open();
-
-                            //    System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spImportDKTGKhongLamSP", conn);
-
-                            //    cmd.Parameters.Add("@sBT_Old", SqlDbType.NVarChar, 50).Value = sBT_Old;
-                            //    cmd.Parameters.Add("@sBT_Import", SqlDbType.NVarChar, 50).Value = sBT_import;
-                            //    cmd.CommandType = CommandType.StoredProcedure;
-                            //    System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
-
-                            //    DataSet ds = new DataSet();
-                            //    adp.Fill(ds);
-                            //    DataTable dt_temp = new DataTable();
-                            //    dt_temp = ds.Tables[0].Copy();
-                            //    //dt_temp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spImportDKLT", sBT_Old, sBT_import, SBT_grvLamThem));
-                            //    grdData.DataSource = dt_temp;
-                            //    Commons.Modules.ObjSystems.XoaTable(sBT_Old);
-                            //    Commons.Modules.ObjSystems.XoaTable(sBT_import);
-                            //    //DataTable dtTemp2 = new DataTable();
-                            //    //dtTemp2 = dt_temp.Copy();
-
-
-                            //    //grvCongNhan_FocusedRowChanged(null, null);
-
-                            //    //ColName = cboCotLayDL.EditValue.ToString();
-                            //    //dtemp.Columns.Add("XOA", System.Type.GetType("System.Boolean"));
-                            //    ////grdChung.DataSource = dtemp;
-
-                            //    ////Commons.Mod.OS.MLoadXtraGrid(grdChung, grvChung, dtemp, true, true, false, true);
-                            //    //this.DialogResult = DialogResult.OK;
-                            //    //this.Close();
-                            //}
-                            //catch (Exception ex)
-                            //{
-                            //    Commons.Modules.ObjSystems.XoaTable(sBT_Old);
-                            //    Commons.Modules.ObjSystems.XoaTable(sBT_import);
-                            //    XtraMessageBox.Show(ex.Message);
-                            //}
-
-                            //frmImportDangKyKLSP frm = new frmImportDangKyKLSP();
-                            //if (frm.ShowDialog() == DialogResult.OK)
-                            //{
-                            //    LoadData();
-                            //}
-                            //else
-                            //{
-                            //    LoadData();
-                            //}
-
+                            if (cboThang.Text == "")
+                            {
+                                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgChuaChonThang"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                return;
+                            }
+                            frmImportTienThuongPhuCap frm = new frmImportTienThuongPhuCap();
+                            if (frm.ShowDialog() == DialogResult.OK)
+                            {
+                                LoadData();
+                            }
+                            else
+                            {
+                                LoadData();
+                            }
                             break;
                         }
                     case "themsua":
@@ -378,7 +290,6 @@ namespace Vs.Payroll
                 cboThang.Enabled = !visible;
                 cboDonVi.Enabled = !visible;
                 cboXiNghiep.Enabled = !visible;
-                grvData.OptionsBehavior.Editable = visible;
             }
             cboTinhTrang.Properties.ReadOnly = true;
         }

@@ -143,6 +143,7 @@ namespace Vs.HRM
                             XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgBanChuaChonCotIn"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             return;
                         }
+
                         DanhSachNhanVien();
 
                         //if (chkInAll.Checked == true)
@@ -429,11 +430,12 @@ namespace Vs.HRM
                 {
                     return;
                 }
+                this.Cursor = Cursors.WaitCursor;
                 Excel.Application oXL;
                 Excel.Workbook oWB;
                 Excel.Worksheet oSheet;
                 oXL = new Excel.Application();
-                oXL.Visible = true;
+                oXL.Visible = false;
 
                 oWB = (Excel.Workbook)(oXL.Workbooks.Add(Missing.Value));
                 oSheet = oWB.ActiveSheet;
@@ -640,6 +642,7 @@ namespace Vs.HRM
                     Excel.Range myRange = oSheet.get_Range("A4", lastColumn + (rowCnt - 1).ToString());
                     myRange.AutoFilter("1", "<>", Excel.XlAutoFilterOperator.xlOr, "", true);
                 }
+                this.Cursor = Cursors.Default;
 
                 oXL.Visible = true;
                 oXL.UserControl = true;
@@ -649,6 +652,7 @@ namespace Vs.HRM
             }
             catch (Exception ex)
             {
+                this.Cursor = Cursors.Default;
                 MessageBox.Show(ex.Message);
             }
         }

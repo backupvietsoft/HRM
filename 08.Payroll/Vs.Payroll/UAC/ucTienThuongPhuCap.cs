@@ -25,11 +25,13 @@ using Microsoft.Office.Interop.Excel;
 using Borders = Microsoft.Office.Interop.Excel.Borders;
 using System.Collections;
 using System.Diagnostics;
+using System.Reflection;
 
 namespace Vs.Payroll
 {
     public partial class ucTienThuongPhuCap : DevExpress.XtraEditors.XtraUserControl
     {
+        private string SaveExcelFile;
         private static bool isAdd = false;
         private string ChuoiKT = "";
         public static ucTienThuongPhuCap _instance;
@@ -90,6 +92,13 @@ namespace Vs.Payroll
                 {
                     Commons.Modules.ObjSystems.MLoadXtraGrid(grdData, grvData, dt, true, true, false, true, true, this.Name);
                     grvData.Columns["ID_CN"].Visible = false;
+                    grvData.Columns["ID_TTCT"].Visible = false;
+                    grvData.Columns["MS_CN"].OptionsColumn.AllowEdit = false;
+                    grvData.Columns["HO_TEN"].OptionsColumn.AllowEdit = false;
+                    grvData.Columns["TEN_TO"].OptionsColumn.AllowEdit = false;
+                    grvData.Columns["NGAY_VAO_LAM"].OptionsColumn.AllowEdit = false;
+                    grvData.Columns["NGAY_BAT_DAU_HD"].OptionsColumn.AllowEdit = false;
+
                 }
                 else
                 {
@@ -98,6 +107,8 @@ namespace Vs.Payroll
 
                 RepositoryItemSearchLookUpEdit cbo = new RepositoryItemSearchLookUpEdit();
                 Commons.Modules.ObjSystems.AddCombSearchLookUpEdit(cbo, "ID", "TEN_TIEN_THUONG", "ID_DM_LTT", grvData, Commons.Modules.ObjSystems.DataLoaiTienThuong(false), this.Name);
+                grvData.Columns["SO_TIEN"].DisplayFormat.FormatType = FormatType.Numeric;
+                grvData.Columns["SO_TIEN"].DisplayFormat.FormatString = "N0";
             }
             catch (Exception ex)
             {
@@ -172,103 +183,7 @@ namespace Vs.Payroll
                 {
                     case "export":
                         {
-                            //try
-                            //{
-                            //    string sPath = "";
-                            //    sPath = SaveFiles("Excel file (*.xlsx)|*.xlsx");
-                            //    if (sPath == "") return;
-                            //    Microsoft.Office.Interop.Excel.Application excelApplication = new Microsoft.Office.Interop.Excel.Application();
-                            //    excelApplication.DisplayAlerts = true;
-
-                            //    excelApplication.Visible = false;
-
-
-                            //    System.Globalization.CultureInfo oldCultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture;
-                            //    System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
-
-                            //    Microsoft.Office.Interop.Excel.Workbooks excelWorkbooks = excelApplication.Workbooks;
-                            //    object misValue = System.Reflection.Missing.Value;
-                            //    Microsoft.Office.Interop.Excel.Workbook excelWorkbook = excelApplication.Workbooks.Add(misValue);
-
-                            //    excelWorkbook.SaveAs(sPath);
-
-                            //    Microsoft.Office.Interop.Excel.Worksheet excelWorkSheet = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Sheets[1];
-
-                            //    DataTable dt = new DataTable();
-                            //    dt = ((DataTable)grdData.DataSource).Copy();
-                            //    dt.DefaultView.RowFilter = "";
-                            //    DataView dv = dt.DefaultView;
-
-                            //    DataTable dt1 = new DataTable();
-                            //    dt1 = dv.ToTable(false, "MS_CN", "HO_TEN", "TEN_XN", "TEN_TO", "TG_HC", "TG_TC_NT", "TG_TC_CN");
-                            //    dt1.Columns["MS_CN"].ColumnName = "MSCN";
-                            //    dt1.Columns["HO_TEN"].ColumnName = "Họ và tên";
-                            //    dt1.Columns["TEN_XN"].ColumnName = "Xưởng/Phòng ban";
-                            //    dt1.Columns["TEN_TO"].ColumnName = "Tổ";
-                            //    dt1.Columns["TG_HC"].ColumnName = "Giờ hành chính";
-                            //    dt1.Columns["TG_TC_NT"].ColumnName = "Giờ tăng ca ngày thường";
-                            //    dt1.Columns["TG_TC_CN"].ColumnName = "Giờ tăng ca chủ nhật";
-                            //    Microsoft.Office.Interop.Excel.Range Ranges1 = excelWorkSheet.Range[excelWorkSheet.Cells[1, 1], excelWorkSheet.Cells[dt1.Rows.Count + 1, dt1.Columns.Count]];
-                            //    Ranges1.Range["A1:G1"].Font.Bold = true;
-                            //    Ranges1.Range["A1:G1"].HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
-                            //    Ranges1.Range["A1:G1"].Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
-                            //    Ranges1.WrapText = true;
-                            //    Ranges1.ColumnWidth = 20;
-                            //    Ranges1.Range["B1"].ColumnWidth = 30;
-                            //    Ranges1.Range["E2:E" + ((dt1.Rows.Count + 1)) + ""].NumberFormat = "0.0";
-                            //    Ranges1.Range["F2:F" + ((dt1.Rows.Count + 1)) + ""].NumberFormat = "0.0";
-                            //    Ranges1.Range["G2:G" + ((dt1.Rows.Count + 1)) + ""].NumberFormat = "0.0";
-                            //    BorderAround(Ranges1.Range["A1:G" + (dt1.Rows.Count + 1) + ""]);
-                            //    MExportExcel(dt1, excelWorkSheet, Ranges1);
-
-                            //    excelApplication.Visible = true;
-                            //    excelWorkbook.Save();
-                            //}
-                            //catch (Exception ex) { XtraMessageBox.Show(ex.Message); }
-
-                            try
-                            {
-                                System.Data.SqlClient.SqlConnection conn;
-                                conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
-                                conn.Open();
-                                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spGetlistDK_TG_KHONG_LAM_SP", conn);
-                                cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
-                                cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
-                                cmd.Parameters.Add("@DNgay", SqlDbType.DateTime).Value = Commons.Modules.ObjSystems.ConvertDateTime(cboThang.Text);
-                                cmd.Parameters.Add("@ID_DV", SqlDbType.BigInt).Value = cboDonVi.EditValue;
-                                cmd.Parameters.Add("@ID_XN", SqlDbType.BigInt).Value = cboXiNghiep.EditValue;
-                                cmd.Parameters.Add("@ID_TO", SqlDbType.BigInt).Value = cboTo.EditValue;
-                                cmd.Parameters.Add("@THEM", SqlDbType.Int).Value = 2;
-                                cmd.CommandType = CommandType.StoredProcedure;
-                                System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
-                                DataSet ds = new DataSet();
-                                adp.Fill(ds);
-                                ds.Tables[0].TableName = "KhongLamSP";
-                                SaveFileDialog saveFileDialog = new SaveFileDialog();
-                                saveFileDialog.Filter = "Excel file (*.xlsx)|*.xlsx";
-                                saveFileDialog.FilterIndex = 0;
-                                saveFileDialog.RestoreDirectory = true;
-                                //saveFileDialog.CreatePrompt = true;
-                                saveFileDialog.CheckFileExists = false;
-                                saveFileDialog.CheckPathExists = false;
-                                saveFileDialog.FileName = DateTime.Now.ToString("yyyyMMdd_HHmmss");
-                                saveFileDialog.Title = "Export Excel File To";
-                                DialogResult res = saveFileDialog.ShowDialog();
-                                // If the file name is not an empty string open it for saving.
-                                if (res == DialogResult.OK)
-                                {
-                                    Commons.TemplateExcel.FillReport(saveFileDialog.FileName, System.Windows.Forms.Application.StartupPath + "\\Template\\TemplateKhongLamRaSP.xlsx", ds, new string[] { "{", "}" });
-                                    Process.Start(saveFileDialog.FileName);
-                                }
-                            }
-                            catch (Exception EX
-                            )
-                            {
-
-                            }
-
-
-
+                            Export();
                             break;
                         }
                     case "import":
@@ -463,6 +378,7 @@ namespace Vs.Payroll
                 cboThang.Enabled = !visible;
                 cboDonVi.Enabled = !visible;
                 cboXiNghiep.Enabled = !visible;
+                grvData.OptionsBehavior.Editable = visible;
             }
             cboTinhTrang.Properties.ReadOnly = true;
         }
@@ -1037,6 +953,191 @@ namespace Vs.Payroll
         private void cboTinhTrang_EditValueChanged(object sender, EventArgs e)
         {
             EnableButon(false, Convert.ToInt32(cboTinhTrang.EditValue));
+        }
+        private void Export()
+        {
+            System.Data.SqlClient.SqlConnection conn;
+            conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+            conn.Open();
+            DataTable dtBCPhep;
+            try
+            {
+                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spTienThuongPhuCap", conn);
+                cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                cmd.Parameters.Add("@DVi", SqlDbType.Int).Value = Convert.ToInt32(cboDonVi.EditValue);
+                cmd.Parameters.Add("@XN", SqlDbType.Int).Value = Convert.ToInt32(cboXiNghiep.EditValue);
+                cmd.Parameters.Add("@TO", SqlDbType.Int).Value = Convert.ToInt32(cboTo.EditValue);
+                cmd.Parameters.Add("@iLoai", SqlDbType.Int).Value = 2;
+                cmd.Parameters.Add("@ID_TTT", SqlDbType.BigInt).Value = cboThang.EditValue;
+                cmd.Parameters.Add("@bCot1", SqlDbType.BigInt).Value = isAdd;
+                cmd.CommandType = CommandType.StoredProcedure;
+                System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+
+                DataSet ds = new DataSet();
+                adp.Fill(ds);
+                dtBCPhep = new DataTable();
+                dtBCPhep = ds.Tables[0].Copy();
+
+                SaveExcelFile = SaveFiles("Excel Workbook |*.xlsx|Excel 97-2003 Workbook |*.xls|Word Document |*.docx|Rich Text Format |*.rtf|PDF File |*.pdf|Web Page |*.html|Single File Web Page |*.mht");
+                if (SaveExcelFile == "")
+                {
+                    return;
+                }
+
+                Microsoft.Office.Interop.Excel.Application oXL;
+                Microsoft.Office.Interop.Excel._Workbook oWB;
+                Microsoft.Office.Interop.Excel._Worksheet oSheet;
+
+                oXL = new Microsoft.Office.Interop.Excel.Application();
+                oXL.Visible = true;
+
+                oWB = (Microsoft.Office.Interop.Excel._Workbook)(oXL.Workbooks.Add(Missing.Value));
+                oSheet = (Microsoft.Office.Interop.Excel._Worksheet)oWB.ActiveSheet;
+
+                string fontName = "Times New Roman";
+                int fontSizeTieuDe = 12;
+                int fontSizeNoiDung = 12;
+                int iTNgay = 1;
+                int iDNgay = 20;
+                int iSoNgay = (iDNgay - iTNgay);
+
+                string lastColumn = string.Empty;
+                //lastColumn = CharacterIncrement(dtBCGaiDoan.Columns.Count - 1);
+                lastColumn = "Z";
+                Range row2_TieuDe_BaoCao0 = oSheet.get_Range("A1");
+                row2_TieuDe_BaoCao0.Font.Size = fontSizeTieuDe;
+                row2_TieuDe_BaoCao0.Font.Name = fontName;
+                row2_TieuDe_BaoCao0.Value2 = "CÔNG TY CỔ PHẦN MAY DUY MINH";
+
+
+                Range row4_TieuDe_Format = oSheet.get_Range("A3", "I3");
+                row4_TieuDe_Format.Font.Size = fontSizeNoiDung;
+                row4_TieuDe_Format.Font.Name = fontName;
+                row4_TieuDe_Format.Merge();
+                row4_TieuDe_Format.Font.Bold = true;
+                row4_TieuDe_Format.Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                row4_TieuDe_Format.Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+                row4_TieuDe_Format.Value2 = "TỔNG HỢP TIỀN THƯỞNG ABC, THƯỞNG HIỆU QUẢ CÔNG VIỆC";
+
+                oSheet.get_Range("A5").RowHeight = 45;
+                Microsoft.Office.Interop.Excel.Range row4_A = oSheet.get_Range("A5");
+                row4_A.ColumnWidth = 5;
+                row4_A.Value2 = "STT";
+
+                Range row4_B = oSheet.get_Range("B5");
+                row4_B.ColumnWidth = 16;
+                row4_B.Value2 = "Mã nhân viên";
+
+                Range row4_C = oSheet.get_Range("C5");
+                row4_C.ColumnWidth = 25;
+                row4_C.Value2 = "Họ tên";
+
+                Range row4_D = oSheet.get_Range("D5");
+                row4_D.ColumnWidth = 40;
+                row4_D.Value2 = "Phòng/Chuyền";
+
+                Range row4_E = oSheet.get_Range("E5");
+                row4_E.ColumnWidth = 15;
+                row4_E.Value2 = "Ngày vào";
+
+                Range row4_F = oSheet.get_Range("F5");
+                row4_F.ColumnWidth = 15;
+                row4_F.Value2 = "Ngày ký HĐLĐ";
+
+                Range row4_G = oSheet.get_Range("G5");
+                row4_G.ColumnWidth = 12;
+                row4_G.Value2 = "Xếp loại";
+
+                Range row4_H = oSheet.get_Range("H5");
+                row4_H.ColumnWidth = 12;
+                row4_H.Value2 = "Tiền thưởng";
+
+                Range row4_I = oSheet.get_Range("I5");
+                row4_I.ColumnWidth = 25;
+                row4_I.Value2 = "Loại thưởng";
+
+                Range row4_J = oSheet.get_Range("J5");
+                row4_J.ColumnWidth = 11;
+                row4_J.Value2 = "Ghi chú";
+
+                Range row4_FormatTieuDe = oSheet.get_Range("A5", "J5");
+                row4_FormatTieuDe.Font.Size = fontSizeTieuDe;
+                row4_FormatTieuDe.Font.Name = fontName;
+                row4_FormatTieuDe.Font.Bold = true;
+                row4_FormatTieuDe.Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                row4_FormatTieuDe.Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+
+
+                DataRow[] dr = dtBCPhep.Select();
+                string[,] rowData = new string[dr.Length, dtBCPhep.Columns.Count];
+
+                int col = 0;
+                int rowCnt = 0;
+                foreach (DataRow row in dr)
+                {
+                    for (col = 0; col < dtBCPhep.Columns.Count; col++)
+                    {
+                        rowData[rowCnt, col] = row[col].ToString();
+                    }
+                    rowCnt++;
+                }
+                rowCnt = rowCnt + 5;
+                oSheet.get_Range("A6", "J" + rowCnt.ToString()).Value2 = rowData;
+                oSheet.get_Range("A6", "J" + rowCnt.ToString()).Font.Name = fontName;
+                oSheet.get_Range("A6", "J" + rowCnt.ToString()).Font.Size = fontSizeNoiDung;
+                ////Kẻ khung toàn bộ
+                BorderAround(oSheet.get_Range("A5", "J" + rowCnt.ToString()));
+                Microsoft.Office.Interop.Excel.Range formatRange;
+                formatRange = oSheet.get_Range("H6", "H" + rowCnt.ToString());
+                formatRange.Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignRight;
+                formatRange.Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+                formatRange.NumberFormat = "#,##0;(#,##0); ; ";
+
+                //var list = new System.Collections.Generic.List<string>();
+                DataTable dt = new DataTable();
+                dt = Commons.Modules.ObjSystems.DataLoaiTienThuong(false);
+                //for (int i = 0; i < dt.Rows.Count; i++)
+                //{
+                //    list.Add(dt.Rows[i]["TEN_TIEN_THUONG"].ToString());
+                //}
+                //var flatList = string.Join(",", list.ToArray());
+
+                //formatRange = oSheet.get_Range("H6", "H" + rowCnt.ToString());
+                //formatRange.Validation.Delete();
+                //formatRange.Validation.Add(
+                //   XlDVType.xlValidateList,
+                //   XlDVAlertStyle.xlValidAlertInformation,
+                //   XlFormatConditionOperator.xlBetween,
+                //   flatList,
+                //   Type.Missing);
+
+                //formatRange.Validation.IgnoreBlank = true;
+                //formatRange.Validation.InCellDropdown = true;
+                //formatRange.Validation.ErrorMessage = "Dữ liệu bạn nhập không đúng bạn có muốn tiếp tục?";
+                //formatRange.Validation.ShowError = true;
+                //formatRange.Validation.ErrorTitle = "Nhập sai dữ liệu";
+
+                Commons.Modules.ObjSystems.AddDropDownExcel(oSheet, formatRange, dt, "TEN_TIEN_THUONG", 9, 6, 9, rowCnt);
+                formatRange = oSheet.get_Range("I6", "I" + rowCnt.ToString());
+                formatRange.WrapText = false;
+                try
+                {
+                    formatRange.TextToColumns(Type.Missing, Microsoft.Office.Interop.Excel.XlTextParsingType.xlDelimited, Microsoft.Office.Interop.Excel.XlTextQualifier.xlTextQualifierDoubleQuote);
+                }
+                catch { }
+
+                oXL.Visible = true;
+                oXL.UserControl = true;
+
+                oWB.SaveAs(SaveExcelFile,
+                    AccessMode: Microsoft.Office.Interop.Excel.XlSaveAsAccessMode.xlShared);
+            }
+            catch (Exception ex)
+            {
+                this.Cursor = Cursors.Default;
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

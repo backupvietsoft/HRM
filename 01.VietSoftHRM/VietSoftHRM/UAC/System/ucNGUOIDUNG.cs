@@ -105,7 +105,7 @@ namespace VietSoftHRM
                                     return;
                                 }
                             }
-                            
+
                             var s = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spGhiUser", (grvNguoiDung.RowCount == 0 ? "" : grvNguoiDung.GetFocusedRowCellValue("ID_USER").ToString()) == "" ?  DBNull.Value : grvNguoiDung.GetFocusedRowCellValue("ID_USER"), ID_NHOMComboBoxEdit.Text == "" ? ID_NHOMComboBoxEdit.EditValue = null : Convert.ToInt64(ID_NHOMComboBoxEdit.EditValue), ID_TOComboBoxEdit.Text == "" ? ID_TOComboBoxEdit.EditValue =null : Convert.ToInt64(ID_TOComboBoxEdit.EditValue), ID_CNSearchLookUpEdit.Text == "" ? ID_CNSearchLookUpEdit.EditValue = null : Convert.ToInt64(ID_CNSearchLookUpEdit.EditValue), USER_NAMETextEdit.EditValue, FULL_NAMETextEdit.EditValue, Commons.Modules.ObjSystems.Encrypt(PASSWORDTextEdit.EditValue.ToString(), true), DESCRIPTIONMemoExEdit.EditValue, USER_MAILTextEdit.EditValue, Convert.ToInt32(ACTIVECheckEdit.EditValue), Convert.ToBoolean(co), Commons.Modules.ObjSystems.Encrypt(USER_NAMETextEdit.EditValue.ToString() + Convert.ToBoolean(chkLIC.EditValue).ToString(), true), Convert.ToBoolean(chkKhach.Checked), Convert.ToBoolean(chkLIC.Checked));
                             Enablecontrol(true);
                             LoadUser(Convert.ToInt32(s));
@@ -154,6 +154,7 @@ namespace VietSoftHRM
         #region hàm load
         private void LoadUser(int iSTT)
         {
+            Commons.Modules.sLoad = "0Load";
             DataTable dt = new DataTable();
             dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetListUser", Commons.Modules.sIdHT, Commons.Modules.UserName, Commons.Modules.TypeLanguage));
             dt.PrimaryKey = new DataColumn[] { dt.Columns["ID_USER"] };
@@ -184,6 +185,7 @@ namespace VietSoftHRM
             {
                 grdNguoiDung.DataSource = dt;
             }
+            Commons.Modules.sLoad = "";
         }
         private void LoadComboTo()
         {

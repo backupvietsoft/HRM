@@ -194,6 +194,15 @@ namespace VietSoftHRM
                         gtgc.Dock = DockStyle.Fill;
                         break;
                     }
+                case "mnuMaHang":
+                    {
+                        ucMaHang ctl = new ucMaHang();
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(ctl);
+                        Commons.Modules.ObjSystems.HideWaitForm();
+                        ctl.Dock = DockStyle.Fill;
+                        break;
+                    }
                 case "mnuThueThuNhap":
                     {
                         ucThueThuNhap ttn = new ucThueThuNhap();

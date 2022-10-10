@@ -28,14 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions21 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions22 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions23 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions24 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions25 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions1 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions2 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions3 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions4 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions5 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
             this.grdDKCTD = new DevExpress.XtraGrid.GridControl();
             this.grvKDCTD = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            this.datTNgay = new DevExpress.XtraEditors.DateEdit();
+            this.datDenNgay = new DevExpress.XtraEditors.DateEdit();
             this.cboXN = new DevExpress.XtraEditors.SearchLookUpEdit();
             this.searchLookUpEdit2View = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.cboDV = new DevExpress.XtraEditors.SearchLookUpEdit();
@@ -47,16 +49,18 @@
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.ItemForSumNhanVien = new DevExpress.XtraLayout.SimpleLabelItem();
             this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
+            this.lblDenNgay = new DevExpress.XtraLayout.LayoutControlItem();
+            this.lblTuNgay = new DevExpress.XtraLayout.LayoutControlItem();
             this.windowsUIButton = new DevExpress.XtraBars.Docking2010.WindowsUIButtonPanel();
             this.searchControl = new DevExpress.XtraEditors.SearchControl();
-            this.datDenNgay = new DevExpress.XtraEditors.DateEdit();
-            this.lblDenNgay = new DevExpress.XtraLayout.LayoutControlItem();
-            this.datTNgay = new DevExpress.XtraEditors.DateEdit();
-            this.lblTuNgay = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.grdDKCTD)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grvKDCTD)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.datTNgay.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.datTNgay.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.datDenNgay.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.datDenNgay.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboXN.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit2View)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboDV.Properties)).BeginInit();
@@ -68,14 +72,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForSumNhanVien)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lblDenNgay)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lblTuNgay)).BeginInit();
             this.windowsUIButton.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.searchControl.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.datDenNgay.Properties.CalendarTimeProperties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.datDenNgay.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lblDenNgay)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.datTNgay.Properties.CalendarTimeProperties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.datTNgay.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lblTuNgay)).BeginInit();
             this.SuspendLayout();
             // 
             // grdDKCTD
@@ -94,6 +94,8 @@
             this.grvKDCTD.GridControl = this.grdDKCTD;
             this.grvKDCTD.Name = "grvKDCTD";
             this.grvKDCTD.OptionsView.ShowGroupPanel = false;
+            this.grvKDCTD.PopupMenuShowing += new DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler(this.grvDSUngVien_PopupMenuShowing);
+            this.grvKDCTD.InitNewRow += new DevExpress.XtraGrid.Views.Grid.InitNewRowEventHandler(this.grvKDCTD_InitNewRow);
             this.grvKDCTD.RowCountChanged += new System.EventHandler(this.grvKDCTD_RowCountChanged);
             // 
             // layoutControl1
@@ -113,6 +115,34 @@
             this.layoutControl1.Size = new System.Drawing.Size(700, 387);
             this.layoutControl1.TabIndex = 11;
             this.layoutControl1.Text = "layoutControl1";
+            // 
+            // datTNgay
+            // 
+            this.datTNgay.EditValue = null;
+            this.datTNgay.Location = new System.Drawing.Point(99, 32);
+            this.datTNgay.Name = "datTNgay";
+            this.datTNgay.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.datTNgay.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.datTNgay.Size = new System.Drawing.Size(134, 24);
+            this.datTNgay.StyleController = this.layoutControl1;
+            this.datTNgay.TabIndex = 23;
+            this.datTNgay.EditValueChanged += new System.EventHandler(this.datTNgay_EditValueChanged);
+            // 
+            // datDenNgay
+            // 
+            this.datDenNgay.EditValue = null;
+            this.datDenNgay.Location = new System.Drawing.Point(328, 32);
+            this.datDenNgay.Name = "datDenNgay";
+            this.datDenNgay.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.datDenNgay.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.datDenNgay.Size = new System.Drawing.Size(135, 24);
+            this.datDenNgay.StyleController = this.layoutControl1;
+            this.datDenNgay.TabIndex = 22;
+            this.datDenNgay.EditValueChanged += new System.EventHandler(this.datDenNgay_EditValueChanged);
             // 
             // cboXN
             // 
@@ -239,6 +269,22 @@
             this.emptySpaceItem1.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
             // 
+            // lblDenNgay
+            // 
+            this.lblDenNgay.Control = this.datDenNgay;
+            this.lblDenNgay.Location = new System.Drawing.Point(229, 26);
+            this.lblDenNgay.Name = "lblDenNgay";
+            this.lblDenNgay.Size = new System.Drawing.Size(230, 26);
+            this.lblDenNgay.TextSize = new System.Drawing.Size(81, 17);
+            // 
+            // lblTuNgay
+            // 
+            this.lblTuNgay.Control = this.datTNgay;
+            this.lblTuNgay.Location = new System.Drawing.Point(0, 26);
+            this.lblTuNgay.Name = "lblTuNgay";
+            this.lblTuNgay.Size = new System.Drawing.Size(229, 26);
+            this.lblTuNgay.TextSize = new System.Drawing.Size(81, 17);
+            // 
             // windowsUIButton
             // 
             this.windowsUIButton.AppearanceButton.Hovered.FontSizeDelta = -1;
@@ -256,18 +302,18 @@
             this.windowsUIButton.AppearanceButton.Pressed.Options.UseFont = true;
             this.windowsUIButton.AppearanceButton.Pressed.Options.UseImage = true;
             this.windowsUIButton.AppearanceButton.Pressed.Options.UseTextOptions = true;
-            windowsUIButtonImageOptions21.ImageUri.Uri = "Edit;Size32x32;GrayScaled";
-            windowsUIButtonImageOptions22.ImageUri.Uri = "snap/snapdeletelist";
-            windowsUIButtonImageOptions23.ImageUri.Uri = "richedit/clearheaderandfooter";
-            windowsUIButtonImageOptions24.ImageUri.Uri = "SaveAll";
-            windowsUIButtonImageOptions25.ImageUri.Uri = "SaveAndClose";
+            windowsUIButtonImageOptions1.ImageUri.Uri = "Edit;Size32x32;GrayScaled";
+            windowsUIButtonImageOptions2.ImageUri.Uri = "snap/snapdeletelist";
+            windowsUIButtonImageOptions3.ImageUri.Uri = "richedit/clearheaderandfooter";
+            windowsUIButtonImageOptions4.ImageUri.Uri = "SaveAll";
+            windowsUIButtonImageOptions5.ImageUri.Uri = "SaveAndClose";
             this.windowsUIButton.Buttons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] {
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions21, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "themsua", -1, false),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions22, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "xoa", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions1, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "themsua", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions2, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "xoa", -1, false),
             new DevExpress.XtraBars.Docking2010.WindowsUISeparator(),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions23, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "thoat", -1, false),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions24, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "luu", -1, false),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions25, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "khongluu", -1, false)});
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions3, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "thoat", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions4, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "luu", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions5, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "khongluu", -1, false)});
             this.windowsUIButton.ContentAlignment = System.Drawing.ContentAlignment.MiddleRight;
             this.windowsUIButton.Controls.Add(this.searchControl);
             this.windowsUIButton.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -296,50 +342,6 @@
             this.searchControl.Size = new System.Drawing.Size(192, 24);
             this.searchControl.TabIndex = 10;
             // 
-            // datDenNgay
-            // 
-            this.datDenNgay.EditValue = null;
-            this.datDenNgay.Location = new System.Drawing.Point(328, 32);
-            this.datDenNgay.Name = "datDenNgay";
-            this.datDenNgay.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.datDenNgay.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.datDenNgay.Size = new System.Drawing.Size(135, 24);
-            this.datDenNgay.StyleController = this.layoutControl1;
-            this.datDenNgay.TabIndex = 22;
-            this.datDenNgay.EditValueChanged += new System.EventHandler(this.datDenNgay_EditValueChanged);
-            // 
-            // lblDenNgay
-            // 
-            this.lblDenNgay.Control = this.datDenNgay;
-            this.lblDenNgay.Location = new System.Drawing.Point(229, 26);
-            this.lblDenNgay.Name = "lblDenNgay";
-            this.lblDenNgay.Size = new System.Drawing.Size(230, 26);
-            this.lblDenNgay.TextSize = new System.Drawing.Size(81, 17);
-            // 
-            // datTNgay
-            // 
-            this.datTNgay.EditValue = null;
-            this.datTNgay.Location = new System.Drawing.Point(99, 32);
-            this.datTNgay.Name = "datTNgay";
-            this.datTNgay.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.datTNgay.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.datTNgay.Size = new System.Drawing.Size(134, 24);
-            this.datTNgay.StyleController = this.layoutControl1;
-            this.datTNgay.TabIndex = 23;
-            this.datTNgay.EditValueChanged += new System.EventHandler(this.datTNgay_EditValueChanged);
-            // 
-            // lblTuNgay
-            // 
-            this.lblTuNgay.Control = this.datTNgay;
-            this.lblTuNgay.Location = new System.Drawing.Point(0, 26);
-            this.lblTuNgay.Name = "lblTuNgay";
-            this.lblTuNgay.Size = new System.Drawing.Size(229, 26);
-            this.lblTuNgay.TextSize = new System.Drawing.Size(81, 17);
-            // 
             // ucDangKiChamTuDong
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -354,6 +356,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.grvKDCTD)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.datTNgay.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.datTNgay.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.datDenNgay.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.datDenNgay.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboXN.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit2View)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboDV.Properties)).EndInit();
@@ -365,14 +371,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForSumNhanVien)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lblDenNgay)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lblTuNgay)).EndInit();
             this.windowsUIButton.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.searchControl.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.datDenNgay.Properties.CalendarTimeProperties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.datDenNgay.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lblDenNgay)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.datTNgay.Properties.CalendarTimeProperties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.datTNgay.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lblTuNgay)).EndInit();
             this.ResumeLayout(false);
 
         }

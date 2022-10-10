@@ -487,7 +487,7 @@ namespace Vs.TimeAttendance
             try
             {
                 GridView grv = (GridView)sender;
-                cboNgay.Text = Convert.ToDateTime(grv.GetFocusedRowCellValue("NGAY_AD").ToString()).ToShortDateString();
+                cboNgay.Text = Convert.ToDateTime(grv.GetFocusedRowCellValue("NGAY_AD").ToString()).ToString("MM/yyyy");
             }
             catch { LoadNull(); }
             cboNgay.ClosePopup();

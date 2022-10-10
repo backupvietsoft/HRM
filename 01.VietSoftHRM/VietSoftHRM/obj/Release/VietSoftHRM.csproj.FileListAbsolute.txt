@@ -278,6 +278,7 @@ H:\Lamviec\Lamviec\HRM\01.HRM\01.VietSoftHRM\VietSoftHRM\obj\Release\VietSoftHRM
 H:\Lamviec\Lamviec\HRM\01.HRM\01.VietSoftHRM\VietSoftHRM\obj\Release\VietSoftHRM.csproj.CopyComplete
 H:\Lamviec\Lamviec\HRM\01.HRM\01.VietSoftHRM\VietSoftHRM\obj\Release\VietSoftHRM.exe
 H:\Lamviec\Lamviec\HRM\01.HRM\01.VietSoftHRM\VietSoftHRM\obj\Release\VietSoftHRM.pdb
+H:\Lamviec\Lamviec\HRM\01.HRM\01.VietSoftHRM\VietSoftHRM\obj\Release\VietSoftHRM.frmThongBaoTuyenDung.resources
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Release\Template\TemplateGiamLaoDong.xlsx
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Release\Template\TemplateTaiNanLaoDong.xlsx
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Release\Template\TemplateTangLaoDong.xlsx
@@ -454,4 +455,3 @@ F:\01.HRM\01.VietSoftHRM\VietSoftHRM\obj\Release\VietSoftHRM.csproj.CoreCompileI
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\obj\Release\VietSoftHRM.csproj.CopyComplete
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\obj\Release\VietSoftHRM.exe
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\obj\Release\VietSoftHRM.pdb
-H:\Lamviec\Lamviec\HRM\01.HRM\01.VietSoftHRM\VietSoftHRM\obj\Release\VietSoftHRM.frmThongBaoTuyenDung.resources

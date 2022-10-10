@@ -394,6 +394,61 @@ namespace Commons
             return KyHieuDV;
         }
 
+        public void AddDropDownExcel(Microsoft.Office.Interop.Excel._Worksheet oSheet, Microsoft.Office.Interop.Excel.Range range, DataTable dtDuLieu, string sCotDuLieu, int iCotBD, int iDongBD, int iCotKT, int iDongKT)
+        {
+            try
+            {
+                var list = new System.Collections.Generic.List<string>();
+                for (int i = 0; i < dtDuLieu.Rows.Count; i++)
+                {
+                    list.Add(dtDuLieu.Rows[i][sCotDuLieu].ToString());
+                }
+                var flatList = string.Join(",", list.ToArray());
+
+                range = oSheet.get_Range("" + CharacterIncrement(iCotBD - 1) + "" + iDongBD + "", "" + CharacterIncrement(iCotKT - 1) + "" + iDongKT.ToString());
+                range.Validation.Delete();
+                range.Validation.Add(
+                   Microsoft.Office.Interop.Excel.XlDVType.xlValidateList,
+                   Microsoft.Office.Interop.Excel.XlDVAlertStyle.xlValidAlertInformation,
+                   Microsoft.Office.Interop.Excel.XlFormatConditionOperator.xlBetween,
+                   flatList,
+                   Type.Missing);
+                range.Validation.IgnoreBlank = true;
+                range.Validation.InCellDropdown = true;
+                range.Validation.ErrorMessage = "Dữ liệu bạn nhập không đúng bạn có muốn tiếp tục?";
+                range.Validation.ShowError = true;
+                range.Validation.ErrorTitle = "Nhập sai dữ liệu";
+            }
+            catch { }
+        }
+        public string CharacterIncrement(int colCount)
+        {
+            int TempCount = 0;
+            string returnCharCount = string.Empty;
+
+            if (colCount <= 25)
+            {
+                TempCount = colCount;
+                char CharCount = Convert.ToChar((Convert.ToInt32('A') + TempCount));
+                returnCharCount += CharCount;
+                return returnCharCount;
+            }
+            else
+            {
+                var rev = 0;
+
+                while (colCount >= 26)
+                {
+                    colCount = colCount - 26;
+                    rev++;
+                }
+
+                returnCharCount += CharacterIncrement(rev - 1);
+                returnCharCount += CharacterIncrement(colCount);
+                return returnCharCount;
+            }
+        }
+
         public bool setCheckImport(int iLoai) // iLoai = 1 Update khi mở form, 0 UPDATE = NULL  khi tắt form
         {
             try

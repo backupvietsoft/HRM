@@ -42,6 +42,8 @@ namespace Vs.HRM
             Commons.Modules.ObjSystems.LoadCboDonVi(cboSearch_DV);
             Commons.Modules.ObjSystems.LoadCboXiNghiep(cboSearch_DV, cboSearch_XN);
             Commons.Modules.ObjSystems.LoadCboTo(cboSearch_DV, cboSearch_XN, cboSearch_TO);
+            Commons.Modules.ObjSystems.MLoadLookUpEditN(cboTINH_TRANG, Commons.Modules.ObjSystems.DataTinhTrangDuyet(false), "ID_TTD", "TEN_TT_DUYET", "TEN_TT_DUYET", "");
+            cboTINH_TRANG.EditValue = 2;
             LoadGrdCongNhan(false);
             Commons.Modules.sLoad = "";
             radTinHTrang.SelectedIndex = 0;
@@ -332,7 +334,7 @@ namespace Vs.HRM
                         int n = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.fuKiemTraKeHoachNghiPhep(" + Convert.ToInt64(item["ID_CN"]) + ",'" + datTNgay.DateTime.ToString("MM/dd/yyyy") + "','" + datDNgay.DateTime.ToString("MM/dd/yyyy") + "')"));
                         if (n == 0)
                         {
-                            SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spInSertKeHoachNghiPhep", cboLDV.EditValue, Convert.ToInt64(item["ID_CN"]), datTNgay.EditValue, datDNgay.EditValue, datNVao.EditValue, numSoGio.Value, memoGhiChu.EditValue);
+                            SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spInSertKeHoachNghiPhep", cboLDV.EditValue, Convert.ToInt64(item["ID_CN"]), datTNgay.EditValue, datDNgay.EditValue, datNVao.EditValue, numSoGio.Value, cboTINH_TRANG.EditValue, memoGhiChu.EditValue);
                         }
                     }
                     catch

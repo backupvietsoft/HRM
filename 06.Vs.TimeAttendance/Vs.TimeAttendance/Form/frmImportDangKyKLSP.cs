@@ -153,7 +153,10 @@ namespace Vs.TimeAttendance
                             grvData.PostEditor();
                             grvData.UpdateCurrentRow();
                             Commons.Modules.ObjSystems.MChooseGrid(false, "XOA", grvData);
-                            DataTable dtSource = Commons.Modules.ObjSystems.ConvertDatatable(grvData);
+                            //DataTable dtSource = Commons.Modules.ObjSystems.ConvertDatatable(grvData);
+
+                            DataTable dtSource = (DataTable)grdData.DataSource;
+
                             if (cboChonSheet.Text == "" || dtSource == null || dtSource.Rows.Count <= 0)
                             {
                                 this.Cursor = Cursors.Default;
@@ -206,7 +209,10 @@ namespace Vs.TimeAttendance
                     default: break;
                 }
             }
-            catch { }
+            catch (Exception EX)
+            {
+                this.Cursor = Cursors.Default;
+            }
         }
         #region import
         private void Import(DataTable dtSource)
@@ -219,87 +225,126 @@ namespace Vs.TimeAttendance
             foreach (DataRow dr in dtSource.Rows)
             {
                 dr.ClearErrors();
+                DateTime dNgay = Convert.ToDateTime(dr[grvData.Columns[0].FieldName.ToString()]);
+                if (dNgay == Convert.ToDateTime(cboNgay.Text))
+                {
 
-
-                //Ngày   
-                col = 0;
-                if (!Commons.Modules.MExcel.KiemDuLieuNgay(grvData, dr, col, true, this.Name))
-                {
-                    errorCount++;
-                }
-                col = 1;
-                //Mã số nhân viên
-                string sMaSo = dr[grvData.Columns[col].FieldName.ToString()].ToString();
-                if (!Commons.Modules.MExcel.KiemTonTai(grvData, dr, col, sMaSo, "CONG_NHAN", "MS_CN", true, this.Name))
-                {
-                    errorCount++;
-                }
-                else
-                {
-                    if (!KiemTrungDL(grvData, dtSource, dr, col, sMaSo, "CONG_NHAN", "MS_CN", this.Name))
+                    //Ngày   
+                    col = 0;
+                    if (!Commons.Modules.MExcel.KiemDuLieuNgay(grvData, dr, col, true, this.Name))
                     {
                         errorCount++;
-                        errorMS++;
                     }
-                }
+                    col = 1;
+                    //Mã số nhân viên
+                    string sMaSo = dr[grvData.Columns[col].FieldName.ToString()].ToString();
+                    if (!Commons.Modules.MExcel.KiemTonTai(grvData, dr, col, sMaSo, "CONG_NHAN", "MS_CN", true, this.Name))
+                    {
+                        errorCount++;
+                    }
+                    else
+                    {
+                        if (!KiemTrungDL(grvData, dtSource, dr, col, sMaSo, "CONG_NHAN", "MS_CN", this.Name, cboNgay.Text))
+                        {
+                            errorCount++;
+                            errorMS++;
+                        }
+                    }
 
 
-                col = 2;
-                //Tên 
-                if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, true, 50, this.Name))
-                {
-                    errorCount++;
-                }
+                    col = 2;
+                    //Tên 
+                    if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, true, 50, this.Name))
+                    {
+                        errorCount++;
+                    }
 
-                col = 3;
-                if (!Commons.Modules.MExcel.KiemDuLieuSo(grvData, dr, col, "Mất điện", 0, 0, false, this.Name))
-                {
-                    errorCount++;
-                }
-                col = 4;
-                if (!Commons.Modules.MExcel.KiemDuLieuSo(grvData, dr, col, "Thời gian hỗ trợ", 0, 0, false, this.Name))
-                {
-                    errorCount++;
-                }
-                col = 5;
-                if (!Commons.Modules.MExcel.KiemDuLieuSo(grvData, dr, col, "Sửa hàng không do lỗi của chuyền", 0, 0, false, this.Name))
-                {
-                    errorCount++;
-                }
-                col = 6;
-                if (!Commons.Modules.MExcel.KiemDuLieuSo(grvData, dr, col, "Hoạt động", 0, 0, false, this.Name))
-                {
-                    errorCount++;
-                }
-                col = 7;
-                if (!Commons.Modules.MExcel.KiemDuLieuSo(grvData, dr, col, "Chờ NPL", 0, 0, false, this.Name))
-                {
-                    errorCount++;
-                }
-                col = 8;
-                if (!Commons.Modules.MExcel.KiemDuLieuSo(grvData, dr, col, " Sửa máy", 0, 0, false, this.Name))
-                {
-                    errorCount++;
-                }
-                col = 9;
-                if (!Commons.Modules.MExcel.KiemDuLieuSo(grvData, dr, col, "Thời gian khác", 0, 0, false, this.Name))
-                {
-                    errorCount++;
-                }
-                col = 10;
-                if (!Commons.Modules.MExcel.KiemDuLieuSo(grvData, dr, col, "Thời gian HC", 0, 0, false, this.Name))
-                {
-                    errorCount++;
-                }
-                col = 11;
-                if (!Commons.Modules.MExcel.KiemDuLieuSo(grvData, dr, col, "Thời gian OT 150%", 0, 0, false, this.Name))
-                {
-                    errorCount++;
-                }
-                col = 12;
-                if (!Commons.Modules.MExcel.KiemDuLieuSo(grvData, dr, col, "Thời gian OT 200%", 0, 0, false, this.Name))
-                {
-                    errorCount++;
+                    col = 3;
+                    if (!Commons.Modules.MExcel.KiemDuLieuSo(grvData, dr, col, "Mất điện", 0, 0, false, this.Name))
+                    {
+                        errorCount++;
+                    }
+                    Double dCOT_1 = Convert.ToDouble(dr[grvData.Columns[col].FieldName.ToString()]);
+
+                    col = 4;
+                    if (!Commons.Modules.MExcel.KiemDuLieuSo(grvData, dr, col, "Thời gian hỗ trợ", 0, 0, false, this.Name))
+                    {
+                        errorCount++;
+                    }
+                    Double dCOT_2 = Convert.ToDouble(dr[grvData.Columns[col].FieldName.ToString()]);
+                    col = 5;
+                    if (!Commons.Modules.MExcel.KiemDuLieuSo(grvData, dr, col, "Sửa hàng không do lỗi của chuyền", 0, 0, false, this.Name))
+                    {
+                        errorCount++;
+                    }
+                    Double dCOT_3 = Convert.ToDouble(dr[grvData.Columns[col].FieldName.ToString()]);
+
+                    col = 6;
+                    if (!Commons.Modules.MExcel.KiemDuLieuSo(grvData, dr, col, "Hoạt động", 0, 0, false, this.Name))
+                    {
+                        errorCount++;
+                    }
+                    Double dCOT_4 = Convert.ToDouble(dr[grvData.Columns[col].FieldName.ToString()]);
+
+                    col = 7;
+                    if (!Commons.Modules.MExcel.KiemDuLieuSo(grvData, dr, col, "Chờ NPL", 0, 0, false, this.Name))
+                    {
+                        errorCount++;
+                    }
+                    Double dCOT_5 = Convert.ToDouble(dr[grvData.Columns[col].FieldName.ToString()]);
+
+                    col = 8;
+                    if (!Commons.Modules.MExcel.KiemDuLieuSo(grvData, dr, col, " Sửa máy", 0, 0, false, this.Name))
+                    {
+                        errorCount++;
+                    }
+                    Double dCOT_6 = Convert.ToDouble(dr[grvData.Columns[col].FieldName.ToString()]);
+
+                    col = 9;
+                    if (!Commons.Modules.MExcel.KiemDuLieuSo(grvData, dr, col, "Thời gian khác", 0, 0, false, this.Name))
+                    {
+                        errorCount++;
+                    }
+                    Double dCOT_7 = Convert.ToDouble(dr[grvData.Columns[col].FieldName.ToString()]);
+
+                    col = 10;
+                    if (!Commons.Modules.MExcel.KiemDuLieuSo(grvData, dr, col, "Thời gian HC", 0, 0, false, this.Name))
+                    {
+                        errorCount++;
+                    }
+                    Double dTG_HC = Convert.ToDouble(dr[grvData.Columns[col].FieldName.ToString()]);
+
+                    col = 11;
+                    if (!Commons.Modules.MExcel.KiemDuLieuSo(grvData, dr, col, "Thời gian OT 150%", 0, 0, false, this.Name))
+                    {
+                        errorCount++;
+                    }
+                    Double dTG_TC_NT = Convert.ToDouble(dr[grvData.Columns[col].FieldName.ToString()]);
+
+                    col = 12;
+                    if (!Commons.Modules.MExcel.KiemDuLieuSo(grvData, dr, col, "Thời gian OT 200%", 0, 0, false, this.Name))
+                    {
+                        errorCount++;
+                    }
+                    Double dTG_TC_CN = Convert.ToDouble(dr[grvData.Columns[col].FieldName.ToString()]);
+
+
+                    Double dTong3Cot = dTG_HC + dTG_TC_NT + dTG_TC_CN;
+                    Double dTong7Cot = dCOT_1 + dCOT_2 + dCOT_3 + dCOT_4 + dCOT_5 + dCOT_6 + dCOT_7;
+                    if (dTong3Cot != dTong7Cot)
+                    {
+                        errorCount++;
+                        dr.SetColumnError("COT_1", Commons.Modules.ObjLanguages.GetLanguage("ucDKThoiGianKhongLamSP", "msgGioLamViecKhongCan"));
+                        dr.SetColumnError("COT_2", Commons.Modules.ObjLanguages.GetLanguage("ucDKThoiGianKhongLamSP", "msgGioLamViecKhongCan"));
+                        dr.SetColumnError("COT_3", Commons.Modules.ObjLanguages.GetLanguage("ucDKThoiGianKhongLamSP", "msgGioLamViecKhongCan"));
+                        dr.SetColumnError("COT_4", Commons.Modules.ObjLanguages.GetLanguage("ucDKThoiGianKhongLamSP", "msgGioLamViecKhongCan"));
+                        dr.SetColumnError("COT_5", Commons.Modules.ObjLanguages.GetLanguage("ucDKThoiGianKhongLamSP", "msgGioLamViecKhongCan"));
+                        dr.SetColumnError("COT_6", Commons.Modules.ObjLanguages.GetLanguage("ucDKThoiGianKhongLamSP", "msgGioLamViecKhongCan"));
+                        dr.SetColumnError("COT_7", Commons.Modules.ObjLanguages.GetLanguage("ucDKThoiGianKhongLamSP", "msgGioLamViecKhongCan"));
+                        dr.SetColumnError("TG_HC", Commons.Modules.ObjLanguages.GetLanguage("ucDKThoiGianKhongLamSP", "msgGioLamViecKhongCan"));
+                        dr.SetColumnError("TG_TC_NT", Commons.Modules.ObjLanguages.GetLanguage("ucDKThoiGianKhongLamSP", "msgGioLamViecKhongCan"));
+                        dr.SetColumnError("TG_TC_CN", Commons.Modules.ObjLanguages.GetLanguage("ucDKThoiGianKhongLamSP", "msgGioLamViecKhongCan"));
+                    }
                 }
             }
             this.Cursor = Cursors.Default;
@@ -748,13 +793,13 @@ namespace Vs.TimeAttendance
         //    }
         //}
 
-        public bool KiemTrungDL(GridView grvData, DataTable dt, DataRow dr, int iCot, string sDLKiem, string tabName, string ColName, string sform)
+        public bool KiemTrungDL(GridView grvData, DataTable dt, DataRow dr, int iCot, string sDLKiem, string tabName, string ColName, string sform, string date)
         {
             string sTenKTra = Commons.Modules.ObjLanguages.GetLanguage(sform, "msgTrungDL");
             try
             {
 
-                if (dt.AsEnumerable().Where(x => x.Field<string>(iCot).Trim().Equals(sDLKiem)).CopyToDataTable().Rows.Count > 1)
+                if (dt.AsEnumerable().Where(x => x.Field<string>(iCot).Trim().Equals(sDLKiem) && x["NGAY"].Equals(date)).CopyToDataTable().Rows.Count > 1)
                 {
                     sTenKTra = Commons.Modules.ObjLanguages.GetLanguage(sform, "msgTrungDLLuoi");
                     dr.SetColumnError(grvData.Columns[iCot].FieldName.ToString(), sTenKTra);

@@ -17,6 +17,7 @@ using DevExpress.DataAccess.Excel;
 using System.Collections;
 using DevExpress.Spreadsheet;
 using DevExpress.Utils;
+using System.Drawing;
 
 namespace Vs.TimeAttendance
 {
@@ -55,7 +56,6 @@ namespace Vs.TimeAttendance
         {
             isAdd = false;
             Commons.Modules.sLoad = "0Load";
-
             repositoryItemTimeEdit1.TimeEditStyle = TimeEditStyle.TouchUI;
             repositoryItemTimeEdit1.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.DateTimeAdvancingCaret;
             repositoryItemTimeEdit1.Mask.EditMask = "HH:mm";
@@ -90,6 +90,8 @@ namespace Vs.TimeAttendance
             //cboCa.Click += CboCa_EditValueChanged;
             Commons.Modules.sLoad = "";
             grvCongNhan_FocusedRowChanged(null, null);
+            grvLamThem.OptionsView.NewItemRowPosition = NewItemRowPosition.None;
+
         }
 
         private void CboCa_EditValueChanged(object sender, EventArgs e)
@@ -173,9 +175,6 @@ namespace Vs.TimeAttendance
                 dID_NHOM.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetNhomCC", cboNgay.EditValue, Commons.Modules.UserName, Commons.Modules.TypeLanguage));
                 Commons.Modules.ObjSystems.AddCombXtra("ID_NHOM", "TEN_NHOM", grvLamThem, dID_NHOM, false, "ID_NHOM", "NHOM_CHAM_CONG");
 
-                DataTable dCA = new DataTable();
-                dCA.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetNhomCC", cboNgay.EditValue, Commons.Modules.UserName, Commons.Modules.TypeLanguage));
-                Commons.Modules.ObjSystems.AddCombXtra("ID_NHOM", "TEN_NHOM", grvLamThem, dID_NHOM, false, "ID_NHOM", "NHOM_CHAM_CONG");
 
                 FormatGrvLamThem();
                 if (isAdd)
@@ -187,8 +186,18 @@ namespace Vs.TimeAttendance
                     grvLamThem.OptionsBehavior.Editable = false;
                 }
 
-                grvLamThem.Columns["SO_GIO_TC"].DisplayFormat.FormatType = FormatType.Numeric;
-                grvLamThem.Columns["SO_GIO_TC"].DisplayFormat.FormatString = "0.0";
+                //grvLamThem.Columns["SO_GIO_TC"].DisplayFormat.FormatType = FormatType.Numeric;
+                //grvLamThem.Columns["SO_GIO_TC"].DisplayFormat.FormatString = "0.0";
+
+                RepositoryItemTextEdit txtEdit = new RepositoryItemTextEdit();
+                txtEdit.Properties.DisplayFormat.FormatString = "0.0";
+                txtEdit.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+                txtEdit.Properties.EditFormat.FormatString = "0.0";
+                txtEdit.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+                txtEdit.Properties.Mask.EditMask = "0.0";
+                txtEdit.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
+                txtEdit.Properties.Mask.UseMaskAsDisplayFormat = true;
+                grvLamThem.Columns["SO_GIO_TC"].ColumnEdit = txtEdit;
 
                 DataTable dCa = new DataTable();
                 RepositoryItemLookUpEdit cboCa = new RepositoryItemLookUpEdit();
@@ -258,6 +267,23 @@ namespace Vs.TimeAttendance
                 grvCongNhan.Columns["CA"].OptionsColumn.AllowEdit = false;
                 grvCongNhan.Columns["HO_TEN"].OptionsColumn.AllowEdit = false;
                 grvCongNhan.Columns["CHON"].Visible = false;
+                if (isAdd)
+                {
+                    grvCongNhan.OptionsSelection.MultiSelect = true;
+                    grvCongNhan.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CheckBoxRowSelect;
+                }
+                else
+                {
+                    grvCongNhan.OptionsSelection.MultiSelect = false;
+                    grvCongNhan.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.RowSelect;
+                }
+
+                try
+                {
+                    grvCongNhan.OptionsSelection.CheckBoxSelectorField = "CHON";
+                    grvCongNhan.Columns["CHON"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
+                }
+                catch { }
                 Commons.Modules.sLoad = "";
             }
             catch (Exception ex)
@@ -550,17 +576,18 @@ namespace Vs.TimeAttendance
                         EnableButon();
                         LoadGridCongNhan();
                         LoadGrdDSLamThem();
+                        Commons.Modules.ObjSystems.DeleteAddRow(grvLamThem);
                         grvCongNhan_FocusedRowChanged(null, null);
                         break;
                     }
                 case "khongghi":
                     {
-                        Commons.Modules.ObjSystems.DeleteAddRow(grvLamThem);
                         isAdd = false;
                         EnableButon();
                         LoadGridCongNhan();
                         LoadGrdDSLamThem();
                         grvCongNhan_FocusedRowChanged(null, null);
+                        Commons.Modules.ObjSystems.DeleteAddRow(grvLamThem);
                         break;
                     }
                 case "in":
@@ -595,9 +622,15 @@ namespace Vs.TimeAttendance
                         //CapNhatNhom();
 
                         frmCapNhatNhom frm = new frmCapNhatNhom(Convert.ToDateTime(cboNgay.Text));
+                        frm.StartPosition = FormStartPosition.CenterParent;
+                        frm.MinimizeBox = false;
+                        double iW, iH;
+                        iW = 450;
+                        iH = 300;
+                        frm.Size = new Size((int)iW, (int)iH);
+
                         if (frm.ShowDialog() == DialogResult.OK)
                         {
-
 
                             string sBTCapNhatNhom = "sBTCapNhatNhom" + Commons.Modules.iIDUser;
                             string sBTCongNhan = "sBTCongNhan" + Commons.Modules.iIDUser;
@@ -1175,6 +1208,7 @@ namespace Vs.TimeAttendance
             double phutBD = 0;
             double phutKT = 0;
             double phutAnCom = 0;
+            double gioTangCa = 0;
             GridView view = sender as GridView;
             try
             {
@@ -1198,8 +1232,9 @@ namespace Vs.TimeAttendance
                         try
                         {
                             gioKT = DateTime.Parse(view.GetFocusedRowCellValue("GIO_KT").ToString());
-                            phutAnCom = Convert.ToDouble(view.GetFocusedRowCellValue("PHUT_AN_CA"));
-                            view.SetRowCellValue(e.RowHandle, view.Columns["SO_GIO_TC"], ((gioKT.Hour * 60 + gioKT.Minute) - (gioBD.Hour * 60 + gioBD.Minute) - phutAnCom) / 60);
+                            phutAnCom = view.GetFocusedRowCellValue("PHUT_AN_CA") == DBNull.Value ? 0 : Convert.ToDouble(view.GetFocusedRowCellValue("PHUT_AN_CA"));
+                            gioTangCa = ((gioKT.Hour * 60 + gioKT.Minute) - (gioBD.Hour * 60 + gioBD.Minute) - phutAnCom) / 60;
+                            view.SetRowCellValue(e.RowHandle, view.Columns["SO_GIO_TC"], gioTangCa);
                         }
                         catch { }
                     }
@@ -1211,8 +1246,10 @@ namespace Vs.TimeAttendance
                     {
                         gioBD = DateTime.Parse(view.GetFocusedRowCellValue("GIO_BD").ToString());
                         gioKT = DateTime.Parse(view.GetFocusedRowCellValue("GIO_KT").ToString());
-                        phutAnCom = Convert.ToDouble(view.GetFocusedRowCellValue("PHUT_AN_CA"));
-                        view.SetRowCellValue(e.RowHandle, view.Columns["SO_GIO_TC"], ((gioKT.Hour * 60 + gioKT.Minute) - (gioBD.Hour * 60 + gioBD.Minute) - phutAnCom) / 60);
+                        phutAnCom = view.GetFocusedRowCellValue("PHUT_AN_CA") == DBNull.Value ? 0 : Convert.ToDouble(view.GetFocusedRowCellValue("PHUT_AN_CA"));
+
+                        gioTangCa = ((gioKT.Hour * 60 + gioKT.Minute) - (gioBD.Hour * 60 + gioBD.Minute) - phutAnCom) / 60;
+                        view.SetRowCellValue(e.RowHandle, view.Columns["SO_GIO_TC"], gioTangCa);
                     }
                     catch { }
                 }
@@ -1227,13 +1264,15 @@ namespace Vs.TimeAttendance
                         try
                         {
                             gioBD = DateTime.Parse(view.GetFocusedRowCellValue("GIO_BD").ToString());
-                            phutAnCom = Convert.ToDouble(view.GetFocusedRowCellValue("PHUT_AN_CA"));
-                            view.SetRowCellValue(e.RowHandle, view.Columns["SO_GIO_TC"], ((gioKT.Hour * 60 + gioKT.Minute) - (gioBD.Hour * 60 + gioBD.Minute) - (phutAnCom / 60)));
+                            phutAnCom = view.GetFocusedRowCellValue("PHUT_AN_CA") == DBNull.Value ? 0 : Convert.ToDouble(view.GetFocusedRowCellValue("PHUT_AN_CA"));
+                            gioTangCa = ((gioKT.Hour * 60 + gioKT.Minute) - (gioBD.Hour * 60 + gioBD.Minute) - phutAnCom) / 60;
+                            view.SetRowCellValue(e.RowHandle, view.Columns["SO_GIO_TC"], gioTangCa);
                         }
                         catch { }
 
                     }
                 }
+
 
 
             }
@@ -1364,9 +1403,33 @@ namespace Vs.TimeAttendance
 
                 DevExpress.XtraGrid.Views.Grid.GridView View = (DevExpress.XtraGrid.Views.Grid.GridView)sender;
                 DevExpress.XtraGrid.Columns.GridColumn ID_CDLV = View.Columns["ID_CDLV"];
-
-
+                DevExpress.XtraGrid.Columns.GridColumn gioBD = View.Columns["GIO_BD"];
+                DevExpress.XtraGrid.Columns.GridColumn gioKT = View.Columns["GIO_KT"];
                 try
+                {
+                    if (View.FocusedColumn.Name.ToString() == "colGIO_BD")
+                    {
+                        if (Convert.ToDateTime(grvLamThem.GetFocusedRowCellValue("GIO_BD")) > Convert.ToDateTime(grvLamThem.GetFocusedRowCellValue("GIO_KT")))
+                        {
+                            grvLamThem.SetColumnError(grvLamThem.Columns["GIO_BD"], "Giờ bắt đầu phải nhỏ hơn giờ kết thúc");
+                            e.Valid = false;
+                            View.SetColumnError(gioBD, "Giờ bắt đầu phải nhỏ hơn ngày kết thúc"); return;
+                        }
+                    }
+                    if (View.FocusedColumn.Name.ToString() == "colGIO_KT")
+                    {
+                        if (Convert.ToDateTime(grvLamThem.GetFocusedRowCellValue("GIO_KT")) < Convert.ToDateTime(grvLamThem.GetFocusedRowCellValue("GIO_BD")))
+                        {
+                            grvLamThem.SetColumnError(grvLamThem.Columns["GIO_KT"], "Giờ kết thúc phải lớn hơn giờ bắt đầu");
+                            e.Valid = false;
+                            View.SetColumnError(gioKT, "Giờ kết thúc phải lớn hơn giờ bắt đầu"); return;
+                        }
+                    }
+                }
+                catch { }
+
+
+                if (View.FocusedColumn.Name.ToString() == "colID_CDLV")
                 {
                     DataTable dt = new DataTable();
                     dt = Commons.Modules.ObjSystems.ConvertDatatable(grvLamThem);
@@ -1381,17 +1444,6 @@ namespace Vs.TimeAttendance
                         //dr.SetColumnError(sCot, sTenKTra);
                     }
                 }
-                catch { }
-
-                //if (View.GetRowCellValue(e.RowHandle, idTo).ToString() == "")
-                //{
-                //    flag = true;
-                //    e.Valid = false;
-                //    View.SetColumnError(idTo, "Tổ không được bỏ trống"); return;
-                //}
-                //flag = false;
-
-                //CheckDuplicateKHNP(grvKHNP, (DataTable)grdKHNP.DataSource, e);
             }
             catch (Exception ex) { }
         }

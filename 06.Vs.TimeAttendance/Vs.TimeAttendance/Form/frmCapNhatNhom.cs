@@ -59,6 +59,14 @@ namespace Vs.TimeAttendance
                 datGioKT.Properties.EditFormat.FormatString = "HH:mm:ss";
                 datGioKT.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.DateTimeAdvancingCaret;
                 datGioKT.Properties.Mask.EditMask = "HH:mm:ss";
+
+                txtSoGioTC.Properties.DisplayFormat.FormatString = "0.0";
+                txtSoGioTC.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+                txtSoGioTC.Properties.EditFormat.FormatString = "0.0";
+                txtSoGioTC.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+                txtSoGioTC.Properties.Mask.EditMask = "0.0";
+                txtSoGioTC.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
+                txtSoGioTC.Properties.Mask.UseMaskAsDisplayFormat = true;
             }
             catch { }
             //Commons.OSystems.SetDateEditFormat(datGioBD);
@@ -142,7 +150,7 @@ namespace Vs.TimeAttendance
                 XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgGioKTPhaiLonHonGioBD"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return false;
             }
-            if (Convert.ToDateTime(dNgay).DayOfWeek.ToString() != "Sunday" && Convert.ToDateTime(dNgay).DayOfWeek.ToString() != "Sunday")
+            if (Convert.ToDateTime(dNgay).DayOfWeek.ToString() != "Sunday" && Convert.ToDateTime(dNgay).DayOfWeek.ToString() != "Saturday")
             {
                 DataTable dt = new DataTable();
                 dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT NGAY FROM dbo.NGAY_NGHI_LE"));
@@ -266,7 +274,7 @@ namespace Vs.TimeAttendance
                             dtR["PHUT_AN_CA"] = txtPhutAnCa.Text == "" ? 0 : Convert.ToDouble(txtPhutAnCa.Text);
                             dtR["SO_GIO_TC"] = txtSoGioTC.Text == "" ? 0 : Convert.ToDouble(txtSoGioTC.Text);
                             dtCapNhat.Rows.Add(dtR);
-                            if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgThemDuLieuThanhCongBanCoMuonTiepTuc"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) return;
+                            //if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgThemDuLieuThanhCongBanCoMuonTiepTuc"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) return;
                             this.DialogResult = DialogResult.OK;
                             this.Close();
 
@@ -295,7 +303,37 @@ namespace Vs.TimeAttendance
                 datGioKT.DateTime = Convert.ToDateTime(cboCA.Properties.View.GetFocusedRowCellValue("GIO_KT"));
             }
             catch { }
-            
+
+        }
+
+        private void datGioBD_EditValueChanged(object sender, EventArgs e)
+        {
+            try
+            {
+               txtSoGioTC.Text = (Convert.ToDouble(((Convert.ToDouble(datGioKT.DateTime.Hour * 60) + Convert.ToDouble(datGioKT.DateTime.Minute)) - (Convert.ToDouble(datGioBD.DateTime.Hour * 60) + Convert.ToDouble(datGioBD.DateTime.Minute)) - (txtPhutAnCa.Text == "" ? 0 : Convert.ToDouble(txtPhutAnCa.Text)))) / 60).ToString();
+
+            }
+            catch { }
+        }
+
+        private void datGioKT_EditValueChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                txtSoGioTC.Text = (Convert.ToDouble(((Convert.ToDouble(datGioKT.DateTime.Hour * 60) + Convert.ToDouble(datGioKT.DateTime.Minute)) - (Convert.ToDouble(datGioBD.DateTime.Hour * 60) + Convert.ToDouble(datGioBD.DateTime.Minute)) - (txtPhutAnCa.Text == "" ? 0 : Convert.ToDouble(txtPhutAnCa.Text)))) / 60).ToString();
+
+            }
+            catch { }
+        }
+
+        private void txtPhutAnCa_EditValueChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                txtSoGioTC.Text = (Convert.ToDouble(((Convert.ToDouble(datGioKT.DateTime.Hour * 60) + Convert.ToDouble(datGioKT.DateTime.Minute)) - (Convert.ToDouble(datGioBD.DateTime.Hour * 60) + Convert.ToDouble(datGioBD.DateTime.Minute)) - (txtPhutAnCa.Text == "" ? 0 : Convert.ToDouble(txtPhutAnCa.Text)))) / 60).ToString();
+
+            }
+            catch { }
         }
     }
 }

@@ -655,10 +655,17 @@ namespace Vs.TimeAttendance
                                     adp.Fill(ds);
                                     dt = new DataTable();
                                     dt = ds.Tables[0].Copy();
+                                    if (Convert.ToInt32(dt.Rows[0][0]) > 1)
+                                    {
+                                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgBanDaChon2CaKhacDeThucHien"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    }
+
+                                    dt = new DataTable();
+                                    dt = ds.Tables[1].Copy();
                                     //dt = new DataTable();
                                     //dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spCapNhatNhomDKLT", sBTCapNhatNhom, sBTCongNhan, sBTLamThem, Commons.Modules.ObjSystems.ConvertDateTime(cboNgay.Text)));
                                     grdLamThem.DataSource = dt;
-                                    dt = ds.Tables[1].Copy();
+                                    dt = ds.Tables[2].Copy();
                                     grdCongNhan.DataSource = dt;
                                     grvCongNhan_FocusedRowChanged(null, null);
                                     Commons.Modules.ObjSystems.XoaTable(sBTCapNhatNhom);
@@ -738,7 +745,7 @@ namespace Vs.TimeAttendance
                         }
                 }
             }
-            catch
+            catch(Exception ex)
             {
                 this.Cursor = Cursors.Default;
             }
@@ -1582,7 +1589,7 @@ namespace Vs.TimeAttendance
             try
             {
                 //&& x["GIO_BD"].Equals(dr["GIO_BD"].ToString()
-                if (dt.AsEnumerable().Where(x => x.Field<string>(sCot).Trim().Equals(sDLKiem) && x["GIO_BD"].Equals(Convert.ToDateTime(dr["GIO_BD"])) && x["ID_CN"].Equals(Convert.ToInt32(dr["ID_CN"]))).CopyToDataTable().Rows.Count > 1)
+                if (dt.AsEnumerable().Where(x => x.Field<string>(sCot).Trim().Equals(sDLKiem) && x["GIO_BD"].Equals(Convert.ToDateTime(dr["GIO_BD"])) && x["ID_CN"].Equals(dr["ID_CN"])).CopyToDataTable().Rows.Count > 1)
                 {
                     sTenKTra = Commons.Modules.ObjLanguages.GetLanguage(sform, "msgTrungDLLuoi");
                     dr.SetColumnError(sCot, sTenKTra);
@@ -1617,6 +1624,17 @@ namespace Vs.TimeAttendance
                 string sID_CDLV = dr["ID_CDLV"].ToString();
                 if (!KiemTrungDL(grvLamThem, dtSource, dr, "ID_CDLV", sID_CDLV, "DANG_KY_LAM_GIO_LAM_THEM", "ID_CN", this.Name))
                 {
+                    try
+                    {
+                        DataTable dt1 = new DataTable();
+                        dt1 = (DataTable)grdCongNhan.DataSource;
+                        dt1.PrimaryKey = new DataColumn[] { dt1.Columns["ID_CN"] };
+                        int index = dt1.Rows.IndexOf(dt1.Rows.Find(dr["ID_CN"]));
+                        DataRow dr1 = dt1.Rows[index];
+                        dr1.SetColumnError("MS_CN", "Error");
+                    }
+                    catch (Exception ex) { }
+                    
                     errorCount++;
                 }
             }

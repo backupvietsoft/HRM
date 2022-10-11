@@ -15,6 +15,7 @@ using System.Reflection;
 using System.Windows.Forms;
 using Microsoft.Office.Interop.Excel;
 using DataTable = System.Data.DataTable;
+using DevExpress.Utils.Menu;
 
 namespace Vs.Payroll
 {
@@ -1279,5 +1280,83 @@ namespace Vs.Payroll
             }
         }
 
+        #region chuotphai
+        class RowInfo
+        {
+            public RowInfo(DevExpress.XtraGrid.Views.Grid.GridView view, int rowHandle)
+            {
+                this.RowHandle = rowHandle;
+                this.View = view;
+            }
+            public DevExpress.XtraGrid.Views.Grid.GridView View;
+            public int RowHandle;
+        }
+        public DXMenuItem MCreateMenuCapNhatAll(DevExpress.XtraGrid.Views.Grid.GridView view, int rowHandle)
+        {
+            string sStr = Commons.Modules.ObjLanguages.GetLanguage(Commons.Modules.ModuleName, this.Name, "lblCapNhatAll", Commons.Modules.TypeLanguage);
+            DXMenuItem menuThongTinNS = new DXMenuItem(sStr, new EventHandler(CapNhatAll));
+            menuThongTinNS.Tag = new RowInfo(view, rowHandle);
+            return menuThongTinNS;
+        }
+        public void CapNhatAll(object sender, EventArgs e)
+        {
+            try
+            {
+                string sCotCN = grvQT.FocusedColumn.FieldName.ToString();
+                try
+                {
+                    if (grvQT.GetFocusedRowCellValue(grvQT.FocusedColumn.FieldName).ToString() == "") return;
+                    string sBTCongNhan = "sBTCongNhan" + Commons.Modules.iIDUser;
+                    Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBTCongNhan, Commons.Modules.ObjSystems.ConvertDatatable(grvQT), "");
+
+                    DataTable dt = new DataTable();
+                    dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spUpdateChuotPhai_TiepNhan", sBTCongNhan, sCotCN, sCotCN.Substring(0, 3) == "NGA" ? Convert.ToDateTime(grvQT.GetFocusedRowCellValue(grvQT.FocusedColumn.FieldName)).ToString("MM/dd/yyyy") : grvQT.GetFocusedRowCellValue(grvQT.FocusedColumn.FieldName)));
+                    grdQT.DataSource = dt;
+                    Commons.Modules.ObjSystems.XoaTable(sCotCN);
+                }
+                catch (Exception ex)
+                {
+                    Commons.Modules.ObjSystems.XoaTable(sCotCN);
+                }
+            }
+            catch (Exception ex) { }
+        }
+        public DXMenuItem MCreateMenuCopy(DevExpress.XtraGrid.Views.Grid.GridView view, int rowHandle)
+        {
+            string sStr = Commons.Modules.ObjLanguages.GetLanguage(Commons.Modules.ModuleName, this.Name, "lblCopy", Commons.Modules.TypeLanguage);
+            DXMenuItem menuThongTinNS = new DXMenuItem(sStr, new EventHandler(Copy));
+            menuThongTinNS.Tag = new RowInfo(view, rowHandle);
+            return menuThongTinNS;
+        }
+        public void Copy(object sender, EventArgs e)
+        {
+            try
+            {
+            }
+            catch (Exception ex) { }
+        }
+        private void grvDSUngVien_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
+        {
+            try
+            {
+                DevExpress.XtraGrid.Views.Grid.GridView view = sender as DevExpress.XtraGrid.Views.Grid.GridView;
+                if (e.MenuType == DevExpress.XtraGrid.Views.Grid.GridMenuType.Row)
+                {
+                    int irow = e.HitInfo.RowHandle;
+                    e.Menu.Items.Clear();
+                    if (windowsUIButton.Buttons[0].Properties.Visible) return;
+                    DevExpress.Utils.Menu.DXMenuItem itemCapNhatAll = MCreateMenuCapNhatAll(view, irow);
+                    e.Menu.Items.Add(itemCapNhatAll);
+                    DevExpress.Utils.Menu.DXMenuItem itemCopy = MCreateMenuCopy(view, irow);
+                    e.Menu.Items.Add(itemCopy);
+                    //if (flag == false) return;
+                }
+            }
+            catch(Exception ex)
+            {
+            }
+        }
+
+        #endregion
     }
 }

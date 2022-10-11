@@ -21,12 +21,8 @@ namespace Vs.Payroll
 {
     public partial class frmImportTienThuongPhuCap : DevExpress.XtraEditors.XtraForm
     {
-        string fileName = "";
         Point ptChung;
-        string ChuoiKT = "";
         DataTable _table = new DataTable();
-        DataTable dtemp;
-        string sCheck = "";
         public DateTime dtThang;
         public int iID_DV;
 
@@ -226,6 +222,24 @@ namespace Vs.Payroll
                 {
                     errorCount++;
                 }
+                else
+                {
+                    try
+                    {
+                        if (Convert.ToInt32(sDonVi) != iID_DV)
+                        {
+                            errorCount++;
+                            dr.SetColumnError(grvData.Columns[col].FieldName.ToString(), Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgKhongCungDonViDangChon"));
+                            dr["XOA"] = 1;
+                        }
+                    }
+                    catch
+                    {
+                        errorCount++;
+                        dr.SetColumnError(grvData.Columns[col].FieldName.ToString(), Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgChuaTonTaiCSDL"));
+                        dr["XOA"] = 1;
+                    }
+                }
 
                 col = 1;
                 //Mã số nhân viên
@@ -240,23 +254,45 @@ namespace Vs.Payroll
                     {
                         errorCount++;
                     }
+                    else
+                    {
+                        try
+                        {
+                            if (Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT COUNT(*) FROM dbo.CONG_NHAN CN INNER JOIN dbo.[TO] T ON T.ID_TO = CN.ID_TO INNER JOIN dbo.XI_NGHIEP  XN ON XN.ID_XN = T.ID_XN WHERE CN.MS_CN = '" + sMaSo + "' AND XN.ID_DV = " + sDonVi + "")) == 0)
+                            {
+                                errorCount++;
+                                dr.SetColumnError(grvData.Columns[col].FieldName.ToString(), Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgCongNhanKhongThuocNhaMay"));
+                                dr["XOA"] = 1;
+                            }
+                        }
+                        catch
+                        {
+                            errorCount++;
+                            dr.SetColumnError(grvData.Columns[col].FieldName.ToString(), Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgChuaTonTaiCSDL"));
+                            dr["XOA"] = 1;
+                        }
+
+                    }
                 }
 
                 col = 5;
-                if (!Commons.Modules.MExcel.KiemDuLieuSo(grvData, dr, col, "Số tiền", 0, 0, true, this.Name))
+                if (!Commons.Modules.MExcel.KiemDuLieuSo(grvData, dr, col, "Số tiền", 0, 0, false, this.Name))
                 {
                     errorCount++;
                 }
                 col = 6;
-                string sTenLoaiThuong = dr[grvData.Columns[col].FieldName.ToString()].ToString();
-                if(sTenLoaiThuong != "0")
+                try
                 {
-                    if (!Commons.Modules.MExcel.KiemTonTai(grvData, dr, col, sTenLoaiThuong, "DM_LOAI_TIEN_THUONG", "ID", false, this.Name))
+                    string sTenLoaiThuong = dr[grvData.Columns[col].FieldName.ToString()].ToString();
+                    double dSoTien = Convert.ToDouble(dr[grvData.Columns[5].FieldName.ToString()]);
+                    if (!KiemTonTai(grvData, dr, col, sTenLoaiThuong, "DM_LOAI_TIEN_THUONG", "ID", true, this.Name, dSoTien))
                     {
                         errorCount++;
                     }
                 }
-                
+                catch { }
+
+               
             }
             this.Cursor = Cursors.Default;
             #endregion
@@ -276,21 +312,19 @@ namespace Vs.Payroll
                     SqlConnection conn = new SqlConnection(Commons.IConnections.CNStr);
                     if (conn.State != ConnectionState.Open) conn.Open();
                     SqlTransaction sTrans = conn.BeginTransaction();
+
                     string sTB = "LK_Tam" + Commons.Modules.UserName;
                     try
                     {
                         //tạo bảm tạm trên lưới
                         Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sTB, Commons.Modules.ObjSystems.ConvertDatatable(grdData), "");
-
-                        //string sSql = "INSERT INTO dbo.UNG_VIEN(MS_UV,HO,TEN,PHAI,NGAY_SINH,NOI_SINH,SO_CMND,NGAY_CAP,NOI_CAP,ID_TT_HN,HO_TEN_VC,NGHE_NGHIEP_VC,SO_CON,DT_DI_DONG,EMAIL,NGUOI_LIEN_HE,QUAN_HE,DT_NGUOI_LIEN_HE,ID_TP,ID_QUAN,ID_PX,THON_XOM,DIA_CHI_THUONG_TRU,ID_NTD,ID_CN,HINH_THUC_TUYEN,ID_TDVH,ID_KNLV,ID_DGTN,VI_TRI_TD_1,VI_TRI_TD_2,NGAY_HEN_DI_LAM,XAC_NHAN_DL,NGAY_NHAN_VIEC,XAC_NHAN_DTDH,DA_CHUYEN,GHI_CHU,DA_GIOI_THIEU,HUY_TUYEN_DUNG) SELECT [" + grvData.Columns[0].FieldName.ToString() + "],[" + grvData.Columns[1].FieldName.ToString() + "],[" + grvData.Columns[2].FieldName.ToString() + "],case [" + grvData.Columns[3].FieldName.ToString() + "] when 'Nam' then 1 else 0 end,CONVERT(datetime,[" + grvData.Columns[4].FieldName.ToString() + "],103),[" + grvData.Columns[5].FieldName.ToString() + "],[" + grvData.Columns[6].FieldName.ToString() + "],[" + grvData.Columns[7].FieldName.ToString() + "],[" + grvData.Columns[8].FieldName.ToString() + "],(SELECT TOP 1 ID_TT_HN FROM dbo.TT_HON_NHAN WHERE TEN_TT_HN = A.[" + grvData.Columns[9].FieldName.ToString() + "]),[" + grvData.Columns[10].FieldName.ToString() + "],[" + grvData.Columns[11].FieldName.ToString() + "],[" + grvData.Columns[12].FieldName.ToString() + "],[" + grvData.Columns[13].FieldName.ToString() + "],[" + grvData.Columns[14].FieldName.ToString() + "],[" + grvData.Columns[15].FieldName.ToString() + "],[" + grvData.Columns[16].FieldName.ToString() + "],[" + grvData.Columns[17].FieldName.ToString() + "],(SELECT TOP 1 ID_TP FROM dbo.THANH_PHO WHERE TEN_TP = A.[" + grvData.Columns[18].FieldName.ToString() + "]),(SELECT TOP 1 ID_QUAN FROM dbo.QUAN WHERE TEN_QUAN = A.[" + grvData.Columns[19].FieldName.ToString() + "]),(SELECT TOP 1 ID_PX FROM dbo.PHUONG_XA WHERE TEN_PX = A.[" + grvData.Columns[20].FieldName.ToString() + "]),[" + grvData.Columns[21].FieldName.ToString() + "],[" + grvData.Columns[22].FieldName.ToString() + "],(SELECT TOP 1 ID_NTD FROM dbo.NGUON_TUYEN_DUNG WHERE TEN_NTD= A.[" + grvData.Columns[23].FieldName.ToString() + "]),(SELECT TOP 1 ID_CN FROM dbo.CONG_NHAN WHERE HO +' '+TEN = A.[" + grvData.Columns[24].FieldName.ToString() + "]),(SELECT ID_HTT FROM dbo.HINH_THUC_TUYEN WHERE TEN_HT_TUYEN = A.[" + grvData.Columns[25].FieldName.ToString() + "]),(SELECT TOP 1 ID_TDVH FROM dbo.TRINH_DO_VAN_HOA WHERE TEN_TDVH = A.[" + grvData.Columns[26].FieldName.ToString() + "]),(SELECT TOP 1 ID_KNLV FROM dbo.KINH_NGHIEM_LV WHERE TEN_KNLV = A.[" + grvData.Columns[27].FieldName.ToString() + "]),(SELECT TOP 1 ID_DGTN FROM dbo.DANH_GIA_TAY_NGHE WHERE TEN_DGTN = A.[" + grvData.Columns[28].FieldName.ToString() + "]),(SELECT TOP 1 ID_LCV FROM dbo.LOAI_CONG_VIEC WHERE TEN_LCV = A.[" + grvData.Columns[29].FieldName.ToString() + "]),(SELECT TOP 1 ID_LCV FROM dbo.LOAI_CONG_VIEC WHERE TEN_LCV = A.[" + grvData.Columns[30].FieldName.ToString() + "]),CONVERT(datetime,[" + grvData.Columns[31].FieldName.ToString() + "],103),[" + grvData.Columns[32].FieldName.ToString() + "],CONVERT(datetime,[" + grvData.Columns[33].FieldName.ToString() + "],103),[" + grvData.Columns[34].FieldName.ToString() + "],[" + grvData.Columns[35].FieldName.ToString() + "],[" + grvData.Columns[36].FieldName.ToString() + "],[" + grvData.Columns[37].FieldName.ToString() + "],[" + grvData.Columns[38].FieldName.ToString() + "]  FROM " + sbt + " AS A";
-
-                        SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spSaveDM_TIEN_THUONG_THANG_CT_Import", sTB);
+                        SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spSaveDM_TIEN_THUONG_THANG_CT_Import", sTB, iID_DV, dtThang);
                         Commons.Modules.ObjSystems.XoaTable(sTB);
                         sTrans.Commit();
+                        Commons.Modules.ObjSystems.XoaTable(sTB);
                         XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgImportDuLieuThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                         //grdData.DataSource = dtSource.Clone();
-                        DataTable dt = new DataTable();
-                        dt = ((DataTable)grdData.DataSource).Clone();
+                        grdData.DataSource = dtSource.Clone();
                         cboChonSheet.Text = string.Empty;
                         btnFile.Text = string.Empty;
                     }
@@ -624,6 +658,41 @@ namespace Vs.Payroll
         //    {
         //    }
         //}
+        public bool KiemTonTai(GridView grvData, DataRow dr, int iCot, string sDLKiem, string tabName, string ColName, Boolean bKiemNull = true, string sform = "", double soTien = 0)
+        {
+            //null không kiểm
+            if (bKiemNull)
+            {//nếu null
+                if (string.IsNullOrEmpty(sDLKiem) && soTien != 0)
+                {
+                    dr.SetColumnError(grvData.Columns[iCot].FieldName.ToString(), Commons.Modules.ObjLanguages.GetLanguage(sform, "msgKhongduocTrong"));
+                    dr["XOA"] = 1;
+                    return false;
+                }
+                //khác null
+                {
+                    if (Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT COUNT(*) FROM dbo." + tabName + " WHERE " + ColName + " = N'" + sDLKiem + "'")) == 0)
+                    {
+                        dr.SetColumnError(grvData.Columns[iCot].FieldName.ToString(), Commons.Modules.ObjLanguages.GetLanguage(sform, "msgChuaTonTaiCSDL"));
+                        dr["XOA"] = 1;
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                if (!string.IsNullOrEmpty(sDLKiem))
+                {
+                    if (Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT COUNT(*) FROM dbo." + tabName + " WHERE " + ColName + " = N'" + sDLKiem + "'")) == 0)
+                    {
+                        dr.SetColumnError(grvData.Columns[iCot].FieldName.ToString(), Commons.Modules.ObjLanguages.GetLanguage(sform, "msgChuaTonTaiCSDL"));
+                        dr["XOA"] = 1;
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
 
         public bool KiemTrungDL(GridView grvData, DataTable dt, DataRow dr, int iCot, string sDLKiem, string tabName, string ColName, string sform)
         {
@@ -646,6 +715,16 @@ namespace Vs.Payroll
                 dr["XOA"] = 1;
                 return false;
             }
+        }
+
+        private void grvData_InvalidRowException(object sender, DevExpress.XtraGrid.Views.Base.InvalidRowExceptionEventArgs e)
+        {
+            e.ExceptionMode = DevExpress.XtraEditors.Controls.ExceptionMode.NoAction;
+        }
+
+        private void grvData_InvalidValueException(object sender, DevExpress.XtraEditors.Controls.InvalidValueExceptionEventArgs e)
+        {
+            e.ExceptionMode = DevExpress.XtraEditors.Controls.ExceptionMode.NoAction;
         }
     }
 }

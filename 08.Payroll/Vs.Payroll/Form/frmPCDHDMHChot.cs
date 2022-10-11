@@ -31,7 +31,7 @@ namespace Vs.Payroll
         {
             lblTD.Text = lblTD.Text + dThang.ToString("MM/yyyy");
             DataTable dt = new DataTable();
-            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "	SELECT DISTINCT	 [CHUYEN].[ID_CHUYEN], [CHUYEN].[TEN_CHUYEN] FROM dbo.CHUYEN	UNION SELECT	'-1',  ' < ALL > ' ORDER BY [TEN_CHUYEN]"));
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "	SELECT DISTINCT	T1.ID_TO ID_CHUYEN, T1.TEN_TO TEN_CHUYEN FROM dbo.[TO] T1 UNION SELECT	'-1',  ' < ALL > ' ORDER BY T1.TEN_TO"));
 
             Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboChuTH, dt, "ID_CHUYEN", "TEN_CHUYEN", "TEN_CHUYEN");
 
@@ -72,7 +72,7 @@ namespace Vs.Payroll
             Commons.Modules.ObjSystems.MLoadXtraGrid(grdHD, grvHD, dt, true, false, true, true, true, this.Name);
             Commons.Modules.ObjSystems.AddCombXtra("ID_CHUYEN", "TEN_CHUYEN", grvHD, ((DataTable)cboChuTH.Properties.DataSource).Copy());
             grvHD.Columns["ID_CHUYEN_SD"].Visible = false;
-            grvHD.Columns["ID_DHBORD"].Visible = false;
+            grvHD.Columns["ID_ORD"].Visible = false;
             grvHD.Columns["SL_CHOT"].DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             grvHD.Columns["SL_CHOT"].DisplayFormat.FormatString = Commons.Modules.sSoLeSL;
             
@@ -92,8 +92,7 @@ namespace Vs.Payroll
                 try
                 {
                     iHD = Convert.ToInt32(cboHD.EditValue.ToString());
-                    iMH = Convert.ToInt32(cboMH.EditValue.ToString());
-                    iOrd = Convert.ToInt32(cboOrd.EditValue.ToString());
+                    iOrd = Convert.ToInt32(cboMH.EditValue.ToString());
                     iChuyenSuDung = Convert.ToInt32(cboChuSD.EditValue.ToString());
                 }
                 catch { }
@@ -111,8 +110,7 @@ namespace Vs.Payroll
                 System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spPCDChotGetCbo", conn);
                 
                 cmd.Parameters.Add("@HoanThanh", SqlDbType.Int).Value = optHT.SelectedIndex;
-                cmd.Parameters.Add("@sDDH", SqlDbType.Int).Value = iHD;
-                cmd.Parameters.Add("@sMH", SqlDbType.Int).Value = iMH;
+                cmd.Parameters.Add("@sKH", SqlDbType.Int).Value = iHD;
                 cmd.Parameters.Add("@sOrd", SqlDbType.Int).Value = iOrd;
                 cmd.Parameters.Add("@sChuSD", SqlDbType.Int).Value = iChuyenSuDung;
                 cmd.Parameters.Add("@dThang", SqlDbType.DateTime, 50).Value = dThang;
@@ -127,28 +125,19 @@ namespace Vs.Payroll
                 dt = new DataTable();
                 dt = ds.Tables[0].Copy();
                 dt.TableName = "HOP_DONG";
-                if (iLoad == 0 ) Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboHD, dt, "ID_DHB", "SO_DHB", "SO_DHB");
+                if (iLoad == 0 ) Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboHD, dt, "ID_DT", "TEN_NGAN", "TEN_NGAN");
                 
 
                 dt = new DataTable();
                 dt = ds.Tables[1].Copy();
                 dt.TableName = "MA_HANG";
-                if (iLoad == 0 || iLoad ==1 ) Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboMH, dt, "ID_HH", "TEN_HH", "TEN_HH");
+                if (iLoad == 0 || iLoad ==1 ) Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboMH, dt, "ID_ORD", "TEN_HH", "TEN_HH");
 
-
-                DataTable dt1 = new DataTable();
-                dt1 = ds.Tables[2].Copy();
-                dt1.TableName = "TEN_ORDER";
-                if (iLoad == 0 || iLoad == 1 || iLoad == 2 ) Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboOrd, dt1, "ID_DHBORD", "ORDER_NUMBER", "ORDER_NUMBER");
-
-                
 
                 dt = new DataTable();
-                dt = ds.Tables[3].Copy();
+                dt = ds.Tables[2].Copy();
                 dt.TableName = "CHUYEN_SD";
-                if (iLoad == 0 || iLoad == 1 || iLoad == 2 || iLoad == 3) Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboChuSD, dt, "ID_CHUYEN_SD", "CHUYEN_SD", "CHUYEN_SD");
-                
-
+                if (iLoad == 0 || iLoad == 1 || iLoad == 2) Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboChuSD, dt, "ID_CHUYEN_SD", "CHUYEN_SD", "CHUYEN_SD");
 
             }
             catch

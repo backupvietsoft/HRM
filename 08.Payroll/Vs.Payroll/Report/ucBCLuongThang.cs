@@ -17,6 +17,7 @@ namespace Vs.Payroll
 {
     public partial class ucBCLuongThang : DevExpress.XtraEditors.XtraUserControl
     {
+        string sKyHieuDV = "";
         public ucBCLuongThang()
         {
             InitializeComponent();
@@ -52,15 +53,30 @@ namespace Vs.Payroll
 
         private void ucBCLuongThang_Load(object sender, EventArgs e)
         {
-            Commons.Modules.ObjSystems.LoadCboDonVi(LK_DON_VI);
-            Commons.Modules.ObjSystems.LoadCboXiNghiep(LK_DON_VI, LK_XI_NGHIEP);
-            Commons.Modules.ObjSystems.LoadCboTo(LK_DON_VI, LK_XI_NGHIEP, LK_TO);
-            LoadThang();
-            DataTable dt = new DataTable();
-            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboCACH_TINH_LUONG", Commons.Modules.UserName, Commons.Modules.TypeLanguage, -1));
-            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboCachTinhLuong, dt, "ID_CTL", "TEN", "TEN");
-            cboCachTinhLuong.EditValue = 2;
-            lk_NgayIn.EditValue = DateTime.Today;
+            try
+            {
+                Commons.Modules.ObjSystems.LoadCboDonVi(LK_DON_VI);
+                Commons.Modules.ObjSystems.LoadCboXiNghiep(LK_DON_VI, LK_XI_NGHIEP);
+                Commons.Modules.ObjSystems.LoadCboTo(LK_DON_VI, LK_XI_NGHIEP, LK_TO);
+                LoadThang();
+                DataTable dt = new DataTable();
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboCACH_TINH_LUONG", Commons.Modules.UserName, Commons.Modules.TypeLanguage, -1));
+                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboCachTinhLuong, dt, "ID_CTL", "TEN", "TEN");
+                cboCachTinhLuong.EditValue = 2;
+                lk_NgayIn.EditValue = DateTime.Today;
+
+                sKyHieuDV = Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString();
+                if (sKyHieuDV == "DM")
+                {
+                    rdo_ChonBaoCao.Properties.Items.RemoveAt(5);
+                    rdo_ChonBaoCao.Properties.Items.RemoveAt(4);
+                    rdo_ChonBaoCao.Properties.Items.RemoveAt(3);
+                    rdo_ChonBaoCao.Properties.Items.RemoveAt(2);
+                    rdo_ChonBaoCao.Properties.Items.RemoveAt(1);
+                }
+            }
+            catch { }
+           
         }
 
         private void grvThang_RowCellClick(object sender, RowCellClickEventArgs e)
@@ -102,9 +118,9 @@ namespace Vs.Payroll
                 case "Print":
                     {
                         frmViewReport frm = new frmViewReport();
-                        switch (rdo_ChonBaoCao.SelectedIndex)
+                        switch (rdo_ChonBaoCao.Properties.Items[rdo_ChonBaoCao.SelectedIndex].Tag)
                         {
-                            case 0:
+                            case "rdo_BangLuongThangSanXuat":
                                 {
                                     switch (Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString())
                                     {
@@ -122,7 +138,7 @@ namespace Vs.Payroll
 
                                 }
                                 break;
-                            case 1:
+                            case "rdo_BangLuongThangCBQLChuyen":
                                 {
 
 
@@ -319,7 +335,7 @@ namespace Vs.Payroll
 
                                 }
                                 break;
-                            case 2:
+                            case "rdo_BangLuongThangThoiGian":
                                 {
 
                                     string sThang = cboThang.EditValue.ToString();
@@ -515,7 +531,7 @@ namespace Vs.Payroll
 
                                 }
                                 break;
-                            case 3:
+                            case "rdo_BangLuongThangQC":
                                 {
 
                                     string sThang = cboThang.EditValue.ToString();
@@ -711,7 +727,7 @@ namespace Vs.Payroll
 
                                 }
                                 break;
-                            case 4:
+                            case "rdo_BangLuongThangToTruong":
                                 {
                                     string sThang = cboThang.EditValue.ToString();
 
@@ -905,7 +921,7 @@ namespace Vs.Payroll
                                     { }
                                 }
                                 break;
-                            case 5:
+                            case "rdo_BangTienLuongChuyenATM":
                                 {
                                     string sThang = cboThang.EditValue.ToString();
                                     DateTime dNgayIn = Convert.ToDateTime(lk_NgayIn.EditValue.ToString());
@@ -1199,7 +1215,7 @@ namespace Vs.Payroll
                                     { }
                                 }
                                 break;
-                            case 6:
+                            case "rdo_PhieuNhanLuong":
                                 {
                                     if (Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString() == "DM")
 
@@ -1221,7 +1237,7 @@ namespace Vs.Payroll
                                     }
                                 }
                                 break;
-                            case 7:
+                            case "rdo_BangLuongThangTongHop":
                                 {
                                     //try
                                     //{
@@ -1528,9 +1544,9 @@ namespace Vs.Payroll
 
         private void rdo_ChonBaoCao_SelectedIndexChanged(object sender, EventArgs e)
         {
-            switch (rdo_ChonBaoCao.SelectedIndex)
+            switch (rdo_ChonBaoCao.Properties.Items[rdo_ChonBaoCao.SelectedIndex].Tag)
             {
-                case 6:
+                case "rdo_PhieuNhanLuong":
                     cboCachTinhLuong.Enabled = true;
                     break;
                 default:
@@ -2026,9 +2042,9 @@ namespace Vs.Payroll
 
 
 
-                ws.Application.ActiveWindow.SplitColumn = 7;
-                ws.Application.ActiveWindow.SplitRow = 9;
-                ws.Application.ActiveWindow.FreezePanes = true;
+                //ws.Application.ActiveWindow.SplitColumn = 7;
+                //ws.Application.ActiveWindow.SplitRow = 9;
+                //ws.Application.ActiveWindow.FreezePanes = true;
 
                 ws.get_Range("A8", "" + lastColumn + "8").Font.Color = XlRgbColor.rgbBlue;
                 ws.get_Range("A9", "" + lastColumn + "9").Font.Color = XlRgbColor.rgbRed;

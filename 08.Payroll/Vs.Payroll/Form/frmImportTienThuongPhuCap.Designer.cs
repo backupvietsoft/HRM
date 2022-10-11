@@ -30,10 +30,10 @@ namespace Vs.Payroll
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions1 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions4 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmImportTienThuongPhuCap));
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions2 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions3 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions5 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions6 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
             this.windowsUIButton = new DevExpress.XtraBars.Docking2010.WindowsUIButtonPanel();
             this.searchControl = new DevExpress.XtraEditors.SearchControl();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
@@ -81,15 +81,15 @@ namespace Vs.Payroll
             this.windowsUIButton.AppearanceButton.Pressed.Options.UseFont = true;
             this.windowsUIButton.AppearanceButton.Pressed.Options.UseImage = true;
             this.windowsUIButton.AppearanceButton.Pressed.Options.UseTextOptions = true;
-            windowsUIButtonImageOptions1.ImageUri.Uri = "SaveAll";
-            windowsUIButtonImageOptions1.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("windowsUIButtonImageOptions1.SvgImage")));
-            windowsUIButtonImageOptions2.ImageUri.Uri = "snap/snapdeletelist";
-            windowsUIButtonImageOptions3.ImageUri.Uri = "richedit/clearheaderandfooter";
+            windowsUIButtonImageOptions4.ImageUri.Uri = "SaveAll";
+            windowsUIButtonImageOptions4.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("windowsUIButtonImageOptions4.SvgImage")));
+            windowsUIButtonImageOptions5.ImageUri.Uri = "snap/snapdeletelist";
+            windowsUIButtonImageOptions6.ImageUri.Uri = "richedit/clearheaderandfooter";
             this.windowsUIButton.Buttons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] {
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions1, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "import", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions4, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "import", -1, false),
             new DevExpress.XtraBars.Docking2010.WindowsUISeparator(),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions2, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "xoa", -1, false),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions3, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "thoat", -1, false)});
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions5, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "xoa", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions6, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "thoat", -1, false)});
             this.windowsUIButton.ContentAlignment = System.Drawing.ContentAlignment.MiddleRight;
             this.windowsUIButton.Controls.Add(this.searchControl);
             this.windowsUIButton.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -132,33 +132,33 @@ namespace Vs.Payroll
             // 
             // btnFile
             // 
-            this.btnFile.Location = new System.Drawing.Point(117, 36);
+            this.btnFile.Location = new System.Drawing.Point(104, 47);
             this.btnFile.Name = "btnFile";
             this.btnFile.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.btnFile.Size = new System.Drawing.Size(381, 28);
+            this.btnFile.Size = new System.Drawing.Size(393, 24);
             this.btnFile.StyleController = this.layoutControl1;
             this.btnFile.TabIndex = 0;
             this.btnFile.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.btnFile_ButtonClick);
             // 
             // cboChonSheet
             // 
-            this.cboChonSheet.Location = new System.Drawing.Point(605, 36);
+            this.cboChonSheet.Location = new System.Drawing.Point(581, 47);
             this.cboChonSheet.Name = "cboChonSheet";
             this.cboChonSheet.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cboChonSheet.Properties.NullText = "";
-            this.cboChonSheet.Size = new System.Drawing.Size(381, 28);
+            this.cboChonSheet.Size = new System.Drawing.Size(393, 24);
             this.cboChonSheet.StyleController = this.layoutControl1;
             this.cboChonSheet.TabIndex = 6;
             this.cboChonSheet.EditValueChanged += new System.EventHandler(this.cboChonSheet_EditValueChanged);
             // 
             // grdData
             // 
-            this.grdData.Location = new System.Drawing.Point(12, 102);
+            this.grdData.Location = new System.Drawing.Point(24, 122);
             this.grdData.MainView = this.grvData;
             this.grdData.Name = "grdData";
-            this.grdData.Size = new System.Drawing.Size(974, 387);
+            this.grdData.Size = new System.Drawing.Size(950, 355);
             this.grdData.TabIndex = 9;
             this.grdData.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grvData});
@@ -177,6 +177,8 @@ namespace Vs.Payroll
             this.grvData.OptionsSelection.ShowCheckBoxSelectorInColumnHeader = DevExpress.Utils.DefaultBoolean.True;
             this.grvData.OptionsView.ShowGroupPanel = false;
             this.grvData.ShownEditor += new System.EventHandler(this.grvData_ShownEditor);
+            this.grvData.InvalidRowException += new DevExpress.XtraGrid.Views.Base.InvalidRowExceptionEventHandler(this.grvData_InvalidRowException);
+            this.grvData.InvalidValueException += new DevExpress.XtraEditors.Controls.InvalidValueExceptionEventHandler(this.grvData_InvalidValueException);
             // 
             // Root
             // 
@@ -197,7 +199,7 @@ namespace Vs.Payroll
             this.lblChonSheet});
             this.groThongTinImport.Location = new System.Drawing.Point(0, 0);
             this.groThongTinImport.Name = "groThongTinImport";
-            this.groThongTinImport.Size = new System.Drawing.Size(988, 66);
+            this.groThongTinImport.Size = new System.Drawing.Size(978, 75);
             // 
             // lblChonFile
             // 
@@ -206,27 +208,27 @@ namespace Vs.Payroll
             this.lblChonFile.CustomizationFormText = "lblChonFile";
             this.lblChonFile.Location = new System.Drawing.Point(0, 0);
             this.lblChonFile.Name = "lblChonFile";
-            this.lblChonFile.Size = new System.Drawing.Size(488, 30);
-            this.lblChonFile.TextSize = new System.Drawing.Size(93, 21);
+            this.lblChonFile.Size = new System.Drawing.Size(477, 28);
+            this.lblChonFile.TextSize = new System.Drawing.Size(76, 17);
             // 
             // lblChonSheet
             // 
             this.lblChonSheet.Control = this.cboChonSheet;
             this.lblChonSheet.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
             this.lblChonSheet.CustomizationFormText = "lblChonSheet";
-            this.lblChonSheet.Location = new System.Drawing.Point(488, 0);
+            this.lblChonSheet.Location = new System.Drawing.Point(477, 0);
             this.lblChonSheet.Name = "lblChonSheet";
-            this.lblChonSheet.Size = new System.Drawing.Size(488, 30);
-            this.lblChonSheet.TextSize = new System.Drawing.Size(93, 21);
+            this.lblChonSheet.Size = new System.Drawing.Size(477, 28);
+            this.lblChonSheet.TextSize = new System.Drawing.Size(76, 17);
             // 
             // groDLImport
             // 
             this.groDLImport.CustomizationFormText = "groDLImport";
             this.groDLImport.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlItem2});
-            this.groDLImport.Location = new System.Drawing.Point(0, 66);
+            this.groDLImport.Location = new System.Drawing.Point(0, 75);
             this.groDLImport.Name = "groDLImport";
-            this.groDLImport.Size = new System.Drawing.Size(988, 425);
+            this.groDLImport.Size = new System.Drawing.Size(978, 406);
             // 
             // layoutControlItem2
             // 
@@ -235,7 +237,7 @@ namespace Vs.Payroll
             this.layoutControlItem2.CustomizationFormText = "layoutControlItem2";
             this.layoutControlItem2.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(976, 389);
+            this.layoutControlItem2.Size = new System.Drawing.Size(954, 359);
             this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem2.TextVisible = false;
             // 

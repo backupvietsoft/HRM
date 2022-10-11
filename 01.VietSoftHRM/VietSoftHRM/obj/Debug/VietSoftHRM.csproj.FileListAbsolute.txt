@@ -2409,8 +2409,7 @@ H:\Lamviec\Lamviec\HRM\01.HRM\01.VietSoftHRM\VietSoftHRM\obj\Debug\VietSoftHRM.c
 H:\Lamviec\Lamviec\HRM\01.HRM\01.VietSoftHRM\VietSoftHRM\obj\Debug\VietSoftHRM.csproj.CopyComplete
 H:\Lamviec\Lamviec\HRM\01.HRM\01.VietSoftHRM\VietSoftHRM\obj\Debug\VietSoftHRM.exe
 H:\Lamviec\Lamviec\HRM\01.HRM\01.VietSoftHRM\VietSoftHRM\obj\Debug\VietSoftHRM.pdb
-F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\DevExpress.Utils.v22.1.dll
-F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\DevExpress.Xpo.v22.1.xml
+F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\DevExpress.Dashboard.v22.1.Core.dll
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Template\TemplateGiamLaoDong.xlsx
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Template\TemplateTaiNanLaoDong.xlsx
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Template\TemplateTangLaoDong.xlsx
@@ -2422,7 +2421,6 @@ F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Commons.dll
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\DevExpress.BonusSkins.v22.1.dll
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\DevExpress.Charts.v22.1.Core.dll
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\DevExpress.CodeParser.v22.1.dll
-F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\DevExpress.Dashboard.v22.1.Core.dll
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\DevExpress.Dashboard.v22.1.Win.dll
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\DevExpress.Data.Desktop.v22.1.dll
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\DevExpress.Data.v22.1.dll
@@ -2443,6 +2441,7 @@ F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\DevExpress.Sparkline.v22.1.Core.d
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\DevExpress.SpellChecker.v22.1.Core.dll
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\DevExpress.Spreadsheet.v22.1.Core.dll
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\DevExpress.TreeMap.v22.1.Core.dll
+F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\DevExpress.Utils.v22.1.dll
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\DevExpress.Utils.v22.1.UI.dll
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\DevExpress.Xpo.v22.1.dll
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\DevExpress.XtraBars.v22.1.dll
@@ -2517,6 +2516,7 @@ F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\DevExpress.TreeMap.v22.1.Core.xml
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\DevExpress.Data.Desktop.v22.1.xml
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\DevExpress.Utils.v22.1.xml
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\DevExpress.Utils.v22.1.UI.xml
+F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\DevExpress.Xpo.v22.1.xml
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\DevExpress.XtraBars.v22.1.xml
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\DevExpress.XtraCharts.v22.1.xml
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\DevExpress.XtraCharts.v22.1.UI.xml

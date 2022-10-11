@@ -185,6 +185,16 @@ namespace VietSoftHRM
                         gtgc.Dock = DockStyle.Fill;
                         break;
                     }
+                case "mnuTinhDiemThang":
+                    {
+                        Vs.TimeAttendance.ucDiemChuyenCanThang tmp = new Vs.TimeAttendance.ucDiemChuyenCanThang();
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(tmp);
+                        Commons.Modules.ObjSystems.HideWaitForm();
+                        tmp.Dock = DockStyle.Fill;
+                        break;
+                    }
+
                 case "mnuQuyDinhPhuCap":
                     {
                         ucQuyDinhPhuCap gtgc = new ucQuyDinhPhuCap();

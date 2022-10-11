@@ -1872,8 +1872,6 @@ H:\Lamviec\Lamviec\HRM\01.HRM\03.Vs.Category\Vs.Category\obj\Debug\Vs.Category.c
 H:\Lamviec\Lamviec\HRM\01.HRM\03.Vs.Category\Vs.Category\obj\Debug\Vs.Category.csproj.CopyComplete
 H:\Lamviec\Lamviec\HRM\01.HRM\03.Vs.Category\Vs.Category\obj\Debug\Vs.Category.dll
 H:\Lamviec\Lamviec\HRM\01.HRM\03.Vs.Category\Vs.Category\obj\Debug\Vs.Category.pdb
-F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\DevExpress.XtraBars.v22.1.dll
-F:\01.HRM\03.Vs.Category\Vs.Category\obj\Debug\Vs.Category.Properties.Resources.resources
 F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\Vs.Category.dll.config
 F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\Vs.Category.dll
 F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\Vs.Category.pdb
@@ -1887,6 +1885,7 @@ F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\DevExpress.Printing.v22.1.Core.dl
 F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\DevExpress.Sparkline.v22.1.Core.dll
 F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\DevExpress.TreeMap.v22.1.Core.dll
 F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\DevExpress.Utils.v22.1.dll
+F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\DevExpress.XtraBars.v22.1.dll
 F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\DevExpress.XtraEditors.v22.1.dll
 F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\DevExpress.XtraGrid.v22.1.dll
 F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\DevExpress.XtraLayout.v22.1.dll
@@ -1954,11 +1953,7 @@ F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\DevExpress.XtraTreeMap.v22.1.xml
 F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\DevExpress.XtraReports.v22.1.xml
 F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\Newtonsoft.Json.xml
 F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\DevExpress.XtraRichEdit.v22.1.xml
-F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\VS.Report.pdb
-F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\VS.Report.dll.config
 F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\DevExpress.Xpo.v22.1.xml
-F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\Vs.HRM.pdb
-F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\Vs.HRM.dll.config
 F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\DevExpress.RichEdit.v22.1.Core.xml
 F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\DevExpress.Pdf.v22.1.Core.xml
 F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\DevExpress.Pdf.v22.1.Drawing.xml
@@ -2019,6 +2014,7 @@ F:\01.HRM\03.Vs.Category\Vs.Category\obj\Debug\Vs.Category.frmEditXI_NGHIEP.reso
 F:\01.HRM\03.Vs.Category\Vs.Category\obj\Debug\Vs.Category.frmEditQUAN.resources
 F:\01.HRM\03.Vs.Category\Vs.Category\obj\Debug\Vs.Category.frmEditMAU_BAO_CAO.resources
 F:\01.HRM\03.Vs.Category\Vs.Category\obj\Debug\Vs.Category.frmXetDuyet_Confirm.resources
+F:\01.HRM\03.Vs.Category\Vs.Category\obj\Debug\Vs.Category.Properties.Resources.resources
 F:\01.HRM\03.Vs.Category\Vs.Category\obj\Debug\Vs.Category.frmDuyetQuyDinh.resources
 F:\01.HRM\03.Vs.Category\Vs.Category\obj\Debug\Vs.Category.frmXetDuyet.resources
 F:\01.HRM\03.Vs.Category\Vs.Category\obj\Debug\Vs.Category.ucDuyet.resources

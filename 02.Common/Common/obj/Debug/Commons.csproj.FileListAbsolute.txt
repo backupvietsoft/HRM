@@ -986,6 +986,7 @@ H:\Lamviec\Lamviec\HRM\01.HRM\02.Common\Common\obj\Debug\Commons.csproj.CoreComp
 H:\Lamviec\Lamviec\HRM\01.HRM\02.Common\Common\obj\Debug\Commons.csproj.CopyComplete
 H:\Lamviec\Lamviec\HRM\01.HRM\02.Common\Common\obj\Debug\Commons.dll
 H:\Lamviec\Lamviec\HRM\01.HRM\02.Common\Common\obj\Debug\Commons.pdb
+F:\01.HRM\02.Common\Common\bin\Debug\DevExpress.CodeParser.v22.1.dll
 F:\01.HRM\02.Common\Common\bin\Debug\Commons.dll.config
 F:\01.HRM\02.Common\Common\bin\Debug\Commons.dll
 F:\01.HRM\02.Common\Common\bin\Debug\Commons.pdb
@@ -1021,7 +1022,6 @@ F:\01.HRM\02.Common\Common\bin\Debug\DevExpress.PivotGrid.v22.1.Core.dll
 F:\01.HRM\02.Common\Common\bin\Debug\DevExpress.XtraGauges.v22.1.Core.dll
 F:\01.HRM\02.Common\Common\bin\Debug\DevExpress.RichEdit.v22.1.Core.dll
 F:\01.HRM\02.Common\Common\bin\Debug\DevExpress.Office.v22.1.Core.dll
-F:\01.HRM\02.Common\Common\bin\Debug\DevExpress.CodeParser.v22.1.dll
 F:\01.HRM\02.Common\Common\bin\Debug\DevExpress.Data.v22.1.xml
 F:\01.HRM\02.Common\Common\bin\Debug\DevExpress.Data.Desktop.v22.1.xml
 F:\01.HRM\02.Common\Common\bin\Debug\DevExpress.Utils.v22.1.xml

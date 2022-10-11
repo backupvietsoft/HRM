@@ -1924,7 +1924,9 @@ namespace Commons
                     {
                         if (btnWinUIB.Buttons[i].Properties.Tag.ToString() != null)
                         {
-                            btnWinUIB.Buttons[i].Properties.Caption = "";
+                            btnWinUIB.Size = new Size(btnWinUIB.Size.Width, 50);
+                            btnWinUIB.AllowGlyphSkinning = false;
+                            btnWinUIB.Buttons[i].Properties.Caption = GetNN(dtTmp, btnWinUIB.Buttons[i].Properties.Tag.ToString(), frm.Name);
                             btnWinUIB.Buttons[i].Properties.ToolTip = GetNN(dtTmp, btnWinUIB.Buttons[i].Properties.Tag.ToString(), frm.Name);
                         }
                     }
@@ -1956,7 +1958,9 @@ namespace Commons
                     {
                         if (btnWinUIB.Buttons[i].Properties.Tag.ToString() != null)
                         {
-                            btnWinUIB.Buttons[i].Properties.Caption = "";
+                            btnWinUIB.Size = new Size(btnWinUIB.Size.Width, 50);
+                            btnWinUIB.AllowGlyphSkinning = false;
+                            btnWinUIB.Buttons[i].Properties.Caption = GetNN(dtTmp, btnWinUIB.Buttons[i].Properties.Tag.ToString(), frm.Name);
                             btnWinUIB.Buttons[i].Properties.ToolTip = GetNN(dtTmp, btnWinUIB.Buttons[i].Properties.Tag.ToString(), frm.Name);
                         }
                     }
@@ -2253,7 +2257,9 @@ namespace Commons
                     {
                         if (btnWinUIB.Buttons[i].Properties.Tag.ToString() != null)
                         {
-                            btnWinUIB.Buttons[i].Properties.Caption = "";
+                            btnWinUIB.Size = new Size(btnWinUIB.Size.Width, 50);
+                            btnWinUIB.AllowGlyphSkinning = false;
+                            btnWinUIB.Buttons[i].Properties.Caption = GetNN(dtTmp, btnWinUIB.Buttons[i].Properties.Tag.ToString(), frm.Name);
                             btnWinUIB.Buttons[i].Properties.ToolTip = GetNN(dtTmp, btnWinUIB.Buttons[i].Properties.Tag.ToString(), frm.Name);
                         }
                     }
@@ -2286,7 +2292,9 @@ namespace Commons
                     {
                         if (btnWinUIB.Buttons[i].Properties.Tag.ToString() != null)
                         {
-                            btnWinUIB.Buttons[i].Properties.Caption = "";
+                            btnWinUIB.Size = new Size(btnWinUIB.Size.Width, 50);
+                            btnWinUIB.AllowGlyphSkinning = false;
+                            btnWinUIB.Buttons[i].Properties.Caption = GetNN(dtTmp, btnWinUIB.Buttons[i].Properties.Tag.ToString(), frm.Name);
                             btnWinUIB.Buttons[i].Properties.ToolTip = GetNN(dtTmp, btnWinUIB.Buttons[i].Properties.Tag.ToString(), frm.Name);
                         }
                     }
@@ -2369,7 +2377,9 @@ namespace Commons
                     {
                         if (btnWinUIB.Buttons[i].Properties.Tag.ToString() != null)
                         {
-                            btnWinUIB.Buttons[i].Properties.Caption = "";
+                            btnWinUIB.Size = new Size(btnWinUIB.Size.Width, 50);
+                            btnWinUIB.AllowGlyphSkinning = false;
+                            btnWinUIB.Buttons[i].Properties.Caption = GetNN(dtTmp, btnWinUIB.Buttons[i].Properties.Tag.ToString(), frm.Name);
                             btnWinUIB.Buttons[i].Properties.ToolTip = GetNN(dtTmp, btnWinUIB.Buttons[i].Properties.Tag.ToString(), frm.Name);
                         }
                     }
@@ -5000,6 +5010,15 @@ namespace Commons
             dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboDanhGiaTayNge", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll));
             return dt;
         }
+
+        public DataTable DataNguoiDanhGia(Int64 iYCTD, Int64 iVTTD, Int64 iDV, Int64 iXN,int active)
+        {
+            //ID_NGUOI_DGTN,TEN_NGUOI_DGTN
+            DataTable dt = new DataTable();
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboNguoiDanhGia", Commons.Modules.UserName,iYCTD,iVTTD,iDV,iXN, active));
+            return dt;
+        }
+
         public DataTable DataDanhNoiDungDT(bool coAll)
         {
             //ID_DGTN,TEN_DGTN
@@ -5070,6 +5089,15 @@ namespace Commons
             dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboLoaiTrinhDo", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll));
             return dt;
         }
+
+        public DataTable DataTayNghe(bool coAll)
+        {
+            //ID_TAY_NGHE,TEN_TAY_NGHE
+            DataTable dt = new DataTable();
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboTayNghe", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll));
+            return dt;
+        }
+
         public DataTable DataChuyenMon(bool coAll)
         {
             DataTable dt = new DataTable();

@@ -37,15 +37,16 @@ namespace Vs.Recruit
             Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboDV, Commons.Modules.ObjSystems.DataDonVi(false), "ID_DV", "TEN_DV", "TEN_DV");
             Commons.Modules.ObjSystems.ThayDoiNN(this, new List<LayoutControlGroup> { Root }, windowsUIButton);
             Commons.Modules.sLoad = "";
-            LoadgrvDinhBien(-1);
+            LoadgrvDinhBien(-1,"");
         }
-        private void LoadgrvDinhBien(Int64 iID_LCV)
+        private void LoadgrvDinhBien(Int64 iID_LCV,string KieuLoad)
         {
             try
             {
                 if (Commons.Modules.sLoad == "0Load") return;
                 DataTable dt = new DataTable();
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetListDinhBien", datNam.DateTime.Year, cboDV.EditValue, Commons.Modules.UserName, Commons.Modules.TypeLanguage, ""));
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetListDinhBien", datNam.DateTime.Year, cboDV.EditValue, Commons.Modules.UserName, Commons.Modules.TypeLanguage, KieuLoad));
+                dt.Columns["DINH_BIEN"].ReadOnly = false;
                 dt.PrimaryKey = new DataColumn[] { dt.Columns["ID_LCV"] };
                 if (grdDinhBien.DataSource == null)
                 {
@@ -151,26 +152,24 @@ namespace Vs.Recruit
                     {
                         enableButon(false);
                         grvDinhBien.Columns["ID_LCV"].OptionsColumn.ReadOnly = false;
-                        if (grvDinhBien.RowCount == 0)
-                        {
-                            try
-                            {
-                                string sSql = "SELECT T2.ID_LCV,CONVERT(FLOAT,0) SL_CHUYEN,CONVERT(FLOAT,0) DINH_BIEN,CONVERT(FLOAT,0) TONG_SO FROM dbo.XI_NGHIEP T1 INNER JOIN LOAI_CONG_VIEC_XI_NGHIEP T2 ON T2.ID_XN = T1.ID_XN INNER JOIN  dbo.LOAI_CONG_VIEC T3 ON T3.ID_LCV = T2.ID_LCV WHERE(T2.ID_XN = " + Convert.ToInt32(cboDV.EditValue) + ") ORDER BY TEN_LCV";
-                                DataTable dt = new DataTable();
-                                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSql));
-                                dt.Columns["DINH_BIEN"].ReadOnly = false;
-                                grdDinhBien.DataSource = dt;
+                        //if (grvDinhBien.RowCount == 0)
+                        //{
+                        //    try
+                        //    {
+                                LoadgrvDinhBien(Convert.ToInt64(grvDinhBien.GetFocusedRowCellValue("ID_LCV")), "THEM");
+                                //dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetListDinhBien", datNam.DateTime.Year, cboDV.EditValue, Commons.Modules.UserName, Commons.Modules.TypeLanguage, KieuLoad));
+                                //dt.Columns["DINH_BIEN"].ReadOnly = false;
                                 grvDinhBien.OptionsBehavior.Editable = true;
                                 grvDinhBien.Columns["ID_LCV"].OptionsColumn.ReadOnly = true;
-                            }
-                            catch
-                            {
-                            }
-                        }
-                        else
-                        {
-                            Commons.Modules.ObjSystems.AddnewRow(grvDinhBien, true);
-                        }
+                        //    }
+                        //    catch
+                        //    {
+                        //    }
+                        //}
+                        //else
+                        //{
+                        //    Commons.Modules.ObjSystems.AddnewRow(grvDinhBien, true);
+                        //}
                         break;
                     }
                 case "sua":
@@ -211,13 +210,13 @@ namespace Vs.Recruit
                         }
                         enableButon(true);
                         Commons.Modules.ObjSystems.DeleteAddRow(grvDinhBien);
-                        LoadgrvDinhBien(Convert.ToInt64(grvDinhBien.GetFocusedRowCellValue("ID_LCV")));
+                        LoadgrvDinhBien(Convert.ToInt64(grvDinhBien.GetFocusedRowCellValue("ID_LCV")),"");
                         break;
                     }
                 case "khongluu":
                     {
                         enableButon(true);
-                        LoadgrvDinhBien(Convert.ToInt64(grvDinhBien.GetFocusedRowCellValue("ID_LCV")));
+                        LoadgrvDinhBien(Convert.ToInt64(grvDinhBien.GetFocusedRowCellValue("ID_LCV")),"");
                         Commons.Modules.ObjSystems.DeleteAddRow(grvDinhBien);
                         break;
                     }
@@ -271,11 +270,17 @@ namespace Vs.Recruit
                 int fontSizeTieuDe = 18;
                 int fontSizeNoiDung = 11;
 
+                int DONG = 0;
+
+                DONG = Commons.Modules.MExcel.TaoTTChung(oSheet, 1, 2, 1, 8, 0, 0);
+                
+                DONG = 4;
 
                 string lastColumn = string.Empty;
                 lastColumn = CharacterIncrement(dtBCThang.Columns.Count - 2);
 
-                Excel.Range row1_TieuDe = oSheet.get_Range("A1", "E1");
+
+                Excel.Range row1_TieuDe = oSheet.get_Range("A"+ (DONG + 1).ToString() +"", "E" + (DONG + 1).ToString() + "");
                 row1_TieuDe.Merge();
                 row1_TieuDe.Font.Bold = true;
                 row1_TieuDe.Value2 = "CÔNG TY CỔ PHẦN MAY DUY MINH";
@@ -285,19 +290,41 @@ namespace Vs.Recruit
                 row1_TieuDe.Cells.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
                 row1_TieuDe.Cells.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
 
-                Range row2_TieuDe = oSheet.get_Range("A2", "E3");
+                oXL.Visible = true;
+
+                Range row2_TieuDe = oSheet.get_Range("A" + (DONG + 2).ToString() + "", "E" + (DONG + 3).ToString() + "");
                 row2_TieuDe.Merge();
                 row2_TieuDe.Font.Size = fontSizeTieuDe;
                 row2_TieuDe.Font.Name = fontName;
                 row2_TieuDe.Font.Bold = true;
-                row2_TieuDe.Value2 = "BẢNG ĐỊNH BIÊN LAO ĐỘNG NĂM " + datNam.Text + " " + cboDV.Text.ToUpper() + "";
+                row2_TieuDe.Value2 = "BẢNG ĐỊNH BIÊN LAO ĐỘNG";
                 row2_TieuDe.WrapText = false;
                 row2_TieuDe.Cells.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
                 row2_TieuDe.Cells.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
 
+                Range rowSubHeader1 = oSheet.get_Range("A" + (DONG + 4).ToString() + "", "B" + (DONG + 4).ToString() + "");
+                rowSubHeader1.Merge();
+                rowSubHeader1.Font.Name = fontName;
+                rowSubHeader1.Font.Bold = true;
+                rowSubHeader1.Value2 = "Năm :" + datNam.Text;
+                rowSubHeader1.WrapText = false;
+                rowSubHeader1.Cells.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
+                rowSubHeader1.Cells.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
 
 
-                Range row5_TieuDe_Format = oSheet.get_Range("A4", "E4"); //27 + 31
+                Range rowSubHeader2 = oSheet.get_Range("C" + (DONG + 4).ToString() + "", "E" + (DONG + 4).ToString() + "");
+                rowSubHeader2.Merge();
+                rowSubHeader2.Font.Name = fontName;
+                rowSubHeader2.Font.Bold = true;
+                rowSubHeader2.Value2 = "Nhà máy :" + cboDV.Text;
+                rowSubHeader2.WrapText = false;
+                rowSubHeader2.Cells.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
+                rowSubHeader2.Cells.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
+
+
+                DONG = 6;
+
+                Range row5_TieuDe_Format = oSheet.get_Range("A" + (DONG + 4).ToString() + "", "E" + (DONG + 4).ToString() + ""); //27 + 31
                 row5_TieuDe_Format.Font.Size = fontSizeNoiDung;
                 row5_TieuDe_Format.Font.Name = fontName;
                 row5_TieuDe_Format.Font.Bold = true;
@@ -306,24 +333,24 @@ namespace Vs.Recruit
                 row5_TieuDe_Format.Cells.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
                 row5_TieuDe_Format.Cells.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
 
-                Range row5_TieuDe_Stt = oSheet.get_Range("A4");
+                Range row5_TieuDe_Stt = oSheet.get_Range("A" + (DONG + 4).ToString() + "");
                 row5_TieuDe_Stt.Value2 = "Stt";
-                row5_TieuDe_Stt.ColumnWidth = 5;
+                row5_TieuDe_Stt.ColumnWidth = 9;
 
-                Range row5_TieuDe_MaSo = oSheet.get_Range("B4");
+                Range row5_TieuDe_MaSo = oSheet.get_Range("B" + (DONG + 4).ToString() + "");
                 row5_TieuDe_MaSo.Value2 = "TỔNG SỐ LAO ĐỘNG";
                 row5_TieuDe_MaSo.ColumnWidth = 32;
                 row5_TieuDe_MaSo.Font.Color = Color.FromArgb(255, 0, 0);
 
-                Range row6_TieuDe_MaSo = oSheet.get_Range("C4");
+                Range row6_TieuDe_MaSo = oSheet.get_Range("C" + (DONG + 4).ToString() + "");
                 row6_TieuDe_MaSo.Value2 = "Định biên";
                 row6_TieuDe_MaSo.ColumnWidth = 12;
 
-                Range row5_TieuDe_HoTen = oSheet.get_Range("D4");
+                Range row5_TieuDe_HoTen = oSheet.get_Range("D" + (DONG + 4).ToString() + "");
                 row5_TieuDe_HoTen.Value2 = "Số lượng hiện tại";
                 row5_TieuDe_HoTen.ColumnWidth = 15;
 
-                Range row6_TieuDe_HoTen = oSheet.get_Range("E4");
+                Range row6_TieuDe_HoTen = oSheet.get_Range("E" + (DONG + 4).ToString() + "");
                 row6_TieuDe_HoTen.Value2 = "Thừa thiếu";
                 row6_TieuDe_HoTen.ColumnWidth = 20;
 
@@ -335,7 +362,7 @@ namespace Vs.Recruit
                 int rowBD_XN = 0; // Row để insert dòng xí nghiệp
                 int rowCONG = 0; // Row để insert dòng tổng
                 //int rowBD_XN = 7; // Row bắt đầu đổ dữ liệu group XI_NGHIEP
-                int rowBD = 5;
+                int rowBD = 5 + DONG;
                 string[] TEN_CV = dtBCThang.AsEnumerable().Select(r => r.Field<string>("TEN_CV")).Distinct().ToArray();
                 string chanVongDau = "Chan";// chặn lần đầu để lần đầu tiên sẽ load data từ cột số 7 trở đi, các vòng lặp tiếp theo bỏ chặn
                 DataTable dt_temp = new DataTable();
@@ -431,13 +458,13 @@ namespace Vs.Recruit
                 //formatRange.NumberFormat = "#,##0.00;(#,##0.00); ; ";
                 ////formatRange.TextToColumns(Type.Missing, Excel.XlTextParsingType.xlDelimited, Excel.XlTextQualifier.xlTextQualifierDoubleQuote);
                 ////Kẻ khung toàn bộ
-                formatRange = oSheet.get_Range("A5", lastColumn + rowCnt.ToString());
+                formatRange = oSheet.get_Range("A" + (DONG + 5).ToString() + "", lastColumn + rowCnt.ToString());
                 formatRange.Font.Name = fontName;
                 formatRange.Font.Size = fontSizeNoiDung;
-                BorderAround(oSheet.get_Range("A4", lastColumn + rowCnt.ToString()));
+                BorderAround(oSheet.get_Range("A" + (DONG + 4).ToString() + "", lastColumn + rowCnt.ToString()));
                 // filter
-                oSheet.Application.ActiveWindow.SplitRow = 4;
-                oSheet.Application.ActiveWindow.FreezePanes = true;
+                //oSheet.Application.ActiveWindow.SplitRow = 4;
+                //oSheet.Application.ActiveWindow.FreezePanes = true;
                 oXL.Visible = true;
                 oXL.UserControl = true;
 
@@ -504,7 +531,7 @@ namespace Vs.Recruit
         }
         private void datNam_EditValueChanged(object sender, EventArgs e)
         {
-            LoadgrvDinhBien(-1);
+            LoadgrvDinhBien(-1,"");
         }
         private void XoaDinhBien()
         {

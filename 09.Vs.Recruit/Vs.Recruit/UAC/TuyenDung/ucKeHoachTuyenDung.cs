@@ -6,6 +6,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
@@ -311,8 +312,12 @@ namespace Vs.Recruit
                 foreach (DevExpress.XtraGrid.Columns.GridColumn col in grvTuan.Columns)
                 {
                     col.Caption = col.FieldName.Substring(5, col.FieldName.Length - 5);
+                    if (Convert.ToInt32(col.FieldName.Substring(5, 2)) < tuanHT)
+                    {
+                        col.OptionsColumn.AllowEdit = false;
+                        col.AppearanceHeader.BackColor = Color.Transparent;
+                    }
                 }
-
                 try
                 {
                     SLDATA = 0;
@@ -381,6 +386,7 @@ namespace Vs.Recruit
                             if (Convert.ToInt32(col.FieldName.Substring(5, 2)) < tuanHT)
                             {
                                 col.OptionsColumn.AllowEdit = false;
+                                col.AppearanceHeader.BackColor = Color.PaleVioletRed;
                             }
                         }
                         enableButon(false);
@@ -410,6 +416,7 @@ namespace Vs.Recruit
                         int n = grvVTYC.FocusedRowHandle;
                         if (!SaveData()) return;
                         LoadgrdVTYC();
+                        LoadgrdKHTuan();
                         //grvVTYC.FocusedRowHandle = n;
                         //grvVTYC.SelectRow(n);
                         Commons.Modules.ObjSystems.DeleteAddRow(grvTuan);
@@ -419,6 +426,7 @@ namespace Vs.Recruit
                 case "khongluu":
                     {
                         LoadgrdVTYC();
+                        LoadgrdKHTuan();
                         enableButon(true);
                         Commons.Modules.ObjSystems.DeleteAddRow(grvTuan);
                         break;
@@ -536,7 +544,7 @@ namespace Vs.Recruit
                     if (selectedRowHandle >= 0)
                     {
 
-                        SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "UPDATE dbo.YCTD_VI_TRI_TUYEN SET ID_TT_VT = 7 WHERE ID_YCTD = " + grvVTYC.GetRowCellValue(selectedRowHandle,"ID_YCTD") + " AND ID_VTTD = " + grvVTYC.GetRowCellValue(selectedRowHandle, "ID_VTTD") + "");
+                        SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "UPDATE dbo.YCTD_VI_TRI_TUYEN SET ID_TT_VT = 7 WHERE ID_YCTD = " + grvVTYC.GetRowCellValue(selectedRowHandle, "ID_YCTD") + " AND ID_VTTD = " + grvVTYC.GetRowCellValue(selectedRowHandle, "ID_VTTD") + "");
                     }
                 }
                 LoadgrdVTYC();

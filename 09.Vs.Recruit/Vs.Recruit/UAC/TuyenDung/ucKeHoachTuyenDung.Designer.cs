@@ -225,9 +225,8 @@
             this.spinTuTuan.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.spinTuTuan.Properties.EditValueChangedFiringMode = DevExpress.XtraEditors.Controls.EditValueChangedFiringMode.Default;
             this.spinTuTuan.Properties.MaskSettings.Set("mask", "N0");
-            this.spinTuTuan.Properties.MaxLength = 53;
             this.spinTuTuan.Properties.MaxValue = new decimal(new int[] {
-            1,
+            53,
             0,
             0,
             0});
@@ -514,7 +513,7 @@
             this.mnuCapNhapMucUuTienToolStripMenuItem,
             this.mnuHuyTuyenDungToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(211, 70);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(211, 48);
             // 
             // mnuCapNhapMucUuTienToolStripMenuItem
             // 

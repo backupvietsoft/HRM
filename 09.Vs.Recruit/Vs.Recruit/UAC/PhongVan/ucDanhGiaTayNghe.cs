@@ -8,14 +8,8 @@ using DevExpress.XtraLayout;
 using Microsoft.ApplicationBlocks.Data;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Vs.Report;
 
 namespace Vs.Recruit
 {
@@ -47,13 +41,15 @@ namespace Vs.Recruit
                 datDNgay.EditValue = secondDateTime;
                 //datTNgay.EditValue = DateTime.Now;
                 LoadCbo();
+
+
                 Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_VTTD, Commons.Modules.ObjSystems.DataViTri(Convert.ToInt64(cboYCTD.EditValue), false), "ID_VTTD", "TEN_VTTD", "TEN_VTTD");
                 LoadData();
                 Commons.Modules.sLoad = "";
                 EnabelButton(true);
 
             }
-            catch (Exception ex)
+            catch
             {
             }
         }
@@ -90,7 +86,6 @@ namespace Vs.Recruit
                     grvDSUngVien.Columns["THUONG_TAY_NGHE"].DisplayFormat.FormatType = FormatType.Numeric;
                     grvDSUngVien.Columns["THUONG_TAY_NGHE"].DisplayFormat.FormatString = "n0";
 
-
                     DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit cboDGTN = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
                     cboDGTN.NullText = "";
                     cboDGTN.ValueMember = "ID_DGTN";
@@ -107,6 +102,41 @@ namespace Vs.Recruit
                     grvDSUngVien.Columns["ID_DGTN"].ColumnEdit = cboDGTN;
                     cboDGTN.BeforePopup += cboDGTN_BeforePopup;
                     cboDGTN.EditValueChanged += cboDGTN_EditValueChanged;
+
+
+                    DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit cboNDGTN1 = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
+                    cboNDGTN1.NullText = "";
+                    cboNDGTN1.ValueMember = "ID_NGUOI_DGTN";
+                    cboNDGTN1.DisplayMember = "TEN_NGUOI_DGTN";
+                    //ID_NGUOI_DGTN,TEN_NGUOI_DGTN
+                    cboNDGTN1.DataSource = Commons.Modules.ObjSystems.DataNguoiDanhGia(-1,-1,-1,-1,-1);
+                    cboNDGTN1.Columns.Clear();
+                    cboNDGTN1.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID_NGUOI_DGTN"));
+                    cboNDGTN1.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("TEN_NGUOI_DGTN"));
+                    cboNDGTN1.Columns["TEN_NGUOI_DGTN"].Caption = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "TEN_NGUOI_DGTN");
+                    cboNDGTN1.AppearanceDropDownHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+                    cboNDGTN1.AppearanceDropDownHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+                    cboNDGTN1.Columns["ID_NGUOI_DGTN"].Visible = false;
+                    grvDSUngVien.Columns["NGUOI_DANH_GIA_1"].ColumnEdit = cboNDGTN1;
+                    cboNDGTN1.BeforePopup += CboDGTN_BeforePopup1;
+                    //cboDGTN.EditValueChanged += cboDGTN_EditValueChanged;
+
+                    DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit cboNDGTN2 = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
+                    cboNDGTN2.NullText = "";
+                    cboNDGTN2.ValueMember = "ID_NGUOI_DGTN";
+                    cboNDGTN2.DisplayMember = "TEN_NGUOI_DGTN";
+                    //ID_NGUOI_DGTN,TEN_NGUOI_DGTN
+                    cboNDGTN2.DataSource = Commons.Modules.ObjSystems.DataNguoiDanhGia(-1, -1, -1, -1, -1);
+                    cboNDGTN2.Columns.Clear();
+                    cboNDGTN2.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID_NGUOI_DGTN"));
+                    cboNDGTN2.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("TEN_NGUOI_DGTN"));
+                    cboNDGTN2.Columns["TEN_NGUOI_DGTN"].Caption = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "TEN_NGUOI_DGTN");
+                    cboNDGTN2.AppearanceDropDownHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+                    cboNDGTN2.AppearanceDropDownHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+                    cboNDGTN2.Columns["ID_NGUOI_DGTN"].Visible = false;
+                    grvDSUngVien.Columns["NGUOI_DANH_GIA_2"].ColumnEdit = cboNDGTN2;
+                    cboNDGTN2.BeforePopup += CboDGTN_BeforePopup2;
+
 
                     DataTable dtCN = new DataTable();
                     dtCN.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboCongNhan", Commons.Modules.UserName, Commons.Modules.TypeLanguage, 3));
@@ -125,9 +155,79 @@ namespace Vs.Recruit
                 {
                     grvDSUngVien.Columns["CHON"].Visible = true;
                 }
+                try
+                {
+                    int LoaiCN = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT ID_LT FROM dbo.LOAI_CONG_VIEC WHERE ID_LCV = " + cboID_VTTD.EditValue + ""));
+                    if(LoaiCN ==1)
+                    {//may
+                        grvDSUngVien.Columns["NGUOI_DANH_GIA_2"].Visible = true;
+                    }    
+                    else
+                    {
+                        grvDSUngVien.Columns["NGUOI_DANH_GIA_2"].Visible = false;
+                    }    
+                }
+                catch
+                {
+                    grvDSUngVien.Columns["NGUOI_DANH_GIA_2"].Visible = false;
+                }
             }
             catch (Exception ex) { }
         }
+
+        private void CboDGTN_BeforePopup1(object sender, EventArgs e)
+        {
+            try
+            {
+                LookUpEdit lookUp = sender as LookUpEdit;
+                    DataTable dt =  Commons.Modules.ObjSystems.DataNguoiDanhGia(Convert.ToInt64(cboYCTD.EditValue),Convert.ToInt64(cboID_VTTD.EditValue),-1,-1,1);
+                lookUp.Properties.DataSource = dt;
+                string sdkien = "( 1 = 1 )";
+                try
+                {
+                    sdkien = "(ID_NGUOI_DGTN NOT IN (" +(grvDSUngVien.GetFocusedRowCellValue("NGUOI_DANH_GIA_2").ToString() == "-1" ? 0 : grvDSUngVien.GetFocusedRowCellValue("NGUOI_DANH_GIA_2")) +"))";
+                    dt.DefaultView.RowFilter = sdkien;
+                }
+                catch
+                {
+                    try
+                    {
+                        dt.DefaultView.RowFilter = "";
+                    }
+                    catch { }
+                }
+
+            }
+            catch { }
+        }
+
+        private void CboDGTN_BeforePopup2(object sender, EventArgs e)
+        {
+            try
+            {
+                LookUpEdit lookUp = sender as LookUpEdit;
+                DataTable dt = Commons.Modules.ObjSystems.DataNguoiDanhGia(Convert.ToInt64(cboYCTD.EditValue), Convert.ToInt64(cboID_VTTD.EditValue), -1, -1, 1);
+                lookUp.Properties.DataSource = dt;
+                string sdkien = "( 1 = 1 )";
+                try
+                {
+                    sdkien = "(ID_NGUOI_DGTN NOT IN (" + (grvDSUngVien.GetFocusedRowCellValue("NGUOI_DANH_GIA_1").ToString() == "-1" ? 0 : grvDSUngVien.GetFocusedRowCellValue("NGUOI_DANH_GIA_1")) + "))";
+                    dt.DefaultView.RowFilter = sdkien;
+                }
+                catch
+                {
+                    try
+                    {
+                        dt.DefaultView.RowFilter = "";
+                    }
+                    catch { }
+                }
+
+            }
+            catch { }
+        }
+
+
         private void cboDGTN_EditValueChanged(object sender, EventArgs e)
         {
             try
@@ -200,6 +300,8 @@ namespace Vs.Recruit
 
             datTNgay.Properties.ReadOnly = !visible;
             datDNgay.Properties.ReadOnly = !visible;
+            cboYCTD.Properties.ReadOnly = !visible;
+            cboID_VTTD.Properties.ReadOnly = !visible;
 
             grvDSUngVien.OptionsBehavior.Editable = !visible;
         }
@@ -272,6 +374,8 @@ namespace Vs.Recruit
                 cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
                 cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
                 cmd.Parameters.Add("@iLoai", SqlDbType.Int).Value = 2;
+                cmd.Parameters.Add("@iCot1", SqlDbType.BigInt).Value = cboYCTD.EditValue;
+                cmd.Parameters.Add("@iCot2", SqlDbType.BigInt).Value = cboID_VTTD.EditValue;
                 cmd.Parameters.Add("@sBT", SqlDbType.NVarChar).Value = sBT;
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.ExecuteNonQuery();
@@ -441,7 +545,9 @@ namespace Vs.Recruit
         {
             if (Commons.Modules.sLoad == "0Load") return;
             Commons.Modules.sLoad = "0Load";
-            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_VTTD, Commons.Modules.ObjSystems.DataViTri(Convert.ToInt64(cboYCTD.EditValue), false), "ID_VTTD", "TEN_VTTD", "TEN_VTTD");
+            DataTable dt = new DataTable();
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT B.ID_LCV ID_VTTD,CASE " + Commons.Modules.UserName + " WHEN 0 THEN B.TEN_LCV WHEN 1 THEN B.TEN_LCV_A ELSE B.TEN_LCV_H END TEN_VTTD FROM dbo.YCTD_VI_TRI_TUYEN A INNER JOIN dbo.LOAI_CONG_VIEC B ON B.ID_LCV = A.ID_VTTD WHERE B.ID_LCV = 206 AND A.ID_YCTD = " + cboYCTD.EditValue + " ORDER BY B.TEN_LCV"));
+            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_VTTD, dt, "ID_VTTD", "TEN_VTTD", "TEN_VTTD", true, true);
             LoadData();
             grvDSUngVien_FocusedRowChanged(null, null);
             Commons.Modules.sLoad = "";

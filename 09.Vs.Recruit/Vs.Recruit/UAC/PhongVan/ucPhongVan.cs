@@ -611,7 +611,7 @@ namespace Vs.Recruit
             try
             {
                 DataTable dt = new DataTable();
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT DISTINCT T1.ID_CN, T1.MS_CN, T1.HO +' '+ T1.TEN AS TEN_CN FROM dbo.CONG_NHAN T1 INNER JOIN dbo.XI_NGHIEP_NGUOI_TUYEN_DUNG T2 ON T2.ID_CN = T1.ID_CN WHERE T2.ID_XN = (SELECT TOP 1 ID_XN FROM dbo.KE_HOACH_PHONG_VAN WHERE SO_KHPV ='" + cboSoKeHoach.EditValue + "')  AND T2.PHONG_VAN = 1 ORDER BY T1.HO + ' ' + T1.TEN"));
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT DISTINCT T1.ID_CN, T1.MS_CN, T1.HO +' '+ T1.TEN AS TEN_CN FROM dbo.CONG_NHAN T1 INNER JOIN dbo.XI_NGHIEP_NGUOI_TUYEN_DUNG T2 ON T2.ID_CN = T1.ID_CN WHERE T2.ID_XN = (SELECT TOP 1 ID_XN FROM dbo.KE_HOACH_PHONG_VAN WHERE ID_KHPV =" + cboSoKeHoach.EditValue + ")  AND T2.PHONG_VAN = 1 ORDER BY T1.HO + ' ' + T1.TEN"));
                 cboNguoiPV1.Properties.DataSource = dt;
                 cboNguoiPV1.EditValue = -99;
             }

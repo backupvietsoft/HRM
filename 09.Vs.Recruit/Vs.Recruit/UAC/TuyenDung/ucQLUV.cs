@@ -5,6 +5,7 @@ using DevExpress.XtraEditors;
 using Microsoft.ApplicationBlocks.Data;
 using DevExpress.XtraBars.Docking2010;
 using DevExpress.XtraBars.Navigation;
+using DevExpress.Spreadsheet;
 using System.Threading;
 using Spire.Xls;
 using DataTable = System.Data.DataTable;
@@ -13,6 +14,10 @@ using Worksheet = Spire.Xls.Worksheet;
 using System.Drawing;
 using System.Collections.Generic;
 using DevExpress.XtraLayout;
+using DevExpress.Utils;
+using DevExpress.XtraGrid.Views.Grid.ViewInfo;
+using System.Linq;
+using OfficeOpenXml;
 
 namespace Vs.Recruit
 {
@@ -86,8 +91,8 @@ namespace Vs.Recruit
                         string sPath = "";
                         sPath = Commons.Modules.MExcel.SaveFiles("Excel Files (*.xls;)|*.xls;|Excel Files (*.Xlsx;)|*.Xlsx;|" + "All Files (*.*)|*.*");
                         if (sPath == "") return;
-                        Workbook book = new Workbook();
-                        Worksheet sheet = book.Worksheets[0];
+                        //Workbook book = new Workbook();
+                        //Worksheet sheet = book.Worksheets[0];
                         ExportUngVien(sPath);
                         break;
                     }
@@ -108,17 +113,30 @@ namespace Vs.Recruit
             }
         }
 
+        private void InSheet(Workbook book,DataTable dt,string Names)
+        {
+            book.Worksheets.Add(Names);
+            Worksheet sheet = book.Worksheets[Names];
+                sheet.InsertDataTable(dt, true, 1, 1);
+            for (int i = 0; i < dt.Columns.Count; i++)
+            {
+                sheet.Range[1, i + 1].Text = Commons.Modules.ObjLanguages.GetLanguage(this.Name, dt.Columns[i].ColumnName);
+                sheet.Range[1, i + 1].Style.Font.IsBold = true;
+          
+            }
+        }
+
         private void ExportUngVien(string sPath)
         {
             try
             {
                 DataTable dtTmp = new DataTable();
-                string SQL = "SELECT TOP 0 MS_UV AS  N'Mã số',HO AS N'Họ',TEN AS N'Tên',PHAI AS N'Giới tính',NGAY_SINH AS N'Ngày sinh',NOI_SINH AS N'Nơi sinh',SO_CMND AS N'CMND',NGAY_CAP AS N'Ngày cấp',NOI_CAP AS N'Nơi cấp',CONVERT(NVARCHAR(250), ID_TT_HN) AS N'Tình trạng HN',HO_TEN_VC AS N'Họ tên V/C',NGHE_NGHIEP_VC AS N'Nghề nghiệp V/C',SO_CON AS N'Số con',DT_DI_DONG AS N'Điện thoại',EMAIL AS N'Email',NGUOI_LIEN_HE AS N'Người liên hệ',QUAN_HE AS N'Quan hệ',DT_NGUOI_LIEN_HE AS N'ĐT Người liên hệ',CONVERT(NVARCHAR(250), ID_TP) AS N'Thành phố',CONVERT(NVARCHAR(250), ID_QUAN) AS N'Quận',CONVERT(NVARCHAR(250), ID_PX) AS N'Phường xã',THON_XOM AS N'Thôn xóm',DIA_CHI_THUONG_TRU AS N'Địa chỉ',CONVERT(NVARCHAR(250), ID_NTD) AS N'Nguồn tuyển',CONVERT(NVARCHAR(250), ID_CN) AS N'Người giới thiệu',CONVERT(NVARCHAR(250), TIENG_ANH) AS N'TIENG_ANH',CONVERT(NVARCHAR(250), TIENG_TRUNG) AS N'TIENG_TRUNG',CONVERT(NVARCHAR(250), TIENG_KHAC) AS N'TIENG_KHAC',CONVERT(NVARCHAR(250), ID_DGTN) AS N'Đánh giá tây nghề',CONVERT(NVARCHAR(250), VI_TRI_TD_1) AS N'Vị trí tuyển 1',CONVERT(NVARCHAR(250), VI_TRI_TD_2) AS N'Vị trí tuyển 2',NGAY_HEN_DI_LAM AS N'Ngày hẹn đi làm',XAC_NHAN_DL AS N'Xác nhận đi làm',NGAY_NHAN_VIEC AS N'Ngày nhận việc',XAC_NHAN_DTDH AS N'Xác nhận đào tạo định hướng',DA_CHUYEN AS N'Chuyển sang nhân sự',GHI_CHU AS N'Ghi chú',DA_GIOI_THIEU AS N'Đã giới thiệu',HUY_TUYEN_DUNG AS N'Hủy tuyển dụng'FROM dbo.UNG_VIEN";
+                string SQL = "SELECT TOP 0 MS_UV AS  N'Mã số',HO + ' '+ TEN AS N'Họ tên',PHAI AS N'Giới tính',NGAY_SINH AS N'Ngày sinh',NOI_SINH AS N'Nơi sinh',SO_CMND AS N'CMND',NGAY_CAP AS N'Ngày cấp',NOI_CAP AS N'Nơi cấp',CONVERT(NVARCHAR(250), '') N'Trình độ học vấn',DT_DI_DONG AS N'Điện thoại',EMAIL AS N'Email',NGUOI_LIEN_HE AS N'Người liên hệ',QUAN_HE AS N'Quan hệ',DT_NGUOI_LIEN_HE AS N'ĐT Người liên hệ',CONVERT(NVARCHAR(250), ID_TP) AS N'Thành phố',CONVERT(NVARCHAR(250), ID_QUAN) AS N'Quận',CONVERT(NVARCHAR(250), ID_PX) AS N'Phường xã',THON_XOM AS N'Thôn xóm',DIA_CHI_THUONG_TRU AS N'Địa chỉ',CONVERT(NVARCHAR(250), '') AS N'Nguồn tuyển',CONVERT(NVARCHAR(250), ID_CN) AS N'Người giới thiệu',CONVERT(NVARCHAR(250), TAY_NGHE) AS N'tay nghề',CONVERT(NVARCHAR(250), VI_TRI_TD_1) AS N'Vị trí tuyển 1',CONVERT(NVARCHAR(250), VI_TRI_TD_2) AS N'Vị trí tuyển 2',CONVERT(NVARCHAR(250), ID_VI_TRI_PHU_HOP) AS N'Vị trí phù hợp',CONG_DOAN_CHU_YEU AS N'Công đoạn chủ yếu' FROM dbo.UNG_VIEN";
 
-                 dtTmp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, SQL));
+                dtTmp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, SQL));
 
                 //export datatable to excel
-                Workbook book = new Workbook();
+                Workbook book = new  Workbook();
                 Worksheet sheet1 = book.Worksheets[0];
                 sheet1.Name = "01-Danh sách ứng viên";
                 sheet1.DefaultColumnWidth = 20;
@@ -127,41 +145,51 @@ namespace Vs.Recruit
 
                 sheet1.Range[2, 1].Text = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.AUTO_CREATE_SO_UNG_VIEN()").ToString();
 
-                sheet1.Range[1, 1, 1, 39].Style.WrapText = true;
-                sheet1.Range[1, 1, 1, 39].Style.VerticalAlignment = VerticalAlignType.Center;
-                sheet1.Range[1, 1, 1, 39].Style.HorizontalAlignment = HorizontalAlignType.Center;
-                sheet1.Range[1, 1, 1, 39].Style.Font.IsBold = true;
+                sheet1.Range[1, 1, 1, 26].Style.WrapText = true;
+                sheet1.Range[1, 1, 1, 26].Style.VerticalAlignment = VerticalAlignType.Center;
+                sheet1.Range[1, 1, 1, 26].Style.HorizontalAlignment = HorizontalAlignType.Center;
+                sheet1.Range[1, 1, 1, 26].Style.Font.IsBold = true;
 
                 sheet1.Range[1, 1].Style.Font.Color = Color.Red;
                 sheet1.Range[1, 2].Style.Font.Color = Color.Red;
-                sheet1.Range[1, 3].Style.Font.Color = Color.Red;
-                sheet1.Range[1, 30].Style.Font.Color = Color.Red;
+                sheet1.Range[1, 4].Style.Font.Color = Color.Red;
+                sheet1.Range[1, 25].Style.Font.Color = Color.Red;
 
 
                 sheet1.Range[1, 1].Comment.RichText.Text = "Mã ứng viên sẽ được đặt theo cấu trúc MUV-000001 trong đó(MUV-: cố định,còn 000001 sẽ được tăng thêm 1 khi có một ứng viên mới).";
-                sheet1.Range[1, 4].Comment.RichText.Text = Commons.Modules.ObjSystems.ConvertCombototext(Commons.Modules.ObjSystems.DataPhai());
-                sheet1.Range[1, 10].Comment.RichText.Text = Commons.Modules.ObjSystems.ConvertCombototext(Commons.Modules.ObjSystems.DataTinHTrangHN(false));
-                sheet1.Range[1, 19].Comment.RichText.Text = "Nhập đúng cấp tỉnh/thành phố trong danh mục.";
-                sheet1.Range[1, 20].Comment.RichText.Text = "Nhập đúng cấp quận/huyện trong danh mục.";
-                sheet1.Range[1, 21].Comment.RichText.Text = "Nhập đúng cấp phường/xã trong danh mục.";
-                sheet1.Range[1, 24].Comment.RichText.Text = Commons.Modules.ObjSystems.ConvertCombototext(Commons.Modules.ObjSystems.DataNguonTD(false));
-                sheet1.Range[1, 25].Comment.RichText.Text = "Họ và tên nhân viên trong công ty giới thiệu.";
 
-                sheet1.Range[1, 26].Comment.RichText.Text = Commons.Modules.ObjSystems.ConvertCombototext(Commons.Modules.ObjSystems.DataMucDoTieng(false));
-                sheet1.Range[1, 27].Comment.RichText.Text = Commons.Modules.ObjSystems.ConvertCombototext(Commons.Modules.ObjSystems.DataMucDoTieng(false));
-                //sheet1.Range[1, 28].Comment.RichText.Text = Commons.Modules.ObjSystems.ConvertCombototext(Commons.Modules.ObjSystems.DataKinhNghiemLV(false));
-                sheet1.Range[1, 29].Comment.RichText.Text = Commons.Modules.ObjSystems.ConvertCombototext(Commons.Modules.ObjSystems.DataDanhGiaTayNghe(false));
 
-                sheet1.Range[1, 30].Comment.RichText.Text = Commons.Modules.ObjSystems.ConvertCombototext(Commons.Modules.ObjSystems.DataLoaiCV(false,Convert.ToInt32(-1)));
-                sheet1.Range[1, 31].Comment.RichText.Text = Commons.Modules.ObjSystems.ConvertCombototext(Commons.Modules.ObjSystems.DataLoaiCV(false, Convert.ToInt32(-1)));
 
-                sheet1.Range[1, 33].Comment.RichText.Text = "Nếu có thì nhập:1\nkhông thì nhập:0";
-                sheet1.Range[1, 35].Comment.RichText.Text = "Nếu có thì nhập:1\nkhông thì nhập:0";
-                sheet1.Range[1, 36].Comment.RichText.Text = "Nếu có thì nhập:1\nkhông thì nhập:0";
-                sheet1.Range[1, 38].Comment.RichText.Text = "Nếu có thì nhập:1\nkhông thì nhập:0";
-                sheet1.Range[1, 39].Comment.RichText.Text = "Nếu có thì nhập:1\nkhông thì nhập:0";
+                //2 giới tính
+                sheet1.Range[2, 3, 50, 3].DataValidation.Values = new string[] { "Nam", "Nữ"};
+                //9 trình độ văn hóa
+                sheet1.Range[2, 9, 50, 9].DataValidation.Values = Commons.Modules.ObjSystems.DataTDVH(-1, false).AsEnumerable().Select(x => x.Field<string>("TEN_TDVH")).ToArray();
+                //15 thành phố
+                //sheet1.Range[2, 15, 50, 15].DataValidation.Values = Commons.Modules.ObjSystems.DataThanhPho(-1, false).AsEnumerable().Select(x => x.Field<string>("TEN_TP")).ToArray();
+                //20 nguồn tuyển  
+                sheet1.Range[2, 20, 50, 20].DataValidation.Values = Commons.Modules.ObjSystems.DataNguonTD(false).AsEnumerable().Select(x => x.Field<string>("TEN_NTD")).ToArray();
+                //21 người giới thiệu
+                //sheet1.Range[2, 21, 50, 21].DataValidation.Values = Commons.Modules.ObjSystems.DataCongNhan(false).AsEnumerable().Select(x => x.Field<string>("TEN_CN")).ToArray();
+                //22 tay nghề
+                sheet1.Range[2, 22, 50, 22].DataValidation.Values = Commons.Modules.ObjSystems.DataTayNghe(false).AsEnumerable().Select(x => x.Field<string>("TEN_TAY_NGHE")).ToArray();
+                //25  vị trí công việc
+                //sheet1.Range[2, 25, 50, 25].DataValidation.Values = Commons.Modules.ObjSystems.DataLoaiCV(false).AsEnumerable().Select(x => x.Field<string>("TEN_LCV")).ToArray();
 
-                sheet1.FreezePanes(2,4);
+
+                sheet1.Range[2, 9, 50, 9].DataValidation.IsSuppressDropDownArrow = false;
+                sheet1.Range[2, 3, 50, 3].DataValidation.IsSuppressDropDownArrow = false;
+                sheet1.Range[2, 20, 50, 20].DataValidation.IsSuppressDropDownArrow = false;
+                sheet1.Range[2, 22, 50, 22].DataValidation.IsSuppressDropDownArrow = false;
+
+
+
+                sheet1.Range[1, 25].Comment.RichText.Text = Commons.Modules.ObjSystems.ConvertCombototext(Commons.Modules.ObjSystems.DataLoaiCV(false, Convert.ToInt32(-1)));
+                InSheet(book, Commons.Modules.ObjSystems.DataLoaiCV(false, Convert.ToInt32(-1)), "Danh sách loại công việc");
+                //sheet1.Range[2, 25, 50, 25].DataValidation.DataRange = book.Worksheets["Danh sách loại công việc"].Range["B2:B15"];
+
+                sheet1.InsertDataTable(dtTmp, true, 1, 1);
+
+                sheet1.FreezePanes(2, 4);
                 //Tên trường Từ năm	Đến năm	Xếp loại
 
                 Worksheet sheet2 = book.Worksheets[1];
@@ -169,17 +197,24 @@ namespace Vs.Recruit
                 sheet2.DefaultColumnWidth = 20;
 
                 sheet2.Range[1, 1].Text = "Mã số";
-                sheet2.Range[1, 2].Text = "Tên bằng";
+                sheet2.Range[1, 2].Text = "Chuyên ngành";
                 sheet2.Range[1, 3].Text = "Tên trường";
                 sheet2.Range[1, 4].Text = "Từ năm";
                 sheet2.Range[1, 5].Text = "Đến năm";
                 sheet2.Range[1, 6].Text = "Xếp loại";
+
                 sheet2.Range[1, 6].Comment.RichText.Text = Commons.Modules.ObjSystems.ConvertCombototext(Commons.Modules.ObjSystems.DataXepLoai(false));
+
+                sheet2.Range[2, 6, 50, 6].DataValidation.Values = Commons.Modules.ObjSystems.DataXepLoai(false).AsEnumerable().Select(x => x.Field<string>("TEN_XL")).ToArray();
+                sheet2.Range[2, 6, 50, 6].DataValidation.IsSuppressDropDownArrow = false;
+
 
                 sheet2.Range[1, 1, 1, 6].Style.WrapText = true;
                 sheet2.Range[1, 1, 1, 6].Style.VerticalAlignment = VerticalAlignType.Center;
                 sheet2.Range[1, 1, 1, 6].Style.HorizontalAlignment = HorizontalAlignType.Center;
                 sheet2.Range[1, 1, 1, 6].Style.Font.IsBold = true;
+
+                sheet2.Range[1, 1].Style.Font.Color = Color.Red;
 
 
                 Worksheet sheet3 = book.Worksheets[2];
@@ -192,12 +227,18 @@ namespace Vs.Recruit
                 sheet3.Range[1, 4].Text = "Mức lương";
                 sheet3.Range[1, 5].Text = "Từ năm";
                 sheet3.Range[1, 6].Text = "Đến năm";
-                sheet3.Range[1, 7].Text = "Lý do nghĩ";
+                sheet3.Range[1, 7].Text = "Số năm kinh nghiệm";
+                sheet3.Range[1, 8].Text = "Lý do nghĩ";
 
-                sheet3.Range[1, 1, 1, 7].Style.WrapText = true;
-                sheet3.Range[1, 1, 1, 7].Style.VerticalAlignment = VerticalAlignType.Center;
-                sheet3.Range[1, 1, 1, 7].Style.HorizontalAlignment = HorizontalAlignType.Center;
-                sheet3.Range[1, 1, 1, 7].Style.Font.IsBold = true;
+              
+                
+
+                sheet3.Range[1, 1].Style.Font.Color = Color.Red;
+
+                sheet3.Range[1, 1, 1, 8].Style.WrapText = true;
+                sheet3.Range[1, 1, 1, 8].Style.VerticalAlignment = VerticalAlignType.Center;
+                sheet3.Range[1, 1, 1, 8].Style.HorizontalAlignment = HorizontalAlignType.Center;
+                sheet3.Range[1, 1, 1, 8].Style.Font.IsBold = true;
 
                 //Worksheet sheet4 = book.Worksheets.Add("04-Thông tin khác");
                 //sheet4.DefaultColumnWidth = 20;
@@ -216,10 +257,12 @@ namespace Vs.Recruit
                 book.SaveToFile(sPath);
                 System.Diagnostics.Process.Start(sPath);
             }
-            catch
+            catch(Exception ex)
             {
             }
         }
+
+
 
         private void LoadCombo()
         {
@@ -242,7 +285,7 @@ namespace Vs.Recruit
             {
                 if (Commons.Modules.sLoad == "0Load") return;
                 DataTable dtTmp = new DataTable();
-                dtTmp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetListUngVien", Commons.Modules.UserName, Commons.Modules.TypeLanguage, cboTinhTrangUV.EditValue, cboLoaiCNV.EditValue,cboLocTheo.EditValue,datTuNgay.EditValue, datDenNgay.EditValue));
+                dtTmp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetListUngVien", Commons.Modules.UserName, Commons.Modules.TypeLanguage, cboTinhTrangUV.EditValue, cboLoaiCNV.EditValue, cboLocTheo.EditValue, datTuNgay.EditValue, datDenNgay.EditValue));
                 dtTmp.PrimaryKey = new DataColumn[] { dtTmp.Columns["ID_UV"] };
                 Commons.Modules.ObjSystems.MLoadXtraGrid(grdUngVien, grvUngVien, dtTmp, false, true, false, true, true, this.Name);
                 grvUngVien.Columns["ID_UV"].Visible = false;
@@ -276,7 +319,7 @@ namespace Vs.Recruit
             //xóa
             try
             {
-               
+
                 Int64 iID = Convert.ToInt64(grvUngVien.GetFocusedRowCellValue("ID_UV"));
                 SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "DELETE dbo.UNG_VIEN_BANG_CAP WHERE ID_UV = " + iID + "");
                 SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "DELETE dbo.UNG_VIEN_KINH_NGHIEM WHERE ID_UV = " + iID + "");
@@ -315,64 +358,71 @@ namespace Vs.Recruit
 
         private void grvUngVien_DoubleClick(object sender, EventArgs e)
         {
-            if (grvUngVien.RowCount == 0)
+            DXMouseEventArgs ea = e as DXMouseEventArgs;
+            GridHitInfo info = grvUngVien.CalcHitInfo(ea.Location);
+            if (info.InRow || info.InRowCell)
             {
-                ucCTQLUV dl = new ucCTQLUV(-1);
-                navigationFrame1.SelectedPage.Visible = false;
-                PageDetails.Controls.Add(dl);
-                dl.Dock = DockStyle.Fill;
-                dl.backWindowsUIButtonPanel.ButtonClick += BackWindowsUIButtonPanel_ButtonClick;
-                Thread thread = new Thread(delegate ()
+
+
+                if (grvUngVien.RowCount == 0)
                 {
-                    if (this.InvokeRequired)
+                    ucCTQLUV dl = new ucCTQLUV(-1);
+                    navigationFrame1.SelectedPage.Visible = false;
+                    PageDetails.Controls.Add(dl);
+                    dl.Dock = DockStyle.Fill;
+                    dl.backWindowsUIButtonPanel.ButtonClick += BackWindowsUIButtonPanel_ButtonClick;
+                    Thread thread = new Thread(delegate ()
                     {
-                        this.Invoke(new MethodInvoker(delegate
+                        if (this.InvokeRequired)
                         {
-                            navigationFrame1.SelectedPage = PageDetails;
-                        }));
-                    }
-                }, 100);
-                thread.Start();
-                accorMenuleft.Visible = false;
-            }
-            else
-            {
-                try
-                {
-                    lblUV.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-                    lblUV.ForeColor = System.Drawing.Color.FromArgb(0, 0, 255);
-                    lblUV.Text = grvUngVien.GetFocusedRowCellValue(grvUngVien.Columns["MS_UV"]).ToString() + " - " + grvUngVien.GetFocusedRowCellValue(grvUngVien.Columns["HO_TEN"]).ToString();
+                            this.Invoke(new MethodInvoker(delegate
+                            {
+                                navigationFrame1.SelectedPage = PageDetails;
+                            }));
+                        }
+                    }, 100);
+                    thread.Start();
+                    accorMenuleft.Visible = false;
                 }
-                catch
+                else
                 {
-                }
-                ucCTQLUV dl = new ucCTQLUV(Convert.ToInt64(grvUngVien.GetFocusedRowCellValue(grvUngVien.Columns["ID_UV"])));
-                navigationFrame1.SelectedPage.Visible = false;
-                PageDetails.Controls.Add(dl);
-                dl.Dock = DockStyle.Fill;
-                dl.backWindowsUIButtonPanel.ButtonClick += BackWindowsUIButtonPanel_ButtonClick;
-                Thread thread = new Thread(delegate ()
-                {
-                    if (this.InvokeRequired)
+                    try
                     {
-                        this.Invoke(new MethodInvoker(delegate
-                        {
-                            navigationFrame1.SelectedPage = PageDetails;
-                        }));
+                        lblUV.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                        lblUV.ForeColor = System.Drawing.Color.FromArgb(0, 0, 255);
+                        lblUV.Text = grvUngVien.GetFocusedRowCellValue(grvUngVien.Columns["MS_UV"]).ToString() + " - " + grvUngVien.GetFocusedRowCellValue(grvUngVien.Columns["HO_TEN"]).ToString();
                     }
-                }, 100);
-                thread.Start();
-                accorMenuleft.Visible = false;
+                    catch
+                    {
+                    }
+                    ucCTQLUV dl = new ucCTQLUV(Convert.ToInt64(grvUngVien.GetFocusedRowCellValue(grvUngVien.Columns["ID_UV"])));
+                    navigationFrame1.SelectedPage.Visible = false;
+                    PageDetails.Controls.Add(dl);
+                    dl.Dock = DockStyle.Fill;
+                    dl.backWindowsUIButtonPanel.ButtonClick += BackWindowsUIButtonPanel_ButtonClick;
+                    Thread thread = new Thread(delegate ()
+                    {
+                        if (this.InvokeRequired)
+                        {
+                            this.Invoke(new MethodInvoker(delegate
+                            {
+                                navigationFrame1.SelectedPage = PageDetails;
+                            }));
+                        }
+                    }, 100);
+                    thread.Start();
+                    accorMenuleft.Visible = false;
+                }
             }
         }
 
         private void cboLocTheo_EditValueChanged(object sender, EventArgs e)
         {
-            if(cboLocTheo.EditValue.ToString()  == "-1")
+            if (cboLocTheo.EditValue.ToString() == "-1")
             {
                 datTuNgay.Properties.ReadOnly = true;
                 datDenNgay.Properties.ReadOnly = true;
-            }    
+            }
             else
             {
                 datTuNgay.Properties.ReadOnly = false;

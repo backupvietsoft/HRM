@@ -704,7 +704,7 @@ namespace Vs.Recruit
             try
             {
                 DataTable dt = new DataTable();
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT DISTINCT T1.ID_CN, T1.MS_CN, T1.HO +' '+ T1.TEN AS TEN_CN FROM dbo.CONG_NHAN T1 INNER JOIN dbo.XI_NGHIEP_NGUOI_TUYEN_DUNG T2 ON T2.ID_CN = T1.ID_CN WHERE T2.ID_XN = " + cboBPYC.EditValue + " AND T2.PHONG_VAN = 1 ORDER BY T1.HO + ' ' + T1.TEN"));
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT DISTINCT T1.ID_CN, T1.MS_CN, T1.HO +' '+ T1.TEN AS TEN_CN FROM dbo.CONG_NHAN T1 INNER JOIN dbo.XI_NGHIEP_NGUOI_TUYEN_DUNG T2 ON T2.ID_CN = T1.ID_CN WHERE T2.ID_XN = " + cboBPYC.EditValue + " AND T2.PHONG_VAN = 1 AND T2.ACTIVE = 1 ORDER BY T1.HO + ' ' + T1.TEN"));
                 cboNguoiPV1.Properties.DataSource = dt;
                 cboNguoiPV1.EditValue = -99;
                 cboBPYC.ErrorText = "";
@@ -725,7 +725,7 @@ namespace Vs.Recruit
             try
             {
                 DataTable dt = new DataTable();
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT DISTINCT T1.ID_CN, T1.MS_CN, T1.HO +' '+ T1.TEN AS TEN_CN FROM dbo.CONG_NHAN T1 INNER JOIN dbo.XI_NGHIEP_NGUOI_TUYEN_DUNG T2 ON T2.ID_CN = T1.ID_CN INNER JOIN dbo.XI_NGHIEP T3 ON T3.ID_XN = T2.ID_XN WHERE T3.PHONG_TD = 1 AND T2.PHONG_VAN = 1 ORDER BY T1.HO + ' ' + T1.TEN"));
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT DISTINCT T1.ID_CN, T1.MS_CN, T1.HO +' '+ T1.TEN AS TEN_CN FROM dbo.CONG_NHAN T1 INNER JOIN dbo.XI_NGHIEP_NGUOI_TUYEN_DUNG T2 ON T2.ID_CN = T1.ID_CN INNER JOIN dbo.XI_NGHIEP T3 ON T3.ID_XN = T2.ID_XN WHERE T3.PHONG_TD = 1 AND T2.PHONG_VAN = 1 AND T2.ACTIVE = 1 ORDER BY T1.HO + ' ' + T1.TEN"));
                 cboNguoiPV2.Properties.DataSource = dt;
                 cboNguoiPV2.EditValue = -99;
             }
@@ -774,10 +774,16 @@ namespace Vs.Recruit
 
         private void cboBPYC_BeforePopup(object sender, EventArgs e)
         {
-            DataTable dt = new DataTable();
-            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, " SELECT H.ID_XN,H.TEN_XN FROM (SELECT DISTINCT T.STT_DV, T.STT_XN, T.ID_XN, T.TEN_XN FROM(SELECT DISTINCT XN.STT_DV, XN.STT_XN, T1.ID_XN, XN.TEN_XN FROM dbo.LOAI_CONG_VIEC_XI_NGHIEP T1 INNER JOIN(SELECT DISTINCT ID_XN, TEN_XN, STT_XN, STT_DV FROM MGetToUser('" + Commons.Modules.UserName + "', " + Commons.Modules.TypeLanguage + ")) XN ON XN.ID_XN = T1.ID_XN)AS T INNER JOIN dbo.YEU_CAU_TUYEN_DUNG T2 ON T2.ID_XN = T.ID_XN  INNER JOIN dbo.YCTD_VI_TRI_TUYEN T3 ON T3.ID_YCTD = T2.ID_YCTD INNER JOIN dbo.LOAI_CONG_VIEC T4 ON T4.ID_LCV = T3.ID_VTTD WHERE T2.ID_TT = 2 AND T3.ID_TT_VT IN(3,5,6) AND T4.ID_CV != 206) H ORDER BY H.STT_DV, H.STT_XN"));
-            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboBPYC, dt, "ID_XN", "TEN_XN", "TEN_XN", true, true);
-            cboBPYC.EditValue = -99;
+            try
+            {
+                DataTable dt = new DataTable();
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, " SELECT H.ID_XN,H.TEN_XN FROM (SELECT DISTINCT T.STT_DV, T.STT_XN, T.ID_XN, T.TEN_XN FROM(SELECT DISTINCT XN.STT_DV, XN.STT_XN, T1.ID_XN, XN.TEN_XN FROM dbo.LOAI_CONG_VIEC_XI_NGHIEP T1 INNER JOIN(SELECT DISTINCT ID_XN, TEN_XN, STT_XN, STT_DV FROM MGetToUser('" + Commons.Modules.UserName + "', " + Commons.Modules.TypeLanguage + ")) XN ON XN.ID_XN = T1.ID_XN)AS T INNER JOIN dbo.YEU_CAU_TUYEN_DUNG T2 ON T2.ID_XN = T.ID_XN  INNER JOIN dbo.YCTD_VI_TRI_TUYEN T3 ON T3.ID_YCTD = T2.ID_YCTD INNER JOIN dbo.LOAI_CONG_VIEC T4 ON T4.ID_LCV = T3.ID_VTTD WHERE T2.ID_TT = 2 AND T3.ID_TT_VT IN(3,5,6) AND T4.ID_CV != 206) H ORDER BY H.STT_DV, H.STT_XN"));
+                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboBPYC, dt, "ID_XN", "TEN_XN", "TEN_XN", true, true);
+                cboBPYC.EditValue = -99;
+            }
+            catch
+            {
+            }
         }
 
         private void grvViTri_RowCountChanged(object sender, EventArgs e)

@@ -51,20 +51,19 @@
             // 
             // richEditControl1
             // 
-            this.richEditControl1.Location = new System.Drawing.Point(693, 133);
-            this.richEditControl1.Margin = new System.Windows.Forms.Padding(5);
+            this.richEditControl1.Location = new System.Drawing.Point(441, 81);
             this.richEditControl1.Name = "richEditControl1";
-            this.richEditControl1.Size = new System.Drawing.Size(908, 715);
+            this.richEditControl1.Size = new System.Drawing.Size(578, 434);
             this.richEditControl1.TabIndex = 0;
             this.richEditControl1.Visible = false;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 28F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1661, 988);
+            this.ClientSize = new System.Drawing.Size(1057, 600);
             this.Controls.Add(this.richEditControl1);
-            this.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";

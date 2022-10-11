@@ -88,11 +88,11 @@ namespace Vs.Recruit
             this.windowsUIButton.Controls.Add(this.searchControl);
             this.windowsUIButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.windowsUIButton.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.windowsUIButton.Location = new System.Drawing.Point(0, 521);
+            this.windowsUIButton.Location = new System.Drawing.Point(0, 539);
             this.windowsUIButton.Margin = new System.Windows.Forms.Padding(4);
             this.windowsUIButton.Name = "windowsUIButton";
             this.windowsUIButton.Padding = new System.Windows.Forms.Padding(4);
-            this.windowsUIButton.Size = new System.Drawing.Size(1008, 53);
+            this.windowsUIButton.Size = new System.Drawing.Size(1008, 35);
             this.windowsUIButton.TabIndex = 5;
             this.windowsUIButton.Text = "windowsUIButtonPanel1";
             this.windowsUIButton.UseButtonBackgroundImages = false;
@@ -101,14 +101,14 @@ namespace Vs.Recruit
             // searchControl
             // 
             this.searchControl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.searchControl.Location = new System.Drawing.Point(12, 14);
+            this.searchControl.Location = new System.Drawing.Point(12, 6);
             this.searchControl.Margin = new System.Windows.Forms.Padding(4);
             this.searchControl.Name = "searchControl";
             this.searchControl.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Repository.ClearButton(),
             new DevExpress.XtraEditors.Repository.SearchButton()});
             this.searchControl.Properties.FindDelay = 100;
-            this.searchControl.Size = new System.Drawing.Size(220, 34);
+            this.searchControl.Size = new System.Drawing.Size(220, 24);
             this.searchControl.TabIndex = 10;
             // 
             // layoutControl1
@@ -120,39 +120,39 @@ namespace Vs.Recruit
             this.layoutControl1.Location = new System.Drawing.Point(0, 0);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.Root = this.Root;
-            this.layoutControl1.Size = new System.Drawing.Size(1008, 521);
+            this.layoutControl1.Size = new System.Drawing.Size(1008, 539);
             this.layoutControl1.TabIndex = 6;
             this.layoutControl1.Text = "layoutControl1";
             // 
             // btnFile
             // 
-            this.btnFile.Location = new System.Drawing.Point(145, 59);
+            this.btnFile.Location = new System.Drawing.Point(104, 46);
             this.btnFile.Name = "btnFile";
             this.btnFile.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.btnFile.Size = new System.Drawing.Size(357, 34);
+            this.btnFile.Size = new System.Drawing.Size(398, 24);
             this.btnFile.StyleController = this.layoutControl1;
             this.btnFile.TabIndex = 0;
             this.btnFile.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.btnFile_ButtonClick);
             // 
             // cboChonSheet
             // 
-            this.cboChonSheet.Location = new System.Drawing.Point(627, 59);
+            this.cboChonSheet.Location = new System.Drawing.Point(586, 46);
             this.cboChonSheet.Name = "cboChonSheet";
             this.cboChonSheet.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cboChonSheet.Properties.NullText = "";
-            this.cboChonSheet.Size = new System.Drawing.Size(357, 34);
+            this.cboChonSheet.Size = new System.Drawing.Size(398, 24);
             this.cboChonSheet.StyleController = this.layoutControl1;
             this.cboChonSheet.TabIndex = 6;
             this.cboChonSheet.EditValueChanged += new System.EventHandler(this.cboChonSheet_EditValueChanged);
             // 
             // grdData
             // 
-            this.grdData.Location = new System.Drawing.Point(24, 156);
+            this.grdData.Location = new System.Drawing.Point(24, 120);
             this.grdData.MainView = this.grvData;
             this.grdData.Name = "grdData";
-            this.grdData.Size = new System.Drawing.Size(960, 341);
+            this.grdData.Size = new System.Drawing.Size(960, 395);
             this.grdData.TabIndex = 9;
             this.grdData.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grvData});
@@ -171,6 +171,7 @@ namespace Vs.Recruit
             this.grvData.OptionsSelection.ShowCheckBoxSelectorInColumnHeader = DevExpress.Utils.DefaultBoolean.True;
             this.grvData.OptionsView.ShowGroupPanel = false;
             this.grvData.ShownEditor += new System.EventHandler(this.grvData_ShownEditor);
+            this.grvData.KeyDown += new System.Windows.Forms.KeyEventHandler(this.grvData_KeyDown);
             // 
             // Root
             // 
@@ -180,7 +181,7 @@ namespace Vs.Recruit
             this.groThongTinImport,
             this.groDLImport});
             this.Root.Name = "Root";
-            this.Root.Size = new System.Drawing.Size(1008, 521);
+            this.Root.Size = new System.Drawing.Size(1008, 539);
             this.Root.TextVisible = false;
             // 
             // groThongTinImport
@@ -191,7 +192,7 @@ namespace Vs.Recruit
             this.lblChonSheet});
             this.groThongTinImport.Location = new System.Drawing.Point(0, 0);
             this.groThongTinImport.Name = "groThongTinImport";
-            this.groThongTinImport.Size = new System.Drawing.Size(988, 97);
+            this.groThongTinImport.Size = new System.Drawing.Size(988, 74);
             // 
             // lblChonFile
             // 
@@ -200,8 +201,8 @@ namespace Vs.Recruit
             this.lblChonFile.CustomizationFormText = "lblChonFile";
             this.lblChonFile.Location = new System.Drawing.Point(0, 0);
             this.lblChonFile.Name = "lblChonFile";
-            this.lblChonFile.Size = new System.Drawing.Size(482, 38);
-            this.lblChonFile.TextSize = new System.Drawing.Size(117, 28);
+            this.lblChonFile.Size = new System.Drawing.Size(482, 28);
+            this.lblChonFile.TextSize = new System.Drawing.Size(76, 17);
             // 
             // lblChonSheet
             // 
@@ -210,17 +211,17 @@ namespace Vs.Recruit
             this.lblChonSheet.CustomizationFormText = "lblChonSheet";
             this.lblChonSheet.Location = new System.Drawing.Point(482, 0);
             this.lblChonSheet.Name = "lblChonSheet";
-            this.lblChonSheet.Size = new System.Drawing.Size(482, 38);
-            this.lblChonSheet.TextSize = new System.Drawing.Size(117, 28);
+            this.lblChonSheet.Size = new System.Drawing.Size(482, 28);
+            this.lblChonSheet.TextSize = new System.Drawing.Size(76, 17);
             // 
             // groDLImport
             // 
             this.groDLImport.CustomizationFormText = "groDLImport";
             this.groDLImport.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlItem2});
-            this.groDLImport.Location = new System.Drawing.Point(0, 97);
+            this.groDLImport.Location = new System.Drawing.Point(0, 74);
             this.groDLImport.Name = "groDLImport";
-            this.groDLImport.Size = new System.Drawing.Size(988, 404);
+            this.groDLImport.Size = new System.Drawing.Size(988, 445);
             // 
             // layoutControlItem2
             // 
@@ -229,7 +230,7 @@ namespace Vs.Recruit
             this.layoutControlItem2.CustomizationFormText = "layoutControlItem2";
             this.layoutControlItem2.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(964, 345);
+            this.layoutControlItem2.Size = new System.Drawing.Size(964, 399);
             this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem2.TextVisible = false;
             // 

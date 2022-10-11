@@ -821,7 +821,6 @@
             this.btnALL.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.btnALL.Size = new System.Drawing.Size(1093, 32);
             this.btnALL.TabIndex = 33;
-            this.btnALL.Text = "S";
             this.btnALL.UseButtonBackgroundImages = false;
             this.btnALL.ButtonClick += new DevExpress.XtraBars.Docking2010.ButtonEventHandler(this.btnALL_ButtonClick);
             // 

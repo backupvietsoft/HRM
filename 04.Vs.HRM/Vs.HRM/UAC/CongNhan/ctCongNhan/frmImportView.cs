@@ -11,6 +11,7 @@ using DevExpress.XtraEditors;
 using System.Data.SqlClient;
 using Microsoft.ApplicationBlocks.Data;
 using DevExpress.XtraBars.Docking2010;
+using DevExpress.XtraGrid;
 
 namespace Vs.HRM
 {
@@ -138,6 +139,32 @@ namespace Vs.HRM
                         break;
                     }
                 default: break;
+            }
+        }
+
+        private void grvChung_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete)
+            {
+                if (MessageBox.Show("Bạn có chắc xóa dòng dữ liệu này ?", "Confirmation", MessageBoxButtons.YesNo) != DialogResult.Yes)
+                    return;
+                //GridView view = sender as GridView;
+                DevExpress.XtraGrid.Views.Grid.GridView view = sender as DevExpress.XtraGrid.Views.Grid.GridView;
+                //view.DeleteRow(view.FocusedRowHandle);
+                if (view.SelectedRowsCount != 0)
+                {
+                    view.GridControl.BeginUpdate();
+                    List<int> selectedLogItems = new List<int>(view.GetSelectedRows());
+                    for (int i = selectedLogItems.Count - 1; i >= 0; i--)
+                    {
+                        view.DeleteRow(selectedLogItems[i]);
+                    }
+                    view.GridControl.EndUpdate();
+                }
+                else if (view.FocusedRowHandle != GridControl.InvalidRowHandle)
+                {
+                    view.DeleteRow(view.FocusedRowHandle);
+                }
             }
         }
     }

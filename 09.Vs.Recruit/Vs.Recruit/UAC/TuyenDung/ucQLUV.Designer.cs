@@ -129,7 +129,7 @@
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(1021, 155, 650, 400);
             this.layoutControl1.Root = this.Root;
-            this.layoutControl1.Size = new System.Drawing.Size(1084, 513);
+            this.layoutControl1.Size = new System.Drawing.Size(1084, 510);
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
             // 
@@ -152,7 +152,7 @@
             this.grdUngVien.MainView = this.grvUngVien;
             this.grdUngVien.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.grdUngVien.Name = "grdUngVien";
-            this.grdUngVien.Size = new System.Drawing.Size(1070, 470);
+            this.grdUngVien.Size = new System.Drawing.Size(1070, 467);
             this.grdUngVien.TabIndex = 20;
             this.grdUngVien.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grvUngVien});
@@ -249,7 +249,7 @@
             this.lblLocTheo});
             this.Root.Name = "Root";
             this.Root.Padding = new DevExpress.XtraLayout.Utils.Padding(5, 5, 5, 0);
-            this.Root.Size = new System.Drawing.Size(1084, 513);
+            this.Root.Size = new System.Drawing.Size(1084, 510);
             this.Root.TextVisible = false;
             // 
             // lblTinhTrangUV
@@ -298,7 +298,7 @@
             this.layoutControlItem1.Control = this.grdUngVien;
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 34);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(1074, 474);
+            this.layoutControlItem1.Size = new System.Drawing.Size(1074, 471);
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
             // 
@@ -356,11 +356,11 @@
             this.windowsUIButton.Controls.Add(this.searchControl1);
             this.windowsUIButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.windowsUIButton.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.windowsUIButton.Location = new System.Drawing.Point(0, 513);
+            this.windowsUIButton.Location = new System.Drawing.Point(0, 510);
             this.windowsUIButton.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.windowsUIButton.Name = "windowsUIButton";
             this.windowsUIButton.Padding = new System.Windows.Forms.Padding(3, 5, 3, 5);
-            this.windowsUIButton.Size = new System.Drawing.Size(1084, 29);
+            this.windowsUIButton.Size = new System.Drawing.Size(1084, 32);
             this.windowsUIButton.TabIndex = 17;
             this.windowsUIButton.Text = "S";
             this.windowsUIButton.UseButtonBackgroundImages = false;
@@ -370,7 +370,7 @@
             // 
             this.searchControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.searchControl1.Client = this.grdUngVien;
-            this.searchControl1.Location = new System.Drawing.Point(9, 3);
+            this.searchControl1.Location = new System.Drawing.Point(7, 6);
             this.searchControl1.Name = "searchControl1";
             this.searchControl1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Repository.ClearButton(),

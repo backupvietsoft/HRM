@@ -32,20 +32,20 @@ namespace Vs.Recruit
             //format date tiem
             Commons.OSystems.SetDateEditFormat(datNGAY_SINH);
             Commons.OSystems.SetDateEditFormat(datNGAY_CAP);
+            Commons.OSystems.SetDateEditFormat(datNgayNhanCV);
             LoadCombo();
             Commons.Modules.ObjSystems.SetPhanQuyen(windowsUIButton);
             if (Commons.Modules.iUngVien == -1)
             {
                 cothem = true;
                 BinDingData(cothem);
-                enableButon(false);
             }
             else
             {
                 cothem = false;
                 BinDingData(cothem);
-                enableButon(true);
             }
+            enableButon(false);
             Commons.Modules.sPS = "";
             Commons.Modules.ObjSystems.HideWaitForm();
         }
@@ -76,12 +76,14 @@ namespace Vs.Recruit
                 //cboID_KNLV
                 //DataTable dt_knlv = new DataTable();
                 //dt_knlv.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboID_KNLV", Commons.Modules.UserName, Commons.Modules.TypeLanguage, false));
-                //Commons.Modules.ObjSystems.MLoadLookUpEditN(cboID_KNLV, dt_knlv, "ID_KNLV", "TEN_KNLV", "TEN_KNLV", "");
+                
+                Commons.Modules.ObjSystems.MLoadLookUpEditN(cboTrinhDoHocVan, Commons.Modules.ObjSystems.DataKinhNghiemLV(false), "ID_KNLV", "TEN_KNLV", "TEN_KNLV", "");
+                Commons.Modules.ObjSystems.MLoadLookUpEditN(cboTayNghe, Commons.Modules.ObjSystems.DataTayNghe(false), "ID_TAY_NGHE", "TEN_TAY_NGHE", "TEN_TAY_NGHE", "");
 
                 // cboID_NTD
-                DataTable dt_ntd = new DataTable();
-                dt_ntd.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboID_NTD", Commons.Modules.UserName, Commons.Modules.TypeLanguage, false));
-                Commons.Modules.ObjSystems.MLoadLookUpEditN(cboID_NTD, dt_ntd, "ID_NTD", "TEN_NTD", "TEN_NTD", "");
+                //DataTable dt_ntd = new DataTable();
+                //dt_ntd.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboID_NTD", Commons.Modules.UserName, Commons.Modules.TypeLanguage, false));
+                //Commons.Modules.ObjSystems.MLoadLookUpEditN(cboID_NTD, dt_ntd, "ID_NTD", "TEN_NTD", "TEN_NTD", "");
 
                 //cboPhai
                 Commons.Modules.ObjSystems.MLoadLookUpEditN(PHAILookUpEdit, Commons.Modules.ObjSystems.DataPhai(), "ID_PHAI", "PHAI", "PHAI", "");
@@ -95,8 +97,9 @@ namespace Vs.Recruit
 
                 //Vi tri tuyen dung
                 //ID_LCV,TEN_LCV
-                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_VTTD_1, Commons.Modules.ObjSystems.DataLoaiCV(false,-1), "ID_LCV", "TEN_LCV", "TEN_LCV", true, true);
-                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_VTTD_2, Commons.Modules.ObjSystems.DataLoaiCV(false,-1), "ID_LCV", "TEN_LCV", "TEN_LCV", true, true);
+                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboVTPhuHop, Commons.Modules.ObjSystems.DataLoaiCV(false,-1), "ID_LCV", "TEN_LCV", "TEN_LCV", true, true);
+
+                //Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_VTTD_2, Commons.Modules.ObjSystems.DataLoaiCV(false,-1), "ID_LCV", "TEN_LCV", "TEN_LCV", true, true);
                 //Commons.Modules.ObjSystems.MLoadLookUpEditN(cboDanhGiaTayNghe, Commons.Modules.ObjSystems.DataDanhGiaTayNghe(false), "ID_DGTN", "TEN_DGTN", "TEN_DGTN", "");
 
                 //nguoi quen
@@ -274,6 +277,7 @@ namespace Vs.Recruit
                     txtHO.EditValue = "";
                     txtTEN.EditValue = "";
                     datNGAY_SINH.EditValue = null;
+                    datNgayNhanCV.EditValue = null;
                     PHAILookUpEdit.EditValue = 0;
                     //cboID_TDVH.EditValue = null;
                     //cboID_KNLV.EditValue = null;
@@ -298,8 +302,8 @@ namespace Vs.Recruit
                     txtNGUOI_LIEN_HE.EditValue = "";
                     txtQUAN_HE.EditValue = "";
                     txtDT_NGUOI_LIEN_HE.EditValue = "";
-                    cboID_VTTD_1.EditValue = null;
-                    cboID_VTTD_2.EditValue = null;
+                    txtID_VTTD_1.EditValue = null;
+                    txtID_VTTD_2.EditValue = null;
                     txtMUC_LUONG_MONG_MUON.EditValue = "";
                     datNGAY_CO_THE_DI_LAM.EditValue = null;
                     cboID_CN.EditValue = null;
@@ -315,6 +319,12 @@ namespace Vs.Recruit
                     cboTiengAnh.EditValue = null;
                     cboTiengHoa.EditValue = null;
                     txtTiengKhac.EditValue = "";
+
+                    cboTayNghe.EditValue =  null;
+                    cboTrinhDoHocVan.EditValue = null;
+                    txtCongDoan.EditValue ="";
+                    cboVTPhuHop.EditValue = null;
+
                 }
                 else
                 {
@@ -340,6 +350,7 @@ namespace Vs.Recruit
                         txtHO.EditValue = dt.Rows[0]["HO"];
                         txtTEN.EditValue = dt.Rows[0]["TEN"];
                         datNGAY_SINH.EditValue = dt.Rows[0]["NGAY_SINH"];
+                        datNgayNhanCV.EditValue = dt.Rows[0]["NGAY_NHAN_HO_SO"];
                         PHAILookUpEdit.EditValue = Convert.ToInt32(dt.Rows[0]["PHAI"]);
                         //cboHINH_THUC_TUYEN.EditValue = dt.Rows[0]["HINH_THUC_TUYEN"];
                         //cboID_TDVH.EditValue = dt.Rows[0]["ID_TDVH"];
@@ -364,8 +375,8 @@ namespace Vs.Recruit
                         txtNGUOI_LIEN_HE.EditValue = dt.Rows[0]["NGUOI_LIEN_HE"];
                         txtQUAN_HE.EditValue = dt.Rows[0]["QUAN_HE"];
                         txtDT_NGUOI_LIEN_HE.EditValue = dt.Rows[0]["DT_NGUOI_LIEN_HE"];
-                        cboID_VTTD_1.EditValue = dt.Rows[0]["VI_TRI_TD_1"];
-                        cboID_VTTD_2.EditValue = dt.Rows[0]["VI_TRI_TD_2"];
+                        txtID_VTTD_1.EditValue = dt.Rows[0]["VI_TRI_TD_1"];
+                        txtID_VTTD_2.EditValue = dt.Rows[0]["VI_TRI_TD_2"];
                         txtMUC_LUONG_MONG_MUON.EditValue = dt.Rows[0]["MUC_LUONG_MONG_MUON"];
                         datNGAY_CO_THE_DI_LAM.EditValue = dt.Rows[0]["NGAY_CO_THE_DI_LAM"];
                         cboID_CN.EditValue = dt.Rows[0]["ID_CN"];
@@ -379,10 +390,14 @@ namespace Vs.Recruit
                         chkHUY_TUYEN_DUNG.EditValue = dt.Rows[0]["HUY_TUYEN_DUNG"];
                         chkXacNhanDTDH.EditValue = dt.Rows[0]["XAC_NHAN_DTDH"];
 
-                        cboTiengAnh.EditValue = Convert.ToInt32(dt.Rows[0]["TIENG_ANH"]);
-                        cboTiengHoa.EditValue = Convert.ToInt32(dt.Rows[0]["TIENG_TRUNG"]);
-
+                        cboTiengAnh.EditValue = dt.Rows[0]["TIENG_ANH"];
+                        cboTiengHoa.EditValue = dt.Rows[0]["TIENG_TRUNG"];
                         txtTiengKhac.EditValue = dt.Rows[0]["TIENG_KHAC"];
+
+                        cboTayNghe.EditValue = dt.Rows[0]["TAY_NGHE"]; 
+                        cboTrinhDoHocVan.EditValue = dt.Rows[0]["ID_TDVH"];
+                        txtCongDoan.EditValue = dt.Rows[0]["CONG_DOAN_CHU_YEU"];
+                        cboVTPhuHop.EditValue = dt.Rows[0]["ID_VI_TRI_PHU_HOP"];
 
                     }
                     catch
@@ -427,8 +442,8 @@ namespace Vs.Recruit
             txtNGUOI_LIEN_HE.Properties.ReadOnly = visible;
             txtSO_CON.Properties.ReadOnly = visible;
             txtQUAN_HE.Properties.ReadOnly = visible;
-            cboID_VTTD_1.Properties.ReadOnly = visible;
-            cboID_VTTD_2.Properties.ReadOnly = visible;
+            txtID_VTTD_1.Properties.ReadOnly = visible;
+            txtID_VTTD_2.Properties.ReadOnly = visible;
             txtMUC_LUONG_MONG_MUON.Properties.ReadOnly = visible;
             datNGAY_CO_THE_DI_LAM.Properties.ReadOnly = visible;
             cboID_CN.Properties.ReadOnly = visible;
@@ -440,6 +455,8 @@ namespace Vs.Recruit
             //txtGHI_CHU.Properties.ReadOnly = visible;
             datNGAY_SINH.Properties.ReadOnly = visible;
             datNGAY_SINH.Properties.Buttons[0].Enabled = !datNGAY_SINH.Properties.ReadOnly;
+            datNgayNhanCV.Properties.ReadOnly = visible;
+            datNgayNhanCV.Properties.Buttons[0].Enabled = !datNgayNhanCV.Properties.ReadOnly;
             PHAILookUpEdit.Properties.ReadOnly = visible;
             //cboHINH_THUC_TUYEN.Properties.ReadOnly = visible;
             //cboID_TDVH.Properties.ReadOnly = visible;
@@ -462,7 +479,11 @@ namespace Vs.Recruit
             cboTiengAnh.Properties.ReadOnly = visible;
             cboTiengHoa.Properties.ReadOnly = visible;
             txtTiengKhac.Properties.ReadOnly = visible;
-            //cboDanhGiaTayNghe.Properties.ReadOnly = visible;
+            cboTayNghe.Properties.ReadOnly = visible;
+            cboTrinhDoHocVan.Properties.ReadOnly = visible;
+            txtCongDoan.Properties.ReadOnly = visible;
+            cboVTPhuHop.Properties.ReadOnly = visible;
+
         }
         private byte[] imgToByteConverter(Image inImg)
         {
@@ -499,24 +520,24 @@ namespace Vs.Recruit
             try
             {
                 //tao bang tam
-                Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, "sBTBC" + Commons.Modules.iIDUser,Commons.Modules.ObjSystems.ConvertDatatable(grdBangCap),"");
-                Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, "sBTKNLV" + Commons.Modules.iIDUser, Commons.Modules.ObjSystems.ConvertDatatable(grdKNLV), "");
-
-             iIDUV = Convert.ToInt64(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spUpdateUngVien",
+            Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, "sBTBC" + Commons.Modules.iIDUser,Commons.Modules.ObjSystems.ConvertDatatable(grdBangCap),"");
+            Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, "sBTKNLV" + Commons.Modules.iIDUser, Commons.Modules.ObjSystems.ConvertDatatable(grdKNLV), "");
+            iIDUV = Convert.ToInt64(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spUpdateUngVien",
             iIDUV,
             txtMS_UV.EditValue,
             imgToByteConverter(HINH_UVPictureEdit.Image),
             txtHO.EditValue,
             txtTEN.EditValue,
             datNGAY_SINH.Text.ToString() == "" ? DBNull.Value : datNGAY_SINH.EditValue,
+            datNgayNhanCV.Text.ToString() == "" ? DBNull.Value : datNgayNhanCV.EditValue,
             PHAILookUpEdit.Text.ToString() == "" ? DBNull.Value : PHAILookUpEdit.EditValue,
-            //cboHINH_THUC_TUYEN.Text.ToString() == "" ? DBNull.Value : cboHINH_THUC_TUYEN.EditValue,
-            //txtGHI_CHU.EditValue,
-            /*ID_DT*/ DBNull.Value, DBNull.Value, DBNull.Value,
+             DBNull.Value, 
+            DBNull.Value,
+            DBNull.Value,
             txtNOI_SINH.EditValue,
             txtSO_CMND.EditValue,
             datNGAY_CAP.Text.ToString() == "" ? DBNull.Value : datNGAY_CAP.EditValue,
-            cboNOI_CAP.Text.ToString() == "" ? DBNull.Value : cboNOI_CAP.EditValue,
+            cboNOI_CAP.EditValue,
             cboID_TT_HN.Text.ToString() == "" ? DBNull.Value : cboID_TT_HN.EditValue,
             txtHO_TEN_VC.EditValue,
             txtNGHE_NGHIEP_VC.EditValue,
@@ -528,17 +549,16 @@ namespace Vs.Recruit
             cboID_QUAN.Text.ToString() == "" ? DBNull.Value : cboID_QUAN.EditValue,
             cboID_PX.Text.ToString() == "" ? DBNull.Value : cboID_PX.EditValue,
             txtTHON_XOM.EditValue,
-            //cboID_TDVH.Text.ToString() == "" ? DBNull.Value : cboID_TDVH.EditValue,
-            //cboID_KNLV.Text.ToString() == "" ? DBNull.Value : cboID_KNLV.EditValue,
-            DBNull.Value, DBNull.Value,
+            cboTrinhDoHocVan.Text.ToString() == "" ? DBNull.Value : cboTrinhDoHocVan.EditValue,
+             DBNull.Value,
             cboID_NTD.Text.ToString() == "" ? DBNull.Value : cboID_NTD.EditValue,
-            cboID_VTTD_1.Text.ToString() == "" ? DBNull.Value : cboID_VTTD_1.EditValue,
-            cboID_VTTD_2.Text.ToString() == "" ? DBNull.Value : cboID_VTTD_2.EditValue,
+            txtID_VTTD_1.EditValue,
+            txtID_VTTD_2.EditValue,
             txtMUC_LUONG_MONG_MUON.EditValue,
             datNGAY_CO_THE_DI_LAM.Text.ToString() == "" ? DBNull.Value : datNGAY_CO_THE_DI_LAM.EditValue,
+            txtNGUOI_LIEN_HE.EditValue,
             txtDT_NGUOI_LIEN_HE.EditValue,
             txtQUAN_HE.EditValue,
-            txtDT_NGUOI_LIEN_HE.EditValue,
             cboID_CN.Text.ToString() == "" ? DBNull.Value : cboID_CN.EditValue,
             chkDA_GIOI_THIEU.EditValue,
             datNGAY_NHAN_VIEC.Text.ToString() == "" ? DBNull.Value : datNGAY_NHAN_VIEC.EditValue,
@@ -547,11 +567,18 @@ namespace Vs.Recruit
             chkHUY_TUYEN_DUNG.EditValue,
             chkDA_CHUYEN.EditValue,
             DBNull.Value,
-            //cboDanhGiaTayNghe.Text.ToString() == "" ? DBNull.Value : cboDanhGiaTayNghe.EditValue,
             chkXacNhanDTDH.EditValue,
-            cboTiengAnh.EditValue,cboTiengHoa.EditValue,txtTiengKhac.EditValue,
-            cothem,"sBTBC" + Commons.Modules.iIDUser,"sBTKNLV" + Commons.Modules.iIDUser));
-                return true;
+            cboTiengAnh.EditValue,
+            cboTiengHoa.EditValue,
+            txtTiengKhac.EditValue,
+            cboTayNghe.Text.ToString() == "" ? DBNull.Value : cboTayNghe.EditValue,
+            cboVTPhuHop.Text.ToString() == "" ? DBNull.Value : cboVTPhuHop.EditValue,
+            txtCongDoan.EditValue,
+            cothem,
+            "sBTBC" + Commons.Modules.iIDUser,
+            "sBTKNLV" + Commons.Modules.iIDUser
+            ));
+            return true;
             }
             catch (Exception ex)
             {

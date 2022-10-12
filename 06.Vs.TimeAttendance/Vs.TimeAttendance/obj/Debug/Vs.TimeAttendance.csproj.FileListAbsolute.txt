@@ -2487,3 +2487,5 @@ D:\01.SourceCode\02.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.Time
 D:\01.SourceCode\02.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.TimeAttendance.csproj.CoreCompileInputs.cache
 D:\01.SourceCode\02.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.TimeAttendance.csproj.CopyComplete
 D:\01.SourceCode\02.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.TimeAttendance.pdb
+D:\01.SourceCode\02.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.TimeAttendance.frmImportDangKyKLSP.resources
+D:\01.SourceCode\02.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.TimeAttendance.frmCapNhatNhom.resources

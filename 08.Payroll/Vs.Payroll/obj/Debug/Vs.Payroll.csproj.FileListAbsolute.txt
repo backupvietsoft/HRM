@@ -2361,7 +2361,6 @@ D:\01.SourceCode\02.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.ucCachTinhLuo
 D:\01.SourceCode\02.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.ucBangLuongThang13.resources
 D:\01.SourceCode\02.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.ucDanhSachTamUng.resources
 D:\01.SourceCode\02.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.ucDangKyBHXH.resources
-D:\01.SourceCode\02.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.ucDKThoiGianKhongLamSP.resources
 D:\01.SourceCode\02.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.ucDSCNHoTroTienDo.resources
 D:\01.SourceCode\02.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.ucNangSuatChuyen.resources
 D:\01.SourceCode\02.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.ucTinhLuong.resources
@@ -2370,7 +2369,6 @@ D:\01.SourceCode\02.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.ucDSCNKhongTi
 D:\01.SourceCode\02.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.ucTienCongTru.resources
 D:\01.SourceCode\02.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.ucLuongKhoan.resources
 D:\01.SourceCode\02.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.ucGiamTruGiaCanh.resources
-D:\01.SourceCode\02.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.ucPhuCapLuong.resources
 D:\01.SourceCode\02.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.ucQuyDinhPhuCap.resources
 D:\01.SourceCode\02.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.ucMucBuLuong.resources
 D:\01.SourceCode\02.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.ucQuyDinhTamUng.resources
@@ -2863,3 +2861,11 @@ F:\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.csproj.CoreCompileInputs.ca
 F:\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.csproj.CopyComplete
 F:\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.dll
 F:\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.pdb
+D:\01.SourceCode\02.HRM\08.Payroll\Vs.Payroll\bin\Debug\Commons.dll
+D:\01.SourceCode\02.HRM\08.Payroll\Vs.Payroll\bin\Debug\EPPlus.dll
+D:\01.SourceCode\02.HRM\08.Payroll\Vs.Payroll\bin\Debug\Commons.pdb
+D:\01.SourceCode\02.HRM\08.Payroll\Vs.Payroll\bin\Debug\Commons.dll.config
+D:\01.SourceCode\02.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.frmEditMaHang.resources
+D:\01.SourceCode\02.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.frmImportTienThuongPhuCap.resources
+D:\01.SourceCode\02.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.ucMaHang.resources
+D:\01.SourceCode\02.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.ucTienThuongPhuCap.resources

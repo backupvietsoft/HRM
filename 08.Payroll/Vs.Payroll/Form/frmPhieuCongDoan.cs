@@ -16,14 +16,13 @@ namespace Vs.Payroll
 {
     public partial class frmPhieuCongDoan : DevExpress.XtraEditors.XtraUserControl
     {
-        //string sCnstr = "Server=192.168.2.5;database=DATA_MT;uid=sa;pwd=123;Connect Timeout=0;";
         int iChuyen = -1;
         int iChuyenSuDung = -1;
         int iOrd = -1;
         int iCN = -1;
         int XemCu = 0;
         DataTable dtMQL = new DataTable();
-        private LookUpEdit lookUp;
+        //private LookUpEdit lookUp;
 
         private DataTable dtCD;
 
@@ -35,16 +34,14 @@ namespace Vs.Payroll
             InitializeComponent();
             Commons.Modules.ObjSystems.ThayDoiNN(this, windowsUIButton);
         }
-        string sBT = "PCDTmp" + Commons.Modules.UserName;
+        string sBT = "PCDTmp" + Commons.Modules.iIDUser;
         CultureInfo cultures = new CultureInfo("en-US");
 
         private void frmPhieuCongDoan_Load(object sender, EventArgs e)
         {
-            //Commons.Modules.sPS = "0Load";
             try
             {
                 Commons.Modules.sLoad = "0Load";
-                //optXCLP.SelectedIndex = 0;
                 Commons.Modules.ObjSystems.LoadCboDonVi(cboDV);
                 Commons.Modules.ObjSystems.LoadCboXiNghiep(cboDV, cboXN);
                 Commons.Modules.ObjSystems.LoadCboTo(cboDV, cboXN, cboTo);
@@ -67,10 +64,7 @@ namespace Vs.Payroll
             catch { }
         }
 
-        private void CboMQL_EditValueChanged(object sender, EventArgs e)
-        {
-            lookUp = sender as LookUpEdit;
-        }
+
 
         public void XoaTable(string strTableName)
         {
@@ -88,10 +82,10 @@ namespace Vs.Payroll
         {
             try
             {
-                string sSql = "SELECT ID_CHUYEN, TEN_CHUYEN FROM CHUYEN UNION SELECT '-1', ' < ALL > ' FROM CHUYEN ORDER BY CHUYEN.TEN_CHUYEN";
+                string sSql = "SELECT ID_TO, TEN_TO FROM [TO] UNION SELECT '-1', ' < ALL > ' FROM [TO] ORDER BY [TO].TEN_TO";
                 DataTable dt = new DataTable();
                 dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSql));
-                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboChuyen, dt, "ID_CHUYEN", "TEN_CHUYEN", "TEN_CHUYEN");
+                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboChuyen, dt, "ID_TO", "TEN_TO", "TEN_TO");
                 searchLookUpEdit1View.Columns[0].Caption = "STT Chuyền";
                 searchLookUpEdit1View.Columns[1].Caption = "Tên Chuyền";
                 searchLookUpEdit1View.Columns[1].AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
@@ -223,7 +217,7 @@ namespace Vs.Payroll
                 if (grdCD.DataSource == null)
                 {
                     //Commons.Modules.ObjSystems.MLoadXtraGrid(grdCD, grvCD, dt, windowsUIButton.Buttons[3].Properties.Visible, false, false, true, true, this.Name);
-                    Commons.Modules.ObjSystems.MLoadXtraGrid(grdCD, grvCD, dt, false, false, false, true, true, this.Name);
+                    Commons.Modules.ObjSystems.MLoadXtraGrid(grdCD, grvCD, dt, false,true, false, true, true, this.Name);
                     grvCD.Columns["TEN_CD"].OptionsColumn.AllowFocus = false;
                     grvCD.Columns["TEN_CD"].OptionsColumn.ReadOnly = true;
                     grvCD.Columns["ID_CN"].Visible = false;
@@ -269,7 +263,7 @@ namespace Vs.Payroll
                 grvCD.Columns["ID_CD"].ColumnEdit = cboMQL;
                 cboMQL.ShowDropDown = DevExpress.XtraEditors.Controls.ShowDropDown.Never;
                 cboMQL.SearchMode = DevExpress.XtraEditors.Controls.SearchMode.OnlyInPopup;
-                cboMQL.EditValueChanged += CboMQL_EditValueChanged;
+     
 
                 //DataTable dtMQL = new DataTable();
                 //dtMQL.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT DISTINCT T1.ID_CD, T1.MaQL, T1.TEN_CD_QT AS TEN_CD FROM QUI_TRINH_CONG_NGHE_CHI_TIET T1 LEFT JOIN PHIEU_CONG_DOAN T2 ON T1.ID_CD = T2.ID_CD"));
@@ -545,6 +539,7 @@ namespace Vs.Payroll
                 //}
                 //kiểm tra không trùng trên lưới
 
+
                 if (Commons.Modules.ObjSystems.ConvertDatatable(grdCD).AsEnumerable().Where(x => x["ID_CN"].ToString().Trim().Equals(grvTo.GetFocusedRowCellValue("ID_CN").ToString().Trim())).Count(x => x["ID_CD"].ToString().Trim().Equals(e.Value.ToString().Trim())) >= 1)
                 {
                     e.Valid = false;
@@ -552,12 +547,12 @@ namespace Vs.Payroll
                     view.SetColumnError(view.Columns["ID_CD"], e.ErrorText);
                     return;
                 }
-
-                DataRowView dataRow = lookUp.GetSelectedDataRow() as DataRowView;
+                DataTable dt = dtMQL.AsEnumerable().Where(x => x["ID_CD"].ToString().Equals(e.Value.ToString())).CopyToDataTable();
                 try
                 {
-                    grvCD.SetFocusedRowCellValue("TEN_CD", dataRow.Row["TEN_CD"]);
-                    grvCD.SetFocusedRowCellValue("ID_CD", dataRow.Row["ID_CD"]);
+
+                    grvCD.SetFocusedRowCellValue("TEN_CD", dt.Rows[0]["TEN_CD"]);
+                    grvCD.SetFocusedRowCellValue("ID_CD", dt.Rows[0]["ID_CD"]);
                     grvCD.SetFocusedRowCellValue("ID_CN", grvTo.GetFocusedRowCellValue("ID_CN"));
                 }
                 catch
@@ -619,7 +614,7 @@ namespace Vs.Payroll
         }
         private void grvCD_InvalidValueException(object sender, DevExpress.XtraEditors.Controls.InvalidValueExceptionEventArgs e)
         {
-            //e.ExceptionMode = DevExpress.XtraEditors.Controls.ExceptionMode.NoAction;
+            e.ExceptionMode = DevExpress.XtraEditors.Controls.ExceptionMode.NoAction;
         }
         private void windowsUIButton_ButtonClick(object sender, DevExpress.XtraBars.Docking2010.ButtonEventArgs e)
         {
@@ -775,16 +770,13 @@ namespace Vs.Payroll
             }
         }
 
-        private void grvCD_CustomRowCellEditForEditing(object sender, CustomRowCellEditEventArgs e)
-        {
 
-        }
 
-        private void txtMSCN_TextChanged(object sender, EventArgs e)
-        {
+        //private void txtMSCN_TextChanged(object sender, EventArgs e)
+        //{
             //try
             //{
-            //    if(txtMSCN.Text == "")
+            //    if (txtMSCN.Text == "")
             //    {
             //        Commons.Modules.sLoad = "";
             //    }
@@ -804,7 +796,7 @@ namespace Vs.Payroll
             //}
             //catch
             //{ }
-        }
+        //}
         private void cboMSCN_EditValueChanged(object sender, EventArgs e)
         {
             try

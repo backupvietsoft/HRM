@@ -143,6 +143,7 @@ namespace Vs.HRM
                             XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgBanChuaChonCotIn"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             return;
                         }
+
                         DanhSachNhanVien();
 
                         //if (chkInAll.Checked == true)
@@ -174,43 +175,48 @@ namespace Vs.HRM
         }
         private void ucBaoCaoCongNhan_Load(object sender, EventArgs e)
         {
+            try
+            {
 
-            rdoChonBC.SelectedIndex = 0;
-            Commons.Modules.sLoad = "0Load";
-            Commons.Modules.ObjSystems.LoadCboDonVi(lkDonVi);
-            Commons.Modules.ObjSystems.LoadCboXiNghiep(lkDonVi, lkXiNghiep);
-            Commons.Modules.ObjSystems.LoadCboTo(lkDonVi, lkXiNghiep, lkTo);
-            Commons.Modules.ObjSystems.LoadCboTTHD(lkTTHD);
-            Commons.Modules.ObjSystems.LoadCboTTHT(lkTTHT);
 
-            // Chuc vu
-            DataTable dt = new DataTable();
-            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboChucVu", Commons.Modules.UserName, Commons.Modules.TypeLanguage, 1, -1));
-            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboChucVu, dt, "ID_CV", "TEN_CV", "TEN_CV");
+                rdoChonBC.SelectedIndex = 0;
+                Commons.Modules.sLoad = "0Load";
+                Commons.Modules.ObjSystems.LoadCboDonVi(lkDonVi);
+                Commons.Modules.ObjSystems.LoadCboXiNghiep(lkDonVi, lkXiNghiep);
+                Commons.Modules.ObjSystems.LoadCboTo(lkDonVi, lkXiNghiep, lkTo);
+                Commons.Modules.ObjSystems.LoadCboTTHD(lkTTHD);
+                Commons.Modules.ObjSystems.LoadCboTTHT(lkTTHT);
 
-            // Loai cong viec
-            DataTable dt1 = new DataTable();
-            dt1.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboLoaiCV", Commons.Modules.UserName, Commons.Modules.TypeLanguage, 1, -1));
-            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboLoaiCongViec
-                , dt1, "ID_LCV", "TEN_LCV", "TEN_LCV");
+                // Chuc vu
+                DataTable dt = new DataTable();
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboChucVu", Commons.Modules.UserName, Commons.Modules.TypeLanguage, 1, -1));
+                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboChucVu, dt, "ID_CV", "TEN_CV", "TEN_CV");
 
-            Commons.OSystems.SetDateEditFormat(dTuNgay);
-            Commons.OSystems.SetDateEditFormat(dDenNgay);
-            Commons.OSystems.SetDateEditFormat(dTuNgayNS);
-            Commons.OSystems.SetDateEditFormat(dDenNgayNS);
-            Commons.OSystems.SetDateEditFormat(NgayIn);
-            LoadGrdChonCot();
-            LoadMauBaoCaoCN();
-            dTuNgay.EditValue = Convert.ToDateTime(("01/" + DateTime.Today.Month + "/" + DateTime.Today.Year), new CultureInfo("de-DE"));
-            dDenNgay.EditValue = Convert.ToDateTime(("01/" + DateTime.Today.Month + "/" + DateTime.Today.Year), new CultureInfo("de-DE")).AddMonths(1).AddDays(-1);
-            dTuNgayNS.EditValue = Convert.ToDateTime(("01/" + DateTime.Today.Month + "/" + DateTime.Today.Year), new CultureInfo("de-DE"));
-            dDenNgayNS.EditValue = Convert.ToDateTime(("01/" + DateTime.Today.Month + "/" + DateTime.Today.Year), new CultureInfo("de-DE")).AddMonths(1).AddDays(-1);
-            NgayIn.EditValue = DateTime.Today;
-            dTuNgayNS.Enabled = false;
-            dDenNgayNS.Enabled = false;
-            chkGroup.Checked = true;
-            Commons.Modules.sLoad = "";
-            EnabledButton(true);
+                //// Loai cong viec
+                //DataTable dt1 = new DataTable();
+                //dt1.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboLoaiCV", Commons.Modules.UserName, Commons.Modules.TypeLanguage, 1, -1, -1));
+                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboLoaiCongViec
+                    , Commons.Modules.ObjSystems.DataLoaiCV(true,-1), "ID_LCV", "TEN_LCV", "TEN_LCV");
+
+                Commons.OSystems.SetDateEditFormat(dTuNgay);
+                Commons.OSystems.SetDateEditFormat(dDenNgay);
+                Commons.OSystems.SetDateEditFormat(dTuNgayNS);
+                Commons.OSystems.SetDateEditFormat(dDenNgayNS);
+                Commons.OSystems.SetDateEditFormat(NgayIn);
+                LoadGrdChonCot();
+                LoadMauBaoCaoCN();
+                dTuNgay.EditValue = Convert.ToDateTime(("01/" + DateTime.Today.Month + "/" + DateTime.Today.Year), new CultureInfo("de-DE"));
+                dDenNgay.EditValue = Convert.ToDateTime(("01/" + DateTime.Today.Month + "/" + DateTime.Today.Year), new CultureInfo("de-DE")).AddMonths(1).AddDays(-1);
+                dTuNgayNS.EditValue = Convert.ToDateTime(("01/" + DateTime.Today.Month + "/" + DateTime.Today.Year), new CultureInfo("de-DE"));
+                dDenNgayNS.EditValue = Convert.ToDateTime(("01/" + DateTime.Today.Month + "/" + DateTime.Today.Year), new CultureInfo("de-DE")).AddMonths(1).AddDays(-1);
+                NgayIn.EditValue = DateTime.Today;
+                dTuNgayNS.Enabled = false;
+                dDenNgayNS.Enabled = false;
+                chkGroup.Checked = true;
+                Commons.Modules.sLoad = "";
+                EnabledButton(true);
+            }
+            catch { }
         }
 
         private void LoadGrdChonCot()
@@ -424,11 +430,12 @@ namespace Vs.HRM
                 {
                     return;
                 }
+                this.Cursor = Cursors.WaitCursor;
                 Excel.Application oXL;
                 Excel.Workbook oWB;
                 Excel.Worksheet oSheet;
                 oXL = new Excel.Application();
-                oXL.Visible = true;
+                oXL.Visible = false;
 
                 oWB = (Excel.Workbook)(oXL.Workbooks.Add(Missing.Value));
                 oSheet = oWB.ActiveSheet;
@@ -473,7 +480,7 @@ namespace Vs.HRM
                         oSheet.Cells[row_dl, col + 1] = dt.Rows[col]["DIEN_GIAI"];
                         oSheet.Cells[row_dl, col + 1].ColumnWidth = dt.Rows[col]["CHIEU_RONG"];
                     }
-                    catch(Exception ex)
+                    catch (Exception ex)
                     {
                         throw ex;
                     }
@@ -625,7 +632,7 @@ namespace Vs.HRM
                 formatRange.Font.Size = fontSizeNoiDung;
                 BorderAround(oSheet.get_Range("A4", lastColumn + (rowCnt + 1).ToString()));
 
-                if(dtBCThang.Rows.Count == 0)
+                if (dtBCThang.Rows.Count == 0)
                 {
                     Excel.Range myRange = oSheet.get_Range("A4", lastColumn + "4");
                     myRange.AutoFilter("1", "<>", Excel.XlAutoFilterOperator.xlOr, "", true);
@@ -635,6 +642,7 @@ namespace Vs.HRM
                     Excel.Range myRange = oSheet.get_Range("A4", lastColumn + (rowCnt - 1).ToString());
                     myRange.AutoFilter("1", "<>", Excel.XlAutoFilterOperator.xlOr, "", true);
                 }
+                this.Cursor = Cursors.Default;
 
                 oXL.Visible = true;
                 oXL.UserControl = true;
@@ -644,6 +652,7 @@ namespace Vs.HRM
             }
             catch (Exception ex)
             {
+                this.Cursor = Cursors.Default;
                 MessageBox.Show(ex.Message);
             }
         }

@@ -6,7 +6,7 @@ using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraLayout;
 using Microsoft.ApplicationBlocks.Data;
 using System;
-using Excel = Microsoft.Office.Interop.Excel;
+using Microsoft.Office.Interop.Excel;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -17,7 +17,9 @@ using System.Drawing;
 using Vs.Report;
 //using Microsoft.Office.Interop.Excel;
 using DataTable = System.Data.DataTable;
-
+using DevExpress.ClipboardSource.SpreadsheetML;
+using System.Diagnostics;
+using DevExpress.Utils;
 
 namespace Vs.TimeAttendance
 {
@@ -108,12 +110,60 @@ namespace Vs.TimeAttendance
             Commons.Modules.sLoad = "";
         }
 
+
+
         private void windowsUIButton_ButtonClick(object sender, DevExpress.XtraBars.Docking2010.ButtonEventArgs e)
         {
             WindowsUIButton btn = e.Button as WindowsUIButton;
             XtraUserControl ctl = new XtraUserControl();
             switch (btn.Tag.ToString())
             {
+                case "in":
+                    {
+
+                        System.Data.SqlClient.SqlConnection conn;
+                        DataTable dt = new DataTable();
+                        try
+                        {
+                            conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                            conn.Open();
+                            System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptTinhDiemThang_DM", conn);
+                            cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                            cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                            cmd.Parameters.Add("@DVi", SqlDbType.Int).Value = cboDV.EditValue;
+                            cmd.Parameters.Add("@XN", SqlDbType.Int).Value =cboXN.EditValue;
+                            cmd.Parameters.Add("@TO", SqlDbType.Int).Value =cboTo.EditValue;
+                            cmd.Parameters.Add("@Thang", SqlDbType.Date).Value = Convert.ToDateTime(cboThang.EditValue).ToString("yyyy-MM-dd");
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+                            DataSet ds = new DataSet();
+                            adp.Fill(ds);
+                            ds.Tables[0].TableName = "DiemChuyenCanThang";                        
+                            SaveFileDialog saveFileDialog = new SaveFileDialog();
+                            saveFileDialog.Filter = "Excel file (*.xlsx)|*.xlsx";
+                            saveFileDialog.FilterIndex = 0;
+                            saveFileDialog.RestoreDirectory = true;
+                            //saveFileDialog.CreatePrompt = true;
+                            saveFileDialog.CheckFileExists = false;
+                            saveFileDialog.CheckPathExists = false;
+                            saveFileDialog.Title = "Export Excel File To";
+                            saveFileDialog.FileName = DateTime.Now.ToString("yyyyMMdd_HHmmss");
+                            DialogResult res = saveFileDialog.ShowDialog();
+                            // If the file name is not an empty string open it for saving.
+                            if (res == DialogResult.OK)
+                            {
+                                Commons.TemplateExcel.FillReport(saveFileDialog.FileName, System.Windows.Forms.Application.StartupPath + "\\Template\\TemplateDiemChuyenCanThang.xlsx", ds, new string[] { "{", "}" });
+                                Process.Start(saveFileDialog.FileName);
+                            }
+                        }
+                        catch
+                        {
+
+                        }
+
+                        
+                        break;
+                    }
                 case "tinhdiemthang":
                     {
                         try
@@ -160,6 +210,11 @@ namespace Vs.TimeAttendance
                     }
             }
         }
+
+        private void InExcel(DataTable dt)
+        {
+          
+        }
         private void GrvPhepThang_CustomUnboundColumnData(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnDataEventArgs e)
         {
             throw new NotImplementedException();
@@ -204,7 +259,10 @@ namespace Vs.TimeAttendance
                 {
                     grdDiemThang.DataSource = dt;
                 }
-                
+
+                grvDiemThang.Columns["TIEN_THUONG"].DisplayFormat.FormatType = FormatType.Numeric;
+                grvDiemThang.Columns["TIEN_THUONG"].DisplayFormat.FormatString = "N0";
+
                 ////visible tháng lớn hơn tháng đang chọn
                 //for (int i = Convert.ToDateTime(cboThang.EditValue).Month + 1; i <= 12; i++)
                 //{
@@ -224,7 +282,7 @@ namespace Vs.TimeAttendance
             try
             {
                 Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBT, Commons.Modules.ObjSystems.ConvertDatatable(grvDiemThang), "");
-                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString() == "DM" ? "spSaveTinhDiemThang_DM" : "spSaveTinhDiemThang", sBT, Convert.ToDateTime(cboThang.EditValue));
+                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString() == "DM" ? "sPsaveTinhDiemThang_DM" : "sPsaveTinhDiemThang", sBT, Convert.ToDateTime(cboThang.EditValue));
                 Commons.Modules.ObjSystems.XoaTable(sBT);
                 return true;
             }
@@ -239,11 +297,13 @@ namespace Vs.TimeAttendance
             windowsUIButton.Buttons[0].Properties.Visible = visible;
             windowsUIButton.Buttons[1].Properties.Visible = visible;
             windowsUIButton.Buttons[2].Properties.Visible = visible;
+            windowsUIButton.Buttons[3].Properties.Visible = visible;
             windowsUIButton.Buttons[5].Properties.Visible = visible;
             windowsUIButton.Buttons[6].Properties.Visible = visible;
+            windowsUIButton.Buttons[7].Properties.Visible = visible;
 
-            windowsUIButton.Buttons[3].Properties.Visible = !visible;
             windowsUIButton.Buttons[4].Properties.Visible = !visible;
+            windowsUIButton.Buttons[5].Properties.Visible = !visible;
             grvDiemThang.OptionsBehavior.Editable = !visible;
             //searchControl.Visible = visible;
             cboThang.Properties.ReadOnly = !visible;

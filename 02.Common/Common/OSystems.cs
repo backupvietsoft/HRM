@@ -394,6 +394,61 @@ namespace Commons
             return KyHieuDV;
         }
 
+        public void AddDropDownExcel(Microsoft.Office.Interop.Excel._Worksheet oSheet, Microsoft.Office.Interop.Excel.Range range, DataTable dtDuLieu, string sCotDuLieu, int iCotBD, int iDongBD, int iCotKT, int iDongKT)
+        {
+            try
+            {
+                var list = new System.Collections.Generic.List<string>();
+                for (int i = 0; i < dtDuLieu.Rows.Count; i++)
+                {
+                    list.Add(dtDuLieu.Rows[i][sCotDuLieu].ToString());
+                }
+                var flatList = string.Join(",", list.ToArray());
+
+                range = oSheet.get_Range("" + CharacterIncrement(iCotBD - 1) + "" + iDongBD + "", "" + CharacterIncrement(iCotKT - 1) + "" + iDongKT.ToString());
+                range.Validation.Delete();
+                range.Validation.Add(
+                   Microsoft.Office.Interop.Excel.XlDVType.xlValidateList,
+                   Microsoft.Office.Interop.Excel.XlDVAlertStyle.xlValidAlertInformation,
+                   Microsoft.Office.Interop.Excel.XlFormatConditionOperator.xlBetween,
+                   flatList,
+                   Type.Missing);
+                range.Validation.IgnoreBlank = true;
+                range.Validation.InCellDropdown = true;
+                range.Validation.ErrorMessage = "Dữ liệu bạn nhập không đúng bạn có muốn tiếp tục?";
+                range.Validation.ShowError = true;
+                range.Validation.ErrorTitle = "Nhập sai dữ liệu";
+            }
+            catch { }
+        }
+        public string CharacterIncrement(int colCount)
+        {
+            int TempCount = 0;
+            string returnCharCount = string.Empty;
+
+            if (colCount <= 25)
+            {
+                TempCount = colCount;
+                char CharCount = Convert.ToChar((Convert.ToInt32('A') + TempCount));
+                returnCharCount += CharCount;
+                return returnCharCount;
+            }
+            else
+            {
+                var rev = 0;
+
+                while (colCount >= 26)
+                {
+                    colCount = colCount - 26;
+                    rev++;
+                }
+
+                returnCharCount += CharacterIncrement(rev - 1);
+                returnCharCount += CharacterIncrement(colCount);
+                return returnCharCount;
+            }
+        }
+
         public bool setCheckImport(int iLoai) // iLoai = 1 Update khi mở form, 0 UPDATE = NULL  khi tắt form
         {
             try
@@ -1488,6 +1543,35 @@ namespace Commons
                 return false;
             }
         }
+
+        public DataTable GetDataTableMultiSelect(DevExpress.XtraGrid.GridControl grd, DevExpress.XtraGrid.Views.Grid.GridView grv)
+        {
+            try
+            {
+                DataRow dr;
+                DataRow row;
+                DataTable dt = new DataTable();
+                dt = ((DataTable)grd.DataSource).Clone();
+                Int32[] selectedRowHandles = grv.GetSelectedRows();
+                for (int i = 0; i < selectedRowHandles.Length; i++)
+                {
+                    int selectedRowHandle = selectedRowHandles[i];
+                    if (selectedRowHandle >= 0)
+                    {
+                        dr = grv.GetDataRow(selectedRowHandle);
+                        row = dt.NewRow();
+                        for (int j = 0; j < grv.Columns.Count; j++)
+                        {
+                            row[j] = dr[j];
+                        }
+                        dt.Rows.Add(row);
+                    }
+                }
+                return dt;
+            }
+            catch { return null; }
+        }
+
         private void Grv_DoubleClickDM(object sender, EventArgs e, string sName)
         {
             if (Form.ModifierKeys == Keys.Control)
@@ -4204,7 +4288,7 @@ namespace Commons
                 dt.DefaultView.RowFilter = column.FieldName + " = " + value;
                 //_view.SelectRow(0);
             }
-            catch
+            catch (Exception ex)
             {
                 dt.DefaultView.RowFilter = "1 = 0";
             }
@@ -4747,6 +4831,18 @@ namespace Commons
         {
             DataTable dt = new DataTable();
             dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboKhenThuongKyLuat", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll));
+            return dt;
+        }
+        public DataTable DataXacNhanGio(bool coAll)
+        {
+            DataTable dt = new DataTable();
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComBoXAC_NHAN_GIO", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll));
+            return dt;
+        }
+        public DataTable DataLoaiTienThuong(bool coAll)
+        {
+            DataTable dt = new DataTable();
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComBoDM_LOAI_TIEN_THUONG", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll));
             return dt;
         }
         public DataTable DataLoaiKhenThuong(bool coAll)

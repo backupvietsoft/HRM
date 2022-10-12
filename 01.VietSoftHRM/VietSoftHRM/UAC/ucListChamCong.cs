@@ -18,7 +18,7 @@ namespace VietSoftHRM
         public int iLoai;
         public int iIDOut;
         public string slinkcha;
-        public string sLoad="";
+        //public string sLoad="";
         public ucListChamCong(TileBar tileBar)
         {
             InitializeComponent();
@@ -65,7 +65,7 @@ namespace VietSoftHRM
         {
 
             var button = sender as AccordionControlElement;
-            if (sLoad == button.Name) return;
+            //if (sLoad == button.Name) return;
             if (button.Style == DevExpress.XtraBars.Navigation.ElementStyle.Item)
             {
                 //   button.Name.ToString()
@@ -73,7 +73,7 @@ namespace VietSoftHRM
                
             }
             Commons.Modules.ObjSystems.ShowWaitForm(this);
-            sLoad = button.Name;
+            //sLoad = button.Name;
             NONNlab_Link.Text = slinkcha + "/" + button.Text;
             switch (button.Name)
             {
@@ -113,9 +113,9 @@ namespace VietSoftHRM
         private void Elementchill_Click(object sender, EventArgs e)
         {
             var button = sender as AccordionControlElement;
-            if (sLoad == button.Name) return;
+            //if (sLoad == button.Name) return;
             Commons.Modules.ObjSystems.ShowWaitForm(this);
-            sLoad = button.Name;
+            //sLoad = button.Name;
             NONNlab_Link.Text = slinkcha + "/" + button.Text;
             if (button.Style == DevExpress.XtraBars.Navigation.ElementStyle.Item)
             {
@@ -126,14 +126,18 @@ namespace VietSoftHRM
             {
                 case "mnuKHNghiPhep":
                     {
-                        if (!panel2.Controls.Contains(ucKeHoachNghiPhep.Instance))
-                        {
-                            panel2.Controls.Clear();
-                            panel2.Controls.Add(ucKeHoachNghiPhep.Instance);
-                            ucKeHoachNghiPhep.Instance.Dock = DockStyle.Fill;
-                            ucKeHoachNghiPhep.Instance.BringToFront();
-                        }
+                        ucKeHoachNghiPhep tmp = new ucKeHoachNghiPhep();
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(tmp);
+                        tmp.Dock = DockStyle.Fill;
                         break;
+                        //if (!panel2.Controls.Contains(ucKeHoachNghiPhep.Instance))
+                        //{
+                        //    panel2.Controls.Clear();
+                        //    panel2.Controls.Add(ucKeHoachNghiPhep.Instance);
+                        //    ucKeHoachNghiPhep.Instance.Dock = DockStyle.Fill;
+                        //    ucKeHoachNghiPhep.Instance.BringToFront();
+                        //}
                     }
                 case "mnuDangKiLamThem":
                     {

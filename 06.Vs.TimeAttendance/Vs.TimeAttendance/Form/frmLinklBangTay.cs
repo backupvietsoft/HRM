@@ -25,7 +25,7 @@ namespace Vs.TimeAttendance
         }
         private void frmLinklBangTay_Load(object sender, EventArgs e)
         {
-            Commons.Modules.sPS = "0Load";
+            Commons.Modules.sLoad = "0Load";
             //         //ID_NHOM,TEN_NHOM
             Commons.Modules.ObjSystems.MLoadLookUpEdit(cboNhomCC, Commons.Modules.ObjSystems.DataNhom(true), "ID_NHOM", "TEN_NHOM", Commons.Modules.ObjLanguages.GetLanguage(this.Name, "TEN_NHOM"));
             LoadLookupCa();
@@ -51,7 +51,7 @@ namespace Vs.TimeAttendance
             Commons.Modules.ObjSystems.SetPhanQuyen(btnALL);
 
             LoadGridCongNhan();
-            Commons.Modules.sPS = "";
+            Commons.Modules.sLoad = "";
         }
 
         private void LoadLookupCa()
@@ -96,36 +96,36 @@ namespace Vs.TimeAttendance
 
         private void cboDV_EditValueChanged(object sender, EventArgs e)
         {
-            if (Commons.Modules.sPS == "0Load") return;
-            Commons.Modules.sPS = "0Load";
+            if (Commons.Modules.sLoad == "0Load") return;
+            Commons.Modules.sLoad = "0Load";
             Commons.Modules.ObjSystems.LoadCboXiNghiep(cboDV, cboXN);
             Commons.Modules.ObjSystems.LoadCboTo(cboDV, cboXN, cboTo);
             LoadGridCongNhan();
-            Commons.Modules.sPS = "";
+            Commons.Modules.sLoad = "";
         }
 
         private void cboXN_EditValueChanged(object sender, EventArgs e)
         {
-            if (Commons.Modules.sPS == "0Load") return;
-            Commons.Modules.sPS = "0Load";
+            if (Commons.Modules.sLoad == "0Load") return;
+            Commons.Modules.sLoad = "0Load";
             Commons.Modules.ObjSystems.LoadCboTo(cboDV, cboXN, cboTo);
             LoadGridCongNhan();
-            Commons.Modules.sPS = "";
+            Commons.Modules.sLoad = "";
         }
 
         private void cboTo_EditValueChanged(object sender, EventArgs e)
         {
-            if (Commons.Modules.sPS == "0Load") return;
-            Commons.Modules.sPS = "0Load";
+            if (Commons.Modules.sLoad == "0Load") return;
+            Commons.Modules.sLoad = "0Load";
             LoadGridCongNhan();
-            Commons.Modules.sPS = "";
+            Commons.Modules.sLoad = "";
         }
         private void cboNhomCC_EditValueChanged(object sender, EventArgs e)
         {
-            if (Commons.Modules.sPS == "0Load") return;
-            Commons.Modules.sPS = "0Load";
+            if (Commons.Modules.sLoad == "0Load") return;
+            Commons.Modules.sLoad = "0Load";
             LoadLookupCa();
-            Commons.Modules.sPS = "";
+            Commons.Modules.sLoad = "";
         }
 
         private void cboHS_EditValueChanged(object sender, EventArgs e)
@@ -163,7 +163,7 @@ namespace Vs.TimeAttendance
                     {
                         try
                         {
-                            string sBT = "BTKinkTay" + Commons.Modules.sId;
+                            string sBT = "BTKinkTay" + Commons.Modules.iIDUser;
                             Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBT, Commons.Modules.ObjSystems.ConvertDatatable(grvChamCongTay), "");
                             SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spThemDuLieuQuetTheTay",
                              cboNhomCC.EditValue, cboHS.EditValue, datNgayDen.DateTime, timGioDen.EditValue, datNgayVe.DateTime, timGioVe.EditValue, sBT);
@@ -175,7 +175,8 @@ namespace Vs.TimeAttendance
                         }
                         catch (Exception ex)
                         {
-                            XtraMessageBox.Show(ex.Message.ToString());
+                            Commons.Modules.ObjSystems.XoaTable("BTKinkTay" + Commons.Modules.iIDUser);
+                            //XtraMessageBox.Show(ex.Message.ToString());
                         }
 
                         break;

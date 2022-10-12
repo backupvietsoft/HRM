@@ -44,7 +44,7 @@ namespace Vs.TimeAttendance
 
         private void ucCheDoLamViec_Load(object sender, EventArgs e)
         {
-            Commons.Modules.sPS = "0Load";
+            Commons.Modules.sLoad = "0Load";
 
             repositoryItemTimeEdit1.TimeEditStyle = TimeEditStyle.TouchUI;
             repositoryItemTimeEdit1.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.DateTimeAdvancingCaret;
@@ -60,7 +60,7 @@ namespace Vs.TimeAttendance
             LoadcboNhomChamCong(cboNhomChamCong);
             LoadGrdChedochamcong();
             EnableButon();
-            Commons.Modules.sPS = "";
+            Commons.Modules.sLoad = "";
         }
 
         private void LoadGrdChedochamcong()
@@ -140,11 +140,11 @@ namespace Vs.TimeAttendance
 
         private void cboNhomChamCong_EditValueChanged(object sender, EventArgs e)
         {
-            if (Commons.Modules.sPS == "0Load") return;
-            Commons.Modules.sPS = "0Load";
+            if (Commons.Modules.sLoad == "0Load") return;
+            Commons.Modules.sLoad = "0Load";
             LoadGrdChedochamcong();
             //EnableButon(true);
-            Commons.Modules.sPS = "";
+            Commons.Modules.sLoad = "";
         }
 
         private void windowsUIButtonPanel1_ButtonClick(object sender, DevExpress.XtraBars.Docking2010.ButtonEventArgs e)
@@ -282,7 +282,7 @@ namespace Vs.TimeAttendance
                 //       "[PHUT_KT],[SO_PHUT],[HE_SO_NGAY_THUONG],[HE_SO_NGAY_CN],[HE_SO_NGAY_LE],[TRU_DAU_GIO],[TRU_CUOI_GIO],[PHUT_VE_SOM],[TANG_CA],[TC_DEM]," +
                 //       "[KIEM_TRA],[NGAY_HOM_SAU],[CA_NGAY_HOM_SAU],[CA_DEM],[PHUT_TRUOC_CA],[CHE_DO] FROM " + sTB + " WHERE CA IS NOT NULL " + "";
 
-                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spSaveCheDoLamViec",Commons.Modules.UserName,Commons.Modules.TypeLanguage, cboNhomChamCong.EditValue,sTB, Convert.ToDateTime(cboNgay.EditValue).ToString("MM/dd/yyyy"));
+                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "sPsaveCheDoLamViec",Commons.Modules.UserName,Commons.Modules.TypeLanguage, cboNhomChamCong.EditValue,sTB, Convert.ToDateTime(cboNgay.EditValue).ToString("MM/dd/yyyy"));
                 Commons.Modules.ObjSystems.XoaTable(sTB);
                 return true;
             }
@@ -398,11 +398,11 @@ namespace Vs.TimeAttendance
 
         private void cboNgay_EditValueChanged(object sender, EventArgs e)
         {
-            if (Commons.Modules.sPS == "0Load") return;
-            Commons.Modules.sPS = "0Load";
+            if (Commons.Modules.sLoad == "0Load") return;
+            Commons.Modules.sLoad = "0Load";
             LoadGrdChedochamcong();
             //EnableButon(true);
-            Commons.Modules.sPS = "";
+            Commons.Modules.sLoad = "";
         }
     }
 }

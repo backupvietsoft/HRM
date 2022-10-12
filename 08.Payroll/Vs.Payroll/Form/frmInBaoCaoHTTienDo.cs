@@ -3,7 +3,7 @@ using DevExpress.XtraEditors;
 using System;
 using System.Data;
 using Vs.Report;
-using Excel = Microsoft.Office.Interop.Excel;
+using Microsoft.Office.Interop.Excel;
 using Microsoft.Office.Interop.Excel;
 using System.Windows.Forms;
 using DataTable = System.Data.DataTable;
@@ -196,18 +196,18 @@ namespace Vs.Payroll
                 {
                     return;
                 }
-                Excel.Application oXL;
-                Excel.Workbook oWB;
-                Excel.Worksheet oSheet;
-                oXL = new Excel.Application();
+                Microsoft.Office.Interop.Excel.Application oXL;
+                Microsoft.Office.Interop.Excel.Workbook oWB;
+                Microsoft.Office.Interop.Excel.Worksheet oSheet;
+                oXL = new Microsoft.Office.Interop.Excel.Application();
                 oXL.Visible = true;
 
 
                 //OfficeOpenXml.ExcelPackage ExcelPkg = new OfficeOpenXml.ExcelPackage();
                 //OfficeOpenXml.ExcelWorksheet wsSheet1 = ExcelPkg.Workbook.Worksheets.Add("Sheet1");
 
-                oWB = (Excel.Workbook)(oXL.Workbooks.Add(Missing.Value));
-                oSheet = (Excel.Worksheet)oWB.ActiveSheet;
+                oWB = (Microsoft.Office.Interop.Excel.Workbook)(oXL.Workbooks.Add(Missing.Value));
+                oSheet = (Microsoft.Office.Interop.Excel.Worksheet)oWB.ActiveSheet;
 
                 string fontName = "Times New Roman";
                 int fontSizeTieuDe = 10;
@@ -221,8 +221,8 @@ namespace Vs.Payroll
                 row2_TieuDe_BaoCao.Font.Size = 11;
                 row2_TieuDe_BaoCao.Font.Name = fontName;
                 row2_TieuDe_BaoCao.Font.FontStyle = "Bold";
-                row2_TieuDe_BaoCao.Cells.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
-                row2_TieuDe_BaoCao.Cells.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
+                row2_TieuDe_BaoCao.Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                row2_TieuDe_BaoCao.Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
                 row2_TieuDe_BaoCao.RowHeight = 20;
                 row2_TieuDe_BaoCao.Value2 = "SỐ LƯỢNG CÔNG NHÂN QUA ĐÒ THÁNG " + sThang + "";
 
@@ -233,8 +233,8 @@ namespace Vs.Payroll
                 row4_TieuDe_Format.Font.Bold = true;
                 row4_TieuDe_Format.WrapText = true;
                 row4_TieuDe_Format.NumberFormat = "@";
-                row4_TieuDe_Format.Cells.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
-                row4_TieuDe_Format.Cells.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
+                row4_TieuDe_Format.Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                row4_TieuDe_Format.Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
                 row4_TieuDe_Format.Interior.Color = Color.FromArgb(255, 255, 0);
 
                 Range row4_TieuDe_TTNV = oSheet.get_Range("A4");
@@ -259,7 +259,7 @@ namespace Vs.Payroll
                 }
                 rowCnt = rowCnt + 4;
                 oSheet.get_Range("A5", lastColumn + rowCnt.ToString()).Value2 = rowData;
-                Excel.Range formatRange;
+                Microsoft.Office.Interop.Excel.Range formatRange;
                 //rowCnt = keepRowCnt + 2;
 
                 ////dịnh dạng
@@ -282,7 +282,7 @@ namespace Vs.Payroll
                 //colKT++;
                 formatRange = oSheet.get_Range("B5", "B" + rowCnt.ToString());
                 formatRange.NumberFormat = "0";
-                formatRange.TextToColumns(Type.Missing, Excel.XlTextParsingType.xlDelimited, Excel.XlTextQualifier.xlTextQualifierDoubleQuote);
+                formatRange.TextToColumns(Type.Missing, Microsoft.Office.Interop.Excel.XlTextParsingType.xlDelimited, Microsoft.Office.Interop.Excel.XlTextQualifier.xlTextQualifierDoubleQuote);
                 ////Kẻ khung toàn bộ
                 //int ke_khung = -1;
 
@@ -309,7 +309,7 @@ namespace Vs.Payroll
                 oXL.UserControl = true;
 
                 oWB.SaveAs(SaveExcelFile,
-                    AccessMode: Excel.XlSaveAsAccessMode.xlShared);
+                    AccessMode: Microsoft.Office.Interop.Excel.XlSaveAsAccessMode.xlShared);
             }
             catch (Exception ex)
             {

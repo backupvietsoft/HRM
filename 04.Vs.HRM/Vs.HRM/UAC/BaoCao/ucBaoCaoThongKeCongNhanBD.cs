@@ -488,7 +488,7 @@ namespace Vs.HRM
                             }
                         case "TY_LE_GT":
                             {
-                                oSheet.Cells[row_dl, col + 1] = "Tỷ lệ";
+                                oSheet.Cells[row_dl, col + 1] = "Phần trăm";
                                 break;
                             }
                         default:
@@ -540,7 +540,7 @@ namespace Vs.HRM
                     {
                         case "TEN_LCV":
                             {
-                                oSheet.Cells[row_dl, col + 6] = "Tỷ lệ CN may";
+                                oSheet.Cells[row_dl, col + 6] = "Phần trăm CN may";
                                 break;
                             }
                         case "TONG_SO_CMN":
@@ -550,7 +550,7 @@ namespace Vs.HRM
                             }
                         case "TY_LE_CNM":
                             {
-                                oSheet.Cells[row_dl, col + 6] = "Tỷ lệ";
+                                oSheet.Cells[row_dl, col + 6] = "Phần trăm";
                                 break;
                             }
                         default:
@@ -608,7 +608,7 @@ namespace Vs.HRM
                             }
                         case "TY_LE_IDD":
                             {
-                                oSheet.Cells[row_dl, col + 11] = "Tỷ lệ";
+                                oSheet.Cells[row_dl, col + 11] = "Phần trăm";
                                 break;
                             }
                         default:
@@ -700,6 +700,7 @@ namespace Vs.HRM
                 {
                     return;
                 }
+                this.Cursor = Cursors.WaitCursor;
                 Microsoft.Office.Interop.Excel.Application oXL;
                 Microsoft.Office.Interop.Excel.Workbook oWB;
                 Microsoft.Office.Interop.Excel.Worksheet oSheet;
@@ -760,7 +761,7 @@ namespace Vs.HRM
                             }
                         case "TY_LE_QUAN":
                             {
-                                oSheet.Cells[row_dl, col + 1] = "Tỷ lệ";
+                                oSheet.Cells[row_dl, col + 1] = "Phần trăm";
                                 break;
                             }
                         default:
@@ -785,7 +786,7 @@ namespace Vs.HRM
                 }
                 rowCnt = rowCnt + 4;
                 oSheet.get_Range("A5", "C" + rowCnt.ToString()).Value2 = rowData;
-                LoadBieuDoTron(oSheet, XlChartType.xlPie, CharacterIncrement(0), 5, CharacterIncrement(0), rowCnt, CharacterIncrement(2), 5, CharacterIncrement(2), rowCnt, "lblSoLuong", 1, 300, 50, 300, 300, true);
+                LoadBieuDoTron(oSheet, XlChartType.xlPie, CharacterIncrement(0), 5, CharacterIncrement(0), rowCnt, CharacterIncrement(2), 5, CharacterIncrement(2), rowCnt, "lblSoLuong", 1, 300, 50, rowCnt < 5 ? 300 : 550, rowCnt < 5 ? 300 : 500, true);
 
                 Microsoft.Office.Interop.Excel.Range formatRange;
                 rowCnt++;
@@ -802,6 +803,11 @@ namespace Vs.HRM
                     formatRange.NumberFormat = "0.0;-0;;@";
                     try { formatRange.TextToColumns(Type.Missing, Microsoft.Office.Interop.Excel.XlTextParsingType.xlDelimited, Microsoft.Office.Interop.Excel.XlTextQualifier.xlTextQualifierDoubleQuote); } catch { }
                 }
+
+                formatRange = oSheet.get_Range("C5", "" + "C" + rowCnt + "");
+                formatRange.NumberFormat = "0.0%";
+
+
                 //// Tạo hyperlink
                 //for (int i = 5; i <= rowCnt; i++)
                 //{
@@ -927,7 +933,7 @@ namespace Vs.HRM
                                 }
                             case "TY_LE_PX":
                                 {
-                                    sheet2.Cells[rowBD, col + 1] = "Tỷ lệ";
+                                    sheet2.Cells[rowBD, col + 1] = "Phần trăm";
                                     sheet2.Cells[rowBD, col + 1].ColumnWidth = 15;
                                     sheet2.Cells[rowBD, col + 1].Interior.Color = Color.FromArgb(255, 255, 0);
                                     break;
@@ -973,7 +979,10 @@ namespace Vs.HRM
                     formatRange.Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
                     formatRange.Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
 
-                    LoadBieuDoCot(sheet2, XlChartType.xlBarClustered, CharacterIncrement(1), 2, CharacterIncrement(1), rowCnt + 1, CharacterIncrement(5), 2, CharacterIncrement(5), rowCnt + 1, "Số công nhân may theo xã của" + " " + TEN_QUAN[i].ToString(), 1, 700, 05, 300, 300, true);
+                    formatRange = sheet2.get_Range("F2", "" + "F" + rowCnt + "");
+                    formatRange.NumberFormat = "0.0%";
+
+                    LoadBieuDoCot(sheet2, XlChartType.xlBarClustered, CharacterIncrement(1), 2, CharacterIncrement(1), rowCnt + 1, CharacterIncrement(5), 2, CharacterIncrement(5), rowCnt + 1, "Số công nhân may theo xã của" + " " + TEN_QUAN[i].ToString(), 1, 700, 35, rowCnt < 10 ? 400 : 700, rowCnt < 10 ? 400 : 800, true);
 
                     formatRange = sheet2.get_Range("P1"); //27 + 31
                     formatRange.Font.Size = fontSizeTieuDe;
@@ -1001,8 +1010,10 @@ namespace Vs.HRM
             }
             catch (Exception ex)
             {
+                this.Cursor = Cursors.Default;
                 MessageBox.Show(ex.Message);
             }
+            this.Cursor = Cursors.Default;
         }
         private void BieuDoBaoCaoSoLaoDong()
         {
@@ -1361,7 +1372,7 @@ namespace Vs.HRM
                 row4_TieuDe_TONG.ColumnWidth = 13;
 
                 Range row4_TieuDe_TYLE = oSheet.get_Range("D4");
-                row4_TieuDe_TYLE.Value = "TỶ LỆ";
+                row4_TieuDe_TYLE.Value = "PHẦN TRĂM";
                 row4_TieuDe_TYLE.ColumnWidth = 13;
                 row4_TieuDe_TYLE.RowHeight = 30;
                 oSheet.Application.ActiveWindow.SplitColumn = 4;

@@ -168,7 +168,7 @@
             this.xrTableCell7.StylePriority.UseTextAlignment = false;
             this.xrTableCell7.Text = "xrTableCell7";
             this.xrTableCell7.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            this.xrTableCell7.Weight = 2.8940312627594635D;
+            this.xrTableCell7.Weight = 2.2295632806543426D;
             // 
             // xrTableCell13
             // 
@@ -184,7 +184,7 @@
             this.xrTableCell13.StylePriority.UseTextAlignment = false;
             this.xrTableCell13.Text = "xrTableCell13";
             this.xrTableCell13.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            this.xrTableCell13.Weight = 1.7551967958858352D;
+            this.xrTableCell13.Weight = 2.2671630728075964D;
             // 
             // xrTableCell2
             // 
@@ -200,7 +200,7 @@
             this.xrTableCell2.StylePriority.UseTextAlignment = false;
             this.xrTableCell2.Text = "xrTableCell2";
             this.xrTableCell2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            this.xrTableCell2.Weight = 1.654178986067298D;
+            this.xrTableCell2.Weight = 1.8066806912506579D;
             // 
             // xrTableCell5
             // 
@@ -356,7 +356,7 @@
             this.tiHoTen.Name = "tiHoTen";
             this.tiHoTen.StylePriority.UseFont = false;
             this.tiHoTen.Text = "Họ tên";
-            this.tiHoTen.Weight = 12.201634964619265D;
+            this.tiHoTen.Weight = 9.4036152364812438D;
             // 
             // tiPhongBan
             // 
@@ -366,7 +366,7 @@
             this.tiPhongBan.Name = "tiPhongBan";
             this.tiPhongBan.StylePriority.UseFont = false;
             this.tiPhongBan.Text = "Xí nghiệp";
-            this.tiPhongBan.Weight = 7.3909849743160745D;
+            this.tiPhongBan.Weight = 9.5468348698951075D;
             // 
             // tiTo
             // 
@@ -376,7 +376,7 @@
             this.tiTo.Name = "tiTo";
             this.tiTo.StylePriority.UseFont = false;
             this.tiTo.Text = "Tổ";
-            this.tiTo.Weight = 6.9656076328041463D;
+            this.tiTo.Weight = 7.6077774653631334D;
             // 
             // tiGioDen
             // 
@@ -511,7 +511,7 @@
             this.ReportUnit = DevExpress.XtraReports.UI.ReportUnit.TenthsOfAMillimeter;
             this.SnapGridSize = 25F;
             this.Tag = "rptDSDiTreVeSom";
-            this.Version = "20.1";
+            this.Version = "22.1";
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();

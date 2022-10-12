@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions3 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions2 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
             this.windowsUIButton = new DevExpress.XtraBars.Docking2010.WindowsUIButtonPanel();
             this.grdCN = new DevExpress.XtraGrid.GridControl();
             this.grvCN = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -108,9 +108,9 @@
             this.windowsUIButton.AppearanceButton.Pressed.Options.UseFont = true;
             this.windowsUIButton.AppearanceButton.Pressed.Options.UseImage = true;
             this.windowsUIButton.AppearanceButton.Pressed.Options.UseTextOptions = true;
-            windowsUIButtonImageOptions3.ImageUri.Uri = "Print";
+            windowsUIButtonImageOptions2.ImageUri.Uri = "Print";
             this.windowsUIButton.Buttons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] {
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions3, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "Print", -1, false)});
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions2, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "Print", -1, false)});
             this.windowsUIButton.ContentAlignment = System.Drawing.ContentAlignment.MiddleRight;
             this.windowsUIButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.windowsUIButton.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -276,10 +276,10 @@
             this.lbDonVi.SetColumnSpan(this.popListLyDo, 3);
             this.popListLyDo.Controls.Add(this.grdLydovang);
             this.popListLyDo.Location = new System.Drawing.Point(758, 183);
-            this.popListLyDo.MinimumSize = new System.Drawing.Size(350, 170);
+            this.popListLyDo.MinimumSize = new System.Drawing.Size(500, 220);
             this.popListLyDo.Name = "popListLyDo";
             this.lbDonVi.SetRow(this.popListLyDo, 5);
-            this.popListLyDo.Size = new System.Drawing.Size(350, 170);
+            this.popListLyDo.Size = new System.Drawing.Size(500, 220);
             this.popListLyDo.TabIndex = 24;
             // 
             // grdLydovang
@@ -288,7 +288,7 @@
             this.grdLydovang.Location = new System.Drawing.Point(0, 0);
             this.grdLydovang.MainView = this.grvLydovang;
             this.grdLydovang.Name = "grdLydovang";
-            this.grdLydovang.Size = new System.Drawing.Size(350, 170);
+            this.grdLydovang.Size = new System.Drawing.Size(500, 220);
             this.grdLydovang.TabIndex = 15;
             this.grdLydovang.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grvLydovang,

@@ -427,7 +427,7 @@ namespace Vs.TimeAttendance
 
                 Range row4_F = oSheet.get_Range("F4");
                 row4_F.ColumnWidth = 25;
-                row4_F.Value2 = "TỔ";
+                row4_F.Value2 = "Chuyền/Phòng";
 
                 Range row4_G = oSheet.get_Range("G4");
                 row4_G.ColumnWidth = 12;

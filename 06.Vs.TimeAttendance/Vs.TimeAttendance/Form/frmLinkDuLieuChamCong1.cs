@@ -58,14 +58,14 @@ namespace Vs.TimeAttendance
                 repositoryItemTimeEdit1.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
                 repositoryItemTimeEdit1.EditFormat.FormatString = "HH:mm:ss";
 
-                Commons.Modules.sPS = "0Load";
+                Commons.Modules.sLoad = "0Load";
                 DataTable dt1 = new DataTable();
                 dt1.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboDON_VI", Commons.Modules.UserName, Commons.Modules.TypeLanguage, 0));
                 Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cbDonVi, dt1, "ID_DV", "TEN_DV", "TEN_DV");
 
                 Commons.Modules.ObjSystems.LoadCboXiNghiep(cbDonVi, cbXiNghiep);
                 Commons.Modules.ObjSystems.LoadCboTo(cbDonVi, cbXiNghiep, cbTo);
-                Commons.Modules.sPS = "";
+                Commons.Modules.sLoad = "";
                 DateTime dt = new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day);
                 dtNgayChamCong.EditValue = dt;
                 Commons.OSystems.SetDateEditFormat(dtNgayChamCong);
@@ -156,9 +156,9 @@ namespace Vs.TimeAttendance
                         System.Data.SqlClient.SqlConnection conn;
                         conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
                         conn.Open();
-                        string sPS = "spDeleteDLChamCongNgay";
-                        if (Commons.Modules.chamCongK == true) sPS = "spDeleteDLChamCongNgay_K";
-                        System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand(sPS, conn);
+                        string sLoad = "spDeleteDLChamCongNgay";
+                        if (Commons.Modules.chamCongK == true) sLoad = "spDeleteDLChamCongNgay_K";
+                        System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand(sLoad, conn);
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("@UName", Commons.Modules.UserName);
                         cmd.Parameters.AddWithValue("@NNgu", Commons.Modules.TypeLanguage);
@@ -510,79 +510,86 @@ namespace Vs.TimeAttendance
                         //load csdl
                         if (loaiLink == 1)
                         {
-                            tbDLQT.Load(SqlHelper.ExecuteReader(Commons.Modules.connect, CommandType.Text, "SELECT RIGHT(UserEnrollNumber,5) AS	MS_THE_CC,TimeStr  AS NGAY FROM dbo.CheckInOut WHERE CONVERT(NVARCHAR(13),TimeStr,103) = '" + dtNgayChamCong.Text + "'"));
+                            if(Convert.ToInt32(cbDonVi.EditValue) == 1)
+                            {
+                                Commons.Modules.connect = "Server=27.74.240.29;database=DATA_CHAM_CONG_DM1;uid=sa;pwd=codaikadaiku;Connect Timeout=9999;";
+                            }
+                            else
+                            {
+                                Commons.Modules.connect = "Server=27.74.240.29;database=DATA_CHAM_CONG_DM2;uid=sa;pwd=codaikadaiku;Connect Timeout=9999;";
+                            }
+                            tbDLQT.Load(SqlHelper.ExecuteReader(Commons.Modules.connect, CommandType.Text, "SELECT UserEnrollNumber AS MS_THE_CC,TimeStr  AS NGAY FROM dbo.CheckInOut WHERE CONVERT(NVARCHAR(13),TimeStr,103) = '" + dtNgayChamCong.Text + "'"));
                         }
                         else
                         {
+                            #region LinkExcel
+                            string sPath = "";
+                            sPath = Commons.Modules.ObjSystems.OpenFiles("All Excel Files (*.xls;*.xlsx)|*.xls;*.xlsx|" + "All Files (*.*)|*.*");
+                            string sBTNgay = "sBTNgay" + Commons.Modules.iIDUser;
 
-                        #region LinkExcel
-                        string sPath = "";
-                        sPath = Commons.Modules.ObjSystems.OpenFiles("All Excel Files (*.xls;*.xlsx)|*.xls;*.xlsx|" + "All Files (*.*)|*.*");
-                        string sBTNgay = "sBTNgay" + Commons.Modules.iIDUser;
-
-                        if (sPath == "") return;
-                        try
-                        {
-                            //Lấy đường dẫn
-                            var source = new ExcelDataSource();
-                            source.FileName = sPath;
-
-                            //Lấy worksheet
-                            Workbook workbook = new Workbook();
-                            string ext = System.IO.Path.GetExtension(sPath);
-                            if (ext.ToLower() == ".xlsx")
-                                workbook.LoadDocument(sPath, DevExpress.Spreadsheet.DocumentFormat.Xlsx);
-                            else
-                                workbook.LoadDocument(sPath, DevExpress.Spreadsheet.DocumentFormat.Xls);
-                            List<string> wSheet = new List<string>();
-                            for (int i = 0; i < workbook.Worksheets.Count; i++)
-                            {
-                                wSheet.Add(workbook.Worksheets[i].Name.ToString());
-                            }
-                            //Load worksheet
-                            XtraInputBoxArgs args = new XtraInputBoxArgs();
-                            // set required Input Box options
-                            args.Caption = "Chọn sheet cần nhập dữ liệu";
-                            args.Prompt = "Chọn sheet cần nhập dữ liệu";
-                            args.DefaultButtonIndex = 0;
-
-                            // initialize a DateEdit editor with custom settings
-                            ComboBoxEdit editor = new ComboBoxEdit();
-                            editor.Properties.Items.AddRange(wSheet);
-                            editor.EditValue = wSheet[0].ToString();
-
-                            args.Editor = editor;
-                            // a default DateEdit value
-                            args.DefaultResponse = wSheet[0].ToString();
-                            // display an Input Box with the custom editor
-                            var result = XtraInputBox.Show(args);
-                            if (result == null || result.ToString() == "") return;
-
-                            var worksheetSettings = new ExcelWorksheetSettings(result.ToString());
-                            source.SourceOptions = new ExcelSourceOptions(worksheetSettings);
-                            source.Fill();
-
-
-                            DataTable dt = new DataTable();
-                            dt = new DataTable();
-                            dt = ToDataTable(source);
-                            //dt.AsEnumerable().Where(x => x["NGAY"].ToString() == "" + dtNgayChamCong.EditValue + "").CopyToDataTable();
+                            if (sPath == "") return;
                             try
                             {
-                                dt = dt.AsEnumerable().Where(x => x["NGAY"].Equals(dtNgayChamCong.EditValue)).CopyToDataTable();
+                                //Lấy đường dẫn
+                                var source = new ExcelDataSource();
+                                source.FileName = sPath;
+
+                                //Lấy worksheet
+                                Workbook workbook = new Workbook();
+                                string ext = System.IO.Path.GetExtension(sPath);
+                                if (ext.ToLower() == ".xlsx")
+                                    workbook.LoadDocument(sPath, DevExpress.Spreadsheet.DocumentFormat.Xlsx);
+                                else
+                                    workbook.LoadDocument(sPath, DevExpress.Spreadsheet.DocumentFormat.Xls);
+                                List<string> wSheet = new List<string>();
+                                for (int i = 0; i < workbook.Worksheets.Count; i++)
+                                {
+                                    wSheet.Add(workbook.Worksheets[i].Name.ToString());
+                                }
+                                //Load worksheet
+                                XtraInputBoxArgs args = new XtraInputBoxArgs();
+                                // set required Input Box options
+                                args.Caption = "Chọn sheet cần nhập dữ liệu";
+                                args.Prompt = "Chọn sheet cần nhập dữ liệu";
+                                args.DefaultButtonIndex = 0;
+
+                                // initialize a DateEdit editor with custom settings
+                                ComboBoxEdit editor = new ComboBoxEdit();
+                                editor.Properties.Items.AddRange(wSheet);
+                                editor.EditValue = wSheet[0].ToString();
+
+                                args.Editor = editor;
+                                // a default DateEdit value
+                                args.DefaultResponse = wSheet[0].ToString();
+                                // display an Input Box with the custom editor
+                                var result = XtraInputBox.Show(args);
+                                if (result == null || result.ToString() == "") return;
+
+                                var worksheetSettings = new ExcelWorksheetSettings(result.ToString());
+                                source.SourceOptions = new ExcelSourceOptions(worksheetSettings);
+                                source.Fill();
+
+
+                                DataTable dt = new DataTable();
+                                dt = new DataTable();
+                                dt = ToDataTable(source);
+                                //dt.AsEnumerable().Where(x => x["NGAY"].ToString() == "" + dtNgayChamCong.EditValue + "").CopyToDataTable();
+                                try
+                                {
+                                    dt = dt.AsEnumerable().Where(x => x["NGAY"].Equals(dtNgayChamCong.EditValue)).CopyToDataTable();
+                                }
+                                catch (Exception ex) { dt = dt.Clone(); }
+                                Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBTNgay, dt, "");
+                                tbDLQT.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spUpdatetbDLQT", sBTNgay, Convert.ToInt32((dt.Columns.Count - 2) / 2)));
                             }
-                            catch (Exception ex) { dt = dt.Clone(); }
-                            Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBTNgay, dt, "");
-                            tbDLQT.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spUpdatetbDLQT", sBTNgay, Convert.ToInt32((dt.Columns.Count - 2) / 2)));
-                        }
-                        catch (Exception ex)
-                        {
-                            XtraMessageBox.Show(ex.Message);
-                            bLinkOK = false;
-                            Commons.Modules.ObjSystems.XoaTable(sBTNgay);
-                            return;
-                        }
-                        #endregion
+                            catch (Exception ex)
+                            {
+                                XtraMessageBox.Show(ex.Message);
+                                bLinkOK = false;
+                                Commons.Modules.ObjSystems.XoaTable(sBTNgay);
+                                return;
+                            }
+                            #endregion
                         }
 
                         System.Data.SqlClient.SqlConnection conn;
@@ -800,9 +807,9 @@ namespace Vs.TimeAttendance
                 System.Data.SqlClient.SqlConnection conn;
                 conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
                 conn.Open();
-                string sPs = "spTongHopDuLieu";
-                if (Commons.Modules.chamCongK == true) sPs = "spTongHopDuLieu_K";
-                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand(sPs, conn);
+                string sLoad = "spTongHopDuLieu";
+                if (Commons.Modules.chamCongK == true) sLoad = "spTongHopDuLieu_K";
+                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand(sLoad, conn);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@UName", Commons.Modules.UserName);
                 cmd.Parameters.AddWithValue("@NNgu", Commons.Modules.TypeLanguage);
@@ -981,6 +988,7 @@ namespace Vs.TimeAttendance
                 if (them)
                 {
                     dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetDuLieuQuetTheCNCT", dtNgay, idCN, Commons.Modules.chamCongK));
+                    dt.Columns["CHINH_SUA"].ReadOnly = true;
                     Commons.Modules.ObjSystems.MLoadXtraGrid(grdChamCong, grvChamCong, dt, true, false, true, true, true, this.Name);
                     DataTable dID_NHOM = new DataTable();
                     dID_NHOM.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetNhomCC", dtNgayChamCong.EditValue, Commons.Modules.UserName, Commons.Modules.TypeLanguage));
@@ -990,6 +998,7 @@ namespace Vs.TimeAttendance
                 else
                 {
                     dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetDuLieuQuetTheCNCT", dtNgay, idCN, Commons.Modules.chamCongK));
+                    dt.Columns["CHINH_SUA"].ReadOnly = true;
                     Commons.Modules.ObjSystems.MLoadXtraGrid(grdChamCong, grvChamCong, dt, false, false, true, true, true, this.Name);
                     DataTable dID_NHOM = new DataTable();
                     dID_NHOM.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetNhomCC", dtNgayChamCong.EditValue, Commons.Modules.UserName, Commons.Modules.TypeLanguage));
@@ -1013,6 +1022,11 @@ namespace Vs.TimeAttendance
                 grvChamCong.Columns["GIO_DEN"].DisplayFormat.FormatString = "HH:mm:ss";
                 grvChamCong.Columns["GIO_DEN"].ColumnEdit = this.repositoryItemTimeEdit1;
                 grvChamCong.Columns["GIO_VE"].ColumnEdit = this.repositoryItemTimeEdit1;
+
+
+                RepositoryItemSearchLookUpEdit cbo = new RepositoryItemSearchLookUpEdit();
+                Commons.Modules.ObjSystems.AddCombSearchLookUpEdit(cbo, "ID_XNG", "TEN_XNG", "ID_XNG", grvChamCong, Commons.Modules.ObjSystems.DataXacNhanGio(false), this.Name);
+
                 grvChamCong.RefreshData();
             }
             catch (Exception ex)
@@ -1034,8 +1048,8 @@ namespace Vs.TimeAttendance
 
         private void cbTo_EditValueChanged(object sender, EventArgs e)
         {
-            if (Commons.Modules.sPS == "0Load") return;
-            Commons.Modules.sPS = "0Load";
+            if (Commons.Modules.sLoad == "0Load") return;
+            Commons.Modules.sLoad = "0Load";
             grdDSCN.DataSource = null;
             grvDSCN.RefreshData();
             //lblTongCong.Text = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgTongSoCN") + "0";
@@ -1049,19 +1063,19 @@ namespace Vs.TimeAttendance
             {
 
             }
-            Commons.Modules.sPS = "";
+            Commons.Modules.sLoad = "";
 
         }
 
         private void dtNgayChamCong_EditValueChanged(object sender, EventArgs e)
         {
-            if (Commons.Modules.sPS != "0Load")
+            if (Commons.Modules.sLoad != "0Load")
             {
                 LoadLuoiNgay(dtNgayChamCong.DateTime);
             }
             else
             {
-                Commons.Modules.sPS = "";
+                Commons.Modules.sLoad = "";
             }
             grdDSCN.DataSource = null;
             grvDSCN.RefreshData();
@@ -1074,7 +1088,7 @@ namespace Vs.TimeAttendance
             {
 
             }
-            Commons.Modules.sPS = "";
+            Commons.Modules.sLoad = "";
         }
 
         private void grvDSCN_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
@@ -1176,7 +1190,7 @@ namespace Vs.TimeAttendance
         }
         private void grdNgay_DoubleClick(object sender, EventArgs e)
         {
-            Commons.Modules.sPS = "0Load";
+            Commons.Modules.sLoad = "0Load";
             DateTime ngay = (DateTime)grvNgay.GetFocusedRowCellValue("NGAY");
             dtNgayChamCong.EditValue = ngay;
             grdDSCN.DataSource = null;
@@ -1324,6 +1338,20 @@ namespace Vs.TimeAttendance
                 returnCharCount += CharacterIncrement(rev - 1);
                 returnCharCount += CharacterIncrement(colCount);
                 return returnCharCount;
+            }
+        }
+
+        private void grvDSCN_RowStyle(object sender, RowStyleEventArgs e)
+        {
+            try
+            {
+                if (Convert.ToBoolean(grvDSCN.GetRowCellValue(e.RowHandle, grvDSCN.Columns["CHINH_SUA"].FieldName)) == false) return;
+                e.Appearance.BackColor = System.Drawing.ColorTranslator.FromHtml("#CC99FF");
+                e.HighPriority = true;
+            }
+            catch
+            {
+
             }
         }
     }

@@ -53,46 +53,46 @@ namespace Vs.TimeAttendance
         private void ucKhongTinhPhep_Load(object sender, EventArgs e)
         {
             Thread.Sleep(1000);
-            Commons.Modules.sPS = "0Load";
+            Commons.Modules.sLoad = "0Load";
             Commons.Modules.ObjSystems.LoadCboDonVi(cboDV);
             Commons.Modules.ObjSystems.LoadCboXiNghiep(cboDV, cboXN);
             Commons.Modules.ObjSystems.LoadCboTo(cboDV, cboXN, cboTo);
 
             LoadThang();
             LoadGridKhongTinhPhep();
-            Commons.Modules.sPS = "";
+            Commons.Modules.sLoad = "";
             enableButon(true);
         }
         private void cboDV_EditValueChanged(object sender, EventArgs e)
         {
-            if (Commons.Modules.sPS == "0Load") return;
-            Commons.Modules.sPS = "0Load";
+            if (Commons.Modules.sLoad == "0Load") return;
+            Commons.Modules.sLoad = "0Load";
             Commons.Modules.ObjSystems.LoadCboXiNghiep(cboDV, cboXN);
             Commons.Modules.ObjSystems.LoadCboTo(cboDV, cboXN, cboTo);
             LoadGridKhongTinhPhep();
-            Commons.Modules.sPS = "";
+            Commons.Modules.sLoad = "";
         }
         private void cboXN_EditValueChanged(object sender, EventArgs e)
         {
-            if (Commons.Modules.sPS == "0Load") return;
-            Commons.Modules.sPS = "0Load";
+            if (Commons.Modules.sLoad == "0Load") return;
+            Commons.Modules.sLoad = "0Load";
             Commons.Modules.ObjSystems.LoadCboTo(cboDV, cboXN, cboTo);
             LoadGridKhongTinhPhep();
-            Commons.Modules.sPS = "";
+            Commons.Modules.sLoad = "";
         }
         private void cboTo_EditValueChanged(object sender, EventArgs e)
         {
-            if (Commons.Modules.sPS == "0Load") return;
-            Commons.Modules.sPS = "0Load";
+            if (Commons.Modules.sLoad == "0Load") return;
+            Commons.Modules.sLoad = "0Load";
             LoadGridKhongTinhPhep();
-            Commons.Modules.sPS = "";
+            Commons.Modules.sLoad = "";
         }
         private void cboThang_EditValueChanged(object sender, EventArgs e)
         {
-            if (Commons.Modules.sPS == "0Load") return;
-            Commons.Modules.sPS = "0Load";
+            if (Commons.Modules.sLoad == "0Load") return;
+            Commons.Modules.sLoad = "0Load";
             LoadGridKhongTinhPhep();
-            Commons.Modules.sPS = "";
+            Commons.Modules.sLoad = "";
         }
         private void windowsUIButton_ButtonClick(object sender, DevExpress.XtraBars.Docking2010.ButtonEventArgs e)
         {

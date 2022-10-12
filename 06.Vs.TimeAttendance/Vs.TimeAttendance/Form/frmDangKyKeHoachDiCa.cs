@@ -22,7 +22,7 @@ namespace Vs.TimeAttendance
 
         private void frmDangKyKeHoachDiCa_Load(object sender, EventArgs e)
         {
-            Commons.Modules.sPS = "0Load";
+            Commons.Modules.sLoad = "0Load";
             Commons.Modules.ObjSystems.ThayDoiNN(this, Root);
             //Commons.Modules.ObjSystems.MLoadLookUpEdit(cboNhom, Commons.Modules.ObjSystems.DataNhom(), "ID_NHOM", "TEN_NHOM", Commons.Modules.ObjLanguages.GetLanguage(this.Name, "TEN_NHOM"));
             //Commons.Modules.ObjSystems.MLoadLookUpEdit(cboCa, Commons.Modules.ObjSystems.DataCa(Convert.ToInt32(cboNhom.EditValue)), "CA", "CA", Commons.Modules.ObjLanguages.GetLanguage(this.Name, "TEN_NHOM"));
@@ -39,13 +39,13 @@ namespace Vs.TimeAttendance
             loadcbm();
             loadcbm_ca();
             LoadGrdCongNhan();
-            Commons.Modules.sPS = "";
+            Commons.Modules.sLoad = "";
         }
         private void LoadGrdCongNhan()
         {
             try
             {
-                Commons.Modules.sPS = "0Load";
+                Commons.Modules.sLoad = "0Load";
                 DataTable dt = new DataTable();
                 dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetChonCongNhan", cboDV.EditValue, cboXN.EditValue, cboTo.EditValue, Commons.Modules.UserName, Commons.Modules.TypeLanguage));
                 dt.Columns["CHON"].ReadOnly = false;
@@ -65,7 +65,7 @@ namespace Vs.TimeAttendance
                 //grvData.Columns["CHON"].AppearanceHeader.BackColor = Color.FromArgb(240, 128, 25);
                 //grvData.Columns["TEN_TO"].AppearanceHeader.BackColor = Color.FromArgb(240, 128, 25);
                 //grvData.Columns["TEN_XN"].AppearanceHeader.BackColor = Color.FromArgb(240, 128, 25);
-                Commons.Modules.sPS = "";
+                Commons.Modules.sLoad = "";
             }
             catch (Exception)
             {
@@ -74,27 +74,27 @@ namespace Vs.TimeAttendance
         
         private void cboDV_EditValueChanged(object sender, EventArgs e)
         {
-            if (Commons.Modules.sPS == "0Load") return;
-            Commons.Modules.sPS = "0Load";
+            if (Commons.Modules.sLoad == "0Load") return;
+            Commons.Modules.sLoad = "0Load";
             Commons.Modules.ObjSystems.LoadCboXiNghiep(cboDV, cboXN);
             Commons.Modules.ObjSystems.LoadCboTo(cboDV, cboXN, cboTo);
             LoadGrdCongNhan();
-            Commons.Modules.sPS = "";
+            Commons.Modules.sLoad = "";
         }
         private void cboXN_EditValueChanged(object sender, EventArgs e)
         {
-            if (Commons.Modules.sPS == "0Load") return;
-            Commons.Modules.sPS = "0Load";
+            if (Commons.Modules.sLoad == "0Load") return;
+            Commons.Modules.sLoad = "0Load";
             Commons.Modules.ObjSystems.LoadCboTo(cboDV, cboXN, cboTo);
             LoadGrdCongNhan();
-            Commons.Modules.sPS = "";
+            Commons.Modules.sLoad = "";
         }
         private void cboTo_EditValueChanged(object sender, EventArgs e)
         {
-            if (Commons.Modules.sPS == "0Load") return;
-            Commons.Modules.sPS = "0Load";
+            if (Commons.Modules.sLoad == "0Load") return;
+            Commons.Modules.sLoad = "0Load";
             LoadGrdCongNhan();
-            Commons.Modules.sPS = "";
+            Commons.Modules.sLoad = "";
         }
 
         private void windowsUIButton_ButtonClick(object sender, DevExpress.XtraBars.Docking2010.ButtonEventArgs e)

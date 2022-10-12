@@ -166,7 +166,38 @@ namespace VietSoftHRM
 
         private void treeListMenu_RowCellClick(object sender, DevExpress.XtraTreeList.RowCellClickEventArgs e)
         {
-            // MessageBox.Show("dsds");
+            setValue_treeListMenu(e.Node);
+        }
+
+        private void treeListMenu_CellValueChanged(object sender, DevExpress.XtraTreeList.CellValueChangedEventArgs e)
+        {
+            setValue_treeListMenu(e.Node);
+        }
+
+        private void setValue_treeListMenu(TreeListNode node)
+        {
+            try
+            {
+                if (int.Parse(node.GetValue(treeListMenu.Columns["ID_PERMISION"]).ToString()) < int.Parse(node.ParentNode.GetValue(treeListMenu.Columns["ID_PERMISION"]).ToString()))
+                {
+                    node.ParentNode.SetValue(treeListMenu.Columns["ID_PERMISION"], node.GetValue(treeListMenu.Columns["ID_PERMISION"]));
+                    setValue_treeListMenu(node.ParentNode);
+                }
+            }
+            catch { }
+
+            try
+            {
+                foreach (TreeListNode ChildNode in node.Nodes)
+                {
+                    if (int.Parse(node.GetValue(treeListMenu.Columns["ID_PERMISION"]).ToString()) > int.Parse(ChildNode.GetValue(treeListMenu.Columns["ID_PERMISION"]).ToString()))
+                    {
+                        ChildNode.SetValue(treeListMenu.Columns["ID_PERMISION"], node.GetValue(treeListMenu.Columns["ID_PERMISION"]));
+                        setValue_treeListMenu(ChildNode);
+                    }
+                }
+            }
+            catch { }
         }
 
         private void cboNhomUser_EditValueChanged(object sender, EventArgs e)

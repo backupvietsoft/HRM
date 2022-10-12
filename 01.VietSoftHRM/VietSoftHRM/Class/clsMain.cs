@@ -51,7 +51,7 @@ namespace VietSoftHRM
                 Commons.Modules.iSoLeSL = 1;
                 Commons.Modules.iSoLeDG = 2;
                 Commons.Modules.iSoLeTT = 0;
-                Commons.Modules.iGio = 8;
+                Commons.Modules.iGio = 9.6;
                 Commons.Modules.iNNghi = 1;
                 Commons.Modules.iLamTronGio = 0;
                 Commons.Modules.sSoLeSL = Commons.Modules.ObjSystems.sDinhDangSoLe(Commons.Modules.iSoLeSL);
@@ -207,7 +207,6 @@ namespace VietSoftHRM
                 String link3 = sArr[3];
                 //Khong có loai update thi thoát
                 if (loai <= -1) return;
-                loai = 0;
                 switch (loai)
                 {
                     //Loai 2 xai link1,2 : path link tren dropbox 

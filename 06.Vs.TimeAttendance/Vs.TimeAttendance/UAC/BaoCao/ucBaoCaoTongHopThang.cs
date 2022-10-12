@@ -111,29 +111,6 @@ namespace Vs.TimeAttendance
                 case "Print":
                     {
 
-                        int n = rdo_ChonBaoCao.SelectedIndex;
-                        if (rdo_ChonBaoCao.Properties.Items.Count < 10)
-                        {
-                            if (sKyHieuDV == "SB")
-                            {
-                                n = (n >= 4 ? n + 1 : n);
-                            }
-                            else if (sKyHieuDV == "DM")
-                            {
-                                if (n < 3)
-                                {
-                                    n = (n >= 2 ? n + 1 : n);
-                                }
-                                else
-                                {
-                                    n = (n >= 3 ? n + 3 : n);
-                                }
-                            }
-                            else
-                            {
-                                n = (n >= 5 ? n + 1 : n); // Bằng 5 hiện chênh lệch
-                            }
-                        }
                         switch (rdo_ChonBaoCao.Properties.Items[rdo_ChonBaoCao.SelectedIndex].Tag)
                         {
                             case "rdo_BangChamCongThang":
@@ -379,72 +356,28 @@ namespace Vs.TimeAttendance
 
         private void rdo_ChonBaoCao_SelectedIndexChanged(object sender, EventArgs e)
         {
-            switch (rdo_ChonBaoCao.SelectedIndex)
+            switch (rdo_ChonBaoCao.Properties.Items[rdo_ChonBaoCao.SelectedIndex].Tag)
             {
-                case 0:
-                    {
-                        rdo_DiTreVeSom.Visible = false;
-                        chkThayDoiCa.Enabled = false;
-                        lblThayDoiCa.Enabled = false;
-                    }
-                    break;
-                case 1:
-                    {
-                        rdo_DiTreVeSom.Visible = false;
-                        chkThayDoiCa.Enabled = false;
-                        lblThayDoiCa.Enabled = false;
-                    }
-                    break;
-                case 2:
+                case "rdo_BangTongHopDiTreVeSomThang":
                     {
                         rdo_DiTreVeSom.Visible = true;
                         chkThayDoiCa.Enabled = false;
                         lblThayDoiCa.Enabled = false;
                     }
                     break;
-                case 3:
-                    {
-                        rdo_DiTreVeSom.Visible = false;
-                        chkThayDoiCa.Enabled = false;
-                        lblThayDoiCa.Enabled = false;
-                    }
-                    break;
-                case 4:
-                    {
-                        rdo_DiTreVeSom.Visible = false;
-                        chkThayDoiCa.Enabled = false;
-                        lblThayDoiCa.Enabled = false;
-                    }
-                    break;
-                case 5:
-                    {
-                        rdo_DiTreVeSom.Visible = false;
-                        chkThayDoiCa.Enabled = false;
-                        lblThayDoiCa.Enabled = false;
-                    }
-                    break;
-                case 6:
-                    {
-                        rdo_DiTreVeSom.Visible = false;
-                        chkThayDoiCa.Enabled = false;
-                        lblThayDoiCa.Enabled = false;
-                        break;
-                    }
-                case 7:
+                case "rdo_ThongTinNhomCCThang":
                     {
                         rdo_DiTreVeSom.Visible = false;
                         chkThayDoiCa.Enabled = true;
                         lblThayDoiCa.Enabled = true;
                         break;
                     }
-                case 8:
+                default:
                     {
                         rdo_DiTreVeSom.Visible = false;
                         chkThayDoiCa.Enabled = false;
                         lblThayDoiCa.Enabled = false;
-                        break;
                     }
-                default:
                     break;
             }
         }
@@ -831,7 +764,7 @@ namespace Vs.TimeAttendance
 
                 Range row5_TieuDe_To = oSheet.get_Range("F5", "F6");
                 row5_TieuDe_To.Merge();
-                row5_TieuDe_To.Value2 = "Tổ";
+                row5_TieuDe_To.Value2 = "Chuyền/Phòng";
                 row5_TieuDe_To.ColumnWidth = 20;
 
                 Range row5_TieuDe_TO_A = oSheet.get_Range("F7");
@@ -1200,7 +1133,7 @@ namespace Vs.TimeAttendance
 
                 Range row5_TieuDe_To = oSheet.get_Range("D5");
                 row5_TieuDe_To.Merge();
-                row5_TieuDe_To.Value2 = "TỔ";
+                row5_TieuDe_To.Value2 = "Chuyền/Phòng";
                 row5_TieuDe_To.ColumnWidth = 12;
 
                 Range row6_TieuDe_To = oSheet.get_Range("D6");
@@ -1329,7 +1262,7 @@ namespace Vs.TimeAttendance
                     // Tạo group xí nghiệp
                     Range row_groupXI_NGHIEP_Format = oSheet.get_Range("A" + rowBD + "".ToString(), lastColumn + "" + rowBD + "".ToString()); //27 + 31
                     row_groupXI_NGHIEP_Format.Interior.Color = Color.FromArgb(0, 255, 255);
-                    oSheet.Cells[rowBD, 1] = "TỔ";
+                    oSheet.Cells[rowBD, 1] = "Chuyền/Phòng";
                     oSheet.Range[oSheet.Cells[Convert.ToInt32(rowBD), 1], oSheet.Cells[Convert.ToInt32(rowBD), 2]].Merge();
                     oSheet.Range[oSheet.Cells[Convert.ToInt32(rowBD), 1], oSheet.Cells[Convert.ToInt32(rowBD), 2]].Font.Bold = true;
                     oSheet.Cells[rowBD, 3] = TEN_TO[i].ToString();
@@ -2864,7 +2797,7 @@ namespace Vs.TimeAttendance
                 row5_TieuDe4.Cells.VerticalAlignment = Excell.XlVAlign.xlVAlignCenter;
                 row5_TieuDe4.Font.Bold = true;
                 row5_TieuDe4.Interior.Color = Color.FromArgb(198, 224, 180);
-                row5_TieuDe4.Value2 = "Tổ";
+                row5_TieuDe4.Value2 = "Chuyền/Phòng";
 
                 //Excell.Range row5_TO = oSheet.get_Range("E6");
                 //row5_TO.Value2 = "Team";
@@ -3177,7 +3110,7 @@ namespace Vs.TimeAttendance
                 //System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptBangXacNhanGioQuetThe", conn);
 
 
-                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand(Commons.Modules.ObjSystems.returnSps(Commons.Modules.chamCongK, sKyHieuDV  == "DM" ? "rptBangTongCongThang_DM" : "rptBangTongCongThang_DM"), conn);
+                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand(Commons.Modules.ObjSystems.returnSps(Commons.Modules.chamCongK, sKyHieuDV == "DM" ? "rptBangTongCongThang_DM" : "rptBangTongCongThang_DM"), conn);
 
                 cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
                 cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
@@ -3265,7 +3198,7 @@ namespace Vs.TimeAttendance
 
                 Excell.Range row5_TieuDe_Cot3 = oSheet.get_Range("C5", "C6");
                 row5_TieuDe_Cot3.Merge();
-                row5_TieuDe_Cot3.Value2 = "Tổ";
+                row5_TieuDe_Cot3.Value2 = "Chuyền/Phòng";
                 row5_TieuDe_Cot3.ColumnWidth = 20;
 
                 Excell.Range row5_TieuDe_Cot4 = oSheet.get_Range("D5", "D6");
@@ -4616,7 +4549,7 @@ namespace Vs.TimeAttendance
 
                 Excell.Range row5_TieuDe_Cot3 = oSheet.get_Range("C5", "C6");
                 row5_TieuDe_Cot3.Merge();
-                row5_TieuDe_Cot3.Value2 = "Tổ";
+                row5_TieuDe_Cot3.Value2 = "Chuyền/Phòng";
                 row5_TieuDe_Cot3.ColumnWidth = 20;
 
                 Excell.Range row5_TieuDe_Cot4 = oSheet.get_Range("D5", "D6");
@@ -5240,12 +5173,24 @@ namespace Vs.TimeAttendance
 
                 //Từ STT - Mã số CN
                 Excell.Range formatRange3;
-                formatRange3 = oSheet.get_Range("A6", "C" + (rowCnt - 1).ToString());
+                formatRange3 = oSheet.get_Range("A6", "B" + (rowCnt - 1).ToString());
                 formatRange3.Cells.HorizontalAlignment = Excell.XlHAlign.xlHAlignCenter;
                 formatRange3.Cells.VerticalAlignment = Excell.XlVAlign.xlVAlignCenter;
 
-                formatRange3 = oSheet.get_Range("B6", "B" + (rowCnt - 1).ToString());
+                formatRange3 = oSheet.get_Range("C6", "D" + (rowCnt - 1).ToString());
                 formatRange3.Cells.HorizontalAlignment = Excell.XlHAlign.xlHAlignLeft;
+                formatRange3.Cells.VerticalAlignment = Excell.XlVAlign.xlVAlignCenter;
+
+                formatRange3 = oSheet.get_Range("E6", "E" + (rowCnt - 1).ToString());
+                formatRange3.Cells.HorizontalAlignment = Excell.XlHAlign.xlHAlignCenter;
+                formatRange3.Cells.VerticalAlignment = Excell.XlVAlign.xlVAlignCenter;
+
+                formatRange3 = oSheet.get_Range("F6", "F" + (rowCnt - 1).ToString());
+                formatRange3.Cells.HorizontalAlignment = Excell.XlHAlign.xlHAlignLeft;
+                formatRange3.Cells.VerticalAlignment = Excell.XlVAlign.xlVAlignCenter;
+
+                formatRange3 = oSheet.get_Range("G6", "K" + (rowCnt - 1).ToString());
+                formatRange3.Cells.HorizontalAlignment = Excell.XlHAlign.xlHAlignCenter;
                 formatRange3.Cells.VerticalAlignment = Excell.XlVAlign.xlVAlignCenter;
 
                 // PHANBO -  đến hết
@@ -5254,12 +5199,11 @@ namespace Vs.TimeAttendance
                 formatRange1.Font.Name = fontName;
                 formatRange1.Font.Size = 9;
 
-                // COT X -  đến hết
-                Excell.Range formatRange4;
-                formatRange4 = oSheet.get_Range("X6", lastColumn + (rowCnt - 1).ToString());
-                formatRange4.Cells.HorizontalAlignment = Excell.XlHAlign.xlHAlignCenter;
-                formatRange4.Cells.VerticalAlignment = Excell.XlVAlign.xlVAlignCenter;
+                // COT L -  đến hết
 
+                formatRange3 = oSheet.get_Range("L6", lastColumn + (rowCnt - 1).ToString());
+                formatRange3.Cells.HorizontalAlignment = Excell.XlHAlign.xlHAlignCenter;
+                formatRange3.Cells.VerticalAlignment = Excell.XlVAlign.xlVAlignCenter;
 
                 //object result = myRange.AutoFilter(1,"HO_TEN");
 

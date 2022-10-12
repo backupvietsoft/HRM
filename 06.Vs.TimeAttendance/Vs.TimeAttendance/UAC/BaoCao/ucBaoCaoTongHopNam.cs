@@ -766,7 +766,7 @@ namespace Vs.TimeAttendance
 
                 Range row5_TieuDe_TO = oSheet.get_Range("E5", "E6");
                 row5_TieuDe_TO.Merge();
-                row5_TieuDe_TO.Value2 = "Tổ";
+                row5_TieuDe_TO.Value2 = "Chuyền/Phòng";
                 row5_TieuDe_TO.ColumnWidth = 15;
 
                 Range row5_TieuDe_NTV = oSheet.get_Range("F5", "F6");
@@ -1022,7 +1022,7 @@ namespace Vs.TimeAttendance
 
                 Range row5_TieuDe_TO = oSheet.get_Range("E5", "E6");
                 row5_TieuDe_TO.Merge();
-                row5_TieuDe_TO.Value2 = "Tổ";
+                row5_TieuDe_TO.Value2 = "Chuyền/Phòng";
                 row5_TieuDe_TO.ColumnWidth = 15;
 
                 Range row5_TieuDe_NTV = oSheet.get_Range("F5", "F6");
@@ -1276,7 +1276,7 @@ namespace Vs.TimeAttendance
 
                 Range row5_TieuDe_TO = oSheet.get_Range("E5", "E6");
                 row5_TieuDe_TO.Merge();
-                row5_TieuDe_TO.Value2 = "Tổ";
+                row5_TieuDe_TO.Value2 = "Chuyền/Phòng";
                 row5_TieuDe_TO.ColumnWidth = 15;
 
                 Range row5_TieuDe_NTV = oSheet.get_Range("F5", "F6");
@@ -1539,7 +1539,7 @@ namespace Vs.TimeAttendance
 
 
                 Range row5_TieuDe_TO = oSheet.get_Range("E5");
-                row5_TieuDe_TO.Value2 = "Tổ";
+                row5_TieuDe_TO.Value2 = "Chuyền/Phòng";
                 row5_TieuDe_TO.ColumnWidth = 15;
 
                 Range row5_TieuDe_NTV = oSheet.get_Range("F5");

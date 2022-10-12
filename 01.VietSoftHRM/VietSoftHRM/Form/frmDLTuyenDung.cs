@@ -49,13 +49,13 @@ namespace VietSoftHRM
             {
                 DataTable dt = new DataTable();
                 dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT ID_LCV,ID_XN,GHI_CHU FROM dbo.LOAI_CONG_VIEC_XI_NGHIEP WHERE ID_XN = " + iiD_XN + ""));
-
+                dt.Columns["GHI_CHU"].ReadOnly = false;
                 if (grdViTri.DataSource == null)
                 {
                     Commons.Modules.ObjSystems.MLoadXtraGrid(grdViTri, grvViTri, dt, false, false, true, true, true, this.Name);
                     grvViTri.Columns["ID_XN"].Visible = false;
 
-                    Commons.Modules.ObjSystems.AddCombXtra("ID_LCV", "TEN_LCV", grvViTri, Commons.Modules.ObjSystems.DataLoaiCV(false, Convert.ToInt32(iiD_XN)), true, "ID_LCV", this.Name, true);
+                    Commons.Modules.ObjSystems.AddCombXtra("ID_LCV", "TEN_LCV", grvViTri, Commons.Modules.ObjSystems.DataLoaiCV(false, -1), true, "ID_LCV", this.Name, true);
                 }
                 else
                 {
@@ -72,11 +72,12 @@ namespace VietSoftHRM
             try
             {
                 DataTable dt = new DataTable();
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT T1.ID_CN, T2.HO + ' ' + T2.TEN HO_TEN, ISNULL(T1.PHONG_VAN,0) PHONG_VAN , ISNULL(T1.YEU_CAU,0) YEU_CAU FROM dbo.XI_NGHIEP_NGUOI_TUYEN_DUNG T1 INNER JOIN dbo.CONG_NHAN T2 ON T2.ID_CN = T1.ID_CN WHERE T1.ID_XN = " + iiD_XN + " ORDER BY HO_TEN"));
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT T1.ID_CN, T2.HO + ' ' + T2.TEN HO_TEN, ISNULL(T1.PHONG_VAN,0) PHONG_VAN , ISNULL(T1.YEU_CAU,0) YEU_CAU, ISNULL(T1.ACTIVE,0) ACTIVE FROM dbo.XI_NGHIEP_NGUOI_TUYEN_DUNG T1 INNER JOIN dbo.CONG_NHAN T2 ON T2.ID_CN = T1.ID_CN WHERE T1.ID_XN = " + iiD_XN + " ORDER BY HO_TEN"));
                 dt.Columns["ID_CN"].ReadOnly = false;
                 dt.Columns["HO_TEN"].ReadOnly = false;
                 dt.Columns["PHONG_VAN"].ReadOnly = false;
                 dt.Columns["YEU_CAU"].ReadOnly = false;
+                dt.Columns["ACTIVE"].ReadOnly = false;
                 if (grdThamGiaTD.DataSource == null)
                 {
                     Commons.Modules.ObjSystems.MLoadXtraGrid(grdThamGiaTD, grvThamGiaTD, dt, false, false, true, true, true, this.Name);
@@ -98,10 +99,11 @@ namespace VietSoftHRM
         private void enableButon(bool visible)
         {
             btnALL.Buttons[0].Properties.Visible = visible;
-            btnALL.Buttons[1].Properties.Visible = !visible;
+            btnALL.Buttons[1].Properties.Visible = visible;
             btnALL.Buttons[2].Properties.Visible = !visible;
-            btnALL.Buttons[3].Properties.Visible = visible;
+            btnALL.Buttons[3].Properties.Visible = !visible;
             btnALL.Buttons[4].Properties.Visible = visible;
+            btnALL.Buttons[5].Properties.Visible = visible;
 
             grvViTri.OptionsBehavior.Editable = !visible;
             grvThamGiaTD.OptionsBehavior.Editable = !visible;
@@ -124,6 +126,20 @@ namespace VietSoftHRM
                         }
                     case "xoa":
                         {
+                            if (tabControl.SelectedTabPage == tabThamGiaTD)
+                            {
+                                if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDeleteNguoiThamGiaTD"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+                                    return;
+                                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "DELETE FROM dbo.XI_NGHIEP_NGUOI_TUYEN_DUNG WHERE ID_XN = " + iiD_XN + " AND ID_CN = " + grvThamGiaTD.GetFocusedRowCellValue("ID_CN") + "");
+                                LoadNguoiTuyenDung();
+                            }
+                            else
+                            {
+                                if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDeleteViTri"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+                                    return;
+                                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "DELETE FROM dbo.LOAI_CONG_VIEC_XI_NGHIEP WHERE ID_XN = " + iiD_XN + " AND ID_LCV = " + grvViTri.GetFocusedRowCellValue("ID_LCV") + "");
+                                LoadViTri();
+                            }
                             break;
                         }
                     case "luu":
@@ -212,7 +228,7 @@ namespace VietSoftHRM
                     else
                     {
                         dt = new DataTable();
-                        dt = (DataTable)grdViTri.DataSource;
+                        dt = ((DataTable)grdViTri.DataSource).Copy();
                         if (dt.AsEnumerable().Count(x => x.Field<Int64>("ID_LCV").Equals(e.Value)) > 0)
                         {
                             e.Valid = false;
@@ -316,49 +332,28 @@ namespace VietSoftHRM
 
         private void grdViTri_ProcessGridKey(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Delete && btnALL.Buttons[0].Properties.Visible == false)
+            try
             {
-                if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDeleteYeuDuLieu"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
-                    return;
-
-                if (grvViTri.SelectedRowsCount != 0)
+                if (e.KeyCode == Keys.Delete)
                 {
-                    grvViTri.GridControl.BeginUpdate();
-                    List<int> selectedLogItems = new List<int>(grvViTri.GetSelectedRows());
-                    for (int i = selectedLogItems.Count - 1; i >= 0; i--)
-                    {
-                        grvViTri.DeleteRow(selectedLogItems[i]);
-                    }
-                    grvViTri.GridControl.EndUpdate();
-                }
-                else if (grvViTri.FocusedRowHandle != GridControl.InvalidRowHandle)
-                {
-                    grvViTri.DeleteRow(grvViTri.FocusedRowHandle);
+                    if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDeleteViTri"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+                        return;
+                    SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "DELETE FROM dbo.LOAI_CONG_VIEC_XI_NGHIEP WHERE ID_XN = " + iiD_XN + " AND ID_LCV = " + grvViTri.GetFocusedRowCellValue("ID_LCV") + "");
+                    LoadViTri();
                 }
             }
+            catch { }
         }
+
 
         private void grdThamGiaTD_ProcessGridKey(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Delete && btnALL.Buttons[0].Properties.Visible == false)
+            if (e.KeyCode == Keys.Delete)
             {
                 if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDeleteNguoiThamGiaTD"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
                     return;
-
-                if (grvThamGiaTD.SelectedRowsCount != 0)
-                {
-                    grvThamGiaTD.GridControl.BeginUpdate();
-                    List<int> selectedLogItems = new List<int>(grvThamGiaTD.GetSelectedRows());
-                    for (int i = selectedLogItems.Count - 1; i >= 0; i--)
-                    {
-                        grvThamGiaTD.DeleteRow(selectedLogItems[i]);
-                    }
-                    grvThamGiaTD.GridControl.EndUpdate();
-                }
-                else if (grvThamGiaTD.FocusedRowHandle != GridControl.InvalidRowHandle)
-                {
-                    grvThamGiaTD.DeleteRow(grvThamGiaTD.FocusedRowHandle);
-                }
+                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "DELETE FROM dbo.XI_NGHIEP_NGUOI_TUYEN_DUNG WHERE ID_XN = " + iiD_XN + " AND ID_CN = " + grvThamGiaTD.GetFocusedRowCellValue("ID_CN") + "");
+                LoadNguoiTuyenDung();
             }
         }
 
@@ -369,6 +364,7 @@ namespace VietSoftHRM
                 GridView view = sender as GridView;
                 view.SetFocusedRowCellValue(view.Columns["PHONG_VAN"], false);
                 view.SetFocusedRowCellValue(view.Columns["YEU_CAU"], false);
+                view.SetFocusedRowCellValue(view.Columns["ACTIVE"], false);
             }
             catch { }
         }

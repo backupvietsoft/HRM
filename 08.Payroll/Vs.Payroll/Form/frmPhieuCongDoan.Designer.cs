@@ -203,7 +203,6 @@
             this.cboMSCN.Size = new System.Drawing.Size(266, 24);
             this.cboMSCN.TabIndex = 4;
             this.cboMSCN.EditValueChanged += new System.EventHandler(this.cboMSCN_EditValueChanged);
-            this.cboMSCN.TextChanged += new System.EventHandler(this.txtMSCN_TextChanged);
             this.cboMSCN.Click += new System.EventHandler(this.cboMSCN_Click);
             this.cboMSCN.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cboMSCN_KeyDown);
             // 
@@ -520,7 +519,6 @@
             this.grvCD.GridControl = this.grdCD;
             this.grvCD.Name = "grvCD";
             this.grvCD.OptionsView.ShowGroupPanel = false;
-            this.grvCD.CustomRowCellEditForEditing += new DevExpress.XtraGrid.Views.Grid.CustomRowCellEditEventHandler(this.grvCD_CustomRowCellEditForEditing);
             this.grvCD.InvalidRowException += new DevExpress.XtraGrid.Views.Base.InvalidRowExceptionEventHandler(this.grvCD_InvalidRowException);
             this.grvCD.KeyDown += new System.Windows.Forms.KeyEventHandler(this.grvCD_KeyDown);
             this.grvCD.ValidatingEditor += new DevExpress.XtraEditors.Controls.BaseContainerValidateEditorEventHandler(this.grvCD_ValidatingEditor);

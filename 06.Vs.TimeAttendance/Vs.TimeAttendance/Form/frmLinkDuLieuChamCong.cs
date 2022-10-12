@@ -54,11 +54,11 @@ namespace Vs.TimeAttendance
                 repositoryItemTimeEdit1.EditFormat.FormatString = "HH:mm:ss";
 
 
-                Commons.Modules.sPS = "0Load";
+                Commons.Modules.sLoad = "0Load";
                 Commons.Modules.ObjSystems.LoadCboDonVi(cbDonVi);
                 Commons.Modules.ObjSystems.LoadCboXiNghiep(cbDonVi, cbXiNghiep);
                 Commons.Modules.ObjSystems.LoadCboTo(cbDonVi, cbXiNghiep, cbTo);
-                Commons.Modules.sPS = "";
+                Commons.Modules.sLoad = "";
                 DateTime dt = new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day);
                 dtNgayChamCong.EditValue = dt;
                 Commons.OSystems.SetDateEditFormat(dtNgayChamCong);
@@ -715,8 +715,8 @@ namespace Vs.TimeAttendance
 
         private void cbTo_EditValueChanged(object sender, EventArgs e)
         {
-            if (Commons.Modules.sPS == "0Load") return;
-            Commons.Modules.sPS = "0Load";
+            if (Commons.Modules.sLoad == "0Load") return;
+            Commons.Modules.sLoad = "0Load";
             grdDSCN.DataSource = null;
             grvDSCN.RefreshData();
             //lblTongCong.Text = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgTongSoCN") + "0";
@@ -730,19 +730,19 @@ namespace Vs.TimeAttendance
             {
 
             }
-            Commons.Modules.sPS = "";
+            Commons.Modules.sLoad = "";
 
         }
 
         private void dtNgayChamCong_EditValueChanged(object sender, EventArgs e)
         {
-            if (Commons.Modules.sPS != "0Load")
+            if (Commons.Modules.sLoad != "0Load")
             {
                 LoadLuoiNgay(dtNgayChamCong.DateTime);
             }
             else
             {
-                Commons.Modules.sPS = "";
+                Commons.Modules.sLoad = "";
             }
             grdDSCN.DataSource = null;
             grvDSCN.RefreshData();
@@ -755,7 +755,7 @@ namespace Vs.TimeAttendance
             {
 
             }
-            Commons.Modules.sPS = "";
+            Commons.Modules.sLoad = "";
         }
         
         private void grvDSCN_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
@@ -857,7 +857,7 @@ namespace Vs.TimeAttendance
         }
         private void grdNgay_DoubleClick(object sender, EventArgs e)
         {
-            Commons.Modules.sPS = "0Load";
+            Commons.Modules.sLoad = "0Load";
             DateTime ngay = (DateTime)grvNgay.GetFocusedRowCellValue("NGAY");
             dtNgayChamCong.EditValue = ngay;
             grdDSCN.DataSource = null;

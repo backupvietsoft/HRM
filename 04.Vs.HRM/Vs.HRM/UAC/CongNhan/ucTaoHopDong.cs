@@ -127,8 +127,8 @@ namespace Vs.HRM
                     grvDSUngVien.Columns["MS_CN"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
                     grvDSUngVien.Columns["HO_TEN"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
                     grvDSUngVien.Columns["NGAY_VAO_LAM"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
-                    grvDSUngVien.Columns["MUC_LUONG_CHINH"].DisplayFormat.FormatType = FormatType.Numeric;
-                    grvDSUngVien.Columns["MUC_LUONG_CHINH"].DisplayFormat.FormatString = "n0";
+                    grvDSUngVien.Columns["LUONG_THU_VIEC"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvDSUngVien.Columns["LUONG_THU_VIEC"].DisplayFormat.FormatString = "n0";
                     grvDSUngVien.Columns["PHU_CAP"].DisplayFormat.FormatType = FormatType.Numeric;
                     grvDSUngVien.Columns["PHU_CAP"].DisplayFormat.FormatString = "n0";
                 }
@@ -229,42 +229,6 @@ namespace Vs.HRM
                     grvDSUngVien.Columns["ID_CV"].ColumnEdit = cboID_CV;
                     cboID_CV.BeforePopup += cboID_CV_BeforePopup;
                     cboID_CV.EditValueChanged += cboID_CV_EditValueChanged;
-
-                    DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit cboID_NL = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
-                    cboID_NL.NullText = "";
-                    cboID_NL.ValueMember = "ID_NL";
-                    cboID_NL.DisplayMember = "MS_NL";
-                    dt = ds.Tables[4].Copy();
-                    cboID_NL.DataSource = dt;
-                    cboID_NL.Columns.Clear();
-                    cboID_NL.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID_NL"));
-                    cboID_NL.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("MS_NL"));
-                    cboID_NL.Columns["MS_NL"].Caption = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "MS_NL");
-                    cboID_NL.AppearanceDropDownHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-                    cboID_NL.AppearanceDropDownHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-                    cboID_NL.Columns["ID_NL"].Visible = false;
-                    grvDSUngVien.Columns["ID_NL"].ColumnEdit = cboID_NL;
-                    cboID_NL.BeforePopup += cboID_NL_BeforePopup;
-                    cboID_NL.EditValueChanged += cboID_NL_EditValueChanged;
-
-                    DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit cboID_BL = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
-                    cboID_BL.NullText = "";
-                    cboID_BL.ValueMember = "ID_BL";
-                    cboID_BL.DisplayMember = "TEN_BL";
-                    //ID_VTTD,TEN_VTTD
-                    dt = ds.Tables[5].Copy();
-                    cboID_BL.DataSource = dt;
-                    cboID_BL.Columns.Clear();
-                    cboID_BL.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID_BL"));
-                    cboID_BL.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("TEN_BL"));
-                    cboID_BL.Columns["TEN_BL"].Caption = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "TEN_BL");
-                    cboID_BL.AppearanceDropDownHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-                    cboID_BL.AppearanceDropDownHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-                    cboID_BL.Columns["ID_BL"].Visible = false;
-                    grvDSUngVien.Columns["ID_BL"].ColumnEdit = cboID_BL;
-                    cboID_BL.BeforePopup += cboID_BL_BeforePopup;
-                    cboID_BL.EditValueChanged += cboID_BL_EditValueChanged;
-
 
                     DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit cboID_TT = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
                     cboID_TT.NullText = "";
@@ -399,39 +363,6 @@ namespace Vs.HRM
             }
             catch { }
         }
-        private void cboID_NL_EditValueChanged(object sender, EventArgs e)
-        {
-            LookUpEdit lookUp = sender as LookUpEdit;
-            DataRowView dataRow = lookUp.GetSelectedDataRow() as DataRowView;
-            grvDSUngVien.SetFocusedRowCellValue("ID_NL", Convert.ToInt64((dataRow.Row[0])));
-        }
-        private void cboID_NL_BeforePopup(object sender, EventArgs e)
-        {
-            try
-            {
-                DataTable dt = new DataTable();
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT ID_NL, MS_NL, CASE " + Commons.Modules.TypeLanguage + " WHEN 0 THEN TEN_NL WHEN 1 THEN ISNULL(NULLIF(TEN_NL_A,''),TEN_NL) ELSE ISNULL(NULLIF(TEN_NL_H,''),TEN_NL) END AS TEN_NL FROM dbo.NGACH_LUONG ORDER BY MS_NL"));
-                LookUpEdit lookUp = sender as LookUpEdit;
-                lookUp.Properties.DataSource = dt;
-            }
-            catch { }
-        }
-        private void cboID_BL_EditValueChanged(object sender, EventArgs e)
-        {
-            LookUpEdit lookUp = sender as LookUpEdit;
-            DataRowView dataRow = lookUp.GetSelectedDataRow() as DataRowView;
-            grvDSUngVien.SetFocusedRowCellValue("ID_BL", Convert.ToInt64((dataRow.Row[0])));
-        }
-        private void cboID_BL_BeforePopup(object sender, EventArgs e)
-        {
-            try
-            {
-                LookUpEdit lookUp = sender as LookUpEdit;
-                lookUp.Properties.DataSource = Commons.Modules.ObjSystems.DataBacLuong(Convert.ToInt64(grvDSUngVien.GetFocusedRowCellValue("ID_NL")), DateTime.Now, false);
-            }
-            catch { }
-        }
-
         private void cboID_TT_EditValueChanged(object sender, EventArgs e)
         {
             LookUpEdit lookUp = sender as LookUpEdit;
@@ -602,21 +533,6 @@ namespace Vs.HRM
                 return false;
             }
         }
-
-        private void grvNoiDung_InitNewRow(object sender, DevExpress.XtraGrid.Views.Grid.InitNewRowEventArgs e)
-        {
-            try
-            {
-                if (grvDSUngVien.RowCount == 0)
-                {
-                    return;
-                }
-            }
-            catch
-            {
-            }
-        }
-
         private void cboID_PV_EditValueChanged(object sender, EventArgs e)
         {
             if (Commons.Modules.sLoad == "0Load") return;
@@ -698,7 +614,7 @@ namespace Vs.HRM
                 ucNS.flag = true;
                 ucNS.sTenLab = "labHopDong";
                 //ns.accorMenuleft = accorMenuleft;
-                tableLayoutPanel1.Hide();
+                dataLayoutControl1.Hide();
                 this.Controls.Add(ucNS);
                 ucNS.Dock = DockStyle.Fill;
                 ucNS.backWindowsUIButtonPanel.ButtonClick += BackWindowsUIButtonPanel_ButtonClick;
@@ -739,7 +655,7 @@ namespace Vs.HRM
         public void BackWindowsUIButtonPanel_ButtonClick(object sender, ButtonEventArgs e)
         {
             ucNS.Hide();
-            tableLayoutPanel1.Show();
+            dataLayoutControl1.Show();
             LoadData();
         }
         private void grvDSUngVien_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
@@ -840,11 +756,16 @@ namespace Vs.HRM
                     row["NGAY_KT_THU_VIEC"] = NgayKT_HD;
                     //gioBD = DateTime.Parse(row["GIO_BD"].ToString());
                 }
-
-                if (e.Column.FieldName == "ID_BL")
+                if (e.Column.FieldName == "NGAY_BD_THU_VIEC")
                 {
-                    MucLuongChinh = Convert.ToDouble(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT ISNULL(MUC_LUONG,0) FROM dbo.BAC_LUONG WHERE ID_BL = " + Convert.ToInt32(grvDSUngVien.GetFocusedRowCellValue("ID_BL")) + ""));
-                    row["MUC_LUONG_CHINH"] = MucLuongChinh;
+                    int iNgayTV = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT ISNULL(SO_NGAY,0) SO_NGAY FROM dbo.LOAI_HDLD WHERE ID_LHDLD = " + Convert.ToInt32(grvDSUngVien.GetFocusedRowCellValue("ID_LHDLD")) + ""));
+                    NgayBD_HD = Convert.ToDateTime(grvDSUngVien.GetFocusedRowCellValue("NGAY_BD_THU_VIEC"));
+                    DateTime dNgayKT = Convert.ToDateTime(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT [dbo].[fnNgayKetThucHD]('" + Convert.ToDateTime(NgayBD_HD).ToString("MM/dd/yyyy") + "' ," + iNgayTV + ")"));
+                    NgayKT_HD = Convert.ToDateTime(grvDSUngVien.GetFocusedRowCellValue("NGAY_BD_THU_VIEC")).AddDays(iNgayTV);
+                    NgayKT_HD = dNgayKT;
+
+                    row["NGAY_BD_THU_VIEC"] = NgayBD_HD;
+                    row["NGAY_KT_THU_VIEC"] = NgayKT_HD;
                 }
             }
             catch (Exception ex) { }
@@ -930,30 +851,6 @@ namespace Vs.HRM
                     {
                         errorCount++;
                     }
-
-                    ////ID_NL
-                    //if (!KiemDuLieu(grvDSUngVien, dr, "ID_NL", true, 250, this.Name))
-                    //{
-                    //    errorCount++;
-                    //}
-
-                    ////ID_BL
-                    //if (!KiemDuLieu(grvDSUngVien, dr, "ID_BL", true, 250, this.Name))
-                    //{
-                    //    errorCount++;
-                    //}
-
-                    //MUC_LUONG_CHINH
-                    if (!KiemDuLieuSo(grvDSUngVien, dr, "MUC_LUONG_CHINH", grvDSUngVien.Columns["MUC_LUONG_CHINH"].FieldName.ToString(), 0, 0, true, this.Name))
-                    {
-                        errorCount++;
-                    }
-
-                    ////DIA_DIEM_LV
-                    //if (!KiemDuLieu(grvDSUngVien, dr, "DIA_DIEM_LAM_VIEC", true, 250, this.Name))
-                    //{
-                    //    errorCount++;
-                    //}
                 }
             }
             #endregion
@@ -1202,5 +1099,9 @@ namespace Vs.HRM
             }
         }
         #endregion
+        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

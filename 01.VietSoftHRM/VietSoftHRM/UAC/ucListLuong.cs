@@ -185,6 +185,16 @@ namespace VietSoftHRM
                         gtgc.Dock = DockStyle.Fill;
                         break;
                     }
+                case "mnuTinhDiemThang":
+                    {
+                        Vs.TimeAttendance.ucDiemChuyenCanThang tmp = new Vs.TimeAttendance.ucDiemChuyenCanThang();
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(tmp);
+                        Commons.Modules.ObjSystems.HideWaitForm();
+                        tmp.Dock = DockStyle.Fill;
+                        break;
+                    }
+
                 case "mnuQuyDinhPhuCap":
                     {
                         ucQuyDinhPhuCap gtgc = new ucQuyDinhPhuCap();
@@ -192,6 +202,15 @@ namespace VietSoftHRM
                         panel2.Controls.Add(gtgc);
                         Commons.Modules.ObjSystems.HideWaitForm();
                         gtgc.Dock = DockStyle.Fill;
+                        break;
+                    }
+                case "mnuMaHang":
+                    {
+                        ucMaHang ctl = new ucMaHang();
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(ctl);
+                        Commons.Modules.ObjSystems.HideWaitForm();
+                        ctl.Dock = DockStyle.Fill;
                         break;
                     }
                 case "mnuThueThuNhap":
@@ -239,13 +258,13 @@ namespace VietSoftHRM
                         ttn.Dock = DockStyle.Fill;
                         break;
                     }
-                case "mnuPhuCapLuong":
+                case "mnuTienThuongPC":
                     {
-                        ucPhuCapLuong ttn = new ucPhuCapLuong();
+                        ucTienThuongPhuCap ctl = new ucTienThuongPhuCap();
                         panel2.Controls.Clear();
-                        panel2.Controls.Add(ttn);
+                        panel2.Controls.Add(ctl);
                         Commons.Modules.ObjSystems.HideWaitForm();
-                        ttn.Dock = DockStyle.Fill;
+                        ctl.Dock = DockStyle.Fill;
                         break;
                     }
                 case "mnuHoTroTienDo":

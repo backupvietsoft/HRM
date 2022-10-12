@@ -42,6 +42,8 @@ namespace Vs.HRM
             Commons.Modules.ObjSystems.LoadCboDonVi(cboSearch_DV);
             Commons.Modules.ObjSystems.LoadCboXiNghiep(cboSearch_DV, cboSearch_XN);
             Commons.Modules.ObjSystems.LoadCboTo(cboSearch_DV, cboSearch_XN, cboSearch_TO);
+            Commons.Modules.ObjSystems.MLoadLookUpEditN(cboTINH_TRANG, Commons.Modules.ObjSystems.DataTinhTrangDuyet(false), "ID_TTD", "TEN_TT_DUYET", "TEN_TT_DUYET", "");
+            cboTINH_TRANG.EditValue = 2;
             LoadGrdCongNhan(false);
             Commons.Modules.sLoad = "";
             radTinHTrang.SelectedIndex = 0;
@@ -185,7 +187,8 @@ namespace Vs.HRM
             {
                 DataTable dt = new DataTable();
                 dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetListKeHoachNghiPhep", dateNam.DateTime.Year, grvDSCN.GetFocusedRowCellValue("ID_CN"), Commons.Modules.UserName, Commons.Modules.TypeLanguage));
-                Commons.Modules.ObjSystems.MLoadXtraGrid(grdKHNP, grvKHNP, dt, false, false, false, false, true, this.Name);
+                dt.Columns["NGHI_NUA_NGAY"].ReadOnly = false;
+                Commons.Modules.ObjSystems.MLoadXtraGrid(grdKHNP, grvKHNP, dt, false, true, false, false, true, this.Name);
                 Commons.Modules.ObjSystems.AddCombXtra("ID_LDV", "TEN_LDV", grvKHNP, Commons.Modules.ObjSystems.DataLyDoVang(false, -1), "ID_LDV", this.Name);
                 RepositoryItemDateEdit dEditN = new RepositoryItemDateEdit();
                 Commons.OSystems.SetDateRepositoryItemDateEdit(dEditN);
@@ -203,9 +206,12 @@ namespace Vs.HRM
 
                 //dt.Columns["SO_GIO"].ReadOnly = true;
                 grvKHNP.Columns["ID_KHNP"].Visible = false;
-                grvKHNP.Columns["ID_CN"].Visible = false;
+                //grvKHNP.Columns["ID_CN"].Visible = false;
+
+                RepositoryItemSearchLookUpEdit cbo = new RepositoryItemSearchLookUpEdit();
+                Commons.Modules.ObjSystems.AddCombSearchLookUpEdit(cbo, "ID_TTD", "TEN_TT_DUYET", "TINH_TRANG_DUYET", grvKHNP, Commons.Modules.ObjSystems.DataTinhTrangDuyet(false), this.Name);
             }
-            catch
+            catch (Exception ex)
             {
 
             }
@@ -259,15 +265,6 @@ namespace Vs.HRM
             LoadGrdCongNhan(false);
             Commons.Modules.sLoad = "";
         }
-        private void AddnewRow(GridView view, bool add)
-        {
-            view.OptionsBehavior.Editable = true;
-            if (add == true)
-            {
-                view.OptionsView.NewItemRowPosition = NewItemRowPosition.Bottom;
-                view.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.True;
-            }
-        }
         private void DeleteAddRow(GridView view)
         {
             view.OptionsBehavior.Editable = false;
@@ -280,7 +277,7 @@ namespace Vs.HRM
             try
             {
 
-                Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, "tabKHNP" + Commons.Modules.iIDUser, Commons.Modules.ObjSystems.ConvertDatatable(grdKHNP), "");
+                Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, "tabKHNP" + Commons.Modules.iIDUser, Commons.Modules.ObjSystems.ConvertDatatable(grvKHNP), "");
                 //string sSql = "UPDATE A set A.TU_NGAY = B.TU_NGAY, A.DEN_NGAY = B.DEN_NGAY,A.NGAY_VAO_LAM_LAI = b.NGAY_VAO_LAM_LAI,SO_GIO = b.SO_GIO,a.GHI_CHU = b.GHI_CHU from dbo.KE_HOACH_NGHI_PHEP A, dbo.tabKHNP" + Commons.Modules.iIDUser + " B where B.ID_KHNP = A.ID_KHNP and A.ID_CN = " + grvDSCN.GetFocusedRowCellValue("ID_CN") + " INSERT INTO dbo.KE_HOACH_NGHI_PHEP(ID_LDV, ID_CN, TU_NGAY, DEN_NGAY, NGAY_VAO_LAM_LAI, SO_NGAY, SO_GIO, GHI_CHU) SELECT ID_LDV," + grvDSCN.GetFocusedRowCellValue("ID_CN") + ",TU_NGAY,DEN_NGAY,NGAY_VAO_LAM_LAI,NULL,SO_GIO,GHI_CHU FROM tabKHNP" + Commons.Modules.iIDUser + " WHERE ID_KHNP NOT IN(SELECT ID_KHNP FROM dbo.KE_HOACH_NGHI_PHEP WHERE ID_CN = " + grvDSCN.GetFocusedRowCellValue("ID_CN") + ")";
                 SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spUpdateKHNP", "tabKHNP" + Commons.Modules.iIDUser, Convert.ToInt64(grvDSCN.GetFocusedRowCellValue("ID_CN")));
                 Commons.Modules.ObjSystems.XoaTable("tabKHNP" + Commons.Modules.iIDUser);
@@ -300,7 +297,7 @@ namespace Vs.HRM
             datDNgay.DateTime = DateTime.Now;
             datTNgay.DateTime = DateTime.Now;
             datNVao.DateTime = datDNgay.DateTime.AddDays(1);
-            numSoGio.Value = Commons.Modules.iGio;
+            numSoGio.Value = Convert.ToDecimal(Commons.Modules.iGio);
             Commons.Modules.sPrivate = "";
         }
         private bool KiemTraCapNhatPhep(DataTable dt)
@@ -337,7 +334,7 @@ namespace Vs.HRM
                         int n = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.fuKiemTraKeHoachNghiPhep(" + Convert.ToInt64(item["ID_CN"]) + ",'" + datTNgay.DateTime.ToString("MM/dd/yyyy") + "','" + datDNgay.DateTime.ToString("MM/dd/yyyy") + "')"));
                         if (n == 0)
                         {
-                            SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spInSertKeHoachNghiPhep", cboLDV.EditValue, Convert.ToInt64(item["ID_CN"]), datTNgay.EditValue, datDNgay.EditValue, datNVao.EditValue, numSoGio.Value, memoGhiChu.EditValue);
+                            SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spInSertKeHoachNghiPhep", cboLDV.EditValue, Convert.ToInt64(item["ID_CN"]), datTNgay.EditValue, datDNgay.EditValue, datNVao.EditValue, numSoGio.Value, cboTINH_TRANG.EditValue, memoGhiChu.EditValue);
                         }
                     }
                     catch
@@ -379,7 +376,7 @@ namespace Vs.HRM
                         windowsUIButton.Buttons[1].Properties.Visible = false;
                         windowsUIButton.Buttons[11].Properties.Visible = false;
                         windowsUIButton.Buttons[12].Properties.Visible = false;
-                        AddnewRow(grvKHNP, true);
+                        Commons.Modules.ObjSystems.AddnewRow(grvKHNP, true);
                         break;
                     }
                 case "capnhatphep":
@@ -404,6 +401,7 @@ namespace Vs.HRM
                     }
                 case "xoa":
                     {
+                        if (iKiemTinhTrang() == 1) return;
                         if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDeleteCapNhatPhep"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) return;
                         if (navigationFrame1.SelectedPage == navigationPage1)
                         {
@@ -467,11 +465,10 @@ namespace Vs.HRM
                                 kt = false;
                             }
 
-
-
                             if (kt == false)
                             {
                                 XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDaBiTrungBanKiemTraLai"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                return;
                             }
                             else
                             {
@@ -494,9 +491,10 @@ namespace Vs.HRM
                     }
                 case "khongluu":
                     {
-                        grvKHNP.RefreshData();
+                        ((DataTable)grdKHNP.DataSource).Clear();
+                        grvDSCN_FocusedRowChanged(null, null);
                         enableButon(true);
-                        DeleteAddRow(grvKHNP);
+                        //DeleteAddRow(grvKHNP);
                         break;
                     }
                 case "thoat":
@@ -555,8 +553,6 @@ namespace Vs.HRM
                 {
                     return;
                 }
-
-
                 DevExpress.XtraGrid.Columns.GridColumn mslydovang = View.Columns["ID_LDV"];
                 DevExpress.XtraGrid.Columns.GridColumn tungay = View.Columns["TU_NGAY"];
                 DevExpress.XtraGrid.Columns.GridColumn denngay = View.Columns["DEN_NGAY"];
@@ -578,6 +574,7 @@ namespace Vs.HRM
                 }
 
                 CheckDuplicateKHNP(grvKHNP, (DataTable)grdKHNP.DataSource, e);
+                View.ClearColumnErrors();
             }
             catch { }
 
@@ -630,7 +627,7 @@ namespace Vs.HRM
         private void datDNgay_EditValueChanged(object sender, EventArgs e)
         {
             if (Commons.Modules.sPrivate == "0LOAD") return;
-            int ngay = 0;
+            double ngay = 0;
             datNVao.DateTime = datDNgay.DateTime.AddDays(TinhNgayVaoLam(datDNgay.DateTime));
             TimeSpan time = datDNgay.DateTime - datTNgay.DateTime;
             TimeSpan time1 = datNVao.DateTime - datTNgay.DateTime;
@@ -655,7 +652,7 @@ namespace Vs.HRM
                         }
                         tn = tn.AddDays(1);
                     } while (datDNgay.DateTime.Date >= tn.Date);
-                    numSoGio.Value = ngay; return;
+                    numSoGio.Value = Convert.ToDecimal(ngay); return;
                 }
                 if (Commons.Modules.iNNghi == 0)
                 {
@@ -664,7 +661,7 @@ namespace Vs.HRM
                         ngay += Commons.Modules.iGio;
                         tn = tn.AddDays(1);
                     } while (datDNgay.DateTime.Date >= tn.Date);
-                    numSoGio.Value = ngay; return;
+                    numSoGio.Value = Convert.ToDecimal(ngay); return;
                 }
                 else
                 {
@@ -676,7 +673,7 @@ namespace Vs.HRM
                         }
                         tn = tn.AddDays(1);
                     } while (datDNgay.DateTime.Date >= tn.Date);
-                    numSoGio.Value = ngay; return;
+                    numSoGio.Value = Convert.ToDecimal(ngay); return;
                 }
             }
             catch (Exception)
@@ -752,13 +749,39 @@ namespace Vs.HRM
                 GridView view = sender as GridView;
                 if (view == null) return;
 
+                if (e.Column.Name == "colID_LDV")
+                {
+                    view.SetRowCellValue(e.RowHandle, view.Columns["TINH_TRANG_DUYET"], 2);
+                }
                 if (e.Column.Name == "colTU_NGAY")
                 {
                     DateTime? fromDate = view.GetRowCellValue(e.RowHandle, view.Columns["TU_NGAY"]) as DateTime?;
                     DateTime? toDate = view.GetRowCellValue(e.RowHandle, view.Columns["DEN_NGAY"]) as DateTime?;
+
+
+                    for (DateTime? dt = fromDate; dt.Value <= toDate; dt = dt.Value.AddDays(1))
+                    {
+                        if (dt.Value.DayOfWeek.ToString() == "Sunday" || dt.Value.DayOfWeek.ToString() == "Saturday")
+                        {
+                            if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgNgayBanConNamTrongThu7ChuNhatBanCoMuonTiepTuc"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
+                            {
+                                view.SetRowCellValue(e.RowHandle, view.Columns["SO_GIO"], 0);
+                                view.SetRowCellValue(e.RowHandle, view.Columns["NGAY_VAO_LAM_LAI"], null);
+                                view.SetRowCellValue(e.RowHandle, view.Columns["TU_NGAY"], null);
+                                return;
+                            }
+                            else
+                            {
+
+                                break;
+                            }
+                        }
+                    }
+
+
                     if (fromDate != null && toDate != null)
                     {
-                        int SoGio = Commons.Modules.ObjSystems.TinhSoNgayTruLeChuNhat(Convert.ToDateTime(fromDate), Convert.ToDateTime(toDate)) * Commons.Modules.iGio;
+                        double SoGio = Commons.Modules.ObjSystems.TinhSoNgayTruLeChuNhat(Convert.ToDateTime(fromDate), Convert.ToDateTime(toDate)) * Commons.Modules.iGio;
                         view.SetRowCellValue(e.RowHandle, view.Columns["SO_GIO"], SoGio);
                     }
                 }
@@ -766,9 +789,27 @@ namespace Vs.HRM
                 {
                     DateTime? fromDate = view.GetRowCellValue(e.RowHandle, view.Columns["TU_NGAY"]) as DateTime?;
                     DateTime? toDate = view.GetRowCellValue(e.RowHandle, view.Columns["DEN_NGAY"]) as DateTime?;
+
+                    for (DateTime? dt = fromDate; dt.Value <= toDate; dt = dt.Value.AddDays(1))
+                    {
+                        if (dt.Value.DayOfWeek.ToString() == "Sunday" || dt.Value.DayOfWeek.ToString() == "Saturday")
+                        {
+                            if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgNgayBanConNamTrongThu7ChuNhatBanCoMuonTiepTuc"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
+                            {
+                                view.SetRowCellValue(e.RowHandle, view.Columns["SO_GIO"], 0);
+                                view.SetRowCellValue(e.RowHandle, view.Columns["NGAY_VAO_LAM_LAI"], null);
+                                view.SetRowCellValue(e.RowHandle, view.Columns["DEN_NGAY"], null);
+                                return;
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+                    }
                     if (fromDate != null && toDate != null)
                     {
-                        int SoGio = Commons.Modules.ObjSystems.TinhSoNgayTruLeChuNhat(Convert.ToDateTime(fromDate), Convert.ToDateTime(toDate)) * Commons.Modules.iGio;
+                        double SoGio = Commons.Modules.ObjSystems.TinhSoNgayTruLeChuNhat(Convert.ToDateTime(fromDate), Convert.ToDateTime(toDate)) * Commons.Modules.iGio;
                         view.SetRowCellValue(e.RowHandle, view.Columns["SO_GIO"], SoGio);
                         view.SetRowCellValue(e.RowHandle, view.Columns["NGAY_VAO_LAM_LAI"], Convert.ToDateTime(view.GetRowCellValue(e.RowHandle, view.Columns["DEN_NGAY"])).AddDays(TinhNgayVaoLam(Convert.ToDateTime(view.GetRowCellValue(e.RowHandle, view.Columns["DEN_NGAY"])))));
                     }
@@ -783,7 +824,11 @@ namespace Vs.HRM
 
         private void grvKHNP_InitNewRow(object sender, InitNewRowEventArgs e)
         {
-
+            try
+            {
+                grvKHNP.SetFocusedRowCellValue("NGHI_NUA_NGAY", false);
+            }
+            catch { }
         }
 
         private void windowsUIButton_Click(object sender, EventArgs e)
@@ -843,6 +888,7 @@ namespace Vs.HRM
             GridView view = sender as GridView;
             try
             {
+
                 int index = ItemForSumNhanVien.Text.IndexOf(':');
                 if (index > 0)
                 {
@@ -862,6 +908,96 @@ namespace Vs.HRM
                 XtraMessageBox.Show(ex.Message.ToString());
             }
             grvDSCN_FocusedRowChanged(null, null);
+        }
+
+        private void grvKHNP_CellValueChanging(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
+        {
+            try
+            {
+                GridView view = sender as GridView;
+
+
+                if (e.Column.Name == "colNGHI_NUA_NGAY")
+                {
+                    view.SetRowCellValue(e.RowHandle, view.Columns["NGHI_NUA_NGAY"], e.Value);
+                    DateTime? fromDate = view.GetRowCellValue(e.RowHandle, view.Columns["TU_NGAY"]) as DateTime?;
+                    DateTime? toDate = view.GetRowCellValue(e.RowHandle, view.Columns["DEN_NGAY"]) as DateTime?;
+                    double SoGio = Commons.Modules.ObjSystems.TinhSoNgayTruLeChuNhat(Convert.ToDateTime(fromDate), Convert.ToDateTime(toDate)) * Commons.Modules.iGio;
+                    if (!Convert.ToBoolean(e.Value))
+                    {
+                        view.SetRowCellValue(e.RowHandle, view.Columns["SO_GIO"], SoGio);
+                    }
+                    else
+                    {
+
+                        if (fromDate == null)
+                        {
+                            view.SetRowCellValue(e.RowHandle, view.Columns["TU_NGAY"], fromDate == null ? DateTime.Now : fromDate);
+                            view.SetRowCellValue(e.RowHandle, view.Columns["DEN_NGAY"], fromDate == null ? DateTime.Now : fromDate);
+                            view.SetRowCellValue(e.RowHandle, view.Columns["NGAY_VAO_LAM_LAI"], fromDate == null ? DateTime.Now : fromDate);
+                        }
+                        view.SetRowCellValue(e.RowHandle, view.Columns["SO_GIO"], (SoGio / 2));
+                    }
+                }
+            }
+            catch { }
+        }
+        private int iKiemTinhTrang()
+        {
+            try
+            {
+                return Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT ISNULL(TINH_TRANG_DUYET,2) FROM dbo.KE_HOACH_NGHI_PHEP WHERE ID_KHNP =" + grvKHNP.GetFocusedRowCellValue("ID_KHNP") + ""));
+            }
+            catch (Exception ex)
+            {
+                return -1;
+            }
+        }
+
+        private void grvKHNP_ShowingEditor(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (iKiemTinhTrang() == 1)
+            {
+                e.Cancel = (grvKHNP.FocusedRowHandle != DevExpress.XtraGrid.GridControl.NewItemRowHandle);
+            }
+        }
+        private int kiemTrung()
+        {
+            string btKHNP = "TMPPRORUN" + Commons.Modules.UserName;
+            try
+            {
+                bool kt = true;
+                Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, btKHNP, Commons.Modules.ObjSystems.ConvertDatatable(grvKHNP), "");
+
+                DataTable dt1 = new DataTable();
+                dt1 = (DataTable)grdKHNP.DataSource;
+                try
+                {
+                    for (int i = 0; i < dt1.Rows.Count; i++)
+                    {
+                        int n = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spKiemTraKHNP", btKHNP, grvDSCN.GetFocusedRowCellValue("ID_CN"), Convert.ToDateTime(Convert.ToDateTime(grvKHNP.GetRowCellValue(i, "TU_NGAY").ToString()).ToShortDateString()), Convert.ToDateTime(grvKHNP.GetRowCellValue(i, "DEN_NGAY"))));
+                        if (n > 1)
+                        {
+                            kt = false;
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    kt = false;
+                }
+
+                if (kt == false)
+                {
+                    XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDaBiTrungBanKiemTraLai"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return 0;
+                }
+                return 1;
+            }
+            catch
+            {
+                return -1;
+            }
         }
     }
 }

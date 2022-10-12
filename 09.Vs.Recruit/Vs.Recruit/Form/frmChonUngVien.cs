@@ -19,6 +19,7 @@ namespace Vs.Recruit
         public frmChonUngVien()
         {
             InitializeComponent();
+            Commons.Modules.ObjSystems.ThayDoiNN(this, Root, btnALL);
         }
 
         #region even
@@ -117,7 +118,6 @@ namespace Vs.Recruit
             ucUV = new ucCTQLUV(Convert.ToInt64(grvChonUV.GetFocusedRowCellValue("ID_UV")));
             Commons.Modules.ObjSystems.ShowWaitForm(this);
             ucUV.Refresh();
-            tablePanel1.Hide();
             this.Controls.Add(ucUV);
             ucUV.Dock = DockStyle.Fill;
             ucUV.backWindowsUIButtonPanel.ButtonClick += BackWindowsUIButtonPanel_ButtonClick;
@@ -128,7 +128,6 @@ namespace Vs.Recruit
         {
             this.WindowState = FormWindowState.Normal;
             ucUV.Hide();
-            tablePanel1.Show();
             LoadData();
         }
 

@@ -25,6 +25,7 @@ public class ConnectToSharedFolder : IDisposable
         var result = 1;
         Thread thread = new Thread(() =>
          {
+             
              result = WNetAddConnection2(
             netResource,
             credentials.Password,

@@ -2755,11 +2755,11 @@ F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.csproj.CoreCompileInputs.ca
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.csproj.CopyComplete
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\VS.Report.dll
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\VS.Report.pdb
-D:\01.SourceCode\02.HRM\05.Vs.Report\Vs.Report\bin\Debug\DevExpress.BonusSkins.v22.1.dll
 D:\01.SourceCode\02.HRM\05.Vs.Report\Vs.Report\bin\Debug\VS.Report.dll.config
 D:\01.SourceCode\02.HRM\05.Vs.Report\Vs.Report\bin\Debug\VS.Report.dll
 D:\01.SourceCode\02.HRM\05.Vs.Report\Vs.Report\bin\Debug\VS.Report.pdb
 D:\01.SourceCode\02.HRM\05.Vs.Report\Vs.Report\bin\Debug\Commons.dll
+D:\01.SourceCode\02.HRM\05.Vs.Report\Vs.Report\bin\Debug\DevExpress.BonusSkins.v22.1.dll
 D:\01.SourceCode\02.HRM\05.Vs.Report\Vs.Report\bin\Debug\DevExpress.Charts.v22.1.Core.dll
 D:\01.SourceCode\02.HRM\05.Vs.Report\Vs.Report\bin\Debug\DevExpress.CodeParser.v22.1.dll
 D:\01.SourceCode\02.HRM\05.Vs.Report\Vs.Report\bin\Debug\DevExpress.Dashboard.v22.1.Core.dll

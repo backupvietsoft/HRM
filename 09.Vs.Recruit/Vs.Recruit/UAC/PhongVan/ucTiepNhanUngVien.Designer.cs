@@ -266,6 +266,7 @@
             new DevExpress.XtraEditors.Repository.ClearButton(),
             new DevExpress.XtraEditors.Repository.SearchButton()});
             this.searchControl1.Properties.Client = this.grdDSUngVien;
+            this.searchControl1.Properties.FindDelay = 100;
             this.searchControl1.Size = new System.Drawing.Size(192, 24);
             this.searchControl1.TabIndex = 0;
             // 

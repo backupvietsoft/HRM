@@ -620,7 +620,12 @@ namespace Commons
             try
             {
                 if (CoNull)
-                    dtTmp.Rows.Add(-99, "");
+                {
+                    DataRow row = dtTmp.NewRow();
+                    row[0] = -99;
+                    row[1] = "";
+                    dtTmp.Rows.InsertAt(row, 0);
+                }
                 cbo.Properties.DataSource = null;
                 cbo.Properties.DataSource = dtTmp;
                 cbo.Properties.DisplayMember = Ten;
@@ -5011,11 +5016,11 @@ namespace Commons
             return dt;
         }
 
-        public DataTable DataNguoiDanhGia(Int64 iYCTD, Int64 iVTTD, Int64 iDV, Int64 iXN,int active)
+        public DataTable DataNguoiDanhGia(Int64 iYCTD, Int64 iVTTD, Int64 iDV, Int64 iXN,int active,int iLoaiDG = -1)
         {
             //ID_NGUOI_DGTN,TEN_NGUOI_DGTN
             DataTable dt = new DataTable();
-            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboNguoiDanhGia", Commons.Modules.UserName,iYCTD,iVTTD,iDV,iXN, active));
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboNguoiDanhGia", Commons.Modules.UserName,iYCTD,iVTTD,iDV,iXN, active,iLoaiDG));
             return dt;
         }
 

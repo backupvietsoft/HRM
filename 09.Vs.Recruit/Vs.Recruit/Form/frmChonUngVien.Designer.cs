@@ -33,11 +33,10 @@ namespace Vs.Recruit
             DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions1 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmChonUngVien));
             DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions2 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            this.tablePanel1 = new DevExpress.Utils.Layout.TablePanel();
-            this.dataLayoutControl1 = new DevExpress.XtraDataLayout.DataLayoutControl();
-            this.grdChonUV = new DevExpress.XtraGrid.GridControl();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mnuLinkUngVienToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dataLayoutControl1 = new DevExpress.XtraDataLayout.DataLayoutControl();
+            this.grdChonUV = new DevExpress.XtraGrid.GridControl();
             this.grvChonUV = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.cboID_VTTD = new DevExpress.XtraEditors.SearchLookUpEdit();
             this.searchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -50,14 +49,13 @@ namespace Vs.Recruit
             this.lblID_TD = new DevExpress.XtraLayout.LayoutControlItem();
             this.lblID_KNLV = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.btnALL = new DevExpress.XtraBars.Docking2010.WindowsUIButtonPanel();
             this.searchControl1 = new DevExpress.XtraEditors.SearchControl();
-            ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).BeginInit();
-            this.tablePanel1.SuspendLayout();
+            this.btnALL = new DevExpress.XtraBars.Docking2010.WindowsUIButtonPanel();
+            this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataLayoutControl1)).BeginInit();
             this.dataLayoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdChonUV)).BeginInit();
-            this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grvChonUV)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboID_VTTD.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).BeginInit();
@@ -70,55 +68,10 @@ namespace Vs.Recruit
             ((System.ComponentModel.ISupportInitialize)(this.lblID_TD)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblID_KNLV)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
-            this.btnALL.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.searchControl1.Properties)).BeginInit();
+            this.btnALL.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             this.SuspendLayout();
-            // 
-            // tablePanel1
-            // 
-            this.tablePanel1.Columns.AddRange(new DevExpress.Utils.Layout.TablePanelColumn[] {
-            new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 10F),
-            new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 100F),
-            new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 10F)});
-            this.tablePanel1.Controls.Add(this.dataLayoutControl1);
-            this.tablePanel1.Controls.Add(this.btnALL);
-            this.tablePanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tablePanel1.Location = new System.Drawing.Point(0, 0);
-            this.tablePanel1.Name = "tablePanel1";
-            this.tablePanel1.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] {
-            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 8F),
-            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 90F),
-            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 46F)});
-            this.tablePanel1.Size = new System.Drawing.Size(998, 535);
-            this.tablePanel1.TabIndex = 0;
-            // 
-            // dataLayoutControl1
-            // 
-            this.tablePanel1.SetColumn(this.dataLayoutControl1, 1);
-            this.dataLayoutControl1.Controls.Add(this.grdChonUV);
-            this.dataLayoutControl1.Controls.Add(this.cboID_VTTD);
-            this.dataLayoutControl1.Controls.Add(this.cboID_NTD);
-            this.dataLayoutControl1.Controls.Add(this.cboID_TD);
-            this.dataLayoutControl1.Controls.Add(this.cboID_KNLV);
-            this.dataLayoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataLayoutControl1.Location = new System.Drawing.Point(13, 11);
-            this.dataLayoutControl1.Name = "dataLayoutControl1";
-            this.dataLayoutControl1.Root = this.Root;
-            this.tablePanel1.SetRow(this.dataLayoutControl1, 1);
-            this.dataLayoutControl1.Size = new System.Drawing.Size(972, 475);
-            this.dataLayoutControl1.TabIndex = 13;
-            this.dataLayoutControl1.Text = "dataLayoutControl1";
-            // 
-            // grdChonUV
-            // 
-            this.grdChonUV.ContextMenuStrip = this.contextMenuStrip1;
-            this.grdChonUV.Location = new System.Drawing.Point(12, 68);
-            this.grdChonUV.MainView = this.grvChonUV;
-            this.grdChonUV.Name = "grdChonUV";
-            this.grdChonUV.Size = new System.Drawing.Size(948, 395);
-            this.grdChonUV.TabIndex = 5;
-            this.grdChonUV.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.grvChonUV});
             // 
             // contextMenuStrip1
             // 
@@ -126,14 +79,41 @@ namespace Vs.Recruit
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuLinkUngVienToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(167, 26);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(219, 36);
             // 
             // mnuLinkUngVienToolStripMenuItem
             // 
             this.mnuLinkUngVienToolStripMenuItem.Name = "mnuLinkUngVienToolStripMenuItem";
-            this.mnuLinkUngVienToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.mnuLinkUngVienToolStripMenuItem.Size = new System.Drawing.Size(218, 32);
             this.mnuLinkUngVienToolStripMenuItem.Text = "mnuLinkUngVien";
             this.mnuLinkUngVienToolStripMenuItem.Click += new System.EventHandler(this.mnuLinkUngVienToolStripMenuItem_Click);
+            // 
+            // dataLayoutControl1
+            // 
+            this.dataLayoutControl1.Controls.Add(this.btnALL);
+            this.dataLayoutControl1.Controls.Add(this.grdChonUV);
+            this.dataLayoutControl1.Controls.Add(this.cboID_VTTD);
+            this.dataLayoutControl1.Controls.Add(this.cboID_NTD);
+            this.dataLayoutControl1.Controls.Add(this.cboID_TD);
+            this.dataLayoutControl1.Controls.Add(this.cboID_KNLV);
+            this.dataLayoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataLayoutControl1.Location = new System.Drawing.Point(0, 0);
+            this.dataLayoutControl1.Name = "dataLayoutControl1";
+            this.dataLayoutControl1.Root = this.Root;
+            this.dataLayoutControl1.Size = new System.Drawing.Size(998, 535);
+            this.dataLayoutControl1.TabIndex = 14;
+            this.dataLayoutControl1.Text = "dataLayoutControl1";
+            // 
+            // grdChonUV
+            // 
+            this.grdChonUV.ContextMenuStrip = this.contextMenuStrip1;
+            this.grdChonUV.Location = new System.Drawing.Point(12, 88);
+            this.grdChonUV.MainView = this.grvChonUV;
+            this.grdChonUV.Name = "grdChonUV";
+            this.grdChonUV.Size = new System.Drawing.Size(974, 383);
+            this.grdChonUV.TabIndex = 5;
+            this.grdChonUV.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.grvChonUV});
             // 
             // grvChonUV
             // 
@@ -148,18 +128,16 @@ namespace Vs.Recruit
             this.grvChonUV.OptionsView.ShowGroupPanel = false;
             this.grvChonUV.RowHeight = 0;
             this.grvChonUV.ViewCaptionHeight = 0;
-            this.grvChonUV.PopupMenuShowing += new DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler(this.grvChonUV_PopupMenuShowing);
-            this.grvChonUV.DoubleClick += new System.EventHandler(this.grvChonUV_DoubleClick);
             // 
             // cboID_VTTD
             // 
-            this.cboID_VTTD.Location = new System.Drawing.Point(139, 12);
+            this.cboID_VTTD.Location = new System.Drawing.Point(202, 12);
             this.cboID_VTTD.Name = "cboID_VTTD";
             this.cboID_VTTD.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cboID_VTTD.Properties.NullText = "";
             this.cboID_VTTD.Properties.PopupView = this.searchLookUpEdit1View;
-            this.cboID_VTTD.Size = new System.Drawing.Size(344, 24);
+            this.cboID_VTTD.Size = new System.Drawing.Size(294, 34);
             this.cboID_VTTD.StyleController = this.dataLayoutControl1;
             this.cboID_VTTD.TabIndex = 1;
             this.cboID_VTTD.EditValueChanged += new System.EventHandler(this.cboID_VTTD_EditValueChanged);
@@ -173,36 +151,36 @@ namespace Vs.Recruit
             // 
             // cboID_NTD
             // 
-            this.cboID_NTD.Location = new System.Drawing.Point(614, 12);
+            this.cboID_NTD.Location = new System.Drawing.Point(690, 12);
             this.cboID_NTD.Name = "cboID_NTD";
             this.cboID_NTD.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cboID_NTD.Properties.NullText = "";
-            this.cboID_NTD.Size = new System.Drawing.Size(346, 24);
+            this.cboID_NTD.Size = new System.Drawing.Size(296, 34);
             this.cboID_NTD.StyleController = this.dataLayoutControl1;
             this.cboID_NTD.TabIndex = 2;
             this.cboID_NTD.EditValueChanged += new System.EventHandler(this.cboID_VTTD_EditValueChanged);
             // 
             // cboID_TD
             // 
-            this.cboID_TD.Location = new System.Drawing.Point(139, 40);
+            this.cboID_TD.Location = new System.Drawing.Point(202, 50);
             this.cboID_TD.Name = "cboID_TD";
             this.cboID_TD.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cboID_TD.Properties.NullText = "";
-            this.cboID_TD.Size = new System.Drawing.Size(344, 24);
+            this.cboID_TD.Size = new System.Drawing.Size(294, 34);
             this.cboID_TD.StyleController = this.dataLayoutControl1;
             this.cboID_TD.TabIndex = 3;
             this.cboID_TD.EditValueChanged += new System.EventHandler(this.cboID_VTTD_EditValueChanged);
             // 
             // cboID_KNLV
             // 
-            this.cboID_KNLV.Location = new System.Drawing.Point(614, 40);
+            this.cboID_KNLV.Location = new System.Drawing.Point(690, 50);
             this.cboID_KNLV.Name = "cboID_KNLV";
             this.cboID_KNLV.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cboID_KNLV.Properties.NullText = "";
-            this.cboID_KNLV.Size = new System.Drawing.Size(346, 24);
+            this.cboID_KNLV.Size = new System.Drawing.Size(296, 34);
             this.cboID_KNLV.StyleController = this.dataLayoutControl1;
             this.cboID_KNLV.TabIndex = 4;
             this.cboID_KNLV.EditValueChanged += new System.EventHandler(this.cboID_VTTD_EditValueChanged);
@@ -216,9 +194,10 @@ namespace Vs.Recruit
             this.lblID_NTD,
             this.lblID_TD,
             this.lblID_KNLV,
-            this.layoutControlItem5});
+            this.layoutControlItem5,
+            this.layoutControlItem2});
             this.Root.Name = "Root";
-            this.Root.Size = new System.Drawing.Size(972, 475);
+            this.Root.Size = new System.Drawing.Size(998, 535);
             this.Root.TextVisible = false;
             // 
             // lblID_VTTD
@@ -226,45 +205,56 @@ namespace Vs.Recruit
             this.lblID_VTTD.Control = this.cboID_VTTD;
             this.lblID_VTTD.Location = new System.Drawing.Point(0, 0);
             this.lblID_VTTD.Name = "lblID_VTTD";
-            this.lblID_VTTD.Size = new System.Drawing.Size(475, 28);
+            this.lblID_VTTD.Size = new System.Drawing.Size(488, 38);
             this.lblID_VTTD.Text = "Vị trí tuyển dụng";
-            this.lblID_VTTD.TextSize = new System.Drawing.Size(123, 17);
+            this.lblID_VTTD.TextSize = new System.Drawing.Size(186, 28);
             // 
             // lblID_NTD
             // 
             this.lblID_NTD.Control = this.cboID_NTD;
-            this.lblID_NTD.Location = new System.Drawing.Point(475, 0);
+            this.lblID_NTD.Location = new System.Drawing.Point(488, 0);
             this.lblID_NTD.Name = "lblID_NTD";
-            this.lblID_NTD.Size = new System.Drawing.Size(477, 28);
+            this.lblID_NTD.Size = new System.Drawing.Size(490, 38);
             this.lblID_NTD.Text = "Nguồn tuyển dụng";
-            this.lblID_NTD.TextSize = new System.Drawing.Size(123, 17);
+            this.lblID_NTD.TextSize = new System.Drawing.Size(186, 28);
             // 
             // lblID_TD
             // 
             this.lblID_TD.Control = this.cboID_TD;
-            this.lblID_TD.Location = new System.Drawing.Point(0, 28);
+            this.lblID_TD.Location = new System.Drawing.Point(0, 38);
             this.lblID_TD.Name = "lblID_TD";
-            this.lblID_TD.Size = new System.Drawing.Size(475, 28);
+            this.lblID_TD.Size = new System.Drawing.Size(488, 38);
             this.lblID_TD.Text = "Trình độ";
-            this.lblID_TD.TextSize = new System.Drawing.Size(123, 17);
+            this.lblID_TD.TextSize = new System.Drawing.Size(186, 28);
             // 
             // lblID_KNLV
             // 
             this.lblID_KNLV.Control = this.cboID_KNLV;
-            this.lblID_KNLV.Location = new System.Drawing.Point(475, 28);
+            this.lblID_KNLV.Location = new System.Drawing.Point(488, 38);
             this.lblID_KNLV.Name = "lblID_KNLV";
-            this.lblID_KNLV.Size = new System.Drawing.Size(477, 28);
+            this.lblID_KNLV.Size = new System.Drawing.Size(490, 38);
             this.lblID_KNLV.Text = "Kinh nghiệm làm việc";
-            this.lblID_KNLV.TextSize = new System.Drawing.Size(123, 17);
+            this.lblID_KNLV.TextSize = new System.Drawing.Size(186, 28);
             // 
             // layoutControlItem5
             // 
             this.layoutControlItem5.Control = this.grdChonUV;
-            this.layoutControlItem5.Location = new System.Drawing.Point(0, 56);
+            this.layoutControlItem5.Location = new System.Drawing.Point(0, 76);
             this.layoutControlItem5.Name = "layoutControlItem5";
-            this.layoutControlItem5.Size = new System.Drawing.Size(952, 399);
+            this.layoutControlItem5.Size = new System.Drawing.Size(978, 387);
             this.layoutControlItem5.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem5.TextVisible = false;
+            // 
+            // searchControl1
+            // 
+            this.searchControl1.Location = new System.Drawing.Point(4, 10);
+            this.searchControl1.Name = "searchControl1";
+            this.searchControl1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Repository.ClearButton(),
+            new DevExpress.XtraEditors.Repository.SearchButton()});
+            this.searchControl1.Properties.FindDelay = 100;
+            this.searchControl1.Size = new System.Drawing.Size(208, 34);
+            this.searchControl1.TabIndex = 0;
             // 
             // btnALL
             // 
@@ -288,49 +278,39 @@ namespace Vs.Recruit
             this.btnALL.Buttons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] {
             new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions1, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "ghi", -1, false),
             new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions2, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "khongghi", -1, false)});
-            this.tablePanel1.SetColumn(this.btnALL, 0);
-            this.tablePanel1.SetColumnSpan(this.btnALL, 3);
             this.btnALL.ContentAlignment = System.Drawing.ContentAlignment.MiddleRight;
             this.btnALL.Controls.Add(this.searchControl1);
             this.btnALL.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnALL.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnALL.Location = new System.Drawing.Point(3, 492);
+            this.btnALL.Location = new System.Drawing.Point(12, 475);
             this.btnALL.Name = "btnALL";
-            this.tablePanel1.SetRow(this.btnALL, 2);
-            this.btnALL.Size = new System.Drawing.Size(992, 40);
+            this.btnALL.Size = new System.Drawing.Size(974, 48);
             this.btnALL.TabIndex = 6;
             this.btnALL.Text = "btnALLPanel1";
             this.btnALL.UseButtonBackgroundImages = false;
             this.btnALL.ButtonClick += new DevExpress.XtraBars.Docking2010.ButtonEventHandler(this.btnALL_ButtonClick);
             // 
-            // searchControl1
+            // layoutControlItem2
             // 
-            this.searchControl1.Client = this.grdChonUV;
-            this.searchControl1.Location = new System.Drawing.Point(19, 12);
-            this.searchControl1.Name = "searchControl1";
-            this.searchControl1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Repository.ClearButton(),
-            new DevExpress.XtraEditors.Repository.SearchButton()});
-            this.searchControl1.Properties.Client = this.grdChonUV;
-            this.searchControl1.Properties.FindDelay = 100;
-            this.searchControl1.Size = new System.Drawing.Size(208, 24);
-            this.searchControl1.TabIndex = 0;
+            this.layoutControlItem2.Control = this.btnALL;
+            this.layoutControlItem2.Location = new System.Drawing.Point(0, 463);
+            this.layoutControlItem2.Name = "layoutControlItem2";
+            this.layoutControlItem2.Size = new System.Drawing.Size(978, 52);
+            this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem2.TextVisible = false;
             // 
             // frmChonUngVien
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             this.ClientSize = new System.Drawing.Size(998, 535);
-            this.Controls.Add(this.tablePanel1);
+            this.Controls.Add(this.dataLayoutControl1);
             this.Name = "frmChonUngVien";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Chọn ứng viên";
             this.Load += new System.EventHandler(this.frmChonUngVien_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).EndInit();
-            this.tablePanel1.ResumeLayout(false);
+            this.contextMenuStrip1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataLayoutControl1)).EndInit();
             this.dataLayoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.grdChonUV)).EndInit();
-            this.contextMenuStrip1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.grvChonUV)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboID_VTTD.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).EndInit();
@@ -343,32 +323,32 @@ namespace Vs.Recruit
             ((System.ComponentModel.ISupportInitialize)(this.lblID_TD)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblID_KNLV)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
-            this.btnALL.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.searchControl1.Properties)).EndInit();
+            this.btnALL.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private DevExpress.Utils.Layout.TablePanel tablePanel1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem mnuLinkUngVienToolStripMenuItem;
         private DevExpress.XtraDataLayout.DataLayoutControl dataLayoutControl1;
+        private DevExpress.XtraBars.Docking2010.WindowsUIButtonPanel btnALL;
+        private DevExpress.XtraEditors.SearchControl searchControl1;
         private DevExpress.XtraGrid.GridControl grdChonUV;
         private DevExpress.XtraGrid.Views.Grid.GridView grvChonUV;
         private DevExpress.XtraEditors.SearchLookUpEdit cboID_VTTD;
         private DevExpress.XtraGrid.Views.Grid.GridView searchLookUpEdit1View;
+        private DevExpress.XtraEditors.LookUpEdit cboID_NTD;
+        private DevExpress.XtraEditors.LookUpEdit cboID_TD;
+        private DevExpress.XtraEditors.LookUpEdit cboID_KNLV;
         private DevExpress.XtraLayout.LayoutControlGroup Root;
         private DevExpress.XtraLayout.LayoutControlItem lblID_VTTD;
         private DevExpress.XtraLayout.LayoutControlItem lblID_NTD;
         private DevExpress.XtraLayout.LayoutControlItem lblID_TD;
         private DevExpress.XtraLayout.LayoutControlItem lblID_KNLV;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem5;
-        private DevExpress.XtraBars.Docking2010.WindowsUIButtonPanel btnALL;
-        private DevExpress.XtraEditors.SearchControl searchControl1;
-        private DevExpress.XtraEditors.LookUpEdit cboID_NTD;
-        private DevExpress.XtraEditors.LookUpEdit cboID_TD;
-        private DevExpress.XtraEditors.LookUpEdit cboID_KNLV;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem mnuLinkUngVienToolStripMenuItem;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
     }
 }

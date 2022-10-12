@@ -263,7 +263,6 @@ namespace Vs.Recruit
         }
 
 
-
         private void LoadCombo()
         {
             try

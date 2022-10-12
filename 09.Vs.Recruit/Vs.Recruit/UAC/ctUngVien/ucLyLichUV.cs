@@ -77,8 +77,8 @@ namespace Vs.Recruit
                 //DataTable dt_knlv = new DataTable();
                 //dt_knlv.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboID_KNLV", Commons.Modules.UserName, Commons.Modules.TypeLanguage, false));
                 
-                Commons.Modules.ObjSystems.MLoadLookUpEditN(cboTrinhDoHocVan, Commons.Modules.ObjSystems.DataKinhNghiemLV(false), "ID_KNLV", "TEN_KNLV", "TEN_KNLV", "");
-                Commons.Modules.ObjSystems.MLoadLookUpEditN(cboTayNghe, Commons.Modules.ObjSystems.DataTayNghe(false), "ID_TAY_NGHE", "TEN_TAY_NGHE", "TEN_TAY_NGHE", "");
+                Commons.Modules.ObjSystems.MLoadLookUpEditN(cboTrinhDoHocVan, Commons.Modules.ObjSystems.DataTDVH(-1,false), "ID_TDVH", "TEN_TDVH", "TEN_TDVH", "",true);
+                Commons.Modules.ObjSystems.MLoadLookUpEditN(cboTayNghe, Commons.Modules.ObjSystems.DataTayNghe(false), "ID_TAY_NGHE", "TEN_TAY_NGHE", "TEN_TAY_NGHE", "",true);
 
                 // cboID_NTD
                 //DataTable dt_ntd = new DataTable();

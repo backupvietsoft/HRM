@@ -539,7 +539,7 @@ namespace Vs.HRM
             {
                 frmTaoHDLD frm = new frmTaoHDLD();
                 frm.dt_temp = new DataTable();
-                frm.dt_temp = (DataTable)grdDSCongNhan.DataSource;
+                frm.dt_temp = Commons.Modules.ObjSystems.ConvertDatatable(grdDSCongNhan);
                 if (frm.ShowDialog() == DialogResult.OK)
                 {
                     LoadNhanSu(-1);

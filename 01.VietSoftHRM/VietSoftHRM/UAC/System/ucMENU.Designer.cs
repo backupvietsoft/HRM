@@ -129,6 +129,7 @@
             this.treeListMenu.TabIndex = 3;
             this.treeListMenu.TreeLevelWidth = 24;
             this.treeListMenu.RowCellClick += new DevExpress.XtraTreeList.RowCellClickEventHandler(this.treeListMenu_RowCellClick);
+            this.treeListMenu.CellValueChanged += new DevExpress.XtraTreeList.CellValueChangedEventHandler(this.treeListMenu_CellValueChanged);
             // 
             // dataLayoutControl1
             // 

@@ -224,6 +224,7 @@ namespace Vs.Payroll
                 }
                 else
                 {
+
                     try
                     {
                         if (Convert.ToInt32(sDonVi) != iID_DV)
@@ -250,29 +251,32 @@ namespace Vs.Payroll
                 }
                 else
                 {
-                    if (!KiemTrungDL(grvData, dtSource, dr, col, sMaSo, "CONG_NHAN", "MS_CN", this.Name))
+
+                    try
                     {
-                        errorCount++;
-                    }
-                    else
-                    {
-                        try
-                        {
-                            if (Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT COUNT(*) FROM dbo.CONG_NHAN CN INNER JOIN dbo.[TO] T ON T.ID_TO = CN.ID_TO INNER JOIN dbo.XI_NGHIEP  XN ON XN.ID_XN = T.ID_XN WHERE CN.MS_CN = '" + sMaSo + "' AND XN.ID_DV = " + sDonVi + "")) == 0)
-                            {
-                                errorCount++;
-                                dr.SetColumnError(grvData.Columns[col].FieldName.ToString(), Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgCongNhanKhongThuocNhaMay"));
-                                dr["XOA"] = 1;
-                            }
-                        }
-                        catch
+                        if (Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT COUNT(*) FROM dbo.CONG_NHAN CN INNER JOIN dbo.[TO] T ON T.ID_TO = CN.ID_TO INNER JOIN dbo.XI_NGHIEP  XN ON XN.ID_XN = T.ID_XN WHERE CN.MS_CN = '" + sMaSo + "' AND XN.ID_DV = " + sDonVi + "")) == 0)
                         {
                             errorCount++;
-                            dr.SetColumnError(grvData.Columns[col].FieldName.ToString(), Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgChuaTonTaiCSDL"));
+                            dr.SetColumnError(grvData.Columns[col].FieldName.ToString(), Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgCongNhanKhongThuocNhaMay"));
                             dr["XOA"] = 1;
                         }
-
                     }
+                    catch
+                    {
+                        errorCount++;
+                        dr.SetColumnError(grvData.Columns[col].FieldName.ToString(), Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgChuaTonTaiCSDL"));
+                        dr["XOA"] = 1;
+                    }
+
+                    //if (!KiemTrungDL(grvData, dtSource, dr, col, sMaSo, "CONG_NHAN", "MS_CN", this.Name))
+                    //{
+                    //    errorCount++;
+                    //}
+                    //else
+                    //{
+                        
+
+                    //}
                 }
 
                 col = 5;
@@ -725,6 +729,31 @@ namespace Vs.Payroll
         private void grvData_InvalidValueException(object sender, DevExpress.XtraEditors.Controls.InvalidValueExceptionEventArgs e)
         {
             e.ExceptionMode = DevExpress.XtraEditors.Controls.ExceptionMode.NoAction;
+        }
+
+        private void grvData_RowCountChanged(object sender, EventArgs e)
+        {
+            GridView view = sender as GridView;
+            try
+            {
+                int index = ItemForSumNhanVien.Text.IndexOf(':');
+                if (index > 0)
+                {
+                    if (view.RowCount > 0)
+                    {
+                        ItemForSumNhanVien.Text = ItemForSumNhanVien.Text.Substring(0, index) + ": " + view.RowCount.ToString();
+                    }
+                    else
+                    {
+                        ItemForSumNhanVien.Text = ItemForSumNhanVien.Text.Substring(0, index) + ": 0";
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show(ex.Message.ToString());
+            }
         }
     }
 }

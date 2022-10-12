@@ -30,17 +30,17 @@ namespace Vs.Payroll
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions4 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions1 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmImportTienThuongPhuCap));
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions5 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions6 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions2 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions3 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
             this.windowsUIButton = new DevExpress.XtraBars.Docking2010.WindowsUIButtonPanel();
             this.searchControl = new DevExpress.XtraEditors.SearchControl();
+            this.grdData = new DevExpress.XtraGrid.GridControl();
+            this.grvData = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.btnFile = new DevExpress.XtraEditors.ButtonEdit();
             this.cboChonSheet = new DevExpress.XtraEditors.LookUpEdit();
-            this.grdData = new DevExpress.XtraGrid.GridControl();
-            this.grvData = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.groThongTinImport = new DevExpress.XtraLayout.LayoutControlGroup();
             this.lblChonFile = new DevExpress.XtraLayout.LayoutControlItem();
@@ -48,20 +48,22 @@ namespace Vs.Payroll
             this.groDLImport = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.ItemForSumNhanVien = new DevExpress.XtraLayout.SimpleLabelItem();
             this.windowsUIButton.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.searchControl.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grdData)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grvData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnFile.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboChonSheet.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.grdData)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.grvData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groThongTinImport)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblChonFile)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblChonSheet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groDLImport)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForSumNhanVien)).BeginInit();
             this.SuspendLayout();
             // 
             // windowsUIButton
@@ -81,15 +83,15 @@ namespace Vs.Payroll
             this.windowsUIButton.AppearanceButton.Pressed.Options.UseFont = true;
             this.windowsUIButton.AppearanceButton.Pressed.Options.UseImage = true;
             this.windowsUIButton.AppearanceButton.Pressed.Options.UseTextOptions = true;
-            windowsUIButtonImageOptions4.ImageUri.Uri = "SaveAll";
-            windowsUIButtonImageOptions4.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("windowsUIButtonImageOptions4.SvgImage")));
-            windowsUIButtonImageOptions5.ImageUri.Uri = "snap/snapdeletelist";
-            windowsUIButtonImageOptions6.ImageUri.Uri = "richedit/clearheaderandfooter";
+            windowsUIButtonImageOptions1.ImageUri.Uri = "SaveAll";
+            windowsUIButtonImageOptions1.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("windowsUIButtonImageOptions1.SvgImage")));
+            windowsUIButtonImageOptions2.ImageUri.Uri = "snap/snapdeletelist";
+            windowsUIButtonImageOptions3.ImageUri.Uri = "richedit/clearheaderandfooter";
             this.windowsUIButton.Buttons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] {
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions4, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "import", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions1, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "import", -1, false),
             new DevExpress.XtraBars.Docking2010.WindowsUISeparator(),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions5, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "xoa", -1, false),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions6, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "thoat", -1, false)});
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions2, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "xoa", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions3, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "thoat", -1, false)});
             this.windowsUIButton.ContentAlignment = System.Drawing.ContentAlignment.MiddleRight;
             this.windowsUIButton.Controls.Add(this.searchControl);
             this.windowsUIButton.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -107,58 +109,24 @@ namespace Vs.Payroll
             // searchControl
             // 
             this.searchControl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.searchControl.Client = this.grdData;
             this.searchControl.Location = new System.Drawing.Point(12, 7);
             this.searchControl.Margin = new System.Windows.Forms.Padding(4);
             this.searchControl.Name = "searchControl";
             this.searchControl.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Repository.ClearButton(),
             new DevExpress.XtraEditors.Repository.SearchButton()});
+            this.searchControl.Properties.Client = this.grdData;
             this.searchControl.Properties.FindDelay = 100;
             this.searchControl.Size = new System.Drawing.Size(192, 24);
             this.searchControl.TabIndex = 10;
             // 
-            // layoutControl1
-            // 
-            this.layoutControl1.Controls.Add(this.btnFile);
-            this.layoutControl1.Controls.Add(this.cboChonSheet);
-            this.layoutControl1.Controls.Add(this.grdData);
-            this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.layoutControl1.Location = new System.Drawing.Point(0, 0);
-            this.layoutControl1.Name = "layoutControl1";
-            this.layoutControl1.Root = this.Root;
-            this.layoutControl1.Size = new System.Drawing.Size(998, 501);
-            this.layoutControl1.TabIndex = 6;
-            this.layoutControl1.Text = "layoutControl1";
-            // 
-            // btnFile
-            // 
-            this.btnFile.Location = new System.Drawing.Point(104, 47);
-            this.btnFile.Name = "btnFile";
-            this.btnFile.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.btnFile.Size = new System.Drawing.Size(393, 24);
-            this.btnFile.StyleController = this.layoutControl1;
-            this.btnFile.TabIndex = 0;
-            this.btnFile.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.btnFile_ButtonClick);
-            // 
-            // cboChonSheet
-            // 
-            this.cboChonSheet.Location = new System.Drawing.Point(581, 47);
-            this.cboChonSheet.Name = "cboChonSheet";
-            this.cboChonSheet.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cboChonSheet.Properties.NullText = "";
-            this.cboChonSheet.Size = new System.Drawing.Size(393, 24);
-            this.cboChonSheet.StyleController = this.layoutControl1;
-            this.cboChonSheet.TabIndex = 6;
-            this.cboChonSheet.EditValueChanged += new System.EventHandler(this.cboChonSheet_EditValueChanged);
-            // 
             // grdData
             // 
-            this.grdData.Location = new System.Drawing.Point(24, 122);
+            this.grdData.Location = new System.Drawing.Point(24, 143);
             this.grdData.MainView = this.grvData;
             this.grdData.Name = "grdData";
-            this.grdData.Size = new System.Drawing.Size(950, 355);
+            this.grdData.Size = new System.Drawing.Size(950, 334);
             this.grdData.TabIndex = 9;
             this.grdData.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grvData});
@@ -178,7 +146,44 @@ namespace Vs.Payroll
             this.grvData.OptionsView.ShowGroupPanel = false;
             this.grvData.ShownEditor += new System.EventHandler(this.grvData_ShownEditor);
             this.grvData.InvalidRowException += new DevExpress.XtraGrid.Views.Base.InvalidRowExceptionEventHandler(this.grvData_InvalidRowException);
+            this.grvData.RowCountChanged += new System.EventHandler(this.grvData_RowCountChanged);
             this.grvData.InvalidValueException += new DevExpress.XtraEditors.Controls.InvalidValueExceptionEventHandler(this.grvData_InvalidValueException);
+            // 
+            // layoutControl1
+            // 
+            this.layoutControl1.Controls.Add(this.btnFile);
+            this.layoutControl1.Controls.Add(this.cboChonSheet);
+            this.layoutControl1.Controls.Add(this.grdData);
+            this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.layoutControl1.Location = new System.Drawing.Point(0, 0);
+            this.layoutControl1.Name = "layoutControl1";
+            this.layoutControl1.Root = this.Root;
+            this.layoutControl1.Size = new System.Drawing.Size(998, 501);
+            this.layoutControl1.TabIndex = 6;
+            this.layoutControl1.Text = "layoutControl1";
+            // 
+            // btnFile
+            // 
+            this.btnFile.Location = new System.Drawing.Point(109, 47);
+            this.btnFile.Name = "btnFile";
+            this.btnFile.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+            this.btnFile.Size = new System.Drawing.Size(388, 24);
+            this.btnFile.StyleController = this.layoutControl1;
+            this.btnFile.TabIndex = 0;
+            this.btnFile.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.btnFile_ButtonClick);
+            // 
+            // cboChonSheet
+            // 
+            this.cboChonSheet.Location = new System.Drawing.Point(586, 47);
+            this.cboChonSheet.Name = "cboChonSheet";
+            this.cboChonSheet.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cboChonSheet.Properties.NullText = "";
+            this.cboChonSheet.Size = new System.Drawing.Size(388, 24);
+            this.cboChonSheet.StyleController = this.layoutControl1;
+            this.cboChonSheet.TabIndex = 6;
+            this.cboChonSheet.EditValueChanged += new System.EventHandler(this.cboChonSheet_EditValueChanged);
             // 
             // Root
             // 
@@ -209,7 +214,7 @@ namespace Vs.Payroll
             this.lblChonFile.Location = new System.Drawing.Point(0, 0);
             this.lblChonFile.Name = "lblChonFile";
             this.lblChonFile.Size = new System.Drawing.Size(477, 28);
-            this.lblChonFile.TextSize = new System.Drawing.Size(76, 17);
+            this.lblChonFile.TextSize = new System.Drawing.Size(81, 17);
             // 
             // lblChonSheet
             // 
@@ -219,13 +224,14 @@ namespace Vs.Payroll
             this.lblChonSheet.Location = new System.Drawing.Point(477, 0);
             this.lblChonSheet.Name = "lblChonSheet";
             this.lblChonSheet.Size = new System.Drawing.Size(477, 28);
-            this.lblChonSheet.TextSize = new System.Drawing.Size(76, 17);
+            this.lblChonSheet.TextSize = new System.Drawing.Size(81, 17);
             // 
             // groDLImport
             // 
             this.groDLImport.CustomizationFormText = "groDLImport";
             this.groDLImport.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlItem2});
+            this.layoutControlItem2,
+            this.ItemForSumNhanVien});
             this.groDLImport.Location = new System.Drawing.Point(0, 75);
             this.groDLImport.Name = "groDLImport";
             this.groDLImport.Size = new System.Drawing.Size(978, 406);
@@ -235,15 +241,26 @@ namespace Vs.Payroll
             this.layoutControlItem2.Control = this.grdData;
             this.layoutControlItem2.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
             this.layoutControlItem2.CustomizationFormText = "layoutControlItem2";
-            this.layoutControlItem2.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlItem2.Location = new System.Drawing.Point(0, 21);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(954, 359);
+            this.layoutControlItem2.Size = new System.Drawing.Size(954, 338);
             this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem2.TextVisible = false;
             // 
             // timer1
             // 
             this.timer1.Interval = 5000;
+            // 
+            // ItemForSumNhanVien
+            // 
+            this.ItemForSumNhanVien.AllowHotTrack = false;
+            this.ItemForSumNhanVien.AppearanceItemCaption.Options.UseTextOptions = true;
+            this.ItemForSumNhanVien.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.ItemForSumNhanVien.Location = new System.Drawing.Point(0, 0);
+            this.ItemForSumNhanVien.Name = "ItemForSumNhanVien";
+            this.ItemForSumNhanVien.Size = new System.Drawing.Size(954, 21);
+            this.ItemForSumNhanVien.Text = "SumNhanVien";
+            this.ItemForSumNhanVien.TextSize = new System.Drawing.Size(81, 17);
             // 
             // frmImportTienThuongPhuCap
             // 
@@ -258,18 +275,19 @@ namespace Vs.Payroll
             this.Load += new System.EventHandler(this.frmImportTienThuongPhuCap_Load);
             this.windowsUIButton.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.searchControl.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grdData)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grvData)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.btnFile.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboChonSheet.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.grdData)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.grvData)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groThongTinImport)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblChonFile)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblChonSheet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groDLImport)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForSumNhanVien)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -290,5 +308,6 @@ namespace Vs.Payroll
         private DevExpress.XtraLayout.LayoutControlGroup groDLImport;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
         public System.Windows.Forms.Timer timer1;
+        private DevExpress.XtraLayout.SimpleLabelItem ItemForSumNhanVien;
     }
 }

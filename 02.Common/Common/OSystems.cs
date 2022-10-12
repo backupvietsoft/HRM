@@ -1538,6 +1538,35 @@ namespace Commons
                 return false;
             }
         }
+
+        public DataTable GetDataTableMultiSelect(DevExpress.XtraGrid.GridControl grd, DevExpress.XtraGrid.Views.Grid.GridView grv)
+        {
+            try
+            {
+                DataRow dr;
+                DataRow row;
+                DataTable dt = new DataTable();
+                dt = ((DataTable)grd.DataSource).Clone();
+                Int32[] selectedRowHandles = grv.GetSelectedRows();
+                for (int i = 0; i < selectedRowHandles.Length; i++)
+                {
+                    int selectedRowHandle = selectedRowHandles[i];
+                    if (selectedRowHandle >= 0)
+                    {
+                        dr = grv.GetDataRow(selectedRowHandle);
+                        row = dt.NewRow();
+                        for (int j = 0; j < grv.Columns.Count; j++)
+                        {
+                            row[j] = dr[j];
+                        }
+                        dt.Rows.Add(row);
+                    }
+                }
+                return dt;
+            }
+            catch { return null; }
+        }
+
         private void Grv_DoubleClickDM(object sender, EventArgs e, string sName)
         {
             if (Form.ModifierKeys == Keys.Control)

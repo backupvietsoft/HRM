@@ -4021,7 +4021,7 @@ namespace Commons
             cbo.View.PopulateColumns(cbo.DataSource);
             cbo.View.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             cbo.View.Appearance.HeaderPanel.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            cbo.View.Columns[Display].SortOrder = DevExpress.Data.ColumnSortOrder.Ascending;
+            //cbo.View.Columns[Display].SortOrder = DevExpress.Data.ColumnSortOrder.Ascending;
             Commons.Modules.ObjSystems.MLoadNNXtraGrid(cbo.View, fName);
             cbo.View.Columns[cotan].Visible = false;
         }

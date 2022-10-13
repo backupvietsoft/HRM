@@ -106,7 +106,7 @@ namespace Vs.HRM
                             frm.ShowDialog();
                             break;
                         }
-                        catch
+                        catch (Exception EX)
                         { }
 
                         break;

@@ -21,7 +21,7 @@ namespace Vs.TimeAttendance
         public ucBaoCaoQuanLyPhep()
         {
             InitializeComponent();
-            Commons.Modules.ObjSystems.ThayDoiNN(this);
+            Commons.Modules.ObjSystems.ThayDoiNN(this,windowsUIButton);
         }
         static string CharacterIncrement(int colCount)
         {

@@ -307,13 +307,13 @@ namespace Vs.Payroll
                 string sSql = "UPDATE QUI_TRINH_CONG_NGHE_CHI_TIET SET CONG_DOAN = tmp.CONG_DOAN, THU_TU_CONG_DOAN = tmp.THU_TU_CONG_DOAN, "
                             + " NHOM_CD = tmp.NHOM_CD, MaQL = tmp.MaQL, BAC_THO = tmp.BAC_THO, BAC_THO_DM = tmp.BAC_THO_DM, LOAI_MAY = tmp.LOAI_MAY, "
                             + " THOI_GIAN_THIET_KE = tmp.THOI_GIAN_THIET_KE, CONG_CU_HT = tmp.CONG_CU_HT, DON_GIA_GIAY = tmp.DON_GIA_GIAY, "
-                            + " DON_GIA_THUC_TE = tmp.DON_GIA_THUC_TE, DMLD = tmp.DMLD "
+                            + " DON_GIA_THUC_TE = tmp.DON_GIA_THUC_TE, DMLD = tmp.DMLD, NGAY_LAP = '" + Convert.ToDateTime(datNgayLap.Text).ToString("MM/dd/yyyy") + "' "
                             + " FROM QUI_TRINH_CONG_NGHE_CHI_TIET_TEST QT "
                             + " INNER JOIN " + stbQT + " tmp ON QT.ID = tmp.ID_CD "
                             + " INSERT INTO QUI_TRINH_CONG_NGHE_CHI_TIET(ID_TO, ID_ORD, THU_TU_CONG_DOAN, CONG_DOAN, NHOM_CD, MaQL, BAC_THO, BAC_THO_DM, "
-                            + " LOAI_MAY, THOI_GIAN_THIET_KE, CONG_CU_HT, DON_GIA_GIAY, DON_GIA_THUC_TE, DMLD)"
+                            + " LOAI_MAY, THOI_GIAN_THIET_KE, CONG_CU_HT, DON_GIA_GIAY, DON_GIA_THUC_TE, DMLD, NGAY_LAP)"
                             + " SELECT ID_TO, ID_ORD, THU_TU_CONG_DOAN, CONG_DOAN, NHOM_CD, MaQL, BAC_THO, BAC_THO_DM, LOAI_MAY, THOI_GIAN_THIET_KE, "
-                            + " CONG_CU_HT, DON_GIA_GIAY, DON_GIA_THUC_TE, DMLD "
+                            + " CONG_CU_HT, DON_GIA_GIAY, DON_GIA_THUC_TE, DMLD, '" + Convert.ToDateTime(datNgayLap.Text).ToString("MM/dd/yyyy") + "' "
                             + " FROM " + stbQT + " tmp1 WHERE ISNULL(ID_CD,0) = 0";
                 SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, sSql);
 
@@ -1386,7 +1386,7 @@ namespace Vs.Payroll
             {
                 if (string.IsNullOrEmpty(sDLKiem) && GTMacDinh != -999999)
                 {
-                    dr[sCot] = GTMacDinh;
+                    dr[sCot] = (GTMacDinh == 0 ? (object)DBNull.Value : GTMacDinh);
                     DLKiem = GTMacDinh;
                     sDLKiem = GTMacDinh.ToString();
                 }
@@ -1409,7 +1409,7 @@ namespace Vs.Payroll
                             }
 
                             DLKiem = Math.Round(DLKiem, 8);
-                            dr[sCot] = DLKiem.ToString();
+                            dr[sCot] = (DLKiem.ToString() == "0" ? (object)DBNull.Value : DLKiem.ToString());
                         }
 
                     }
@@ -1546,6 +1546,11 @@ namespace Vs.Payroll
         {
             try
             {
+                if (e.KeyCode == Keys.Delete && !windowsUIButton.Buttons[0].Properties.Visible)
+                {
+                    grvQT.DeleteSelectedRows();
+                    ((DataTable)grdQT.DataSource).AcceptChanges();
+                }
                 if (e.Control && e.KeyCode == Keys.C)
                 {
                     DataTable dtTemp = new DataTable();

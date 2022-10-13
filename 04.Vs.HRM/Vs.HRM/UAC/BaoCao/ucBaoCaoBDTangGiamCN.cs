@@ -21,7 +21,7 @@ namespace Vs.HRM
         public ucBaoCaoBDTangGiamCN()
         {
             InitializeComponent();
-            Commons.Modules.ObjSystems.ThayDoiNN(this);
+            Commons.Modules.ObjSystems.ThayDoiNN(this,windowsUIButton);
         }
 
         private void windowsUIButton_ButtonClick(object sender, ButtonEventArgs e)

@@ -620,7 +620,7 @@ namespace Vs.TimeAttendance
                             frm.MinimizeBox = false;
                             double iW, iH;
                             iW = 450;
-                            iH = 300;
+                            iH = 310;
                             frm.Size = new Size((int)iW, (int)iH);
 
                             if (frm.ShowDialog() == DialogResult.OK)

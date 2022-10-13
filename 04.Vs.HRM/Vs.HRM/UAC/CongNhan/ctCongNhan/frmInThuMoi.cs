@@ -84,9 +84,11 @@ namespace Vs.HRM
                 conn1 = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
                 conn1.Open();
 
-                System.Data.SqlClient.SqlCommand cmd1 = new System.Data.SqlClient.SqlCommand("rptHopDongThuViec_All", conn1);
+                System.Data.SqlClient.SqlCommand cmd1 = new System.Data.SqlClient.SqlCommand("rptHopDongThuViec_DM", conn1);
                 cmd1.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
                 cmd1.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                cmd1.Parameters.Add("@ID_CN", SqlDbType.BigInt).Value = -1;
+                cmd1.Parameters.Add("@ID_SQD", SqlDbType.BigInt).Value = -1;
                 cmd1.Parameters.Add("@sBT", SqlDbType.NVarChar).Value = sBTCongNhan;
                 cmd1.CommandType = CommandType.StoredProcedure;
 

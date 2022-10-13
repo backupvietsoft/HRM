@@ -26,7 +26,7 @@ namespace Vs.HRM
         public ucBaoCaoGiaiDoan()
         {
             InitializeComponent();
-            Commons.Modules.ObjSystems.ThayDoiNN(this);
+            Commons.Modules.ObjSystems.ThayDoiNN(this,windowsUIButton);
         }
         static string CharacterIncrement(int colCount)
         {

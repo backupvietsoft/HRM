@@ -152,7 +152,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 5F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 42F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 70F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1184, 736);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
@@ -160,7 +160,7 @@
             // 
             this.tableLayoutPanel1.SetColumnSpan(this.txtTEN_CN, 2);
             this.txtTEN_CN.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtTEN_CN.Location = new System.Drawing.Point(804, 357);
+            this.txtTEN_CN.Location = new System.Drawing.Point(804, 343);
             this.txtTEN_CN.Name = "txtTEN_CN";
             this.txtTEN_CN.Properties.ReadOnly = true;
             this.txtTEN_CN.Size = new System.Drawing.Size(377, 24);
@@ -193,7 +193,7 @@
             // cboMSCN
             // 
             this.cboMSCN.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cboMSCN.Location = new System.Drawing.Point(519, 357);
+            this.cboMSCN.Location = new System.Drawing.Point(519, 343);
             this.cboMSCN.Name = "cboMSCN";
             this.cboMSCN.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -216,7 +216,7 @@
             // 
             // lblMS_CN
             // 
-            this.lblMS_CN.Location = new System.Drawing.Point(410, 357);
+            this.lblMS_CN.Location = new System.Drawing.Point(410, 343);
             this.lblMS_CN.Name = "lblMS_CN";
             this.lblMS_CN.Size = new System.Drawing.Size(37, 17);
             this.lblMS_CN.TabIndex = 3;
@@ -462,7 +462,7 @@
             this.grdPCD.Location = new System.Drawing.Point(410, 72);
             this.grdPCD.MainView = this.grvPCD;
             this.grdPCD.Name = "grdPCD";
-            this.grdPCD.Size = new System.Drawing.Size(771, 279);
+            this.grdPCD.Size = new System.Drawing.Size(771, 265);
             this.grdPCD.TabIndex = 32;
             this.grdPCD.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grvPCD});
@@ -482,17 +482,17 @@
             this.panel1.Controls.Add(this.popupContainerControl2);
             this.panel1.Controls.Add(this.btnTSua);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(16, 696);
+            this.panel1.Location = new System.Drawing.Point(16, 668);
             this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(375, 38);
+            this.panel1.Size = new System.Drawing.Size(375, 66);
             this.panel1.TabIndex = 39;
             // 
             // btnTSua
             // 
             this.btnTSua.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnTSua.Enabled = false;
-            this.btnTSua.Location = new System.Drawing.Point(151, -36);
+            this.btnTSua.Location = new System.Drawing.Point(151, -8);
             this.btnTSua.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnTSua.Name = "btnTSua";
             this.btnTSua.Size = new System.Drawing.Size(102, 24);
@@ -505,10 +505,10 @@
             this.grdCD.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grdCD.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4);
             this.grdCD.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grdCD.Location = new System.Drawing.Point(410, 387);
+            this.grdCD.Location = new System.Drawing.Point(410, 373);
             this.grdCD.MainView = this.grvCD;
             this.grdCD.Name = "grdCD";
-            this.grdCD.Size = new System.Drawing.Size(771, 279);
+            this.grdCD.Size = new System.Drawing.Size(771, 265);
             this.grdCD.TabIndex = 5;
             this.grdCD.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grvCD});
@@ -534,7 +534,7 @@
             this.grdTo.MainView = this.grvTo;
             this.grdTo.Name = "grdTo";
             this.tableLayoutPanel1.SetRowSpan(this.grdTo, 4);
-            this.grdTo.Size = new System.Drawing.Size(375, 594);
+            this.grdTo.Size = new System.Drawing.Size(375, 566);
             this.grdTo.TabIndex = 32;
             this.grdTo.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grvTo});
@@ -576,11 +576,11 @@
             this.windowsUIButton.ContentAlignment = System.Drawing.ContentAlignment.MiddleRight;
             this.windowsUIButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.windowsUIButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.windowsUIButton.Location = new System.Drawing.Point(411, 698);
+            this.windowsUIButton.Location = new System.Drawing.Point(411, 670);
             this.windowsUIButton.Margin = new System.Windows.Forms.Padding(4);
             this.windowsUIButton.Name = "windowsUIButton";
             this.windowsUIButton.Padding = new System.Windows.Forms.Padding(4);
-            this.windowsUIButton.Size = new System.Drawing.Size(769, 34);
+            this.windowsUIButton.Size = new System.Drawing.Size(769, 62);
             this.windowsUIButton.TabIndex = 43;
             this.windowsUIButton.Text = "windowsUIButtonPanel1";
             this.windowsUIButton.UseButtonBackgroundImages = false;

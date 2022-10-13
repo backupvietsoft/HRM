@@ -134,17 +134,20 @@ namespace Vs.HRM
                 grvData.Columns["ID_CV"].Visible = false;
                 grvData.Columns["CHON"].Visible = false;
                 grvData.Columns["ID_TT"].Visible = false;
+                grvData.Columns["CONG_VIEC_ENG"].Visible = false;
+                grvData.Columns["MO_TA_CV_BHXH"].Visible = false;
+                grvData.Columns["MO_TA_CV_BHXH_A"].Visible = false;
                 grvData.Columns["MS_CN"].OptionsColumn.AllowEdit = false;
                 grvData.Columns["HO_TEN"].OptionsColumn.AllowEdit = false;
                 grvData.Columns["SO_HDLD"].OptionsColumn.AllowEdit = false;
                 grvData.Columns["NGAY_BAT_DAU_HD"].OptionsColumn.AllowEdit = false;
                 grvData.Columns["NGAY_HET_HD"].OptionsColumn.AllowEdit = false;
                 grvData.Columns["DIA_CHI_NOI_LAM_VIEC"].OptionsColumn.AllowEdit = false;
-                grvData.Columns["TEN_LCV"].OptionsColumn.AllowEdit = false;
                 grvData.Columns["TEN_CV"].OptionsColumn.AllowEdit = false;
                 grvData.Columns["DIA_DIEM_LAM_VIEC"].OptionsColumn.AllowEdit = false;
                 grvData.Columns["HD_GIA_HAN"].OptionsColumn.AllowEdit = false;
-                grvData.Columns["NGAY_KY"].OptionsColumn.AllowEdit = false;
+                grvData.Columns["CONG_VIEC"].OptionsColumn.AllowEdit = false;
+                grvData.Columns["TEN_TT"].OptionsColumn.AllowEdit = false;
 
                 DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit cboID_LHDLD = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
                 cboID_LHDLD.NullText = "";
@@ -275,7 +278,7 @@ namespace Vs.HRM
                     NgayBD_HD = Convert.ToDateTime(grvData.GetFocusedRowCellValue("NGAY_BAT_DAU_HD"));
                     if (iThang != 0)
                     {
-                        NgayKT_HD = Convert.ToDateTime(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.fnNgayTiepTheoTruLeChuNhat(DATEADD(YEAR,1,'" + NgayBD_HD.ToString("MM/dd/yyyy") + "'))"));
+                        NgayKT_HD = NgayBD_HD.AddYears(1).AddDays(1);
                     }
                     else
                     {
@@ -492,12 +495,15 @@ namespace Vs.HRM
                         errorCount++;
                     }
 
-                    //LUONG_THU_VIEC
                     if (!KiemDuLieuSo(grvData, dr, "MUC_LUONG", grvData.Columns["MUC_LUONG"].FieldName.ToString(), 0, 0, true, this.Name))
                     {
                         errorCount++;
                     }
 
+                    if (!KiemDuLieu(grvData, dr, "CONG_VIEC", true, 250, this.Name))
+                    {
+                        errorCount++;
+                    }
                     // nguoi ky
                     if (!KiemDuLieu(grvData, dr, "ID_NK", true, 250, this.Name))
                     {
@@ -538,15 +544,17 @@ namespace Vs.HRM
                 System.Data.SqlClient.SqlConnection conn1;
                 dt = new DataTable();
                 frmViewReport frm = new frmViewReport();
-                frm.rpt = new rptHopDongLaoDong_AllDM(DateTime.Now);
+                frm.rpt = new rptHopDongLaoDong_DM(DateTime.Now);
 
                 conn1 = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
                 conn1.Open();
 
-                System.Data.SqlClient.SqlCommand cmd1 = new System.Data.SqlClient.SqlCommand("rptHopDongLaoDong_AllDM", conn1);
+                System.Data.SqlClient.SqlCommand cmd1 = new System.Data.SqlClient.SqlCommand("rptHopDongLaoDong_DM", conn1);
                 cmd1.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
                 cmd1.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
                 cmd1.Parameters.Add("@sBT", SqlDbType.NVarChar).Value = sBT;
+                cmd1.Parameters.Add("@ID_CN", SqlDbType.BigInt).Value = -1;
+                cmd1.Parameters.Add("@ID_SQD", SqlDbType.BigInt).Value = -1;
                 cmd1.CommandType = CommandType.StoredProcedure;
                 System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd1);
                 DataSet ds = new DataSet();

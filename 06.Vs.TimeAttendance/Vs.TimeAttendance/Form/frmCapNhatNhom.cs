@@ -25,7 +25,7 @@ namespace Vs.TimeAttendance
         {
             dNgay = dngay;
             InitializeComponent();
-            Commons.Modules.ObjSystems.ThayDoiNN(this, Root);
+            Commons.Modules.ObjSystems.ThayDoiNN(this, Root,windowsUIButton);
             repositoryItemTimeEdit1 = new RepositoryItemTimeEdit();
 
         }

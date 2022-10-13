@@ -11,7 +11,7 @@ namespace Vs.HRM
         public ucBaoCaoLaoDongThang()
         {
             InitializeComponent();
-            Commons.Modules.ObjSystems.ThayDoiNN(this);
+            Commons.Modules.ObjSystems.ThayDoiNN(this,windowsUIButton);
             Commons.OSystems.SetDateEditFormat(NgayIn);
             dtThang.EditValue = DateTime.Now;
             NgayIn.EditValue = DateTime.Today;

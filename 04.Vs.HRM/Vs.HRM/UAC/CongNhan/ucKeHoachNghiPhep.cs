@@ -34,22 +34,31 @@ namespace Vs.HRM
         }
         private void ucKeHoachNghiPhep_Load(object sender, EventArgs e)
         {
-            Thread.Sleep(100);
-            dateNam.EditValue = DateTime.Now;
-            enableButon(true);
-            Commons.Modules.ObjSystems.SetPhanQuyen(windowsUIButton);
-            Commons.Modules.sLoad = "0Load";
-            Commons.Modules.ObjSystems.LoadCboDonVi(cboSearch_DV);
-            Commons.Modules.ObjSystems.LoadCboXiNghiep(cboSearch_DV, cboSearch_XN);
-            Commons.Modules.ObjSystems.LoadCboTo(cboSearch_DV, cboSearch_XN, cboSearch_TO);
-            Commons.Modules.ObjSystems.MLoadLookUpEditN(cboTINH_TRANG, Commons.Modules.ObjSystems.DataTinhTrangDuyet(false), "ID_TTD", "TEN_TT_DUYET", "TEN_TT_DUYET", "");
-            cboTINH_TRANG.EditValue = 2;
-            LoadGrdCongNhan(false);
-            Commons.Modules.sLoad = "";
-            radTinHTrang.SelectedIndex = 0;
-            Commons.OSystems.SetDateEditFormat(datTNgay);
-            Commons.OSystems.SetDateEditFormat(datDNgay);
-            Commons.OSystems.SetDateEditFormat(datNVao);
+            try
+            {
+                lblSoGio.Visible = false;
+                numSoGio.Visible = false;
+                lblNVao.Visible = false;
+                datNVao.Visible = false;
+
+                Thread.Sleep(100);
+                dateNam.EditValue = DateTime.Now;
+                enableButon(true);
+                Commons.Modules.ObjSystems.SetPhanQuyen(windowsUIButton);
+                Commons.Modules.sLoad = "0Load";
+                Commons.Modules.ObjSystems.LoadCboDonVi(cboSearch_DV);
+                Commons.Modules.ObjSystems.LoadCboXiNghiep(cboSearch_DV, cboSearch_XN);
+                Commons.Modules.ObjSystems.LoadCboTo(cboSearch_DV, cboSearch_XN, cboSearch_TO);
+                Commons.Modules.ObjSystems.MLoadLookUpEditN(cboTINH_TRANG, Commons.Modules.ObjSystems.DataTinhTrangDuyet(false), "ID_TTD", "TEN_TT_DUYET", "TEN_TT_DUYET", "");
+                cboTINH_TRANG.EditValue = 2;
+                LoadGrdCongNhan(false);
+                Commons.Modules.sLoad = "";
+                radTinHTrang.SelectedIndex = 0;
+                Commons.OSystems.SetDateEditFormat(datTNgay);
+                Commons.OSystems.SetDateEditFormat(datDNgay);
+                Commons.OSystems.SetDateEditFormat(datNVao);
+            }
+            catch { }
         }
         public void CheckDuplicateKHNP(GridView grid, DataTable GridDataTable, DevExpress.XtraGrid.Views.Base.ValidateRowEventArgs e)
         {
@@ -193,6 +202,8 @@ namespace Vs.HRM
                 RepositoryItemDateEdit dEditN = new RepositoryItemDateEdit();
                 Commons.OSystems.SetDateRepositoryItemDateEdit(dEditN);
 
+                grvKHNP.Columns["SO_GIO"].Visible = false;
+                grvKHNP.Columns["NGAY_VAO_LAM_LAI"].Visible = false;
                 grvKHNP.Columns["TU_NGAY"].ColumnEdit = dEditN;
                 grvKHNP.Columns["DEN_NGAY"].ColumnEdit = dEditN;
                 grvKHNP.Columns["NGAY_VAO_LAM_LAI"].ColumnEdit = dEditN;
@@ -334,7 +345,7 @@ namespace Vs.HRM
                         int n = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.fuKiemTraKeHoachNghiPhep(" + Convert.ToInt64(item["ID_CN"]) + ",'" + datTNgay.DateTime.ToString("MM/dd/yyyy") + "','" + datDNgay.DateTime.ToString("MM/dd/yyyy") + "')"));
                         if (n == 0)
                         {
-                            SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spInSertKeHoachNghiPhep", cboLDV.EditValue, Convert.ToInt64(item["ID_CN"]), datTNgay.EditValue, datDNgay.EditValue, datNVao.EditValue, numSoGio.Value, cboTINH_TRANG.EditValue, memoGhiChu.EditValue);
+                            SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spInSertKeHoachNghiPhep", cboLDV.EditValue, Convert.ToInt64(item["ID_CN"]), datTNgay.EditValue, datDNgay.EditValue, datNVao.EditValue, numSoGio.Value, cboTINH_TRANG.EditValue, chkNGHI_NUA_NGAY.EditValue, memoGhiChu.EditValue);
                         }
                     }
                     catch
@@ -956,10 +967,10 @@ namespace Vs.HRM
 
         private void grvKHNP_ShowingEditor(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (iKiemTinhTrang() == 1)
-            {
-                e.Cancel = (grvKHNP.FocusedRowHandle != DevExpress.XtraGrid.GridControl.NewItemRowHandle);
-            }
+            //if (iKiemTinhTrang() == 1)
+            //{
+            //    e.Cancel = (grvKHNP.FocusedRowHandle != DevExpress.XtraGrid.GridControl.NewItemRowHandle);
+            //}
         }
         private int kiemTrung()
         {

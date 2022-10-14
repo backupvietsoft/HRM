@@ -26,7 +26,7 @@ namespace Vs.HRM
         public ucBaoCaoGiaiDoan()
         {
             InitializeComponent();
-            Commons.Modules.ObjSystems.ThayDoiNN(this,windowsUIButton);
+            Commons.Modules.ObjSystems.ThayDoiNN(this, windowsUIButton);
         }
         static string CharacterIncrement(int colCount)
         {
@@ -1393,7 +1393,7 @@ namespace Vs.HRM
                 Excell.Worksheet oSheet;
                 oXL = new Excell.Application();
                 oXL.Visible = false;
-
+                this.Cursor = Cursors.WaitCursor;
                 oWB = (Excell.Workbook)(oXL.Workbooks.Add(Missing.Value));
                 oSheet = (Excell.Worksheet)oWB.ActiveSheet;
 
@@ -1447,6 +1447,9 @@ namespace Vs.HRM
 
                 Range row5 = oSheet.get_Range("B5");
                 row5.RowHeight = 79;
+
+
+                #region table 1
 
                 //Range row5_TieuDe_Format = oSheet.get_Range("B4", lastColumn + "5"); //27 + 31
                 Range row5_TieuDe_Format = oSheet.get_Range("B4", lastColumn + "5"); //27 + 31
@@ -1511,11 +1514,6 @@ namespace Vs.HRM
                     oSheet.Range[oSheet.Cells[5, Convert.ToInt32(col_td + 4)], oSheet.Cells[6, Convert.ToInt32(col_td + 4)]].Merge();
                     oSheet.Range[oSheet.Cells[5, Convert.ToInt32(col_td + 4)], oSheet.Cells[6, Convert.ToInt32(col_td + 4)]].Interior.Color = Color.FromArgb(255, 255, 0);
 
-
-                    //oSheet.Cells[4, col_td].Merge();
-                    //row4_Ngay = oSheet.get_Range(CharacterIncrement(col_td - 1) + "4", CharacterIncrement(col_td + 3) + "4");
-                    //row4_Ngay.Value2 = dTNgay.ToString("dd/MM/yyyy");
-                    //row4_Ngay.Merge();
                     col_td = col_td + 5;
                     dTNgay = dTNgay.AddDays(1);
                 }
@@ -1523,7 +1521,7 @@ namespace Vs.HRM
 
 
                 oSheet.Application.ActiveWindow.SplitColumn = 3;
-                oSheet.Application.ActiveWindow.SplitRow = 7;
+                oSheet.Application.ActiveWindow.SplitRow = 6;
                 oSheet.Application.ActiveWindow.FreezePanes = true;
 
 
@@ -1541,11 +1539,6 @@ namespace Vs.HRM
                 string chanVongDau = "Chan";// chặn lần đầu để lần đầu tiên sẽ load data từ cột số 7 trở đi, các vòng lặp tiếp theo bỏ chặn
                 DataTable dt_temp = new DataTable();
                 dt_temp = ds.Tables[0].Copy(); // Dữ row count data
-                string sTenCot1 = "=";
-                string sTenCot2 = "=";
-                string sTenCot3 = "=";
-                string sTenCot4 = "=";
-                string sTenCot5 = "=";
 
                 string sRowXN = "";
                 string s = int_to_Roman(9);
@@ -1589,8 +1582,7 @@ namespace Vs.HRM
                     row_groupXI_NGHIEP_Format.Interior.Color = Color.FromArgb(255, 255, 0);
                     oSheet.Cells[rowBD, 2] = TEN_XN[i].ToString();
                     oSheet.Range[oSheet.Cells[Convert.ToInt32(rowBD), 1], oSheet.Cells[Convert.ToInt32(rowBD), 2]].Font.Bold = true;
-                    //oSheet.Range[oSheet.Cells[Convert.ToInt32(rowBD), 1], oSheet.Cells[Convert.ToInt32(rowBD), 2]].Font.Size = fontSizeNoiDung;
-                    //oSheet.Range[oSheet.Cells[Convert.ToInt32(rowBD), 1], oSheet.Cells[Convert.ToInt32(rowBD), 2]].Font.Name = fontName;
+
 
                     oSheet.Cells[rowBD, 3] = "Sub-Total " + int_to_Roman(i + 1) + "";
                     oSheet.Cells[rowBD, 3].Font.Bold = true;
@@ -1599,90 +1591,7 @@ namespace Vs.HRM
                     oSheet.Cells[rowBD, 3].Cells.VerticalAlignment = Excell.XlVAlign.xlVAlignCenter;
                     oSheet.Cells[rowBD, 3].Font.Name = fontName;
 
-                    //oSheet.Cells[rowBD, 4] = "=SUM(" + CharacterIncrement(3) + "" + (rowBD + 1) + ":" + CharacterIncrement(3) + "" + (rowCnt + 1) + ")";
-                    //oSheet.Cells[rowBD, 4].Font.Bold = true;
-                    //oSheet.Cells[rowBD, 4].Font.Color = Color.FromArgb(255, 0, 0);
-                    //oSheet.Cells[rowBD, 4].Font.Size = fontSizeNoiDung;
-                    //oSheet.Cells[rowBD, 4].Cells.HorizontalAlignment = Excell.XlHAlign.xlHAlignCenter;
-                    //oSheet.Cells[rowBD, 4].Cells.VerticalAlignment = Excell.XlVAlign.xlVAlignCenter;
-                    //oSheet.Cells[rowBD, 4].Font.Name = fontName;
-                    //sTenCotD = sTenCotD + CharacterIncrement(3) + rowBD + "+";
                     sRowXN = sRowXN + rowBD + ",";
-
-                    ////Fortmart cột D
-                    //Excell.Range formatRange10;
-                    //formatRange10 = oSheet.get_Range("D" + (rowBD + 1) + "", "D" + (rowCnt + 1));
-                    //formatRange10.Font.Bold = true;
-
-                    ////Fortmart cột G
-                    //formatRange10 = oSheet.get_Range("G" + (rowBD + 1) + "", "G" + (rowCnt + 1));
-                    //formatRange10.Font.Bold = true;
-                    //formatRange10.Font.Color = Color.FromArgb(255, 0, 0);
-
-                    ////Fortmart cột L
-                    //Excell.Range formatRange11;
-                    //formatRange11 = oSheet.get_Range("L" + (rowBD + 1) + "", "L" + (rowCnt + 1));
-
-                    //Fortmart cột M
-                    //Excell.Range formatRange12;
-                    //formatRange12 = oSheet.get_Range("M" + (rowBD + 1) + "", "M" + (rowCnt + 1));
-
-                    ////Fortmart cột M
-                    //Excell.Range formatRange13;
-                    //formatRange13 = oSheet.get_Range("N" + (rowBD + 1) + "", "N" + (rowCnt + 1));
-
-                    //oSheet.Cells[rowBD, 5] = "=SUM(" + CharacterIncrement(4) + "" + (rowBD + 1) + ":" + CharacterIncrement(4) + "" + (rowCnt + 1) + ")";
-                    //oSheet.Cells[rowBD, 5].Font.Bold = true;
-                    //oSheet.Cells[rowBD, 5].Font.Color = Color.FromArgb(255, 0, 0);
-                    //sTenCotE = sTenCotE + CharacterIncrement(4) + rowBD + "+";
-
-                    //oSheet.Cells[rowBD, 6] = "=SUM(" + CharacterIncrement(5) + "" + (rowBD + 1) + ":" + CharacterIncrement(5) + "" + (rowCnt + 1) + ")";
-                    //oSheet.Cells[rowBD, 6].Font.Bold = true;
-                    //oSheet.Cells[rowBD, 6].Font.Color = Color.FromArgb(255, 0, 0);
-                    //sTenCotF = sTenCotF + CharacterIncrement(5) + rowBD + "+";
-
-                    ////oSheet.Cells[rowBD, 7] = "=SUM(" + CharacterIncrement(6) + "" + (rowBD + 1) + ":" + CharacterIncrement(6) + "" + (rowCnt + 1) + ")";
-                    //oSheet.Cells[rowBD, 7] = "=D" + rowBD + "+F" + rowBD + "-E" + rowBD + "";
-                    //oSheet.Cells[rowBD, 7].Font.Bold = true;
-
-                    //oSheet.Cells[rowBD, 8] = "=SUM(" + CharacterIncrement(7) + "" + (rowBD + 1) + ":" + CharacterIncrement(7) + "" + (rowCnt + 1) + ")";
-                    //oSheet.Cells[rowBD, 8].Font.Bold = true;
-                    //oSheet.Cells[rowBD, 8].Font.Color = Color.FromArgb(255, 0, 0);
-                    //sTenCotH = sTenCotH + CharacterIncrement(7) + rowBD + "+";
-
-
-                    //oSheet.Cells[rowBD, 9] = "=SUM(" + CharacterIncrement(8) + "" + (rowBD + 1) + ":" + CharacterIncrement(8) + "" + (rowCnt + 1) + ")";
-                    //oSheet.Cells[rowBD, 9].Font.Bold = true;
-                    //oSheet.Cells[rowBD, 9].Font.Color = Color.FromArgb(255, 0, 0);
-                    //sTenCotI = sTenCotI + CharacterIncrement(8) + rowBD + "+";
-
-
-                    //oSheet.Cells[rowBD, 10] = "=SUM(" + CharacterIncrement(9) + "" + (rowBD + 1) + ":" + CharacterIncrement(9) + "" + (rowCnt + 1) + ")";
-                    //oSheet.Cells[rowBD, 10].Font.Bold = true;
-                    //oSheet.Cells[rowBD, 10].Font.Color = Color.FromArgb(255, 0, 0);
-                    //sTenCotJ = sTenCotJ + CharacterIncrement(9) + rowBD + "+";
-
-
-                    //oSheet.Cells[rowBD, 11] = "=SUM(" + CharacterIncrement(10) + "" + (rowBD + 1) + ":" + CharacterIncrement(10) + "" + (rowCnt + 1) + ")";
-                    //oSheet.Cells[rowBD, 11].Font.Bold = true;
-                    //oSheet.Cells[rowBD, 11].Font.Color = Color.FromArgb(255, 0, 0);
-                    //sTenCotK = sTenCotK + CharacterIncrement(10) + rowBD + "+";
-
-
-                    //oSheet.Cells[rowBD, 12] = "=SUM(I" + rowBD + ":K" + rowBD + ")";
-                    //oSheet.Cells[rowBD, 12].Font.Bold = true;
-                    //oSheet.Cells[rowBD, 12].Font.Color = Color.FromArgb(255, 0, 0);
-                    //sTenCotL = sTenCotL + CharacterIncrement(11) + rowBD + "+";
-
-
-                    //oSheet.Cells[rowBD, 13] = "=G" + rowBD + "-L" + rowBD + "-H" + rowBD + "";
-                    //oSheet.Cells[rowBD, 13].Font.Bold = true;
-                    //sTenCotM = sTenCotM + CharacterIncrement(12) + rowBD + "+";
-
-
-                    //oSheet.Cells[rowBD, 14] = "=IFERROR(L" + rowBD + "/G" + rowBD + ",0)";
-                    //oSheet.Cells[rowBD, 14].Font.Bold = true;
-                    //oSheet.Cells[rowBD, 14].Font.Color = Color.FromArgb(255, 0, 0);
 
                     //Đổ dữ liệu của xí nghiệp
                     oSheet.get_Range("B" + (rowBD + 1) + "", lastColumn + (rowCnt + 1).ToString()).Value2 = rowData;
@@ -1693,9 +1602,6 @@ namespace Vs.HRM
                     {
                         // cột tổng lao động
                         oSheet.Cells[rowBD, col_td] = "=SUM(" + CharacterIncrement(col_td - 1) + "" + (rowBD + 1) + ":" + CharacterIncrement(col_td - 1) + "" + (rowCnt + 1) + ")";
-                        //oSheet.Range[oSheet.Cells[5, Convert.ToInt32(col_td)], oSheet.Cells[6, Convert.ToInt32(col_td)]].Merge();
-                        //oSheet.Range[oSheet.Cells[5, Convert.ToInt32(col_td)], oSheet.Cells[6, Convert.ToInt32(col_td)]].Interior.Color = Color.FromArgb(255, 255, 0);
-
 
                         //cột số lao động vắng mặt
                         oSheet.Cells[rowBD, col_td + 1] = "=SUM(" + CharacterIncrement(col_td) + "" + (rowBD + 1) + ":" + CharacterIncrement(col_td) + "" + (rowCnt + 1) + ")";
@@ -1716,10 +1622,7 @@ namespace Vs.HRM
                         formatRange11 = oSheet.get_Range("" + CharacterIncrement(col_td + 3) + "" + rowBD + "", "" + CharacterIncrement(col_td + 3) + "" + (rowCnt + 1) + "");
                         formatRange11.Value = "=IFERROR(" + CharacterIncrement(col_td + 1) + "" + rowBD + "/" + CharacterIncrement(col_td - 1) + "" + rowBD + ",0)";
 
-                        //oSheet.Cells[4, col_td].Merge();
-                        //row4_Ngay = oSheet.get_Range(CharacterIncrement(col_td - 1) + "4", CharacterIncrement(col_td + 3) + "4");
-                        //row4_Ngay.Value2 = dTNgay.ToString("dd/MM/yyyy");
-                        //row4_Ngay.Merge();
+
                         col_td = col_td + 5;
                         dTNgay = dTNgay.AddDays(1);
                     }
@@ -1730,24 +1633,7 @@ namespace Vs.HRM
                     formatRange10.Font.Bold = true;
                     formatRange10.HorizontalAlignment = Excell.XlHAlign.xlHAlignCenter;
                     formatRange10.VerticalAlignment = Excell.XlVAlign.xlVAlignCenter;
-                    //formatRange10.Value2 = "=D" + rowSum + "+F" + rowSum + "-E" + rowSum + "";
-                    //formatRange11.Value2 = "=SUM(I" + rowSum + ":K" + rowSum + ")";
-                    //formatRange12.Value2 = "=G" + rowSum + "-L" + rowSum + "-H" + rowSum + "";
-                    //formatRange13.Value2 = "=IFERROR(L" + rowSum + "/G" + rowSum + ",0)";
 
-
-
-                    ////Tính tổng xí nghiệp
-                    //Range row_groupTONG_Format = oSheet.get_Range("A" + (rowBD + current_dr + 1) + "".ToString(), lastColumn + "" + (rowBD + current_dr + 1) + "".ToString()); //27 + 31 // (rowBD + current_dr +1) sẽ lấy cái dòng bắt đầu (7) + dòng dữ liệu (ví dụ là 2 dòng) = 9 thì cột cộng sẽ + thêm 1 dòng nữa  = 10
-                    //row_groupTONG_Format.Interior.Color = Color.Yellow;
-                    //row_groupTONG_Format.Font.Bold = true;
-                    //oSheet.Cells[(rowBD + current_dr + 1), 1] = "Cộng";
-                    //oSheet.Range[oSheet.Cells[Convert.ToInt32(rowBD + current_dr + 1), 1], oSheet.Cells[Convert.ToInt32(rowBD + current_dr + 1), 4]].Merge();
-
-                    //for (int colSUM = 5; colSUM < dtBCThang.Columns.Count - 2; colSUM++)
-                    //{
-                    //    oSheet.Cells[(rowBD + current_dr + 1), colSUM] = "=SUM(" + CellAddress(oSheet, rowBD + 1, colSUM) + ":" + CellAddress(oSheet, (rowBD + current_dr), colSUM) + ")";
-                    //}
                     dr_Cu = current_dr;
                     keepRowCnt = rowCnt;
                     rowSum = rowCnt + 3;
@@ -1758,10 +1644,8 @@ namespace Vs.HRM
                 Excell.Range formatRange1;
                 Excell.Range formatRange3;
                 Excell.Range formatRange4;
-                string CurentColumn = string.Empty;
                 int rowbd;
                 int rowDup = 0; // row bat dau của dữ liệu duplicate
-                int colKT = dtBCThang.Columns.Count;
                 bool bChan = false;
                 for (rowbd = 8; rowbd <= rowCnt; rowbd++)
                 {
@@ -1819,10 +1703,6 @@ namespace Vs.HRM
                 rowSumAll.Interior.Color = Color.FromArgb(255, 255, 0);
                 rowSumAll.HorizontalAlignment = Excell.XlHAlign.xlHAlignCenter;
                 rowSumAll.VerticalAlignment = Excell.XlVAlign.xlVAlignCenter;
-                //for (int colSUM = 4; colSUM <= dtBCThang.Columns.Count; colSUM++)
-                //{
-                //    oSheet.Cells[rowCnt, colSUM] = "=SUM(" + CellAddress(oSheet, 7, colSUM) + ":" + CellAddress(oSheet, rowCnt - 1, colSUM) + ")/2";
-                //}
 
                 col_td = 4;
                 dTNgay = Convert.ToDateTime(lk_TuNgay.EditValue);
@@ -1842,21 +1722,12 @@ namespace Vs.HRM
                     oSheet.Cells[rowCnt, col_td + 1] = "=SUM(" + CellAddress(oSheet, 7, col_td + 1) + ":" + CellAddress(oSheet, rowCnt - 1, col_td + 1) + ")/2";
 
 
-                    //oSheet.Cells[5, col_td + 1] = "Số lao động vắng mặt";
-                    //oSheet.Range[oSheet.Cells[5, Convert.ToInt32(col_td + 1)], oSheet.Cells[6, Convert.ToInt32(col_td + 1)]].Merge();
-                    //oSheet.Range[oSheet.Cells[5, Convert.ToInt32(col_td + 1)], oSheet.Cells[6, Convert.ToInt32(col_td + 1)]].Interior.Color = Color.FromArgb(255, 230, 153);
-
-
                     //cột Số lao động có mặt
                     formatRange4 = oSheet.get_Range(CharacterIncrement(col_td + 1) + "7" + "", CharacterIncrement(col_td + 1) + (rowCnt).ToString());
                     formatRange4.Interior.Color = Color.FromArgb(189, 215, 238);
                     formatRange4.NumberFormat = "0";
                     try { formatRange4.TextToColumns(Type.Missing, Excell.XlTextParsingType.xlDelimited, Excell.XlTextQualifier.xlTextQualifierDoubleQuote); } catch { }
                     oSheet.Cells[rowCnt, col_td + 2] = "=SUM(" + CellAddress(oSheet, 7, col_td + 2) + ":" + CellAddress(oSheet, rowCnt - 1, col_td + 2) + ")/2";
-
-                    //oSheet.Cells[5, col_td + 2] = "Số lao động có mặt/ Total employees present";
-                    //oSheet.Range[oSheet.Cells[5, Convert.ToInt32(col_td + 2)], oSheet.Cells[6, Convert.ToInt32(col_td + 2)]].Merge();
-                    //oSheet.Range[oSheet.Cells[5, Convert.ToInt32(col_td + 2)], oSheet.Cells[6, Convert.ToInt32(col_td + 2)]].Interior.Color = Color.FromArgb(189, 215, 238);
 
 
                     //cột Tỷ lệ vắng (%)
@@ -1865,10 +1736,6 @@ namespace Vs.HRM
                     formatRange4.NumberFormat = @"0%";
                     try { formatRange4.TextToColumns(Type.Missing, Excell.XlTextParsingType.xlDelimited, Excell.XlTextQualifier.xlTextQualifierDoubleQuote); } catch { }
                     oSheet.Cells[rowCnt, col_td + 3] = "=IFERROR(" + CellAddress(oSheet, rowCnt, col_td + 1) + "/" + CellAddress(oSheet, rowCnt, col_td) + ",0)";
-
-                    //oSheet.Cells[5, col_td + 3] = "Tỷ lệ vắng (%)";
-                    //oSheet.Range[oSheet.Cells[5, Convert.ToInt32(col_td + 3)], oSheet.Cells[6, Convert.ToInt32(col_td + 3)]].Merge();
-                    //oSheet.Range[oSheet.Cells[5, Convert.ToInt32(col_td + 3)], oSheet.Cells[6, Convert.ToInt32(col_td + 3)]].Interior.Color = Color.FromArgb(255, 255, 0);
 
 
 
@@ -1879,23 +1746,9 @@ namespace Vs.HRM
                     try { formatRange4.TextToColumns(Type.Missing, Excell.XlTextParsingType.xlDelimited, Excell.XlTextQualifier.xlTextQualifierDoubleQuote); } catch { }
                     oSheet.Cells[rowCnt, col_td + 4] = "=IFERROR(" + CellAddress(oSheet, rowCnt, col_td + 2) + "/" + CellAddress(oSheet, rowCnt, col_td) + ",0)";
 
-
-                    //oSheet.Cells[5, col_td + 4] = "Tỷ lệ có mặt/ tổng số (%)";
-                    //oSheet.Range[oSheet.Cells[5, Convert.ToInt32(col_td + 4)], oSheet.Cells[6, Convert.ToInt32(col_td + 4)]].Merge();
-                    //oSheet.Range[oSheet.Cells[5, Convert.ToInt32(col_td + 4)], oSheet.Cells[6, Convert.ToInt32(col_td + 4)]].Interior.Color = Color.FromArgb(255, 255, 0);
-
-
-                    //oSheet.Cells[4, col_td].Merge();
-                    //row4_Ngay = oSheet.get_Range(CharacterIncrement(col_td - 1) + "4", CharacterIncrement(col_td + 3) + "4");
-                    //row4_Ngay.Value2 = dTNgay.ToString("dd/MM/yyyy");
-                    //row4_Ngay.Merge();
                     col_td = col_td + 5;
                     dTNgay = dTNgay.AddDays(1);
                 }
-
-                //oSheet.Cells[rowCnt, 14] = "=IFERROR(L" + rowCnt + "/G" + rowCnt + ",0)";
-                //oSheet.Cells[rowCnt, 14].Font.Bold = true;
-                //oSheet.Cells[rowCnt, 14].Font.Color = Color.FromArgb(255, 0, 0);
 
                 Excell.Range formatRange8;
                 sRowXN = sRowXN.Substring(0, sRowXN.Length - 1);
@@ -1920,44 +1773,240 @@ namespace Vs.HRM
                 formatRange9.Font.Size = fontSizeNoiDung;
                 formatRange9.Font.Name = fontName;
 
-                //formatRange9.NumberFormat = "0";
-                ////try { formatRange9.TextToColumns(Type.Missing, Excell.XlTextParsingType.xlDelimited, Excell.XlTextQualifier.xlTextQualifierDoubleQuote); } catch (Exception ex) { }
-
-                //int colBD = 3;
-                //for (col = colBD; col <= dtBCThang.Columns.Count; col++) // không format cột tỷ lệ
-                //{
-                //    CurentColumn = CharacterIncrement(col);
-                //    formatRange = oSheet.get_Range(CurentColumn + "8", CurentColumn + rowCnt.ToString());
-                //    //formatRange.NumberFormat = "#,##0.00;(#,##0.00); ; ";
-                //    formatRange.NumberFormat = "0";
-                //    try { formatRange.TextToColumns(Type.Missing, Excell.XlTextParsingType.xlDelimited, Excell.XlTextQualifier.xlTextQualifierDoubleQuote); } catch { }
-                //}
-
-                //formatRange9 = oSheet.get_Range("N7", lastColumn + (rowCnt));
-                //formatRange9.NumberFormat = @"0.0\%";
-                //try { formatRange9.TextToColumns(Type.Missing, Excell.XlTextParsingType.xlDelimited, Excell.XlTextQualifier.xlTextQualifierDoubleQuote); } catch { }
-
-
-                ////Fortmart cột L
-                //formatRange9 = oSheet.get_Range("L7", "L" + (rowCnt - 1));
-                //formatRange9.Font.Bold = true;
-                //formatRange9.Font.Color = Color.FromArgb(255, 0, 0);
-
-                ////Fortmart cột M
-                //formatRange9 = oSheet.get_Range("M7", "M" + (rowCnt - 1));
-                //formatRange9.Font.Bold = true;
-
-                ////Fortmart cột N
-                //formatRange9 = oSheet.get_Range("N7", "N" + (rowCnt - 1));
-                //formatRange9.Font.Bold = true;
-                //formatRange9.Font.Color = Color.FromArgb(255, 0, 0);
                 BorderAround(oSheet.get_Range("B2", "C3"));
                 BorderAround(oSheet.get_Range("B4", lastColumn + rowCnt.ToString()));
+
+                #endregion
+
+                ////////////////////////////////////////////////////////////////////////////////// TABLE 2  //////////////////////////////////////////////////////////////////////////////////
+                #region table 2
+
+                rowCnt = rowCnt + 5; // Dòng phòng ban
+                int rowCnt2 = rowCnt - 1; // dòng ngày
+                row5_TieuDe_Stt = oSheet.get_Range("B" + rowCnt + "", "B" + (rowCnt + 1).ToString() + "");
+                row5_TieuDe_Stt.Merge();
+                row5_TieuDe_Stt.Value2 = "Phòng ban/ Section";
+                row5_TieuDe_Stt.Font.Name = fontName;
+                row5_TieuDe_Stt.Font.Size = fontSizeNoiDung;
+                row5_TieuDe_Stt.Interior.Color = Color.FromArgb(198, 224, 180);
+
+                row6_TieuDe_Stt = oSheet.get_Range("C" + rowCnt + "", "C" + (rowCnt + 1).ToString() + "");
+                row6_TieuDe_Stt.Merge();
+                row6_TieuDe_Stt.Value2 = "Đơn vị/ Department Vị trí/ Position";
+                row6_TieuDe_Stt.ColumnWidth = 30;
+                row6_TieuDe_Stt.Font.Name = fontName;
+                row6_TieuDe_Stt.Font.Size = fontSizeNoiDung;
+                row6_TieuDe_Stt.Interior.Color = Color.FromArgb(198, 224, 180);
+
+                col_td = 4;
+                row4_1 = oSheet.get_Range("A" + rowCnt2 + "");
+                row4_1.RowHeight = 25;
+
+                row4_1 = oSheet.get_Range("A" + rowCnt + "");
+                row4_1.RowHeight = 79;
+                dTNgay = Convert.ToDateTime(lk_TuNgay.EditValue);
+                while (dTNgay <= dDNgay)
+                {
+                    oSheet.Cells[rowCnt - 1, col_td] = dTNgay.ToString("dd/MM/yyyy");
+                    oSheet.Range[oSheet.Cells[rowCnt - 1, Convert.ToInt32(col_td)], oSheet.Cells[rowCnt - 1, Convert.ToInt32(col_td + 2)]].Merge();
+                    oSheet.Cells[rowCnt, col_td] = "Tổng lao động / Total employees";
+                    oSheet.Range[oSheet.Cells[rowCnt, Convert.ToInt32(col_td)], oSheet.Cells[rowCnt + 1, Convert.ToInt32(col_td)]].Merge();
+                    oSheet.Range[oSheet.Cells[rowCnt, Convert.ToInt32(col_td)], oSheet.Cells[rowCnt + 1, Convert.ToInt32(col_td)]].Interior.Color = Color.FromArgb(255, 255, 0);
+
+
+                    oSheet.Cells[rowCnt, col_td + 1] = "Số lao động có mặt/ Total employees present";
+                    oSheet.Range[oSheet.Cells[rowCnt, Convert.ToInt32(col_td + 1)], oSheet.Cells[rowCnt + 1, Convert.ToInt32(col_td + 1)]].Merge();
+                    oSheet.Range[oSheet.Cells[rowCnt, Convert.ToInt32(col_td + 1)], oSheet.Cells[rowCnt + 1, Convert.ToInt32(col_td + 1)]].Interior.Color = Color.FromArgb(255, 230, 153);
+
+
+                    oSheet.Cells[rowCnt, col_td + 2] = "Tỷ lệ có mặt/ tổng số (%)";
+                    oSheet.Range[oSheet.Cells[rowCnt, Convert.ToInt32(col_td + 2)], oSheet.Cells[rowCnt + 1, Convert.ToInt32(col_td + 2)]].Merge();
+                    oSheet.Range[oSheet.Cells[rowCnt, Convert.ToInt32(col_td + 2)], oSheet.Cells[rowCnt + 1, Convert.ToInt32(col_td + 2)]].Interior.Color = Color.FromArgb(189, 215, 238);
+
+                    col_td = col_td + 3;
+                    dTNgay = dTNgay.AddDays(1);
+                }
+
+                int rowCnt1 = rowCnt + 2; // dòng dữ liệu
+                keepRowCnt = rowCnt + 2;// Biến này dùng để lưu lại giá trị của biến rowCnt
+                col = 1;
+                dr_Cu = 0; // Count số nhân viên của xí nghiệp đổ dữ liệu trước
+                current_dr = 0; // Count số nhân viên của xí nghiệp đang được đổ dữ liệu
+                rowBD_XN = 0; // Row để insert dòng xí nghiệp
+                rowBD = rowCnt + 2;
+                rowCnt = 0;
+                dtBCThang = new DataTable();
+                dtBCThang = ds.Tables[2].Copy();
+                lastColumn = CharacterIncrement(dtBCThang.Columns.Count - 1);
+                string[] TEN_TO = dtBCThang.AsEnumerable().Select(r => r.Field<string>("TEN_TO")).Distinct().ToArray();
+                chanVongDau = "Chan";// chặn lần đầu để lần đầu tiên sẽ load data từ cột số 7 trở đi, các vòng lặp tiếp theo bỏ chặn
+                dt_temp = new DataTable();
+                dt_temp = ds.Tables[2].Copy(); // Dữ row count data
+
+                sRowXN = "";
+                s = int_to_Roman(9);
+                rowSum = 8; //Row sum của cột G 
+                for (int i = 0; i < TEN_TO.Count(); i++)
+                {
+                    dtBCThang = ds.Tables[2].Copy();
+                    dtBCThang = dtBCThang.AsEnumerable().Where(r => r.Field<string>("TEN_TO") == TEN_TO[i]).CopyToDataTable().Copy();
+                    DataRow[] dr = dtBCThang.Select();
+                    current_dr = dr.Count();
+                    string[,] rowData = new string[dr.Count(), dtBCThang.Columns.Count];
+                    foreach (DataRow row in dr)
+                    {
+                        for (col = 0; col < dtBCThang.Columns.Count; col++)
+                        {
+                            rowData[rowCnt, col] = row[col].ToString();
+                        }
+                        rowCnt++;
+                    }
+                    if (chanVongDau == "Chan") // Chạy vòng đầu tiên, rowBD_XN = 0, vì nó nằm dòng đầu tiên thì rowBD lúc này sẽ  = 7, các vòng tiếp theo sẽ lấy cái dòng BĐ của + thêm rowBD_XN = 1 vào để không bị nằm đè lên dòng thứ 9
+                    {
+                        dr_Cu = 0;
+                        rowBD_XN = 0;
+                        chanVongDau = "";
+                    }
+                    else
+                    {
+                        rowBD_XN = 1;
+                    }
+                    rowBD = rowBD + dr_Cu + rowBD_XN;
+                    //rowCnt = rowCnt + 6 + dr_Cu;
+                    rowCnt = rowBD + current_dr - 1;
+
+                    //Đổ dữ liệu của xí nghiệp
+                    oSheet.get_Range("B" + (rowBD) + "", lastColumn + (rowCnt).ToString()).Value2 = rowData;
+
+                    col_td = 4;
+                    dTNgay = Convert.ToDateTime(lk_TuNgay.EditValue);
+                    //Set công thức từng row
+                    while (dTNgay <= dDNgay)
+                    {
+                        //cột Tỷ lệ vắng (%)
+                        formatRange11 = oSheet.get_Range("" + CharacterIncrement(col_td + 1) + "" + rowBD + "", "" + CharacterIncrement(col_td + 1) + "" + (rowCnt + 1) + "");
+                        formatRange11.Value = "=IFERROR(" + CharacterIncrement(col_td) + "" + rowBD.ToString() + "/" + CharacterIncrement(col_td - 1) + "" + rowBD.ToString() + ",0)";
+                        formatRange11.NumberFormat = @"0%";
+                        try { formatRange11.TextToColumns(Type.Missing, Excell.XlTextParsingType.xlDelimited, Excell.XlTextQualifier.xlTextQualifierDoubleQuote); } catch { }
+                        col_td = col_td + 3;
+                        dTNgay = dTNgay.AddDays(1);
+                    }
+
+
+                    col_td = 4;
+                    dr_Cu = current_dr;
+                    keepRowCnt = rowCnt;
+                    rowSum = rowCnt + 3;
+                    rowCnt = 0;
+                }
+                rowCnt = keepRowCnt;
+                rowDup = 0; // row bat dau của dữ liệu duplicate
+                bChan = false;
+                for (rowbd = rowCnt1; rowbd <= rowCnt; rowbd++)
+                {
+                    formatRange = oSheet.get_Range("B" + rowbd + "");
+                    formatRange1 = oSheet.get_Range("B" + (rowbd + 1).ToString());
+
+                    if (formatRange.Value == null)
+                    {
+                        formatRange = oSheet.get_Range("B" + (rowDup).ToString() + "");
+                    }
+                    if (formatRange.Value == formatRange1.Value)
+                    {
+                        if (bChan == false)
+                        {
+                            rowDup = rowbd;
+                        }
+                        bChan = true;
+                        formatRange.Value = null;
+                        formatRange3 = oSheet.get_Range("B" + rowbd + "", "B" + (rowbd + 1).ToString());
+                        formatRange3.Merge();
+                    }
+                    else
+                    {
+                        bChan = false;
+                        rowDup = 0;
+                    }
+                    //formatRange.NumberFormat = "#,##0.00;(#,##0.00); ; ";
+                }
+
+
+                rowCnt++;
+
+                formatRange9 = oSheet.get_Range("B" + rowCnt + "");
+                formatRange9.Value = "Tổng/Grand Total";
+
+                formatRange9 = oSheet.get_Range("D" + rowCnt + "", lastColumn + rowCnt);
+                formatRange9.Font.Bold = true;
+                formatRange9.Font.Name = fontName;
+                formatRange9.Font.Size = fontSizeNoiDung;
+                formatRange9.Font.Color = Color.FromArgb(255, 0, 0);
+                formatRange9.Interior.Color = Color.FromArgb(189, 215, 238);
+                formatRange9.HorizontalAlignment = Excell.XlHAlign.xlHAlignCenter;
+                formatRange9.VerticalAlignment = Excell.XlVAlign.xlVAlignCenter;
+
+                // SUM
+                col_td = 4;
+                dTNgay = Convert.ToDateTime(lk_TuNgay.EditValue);
+                while (dTNgay <= dDNgay)
+                {
+                    formatRange4 = oSheet.get_Range(CharacterIncrement(col_td - 1) + "" + rowCnt + "" + "", CharacterIncrement(col_td - 1) + (rowCnt).ToString());
+                    oSheet.Cells[rowCnt, col_td] = "=SUM(" + CellAddress(oSheet, rowCnt1, col_td) + ":" + CellAddress(oSheet, rowCnt - 1, col_td) + ")"; // sUM TỪNNG CỘT
+
+                    formatRange4 = oSheet.get_Range(CharacterIncrement(col_td) + "" + rowCnt + "" + "", CharacterIncrement(col_td) + (rowCnt).ToString());
+                    oSheet.Cells[rowCnt, col_td + 1] = "=SUM(" + CellAddress(oSheet, rowCnt1, col_td + 1) + ":" + CellAddress(oSheet, rowCnt - 1, col_td + 1) + ")";
+
+                    //cột Tỷ lệ vắng (%)
+                    formatRange4 = oSheet.get_Range(CharacterIncrement(col_td + 1) + "" + rowCnt + "" + "", CharacterIncrement(col_td + 1) + (rowCnt).ToString());
+                    oSheet.Cells[rowCnt, col_td + 2] = "=IFERROR(" + CellAddress(oSheet, rowCnt, col_td + 1) + "/" + CellAddress(oSheet, rowCnt, col_td) + ",0)";
+
+                    col_td = col_td + 3;
+                    dTNgay = dTNgay.AddDays(1);
+                }
+
+                col_td = 4;
+                dTNgay = Convert.ToDateTime(lk_TuNgay.EditValue);
+                while (dTNgay <= dDNgay)
+                {
+                    formatRange4 = oSheet.get_Range(CharacterIncrement(col_td - 1) + "" + rowCnt1 + "" + "", CharacterIncrement(col_td - 1) + (rowCnt).ToString());
+                    formatRange4.Interior.Color = Color.FromArgb(226, 239, 218);
+                    formatRange4.NumberFormat = "0"; // format từng cột
+                    try { formatRange4.TextToColumns(Type.Missing, Excell.XlTextParsingType.xlDelimited, Excell.XlTextQualifier.xlTextQualifierDoubleQuote); } catch { }
+
+                    //cột số lao động vắng mặt
+                    formatRange4 = oSheet.get_Range(CharacterIncrement(col_td) + "" + rowCnt1 + "" + "", CharacterIncrement(col_td) + (rowCnt).ToString());
+                    formatRange4.Interior.Color = Color.FromArgb(255, 230, 153);
+                    formatRange4.NumberFormat = "0";
+                    try { formatRange4.TextToColumns(Type.Missing, Excell.XlTextParsingType.xlDelimited, Excell.XlTextQualifier.xlTextQualifierDoubleQuote); } catch { }
+
+                    formatRange4 = oSheet.get_Range(CharacterIncrement(col_td + 1) + "" + rowCnt1 + "" + "", CharacterIncrement(col_td + 1) + (rowCnt).ToString());
+                    formatRange4.Interior.Color = Color.FromArgb(189, 215, 238);
+                    formatRange4.NumberFormat = @"0%";
+                    try { formatRange4.TextToColumns(Type.Missing, Excell.XlTextParsingType.xlDelimited, Excell.XlTextQualifier.xlTextQualifierDoubleQuote); } catch { }
+
+                    col_td = col_td + 3;
+                    dTNgay = dTNgay.AddDays(1);
+                }
+
+
+                formatRange9 = oSheet.get_Range("D" + rowCnt2 + "", lastColumn + rowCnt);
+                formatRange9.Font.Bold = true;
+                formatRange9.WrapText = true;
+                formatRange9.HorizontalAlignment = Excell.XlHAlign.xlHAlignCenter;
+                formatRange9.VerticalAlignment = Excell.XlVAlign.xlVAlignCenter;
+
+                formatRange9 = oSheet.get_Range("B" + rowCnt2 + "", lastColumn + rowCnt.ToString());
+                formatRange9.Font.Name = fontName;
+                formatRange9.Font.Size = fontSizeNoiDung;
+
+                BorderAround(oSheet.get_Range("B" + rowCnt2 + "", lastColumn + rowCnt.ToString()));
+                #endregion
+
                 //// filter
                 //Excell.Range myRange = oSheet.get_Range("A7", lastColumn + (rowCnt - 1).ToString());
                 //myRange.AutoFilter("1", "<>", Microsoft.Office.Interop.Excell.XlAutoFilterOperator.xlOr, "", true);
 
-
+                this.Cursor = Cursors.Default;
                 oXL.Visible = true;
                 oXL.UserControl = true;
 
@@ -1966,6 +2015,7 @@ namespace Vs.HRM
             }
             catch (Exception ex)
             {
+                this.Cursor = Cursors.Default;
                 MessageBox.Show(ex.Message);
             }
         }

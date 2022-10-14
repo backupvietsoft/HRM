@@ -179,7 +179,7 @@ namespace Vs.Payroll
 
             DataTable dt = new DataTable();
             dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spQTCNGet", sTo, sOrd));
-
+            dt.Columns["ID_CD"].ReadOnly = false;
             if (grdQT.DataSource == null)
             {
                 Commons.Modules.ObjSystems.MLoadXtraGrid(grdQT, grvQT, dt, false, false, false, false, true, this.Name);
@@ -302,20 +302,23 @@ namespace Vs.Payroll
             try
             {
                 //tạo một datatable 
-                Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, stbQT, Commons.Modules.ObjSystems.ConvertDatatable(grdQT), "");
+                Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, stbQT, Commons.Modules.ObjSystems.ConvertDatatable(grvQT), "");
                 //Cap nhat qui trinh cong nghe
-                string sSql = "UPDATE QUI_TRINH_CONG_NGHE_CHI_TIET SET CONG_DOAN = tmp.CONG_DOAN, THU_TU_CONG_DOAN = tmp.THU_TU_CONG_DOAN, "
-                            + " NHOM_CD = tmp.NHOM_CD, MaQL = tmp.MaQL, BAC_THO = tmp.BAC_THO, BAC_THO_DM = tmp.BAC_THO_DM, LOAI_MAY = tmp.LOAI_MAY, "
-                            + " THOI_GIAN_THIET_KE = tmp.THOI_GIAN_THIET_KE, CONG_CU_HT = tmp.CONG_CU_HT, DON_GIA_GIAY = tmp.DON_GIA_GIAY, "
-                            + " DON_GIA_THUC_TE = tmp.DON_GIA_THUC_TE, DMLD = tmp.DMLD, NGAY_LAP = '" + Convert.ToDateTime(datNgayLap.Text).ToString("MM/dd/yyyy") + "' "
-                            + " FROM QUI_TRINH_CONG_NGHE_CHI_TIET_TEST QT "
-                            + " INNER JOIN " + stbQT + " tmp ON QT.ID = tmp.ID_CD "
-                            + " INSERT INTO QUI_TRINH_CONG_NGHE_CHI_TIET(ID_TO, ID_ORD, THU_TU_CONG_DOAN, CONG_DOAN, NHOM_CD, MaQL, BAC_THO, BAC_THO_DM, "
-                            + " LOAI_MAY, THOI_GIAN_THIET_KE, CONG_CU_HT, DON_GIA_GIAY, DON_GIA_THUC_TE, DMLD, NGAY_LAP)"
-                            + " SELECT ID_TO, ID_ORD, THU_TU_CONG_DOAN, CONG_DOAN, NHOM_CD, MaQL, BAC_THO, BAC_THO_DM, LOAI_MAY, THOI_GIAN_THIET_KE, "
-                            + " CONG_CU_HT, DON_GIA_GIAY, DON_GIA_THUC_TE, DMLD, '" + Convert.ToDateTime(datNgayLap.Text).ToString("MM/dd/yyyy") + "' "
-                            + " FROM " + stbQT + " tmp1 WHERE ISNULL(ID_CD,0) = 0";
-                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, sSql);
+
+
+                //string sSql = "UPDATE QUI_TRINH_CONG_NGHE_CHI_TIET SET CONG_DOAN = tmp.CONG_DOAN, THU_TU_CONG_DOAN = tmp.THU_TU_CONG_DOAN, "
+                //            + " NHOM_CD = tmp.NHOM_CD, MaQL = tmp.MaQL, BAC_THO = tmp.BAC_THO, BAC_THO_DM = tmp.BAC_THO_DM, LOAI_MAY = tmp.LOAI_MAY, "
+                //            + " THOI_GIAN_THIET_KE = tmp.THOI_GIAN_THIET_KE, CONG_CU_HT = tmp.CONG_CU_HT, DON_GIA_GIAY = tmp.DON_GIA_GIAY, "
+                //            + " DON_GIA_THUC_TE = tmp.DON_GIA_THUC_TE, DMLD = tmp.DMLD, NGAY_LAP = '" + Convert.ToDateTime(datNgayLap.Text).ToString("MM/dd/yyyy") + "' "
+                //            + " FROM QUI_TRINH_CONG_NGHE_CHI_TIET_TEST QT "
+                //            + " INNER JOIN " + stbQT + " tmp ON QT.ID = tmp.ID_CD "
+                //            + " INSERT INTO QUI_TRINH_CONG_NGHE_CHI_TIET(ID_TO, ID_ORD, THU_TU_CONG_DOAN, CONG_DOAN, NHOM_CD, MaQL, BAC_THO, BAC_THO_DM, "
+                //            + " LOAI_MAY, THOI_GIAN_THIET_KE, CONG_CU_HT, DON_GIA_GIAY, DON_GIA_THUC_TE, DMLD, NGAY_LAP)"
+                //            + " SELECT " + cboChuyen.EditValue + ", " + cboMH.EditValue + ", THU_TU_CONG_DOAN, CONG_DOAN, NHOM_CD, MaQL, BAC_THO, BAC_THO_DM, LOAI_MAY, THOI_GIAN_THIET_KE, "
+                //            + " CONG_CU_HT, DON_GIA_GIAY, DON_GIA_THUC_TE, DMLD, '" + Convert.ToDateTime(datNgayLap.Text).ToString("MM/dd/yyyy") + "' "
+                //            + " FROM " + stbQT + " tmp1 WHERE ISNULL(ID_CD,0) = 0";
+
+                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spSaveQTCN", stbQT, cboChuyen.EditValue, cboMH.EditValue, datNgayLap.Text);
 
                 //string strSql1 = "DROP TABLE " + stbQT;
                 //SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, strSql1);
@@ -1251,7 +1254,7 @@ namespace Vs.Payroll
                     errorCount++;
                 }
 
-                if (!KiemDuLieuSo(grvQT, dr, "DON_GIA_THUC_TE", grvQT.Columns["DON_GIA_THUC_TE"].FieldName.ToString(), 0, 0, false, this.Name))
+                if (!KiemDuLieuSo(grvQT, dr, "DON_GIA_THUC_TE", grvQT.Columns["DON_GIA_THUC_TE"].FieldName.ToString(), 0, 0, true, this.Name))
                 {
                     errorCount++;
                 }
@@ -1393,7 +1396,7 @@ namespace Vs.Payroll
 
                 if (!string.IsNullOrEmpty(sDLKiem))
                 {
-                    if (!double.TryParse(dr[sCot].ToString(), out DLKiem))
+                    if (!double.TryParse(dr[sCot].ToString() == "" ? "0" : dr[sCot].ToString(), out DLKiem))
                     {
                         dr.SetColumnError(sCot, sTenKTra + Commons.Modules.ObjLanguages.GetLanguage(sForm, "msgKhongPhaiSo"));
                         return false;
@@ -1586,6 +1589,15 @@ namespace Vs.Payroll
                         Commons.Modules.ObjSystems.XoaTable(sBT);
                     }
                 }
+            }
+            catch { }
+        }
+
+        private void grvQT_InitNewRow(object sender, InitNewRowEventArgs e)
+        {
+            try
+            {
+                grvQT.SetFocusedRowCellValue("ID_CD", 0);
             }
             catch { }
         }

@@ -143,6 +143,7 @@
             this.grvQT.OptionsSelection.MultiSelect = true;
             this.grvQT.OptionsView.ShowGroupPanel = false;
             this.grvQT.PopupMenuShowing += new DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler(this.grvDSUngVien_PopupMenuShowing);
+            this.grvQT.InitNewRow += new DevExpress.XtraGrid.Views.Grid.InitNewRowEventHandler(this.grvQT_InitNewRow);
             this.grvQT.InvalidRowException += new DevExpress.XtraGrid.Views.Base.InvalidRowExceptionEventHandler(this.grvQT_InvalidRowException);
             this.grvQT.InvalidValueException += new DevExpress.XtraEditors.Controls.InvalidValueExceptionEventHandler(this.grvQT_InvalidValueException);
             // 

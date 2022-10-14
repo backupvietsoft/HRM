@@ -1818,6 +1818,8 @@ D:\01.SourceCode\02.HRM\03.Vs.Category\Vs.Category\obj\Debug\Vs.Category.csproj.
 D:\01.SourceCode\02.HRM\03.Vs.Category\Vs.Category\obj\Debug\Vs.Category.dll
 D:\01.SourceCode\02.HRM\03.Vs.Category\Vs.Category\obj\Debug\Vs.Category.pdb
 D:\01.SourceCode\02.HRM\03.Vs.Category\Vs.Category\bin\Debug\Vs.Recruit.exe.config
+F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\DevExpress.DataAccess.v22.1.xml
+F:\01.HRM\03.Vs.Category\Vs.Category\obj\Debug\Vs.Category.Properties.Resources.resources
 F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\Vs.Category.dll.config
 F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\Vs.Category.dll
 F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\Vs.Category.pdb
@@ -1899,16 +1901,11 @@ F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\DevExpress.XtraTreeMap.v22.1.xml
 F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\DevExpress.XtraReports.v22.1.xml
 F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\Newtonsoft.Json.xml
 F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\DevExpress.XtraRichEdit.v22.1.xml
-F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\VS.Report.pdb
-F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\VS.Report.dll.config
 F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\DevExpress.Xpo.v22.1.xml
-F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\Vs.HRM.pdb
-F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\Vs.HRM.dll.config
 F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\DevExpress.RichEdit.v22.1.Core.xml
 F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\DevExpress.Pdf.v22.1.Core.xml
 F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\DevExpress.Pdf.v22.1.Drawing.xml
 F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\DevExpress.XtraCharts.v22.1.xml
-F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\DevExpress.DataAccess.v22.1.xml
 F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\DevExpress.Charts.v22.1.Core.xml
 F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\DevExpress.PivotGrid.v22.1.Core.xml
 F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\DevExpress.XtraGauges.v22.1.Core.xml
@@ -1964,7 +1961,6 @@ F:\01.HRM\03.Vs.Category\Vs.Category\obj\Debug\Vs.Category.frmEditXI_NGHIEP.reso
 F:\01.HRM\03.Vs.Category\Vs.Category\obj\Debug\Vs.Category.frmEditQUAN.resources
 F:\01.HRM\03.Vs.Category\Vs.Category\obj\Debug\Vs.Category.frmEditMAU_BAO_CAO.resources
 F:\01.HRM\03.Vs.Category\Vs.Category\obj\Debug\Vs.Category.frmXetDuyet_Confirm.resources
-F:\01.HRM\03.Vs.Category\Vs.Category\obj\Debug\Vs.Category.Properties.Resources.resources
 F:\01.HRM\03.Vs.Category\Vs.Category\obj\Debug\Vs.Category.frmDuyetQuyDinh.resources
 F:\01.HRM\03.Vs.Category\Vs.Category\obj\Debug\Vs.Category.frmXetDuyet.resources
 F:\01.HRM\03.Vs.Category\Vs.Category\obj\Debug\Vs.Category.ucDuyet.resources

@@ -2412,7 +2412,6 @@ D:\01.SourceCode\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\VietSoftHRM.exe.con
 D:\01.SourceCode\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\VietSoftHRM.pdb
 D:\01.SourceCode\02.HRM\01.VietSoftHRM\VietSoftHRM\obj\Debug\VietSoftHRM.csproj.CopyComplete
 D:\01.SourceCode\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Vs.Recruit.exe.config
-F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\DevExpress.BonusSkins.v22.1.dll
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Template\TemplateGiamLaoDong.xlsx
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Template\TemplateTaiNanLaoDong.xlsx
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Template\TemplateTangLaoDong.xlsx
@@ -2421,6 +2420,7 @@ F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\VietSoftHRM.exe.config
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\VietSoftHRM.exe
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\VietSoftHRM.pdb
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Commons.dll
+F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\DevExpress.BonusSkins.v22.1.dll
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\DevExpress.Charts.v22.1.Core.dll
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\DevExpress.CodeParser.v22.1.dll
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\DevExpress.Dashboard.v22.1.Core.dll

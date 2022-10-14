@@ -959,7 +959,8 @@
             this.xrLabel6.AllowMarkupText = true;
             this.xrLabel6.Dpi = 254F;
             this.xrLabel6.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "\'Công việc phải làm: \'+ [DATA].[MO_TA_CV]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "\'Công việc phải làm: \'+ [DATA].[MO_TA_CV] + \' và các công việc có liên quan theo " +
+                    "yêu cầu của công ty tại từng thời điểm\'")});
             this.xrLabel6.Font = new System.Drawing.Font("Times New Roman", 11.25F);
             this.xrLabel6.LocationFloat = new DevExpress.Utils.PointFloat(114.6855F, 2053.193F);
             this.xrLabel6.Multiline = true;

@@ -14,6 +14,7 @@ using System.Linq;
 using System.Windows.Forms;
 using DevExpress.Spreadsheet;
 using System.Threading;
+using DevExpress.XtraEditors.Repository;
 
 namespace Vs.TimeAttendance
 {
@@ -126,6 +127,28 @@ namespace Vs.TimeAttendance
                 Commons.Modules.ObjSystems.XoaTable(sBT);
 
                 Commons.Modules.ObjSystems.MLoadXtraGrid(grdData, grvData, dt1, true, true, false, true, true, this.Name);
+
+                RepositoryItemTextEdit txtEdit = new RepositoryItemTextEdit();
+                txtEdit.Properties.DisplayFormat.FormatString = "0.00";
+                txtEdit.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+                txtEdit.Properties.EditFormat.FormatString = "0.00";
+                txtEdit.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+                txtEdit.Properties.Mask.EditMask = "0.00";
+                txtEdit.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
+                txtEdit.Properties.Mask.UseMaskAsDisplayFormat = true;
+
+                grvData.Columns["COT_1"].ColumnEdit = txtEdit;
+                grvData.Columns["COT_2"].ColumnEdit = txtEdit;
+                grvData.Columns["COT_3"].ColumnEdit = txtEdit;
+                grvData.Columns["COT_4"].ColumnEdit = txtEdit;
+                grvData.Columns["COT_5"].ColumnEdit = txtEdit;
+                grvData.Columns["COT_6"].ColumnEdit = txtEdit;
+                grvData.Columns["COT_7"].ColumnEdit = txtEdit;
+                grvData.Columns["TG_HC"].ColumnEdit = txtEdit;
+                grvData.Columns["TG_TC_NT"].ColumnEdit = txtEdit;
+                grvData.Columns["TG_TC_CN"].ColumnEdit = txtEdit;
+
+
                 grvData.Columns[0].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
                 grvData.Columns[1].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
                 grvData.Columns[2].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;

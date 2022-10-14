@@ -91,7 +91,6 @@ namespace Vs.Payroll
                 dt = ds.Tables[0].Copy();
                 dt.TableName = "KHACH_HANG";
                 if (iLoad == 0) Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboKH, dt, "ID_DT", "TEN_NGAN", "TEN_NGAN", true);
-
                 //dt = new DataTable();
                 //dt = ds.Tables[1].Copy();
                 //dt.TableName = "HOP_DONG";
@@ -113,13 +112,12 @@ namespace Vs.Payroll
                 //dt = ds.Tables[3].Copy();
                 //dt.TableName = "TEN_ORDER";
                 //if (iLoad == 0 || iLoad == 1 || iLoad == 2 || iLoad == 3) Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboOrd, dt, "ID_DHBORD", "TEN_ORD", "TEN_ORD", true);
-
+                Commons.Modules.sLoad = "";
             }
             catch (Exception ex)
             {
                 XtraMessageBox.Show(ex.Message.ToString());
             }
-
         }
 
         private void LoadCbo()
@@ -1543,6 +1541,7 @@ namespace Vs.Payroll
         private void cboDV_EditValueChanged(object sender, EventArgs e)
         {
             LoadCbo();
+            LoadHD(0);
         }
 
         private void grdQT_ProcessGridKey(object sender, KeyEventArgs e)

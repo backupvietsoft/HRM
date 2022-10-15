@@ -2854,7 +2854,10 @@ D:\01.SourceCode\02.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.csproj.CoreCo
 D:\01.SourceCode\02.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.csproj.CopyComplete
 D:\01.SourceCode\02.HRM\05.Vs.Report\Vs.Report\obj\Debug\VS.Report.dll
 D:\01.SourceCode\02.HRM\05.Vs.Report\Vs.Report\obj\Debug\VS.Report.pdb
-F:\01.HRM\05.Vs.Report\Vs.Report\bin\Debug\DevExpress.XtraDiagram.v22.1.xml
+H:\Lamviec\Lamviec\HRM\01.HRM\05.Vs.Report\Vs.Report\bin\Debug\Commons.dll
+H:\Lamviec\Lamviec\HRM\01.HRM\05.Vs.Report\Vs.Report\bin\Debug\de\DevExpress.XtraTreeList.v22.1.resources.dll
+H:\Lamviec\Lamviec\HRM\01.HRM\05.Vs.Report\Vs.Report\bin\Debug\es\DevExpress.XtraTreeList.v22.1.resources.dll
+H:\Lamviec\Lamviec\HRM\01.HRM\05.Vs.Report\Vs.Report\bin\Debug\ja\DevExpress.XtraTreeList.v22.1.resources.dll
 F:\01.HRM\05.Vs.Report\Vs.Report\bin\Debug\VS.Report.dll.config
 F:\01.HRM\05.Vs.Report\Vs.Report\bin\Debug\VS.Report.dll
 F:\01.HRM\05.Vs.Report\Vs.Report\bin\Debug\VS.Report.pdb
@@ -2949,6 +2952,7 @@ F:\01.HRM\05.Vs.Report\Vs.Report\bin\Debug\DevExpress.Pdf.v22.1.Drawing.xml
 F:\01.HRM\05.Vs.Report\Vs.Report\bin\Debug\DevExpress.DataAccess.v22.1.UI.xml
 F:\01.HRM\05.Vs.Report\Vs.Report\bin\Debug\DevExpress.XtraNavBar.v22.1.xml
 F:\01.HRM\05.Vs.Report\Vs.Report\bin\Debug\DevExpress.XtraPivotGrid.v22.1.xml
+F:\01.HRM\05.Vs.Report\Vs.Report\bin\Debug\DevExpress.XtraDiagram.v22.1.xml
 F:\01.HRM\05.Vs.Report\Vs.Report\bin\Debug\DevExpress.Diagram.v22.1.Core.xml
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.csprojAssemblyReference.cache
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptThamGiaBHXH.resources
@@ -3108,7 +3112,3 @@ F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.csproj.CoreCompileInputs.ca
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.csproj.CopyComplete
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\VS.Report.dll
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\VS.Report.pdb
-H:\Lamviec\Lamviec\HRM\01.HRM\05.Vs.Report\Vs.Report\bin\Debug\Commons.dll
-H:\Lamviec\Lamviec\HRM\01.HRM\05.Vs.Report\Vs.Report\bin\Debug\de\DevExpress.XtraTreeList.v22.1.resources.dll
-H:\Lamviec\Lamviec\HRM\01.HRM\05.Vs.Report\Vs.Report\bin\Debug\es\DevExpress.XtraTreeList.v22.1.resources.dll
-H:\Lamviec\Lamviec\HRM\01.HRM\05.Vs.Report\Vs.Report\bin\Debug\ja\DevExpress.XtraTreeList.v22.1.resources.dll

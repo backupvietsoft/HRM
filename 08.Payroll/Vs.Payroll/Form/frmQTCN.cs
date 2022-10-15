@@ -34,7 +34,6 @@ namespace Vs.Payroll
         public frmQTCN()
         {
             InitializeComponent();
-            Commons.Modules.ObjSystems.ThayDoiNN(this, windowsUIButton);
         }
 
         private void frmQTCN_Load(object sender, EventArgs e)
@@ -43,109 +42,118 @@ namespace Vs.Payroll
             try
             {
                 datNgayLap.DateTime = DateTime.Now;
-                Commons.Modules.ObjSystems.LoadCboDonVi(cboDV);
-                LoadCbo();
-                LoadHD(0);
-                LoadLuoi();
-                //cboCum_EditValueChanged(null, null);
-                //cboChuyen_EditValueChanged(null, null);
+                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboDV, Commons.Modules.ObjSystems.DataDonVi(false), "ID_DV", "TEN_DV", "TEN_DV");
+                Commons.OSystems.SetDateEditFormat(datTNgay);
+                Commons.OSystems.SetDateEditFormat(datDNgay);
+                datTNgay.EditValue = DateTime.Now.AddMonths(-2);
+                datDNgay.EditValue = DateTime.Now;
+                LoadCboDoiTac();
+                LoadCboHangHoa();
+                LoadCboTo();
+                LoadCboCum();
+                LoadData();
             }
             catch (Exception ex) { XtraMessageBox.Show(ex.Message.ToString()); }
 
             Commons.Modules.sLoad = "";
+            Commons.Modules.ObjSystems.ThayDoiNN(this, windowsUIButton);
         }
 
-        private void LoadHD(int iLoad)
+        private void LoadCboDoiTac()
         {
-            Commons.Modules.sLoad = "0LoadCbo";
-            String sKH, sDV; //, sMH, sTo;
-            sKH = "-1"; sDV = "-1"; //sMH = "-1"; sTo = "-1";
-
-            try { sKH = cboKH.EditValue.ToString(); } catch { }
-            try { sDV = cboDV.EditValue.ToString(); } catch { }
-            //try { sMH = cboMH.EditValue.ToString(); } catch { }
-            //try { sTo = cboChuyen.EditValue.ToString(); } catch { }
-
             System.Data.SqlClient.SqlConnection conn;
             DataTable dt = new DataTable();
-
             try
             {
                 conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
                 conn.Open();
-
-                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spQTCNGetCbo", conn);
-                cmd.Parameters.Add("@sDV", SqlDbType.NVarChar, 50).Value = sDV;
-                cmd.Parameters.Add("@sKH", SqlDbType.NVarChar, 50).Value = sKH;
-                //cmd.Parameters.Add("@sDDH", SqlDbType.NVarChar, 50).Value = sDDH;
-                //cmd.Parameters.Add("@sMH", SqlDbType.NVarChar, 50).Value = sMH;
-                //cmd.Parameters.Add("@sOrd", SqlDbType.NVarChar, 50).Value = sOrd;
-
+                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spQTCN", conn);
+                cmd.Parameters.Add("@iLoai", SqlDbType.Int).Value = 0;
+                cmd.Parameters.Add("@ID_DV", SqlDbType.BigInt).Value = cboDV.EditValue;
                 cmd.CommandType = CommandType.StoredProcedure;
                 System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
-
                 DataSet ds = new DataSet();
                 adp.Fill(ds);
-
                 dt = new DataTable();
                 dt = ds.Tables[0].Copy();
-                dt.TableName = "KHACH_HANG";
-                if (iLoad == 0) Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboKH, dt, "ID_DT", "TEN_NGAN", "TEN_NGAN", true);
-                //dt = new DataTable();
-                //dt = ds.Tables[1].Copy();
-                //dt.TableName = "HOP_DONG";
-                //if (iLoad == 0 || iLoad == 1) Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboDV, dt, "ID_DHB", "SO_DHB", "SO_DHB", true);
-
-
-                dt = new DataTable();
-                dt = ds.Tables[1].Copy();
-                dt.TableName = "MA_HANG";
-                if (iLoad == 0 || iLoad == 1 || iLoad == 2)
-                {
-                    Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboMH, dt, "ID_ORD", "TEN_HH", "TEN_HH", true);
-                    //cboMH.Properties.DataSource
-                    //cboMH.Properties.View.Columns["TEN_LOAI_HH"].Visible = false;
-                    LOAI_HH = dt.Rows[0]["TEN_LOAI_HH"].ToString();
-                }
-
-                //dt = new DataTable();
-                //dt = ds.Tables[3].Copy();
-                //dt.TableName = "TEN_ORDER";
-                //if (iLoad == 0 || iLoad == 1 || iLoad == 2 || iLoad == 3) Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboOrd, dt, "ID_DHBORD", "TEN_ORD", "TEN_ORD", true);
-                Commons.Modules.sLoad = "";
+                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboKH, dt, "ID_DT", "TEN_NGAN", "TEN_NGAN", true);
             }
             catch (Exception ex)
             {
                 XtraMessageBox.Show(ex.Message.ToString());
             }
         }
-
-        private void LoadCbo()
+        private void LoadCboHangHoa()
         {
             try
             {
+                System.Data.SqlClient.SqlConnection conn;
                 DataTable dt = new DataTable();
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboCHUYEN", Commons.Modules.UserName, Commons.Modules.TypeLanguage, cboDV.EditValue, 1));
-                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboChuyen, dt, "ID_TO", "TEN_TO", "TEN_TO");
+                try
+                {
+                    conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                    conn.Open();
+                    System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spQTCN", conn);
+                    cmd.Parameters.Add("@iLoai", SqlDbType.Int).Value = 0;
+                    cmd.Parameters.Add("@ID_DT", SqlDbType.BigInt).Value = cboKH.Text == "" ? -99 : cboKH.EditValue;
+                    cmd.Parameters.Add("@TNgay", SqlDbType.DateTime).Value = Commons.Modules.ObjSystems.ConvertDateTime(datTNgay.Text);
+                    cmd.Parameters.Add("@DNgay", SqlDbType.DateTime).Value = Commons.Modules.ObjSystems.ConvertDateTime(datDNgay.Text);
+                    cmd.Parameters.Add("@bCot1", SqlDbType.Bit).Value = rdoXemCuLapMoi.SelectedIndex;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+                    DataSet ds = new DataSet();
+                    adp.Fill(ds);
+                    dt = new DataTable();
+                    dt = ds.Tables[1].Copy();
+                    Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboMH, dt, "ID_ORD", "TEN_HH", "TEN_HH", true);
+                    if (dt.Rows.Count == 0)
+                    {
+                        cboMH_EditValueChanged(null, null);
+                    }
+                }
+                catch (Exception ex)
+                {
+                }
+            }
+            catch { }
+        }
+        private void LoadCboTo()
+        {
+            try
+            {
+                System.Data.SqlClient.SqlConnection conn;
+                DataTable dt = new DataTable();
+                conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                conn.Open();
+                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spQTCN", conn);
+                cmd.Parameters.Add("@iLoai", SqlDbType.Int).Value = 0;
+                cmd.Parameters.Add("@ID_DV", SqlDbType.BigInt).Value = cboDV.EditValue;
+                cmd.Parameters.Add("@bCot1", SqlDbType.Bit).Value = rdoXemCuLapMoi.SelectedIndex;
+                cmd.Parameters.Add("@ID_MH", SqlDbType.BigInt).Value = cboMH.Text == "" ? -99 : cboMH.EditValue;
+                cmd.CommandType = CommandType.StoredProcedure;
+                System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+                DataSet ds = new DataSet();
+                adp.Fill(ds);
+                dt = new DataTable();
+                dt = ds.Tables[2].Copy();
+                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboChuyen, dt, "ID_TO", "TEN_TO", "TEN_TO", true);
                 cboChuyen.Properties.View.Columns[0].Caption = "STT Chuyền";
                 cboChuyen.Properties.View.Columns[1].Caption = "Tên Chuyền";
                 cboChuyen.Properties.View.Columns[1].AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
                 cboChuyen.Properties.View.Columns[1].AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
                 cboChuyen.Properties.View.Columns[0].AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
                 cboChuyen.Properties.View.Columns[0].AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-
                 //LoadCboCum(id_NHH);
             }
-            catch { }
+            catch (Exception ex) { }
         }
 
         private void LoadCboCum()
         {
             try
             {
-                //string sSql = "SELECT ID_CUM, TEN_CUM FROM CUM WHERE ID_NHH = " + cboLMH.EditValue + " UNION SELECT '-1','' FROM CUM ";
                 DataTable dt = new DataTable();
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboCUM", Convert.ToInt64(cboChuyen.EditValue), Convert.ToInt64(cboMH.EditValue), 1));
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboCUM", Convert.ToInt64(cboChuyen.EditValue), cboMH.Text == "" ? -99 : Convert.ToInt64(cboMH.EditValue), 1));
                 if (cboCum.Properties.DataSource == null)
                 {
                     Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboCum, dt, "ID_NHOM", "NHOM_CD", "NHOM_CD");
@@ -164,35 +172,44 @@ namespace Vs.Payroll
             catch { }
         }
 
-        //DataTable dtBT;
-        //DataTable dtCD, dtLoaiMay, dtChuyen, dtCum, dtCDTemp;
-        private void LoadLuoi()
+        private void LoadData()
         {
-            //Commons.Modules.sLoad = "0Load";
-            String sTo, sOrd;
-            sTo = "-1"; sOrd = "-1";
-
-            try { sTo = cboChuyen.EditValue.ToString(); } catch { }
-            try { sOrd = cboMH.EditValue.ToString(); } catch { }
-
+            System.Data.SqlClient.SqlConnection conn;
             DataTable dt = new DataTable();
-            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spQTCNGet", sTo, sOrd));
-            dt.Columns["ID_CD"].ReadOnly = false;
-            if (grdQT.DataSource == null)
+            try
             {
-                Commons.Modules.ObjSystems.MLoadXtraGrid(grdQT, grvQT, dt, false, false, false, false, true, this.Name);
+                conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                conn.Open();
+                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spQTCN", conn);
+                cmd.Parameters.Add("@iLoai", SqlDbType.Int).Value = 1;
+                cmd.Parameters.Add("@ID_TO", SqlDbType.BigInt).Value = cboChuyen.EditValue;
+                cmd.Parameters.Add("@ID_MH", SqlDbType.BigInt).Value = cboMH.Text == "" ? -99 : cboMH.EditValue;
+                cmd.CommandType = CommandType.StoredProcedure;
+                System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+                DataSet ds = new DataSet();
+                adp.Fill(ds);
+                dt = new DataTable();
+                dt = ds.Tables[0].Copy();
+                dt.Columns["ID_CD"].ReadOnly = false;
+                if (grdQT.DataSource == null)
+                {
+                    Commons.Modules.ObjSystems.MLoadXtraGrid(grdQT, grvQT, dt, false, false, false, false, true, this.Name);
+                }
+                else
+                {
+                    try { grdQT.DataSource = dt; } catch { }
+                }
+                if (!isAdd)
+                {
+                    grvQT.OptionsView.NewItemRowPosition = NewItemRowPosition.None;
+                }
+                FormatGrid();
+                SetButton(isAdd);
             }
-            else
+            catch (Exception ex)
             {
-                try { grdQT.DataSource = dt; } catch { }
-            }
-            if (!isAdd)
-            {
-                grvQT.OptionsView.NewItemRowPosition = NewItemRowPosition.None;
             }
 
-            FormatGrid();
-            SetButton(isAdd);
         }
 
         private void FormatGrid()
@@ -221,28 +238,33 @@ namespace Vs.Payroll
 
         private void cboKH_EditValueChanged(object sender, EventArgs e)
         {
-            if (Commons.Modules.sLoad == "0LoadCbo") return;
-            LoadHD(1);
+            if (Commons.Modules.sLoad == "0Load") return;
+            if (rdoXemCuLapMoi.SelectedIndex == 1) return;
+            LoadCboHangHoa();
+            LoadCboTo();
             Commons.Modules.sLoad = "";
         }
 
         private void cboMH_EditValueChanged(object sender, EventArgs e)
         {
-            //if (Commons.Modules.sLoad == "0LoadCbo") return;
-            LoadCboCum();
-            LoadLuoi();
-            Commons.Modules.sLoad = "";
+            if (rdoXemCuLapMoi.SelectedIndex == 1) return;
+            LoadCboTo();
+            cboChuyen_EditValueChanged(null, null);
+            //LoadCboCum(s);
+            //LoadData();
         }
 
         private void cboChuyen_EditValueChanged(object sender, EventArgs e)
         {
             LoadCboCum();
-            LoadLuoi();
+            LoadData();
+            datNgayLap.DateTime = Convert.ToDateTime(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT TOP 1 NGAY_LAP FROM dbo.QUI_TRINH_CONG_NGHE_CHI_TIET WHERE ID = " + (grvQT.GetFocusedRowCellValue("ID_CD") == null ? -1 : Convert.ToInt64(grvQT.GetFocusedRowCellValue("ID_CD"))).ToString() + ""));
+            datNgayLap.DateTime = datNgayLap.DateTime == DateTime.MinValue ? DateTime.Now : datNgayLap.DateTime;
         }
 
         private void LocData()
         {
-            if (Commons.Modules.sLoad == "0LoadCbo") return;
+            if (Commons.Modules.sLoad == "0Load") return;
             DataTable dtTmp = new DataTable();
             try
             {
@@ -284,8 +306,9 @@ namespace Vs.Payroll
             cboDV.Enabled = !isAdd;
             cboMH.Enabled = !isAdd;
             cboChuyen.Enabled = !isAdd;
-            datNgayLap.Enabled = !isAdd;
-
+            datNgayLap.Enabled = isAdd;
+            datTNgay.Enabled = !isAdd;
+            datDNgay.Enabled = !isAdd;
             cboCum.Enabled = !isAdd;
         }
 
@@ -303,27 +326,30 @@ namespace Vs.Payroll
                 Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, stbQT, Commons.Modules.ObjSystems.ConvertDatatable(grvQT), "");
                 //Cap nhat qui trinh cong nghe
 
-
-                //string sSql = "UPDATE QUI_TRINH_CONG_NGHE_CHI_TIET SET CONG_DOAN = tmp.CONG_DOAN, THU_TU_CONG_DOAN = tmp.THU_TU_CONG_DOAN, "
-                //            + " NHOM_CD = tmp.NHOM_CD, MaQL = tmp.MaQL, BAC_THO = tmp.BAC_THO, BAC_THO_DM = tmp.BAC_THO_DM, LOAI_MAY = tmp.LOAI_MAY, "
-                //            + " THOI_GIAN_THIET_KE = tmp.THOI_GIAN_THIET_KE, CONG_CU_HT = tmp.CONG_CU_HT, DON_GIA_GIAY = tmp.DON_GIA_GIAY, "
-                //            + " DON_GIA_THUC_TE = tmp.DON_GIA_THUC_TE, DMLD = tmp.DMLD, NGAY_LAP = '" + Convert.ToDateTime(datNgayLap.Text).ToString("MM/dd/yyyy") + "' "
-                //            + " FROM QUI_TRINH_CONG_NGHE_CHI_TIET_TEST QT "
-                //            + " INNER JOIN " + stbQT + " tmp ON QT.ID = tmp.ID_CD "
-                //            + " INSERT INTO QUI_TRINH_CONG_NGHE_CHI_TIET(ID_TO, ID_ORD, THU_TU_CONG_DOAN, CONG_DOAN, NHOM_CD, MaQL, BAC_THO, BAC_THO_DM, "
-                //            + " LOAI_MAY, THOI_GIAN_THIET_KE, CONG_CU_HT, DON_GIA_GIAY, DON_GIA_THUC_TE, DMLD, NGAY_LAP)"
-                //            + " SELECT " + cboChuyen.EditValue + ", " + cboMH.EditValue + ", THU_TU_CONG_DOAN, CONG_DOAN, NHOM_CD, MaQL, BAC_THO, BAC_THO_DM, LOAI_MAY, THOI_GIAN_THIET_KE, "
-                //            + " CONG_CU_HT, DON_GIA_GIAY, DON_GIA_THUC_TE, DMLD, '" + Convert.ToDateTime(datNgayLap.Text).ToString("MM/dd/yyyy") + "' "
-                //            + " FROM " + stbQT + " tmp1 WHERE ISNULL(ID_CD,0) = 0";
-
-                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spSaveQTCN", stbQT, cboChuyen.EditValue, cboMH.EditValue, datNgayLap.Text);
-
-                //string strSql1 = "DROP TABLE " + stbQT;
-                //SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, strSql1);
+                System.Data.SqlClient.SqlConnection conn;
+                DataTable dt = new DataTable();
+                try
+                {
+                    conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                    conn.Open();
+                    System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spQTCN", conn);
+                    cmd.Parameters.Add("@iLoai", SqlDbType.Int).Value = 2;
+                    cmd.Parameters.Add("@NGAY_LAP", SqlDbType.DateTime).Value = Commons.Modules.ObjSystems.ConvertDateTime(datNgayLap.Text);
+                    cmd.Parameters.Add("@sBT", SqlDbType.NVarChar).Value = stbQT;
+                    cmd.Parameters.Add("@ID_TO", SqlDbType.BigInt).Value = cboChuyen.EditValue;
+                    cmd.Parameters.Add("@ID_MH", SqlDbType.BigInt).Value = cboMH.EditValue;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    XtraMessageBox.Show(ex.Message.ToString());
+                }
                 Commons.Modules.ObjSystems.XoaTable(stbQT);
             }
             catch (Exception ex)
             {
+                Commons.Modules.ObjSystems.XoaTable(stbQT);
                 XtraMessageBox.Show(ex.Message.ToString());
             }
         }
@@ -923,7 +949,7 @@ namespace Vs.Payroll
                                 sSql = "DELETE QUI_TRINH_CONG_NGHE_CHI_TIET WHERE ID_TO = " + grvQT.GetFocusedRowCellValue("ID_TO") +
                                                                         " AND ID_ORD = " + grvQT.GetFocusedRowCellValue("ID_ORD") + "";
                                 SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, sSql);
-                                LoadLuoi();
+                                LoadData();
                             }
                             catch
                             {
@@ -1031,7 +1057,8 @@ namespace Vs.Payroll
                         if (grvQT.HasColumnErrors) return;
                         Savedata();
                         Commons.Modules.ObjSystems.DeleteAddRow(grvQT);
-                        LoadLuoi();
+                        rdoXemCuLapMoi.SelectedIndex = 0;
+                        //LoadData();
                         LocData();
                         break;
                     }
@@ -1040,7 +1067,7 @@ namespace Vs.Payroll
                         isAdd = false;
                         Commons.Modules.ObjSystems.DeleteAddRow(grvQT);
                         SetButton(isAdd);
-                        LoadLuoi();
+                        LoadData();
                         LocData();
                         grvQT.OptionsBehavior.Editable = false;
                         break;
@@ -1437,7 +1464,17 @@ namespace Vs.Payroll
                 }
                 else
                 {
+                    //if (Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT COUNT(*) FROM dbo.QUI_TRINH_CONG_NGHE_CHI_TIET WHERE ID_TO = " + cboChuyen.EditValue + " AND ID_ORD = " + cboMH.EditValue + " AND MaQL = " + sDLKiem + "")) > 0)
+                    //{
+                    //    sTenKTra = Commons.Modules.ObjLanguages.GetLanguage(sform, "msgTrungDLCSDL");
+                    //    dr.SetColumnError(sCot, sTenKTra);
+                    //    return false;
+                    //}
+                    //else
+                    //{
+                    //}
                     return true;
+
                 }
             }
             catch (Exception ex)
@@ -1540,8 +1577,12 @@ namespace Vs.Payroll
 
         private void cboDV_EditValueChanged(object sender, EventArgs e)
         {
-            LoadCbo();
-            LoadHD(0);
+            if (Commons.Modules.sLoad == "0Load") return;
+            LoadCboDoiTac();
+            LoadCboHangHoa();
+
+            LoadCboTo();
+            cboChuyen_EditValueChanged(null, null);
         }
 
         private void grdQT_ProcessGridKey(object sender, KeyEventArgs e)
@@ -1599,6 +1640,30 @@ namespace Vs.Payroll
                 grvQT.SetFocusedRowCellValue("ID_CD", 0);
             }
             catch { }
+        }
+
+        private void rdoXemCuLapMoi_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                LoadCboHangHoa();
+                LoadCboTo();
+                cboChuyen_EditValueChanged(null, null);
+            }
+            catch (Exception ex) { }
+        }
+
+        private void datTNgay_EditValueChanged(object sender, EventArgs e)
+        {
+            if (Commons.Modules.sLoad == "0Load") return;
+            LoadCboHangHoa();
+
+        }
+
+        private void datDNgay_EditValueChanged(object sender, EventArgs e)
+        {
+            if (Commons.Modules.sLoad == "0Load") return;
+            LoadCboHangHoa();
         }
 
         private void grvDSUngVien_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)

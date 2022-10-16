@@ -60,9 +60,9 @@ namespace Vs.Payroll
         {
             Commons.Modules.sLoad = "0Load";
             Commons.Modules.ObjSystems.LoadCboDonVi(cboDonVi);
-            DateTime dNgay = DateTime.Now.AddMonths(-2);
+            DateTime dNgay = DateTime.Now.AddMonths(-4);
             datTNgay.DateTime = Convert.ToDateTime(("01/" + dNgay.Month + "/" + dNgay.Year)); ;
-            datDNgay.DateTime = datTNgay.DateTime.AddMonths(3).AddDays(-1);
+            datDNgay.DateTime = datTNgay.DateTime.AddMonths(5).AddDays(-1);
             LoadCbo();
             EnableButon(isAdd);
             Commons.Modules.sLoad = "";

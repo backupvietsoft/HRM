@@ -45,13 +45,14 @@ namespace Vs.Payroll
                 Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboDV, Commons.Modules.ObjSystems.DataDonVi(false), "ID_DV", "TEN_DV", "TEN_DV");
                 Commons.OSystems.SetDateEditFormat(datTNgay);
                 Commons.OSystems.SetDateEditFormat(datDNgay);
-                datTNgay.EditValue = DateTime.Now.AddMonths(-2);
+                datTNgay.EditValue = DateTime.Now.AddMonths(-4);
                 datDNgay.EditValue = DateTime.Now;
                 LoadCboDoiTac();
                 LoadCboHangHoa();
                 LoadCboTo();
                 LoadCboCum();
                 LoadData();
+                rdoXemCuLapMoi.SelectedIndex = 1;
             }
             catch (Exception ex) { XtraMessageBox.Show(ex.Message.ToString()); }
 
@@ -239,7 +240,6 @@ namespace Vs.Payroll
         private void cboKH_EditValueChanged(object sender, EventArgs e)
         {
             if (Commons.Modules.sLoad == "0Load") return;
-            if (rdoXemCuLapMoi.SelectedIndex == 1) return;
             LoadCboHangHoa();
             LoadCboTo();
             Commons.Modules.sLoad = "";
@@ -247,7 +247,7 @@ namespace Vs.Payroll
 
         private void cboMH_EditValueChanged(object sender, EventArgs e)
         {
-            if (rdoXemCuLapMoi.SelectedIndex == 1) return;
+            //if (rdoXemCuLapMoi.SelectedIndex == 1) return;
             LoadCboTo();
             cboChuyen_EditValueChanged(null, null);
             //LoadCboCum(s);
@@ -293,14 +293,13 @@ namespace Vs.Payroll
             windowsUIButton.Buttons[1].Properties.Visible = !isAdd;
             windowsUIButton.Buttons[2].Properties.Visible = !isAdd;
             windowsUIButton.Buttons[4].Properties.Visible = true;
-            windowsUIButton.Buttons[10].Properties.Visible = !isAdd;
+            windowsUIButton.Buttons[9].Properties.Visible = !isAdd;
 
             windowsUIButton.Buttons[3].Properties.Visible = isAdd;
             windowsUIButton.Buttons[5].Properties.Visible = isAdd;
             windowsUIButton.Buttons[6].Properties.Visible = isAdd;
             windowsUIButton.Buttons[7].Properties.Visible = isAdd;
             windowsUIButton.Buttons[8].Properties.Visible = isAdd;
-            windowsUIButton.Buttons[9].Properties.Visible = isAdd;
 
             cboKH.Enabled = !isAdd;
             cboDV.Enabled = !isAdd;
@@ -1057,8 +1056,7 @@ namespace Vs.Payroll
                         if (grvQT.HasColumnErrors) return;
                         Savedata();
                         Commons.Modules.ObjSystems.DeleteAddRow(grvQT);
-                        rdoXemCuLapMoi.SelectedIndex = 0;
-                        //LoadData();
+                        LoadData();
                         LocData();
                         break;
                     }
@@ -1646,6 +1644,20 @@ namespace Vs.Payroll
         {
             try
             {
+                if(rdoXemCuLapMoi.SelectedIndex == 0)
+                {
+                    lblTuNgay.Visible = true;
+                    lblDenNgay.Visible = true;
+                    datTNgay.Visible = true;
+                    datDNgay.Visible = true;
+                }
+                else
+                {
+                    lblTuNgay.Visible = false;
+                    lblDenNgay.Visible = false;
+                    datTNgay.Visible = false;
+                    datDNgay.Visible = false;
+                }
                 LoadCboHangHoa();
                 LoadCboTo();
                 cboChuyen_EditValueChanged(null, null);

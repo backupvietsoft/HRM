@@ -4,12 +4,13 @@ using System.Collections;
 using System.ComponentModel;
 using DevExpress.XtraReports.UI;
 using System.Data;
+using Commons;
 
 namespace Vs.Report
 {
     public partial class rptThuongKhacLuong : DevExpress.XtraReports.UI.XtraReport
     {
-        public rptThuongKhacLuong(DateTime ngayin,DateTime TuNgay )
+        public rptThuongKhacLuong(DateTime ngayin, DateTime TuNgay)
         {
             InitializeComponent();
 

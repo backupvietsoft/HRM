@@ -37,9 +37,9 @@ namespace Vs.Recruit
             Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboDV, Commons.Modules.ObjSystems.DataDonVi(false), "ID_DV", "TEN_DV", "TEN_DV");
             Commons.Modules.ObjSystems.ThayDoiNN(this, new List<LayoutControlGroup> { Root }, windowsUIButton);
             Commons.Modules.sLoad = "";
-            LoadgrvDinhBien(-1,"");
+            LoadgrvDinhBien(-1, "");
         }
-        private void LoadgrvDinhBien(Int64 iID_LCV,string KieuLoad)
+        private void LoadgrvDinhBien(Int64 iID_LCV, string KieuLoad)
         {
             try
             {
@@ -54,9 +54,9 @@ namespace Vs.Recruit
 
 
                     DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit cboLCV = new DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit();
-   
+
                     //ID_LCV,TEN_LCV
-                    
+
                     cboLCV.NullText = "";
                     cboLCV.ValueMember = "ID_LCV";
                     cboLCV.DisplayMember = "TEN_LCV";
@@ -110,7 +110,7 @@ namespace Vs.Recruit
             try
             {
                 SearchLookUpEdit lookUp = sender as SearchLookUpEdit;
-                lookUp.Properties.DataSource = Commons.Modules.ObjSystems.DataLoaiCV(false,-1,Convert.ToInt64(cboDV.EditValue));
+                lookUp.Properties.DataSource = Commons.Modules.ObjSystems.DataLoaiCV(false, -1, Convert.ToInt64(cboDV.EditValue));
                 DataTable dt = new DataTable();
                 dt = (DataTable)lookUp.Properties.DataSource;
                 DataTable dtTmp = new DataTable();
@@ -152,24 +152,9 @@ namespace Vs.Recruit
                     {
                         enableButon(false);
                         grvDinhBien.Columns["ID_LCV"].OptionsColumn.ReadOnly = false;
-                        //if (grvDinhBien.RowCount == 0)
-                        //{
-                        //    try
-                        //    {
-                                LoadgrvDinhBien(Convert.ToInt64(grvDinhBien.GetFocusedRowCellValue("ID_LCV")), "THEM");
-                                //dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetListDinhBien", datNam.DateTime.Year, cboDV.EditValue, Commons.Modules.UserName, Commons.Modules.TypeLanguage, KieuLoad));
-                                //dt.Columns["DINH_BIEN"].ReadOnly = false;
-                                grvDinhBien.OptionsBehavior.Editable = true;
-                                grvDinhBien.Columns["ID_LCV"].OptionsColumn.ReadOnly = true;
-                        //    }
-                        //    catch
-                        //    {
-                        //    }
-                        //}
-                        //else
-                        //{
-                        //    Commons.Modules.ObjSystems.AddnewRow(grvDinhBien, true);
-                        //}
+                        LoadgrvDinhBien(Convert.ToInt64(grvDinhBien.GetFocusedRowCellValue("ID_LCV")), "THEM");
+                        grvDinhBien.OptionsBehavior.Editable = true;
+                        grvDinhBien.Columns["ID_LCV"].OptionsColumn.ReadOnly = true;
                         break;
                     }
                 case "sua":
@@ -210,13 +195,13 @@ namespace Vs.Recruit
                         }
                         enableButon(true);
                         Commons.Modules.ObjSystems.DeleteAddRow(grvDinhBien);
-                        LoadgrvDinhBien(Convert.ToInt64(grvDinhBien.GetFocusedRowCellValue("ID_LCV")),"");
+                        LoadgrvDinhBien(Convert.ToInt64(grvDinhBien.GetFocusedRowCellValue("ID_LCV")), "");
                         break;
                     }
                 case "khongluu":
                     {
                         enableButon(true);
-                        LoadgrvDinhBien(Convert.ToInt64(grvDinhBien.GetFocusedRowCellValue("ID_LCV")),"");
+                        LoadgrvDinhBien(Convert.ToInt64(grvDinhBien.GetFocusedRowCellValue("ID_LCV")), "");
                         Commons.Modules.ObjSystems.DeleteAddRow(grvDinhBien);
                         break;
                     }
@@ -271,16 +256,14 @@ namespace Vs.Recruit
                 int fontSizeNoiDung = 11;
 
                 int DONG = 0;
-
                 DONG = Commons.Modules.MExcel.TaoTTChung(oSheet, 1, 2, 1, 8, 0, 0);
-                
                 DONG = 4;
 
                 string lastColumn = string.Empty;
                 lastColumn = CharacterIncrement(dtBCThang.Columns.Count - 2);
 
 
-                Excel.Range row1_TieuDe = oSheet.get_Range("A"+ (DONG + 1).ToString() +"", "E" + (DONG + 1).ToString() + "");
+                Excel.Range row1_TieuDe = oSheet.get_Range("A" + (DONG + 1).ToString() + "", "E" + (DONG + 1).ToString() + "");
                 row1_TieuDe.Merge();
                 row1_TieuDe.Font.Bold = true;
                 row1_TieuDe.Value2 = "CÔNG TY CỔ PHẦN MAY DUY MINH";
@@ -531,7 +514,7 @@ namespace Vs.Recruit
         }
         private void datNam_EditValueChanged(object sender, EventArgs e)
         {
-            LoadgrvDinhBien(-1,"");
+            LoadgrvDinhBien(-1, "");
         }
         private void XoaDinhBien()
         {

@@ -84,11 +84,16 @@ namespace Vs.Recruit
                 grvDSUngVien.Columns["NGAY_NHAN_VIEC"].OptionsColumn.AllowEdit = false;
                 grvDSUngVien.Columns["NGAY_DG_TN"].OptionsColumn.AllowEdit = false;
                 grvDSUngVien.Columns["HOAN_THANH_DT"].OptionsColumn.AllowEdit = false;
+                grvDSUngVien.Columns["MUC_LUONG_DN"].OptionsColumn.AllowEdit = false;
+                grvDSUngVien.Columns["TEN_LHDLD"].OptionsColumn.AllowEdit = false;
                 grvDSUngVien.Columns["ID_CN"].OptionsColumn.AllowEdit = false;
                 grvDSUngVien.Columns["ID_UV"].Visible = false;
                 grvDSUngVien.Columns["MS_CV"].Visible = false;
                 grvDSUngVien.Columns["ID_YCTD"].Visible = false;
                 grvDSUngVien.Columns["ID_VTTD"].Visible = false;
+
+                grvDSUngVien.Columns["MUC_LUONG_DN"].DisplayFormat.FormatType = FormatType.Numeric;
+                grvDSUngVien.Columns["MUC_LUONG_DN"].DisplayFormat.FormatString = Commons.Modules.sSoLeTT;
 
                 RepositoryItemButtonEdit btnEdit = new RepositoryItemButtonEdit();
                 grvDSUngVien.Columns["TAI_LIEU"].ColumnEdit = btnEdit;
@@ -166,7 +171,8 @@ namespace Vs.Recruit
                 adp.Fill(ds);
                 DataTable dt = new DataTable();
                 dt = ds.Tables[0].Copy();
-                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboMS_CV, dt, "MS_CV", "TEN_CV", "TEN_CV");
+
+                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboMS_CV,dt, "MS_CV", "TEN_CV", "TEN_CV");
                 cboMS_CV.EditValue = 2;
             }
             catch { }

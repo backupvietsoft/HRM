@@ -31,31 +31,91 @@ namespace Vs.Recruit
             Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboDV, Commons.Modules.ObjSystems.DataDonVi(false), "ID_DV", "TEN_DV", "TEN_DV");
             Commons.Modules.ObjSystems.ThayDoiNN(this, new List<LayoutControlGroup> { Root }, windowsUIButton);
             Commons.Modules.sLoad = "";
-            LoadGrdDinhBienLD();
+            LoadGrdDinhBienLD(-1,"");
         }
-        private void LoadGrdDinhBienLD()
+        private void LoadGrdDinhBienLD(Int64 iID_LCV, string KieuLoad)
         {
             try
             {
                 if (Commons.Modules.sLoad == "0Load") return;
                 DataTable dt = new DataTable();
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetListDinhBienLD", datNam.DateTime.Year, cboDV.EditValue, "",Commons.Modules.UserName,Commons.Modules.TypeLanguage));
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetListDinhBienLD", datNam.DateTime.Year, cboDV.EditValue, KieuLoad,Commons.Modules.UserName,Commons.Modules.TypeLanguage));
+                //dt.Columns["DINH_BIEN"].ReadOnly = false;
+                for (int i = 1; i < dt.Columns.Count; i++)
+                {
+                    dt.Columns[i].ReadOnly = false;
+                }
+                dt.PrimaryKey = new DataColumn[] { dt.Columns["ID_LCV"] };
                 if (grdDinhBienLD.DataSource == null)
                 {
                     Commons.Modules.ObjSystems.MLoadXtraGrid(grdDinhBienLD, grvDinhBienLD, dt, false, false, true, true, true, this.Name);
-                    Commons.Modules.ObjSystems.AddCombXtra("ID_LCV", "TEN_LCV", grvDinhBienLD, Commons.Modules.ObjSystems.DataLoaiCV(false,-1), true, "ID_LCV", this.Name);
-                    grvDinhBienLD.Columns["ID_LCV"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
+                    Commons.Modules.ObjSystems.AddCombXtra("ID_LCV", "TEN_LCV", grvDinhBienLD, Commons.Modules.ObjSystems.DataLoaiCV(false, Convert.ToInt32(-1)), true, "ID_LCV", this.Name);
                     Commons.Modules.ObjSystems.DeleteAddRow(grvDinhBienLD);
+                    grvDinhBienLD.Columns["ID_LCV"].OptionsColumn.ReadOnly = true;
+                    grvDinhBienLD.Columns["ID_LCV"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
                 }
                 else
                 {
                     grdDinhBienLD.DataSource = dt;
+                }
+                if (iID_LCV != -1)
+                {
+                    int index = dt.Rows.IndexOf(dt.Rows.Find(iID_LCV));
+                    grvDinhBienLD.FocusedRowHandle = grvDinhBienLD.GetRowHandle(index);
+                    grvDinhBienLD.SelectRow(index);
                 }
             }
             catch
             {
             }
         }
+        //private void cboLCV_BeforePopup(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        SearchLookUpEdit lookUp = sender as SearchLookUpEdit;
+        //        lookUp.Properties.DataSource = Commons.Modules.ObjSystems.DataLoaiCV(false, -1, Convert.ToInt64(cboDV.EditValue));
+        //        DataTable dt = new DataTable();
+        //        dt = (DataTable)lookUp.Properties.DataSource;
+        //        DataTable dtTmp = new DataTable();
+        //        string sdkien = "( 1 = 1 )";
+        //        try
+        //        {
+        //            string sID = "";
+        //            DataTable dtTemp = new DataTable();
+        //            dtTmp = Commons.Modules.ObjSystems.ConvertDatatable(grvDinhBienLD).Copy();
+        //            for (int i = 0; i < dtTmp.Rows.Count; i++)
+        //            {
+        //                sID = sID + dtTmp.Rows[i]["ID_LCV"].ToString() + ",";
+        //            }
+        //            sID = sID.Substring(0, sID.Length - 1);
+        //            sdkien = "ID_LCV NOT IN (" + sID + ")";
+        //            dt.DefaultView.RowFilter = sdkien;
+        //        }
+        //        catch
+        //        {
+        //            try
+        //            {
+        //                dtTmp.DefaultView.RowFilter = "";
+        //            }
+        //            catch { }
+        //        }
+
+        //    }
+        //    catch { }
+        //}
+        //private void cboLCV_EditValueChanged(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        LookUpEdit lookUp = sender as LookUpEdit;
+        //        DataRowView dataRow = lookUp.GetSelectedDataRow() as DataRowView;
+        //        grvDinhBienLD.SetFocusedRowCellValue("ID_LCV", Convert.ToUInt64((dataRow.Row[0])));
+        //    }
+        //    catch
+        //    {
+        //    }
+        //}
 
         private void LoadGrdIn()
         {
@@ -79,10 +139,19 @@ namespace Vs.Recruit
             if (btn == null || btn.Tag == null) return;
             switch (btn.Tag.ToString())
             {
+                case "them":
+                    {
+                        enableButon(false);
+                        grvDinhBienLD.Columns["ID_LCV"].OptionsColumn.ReadOnly = false;
+                        LoadGrdDinhBienLD(Convert.ToInt64(grvDinhBienLD.GetFocusedRowCellValue("ID_LCV")), "THEM");
+                        grvDinhBienLD.OptionsBehavior.Editable = true;
+                        grvDinhBienLD.Columns["ID_LCV"].OptionsColumn.ReadOnly = true;
+                        break;
+                    }
                 case "sua":
                     {
                         enableButon(false);
-                        Commons.Modules.ObjSystems.AddnewRow(grvDinhBienLD, true);
+                        Commons.Modules.ObjSystems.AddnewRow(grvDinhBienLD, false);
                         break;
                     }
                 case "xoa":
@@ -117,11 +186,13 @@ namespace Vs.Recruit
                         }
                         enableButon(true);
                         Commons.Modules.ObjSystems.DeleteAddRow(grvDinhBienLD);
+                        LoadGrdDinhBienLD(Convert.ToInt64(grvDinhBienLD.GetFocusedRowCellValue("ID_LCV")), "");
                         break;
                     }
                 case "khongluu":
                     {
                         enableButon(true);
+                        LoadGrdDinhBienLD(Convert.ToInt64(grvDinhBienLD.GetFocusedRowCellValue("ID_LCV")), "");
                         Commons.Modules.ObjSystems.DeleteAddRow(grvDinhBienLD);
                         break;
                     }
@@ -280,12 +351,13 @@ namespace Vs.Recruit
         {
             windowsUIButton.Buttons[0].Properties.Visible = visible;
             windowsUIButton.Buttons[1].Properties.Visible = visible;
-            windowsUIButton.Buttons[2].Properties.Visible = visible;
+            windowsUIButton.Buttons[2].Properties.Visible = false;
             windowsUIButton.Buttons[3].Properties.Visible = visible;
             windowsUIButton.Buttons[4].Properties.Visible = visible;
-            windowsUIButton.Buttons[5].Properties.Visible = !visible;
+            windowsUIButton.Buttons[5].Properties.Visible = visible;
             windowsUIButton.Buttons[6].Properties.Visible = !visible;
-            windowsUIButton.Buttons[7].Properties.Visible = visible;
+            windowsUIButton.Buttons[7].Properties.Visible = !visible;
+            windowsUIButton.Buttons[8].Properties.Visible = visible;
             datNam.ReadOnly = !visible;
             cboDV.ReadOnly = !visible;
         }
@@ -339,7 +411,7 @@ namespace Vs.Recruit
         }
         private void datNam_EditValueChanged(object sender, EventArgs e)
         {
-            LoadGrdDinhBienLD();
+            LoadGrdDinhBienLD(-1,"");
         }
         private void XoaDinhBien()
         {
@@ -372,6 +444,11 @@ namespace Vs.Recruit
             {
                 XoaDinhBien();
             }
+        }
+
+        private void searchControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

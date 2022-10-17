@@ -17,7 +17,7 @@ namespace Vs.Recruit
         public frmInKeHoachTD()
         {
             InitializeComponent();
-            Commons.Modules.ObjSystems.ThayDoiNN(this, Root);
+            Commons.Modules.ObjSystems.ThayDoiNN(this, Root,windowsUIButton);
         }
 
         private void frmInKeHoachTD_Load(object sender, EventArgs e)
@@ -350,7 +350,7 @@ namespace Vs.Recruit
                     DONG += dt.Rows.Count + 1;
                 }
                 Commons.Modules.MExcel.ColumnWidth(excelWorkSheet, 10, "@", true, 1, 1, DONG + TDong, 1);
-                Commons.Modules.MExcel.ColumnWidth(excelWorkSheet, 17, "@", true, 1, 2, DONG + TDong, 2);
+                Commons.Modules.MExcel.ColumnWidth(excelWorkSheet, 20, "@", true, 1, 2, DONG + TDong, 2);
                 Commons.Modules.MExcel.ColumnWidth(excelWorkSheet, 45, "@", true, 1, 3, DONG + TDong, 3);
                 Commons.Modules.MExcel.ColumnWidth(excelWorkSheet, 14, "@", true, 1, 4, DONG + TDong, 4);
                 Commons.Modules.MExcel.ColumnWidth(excelWorkSheet, 14, "#", true, 1, 5, DONG + TDong, 6);
@@ -384,8 +384,8 @@ namespace Vs.Recruit
                 title1 = Commons.Modules.MExcel.GetRange(excelWorkSheet, DONG, COT, DONG, TCot);
                 title.AutoFill(title1, Microsoft.Office.Interop.Excel.XlAutoFillType.xlFillCopy);
 
-                excelWorkSheet.Application.ActiveWindow.SplitRow = 5;
-                excelWorkSheet.Application.ActiveWindow.SplitColumn = 1;
+                excelWorkSheet.Application.ActiveWindow.SplitRow = 8;
+                excelWorkSheet.Application.ActiveWindow.SplitColumn = 3;
                 excelWorkSheet.Application.ActiveWindow.FreezePanes = true;
 
                 excelWorkbook.Save();

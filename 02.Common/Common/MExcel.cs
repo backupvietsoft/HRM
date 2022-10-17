@@ -275,7 +275,42 @@ public class MExcel
         {
         }
     }
-    
+    public void AddExcelDataValidationList(OfficeOpenXml.ExcelWorksheet wsWorkSheet, int iFromRow, int iFromCol, int iToRow, int iToCol, string sFomula , string[] list, string sErrorTitle = "", string sError = "", OfficeOpenXml.DataValidation.ExcelDataValidationWarningStyle ErrorStyle = OfficeOpenXml.DataValidation.ExcelDataValidationWarningStyle.stop, string sPromptTitle = "", string sPrompt = "")
+    {
+        try
+        {
+            ExcelRange r = wsWorkSheet.Cells[iFromRow, iFromCol, iToRow, iToCol];
+            var dvDataValidation = r.DataValidation.AddListDataValidation();
+            if (sFomula != "")
+            {
+                dvDataValidation.Formula.ExcelFormula = sFomula;
+            }
+            else
+            {
+                foreach (var item in list)
+                {
+                    dvDataValidation.Formula.Values.Add(item);
+
+                }
+            }
+            if (sErrorTitle != "" || sError != "")
+            {
+                dvDataValidation.ShowErrorMessage = true;
+                dvDataValidation.ErrorTitle = sErrorTitle;
+                dvDataValidation.Error = sError;
+                dvDataValidation.ErrorStyle = ErrorStyle;
+            }
+
+            if (sPromptTitle != "" || sPrompt != "")
+            {
+                dvDataValidation.ShowInputMessage = true;
+                dvDataValidation.PromptTitle = sPromptTitle;
+                dvDataValidation.Prompt = sPrompt;
+            }
+
+        }
+        catch(Exception ex) { }
+    }
     public void ColumnWidth(Excel.Worksheet MWsheet, float MColumnWidth, string MNumberFormat, bool MWrapText, int DongBD, int CotBD, int DongKT, int CotKT)
     {
         try
@@ -1376,7 +1411,7 @@ public class MExcel
             var FileExt = Path.GetExtension(FileName);
 
 
-            if (FileExt == ".xls")
+            if (FileExt.ToLower() == ".xls")
             {
                 HSSFWorkbook hssfwb = new HSSFWorkbook(excelStream);
                 for (int i = 0; i < hssfwb.NumberOfSheets; i++)
@@ -1386,7 +1421,7 @@ public class MExcel
                         dt.Rows.Add(i, SheetName);
                 }
             }
-            else if (FileExt == ".xlsx")
+            else if (FileExt.ToLower() == ".xlsx")
             {
                 XSSFWorkbook hssfwb = new XSSFWorkbook(excelStream);
                 for (int i = 0; i < hssfwb.NumberOfSheets; i++)

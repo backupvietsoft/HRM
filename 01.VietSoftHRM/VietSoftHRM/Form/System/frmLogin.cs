@@ -13,6 +13,7 @@ namespace VietSoftHRM
     {
         public frmLogin()
         {
+            DevExpress.Utils.Paint.TextRendererHelper.UseScriptAnalyse = false;
             InitializeComponent();
             UserLookAndFeel.Default.SkinName = VietSoftHRM.Properties.Settings.Default["ApplicationSkinName"].ToString();
         }

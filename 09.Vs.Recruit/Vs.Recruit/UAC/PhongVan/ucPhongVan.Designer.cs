@@ -101,6 +101,7 @@
             this.btnALL = new DevExpress.XtraBars.Docking2010.WindowsUIButtonPanel();
             this.dxValidationProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
             this.ofileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataLayoutControl1)).BeginInit();
             this.dataLayoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cboTTLoc.Properties)).BeginInit();
@@ -155,6 +156,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.lblNguoiPV2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblTinhTrang)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).BeginInit();
             this.SuspendLayout();
             // 
             // dataLayoutControl1
@@ -178,6 +180,8 @@
             this.dataLayoutControl1.Controls.Add(this.txtNDPV);
             this.dataLayoutControl1.Controls.Add(this.txtBuocPV);
             this.dataLayoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataLayoutControl1.HiddenItems.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.lblThongTin});
             this.dataLayoutControl1.Location = new System.Drawing.Point(0, 0);
             this.dataLayoutControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dataLayoutControl1.Name = "dataLayoutControl1";
@@ -528,7 +532,6 @@
             this.groUVPV,
             this.tabViTri,
             this.lblKeHoachPV,
-            this.lblThongTin,
             this.lblBacDau,
             this.lblNDPV,
             this.lblBuocPV,
@@ -536,7 +539,8 @@
             this.lblKieuPV,
             this.lblKetThuc,
             this.lblNguoiPV2,
-            this.lblTinhTrang});
+            this.lblTinhTrang,
+            this.emptySpaceItem1});
             this.Root.Name = "Root";
             this.Root.Padding = new DevExpress.XtraLayout.Utils.Padding(10, 10, 10, 0);
             this.Root.Size = new System.Drawing.Size(1093, 559);
@@ -828,6 +832,14 @@
             // 
             this.ofileDialog.FileName = "openFileDialog1";
             // 
+            // emptySpaceItem1
+            // 
+            this.emptySpaceItem1.AllowHotTrack = false;
+            this.emptySpaceItem1.Location = new System.Drawing.Point(585, 84);
+            this.emptySpaceItem1.Name = "emptySpaceItem1";
+            this.emptySpaceItem1.Size = new System.Drawing.Size(488, 28);
+            this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
+            // 
             // ucPhongVan
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -892,6 +904,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.lblNguoiPV2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblTinhTrang)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -952,5 +965,6 @@
         private DevExpress.XtraLayout.LayoutControlItem lblTinhTrangLoc;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem mnuLinkUngVien;
+        private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem1;
     }
 }

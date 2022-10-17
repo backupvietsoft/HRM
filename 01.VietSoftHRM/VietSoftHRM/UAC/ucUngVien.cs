@@ -205,7 +205,7 @@ namespace VietSoftHRM
         private void Elementchill_Click(object sender, EventArgs e)
         {
             var button = sender as AccordionControlElement;
-            if (sLoad == button.Name) return;
+            if (sLoad == button.Name && sLoad.Substring(0,5) != "mnuBC") return;
             Commons.Modules.ObjSystems.ShowWaitForm(this);
             Commons.Modules.ObjSystems.GetPhanQuyen(button);
             sLoad = button.Name;
@@ -318,10 +318,16 @@ namespace VietSoftHRM
                 #region Bao cao
                 case "mnuBCDSUVTuyenDung":
                     {
-                        ucBaoCaoDSUVThamGiaTD tmp = new ucBaoCaoDSUVThamGiaTD();
-                        panel2.Controls.Clear();
-                        panel2.Controls.Add(tmp);
-                        tmp.Dock = DockStyle.Fill;
+                        frmInSoSanhThucTeDL tmp = new frmInSoSanhThucTeDL();
+                        Commons.Modules.ObjSystems.HideWaitForm();
+                        tmp.ShowDialog();
+                        break;
+                    }
+                case "mnuBChiTieuTD":
+                    {
+                        frmInKeHoachTD tmp = new frmInKeHoachTD();
+                        Commons.Modules.ObjSystems.HideWaitForm();
+                        tmp.ShowDialog();  
                         break;
                     }
                 #endregion  

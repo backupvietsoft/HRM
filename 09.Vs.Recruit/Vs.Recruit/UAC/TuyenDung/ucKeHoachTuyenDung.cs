@@ -168,7 +168,7 @@ namespace Vs.Recruit
         private void enableButon(bool visible)
         {
             btnALL.Buttons[0].Properties.Visible = visible;
-            btnALL.Buttons[1].Properties.Visible = visible;
+            btnALL.Buttons[1].Properties.Visible = false;
             btnALL.Buttons[2].Properties.Visible = visible;
             btnALL.Buttons[3].Properties.Visible = !visible;
             btnALL.Buttons[4].Properties.Visible = !visible;
@@ -251,12 +251,12 @@ namespace Vs.Recruit
                 {
                     item.ReadOnly = false;
                 }
-                Commons.Modules.ObjSystems.MLoadXtraGrid(grdVTYC, grvVTYC, dt, false, true, false, true, false, this.Name);
-
+                Commons.Modules.ObjSystems.MLoadXtraGridIP(grdVTYC, grvVTYC, dt, false, true, false, true);
                 grvVTYC.ClearSorting();
                 grvVTYC.Columns["ID_YCTD"].Visible = false;
                 grvVTYC.Columns["ID_VTTD"].Visible = false;
-                //grvVTYC.Columns["ID_TT"].Visible = false;
+                grvVTYC.Columns["ID_TT_VT"].Visible = false;
+                grvVTYC.Columns["LY_DO_TUYEN"].Visible = false;
 
                 for (int i = 0; i < grvVTYC.Columns.Count; i++)
                 {
@@ -625,6 +625,33 @@ namespace Vs.Recruit
             }
             catch (Exception ex) { }
 
+        }
+
+        private void grvVTYC_RowStyle(object sender, RowStyleEventArgs e)
+        {
+            GridView View = sender as GridView;
+            if (e.RowHandle >= 0)
+            {
+                string category = View.GetRowCellDisplayText(e.RowHandle, View.Columns["TEN_UT"]).ToString();
+                if (category == "Cần tuyển gấp")
+                {
+                    e.Appearance.BackColor = Color.Salmon;
+                    e.Appearance.BackColor2 = Color.SeaShell;
+                    e.HighPriority = true;
+                }
+            }
+        }
+
+        private void spinTuTuan_Validated(object sender, EventArgs e)
+        {
+            if (Commons.Modules.sLoad == "0Load") return;
+            LoadgrdVTYC();
+        }
+
+        private void spinDenTuan_Validated(object sender, EventArgs e)
+        {
+            if (Commons.Modules.sLoad == "0Load") return;
+            LoadgrdVTYC();
         }
     }
 }

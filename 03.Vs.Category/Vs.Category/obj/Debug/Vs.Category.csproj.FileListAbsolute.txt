@@ -2059,4 +2059,4 @@ D:\01.SourceCode\02.HRM\03.Vs.Category\Vs.Category\obj\Debug\Vs.Category.csproj.
 D:\01.SourceCode\02.HRM\03.Vs.Category\Vs.Category\obj\Debug\Vs.Category.csproj.CopyComplete
 D:\01.SourceCode\02.HRM\03.Vs.Category\Vs.Category\obj\Debug\Vs.Category.dll
 D:\01.SourceCode\02.HRM\03.Vs.Category\Vs.Category\obj\Debug\Vs.Category.pdb
-D:\01.SourceCode\02.HRM\03.Vs.Category\Vs.Category\bin\Debug\Vs.Recruit.exe.config
+D:\01.SourceCode\02.HRM\03.Vs.Category\Vs.Category\bin\Debug\ICSharpCode.SharpZipLib.dll

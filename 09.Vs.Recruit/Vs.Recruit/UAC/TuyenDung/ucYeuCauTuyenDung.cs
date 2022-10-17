@@ -363,7 +363,7 @@ namespace Vs.Recruit
                         if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgBanCoMuonChuyenDuyetKhong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) return;
                         try
                         {
-                            SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "UPDATE A SET A.ID_TT_VT = CASE B.ID_LT WHEN 1 THEN 3 ELSE 2 END FROM dbo.YCTD_VI_TRI_TUYEN A INNER JOIN dbo.LOAI_CONG_VIEC B ON B.ID_LCV = A.ID_VTTD WHERE A.ID_YCTD = " + iID_YCTD + " UPDATE dbo.YEU_CAU_TUYEN_DUNG SET ID_TT =  2 WHERE ID_YCTD = " + iID_YCTD + " ");
+                            SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "UPDATE A SET A.ID_TT_VT = CASE B.ID_LT WHEN 1 THEN 3 ELSE 3 END FROM dbo.YCTD_VI_TRI_TUYEN A INNER JOIN dbo.LOAI_CONG_VIEC B ON B.ID_LCV = A.ID_VTTD WHERE A.ID_YCTD = " + iID_YCTD + " UPDATE dbo.YEU_CAU_TUYEN_DUNG SET ID_TT =  2 WHERE ID_YCTD = " + iID_YCTD + " ");
                             LoadgrdPYC(iID_YCTD);
                             cboTrangThai.EditValue = 2;
                             btnALL.Buttons[0].Properties.Visible = false;

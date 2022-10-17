@@ -329,6 +329,12 @@
     <Compile Include="Form\frmDanhSachYCTD.Designer.cs">
       <DependentUpon>frmDanhSachYCTD.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form\frmInSoSanhThucTeDL.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\frmInSoSanhThucTeDL.designer.cs">
+      <DependentUpon>frmInSoSanhThucTeDL.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmUngVien.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -567,6 +573,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form\frmDanhSachYCTD.resx">
       <DependentUpon>frmDanhSachYCTD.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\frmInSoSanhThucTeDL.resx">
+      <DependentUpon>frmInSoSanhThucTeDL.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmUngVien.resx">
       <DependentUpon>frmUngVien.cs</DependentUpon>

@@ -2227,7 +2227,6 @@ F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.TimeAttendance.csp
 F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.TimeAttendance.csproj.CopyComplete
 F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.TimeAttendance.dll
 F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.TimeAttendance.pdb
-D:\01.SourceCode\02.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.TimeAttendance.dll
 D:\01.SourceCode\02.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\Vs.TimeAttendance.dll.config
 D:\01.SourceCode\02.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\Vs.TimeAttendance.dll
 D:\01.SourceCode\02.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\Vs.TimeAttendance.pdb
@@ -2409,6 +2408,8 @@ D:\01.SourceCode\02.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\es\DevE
 D:\01.SourceCode\02.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\ja\DevExpress.Diagram.v22.1.Core.resources.dll
 D:\01.SourceCode\02.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.TimeAttendance.csproj.AssemblyReference.cache
 D:\01.SourceCode\02.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.TimeAttendance.csproj.ResolveComReference.cache
+D:\01.SourceCode\02.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.TimeAttendance.frmImportDangKyKLSP.resources
+D:\01.SourceCode\02.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.TimeAttendance.frmCapNhatNhom.resources
 D:\01.SourceCode\02.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.TimeAttendance.Form.frmInKehoachdica.resources
 D:\01.SourceCode\02.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.TimeAttendance.frmLinkDuLieuChamCong1.resources
 D:\01.SourceCode\02.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.TimeAttendance.frmLinkDuLieuChamCong.resources
@@ -2486,6 +2487,6 @@ D:\01.SourceCode\02.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.Time
 D:\01.SourceCode\02.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.TimeAttendance.dll.licenses
 D:\01.SourceCode\02.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.TimeAttendance.csproj.CoreCompileInputs.cache
 D:\01.SourceCode\02.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.TimeAttendance.csproj.CopyComplete
+D:\01.SourceCode\02.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.TimeAttendance.dll
 D:\01.SourceCode\02.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.TimeAttendance.pdb
-D:\01.SourceCode\02.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.TimeAttendance.frmImportDangKyKLSP.resources
-D:\01.SourceCode\02.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.TimeAttendance.frmCapNhatNhom.resources
+D:\01.SourceCode\02.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\ICSharpCode.SharpZipLib.dll

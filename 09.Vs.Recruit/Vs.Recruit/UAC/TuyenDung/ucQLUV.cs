@@ -18,6 +18,7 @@ using DevExpress.Utils;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using System.Linq;
 using OfficeOpenXml;
+using OfficeOpenXml.Style;
 
 namespace Vs.Recruit
 {
@@ -89,7 +90,7 @@ namespace Vs.Recruit
                 case "export":
                     {
                         string sPath = "";
-                        sPath = Commons.Modules.MExcel.SaveFiles("Excel Files (*.xls;)|*.xls;|Excel Files (*.Xlsx;)|*.Xlsx;|" + "All Files (*.*)|*.*");
+                        sPath = Commons.Modules.MExcel.SaveFiles("Excel Files (*.xlsx;)|*.xlsx;|" + "All Files (*.*)|*.*");
                         if (sPath == "") return;
                         //Workbook book = new Workbook();
                         //Worksheet sheet = book.Worksheets[0];
@@ -113,151 +114,157 @@ namespace Vs.Recruit
             }
         }
 
-        private void InSheet(Workbook book,DataTable dt,string Names)
-        {
-            book.Worksheets.Add(Names);
-            Worksheet sheet = book.Worksheets[Names];
-                sheet.InsertDataTable(dt, true, 1, 1);
-            for (int i = 0; i < dt.Columns.Count; i++)
-            {
-                sheet.Range[1, i + 1].Text = Commons.Modules.ObjLanguages.GetLanguage(this.Name, dt.Columns[i].ColumnName);
-                sheet.Range[1, i + 1].Style.Font.IsBold = true;
-          
-            }
-        }
 
         private void ExportUngVien(string sPath)
         {
             try
             {
                 DataTable dtTmp = new DataTable();
-                string SQL = "SELECT TOP 0 MS_UV AS  N'Mã số',HO + ' '+ TEN AS N'Họ tên',PHAI AS N'Giới tính',NGAY_SINH AS N'Ngày sinh',NOI_SINH AS N'Nơi sinh',SO_CMND AS N'CMND',NGAY_CAP AS N'Ngày cấp',NOI_CAP AS N'Nơi cấp',CONVERT(NVARCHAR(250), '') N'Trình độ học vấn',DT_DI_DONG AS N'Điện thoại',EMAIL AS N'Email',NGUOI_LIEN_HE AS N'Người liên hệ',QUAN_HE AS N'Quan hệ',DT_NGUOI_LIEN_HE AS N'ĐT Người liên hệ',CONVERT(NVARCHAR(250), ID_TP) AS N'Thành phố',CONVERT(NVARCHAR(250), ID_QUAN) AS N'Quận',CONVERT(NVARCHAR(250), ID_PX) AS N'Phường xã',THON_XOM AS N'Thôn xóm',DIA_CHI_THUONG_TRU AS N'Địa chỉ',CONVERT(NVARCHAR(250), '') AS N'Nguồn tuyển',CONVERT(NVARCHAR(250), ID_CN) AS N'Người giới thiệu',CONVERT(NVARCHAR(250), TAY_NGHE) AS N'tay nghề',CONVERT(NVARCHAR(250), VI_TRI_TD_1) AS N'Vị trí tuyển 1',CONVERT(NVARCHAR(250), VI_TRI_TD_2) AS N'Vị trí tuyển 2',CONVERT(NVARCHAR(250), ID_VI_TRI_PHU_HOP) AS N'Vị trí phù hợp',CONG_DOAN_CHU_YEU AS N'Công đoạn chủ yếu' FROM dbo.UNG_VIEN";
+                string SQL = "SELECT TOP 0 MS_UV AS  N'Mã số',NGAY_NHAN_HO_SO AS N'ngày nhận CV',HO + ' '+ TEN AS N'Họ tên',PHAI AS N'Giới tính',NGAY_SINH AS N'Ngày sinh',NOI_SINH AS N'Nơi sinh',SO_CMND AS N'CMND',NGAY_CAP AS N'Ngày cấp',NOI_CAP AS N'Nơi cấp',CONVERT(NVARCHAR(250), '') N'Trình độ học vấn',DT_DI_DONG AS N'Điện thoại',EMAIL AS N'Email',NGUOI_LIEN_HE AS N'Người liên hệ',QUAN_HE AS N'Quan hệ',DT_NGUOI_LIEN_HE AS N'ĐT Người liên hệ',CONVERT(NVARCHAR(250), ID_TP) AS N'Thành phố',CONVERT(NVARCHAR(250), ID_QUAN) AS N'Quận',CONVERT(NVARCHAR(250), ID_PX) AS N'Phường xã',THON_XOM AS N'Thôn xóm',DIA_CHI_THUONG_TRU AS N'Địa chỉ',CONVERT(NVARCHAR(250), '') AS N'Nguồn tuyển',CONVERT(NVARCHAR(250), ID_CN) AS N'Người giới thiệu',CONVERT(NVARCHAR(250), TAY_NGHE) AS N'tay nghề',CONVERT(NVARCHAR(250), VI_TRI_TD_1) AS N'Vị trí tuyển 1',CONVERT(NVARCHAR(250), VI_TRI_TD_2) AS N'Vị trí tuyển 2',CONVERT(NVARCHAR(250), ID_VI_TRI_PHU_HOP) AS N'Vị trí phù hợp',CONG_DOAN_CHU_YEU AS N'Công đoạn chủ yếu',GHI_CHU AS N'Ghi Chú' FROM dbo.UNG_VIEN";
 
                 dtTmp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, SQL));
 
                 //export datatable to excel
-                Workbook book = new  Workbook();
-                Worksheet sheet1 = book.Worksheets[0];
-                sheet1.Name = "01-Danh sách ứng viên";
-                sheet1.DefaultColumnWidth = 20;
 
-                sheet1.InsertDataTable(dtTmp, true, 1, 1);
+                ExcelPackage pck = new ExcelPackage();
 
-                sheet1.Range[2, 1].Text = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.AUTO_CREATE_SO_UNG_VIEN()").ToString();
+                var sheet1 = pck.Workbook.Worksheets.Add("01 - Danh sách ứng viên");
+                var sheet2 = pck.Workbook.Worksheets.Add("02-Bằng cấp");
+                var sheet3 = pck.Workbook.Worksheets.Add("03-Kinh nghiệm làm việc");
+                var sheet4 = pck.Workbook.Worksheets.Add("List Loại Công Việc");
 
-                sheet1.Range[1, 1, 1, 26].Style.WrapText = true;
-                sheet1.Range[1, 1, 1, 26].Style.VerticalAlignment = VerticalAlignType.Center;
-                sheet1.Range[1, 1, 1, 26].Style.HorizontalAlignment = HorizontalAlignType.Center;
-                sheet1.Range[1, 1, 1, 26].Style.Font.IsBold = true;
+                sheet1.DefaultColWidth = 20;
+                sheet1.Cells[1, 1].LoadFromDataTable(dtTmp, true);
+                sheet1.Cells[2, 1].Value = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.AUTO_CREATE_SO_UNG_VIEN()").ToString();
 
-                sheet1.Range[1, 1].Style.Font.Color = Color.Red;
-                sheet1.Range[1, 2].Style.Font.Color = Color.Red;
-                sheet1.Range[1, 4].Style.Font.Color = Color.Red;
-                sheet1.Range[1, 25].Style.Font.Color = Color.Red;
+                sheet1.Cells[1, 1, 1, 28].Style.WrapText = true;
+                sheet1.Cells[1, 1, 1, 28].Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+                sheet1.Cells[1, 1, 1, 28].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                sheet1.Cells[1, 1, 1, 28].Style.Font.Bold = true;
+
+                sheet1.Cells[1, 1].Style.Font.Color.SetColor(Color.Red);
+                sheet1.Cells[1, 3].Style.Font.Color.SetColor(Color.Red);
+                sheet1.Cells[1, 5].Style.Font.Color.SetColor(Color.Red);
+                sheet1.Cells[1, 26].Style.Font.Color.SetColor(Color.Red);
+
+                //sheet1.Cells[1, 1].Comment.RichText.Add("Mã ứng viên sẽ được đặt theo cấu trúc MUV-000001 trong đó(MUV-: cố định,còn 000001 sẽ được tăng thêm 1 khi có một ứng viên mới).");
 
 
-                sheet1.Range[1, 1].Comment.RichText.Text = "Mã ứng viên sẽ được đặt theo cấu trúc MUV-000001 trong đó(MUV-: cố định,còn 000001 sẽ được tăng thêm 1 khi có một ứng viên mới).";
-
-
+                sheet1.Cells[1, 1].AddComment("Mã ứng viên sẽ được đặt theo cấu trúc MUV-000001 trong đó(MUV-: cố định,còn 000001 sẽ được tăng thêm 1 khi có một ứng viên mới).", "REF");
 
                 //2 giới tính
-                sheet1.Range[2, 3, 50, 3].DataValidation.Values = new string[] { "Nam", "Nữ"};
+
+
+                sheet4.Cells[1, 1, 1, 1].Style.WrapText = true;
+                sheet4.Cells[1, 1, 1, 1].Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+                sheet4.Cells[1, 1, 1, 1].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                sheet4.Cells[1, 1, 1, 1].Style.Font.Bold = true;
+                sheet4.Cells[1, 1, 1, 1].Value = "Tên công việc";
+                sheet4.Column(1).Width = 50;
+                sheet4.Cells[2, 1].LoadFromCollection(Commons.Modules.ObjSystems.DataLoaiCV(false).AsEnumerable().Select(x => x.Field<string>("TEN_LCV")).ToArray());
+
+                Commons.Modules.MExcel.AddExcelDataValidationList(sheet1, 2, 4, 50, 4, "", new string[] { "Nam", "Nữ" });
+                Commons.Modules.MExcel.AddExcelDataValidationList(sheet1, 2, 10, 50, 10, "", Commons.Modules.ObjSystems.DataTDVH(-1, false).AsEnumerable().Select(x => x.Field<string>("TEN_TDVH")).ToArray());
+                //Commons.Modules.MExcel.AddExcelDataValidationList(sheet1, 2, 16, 50, 16, "", Commons.Modules.ObjSystems.DataThanhPho(-1, false).AsEnumerable().Select(x => x.Field<string>("TEN_TP")).ToArray());
+                Commons.Modules.MExcel.AddExcelDataValidationList(sheet1, 2, 21, 50, 21, "", Commons.Modules.ObjSystems.DataNguonTD(false).AsEnumerable().Select(x => x.Field<string>("TEN_NTD")).ToArray());
+                //Commons.Modules.MExcel.AddExcelDataValidationList(sheet1, 2, 22, 50, 22, "", Commons.Modules.ObjSystems.DataCongNhan(false).AsEnumerable().Select(x => x.Field<string>("TEN_CN")).ToArray());
+                Commons.Modules.MExcel.AddExcelDataValidationList(sheet1, 2, 23, 50, 23, "", Commons.Modules.ObjSystems.DataTayNghe(false).AsEnumerable().Select(x => x.Field<string>("TEN_TAY_NGHE")).ToArray());
+
+
+                Commons.Modules.MExcel.AddExcelDataValidationList(sheet1, 2, 26, 50, 26, "'List Loại Công Việc'!$A$2:$A$"+ Commons.Modules.ObjSystems.DataLoaiCV(false).Rows.Count.ToString() + "",null);
+
                 //9 trình độ văn hóa
-                sheet1.Range[2, 9, 50, 9].DataValidation.Values = Commons.Modules.ObjSystems.DataTDVH(-1, false).AsEnumerable().Select(x => x.Field<string>("TEN_TDVH")).ToArray();
+                //sheet1.Cells[2, 9, 50, 9].DataValidation.va = Commons.Modules.ObjSystems.DataTDVH(-1, false).AsEnumerable().Select(x => x.Field<string>("TEN_TDVH")).ToArray();
                 //15 thành phố
                 //sheet1.Range[2, 15, 50, 15].DataValidation.Values = Commons.Modules.ObjSystems.DataThanhPho(-1, false).AsEnumerable().Select(x => x.Field<string>("TEN_TP")).ToArray();
                 //20 nguồn tuyển  
-                sheet1.Range[2, 20, 50, 20].DataValidation.Values = Commons.Modules.ObjSystems.DataNguonTD(false).AsEnumerable().Select(x => x.Field<string>("TEN_NTD")).ToArray();
+                //sheet1.Cells[2, 20, 50, 20].DataValidation.Values = Commons.Modules.ObjSystems.DataNguonTD(false).AsEnumerable().Select(x => x.Field<string>("TEN_NTD")).ToArray();
                 //21 người giới thiệu
                 //sheet1.Range[2, 21, 50, 21].DataValidation.Values = Commons.Modules.ObjSystems.DataCongNhan(false).AsEnumerable().Select(x => x.Field<string>("TEN_CN")).ToArray();
                 //22 tay nghề
-                sheet1.Range[2, 22, 50, 22].DataValidation.Values = Commons.Modules.ObjSystems.DataTayNghe(false).AsEnumerable().Select(x => x.Field<string>("TEN_TAY_NGHE")).ToArray();
+                //sheet1.Range[2, 22, 50, 22].DataValidation.Values = Commons.Modules.ObjSystems.DataTayNghe(false).AsEnumerable().Select(x => x.Field<string>("TEN_TAY_NGHE")).ToArray();
                 //25  vị trí công việc
                 //sheet1.Range[2, 25, 50, 25].DataValidation.Values = Commons.Modules.ObjSystems.DataLoaiCV(false).AsEnumerable().Select(x => x.Field<string>("TEN_LCV")).ToArray();
 
+                //sheet1.Range[2, 9, 50, 9].DataValidation.IsSuppressDropDownArrow = false;
+                //sheet1.Range[2, 3, 50, 3].DataValidation.IsSuppressDropDownArrow = false;
+                //sheet1.Range[2, 20, 50, 20].DataValidation.IsSuppressDropDownArrow = false;
+                //sheet1.Range[2, 22, 50, 22].DataValidation.IsSuppressDropDownArrow = false;
 
-                sheet1.Range[2, 9, 50, 9].DataValidation.IsSuppressDropDownArrow = false;
-                sheet1.Range[2, 3, 50, 3].DataValidation.IsSuppressDropDownArrow = false;
-                sheet1.Range[2, 20, 50, 20].DataValidation.IsSuppressDropDownArrow = false;
-                sheet1.Range[2, 22, 50, 22].DataValidation.IsSuppressDropDownArrow = false;
+                //InSheet(book, Commons.Modules.ObjSystems.DataLoaiCV(false, Convert.ToInt32(-1)), "Danh sách loại công việc");
+                ////sheet1.Range[2, 25, 50, 25].DataValidation.DataRange = book.Worksheets["Danh sách loại công việc"].Range["B2:B15"];
 
+                //sheet1.InsertDataTable(dtTmp, true, 1, 1);
 
+                //sheet1.FreezePanes(2, 4);
+                ////Tên trường Từ năm	Đến năm	Xếp loại
 
-                sheet1.Range[1, 25].Comment.RichText.Text = Commons.Modules.ObjSystems.ConvertCombototext(Commons.Modules.ObjSystems.DataLoaiCV(false, Convert.ToInt32(-1)));
-                InSheet(book, Commons.Modules.ObjSystems.DataLoaiCV(false, Convert.ToInt32(-1)), "Danh sách loại công việc");
-                //sheet1.Range[2, 25, 50, 25].DataValidation.DataRange = book.Worksheets["Danh sách loại công việc"].Range["B2:B15"];
+                //Worksheet sheet2 = book.Worksheets[1];
+                //sheet2.Name = "02-Bằng cấp";
+                sheet2.DefaultColWidth = 20;
 
-                sheet1.InsertDataTable(dtTmp, true, 1, 1);
+                sheet2.Cells[1, 1].Value = "Mã số";
+                sheet2.Cells[1, 2].Value = "Chuyên ngành";
+                sheet2.Cells[1, 3].Value = "Tên trường";
+                sheet2.Cells[1, 4].Value = "Từ năm";
+                sheet2.Cells[1, 5].Value = "Đến năm";
+                sheet2.Cells[1, 6].Value = "Xếp loại";
 
-                sheet1.FreezePanes(2, 4);
-                //Tên trường Từ năm	Đến năm	Xếp loại
-
-                Worksheet sheet2 = book.Worksheets[1];
-                sheet2.Name = "02-Bằng cấp";
-                sheet2.DefaultColumnWidth = 20;
-
-                sheet2.Range[1, 1].Text = "Mã số";
-                sheet2.Range[1, 2].Text = "Chuyên ngành";
-                sheet2.Range[1, 3].Text = "Tên trường";
-                sheet2.Range[1, 4].Text = "Từ năm";
-                sheet2.Range[1, 5].Text = "Đến năm";
-                sheet2.Range[1, 6].Text = "Xếp loại";
-
-                sheet2.Range[1, 6].Comment.RichText.Text = Commons.Modules.ObjSystems.ConvertCombototext(Commons.Modules.ObjSystems.DataXepLoai(false));
-
-                sheet2.Range[2, 6, 50, 6].DataValidation.Values = Commons.Modules.ObjSystems.DataXepLoai(false).AsEnumerable().Select(x => x.Field<string>("TEN_XL")).ToArray();
-                sheet2.Range[2, 6, 50, 6].DataValidation.IsSuppressDropDownArrow = false;
+                sheet2.Cells[1, 6].AddComment(Commons.Modules.ObjSystems.ConvertCombototext(Commons.Modules.ObjSystems.DataXepLoai(false)), "REF");
+                Commons.Modules.MExcel.AddExcelDataValidationList(sheet2, 2, 6, 50, 6, "", Commons.Modules.ObjSystems.DataXepLoai(false).AsEnumerable().Select(x => x.Field<string>("TEN_XL")).ToArray());
 
 
-                sheet2.Range[1, 1, 1, 6].Style.WrapText = true;
-                sheet2.Range[1, 1, 1, 6].Style.VerticalAlignment = VerticalAlignType.Center;
-                sheet2.Range[1, 1, 1, 6].Style.HorizontalAlignment = HorizontalAlignType.Center;
-                sheet2.Range[1, 1, 1, 6].Style.Font.IsBold = true;
 
-                sheet2.Range[1, 1].Style.Font.Color = Color.Red;
+                sheet2.Cells[1, 1, 1, 6].Style.WrapText = true;
+                sheet2.Cells[1, 1, 1, 6].Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+                sheet2.Cells[1, 1, 1, 6].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                sheet2.Cells[1, 1, 1, 6].Style.Font.Bold = true;
+
+                sheet2.Cells[1, 1].Style.Font.Color.SetColor(Color.Red);
 
 
-                Worksheet sheet3 = book.Worksheets[2];
-                sheet3.Name = "03-Kinh nghiệm làm việc";
-                sheet3.DefaultColumnWidth = 20;
+                sheet3.DefaultColWidth = 20;
 
-                sheet3.Range[1, 1].Text = "Mã số";
-                sheet3.Range[1, 2].Text = "Tên công ty";
-                sheet3.Range[1, 3].Text = "Chức vụ";
-                sheet3.Range[1, 4].Text = "Mức lương";
-                sheet3.Range[1, 5].Text = "Từ năm";
-                sheet3.Range[1, 6].Text = "Đến năm";
-                sheet3.Range[1, 7].Text = "Số năm kinh nghiệm";
-                sheet3.Range[1, 8].Text = "Lý do nghĩ";
+                sheet3.Cells[1, 1].Value = "Mã số";
+                sheet3.Cells[1, 2].Value = "Tên công ty";
+                sheet3.Cells[1, 3].Value = "Chức vụ";
+                sheet3.Cells[1, 4].Value = "Mức lương";
+                sheet3.Cells[1, 5].Value = "Từ năm";
+                sheet3.Cells[1, 6].Value = "Đến năm";
+                sheet3.Cells[1, 7].Value = "Số năm kinh nghiệm";
+                sheet3.Cells[1, 8].Value = "Lý do nghĩ";
+                sheet3.Cells[1, 1].Style.Font.Color.SetColor(Color.Red);
 
-              
-                
+                sheet3.Cells[1, 1, 1, 8].Style.WrapText = true;
+                sheet3.Cells[1, 1, 1, 8].Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+                sheet3.Cells[1, 1, 1, 8].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                sheet3.Cells[1, 1, 1, 8].Style.Font.Bold = true;
 
-                sheet3.Range[1, 1].Style.Font.Color = Color.Red;
+                ////Worksheet sheet4 = book.Worksheets.Add("04-Thông tin khác");
+                ////sheet4.DefaultColumnWidth = 20;
 
-                sheet3.Range[1, 1, 1, 8].Style.WrapText = true;
-                sheet3.Range[1, 1, 1, 8].Style.VerticalAlignment = VerticalAlignType.Center;
-                sheet3.Range[1, 1, 1, 8].Style.HorizontalAlignment = HorizontalAlignType.Center;
-                sheet3.Range[1, 1, 1, 8].Style.Font.IsBold = true;
+                ////sheet4.Range[1, 1].Text = "Mã số";
+                ////sheet4.Range[1, 2].Text = "Nội dung";
+                ////sheet4.Range[1, 3].Text = "Xếp loại";
 
-                //Worksheet sheet4 = book.Worksheets.Add("04-Thông tin khác");
-                //sheet4.DefaultColumnWidth = 20;
+                ////sheet4.Range[1, 3].Comment.RichText.Text = Commons.Modules.ObjSystems.ConvertCombototext(Commons.Modules.ObjSystems.DataXepLoai(false));
 
-                //sheet4.Range[1, 1].Text = "Mã số";
-                //sheet4.Range[1, 2].Text = "Nội dung";
-                //sheet4.Range[1, 3].Text = "Xếp loại";
+                ////sheet4.Range[1, 1, 1, 3].Style.WrapText = true;
+                ////sheet4.Range[1, 1, 1, 3].Style.VerticalAlignment = VerticalAlignType.Center;
+                ////sheet4.Range[1, 1, 1, 3].Style.HorizontalAlignment = HorizontalAlignType.Center;
+                ////sheet4.Range[1, 1, 1, 3].Style.Font.IsBold = true;
 
-                //sheet4.Range[1, 3].Comment.RichText.Text = Commons.Modules.ObjSystems.ConvertCombototext(Commons.Modules.ObjSystems.DataXepLoai(false));
+                var fi = new System.IO.FileInfo(sPath);
+                if (fi.Exists)
+                    fi.Delete();
+                pck.SaveAs(fi);
+                System.Diagnostics.Process.Start(fi.FullName);
 
-                //sheet4.Range[1, 1, 1, 3].Style.WrapText = true;
-                //sheet4.Range[1, 1, 1, 3].Style.VerticalAlignment = VerticalAlignType.Center;
-                //sheet4.Range[1, 1, 1, 3].Style.HorizontalAlignment = HorizontalAlignType.Center;
-                //sheet4.Range[1, 1, 1, 3].Style.Font.IsBold = true;
 
-                book.SaveToFile(sPath);
-                System.Diagnostics.Process.Start(sPath);
+                //book.SaveToFile(sPath);
+                //System.Diagnostics.Process.Start(sPath);
             }
-            catch(Exception ex)
+            catch
             {
             }
         }

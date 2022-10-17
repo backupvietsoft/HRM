@@ -181,5 +181,17 @@ namespace Vs.Recruit
 
             }
         }
+
+        private void rdo_ChonBaoCao_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(rdo_ChonBaoCao.SelectedIndex == 0)
+            {
+                dNgayIn.Enabled = false;
+            }    
+            else
+            {
+                dNgayIn.Enabled = true;
+            }    
+        }
     }
 }

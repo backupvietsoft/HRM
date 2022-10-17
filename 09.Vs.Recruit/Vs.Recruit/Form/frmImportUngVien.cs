@@ -18,7 +18,6 @@ namespace Vs.Recruit
     {
         string fileName = "";
         Point ptChung;
-        string ChuoiKT = "";
         DataTable _table = new DataTable();
         DataTable dtemp;
         public frmImportUngVien()
@@ -193,161 +192,173 @@ namespace Vs.Recruit
                     }
                 }
                 col = 1;
+                //ngày nhận CV
+                if (!Commons.Modules.MExcel.KiemDuLieuNgay(grvData, dr, col,false, this.Name))
+                {
+                    errorCount++;
+                }
+                col = 2;
                 //Họ và tên
                 if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, true, 70, this.Name))
                 {
                     errorCount++;
                 }
-                col = 2;
+                col = 3;
                 //Giới tính
                 string sGioiTinh = dr[grvData.Columns[col].FieldName.ToString()].ToString();
                 if (!Commons.Modules.MExcel.KiemDuLieuBool(grvData, dr, col, sGioiTinh, false))
                 {
                     errorCount++;
                 }
-                col = 3;
+                col = 4;
                 //Ngày sinh   
                 if (!Commons.Modules.MExcel.KiemDuLieuNgay(grvData, dr, col, true, this.Name))
                 {
                     errorCount++;
                 }
-                col = 4;
+                col = 5;
                 //Nơi sinh    
                 if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, false, 250, this.Name))
                 {
                     errorCount++;
                 }
-                col = 5;
+                col = 6;
                 //CMND 
                 if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, false, 15, this.Name))
                 {
                     errorCount++;
                 }
-                col = 6;
+                col = 7;
                 //Ngày cấp 
                 if (!Commons.Modules.MExcel.KiemDuLieuNgay(grvData, dr, col, false, this.Name))
                 {
                     errorCount++;
                 }
-                col = 7;
+                col = 8;
                 //Nơi cấp
                 if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, false, 150, this.Name))
                 {
                     errorCount++;
                 }
-                col = 8;
+                col = 9;
                 //Trình độ văn hóa
                 string sVanHoa = dr[grvData.Columns[col].FieldName.ToString()].ToString();
                 if (!Commons.Modules.MExcel.KiemTonTai(grvData, dr, col, sVanHoa, "TRINH_DO_VAN_HOA", "TEN_TDVH", false, this.Name))
                 {
                     errorCount++;
                 }
-                col = 9;
+                col = 10;
                 //Điện thoại  
                 if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, false, 20, this.Name))
                 {
                     errorCount++;
                 }
-                col = 10;
+                col = 11;
                 //Email 
                 if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, false, 250, this.Name))
                 {
                     errorCount++;
                 }
-                col = 11;
+                col = 12;
                 //Người liên hệ   
                 if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, false, 50, this.Name))
                 {
                     errorCount++;
                 }
-                col = 12;
+                col = 13;
                 //Quan hệ 
                 if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, false, 50, this.Name))
                 {
                     errorCount++;
                 }
-                col = 13;
+                col = 14;
                 //ĐT Người liên hệ 
                 if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, false, 20, this.Name))
                 {
                     errorCount++;
                 }
-                col = 14;
+                col = 15;
                 //Thành phố   
                 string sThanhPho = dr[grvData.Columns[col].FieldName.ToString()].ToString();
                 if (!Commons.Modules.MExcel.KiemTonTai(grvData, dr, col, sThanhPho, "THANH_PHO", "TEN_TP", false, this.Name))
                 {
                     errorCount++;
                 }
-                col = 15;
+                col = 16;
                 //Quận 
                 string sQuan = dr[grvData.Columns[col].FieldName.ToString()].ToString();
                 if (!KiemTonTai(grvData, dr, col, sQuan, "SELECT COUNT(*) FROM dbo.QUAN WHERE TEN_QUAN = N'"+ sQuan +"' AND ID_TP = (SELECT ID_TP FROM dbo.THANH_PHO WHERE TEN_TP = N'"+ sThanhPho +"')", false, this.Name))
                 {
                     errorCount++;
                 }
-                col = 16;
+                col = 17;
                 //Phường xã 
                 string sPhuongXa = dr[grvData.Columns[col].FieldName.ToString()].ToString();
                 if (!KiemTonTai(grvData, dr, col, sPhuongXa, "SELECT COUNT(*) FROM dbo.PHUONG_XA WHERE TEN_PX = N'"+ sPhuongXa + "' AND  ID_QUAN = (SELECT TOP 1 ID_QUAN FROM dbo.QUAN WHERE TEN_QUAN = N'" + sQuan +"')", false, this.Name))
                 {
                     errorCount++;
                 }
-                col = 17;
+                col = 18;
                 //Thôn xóm 
                 if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, false, 100, this.Name))
                 {
                     errorCount++;
                 }
-                col = 18;
+                col = 19;
                 //Địa chỉ
                 if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, false, 250, this.Name))
                 {
                     errorCount++;
                 }
-                col = 19;
+                col = 20;
                 //Nguồn tuyển
                 string sNguonTuyen = dr[grvData.Columns[col].FieldName.ToString()].ToString();
                 if (!Commons.Modules.MExcel.KiemTonTai(grvData, dr, col, sNguonTuyen, "NGUON_TUYEN_DUNG", "TEN_NTD", false, this.Name))
                 {
                     errorCount++;
                 }
-                col = 20;
+                col = 21;
                 //Người giới thiệu    
                 string sNguoiGT = dr[grvData.Columns[col].FieldName.ToString()].ToString();
                 if (!Commons.Modules.MExcel.KiemTonTai(grvData, dr, col, sNguoiGT, "CONG_NHAN", "HO", "TEN", this.Name))
                 {
                     errorCount++;
                 }
-                col = 21;
+                col = 22;
                 //tây nghề
                 string sTayNghe = dr[grvData.Columns[col].FieldName.ToString()].ToString();
                 if (!Commons.Modules.MExcel.KiemTonTai(grvData, dr, col, sTayNghe, "TAY_NGHE", "TEN_TAY_NGHE", false, this.Name))
                 {
                     errorCount++;
                 }
-                col = 22;
+                col = 23;
                 //Vị trí tuyển 1
                 if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, false, 250, this.Name))
                 {
                     errorCount++;
                 }
-                col = 23;
+                col = 24;
                 //Vị trí tuyển 2
                 if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, false, 250, this.Name))
                 {
                     errorCount++;
                 }
-                col = 24;
+                col = 25;
                 //Vị trí phù hơp
                 string sVTT1 = dr[grvData.Columns[col].FieldName.ToString()].ToString();
                 if (!Commons.Modules.MExcel.KiemTonTai(grvData, dr, col, sVTT1, "LOAI_CONG_VIEC", "TEN_LCV"))
                 {
                     errorCount++;
                 }
-                col = 25;
+                col = 26;
                 //Công đoạn chủ yếu
                 if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, false, 250, this.Name))
+                {
+                    errorCount++;
+                }
+                col = 27;
+                //Ghi Chu
+                if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, false, 500, this.Name))
                 {
                     errorCount++;
                 }
@@ -374,7 +385,7 @@ namespace Vs.Recruit
                         string sbt = "sBTUV" + Commons.Modules.iIDUser;
                         Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sbt, Commons.Modules.ObjSystems.ConvertDatatable(grvData), "");
 
-                        string sSql = "INSERT INTO dbo.UNG_VIEN(MS_UV,HO,TEN,PHAI,NGAY_SINH,NOI_SINH,SO_CMND,NGAY_CAP,NOI_CAP,ID_TDVH,DT_DI_DONG,EMAIL,NGUOI_LIEN_HE,QUAN_HE,DT_NGUOI_LIEN_HE,ID_TP,ID_QUAN,ID_PX,THON_XOM,DIA_CHI_THUONG_TRU,ID_NTD,ID_CN,TAY_NGHE,VI_TRI_TD_1,VI_TRI_TD_2,ID_VI_TRI_PHU_HOP,CONG_DOAN_CHU_YEU,ID_TT_UV) SELECT IIF(ISNULL([" + grvData.Columns[0].FieldName.ToString() + "],'')= '','MUV-' +  RIGHT('00000' + CONVERT(NVARCHAR(6),RIGHT( dbo.AUTO_CREATE_SO_UNG_VIEN(),5) +  ROW_NUMBER() OVER (ORDER BY [Mã số]) - 1),5),[" + grvData.Columns[0].FieldName.ToString() + "]) ,LEFT( [" + grvData.Columns[1].FieldName.ToString() + "], len([" + grvData.Columns[1].FieldName.ToString() + "])-charindex(' ', REVERSE([" + grvData.Columns[1].FieldName.ToString() + "]),1)),  RIGHT([" + grvData.Columns[1].FieldName.ToString() + "], (charindex(' ', REVERSE([" + grvData.Columns[1].FieldName.ToString() + "]), 1)) -1),case [" + grvData.Columns[2].FieldName.ToString() + "] when 'Nam' then 1 else 0 end,CONVERT(datetime,[" + grvData.Columns[3].FieldName.ToString() + "],103),[" + grvData.Columns[4].FieldName.ToString() + "],[" + grvData.Columns[5].FieldName.ToString() + "],CONVERT(datetime,[" + grvData.Columns[6].FieldName.ToString() + "],103),[" + grvData.Columns[7].FieldName.ToString() + "],(SELECT TOP 1 ID_TDVH FROM dbo.TRINH_DO_VAN_HOA WHERE TEN_TDVH = A.[" + grvData.Columns[8].FieldName.ToString() + "]),[" + grvData.Columns[9].FieldName.ToString() + "],[" + grvData.Columns[10].FieldName.ToString() + "],[" + grvData.Columns[11].FieldName.ToString() + "],[" + grvData.Columns[12].FieldName.ToString() + "],[" + grvData.Columns[13].FieldName.ToString() + "],(SELECT TOP 1 ID_TP FROM dbo.THANH_PHO WHERE TEN_TP = A.[" + grvData.Columns[14].FieldName.ToString() + "]),(SELECT TOP 1 ID_QUAN FROM dbo.QUAN WHERE TEN_QUAN = A.[" + grvData.Columns[15].FieldName.ToString() + "] AND ID_TP = (SELECT TOP 1 ID_TP FROM dbo.THANH_PHO WHERE TEN_TP = A.[" + grvData.Columns[14].FieldName.ToString() + "])),(SELECT TOP 1 ID_PX FROM dbo.PHUONG_XA WHERE TEN_PX = A.[" + grvData.Columns[16].FieldName.ToString() + "] AND ID_QUAN = (SELECT TOP 1 ID_QUAN FROM dbo.QUAN WHERE TEN_QUAN = A.[" + grvData.Columns[15].FieldName.ToString() + "])),[" + grvData.Columns[17].FieldName.ToString() + "],[" + grvData.Columns[18].FieldName.ToString() + "],(SELECT TOP 1 ID_NTD FROM dbo.NGUON_TUYEN_DUNG WHERE TEN_NTD= A.[" + grvData.Columns[19].FieldName.ToString() + "]),(SELECT TOP 1 ID_CN FROM dbo.CONG_NHAN WHERE HO +' '+TEN = A.[" + grvData.Columns[20].FieldName.ToString() + "]),(SELECT TOP 1 ID_TAY_NGHE FROM dbo.TAY_NGHE WHERE TEN_TAY_NGHE = A.[" + grvData.Columns[21].FieldName.ToString() + "]),A.[" + grvData.Columns[22].FieldName.ToString() + "],A.[" + grvData.Columns[23].FieldName.ToString() + "],(SELECT TOP 1 ID_LCV FROM dbo.LOAI_CONG_VIEC WHERE TEN_LCV = A.[" + grvData.Columns[24].FieldName.ToString() + "]),[" + grvData.Columns[25].FieldName.ToString() + "],1  FROM " + sbt + " AS A";
+                        string sSql = "INSERT INTO dbo.UNG_VIEN(MS_UV,NGAY_NHAN_HO_SO,HO,TEN,PHAI,NGAY_SINH,NOI_SINH,SO_CMND,NGAY_CAP,NOI_CAP,ID_TDVH,DT_DI_DONG,EMAIL,NGUOI_LIEN_HE,QUAN_HE,DT_NGUOI_LIEN_HE,ID_TP,ID_QUAN,ID_PX,THON_XOM,DIA_CHI_THUONG_TRU,ID_NTD,ID_CN,TAY_NGHE,VI_TRI_TD_1,VI_TRI_TD_2,ID_VI_TRI_PHU_HOP,CONG_DOAN_CHU_YEU,GHI_CHU,ID_TT_UV) SELECT IIF(ISNULL([" + grvData.Columns[0].FieldName.ToString() + "],'')= '','MUV-' +  RIGHT('000000' + CONVERT(NVARCHAR(6),RIGHT( dbo.AUTO_CREATE_SO_UNG_VIEN(),6) +  ROW_NUMBER() OVER (ORDER BY [Mã số]) - 1),5),[" + grvData.Columns[0].FieldName.ToString() + "]),CONVERT(datetime,[" + grvData.Columns[1].FieldName.ToString() + "],103),LEFT( [" + grvData.Columns[2].FieldName.ToString() + "], len([" + grvData.Columns[2].FieldName.ToString() + "])-charindex(' ', REVERSE([" + grvData.Columns[2].FieldName.ToString() + "]),1)),  RIGHT([" + grvData.Columns[2].FieldName.ToString() + "], (charindex(' ', REVERSE([" + grvData.Columns[2].FieldName.ToString() + "]), 1)) -1),case [" + grvData.Columns[3].FieldName.ToString() + "] when 'Nam' then 1 else 0 end,CONVERT(datetime,[" + grvData.Columns[4].FieldName.ToString() + "],103),[" + grvData.Columns[5].FieldName.ToString() + "],[" + grvData.Columns[6].FieldName.ToString() + "],CONVERT(datetime,[" + grvData.Columns[7].FieldName.ToString() + "],103),[" + grvData.Columns[8].FieldName.ToString() + "],(SELECT TOP 1 ID_TDVH FROM dbo.TRINH_DO_VAN_HOA WHERE TEN_TDVH = A.[" + grvData.Columns[9].FieldName.ToString() + "]),[" + grvData.Columns[10].FieldName.ToString() + "],[" + grvData.Columns[11].FieldName.ToString() + "],[" + grvData.Columns[12].FieldName.ToString() + "],[" + grvData.Columns[13].FieldName.ToString() + "],[" + grvData.Columns[14].FieldName.ToString() + "],(SELECT TOP 1 ID_TP FROM dbo.THANH_PHO WHERE TEN_TP = A.[" + grvData.Columns[15].FieldName.ToString() + "]),(SELECT TOP 1 ID_QUAN FROM dbo.QUAN WHERE TEN_QUAN = A.[" + grvData.Columns[16].FieldName.ToString() + "] AND ID_TP = (SELECT TOP 1 ID_TP FROM dbo.THANH_PHO WHERE TEN_TP = A.[" + grvData.Columns[15].FieldName.ToString() + "])),(SELECT TOP 1 ID_PX FROM dbo.PHUONG_XA WHERE TEN_PX = A.[" + grvData.Columns[17].FieldName.ToString() + "] AND ID_QUAN = (SELECT TOP 1 ID_QUAN FROM dbo.QUAN WHERE TEN_QUAN = A.[" + grvData.Columns[16].FieldName.ToString() + "])),[" + grvData.Columns[18].FieldName.ToString() + "],[" + grvData.Columns[19].FieldName.ToString() + "],(SELECT TOP 1 ID_NTD FROM dbo.NGUON_TUYEN_DUNG WHERE TEN_NTD= A.[" + grvData.Columns[20].FieldName.ToString() + "]),(SELECT TOP 1 ID_CN FROM dbo.CONG_NHAN WHERE HO +' '+TEN = A.[" + grvData.Columns[21].FieldName.ToString() + "]),(SELECT TOP 1 ID_TAY_NGHE FROM dbo.TAY_NGHE WHERE TEN_TAY_NGHE = A.[" + grvData.Columns[22].FieldName.ToString() + "]),A.[" + grvData.Columns[23].FieldName.ToString() + "],A.[" + grvData.Columns[24].FieldName.ToString() + "],(SELECT TOP 1 ID_LCV FROM dbo.LOAI_CONG_VIEC WHERE TEN_LCV = A.[" + grvData.Columns[25].FieldName.ToString() + "]),[" + grvData.Columns[26].FieldName.ToString() + "],[" + grvData.Columns[27].FieldName.ToString() + "],1  FROM " + sbt + " AS A";
 
                         SqlHelper.ExecuteNonQuery(sTrans, CommandType.Text, sSql);
 
@@ -735,37 +746,37 @@ namespace Vs.Recruit
                 {
                     case 0:
                         {
-                            if (col == 8)
+                            if (col == 9)
                             {
                                 Commons.Modules.MExcel.KiemData("TRINH_DO_VAN_HOA", "TEN_TDVH", info.RowHandle, col, row);
                             }
-                            if (col == 14)
+                            if (col == 15)
                             {
                                 Commons.Modules.MExcel.KiemData("THANH_PHO", "TEN_TP", info.RowHandle, col, row);
                             }
-                            if (col == 15)
+                            if (col == 16)
                             {
                                 Commons.Modules.MExcel.KiemData("SELECT * FROM dbo.QUAN WHERE ID_TP = (SELECT TOP 1 ID_TP FROM dbo.THANH_PHO WHERE TEN_TP =N'"+ row[14].ToString() +"')", "TEN_QUAN",col, row);
                             }
-                            if (col == 16)
+                            if (col == 17)
                             {
                                 Commons.Modules.MExcel.KiemData("SELECT * FROM dbo.PHUONG_XA WHERE ID_QUAN = (SELECT TOP 1 ID_QUAN FROM dbo.QUAN WHERE TEN_QUAN = N'"+ row[15] +"')", "TEN_PX", col, row);
                             }
-                            if (col == 19)
+                            if (col == 20)
                             {
                                 Commons.Modules.MExcel.KiemData("NGUON_TUYEN_DUNG", "TEN_NTD", info.RowHandle, col, row);
                             }
                             //Người giới thiệu
-                            if(col == 20)
+                            if(col == 21)
                             {
                                 Commons.Modules.MExcel.KiemData("SELECT MS_CN,HO + ' '+ TEN AS HO_TEN,PHAI,NGAY_SINH FROM dbo.CONG_NHAN ORDER BY MS_CN", "HO_TEN", col, row);
                             }
                           
-                            if (col == 21)
+                            if (col == 22)
                             {
                                 Commons.Modules.MExcel.KiemData("TAY_NGHE", "TEN_TAY_NGHE", info.RowHandle, col, row);
                             }
-                            if (col == 24)
+                            if (col == 25)
                             {
                                 Commons.Modules.MExcel.KiemData("LOAI_CONG_VIEC", "TEN_LCV", info.RowHandle, col, row);
                             }

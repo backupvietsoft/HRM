@@ -33,8 +33,7 @@ namespace Vs.Recruit
         {
             try
             {
-
-                Commons.Modules.sLoad = "0Load";                 
+                Commons.Modules.sLoad = "0Load";
                 tbDat = new DataTable();
                 tbDat.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT 0 AS ID_DAT,CASE 0 WHEN 0 then N'Không đạt' ELSE 'not achieved' END DAT UNION SELECT 1 AS ID_DAT, CASE 0 WHEN 0 then N'Đạt' ELSE 'Achieved' END DAT"));
                 Commons.OSystems.SetDateEditFormat(datTNgay);
@@ -48,10 +47,6 @@ namespace Vs.Recruit
                 Commons.Modules.sLoad = "";
                 cboID_VTTD_EditValueChanged(null, null);
                 EnabelButton(true);
-
- 
-              
-
             }
             catch
             {
@@ -61,6 +56,23 @@ namespace Vs.Recruit
         {
             try
             {
+                if (LoaiCN == 1)
+                {//may
+                    if (Convert.ToInt32(cboTayNghe.EditValue) == 1)
+                    {
+                        ////đào tạo
+                        grvDSUngVien.Name = "grvDSUngVienDT";
+                    }
+                    else
+                    {
+                        grvDSUngVien.Name = "grvDSUngVienTN";
+                    }    
+                }
+                else
+                {
+                    grvDSUngVien.Name = "grvDSUngVienKH";
+                }    
+
                 System.Data.SqlClient.SqlConnection conn;
                 conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
                 conn.Open();
@@ -80,81 +92,71 @@ namespace Vs.Recruit
                 adp.Fill(ds);
                 DataTable dt = new DataTable();
                 dt = ds.Tables[0].Copy();
-                if (grdDSUngVien.DataSource == null)
-                {
-                    Commons.Modules.ObjSystems.MLoadXtraGrid(grdDSUngVien, grvDSUngVien, dt, true, true, false, true, true, this.Name);
+                Commons.Modules.ObjSystems.MLoadXtraGrid(grdDSUngVien, grvDSUngVien, dt, true, true, false, true, true, this.Name);
+                grvDSUngVien.Columns["ID_UV"].Visible = false;
+                grvDSUngVien.Columns["TINH_TRANG_DG"].Visible = false;
+                grvDSUngVien.Columns["MS_UV"].OptionsColumn.AllowEdit = false;
+                grvDSUngVien.Columns["HO_TEN"].OptionsColumn.AllowEdit = false;
+                grvDSUngVien.Columns["MS_CN"].OptionsColumn.AllowEdit = false;
+                grvDSUngVien.Columns["HO_TEN_NGT"].OptionsColumn.AllowEdit = false;
+                grvDSUngVien.Columns["THUONG_TAY_NGHE"].DisplayFormat.FormatType = FormatType.Numeric;
+                grvDSUngVien.Columns["THUONG_TAY_NGHE"].DisplayFormat.FormatString = "n0";
 
-                    grvDSUngVien.Columns["ID_UV"].Visible = false;
-                    grvDSUngVien.Columns["TINH_TRANG_DG"].Visible = false;
-                    grvDSUngVien.Columns["MS_UV"].OptionsColumn.AllowEdit = false;
-                    grvDSUngVien.Columns["HO_TEN"].OptionsColumn.AllowEdit = false;
-                    grvDSUngVien.Columns["THUONG_TAY_NGHE"].DisplayFormat.FormatType = FormatType.Numeric;
-                    grvDSUngVien.Columns["THUONG_TAY_NGHE"].DisplayFormat.FormatString = "n0";
+                DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit cboDGTN = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
+                cboDGTN.NullText = "";
+                cboDGTN.ValueMember = "ID_DGTN";
+                cboDGTN.DisplayMember = "TEN_DGTN";
+                //ID_VTTD,TEN_VTTD
+                cboDGTN.DataSource = Commons.Modules.ObjSystems.DataDanhGiaTayNghe(false);
+                cboDGTN.Columns.Clear();
+                cboDGTN.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID_DGTN"));
+                cboDGTN.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("TEN_DGTN"));
+                cboDGTN.Columns["TEN_DGTN"].Caption = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "TEN_DGTN");
+                cboDGTN.AppearanceDropDownHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+                cboDGTN.AppearanceDropDownHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+                cboDGTN.Columns["ID_DGTN"].Visible = false;
+                grvDSUngVien.Columns["ID_DGTN"].ColumnEdit = cboDGTN;
+                cboDGTN.BeforePopup += cboDGTN_BeforePopup;
+                cboDGTN.EditValueChanged += cboDGTN_EditValueChanged;
+                DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit cboNDGTN1 = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
+                cboNDGTN1.NullText = "";
+                cboNDGTN1.ValueMember = "ID_NGUOI_DGTN";
+                cboNDGTN1.DisplayMember = "TEN_NGUOI_DGTN";
+                //ID_NGUOI_DGTN,TEN_NGUOI_DGTN
+                cboNDGTN1.DataSource = Commons.Modules.ObjSystems.DataNguoiDanhGia(-1, -1, -1, -1, -1);
+                cboNDGTN1.Columns.Clear();
+                cboNDGTN1.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID_NGUOI_DGTN"));
+                cboNDGTN1.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("TEN_NGUOI_DGTN"));
+                cboNDGTN1.Columns["TEN_NGUOI_DGTN"].Caption = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "TEN_NGUOI_DGTN");
+                cboNDGTN1.AppearanceDropDownHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+                cboNDGTN1.AppearanceDropDownHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+                cboNDGTN1.Columns["ID_NGUOI_DGTN"].Visible = false;
+                grvDSUngVien.Columns["NGUOI_DANH_GIA_1"].ColumnEdit = cboNDGTN1;
+                cboNDGTN1.BeforePopup += CboDGTN_BeforePopup1;
+                //cboDGTN.EditValueChanged += cboDGTN_EditValueChanged;
 
-                    DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit cboDGTN = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
-                    cboDGTN.NullText = "";
-                    cboDGTN.ValueMember = "ID_DGTN";
-                    cboDGTN.DisplayMember = "TEN_DGTN";
-                    //ID_VTTD,TEN_VTTD
-                    cboDGTN.DataSource = Commons.Modules.ObjSystems.DataDanhGiaTayNghe(false);
-                    cboDGTN.Columns.Clear();
-                    cboDGTN.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID_DGTN"));
-                    cboDGTN.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("TEN_DGTN"));
-                    cboDGTN.Columns["TEN_DGTN"].Caption = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "TEN_DGTN");
-                    cboDGTN.AppearanceDropDownHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-                    cboDGTN.AppearanceDropDownHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-                    cboDGTN.Columns["ID_DGTN"].Visible = false;
-                    grvDSUngVien.Columns["ID_DGTN"].ColumnEdit = cboDGTN;
-                    cboDGTN.BeforePopup += cboDGTN_BeforePopup;
-                    cboDGTN.EditValueChanged += cboDGTN_EditValueChanged;
-
-
-                    DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit cboNDGTN1 = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
-                    cboNDGTN1.NullText = "";
-                    cboNDGTN1.ValueMember = "ID_NGUOI_DGTN";
-                    cboNDGTN1.DisplayMember = "TEN_NGUOI_DGTN";
-                    //ID_NGUOI_DGTN,TEN_NGUOI_DGTN
-                    cboNDGTN1.DataSource = Commons.Modules.ObjSystems.DataNguoiDanhGia(-1,-1,-1,-1,-1);
-                    cboNDGTN1.Columns.Clear();
-                    cboNDGTN1.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID_NGUOI_DGTN"));
-                    cboNDGTN1.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("TEN_NGUOI_DGTN"));
-                    cboNDGTN1.Columns["TEN_NGUOI_DGTN"].Caption = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "TEN_NGUOI_DGTN");
-                    cboNDGTN1.AppearanceDropDownHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-                    cboNDGTN1.AppearanceDropDownHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-                    cboNDGTN1.Columns["ID_NGUOI_DGTN"].Visible = false;
-                    grvDSUngVien.Columns["NGUOI_DANH_GIA_1"].ColumnEdit = cboNDGTN1;
-                    cboNDGTN1.BeforePopup += CboDGTN_BeforePopup1;
-                    //cboDGTN.EditValueChanged += cboDGTN_EditValueChanged;
-
-                    DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit cboNDGTN2 = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
-                    cboNDGTN2.NullText = "";
-                    cboNDGTN2.ValueMember = "ID_NGUOI_DGTN";
-                    cboNDGTN2.DisplayMember = "TEN_NGUOI_DGTN";
-                    //ID_NGUOI_DGTN,TEN_NGUOI_DGTN
-                    cboNDGTN2.DataSource = Commons.Modules.ObjSystems.DataNguoiDanhGia(-1, -1, -1, -1, -1);
-                    cboNDGTN2.Columns.Clear();
-                    cboNDGTN2.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID_NGUOI_DGTN"));
-                    cboNDGTN2.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("TEN_NGUOI_DGTN"));
-                    cboNDGTN2.Columns["TEN_NGUOI_DGTN"].Caption = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "TEN_NGUOI_DGTN");
-                    cboNDGTN2.AppearanceDropDownHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-                    cboNDGTN2.AppearanceDropDownHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-                    cboNDGTN2.Columns["ID_NGUOI_DGTN"].Visible = false;
-                    grvDSUngVien.Columns["NGUOI_DANH_GIA_2"].ColumnEdit = cboNDGTN2;
-                    cboNDGTN2.BeforePopup += CboDGTN_BeforePopup2;
+                DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit cboNDGTN2 = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
+                cboNDGTN2.NullText = "";
+                cboNDGTN2.ValueMember = "ID_NGUOI_DGTN";
+                cboNDGTN2.DisplayMember = "TEN_NGUOI_DGTN";
+                //ID_NGUOI_DGTN,TEN_NGUOI_DGTN
+                cboNDGTN2.DataSource = Commons.Modules.ObjSystems.DataNguoiDanhGia(-1, -1, -1, -1, -1);
+                cboNDGTN2.Columns.Clear();
+                cboNDGTN2.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID_NGUOI_DGTN"));
+                cboNDGTN2.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("TEN_NGUOI_DGTN"));
+                cboNDGTN2.Columns["TEN_NGUOI_DGTN"].Caption = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "TEN_NGUOI_DGTN");
+                cboNDGTN2.AppearanceDropDownHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+                cboNDGTN2.AppearanceDropDownHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+                cboNDGTN2.Columns["ID_NGUOI_DGTN"].Visible = false;
+                grvDSUngVien.Columns["NGUOI_DANH_GIA_2"].ColumnEdit = cboNDGTN2;
+                cboNDGTN2.BeforePopup += CboDGTN_BeforePopup2;
 
 
-                    DataTable dtCN = new DataTable();
-                    dtCN.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboCongNhan", Commons.Modules.UserName, Commons.Modules.TypeLanguage, 3));
-                    RepositoryItemSearchLookUpEdit cbo = new RepositoryItemSearchLookUpEdit();
-                    Commons.Modules.ObjSystems.AddCombSearchLookUpEdit(cbo, "ID_CN", "HO_TEN", "ID_CN", grvDSUngVien, dtCN, this.Name);
 
-                    Commons.Modules.ObjSystems.AddCombXtra("ID_DAT", "DAT", "KT_NHANH_TAY", grvDSUngVien, tbDat, false, "ID_DAT", "DAT");
-                    Commons.Modules.ObjSystems.AddCombXtra("ID_DAT", "DAT", "DAT", grvDSUngVien, tbDat, false, "ID_DAT", "DAT");
-                }
-                else
-                {
-                    grdDSUngVien.DataSource = dt;
-                }
+
+                Commons.Modules.ObjSystems.AddCombXtra("ID_DAT", "DAT", "KT_NHANH_TAY", grvDSUngVien, tbDat, false, "ID_DAT", "DAT");
+                Commons.Modules.ObjSystems.AddCombXtra("ID_DAT", "DAT", "DAT", grvDSUngVien, tbDat, false, "ID_DAT", "DAT");
+
                 if (iAdd == 0)
                 {
                     grvDSUngVien.Columns["CHON"].Visible = false;
@@ -169,18 +171,20 @@ namespace Vs.Recruit
                 {
                     if (LoaiCN == 1)
                     {//may
-                        if(Convert.ToInt32(cboTayNghe.EditValue) == 1)
+                        if (Convert.ToInt32(cboTayNghe.EditValue) == 1)
                         {
                             //đào tạo
                             grvDSUngVien.Columns["KQ_VAI"].Visible = false;
                             grvDSUngVien.Columns["ID_DGTN"].Visible = false;
                             grvDSUngVien.Columns["NGUOI_DANH_GIA_2"].Visible = false;
-                            grvDSUngVien.Columns["ID_CN"].Visible = true;
+                            grvDSUngVien.Columns["MS_CN"].Visible = true;
+                            grvDSUngVien.Columns["HO_TEN_NGT"].Visible = true;
                             grvDSUngVien.Columns["THUONG_TAY_NGHE"].Visible = false;
 
                             grvDSUngVien.Columns["DAT"].VisibleIndex = 13;
-                            grvDSUngVien.Columns["ID_CN"].VisibleIndex = 14;
-                            grvDSUngVien.Columns["GHI_CHU"].VisibleIndex = 15;
+                            grvDSUngVien.Columns["MS_CN"].VisibleIndex = 14;
+                            grvDSUngVien.Columns["HO_TEN_NGT"].VisibleIndex = 15;
+                            grvDSUngVien.Columns["GHI_CHU"].VisibleIndex = 16;
 
                         }
                         else
@@ -191,31 +195,33 @@ namespace Vs.Recruit
                             grvDSUngVien.Columns["ID_DGTN"].Visible = true;
                             grvDSUngVien.Columns["ID_DGTN"].VisibleIndex = 10;
                             grvDSUngVien.Columns["NGUOI_DANH_GIA_2"].Visible = true;
-                            grvDSUngVien.Columns["NGUOI_DANH_GIA_2"].VisibleIndex  = 11;
+                            grvDSUngVien.Columns["NGUOI_DANH_GIA_2"].VisibleIndex = 11;
                             grvDSUngVien.Columns["THUONG_TAY_NGHE"].Visible = true;
                             grvDSUngVien.Columns["THUONG_TAY_NGHE"].VisibleIndex = 12;
 
                             //DAT	ID_CN	GHI_CHU
-                            grvDSUngVien.Columns["ID_CN"].Visible = true;
+                            grvDSUngVien.Columns["MS_CN"].Visible = true;
+                            grvDSUngVien.Columns["HO_TEN_NGT"].Visible = true;
                             grvDSUngVien.Columns["DAT"].VisibleIndex = 13;
-                            grvDSUngVien.Columns["ID_CN"].VisibleIndex = 14;
-                            grvDSUngVien.Columns["GHI_CHU"].VisibleIndex = 15;
-
-
-
+                            grvDSUngVien.Columns["MS_CN"].VisibleIndex = 14;
+                            grvDSUngVien.Columns["HO_TEN_NGT"].VisibleIndex = 15;
+                            grvDSUngVien.Columns["GHI_CHU"].VisibleIndex = 16;
                         }
+                        grvDSUngVien.Columns["KQ_GIAY"].Caption = "KQKT bài giấy";
                     }
                     else
                     {
-                       //công nhân khác
+                        //công nhân khác
 
                         grvDSUngVien.Columns["KQ_VAI"].Visible = false;
                         grvDSUngVien.Columns["ID_DGTN"].Visible = false;
                         grvDSUngVien.Columns["NGUOI_DANH_GIA_2"].Visible = false;
-                        grvDSUngVien.Columns["ID_CN"].Visible = false;
+                        grvDSUngVien.Columns["MS_CN"].Visible = false;
+                        grvDSUngVien.Columns["HO_TEN_NGT"].Visible = false;
                         grvDSUngVien.Columns["THUONG_TAY_NGHE"].Visible = false;
                         grvDSUngVien.Columns["DAT"].VisibleIndex = 14;
                         grvDSUngVien.Columns["GHI_CHU"].VisibleIndex = 15;
+                        grvDSUngVien.Columns["KQ_GIAY"].Caption = "KQKT tay nghề";
                     }
                     grvDSUngVien_FocusedRowChanged(null, null);
                 }
@@ -223,7 +229,7 @@ namespace Vs.Recruit
                 {
                 }
             }
-            catch(Exception ex){ }
+            catch (Exception ex) { }
         }
 
         private void CboDGTN_BeforePopup1(object sender, EventArgs e)
@@ -232,12 +238,12 @@ namespace Vs.Recruit
             {
                 //LoaiCN = 1 may, = 2 khác
                 LookUpEdit lookUp = sender as LookUpEdit;
-                DataTable dt =  Commons.Modules.ObjSystems.DataNguoiDanhGia(Convert.ToInt64(cboYCTD.EditValue),Convert.ToInt64(cboID_VTTD.EditValue),-1,-1,1,LoaiCN == 1 ? 1 : 3);
+                DataTable dt = Commons.Modules.ObjSystems.DataNguoiDanhGia(Convert.ToInt64(cboYCTD.EditValue), Convert.ToInt64(cboID_VTTD.EditValue), -1, -1, 1, LoaiCN == 1 ? 1 : 3);
                 lookUp.Properties.DataSource = dt;
                 string sdkien = "( 1 = 1 )";
                 try
                 {
-                    sdkien = "(ID_NGUOI_DGTN NOT IN (" +(grvDSUngVien.GetFocusedRowCellValue("NGUOI_DANH_GIA_2").ToString() == "-1" ? 0 : grvDSUngVien.GetFocusedRowCellValue("NGUOI_DANH_GIA_2")) +"))";
+                    sdkien = "(ID_NGUOI_DGTN NOT IN (" + (grvDSUngVien.GetFocusedRowCellValue("NGUOI_DANH_GIA_2").ToString() == "-1" ? 0 : grvDSUngVien.GetFocusedRowCellValue("NGUOI_DANH_GIA_2")) + "))";
                     dt.DefaultView.RowFilter = sdkien;
                 }
                 catch
@@ -258,7 +264,7 @@ namespace Vs.Recruit
             try
             {
                 LookUpEdit lookUp = sender as LookUpEdit;
-                DataTable dt = Commons.Modules.ObjSystems.DataNguoiDanhGia(Convert.ToInt64(cboYCTD.EditValue), Convert.ToInt64(cboID_VTTD.EditValue), -1, -1, 1,2);
+                DataTable dt = Commons.Modules.ObjSystems.DataNguoiDanhGia(Convert.ToInt64(cboYCTD.EditValue), Convert.ToInt64(cboID_VTTD.EditValue), -1, -1, 1, 2);
                 lookUp.Properties.DataSource = dt;
                 string sdkien = "( 1 = 1 )";
                 try
@@ -465,14 +471,14 @@ namespace Vs.Recruit
         {
             if (Commons.Modules.sLoad == "0Load") return;
             LoaiCN = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT ID_LT FROM dbo.LOAI_CONG_VIEC WHERE ID_LCV = " + cboID_VTTD.EditValue + ""));
-            if(LoaiCN == 1)
+            if (LoaiCN == 1)
             {
                 lblTayNghe.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
-            }    
+            }
             else
             {
                 lblTayNghe.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
-            }    
+            }
             LoadData();
             //grvDSUngVien_FocusedRowChanged(null, null);
         }
@@ -602,7 +608,7 @@ namespace Vs.Recruit
         {
             if (Commons.Modules.sLoad == "0Load") return;
             DataTable dt = new DataTable();
-            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT B.ID_LCV ID_VTTD,CASE " + Commons.Modules.TypeLanguage + " WHEN 0 THEN B.TEN_LCV WHEN 1 THEN B.TEN_LCV_A ELSE B.TEN_LCV_H END TEN_VTTD FROM dbo.YCTD_VI_TRI_TUYEN A INNER JOIN dbo.LOAI_CONG_VIEC B ON B.ID_LCV = A.ID_VTTD WHERE B.ID_CV = 206 AND A.ID_YCTD = " + cboYCTD.EditValue + " ORDER BY B.TEN_LCV"));
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT B.ID_LCV ID_VTTD,CASE " + Commons.Modules.TypeLanguage + " WHEN 0 THEN B.TEN_LCV WHEN 1 THEN B.TEN_LCV_A ELSE B.TEN_LCV_H END TEN_VTTD FROM dbo.YCTD_VI_TRI_TUYEN A INNER JOIN dbo.LOAI_CONG_VIEC B ON B.ID_LCV = A.ID_VTTD WHERE B.ID_CV in (206,208) AND A.ID_YCTD = " + cboYCTD.EditValue + " ORDER BY B.TEN_LCV"));
             Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_VTTD, dt, "ID_VTTD", "TEN_VTTD", "TEN_VTTD", true, true);
             LoadData();
         }
@@ -642,5 +648,33 @@ namespace Vs.Recruit
             if (Commons.Modules.sLoad == "0Load") return;
             LoadData();
         }
+
+        private void grvDSUngVien_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
+        {
+
+
+        }
+
+        //private void grvDSUngVien_CellValueChanging(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
+        //{
+        //    try
+        //    {
+        //        if (Commons.Modules.sLoad == "0Load") return;
+        //        if (e.Column.FieldName == "ID_CN")
+        //        {
+        //            string TenCN = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT HO + ' '+ TEN  FROM dbo.CONG_NHAN WHERE ID_CN = " + e.Value + "").ToString();
+        //            grvDSUngVien.SetRowCellValue(grvDSUngVien.FocusedRowHandle, "HO_TEN_NGT", TenCN);
+        //            Commons.Modules.sLoad = "0Load";
+        //            grvDSUngVien.SetRowCellValue(grvDSUngVien.FocusedRowHandle, "ID_CN", e.Value);
+        //            Commons.Modules.sLoad = "";
+        //            return;
+        //        }
+        //        return;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        XtraMessageBox.Show(ex.Message);
+        //    }
+        //}
     }
 }

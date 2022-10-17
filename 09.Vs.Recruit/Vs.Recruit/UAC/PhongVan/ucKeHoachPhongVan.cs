@@ -151,7 +151,7 @@ namespace Vs.Recruit
             //{
             //    dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT DISTINCT A.ID_YCTD,MA_YCTD FROM dbo.YEU_CAU_TUYEN_DUNG A INNER JOIN dbo.YCTD_VI_TRI_TUYEN B ON B.ID_YCTD = A.ID_YCTD INNER JOIN dbo.LOAI_CONG_VIEC C ON C.ID_LCV = B.ID_VTTD WHERE ID_TT != 3 AND C.ID_CV = 205 AND B.ID_TT_VT IN(3, 5, 6) AND A.ID_XN = " + cboBPYC.EditValue + "ORDER BY A.MA_YCTD DESC"));
             //}
-            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT DISTINCT A.ID_YCTD,MA_YCTD FROM dbo.YEU_CAU_TUYEN_DUNG A INNER JOIN dbo.YCTD_VI_TRI_TUYEN B ON B.ID_YCTD = A.ID_YCTD INNER JOIN dbo.LOAI_CONG_VIEC C ON C.ID_LCV = B.ID_VTTD WHERE ID_TT != 3 AND C.ID_CV != 206 AND B.ID_TT_VT IN(3, 5, 6) AND A.ID_XN = " + cboBPYC.EditValue + "ORDER BY A.MA_YCTD DESC"));
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT DISTINCT A.ID_YCTD,MA_YCTD FROM dbo.YEU_CAU_TUYEN_DUNG A INNER JOIN dbo.YCTD_VI_TRI_TUYEN B ON B.ID_YCTD = A.ID_YCTD INNER JOIN dbo.LOAI_CONG_VIEC C ON C.ID_LCV = B.ID_VTTD WHERE ID_TT != 3 AND C.ID_CV = 205 AND B.ID_TT_VT IN(3, 5, 6) AND A.ID_XN = " + cboBPYC.EditValue + "ORDER BY A.MA_YCTD DESC"));
             lookUp.Properties.DataSource = dt;
         }
 
@@ -167,7 +167,7 @@ namespace Vs.Recruit
                 //else
                 //{
                 DataTable dt = new DataTable();
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT DISTINCT A.ID_VTTD,CASE 0 WHEN 0 THEN TEN_LCV WHEN 1 THEN ISNULL(NULLIF(TEN_LCV_A,''),TEN_LCV) ELSE ISNULL(NULLIF(TEN_LCV_H,''),TEN_LCV) END AS TEN_VTTD FROM dbo.YCTD_VI_TRI_TUYEN A INNER JOIN dbo.LOAI_CONG_VIEC B ON B.ID_LCV = A.ID_VTTD WHERE A.ID_YCTD = " + grvViTri.GetFocusedRowCellValue("ID_YCTD") + " AND B.ID_CV != 206  AND A.ID_TT_VT IN (3,5,6) ORDER BY TEN_VTTD"));
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT DISTINCT A.ID_VTTD,CASE 0 WHEN 0 THEN TEN_LCV WHEN 1 THEN ISNULL(NULLIF(TEN_LCV_A,''),TEN_LCV) ELSE ISNULL(NULLIF(TEN_LCV_H,''),TEN_LCV) END AS TEN_VTTD FROM dbo.YCTD_VI_TRI_TUYEN A INNER JOIN dbo.LOAI_CONG_VIEC B ON B.ID_LCV = A.ID_VTTD WHERE A.ID_YCTD = " + grvViTri.GetFocusedRowCellValue("ID_YCTD") + " AND B.ID_CV = 205  AND A.ID_TT_VT IN (3,5,6) ORDER BY TEN_VTTD"));
                 lookUp.Properties.DataSource = dt;
                 //}
             }
@@ -777,7 +777,7 @@ namespace Vs.Recruit
             try
             {
                 DataTable dt = new DataTable();
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, " SELECT H.ID_XN,H.TEN_XN FROM (SELECT DISTINCT T.STT_DV, T.STT_XN, T.ID_XN, T.TEN_XN FROM(SELECT DISTINCT XN.STT_DV, XN.STT_XN, T1.ID_XN, XN.TEN_XN FROM dbo.LOAI_CONG_VIEC_XI_NGHIEP T1 INNER JOIN(SELECT DISTINCT ID_XN, TEN_XN, STT_XN, STT_DV FROM MGetToUser('" + Commons.Modules.UserName + "', " + Commons.Modules.TypeLanguage + ")) XN ON XN.ID_XN = T1.ID_XN)AS T INNER JOIN dbo.YEU_CAU_TUYEN_DUNG T2 ON T2.ID_XN = T.ID_XN  INNER JOIN dbo.YCTD_VI_TRI_TUYEN T3 ON T3.ID_YCTD = T2.ID_YCTD INNER JOIN dbo.LOAI_CONG_VIEC T4 ON T4.ID_LCV = T3.ID_VTTD WHERE T2.ID_TT = 2 AND T3.ID_TT_VT IN(3,5,6) AND T4.ID_CV != 206) H ORDER BY H.STT_DV, H.STT_XN"));
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, " SELECT H.ID_XN,H.TEN_XN FROM (SELECT DISTINCT T.STT_DV, T.STT_XN, T.ID_XN, T.TEN_XN FROM(SELECT DISTINCT XN.STT_DV, XN.STT_XN, T1.ID_XN, XN.TEN_XN FROM dbo.LOAI_CONG_VIEC_XI_NGHIEP T1 INNER JOIN(SELECT DISTINCT ID_XN, TEN_XN, STT_XN, STT_DV FROM MGetToUser('" + Commons.Modules.UserName + "', " + Commons.Modules.TypeLanguage + ")) XN ON XN.ID_XN = T1.ID_XN)AS T INNER JOIN dbo.YEU_CAU_TUYEN_DUNG T2 ON T2.ID_XN = T.ID_XN  INNER JOIN dbo.YCTD_VI_TRI_TUYEN T3 ON T3.ID_YCTD = T2.ID_YCTD INNER JOIN dbo.LOAI_CONG_VIEC T4 ON T4.ID_LCV = T3.ID_VTTD WHERE T2.ID_TT = 2 AND T3.ID_TT_VT IN(3,5,6) AND T4.ID_CV = 205) H ORDER BY H.STT_DV, H.STT_XN"));
                 Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboBPYC, dt, "ID_XN", "TEN_XN", "TEN_XN", true, true);
                 cboBPYC.EditValue = -99;
             }

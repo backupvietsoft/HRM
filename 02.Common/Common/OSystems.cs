@@ -1720,6 +1720,42 @@ namespace Commons
                 { }
             }
         }
+        public void ThayDoiNN(Form frm,WindowsUIButtonPanel btnWinUIB)
+        {
+            DataTable dtTmp = new DataTable();
+            dtTmp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT KEYWORD , CASE " + Modules.TypeLanguage + " WHEN 0 THEN VIETNAM WHEN 1 THEN ENGLISH ELSE CHINESE END AS NN  FROM LANGUAGES WHERE FORM = N'" + frm.Name + "' "));
+            frm.Text = GetNN(dtTmp, frm.Name, frm.Name);
+            List<Control> resultControlList = new List<Control>();
+            GetControlsCollection(frm, ref resultControlList, null);
+
+            foreach (Control control1 in resultControlList)
+            {
+                try
+                {
+                    DoiNN(control1, frm, dtTmp);
+                }
+                catch
+                { }
+            }
+
+            for (int i = 0; i < btnWinUIB.Buttons.Count; i++)
+            {
+                try
+                {
+                    if (btnWinUIB.Buttons[i].Properties.Tag.ToString() != null)
+                    {
+                        btnWinUIB.Size = new Size(btnWinUIB.Size.Width, 50);
+                        btnWinUIB.AllowGlyphSkinning = false;
+                        btnWinUIB.Buttons[i].Properties.Caption = GetNN(dtTmp, btnWinUIB.Buttons[i].Properties.Tag.ToString(), frm.Name);
+                        btnWinUIB.Buttons[i].Properties.ToolTip = GetNN(dtTmp, btnWinUIB.Buttons[i].Properties.Tag.ToString(), frm.Name);
+                    }
+                }
+                catch
+                {
+                }
+            }
+
+        }
 
         public void ThayDoiNN(XtraReport report)
         {
@@ -3457,7 +3493,7 @@ namespace Commons
             }
             catch
             {
-                if (sKeyWord.Substring(0, 3).ToString().ToLower() == "chk")
+                if (sKeyWord.Substring(0, 2).ToString().ToLower() == "ch")
                 {
                     sNN = "";
                 }
@@ -5084,7 +5120,7 @@ namespace Commons
         {
             //ID_LCV,TEN_LCV
             DataTable dt = new DataTable();
-            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboLoaiCV", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll, -1));
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboLoaiCV", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll,-1, -1));
             return dt;
         }
         public DataTable DataMucDoTieng(bool coAll)

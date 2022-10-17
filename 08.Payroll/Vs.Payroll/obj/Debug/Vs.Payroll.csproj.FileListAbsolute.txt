@@ -2312,7 +2312,6 @@ H:\Lamviec\Lamviec\HRM\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.frmDonH
 H:\Lamviec\Lamviec\HRM\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.frmEditMaHang.resources
 H:\Lamviec\Lamviec\HRM\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\VS.OEE.frmImport.resources
 H:\Lamviec\Lamviec\HRM\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.frmImportTienThuongPhuCap.resources
-H:\Lamviec\Lamviec\HRM\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.Form.frmInBaoCaoPCD.resources
 H:\Lamviec\Lamviec\HRM\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.frmInBaoCaoHTTienDo.resources
 H:\Lamviec\Lamviec\HRM\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.frmLayDuLieuLuongT13.resources
 H:\Lamviec\Lamviec\HRM\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\VS.ERP.frmPhieuNhapKho_Import.resources
@@ -2870,3 +2869,4 @@ F:\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.csproj.CoreCompileInputs.ca
 F:\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.csproj.CopyComplete
 F:\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.dll
 F:\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.pdb
+H:\Lamviec\Lamviec\HRM\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.frmInBaoCaoPCD.resources

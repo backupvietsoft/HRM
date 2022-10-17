@@ -1196,7 +1196,7 @@ namespace Commons
                 cbo.Properties.View.Columns[0].Visible = false;
                 if (TenCot != "")
                 {
-                    cbo.Properties.View.Columns[Ten].SortOrder = DevExpress.Data.ColumnSortOrder.Ascending;
+                    //cbo.Properties.View.Columns[Ten].SortOrder = DevExpress.Data.ColumnSortOrder.Ascending;
                 }
                 cbo.Properties.View.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
                 cbo.Properties.View.Appearance.HeaderPanel.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;

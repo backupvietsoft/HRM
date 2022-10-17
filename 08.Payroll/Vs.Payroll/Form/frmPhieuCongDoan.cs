@@ -42,14 +42,14 @@ namespace Vs.Payroll
             try
             {
                 Commons.Modules.sLoad = "0Load";
-                Commons.Modules.ObjSystems.LoadCboDonVi(cboDV);
+                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboDV, Commons.Modules.ObjSystems.DataDonVi(false), "ID_DV", "TEN_DV", "TEN_DV");
 
                 DataTable dt = new DataTable();
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT  T.ID_XN,T.TEN_XN FROM (SELECT  DISTINCT  STT_DV, STT_XN, ID_XN, TEN_XN  AS TEN_XN  FROM dbo.MGetToUser('" + Commons.Modules.UserName + "', " + Commons.Modules.TypeLanguage + ") WHERE ID_DV = " + cboDV.EditValue + " OR " + cboDV.EditValue + " = -1 AND ID_LOAI_CHUYEN IN(1, 2, 3, 4, 5, 6, 7) UNION SELECT - 1, -1, -1, '< All >') T ORDER BY T.STT_DV, T.STT_XN"));
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT  T.ID_XN,T.TEN_XN FROM (SELECT  DISTINCT  STT_DV, STT_XN, STT_TO ,ID_XN, TEN_XN  AS TEN_XN  FROM dbo.MGetToUser('" + Commons.Modules.UserName + "', " + Commons.Modules.TypeLanguage + ") WHERE ID_DV = " + cboDV.EditValue + " OR " + cboDV.EditValue + " = -1 AND ID_LOAI_CHUYEN IN(1, 2, 3, 4, 5, 6, 7) UNION SELECT - 1, -1, -1, -1, '< All >') T ORDER BY T.STT_DV, T.STT_XN, T.STT_TO"));
                 Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboXN, dt, "ID_XN", "TEN_XN", "TEN_XN");
 
                 dt = new DataTable();
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT  ID_TO, TEN_TO FROM dbo.MGetToUser('" + Commons.Modules.UserName + "'," + Commons.Modules.TypeLanguage + ") WHERE ID_LOAI_CHUYEN IN (1,2,3,4,5,6,7) AND (ID_DV = " + cboDV.EditValue + " OR " + cboDV.EditValue + " =-1) AND (ID_XN =" + cboXN.EditValue + " OR " + cboXN.EditValue + " = -1) UNION SELECT - 1, '< All >' ORDER BY  TEN_TO"));
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT T2.ID_TO, T2.TEN_TO FROM (SELECT  ID_TO, TEN_TO, STT_TO FROM dbo.MGetToUser('" + Commons.Modules.UserName + "', " + Commons.Modules.TypeLanguage + ") WHERE ID_LOAI_CHUYEN IN(1, 2, 3, 4, 5, 6, 7) AND(ID_DV = " + cboDV.EditValue + " OR " + cboDV.EditValue + " = -1) AND(ID_XN = " + cboXN.EditValue + " OR " + cboXN.EditValue + " = -1) UNION SELECT - 1, '< All >', -1) T2 ORDER BY  STT_TO "));
                 Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboTo, dt, "ID_TO", "TEN_TO", "TEN_TO");
 
 
@@ -89,7 +89,7 @@ namespace Vs.Payroll
         {
             try
             {
-                string sSql = "SELECT [TO].ID_TO, [TO].TEN_TO FROM dbo.[TO] INNER JOIN dbo.XI_NGHIEP XN ON XN.ID_XN = [TO].ID_XN WHERE [TO].ID_LOAI_CHUYEN IN (1,2,3,4,5,6,7) AND (XN.ID_DV = " + cboDV.EditValue + " OR " + cboDV.EditValue + " = -1) ORDER BY [TO].TEN_TO";
+                string sSql = "SELECT [TO].ID_TO, [TO].TEN_TO FROM dbo.[TO] INNER JOIN dbo.XI_NGHIEP XN ON XN.ID_XN = [TO].ID_XN WHERE [TO].ID_LOAI_CHUYEN IN (1,2,3,4,5,6,7) AND (XN.ID_DV = " + cboDV.EditValue + " OR " + cboDV.EditValue + " = -1) ORDER BY [TO].STT_TO";
                 DataTable dt = new DataTable();
                 dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSql));
                 Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboChuyen, dt, "ID_TO", "TEN_TO", "TEN_TO");
@@ -219,7 +219,7 @@ namespace Vs.Payroll
 
                 DataTable dt = new DataTable();
                 dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spPCDGetCDoan", cboDV.EditValue, cboXN.EditValue, cboTo.EditValue, Commons.Modules.UserName,
-                        Commons.Modules.TypeLanguage, iChuyen, iOrd, dtNgay));
+                        Commons.Modules.TypeLanguage, iChuyenSuDung, iOrd, dtNgay));
                 dtCD = dt;
                 if (grdCD.DataSource == null)
                 {
@@ -346,12 +346,10 @@ namespace Vs.Payroll
         {
             if (Commons.Modules.sLoad == "0Load") return;
             grvCD.UpdateCurrentRow();
-            if (grvPCD.RowCount != 0)
-            {
-                iChuyenSuDung = Convert.ToInt32(grvPCD.GetFocusedRowCellValue("ID_CHUYEN_SD").ToString());
-                iChuyen = Convert.ToInt32(grvPCD.GetFocusedRowCellValue("ID_CHUYEN").ToString());
-                iOrd = Convert.ToInt32(grvPCD.GetFocusedRowCellValue("ID_ORD").ToString());
-            }
+
+            iChuyenSuDung = grvPCD.GetFocusedRowCellValue("ID_CHUYEN_SD") == null ? -1 : Convert.ToInt32(grvPCD.GetFocusedRowCellValue("ID_CHUYEN_SD").ToString());
+            iChuyen = grvPCD.GetFocusedRowCellValue("ID_CHUYEN") == null ? -1 : Convert.ToInt32(grvPCD.GetFocusedRowCellValue("ID_CHUYEN").ToString());
+            iOrd = grvPCD.GetFocusedRowCellValue("ID_ORD") == null ? -1 : Convert.ToInt32(grvPCD.GetFocusedRowCellValue("ID_ORD").ToString());
             LoadCD();
             LoadCN();
             LoadCboMSCN();
@@ -465,7 +463,7 @@ namespace Vs.Payroll
                 Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboXN, dt, "ID_XN", "TEN_XN", "TEN_XN");
 
                 dt = new DataTable();
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT  ID_TO, TEN_TO FROM dbo.MGetToUser('" + Commons.Modules.UserName + "'," + Commons.Modules.TypeLanguage + ") WHERE ID_LOAI_CHUYEN IN (1,2,3,4,5,6,7) AND (ID_DV = " + cboDV.EditValue + " OR " + cboDV.EditValue + " =-1) AND (ID_XN =" + cboXN.EditValue + " OR " + cboXN.EditValue + " = -1) UNION SELECT - 1, '< All >' ORDER BY  TEN_TO"));
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT T2.ID_TO, T2.TEN_TO FROM (SELECT  ID_TO, TEN_TO, STT_TO FROM dbo.MGetToUser('" + Commons.Modules.UserName + "', " + Commons.Modules.TypeLanguage + ") WHERE ID_LOAI_CHUYEN IN(1, 2, 3, 4, 5, 6, 7) AND(ID_DV = " + cboDV.EditValue + " OR " + cboDV.EditValue + " = -1) AND(ID_XN = " + cboXN.EditValue + " OR " + cboXN.EditValue + " = -1) UNION SELECT - 1, '< All >', -1) T2 ORDER BY  STT_TO "));
                 Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboTo, dt, "ID_TO", "TEN_TO", "TEN_TO");
                 LoadChuyen();
             }
@@ -484,9 +482,11 @@ namespace Vs.Payroll
         private void cboTo_EditValueChanged(object sender, EventArgs e)
         {
             if (Commons.Modules.sLoad == "0Load") return;
+            LoadPCD();
             LoadCN();
             LoadCboMSCN();
             LoadCD();
+            grvTo_FocusedRowChanged(null, null);
         }
 
         private void cboNgay_EditValueChanged_1(object sender, EventArgs e)
@@ -710,13 +710,14 @@ namespace Vs.Payroll
 
                 case "in":
                     {
+                        if (grvPCD.RowCount == 0) return;
                         DateTime Ngay = DateTime.ParseExact(cboNgay.Text, "dd/MM/yyyy", cultures);
 
                         iChuyen = Convert.ToInt32(grvPCD.GetFocusedRowCellValue("ID_CHUYEN"));
                         iChuyenSuDung = Convert.ToInt32(grvPCD.GetFocusedRowCellValue("ID_CHUYEN_SD"));
                         iOrd = Convert.ToInt32(grvPCD.GetFocusedRowCellValue("ID_ORD"));
 
-                        Form.frmInBaoCaoPCD frm = new Form.frmInBaoCaoPCD(Ngay, Convert.ToInt64(iChuyen), Convert.ToInt64(iChuyenSuDung), Convert.ToInt64(iOrd));
+                        frmInBaoCaoPCD frm = new frmInBaoCaoPCD(Ngay, Convert.ToInt64(iChuyen), Convert.ToInt64(iChuyenSuDung), Convert.ToInt64(iOrd));
                         //frm.Size = new Size(750, 213);
                         //frm.StartPosition = FormStartPosition.CenterParent;
                         //frm.Size = new Size((this.Width / 2) + (frm.Width / 2), (this.Height / 2) + (frm.Height / 2));

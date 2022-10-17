@@ -39,6 +39,8 @@ namespace Vs.Payroll
 
             LoadHD(0);
 
+            lblOrder.Visible = false;
+            cboOrd.Visible = false;
 
             Commons.Modules.sPS = "";
         }
@@ -52,7 +54,7 @@ namespace Vs.Payroll
                 {
                     iHD = Convert.ToInt32(cboHD.EditValue.ToString());
                     iMH = Convert.ToInt32(cboMH.EditValue.ToString());
-                    iOrd = Convert.ToInt32(cboOrd.EditValue.ToString());
+                    iOrd = Convert.ToInt32(cboMH.EditValue.ToString());
                     iChuyen = Convert.ToInt32(cboChuTH.EditValue.ToString());
                     iChuyenSuDung = Convert.ToInt32(cboChuSD.EditValue.ToString());
                 }

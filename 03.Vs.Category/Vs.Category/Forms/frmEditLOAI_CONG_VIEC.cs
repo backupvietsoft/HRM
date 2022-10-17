@@ -35,7 +35,7 @@ namespace Vs.Category
                 //DataTable dt = new DataTable();
                 //dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboCongNhan", Commons.Modules.UserName, Commons.Modules.TypeLanguage, 3));
 
-                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboChucVu, Commons.Modules.ObjSystems.DataChucVu(false,Convert.ToInt32(-1)) , "ID_CV", "TEN_CV", "TEN_CV");
+                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboChucVu, Commons.Modules.ObjSystems.DataChucVu(false, Convert.ToInt32(-1)), "ID_CV", "TEN_CV", "TEN_CV");
 
                 //Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboChucVu, Commons.Modules.ObjSystems.DataXiNghiep(-1,false) , "ID_XN", "TEN_XN", "TEN_XN");
                 ItemForTEN_CV.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
@@ -75,7 +75,7 @@ namespace Vs.Category
         {
             try
             {
-                string sSql = "SELECT ID_LCV, TEN_LCV, TEN_LCV_A, TEN_LCV_H, DOC_HAI, PHEP_CT, ID_LT,ID_CV, STT " +
+                string sSql = "SELECT * " +
                     "FROM LOAI_CONG_VIEC WHERE ID_LCV =	" + Id.ToString();
                 DataTable dtTmp = new DataTable();
                 dtTmp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSql));
@@ -87,6 +87,10 @@ namespace Vs.Category
                 ID_LTSearchLookUpEdit.EditValue = dtTmp.Rows[0]["ID_LT"];
                 cboChucVu.EditValue = dtTmp.Rows[0]["ID_CV"].ToString() == "" ? -1 : Convert.ToInt64(dtTmp.Rows[0]["ID_CV"]);
                 txtSTT.EditValue = Convert.ToInt32(dtTmp.Rows[0]["STT"]);
+                txtCHUC_DANH.EditValue = dtTmp.Rows[0]["CHUC_DANH"];
+                txtMO_TA_CV.EditValue = dtTmp.Rows[0]["MO_TA_CV_BHXH"];
+                txtCHUC_DANH_A.EditValue = dtTmp.Rows[0]["CHUC_DANH_A"];
+                txtMO_TA_CV_A.EditValue = dtTmp.Rows[0]["MO_TA_CV_BHXH_A"];
             }
             catch
             {
@@ -104,6 +108,10 @@ namespace Vs.Category
                 TEN_LCVTextEdit.Focus();
                 cboChucVu.EditValue = -1;
                 txtSTT.EditValue = 1;
+                txtCHUC_DANH.Text = "";
+                txtMO_TA_CV.Text = "";
+                txtCHUC_DANH_A.Text = "";
+                txtMO_TA_CV_A.Text = "";
             }
             catch { }
         }
@@ -126,7 +134,9 @@ namespace Vs.Category
                                 (PHEP_CTTextEdit.EditValue == null) ? 0 : PHEP_CTTextEdit.EditValue,
                                 ID_LTSearchLookUpEdit.Text.Trim() == "" ? ID_LTSearchLookUpEdit.EditValue = null : ID_LTSearchLookUpEdit.EditValue,
                                 Convert.ToInt64(cboChucVu.Text == "" ? cboChucVu.EditValue = null : cboChucVu.EditValue),
-                                (txtSTT.Text == "") ? txtSTT.EditValue = null : txtSTT.EditValue
+                                (txtSTT.Text == "") ? txtSTT.EditValue = null : txtSTT.EditValue,
+                                txtCHUC_DANH.Text, txtCHUC_DANH_A.Text,
+                                txtMO_TA_CV.Text, txtMO_TA_CV_A.Text
                                 ).ToString();
                             if (AddEdit)
                             {

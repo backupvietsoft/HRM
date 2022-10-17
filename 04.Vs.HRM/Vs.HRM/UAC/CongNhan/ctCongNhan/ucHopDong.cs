@@ -19,6 +19,8 @@ namespace Vs.HRM
         DataTable tableTTC_CN = new DataTable();
         string strDuongDan = "";
         WindowsUIButton btn1 = null;
+        string sCHUC_DANH_A = "";
+        string sMO_TA_CV_A = "";
         public ucHopDong(Int64 id)
         {
             InitializeComponent();
@@ -85,7 +87,8 @@ namespace Vs.HRM
             MUC_LUONG_THUC_LINHTextEdit.Properties.ReadOnly = visible;
             DIA_DIEM_LAM_VIECTextEdit.Properties.ReadOnly = visible;
             DIA_CHI_NOI_LAM_VIECTextEdit.Properties.ReadOnly = visible;
-            CONG_VIECTextEdit.Properties.ReadOnly = visible;
+            CONG_VIECTextEdit.Properties.ReadOnly = true;
+            txtMO_TA_CV.Properties.ReadOnly = true;
             ID_CVLookUpEdit.Properties.ReadOnly = visible;
             SO_NGAY_PHEPTextEdit.Properties.ReadOnly = visible;
             NGUOI_KY_GIA_HANLookUpEdit.Properties.ReadOnly = visible;
@@ -124,7 +127,10 @@ namespace Vs.HRM
                     MUC_LUONG_THUC_LINHTextEdit.EditValue = Convert.ToDouble(MUC_LUONG_CHINHTextEdit.EditValue) + Convert.ToDouble(CHI_SO_PHU_CAPTextEdit.EditValue);
                     DIA_DIEM_LAM_VIECTextEdit.EditValue = tableTTC_CN.Rows[0]["TEN_DV"];
                     DIA_CHI_NOI_LAM_VIECTextEdit.EditValue = tableTTC_CN.Rows[0]["DIA_CHI"];
-                    CONG_VIECTextEdit.EditValue = tableTTC_CN.Rows[0]["TEN_LCV"];
+                    CONG_VIECTextEdit.EditValue = tableTTC_CN.Rows[0]["CHUC_DANH"];
+                    sCHUC_DANH_A = tableTTC_CN.Rows[0]["CHUC_DANH_A"].ToString();
+                    txtMO_TA_CV.EditValue = tableTTC_CN.Rows[0]["MO_TA_CV_BHXH"];
+                    sMO_TA_CV_A = tableTTC_CN.Rows[0]["MO_TA_CV_BHXH_A"].ToString();
                     ngayhethan(Convert.ToInt32(ID_LHDLDLookUpEdit.EditValue));
                     ID_CVLookUpEdit.EditValue = tableTTC_CN.Rows[0]["ID_CV"];
                     SO_NGAY_PHEPTextEdit.EditValue = "";
@@ -134,7 +140,8 @@ namespace Vs.HRM
                     cboTinhTrang.EditValue = 1;
                     cboNgachLuong.EditValue = "";
                     cboBAC_LUONG.EditValue = "";
-
+                    
+                    sMO_TA_CV_A = "";
                 }
                 catch (Exception ex)
                 {
@@ -164,12 +171,14 @@ namespace Vs.HRM
                     DIA_DIEM_LAM_VIECTextEdit.EditValue = grvHopDong.GetFocusedRowCellValue("DIA_DIEM_LAM_VIEC");
                     DIA_CHI_NOI_LAM_VIECTextEdit.EditValue = grvHopDong.GetFocusedRowCellValue("DIA_CHI_NOI_LAM_VIEC");
                     CONG_VIECTextEdit.EditValue = grvHopDong.GetFocusedRowCellValue("CONG_VIEC");
+                    sCHUC_DANH_A = grvHopDong.GetFocusedRowCellValue("CONG_VIEC_ENG").ToString();
+                    sMO_TA_CV_A = grvHopDong.GetFocusedRowCellValue("MO_TA_CV_A").ToString();
+                    txtMO_TA_CV.EditValue = grvHopDong.GetFocusedRowCellValue("MO_TA_CV");
                     ID_CVLookUpEdit.EditValue = grvHopDong.GetFocusedRowCellValue("ID_CV");
                     SO_NGAY_PHEPTextEdit.EditValue = grvHopDong.GetFocusedRowCellValue("SO_NGAY_PHEP");
                     NGUOI_KY_GIA_HANLookUpEdit.EditValue = Convert.ToInt32(grvHopDong.GetFocusedRowCellValue("NGUOI_KY_GIA_HAN"));
                     cboTinhTrang.EditValue = string.IsNullOrEmpty(grvHopDong.GetFocusedRowCellValue("ID_TT").ToString()) ? cboTinhTrang.EditValue = null : Convert.ToInt32(grvHopDong.GetFocusedRowCellValue("ID_TT"));
                     txtTaiLieu.EditValue = grvHopDong.GetFocusedRowCellValue("TAI_LIEU");
-
                 }
                 catch
                 {
@@ -210,7 +219,10 @@ namespace Vs.HRM
                 MUC_LUONG_THUC_LINHTextEdit.EditValue,
                 DIA_DIEM_LAM_VIECTextEdit.EditValue,
                 DIA_CHI_NOI_LAM_VIECTextEdit.EditValue,
-                CONG_VIECTextEdit.EditValue,
+                CONG_VIECTextEdit.Text,
+                sCHUC_DANH_A,
+                txtMO_TA_CV.Text,
+                sMO_TA_CV_A,
                 ID_CVLookUpEdit.EditValue,
                 SO_NGAY_PHEPTextEdit.EditValue,
                 NGUOI_KY_GIA_HANLookUpEdit.EditValue, cboTinhTrang.EditValue, txtTaiLieu.EditValue,
@@ -267,6 +279,9 @@ namespace Vs.HRM
             grvHopDong.Columns["DIA_DIEM_LAM_VIEC"].Visible = false;
             grvHopDong.Columns["DIA_CHI_NOI_LAM_VIEC"].Visible = false;
             grvHopDong.Columns["CONG_VIEC"].Visible = false;
+            grvHopDong.Columns["MO_TA_CV"].Visible = false;
+            grvHopDong.Columns["CONG_VIEC_ENG"].Visible = false;
+            grvHopDong.Columns["MO_TA_CV_A"].Visible = false;
             grvHopDong.Columns["ID_CV"].Visible = false;
             grvHopDong.Columns["SO_NGAY_PHEP"].Visible = false;
             grvHopDong.Columns["NGUOI_KY_GIA_HAN"].Visible = false;

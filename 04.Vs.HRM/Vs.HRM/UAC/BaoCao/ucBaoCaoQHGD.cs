@@ -24,7 +24,7 @@ namespace Vs.HRM
         public ucBaoCaoQHGD()
         {
             InitializeComponent();
-            Commons.Modules.ObjSystems.ThayDoiNN(this);
+            Commons.Modules.ObjSystems.ThayDoiNN(this,windowsUIButton);
         }
 
         //Update

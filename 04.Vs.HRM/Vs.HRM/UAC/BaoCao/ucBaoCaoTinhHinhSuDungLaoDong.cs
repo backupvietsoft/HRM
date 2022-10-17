@@ -20,7 +20,7 @@ namespace Vs.HRM
         public ucBaoCaoTinhHinhSuDungLaoDong()
         {
             InitializeComponent();
-            Commons.Modules.ObjSystems.ThayDoiNN(this);
+            Commons.Modules.ObjSystems.ThayDoiNN(this,windowsUIButton);
             dtNAM.EditValue = DateTime.Now;
             dtTmp = LoadText();
             ShowText(dtTmp);

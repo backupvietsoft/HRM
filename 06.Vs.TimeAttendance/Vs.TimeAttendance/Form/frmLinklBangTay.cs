@@ -11,6 +11,7 @@ using DevExpress.XtraEditors;
 using Microsoft.ApplicationBlocks.Data;
 using DevExpress.XtraBars.Docking2010;
 using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraEditors.Repository;
 
 namespace Vs.TimeAttendance
 {
@@ -18,14 +19,29 @@ namespace Vs.TimeAttendance
     {
         public DateTime ngaylink;
         public int flag = 0;
+        RepositoryItemTimeEdit repositoryItemTimeEdit1;
         public frmLinklBangTay()
         {
             InitializeComponent();
             Commons.Modules.ObjSystems.ThayDoiNN(this, Root, btnALL);
+            repositoryItemTimeEdit1 = new RepositoryItemTimeEdit();
+
         }
         private void frmLinklBangTay_Load(object sender, EventArgs e)
         {
             Commons.Modules.sLoad = "0Load";
+
+            repositoryItemTimeEdit1.TimeEditStyle = TimeEditStyle.TouchUI;
+            repositoryItemTimeEdit1.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.DateTimeAdvancingCaret;
+            repositoryItemTimeEdit1.Mask.EditMask = "HH:mm:ss";
+
+            repositoryItemTimeEdit1.NullText = "00:00:00";
+            repositoryItemTimeEdit1.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            repositoryItemTimeEdit1.DisplayFormat.FormatString = "HH:mm:ss";
+            repositoryItemTimeEdit1.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            repositoryItemTimeEdit1.EditFormat.FormatString = "HH:mm:ss";
+
+
             //         //ID_NHOM,TEN_NHOM
             Commons.Modules.ObjSystems.MLoadLookUpEdit(cboNhomCC, Commons.Modules.ObjSystems.DataNhom(true), "ID_NHOM", "TEN_NHOM", Commons.Modules.ObjLanguages.GetLanguage(this.Name, "TEN_NHOM"));
             LoadLookupCa();
@@ -87,6 +103,8 @@ namespace Vs.TimeAttendance
                 grvChamCongTay.Columns["ID_CN"].Visible = false;
                 grvChamCongTay.Columns["CHON"].Visible = false;
                 grvChamCongTay.Columns["ID_NHOM"].Visible = false;
+                grvChamCongTay.Columns["GIO_DEN"].ColumnEdit = this.repositoryItemTimeEdit1;
+                grvChamCongTay.Columns["GIO_VE"].ColumnEdit = this.repositoryItemTimeEdit1;
             }
             else
             {
@@ -165,13 +183,11 @@ namespace Vs.TimeAttendance
                         {
                             string sBT = "BTKinkTay" + Commons.Modules.iIDUser;
                             Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBT, Commons.Modules.ObjSystems.ConvertDatatable(grvChamCongTay), "");
-                            SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spThemDuLieuQuetTheTay",
-                             cboNhomCC.EditValue, cboHS.EditValue, datNgayDen.DateTime, timGioDen.EditValue, datNgayVe.DateTime, timGioVe.EditValue, sBT);
                             DataTable dt = new DataTable();
-                            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT * FROM " + sBT));
+                            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spThemDuLieuQuetTheTay",
+                             cboNhomCC.EditValue, cboHS.EditValue, datNgayDen.DateTime, timGioDen.EditValue, datNgayVe.DateTime, timGioVe.EditValue, sBT));
                             grdChamCongTay.DataSource = dt;
                             Commons.Modules.ObjSystems.XoaTable(sBT);
-                           
                         }
                         catch (Exception ex)
                         {

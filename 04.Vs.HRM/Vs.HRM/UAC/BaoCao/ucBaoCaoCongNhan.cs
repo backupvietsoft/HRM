@@ -27,7 +27,7 @@ namespace Vs.HRM
         {
 
             InitializeComponent();
-            Commons.Modules.ObjSystems.ThayDoiNN(this);
+            Commons.Modules.ObjSystems.ThayDoiNN(this,windowsUIButton);
 
             //Danh cho NB
             this.chkInAll.Visible = false;

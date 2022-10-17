@@ -25,7 +25,7 @@ namespace Vs.TimeAttendance
         {
             dNgay = dngay;
             InitializeComponent();
-            Commons.Modules.ObjSystems.ThayDoiNN(this, Root);
+            Commons.Modules.ObjSystems.ThayDoiNN(this, Root,windowsUIButton);
             repositoryItemTimeEdit1 = new RepositoryItemTimeEdit();
 
         }
@@ -60,11 +60,11 @@ namespace Vs.TimeAttendance
                 datGioKT.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.DateTimeAdvancingCaret;
                 datGioKT.Properties.Mask.EditMask = "HH:mm:ss";
 
-                txtSoGioTC.Properties.DisplayFormat.FormatString = "0.0";
+                txtSoGioTC.Properties.DisplayFormat.FormatString = "0.00";
                 txtSoGioTC.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-                txtSoGioTC.Properties.EditFormat.FormatString = "0.0";
+                txtSoGioTC.Properties.EditFormat.FormatString = "0.00";
                 txtSoGioTC.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-                txtSoGioTC.Properties.Mask.EditMask = "0.0";
+                txtSoGioTC.Properties.Mask.EditMask = "0.00";
                 txtSoGioTC.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
                 txtSoGioTC.Properties.Mask.UseMaskAsDisplayFormat = true;
             }

@@ -21,7 +21,7 @@ namespace Vs.TimeAttendance
         public ucBaoCaoTheoNgay()
         {
             InitializeComponent();
-            Commons.Modules.ObjSystems.ThayDoiNN(this);
+            Commons.Modules.ObjSystems.ThayDoiNN(this,windowsUIButton);
         }
 
 

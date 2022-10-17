@@ -1215,7 +1215,10 @@ namespace Commons
                 }
 
             }
-            catch { }
+            catch
+            {
+                
+            }
         }
         public void AddCombSearchLookUpEdit(RepositoryItemSearchLookUpEdit cboSearch, string Value, string Display, string cot, GridView grv, DataTable dtTmp, string form)
         {
@@ -4057,7 +4060,7 @@ namespace Commons
             cbo.View.PopulateColumns(cbo.DataSource);
             cbo.View.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             cbo.View.Appearance.HeaderPanel.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            cbo.View.Columns[Display].SortOrder = DevExpress.Data.ColumnSortOrder.Ascending;
+            //cbo.View.Columns[Display].SortOrder = DevExpress.Data.ColumnSortOrder.Ascending;
             Commons.Modules.ObjSystems.MLoadNNXtraGrid(cbo.View, fName);
             cbo.View.Columns[cotan].Visible = false;
         }
@@ -5148,11 +5151,11 @@ namespace Commons
             return dt;
         }
 
-        public DataTable DataNguoiDanhGia(Int64 iYCTD, Int64 iVTTD, Int64 iDV, Int64 iXN,int active,int iLoaiDG = -1)
+        public DataTable DataNguoiDanhGia(Int64 iYCTD, Int64 iVTTD, Int64 iDV, Int64 iXN, int active, int iLoaiDG = -1)
         {
             //ID_NGUOI_DGTN,TEN_NGUOI_DGTN
             DataTable dt = new DataTable();
-            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboNguoiDanhGia", Commons.Modules.UserName,iYCTD,iVTTD,iDV,iXN, active,iLoaiDG));
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboNguoiDanhGia", Commons.Modules.UserName, iYCTD, iVTTD, iDV, iXN, active, iLoaiDG));
             return dt;
         }
 

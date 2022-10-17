@@ -18,7 +18,7 @@ namespace Vs.Payroll
         public ucBCLuongSanPham()
         {
             InitializeComponent();
-            Commons.Modules.ObjSystems.ThayDoiNN(this);
+            Commons.Modules.ObjSystems.ThayDoiNN(this,windowsUIButton);
         }
         static string CharacterIncrement(int colCount)
         {

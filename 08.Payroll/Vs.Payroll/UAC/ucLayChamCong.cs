@@ -140,74 +140,78 @@ namespace Vs.Payroll
 
         private void windowsUIButtonPanel1_ButtonClick(object sender, DevExpress.XtraBars.Docking2010.ButtonEventArgs e)
         {
-            WindowsUIButton btn = e.Button as WindowsUIButton;
-            XtraUserControl ctl = new XtraUserControl();
-            switch (btn.Tag.ToString())
+            try
             {
-                case "themsua":
-                    {
-                        grvData.OptionsBehavior.Editable = true;
-                        EnableButon(true);
-                        break;
-                    }
-                case "xoa":
-                    {
-                        XoaCheDoLV();
-                        LoadGrdGTGC();
-                        //LoadGrdGTGC_DM();
-
-                        break;
-                    }
-                case "ghi":
-                    {
-                        Validate();
-                        if (grvData.HasColumnErrors) return;
-                        if (Savedata() == false)
+                WindowsUIButton btn = e.Button as WindowsUIButton;
+                XtraUserControl ctl = new XtraUserControl();
+                switch (btn.Tag.ToString())
+                {
+                    case "themsua":
                         {
-                            Commons.Modules.ObjSystems.msgChung(Commons.ThongBao.msgDuLieuDangSuDung);
-                        }
-                        LoadGrdGTGC();
-                        //LoadGrdGTGC_DM();
-
-                        EnableButon(false);
-                        break;
-                    }
-                case "khongghi":
-                    {
-                        grvData.OptionsBehavior.Editable = false;
-                        LoadGrdGTGC();
-                        //LoadGrdGTGC_DM();
-                        EnableButon(false);
-                        break;
-                    }
-                case "laycong":
-                    {
-                        try
-                        {
-                            grdData.DataSource = null;
-                            DateTime Tngay = Convert.ToDateTime(cboThang.EditValue);
-                            DateTime Dngay = Convert.ToDateTime(cboThang.EditValue).AddMonths(1).AddDays(-1);
-                            DataTable dt = new DataTable();
-                            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, (kyHieuDV == "DM" ? "spGetChamCongThang_DM" : "spGetChamCongThang"), Commons.Modules.UserName, Commons.Modules.TypeLanguage, cboDonVi.EditValue, cboXiNghiep.EditValue, cboTo.EditValue, Tngay, Dngay));
-                            Commons.Modules.ObjSystems.MLoadXtraGrid(grdData, grvData, dt, true, false, true, true, true, this.Name);
+                            grvData.OptionsBehavior.Editable = true;
                             EnableButon(true);
-                            dt.Columns["MS_CN"].ReadOnly = true;
-                            dt.Columns["HO_TEN"].ReadOnly = true;
-                            dt.Columns["TEN_TO"].ReadOnly = true;
-                            dt.Columns["TEN_CV"].ReadOnly = true;
-                            dt.Columns["CACH_TL"].ReadOnly = true;
+                            break;
                         }
-                        catch { }
+                    case "xoa":
+                        {
+                            XoaCheDoLV();
+                            LoadGrdGTGC();
+                            //LoadGrdGTGC_DM();
+
+                            break;
+                        }
+                    case "ghi":
+                        {
+                            Validate();
+                            if (grvData.HasColumnErrors) return;
+                            if (Savedata() == false)
+                            {
+                                Commons.Modules.ObjSystems.msgChung(Commons.ThongBao.msgDuLieuDangSuDung);
+                            }
+                            LoadGrdGTGC();
+                            //LoadGrdGTGC_DM();
+
+                            EnableButon(false);
+                            break;
+                        }
+                    case "khongghi":
+                        {
+                            grvData.OptionsBehavior.Editable = false;
+                            LoadGrdGTGC();
+                            //LoadGrdGTGC_DM();
+                            EnableButon(false);
+                            break;
+                        }
+                    case "laycong":
+                        {
+                            try
+                            {
+                                grdData.DataSource = null;
+                                DateTime Tngay = Convert.ToDateTime(cboThang.EditValue);
+                                DateTime Dngay = Convert.ToDateTime(cboThang.EditValue).AddMonths(1).AddDays(-1);
+                                DataTable dt = new DataTable();
+                                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, (kyHieuDV == "DM" ? "spGetChamCongThang_DM" : "spGetChamCongThang"), Commons.Modules.UserName, Commons.Modules.TypeLanguage, cboDonVi.EditValue, cboXiNghiep.EditValue, cboTo.EditValue, Tngay, Dngay));
+                                Commons.Modules.ObjSystems.MLoadXtraGrid(grdData, grvData, dt, true, false, true, true, true, this.Name);
+                                EnableButon(true);
+                                dt.Columns["MS_CN"].ReadOnly = true;
+                                dt.Columns["HO_TEN"].ReadOnly = true;
+                                dt.Columns["TEN_TO"].ReadOnly = true;
+                                dt.Columns["TEN_CV"].ReadOnly = true;
+                                dt.Columns["CACH_TL"].ReadOnly = true;
+                            }
+                            catch { }
 
 
-                        break;
-                    }
-                case "thoat":
-                    {
-                        Commons.Modules.ObjSystems.GotoHome(this);
-                        break;
-                    }
+                            break;
+                        }
+                    case "thoat":
+                        {
+                            Commons.Modules.ObjSystems.GotoHome(this);
+                            break;
+                        }
+                }
             }
+            catch { }
         }
 
         private void EnableButon(bool visible)
@@ -219,7 +223,6 @@ namespace Vs.Payroll
             btnALL.Buttons[4].Properties.Visible = !visible;
             btnALL.Buttons[5].Properties.Visible = visible;
             btnALL.Buttons[6].Properties.Visible = visible;
-            btnALL.Buttons[7].Properties.Visible = visible;
             cboTo.Enabled = !visible;
             cboThang.Enabled = !visible;
             cboDonVi.Enabled = !visible;

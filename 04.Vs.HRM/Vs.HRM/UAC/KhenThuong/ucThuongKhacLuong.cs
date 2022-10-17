@@ -1,6 +1,7 @@
 ﻿using DevExpress.Utils;
 using DevExpress.XtraBars.Docking2010;
 using DevExpress.XtraEditors;
+using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraLayout;
 using Microsoft.ApplicationBlocks.Data;
@@ -19,109 +20,83 @@ namespace Vs.HRM
         public ucThuongKhacLuong()
         {
             InitializeComponent();
-
             Commons.Modules.ObjSystems.ThayDoiNN(this, new List<LayoutControlGroup>() { Root }, windowsUIButton);
-        }
-
-        private void optCachThuong_Click(object sender, EventArgs e)
-        {
-            if(raCacTinh.SelectedIndex ==0)
-            {
-                txTienQuyDinh.Properties.ReadOnly = true;
-                txSoThang.Properties.ReadOnly = false;
-                txSoTien.Properties.ReadOnly = false;
-                txSoToiThieu.Properties.ReadOnly = false;
-            }
-            else
-            {
-                txSoThang.Properties.ReadOnly = true;
-                txSoTien.Properties.ReadOnly = true;
-                txSoToiThieu.Properties.ReadOnly = true;
-                txTienQuyDinh.Properties.ReadOnly = false;
-            }
         }
 
         private void LoadThang(DateTime dThang)
         {
-            DataTable dt = new DataTable();
-            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr
-                , "spThuongKhacLuong"
-                , "01/01/1900"
-                , "01/01/1900"
-                , -1, -1, -1
-                , Commons.Modules.UserName
-                , Commons.Modules.TypeLanguage
-                , ""
-                ,"Cbo"));
-            
-            if (grdThang.DataSource == null)
-            {
-                Commons.Modules.ObjSystems.MLoadXtraGrid(grdThang, grvThang, dt, false, true, true, true, true, this.Name);
-                   if (grvThang.Columns["ID_TKL"] != null)
-                    grvThang.Columns["ID_TKL"].Visible = false;
-                if (grvThang.Columns["ID_NDTKL"] != null)
-                    grvThang.Columns["ID_NDTKL"].Visible = false;
-                if (grvThang.Columns["NGAY_TKL"] != null)
-                    grvThang.Columns["NGAY_TKL"].Visible = true;
-                if (grvThang.Columns["TIEN_QUY_DINH"] != null)
-                    grvThang.Columns["TIEN_QUY_DINH"].Visible = false;
-                if (grvThang.Columns["SO_TIEN"] != null)
-                    grvThang.Columns["SO_TIEN"].Visible = false;
-                if (grvThang.Columns["SO_TIEN_GH"] != null)
-                    grvThang.Columns["SO_TIEN_GH"].Visible = false;
-                if (grvThang.Columns["TD_BC"] != null)
-                    grvThang.Columns["TD_BC"].Visible = false;
-                if (grvThang.Columns["ID_CN"] != null)
-                    grvThang.Columns["ID_CN"].Visible = false;
-                if (grvThang.Columns["SO_TIEN_NHAN"] != null)
-                    grvThang.Columns["SO_TIEN_NHAN"].Visible = true;
-                if (grvThang.Columns["SO_THANG_TINH"] != null)
-                    grvThang.Columns["SO_THANG_TINH"].Visible = false;
-            }
-            else
-                Commons.Modules.ObjSystems.MLoadXtraGrid(grdThang, grvThang, dt, false, false, true, false, false, this.Name);
-            
             try
             {
 
-                if (dThang == Convert.ToDateTime("01/01/1900"))
+
+                DataTable dt = new DataTable();
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr
+                    , "spThuongKhacLuong"
+                    , "01/01/1900"
+                    , "01/01/1900"
+                    , -1, -1, -1
+                    , Commons.Modules.UserName
+                    , Commons.Modules.TypeLanguage
+                    , ""
+                    , "Cbo"));
+
+                if (grdThang.DataSource == null)
                 {
-                    if (dt == null  || dt.Rows.Count <= 0) LoadNull();
-                    else
-                    {
-                        //T1.ID_NDTKL, T1.NGAY_TKL, T1.SO_TIEN_NHAN, T1.SO_THANG_TINH, T1.SO_TIEN, T1.SO_TIEN_GH, T1.TD_BC
-                        cboThang.Text = Convert.ToDateTime(dt.Rows[0]["NGAY_TKL"].ToString()).ToShortDateString();
-                        txTienQuyDinh.Text = dt.Rows[0]["SO_TIEN_NHAN"].ToString();
-                        txSoThang.Text = dt.Rows[0]["SO_THANG_TINH"].ToString();
-                        txSoTien.Text = dt.Rows[0]["SO_TIEN"].ToString();
-                        txSoToiThieu.Text = dt.Rows[0]["SO_TIEN_GH"].ToString();
-                        txTieuDeBaoCao.Text = dt.Rows[0]["TD_BC"].ToString();
-                    }
+                    Commons.Modules.ObjSystems.MLoadXtraGrid(grdThang, grvThang, dt, false, true, true, true, true, this.Name);
+                    grvThang.Columns["ID_NDTKL"].Visible = false;
+                    grvThang.Columns["NGAY_TKL"].Visible = true;
+                    grvThang.Columns["SO_TIEN"].Visible = false;
+                    grvThang.Columns["SO_TIEN_GH"].Visible = false;
+                    grvThang.Columns["TD_BC"].Visible = false;
+                    //grvThang.Columns["ID_CN"].Visible = false;
+                    grvThang.Columns["SO_TIEN_NHAN"].Visible = false;
+                    grvThang.Columns["SO_THANG_TINH"].Visible = false;
                 }
                 else
-                {
-                    cboThang.Text = dThang.Date.ToShortDateString();
+                    grdThang.DataSource = dt;
 
-                    DataRow[] dr;
-                    dr = dt.Select("NGAY_TKL" + "='" + cboThang.Text + "'", "NGAY_TKL", DataViewRowState.CurrentRows);
-                    if (dr.Count() == 1)
+                try
+                {
+
+                    if (dThang == Convert.ToDateTime("01/01/1900"))
                     {
-                        cboThang.Text = Convert.ToDateTime(dr[0]["NGAY_TKL"].ToString()).ToShortDateString();
-                        txTienQuyDinh.Text = dr[0]["TIEN_QUY_DINH"].ToString();
-                        txSoThang.Text = dr[0]["SO_THANG_TINH"].ToString();
-                        txSoTien.Text = dr[0]["SO_TIEN"].ToString();
-                        txSoToiThieu.Text = dr[0]["SO_TIEN_GH"].ToString();
-                        txTieuDeBaoCao.Text = dr[0]["TD_BC"].ToString();
+                        if (dt == null || dt.Rows.Count <= 0) LoadNull();
+                        else
+                        {
+                            //T1.ID_NDTKL, T1.NGAY_TKL, T1.SO_TIEN_NHAN, T1.SO_THANG_TINH, T1.SO_TIEN, T1.SO_TIEN_GH, T1.TD_BC
+                            cboThang.Text = Convert.ToDateTime(dt.Rows[0]["NGAY_TKL"].ToString()).ToShortDateString();
+                            txSoThang.Text = dt.Rows[0]["SO_THANG_TINH"].ToString();
+                            txSoTien.Text = dt.Rows[0]["SO_TIEN"].ToString();
+                            txSoToiThieu.Text = dt.Rows[0]["SO_TIEN_GH"].ToString();
+                            txTieuDeBaoCao.Text = dt.Rows[0]["TD_BC"].ToString();
+                        }
                     }
-                    else {
-                        LoadNull();
+                    else
+                    {
+                        cboThang.Text = dThang.Date.ToShortDateString();
+
+                        DataRow[] dr;
+                        dr = dt.Select("NGAY_TKL" + "='" + cboThang.Text + "'", "NGAY_TKL", DataViewRowState.CurrentRows);
+                        if (dr.Count() == 1)
+                        {
+                            cboThang.Text = Convert.ToDateTime(dr[0]["NGAY_TKL"].ToString()).ToShortDateString();
+                            txSoThang.Text = dr[0]["SO_THANG_TINH"].ToString();
+                            txSoTien.Text = dr[0]["SO_TIEN"].ToString();
+                            txSoToiThieu.Text = dr[0]["SO_TIEN_GH"].ToString();
+                            txTieuDeBaoCao.Text = dr[0]["TD_BC"].ToString();
+                        }
+                        else
+                        {
+                            LoadNull();
+                        }
                     }
                 }
+                catch
+                {
+                    LoadNull();
+                }
             }
-            catch {
-                LoadNull();
-            }
-
+            catch (Exception ex) { }
         }
         private void grvThang_RowCellClick(object sender, RowCellClickEventArgs e)
         {
@@ -131,12 +106,12 @@ namespace Vs.HRM
                 cboThang.Text = Convert.ToDateTime(grv.GetFocusedRowCellValue("NGAY_TKL").ToString()).ToShortDateString();
                 txTieuDeBaoCao.Text = grv.GetFocusedRowCellValue("TD_BC").ToString();
                 cbNoiDung.EditValue = grv.GetFocusedRowCellValue("ID_NDTKL").ToString();
-                txTienQuyDinh.Text = grv.GetFocusedRowCellValue("TIEN_QUY_DINH").ToString();
                 txSoThang.Text = grv.GetFocusedRowCellValue("SO_THANG_TINH").ToString();
                 txSoTien.Text = grv.GetFocusedRowCellValue("SO_TIEN").ToString();
                 txSoToiThieu.Text = grv.GetFocusedRowCellValue("SO_TIEN_GH").ToString();
             }
-            catch {
+            catch
+            {
                 LoadNull();
             }
             cboThang.ClosePopup();
@@ -147,7 +122,6 @@ namespace Vs.HRM
             try
             {
                 if (cboThang.Text == "") cboThang.Text = DateTime.Now.ToShortDateString();
-                txTienQuyDinh.Text = "0";
                 txSoThang.Text = "0";
                 txSoTien.Text = "0";
                 txSoToiThieu.Text = "0";
@@ -155,51 +129,46 @@ namespace Vs.HRM
             }
             catch (Exception ex)
             {
-                cboThang.Text = "";txTienQuyDinh.Text = "0";txSoThang.Text = "0";txSoTien.Text = "0";txSoToiThieu.Text = "0";txTieuDeBaoCao.Text = "";
+                cboThang.Text = ""; txSoThang.Text = "0"; txSoTien.Text = "0"; txSoToiThieu.Text = "0"; txTieuDeBaoCao.Text = "";
                 XtraMessageBox.Show(ex.Message.ToString());
             }
         }
         private void ucThuongKhacLuong_Load(object sender, EventArgs e)
         {
+            try
+            {
+                txSoThang.Text = "0";
+                txSoTien.Text = "0";
+                txSoToiThieu.Text = "0";
 
-            txTienQuyDinh.Text = "0";
-            txSoThang.Text = "0";
-            txSoTien.Text = "0";
-            txSoToiThieu.Text = "0";
+                txSoThang.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
+                txSoThang.Properties.Mask.EditMask = "N0";
+                txSoThang.Properties.Mask.UseMaskAsDisplayFormat = true;
 
-            txTienQuyDinh.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
-            txTienQuyDinh.Properties.Mask.EditMask = "N0";
-            txTienQuyDinh.Properties.Mask.UseMaskAsDisplayFormat = true;
+                txSoTien.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
+                txSoTien.Properties.Mask.EditMask = "N0";
+                txSoTien.Properties.Mask.UseMaskAsDisplayFormat = true;
 
-            txSoThang.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
-            txSoThang.Properties.Mask.EditMask = "N0";
-            txSoThang.Properties.Mask.UseMaskAsDisplayFormat = true;
-
-            txSoTien.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
-            txSoTien.Properties.Mask.EditMask = "N0";
-            txSoTien.Properties.Mask.UseMaskAsDisplayFormat = true;
-
-            txSoToiThieu.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
-            txSoToiThieu.Properties.Mask.EditMask = "N0";
-            txSoToiThieu.Properties.Mask.UseMaskAsDisplayFormat = true;
+                txSoToiThieu.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
+                txSoToiThieu.Properties.Mask.EditMask = "N0";
+                txSoToiThieu.Properties.Mask.UseMaskAsDisplayFormat = true;
 
 
-            Commons.Modules.sPS = "0Load";
-            DataTable dt = new DataTable();
-            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spThuongKhacLuong", "01/01/1900", "01/01/1900", -1, -1, -1, Commons.Modules.UserName, Commons.Modules.TypeLanguage, "", "CboNoiDung"));
-            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cbNoiDung, dt, "ID_NDTKL", "TEN_THUONG", "TEN_THUONG");
+                Commons.Modules.sLoad = "0Load";
 
-            LoadThang(Convert.ToDateTime("01/01/1900"));
-            Commons.Modules.ObjSystems.LoadCboDonVi(cbDonVi);
-            Commons.Modules.ObjSystems.LoadCboXiNghiep(cbDonVi, cbXiNghiep);
-            Commons.Modules.ObjSystems.LoadCboTo(cbDonVi, cbXiNghiep, cbDichVu);
-            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cbNoiDung, Commons.Modules.ObjSystems.DataNoiDungThuongKhacLuong(true), "ID_NDTKL", "TEN_THUONG", "TEN_THUONG");
-            Commons.Modules.sPS = "";
-            LoadLuoi(0, -1);
-            enableButon(true);
-            Commons.Modules.ObjSystems.SetPhanQuyen(windowsUIButton);
-
-            //   txtTongTien.Properties.Mask.EditMask = "n" + Commons.Modules.iSoLeTT.ToString();
+                LoadThang(Convert.ToDateTime("01/01/1900"));
+                Commons.Modules.ObjSystems.LoadCboDonVi(cbDonVi);
+                Commons.Modules.ObjSystems.LoadCboXiNghiep(cbDonVi, cbXiNghiep);
+                Commons.Modules.ObjSystems.LoadCboTo(cbDonVi, cbXiNghiep, cbDichVu);
+                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cbNoiDung, Commons.Modules.ObjSystems.DataNoiDungThuongKhacLuong(false), "ID_NDTKL", "TEN_THUONG", "TEN_THUONG");
+                Commons.Modules.sLoad = "";
+                LoadLuoi(0, -1);
+                enableButon(true);
+                Commons.Modules.ObjSystems.SetPhanQuyen(windowsUIButton);
+                raCacTinh_SelectedIndexChanged(null, null);
+                //   txtTongTien.Properties.Mask.EditMask = "n" + Commons.Modules.iSoLeTT.ToString();
+            }
+            catch { }
         }
 
         private void cboThang_EditValueChanged(object sender, EventArgs e)
@@ -209,7 +178,7 @@ namespace Vs.HRM
         //0 - Load Grid, 1Them,2 CapNhap So tien
         private void LoadLuoi(int iThemSua, int id)
         {
-            if (Commons.Modules.sPS == "0Load") return;
+            if (Commons.Modules.sLoad == "0Load") return;
             DataTable dt = new DataTable();
             DateTime dThang = Convert.ToDateTime("01/01/1900");
             try
@@ -241,7 +210,7 @@ namespace Vs.HRM
                     Commons.Modules.ObjSystems.MLoadXtraGrid(grdChung, grvChung, dt, false, true, true, true, true, this.Name);
                 }
                 else
-                    Commons.Modules.ObjSystems.MLoadXtraGrid(grdChung, grvChung, dt, false, false, true, true, false, this.Name);
+                    grdChung.DataSource = dt;
 
 
             }
@@ -259,43 +228,39 @@ namespace Vs.HRM
                     , "Add"));
                 dt.PrimaryKey = new DataColumn[] { dt.Columns["ID_CN"] };
 
-
                 if (grdChung.DataSource == null)
                 {
                     Commons.Modules.ObjSystems.MLoadXtraGrid(grdChung, grvChung, dt, true, true, true, true, true, this.Name);
-              
+
                 }
                 else
-                    Commons.Modules.ObjSystems.MLoadXtraGrid(grdChung, grvChung, dt, true, false, true, true, false, this.Name);
+                    grdChung.DataSource = dt;
 
             }
             if (iThemSua == 2) //2 - Load Grid Cap nhap so tien
             {
-
-                string sBT = "TKL" + Commons.Modules.UserName;
                 DataTable tb = new DataTable();
                 tb = (DataTable)grdChung.DataSource;
                 try
                 {
                     dThang = dThang.Date;
-                  }
+                }
                 catch
                 {
                 }
                 for (int i = 0; i < tb.Rows.Count; i++)
                 {
 
-                    tb.Rows[i]["ID_NDTKL"] = (cbNoiDung.EditValue ==null || cbNoiDung.EditValue.ToString()=="" || cbNoiDung.EditValue.ToString()=="-1")? DBNull.Value: cbNoiDung.EditValue;
+                    tb.Rows[i]["ID_NDTKL"] = (cbNoiDung.EditValue == null || cbNoiDung.EditValue.ToString() == "" || cbNoiDung.EditValue.ToString() == "-1") ? DBNull.Value : cbNoiDung.EditValue;
                     tb.Rows[i]["NGAY_TKL"] = new DateTime(dThang.Year, dThang.Month, 1);
 
-                    tb.Rows[i]["TIEN_QUY_DINH"] = txTienQuyDinh.EditValue;
                     tb.Rows[i]["SO_THANG_TINH"] = txSoThang.EditValue;
                     tb.Rows[i]["SO_TIEN"] = txSoTien.EditValue;
                     tb.Rows[i]["SO_TIEN_GH"] = txSoToiThieu.EditValue;
                     tb.Rows[i]["TD_BC"] = txTieuDeBaoCao.Text;
                     if (raCacTinh.SelectedIndex == -1 || raCacTinh.SelectedIndex == 0)
                     {
-                        tb.Rows[i]["SO_TIEN_NHAN"] = txTienQuyDinh.EditValue;
+                        tb.Rows[i]["SO_TIEN_NHAN"] = txSoTien.EditValue;
                     }
                     else
                     {
@@ -309,7 +274,7 @@ namespace Vs.HRM
                         }
                         else
                         {
-                            tb.Rows[i]["SO_TIEN_NHAN"] = Math.Round((float.Parse(txSoTien.EditValue.ToString()) / sothangduoctinh * sothanglam)/1000,0) * 1000;
+                            tb.Rows[i]["SO_TIEN_NHAN"] = Math.Round((float.Parse(txSoTien.EditValue.ToString()) / sothangduoctinh * sothanglam) / 1000, 0) * 1000;
                         }
                     }
 
@@ -321,7 +286,6 @@ namespace Vs.HRM
                             tb.Rows[i]["SO_TIEN_NHAN"] = txSoToiThieu.EditValue;
                         else tb.Rows[i]["SO_TIEN_NHAN"] = float.Parse(tt.ToString());
                     }
-
                 }
             }
             if (grvChung.Columns["ID_TKL"] != null)
@@ -330,8 +294,6 @@ namespace Vs.HRM
                 grvChung.Columns["ID_NDTKL"].Visible = false;
             if (grvChung.Columns["NGAY_TKL"] != null)
                 grvChung.Columns["NGAY_TKL"].Visible = false;
-            if (grvChung.Columns["TIEN_QUY_DINH"] != null)
-                grvChung.Columns["TIEN_QUY_DINH"].Visible = false;
             if (grvChung.Columns["SO_THANG_TINH"] != null)
                 grvChung.Columns["SO_THANG_TINH"].Visible = false;
             if (grvChung.Columns["SO_TIEN"] != null)
@@ -344,16 +306,15 @@ namespace Vs.HRM
             {
                 grvChung.Columns["ID_CN"].Visible = false;
             }
+
+            grvChung.Columns["MS_CN"].OptionsColumn.AllowEdit = false;
+            grvChung.Columns["HO_TEN"].OptionsColumn.AllowEdit = false;
+            grvChung.Columns["NGAY_VAO_LAM"].OptionsColumn.AllowEdit = false;
+
             grvChung.Columns["SO_TIEN"].DisplayFormat.FormatType = FormatType.Numeric;
             grvChung.Columns["SO_TIEN"].DisplayFormat.FormatString = "N0";
             grvChung.Columns["SO_TIEN_NHAN"].DisplayFormat.FormatType = FormatType.Numeric;
             grvChung.Columns["SO_TIEN_NHAN"].DisplayFormat.FormatString = "N0";
-
-
-
-
-
-
             grvChung.RefreshData();
             if (id != -1)
             {
@@ -377,6 +338,7 @@ namespace Vs.HRM
                     case "themsua":
                         {
                             enableButon(false);
+                            raCacTinh_SelectedIndexChanged(null, null);
                             LoadLuoi(1, -1);
                             break;
 
@@ -384,7 +346,6 @@ namespace Vs.HRM
                     case "khongluu":
                         {
                             grvChung.RefreshData();
-                            txTienQuyDinh.EditValue = 0;
                             txSoThang.EditValue = 0;
                             txSoTien.EditValue = 0;
                             txSoToiThieu.EditValue = 0;
@@ -399,15 +360,17 @@ namespace Vs.HRM
                             grvChung.UpdateCurrentRow();
                             DateTime dThang = Convert.ToDateTime(cboThang.Text);
                             int idCN = -1;
-                            try {
+                            try
+                            {
                                 idCN = int.Parse(grvChung.GetFocusedRowCellValue("ID_CN").ToString());
-                            } catch { }
+                            }
+                            catch { }
                             if (!SaveData()) return;
                             enableButon(true);
-                            Commons.Modules.sPS = "0Load";
+                            Commons.Modules.sLoad = "0Load";
                             LoadThang(dThang);
 
-                            Commons.Modules.sPS = "";
+                            Commons.Modules.sLoad = "";
                             LoadLuoi(0, idCN);
                             break;
                         }
@@ -423,12 +386,34 @@ namespace Vs.HRM
                         }
                     case "Print":
                         {
-                            PrintData();
-                            break;
-                        }
-                    case "intongquat":
-                        {
-                            PrintDataTongQuat();
+                            //Load worksheet
+                            XtraInputBoxArgs args = new XtraInputBoxArgs();
+                            // set required Input Box options
+                            args.Caption = "In danh sách thưởng";
+                            //args.Prompt = "Chọn sheet cần nhập dữ liệu";
+                            args.DefaultButtonIndex = 0;
+                            // initialize a DateEdit editor with custom settings
+                            RadioGroup editor = new RadioGroup();
+                            editor.Properties.BeginUpdate();
+                            editor.Properties.Items.Add(new RadioGroupItem(0, Commons.Modules.ObjLanguages.GetLanguage(this.Name, "lblInDSThuong")));
+                            editor.Properties.Items.Add(new RadioGroupItem(1, Commons.Modules.ObjLanguages.GetLanguage(this.Name, "lblInTongQuat")));
+                            editor.Properties.EndUpdate();
+                            editor.Width = 310;
+                            args.Editor = editor;
+                            // a default DateEdit value
+                            args.DefaultResponse = 0;
+                            // display an Input Box with the custom editor
+                            var result = XtraInputBox.Show(args);
+
+                            if (result == null || result.ToString() == "") return;
+                            if (Convert.ToInt32(result) == 0)
+                            {
+                                PrintData();
+                            }
+                            else
+                            {
+                                PrintDataTongQuat();
+                            }
                             break;
                         }
                     case "CapNhat":
@@ -470,15 +455,37 @@ namespace Vs.HRM
                 windowsUIButton.Buttons[4].Properties.Visible = visible;
                 windowsUIButton.Buttons[5].Properties.Visible = visible;
                 windowsUIButton.Buttons[6].Properties.Visible = visible;
-                windowsUIButton.Buttons[7].Properties.Visible = visible;
+                windowsUIButton.Buttons[7].Properties.Visible = !visible;
                 windowsUIButton.Buttons[8].Properties.Visible = !visible;
-                windowsUIButton.Buttons[9].Properties.Visible = !visible;
-                windowsUIButton.Buttons[10].Properties.Visible = visible;
+                windowsUIButton.Buttons[9].Properties.Visible = visible;
                 cboThang.Properties.ReadOnly = !visible;
                 cbXiNghiep.Properties.ReadOnly = !visible;
                 cbDonVi.Properties.ReadOnly = !visible;
                 cbDichVu.Properties.ReadOnly = !visible;
                 txTieuDeBaoCao.Properties.ReadOnly = visible;
+                grvChung.OptionsBehavior.Editable = !visible;
+
+                if (visible)
+                {
+                    lLoai.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                    laSoThang.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                    laSoTien.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                    laToiThieu.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                    laLyDo.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                    laTieuDe.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                    emptySpaceItem3.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                }
+                else
+                {
+                    lLoai.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+                    laSoThang.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+                    laSoTien.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+                    laToiThieu.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+                    laLyDo.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+                    laTieuDe.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+                    emptySpaceItem3.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+                }
+
             }
             catch { }
         }
@@ -510,7 +517,7 @@ namespace Vs.HRM
                 XtraMessageBox.Show(ex.Message.ToString());
                 return false;
             }
-            
+
         }
 
         private void cboDV_Click(object sender, EventArgs e)
@@ -519,30 +526,27 @@ namespace Vs.HRM
         }
         private void cboDV_EditValueChanged(object sender, EventArgs e)
         {
-            if (Commons.Modules.sPS == "0Load") return;
-            Commons.Modules.sPS = "0Load";
+            if (Commons.Modules.sLoad == "0Load") return;
+            Commons.Modules.sLoad = "0Load";
             Commons.Modules.ObjSystems.LoadCboXiNghiep(cbDonVi, cbXiNghiep);
             Commons.Modules.ObjSystems.LoadCboTo(cbDonVi, cbXiNghiep, cbDichVu);
             cbDichVu.EditValue = -1;
-            Commons.Modules.sPS = "";
+            Commons.Modules.sLoad = "";
             LoadLuoi(0, -1);
         }
         private void cboXN_EditValueChanged(object sender, EventArgs e)
         {
-            if (Commons.Modules.sPS == "0Load") return;
-            Commons.Modules.sPS = "0Load";
+            if (Commons.Modules.sLoad == "0Load") return;
+            Commons.Modules.sLoad = "0Load";
             Commons.Modules.ObjSystems.LoadCboTo(cbDonVi, cbXiNghiep, cbDichVu);
             cbDichVu.EditValue = -1;
-            Commons.Modules.sPS = "";
+            Commons.Modules.sLoad = "";
             LoadLuoi(0, -1);
         }
-
-      
-
-
         private void cboTo_EditValueChanged(object sender, EventArgs e)
         {
-
+            if (Commons.Modules.sLoad == "0Load") return;
+            LoadLuoi(0, -1);
         }
 
         private void grdChung_ProcessGridKey(object sender, System.Windows.Forms.KeyEventArgs e)
@@ -555,7 +559,7 @@ namespace Vs.HRM
             try { iIdCN = int.Parse(grvChung.GetFocusedRowCellValue("ID_CN").ToString()); } catch { }
             if (iIdCN == -1)
             {
-                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgKhongCoDuLieuXoa") , Commons.Modules.ObjLanguages.GetLanguage("frmChung", "sThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgKhongCoDuLieuXoa"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "sThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
             DeleteData(iIdCN);
@@ -588,12 +592,12 @@ namespace Vs.HRM
             {
 
                 SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spThuongKhacLuong", dThang, "01/01/1900", iIdCN, -1, -1, Commons.Modules.UserName, Commons.Modules.TypeLanguage, "", "Delete");
-                Commons.Modules.sPS = "0Load";
+                Commons.Modules.sLoad = "0Load";
                 if (iIdCN == -1)
                     LoadThang(Convert.ToDateTime("01/01/1900"));
                 else
                     LoadThang(dThang);
-                Commons.Modules.sPS = "";
+                Commons.Modules.sLoad = "";
                 LoadLuoi(0, -1);
 
             }
@@ -709,22 +713,30 @@ namespace Vs.HRM
 
         private void raCacTinh_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (raCacTinh.SelectedIndex == -1 || raCacTinh.SelectedIndex == 0)
+            if (windowsUIButton.Buttons[0].Properties.Visible && raCacTinh.SelectedIndex == 0)
             {
-                txTienQuyDinh.Properties.ReadOnly = false;
-                txTienQuyDinh.Focus();
-                txSoThang.Properties.ReadOnly = true;
+                laSoThang.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
                 txSoThang.EditValue = 0;
-                txSoTien.Properties.ReadOnly = true;
+                laToiThieu.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                txSoToiThieu.EditValue = 0;
                 txSoTien.EditValue = 0;
             }
-            else 
+            else if (windowsUIButton.Buttons[0].Properties.Visible && raCacTinh.SelectedIndex == 1)
             {
-                txTienQuyDinh.Properties.ReadOnly = true;
-                txTienQuyDinh.EditValue = 0;
-                txSoThang.Properties.ReadOnly = false;
-                txSoThang.Focus();
-                txSoTien.Properties.ReadOnly = false;
+                laSoThang.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+                txSoThang.EditValue = 0;
+                txSoTien.EditValue = 0;
+                txSoToiThieu.EditValue = 0;
+                laToiThieu.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+            }
+            else
+            {
+
+
+                //txTienQuyDinh.Properties.ReadOnly = true;
+                //txSoThang.Properties.ReadOnly = true;
+                //txSoTien.Properties.ReadOnly = true;
+                //txSoToiThieu.Properties.ReadOnly = true;
             }
         }
 
@@ -740,7 +752,6 @@ namespace Vs.HRM
                 {
                     cboThang.Text = Convert.ToDateTime(dr[0]["NGAY_TKL"].ToString()).ToShortDateString();
 
-                    txTienQuyDinh.Text = dr[0]["SO_TIEN_NHAN"].ToString();
                     txSoThang.Text = dr[0]["SO_THANG_TINH"].ToString();
                     txSoTien.Text = dr[0]["SO_TIEN"].ToString();
                     txSoToiThieu.Text = dr[0]["SO_TIEN_GH"].ToString();

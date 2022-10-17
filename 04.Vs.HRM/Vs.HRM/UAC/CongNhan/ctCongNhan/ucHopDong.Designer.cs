@@ -43,11 +43,13 @@
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule4 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule5 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule6 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
+            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule7 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             this.windowsUIButton = new DevExpress.XtraBars.Docking2010.WindowsUIButtonPanel();
             this.searchControl = new DevExpress.XtraEditors.SearchControl();
             this.grdHopDong = new DevExpress.XtraGrid.GridControl();
             this.grvHopDong = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.dataLayoutControl1 = new DevExpress.XtraDataLayout.DataLayoutControl();
+            this.txtMO_TA_CV = new DevExpress.XtraEditors.MemoEdit();
             this.cboTinhTrang = new DevExpress.XtraEditors.LookUpEdit();
             this.cboBAC_LUONG = new DevExpress.XtraEditors.LookUpEdit();
             this.SO_HDLDTextEdit = new DevExpress.XtraEditors.TextEdit();
@@ -91,6 +93,7 @@
             this.ItemForBAC_LUONG = new DevExpress.XtraLayout.LayoutControlItem();
             this.ItemForSO_NGAY_PHEP = new DevExpress.XtraLayout.LayoutControlItem();
             this.ItemForTinhTrang = new DevExpress.XtraLayout.LayoutControlItem();
+            this.lblMO_TA_CV = new DevExpress.XtraLayout.LayoutControlItem();
             this.dxValidationProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
             this.ofdfile = new System.Windows.Forms.OpenFileDialog();
             this.windowsUIButton.SuspendLayout();
@@ -99,6 +102,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.grvHopDong)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataLayoutControl1)).BeginInit();
             this.dataLayoutControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtMO_TA_CV.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboTinhTrang.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboBAC_LUONG.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SO_HDLDTextEdit.Properties)).BeginInit();
@@ -145,6 +149,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.ItemForBAC_LUONG)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForSO_NGAY_PHEP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForTinhTrang)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lblMO_TA_CV)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -217,11 +222,11 @@
             // grdHopDong
             // 
             this.grdHopDong.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.grdHopDong.Location = new System.Drawing.Point(6, 162);
+            this.grdHopDong.Location = new System.Drawing.Point(6, 218);
             this.grdHopDong.MainView = this.grvHopDong;
             this.grdHopDong.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.grdHopDong.Name = "grdHopDong";
-            this.grdHopDong.Size = new System.Drawing.Size(1208, 413);
+            this.grdHopDong.Size = new System.Drawing.Size(1208, 357);
             this.grdHopDong.TabIndex = 70;
             this.grdHopDong.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grvHopDong});
@@ -237,6 +242,7 @@
             // 
             // dataLayoutControl1
             // 
+            this.dataLayoutControl1.Controls.Add(this.txtMO_TA_CV);
             this.dataLayoutControl1.Controls.Add(this.cboTinhTrang);
             this.dataLayoutControl1.Controls.Add(this.cboBAC_LUONG);
             this.dataLayoutControl1.Controls.Add(this.grdHopDong);
@@ -266,9 +272,20 @@
             this.dataLayoutControl1.TabIndex = 7;
             this.dataLayoutControl1.Text = "dataLayoutControl1";
             // 
+            // txtMO_TA_CV
+            // 
+            this.txtMO_TA_CV.Location = new System.Drawing.Point(153, 136);
+            this.txtMO_TA_CV.Name = "txtMO_TA_CV";
+            this.txtMO_TA_CV.Size = new System.Drawing.Size(1061, 54);
+            this.txtMO_TA_CV.StyleController = this.dataLayoutControl1;
+            this.txtMO_TA_CV.TabIndex = 78;
+            conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule1.ErrorText = "Không được trống";
+            this.dxValidationProvider1.SetValidationRule(this.txtMO_TA_CV, conditionValidationRule1);
+            // 
             // cboTinhTrang
             // 
-            this.cboTinhTrang.Location = new System.Drawing.Point(1060, 136);
+            this.cboTinhTrang.Location = new System.Drawing.Point(1060, 192);
             this.cboTinhTrang.Name = "cboTinhTrang";
             this.cboTinhTrang.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -287,9 +304,9 @@
             this.cboBAC_LUONG.Size = new System.Drawing.Size(154, 24);
             this.cboBAC_LUONG.StyleController = this.dataLayoutControl1;
             this.cboBAC_LUONG.TabIndex = 74;
-            conditionValidationRule1.ErrorText = "Không được trống";
-            conditionValidationRule1.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.None;
-            this.dxValidationProvider1.SetValidationRule(this.cboBAC_LUONG, conditionValidationRule1);
+            conditionValidationRule2.ErrorText = "Không được trống";
+            conditionValidationRule2.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.None;
+            this.dxValidationProvider1.SetValidationRule(this.cboBAC_LUONG, conditionValidationRule2);
             this.cboBAC_LUONG.EditValueChanged += new System.EventHandler(this.cboBAC_LUONG_EditValueChanged);
             // 
             // SO_HDLDTextEdit
@@ -300,10 +317,10 @@
             this.SO_HDLDTextEdit.Size = new System.Drawing.Size(153, 24);
             this.SO_HDLDTextEdit.StyleController = this.dataLayoutControl1;
             this.SO_HDLDTextEdit.TabIndex = 5;
-            conditionValidationRule2.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule2.ErrorText = "This value is not valid";
-            conditionValidationRule2.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.Critical;
-            this.dxValidationProvider1.SetValidationRule(this.SO_HDLDTextEdit, conditionValidationRule2);
+            conditionValidationRule3.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule3.ErrorText = "This value is not valid";
+            conditionValidationRule3.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.Critical;
+            this.dxValidationProvider1.SetValidationRule(this.SO_HDLDTextEdit, conditionValidationRule3);
             // 
             // ID_LHDLDLookUpEdit
             // 
@@ -316,10 +333,10 @@
             this.ID_LHDLDLookUpEdit.Size = new System.Drawing.Size(154, 24);
             this.ID_LHDLDLookUpEdit.StyleController = this.dataLayoutControl1;
             this.ID_LHDLDLookUpEdit.TabIndex = 7;
-            conditionValidationRule3.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule3.ErrorText = "This value is not valid";
-            conditionValidationRule3.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.Critical;
-            this.dxValidationProvider1.SetValidationRule(this.ID_LHDLDLookUpEdit, conditionValidationRule3);
+            conditionValidationRule4.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule4.ErrorText = "This value is not valid";
+            conditionValidationRule4.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.Critical;
+            this.dxValidationProvider1.SetValidationRule(this.ID_LHDLDLookUpEdit, conditionValidationRule4);
             this.ID_LHDLDLookUpEdit.EditValueChanged += new System.EventHandler(this.ID_LHDLDLookUpEdit_EditValueChanged);
             // 
             // HD_GIA_HANCheckEdit
@@ -433,10 +450,10 @@
             this.NGAY_KYDateEdit.Size = new System.Drawing.Size(153, 24);
             this.NGAY_KYDateEdit.StyleController = this.dataLayoutControl1;
             this.NGAY_KYDateEdit.TabIndex = 25;
-            conditionValidationRule4.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule4.ErrorText = "Không được trống";
-            conditionValidationRule4.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.Critical;
-            this.dxValidationProvider1.SetValidationRule(this.NGAY_KYDateEdit, conditionValidationRule4);
+            conditionValidationRule5.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule5.ErrorText = "Không được trống";
+            conditionValidationRule5.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.Critical;
+            this.dxValidationProvider1.SetValidationRule(this.NGAY_KYDateEdit, conditionValidationRule5);
             // 
             // CHI_SO_PHU_CAPTextEdit
             // 
@@ -478,10 +495,10 @@
             this.ID_CVLookUpEdit.Size = new System.Drawing.Size(154, 24);
             this.ID_CVLookUpEdit.StyleController = this.dataLayoutControl1;
             this.ID_CVLookUpEdit.TabIndex = 21;
-            conditionValidationRule5.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule5.ErrorText = "This value is not valid";
-            conditionValidationRule5.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.Critical;
-            this.dxValidationProvider1.SetValidationRule(this.ID_CVLookUpEdit, conditionValidationRule5);
+            conditionValidationRule6.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule6.ErrorText = "This value is not valid";
+            conditionValidationRule6.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.Critical;
+            this.dxValidationProvider1.SetValidationRule(this.ID_CVLookUpEdit, conditionValidationRule6);
             // 
             // NGUOI_KY_GIA_HANLookUpEdit
             // 
@@ -494,14 +511,14 @@
             this.NGUOI_KY_GIA_HANLookUpEdit.Size = new System.Drawing.Size(154, 24);
             this.NGUOI_KY_GIA_HANLookUpEdit.StyleController = this.dataLayoutControl1;
             this.NGUOI_KY_GIA_HANLookUpEdit.TabIndex = 26;
-            conditionValidationRule6.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule6.ErrorText = "Không được trống";
-            conditionValidationRule6.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.Critical;
-            this.dxValidationProvider1.SetValidationRule(this.NGUOI_KY_GIA_HANLookUpEdit, conditionValidationRule6);
+            conditionValidationRule7.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule7.ErrorText = "Không được trống";
+            conditionValidationRule7.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.Critical;
+            this.dxValidationProvider1.SetValidationRule(this.NGUOI_KY_GIA_HANLookUpEdit, conditionValidationRule7);
             // 
             // txtTaiLieu
             // 
-            this.txtTaiLieu.Location = new System.Drawing.Point(153, 136);
+            this.txtTaiLieu.Location = new System.Drawing.Point(153, 192);
             this.txtTaiLieu.Name = "txtTaiLieu";
             this.txtTaiLieu.Properties.AllowGlyphSkinning = DevExpress.Utils.DefaultBoolean.True;
             this.txtTaiLieu.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -570,7 +587,8 @@
             this.ItemForNL,
             this.ItemForBAC_LUONG,
             this.ItemForSO_NGAY_PHEP,
-            this.ItemForTinhTrang});
+            this.ItemForTinhTrang,
+            this.lblMO_TA_CV});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "autoGeneratedGroup0";
             this.layoutControlGroup1.Size = new System.Drawing.Size(1210, 571);
@@ -622,9 +640,9 @@
             // layoutControlItem1
             // 
             this.layoutControlItem1.Control = this.grdHopDong;
-            this.layoutControlItem1.Location = new System.Drawing.Point(0, 156);
+            this.layoutControlItem1.Location = new System.Drawing.Point(0, 212);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(1210, 415);
+            this.layoutControlItem1.Size = new System.Drawing.Size(1210, 359);
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
             // 
@@ -707,7 +725,7 @@
             // ItemForTaiLieu
             // 
             this.ItemForTaiLieu.Control = this.txtTaiLieu;
-            this.ItemForTaiLieu.Location = new System.Drawing.Point(0, 130);
+            this.ItemForTaiLieu.Location = new System.Drawing.Point(0, 186);
             this.ItemForTaiLieu.Name = "ItemForTaiLieu";
             this.ItemForTaiLieu.Size = new System.Drawing.Size(907, 26);
             this.ItemForTaiLieu.Text = "TaiLieu";
@@ -775,11 +793,24 @@
             // ItemForTinhTrang
             // 
             this.ItemForTinhTrang.Control = this.cboTinhTrang;
-            this.ItemForTinhTrang.Location = new System.Drawing.Point(907, 130);
+            this.ItemForTinhTrang.Location = new System.Drawing.Point(907, 186);
             this.ItemForTinhTrang.Name = "ItemForTinhTrang";
             this.ItemForTinhTrang.Size = new System.Drawing.Size(303, 26);
             this.ItemForTinhTrang.Text = "TINH_TRANG";
             this.ItemForTinhTrang.TextSize = new System.Drawing.Size(135, 17);
+            // 
+            // lblMO_TA_CV
+            // 
+            this.lblMO_TA_CV.AppearanceItemCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.lblMO_TA_CV.AppearanceItemCaption.Options.UseForeColor = true;
+            this.lblMO_TA_CV.Control = this.txtMO_TA_CV;
+            this.lblMO_TA_CV.Location = new System.Drawing.Point(0, 130);
+            this.lblMO_TA_CV.MaxSize = new System.Drawing.Size(0, 56);
+            this.lblMO_TA_CV.MinSize = new System.Drawing.Size(159, 56);
+            this.lblMO_TA_CV.Name = "lblMO_TA_CV";
+            this.lblMO_TA_CV.Size = new System.Drawing.Size(1210, 56);
+            this.lblMO_TA_CV.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            this.lblMO_TA_CV.TextSize = new System.Drawing.Size(135, 17);
             // 
             // ofdfile
             // 
@@ -801,6 +832,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.grvHopDong)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataLayoutControl1)).EndInit();
             this.dataLayoutControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.txtMO_TA_CV.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboTinhTrang.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboBAC_LUONG.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.SO_HDLDTextEdit.Properties)).EndInit();
@@ -847,6 +879,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.ItemForBAC_LUONG)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForSO_NGAY_PHEP)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForTinhTrang)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lblMO_TA_CV)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).EndInit();
             this.ResumeLayout(false);
 
@@ -904,5 +937,7 @@
         private DevExpress.XtraEditors.SearchLookUpEdit cboNgachLuong;
         private DevExpress.XtraGrid.Views.Grid.GridView searchLookUpEdit1View;
         private System.Windows.Forms.OpenFileDialog ofdfile;
+        private DevExpress.XtraEditors.MemoEdit txtMO_TA_CV;
+        private DevExpress.XtraLayout.LayoutControlItem lblMO_TA_CV;
     }
 }

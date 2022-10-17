@@ -568,6 +568,7 @@ namespace Vs.HRM
                 cmd1.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
                 cmd1.Parameters.Add("@ID_CN", SqlDbType.Int).Value = idCN;
                 cmd1.Parameters.Add("@ID_SQD", SqlDbType.Int).Value = idHD;
+                cmd1.Parameters.Add("@sBT", SqlDbType.NVarChar).Value = "";
                 cmd1.CommandType = CommandType.StoredProcedure;
                 System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd1);
                 DataSet ds = new DataSet();
@@ -605,6 +606,7 @@ namespace Vs.HRM
                 cmd1.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
                 cmd1.Parameters.Add("@ID_CN", SqlDbType.Int).Value = idCN;
                 cmd1.Parameters.Add("@ID_SQD", SqlDbType.Int).Value = idHD;
+                cmd1.Parameters.Add("@sBT", SqlDbType.NVarChar).Value = "";
                 cmd1.CommandType = CommandType.StoredProcedure;
 
                 System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd1);
@@ -622,7 +624,7 @@ namespace Vs.HRM
 
                 frm.ShowDialog();
             }
-            catch { }
+            catch (Exception ex) { }
         }
         private void HopDongThoiVu_SB()
         {

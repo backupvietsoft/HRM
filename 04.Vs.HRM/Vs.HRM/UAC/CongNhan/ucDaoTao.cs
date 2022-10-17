@@ -67,7 +67,7 @@ namespace Vs.HRM
                 //Commons.Modules.ObjSystems.MAutoCompleteTextEdit(GIAO_VIENTextEdit, Commons.Modules.ObjSystems.ConvertDatatable(grdKhoaHoc), "GIAO_VIEN");
                 //Commons.Modules.ObjSystems.MAutoCompleteTextEdit(DIA_DIEMTextEdit, Commons.Modules.ObjSystems.ConvertDatatable(grdKhoaHoc), "DIA_DIEM");
 
-             
+
 
                 //load tab 1
                 //Commons.Modules.ObjSystems.LoadCboDonVi(cboSearch_DV);
@@ -235,7 +235,7 @@ namespace Vs.HRM
             ReadOnlycontrol(visible);
             if (tabbedControlGroup1.SelectedTabPageIndex == 1)
             {
-                windowsUIButton.Buttons[1].Properties.Visible = false;
+                windowsUIButton.Buttons[0].Properties.Visible = false;
             }
         }
         private void grvKhoaHoc_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
@@ -249,7 +249,7 @@ namespace Vs.HRM
                     NOI_DTLookUpEdit.EditValue = grvKhoaHoc.GetFocusedRowCellValue("NOI_DT");
                     TRUONG_DTTextEdit.EditValue = grvKhoaHoc.GetFocusedRowCellValue("TRUONG_DT");
                     TIN_CHITextEdit.EditValue = grvKhoaHoc.GetFocusedRowCellValue("TIN_CHI");
-                    NGAY_BDDateEdit.DateTime =  Convert.ToDateTime(grvKhoaHoc.GetFocusedRowCellValue("NGAY_BD"));
+                    NGAY_BDDateEdit.DateTime = Convert.ToDateTime(grvKhoaHoc.GetFocusedRowCellValue("NGAY_BD"));
                     GIO_BDTimeEdit.EditValue = grvKhoaHoc.GetFocusedRowCellValue("GIO_BD");
                     NGAY_KTDateEdit.DateTime = Convert.ToDateTime(grvKhoaHoc.GetFocusedRowCellValue("NGAY_KT"));
                     GIO_KTtimeEdit.EditValue = grvKhoaHoc.GetFocusedRowCellValue("GIO_KT");
@@ -339,8 +339,23 @@ namespace Vs.HRM
                     }
                 case "sua":
                     {
-                        them = true;
-                        bthem = false;
+                        if (tabbedControlGroup1.SelectedTabPageIndex == 1)
+                        {
+                            if (grvKhoaHoc.RowCount == 0)
+                            {
+                                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgChuaChonKhoaHoc"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                enableButon(true);
+                                them = false;
+                                bthem = false;
+                                return;
+                            }
+                            LoadGridKeHoachDaoTao(true);
+                        }
+                        else
+                        {
+                            them = true;
+                            bthem = false;
+                        }
                         enableButon(false);
                         break;
                     }
@@ -443,15 +458,31 @@ namespace Vs.HRM
             }
             else
             {
-                if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDeleteKhoaDaoTao"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) return;
-                try
+                if (grvDSCN.RowCount > 0)
                 {
-                    SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "DELETE dbo.KHOA_DAO_TAO WHERE ID_KDT = " + grvKhoaHoc.GetFocusedRowCellValue("ID_KDT") + "");
-                    grvKhoaHoc.DeleteSelectedRows();
+                    if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDeleteKhoaDaoTaoCoHocVien"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) return;
+                    try
+                    {
+                        SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "DELETE FROM dbo.KE_HOACH_DAO_TAO WHERE ID_KDT = " + grvKhoaHoc.GetFocusedRowCellValue("ID_KDT") + "  DELETE FROM dbo.KHOA_DAO_TAO WHERE ID_KDT = " + grvKhoaHoc.GetFocusedRowCellValue("ID_KDT") + "");
+                        grvKhoaHoc.DeleteSelectedRows();
+                    }
+                    catch (Exception ex)
+                    {
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDelDangSuDung") + "\n" + ex.Message.ToString(), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
                 }
-                catch (Exception ex)
+                else
                 {
-                    XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDelDangSuDung") + "\n" + ex.Message.ToString(), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDeleteKhoaDaoTao"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) return;
+                    try
+                    {
+                        SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "DELETE FROM dbo.KHOA_DAO_TAO WHERE ID_KDT = " + grvKhoaHoc.GetFocusedRowCellValue("ID_KDT") + "");
+                        grvKhoaHoc.DeleteSelectedRows();
+                    }
+                    catch (Exception ex)
+                    {
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDelDangSuDung") + "\n" + ex.Message.ToString(), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
                 }
             }
         }
@@ -478,7 +509,7 @@ namespace Vs.HRM
             {
                 XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgChuaChonKhoaHoc"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-           
+
         }
         private void grdKhoaHoc_ProcessGridKey(object sender, KeyEventArgs e)
         {
@@ -538,7 +569,7 @@ namespace Vs.HRM
             }
             else
             {
-                Commons.Modules.ObjSystems.MLoadXtraGrid(grdDSCN, grvDSCN, dt, true, false,false, true, true, this.Name);
+                Commons.Modules.ObjSystems.MLoadXtraGrid(grdDSCN, grvDSCN, dt, true, false, false, true, true, this.Name);
                 grvDSCN.OptionsSelection.ShowCheckBoxSelectorInColumnHeader = DevExpress.Utils.DefaultBoolean.True;
                 grvDSCN.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CheckBoxRowSelect;
                 grvDSCN.OptionsSelection.CheckBoxSelectorField = "CHON";

@@ -20,7 +20,7 @@ namespace Vs.HRM
         public ucBaoCaoThongKeCongNhanBD()
         {
             InitializeComponent();
-            Commons.Modules.ObjSystems.ThayDoiNN(this);
+            Commons.Modules.ObjSystems.ThayDoiNN(this,windowsUIButton);
 
         }
 

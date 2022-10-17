@@ -121,8 +121,16 @@ namespace Vs.HRM
                     Commons.Modules.ObjSystems.MLoadXtraGrid(grdDSUngVien, grvDSUngVien, dt, true, true, false, true, true, this.Name);
                     grvDSUngVien.BestFitColumns();
                     grvDSUngVien.Columns["CHON"].Visible = false;
+                    grvDSUngVien.Columns["CONG_VIEC_ENG"].Visible = false;
+                    grvDSUngVien.Columns["MO_TA_CV"].Visible = false;
+                    grvDSUngVien.Columns["MO_TA_CV_A"].Visible = false;
                     grvDSUngVien.Columns["MS_CN"].OptionsColumn.AllowEdit = false;
                     grvDSUngVien.Columns["HO_TEN"].OptionsColumn.AllowEdit = false;
+                    grvDSUngVien.Columns["CONG_VIEC"].OptionsColumn.AllowEdit = false;
+                    grvDSUngVien.Columns["SO_HDLD"].OptionsColumn.AllowEdit = false;
+                    grvDSUngVien.Columns["CONG_VIEC_ENG"].OptionsColumn.AllowEdit = false;
+                    grvDSUngVien.Columns["MO_TA_CV"].OptionsColumn.AllowEdit = false;
+                    grvDSUngVien.Columns["MO_TA_CV_A"].OptionsColumn.AllowEdit = false;
                     grvDSUngVien.Columns["NGAY_VAO_LAM"].OptionsColumn.AllowEdit = false;
                     grvDSUngVien.Columns["MS_CN"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
                     grvDSUngVien.Columns["HO_TEN"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
@@ -748,9 +756,7 @@ namespace Vs.HRM
                 {
                     int iNgayTV = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT ISNULL(SO_NGAY,0) SO_NGAY FROM dbo.LOAI_HDLD WHERE ID_LHDLD = " + Convert.ToInt32(grvDSUngVien.GetFocusedRowCellValue("ID_LHDLD")) + ""));
                     NgayBD_HD = Convert.ToDateTime(grvDSUngVien.GetFocusedRowCellValue("NGAY_BD_THU_VIEC"));
-                    DateTime dNgayKT = Convert.ToDateTime(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT [dbo].[fnNgayKetThucHD]('" + Convert.ToDateTime(NgayBD_HD).ToString("MM/dd/yyyy") + "' ," + iNgayTV + ")"));
-                    NgayKT_HD = Convert.ToDateTime(grvDSUngVien.GetFocusedRowCellValue("NGAY_BD_THU_VIEC")).AddDays(iNgayTV);
-                    NgayKT_HD = dNgayKT;
+                    NgayKT_HD = NgayBD_HD.AddDays(iNgayTV);
 
                     row["NGAY_BD_THU_VIEC"] = NgayBD_HD;
                     row["NGAY_KT_THU_VIEC"] = NgayKT_HD;
@@ -760,9 +766,7 @@ namespace Vs.HRM
                 {
                     int iNgayTV = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT ISNULL(SO_NGAY,0) SO_NGAY FROM dbo.LOAI_HDLD WHERE ID_LHDLD = " + Convert.ToInt32(grvDSUngVien.GetFocusedRowCellValue("ID_LHDLD")) + ""));
                     NgayBD_HD = Convert.ToDateTime(grvDSUngVien.GetFocusedRowCellValue("NGAY_BD_THU_VIEC"));
-                    DateTime dNgayKT = Convert.ToDateTime(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT [dbo].[fnNgayKetThucHD]('" + Convert.ToDateTime(NgayBD_HD).ToString("MM/dd/yyyy") + "' ," + iNgayTV + ")"));
-                    NgayKT_HD = Convert.ToDateTime(grvDSUngVien.GetFocusedRowCellValue("NGAY_BD_THU_VIEC")).AddDays(iNgayTV);
-                    NgayKT_HD = dNgayKT;
+                    NgayKT_HD = NgayBD_HD.AddDays(iNgayTV);
 
                     row["NGAY_BD_THU_VIEC"] = NgayBD_HD;
                     row["NGAY_KT_THU_VIEC"] = NgayKT_HD;

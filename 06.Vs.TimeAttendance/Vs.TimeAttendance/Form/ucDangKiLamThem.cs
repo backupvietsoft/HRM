@@ -199,11 +199,11 @@ namespace Vs.TimeAttendance
                 //grvLamThem.Columns["SO_GIO_TC"].DisplayFormat.FormatString = "0.0";
 
                 RepositoryItemTextEdit txtEdit = new RepositoryItemTextEdit();
-                txtEdit.Properties.DisplayFormat.FormatString = "0.0";
+                txtEdit.Properties.DisplayFormat.FormatString = "0.00";
                 txtEdit.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-                txtEdit.Properties.EditFormat.FormatString = "0.0";
+                txtEdit.Properties.EditFormat.FormatString = "0.00";
                 txtEdit.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-                txtEdit.Properties.Mask.EditMask = "0.0";
+                txtEdit.Properties.Mask.EditMask = "0.00";
                 txtEdit.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
                 txtEdit.Properties.Mask.UseMaskAsDisplayFormat = true;
                 grvLamThem.Columns["SO_GIO_TC"].ColumnEdit = txtEdit;
@@ -270,8 +270,8 @@ namespace Vs.TimeAttendance
                 dt.Columns["CHON"].ReadOnly = false;
                 Commons.Modules.ObjSystems.MLoadXtraGrid(grdCongNhan, grvCongNhan, dt, true, true, true, true, true, this.Name);
                 grvCongNhan.Columns["ID_CN"].Visible = false;
-                grvCongNhan.Columns["MS_CN"].OptionsColumn.AllowEdit = false;
-                grvCongNhan.Columns["HO_TEN"].OptionsColumn.AllowEdit = false;
+                //grvCongNhan.Columns["MS_CN"].OptionsColumn.AllowEdit = false;
+                //grvCongNhan.Columns["HO_TEN"].OptionsColumn.AllowEdit = false;
                 grvCongNhan.Columns["TEN_NHOM"].OptionsColumn.AllowEdit = false;
                 grvCongNhan.Columns["CA"].OptionsColumn.AllowEdit = false;
                 grvCongNhan.Columns["HO_TEN"].OptionsColumn.AllowEdit = false;
@@ -620,7 +620,7 @@ namespace Vs.TimeAttendance
                             frm.MinimizeBox = false;
                             double iW, iH;
                             iW = 450;
-                            iH = 300;
+                            iH = 310;
                             frm.Size = new Size((int)iW, (int)iH);
 
                             if (frm.ShowDialog() == DialogResult.OK)

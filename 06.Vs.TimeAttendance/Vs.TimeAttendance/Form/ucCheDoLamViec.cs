@@ -35,11 +35,13 @@ namespace Vs.TimeAttendance
         }
 
         RepositoryItemTimeEdit repositoryItemTimeEdit1;
+        RepositoryItemTextEdit txtEdit;
         public ucCheDoLamViec()
         {
             InitializeComponent();
             Commons.Modules.ObjSystems.ThayDoiNN(this, new List<LayoutControlGroup>() { Root }, btnALL);
             repositoryItemTimeEdit1 = new RepositoryItemTimeEdit();
+            txtEdit = new RepositoryItemTextEdit();
         }
 
         private void ucCheDoLamViec_Load(object sender, EventArgs e)
@@ -55,7 +57,17 @@ namespace Vs.TimeAttendance
             repositoryItemTimeEdit1.DisplayFormat.FormatString = "HH:mm";
             repositoryItemTimeEdit1.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             repositoryItemTimeEdit1.EditFormat.FormatString = "HH:mm";
+
+
+            txtEdit.Properties.DisplayFormat.FormatString = "0.0";
+            txtEdit.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            txtEdit.Properties.EditFormat.FormatString = "0.0";
+            txtEdit.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            txtEdit.Properties.Mask.EditMask = "0.0";
+            txtEdit.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
+            txtEdit.Properties.Mask.UseMaskAsDisplayFormat = true;
             
+
             LoaddNgayApDung();
             LoadcboNhomChamCong(cboNhomChamCong);
             LoadGrdChedochamcong();
@@ -79,19 +91,27 @@ namespace Vs.TimeAttendance
                     dt.Columns["GIO_BD"].ReadOnly = false;
                     dt.Columns["GIO_KT"].ReadOnly = false;
                     Commons.Modules.ObjSystems.MLoadXtraGrid(grdData, grvData, dt, false, false, false, true, true, this.Name);
+
+                    grvData.Columns["TRU_DAU_GIO"].ColumnEdit = txtEdit;
+                    grvData.Columns["TRU_CUOI_GIO"].ColumnEdit = txtEdit;
+                    grvData.Columns["HE_SO_NGAY_THUONG"].ColumnEdit = txtEdit;
+                    grvData.Columns["HE_SO_NGAY_CN"].ColumnEdit = txtEdit;
+                    grvData.Columns["HE_SO_NGAY_LE"].ColumnEdit = txtEdit;
+
+                    grvData.Columns["ID_CDLV"].Visible = false;
+                    grvData.Columns["ID_NHOM"].Visible = false;
+                    grvData.Columns["NGAY"].Visible = false;
+                    grvData.Columns["PHUT_BD"].OptionsColumn.ReadOnly = true;
+                    grvData.Columns["PHUT_KT"].OptionsColumn.ReadOnly = true;
+                    grvData.Columns["SO_PHUT"].OptionsColumn.ReadOnly = true;
+                    grvData.Columns["GIO_BD"].ColumnEdit = this.repositoryItemTimeEdit1;
+                    grvData.Columns["GIO_KT"].ColumnEdit = this.repositoryItemTimeEdit1;
                 }
             }
             catch
             {
             }
-            grvData.Columns["ID_CDLV"].Visible = false;
-            grvData.Columns["ID_NHOM"].Visible = false;
-            grvData.Columns["NGAY"].Visible = false;
-            grvData.Columns["PHUT_BD"].OptionsColumn.ReadOnly = true;
-            grvData.Columns["PHUT_KT"].OptionsColumn.ReadOnly = true;
-            grvData.Columns["SO_PHUT"].OptionsColumn.ReadOnly = true;
-            grvData.Columns["GIO_BD"].ColumnEdit = this.repositoryItemTimeEdit1;
-            grvData.Columns["GIO_KT"].ColumnEdit = this.repositoryItemTimeEdit1;
+            
         }
 
         public void LoadcboNhomChamCong(SearchLookUpEdit cboNhomChamCong)
@@ -273,7 +293,7 @@ namespace Vs.TimeAttendance
             try
             {
                 Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sTB, Commons.Modules.ObjSystems.ConvertDatatable(grvData), "");
-                
+
                 //sSql = "DELETE CHE_DO_LAM_VIEC WHERE CONVERT(NVARCHAR, NGAY, 112) = '" + Convert.ToDateTime(cboNgay.EditValue).ToString("yyyyMMdd") +
                 //       "' AND ID_NHOM = " + cboNhomChamCong.EditValue +
                 //       " INSERT INTO CHE_DO_LAM_VIEC([ID_NHOM],[CA],[NGAY],[GIO_BD],[GIO_KT],[PHUT_BD],[PHUT_KT],[SO_PHUT],[HE_SO_NGAY_THUONG]," +
@@ -282,12 +302,12 @@ namespace Vs.TimeAttendance
                 //       "[PHUT_KT],[SO_PHUT],[HE_SO_NGAY_THUONG],[HE_SO_NGAY_CN],[HE_SO_NGAY_LE],[TRU_DAU_GIO],[TRU_CUOI_GIO],[PHUT_VE_SOM],[TANG_CA],[TC_DEM]," +
                 //       "[KIEM_TRA],[NGAY_HOM_SAU],[CA_NGAY_HOM_SAU],[CA_DEM],[PHUT_TRUOC_CA],[CHE_DO] FROM " + sTB + " WHERE CA IS NOT NULL " + "";
 
-                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "sPsaveCheDoLamViec",Commons.Modules.UserName,Commons.Modules.TypeLanguage, cboNhomChamCong.EditValue,sTB, Convert.ToDateTime(cboNgay.EditValue).ToString("MM/dd/yyyy"));
+                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "sPsaveCheDoLamViec", Commons.Modules.UserName, Commons.Modules.TypeLanguage, cboNhomChamCong.EditValue, sTB, Convert.ToDateTime(cboNgay.EditValue).ToString("MM/dd/yyyy"));
                 Commons.Modules.ObjSystems.XoaTable(sTB);
                 return true;
             }
             catch (Exception ex)
-            { 
+            {
                 Commons.Modules.ObjSystems.XoaTable(sTB);
                 return false;
             }

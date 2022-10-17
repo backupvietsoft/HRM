@@ -38,12 +38,13 @@ namespace Vs.Payroll.Form
             LoadCboChuyen();
             cboID_CHUYEN.EditValue = iID_CHUYEN;
             //LoadCboHD(0);
+            lblID_ORD.Visible = false;
+            cboID_ORD.Visible = false;
 
             LoadcboDHB();
-
             cboID_DHB.EditValue = iID_DHB;
             cboID_MH.EditValue = iID_MH;
-            cboID_ORD.EditValue = iID_ORD;
+            //cboID_ORD.EditValue = iID_ORD;
 
             LoadgrvCDThuaThieu();
             LoadgrvCN();
@@ -129,7 +130,7 @@ namespace Vs.Payroll.Form
         {
             //LoadCboHD(2);
             LoadcboHH();
-            LoadcboORD();
+            //LoadcboORD();
             Commons.Modules.sLoad = "";
         }
 
@@ -137,7 +138,7 @@ namespace Vs.Payroll.Form
         {
             if (Commons.Modules.sLoad == "0Load") return;
             //LoadCboHD(3);
-            LoadcboORD();
+            //LoadcboORD();
             LoadSLChot();
             LoadgrvCDThuaThieu();
             LoadgrvCN();
@@ -219,7 +220,7 @@ namespace Vs.Payroll.Form
                 cmd.Parameters.Add("@Ngay", SqlDbType.DateTime).Value = Ngay;
                 cmd.Parameters.Add("@ID_CHUYEN", SqlDbType.Int).Value = cboID_CHUYEN.EditValue;
                 cmd.Parameters.Add("@ID_CHUYEN_SD", SqlDbType.Int).Value = Convert.ToInt32(iID_CHUYEN_SD);
-                cmd.Parameters.Add("@ID_ORD", SqlDbType.Int).Value = cboID_ORD.EditValue;
+                cmd.Parameters.Add("@ID_ORD", SqlDbType.Int).Value = cboID_MH.EditValue;
 
                 cmd.CommandType = CommandType.StoredProcedure;
                 System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
@@ -259,7 +260,7 @@ namespace Vs.Payroll.Form
 
                 dt = new DataTable();
                 dt = ds.Tables[0].Copy();
-                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_DHB, dt, "ID_DHB", "SO_DHB", "SO_DHB", true);
+                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_DHB, dt, "ID_DT", "TEN_NGAN", "TEN_NGAN", true);
 
                 if (conn.State == ConnectionState.Open)
                     conn.Close();
@@ -288,13 +289,13 @@ namespace Vs.Payroll.Form
 
                 dt = new DataTable();
                 dt = ds.Tables[0].Copy();
-                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_MH, dt, "ID_HH", "TEN_HH", "TEN_HH", true);
+                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_MH, dt, "ID_ORD", "TEN_HH", "TEN_HH", true);
                 if (conn.State == ConnectionState.Open)
                     conn.Close();
             }
             catch { }
         }
-        private void LoadcboORD()
+        /*private void LoadcboORD()
         {
             System.Data.SqlClient.SqlConnection conn;
             DataTable dt = new DataTable();
@@ -322,18 +323,18 @@ namespace Vs.Payroll.Form
                     conn.Close();
             }
             catch { }
-        }
+        }*/
 
         private void LoadCboChuyen()
         {
             try
             {
-                string sSql = "SELECT ID_CHUYEN, TEN_CHUYEN FROM CHUYEN ORDER BY CHUYEN.TEN_CHUYEN";
+                string sSql = "SELECT ID_TO, TEN_TO FROM [TO] ORDER BY [TO].STT_TO";
                 DataTable dt = new DataTable();
                 dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSql));
                 if (cboID_CHUYEN.Properties.DataSource == null)
                 {
-                    Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_CHUYEN, dt, "ID_CHUYEN", "TEN_CHUYEN", "TEN_CHUYEN");
+                    Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_CHUYEN, dt, "ID_TO", "TEN_TO", "TEN_TO");
                 }
                 else
                 {
@@ -359,7 +360,7 @@ namespace Vs.Payroll.Form
                 cmd.Parameters.Add("@Ngay", SqlDbType.DateTime).Value = Ngay;
                 cmd.Parameters.Add("@ID_CHUYEN", SqlDbType.BigInt).Value = cboID_CHUYEN.EditValue;
                 cmd.Parameters.Add("@ID_CHUYEN_SD", SqlDbType.BigInt).Value = iID_CHUYEN_SD;
-                cmd.Parameters.Add("@ID_ORD", SqlDbType.BigInt).Value = cboID_ORD.EditValue;
+                cmd.Parameters.Add("@ID_ORD", SqlDbType.BigInt).Value = cboID_MH.EditValue;
                 cmd.CommandType = CommandType.StoredProcedure;
                 System.Data.SqlClient.SqlDataAdapter da = new System.Data.SqlClient.SqlDataAdapter(cmd);
                 DataSet ds = new DataSet();
@@ -435,7 +436,7 @@ namespace Vs.Payroll.Form
             try
             {
                 DataTable dt = new DataTable();
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetDSCNThucHienCD", Commons.Modules.UserName, Commons.Modules.TypeLanguage, Ngay, Convert.ToInt64(cboID_CHUYEN.EditValue), iID_CHUYEN_SD, Convert.ToInt64(cboID_ORD.EditValue)));
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetDSCNThucHienCD", Commons.Modules.UserName, Commons.Modules.TypeLanguage, Ngay, Convert.ToInt64(cboID_CHUYEN.EditValue), iID_CHUYEN_SD, Convert.ToInt64(cboID_MH.EditValue)));
                 if (grdCNThucHien.DataSource == null)
                 {
                     Commons.Modules.ObjSystems.MLoadXtraGrid(grdCNThucHien, grvCNThucHien, dt, false, true, false, true, false, "");

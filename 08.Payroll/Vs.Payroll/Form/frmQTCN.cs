@@ -333,7 +333,7 @@ namespace Vs.Payroll
                     conn.Open();
                     System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spQTCN", conn);
                     cmd.Parameters.Add("@iLoai", SqlDbType.Int).Value = 2;
-                    cmd.Parameters.Add("@NGAY_LAP", SqlDbType.DateTime).Value = Commons.Modules.ObjSystems.ConvertDateTime(datNgayLap.Text);
+                    cmd.Parameters.Add("@NGAY_LAP", SqlDbType.DateTime).Value = Convert.ToDateTime(datNgayLap.Text);
                     cmd.Parameters.Add("@sBT", SqlDbType.NVarChar).Value = stbQT;
                     cmd.Parameters.Add("@ID_TO", SqlDbType.BigInt).Value = cboChuyen.EditValue;
                     cmd.Parameters.Add("@ID_MH", SqlDbType.BigInt).Value = cboMH.EditValue;

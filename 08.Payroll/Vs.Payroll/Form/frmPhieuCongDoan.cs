@@ -43,8 +43,15 @@ namespace Vs.Payroll
             {
                 Commons.Modules.sLoad = "0Load";
                 Commons.Modules.ObjSystems.LoadCboDonVi(cboDV);
-                Commons.Modules.ObjSystems.LoadCboXiNghiep(cboDV, cboXN);
-                Commons.Modules.ObjSystems.LoadCboTo(cboDV, cboXN, cboTo);
+
+                DataTable dt = new DataTable();
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT  T.ID_XN,T.TEN_XN FROM (SELECT  DISTINCT  STT_DV, STT_XN, ID_XN, TEN_XN  AS TEN_XN  FROM dbo.MGetToUser('" + Commons.Modules.UserName + "', " + Commons.Modules.TypeLanguage + ") WHERE ID_DV = " + cboDV.EditValue + " OR " + cboDV.EditValue + " = -1 AND ID_LOAI_CHUYEN IN(1, 2, 3, 4, 5, 6, 7) UNION SELECT - 1, -1, -1, '< All >') T ORDER BY T.STT_DV, T.STT_XN"));
+                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboXN, dt, "ID_XN", "TEN_XN", "TEN_XN");
+
+                dt = new DataTable();
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT  ID_TO, TEN_TO FROM dbo.MGetToUser('" + Commons.Modules.UserName + "'," + Commons.Modules.TypeLanguage + ") WHERE ID_LOAI_CHUYEN IN (1,2,3,4,5,6,7) AND (ID_DV = " + cboDV.EditValue + " OR " + cboDV.EditValue + " =-1) AND (ID_XN =" + cboXN.EditValue + " OR " + cboXN.EditValue + " = -1) UNION SELECT - 1, '< All >' ORDER BY  TEN_TO"));
+                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboTo, dt, "ID_TO", "TEN_TO", "TEN_TO");
+
 
                 LoadThang();
                 LoadChuyen();
@@ -55,7 +62,7 @@ namespace Vs.Payroll
                 Commons.Modules.sLoad = "";
 
                 grvTo_FocusedRowChanged(null, null);
-
+                TSua(false);
                 //cboMSCN.Properties.Items[2].Description = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "rdoDaDong");
                 //grvCD.Columns["ID_CD"].ColumnEdit = cboMQL;
                 //cboMQL.EditValueChanged += CboMQL_EditValueChanged;
@@ -82,7 +89,7 @@ namespace Vs.Payroll
         {
             try
             {
-                string sSql = "SELECT ID_TO, TEN_TO FROM [TO] UNION SELECT '-1', ' < ALL > ' FROM [TO] ORDER BY [TO].TEN_TO";
+                string sSql = "SELECT [TO].ID_TO, [TO].TEN_TO FROM dbo.[TO] INNER JOIN dbo.XI_NGHIEP XN ON XN.ID_XN = [TO].ID_XN WHERE [TO].ID_LOAI_CHUYEN IN (1,2,3,4,5,6,7) AND (XN.ID_DV = " + cboDV.EditValue + " OR " + cboDV.EditValue + " = -1) ORDER BY [TO].TEN_TO";
                 DataTable dt = new DataTable();
                 dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSql));
                 Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboChuyen, dt, "ID_TO", "TEN_TO", "TEN_TO");
@@ -217,7 +224,7 @@ namespace Vs.Payroll
                 if (grdCD.DataSource == null)
                 {
                     //Commons.Modules.ObjSystems.MLoadXtraGrid(grdCD, grvCD, dt, windowsUIButton.Buttons[3].Properties.Visible, false, false, true, true, this.Name);
-                    Commons.Modules.ObjSystems.MLoadXtraGrid(grdCD, grvCD, dt, false,true, false, true, true, this.Name);
+                    Commons.Modules.ObjSystems.MLoadXtraGrid(grdCD, grvCD, dt, false, true, false, true, true, this.Name);
                     grvCD.Columns["TEN_CD"].OptionsColumn.AllowFocus = false;
                     grvCD.Columns["TEN_CD"].OptionsColumn.ReadOnly = true;
                     grvCD.Columns["ID_CN"].Visible = false;
@@ -238,7 +245,7 @@ namespace Vs.Payroll
                 cboMQL.DisplayMember = "MaQL";
                 cboMQL.DataSource = dtMQL;
                 cboMQL.Columns.Clear();
-                TSua(false);
+                //TSua(false);
 
                 cboMQL.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID_CD"));
                 cboMQL.Columns["ID_CD"].Caption = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "ID_CD");
@@ -263,7 +270,7 @@ namespace Vs.Payroll
                 grvCD.Columns["ID_CD"].ColumnEdit = cboMQL;
                 cboMQL.ShowDropDown = DevExpress.XtraEditors.Controls.ShowDropDown.Never;
                 cboMQL.SearchMode = DevExpress.XtraEditors.Controls.SearchMode.OnlyInPopup;
-     
+
 
                 //DataTable dtMQL = new DataTable();
                 //dtMQL.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT DISTINCT T1.ID_CD, T1.MaQL, T1.TEN_CD_QT AS TEN_CD FROM QUI_TRINH_CONG_NGHE_CHI_TIET T1 LEFT JOIN PHIEU_CONG_DOAN T2 ON T1.ID_CD = T2.ID_CD"));
@@ -393,7 +400,7 @@ namespace Vs.Payroll
 
         private void TSua(Boolean TSua)
         {
-            grdPCD.Enabled = !TSua;
+            //grdPCD.Enabled = !TSua;
 
             windowsUIButton.Buttons[0].Properties.Visible = !TSua;
             windowsUIButton.Buttons[1].Properties.Visible = !TSua;
@@ -450,15 +457,28 @@ namespace Vs.Payroll
 
         private void cboDV_EditValueChanged(object sender, EventArgs e)
         {
-            if (Commons.Modules.sLoad == "0Load") return;
-            Commons.Modules.ObjSystems.LoadCboXiNghiep(cboDV, cboXN);
-            Commons.Modules.ObjSystems.LoadCboTo(cboDV, cboXN, cboTo);
+            try
+            {
+                if (Commons.Modules.sLoad == "0Load") return;
+                DataTable dt = new DataTable();
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT  T.ID_XN,T.TEN_XN FROM (SELECT  DISTINCT  STT_DV, STT_XN, ID_XN, TEN_XN  AS TEN_XN  FROM dbo.MGetToUser('" + Commons.Modules.UserName + "', " + Commons.Modules.TypeLanguage + ") WHERE (ID_DV = " + cboDV.EditValue + " OR " + cboDV.EditValue + " = -1) AND ID_LOAI_CHUYEN IN(1, 2, 3, 4, 5, 6, 7) UNION SELECT - 1, -1, -1, '< All >') T ORDER BY T.STT_DV, T.STT_XN"));
+                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboXN, dt, "ID_XN", "TEN_XN", "TEN_XN");
+
+                dt = new DataTable();
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT  ID_TO, TEN_TO FROM dbo.MGetToUser('" + Commons.Modules.UserName + "'," + Commons.Modules.TypeLanguage + ") WHERE ID_LOAI_CHUYEN IN (1,2,3,4,5,6,7) AND (ID_DV = " + cboDV.EditValue + " OR " + cboDV.EditValue + " =-1) AND (ID_XN =" + cboXN.EditValue + " OR " + cboXN.EditValue + " = -1) UNION SELECT - 1, '< All >' ORDER BY  TEN_TO"));
+                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboTo, dt, "ID_TO", "TEN_TO", "TEN_TO");
+                LoadChuyen();
+            }
+            catch { }
+
         }
 
         private void cboXN_EditValueChanged(object sender, EventArgs e)
         {
             if (Commons.Modules.sLoad == "0Load") return;
-            Commons.Modules.ObjSystems.LoadCboTo(cboDV, cboXN, cboTo);
+            DataTable dt = new DataTable();
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT  ID_TO, TEN_TO FROM dbo.MGetToUser('" + Commons.Modules.UserName + "'," + Commons.Modules.TypeLanguage + ") WHERE ID_LOAI_CHUYEN IN (1,2,3,4,5,6,7) AND (ID_DV = " + cboDV.EditValue + " OR " + cboDV.EditValue + " =-1) AND (ID_XN =" + cboXN.EditValue + " OR " + cboXN.EditValue + " = -1) UNION SELECT - 1, '< All >' ORDER BY  TEN_TO"));
+            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboTo, dt, "ID_TO", "TEN_TO", "TEN_TO");
         }
 
         private void cboTo_EditValueChanged(object sender, EventArgs e)
@@ -628,7 +648,7 @@ namespace Vs.Payroll
                         try
                         {
                             ////Load combo DHB, MH
-                            string strSQL = "SELECT ID_DHB, ID_HH FROM dbo.DON_HANG_BAN_ORDER WHERE ID_DHBORD = " + Convert.ToInt64(grvPCD.GetFocusedRowCellValue("ID_ORD")) + "";
+                            string strSQL = "SELECT ID_ORD, ID_DT FROM dbo.DON_HANG_BAN_ORDER WHERE ID_ORD = " + Convert.ToInt64(grvPCD.GetFocusedRowCellValue("ID_ORD")) + "";
                             dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, strSQL));
                         }
                         catch
@@ -643,11 +663,11 @@ namespace Vs.Payroll
                         frm.Location = new Point(this.Width / 2 - frm.Width / 2 + this.Location.X,
                                                   this.Height / 2 - frm.Height / 2 + this.Location.Y);
 
-                        frm.iID_DHB = Convert.ToInt64(dt.Rows[0]["ID_DHB"]);
-                        frm.iID_MH = Convert.ToInt64(dt.Rows[0]["ID_HH"]);
+                        frm.iID_DHB = Convert.ToInt64(dt.Rows[0]["ID_DT"]);
+                        frm.iID_MH = Convert.ToInt64(dt.Rows[0]["ID_ORD"]);
                         frm.iID_CHUYEN = Convert.ToInt64(grvPCD.GetFocusedRowCellValue("ID_CHUYEN"));
                         frm.iID_CHUYEN_SD = Convert.ToInt64(grvPCD.GetFocusedRowCellValue("ID_CHUYEN_SD"));
-                        frm.iID_ORD = Convert.ToInt64(grvPCD.GetFocusedRowCellValue("ID_ORD"));
+                        frm.iID_ORD = -1;
                         frm.Ngay = DateTime.ParseExact(cboNgay.Text, "dd/MM/yyyy", cultures);
 
                         iIDPCD_TEMP = Convert.ToInt64(grvPCD.GetFocusedRowCellValue("ID_TEMP"));
@@ -774,28 +794,28 @@ namespace Vs.Payroll
 
         //private void txtMSCN_TextChanged(object sender, EventArgs e)
         //{
-            //try
-            //{
-            //    if (txtMSCN.Text == "")
-            //    {
-            //        Commons.Modules.sLoad = "";
-            //    }
-            //    if (Commons.Modules.sLoad == "0Short") return;
-            //    DataTable dt = (DataTable)(grdTo.DataSource);
-            //    if (txtMSCN.Text.Length > 0)
-            //    {
-            //        string TextSearch = string.Format("MS_CN LIKE '%{0}%'", txtMSCN.Text);
+        //try
+        //{
+        //    if (txtMSCN.Text == "")
+        //    {
+        //        Commons.Modules.sLoad = "";
+        //    }
+        //    if (Commons.Modules.sLoad == "0Short") return;
+        //    DataTable dt = (DataTable)(grdTo.DataSource);
+        //    if (txtMSCN.Text.Length > 0)
+        //    {
+        //        string TextSearch = string.Format("MS_CN LIKE '%{0}%'", txtMSCN.Text);
 
-            //        try
-            //        {
-            //            dt.DefaultView.RowFilter = TextSearch;
-            //        }
-            //        catch { dt.DefaultView.RowFilter = ""; }
-            //    }
-            //    else { dt.DefaultView.RowFilter = ""; }
-            //}
-            //catch
-            //{ }
+        //        try
+        //        {
+        //            dt.DefaultView.RowFilter = TextSearch;
+        //        }
+        //        catch { dt.DefaultView.RowFilter = ""; }
+        //    }
+        //    else { dt.DefaultView.RowFilter = ""; }
+        //}
+        //catch
+        //{ }
         //}
         private void cboMSCN_EditValueChanged(object sender, EventArgs e)
         {

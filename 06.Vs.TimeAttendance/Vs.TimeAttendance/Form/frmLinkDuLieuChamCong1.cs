@@ -943,7 +943,7 @@ namespace Vs.TimeAttendance
                 grvNgay.Columns["NGAY"].DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
                 grvNgay.Columns["NGAY"].DisplayFormat.FormatString = "dd/MM/yyyy";
 
-                grvNgay.Columns["TH"].Visible = true;
+                
                 grvNgay.OptionsSelection.ShowCheckBoxSelectorInColumnHeader = DevExpress.Utils.DefaultBoolean.True;
                 grvNgay.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CheckBoxRowSelect;
                 grvNgay.OptionsSelection.CheckBoxSelectorField = "TH";
@@ -1352,6 +1352,23 @@ namespace Vs.TimeAttendance
             catch
             {
 
+            }
+        }
+
+        private void grvDSCN_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Modifiers == Keys.Control && e.KeyCode == Keys.F3)
+            {
+                frmViewDataGoc frm = new frmViewDataGoc();
+                DateTime dNgay = DateTime.Now.Date;
+                try { dNgay = dtNgayChamCong.DateTime; } catch { }
+
+                Int64 iIDCN = -1;
+                try { iIDCN = Int64.Parse(grvDSCN.GetFocusedRowCellValue("ID_CN").ToString()); } catch { }
+                frm.iIDCN = iIDCN;
+                frm.dNgayCC = dNgay;
+                frm.ShowDialog();
+                
             }
         }
     }

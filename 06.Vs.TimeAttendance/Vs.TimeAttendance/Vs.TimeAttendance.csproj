@@ -149,6 +149,12 @@
     <Compile Include="Form\frmVachTheLoi.Designer.cs">
       <DependentUpon>frmVachTheLoi.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form\frmViewDataGoc.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\frmViewDataGoc.Designer.cs">
+      <DependentUpon>frmViewDataGoc.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form\ucCapNhatGio.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -576,6 +582,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form\frmVachTheLoi.resx">
       <DependentUpon>frmVachTheLoi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\frmViewDataGoc.resx">
+      <DependentUpon>frmViewDataGoc.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\ucCapNhatGio.resx">
       <DependentUpon>ucCapNhatGio.cs</DependentUpon>

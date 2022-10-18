@@ -2412,6 +2412,7 @@ D:\01.SourceCode\02.HRM\01.VietSoftHRM\VietSoftHRM\obj\Debug\VietSoftHRM.csproj.
 D:\01.SourceCode\02.HRM\01.VietSoftHRM\VietSoftHRM\obj\Debug\VietSoftHRM.exe
 D:\01.SourceCode\02.HRM\01.VietSoftHRM\VietSoftHRM\obj\Debug\VietSoftHRM.pdb
 D:\01.SourceCode\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\ICSharpCode.SharpZipLib.dll
+H:\Lamviec\Lamviec\HRM\01.HRM\01.VietSoftHRM\VietSoftHRM\obj\Debug\VietSoftHRM.frmThongBaoTuyenDung.resources
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Template\TemplateGiamLaoDong.xlsx
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Template\TemplateTaiNanLaoDong.xlsx
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Template\TemplateTangLaoDong.xlsx
@@ -2581,4 +2582,3 @@ F:\01.HRM\01.VietSoftHRM\VietSoftHRM\obj\Debug\VietSoftHRM.csproj.CoreCompileInp
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\obj\Debug\VietSoftHRM.csproj.CopyComplete
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\obj\Debug\VietSoftHRM.exe
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\obj\Debug\VietSoftHRM.pdb
-H:\Lamviec\Lamviec\HRM\01.HRM\01.VietSoftHRM\VietSoftHRM\obj\Debug\VietSoftHRM.frmThongBaoTuyenDung.resources

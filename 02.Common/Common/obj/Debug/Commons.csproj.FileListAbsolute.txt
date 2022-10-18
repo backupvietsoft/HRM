@@ -987,6 +987,8 @@ D:\01.SourceCode\02.HRM\02.Common\Common\obj\Debug\Commons.csproj.CopyComplete
 D:\01.SourceCode\02.HRM\02.Common\Common\obj\Debug\Commons.dll
 D:\01.SourceCode\02.HRM\02.Common\Common\obj\Debug\Commons.pdb
 D:\01.SourceCode\02.HRM\02.Common\Common\bin\Debug\ICSharpCode.SharpZipLib.dll
+F:\01.HRM\02.Common\Common\bin\Debug\DevExpress.XtraTreeList.v22.1.dll
+F:\01.HRM\02.Common\Common\obj\Debug\Commons.ThongBao.resources
 F:\01.HRM\02.Common\Common\bin\Debug\Commons.dll.config
 F:\01.HRM\02.Common\Common\bin\Debug\Commons.dll
 F:\01.HRM\02.Common\Common\bin\Debug\Commons.pdb
@@ -1005,7 +1007,6 @@ F:\01.HRM\02.Common\Common\bin\Debug\DevExpress.XtraGrid.v22.1.dll
 F:\01.HRM\02.Common\Common\bin\Debug\DevExpress.XtraLayout.v22.1.dll
 F:\01.HRM\02.Common\Common\bin\Debug\DevExpress.XtraNavBar.v22.1.dll
 F:\01.HRM\02.Common\Common\bin\Debug\DevExpress.XtraReports.v22.1.dll
-F:\01.HRM\02.Common\Common\bin\Debug\DevExpress.XtraTreeList.v22.1.dll
 F:\01.HRM\02.Common\Common\bin\Debug\Microsoft.ApplicationBlocks.Data.dll
 F:\01.HRM\02.Common\Common\bin\Debug\Newtonsoft.Json.dll
 F:\01.HRM\02.Common\Common\bin\Debug\NPOI.dll
@@ -1052,7 +1053,6 @@ F:\01.HRM\02.Common\Common\obj\Debug\Commons.frmPopUp.resources
 F:\01.HRM\02.Common\Common\obj\Debug\Commons.frmWaitForm.resources
 F:\01.HRM\02.Common\Common\obj\Debug\Commons.Properties.Resources.resources
 F:\01.HRM\02.Common\Common\obj\Debug\Commons.SubReportHeader.resources
-F:\01.HRM\02.Common\Common\obj\Debug\Commons.ThongBao.resources
 F:\01.HRM\02.Common\Common\obj\Debug\Commons.UAC.XtraForm1.resources
 F:\01.HRM\02.Common\Common\obj\Debug\Commons.csproj.GenerateResource.cache
 F:\01.HRM\02.Common\Common\obj\Debug\Commons.dll.licenses

@@ -2417,6 +2417,7 @@ F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.TimeAttendance.For
 F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.TimeAttendance.frmLinkDuLieuChamCong1.resources
 F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.TimeAttendance.frmLinkDuLieuChamCong.resources
 F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.TimeAttendance.frmVachTheLoi.resources
+F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.TimeAttendance.frmViewDataGoc.resources
 F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.HRM.ucCapNhatGio.resources
 F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.TimeAttendance.ucDangKiLamThem.resources
 F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.TimeAttendance.ucViPhamQuetThe.resources

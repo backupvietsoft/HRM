@@ -41,6 +41,7 @@ namespace Vs.Payroll
         {
             try
             {
+                chkKT.Checked = true;
                 Commons.Modules.sLoad = "0Load";
                 Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboDV, Commons.Modules.ObjSystems.DataDonVi(false), "ID_DV", "TEN_DV", "TEN_DV");
 
@@ -49,7 +50,7 @@ namespace Vs.Payroll
                 Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboXN, dt, "ID_XN", "TEN_XN", "TEN_XN");
 
                 dt = new DataTable();
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT T2.ID_TO, T2.TEN_TO FROM (SELECT  ID_TO, TEN_TO, STT_TO FROM dbo.MGetToUser('" + Commons.Modules.UserName + "', " + Commons.Modules.TypeLanguage + ") WHERE ID_LOAI_CHUYEN IN(1, 2, 3, 4, 5, 6, 7) AND(ID_DV = " + cboDV.EditValue + " OR " + cboDV.EditValue + " = -1) AND(ID_XN = " + cboXN.EditValue + " OR " + cboXN.EditValue + " = -1) UNION SELECT - 1, '< All >', -1) T2 ORDER BY  STT_TO "));
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT T2.ID_TO, T2.TEN_TO FROM (SELECT  ID_TO, TEN_TO, STT_TO FROM dbo.MGetToUser('" + Commons.Modules.UserName + "', " + Commons.Modules.TypeLanguage + ") WHERE ID_LOAI_CHUYEN IN(1, 2, 3, 4, 5, 6, 7) AND(ID_DV = " + cboDV.EditValue + " OR " + cboDV.EditValue + " = -1) AND(ID_XN = " + cboXN.EditValue + " OR " + cboXN.EditValue + " = -1)) T2 ORDER BY  STT_TO "));
                 Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboTo, dt, "ID_TO", "TEN_TO", "TEN_TO");
 
 
@@ -180,11 +181,11 @@ namespace Vs.Payroll
                 catch { dtNgay = DateTime.Now; }
 
                 //optXCLP.SelectedIndex = 0  XEM CU
-
                 DataTable dt = new DataTable();
                 dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spPCDGetCNhan", cboDV.EditValue, cboXN.EditValue, cboTo.EditValue, Commons.Modules.UserName,
                         Commons.Modules.TypeLanguage, XemCu, iChuyen, iOrd, dtNgay));
                 dt.PrimaryKey = new DataColumn[] { dt.Columns["ID_CN"] };
+                dt.Columns["CDL"].ReadOnly = false;
                 //Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboCN, dt, "MS_CN", "LMS", "LMS");
                 if (grdTo.DataSource == null)
                 {
@@ -203,7 +204,7 @@ namespace Vs.Payroll
                     grvTo.SelectRow(index);
                 }
             }
-            catch { }
+            catch (Exception ex) { }
         }
 
         private void LoadCD()
@@ -221,6 +222,7 @@ namespace Vs.Payroll
                 DataTable dt = new DataTable();
                 dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spPCDGetCDoan", cboDV.EditValue, cboXN.EditValue, cboTo.EditValue, Commons.Modules.UserName,
                         Commons.Modules.TypeLanguage, iChuyenSuDung, iOrd, dtNgay, sBT));
+                dt.Columns["ID_CD"].ReadOnly = false;
                 dtCD = dt;
                 Commons.Modules.ObjSystems.XoaTable(sBT);
                 if (grdCD.DataSource == null)
@@ -230,6 +232,9 @@ namespace Vs.Payroll
                     grvCD.Columns["TEN_CD"].OptionsColumn.AllowFocus = false;
                     grvCD.Columns["TEN_CD"].OptionsColumn.ReadOnly = true;
                     grvCD.Columns["ID_CN"].Visible = false;
+                    grvCD.Columns["ID_CHUYEN"].Visible = false;
+                    grvCD.Columns["ID_CHUYEN_SD"].Visible = false;
+                    grvCD.Columns["ID_ORD"].Visible = false;
 
                     grvCD.Columns["SO_LUONG"].DisplayFormat.FormatType = FormatType.Numeric;
                     grvCD.Columns["SO_LUONG"].DisplayFormat.FormatString = "N0";
@@ -265,14 +270,17 @@ namespace Vs.Payroll
                 //cboMQL.ShowLines
                 grvCD.Columns["ID_CD"].ColumnEdit = cboMQL;
                 cboMQL.ShowDropDown = DevExpress.XtraEditors.Controls.ShowDropDown.Never;
-                cboMQL.SearchMode = DevExpress.XtraEditors.Controls.SearchMode.OnlyInPopup;
+                cboMQL.SearchMode = DevExpress.XtraEditors.Controls.SearchMode.AutoComplete;
+                cboMQL.EditValueChanged += CboMQL_EditValueChanged;
             }
             catch
             {
                 Commons.Modules.ObjSystems.XoaTable(sBT);
             }
         }
-
+        private void CboMQL_EditValueChanged(object sender, EventArgs e)
+        {
+        }
         private void LoadCboMSCN()
         {
             try
@@ -337,8 +345,6 @@ namespace Vs.Payroll
             iChuyenSuDung = grvPCD.GetFocusedRowCellValue("ID_CHUYEN_SD") == null ? -1 : Convert.ToInt32(grvPCD.GetFocusedRowCellValue("ID_CHUYEN_SD").ToString());
             iChuyen = grvPCD.GetFocusedRowCellValue("ID_CHUYEN") == null ? -1 : Convert.ToInt32(grvPCD.GetFocusedRowCellValue("ID_CHUYEN").ToString());
             iOrd = grvPCD.GetFocusedRowCellValue("ID_ORD") == null ? -1 : Convert.ToInt32(grvPCD.GetFocusedRowCellValue("ID_ORD").ToString());
-            //LoadCD();
-
             LoadCN();
 
             cboMQL = new RepositoryItemLookUpEdit();
@@ -368,8 +374,8 @@ namespace Vs.Payroll
             //cboMQL.ShowLines
             grvCD.Columns["ID_CD"].ColumnEdit = cboMQL;
             cboMQL.ShowDropDown = DevExpress.XtraEditors.Controls.ShowDropDown.Never;
-            cboMQL.SearchMode = DevExpress.XtraEditors.Controls.SearchMode.OnlyInPopup;
-
+            cboMQL.SearchMode = DevExpress.XtraEditors.Controls.SearchMode.AutoComplete;
+            cboMQL.EditValueChanged += CboMQL_EditValueChanged;
             LoadCboMSCN();
             grvTo_FocusedRowChanged(null, null);
         }
@@ -401,11 +407,6 @@ namespace Vs.Payroll
             }
             catch { }
 
-            try
-            {
-                txtTEN_CN.EditValue = string.IsNullOrEmpty(grvTo.GetFocusedRowCellValue("HO_TEN").ToString()) ? null : grvTo.GetFocusedRowCellValue("HO_TEN").ToString();
-            }
-            catch { }
 
             if (Commons.Modules.sPS != "0Focus")
             {
@@ -481,7 +482,7 @@ namespace Vs.Payroll
                 Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboXN, dt, "ID_XN", "TEN_XN", "TEN_XN");
 
                 dt = new DataTable();
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT T2.ID_TO, T2.TEN_TO FROM (SELECT  ID_TO, TEN_TO, STT_TO FROM dbo.MGetToUser('" + Commons.Modules.UserName + "', " + Commons.Modules.TypeLanguage + ") WHERE ID_LOAI_CHUYEN IN(1, 2, 3, 4, 5, 6, 7) AND(ID_DV = " + cboDV.EditValue + " OR " + cboDV.EditValue + " = -1) AND(ID_XN = " + cboXN.EditValue + " OR " + cboXN.EditValue + " = -1) UNION SELECT - 1, '< All >', -1) T2 ORDER BY  STT_TO "));
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT T2.ID_TO, T2.TEN_TO FROM (SELECT  ID_TO, TEN_TO, STT_TO FROM dbo.MGetToUser('" + Commons.Modules.UserName + "', " + Commons.Modules.TypeLanguage + ") WHERE ID_LOAI_CHUYEN IN(1, 2, 3, 4, 5, 6, 7) AND(ID_DV = " + cboDV.EditValue + " OR " + cboDV.EditValue + " = -1) AND(ID_XN = " + cboXN.EditValue + " OR " + cboXN.EditValue + " = -1) ) T2 ORDER BY  STT_TO "));
                 Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboTo, dt, "ID_TO", "TEN_TO", "TEN_TO");
                 LoadChuyen();
             }
@@ -493,7 +494,7 @@ namespace Vs.Payroll
         {
             if (Commons.Modules.sLoad == "0Load") return;
             DataTable dt = new DataTable();
-            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT  ID_TO, TEN_TO FROM dbo.MGetToUser('" + Commons.Modules.UserName + "'," + Commons.Modules.TypeLanguage + ") WHERE ID_LOAI_CHUYEN IN (1,2,3,4,5,6,7) AND (ID_DV = " + cboDV.EditValue + " OR " + cboDV.EditValue + " =-1) AND (ID_XN =" + cboXN.EditValue + " OR " + cboXN.EditValue + " = -1) UNION SELECT - 1, '< All >' ORDER BY  TEN_TO"));
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT T2.ID_TO, T2.TEN_TO FROM (SELECT  ID_TO, TEN_TO, STT_TO FROM dbo.MGetToUser('" + Commons.Modules.UserName + "', " + Commons.Modules.TypeLanguage + ") WHERE ID_LOAI_CHUYEN IN(1, 2, 3, 4, 5, 6, 7) AND(ID_DV = " + cboDV.EditValue + " OR " + cboDV.EditValue + " = -1) AND(ID_XN = " + cboXN.EditValue + " OR " + cboXN.EditValue + " = -1)) T2 ORDER BY  STT_TO "));
             Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboTo, dt, "ID_TO", "TEN_TO", "TEN_TO");
         }
 
@@ -561,7 +562,6 @@ namespace Vs.Payroll
 
         private void grvCD_ValidatingEditor(object sender, DevExpress.XtraEditors.Controls.BaseContainerValidateEditorEventArgs e)
         {
-
             grvCD.ClearColumnErrors();
             GridView view = sender as GridView;
 
@@ -598,7 +598,7 @@ namespace Vs.Payroll
                 }
             }
 
-            if (chkKT.Checked == true)
+            if (chkKT.Checked == false)
             {
                 return;
             }
@@ -607,15 +607,16 @@ namespace Vs.Payroll
                 string sBT_CD = "sBT_CD" + Commons.Modules.UserName;
                 try
                 {
-                    Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBT_CD, dtCD, "");
+                    //Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBT_CD, dtCD, "");
+                    Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBT_CD, Commons.Modules.ObjSystems.ConvertDatatable(grvCD), "");
                     System.Data.SqlClient.SqlConnection conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
                     conn.Open();
                     System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spGetSLNhapCD", conn);
                     cmd.Parameters.Add("@BangTam", SqlDbType.NVarChar).Value = sBT_CD;
                     cmd.Parameters.Add("@Ngay", SqlDbType.DateTime).Value = DateTime.ParseExact(cboNgay.Text, "dd/MM/yyyy", cultures);
                     cmd.Parameters.Add("@SLnhap", SqlDbType.Int).Value = e.Value;
-                    cmd.Parameters.Add("@ID_Chuyen", SqlDbType.BigInt).Value = Convert.ToInt64(grvPCD.GetFocusedRowCellValue("ID_CHUYEN"));
-                    cmd.Parameters.Add("@ID_Ord", SqlDbType.BigInt).Value = string.IsNullOrEmpty(grvPCD.GetFocusedRowCellValue("ID_ORD").ToString()) ? -1 : Convert.ToInt64(grvPCD.GetFocusedRowCellValue("ID_ORD"));
+                    cmd.Parameters.Add("@ID_Chuyen", SqlDbType.BigInt).Value = Convert.ToInt64(grvCD.GetFocusedRowCellValue("ID_CHUYEN"));
+                    cmd.Parameters.Add("@ID_Ord", SqlDbType.BigInt).Value = string.IsNullOrEmpty(grvCD.GetFocusedRowCellValue("ID_ORD").ToString()) ? -1 : Convert.ToInt64(grvCD.GetFocusedRowCellValue("ID_ORD"));
                     cmd.Parameters.Add("@ID_CD", SqlDbType.BigInt).Value = string.IsNullOrEmpty(grvCD.GetFocusedRowCellValue("ID_CD").ToString()) ? -1 : Convert.ToInt64(grvCD.GetFocusedRowCellValue("ID_CD"));
                     cmd.CommandType = CommandType.StoredProcedure;
                     System.Data.SqlClient.SqlDataAdapter da = new System.Data.SqlClient.SqlDataAdapter(cmd);
@@ -636,6 +637,10 @@ namespace Vs.Payroll
                             view.SetColumnError(view.Columns["SO_LUONG"], e.ErrorText);
                             return;
                         }
+                        else
+                        {
+                            grvCD.SetFocusedRowCellValue("SO_LUONG", e.Value);
+                        }
                     }
                     Commons.Modules.ObjSystems.XoaTable(sBT_CD);
                 }
@@ -645,7 +650,30 @@ namespace Vs.Payroll
                 }
             }
         }
-
+        private void grvCD_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
+        {
+            //try
+            //{
+            //    GridView view = sender as GridView;
+            //    if (e.Column.FieldName == "SO_LUONG")
+            //    {
+            //        int iSLNhap = 0;
+            //        iSLNhap = view.GetFocusedRowCellValue("SO_LUONG") == null ? 0 : Convert.ToInt32(grvCD.GetFocusedRowCellValue("SO_LUONG"));
+            //        if (iSLNhap == 0)
+            //        {
+            //            //string sError = Commons.Modules.TypeLanguage == 0 ? "Số lượng phải lớn hơn 0" : "The number must be greater than 0";
+            //            //view.SetColumnError(view.Columns["SO_LUONG"], sError);
+            //            bKiemSL = true;
+            //            return;
+            //        }
+            //    }
+            //    bKiemSL = false;
+            //}
+            //catch
+            //{
+            //    bKiemSL = true;
+            //}
+        }
         private void grvCD_InvalidRowException(object sender, DevExpress.XtraGrid.Views.Base.InvalidRowExceptionEventArgs e)
         {
             e.ExceptionMode = DevExpress.XtraEditors.Controls.ExceptionMode.NoAction;
@@ -748,6 +776,12 @@ namespace Vs.Payroll
                     }
                 case "luu":
                     {
+                        grvCD.CloseEditor();
+                        grvCD.UpdateCurrentRow();
+
+                        DataTable dtSoure = new DataTable();
+                        dtSoure = (DataTable)grdCD.DataSource;
+                        //if (!KiemTraLuoi(dtSoure)) return;
                         string stbCongNhan = "BTPCD" + Commons.Modules.UserName;
                         //DateTime ngay = Convert.ToDateTime(cboNgay.EditValue);
                         DateTime ngay = DateTime.ParseExact(cboNgay.Text, "dd/MM/yyyy", cultures);
@@ -762,9 +796,14 @@ namespace Vs.Payroll
                         catch (Exception ex) { }
 
                         TSua(false);
-                        LoadCD();
-                        LoadCN();
-                        LoadCboMSCN();
+                        XemCu = 0;
+                        Commons.Modules.ObjSystems.DeleteAddRow(grvCD);
+                        grvCD.UpdateCurrentRow();
+                        cboNgay_EditValueChanged_1(null, null);
+                        //LoadPCD();
+                        //LoadCD();
+                        //LoadCN();
+                        //LoadCboMSCN();
                         grvTo_FocusedRowChanged(null, null);
                         break;
                     }
@@ -775,10 +814,10 @@ namespace Vs.Payroll
                         XemCu = 0;
                         Commons.Modules.ObjSystems.DeleteAddRow(grvCD);
                         grvCD.UpdateCurrentRow();
-                        LoadPCD();
-                        LoadCD();
-                        LoadCN();
-                        LoadCboMSCN();
+                        //LoadPCD();
+                        //LoadCD();
+                        //LoadCN();
+                        //LoadCboMSCN();
                         cboNgay_EditValueChanged_1(null, null);
                         grvTo_FocusedRowChanged(null, null);
                         break;
@@ -809,31 +848,6 @@ namespace Vs.Payroll
             }
         }
 
-        //private void txtMSCN_TextChanged(object sender, EventArgs e)
-        //{
-        //try
-        //{
-        //    if (txtMSCN.Text == "")
-        //    {
-        //        Commons.Modules.sLoad = "";
-        //    }
-        //    if (Commons.Modules.sLoad == "0Short") return;
-        //    DataTable dt = (DataTable)(grdTo.DataSource);
-        //    if (txtMSCN.Text.Length > 0)
-        //    {
-        //        string TextSearch = string.Format("MS_CN LIKE '%{0}%'", txtMSCN.Text);
-
-        //        try
-        //        {
-        //            dt.DefaultView.RowFilter = TextSearch;
-        //        }
-        //        catch { dt.DefaultView.RowFilter = ""; }
-        //    }
-        //    else { dt.DefaultView.RowFilter = ""; }
-        //}
-        //catch
-        //{ }
-        //}
         private void cboMSCN_EditValueChanged(object sender, EventArgs e)
         {
             try
@@ -864,6 +878,8 @@ namespace Vs.Payroll
                 grvCD.SetFocusedRowCellValue("ID_CHUYEN", grvPCD.GetFocusedRowCellValue("ID_CHUYEN"));
                 grvCD.SetFocusedRowCellValue("ID_CHUYEN_SD", grvPCD.GetFocusedRowCellValue("ID_CHUYEN_SD"));
                 grvCD.SetFocusedRowCellValue("ID_ORD", grvPCD.GetFocusedRowCellValue("ID_ORD"));
+                grvTo.SetFocusedRowCellValue("CDL", grvCD.RowCount);
+
             }
             catch { }
         }
@@ -872,9 +888,189 @@ namespace Vs.Payroll
         {
             try
             {
+                //grvCD.SetFocusedRowCellValue("ID_CD", cboMQL.GetDataSourceValue("ID_CD", 1));
                 if (e.KeyCode == Keys.Delete && !windowsUIButton.Buttons[0].Properties.Visible)
                 {
                     grvCD.DeleteSelectedRows();
+                    DataTable dt = new DataTable();
+                    dt = Commons.Modules.ObjSystems.ConvertDatatable(grvCD);
+                    grvTo.SetFocusedRowCellValue("CDL", dt.Rows.Count == 0 ? (object)(DBNull.Value) : dt.Rows.Count);
+                }
+            }
+            catch { }
+        }
+
+        private void grvPCD_RowCountChanged(object sender, EventArgs e)
+        {
+            grvPCD_FocusedRowChanged(null, null);
+        }
+
+        private void grvCD_CellValueChanging(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
+        {
+            //try
+            //{
+            //    GridView view = sender as GridView;
+            //    if (e.Column.FieldName == "SO_LUONG")
+            //    {
+            //        int iSLNhap = 0;
+            //        iSLNhap = Convert.ToInt32(e.Value);
+            //        if (iSLNhap == 0)
+            //        {
+            //            //string sError = Commons.Modules.TypeLanguage == 0 ? "Số lượng phải lớn hơn 0" : "The number must be greater than 0";
+            //            //view.SetColumnError(view.Columns["SO_LUONG"], sError);
+            //            bKiemSL = true;
+            //            return;
+            //        }
+            //    }
+            //    bKiemSL = false;
+            //}
+            //catch
+            //{
+            //    bKiemSL = true;
+            //}
+        }
+
+        #region kiemDL
+        private bool KiemTraLuoi(DataTable dtSource)
+        {
+            int errorCount = 0;
+            #region kiểm tra dữ liệu
+            this.Cursor = Cursors.WaitCursor;
+            foreach (DataRow dr in dtSource.Rows)
+            {
+                dr.ClearErrors();
+                //Số hợp đồng lao động
+
+
+                if (!KiemDuLieuSo(grvCD, dr, "SO_LUONG", grvCD.Columns["SO_LUONG"].FieldName.ToString(), 0, 0, true, this.Name))
+                {
+                    try
+                    {
+                        DataTable dt1 = new DataTable();
+                        dt1 = (DataTable)grdTo.DataSource;
+                        dt1.PrimaryKey = new DataColumn[] { dt1.Columns["ID_CN"] };
+                        int index = dt1.Rows.IndexOf(dt1.Rows.Find(dr["ID_CN"]));
+                        DataRow dr1 = dt1.Rows[index];
+                        dr1.SetColumnError("CDL", "Error");
+
+                        DataTable dt2 = new DataTable();
+                        dt2 = (DataTable)grdPCD.DataSource;
+                        dt2.PrimaryKey = new DataColumn[] { dt2.Columns["ID_ORD"] };
+                        index = dt2.Rows.IndexOf(dt2.Rows.Find(dr["ID_ORD"]));
+                        DataRow dr2 = dt2.Rows[index];
+                        dr2.SetColumnError("TEN_HH", "Error");
+                    }
+                    catch (Exception ex) { }
+                    errorCount++;
+                }
+            }
+            #endregion
+            Commons.Modules.ObjSystems.HideWaitForm();
+            if (errorCount != 0)
+            {
+                this.Cursor = Cursors.Default;
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDuLieuChuaHopLe"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            else
+            {
+                this.Cursor = Cursors.Default;
+                return true;
+            }
+        }
+
+        public bool KiemDuLieuSo(GridView grvData, DataRow dr, string sCot, string sTenKTra, double GTSoSanh, double GTMacDinh, Boolean bKiemNull, string sForm)
+        {
+            string sDLKiem;
+            sDLKiem = dr[sCot].ToString();
+            double DLKiem;
+            if (bKiemNull)
+            {
+                if (string.IsNullOrEmpty(sDLKiem))
+                {
+                    dr.SetColumnError(sCot, Commons.Modules.ObjLanguages.GetLanguage(sForm, "msgKhongduocTrong"));
+                    return false;
+                }
+                else
+                {
+                    if (!double.TryParse(dr[sCot].ToString(), out DLKiem))
+                    {
+                        dr.SetColumnError(sCot, Commons.Modules.ObjLanguages.GetLanguage(sForm, "msgKhongPhaiSo"));
+                        return false;
+                    }
+                    else
+                    {
+                        if (GTSoSanh != -999999)
+                        {
+                            if (DLKiem < GTSoSanh)
+                            {
+                                dr.SetColumnError(sCot, sTenKTra + Commons.Modules.ObjLanguages.GetLanguage(sForm, "msgKhongNhoHon") + GTSoSanh.ToString());
+                                dr["XOA"] = 1;
+                                return false;
+                            }
+
+                            DLKiem = Math.Round(DLKiem, 8);
+                            dr[sCot] = DLKiem.ToString();
+
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (string.IsNullOrEmpty(sDLKiem) && GTMacDinh != -999999)
+                {
+                    dr[sCot] = GTMacDinh;
+                    DLKiem = GTMacDinh;
+                    sDLKiem = GTMacDinh.ToString();
+                }
+
+                if (!string.IsNullOrEmpty(sDLKiem))
+                {
+                    if (!double.TryParse(dr[sCot].ToString(), out DLKiem))
+                    {
+                        dr.SetColumnError(sCot, sTenKTra + Commons.Modules.ObjLanguages.GetLanguage(sForm, "msgKhongPhaiSo"));
+                        return false;
+                    }
+                    else
+                    {
+                        if (GTSoSanh != -999999)
+                        {
+                            if (DLKiem < GTSoSanh)
+                            {
+                                dr.SetColumnError(sCot, sTenKTra + Commons.Modules.ObjLanguages.GetLanguage(sForm, "msgKhongNhoHon") + GTSoSanh.ToString());
+                                return false;
+                            }
+
+                            DLKiem = Math.Round(DLKiem, 8);
+                            dr[sCot] = DLKiem.ToString();
+                        }
+                    }
+                }
+            }
+            return true;
+        }
+
+        #endregion
+
+        private void grvCD_ValidateRow(object sender, DevExpress.XtraGrid.Views.Base.ValidateRowEventArgs e)
+        {
+            try
+            {
+                GridView view = sender as GridView;
+                view.UpdateCurrentRow();
+
+                if (view.FocusedColumn.FieldName == "SO_LUONG")
+                {
+                    int iSLNhap = 0;
+                    iSLNhap = view.GetFocusedRowCellValue("SO_LUONG").ToString() == "" ? 0 : Convert.ToInt32(view.GetFocusedRowCellValue("SO_LUONG"));
+                    if (iSLNhap == 0)
+                    {
+                        e.Valid = false;
+                        e.ErrorText = Commons.Modules.TypeLanguage == 0 ? "Số lượng phải lớn hơn 0" : "The number must be greater than 0";
+                        view.SetColumnError(view.Columns["SO_LUONG"], e.ErrorText);
+                        return;
+                    }
                 }
             }
             catch { }

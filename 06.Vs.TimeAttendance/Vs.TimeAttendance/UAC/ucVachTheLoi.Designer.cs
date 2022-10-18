@@ -217,7 +217,6 @@
             this.grvCongNhan.OptionsView.ShowGroupPanel = false;
             this.grvCongNhan.PopupMenuShowing += new DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler(this.grvDSUngVien_PopupMenuShowing);
             this.grvCongNhan.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.grvCongNhan_FocusedRowChanged);
-            this.grvCongNhan.CellValueChanged += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.grvCongNhan_CellValueChanged);
             this.grvCongNhan.InvalidRowException += new DevExpress.XtraGrid.Views.Base.InvalidRowExceptionEventHandler(this.grvCongNhan_InvalidRowException);
             this.grvCongNhan.ValidatingEditor += new DevExpress.XtraEditors.Controls.BaseContainerValidateEditorEventHandler(this.grvCongNhan_ValidatingEditor);
             this.grvCongNhan.RowCountChanged += new System.EventHandler(this.grvCongNhan_RowCountChanged);

@@ -394,6 +394,7 @@ namespace Vs.TimeAttendance
         private void grvCongNhan_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
             if (Commons.Modules.sLoad == "0Load") return;
+            grvCongNhan.UpdateCurrentRow();
             DataTable dtTmp = new DataTable();
             String sIDCN;
             try

@@ -27,7 +27,6 @@ namespace Vs.HRM
             }
         }
 
-
         public ucCapNhatGio()
         {
             InitializeComponent();
@@ -64,6 +63,7 @@ namespace Vs.HRM
 
             Commons.Modules.sLoad = "";
             dTuNgay.EditValue = Convert.ToDateTime(("01/" + DateTime.Now.Month + "/" + DateTime.Now.Year));
+            EnabelButton(true);
         }
         private void cboDV_EditValueChanged(object sender, EventArgs e)
         {
@@ -122,7 +122,6 @@ namespace Vs.HRM
                             Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBT, Commons.Modules.ObjSystems.ConvertDatatable(grvData), "");
 
                             System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spAutoUpdateTimekeeping", conn);
-                            cmd.CommandType = CommandType.StoredProcedure;
                             cmd.Parameters.AddWithValue("@UName", Commons.Modules.UserName);
                             cmd.Parameters.AddWithValue("@NNgu", Commons.Modules.TypeLanguage);
                             cmd.Parameters.AddWithValue("@ID_DV", cboDV.EditValue);
@@ -131,15 +130,55 @@ namespace Vs.HRM
                             cmd.Parameters.AddWithValue("@sBT1", sBT);
                             cmd.Parameters.AddWithValue("@TNgay", dTuNgay.EditValue);
                             cmd.Parameters.AddWithValue("@DDate", dDenNgay.EditValue);
-                            cmd.ExecuteNonQuery();
+                            cmd.Parameters.AddWithValue("@iLoai", 0);
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+                            DataSet ds = new DataSet();
+                            adp.Fill(ds);
+                            DataTable dt = new DataTable();
+                            dt = ds.Tables[0].Copy();
+                            grdData.DataSource = dt;
                             Commons.Modules.ObjSystems.XoaTable(sBT);
-                            XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_CapNhatThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            LoadData();
+                            //XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_CapNhatThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            EnabelButton(false);
                         }
                         catch (Exception ex)
                         {
                             Commons.Modules.ObjSystems.XoaTable("sBTCapNhatGio" + Commons.Modules.iIDUser);
                         }
+                        break;
+                    }
+                case "ghi":
+                    {
+                        System.Data.SqlClient.SqlConnection conn;
+                        conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                        conn.Open();
+
+                        string sBT = "sBTCapNhatGio" + Commons.Modules.iIDUser;
+                        Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBT, Commons.Modules.ObjSystems.ConvertDatatable(grvData), "");
+
+                        System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spAutoUpdateTimekeeping", conn);
+                        cmd.Parameters.AddWithValue("@UName", Commons.Modules.UserName);
+                        cmd.Parameters.AddWithValue("@NNgu", Commons.Modules.TypeLanguage);
+                        cmd.Parameters.AddWithValue("@ID_DV", cboDV.EditValue);
+                        cmd.Parameters.AddWithValue("@ID_XN", cboXN.EditValue);
+                        cmd.Parameters.AddWithValue("@ID_TO", cboTo.EditValue);
+                        cmd.Parameters.AddWithValue("@sBT1", sBT);
+                        cmd.Parameters.AddWithValue("@TNgay", dTuNgay.EditValue);
+                        cmd.Parameters.AddWithValue("@DDate", dDenNgay.EditValue);
+                        cmd.Parameters.AddWithValue("@iLoai", 1);
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.ExecuteNonQuery();
+                        Commons.Modules.ObjSystems.XoaTable(sBT);
+                        LoadData();
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_CapNhatThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        EnabelButton(true);
+                        break;
+                    }
+                case "khongghi":
+                    {
+                        LoadData();
+                        EnabelButton(true);
                         break;
                     }
                 case "thoat":
@@ -202,6 +241,13 @@ namespace Vs.HRM
                 {
                     Commons.Modules.ObjSystems.MLoadXtraGrid(grdData, grvData, dt, true, true, false, true, true, this.Name);
                     grvData.Columns["ID_CN"].Visible = false;
+                    grvData.Columns["NGAY_DEN"].Visible = false;
+                    grvData.Columns["NGAY_VE"].Visible = false;
+                    grvData.Columns["PHUT_DEN"].Visible = false;
+                    grvData.Columns["PHUT_VE"].Visible = false;
+                    grvData.Columns["ID_NHOM"].Visible = false;
+                    grvData.Columns["CA"].Visible = false;
+                    grvData.Columns["CHINH_SUA"].Visible = false;
 
                     grvData.Columns["GIO_DEN"].ColumnEdit = repositoryItemTimeEdit1;
                     grvData.Columns["GIO_VE"].ColumnEdit = repositoryItemTimeEdit1;
@@ -214,12 +260,18 @@ namespace Vs.HRM
                     grvData.Columns["NGAY"].OptionsColumn.AllowEdit = false;
                     grvData.Columns["GIO_DEN"].OptionsColumn.AllowEdit = false;
                     grvData.Columns["GIO_VE"].OptionsColumn.AllowEdit = false;
-
+                    grvData.Columns["CHON"].Visible = false;
                 }
                 else
                 {
                     grdData.DataSource = dt;
                 }
+                try
+                {
+                    grvData.OptionsSelection.CheckBoxSelectorField = "CHON";
+                    grvData.Columns["CHON"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
+                }
+                catch { }
             }
             catch { }
         }
@@ -248,14 +300,31 @@ namespace Vs.HRM
         {
             try
             {
-                if (Convert.ToDateTime(grvData.GetRowCellValue(e.RowHandle, grvData.Columns["NGAY"])).DayOfWeek.ToString() != "Sunday" && Convert.ToDateTime(grvData.GetRowCellValue(e.RowHandle, grvData.Columns["NGAY"])).DayOfWeek.ToString() != "Saturday") return;
-                e.Appearance.BackColor = System.Drawing.ColorTranslator.FromHtml("#A9F5BC");
-                e.HighPriority = true;
+                if (Convert.ToDateTime(grvData.GetRowCellValue(e.RowHandle, grvData.Columns["NGAY"])).DayOfWeek.ToString() != "Sunday" && Convert.ToDateTime(grvData.GetRowCellValue(e.RowHandle, grvData.Columns["NGAY"])).DayOfWeek.ToString() != "Saturday")
+                {
+                    e.Appearance.BackColor = System.Drawing.ColorTranslator.FromHtml("#FFFFFF");
+                    e.HighPriority = true;
+                }
+                else
+                {
+                    e.Appearance.BackColor = System.Drawing.ColorTranslator.FromHtml("#A9F5BC");
+                    e.HighPriority = true;
+                }
+                
             }
             catch
             {
 
             }
+        }
+        private void EnabelButton(bool visible)
+        {
+            windowsUIButton.Buttons[0].Properties.Visible = visible;
+            windowsUIButton.Buttons[1].Properties.Visible = visible;
+            windowsUIButton.Buttons[2].Properties.Visible = visible;
+            windowsUIButton.Buttons[3].Properties.Visible = !visible;
+            windowsUIButton.Buttons[4].Properties.Visible = !visible;
+            grvData.OptionsBehavior.Editable = !visible;
         }
     }
 }

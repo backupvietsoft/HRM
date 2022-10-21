@@ -132,7 +132,7 @@
             this.xrTableCell6.StylePriority.UseFont = false;
             this.xrTableCell6.StylePriority.UsePadding = false;
             this.xrTableCell6.StylePriority.UseTextAlignment = false;
-            xrSummary1.Running = DevExpress.XtraReports.UI.SummaryRunning.Page;
+            xrSummary1.Running = DevExpress.XtraReports.UI.SummaryRunning.Report;
             this.xrTableCell6.Summary = xrSummary1;
             this.xrTableCell6.Text = "xrTableCell6";
             this.xrTableCell6.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
@@ -168,7 +168,7 @@
             this.xrTableCell3.StylePriority.UseTextAlignment = false;
             this.xrTableCell3.Text = "xrTableCell3";
             this.xrTableCell3.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            this.xrTableCell3.Weight = 1.7468687930908087D;
+            this.xrTableCell3.Weight = 1.5557278542059831D;
             // 
             // xrTableCell2
             // 
@@ -184,7 +184,7 @@
             this.xrTableCell2.StylePriority.UseTextAlignment = false;
             this.xrTableCell2.Text = "xrTableCell2";
             this.xrTableCell2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            this.xrTableCell2.Weight = 1.6820729740674509D;
+            this.xrTableCell2.Weight = 1.7275826614303107D;
             // 
             // xrTableCell4
             // 
@@ -200,7 +200,7 @@
             this.xrTableCell4.StylePriority.UseTextAlignment = false;
             this.xrTableCell4.Text = "xrTableCell4";
             this.xrTableCell4.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            this.xrTableCell4.Weight = 1.5454785319943503D;
+            this.xrTableCell4.Weight = 1.691109783516316D;
             // 
             // xrTableCell11
             // 
@@ -358,7 +358,7 @@
             this.tiHoten.RowSpan = 2;
             this.tiHoten.StylePriority.UseFont = false;
             this.tiHoten.Text = "Họ tên";
-            this.tiHoten.Weight = 2.5790066702653065D;
+            this.tiHoten.Weight = 2.2968140306712095D;
             // 
             // tiPBan
             // 
@@ -368,7 +368,7 @@
             this.tiPBan.Name = "tiPBan";
             this.tiPBan.StylePriority.UseFont = false;
             this.tiPBan.Text = "Phòng ban";
-            this.tiPBan.Weight = 2.4833448198567329D;
+            this.tiPBan.Weight = 2.550533336911383D;
             // 
             // tiTo
             // 
@@ -378,7 +378,7 @@
             this.tiTo.Name = "tiTo";
             this.tiTo.StylePriority.UseFont = false;
             this.tiTo.Text = "Tổ";
-            this.tiTo.Weight = 2.2816817313997761D;
+            this.tiTo.Weight = 2.4966858539392227D;
             // 
             // tiGioden
             // 

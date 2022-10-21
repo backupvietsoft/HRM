@@ -215,6 +215,7 @@ namespace Vs.TimeAttendance
                     {
                         TongHopDuLieu();
                         LoadLuoiNgay(dtNgayChamCong.DateTime);
+                        LoadGridCongNhan(dtNgayChamCong.DateTime);
                         XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msg_TongHopDL"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                         break;
                     }
@@ -966,6 +967,10 @@ namespace Vs.TimeAttendance
                 dt.Columns["MS_THE_CC"].ReadOnly = true;
                 Commons.Modules.ObjSystems.MLoadXtraGrid(grdDSCN, grvDSCN, dt, false, false, true, true, true, this.Name);
                 grvDSCN.Columns["ID_CN"].Visible = false;
+                grvDSCN.Columns["GIO_LV"].DisplayFormat.FormatType = FormatType.Numeric;
+                grvDSCN.Columns["GIO_LV"].DisplayFormat.FormatString = "0.00;(0.00);''";
+                grvDSCN.Columns["GIO_TC"].DisplayFormat.FormatType = FormatType.Numeric;
+                grvDSCN.Columns["GIO_TC"].DisplayFormat.FormatString = "0.00;(0.00);''";
                 grvDSCN.RefreshData();
             }
             catch

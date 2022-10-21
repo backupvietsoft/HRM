@@ -92,6 +92,19 @@ namespace Commons
             }
         }
 
+        private static bool _bKiemPCD;
+        public static bool bKiemPCD
+        {
+            get
+            {
+                return _bKiemPCD;
+            }
+            set
+            {
+                _bKiemPCD = value;
+            }
+        }
+
         private static string _msgTitle;
         public static string msgTitle
         {

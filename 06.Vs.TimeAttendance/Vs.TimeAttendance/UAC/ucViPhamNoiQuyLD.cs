@@ -1,4 +1,5 @@
 ﻿using Commons;
+using DevExpress.Utils.Menu;
 using DevExpress.XtraBars.Docking2010;
 using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Repository;
@@ -18,6 +19,8 @@ namespace Vs.TimeAttendance
 {
     public partial class ucViPhamNoiQuyLD : DevExpress.XtraEditors.XtraUserControl
     {
+        private bool iAdd = false;
+        private string ChuoiKT = "";
         public static ucViPhamNoiQuyLD _instance;
         public static ucViPhamNoiQuyLD Instance
         {
@@ -88,38 +91,6 @@ namespace Vs.TimeAttendance
             grvCongNhan_FocusedRowChanged(null, null);
             Commons.Modules.sLoad = "";
         }
-        public void CheckDuplicateDIEM_THEO_DOI_NOP_BAI(GridView grid, DataSet GridDataSet, DevExpress.XtraGrid.Views.Base.ValidateRowEventArgs e)
-        {
-            DataRow row = grid.GetDataRow(e.RowHandle);
-            int count = 0;
-            foreach (DataRow r in GridDataSet.Tables[0].Rows)
-            {
-                if (r.RowState != DataRowState.Deleted)
-                {
-                    if (r["NHAN_SU"].ToString() == row["NHAN_SU"].ToString() && r["NGUOI_GIAO"].ToString() == row["NGUOI_GIAO"].ToString() && r["NGAY_GIAO"].ToString() == row["NGAY_GIAO"].ToString())
-                    {
-                        if (grid.IsNewItemRow(grid.FocusedRowHandle))
-                        {
-                            r.RowError = "Dữ liệu bị trùng, xin vui lòng kiểm tra lại.";
-                            grid.SetColumnError(grid.Columns["NHAN_SU"], "Nhân sự, người giao và ngày giao bị trùng, xin vui lòng kiểm tra lại.");
-                            e.Valid = false;
-                            return;
-                        }
-                        else
-                        {
-                            count++;
-                            if (count == 2)
-                            {
-                                r.RowError = "Dữ liệu bị trùng, xin vui lòng kiểm tra lại.";
-                                grid.SetColumnError(grid.Columns["NHAN_SU"], "Nhân sự, người giao và ngày giao bị trùng, xin vui lòng kiểm tra lại.");
-                                e.Valid = false;
-                                return;
-                            }
-                        }
-                    }
-                }
-            }
-        }
         private void windowsUIButton_ButtonClick(object sender, DevExpress.XtraBars.Docking2010.ButtonEventArgs e)
         {
             WindowsUIButton btn = e.Button as WindowsUIButton;
@@ -129,18 +100,16 @@ namespace Vs.TimeAttendance
 
                 case "themsua":
                     {
-                        if (grvCongNhan.RowCount == 0)
-                        {
-                            Commons.Modules.ObjSystems.msgChung(Commons.ThongBao.msgBanChuaChonDuLieu);
-                            return;
-                        }
+                        iAdd = true;
+                        LoadGrdCongNhan();
+                        LoadGrdVPNoiQuy();
+                        grvCongNhan_FocusedRowChanged(null, null);
                         Commons.Modules.ObjSystems.AddnewRow(grvViPhamNoiQuyLD, true);
                         enableButon(false);
                         break;
                     }
                 case "xoa":
                     {
-                        XoaKeHoachDiCa();
                         break;
                     }
                 case "In":
@@ -148,7 +117,7 @@ namespace Vs.TimeAttendance
                         System.Data.SqlClient.SqlConnection conn;
                         DataTable dt = new DataTable();
                         frmViewReport frm = new frmViewReport();
-                        frm.rpt = new rptBCViPhamNoiQuyLD(Convert.ToDateTime(cboThang.Text),"");
+                        frm.rpt = new rptBCViPhamNoiQuyLD(Convert.ToDateTime(cboThang.Text), "");
 
                         conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
                         conn.Open();
@@ -175,6 +144,9 @@ namespace Vs.TimeAttendance
                     {
                         Validate();
                         if (grvViPhamNoiQuyLD.HasColumnErrors) return;
+                        DataTable dt = new DataTable();
+                        dt = (DataTable)grdViPhamNoiQuyLD.DataSource;
+                        if (!KiemTraLuoi(dt)) return;
                         if (Savedata() == false)
                         {
                             Commons.Modules.ObjSystems.msgChung(Commons.ThongBao.msgDuLieuDangSuDung);
@@ -189,8 +161,10 @@ namespace Vs.TimeAttendance
                     }
                 case "khongluu":
                     {
-                        Commons.Modules.ObjSystems.DeleteAddRow(grvViPhamNoiQuyLD);
+                        iAdd = false;
+                        LoadGrdCongNhan();
                         LoadGrdVPNoiQuy();
+                        Commons.Modules.ObjSystems.DeleteAddRow(grvViPhamNoiQuyLD);
                         grvCongNhan_FocusedRowChanged(null, null);
                         enableButon(true);
                         break;
@@ -210,15 +184,32 @@ namespace Vs.TimeAttendance
             {
                 Commons.Modules.sLoad = "0Load";
                 DataTable dt = new DataTable();
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetCongNhanVPNoiQuy", cboDV.EditValue, cboXN.EditValue, cboTo.EditValue, Commons.Modules.UserName, Commons.Modules.TypeLanguage, 1));
-                Commons.Modules.ObjSystems.MLoadXtraGrid(grdCongNhan, grvCongNhan, dt, false, false, true, true, true, this.Name);
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetCongNhanVPNoiQuy", cboDV.EditValue, cboXN.EditValue, cboTo.EditValue, Commons.Modules.UserName, Commons.Modules.TypeLanguage, iAdd, Commons.Modules.ObjSystems.ConvertDateTime(cboThang.Text)));
+                dt.Columns["CHON"].ReadOnly = false;
+                Commons.Modules.ObjSystems.MLoadXtraGrid(grdCongNhan, grvCongNhan, dt, false, true, true, true, true, this.Name);
                 grvCongNhan.Columns["ID_CN"].Visible = false;
                 grvCongNhan.Columns["TINH_TRANG"].Visible = false;
-                //grvCongNhan.Appearance.HeaderPanel.BackColor = Color.FromArgb(240, 128, 25);
-                //for (int i = 0; i < grvCongNhan.Columns.Count; i++)
-                //{
-                //    grvCongNhan.Columns[i].AppearanceHeader.BackColor = Color.FromArgb(200, 200, 200);
-                //}
+                grvCongNhan.Columns["CHON"].Visible = false;
+                if (iAdd)
+                {
+                    dt.Columns["CDL"].ReadOnly = false;
+                    grvCongNhan.OptionsSelection.MultiSelect = true;
+                    grvCongNhan.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CheckBoxRowSelect;
+                    try
+                    {
+                        //grvCongNhan.Columns["CDL"].Visible = false;
+                        grvCongNhan.OptionsSelection.CheckBoxSelectorField = "CHON";
+                        grvCongNhan.Columns["CHON"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
+                    }
+                    catch { }
+                }
+                else
+                {
+                    grvCongNhan.OptionsSelection.MultiSelect = false;
+                    grvCongNhan.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.RowSelect;
+                }
+
+
                 Commons.Modules.sLoad = "";
             }
             catch (Exception ex)
@@ -234,6 +225,7 @@ namespace Vs.TimeAttendance
 
                 dt.Columns["ID_NQLD"].ReadOnly = false;
                 dt.Columns["NGAY"].ReadOnly = false;
+                dt.Columns["ID_VPNQ"].ReadOnly = false;
                 if (grdViPhamNoiQuyLD.DataSource == null)
                 {
                     Commons.Modules.ObjSystems.MLoadXtraGrid(grdViPhamNoiQuyLD, grvViPhamNoiQuyLD, dt, true, true, false, true, true, this.Name);
@@ -245,15 +237,25 @@ namespace Vs.TimeAttendance
                     grdViPhamNoiQuyLD.DataSource = dt;
                 }
 
-                //RepositoryItemLookUpEdit cboNQLD = new RepositoryItemLookUpEdit();
-
-                //cboNQLD.NullText = "";
-                //cboNQLD.ValueMember = "ID_NQLD";
-                //cboNQLD.DisplayMember = "NOI_DUNG";
                 DataTable dt1 = new DataTable();
-                dt1.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboNQLD",Commons.Modules.UserName, Commons.Modules.TypeLanguage, 0));
-                Commons.Modules.ObjSystems.AddCombXtra("ID_NQLD", "NOI_DUNG", grvViPhamNoiQuyLD, dt1, false, "ID_NQLD", "NOI_QUY_LAO_DONG");
+                dt1.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboNQLD", Commons.Modules.UserName, Commons.Modules.TypeLanguage, 0));
 
+                RepositoryItemLookUpEdit cboNQLD = new RepositoryItemLookUpEdit();
+                cboNQLD.NullText = "";
+                cboNQLD.ValueMember = "ID_NQLD";
+                cboNQLD.DisplayMember = "NOI_DUNG";
+                cboNQLD.DataSource = dt1;
+                cboNQLD.Columns.Clear();
+
+                cboNQLD.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("NOI_DUNG"));
+                cboNQLD.Columns["NOI_DUNG"].Caption = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "NOI_DUNG");
+
+                cboNQLD.AppearanceDropDownHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+                cboNQLD.AppearanceDropDownHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+                grvViPhamNoiQuyLD.Columns["ID_NQLD"].ColumnEdit = cboNQLD;
+
+                cboNQLD.BeforePopup += cboNQLD_BeforePopup;
+                cboNQLD.EditValueChanged += cboNQLD_EditValueChanged;
             }
             catch
             {
@@ -262,60 +264,55 @@ namespace Vs.TimeAttendance
         }
         private void cboNQLD_BeforePopup(object sender, EventArgs e)
         {
-            //try
-            //{
-            //    Int64 id_cv = Convert.ToInt64(grvViPhamNoiQuyLD.GetFocusedRowCellValue("ID_NQLD"));
-            //    if (sender is LookUpEdit cbo)
-            //    {
-            //        try
-            //        {
-            //            DataTable DataCombo = (DataTable)cbo.Properties.DataSource;
-            //            DataTable DataLuoi = Commons.Modules.ObjSystems.ConvertDatatable(grdViPhamNoiQuyLD);
-            //            var DataNewCombo = DataCombo.AsEnumerable().Where(r => !DataLuoi.AsEnumerable()
-            //            .Any(r2 => r["ID_NQLD"].ToString().Trim() == r2["ID_NQLD"].ToString().Trim())).CopyToDataTable();
-            //            cbo.Properties.DataSource = null;
-            //            cbo.Properties.DataSource = DataNewCombo;
-            //        }
-            //        catch
-            //        {
-            //            cbo.Properties.DataSource = null;
-            //        }
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    XtraMessageBox.Show(ex.Message);
-            //}
+            try
+            {
+                DataTable dt = new DataTable();
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboNQLD", Commons.Modules.UserName, Commons.Modules.TypeLanguage, 0));
+                LookUpEdit lookUp = sender as LookUpEdit;
+                lookUp.Properties.DataSource = dt;
+                DataTable dtTmp = new DataTable();
+                string sdkien = "( 1 = 1 )";
+                try
+                {
+                    string sID = "";
+                    DataTable dtTemp = new DataTable();
+                    dtTmp = Commons.Modules.ObjSystems.ConvertDatatable(grvViPhamNoiQuyLD).Copy();
+                    for (int i = 0; i < dtTmp.Rows.Count; i++)
+                    {
+                        sID = sID + dtTmp.Rows[i]["ID_NQLD"].ToString() + ",";
+                    }
+                    sID = sID.Substring(0, sID.Length - 1);
+                    sdkien = "(ID_NQLD NOT IN (" + sID + "))";
+                    dt.DefaultView.RowFilter = sdkien;
+                }
+                catch
+                {
+                    try
+                    {
+                        dtTmp.DefaultView.RowFilter = "";
+                    }
+                    catch { }
+                }
 
-            //try
-            //{
-            //    if (sender is LookUpEdit cbo)
-            //    {
-            //        int ID_NQLD = Convert.ToInt32(grvViPhamNoiQuyLD.GetFocusedRowCellValue("ID_NQLD"));
-            //        cbo.Properties.DataSource = null;
-            //        DataTable dt = new DataTable();
-            //        //dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT DISTINCT ID_NQLD  FROM VI_PHAM_NOI_QUY_LD WHERE ID_NQLD = " + ID_NHOM + " OR " + ID_NHOM + " = -1 ORDER BY CA"));
-            //        cbo.Properties.DataSource = Commons.Modules.ObjSystems.DataCa(ID_NQLD);
-            //    }
-            //}
-            //catch
-            //{
-            //}
+            }
+            catch { }
         }
         private void cboNQLD_EditValueChanged(object sender, EventArgs e)
         {
-            //LookUpEdit lookUp = sender as LookUpEdit;
-            //DataRowView dataRow = lookUp.GetSelectedDataRow() as DataRowView;
-            //try
-            //{
-            //    grvData.SetFocusedRowCellValue("TEN_TO", dataRow.Row["TEN_TO"]);
-            //}
-            //catch
-            //{
+            LookUpEdit lookUp = sender as LookUpEdit;
+            DataRowView dataRow = lookUp.GetSelectedDataRow() as DataRowView;
+            try
+            {
+                grvViPhamNoiQuyLD.SetFocusedRowCellValue("ID_NQLD", dataRow[0]);
+                grvViPhamNoiQuyLD.SetFocusedRowCellValue("ID_CN", grvCongNhan.GetFocusedRowCellValue("ID_CN"));
+                grvCongNhan.SetFocusedRowCellValue("CDL", 1);
+            }
+            catch
+            {
 
-            //}
+            }
         }
-        
+
         private void CboMSCa_BeforePopup(object sender, EventArgs e)
         {
             try
@@ -361,27 +358,13 @@ namespace Vs.TimeAttendance
             windowsUIButton.Buttons[5].Properties.Visible = !visible;
             windowsUIButton.Buttons[6].Properties.Visible = visible;
 
+            cboDV.Properties.ReadOnly = !visible;
+            cboXN.Properties.ReadOnly = !visible;
+            cboTo.Properties.ReadOnly = !visible;
+            cboThang.Properties.ReadOnly = !visible;
+
             grvViPhamNoiQuyLD.OptionsBehavior.Editable = !visible;
-
-            searchControl.Visible = visible;
         }
-        private void XoaKeHoachDiCa()
-        {
-            if (grvViPhamNoiQuyLD.RowCount == 0) { Commons.Modules.ObjSystems.msgChung(Commons.ThongBao.msgKhongCoDuLieuXoa); return; }
-            if (Commons.Modules.ObjSystems.msgHoi(Commons.ThongBao.msgXoa) == DialogResult.No) return;
-            //xóa
-            try
-            {
-                string sSql = "DELETE dbo.VI_PHAM_NOI_QUY_LD WHERE ID_CN = " + grvViPhamNoiQuyLD.GetFocusedRowCellValue("ID_CN") + "  AND NGAY = '" + Convert.ToDateTime(grvViPhamNoiQuyLD.GetFocusedRowCellValue("NGAY")).ToString("MM/dd/yyyy") + "' ";
-                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, sSql);
-                grvViPhamNoiQuyLD.DeleteSelectedRows();
-            }
-            catch
-            {
-                Commons.Modules.ObjSystems.msgChung(Commons.ThongBao.msgKhongCoDuLieuXoa);
-            }
-        }
-
         public void LoadThang()
         {
             try
@@ -390,7 +373,7 @@ namespace Vs.TimeAttendance
                 DataTable dtthang = new DataTable();
                 string sSql = "SELECT disTINCT SUBSTRING(CONVERT(VARCHAR(10),NGAY,103),4,2) as M, RIGHT(CONVERT(VARCHAR(10),NGAY,103),4) AS Y ,RIGHT(CONVERT(VARCHAR(10),NGAY,103),7) AS NGAY FROM dbo.VI_PHAM_NOI_QUY_LD ORDER BY Y DESC , M DESC";
                 dtthang.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSql));
-                if(grdThang.DataSource == null)
+                if (grdThang.DataSource == null)
                 {
                     Commons.Modules.ObjSystems.MLoadXtraGrid(grdThang, grvThang, dtthang, false, true, true, true, true, this.Name);
                     grvThang.Columns["M"].Visible = false;
@@ -400,7 +383,7 @@ namespace Vs.TimeAttendance
                 {
                     grdThang.DataSource = dtthang;
                 }
-                
+
 
                 cboThang.Text = grvThang.GetFocusedRowCellValue("NGAY").ToString();
             }
@@ -446,7 +429,7 @@ namespace Vs.TimeAttendance
         }
 
         private void grvCongNhan_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
-      {
+        {
             if (Commons.Modules.sLoad == "0Load") return;
             DataTable dtTmp = new DataTable();
             String sIDCN;
@@ -463,80 +446,6 @@ namespace Vs.TimeAttendance
             }
             catch { }
         }
-
-        private void grvKeHoachDiCa_ValidateRow(object sender, DevExpress.XtraGrid.Views.Base.ValidateRowEventArgs e)
-        {
-            try
-            {
-                //DevExpress.XtraGrid.Views.Grid.GridView View = (DevExpress.XtraGrid.Views.Grid.GridView)sender;
-                //DevExpress.XtraGrid.Columns.GridColumn ID_NQLD = View.Columns["ID_NQLD"];
-                //DevExpress.XtraGrid.Columns.GridColumn NGAY = View.Columns["NGAY"];
-
-                //if (View.GetRowCellValue(e.RowHandle, ID_NQLD).ToString() == "")
-                //{
-                //    e.Valid = false;
-                //    View.SetColumnError(ID_NQLD, Commons.Modules.ObjLanguages.GetLanguage(Commons.Modules.ModuleName, this.Name, "MsgKiemtraLDVNULL", Commons.Modules.TypeLanguage)); return;
-                //}
-
-                //if (View.GetRowCellValue(e.RowHandle, NGAY).ToString() == "")
-                //{
-                //    e.Valid = false;
-                //    View.SetColumnError(NGAY, Commons.Modules.ObjLanguages.GetLanguage(Commons.Modules.ModuleName, this.Name, "MsgKiemtraLDVNULL", Commons.Modules.TypeLanguage)); return;
-                //}
-                  
-            }
-            catch { }
-            
-        }
-
-        private void grdKeHoachDiCa_ProcessGridKey(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Delete)
-            {
-                XoaKeHoachDiCa();
-            }
-        }
-
-        private void grvKeHoachDiCa_ValidatingEditor(object sender, DevExpress.XtraEditors.Controls.BaseContainerValidateEditorEventArgs e)
-        {
-            grvViPhamNoiQuyLD.ClearColumnErrors();
-            GridView view = sender as GridView;
-
-            if (view.FocusedColumn.FieldName == "NGAY")
-            {
-
-                if (Convert.ToDateTime(e.Value) == null)
-                {
-                    e.Valid = false;
-                    e.ErrorText = "Ngày không được trống";
-                }
-            }
-        }
-
-        private void grvKeHoachDiCa_InvalidRowException(object sender, DevExpress.XtraGrid.Views.Base.InvalidRowExceptionEventArgs e)
-        {
-            e.ExceptionMode = DevExpress.XtraEditors.Controls.ExceptionMode.NoAction;
-        }
-
-        private void grvKeHoachDiCa_InvalidValueException(object sender, DevExpress.XtraEditors.Controls.InvalidValueExceptionEventArgs e)
-        {
-            //e.ExceptionMode = DevExpress.XtraEditors.Controls.ExceptionMode.NoAction;
-        }
-
-        private void grvKeHoachDiCa_InitNewRow(object sender, InitNewRowEventArgs e)
-        {
-            //thêm defaulst khi add một dòng mới
-            try
-            {
-                GridView view = sender as GridView;
-                view.SetFocusedRowCellValue("TU_NGAY", Convert.ToDateTime(DateTime.Now.Date));
-                view.SetFocusedRowCellValue("DEN_NGAY", Convert.ToDateTime(DateTime.Now.Date));
-            }
-            catch
-            {
-            }
-        }
-
         private void grvCongNhan_RowCountChanged(object sender, EventArgs e)
         {
             GridView view = sender as GridView;
@@ -596,9 +505,319 @@ namespace Vs.TimeAttendance
         private void cboThang_EditValueChanged(object sender, EventArgs e)
         {
             if (Commons.Modules.sLoad == "0Load") return;
+            LoadGrdCongNhan();
             LoadGrdVPNoiQuy();
             grvCongNhan_FocusedRowChanged(null, null);
             Commons.Modules.sLoad = "";
+        }
+
+        private void grvCongNhan_RowStyle(object sender, RowStyleEventArgs e)
+        {
+            try
+            {
+                if (Convert.ToBoolean(grvCongNhan.GetRowCellValue(e.RowHandle, grvCongNhan.Columns["CDL"])) == false)
+                {
+                    e.Appearance.BackColor = System.Drawing.ColorTranslator.FromHtml("#FFFFFF");
+                    e.HighPriority = true;
+                }
+                else
+                {
+                    e.Appearance.BackColor = System.Drawing.ColorTranslator.FromHtml("#FFFFCC");
+                    e.HighPriority = true;
+                }
+
+            }
+            catch
+            {
+            }
+        }
+
+        private void grdViPhamNoiQuyLD_ProcessGridKey(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                if (e.KeyCode == Keys.Delete && windowsUIButton.Buttons[0].Properties.Visible == false)
+                {
+                    grvViPhamNoiQuyLD.DeleteSelectedRows();
+                    DataTable dt = new DataTable();
+                    dt = Commons.Modules.ObjSystems.ConvertDatatable(grvViPhamNoiQuyLD);
+                    if (dt.Rows.Count == 0)
+                        grvCongNhan.SetFocusedRowCellValue("CDL", 0);
+                }
+
+            }
+            catch { }
+        }
+        public bool KiemKyTu(string strInput, string strChuoi)
+        {
+
+            if (strChuoi == "") strChuoi = ChuoiKT;
+
+            for (int i = 0; i < strInput.Length; i++)
+            {
+                for (int j = 0; j < strChuoi.Length; j++)
+                {
+                    if (strInput[i] == strChuoi[j])
+                    {
+                        return true;
+                    }
+                }
+            }
+            if (strInput.Contains("//"))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public bool KiemDuLieu(GridView grvData, DataRow dr, string sCot, Boolean bKiemNull, int iDoDaiKiem, string sform)
+        {
+            string sDLKiem;
+            try
+            {
+                sDLKiem = dr[sCot].ToString();
+                if (bKiemNull)
+                {
+                    if (string.IsNullOrEmpty(sDLKiem))
+                    {
+                        dr.SetColumnError(sCot, Commons.Modules.ObjLanguages.GetLanguage(sform, "msgKhongDuocTrong"));
+                        return false;
+                    }
+                    else
+                    {
+                        if (KiemKyTu(sDLKiem, ChuoiKT))  //KiemKyTu
+                        {
+                            dr.SetColumnError(sCot, Commons.Modules.ObjLanguages.GetLanguage(sform, "msgCoChuaKyTuDB"));
+                            return false;
+                        }
+                    }
+                }
+                else
+                {
+                    if (!string.IsNullOrEmpty(sDLKiem))
+                    {
+                        if (KiemKyTu(sDLKiem, ChuoiKT))  //KiemKyTu
+                        {
+                            dr.SetColumnError(sCot, Commons.Modules.ObjLanguages.GetLanguage(sform, "msgCoChuaKyTuDB"));
+                            dr["XOA"] = 1;
+                            return false;
+                        }
+                    }
+                }
+                if (iDoDaiKiem != 0)
+                {
+                    if (sDLKiem.Length > iDoDaiKiem)
+                    {
+                        dr.SetColumnError(sCot, Commons.Modules.ObjLanguages.GetLanguage(sform, "msgDoDaiKyTuVuocQua " + iDoDaiKiem));
+                        return false;
+                    }
+                }
+            }
+            catch
+            {
+                dr.SetColumnError(sCot, "error");
+                return false;
+            }
+            return true;
+        }
+        public bool KiemDuLieuNgay(GridView grvData, DataRow dr, string sCot, Boolean bKiemNull, string sform)
+        {
+            string sDLKiem;
+            sDLKiem = dr[sCot].ToString();
+            DateTime DLKiem;
+
+            try
+            {
+
+                if (bKiemNull)
+                {
+                    if (string.IsNullOrEmpty(sDLKiem))
+                    {
+                        dr.SetColumnError(sCot, Commons.Modules.ObjLanguages.GetLanguage(sform, "msgKhongduocTrong"));
+                        return false;
+                    }
+                    else
+                    {
+                        //sDLKiem = DateTime.ParseExact(sDLKiem, "dd/MM/yyyy", CultureInfo.InvariantCulture).ToString();
+                        if (!DateTime.TryParse(sDLKiem, out DLKiem))
+                        {
+                            dr.SetColumnError(sCot, Commons.Modules.ObjLanguages.GetLanguage(sform, "msgKhongPhaiNgay"));
+                            return false;
+                        }
+
+                    }
+                }
+                else
+                {
+                    if (!string.IsNullOrEmpty(sDLKiem))
+                    {
+                        if (!DateTime.TryParse(sDLKiem, out DLKiem))
+                        {
+                            dr.SetColumnError(sCot, Commons.Modules.ObjLanguages.GetLanguage(sform, "msgKhongPhaiNgay"));
+                            return false;
+                        }
+                    }
+                }
+            }
+            catch
+            {
+                dr.SetColumnError(sCot, Commons.Modules.ObjLanguages.GetLanguage(sform, "msgKhongPhaiNgay"));
+                return false;
+            }
+            return true;
+        }
+
+        private bool KiemTraLuoi(DataTable dtSource)
+        {
+            int errorCount = 0;
+            #region kiểm tra dữ liệu
+            this.Cursor = Cursors.WaitCursor;
+            foreach (DataRow dr in dtSource.Rows)
+            {
+                dr.ClearErrors();
+                //Số hợp đồng lao động
+                if (!KiemDuLieuNgay(grvViPhamNoiQuyLD, dr, "NGAY", true, this.Name))
+                {
+                    try
+                    {
+                        DataTable dt1 = new DataTable();
+                        dt1 = (DataTable)grdCongNhan.DataSource;
+                        dt1.PrimaryKey = new DataColumn[] { dt1.Columns["ID_CN"] };
+                        int index = dt1.Rows.IndexOf(dt1.Rows.Find(dr["ID_CN"]));
+                        DataRow dr1 = dt1.Rows[index];
+                        dr1.SetColumnError("MS_CN", "Error");
+                    }
+                    catch (Exception ex) { }
+                    errorCount++;
+                }
+            }
+            #endregion
+            Commons.Modules.ObjSystems.HideWaitForm();
+            if (errorCount != 0)
+            {
+                this.Cursor = Cursors.Default;
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDuLieuChuaHopLe"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            else
+            {
+                this.Cursor = Cursors.Default;
+                return true;
+            }
+        }
+        #region chuotphai
+        class RowInfo
+        {
+            public RowInfo(DevExpress.XtraGrid.Views.Grid.GridView view, int rowHandle)
+            {
+                this.RowHandle = rowHandle;
+                this.View = view;
+            }
+            public DevExpress.XtraGrid.Views.Grid.GridView View;
+            public int RowHandle;
+        }
+        public DXMenuItem MCreateMenuCapNhatAll(DevExpress.XtraGrid.Views.Grid.GridView view, int rowHandle)
+        {
+            string sStr = Commons.Modules.ObjLanguages.GetLanguage(Commons.Modules.ModuleName, this.Name, "lblCapNhatViPham", Commons.Modules.TypeLanguage);
+            DXMenuItem menuThongTinNS = new DXMenuItem(sStr, new EventHandler(CapNhatAll));
+            menuThongTinNS.Tag = new RowInfo(view, rowHandle);
+            return menuThongTinNS;
+        }
+        public void CapNhatAll(object sender, EventArgs e)
+        {
+            try
+            {
+                try
+                {
+                    string sBTCongNhan = "sBTCongNhan" + Commons.Modules.iIDUser;
+                    string sBTNoiDung = "sBTNoiDungCapNhat" + Commons.Modules.iIDUser;
+                    string sBTNoiDung_Cu = "sBTNoiDungCu" + Commons.Modules.iIDUser;
+                    try
+                    {
+                        DataTable dt_capnhat = new DataTable();
+                        dt_capnhat = ((DataTable)grdViPhamNoiQuyLD.DataSource).DefaultView.ToTable().Copy();
+
+
+                        Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBTCongNhan, Commons.Modules.ObjSystems.ConvertDatatable(grdCongNhan), "");
+                        Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBTNoiDung, dt_capnhat, "");
+                        Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBTNoiDung_Cu, Commons.Modules.ObjSystems.ConvertDatatable(grdViPhamNoiQuyLD), "");
+                        System.Data.SqlClient.SqlConnection conn;
+                        conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                        conn.Open();
+                        System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spCapNhatVPNQ", conn);
+
+                        cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                        cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                        cmd.Parameters.Add("@sBT", SqlDbType.NVarChar).Value = sBTCongNhan;
+                        cmd.Parameters.Add("@sBT1", SqlDbType.NVarChar).Value = sBTNoiDung;
+                        cmd.Parameters.Add("@sBT2", SqlDbType.NVarChar).Value = sBTNoiDung_Cu;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+                        DataSet ds = new DataSet();
+                        adp.Fill(ds);
+                        DataTable dt = new DataTable();
+                        dt = ds.Tables[0].Copy();
+                        grdViPhamNoiQuyLD.DataSource = dt;
+
+                        dt = new DataTable();
+                        dt = ds.Tables[1].Copy();
+                        grdCongNhan.DataSource = dt;
+                        grvCongNhan_FocusedRowChanged(null, null);
+                        Commons.Modules.ObjSystems.XoaTable(sBTCongNhan);
+                        Commons.Modules.ObjSystems.XoaTable(sBTNoiDung);
+                    }
+                    catch (Exception ex)
+                    {
+                        Commons.Modules.ObjSystems.XoaTable(sBTCongNhan);
+                        Commons.Modules.ObjSystems.XoaTable(sBTNoiDung);
+                    }
+                }
+                catch (Exception ex)
+                {
+                }
+            }
+            catch (Exception ex) { }
+        }
+        private void grvViPhamNoiQuyLD_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
+        {
+            try
+            {
+                DevExpress.XtraGrid.Views.Grid.GridView view = sender as DevExpress.XtraGrid.Views.Grid.GridView;
+                if (e.MenuType == DevExpress.XtraGrid.Views.Grid.GridMenuType.Row)
+                {
+                    int irow = e.HitInfo.RowHandle;
+                    e.Menu.Items.Clear();
+                    if (windowsUIButton.Buttons[0].Properties.Visible) return;
+                    //if (grvViPhamNoiQuyLD.FocusedColumn.FieldName.ToString() == "MS_CN" || grvDSUngVien.FocusedColumn.FieldName.ToString() == "HO_TEN") return;
+                    DevExpress.Utils.Menu.DXMenuItem itemCapNhatAll = MCreateMenuCapNhatAll(view, irow);
+                    e.Menu.Items.Add(itemCapNhatAll);
+                    //if (flag == false) return;
+                }
+            }
+            catch
+            {
+            }
+        }
+
+        #endregion
+
+        private void grvViPhamNoiQuyLD_InitNewRow(object sender, InitNewRowEventArgs e)
+        {
+            try
+            {
+                grvViPhamNoiQuyLD.SetFocusedRowCellValue("ID_VPNQ", 0);
+            }
+            catch { }
+        }
+
+        private void grvViPhamNoiQuyLD_InvalidRowException(object sender, DevExpress.XtraGrid.Views.Base.InvalidRowExceptionEventArgs e)
+        {
+            e.ExceptionMode = DevExpress.XtraEditors.Controls.ExceptionMode.NoAction;
+        }
+
+        private void grvViPhamNoiQuyLD_InvalidValueException(object sender, DevExpress.XtraEditors.Controls.InvalidValueExceptionEventArgs e)
+        {
+            e.ExceptionMode = DevExpress.XtraEditors.Controls.ExceptionMode.NoAction;
         }
     }
 }

@@ -43,10 +43,6 @@ namespace Vs.Report
 
         private void rptDSCDThuaThieu_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
         {
-            xrLabel11.Text = HopDong;
-            xrLabel10.Text = MaHang;
-            xrLabel14.Text = Order;
-            xrLabel16.Text = Chuyen;
         }
     }
 }

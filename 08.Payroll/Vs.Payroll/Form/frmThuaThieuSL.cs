@@ -16,35 +16,32 @@ namespace Vs.Payroll.Form
 {
     public partial class frmThuaThieuSL : DevExpress.XtraEditors.XtraForm
     {
-        public Int64 iID_DHB = -1;
-        public Int64 iID_MH = -1;
+        public int iID_DV = -1;
         public Int64 iID_CHUYEN = -1;
         public Int64 iID_CHUYEN_SD = -1;
         public Int64 iID_ORD = -1;
+        public int iID_DT = -1;
         public int slChot = 0;
-        public DateTime Ngay = DateTime.Now;
+        public DateTime Ngay;
 
         public Int64 iID_CD_TMP = -1;
 
         public frmThuaThieuSL()
         {
             InitializeComponent();
+
         }
 
         #region even
         private void frmThuaThieuSL_Load(object sender, EventArgs e)
         {
             Commons.Modules.sLoad = "0Load";
-            LoadCboChuyen();
-            cboID_CHUYEN.EditValue = iID_CHUYEN;
-            //LoadCboHD(0);
-            lblID_ORD.Visible = false;
-            cboID_ORD.Visible = false;
+            LoadcboKH_CHUYEN();
+            LoadcboORD();
 
-            LoadcboDHB();
-            cboID_DHB.EditValue = iID_DHB;
-            cboID_MH.EditValue = iID_MH;
-            //cboID_ORD.EditValue = iID_ORD;
+            cboID_DT.EditValue = iID_DT;
+            cboID_ORD.EditValue = iID_ORD;
+            cboID_CHUYEN.EditValue = iID_CHUYEN_SD;
 
             LoadgrvCDThuaThieu();
             LoadgrvCN();
@@ -54,7 +51,8 @@ namespace Vs.Payroll.Form
 
             enableButon(true);
             LoadNN();
-            lblSLChot.Text = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "SL_chot : ") + slChot.ToString("N0");
+            LoadSLChot();
+            lblThangDoiChieu.Text = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "lblThangDoiChieu") + " : " + Ngay.ToString("MM/yyyy");
         }
         private void windowsUIButton_ButtonClick(object sender, DevExpress.XtraBars.Docking2010.ButtonEventArgs e)
         {
@@ -67,6 +65,7 @@ namespace Vs.Payroll.Form
 
                     case "sua":
                         {
+                            iID_CD_TMP = Convert.ToInt64(grvCNThucHien.GetFocusedRowCellValue("ID_CD"));
                             enableButon(false);
                             break;
                         }
@@ -90,8 +89,9 @@ namespace Vs.Payroll.Form
                                 Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBT_grvCNThucHien, Commons.Modules.ObjSystems.ConvertDatatable(grdCNThucHien), "");
                                 System.Data.SqlClient.SqlConnection conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
                                 conn.Open();
-                                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spUpdatePCD", conn);
+                                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spThuaThieuSL", conn);
                                 cmd.Parameters.Add("@sBT", SqlDbType.NVarChar).Value = sBT_grvCNThucHien;
+                                cmd.Parameters.Add("@iLoai", SqlDbType.Int).Value = 4;
                                 cmd.CommandType = CommandType.StoredProcedure;
                                 cmd.ExecuteNonQuery();
                                 LoadgrvCDThuaThieu();
@@ -103,6 +103,9 @@ namespace Vs.Payroll.Form
 
                     case "khongghi":
                         {
+                            LoadgrvCDThuaThieu();
+                            LoadgrvCN();
+                            grvCDThuaThieu_FocusedRowChanged(null, null);
                             enableButon(true);
                             break;
                         }
@@ -124,34 +127,20 @@ namespace Vs.Payroll.Form
 
             }
         }
-
-
-        private void cboID_DHB_EditValueChanged(object sender, EventArgs e)
+        private void cboID_DT_EditValueChanged(object sender, EventArgs e)
         {
-            //LoadCboHD(2);
-            LoadcboHH();
-            //LoadcboORD();
-            Commons.Modules.sLoad = "";
+            LoadcboORD();
         }
-
-        private void cboID_MH_EditValueChanged(object sender, EventArgs e)
+        private void cboID_ORD_EditValueChanged(object sender, EventArgs e)
         {
             if (Commons.Modules.sLoad == "0Load") return;
-            //LoadCboHD(3);
-            //LoadcboORD();
-            LoadSLChot();
             LoadgrvCDThuaThieu();
             LoadgrvCN();
             grvCDThuaThieu_FocusedRowChanged(null, null);
         }
-
-        private void cboID_ORD_EditValueChanged(object sender, EventArgs e)
-        {
-            LoadgrvCDThuaThieu();
-        }
         private void cboID_CHUYEN_EditValueChanged(object sender, EventArgs e)
         {
-
+            if (Commons.Modules.sLoad == "0Load") return;
             LoadSLChot();
             LoadgrvCDThuaThieu();
             LoadgrvCN();
@@ -170,7 +159,14 @@ namespace Vs.Payroll.Form
                 string sDK = "";
                 sIDCD = "-1";
                 try { sIDCD = grvCDThuaThieu.GetFocusedRowCellValue("ID_CD").ToString(); } catch (Exception ex) { }
-                if (sIDCD != "-1") sDK = " ID_CD = '" + sIDCD + "' ";
+                if (sIDCD != "-1")
+                {
+                    sDK = " ID_CD = '" + sIDCD + "' ";
+                }
+                else
+                {
+                    sDK = "1 =0 ";
+                }
 
                 dtTmp.DefaultView.RowFilter = sDK;
             }
@@ -207,24 +203,22 @@ namespace Vs.Payroll.Form
             System.Data.SqlClient.SqlConnection conn;
             DataTable dt = new DataTable();
             frmViewReport frm = new frmViewReport();
-            frm.rpt = new rptDSCDThuaThieu(DateTime.Now, cboID_DHB.Text, cboID_MH.Text, cboID_ORD.Text, cboID_CHUYEN.Text);
+            frm.rpt = new rptDSCDThuaThieu(DateTime.Now, cboID_DT.Text, cboID_ORD.Text, "ID_ORD", cboID_CHUYEN.Text);
             try
             {
                 conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
                 conn.Open();
 
-                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptDSCDThuaThieu", conn);
+                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spThuaThieuSL", conn);
 
-                cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
-                cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = 1;
-                cmd.Parameters.Add("@Ngay", SqlDbType.DateTime).Value = Ngay;
-                cmd.Parameters.Add("@ID_CHUYEN", SqlDbType.Int).Value = cboID_CHUYEN.EditValue;
+                cmd.Parameters.Add("@UName", SqlDbType.NVarChar).Value = Commons.Modules.UserName;
+                cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                cmd.Parameters.Add("@iLoai", SqlDbType.Int).Value = 5;
+                cmd.Parameters.Add("@DNgay", SqlDbType.DateTime).Value = Ngay;
                 cmd.Parameters.Add("@ID_CHUYEN_SD", SqlDbType.Int).Value = Convert.ToInt32(iID_CHUYEN_SD);
-                cmd.Parameters.Add("@ID_ORD", SqlDbType.Int).Value = cboID_MH.EditValue;
-
+                cmd.Parameters.Add("@ID_ORD", SqlDbType.Int).Value = cboID_ORD.EditValue;
                 cmd.CommandType = CommandType.StoredProcedure;
                 System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
-
                 DataSet ds = new DataSet();
                 adp.Fill(ds);
                 dt = new DataTable();
@@ -239,7 +233,7 @@ namespace Vs.Payroll.Form
             frm.ShowDialog();
         }
 
-        private void LoadcboDHB()
+        private void LoadcboKH_CHUYEN()
         {
             System.Data.SqlClient.SqlConnection conn;
             DataTable dt = new DataTable();
@@ -247,120 +241,71 @@ namespace Vs.Payroll.Form
             {
                 conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
                 conn.Open();
-
-                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spThuaThieuGetCbo", conn);
-
-                cmd.Parameters.Add("@iLoai", SqlDbType.Int).Value = 1;
-
+                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spThuaThieuSL", conn);
+                cmd.Parameters.Add("@UName", SqlDbType.NVarChar).Value = Commons.Modules.UserName;
+                cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                cmd.Parameters.Add("@iLoai", SqlDbType.Int).Value = 0;
+                cmd.Parameters.Add("@DVi", SqlDbType.Int).Value = iID_DV;
                 cmd.CommandType = CommandType.StoredProcedure;
                 System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
-
                 DataSet ds = new DataSet();
                 adp.Fill(ds);
-
                 dt = new DataTable();
                 dt = ds.Tables[0].Copy();
-                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_DHB, dt, "ID_DT", "TEN_NGAN", "TEN_NGAN", true);
-
-                if (conn.State == ConnectionState.Open)
-                    conn.Close();
-            }
-            catch { }
-        }
-
-        private void LoadcboHH()
-        {
-            System.Data.SqlClient.SqlConnection conn;
-            DataTable dt = new DataTable();
-            try
-            {
-                conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
-                conn.Open();
-
-                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spThuaThieuGetCbo", conn);
-
-                cmd.Parameters.Add("@iLoai", SqlDbType.Int).Value = 2;
-                cmd.Parameters.Add("@ID_DHB", SqlDbType.BigInt).Value = Convert.ToInt64(cboID_DHB.EditValue);
-                cmd.CommandType = CommandType.StoredProcedure;
-                System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
-
-                DataSet ds = new DataSet();
-                adp.Fill(ds);
+                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_DT, dt, "ID_DT", "TEN_KH", "TEN_KH");
 
                 dt = new DataTable();
-                dt = ds.Tables[0].Copy();
-                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_MH, dt, "ID_ORD", "TEN_HH", "TEN_HH", true);
-                if (conn.State == ConnectionState.Open)
-                    conn.Close();
-            }
-            catch { }
-        }
-        /*private void LoadcboORD()
-        {
-            System.Data.SqlClient.SqlConnection conn;
-            DataTable dt = new DataTable();
-            try
-            {
-                conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
-                conn.Open();
-
-                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spThuaThieuGetCbo", conn);
-
-                cmd.Parameters.Add("@iLoai", SqlDbType.Int).Value = 3;
-                cmd.Parameters.Add("@ID_DHB", SqlDbType.BigInt).Value = Convert.ToInt64(cboID_DHB.EditValue);
-                cmd.Parameters.Add("@ID_HH", SqlDbType.BigInt).Value = Convert.ToInt64(cboID_MH.EditValue);
-
-                cmd.CommandType = CommandType.StoredProcedure;
-                System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
-
-                DataSet ds = new DataSet();
-                adp.Fill(ds);
-
-                dt = new DataTable();
-                dt = ds.Tables[0].Copy();
-                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_ORD, dt, "ID_DHBORD", "TEN_ORD", "TEN_ORD", true);
-                if (conn.State == ConnectionState.Open)
-                    conn.Close();
-            }
-            catch { }
-        }*/
-
-        private void LoadCboChuyen()
-        {
-            try
-            {
-                string sSql = "SELECT ID_TO, TEN_TO FROM [TO] ORDER BY [TO].STT_TO";
-                DataTable dt = new DataTable();
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSql));
-                if (cboID_CHUYEN.Properties.DataSource == null)
-                {
-                    Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_CHUYEN, dt, "ID_TO", "TEN_TO", "TEN_TO");
-                }
-                else
-                {
-                    cboID_CHUYEN.Properties.DataSource = dt;
-                }
-                cboID_CHUYEN.Properties.View.Columns[0].Caption = "STT Chuyền";
-                cboID_CHUYEN.Properties.View.Columns[1].Caption = "Tên Chuyền";
+                dt = ds.Tables[1].Copy();
+                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_CHUYEN, dt, "ID_TO", "TEN_TO", "TEN_TO", true);
                 cboID_CHUYEN.Properties.View.Columns[1].AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
                 cboID_CHUYEN.Properties.View.Columns[1].AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
                 cboID_CHUYEN.Properties.View.Columns[0].AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
                 cboID_CHUYEN.Properties.View.Columns[0].AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+
+                if (conn.State == ConnectionState.Open)
+                    conn.Close();
             }
             catch { }
         }
 
+        private void LoadcboORD()
+        {
+            System.Data.SqlClient.SqlConnection conn;
+            DataTable dt = new DataTable();
+            try
+            {
+                conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                conn.Open();
+                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spThuaThieuSL", conn);
+                cmd.Parameters.Add("@UName", SqlDbType.NVarChar).Value = Commons.Modules.UserName;
+                cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                cmd.Parameters.Add("@iLoai", SqlDbType.Int).Value = 1;
+                cmd.Parameters.Add("@DVi", SqlDbType.Int).Value = iID_DV;
+                cmd.Parameters.Add("@iCot1", SqlDbType.BigInt).Value = Convert.ToInt64(cboID_DT.EditValue);
+                cmd.CommandType = CommandType.StoredProcedure;
+                System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+                DataSet ds = new DataSet();
+                adp.Fill(ds);
+                dt = new DataTable();
+                dt = ds.Tables[0].Copy();
+
+                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_ORD, dt, "ID_ORD", "TEN_HH", "TEN_HH", true);
+                if (conn.State == ConnectionState.Open)
+                    conn.Close();
+            }
+            catch { }
+        }
         private void LoadgrvCDThuaThieu()
         {
             try
             {
                 System.Data.SqlClient.SqlConnection conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
                 conn.Open();
-                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spGetDSCDThuaThieu", conn);
-                cmd.Parameters.Add("@Ngay", SqlDbType.DateTime).Value = Ngay;
-                cmd.Parameters.Add("@ID_CHUYEN", SqlDbType.BigInt).Value = cboID_CHUYEN.EditValue;
-                cmd.Parameters.Add("@ID_CHUYEN_SD", SqlDbType.BigInt).Value = iID_CHUYEN_SD;
-                cmd.Parameters.Add("@ID_ORD", SqlDbType.BigInt).Value = cboID_MH.EditValue;
+                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spThuaThieuSL", conn);
+                cmd.Parameters.Add("@DNgay", SqlDbType.DateTime).Value = Ngay;
+                cmd.Parameters.Add("@iLoai", SqlDbType.Int).Value = 2;
+                cmd.Parameters.Add("@ID_CHUYEN_SD", SqlDbType.BigInt).Value = cboID_CHUYEN.EditValue;
+                cmd.Parameters.Add("@ID_ORD", SqlDbType.BigInt).Value = cboID_ORD.EditValue;
                 cmd.CommandType = CommandType.StoredProcedure;
                 System.Data.SqlClient.SqlDataAdapter da = new System.Data.SqlClient.SqlDataAdapter(cmd);
                 DataSet ds = new DataSet();
@@ -369,13 +314,9 @@ namespace Vs.Payroll.Form
                 dt = ds.Tables[0].Copy();
                 dt.PrimaryKey = new DataColumn[] { dt.Columns["ID_CD"] };
 
-
-
-
                 if (grdCDThuaThieu.DataSource == null)
                 {
                     Commons.Modules.ObjSystems.MLoadXtraGrid(grdCDThuaThieu, grvCDThuaThieu, dt, false, true, false, true, false, "");
-                    grvCDThuaThieu.Columns["ID_CHUYEN_TH"].Visible = false;
                     grvCDThuaThieu.Columns["ID_CHUYEN_SD"].Visible = false;
                     grvCDThuaThieu.Columns["SL_CHOT"].Visible = false;
                     grvCDThuaThieu.Columns["ID_CD"].Visible = false;
@@ -395,8 +336,6 @@ namespace Vs.Payroll.Form
                     grdCDThuaThieu.DataSource = dt;
                 }
 
-
-
                 if (iID_CD_TMP != -1)
                 {
                     try
@@ -407,7 +346,7 @@ namespace Vs.Payroll.Form
                     catch { }
                 }
             }
-            catch
+            catch (Exception ex)
             {
 
             }
@@ -417,26 +356,32 @@ namespace Vs.Payroll.Form
         {
             try
             {
-                System.Data.SqlClient.SqlConnection conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
-                conn.Open();
-                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("SELECT dbo.fnGetSLChot(@Ngay,@ID_ChuyenSD,@ID_Chuyen, @ID_Ord)", conn);
-                cmd.Parameters.AddWithValue("@Ngay", Ngay);
-                cmd.Parameters.AddWithValue("@ID_ChuyenSD", iID_CHUYEN_SD);
-                cmd.Parameters.AddWithValue("@ID_Chuyen", cboID_CHUYEN.EditValue);
-                cmd.Parameters.AddWithValue("@ID_Ord", cboID_ORD.EditValue);
-
-                slChot = string.IsNullOrEmpty(cmd.ExecuteScalar().ToString()) ? 0 : Convert.ToInt32(cmd.ExecuteScalar());
+                slChot = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.fnGetSLChot('" + Ngay.ToString("MM/dd/yyyy") + "', " + cboID_CHUYEN.EditValue + ", " + cboID_ORD.EditValue + ")"));
                 lblSLChot.Text = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "SL_chot : ") + slChot.ToString("N0");
             }
-            catch  { }
+            catch { }
         }
 
         private void LoadgrvCN()
         {
             try
             {
+                System.Data.SqlClient.SqlConnection conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                conn.Open();
+                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spThuaThieuSL", conn);
+                cmd.Parameters.Add("@UName", SqlDbType.NVarChar).Value = Commons.Modules.UserName;
+                cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                cmd.Parameters.Add("@DNgay", SqlDbType.DateTime).Value = Ngay;
+                cmd.Parameters.Add("@iLoai", SqlDbType.Int).Value = 3;
+                cmd.Parameters.Add("@ID_CHUYEN", SqlDbType.BigInt).Value = -1;
+                cmd.Parameters.Add("@ID_CHUYEN_SD", SqlDbType.BigInt).Value = cboID_CHUYEN.EditValue;
+                cmd.Parameters.Add("@ID_ORD", SqlDbType.BigInt).Value = cboID_ORD.EditValue;
+                cmd.CommandType = CommandType.StoredProcedure;
+                System.Data.SqlClient.SqlDataAdapter da = new System.Data.SqlClient.SqlDataAdapter(cmd);
+                DataSet ds = new DataSet();
+                da.Fill(ds);
                 DataTable dt = new DataTable();
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetDSCNThucHienCD", Commons.Modules.UserName, Commons.Modules.TypeLanguage, Ngay, Convert.ToInt64(cboID_CHUYEN.EditValue), iID_CHUYEN_SD, Convert.ToInt64(cboID_MH.EditValue)));
+                dt = ds.Tables[0].Copy();
                 if (grdCNThucHien.DataSource == null)
                 {
                     Commons.Modules.ObjSystems.MLoadXtraGrid(grdCNThucHien, grvCNThucHien, dt, false, true, false, true, false, "");

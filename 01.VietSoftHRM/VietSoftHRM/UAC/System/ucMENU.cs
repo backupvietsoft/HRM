@@ -134,6 +134,8 @@ namespace VietSoftHRM
                         }
                         EnableControl(false);
                         LoadTreeMenu(false);
+
+                        //treeListMenu.ExportToXlsx(@"C:\Users\PC\Desktop\Sheet1.xlsx");
                         break;
                     }
                 case "khongluu":

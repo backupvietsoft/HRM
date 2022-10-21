@@ -1217,7 +1217,7 @@ namespace Commons
             }
             catch
             {
-                
+
             }
         }
         public void AddCombSearchLookUpEdit(RepositoryItemSearchLookUpEdit cboSearch, string Value, string Display, string cot, GridView grv, DataTable dtTmp, string form)
@@ -1723,7 +1723,7 @@ namespace Commons
                 { }
             }
         }
-        public void ThayDoiNN(Form frm,WindowsUIButtonPanel btnWinUIB)
+        public void ThayDoiNN(Form frm, WindowsUIButtonPanel btnWinUIB)
         {
             DataTable dtTmp = new DataTable();
             dtTmp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT KEYWORD , CASE " + Modules.TypeLanguage + " WHEN 0 THEN VIETNAM WHEN 1 THEN ENGLISH ELSE CHINESE END AS NN  FROM LANGUAGES WHERE FORM = N'" + frm.Name + "' "));
@@ -5123,7 +5123,7 @@ namespace Commons
         {
             //ID_LCV,TEN_LCV
             DataTable dt = new DataTable();
-            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboLoaiCV", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll,-1, -1));
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboLoaiCV", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll, -1, -1));
             return dt;
         }
         public DataTable DataMucDoTieng(bool coAll)

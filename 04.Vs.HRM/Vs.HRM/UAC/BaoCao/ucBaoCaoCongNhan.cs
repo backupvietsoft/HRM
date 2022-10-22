@@ -192,26 +192,11 @@ namespace Vs.HRM
                 dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboChucVu", Commons.Modules.UserName, Commons.Modules.TypeLanguage, 1, -1));
                 Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboChucVu, dt, "ID_CV", "TEN_CV", "TEN_CV");
 
-                //// Loai cong viec
-                //DataTable dt1 = new DataTable();
-                //dt1.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboLoaiCV", Commons.Modules.UserName, Commons.Modules.TypeLanguage, 1, -1, -1));
-                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboLoaiCongViec
-                    , Commons.Modules.ObjSystems.DataLoaiCV(true,-1), "ID_LCV", "TEN_LCV", "TEN_LCV");
 
-                Commons.OSystems.SetDateEditFormat(dTuNgay);
-                Commons.OSystems.SetDateEditFormat(dDenNgay);
-                Commons.OSystems.SetDateEditFormat(dTuNgayNS);
-                Commons.OSystems.SetDateEditFormat(dDenNgayNS);
                 Commons.OSystems.SetDateEditFormat(NgayIn);
                 LoadGrdChonCot();
                 LoadMauBaoCaoCN();
-                dTuNgay.EditValue = Convert.ToDateTime(("01/" + DateTime.Today.Month + "/" + DateTime.Today.Year), new CultureInfo("de-DE"));
-                dDenNgay.EditValue = Convert.ToDateTime(("01/" + DateTime.Today.Month + "/" + DateTime.Today.Year), new CultureInfo("de-DE")).AddMonths(1).AddDays(-1);
-                dTuNgayNS.EditValue = Convert.ToDateTime(("01/" + DateTime.Today.Month + "/" + DateTime.Today.Year), new CultureInfo("de-DE"));
-                dDenNgayNS.EditValue = Convert.ToDateTime(("01/" + DateTime.Today.Month + "/" + DateTime.Today.Year), new CultureInfo("de-DE")).AddMonths(1).AddDays(-1);
                 NgayIn.EditValue = DateTime.Today;
-                dTuNgayNS.Enabled = false;
-                dDenNgayNS.Enabled = false;
                 chkGroup.Checked = true;
                 Commons.Modules.sLoad = "";
                 EnabledButton(true);
@@ -278,23 +263,6 @@ namespace Vs.HRM
             if (Commons.Modules.sLoad == "0Load") return;
             Commons.Modules.ObjSystems.LoadCboTo(lkDonVi, lkXiNghiep, lkTo);
         }
-
-        private void chkNgaySinh_CheckedChanged(object sender, EventArgs e)
-        {
-            CheckEdit edit = sender as CheckEdit;
-            switch (edit.Checked)
-            {
-                case true:
-                    dTuNgayNS.Enabled = true;
-                    dDenNgayNS.Enabled = true;
-                    break;
-                case false:
-                    dTuNgayNS.Enabled = false;
-                    dDenNgayNS.Enabled = false;
-                    break;
-            }
-        }
-
         private void DanhSachNhanVien()
         {
 
@@ -408,15 +376,11 @@ namespace Vs.HRM
                 cmd.Parameters.Add("@TO", SqlDbType.Int).Value = lkTo.EditValue;
                 cmd.Parameters.Add("@TTHD", SqlDbType.Int).Value = lkTTHD.EditValue;
                 cmd.Parameters.Add("@TTHT", SqlDbType.Int).Value = lkTTHT.EditValue;
-                cmd.Parameters.Add("@TNGAY", SqlDbType.Date).Value = (dTuNgay.EditValue == null) ? "01/01/1900" : dTuNgay.EditValue;
-                cmd.Parameters.Add("@DNGAY", SqlDbType.Date).Value = (dDenNgay.EditValue == null) ? "01/01/2999" : dDenNgay.EditValue;
+                cmd.Parameters.Add("@DNGAY", SqlDbType.DateTime).Value = NgayIn.DateTime;
                 cmd.Parameters.Add("@Loai", SqlDbType.Int).Value = rdoChonBC.SelectedIndex;
-                cmd.Parameters.Add("@TNGAY_NS", SqlDbType.Date).Value = (dTuNgayNS.EditValue == null) ? "01/01/1900" : dTuNgayNS.EditValue;
-                cmd.Parameters.Add("@DNGAY_NS", SqlDbType.Date).Value = (dDenNgayNS.EditValue == null) ? "01/01/2999" : dDenNgayNS.EditValue;
-                cmd.Parameters.Add("@NS", SqlDbType.Bit).Value = chkNgaySinh.EditValue;
                 cmd.Parameters.Add("@Field", SqlDbType.NVarChar, 1000).Value = dsCol;
                 cmd.Parameters.Add("@ID_CV", SqlDbType.BigInt, 1000).Value = cboChucVu.EditValue;
-                cmd.Parameters.Add("@ID_LCV", SqlDbType.BigInt, 1000).Value = cboLoaiCongViec.EditValue;
+                cmd.Parameters.Add("@Loai_sort", SqlDbType.Bit).Value = chkGroup.Checked;
                 cmd.Parameters.Add("@Loai_sort", SqlDbType.Bit).Value = chkGroup.Checked;
                 cmd.CommandType = CommandType.StoredProcedure;
                 System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
@@ -752,6 +716,7 @@ namespace Vs.HRM
             windowsUIButton.Buttons[3].Properties.Visible = visible;
             windowsUIButton.Buttons[4].Properties.Visible = !visible;
             windowsUIButton.Buttons[5].Properties.Visible = !visible;
+            windowsUIButton.Buttons[6].Properties.Visible = visible;
             grvMauBC.OptionsBehavior.Editable = !visible;
         }
 
@@ -1392,7 +1357,7 @@ namespace Vs.HRM
                 cmd.Parameters.Add("@DVi", SqlDbType.Int).Value = lkDonVi.EditValue;
                 cmd.Parameters.Add("@XN", SqlDbType.Int).Value = lkXiNghiep.EditValue;
                 cmd.Parameters.Add("@TO", SqlDbType.Int).Value = lkTo.EditValue;
-                cmd.Parameters.Add("@DNgay", SqlDbType.Date).Value = (dDenNgayNS.EditValue == null) ? "01/01/2999" : dDenNgayNS.EditValue;
+                cmd.Parameters.Add("@DNgay", SqlDbType.Date).Value = NgayIn.DateTime;
                 cmd.CommandType = CommandType.StoredProcedure;
                 System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
                 adp.Fill(dt);

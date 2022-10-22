@@ -680,8 +680,8 @@ namespace VietSoftHRM
         {
             frmThongBaoTuyenDung frm = new frmThongBaoTuyenDung();
             double iW, iH;
-            iW = Screen.PrimaryScreen.WorkingArea.Width / 1.5;
-            iH = Screen.PrimaryScreen.WorkingArea.Height / 1.5;
+            iW = Screen.PrimaryScreen.WorkingArea.Width / 1.2;
+            iH = Screen.PrimaryScreen.WorkingArea.Height / 1.2;
             frm.Size = new Size((int)iW, (int)iH);
             frm.iID_LCV = Convert.ToInt64(grvDanhMuc.GetFocusedRowCellValue("ID_LCV"));
             frm.ShowDialog();

@@ -96,97 +96,109 @@ namespace Vs.TimeAttendance
         }
         private void windowsUIButton_ButtonClick(object sender, DevExpress.XtraBars.Docking2010.ButtonEventArgs e)
         {
-            WindowsUIButton btn = e.Button as WindowsUIButton;
-            XtraUserControl ctl = new XtraUserControl();
-            switch (btn.Tag.ToString())
+            try
             {
+                WindowsUIButton btn = e.Button as WindowsUIButton;
+                XtraUserControl ctl = new XtraUserControl();
+                switch (btn.Tag.ToString())
+                {
 
-                case "themsua":
-                    {
-                        iAdd = true;
-                        LoadGrdCongNhan();
-                        LoadGrdVPNoiQuy();
-                        grvCongNhan_FocusedRowChanged(null, null);
-                        Commons.Modules.ObjSystems.AddnewRow(grvViPhamNoiQuyLD, true);
-                        enableButon(false);
-                        break;
-                    }
-                case "xoa":
-                    {
-                        DeleteVPNQ();
-                        LoadGrdCongNhan();
-                        LoadGrdVPNoiQuy();
-                        grvCongNhan_FocusedRowChanged(null, null);
-                        break;
-                    }
-                case "In":
-                    {
-                        System.Data.SqlClient.SqlConnection conn;
-                        DataTable dt = new DataTable();
-                        frmViewReport frm = new frmViewReport();
-                        frm.rpt = new rptBCViPhamNoiQuyLD(Convert.ToDateTime(cboThang.Text), "");
-
-                        conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
-                        conn.Open();
-
-                        System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptViPhamNoiQuyLD", conn);
-                        cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
-                        cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
-                        cmd.Parameters.Add("@THANG", SqlDbType.DateTime).Value = Convert.ToDateTime(cboThang.EditValue);
-                        cmd.Parameters.Add("@DVi", SqlDbType.Int).Value = cboDV.EditValue;
-                        cmd.Parameters.Add("@XN", SqlDbType.Int).Value = cboXN.EditValue;
-                        cmd.Parameters.Add("@TO", SqlDbType.Int).Value = cboTo.EditValue;
-                        cmd.CommandType = CommandType.StoredProcedure;
-
-                        System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
-                        DataSet ds = new DataSet();
-                        adp.Fill(ds);
-                        dt = new DataTable();
-                        dt = ds.Tables[0].Copy();
-                        dt.TableName = "DATA";
-                        frm.AddDataSource(dt);
-
-                        frm.ShowDialog();
-
-                        break;
-                    }
-                case "luu":
-                    {
-                        Validate();
-                        if (grvViPhamNoiQuyLD.HasColumnErrors) return;
-                        DataTable dt = new DataTable();
-                        dt = (DataTable)grdViPhamNoiQuyLD.DataSource;
-                        if (!KiemTraLuoi(dt)) return;
-                        if (Savedata() == false)
+                    case "themsua":
                         {
-                            Commons.Modules.ObjSystems.msgChung(Commons.ThongBao.msgDuLieuDangSuDung);
+                            iAdd = true;
+                            LoadGrdCongNhan();
+                            LoadGrdVPNoiQuy();
+                            grvCongNhan_FocusedRowChanged(null, null);
+                            Commons.Modules.ObjSystems.AddnewRow(grvViPhamNoiQuyLD, true);
+                            enableButon(false);
+                            break;
                         }
-                        iAdd = false;
-                        LoadGrdCongNhan();
-                        LoadGrdVPNoiQuy();
-                        Commons.Modules.ObjSystems.DeleteAddRow(grvViPhamNoiQuyLD);
-                        grvCongNhan_FocusedRowChanged(null, null);
-                        LoadThang();
-                        enableButon(true);
+                    case "xoa":
+                        {
+                            DeleteVPNQ();
+                            LoadGrdCongNhan();
+                            LoadGrdVPNoiQuy();
+                            grvCongNhan_FocusedRowChanged(null, null);
+                            break;
+                        }
+                    case "In":
+                        {
+                            System.Data.SqlClient.SqlConnection conn;
+                            DataTable dt = new DataTable();
+                            frmViewReport frm = new frmViewReport();
+                            frm.rpt = new rptBCViPhamNoiQuyLD(Convert.ToDateTime(cboThang.Text), "");
 
-                        break;
-                    }
-                case "khongluu":
-                    {
-                        iAdd = false;
-                        LoadGrdCongNhan();
-                        LoadGrdVPNoiQuy();
-                        Commons.Modules.ObjSystems.DeleteAddRow(grvViPhamNoiQuyLD);
-                        grvCongNhan_FocusedRowChanged(null, null);
-                        enableButon(true);
-                        break;
-                    }
-                case "thoat":
-                    {
-                        Commons.Modules.ObjSystems.GotoHome(this);
-                        break;
-                    }
+                            conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                            conn.Open();
+
+                            System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptViPhamNoiQuyLD", conn);
+                            cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                            cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                            cmd.Parameters.Add("@THANG", SqlDbType.DateTime).Value = Convert.ToDateTime(cboThang.EditValue);
+                            cmd.Parameters.Add("@DVi", SqlDbType.Int).Value = cboDV.EditValue;
+                            cmd.Parameters.Add("@XN", SqlDbType.Int).Value = cboXN.EditValue;
+                            cmd.Parameters.Add("@TO", SqlDbType.Int).Value = cboTo.EditValue;
+                            cmd.CommandType = CommandType.StoredProcedure;
+
+                            System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+                            DataSet ds = new DataSet();
+                            adp.Fill(ds);
+                            dt = new DataTable();
+                            dt = ds.Tables[0].Copy();
+                            dt.TableName = "DATA";
+                            frm.AddDataSource(dt);
+
+                            frm.ShowDialog();
+
+                            break;
+                        }
+                    case "luu":
+                        {
+                            grvViPhamNoiQuyLD.CloseEditor();
+                            grvViPhamNoiQuyLD.UpdateCurrentRow();
+                            Validate();
+                            if (grvViPhamNoiQuyLD.HasColumnErrors) return;
+                            DataTable dt = new DataTable();
+                            dt = (DataTable)grdViPhamNoiQuyLD.DataSource;
+                            if (!KiemTraLuoi(dt)) return;
+                            if (Savedata() == false)
+                            {
+                                Commons.Modules.ObjSystems.msgChung(Commons.ThongBao.msgDuLieuDangSuDung);
+                            }
+                            iAdd = false;
+                            LoadGrdCongNhan();
+                            LoadGrdVPNoiQuy();
+                            Commons.Modules.ObjSystems.DeleteAddRow(grvViPhamNoiQuyLD);
+                            grvCongNhan_FocusedRowChanged(null, null);
+                            LoadThang();
+                            enableButon(true);
+
+                            break;
+                        }
+                    case "khongluu":
+                        {
+                            iAdd = false;
+                            LoadGrdCongNhan();
+                            LoadGrdVPNoiQuy();
+                            Commons.Modules.ObjSystems.DeleteAddRow(grvViPhamNoiQuyLD);
+                            grvCongNhan_FocusedRowChanged(null, null);
+                            enableButon(true);
+                            break;
+                        }
+                    case "thoat":
+                        {
+                            Commons.Modules.ObjSystems.GotoHome(this);
+                            break;
+                        }
+                    default:
+                        {
+                            break;
+                        }
+                }
+
             }
+            catch { }
+
         }
 
         #region hàm xử lý dữ liệu
@@ -561,8 +573,13 @@ namespace Vs.TimeAttendance
                     grvViPhamNoiQuyLD.DeleteSelectedRows();
                     DataTable dt = new DataTable();
                     dt = Commons.Modules.ObjSystems.ConvertDatatable(grvViPhamNoiQuyLD);
+                    dt = new DataTable();
+                    dt = ((DataTable)grdViPhamNoiQuyLD.DataSource);
+                    dt.AcceptChanges();
                     if (dt.Rows.Count == 0)
+                    {
                         grvCongNhan.SetFocusedRowCellValue("CDL", 0);
+                    }
                 }
 
             }
@@ -923,7 +940,8 @@ namespace Vs.TimeAttendance
                     return;
                 }
             }
-            catch {
+            catch
+            {
                 Commons.Modules.ObjSystems.XoaTable(sBT);
             }
         }

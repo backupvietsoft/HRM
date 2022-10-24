@@ -1217,7 +1217,7 @@ namespace Vs.Payroll
                                 break;
                             case "rdo_PhieuNhanLuong":
                                 {
-                                    if (Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString() == "DM")
+                                    if (Commons.Modules.KyHieuDV == "DM")
 
                                     {
                                         PhieuLuongThang_DM();
@@ -1515,7 +1515,7 @@ namespace Vs.Payroll
             {
 
                 DataTable dtthang = new DataTable();
-                string sSql = " SELECT DISTINCT SUBSTRING(CONVERT(VARCHAR(10),THANG,103),4,2) as M, RIGHT(CONVERT(VARCHAR(10),THANG,103),4) AS Y ,RIGHT(CONVERT(VARCHAR(10),THANG,103),7) AS THANG FROM dbo.BANG_LUONG ORDER BY Y DESC , M DESC";
+                string sSql = " SELECT DISTINCT SUBSTRING(CONVERT(VARCHAR(10),THANG,103),4,2) as M, RIGHT(CONVERT(VARCHAR(10),THANG,103),4) AS Y ,RIGHT(CONVERT(VARCHAR(10),THANG,103),7) AS THANG FROM dbo.BANG_LUONG_DM_CHA ORDER BY Y DESC , M DESC";
                 dtthang.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSql));
                 Commons.Modules.ObjSystems.MLoadXtraGrid(grdThang, grvThang, dtthang, false, true, true, true, true, this.Name);
                 grvThang.Columns["M"].Visible = false;
@@ -1544,15 +1544,24 @@ namespace Vs.Payroll
 
         private void rdo_ChonBaoCao_SelectedIndexChanged(object sender, EventArgs e)
         {
-            switch (rdo_ChonBaoCao.Properties.Items[rdo_ChonBaoCao.SelectedIndex].Tag)
+            if(Commons.Modules.KyHieuDV == "DM")
             {
-                case "rdo_PhieuNhanLuong":
-                    cboCachTinhLuong.Enabled = true;
-                    break;
-                default:
-                    cboCachTinhLuong.Enabled = false;
-                    break;
+                cboCachTinhLuong.Visible = false;
+                lblCachTinhLuong.Visible = false;
             }
+            else
+            {
+                switch (rdo_ChonBaoCao.Properties.Items[rdo_ChonBaoCao.SelectedIndex].Tag)
+                {
+                    case "rdo_PhieuNhanLuong":
+                        cboCachTinhLuong.Enabled = true;
+                        break;
+                    default:
+                        cboCachTinhLuong.Enabled = false;
+                        break;
+                }
+            }
+            
         }
         private void InPhieuNhanLuongCNSP(string MaSo)
         {
@@ -2111,10 +2120,26 @@ namespace Vs.Payroll
                     ws.Cells[row, colSUM] = "=SUBTOTAL(9," + CellAddress(ws, 10, colSUM) + ":" + CellAddress(ws, row - 1, colSUM) + ")";
                 }
 
+
                 for (int colFormat = 32; colFormat < dt2.Columns.Count + 2; colFormat++)
                 {
                     ws.get_Range(CellAddress(ws, 10, colFormat), CellAddress(ws, row, colFormat)).NumberFormat = "#,##0;(#,##0); ; ";
                 }
+
+                for (int colFormat = 14; colFormat < 28; colFormat++)
+                {
+                    ws.get_Range(CellAddress(ws, 10, colFormat), CellAddress(ws, row, colFormat)).NumberFormat = "#,##0.00;(#,##0.0); ; ";
+                }
+
+                for (int colFormat = 28; colFormat < 30; colFormat++)
+                {
+                    ws.get_Range(CellAddress(ws, 10, colFormat), CellAddress(ws, row, colFormat)).NumberFormat = "#,##0.0;(#,##0.0); ; ";
+                }
+                for (int colFormat = 30; colFormat < 38; colFormat++)
+                {
+                    ws.get_Range(CellAddress(ws, 10, colFormat), CellAddress(ws, row, colFormat)).NumberFormat = "#,##0.00;(#,##0.0); ; ";
+                }
+
                 //Range colFormat = ws.get_Range("I8", "I" + row);
                 //colFormat.NumberFormat = "#,##0;(#,##0); ; ";
                 //ws.get_Range("I9", "I" + row).NumberFormat = "#,##0;(#,##0); ; ";
@@ -2181,7 +2206,7 @@ namespace Vs.Payroll
             conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
             conn.Open();
 
-            System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptPhieuLuongThangDM_TEST", conn);
+            System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptPhieuLuongThangDM", conn);
             cmd.CommandType = CommandType.StoredProcedure;
 
             System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);

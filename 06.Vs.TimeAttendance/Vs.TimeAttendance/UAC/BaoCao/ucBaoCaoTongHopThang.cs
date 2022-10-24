@@ -3861,6 +3861,7 @@ namespace Vs.TimeAttendance
                 Excell.Worksheet oSheet;
                 oXL = new Excell.Application();
                 oXL.Visible = false;
+                this.Cursor = Cursors.WaitCursor;
 
                 //OfficeOpenXml.ExcelPackage ExcelPkg = new OfficeOpenXml.ExcelPackage();
                 //OfficeOpenXml.ExcelWorksheet wsSheet1 = ExcelPkg.Workbook.Worksheets.Add("Sheet1");
@@ -3988,7 +3989,7 @@ namespace Vs.TimeAttendance
                 ROWY2.WrapText = false;
 
 
-                Range row3_TieuDeCT_Format = oSheet.get_Range("X3", lastColumNgayCT + "3"); //27 + 31
+                Range row3_TieuDeCT_Format = oSheet.get_Range("Y3", lastColumNgayCT + "3"); //27 + 31
                 row3_TieuDeCT_Format.Font.Size = 9;
                 row3_TieuDeCT_Format.Font.Name = fontName;
                 row3_TieuDeCT_Format.Merge();
@@ -4001,14 +4002,14 @@ namespace Vs.TimeAttendance
 
 
                 //Cột ngày công thường
-                Range row4_TieuDeCT_Format = oSheet.get_Range("X4", lastColumNgayCT + "4"); //27 + 31
+                Range row4_TieuDeCT_Format = oSheet.get_Range("Y4", lastColumNgayCT + "4"); //27 + 31
                 row4_TieuDeCT_Format.Font.Size = 9;
                 row4_TieuDeCT_Format.Font.Name = fontName;
                 row4_TieuDeCT_Format.NumberFormat = "d";
                 row4_TieuDeCT_Format.Cells.HorizontalAlignment = Excell.XlHAlign.xlHAlignCenter;
                 row4_TieuDeCT_Format.Cells.VerticalAlignment = Excell.XlVAlign.xlVAlignCenter;
 
-                int col = 24;
+                int col = 25;
                 bool vongdau = false;
                 string sTenCot = "";
                 while (iTNgay < iDNgay)
@@ -4089,7 +4090,7 @@ namespace Vs.TimeAttendance
 
 
 
-                Range row5_TieuDe_Format = oSheet.get_Range("A5", "W5"); //27 + 31
+                Range row5_TieuDe_Format = oSheet.get_Range("A5", "X5"); //27 + 31
                 row5_TieuDe_Format.Font.Size = 9;
                 row5_TieuDe_Format.Font.Name = fontName;
                 row5_TieuDe_Format.NumberFormat = "@";
@@ -4100,7 +4101,7 @@ namespace Vs.TimeAttendance
                 row5_TieuDe_Format.Cells.VerticalAlignment = Excell.XlVAlign.xlVAlignCenter;
                 row5_TieuDe_Format.Interior.Color = Color.FromArgb(198, 224, 180);
 
-                Range row6_TieuDe_Format = oSheet.get_Range("A6", "W6"); //27 + 31
+                Range row6_TieuDe_Format = oSheet.get_Range("A6", "X6"); //27 + 31
                 row6_TieuDe_Format.Interior.Color = Color.FromArgb(198, 224, 180);
 
                 Range row5_TieuDe_STT = oSheet.get_Range("A5");
@@ -4198,15 +4199,19 @@ namespace Vs.TimeAttendance
                 row5_TieuDe_GLTNNHT.ColumnWidth = 9;
 
                 Range row5_TieuDe_V5 = oSheet.get_Range("V5");
-                row5_TieuDe_V5.Value2 = "Tăng ca 150% k làm ra SP";
+                row5_TieuDe_V5.Value2 = "Giờ tăng ca ngày lễ";
                 row5_TieuDe_V5.ColumnWidth = 9;
 
                 Range row5_TieuDe_W5 = oSheet.get_Range("W5");
-                row5_TieuDe_W5.Value2 = "Tổng giờ ko làm ra sản phẩm (Offtime)";
-                row5_TieuDe_W5.ColumnWidth = 10;
+                row5_TieuDe_W5.Value2 = "Tăng ca 150% không làm ra SP";
+                row5_TieuDe_W5.ColumnWidth = 9;
+
+                Range row5_TieuDe_X5 = oSheet.get_Range("X5");
+                row5_TieuDe_X5.Value2 = "Tổng giờ ko làm ra sản phẩm (Offtime)";
+                row5_TieuDe_X5.ColumnWidth = 10;
 
                 // Thứ ngày cho cột công thường
-                Range row5_TieuDeCT_Format = oSheet.get_Range("X5", lastColumNgayCT + "5"); //27 + 31
+                Range row5_TieuDeCT_Format = oSheet.get_Range("Y5", lastColumNgayCT + "5"); //27 + 31
                 row5_TieuDeCT_Format.Font.Size = 9;
                 row5_TieuDeCT_Format.Font.Name = fontName;
                 row5_TieuDeCT_Format.Orientation = 90;
@@ -4216,7 +4221,7 @@ namespace Vs.TimeAttendance
                 row5_TieuDeCT_Format.Cells.VerticalAlignment = Excell.XlVAlign.xlVAlignBottom;
 
                 string sThu = "";
-                int col_r5 = 24;
+                int col_r5 = 25;
                 iTNgay = Convert.ToDateTime(lk_TuNgay.EditValue).Day;
                 sTenCot = "";
                 while (iTNgay <= iDNgay)
@@ -4306,7 +4311,7 @@ namespace Vs.TimeAttendance
                 oSheet.get_Range("A7", lastColumn + rowCnt.ToString()).Value2 = rowData;
 
 
-                col_r5 = 24;
+                col_r5 = 25;
                 sThu = "";
                 iTNgay = Convert.ToDateTime(lk_TuNgay.EditValue).Day;
                 sTenCot = "";
@@ -4413,14 +4418,14 @@ namespace Vs.TimeAttendance
 
                 // COT X -  đến hết
                 Excell.Range formatRange4;
-                formatRange4 = oSheet.get_Range("X6", lastColumn + (rowCnt - 1).ToString());
+                formatRange4 = oSheet.get_Range("Y6", lastColumn + (rowCnt - 1).ToString());
                 formatRange4.Cells.HorizontalAlignment = Excell.XlHAlign.xlHAlignCenter;
                 formatRange4.Cells.VerticalAlignment = Excell.XlVAlign.xlVAlignCenter;
 
 
                 //object result = myRange.AutoFilter(1,"HO_TEN");
 
-                BorderAround(oSheet.get_Range("X3", lastColumn + "4"));
+                BorderAround(oSheet.get_Range("Y3", lastColumn + "4"));
                 BorderAround(oSheet.get_Range("A5", lastColumn + (rowCnt - 1).ToString()));
                 Excell.Range myRange = oSheet.get_Range("A5", lastColumn + (rowCnt - 1).ToString());
                 myRange.AutoFilter("1", "<>", Excell.XlAutoFilterOperator.xlOr, "", true);
@@ -4428,6 +4433,7 @@ namespace Vs.TimeAttendance
                 // filter
                 //oSheet.Application.ActiveWindow.SplitColumn = 4;
                 //oSheet.Application.ActiveWindow.FreezePanes = true;
+                this.Cursor = Cursors.Default;
                 oXL.Visible = true;
                 oXL.UserControl = true;
                 //oWB.SaveAs("TheSavePath", Excell.XlFileFormat.xlWorkbookDefaul);
@@ -4436,6 +4442,7 @@ namespace Vs.TimeAttendance
             }
             catch (Exception ex)
             {
+                this.Cursor = Cursors.Default;
                 MessageBox.Show(ex.Message);
             }
         }

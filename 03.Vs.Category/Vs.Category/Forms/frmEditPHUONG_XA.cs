@@ -80,7 +80,7 @@ namespace Vs.Category
         {
             try
             {
-                string sSql = "SELECT T1.ID_PX, T1.ID_QUAN, T2.ID_TP, T1.TEN_PX, T1.TEN_PX_A, T1.TEN_PX_H, KHOANG_CACH, T1.MS_XA " +
+                string sSql = "SELECT T1.ID_PX, T1.ID_QUAN, T2.ID_TP, T1.TEN_PX, T1.TEN_PX_A, T1.TEN_PX_H, KHOANG_CACH, T1.MS_XA , T1.DI_DO " +
                     "FROM PHUONG_XA T1 INNER JOIN QUAN T2 ON T1.ID_QUAN = T2.ID_QUAN " +
                     "WHERE T1.ID_PX =	" + Id.ToString();
                 DataTable dtTmp = new DataTable();
@@ -94,6 +94,7 @@ namespace Vs.Category
                 ID_TPSearchLookUpEdit.EditValue = dtTmp.Rows[0]["ID_TP"];
                 LoadQuan(Int64.Parse(ID_TPSearchLookUpEdit.EditValue.ToString()));
                 ID_QUANSearchLookUpEdit.EditValue = dtTmp.Rows[0]["ID_QUAN"];
+                DI_DOCheckEdit.EditValue = dtTmp.Rows[0]["DI_DO"];
                 try { txtKhoangCach.Text = dtTmp.Rows[0]["KHOANG_CACH"].ToString(); } catch { }
             }
             catch (Exception EX)
@@ -146,6 +147,7 @@ namespace Vs.Category
                 MS_XATextEdit.EditValue = String.Empty;
                 txtKhoangCach.Text = string.Empty;
                 TEN_PXTextEdit.Focus();
+                DI_DOCheckEdit.EditValue = false;
             }
             catch { }
         }
@@ -165,7 +167,7 @@ namespace Vs.Category
                             if (bKiemTrung()) return;
                             Commons.Modules.sId = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spUpdatePHUONG_XA", (AddEdit ? -1 : Id),
                                 MS_XATextEdit.EditValue, TEN_PXTextEdit.EditValue, TEN_PX_ATextEdit.EditValue,
-                                TEN_PX_HTextEdit.EditValue, ID_QUANSearchLookUpEdit.EditValue, txtKhoangCach.Text
+                                TEN_PX_HTextEdit.EditValue, ID_QUANSearchLookUpEdit.EditValue, txtKhoangCach.Text,DI_DOCheckEdit.EditValue
                                 ).ToString();
                             if (AddEdit)
                             {

@@ -122,8 +122,10 @@
             // 
             this.xrTableCell1.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[TU_THANG]")});
+            this.xrTableCell1.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.xrTableCell1.Multiline = true;
             this.xrTableCell1.Name = "xrTableCell1";
+            this.xrTableCell1.StylePriority.UseFont = false;
             this.xrTableCell1.StylePriority.UseTextAlignment = false;
             this.xrTableCell1.Text = "xrTableCell1";
             this.xrTableCell1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
@@ -133,8 +135,10 @@
             // 
             this.xrTableCell2.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[DEN_THANG]")});
+            this.xrTableCell2.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.xrTableCell2.Multiline = true;
             this.xrTableCell2.Name = "xrTableCell2";
+            this.xrTableCell2.StylePriority.UseFont = false;
             this.xrTableCell2.StylePriority.UseTextAlignment = false;
             this.xrTableCell2.Text = "xrTableCell2";
             this.xrTableCell2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
@@ -144,8 +148,10 @@
             // 
             this.xrTableCell3.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[TEN_CV]")});
+            this.xrTableCell3.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.xrTableCell3.Multiline = true;
             this.xrTableCell3.Name = "xrTableCell3";
+            this.xrTableCell3.StylePriority.UseFont = false;
             this.xrTableCell3.Text = "xrTableCell3";
             this.xrTableCell3.Weight = 1.9675282284813673D;
             // 
@@ -153,8 +159,10 @@
             // 
             this.xrTableCell4.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[NAM_DONG]")});
+            this.xrTableCell4.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.xrTableCell4.Multiline = true;
             this.xrTableCell4.Name = "xrTableCell4";
+            this.xrTableCell4.StylePriority.UseFont = false;
             this.xrTableCell4.StylePriority.UseTextAlignment = false;
             this.xrTableCell4.Text = "xrTableCell4";
             this.xrTableCell4.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
@@ -164,8 +172,10 @@
             // 
             this.xrTableCell5.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[THANG_DONG]")});
+            this.xrTableCell5.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.xrTableCell5.Multiline = true;
             this.xrTableCell5.Name = "xrTableCell5";
+            this.xrTableCell5.StylePriority.UseFont = false;
             this.xrTableCell5.StylePriority.UseTextAlignment = false;
             this.xrTableCell5.Text = "xrTableCell5";
             this.xrTableCell5.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
@@ -175,8 +185,10 @@
             // 
             this.xrTableCell10.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[MUC_LUONG_DONG]")});
+            this.xrTableCell10.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.xrTableCell10.Multiline = true;
             this.xrTableCell10.Name = "xrTableCell10";
+            this.xrTableCell10.StylePriority.UseFont = false;
             this.xrTableCell10.StylePriority.UseTextAlignment = false;
             this.xrTableCell10.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             this.xrTableCell10.TextFormatString = "{0:#,#}";
@@ -193,10 +205,12 @@
             // 
             this.THANG.Borders = ((DevExpress.XtraPrinting.BorderSide)(((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Right) 
             | DevExpress.XtraPrinting.BorderSide.Bottom)));
+            this.THANG.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.THANG.Multiline = true;
             this.THANG.Name = "THANG";
             this.THANG.StylePriority.UseBorders = false;
-            this.THANG.Text = "THANG";
+            this.THANG.StylePriority.UseFont = false;
+            this.THANG.Text = "Tháng";
             this.THANG.Weight = 0.99637295647001212D;
             // 
             // xrTableCell12
@@ -236,40 +250,50 @@
             // 
             this.NAM.Borders = ((DevExpress.XtraPrinting.BorderSide)(((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Right) 
             | DevExpress.XtraPrinting.BorderSide.Bottom)));
+            this.NAM.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.NAM.Multiline = true;
             this.NAM.Name = "NAM";
             this.NAM.StylePriority.UseBorders = false;
-            this.NAM.Text = "NAM";
+            this.NAM.StylePriority.UseFont = false;
+            this.NAM.Text = "Năm";
             this.NAM.Weight = 1.0729322777318902D;
             // 
             // MUC_LUONG
             // 
+            this.MUC_LUONG.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MUC_LUONG.Multiline = true;
             this.MUC_LUONG.Name = "MUC_LUONG";
             this.MUC_LUONG.RowSpan = 2;
+            this.MUC_LUONG.StylePriority.UseFont = false;
             this.MUC_LUONG.Text = "MUC_LUONG";
             this.MUC_LUONG.Weight = 1.2408061894600047D;
             // 
             // THOI_GIANG_DONG_BH
             // 
+            this.THOI_GIANG_DONG_BH.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.THOI_GIANG_DONG_BH.Multiline = true;
             this.THOI_GIANG_DONG_BH.Name = "THOI_GIANG_DONG_BH";
+            this.THOI_GIANG_DONG_BH.StylePriority.UseFont = false;
             this.THOI_GIANG_DONG_BH.Text = "THOI_GIANG_DONG_BH";
             this.THOI_GIANG_DONG_BH.Weight = 2.0693050464014209D;
             // 
             // DEN_THANG
             // 
+            this.DEN_THANG.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DEN_THANG.Multiline = true;
             this.DEN_THANG.Name = "DEN_THANG";
             this.DEN_THANG.RowSpan = 2;
+            this.DEN_THANG.StylePriority.UseFont = false;
             this.DEN_THANG.Text = "DEN_THANG";
             this.DEN_THANG.Weight = 1.1279384545226265D;
             // 
             // TU_THANG
             // 
+            this.TU_THANG.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TU_THANG.Multiline = true;
             this.TU_THANG.Name = "TU_THANG";
             this.TU_THANG.RowSpan = 2;
+            this.TU_THANG.StylePriority.UseFont = false;
             this.TU_THANG.StylePriority.UseTextAlignment = false;
             this.TU_THANG.Text = "TU_THANG";
             this.TU_THANG.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
@@ -288,9 +312,11 @@
             // 
             // CHUC_VU
             // 
+            this.CHUC_VU.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CHUC_VU.Multiline = true;
             this.CHUC_VU.Name = "CHUC_VU";
             this.CHUC_VU.RowSpan = 2;
+            this.CHUC_VU.StylePriority.UseFont = false;
             this.CHUC_VU.Text = "CHUC_VU";
             this.CHUC_VU.Weight = 3.1446216559284847D;
             // 
@@ -321,7 +347,7 @@
             // 
             // lblTIEU_DE
             // 
-            this.lblTIEU_DE.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTIEU_DE.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTIEU_DE.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
             this.lblTIEU_DE.Multiline = true;
             this.lblTIEU_DE.Name = "lblTIEU_DE";
@@ -353,7 +379,7 @@
             this.lblDON_VI.AllowMarkupText = true;
             this.lblDON_VI.AutoWidth = true;
             this.lblDON_VI.CanShrink = true;
-            this.lblDON_VI.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.lblDON_VI.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDON_VI.LocationFloat = new DevExpress.Utils.PointFloat(0F, 207.2917F);
             this.lblDON_VI.Multiline = true;
             this.lblDON_VI.Name = "lblDON_VI";
@@ -370,7 +396,7 @@
             this.lblTHEO_QD.AutoWidth = true;
             this.lblTHEO_QD.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[SO_QD]")});
-            this.lblTHEO_QD.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.lblTHEO_QD.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTHEO_QD.LocationFloat = new DevExpress.Utils.PointFloat(0F, 181.1667F);
             this.lblTHEO_QD.Multiline = true;
             this.lblTHEO_QD.Name = "lblTHEO_QD";
@@ -388,7 +414,7 @@
             this.lblNGAY_THANG_NAM.AutoWidth = true;
             this.lblNGAY_THANG_NAM.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[NGAY_THOI_VIEC]")});
-            this.lblNGAY_THANG_NAM.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.lblNGAY_THANG_NAM.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNGAY_THANG_NAM.LocationFloat = new DevExpress.Utils.PointFloat(454.6876F, 181.1667F);
             this.lblNGAY_THANG_NAM.Multiline = true;
             this.lblNGAY_THANG_NAM.Name = "lblNGAY_THANG_NAM";
@@ -404,7 +430,7 @@
             // 
             this.lblGIOI_TINH.AllowMarkupText = true;
             this.lblGIOI_TINH.AutoWidth = true;
-            this.lblGIOI_TINH.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.lblGIOI_TINH.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblGIOI_TINH.LocationFloat = new DevExpress.Utils.PointFloat(476.2323F, 62.54178F);
             this.lblGIOI_TINH.Multiline = true;
             this.lblGIOI_TINH.Name = "lblGIOI_TINH";
@@ -419,7 +445,7 @@
             // 
             this.lblDIA_CHI_THUONG_TRU.AllowMarkupText = true;
             this.lblDIA_CHI_THUONG_TRU.CanShrink = true;
-            this.lblDIA_CHI_THUONG_TRU.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.lblDIA_CHI_THUONG_TRU.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDIA_CHI_THUONG_TRU.LocationFloat = new DevExpress.Utils.PointFloat(0F, 154.5417F);
             this.lblDIA_CHI_THUONG_TRU.Multiline = true;
             this.lblDIA_CHI_THUONG_TRU.Name = "lblDIA_CHI_THUONG_TRU";
@@ -434,7 +460,7 @@
             // 
             this.lblDON_VI_CONG_TAC.AllowMarkupText = true;
             this.lblDON_VI_CONG_TAC.AutoWidth = true;
-            this.lblDON_VI_CONG_TAC.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.lblDON_VI_CONG_TAC.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDON_VI_CONG_TAC.LocationFloat = new DevExpress.Utils.PointFloat(0F, 131.5417F);
             this.lblDON_VI_CONG_TAC.Multiline = true;
             this.lblDON_VI_CONG_TAC.Name = "lblDON_VI_CONG_TAC";
@@ -449,7 +475,7 @@
             // 
             this.lblCHUC_VU.AllowMarkupText = true;
             this.lblCHUC_VU.AutoWidth = true;
-            this.lblCHUC_VU.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.lblCHUC_VU.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCHUC_VU.LocationFloat = new DevExpress.Utils.PointFloat(0F, 108.5417F);
             this.lblCHUC_VU.Multiline = true;
             this.lblCHUC_VU.Name = "lblCHUC_VU";
@@ -464,7 +490,7 @@
             // 
             this.lblNGAY_SINH.AllowMarkupText = true;
             this.lblNGAY_SINH.AutoWidth = true;
-            this.lblNGAY_SINH.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.lblNGAY_SINH.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNGAY_SINH.LocationFloat = new DevExpress.Utils.PointFloat(0F, 85.54175F);
             this.lblNGAY_SINH.Multiline = true;
             this.lblNGAY_SINH.Name = "lblNGAY_SINH";
@@ -479,7 +505,7 @@
             // 
             this.lbl_HO_TEN.AllowMarkupText = true;
             this.lbl_HO_TEN.AutoWidth = true;
-            this.lbl_HO_TEN.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.lbl_HO_TEN.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_HO_TEN.LocationFloat = new DevExpress.Utils.PointFloat(0F, 62.54178F);
             this.lbl_HO_TEN.Multiline = true;
             this.lbl_HO_TEN.Name = "lbl_HO_TEN";
@@ -494,7 +520,7 @@
             // 
             this.lblSO_BHXH.AllowMarkupText = true;
             this.lblSO_BHXH.AutoWidth = true;
-            this.lblSO_BHXH.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.lblSO_BHXH.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSO_BHXH.LocationFloat = new DevExpress.Utils.PointFloat(473.7322F, 15.58334F);
             this.lblSO_BHXH.Multiline = true;
             this.lblSO_BHXH.Name = "lblSO_BHXH";
@@ -514,7 +540,7 @@
             // 
             // lblCHXHCNVN
             // 
-            this.lblCHXHCNVN.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
+            this.lblCHXHCNVN.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCHXHCNVN.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
             this.lblCHXHCNVN.Multiline = true;
             this.lblCHXHCNVN.Name = "lblCHXHCNVN";
@@ -547,7 +573,7 @@
             // 
             // lblDLTDHP
             // 
-            this.lblDLTDHP.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.lblDLTDHP.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDLTDHP.LocationFloat = new DevExpress.Utils.PointFloat(0F, 36.91667F);
             this.lblDLTDHP.Name = "lblDLTDHP";
             this.lblDLTDHP.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
@@ -567,7 +593,7 @@
             this.Font = new System.Drawing.Font("Arial", 9.75F);
             this.Margins = new System.Drawing.Printing.Margins(75, 75, 13, 34);
             this.Tag = "rptThamGiaBHXH";
-            this.Version = "20.1";
+            this.Version = "22.1";
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();

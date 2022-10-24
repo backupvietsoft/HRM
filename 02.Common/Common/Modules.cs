@@ -172,6 +172,19 @@ namespace Commons
             }
         }
 
+        private static string _sKyHieuDV;
+        public static string KyHieuDV
+        {
+            get
+            {
+                return _sKyHieuDV;
+            }
+            set
+            {
+                _sKyHieuDV = value;
+            }
+        }
+
 
         //định nghĩa version PM
         private static string _sVersion;

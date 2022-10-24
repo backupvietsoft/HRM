@@ -19,7 +19,7 @@ namespace Vs.HRM
         public ucBaoCaoDanhGiaTTThuViec()
         {
             InitializeComponent();
-            Commons.Modules.ObjSystems.ThayDoiNN(this,windowsUIButton);
+            Commons.Modules.ObjSystems.ThayDoiNN(this, windowsUIButton);
         }
 
         private void windowsUIButton_ButtonClick(object sender, ButtonEventArgs e)
@@ -30,7 +30,63 @@ namespace Vs.HRM
             {
                 case "Print":
                     {
-                        DanhGiaTinhTrangThuViec_DM();
+                        if (chkBCThuViec.Checked == true)
+                        {
+
+                            DanhGiaTinhTrangThuViec_DM();
+                        }
+                        if(chkBCTrinhDo.Checked == true)
+                        {
+                            System.Data.SqlClient.SqlConnection conn;
+                            DataTable dt = new DataTable();
+                            frmViewReport frm = new frmViewReport();
+                            string strTieuDe = ("Đánh giá trình độ " + LK_NOI_DUNG.Text).ToUpper(); ;
+
+                            frm.rpt = new rptBCDanhGiaTrinhDo(lk_NgayIn.DateTime, strTieuDe);
+
+                            try
+                            {
+                                Int32 DiemTu = 0;
+                                Int32 DiemDen = 99;
+                                if (txDiemTu.Text != "")
+                                {
+                                    DiemTu = Convert.ToInt32(txDiemTu.EditValue);
+                                }
+                                if (txDiemDen.Text != "")
+                                {
+                                    DiemDen = Convert.ToInt32(txDiemDen.EditValue);
+                                }
+
+                                conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                                conn.Open();
+
+                                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptDanhGiaTrinhDo", conn);
+
+                                cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                                cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                                cmd.Parameters.Add("@Dvi", SqlDbType.Int).Value = LK_DON_VI.EditValue;
+                                cmd.Parameters.Add("@XN", SqlDbType.Int).Value = LK_XI_NGHIEP.EditValue;
+                                cmd.Parameters.Add("@TO", SqlDbType.Int).Value = LK_TO.EditValue;
+                                cmd.Parameters.Add("@NDDG", SqlDbType.Int).Value = Convert.ToInt32(LK_NOI_DUNG.EditValue);
+                                cmd.Parameters.Add("@DiemT", SqlDbType.Int).Value = DiemTu;
+                                cmd.Parameters.Add("@DiemD", SqlDbType.Int).Value = DiemDen;
+                                cmd.Parameters.Add("@DNgay", SqlDbType.Date).Value = lk_NgayIn.EditValue;
+                                cmd.CommandType = CommandType.StoredProcedure;
+                                System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+                                DataSet ds = new DataSet();
+                                adp.Fill(ds);
+                                dt = new DataTable();
+                                dt = ds.Tables[0].Copy();
+                                dt.TableName = "DA_TA";
+                                frm.AddDataSource(dt);
+                            }
+                            catch
+                            { }
+
+
+                            frm.ShowDialog();
+                            break;
+                        }
                         break;
                     }
                 default:
@@ -41,10 +97,12 @@ namespace Vs.HRM
         private void ucBaoCaoDanhGiaTTThuViec_Load(object sender, EventArgs e)
         {
             Commons.Modules.sLoad = "0Load";
+            lk_NgayIn.DateTime = DateTime.Now;
+            Commons.OSystems.SetDateEditFormat(lk_NgayIn);
             LoadCboDonVi();
             LoadCboXiNghiep();
             LoadCboTo();
-
+            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(LK_NOI_DUNG, Commons.Modules.ObjSystems.DataNoiDungDanhGia(false), "ID_NDDG", "TEN_NDDG", "Nội dung");
             Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_CV, Commons.Modules.ObjSystems.DataChucVu(true, System.Convert.ToInt32(-1)), "ID_CV", "TEN_CV", "TEN_CV");
             Commons.OSystems.SetDateEditFormat(dTuNgay);
             Commons.OSystems.SetDateEditFormat(dDenNgay);
@@ -56,6 +114,7 @@ namespace Vs.HRM
             dtDN = dtDN.AddDays(-(dtDN.Day));
             dDenNgay.EditValue = dtDN;
             Commons.Modules.sLoad = "";
+            chkBCThuViec.EditValue = true;
         }
         private void LoadCboDonVi()
         {
@@ -260,7 +319,7 @@ namespace Vs.HRM
                 row5_TieuDe_NHHL.ColumnWidth = 13;
 
                 Range row5_TieuDe_NDG = oSheet.get_Range("J5");
-                row5_TieuDe_NDG.Value2 = "Người đánh giá"; 
+                row5_TieuDe_NDG.Value2 = "Người đánh giá";
                 row5_TieuDe_NDG.ColumnWidth = 25;
 
                 Range row5_TieuDe_NDGG = oSheet.get_Range("K5");
@@ -435,6 +494,41 @@ namespace Vs.HRM
                 return returnCharCount;
             }
         }
+        private void EnabelButton(bool visible)
+        {
+            lblTNgay.Enabled = visible;
+            lblDNgay.Enabled = visible;
+            lblChucVu.Enabled = visible;
+            dTuNgay.Enabled = visible;
+            dDenNgay.Enabled = visible;
+            lblBCTrinhDo.Enabled = !visible;
 
+            lbNoiDung.Enabled = !visible;
+            lbDiemTu.Enabled = !visible;
+            lbDen.Enabled = !visible;
+            LK_NOI_DUNG.Enabled = !visible;
+            txDiemTu.Enabled = !visible;
+            txDiemDen.Enabled = !visible;
+            lblBCDanhGiaTV.Enabled = visible;
+        }
+
+        private void chkBCThuViec_CheckedChanged(object sender, EventArgs e)
+        {
+            if (Commons.Modules.sLoad == "0Load") return;
+            Commons.Modules.sLoad = "0Load";
+            EnabelButton(true);
+            chkBCTrinhDo.EditValue = false;
+            Commons.Modules.sLoad = "";
+
+        }
+
+        private void chkBCTrinhDo_CheckedChanged(object sender, EventArgs e)
+        {
+            if (Commons.Modules.sLoad == "0Load") return;
+            Commons.Modules.sLoad = "0Load";
+            EnabelButton(false);
+            chkBCThuViec.EditValue = false;
+            Commons.Modules.sLoad = "";
+        }
     }
 }

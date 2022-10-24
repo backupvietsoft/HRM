@@ -169,6 +169,11 @@ namespace Vs.HRM
                         SaveDinhDangBaoCaoCongNhan();
                         break;
                     }
+                case "thoat":
+                    {
+                        Commons.Modules.ObjSystems.GotoHome(this);
+                        break;
+                    }
                 default:
                     break;
             }
@@ -380,7 +385,6 @@ namespace Vs.HRM
                 cmd.Parameters.Add("@Loai", SqlDbType.Int).Value = rdoChonBC.SelectedIndex;
                 cmd.Parameters.Add("@Field", SqlDbType.NVarChar, 1000).Value = dsCol;
                 cmd.Parameters.Add("@ID_CV", SqlDbType.BigInt, 1000).Value = cboChucVu.EditValue;
-                cmd.Parameters.Add("@Loai_sort", SqlDbType.Bit).Value = chkGroup.Checked;
                 cmd.Parameters.Add("@Loai_sort", SqlDbType.Bit).Value = chkGroup.Checked;
                 cmd.CommandType = CommandType.StoredProcedure;
                 System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);

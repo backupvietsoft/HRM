@@ -3743,7 +3743,9 @@ namespace Commons
         public bool checkExitsUser(string sUserName)
         {
             string sSql = "";
-            sSql = "SELECT COUNT(*) FROM dbo.LOGIN WHERE USER_LOGIN = '" + sUserName + "'";
+            string MName = "";
+            try { MName = Environment.MachineName; } catch { }
+            sSql = "SELECT COUNT(*) FROM dbo.LOGIN WHERE USER_LOGIN = '" + sUserName + "' AND M_NAME <> N'"+ MName + "'";
             if (Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, sSql).ToString()) > 0)
             {
                 return false;

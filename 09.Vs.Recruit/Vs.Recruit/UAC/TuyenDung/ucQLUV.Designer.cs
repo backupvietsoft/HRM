@@ -135,12 +135,12 @@
             // 
             // cboLocTheo
             // 
-            this.cboLocTheo.Location = new System.Drawing.Point(530, 7);
+            this.cboLocTheo.Location = new System.Drawing.Point(537, 6);
             this.cboLocTheo.Name = "cboLocTheo";
             this.cboLocTheo.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cboLocTheo.Properties.NullText = "";
-            this.cboLocTheo.Size = new System.Drawing.Size(118, 24);
+            this.cboLocTheo.Size = new System.Drawing.Size(112, 24);
             this.cboLocTheo.StyleController = this.layoutControl1;
             this.cboLocTheo.TabIndex = 21;
             this.cboLocTheo.EditValueChanged += new System.EventHandler(this.cboLocTheo_EditValueChanged);
@@ -148,11 +148,11 @@
             // grdUngVien
             // 
             this.grdUngVien.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(3, 7, 3, 7);
-            this.grdUngVien.Location = new System.Drawing.Point(7, 41);
+            this.grdUngVien.Location = new System.Drawing.Point(6, 38);
             this.grdUngVien.MainView = this.grvUngVien;
             this.grdUngVien.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.grdUngVien.Name = "grdUngVien";
-            this.grdUngVien.Size = new System.Drawing.Size(1070, 467);
+            this.grdUngVien.Size = new System.Drawing.Size(1072, 471);
             this.grdUngVien.TabIndex = 20;
             this.grdUngVien.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grvUngVien});
@@ -170,13 +170,13 @@
             // cboTinhTrangUV
             // 
             this.cboTinhTrangUV.EditValue = false;
-            this.cboTinhTrangUV.Location = new System.Drawing.Point(100, 7);
+            this.cboTinhTrangUV.Location = new System.Drawing.Point(107, 6);
             this.cboTinhTrangUV.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.cboTinhTrangUV.Name = "cboTinhTrangUV";
             this.cboTinhTrangUV.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cboTinhTrangUV.Properties.NullText = "";
-            this.cboTinhTrangUV.Size = new System.Drawing.Size(118, 24);
+            this.cboTinhTrangUV.Size = new System.Drawing.Size(112, 24);
             this.cboTinhTrangUV.StyleController = this.layoutControl1;
             this.cboTinhTrangUV.TabIndex = 11;
             this.cboTinhTrangUV.EditValueChanged += new System.EventHandler(this.cboDA_TUYEN_DUNG_EditValueChanged);
@@ -184,7 +184,7 @@
             // datTuNgay
             // 
             this.datTuNgay.EditValue = "";
-            this.datTuNgay.Location = new System.Drawing.Point(745, 7);
+            this.datTuNgay.Location = new System.Drawing.Point(752, 6);
             this.datTuNgay.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.datTuNgay.Name = "datTuNgay";
             this.datTuNgay.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -196,7 +196,7 @@
             this.datTuNgay.Properties.EditFormat.FormatString = "dd/MM/yyyy";
             this.datTuNgay.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.datTuNgay.Properties.MaskSettings.Set("mask", "d");
-            this.datTuNgay.Size = new System.Drawing.Size(117, 24);
+            this.datTuNgay.Size = new System.Drawing.Size(111, 24);
             this.datTuNgay.StyleController = this.layoutControl1;
             this.datTuNgay.TabIndex = 19;
             this.datTuNgay.EditValueChanged += new System.EventHandler(this.cboDA_TUYEN_DUNG_EditValueChanged);
@@ -204,7 +204,7 @@
             // datDenNgay
             // 
             this.datDenNgay.EditValue = null;
-            this.datDenNgay.Location = new System.Drawing.Point(959, 7);
+            this.datDenNgay.Location = new System.Drawing.Point(966, 6);
             this.datDenNgay.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.datDenNgay.Name = "datDenNgay";
             this.datDenNgay.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -216,7 +216,7 @@
             this.datDenNgay.Properties.EditFormat.FormatString = "dd/MM/yyyy";
             this.datDenNgay.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.datDenNgay.Properties.MaskSettings.Set("mask", "d");
-            this.datDenNgay.Size = new System.Drawing.Size(118, 24);
+            this.datDenNgay.Size = new System.Drawing.Size(112, 24);
             this.datDenNgay.StyleController = this.layoutControl1;
             this.datDenNgay.TabIndex = 18;
             this.datDenNgay.EditValueChanged += new System.EventHandler(this.cboDA_TUYEN_DUNG_EditValueChanged);
@@ -224,13 +224,13 @@
             // cboLoaiCNV
             // 
             this.cboLoaiCNV.EditValue = "";
-            this.cboLoaiCNV.Location = new System.Drawing.Point(315, 7);
+            this.cboLoaiCNV.Location = new System.Drawing.Point(322, 6);
             this.cboLoaiCNV.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cboLoaiCNV.Name = "cboLoaiCNV";
             this.cboLoaiCNV.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cboLoaiCNV.Properties.NullText = "";
-            this.cboLoaiCNV.Size = new System.Drawing.Size(118, 24);
+            this.cboLoaiCNV.Size = new System.Drawing.Size(112, 24);
             this.cboLoaiCNV.StyleController = this.layoutControl1;
             this.cboLoaiCNV.TabIndex = 19;
             this.cboLoaiCNV.EditValueChanged += new System.EventHandler(this.cboDA_TUYEN_DUNG_EditValueChanged);
@@ -259,7 +259,7 @@
             this.lblTinhTrangUV.CustomizationFormText = "ItemForDA_TUYEN_DUNG";
             this.lblTinhTrangUV.Location = new System.Drawing.Point(0, 0);
             this.lblTinhTrangUV.Name = "lblTinhTrangUV";
-            this.lblTinhTrangUV.Size = new System.Drawing.Size(215, 28);
+            this.lblTinhTrangUV.Size = new System.Drawing.Size(215, 26);
             this.lblTinhTrangUV.TextSize = new System.Drawing.Size(89, 17);
             // 
             // lblDenNgay
@@ -269,7 +269,7 @@
             this.lblDenNgay.CustomizationFormText = "lblDenNgay";
             this.lblDenNgay.Location = new System.Drawing.Point(859, 0);
             this.lblDenNgay.Name = "lblDenNgay";
-            this.lblDenNgay.Size = new System.Drawing.Size(215, 28);
+            this.lblDenNgay.Size = new System.Drawing.Size(215, 26);
             this.lblDenNgay.TextSize = new System.Drawing.Size(89, 17);
             // 
             // lblTuNgay
@@ -279,13 +279,13 @@
             this.lblTuNgay.CustomizationFormText = "lblTuNgay";
             this.lblTuNgay.Location = new System.Drawing.Point(645, 0);
             this.lblTuNgay.Name = "lblTuNgay";
-            this.lblTuNgay.Size = new System.Drawing.Size(214, 28);
+            this.lblTuNgay.Size = new System.Drawing.Size(214, 26);
             this.lblTuNgay.TextSize = new System.Drawing.Size(89, 17);
             // 
             // emptySpaceItem2
             // 
             this.emptySpaceItem2.AllowHotTrack = false;
-            this.emptySpaceItem2.Location = new System.Drawing.Point(0, 28);
+            this.emptySpaceItem2.Location = new System.Drawing.Point(0, 26);
             this.emptySpaceItem2.MaxSize = new System.Drawing.Size(0, 6);
             this.emptySpaceItem2.MinSize = new System.Drawing.Size(12, 6);
             this.emptySpaceItem2.Name = "emptySpaceItem2";
@@ -296,9 +296,9 @@
             // layoutControlItem1
             // 
             this.layoutControlItem1.Control = this.grdUngVien;
-            this.layoutControlItem1.Location = new System.Drawing.Point(0, 34);
+            this.layoutControlItem1.Location = new System.Drawing.Point(0, 32);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(1074, 471);
+            this.layoutControlItem1.Size = new System.Drawing.Size(1074, 473);
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
             // 
@@ -309,7 +309,7 @@
             this.lblLoaiCNV.CustomizationFormText = "lblLoaiCNV";
             this.lblLoaiCNV.Location = new System.Drawing.Point(215, 0);
             this.lblLoaiCNV.Name = "lblLoaiCNV";
-            this.lblLoaiCNV.Size = new System.Drawing.Size(215, 28);
+            this.lblLoaiCNV.Size = new System.Drawing.Size(215, 26);
             this.lblLoaiCNV.TextSize = new System.Drawing.Size(89, 17);
             // 
             // lblLocTheo
@@ -317,7 +317,7 @@
             this.lblLocTheo.Control = this.cboLocTheo;
             this.lblLocTheo.Location = new System.Drawing.Point(430, 0);
             this.lblLocTheo.Name = "lblLocTheo";
-            this.lblLocTheo.Size = new System.Drawing.Size(215, 28);
+            this.lblLocTheo.Size = new System.Drawing.Size(215, 26);
             this.lblLocTheo.TextSize = new System.Drawing.Size(89, 17);
             // 
             // windowsUIButton
@@ -370,7 +370,7 @@
             // 
             this.searchControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.searchControl1.Client = this.grdUngVien;
-            this.searchControl1.Location = new System.Drawing.Point(7, 6);
+            this.searchControl1.Location = new System.Drawing.Point(7, 4);
             this.searchControl1.Name = "searchControl1";
             this.searchControl1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Repository.ClearButton(),

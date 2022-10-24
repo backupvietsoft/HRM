@@ -74,6 +74,8 @@
             this.timKetThuc = new DevExpress.XtraEditors.TimeEdit();
             this.txtNDPV = new DevExpress.XtraEditors.MemoEdit();
             this.txtBuocPV = new DevExpress.XtraEditors.SpinEdit();
+            this.lblThongTin = new DevExpress.XtraLayout.LayoutControlItem();
+            this.lblBuocPV = new DevExpress.XtraLayout.LayoutControlItem();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.splitterItem1 = new DevExpress.XtraLayout.SplitterItem();
             this.lblThang = new DevExpress.XtraLayout.LayoutControlItem();
@@ -89,10 +91,8 @@
             this.tabViTri = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem13 = new DevExpress.XtraLayout.LayoutControlItem();
             this.lblKeHoachPV = new DevExpress.XtraLayout.LayoutControlItem();
-            this.lblThongTin = new DevExpress.XtraLayout.LayoutControlItem();
             this.lblBacDau = new DevExpress.XtraLayout.LayoutControlItem();
             this.lblNDPV = new DevExpress.XtraLayout.LayoutControlItem();
-            this.lblBuocPV = new DevExpress.XtraLayout.LayoutControlItem();
             this.lblNguoiPV1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.lblKieuPV = new DevExpress.XtraLayout.LayoutControlItem();
             this.lblKetThuc = new DevExpress.XtraLayout.LayoutControlItem();
@@ -101,7 +101,6 @@
             this.btnALL = new DevExpress.XtraBars.Docking2010.WindowsUIButtonPanel();
             this.dxValidationProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
             this.ofileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataLayoutControl1)).BeginInit();
             this.dataLayoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cboTTLoc.Properties)).BeginInit();
@@ -131,6 +130,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.timKetThuc.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtNDPV.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtBuocPV.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lblThongTin)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lblBuocPV)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitterItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblThang)).BeginInit();
@@ -146,17 +147,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.tabViTri)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem13)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblKeHoachPV)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lblThongTin)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblBacDau)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblNDPV)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lblBuocPV)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblNguoiPV1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblKieuPV)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblKetThuc)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblNguoiPV2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblTinhTrang)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).BeginInit();
             this.SuspendLayout();
             // 
             // dataLayoutControl1
@@ -181,7 +179,8 @@
             this.dataLayoutControl1.Controls.Add(this.txtBuocPV);
             this.dataLayoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataLayoutControl1.HiddenItems.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.lblThongTin});
+            this.lblThongTin,
+            this.lblBuocPV});
             this.dataLayoutControl1.Location = new System.Drawing.Point(0, 0);
             this.dataLayoutControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dataLayoutControl1.Name = "dataLayoutControl1";
@@ -298,6 +297,7 @@
             this.grvUVPV.Name = "grvUVPV";
             this.grvUVPV.OptionsView.ShowGroupPanel = false;
             this.grvUVPV.PopupMenuShowing += new DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler(this.grvUVPV_PopupMenuShowing);
+            this.grvUVPV.ShowingEditor += new System.ComponentModel.CancelEventHandler(this.grvUVPV_ShowingEditor);
             // 
             // txtThongTin
             // 
@@ -311,11 +311,11 @@
             // grdViTri
             // 
             this.grdViTri.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
-            this.grdViTri.Location = new System.Drawing.Point(366, 217);
+            this.grdViTri.Location = new System.Drawing.Point(366, 189);
             this.grdViTri.MainView = this.grvViTri;
             this.grdViTri.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.grdViTri.Name = "grdViTri";
-            this.grdViTri.Size = new System.Drawing.Size(703, 137);
+            this.grdViTri.Size = new System.Drawing.Size(703, 165);
             this.grdViTri.TabIndex = 18;
             this.grdViTri.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grvViTri});
@@ -497,7 +497,7 @@
             // 
             // txtNDPV
             // 
-            this.txtNDPV.Location = new System.Drawing.Point(472, 124);
+            this.txtNDPV.Location = new System.Drawing.Point(472, 96);
             this.txtNDPV.Name = "txtNDPV";
             this.txtNDPV.Size = new System.Drawing.Size(609, 55);
             this.txtNDPV.StyleController = this.dataLayoutControl1;
@@ -515,9 +515,25 @@
             this.txtBuocPV.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.txtBuocPV.Properties.ReadOnly = true;
-            this.txtBuocPV.Size = new System.Drawing.Size(121, 24);
+            this.txtBuocPV.Size = new System.Drawing.Size(609, 24);
             this.txtBuocPV.StyleController = this.dataLayoutControl1;
             this.txtBuocPV.TabIndex = 61;
+            // 
+            // lblThongTin
+            // 
+            this.lblThongTin.Control = this.txtThongTin;
+            this.lblThongTin.Location = new System.Drawing.Point(585, 84);
+            this.lblThongTin.Name = "lblThongTin";
+            this.lblThongTin.Size = new System.Drawing.Size(488, 28);
+            this.lblThongTin.TextSize = new System.Drawing.Size(114, 17);
+            // 
+            // lblBuocPV
+            // 
+            this.lblBuocPV.Control = this.txtBuocPV;
+            this.lblBuocPV.Location = new System.Drawing.Point(342, 84);
+            this.lblBuocPV.Name = "lblBuocPV";
+            this.lblBuocPV.Size = new System.Drawing.Size(731, 28);
+            this.lblBuocPV.TextSize = new System.Drawing.Size(114, 17);
             // 
             // Root
             // 
@@ -534,13 +550,11 @@
             this.lblKeHoachPV,
             this.lblBacDau,
             this.lblNDPV,
-            this.lblBuocPV,
             this.lblNguoiPV1,
             this.lblKieuPV,
             this.lblKetThuc,
             this.lblNguoiPV2,
-            this.lblTinhTrang,
-            this.emptySpaceItem1});
+            this.lblTinhTrang});
             this.Root.Name = "Root";
             this.Root.Padding = new DevExpress.XtraLayout.Utils.Padding(10, 10, 10, 0);
             this.Root.Size = new System.Drawing.Size(1093, 559);
@@ -661,9 +675,9 @@
             this.tabViTri.CustomizationFormText = "aaa";
             this.tabViTri.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlItem13});
-            this.tabViTri.Location = new System.Drawing.Point(342, 171);
+            this.tabViTri.Location = new System.Drawing.Point(342, 143);
             this.tabViTri.Name = "tabViTri";
-            this.tabViTri.Size = new System.Drawing.Size(731, 187);
+            this.tabViTri.Size = new System.Drawing.Size(731, 215);
             this.tabViTri.Text = "Vị trí yêu cầu";
             // 
             // layoutControlItem13
@@ -673,7 +687,7 @@
             this.layoutControlItem13.CustomizationFormText = "layoutControlItem1";
             this.layoutControlItem13.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem13.Name = "layoutControlItem13";
-            this.layoutControlItem13.Size = new System.Drawing.Size(707, 141);
+            this.layoutControlItem13.Size = new System.Drawing.Size(707, 169);
             this.layoutControlItem13.Text = "Nội dung phỏng vấn";
             this.layoutControlItem13.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem13.TextVisible = false;
@@ -691,14 +705,6 @@
             this.lblKeHoachPV.Text = "Số kế hoạch";
             this.lblKeHoachPV.TextSize = new System.Drawing.Size(114, 17);
             // 
-            // lblThongTin
-            // 
-            this.lblThongTin.Control = this.txtThongTin;
-            this.lblThongTin.Location = new System.Drawing.Point(585, 84);
-            this.lblThongTin.Name = "lblThongTin";
-            this.lblThongTin.Size = new System.Drawing.Size(488, 28);
-            this.lblThongTin.TextSize = new System.Drawing.Size(114, 17);
-            // 
             // lblBacDau
             // 
             this.lblBacDau.Control = this.timBacDau;
@@ -710,21 +716,13 @@
             // lblNDPV
             // 
             this.lblNDPV.Control = this.txtNDPV;
-            this.lblNDPV.Location = new System.Drawing.Point(342, 112);
+            this.lblNDPV.Location = new System.Drawing.Point(342, 84);
             this.lblNDPV.MaxSize = new System.Drawing.Size(0, 59);
             this.lblNDPV.MinSize = new System.Drawing.Size(131, 59);
             this.lblNDPV.Name = "lblNDPV";
             this.lblNDPV.Size = new System.Drawing.Size(731, 59);
             this.lblNDPV.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.lblNDPV.TextSize = new System.Drawing.Size(114, 17);
-            // 
-            // lblBuocPV
-            // 
-            this.lblBuocPV.Control = this.txtBuocPV;
-            this.lblBuocPV.Location = new System.Drawing.Point(342, 84);
-            this.lblBuocPV.Name = "lblBuocPV";
-            this.lblBuocPV.Size = new System.Drawing.Size(243, 28);
-            this.lblBuocPV.TextSize = new System.Drawing.Size(114, 17);
             // 
             // lblNguoiPV1
             // 
@@ -832,14 +830,6 @@
             // 
             this.ofileDialog.FileName = "openFileDialog1";
             // 
-            // emptySpaceItem1
-            // 
-            this.emptySpaceItem1.AllowHotTrack = false;
-            this.emptySpaceItem1.Location = new System.Drawing.Point(585, 84);
-            this.emptySpaceItem1.Name = "emptySpaceItem1";
-            this.emptySpaceItem1.Size = new System.Drawing.Size(488, 28);
-            this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
-            // 
             // ucPhongVan
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -879,6 +869,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.timKetThuc.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtNDPV.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtBuocPV.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lblThongTin)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lblBuocPV)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitterItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblThang)).EndInit();
@@ -894,17 +886,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.tabViTri)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem13)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblKeHoachPV)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lblThongTin)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblBacDau)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblNDPV)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lblBuocPV)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblNguoiPV1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblKieuPV)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblKetThuc)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblNguoiPV2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblTinhTrang)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -965,6 +954,5 @@
         private DevExpress.XtraLayout.LayoutControlItem lblTinhTrangLoc;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem mnuLinkUngVien;
-        private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem1;
     }
 }

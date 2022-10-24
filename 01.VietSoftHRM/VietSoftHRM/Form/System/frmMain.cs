@@ -422,14 +422,14 @@ namespace VietSoftHRM
         {
             switch (keyData)
             {
-                case Keys.Escape:
-                    Control cl = FindFocusedControl(this);
-                    if (cl != null && cl.GetType() == typeof(TextBox))
-                        return base.ProcessCmdKey(ref msg, keyData);
-                    else
-                        if (this.Name != "frmMain")
-                        this.Close();
-                    return true;
+                //case Keys.Escape:
+                //    Control cl = FindFocusedControl(this);
+                //    if (cl != null && cl.GetType() == typeof(TextBox))
+                //        return base.ProcessCmdKey(ref msg, keyData);
+                //    else
+                //        if (this.Name != "frmMain")
+                //        this.Close();
+                //    return true;
                 case (Keys.Shift | Keys.F1):
                     Vs.HRM.frmHelp_View fr = new Vs.HRM.frmHelp_View();
                     fr.ShowDiaLogControls(this);

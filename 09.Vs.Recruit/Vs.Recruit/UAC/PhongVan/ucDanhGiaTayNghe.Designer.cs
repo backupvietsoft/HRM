@@ -221,6 +221,7 @@
             this.grvDSUngVien.OptionsSelection.MultiSelect = true;
             this.grvDSUngVien.OptionsView.ShowGroupPanel = false;
             this.grvDSUngVien.PopupMenuShowing += new DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler(this.grvDSUngVien_PopupMenuShowing);
+            this.grvDSUngVien.ShowingEditor += new System.ComponentModel.CancelEventHandler(this.grvDSUngVien_ShowingEditor);
             this.grvDSUngVien.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.grvDSUngVien_FocusedRowChanged);
             this.grvDSUngVien.CellValueChanged += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.grvDSUngVien_CellValueChanged);
             this.grvDSUngVien.InvalidRowException += new DevExpress.XtraGrid.Views.Base.InvalidRowExceptionEventHandler(this.grvDSUngVien_InvalidRowException);

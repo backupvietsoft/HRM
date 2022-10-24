@@ -33,7 +33,7 @@ namespace VietSoftHRM
                 
             }
             clsMain.setTTC();
-            //clsMain.CheckUpdate();
+            clsMain.CheckUpdate();
             Application.EnableVisualStyles();
             
             if (args.Length > 0)

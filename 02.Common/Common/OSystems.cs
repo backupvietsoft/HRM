@@ -1723,6 +1723,26 @@ namespace Commons
                 { }
             }
         }
+
+        public void ThayDoiNN(XtraForm frm)
+        {
+            DataTable dtTmp = new DataTable();
+            dtTmp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT KEYWORD , CASE " + Modules.TypeLanguage + " WHEN 0 THEN VIETNAM WHEN 1 THEN ENGLISH ELSE CHINESE END AS NN  FROM LANGUAGES WHERE FORM = N'" + frm.Name + "' "));
+            frm.Text = GetNN(dtTmp, frm.Name, frm.Name);
+            List<Control> resultControlList = new List<Control>();
+            GetControlsCollection(frm, ref resultControlList, null);
+
+            foreach (Control control1 in resultControlList)
+            {
+                try
+                {
+                    DoiNN(control1, frm, dtTmp);
+                }
+                catch
+                { }
+            }
+        }
+
         public void ThayDoiNN(Form frm,WindowsUIButtonPanel btnWinUIB)
         {
             DataTable dtTmp = new DataTable();
@@ -4198,6 +4218,28 @@ namespace Commons
                 throw;
             }
         }
+
+        public void AddMonth(string Value,GridView grv)
+        {
+            try
+            {
+                RepositoryItemDateEdit dEdit = new RepositoryItemDateEdit();
+                grv.Columns[Value].ColumnEdit = dEdit;
+                dEdit.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+                dEdit.DisplayFormat.FormatString = "MM/yyyy";
+                dEdit.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
+                dEdit.EditFormat.FormatString = "MM/yyyy";
+                dEdit.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+                dEdit.MaskSettings.Set("mask", "MM/yyyy");
+                dEdit.VistaCalendarInitialViewStyle = DevExpress.XtraEditors.VistaCalendarInitialViewStyle.YearView;
+                dEdit.VistaCalendarViewStyle = DevExpress.XtraEditors.VistaCalendarViewStyle.YearView;
+            }
+            catch
+            {
+            }
+        }
+
+
         public void AddComboAnID(string Value, string Display, GridView grv, DataTable tempt)
         {
             try

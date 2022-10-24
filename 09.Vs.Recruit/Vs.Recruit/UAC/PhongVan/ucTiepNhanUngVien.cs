@@ -172,7 +172,7 @@ namespace Vs.Recruit
                 DataTable dt = new DataTable();
                 dt = ds.Tables[0].Copy();
 
-                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboMS_CV,dt, "MS_CV", "TEN_CV", "TEN_CV");
+                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboMS_CV, dt, "MS_CV", "TEN_CV", "TEN_CV");
                 cboMS_CV.EditValue = 2;
             }
             catch { }
@@ -460,6 +460,35 @@ namespace Vs.Recruit
             tableLayoutPanel1.Show();
             LoadData();
         }
+
+        private bool checkDataoDH()
+        {
+            try
+            {
+                DataRow dr;
+                DataTable dt = new DataTable();
+                dt = ((DataTable)grdDSUngVien.DataSource).Clone();
+                Int32[] selectedRowHandles = grvDSUngVien.GetSelectedRows();
+                for (int i = 0; i < selectedRowHandles.Length; i++)
+                {
+                    int selectedRowHandle = selectedRowHandles[i];
+                    if (selectedRowHandle >= 0)
+                    {
+                        dr = grvDSUngVien.GetDataRow(selectedRowHandle);
+                        if (Convert.ToBoolean(dr["HOAN_THANH_DT"]) == false)
+                        {
+                            return false;
+                        }
+                    }
+                }
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         private void grvDSUngVien_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
         {
             try
@@ -469,15 +498,17 @@ namespace Vs.Recruit
                 {
                     int irow = e.HitInfo.RowHandle;
                     e.Menu.Items.Clear();
+                    //kiểu tra data select có tiếp đào tạo mới hiện menu
 
                     DevExpress.Utils.Menu.DXMenuItem itemTiepNhan = MCreateMenuThongTinTNUV(view, irow);
                     e.Menu.Items.Add(itemTiepNhan);
-
                     DevExpress.Utils.Menu.DXMenuItem itemTTUV = MCreateMenuThongTinUV(view, irow);
                     e.Menu.Items.Add(itemTTUV);
-
-                    DevExpress.Utils.Menu.DXMenuItem itemCapNhatNhanh = MCreateMenuCapNhatNhanh(view, irow);
-                    e.Menu.Items.Add(itemCapNhatNhanh);
+                    if (checkDataoDH())
+                    {
+                        DevExpress.Utils.Menu.DXMenuItem itemCapNhatNhanh = MCreateMenuCapNhatNhanh(view, irow);
+                        e.Menu.Items.Add(itemCapNhatNhanh);
+                    }
 
                     DevExpress.Utils.Menu.DXMenuItem itemHuyTD = MCreateMenuHuyTD(view, irow);
                     e.Menu.Items.Add(itemHuyTD);

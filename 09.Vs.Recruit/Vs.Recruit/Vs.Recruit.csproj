@@ -245,6 +245,12 @@
     <Compile Include="Form\frmInGiayHenDiLam.Designer.cs">
       <DependentUpon>frmInGiayHenDiLam.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form\frmAuToKeHoachPhongVan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\frmAuToKeHoachPhongVan.Designer.cs">
+      <DependentUpon>frmAuToKeHoachPhongVan.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form\frmPhieuDTDH.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -531,6 +537,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form\frmInGiayHenDiLam.resx">
       <DependentUpon>frmInGiayHenDiLam.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\frmAuToKeHoachPhongVan.resx">
+      <DependentUpon>frmAuToKeHoachPhongVan.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\frmPhieuDTDH.resx">
       <DependentUpon>frmPhieuDTDH.cs</DependentUpon>

@@ -120,7 +120,7 @@ namespace Vs.Recruit
             try
             {
                 DataTable dtTmp = new DataTable();
-                string SQL = "SELECT TOP 0 MS_UV AS  N'Mã số',NGAY_NHAN_HO_SO AS N'ngày nhận CV',HO + ' '+ TEN AS N'Họ tên',PHAI AS N'Giới tính',NGAY_SINH AS N'Ngày sinh',NOI_SINH AS N'Nơi sinh',SO_CMND AS N'CMND',NGAY_CAP AS N'Ngày cấp',NOI_CAP AS N'Nơi cấp',CONVERT(NVARCHAR(250), '') N'Trình độ học vấn',DT_DI_DONG AS N'Điện thoại',EMAIL AS N'Email',NGUOI_LIEN_HE AS N'Người liên hệ',QUAN_HE AS N'Quan hệ',DT_NGUOI_LIEN_HE AS N'ĐT Người liên hệ',CONVERT(NVARCHAR(250), ID_TP) AS N'Thành phố',CONVERT(NVARCHAR(250), ID_QUAN) AS N'Quận',CONVERT(NVARCHAR(250), ID_PX) AS N'Phường xã',THON_XOM AS N'Thôn xóm',DIA_CHI_THUONG_TRU AS N'Địa chỉ',CONVERT(NVARCHAR(250), '') AS N'Nguồn tuyển',CONVERT(NVARCHAR(250), ID_CN) AS N'Người giới thiệu',CONVERT(NVARCHAR(250), TAY_NGHE) AS N'tay nghề',CONVERT(NVARCHAR(250), VI_TRI_TD_1) AS N'Vị trí tuyển 1',CONVERT(NVARCHAR(250), VI_TRI_TD_2) AS N'Vị trí tuyển 2',CONVERT(NVARCHAR(250), ID_VI_TRI_PHU_HOP) AS N'Vị trí phù hợp',CONG_DOAN_CHU_YEU AS N'Công đoạn chủ yếu',GHI_CHU AS N'Ghi Chú' FROM dbo.UNG_VIEN";
+                string SQL = "SELECT TOP 0 MS_UV AS  N'Mã số',NGAY_NHAN_HO_SO AS N'ngày nhận CV',HO + ' '+ TEN AS N'Họ tên',PHAI AS N'Giới tính',NGAY_SINH AS N'Ngày sinh',NOI_SINH AS N'Nơi sinh',SO_CMND AS N'CMND',NGAY_CAP AS N'Ngày cấp',NOI_CAP AS N'Nơi cấp',CONVERT(NVARCHAR(250), '') N'Trình độ học vấn',DT_DI_DONG AS N'Điện thoại',EMAIL AS N'Email',NGUOI_LIEN_HE AS N'Người liên hệ',QUAN_HE AS N'Quan hệ',DT_NGUOI_LIEN_HE AS N'ĐT Người liên hệ',CONVERT(NVARCHAR(250), ID_TP) AS N'Tỉnh',CONVERT(NVARCHAR(250), ID_QUAN) AS N'Huyện',CONVERT(NVARCHAR(250), ID_PX) AS N'Xã',THON_XOM AS N'Đường/Thôn/Xóm',DIA_CHI_THUONG_TRU AS N'Địa chỉ',CONVERT(NVARCHAR(250), '') AS N'Nguồn tuyển',CONVERT(NVARCHAR(250), ID_CN) AS N'Người giới thiệu',CONVERT(NVARCHAR(250), TAY_NGHE) AS N'tay nghề',CONVERT(NVARCHAR(250), VI_TRI_TD_1) AS N'Vị trí tuyển 1',CONVERT(NVARCHAR(250), VI_TRI_TD_2) AS N'Vị trí tuyển 2',CONVERT(NVARCHAR(250), ID_VI_TRI_PHU_HOP) AS N'Vị trí phù hợp',CONG_DOAN_CHU_YEU AS N'Công đoạn chủ yếu',GHI_CHU AS N'Ghi Chú' FROM dbo.UNG_VIEN";
 
                 dtTmp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, SQL));
 
@@ -131,7 +131,10 @@ namespace Vs.Recruit
                 var sheet1 = pck.Workbook.Worksheets.Add("01 - Danh sách ứng viên");
                 var sheet2 = pck.Workbook.Worksheets.Add("02-Bằng cấp");
                 var sheet3 = pck.Workbook.Worksheets.Add("03-Kinh nghiệm làm việc");
-                var sheet4 = pck.Workbook.Worksheets.Add("List Loại Công Việc");
+                var sheet4 = pck.Workbook.Worksheets.Add("Danh sách Tỉnh");
+                var sheet5 = pck.Workbook.Worksheets.Add("Danh sách Huyện");
+                var sheet6 = pck.Workbook.Worksheets.Add("Danh sách Xã");
+                var sheet7 = pck.Workbook.Worksheets.Add("Danh sách Loại Công Việc");
 
                 sheet1.DefaultColWidth = 20;
                 sheet1.Cells[1, 1].LoadFromDataTable(dtTmp, true);
@@ -149,19 +152,48 @@ namespace Vs.Recruit
 
                 //sheet1.Cells[1, 1].Comment.RichText.Add("Mã ứng viên sẽ được đặt theo cấu trúc MUV-000001 trong đó(MUV-: cố định,còn 000001 sẽ được tăng thêm 1 khi có một ứng viên mới).");
 
-
                 sheet1.Cells[1, 1].AddComment("Mã ứng viên sẽ được đặt theo cấu trúc MUV-000001 trong đó(MUV-: cố định,còn 000001 sẽ được tăng thêm 1 khi có một ứng viên mới).", "REF");
-
-                //2 giới tính
 
 
                 sheet4.Cells[1, 1, 1, 1].Style.WrapText = true;
                 sheet4.Cells[1, 1, 1, 1].Style.VerticalAlignment = ExcelVerticalAlignment.Center;
                 sheet4.Cells[1, 1, 1, 1].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
                 sheet4.Cells[1, 1, 1, 1].Style.Font.Bold = true;
-                sheet4.Cells[1, 1, 1, 1].Value = "Tên công việc";
+                sheet4.Cells[1, 1, 1, 1].Value = "Tỉnh";
                 sheet4.Column(1).Width = 50;
-                sheet4.Cells[2, 1].LoadFromCollection(Commons.Modules.ObjSystems.DataLoaiCV(false).AsEnumerable().Select(x => x.Field<string>("TEN_LCV")).ToArray());
+                sheet4.Cells[2, 1].LoadFromCollection(Commons.Modules.ObjSystems.DataThanhPho(-1,false).AsEnumerable().Select(x => x.Field<string>("TEN_TP")).ToArray());
+
+
+                sheet5.Cells[1, 1, 1, 2].Style.WrapText = true;
+                sheet5.Cells[1, 1, 1, 2].Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+                sheet5.Cells[1, 1, 1, 2].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                sheet5.Cells[1, 1, 1, 2].Style.Font.Bold = true;
+                sheet5.Column(1).Width = 50;
+                sheet5.Column(2).Width = 50;
+                DataTable tbHuyen = new DataTable();
+                tbHuyen.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr,CommandType.Text, "SELECT B.TEN_TP AS N'Tỉnh',TEN_QUAN AS N'Huyện' FROM dbo.QUAN A INNER JOIN  dbo.THANH_PHO B ON B.ID_TP = A.ID_TP ORDER BY B.TEN_TP,A.TEN_QUAN"));
+                sheet5.Cells[1, 1].LoadFromDataTable(tbHuyen,true);
+
+                sheet6.Cells[1, 1, 1, 2].Style.WrapText = true;
+                sheet6.Cells[1, 1, 1, 2].Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+                sheet6.Cells[1, 1, 1, 2].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                sheet6.Cells[1, 1, 1, 2].Style.Font.Bold = true;
+                sheet6.Column(1).Width = 50;
+                sheet6.Column(2).Width = 50;
+
+                DataTable tbXa = new DataTable();
+                tbXa.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT TEN_QUAN AS N'Huyện',A.TEN_PX N'Xã' FROM dbo.PHUONG_XA A INNER JOIN  dbo.QUAN B ON B.ID_QUAN = A.ID_QUAN ORDER BY B.TEN_QUAN,A.TEN_PX"));
+                sheet6.Cells[1, 1].LoadFromDataTable(tbXa, true);
+
+
+                //2 giới tính
+                sheet7.Cells[1, 1, 1, 1].Style.WrapText = true;
+                sheet7.Cells[1, 1, 1, 1].Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+                sheet7.Cells[1, 1, 1, 1].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                sheet7.Cells[1, 1, 1, 1].Style.Font.Bold = true;
+                sheet7.Cells[1, 1, 1, 1].Value = "Tên công việc";
+                sheet7.Column(1).Width = 50;
+                sheet7.Cells[2, 1].LoadFromCollection(Commons.Modules.ObjSystems.DataLoaiCV(false).AsEnumerable().Select(x => x.Field<string>("TEN_LCV")).ToArray());
 
                 Commons.Modules.MExcel.AddExcelDataValidationList(sheet1, 2, 4, 50, 4, "", new string[] { "Nam", "Nữ" });
                 Commons.Modules.MExcel.AddExcelDataValidationList(sheet1, 2, 10, 50, 10, "", Commons.Modules.ObjSystems.DataTDVH(-1, false).AsEnumerable().Select(x => x.Field<string>("TEN_TDVH")).ToArray());
@@ -170,8 +202,10 @@ namespace Vs.Recruit
                 //Commons.Modules.MExcel.AddExcelDataValidationList(sheet1, 2, 22, 50, 22, "", Commons.Modules.ObjSystems.DataCongNhan(false).AsEnumerable().Select(x => x.Field<string>("TEN_CN")).ToArray());
                 Commons.Modules.MExcel.AddExcelDataValidationList(sheet1, 2, 23, 50, 23, "", Commons.Modules.ObjSystems.DataTayNghe(false).AsEnumerable().Select(x => x.Field<string>("TEN_TAY_NGHE")).ToArray());
 
-
-                Commons.Modules.MExcel.AddExcelDataValidationList(sheet1, 2, 26, 50, 26, "'List Loại Công Việc'!$A$2:$A$"+ Commons.Modules.ObjSystems.DataLoaiCV(false).Rows.Count.ToString() + "",null);
+                Commons.Modules.MExcel.AddExcelDataValidationList(sheet1, 2, 16, 50, 16, "'Danh sách Tỉnh'!$A$2:$A$" + Commons.Modules.ObjSystems.DataThanhPho(-1,false).Rows.Count.ToString() + "", null);
+                Commons.Modules.MExcel.AddExcelDataValidationList(sheet1, 2, 17, 50, 17, "'Danh sách Huyện'!$B$2:$B$" + Commons.Modules.ObjSystems.DataQuan(-1,false).Rows.Count.ToString() + "", null);
+                Commons.Modules.MExcel.AddExcelDataValidationList(sheet1, 2, 18, 50, 18, "'Danh sách Xã'!$B$2:$B$" + Commons.Modules.ObjSystems.DataPhuongXa(-1,false).Rows.Count.ToString() + "", null);
+                Commons.Modules.MExcel.AddExcelDataValidationList(sheet1, 2, 26, 50, 26, "'Danh sách Loại Công Việc'!$A$2:$A$"+ Commons.Modules.ObjSystems.DataLoaiCV(false).Rows.Count.ToString() + "",null);
 
                 //9 trình độ văn hóa
                 //sheet1.Cells[2, 9, 50, 9].DataValidation.va = Commons.Modules.ObjSystems.DataTDVH(-1, false).AsEnumerable().Select(x => x.Field<string>("TEN_TDVH")).ToArray();
@@ -211,6 +245,7 @@ namespace Vs.Recruit
                 sheet2.Cells[1, 6].Value = "Xếp loại";
 
                 sheet2.Cells[1, 6].AddComment(Commons.Modules.ObjSystems.ConvertCombototext(Commons.Modules.ObjSystems.DataXepLoai(false)), "REF");
+
                 Commons.Modules.MExcel.AddExcelDataValidationList(sheet2, 2, 6, 50, 6, "", Commons.Modules.ObjSystems.DataXepLoai(false).AsEnumerable().Select(x => x.Field<string>("TEN_XL")).ToArray());
 
 
@@ -240,19 +275,7 @@ namespace Vs.Recruit
                 sheet3.Cells[1, 1, 1, 8].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
                 sheet3.Cells[1, 1, 1, 8].Style.Font.Bold = true;
 
-                ////Worksheet sheet4 = book.Worksheets.Add("04-Thông tin khác");
-                ////sheet4.DefaultColumnWidth = 20;
 
-                ////sheet4.Range[1, 1].Text = "Mã số";
-                ////sheet4.Range[1, 2].Text = "Nội dung";
-                ////sheet4.Range[1, 3].Text = "Xếp loại";
-
-                ////sheet4.Range[1, 3].Comment.RichText.Text = Commons.Modules.ObjSystems.ConvertCombototext(Commons.Modules.ObjSystems.DataXepLoai(false));
-
-                ////sheet4.Range[1, 1, 1, 3].Style.WrapText = true;
-                ////sheet4.Range[1, 1, 1, 3].Style.VerticalAlignment = VerticalAlignType.Center;
-                ////sheet4.Range[1, 1, 1, 3].Style.HorizontalAlignment = HorizontalAlignType.Center;
-                ////sheet4.Range[1, 1, 1, 3].Style.Font.IsBold = true;
 
                 var fi = new System.IO.FileInfo(sPath);
                 if (fi.Exists)

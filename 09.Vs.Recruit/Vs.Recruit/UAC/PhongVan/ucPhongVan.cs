@@ -108,7 +108,7 @@ namespace Vs.Recruit
                 {
                     //if (bBT == false)
                     //{
-                    dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT ID_PV,HO + ' '+TEN AS HO_TEN,ID_YCTD,ID_VTTD,A.ID_UV,NOI_DUNG_PV,B.NGAY_SINH, CASE B.PHAI WHEN 0 THEN CASE "+ Commons.Modules.TypeLanguage + " WHEN 0 THEN N'Nữ' ELSE 'Women' END ELSE CASE "+ Commons.Modules.TypeLanguage +" WHEN 0 THEN N'Nam' ELSE 'Men' END END GIOI_TINH, A.DAT FROM dbo.UNG_VIEN_PHONG_VAN A INNER JOIN dbo.UNG_VIEN B ON B.ID_UV = A.ID_UV WHERE ID_PV = " + iID_PV + " ORDER BY HO_TEN "));
+                    dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT ID_PV,HO + ' '+TEN AS HO_TEN,ID_YCTD,ID_VTTD,A.ID_UV,NOI_DUNG_PV,B.NGAY_SINH,A.TEST_TH,A.TEST_IQ, CASE B.PHAI WHEN 0 THEN CASE " + Commons.Modules.TypeLanguage + " WHEN 0 THEN N'Nữ' ELSE 'Women' END ELSE CASE " + Commons.Modules.TypeLanguage + " WHEN 0 THEN N'Nam' ELSE 'Men' END END GIOI_TINH,A.LAN_PV, A.DAT FROM dbo.UNG_VIEN_PHONG_VAN A INNER JOIN dbo.UNG_VIEN B ON B.ID_UV = A.ID_UV WHERE ID_PV = " + iID_PV + " ORDER BY HO_TEN "));
                     //}
                     //else
                     //{
@@ -124,15 +124,16 @@ namespace Vs.Recruit
                     Commons.Modules.ObjSystems.MLoadXtraGrid(grdUVPV, grvUVPV, dt, false, false, true, true, true, this.Name);
                     Commons.Modules.ObjSystems.AddCombXtra("ID_UV", "MS_UV", grvUVPV, Commons.Modules.ObjSystems.DataUngVienTheoTT(false, 1), true, "ID_UV", this.Name, true);
 
-                    Commons.Modules.ObjSystems.AddCombXtra("DAT", "TEN_TT_UVPV", grvUVPV, Commons.Modules.ObjSystems.DataTinhTrangUVPV(false), false, "DAT", this.Name, true,false);
+                    Commons.Modules.ObjSystems.AddCombXtra("DAT", "TEN_TT_UVPV", grvUVPV, Commons.Modules.ObjSystems.DataTinhTrangUVPV(false), false, "DAT", this.Name, true, false);
 
-                        grvUVPV.Columns["ID_PV"].Visible = false;
-                        grvUVPV.Columns["ID_YCTD"].Visible = false;
-                        grvUVPV.Columns["ID_VTTD"].Visible = false;
-                        grvUVPV.Columns["ID_UV"].OptionsColumn.AllowEdit = false;
-                        grvUVPV.Columns["HO_TEN"].OptionsColumn.AllowEdit = false;
-                        grvUVPV.Columns["NGAY_SINH"].OptionsColumn.AllowEdit = false;
-                        grvUVPV.Columns["GIOI_TINH"].OptionsColumn.AllowEdit = false;
+                    grvUVPV.Columns["ID_PV"].Visible = false;
+                    grvUVPV.Columns["ID_YCTD"].Visible = false;
+                    grvUVPV.Columns["ID_VTTD"].Visible = false;
+                    grvUVPV.Columns["ID_UV"].OptionsColumn.AllowEdit = false;
+                    grvUVPV.Columns["HO_TEN"].OptionsColumn.AllowEdit = false;
+                    grvUVPV.Columns["NGAY_SINH"].OptionsColumn.AllowEdit = false;
+                    grvUVPV.Columns["GIOI_TINH"].OptionsColumn.AllowEdit = false;
+                    grvUVPV.Columns["LAN_PV"].OptionsColumn.AllowEdit = false;
                 }
                 else
                 {
@@ -231,6 +232,7 @@ namespace Vs.Recruit
                         if (!SaveData()) return;
                         LoadgrdPV(iID_PV);
                         cboTTLoc_EditValueChanged(null, null);
+                        //kiểm tra nếu tình trạng bằng 2
                         Commons.Modules.ObjSystems.DeleteAddRow(grvUVPV);
                         enableButon(true);
                         break;
@@ -267,8 +269,33 @@ namespace Vs.Recruit
                 {
                     cboTinhTrang.EditValue = 2;
                 }
+                //kiểu tra trong lưới ứng viên có tình trạng  = 4 thì mở form cập nhật kế hoạch mới
+                bool AutoKH = false;
+                string soKH = "";
+                DateTime NgayLap = DateTime.Now, NgayPV = DateTime.Now;
+                Int64 NguoiPV1 = -99, NguoiPV2 = -99;
+                bool Online = false;
+                //nếu trong lưới ứng viên có phỏng vấn và phỏng vấn này chưa có trong kế hoạch
+                int iKiemKHPV = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT COUNT(*) FROM dbo.UNG_VIEN_TUYEN_DUNG WHERE ID_PV = " + iID_PV + ""));
+                if (Commons.Modules.ObjSystems.ConvertDatatable(grvUVPV).AsEnumerable().Count(x => x["DAT"].Equals(4)) > 0 && iKiem == 0)
+                {
+                    AutoKH = true;
+                    frmAuToKeHoachPhongVan frm = new frmAuToKeHoachPhongVan();
+                    frm.NgayLap = datNgayPV.DateTime;
+                    frm.NgayPV = datNgayPV.DateTime;
+                    frm.NguoiPV1 = Convert.ToInt64(cboNguoiPV1.EditValue);
+                    frm.NguoiPV2 = Convert.ToInt64(cboNguoiPV2.EditValue);
+                    frm.IDKH = Convert.ToInt64(cboSoKeHoach.EditValue);
+                    if (frm.ShowDialog() != DialogResult.OK) return false;
+                    soKH = frm.soKH;
+                    NgayLap = frm.NgayLap;
+                    NgayPV = frm.NgayPV;
+                    NguoiPV1 = frm.NguoiPV1;
+                    NguoiPV2 = frm.NguoiPV2;
+                    Online = frm.Online;
+                }
                 Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, "sBTVT" + Commons.Modules.iIDUser, Commons.Modules.ObjSystems.ConvertDatatable(grvViTri), "");
-                Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, "sBTUVPV" + Commons.Modules.iIDUser, Commons.Modules.ObjSystems.ConvertDatatable(grdUVPV), "");
+                Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, "sBTUVPV" + Commons.Modules.iIDUser, Commons.Modules.ObjSystems.ConvertDatatable(grvUVPV), "");
                 iID_PVPOLD = Convert.ToInt64(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spSavePhongVan",
                     iID_PV,
                     txtSO_PV.EditValue,
@@ -284,17 +311,26 @@ namespace Vs.Recruit
                     txtThongTin.EditValue,
                     chkKieuPV.Checked,
                     "sBTVT" + Commons.Modules.iIDUser,
-                    "sBTUVPV" + Commons.Modules.iIDUser));
-                if(iKiem == 0)
-                {
-                    cboTTLoc.EditValue = 2;
-                }    
+                    "sBTUVPV" + Commons.Modules.iIDUser,
+                    AutoKH,
+                    soKH,
+                    NgayLap,
+                    NgayPV,
+                    NguoiPV1,
+                    NguoiPV2,
+                    Online,
+                    Commons.Modules.iIDUser
+                    ));
+                //if (iKiem == 0)
+                //{
+                //    cboTTLoc.EditValue = 2;
+                //}
                 if (iID_PVPOLD != -1)
                     return true;
                 else
                     return false;
             }
-            catch
+            catch (Exception ex)
             {
                 return false;
             }
@@ -456,6 +492,13 @@ namespace Vs.Recruit
                 SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "DBCC CHECKIDENT (PHONG_VAN,RESEED,0)DBCC CHECKIDENT (PHONG_VAN,RESEED) DELETE FROM dbo.PHONG_VAN WHERE ID_PV = " + iID_PV + "");
                 SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, " UPDATE A SET A.TINH_TRANG = 1 FROM dbo.KE_HOACH_PHONG_VAN A WHERE NOT EXISTS(SELECT * FROM dbo.PHONG_VAN B WHERE B.ID_KHPV = A.ID_KHPV) ");
                 grvPV.DeleteSelectedRows();
+                try
+                {
+                    iID_PV = Convert.ToInt64(grvPV.GetFocusedRowCellValue("ID_PV").ToString());
+                }
+                catch
+                {
+                }
             }
             catch (Exception ex)
             {
@@ -530,6 +573,15 @@ namespace Vs.Recruit
                     cboNguoiPV1.EditValue = row["NGUOI_PV_1"];
                     cboNguoiPV2.EditValue = row["NGUOI_PV_2"];
                     chkKieuPV.Checked = Convert.ToBoolean(row["PV_ON_OF_LINE"]);
+                    try
+                    {
+                        datNgayPV.EditValue = Convert.ToDateTime(row["NGAY_PV"]);
+                    }
+                    catch
+                    {
+                        datNgayPV.EditValue = DateTime.Now;
+                    }
+
                     txtBuocPV.EditValue = row["BUOC_PV"];
                     grdViTri.DataSource = set.Tables[1];
                     grdUVPV.DataSource = set.Tables[2];
@@ -546,7 +598,7 @@ namespace Vs.Recruit
             try
             {
                 DataSet set = new DataSet();
-                set = SqlHelper.ExecuteDataset(Commons.IConnections.CNStr, "spGetRefeshPV", Commons.Modules.TypeLanguage,iID_PV, cboSoKeHoach.EditValue);
+                set = SqlHelper.ExecuteDataset(Commons.IConnections.CNStr, "spGetRefeshPV", Commons.Modules.TypeLanguage, iID_PV, cboSoKeHoach.EditValue);
                 return set;
             }
             catch
@@ -577,13 +629,35 @@ namespace Vs.Recruit
 
         private void cboTinhTrang_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
-            if (iID_PV == -1) return;
-            if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", Convert.ToInt32(cboTinhTrang.EditValue) == 1 ? "msgBanCoMuonKetThucPhieu" : "msgBanCoMuonChuyenDangThucHien"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) return;
 
-            SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "UPDATE dbo.PHONG_VAN SET TINH_TRANG =" + (Convert.ToInt32(cboTinhTrang.EditValue) == 1 ? "2" : "1") + " WHERE ID_PV = " + iID_PV + "");
-            cboTinhTrang.EditValue = Convert.ToInt32(cboTinhTrang.EditValue) == 2 ? 1 : 2;
-            //update trạng thái vào đây
-            datTuNgay_EditValueChanged(null, null);
+            if (iID_PV == -1) return;
+            if (e.Button.Index == 1)
+            {
+                //kiểm tra có tồn tại trong kế hoạch chưa
+                int iTonTaiPV = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT COUNT(*) FROM dbo.UNG_VIEN_TUYEN_DUNG WHERE ID_PV = " + iID_PV + ""));
+
+                if(iTonTaiPV > 0)
+                {
+                    XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDuLieuDaPhatSinhKeHoach"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                int iTonTaiTN = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT COUNT(A.ID_UV) FROM dbo.UNG_VIEN_PHONG_VAN A INNER JOIN dbo.UNG_VIEN B ON B.ID_UV = A.ID_UV WHERE B.ID_TT_UV > 2 AND A.ID_PV = " + iID_PV+""));
+
+                if (iTonTaiTN > 0)
+                {
+                    XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDuLieuDaPhatSinhTiepNhan"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                //kiểm tra có ứng viên có tồn tại bên tiếp nhận chưa(tình trạng ứng viên lớn hơn 2)
+
+                if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", Convert.ToInt32(cboTinhTrang.EditValue) == 1 ? "msgBanCoMuonKetThucPhieu" : "msgBanCoMuonChuyenDangThucHien"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) return;
+
+                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "UPDATE dbo.PHONG_VAN SET TINH_TRANG =" + (Convert.ToInt32(cboTinhTrang.EditValue) == 1 ? "2" : "1") + " WHERE ID_PV = " + iID_PV + "");
+                cboTinhTrang.EditValue = Convert.ToInt32(cboTinhTrang.EditValue) == 2 ? 1 : 2;
+                //update trạng thái vào đây
+                datTuNgay_EditValueChanged(null, null);
+            }
 
         }
 
@@ -625,12 +699,22 @@ namespace Vs.Recruit
             try
             {
                 DataTable dt = new DataTable();
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT DISTINCT T1.ID_CN, T1.MS_CN, T1.HO +' '+ T1.TEN AS TEN_CN FROM dbo.CONG_NHAN T1 INNER JOIN dbo.XI_NGHIEP_NGUOI_TUYEN_DUNG T2 ON T2.ID_CN = T1.ID_CN INNER JOIN dbo.XI_NGHIEP T3 ON T3.ID_XN = T2.ID_XN WHERE T3.PHONG_TD = 1 AND T2.PHONG_VAN = 1 ORDER BY T1.HO + ' ' + T1.TEN"));
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT DISTINCT T1.ID_CN, T1.MS_CN, T1.HO +' '+ T1.TEN AS TEN_CN FROM dbo.CONG_NHAN T1 WHERE T1.PV_TD = 1"));
                 cboNguoiPV2.Properties.DataSource = dt;
                 cboNguoiPV2.EditValue = -99;
             }
             catch
             {
+            }
+        }
+
+        private void grvUVPV_ShowingEditor(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (!dxValidationProvider1.Validate())
+            {
+                e.Cancel = true;
+                grvViTri.DeleteSelectedRows();
+                return;
             }
         }
 

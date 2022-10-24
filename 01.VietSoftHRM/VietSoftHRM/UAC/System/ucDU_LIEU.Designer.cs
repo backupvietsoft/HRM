@@ -36,12 +36,11 @@
             this.searchControl = new DevExpress.XtraEditors.SearchControl();
             this.grdTo = new DevExpress.XtraGrid.GridControl();
             this.grvTo = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
-            this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             this.cboNhomUser = new DevExpress.XtraEditors.SearchLookUpEdit();
             this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             this.lblNhom = new DevExpress.XtraLayout.LayoutControlItem();
             this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
@@ -50,14 +49,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.searchControl.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdTo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grvTo)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
-            this.groupControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboNhomUser.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblNhom)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).BeginInit();
@@ -95,11 +92,11 @@
             this.windowsUIButton.Controls.Add(this.searchControl);
             this.windowsUIButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.windowsUIButton.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.windowsUIButton.Location = new System.Drawing.Point(0, 768);
-            this.windowsUIButton.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.windowsUIButton.Location = new System.Drawing.Point(0, 466);
+            this.windowsUIButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.windowsUIButton.Name = "windowsUIButton";
-            this.windowsUIButton.Padding = new System.Windows.Forms.Padding(6, 7, 6, 7);
-            this.windowsUIButton.Size = new System.Drawing.Size(1317, 56);
+            this.windowsUIButton.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.windowsUIButton.Size = new System.Drawing.Size(838, 34);
             this.windowsUIButton.TabIndex = 3;
             this.windowsUIButton.Text = "windowsUIButtonPanel1";
             this.windowsUIButton.UseButtonBackgroundImages = false;
@@ -109,8 +106,8 @@
             // 
             this.searchControl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.searchControl.Client = this.grdTo;
-            this.searchControl.Location = new System.Drawing.Point(19, 15);
-            this.searchControl.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.searchControl.Location = new System.Drawing.Point(15, 5);
+            this.searchControl.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.searchControl.Name = "searchControl";
             this.searchControl.Properties.AutoHeight = false;
             this.searchControl.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -118,24 +115,24 @@
             new DevExpress.XtraEditors.Repository.SearchButton()});
             this.searchControl.Properties.Client = this.grdTo;
             this.searchControl.Properties.FindDelay = 100;
-            this.searchControl.Size = new System.Drawing.Size(302, 34);
+            this.searchControl.Size = new System.Drawing.Size(192, 24);
             this.searchControl.TabIndex = 10;
             // 
             // grdTo
             // 
-            this.grdTo.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
-            this.grdTo.Location = new System.Drawing.Point(19, 69);
+            this.grdTo.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grdTo.Location = new System.Drawing.Point(4, 34);
             this.grdTo.MainView = this.grvTo;
-            this.grdTo.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.grdTo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.grdTo.Name = "grdTo";
-            this.grdTo.Size = new System.Drawing.Size(1275, 641);
+            this.grdTo.Size = new System.Drawing.Size(830, 428);
             this.grdTo.TabIndex = 0;
             this.grdTo.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grvTo});
             // 
             // grvTo
             // 
-            this.grvTo.DetailHeight = 753;
+            this.grvTo.DetailHeight = 457;
             this.grvTo.FixedLineWidth = 3;
             this.grvTo.GridControl = this.grdTo;
             this.grvTo.Name = "grvTo";
@@ -143,29 +140,39 @@
             this.grvTo.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CheckBoxRowSelect;
             this.grvTo.OptionsView.ShowGroupPanel = false;
             // 
-            // groupControl1
-            // 
-            this.groupControl1.Controls.Add(this.layoutControl1);
-            this.groupControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupControl1.Location = new System.Drawing.Point(0, 0);
-            this.groupControl1.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
-            this.groupControl1.Name = "groupControl1";
-            this.groupControl1.Size = new System.Drawing.Size(1317, 768);
-            this.groupControl1.TabIndex = 4;
-            this.groupControl1.Text = "groupControl1";
-            // 
             // layoutControl1
             // 
             this.layoutControl1.Controls.Add(this.grdTo);
             this.layoutControl1.Controls.Add(this.cboNhomUser);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.layoutControl1.Location = new System.Drawing.Point(2, 37);
-            this.layoutControl1.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.layoutControl1.Location = new System.Drawing.Point(0, 0);
+            this.layoutControl1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.Root = this.Root;
-            this.layoutControl1.Size = new System.Drawing.Size(1313, 729);
+            this.layoutControl1.Size = new System.Drawing.Size(838, 466);
             this.layoutControl1.TabIndex = 1;
             this.layoutControl1.Text = "layoutControl1";
+            // 
+            // cboNhomUser
+            // 
+            this.cboNhomUser.EditValue = "";
+            this.cboNhomUser.Location = new System.Drawing.Point(339, 4);
+            this.cboNhomUser.Name = "cboNhomUser";
+            this.cboNhomUser.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cboNhomUser.Properties.NullText = "";
+            this.cboNhomUser.Properties.PopupView = this.gridView2;
+            this.cboNhomUser.Size = new System.Drawing.Size(195, 24);
+            this.cboNhomUser.StyleController = this.layoutControl1;
+            this.cboNhomUser.TabIndex = 15;
+            this.cboNhomUser.EditValueChanged += new System.EventHandler(this.cboNhomUser_EditValueChanged);
+            // 
+            // gridView2
+            // 
+            this.gridView2.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            this.gridView2.Name = "gridView2";
+            this.gridView2.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.gridView2.OptionsView.ShowGroupPanel = false;
             // 
             // Root
             // 
@@ -178,61 +185,37 @@
             this.emptySpaceItem2,
             this.emptySpaceItem3});
             this.Root.Name = "Root";
-            this.Root.Size = new System.Drawing.Size(1313, 729);
+            this.Root.Size = new System.Drawing.Size(838, 466);
             this.Root.TextVisible = false;
             // 
             // layoutControlItem3
             // 
             this.layoutControlItem3.Control = this.grdTo;
-            this.layoutControlItem3.Location = new System.Drawing.Point(0, 50);
+            this.layoutControlItem3.Location = new System.Drawing.Point(0, 30);
             this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Size = new System.Drawing.Size(1281, 647);
+            this.layoutControlItem3.Size = new System.Drawing.Size(832, 430);
             this.layoutControlItem3.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem3.TextVisible = false;
-            // 
-            // cboNhomUser
-            // 
-            this.cboNhomUser.EditValue = "";
-            this.cboNhomUser.Location = new System.Drawing.Point(529, 19);
-            this.cboNhomUser.Margin = new System.Windows.Forms.Padding(5);
-            this.cboNhomUser.Name = "cboNhomUser";
-            this.cboNhomUser.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cboNhomUser.Properties.NullText = "";
-            this.cboNhomUser.Properties.PopupView = this.gridView2;
-            this.cboNhomUser.Size = new System.Drawing.Size(312, 34);
-            this.cboNhomUser.StyleController = this.layoutControl1;
-            this.cboNhomUser.TabIndex = 15;
-            this.cboNhomUser.EditValueChanged += new System.EventHandler(this.cboNhomUser_EditValueChanged);
-            // 
-            // gridView2
-            // 
-            this.gridView2.DetailHeight = 576;
-            this.gridView2.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
-            this.gridView2.Name = "gridView2";
-            this.gridView2.OptionsSelection.EnableAppearanceFocusedCell = false;
-            this.gridView2.OptionsView.ShowGroupPanel = false;
             // 
             // lblNhom
             // 
             this.lblNhom.Control = this.cboNhomUser;
             this.lblNhom.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
             this.lblNhom.CustomizationFormText = "lblNhom";
-            this.lblNhom.Location = new System.Drawing.Point(427, 0);
-            this.lblNhom.MaxSize = new System.Drawing.Size(401, 40);
-            this.lblNhom.MinSize = new System.Drawing.Size(401, 40);
+            this.lblNhom.Location = new System.Drawing.Point(277, 0);
+            this.lblNhom.MaxSize = new System.Drawing.Size(255, 24);
+            this.lblNhom.MinSize = new System.Drawing.Size(255, 24);
             this.lblNhom.Name = "lblNhom";
-            this.lblNhom.Size = new System.Drawing.Size(401, 40);
+            this.lblNhom.Size = new System.Drawing.Size(255, 24);
             this.lblNhom.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-            this.lblNhom.Text = "lblNhom";
-            this.lblNhom.TextSize = new System.Drawing.Size(77, 28);
+            this.lblNhom.TextSize = new System.Drawing.Size(50, 17);
             // 
             // emptySpaceItem1
             // 
             this.emptySpaceItem1.AllowHotTrack = false;
-            this.emptySpaceItem1.Location = new System.Drawing.Point(828, 0);
+            this.emptySpaceItem1.Location = new System.Drawing.Point(532, 0);
             this.emptySpaceItem1.Name = "emptySpaceItem1";
-            this.emptySpaceItem1.Size = new System.Drawing.Size(453, 40);
+            this.emptySpaceItem1.Size = new System.Drawing.Size(300, 24);
             this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
             // 
             // emptySpaceItem2
@@ -240,42 +223,40 @@
             this.emptySpaceItem2.AllowHotTrack = false;
             this.emptySpaceItem2.Location = new System.Drawing.Point(0, 0);
             this.emptySpaceItem2.Name = "emptySpaceItem2";
-            this.emptySpaceItem2.Size = new System.Drawing.Size(427, 40);
+            this.emptySpaceItem2.Size = new System.Drawing.Size(277, 24);
             this.emptySpaceItem2.TextSize = new System.Drawing.Size(0, 0);
             // 
             // emptySpaceItem3
             // 
             this.emptySpaceItem3.AllowHotTrack = false;
-            this.emptySpaceItem3.Location = new System.Drawing.Point(0, 40);
-            this.emptySpaceItem3.MaxSize = new System.Drawing.Size(0, 10);
-            this.emptySpaceItem3.MinSize = new System.Drawing.Size(9, 10);
+            this.emptySpaceItem3.Location = new System.Drawing.Point(0, 24);
+            this.emptySpaceItem3.MaxSize = new System.Drawing.Size(0, 6);
+            this.emptySpaceItem3.MinSize = new System.Drawing.Size(6, 6);
             this.emptySpaceItem3.Name = "emptySpaceItem3";
-            this.emptySpaceItem3.Size = new System.Drawing.Size(1281, 10);
+            this.emptySpaceItem3.Size = new System.Drawing.Size(832, 6);
             this.emptySpaceItem3.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.emptySpaceItem3.TextSize = new System.Drawing.Size(0, 0);
             // 
             // ucDU_LIEU
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 28F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.groupControl1);
+            this.Controls.Add(this.layoutControl1);
             this.Controls.Add(this.windowsUIButton);
-            this.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "ucDU_LIEU";
-            this.Size = new System.Drawing.Size(1317, 824);
+            this.Size = new System.Drawing.Size(838, 500);
             this.Load += new System.EventHandler(this.ucDU_LIEU_Load);
             this.windowsUIButton.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.searchControl.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdTo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grvTo)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).EndInit();
-            this.groupControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboNhomUser.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblNhom)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).EndInit();
@@ -288,7 +269,6 @@
 
         private DevExpress.XtraBars.Docking2010.WindowsUIButtonPanel windowsUIButton;
         private DevExpress.XtraEditors.SearchControl searchControl;
-        private DevExpress.XtraEditors.GroupControl groupControl1;
         private DevExpress.XtraGrid.GridControl grdTo;
         private DevExpress.XtraGrid.Views.Grid.GridView grvTo;
         private DevExpress.XtraLayout.LayoutControl layoutControl1;

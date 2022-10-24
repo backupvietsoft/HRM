@@ -194,6 +194,15 @@ namespace VietSoftHRM
                         ns.Dock = DockStyle.Fill;
                         break;
                     }
+                case "mnuKeHoachLaoDongNam":
+                    {
+                        ucDinhBienLD ns = new ucDinhBienLD();
+                        //ns.accorMenuleft = accorMenuleft;
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(ns);
+                        ns.Dock = DockStyle.Fill;
+                        break;
+                    }
 
                 default:
                     break;

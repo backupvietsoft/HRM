@@ -576,25 +576,40 @@ namespace Vs.Recruit
                 //từ năm
                 col = 4;
                 string sTuNam = dr[grvData.Columns[col].FieldName.ToString()].ToString();
-                if (!Commons.Modules.MExcel.KiemDuLieuSo(grvData, dr, col, sTuNam, 0, -999999, false, this.Name))
+                if (!Commons.Modules.MExcel.KiemDuLieuNgay(grvData, dr, col, false, this.Name))
                 {
                     errorCount++;
                 }
                 //Đến năm 
                 col = 5;
                 string sDenNam = dr[grvData.Columns[col].FieldName.ToString()].ToString();
-                if (!Commons.Modules.MExcel.KiemDuLieuSo(grvData, dr, col, sDenNam, 0, -999999, false, this.Name))
+                if (!Commons.Modules.MExcel.KiemDuLieuNgay(grvData, dr, col, false, this.Name))
                 {
                     errorCount++;
                 }
-
                 //Số năm 
                 col = 6;
-                string sSoNam = dr[grvData.Columns[col].FieldName.ToString()].ToString();
-                if (!Commons.Modules.MExcel.KiemDuLieuSo(grvData, dr, col, sSoNam, 0, -999999, false, this.Name))
+                try
                 {
-                    errorCount++;
+                    if (!string.IsNullOrEmpty(sTuNam) && !string.IsNullOrEmpty(sDenNam))
+                    {
+                        DateTime TN = Convert.ToDateTime(sTuNam);
+                        DateTime DN = Convert.ToDateTime(sDenNam);
+                        if(TN > DN)
+                        {
+                            dr.SetColumnError(grvData.Columns[5].FieldName.ToString(), Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgKhongduocTrong"));
+                            dr["XOA"] = 1;
+                            errorCount++;
+                        }    
+                        TimeSpan tim = DN - TN;
+                        string s = (int)(tim.TotalDays / 365) + (Commons.Modules.TypeLanguage == 0 ? " Năm " : " Year ") + (int)((tim.TotalDays % 365) / 30) + (Commons.Modules.TypeLanguage == 0 ? " Tháng" : " Month");
+                        dr[grvData.Columns[col].FieldName.ToString()] = s;
+                    }
                 }
+                catch
+                {
+                }
+                
 
                 //lý do nghĩ
                 col = 7;

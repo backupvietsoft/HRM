@@ -45,10 +45,17 @@
             this.searchControl = new DevExpress.XtraEditors.SearchControl();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1.Panel1)).BeginInit();
+            this.splitContainerControl1.Panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1.Panel2)).BeginInit();
+            this.splitContainerControl1.Panel2.SuspendLayout();
             this.splitContainerControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grpNhomUser)).BeginInit();
             this.grpNhomUser.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridSplitContainer1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridSplitContainer1.Panel1)).BeginInit();
+            this.gridSplitContainer1.Panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridSplitContainer1.Panel2)).BeginInit();
             this.gridSplitContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdNhom)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grvNhom)).BeginInit();
@@ -66,8 +73,14 @@
             this.splitContainerControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainerControl1.Location = new System.Drawing.Point(0, 0);
             this.splitContainerControl1.Name = "splitContainerControl1";
+            // 
+            // splitContainerControl1.Panel1
+            // 
             this.splitContainerControl1.Panel1.Controls.Add(this.grpNhomUser);
             this.splitContainerControl1.Panel1.Text = "Panel1";
+            // 
+            // splitContainerControl1.Panel2
+            // 
             this.splitContainerControl1.Panel2.Controls.Add(this.grpUser);
             this.splitContainerControl1.Panel2.Text = "Panel2";
             this.splitContainerControl1.Size = new System.Drawing.Size(1004, 476);
@@ -88,10 +101,13 @@
             // 
             this.gridSplitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridSplitContainer1.Grid = this.grdNhom;
-            this.gridSplitContainer1.Location = new System.Drawing.Point(2, 24);
+            this.gridSplitContainer1.Location = new System.Drawing.Point(2, 21);
             this.gridSplitContainer1.Name = "gridSplitContainer1";
+            // 
+            // gridSplitContainer1.Panel1
+            // 
             this.gridSplitContainer1.Panel1.Controls.Add(this.grdNhom);
-            this.gridSplitContainer1.Size = new System.Drawing.Size(281, 450);
+            this.gridSplitContainer1.Size = new System.Drawing.Size(281, 453);
             this.gridSplitContainer1.TabIndex = 0;
             // 
             // grdNhom
@@ -100,7 +116,7 @@
             this.grdNhom.Location = new System.Drawing.Point(0, 0);
             this.grdNhom.MainView = this.grvNhom;
             this.grdNhom.Name = "grdNhom";
-            this.grdNhom.Size = new System.Drawing.Size(281, 450);
+            this.grdNhom.Size = new System.Drawing.Size(281, 453);
             this.grdNhom.TabIndex = 0;
             this.grdNhom.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grvNhom});
@@ -123,17 +139,17 @@
             this.grpUser.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grpUser.Location = new System.Drawing.Point(0, 0);
             this.grpUser.Name = "grpUser";
-            this.grpUser.Size = new System.Drawing.Size(713, 476);
+            this.grpUser.Size = new System.Drawing.Size(709, 476);
             this.grpUser.TabIndex = 0;
             this.grpUser.Text = "Danh sách User theo Nhóm";
             // 
             // grdUser
             // 
             this.grdUser.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.grdUser.Location = new System.Drawing.Point(2, 24);
+            this.grdUser.Location = new System.Drawing.Point(2, 21);
             this.grdUser.MainView = this.grvUser;
             this.grdUser.Name = "grdUser";
-            this.grdUser.Size = new System.Drawing.Size(709, 450);
+            this.grdUser.Size = new System.Drawing.Size(705, 453);
             this.grdUser.TabIndex = 1;
             this.grdUser.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grvUser});
@@ -189,7 +205,7 @@
             // 
             this.searchControl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.searchControl.Client = this.grdUser;
-            this.searchControl.Location = new System.Drawing.Point(3, 7);
+            this.searchControl.Location = new System.Drawing.Point(12, 5);
             this.searchControl.Margin = new System.Windows.Forms.Padding(4);
             this.searchControl.Name = "searchControl";
             this.searchControl.Properties.AutoHeight = false;
@@ -219,10 +235,17 @@
             this.Name = "ucNHOM";
             this.Size = new System.Drawing.Size(1004, 510);
             this.Load += new System.EventHandler(this.ucNHOM_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1.Panel1)).EndInit();
+            this.splitContainerControl1.Panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1.Panel2)).EndInit();
+            this.splitContainerControl1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).EndInit();
             this.splitContainerControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.grpNhomUser)).EndInit();
             this.grpNhomUser.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gridSplitContainer1.Panel1)).EndInit();
+            this.gridSplitContainer1.Panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gridSplitContainer1.Panel2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridSplitContainer1)).EndInit();
             this.gridSplitContainer1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.grdNhom)).EndInit();

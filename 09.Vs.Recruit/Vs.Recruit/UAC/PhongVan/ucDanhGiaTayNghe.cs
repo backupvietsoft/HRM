@@ -66,13 +66,12 @@ namespace Vs.Recruit
                     else
                     {
                         grvDSUngVien.Name = "grvDSUngVienTN";
-                    }    
+                    }
                 }
                 else
                 {
                     grvDSUngVien.Name = "grvDSUngVienKH";
-                }    
-
+                }
                 System.Data.SqlClient.SqlConnection conn;
                 conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
                 conn.Open();
@@ -84,7 +83,7 @@ namespace Vs.Recruit
                 cmd.Parameters.Add("@dCot2", SqlDbType.DateTime).Value = Convert.ToDateTime(datDNgay.EditValue);
                 cmd.Parameters.Add("@iCot1", SqlDbType.BigInt).Value = cboYCTD.EditValue;
                 cmd.Parameters.Add("@iCot2", SqlDbType.BigInt).Value = cboID_VTTD.EditValue;
-                cmd.Parameters.Add("@iCot3", SqlDbType.BigInt).Value = cboTayNghe.EditValue;
+                cmd.Parameters.Add("@iCot3", SqlDbType.BigInt).Value = cboTayNghe.Visible == false ? -1 : cboTayNghe.EditValue;
                 cmd.Parameters.Add("@bCot1", SqlDbType.Bit).Value = iAdd;
                 cmd.CommandType = CommandType.StoredProcedure;
                 System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
@@ -92,12 +91,13 @@ namespace Vs.Recruit
                 adp.Fill(ds);
                 DataTable dt = new DataTable();
                 dt = ds.Tables[0].Copy();
-                Commons.Modules.ObjSystems.MLoadXtraGrid(grdDSUngVien, grvDSUngVien, dt, true, true, false, true, true, this.Name);
+                Commons.Modules.ObjSystems.MLoadXtraGrid(grdDSUngVien, grvDSUngVien, dt, false, true, false, true, true, this.Name);
                 grvDSUngVien.Columns["ID_UV"].Visible = false;
                 grvDSUngVien.Columns["TINH_TRANG_DG"].Visible = false;
                 grvDSUngVien.Columns["MS_UV"].OptionsColumn.AllowEdit = false;
                 grvDSUngVien.Columns["HO_TEN"].OptionsColumn.AllowEdit = false;
                 grvDSUngVien.Columns["MS_CN"].OptionsColumn.AllowEdit = false;
+                grvDSUngVien.Columns["TEN_TT_UV"].OptionsColumn.AllowEdit = false;
                 grvDSUngVien.Columns["HO_TEN_NGT"].OptionsColumn.AllowEdit = false;
                 grvDSUngVien.Columns["THUONG_TAY_NGHE"].DisplayFormat.FormatType = FormatType.Numeric;
                 grvDSUngVien.Columns["THUONG_TAY_NGHE"].DisplayFormat.FormatString = "n0";
@@ -181,31 +181,31 @@ namespace Vs.Recruit
                             grvDSUngVien.Columns["HO_TEN_NGT"].Visible = true;
                             grvDSUngVien.Columns["THUONG_TAY_NGHE"].Visible = false;
 
-                            grvDSUngVien.Columns["DAT"].VisibleIndex = 13;
-                            grvDSUngVien.Columns["MS_CN"].VisibleIndex = 14;
-                            grvDSUngVien.Columns["HO_TEN_NGT"].VisibleIndex = 15;
-                            grvDSUngVien.Columns["GHI_CHU"].VisibleIndex = 16;
+                            grvDSUngVien.Columns["DAT"].VisibleIndex = 14;
+                            grvDSUngVien.Columns["MS_CN"].VisibleIndex = 15;
+                            grvDSUngVien.Columns["HO_TEN_NGT"].VisibleIndex = 16;
+                            grvDSUngVien.Columns["GHI_CHU"].VisibleIndex = 17;
 
                         }
                         else
                         {
                             //tây nghề
                             grvDSUngVien.Columns["KQ_VAI"].Visible = true;
-                            grvDSUngVien.Columns["KQ_VAI"].VisibleIndex = 9;
+                            grvDSUngVien.Columns["KQ_VAI"].VisibleIndex = 10;
                             grvDSUngVien.Columns["ID_DGTN"].Visible = true;
-                            grvDSUngVien.Columns["ID_DGTN"].VisibleIndex = 10;
+                            grvDSUngVien.Columns["ID_DGTN"].VisibleIndex = 11;
                             grvDSUngVien.Columns["NGUOI_DANH_GIA_2"].Visible = true;
-                            grvDSUngVien.Columns["NGUOI_DANH_GIA_2"].VisibleIndex = 11;
+                            grvDSUngVien.Columns["NGUOI_DANH_GIA_2"].VisibleIndex = 12;
                             grvDSUngVien.Columns["THUONG_TAY_NGHE"].Visible = true;
-                            grvDSUngVien.Columns["THUONG_TAY_NGHE"].VisibleIndex = 12;
+                            grvDSUngVien.Columns["THUONG_TAY_NGHE"].VisibleIndex = 13;
 
                             //DAT	ID_CN	GHI_CHU
                             grvDSUngVien.Columns["MS_CN"].Visible = true;
                             grvDSUngVien.Columns["HO_TEN_NGT"].Visible = true;
-                            grvDSUngVien.Columns["DAT"].VisibleIndex = 13;
-                            grvDSUngVien.Columns["MS_CN"].VisibleIndex = 14;
-                            grvDSUngVien.Columns["HO_TEN_NGT"].VisibleIndex = 15;
-                            grvDSUngVien.Columns["GHI_CHU"].VisibleIndex = 16;
+                            grvDSUngVien.Columns["DAT"].VisibleIndex = 14;
+                            grvDSUngVien.Columns["MS_CN"].VisibleIndex = 15;
+                            grvDSUngVien.Columns["HO_TEN_NGT"].VisibleIndex = 16;
+                            grvDSUngVien.Columns["GHI_CHU"].VisibleIndex = 17;
                         }
                         grvDSUngVien.Columns["KQ_GIAY"].Caption = "KQKT bài giấy";
                     }
@@ -445,7 +445,7 @@ namespace Vs.Recruit
                 Commons.Modules.ObjSystems.XoaTable(sBT);
                 return true;
             }
-            catch
+            catch (Exception ex)
             {
                 Commons.Modules.ObjSystems.XoaTable(sBT);
                 return false;
@@ -469,18 +469,23 @@ namespace Vs.Recruit
 
         private void cboID_VTTD_EditValueChanged(object sender, EventArgs e)
         {
-            if (Commons.Modules.sLoad == "0Load") return;
-            LoaiCN = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT ID_LT FROM dbo.LOAI_CONG_VIEC WHERE ID_LCV = " + cboID_VTTD.EditValue + ""));
-            if (LoaiCN == 1)
+            try
             {
-                lblTayNghe.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+                if (Commons.Modules.sLoad == "0Load") return;
+                LoaiCN = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT ISNULL(ID_LT,0) FROM dbo.LOAI_CONG_VIEC WHERE ID_LCV = " + cboID_VTTD.EditValue + ""));
+                if (LoaiCN == 1)
+                {
+                    lblTayNghe.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+                }
+                else
+                {
+                    lblTayNghe.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                }
+                LoadData();
             }
-            else
+            catch (Exception)
             {
-                lblTayNghe.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             }
-            LoadData();
-            //grvDSUngVien_FocusedRowChanged(null, null);
         }
         #region chuotphai
         class RowInfo
@@ -653,6 +658,18 @@ namespace Vs.Recruit
         {
 
 
+        }
+
+        private void grvDSUngVien_ShowingEditor(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            try
+            {
+                if (grvDSUngVien.RowCount == 0) return;
+                e.Cancel = Convert.ToBoolean(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT XAC_NHAN_DL FROM dbo.UNG_VIEN WHERE ID_UV = " + grvDSUngVien.GetFocusedRowCellValue("ID_UV") + ""));
+            }
+            catch
+            {
+            }
         }
 
         //private void grvDSUngVien_CellValueChanging(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)

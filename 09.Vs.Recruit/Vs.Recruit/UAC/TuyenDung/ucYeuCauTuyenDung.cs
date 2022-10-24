@@ -698,11 +698,6 @@ namespace Vs.Recruit
         {
             try
             {
-                if (!dxValidationProvider1.Validate())
-                {
-                    grvThayThe.DeleteSelectedRows();
-                    return;
-                }
                 grvThayThe.SetFocusedRowCellValue("ID_YCTD", iID_YCTD);
                 grvThayThe.SetFocusedRowCellValue("ID_VTTD", grvViTri.GetFocusedRowCellValue("ID_LCV"));
             }
@@ -1341,6 +1336,17 @@ namespace Vs.Recruit
             dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT  ID_XN,T.TEN_XN FROM (SELECT DISTINCT XN.STT_DV, XN.STT_XN, T1.ID_XN, XN.TEN_XN FROM dbo.LOAI_CONG_VIEC_XI_NGHIEP T1 INNER JOIN(SELECT DISTINCT ID_XN, TEN_XN, STT_XN, STT_DV FROM MGetToUser('" + Commons.Modules.UserName + "', " + Commons.Modules.TypeLanguage + ")) XN ON XN.ID_XN = T1.ID_XN)AS T ORDER BY T.STT_DV, T.STT_XN"));
             Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboBPYC, Commons.Modules.ObjSystems.DataXiNghiep(-1, false), "ID_XN", "TEN_XN", "TEN_XN", true, true);
             cboBPYC.EditValue = -99;
+        }
+
+        private void grvViTri_ShowingEditor(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (!dxValidationProvider1.Validate())
+            {
+                e.Cancel = true;
+                grvThayThe.DeleteSelectedRows();
+                return;
+            }
+
         }
     }
 }

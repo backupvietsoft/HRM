@@ -551,6 +551,15 @@ namespace Vs.Recruit
                 SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "DBCC CHECKIDENT (KE_HOACH_PHONG_VAN,RESEED,0)DBCC CHECKIDENT (KE_HOACH_PHONG_VAN,RESEED) DELETE FROM dbo.KE_HOACH_PHONG_VAN WHERE ID_KHPV = " + iID_KHPV + "");
                 //xóa file trên server
                 grvKHPV.DeleteSelectedRows();
+                try
+                {
+                    iID_KHPV = Convert.ToInt64(grvKHPV.GetFocusedRowCellValue("ID_KHPV"));
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
             }
             catch (Exception ex)
             {
@@ -725,7 +734,7 @@ namespace Vs.Recruit
             try
             {
                 DataTable dt = new DataTable();
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT DISTINCT T1.ID_CN, T1.MS_CN, T1.HO +' '+ T1.TEN AS TEN_CN FROM dbo.CONG_NHAN T1 INNER JOIN dbo.XI_NGHIEP_NGUOI_TUYEN_DUNG T2 ON T2.ID_CN = T1.ID_CN INNER JOIN dbo.XI_NGHIEP T3 ON T3.ID_XN = T2.ID_XN WHERE T3.PHONG_TD = 1 AND T2.PHONG_VAN = 1 AND T2.ACTIVE = 1 ORDER BY T1.HO + ' ' + T1.TEN"));
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT DISTINCT T1.ID_CN, T1.MS_CN, T1.HO +' '+ T1.TEN AS TEN_CN FROM dbo.CONG_NHAN T1 WHERE T1.PV_TD = 1"));
                 cboNguoiPV2.Properties.DataSource = dt;
                 cboNguoiPV2.EditValue = -99;
             }
@@ -794,16 +803,24 @@ namespace Vs.Recruit
                 {
                     cboBPYC.Properties.ReadOnly = true;
                     cboNguoiPV1.Properties.ReadOnly = true;
-                    cboNguoiPV2.Properties.ReadOnly = true;
                     chkKieuPV.Properties.ReadOnly = true;
                 }
                 else
                 {
                     cboBPYC.Properties.ReadOnly = false;
                     cboNguoiPV1.Properties.ReadOnly = false;
-                    cboNguoiPV2.Properties.ReadOnly = false;
                     chkKieuPV.Properties.ReadOnly = false;
                 }
+            }
+        }
+
+        private void grvViTri_ShowingEditor(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (!dxValidationProvider1.Validate())
+            {
+                e.Cancel = true;
+                grvViTri.DeleteSelectedRows();
+                return;
             }
         }
     }

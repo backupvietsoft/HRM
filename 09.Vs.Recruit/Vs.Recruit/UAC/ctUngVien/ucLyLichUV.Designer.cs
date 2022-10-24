@@ -32,23 +32,24 @@ namespace Vs.Recruit
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions8 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions9 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions10 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions11 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions12 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions13 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions14 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions15 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions16 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions17 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions18 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions19 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions20 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions21 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule4 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule5 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule1 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule2 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
-            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule3 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             this.dt = new System.Data.DataTable();
             this.windowsUIButton = new DevExpress.XtraBars.Docking2010.WindowsUIButtonPanel();
             this.dataLayoutControl1 = new DevExpress.XtraDataLayout.DataLayoutControl();
             this.cboTayNghe = new DevExpress.XtraEditors.LookUpEdit();
             this.cboVTPhuHop = new DevExpress.XtraEditors.SearchLookUpEdit();
             this.gridView6 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.datNGAY_CO_THE_DI_LAM = new DevExpress.XtraEditors.DateEdit();
             this.txtTiengKhac = new DevExpress.XtraEditors.TextEdit();
             this.cboTiengHoa = new DevExpress.XtraEditors.LookUpEdit();
             this.cboTiengAnh = new DevExpress.XtraEditors.LookUpEdit();
@@ -56,7 +57,6 @@ namespace Vs.Recruit
             this.chkXacNhanDTDH = new DevExpress.XtraEditors.CheckEdit();
             this.grdKNLV = new DevExpress.XtraGrid.GridControl();
             this.grvKNLV = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.datNGAY_CO_THE_DI_LAM = new DevExpress.XtraEditors.DateEdit();
             this.grdBangCap = new DevExpress.XtraGrid.GridControl();
             this.grvBangCap = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.datNGAY_NHAN_VIEC = new DevExpress.XtraEditors.DateEdit();
@@ -100,6 +100,7 @@ namespace Vs.Recruit
             this.txtID_VTTD_1 = new DevExpress.XtraEditors.TextEdit();
             this.txtID_VTTD_2 = new DevExpress.XtraEditors.TextEdit();
             this.datNgayNhanCV = new DevExpress.XtraEditors.DateEdit();
+            this.txtGHI_CHU = new DevExpress.XtraEditors.TextEdit();
             this.ItemForNgayDiLam = new DevExpress.XtraLayout.LayoutControlItem();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
@@ -142,6 +143,7 @@ namespace Vs.Recruit
             this.lblTiengAnh = new DevExpress.XtraLayout.LayoutControlItem();
             this.lblTiengTrung = new DevExpress.XtraLayout.LayoutControlItem();
             this.lblTiengKhac = new DevExpress.XtraLayout.LayoutControlItem();
+            this.lblNghiChu = new DevExpress.XtraLayout.LayoutControlItem();
             this.ItemForID_PX = new DevExpress.XtraLayout.LayoutControlItem();
             this.ItemForNGAY_SINH = new DevExpress.XtraLayout.LayoutControlItem();
             this.emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
@@ -170,14 +172,14 @@ namespace Vs.Recruit
             this.ItemForTHON_XOM = new DevExpress.XtraLayout.LayoutControlItem();
             this.lblNgayNhanCV = new DevExpress.XtraLayout.LayoutControlItem();
             this.dxValidationProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
-            this.txtGHI_CHU = new DevExpress.XtraEditors.TextEdit();
-            this.lblNghiChu = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.dt)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataLayoutControl1)).BeginInit();
             this.dataLayoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cboTayNghe.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboVTPhuHop.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.datNGAY_CO_THE_DI_LAM.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.datNGAY_CO_THE_DI_LAM.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTiengKhac.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboTiengHoa.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboTiengAnh.Properties)).BeginInit();
@@ -185,8 +187,6 @@ namespace Vs.Recruit
             ((System.ComponentModel.ISupportInitialize)(this.chkXacNhanDTDH.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdKNLV)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grvKNLV)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.datNGAY_CO_THE_DI_LAM.Properties.CalendarTimeProperties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.datNGAY_CO_THE_DI_LAM.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdBangCap)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grvBangCap)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.datNGAY_NHAN_VIEC.Properties.CalendarTimeProperties)).BeginInit();
@@ -235,6 +235,7 @@ namespace Vs.Recruit
             ((System.ComponentModel.ISupportInitialize)(this.txtID_VTTD_2.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.datNgayNhanCV.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.datNgayNhanCV.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtGHI_CHU.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForNgayDiLam)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
@@ -277,6 +278,7 @@ namespace Vs.Recruit
             ((System.ComponentModel.ISupportInitialize)(this.lblTiengAnh)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblTiengTrung)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblTiengKhac)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lblNghiChu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForID_PX)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForNGAY_SINH)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).BeginInit();
@@ -305,8 +307,6 @@ namespace Vs.Recruit
             ((System.ComponentModel.ISupportInitialize)(this.ItemForTHON_XOM)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblNgayNhanCV)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtGHI_CHU.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lblNghiChu)).BeginInit();
             this.SuspendLayout();
             // 
             // windowsUIButton
@@ -326,23 +326,23 @@ namespace Vs.Recruit
             this.windowsUIButton.AppearanceButton.Pressed.Options.UseFont = true;
             this.windowsUIButton.AppearanceButton.Pressed.Options.UseImage = true;
             this.windowsUIButton.AppearanceButton.Pressed.Options.UseTextOptions = true;
-            windowsUIButtonImageOptions8.ImageUri.Uri = "AddItem";
-            windowsUIButtonImageOptions9.ImageUri.Uri = "Edit;Size32x32;GrayScaled";
-            windowsUIButtonImageOptions10.ImageUri.Uri = "snap/snapdeletelist";
-            windowsUIButtonImageOptions11.ImageUri.Uri = "Print";
-            windowsUIButtonImageOptions12.ImageUri.Uri = "SaveAll";
-            windowsUIButtonImageOptions13.ImageUri.Uri = "SaveAndClose";
-            windowsUIButtonImageOptions14.ImageUri.Uri = "richedit/clearheaderandfooter";
+            windowsUIButtonImageOptions15.ImageUri.Uri = "AddItem";
+            windowsUIButtonImageOptions16.ImageUri.Uri = "Edit;Size32x32;GrayScaled";
+            windowsUIButtonImageOptions17.ImageUri.Uri = "snap/snapdeletelist";
+            windowsUIButtonImageOptions18.ImageUri.Uri = "Print";
+            windowsUIButtonImageOptions19.ImageUri.Uri = "SaveAll";
+            windowsUIButtonImageOptions20.ImageUri.Uri = "SaveAndClose";
+            windowsUIButtonImageOptions21.ImageUri.Uri = "richedit/clearheaderandfooter";
             this.windowsUIButton.Buttons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] {
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions8, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "them", -1, false),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions9, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "sua", -1, false),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions10, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, false, "xoa", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions15, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "them", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions16, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "sua", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions17, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, false, "xoa", -1, false),
             new DevExpress.XtraBars.Docking2010.WindowsUISeparator(),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions11, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "in", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions18, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "in", -1, false),
             new DevExpress.XtraBars.Docking2010.WindowsUISeparator(),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions12, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "luu", -1, false),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions13, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "khongluu", -1, false),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions14, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "thoat", -1, false)});
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions19, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "luu", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions20, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "khongluu", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions21, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "thoat", -1, false)});
             this.windowsUIButton.ContentAlignment = System.Drawing.ContentAlignment.MiddleRight;
             this.windowsUIButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.windowsUIButton.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -360,13 +360,13 @@ namespace Vs.Recruit
             // 
             this.dataLayoutControl1.Controls.Add(this.cboTayNghe);
             this.dataLayoutControl1.Controls.Add(this.cboVTPhuHop);
+            this.dataLayoutControl1.Controls.Add(this.datNGAY_CO_THE_DI_LAM);
             this.dataLayoutControl1.Controls.Add(this.txtTiengKhac);
             this.dataLayoutControl1.Controls.Add(this.cboTiengHoa);
             this.dataLayoutControl1.Controls.Add(this.cboTiengAnh);
             this.dataLayoutControl1.Controls.Add(this.chkDA_CHUYEN);
             this.dataLayoutControl1.Controls.Add(this.chkXacNhanDTDH);
             this.dataLayoutControl1.Controls.Add(this.grdKNLV);
-            this.dataLayoutControl1.Controls.Add(this.datNGAY_CO_THE_DI_LAM);
             this.dataLayoutControl1.Controls.Add(this.grdBangCap);
             this.dataLayoutControl1.Controls.Add(this.datNGAY_NHAN_VIEC);
             this.dataLayoutControl1.Controls.Add(this.chkHUY_TUYEN_DUNG);
@@ -440,10 +440,10 @@ namespace Vs.Recruit
             this.cboVTPhuHop.Size = new System.Drawing.Size(133, 24);
             this.cboVTPhuHop.StyleController = this.dataLayoutControl1;
             this.cboVTPhuHop.TabIndex = 230;
-            conditionValidationRule5.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.Greater;
-            conditionValidationRule5.ErrorText = "This value is not valid";
-            conditionValidationRule5.Value1 = ((long)(0));
-            this.dxValidationProvider1.SetValidationRule(this.cboVTPhuHop, conditionValidationRule5);
+            conditionValidationRule4.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.Greater;
+            conditionValidationRule4.ErrorText = "This value is not valid";
+            conditionValidationRule4.Value1 = ((long)(0));
+            this.dxValidationProvider1.SetValidationRule(this.cboVTPhuHop, conditionValidationRule4);
             // 
             // gridView6
             // 
@@ -451,6 +451,20 @@ namespace Vs.Recruit
             this.gridView6.Name = "gridView6";
             this.gridView6.OptionsSelection.EnableAppearanceFocusedCell = false;
             this.gridView6.OptionsView.ShowGroupPanel = false;
+            // 
+            // datNGAY_CO_THE_DI_LAM
+            // 
+            this.datNGAY_CO_THE_DI_LAM.EditValue = null;
+            this.datNGAY_CO_THE_DI_LAM.Location = new System.Drawing.Point(1079, 314);
+            this.datNGAY_CO_THE_DI_LAM.Margin = new System.Windows.Forms.Padding(4);
+            this.datNGAY_CO_THE_DI_LAM.Name = "datNGAY_CO_THE_DI_LAM";
+            this.datNGAY_CO_THE_DI_LAM.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.datNGAY_CO_THE_DI_LAM.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.datNGAY_CO_THE_DI_LAM.Size = new System.Drawing.Size(50, 24);
+            this.datNGAY_CO_THE_DI_LAM.StyleController = this.dataLayoutControl1;
+            this.datNGAY_CO_THE_DI_LAM.TabIndex = 209;
             // 
             // txtTiengKhac
             // 
@@ -531,20 +545,10 @@ namespace Vs.Recruit
             this.grvKNLV.Name = "grvKNLV";
             this.grvKNLV.OptionsView.ShowGroupPanel = false;
             this.grvKNLV.InitNewRow += new DevExpress.XtraGrid.Views.Grid.InitNewRowEventHandler(this.grvKNLV_InitNewRow);
-            // 
-            // datNGAY_CO_THE_DI_LAM
-            // 
-            this.datNGAY_CO_THE_DI_LAM.EditValue = null;
-            this.datNGAY_CO_THE_DI_LAM.Location = new System.Drawing.Point(1079, 314);
-            this.datNGAY_CO_THE_DI_LAM.Margin = new System.Windows.Forms.Padding(4);
-            this.datNGAY_CO_THE_DI_LAM.Name = "datNGAY_CO_THE_DI_LAM";
-            this.datNGAY_CO_THE_DI_LAM.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.datNGAY_CO_THE_DI_LAM.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.datNGAY_CO_THE_DI_LAM.Size = new System.Drawing.Size(50, 24);
-            this.datNGAY_CO_THE_DI_LAM.StyleController = this.dataLayoutControl1;
-            this.datNGAY_CO_THE_DI_LAM.TabIndex = 209;
+            this.grvKNLV.CellValueChanged += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.grvKNLV_CellValueChanged);
+            this.grvKNLV.InvalidRowException += new DevExpress.XtraGrid.Views.Base.InvalidRowExceptionEventHandler(this.grvKNLV_InvalidRowException);
+            this.grvKNLV.ValidatingEditor += new DevExpress.XtraEditors.Controls.BaseContainerValidateEditorEventHandler(this.grvKNLV_ValidatingEditor);
+            this.grvKNLV.InvalidValueException += new DevExpress.XtraEditors.Controls.InvalidValueExceptionEventHandler(this.grvKNLV_InvalidValueException);
             // 
             // grdBangCap
             // 
@@ -744,10 +748,10 @@ namespace Vs.Recruit
             this.txtTEN.Size = new System.Drawing.Size(128, 24);
             this.txtTEN.StyleController = this.dataLayoutControl1;
             this.txtTEN.TabIndex = 2;
-            conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule1.ErrorText = "This value is not valid";
-            conditionValidationRule1.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.Critical;
-            this.dxValidationProvider1.SetValidationRule(this.txtTEN, conditionValidationRule1);
+            conditionValidationRule5.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule5.ErrorText = "This value is not valid";
+            conditionValidationRule5.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.Critical;
+            this.dxValidationProvider1.SetValidationRule(this.txtTEN, conditionValidationRule5);
             // 
             // datNGAY_SINH
             // 
@@ -761,10 +765,10 @@ namespace Vs.Recruit
             this.datNGAY_SINH.Size = new System.Drawing.Size(129, 24);
             this.datNGAY_SINH.StyleController = this.dataLayoutControl1;
             this.datNGAY_SINH.TabIndex = 4;
-            conditionValidationRule2.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule2.ErrorText = "This value is not valid";
-            conditionValidationRule2.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.Critical;
-            this.dxValidationProvider1.SetValidationRule(this.datNGAY_SINH, conditionValidationRule2);
+            conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule1.ErrorText = "This value is not valid";
+            conditionValidationRule1.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.Critical;
+            this.dxValidationProvider1.SetValidationRule(this.datNGAY_SINH, conditionValidationRule1);
             // 
             // txtSO_CMND
             // 
@@ -858,10 +862,10 @@ namespace Vs.Recruit
             this.txtHO.Size = new System.Drawing.Size(129, 24);
             this.txtHO.StyleController = this.dataLayoutControl1;
             this.txtHO.TabIndex = 1;
-            conditionValidationRule3.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule3.ErrorText = "This value is not valid";
-            conditionValidationRule3.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.Critical;
-            this.dxValidationProvider1.SetValidationRule(this.txtHO, conditionValidationRule3);
+            conditionValidationRule2.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule2.ErrorText = "This value is not valid";
+            conditionValidationRule2.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.Critical;
+            this.dxValidationProvider1.SetValidationRule(this.txtHO, conditionValidationRule2);
             // 
             // PHAILookUpEdit
             // 
@@ -1010,6 +1014,14 @@ namespace Vs.Recruit
             this.datNgayNhanCV.StyleController = this.dataLayoutControl1;
             this.datNgayNhanCV.TabIndex = 234;
             // 
+            // txtGHI_CHU
+            // 
+            this.txtGHI_CHU.Location = new System.Drawing.Point(202, 436);
+            this.txtGHI_CHU.Name = "txtGHI_CHU";
+            this.txtGHI_CHU.Size = new System.Drawing.Size(935, 24);
+            this.txtGHI_CHU.StyleController = this.dataLayoutControl1;
+            this.txtGHI_CHU.TabIndex = 235;
+            // 
             // ItemForNgayDiLam
             // 
             this.ItemForNgayDiLam.Control = this.datNGAY_CO_THE_DI_LAM;
@@ -1132,7 +1144,7 @@ namespace Vs.Recruit
             // 
             this.tab.Location = new System.Drawing.Point(0, 304);
             this.tab.Name = "tab";
-            this.tab.SelectedTabPage = this.tabThongTinKhac;
+            this.tab.SelectedTabPage = this.tabKNLV;
             this.tab.ShowTabHeader = DevExpress.Utils.DefaultBoolean.True;
             this.tab.Size = new System.Drawing.Size(1141, 309);
             this.tab.TabPages.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
@@ -1494,6 +1506,14 @@ namespace Vs.Recruit
             this.lblTiengKhac.Size = new System.Drawing.Size(373, 28);
             this.lblTiengKhac.TextSize = new System.Drawing.Size(174, 17);
             // 
+            // lblNghiChu
+            // 
+            this.lblNghiChu.Control = this.txtGHI_CHU;
+            this.lblNghiChu.Location = new System.Drawing.Point(0, 84);
+            this.lblNghiChu.Name = "lblNghiChu";
+            this.lblNghiChu.Size = new System.Drawing.Size(1117, 28);
+            this.lblNghiChu.TextSize = new System.Drawing.Size(174, 17);
+            // 
             // ItemForID_PX
             // 
             this.ItemForID_PX.Control = this.cboID_PX;
@@ -1784,22 +1804,6 @@ namespace Vs.Recruit
             this.lblNgayNhanCV.Text = "Ngày nhận CV";
             this.lblNgayNhanCV.TextSize = new System.Drawing.Size(174, 17);
             // 
-            // txtGHI_CHU
-            // 
-            this.txtGHI_CHU.Location = new System.Drawing.Point(202, 436);
-            this.txtGHI_CHU.Name = "txtGHI_CHU";
-            this.txtGHI_CHU.Size = new System.Drawing.Size(935, 24);
-            this.txtGHI_CHU.StyleController = this.dataLayoutControl1;
-            this.txtGHI_CHU.TabIndex = 235;
-            // 
-            // lblNghiChu
-            // 
-            this.lblNghiChu.Control = this.txtGHI_CHU;
-            this.lblNghiChu.Location = new System.Drawing.Point(0, 84);
-            this.lblNghiChu.Name = "lblNghiChu";
-            this.lblNghiChu.Size = new System.Drawing.Size(1117, 28);
-            this.lblNghiChu.TextSize = new System.Drawing.Size(174, 17);
-            // 
             // ucLyLichUV
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -1815,6 +1819,8 @@ namespace Vs.Recruit
             ((System.ComponentModel.ISupportInitialize)(this.cboTayNghe.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboVTPhuHop.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.datNGAY_CO_THE_DI_LAM.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.datNGAY_CO_THE_DI_LAM.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTiengKhac.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboTiengHoa.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboTiengAnh.Properties)).EndInit();
@@ -1822,8 +1828,6 @@ namespace Vs.Recruit
             ((System.ComponentModel.ISupportInitialize)(this.chkXacNhanDTDH.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdKNLV)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grvKNLV)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.datNGAY_CO_THE_DI_LAM.Properties.CalendarTimeProperties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.datNGAY_CO_THE_DI_LAM.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdBangCap)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grvBangCap)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.datNGAY_NHAN_VIEC.Properties.CalendarTimeProperties)).EndInit();
@@ -1872,6 +1876,7 @@ namespace Vs.Recruit
             ((System.ComponentModel.ISupportInitialize)(this.txtID_VTTD_2.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.datNgayNhanCV.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.datNgayNhanCV.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtGHI_CHU.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForNgayDiLam)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
@@ -1914,6 +1919,7 @@ namespace Vs.Recruit
             ((System.ComponentModel.ISupportInitialize)(this.lblTiengAnh)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblTiengTrung)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblTiengKhac)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lblNghiChu)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForID_PX)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForNGAY_SINH)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).EndInit();
@@ -1942,8 +1948,6 @@ namespace Vs.Recruit
             ((System.ComponentModel.ISupportInitialize)(this.ItemForTHON_XOM)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblNgayNhanCV)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtGHI_CHU.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lblNghiChu)).EndInit();
             this.ResumeLayout(false);
 
         }

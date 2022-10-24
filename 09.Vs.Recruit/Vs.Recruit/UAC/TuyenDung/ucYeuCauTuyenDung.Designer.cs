@@ -321,6 +321,7 @@
             this.grvViTri.Name = "grvViTri";
             this.grvViTri.OptionsView.ShowGroupPanel = false;
             this.grvViTri.PopupMenuShowing += new DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler(this.grvViTri_PopupMenuShowing);
+            this.grvViTri.ShowingEditor += new System.ComponentModel.CancelEventHandler(this.grvViTri_ShowingEditor);
             this.grvViTri.InitNewRow += new DevExpress.XtraGrid.Views.Grid.InitNewRowEventHandler(this.grvViTri_InitNewRow);
             this.grvViTri.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.grvViTri_FocusedRowChanged);
             this.grvViTri.CellValueChanged += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.grvViTri_CellValueChanged);

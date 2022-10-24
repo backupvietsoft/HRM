@@ -34,7 +34,7 @@ namespace VietSoftHRM
         }
         private void grvUser_Click(object sender, EventArgs e)
         {
-            grid = 2;
+            grid = 1;
         }
         private void grvNhom_Click(object sender, EventArgs e)
         {
@@ -75,15 +75,15 @@ namespace VietSoftHRM
                         {
                             dem = grvNhom.RowCount;
                             AddnewRow(grvNhom, true);
-                            grvUser.OptionsBehavior.ReadOnly = true;
+                            //grvUser.OptionsBehavior.ReadOnly = true;
                             grvNhom.OptionsBehavior.ReadOnly = false;
                         }
                         else
                         {
                             dem = grvUser.RowCount;
-                            AddnewRow(grvUser, true);
+                            //AddnewRow(grvUser, true);
                             grvNhom.OptionsBehavior.ReadOnly = true;
-                            grvUser.OptionsBehavior.ReadOnly = false;
+                            //grvUser.OptionsBehavior.ReadOnly = false;
                         }
                         break;
                     }
@@ -112,7 +112,7 @@ namespace VietSoftHRM
                         }
                         else
                         {
-                            AddnewRow(grvUser, false);
+                            //AddnewRow(grvUser, false);
                             grvUser.OptionsBehavior.ReadOnly = false;
                             grvNhom.OptionsBehavior.ReadOnly = true;
                         }
@@ -229,6 +229,8 @@ namespace VietSoftHRM
             {
                 SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "DELETE dbo.NHOM WHERE ID_NHOM = " + grvNhom.GetFocusedRowCellValue("ID_NHOM") + "");
                 grvNhom.DeleteSelectedRows();
+                LoadUser();
+                grvNhom_FocusedRowChanged(null,null);
             }
             catch (Exception ex)
             {
@@ -281,10 +283,10 @@ namespace VietSoftHRM
             {
                 if (co == false)
                 {
-                    for (int i = 0; i < grvUser.RowCount; i++)
+                    for (int i = 0; i < grvNhom.RowCount; i++)
                     {
                         //sữa những dòng đã có
-                        SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spGhiNhom", grvNhom.GetRowCellValue(i, "ID_NHOM"), grvNhom.GetRowCellValue(i, "TEN_NHOM"), grvNhom.GetRowCellValue(i, "GHI_CHU"), 0);
+                        SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spGhiNhom", grvNhom.GetRowCellValue(i, "ID_NHOM"), grvNhom.GetRowCellValue(i, "TEN_NHOM"), grvNhom.GetRowCellValue(i, "GHI_CHU"));
                     }
                 }
                 else
@@ -293,7 +295,7 @@ namespace VietSoftHRM
                     for (int i = dem; i < grvNhom.RowCount; i++)
                     {
                         if (string.IsNullOrEmpty(grvNhom.GetRowCellValue(i, "TEN_NHOM") + "")) break;
-                        SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spGhiNhom", -1, grvNhom.GetRowCellValue(i, "TEN_NHOM"), grvNhom.GetRowCellValue(i, "GHI_CHU"), 1);
+                        SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spGhiNhom", -1, grvNhom.GetRowCellValue(i, "TEN_NHOM"), grvNhom.GetRowCellValue(i, "GHI_CHU"));
                     }
                 }
             }

@@ -288,14 +288,13 @@ namespace Vs.HRM
         }
         private void CboID_HTNTC_BeforePopup(object sender, EventArgs e)
         {
-            LookUpEdit lookUp = sender as LookUpEdit;
-
-            //string id = lookUp.get;
-
-            // Access the currently selected data row
-            //DataRowView dataRow = lookUp.Properties.DataSource as DataRowView;
-
-            lookUp.Properties.DataSource = Commons.Modules.ObjSystems.DataHinhThucTroCap(ID_LDVTemp, false);
+            try
+            {
+                LookUpEdit lookUp = sender as LookUpEdit;
+                lookUp.Properties.DataSource = Commons.Modules.ObjSystems.DataHinhThucTroCap(Convert.ToInt32(grvTroCapBHXH.GetFocusedRowCellValue("ID_LDV")), false);
+            }
+            catch { }
+            
         }
 
         private void windowsUIButton_ButtonClick(object sender, DevExpress.XtraBars.Docking2010.ButtonEventArgs e)

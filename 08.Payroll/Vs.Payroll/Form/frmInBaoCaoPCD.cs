@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Vs.Report;
 
-namespace Vs.Payroll.Form
+namespace Vs.Payroll
 {
     public partial class frmInBaoCaoPCD : DevExpress.XtraEditors.XtraForm
     {

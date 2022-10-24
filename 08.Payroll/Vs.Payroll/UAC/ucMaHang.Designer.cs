@@ -49,7 +49,7 @@
             this.ItemForKH = new DevExpress.XtraLayout.LayoutControlItem();
             this.ItemForLHH = new DevExpress.XtraLayout.LayoutControlItem();
             this.ItemForSumNhanVien = new DevExpress.XtraLayout.SimpleLabelItem();
-            this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.lblDaHoanThanh = new DevExpress.XtraLayout.LayoutControlItem();
             this.ItemForTNgay = new DevExpress.XtraLayout.LayoutControlItem();
             this.ItemForDNgay = new DevExpress.XtraLayout.LayoutControlItem();
             this.searchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -74,7 +74,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.ItemForKH)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForLHH)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForSumNhanVien)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lblDaHoanThanh)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForTNgay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForDNgay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).BeginInit();
@@ -119,7 +119,7 @@
             this.ItemForKH,
             this.ItemForLHH,
             this.ItemForSumNhanVien,
-            this.layoutControlItem2,
+            this.lblDaHoanThanh,
             this.ItemForTNgay,
             this.ItemForDNgay});
             this.Root.Name = "Root";
@@ -144,17 +144,17 @@
             this.ItemForDonVi.Name = "ItemForDonVi";
             this.ItemForDonVi.Size = new System.Drawing.Size(327, 30);
             this.ItemForDonVi.Text = "Đơn vị";
-            this.ItemForDonVi.TextSize = new System.Drawing.Size(83, 17);
+            this.ItemForDonVi.TextSize = new System.Drawing.Size(96, 17);
             // 
             // cboDonVi
             // 
             this.cboDonVi.EditValue = "\\";
-            this.cboDonVi.Location = new System.Drawing.Point(99, 12);
+            this.cboDonVi.Location = new System.Drawing.Point(112, 12);
             this.cboDonVi.Name = "cboDonVi";
             this.cboDonVi.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cboDonVi.Properties.NullText = "";
-            this.cboDonVi.Size = new System.Drawing.Size(236, 24);
+            this.cboDonVi.Size = new System.Drawing.Size(223, 24);
             this.cboDonVi.StyleController = this.layoutControl;
             this.cboDonVi.TabIndex = 0;
             this.cboDonVi.Visible = false;
@@ -181,12 +181,12 @@
             // cboLHH
             // 
             this.cboLHH.EditValue = "\\";
-            this.cboLHH.Location = new System.Drawing.Point(753, 12);
+            this.cboLHH.Location = new System.Drawing.Point(766, 12);
             this.cboLHH.Name = "cboLHH";
             this.cboLHH.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cboLHH.Properties.NullText = "";
-            this.cboLHH.Size = new System.Drawing.Size(236, 24);
+            this.cboLHH.Size = new System.Drawing.Size(223, 24);
             this.cboLHH.StyleController = this.layoutControl;
             this.cboLHH.TabIndex = 0;
             this.cboLHH.Visible = false;
@@ -195,12 +195,12 @@
             // cboKhachHang
             // 
             this.cboKhachHang.EditValue = "\\";
-            this.cboKhachHang.Location = new System.Drawing.Point(425, 13);
+            this.cboKhachHang.Location = new System.Drawing.Point(438, 13);
             this.cboKhachHang.Name = "cboKhachHang";
             this.cboKhachHang.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cboKhachHang.Properties.NullText = "";
-            this.cboKhachHang.Size = new System.Drawing.Size(238, 24);
+            this.cboKhachHang.Size = new System.Drawing.Size(225, 24);
             this.cboKhachHang.StyleController = this.layoutControl;
             this.cboKhachHang.TabIndex = 0;
             this.cboKhachHang.Visible = false;
@@ -208,13 +208,13 @@
             // 
             // chkDaDong
             // 
-            this.chkDaDong.Location = new System.Drawing.Point(12, 42);
+            this.chkDaDong.Location = new System.Drawing.Point(112, 42);
             this.chkDaDong.Name = "chkDaDong";
-            this.chkDaDong.Properties.Caption = "Đã đóng";
+            this.chkDaDong.Properties.Caption = "";
             this.chkDaDong.Properties.DisplayValueChecked = "1";
             this.chkDaDong.Properties.DisplayValueGrayed = "0";
             this.chkDaDong.Properties.DisplayValueUnchecked = "0";
-            this.chkDaDong.Size = new System.Drawing.Size(323, 21);
+            this.chkDaDong.Size = new System.Drawing.Size(223, 19);
             this.chkDaDong.StyleController = this.layoutControl;
             this.chkDaDong.TabIndex = 4;
             this.chkDaDong.EditValueChanged += new System.EventHandler(this.cboDonVi_EditValueChanged);
@@ -222,14 +222,14 @@
             // datTNgay
             // 
             this.datTNgay.EditValue = null;
-            this.datTNgay.Location = new System.Drawing.Point(426, 42);
+            this.datTNgay.Location = new System.Drawing.Point(439, 42);
             this.datTNgay.Name = "datTNgay";
             this.datTNgay.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.datTNgay.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.datTNgay.Properties.CalendarTimeProperties.MaskSettings.Set("mask", "dd/MM/yyyy");
-            this.datTNgay.Size = new System.Drawing.Size(236, 24);
+            this.datTNgay.Size = new System.Drawing.Size(223, 24);
             this.datTNgay.StyleController = this.layoutControl;
             this.datTNgay.TabIndex = 5;
             this.datTNgay.EditValueChanged += new System.EventHandler(this.cboDonVi_EditValueChanged);
@@ -237,13 +237,13 @@
             // datDNgay
             // 
             this.datDNgay.EditValue = null;
-            this.datDNgay.Location = new System.Drawing.Point(753, 42);
+            this.datDNgay.Location = new System.Drawing.Point(766, 42);
             this.datDNgay.Name = "datDNgay";
             this.datDNgay.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.datDNgay.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.datDNgay.Size = new System.Drawing.Size(236, 24);
+            this.datDNgay.Size = new System.Drawing.Size(223, 24);
             this.datDNgay.StyleController = this.layoutControl;
             this.datDNgay.TabIndex = 6;
             this.datDNgay.EditValueChanged += new System.EventHandler(this.cboDonVi_EditValueChanged);
@@ -258,7 +258,7 @@
             this.ItemForKH.Padding = new DevExpress.XtraLayout.Utils.Padding(1, 1, 3, 3);
             this.ItemForKH.Size = new System.Drawing.Size(327, 30);
             this.ItemForKH.Text = "Khách hàng";
-            this.ItemForKH.TextSize = new System.Drawing.Size(83, 17);
+            this.ItemForKH.TextSize = new System.Drawing.Size(96, 17);
             // 
             // ItemForLHH
             // 
@@ -268,7 +268,7 @@
             this.ItemForLHH.Name = "ItemForLHH";
             this.ItemForLHH.Size = new System.Drawing.Size(327, 30);
             this.ItemForLHH.Text = "Loại hàng hoá";
-            this.ItemForLHH.TextSize = new System.Drawing.Size(83, 17);
+            this.ItemForLHH.TextSize = new System.Drawing.Size(96, 17);
             // 
             // ItemForSumNhanVien
             // 
@@ -279,16 +279,15 @@
             this.ItemForSumNhanVien.Name = "ItemForSumNhanVien";
             this.ItemForSumNhanVien.Size = new System.Drawing.Size(981, 21);
             this.ItemForSumNhanVien.Text = "SumNhanVien";
-            this.ItemForSumNhanVien.TextSize = new System.Drawing.Size(83, 17);
+            this.ItemForSumNhanVien.TextSize = new System.Drawing.Size(96, 17);
             // 
-            // layoutControlItem2
+            // lblDaHoanThanh
             // 
-            this.layoutControlItem2.Control = this.chkDaDong;
-            this.layoutControlItem2.Location = new System.Drawing.Point(0, 30);
-            this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(327, 28);
-            this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem2.TextVisible = false;
+            this.lblDaHoanThanh.Control = this.chkDaDong;
+            this.lblDaHoanThanh.Location = new System.Drawing.Point(0, 30);
+            this.lblDaHoanThanh.Name = "lblDaHoanThanh";
+            this.lblDaHoanThanh.Size = new System.Drawing.Size(327, 28);
+            this.lblDaHoanThanh.TextSize = new System.Drawing.Size(96, 17);
             // 
             // ItemForTNgay
             // 
@@ -297,7 +296,7 @@
             this.ItemForTNgay.Name = "ItemForTNgay";
             this.ItemForTNgay.Size = new System.Drawing.Size(327, 28);
             this.ItemForTNgay.Text = "Từ ngày";
-            this.ItemForTNgay.TextSize = new System.Drawing.Size(83, 17);
+            this.ItemForTNgay.TextSize = new System.Drawing.Size(96, 17);
             // 
             // ItemForDNgay
             // 
@@ -306,7 +305,7 @@
             this.ItemForDNgay.Name = "ItemForDNgay";
             this.ItemForDNgay.Size = new System.Drawing.Size(327, 28);
             this.ItemForDNgay.Text = "Đến ngày";
-            this.ItemForDNgay.TextSize = new System.Drawing.Size(83, 17);
+            this.ItemForDNgay.TextSize = new System.Drawing.Size(96, 17);
             // 
             // searchLookUpEdit1View
             // 
@@ -410,7 +409,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.ItemForKH)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForLHH)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForSumNhanVien)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lblDaHoanThanh)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForTNgay)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForDNgay)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).EndInit();
@@ -439,7 +438,7 @@
         private DevExpress.XtraEditors.CheckEdit chkDaDong;
         private DevExpress.XtraEditors.DateEdit datTNgay;
         private DevExpress.XtraEditors.DateEdit datDNgay;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
+        private DevExpress.XtraLayout.LayoutControlItem lblDaHoanThanh;
         private DevExpress.XtraLayout.LayoutControlItem ItemForTNgay;
         private DevExpress.XtraLayout.LayoutControlItem ItemForDNgay;
         private DevExpress.XtraEditors.SearchControl searchControl;

@@ -28,49 +28,34 @@
         /// </summary>
         private void InitializeComponent()
         {
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions1 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions2 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions3 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions4 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.lblTD = new DevExpress.XtraEditors.LabelControl();
-            this.optHT = new DevExpress.XtraEditors.RadioGroup();
-            this.cboHD = new DevExpress.XtraEditors.SearchLookUpEdit();
-            this.searchLookUpEdit3View = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.cboMH = new DevExpress.XtraEditors.SearchLookUpEdit();
-            this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.cboOrd = new DevExpress.XtraEditors.SearchLookUpEdit();
-            this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.lblHopDong = new DevExpress.XtraEditors.LabelControl();
-            this.lblMaHang = new DevExpress.XtraEditors.LabelControl();
-            this.lblOrder = new DevExpress.XtraEditors.LabelControl();
-            this.lblChuyenSD = new DevExpress.XtraEditors.LabelControl();
-            this.lblChuyen = new DevExpress.XtraEditors.LabelControl();
-            this.cboChuSD = new DevExpress.XtraEditors.SearchLookUpEdit();
-            this.gridView3 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.cboChuTH = new DevExpress.XtraEditors.SearchLookUpEdit();
-            this.gridView4 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
-            this.searchControl2 = new DevExpress.XtraEditors.SearchControl();
-            this.btnThoat = new DevExpress.XtraEditors.SimpleButton();
-            this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
-            this.btnKChon = new DevExpress.XtraEditors.SimpleButton();
-            this.btnThem = new DevExpress.XtraEditors.SimpleButton();
-            this.grdHD = new DevExpress.XtraGrid.GridControl();
-            this.grvHD = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.grdData = new DevExpress.XtraGrid.GridControl();
+            this.grvData = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.lblChuyenTH = new DevExpress.XtraEditors.LabelControl();
+            this.lblKhachHang = new DevExpress.XtraEditors.LabelControl();
+            this.lblThang = new DevExpress.XtraEditors.LabelControl();
+            this.datThang = new DevExpress.XtraEditors.DateEdit();
+            this.windowsUIButton = new DevExpress.XtraBars.Docking2010.WindowsUIButtonPanel();
+            this.searchControl = new DevExpress.XtraEditors.SearchControl();
+            this.cboKHACH_HANG = new DevExpress.XtraEditors.SearchLookUpEdit();
+            this.searchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.cboChuyenTH = new DevExpress.XtraEditors.SearchLookUpEdit();
+            this.searchLookUpEdit2View = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.optHT.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cboHD.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit3View)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cboMH.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cboOrd.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cboChuSD.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cboChuTH.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
-            this.panelControl2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.searchControl2.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.grdHD)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.grvHD)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grdData)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grvData)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.datThang.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.datThang.Properties)).BeginInit();
+            this.windowsUIButton.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.searchControl.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cboKHACH_HANG.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cboChuyenTH.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit2View)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -84,338 +69,188 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.07001F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 18.29613F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 4.450595F));
-            this.tableLayoutPanel1.Controls.Add(this.lblTD, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.optHT, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.cboHD, 2, 3);
-            this.tableLayoutPanel1.Controls.Add(this.cboMH, 4, 3);
-            this.tableLayoutPanel1.Controls.Add(this.cboOrd, 6, 3);
-            this.tableLayoutPanel1.Controls.Add(this.lblHopDong, 1, 3);
-            this.tableLayoutPanel1.Controls.Add(this.lblMaHang, 3, 3);
-            this.tableLayoutPanel1.Controls.Add(this.lblOrder, 5, 3);
-            this.tableLayoutPanel1.Controls.Add(this.lblChuyenSD, 1, 4);
-            this.tableLayoutPanel1.Controls.Add(this.lblChuyen, 3, 4);
-            this.tableLayoutPanel1.Controls.Add(this.cboChuSD, 2, 4);
-            this.tableLayoutPanel1.Controls.Add(this.cboChuTH, 4, 4);
-            this.tableLayoutPanel1.Controls.Add(this.panelControl2, 0, 6);
-            this.tableLayoutPanel1.Controls.Add(this.btnThem, 6, 4);
-            this.tableLayoutPanel1.Controls.Add(this.grdHD, 0, 5);
+            this.tableLayoutPanel1.Controls.Add(this.grdData, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.lblChuyenTH, 5, 1);
+            this.tableLayoutPanel1.Controls.Add(this.lblKhachHang, 3, 1);
+            this.tableLayoutPanel1.Controls.Add(this.lblThang, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.datThang, 2, 1);
+            this.tableLayoutPanel1.Controls.Add(this.windowsUIButton, 0, 4);
+            this.tableLayoutPanel1.Controls.Add(this.cboKHACH_HANG, 4, 1);
+            this.tableLayoutPanel1.Controls.Add(this.cboChuyenTH, 6, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 8;
+            this.tableLayoutPanel1.RowCount = 6;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 5F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 36F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 33F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 28F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 28F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 33F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 5F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(920, 538);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
-            // lblTD
+            // grdData
             // 
-            this.lblTD.Appearance.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold);
-            this.lblTD.Appearance.Options.UseFont = true;
-            this.lblTD.Appearance.Options.UseTextOptions = true;
-            this.lblTD.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.lblTD.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.tableLayoutPanel1.SetColumnSpan(this.lblTD, 8);
-            this.lblTD.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblTD.Location = new System.Drawing.Point(3, 8);
-            this.lblTD.Name = "lblTD";
-            this.lblTD.Size = new System.Drawing.Size(914, 30);
-            this.lblTD.TabIndex = 35;
-            this.lblTD.Text = "CHỌN MÃ HÀNG ORDER SỐ LƯỢNG CHỐT THÁNG ";
+            this.tableLayoutPanel1.SetColumnSpan(this.grdData, 8);
+            this.grdData.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.grdData.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4);
+            this.grdData.Location = new System.Drawing.Point(4, 57);
+            this.grdData.MainView = this.grvData;
+            this.grdData.Margin = new System.Windows.Forms.Padding(4);
+            this.grdData.Name = "grdData";
+            this.grdData.Size = new System.Drawing.Size(912, 412);
+            this.grdData.TabIndex = 38;
+            this.grdData.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.grvData});
             // 
-            // optHT
+            // grvData
             // 
-            this.tableLayoutPanel1.SetColumnSpan(this.optHT, 2);
-            this.optHT.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.optHT.Location = new System.Drawing.Point(43, 43);
-            this.optHT.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.optHT.Name = "optHT";
-            this.optHT.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] {
-            new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Đang sản xuất", true, null, "optXemCu"),
-            new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Hoàn thành", true, null, "optLapMoi")});
-            this.optHT.Size = new System.Drawing.Size(273, 29);
-            this.optHT.TabIndex = 34;
-            this.optHT.SelectedIndexChanged += new System.EventHandler(this.optHT_SelectedIndexChanged);
+            this.grvData.DetailHeight = 457;
+            this.grvData.FixedLineWidth = 3;
+            this.grvData.GridControl = this.grdData;
+            this.grvData.Name = "grvData";
+            this.grvData.OptionsView.ShowGroupPanel = false;
             // 
-            // cboHD
+            // lblChuyenTH
             // 
-            this.cboHD.Cursor = System.Windows.Forms.Cursors.Default;
-            this.cboHD.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cboHD.Location = new System.Drawing.Point(154, 77);
-            this.cboHD.Name = "cboHD";
-            this.cboHD.Properties.Appearance.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cboHD.Properties.Appearance.Options.UseFont = true;
-            this.cboHD.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.lblChuyenTH.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblChuyenTH.Location = new System.Drawing.Point(601, 8);
+            this.lblChuyenTH.Name = "lblChuyenTH";
+            this.lblChuyenTH.Size = new System.Drawing.Size(105, 22);
+            this.lblChuyenTH.TabIndex = 35;
+            this.lblChuyenTH.Text = "Chuyền TH";
+            // 
+            // lblKhachHang
+            // 
+            this.lblKhachHang.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblKhachHang.Location = new System.Drawing.Point(322, 8);
+            this.lblKhachHang.Name = "lblKhachHang";
+            this.lblKhachHang.Size = new System.Drawing.Size(105, 22);
+            this.lblKhachHang.TabIndex = 35;
+            this.lblKhachHang.Text = "Khách hàng";
+            // 
+            // lblThang
+            // 
+            this.lblThang.Location = new System.Drawing.Point(43, 8);
+            this.lblThang.Name = "lblThang";
+            this.lblThang.Size = new System.Drawing.Size(36, 17);
+            this.lblThang.TabIndex = 40;
+            this.lblThang.Text = "Tháng";
+            // 
+            // datThang
+            // 
+            this.datThang.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.datThang.EditValue = null;
+            this.datThang.Location = new System.Drawing.Point(154, 8);
+            this.datThang.Name = "datThang";
+            this.datThang.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cboHD.Properties.NullText = "";
-            this.cboHD.Properties.PopupView = this.searchLookUpEdit3View;
-            this.cboHD.Size = new System.Drawing.Size(162, 22);
-            this.cboHD.TabIndex = 36;
-            this.cboHD.EditValueChanged += new System.EventHandler(this.cboHD_EditValueChanged_1);
-            // 
-            // searchLookUpEdit3View
-            // 
-            this.searchLookUpEdit3View.Appearance.Row.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.searchLookUpEdit3View.Appearance.Row.Options.UseFont = true;
-            this.searchLookUpEdit3View.DetailHeight = 193;
-            this.searchLookUpEdit3View.FixedLineWidth = 1;
-            this.searchLookUpEdit3View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
-            this.searchLookUpEdit3View.Name = "searchLookUpEdit3View";
-            this.searchLookUpEdit3View.OptionsSelection.EnableAppearanceFocusedCell = false;
-            this.searchLookUpEdit3View.OptionsView.ShowGroupPanel = false;
-            // 
-            // cboMH
-            // 
-            this.cboMH.Cursor = System.Windows.Forms.Cursors.Default;
-            this.cboMH.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cboMH.Location = new System.Drawing.Point(433, 77);
-            this.cboMH.Name = "cboMH";
-            this.cboMH.Properties.Appearance.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cboMH.Properties.Appearance.Options.UseFont = true;
-            this.cboMH.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.datThang.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cboMH.Properties.NullText = "";
-            this.cboMH.Properties.PopupView = this.gridView1;
-            this.cboMH.Size = new System.Drawing.Size(162, 22);
-            this.cboMH.TabIndex = 36;
-            this.cboMH.EditValueChanged += new System.EventHandler(this.cboMH_EditValueChanged);
+            this.datThang.Properties.DisplayFormat.FormatString = "MM/yyyy";
+            this.datThang.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.datThang.Properties.EditFormat.FormatString = "MM/yyyy";
+            this.datThang.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.datThang.Properties.MaskSettings.Set("mask", "MM/yyyy");
+            this.datThang.Properties.ReadOnly = true;
+            this.datThang.Size = new System.Drawing.Size(162, 24);
+            this.datThang.TabIndex = 41;
             // 
-            // gridView1
+            // windowsUIButton
             // 
-            this.gridView1.Appearance.Row.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.gridView1.Appearance.Row.Options.UseFont = true;
-            this.gridView1.DetailHeight = 193;
-            this.gridView1.FixedLineWidth = 1;
-            this.gridView1.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
-            this.gridView1.Name = "gridView1";
-            this.gridView1.OptionsSelection.EnableAppearanceFocusedCell = false;
-            this.gridView1.OptionsView.ShowGroupPanel = false;
+            this.windowsUIButton.AppearanceButton.Hovered.FontSizeDelta = -1;
+            this.windowsUIButton.AppearanceButton.Hovered.ForeColor = System.Drawing.Color.Gray;
+            this.windowsUIButton.AppearanceButton.Hovered.Options.UseFont = true;
+            this.windowsUIButton.AppearanceButton.Hovered.Options.UseForeColor = true;
+            this.windowsUIButton.AppearanceButton.Normal.FontSizeDelta = -1;
+            this.windowsUIButton.AppearanceButton.Normal.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.windowsUIButton.AppearanceButton.Normal.Options.UseFont = true;
+            this.windowsUIButton.AppearanceButton.Normal.Options.UseForeColor = true;
+            this.windowsUIButton.AppearanceButton.Pressed.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.windowsUIButton.AppearanceButton.Pressed.FontSizeDelta = -1;
+            this.windowsUIButton.AppearanceButton.Pressed.Options.UseBackColor = true;
+            this.windowsUIButton.AppearanceButton.Pressed.Options.UseBorderColor = true;
+            this.windowsUIButton.AppearanceButton.Pressed.Options.UseFont = true;
+            this.windowsUIButton.AppearanceButton.Pressed.Options.UseImage = true;
+            this.windowsUIButton.AppearanceButton.Pressed.Options.UseTextOptions = true;
+            windowsUIButtonImageOptions1.ImageUri.Uri = "Edit;Size32x32;GrayScaled";
+            windowsUIButtonImageOptions2.ImageUri.Uri = "richedit/clearheaderandfooter";
+            windowsUIButtonImageOptions3.ImageUri.Uri = "SaveAll";
+            windowsUIButtonImageOptions4.ImageUri.Uri = "SaveAndClose";
+            this.windowsUIButton.Buttons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] {
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions1, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "themsua", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUISeparator(),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions2, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "thoat", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions3, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "luu", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions4, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "khongluu", -1, false)});
+            this.tableLayoutPanel1.SetColumnSpan(this.windowsUIButton, 8);
+            this.windowsUIButton.ContentAlignment = System.Drawing.ContentAlignment.MiddleRight;
+            this.windowsUIButton.Controls.Add(this.searchControl);
+            this.windowsUIButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.windowsUIButton.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.windowsUIButton.Location = new System.Drawing.Point(4, 480);
+            this.windowsUIButton.Margin = new System.Windows.Forms.Padding(4, 7, 4, 7);
+            this.windowsUIButton.Name = "windowsUIButton";
+            this.windowsUIButton.Padding = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.windowsUIButton.Size = new System.Drawing.Size(912, 46);
+            this.windowsUIButton.TabIndex = 42;
+            this.windowsUIButton.Text = "S";
+            this.windowsUIButton.UseButtonBackgroundImages = false;
+            this.windowsUIButton.ButtonClick += new DevExpress.XtraBars.Docking2010.ButtonEventHandler(this.windowsUIButton_ButtonClick);
             // 
-            // cboOrd
+            // searchControl
             // 
-            this.cboOrd.Cursor = System.Windows.Forms.Cursors.Default;
-            this.cboOrd.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cboOrd.Location = new System.Drawing.Point(712, 77);
-            this.cboOrd.Name = "cboOrd";
-            this.cboOrd.Properties.Appearance.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cboOrd.Properties.Appearance.Options.UseFont = true;
-            this.cboOrd.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cboOrd.Properties.NullText = "";
-            this.cboOrd.Properties.PopupView = this.gridView2;
-            this.cboOrd.Size = new System.Drawing.Size(162, 22);
-            this.cboOrd.TabIndex = 36;
-            this.cboOrd.EditValueChanged += new System.EventHandler(this.cboOrd_EditValueChanged);
-            // 
-            // gridView2
-            // 
-            this.gridView2.Appearance.Row.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.gridView2.Appearance.Row.Options.UseFont = true;
-            this.gridView2.DetailHeight = 193;
-            this.gridView2.FixedLineWidth = 1;
-            this.gridView2.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
-            this.gridView2.Name = "gridView2";
-            this.gridView2.OptionsSelection.EnableAppearanceFocusedCell = false;
-            this.gridView2.OptionsView.ShowGroupPanel = false;
-            // 
-            // lblHopDong
-            // 
-            this.lblHopDong.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblHopDong.Location = new System.Drawing.Point(43, 77);
-            this.lblHopDong.Name = "lblHopDong";
-            this.lblHopDong.Size = new System.Drawing.Size(105, 22);
-            this.lblHopDong.TabIndex = 35;
-            this.lblHopDong.Text = "Khách hàng";
-            // 
-            // lblMaHang
-            // 
-            this.lblMaHang.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblMaHang.Location = new System.Drawing.Point(322, 77);
-            this.lblMaHang.Name = "lblMaHang";
-            this.lblMaHang.Size = new System.Drawing.Size(105, 22);
-            this.lblMaHang.TabIndex = 35;
-            this.lblMaHang.Text = "Mã hàng";
-            // 
-            // lblOrder
-            // 
-            this.lblOrder.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblOrder.Location = new System.Drawing.Point(601, 77);
-            this.lblOrder.Name = "lblOrder";
-            this.lblOrder.Size = new System.Drawing.Size(105, 22);
-            this.lblOrder.TabIndex = 35;
-            this.lblOrder.Text = "Order";
-            // 
-            // lblChuyenSD
-            // 
-            this.lblChuyenSD.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblChuyenSD.Location = new System.Drawing.Point(43, 105);
-            this.lblChuyenSD.Name = "lblChuyenSD";
-            this.lblChuyenSD.Size = new System.Drawing.Size(105, 22);
-            this.lblChuyenSD.TabIndex = 35;
-            this.lblChuyenSD.Text = "Chuyền QTCN";
-            // 
-            // lblChuyen
-            // 
-            this.lblChuyen.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblChuyen.Location = new System.Drawing.Point(322, 105);
-            this.lblChuyen.Name = "lblChuyen";
-            this.lblChuyen.Size = new System.Drawing.Size(105, 22);
-            this.lblChuyen.TabIndex = 35;
-            this.lblChuyen.Text = "Chuyền TH";
-            // 
-            // cboChuSD
-            // 
-            this.cboChuSD.Cursor = System.Windows.Forms.Cursors.Default;
-            this.cboChuSD.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cboChuSD.Location = new System.Drawing.Point(154, 105);
-            this.cboChuSD.Name = "cboChuSD";
-            this.cboChuSD.Properties.Appearance.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cboChuSD.Properties.Appearance.Options.UseFont = true;
-            this.cboChuSD.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cboChuSD.Properties.NullText = "";
-            this.cboChuSD.Properties.PopupView = this.gridView3;
-            this.cboChuSD.Size = new System.Drawing.Size(162, 22);
-            this.cboChuSD.TabIndex = 36;
-            this.cboChuSD.EditValueChanged += new System.EventHandler(this.cboChuSD_EditValueChanged);
-            // 
-            // gridView3
-            // 
-            this.gridView3.Appearance.Row.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.gridView3.Appearance.Row.Options.UseFont = true;
-            this.gridView3.DetailHeight = 193;
-            this.gridView3.FixedLineWidth = 1;
-            this.gridView3.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
-            this.gridView3.Name = "gridView3";
-            this.gridView3.OptionsSelection.EnableAppearanceFocusedCell = false;
-            this.gridView3.OptionsView.ShowGroupPanel = false;
-            // 
-            // cboChuTH
-            // 
-            this.cboChuTH.Cursor = System.Windows.Forms.Cursors.Default;
-            this.cboChuTH.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cboChuTH.Location = new System.Drawing.Point(433, 105);
-            this.cboChuTH.Name = "cboChuTH";
-            this.cboChuTH.Properties.Appearance.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cboChuTH.Properties.Appearance.Options.UseFont = true;
-            this.cboChuTH.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cboChuTH.Properties.NullText = "";
-            this.cboChuTH.Properties.PopupView = this.gridView4;
-            this.cboChuTH.Size = new System.Drawing.Size(162, 22);
-            this.cboChuTH.TabIndex = 36;
-            this.cboChuTH.EditValueChanged += new System.EventHandler(this.cboChuTH_EditValueChanged);
-            // 
-            // gridView4
-            // 
-            this.gridView4.Appearance.Row.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.gridView4.Appearance.Row.Options.UseFont = true;
-            this.gridView4.DetailHeight = 193;
-            this.gridView4.FixedLineWidth = 1;
-            this.gridView4.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
-            this.gridView4.Name = "gridView4";
-            this.gridView4.OptionsSelection.EnableAppearanceFocusedCell = false;
-            this.gridView4.OptionsView.ShowGroupPanel = false;
-            // 
-            // panelControl2
-            // 
-            this.tableLayoutPanel1.SetColumnSpan(this.panelControl2, 8);
-            this.panelControl2.Controls.Add(this.searchControl2);
-            this.panelControl2.Controls.Add(this.btnThoat);
-            this.panelControl2.Controls.Add(this.simpleButton1);
-            this.panelControl2.Controls.Add(this.btnKChon);
-            this.panelControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelControl2.Location = new System.Drawing.Point(3, 503);
-            this.panelControl2.Name = "panelControl2";
-            this.panelControl2.Size = new System.Drawing.Size(914, 27);
-            this.panelControl2.TabIndex = 37;
-            // 
-            // searchControl2
-            // 
-            this.searchControl2.Dock = System.Windows.Forms.DockStyle.Left;
-            this.searchControl2.Location = new System.Drawing.Point(2, 2);
-            this.searchControl2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.searchControl2.Name = "searchControl2";
-            this.searchControl2.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.searchControl.Client = this.grdData;
+            this.searchControl.Location = new System.Drawing.Point(17, 7);
+            this.searchControl.Name = "searchControl";
+            this.searchControl.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Repository.ClearButton(),
             new DevExpress.XtraEditors.Repository.SearchButton()});
-            this.searchControl2.Size = new System.Drawing.Size(206, 24);
-            this.searchControl2.TabIndex = 39;
+            this.searchControl.Properties.Client = this.grdData;
+            this.searchControl.Properties.FindDelay = 100;
+            this.searchControl.Size = new System.Drawing.Size(192, 24);
+            this.searchControl.TabIndex = 10;
             // 
-            // btnThoat
+            // cboKHACH_HANG
             // 
-            this.btnThoat.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnThoat.Appearance.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnThoat.Appearance.Options.UseFont = true;
-            this.btnThoat.Location = new System.Drawing.Point(766, 2);
-            this.btnThoat.Name = "btnThoat";
-            this.btnThoat.Size = new System.Drawing.Size(144, 24);
-            this.btnThoat.TabIndex = 0;
-            this.btnThoat.Text = "Cập nhật và thoát";
-            this.btnThoat.Click += new System.EventHandler(this.btnThoat_Click);
+            this.cboKHACH_HANG.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cboKHACH_HANG.Location = new System.Drawing.Point(433, 8);
+            this.cboKHACH_HANG.Name = "cboKHACH_HANG";
+            this.cboKHACH_HANG.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cboKHACH_HANG.Properties.NullText = "";
+            this.cboKHACH_HANG.Properties.PopupView = this.searchLookUpEdit1View;
+            this.cboKHACH_HANG.Size = new System.Drawing.Size(162, 24);
+            this.cboKHACH_HANG.TabIndex = 43;
+            this.cboKHACH_HANG.EditValueChanged += new System.EventHandler(this.cboKHACH_HANG_EditValueChanged);
             // 
-            // simpleButton1
+            // searchLookUpEdit1View
             // 
-            this.simpleButton1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.simpleButton1.Appearance.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.simpleButton1.Appearance.Options.UseFont = true;
-            this.simpleButton1.Location = new System.Drawing.Point(538, 2);
-            this.simpleButton1.Name = "simpleButton1";
-            this.simpleButton1.Size = new System.Drawing.Size(108, 24);
-            this.simpleButton1.TabIndex = 0;
-            this.simpleButton1.Text = "Chọn tất cả";
-            this.simpleButton1.Click += new System.EventHandler(this.simpleButton1_Click);
+            this.searchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            this.searchLookUpEdit1View.Name = "searchLookUpEdit1View";
+            this.searchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.searchLookUpEdit1View.OptionsView.ShowGroupPanel = false;
             // 
-            // btnKChon
+            // cboChuyenTH
             // 
-            this.btnKChon.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnKChon.Appearance.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnKChon.Appearance.Options.UseFont = true;
-            this.btnKChon.Location = new System.Drawing.Point(652, 2);
-            this.btnKChon.Name = "btnKChon";
-            this.btnKChon.Size = new System.Drawing.Size(108, 24);
-            this.btnKChon.TabIndex = 0;
-            this.btnKChon.Text = "Không chọn";
-            this.btnKChon.Click += new System.EventHandler(this.btnKChon_Click);
+            this.cboChuyenTH.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cboChuyenTH.Location = new System.Drawing.Point(712, 8);
+            this.cboChuyenTH.Name = "cboChuyenTH";
+            this.cboChuyenTH.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cboChuyenTH.Properties.NullText = "";
+            this.cboChuyenTH.Properties.PopupView = this.searchLookUpEdit2View;
+            this.cboChuyenTH.Size = new System.Drawing.Size(162, 24);
+            this.cboChuyenTH.TabIndex = 44;
+            this.cboChuyenTH.EditValueChanged += new System.EventHandler(this.cboChuyenTH_EditValueChanged);
             // 
-            // btnThem
+            // searchLookUpEdit2View
             // 
-            this.btnThem.Appearance.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnThem.Appearance.Options.UseFont = true;
-            this.btnThem.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnThem.Location = new System.Drawing.Point(766, 105);
-            this.btnThem.Name = "btnThem";
-            this.btnThem.Size = new System.Drawing.Size(108, 22);
-            this.btnThem.TabIndex = 0;
-            this.btnThem.Text = "Thêm";
-            this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
-            // 
-            // grdHD
-            // 
-            this.tableLayoutPanel1.SetColumnSpan(this.grdHD, 8);
-            this.grdHD.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4);
-            this.grdHD.Location = new System.Drawing.Point(4, 134);
-            this.grdHD.MainView = this.grvHD;
-            this.grdHD.Margin = new System.Windows.Forms.Padding(4);
-            this.grdHD.Name = "grdHD";
-            this.grdHD.Size = new System.Drawing.Size(912, 354);
-            this.grdHD.TabIndex = 38;
-            this.grdHD.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.grvHD});
-            // 
-            // grvHD
-            // 
-            this.grvHD.DetailHeight = 457;
-            this.grvHD.FixedLineWidth = 3;
-            this.grvHD.GridControl = this.grdHD;
-            this.grvHD.Name = "grvHD";
-            this.grvHD.OptionsView.ShowGroupPanel = false;
+            this.searchLookUpEdit2View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            this.searchLookUpEdit2View.Name = "searchLookUpEdit2View";
+            this.searchLookUpEdit2View.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.searchLookUpEdit2View.OptionsView.ShowGroupPanel = false;
             // 
             // frmPCDHDMHChot
             // 
@@ -429,22 +264,16 @@
             this.Load += new System.EventHandler(this.frmPCDHDMHChot_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.optHT.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cboHD.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit3View)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cboMH.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cboOrd.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cboChuSD.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cboChuTH.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).EndInit();
-            this.panelControl2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.searchControl2.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.grdHD)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.grvHD)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grdData)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grvData)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.datThang.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.datThang.Properties)).EndInit();
+            this.windowsUIButton.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.searchControl.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cboKHACH_HANG.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cboChuyenTH.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit2View)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -452,30 +281,17 @@
         #endregion
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private DevExpress.XtraEditors.LabelControl lblTD;
-        private DevExpress.XtraEditors.RadioGroup optHT;
-        private DevExpress.XtraEditors.SearchLookUpEdit cboHD;
-        private DevExpress.XtraGrid.Views.Grid.GridView searchLookUpEdit3View;
-        private DevExpress.XtraEditors.SearchLookUpEdit cboMH;
-        private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
-        private DevExpress.XtraEditors.SearchLookUpEdit cboOrd;
-        private DevExpress.XtraGrid.Views.Grid.GridView gridView2;
-        private DevExpress.XtraEditors.LabelControl lblHopDong;
-        private DevExpress.XtraEditors.LabelControl lblMaHang;
-        private DevExpress.XtraEditors.LabelControl lblOrder;
-        private DevExpress.XtraEditors.LabelControl lblChuyenSD;
-        private DevExpress.XtraEditors.LabelControl lblChuyen;
-        private DevExpress.XtraEditors.SearchLookUpEdit cboChuSD;
-        private DevExpress.XtraGrid.Views.Grid.GridView gridView3;
-        private DevExpress.XtraEditors.SearchLookUpEdit cboChuTH;
-        private DevExpress.XtraGrid.Views.Grid.GridView gridView4;
-        private DevExpress.XtraEditors.SimpleButton btnThem;
-        private DevExpress.XtraEditors.PanelControl panelControl2;
-        private DevExpress.XtraEditors.SimpleButton btnThoat;
-        private DevExpress.XtraEditors.SimpleButton btnKChon;
-        private DevExpress.XtraEditors.SimpleButton simpleButton1;
-        private DevExpress.XtraEditors.SearchControl searchControl2;
-        private DevExpress.XtraGrid.GridControl grdHD;
-        private DevExpress.XtraGrid.Views.Grid.GridView grvHD;
+        private DevExpress.XtraEditors.LabelControl lblKhachHang;
+        private DevExpress.XtraEditors.LabelControl lblChuyenTH;
+        private DevExpress.XtraGrid.GridControl grdData;
+        private DevExpress.XtraGrid.Views.Grid.GridView grvData;
+        private DevExpress.XtraEditors.LabelControl lblThang;
+        private DevExpress.XtraEditors.DateEdit datThang;
+        private DevExpress.XtraBars.Docking2010.WindowsUIButtonPanel windowsUIButton;
+        private DevExpress.XtraEditors.SearchControl searchControl;
+        private DevExpress.XtraEditors.SearchLookUpEdit cboKHACH_HANG;
+        private DevExpress.XtraGrid.Views.Grid.GridView searchLookUpEdit1View;
+        private DevExpress.XtraEditors.SearchLookUpEdit cboChuyenTH;
+        private DevExpress.XtraGrid.Views.Grid.GridView searchLookUpEdit2View;
     }
 }

@@ -215,6 +215,7 @@ namespace Vs.TimeAttendance
                     {
                         TongHopDuLieu();
                         LoadLuoiNgay(dtNgayChamCong.DateTime);
+                        LoadGridCongNhan(dtNgayChamCong.DateTime);
                         XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msg_TongHopDL"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                         break;
                     }
@@ -943,7 +944,7 @@ namespace Vs.TimeAttendance
                 grvNgay.Columns["NGAY"].DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
                 grvNgay.Columns["NGAY"].DisplayFormat.FormatString = "dd/MM/yyyy";
 
-                grvNgay.Columns["TH"].Visible = true;
+                
                 grvNgay.OptionsSelection.ShowCheckBoxSelectorInColumnHeader = DevExpress.Utils.DefaultBoolean.True;
                 grvNgay.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CheckBoxRowSelect;
                 grvNgay.OptionsSelection.CheckBoxSelectorField = "TH";
@@ -966,6 +967,10 @@ namespace Vs.TimeAttendance
                 dt.Columns["MS_THE_CC"].ReadOnly = true;
                 Commons.Modules.ObjSystems.MLoadXtraGrid(grdDSCN, grvDSCN, dt, false, false, true, true, true, this.Name);
                 grvDSCN.Columns["ID_CN"].Visible = false;
+                grvDSCN.Columns["GIO_LV"].DisplayFormat.FormatType = FormatType.Numeric;
+                grvDSCN.Columns["GIO_LV"].DisplayFormat.FormatString = "0.00;(0.00);''";
+                grvDSCN.Columns["GIO_TC"].DisplayFormat.FormatType = FormatType.Numeric;
+                grvDSCN.Columns["GIO_TC"].DisplayFormat.FormatString = "0.00;(0.00);''";
                 grvDSCN.RefreshData();
             }
             catch
@@ -1352,6 +1357,23 @@ namespace Vs.TimeAttendance
             catch
             {
 
+            }
+        }
+
+        private void grvDSCN_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Modifiers == Keys.Control && e.KeyCode == Keys.F3)
+            {
+                frmViewDataGoc frm = new frmViewDataGoc();
+                DateTime dNgay = DateTime.Now.Date;
+                try { dNgay = dtNgayChamCong.DateTime; } catch { }
+
+                Int64 iIDCN = -1;
+                try { iIDCN = Int64.Parse(grvDSCN.GetFocusedRowCellValue("ID_CN").ToString()); } catch { }
+                frm.iIDCN = iIDCN;
+                frm.dNgayCC = dNgay;
+                frm.ShowDialog();
+                
             }
         }
     }

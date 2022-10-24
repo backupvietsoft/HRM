@@ -339,6 +339,8 @@ H:\Lamviec\Lamviec\HRM\01.HRM\04.Vs.HRM\Vs.HRM\obj\Release\Vs.HRM.csproj.CopyCom
 H:\Lamviec\Lamviec\HRM\01.HRM\04.Vs.HRM\Vs.HRM\obj\Release\Vs.HRM.dll
 H:\Lamviec\Lamviec\HRM\01.HRM\04.Vs.HRM\Vs.HRM\obj\Release\Vs.HRM.pdb
 H:\Lamviec\Lamviec\HRM\01.HRM\04.Vs.HRM\Vs.HRM\obj\Release\Vs.HRM.frmTaoHDLD.resources
+F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Release\VS.Report.dll
+F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Release\Vs.HRM.dll
 F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Release\Template\TemplateGiamLaoDong.xlsx
 F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Release\Template\TemplateTaiNanLaoDong.xlsx
 F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Release\Template\TemplateTangLaoDong.xlsx
@@ -403,7 +405,6 @@ F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Release\DevExpress.XtraTreeMap.v22.1.dll
 F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Release\DevExpress.XtraTreeMap.v22.1.UI.dll
 F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Release\Microsoft.ApplicationBlocks.Data.dll
 F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Release\Vs.Recruit.dll
-F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Release\VS.Report.dll
 F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Release\EPPlus.dll
 F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Release\NPOI.dll
 F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Release\NPOI.OOXML.dll
@@ -562,5 +563,4 @@ F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Release\Vs.HRM.csproj.GenerateResource.cache
 F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Release\Vs.HRM.dll.licenses
 F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Release\Vs.HRM.csproj.CoreCompileInputs.cache
 F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Release\Vs.HRM.csproj.CopyComplete
-F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Release\Vs.HRM.dll
 F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Release\Vs.HRM.pdb

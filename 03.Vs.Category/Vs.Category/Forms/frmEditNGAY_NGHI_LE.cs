@@ -38,8 +38,8 @@ namespace Vs.Category
         {
             try
             {
-                string sSql = "SELECT ID_NNL,NGAY, LY_DO, LY_DO_A, LY_DO_H, STT " +
-                    "FROM NGAY_NGHI_LE WHERE ID_NNL = " + Id ;
+                string sSql = "SELECT ID_NNL,NGAY, LY_DO, LY_DO_A, LY_DO_H, ISNULL(NGHI_BU,0) NGHI_BU ,STT " +
+                    "FROM NGAY_NGHI_LE WHERE ID_NNL = " + Id;
                 DataTable dtTmp = new DataTable();
                 dtTmp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSql));
                 NGAYDateEdit.EditValue = dtTmp.Rows[0]["NGAY"];
@@ -47,6 +47,7 @@ namespace Vs.Category
                 LY_DO_ATextEdit.EditValue = dtTmp.Rows[0]["LY_DO_A"].ToString();
                 LY_DO_HTextEdit.EditValue = dtTmp.Rows[0]["LY_DO_H"].ToString();
                 txtSTT.EditValue = dtTmp.Rows[0]["STT"].ToString();
+                chkNghiBu.EditValue = Convert.ToBoolean(dtTmp.Rows[0]["NGHI_BU"]);
             }
             catch (Exception EX)
             {
@@ -64,6 +65,7 @@ namespace Vs.Category
                 LY_DOTextEdit.EditValue = String.Empty;
                 LY_DO_ATextEdit.EditValue = String.Empty;
                 LY_DO_HTextEdit.EditValue = String.Empty;
+                chkNghiBu.Checked = false;
             }
             catch { }
         }
@@ -83,7 +85,7 @@ namespace Vs.Category
                             try
                             {
                                 DataTable dt = new DataTable();
-                                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spUpdateNGAY_NGHI_LE", (AddEdit ? 1 : 0), NGAYDateEdit.EditValue, LY_DOTextEdit.EditValue.ToString(), LY_DO_ATextEdit.Text, LY_DO_HTextEdit.Text ,(txtSTT.Text == "") ? txtSTT.EditValue = null : txtSTT.EditValue));
+                                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spUpdateNGAY_NGHI_LE", (AddEdit ? 1 : 0), NGAYDateEdit.EditValue, LY_DOTextEdit.EditValue.ToString(), LY_DO_ATextEdit.Text, LY_DO_HTextEdit.Text, (txtSTT.Text == "") ? txtSTT.EditValue = null : txtSTT.EditValue, chkNghiBu.EditValue));
 
                                 if (AddEdit)
                                 {
@@ -124,7 +126,7 @@ namespace Vs.Category
                 string sSql = "";
                 if (AddEdit)
                 {
-                    sSql = "SELECT COUNT(*) FROM NGAY_NGHI_LE WHERE CONVERT(NVARCHAR,NGAY,112) = '" + Convert.ToDateTime(NGAYDateEdit.EditValue).ToString("yyyyMMdd") +"'";
+                    sSql = "SELECT COUNT(*) FROM NGAY_NGHI_LE WHERE CONVERT(NVARCHAR,NGAY,112) = '" + Convert.ToDateTime(NGAYDateEdit.EditValue).ToString("yyyyMMdd") + "'";
                     if (Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, sSql)) != 0)
                     {
                         XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msg_NgayTrung"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -139,6 +141,6 @@ namespace Vs.Category
                 return true;
             }
             return false;
-        }       
+        }
     }
 }

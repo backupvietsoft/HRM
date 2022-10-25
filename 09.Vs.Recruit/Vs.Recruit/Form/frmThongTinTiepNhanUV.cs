@@ -14,12 +14,7 @@ namespace Vs.Recruit
 {
     public partial class frmThongTinTiepNhanUV : DevExpress.XtraEditors.XtraForm
     {
-        private ucCTQLUV ucUV;
-        private long iID_UV;
-        private int iMS_CV;
         public AccordionControl accorMenuleft;
-        private int dem = 0;
-        private string sNGayChuyen = "";
         private long iID_YCTD = -1;
         private long iID_VTTD = -1;
         public DataTable dtTemp;
@@ -34,7 +29,7 @@ namespace Vs.Recruit
             try
             {
                 Commons.Modules.sLoad = "0Load";
-                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboNGUOI_DT, Commons.Modules.ObjSystems.TruongBoPhan(), "ID_CN", "HO_TEN", "HO_TEN", true, true);
+                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboNGUOI_DT, Commons.Modules.ObjSystems.TruongBoPhan(Convert.ToInt64(dtTemp.Rows[0]["ID_YCTD"])), "ID_CN", "HO_TEN", "HO_TEN", true, true);
                 //Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_NGUOI_CHUYEN, Commons.Modules.ObjSystems.TruongBoPhan(), "ID_CN", "HO_TEN", "HO_TEN", true, true);
 
                 DataTable dt = new DataTable();
@@ -46,6 +41,7 @@ namespace Vs.Recruit
                 //Commons.OSystems.SetDateEditFormat(datNGAY_NHAN_VIEC);
                 Commons.Modules.sLoad = "";
                 cboID_LHDLD.EditValue = 7;
+                cboNGUOI_DT.EditValue = -99;
             }
             catch (Exception ex) { }
         }

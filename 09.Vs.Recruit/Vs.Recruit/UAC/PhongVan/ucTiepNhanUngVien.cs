@@ -268,6 +268,7 @@ namespace Vs.Recruit
                         dr = grvDSUngVien.GetDataRow(selectedRowHandle);
                         row = dt.NewRow();
                         row["ID_UV"] = dr["ID_UV"];
+                        row["ID_YCTD"] = dr["ID_YCTD"];
                         dt.Rows.Add(row);
                     }
                 }

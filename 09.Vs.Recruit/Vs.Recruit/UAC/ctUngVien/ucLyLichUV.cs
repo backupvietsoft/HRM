@@ -756,8 +756,6 @@ namespace Vs.Recruit
             try
             {
                 GridView view = sender as GridView;
-                view.PostEditor();
-                view.UpdateCurrentRow();
                 if (view == null) return;
                 if (view.FocusedColumn.FieldName == "TU_NAM")
                 {//kiểm tra máy không được để trống
@@ -771,7 +769,6 @@ namespace Vs.Recruit
                         return;
                     }
                 }
-
                 if (view.FocusedColumn.FieldName == "DEN_NAM")
                 {//kiểm tra máy không được để trống
                     DateTime DN = Convert.ToDateTime(e.Value.ToString());
@@ -784,14 +781,11 @@ namespace Vs.Recruit
                         return;
                     }
                 }
-
-
             }
             catch
             {
 
             }
-
         }
 
         private void grvKNLV_InvalidRowException(object sender, DevExpress.XtraGrid.Views.Base.InvalidRowExceptionEventArgs e)

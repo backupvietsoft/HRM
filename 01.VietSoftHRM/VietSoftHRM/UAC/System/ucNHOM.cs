@@ -38,8 +38,15 @@ namespace VietSoftHRM
         }
         private void grvNhom_Click(object sender, EventArgs e)
         {
-            grid = 1;
-            Commons.Modules.sIdHT = grvNhom.GetFocusedRowCellValue("ID_NHOM").ToString();
+            try
+            {
+                grid = 1;
+                Commons.Modules.sIdHT = grvNhom.GetFocusedRowCellValue("ID_NHOM").ToString();
+            }
+            catch
+            {
+            }
+
         }
         private void grdUser_ProcessGridKey(object sender, KeyEventArgs e)
         {
@@ -140,6 +147,7 @@ namespace VietSoftHRM
                     }
                 case "khongluu":
                     {
+                        LoadgrdNhom();
                         enabledControl(true);
                         enableButon(true);
                         DeleteAddRow(grvNhom);
@@ -230,7 +238,7 @@ namespace VietSoftHRM
                 SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "DELETE dbo.NHOM WHERE ID_NHOM = " + grvNhom.GetFocusedRowCellValue("ID_NHOM") + "");
                 grvNhom.DeleteSelectedRows();
                 LoadUser();
-                grvNhom_FocusedRowChanged(null,null);
+                grvNhom_FocusedRowChanged(null, null);
             }
             catch (Exception ex)
             {
@@ -239,7 +247,7 @@ namespace VietSoftHRM
         }
         private void XoaUser()
         {
-            if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDeleteUser"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo,MessageBoxIcon.Question) == DialogResult.No) return;
+            if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDeleteUser"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) return;
             //xóa
             try
             {
@@ -321,18 +329,15 @@ namespace VietSoftHRM
         {
             if (enabled == true)
             {
-                grdUser.Enabled = true;
                 grdNhom.Enabled = true;
                 return;
             }
             if (grid == 1)
             {
-                grdUser.Enabled = enabled;
                 grdNhom.Enabled = !enabled;
             }
             else
             {
-                grdUser.Enabled = !enabled;
                 grdNhom.Enabled = enabled;
             }
         }
@@ -381,13 +386,19 @@ namespace VietSoftHRM
 
         private void grvNhom_ValidateRow(object sender, DevExpress.XtraGrid.Views.Base.ValidateRowEventArgs e)
         {
-            DevExpress.XtraGrid.Views.Grid.GridView View = (DevExpress.XtraGrid.Views.Grid.GridView)sender;
-            DevExpress.XtraGrid.Columns.GridColumn sTenNhom = View.Columns["TEN_NHOM"];
-            if (View.GetRowCellValue(e.RowHandle, sTenNhom).ToString() == "")
+            try
             {
-                e.Valid = false;
-                View.SetColumnError(sTenNhom, Commons.Modules.ObjLanguages.GetLanguage(Commons.Modules.ModuleName, this.Name, "MsgTenNhomKhongNull", Commons.Modules.TypeLanguage));
-                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "MsgKiemtraTenUserNULL"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning); return;
+                DevExpress.XtraGrid.Views.Grid.GridView View = (DevExpress.XtraGrid.Views.Grid.GridView)sender;
+                DevExpress.XtraGrid.Columns.GridColumn sTenNhom = View.Columns["TEN_NHOM"];
+                if (View.GetRowCellValue(e.RowHandle, sTenNhom).ToString() == "")
+                {
+                    e.Valid = false;
+                    View.SetColumnError(sTenNhom, Commons.Modules.ObjLanguages.GetLanguage(Commons.Modules.ModuleName, this.Name, "MsgTenNhomKhongNull", Commons.Modules.TypeLanguage));
+                    XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "MsgKiemtraTenUserNULL"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning); return;
+                }
+            }
+            catch
+            {
             }
         }
 

@@ -2350,3 +2350,4 @@ H:\Lamviec\Lamviec\HRM\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\V
 H:\Lamviec\Lamviec\HRM\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.TimeAttendance.csproj.CopyComplete
 H:\Lamviec\Lamviec\HRM\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.TimeAttendance.dll
 H:\Lamviec\Lamviec\HRM\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.TimeAttendance.pdb
+D:\01.SourceCode\02.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.TimeAttendance.frmViewDataGoc.resources

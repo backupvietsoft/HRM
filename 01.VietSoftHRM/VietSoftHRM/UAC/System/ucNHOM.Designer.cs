@@ -83,7 +83,7 @@
             // 
             this.splitContainerControl1.Panel2.Controls.Add(this.grpUser);
             this.splitContainerControl1.Panel2.Text = "Panel2";
-            this.splitContainerControl1.Size = new System.Drawing.Size(1004, 476);
+            this.splitContainerControl1.Size = new System.Drawing.Size(1085, 563);
             this.splitContainerControl1.SplitterPosition = 285;
             this.splitContainerControl1.TabIndex = 0;
             // 
@@ -93,7 +93,7 @@
             this.grpNhomUser.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grpNhomUser.Location = new System.Drawing.Point(0, 0);
             this.grpNhomUser.Name = "grpNhomUser";
-            this.grpNhomUser.Size = new System.Drawing.Size(285, 476);
+            this.grpNhomUser.Size = new System.Drawing.Size(285, 563);
             this.grpNhomUser.TabIndex = 0;
             this.grpNhomUser.Text = "Nhóm";
             // 
@@ -101,13 +101,13 @@
             // 
             this.gridSplitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridSplitContainer1.Grid = this.grdNhom;
-            this.gridSplitContainer1.Location = new System.Drawing.Point(2, 21);
+            this.gridSplitContainer1.Location = new System.Drawing.Point(2, 24);
             this.gridSplitContainer1.Name = "gridSplitContainer1";
             // 
             // gridSplitContainer1.Panel1
             // 
             this.gridSplitContainer1.Panel1.Controls.Add(this.grdNhom);
-            this.gridSplitContainer1.Size = new System.Drawing.Size(281, 453);
+            this.gridSplitContainer1.Size = new System.Drawing.Size(281, 537);
             this.gridSplitContainer1.TabIndex = 0;
             // 
             // grdNhom
@@ -116,7 +116,7 @@
             this.grdNhom.Location = new System.Drawing.Point(0, 0);
             this.grdNhom.MainView = this.grvNhom;
             this.grdNhom.Name = "grdNhom";
-            this.grdNhom.Size = new System.Drawing.Size(281, 453);
+            this.grdNhom.Size = new System.Drawing.Size(281, 537);
             this.grdNhom.TabIndex = 0;
             this.grdNhom.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grvNhom});
@@ -139,17 +139,17 @@
             this.grpUser.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grpUser.Location = new System.Drawing.Point(0, 0);
             this.grpUser.Name = "grpUser";
-            this.grpUser.Size = new System.Drawing.Size(709, 476);
+            this.grpUser.Size = new System.Drawing.Size(794, 563);
             this.grpUser.TabIndex = 0;
             this.grpUser.Text = "Danh sách User theo Nhóm";
             // 
             // grdUser
             // 
             this.grdUser.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.grdUser.Location = new System.Drawing.Point(2, 21);
+            this.grdUser.Location = new System.Drawing.Point(2, 24);
             this.grdUser.MainView = this.grvUser;
             this.grdUser.Name = "grdUser";
-            this.grdUser.Size = new System.Drawing.Size(705, 453);
+            this.grdUser.Size = new System.Drawing.Size(790, 537);
             this.grdUser.TabIndex = 1;
             this.grdUser.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grvUser});
@@ -191,11 +191,11 @@
             this.windowsUIButton.Controls.Add(this.searchControl);
             this.windowsUIButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.windowsUIButton.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.windowsUIButton.Location = new System.Drawing.Point(0, 476);
+            this.windowsUIButton.Location = new System.Drawing.Point(0, 563);
             this.windowsUIButton.Margin = new System.Windows.Forms.Padding(4);
             this.windowsUIButton.Name = "windowsUIButton";
             this.windowsUIButton.Padding = new System.Windows.Forms.Padding(4);
-            this.windowsUIButton.Size = new System.Drawing.Size(1004, 34);
+            this.windowsUIButton.Size = new System.Drawing.Size(1085, 34);
             this.windowsUIButton.TabIndex = 1;
             this.windowsUIButton.Text = "windowsUIButtonPanel1";
             this.windowsUIButton.UseButtonBackgroundImages = false;
@@ -222,7 +222,7 @@
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControl1.Location = new System.Drawing.Point(0, 0);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(1004, 510);
+            this.panelControl1.Size = new System.Drawing.Size(1085, 597);
             this.panelControl1.TabIndex = 2;
             // 
             // ucNHOM
@@ -233,7 +233,7 @@
             this.Controls.Add(this.windowsUIButton);
             this.Controls.Add(this.panelControl1);
             this.Name = "ucNHOM";
-            this.Size = new System.Drawing.Size(1004, 510);
+            this.Size = new System.Drawing.Size(1085, 597);
             this.Load += new System.EventHandler(this.ucNHOM_Load);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1.Panel1)).EndInit();
             this.splitContainerControl1.Panel1.ResumeLayout(false);

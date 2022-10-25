@@ -343,7 +343,6 @@ namespace Vs.Recruit
                 adp.Fill(ds);
                 DataTable dt = new DataTable();
                 dt = ds.Tables[0].Copy();
-
                 Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboYCTD, dt, "ID_YCTD", "MA_YCTD", "");
                 Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_VTTD, Commons.Modules.ObjSystems.DataViTri(Convert.ToInt64(cboYCTD.EditValue), false), "ID_VTTD", "TEN_VTTD", "TEN_VTTD");
                 Commons.Modules.ObjSystems.MLoadLookUpEdit(cboTayNghe, Commons.Modules.ObjSystems.DataTayNghe(false), "ID_TAY_NGHE", "TEN_TAY_NGHE", "TEN_TAY_NGHE");

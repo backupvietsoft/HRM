@@ -5318,10 +5318,10 @@ namespace Commons
             return dt;
         }
 
-        public DataTable TruongBoPhan()
+        public DataTable TruongBoPhan(Int64 iID_YCTD)
         {
             DataTable dt = new DataTable();
-            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComBoTruongBoPhan", Commons.Modules.TypeLanguage));
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComBoTruongBoPhan", iID_YCTD));
             return dt;
         }
 

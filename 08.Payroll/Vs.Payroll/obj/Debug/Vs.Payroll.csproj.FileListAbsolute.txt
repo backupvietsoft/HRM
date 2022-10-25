@@ -2312,7 +2312,6 @@ D:\01.SourceCode\02.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.frmDonHangBan
 D:\01.SourceCode\02.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.frmEditMaHang.resources
 D:\01.SourceCode\02.HRM\08.Payroll\Vs.Payroll\obj\Debug\VS.OEE.frmImport.resources
 D:\01.SourceCode\02.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.frmImportTienThuongPhuCap.resources
-D:\01.SourceCode\02.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.Form.frmInBaoCaoPCD.resources
 D:\01.SourceCode\02.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.frmInBaoCaoHTTienDo.resources
 D:\01.SourceCode\02.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.frmLayDuLieuLuongT13.resources
 D:\01.SourceCode\02.HRM\08.Payroll\Vs.Payroll\obj\Debug\VS.ERP.frmPhieuNhapKho_Import.resources
@@ -2685,3 +2684,4 @@ H:\Lamviec\Lamviec\HRM\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.pdb
 F:\01.HRM\08.Payroll\Vs.Payroll\bin\Debug\DevExpress.PivotGrid.v22.1.Core.dll
 F:\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\VS.ERP.frmPhieuNhapKho_Import.resources
 F:\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.srptThietBi.resources
+D:\01.SourceCode\02.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.frmInBaoCaoPCD.resources

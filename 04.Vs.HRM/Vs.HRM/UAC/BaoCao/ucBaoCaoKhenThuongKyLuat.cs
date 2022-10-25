@@ -236,5 +236,11 @@ namespace Vs.HRM
             dTuNgay.EditValue = Convert.ToDateTime(("01/" + dtThang.Text), new CultureInfo("de-DE"));
             dDenNgay.EditValue = Convert.ToDateTime(("01/" + dtThang.Text), new CultureInfo("de-DE")).AddMonths(1).AddDays(-1);
         }
+
+        private void LK_TO_EditValueChanged(object sender, EventArgs e)
+        {
+            if (Commons.Modules.sLoad == "0Load") return;
+            LoadNhanSu();
+        }
     }
 }

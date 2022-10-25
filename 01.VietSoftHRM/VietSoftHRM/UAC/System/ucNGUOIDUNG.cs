@@ -29,7 +29,7 @@ namespace VietSoftHRM
             Commons.Modules.sLoad = "0Load";
             Commons.Modules.ObjSystems.SetPhanQuyen(windowsUIButton);
             ///////LoadComboTo();
-           /////// LoadComboCN();
+            /////// LoadComboCN();
             LoadComboNhom();
             LoadUser(-1);
             enableButon(true);
@@ -97,7 +97,8 @@ namespace VietSoftHRM
 
                             if (chkLIC.Checked)
                             {
-                                int lic = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT COUNT(*) FROM dbo.USERS WHERE LIC = 1 AND ID_USER != " + grvNguoiDung.GetFocusedRowCellValue("ID_USER") + ""));
+                                int lic = 0;
+                                try { lic = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT COUNT(*) FROM dbo.USERS WHERE LIC = 1 AND ID_USER != " + grvNguoiDung.GetFocusedRowCellValue("ID_USER") + "")); } catch { }
                                 if (lic >= Commons.Modules.iLic)
                                 {
                                     XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgLincenseDaHet"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -105,7 +106,7 @@ namespace VietSoftHRM
                                 }
                             }
 
-                            var s = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spGhiUser", (grvNguoiDung.RowCount == 0 ? "" : grvNguoiDung.GetFocusedRowCellValue("ID_USER").ToString()) == "" ?  DBNull.Value : grvNguoiDung.GetFocusedRowCellValue("ID_USER"), ID_NHOMComboBoxEdit.Text == "" ? ID_NHOMComboBoxEdit.EditValue = null : Convert.ToInt64(ID_NHOMComboBoxEdit.EditValue), USER_NAMETextEdit.EditValue, FULL_NAMETextEdit.EditValue, Commons.Modules.ObjSystems.Encrypt(PASSWORDTextEdit.EditValue.ToString(), true), DESCRIPTIONMemoExEdit.EditValue, USER_MAILTextEdit.EditValue, Convert.ToInt32(ACTIVECheckEdit.EditValue), Convert.ToBoolean(co), Commons.Modules.ObjSystems.Encrypt(USER_NAMETextEdit.EditValue.ToString() + Convert.ToBoolean(chkLIC.EditValue).ToString(), true), Convert.ToBoolean(chkKhach.Checked), Convert.ToBoolean(chkLIC.Checked));
+                            var s = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spGhiUser", (grvNguoiDung.RowCount == 0 ? "" : grvNguoiDung.GetFocusedRowCellValue("ID_USER").ToString()) == "" ? DBNull.Value : grvNguoiDung.GetFocusedRowCellValue("ID_USER"), ID_NHOMComboBoxEdit.Text == "" ? ID_NHOMComboBoxEdit.EditValue = null : Convert.ToInt64(ID_NHOMComboBoxEdit.EditValue), USER_NAMETextEdit.EditValue, FULL_NAMETextEdit.EditValue, Commons.Modules.ObjSystems.Encrypt(PASSWORDTextEdit.EditValue.ToString(), true), DESCRIPTIONMemoExEdit.EditValue, USER_MAILTextEdit.EditValue, Convert.ToInt32(ACTIVECheckEdit.EditValue), Convert.ToBoolean(co), Commons.Modules.ObjSystems.Encrypt(USER_NAMETextEdit.EditValue.ToString() + Convert.ToBoolean(chkLIC.EditValue).ToString(), true), Convert.ToBoolean(chkKhach.Checked), Convert.ToBoolean(chkLIC.Checked));
                             Enablecontrol(true);
                             LoadUser(Convert.ToInt32(s));
                             enableButon(true);
@@ -139,7 +140,7 @@ namespace VietSoftHRM
             ACTIVECheckEdit.EditValue = Convert.ToBoolean(grvNguoiDung.GetFocusedRowCellValue("ACTIVE"));
             chkLIC.EditValue = Convert.ToBoolean(grvNguoiDung.GetFocusedRowCellValue("LIC"));
             ID_NHOMComboBoxEdit.EditValue = grvNguoiDung.GetFocusedRowCellValue("ID_NHOM");
-           /// ID_TOComboBoxEdit.EditValue = grvNguoiDung.GetFocusedRowCellValue("ID_TO");
+            /// ID_TOComboBoxEdit.EditValue = grvNguoiDung.GetFocusedRowCellValue("ID_TO");
             ////ID_CNSearchLookUpEdit.EditValue = grvNguoiDung.GetFocusedRowCellValue("ID_CN");
             FULL_NAMETextEdit.EditValue = grvNguoiDung.GetFocusedRowCellValue("FULL_NAME");
             PASSWORDTextEdit.EditValue = Commons.Modules.ObjSystems.Decrypt(grvNguoiDung.GetFocusedRowCellValue("PASSWORD").ToString(), true);
@@ -216,8 +217,8 @@ namespace VietSoftHRM
             ACTIVECheckEdit.Properties.ReadOnly = enable;
             chkLIC.Properties.ReadOnly = enable;
             ID_NHOMComboBoxEdit.Properties.ReadOnly = enable;
-           /// ID_TOComboBoxEdit.Properties.ReadOnly = enable;
-           // ID_CNSearchLookUpEdit.Properties.ReadOnly = enable;
+            /// ID_TOComboBoxEdit.Properties.ReadOnly = enable;
+            // ID_CNSearchLookUpEdit.Properties.ReadOnly = enable;
             FULL_NAMETextEdit.Properties.ReadOnly = enable;
             PASSWORDTextEdit.Properties.ReadOnly = enable;
             USER_MAILTextEdit.Properties.ReadOnly = enable;
@@ -231,8 +232,8 @@ namespace VietSoftHRM
             ACTIVECheckEdit.Checked = true;
             chkLIC.Checked = false;
             ID_NHOMComboBoxEdit.ResetText();
-           ///ID_TOComboBoxEdit.ResetText();
-           /// ID_CNSearchLookUpEdit.ResetText();
+            ///ID_TOComboBoxEdit.ResetText();
+            /// ID_CNSearchLookUpEdit.ResetText();
             FULL_NAMETextEdit.ResetText();
             PASSWORDTextEdit.ResetText();
             USER_MAILTextEdit.ResetText();

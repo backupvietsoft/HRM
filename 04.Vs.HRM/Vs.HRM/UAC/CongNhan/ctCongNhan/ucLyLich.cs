@@ -1032,82 +1032,89 @@ namespace Vs.HRM
                     sTBBangCap = "";
                 }
                 Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sTBBangCap, Commons.Modules.ObjSystems.ConvertDatatable(grvBangCapCN), "");
-                Commons.Modules.iCongNhan = Convert.ToInt64(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spUpdateCongNhan",
-                Commons.Modules.iCongNhan,
-                imgToByteConverter(HINH_CNPictureEdit.Image),
-                MS_CNTextEdit.EditValue,
-                MS_THE_CCTextEdit.EditValue,
-                ID_QGLookUpEdit.Text.ToString() == "" ? DBNull.Value : ID_QGLookUpEdit.EditValue,
-                HOTextEdit.EditValue,
-                TENTextEdit.EditValue,
-                TEN_KHONG_DAUTextEdit.EditValue,
-                NGAY_SINHDateEdit.EditValue,
-                NAM_SINHDateEdit.Text.ToString() == "" ? NAM_SINHDateEdit.EditValue = null : Convert.ToInt32(NAM_SINHDateEdit.EditValue),
-                PHAILookupEdit.EditValue,
-                ID_TOLookupEdit.Text.ToString() == "" ? ID_TOLookupEdit.EditValue = null : ID_TOLookupEdit.EditValue,
-                ID_CVLookUpEdit.Text.ToString() == "" ? ID_CVLookUpEdit.EditValue = null : ID_CVLookUpEdit.EditValue,
-                ID_LCVLookUpEdit.Text.ToString() == "" ? ID_LCVLookUpEdit.EditValue = null : ID_LCVLookUpEdit.EditValue,
-                PHEP_CTTextEdit.EditValue,
-                NGAY_HOC_VIECDateEdit.Text.ToString() == "" ? DBNull.Value : NGAY_HOC_VIECDateEdit.EditValue,
-                NGAY_THU_VIECDateEdit.Text.ToString() == "" ? DBNull.Value : NGAY_THU_VIECDateEdit.EditValue,
-                NGAY_VAO_LAMDateEdit.Text.ToString() == "" ? DBNull.Value : NGAY_VAO_LAMDateEdit.EditValue,
-                ID_TT_HDLookUpEdit.Text.ToString() == "" ? ID_TT_HDLookUpEdit.EditValue = null : ID_TT_HDLookUpEdit.EditValue,
-                ID_TT_HTLookUpEdit.Text.ToString() == "" ? ID_TT_HTLookUpEdit.EditValue = null : ID_TT_HTLookUpEdit.EditValue,
-                HINH_THUC_TUYENTextEdit.EditValue,
-                LAO_DONG_CNCheckEdit.EditValue,
-                TRUC_TIEP_SXCheckEdit.EditValue,
-                LD_TINHCheckEdit.EditValue,
-                VAO_LAM_LAICheckEdit.EditValue,
-                SO_CMNDTextEdit.EditValue,
-                NGAY_CAPDateEdit.Text.ToString() == "" ? DBNull.Value : NGAY_CAPDateEdit.EditValue,
-                txtNOI_CAP.Text,
-                ID_TT_HNLookUpEdit.Text.ToString() == "" ? ID_TT_HNLookUpEdit.EditValue = null : ID_TT_HNLookUpEdit.EditValue,
-                MS_THUETextEdit.EditValue,
-                MA_THE_ATMTextEdit.EditValue,
-                SO_TAI_KHOANTextEdit.EditValue,
-                CHUYEN_MONTextEdit.EditValue,
-                ID_LOAI_TDLookUpEdit.Text.ToString() == "" ? ID_LOAI_TDLookUpEdit.EditValue = null : ID_LOAI_TDLookUpEdit.EditValue,
-                ID_TDVHLookUpEdit.Text.ToString() == "" ? ID_TDVHLookUpEdit.EditValue = null : ID_TDVHLookUpEdit.EditValue,
-                NGOAI_NGUTextEdit.EditValue,
-                DT_NHATextEdit.EditValue,
-                DT_NGUOI_THANTextEdit.EditValue,
-                DT_DI_DONGTextEdit.EditValue,
-                EMAILTextEdit.EditValue,
-                NOI_SINHTextEdit.EditValue,
-                NGUYEN_QUANTextEdit.EditValue,
-                ID_DTLookUpEdit.Text.ToString() == "" ? ID_DTLookUpEdit.EditValue = null : ID_DTLookUpEdit.EditValue,
-                TON_GIAOTextEdit.EditValue,
-                DIA_CHI_THUONG_TRUTextEdit.EditValue,
-                ID_TPLookUpEdit.Text.ToString() == "" ? ID_TPLookUpEdit.EditValue = null : ID_TPLookUpEdit.EditValue,
-                ID_QUANLookEdit.Text.ToString() == "" ? ID_QUANLookEdit.EditValue = null : ID_QUANLookEdit.EditValue,
-                ID_PXLookUpEdit.Text.ToString() == "" ? ID_PXLookUpEdit.EditValue = null : ID_PXLookUpEdit.EditValue,
-                THON_XOMTextEdit.EditValue,
-                DIA_CHI_TAM_TRUTextEdit.EditValue,
-                ID_TP_TAM_TRULookUpEdit.Text.ToString() == "" ? ID_TP_TAM_TRULookUpEdit.EditValue = null : ID_TP_TAM_TRULookUpEdit.EditValue,
-                ID_QUAN_TAM_TRULookUpEdit.Text.ToString() == "" ? ID_QUAN_TAM_TRULookUpEdit.EditValue = null : ID_QUAN_TAM_TRULookUpEdit.EditValue,
-                ID_PX_TAM_TRULookUpEdit.Text.ToString() == "" ? ID_PX_TAM_TRULookUpEdit.EditValue = null : ID_PX_TAM_TRULookUpEdit.EditValue,
-                THON_XOM_TAM_TRUTextEdit.EditValue,
-                SO_BHXHTextEdit.EditValue,
-                NGAY_DBHXHDateEdit.Text.ToString() == "" ? DBNull.Value : NGAY_DBHXHDateEdit.EditValue,
-                NGAY_CHAM_DUT_NOP_BHXHDateEdit.Text.ToString() == "" ? DBNull.Value : NGAY_CHAM_DUT_NOP_BHXHDateEdit.EditValue,
-                THAM_GIA_BHXHCheckEdit.EditValue,
-                SO_THE_BHYTTextEdit.EditValue,
-                NGAY_HET_HANDateEdit.Text.ToString() == "" ? DBNull.Value : NGAY_HET_HANDateEdit.EditValue,
-                TINH_THANHLookUpEdit.Text.ToString() == "" ? TINH_THANHLookUpEdit.EditValue = null : TINH_THANHLookUpEdit.EditValue,
-                BENH_VIENLookUpEdit.Text.ToString() == "" ? BENH_VIENLookUpEdit.EditValue = null : BENH_VIENLookUpEdit.EditValue,
-                LD_NNCheckEdit.EditValue,
-                SO_GIAY_PHEPTextEdit.EditValue,
-                NGAY_CAP_GPDateEdit.Text.ToString() == "" ? DBNull.Value : NGAY_CAP_GPDateEdit.EditValue,
-                LOAI_QUOC_TICHLookUpEdit.Text.ToString() == "" ? LOAI_QUOC_TICHLookUpEdit.EditValue = null : LOAI_QUOC_TICHLookUpEdit.EditValue,
-                CAP_GIAY_PHEPLookUpEdit.Text.ToString() == "" ? CAP_GIAY_PHEPLookUpEdit.EditValue = null : CAP_GIAY_PHEPLookUpEdit.EditValue,
-                NGAY_HH_GPDateEdit.Text.ToString() == "" ? DBNull.Value : NGAY_HH_GPDateEdit.EditValue,
-                LD_GIAM_LDNNLookUpEdit.Text.ToString() == "" ? LD_GIAM_LDNNLookUpEdit.EditValue = null : LD_GIAM_LDNNLookUpEdit.EditValue,
-                cboID_KV.Text.ToString() == "" ? cboID_KV.EditValue = null : cboID_KV.EditValue,
-                cothem, sTBBangCap, txtDIA_CHI_KS.Text,
-                cboID_TP_KS.Text.ToString() == "" ? cboID_TP_KS.EditValue = null : cboID_TP_KS.EditValue,
-                cboID_QUAN_KS.Text.ToString() == "" ? cboID_QUAN_KS.EditValue = null : cboID_QUAN_KS.EditValue,
-                cboID_PX_KS.Text.ToString() == "" ? cboID_PX_KS.EditValue = null : cboID_PX_KS.EditValue
-                ));
+
+                System.Data.SqlClient.SqlConnection conn;
+                conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                conn.Open();
+                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spUpdateCongNhan", conn);
+                cmd.Parameters.Add("@ID_CN", SqlDbType.BigInt).Value = Commons.Modules.iCongNhan;
+                cmd.Parameters.Add("@HINH_CN", SqlDbType.Image).Value = imgToByteConverter(HINH_CNPictureEdit.Image);
+                cmd.Parameters.Add("@MS_CN", SqlDbType.NVarChar).Value = MS_CNTextEdit.Text;
+                cmd.Parameters.Add("@MS_THE_CC", SqlDbType.NVarChar).Value = MS_THE_CCTextEdit.Text;
+                cmd.Parameters.Add("@ID_QG", SqlDbType.BigInt).Value = ID_QGLookUpEdit.Text.ToString() == "" ? DBNull.Value : ID_QGLookUpEdit.EditValue;
+                cmd.Parameters.Add("@HO", SqlDbType.NVarChar).Value = HOTextEdit.Text;
+                cmd.Parameters.Add("@TEN", SqlDbType.NVarChar).Value = TENTextEdit.Text;
+                cmd.Parameters.Add("@TEN_KHONG_DAU", SqlDbType.NVarChar).Value = TEN_KHONG_DAUTextEdit.Text;
+                cmd.Parameters.Add("@NGAY_SINH", SqlDbType.DateTime).Value = Commons.Modules.ObjSystems.ConvertDateTime(NGAY_SINHDateEdit.Text);
+                cmd.Parameters.Add("@NAM_SINH", SqlDbType.Int).Value = NAM_SINHDateEdit.Text == "" ? NAM_SINHDateEdit.EditValue = null : Convert.ToInt32(NAM_SINHDateEdit.EditValue);
+                cmd.Parameters.Add("@PHAI", SqlDbType.Bit).Value = PHAILookupEdit.EditValue;
+                cmd.Parameters.Add("@ID_TO", SqlDbType.BigInt).Value = ID_TOLookupEdit.Text == "" ? DBNull.Value : ID_TOLookupEdit.EditValue;
+                cmd.Parameters.Add("@ID_CV", SqlDbType.BigInt).Value = ID_CVLookUpEdit.Text == "" ? DBNull.Value : ID_CVLookUpEdit.EditValue;
+                cmd.Parameters.Add("@ID_LCV", SqlDbType.BigInt).Value = ID_LCVLookUpEdit.Text == "" ? DBNull.Value : ID_LCVLookUpEdit.EditValue;
+                cmd.Parameters.Add("@PHEP_CT", SqlDbType.Float).Value = PHEP_CTTextEdit.EditValue;
+                cmd.Parameters.Add("@NGAY_HOC_VIEC", SqlDbType.DateTime).Value = NGAY_HOC_VIECDateEdit.Text == "" ? DBNull.Value : NGAY_HOC_VIECDateEdit.EditValue;
+                cmd.Parameters.Add("@NGAY_THU_VIEC", SqlDbType.DateTime).Value = NGAY_THU_VIECDateEdit.Text == "" ? DBNull.Value : NGAY_THU_VIECDateEdit.EditValue;
+                cmd.Parameters.Add("@NGAY_VAO_LAM", SqlDbType.DateTime).Value = NGAY_VAO_LAMDateEdit.Text == "" ? DBNull.Value : NGAY_VAO_LAMDateEdit.EditValue;
+                cmd.Parameters.Add("@ID_TT_HD", SqlDbType.BigInt).Value = ID_TT_HDLookUpEdit.Text == "" ? DBNull.Value : ID_TT_HDLookUpEdit.EditValue;
+                cmd.Parameters.Add("@ID_TT_HT", SqlDbType.BigInt).Value = ID_TT_HTLookUpEdit.Text == "" ? DBNull.Value : ID_TT_HTLookUpEdit.EditValue;
+                cmd.Parameters.Add("@HINH_THUC_TUYEN", SqlDbType.NVarChar).Value = HINH_THUC_TUYENTextEdit.Text;
+                cmd.Parameters.Add("@LD_TINH", SqlDbType.Bit).Value = LD_TINHCheckEdit.EditValue;
+                cmd.Parameters.Add("@TRUC_TIEP_SX", SqlDbType.Bit).Value = TRUC_TIEP_SXCheckEdit.EditValue;
+                cmd.Parameters.Add("@LAO_DONG_CONG_NHAT", SqlDbType.Bit).Value = LAO_DONG_CNCheckEdit.EditValue;
+                cmd.Parameters.Add("@VAO_LAM_LAI", SqlDbType.Bit).Value = VAO_LAM_LAICheckEdit.EditValue;
+                cmd.Parameters.Add("@SO_CMND", SqlDbType.NVarChar).Value = SO_CMNDTextEdit.Text;
+                cmd.Parameters.Add("@NGAY_CAP", SqlDbType.DateTime).Value = NGAY_CAPDateEdit.Text == "" ? DBNull.Value : NGAY_CAPDateEdit.EditValue;
+                cmd.Parameters.Add("@NOI_CAP", SqlDbType.NVarChar).Value = txtNOI_CAP.Text;
+                cmd.Parameters.Add("@ID_TT_HN", SqlDbType.BigInt).Value = ID_TT_HNLookUpEdit.Text == "" ? DBNull.Value : ID_TT_HNLookUpEdit.EditValue;
+                cmd.Parameters.Add("@MS_THUE", SqlDbType.NVarChar).Value = MS_THUETextEdit.Text;
+                cmd.Parameters.Add("@MA_THE_ATM", SqlDbType.NVarChar).Value = MA_THE_ATMTextEdit.Text;
+                cmd.Parameters.Add("@SO_TAI_KHOAN", SqlDbType.NVarChar).Value = SO_TAI_KHOANTextEdit.Text;
+                cmd.Parameters.Add("@CHUYEN_MON", SqlDbType.NVarChar).Value = CHUYEN_MONTextEdit.Text;
+                cmd.Parameters.Add("@ID_LOAI_TD", SqlDbType.BigInt).Value = ID_LOAI_TDLookUpEdit.Text == "" ? DBNull.Value : ID_LOAI_TDLookUpEdit.EditValue;
+                cmd.Parameters.Add("@ID_TDVH", SqlDbType.BigInt).Value = ID_TDVHLookUpEdit.Text == "" ? DBNull.Value : ID_TDVHLookUpEdit.EditValue;
+                cmd.Parameters.Add("@NGOAI_NGU", SqlDbType.NVarChar).Value = NGOAI_NGUTextEdit.Text;
+                cmd.Parameters.Add("@DT_NHA", SqlDbType.NVarChar).Value = DT_NHATextEdit.Text;
+                cmd.Parameters.Add("@DT_NGUOI_THAN", SqlDbType.NVarChar).Value = DT_NGUOI_THANTextEdit.Text;
+                cmd.Parameters.Add("@DT_DI_DONG", SqlDbType.NVarChar).Value = DT_DI_DONGTextEdit.Text;
+                cmd.Parameters.Add("@EMAIL", SqlDbType.NVarChar).Value = EMAILTextEdit.Text;
+                cmd.Parameters.Add("@NOI_SINH", SqlDbType.NVarChar).Value = NOI_SINHTextEdit.Text;
+                cmd.Parameters.Add("@NGUYEN_QUAN", SqlDbType.NVarChar).Value = NGUYEN_QUANTextEdit.Text;
+                cmd.Parameters.Add("@ID_DT", SqlDbType.BigInt).Value = ID_DTLookUpEdit.Text == "" ? DBNull.Value : ID_DTLookUpEdit.EditValue;
+                cmd.Parameters.Add("@TON_GIAO", SqlDbType.NVarChar).Value = TON_GIAOTextEdit.Text;
+                cmd.Parameters.Add("@DIA_CHI_THUONG_TRU", SqlDbType.NVarChar).Value = DIA_CHI_THUONG_TRUTextEdit.Text;
+                cmd.Parameters.Add("@ID_TP", SqlDbType.BigInt).Value = ID_TPLookUpEdit.Text == "" ? DBNull.Value : ID_TPLookUpEdit.EditValue;
+                cmd.Parameters.Add("@ID_QUAN", SqlDbType.BigInt).Value = ID_QUANLookEdit.Text == "" ? DBNull.Value : ID_QUANLookEdit.EditValue;
+                cmd.Parameters.Add("@ID_PX", SqlDbType.BigInt).Value = ID_PXLookUpEdit.Text == "" ? DBNull.Value : ID_PXLookUpEdit.EditValue;
+                cmd.Parameters.Add("@THON_XOM", SqlDbType.NVarChar).Value = THON_XOMTextEdit.Text;
+                cmd.Parameters.Add("@DIA_CHI_TAM_TRU", SqlDbType.NVarChar).Value = DIA_CHI_TAM_TRUTextEdit.Text;
+                cmd.Parameters.Add("@ID_TP_TAM_TRU", SqlDbType.BigInt).Value = ID_TP_TAM_TRULookUpEdit.Text == "" ? DBNull.Value : ID_TP_TAM_TRULookUpEdit.EditValue;
+                cmd.Parameters.Add("@ID_QUAN_TAM_TRU", SqlDbType.BigInt).Value = ID_QUAN_TAM_TRULookUpEdit.Text == "" ? DBNull.Value : ID_QUAN_TAM_TRULookUpEdit.EditValue;
+                cmd.Parameters.Add("@ID_PX_TAM_TRU", SqlDbType.BigInt).Value = ID_PX_TAM_TRULookUpEdit.Text == "" ? DBNull.Value : ID_PX_TAM_TRULookUpEdit.EditValue;
+                cmd.Parameters.Add("@THON_XOM_TAM_TRU", SqlDbType.NVarChar).Value = THON_XOM_TAM_TRUTextEdit.Text;
+                cmd.Parameters.Add("@SO_BHXH", SqlDbType.NVarChar).Value = SO_BHXHTextEdit.Text;
+                cmd.Parameters.Add("@NGAY_DBHXH", SqlDbType.DateTime).Value = NGAY_DBHXHDateEdit.Text == "" ? DBNull.Value : NGAY_DBHXHDateEdit.EditValue;
+                cmd.Parameters.Add("@NGAY_CHAM_DUT_NOP_BHXH", SqlDbType.DateTime).Value = NGAY_CHAM_DUT_NOP_BHXHDateEdit.Text == "" ? DBNull.Value : NGAY_CHAM_DUT_NOP_BHXHDateEdit.EditValue;
+                cmd.Parameters.Add("@THAM_GIA_BHXH", SqlDbType.Bit).Value = THAM_GIA_BHXHCheckEdit.EditValue;
+                cmd.Parameters.Add("@SO_THE_BHYT", SqlDbType.NVarChar).Value = SO_THE_BHYTTextEdit.Text;
+                cmd.Parameters.Add("@NGAY_HET_HAN", SqlDbType.DateTime).Value = NGAY_HET_HANDateEdit.Text == "" ? DBNull.Value : NGAY_HET_HANDateEdit.EditValue;
+                cmd.Parameters.Add("@ID_TT", SqlDbType.BigInt).Value = TINH_THANHLookUpEdit.Text == "" ? DBNull.Value : TINH_THANHLookUpEdit.EditValue;
+                cmd.Parameters.Add("@ID_BV", SqlDbType.BigInt).Value = BENH_VIENLookUpEdit.Text == "" ? DBNull.Value : BENH_VIENLookUpEdit.EditValue;
+                cmd.Parameters.Add("@LD_NN", SqlDbType.Bit).Value = LD_NNCheckEdit.EditValue;
+                cmd.Parameters.Add("@SO_GIAY_PHEP", SqlDbType.NVarChar).Value = SO_GIAY_PHEPTextEdit.Text;
+                cmd.Parameters.Add("@NGAY_CAP_GP", SqlDbType.Bit).Value = NGAY_CAP_GPDateEdit.Text == "" ? DBNull.Value : NGAY_CAP_GPDateEdit.EditValue;
+                cmd.Parameters.Add("@LOAI_QUOC_TICH", SqlDbType.Int).Value = LOAI_QUOC_TICHLookUpEdit.Text == "" ? DBNull.Value : LOAI_QUOC_TICHLookUpEdit.EditValue;
+                cmd.Parameters.Add("@CAP_GIAY_PHEP", SqlDbType.Int).Value = CAP_GIAY_PHEPLookUpEdit.Text == "" ? DBNull.Value : CAP_GIAY_PHEPLookUpEdit.EditValue;
+                cmd.Parameters.Add("@NGAY_HH_GP", SqlDbType.DateTime).Value = NGAY_HH_GPDateEdit.Text == "" ? DBNull.Value : NGAY_HH_GPDateEdit.EditValue;
+                cmd.Parameters.Add("@LD_GIAM_LDNN", SqlDbType.BigInt).Value = LD_GIAM_LDNNLookUpEdit.Text == "" ? DBNull.Value : LD_GIAM_LDNNLookUpEdit.EditValue;
+                cmd.Parameters.Add("@ID_KV", SqlDbType.BigInt).Value = cboID_KV.Text == "" ? DBNull.Value : cboID_KV.EditValue;
+                cmd.Parameters.Add("@Them", SqlDbType.Bit).Value = cothem;
+                cmd.Parameters.Add("@sbtBC", SqlDbType.NVarChar).Value = sTBBangCap;
+                cmd.Parameters.Add("@DC_KHAI_SINH", SqlDbType.NVarChar).Value = txtDIA_CHI_KS.Text;
+                cmd.Parameters.Add("@ID_TP_KS", SqlDbType.BigInt).Value = cboID_TP_KS.Text == "" ? DBNull.Value : cboID_TP_KS.EditValue;
+                cmd.Parameters.Add("@ID_QUAN_KS", SqlDbType.BigInt).Value = cboID_QUAN_KS.Text == "" ? DBNull.Value : cboID_QUAN_KS.EditValue;
+                cmd.Parameters.Add("@ID_PX_KS", SqlDbType.BigInt).Value = cboID_PX_KS.Text == "" ? DBNull.Value : cboID_PX_KS.EditValue;
+                cmd.CommandType = CommandType.StoredProcedure;
+                Commons.Modules.iCongNhan = Convert.ToInt64(cmd.ExecuteScalar());
                 return true;
             }
             catch (Exception ex)

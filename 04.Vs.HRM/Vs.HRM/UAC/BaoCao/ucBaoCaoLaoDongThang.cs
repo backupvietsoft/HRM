@@ -15,6 +15,7 @@ namespace Vs.HRM
             Commons.OSystems.SetDateEditFormat(NgayIn);
             dtThang.EditValue = DateTime.Now;
             NgayIn.EditValue = DateTime.Today;
+            Commons.Modules.ObjSystems.LoadCboDonVi(cboID_DV);
         }
 
         private void windowsUIButton_ButtonClick(object sender, ButtonEventArgs e)
@@ -47,6 +48,7 @@ namespace Vs.HRM
                             cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
                             cmd.Parameters.Add("@TNgay", SqlDbType.Date).Value = dtTN;
                             cmd.Parameters.Add("@DNgay", SqlDbType.Date).Value = dtDN;
+                            cmd.Parameters.Add("@DVi", SqlDbType.Int).Value = cboID_DV.EditValue;
                             cmd.CommandType = CommandType.StoredProcedure;
                             System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
 
@@ -57,7 +59,7 @@ namespace Vs.HRM
                             dt.TableName = "DA_TA";
                             frm.AddDataSource(dt);
                         }
-                        catch
+                        catch (Exception EX)
                         { }
 
 

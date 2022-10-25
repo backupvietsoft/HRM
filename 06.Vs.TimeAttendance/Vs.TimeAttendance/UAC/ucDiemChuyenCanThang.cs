@@ -118,7 +118,7 @@ namespace Vs.TimeAttendance
             XtraUserControl ctl = new XtraUserControl();
             switch (btn.Tag.ToString())
             {
-                case "in":
+                case "In":
                     {
 
                         System.Data.SqlClient.SqlConnection conn;

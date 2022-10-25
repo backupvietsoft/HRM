@@ -11,7 +11,6 @@ namespace Vs.HRM
     {
         private long idCN;
         private long idHD;
-
         public frmInHopDongCN(Int64 idCongNhan, Int64 idHopDong, string tencn)
         {
             InitializeComponent();
@@ -27,16 +26,16 @@ namespace Vs.HRM
             //chkChuaThamGia.Visible = false;
             //chkDaThamGia.Visible = false;
             rdo_ChonBaoCao.SelectedIndex = 0;
-            if (Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString() == "SB")
+
+            if (Commons.Modules.KyHieuDV == "SB")
             {
                 rdo_ChonBaoCao.Properties.Items.RemoveAt(3);
             }
-            else if (Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString() == "DM")
+            else if (Commons.Modules.KyHieuDV == "DM")
             {
                 rdo_ChonBaoCao.Properties.Items.RemoveAt(4);
                 rdo_ChonBaoCao.Properties.Items.RemoveAt(3);
                 rdo_ChonBaoCao.Properties.Items.RemoveAt(2);
-                rdo_ChonBaoCao.Properties.Items.RemoveAt(1);
             }
             else
             {
@@ -56,29 +55,11 @@ namespace Vs.HRM
             {
                 case "In":
                     {
-
-                        int n = rdo_ChonBaoCao.SelectedIndex;
-                        if (rdo_ChonBaoCao.Properties.Items.Count < 6)
+                        switch (rdo_ChonBaoCao.Properties.Items[rdo_ChonBaoCao.SelectedIndex].Tag)
                         {
-                            if (Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString() == "SB")
-                            {
-                                n = (n >= 2 ? n + 1 : n);
-                            }
-                            else if (Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString() == "DM")
-                            {
-                                n = (n >= 1 ? n + 4 : n);
-                            }
-                            else
-                            {
-                                n = (n >= 4 ? n + 1 : n);
-                            }
-                        }
-
-                        switch (n)
-                        {
-                            case 0:
+                            case "rdo_HopDongLaoDong":
                                 {
-                                    switch (Commons.Modules.ObjSystems.KyHieuDV_CN(Convert.ToInt64(Commons.Modules.iCongNhan)))
+                                    switch (Commons.Modules.KyHieuDV)
                                     {
                                         case "MT":
                                             {
@@ -120,9 +101,9 @@ namespace Vs.HRM
 
                                 }
                                 break;
-                            case 1:
+                            case "rdo_HopDongThuViec":
                                 {
-                                    switch (Commons.Modules.ObjSystems.KyHieuDV_CN(Convert.ToInt64(Commons.Modules.iCongNhan)))
+                                    switch (Commons.Modules.KyHieuDV)
                                     {
                                         case "MT":
                                             {
@@ -136,7 +117,7 @@ namespace Vs.HRM
                                             }
                                         case "DM":
                                             {
-                                                HopDongThuViec_DM();
+                                                InQuaTrinhTGBHXH();
                                                 break;
                                             }
                                         case "HN":
@@ -156,9 +137,9 @@ namespace Vs.HRM
 
                                 }
                                 break;
-                            case 2:
+                            case "rdo_HopDongThucViecCN_QC":
                                 {
-                                    switch (Commons.Modules.ObjSystems.KyHieuDV_CN(Convert.ToInt64(Commons.Modules.iCongNhan)))
+                                    switch (Commons.Modules.KyHieuDV)
                                     {
                                         case "MT":
                                             {
@@ -187,9 +168,9 @@ namespace Vs.HRM
 
                                 }
                                 break;
-                            case 3:
+                            case "rdo_HopDongDaoTao":
                                 {
-                                    switch (Commons.Modules.ObjSystems.KyHieuDV_CN(Convert.ToInt64(Commons.Modules.iCongNhan)))
+                                    switch (Commons.Modules.KyHieuDV)
                                     {
                                         case "MT":
                                             {
@@ -210,12 +191,12 @@ namespace Vs.HRM
                                 }
                                 break;
 
-                            case 4:
+                            case "rdo_HopDongLaoDongKhoang":
                                 {
                                     HopDongLaoDongKhoang_SB();
                                     break;
                                 }
-                            case 5:
+                            case "rdo_ToKhaiBHXH":
                                 {
                                     ToKhaiCapSoBHXH();
                                     break;
@@ -899,15 +880,17 @@ namespace Vs.HRM
                     break;
             }
         }
-
-        private void chkDaThamGia_CheckedChanged(object sender, EventArgs e)
+        private void InQuaTrinhTGBHXH()
         {
+            frmViewReport frm = new frmViewReport();
+            frm.rpt = new rptThamGiaBHXH(Commons.Modules.iCongNhan);
+            DataTable dt = new DataTable();
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetThamGiaBHXH", Commons.Modules.iCongNhan));
+            if (dt == null || dt.Rows.Count == 0) return;
+            dt.TableName = "DATA";
+            frm.AddDataSource(dt);
 
-        }
-
-        private void chkChuaThamGia_CheckedChanged(object sender, EventArgs e)
-        {
-
+            frm.ShowDialog();
         }
     }
 }

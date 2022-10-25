@@ -117,7 +117,6 @@
             this.tablePanel1.SetRow(this.chkDaThamGia, 6);
             this.chkDaThamGia.Size = new System.Drawing.Size(181, 25);
             this.chkDaThamGia.TabIndex = 4;
-            this.chkDaThamGia.CheckedChanged += new System.EventHandler(this.chkDaThamGia_CheckedChanged);
             // 
             // dNgayIn
             // 

@@ -1807,7 +1807,7 @@ namespace Vs.HRM
                 dTNgay = Convert.ToDateTime(lk_TuNgay.EditValue);
                 while (dTNgay <= dDNgay)
                 {
-                    oSheet.Cells[rowCnt - 1, col_td] = dTNgay.ToString("dd/MM/yyyy");
+                    oSheet.Cells[rowCnt - 1, col_td] = dTNgay;
                     oSheet.Range[oSheet.Cells[rowCnt - 1, Convert.ToInt32(col_td)], oSheet.Cells[rowCnt - 1, Convert.ToInt32(col_td + 2)]].Merge();
                     oSheet.Cells[rowCnt, col_td] = "Tổng lao động / Total employees";
                     oSheet.Range[oSheet.Cells[rowCnt, Convert.ToInt32(col_td)], oSheet.Cells[rowCnt + 1, Convert.ToInt32(col_td)]].Merge();

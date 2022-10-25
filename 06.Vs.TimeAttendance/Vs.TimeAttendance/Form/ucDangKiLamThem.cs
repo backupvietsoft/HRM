@@ -199,11 +199,11 @@ namespace Vs.TimeAttendance
                 //grvLamThem.Columns["SO_GIO_TC"].DisplayFormat.FormatString = "0.0";
 
                 RepositoryItemTextEdit txtEdit = new RepositoryItemTextEdit();
-                txtEdit.Properties.DisplayFormat.FormatString = "0.00";
+                txtEdit.Properties.DisplayFormat.FormatString = "00.00";
                 txtEdit.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-                txtEdit.Properties.EditFormat.FormatString = "0.00";
+                txtEdit.Properties.EditFormat.FormatString = "00.00";
                 txtEdit.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-                txtEdit.Properties.Mask.EditMask = "0.00";
+                txtEdit.Properties.Mask.EditMask = "00.00";
                 txtEdit.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
                 txtEdit.Properties.Mask.UseMaskAsDisplayFormat = true;
                 grvLamThem.Columns["SO_GIO_TC"].ColumnEdit = txtEdit;

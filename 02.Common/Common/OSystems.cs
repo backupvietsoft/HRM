@@ -196,7 +196,7 @@ namespace Commons
             DateTime ngay;
             try
             {
-                ngay = DateTime.ParseExact(sDate, "dd/MM/yyyy", cultures);
+                ngay = DateTime.ParseExact(sDate, "dd/MM/yyyy",cultures);
                 return ngay;
             }
             catch
@@ -1194,10 +1194,6 @@ namespace Commons
 
                 cbo.Properties.PopulateViewColumns();
                 cbo.Properties.View.Columns[0].Visible = false;
-                if (TenCot != "")
-                {
-                    cbo.Properties.View.Columns[Ten].SortOrder = DevExpress.Data.ColumnSortOrder.Ascending;
-                }
                 cbo.Properties.View.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
                 cbo.Properties.View.Appearance.HeaderPanel.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
                 cbo.Properties.View.Appearance.HeaderPanel.Options.UseTextOptions = true;

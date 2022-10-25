@@ -27,7 +27,7 @@ namespace Vs.HRM
         {
 
             InitializeComponent();
-            Commons.Modules.ObjSystems.ThayDoiNN(this,windowsUIButton);
+            Commons.Modules.ObjSystems.ThayDoiNN(this, windowsUIButton);
 
             //Danh cho NB
             this.chkInAll.Visible = false;
@@ -570,7 +570,10 @@ namespace Vs.HRM
                             }
                             else if (dt.Rows[col - 1]["DINH_DANG"].ToString() == "Date")
                             {
-                                formatRange.NumberFormat = "dd/mm/yyyy";
+
+                                //System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
+                                //DateTime.FromOADate(((Excel.Range)oSheet.Cells[7, 2]).Value2);
+                                formatRange.NumberFormat = "dd/MM/yyyy";
                                 formatRange.Cells.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
                                 formatRange.Cells.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
                                 try { formatRange.TextToColumns(Type.Missing, Excel.XlTextParsingType.xlDelimited, Excel.XlTextQualifier.xlTextQualifierDoubleQuote); } catch (Exception ex) { }
@@ -599,7 +602,9 @@ namespace Vs.HRM
                 formatRange.Font.Name = fontName;
                 formatRange.Font.Size = fontSizeNoiDung;
                 BorderAround(oSheet.get_Range("A4", lastColumn + (rowCnt + 1).ToString()));
-
+                //formatRange = oSheet.get_Range("C5", "C31");
+                //System.Globalization.CultureInfo cultures = new System.Globalization.CultureInfo("en-US");
+                //formatRange.NumberFormat = cultures.DateTimeFormat.ShortestDayNames;
                 if (dtBCThang.Rows.Count == 0)
                 {
                     Excel.Range myRange = oSheet.get_Range("A4", lastColumn + "4");

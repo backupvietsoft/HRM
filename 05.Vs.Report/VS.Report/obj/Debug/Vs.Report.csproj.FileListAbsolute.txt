@@ -2859,8 +2859,9 @@ H:\Lamviec\Lamviec\HRM\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.csproj.
 H:\Lamviec\Lamviec\HRM\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.csproj.CopyComplete
 H:\Lamviec\Lamviec\HRM\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\VS.Report.dll
 H:\Lamviec\Lamviec\HRM\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\VS.Report.pdb
-F:\01.HRM\05.Vs.Report\Vs.Report\bin\Debug\VS.Report.dll.config
 F:\01.HRM\05.Vs.Report\Vs.Report\bin\Debug\VS.Report.dll
+F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\VS.Report.dll
+F:\01.HRM\05.Vs.Report\Vs.Report\bin\Debug\VS.Report.dll.config
 F:\01.HRM\05.Vs.Report\Vs.Report\bin\Debug\VS.Report.pdb
 F:\01.HRM\05.Vs.Report\Vs.Report\bin\Debug\Commons.dll
 F:\01.HRM\05.Vs.Report\Vs.Report\bin\Debug\DevExpress.BonusSkins.v22.1.dll
@@ -3111,5 +3112,4 @@ F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.csproj.GenerateResource.cac
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\VS.Report.dll.licenses
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.csproj.CoreCompileInputs.cache
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.csproj.CopyComplete
-F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\VS.Report.dll
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\VS.Report.pdb

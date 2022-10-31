@@ -3004,6 +3004,7 @@ F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptQuaTrinhLuongCN.resource
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptBCQuaTrinhLuongCN_SB.resources
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptBCQuaTrinhLuongTH.resources
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptBCTaiKyHopDongLaoDong.resources
+F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\VS.Report.rptBCTaiNanLD_DM.resources
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptBCTangGiamLD6Thang.resources
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptBCTangLaoDongThang.resources
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptBCThongKeDaoTao.resources
@@ -3100,6 +3101,10 @@ F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.srptQuaTrinhLamViec.resourc
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.srptQuaTrinhLuong.resources
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\VS.Report.NhanSu.srptTest.resources
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.srptToKhaiBaoHiemXaHoi.resources
+F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\VS.Report.sprtTaiNanLaoDong.resources
+F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\VS.Report.sprtKhachQuanKhoTranh.resources
+F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\VS.Report.sprtDoNguoiLaoDong.resources
+F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\VS.Report.sprtDoNguoiSDLaoDong.resources
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\VS.Report.Properties.Resources.resources
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptDSDonVi.resources
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptDV.resources

@@ -54,6 +54,7 @@ namespace Vs.Payroll
                 sKyHieuDV = Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString();
                 Commons.Modules.sLoad = "0Load";
                 LoadThang();
+                LoadCboLoaiCNV();
                 if (sKyHieuDV != "DM")
                 {
                     LoadGrdGTGC();
@@ -62,14 +63,22 @@ namespace Vs.Payroll
                 {
                     LoadGrdGTGC_DM();
                 }
-
                 txtNgayCongChuan.Text = getNgayCongChuan().ToString();
                 txtNgayCongLV.Text = getNgayCongChuan().ToString();
                 Commons.Modules.sLoad = "";
             }
             catch { }
         }
-
+        private void LoadCboLoaiCNV()
+        {
+            try
+            {
+                DataTable dt = new DataTable();
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboLoaiCNV", Commons.Modules.TypeLanguage));
+                Commons.Modules.ObjSystems.MLoadLookUpEdit(cboLoaiTinhLuong, dt, "ID_LOAI", "TEN_LOAI", "");
+            }
+            catch { }
+        }
         private void LoadGrdGTGC()
         {
             try
@@ -179,7 +188,7 @@ namespace Vs.Payroll
                 DataTable dt = new DataTable();
                 DateTime Tngay = Convert.ToDateTime(cboThang.EditValue);
                 DateTime Dngay = Convert.ToDateTime(cboThang.EditValue).AddMonths(1).AddDays(-1);
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetBangLuong_DM", Commons.Modules.UserName, Commons.Modules.TypeLanguage, cboDonVi.EditValue, cboXiNghiep.EditValue, cboTo.EditValue, Tngay, Dngay));
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetBangLuong_DM", Commons.Modules.UserName, Commons.Modules.TypeLanguage, cboDonVi.EditValue, cboXiNghiep.EditValue, cboTo.EditValue, Tngay, Dngay, cboLoaiTinhLuong.EditValue));
                 if (grdData.DataSource == null)
                 {
                     Commons.Modules.ObjSystems.MLoadXtraGrid(grdData, grvData, dt, false, false, false, true, true, this.Name);
@@ -417,7 +426,7 @@ namespace Vs.Payroll
                             DateTime Tngay = Convert.ToDateTime(cboThang.EditValue);
                             DateTime Dngay = Convert.ToDateTime(cboThang.EditValue).AddMonths(1).AddDays(-1);
                             DataTable dt = new DataTable();
-                            SqlHelper.ExecuteReader(Commons.IConnections.CNStr, sKyHieuDV == "DM" ? "spGetTinhLuongThang_DM" : "spGetTinhLuongThang", Commons.Modules.UserName, Commons.Modules.TypeLanguage, cboDonVi.EditValue, cboXiNghiep.EditValue, cboTo.EditValue, Convert.ToInt32(txtNgayCongLV.EditValue), Convert.ToInt32(txtNgayCongChuan.EditValue), Tngay, Dngay);
+                            SqlHelper.ExecuteReader(Commons.IConnections.CNStr, sKyHieuDV == "DM" ? "spGetTinhLuongThang_DM" : "spGetTinhLuongThang", Commons.Modules.UserName, Commons.Modules.TypeLanguage, cboDonVi.EditValue, cboXiNghiep.EditValue, cboTo.EditValue, Convert.ToInt32(txtNgayCongLV.EditValue), Convert.ToInt32(txtNgayCongChuan.EditValue), Tngay, Dngay, cboLoaiTinhLuong.EditValue);
                             if (sKyHieuDV != "DM")
                             {
                                 LoadGrdGTGC();
@@ -464,7 +473,7 @@ namespace Vs.Payroll
             {
                 DateTime Tngay = Commons.Modules.ObjSystems.ConvertDateTime(cboThang.Text);
                 DateTime Dngay = Commons.Modules.ObjSystems.ConvertDateTime(cboThang.Text).AddMonths(1).AddDays(-1);
-                ngay = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.fnGetSoNgayTruLeNgayNghiMacDinh('" + Tngay.ToString("MM/dd/yyyy") + "','" + Dngay.ToString("MM/dd/yyyy") + "')"));
+                ngay = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.fnGetSoNgayCongQuiDinhThang('" + Tngay.ToString("MM/dd/yyyy") + "','" + Dngay.ToString("MM/dd/yyyy") + "')"));
                 return ngay;
             }
             catch { return ngay; }
@@ -648,5 +657,17 @@ namespace Vs.Payroll
             }
         }
 
+        private void cboLoaiTinhLuong_EditValueChanged(object sender, EventArgs e)
+        {
+            if (Commons.Modules.sLoad == "0Load") return;
+            if (sKyHieuDV != "DM")
+            {
+                LoadGrdGTGC();
+            }
+            else
+            {
+                LoadGrdGTGC_DM();
+            }
+        }
     }
 }

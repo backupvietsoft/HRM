@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Windows.Forms;
 using Vs.Report;
 using System.Globalization;
+using VS.Report;
 
 namespace Vs.HRM
 {
@@ -14,7 +15,7 @@ namespace Vs.HRM
         public ucBaoCaoBaoHiemTaiNan()
         {
             InitializeComponent();
-            Commons.Modules.ObjSystems.ThayDoiNN(this,windowsUIButton);
+            Commons.Modules.ObjSystems.ThayDoiNN(this, windowsUIButton);
         }
 
         private void windowsUIButton_ButtonClick(object sender, ButtonEventArgs e)
@@ -122,8 +123,10 @@ namespace Vs.HRM
                                         adp.Fill(ds);
                                         dt = new DataTable();
                                         dt = ds.Tables[0].Copy();
-                                        dt.TableName = "DA_TA";
+                                        dt.TableName = "DATA";
                                         frm.AddDataSource(dt);
+
+                                        
                                     }
                                     catch
                                     {
@@ -132,53 +135,108 @@ namespace Vs.HRM
                                 break;
                             case 3:
                                 {
+                                    if (rdo_ChonBaoCao.SelectedIndex == 0) return;
+
+                                    DateTime firstDateTime = DateTime.Today;
+                                    DateTime secondDateTime = DateTime.Today;
+                                    string sTieuDe = "";
+
+                                    switch (rdo_ChonBaoCao.SelectedIndex)
+                                    {
+                                        case 1:
+                                            {
+                                                firstDateTime = new DateTime(Convert.ToInt32(txNam.Text), 1, 1);
+                                                secondDateTime = new DateTime(Convert.ToInt32(txNam.Text), 6, 30);
+                                                sTieuDe = "Kỳ báo định kỳ 6 tháng đầu năm " + Convert.ToString(txNam.Text);
+                                            }
+                                            break;
+                                        case 2:
+                                            {
+                                                firstDateTime = new DateTime(Convert.ToInt32(txNam.Text), 7, 1);
+                                                secondDateTime = new DateTime(Convert.ToInt32(txNam.Text), 12, 31);
+                                                sTieuDe = "Kỳ báo định kỳ 6 tháng cuối năm " + Convert.ToString(txNam.Text);
+                                            }
+                                            break;
+                                        default:
+                                            break;
+                                    }
+                                    frm.rpt = new rptBCTaiNanLD_DM(sTieuDe, lk_NgayIn.DateTime, Convert.ToInt32(LK_DON_VI.EditValue), Convert.ToInt32(txNam.Text), rdo_ChonBaoCao.SelectedIndex);
+
+                                    conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                                    conn.Open();
+
+                                    System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptThongKeTaiNanLD6Thang", conn);
+
+                                    cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                                    cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                                    cmd.Parameters.Add("@DV", SqlDbType.Int).Value = LK_DON_VI.EditValue;
+                                    cmd.Parameters.Add("@Nam", SqlDbType.Int).Value = Convert.ToInt32(txNam.Text);
+                                    cmd.Parameters.Add("@Loai", SqlDbType.Int).Value = rdo_ChonBaoCao.SelectedIndex;
+                                    cmd.CommandType = CommandType.StoredProcedure;
+                                    System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+
+                                    DataSet ds = new DataSet();
+                                    adp.Fill(ds);
+                                    dt = new DataTable();
+                                    dt = ds.Tables[0].Copy();
+                                    dt.TableName = "DATA";
+                                    frm.AddDataSource(dt);
 
                                     dt = new DataTable();
-                                    try
-                                    {
-                                        conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
-                                        conn.Open();
-                                        System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptBCThongKeTaiNan6Thang", conn);
-                                        cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
-                                        cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
-                                        cmd.Parameters.Add("@DVi", SqlDbType.Int).Value = -1;
-                                        cmd.Parameters.Add("@XN", SqlDbType.Int).Value = -1;
-                                        cmd.Parameters.Add("@TO", SqlDbType.Int).Value = -1;
-                                        cmd.Parameters.Add("@TNgay", SqlDbType.Date).Value = DateTime.Now;
-                                        cmd.Parameters.Add("@DNgay", SqlDbType.Date).Value = DateTime.Now;
-                                        cmd.CommandType = CommandType.StoredProcedure;
-                                        System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
-                                        DataSet ds = new DataSet();
-                                        adp.Fill(ds);
-                                        ds.Tables[0].TableName = "TaiNanLaoDongTH";
-                                        ds.Tables[1].TableName = "TaiNanLaoDong";
-                                        SaveFileDialog saveFileDialog = new SaveFileDialog();
-                                        saveFileDialog.Filter = "Excel Files(.xls)|*.xls| Excel Files(.xlsx)| *.xlsx";
-                                        saveFileDialog.FilterIndex = 0;
-                                        saveFileDialog.RestoreDirectory = true;
-                                        saveFileDialog.CreatePrompt = true;
-                                        saveFileDialog.Title = "Export Excel File To";
-                                        // If the file name is not an empty string open it for saving.
-                                        if (saveFileDialog.ShowDialog() == DialogResult.OK)
-                                        {
-                                            if (saveFileDialog.FileName != "")
-                                            {
-                                                Commons.TemplateExcel.FillReport(saveFileDialog.FileName, Application.StartupPath + "\\Template\\TemplateTaiNanLaoDong.xlsx", ds, new string[] { "{", "}" });
-                                                Process.Start(saveFileDialog.FileName);
-                                            }
-                                        }
-                                    }
-                                    catch 
-                                    {
+                                    dt = ds.Tables[5].Copy();
+                                    dt.TableName = "DATA5";
+                                    frm.AddDataSource(dt);
 
-                                    }
+                                    dt = new DataTable();
+                                    dt = ds.Tables[6].Copy();
+                                    dt.TableName = "DATA6";
+                                    frm.AddDataSource(dt);
+
+                                    frm.ShowDialog();
+
+                                    //dt = new DataTable();
+                                    //try
+                                    //{
+                                    //    conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                                    //    conn.Open();
+                                    //    System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptBCThongKeTaiNan6Thang", conn);
+                                    //    cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                                    //    cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                                    //    cmd.Parameters.Add("@DVi", SqlDbType.Int).Value = -1;
+                                    //    cmd.Parameters.Add("@XN", SqlDbType.Int).Value = -1;
+                                    //    cmd.Parameters.Add("@TO", SqlDbType.Int).Value = -1;
+                                    //    cmd.Parameters.Add("@TNgay", SqlDbType.Date).Value = DateTime.Now;
+                                    //    cmd.Parameters.Add("@DNgay", SqlDbType.Date).Value = DateTime.Now;
+                                    //    cmd.CommandType = CommandType.StoredProcedure;
+                                    //    System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+                                    //    DataSet ds = new DataSet();
+                                    //    adp.Fill(ds);
+                                    //    ds.Tables[0].TableName = "TaiNanLaoDongTH";
+                                    //    ds.Tables[1].TableName = "TaiNanLaoDong";
+                                    //    SaveFileDialog saveFileDialog = new SaveFileDialog();
+                                    //    saveFileDialog.Filter = "Excel Files(.xls)|*.xls| Excel Files(.xlsx)| *.xlsx";
+                                    //    saveFileDialog.FilterIndex = 0;
+                                    //    saveFileDialog.RestoreDirectory = true;
+                                    //    saveFileDialog.CreatePrompt = true;
+                                    //    saveFileDialog.Title = "Export Excel File To";
+                                    //    // If the file name is not an empty string open it for saving.
+                                    //    if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                                    //    {
+                                    //        if (saveFileDialog.FileName != "")
+                                    //        {
+                                    //            Commons.TemplateExcel.FillReport(saveFileDialog.FileName, Application.StartupPath + "\\Template\\TemplateTaiNanLaoDong.xlsx", ds, new string[] { "{", "}" });
+                                    //            Process.Start(saveFileDialog.FileName);
+                                    //        }
+                                    //    }
+                                    //}
+                                    //catch
+                                    //{
+
+                                    //}
                                 }
                                 break;
                             default: break;
                         }
-                        if (rdoChonBC.SelectedIndex != 3)
-                            frm.ShowDialog();
-
                     }
                     break;
 
@@ -231,7 +289,7 @@ namespace Vs.HRM
                             txNam.Enabled = false;
                         }
                         break;
-                   
+
                     case 1:
                         {
                             dtTuNgay.EditValue = new DateTime(int.Parse(txNam.Text), 1, 1);
@@ -265,17 +323,17 @@ namespace Vs.HRM
 
         private void txNam_EditValueChanged(object sender, EventArgs e)
         {
-            if (rdo_ChonBaoCao.SelectedIndex==1)
+            if (rdo_ChonBaoCao.SelectedIndex == 1)
             {
                 dtTuNgay.EditValue = Convert.ToDateTime(("01/01/" + txNam.Text));
                 dtDenNgay.EditValue = Convert.ToDateTime(("30/06/" + txNam.Text));
             }
-            if(rdo_ChonBaoCao.SelectedIndex ==2)
+            if (rdo_ChonBaoCao.SelectedIndex == 2)
             {
                 dtTuNgay.EditValue = Convert.ToDateTime(("01/07/" + txNam.Text));
                 dtDenNgay.EditValue = Convert.ToDateTime(("31/12/" + txNam.Text));
             }
-           
+
         }
     }
 }

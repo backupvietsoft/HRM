@@ -394,18 +394,17 @@ namespace Commons
             return KyHieuDV;
         }
 
-        public void AddDropDownExcel(Microsoft.Office.Interop.Excel._Worksheet oSheet, Microsoft.Office.Interop.Excel.Range range, DataTable dtDuLieu, string sCotDuLieu, int iCotBD, int iDongBD, int iCotKT, int iDongKT)
+        public void AddDropDownExcel(Microsoft.Office.Interop.Excel._Worksheet oSheet, Microsoft.Office.Interop.Excel.Range range, DataTable dtDuLieu, string sCotDuLieu)
         {
             try
             {
                 var list = new System.Collections.Generic.List<string>();
                 for (int i = 0; i < dtDuLieu.Rows.Count; i++)
                 {
-                    list.Add(dtDuLieu.Rows[i][sCotDuLieu].ToString());
+                    list.Add(dtDuLieu.Rows[i][sCotDuLieu].ToString().Trim());
                 }
                 var flatList = string.Join(",", list.ToArray());
 
-                range = oSheet.get_Range("" + CharacterIncrement(iCotBD - 1) + "" + iDongBD + "", "" + CharacterIncrement(iCotKT - 1) + "" + iDongKT.ToString());
                 range.Validation.Delete();
                 range.Validation.Add(
                    Microsoft.Office.Interop.Excel.XlDVType.xlValidateList,
@@ -546,15 +545,37 @@ namespace Commons
             dateEdit.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.DateTimeAdvancingCaret;
             dateEdit.Mask.EditMask = "dd/MM/yyyy";
         }
+        public int getTinhTrangLuongThang(DateTime dThang, Int64 ID_DV)
+        {
+            try
+            {
+                int resulst = 0;
+                string sSql = "";
+                sSql = "SELECT ISNULL(TINH_TRANG,1) TINH_TRANG FROM dbo.BANG_LUONG_DM_CHA WHERE THANG = (SELECT DATEADD(month, DATEDIFF(month, 0, '" + dThang.ToString("yyyyMMdd") + "'), 0)) AND ID_DV = " + ID_DV + "";
+                resulst = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, sSql)); //* Commons.Modules.iGio
+                return resulst;
+            }
+            catch
+            {
+                return 0;
+            }
+        }
 
         public int TinhSoNgayTruLeChuNhat(DateTime TNgay, DateTime DNgay)
         {
-            int resulst = 0;
+            try
+            {
+                int resulst = 0;
 
-            string sSql = "";
-            sSql = "SELECT [dbo].[fnGetSoNgayTruLeChuNhat]('" + Convert.ToDateTime(TNgay).ToString("yyyyMMdd") + "','" + Convert.ToDateTime(DNgay).ToString("yyyyMMdd") + "')";
-            resulst = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, sSql)); //* Commons.Modules.iGio
-            return resulst;
+                string sSql = "";
+                sSql = "SELECT [dbo].[fnGetSoNgayTruLeChuNhat]('" + Convert.ToDateTime(TNgay).ToString("yyyyMMdd") + "','" + Convert.ToDateTime(DNgay).ToString("yyyyMMdd") + "')";
+                resulst = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, sSql)); //* Commons.Modules.iGio
+                return resulst;
+            }
+            catch
+            {
+                return 0;
+            }
         }
         public IEnumerable<Control> GetAllConTrol(Control control, IEnumerable<Type> filteringTypes)
         {
@@ -1194,10 +1215,6 @@ namespace Commons
 
                 cbo.Properties.PopulateViewColumns();
                 cbo.Properties.View.Columns[0].Visible = false;
-                if (TenCot != "")
-                {
-                    cbo.Properties.View.Columns[Ten].SortOrder = DevExpress.Data.ColumnSortOrder.Ascending;
-                }
                 cbo.Properties.View.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
                 cbo.Properties.View.Appearance.HeaderPanel.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
                 cbo.Properties.View.Appearance.HeaderPanel.Options.UseTextOptions = true;
@@ -1217,7 +1234,7 @@ namespace Commons
             }
             catch
             {
-                
+
             }
         }
         public void AddCombSearchLookUpEdit(RepositoryItemSearchLookUpEdit cboSearch, string Value, string Display, string cot, GridView grv, DataTable dtTmp, string form)
@@ -1768,7 +1785,7 @@ namespace Commons
             }
         }
 
-        public void ThayDoiNN(Form frm,WindowsUIButtonPanel btnWinUIB)
+        public void ThayDoiNN(Form frm, WindowsUIButtonPanel btnWinUIB)
         {
             DataTable dtTmp = new DataTable();
             dtTmp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT KEYWORD , CASE " + Modules.TypeLanguage + " WHEN 0 THEN VIETNAM WHEN 1 THEN ENGLISH ELSE CHINESE END AS NN  FROM LANGUAGES WHERE FORM = N'" + frm.Name + "' "));
@@ -2558,6 +2575,60 @@ namespace Commons
                     }
                     catch
                     {
+                    }
+                }
+            }
+            catch
+            { }
+        }
+        public void ThayDoiNN(XtraUserControl frm, List<LayoutControlGroup> group, List<WindowsUIButtonPanel> btnWinUIB)
+        {
+            DataTable dtTmp = new DataTable();
+            dtTmp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT KEYWORD , CASE " + Modules.TypeLanguage + " WHEN 0 THEN VIETNAM WHEN 1 THEN ENGLISH ELSE CHINESE END AS NN  FROM LANGUAGES WHERE FORM = N'" + frm.Name + "' "));
+            frm.Text = GetNN(dtTmp, frm.Name, frm.Name);
+
+            List<Control> resultControlList = new List<Control>();
+            GetControlsCollection(frm, ref resultControlList, null);
+            foreach (Control control in resultControlList)
+            {
+                try
+                {
+                    DoiNN(control, frm, dtTmp);
+                }
+                catch
+                { }
+            }
+            try
+            {
+                foreach (LayoutControlGroup gr in group)
+                {
+                    LoadNNGroupControl(gr, dtTmp, frm.Name);
+                    gr.DoubleClick += delegate (object a, EventArgs b) { ControlGroup_DoubleClick(gr, b, frm.Name); };
+                }
+            }
+            catch
+            {
+            }
+            try
+            {
+                foreach (WindowsUIButtonPanel btn in btnWinUIB)
+                {
+
+                    for (int i = 0; i < btn.Buttons.Count; i++)
+                    {
+                        try
+                        {
+                            if (btn.Buttons[i].Properties.Tag.ToString() != null)
+                            {
+                                btn.Size = new Size(btn.Size.Width, 50);
+                                btn.AllowGlyphSkinning = false;
+                                btn.Buttons[i].Properties.Caption = GetNN(dtTmp, btn.Buttons[i].Properties.Tag.ToString(), frm.Name);
+                                btn.Buttons[i].Properties.ToolTip = GetNN(dtTmp, btn.Buttons[i].Properties.Tag.ToString(), frm.Name);
+                            }
+                        }
+                        catch
+                        {
+                        }
                     }
                 }
             }
@@ -3771,7 +3842,7 @@ namespace Commons
             string sSql = "";
             string MName = "";
             try { MName = Environment.MachineName; } catch { }
-            sSql = "SELECT COUNT(*) FROM dbo.LOGIN WHERE USER_LOGIN = '" + sUserName + "' AND M_NAME <> N'"+ MName + "'";
+            sSql = "SELECT COUNT(*) FROM dbo.LOGIN WHERE USER_LOGIN = '" + sUserName + "' AND M_NAME <> N'" + MName + "'";
             if (Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, sSql).ToString()) > 0)
             {
                 return false;
@@ -4247,7 +4318,7 @@ namespace Commons
             }
         }
 
-        public void AddMonth(string Value,GridView grv)
+        public void AddMonth(string Value, GridView grv)
         {
             try
             {
@@ -5201,7 +5272,7 @@ namespace Commons
         {
             //ID_LCV,TEN_LCV
             DataTable dt = new DataTable();
-            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboLoaiCV", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll,-1, -1));
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboLoaiCV", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll, -1, -1));
             return dt;
         }
         public DataTable DataMucDoTieng(bool coAll)

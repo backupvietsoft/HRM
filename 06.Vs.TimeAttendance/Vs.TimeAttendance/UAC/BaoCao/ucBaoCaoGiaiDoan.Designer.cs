@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions2 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions1 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
             this.windowsUIButton = new DevExpress.XtraBars.Docking2010.WindowsUIButtonPanel();
             this.grdCN = new DevExpress.XtraGrid.GridControl();
             this.grvCN = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -108,9 +108,9 @@
             this.windowsUIButton.AppearanceButton.Pressed.Options.UseFont = true;
             this.windowsUIButton.AppearanceButton.Pressed.Options.UseImage = true;
             this.windowsUIButton.AppearanceButton.Pressed.Options.UseTextOptions = true;
-            windowsUIButtonImageOptions2.ImageUri.Uri = "Print";
+            windowsUIButtonImageOptions1.ImageUri.Uri = "Print";
             this.windowsUIButton.Buttons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] {
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions2, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "Print", -1, false)});
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions1, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "Print", -1, false)});
             this.windowsUIButton.ContentAlignment = System.Drawing.ContentAlignment.MiddleRight;
             this.windowsUIButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.windowsUIButton.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -382,8 +382,7 @@
             new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "DS chấm vắng giai đoạn", true, "rdo_chamvanggiaidoan"),
             new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "DS chấm công vắng lũy kế", true, "rdo_chamcongvangluyke"),
             new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Xác nhận quẹt thẻ", true, "rdo_xacnhanquetthe"),
-            new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Chấm công chi tiết công nhân giai đoạn", true, "rdo_congnhangiaidoan"),
-            new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Báo cáo hàng ngày theo giai đoạn", true, "rdo_BaoCaoHangNgayTheoGiaiDoan")});
+            new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Chấm công chi tiết công nhân giai đoạn", true, "rdo_congnhangiaidoan")});
             this.lbDonVi.SetRow(this.rdo_ChonBaoCao, 4);
             this.lbDonVi.SetRowSpan(this.rdo_ChonBaoCao, 5);
             this.rdo_ChonBaoCao.Size = new System.Drawing.Size(424, 235);

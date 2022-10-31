@@ -2002,10 +2002,6 @@ namespace Vs.HRM
                 BorderAround(oSheet.get_Range("B" + rowCnt2 + "", lastColumn + rowCnt.ToString()));
                 #endregion
 
-                //// filter
-                //Excell.Range myRange = oSheet.get_Range("A7", lastColumn + (rowCnt - 1).ToString());
-                //myRange.AutoFilter("1", "<>", Microsoft.Office.Interop.Excell.XlAutoFilterOperator.xlOr, "", true);
-
                 this.Cursor = Cursors.Default;
                 oXL.Visible = true;
                 oXL.UserControl = true;

@@ -228,6 +228,7 @@ namespace VietSoftHRM
                         {
                             if (string.IsNullOrEmpty(link1)) return;
                             MUpdate(loai, link1, link2, ".");
+                            Commons.Modules.sInfoSer = Commons.Modules.sInfoClient;
                             break;
                         }
                     default: { break; }

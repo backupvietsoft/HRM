@@ -35,46 +35,93 @@ namespace Vs.HRM
                         {
                             case 0:
                                 {
-                                    switch (Commons.Modules.ObjSystems.KyHieuDV_CN(Convert.ToInt64(Commons.Modules.iCongNhan)))
-                                    {
-                                        case "MT":
-                                            {
-                                                break;
-                                            }
-                                        case "SB":
-                                            {
-                                                break;
-                                            }
-                                        case "NB":
-                                            {
-
-                                                break;
-                                            }
-                                        default:
-                                            InSoYeuLyLich();
-                                            break;
-                                    }
-
+                                    InSoYeuLyLich();
                                 }
                                 break;
                             case 1:
                                 {
-                                    switch (Commons.Modules.ObjSystems.KyHieuDV_CN(Convert.ToInt64(Commons.Modules.iCongNhan)))
+                                    switch (Commons.Modules.KyHieuDV)
                                     {
-                                        case "MT":
+                                        case "DM":
                                             {
-                                                break;
-                                            }
-                                        case "SB":
-                                            {
+                                                DataColumn dtC;
+                                                DataRow dtR;
+                                                DataTable dt = new DataTable();
+
+                                                dt = new DataTable();
+                                                dtC = new DataColumn();
+                                                dtC.DataType = typeof(Int64);
+                                                dtC.ColumnName = "ID_CN";
+                                                dtC.Caption = "ID_CN";
+                                                dtC.ReadOnly = false;
+                                                dt.Columns.Add(dtC);
+
+                                                dtC = new DataColumn();
+                                                dtC.DataType = typeof(bool);
+                                                dtC.ColumnName = "CHON";
+                                                dtC.Caption = "CHON";
+                                                dtC.ReadOnly = false;
+                                                dt.Columns.Add(dtC);
+
+
+                                                dtR = dt.NewRow();
+                                                dtR["ID_CN"] = Commons.Modules.iCongNhan;
+                                                dtR["CHON"] = true;
+                                                dt.Rows.Add(dtR);
+
+
+                                                //tạo một datatable 
+                                                string strSaveThongTinNhanVien = "strSaveThongTinNhanVien" + Commons.Modules.UserName;
+
+                                                Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, strSaveThongTinNhanVien, dt, "");
+
+                                                System.Data.SqlClient.SqlConnection conn;
+                                                DataTable dtbc = new DataTable();
+                                                frmViewReport frm = new frmViewReport();
+                                                //frm.rpt = new rptTheNhanVien_DM(dt);
+
+
+                                                conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                                                conn.Open();
+
+                                                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spSaveThongTinNhanVienDM", conn);
+                                                cmd.Parameters.Add("@sBT", SqlDbType.NVarChar, 50).Value = strSaveThongTinNhanVien;
+                                                cmd.CommandType = CommandType.StoredProcedure;
+                                                System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+                                                DataSet ds = new DataSet();
+                                                adp.Fill(ds);
+
+                                                DataTable dt1 = new DataTable();
+                                                dt1 = ds.Tables[1].Copy();
+                                                dt1.TableName = "DATA";
+                                                frm.rpt = new Vs.Recruit.rptInTheNV_DM(dt1);
+                                                frm.AddDataSource(dt1);
+
+                                                dt = new DataTable();
+                                                dt = ds.Tables[0].Copy();
+                                                dt.TableName = "DATA1";
+                                                frm.AddDataSource(dt);
+
+
+
+
+                                                DataTable dt2 = new DataTable();
+                                                dt2 = ds.Tables[2].Copy();
+                                                dt2.TableName = "DATA2";
+                                                frm.AddDataSource(dt2);
+
+                                                frm.ShowDialog();
+
+                                                Commons.Modules.ObjSystems.XoaTable(strSaveThongTinNhanVien);
+                                                conn.Close();
                                                 break;
                                             }
                                         case "NB":
                                             {
+                                                InDanhGiaKetQuaThuViecNhanVien_NB();
                                                 break;
                                             }
                                         default:
-                                            InDanhGiaKetQuaThuViecNhanVien_NB();
                                             break;
                                     }
 
@@ -171,7 +218,12 @@ namespace Vs.HRM
 
         private void formInLyLich_Load(object sender, EventArgs e)
         {
-            rdo_ChonBaoCao.SelectedIndex = 0;
+            if (Commons.Modules.KyHieuDV == "DM")
+            {
+                rdo_ChonBaoCao.Properties.Items.RemoveAt(4);
+                rdo_ChonBaoCao.Properties.Items.RemoveAt(3);
+                rdo_ChonBaoCao.Properties.Items.RemoveAt(2);
+            }
             dNgayIn.EditValue = DateTime.Today;
             Commons.OSystems.SetDateEditFormat(dNgayIn);
             Commons.Modules.sLoad = "";
@@ -191,9 +243,6 @@ namespace Vs.HRM
 
                 cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
                 cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
-                //    cmd.Parameters.Add("@Dvi", SqlDbType.Int).Value = -1;
-                //     cmd.Parameters.Add("@XN", SqlDbType.Int).Value = -1;
-                //    cmd.Parameters.Add("@TO", SqlDbType.Int).Value = -1;
                 cmd.Parameters.Add("@ID_CN", SqlDbType.BigInt).Value = Commons.Modules.iCongNhan;
                 cmd.CommandType = CommandType.StoredProcedure;
                 System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
@@ -275,7 +324,7 @@ namespace Vs.HRM
                 System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
                 DataSet ds = new DataSet();
                 adp.Fill(ds);
-               ds.Tables[0].TableName = "PhieuDanhGiaKetQuaThuViec";
+                ds.Tables[0].TableName = "PhieuDanhGiaKetQuaThuViec";
 
                 SaveFileDialog saveFileDialog = new SaveFileDialog();
                 saveFileDialog.Filter = "Excel file (*.xlsx)|*.xlsx";
@@ -305,7 +354,6 @@ namespace Vs.HRM
 
             }
         }
-
         private void InDanhGiaKetQuaQuaTrinhLamViec_NB()
         {
             try
@@ -352,7 +400,6 @@ namespace Vs.HRM
 
             }
         }
-
         private void InPhieuDanhGiaKetQuaQuaTrinhLamViecCongNhan_NB()
         {
             try

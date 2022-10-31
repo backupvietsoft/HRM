@@ -55,6 +55,7 @@ namespace Vs.TimeAttendance
                 windowsUIButton.Buttons[4].Properties.Visible = false;
                 windowsUIButton.Buttons[7].Properties.Visible = false;
                 windowsUIButton.Buttons[8].Properties.Visible = false;
+                windowsUIButton.Buttons[9].Properties.Visible = false;
             }
             else
             {
@@ -130,9 +131,25 @@ namespace Vs.TimeAttendance
             XtraUserControl ctl = new XtraUserControl();
             switch (btn.Tag.ToString())
             {
+                case "capnhatdieuchinh":
+                    {
+                        try
+                        {
+                            if (grvCongNhan.RowCount == 0 || grvKeHoachDiCa.RowCount == 0) return;
+                            DataTable dt = new DataTable();
+                            SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spCapNhatDieuChinh", Commons.Modules.UserName, Commons.Modules.TypeLanguage, grvCongNhan.GetFocusedRowCellValue("ID_CN"), grvKeHoachDiCa.GetFocusedRowCellValue("ID_NHOM"), grvKeHoachDiCa.GetFocusedRowCellValue("CA"), grvKeHoachDiCa.GetFocusedRowCellValue("TU_NGAY"), grvKeHoachDiCa.GetFocusedRowCellValue("DEN_NGAY"));
+                            LoadgrdKeHoachDiCa();
+                            XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgCapNhatThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        catch
+                        {
+                            XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgCapNhatKhongCong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        break;
+                    }
                 case "capnhat":
                     {
-                        if(!Validate()) return;
+                        if (!Validate()) return;
                         if (grvCongNhan.HasColumnErrors) return;
                         if (XtraMessageBox.Show("Bạn có muốn cập nhật nhóm: " + grvKeHoachDiCa.GetFocusedRowCellDisplayText("ID_NHOM") + ", ca: " + grvKeHoachDiCa.GetFocusedRowCellDisplayText("CA") + " cho các nhân viên được chọn", "", MessageBoxButtons.YesNo) == DialogResult.No)
                         {
@@ -141,10 +158,10 @@ namespace Vs.TimeAttendance
                         CapNhatNhom();
                         break;
                     }
-              
+
                 case "themsua":
                     {
-                       
+
                         them = true;
                         LoadGrdCongNhan(them);
                         grvCongNhan_FocusedRowChanged(null, null);
@@ -228,7 +245,7 @@ namespace Vs.TimeAttendance
                 {
                     grvCongNhan.Columns["CHON"].Visible = true;
                 }
-               
+
                 try
                 {
                     grvCongNhan.OptionsSelection.CheckBoxSelectorField = "CHON";
@@ -346,10 +363,11 @@ namespace Vs.TimeAttendance
             windowsUIButton.Buttons[2].Properties.Visible = visible;
             windowsUIButton.Buttons[3].Properties.Visible = visible;
             windowsUIButton.Buttons[4].Properties.Visible = visible;
-            windowsUIButton.Buttons[8].Properties.Visible = visible;
             windowsUIButton.Buttons[5].Properties.Visible = !visible;
             windowsUIButton.Buttons[6].Properties.Visible = !visible;
             windowsUIButton.Buttons[7].Properties.Visible = !visible;
+            windowsUIButton.Buttons[8].Properties.Visible = !visible;
+            windowsUIButton.Buttons[9].Properties.Visible = visible;
             //searchControl.Visible = visible;
         }
         private void XoaKeHoachDiCa()

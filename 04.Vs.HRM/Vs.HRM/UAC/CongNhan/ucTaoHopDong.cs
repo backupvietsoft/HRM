@@ -43,7 +43,6 @@ namespace Vs.HRM
                 Commons.Modules.sLoad = "";
                 datTNgay.EditValue = Convert.ToDateTime(("01/" + DateTime.Now.Month + "/" + DateTime.Now.Year));
 
-                //LoadData();
                 enabel(true);
                 btnALL.Buttons[0].Properties.Visible = false;
                 btnALL.Buttons[1].Properties.Visible = false;
@@ -386,37 +385,6 @@ namespace Vs.HRM
             }
             catch { }
         }
-
-        private void LoadCbo()
-        {
-            //try
-            //{
-            //    System.Data.SqlClient.SqlConnection conn;
-            //    conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
-            //    conn.Open();
-            //    System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spGetComboPV_TheoNgay", conn);
-
-            //    cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
-            //    cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
-            //    cmd.Parameters.Add("@CoAll", SqlDbType.Bit).Value = true;
-            //    cmd.Parameters.Add("@TNgay", SqlDbType.DateTime).Value = Convert.ToDateTime(datTNgay.EditValue);
-            //    cmd.Parameters.Add("@DNgay", SqlDbType.DateTime).Value = Convert.ToDateTime(datDNgay.EditValue);
-            //    cmd.CommandType = CommandType.StoredProcedure;
-            //    System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
-            //    DataSet ds = new DataSet();
-            //    adp.Fill(ds);
-            //    DataTable dt = new DataTable();
-            //    dt = ds.Tables[0].Copy();
-            //    Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_PV, dt, "ID_PV", "MA_SO", "MA_SO");
-            //    if (dt.Rows.Count == 1)
-            //    {
-            //        cboID_PV.Properties.DataSource = dt.Clone();
-            //        cboID_PV.EditValue = 0;
-            //    }
-            //}
-            //catch { }
-        }
-
         private void enabel(bool visible)
         {
             btnALL.Buttons[0].Properties.Visible = visible;

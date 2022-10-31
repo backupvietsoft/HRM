@@ -492,7 +492,7 @@ namespace Vs.HRM
                     }
                 case "in":
                     {
-                        if (Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString() == "NB")
+                        if (Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString() == "DM")
                         {
                             frmInLyLichCN InLyLichCN = new frmInLyLichCN(Commons.Modules.iCongNhan);
                             InLyLichCN.ShowDialog();
@@ -532,7 +532,6 @@ namespace Vs.HRM
                             catch (Exception ex)
                             {
                             }
-
                             frm.ShowDialog();
                         }
                         break;

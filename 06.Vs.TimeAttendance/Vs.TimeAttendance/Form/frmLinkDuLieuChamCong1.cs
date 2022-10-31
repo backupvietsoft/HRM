@@ -25,6 +25,7 @@ namespace Vs.TimeAttendance
         private bool bLinkOK = false;
         private int loaiLink = 1; // 1 Link bằng SQL, 2 Link bằng excel
         public static frmLinkDuLieuChamCong1 _instance;
+        private int iTinhTrangCong = 1; // tinh trang >= 3 thì ko cho chỉnh sửa gì nữa
         public static frmLinkDuLieuChamCong1 Instance
         {
             get
@@ -38,7 +39,7 @@ namespace Vs.TimeAttendance
         public frmLinkDuLieuChamCong1()
         {
             InitializeComponent();
-            Commons.Modules.ObjSystems.ThayDoiNN(this, new List<LayoutControlGroup> { layoutControlGroup1 }, windowsUIButton);
+            Commons.Modules.ObjSystems.ThayDoiNN(this, new List<LayoutControlGroup> { layoutControlGroup1 }, new List<WindowsUIButtonPanel> { windowsUIButton, windowsUIButtonPanel1 });
             //Commons.Modules.ObjSystems.ThayDoiNN(this, layoutControlGroup1);
             repositoryItemTimeEdit1 = new RepositoryItemTimeEdit();
         }
@@ -65,6 +66,7 @@ namespace Vs.TimeAttendance
 
                 Commons.Modules.ObjSystems.LoadCboXiNghiep(cbDonVi, cbXiNghiep);
                 Commons.Modules.ObjSystems.LoadCboTo(cbDonVi, cbXiNghiep, cbTo);
+                LoadCboDataLink();
                 Commons.Modules.sLoad = "";
                 DateTime dt = new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day);
                 dtNgayChamCong.EditValue = dt;
@@ -72,6 +74,7 @@ namespace Vs.TimeAttendance
                 LoadLuoiNgay(dt);
                 grdDSCN.DataSource = null;
                 grvDSCN.RefreshData();
+                iTinhTrangCong = Commons.Modules.ObjSystems.getTinhTrangLuongThang(dtNgayChamCong.DateTime, Convert.ToInt64(cbDonVi.EditValue));
                 enableButon(true);
                 //lblTongCong.Text = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgTongSoCN") + "0";
                 DateTime ngay = (DateTime)grvNgay.GetFocusedRowCellValue("NGAY");
@@ -86,32 +89,99 @@ namespace Vs.TimeAttendance
         #region Các hàm xử lý
         private void enableButon(bool visible)
         {
-
-            windowsUIButton.Buttons[0].Properties.Visible = visible;
-            windowsUIButton.Buttons[1].Properties.Visible = visible;
-            windowsUIButton.Buttons[2].Properties.Visible = visible;
-            windowsUIButton.Buttons[3].Properties.Visible = visible;
-            windowsUIButton.Buttons[4].Properties.Visible = visible;
-            windowsUIButton.Buttons[5].Properties.Visible = !visible;
-            windowsUIButton.Buttons[6].Properties.Visible = !visible;
-            windowsUIButton.Buttons[7].Properties.Visible = visible;
-            windowsUIButton.Buttons[8].Properties.Visible = visible;
-            windowsUIButton.Buttons[9].Properties.Visible = visible;
-            windowsUIButton.Buttons[10].Properties.Visible = visible;
-            windowsUIButton.Buttons[11].Properties.Visible = visible;
-            if (Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString() == "DM")
+            if (iTinhTrangCong >= 3)
             {
-                windowsUIButton.Buttons[12].Properties.Visible = visible;
+                windowsUIButton.Buttons[14].Properties.Visible = true;
+                windowsUIButtonPanel1.Visible = false;
+                windowsUIButton.Buttons[0].Properties.Visible = false;
+                windowsUIButton.Buttons[1].Properties.Visible = false;
+                windowsUIButton.Buttons[2].Properties.Visible = false;
+                windowsUIButton.Buttons[3].Properties.Visible = false;
+                windowsUIButton.Buttons[4].Properties.Visible = false;
+                windowsUIButton.Buttons[5].Properties.Visible = false;
+                windowsUIButton.Buttons[6].Properties.Visible = false;
+                windowsUIButton.Buttons[7].Properties.Visible = false;
+                windowsUIButton.Buttons[8].Properties.Visible = false;
+                windowsUIButton.Buttons[9].Properties.Visible = false;
+                windowsUIButton.Buttons[10].Properties.Visible = false;
+                windowsUIButton.Buttons[11].Properties.Visible = false;
+                windowsUIButton.Buttons[12].Properties.Visible = false;
+                windowsUIButton.Buttons[13].Properties.Visible = false;
             }
             else
             {
-                windowsUIButton.Buttons[12].Properties.Visible = false;
+                windowsUIButtonPanel1.Visible = visible;
+                windowsUIButton.Buttons[0].Properties.Visible = visible;
+                windowsUIButton.Buttons[1].Properties.Visible = visible;
+                windowsUIButton.Buttons[2].Properties.Visible = visible;
+                windowsUIButton.Buttons[3].Properties.Visible = visible;
+                windowsUIButton.Buttons[4].Properties.Visible = visible;
+                windowsUIButton.Buttons[5].Properties.Visible = !visible;
+                windowsUIButton.Buttons[6].Properties.Visible = !visible;
+                windowsUIButton.Buttons[7].Properties.Visible = visible;
+                windowsUIButton.Buttons[8].Properties.Visible = visible;
+                windowsUIButton.Buttons[9].Properties.Visible = visible;
+                windowsUIButton.Buttons[10].Properties.Visible = visible;
+                windowsUIButton.Buttons[11].Properties.Visible = visible;
+                if (Commons.Modules.KyHieuDV == "DM")
+                {
+                    windowsUIButton.Buttons[12].Properties.Visible = visible;
+                }
+                else
+                {
+                    windowsUIButton.Buttons[12].Properties.Visible = false;
+                }
+                windowsUIButton.Buttons[13].Properties.Visible = visible;
+                windowsUIButton.Buttons[14].Properties.Visible = visible;
             }
-            windowsUIButton.Buttons[13].Properties.Visible = visible;
-            windowsUIButton.Buttons[14].Properties.Visible = visible;
             //      groupDanhSachKhoaHoc.Enabled = visible;
         }
+        private void LoadCboDataLink()
+        {
+            try
+            {
+                DataTable dt = new DataTable();
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT ROW_NUMBER() OVER (ORDER BY (SELECT NULL)) ID, [NAME] FROM sys.sysdatabases where name LIKE '%DATA_CHAM_CONG%'"));
+                Commons.Modules.ObjSystems.MLoadLookUpEdit(cboDataLink, dt, "ID", "NAME", "");
+                if(Convert.ToInt32(cbDonVi.EditValue) == 1)
+                {
+                    cboDataLink.EditValue = Convert.ToInt64(1);
+                }
+                else
+                {
+                    cboDataLink.EditValue = Convert.ToInt64(2);
+                }
+            }
+            catch { }
+        }
+        private void windowsUIButtonPanel1_ButtonClick(object sender, ButtonEventArgs e)
+        {
+            try
+            {
+                WindowsUIButton btn = e.Button as WindowsUIButton;
+                if (btn == null) return;
+                XtraUserControl ctl = new XtraUserControl();
+                switch (btn.Tag.ToString())
+                {
+                    case "tinhtrang":
+                        {
+                            frmTinhTrangBangCong frm = new frmTinhTrangBangCong();
+                            frm.dNgay = Convert.ToDateTime(dtNgayChamCong.EditValue);
+                            frm.iID_DV = Convert.ToInt64(cbDonVi.EditValue);
+                            if (frm.ShowDialog() == DialogResult.OK)
+                            {
 
+                            }
+                            break;
+                        }
+                    default:
+                        {
+                            break;
+                        }
+                }
+            }
+            catch { }
+        }
         private void windowsUIButton_ButtonClick(object sender, DevExpress.XtraBars.Docking2010.ButtonEventArgs e)
         {
             WindowsUIButton btn = e.Button as WindowsUIButton;
@@ -511,7 +581,7 @@ namespace Vs.TimeAttendance
                         //load csdl
                         if (loaiLink == 1)
                         {
-                            if(Convert.ToInt32(cbDonVi.EditValue) == 1)
+                            if (Convert.ToInt32(cboDataLink.EditValue) == 1)
                             {
                                 Commons.Modules.connect = "Server=27.74.240.29;database=DATA_CHAM_CONG_DM1;uid=sa;pwd=codaikadaiku;Connect Timeout=9999;";
                             }
@@ -944,7 +1014,7 @@ namespace Vs.TimeAttendance
                 grvNgay.Columns["NGAY"].DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
                 grvNgay.Columns["NGAY"].DisplayFormat.FormatString = "dd/MM/yyyy";
 
-                
+
                 grvNgay.OptionsSelection.ShowCheckBoxSelectorInColumnHeader = DevExpress.Utils.DefaultBoolean.True;
                 grvNgay.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CheckBoxRowSelect;
                 grvNgay.OptionsSelection.CheckBoxSelectorField = "TH";
@@ -1044,6 +1114,9 @@ namespace Vs.TimeAttendance
         private void cbDonVi_EditValueChanged(object sender, EventArgs e)
         {
             Commons.Modules.ObjSystems.LoadCboXiNghiep(cbDonVi, cbXiNghiep);
+            LoadCboDataLink();
+            iTinhTrangCong = Commons.Modules.ObjSystems.getTinhTrangLuongThang(dtNgayChamCong.DateTime, Convert.ToInt64(cbDonVi.EditValue));
+            enableButon(true);
         }
 
         private void cbXiNghiep_EditValueChanged(object sender, EventArgs e)
@@ -1074,6 +1147,7 @@ namespace Vs.TimeAttendance
 
         private void dtNgayChamCong_EditValueChanged(object sender, EventArgs e)
         {
+
             if (Commons.Modules.sLoad != "0Load")
             {
                 LoadLuoiNgay(dtNgayChamCong.DateTime);
@@ -1093,6 +1167,8 @@ namespace Vs.TimeAttendance
             {
 
             }
+            iTinhTrangCong = Commons.Modules.ObjSystems.getTinhTrangLuongThang(dtNgayChamCong.DateTime, Convert.ToInt64(cbDonVi.EditValue));
+            enableButon(true);
             Commons.Modules.sLoad = "";
         }
 
@@ -1373,8 +1449,10 @@ namespace Vs.TimeAttendance
                 frm.iIDCN = iIDCN;
                 frm.dNgayCC = dNgay;
                 frm.ShowDialog();
-                
+
             }
         }
+
+
     }
 }

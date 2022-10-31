@@ -378,6 +378,12 @@
     <Compile Include="NhanSu\rptBCTaiKyHopDongLaoDong.Designer.cs">
       <DependentUpon>rptBCTaiKyHopDongLaoDong.cs</DependentUpon>
     </Compile>
+    <Compile Include="NhanSu\rptBCTaiNanLD_DM.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptBCTaiNanLD_DM.Designer.cs">
+      <DependentUpon>rptBCTaiNanLD_DM.cs</DependentUpon>
+    </Compile>
     <Compile Include="NhanSu\rptBCTangGiamLD6Thang.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -954,6 +960,30 @@
     <Compile Include="NhanSu\srptToKhaiBaoHiemXaHoi.Designer.cs">
       <DependentUpon>srptToKhaiBaoHiemXaHoi.cs</DependentUpon>
     </Compile>
+    <Compile Include="NhanSu\SubReport\sprtTaiNanLaoDong.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\SubReport\sprtTaiNanLaoDong.Designer.cs">
+      <DependentUpon>sprtTaiNanLaoDong.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\SubReport\sprtKhachQuanKhoTranh.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\SubReport\sprtKhachQuanKhoTranh.Designer.cs">
+      <DependentUpon>sprtKhachQuanKhoTranh.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\SubReport\sprtDoNguoiLaoDong.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\SubReport\sprtDoNguoiLaoDong.Designer.cs">
+      <DependentUpon>sprtDoNguoiLaoDong.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\SubReport\sprtDoNguoiSDLaoDong.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\SubReport\sprtDoNguoiSDLaoDong.Designer.cs">
+      <DependentUpon>sprtDoNguoiSDLaoDong.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DanhMuc\rptDSDonVi.cs">
@@ -1135,6 +1165,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="NhanSu\rptBCTaiKyHopDongLaoDong.resx">
       <DependentUpon>rptBCTaiKyHopDongLaoDong.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\rptBCTaiNanLD_DM.resx">
+      <DependentUpon>rptBCTaiNanLD_DM.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NhanSu\rptBCTangGiamLD6Thang.resx">
       <DependentUpon>rptBCTangGiamLD6Thang.cs</DependentUpon>
@@ -1426,6 +1459,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="NhanSu\srptToKhaiBaoHiemXaHoi.resx">
       <DependentUpon>srptToKhaiBaoHiemXaHoi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\SubReport\sprtTaiNanLaoDong.resx">
+      <DependentUpon>sprtTaiNanLaoDong.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\SubReport\sprtKhachQuanKhoTranh.resx">
+      <DependentUpon>sprtKhachQuanKhoTranh.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\SubReport\sprtDoNguoiLaoDong.resx">
+      <DependentUpon>sprtDoNguoiLaoDong.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\SubReport\sprtDoNguoiSDLaoDong.resx">
+      <DependentUpon>sprtDoNguoiSDLaoDong.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">

@@ -2937,11 +2937,13 @@ F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\DevExpress.XtraScheduler.v22.1.dll
 F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\DevExpress.XtraTreeList.v22.1.dll
 F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\DevExpress.XtraTreeMap.v22.1.dll
 F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\DevExpress.XtraTreeMap.v22.1.UI.dll
+F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\Vs.Recruit.dll
 F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\VS.Report.dll
 F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\EPPlus.dll
 F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\NPOI.dll
 F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\NPOI.OOXML.dll
 F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\Newtonsoft.Json.dll
+F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\Spire.XLS.dll
 F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\DevExpress.XtraDiagram.v22.1.dll
 F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\DevExpress.Diagram.v22.1.Core.dll
 F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\DevExpress.XtraVerticalGrid.v22.1.dll
@@ -2949,10 +2951,13 @@ F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\DevExpress.XtraNavBar.v22.1.dll
 F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\DevExpress.XtraCharts.v22.1.Extensions.dll
 F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\NPOI.OpenXmlFormats.dll
 F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\NPOI.OpenXml4Net.dll
+F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\Spire.License.dll
 F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\Commons.pdb
 F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\Commons.dll.config
 F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\VS.Report.pdb
 F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\VS.Report.dll.config
+F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\Vs.Recruit.pdb
+F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\Vs.Recruit.dll.config
 F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\DevExpress.Charts.v22.1.Core.xml
 F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\DevExpress.Dashboard.v22.1.Core.xml
 F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\DevExpress.Dashboard.v22.1.Win.xml

@@ -143,6 +143,12 @@
     <Compile Include="Form\frmLinkDuLieuChamCong.Designer.cs">
       <DependentUpon>frmLinkDuLieuChamCong.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form\frmTinhTrangBangCong.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\frmTinhTrangBangCong.Designer.cs">
+      <DependentUpon>frmTinhTrangBangCong.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form\frmVachTheLoi.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -517,6 +523,12 @@
     <Compile Include="UAC\BaoCao\ucBaoCaoTheoNgay.Designer.cs">
       <DependentUpon>ucBaoCaoTheoNgay.cs</DependentUpon>
     </Compile>
+    <Compile Include="UAC\BaoCao\WaitForm1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UAC\BaoCao\WaitForm1.Designer.cs">
+      <DependentUpon>WaitForm1.cs</DependentUpon>
+    </Compile>
     <Compile Include="UAC\ucDiemChuyenCanThang.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -579,6 +591,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form\frmLinkDuLieuChamCong.resx">
       <DependentUpon>frmLinkDuLieuChamCong.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\frmTinhTrangBangCong.resx">
+      <DependentUpon>frmTinhTrangBangCong.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\frmVachTheLoi.resx">
       <DependentUpon>frmVachTheLoi.cs</DependentUpon>
@@ -776,6 +791,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UAC\BaoCao\ucBaoCaoTheoNgay.resx">
       <DependentUpon>ucBaoCaoTheoNgay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UAC\BaoCao\WaitForm1.resx">
+      <DependentUpon>WaitForm1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UAC\ucDiemChuyenCanThang.resx">
       <DependentUpon>ucDiemChuyenCanThang.cs</DependentUpon>

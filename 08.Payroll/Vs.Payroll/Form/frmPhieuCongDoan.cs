@@ -44,15 +44,8 @@ namespace Vs.Payroll
                 chkKT.Checked = Commons.Modules.bKiemPCD;
                 Commons.Modules.sLoad = "0Load";
                 Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboDV, Commons.Modules.ObjSystems.DataDonVi(false), "ID_DV", "TEN_DV", "TEN_DV");
-
-                DataTable dt = new DataTable();
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT T.ID_XN,T.TEN_XN FROM (SELECT  DISTINCT  STT_DV, STT_XN ,ID_XN, TEN_XN  AS TEN_XN  FROM dbo.MGetToUser('" + Commons.Modules.UserName + "', " + Commons.Modules.TypeLanguage + ") WHERE ID_DV = " + cboDV.EditValue + " OR " + cboDV.EditValue + " = -1 AND ID_LOAI_CHUYEN IN(1, 2, 3, 4, 5, 6, 7) UNION SELECT - 1, -1, -1, '< All >') T ORDER BY T.STT_DV, T.STT_XN"));
-                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboXN, dt, "ID_XN", "TEN_XN", "TEN_XN");
-
-                dt = new DataTable();
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT T2.ID_TO, T2.TEN_TO FROM (SELECT  ID_TO, TEN_TO, STT_TO FROM dbo.MGetToUser('" + Commons.Modules.UserName + "', " + Commons.Modules.TypeLanguage + ") WHERE ID_LOAI_CHUYEN IN(1, 2, 3, 4, 5, 6, 7) AND(ID_DV = " + cboDV.EditValue + " OR " + cboDV.EditValue + " = -1) AND(ID_XN = " + cboXN.EditValue + " OR " + cboXN.EditValue + " = -1)) T2 ORDER BY  STT_TO "));
-                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboTo, dt, "ID_TO", "TEN_TO", "TEN_TO");
-
+                LoadCboXN();
+                LoadCboTo();
 
                 LoadThang();
                 LoadChuyen();
@@ -136,15 +129,30 @@ namespace Vs.Payroll
                     dtNgay = DateTime.ParseExact(cboNgay.Text, "dd/MM/yyyy", cultures);
                 }
                 catch { dtNgay = DateTime.Now; }
-                //optXCLP.SelectedIndex = 0  XEM CU
+
+
+                System.Data.SqlClient.SqlConnection conn;
+                conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                conn.Open();
+                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spPCDHDMH", conn);
+                cmd.Parameters.Add("@UName", SqlDbType.NVarChar).Value = Commons.Modules.UserName;
+                cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                cmd.Parameters.Add("@ID_DV", SqlDbType.BigInt).Value = cboDV.EditValue;
+                cmd.Parameters.Add("@ID_XN", SqlDbType.BigInt).Value = cboXN.EditValue;
+                cmd.Parameters.Add("@ID_TO", SqlDbType.BigInt).Value = cboTo.EditValue;
+                cmd.Parameters.Add("@ID_CHUYEN", SqlDbType.Int).Value = cboChuyen.EditValue;
+                cmd.Parameters.Add("@XemCu", SqlDbType.Int).Value = XemCu;
+                cmd.Parameters.Add("@DNgay", SqlDbType.DateTime).Value = dtNgay;
+                cmd.CommandType = CommandType.StoredProcedure;
+                System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+                DataSet ds = new DataSet();
+                adp.Fill(ds);
                 DataTable dt = new DataTable();
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spPCDHDMH", Commons.Modules.UserName, Commons.Modules.TypeLanguage, cboDV.EditValue, cboXN.EditValue, cboTo.EditValue,
-                         cboChuyen.EditValue, XemCu, dtNgay));
+                dt = ds.Tables[0].Copy();
                 dt.PrimaryKey = new DataColumn[] { dt.Columns["ID_TEMP"] };
                 if (grdPCD.DataSource == null)
                 {
                     Commons.Modules.ObjSystems.MLoadXtraGrid(grdPCD, grvPCD, dt, false, false, true, true, true, this.Name);
-                    grvPCD.Columns["ID_CHUYEN"].Visible = false;
                     grvPCD.Columns["ID_CHUYEN_SD"].Visible = false;
                     grvPCD.Columns["ID_ORD"].Visible = false;
                     grvPCD.Columns["ID_DT"].Visible = false;
@@ -156,10 +164,11 @@ namespace Vs.Payroll
                 {
                     grdPCD.DataSource = dt;
                 }
+
+
                 if (grvPCD.RowCount != 0)
                 {
                     iChuyenSuDung = Convert.ToInt32(grvPCD.GetFocusedRowCellValue("ID_CHUYEN_SD").ToString());
-                    iChuyen = Convert.ToInt32(grvPCD.GetFocusedRowCellValue("ID_CHUYEN").ToString());
                     iOrd = Convert.ToInt32(grvPCD.GetFocusedRowCellValue("ID_ORD").ToString());
                 }
                 if (iIDPCD_TEMP != -1)
@@ -171,8 +180,12 @@ namespace Vs.Payroll
                     }
                     catch { }
                 }
+
+                dt = new DataTable();
+                dt = ds.Tables[1].Copy();
+                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboMaHang, dt, "ID_ORD", "TEN_HH", "TEN_HH");
             }
-            catch { }
+            catch (Exception ex) { }
         }
 
         private void LoadCN()
@@ -302,7 +315,6 @@ namespace Vs.Payroll
             grvCD.UpdateCurrentRow();
 
             iChuyenSuDung = grvPCD.GetFocusedRowCellValue("ID_CHUYEN_SD") == null ? -1 : Convert.ToInt32(grvPCD.GetFocusedRowCellValue("ID_CHUYEN_SD").ToString());
-            iChuyen = grvPCD.GetFocusedRowCellValue("ID_CHUYEN") == null ? -1 : Convert.ToInt32(grvPCD.GetFocusedRowCellValue("ID_CHUYEN").ToString());
             iOrd = grvPCD.GetFocusedRowCellValue("ID_ORD") == null ? -1 : Convert.ToInt32(grvPCD.GetFocusedRowCellValue("ID_ORD").ToString());
             //LoadCN();
 
@@ -322,7 +334,7 @@ namespace Vs.Payroll
                 catch { }
                 if (sIDCN != "")
                 {
-                    sDK = "ID_CHUYEN = '" + iChuyen + "' AND ID_ORD = '" + iOrd + "' ";
+                    sDK = "ID_ORD = '" + iOrd + "' ";
                 }
                 dtTmp.DefaultView.RowFilter = sDK;
             }
@@ -377,7 +389,14 @@ namespace Vs.Payroll
                 catch { }
                 if (sIDCN != "-1")
                 {
-                    sDK = " ID_CN = '" + sIDCN + "' AND ID_CHUYEN = '" + iChuyen + "' AND ID_CHUYEN_SD = '" + iChuyenSuDung + "' AND ID_ORD = '" + iOrd + "' ";
+                    if (XemCu == 0)
+                    {
+                        sDK = " ID_CN = '" + sIDCN + "' AND ID_CHUYEN = '" + iChuyen + "' AND ID_CHUYEN_SD = '" + iChuyenSuDung + "' AND ID_ORD = '" + iOrd + "' ";
+                    }
+                    else
+                    {
+                        sDK = " ID_CN = '" + sIDCN + "' AND ID_CHUYEN_SD = '" + iChuyenSuDung + "' AND ID_ORD = '" + iOrd + "' ";
+                    }
                 }
                 else
                 {
@@ -405,11 +424,10 @@ namespace Vs.Payroll
             windowsUIButton.Buttons[2].Properties.Visible = !TSua;
             windowsUIButton.Buttons[3].Properties.Visible = !TSua;
             windowsUIButton.Buttons[4].Properties.Visible = !TSua;
-            windowsUIButton.Buttons[5].Properties.Visible = !TSua;
-            windowsUIButton.Buttons[8].Properties.Visible = !TSua;
+            windowsUIButton.Buttons[7].Properties.Visible = !TSua;
 
+            windowsUIButton.Buttons[5].Properties.Visible = TSua;
             windowsUIButton.Buttons[6].Properties.Visible = TSua;
-            windowsUIButton.Buttons[7].Properties.Visible = TSua;
 
 
             cboDV.Properties.ReadOnly = TSua;
@@ -417,6 +435,8 @@ namespace Vs.Payroll
             cboTo.Properties.ReadOnly = TSua;
             cboChuyen.Properties.ReadOnly = TSua;
             cboNgay.Properties.ReadOnly = TSua;
+            lblMaHang.Enabled = TSua;
+            cboMaHang.Properties.ReadOnly = !TSua;
 
         }
 
@@ -459,14 +479,12 @@ namespace Vs.Payroll
             {
                 if (Commons.Modules.sLoad == "0Load") return;
                 Commons.Modules.sLoad = "0Load";
-                DataTable dt = new DataTable();
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT  T.ID_XN,T.TEN_XN FROM (SELECT  DISTINCT  STT_DV, STT_XN, ID_XN, TEN_XN  AS TEN_XN  FROM dbo.MGetToUser('" + Commons.Modules.UserName + "', " + Commons.Modules.TypeLanguage + ") WHERE (ID_DV = " + cboDV.EditValue + " OR " + cboDV.EditValue + " = -1) AND ID_LOAI_CHUYEN IN(1, 2, 3, 4, 5, 6, 7) UNION SELECT - 1, -1, -1, '< All >') T ORDER BY T.STT_DV, T.STT_XN"));
-                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboXN, dt, "ID_XN", "TEN_XN", "TEN_XN");
-
-                dt = new DataTable();
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT T2.ID_TO, T2.TEN_TO FROM (SELECT  ID_TO, TEN_TO, STT_TO FROM dbo.MGetToUser('" + Commons.Modules.UserName + "', " + Commons.Modules.TypeLanguage + ") WHERE ID_LOAI_CHUYEN IN(1, 2, 3, 4, 5, 6, 7) AND(ID_DV = " + cboDV.EditValue + " OR " + cboDV.EditValue + " = -1) AND(ID_XN = " + cboXN.EditValue + " OR " + cboXN.EditValue + " = -1) ) T2 ORDER BY  STT_TO "));
-                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboTo, dt, "ID_TO", "TEN_TO", "TEN_TO");
+                LoadCboXN();
+                LoadCboTo();
                 LoadChuyen();
+                LoadPCD();
+                LoadCN();
+                LoadCD();
                 Commons.Modules.sLoad = "";
             }
             catch { }
@@ -477,9 +495,10 @@ namespace Vs.Payroll
         {
             if (Commons.Modules.sLoad == "0Load") return;
             Commons.Modules.sLoad = "0Load";
-            DataTable dt = new DataTable();
-            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT T2.ID_TO, T2.TEN_TO FROM (SELECT  ID_TO, TEN_TO, STT_TO FROM dbo.MGetToUser('" + Commons.Modules.UserName + "', " + Commons.Modules.TypeLanguage + ") WHERE ID_LOAI_CHUYEN IN(1, 2, 3, 4, 5, 6, 7) AND(ID_DV = " + cboDV.EditValue + " OR " + cboDV.EditValue + " = -1) AND(ID_XN = " + cboXN.EditValue + " OR " + cboXN.EditValue + " = -1)) T2 ORDER BY  STT_TO "));
-            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboTo, dt, "ID_TO", "TEN_TO", "TEN_TO");
+            LoadCboTo();
+            LoadPCD();
+            LoadCN();
+            LoadCD();
             Commons.Modules.sLoad = "";
         }
 
@@ -683,7 +702,7 @@ namespace Vs.Payroll
                             //Form.frmThuaThieuSL frm = new Form.frmThuaThieuSL(Convert.ToInt64(dt.Rows[0]["ID_DHB"]), Convert.ToInt64(dt.Rows[0]["ID_HH"]), Convert.ToInt64(grvPCD.GetFocusedRowCellValue("ID_CHUYEN")), Convert.ToInt64(grvPCD.GetFocusedRowCellValue("ID_CHUYEN_SD")), Convert.ToInt64(grvPCD.GetFocusedRowCellValue("ID_ORD")), DateTime.ParseExact(cboNgay.Text, "dd/MM/yyyy", cultures));
                             Form.frmThuaThieuSL frm = new Form.frmThuaThieuSL();
                             frm.iID_DV = Convert.ToInt32(cboDV.EditValue);
-                            frm.iID_CHUYEN = Convert.ToInt64(grvPCD.GetFocusedRowCellValue("ID_CHUYEN"));
+                            //frm.iID_CHUYEN = Convert.ToInt64(grvPCD.GetFocusedRowCellValue("ID_CHUYEN"));
                             frm.iID_CHUYEN_SD = Convert.ToInt64(grvPCD.GetFocusedRowCellValue("ID_CHUYEN_SD"));
                             frm.iID_ORD = Convert.ToInt64(grvPCD.GetFocusedRowCellValue("ID_ORD"));
                             frm.iID_DT = Convert.ToInt32(grvPCD.GetFocusedRowCellValue("ID_DT"));
@@ -711,7 +730,7 @@ namespace Vs.Payroll
                             DateTime dThang = DateTime.ParseExact(cboNgay.Text, "dd/MM/yyyy", cultures);
                             frm.dThang = Convert.ToDateTime("01/" + dThang.Month + "/" + dThang.Year);
                             frm.iID_DV = Convert.ToInt32(cboDV.EditValue);
-                            if(frm.ShowDialog() == DialogResult.OK)
+                            if (frm.ShowDialog() == DialogResult.OK)
                             {
                                 LoadPCD();
                             }
@@ -737,7 +756,6 @@ namespace Vs.Payroll
                             if (grvPCD.RowCount == 0) return;
                             DateTime Ngay = DateTime.ParseExact(cboNgay.Text, "dd/MM/yyyy", cultures);
 
-                            iChuyen = Convert.ToInt32(grvPCD.GetFocusedRowCellValue("ID_CHUYEN"));
                             iChuyenSuDung = Convert.ToInt32(grvPCD.GetFocusedRowCellValue("ID_CHUYEN_SD"));
                             iOrd = Convert.ToInt32(grvPCD.GetFocusedRowCellValue("ID_ORD"));
 
@@ -768,7 +786,7 @@ namespace Vs.Payroll
                             {
                                 Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, stbCongNhan, (DataTable)grdCD.DataSource, "");
 
-                                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spSavePhieuCongDoan", stbCongNhan, iChuyen, iChuyenSuDung, iOrd, ngay.ToString("yyyyMMdd"));
+                                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spSavePhieuCongDoan", stbCongNhan, iChuyen, cboChuyen.EditValue, iOrd, ngay.ToString("yyyyMMdd"));
                                 Commons.Modules.ObjSystems.XoaTable(stbCongNhan);
                             }
                             catch (Exception ex) { }
@@ -839,7 +857,7 @@ namespace Vs.Payroll
         {
             try
             {
-                grvCD.SetFocusedRowCellValue("ID_CHUYEN", grvPCD.GetFocusedRowCellValue("ID_CHUYEN"));
+                grvCD.SetFocusedRowCellValue("ID_CHUYEN", grvTo.GetFocusedRowCellValue("ID_CHUYEN"));
                 grvCD.SetFocusedRowCellValue("ID_CHUYEN_SD", grvPCD.GetFocusedRowCellValue("ID_CHUYEN_SD"));
                 grvCD.SetFocusedRowCellValue("ID_ORD", grvPCD.GetFocusedRowCellValue("ID_ORD"));
                 grvTo.SetFocusedRowCellValue("CDL", grvCD.RowCount);
@@ -1053,6 +1071,53 @@ namespace Vs.Payroll
                 grvCD.FocusedColumn = grvCD.Columns["ID_CD"];
                 grvCD.FocusedRowHandle = DevExpress.XtraGrid.GridControl.NewItemRowHandle;
             }
+        }
+        private void LoadCboXN()
+        {
+            try
+            {
+                DataTable dt = new DataTable();
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT  T.ID_XN,T.TEN_XN FROM (SELECT  DISTINCT  STT_DV, STT_XN, ID_XN, TEN_XN  AS TEN_XN  FROM dbo.MGetToUser('" + Commons.Modules.UserName + "', " + Commons.Modules.TypeLanguage + ") WHERE (ID_DV = " + cboDV.EditValue + " OR " + cboDV.EditValue + " = -1) AND ID_LOAI_CHUYEN IN(1, 2, 3, 4, 5, 6, 7) UNION SELECT - 1, -1, -1, '< All >') T ORDER BY T.STT_DV, T.STT_XN"));
+                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboXN, dt, "ID_XN", "TEN_XN", "TEN_XN");
+            }
+            catch { }
+        }
+        private void LoadCboTo()
+        {
+            try
+            {
+                DataTable dt = new DataTable();
+                string sSQL = "SELECT T.ID_TO, T.TEN_TO  FROM (SELECT T2.ID_TO, T2.TEN_TO, T2.STT_TO FROM(SELECT ID_TO, TEN_TO, STT_TO FROM dbo.MGetToUser('" + Commons.Modules.UserName + "', " + Commons.Modules.TypeLanguage + ") WHERE ID_LOAI_CHUYEN IN(1, 2, 3, 4, 5, 6, 7) AND(ID_DV = " + cboDV.EditValue + " OR " + cboDV.EditValue + " = -1) AND(ID_XN = " + cboXN.EditValue + " OR " + cboXN.EditValue + " = -1)) T2 UNION SELECT - 1, '< All >', -1) T ORDER BY STT_TO";
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSQL));
+                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboTo, dt, "ID_TO", "TEN_TO", "TEN_TO");
+            }
+            catch (Exception ex) { }
+        }
+
+        private void cboMaHang_EditValueChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                #region filter PCD
+                if (Commons.Modules.sLoad == "0Load") return;
+                DataTable dtTmp = new DataTable();
+                dtTmp = (DataTable)grdPCD.DataSource;
+                String sIDPCD;
+                try
+                {
+                    string sDK = "";
+                    sIDPCD = "";
+                    sDK = "ID_ORD = '" + cboMaHang.EditValue + "' OR '" + cboMaHang.EditValue + "' = '-1' ";
+                    dtTmp.DefaultView.RowFilter = sDK;
+                }
+                catch (Exception ex)
+                {
+                    dtTmp.DefaultView.RowFilter = "1 = 0";
+                }
+                #endregion
+                grvPCD_FocusedRowChanged(null, null);
+            }
+            catch { }
         }
     }
 

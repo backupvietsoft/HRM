@@ -397,6 +397,12 @@
     <Compile Include="Report\rptBangTongHopCongDoan.Designer.cs">
       <DependentUpon>rptBangTongHopCongDoan.cs</DependentUpon>
     </Compile>
+    <Compile Include="Report\rptDSCNToCat.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\rptDSCNToCat.Designer.cs">
+      <DependentUpon>rptDSCNToCat.cs</DependentUpon>
+    </Compile>
     <Compile Include="Report\rptDSCDThuaThieu.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -511,6 +517,12 @@
     </Compile>
     <Compile Include="UAC\ucDangKyBHXH.Designer.cs">
       <DependentUpon>ucDangKyBHXH.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UAC\ucLSPKiemSoat.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UAC\ucLSPKiemSoat.Designer.cs">
+      <DependentUpon>ucLSPKiemSoat.cs</DependentUpon>
     </Compile>
     <Compile Include="UAC\ucDoanhThuCat.cs">
       <SubType>UserControl</SubType>
@@ -763,6 +775,9 @@
     <EmbeddedResource Include="Report\rptBangTongHopCongDoan.resx">
       <DependentUpon>rptBangTongHopCongDoan.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Report\rptDSCNToCat.resx">
+      <DependentUpon>rptDSCNToCat.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Report\rptDSCDThuaThieu.resx">
       <DependentUpon>rptDSCDThuaThieu.cs</DependentUpon>
     </EmbeddedResource>
@@ -819,6 +834,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UAC\ucDangKyBHXH.resx">
       <DependentUpon>ucDangKyBHXH.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UAC\ucLSPKiemSoat.resx">
+      <DependentUpon>ucLSPKiemSoat.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UAC\ucDoanhThuCat.resx">
       <DependentUpon>ucDoanhThuCat.cs</DependentUpon>

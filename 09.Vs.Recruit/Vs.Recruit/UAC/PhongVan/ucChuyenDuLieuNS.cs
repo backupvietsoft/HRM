@@ -361,7 +361,7 @@ namespace Vs.Recruit
                                 DataTable ttc = new DataTable();
                                 frmViewReport frm = new frmViewReport();
 
-                                frm.rpt = new rptTheNhanVien_DM(DateTime.Now);
+                                
 
                                 conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
                                 conn.Open();
@@ -377,7 +377,7 @@ namespace Vs.Recruit
                                 dt = ds.Tables[1].Copy();
                                 dt.TableName = "DA_TA";
                                 frm.AddDataSource(dt);
-
+                                frm.rpt = new rptInTheNV_DM(dt);
 
                                 ttc = ds.Tables[0].Copy();
                                 ttc.TableName = "TTC";

@@ -28,6 +28,7 @@ namespace Vs.HRM
         public frmImportNhanSu()
         {
             InitializeComponent();
+            Commons.Modules.ObjSystems.ThayDoiNN(this, Root, windowsUIButton);
         }
         private void btnFile_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
@@ -118,7 +119,7 @@ namespace Vs.HRM
                 grvData.Columns[3].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
                 grdData.DataSource = dt;
             }
-            catch
+            catch (Exception ex)
             {
                 Commons.Modules.ObjSystems.XoaTable(sBT);
                 grdData.DataSource = null;
@@ -189,6 +190,7 @@ namespace Vs.HRM
                                 dt = new DataTable();
                                 dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT MA_QG AS N'Mã quốc gia', TEN_QG AS N'Tên quốc gia' FROM dbo.QUOC_GIA"));
                                 Ranges1 = excelWorkSheet1.Range[excelWorkSheet1.Cells[1, 1], excelWorkSheet1.Cells[dt.Rows.Count + 1, dt.Columns.Count]];
+
                                 Ranges1.ColumnWidth = 20;
                                 Ranges1.Font.Name = fontName;
                                 Ranges1.Font.Size = fontSizeNoiDung;
@@ -416,6 +418,25 @@ namespace Vs.HRM
                                 myRange.AutoFilter("1", "<>", Microsoft.Office.Interop.Excel.XlAutoFilterOperator.xlOr, "", true);
                                 MExportExcel(dt, excelWorkSheet16, Ranges1);
 
+
+                                // Trình độ
+                                Microsoft.Office.Interop.Excel.Worksheet excelWorkSheet17 = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Sheets[1];
+                                excelWorkSheet17 = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkbook.Worksheets.Add(After: excelWorkbook.Sheets[excelWorkbook.Sheets.Count]);
+                                excelWorkSheet17.Name = "15 - Lý do thôi việc";
+                                dt = new DataTable();
+                                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT CHAR(13)+ TEN_LD_TV AS N'Lý do thôi việc' FROM dbo.LY_DO_THOI_VIEC"));
+                                Ranges1 = excelWorkSheet17.Range[excelWorkSheet17.Cells[1, 1], excelWorkSheet17.Cells[dt.Rows.Count + 1, dt.Columns.Count]];
+                                Ranges1.ColumnWidth = 20;
+                                Ranges1.Font.Name = fontName;
+                                Ranges1.Font.Size = fontSizeNoiDung;
+                                lastColumn = CharacterIncrement(dt.Columns.Count - 1);
+                                Ranges1.Range["A1", "" + lastColumn + "1"].Font.Bold = true;
+                                Ranges1.Range["A1", "" + lastColumn + "1"].HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                                Ranges1.Range["A1", "" + lastColumn + "1"].Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+                                myRange = excelWorkSheet17.get_Range("A1", lastColumn + (dt.Rows.Count + 1).ToString());
+                                myRange.AutoFilter("1", "<>", Microsoft.Office.Interop.Excel.XlAutoFilterOperator.xlOr, "", true);
+                                MExportExcel(dt, excelWorkSheet17, Ranges1);
+
                                 excelWorkSheet.Activate();
 
                                 excelApplication.Visible = true;
@@ -482,7 +503,9 @@ namespace Vs.HRM
                     default: break;
                 }
             }
-            catch { }
+            catch (Exception EX) {
+                XtraMessageBox.Show(EX.Message);
+            }
         }
         #region import ứng viên
         private void ImportUngVien(DataTable dtSource)
@@ -510,12 +533,15 @@ namespace Vs.HRM
                         errorCount++;
                         errorMS++;
                     }
-                    if (dr[grvData.Columns[col].FieldName.ToString()].ToString().Substring(0, 3) != dr[grvData.Columns[8].FieldName.ToString()].ToString().Substring(0, 3))
+                    if (Commons.Modules.KyHieuDV == "DM")
                     {
-                        string sTenKTra = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgKhongDungDinhDang");
-                        dr.SetColumnError(grvData.Columns[col].FieldName.ToString(), sTenKTra);
-                        dr["XOA"] = 1;
-                        errorMS++;
+                        if (dr[grvData.Columns[col].FieldName.ToString()].ToString().Substring(0, 3) != dr[grvData.Columns[8].FieldName.ToString()].ToString().Substring(0, 3))
+                        {
+                            string sTenKTra = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgKhongDungDinhDang");
+                            dr.SetColumnError(grvData.Columns[col].FieldName.ToString(), sTenKTra);
+                            dr["XOA"] = 1;
+                            errorMS++;
+                        }
                     }
                 }
 
@@ -683,15 +709,37 @@ namespace Vs.HRM
                     }
                 }
 
-                //Hình thức tuyển
+                //Ngày nghỉ việc
                 col = 16;
+                if (!Commons.Modules.MExcel.KiemDuLieuNgay(grvData, dr, col, false, this.Name))
+                {
+                    errorCount++;
+                }
+
+                //Tình trạng nhân sự
+                col = 17;
+                string sLyDoThoiViec = dr[grvData.Columns[col].FieldName.ToString()].ToString();
+                if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, false, 250, this.Name))
+                {
+                    errorCount++;
+                }
+                else
+                {
+                    if (!Commons.Modules.MExcel.KiemTonTai(grvData, dr, col, sLyDoThoiViec, "LY_DO_THOI_VIEC", "TEN_LD_TV", false, this.Name))
+                    {
+                        errorCount++;
+                    }
+                }
+
+                //Hình thức tuyển
+                col = 18;
                 if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, false, 250, this.Name))
                 {
                     errorCount++;
                 }
 
                 //Tham gia BHXH
-                col = 17;
+                col = 19;
                 string sThamGiaBHXH = dr[grvData.Columns[col].FieldName.ToString()].ToString();
                 if (!Commons.Modules.MExcel.KiemDuLieuBool(grvData, dr, col, sThamGiaBHXH, false))
                 {
@@ -699,7 +747,7 @@ namespace Vs.HRM
                 }
 
                 //LD Tỉnh
-                col = 18;
+                col = 20;
                 string sLDTinh = dr[grvData.Columns[col].FieldName.ToString()].ToString();
                 if (!Commons.Modules.MExcel.KiemDuLieuBool(grvData, dr, col, sLDTinh, false))
                 {
@@ -707,14 +755,14 @@ namespace Vs.HRM
                 }
 
                 //Ghi chú
-                col = 19;
+                col = 21;
                 if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, false, 250, this.Name))
                 {
                     errorCount++;
                 }
 
                 //Dân tộc
-                col = 20;
+                col = 22;
                 string sTenDanToc = dr[grvData.Columns[col].FieldName.ToString()].ToString();
                 if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, false, 250, this.Name))
                 {
@@ -729,49 +777,49 @@ namespace Vs.HRM
                 }
 
                 //Tôn giáo
-                col = 21;
-                if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, false, 250, this.Name))
-                {
-                    errorCount++;
-                }
-
-                //Nơi sinh
-                col = 22;
-                if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, false, 250, this.Name))
-                {
-                    errorCount++;
-                }
-
-                //Nguyên quán
                 col = 23;
                 if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, false, 250, this.Name))
                 {
                     errorCount++;
                 }
 
-                //Số CMND
+                //Nơi sinh
                 col = 24;
                 if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, false, 250, this.Name))
                 {
                     errorCount++;
                 }
 
-                //Ngày cấp
+                //Nguyên quán
                 col = 25;
-                if (!Commons.Modules.MExcel.KiemDuLieuNgay(grvData, dr, col, false, this.Name))
+                if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, false, 250, this.Name))
                 {
                     errorCount++;
                 }
 
-                //Nơi cấp
+                //Số CMND
                 col = 26;
                 if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, false, 250, this.Name))
                 {
                     errorCount++;
                 }
 
-                //Tình trạng hôn nhân
+                //Ngày cấp
                 col = 27;
+                if (!Commons.Modules.MExcel.KiemDuLieuNgay(grvData, dr, col, false, this.Name))
+                {
+                    errorCount++;
+                }
+
+                //Nơi cấp
+                col = 28;
+                if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, false, 250, this.Name))
+                {
+                    errorCount++;
+                }
+
+                //Tình trạng hôn nhân
+                col = 29;
                 string sTTHonNhan = dr[grvData.Columns[col].FieldName.ToString()].ToString();
                 if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, false, 250, this.Name))
                 {
@@ -786,35 +834,35 @@ namespace Vs.HRM
                 }
 
                 //Mã thẻ ATM
-                col = 28;
-                if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, false, 250, this.Name))
-                {
-                    errorCount++;
-                }
-
-                //Số tài khoản
-                col = 29;
-                if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, false, 250, this.Name))
-                {
-                    errorCount++;
-                }
-
-                //Mã số thuế
                 col = 30;
                 if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, false, 250, this.Name))
                 {
                     errorCount++;
                 }
 
-                //Tên không dấu
+                //Số tài khoản
                 col = 31;
                 if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, false, 250, this.Name))
                 {
                     errorCount++;
                 }
 
-                //Lao động nước ngoài
+                //Mã số thuế
                 col = 32;
+                if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, false, 250, this.Name))
+                {
+                    errorCount++;
+                }
+
+                //Tên không dấu
+                col = 33;
+                if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, false, 250, this.Name))
+                {
+                    errorCount++;
+                }
+
+                //Lao động nước ngoài
+                col = 34;
                 string sLDNuocNgoai = dr[grvData.Columns[col].FieldName.ToString()].ToString();
                 if (!Commons.Modules.MExcel.KiemDuLieuBool(grvData, dr, col, sLDNuocNgoai, false))
                 {
@@ -822,42 +870,42 @@ namespace Vs.HRM
                 }
 
                 //ĐT di động
-                col = 33;
-                if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, false, 250, this.Name))
-                {
-                    errorCount++;
-                }
-
-                //ĐT nhà
-                col = 34;
-                if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, false, 250, this.Name))
-                {
-                    errorCount++;
-                }
-
-                //ĐT người thân
                 col = 35;
                 if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, false, 250, this.Name))
                 {
                     errorCount++;
                 }
 
-                //Email
+                //ĐT nhà
                 col = 36;
                 if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, false, 250, this.Name))
                 {
                     errorCount++;
                 }
 
-                //Dia chi thuong tru
+                //ĐT người thân
                 col = 37;
                 if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, false, 250, this.Name))
                 {
                     errorCount++;
                 }
 
-                //Thành phố
+                //Email
                 col = 38;
+                if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, false, 250, this.Name))
+                {
+                    errorCount++;
+                }
+
+                //Dia chi thuong tru
+                col = 39;
+                if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, false, 250, this.Name))
+                {
+                    errorCount++;
+                }
+
+                //Thành phố
+                col = 40;
                 string sThanhPho = dr[grvData.Columns[col].FieldName.ToString()].ToString();
                 if (!Commons.Modules.MExcel.KiemTonTai(grvData, dr, col, sThanhPho, "THANH_PHO", "TEN_TP", false, this.Name))
                 {
@@ -865,7 +913,7 @@ namespace Vs.HRM
                 }
 
                 //Quận
-                col = 39;
+                col = 41;
                 string sQuan = dr[grvData.Columns[col].FieldName.ToString()].ToString();
                 if (!Commons.Modules.MExcel.KiemTonTai(grvData, dr, col, sQuan, "QUAN", "TEN_QUAN", false, this.Name))
                 {
@@ -873,7 +921,7 @@ namespace Vs.HRM
                 }
 
                 //phường xã
-                col = 40;
+                col = 42;
                 string sPhuongXa = dr[grvData.Columns[col].FieldName.ToString()].ToString();
                 if (!Commons.Modules.MExcel.KiemTonTai(grvData, dr, col, sPhuongXa, "PHUONG_XA", "TEN_PX", false, this.Name))
                 {
@@ -881,21 +929,21 @@ namespace Vs.HRM
                 }
 
                 //Thôn xóm
-                col = 41;
+                col = 43;
                 if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, false, 250, this.Name))
                 {
                     errorCount++;
                 }
 
                 //Địa chỉ tạm trú
-                col = 42;
+                col = 44;
                 if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, false, 250, this.Name))
                 {
                     errorCount++;
                 }
 
                 //Thành phố tạm trú
-                col = 43;
+                col = 45;
                 string sThanhPhoTamTru = dr[grvData.Columns[col].FieldName.ToString()].ToString();
                 if (!Commons.Modules.MExcel.KiemTonTai(grvData, dr, col, sThanhPhoTamTru, "THANH_PHO", "TEN_TP", false, this.Name))
                 {
@@ -903,7 +951,7 @@ namespace Vs.HRM
                 }
 
                 //Quận tạm trú
-                col = 44;
+                col = 46;
                 string sQuanTamTru = dr[grvData.Columns[col].FieldName.ToString()].ToString();
                 if (!Commons.Modules.MExcel.KiemTonTai(grvData, dr, col, sQuanTamTru, "QUAN", "TEN_QUAN", false, this.Name))
                 {
@@ -911,7 +959,7 @@ namespace Vs.HRM
                 }
 
                 //phường xã tạm trú
-                col = 45;
+                col = 47;
                 string sPhuongXaTamTru = dr[grvData.Columns[col].FieldName.ToString()].ToString();
                 if (!Commons.Modules.MExcel.KiemTonTai(grvData, dr, col, sPhuongXaTamTru, "PHUONG_XA", "TEN_PX", false, this.Name))
                 {
@@ -919,37 +967,37 @@ namespace Vs.HRM
                 }
 
                 //Thôn xóm tạm trú
-                col = 46;
+                col = 48;
                 if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, false, 250, this.Name))
                 {
                     errorCount++;
                 }
 
                 //số BHXH
-                col = 47;
+                col = 49;
                 if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, false, 250, this.Name))
                 {
                     errorCount++;
                 }
 
                 //Ngày đóng BHXH
-                col = 48;
+                col = 50;
                 if (!Commons.Modules.MExcel.KiemDuLieuNgay(grvData, dr, col, false, this.Name))
                 {
                     errorCount++;
                 }
 
                 //loại trình độ 
-                col = 49;
+                col = 51;
 
                 string sLoaiTrinhDo = dr[grvData.Columns[col].FieldName.ToString()].ToString();
-                if (!Commons.Modules.MExcel.KiemTonTai(grvData, dr, col, sLoaiTrinhDo, "LOAI_TRINH_DO", "TEN_LTD", false, this.Name))
+                if (!Commons.Modules.MExcel.KiemTonTai(grvData, dr, col, sLoaiTrinhDo, "LOAI_TRINH_DO", "TEN_LOAI_TD", false, this.Name))
                 {
                     errorCount++;
                 }
 
                 //Trình độ văn hóa
-                col = 50;
+                col = 52;
                 string sTDVanHoa = dr[grvData.Columns[col].FieldName.ToString()].ToString();
                 if (!Commons.Modules.MExcel.KiemTonTai(grvData, dr, col, sTDVanHoa, "TRINH_DO_VAN_HOA", "TEN_TDVH", false, this.Name))
                 {
@@ -958,28 +1006,28 @@ namespace Vs.HRM
 
 
                 //Chuyên môn
-                col = 51;
-                if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, false, 250, this.Name))
-                {
-                    errorCount++;
-                }
-
-                //Ngoại ngữ
-                col = 52;
-                if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, false, 250, this.Name))
-                {
-                    errorCount++;
-                }
-
-                //Ngân hàng
                 col = 53;
                 if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, false, 250, this.Name))
                 {
                     errorCount++;
                 }
 
-                //Chi nhánh ngân hàng
+                //Ngoại ngữ
                 col = 54;
+                if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, false, 250, this.Name))
+                {
+                    errorCount++;
+                }
+
+                //Ngân hàng
+                col = 55;
+                if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, false, 250, this.Name))
+                {
+                    errorCount++;
+                }
+
+                //Chi nhánh ngân hàng
+                col = 56;
                 if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, false, 250, this.Name))
                 {
                     errorCount++;
@@ -991,164 +1039,167 @@ namespace Vs.HRM
             int errorEmpty = 0;
             int errorExist = 0;
             string sBT = "sBTImport" + Commons.Modules.iIDUser;
-            if (errorMS != 0)
+            if (Commons.Modules.KyHieuDV == "DM")
             {
-                if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgCoMaSoCongNhanBiLoiBanCoMuonTaoMaMoi"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) return;
-                try
+                if (errorMS != 0)
                 {
-                    for (int i = 0; i < dtSource.Rows.Count; i++)
+                    if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgCoMaSoCongNhanBiLoiBanCoMuonTaoMaMoi"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) return;
+                    try
                     {
-                        if (dtSource.Rows[i][grvData.Columns[8].FieldName.ToString()].ToString() == "")
+                        for (int i = 0; i < dtSource.Rows.Count; i++)
                         {
-                            errorEmpty++;
-                        }
-                        else
-                        {
-                            if (Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT COUNT(*) FROM dbo.[TO] A WHERE A.[TEN_TO] = N'" + dtSource.Rows[i][grvData.Columns[8].FieldName.ToString()].ToString() + "'")) == 0)
+                            if (dtSource.Rows[i][grvData.Columns[8].FieldName.ToString()].ToString() == "")
                             {
-                                errorExist++;
+                                errorEmpty++;
+                            }
+                            else
+                            {
+                                if (Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT COUNT(*) FROM dbo.[TO] A WHERE A.[TEN_TO] = N'" + dtSource.Rows[i][grvData.Columns[8].FieldName.ToString()].ToString() + "'")) == 0)
+                                {
+                                    errorExist++;
+                                }
                             }
                         }
-                    }
-                    if (errorEmpty != 0)
-                    {
-                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgBanPhaiChonToTruoc"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        return;
-                    }
-                    if (errorExist != 0)
-                    {
-                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgTenToKhongTonTai"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        return;
-                    }
-
-                    string sMaMaxDMS = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.AUTO_CREATE_SO_CONG_NHAN(1, 1)").ToString();
-                    string sMaMaxDMT = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.AUTO_CREATE_SO_CONG_NHAN(2, 1)").ToString();
-
-                    int iMaTemp = 0;
-                    Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBT, Commons.Modules.ObjSystems.ConvertDatatable(grvData), "");
-                    for (int i = 0; i < dtSource.Rows.Count; i++)
-                    {
-                        string sMaSo = dtSource.Rows[i][grvData.Columns[0].FieldName.ToString()].ToString();
-                        string sHo = dtSource.Rows[i][grvData.Columns[2].FieldName.ToString()].ToString();
-                        string sTen = dtSource.Rows[i][grvData.Columns[3].FieldName.ToString()].ToString();
-                        string sNgaySinh = Convert.ToDateTime(dtSource.Rows[i][grvData.Columns[5].FieldName.ToString()]).ToString("MM/dd/yyyy");
-                        string sMaSoTheCC = dtSource.Rows[i][grvData.Columns[1].FieldName.ToString()].ToString();
-                        string sGetID_DV = "SELECT T1.ID_DV FROM dbo.DON_VI T1 INNER JOIN dbo.XI_NGHIEP T2 ON T2.ID_DV = T1.ID_DV INNER JOIN dbo.[TO] T3 ON T3.ID_XN = T2.ID_XN WHERE T3.TEN_TO = N'" + dtSource.Rows[i][grvData.Columns[8].FieldName.ToString()].ToString() + "'";
-                        int iID_DV = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, sGetID_DV));
-
-                        if (dtSource.AsEnumerable().Where(x => x.Field<string>(grvData.Columns[0].FieldName.ToString()).Trim().Equals(sMaSo)).CopyToDataTable().Rows.Count > 1)
+                        if (errorEmpty != 0)
                         {
-                            string strSQL = "UPDATE  A SET A.[" + grvData.Columns[0].FieldName.ToString() + "] = N'" + sMaMaxDMS + "' FROM " + sBT + " A WHERE A.[" + grvData.Columns[0].FieldName.ToString() + "] = N'" + sMaSo + "' AND A.[" + grvData.Columns[2].FieldName.ToString() + "] = N'" + sHo + "' AND A.[" + grvData.Columns[3].FieldName.ToString() + "] = N'" + sTen + "' AND A.[" + grvData.Columns[5].FieldName.ToString() + "] = '" + sNgaySinh + "'";
-                            SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, strSQL);
-                            dtSource.Rows[i][0] = sMaMaxDMS;
-                            i--;
+                            XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgBanPhaiChonToTruoc"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
                         }
-                        else
+                        if (errorExist != 0)
                         {
-                            if (Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT COUNT(*) FROM dbo.[CONG_NHAN] WHERE MS_CN = N'" + sMaSo + "'")) > 0)
+                            XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgTenToKhongTonTai"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
+
+                        string sMaMaxDMS = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.AUTO_CREATE_SO_CONG_NHAN(1, 1)").ToString();
+                        string sMaMaxDMT = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.AUTO_CREATE_SO_CONG_NHAN(2, 1)").ToString();
+
+                        int iMaTemp = 0;
+                        Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBT, Commons.Modules.ObjSystems.ConvertDatatable(grvData), "");
+                        for (int i = 0; i < dtSource.Rows.Count; i++)
+                        {
+                            string sMaSo = dtSource.Rows[i][grvData.Columns[0].FieldName.ToString()].ToString();
+                            string sHo = dtSource.Rows[i][grvData.Columns[2].FieldName.ToString()].ToString();
+                            string sTen = dtSource.Rows[i][grvData.Columns[3].FieldName.ToString()].ToString();
+                            string sNgaySinh = Convert.ToDateTime(dtSource.Rows[i][grvData.Columns[5].FieldName.ToString()]).ToString("MM/dd/yyyy");
+                            string sMaSoTheCC = dtSource.Rows[i][grvData.Columns[1].FieldName.ToString()].ToString();
+                            string sGetID_DV = "SELECT T1.ID_DV FROM dbo.DON_VI T1 INNER JOIN dbo.XI_NGHIEP T2 ON T2.ID_DV = T1.ID_DV INNER JOIN dbo.[TO] T3 ON T3.ID_XN = T2.ID_XN WHERE T3.TEN_TO = N'" + dtSource.Rows[i][grvData.Columns[8].FieldName.ToString()].ToString() + "'";
+                            int iID_DV = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, sGetID_DV));
+
+                            if (dtSource.AsEnumerable().Where(x => x.Field<string>(grvData.Columns[0].FieldName.ToString()).Trim().Equals(sMaSo)).CopyToDataTable().Rows.Count > 1)
                             {
-                                if (iID_DV == 1)
+                                string strSQL = "UPDATE  A SET A.[" + grvData.Columns[0].FieldName.ToString() + "] = N'" + sMaMaxDMS + "' FROM " + sBT + " A WHERE A.[" + grvData.Columns[0].FieldName.ToString() + "] = N'" + sMaSo + "' AND A.[" + grvData.Columns[2].FieldName.ToString() + "] = N'" + sHo + "' AND A.[" + grvData.Columns[3].FieldName.ToString() + "] = N'" + sTen + "' AND A.[" + grvData.Columns[5].FieldName.ToString() + "] = '" + sNgaySinh + "'";
+                                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, strSQL);
+                                dtSource.Rows[i][0] = sMaMaxDMS;
+                                i--;
+                            }
+                            else
+                            {
+                                if (Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT COUNT(*) FROM dbo.[CONG_NHAN] WHERE MS_CN = N'" + sMaSo + "'")) > 0)
                                 {
-                                    if (Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT COUNT(*) FROM dbo.[" + sBT + "] A WHERE A.[" + grvData.Columns[0].FieldName.ToString() + "] = N'" + sMaMaxDMS + "'")) > 0)
+                                    if (iID_DV == 1)
                                     {
-                                        iMaTemp = Convert.ToInt32(sMaMaxDMS.Substring(3, sMaMaxDMS.Length - 3)) + 1;
-                                        sMaMaxDMS = sMaMaxDMS.Substring(0, sMaMaxDMS.Length - (iMaTemp.ToString().Length)) + iMaTemp.ToString();
-                                        i--;
+                                        if (Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT COUNT(*) FROM dbo.[" + sBT + "] A WHERE A.[" + grvData.Columns[0].FieldName.ToString() + "] = N'" + sMaMaxDMS + "'")) > 0)
+                                        {
+                                            iMaTemp = Convert.ToInt32(sMaMaxDMS.Substring(3, sMaMaxDMS.Length - 3)) + 1;
+                                            sMaMaxDMS = sMaMaxDMS.Substring(0, sMaMaxDMS.Length - (iMaTemp.ToString().Length)) + iMaTemp.ToString();
+                                            i--;
+                                        }
+                                        else
+                                        {
+                                            string strSQL = "UPDATE  A SET A.[" + grvData.Columns[0].FieldName.ToString() + "] = N'" + sMaMaxDMS + "' FROM " + sBT + " A WHERE A.[" + grvData.Columns[0].FieldName.ToString() + "] = N'" + sMaSo + "'";
+                                            SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, strSQL);
+                                            iMaTemp = Convert.ToInt32(sMaMaxDMS.Substring(3, sMaMaxDMS.Length - 3)) + 1;
+                                            sMaMaxDMS = sMaMaxDMS.Substring(0, sMaMaxDMS.Length - (iMaTemp.ToString().Length)) + iMaTemp.ToString();
+                                        }
                                     }
                                     else
                                     {
-                                        string strSQL = "UPDATE  A SET A.[" + grvData.Columns[0].FieldName.ToString() + "] = N'" + sMaMaxDMS + "' FROM " + sBT + " A WHERE A.[" + grvData.Columns[0].FieldName.ToString() + "] = N'" + sMaSo + "'";
-                                        SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, strSQL);
-                                        iMaTemp = Convert.ToInt32(sMaMaxDMS.Substring(3, sMaMaxDMS.Length - 3)) + 1;
-                                        sMaMaxDMS = sMaMaxDMS.Substring(0, sMaMaxDMS.Length - (iMaTemp.ToString().Length)) + iMaTemp.ToString();
+                                        if (Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT COUNT(*) FROM dbo.[" + sBT + "] A WHERE A.[" + grvData.Columns[0].FieldName.ToString() + "] = N'" + sMaMaxDMT + "'")) > 0)
+                                        {
+                                            iMaTemp = Convert.ToInt32(sMaMaxDMT.Substring(3, sMaMaxDMT.Length - 3)) + 1;
+                                            sMaMaxDMT = sMaMaxDMT.Substring(0, sMaMaxDMT.Length - (iMaTemp.ToString().Length)) + iMaTemp.ToString();
+                                            i--;
+                                        }
+                                        else
+                                        {
+                                            string strSQL = "UPDATE  A SET A.[" + grvData.Columns[0].FieldName.ToString() + "] = N'" + sMaMaxDMT + "' FROM " + sBT + " A WHERE A.[" + grvData.Columns[0].FieldName.ToString() + "] = N'" + sMaSo + "'";
+                                            SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, strSQL);
+                                            iMaTemp = Convert.ToInt32(sMaMaxDMT.Substring(3, sMaMaxDMT.Length - 3)) + 1;
+                                            sMaMaxDMT = sMaMaxDMT.Substring(0, sMaMaxDMT.Length - (iMaTemp.ToString().Length)) + iMaTemp.ToString();
+                                        }
                                     }
                                 }
                                 else
                                 {
-                                    if (Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT COUNT(*) FROM dbo.[" + sBT + "] A WHERE A.[" + grvData.Columns[0].FieldName.ToString() + "] = N'" + sMaMaxDMT + "'")) > 0)
+                                    if (iID_DV == 1)
                                     {
-                                        iMaTemp = Convert.ToInt32(sMaMaxDMT.Substring(3, sMaMaxDMT.Length - 3)) + 1;
-                                        sMaMaxDMT = sMaMaxDMT.Substring(0, sMaMaxDMT.Length - (iMaTemp.ToString().Length)) + iMaTemp.ToString();
-                                        i--;
-                                    }
-                                    else
-                                    {
-                                        string strSQL = "UPDATE  A SET A.[" + grvData.Columns[0].FieldName.ToString() + "] = N'" + sMaMaxDMT + "' FROM " + sBT + " A WHERE A.[" + grvData.Columns[0].FieldName.ToString() + "] = N'" + sMaSo + "'";
-                                        SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, strSQL);
-                                        iMaTemp = Convert.ToInt32(sMaMaxDMT.Substring(3, sMaMaxDMT.Length - 3)) + 1;
-                                        sMaMaxDMT = sMaMaxDMT.Substring(0, sMaMaxDMT.Length - (iMaTemp.ToString().Length)) + iMaTemp.ToString();
-                                    }
-                                }
-                            }
-                            else
-                            {
-                                if (iID_DV == 1)
-                                {
-                                    if (sMaSo.Substring(0, 3).ToString() != "DMS")
-                                    {
-
-                                        //string sTEMP = "000000" + sMaSo.Substring(3, sMaSo.Length - 3);
-                                        //sMaSo = sMaSo.Substring(0, 3).ToString() + sTEMP.Substring(sTEMP.Length - 6);
-                                        string strSQL = "UPDATE  A SET A.[" + grvData.Columns[0].FieldName.ToString() + "] = N'" + "DMS" + sMaSo.Substring(3, sMaSo.Length - 3).ToString().Trim() + "' FROM " + sBT + " A WHERE A.[" + grvData.Columns[0].FieldName.ToString() + "] = N'" + dtSource.Rows[i][0].ToString().Trim() + "'";
-                                        SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, strSQL);
-                                        dtSource.Rows[i][0] = "DMS" + sMaSo.Substring(3, sMaSo.Length - 3);
-                                        i--;
-                                    }
-                                    else
-                                    {
-                                        if (sMaSo.Substring(3, sMaSo.Length - 3).Length != 6)
+                                        if (sMaSo.Substring(0, 3).ToString() != "DMS")
                                         {
-                                            string sTEMP = "000000" + sMaSo.Substring(3, sMaSo.Length - 3);
-                                            sMaSo = sMaSo.Substring(0, 3).ToString() + sTEMP.Substring(sTEMP.Length - 6);
+
+                                            //string sTEMP = "000000" + sMaSo.Substring(3, sMaSo.Length - 3);
+                                            //sMaSo = sMaSo.Substring(0, 3).ToString() + sTEMP.Substring(sTEMP.Length - 6);
                                             string strSQL = "UPDATE  A SET A.[" + grvData.Columns[0].FieldName.ToString() + "] = N'" + "DMS" + sMaSo.Substring(3, sMaSo.Length - 3).ToString().Trim() + "' FROM " + sBT + " A WHERE A.[" + grvData.Columns[0].FieldName.ToString() + "] = N'" + dtSource.Rows[i][0].ToString().Trim() + "'";
                                             SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, strSQL);
                                             dtSource.Rows[i][0] = "DMS" + sMaSo.Substring(3, sMaSo.Length - 3);
                                             i--;
                                         }
-                                    }
-                                }
-                                else
-                                {
-                                    if (sMaSo.Substring(0, 3).ToString() != "DMT")
-                                    {
-
-                                        //string sTEMP = "000000" + sMaSo.Substring(3, sMaSo.Length - 3);
-                                        //sMaSo = sMaSo.Substring(0, 3).ToString() + sTEMP.Substring(sTEMP.Length - 6);
-                                        string strSQL = "UPDATE  A SET A.[" + grvData.Columns[0].FieldName.ToString() + "] = N'" + "DMT" + sMaSo.Substring(3, sMaSo.Length - 3).ToString().Trim() + "' FROM " + sBT + " A WHERE A.[" + grvData.Columns[0].FieldName.ToString() + "] = N'" + dtSource.Rows[i][0].ToString().Trim() + "'";
-                                        SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, strSQL);
-                                        dtSource.Rows[i][0] = "DMT" + sMaSo.Substring(3, sMaSo.Length - 3);
-                                        i--;
+                                        else
+                                        {
+                                            if (sMaSo.Substring(3, sMaSo.Length - 3).Length != 6)
+                                            {
+                                                string sTEMP = "000000" + sMaSo.Substring(3, sMaSo.Length - 3);
+                                                sMaSo = sMaSo.Substring(0, 3).ToString() + sTEMP.Substring(sTEMP.Length - 6);
+                                                string strSQL = "UPDATE  A SET A.[" + grvData.Columns[0].FieldName.ToString() + "] = N'" + "DMS" + sMaSo.Substring(3, sMaSo.Length - 3).ToString().Trim() + "' FROM " + sBT + " A WHERE A.[" + grvData.Columns[0].FieldName.ToString() + "] = N'" + dtSource.Rows[i][0].ToString().Trim() + "'";
+                                                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, strSQL);
+                                                dtSource.Rows[i][0] = "DMS" + sMaSo.Substring(3, sMaSo.Length - 3);
+                                                i--;
+                                            }
+                                        }
                                     }
                                     else
                                     {
-                                        if (sMaSo.Substring(3, sMaSo.Length - 3).Length != 6)
+                                        if (sMaSo.Substring(0, 3).ToString() != "DMT")
                                         {
-                                            string sTEMP = "000000" + sMaSo.Substring(3, sMaSo.Length - 3);
-                                            sMaSo = sMaSo.Substring(0, 3).ToString() + sTEMP.Substring(sTEMP.Length - 6);
+
+                                            //string sTEMP = "000000" + sMaSo.Substring(3, sMaSo.Length - 3);
+                                            //sMaSo = sMaSo.Substring(0, 3).ToString() + sTEMP.Substring(sTEMP.Length - 6);
                                             string strSQL = "UPDATE  A SET A.[" + grvData.Columns[0].FieldName.ToString() + "] = N'" + "DMT" + sMaSo.Substring(3, sMaSo.Length - 3).ToString().Trim() + "' FROM " + sBT + " A WHERE A.[" + grvData.Columns[0].FieldName.ToString() + "] = N'" + dtSource.Rows[i][0].ToString().Trim() + "'";
                                             SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, strSQL);
                                             dtSource.Rows[i][0] = "DMT" + sMaSo.Substring(3, sMaSo.Length - 3);
                                             i--;
                                         }
+                                        else
+                                        {
+                                            if (sMaSo.Substring(3, sMaSo.Length - 3).Length != 6)
+                                            {
+                                                string sTEMP = "000000" + sMaSo.Substring(3, sMaSo.Length - 3);
+                                                sMaSo = sMaSo.Substring(0, 3).ToString() + sTEMP.Substring(sTEMP.Length - 6);
+                                                string strSQL = "UPDATE  A SET A.[" + grvData.Columns[0].FieldName.ToString() + "] = N'" + "DMT" + sMaSo.Substring(3, sMaSo.Length - 3).ToString().Trim() + "' FROM " + sBT + " A WHERE A.[" + grvData.Columns[0].FieldName.ToString() + "] = N'" + dtSource.Rows[i][0].ToString().Trim() + "'";
+                                                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, strSQL);
+                                                dtSource.Rows[i][0] = "DMT" + sMaSo.Substring(3, sMaSo.Length - 3);
+                                                i--;
+                                            }
+                                        }
                                     }
                                 }
                             }
+
+                            //MaTheChamCong
                         }
 
-                        //MaTheChamCong
+                        SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "UPDATE T1 SET T1.[" + grvData.Columns[1].FieldName.ToString() + "] = '1' + RIGHT(T1.[" + grvData.Columns[0].FieldName.ToString() + "], 6) FROM " + sBT + " T1");
+                        DataTable dt = new DataTable();
+                        dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT * FROM " + sBT + ""));
+                        grdData.DataSource = dt;
+                        Commons.Modules.ObjSystems.XoaTable(sBT);
+                        return;
                     }
-
-                    SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "UPDATE T1 SET T1.[" + grvData.Columns[1].FieldName.ToString() + "] = '1' + RIGHT(T1.[" + grvData.Columns[0].FieldName.ToString() + "], 6) FROM " + sBT + " T1");
-                    DataTable dt = new DataTable();
-                    dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT * FROM " + sBT + ""));
-                    grdData.DataSource = dt;
-                    Commons.Modules.ObjSystems.XoaTable(sBT);
-                    return;
-                }
-                catch (Exception ex)
-                {
-                    Commons.Modules.ObjSystems.XoaTable(sBT);
-                    return;
+                    catch (Exception ex)
+                    {
+                        Commons.Modules.ObjSystems.XoaTable(sBT);
+                        return;
+                    }
                 }
             }
             if (errorCount != 0)
@@ -1161,44 +1212,14 @@ namespace Vs.HRM
                 DialogResult res = XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDuLieuSanSangImport"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (res == DialogResult.Yes)
                 {
-                    SqlConnection conn = new SqlConnection(Commons.IConnections.CNStr);
-                    if (conn.State != ConnectionState.Open) conn.Open();
-                    SqlTransaction sTrans = conn.BeginTransaction();
+
                     string sbt = "sBTUV" + Commons.Modules.iIDUser;
                     try
                     {
                         //tạo bảm tạm trên lưới
                         Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sbt, Commons.Modules.ObjSystems.ConvertDatatable(grvData), "");
-
-                        //string sSql = "INSERT INTO dbo.UNG_VIEN(MS_UV,HO,TEN,PHAI,NGAY_SINH,NOI_SINH,SO_CMND,NGAY_CAP,NOI_CAP,ID_TT_HN,HO_TEN_VC,NGHE_NGHIEP_VC,SO_CON,DT_DI_DONG,EMAIL,NGUOI_LIEN_HE,QUAN_HE,DT_NGUOI_LIEN_HE,ID_TP,ID_QUAN,ID_PX,THON_XOM,DIA_CHI_THUONG_TRU,ID_NTD,ID_CN,HINH_THUC_TUYEN,ID_TDVH,ID_KNLV,ID_DGTN,VI_TRI_TD_1,VI_TRI_TD_2,NGAY_HEN_DI_LAM,XAC_NHAN_DL,NGAY_NHAN_VIEC,XAC_NHAN_DTDH,DA_CHUYEN,GHI_CHU,DA_GIOI_THIEU,HUY_TUYEN_DUNG) SELECT [" + grvData.Columns[0].FieldName.ToString() + "],[" + grvData.Columns[1].FieldName.ToString() + "],[" + grvData.Columns[2].FieldName.ToString() + "],case [" + grvData.Columns[3].FieldName.ToString() + "] when 'Nam' then 1 else 0 end,CONVERT(datetime,[" + grvData.Columns[4].FieldName.ToString() + "],103),[" + grvData.Columns[5].FieldName.ToString() + "],[" + grvData.Columns[6].FieldName.ToString() + "],[" + grvData.Columns[7].FieldName.ToString() + "],[" + grvData.Columns[8].FieldName.ToString() + "],(SELECT TOP 1 ID_TT_HN FROM dbo.TT_HON_NHAN WHERE TEN_TT_HN = A.[" + grvData.Columns[9].FieldName.ToString() + "]),[" + grvData.Columns[10].FieldName.ToString() + "],[" + grvData.Columns[11].FieldName.ToString() + "],[" + grvData.Columns[12].FieldName.ToString() + "],[" + grvData.Columns[13].FieldName.ToString() + "],[" + grvData.Columns[14].FieldName.ToString() + "],[" + grvData.Columns[15].FieldName.ToString() + "],[" + grvData.Columns[16].FieldName.ToString() + "],[" + grvData.Columns[17].FieldName.ToString() + "],(SELECT TOP 1 ID_TP FROM dbo.THANH_PHO WHERE TEN_TP = A.[" + grvData.Columns[18].FieldName.ToString() + "]),(SELECT TOP 1 ID_QUAN FROM dbo.QUAN WHERE TEN_QUAN = A.[" + grvData.Columns[19].FieldName.ToString() + "]),(SELECT TOP 1 ID_PX FROM dbo.PHUONG_XA WHERE TEN_PX = A.[" + grvData.Columns[20].FieldName.ToString() + "]),[" + grvData.Columns[21].FieldName.ToString() + "],[" + grvData.Columns[22].FieldName.ToString() + "],(SELECT TOP 1 ID_NTD FROM dbo.NGUON_TUYEN_DUNG WHERE TEN_NTD= A.[" + grvData.Columns[23].FieldName.ToString() + "]),(SELECT TOP 1 ID_CN FROM dbo.CONG_NHAN WHERE HO +' '+TEN = A.[" + grvData.Columns[24].FieldName.ToString() + "]),(SELECT ID_HTT FROM dbo.HINH_THUC_TUYEN WHERE TEN_HT_TUYEN = A.[" + grvData.Columns[25].FieldName.ToString() + "]),(SELECT TOP 1 ID_TDVH FROM dbo.TRINH_DO_VAN_HOA WHERE TEN_TDVH = A.[" + grvData.Columns[26].FieldName.ToString() + "]),(SELECT TOP 1 ID_KNLV FROM dbo.KINH_NGHIEM_LV WHERE TEN_KNLV = A.[" + grvData.Columns[27].FieldName.ToString() + "]),(SELECT TOP 1 ID_DGTN FROM dbo.DANH_GIA_TAY_NGHE WHERE TEN_DGTN = A.[" + grvData.Columns[28].FieldName.ToString() + "]),(SELECT TOP 1 ID_LCV FROM dbo.LOAI_CONG_VIEC WHERE TEN_LCV = A.[" + grvData.Columns[29].FieldName.ToString() + "]),(SELECT TOP 1 ID_LCV FROM dbo.LOAI_CONG_VIEC WHERE TEN_LCV = A.[" + grvData.Columns[30].FieldName.ToString() + "]),CONVERT(datetime,[" + grvData.Columns[31].FieldName.ToString() + "],103),[" + grvData.Columns[32].FieldName.ToString() + "],CONVERT(datetime,[" + grvData.Columns[33].FieldName.ToString() + "],103),[" + grvData.Columns[34].FieldName.ToString() + "],[" + grvData.Columns[35].FieldName.ToString() + "],[" + grvData.Columns[36].FieldName.ToString() + "],[" + grvData.Columns[37].FieldName.ToString() + "],[" + grvData.Columns[38].FieldName.ToString() + "]  FROM " + sbt + " AS A";
-
-                        string sSql1 = "INSERT INTO	 dbo.CONG_NHAN(MS_CN, MS_THE_CC,  HO, TEN, ID_QG, NGAY_SINH, NAM_SINH, PHAI, ID_TO, ID_CV, ID_LCV,  NGAY_THU_VIEC, NGAY_VAO_CTY, " +
-                            "NGAY_VAO_LAM, VAO_LAM_LAI ,ID_TT_HD, ID_TT_HT, HINH_THUC_TUYEN, PHEP_CT, THAM_GIA_BHXH, LD_TINH, GHI_CHU, ID_DT, " +
-                            "TON_GIAO, NOI_SINH, NGUYEN_QUAN, SO_CMND, NGAY_CAP, NOI_CAP, ID_TT_HN, MA_THE_ATM, SO_TAI_KHOAN, MS_THUE, TEN_KHONG_DAU, LD_NN, DT_DI_DONG, DT_NHA, DT_NGUOI_THAN, EMAIL, DIA_CHI_THUONG_TRU," +
-                            " ID_TP, ID_QUAN, ID_PX, THON_XOM, DIA_CHI_TAM_TRU, ID_TP_TAM_TRU, ID_QUAN_TAM_TRU, ID_PX_TAM_TRU, THON_XOM_TAM_TRU, SO_BHXH, NGAY_DBHXH, ID_LOAI_TD, ID_TDVH, CHUYEN_MON, NGOAI_NGU,  NGAN_HANG, CHI_NHANH_NH) " +
-
-                            "SELECT A.[" + grvData.Columns[0].FieldName.ToString() + "], A.[" + grvData.Columns[1].FieldName.ToString() + "], A.[" + grvData.Columns[2].FieldName.ToString() + "], A.[" + grvData.Columns[3].FieldName.ToString() + "], " +
-                            "(SELECT TOP 1 ID_QG FROM dbo.QUOC_GIA WHERE TEN_QG = A.[" + grvData.Columns[4].FieldName.ToString() + "]), CONVERT(DATETIME,[A].[" + grvData.Columns[5].FieldName.ToString() + "],103), [A].[" + grvData.Columns[6].FieldName.ToString() + "],  " +
-                            "[A].[" + grvData.Columns[7].FieldName.ToString() + "], (SELECT TOP 1 ID_TO FROM dbo.[TO] WHERE TEN_TO = A.[" + grvData.Columns[8].FieldName.ToString() + "]), (SELECT TOP 1 ID_CV FROM dbo.CHUC_VU WHERE TEN_CV = A.[" + grvData.Columns[9].FieldName.ToString() + "]), " +
-                            "(SELECT TOP 1 ID_LCV FROM dbo.LOAI_CONG_VIEC WHERE TEN_LCV = A.[" + grvData.Columns[10].FieldName.ToString() + "]), CONVERT(DATETIME,[A].[" + grvData.Columns[11].FieldName.ToString() + "],103), " +
-                            "CONVERT(DATETIME,A.[" + grvData.Columns[12].FieldName.ToString() + "],103), CONVERT(DATETIME,A.[" + grvData.Columns[12].FieldName.ToString() + "],103) ,[A].[" + grvData.Columns[13].FieldName.ToString() + "], " +
-                            "(SELECT TOP 1 ID_TT_HD FROM dbo.TINH_TRANG_HD WHERE TEN_TT_HD = A.[" + grvData.Columns[14].FieldName.ToString() + "]), (SELECT TOP 1 ID_TT_HT FROM dbo.TINH_TRANG_HT WHERE TEN_TT_HT = A.[" + grvData.Columns[15].FieldName.ToString() + "]), [A].[" + grvData.Columns[16].FieldName.ToString() + "], " +
-                            "(SELECT PHEP_CT FROM dbo.LOAI_CONG_VIEC WHERE TEN_LCV = A.[" + grvData.Columns[10].FieldName.ToString().Trim() + "]), [A].[" + grvData.Columns[17].FieldName.ToString() + "], [A].[" + grvData.Columns[18].FieldName.ToString() + "], A.[" + grvData.Columns[19].FieldName.ToString() + "], " +
-                            "(SELECT TOP 1 ID_DT FROM dbo.DAN_TOC WHERE TEN_DT = A.[" + grvData.Columns[20].FieldName.ToString() + "]), A.[" + grvData.Columns[21].FieldName.ToString() + "], A.[" + grvData.Columns[22].FieldName.ToString() + "],  " +
-                            "A.[" + grvData.Columns[23].FieldName.ToString() + "], A.[" + grvData.Columns[24].FieldName.ToString() + "], CONVERT(DATETIME,A.[" + grvData.Columns[25].FieldName.ToString() + "],103), A.[" + grvData.Columns[26].FieldName.ToString() + "], (SELECT TOP 1 ID_TT_HN FROM dbo.TT_HON_NHAN WHERE TEN_TT_HN = A.[" + grvData.Columns[27].FieldName.ToString() + "]), A.[" + grvData.Columns[28].FieldName.ToString() + "], " +
-                            "A.[" + grvData.Columns[29].FieldName.ToString() + "],A.[" + grvData.Columns[30].FieldName.ToString() + "], A.[" + grvData.Columns[31].FieldName.ToString() + "], A.[" + grvData.Columns[32].FieldName.ToString() + "], " +
-                            "A.[" + grvData.Columns[33].FieldName.ToString() + "], A.[" + grvData.Columns[34].FieldName.ToString() + "], A.[" + grvData.Columns[35].FieldName.ToString() + "], A." + grvData.Columns[36].FieldName.ToString() + ", A.[" + grvData.Columns[37].FieldName.ToString() + "], " +
-                            "(SELECT TOP 1 ID_TP FROM dbo.THANH_PHO WHERE TEN_TP = A.[" + grvData.Columns[38].FieldName.ToString() + "]), (SELECT TOP 1 ID_QUAN FROM  QUAN WHERE TEN_QUAN  = A.[" + grvData.Columns[39].FieldName.ToString() + "]), " +
-                            "(SELECT TOP 1 ID_PX FROM dbo.PHUONG_XA WHERE TEN_PX = A.[" + grvData.Columns[40].FieldName.ToString() + "]), A.[" + grvData.Columns[41].FieldName.ToString() + "], A.[" + grvData.Columns[42].FieldName.ToString() + "], " +
-                            "(SELECT TOP 1 ID_TP FROM dbo.THANH_PHO WHERE TEN_TP = A.[" + grvData.Columns[43].FieldName.ToString() + "]), (SELECT TOP 1 ID_QUAN FROM  QUAN WHERE TEN_QUAN  = A.[" + grvData.Columns[44].FieldName.ToString() + "]), " +
-                            "(SELECT TOP 1 ID_PX FROM dbo.PHUONG_XA WHERE TEN_PX = A.[" + grvData.Columns[45].FieldName.ToString() + "]), A.[" + grvData.Columns[46].FieldName.ToString() + "], A.[" + grvData.Columns[47].FieldName.ToString() + "], CONVERT(DATETIME,A.[" + grvData.Columns[48].FieldName.ToString() + "],103), " +
-                            "(SELECT TOP 1 ID_LOAI_TD FROM dbo.LOAI_TRINH_DO WHERE TEN_LOAI_TD = A.[" + grvData.Columns[49].FieldName.ToString() + "]), (SELECT TOP 1 ID_TDVH FROM dbo.TRINH_DO_VAN_HOA WHERE TEN_TDVH = A.[" + grvData.Columns[50].FieldName.ToString() + "]), A.[" + grvData.Columns[51].FieldName.ToString() + "], A.[" + grvData.Columns[52].FieldName.ToString() + "]," +
-                            " A.[" + grvData.Columns[53].FieldName.ToString() + "], A.[" + grvData.Columns[54].FieldName.ToString() + "]  FROM " + sbt + " AS A";
-                        SqlHelper.ExecuteNonQuery(sTrans, CommandType.Text, sSql1);
-
+                        SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spSaveImportNhanSu", sbt);
                         Commons.Modules.ObjSystems.XoaTable(sbt);
-
-                        sTrans.Commit();
                         XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgImportDuLieuThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                         grdData.DataSource = dtSource.Clone();
                         cboChonSheet.Text = string.Empty;
@@ -1207,12 +1228,9 @@ namespace Vs.HRM
                     catch (Exception ex)
                     {
                         Commons.Modules.ObjSystems.XoaTable(sbt);
-                        sTrans.Rollback();
                         XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgImportKhongThanhCong") + " error(" + ex.ToString() + ")", Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                     }
-                    if (conn.State != ConnectionState.Closed) conn.Close();
-
                 }
             }
         }
@@ -1532,7 +1550,7 @@ namespace Vs.HRM
                         }
                     case 8:
                         {
-                            sSql = "SELECT T1.MS_TO, T1.TEN_TO + ' ' + T3.MSDV TEN_TO FROM dbo.[TO] T1 INNER JOIN dbo.XI_NGHIEP T2 ON T2.ID_XN = T1.ID_XN INNER JOIN dbo.DON_VI T3 ON T3.ID_DV = T2.ID_DV WHERE(T3.ID_DV = " + -1 + " OR " + -1 + " = -1) AND(T2.ID_XN = " + -1 + " OR " + -1 + " = -1) ORDER BY T3.STT_DV, T2.STT_XN, T1.STT_TO";
+                            sSql = "SELECT T1.MS_TO, T1.TEN_TO FROM dbo.[TO] T1 INNER JOIN dbo.XI_NGHIEP T2 ON T2.ID_XN = T1.ID_XN INNER JOIN dbo.DON_VI T3 ON T3.ID_DV = T2.ID_DV WHERE(T3.ID_DV = " + -1 + " OR " + -1 + " = -1) AND(T2.ID_XN = " + -1 + " OR " + -1 + " = -1) ORDER BY T3.STT_DV, T2.STT_XN, T1.STT_TO";
                             drow = GetData("ID_TO", sSql);
                             sKQ = Convert.ToString(drow["TEN_TO"]);
                             sKQ = sKQ.Substring(0, sKQ.Length - 3).Trim();
@@ -1573,7 +1591,15 @@ namespace Vs.HRM
                             row.ClearErrors();
                             break;
                         }
-                    case 20:
+                    case 17:
+                        {
+                            sSql = "SELECT TEN_LD_TV FROM dbo.LY_DO_THOI_VIEC ORDER BY STT";
+                            drow = GetData("ID_LD_TV", sSql);
+                            sKQ = Convert.ToString(drow["ID_LD_TV"]);
+                            row.ClearErrors();
+                            break;
+                        }
+                    case 22:
                         {
                             sSql = "SELECT TEN_DT FROM dbo.DAN_TOC";
                             drow = GetData("ID_DT", sSql);
@@ -1582,7 +1608,7 @@ namespace Vs.HRM
                             break;
                         }
 
-                    case 27:
+                    case 29:
                         {
                             sSql = "SELECT TEN_TT_HN FROM dbo.TT_HON_NHAN";
                             drow = GetData("ID_TT_HN", sSql);
@@ -1591,7 +1617,7 @@ namespace Vs.HRM
                             break;
                         }
 
-                    case 38:
+                    case 40:
                         {
                             sSql = "SELECT MS_TINH, TEN_TP FROM dbo.THANH_PHO ORDER BY TEN_TP";
                             drow = GetData("ID_TP", sSql);
@@ -1599,7 +1625,7 @@ namespace Vs.HRM
                             row.ClearErrors();
                             break;
                         }
-                    case 39:
+                    case 41:
                         {
                             string strSQL = "SELECT ISNULL(ID_TP,-1) ID_TP FROM dbo.THANH_PHO WHERE TEN_TP = N'" + grvData.GetFocusedRowCellValue(grvData.Columns[38]).ToString().Trim() + "'";
                             int id_tp = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, strSQL));
@@ -1610,7 +1636,7 @@ namespace Vs.HRM
                             row.ClearErrors();
                             break;
                         }
-                    case 40:
+                    case 42:
                         {
                             string strSQL = "SELECT ISNULL(ID_TP,-1) ID_TP FROM dbo.THANH_PHO WHERE TEN_TP = N'" + grvData.GetFocusedRowCellValue(grvData.Columns[38]).ToString().Trim() + "'";
                             int id_tp = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, strSQL));
@@ -1625,7 +1651,7 @@ namespace Vs.HRM
                             row.ClearErrors();
                             break;
                         }
-                    case 43:
+                    case 45:
                         {
                             sSql = "SELECT MS_TINH, TEN_TP FROM dbo.THANH_PHO ORDER BY TEN_TP";
                             drow = GetData("ID_TP", sSql);
@@ -1633,7 +1659,7 @@ namespace Vs.HRM
                             row.ClearErrors();
                             break;
                         }
-                    case 44:
+                    case 46:
                         {
                             string strSQL = "SELECT ISNULL(ID_TP,-1) ID_TP FROM dbo.THANH_PHO WHERE TEN_TP = N'" + grvData.GetFocusedRowCellValue(grvData.Columns[43]).ToString().Trim() + "'";
                             int id_tp = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, strSQL));
@@ -1644,7 +1670,7 @@ namespace Vs.HRM
                             row.ClearErrors();
                             break;
                         }
-                    case 45:
+                    case 47:
                         {
                             string strSQL = "SELECT ISNULL(ID_TP,-1) ID_TP FROM dbo.THANH_PHO WHERE TEN_TP = N'" + grvData.GetFocusedRowCellValue(grvData.Columns[43]).ToString().Trim() + "'";
                             int id_tp = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, strSQL));
@@ -1659,7 +1685,7 @@ namespace Vs.HRM
                             row.ClearErrors();
                             break;
                         }
-                    case 49:
+                    case 51:
                         {
                             sSql = "SELECT TEN_LOAI_TD FROM dbo.LOAI_TRINH_DO ORDER BY STT";
                             drow = GetData("ID_LOAI_TD", sSql);
@@ -1667,7 +1693,7 @@ namespace Vs.HRM
                             row.ClearErrors();
                             break;
                         }
-                    case 50:
+                    case 52:
                         {
                             sSql = "SELECT T2.TEN_LOAI_TD, T1.TEN_TDVH FROM dbo.TRINH_DO_VAN_HOA T1 INNER JOIN dbo.LOAI_TRINH_DO T2 ON T2.ID_LOAI_TD = T1.ID_LOAI_TD ORDER BY T2.STT, T1.STT";
                             drow = GetData("ID_TDVH", sSql);
@@ -1726,7 +1752,6 @@ namespace Vs.HRM
                 if (!Commons.Modules.ObjSystems.setCheckImport(1)) this.Close();
             }
             catch { }
-            Commons.Modules.ObjSystems.ThayDoiNN(this, Root, windowsUIButton);
         }
         public string SaveFiles(string MFilter)
         {
@@ -1801,7 +1826,300 @@ namespace Vs.HRM
             for (int i = 0; i < props.Count; i++)
             {
                 PropertyDescriptor prop = props[i];
-                table.Columns.Add(prop.Name.Trim(), prop.PropertyType);
+                string sTenCot = "";
+                switch (i)
+                {
+                    case 0:
+                        {
+                            sTenCot = "MS_CN";
+                            break;
+                        }
+                    case 1:
+                        {
+                            sTenCot = "MS_THE_CC";
+                            break;
+                        }
+                    case 2:
+                        {
+                            sTenCot = "HO";
+                            break;
+                        }
+                    case 3:
+                        {
+                            sTenCot = "TEN";
+                            break;
+                        }
+                    case 4:
+                        {
+                            sTenCot = "TEN_QG";
+                            break;
+                        }
+                    case 5:
+                        {
+                            sTenCot = "NGAY_SINH";
+                            break;
+                        }
+                    case 6:
+                        {
+                            sTenCot = "NAM_SINH";
+                            break;
+                        }
+                    case 7:
+                        {
+                            sTenCot = "PHAI";
+                            break;
+                        }
+                    case 8:
+                        {
+                            sTenCot = "TEN_TO";
+                            break;
+                        }
+                    case 9:
+                        {
+                            sTenCot = "TEN_CV";
+                            break;
+                        }
+                    case 10:
+                        {
+                            sTenCot = "TEN_LCV";
+                            break;
+                        }
+                    case 11:
+                        {
+                            sTenCot = "NGAY_THU_VIEC";
+                            break;
+                        }
+                    case 12:
+                        {
+                            sTenCot = "NGAY_VAO_LAM";
+                            break;
+                        }
+                    case 13:
+                        {
+                            sTenCot = "VAO_LAM_LAI";
+                            break;
+                        }
+                    case 14:
+                        {
+                            sTenCot = "TEN_TT_HD";
+                            break;
+                        }
+                    case 15:
+                        {
+                            sTenCot = "TEN_TT_HT";
+                            break;
+                        }
+                    case 16:
+                        {
+                            sTenCot = "NGAY_NGHI_VIEC";
+                            break;
+                        }
+                    case 17:
+                        {
+                            sTenCot = "TEN_LD_TV";
+                            break;
+                        }
+                    case 18:
+                        {
+                            sTenCot = "HINH_THUC_TUYEN";
+                            break;
+                        }
+                    case 19:
+                        {
+                            sTenCot = "THAM_GIA_BHXH";
+                            break;
+                        }
+                    case 20:
+                        {
+                            sTenCot = "LD_TINH";
+                            break;
+                        }
+                    case 21:
+                        {
+                            sTenCot = "GHI_CHU";
+                            break;
+                        }
+                    case 22:
+                        {
+                            sTenCot = "TEN_DT";
+                            break;
+                        }
+                    case 23:
+                        {
+                            sTenCot = "TON_GIAO";
+                            break;
+                        }
+                    case 24:
+                        {
+                            sTenCot = "NOI_SINH";
+                            break;
+                        }
+                    case 25:
+                        {
+                            sTenCot = "NGUYEN_QUAN";
+                            break;
+                        }
+                    case 26:
+                        {
+                            sTenCot = "SO_CMND";
+                            break;
+                        }
+                    case 27:
+                        {
+                            sTenCot = "NGAY_CAP";
+                            break;
+                        }
+                    case 28:
+                        {
+                            sTenCot = "NOI_CAP";
+                            break;
+                        }
+                    case 29:
+                        {
+                            sTenCot = "TEN_TT_HN";
+                            break;
+                        }
+                    case 30:
+                        {
+                            sTenCot = "MA_THE_ATM";
+                            break;
+                        }
+                    case 31:
+                        {
+                            sTenCot = "SO_TAI_KHOAN";
+                            break;
+                        }
+                    case 32:
+                        {
+                            sTenCot = "MS_THUE";
+                            break;
+                        }
+                    case 33:
+                        {
+                            sTenCot = "TEN_KHONG_DAU";
+                            break;
+                        }
+                    case 34:
+                        {
+                            sTenCot = "LD_NN";
+                            break;
+                        }
+                    case 35:
+                        {
+                            sTenCot = "DT_DI_DONG";
+                            break;
+                        }
+                    case 36:
+                        {
+                            sTenCot = "DT_NHA";
+                            break;
+                        }
+                    case 37:
+                        {
+                            sTenCot = "DT_NGUOI_THAN";
+                            break;
+                        }
+                    case 38:
+                        {
+                            sTenCot = "EMAIL";
+                            break;
+                        }
+                    case 39:
+                        {
+                            sTenCot = "DIA_CHI_THUONG_TRU";
+                            break;
+                        }
+                    case 40:
+                        {
+                            sTenCot = "TEN_TP";
+                            break;
+                        }
+                    case 41:
+                        {
+                            sTenCot = "TEN_QUAN";
+                            break;
+                        }
+                    case 42:
+                        {
+                            sTenCot = "TEN_PX";
+                            break;
+                        }
+                    case 43:
+                        {
+                            sTenCot = "THON_XOM";
+                            break;
+                        }
+                    case 44:
+                        {
+                            sTenCot = "DIA_CHI_TAM_TRU";
+                            break;
+                        }
+                    case 45:
+                        {
+                            sTenCot = "TEN_TP_TAM_TRU";
+                            break;
+                        }
+                    case 46:
+                        {
+                            sTenCot = "TEN_QUAN_TAM_TRU";
+                            break;
+                        }
+                    case 47:
+                        {
+                            sTenCot = "TEN_PX_TAM_TRU";
+                            break;
+                        }
+                    case 48:
+                        {
+                            sTenCot = "THON_XOM_TAM_TRU";
+                            break;
+                        }
+                    case 49:
+                        {
+                            sTenCot = "SO_BHXH";
+                            break;
+                        }
+                    case 50:
+                        {
+                            sTenCot = "NGAY_DBHXH";
+                            break;
+                        }
+                    case 51:
+                        {
+                            sTenCot = "TEN_LOAI_TD";
+                            break;
+                        }
+                    case 52:
+                        {
+                            sTenCot = "TEN_TDVH";
+                            break;
+                        }
+                    case 53:
+                        {
+                            sTenCot = "CHUYEN_MON";
+                            break;
+                        }
+                    case 54:
+                        {
+                            sTenCot = "NGOAI_NGU";
+                            break;
+                        }
+                    case 55:
+                        {
+                            sTenCot = "NGAN_HANG";
+                            break;
+                        }
+                    case 56:
+                        {
+                            sTenCot = "CHI_NHANH_NH";
+                            break;
+                        }
+                    default:
+                        {
+                            break;
+                        }
+                }
+                table.Columns.Add(sTenCot.Trim(), (i == 0 || i == 1) ? typeof(string) : prop.PropertyType);
             }
             object[] values = new object[props.Count];
             foreach (DevExpress.DataAccess.Native.Excel.ViewRow item in list)
@@ -1809,9 +2127,14 @@ namespace Vs.HRM
                 for (int i = 0; i < values.Length; i++)
                 {
                     nameType = props[i].PropertyType.Name.ToLower();
+
                     if (props[i].GetValue(item) == null)
                     {
                         values[i] = props[i].GetValue(item);
+                    }
+                    else if (i == 0 || i == 1)
+                    {
+                        values[i] = props[i].GetValue(item).ToString();
                     }
                     else
                     {

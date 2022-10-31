@@ -28,14 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions1 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPhieuCongDoan));
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions2 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions3 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions4 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions5 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions6 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
             DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions7 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPhieuCongDoan));
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions8 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions9 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions10 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions11 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions12 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.cboChuyen = new DevExpress.XtraEditors.SearchLookUpEdit();
             this.searchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -71,6 +70,9 @@
             this.windowsUIButton = new DevExpress.XtraBars.Docking2010.WindowsUIButtonPanel();
             this.searchControl2 = new DevExpress.XtraEditors.SearchControl();
             this.searchControl1 = new DevExpress.XtraEditors.SearchControl();
+            this.lblMaHang = new DevExpress.XtraEditors.LabelControl();
+            this.cboMaHang = new DevExpress.XtraEditors.SearchLookUpEdit();
+            this.gridView6 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cboChuyen.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).BeginInit();
@@ -101,6 +103,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.grvTo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchControl2.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchControl1.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cboMaHang.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView6)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -125,8 +129,6 @@
             this.tableLayoutPanel1.Controls.Add(this.cboXN, 5, 0);
             this.tableLayoutPanel1.Controls.Add(this.cboTo, 8, 0);
             this.tableLayoutPanel1.Controls.Add(this.cboNgay, 2, 1);
-            this.tableLayoutPanel1.Controls.Add(this.chkKT, 8, 1);
-            this.tableLayoutPanel1.Controls.Add(this.lblKhongKTSL, 7, 1);
             this.tableLayoutPanel1.Controls.Add(this.grdPCD, 4, 3);
             this.tableLayoutPanel1.Controls.Add(this.panel1, 1, 8);
             this.tableLayoutPanel1.Controls.Add(this.grdCD, 4, 6);
@@ -134,6 +136,10 @@
             this.tableLayoutPanel1.Controls.Add(this.windowsUIButton, 4, 8);
             this.tableLayoutPanel1.Controls.Add(this.searchControl2, 1, 7);
             this.tableLayoutPanel1.Controls.Add(this.searchControl1, 4, 4);
+            this.tableLayoutPanel1.Controls.Add(this.lblKhongKTSL, 7, 4);
+            this.tableLayoutPanel1.Controls.Add(this.chkKT, 8, 4);
+            this.tableLayoutPanel1.Controls.Add(this.lblMaHang, 7, 1);
+            this.tableLayoutPanel1.Controls.Add(this.cboMaHang, 8, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -389,20 +395,20 @@
             // chkKT
             // 
             this.chkKT.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.chkKT.Location = new System.Drawing.Point(913, 29);
+            this.chkKT.Location = new System.Drawing.Point(913, 347);
             this.chkKT.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.chkKT.Name = "chkKT";
             this.chkKT.Properties.Caption = "";
             this.chkKT.Properties.GlyphVerticalAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.chkKT.Size = new System.Drawing.Size(268, 23);
+            this.chkKT.Size = new System.Drawing.Size(268, 21);
             this.chkKT.TabIndex = 2;
             // 
             // lblKhongKTSL
             // 
             this.lblKhongKTSL.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblKhongKTSL.Location = new System.Drawing.Point(804, 30);
+            this.lblKhongKTSL.Location = new System.Drawing.Point(804, 348);
             this.lblKhongKTSL.Name = "lblKhongKTSL";
-            this.lblKhongKTSL.Size = new System.Drawing.Size(103, 21);
+            this.lblKhongKTSL.Size = new System.Drawing.Size(103, 19);
             this.lblKhongKTSL.TabIndex = 45;
             this.lblKhongKTSL.Text = "KHONG_KT_SL";
             // 
@@ -502,23 +508,21 @@
             this.windowsUIButton.AppearanceButton.Normal.Options.UseForeColor = true;
             this.windowsUIButton.AppearanceButton.Pressed.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.windowsUIButton.AppearanceButton.Pressed.Options.UseBackColor = true;
-            windowsUIButtonImageOptions1.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("windowsUIButtonImageOptions1.SvgImage")));
-            windowsUIButtonImageOptions2.ImageUri.Uri = "Edit;Size32x32;GrayScaled";
-            windowsUIButtonImageOptions3.ImageUri.Uri = "dashboards/itemtypechecked";
-            windowsUIButtonImageOptions4.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("windowsUIButtonImageOptions4.SvgImage")));
-            windowsUIButtonImageOptions5.ImageUri.Uri = "SaveAll";
-            windowsUIButtonImageOptions6.ImageUri.Uri = "SaveAndClose";
-            windowsUIButtonImageOptions7.ImageUri.Uri = "richedit/clearheaderandfooter";
+            windowsUIButtonImageOptions7.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("windowsUIButtonImageOptions7.SvgImage")));
+            windowsUIButtonImageOptions8.ImageUri.Uri = "Edit;Size32x32;GrayScaled";
+            windowsUIButtonImageOptions9.ImageUri.Uri = "dashboards/itemtypechecked";
+            windowsUIButtonImageOptions10.ImageUri.Uri = "SaveAll";
+            windowsUIButtonImageOptions11.ImageUri.Uri = "SaveAndClose";
+            windowsUIButtonImageOptions12.ImageUri.Uri = "richedit/clearheaderandfooter";
             this.windowsUIButton.Buttons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] {
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions1, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "thuathieu", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions7, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "thuathieu", -1, false),
             new DevExpress.XtraBars.Docking2010.WindowsUISeparator(),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions2, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "themsua", -1, false),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions3, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "ChonMH", -1, false),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions4, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "in", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions8, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "themsua", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions9, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "ChonMH", -1, false),
             new DevExpress.XtraBars.Docking2010.WindowsUISeparator(),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions5, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "luu", -1, false),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions6, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "khongluu", -1, false),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions7, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "thoat", -1, false)});
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions10, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "luu", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions11, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "khongluu", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions12, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "thoat", -1, false)});
             this.tableLayoutPanel1.SetColumnSpan(this.windowsUIButton, 5);
             this.windowsUIButton.ContentAlignment = System.Drawing.ContentAlignment.MiddleRight;
             this.windowsUIButton.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -553,6 +557,7 @@
             // 
             this.searchControl1.Client = this.grdPCD;
             this.tableLayoutPanel1.SetColumnSpan(this.searchControl1, 2);
+            this.searchControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.searchControl1.Location = new System.Drawing.Point(410, 348);
             this.searchControl1.Name = "searchControl1";
             this.searchControl1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -561,6 +566,35 @@
             this.searchControl1.Properties.Client = this.grdPCD;
             this.searchControl1.Size = new System.Drawing.Size(375, 24);
             this.searchControl1.TabIndex = 46;
+            // 
+            // lblMaHang
+            // 
+            this.lblMaHang.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblMaHang.Location = new System.Drawing.Point(804, 30);
+            this.lblMaHang.Name = "lblMaHang";
+            this.lblMaHang.Size = new System.Drawing.Size(103, 21);
+            this.lblMaHang.TabIndex = 48;
+            this.lblMaHang.Text = "Mã hàng";
+            // 
+            // cboMaHang
+            // 
+            this.cboMaHang.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cboMaHang.Location = new System.Drawing.Point(913, 30);
+            this.cboMaHang.Name = "cboMaHang";
+            this.cboMaHang.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cboMaHang.Properties.NullText = "";
+            this.cboMaHang.Properties.PopupView = this.gridView6;
+            this.cboMaHang.Size = new System.Drawing.Size(268, 24);
+            this.cboMaHang.TabIndex = 49;
+            this.cboMaHang.EditValueChanged += new System.EventHandler(this.cboMaHang_EditValueChanged);
+            // 
+            // gridView6
+            // 
+            this.gridView6.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            this.gridView6.Name = "gridView6";
+            this.gridView6.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.gridView6.OptionsView.ShowGroupPanel = false;
             // 
             // frmPhieuCongDoan
             // 
@@ -603,6 +637,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.grvTo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchControl2.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchControl1.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cboMaHang.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView6)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -644,5 +680,8 @@
         private DevExpress.XtraGrid.Views.Grid.GridView grvCD;
         private DevExpress.XtraEditors.SearchControl searchControl1;
         private DevExpress.XtraEditors.SearchControl searchControl2;
+        private DevExpress.XtraEditors.LabelControl lblMaHang;
+        private DevExpress.XtraEditors.SearchLookUpEdit cboMaHang;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridView6;
     }
 }

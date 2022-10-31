@@ -992,10 +992,8 @@ namespace Vs.Payroll
                 //formatRange.Validation.ErrorMessage = "Dữ liệu bạn nhập không đúng bạn có muốn tiếp tục?";
                 //formatRange.Validation.ShowError = true;
                 //formatRange.Validation.ErrorTitle = "Nhập sai dữ liệu";
-
-                Commons.Modules.ObjSystems.AddDropDownExcel(oSheet, formatRange, dt, "TEN_TIEN_THUONG", 9, 6, 9, rowCnt);
                 formatRange = oSheet.get_Range("I6", "I" + rowCnt.ToString());
-                formatRange.WrapText = false;
+                Commons.Modules.ObjSystems.AddDropDownExcel(oSheet, formatRange, dt, "TEN_TIEN_THUONG");
                 try
                 {
                     formatRange.TextToColumns(Type.Missing, Microsoft.Office.Interop.Excel.XlTextParsingType.xlDelimited, Microsoft.Office.Interop.Excel.XlTextQualifier.xlTextQualifierDoubleQuote);

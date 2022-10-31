@@ -146,10 +146,6 @@
     <Reference Include="UIAutomationClient" />
     <Reference Include="UIAutomationProvider" />
     <Reference Include="UIAutomationTypes" />
-    <Reference Include="Vs.Recruit, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\Vs.Recruit.dll</HintPath>
-    </Reference>
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
@@ -1044,6 +1040,10 @@
     <ProjectReference Include="..\..\05.Vs.Report\Vs.Report\Vs.Report.csproj">
       <Project>{bf84c4f2-fde2-492a-8175-ba38720d0dbd}</Project>
       <Name>Vs.Report</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\09.Vs.Recruit\Vs.Recruit\Vs.Recruit.csproj">
+      <Project>{ef26d657-b988-4b7a-bd04-e7a282a49d6c}</Project>
+      <Name>Vs.Recruit</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

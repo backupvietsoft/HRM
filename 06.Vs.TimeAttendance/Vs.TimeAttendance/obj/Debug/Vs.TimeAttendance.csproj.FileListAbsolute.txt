@@ -2447,6 +2447,7 @@ F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.TimeAttendance.frm
 F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.TimeAttendance.Form.frmInKehoachdica.resources
 F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.TimeAttendance.frmLinkDuLieuChamCong1.resources
 F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.TimeAttendance.frmLinkDuLieuChamCong.resources
+F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.TimeAttendance.frmTinhTrangBangCong.resources
 F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.TimeAttendance.frmVachTheLoi.resources
 F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.TimeAttendance.frmViewDataGoc.resources
 F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.HRM.ucCapNhatGio.resources
@@ -2510,6 +2511,7 @@ F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.TimeAttendance.ucB
 F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.TimeAttendance.ucBaoCaoTongHopNam.resources
 F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.TimeAttendance.ucBaoCaoTongHopThang.resources
 F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.TimeAttendance.ucBaoCaoTheoNgay.resources
+F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.TimeAttendance.UAC.BaoCao.WaitForm1.resources
 F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.TimeAttendance.ucDiemChuyenCanThang.resources
 F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.TimeAttendance.ucDKThoiGianKhongLamSP.resources
 F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.TimeAttendance.ucMucThuongChuyenCan.resources

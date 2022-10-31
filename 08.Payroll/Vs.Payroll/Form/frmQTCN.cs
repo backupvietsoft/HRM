@@ -1560,8 +1560,19 @@ namespace Vs.Payroll
             try
             {
                 Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBT, dtTempCopy, "");
+                System.Data.SqlClient.SqlConnection conn;
+                conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                conn.Open();
+                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spCopyQTCN", conn);
+                cmd.Parameters.Add("@ID_ORD", SqlDbType.BigInt).Value = cboMH.EditValue;
+                cmd.Parameters.Add("@ID_TO", SqlDbType.BigInt).Value = cboChuyen.EditValue;
+                cmd.Parameters.Add("@sBT", SqlDbType.NVarChar).Value = sBT;
+                cmd.CommandType = CommandType.StoredProcedure;
+                System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+                DataSet ds = new DataSet();
+                adp.Fill(ds);
                 DataTable dt = new DataTable();
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spCopyQTCN", sBT, cboMH.EditValue, cboChuyen.EditValue));
+                dt = ds.Tables[0].Copy();
                 grdQT.DataSource = dt;
                 Commons.Modules.ObjSystems.XoaTable(sBT);
                 Commons.Modules.ObjSystems.AddnewRow(grvQT, true);

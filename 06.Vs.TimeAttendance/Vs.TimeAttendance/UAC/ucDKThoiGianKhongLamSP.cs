@@ -218,6 +218,7 @@ namespace Vs.TimeAttendance
                             DataSet ds = new DataSet();
                             adp.Fill(ds);
                             ds.Tables[0].TableName = "KhongLamSP";
+                            ds.Tables[1].TableName = "KLSP";
                             SaveFileDialog saveFileDialog = new SaveFileDialog();
                             saveFileDialog.Filter = "Excel file (*.xlsx)|*.xlsx";
                             saveFileDialog.FilterIndex = 0;

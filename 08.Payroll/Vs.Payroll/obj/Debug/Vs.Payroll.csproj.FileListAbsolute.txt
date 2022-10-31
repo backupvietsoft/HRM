@@ -2828,6 +2828,7 @@ F:\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.rptDanhMucCongDoan.resource
 F:\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.rptBangLSPTongHopTheoCN.resources
 F:\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.rptBangTongHopLuongMaHang.resources
 F:\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Report.rptBangTongHopCongDoan.resources
+F:\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.rptDSCNToCat.resources
 F:\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Report.rptDSCDThuaThieu.resources
 F:\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.rptLuongSanPhamChiTietCaNhan.resources
 F:\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.rptBangLSPTongHopMHTheoCN.resources
@@ -2847,6 +2848,7 @@ F:\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.ucCachTinhLuong.resources
 F:\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.ucBangLuongThang13.resources
 F:\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.ucDanhSachTamUng.resources
 F:\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.ucDangKyBHXH.resources
+F:\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.ucLSPKiemSoat.resources
 F:\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.ucDoanhThuCat.resources
 F:\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.ucMaHang.resources
 F:\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.ucTienThuongPhuCap.resources

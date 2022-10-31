@@ -2,6 +2,7 @@
 using DevExpress.XtraBars.Docking2010;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Grid;
+using Microsoft.ApplicationBlocks.Data;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Vs.Report;
 
 namespace Vs.Payroll
 {
@@ -19,6 +21,7 @@ namespace Vs.Payroll
         public int iID_TO = -1;
         public DateTime dNgay;
         private bool isAdd = false;
+        public double fTongDoanhThu = 0;
         public frmTinhLuongCNToCat()
         {
             InitializeComponent();
@@ -61,6 +64,13 @@ namespace Vs.Payroll
                         }
                     case "In":
                         {
+                            frmViewReport frm = new frmViewReport();
+                            frm.rpt = new rptDSCNToCat(dNgay);
+                            DataTable dt = new DataTable();
+                            dt = (DataTable)grdData.DataSource;
+                            dt.TableName = "DATA";
+                            frm.AddDataSource(dt);
+                            frm.ShowDialog();
                             break;
                         }
                     case "thoat":
@@ -71,7 +81,23 @@ namespace Vs.Payroll
                         }
                     case "luu":
                         {
-                            isAdd = true;
+                            grvData.CloseEditor();
+                            grvData.UpdateCurrentRow();
+                            Validate();
+                            if (grvData.HasColumnErrors) return;
+                            DataTable dt_CHON = new DataTable();
+                            dt_CHON = ((DataTable)grdData.DataSource);
+                            //dt_CHON = Commons.Modules.ObjSystems.ConvertDatatable(grvDSUngVien);
+                            if (dt_CHON.AsEnumerable().Where(r => r.Field<Boolean>("CHON") == true).Count() == 0)
+                            {
+                                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgChuaChonCongNhan"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                return;
+                            }
+                            if (Savedata() == false)
+                            {
+                                Commons.Modules.ObjSystems.msgChung(Commons.ThongBao.msgDuLieuDangSuDung);
+                            }
+                            isAdd = false;
                             LoadData();
                             EnabelButton(isAdd);
                             break;
@@ -83,9 +109,16 @@ namespace Vs.Payroll
                             EnabelButton(isAdd);
                             break;
                         }
+                    case "xoa":
+                        {
+                            if (grvData.RowCount == 0) return;
+                            if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msg_XoaDong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) return;
+                            SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "DELETE FROM dbo.LUONG_CONG_NHAN_CAT WHERE ID = " + grvData.GetFocusedRowCellValue("ID") + "");
+                            break;
+                        }
                 }
             }
-            catch { }
+            catch (Exception ex) { }
         }
         private void EnabelButton(bool visible)
         {
@@ -95,10 +128,7 @@ namespace Vs.Payroll
             windowsUIButton.Buttons[3].Properties.Visible = !visible;
             windowsUIButton.Buttons[4].Properties.Visible = visible;
             windowsUIButton.Buttons[5].Properties.Visible = visible;
-            windowsUIButton.Buttons[6].Properties.Visible = visible;
-            windowsUIButton.Buttons[7].Properties.Visible = visible;
             grvData.OptionsBehavior.Editable = visible;
-
         }
         private void LoadData()
         {
@@ -129,36 +159,78 @@ namespace Vs.Payroll
                     grvData.Columns["HE_SO"].DisplayFormat.FormatString = "0.0";
                     grvData.Columns["SG_LV_TT"].DisplayFormat.FormatType = FormatType.Numeric;
                     grvData.Columns["SG_LV_TT"].DisplayFormat.FormatString = "0.00";
-                    grvData.Columns["LUONG_SP"].DisplayFormat.FormatType = FormatType.Numeric;
-                    grvData.Columns["LUONG_SP"].DisplayFormat.FormatString = "N0";
                     grvData.Columns["MS_CN"].OptionsColumn.AllowEdit = false;
                     grvData.Columns["HO_TEN"].OptionsColumn.AllowEdit = false;
                     grvData.Columns["SG_LV_TT"].OptionsColumn.AllowEdit = false;
+                    grvData.Columns["CHON"].Visible = false;
                 }
                 else
                 {
                     grdData.DataSource = dt;
                 }
+                if (isAdd)
+                {
+                    grvData.OptionsSelection.MultiSelect = true;
+                    grvData.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CheckBoxRowSelect;
+                }
+                else
+                {
+                    grvData.OptionsSelection.MultiSelect = false;
+                    grvData.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.RowSelect;
+                }
+
+                try
+                {
+                    grvData.OptionsSelection.CheckBoxSelectorField = "CHON";
+                    grvData.Columns["CHON"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
+                }
+                catch { }
             }
             catch (Exception ex)
             {
             }
         }
+        private bool Savedata()
+        {
+            string sTB = "sBTTinhLuong" + Commons.Modules.iIDUser;
+            try
+            {
 
+                Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sTB, Commons.Modules.ObjSystems.ConvertDatatable(grdData), "");
+                System.Data.SqlClient.SqlConnection conn;
+                conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                conn.Open();
+                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spTinhLuongCNCat", conn);
+                cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                cmd.Parameters.Add("@iLoai", SqlDbType.Int).Value = 3;
+                cmd.Parameters.Add("@sBT", SqlDbType.NVarChar).Value = sTB;
+                cmd.Parameters.Add("@Ngay", SqlDbType.DateTime).Value = dNgay;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.ExecuteNonQuery();
+                Commons.Modules.ObjSystems.XoaTable(sTB);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Commons.Modules.ObjSystems.XoaTable(sTB);
+                return false;
+            }
+        }
         private void grvData_RowCountChanged(object sender, EventArgs e)
         {
             GridView view = sender as GridView;
             try
             {
-                
-                    if (view.RowCount > 0)
-                    {
-                        ItemForSumNhanVien.Text = "Tổng số công nhân viên" + ": " + view.RowCount.ToString();
-                    }
-                    else
-                    {
-                        ItemForSumNhanVien.Text = "Tổng số công nhân viên" + ": 0";
-                    }
+
+                if (view.RowCount > 0)
+                {
+                    ItemForSumNhanVien.Text = "Tổng số công nhân viên" + ": " + view.RowCount.ToString();
+                }
+                else
+                {
+                    ItemForSumNhanVien.Text = "Tổng số công nhân viên" + ": 0";
+                }
             }
             catch (Exception ex)
             {

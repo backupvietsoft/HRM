@@ -35,6 +35,7 @@ namespace Vs.Payroll
             }
         }
         private int iTinhTrang = 1;
+        private double iTongDoanhThu = 0;
         RepositoryItemTimeEdit repositoryItemTimeEdit1;
         public ucDoanhThuCat()
         {
@@ -133,7 +134,8 @@ namespace Vs.Payroll
                     dt = ds.Tables[1].Copy();
                     DataTable dt1 = new DataTable();
                     dt1 = ds.Tables[2].Copy();
-                    lblTextDoanhThu.Text = "Doanh thu theo ngày : " + dt.Rows[0][0].ToString() + " đồng    Doanh thu tháng : " + dt1.Rows[0][0].ToString() + " đồng";
+                    iTongDoanhThu = Convert.ToDouble(dt1.Rows[0][0]);
+                    lblTextDoanhThu.Text = "Doanh thu theo ngày : " + dt.Rows[0][0].ToString() + " đồng    Doanh thu tháng : " + Convert.ToDouble(dt1.Rows[0][0]).ToString("#,##0") + " đồng";
                     dt1 = new DataTable();
                     dt1 = ds.Tables[3].Copy();
                     iTinhTrang = 1;
@@ -206,6 +208,13 @@ namespace Vs.Payroll
                             EnableButon(isAdd);
                             break;
                         }
+                    case "xoa":
+                        {
+                            if (grvData.RowCount == 0) return;
+                            if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msg_XoaDong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) return;
+                            SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "DELETE FROM dbo.DOANH_THU_CAT WHERE ID = " + grvData.GetFocusedRowCellValue("ID") + "");
+                            break;
+                        }
                     case "thoat":
                         {
                             Commons.Modules.ObjSystems.GotoHome(this);
@@ -228,7 +237,8 @@ namespace Vs.Payroll
                             frmTinhLuongCNToCat frm = new frmTinhLuongCNToCat();
                             frm.iID_TO = Convert.ToInt32(cboTo.EditValue);
                             frm.dNgay = Commons.Modules.ObjSystems.ConvertDateTime(cboThang.Text);
-                            if(frm.ShowDialog() == DialogResult.OK)
+                            frm.fTongDoanhThu = iTongDoanhThu;
+                            if (frm.ShowDialog() == DialogResult.OK)
                             {
                                 LoadData();
                             }
@@ -248,6 +258,7 @@ namespace Vs.Payroll
             {
                 btnALL.Buttons[0].Properties.Visible = false;
                 btnALL.Buttons[1].Properties.Visible = false;
+                btnALL.Buttons[2].Properties.Visible = false;
                 btnCNCat.Visible = false;
             }
             else
@@ -255,8 +266,9 @@ namespace Vs.Payroll
                 btnALL.Buttons[0].Properties.Visible = !visible;
                 btnALL.Buttons[1].Properties.Visible = !visible;
                 btnALL.Buttons[2].Properties.Visible = !visible;
-                btnALL.Buttons[3].Properties.Visible = visible;
+                btnALL.Buttons[3].Properties.Visible = !visible;
                 btnALL.Buttons[4].Properties.Visible = visible;
+                btnALL.Buttons[5].Properties.Visible = visible;
                 btnCNCat.Visible = !visible;
                 cboTo.Enabled = !visible;
                 cboThang.Enabled = !visible;

@@ -34,8 +34,6 @@ namespace Vs.HRM
         {
             try
             {
-
-
                 WindowsUIButton btn = e.Button as WindowsUIButton;
                 XtraUserControl ctl = new XtraUserControl();
                 switch (btn.Tag.ToString())
@@ -204,7 +202,7 @@ namespace Vs.HRM
                                         DateTime firstDateTime = DateTime.Today;
                                         DateTime secondDateTime = DateTime.Today;
 
-                                        if (Commons.Modules.ObjSystems.KyHieuDV(Convert.ToInt64(LK_DON_VI.EditValue)) == "HN")
+                                        if (Commons.Modules.KyHieuDV == "HN")
                                         {
                                             // lấy dữ liệu sau khi lưu
                                             switch (rdo_ChonThang.SelectedIndex)
@@ -226,6 +224,10 @@ namespace Vs.HRM
                                                     break;
                                             }
                                             BaoCaoChiTiet6ThangDau_HN(firstDateTime, secondDateTime);
+                                        }
+                                        else if (Commons.Modules.KyHieuDV == "DM")
+                                        {
+                                            BCTinhHinhSDLD_DM();
                                         }
                                         else
                                         {
@@ -310,7 +312,6 @@ namespace Vs.HRM
             txtNam.EditValue = DateTime.Today.Year;
             lk_NgayIn.EditValue = DateTime.Today;
             Commons.Modules.sLoad = "";
-
         }
 
         private void LK_DON_VI_EditValueChanged(object sender, EventArgs e)
@@ -338,6 +339,15 @@ namespace Vs.HRM
 
         private void rdoChonBaoCao_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (Commons.Modules.KyHieuDV == "DM")
+            {
+                lbXiNghiep.Rows[8].Height = 0;
+                lbXiNghiep.Rows[7].Height = 0;
+                lbXiNghiep.Rows[6].Height = 0;
+                lbXiNghiep.Rows[5].Height = 0;
+                lbXiNghiep.Rows[4].Height = 0;
+                return;
+            }
             switch (rdoChonBaoCao.Properties.Items[rdoChonBaoCao.SelectedIndex].Tag)
             {
                 case "rdo_TinhHinhSDLaoDong":
@@ -478,7 +488,6 @@ namespace Vs.HRM
 
             }
         }
-
         private void rdo_ChonThang_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (flag && rdoChonBaoCao.SelectedIndex == 2)
@@ -883,6 +892,515 @@ namespace Vs.HRM
             catch (Exception ex)
             {
                 System.Windows.MessageBox.Show(ex.Message);
+            }
+        }
+        private void BCTinhHinhSDLD_DM()
+        {
+            try
+            {
+                DateTime firstDateTime = DateTime.Today;
+                DateTime secondDateTime = DateTime.Today;
+                string sTieuDe = "";
+
+                switch (rdo_ChonThang.SelectedIndex)
+                {
+                    case 0:
+                        {
+                            firstDateTime = new DateTime(Convert.ToInt32(txtNam.Text), 1, 1);
+                            secondDateTime = new DateTime(Convert.ToInt32(txtNam.Text), 6, 30);
+                            sTieuDe = "TÌNH HÌNH SỬ DỤNG LAO ĐỘNG 6 THÁNG ĐẦU NĂM " + Convert.ToString(txtNam.Text);
+                        }
+                        break;
+                    case 1:
+                        {
+                            firstDateTime = new DateTime(Convert.ToInt32(txtNam.Text), 7, 1);
+                            secondDateTime = new DateTime(Convert.ToInt32(txtNam.Text), 12, 31);
+                            sTieuDe = "TÌNH HÌNH SỬ DỤNG LAO ĐỘNG 6 THÁNG CUỐI NĂM " + Convert.ToString(txtNam.Text);
+                        }
+                        break;
+                    default:
+                        break;
+                }
+
+
+                System.Data.SqlClient.SqlConnection conn;
+                conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                conn.Open();
+                DataTable dtBCThang;
+
+                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptBCTinhHinhSuDungLaoDong_DM", conn);
+
+                cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                cmd.Parameters.Add("@DVi", SqlDbType.Int).Value = LK_DON_VI.EditValue;
+                cmd.Parameters.Add("@TNgay", SqlDbType.DateTime).Value = firstDateTime;
+                cmd.Parameters.Add("@DNgay", SqlDbType.DateTime).Value = secondDateTime;
+                cmd.CommandType = CommandType.StoredProcedure;
+                System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+                DataSet ds = new DataSet();
+                adp.Fill(ds);
+                dtBCThang = new DataTable();
+                dtBCThang = ds.Tables[0].Copy();
+
+                SaveExcelFile = SaveFiles("Excel Workbook |*.xlsx|Excel 97-2003 Workbook |*.xls|Word Document |*.docx|Rich Text Format |*.rtf|PDF File |*.pdf|Web Page |*.html|Single File Web Page |*.mht");
+                if (SaveExcelFile == "")
+                {
+                    return;
+                }
+                Microsoft.Office.Interop.Excel.Application oXL;
+                Microsoft.Office.Interop.Excel.Workbook oWB;
+                Microsoft.Office.Interop.Excel.Worksheet oSheet;
+                oXL = new Microsoft.Office.Interop.Excel.Application();
+                oXL.Visible = false;
+                this.Cursor = Cursors.WaitCursor;
+
+                //OfficeOpenXml.ExcelPackage ExcelPkg = new OfficeOpenXml.ExcelPackage();
+                //OfficeOpenXml.ExcelWorksheet wsSheet1 = ExcelPkg.Workbook.Worksheets.Add("Sheet1");
+
+                oWB = (Microsoft.Office.Interop.Excel.Workbook)(oXL.Workbooks.Add(Missing.Value));
+                oSheet = (Microsoft.Office.Interop.Excel.Worksheet)oWB.ActiveSheet;
+
+                string fontName = "Times New Roman";
+                int fontSizeTieuDe = 10;
+                int fontSizeNoiDung = 10;
+
+                string lastColumn = string.Empty;
+                lastColumn = CharacterIncrement(dtBCThang.Columns.Count - 1);
+
+
+                Range row2_TieuDe_BaoCao = oSheet.get_Range("Z1");
+                row2_TieuDe_BaoCao.Font.Size = 12;
+                row2_TieuDe_BaoCao.Font.Name = fontName;
+                row2_TieuDe_BaoCao.Font.FontStyle = "Bold";
+                row2_TieuDe_BaoCao.Value2 = "Mẫu số 01/PLI";
+
+                row2_TieuDe_BaoCao = oSheet.get_Range("A2");
+                row2_TieuDe_BaoCao.Font.Size = 12;
+                row2_TieuDe_BaoCao.Font.Name = fontName;
+                row2_TieuDe_BaoCao.Font.Bold = true;
+                row2_TieuDe_BaoCao.Value2 = "CÔNG TY CỔ PHẦN MAY DUY MINH";
+
+                row2_TieuDe_BaoCao = oSheet.get_Range("R2", "AA2");
+                row2_TieuDe_BaoCao.Merge();
+                row2_TieuDe_BaoCao.Font.Size = 12;
+                row2_TieuDe_BaoCao.Font.Name = fontName;
+                row2_TieuDe_BaoCao.Font.Bold = true;
+                row2_TieuDe_BaoCao.Value2 = "CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM";
+                row2_TieuDe_BaoCao.Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                row2_TieuDe_BaoCao.Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+
+                row2_TieuDe_BaoCao = oSheet.get_Range("R3", "AA3");
+                row2_TieuDe_BaoCao.Merge();
+                row2_TieuDe_BaoCao.Font.Size = 12;
+                row2_TieuDe_BaoCao.Font.Name = fontName;
+                row2_TieuDe_BaoCao.Font.Bold = true;
+                row2_TieuDe_BaoCao.Font.Italic = true;
+                row2_TieuDe_BaoCao.Value2 = "Độc lập - Tự do - Hạnh phúc";
+                row2_TieuDe_BaoCao.Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                row2_TieuDe_BaoCao.Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+
+                row2_TieuDe_BaoCao = oSheet.get_Range("R4", "AA4");
+                row2_TieuDe_BaoCao.Merge();
+                row2_TieuDe_BaoCao.Font.Size = 12;
+                row2_TieuDe_BaoCao.Font.Name = fontName;
+                row2_TieuDe_BaoCao.Font.Italic = true;
+                row2_TieuDe_BaoCao.Value2 = "……, ngày … tháng … năm …";
+                row2_TieuDe_BaoCao.Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                row2_TieuDe_BaoCao.Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+
+                row2_TieuDe_BaoCao = oSheet.get_Range("A6", "AA6");
+                row2_TieuDe_BaoCao.Merge();
+                row2_TieuDe_BaoCao.Font.Size = 12;
+                row2_TieuDe_BaoCao.Font.Name = fontName;
+                row2_TieuDe_BaoCao.Font.FontStyle = "Bold";
+                row2_TieuDe_BaoCao.Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                row2_TieuDe_BaoCao.Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+                row2_TieuDe_BaoCao.Value2 = "BÁO CÁO";
+
+                row2_TieuDe_BaoCao = oSheet.get_Range("A7", "AA7");
+                row2_TieuDe_BaoCao.Merge();
+                row2_TieuDe_BaoCao.Font.Size = 12;
+                row2_TieuDe_BaoCao.Font.Name = fontName;
+                row2_TieuDe_BaoCao.Font.FontStyle = "Bold";
+                row2_TieuDe_BaoCao.Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                row2_TieuDe_BaoCao.Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+                row2_TieuDe_BaoCao.Value2 = sTieuDe;
+
+                row2_TieuDe_BaoCao = oSheet.get_Range("A8", "AA8");
+                row2_TieuDe_BaoCao.Merge();
+                row2_TieuDe_BaoCao.Font.Size = 12;
+                row2_TieuDe_BaoCao.Font.Name = fontName;
+                row2_TieuDe_BaoCao.Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                row2_TieuDe_BaoCao.Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+                row2_TieuDe_BaoCao.Value2 = "Kính gửi: Sở lao động thương binh và xã hội tỉnh Nam Định";
+
+                row2_TieuDe_BaoCao = oSheet.get_Range("A8", "AA8");
+                row2_TieuDe_BaoCao.Merge();
+                row2_TieuDe_BaoCao.Font.Size = 12;
+                row2_TieuDe_BaoCao.Font.Name = fontName;
+                row2_TieuDe_BaoCao.Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                row2_TieuDe_BaoCao.Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+                row2_TieuDe_BaoCao.Value2 = "Kính gửi: Sở lao động thương binh và xã hội tỉnh Nam Định";
+
+                row2_TieuDe_BaoCao = oSheet.get_Range("A10");
+                row2_TieuDe_BaoCao.Font.Size = 12;
+                row2_TieuDe_BaoCao.Font.Name = fontName;
+                row2_TieuDe_BaoCao.Value2 = "1. Thông tin chung về doanh nghiệp, cơ quan, tổ chức:";
+
+                row2_TieuDe_BaoCao = oSheet.get_Range("A11");
+                row2_TieuDe_BaoCao.Font.Size = 12;
+                row2_TieuDe_BaoCao.Font.Name = fontName;
+                row2_TieuDe_BaoCao.Value2 = "Tên doanh nghiệp: CÔNG TY CỔ PHẦN MAY DUY MINH";
+
+                row2_TieuDe_BaoCao = oSheet.get_Range("A12");
+                row2_TieuDe_BaoCao.Font.Size = 12;
+                row2_TieuDe_BaoCao.Font.Name = fontName;
+                row2_TieuDe_BaoCao.Value2 = "Địa chỉ: Lô CN4, khu công nghiệp Bảo Minh, xã Liên Bảo, huyện Vụ Bản, Tỉnh Nam Định.";
+
+                row2_TieuDe_BaoCao = oSheet.get_Range("A13");
+                row2_TieuDe_BaoCao.Font.Size = 12;
+                row2_TieuDe_BaoCao.Font.Name = fontName;
+                row2_TieuDe_BaoCao.Value2 = "Điện thoại:  0228.6556.777";
+
+                row2_TieuDe_BaoCao = oSheet.get_Range("A14");
+                row2_TieuDe_BaoCao.Font.Size = 12;
+                row2_TieuDe_BaoCao.Font.Name = fontName;
+                row2_TieuDe_BaoCao.Value2 = "Email:";
+
+                row2_TieuDe_BaoCao = oSheet.get_Range("A15");
+                row2_TieuDe_BaoCao.Font.Size = 12;
+                row2_TieuDe_BaoCao.Font.Name = fontName;
+                row2_TieuDe_BaoCao.Value2 = "Mã số giấy chứng nhận đăng ký doanh nghiệp: 0601156266";
+
+                row2_TieuDe_BaoCao = oSheet.get_Range("A16");
+                row2_TieuDe_BaoCao.Font.Size = 12;
+                row2_TieuDe_BaoCao.Font.Name = fontName;
+                row2_TieuDe_BaoCao.Value2 = "Lĩnh vực hoạt động, ngành, nghề kinh doanh chính: May mặc";
+
+                row2_TieuDe_BaoCao = oSheet.get_Range("A17");
+                row2_TieuDe_BaoCao.Font.Size = 12;
+                row2_TieuDe_BaoCao.Font.Name = fontName;
+                row2_TieuDe_BaoCao.Value2 = "2. Thông tin tình hình sử dụng lao động của đơn vị:";
+
+
+                Range row4_TieuDe_Format = oSheet.get_Range("A19", "AA21"); //27 + 31
+                row4_TieuDe_Format.Font.Size = 8;
+                row4_TieuDe_Format.Font.Name = fontName;
+                row4_TieuDe_Format.Font.Bold = true;
+                row4_TieuDe_Format.WrapText = true;
+                row4_TieuDe_Format.NumberFormat = "@";
+                row4_TieuDe_Format.Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                row4_TieuDe_Format.Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+
+                row4_TieuDe_Format = oSheet.get_Range("A20");
+                row4_TieuDe_Format.RowHeight = 30;
+
+                row4_TieuDe_Format = oSheet.get_Range("A21");
+                row4_TieuDe_Format.RowHeight = 30;
+
+                row4_TieuDe_Format = oSheet.get_Range("A19", "A21");
+                row4_TieuDe_Format.Merge();
+                row4_TieuDe_Format.Value2 = "STT";
+                row4_TieuDe_Format.ColumnWidth = 7.5;
+
+                row4_TieuDe_Format = oSheet.get_Range("B19", "B21");
+                row4_TieuDe_Format.Merge();
+                row4_TieuDe_Format.Value2 = "Họ tên";
+                row4_TieuDe_Format.ColumnWidth = 20;
+
+
+                row4_TieuDe_Format = oSheet.get_Range("C19", "C21");
+                row4_TieuDe_Format.Merge();
+                row4_TieuDe_Format.Value2 = "Mã số BHXH";
+                row4_TieuDe_Format.ColumnWidth = 11;
+
+                row4_TieuDe_Format = oSheet.get_Range("D19", "E20");
+                row4_TieuDe_Format.Merge();
+                row4_TieuDe_Format.Value2 = "Ngày tháng năm sinh";
+
+                row4_TieuDe_Format = oSheet.get_Range("D21");
+                row4_TieuDe_Format.Value2 = "Nam";
+                row4_TieuDe_Format.ColumnWidth = 12;
+
+
+                row4_TieuDe_Format = oSheet.get_Range("E21");
+                row4_TieuDe_Format.Value2 = "Nữ";
+                row4_TieuDe_Format.ColumnWidth = 12;
+
+                row4_TieuDe_Format = oSheet.get_Range("F19", "F21");
+                row4_TieuDe_Format.Merge();
+                row4_TieuDe_Format.Value2 = "Số CCCD/ CMND/ Hộ chiếu";
+                row4_TieuDe_Format.ColumnWidth = 15;
+
+                row4_TieuDe_Format = oSheet.get_Range("G19", "G21");
+                row4_TieuDe_Format.Merge();
+                row4_TieuDe_Format.Value2 = "Cấp bậc, chức vụ, chức danh nghề, nơi làm việc";
+                row4_TieuDe_Format.ColumnWidth = 15;
+
+                row4_TieuDe_Format = oSheet.get_Range("H19", "K19");
+                row4_TieuDe_Format.Merge();
+                row4_TieuDe_Format.Value2 = "Vị trí việc làm (2)";
+
+                row4_TieuDe_Format = oSheet.get_Range("H20", "H21");
+                row4_TieuDe_Format.Merge();
+                row4_TieuDe_Format.Value2 = "Nhà quản lý";
+                row4_TieuDe_Format.ColumnWidth = 9;
+
+                row4_TieuDe_Format = oSheet.get_Range("I20", "I21");
+                row4_TieuDe_Format.Merge();
+                row4_TieuDe_Format.Value2 = "Chuyên môn kỹ thuật bậc cao";
+                row4_TieuDe_Format.ColumnWidth = 9;
+
+                row4_TieuDe_Format = oSheet.get_Range("J20", "J21");
+                row4_TieuDe_Format.Merge();
+                row4_TieuDe_Format.Value2 = "Chuyên môn kỹ thuật bậc trung";
+                row4_TieuDe_Format.ColumnWidth = 9;
+
+                row4_TieuDe_Format = oSheet.get_Range("K20", "K21");
+                row4_TieuDe_Format.Merge();
+                row4_TieuDe_Format.Value2 = "Khác";
+                row4_TieuDe_Format.ColumnWidth = 9;
+
+                row4_TieuDe_Format = oSheet.get_Range("L19", "Q19");
+                row4_TieuDe_Format.Merge();
+                row4_TieuDe_Format.Value2 = "Tiền lương";
+
+                row4_TieuDe_Format = oSheet.get_Range("L20", "L21");
+                row4_TieuDe_Format.Merge();
+                row4_TieuDe_Format.Value2 = "Hệ số/ Mức lương";
+                row4_TieuDe_Format.ColumnWidth = 10;
+
+                row4_TieuDe_Format = oSheet.get_Range("M20", "Q20");
+                row4_TieuDe_Format.Merge();
+                row4_TieuDe_Format.Value2 = "Phụ cấp";
+
+                row4_TieuDe_Format = oSheet.get_Range("M21");
+                row4_TieuDe_Format.Value2 = "Chức vụ";
+                row4_TieuDe_Format.ColumnWidth = 10;
+
+                row4_TieuDe_Format = oSheet.get_Range("N21");
+                row4_TieuDe_Format.Value2 = "Thâm niên VK (%)";
+                row4_TieuDe_Format.ColumnWidth = 10;
+
+                row4_TieuDe_Format = oSheet.get_Range("O21");
+                row4_TieuDe_Format.Value2 = "Thâm niên nghề (%)";
+                row4_TieuDe_Format.ColumnWidth = 10;
+
+                row4_TieuDe_Format = oSheet.get_Range("P21");
+                row4_TieuDe_Format.Value2 = "Phụ cấp lương";
+                row4_TieuDe_Format.ColumnWidth = 10;
+
+                row4_TieuDe_Format = oSheet.get_Range("Q21");
+                row4_TieuDe_Format.Value2 = "Các khoản bổ sung";
+                row4_TieuDe_Format.ColumnWidth = 10;
+
+                row4_TieuDe_Format = oSheet.get_Range("R19", "S20");
+                row4_TieuDe_Format.Merge();
+                row4_TieuDe_Format.Value2 = "Ngành/nghề nặng nhọc, độc hại";
+
+                row4_TieuDe_Format = oSheet.get_Range("R21");
+                row4_TieuDe_Format.Value2 = "Ngày bắt đầu";
+                row4_TieuDe_Format.ColumnWidth = 10;
+
+                row4_TieuDe_Format = oSheet.get_Range("S21");
+                row4_TieuDe_Format.Value2 = "Ngày kết thúc";
+                row4_TieuDe_Format.ColumnWidth = 10;
+
+                row4_TieuDe_Format = oSheet.get_Range("T19", "X19");
+                row4_TieuDe_Format.Merge();
+                row4_TieuDe_Format.Value2 = "Loại và hiệu lực hợp đồng lao động";
+
+                row4_TieuDe_Format = oSheet.get_Range("T20", "T21");
+                row4_TieuDe_Format.Merge();
+                row4_TieuDe_Format.Value2 = "Ngày bắt đầu HĐLĐ không xác định thời hạn";
+                row4_TieuDe_Format.ColumnWidth = 12;
+
+                row4_TieuDe_Format = oSheet.get_Range("U20", "V20");
+                row4_TieuDe_Format.Merge();
+                row4_TieuDe_Format.Value2 = "Hiệu lực HĐLĐ xác định thời hạn";
+
+                row4_TieuDe_Format = oSheet.get_Range("U21");
+                row4_TieuDe_Format.Value2 = "Ngày bắt đầu";
+                row4_TieuDe_Format.ColumnWidth = 10;
+
+                row4_TieuDe_Format = oSheet.get_Range("V21");
+                row4_TieuDe_Format.Value2 = "Ngày kết thúc";
+                row4_TieuDe_Format.ColumnWidth = 10;
+
+                row4_TieuDe_Format = oSheet.get_Range("W20", "X20");
+                row4_TieuDe_Format.Merge();
+                row4_TieuDe_Format.Value2 = "Hiệu lực HĐLĐ khác (dưới 1 tháng, thử việc)";
+
+                row4_TieuDe_Format = oSheet.get_Range("W21");
+                row4_TieuDe_Format.Value2 = "Ngày bắt đầu";
+                row4_TieuDe_Format.ColumnWidth = 10;
+
+                row4_TieuDe_Format = oSheet.get_Range("X21");
+                row4_TieuDe_Format.Value2 = "Ngày kết thúc";
+                row4_TieuDe_Format.ColumnWidth = 10;
+
+                row4_TieuDe_Format = oSheet.get_Range("Y19", "Y21");
+                row4_TieuDe_Format.Merge();
+                row4_TieuDe_Format.Value2 = "Thời điểm đơn vị bắt đầu đóng BHXH";
+                row4_TieuDe_Format.ColumnWidth = 8;
+
+                row4_TieuDe_Format = oSheet.get_Range("Z19", "Z21");
+                row4_TieuDe_Format.Merge();
+                row4_TieuDe_Format.Value2 = "Thời điểm đơn vị kết thúc đóng BHXH";
+                row4_TieuDe_Format.ColumnWidth = 8;
+
+                row4_TieuDe_Format = oSheet.get_Range("AA19", "AA21");
+                row4_TieuDe_Format.Merge();
+                row4_TieuDe_Format.Value2 = "Ghi chú";
+                row4_TieuDe_Format.ColumnWidth = 8;
+
+                for (int i = 1; i <= 27; i++)
+                {
+                    row4_TieuDe_Format = oSheet.get_Range("" + CharacterIncrement(i - 1) + "22");
+                    row4_TieuDe_Format.Value2 = i.ToString();
+                }
+
+                DataRow[] dr = dtBCThang.Select();
+                string[,] rowData = new string[dr.Count(), dtBCThang.Columns.Count];
+
+                int rowCnt = 0;
+                foreach (DataRow row in dr)
+                {
+                    for (int col_bd = 0; col_bd < dtBCThang.Columns.Count; col_bd++)
+                    {
+                        rowData[rowCnt, col_bd] = row[col_bd].ToString();
+                    }
+                    rowCnt++;
+                }
+                rowCnt = rowCnt + 22;
+                oSheet.get_Range("A23", lastColumn + rowCnt.ToString()).Value2 = rowData;
+                Microsoft.Office.Interop.Excel.Range formatRange;
+
+                formatRange = oSheet.get_Range("L23", "L" + (rowCnt).ToString());
+                formatRange.NumberFormat = "#,##0.00;(#,##0.00); ; ";
+                try { formatRange.TextToColumns(Type.Missing, Microsoft.Office.Interop.Excel.XlTextParsingType.xlDelimited, Microsoft.Office.Interop.Excel.XlTextQualifier.xlTextQualifierDoubleQuote); } catch { }
+
+                string CurentColumn = "";
+
+                for (int col = 4; col <= 5; col++)
+                {
+                    CurentColumn = CharacterIncrement(col - 1);
+                    formatRange = oSheet.get_Range(CurentColumn + "23", CurentColumn + rowCnt.ToString());
+                    formatRange.NumberFormat = "dd/MM/yyyy";
+                    try { formatRange.TextToColumns(Type.Missing, Microsoft.Office.Interop.Excel.XlTextParsingType.xlDelimited, Microsoft.Office.Interop.Excel.XlTextQualifier.xlTextQualifierDoubleQuote); } catch { }
+                }
+
+                for (int col = 13; col < 18; col++)
+                {
+                    CurentColumn = CharacterIncrement(col - 1);
+                    formatRange = oSheet.get_Range(CurentColumn + "23", CurentColumn + rowCnt.ToString());
+                    formatRange.NumberFormat = "#,##0.00;(#,##0.00); ; ";
+                    try { formatRange.TextToColumns(Type.Missing, Microsoft.Office.Interop.Excel.XlTextParsingType.xlDelimited, Microsoft.Office.Interop.Excel.XlTextQualifier.xlTextQualifierDoubleQuote); } catch { }
+                }
+
+                for (int col = 18; col <= 24; col++)
+                {
+                    CurentColumn = CharacterIncrement(col - 1);
+                    formatRange = oSheet.get_Range(CurentColumn + "23", CurentColumn + rowCnt.ToString());
+                    formatRange.NumberFormat = "dd/MM/yyyy";
+                    try { formatRange.TextToColumns(Type.Missing, Microsoft.Office.Interop.Excel.XlTextParsingType.xlDelimited, Microsoft.Office.Interop.Excel.XlTextQualifier.xlTextQualifierDoubleQuote); } catch { }
+                }
+
+                for (int col = 25; col <= 26; col++)
+                {
+                    CurentColumn = CharacterIncrement(col - 1);
+                    formatRange = oSheet.get_Range(CurentColumn + "23", CurentColumn + rowCnt.ToString());
+                    formatRange.NumberFormat = "MM/yyyy";
+                    try { formatRange.TextToColumns(Type.Missing, Microsoft.Office.Interop.Excel.XlTextParsingType.xlDelimited, Microsoft.Office.Interop.Excel.XlTextQualifier.xlTextQualifierDoubleQuote); } catch { }
+                }
+                formatRange = oSheet.get_Range("A23", lastColumn + (rowCnt).ToString());
+                formatRange.Font.Name = fontName;
+                formatRange.WrapText = true;
+                formatRange.Font.Size = fontSizeNoiDung;
+
+                BorderAround(oSheet.get_Range("A19", lastColumn + (rowCnt).ToString()));
+
+                rowCnt = rowCnt + 2;
+
+                formatRange = oSheet.get_Range("A" + rowCnt.ToString());
+                formatRange.Font.Name = fontName;
+                formatRange.Font.Size = fontSizeNoiDung;
+                formatRange.Value2 = "Số Lao động trên 35 tuổi:";
+
+                rowCnt++;
+
+                formatRange = oSheet.get_Range("R" + rowCnt.ToString(), "U" + rowCnt.ToString());
+                formatRange.Merge();
+                formatRange.Value2 = "ĐẠI DIỆN DOANH NGHIỆP, CƠ QUAN, TỔ CHỨC";
+                formatRange.Font.Name = fontName;
+                formatRange.Font.Size = fontSizeNoiDung;
+                formatRange.Font.Bold = true;
+                formatRange.Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                formatRange.Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+
+                rowCnt++;
+
+                formatRange = oSheet.get_Range("R" + rowCnt.ToString(), "U" + rowCnt.ToString());
+                formatRange.Merge();
+                formatRange.Value2 = "(Chữ ký, dấu)";
+                formatRange.Font.Name = fontName;
+                formatRange.Font.Size = fontSizeNoiDung;
+                formatRange.Font.Italic = true;
+                formatRange.Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                formatRange.Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+
+                rowCnt = rowCnt + 3;
+
+                formatRange = oSheet.get_Range("A" + rowCnt.ToString());
+                formatRange.Value2 = "Ghi chú:";
+                formatRange.Font.Name = fontName;
+                formatRange.Font.Size = 10;
+                formatRange.Font.Bold = true;
+                formatRange.Font.Italic = true;
+
+                rowCnt++;
+
+                formatRange = oSheet.get_Range("A" + rowCnt.ToString());
+                formatRange.Value2 = "(2) Vị trí việc làm phân loại theo:";
+                formatRange.Font.Name = fontName;
+                formatRange.Font.Size = 10;
+
+                rowCnt++;
+
+                formatRange = oSheet.get_Range("A" + rowCnt.ToString());
+                formatRange.Value2 = "- Cột (8) Nhà quản lý: Nhóm này bao gồm những nhà lãnh đạo, quản lý làm việc trong các ngành, các cấp và trong các cơ quan, tổ chức, doanh nghiệp có giữ các chức vụ, có quyền quản lý, chỉ huy, điều hành từ trung ương tới cấp xã;";
+                formatRange.Font.Name = fontName;
+                formatRange.Font.Size = 10;
+
+
+                rowCnt++;
+
+                formatRange = oSheet.get_Range("A" + rowCnt.ToString());
+                formatRange.Value2 = "- Cột (9) Chuyên môn kỹ thuật bậc cao: Nhóm này bao gồm những nghề đòi hỏi phải có kiến thức chuyên môn, nghiệp vụ và kinh nghiệm ở trình độ cao (đại học trở lên) trong lĩnh vực khoa học và kỹ thuật, sức khỏe, giáo dục, kinh doanh và quản lý, công nghệ thông tin ";
+                formatRange.Font.Name = fontName;
+                formatRange.Font.Size = 10;
+
+                rowCnt++;
+
+                formatRange = oSheet.get_Range("A" + rowCnt.ToString());
+                formatRange.Value2 = "- Cột (10) Chuyên môn kỹ thuật bậc trung: Nhóm này bao gồm những nghề đòi hỏi kiến thức và kinh nghiệm ở trình độ bậc trung (cao đẳng, trung cấp) về các lĩnh vực khoa học và kỹ thuật, sức khỏe, kinh doanh và quản lý, luật pháp, văn hóa, xã hội, thông tin và truyền ";
+                formatRange.Font.Name = fontName;
+                formatRange.Font.Size = 10;
+
+
+                // filter
+                this.Cursor = Cursors.Default;
+
+                oXL.Visible = true;
+                oXL.UserControl = true;
+
+                oWB.SaveAs(SaveExcelFile,
+                    AccessMode: Microsoft.Office.Interop.Excel.XlSaveAsAccessMode.xlShared);
+            }
+            catch (Exception ex)
+            {
+                this.Cursor = Cursors.Default;
+                MessageBox.Show(ex.Message);
             }
         }
         public string SaveFiles(string MFilter)

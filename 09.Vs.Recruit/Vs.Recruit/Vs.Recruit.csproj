@@ -353,17 +353,17 @@
     <Compile Include="Report\rptGiayHenDiLam.designer.cs">
       <DependentUpon>rptGiayHenDiLam.cs</DependentUpon>
     </Compile>
+    <Compile Include="Report\rptInTheNV_DM.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\rptInTheNV_DM.Designer.cs">
+      <DependentUpon>rptInTheNV_DM.cs</DependentUpon>
+    </Compile>
     <Compile Include="Report\rptPhieuPhongVanUngVien.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Report\rptPhieuPhongVanUngVien.designer.cs">
       <DependentUpon>rptPhieuPhongVanUngVien.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Report\rptTheNhanVien_DM.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Report\rptTheNhanVien_DM.Designer.cs">
-      <DependentUpon>rptTheNhanVien_DM.cs</DependentUpon>
     </Compile>
     <Compile Include="Report\rptThongBaoTuyenDung.cs">
       <SubType>Component</SubType>
@@ -592,11 +592,11 @@
     <EmbeddedResource Include="Report\rptGiayHenDiLam.resx">
       <DependentUpon>rptGiayHenDiLam.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Report\rptInTheNV_DM.resx">
+      <DependentUpon>rptInTheNV_DM.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Report\rptPhieuPhongVanUngVien.resx">
       <DependentUpon>rptPhieuPhongVanUngVien.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Report\rptTheNhanVien_DM.resx">
-      <DependentUpon>rptTheNhanVien_DM.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\rptThongBaoTuyenDung.resx">
       <DependentUpon>rptThongBaoTuyenDung.cs</DependentUpon>

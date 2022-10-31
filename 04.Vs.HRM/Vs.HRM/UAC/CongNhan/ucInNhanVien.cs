@@ -39,13 +39,21 @@ namespace Vs.HRM
         #region bảo hiểm y tế
         private void ucThongTinNhanVien_Load(object sender, EventArgs e)
         {
-            Thread.Sleep(1000);
-            Commons.Modules.sLoad = "0Load";
-            Commons.Modules.ObjSystems.LoadCboDonVi(cboDV);
-            Commons.Modules.ObjSystems.LoadCboXiNghiep(cboDV, cboXN);
-            Commons.Modules.ObjSystems.LoadCboTo(cboDV, cboXN, cboTo);
-            LoadGridThongTinNhanVien();
-            Commons.Modules.sLoad = "";
+            try
+            {
+                Thread.Sleep(1000);
+                Commons.Modules.sLoad = "0Load";
+                Commons.OSystems.SetDateEditFormat(datTuNgay);
+                Commons.OSystems.SetDateEditFormat(datDNgay);
+                datTuNgay.DateTime = DateTime.Now.AddMonths(-2);
+                datDNgay.DateTime = DateTime.Now;
+                Commons.Modules.ObjSystems.LoadCboDonVi(cboDV);
+                Commons.Modules.ObjSystems.LoadCboXiNghiep(cboDV, cboXN);
+                Commons.Modules.ObjSystems.LoadCboTo(cboDV, cboXN, cboTo);
+                LoadGridThongTinNhanVien();
+                Commons.Modules.sLoad = "";
+            }
+            catch { }
         }
         private void cboDV_EditValueChanged(object sender, EventArgs e)
         {
@@ -103,34 +111,42 @@ namespace Vs.HRM
                                     DataTable dt = new DataTable();
                                     DataTable dtbc = new DataTable();
                                     frmViewReport frm = new frmViewReport();
-                                    frm.rpt = new rptTheNhanVien(DateTime.Now);
+                                    //frm.rpt = new rptTheNhanVien_DM(dt);
+
 
                                     conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
                                     conn.Open();
 
-                                    System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spSaveThongTinNhanVien", conn);
+                                    System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spSaveThongTinNhanVienDM", conn);
                                     cmd.Parameters.Add("@sBT", SqlDbType.NVarChar, 50).Value = strSaveThongTinNhanVien;
                                     cmd.CommandType = CommandType.StoredProcedure;
-
                                     System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
                                     DataSet ds = new DataSet();
                                     adp.Fill(ds);
+
+                                    DataTable dt1 = new DataTable();
+                                    dt1 = ds.Tables[1].Copy();
+                                    dt1.TableName = "DATA";
+                                    frm.rpt = new Vs.Recruit.rptInTheNV_DM(dt1);
+                                    frm.AddDataSource(dt1);
+
                                     dt = new DataTable();
-                                    dt = ds.Tables[1].Copy();
-                                    dt.TableName = "DA_TA";
+                                    dt = ds.Tables[0].Copy();
+                                    dt.TableName = "DATA1";
                                     frm.AddDataSource(dt);
 
 
-                                    dtbc = new DataTable();
-                                    dtbc = ds.Tables[0].Copy();
-                                    dtbc.TableName = "DON_VI";
-                                    frm.AddDataSource(dtbc);
+
+
+                                    DataTable dt2 = new DataTable();
+                                    dt2 = ds.Tables[2].Copy();
+                                    dt2.TableName = "DATA2";
+                                    frm.AddDataSource(dt2);
 
                                     frm.ShowDialog();
 
                                     Commons.Modules.ObjSystems.XoaTable(strSaveThongTinNhanVien);
                                     conn.Close();
-                                    //SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spSaveThongTinNhanVien", strSaveThongTinNhanVien);
                                 }
                                 catch (Exception ex)
                                 {
@@ -160,27 +176,31 @@ namespace Vs.HRM
         #region hàm xử lý dữ liệu
         private void LoadGridThongTinNhanVien()
         {
-            DataTable dt = new DataTable();
-            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spLayDanhSachThongTinNhanVien", cboDV.EditValue, cboXN.EditValue, cboTo.EditValue, Commons.Modules.UserName, Commons.Modules.TypeLanguage));
-            dt.Columns["CHON"].ReadOnly = false;
-            if (grdTTNhanVien.DataSource == null)
-            {
-                Commons.Modules.ObjSystems.MLoadXtraGrid(grdTTNhanVien, grvTTNhanVien, dt, true, false, false, false, true, this.Name);
-                grvTTNhanVien.Columns["CHON"].Visible = false;
-                grvTTNhanVien.Columns["ID_CN"].Visible = false;
-                grvTTNhanVien.Columns["MS_CN"].OptionsColumn.AllowEdit = false;
-                grvTTNhanVien.Columns["TEN_XN"].OptionsColumn.AllowEdit = false;
-                grvTTNhanVien.Columns["TEN_TO"].OptionsColumn.AllowEdit = false;
-                grvTTNhanVien.Columns["HO_TEN"].OptionsColumn.AllowEdit = false;
-            }
-            else
-            {
-                grdTTNhanVien.DataSource = dt;
-            }
             try
             {
-                grvTTNhanVien.OptionsSelection.CheckBoxSelectorField = "CHON";
-                grvTTNhanVien.Columns["CHON"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
+                DataTable dt = new DataTable();
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spLayDanhSachThongTinNhanVien", cboDV.EditValue, cboXN.EditValue, cboTo.EditValue, Commons.Modules.UserName, Commons.Modules.TypeLanguage, datTuNgay.EditValue, datDNgay.EditValue));
+                dt.Columns["CHON"].ReadOnly = false;
+                if (grdTTNhanVien.DataSource == null)
+                {
+                    Commons.Modules.ObjSystems.MLoadXtraGrid(grdTTNhanVien, grvTTNhanVien, dt, true, false, false, false, true, this.Name);
+                    grvTTNhanVien.Columns["CHON"].Visible = false;
+                    grvTTNhanVien.Columns["ID_CN"].Visible = false;
+                    grvTTNhanVien.Columns["MS_CN"].OptionsColumn.AllowEdit = false;
+                    grvTTNhanVien.Columns["TEN_XN"].OptionsColumn.AllowEdit = false;
+                    grvTTNhanVien.Columns["TEN_TO"].OptionsColumn.AllowEdit = false;
+                    grvTTNhanVien.Columns["HO_TEN"].OptionsColumn.AllowEdit = false;
+                }
+                else
+                {
+                    grdTTNhanVien.DataSource = dt;
+                }
+                try
+                {
+                    grvTTNhanVien.OptionsSelection.CheckBoxSelectorField = "CHON";
+                    grvTTNhanVien.Columns["CHON"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
+                }
+                catch { }
             }
             catch { }
         }
@@ -217,6 +237,18 @@ namespace Vs.HRM
         private void windowsUIButton_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void datTuNgay_EditValueChanged(object sender, EventArgs e)
+        {
+            if (Commons.Modules.sLoad == "0Load") return;
+            LoadGridThongTinNhanVien();
+        }
+
+        private void datDNgay_EditValueChanged(object sender, EventArgs e)
+        {
+            if (Commons.Modules.sLoad == "0Load") return;
+            LoadGridThongTinNhanVien();
         }
     }
 }

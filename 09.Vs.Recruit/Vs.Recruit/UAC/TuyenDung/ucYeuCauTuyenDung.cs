@@ -32,8 +32,8 @@ namespace Vs.Recruit
             LoadgrdPYC(-1);
             BindingData(false);
             Commons.Modules.sLoad = "";
-            cboTrangThai_EditValueChanged(null, null);
             enableButon(true);
+            cboTrangThai_EditValueChanged(null, null);
             Commons.Modules.ObjSystems.SetPhanQuyen(btnALL);
             foreach (ToolStripMenuItem item in contextMenuStrip1.Items)
             {
@@ -363,7 +363,17 @@ namespace Vs.Recruit
                         if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgBanCoMuonChuyenDuyetKhong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) return;
                         try
                         {
-                            SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "UPDATE A SET A.ID_TT_VT = CASE B.ID_LT WHEN 1 THEN 3 ELSE 3 END FROM dbo.YCTD_VI_TRI_TUYEN A INNER JOIN dbo.LOAI_CONG_VIEC B ON B.ID_LCV = A.ID_VTTD WHERE A.ID_YCTD = " + iID_YCTD + " UPDATE dbo.YEU_CAU_TUYEN_DUNG SET ID_TT =  2 WHERE ID_YCTD = " + iID_YCTD + " ");
+                            if (Commons.IConnections.Database == "VS_HRM_DEMO")
+                            {
+                                for (int i = 0; i < grvViTri.RowCount; i++)
+                                {
+                                    SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spQuyDinhDuyetTaiLieu", Commons.Modules.iIDUser, this.Name, iID_YCTD, grvViTri.GetRowCellValue(i, "ID_LCV"), txtMA_YCTD.Text + " " + grvViTri.GetRowCellDisplayText(i, "ID_LCV").ToString(), 1, "Tài liệu đk", Convert.ToInt32(grvViTri.GetRowCellValue(i, "ID_MUT")) == 1 ? true : false, Commons.Modules.UserName, Commons.Modules.TypeLanguage);
+                                }
+                            }
+                            else
+                            {
+                                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "UPDATE A SET A.ID_TT_VT = CASE B.ID_LT WHEN 1 THEN 3 ELSE 3 END FROM dbo.YCTD_VI_TRI_TUYEN A INNER JOIN dbo.LOAI_CONG_VIEC B ON B.ID_LCV = A.ID_VTTD WHERE A.ID_YCTD = " + iID_YCTD + " UPDATE dbo.YEU_CAU_TUYEN_DUNG SET ID_TT =  2 WHERE ID_YCTD = " + iID_YCTD + " ");
+                            }
                             LoadgrdPYC(iID_YCTD);
                             cboTrangThai.EditValue = 2;
                             btnALL.Buttons[0].Properties.Visible = false;
@@ -691,8 +701,6 @@ namespace Vs.Recruit
             {
                 groNVThayThe.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             }
-
-
         }
         private void grvThayThe_InitNewRow(object sender, InitNewRowEventArgs e)
         {
@@ -732,21 +740,26 @@ namespace Vs.Recruit
                 Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboNguoiYC, Commons.Modules.ObjSystems.DataCongNhan(false), "ID_CN", "TEN_CN", "TEN_CN", true, true);
                 //khi ở chế độ view thì thì hiện chuyển duyệt khi tình trạng đang soạn
                 BindingData(false);
-                if (Convert.ToInt32(cboTinhTrang.EditValue) == 1)
+                if (Convert.ToInt32(cboTinhTrang.EditValue) == 1|| grvPYC.FocusedRowHandle < 0)
                 {
-                    btnALL.Buttons[0].Properties.Visible = true;
-                    btnALL.Buttons[1].Properties.Visible = true;
-                    btnALL.Buttons[2].Properties.Visible = true;
-                    btnALL.Buttons[3].Properties.Visible = true;
-                    btnALL.Buttons[4].Properties.Visible = true;
+                    if (grvPYC.FocusedRowHandle < 0)
+                    {
+                        btnALL.Buttons[0].Properties.Visible = false;
+                        btnALL.Buttons[2].Properties.Visible = false;
+                        btnALL.Buttons[3].Properties.Visible = false;
+                    }
+                    else
+                    {
+                        btnALL.Buttons[0].Properties.Visible = true;
+                        btnALL.Buttons[2].Properties.Visible = true;
+                        btnALL.Buttons[3].Properties.Visible = true;
+                    }    
                 }
                 else
                 {
-                    btnALL.Buttons[0].Properties.Visible = false;
-                    btnALL.Buttons[1].Properties.Visible = false;
-                    btnALL.Buttons[2].Properties.Visible = false;
-                    btnALL.Buttons[3].Properties.Visible = false;
-                    btnALL.Buttons[4].Properties.Visible = false;
+                    btnALL.Buttons[0].Properties.Visible = true;
+                    btnALL.Buttons[2].Properties.Visible = true;
+                    btnALL.Buttons[3].Properties.Visible = true;
                 }
 
             }

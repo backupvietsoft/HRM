@@ -2532,10 +2532,8 @@ D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.ucXepLoaiKhenThuong.re
 D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.ucBHXHThang.resources
 D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.XtraForm1.resources
 D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.csproj.GenerateResource.cache
-D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.dll.licenses
 D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.csproj.CoreCompileInputs.cache
 D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.csproj.CopyComplete
-D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.dll
 D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.pdb
 D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\ICSharpCode.SharpZipLib.dll
 H:\Lamviec\Lamviec\HRM\01.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\Template\TemplateGiamLaoDong.xlsx
@@ -2875,3 +2873,7 @@ H:\Lamviec\Lamviec\HRM\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.csproj.CoreCompi
 H:\Lamviec\Lamviec\HRM\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.csproj.CopyComplete
 H:\Lamviec\Lamviec\HRM\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.dll
 H:\Lamviec\Lamviec\HRM\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.pdb
+D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\Vs.HRM.exe.config
+D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.frmChonNhanVien.resources
+D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.dll.licenses
+D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.dll

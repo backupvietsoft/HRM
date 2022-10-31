@@ -35,6 +35,7 @@
             DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions4 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
             DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions5 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
             DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions6 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions7 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
             this.navigationFrame1 = new DevExpress.XtraBars.Navigation.NavigationFrame();
             this.PageDetails = new DevExpress.XtraBars.Navigation.NavigationPage();
             this.pageList = new DevExpress.XtraBars.Navigation.NavigationPage();
@@ -56,6 +57,8 @@
             this.lblLocTheo = new DevExpress.XtraLayout.LayoutControlItem();
             this.windowsUIButton = new DevExpress.XtraBars.Docking2010.WindowsUIButtonPanel();
             this.searchControl1 = new DevExpress.XtraEditors.SearchControl();
+            this.grdData = new DevExpress.XtraGrid.GridControl();
+            this.grvData = new DevExpress.XtraGrid.Views.Grid.GridView();
             ((System.ComponentModel.ISupportInitialize)(this.navigationFrame1)).BeginInit();
             this.navigationFrame1.SuspendLayout();
             this.pageList.SuspendLayout();
@@ -80,6 +83,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.lblLocTheo)).BeginInit();
             this.windowsUIButton.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.searchControl1.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grdData)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grvData)).BeginInit();
             this.SuspendLayout();
             // 
             // navigationFrame1
@@ -342,7 +347,8 @@
             windowsUIButtonImageOptions3.ImageUri.Uri = "AddItem";
             windowsUIButtonImageOptions4.ImageUri.Uri = "Edit;Size32x32;GrayScaled";
             windowsUIButtonImageOptions5.ImageUri.Uri = "snap/snapdeletelist";
-            windowsUIButtonImageOptions6.ImageUri.Uri = "richedit/clearheaderandfooter";
+            windowsUIButtonImageOptions6.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("windowsUIButtonImageOptions6.SvgImage")));
+            windowsUIButtonImageOptions7.ImageUri.Uri = "richedit/clearheaderandfooter";
             this.windowsUIButton.Buttons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] {
             new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions1, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "import", -1, false),
             new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions2, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "export", -1, false),
@@ -351,8 +357,11 @@
             new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions4, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "sua", -1, false),
             new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions5, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "xoa", -1, false),
             new DevExpress.XtraBars.Docking2010.WindowsUISeparator(),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions6, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "thoat", -1, false)});
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions6, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "in", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUISeparator(),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions7, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "thoat", -1, false)});
             this.windowsUIButton.ContentAlignment = System.Drawing.ContentAlignment.MiddleRight;
+            this.windowsUIButton.Controls.Add(this.grdData);
             this.windowsUIButton.Controls.Add(this.searchControl1);
             this.windowsUIButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.windowsUIButton.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -380,6 +389,22 @@
             this.searchControl1.Properties.ShowDefaultButtonsMode = DevExpress.XtraEditors.Repository.ShowDefaultButtonsMode.AutoChangeSearchToClear;
             this.searchControl1.Size = new System.Drawing.Size(191, 24);
             this.searchControl1.TabIndex = 2;
+            // 
+            // grdData
+            // 
+            this.grdData.Location = new System.Drawing.Point(272, 3);
+            this.grdData.MainView = this.grvData;
+            this.grdData.Name = "grdData";
+            this.grdData.Size = new System.Drawing.Size(233, 24);
+            this.grdData.TabIndex = 3;
+            this.grdData.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.grvData});
+            this.grdData.Visible = false;
+            // 
+            // grvData
+            // 
+            this.grvData.GridControl = this.grdData;
+            this.grvData.Name = "grvData";
             // 
             // ucQLUV
             // 
@@ -414,6 +439,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.lblLocTheo)).EndInit();
             this.windowsUIButton.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.searchControl1.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grdData)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grvData)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -441,5 +468,7 @@
         private DevExpress.XtraEditors.LookUpEdit cboLocTheo;
         private DevExpress.XtraLayout.LayoutControlItem lblLocTheo;
         private DevExpress.XtraEditors.LookUpEdit cboLoaiCNV;
+        private DevExpress.XtraGrid.GridControl grdData;
+        private DevExpress.XtraGrid.Views.Grid.GridView grvData;
     }
 }

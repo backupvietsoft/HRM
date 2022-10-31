@@ -1,7 +1,6 @@
 ﻿using DevExpress.XtraBars.Docking2010;
 using DevExpress.XtraBars.Navigation;
 using DevExpress.XtraEditors;
-using DevExpress.XtraGrid;
 using Microsoft.ApplicationBlocks.Data;
 using System;
 using System.Data;

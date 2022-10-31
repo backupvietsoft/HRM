@@ -22,14 +22,14 @@ namespace Vs.HRM
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             BonusSkins.Register();
-            Commons.Modules.ModuleName = "HRM";
+            Commons.Modules.ModuleName = "VS_HRM";
             Commons.Modules.UserName = "admin";
             DataSet ds = new DataSet();
             //ds.ReadXml(AppDomain.CurrentDomain.BaseDirectory + "\\vsconfig.xml");
             Commons.IConnections.Username = "sa";
-            Commons.IConnections.Server = @".\SQL2008";
+            Commons.IConnections.Server = @"27.74.240.29,1433";
             Commons.IConnections.Database = "VS_HRM_DEMO";
-            Commons.IConnections.Password = "123";
+            Commons.IConnections.Password = "codaikadaiku";
 
             Commons.Modules.sPrivate = @"PILMICO";
             //Commons.Modules.sPrivate = @"ADC";

@@ -42,7 +42,6 @@
             this.layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcgDaDuyet = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataLayoutControl1)).BeginInit();
             this.dataLayoutControl1.SuspendLayout();
             this.btnALL.SuspendLayout();
@@ -57,19 +56,17 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcgDaDuyet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
             this.SuspendLayout();
             // 
             // dataLayoutControl1
             // 
-            this.dataLayoutControl1.Controls.Add(this.btnALL);
             this.dataLayoutControl1.Controls.Add(this.grdDaDuyet);
             this.dataLayoutControl1.Controls.Add(this.grdChung);
             this.dataLayoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataLayoutControl1.Location = new System.Drawing.Point(0, 0);
             this.dataLayoutControl1.Name = "dataLayoutControl1";
             this.dataLayoutControl1.Root = this.Root;
-            this.dataLayoutControl1.Size = new System.Drawing.Size(973, 566);
+            this.dataLayoutControl1.Size = new System.Drawing.Size(973, 534);
             this.dataLayoutControl1.TabIndex = 0;
             this.dataLayoutControl1.Text = "dataLayoutControl1";
             // 
@@ -96,11 +93,12 @@
             this.btnALL.ContentAlignment = System.Drawing.ContentAlignment.MiddleRight;
             this.btnALL.Controls.Add(this.txtTim);
             this.btnALL.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnALL.Location = new System.Drawing.Point(6, 528);
+            this.btnALL.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.btnALL.Location = new System.Drawing.Point(0, 534);
             this.btnALL.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnALL.Name = "btnALL";
             this.btnALL.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            this.btnALL.Size = new System.Drawing.Size(961, 32);
+            this.btnALL.Size = new System.Drawing.Size(973, 32);
             this.btnALL.TabIndex = 36;
             this.btnALL.Text = "S";
             this.btnALL.UseButtonBackgroundImages = false;
@@ -109,7 +107,7 @@
             // txtTim
             // 
             this.txtTim.Client = this.grdChung;
-            this.txtTim.Location = new System.Drawing.Point(6, 5);
+            this.txtTim.Location = new System.Drawing.Point(13, 4);
             this.txtTim.Name = "txtTim";
             this.txtTim.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Repository.ClearButton(),
@@ -123,7 +121,7 @@
             this.grdChung.Location = new System.Drawing.Point(12, 37);
             this.grdChung.MainView = this.grvChung;
             this.grdChung.Name = "grdChung";
-            this.grdChung.Size = new System.Drawing.Size(949, 483);
+            this.grdChung.Size = new System.Drawing.Size(949, 485);
             this.grdChung.TabIndex = 8;
             this.grdChung.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grvChung});
@@ -144,7 +142,7 @@
             this.grdDaDuyet.Location = new System.Drawing.Point(12, 37);
             this.grdDaDuyet.MainView = this.grvDaDuyet;
             this.grdDaDuyet.Name = "grdDaDuyet";
-            this.grdDaDuyet.Size = new System.Drawing.Size(949, 483);
+            this.grdDaDuyet.Size = new System.Drawing.Size(949, 485);
             this.grdDaDuyet.TabIndex = 14;
             this.grdDaDuyet.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grvDaDuyet});
@@ -162,10 +160,9 @@
             this.Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
             this.Root.GroupBordersVisible = false;
             this.Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.tabChung,
-            this.layoutControlItem3});
+            this.tabChung});
             this.Root.Name = "Root";
-            this.Root.Size = new System.Drawing.Size(973, 566);
+            this.Root.Size = new System.Drawing.Size(973, 534);
             this.Root.TextVisible = false;
             // 
             // tabChung
@@ -173,7 +170,7 @@
             this.tabChung.Location = new System.Drawing.Point(0, 0);
             this.tabChung.Name = "tabChung";
             this.tabChung.SelectedTabPage = this.lcgXetDuyet;
-            this.tabChung.Size = new System.Drawing.Size(963, 522);
+            this.tabChung.Size = new System.Drawing.Size(963, 524);
             this.tabChung.TabPages.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.lcgXetDuyet,
             this.lcgDaDuyet});
@@ -185,14 +182,14 @@
             this.layoutControlItem8});
             this.lcgXetDuyet.Location = new System.Drawing.Point(0, 0);
             this.lcgXetDuyet.Name = "lcgXetDuyet";
-            this.lcgXetDuyet.Size = new System.Drawing.Size(951, 485);
+            this.lcgXetDuyet.Size = new System.Drawing.Size(951, 487);
             // 
             // layoutControlItem8
             // 
             this.layoutControlItem8.Control = this.grdChung;
             this.layoutControlItem8.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem8.Name = "layoutControlItem8";
-            this.layoutControlItem8.Size = new System.Drawing.Size(951, 485);
+            this.layoutControlItem8.Size = new System.Drawing.Size(951, 487);
             this.layoutControlItem8.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem8.TextVisible = false;
             // 
@@ -202,29 +199,21 @@
             this.layoutControlItem2});
             this.lcgDaDuyet.Location = new System.Drawing.Point(0, 0);
             this.lcgDaDuyet.Name = "lcgDaDuyet";
-            this.lcgDaDuyet.Size = new System.Drawing.Size(951, 485);
+            this.lcgDaDuyet.Size = new System.Drawing.Size(951, 487);
             // 
             // layoutControlItem2
             // 
             this.layoutControlItem2.Control = this.grdDaDuyet;
             this.layoutControlItem2.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(951, 485);
+            this.layoutControlItem2.Size = new System.Drawing.Size(951, 487);
             this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem2.TextVisible = false;
-            // 
-            // layoutControlItem3
-            // 
-            this.layoutControlItem3.Control = this.btnALL;
-            this.layoutControlItem3.Location = new System.Drawing.Point(0, 522);
-            this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Size = new System.Drawing.Size(963, 34);
-            this.layoutControlItem3.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem3.TextVisible = false;
             // 
             // frmXetDuyet
             // 
             this.Controls.Add(this.dataLayoutControl1);
+            this.Controls.Add(this.btnALL);
             this.Name = "frmXetDuyet";
             this.Size = new System.Drawing.Size(973, 566);
             this.Load += new System.EventHandler(this.frmXetDuyet_Load);
@@ -242,7 +231,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcgDaDuyet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -262,6 +250,5 @@
         private DevExpress.XtraLayout.LayoutControlGroup lcgDaDuyet;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
         private DevExpress.XtraBars.Docking2010.WindowsUIButtonPanel btnALL;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;
     }
 }

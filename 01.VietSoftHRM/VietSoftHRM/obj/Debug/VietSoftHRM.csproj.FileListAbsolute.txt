@@ -1923,7 +1923,6 @@ D:\01.SourceCode\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\DevExpress.XtraVert
 D:\01.SourceCode\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Microsoft.ApplicationBlocks.Data.dll
 D:\01.SourceCode\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Newtonsoft.Json.dll
 D:\01.SourceCode\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Vs.Category.dll
-D:\01.SourceCode\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Vs.HRM.dll
 D:\01.SourceCode\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Vs.Payroll.dll
 D:\01.SourceCode\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Vs.Recruit.dll
 D:\01.SourceCode\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\VS.Report.dll
@@ -2413,3 +2412,5 @@ H:\Lamviec\Lamviec\HRM\01.HRM\01.VietSoftHRM\VietSoftHRM\obj\Debug\VietSoftHRM.c
 H:\Lamviec\Lamviec\HRM\01.HRM\01.VietSoftHRM\VietSoftHRM\obj\Debug\VietSoftHRM.csproj.CopyComplete
 H:\Lamviec\Lamviec\HRM\01.HRM\01.VietSoftHRM\VietSoftHRM\obj\Debug\VietSoftHRM.exe
 H:\Lamviec\Lamviec\HRM\01.HRM\01.VietSoftHRM\VietSoftHRM\obj\Debug\VietSoftHRM.pdb
+D:\01.SourceCode\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Vs.HRM.exe.config
+D:\01.SourceCode\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Vs.HRM.dll

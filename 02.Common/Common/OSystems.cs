@@ -1702,6 +1702,31 @@ namespace Commons
                 }
             }
         }
+
+        public void MFormatCol(GridView grv, string sColFormat, int iFormatString)
+        {
+            try
+            {
+                string sFormatString = "n" + iFormatString.ToString();
+                RepositoryItemTextEdit txtEdit = new RepositoryItemTextEdit();
+                txtEdit.Properties.DisplayFormat.FormatString = sFormatString;
+                txtEdit.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+                txtEdit.Properties.EditFormat.FormatString = sFormatString;
+                txtEdit.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+                txtEdit.Properties.Mask.EditMask = sFormatString;
+                txtEdit.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
+                txtEdit.Properties.Mask.UseMaskAsDisplayFormat = true;
+                grv.Columns[sColFormat].ColumnEdit = txtEdit;
+                //grv.Columns[sColFormat].DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+                //grv.Columns[sColFormat].DisplayFormat.FormatString = sFormatString;
+            }
+            catch
+            {
+                grv.Columns[sColFormat].DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+                grv.Columns[sColFormat].DisplayFormat.FormatString = "N2";
+            }
+        }
+
         #endregion
 
         #region thay doi nn
@@ -3518,7 +3543,8 @@ namespace Commons
             {
                 if (sKeyWord.Substring(0, 2).ToString().ToLower() == "ch")
                 {
-                    sNN = "";
+                    //sNN = "";
+                    sNN = Modules.ObjLanguages.GetLanguage(Modules.ModuleName, sFormName, sKeyWord, Modules.TypeLanguage);
                 }
                 else
                 {
@@ -4963,6 +4989,14 @@ namespace Commons
             //ID_TT, TenTT
             DataTable dt = new DataTable();
             dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboTinhTrang", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll));
+            return dt;
+        }
+
+        public DataTable DataTinhTrangDT(bool coAll)
+        {
+            //T.ID_TT_DT, TEN_TT_DT
+            DataTable dt = new DataTable();
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboTinhTrangDT", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll));
             return dt;
         }
         public DataTable DataTinhTrangTD(bool coAll)

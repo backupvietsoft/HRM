@@ -58,22 +58,21 @@ namespace Vs.Category
 
         private void cboID_DTL_EditValueChanged(object sender, EventArgs e)
         {
-            try
-            {
-                if (Commons.Modules.sLoad == "0Load") return;
-                if (cboID_DTL.EditValue == null) return;
-                DataTable dt = new DataTable();
-                dt = ((DataTable)cboID_DTL.Properties.DataSource).Copy();
+            //try
+            //{
+            //    if (Commons.Modules.sLoad == "0Load") return;
+            //    if (cboID_DTL.EditValue == null) return;
+            //    DataTable dt = new DataTable();
+            //    dt = ((DataTable)cboID_DTL.Properties.DataSource).Copy();
 
-                try
-                {
-                    dt = dt.AsEnumerable().Where(r => r.Field<int>("ID_DTL").Equals(cboID_DTL.EditValue)).CopyToDataTable();
-                }
-                catch { dt = dt.Clone(); }
+            //    try
+            //    {
+            //        dt = dt.AsEnumerable().Where(r => r.Field<int>("ID_DTL").Equals(cboID_DTL.EditValue)).CopyToDataTable();
+            //    }
+            //    catch { dt = dt.Clone(); }
 
-                txtDIEU_KIEN_DUYET.Text = string.IsNullOrEmpty(Convert.ToString(dt.Rows[0]["QUERY"])) ? "" : Convert.ToString(dt.Rows[0]["QUERY"]);
-            }
-            catch (Exception ex) { XtraMessageBox.Show(ex.Message); }
+            //}
+            //catch (Exception ex) { XtraMessageBox.Show(ex.Message); }
         }
 
         private void grvUserDuyet_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
@@ -382,7 +381,7 @@ namespace Vs.Category
                             cmd.Parameters.Add("@TEN_QUY_DINH_H", SqlDbType.NVarChar).Value = txtTEN_QUY_DINH_H.Text;
                             cmd.Parameters.Add("@NGAY_HIEU_LUC", SqlDbType.DateTime).Value = Commons.Modules.ObjSystems.ConvertDateTime(datNGAY_HIEU_LUC.Text);
                             cmd.Parameters.Add("@ID_DTL", SqlDbType.BigInt).Value = cboID_DTL.EditValue;
-                            cmd.Parameters.Add("@DIEU_KIEN_DUYET", SqlDbType.BigInt).Value = cboID_DTL.EditValue;
+                            cmd.Parameters.Add("@DIEU_KIEN_DUYET", SqlDbType.NVarChar).Value = txtDIEU_KIEN_DUYET.EditValue;
                             cmd.Parameters.Add("@INACTIVE", SqlDbType.Bit).Value = chkINACTIVE.Checked;
                             cmd.CommandType = CommandType.StoredProcedure;
                             System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
@@ -632,9 +631,7 @@ namespace Vs.Category
             btnALL.Buttons[4].Properties.Visible = !visible;
             btnALL.Buttons[5].Properties.Visible = !visible;
             btnALL.Buttons[6].Properties.Visible = visible;
-
-            grvQuyDinh.OptionsBehavior.Editable = !visible;
-
+            grdQuyDinh.Enabled = visible;
             txtSO_DQD.Properties.ReadOnly = visible;
             datNGAY_HIEU_LUC.Properties.ReadOnly = visible;
             datNGAY_HIEU_LUC.Properties.Buttons[0].Enabled = !datNGAY_HIEU_LUC.Properties.ReadOnly;
@@ -715,7 +712,7 @@ namespace Vs.Category
                     grdBuocDuyet.DataSource = dt2;
 
                 LoadCbo_GridView();
-                StatusControl();
+                //StatusControl();
                 Commons.Modules.ObjSystems.DeleteAddRow(grvBuocDuyet);
                 Commons.Modules.ObjSystems.DeleteAddRow(grvUserDuyet);
             }

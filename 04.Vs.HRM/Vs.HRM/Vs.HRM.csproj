@@ -153,6 +153,12 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Form\frmChonNhanVien.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\frmChonNhanVien.Designer.cs">
+      <DependentUpon>frmChonNhanVien.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmHelp_View.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -659,6 +665,9 @@
     <Compile Include="XtraForm1.Designer.cs">
       <DependentUpon>XtraForm1.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Form\frmChonNhanVien.resx">
+      <DependentUpon>frmChonNhanVien.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmHelp_View.resx">
       <DependentUpon>frmHelp_View.cs</DependentUpon>
     </EmbeddedResource>

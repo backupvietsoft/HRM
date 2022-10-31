@@ -48,6 +48,18 @@ namespace Vs.Recruit
             XtraUserControl ctl = new XtraUserControl();
             switch (btn.Tag.ToString())
             {
+                case "in":
+                    {
+                        Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr,"sbtUV" + Commons.Modules.iIDUser,Commons.Modules.ObjSystems.ConvertDatatable(grvUngVien),"");
+
+                        string sSql = "SELECT A.MS_UV,UV.NGAY_NHAN_HO_SO,A.HO_TEN,A.NGAY_SINH,DATEDIFF(YEAR,A.NGAY_SINH,GETDATE()) AS TUOI,A.GIOI_TINH,A.VI_TRI_TD_1,A.VI_TRI_TD_2,A.TEN_VT_PH,A.DT_DI_DONG,B.DT_NGUOI_THAN,UV.QUAN_HE,A.THON_XOM,A.TEN_PX,A.TEN_QUAN,A.TEN_TP,A.DIA_CHI_THUONG_TRU,NT.TEN_NTD,(SELECT TEN_LCV FROM dbo.LOAI_CONG_VIEC WHERE ID_LCV = B.ID_LCV) AS VT_TRUNG_TUYEN, A.TEN_TAY_NGHE,(SELECT TEN_TO FROM dbo.[TO] WHERE ID_TO = B.ID_TO) AS TEN_TO , ISNULL(CONVERT(NVARCHAR(50), A.NGAY_HEN_DI_LAM, 103), 'F') AS NGAY_HEN_DI_LAM, ISNULL(CONVERT(NVARCHAR(50), A.NGAY_NHAN_VIEC, 103), 'F') AS NGAY_NHAN_VIEC, UV.GHI_CHU FROM  "+ "sbtUV" + Commons.Modules.iIDUser + " A INNER JOIN dbo.UNG_VIEN UV ON UV.ID_UV = A.ID_UV LEFT JOIN dbo.NGUON_TUYEN_DUNG NT ON NT.ID_NTD = UV.ID_NTD LEFT JOIN dbo.CONG_NHAN B ON B.ID_UV = A.ID_UV";
+                        DataTable dt = new DataTable();
+                        dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr,CommandType.Text,sSql));
+                        Commons.Modules.ObjSystems.MLoadXtraGrid(grdData, grvData, dt, false, true, false, true, true, this.Name);
+                        Commons.Modules.ObjSystems.XoaTable("sbtUV" + Commons.Modules.iIDUser);
+                        InUngVien();
+                        break;
+                    }
                 case "them":
                     {
                         ucCTQLUV dl = new ucCTQLUV(-1);
@@ -114,6 +126,115 @@ namespace Vs.Recruit
             }
         }
 
+        private void InUngVien()
+        {
+            List<int> list = new List<int>();
+            string sPath = "";
+            sPath = Commons.Modules.MExcel.SaveFiles("Excel file (*.xlsx)|*.xlsx");
+            if (sPath == "") return;
+            //this.Cursor = Cursors.WaitCursor;
+            Commons.Modules.ObjSystems.ShowWaitForm(this);
+
+
+            Microsoft.Office.Interop.Excel.Application excelApplication = new Microsoft.Office.Interop.Excel.Application();
+            excelApplication.DisplayAlerts = true;
+
+            Microsoft.Office.Interop.Excel.Range title;
+
+            int TCot = grvData.Columns.Count;
+            int TDong = grvData.RowCount;
+
+            excelApplication.Visible = false;
+            grvData.ActiveFilter.Clear();
+            grvData.ExportToXlsx(sPath);
+            System.Globalization.CultureInfo oldCultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture;
+            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
+            Microsoft.Office.Interop.Excel.Workbooks excelWorkbooks = excelApplication.Workbooks;
+            Microsoft.Office.Interop.Excel.Workbook excelWorkbook = excelWorkbooks.Open(sPath, 0, false, 5, "", "", false, Microsoft.Office.Interop.Excel.XlPlatform.xlWindows, "", false, false, 0, true);
+            Excel.Worksheet excelWorkSheet = (Excel.Worksheet)excelWorkbook.Sheets[1];
+            try
+            {
+                excelApplication.Cells.Borders.LineStyle = 0;
+                excelApplication.Cells.Font.Name = "Times New Roman";
+                excelApplication.Cells.Font.Size = 13;
+                excelWorkSheet.AutoFilterMode = false;
+                excelWorkSheet.Application.ActiveWindow.FreezePanes = false;
+                int DONG = 0;
+
+                DONG = Commons.Modules.MExcel.TaoTTChung(excelWorkSheet, 1, 2, 1, 10, 0, 0);
+
+                Commons.Modules.MExcel.ThemDong(excelWorkSheet, Microsoft.Office.Interop.Excel.XlInsertShiftDirection.xlShiftDown, 3, DONG);
+
+                title = Commons.Modules.MExcel.GetRange(excelWorkSheet, DONG, 1, DONG, 10);
+                title.Merge(true);
+                title.Value2 = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "BCDanhSachUngTuyenCongNhan");  /*"BÁO CÁO THEO DÕI THỰC HIỆN KẾ HOẠCH TUYỂN DỤNG";*/
+                title.Font.Size = 18;
+                title.RowHeight = 36;
+                title.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                title.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+                title.Font.Bold = true;
+
+                DONG++;
+
+                title = Commons.Modules.MExcel.GetRange(excelWorkSheet, DONG, 1, DONG, 5);
+                title.Merge(true);
+                title.Value2 = lblTinhTrangUV.Text.Trim() + " :" + cboTinhTrangUV.Text.Trim();
+                title.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                title.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+
+                title = Commons.Modules.MExcel.GetRange(excelWorkSheet, DONG, 6, DONG, 10);
+                title.Merge(true);
+                title.Value2 = lblLoaiCNV.Text.Trim() + " :" + cboLoaiCNV.Text.Trim();
+                title.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                title.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+                title.Font.Bold = false;
+                DONG++;
+
+                if (cboLocTheo.Text !="")
+                {
+                    title = Commons.Modules.MExcel.GetRange(excelWorkSheet, DONG, 1, DONG, 5);
+                    title.Merge(true);
+                    title.Value2 = lblLocTheo.Text.Trim() + " :" + cboLocTheo.Text.Trim();
+                    title.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                    title.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+
+                    title = Commons.Modules.MExcel.GetRange(excelWorkSheet, DONG, 6, DONG, 10);
+                    title.Merge(true);
+                    title.Value2 = lblTuNgay.Text.Trim() + " :" + datTuNgay.Text.Trim() + " " + lblDenNgay.Text.Trim() + " :" + datDenNgay.Text.Trim();
+                    title.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                    title.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+                    title.Font.Bold = false;
+                }
+
+                DONG++;
+
+                //định dạng style
+                title = Commons.Modules.MExcel.GetRange(excelWorkSheet, DONG, 1, DONG, TCot);
+                title.RowHeight = 22;
+                title.Font.Bold = true;
+                title.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                title.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+
+
+                title = Commons.Modules.MExcel.GetRange(excelWorkSheet, DONG, 1, DONG + TDong, TCot);
+                title.Borders.LineStyle = Excel.XlLineStyle.xlContinuous;
+                title.Borders.Weight = Excel.XlBorderWeight.xlThin;
+                excelWorkSheet.Columns.AutoFit();
+
+                excelWorkbook.Save();
+                excelApplication.Visible = true;
+                Commons.Modules.MExcel.MReleaseObject(excelWorkSheet);
+                Commons.Modules.MExcel.MReleaseObject(excelWorkbook);
+                Commons.Modules.MExcel.MReleaseObject(excelApplication);
+
+                Commons.Modules.ObjSystems.HideWaitForm();
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(Commons.Modules.ModuleName, this.Name, "InKhongThanhCong", Commons.Modules.TypeLanguage) + ": " + ex.Message);
+            }
+        }
+
 
         private void ExportUngVien(string sPath)
         {
@@ -161,7 +282,7 @@ namespace Vs.Recruit
                 sheet4.Cells[1, 1, 1, 1].Style.Font.Bold = true;
                 sheet4.Cells[1, 1, 1, 1].Value = "Tỉnh";
                 sheet4.Column(1).Width = 50;
-                sheet4.Cells[2, 1].LoadFromCollection(Commons.Modules.ObjSystems.DataThanhPho(-1,false).AsEnumerable().Select(x => x.Field<string>("TEN_TP")).ToArray());
+                sheet4.Cells[2, 1].LoadFromCollection(Commons.Modules.ObjSystems.DataThanhPho(-1, false).AsEnumerable().Select(x => x.Field<string>("TEN_TP")).ToArray());
 
 
                 sheet5.Cells[1, 1, 1, 2].Style.WrapText = true;
@@ -171,8 +292,8 @@ namespace Vs.Recruit
                 sheet5.Column(1).Width = 50;
                 sheet5.Column(2).Width = 50;
                 DataTable tbHuyen = new DataTable();
-                tbHuyen.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr,CommandType.Text, "SELECT B.TEN_TP AS N'Tỉnh',TEN_QUAN AS N'Huyện' FROM dbo.QUAN A INNER JOIN  dbo.THANH_PHO B ON B.ID_TP = A.ID_TP ORDER BY B.TEN_TP,A.TEN_QUAN"));
-                sheet5.Cells[1, 1].LoadFromDataTable(tbHuyen,true);
+                tbHuyen.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT B.TEN_TP AS N'Tỉnh',TEN_QUAN AS N'Huyện' FROM dbo.QUAN A INNER JOIN  dbo.THANH_PHO B ON B.ID_TP = A.ID_TP ORDER BY B.TEN_TP,A.TEN_QUAN"));
+                sheet5.Cells[1, 1].LoadFromDataTable(tbHuyen, true);
 
                 sheet6.Cells[1, 1, 1, 2].Style.WrapText = true;
                 sheet6.Cells[1, 1, 1, 2].Style.VerticalAlignment = ExcelVerticalAlignment.Center;
@@ -202,10 +323,10 @@ namespace Vs.Recruit
                 //Commons.Modules.MExcel.AddExcelDataValidationList(sheet1, 2, 22, 50, 22, "", Commons.Modules.ObjSystems.DataCongNhan(false).AsEnumerable().Select(x => x.Field<string>("TEN_CN")).ToArray());
                 Commons.Modules.MExcel.AddExcelDataValidationList(sheet1, 2, 23, 50, 23, "", Commons.Modules.ObjSystems.DataTayNghe(false).AsEnumerable().Select(x => x.Field<string>("TEN_TAY_NGHE")).ToArray());
 
-                Commons.Modules.MExcel.AddExcelDataValidationList(sheet1, 2, 16, 50, 16, "'Danh sách Tỉnh'!$A$2:$A$" + Commons.Modules.ObjSystems.DataThanhPho(-1,false).Rows.Count.ToString() + "", null);
-                Commons.Modules.MExcel.AddExcelDataValidationList(sheet1, 2, 17, 50, 17, "'Danh sách Huyện'!$B$2:$B$" + Commons.Modules.ObjSystems.DataQuan(-1,false).Rows.Count.ToString() + "", null);
-                Commons.Modules.MExcel.AddExcelDataValidationList(sheet1, 2, 18, 50, 18, "'Danh sách Xã'!$B$2:$B$" + Commons.Modules.ObjSystems.DataPhuongXa(-1,false).Rows.Count.ToString() + "", null);
-                Commons.Modules.MExcel.AddExcelDataValidationList(sheet1, 2, 26, 50, 26, "'Danh sách Loại Công Việc'!$A$2:$A$"+ Commons.Modules.ObjSystems.DataLoaiCV(false).Rows.Count.ToString() + "",null);
+                Commons.Modules.MExcel.AddExcelDataValidationList(sheet1, 2, 16, 50, 16, "'Danh sách Tỉnh'!$A$2:$A$" + Commons.Modules.ObjSystems.DataThanhPho(-1, false).Rows.Count.ToString() + "", null);
+                Commons.Modules.MExcel.AddExcelDataValidationList(sheet1, 2, 17, 50, 17, "'Danh sách Huyện'!$B$2:$B$" + Commons.Modules.ObjSystems.DataQuan(-1, false).Rows.Count.ToString() + "", null);
+                Commons.Modules.MExcel.AddExcelDataValidationList(sheet1, 2, 18, 50, 18, "'Danh sách Xã'!$B$2:$B$" + Commons.Modules.ObjSystems.DataPhuongXa(-1, false).Rows.Count.ToString() + "", null);
+                Commons.Modules.MExcel.AddExcelDataValidationList(sheet1, 2, 26, 50, 26, "'Danh sách Loại Công Việc'!$A$2:$A$" + Commons.Modules.ObjSystems.DataLoaiCV(false).Rows.Count.ToString() + "", null);
 
                 //9 trình độ văn hóa
                 //sheet1.Cells[2, 9, 50, 9].DataValidation.va = Commons.Modules.ObjSystems.DataTDVH(-1, false).AsEnumerable().Select(x => x.Field<string>("TEN_TDVH")).ToArray();

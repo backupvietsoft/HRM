@@ -191,21 +191,21 @@ namespace Vs.Recruit
                         {
                             //tây nghề
                             grvDSUngVien.Columns["KQ_VAI"].Visible = true;
-                            grvDSUngVien.Columns["KQ_VAI"].VisibleIndex = 10;
+                            grvDSUngVien.Columns["KQ_VAI"].VisibleIndex = 11;
                             grvDSUngVien.Columns["ID_DGTN"].Visible = true;
-                            grvDSUngVien.Columns["ID_DGTN"].VisibleIndex = 11;
+                            grvDSUngVien.Columns["ID_DGTN"].VisibleIndex = 12;
                             grvDSUngVien.Columns["NGUOI_DANH_GIA_2"].Visible = true;
-                            grvDSUngVien.Columns["NGUOI_DANH_GIA_2"].VisibleIndex = 12;
+                            grvDSUngVien.Columns["NGUOI_DANH_GIA_2"].VisibleIndex = 13;
                             grvDSUngVien.Columns["THUONG_TAY_NGHE"].Visible = true;
-                            grvDSUngVien.Columns["THUONG_TAY_NGHE"].VisibleIndex = 13;
+                            grvDSUngVien.Columns["THUONG_TAY_NGHE"].VisibleIndex = 14;
 
                             //DAT	ID_CN	GHI_CHU
                             grvDSUngVien.Columns["MS_CN"].Visible = true;
                             grvDSUngVien.Columns["HO_TEN_NGT"].Visible = true;
-                            grvDSUngVien.Columns["DAT"].VisibleIndex = 14;
-                            grvDSUngVien.Columns["MS_CN"].VisibleIndex = 15;
-                            grvDSUngVien.Columns["HO_TEN_NGT"].VisibleIndex = 16;
-                            grvDSUngVien.Columns["GHI_CHU"].VisibleIndex = 17;
+                            grvDSUngVien.Columns["DAT"].VisibleIndex = 15;
+                            grvDSUngVien.Columns["MS_CN"].VisibleIndex = 16;
+                            grvDSUngVien.Columns["HO_TEN_NGT"].VisibleIndex = 17;
+                            grvDSUngVien.Columns["GHI_CHU"].VisibleIndex = 18;
                         }
                         grvDSUngVien.Columns["KQ_GIAY"].Caption = "KQKT bài giấy";
                     }

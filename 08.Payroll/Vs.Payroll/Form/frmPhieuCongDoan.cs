@@ -391,7 +391,7 @@ namespace Vs.Payroll
                 {
                     if (XemCu == 0)
                     {
-                        sDK = " ID_CN = '" + sIDCN + "' AND ID_CHUYEN = '" + iChuyen + "' AND ID_CHUYEN_SD = '" + iChuyenSuDung + "' AND ID_ORD = '" + iOrd + "' ";
+                        sDK = " ID_CN = '" + sIDCN + "' AND ID_CHUYEN_SD = '" + iChuyenSuDung + "' AND ID_ORD = '" + iOrd + "' ";
                     }
                     else
                     {
@@ -830,14 +830,6 @@ namespace Vs.Payroll
 
         private void grvCD_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Delete)
-            {
-                if (windowsUIButton.Buttons[1].Properties.Visible)
-                {
-                    return;
-                }
-                grvCD.DeleteSelectedRows();
-            }
             if (e.KeyCode == Keys.Home)
             {
                 searchControl2.Focus();
@@ -874,6 +866,7 @@ namespace Vs.Payroll
                 if (e.KeyCode == Keys.Delete && !windowsUIButton.Buttons[0].Properties.Visible)
                 {
                     grvCD.DeleteSelectedRows();
+                    ((DataTable)grdCD.DataSource).AcceptChanges();
                     DataTable dt = new DataTable();
                     dt = Commons.Modules.ObjSystems.ConvertDatatable(grvCD);
                     grvTo.SetFocusedRowCellValue("CDL", dt.Rows.Count == 0 ? (object)(DBNull.Value) : dt.Rows.Count);

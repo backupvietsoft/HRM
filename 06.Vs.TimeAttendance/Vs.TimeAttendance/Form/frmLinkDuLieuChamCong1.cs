@@ -1,6 +1,7 @@
 ﻿using DevExpress.DataAccess.Excel;
 using DevExpress.Spreadsheet;
 using DevExpress.Utils;
+using DevExpress.Utils.Menu;
 using DevExpress.XtraBars.Docking2010;
 using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Repository;
@@ -143,7 +144,7 @@ namespace Vs.TimeAttendance
                 DataTable dt = new DataTable();
                 dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT ROW_NUMBER() OVER (ORDER BY (SELECT NULL)) ID, [NAME] FROM sys.sysdatabases where name LIKE '%DATA_CHAM_CONG%'"));
                 Commons.Modules.ObjSystems.MLoadLookUpEdit(cboDataLink, dt, "ID", "NAME", "");
-                if(Convert.ToInt32(cbDonVi.EditValue) == 1)
+                if (Convert.ToInt32(cbDonVi.EditValue) == 1)
                 {
                     cboDataLink.EditValue = Convert.ToInt64(1);
                 }
@@ -283,7 +284,7 @@ namespace Vs.TimeAttendance
                     }
                 case "TongHopThongTin":
                     {
-                        TongHopDuLieu();
+                        TongHopDuLieu(dtNgayChamCong.DateTime);
                         LoadLuoiNgay(dtNgayChamCong.DateTime);
                         LoadGridCongNhan(dtNgayChamCong.DateTime);
                         XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msg_TongHopDL"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -861,7 +862,7 @@ namespace Vs.TimeAttendance
             }
         }
         //ham tong hop du lieu
-        private void TongHopDuLieu()
+        private void TongHopDuLieu(DateTime dNgayChamCong)
         {
             try
             {
@@ -890,7 +891,7 @@ namespace Vs.TimeAttendance
                 cmd.Parameters.AddWithValue("@CN", iIDCN);
                 cmd.Parameters.AddWithValue("@LB", iLB);
                 cmd.Parameters.AddWithValue("@LamTron", Commons.Modules.iLamTronGio);
-                cmd.Parameters.AddWithValue("@Ngay", dtNgayChamCong.DateTime);
+                cmd.Parameters.AddWithValue("@Ngay", dNgayChamCong);
                 cmd.ExecuteNonQuery();
             }
             catch (Exception ex)
@@ -1008,9 +1009,12 @@ namespace Vs.TimeAttendance
 
                 DataTable dt = new DataTable();
                 dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetDuLieuQuetThe", tn, dn, Commons.Modules.UserName, Commons.Modules.TypeLanguage, cbDonVi.EditValue, cbXiNghiep.EditValue, cbTo.EditValue, Commons.Modules.chamCongK));
+                dt.Columns["CHON"].ReadOnly = false;
                 dt.PrimaryKey = new DataColumn[] { dt.Columns["NGAY"] };
-                Commons.Modules.ObjSystems.MLoadXtraGrid(grdNgay, grvNgay, dt, false, false, true, true, true, this.Name);
-                grvNgay.Columns["NGAY"].Visible = true;
+                Commons.Modules.ObjSystems.MLoadXtraGrid(grdNgay, grvNgay, dt, true, false, true, true, true, this.Name);
+                grvNgay.Columns["NGAY"].OptionsColumn.AllowEdit = false;
+                grvNgay.Columns["TH"].OptionsColumn.AllowEdit = false;
+                grvNgay.Columns["CHON"].Visible = false;
                 grvNgay.Columns["NGAY"].DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
                 grvNgay.Columns["NGAY"].DisplayFormat.FormatString = "dd/MM/yyyy";
 
@@ -1018,6 +1022,11 @@ namespace Vs.TimeAttendance
                 grvNgay.OptionsSelection.ShowCheckBoxSelectorInColumnHeader = DevExpress.Utils.DefaultBoolean.True;
                 grvNgay.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CheckBoxRowSelect;
                 grvNgay.OptionsSelection.CheckBoxSelectorField = "TH";
+                try
+                {
+                    grvNgay.OptionsSelection.CheckBoxSelectorField = "CHON";
+                }
+                catch { }
             }
             catch (Exception ex)
             {
@@ -1453,6 +1462,80 @@ namespace Vs.TimeAttendance
             }
         }
 
+        #region chuotphai
+        class RowInfo
+        {
+            public RowInfo(DevExpress.XtraGrid.Views.Grid.GridView view, int rowHandle)
+            {
+                this.RowHandle = rowHandle;
+                this.View = view;
+            }
+
+
+            public DevExpress.XtraGrid.Views.Grid.GridView View;
+            public int RowHandle;
+        }
+        //Nhap ung vien
+        public DXMenuItem MCreateMenuCapNhat(DevExpress.XtraGrid.Views.Grid.GridView view, int rowHandle)
+        {
+            string sStr = Commons.Modules.ObjLanguages.GetLanguage(Commons.Modules.ModuleName, this.Name, "TongHopThongTin", Commons.Modules.TypeLanguage);
+            DXMenuItem menuCapNhat = new DXMenuItem(sStr, new EventHandler(CapNhat));
+            menuCapNhat.Tag = new RowInfo(view, rowHandle);
+            return menuCapNhat;
+        }
+        public void CapNhat(object sender, EventArgs e)
+        {
+            try
+            {
+                DataTable dt_CHON = new DataTable();
+                dt_CHON = ((DataTable)grdNgay.DataSource);
+                //dt_CHON = Commons.Modules.ObjSystems.ConvertDatatable(grvDSUngVien);
+                if (dt_CHON.AsEnumerable().Where(r => r.Field<Boolean>("CHON") == true).Count() == 0)
+                {
+                    XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgChuaChonNgay"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                string sBT = "sBTTongHopDL" + Commons.Modules.iIDUser;
+                Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, "", Commons.Modules.ObjSystems.ConvertDatatable(grdNgay), "");
+                int iLB = 0;
+                if (NONN_LAM_BUCheckEdit.Checked)
+                {
+                    iLB = 1;
+                }
+                Int64 iIDCN = -1;
+                if (NONN_TheoNhanVienCheckEdit.Checked)
+                {
+                    iIDCN = Convert.ToInt64(grvDSCN.GetFocusedRowCellValue("ID_CN").ToString());
+                }
+                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spTongHopDuLieu_GiaiDoan", Commons.Modules.UserName, Commons.Modules.TypeLanguage, cbDonVi.EditValue, cbXiNghiep.EditValue, cbTo.EditValue, iIDCN, iLB, Commons.Modules.iLamTronGio,sBT);
+                LoadLuoiNgay(dtNgayChamCong.DateTime);
+                LoadGridCongNhan(dtNgayChamCong.DateTime);
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msg_TongHopDL"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex) { }
+        }
+
+        private void grvData_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
+        {
+            try
+            {
+                if (windowsUIButton.Buttons[2].Properties.Visible == false) return;
+                DevExpress.XtraGrid.Views.Grid.GridView view = sender as DevExpress.XtraGrid.Views.Grid.GridView;
+                if (e.MenuType == DevExpress.XtraGrid.Views.Grid.GridMenuType.Row)
+                {
+                    int irow = e.HitInfo.RowHandle;
+                    e.Menu.Items.Clear();
+
+                    DevExpress.Utils.Menu.DXMenuItem itemNhap = MCreateMenuCapNhat(view, irow);
+                    e.Menu.Items.Add(itemNhap);
+                }
+            }
+            catch
+            {
+            }
+        }
+
+        #endregion
 
     }
 }

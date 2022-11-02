@@ -1331,6 +1331,7 @@ namespace Vs.TimeAttendance
                 conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
                 conn.Open();
                 DataTable dtBCThang;
+                splashScreenManager1.ShowWaitForm();
 
                 System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptBangCongNgay_DM", conn);
 
@@ -1350,12 +1351,7 @@ namespace Vs.TimeAttendance
                 DataTable dtSLXN = new DataTable(); // Lấy số lượng xí nghiệp
                 dtSLXN = ds.Tables[1].Copy();
                 int slXN = Convert.ToInt32(dtSLXN.Rows[0][0]);
-
-                SaveExcelFile = SaveFiles("Excel Workbook |*.xlsx|Excel 97-2003 Workbook |*.xls|Word Document |*.docx|Rich Text Format |*.rtf|PDF File |*.pdf|Web Page |*.html|Single File Web Page |*.mht");
-                if (SaveExcelFile == "")
-                {
-                    return;
-                }
+                
                 Microsoft.Office.Interop.Excel.Application oXL;
                 Microsoft.Office.Interop.Excel.Workbook oWB;
                 Microsoft.Office.Interop.Excel.Worksheet oSheet;
@@ -1365,7 +1361,6 @@ namespace Vs.TimeAttendance
                 oWB = (Microsoft.Office.Interop.Excel.Workbook)(oXL.Workbooks.Add(Missing.Value));
                 oSheet = (Microsoft.Office.Interop.Excel.Worksheet)oWB.ActiveSheet;
                 oSheet.Name = Convert.ToDateTime(LK_NgayXemBaoCao.EditValue).Day.ToString();
-                splashScreenManager1.ShowWaitForm();
                 #region TheoNgay
 
                 string fontName = "Times New Roman";
@@ -2799,9 +2794,6 @@ namespace Vs.TimeAttendance
 
                 oXL.Visible = true;
                 oXL.UserControl = true;
-
-                oWB.SaveAs(SaveExcelFile,
-                    AccessMode: Microsoft.Office.Interop.Excel.XlSaveAsAccessMode.xlShared);
 
             }
             catch (Exception ex)

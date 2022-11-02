@@ -341,6 +341,12 @@
     <Compile Include="UAC\BaoCao\ucBaoCaoTinhHinhSuDungLaoDong.designer.cs">
       <DependentUpon>ucBaoCaoTinhHinhSuDungLaoDong.cs</DependentUpon>
     </Compile>
+    <Compile Include="UAC\BaoCao\WaitForm1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UAC\BaoCao\WaitForm1.Designer.cs">
+      <DependentUpon>WaitForm1.cs</DependentUpon>
+    </Compile>
     <Compile Include="UAC\BaoHiem\ucThamGiaBHXH.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -760,6 +766,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UAC\BaoCao\ucBaoCaoTinhHinhSuDungLaoDong.resx">
       <DependentUpon>ucBaoCaoTinhHinhSuDungLaoDong.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UAC\BaoCao\WaitForm1.resx">
+      <DependentUpon>WaitForm1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UAC\BaoHiem\ucThamGiaBHXH.resx">
       <DependentUpon>ucThamGiaBHXH.cs</DependentUpon>

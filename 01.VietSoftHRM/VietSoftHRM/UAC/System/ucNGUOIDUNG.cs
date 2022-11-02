@@ -107,6 +107,12 @@ namespace VietSoftHRM
                             }
 
                             var s = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spGhiUser", (grvNguoiDung.RowCount == 0 ? "" : grvNguoiDung.GetFocusedRowCellValue("ID_USER").ToString()) == "" ? DBNull.Value : grvNguoiDung.GetFocusedRowCellValue("ID_USER"), ID_NHOMComboBoxEdit.Text == "" ? ID_NHOMComboBoxEdit.EditValue = null : Convert.ToInt64(ID_NHOMComboBoxEdit.EditValue), USER_NAMETextEdit.EditValue, FULL_NAMETextEdit.EditValue, Commons.Modules.ObjSystems.Encrypt(PASSWORDTextEdit.EditValue.ToString(), true), DESCRIPTIONMemoExEdit.EditValue, USER_MAILTextEdit.EditValue, Convert.ToInt32(ACTIVECheckEdit.EditValue), Convert.ToBoolean(co), Commons.Modules.ObjSystems.Encrypt(USER_NAMETextEdit.EditValue.ToString() + Convert.ToBoolean(chkLIC.EditValue).ToString(), true), Convert.ToBoolean(chkKhach.Checked), Convert.ToBoolean(chkLIC.Checked));
+                            if (Convert.ToInt32(s) == 0)
+                            {
+                                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgUserNameDaTonTai"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                USER_NAMETextEdit.Focus();
+                                return;
+                            }
                             Enablecontrol(true);
                             LoadUser(Convert.ToInt32(s));
                             enableButon(true);

@@ -487,6 +487,12 @@
     <Compile Include="Report\ucBCLuongSanPham.Designer.cs">
       <DependentUpon>ucBCLuongSanPham.cs</DependentUpon>
     </Compile>
+    <Compile Include="Report\WaitForm1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Report\WaitForm1.Designer.cs">
+      <DependentUpon>WaitForm1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Settings.cs" />
     <Compile Include="Report\ucBaoCaoDMCD.cs">
       <SubType>UserControl</SubType>
@@ -822,6 +828,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Report\ucBaoCaoDMCD.resx">
       <DependentUpon>ucBaoCaoDMCD.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\WaitForm1.resx">
+      <DependentUpon>WaitForm1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UAC\ucCachTinhLuong.resx">
       <DependentUpon>ucCachTinhLuong.cs</DependentUpon>

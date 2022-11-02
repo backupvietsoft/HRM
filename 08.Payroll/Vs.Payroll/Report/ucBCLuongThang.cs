@@ -2139,31 +2139,8 @@ namespace Vs.Payroll
                 {
                     ws.get_Range(CellAddress(ws, 10, colFormat), CellAddress(ws, row, colFormat)).NumberFormat = "#,##0.00;(#,##0.0); ; ";
                 }
+                ws.get_Range("BU10", "BU" + row).NumberFormat = "@";
 
-                //Range colFormat = ws.get_Range("I8", "I" + row);
-                //colFormat.NumberFormat = "#,##0;(#,##0); ; ";
-                //ws.get_Range("I9", "I" + row).NumberFormat = "#,##0;(#,##0); ; ";
-                //ws.get_Range("J9", "J" + row).NumberFormat = "#,##0.0;(#,##0.0); ; ";
-                //ws.get_Range("K9", "N" + row).NumberFormat = "#,##0;(#,##0); ; ";
-                //ws.get_Range("O9", "O" + row).NumberFormat = "#,##0.0;(#,##0.0); ; ";
-                //ws.get_Range("P9", "P" + row).NumberFormat = "#,##0;(#,##0); ; ";
-                //ws.get_Range("Q9", "Q" + row).NumberFormat = "#,##0.0;(#,##0.0); ; ";
-                //ws.get_Range("R9", "R" + row).NumberFormat = "#,##0;(#,##0); ; ";
-                //ws.get_Range("S9", "S" + row).NumberFormat = "#,##0.0;(#,##0.0); ; ";
-                //ws.get_Range("T9", "T" + row).NumberFormat = "#,##0;(#,##0); ; ";
-                //ws.get_Range("U9", "U" + row).NumberFormat = "#,##0.0;(#,##0.0); ; ";
-                //ws.get_Range("V9", "V" + row).NumberFormat = "#,##0;(#,##0); ; ";
-                //ws.get_Range("W9", "W" + row).NumberFormat = "#,##0.0;(#,##0.0); ; ";
-                //ws.get_Range("X9", "X" + row).NumberFormat = "#,##0;(#,##0); ; ";
-                //ws.get_Range("Y9", "Y" + row).NumberFormat = "#,##0.0;(#,##0.0); ; ";
-                //ws.get_Range("Z9", "Z" + row).NumberFormat = "#,##0;(#,##0); ; ";
-                //ws.get_Range("AA9", "AA" + row).NumberFormat = "#,##0.0;(#,##0.0); ; ";
-                //ws.get_Range("AB9", "AB" + row).NumberFormat = "#,##0;(#,##0); ; ";
-                //ws.get_Range("AC9", "AC" + row).NumberFormat = "#,##0.0;(#,##0.0); ; ";
-                //ws.get_Range("AD9", "AD" + row).NumberFormat = "#,##0;(#,##0); ; ";
-                //ws.get_Range("AE9", "AT" + row).NumberFormat = "#,##0;(#,##0); ; ";
-                //ws.get_Range("AU9", "AU" + row).NumberFormat = "#,##0.0;(#,##0.0); ; ";
-                //ws.get_Range("AV9", "AY" + row).NumberFormat = "#,##0;(#,##0); ; ";
 
                 ws.get_Range("J10", "J" + row).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
                 ws.get_Range("K10", "K" + row).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;

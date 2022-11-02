@@ -270,24 +270,6 @@ namespace Vs.HRM
         }
         private void DanhSachNhanVien()
         {
-
-            int countColumns = 0;
-            var tableH = new XRTable();
-            var tableD = new XRTable();
-
-            tableH.BeginInit();
-            tableD.BeginInit();
-
-            float totalWidth = 0f;
-
-            tableH.LocationF = new DevExpress.Utils.PointFloat(0F, 0F);
-            tableH.Borders = BorderSide.All;
-            tableD.LocationF = new DevExpress.Utils.PointFloat(0F, 0F);
-            tableD.Borders = BorderSide.Left | BorderSide.Right | BorderSide.Bottom;
-
-            var tableHRow = new XRTableRow();
-            var tableDRow = new XRTableRow();
-
             string dsCol = "";
 
             DataTable dt = new DataTable();
@@ -305,70 +287,39 @@ namespace Vs.HRM
                     {
                         dsCol = dsCol + "," + (dr["TEN_FIELD"].ToString() == "TEN_TO" ? "TEN_TO AS BO_PHAN" : dr["TEN_FIELD"].ToString());
                     }
-
-                    var cellH = new XRTableCell()
-                    {
-                        Text = dr["DIEN_GIAI"].ToString(),
-                        TextAlignment = TextAlignment.MiddleCenter,
-                        Font = new System.Drawing.Font(uFontName, uFontSize, System.Drawing.FontStyle.Bold)
-                    };
-                    tableHRow.Cells.Add(cellH);
-
-                    var cellD = new XRTableCell()
-                    {
-                        Text = dr["TEN_FIELD"].ToString(),
-                        Font = new System.Drawing.Font(uFontName, uFontSize),
-                        Padding = new PaddingInfo(5, 5, 0, 0)
-                    };
-
-                    if (dr["CANH_LE"].ToString() == "1")
-                    {
-                        cellD.TextAlignment = TextAlignment.MiddleLeft;
-                    }
-                    else if (dr["CANH_LE"].ToString() == "2")
-                    {
-                        cellD.TextAlignment = TextAlignment.MiddleCenter;
-                    }
-                    else
-                    {
-                        cellD.TextAlignment = TextAlignment.MiddleRight;
-                    };
-
-                    if (dr["DINH_DANG"].ToString() == "Num")
-                    {
-                        cellD.TextFormatString = "{0:#,#}";
-                    }
-                    else if (dr["DINH_DANG"].ToString() == "Date")
-                    {
-                        cellD.TextFormatString = "{0:dd/MM/yyyy}";
-                    }
-                    else
-                    {
-                        cellD.TextFormatString = "{0}";
-                    };
-
-                    cellD.ExpressionBindings.Add(new ExpressionBinding("Text", $"[{ dr["TEN_FIELD"].ToString()}]"));
-                    tableDRow.Cells.Add(cellD);
-
-                    float width = (float)Convert.ToDouble(dr["CHIEU_RONG"].ToString());
-                    cellD.WidthF = cellH.WidthF = width;
-                    totalWidth += width;
                 }
             }
+            if (dsCol.IndexOf("LICH_SU_HD") != -1)
+            {
+                dsCol = dsCol.Replace("LICH_SU_HD", "NGAY_BD_THU_VIEC, NGAY_KT_THU_VIEC, NGAY_BD_HD1, NGAY_KT_HD1, NGAY_BD_HD2, NGAY_KT_HD2, NGAY_HDKXD");
+                string sBT = "sBTrptBCCN" + Commons.Modules.iIDUser;
+                Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBT, dt, "");
+                dt = new DataTable();
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spCapNhatDS_FIELD_CN_CHON", Commons.Modules.UserName, Commons.Modules.TypeLanguage, sBT, 7, 0));
+            }
 
-            tableH.Rows.Add(tableHRow);
-            tableD.Rows.Add(tableDRow);
+            if (dsCol.IndexOf("LICH_SU_CT") != -1)
+            {
+                string sBT = "sBTrptBCCN" + Commons.Modules.iIDUser;
+                Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBT, dt, "");
+                string sSQL = "SELECT MAX(T3.SLCT) FROM (SELECT T1.ID_CN ,COUNT(T1.SO_QUYET_DINH) SLCT FROM dbo.QUA_TRINH_CONG_TAC T1 INNER JOIN ( SELECT CN.ID_CN FROM dbo.CONG_NHAN CN INNER JOIN dbo.MGetToUser('" + Commons.Modules.UserName + "'," + Commons.Modules.TypeLanguage + ") T ON T.ID_TO = CN.ID_TO WHERE(T.ID_DV = " + lkDonVi.EditValue + " OR " + lkDonVi.EditValue + " = -1) AND(T.ID_XN = " + lkXiNghiep.EditValue + " OR " + lkXiNghiep.EditValue + " = -1) AND(T.ID_TO = " + lkTo.EditValue + " OR " + lkTo.EditValue + " = -1) AND((" + rdoChonBC.SelectedIndex + " = 0 AND ISNULL(CN.NGAY_NGHI_VIEC, '') = '') OR(" + rdoChonBC.SelectedIndex + " <> 0 AND ISNULL(CN.NGAY_NGHI_VIEC, '') <> ''))) T2 ON T2.ID_CN = T1.ID_CN GROUP BY T1.ID_CN) T3";
+                int iSLCT = 1;
+                try
+                {
 
-            tableD.WidthF = tableH.WidthF = totalWidth;
-            tableH.HeightF = 35F;
-            tableD.HeightF = 30F;
+                    iSLCT = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, sSQL));
+                }
+                catch{ }
+                dt = new DataTable();
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spCapNhatDS_FIELD_CN_CHON", Commons.Modules.UserName, Commons.Modules.TypeLanguage, sBT, iSLCT, 1));
+            }
 
-            tableH.EndInit();
-            tableD.EndInit();
 
             System.Data.SqlClient.SqlConnection conn;
             try
             {
+                this.Cursor = Cursors.WaitCursor;
+                splashScreenManager1.ShowWaitForm();
                 conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
                 conn.Open();
 
@@ -392,12 +343,7 @@ namespace Vs.HRM
                 adp.Fill(ds);
                 DataTable dtBCThang = new DataTable();
                 dtBCThang = ds.Tables[0].Copy();
-
-                SaveExcelFile = SaveFiles("Excel Workbook |*.xlsx|Excel 97-2003 Workbook |*.xls|Word Document |*.docx|Rich Text Format |*.rtf|PDF File |*.pdf|Web Page |*.html|Single File Web Page |*.mht");
-                if (SaveExcelFile == "")
-                {
-                    return;
-                }
+                
                 this.Cursor = Cursors.WaitCursor;
                 Excel.Application oXL;
                 Excel.Workbook oWB;
@@ -443,8 +389,6 @@ namespace Vs.HRM
                 {
                     try
                     {
-                        //oSheet.Cells[row_dl, col + 1] =  dtBCThang.Columns[col].ToString();
-                        //oSheet.Cells[row_dl, col + 1] = tableHRow.Cells[col].Text;
                         oSheet.Cells[row_dl, col + 1] = dt.Rows[col]["DIEN_GIAI"];
                         oSheet.Cells[row_dl, col + 1].ColumnWidth = dt.Rows[col]["CHIEU_RONG"];
                     }
@@ -600,7 +544,9 @@ namespace Vs.HRM
                 rowCnt = keepRowCnt;
                 formatRange = oSheet.get_Range("A5", "" + lastColumn + "" + (rowCnt + 1).ToString() + "");
                 formatRange.Font.Name = fontName;
+                formatRange.WrapText = true;
                 formatRange.Font.Size = fontSizeNoiDung;
+                formatRange.Cells.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
                 BorderAround(oSheet.get_Range("A4", lastColumn + (rowCnt + 1).ToString()));
                 //formatRange = oSheet.get_Range("C5", "C31");
                 //System.Globalization.CultureInfo cultures = new System.Globalization.CultureInfo("en-US");
@@ -616,15 +562,13 @@ namespace Vs.HRM
                     myRange.AutoFilter("1", "<>", Excel.XlAutoFilterOperator.xlOr, "", true);
                 }
                 this.Cursor = Cursors.Default;
-
+                splashScreenManager1.CloseWaitForm();
                 oXL.Visible = true;
                 oXL.UserControl = true;
-
-                oWB.SaveAs(SaveExcelFile,
-                    AccessMode: Excel.XlSaveAsAccessMode.xlExclusive);
             }
             catch (Exception ex)
             {
+                splashScreenManager1.CloseWaitForm();
                 this.Cursor = Cursors.Default;
                 MessageBox.Show(ex.Message);
             }
@@ -1420,7 +1364,7 @@ namespace Vs.HRM
                 oSheet.get_Range("A12", lastColumn + rowCnt.ToString()).Value2 = rowData;
 
                 Excel.Range formatRangeAll = oSheet.get_Range("A12", lastColumn + rowCnt.ToString());//Format all Data table
-                //BorderAround(formatRangeAll);
+                                                                                                     //BorderAround(formatRangeAll);
                 formatRangeAll.WrapText = true;
                 formatRangeAll.Font.Name = "Times New Roman";
                 formatRangeAll.Font.Size = 11;

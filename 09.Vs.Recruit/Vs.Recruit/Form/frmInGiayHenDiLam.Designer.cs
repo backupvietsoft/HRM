@@ -70,7 +70,7 @@
             this.windowsUIButton.ContentAlignment = System.Drawing.ContentAlignment.MiddleRight;
             this.windowsUIButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.windowsUIButton.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.windowsUIButton.Location = new System.Drawing.Point(0, 158);
+            this.windowsUIButton.Location = new System.Drawing.Point(0, 154);
             this.windowsUIButton.Margin = new System.Windows.Forms.Padding(4);
             this.windowsUIButton.Name = "windowsUIButton";
             this.windowsUIButton.Padding = new System.Windows.Forms.Padding(4);
@@ -102,7 +102,7 @@
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 28F),
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F),
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F)});
-            this.tablePanel1.Size = new System.Drawing.Size(436, 158);
+            this.tablePanel1.Size = new System.Drawing.Size(436, 154);
             this.tablePanel1.TabIndex = 9;
             // 
             // dNgayIn
@@ -139,8 +139,7 @@
             this.rdo_ChonBaoCao.Properties.Columns = 1;
             this.rdo_ChonBaoCao.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] {
             new DevExpress.XtraEditors.Controls.RadioGroupItem("", "In giấy hẹn đi làm", true, "rdo_GiayHenDiLam"),
-            new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Danh sách ứng viên được đào tạo định hướng", true, "rdo_DSUVDuocDTDinhHuong"),
-            new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "In thẻ nhân viên", true, "rdo_InTheNhanVien")});
+            new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Danh sách ứng viên được đào tạo định hướng", true, "rdo_DSUVDuocDTDinhHuong")});
             this.tablePanel1.SetRow(this.rdo_ChonBaoCao, 1);
             this.tablePanel1.SetRowSpan(this.rdo_ChonBaoCao, 3);
             this.rdo_ChonBaoCao.Size = new System.Drawing.Size(394, 88);
@@ -170,7 +169,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(436, 208);
+            this.ClientSize = new System.Drawing.Size(436, 204);
             this.Controls.Add(this.tablePanel1);
             this.Controls.Add(this.windowsUIButton);
             this.Name = "frmInGiayHenDiLam";

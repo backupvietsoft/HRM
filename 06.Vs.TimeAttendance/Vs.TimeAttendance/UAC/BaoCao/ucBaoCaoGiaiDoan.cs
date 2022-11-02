@@ -234,6 +234,7 @@ namespace Vs.HRM
                     {
                         chkInTheoCongNhan.Enabled = true;
                         grdCN.Visible = true;
+                        searchControl1.Visible = true;
                         break;
                     }
 
@@ -241,6 +242,7 @@ namespace Vs.HRM
                     {
                         chkInTheoCongNhan.Enabled = false;
                         grdCN.Visible = false;
+                        searchControl1.Visible = false;
                         break;
                     }
             }

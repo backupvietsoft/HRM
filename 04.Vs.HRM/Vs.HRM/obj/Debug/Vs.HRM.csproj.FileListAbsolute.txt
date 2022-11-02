@@ -3012,6 +3012,7 @@ F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\DevExpress.XtraVerticalGrid.v22.1.xml
 F:\01.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\DevExpress.XtraNavBar.v22.1.xml
 F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.csprojAssemblyReference.cache
 F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.csproj.ResolveComReference.cache
+F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.frmChonNhanVien.resources
 F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.frmHelp_View.resources
 F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.ucBaoCaoDanhGiaTTThuViec.resources
 F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.ucBaoCaoQHGD.resources
@@ -3044,6 +3045,7 @@ F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.ucBaoCaoBDTangGiamCN.resources
 F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.ucBaoCaoXiNghiep.resources
 F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.ucBlank.resources
 F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.ucBaoCaoTinhHinhSuDungLaoDong.resources
+F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.TimeAttendance.UAC.BaoCao.WaitForm1.resources
 F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.ucThamGiaBHXH.resources
 F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.frmImportNhanSu.resources
 F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.frmImportView.resources

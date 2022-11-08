@@ -68,7 +68,7 @@ namespace Vs.TimeAttendance
                                 }
                             case "rdo_DSNVLoiTheNgay":
                                 {
-                                    DSNVCoTren2CapGioChinh();
+                                    DSNVVachTheLoiNgay();
                                     break;
                                 }
 

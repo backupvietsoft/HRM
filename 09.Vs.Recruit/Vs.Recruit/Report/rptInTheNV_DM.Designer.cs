@@ -61,7 +61,7 @@
             // BottomMargin
             // 
             this.BottomMargin.Dpi = 254F;
-            this.BottomMargin.HeightF = 151.4707F;
+            this.BottomMargin.HeightF = 151F;
             this.BottomMargin.Name = "BottomMargin";
             // 
             // Detail
@@ -99,7 +99,7 @@
             this.xrPanel1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
             this.xrPanel1.Name = "xrPanel1";
             this.xrPanel1.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 254F);
-            this.xrPanel1.SizeF = new System.Drawing.SizeF(955F, 884.7064F);
+            this.xrPanel1.SizeF = new System.Drawing.SizeF(1010F, 884.7064F);
             this.xrPanel1.StylePriority.UsePadding = false;
             // 
             // xrPanel6
@@ -113,10 +113,10 @@
             this.xrLabel17,
             this.xrLabel18});
             this.xrPanel6.Dpi = 254F;
-            this.xrPanel6.LocationFloat = new DevExpress.Utils.PointFloat(489.3754F, 4.666664F);
+            this.xrPanel6.LocationFloat = new DevExpress.Utils.PointFloat(505F, 4.666684F);
             this.xrPanel6.Name = "xrPanel6";
             this.xrPanel6.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 254F);
-            this.xrPanel6.SizeF = new System.Drawing.SizeF(462.0547F, 771.4875F);
+            this.xrPanel6.SizeF = new System.Drawing.SizeF(505F, 771.4875F);
             this.xrPanel6.StylePriority.UsePadding = false;
             // 
             // xrLabel6
@@ -258,7 +258,7 @@
             this.xrPanel5.LocationFloat = new DevExpress.Utils.PointFloat(0F, 4.666664F);
             this.xrPanel5.Name = "xrPanel5";
             this.xrPanel5.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 254F);
-            this.xrPanel5.SizeF = new System.Drawing.SizeF(489.3754F, 771.4875F);
+            this.xrPanel5.SizeF = new System.Drawing.SizeF(505F, 771.4875F);
             this.xrPanel5.StylePriority.UseBackColor = false;
             this.xrPanel5.StylePriority.UsePadding = false;
             // 
@@ -431,7 +431,7 @@
             this.Detail});
             this.Dpi = 254F;
             this.Font = new System.Drawing.Font("Arial", 9.75F);
-            this.Margins = new System.Drawing.Printing.Margins(87, 103, 80, 151);
+            this.Margins = new System.Drawing.Printing.Margins(30, 50, 80, 151);
             this.PageHeight = 2970;
             this.PageWidth = 2100;
             this.PaperKind = System.Drawing.Printing.PaperKind.A4;

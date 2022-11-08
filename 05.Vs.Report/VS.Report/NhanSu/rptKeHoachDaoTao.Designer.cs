@@ -49,6 +49,7 @@
             this.tiNguoiLapBieu = new DevExpress.XtraReports.UI.XRLabel();
             this.lblNgay = new DevExpress.XtraReports.UI.XRLabel();
             this.ReportHeader = new DevExpress.XtraReports.UI.ReportHeaderBand();
+            this.xrSubreport1 = new DevExpress.XtraReports.UI.XRSubreport();
             this.xrLabel13 = new DevExpress.XtraReports.UI.XRLabel();
             this.lbNgayKetThuc = new DevExpress.XtraReports.UI.XRLabel();
             this.lbHinhThucDaoTao = new DevExpress.XtraReports.UI.XRLabel();
@@ -87,7 +88,6 @@
             this.xrTableRow3 = new DevExpress.XtraReports.UI.XRTableRow();
             this.lbTo = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell9 = new DevExpress.XtraReports.UI.XRTableCell();
-            this.xrSubreport1 = new DevExpress.XtraReports.UI.XRSubreport();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable3)).BeginInit();
@@ -395,6 +395,14 @@
             this.ReportHeader.Dpi = 254F;
             this.ReportHeader.HeightF = 571.2084F;
             this.ReportHeader.Name = "ReportHeader";
+            // 
+            // xrSubreport1
+            // 
+            this.xrSubreport1.Dpi = 254F;
+            this.xrSubreport1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
+            this.xrSubreport1.LockedInUserDesigner = true;
+            this.xrSubreport1.Name = "xrSubreport1";
+            this.xrSubreport1.SizeF = new System.Drawing.SizeF(1846F, 42.93904F);
             // 
             // xrLabel13
             // 
@@ -778,7 +786,7 @@
             this.lbPhongBan.Multiline = true;
             this.lbPhongBan.Name = "lbPhongBan";
             this.lbPhongBan.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
-            this.lbPhongBan.SizeF = new System.Drawing.SizeF(268.0595F, 70F);
+            this.lbPhongBan.SizeF = new System.Drawing.SizeF(342.9165F, 70F);
             this.lbPhongBan.StylePriority.UseFont = false;
             this.lbPhongBan.StylePriority.UsePadding = false;
             this.lbPhongBan.StylePriority.UseTextAlignment = false;
@@ -793,11 +801,11 @@
             this.xrLabel24.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[TEN_XN]")});
             this.xrLabel24.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.xrLabel24.LocationFloat = new DevExpress.Utils.PointFloat(268.0595F, 0F);
+            this.xrLabel24.LocationFloat = new DevExpress.Utils.PointFloat(342.9166F, 0F);
             this.xrLabel24.Multiline = true;
             this.xrLabel24.Name = "xrLabel24";
             this.xrLabel24.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
-            this.xrLabel24.SizeF = new System.Drawing.SizeF(544.1179F, 70F);
+            this.xrLabel24.SizeF = new System.Drawing.SizeF(1485.336F, 70F);
             this.xrLabel24.StylePriority.UseFont = false;
             this.xrLabel24.StylePriority.UsePadding = false;
             this.xrLabel24.StylePriority.UseTextAlignment = false;
@@ -991,14 +999,6 @@
             this.xrTableCell9.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
             this.xrTableCell9.Weight = 2.8574441534785766D;
             // 
-            // xrSubreport1
-            // 
-            this.xrSubreport1.Dpi = 254F;
-            this.xrSubreport1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
-            this.xrSubreport1.LockedInUserDesigner = true;
-            this.xrSubreport1.Name = "xrSubreport1";
-            this.xrSubreport1.SizeF = new System.Drawing.SizeF(1846F, 42.93904F);
-            // 
             // rptKeHoachDaoTao
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
@@ -1018,7 +1018,7 @@
             this.ReportUnit = DevExpress.XtraReports.UI.ReportUnit.TenthsOfAMillimeter;
             this.SnapGridSize = 25F;
             this.Tag = "rptKeHoachDaoTao";
-            this.Version = "20.1";
+            this.Version = "22.1";
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable3)).EndInit();

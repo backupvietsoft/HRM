@@ -412,7 +412,11 @@ namespace Vs.HRM
                     }
                 case "xoa":
                     {
-                        if (iKiemTinhTrang() == 1) return;
+                        if (iKiemTinhTrang() == 1)
+                        {
+                            XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDaDuyetKhongTheXoa"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning); return;
+                            return;
+                        }
                         if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDeleteCapNhatPhep"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) return;
                         if (navigationFrame1.SelectedPage == navigationPage1)
                         {

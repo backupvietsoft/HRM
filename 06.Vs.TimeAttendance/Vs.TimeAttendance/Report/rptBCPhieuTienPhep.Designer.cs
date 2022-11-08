@@ -141,7 +141,7 @@
             this.lbMaNV.Name = "lbMaNV";
             this.lbMaNV.StylePriority.UseFont = false;
             this.lbMaNV.Text = "Mã NV";
-            this.lbMaNV.Weight = 1.8306933030677728D;
+            this.lbMaNV.Weight = 2.5054068137675918D;
             // 
             // lbHoTen
             // 
@@ -151,7 +151,7 @@
             this.lbHoTen.Name = "lbHoTen";
             this.lbHoTen.StylePriority.UseFont = false;
             this.lbHoTen.Text = "Họ tên";
-            this.lbHoTen.Weight = 4.8211050429611975D;
+            this.lbHoTen.Weight = 4.1463915322613785D;
             // 
             // lbSoTaiKhoan
             // 
@@ -299,7 +299,7 @@
             this.xrTableCell2.StylePriority.UseTextAlignment = false;
             this.xrTableCell2.Text = "xrTableCell2";
             this.xrTableCell2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
-            this.xrTableCell2.Weight = 1.2714959688041443D;
+            this.xrTableCell2.Weight = 1.7401137786900069D;
             // 
             // xrTableCell3
             // 
@@ -313,7 +313,7 @@
             this.xrTableCell3.StylePriority.UseFont = false;
             this.xrTableCell3.StylePriority.UsePadding = false;
             this.xrTableCell3.Text = "xrTableCell3";
-            this.xrTableCell3.Weight = 3.3484669583644164D;
+            this.xrTableCell3.Weight = 2.879849148478554D;
             // 
             // xrTableCell4
             // 
@@ -466,7 +466,7 @@
             this.ReportUnit = DevExpress.XtraReports.UI.ReportUnit.TenthsOfAMillimeter;
             this.SnapGridSize = 25F;
             this.Tag = "rptBCPhieuTienPhep";
-            this.Version = "20.1";
+            this.Version = "22.1";
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();

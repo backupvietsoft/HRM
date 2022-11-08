@@ -370,7 +370,7 @@ namespace Vs.TimeAttendance
                 DataRowView dataRow = lookUp.GetSelectedDataRow() as DataRowView;
                 DataTable dt = new DataTable();
                 dt = (DataTable)grdCongNhan.DataSource;
-                dt.AsEnumerable().Where(x => x["ID_CN"].ToString() == grvCongNhan.GetFocusedRowCellValue("ID_CN").ToString()).ToList<DataRow>().ForEach(r => r["CA"] = (dataRow.Row[1])); 
+                dt.AsEnumerable().Where(x => x["ID_CN"].ToString() == grvCongNhan.GetFocusedRowCellValue("ID_CN").ToString()).ToList<DataRow>().ForEach(r => r["CA"] = (dataRow.Row[1]));
                 dt.AcceptChanges();
             }
             catch (Exception ex) { }
@@ -482,15 +482,11 @@ namespace Vs.TimeAttendance
                 }
                 for (int i = 0; i <= grvCongNhan.RowCount; i++)
                 {
-                    if (Convert.ToBoolean(grvCongNhan.GetRowCellValue(i, "CHINH_SUA")) == false)
-                    {
-                        grvCongNhan.SetRowCellValue(i, "NGAY_DEN", NgayDen.Date);
-                        grvCongNhan.SetRowCellValue(i, "NGAY_VE", NgayVe.Date);
-                        grvCongNhan.SetRowCellValue(i, "GIO_DEN", NgayDen.TimeOfDay.ToString());
-                        grvCongNhan.SetRowCellValue(i, "GIO_VE", NgayVe.TimeOfDay.ToString());
-                        grvCongNhan.SetRowCellValue(i, "CHINH_SUA", true);
-                        grvCongNhan.SetRowCellValue(i, "ID_XNG", cboID_XNG.EditValue);
-                    }
+                    grvCongNhan.SetRowCellValue(i, "NGAY_DEN", NgayDen.Date);
+                    grvCongNhan.SetRowCellValue(i, "NGAY_VE", NgayVe.Date);
+                    grvCongNhan.SetRowCellValue(i, "GIO_DEN", NgayDen.TimeOfDay.ToString());
+                    grvCongNhan.SetRowCellValue(i, "GIO_VE", NgayVe.TimeOfDay.ToString());
+                    grvCongNhan.SetRowCellValue(i, "ID_XNG", cboID_XNG.EditValue);
                 }
             }
             catch (Exception ex)
@@ -508,7 +504,6 @@ namespace Vs.TimeAttendance
                 grvCongNhan.SetFocusedRowCellValue("NGAY_VE", NgayVe.Date);
                 grvCongNhan.SetFocusedRowCellValue("GIO_DEN", NgayDen.TimeOfDay.ToString());
                 grvCongNhan.SetFocusedRowCellValue("GIO_VE", NgayVe.TimeOfDay.ToString());
-                grvCongNhan.SetFocusedRowCellValue("CHINH_SUA", true);
                 grvCongNhan.SetFocusedRowCellValue("ID_XNG", cboID_XNG.EditValue);
             }
             catch (Exception ex)
@@ -722,6 +717,31 @@ namespace Vs.TimeAttendance
             {
 
             }
+        }
+
+        private void grvCongNhan_InitNewRow(object sender, InitNewRowEventArgs e)
+        {
+            try
+            {
+                GridView view = sender as GridView;
+                view.SetFocusedRowCellValue(view.Columns["CHINH_SUA"], true);
+            }
+            catch
+            {
+            }
+        }
+
+        private void grvCongNhan_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
+        {
+            try
+            {
+                GridView view = sender as GridView;
+                if (e.Column.FieldName == "GIO_DEN" || e.Column.FieldName == "GIO_VE")
+                {
+                    view.SetFocusedRowCellValue("CHINH_SUA", true);
+                }
+            }
+            catch { }
         }
     }
 }

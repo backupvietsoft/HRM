@@ -55,7 +55,7 @@ namespace Vs.Payroll
             try
             {
                 Commons.Modules.sLoad = "0Load";
-                Commons.Modules.ObjSystems.LoadCboDonVi(LK_DON_VI);
+                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(LK_DON_VI, Commons.Modules.ObjSystems.DataDonVi(false), "ID_DV", "TEN_DV", "TEN_DV");
                 Commons.Modules.ObjSystems.LoadCboXiNghiep(LK_DON_VI, LK_XI_NGHIEP);
                 Commons.Modules.ObjSystems.LoadCboTo(LK_DON_VI, LK_XI_NGHIEP, LK_TO);
                 Commons.Modules.sLoad = "";
@@ -517,7 +517,11 @@ namespace Vs.Payroll
             adp.Fill(ds);
             dt = new DataTable();
             dt = ds.Tables[0].Copy();
-
+            if (dt.Rows.Count == 0)
+            {
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgKhongCoDuLieuIn"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
             dt1 = new DataTable();
             dt1 = ds.Tables[1].Copy();
 
@@ -732,7 +736,11 @@ namespace Vs.Payroll
             adp.Fill(ds);
             dt = new DataTable();
             dt = ds.Tables[0].Copy();
-
+            if (dt.Rows.Count == 0)
+            {
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgKhongCoDuLieuIn"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
             dt1 = new DataTable();
             dt1 = ds.Tables[1].Copy();
 
@@ -929,6 +937,12 @@ namespace Vs.Payroll
                     System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
                     DataSet ds = new DataSet();
                     adp.Fill(ds);
+                    dt = ds.Tables[0].Copy();
+                    if (dt.Rows.Count == 0)
+                    {
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgKhongCoDuLieuIn"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return;
+                    }
                     ds.Tables[0].TableName = "PhieuLuongT13";
                     ds.Tables[1].TableName = "info";
                     SaveFileDialog saveFileDialog = new SaveFileDialog();

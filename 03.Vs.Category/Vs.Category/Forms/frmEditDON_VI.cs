@@ -30,6 +30,11 @@ namespace Vs.Category
                     dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboCongNhan", Commons.Modules.UserName, Commons.Modules.TypeLanguage, 3));
                     Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_CN, dt, "ID_CN", "HO_TEN", "HO_TEN");
                     ItemForTruongDonVi.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+                    if (Commons.Modules.UserName != "admin")
+                    {
+                        lblTenDataLink.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                        lblDuongDanDataLink.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                    }
                 }
                 if (!bAddEditDV)
                 {
@@ -54,7 +59,7 @@ namespace Vs.Category
         {
             try
             {
-                string sSql = "SELECT ID_DV ,MSDV ,TEN_DV ,TEN_DV_A ,TEN_DV_H ,TEN_NGAN ,DIA_CHI ,MAC_DINH ,CHU_QUAN ,DIEN_THOAI ,FAX ,MS_BHYT ,MS_BHXH ,SO_TAI_KHOAN ,TEN_NGAN_HANG ,KY_HIEU ,NGUOI_DAI_DIEN ,CHUC_VU ,SO_HS,STT_DV, ID_CN, FACEBOOK_TD FROM dbo.DON_VI WHERE ID_DV =	" + iIdDV.ToString();
+                string sSql = "SELECT ID_DV ,MSDV ,TEN_DV ,TEN_DV_A ,TEN_DV_H ,TEN_NGAN ,DIA_CHI ,MAC_DINH ,CHU_QUAN ,DIEN_THOAI ,FAX ,MS_BHYT ,MS_BHXH ,SO_TAI_KHOAN ,TEN_NGAN_HANG ,KY_HIEU ,NGUOI_DAI_DIEN ,CHUC_VU ,SO_HS,STT_DV, ID_CN, FACEBOOK_TD, TEN_DATA_LINK, DUONG_DAN_DATA_LINK FROM dbo.DON_VI WHERE ID_DV =	" + iIdDV.ToString();
                 DataTable dtTmp = new DataTable();
                 dtTmp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSql));
                 ItemForMSDV.Control.Text = dtTmp.Rows[0]["MSDV"].ToString();
@@ -76,6 +81,8 @@ namespace Vs.Category
                 ItemForNGUOI_DAI_DIEN.Control.Text = dtTmp.Rows[0]["NGUOI_DAI_DIEN"].ToString();
                 ItemForSTT_DV.Control.Text = dtTmp.Rows[0]["STT_DV"].ToString();
                 cboID_CN.EditValue = dtTmp.Rows[0]["ID_CN"].ToString() == "" ? -1 : Convert.ToInt64(dtTmp.Rows[0]["ID_CN"]);
+                txtTenDataLink.Text = dtTmp.Rows[0]["TEN_DATA_LINK"].ToString();
+                txtDuongDanDataLink.Text = dtTmp.Rows[0]["DUONG_DAN_DATA_LINK"].ToString();
                 if (bAddEditDV)
                 {
                     sSql = "SELECT ISNULL(MAX(STT_DV),0) + 1 FROM dbo.[DON_VI] ";
@@ -114,6 +121,8 @@ namespace Vs.Category
                 ItemForSTT_DV.Control.Text = String.Empty;
                 ItemForFB.Control.Text = String.Empty;
                 cboID_CN.EditValue = -1;
+                txtTenDataLink.Text = String.Empty;
+                txtDuongDanDataLink.Text = String.Empty;
                 MSDVTextEdit.Focus();
 
             }
@@ -140,7 +149,7 @@ namespace Vs.Category
                                     ItemForDIA_CHI.Control.Text, Convert.ToBoolean(MAC_DINHCheckEdit.EditValue), ItemForCHU_QUAN.Control.Text, ItemForDIEN_THOAI.Control.Text,
                                     ItemForFAX.Control.Text, ItemForMS_BHYT.Control.Text, ItemForMS_BHXH.Control.Text, ItemForSO_TAI_KHOAN.Control.Text,
                                     ItemForTEN_NGAN_HANG.Control.Text, ItemForNGUOI_DAI_DIEN.Control.Text,
-                                     ItemForSTT_DV.Control.Text == "" ? ItemForSTT_DV.Control.Text = null : ItemForSTT_DV.Control.Text, Convert.ToInt64(cboID_CN.Text == "" ? cboID_CN.EditValue = null : cboID_CN.EditValue), ItemForFB.Control.Text).ToString();
+                                     ItemForSTT_DV.Control.Text == "" ? ItemForSTT_DV.Control.Text = null : ItemForSTT_DV.Control.Text, Convert.ToInt64(cboID_CN.Text == "" ? cboID_CN.EditValue = null : cboID_CN.EditValue), ItemForFB.Control.Text, txtTenDataLink.Text, txtDuongDanDataLink.Text).ToString();
 
                             if (bAddEditDV)
                             {

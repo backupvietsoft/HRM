@@ -802,7 +802,6 @@ public class MExcel
         }
     }
 
-
     public void AddImage(ExcelWorksheet ws, int DongBD, int CotBD, int logoWidth, int logoHeight, DataTable dtLogo, string sCotHinh)
     {
         System.Drawing.Image img;

@@ -35,7 +35,7 @@ namespace Vs.HRM
 
                             DanhGiaTinhTrangThuViec_DM();
                         }
-                        if(chkBCTrinhDo.Checked == true)
+                        if (chkBCTrinhDo.Checked == true)
                         {
                             System.Data.SqlClient.SqlConnection conn;
                             DataTable dt = new DataTable();
@@ -87,6 +87,46 @@ namespace Vs.HRM
                             frm.ShowDialog();
                             break;
                         }
+                        if (chkCNViPham.Checked == true)
+                        {
+                            System.Data.SqlClient.SqlConnection conn1;
+                            DataTable dt = new DataTable();
+                            frmViewReport frm = new frmViewReport();
+                            frm.rpt = new rptBCKhenThuongKyLuatTH(lk_NgayIn.DateTime, dTuNgay.DateTime, dDenNgay.DateTime);
+
+                            try
+                            {
+                                conn1 = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                                conn1.Open();
+
+                                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptKhenThuongKyLuatTH", conn1);
+                                cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                                cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                                cmd.Parameters.Add("@Dvi", SqlDbType.Int).Value = LK_DON_VI.EditValue;
+                                cmd.Parameters.Add("@XN", SqlDbType.Int).Value = LK_XI_NGHIEP.EditValue;
+                                cmd.Parameters.Add("@TO", SqlDbType.Int).Value = LK_TO.EditValue;
+                                cmd.Parameters.Add("@ID_CN", SqlDbType.BigInt).Value = -1;
+                                cmd.Parameters.Add("@TNgay", SqlDbType.Date).Value = dTuNgay.EditValue;
+                                cmd.Parameters.Add("@DNgay", SqlDbType.Date).Value = dDenNgay.EditValue;
+                                cmd.Parameters.Add("@Loai", SqlDbType.Int).Value = 2;
+
+                                cmd.CommandType = CommandType.StoredProcedure;
+                                System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+
+                                DataSet ds = new DataSet();
+                                adp.Fill(ds);
+                                dt = new DataTable();
+                                dt = ds.Tables[0].Copy();
+                                dt.TableName = "DA_TA";
+                                frm.AddDataSource(dt);
+                            }
+                            catch (Exception ex)
+                            {
+                            }
+
+
+                            frm.ShowDialog();
+                        }
                         break;
                     }
                 default:
@@ -121,7 +161,7 @@ namespace Vs.HRM
             try
             {
                 DataTable dt = new DataTable();
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboDON_VI", Commons.Modules.UserName, Commons.Modules.TypeLanguage, 1));
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboDON_VI", Commons.Modules.UserName, Commons.Modules.TypeLanguage, 0));
                 if (LK_DON_VI.Properties.DataSource == null)
                 {
                     Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(LK_DON_VI, dt, "ID_DV", "TEN_DV", "TEN_DV");
@@ -499,9 +539,11 @@ namespace Vs.HRM
             lblTNgay.Enabled = visible;
             lblDNgay.Enabled = visible;
             lblChucVu.Enabled = visible;
+            cboID_CV.Enabled = visible;
             dTuNgay.Enabled = visible;
             dDenNgay.Enabled = visible;
             lblBCTrinhDo.Enabled = !visible;
+            lbBCCNViPham.Enabled = !visible;
 
             lbNoiDung.Enabled = !visible;
             lbDiemTu.Enabled = !visible;
@@ -510,6 +552,7 @@ namespace Vs.HRM
             txDiemTu.Enabled = !visible;
             txDiemDen.Enabled = !visible;
             lblBCDanhGiaTV.Enabled = visible;
+            lbBCCNViPham.Enabled = visible;
         }
 
         private void chkBCThuViec_CheckedChanged(object sender, EventArgs e)
@@ -518,6 +561,8 @@ namespace Vs.HRM
             Commons.Modules.sLoad = "0Load";
             EnabelButton(true);
             chkBCTrinhDo.EditValue = false;
+            chkCNViPham.EditValue = false;
+            lbBCCNViPham.Enabled = false;
             Commons.Modules.sLoad = "";
 
         }
@@ -528,6 +573,20 @@ namespace Vs.HRM
             Commons.Modules.sLoad = "0Load";
             EnabelButton(false);
             chkBCThuViec.EditValue = false;
+            chkCNViPham.EditValue = false;
+            Commons.Modules.sLoad = "";
+        }
+
+        private void chkCNViPham_CheckedChanged(object sender, EventArgs e)
+        {
+            if (Commons.Modules.sLoad == "0Load") return;
+            Commons.Modules.sLoad = "0Load";
+            EnabelButton(true);
+            lblBCDanhGiaTV.Enabled = false;
+            chkBCThuViec.EditValue = false;
+            chkBCTrinhDo.EditValue = false;
+            lblChucVu.Enabled = false;
+            cboID_CV.Enabled = false;
             Commons.Modules.sLoad = "";
         }
     }

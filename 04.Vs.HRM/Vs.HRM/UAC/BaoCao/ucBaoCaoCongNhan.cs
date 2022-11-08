@@ -186,7 +186,7 @@ namespace Vs.HRM
 
                 rdoChonBC.SelectedIndex = 0;
                 Commons.Modules.sLoad = "0Load";
-                Commons.Modules.ObjSystems.LoadCboDonVi(lkDonVi);
+                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(lkDonVi, Commons.Modules.ObjSystems.DataDonVi(false), "ID_DV", "TEN_DV", "TEN_DV");
                 Commons.Modules.ObjSystems.LoadCboXiNghiep(lkDonVi, lkXiNghiep);
                 Commons.Modules.ObjSystems.LoadCboTo(lkDonVi, lkXiNghiep, lkTo);
                 Commons.Modules.ObjSystems.LoadCboTTHD(lkTTHD);

@@ -252,7 +252,7 @@ namespace Vs.HRM
         {
             Commons.Modules.sLoad = "0Load";
             datNam.DateTime = DateTime.Now.AddYears(-1);
-            Commons.Modules.ObjSystems.LoadCboDonVi(LK_DON_VI);
+            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(LK_DON_VI, Commons.Modules.ObjSystems.DataDonVi(false), "ID_DV", "TEN_DV", "TEN_DV");
             Commons.Modules.ObjSystems.LoadCboXiNghiep(LK_DON_VI, LK_XI_NGHIEP);
             Commons.Modules.ObjSystems.LoadCboTo(LK_DON_VI, LK_XI_NGHIEP, LK_TO);
 

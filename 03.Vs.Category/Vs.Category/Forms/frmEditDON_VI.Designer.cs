@@ -38,6 +38,7 @@ namespace Vs.Category
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule3 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             this.btnALL = new DevExpress.XtraBars.Docking2010.WindowsUIButtonPanel();
             this.dataLayoutControl1 = new DevExpress.XtraDataLayout.DataLayoutControl();
+            this.FBtextEdit = new DevExpress.XtraEditors.TextEdit();
             this.cboID_CN = new DevExpress.XtraEditors.SearchLookUpEdit();
             this.searchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.TEN_NGAN_HANGTextEdit = new DevExpress.XtraEditors.TextEdit();
@@ -75,13 +76,17 @@ namespace Vs.Category
             this.ItemForSO_TAI_KHOAN = new DevExpress.XtraLayout.LayoutControlItem();
             this.ItemForTEN_NGAN_HANG = new DevExpress.XtraLayout.LayoutControlItem();
             this.ItemForTruongDonVi = new DevExpress.XtraLayout.LayoutControlItem();
+            this.ItemForFB = new DevExpress.XtraLayout.LayoutControlItem();
             this.dxValidationProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
             this.tablePanel1 = new DevExpress.Utils.Layout.TablePanel();
             this.behaviorManager1 = new DevExpress.Utils.Behaviors.BehaviorManager(this.components);
-            this.FBtextEdit = new DevExpress.XtraEditors.TextEdit();
-            this.ItemForFB = new DevExpress.XtraLayout.LayoutControlItem();
+            this.txtTenDataLink = new DevExpress.XtraEditors.TextEdit();
+            this.lblTenDataLink = new DevExpress.XtraLayout.LayoutControlItem();
+            this.txtDuongDanDataLink = new DevExpress.XtraEditors.TextEdit();
+            this.lblDuongDanDataLink = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataLayoutControl1)).BeginInit();
             this.dataLayoutControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.FBtextEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboID_CN.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.TEN_NGAN_HANGTextEdit.Properties)).BeginInit();
@@ -119,12 +124,15 @@ namespace Vs.Category
             ((System.ComponentModel.ISupportInitialize)(this.ItemForSO_TAI_KHOAN)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForTEN_NGAN_HANG)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForTruongDonVi)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForFB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).BeginInit();
             this.tablePanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.behaviorManager1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.FBtextEdit.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemForFB)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtTenDataLink.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lblTenDataLink)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDuongDanDataLink.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lblDuongDanDataLink)).BeginInit();
             this.SuspendLayout();
             // 
             // btnALL
@@ -164,6 +172,8 @@ namespace Vs.Category
             // dataLayoutControl1
             // 
             this.tablePanel1.SetColumn(this.dataLayoutControl1, 1);
+            this.dataLayoutControl1.Controls.Add(this.txtDuongDanDataLink);
+            this.dataLayoutControl1.Controls.Add(this.txtTenDataLink);
             this.dataLayoutControl1.Controls.Add(this.FBtextEdit);
             this.dataLayoutControl1.Controls.Add(this.cboID_CN);
             this.dataLayoutControl1.Controls.Add(this.TEN_NGAN_HANGTextEdit);
@@ -192,15 +202,23 @@ namespace Vs.Category
             this.dataLayoutControl1.TabIndex = 6;
             this.dataLayoutControl1.Text = "dataLayoutControl1";
             // 
+            // FBtextEdit
+            // 
+            this.FBtextEdit.Location = new System.Drawing.Point(144, 328);
+            this.FBtextEdit.Name = "FBtextEdit";
+            this.FBtextEdit.Size = new System.Drawing.Size(474, 24);
+            this.FBtextEdit.StyleController = this.dataLayoutControl1;
+            this.FBtextEdit.TabIndex = 29;
+            // 
             // cboID_CN
             // 
-            this.cboID_CN.Location = new System.Drawing.Point(139, 126);
+            this.cboID_CN.Location = new System.Drawing.Point(144, 126);
             this.cboID_CN.Name = "cboID_CN";
             this.cboID_CN.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cboID_CN.Properties.NullText = "";
             this.cboID_CN.Properties.PopupView = this.searchLookUpEdit1View;
-            this.cboID_CN.Size = new System.Drawing.Size(479, 24);
+            this.cboID_CN.Size = new System.Drawing.Size(474, 24);
             this.cboID_CN.StyleController = this.dataLayoutControl1;
             this.cboID_CN.TabIndex = 28;
             // 
@@ -213,9 +231,9 @@ namespace Vs.Category
             // 
             // TEN_NGAN_HANGTextEdit
             // 
-            this.TEN_NGAN_HANGTextEdit.Location = new System.Drawing.Point(139, 302);
+            this.TEN_NGAN_HANGTextEdit.Location = new System.Drawing.Point(144, 302);
             this.TEN_NGAN_HANGTextEdit.Name = "TEN_NGAN_HANGTextEdit";
-            this.TEN_NGAN_HANGTextEdit.Size = new System.Drawing.Size(479, 24);
+            this.TEN_NGAN_HANGTextEdit.Size = new System.Drawing.Size(474, 24);
             this.TEN_NGAN_HANGTextEdit.StyleController = this.dataLayoutControl1;
             this.TEN_NGAN_HANGTextEdit.TabIndex = 27;
             // 
@@ -232,9 +250,9 @@ namespace Vs.Category
             // MSDVTextEdit
             // 
             this.MSDVTextEdit.EnterMoveNextControl = true;
-            this.MSDVTextEdit.Location = new System.Drawing.Point(144, 8);
+            this.MSDVTextEdit.Location = new System.Drawing.Point(149, 8);
             this.MSDVTextEdit.Name = "MSDVTextEdit";
-            this.MSDVTextEdit.Size = new System.Drawing.Size(147, 24);
+            this.MSDVTextEdit.Size = new System.Drawing.Size(142, 24);
             this.MSDVTextEdit.StyleController = this.dataLayoutControl1;
             this.MSDVTextEdit.TabIndex = 5;
             conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
@@ -246,9 +264,9 @@ namespace Vs.Category
             // TEN_DON_VITextEdit
             // 
             this.TEN_DON_VITextEdit.EnterMoveNextControl = true;
-            this.TEN_DON_VITextEdit.Location = new System.Drawing.Point(144, 38);
+            this.TEN_DON_VITextEdit.Location = new System.Drawing.Point(149, 38);
             this.TEN_DON_VITextEdit.Name = "TEN_DON_VITextEdit";
-            this.TEN_DON_VITextEdit.Size = new System.Drawing.Size(469, 24);
+            this.TEN_DON_VITextEdit.Size = new System.Drawing.Size(464, 24);
             this.TEN_DON_VITextEdit.StyleController = this.dataLayoutControl1;
             this.TEN_DON_VITextEdit.TabIndex = 6;
             conditionValidationRule2.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
@@ -259,118 +277,118 @@ namespace Vs.Category
             // TEN_DON_VI_ATextEdit
             // 
             this.TEN_DON_VI_ATextEdit.EnterMoveNextControl = true;
-            this.TEN_DON_VI_ATextEdit.Location = new System.Drawing.Point(144, 68);
+            this.TEN_DON_VI_ATextEdit.Location = new System.Drawing.Point(149, 68);
             this.TEN_DON_VI_ATextEdit.Name = "TEN_DON_VI_ATextEdit";
-            this.TEN_DON_VI_ATextEdit.Size = new System.Drawing.Size(469, 24);
+            this.TEN_DON_VI_ATextEdit.Size = new System.Drawing.Size(464, 24);
             this.TEN_DON_VI_ATextEdit.StyleController = this.dataLayoutControl1;
             this.TEN_DON_VI_ATextEdit.TabIndex = 7;
             // 
             // TEN_DON_VI_HTextEdit
             // 
             this.TEN_DON_VI_HTextEdit.EnterMoveNextControl = true;
-            this.TEN_DON_VI_HTextEdit.Location = new System.Drawing.Point(144, 98);
+            this.TEN_DON_VI_HTextEdit.Location = new System.Drawing.Point(149, 98);
             this.TEN_DON_VI_HTextEdit.Name = "TEN_DON_VI_HTextEdit";
-            this.TEN_DON_VI_HTextEdit.Size = new System.Drawing.Size(469, 24);
+            this.TEN_DON_VI_HTextEdit.Size = new System.Drawing.Size(464, 24);
             this.TEN_DON_VI_HTextEdit.StyleController = this.dataLayoutControl1;
             this.TEN_DON_VI_HTextEdit.TabIndex = 8;
             // 
             // TEN_NGANTextEdit
             // 
             this.TEN_NGANTextEdit.EnterMoveNextControl = true;
-            this.TEN_NGANTextEdit.Location = new System.Drawing.Point(144, 184);
+            this.TEN_NGANTextEdit.Location = new System.Drawing.Point(149, 184);
             this.TEN_NGANTextEdit.Name = "TEN_NGANTextEdit";
-            this.TEN_NGANTextEdit.Size = new System.Drawing.Size(162, 24);
+            this.TEN_NGANTextEdit.Size = new System.Drawing.Size(157, 24);
             this.TEN_NGANTextEdit.StyleController = this.dataLayoutControl1;
             this.TEN_NGANTextEdit.TabIndex = 9;
             // 
             // DIA_CHITextEdit
             // 
             this.DIA_CHITextEdit.EnterMoveNextControl = true;
-            this.DIA_CHITextEdit.Location = new System.Drawing.Point(144, 154);
+            this.DIA_CHITextEdit.Location = new System.Drawing.Point(149, 154);
             this.DIA_CHITextEdit.Name = "DIA_CHITextEdit";
-            this.DIA_CHITextEdit.Size = new System.Drawing.Size(469, 24);
+            this.DIA_CHITextEdit.Size = new System.Drawing.Size(464, 24);
             this.DIA_CHITextEdit.StyleController = this.dataLayoutControl1;
             this.DIA_CHITextEdit.TabIndex = 10;
             // 
             // CHU_QUANTextEdit
             // 
             this.CHU_QUANTextEdit.EnterMoveNextControl = true;
-            this.CHU_QUANTextEdit.Location = new System.Drawing.Point(451, 184);
+            this.CHU_QUANTextEdit.Location = new System.Drawing.Point(456, 184);
             this.CHU_QUANTextEdit.Name = "CHU_QUANTextEdit";
-            this.CHU_QUANTextEdit.Size = new System.Drawing.Size(162, 24);
+            this.CHU_QUANTextEdit.Size = new System.Drawing.Size(157, 24);
             this.CHU_QUANTextEdit.StyleController = this.dataLayoutControl1;
             this.CHU_QUANTextEdit.TabIndex = 12;
             // 
             // FAXTextEdit
             // 
             this.FAXTextEdit.EnterMoveNextControl = true;
-            this.FAXTextEdit.Location = new System.Drawing.Point(451, 214);
+            this.FAXTextEdit.Location = new System.Drawing.Point(456, 214);
             this.FAXTextEdit.Name = "FAXTextEdit";
             this.FAXTextEdit.Properties.Mask.EditMask = "\\d{0,15}";
             this.FAXTextEdit.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
-            this.FAXTextEdit.Size = new System.Drawing.Size(162, 24);
+            this.FAXTextEdit.Size = new System.Drawing.Size(157, 24);
             this.FAXTextEdit.StyleController = this.dataLayoutControl1;
             this.FAXTextEdit.TabIndex = 14;
             // 
             // MS_BHYTTextEdit
             // 
             this.MS_BHYTTextEdit.EnterMoveNextControl = true;
-            this.MS_BHYTTextEdit.Location = new System.Drawing.Point(144, 244);
+            this.MS_BHYTTextEdit.Location = new System.Drawing.Point(149, 244);
             this.MS_BHYTTextEdit.Name = "MS_BHYTTextEdit";
-            this.MS_BHYTTextEdit.Size = new System.Drawing.Size(162, 24);
+            this.MS_BHYTTextEdit.Size = new System.Drawing.Size(157, 24);
             this.MS_BHYTTextEdit.StyleController = this.dataLayoutControl1;
             this.MS_BHYTTextEdit.TabIndex = 15;
             // 
             // MS_BHXHTextEdit
             // 
             this.MS_BHXHTextEdit.EnterMoveNextControl = true;
-            this.MS_BHXHTextEdit.Location = new System.Drawing.Point(451, 244);
+            this.MS_BHXHTextEdit.Location = new System.Drawing.Point(456, 244);
             this.MS_BHXHTextEdit.Name = "MS_BHXHTextEdit";
-            this.MS_BHXHTextEdit.Size = new System.Drawing.Size(162, 24);
+            this.MS_BHXHTextEdit.Size = new System.Drawing.Size(157, 24);
             this.MS_BHXHTextEdit.StyleController = this.dataLayoutControl1;
             this.MS_BHXHTextEdit.TabIndex = 16;
             // 
             // SO_TAI_KHOANTextEdit
             // 
             this.SO_TAI_KHOANTextEdit.EnterMoveNextControl = true;
-            this.SO_TAI_KHOANTextEdit.Location = new System.Drawing.Point(451, 274);
+            this.SO_TAI_KHOANTextEdit.Location = new System.Drawing.Point(456, 274);
             this.SO_TAI_KHOANTextEdit.Name = "SO_TAI_KHOANTextEdit";
             this.SO_TAI_KHOANTextEdit.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.RegExpMaskManager));
             this.SO_TAI_KHOANTextEdit.Properties.MaskSettings.Set("allowBlankInput", true);
             this.SO_TAI_KHOANTextEdit.Properties.MaskSettings.Set("mask", "\\d{0,15}");
-            this.SO_TAI_KHOANTextEdit.Size = new System.Drawing.Size(162, 24);
+            this.SO_TAI_KHOANTextEdit.Size = new System.Drawing.Size(157, 24);
             this.SO_TAI_KHOANTextEdit.StyleController = this.dataLayoutControl1;
             this.SO_TAI_KHOANTextEdit.TabIndex = 17;
             // 
             // NGUOI_DAI_DIENTextEdit
             // 
             this.NGUOI_DAI_DIENTextEdit.EnterMoveNextControl = true;
-            this.NGUOI_DAI_DIENTextEdit.Location = new System.Drawing.Point(144, 274);
+            this.NGUOI_DAI_DIENTextEdit.Location = new System.Drawing.Point(149, 274);
             this.NGUOI_DAI_DIENTextEdit.Name = "NGUOI_DAI_DIENTextEdit";
-            this.NGUOI_DAI_DIENTextEdit.Size = new System.Drawing.Size(162, 24);
+            this.NGUOI_DAI_DIENTextEdit.Size = new System.Drawing.Size(157, 24);
             this.NGUOI_DAI_DIENTextEdit.StyleController = this.dataLayoutControl1;
             this.NGUOI_DAI_DIENTextEdit.TabIndex = 20;
             // 
             // textEdit1
             // 
             this.textEdit1.EnterMoveNextControl = true;
-            this.textEdit1.Location = new System.Drawing.Point(144, 214);
+            this.textEdit1.Location = new System.Drawing.Point(149, 214);
             this.textEdit1.Name = "textEdit1";
-            this.textEdit1.Size = new System.Drawing.Size(162, 24);
+            this.textEdit1.Size = new System.Drawing.Size(157, 24);
             this.textEdit1.StyleController = this.dataLayoutControl1;
             this.textEdit1.TabIndex = 24;
             // 
             // STT_DVTextEdit
             // 
             this.STT_DVTextEdit.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.STT_DVTextEdit.Location = new System.Drawing.Point(431, 9);
+            this.STT_DVTextEdit.Location = new System.Drawing.Point(436, 9);
             this.STT_DVTextEdit.Margin = new System.Windows.Forms.Padding(4);
             this.STT_DVTextEdit.Name = "STT_DVTextEdit";
             this.STT_DVTextEdit.Properties.Appearance.Options.UseTextOptions = true;
             this.STT_DVTextEdit.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.STT_DVTextEdit.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.NumericMaskManager));
             this.STT_DVTextEdit.Properties.MaskSettings.Set("mask", "N0");
-            this.STT_DVTextEdit.Size = new System.Drawing.Size(31, 24);
+            this.STT_DVTextEdit.Size = new System.Drawing.Size(26, 24);
             this.STT_DVTextEdit.StyleController = this.dataLayoutControl1;
             this.STT_DVTextEdit.TabIndex = 25;
             conditionValidationRule3.ErrorText = "This value is not valid";
@@ -409,7 +427,9 @@ namespace Vs.Category
             this.ItemForSO_TAI_KHOAN,
             this.ItemForTEN_NGAN_HANG,
             this.ItemForTruongDonVi,
-            this.ItemForFB});
+            this.ItemForFB,
+            this.lblTenDataLink,
+            this.lblDuongDanDataLink});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "autoGeneratedGroup0";
             this.layoutControlGroup1.Size = new System.Drawing.Size(614, 419);
@@ -424,7 +444,7 @@ namespace Vs.Category
             this.ItemForMSDV.Padding = new DevExpress.XtraLayout.Utils.Padding(6, 6, 3, 3);
             this.ItemForMSDV.Size = new System.Drawing.Size(292, 30);
             this.ItemForMSDV.Text = "MSDV";
-            this.ItemForMSDV.TextSize = new System.Drawing.Size(121, 17);
+            this.ItemForMSDV.TextSize = new System.Drawing.Size(126, 17);
             // 
             // ItemForTEN_DON_VI
             // 
@@ -436,7 +456,7 @@ namespace Vs.Category
             this.ItemForTEN_DON_VI.Padding = new DevExpress.XtraLayout.Utils.Padding(6, 6, 3, 3);
             this.ItemForTEN_DON_VI.Size = new System.Drawing.Size(614, 30);
             this.ItemForTEN_DON_VI.Text = "TEN_DON_VI";
-            this.ItemForTEN_DON_VI.TextSize = new System.Drawing.Size(121, 17);
+            this.ItemForTEN_DON_VI.TextSize = new System.Drawing.Size(126, 17);
             // 
             // ItemForTEN_DON_VI_A
             // 
@@ -446,7 +466,7 @@ namespace Vs.Category
             this.ItemForTEN_DON_VI_A.Padding = new DevExpress.XtraLayout.Utils.Padding(6, 6, 3, 3);
             this.ItemForTEN_DON_VI_A.Size = new System.Drawing.Size(614, 30);
             this.ItemForTEN_DON_VI_A.Text = "TEN_DON_VI_A";
-            this.ItemForTEN_DON_VI_A.TextSize = new System.Drawing.Size(121, 17);
+            this.ItemForTEN_DON_VI_A.TextSize = new System.Drawing.Size(126, 17);
             // 
             // ItemForTEN_DON_VI_H
             // 
@@ -456,7 +476,7 @@ namespace Vs.Category
             this.ItemForTEN_DON_VI_H.Padding = new DevExpress.XtraLayout.Utils.Padding(6, 6, 3, 3);
             this.ItemForTEN_DON_VI_H.Size = new System.Drawing.Size(614, 30);
             this.ItemForTEN_DON_VI_H.Text = "TEN_DON_VI_H";
-            this.ItemForTEN_DON_VI_H.TextSize = new System.Drawing.Size(121, 17);
+            this.ItemForTEN_DON_VI_H.TextSize = new System.Drawing.Size(126, 17);
             // 
             // ItemForDIA_CHI
             // 
@@ -466,7 +486,7 @@ namespace Vs.Category
             this.ItemForDIA_CHI.Padding = new DevExpress.XtraLayout.Utils.Padding(6, 6, 3, 3);
             this.ItemForDIA_CHI.Size = new System.Drawing.Size(614, 30);
             this.ItemForDIA_CHI.Text = "DIA_CHI";
-            this.ItemForDIA_CHI.TextSize = new System.Drawing.Size(121, 17);
+            this.ItemForDIA_CHI.TextSize = new System.Drawing.Size(126, 17);
             // 
             // ItemForCHU_QUAN
             // 
@@ -476,7 +496,7 @@ namespace Vs.Category
             this.ItemForCHU_QUAN.Padding = new DevExpress.XtraLayout.Utils.Padding(6, 6, 3, 3);
             this.ItemForCHU_QUAN.Size = new System.Drawing.Size(307, 30);
             this.ItemForCHU_QUAN.Text = "CHU_QUAN";
-            this.ItemForCHU_QUAN.TextSize = new System.Drawing.Size(121, 17);
+            this.ItemForCHU_QUAN.TextSize = new System.Drawing.Size(126, 17);
             // 
             // ItemForMS_BHYT
             // 
@@ -486,7 +506,7 @@ namespace Vs.Category
             this.ItemForMS_BHYT.Padding = new DevExpress.XtraLayout.Utils.Padding(6, 6, 3, 3);
             this.ItemForMS_BHYT.Size = new System.Drawing.Size(307, 30);
             this.ItemForMS_BHYT.Text = "MS_BHYT";
-            this.ItemForMS_BHYT.TextSize = new System.Drawing.Size(121, 17);
+            this.ItemForMS_BHYT.TextSize = new System.Drawing.Size(126, 17);
             // 
             // ItemForMS_BHXH
             // 
@@ -496,7 +516,7 @@ namespace Vs.Category
             this.ItemForMS_BHXH.Padding = new DevExpress.XtraLayout.Utils.Padding(6, 6, 3, 3);
             this.ItemForMS_BHXH.Size = new System.Drawing.Size(307, 30);
             this.ItemForMS_BHXH.Text = "MS_BHXH";
-            this.ItemForMS_BHXH.TextSize = new System.Drawing.Size(121, 17);
+            this.ItemForMS_BHXH.TextSize = new System.Drawing.Size(126, 17);
             // 
             // ItemForFAX
             // 
@@ -506,7 +526,7 @@ namespace Vs.Category
             this.ItemForFAX.Padding = new DevExpress.XtraLayout.Utils.Padding(6, 6, 3, 3);
             this.ItemForFAX.Size = new System.Drawing.Size(307, 30);
             this.ItemForFAX.Text = "FAX";
-            this.ItemForFAX.TextSize = new System.Drawing.Size(121, 17);
+            this.ItemForFAX.TextSize = new System.Drawing.Size(126, 17);
             // 
             // ItemForNGUOI_DAI_DIEN
             // 
@@ -516,7 +536,7 @@ namespace Vs.Category
             this.ItemForNGUOI_DAI_DIEN.Padding = new DevExpress.XtraLayout.Utils.Padding(6, 6, 3, 3);
             this.ItemForNGUOI_DAI_DIEN.Size = new System.Drawing.Size(307, 30);
             this.ItemForNGUOI_DAI_DIEN.Text = "NGUOI_DAI_DIEN";
-            this.ItemForNGUOI_DAI_DIEN.TextSize = new System.Drawing.Size(121, 17);
+            this.ItemForNGUOI_DAI_DIEN.TextSize = new System.Drawing.Size(126, 17);
             // 
             // ItemForTEN_NGAN
             // 
@@ -526,7 +546,7 @@ namespace Vs.Category
             this.ItemForTEN_NGAN.Padding = new DevExpress.XtraLayout.Utils.Padding(6, 6, 3, 3);
             this.ItemForTEN_NGAN.Size = new System.Drawing.Size(307, 30);
             this.ItemForTEN_NGAN.Text = "TEN_NGAN";
-            this.ItemForTEN_NGAN.TextSize = new System.Drawing.Size(121, 17);
+            this.ItemForTEN_NGAN.TextSize = new System.Drawing.Size(126, 17);
             // 
             // ItemForDIEN_THOAI
             // 
@@ -535,7 +555,7 @@ namespace Vs.Category
             this.ItemForDIEN_THOAI.Name = "ItemForDIEN_THOAI";
             this.ItemForDIEN_THOAI.Padding = new DevExpress.XtraLayout.Utils.Padding(6, 6, 3, 3);
             this.ItemForDIEN_THOAI.Size = new System.Drawing.Size(307, 30);
-            this.ItemForDIEN_THOAI.TextSize = new System.Drawing.Size(121, 17);
+            this.ItemForDIEN_THOAI.TextSize = new System.Drawing.Size(126, 17);
             // 
             // ItemForSTT_DV
             // 
@@ -549,7 +569,7 @@ namespace Vs.Category
             this.ItemForSTT_DV.Size = new System.Drawing.Size(166, 30);
             this.ItemForSTT_DV.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.ItemForSTT_DV.Text = "STT_DV";
-            this.ItemForSTT_DV.TextSize = new System.Drawing.Size(121, 17);
+            this.ItemForSTT_DV.TextSize = new System.Drawing.Size(126, 17);
             // 
             // ItemForMAC_DINH
             // 
@@ -572,7 +592,7 @@ namespace Vs.Category
             this.ItemForSO_TAI_KHOAN.Padding = new DevExpress.XtraLayout.Utils.Padding(6, 6, 3, 3);
             this.ItemForSO_TAI_KHOAN.Size = new System.Drawing.Size(307, 30);
             this.ItemForSO_TAI_KHOAN.Text = "SO_TAI_KHOAN";
-            this.ItemForSO_TAI_KHOAN.TextSize = new System.Drawing.Size(121, 17);
+            this.ItemForSO_TAI_KHOAN.TextSize = new System.Drawing.Size(126, 17);
             // 
             // ItemForTEN_NGAN_HANG
             // 
@@ -581,7 +601,7 @@ namespace Vs.Category
             this.ItemForTEN_NGAN_HANG.Name = "ItemForTEN_NGAN_HANG";
             this.ItemForTEN_NGAN_HANG.Size = new System.Drawing.Size(614, 26);
             this.ItemForTEN_NGAN_HANG.Text = "TEN_NGAN_HANG";
-            this.ItemForTEN_NGAN_HANG.TextSize = new System.Drawing.Size(121, 17);
+            this.ItemForTEN_NGAN_HANG.TextSize = new System.Drawing.Size(126, 17);
             // 
             // ItemForTruongDonVi
             // 
@@ -589,7 +609,15 @@ namespace Vs.Category
             this.ItemForTruongDonVi.Location = new System.Drawing.Point(0, 120);
             this.ItemForTruongDonVi.Name = "ItemForTruongDonVi";
             this.ItemForTruongDonVi.Size = new System.Drawing.Size(614, 26);
-            this.ItemForTruongDonVi.TextSize = new System.Drawing.Size(121, 17);
+            this.ItemForTruongDonVi.TextSize = new System.Drawing.Size(126, 17);
+            // 
+            // ItemForFB
+            // 
+            this.ItemForFB.Control = this.FBtextEdit;
+            this.ItemForFB.Location = new System.Drawing.Point(0, 322);
+            this.ItemForFB.Name = "ItemForFB";
+            this.ItemForFB.Size = new System.Drawing.Size(614, 26);
+            this.ItemForFB.TextSize = new System.Drawing.Size(126, 17);
             // 
             // dxValidationProvider1
             // 
@@ -611,21 +639,37 @@ namespace Vs.Category
             this.tablePanel1.Size = new System.Drawing.Size(788, 459);
             this.tablePanel1.TabIndex = 7;
             // 
-            // FBtextEdit
+            // txtTenDataLink
             // 
-            this.FBtextEdit.Location = new System.Drawing.Point(139, 328);
-            this.FBtextEdit.Name = "FBtextEdit";
-            this.FBtextEdit.Size = new System.Drawing.Size(479, 24);
-            this.FBtextEdit.StyleController = this.dataLayoutControl1;
-            this.FBtextEdit.TabIndex = 29;
+            this.txtTenDataLink.Location = new System.Drawing.Point(144, 354);
+            this.txtTenDataLink.Name = "txtTenDataLink";
+            this.txtTenDataLink.Size = new System.Drawing.Size(167, 24);
+            this.txtTenDataLink.StyleController = this.dataLayoutControl1;
+            this.txtTenDataLink.TabIndex = 30;
             // 
-            // ItemForFB
+            // lblTenDataLink
             // 
-            this.ItemForFB.Control = this.FBtextEdit;
-            this.ItemForFB.Location = new System.Drawing.Point(0, 322);
-            this.ItemForFB.Name = "ItemForFB";
-            this.ItemForFB.Size = new System.Drawing.Size(614, 97);
-            this.ItemForFB.TextSize = new System.Drawing.Size(121, 17);
+            this.lblTenDataLink.Control = this.txtTenDataLink;
+            this.lblTenDataLink.Location = new System.Drawing.Point(0, 348);
+            this.lblTenDataLink.Name = "lblTenDataLink";
+            this.lblTenDataLink.Size = new System.Drawing.Size(307, 71);
+            this.lblTenDataLink.TextSize = new System.Drawing.Size(126, 17);
+            // 
+            // txtDuongDanDataLink
+            // 
+            this.txtDuongDanDataLink.Location = new System.Drawing.Point(451, 354);
+            this.txtDuongDanDataLink.Name = "txtDuongDanDataLink";
+            this.txtDuongDanDataLink.Size = new System.Drawing.Size(167, 24);
+            this.txtDuongDanDataLink.StyleController = this.dataLayoutControl1;
+            this.txtDuongDanDataLink.TabIndex = 31;
+            // 
+            // lblDuongDanDataLink
+            // 
+            this.lblDuongDanDataLink.Control = this.txtDuongDanDataLink;
+            this.lblDuongDanDataLink.Location = new System.Drawing.Point(307, 348);
+            this.lblDuongDanDataLink.Name = "lblDuongDanDataLink";
+            this.lblDuongDanDataLink.Size = new System.Drawing.Size(307, 71);
+            this.lblDuongDanDataLink.TextSize = new System.Drawing.Size(126, 17);
             // 
             // frmEditDON_VI
             // 
@@ -640,6 +684,7 @@ namespace Vs.Category
             this.Resize += new System.EventHandler(this.frmEditDON_VI_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.dataLayoutControl1)).EndInit();
             this.dataLayoutControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.FBtextEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboID_CN.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.TEN_NGAN_HANGTextEdit.Properties)).EndInit();
@@ -677,12 +722,15 @@ namespace Vs.Category
             ((System.ComponentModel.ISupportInitialize)(this.ItemForSO_TAI_KHOAN)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForTEN_NGAN_HANG)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForTruongDonVi)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForFB)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).EndInit();
             this.tablePanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.behaviorManager1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.FBtextEdit.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemForFB)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtTenDataLink.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lblTenDataLink)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDuongDanDataLink.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lblDuongDanDataLink)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -735,5 +783,9 @@ namespace Vs.Category
         private DevExpress.Utils.Behaviors.BehaviorManager behaviorManager1;
         private DevExpress.XtraEditors.TextEdit FBtextEdit;
         private DevExpress.XtraLayout.LayoutControlItem ItemForFB;
+        private DevExpress.XtraEditors.TextEdit txtDuongDanDataLink;
+        private DevExpress.XtraEditors.TextEdit txtTenDataLink;
+        private DevExpress.XtraLayout.LayoutControlItem lblTenDataLink;
+        private DevExpress.XtraLayout.LayoutControlItem lblDuongDanDataLink;
     }
 }

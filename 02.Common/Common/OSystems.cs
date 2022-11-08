@@ -759,7 +759,7 @@ namespace Commons
                 cbo.Properties.Columns[Ten].Caption = Modules.ObjLanguages.GetLanguage(Modules.ModuleName, "LookUpEdit", Ten, Modules.TypeLanguage);
                 return true;
             }
-            catch
+            catch(Exception ex)
             {
                 return false;
             }

@@ -605,7 +605,13 @@ namespace Vs.TimeAttendance
                         }
                     case "in":
                         {
-                            InBaoCao();
+                            frmBaoCaoDangKyLamThem frm = new frmBaoCaoDangKyLamThem();
+                            frm.dNgayDL = Commons.Modules.ObjSystems.ConvertDateTime(cboNgay.Text);
+                            frm.ID_DV = Convert.ToInt64(cboDonVi.EditValue);
+                            frm.ID_XN = Convert.ToInt64(cboXiNghiep.EditValue);
+                            frm.ID_TO = Convert.ToInt64(cboTo.EditValue);
+                            frm.sTenXN = cboXiNghiep.Text;
+                            frm.ShowDialog();
                             break;
                         }
                     case "thoat":
@@ -745,7 +751,7 @@ namespace Vs.TimeAttendance
                         }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 this.Cursor = Cursors.Default;
             }
@@ -1634,7 +1640,7 @@ namespace Vs.TimeAttendance
                         dr1.SetColumnError("MS_CN", "Error");
                     }
                     catch (Exception ex) { }
-                    
+
                     errorCount++;
                 }
             }

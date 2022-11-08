@@ -372,21 +372,22 @@
             this.rdo_ChonBaoCao.Name = "rdo_ChonBaoCao";
             this.rdo_ChonBaoCao.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] {
             new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Bảng chấm công tháng", true, "rdo_BangChamCongThang"),
-            new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Bảng chấm công tăng ca tháng", true, "rdo_BangChamCongTangCaThang"),
-            new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Bảng tổng hợp đi trễ về sớm tháng", true, "rdo_BangTongHopDiTreVeSomThang"),
             new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Bảng tổng hợp công tháng", true, "rdo_BangTongHopCongThang"),
+            new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Bảng tổng hợp đi trễ về sớm tháng", true, "rdo_BangTongHopDiTreVeSomThang"),
+            new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Báo cáo nghỉ/bỏ việc tháng", true, "rdo_BaoCaoNghiBoViecThang"),
+            new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Bảng chấm công tăng ca tháng", true, "rdo_BangChamCongTangCaThang"),
+            new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Danh sách chuyển công tác", true, "rdo_DanhSachChuyenCongTac"),
+            new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Báo cáo số lần xác nhận công tháng", true, "rdo_BCSoLanXacNhanCongThang"),
             new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Bảng chênh lệch tăng ca tháng", true, "rdo_BangChenhLechTangCaThang"),
             new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Danh sách tháng", true, "rdo_DanhSachThang"),
-            new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Báo cáo nghỉ/bỏ việc tháng", true, "rdo_BaoCaoNghiBoViecThang"),
-            new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Danh sách chuyển công tác", true, "rdo_DanhSachChuyenCongTac"),
-            new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Thông tin nhóm chấm công tháng", true, "rdo_ThongTinNhomCCThang"),
-            new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Báo cáo số lần xác nhận công tháng", true, "rdo_BCSoLanXacNhanCongThang")});
+            new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Thông tin nhóm chấm công tháng", true, "rdo_ThongTinNhomCCThang")});
             this.rdo_ChonBaoCao.Properties.ItemsLayout = DevExpress.XtraEditors.RadioGroupItemsLayout.Column;
             this.Table.SetRow(this.rdo_ChonBaoCao, 5);
             this.Table.SetRowSpan(this.rdo_ChonBaoCao, 7);
             this.rdo_ChonBaoCao.Size = new System.Drawing.Size(453, 244);
             this.rdo_ChonBaoCao.TabIndex = 22;
             this.rdo_ChonBaoCao.SelectedIndexChanged += new System.EventHandler(this.rdo_ChonBaoCao_SelectedIndexChanged);
+            this.rdo_ChonBaoCao.KeyDown += new System.Windows.Forms.KeyEventHandler(this.rdo_ChonBaoCao_KeyDown);
             // 
             // lbThang
             // 

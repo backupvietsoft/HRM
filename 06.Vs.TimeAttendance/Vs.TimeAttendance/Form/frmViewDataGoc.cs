@@ -35,7 +35,7 @@ namespace Vs.TimeAttendance
             DataTable dt = new DataTable();
             try
             {
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT  CONVERT(DATETIME,CONVERT(NVARCHAR(10),NGAY_DEN,101) + ' ' + CONVERT(NVARCHAR(8),GIO_DEN,108)) AS NGAY_GIO_DEN, CONVERT(DATETIME, CONVERT(NVARCHAR(10),T1.NGAY_VE,101) + ' ' +  CONVERT(NVARCHAR(8),T1.GIO_VE,108) ) AS NGAY_GIO_VE FROM DU_LIEU_QUET_THE T1 WHERE (CONVERT(NVARCHAR(10),T1.NGAY,101) = CONVERT(NVARCHAR(10),'" +  dNgayCC.Date.ToString("MM/dd/yyyy") + "',101)) AND (ID_CN = "  + iIDCN.ToString() + ") AND (ISNULL(CHINH_SUA,0) = 0) ORDER BY T1.NGAY_DEN, T1.GIO_DEN, T1.NGAY_VE, T1.GIO_VE"));
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT  CONVERT(DATETIME,CONVERT(NVARCHAR(10),NGAY_DEN,101) + ' ' + CONVERT(NVARCHAR(8),GIO_DEN,108)) AS NGAY_GIO_DEN, CONVERT(DATETIME, CONVERT(NVARCHAR(10),T1.NGAY_VE,101) + ' ' +  CONVERT(NVARCHAR(8),T1.GIO_VE,108) ) AS NGAY_GIO_VE FROM DU_LIEU_QUET_THE_K T1 WHERE (CONVERT(NVARCHAR(10),T1.NGAY,101) = CONVERT(NVARCHAR(10),'" +  dNgayCC.Date.ToString("MM/dd/yyyy") + "',101)) AND (ID_CN = "  + iIDCN.ToString() + ") AND (ISNULL(CHINH_SUA,0) = 0) ORDER BY T1.NGAY_DEN, T1.GIO_DEN, T1.NGAY_VE, T1.GIO_VE"));
 
                 Commons.Modules.ObjSystems.MLoadXtraGrid(grdData, grvData, dt, false, true, false, true, true, this.Name);
                 grvData.Columns["NGAY_GIO_DEN"].DisplayFormat.FormatType = FormatType.DateTime;

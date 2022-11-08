@@ -306,7 +306,7 @@ namespace Vs.HRM
         private void ucBaoCaoTangLaoDong_Load(object sender, EventArgs e)
         {
             Commons.Modules.sLoad = "0Load";
-            Commons.Modules.ObjSystems.LoadCboDonVi(LK_DON_VI);
+            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(LK_DON_VI, Commons.Modules.ObjSystems.DataDonVi(false), "ID_DV", "TEN_DV", "TEN_DV");
 
             Commons.OSystems.SetDateEditFormat(lk_NgayIn);
             txtNam.EditValue = DateTime.Today.Year;

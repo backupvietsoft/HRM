@@ -64,7 +64,7 @@ namespace Vs.TimeAttendance
             }
         }
 
-       // private SqlConnection conn;
+        // private SqlConnection conn;
 
         public ucDiemChuyenCanThang()
         {
@@ -76,6 +76,7 @@ namespace Vs.TimeAttendance
         private void ucPhepThang_Load(object sender, EventArgs e)
         {
             Commons.Modules.sLoad = "0Load";
+            ItemForNgayCongQuyDinh.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             txtNgayCongQD.EditValue = 18;
             LoadThang();
             Commons.Modules.ObjSystems.LoadCboDonVi(cboDV);
@@ -131,14 +132,14 @@ namespace Vs.TimeAttendance
                             cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
                             cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
                             cmd.Parameters.Add("@DVi", SqlDbType.Int).Value = cboDV.EditValue;
-                            cmd.Parameters.Add("@XN", SqlDbType.Int).Value =cboXN.EditValue;
-                            cmd.Parameters.Add("@TO", SqlDbType.Int).Value =cboTo.EditValue;
+                            cmd.Parameters.Add("@XN", SqlDbType.Int).Value = cboXN.EditValue;
+                            cmd.Parameters.Add("@TO", SqlDbType.Int).Value = cboTo.EditValue;
                             cmd.Parameters.Add("@Thang", SqlDbType.Date).Value = Convert.ToDateTime(cboThang.EditValue).ToString("yyyy-MM-dd");
                             cmd.CommandType = CommandType.StoredProcedure;
                             System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
                             DataSet ds = new DataSet();
                             adp.Fill(ds);
-                            ds.Tables[0].TableName = "DiemChuyenCanThang";                        
+                            ds.Tables[0].TableName = "DiemChuyenCanThang";
                             SaveFileDialog saveFileDialog = new SaveFileDialog();
                             saveFileDialog.Filter = "Excel file (*.xlsx)|*.xlsx";
                             saveFileDialog.FilterIndex = 0;
@@ -161,7 +162,7 @@ namespace Vs.TimeAttendance
 
                         }
 
-                        
+
                         break;
                     }
                 case "tinhdiemthang":
@@ -169,7 +170,7 @@ namespace Vs.TimeAttendance
                         try
                         {
                             DataTable dt = new DataTable();
-                            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString() == "DM" ? "spTinhThuongChuyenCanThang_DM" : "spTinhDiemThang", Commons.Modules.UserName, Commons.Modules.TypeLanguage, Convert.ToInt32(cboDV.EditValue), Convert.ToInt32(cboXN.EditValue), Convert.ToInt32(cboTo.EditValue), Convert.ToInt32(txtNgayCongQD.EditValue) ,Convert.ToDateTime(cboThang.EditValue)));
+                            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString() == "DM" ? "spTinhThuongChuyenCanThang_DM" : "spTinhDiemThang", Commons.Modules.UserName, Commons.Modules.TypeLanguage, Convert.ToInt32(cboDV.EditValue), Convert.ToInt32(cboXN.EditValue), Convert.ToInt32(cboTo.EditValue), Convert.ToInt32(txtNgayCongQD.EditValue), Convert.ToDateTime(cboThang.EditValue)));
                             grdDiemThang.DataSource = dt;
                             enableButon(false);
                         }
@@ -186,7 +187,7 @@ namespace Vs.TimeAttendance
                     {
                         if (grvDiemThang.RowCount == 0)
                             return;
-                        if(Savedata() == true)
+                        if (Savedata() == true)
                         {
                             LoadThang();
                             LoadGrdDiemThang();
@@ -194,7 +195,7 @@ namespace Vs.TimeAttendance
                         enableButon(true);
                         break;
                     }
-                
+
                 case "khongghi":
                     {
                         LoadGrdDiemThang();
@@ -213,7 +214,7 @@ namespace Vs.TimeAttendance
 
         private void InExcel(DataTable dt)
         {
-          
+
         }
         private void GrvPhepThang_CustomUnboundColumnData(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnDataEventArgs e)
         {
@@ -236,7 +237,7 @@ namespace Vs.TimeAttendance
                 dt.Columns[1].ReadOnly = true;
                 dt.Columns[2].ReadOnly = true;
                 dt.Columns[3].ReadOnly = true;
-                if(grdDiemThang.DataSource == null)
+                if (grdDiemThang.DataSource == null)
                 {
                     Commons.Modules.ObjSystems.MLoadXtraGrid(grdDiemThang, grvDiemThang, dt, true, true, false, true, true, this.Name);
                     grvDiemThang.Columns["ID_CN"].Visible = false;
@@ -327,7 +328,7 @@ namespace Vs.TimeAttendance
                 DataTable dtthang = new DataTable();
                 string sSql = "SELECT disTINCT SUBSTRING(CONVERT(VARCHAR(10),THANG,103),4,2) as M, RIGHT(CONVERT(VARCHAR(10),THANG,103),4) AS Y ,RIGHT(CONVERT(VARCHAR(10),THANG,103),7) AS THANG FROM dbo.DIEM_THANG ORDER BY Y DESC , M DESC";
                 dtthang.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSql));
-                if(grdThang.DataSource == null)
+                if (grdThang.DataSource == null)
                 {
                     Commons.Modules.ObjSystems.MLoadXtraGrid(grdThang, grvThang, dtthang, false, true, true, true, true, this.Name);
                     grvThang.Columns["M"].Visible = false;
@@ -337,11 +338,11 @@ namespace Vs.TimeAttendance
                 {
                     grdThang.DataSource = dtthang;
                 }
-                
+
 
                 cboThang.Text = grvThang.GetFocusedRowCellValue("THANG").ToString();
             }
-            catch 
+            catch
             {
                 DateTime now = DateTime.Now;
 

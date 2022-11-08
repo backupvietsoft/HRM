@@ -346,9 +346,10 @@ namespace Vs.HRM
                         {
                             BAC_LUONGLookUpEdit.ErrorText = "";
                         }
-                        if((int)cboTinhTrang.EditValue != 2)
+                        
+                        if(Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT COUNT(*) FROM dbo.LUONG_CO_BAN WHERE ID_CN = "+Commons.Modules.iCongNhan+" AND ID_TT <> 2")) > 0 )
                         {
-                            XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgChuyenSangTinhTrangDaKy"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgTatCaHopDongPhaiOTinhTrangDaKy"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                             return;
                         }
                         //kiem trung

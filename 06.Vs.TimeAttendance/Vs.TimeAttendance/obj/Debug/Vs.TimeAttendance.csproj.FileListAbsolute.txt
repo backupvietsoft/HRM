@@ -2178,8 +2178,10 @@ F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\DevExpress.XtraDiagra
 F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\bin\Debug\DevExpress.Diagram.v22.1.Core.xml
 F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.TimeAttendance.csprojAssemblyReference.cache
 F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.TimeAttendance.csproj.ResolveComReference.cache
+F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.TimeAttendance.frmBaoCaoDangKyLamThem.resources
 F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.TimeAttendance.frmImportDangKyKLSP.resources
 F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.TimeAttendance.frmCapNhatNhom.resources
+F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.TimeAttendance.frmBaoCaoNgay.resources
 F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.TimeAttendance.Form.frmInKehoachdica.resources
 F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.TimeAttendance.frmLinkDuLieuChamCong1.resources
 F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.TimeAttendance.frmLinkDuLieuChamCong.resources

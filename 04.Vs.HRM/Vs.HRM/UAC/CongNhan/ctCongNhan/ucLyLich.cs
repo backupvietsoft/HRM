@@ -136,6 +136,9 @@ namespace Vs.HRM
             Commons.Modules.ObjSystems.MLoadLookUpEditN(PHAILookupEdit, dt_Phai, "ID_PHAI", "PHAI", "PHAI", "");
 
             ItemForKHU_VUC.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+            ItemForLD_TINH.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+            ItemForTRUC_TIEP_SX.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+            ItemForLAO_DONG_CONG_NHAT.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             if (Commons.Modules.ObjSystems.KyHieuDV_CN(Commons.Modules.iCongNhan) == "SB")
             {
                 // KHU_VUCLookUpEdit

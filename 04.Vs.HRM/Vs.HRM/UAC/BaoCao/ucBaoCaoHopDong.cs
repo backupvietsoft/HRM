@@ -16,7 +16,6 @@ namespace Vs.HRM
     public partial class ucBaoCaoHopDong : DevExpress.XtraEditors.XtraUserControl
     {
         private string SaveExcelFile;
-        private string sKyHieuDV = "";
         public ucBaoCaoHopDong()
         {
             InitializeComponent();
@@ -290,7 +289,7 @@ namespace Vs.HRM
                                 }
                             case "rdo_BaoCaoThamNien":
                                 {
-                                    switch (sKyHieuDV)
+                                    switch (Commons.Modules.KyHieuDV)
                                     {
                                         case "DM":
                                             {
@@ -319,9 +318,11 @@ namespace Vs.HRM
             LoadCboDonVi();
             LoadCboXiNghiep();
             LoadCboTo();
-            sKyHieuDV = Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString();
-            if (sKyHieuDV == "DM")
+            if (Commons.Modules.KyHieuDV == "DM")
             {
+                rdo_ChonBaoCao.Properties.Items.RemoveAt(7);
+                rdo_ChonBaoCao.Properties.Items.RemoveAt(6);
+                rdo_ChonBaoCao.Properties.Items.RemoveAt(5);
                 rdo_ChonBaoCao.Properties.Items.RemoveAt(4);
                 rdo_ChonBaoCao.Properties.Items.RemoveAt(3);
             }
@@ -346,7 +347,7 @@ namespace Vs.HRM
             try
             {
                 DataTable dt = new DataTable();
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboDON_VI", Commons.Modules.UserName, Commons.Modules.TypeLanguage, 1));
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboDON_VI", Commons.Modules.UserName, Commons.Modules.TypeLanguage, 0));
                 if (LK_DON_VI.Properties.DataSource == null)
                 {
                     Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(LK_DON_VI, dt, "ID_DV", "TEN_DV", "TEN_DV");

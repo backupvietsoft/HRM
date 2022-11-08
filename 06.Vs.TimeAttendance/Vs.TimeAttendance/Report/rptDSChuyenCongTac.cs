@@ -17,7 +17,7 @@ namespace Vs.Report
             Commons.Modules.ObjSystems.ThayDoiNN(this);
             xrSubreport1.ReportSource = new SubReportHeader();
 
-            lblTIEU_DE.Text = tieude;
+            
             DataTable dtNgu = new DataTable();
             dtNgu.Load(Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT KEYWORD, CASE " + Commons.Modules.TypeLanguage + " WHEN 0 THEN VIETNAM WHEN 1 THEN ENGLISH ELSE CHINESE END AS NN  FROM LANGUAGES WHERE FORM = N'NgayThangNam' "));
 
@@ -29,10 +29,9 @@ namespace Vs.Report
                 Commons.Modules.ObjSystems.GetNN(dtNgu, "Thang", "NgayThangNam") + " " + Thang.Substring(Thang.Length - 2, 2) + " " +
                 Commons.Modules.ObjSystems.GetNN(dtNgu, "Nam", "NgayThangNam") + " " + Nam.Substring(Nam.Length - 4, 4);
 
-            
             string ThangXemBC = "0" + thang.Month;
             string NamXemBC = "00" + thang.Year;
-            lblthang.Text = ThangXemBC.Substring(ThangXemBC.Length - 2, 2) + "/"
+            lblTIEU_DE.Text = tieude + " " + ThangXemBC.Substring(ThangXemBC.Length - 2, 2) + "/"
                               + NamXemBC.Substring(NamXemBC.Length - 4, 4);
 
         }

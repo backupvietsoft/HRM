@@ -11,12 +11,12 @@ using System.Linq;
 using System.Drawing;
 using DataTable = System.Data.DataTable;
 using System.Windows.Forms;
+using System.Reflection;
 
 namespace Vs.Payroll
 {
     public partial class ucBCLuongSanPham : DevExpress.XtraEditors.XtraUserControl
     {
-        private string sKyHieuDV = "";
         public ucBCLuongSanPham()
         {
             InitializeComponent();
@@ -54,25 +54,27 @@ namespace Vs.Payroll
         {
             Commons.Modules.sLoad = "0Load";
 
-            sKyHieuDV = Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString();
-            if (sKyHieuDV == "DM")
+            if (Commons.Modules.KyHieuDV == "DM")
             {
+                chkInTheoCongNhan.Visible = false;
                 rdo_ChonBaoCao.Properties.Items.RemoveAt(5);
-                rdo_ChonBaoCao.Properties.Items.RemoveAt(3);
-                rdo_ChonBaoCao.Properties.Items.RemoveAt(1);
-                rdo_ChonBaoCao.Properties.Items.RemoveAt(0);
             }
-            Commons.Modules.ObjSystems.LoadCboDonVi(LK_DON_VI);
-            Commons.Modules.ObjSystems.LoadCboXiNghiep(LK_DON_VI, LK_XI_NGHIEP);
-            Commons.Modules.ObjSystems.LoadCboTo(LK_DON_VI, LK_XI_NGHIEP, LK_TO);
-            LoadCboHopDong();
-            LoadCboMaHang();
-            //LoadCboOrder();
-            LoadCboChuyen();
+            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(LK_DON_VI, Commons.Modules.ObjSystems.DataDonVi(false), "ID_DV", "TEN_DV", "TEN_DV");
+            LoadCboXN();
+            LoadCboTo();
+            LoadChuyen();
             LoadGrvCongNhan();
-
-            lk_TuNgay.EditValue = Convert.ToDateTime("01/" + DateTime.Today.Month + "/" + DateTime.Today.Year);
-            lk_DenNgay.EditValue = Convert.ToDateTime("01/" + Convert.ToDateTime(lk_TuNgay.EditValue).AddMonths(+1).Month + "/" + Convert.ToDateTime(lk_TuNgay.EditValue).AddMonths(+1).Year).AddDays(-1);
+            grdCN.Visible = false;
+            searchControl1.Visible = false;
+            datThang.DateTime = DateTime.Now;
+            datThang.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            datThang.Properties.DisplayFormat.FormatString = "MM/yyyy";
+            datThang.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            datThang.Properties.EditFormat.FormatString = "MM/yyyy";
+            datThang.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.DateTimeAdvancingCaret;
+            datThang.Properties.Mask.EditMask = "MM/yyyy";
+            datNgayXem.DateTime = DateTime.Now;
+            Commons.OSystems.SetDateEditFormat(datNgayXem);
 
             //lk_TuNgay.EditValue = Convert.ToDateTime("01/" + DateTime.Today.Month + "/" + DateTime.Today.Year).ToString("dd/MM/yyyy");
             //DateTime dtTN = DateTime.Today;
@@ -83,98 +85,6 @@ namespace Vs.Payroll
             Commons.Modules.sLoad = "";
             rdo_ChonBaoCao_SelectedIndexChanged(null, null);
         }
-
-        private void LoadCboHopDong()
-        {
-            try
-            {
-                DataTable dtHD = new DataTable();
-                dtHD.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spBaoCaoLSP_GetCbo", 1, -1, -1, -1, -1, lk_TuNgay.EditValue, lk_DenNgay.EditValue));
-                if (LK_HOP_DONG.Properties.DataSource == null)
-                {
-                    Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(LK_HOP_DONG, dtHD, "ID_DT", "TEN_NGAN", "TEN_NGAN");
-                }
-                else
-                {
-                    LK_HOP_DONG.Properties.DataSource = dtHD;
-                }
-                LK_HOP_DONG.EditValue = -1;
-            }
-            catch (Exception ex)
-            {
-                XtraMessageBox.Show(ex.Message.ToString());
-            }
-        }
-
-        private void LoadCboMaHang()
-        {
-            try
-            {
-                DataTable dtMH = new DataTable();
-                dtMH.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spBaoCaoLSP_GetCbo", 2, -1, LK_HOP_DONG.EditValue, -1, -1, lk_TuNgay.EditValue, lk_DenNgay.EditValue));
-                if (LK_MA_HANG.Properties.DataSource == null)
-                {
-                    Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(LK_MA_HANG, dtMH, "ID_ORD", "TEN_HH", "TEN_HH");
-                }
-                else
-                {
-                    LK_MA_HANG.Properties.DataSource = dtMH;
-                }
-
-                LK_MA_HANG.EditValue = -1;
-            }
-            catch (Exception ex)
-            {
-                XtraMessageBox.Show(ex.Message.ToString());
-            }
-        }
-
-        //private void LoadCboOrder()
-        //{
-        //    try
-        //    {
-        //        DataTable dtORD = new DataTable();
-        //        dtORD.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spBaoCaoLSP_GetCbo", 3, -1, LK_HOP_DONG.EditValue, LK_MA_HANG.EditValue, -1, lk_TuNgay.EditValue, lk_DenNgay.EditValue));
-        //        if(LK_ORDER.Properties.DataSource == null)
-        //        {
-        //            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(LK_ORDER, dtORD, "ID_ORD", "ORDER_NUMBER", "ORDER_NUMBER");
-        //        }
-        //        else
-        //        {
-        //            LK_ORDER.Properties.DataSource = dtORD;
-        //        }
-
-        //        LK_ORDER.EditValue = -1;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        XtraMessageBox.Show(ex.Message.ToString());
-        //    }
-        //}
-
-        private void LoadCboChuyen()
-        {
-            try
-            {
-                DataTable dtChuyen = new DataTable();
-                dtChuyen.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spBaoCaoLSP_GetCbo", 4, -1, LK_HOP_DONG.EditValue, LK_MA_HANG.EditValue, -1, lk_TuNgay.EditValue, lk_DenNgay.EditValue));
-                if (LK_CHUYEN.Properties.DataSource == null)
-                {
-                    Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(LK_CHUYEN, dtChuyen, "ID_CHUYEN", "TEN_CHUYEN", "TEN_CHUYEN");
-                }
-                else
-                {
-                    LK_CHUYEN.Properties.DataSource = dtChuyen;
-                }
-
-                LK_CHUYEN.EditValue = -1;
-            }
-            catch (Exception ex)
-            {
-                XtraMessageBox.Show(ex.Message.ToString());
-            }
-        }
-
         private void windowsUIButton_ButtonClick(object sender, ButtonEventArgs e)
         {
             WindowsUIButton btn = e.Button as WindowsUIButton;
@@ -187,52 +97,61 @@ namespace Vs.Payroll
                         DataTable dt;
                         switch (rdo_ChonBaoCao.Properties.Items[rdo_ChonBaoCao.SelectedIndex].Tag)
                         {
-                            case "rdo_bangluongsanphamtonghop":
+                            case "rdo_bangluongsanphamtonghop": // 2
                                 {
-                                    System.Data.SqlClient.SqlConnection conn;
-                                    dt = new DataTable();
-
-                                    frm.rpt = new rptBangLSPTongHopTheoCN(lk_TuNgay.DateTime, lk_DenNgay.DateTime);
-
-                                    try
+                                    switch (Commons.Modules.KyHieuDV)
                                     {
-                                        conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
-                                        conn.Open();
+                                        case "DM":
+                                            {
+                                                LuongSPTongHopNgay();
+                                                break;
+                                            }
+                                        default:
+                                            {
+                                                System.Data.SqlClient.SqlConnection conn;
+                                                dt = new DataTable();
 
-                                        System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptBangLSPTongHopTheoCN", conn);
+                                                frm.rpt = new rptBangLSPTongHopTheoCN(datThang.DateTime, datNgayXem.DateTime);
 
-                                        cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
-                                        cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
-                                        cmd.Parameters.Add("@Dvi", SqlDbType.Int).Value = LK_DON_VI.EditValue;
-                                        cmd.Parameters.Add("@XN", SqlDbType.Int).Value = LK_XI_NGHIEP.EditValue;
-                                        cmd.Parameters.Add("@TO", SqlDbType.Int).Value = LK_TO.EditValue;
-                                        cmd.Parameters.Add("@TNgay", SqlDbType.Date).Value = lk_TuNgay.DateTime;
-                                        cmd.Parameters.Add("@DNgay", SqlDbType.Date).Value = lk_DenNgay.DateTime;
-                                        cmd.CommandType = CommandType.StoredProcedure;
-                                        System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+                                                try
+                                                {
+                                                    conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                                                    conn.Open();
 
-                                        DataSet ds = new DataSet();
-                                        adp.Fill(ds);
-                                        dt = new DataTable();
-                                        dt = ds.Tables[0].Copy();
-                                        dt.TableName = "DA_TA";
-                                        frm.AddDataSource(dt);
-                                        frm.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung());
+                                                    System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptBangLSPTongHopTheoCN", conn);
+
+                                                    cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                                                    cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                                                    cmd.Parameters.Add("@Dvi", SqlDbType.Int).Value = LK_DON_VI.EditValue;
+                                                    cmd.Parameters.Add("@XN", SqlDbType.Int).Value = LK_XI_NGHIEP.EditValue;
+                                                    cmd.Parameters.Add("@TO", SqlDbType.Int).Value = LK_TO.EditValue;
+                                                    cmd.Parameters.Add("@Ngay", SqlDbType.Date).Value = datThang.DateTime;
+                                                    cmd.CommandType = CommandType.StoredProcedure;
+                                                    System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+
+                                                    DataSet ds = new DataSet();
+                                                    adp.Fill(ds);
+                                                    dt = new DataTable();
+                                                    dt = ds.Tables[0].Copy();
+                                                    dt.TableName = "DA_TA";
+                                                    frm.AddDataSource(dt);
+                                                    frm.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung());
+                                                }
+                                                catch
+                                                { }
+                                                frm.ShowDialog();
+                                                break;
+                                            }
                                     }
-                                    catch
-                                    { }
-
-
-                                    frm.ShowDialog();
                                 }
                                 break;
-                            case "rdo_bangluongsnaphamtonghoptheoMH":
+                            case "rdo_bangluongsnaphamtonghoptheoMH": //3
                                 {
                                     System.Data.SqlClient.SqlConnection conn;
                                     dt = new DataTable();
                                     //string sTieuDe = "DANH SÁCH NHÂN VIÊN ĐI TRỄ VỀ SỚM THEO GIAI ĐOẠN";
 
-                                    frm.rpt = new rptBangLSPTheoMaHang(lk_TuNgay.DateTime, lk_DenNgay.DateTime);
+                                    frm.rpt = new rptBangLSPTheoMaHang(datThang.DateTime, datNgayXem.DateTime);
 
                                     try
                                     {
@@ -246,12 +165,9 @@ namespace Vs.Payroll
                                         cmd.Parameters.Add("@Dvi", SqlDbType.Int).Value = LK_DON_VI.EditValue;
                                         cmd.Parameters.Add("@XN", SqlDbType.Int).Value = LK_XI_NGHIEP.EditValue;
                                         cmd.Parameters.Add("@TO", SqlDbType.Int).Value = LK_TO.EditValue;
-                                        cmd.Parameters.Add("@DH", SqlDbType.Int).Value = LK_HOP_DONG.EditValue;
                                         cmd.Parameters.Add("@MH", SqlDbType.Int).Value = -1;
-                                        cmd.Parameters.Add("@ORD", SqlDbType.Int).Value = LK_MA_HANG.EditValue;
                                         cmd.Parameters.Add("@CHUYEN", SqlDbType.Int).Value = LK_CHUYEN.EditValue;
-                                        cmd.Parameters.Add("@TNgay", SqlDbType.Date).Value = lk_TuNgay.DateTime;
-                                        cmd.Parameters.Add("@DNgay", SqlDbType.Date).Value = lk_DenNgay.DateTime;
+                                        cmd.Parameters.Add("@Ngay", SqlDbType.Date).Value = datThang.DateTime;
                                         cmd.CommandType = CommandType.StoredProcedure;
                                         System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
 
@@ -270,10 +186,15 @@ namespace Vs.Payroll
                                     frm.ShowDialog();
                                 }
                                 break;
-                            case "rdo_luongspcanhan":
+                            case "rdo_luongspcanhan": //0
                                 {
-
                                     DataTable dt1 = Commons.Modules.ObjSystems.ConvertDatatable(grdCN);
+                                    dt1.Columns["CHON"].ReadOnly = false;
+                                    if (chkInTheoCongNhan.Checked == false)
+                                    {
+                                        dt1.AsEnumerable().ToList<DataRow>().ForEach(r => r["CHON"] = true);
+                                    }
+
                                     if (dt1.AsEnumerable().Count(x => Convert.ToBoolean(x["CHON"]) == true) == 0)
                                     {
                                         XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgChuaChonCongNhan"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -300,12 +221,8 @@ namespace Vs.Payroll
                                         cmd.Parameters.Add("@Dvi", SqlDbType.Int).Value = LK_DON_VI.EditValue;
                                         cmd.Parameters.Add("@XN", SqlDbType.Int).Value = LK_XI_NGHIEP.EditValue;
                                         cmd.Parameters.Add("@TO", SqlDbType.Int).Value = LK_TO.EditValue;
-                                        cmd.Parameters.Add("@DH", SqlDbType.Int).Value = LK_HOP_DONG.EditValue;
-                                        cmd.Parameters.Add("@MH", SqlDbType.Int).Value = -1;
-                                        cmd.Parameters.Add("@ORD", SqlDbType.Int).Value = LK_MA_HANG.EditValue;
                                         cmd.Parameters.Add("@CHUYEN", SqlDbType.Int).Value = LK_CHUYEN.EditValue;
-                                        cmd.Parameters.Add("@TNgay", SqlDbType.Date).Value = Convert.ToDateTime(lk_TuNgay.EditValue);
-                                        cmd.Parameters.Add("@DNgay", SqlDbType.Date).Value = Convert.ToDateTime(lk_DenNgay.EditValue);
+                                        cmd.Parameters.Add("@Ngay", SqlDbType.Date).Value = datThang.DateTime;
                                         cmd.Parameters.Add("@sBT", SqlDbType.NVarChar).Value = sBT;
                                         cmd.CommandType = CommandType.StoredProcedure;
                                         System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
@@ -313,6 +230,11 @@ namespace Vs.Payroll
                                         adp.Fill(ds);
                                         dtChuyen = new DataTable();
                                         dtChuyen = ds.Tables[0].Copy();
+                                        if (dtChuyen.Rows.Count == 0)
+                                        {
+                                            XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgKhongCoDuLieuIn"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                            return;
+                                        }
                                         Microsoft.Office.Interop.Excel.Application oApp;
                                         Microsoft.Office.Interop.Excel.Workbook oBook;
                                         Microsoft.Office.Interop.Excel.Worksheet oSheet;
@@ -357,7 +279,7 @@ namespace Vs.Payroll
                                                 row4_TieuDe_BaoCao.Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
                                                 row4_TieuDe_BaoCao.Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
                                                 row4_TieuDe_BaoCao.RowHeight = 30;
-                                                row4_TieuDe_BaoCao.Value2 = "BẢNG KÊ SẢN LƯỢNG THÁNG " + Convert.ToDateTime(lk_TuNgay.EditValue).ToString("MM/yyyy");
+                                                row4_TieuDe_BaoCao.Value2 = "BẢNG KÊ SẢN LƯỢNG THÁNG " + Convert.ToDateTime(datThang.EditValue).ToString("MM/yyyy");
 
                                                 //Microsoft.Office.Interop.Excel.Range row5_TieuDe_BaoCao = oSheet.get_Range("A5", "M5");
                                                 //row5_TieuDe_BaoCao.Merge();
@@ -390,12 +312,8 @@ namespace Vs.Payroll
                                             cmdCT.Parameters.Add("@Dvi", SqlDbType.Int).Value = LK_DON_VI.EditValue;
                                             cmdCT.Parameters.Add("@XN", SqlDbType.Int).Value = LK_XI_NGHIEP.EditValue;
                                             cmdCT.Parameters.Add("@TO", SqlDbType.Int).Value = LK_TO.EditValue;
-                                            cmdCT.Parameters.Add("@DH", SqlDbType.Int).Value = LK_HOP_DONG.EditValue;
-                                            cmdCT.Parameters.Add("@MH", SqlDbType.Int).Value = LK_MA_HANG.EditValue;
-                                            cmdCT.Parameters.Add("@ORD", SqlDbType.Int).Value = -1;
                                             cmdCT.Parameters.Add("@CHUYEN", SqlDbType.Int).Value = rowC[0];
-                                            cmdCT.Parameters.Add("@TNgay", SqlDbType.Date).Value = Convert.ToDateTime(lk_TuNgay.EditValue);
-                                            cmdCT.Parameters.Add("@DNgay", SqlDbType.Date).Value = Convert.ToDateTime(lk_DenNgay.EditValue);
+                                            cmdCT.Parameters.Add("@Ngay", SqlDbType.Date).Value = datThang.DateTime;
                                             cmdCT.Parameters.Add("@sBT", SqlDbType.NVarChar).Value = sBT;
                                             cmdCT.CommandType = CommandType.StoredProcedure;
                                             System.Data.SqlClient.SqlDataAdapter adpCT = new System.Data.SqlClient.SqlDataAdapter(cmdCT);
@@ -505,6 +423,8 @@ namespace Vs.Payroll
                                         oApp.Visible = true;
                                         this.Cursor = Cursors.Default;
                                         Commons.Modules.ObjSystems.XoaTable(sBT);
+
+                                        oApp.UserControl = true;
                                     }
                                     catch (Exception ex)
                                     {
@@ -514,17 +434,24 @@ namespace Vs.Payroll
                                     }
                                 }
                                 break;
-                            case "rdo_luongspchitiet":
+                            case "rdo_luongspchitiet": // 4
                                 {
                                     try
                                     {
-                                        int idCN = -1;
-
-                                        if (chkInTheoCongNhan.Checked)
+                                        DataTable dt1 = Commons.Modules.ObjSystems.ConvertDatatable(grdCN);
+                                        dt1.Columns["CHON"].ReadOnly = false;
+                                        if (chkInTheoCongNhan.Checked == false)
                                         {
-                                            idCN = Convert.ToInt32(grvCN.GetFocusedRowCellValue("ID_CN"));
+                                            dt1.AsEnumerable().ToList<DataRow>().ForEach(r => r["CHON"] = true);
                                         }
 
+                                        if (dt1.AsEnumerable().Count(x => Convert.ToBoolean(x["CHON"]) == true) == 0)
+                                        {
+                                            XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgChuaChonCongNhan"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                            return;
+                                        }
+                                        string sBT = "rptGetLSP" + Commons.Modules.iIDUser;
+                                        Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBT, Commons.Modules.ObjSystems.ConvertDatatable(grdCN), "");
                                         System.Data.SqlClient.SqlConnection conn;
                                         conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
                                         conn.Open();
@@ -541,13 +468,9 @@ namespace Vs.Payroll
                                         cmd.Parameters.Add("@Dvi", SqlDbType.Int).Value = LK_DON_VI.EditValue;
                                         cmd.Parameters.Add("@XN", SqlDbType.Int).Value = LK_XI_NGHIEP.EditValue;
                                         cmd.Parameters.Add("@TO", SqlDbType.Int).Value = LK_TO.EditValue;
-                                        cmd.Parameters.Add("@CN", SqlDbType.Int).Value = idCN;
-                                        cmd.Parameters.Add("@DH", SqlDbType.Int).Value = LK_HOP_DONG.EditValue;
-                                        cmd.Parameters.Add("@MH", SqlDbType.Int).Value = -1;
-                                        cmd.Parameters.Add("@ORD", SqlDbType.Int).Value = LK_MA_HANG.EditValue;
                                         cmd.Parameters.Add("@CHUYEN", SqlDbType.Int).Value = LK_CHUYEN.EditValue;
-                                        cmd.Parameters.Add("@TNgay", SqlDbType.Date).Value = Convert.ToDateTime(lk_TuNgay.EditValue);
-                                        cmd.Parameters.Add("@DNgay", SqlDbType.Date).Value = Convert.ToDateTime(lk_DenNgay.EditValue);
+                                        cmd.Parameters.Add("@Ngay", SqlDbType.Date).Value = datThang.DateTime;
+                                        cmd.Parameters.Add("@sBT", SqlDbType.NVarChar).Value = sBT;
                                         cmd.CommandType = CommandType.StoredProcedure;
                                         System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
 
@@ -611,7 +534,7 @@ namespace Vs.Payroll
                                                 row5_TieuDe_BaoCao.Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
                                                 row5_TieuDe_BaoCao.Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
                                                 row5_TieuDe_BaoCao.RowHeight = 20;
-                                                row5_TieuDe_BaoCao.Value2 = "Từ ngày " + Convert.ToDateTime(lk_TuNgay.EditValue).ToString("dd/MM/yyyy") + " đến ngày " + Convert.ToDateTime(lk_DenNgay.EditValue).ToString("dd/MM/yyyy");
+                                                row5_TieuDe_BaoCao.Value2 = "Từ ngày " + Convert.ToDateTime(datThang.EditValue).ToString("dd/MM/yyyy") + " đến ngày " + Convert.ToDateTime(datNgayXem.EditValue).ToString("dd/MM/yyyy");
 
                                                 oRow = 7;
                                             }
@@ -634,13 +557,10 @@ namespace Vs.Payroll
                                             cmdCT.Parameters.Add("@Dvi", SqlDbType.Int).Value = LK_DON_VI.EditValue;
                                             cmdCT.Parameters.Add("@XN", SqlDbType.Int).Value = LK_XI_NGHIEP.EditValue;
                                             cmdCT.Parameters.Add("@TO", SqlDbType.Int).Value = LK_TO.EditValue;
-                                            cmdCT.Parameters.Add("@CN", SqlDbType.Int).Value = idCN;
-                                            cmdCT.Parameters.Add("@DH", SqlDbType.Int).Value = LK_HOP_DONG.EditValue;
-                                            cmdCT.Parameters.Add("@MH", SqlDbType.Int).Value = -1;
-                                            cmdCT.Parameters.Add("@ORD", SqlDbType.Int).Value = LK_MA_HANG.EditValue;
                                             cmdCT.Parameters.Add("@CHUYEN", SqlDbType.Int).Value = rowC[0];
-                                            cmdCT.Parameters.Add("@TNgay", SqlDbType.Date).Value = Convert.ToDateTime(lk_TuNgay.EditValue);
-                                            cmdCT.Parameters.Add("@DNgay", SqlDbType.Date).Value = Convert.ToDateTime(lk_DenNgay.EditValue);
+                                            cmdCT.Parameters.Add("@Ngay", SqlDbType.Date).Value = datThang.DateTime;
+                                            cmdCT.Parameters.Add("@sBT", SqlDbType.NVarChar).Value = sBT;
+
                                             cmdCT.CommandType = CommandType.StoredProcedure;
                                             System.Data.SqlClient.SqlDataAdapter adpCT = new System.Data.SqlClient.SqlDataAdapter(cmdCT);
 
@@ -794,9 +714,15 @@ namespace Vs.Payroll
                                     }
                                 }
                                 break;
-                            case "rdo_luongspchitietcanhan":
+                            case "rdo_luongspchitietcanhan": // 1
                                 {
                                     DataTable dt1 = Commons.Modules.ObjSystems.ConvertDatatable(grdCN);
+                                    dt1.Columns["CHON"].ReadOnly = false;
+                                    if (chkInTheoCongNhan.Checked == false)
+                                    {
+                                        dt1.AsEnumerable().ToList<DataRow>().ForEach(r => r["CHON"] = true);
+                                    }
+
                                     if (dt1.AsEnumerable().Count(x => Convert.ToBoolean(x["CHON"]) == true) == 0)
                                     {
                                         XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgChuaChonCongNhan"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -822,12 +748,8 @@ namespace Vs.Payroll
                                         cmd.Parameters.Add("@Dvi", SqlDbType.Int).Value = LK_DON_VI.EditValue;
                                         cmd.Parameters.Add("@XN", SqlDbType.Int).Value = LK_XI_NGHIEP.EditValue;
                                         cmd.Parameters.Add("@TO", SqlDbType.Int).Value = LK_TO.EditValue;
-                                        cmd.Parameters.Add("@DH", SqlDbType.Int).Value = LK_HOP_DONG.EditValue;
-                                        cmd.Parameters.Add("@MH", SqlDbType.Int).Value = -1;
-                                        cmd.Parameters.Add("@ORD", SqlDbType.Int).Value = LK_MA_HANG.EditValue;
                                         cmd.Parameters.Add("@CHUYEN", SqlDbType.Int).Value = LK_CHUYEN.EditValue;
-                                        cmd.Parameters.Add("@TNgay", SqlDbType.Date).Value = Convert.ToDateTime(lk_TuNgay.EditValue);
-                                        cmd.Parameters.Add("@DNgay", SqlDbType.Date).Value = Convert.ToDateTime(lk_DenNgay.EditValue);
+                                        cmd.Parameters.Add("@Ngay", SqlDbType.Date).Value = datThang.DateTime;
                                         cmd.Parameters.Add("@sBT", SqlDbType.NVarChar).Value = sBT;
                                         cmd.CommandType = CommandType.StoredProcedure;
                                         System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
@@ -836,7 +758,11 @@ namespace Vs.Payroll
                                         adp.Fill(ds);
                                         dtChuyen = new DataTable();
                                         dtChuyen = ds.Tables[0].Copy();
-
+                                        if (dtChuyen.Rows.Count == 0)
+                                        {
+                                            XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgKhongCoDuLieuIn"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                            return;
+                                        }
                                         Microsoft.Office.Interop.Excel.Application oApp;
                                         Microsoft.Office.Interop.Excel.Workbook oBook;
                                         Microsoft.Office.Interop.Excel.Worksheet oSheet;
@@ -892,7 +818,7 @@ namespace Vs.Payroll
                                                 row5_TieuDe_BaoCao.Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
                                                 row5_TieuDe_BaoCao.Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
                                                 row5_TieuDe_BaoCao.RowHeight = 20;
-                                                row5_TieuDe_BaoCao.Value2 = "Từ ngày " + Convert.ToDateTime(lk_TuNgay.EditValue).ToString("dd/MM/yyyy") + " đến ngày " + Convert.ToDateTime(lk_DenNgay.EditValue).ToString("dd/MM/yyyy");
+                                                row5_TieuDe_BaoCao.Value2 = "Từ ngày " + Convert.ToDateTime(datThang.EditValue).ToString("dd/MM/yyyy") + " đến ngày " + Convert.ToDateTime(datNgayXem.EditValue).ToString("dd/MM/yyyy");
 
                                                 oRow = 7;
                                             }
@@ -909,18 +835,14 @@ namespace Vs.Payroll
 
                                             oRow++;
 
-                                            System.Data.SqlClient.SqlCommand cmdCT = new System.Data.SqlClient.SqlCommand("rptBangLSPTongHopMHTheoCN_DM", conn);
+                                            System.Data.SqlClient.SqlCommand cmdCT = new System.Data.SqlClient.SqlCommand("rptBangLSPChiTietMHCNTheoChuyen", conn);
                                             cmdCT.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
                                             cmdCT.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
                                             cmdCT.Parameters.Add("@Dvi", SqlDbType.Int).Value = LK_DON_VI.EditValue;
                                             cmdCT.Parameters.Add("@XN", SqlDbType.Int).Value = LK_XI_NGHIEP.EditValue;
                                             cmdCT.Parameters.Add("@TO", SqlDbType.Int).Value = LK_TO.EditValue;
-                                            cmdCT.Parameters.Add("@DH", SqlDbType.Int).Value = LK_HOP_DONG.EditValue;
-                                            cmdCT.Parameters.Add("@MH", SqlDbType.Int).Value = LK_MA_HANG.EditValue;
-                                            cmdCT.Parameters.Add("@ORD", SqlDbType.Int).Value = -1;
                                             cmdCT.Parameters.Add("@CHUYEN", SqlDbType.Int).Value = rowC[0];
-                                            cmdCT.Parameters.Add("@TNgay", SqlDbType.Date).Value = Convert.ToDateTime(lk_TuNgay.EditValue);
-                                            cmdCT.Parameters.Add("@DNgay", SqlDbType.Date).Value = Convert.ToDateTime(lk_DenNgay.EditValue);
+                                            cmdCT.Parameters.Add("@Ngay", SqlDbType.Date).Value = datThang.DateTime;
                                             cmdCT.Parameters.Add("@sBT", SqlDbType.NVarChar).Value = sBT;
                                             cmdCT.CommandType = CommandType.StoredProcedure;
                                             System.Data.SqlClient.SqlDataAdapter adpCT = new System.Data.SqlClient.SqlDataAdapter(cmdCT);
@@ -1049,12 +971,12 @@ namespace Vs.Payroll
                                     // frm.ShowDialog();
                                 }
                                 break;
-                            case "rdo_bangtonghopluongmahang":
+                            case "rdo_bangtonghopluongmahang": // 5
                                 {
                                     System.Data.SqlClient.SqlConnection conn;
                                     dt = new DataTable();
 
-                                    frm.rpt = new rptBangTongHopLuongMaHang(lk_TuNgay.DateTime, lk_DenNgay.DateTime, lk_NgayIn.DateTime);
+                                    frm.rpt = new rptBangTongHopLuongMaHang(datThang.DateTime, datNgayXem.DateTime, lk_NgayIn.DateTime);
 
                                     try
                                     {
@@ -1071,12 +993,8 @@ namespace Vs.Payroll
 
                                         cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
                                         cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
-                                        cmd.Parameters.Add("@DH", SqlDbType.Int).Value = LK_HOP_DONG.EditValue;
-                                        cmd.Parameters.Add("@MH", SqlDbType.Int).Value = -1;
-                                        cmd.Parameters.Add("@ORD", SqlDbType.Int).Value = LK_MA_HANG.EditValue;
                                         cmd.Parameters.Add("@CHUYEN", SqlDbType.Int).Value = LK_CHUYEN.EditValue;
-                                        cmd.Parameters.Add("@TNgay", SqlDbType.Date).Value = lk_TuNgay.DateTime;
-                                        cmd.Parameters.Add("@DNgay", SqlDbType.Date).Value = lk_DenNgay.DateTime;
+                                        cmd.Parameters.Add("@Ngay", SqlDbType.Date).Value = datThang.DateTime;
                                         cmd.CommandType = CommandType.StoredProcedure;
                                         System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
 
@@ -1176,15 +1094,16 @@ namespace Vs.Payroll
         private void LK_DON_VI_EditValueChanged(object sender, EventArgs e)
         {
             if (Commons.Modules.sLoad == "0Load") return;
-            Commons.Modules.ObjSystems.LoadCboXiNghiep(LK_DON_VI, LK_XI_NGHIEP);
-            Commons.Modules.ObjSystems.LoadCboTo(LK_DON_VI, LK_XI_NGHIEP, LK_TO);
+            LoadCboXN();
+            LoadCboTo();
+            LoadChuyen();
             LoadGrvCongNhan();
         }
 
         private void LK_XI_NGHIEP_EditValueChanged(object sender, EventArgs e)
         {
             if (Commons.Modules.sLoad == "0Load") return;
-            Commons.Modules.ObjSystems.LoadCboTo(LK_DON_VI, LK_XI_NGHIEP, LK_TO);
+            LoadCboTo();
             LoadGrvCongNhan();
         }
 
@@ -1194,86 +1113,483 @@ namespace Vs.Payroll
             LoadGrvCongNhan();
         }
 
-        private void lk_TuNgay_EditValueChanged(object sender, EventArgs e)
-        {
-            if (Commons.Modules.sLoad == "0Load") return;
-            LoadCboHopDong();
-            LoadCboMaHang();
-            //LoadCboOrder();
-            LoadCboChuyen();
-        }
-
-        private void lk_DenNgay_EditValueChanged(object sender, EventArgs e)
-        {
-            if (Commons.Modules.sLoad == "0Load") return;
-            LoadCboHopDong();
-            LoadCboMaHang();
-            //LoadCboOrder();
-            LoadCboChuyen();
-        }
-
-        private void LK_HOP_DONG_EditValueChanged(object sender, EventArgs e)
-        {
-            if (Commons.Modules.sLoad == "0Load") return;
-            LoadCboMaHang();
-            //LoadCboOrder();
-            LoadCboChuyen();
-        }
-
-        private void LK_MA_HANG_EditValueChanged(object sender, EventArgs e)
-        {
-            if (Commons.Modules.sLoad == "0Load") return;
-            //LoadCboOrder();
-            LoadCboChuyen();
-        }
-
-        private void LK_ORDER_EditValueChanged(object sender, EventArgs e)
-        {
-            if (Commons.Modules.sLoad == "0Load") return;
-            LoadCboChuyen();
-        }
-
         private void rdo_ChonBaoCao_SelectedIndexChanged(object sender, EventArgs e)
         {
             switch (rdo_ChonBaoCao.Properties.Items[rdo_ChonBaoCao.SelectedIndex].Tag)
             {
                 case "rdo_bangluongsanphamtonghop":
                     {
-                        chkInTheoCongNhan.Visible = false;
-                        grdCN.Visible = false;
+                        lblNgayXem.Enabled = true;
+                        datNgayXem.Enabled = true;
+
+                        lbThang.Enabled = false;
+                        datThang.Enabled = false;
                     }
                     break;
-                case "rdo_bangluongsnaphamtonghoptheoMH":
+                default:
                     {
-                        chkInTheoCongNhan.Visible = false;
-                        grdCN.Visible = false;
+                        lblNgayXem.Enabled = false;
+                        datNgayXem.Enabled = false;
+
+                        lbThang.Enabled = true;
+                        datThang.Enabled = true;
+                        break;
                     }
-                    break;
-                case "rdo_luongspcanhan":
-                    {
-                        chkInTheoCongNhan.Visible = false;
-                        grdCN.Visible = true;
-                    }
-                    break;
-                case "rdo_luongspchitiet":
-                    {
-                        chkInTheoCongNhan.Visible = false;
-                        grdCN.Visible = true;
-                    }
-                    break;
-                case "rdo_luongspchitietcanhan":
-                    {
-                        chkInTheoCongNhan.Visible = false;
-                        grdCN.Visible = true;
-                    }
-                    break;
-                case "rdo_bangtonghopluongmahang":
-                    {
-                        chkInTheoCongNhan.Visible = false;
-                        grdCN.Visible = false;
-                    }
-                    break;
             }
+        }
+
+        private void chkInTheoCongNhan_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkInTheoCongNhan.Checked == true)
+            {
+                grdCN.Visible = true;
+                searchControl1.Visible = true;
+            }
+            else
+            {
+                grdCN.Visible = false;
+                searchControl1.Visible = false;
+            }
+        }
+        private void LoadCboTo()
+        {
+            try
+            {
+                DataTable dt = new DataTable();
+                string sSQL = "SELECT T.ID_TO, T.TEN_TO  FROM (SELECT T2.ID_TO, T2.TEN_TO, T2.STT_TO FROM(SELECT ID_TO, TEN_TO, STT_TO FROM dbo.MGetToUser('" + Commons.Modules.UserName + "', " + Commons.Modules.TypeLanguage + ") WHERE ID_LOAI_CHUYEN IN(1, 2, 3, 4, 5, 6, 7) AND(ID_DV = " + LK_DON_VI.EditValue + " OR " + LK_DON_VI.EditValue + " = -1) AND(ID_XN = " + LK_XI_NGHIEP.EditValue + " OR " + LK_XI_NGHIEP.EditValue + " = -1)) T2 UNION SELECT - 1, '< All >', -1) T ORDER BY STT_TO";
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSQL));
+                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(LK_TO, dt, "ID_TO", "TEN_TO", "TEN_TO");
+            }
+            catch (Exception ex) { }
+        }
+        private void LoadCboXN()
+        {
+            try
+            {
+                DataTable dt = new DataTable();
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT  T.ID_XN,T.TEN_XN FROM (SELECT  DISTINCT  STT_DV, STT_XN, ID_XN, TEN_XN  AS TEN_XN  FROM dbo.MGetToUser('" + Commons.Modules.UserName + "', " + Commons.Modules.TypeLanguage + ") WHERE (ID_DV = " + LK_DON_VI.EditValue + " OR " + LK_DON_VI.EditValue + " = -1) AND ID_LOAI_CHUYEN IN(1, 2, 3, 4, 5, 6, 7) UNION SELECT - 1, -1, -1, '< All >') T ORDER BY T.STT_DV, T.STT_XN"));
+                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(LK_XI_NGHIEP, dt, "ID_XN", "TEN_XN", "TEN_XN");
+            }
+            catch { }
+        }
+        private void LoadChuyen()
+        {
+            try
+            {
+                string sSql = "SELECT T.ID_TO, T.TEN_TO FROM (SELECT [TO].ID_TO, [TO].TEN_TO, [TO].STT_TO FROM dbo.[TO] INNER JOIN dbo.XI_NGHIEP XN ON XN.ID_XN = [TO].ID_XN WHERE [TO].ID_LOAI_CHUYEN IN (1,2,3,4,5,6,7) AND (XN.ID_DV = " + LK_DON_VI.EditValue + " OR " + LK_DON_VI.EditValue + " = -1) UNION SELECT -1, ' < All > ', -1) T ORDER BY T.STT_TO";
+                DataTable dt = new DataTable();
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSql));
+                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(LK_CHUYEN, dt, "ID_TO", "TEN_TO", "TEN_TO");
+            }
+            catch { }
+        }
+        private void LuongSPTongHopNgay()
+        {
+            try
+            {
+                this.Cursor = Cursors.WaitCursor;
+                Commons.Modules.ObjSystems.ShowWaitForm(this);
+
+                System.Data.SqlClient.SqlConnection conn;
+                conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                conn.Open();
+                DataTable dtBCThang;
+
+                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptLuongSPTongHopNgay", conn);
+
+                cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                cmd.Parameters.Add("@DVi", SqlDbType.Int).Value = LK_DON_VI.EditValue;
+                cmd.Parameters.Add("@XN", SqlDbType.Int).Value = LK_XI_NGHIEP.EditValue;
+                cmd.Parameters.Add("@TO", SqlDbType.Int).Value = LK_TO.EditValue;
+                cmd.Parameters.Add("@CHUYEN", SqlDbType.Int).Value = LK_CHUYEN.EditValue;
+                cmd.Parameters.Add("@Ngay", SqlDbType.DateTime).Value = datNgayXem.DateTime;
+                cmd.CommandType = CommandType.StoredProcedure;
+                System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+
+                DataSet ds = new DataSet();
+                adp.Fill(ds);
+                dtBCThang = new DataTable();
+                dtBCThang = ds.Tables[0].Copy();
+                if (dtBCThang.Rows.Count == 0)
+                {
+                    XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgKhongCoDuLieuIn"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.Cursor = Cursors.Default;
+                    return;
+                }
+
+                Microsoft.Office.Interop.Excel.Application oXL;
+                Microsoft.Office.Interop.Excel.Workbook oWB;
+                Excel.Worksheet oSheet;
+                oXL = new Microsoft.Office.Interop.Excel.Application();
+                oXL.Visible = false;
+
+                oWB = (Microsoft.Office.Interop.Excel.Workbook)(oXL.Workbooks.Add(Missing.Value));
+                oSheet = (Excel.Worksheet)oWB.ActiveSheet;
+
+                string fontName = "Times New Roman";
+                int fontSizeTieuDe = 10;
+                int fontSizeNoiDung = 10;
+
+                int lastColumn = 0;
+                lastColumn = dtBCThang.Columns.Count;
+
+                TaoTTChung(oSheet, 1, 2, 1, 7, 0, 0);
+
+                Range row2_TieuDe_BaoCao = oSheet.Range[oSheet.Cells[5, 1], oSheet.Cells[5, lastColumn]];
+                row2_TieuDe_BaoCao.Merge();
+                row2_TieuDe_BaoCao.Font.Size = 16;
+                row2_TieuDe_BaoCao.Font.Name = fontName;
+                row2_TieuDe_BaoCao.Font.FontStyle = "Bold";
+                row2_TieuDe_BaoCao.Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                row2_TieuDe_BaoCao.Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+                row2_TieuDe_BaoCao.RowHeight = 20;
+                row2_TieuDe_BaoCao.Value2 = "BẢNG THỐNG KÊ TIỀN LƯƠNG SẢN PHẨM NGÀY " + Convert.ToDateTime(datNgayXem.EditValue).ToString("dd/MM/yyyy") + "";
+
+
+                Range row4_TieuDe_Format = oSheet.Range[oSheet.Cells[7, 1], oSheet.Cells[7, lastColumn]];
+                row4_TieuDe_Format.Font.Size = fontSizeTieuDe;
+                row4_TieuDe_Format.Font.Name = fontName;
+                row4_TieuDe_Format.Font.Bold = true;
+                row4_TieuDe_Format.WrapText = true;
+                row4_TieuDe_Format.NumberFormat = "@";
+                row4_TieuDe_Format.Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                row4_TieuDe_Format.Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+                row4_TieuDe_Format.Interior.Color = Color.FromArgb(255, 242, 204);
+
+                Range row4_TieuDe_TTNV = oSheet.Range[oSheet.Cells[7, 1], oSheet.Cells[7, 1]];
+                row4_TieuDe_TTNV.Value2 = "STT";
+                row4_TieuDe_TTNV.ColumnWidth = 10;
+
+                Range row4_TieuDe_TTC = oSheet.Range[oSheet.Cells[7, 2], oSheet.Cells[7, 2]];
+                row4_TieuDe_TTC.Value2 = "Mã nhân viên";
+                row4_TieuDe_TTC.ColumnWidth = 11;
+
+                row4_TieuDe_TTC = oSheet.Range[oSheet.Cells[7, 3], oSheet.Cells[7, 3]];
+                row4_TieuDe_TTC.Value2 = "Họ tên";
+                row4_TieuDe_TTC.ColumnWidth = 20;
+
+
+                row4_TieuDe_TTC = oSheet.Range[oSheet.Cells[7, 4], oSheet.Cells[7, 4]];
+                row4_TieuDe_TTC.Value2 = "Bộ phận";
+                row4_TieuDe_TTC.ColumnWidth = 35;
+
+                row4_TieuDe_TTC = oSheet.Range[oSheet.Cells[7, 5], oSheet.Cells[7, 5]];
+                row4_TieuDe_TTC.Value2 = "Tiền lương sản phẩm";
+                row4_TieuDe_TTC.ColumnWidth = 15;
+
+                row4_TieuDe_TTC = oSheet.Range[oSheet.Cells[7, 6], oSheet.Cells[7, 6]];
+                row4_TieuDe_TTC.Value2 = "Số giờ thực tế";
+                row4_TieuDe_TTC.ColumnWidth = 15;
+
+                row4_TieuDe_TTC = oSheet.Range[oSheet.Cells[7, 7], oSheet.Cells[7, 7]];
+                row4_TieuDe_TTC.Value2 = "Lương SP bình quân 1 giờ";
+                row4_TieuDe_TTC.ColumnWidth = 15;
+
+                row4_TieuDe_TTC = oSheet.Range[oSheet.Cells[7, 8], oSheet.Cells[7, 8]];
+                row4_TieuDe_TTC.Value2 = "Lương ngày theo giờ HC";
+                row4_TieuDe_TTC.ColumnWidth = 15;
+
+                row4_TieuDe_TTC = oSheet.Range[oSheet.Cells[7, 9], oSheet.Cells[7, 9]];
+                row4_TieuDe_TTC.Value2 = "Summary theo ngày";
+                row4_TieuDe_TTC.ColumnWidth = 15;
+
+                DataRow[] dr = dtBCThang.Select();
+                string[,] rowData = new string[dr.Count(), dtBCThang.Columns.Count];
+
+                int rowCnt = 0;
+                foreach (DataRow row in dr)
+                {
+                    for (int col_bd = 0; col_bd < dtBCThang.Columns.Count; col_bd++)
+                    {
+                        rowData[rowCnt, col_bd] = row[col_bd].ToString();
+                    }
+                    rowCnt++;
+                }
+                rowCnt = rowCnt + 7;
+                oSheet.Range[oSheet.Cells[8, 1], oSheet.Cells[rowCnt, lastColumn]].Value2 = rowData;
+
+                rowCnt++;
+                Microsoft.Office.Interop.Excel.Range formatRange;
+                formatRange = oSheet.Range[oSheet.Cells[rowCnt, 1], oSheet.Cells[rowCnt, 3]];
+                formatRange.Merge();
+                formatRange.Value2 = "Tổng";
+                formatRange.Font.Bold = true;
+                formatRange.Font.Name = fontName;
+                formatRange.Font.Size = 10;
+
+
+                formatRange = oSheet.Range[oSheet.Cells[8, 5], oSheet.Cells[rowCnt, 5]];
+                formatRange.NumberFormat = "#,##0;(#,##0); ; ";
+                try
+                {
+                    formatRange.TextToColumns(Type.Missing, Microsoft.Office.Interop.Excel.XlTextParsingType.xlDelimited, Microsoft.Office.Interop.Excel.XlTextQualifier.xlTextQualifierDoubleQuote);
+                }
+                catch { }
+
+                formatRange = oSheet.Range[oSheet.Cells[8, 6], oSheet.Cells[rowCnt, 6]];
+                formatRange.NumberFormat = "#,##0.0;(#,##0.0); ; ";
+                try
+                {
+                    formatRange.TextToColumns(Type.Missing, Microsoft.Office.Interop.Excel.XlTextParsingType.xlDelimited, Microsoft.Office.Interop.Excel.XlTextQualifier.xlTextQualifierDoubleQuote);
+                }
+                catch { }
+
+                formatRange = oSheet.Range[oSheet.Cells[8, 7], oSheet.Cells[rowCnt, 7]];
+                formatRange.NumberFormat = "#,##0;(#,##0); ; ";
+                try
+                {
+                    formatRange.TextToColumns(Type.Missing, Microsoft.Office.Interop.Excel.XlTextParsingType.xlDelimited, Microsoft.Office.Interop.Excel.XlTextQualifier.xlTextQualifierDoubleQuote);
+                }
+                catch { }
+
+                formatRange = oSheet.Range[oSheet.Cells[8, 8], oSheet.Cells[rowCnt, 8]];
+                formatRange.NumberFormat = "#,##0;(#,##0); ; ";
+                try
+                {
+                    formatRange.TextToColumns(Type.Missing, Microsoft.Office.Interop.Excel.XlTextParsingType.xlDelimited, Microsoft.Office.Interop.Excel.XlTextQualifier.xlTextQualifierDoubleQuote);
+                }
+                catch { }
+
+                dtBCThang = new DataTable();
+                dtBCThang = ds.Tables[1].Copy();
+                string sLCBNgay = dtBCThang.Rows[0][0].ToString();
+
+                for (int i = 0; i < rowCnt - 8; i++)
+                {
+                    formatRange = oSheet.Range[oSheet.Cells[(i + 8), 7], oSheet.Cells[(i + 8), 7]];
+                    formatRange.Value = "=IFERROR(" + CellAddress(oSheet, (i + 8), 5) + "/" + CellAddress(oSheet, (i + 8), 6) + ",0)";
+
+                    formatRange = oSheet.Range[oSheet.Cells[(i + 8), 8], oSheet.Cells[(i + 8), 8]];
+                    formatRange.Value = "=" + CellAddress(oSheet, (i + 8), 7) + " * 9.6";
+
+                    formatRange = oSheet.Range[oSheet.Cells[(i + 8), 9], oSheet.Cells[(i + 8), 9]];
+
+                    formatRange.Value = "=+IF(H4<" + sLCBNgay + @","" < " + sLCBNgay + @""",IF(H4>=" + sLCBNgay + @","" >= " + sLCBNgay + @"""))";
+                }
+
+
+                formatRange = oSheet.Range[oSheet.Cells[rowCnt, 5], oSheet.Cells[rowCnt, 5]];
+                formatRange.Value2 = "=SUBTOTAL(9," + CellAddress(oSheet, 8, 5) + ":" + CellAddress(oSheet, rowCnt - 1, 5) + ")";
+                formatRange.Font.Bold = true;
+                formatRange.Font.Name = fontName;
+                formatRange.Font.Size = 10;
+
+
+                formatRange = oSheet.Range[oSheet.Cells[8, 1], oSheet.Cells[rowCnt, lastColumn]];
+                formatRange.Font.Name = fontName;
+                formatRange.Font.Size = fontSizeNoiDung;
+
+
+                BorderAround(oSheet.Range[oSheet.Cells[7, 1], oSheet.Cells[rowCnt, lastColumn]]);
+
+                oSheet = (Excel.Worksheet)oWB.ActiveSheet;
+                oSheet = oWB.Worksheets.Add(After: oWB.Sheets[oWB.Sheets.Count]);
+                oSheet.Name = "Sheet 2";
+
+
+                formatRange = oSheet.Range[oSheet.Cells[1, 1], oSheet.Cells[1, 7]];
+                formatRange.Merge();
+                formatRange.Value2 = "BẢNG TỔNG HỢP LƯƠNG SẢN PHẨM THEO TỔ SX NGÀY " + datNgayXem.DateTime.ToString("dd/MM/yyyy");
+                formatRange.Font.Bold = true;
+                formatRange.Font.Name = fontName;
+                formatRange.Font.Size = 16;
+                formatRange.Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                formatRange.Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+
+
+                formatRange = oSheet.Range[oSheet.Cells[3, 1], oSheet.Cells[3, 7]];
+                formatRange.Font.Size = fontSizeTieuDe;
+                formatRange.Font.Name = fontName;
+                formatRange.Font.Bold = true;
+                formatRange.WrapText = true;
+                formatRange.NumberFormat = "@";
+                formatRange.Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                formatRange.Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+                formatRange.Interior.Color = Color.FromArgb(255, 242, 204);
+
+                formatRange = oSheet.Range[oSheet.Cells[3, 1], oSheet.Cells[3, 1]];
+                formatRange.Value = "STT";
+                formatRange.ColumnWidth = 5;
+
+                formatRange = oSheet.Range[oSheet.Cells[3, 2], oSheet.Cells[3, 2]];
+                formatRange.Value = "Bộ phận";
+                formatRange.ColumnWidth = 35;
+
+                formatRange = oSheet.Range[oSheet.Cells[3, 3], oSheet.Cells[3, 3]];
+                formatRange.Value = "Số LĐ";
+                formatRange.ColumnWidth = 15;
+
+                formatRange = oSheet.Range[oSheet.Cells[3, 4], oSheet.Cells[3, 4]];
+                formatRange.Value = "Số LĐ có mặt";
+                formatRange.ColumnWidth = 15;
+
+
+                formatRange = oSheet.Range[oSheet.Cells[3, 5], oSheet.Cells[3, 5]];
+                formatRange.Value = "Tổng tiền lương";
+                formatRange.ColumnWidth = 15;
+
+                formatRange = oSheet.Range[oSheet.Cells[3, 6], oSheet.Cells[3, 6]];
+                formatRange.Value = "Lương SP BQ / người";
+                formatRange.ColumnWidth = 15;
+
+                formatRange = oSheet.Range[oSheet.Cells[3, 7], oSheet.Cells[3, 7]];
+                formatRange.Value = "Ghi chú";
+                formatRange.ColumnWidth = 15;
+
+
+
+                dtBCThang = new DataTable();
+                dtBCThang = ds.Tables[2].Copy();
+                lastColumn = dtBCThang.Columns.Count;
+                dr = dtBCThang.Select();
+                rowData = new string[dr.Count(), dtBCThang.Columns.Count];
+
+                rowCnt = 0;
+                foreach (DataRow row in dr)
+                {
+                    for (int col_bd = 0; col_bd < dtBCThang.Columns.Count; col_bd++)
+                    {
+                        rowData[rowCnt, col_bd] = row[col_bd].ToString();
+                    }
+                    rowCnt++;
+                }
+                rowCnt = rowCnt + 3;
+                oSheet.Range[oSheet.Cells[4, 1], oSheet.Cells[rowCnt, lastColumn]].Value2 = rowData;
+
+                formatRange = oSheet.Range[oSheet.Cells[4, 5], oSheet.Cells[rowCnt, 5]];
+                formatRange.NumberFormat = "#,##0;(#,##0); ; ";
+                try
+                {
+                    formatRange.TextToColumns(Type.Missing, Microsoft.Office.Interop.Excel.XlTextParsingType.xlDelimited, Microsoft.Office.Interop.Excel.XlTextQualifier.xlTextQualifierDoubleQuote);
+                }
+                catch { }
+
+                formatRange = oSheet.Range[oSheet.Cells[4, 6], oSheet.Cells[rowCnt, 6]];
+                formatRange.NumberFormat = "#,##0;(#,##0); ; ";
+                try
+                {
+                    formatRange.TextToColumns(Type.Missing, Microsoft.Office.Interop.Excel.XlTextParsingType.xlDelimited, Microsoft.Office.Interop.Excel.XlTextQualifier.xlTextQualifierDoubleQuote);
+                }
+                catch { }
+
+
+                for (int i = 0; i < rowCnt - 3; i++)
+                {
+                    formatRange = oSheet.Range[oSheet.Cells[(i + 4), 6], oSheet.Cells[(i + 4), 6]];
+                    formatRange.Value = "=IFERROR(" + CellAddress(oSheet, (i + 4), 5) + "/" + CellAddress(oSheet, (i + 4), 4) + ",0)";
+                }
+
+                formatRange = oSheet.Range[oSheet.Cells[4, 1], oSheet.Cells[rowCnt, lastColumn]];
+                formatRange.Font.Name = fontName;
+                formatRange.Font.Size = fontSizeNoiDung;
+
+                for (int i = 1; i < 5; i++)
+                {
+                    if(i != 2)
+                    {
+                        formatRange = oSheet.Range[oSheet.Cells[4, i], oSheet.Cells[rowCnt, i]];
+                        formatRange.Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                        formatRange.Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+                    }
+                }
+
+                BorderAround(oSheet.Range[oSheet.Cells[3, 1], oSheet.Cells[rowCnt, lastColumn]]);
+
+                oWB.Sheets[1].Activate();
+                Commons.Modules.ObjSystems.HideWaitForm();
+                // filter
+                this.Cursor = Cursors.Default;
+                oXL.Visible = true;
+                oXL.UserControl = true;
+            }
+            catch (Exception ex)
+            {
+                Commons.Modules.ObjSystems.HideWaitForm();
+                this.Cursor = Cursors.Default;
+                MessageBox.Show(ex.Message);
+            }
+        }
+        public int TaoTTChung(Excel.Worksheet MWsheet, int DongBD, int CotBD, int DongKT, int CotKT, float MLeft, float MTop)
+        {
+            try
+            {
+                DataTable dtTmp = Commons.Modules.ObjSystems.DataThongTinChung();
+                Microsoft.Office.Interop.Excel.Range CurCell = MWsheet.Range[MWsheet.Cells[DongBD, 1], MWsheet.Cells[DongKT, 1]];
+                CurCell.EntireRow.Insert(Microsoft.Office.Interop.Excel.XlInsertShiftDirection.xlShiftDown);
+
+                CurCell = MWsheet.Range[MWsheet.Cells[DongBD, CotBD], MWsheet.Cells[DongKT, CotKT - 3]];
+                CurCell.Merge(true);
+                CurCell.Font.Bold = true;
+                CurCell.Borders.LineStyle = 0;
+                CurCell.Value2 = dtTmp.Rows[0]["TEN_CTY"];
+
+
+
+                DongBD += 1;
+                DongKT += 1;
+                CurCell = MWsheet.Range[MWsheet.Cells[DongBD, "A"], MWsheet.Cells[DongKT, "A"]];
+                CurCell.EntireRow.Insert(Microsoft.Office.Interop.Excel.XlInsertShiftDirection.xlShiftDown);
+                CurCell = MWsheet.Range[MWsheet.Cells[DongBD, CotBD], MWsheet.Cells[DongKT, CotKT]];
+                CurCell.Merge(true);
+                CurCell.Font.Bold = true;
+                CurCell.Borders.LineStyle = 0;
+                CurCell.Value2 = Commons.Modules.ObjLanguages.GetLanguage("frmChung", "diachi") + " : " + dtTmp.Rows[0]["DIA_CHI"].ToString();
+
+                DongBD += 1;
+                DongKT += 1;
+                CurCell = MWsheet.Range[MWsheet.Cells[DongBD, "A"], MWsheet.Cells[DongKT, "A"]];
+                CurCell.EntireRow.Insert(Microsoft.Office.Interop.Excel.XlInsertShiftDirection.xlShiftDown);
+                CurCell = MWsheet.Range[MWsheet.Cells[DongBD, CotBD], MWsheet.Cells[DongKT, CotKT]];
+                CurCell.Merge(true);
+                CurCell.Font.Bold = true;
+                CurCell.Borders.LineStyle = 0;
+                CurCell.Value2 = Commons.Modules.ObjLanguages.GetLanguage("frmChung", "dienthoai") + " : " + dtTmp.Rows[0]["DIEN_THOAI"] + "  " + Commons.Modules.ObjLanguages.GetLanguage("frmChung", "Fax") + " : " + dtTmp.Rows[0]["FAX"].ToString();
+
+                //DongBD += 1;
+                //DongKT += 1;
+                //CurCell = MWsheet.Range[MWsheet.Cells[DongBD, "A"], MWsheet.Cells[DongKT, "A"]];
+                //CurCell.EntireRow.Insert(Microsoft.Office.Interop.Excel.XlInsertShiftDirection.xlShiftDown);
+                //CurCell = MWsheet.Range[MWsheet.Cells[DongBD, CotBD], MWsheet.Cells[DongKT, CotKT]];
+                //CurCell.Merge(true);
+                //CurCell.Font.Bold = true;
+                //CurCell.Borders.LineStyle = 0;
+                //CurCell.Value2 = "Email : " + dtTmp.Rows[0]["EMAIL"];
+
+                System.IO.DirectoryInfo dir = new System.IO.DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory + "Masters");
+                GetImage((byte[])dtTmp.Rows[0]["LOGO"], System.Windows.Forms.Application.StartupPath, "logo.bmp");
+                MWsheet.Shapes.AddPicture(System.Windows.Forms.Application.StartupPath + @"\logo.bmp", Office.MsoTriState.msoFalse, Office.MsoTriState.msoCTrue, MLeft, MTop, 50, 50);
+                System.IO.File.Delete(System.Windows.Forms.Application.StartupPath + @"\logo.bmp");
+
+                return DongBD + 1;
+            }
+            catch
+            {
+                return DongBD + 1;
+            }
+        }
+        public void GetImage(byte[] Logo, string sPath, string sFile)
+        {
+            try
+            {
+                string strPath = sPath + @"\" + sFile;
+                System.IO.MemoryStream stream = new System.IO.MemoryStream(Logo);
+                System.Drawing.Image img = System.Drawing.Image.FromStream(stream);
+                img.Save(strPath);
+            }
+            catch (Exception)
+            {
+            }
+        }
+        private string CellAddress(Excel.Worksheet sht, int row, int col)
+        {
+            return RangeAddress(sht.Cells[row, col]);
+        }
+        private string RangeAddress(Microsoft.Office.Interop.Excel.Range rng)
+        {
+            object missing = null;
+            return rng.get_AddressLocal(false, false, Microsoft.Office.Interop.Excel.XlReferenceStyle.xlA1,
+                   missing, missing);
         }
 
     }

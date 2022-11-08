@@ -235,8 +235,8 @@
             new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Báo cáo thâm niên tổng hợp", true, "rdo_BaoCaoThamNien")});
             this.rdo_ChonBaoCao.Properties.ItemsLayout = DevExpress.XtraEditors.RadioGroupItemsLayout.Column;
             this.lbDonVi.SetRow(this.rdo_ChonBaoCao, 3);
-            this.lbDonVi.SetRowSpan(this.rdo_ChonBaoCao, 7);
-            this.rdo_ChonBaoCao.Size = new System.Drawing.Size(291, 246);
+            this.lbDonVi.SetRowSpan(this.rdo_ChonBaoCao, 5);
+            this.rdo_ChonBaoCao.Size = new System.Drawing.Size(291, 174);
             this.rdo_ChonBaoCao.TabIndex = 17;
             this.rdo_ChonBaoCao.SelectedIndexChanged += new System.EventHandler(this.rdo_ChonBaoCao_SelectedIndexChanged);
             // 

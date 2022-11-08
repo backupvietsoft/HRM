@@ -85,9 +85,10 @@ namespace Vs.HRM
             windowsUIButton.Buttons[2].Properties.Visible = visible;
             windowsUIButton.Buttons[3].Properties.Visible = visible;
             windowsUIButton.Buttons[4].Properties.Visible = visible;
-            windowsUIButton.Buttons[5].Properties.Visible = !visible;
+            windowsUIButton.Buttons[5].Properties.Visible = visible;
             windowsUIButton.Buttons[6].Properties.Visible = !visible;
-            windowsUIButton.Buttons[7].Properties.Visible = visible;
+            windowsUIButton.Buttons[7].Properties.Visible = !visible;
+            windowsUIButton.Buttons[8].Properties.Visible = visible;
             searchControl.Visible = visible;
         }
         private void InDuLieu()
@@ -145,10 +146,29 @@ namespace Vs.HRM
             if (btn == null || btn.Tag == null) return;
             switch (btn.Tag.ToString())
             {
-                case "themsua":
+                case "them":
+                    {
+                        SO_QDTextEdit.EditValue = "";
+                        NGAY_NHAN_DONDateEdit.EditValue = null;
+                        NGAY_THOI_VIECDateEdit.EditValue = DateTime.Today;
+                        NGAY_KYDateEdit.EditValue = DateTime.Today;
+                        ID_LD_TVLookUpEdit.EditValue = null;
+                        NGUYEN_NHANTextEdit.EditValue = "";
+                        txtTaiLieu.ResetText();
+                        txtTaiLieuQD.ResetText();
+
+                        navigationFrame.SelectedPage = navigationPage2;
+                        dxValidationProvider1.ValidateHiddenControls = true;
+                        dxValidationProvider1.RemoveControlError(ID_LD_TVLookUpEdit);
+                        enableButon(false);
+                        break;
+                    }
+                case "sua":
                     {
                         LoadText();
                         navigationFrame.SelectedPage = navigationPage2;
+                        dxValidationProvider1.ValidateHiddenControls = true;
+                        dxValidationProvider1.RemoveControlError(ID_LD_TVLookUpEdit);
                         enableButon(false);
                         break;
                     }
@@ -181,6 +201,7 @@ namespace Vs.HRM
                         navigationFrame.SelectedPage = navigationPage1;
                         dxValidationProvider1.ValidateHiddenControls = false;
                         enableButon(true);
+                        radChonXem_SelectedIndexChanged(null, null);
                         break;
                     }
                 case "thoat":
@@ -399,8 +420,9 @@ namespace Vs.HRM
         //}
         private void grvCongNhan_DoubleClick(object sender, EventArgs e)
         {
-
             navigationFrame.SelectedPage = navigationPage2;
+            dxValidationProvider1.ValidateHiddenControls = true;
+            dxValidationProvider1.RemoveControlError(ID_LD_TVLookUpEdit);
             enableButon(false);
         }
         private void LoadText()
@@ -620,11 +642,15 @@ namespace Vs.HRM
             {
                 ItemForTNgay.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
                 ItemForDNgay.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                windowsUIButton.Buttons[0].Properties.Visible = true;
+                windowsUIButton.Buttons[1].Properties.Visible = false;
             }
             else
             {
                 ItemForTNgay.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
                 ItemForDNgay.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+                windowsUIButton.Buttons[0].Properties.Visible = false;
+                windowsUIButton.Buttons[1].Properties.Visible = true;
             }
         }
         private void LayDuongDan()
@@ -748,7 +774,26 @@ namespace Vs.HRM
         {
             int intLDTV = 0;
             try { intLDTV = Convert.ToInt32(ID_LD_TVLookUpEdit.EditValue.ToString()); } catch { }
-            if (intLDTV != 1)
+            if (intLDTV == 3)
+            {
+                SO_QDTextEdit.Properties.ReadOnly = true;
+                ItemForNGAY_NHAN_DON.AppearanceItemCaption.Options.UseForeColor = false;
+                NGAY_NHAN_DONDateEdit.Properties.ReadOnly = true;
+                NGAY_KYDateEdit.Properties.ReadOnly = true;
+                NGUYEN_NHANTextEdit.Properties.ReadOnly = true;
+                ID_NKLookUpEdit.Properties.ReadOnly = true;
+                SO_NAM_TRO_CAPTextEdit.Properties.ReadOnly = true;
+                TIEN_TRO_CAPTextEdit.Properties.ReadOnly = true;
+                TIEN_PHEPTextEdit.Properties.ReadOnly = true;
+                SO_PHEP_HUONGTextEdit.Properties.ReadOnly = true;
+
+                SO_QDTextEdit.EditValue = "";
+                NGAY_NHAN_DONDateEdit.EditValue = null;
+                NGAY_KYDateEdit.EditValue = null;
+                NGUYEN_NHANTextEdit.EditValue = "";
+                ID_NKLookUpEdit.EditValue = null;
+            }
+            if (intLDTV != 1 && intLDTV != 3)
             {
                 SO_QDTextEdit.EditValue = "";
                 ItemForNGAY_NHAN_DON.AppearanceItemCaption.Options.UseForeColor = false;
@@ -756,12 +801,35 @@ namespace Vs.HRM
                 NGAY_KYDateEdit.EditValue = null;
                 NGUYEN_NHANTextEdit.EditValue = "";
                 ID_NKLookUpEdit.EditValue = null;
+
+                SO_QDTextEdit.Properties.ReadOnly = false;
+                NGAY_NHAN_DONDateEdit.Properties.ReadOnly = false;
+                NGAY_KYDateEdit.Properties.ReadOnly = false;
+                NGUYEN_NHANTextEdit.Properties.ReadOnly = false;
+                ID_NKLookUpEdit.Properties.ReadOnly = false;
+
+                SO_NAM_TRO_CAPTextEdit.Properties.ReadOnly = false;
+                TIEN_TRO_CAPTextEdit.Properties.ReadOnly = false;
+                TIEN_PHEPTextEdit.Properties.ReadOnly = false;
+                SO_PHEP_HUONGTextEdit.Properties.ReadOnly = false;
+
             }
-            else
+            if (intLDTV == 1)
             {
                 //ItemForNGAY_NHAN_DON.AppearanceItemCaption.ForeColor = System.Drawing.Color.FromArgb(192, 0, 0);
                 ItemForNGAY_NHAN_DON.AppearanceItemCaption.Options.UseForeColor = true;
                 NGAY_NHAN_DONDateEdit.DateTime = DateTime.Now;
+
+                SO_QDTextEdit.Properties.ReadOnly = false;
+                NGAY_NHAN_DONDateEdit.Properties.ReadOnly = false;
+                NGAY_KYDateEdit.Properties.ReadOnly = false;
+                NGUYEN_NHANTextEdit.Properties.ReadOnly = false;
+                ID_NKLookUpEdit.Properties.ReadOnly = false;
+
+                SO_NAM_TRO_CAPTextEdit.Properties.ReadOnly = false;
+                TIEN_TRO_CAPTextEdit.Properties.ReadOnly = false;
+                TIEN_PHEPTextEdit.Properties.ReadOnly = false;
+                SO_PHEP_HUONGTextEdit.Properties.ReadOnly = false;
             }
         }
 

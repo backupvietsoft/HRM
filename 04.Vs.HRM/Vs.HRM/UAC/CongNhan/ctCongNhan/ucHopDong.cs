@@ -140,7 +140,7 @@ namespace Vs.HRM
                     cboTinhTrang.EditValue = 1;
                     cboNgachLuong.EditValue = "";
                     cboBAC_LUONG.EditValue = "";
-                    
+
                     sMO_TA_CV_A = "";
                 }
                 catch (Exception ex)
@@ -204,7 +204,7 @@ namespace Vs.HRM
                 int n = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spUpdateHopDong",
                 grvHopDong.GetFocusedRowCellValue("ID_HDLD"),
                 Commons.Modules.iCongNhan,
-                SO_HDLDTextEdit.EditValue,
+                SO_HDLDTextEdit.Text,
                 ID_LHDLDLookUpEdit.EditValue,
                 NGAY_BAT_DAU_HDDateEdit.EditValue,
                 NGAY_HET_HDDateEdit.EditValue,
@@ -213,7 +213,7 @@ namespace Vs.HRM
                 NGAY_BAT_DAU_HDDateEdit.EditValue,
                 NGAY_HET_HDDateEdit.EditValue,
                 MUC_LUONG_CHINHTextEdit.EditValue,
-                cboBAC_LUONG.EditValue,
+                cboBAC_LUONG.Text == "" ? null : cboBAC_LUONG.EditValue,
                 MUC_LUONG_CHINHTextEdit.EditValue,
                 CHI_SO_PHU_CAPTextEdit.EditValue,
                 MUC_LUONG_THUC_LINHTextEdit.EditValue,

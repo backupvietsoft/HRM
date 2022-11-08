@@ -22,8 +22,6 @@ namespace Vs.Payroll
 
             time.Text = "Tháng " + Thang.Substring(Thang.Length - 2, 2) + " Năm " + Nam.Substring(Nam.Length - 4, 4);
             lblTitle.Text = tde;
-
-
         }
 
     }

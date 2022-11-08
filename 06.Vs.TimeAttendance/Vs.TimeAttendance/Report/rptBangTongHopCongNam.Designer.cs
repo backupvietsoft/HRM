@@ -207,7 +207,7 @@
             this.xrTableCell19.StylePriority.UsePadding = false;
             this.xrTableCell19.StylePriority.UseTextAlignment = false;
             this.xrTableCell19.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
-            this.xrTableCell19.Weight = 1.8010762101789135D;
+            this.xrTableCell19.Weight = 2.2643155048525303D;
             // 
             // xrTableCell20
             // 
@@ -222,7 +222,7 @@
             this.xrTableCell20.StylePriority.UseTextAlignment = false;
             this.xrTableCell20.Text = "NGUYỄN THỊ MỘNG TUYỀN";
             this.xrTableCell20.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            this.xrTableCell20.Weight = 4.6694566716392583D;
+            this.xrTableCell20.Weight = 4.2062173769656415D;
             // 
             // xrTableCell2
             // 
@@ -572,7 +572,7 @@
             this.tiMSCN.Name = "tiMSCN";
             this.tiMSCN.StylePriority.UseFont = false;
             this.tiMSCN.Text = "MSCN";
-            this.tiMSCN.Weight = 1.8010753768583634D;
+            this.tiMSCN.Weight = 2.2643150436047406D;
             // 
             // tiHoTen
             // 
@@ -581,7 +581,7 @@
             this.tiHoTen.Name = "tiHoTen";
             this.tiHoTen.StylePriority.UseFont = false;
             this.tiHoTen.Text = "Họ và tên";
-            this.tiHoTen.Weight = 4.6694569629681189D;
+            this.tiHoTen.Weight = 4.2062172962217419D;
             // 
             // lbNgayVL
             // 
@@ -1093,7 +1093,7 @@
             this.PageWidth = 1169;
             this.PaperKind = System.Drawing.Printing.PaperKind.A4;
             this.Tag = "rptBangTongHopCongNam";
-            this.Version = "20.1";
+            this.Version = "22.1";
             ((System.ComponentModel.ISupportInitialize)(this.xrTable4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).EndInit();

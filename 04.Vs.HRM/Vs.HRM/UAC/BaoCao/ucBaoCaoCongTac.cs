@@ -28,7 +28,7 @@ namespace Vs.HRM
                         {
                             case 0:
                                 {
-                                    switch (Commons.Modules.ObjSystems.KyHieuDV(Convert.ToInt64(LK_DON_VI.EditValue)))
+                                    switch (Commons.Modules.KyHieuDV)
                                     {
                                         case "NB":
                                             {
@@ -164,7 +164,7 @@ namespace Vs.HRM
         private void ucBaoCaoCongTac_Load(object sender, EventArgs e)
         {
             Commons.Modules.sLoad = "0Load";
-            Commons.Modules.ObjSystems.LoadCboDonVi(LK_DON_VI);
+            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(LK_DON_VI, Commons.Modules.ObjSystems.DataDonVi(false), "ID_DV", "TEN_DV", "TEN_DV");
             Commons.Modules.ObjSystems.LoadCboXiNghiep(LK_DON_VI, LK_XI_NGHIEP);
             Commons.Modules.ObjSystems.LoadCboTo(LK_DON_VI, LK_XI_NGHIEP, LK_TO);
 
@@ -174,10 +174,10 @@ namespace Vs.HRM
 
             dTuNgay.EditValue = Convert.ToDateTime(("01/" + DateTime.Today.Month + "/" + DateTime.Today.Year));
             dDenNgay.EditValue = Convert.ToDateTime(("01/" + DateTime.Today.Month + "/" + DateTime.Today.Year)).AddMonths(1).AddDays(-1);
-            dtThang.EditValue = DateTime.Today;
             lk_NgayIn.EditValue = DateTime.Today;
-
-            rdo_ChonBaoCao_SelectedIndexChanged(null, null);
+            tablePanel1.Rows[2].Height = 0;
+            tablePanel1.Rows[3].Height = 0;
+            rdo_ChonBaoCao.SelectedIndex = 1;
             Commons.Modules.sLoad = "";
         }
 
@@ -197,21 +197,6 @@ namespace Vs.HRM
         private void tablePanel1_Validated(object sender, EventArgs e)
         {
 
-        }
-        private void dtThang_EditValueChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                DateTime firstDateTime = new DateTime(dtThang.DateTime.Year, Convert.ToInt32(dtThang.DateTime.Month), 1);
-                dTuNgay.EditValue = firstDateTime;
-                int t = DateTime.DaysInMonth(firstDateTime.Year, firstDateTime.Month);
-                DateTime secondDateTime = new DateTime(dtThang.DateTime.Year, Convert.ToInt32(dtThang.DateTime.Month), t);
-                dDenNgay.EditValue = secondDateTime;
-            }
-            catch
-            {
-
-            }
         }
 
         private void dtThang_Validated(object sender, EventArgs e)
@@ -234,34 +219,10 @@ namespace Vs.HRM
         {
             try
             {
-                switch (rdo_ChonBaoCao.SelectedIndex)
-                {
-                    case 0:
-                        {
-                            dtThang.Enabled = false;
-                            dTuNgay.Enabled = false;
-                            dDenNgay.Enabled = false;
-                        }
-                        break;
-                    case 1:
-                        {
-                            dtThang.Enabled = true;
-                            dTuNgay.Enabled = true;
-                            dDenNgay.Enabled = true;
-                        }
-                        break;
-                    
-                    default:
-                        dtThang.Enabled = true;
-                        dTuNgay.Enabled = true;
-                        dDenNgay.Enabled = true;
-                        break;
-                }
             }
             catch
             { }
         }
-
        
     }
 }

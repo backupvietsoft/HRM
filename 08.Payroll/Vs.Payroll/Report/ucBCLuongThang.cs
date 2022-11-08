@@ -21,7 +21,7 @@ namespace Vs.Payroll
         public ucBCLuongThang()
         {
             InitializeComponent();
-            Commons.Modules.ObjSystems.ThayDoiNN(this,windowsUIButton);
+            Commons.Modules.ObjSystems.ThayDoiNN(this, windowsUIButton);
         }
         static string CharacterIncrement(int colCount)
         {
@@ -55,7 +55,7 @@ namespace Vs.Payroll
         {
             try
             {
-                Commons.Modules.ObjSystems.LoadCboDonVi(LK_DON_VI);
+                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(LK_DON_VI, Commons.Modules.ObjSystems.DataDonVi(false), "ID_DV", "TEN_DV", "TEN_DV");
                 Commons.Modules.ObjSystems.LoadCboXiNghiep(LK_DON_VI, LK_XI_NGHIEP);
                 Commons.Modules.ObjSystems.LoadCboTo(LK_DON_VI, LK_XI_NGHIEP, LK_TO);
                 LoadThang();
@@ -76,7 +76,7 @@ namespace Vs.Payroll
                 }
             }
             catch { }
-           
+
         }
 
         private void grvThang_RowCellClick(object sender, RowCellClickEventArgs e)
@@ -122,7 +122,7 @@ namespace Vs.Payroll
                         {
                             case "rdo_BangLuongThangSanXuat":
                                 {
-                                    switch (Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString())
+                                    switch (Commons.Modules.KyHieuDV)
                                     {
                                         case "DM":
                                             {
@@ -1544,7 +1544,7 @@ namespace Vs.Payroll
 
         private void rdo_ChonBaoCao_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(Commons.Modules.KyHieuDV == "DM")
+            if (Commons.Modules.KyHieuDV == "DM")
             {
                 cboCachTinhLuong.Visible = false;
                 lblCachTinhLuong.Visible = false;
@@ -1561,12 +1561,11 @@ namespace Vs.Payroll
                         break;
                 }
             }
-            
+
         }
         private void InPhieuNhanLuongCNSP(string MaSo)
         {
             System.Data.SqlClient.SqlConnection conn;
-            DataTable dt = new DataTable();
             try
             {
                 conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
@@ -1583,6 +1582,13 @@ namespace Vs.Payroll
                 System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
                 DataSet ds = new DataSet();
                 adp.Fill(ds);
+                DataTable dt = new DataTable();
+                dt = ds.Tables[0].Copy();
+                if (dt.Rows.Count == 0)
+                {
+                    XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgKhongCoDuLieuIn"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
                 ds.Tables[0].TableName = "PhieuNhanLuong";
                 ds.Tables[1].TableName = "info";
                 SaveFileDialog saveFileDialog = new SaveFileDialog();
@@ -1627,6 +1633,13 @@ namespace Vs.Payroll
                 System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
                 DataSet ds = new DataSet();
                 adp.Fill(ds);
+                dt = new DataTable();
+                dt = ds.Tables[0].Copy();
+                if (dt.Rows.Count == 0)
+                {
+                    XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgKhongCoDuLieuIn"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
                 ds.Tables[0].TableName = "PhieuNhanLuong";
                 ds.Tables[1].TableName = "info";
                 SaveFileDialog saveFileDialog = new SaveFileDialog();
@@ -1671,6 +1684,13 @@ namespace Vs.Payroll
                 System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
                 DataSet ds = new DataSet();
                 adp.Fill(ds);
+                dt = new DataTable();
+                dt = ds.Tables[0].Copy();
+                if (dt.Rows.Count == 0)
+                {
+                    XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgKhongCoDuLieuIn"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
                 ds.Tables[0].TableName = "PhieuNhanLuong";
                 ds.Tables[1].TableName = "info";
                 SaveFileDialog saveFileDialog = new SaveFileDialog();
@@ -1720,7 +1740,11 @@ namespace Vs.Payroll
             adp.Fill(ds);
             dt = new DataTable();
             dt = ds.Tables[0].Copy();
-
+            if (dt.Rows.Count == 0)
+            {
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgKhongCoDuLieuIn"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
             dt1 = new DataTable();
             dt1 = ds.Tables[1].Copy();
 
@@ -1928,7 +1952,11 @@ namespace Vs.Payroll
 
             dt1 = new DataTable();
             dt1 = ds.Tables[0].Copy();
-
+            if (dt1.Rows.Count == 0)
+            {
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgKhongCoDuLieuIn"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
             dt2 = new DataTable();
             dt2 = ds.Tables[1].Copy();
 
@@ -2120,6 +2148,10 @@ namespace Vs.Payroll
                     ws.Cells[row, colSUM] = "=SUBTOTAL(9," + CellAddress(ws, 10, colSUM) + ":" + CellAddress(ws, row - 1, colSUM) + ")";
                 }
 
+                for (int colFormat = 10; colFormat <= 12; colFormat++)
+                {
+                    ws.get_Range(CellAddress(ws, 10, colFormat), CellAddress(ws, row, colFormat)).NumberFormat = "dd/MM/yyyy";
+                }
 
                 for (int colFormat = 32; colFormat < dt2.Columns.Count + 2; colFormat++)
                 {
@@ -2139,31 +2171,8 @@ namespace Vs.Payroll
                 {
                     ws.get_Range(CellAddress(ws, 10, colFormat), CellAddress(ws, row, colFormat)).NumberFormat = "#,##0.00;(#,##0.0); ; ";
                 }
+                ws.get_Range("BU10", "BU" + row).NumberFormat = "@";
 
-                //Range colFormat = ws.get_Range("I8", "I" + row);
-                //colFormat.NumberFormat = "#,##0;(#,##0); ; ";
-                //ws.get_Range("I9", "I" + row).NumberFormat = "#,##0;(#,##0); ; ";
-                //ws.get_Range("J9", "J" + row).NumberFormat = "#,##0.0;(#,##0.0); ; ";
-                //ws.get_Range("K9", "N" + row).NumberFormat = "#,##0;(#,##0); ; ";
-                //ws.get_Range("O9", "O" + row).NumberFormat = "#,##0.0;(#,##0.0); ; ";
-                //ws.get_Range("P9", "P" + row).NumberFormat = "#,##0;(#,##0); ; ";
-                //ws.get_Range("Q9", "Q" + row).NumberFormat = "#,##0.0;(#,##0.0); ; ";
-                //ws.get_Range("R9", "R" + row).NumberFormat = "#,##0;(#,##0); ; ";
-                //ws.get_Range("S9", "S" + row).NumberFormat = "#,##0.0;(#,##0.0); ; ";
-                //ws.get_Range("T9", "T" + row).NumberFormat = "#,##0;(#,##0); ; ";
-                //ws.get_Range("U9", "U" + row).NumberFormat = "#,##0.0;(#,##0.0); ; ";
-                //ws.get_Range("V9", "V" + row).NumberFormat = "#,##0;(#,##0); ; ";
-                //ws.get_Range("W9", "W" + row).NumberFormat = "#,##0.0;(#,##0.0); ; ";
-                //ws.get_Range("X9", "X" + row).NumberFormat = "#,##0;(#,##0); ; ";
-                //ws.get_Range("Y9", "Y" + row).NumberFormat = "#,##0.0;(#,##0.0); ; ";
-                //ws.get_Range("Z9", "Z" + row).NumberFormat = "#,##0;(#,##0); ; ";
-                //ws.get_Range("AA9", "AA" + row).NumberFormat = "#,##0.0;(#,##0.0); ; ";
-                //ws.get_Range("AB9", "AB" + row).NumberFormat = "#,##0;(#,##0); ; ";
-                //ws.get_Range("AC9", "AC" + row).NumberFormat = "#,##0.0;(#,##0.0); ; ";
-                //ws.get_Range("AD9", "AD" + row).NumberFormat = "#,##0;(#,##0); ; ";
-                //ws.get_Range("AE9", "AT" + row).NumberFormat = "#,##0;(#,##0); ; ";
-                //ws.get_Range("AU9", "AU" + row).NumberFormat = "#,##0.0;(#,##0.0); ; ";
-                //ws.get_Range("AV9", "AY" + row).NumberFormat = "#,##0;(#,##0); ; ";
 
                 ws.get_Range("J10", "J" + row).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
                 ws.get_Range("K10", "K" + row).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
@@ -2214,6 +2223,11 @@ namespace Vs.Payroll
             adp.Fill(ds);
             dt = new DataTable();
             dt = ds.Tables[0].Copy();
+            if (dt.Rows.Count == 0)
+            {
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgKhongCoDuLieuIn"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
             dt.TableName = "DATA";
             frm.AddDataSource(dt);
             frm.ShowDialog();

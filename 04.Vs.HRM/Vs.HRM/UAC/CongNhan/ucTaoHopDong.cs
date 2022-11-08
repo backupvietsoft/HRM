@@ -476,12 +476,12 @@ namespace Vs.HRM
                         }
                     case "khongghi":
                         {
-                            Commons.Modules.sLoad = "0Load";
-                            iAdd = 0;
-                            LoadData();
-                            Commons.Modules.sLoad = "";
-                            enabel(true);
-                            btnALL.Buttons[2].Properties.Visible = false;
+                            //Commons.Modules.sLoad = "0Load";
+                            //iAdd = 0;
+                            //LoadData();
+                            //Commons.Modules.sLoad = "";
+                            rdoChonXem.SelectedIndex = 0;
+                            rdoChonXem_SelectedIndexChanged(null, null);
                             break;
                         }
                     case "thoat":

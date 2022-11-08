@@ -139,8 +139,7 @@
             this.rdo_ChonBaoCao.Properties.Columns = 1;
             this.rdo_ChonBaoCao.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] {
             new DevExpress.XtraEditors.Controls.RadioGroupItem("", "In giấy hẹn đi làm", true, "rdo_GiayHenDiLam"),
-            new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Danh sách ứng viên được đào tạo định hướng", true, "rdo_DSUVDuocDTDinhHuong"),
-            new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "In thẻ nhân viên", true, "rdo_InTheNhanVien")});
+            new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Danh sách ứng viên được đào tạo định hướng", true, "rdo_DSUVDuocDTDinhHuong")});
             this.tablePanel1.SetRow(this.rdo_ChonBaoCao, 1);
             this.tablePanel1.SetRowSpan(this.rdo_ChonBaoCao, 3);
             this.rdo_ChonBaoCao.Size = new System.Drawing.Size(394, 88);

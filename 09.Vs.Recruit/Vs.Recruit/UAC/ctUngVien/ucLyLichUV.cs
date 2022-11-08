@@ -158,6 +158,15 @@ namespace Vs.Recruit
                 case "luu":
                     {
                         if (!dxValidationProvider1.Validate()) return;
+                        //kiểm tra nếu là công nhân may thì phải nhập tây nghề
+                        if(Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr,CommandType.Text, "SELECT ISNULL(ID_LT,0) FROM dbo.LOAI_CONG_VIEC WHERE ID_LCV = " + cboVTPhuHop.EditValue + "")) ==1 )
+                        {
+                            if(cboTayNghe.Text == "")
+                            {
+                                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgBanChuaNhap") + lblTayNghe.Text, Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                return;
+                            }    
+                        }    
                         System.Data.SqlClient.SqlConnection conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
                         conn.Open();
                         System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spkiemtrungMSUV", conn);

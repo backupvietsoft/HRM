@@ -50,9 +50,13 @@ namespace Vs.Recruit
             {
                 case "in":
                     {
+                        if(grvUngVien.RowCount == 0)
+                        {
+                            Commons.Modules.ObjSystems.msgChung(Commons.ThongBao.msgKhongCoDuLieuIn);
+                            return;
+                        }    
                         Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr,"sbtUV" + Commons.Modules.iIDUser,Commons.Modules.ObjSystems.ConvertDatatable(grvUngVien),"");
-
-                        string sSql = "SELECT A.MS_UV,UV.NGAY_NHAN_HO_SO,A.HO_TEN,A.NGAY_SINH,DATEDIFF(YEAR,A.NGAY_SINH,GETDATE()) AS TUOI,A.GIOI_TINH,A.VI_TRI_TD_1,A.VI_TRI_TD_2,A.TEN_VT_PH,A.DT_DI_DONG,B.DT_NGUOI_THAN,UV.QUAN_HE,A.THON_XOM,A.TEN_PX,A.TEN_QUAN,A.TEN_TP,A.DIA_CHI_THUONG_TRU,NT.TEN_NTD,(SELECT TEN_LCV FROM dbo.LOAI_CONG_VIEC WHERE ID_LCV = B.ID_LCV) AS VT_TRUNG_TUYEN, A.TEN_TAY_NGHE,(SELECT TEN_TO FROM dbo.[TO] WHERE ID_TO = B.ID_TO) AS TEN_TO , ISNULL(CONVERT(NVARCHAR(50), A.NGAY_HEN_DI_LAM, 103), 'F') AS NGAY_HEN_DI_LAM, ISNULL(CONVERT(NVARCHAR(50), A.NGAY_NHAN_VIEC, 103), 'F') AS NGAY_NHAN_VIEC, UV.GHI_CHU FROM  "+ "sbtUV" + Commons.Modules.iIDUser + " A INNER JOIN dbo.UNG_VIEN UV ON UV.ID_UV = A.ID_UV LEFT JOIN dbo.NGUON_TUYEN_DUNG NT ON NT.ID_NTD = UV.ID_NTD LEFT JOIN dbo.CONG_NHAN B ON B.ID_UV = A.ID_UV";
+                        string sSql = "SELECT A.MS_UV,UV.NGAY_NHAN_HO_SO,A.HO_TEN,A.NGAY_SINH,DATEDIFF(YEAR,A.NGAY_SINH,GETDATE()) AS TUOI,A.GIOI_TINH,A.VI_TRI_TD_1,A.VI_TRI_TD_2,A.TEN_VT_PH,A.DT_DI_DONG,B.DT_NGUOI_THAN,UV.QUAN_HE,A.THON_XOM,A.TEN_PX,A.TEN_QUAN,A.TEN_TP,A.DIA_CHI_THUONG_TRU,NT.TEN_NTD,(SELECT TEN_LCV FROM dbo.LOAI_CONG_VIEC WHERE ID_LCV = B.ID_LCV) AS VT_TRUNG_TUYEN, A.TEN_TAY_NGHE,(SELECT TEN_TO FROM dbo.[TO] WHERE ID_TO = B.ID_TO) AS TEN_TO ,CONVERT(NVARCHAR(50), A.NGAY_HEN_DI_LAM, 103) AS NGAY_HEN_DI_LAM, CONVERT(NVARCHAR(50), A.NGAY_NHAN_VIEC, 103) AS NGAY_NHAN_VIEC, UV.GHI_CHU FROM  "+ "sbtUV" + Commons.Modules.iIDUser + " A INNER JOIN dbo.UNG_VIEN UV ON UV.ID_UV = A.ID_UV LEFT JOIN dbo.NGUON_TUYEN_DUNG NT ON NT.ID_NTD = UV.ID_NTD LEFT JOIN dbo.CONG_NHAN B ON B.ID_UV = A.ID_UV";
                         DataTable dt = new DataTable();
                         dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr,CommandType.Text,sSql));
                         Commons.Modules.ObjSystems.MLoadXtraGrid(grdData, grvData, dt, false, true, false, true, true, this.Name);

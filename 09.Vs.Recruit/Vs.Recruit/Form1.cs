@@ -11,7 +11,7 @@ namespace Vs.Recruit
             InitializeComponent();
             //TinhSoTuanCuaTHang();
             Commons.Modules.iUngVien = -1;
-            ucKeHoachTuyenDung uac = new ucKeHoachTuyenDung();
+            ucYeuCauTuyenDung uac = new ucYeuCauTuyenDung();
             this.Controls.Add(uac);
             uac.Dock = DockStyle.Fill;
             //LoadAA();

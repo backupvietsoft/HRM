@@ -51,7 +51,7 @@
             // 
             // richEditControl1
             // 
-            this.richEditControl1.Location = new System.Drawing.Point(441, 81);
+            this.richEditControl1.Location = new System.Drawing.Point(392, 23);
             this.richEditControl1.Name = "richEditControl1";
             this.richEditControl1.Size = new System.Drawing.Size(578, 434);
             this.richEditControl1.TabIndex = 0;

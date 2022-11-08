@@ -107,6 +107,12 @@
   <ItemGroup>
     <Compile Include="clsXuLy.cs" />
     <Compile Include="ConnectToSharedFolder.cs" />
+    <Compile Include="Form\frmYKienYC.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\frmYKienYC.Designer.cs">
+      <DependentUpon>frmYKienYC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form\frmPopUp.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -151,6 +157,9 @@
     <Compile Include="UAC\XtraForm1.Designer.cs">
       <DependentUpon>XtraForm1.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Form\frmYKienYC.resx">
+      <DependentUpon>frmYKienYC.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form\frmPopUp.resx">
       <DependentUpon>frmPopUp.cs</DependentUpon>
     </EmbeddedResource>

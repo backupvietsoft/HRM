@@ -352,7 +352,7 @@ namespace Vs.Recruit
                 XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgBanKhongCoQuyenTruyCapDD"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgfrmThongBao"), MessageBoxButtons.OK);
             }
         }
-        private void btnALL_ButtonClick(object sender, ButtonEventArgs e)
+        public void btnALL_ButtonClick(object sender, ButtonEventArgs e)
         {
             WindowsUIButton btn = e.Button as WindowsUIButton;
             XtraUserControl ctl = new XtraUserControl();
@@ -363,23 +363,28 @@ namespace Vs.Recruit
                         if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgBanCoMuonChuyenDuyetKhong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) return;
                         try
                         {
-                            if (Commons.IConnections.Database == "VS_HRM_DEMO")
+                            for (int i = 0; i < grvViTri.RowCount; i++)
                             {
-                                for (int i = 0; i < grvViTri.RowCount; i++)
-                                {
-                                    SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spQuyDinhDuyetTaiLieu", Commons.Modules.iIDUser, this.Name, iID_YCTD, grvViTri.GetRowCellValue(i, "ID_LCV"), txtMA_YCTD.Text + " " + grvViTri.GetRowCellDisplayText(i, "ID_LCV").ToString(), 1, "Tài liệu đk", Convert.ToInt32(grvViTri.GetRowCellValue(i, "ID_MUT")) == 1 ? true : false, Commons.Modules.UserName, Commons.Modules.TypeLanguage);
-                                }
-                            }
-                            else
-                            {
-                                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "UPDATE A SET A.ID_TT_VT = CASE B.ID_LT WHEN 1 THEN 3 ELSE 3 END FROM dbo.YCTD_VI_TRI_TUYEN A INNER JOIN dbo.LOAI_CONG_VIEC B ON B.ID_LCV = A.ID_VTTD WHERE A.ID_YCTD = " + iID_YCTD + " UPDATE dbo.YEU_CAU_TUYEN_DUNG SET ID_TT =  2 WHERE ID_YCTD = " + iID_YCTD + " ");
+                                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spQuyDinhDuyetTaiLieu",
+                                    Commons.Modules.iIDUser, 
+                                    this.Name,
+                                    iID_YCTD,
+                                    grvViTri.GetRowCellValue(i, "ID_LCV"), 
+                                    txtMA_YCTD.Text + " " + grvViTri.GetRowCellDisplayText(i, "ID_LCV").ToString(),
+                                    1, 
+                                    InDuLieuCD("SELECT T2.TEN_LCV, T1.SL_TUYEN AS SO_LUONG, T1.MO_TA_CV, T1.YEU_CAU, T1.YEU_CAU_KHAC, T1.THOI_GIAN_LAM_VIEC, T1.CHE_DO_PHUC_LOI FROM dbo.YCTD_VI_TRI_TUYEN T1 INNER JOIN dbo.LOAI_CONG_VIEC T2 ON T2.ID_LCV = T1.ID_VTTD WHERE T1.ID_YCTD = "+ iID_YCTD + " AND T1.ID_VTTD = "+ grvViTri.GetRowCellValue(i, "ID_LCV") + ""),
+                                    Convert.ToInt32(grvViTri.GetRowCellValue(i, "ID_MUT")) == 1 ? true : false,
+                                    txtLyDo.Text,
+                                    Commons.Modules.UserName,
+                                    Commons.Modules.TypeLanguage);
                             }
                             LoadgrdPYC(iID_YCTD);
                             cboTrangThai.EditValue = 2;
                             btnALL.Buttons[0].Properties.Visible = false;
                         }
-                        catch
+                        catch(Exception ex)
                         {
+                            XtraMessageBox.Show(ex.ToString());
                         }
                         break;
                     }
@@ -487,6 +492,31 @@ namespace Vs.Recruit
                     break;
             }
         }
+
+        private string InDuLieuCD(string sSql)
+        {
+            DataTable dt = new DataTable();
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr,CommandType.Text,sSql));
+            frmViewReport frm = new frmViewReport();
+            frm.rpt = new rptThongBaoTuyenDung();
+            frm.AddDataSource(dt);
+            frm.frmViewReport_Load(null, null);
+            string file = DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".pdf";
+            frm.rpt.ExportToPdf(file, null);
+            string resulst = Commons.Modules.ObjSystems.FileCopy(Application.StartupPath, file, this.Name);
+            try
+            {
+                File.Delete(file);
+            }
+            catch(Exception ex)
+            {
+                XtraMessageBox.Show(ex.ToString());
+            }
+            return resulst;
+
+        }
+
+
         private bool SaveData()
         {
             try
@@ -531,8 +561,6 @@ namespace Vs.Recruit
         {
             try
             {
-
-
                 btnALL.Buttons[0].Properties.Visible = visible;
                 btnALL.Buttons[1].Properties.Visible = visible;
                 btnALL.Buttons[2].Properties.Visible = visible;
@@ -728,7 +756,7 @@ namespace Vs.Recruit
                 }
                 catch
                 {
-                }
+                }  
             }
         }
         private void grvPYC_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
@@ -736,11 +764,12 @@ namespace Vs.Recruit
             try
             {
                 if (Commons.Modules.sLoad == "0Load") return;
+                if (Commons.Modules.sLoad == "0FS") return;
                 Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboBPYC, Commons.Modules.ObjSystems.DataXiNghiep(-1, false), "ID_XN", "TEN_XN", "TEN_XN", true, false);
                 Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboNguoiYC, Commons.Modules.ObjSystems.DataCongNhan(false), "ID_CN", "TEN_CN", "TEN_CN", true, true);
                 //khi ở chế độ view thì thì hiện chuyển duyệt khi tình trạng đang soạn
                 BindingData(false);
-                if (Convert.ToInt32(cboTinhTrang.EditValue) == 1|| grvPYC.FocusedRowHandle < 0)
+                if (Convert.ToInt32(cboTinhTrang.EditValue) == 1 || grvPYC.FocusedRowHandle < 0)
                 {
                     if (grvPYC.FocusedRowHandle < 0)
                     {
@@ -753,13 +782,13 @@ namespace Vs.Recruit
                         btnALL.Buttons[0].Properties.Visible = true;
                         btnALL.Buttons[2].Properties.Visible = true;
                         btnALL.Buttons[3].Properties.Visible = true;
-                    }    
+                    }
                 }
                 else
                 {
-                    btnALL.Buttons[0].Properties.Visible = true;
-                    btnALL.Buttons[2].Properties.Visible = true;
-                    btnALL.Buttons[3].Properties.Visible = true;
+                    btnALL.Buttons[0].Properties.Visible = false;
+                    btnALL.Buttons[2].Properties.Visible = false;
+                    btnALL.Buttons[3].Properties.Visible = false;
                 }
 
             }
@@ -1035,6 +1064,7 @@ namespace Vs.Recruit
         //}
         private void cboTrangThai_EditValueChanged(object sender, EventArgs e)
         {
+            Commons.Modules.sLoad = "0FS";
             int idFC_CU = Convert.ToInt32(grvPYC.GetFocusedRowCellValue("ID_YCTD"));
             DataTable dt = new DataTable();
             dt = (DataTable)grdPYC.DataSource;
@@ -1063,6 +1093,7 @@ namespace Vs.Recruit
                 grvPYC.SelectRow(index);
             }
             catch { }
+            Commons.Modules.sLoad = "";
             //grvPYC.SetFocusedRowCellValue("ID_YCTD", idFC_CU);
             //Commons.Modules.ObjSystems.RowFilter(grdPYC, grvPYC.Columns["ID_TT"], (cboTrangThai.EditValue).ToString());
             grvPYC_FocusedRowChanged(null, null);

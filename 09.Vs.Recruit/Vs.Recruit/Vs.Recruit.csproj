@@ -221,10 +221,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Debug\Vs.HRM.dll</HintPath>
     </Reference>
-    <Reference Include="VS.Report, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\VS.Report.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Form1.cs">
@@ -721,6 +717,10 @@
     <ProjectReference Include="..\..\02.Common\Common\Commons.csproj">
       <Project>{375704a9-ba2d-4325-aa66-2fdd8ee246ca}</Project>
       <Name>Commons</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\05.Vs.Report\Vs.Report\Vs.Report.csproj">
+      <Project>{bf84c4f2-fde2-492a-8175-ba38720d0dbd}</Project>
+      <Name>Vs.Report</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

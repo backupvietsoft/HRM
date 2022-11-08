@@ -257,7 +257,7 @@ namespace Vs.Recruit
                 grvVTYC.Columns["ID_VTTD"].Visible = false;
                 grvVTYC.Columns["ID_TT_VT"].Visible = false;
                 grvVTYC.Columns["LY_DO_TUYEN"].Visible = false;
-
+                
                 for (int i = 0; i < grvVTYC.Columns.Count; i++)
                 {
                     if (i < 17)
@@ -287,6 +287,8 @@ namespace Vs.Recruit
                 {
                     //grvVTYC.FocusedRowHandle = 0;
                 }
+                grvVTYC.Columns["MA_YCTD"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
+                grvVTYC.Columns["TEN_LCV"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
                 Commons.Modules.sLoad = "";
             }
             catch

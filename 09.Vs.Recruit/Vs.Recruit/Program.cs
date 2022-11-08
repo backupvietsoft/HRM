@@ -30,7 +30,7 @@ namespace Vs.Recruit
             //ds.ReadXml(AppDomain.CurrentDomain.BaseDirectory + "\\vsconfig.xml");
             Commons.IConnections.Username = "sa";
             Commons.IConnections.Server = @"27.74.240.29";
-            Commons.IConnections.Database = "VS_HRM_DM";
+            Commons.IConnections.Database = "VS_HRM_DEMO";
             Commons.IConnections.Password = "codaikadaiku";
             Commons.Modules.sPrivate = @"PILMICO";
             try

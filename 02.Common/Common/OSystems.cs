@@ -335,6 +335,42 @@ namespace Commons
             return true;
         }
 
+        public string FileCopy(string strDUONG_DAN, string strHINH, string FormThuMuc)
+        {
+
+            try
+            {
+                string folderLocation = Commons.Modules.sDDTaiLieu + '\\' + FormThuMuc;
+                string folderLocationFile = folderLocation + '\\' + strHINH;
+                bool exists = System.IO.Directory.Exists(folderLocation);
+                if (!exists)
+                {
+                    System.IO.Directory.CreateDirectory(folderLocation);
+                }
+                if (!File.Exists(folderLocationFile))
+                {
+                    try
+                    {
+                        System.IO.File.Copy(strDUONG_DAN + '\\' + strHINH, folderLocationFile, true);
+
+                    }
+                    catch
+                    {
+                    }
+                }
+                else
+                {
+                    folderLocationFile = "";
+                }
+                return folderLocationFile;
+            }
+            catch
+            {
+                return "";
+            }
+        }
+
+
         public void LuuDuongDan(string strDUONG_DAN, string strHINH)
         {
             if (strHINH.Equals(""))

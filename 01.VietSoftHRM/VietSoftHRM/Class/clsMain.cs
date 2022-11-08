@@ -1,4 +1,5 @@
-﻿using DevExpress.XtraEditors;
+﻿using CredentialManagement;
+using DevExpress.XtraEditors;
 using Microsoft.ApplicationBlocks.Data;
 using System;
 using System.Data;
@@ -84,9 +85,23 @@ namespace VietSoftHRM
                     using (new ConnectToSharedFolder(dt.Rows[0]["DUONG_DAN_TL"].ToString(), new NetworkCredential(dt.Rows[0]["USER_TL"].ToString(), dt.Rows[0]["PASS_TL"].ToString())))
                     {
                         Commons.Modules.sDDTaiLieu = dt.Rows[0]["DUONG_DAN_TL"].ToString();
+                        bool exists = System.IO.Directory.Exists(Commons.Modules.sDDTaiLieu);
+                        if (!exists)
+                        {
+                            System.IO.Directory.CreateDirectory(Commons.Modules.sDDTaiLieu);
+                        }
+                        using (var cred = new Credential())
+                        {
+                            cred.Username = dt.Rows[0]["USER_TL"].ToString();
+                            cred.Password = dt.Rows[0]["PASS_TL"].ToString();
+                            cred.Target = Commons.Modules.sDDTaiLieu.Substring(2, Commons.Modules.sDDTaiLieu.Substring(2).IndexOf("\\"));
+                            cred.Type = CredentialType.DomainPassword;
+                            cred.PersistanceType = PersistanceType.LocalComputer;
+                            cred.Save();
+                        }
                     }
                 }
-                catch (Exception ex)
+                catch 
                 {
                     Commons.Modules.sDDTaiLieu = "";
                     Commons.Modules.iLOAI_CN = 0;

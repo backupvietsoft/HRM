@@ -71,7 +71,7 @@ namespace Vs.Report
 
 
 
-        private void frmViewReport_Load(object sender, EventArgs e)
+        public void frmViewReport_Load(object sender, EventArgs e)
         {
             try
             {

@@ -289,22 +289,12 @@ namespace VietSoftHRM
         {
             try
             {
-                if (co == false)
+                for (int i = 0; i < grvNhom.RowCount; i++)
                 {
-                    for (int i = 0; i < grvNhom.RowCount; i++)
-                    {
-                        //sữa những dòng đã có
-                        SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spGhiNhom", grvNhom.GetRowCellValue(i, "ID_NHOM"), grvNhom.GetRowCellValue(i, "TEN_NHOM"), grvNhom.GetRowCellValue(i, "GHI_CHU"));
-                    }
-                }
-                else
-                {
-                    //thêm thì lấy những dòng nào chưa có trong table 
-                    for (int i = dem; i < grvNhom.RowCount; i++)
-                    {
-                        if (string.IsNullOrEmpty(grvNhom.GetRowCellValue(i, "TEN_NHOM") + "")) break;
-                        SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spGhiNhom", -1, grvNhom.GetRowCellValue(i, "TEN_NHOM"), grvNhom.GetRowCellValue(i, "GHI_CHU"));
-                    }
+                    //sữa những dòng đã có
+                    if(Commons.Modules.ObjSystems.IsnullorEmpty(grvNhom.GetRowCellValue(i, "TEN_NHOM")))
+                    { break; }
+                    SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spGhiNhom", grvNhom.GetRowCellValue(i, "ID_NHOM"), grvNhom.GetRowCellValue(i, "TEN_NHOM"), grvNhom.GetRowCellValue(i, "GHI_CHU"));
                 }
             }
             catch (Exception ex)

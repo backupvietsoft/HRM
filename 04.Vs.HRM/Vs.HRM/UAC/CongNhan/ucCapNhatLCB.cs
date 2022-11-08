@@ -15,6 +15,7 @@ namespace Vs.HRM
     public partial class ucCapNhatLCB : DevExpress.XtraEditors.XtraUserControl
     {
         public static ucCapNhatLCB _instance;
+        bool bSave = false;
         public static ucCapNhatLCB Instance
         {
             get
@@ -25,7 +26,6 @@ namespace Vs.HRM
             }
         }
 
-        string sbt = Commons.Modules.UserName;
         public ucCapNhatLCB()
         {
             InitializeComponent();
@@ -41,12 +41,7 @@ namespace Vs.HRM
             Commons.Modules.ObjSystems.LoadCboDonVi(cboDV);
             Commons.Modules.ObjSystems.LoadCboXiNghiep(cboDV, cboXN);
             Commons.Modules.ObjSystems.LoadCboTo(cboDV, cboXN, cboTo);
-            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(BAC_CVlookUpEdit, Commons.Modules.ObjSystems.DataNgachLuong(true), "ID_NL", "MS_NL", "MS_NL");
-            Commons.Modules.ObjSystems.MLoadLookUpEdit(BAC_HDlookUpEdit, Commons.Modules.ObjSystems.DataBacLuong(Convert.ToInt64(BAC_CVlookUpEdit.EditValue), Convert.ToDateTime(NGAY_HIEU_LUCdateEdit.EditValue), true), "ID_BL", "TEN_BL", "TEN_BL");
-            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(ID_NLlookUpEdit, Commons.Modules.ObjSystems.DataNgachLuong(false), "ID_NL", "MS_NL", "MS_NL");
-            Commons.Modules.ObjSystems.MLoadLookUpEdit(ID_BLlookUpEdit, Commons.Modules.ObjSystems.DataBacLuong(Convert.ToInt64(ID_NLlookUpEdit.EditValue), Convert.ToDateTime(NGAY_HIEU_LUCdateEdit.EditValue), false), "ID_BL", "TEN_BL", "TEN_BL");
             LoadGrdCapNhatLCB();
-            Commons.Modules.ObjSystems.MLoadLookUpEdit(COT_CAP_NHATlookUpEdit, Commons.Modules.ObjSystems.DataCotCapNhat(false), "ID_COT", "TEN_COT", "TEN_COT");
             radBoloc_EditValueChanged(null, null);
             enableButon(true);
             Commons.Modules.ObjSystems.SetPhanQuyen(windowsUIButton);
@@ -55,8 +50,6 @@ namespace Vs.HRM
 
         private void formatText()
         {
-            LUONG_CO_BANtextEdit.Properties.Mask.EditMask = "N" + Commons.Modules.iSoLeTT.ToString() + "";
-            SO_TIENtextEdit.Properties.Mask.EditMask = "N" + Commons.Modules.iSoLeTT.ToString() + "";
             Commons.OSystems.SetDateEditFormat(NGAY_HIEU_LUCdateEdit);
 
         }
@@ -70,20 +63,13 @@ namespace Vs.HRM
             {
                 case "themsua":
                     {
+                        grvCapNhatLCB.OptionsSelection.ShowCheckBoxSelectorInColumnHeader = DevExpress.Utils.DefaultBoolean.True;
+                        grvCapNhatLCB.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CheckBoxRowSelect;
+                        grvCapNhatLCB.OptionsSelection.CheckBoxSelectorField = "CHON";
                         enableButon(false);
+                        bSave = false;
                         break;
                     }
-                case "chonall":
-                    {
-                        Commons.Modules.ObjSystems.MChooseGrid(true, "CHON", grvCapNhatLCB);
-                        break;
-                    }
-                case "bochon":
-                    {
-                        Commons.Modules.ObjSystems.MChooseGrid(false, "CHON", grvCapNhatLCB);
-                        break;
-                    }
-
                 case "thuchien":
                     {
                         try
@@ -93,49 +79,40 @@ namespace Vs.HRM
                                 Commons.Modules.ObjSystems.msgChung(Commons.ThongBao.msgBanChuaChonDuLieu); return;
                             }
                         }
-                        catch 
+                        catch
                         {
                             Commons.Modules.ObjSystems.msgChung(Commons.ThongBao.msgBanChuaChonDuLieu); return;
                         }
-                        dxValidationProvider1.Dispose();
-                        DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule1 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
-                        conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-                        conditionValidationRule1.ErrorText = "This value is not valid";
-                        conditionValidationRule1.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.Critical;
-                        if (chkNgayHieuLuc.Checked == true)
-                        {
-                            dxValidationProvider1.SetValidationRule(this.NGAY_HIEU_LUCdateEdit, conditionValidationRule1);
-                        }
-                        if (chkNLuong.Checked == true)
-                        {
-                            dxValidationProvider1.SetValidationRule(this.ID_NLlookUpEdit, conditionValidationRule1);
-                        }
-                        if (chkBLuong.Checked == true)
-                        {
-                            dxValidationProvider1.SetValidationRule(this.ID_BLlookUpEdit, conditionValidationRule1);
-                        }
-                        if (chkLuongCoBan.Checked == true)
-                        {
-                            dxValidationProvider1.SetValidationRule(this.LUONG_CO_BANtextEdit, conditionValidationRule1);
-                        }
-                        if (chkCOT_CAP_NHAT.Checked == true)
-                        {
-                            dxValidationProvider1.SetValidationRule(this.SO_TIENtextEdit, conditionValidationRule1);
-                        }
+                        //dxValidationProvider1.Dispose();
+                        //DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule1 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
+                        //conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+                        //conditionValidationRule1.ErrorText = "This value is not valid";
+                        //conditionValidationRule1.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.Critical;
+
+                        //dxValidationProvider1.SetValidationRule(this.NGAY_HIEU_LUCdateEdit, conditionValidationRule1);
+
                         if (!dxValidationProvider1.Validate()) return;
                         if (CapNhapTheoDieuKien() == false)
                         {
                             Commons.Modules.ObjSystems.msgChung(Commons.ThongBao.msgBanChuaChonDuLieu); return;
-
                         }
                         enableButon(false);
+                        bSave = true;
                         break;
                     }
                 case "luu":
-                    {
+                        {
+                        if (!dxValidationProvider1.Validate()) return;
+                        Commons.Modules.ObjSystems.ClearValidationProvider(dxValidationProvider1);
+                        if (Convert.ToInt32(Commons.Modules.ObjSystems.ConvertDatatable(grvCapNhatLCB).AsEnumerable().Count(x => x["CHON"].ToString().Trim().ToUpper() == "TRUE")) == 0)
+                        {
+                            Commons.Modules.ObjSystems.msgChung(Commons.ThongBao.msgBanChuaChonDuLieu); return;
+                        }
+                        if (!bSave) {
+                            Commons.Modules.ObjSystems.msgChung("msgCanBamThucHienDeLuu"); return;
+                        }
                         if (Savedata() == false)
                         {
-                            //thất bại
                             Commons.Modules.ObjSystems.msgChung(Commons.ThongBao.msgCapNhatThatBai); return;
                         }
                         Uncheck();
@@ -183,21 +160,6 @@ namespace Vs.HRM
             LoadGrdCapNhatLCB();
             Commons.Modules.sLoad = "";
         }
-        private void BAC_CVlookUpEdit_EditValueChanged(object sender, EventArgs e)
-        {
-            if (Commons.Modules.sLoad == "0Load") return;
-            Commons.Modules.sLoad = "0Load";
-            Commons.Modules.ObjSystems.MLoadLookUpEdit(BAC_HDlookUpEdit, Commons.Modules.ObjSystems.DataBacLuong(Convert.ToInt64(BAC_CVlookUpEdit.EditValue), Convert.ToDateTime(NGAY_HIEU_LUCdateEdit.EditValue), true), "ID_BL", "TEN_BL", "TEN_BL");
-            LoadGrdCapNhatLCB();
-            Commons.Modules.sLoad = "";
-        }
-        private void BAC_HDlookUpEdit_EditValueChanged(object sender, EventArgs e)
-        {
-            if (Commons.Modules.sLoad == "0Load") return;
-            Commons.Modules.sLoad = "0Load";
-            LoadGrdCapNhatLCB();
-            Commons.Modules.sLoad = "";
-        }
         private void radBoloc_EditValueChanged(object sender, EventArgs e)
         {
             if (radBoloc.SelectedIndex == 0)
@@ -220,7 +182,7 @@ namespace Vs.HRM
             DataTable dt = new DataTable();
             try
             {
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetListCapNhatLCB", Convert.ToInt64(cboDV.EditValue), Convert.ToInt64(cboXN.EditValue), Convert.ToInt64(cboTo.EditValue), Convert.ToInt64(BAC_CVlookUpEdit.EditValue), string.IsNullOrEmpty(BAC_HDlookUpEdit.Text.ToString()) ? -1 : Convert.ToInt64(BAC_HDlookUpEdit.EditValue), radBoloc.SelectedIndex, LuongTutextEdit.EditValue, LuongDentextEdit.EditValue, Commons.Modules.UserName, Commons.Modules.TypeLanguage));
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetListCapNhatLCB", Convert.ToInt64(cboDV.EditValue), Convert.ToInt64(cboXN.EditValue), Convert.ToInt64(cboTo.EditValue), radBoloc.SelectedIndex, LuongTutextEdit.EditValue, LuongDentextEdit.EditValue, Commons.Modules.UserName, Commons.Modules.TypeLanguage));
                 dt.Columns["CHON"].ReadOnly = false;
                 Commons.Modules.ObjSystems.MLoadXtraGrid(grdCapNhatLCB, grvCapNhatLCB, dt, false, false, false, true, true, this.Name);
                 grvCapNhatLCB.Columns["CHON"].Visible = false;
@@ -228,13 +190,14 @@ namespace Vs.HRM
                 grvCapNhatLCB.Columns["ID_LCB"].Visible = false;
                 grvCapNhatLCB.Columns["ID_NL"].Visible = false;
                 grvCapNhatLCB.Columns["ID_BL"].Visible = false;
-                grvCapNhatLCB.OptionsSelection.CheckBoxSelectorField = "CHON";
+
+                grvCapNhatLCB.Columns["CHON"].Visible = false;
+                grvCapNhatLCB.OptionsSelection.ShowCheckBoxSelectorInColumnHeader = DevExpress.Utils.DefaultBoolean.False;
+                grvCapNhatLCB.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.RowSelect;
 
                 grvCapNhatLCB.Columns["CHON"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
                 grvCapNhatLCB.Columns["MS_CN"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
                 grvCapNhatLCB.Columns["SO_QUYET_DINH"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
-                //grvCapNhatLCB.Columns["ID_LDV"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
-
 
                 grvCapNhatLCB.Columns["LUONG_CO_BAN"].DisplayFormat.FormatType = FormatType.Numeric;
                 grvCapNhatLCB.Columns["LUONG_CO_BAN"].DisplayFormat.FormatString = Commons.Modules.sSoLeTT;
@@ -248,11 +211,9 @@ namespace Vs.HRM
                 grvCapNhatLCB.Columns["PC_KY_NANG"].DisplayFormat.FormatString = Commons.Modules.sSoLeTT;
                 grvCapNhatLCB.Columns["THUONG_HT_CV"].DisplayFormat.FormatType = FormatType.Numeric;
                 grvCapNhatLCB.Columns["THUONG_HT_CV"].DisplayFormat.FormatString = Commons.Modules.sSoLeTT;
-
-
-                //Commons.Modules.ObjSystems.
+                ItemForSumNhanVien.Text = Commons.Modules.ObjLanguages.GetLanguage(this.Name, ItemForSumNhanVien.Name) + ": " + grvCapNhatLCB.RowCount.ToString();
             }
-            catch (Exception ex)
+            catch
             {
 
             }
@@ -271,159 +232,41 @@ namespace Vs.HRM
 
         private void Uncheck()
         {
-            chkBLuong.Checked = false;
-            chkCOT_CAP_NHAT.Checked = false;
-            chkLuongCoBan.Checked = false;
-            chkNgayHieuLuc.Checked = false;
-            chkNLuong.EditValue = false;
 
             NGAY_HIEU_LUCdateEdit.EditValue = DateTime.Now;
-            LUONG_CO_BANtextEdit.EditValue = null;
-            ID_NLlookUpEdit.EditValue = null;
-            ID_BLlookUpEdit.EditValue = null;
-            SO_TIENtextEdit.EditValue = null;
+            LUONG_CO_BANtextEdit.EditValue = 0;
             NOI_DUNGtextEdit.EditValue = "";
         }
         private bool CapNhapTheoDieuKien()
         {
-            DataTable dtDLCN = new DataTable();
-            DataColumn dtC;
-            DataRow dtR;
-
-            dtC = new DataColumn();
-            dtC.DataType = typeof(DateTime);
-            dtC.ColumnName = "NGAY_HIEU_LUC";
-            dtC.Caption = "NGAY_HIEU_LUC";
-            dtC.ReadOnly = false;
-            dtC.Unique = true;
-            dtDLCN.Columns.Add(dtC);
-
-            dtC = new DataColumn();
-            dtC.DataType = typeof(long);
-            dtC.ColumnName = "ID_NL";
-            dtC.Caption = "ID_NL";
-            dtC.ReadOnly = false;
-            dtC.Unique = true;
-            dtDLCN.Columns.Add(dtC);
-
-            dtC = new DataColumn();
-            dtC.DataType = typeof(string);
-            dtC.ColumnName = "MS_NL";
-            dtC.Caption = "MS_NL";
-            dtC.ReadOnly = false;
-            dtC.Unique = true;
-            dtDLCN.Columns.Add(dtC);
-
-            dtC = new DataColumn();
-            dtC.DataType = typeof(long);
-            dtC.ColumnName = "ID_BL";
-            dtC.Caption = "ID_BL";
-            dtC.ReadOnly = false;
-            dtC.Unique = true;
-            dtDLCN.Columns.Add(dtC);
-
-            dtC = new DataColumn();
-            dtC.DataType = typeof(string);
-            dtC.ColumnName = "TEN_BL";
-            dtC.Caption = "TEN_BL";
-            dtC.ReadOnly = false;
-            dtC.Unique = true;
-            dtDLCN.Columns.Add(dtC);
-
-            dtC = new DataColumn();
-            dtC.DataType = typeof(float);
-            dtC.ColumnName = "LUONG_CO_BAN";
-            dtC.Caption = "LUONG_CO_BAN";
-            dtC.ReadOnly = false;
-            dtC.Unique = true;
-            dtDLCN.Columns.Add(dtC);
-
-            dtC = new DataColumn();
-            dtC.DataType = typeof(float);
-            dtC.ColumnName = COT_CAP_NHATlookUpEdit.EditValue.ToString();
-            dtC.Caption = COT_CAP_NHATlookUpEdit.EditValue.ToString();
-            dtC.ReadOnly = false;
-            dtC.Unique = true;
-            dtDLCN.Columns.Add(dtC);
-
-            dtR = dtDLCN.NewRow();
-
-            if (chkNgayHieuLuc.Checked == true)
+            DataTable dtCN = new DataTable();
+            dtCN = (DataTable)grdCapNhatLCB.DataSource;
+            int SQD = 0;
+            try
             {
-                dtR["NGAY_HIEU_LUC"] = NGAY_HIEU_LUCdateEdit.EditValue.ToString();
+                SQD = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT MAX(SO_QUYET_DINH) + 1 FROM dbo.LUONG_CO_BAN"));
+                dtCN.AsEnumerable().Where(x => x["CHON"].ToString().ToUpper().Trim() == "TRUE").ToList<DataRow>().ForEach(r => { r["NGAY_HIEU_LUC"] = NGAY_HIEU_LUCdateEdit.DateTime; r["LUONG_CO_BAN"] = LUONG_CO_BANtextEdit.EditValue; r["GHI_CHU"] = NOI_DUNGtextEdit.EditValue; r["SO_QUYET_DINH"] = SQD; });
+                dtCN.AcceptChanges();
+                return true;
             }
-            if (chkNLuong.Checked == true)
-            {
-                dtR["ID_NL"] = ID_NLlookUpEdit.EditValue.ToString();
-                dtR["MS_NL"] = ID_NLlookUpEdit.Text.ToString();
-
-            }
-            if (chkBLuong.Checked == true)
-            {
-                dtR["ID_BL"] = ID_BLlookUpEdit.EditValue.ToString();
-                dtR["TEN_BL"] = ID_BLlookUpEdit.Text.ToString();
-
-            }
-            if (chkLuongCoBan.Checked == true)
-            {
-                dtR["LUONG_CO_BAN"] = LUONG_CO_BANtextEdit.EditValue.ToString();
-            }
-            if (chkCOT_CAP_NHAT.Checked == true)
-            {
-                dtR["" + COT_CAP_NHATlookUpEdit.EditValue.ToString() + ""] = SO_TIENtextEdit.EditValue.ToString();
-            }
-            dtDLCN.Rows.Add(dtR);
-            if (dtDLCN.Rows.Count == 0)
+            catch
             {
                 return false;
             }
-            else
-            {
 
-                DataTable dtCN = new DataTable();
-                dtCN = (DataTable)grdCapNhatLCB.DataSource;
-
-                try { 
-                string sBT = "sBTDLCN" + Commons.Modules.UserName;
-                string sBT1 = "sBTCongNhan" + Commons.Modules.UserName;
-                Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBT, dtDLCN, "");
-                Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBT1, dtCN, "");
-
-                System.Data.SqlClient.SqlConnection conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
-                conn.Open();
-
-                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spCapNhatLCB", conn);
-                cmd.Parameters.Add("@sBTDLCN", SqlDbType.NVarChar).Value = sBT;
-                cmd.Parameters.Add("@sBTCN", SqlDbType.NVarChar).Value = sBT1;
-                cmd.Parameters.Add("@NAME_COL", SqlDbType.NVarChar).Value = COT_CAP_NHATlookUpEdit.EditValue.ToString();
-                cmd.CommandType = CommandType.StoredProcedure;
-                System.Data.SqlClient.SqlDataAdapter da = new System.Data.SqlClient.SqlDataAdapter(cmd);
-                DataSet ds = new DataSet();
-                da.Fill(ds);
-                DataTable dt = new DataTable();
-                dt = ds.Tables[0].Copy();
-                grdCapNhatLCB.DataSource = dt;
-                }
-                catch
-                {
-                    return false;
-                }
-
-                return true;
-            }
         }
         private bool Savedata()
         {
             try
             {
                 DataTable dt = Commons.Modules.ObjSystems.ConvertDatatable(grvCapNhatLCB);
-                Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sbt, dt, "");
-                string sSql = "UPDATE a SET a.NGAY_HIEU_LUC = b.NGAY_HIEU_LUC,a.ID_NL = b.ID_NL,a.ID_BL = b.ID_BL,a.LUONG_CO_BAN = b.LUONG_CO_BAN,a.THUONG_CHUYEN_CAN = b.THUONG_CHUYEN_CAN,a.PC_DOC_HAI = b.PC_DOC_HAI,a.THUONG_HT_CV = b.THUONG_HT_CV,a.PC_KY_NANG = b.PC_KY_NANG,a.PC_SINH_HOAT = b.PC_SINH_HOAT,a.GHI_CHU = N'" + NOI_DUNGtextEdit.EditValue + "' FROM dbo.LUONG_CO_BAN a INNER JOIN " + sbt + " b ON b.ID_LCB = a.ID_LCB AND b.CHON = 1";
+                Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, "sbtLuongCB" + Commons.Modules.iIDUser, dt, "");
+                string sSql = "INSERT INTO dbo.LUONG_CO_BAN(ID_CN,ID_TO,ID_CV,ID_NK,NGAY_KY,SO_QUYET_DINH,NGAY_HIEU_LUC,GHI_CHU,LUONG_CO_BAN,MUC_LUONG_THUC,HS_LUONG,THUONG_CHUYEN_CAN,PC_DOC_HAI,THUONG_HT_CV,PC_KY_NANG,PC_SINH_HOAT,ID_TT) SELECT A.ID_CN,B.ID_TO,B.ID_CV,1,A.NGAY_HIEU_LUC,A.SO_QUYET_DINH,A.NGAY_HIEU_LUC,A.GHI_CHU,A.LUONG_CO_BAN,A.LUONG_CO_BAN,A.LUONG_CO_BAN,A.THUONG_CHUYEN_CAN,A.PC_DOC_HAI,A.THUONG_HT_CV,A.PC_KY_NANG,A.PC_SINH_HOAT,1 FROM dbo.sbtLuongCB35 A INNER JOIN dbo.CONG_NHAN B ON B.ID_CN = A.ID_CN WHERE A.CHON = 1 AND NOT EXISTS (SELECT * FROM dbo.LUONG_CO_BAN C WHERE A.ID_CN = C.ID_CN AND CONVERT(DATE,A.NGAY_HIEU_LUC) = CONVERT(DATE,C.NGAY_HIEU_LUC) AND A.SO_QUYET_DINH = C.SO_QUYET_DINH)";
                 SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, sSql);
-                Commons.Modules.ObjSystems.XoaTable(sbt);
+                Commons.Modules.ObjSystems.XoaTable("sbtLuongCB" + Commons.Modules.iIDUser);
                 return true;
             }
-            catch (Exception)
+            catch
             {
                 return false;
             }
@@ -436,7 +279,6 @@ namespace Vs.HRM
         {
             if (Commons.Modules.sLoad == "0Load") return;
             Commons.Modules.sLoad = "0Load";
-            Commons.Modules.ObjSystems.MLoadLookUpEdit(ID_BLlookUpEdit, Commons.Modules.ObjSystems.DataBacLuong(Convert.ToInt64(ID_NLlookUpEdit.EditValue), Convert.ToDateTime(NGAY_HIEU_LUCdateEdit.EditValue), false), "ID_BL", "TEN_BL", "TEN_BL");
             //LoadGrdCapNhatLCB();
             Commons.Modules.sLoad = "";
         }
@@ -482,26 +324,13 @@ namespace Vs.HRM
 
         private void grvCapNhatLCB_RowCountChanged(object sender, EventArgs e)
         {
-            GridView view = sender as GridView;
-            try
-            {
-                int index = ItemForSumNhanVien.Text.IndexOf(':');
-                if (index > 0)
-                {
-                    if (view.RowCount > 0)
-                    {
-                        ItemForSumNhanVien.Text = ItemForSumNhanVien.Text.Substring(0, index) + ": " + view.RowCount.ToString();
-                    }
-                    else
-                    {
-                        ItemForSumNhanVien.Text = ItemForSumNhanVien.Text.Substring(0, index) + ": 0";
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                XtraMessageBox.Show(ex.Message.ToString());
-            }
+            ItemForSumNhanVien.Text = Commons.Modules.ObjLanguages.GetLanguage(this.Name, ItemForSumNhanVien.Name) + ": " + grvCapNhatLCB.RowCount.ToString();
+
+        }
+
+        private void grvCapNhatLCB_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
+        {
+            bSave = false;
         }
     }
 }

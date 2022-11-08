@@ -126,18 +126,6 @@ namespace Vs.Recruit
                                     InDTDH();
                                     break;
                                 }
-                            case 2:
-                                {
-                                    DataTable dtbc = new DataTable();
-                                    string sBTCongNhan = "sBTCongNhan" + Commons.Modules.iIDUser;
-                                    try
-                                    {
-                                        Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBTCongNhan, dtTemp, "");
-
-                                    }
-                                    catch { }
-                                    break;
-                                }
                             default:
                                 break;
                         }

@@ -30,7 +30,6 @@ namespace VietSoftHRM
                 //System.Diagnostics.Process.Start("VietSoftHRM.exe", Com.Mod.Server + " " + Com.Mod.UserDB + " " + Com.Mod.Password + " " + Com.Mod.Database + " " + Com.Mod.UserID.ToString() + " " + Com.Mod.UName.ToString());
                 //insert vao user
                 //MessageBox.Show(Commons.Modules.UserName + " : " + Commons.Modules.iIDUser.ToString() + " : " + Commons.IConnections.Database + "\n" + Commons.IConnections.CNStr);
-                
             }
             clsMain.setTTC();
             clsMain.CheckUpdate();
@@ -56,11 +55,8 @@ namespace VietSoftHRM
                 //MRunInt();
                 Application.Run(new frmLogin());
                 //Application.Run(new frmMain());
-
                 //Application.Run(new XtraForm1());
-
                 //Application.Run(new Vs.HRM.frmImportNhanSu());
-
                 //Vs.Report.frmViewReport frm = new Vs.Report.frmViewReport();
                 //frm.rpt = new VS.Report.NhanSu.XtraReport1();
                 //frm.ShowDialog();
@@ -93,6 +89,5 @@ namespace VietSoftHRM
                 MessageBox.Show(ex.Message);
             }
         }
-
     }
 }

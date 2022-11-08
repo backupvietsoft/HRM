@@ -6,6 +6,8 @@ using System.Data;
 using System.Windows.Forms;
 using Microsoft.ApplicationBlocks.Data;
 using Vs.Report;
+using System.IO;
+using Commons;
 
 namespace Vs.HRM
 {
@@ -287,9 +289,50 @@ namespace Vs.HRM
             }
         }
 
+        private string InDuLieuCD()
+        {
+            System.Data.SqlClient.SqlConnection conn;
+            DataTable dt = new DataTable();
+            frmViewReport frm = new frmViewReport();
+            frm.rpt = new rptKeHoachDaoTao(DateTime.Now);
+            try
+            {
+                conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                conn.Open();
 
-       
-       
+                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptKeHoachDaoTao", conn);
+
+                cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                cmd.Parameters.Add("@ID_KDT", SqlDbType.Int).Value = Convert.ToInt64(grvKhoaHoc.GetFocusedRowCellValue("ID_KDT"));
+                cmd.CommandType = CommandType.StoredProcedure;
+                System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+
+                DataSet ds = new DataSet();
+                adp.Fill(ds);
+                dt = new DataTable();
+                dt = ds.Tables[0].Copy();
+                dt.TableName = "DA_TA";
+                frm.AddDataSource(dt);
+            }
+            catch
+            {
+            }
+            frm.frmViewReport_Load(null, null);
+            string file = DateTime.Now.ToString("yyyyMMdd_HHmmss") +".pdf";
+            frm.rpt.ExportToPdf(file,null);
+            string resulst = Commons.Modules.ObjSystems.FileCopy(Application.StartupPath, file, this.Name);
+            try
+            {
+                File.Delete(file);
+            }
+            catch
+            {
+            }
+            return resulst;
+
+        }
+
         private void InDuLieu()
         {
             System.Data.SqlClient.SqlConnection conn;
@@ -321,6 +364,34 @@ namespace Vs.HRM
             }
             frm.ShowDialog();
         }
+
+        private bool checkDuyetTuDong()
+        {
+            //user có trong duyệt user
+            string sSql = "SELECT COUNT(*) FROM dbo.DUYET_USER A INNER JOIN dbo.DUYET_QUY_DINH B ON B.ID_DQD = A.ID_DQD INNER JOIN dbo.DUYET_TAI_LIEU C ON C.ID_DTL = B.ID_DTL WHERE C.FORM_NAME = '" + this.Name + "' AND A.ID_USER = " + Commons.Modules.iIDUser + "";
+            int n = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, sSql));
+            if(n > 0)
+            {
+                 return true;
+            }
+            //kiểm tra không có bước duyệt nào
+            sSql = "SELECT COUNT(*) FROM dbo.DUYET_BUOC A INNER JOIN dbo.DUYET_QUY_DINH B ON B.ID_DQD = A.ID_DQD INNER JOIN dbo.DUYET_TAI_LIEU C ON C.ID_DTL = B.ID_DTL WHERE C.FORM_NAME = '"+ this.Name + "'";
+            n = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, sSql));
+            if (n == 0)
+            {
+                return true;
+            }
+            //
+            sSql = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr,CommandType.Text, "SELECT TOP 1 A.DIEU_KIEN_DUYET FROM dbo.DUYET_QUY_DINH A INNER JOIN dbo.DUYET_TAI_LIEU B ON B.ID_DTL = A.ID_DTL WHERE B.FORM_NAME = '" + this.Name + "'").ToString();
+            n = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, sSql.Replace("@ID_KDT",iIDDT.ToString())));
+            if (n == 0)
+            {
+                return true;
+            }
+            return false;
+        }    
+
+
         private void windowsUIButton_ButtonClick(object sender, DevExpress.XtraBars.Docking2010.ButtonEventArgs e)
         {
             WindowsUIButton btn = e.Button as WindowsUIButton;
@@ -333,7 +404,31 @@ namespace Vs.HRM
                         if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgBanCoMuonChuyenDuyetKhong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) return;
                         try
                         {
-                            SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spQuyDinhDuyetTaiLieu",Commons.Modules.iIDUser,this.Name,iIDDT,-1,ItemForTEN_KHOA_DT.Text,1,"Tài liệu đk",0,Commons.Modules.UserName,Commons.Modules.TypeLanguage);
+                            //kiểm tra duyệt quy trình
+                            string Ykien = "";
+                            bool KhanCap = false;
+                            if(!checkDuyetTuDong())
+                            {
+                                frmYKienYC frm = new frmYKienYC();
+                                if(frm.ShowDialog() == DialogResult.OK)
+                                {
+                                    Ykien = frm.txtYKien.Text;
+                                    KhanCap = frm.chkKhanCap.Checked;
+                                }    
+                            }    
+
+                            SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spQuyDinhDuyetTaiLieu",
+                                Commons.Modules.iIDUser, 
+                                this.Name, 
+                                iIDDT, 
+                                -1, 
+                                ItemForTEN_KHOA_DT.Text, 
+                                1,
+                                InDuLieuCD(), 
+                                KhanCap,
+                                Ykien,
+                                Commons.Modules.UserName,
+                                Commons.Modules.TypeLanguage);
                             LoadGridControl(iIDDT);
                             windowsUIButton.Buttons[0].Properties.Visible = false;
                             LoadGridControl(iIDDT);

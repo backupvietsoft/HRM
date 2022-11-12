@@ -628,6 +628,27 @@ namespace Vs.HRM
             }
             catch (Exception ex) { }
         }
+
+        // cap nhat hop dong
+        public DXMenuItem MCreateMenuCapNhatTT(DevExpress.XtraGrid.Views.Grid.GridView view, int rowHandle)
+        {
+            string sStr = Commons.Modules.ObjLanguages.GetLanguage(Commons.Modules.ModuleName, this.Name, "lblCapNhatTinhTrang", Commons.Modules.TypeLanguage);
+            DXMenuItem menuThongTinNS = new DXMenuItem(sStr, new EventHandler(CapNhatTT));
+            menuThongTinNS.Tag = new RowInfo(view, rowHandle);
+            return menuThongTinNS;
+        }
+        public void CapNhatTT(object sender, EventArgs e)
+        {
+            try
+            {
+                iID_CN = Convert.ToInt64(grvDSUngVien.GetFocusedRowCellValue("ID_CN"));
+                string sSQL = "UPDATE dbo.HOP_DONG_LAO_DONG SET ID_TT = 2 WHERE ID_CN = " + grvDSUngVien.GetFocusedRowCellValue("ID_CN") + " AND ID_HDLD = " + grvDSUngVien.GetFocusedRowCellValue("ID_HDLD") + "";
+                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, sSQL);
+                LoadData();
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgLuuThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "sThongBao"), MessageBoxButtons.OK);
+            }
+            catch (Exception ex) { }
+        }
         public void BackWindowsUIButtonPanel_ButtonClick(object sender, ButtonEventArgs e)
         {
             ucNS.Hide();
@@ -645,10 +666,19 @@ namespace Vs.HRM
                     e.Menu.Items.Clear();
                     DevExpress.Utils.Menu.DXMenuItem itemTTNS = MCreateMenuThongTinNS(view, irow);
                     e.Menu.Items.Add(itemTTNS);
+
+                    if (grvDSUngVien.FocusedColumn.FieldName.ToString() == "TEN_TT")
+                    {
+                        DevExpress.Utils.Menu.DXMenuItem itemCapNhatTT = MCreateMenuCapNhatTT(view, irow);
+                        e.Menu.Items.Add(itemCapNhatTT);
+                    }
+
                     if (btnALL.Buttons[2].Properties.Visible || btnALL.Buttons[0].Properties.Visible) return;
                     if (grvDSUngVien.FocusedColumn.FieldName.ToString() == "MS_CN" || grvDSUngVien.FocusedColumn.FieldName.ToString() == "HO_TEN") return;
                     DevExpress.Utils.Menu.DXMenuItem itemCapNhatAll = MCreateMenuCapNhatAll(view, irow);
                     e.Menu.Items.Add(itemCapNhatAll);
+
+                   
                     //if (flag == false) return;
                 }
             }

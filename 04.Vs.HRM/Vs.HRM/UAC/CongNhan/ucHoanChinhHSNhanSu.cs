@@ -119,8 +119,9 @@ namespace Vs.HRM
                 Commons.Modules.ObjSystems.MLoadXtraGrid(grdData, grvData, dt, false, false, false, false, true, this.Name);
                 grvData.Columns["ID_CN"].Visible = false;
                 grvData.Columns["ID_HDLD"].Visible = false;
-                grvData.Columns["TT_HDLD"].AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-                grvData.Columns["TT_HDLD"].AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+                grvData.Columns["TT_HDLD_DANG_SOAN"].AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+                grvData.Columns["TT_HDLD_CHUA_CO"].AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+                grvData.Columns["TT_HDLD_HET_HD"].AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
                 grvData.Columns["TT_QTCT"].AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
                 grvData.Columns["TT_QTCT"].AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
                 grvData.Columns["TT_LUONG"].AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
@@ -196,7 +197,7 @@ namespace Vs.HRM
                 ucNS.Refresh();
                 ucNS.flag = true;
                 string sTenLab = "";
-                if (grvData.FocusedColumn.FieldName.ToString() == "TT_HDLD")
+                if (grvData.FocusedColumn.FieldName.Substring(0, 7) == "TT_HDLD")
                 {
                     sTenLab = "labHopDong";
                 }
@@ -223,6 +224,28 @@ namespace Vs.HRM
             }
             catch (Exception ex) { }
         }
+
+        // cap nhat hop dong
+        public DXMenuItem MCreateMenuCapNhatTT(DevExpress.XtraGrid.Views.Grid.GridView view, int rowHandle)
+        {
+            string sStr = Commons.Modules.ObjLanguages.GetLanguage(Commons.Modules.ModuleName, this.Name, "lblCapNhatTinhTrang", Commons.Modules.TypeLanguage);
+            DXMenuItem menuThongTinNS = new DXMenuItem(sStr, new EventHandler(CapNhatTT));
+            menuThongTinNS.Tag = new RowInfo(view, rowHandle);
+            return menuThongTinNS;
+        }
+        public void CapNhatTT(object sender, EventArgs e)
+        {
+            try
+            {
+                iID_NS = Convert.ToInt64(grvData.GetFocusedRowCellValue("ID_CN"));
+                string sSQL = "UPDATE dbo.HOP_DONG_LAO_DONG SET ID_TT = 2 WHERE ID_CN = " + grvData.GetFocusedRowCellValue("ID_CN") + " AND ID_HDLD = " + grvData.GetFocusedRowCellValue("ID_HDLD") + "";
+                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, sSQL);
+                LoadData();
+
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgLuuThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "sThongBao"), MessageBoxButtons.OK);
+            }
+            catch (Exception ex) { }
+        }
         public void BackWindowsUIButtonPanel_ButtonClick(object sender, ButtonEventArgs e)
         {
             ucNS.Hide();
@@ -242,6 +265,11 @@ namespace Vs.HRM
                     e.Menu.Items.Clear();
                     DevExpress.Utils.Menu.DXMenuItem itemTTNS = MCreateMenuThongTinNS(view, irow);
                     e.Menu.Items.Add(itemTTNS);
+                    if (grvData.FocusedColumn.FieldName.ToString() == "TT_HDLD_DANG_SOAN" && grvData.GetFocusedRowCellValue("TT_HDLD_DANG_SOAN").ToString() != "")
+                    {
+                        DevExpress.Utils.Menu.DXMenuItem itemCapNhatTT = MCreateMenuCapNhatTT(view, irow);
+                        e.Menu.Items.Add(itemCapNhatTT);
+                    }
                     //if (flag == false) return;
                 }
             }

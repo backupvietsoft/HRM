@@ -516,10 +516,6 @@ namespace Vs.HRM
                                 if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgCoHDchuaky"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "sThongBao"), MessageBoxButtons.YesNo) == DialogResult.No) return;
                                 SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "UPDATE dbo.HOP_DONG_LAO_DONG SET ID_TT = 2 WHERE ID_CN =" + Commons.Modules.iCongNhan + "");
                             }
-                            if (Convert.ToInt32(cboTinhTrang.EditValue) == 2 && txtTaiLieu.Text.Trim() == "")
-                            {
-                                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgTaiLieuKhongDuocTrong"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "sThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Warning); return;
-                            }
                             if (SaveData())
                             {
                                 Commons.Modules.ObjSystems.LuuDuongDan(strDuongDan, txtTaiLieu.Text);

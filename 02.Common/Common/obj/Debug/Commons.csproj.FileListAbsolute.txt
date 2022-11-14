@@ -961,7 +961,6 @@ D:\01.SourceCode\02.HRM\02.Common\Common\bin\Debug\DevExpress.XtraGauges.v22.1.C
 D:\01.SourceCode\02.HRM\02.Common\Common\bin\Debug\DevExpress.RichEdit.v22.1.Core.dll
 D:\01.SourceCode\02.HRM\02.Common\Common\bin\Debug\DevExpress.Office.v22.1.Core.dll
 D:\01.SourceCode\02.HRM\02.Common\Common\bin\Debug\DevExpress.CodeParser.v22.1.dll
-D:\01.SourceCode\02.HRM\02.Common\Common\bin\Debug\ICSharpCode.SharpZipLib.dll
 D:\01.SourceCode\02.HRM\02.Common\Common\bin\Debug\DevExpress.Data.v22.1.xml
 D:\01.SourceCode\02.HRM\02.Common\Common\bin\Debug\DevExpress.Data.Desktop.v22.1.xml
 D:\01.SourceCode\02.HRM\02.Common\Common\bin\Debug\DevExpress.Utils.v22.1.xml

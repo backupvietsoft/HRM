@@ -144,8 +144,7 @@ public class MExcel
         string resulst = MWsheet.Cells[DongBD, CotBD].Value;
         MWsheet.Cells[DongBD, CotBD].Value2 ="";
         return resulst;
-
-    }    
+    }
     public void MFuntion(Microsoft.Office.Interop.Excel.Worksheet MWsheet, string MFuntion, int DongBD, int CotBD, int DongBDFuntion, int CotBDFuntion, float MFontSize, bool MFontBold, float MColumnWidth, string MNumberFormat)
     {
         try
@@ -465,7 +464,7 @@ public class MExcel
         }
     }
 
-    public void DinhDang(Microsoft.Office.Interop.Excel.Worksheet MWsheet, string NoiDung, int Dong, int Cot)
+    public void DinhDang(Excel.Worksheet MWsheet, string NoiDung, int Dong, int Cot)
     {
         try
         {
@@ -480,7 +479,7 @@ public class MExcel
         }
     }
 
-    public void DinhDang(Microsoft.Office.Interop.Excel.Worksheet MWsheet, string NoiDung, int Dong, int Cot, String MNumberFormat)
+    public void DinhDang(Excel.Worksheet MWsheet, string NoiDung, int Dong, int Cot, String MNumberFormat)
     {
         try
         {
@@ -495,7 +494,7 @@ public class MExcel
         }
     }
 
-    public void DinhDang(Microsoft.Office.Interop.Excel.Worksheet MWsheet, string NoiDung, int Dong, int Cot, String MNumberFormat, float MFontSize)
+    public void DinhDang(Excel.Worksheet MWsheet, string NoiDung, int Dong, int Cot, String MNumberFormat, float MFontSize)
     {
         try
         {
@@ -513,7 +512,7 @@ public class MExcel
         }
     }
 
-    public void DinhDang(Microsoft.Office.Interop.Excel.Worksheet MWsheet, string NoiDung, int Dong, int Cot, String MNumberFormat, float MFontSize, bool MFontBold)
+    public void DinhDang(Excel.Worksheet MWsheet, string NoiDung, int Dong, int Cot, String MNumberFormat, float MFontSize, bool MFontBold)
     {
         try
         {
@@ -568,7 +567,7 @@ public class MExcel
     // End Try
     // End Sub
 
-    public void DinhDang(Microsoft.Office.Interop.Excel.Worksheet MWsheet, string NoiDung, int Dong, int Cot, String MNumberFormat, float MFontSize, bool MFontBold, Microsoft.Office.Interop.Excel.XlHAlign MHAlign, Microsoft.Office.Interop.Excel.XlVAlign MVAlign)
+    public void DinhDang(Excel.Worksheet MWsheet, string NoiDung, int Dong, int Cot, String MNumberFormat, float MFontSize, bool MFontBold, Microsoft.Office.Interop.Excel.XlHAlign MHAlign, Microsoft.Office.Interop.Excel.XlVAlign MVAlign)
     {
         try
         {
@@ -591,7 +590,7 @@ public class MExcel
         }
     }
 
-    public void DinhDang(Microsoft.Office.Interop.Excel.Worksheet MWsheet, string NoiDung, int Dong, int Cot, String MNumberFormat, float MFontSize, bool MFontBold, bool MMerge, int MDongMerge, int MCotMerge)
+    public void DinhDang(Excel.Worksheet MWsheet, string NoiDung, int Dong, int Cot, String MNumberFormat, float MFontSize, bool MFontBold, bool MMerge, int MDongMerge, int MCotMerge)
     {
         try
         {
@@ -614,7 +613,7 @@ public class MExcel
         }
     }
 
-    public void DinhDang(Microsoft.Office.Interop.Excel.Worksheet MWsheet, string NoiDung, int Dong, int Cot, String MNumberFormat, float MFontSize, bool MFontBold, Microsoft.Office.Interop.Excel.XlHAlign MHAlign, Microsoft.Office.Interop.Excel.XlVAlign MVAlign, bool MMerge, int MDongMerge, int MCotMerge, int MRowHeight)
+    public void DinhDang(Excel.Worksheet MWsheet, string NoiDung, int Dong, int Cot, String MNumberFormat, float MFontSize, bool MFontBold, Microsoft.Office.Interop.Excel.XlHAlign MHAlign, Microsoft.Office.Interop.Excel.XlVAlign MVAlign, bool MMerge, int MDongMerge, int MCotMerge, int MRowHeight)
     {
         try
         {
@@ -639,7 +638,7 @@ public class MExcel
         }
     }
 
-    public void DinhDang(Microsoft.Office.Interop.Excel.Worksheet MWsheet, string NoiDung, int Dong, int Cot, String MNumberFormat, float MFontSize, bool MFontBold, Microsoft.Office.Interop.Excel.XlHAlign MHAlign, Microsoft.Office.Interop.Excel.XlVAlign MVAlign, bool MMerge, int MDongMerge, int MCotMerge, bool MFontUnderline, bool MFontItalic)
+    public void DinhDang(Excel.Worksheet MWsheet, string NoiDung, int Dong, int Cot, String MNumberFormat, float MFontSize, bool MFontBold, Microsoft.Office.Interop.Excel.XlHAlign MHAlign, Microsoft.Office.Interop.Excel.XlVAlign MVAlign, bool MMerge, int MDongMerge, int MCotMerge, bool MFontUnderline, bool MFontItalic)
     {
         try
         {

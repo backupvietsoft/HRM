@@ -20,7 +20,11 @@ namespace Vs.TimeAttendance
         public XtraForm1()
         {
             InitializeComponent();
-           
+            Commons.Modules.iUngVien = -1;
+            ucBaoCaoTongHopThang uac = new ucBaoCaoTongHopThang();
+            this.Controls.Add(uac);
+            uac.Dock = DockStyle.Fill;
+
         }
 
     }

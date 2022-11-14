@@ -45,7 +45,7 @@ namespace Vs.Recruit
                 LoadData();
                 Commons.Modules.sLoad = "";
             }
-            catch (Exception ex)
+            catch
             {
             }
         }
@@ -206,11 +206,19 @@ namespace Vs.Recruit
                     case "Ingiayhen":
                         {
                             if (grvDSUngVien.RowCount == 0) return;
-
                             frmInGiayHenDiLam frm = new frmInGiayHenDiLam();
                             frm.MS_CV = Convert.ToInt32(cboMS_CV.EditValue);
                             frm.dtTemp = new DataTable();
-                            frm.dtTemp = (DataTable)grdDSUngVien.DataSource;
+                            try
+                            {
+                                frm.dtTemp = Commons.Modules.ObjSystems.ConvertDatatable(grdDSUngVien);
+                                    //.AsEnumerable().Where(x => x["NGAY_HEN_DI_LAM"] != "").CopyToDataTable();
+
+                            }
+                            catch
+                            {
+
+                            }
                             frm.ShowDialog();
                             break;
                         }

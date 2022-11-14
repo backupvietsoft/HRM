@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions1 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions2 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions3 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions4 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
             this.dataLayoutControl1 = new DevExpress.XtraDataLayout.DataLayoutControl();
             this.txtCHE_DO_PHUC_LOI = new DevExpress.XtraEditors.MemoEdit();
             this.txtTHOI_GIAN_LAM_VIEC = new DevExpress.XtraEditors.MemoEdit();
@@ -80,41 +80,41 @@
             // 
             // txtCHE_DO_PHUC_LOI
             // 
-            this.txtCHE_DO_PHUC_LOI.Location = new System.Drawing.Point(165, 418);
+            this.txtCHE_DO_PHUC_LOI.Location = new System.Drawing.Point(129, 418);
             this.txtCHE_DO_PHUC_LOI.Name = "txtCHE_DO_PHUC_LOI";
-            this.txtCHE_DO_PHUC_LOI.Size = new System.Drawing.Size(715, 106);
+            this.txtCHE_DO_PHUC_LOI.Size = new System.Drawing.Size(751, 106);
             this.txtCHE_DO_PHUC_LOI.StyleController = this.dataLayoutControl1;
             this.txtCHE_DO_PHUC_LOI.TabIndex = 40;
             // 
             // txtTHOI_GIAN_LAM_VIEC
             // 
-            this.txtTHOI_GIAN_LAM_VIEC.Location = new System.Drawing.Point(165, 348);
+            this.txtTHOI_GIAN_LAM_VIEC.Location = new System.Drawing.Point(129, 348);
             this.txtTHOI_GIAN_LAM_VIEC.Name = "txtTHOI_GIAN_LAM_VIEC";
-            this.txtTHOI_GIAN_LAM_VIEC.Size = new System.Drawing.Size(715, 66);
+            this.txtTHOI_GIAN_LAM_VIEC.Size = new System.Drawing.Size(751, 66);
             this.txtTHOI_GIAN_LAM_VIEC.StyleController = this.dataLayoutControl1;
             this.txtTHOI_GIAN_LAM_VIEC.TabIndex = 39;
             // 
             // txtYEU_CAU_KHAC
             // 
-            this.txtYEU_CAU_KHAC.Location = new System.Drawing.Point(165, 278);
+            this.txtYEU_CAU_KHAC.Location = new System.Drawing.Point(129, 278);
             this.txtYEU_CAU_KHAC.Name = "txtYEU_CAU_KHAC";
-            this.txtYEU_CAU_KHAC.Size = new System.Drawing.Size(715, 66);
+            this.txtYEU_CAU_KHAC.Size = new System.Drawing.Size(751, 66);
             this.txtYEU_CAU_KHAC.StyleController = this.dataLayoutControl1;
             this.txtYEU_CAU_KHAC.TabIndex = 38;
             // 
             // txtYEU_CAU
             // 
-            this.txtYEU_CAU.Location = new System.Drawing.Point(165, 208);
+            this.txtYEU_CAU.Location = new System.Drawing.Point(129, 208);
             this.txtYEU_CAU.Name = "txtYEU_CAU";
-            this.txtYEU_CAU.Size = new System.Drawing.Size(715, 66);
+            this.txtYEU_CAU.Size = new System.Drawing.Size(751, 66);
             this.txtYEU_CAU.StyleController = this.dataLayoutControl1;
             this.txtYEU_CAU.TabIndex = 37;
             // 
             // txtMO_TA_CV
             // 
-            this.txtMO_TA_CV.Location = new System.Drawing.Point(165, 45);
+            this.txtMO_TA_CV.Location = new System.Drawing.Point(129, 45);
             this.txtMO_TA_CV.Name = "txtMO_TA_CV";
-            this.txtMO_TA_CV.Size = new System.Drawing.Size(715, 159);
+            this.txtMO_TA_CV.Size = new System.Drawing.Size(751, 159);
             this.txtMO_TA_CV.StyleController = this.dataLayoutControl1;
             this.txtMO_TA_CV.TabIndex = 36;
             // 
@@ -135,11 +135,11 @@
             this.btnALL.AppearanceButton.Pressed.Options.UseFont = true;
             this.btnALL.AppearanceButton.Pressed.Options.UseImage = true;
             this.btnALL.AppearanceButton.Pressed.Options.UseTextOptions = true;
-            windowsUIButtonImageOptions1.ImageUri.Uri = "SaveAll";
-            windowsUIButtonImageOptions2.ImageUri.Uri = "richedit/clearheaderandfooter";
+            windowsUIButtonImageOptions3.ImageUri.Uri = "SaveAll";
+            windowsUIButtonImageOptions4.ImageUri.Uri = "richedit/clearheaderandfooter";
             this.btnALL.Buttons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] {
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions1, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "luu", -1, false),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions2, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "thoat", -1, false)});
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions3, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "luu", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions4, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "thoat", -1, false)});
             this.btnALL.ContentAlignment = System.Drawing.ContentAlignment.MiddleRight;
             this.btnALL.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnALL.Location = new System.Drawing.Point(12, 528);
@@ -179,12 +179,14 @@
             this.lblLoaiCongViec.AppearanceItemCaption.Options.UseTextOptions = true;
             this.lblLoaiCongViec.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.lblLoaiCongViec.AppearanceItemCaption.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.lblLoaiCongViec.AutoSizeMode = DevExpress.XtraLayout.SimpleLabelAutoSizeMode.Both;
             this.lblLoaiCongViec.Location = new System.Drawing.Point(0, 0);
             this.lblLoaiCongViec.MaxSize = new System.Drawing.Size(0, 33);
             this.lblLoaiCongViec.MinSize = new System.Drawing.Size(136, 33);
             this.lblLoaiCongViec.Name = "lblLoaiCongViec";
             this.lblLoaiCongViec.Size = new System.Drawing.Size(872, 33);
             this.lblLoaiCongViec.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            this.lblLoaiCongViec.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.AutoSize;
             this.lblLoaiCongViec.TextSize = new System.Drawing.Size(149, 21);
             // 
             // layoutControlItem3
@@ -203,7 +205,7 @@
             this.lblMoTaCongViec.Location = new System.Drawing.Point(0, 33);
             this.lblMoTaCongViec.Name = "lblMoTaCongViec";
             this.lblMoTaCongViec.Size = new System.Drawing.Size(872, 163);
-            this.lblMoTaCongViec.TextSize = new System.Drawing.Size(149, 17);
+            this.lblMoTaCongViec.TextSize = new System.Drawing.Size(113, 17);
             // 
             // lblYeuCau
             // 
@@ -211,7 +213,7 @@
             this.lblYeuCau.Location = new System.Drawing.Point(0, 196);
             this.lblYeuCau.Name = "lblYeuCau";
             this.lblYeuCau.Size = new System.Drawing.Size(872, 70);
-            this.lblYeuCau.TextSize = new System.Drawing.Size(149, 17);
+            this.lblYeuCau.TextSize = new System.Drawing.Size(113, 17);
             // 
             // lblYeuCauKhac
             // 
@@ -219,7 +221,7 @@
             this.lblYeuCauKhac.Location = new System.Drawing.Point(0, 266);
             this.lblYeuCauKhac.Name = "lblYeuCauKhac";
             this.lblYeuCauKhac.Size = new System.Drawing.Size(872, 70);
-            this.lblYeuCauKhac.TextSize = new System.Drawing.Size(149, 17);
+            this.lblYeuCauKhac.TextSize = new System.Drawing.Size(113, 17);
             // 
             // lblThoiGianLamViec
             // 
@@ -227,7 +229,7 @@
             this.lblThoiGianLamViec.Location = new System.Drawing.Point(0, 336);
             this.lblThoiGianLamViec.Name = "lblThoiGianLamViec";
             this.lblThoiGianLamViec.Size = new System.Drawing.Size(872, 70);
-            this.lblThoiGianLamViec.TextSize = new System.Drawing.Size(149, 17);
+            this.lblThoiGianLamViec.TextSize = new System.Drawing.Size(113, 17);
             // 
             // lblCheDoPhucLoi
             // 
@@ -235,7 +237,7 @@
             this.lblCheDoPhucLoi.Location = new System.Drawing.Point(0, 406);
             this.lblCheDoPhucLoi.Name = "lblCheDoPhucLoi";
             this.lblCheDoPhucLoi.Size = new System.Drawing.Size(872, 110);
-            this.lblCheDoPhucLoi.TextSize = new System.Drawing.Size(149, 17);
+            this.lblCheDoPhucLoi.TextSize = new System.Drawing.Size(113, 17);
             // 
             // frmThongBaoTuyenDung
             // 

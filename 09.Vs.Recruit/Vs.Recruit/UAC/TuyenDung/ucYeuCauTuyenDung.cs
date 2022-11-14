@@ -430,7 +430,6 @@ namespace Vs.Recruit
                         {
                             conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
                             conn.Open();
-
                             System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptThongBaoTuyenDung", conn);
                             cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
                             cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
@@ -443,7 +442,7 @@ namespace Vs.Recruit
                             dt = ds.Tables[0].Copy();
                             if (dt.Rows.Count == 0)
                             {
-                                Commons.Modules.ObjSystems.msgChung(Commons.ThongBao.msgKhongCoDuLieuIn);
+                                Commons.Modules.ObjSystems.msgChung("msgChuaDuocDuyetKhongTheIn");
                                 return;
                             }
                             dt.TableName = "DA_TA";
@@ -1320,13 +1319,10 @@ namespace Vs.Recruit
 
                     try
                     {
-                        int n = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT TOP 1 DINH_BIEN FROM dbo.DINH_BIEN WHERE ID_LCV = " + e.Value + " AND NAM = " + datNgayYC.DateTime.Year + ""));
+                        int n = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT  [dbo].[fnGetSoLuongDBLD]((SELECT TOP 1 ID_DV FROM dbo.XI_NGHIEP WHERE ID_XN = "+ cboBPYC.EditValue +"),"+ e.Value +",GETDATE())"));
                         grvViTri.SetFocusedRowCellValue("SL_DINH_BIEN", n);
                     }
                     catch { grvViTri.SetFocusedRowCellValue("SL_DINH_BIEN", 0); }
-
-
-
                     Commons.Modules.sLoad = "0Load";
                     grvViTri.SetFocusedRowCellValue("ID_LCV", Convert.ToInt64(e.Value));
                     Commons.Modules.sLoad = "";

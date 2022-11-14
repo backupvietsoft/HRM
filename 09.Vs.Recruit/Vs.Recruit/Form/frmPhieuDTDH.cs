@@ -20,8 +20,6 @@ namespace Vs.Recruit
             InitializeComponent();
             Commons.Modules.ObjSystems.ThayDoiNN(this, Root, btnALL);
         }
-
-
         #region even
         private void frmPhieuDTDH_Load(object sender, EventArgs e)
         {

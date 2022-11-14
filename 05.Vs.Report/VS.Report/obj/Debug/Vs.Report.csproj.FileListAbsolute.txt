@@ -2824,7 +2824,6 @@ D:\01.SourceCode\02.HRM\05.Vs.Report\Vs.Report\bin\Debug\DevExpress.DataAccess.v
 D:\01.SourceCode\02.HRM\05.Vs.Report\Vs.Report\bin\Debug\DevExpress.XtraNavBar.v22.1.dll
 D:\01.SourceCode\02.HRM\05.Vs.Report\Vs.Report\bin\Debug\DevExpress.XtraPivotGrid.v22.1.dll
 D:\01.SourceCode\02.HRM\05.Vs.Report\Vs.Report\bin\Debug\DevExpress.XtraCharts.v22.1.Extensions.dll
-D:\01.SourceCode\02.HRM\05.Vs.Report\Vs.Report\bin\Debug\ICSharpCode.SharpZipLib.dll
 D:\01.SourceCode\02.HRM\05.Vs.Report\Vs.Report\bin\Debug\NPOI.OpenXmlFormats.dll
 D:\01.SourceCode\02.HRM\05.Vs.Report\Vs.Report\bin\Debug\NPOI.OpenXml4Net.dll
 D:\01.SourceCode\02.HRM\05.Vs.Report\Vs.Report\bin\Debug\DevExpress.Images.v22.1.dll

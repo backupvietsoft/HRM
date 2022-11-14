@@ -66,7 +66,7 @@ namespace Vs.Recruit
                 row2_TieuDe_BaoCao.NumberFormat = "@";
                 row2_TieuDe_BaoCao.Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
                 row2_TieuDe_BaoCao.Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
-                row2_TieuDe_BaoCao.Value2 = "DANH SÁCH SO SÁNH TUYỂN DỤNG VÀ THỰC TẾ ĐI LÀM";
+                row2_TieuDe_BaoCao.Value2 = "SO SÁNH TUYỂN DỤNG VÀ THỰC TẾ ĐI LÀM";
 
                 Excel.Range row4_Sub_TieuDe_BaoCao = oSheet.get_Range("A" + (DONG + 3).ToString() + "", lastColumn + (DONG + 3).ToString() +""); //A3 - V21
                 row4_Sub_TieuDe_BaoCao.Merge();

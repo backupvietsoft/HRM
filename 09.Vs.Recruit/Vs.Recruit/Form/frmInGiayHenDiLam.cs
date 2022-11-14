@@ -1,5 +1,6 @@
 ﻿using DevExpress.XtraBars.Docking2010;
 using DevExpress.XtraEditors;
+using DevExpress.XtraLayout.Utils;
 using System;
 using System.Data;
 using System.Diagnostics;
@@ -13,6 +14,7 @@ namespace Vs.Recruit
     {
         public int MS_CV = 0;
         public DataTable dtTemp;
+        public DataTable dtUV;
         public frmInGiayHenDiLam()
         {
             InitializeComponent();
@@ -23,8 +25,33 @@ namespace Vs.Recruit
         private void frmInGiayHenDiLam_Load(object sender, EventArgs e)
         {
             rdo_ChonBaoCao.SelectedIndex = 0;
-            dNgayIn.EditValue = DateTime.Today;
+            datTuNgay.EditValue = DateTime.Today;
+            datDenNgay.EditValue = DateTime.Today;
+            LoadComBoUngVien();
         }
+        private void LoadComBoUngVien()
+        {
+            try
+            {
+                dtTemp = dtTemp.AsEnumerable().Where(x => x["NGAY_HEN_DI_LAM"].ToString() != "").CopyToDataTable();
+            }
+            catch
+            {
+                Commons.Modules.ObjSystems.msgChung(Commons.ThongBao.msgKhongCoDuLieuIn);
+                return;
+            }
+            try
+            {
+                DataView view = new DataView(dtTemp);
+                dtUV = view.ToTable(false, new string[] { "ID_UV","HO_TEN" });
+                Commons.Modules.ObjSystems.MLoadCheckedComboBoxEdit(cboUngVien, dtUV, "ID_UV", "HO_TEN", this.Name, true);
+                cboUngVien.CheckAll();
+            }
+            catch
+            {
+            }
+        }
+
         //sự kiện các nút xử lí
         private void windowsUIButton_ButtonClick(object sender, DevExpress.XtraBars.Docking2010.ButtonEventArgs e)
         {
@@ -37,21 +64,27 @@ namespace Vs.Recruit
                     {
                         System.Data.SqlClient.SqlConnection conn;
                         DataTable dtTTC = new DataTable(); // Lấy ký hiệu đơn vị trong thông tin chung
-
                         dtTTC = Commons.Modules.ObjSystems.DataThongTinChung();
                         switch (rdo_ChonBaoCao.SelectedIndex)
                         {
                             case 0:
                                 {
+                                    if(cboUngVien.Text =="")
+                                    {
+                                        Commons.Modules.ObjSystems.msgChung(Commons.ThongBao.msgKhongCoDuLieuIn);
+                                        return;
+                                    }    
+                                    string sBTCongNhan = "sBTCongNhan" + Commons.Modules.iIDUser;
+                                    Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBTCongNhan, dtTemp.Select("ID_UV IN (" + cboUngVien.EditValue + ")").CopyToDataTable(), "");
                                     switch (MS_CV)
                                     {
                                         case 1:
                                             {
                                                 DataTable dtbc = new DataTable();
-                                                string sBTCongNhan = "sBTCongNhan" + Commons.Modules.iIDUser;
                                                 try
                                                 {
-                                                    Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBTCongNhan, dtTemp, "");
+
+
                                                     System.Data.SqlClient.SqlConnection conn1;
                                                     frmViewReport frm = new frmViewReport();
                                                     frm.rpt = new rptThuMoi();
@@ -90,7 +123,6 @@ namespace Vs.Recruit
                                         default:
                                             {
                                                 frmViewReport frm = new frmViewReport();
-                                                string sBTCongNhan = "sBTCongNhan" + Commons.Modules.iIDUser;
                                                 Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBTCongNhan, dtTemp, "");
                                                 System.Data.SqlClient.SqlConnection conn1;
                                                 DataTable dt = new DataTable();
@@ -152,11 +184,17 @@ namespace Vs.Recruit
                 System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptDSUVDaoTaoDH", conn);
                 cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
                 cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
-                cmd.Parameters.Add("@NgayDT", SqlDbType.Date).Value = Commons.Modules.ObjSystems.ConvertDateTime(dNgayIn.Text);
+                cmd.Parameters.Add("@TuNgay", SqlDbType.Date).Value = Commons.Modules.ObjSystems.ConvertDateTime(datTuNgay.Text);
+                cmd.Parameters.Add("@DenNgay", SqlDbType.Date).Value = Commons.Modules.ObjSystems.ConvertDateTime(datDenNgay.Text);
                 cmd.CommandType = CommandType.StoredProcedure;
                 System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
                 DataSet ds = new DataSet();
                 adp.Fill(ds);
+                if (ds.Tables[0].Rows.Count == 0)
+                {
+                    Commons.Modules.ObjSystems.msgChung(Commons.ThongBao.msgKhongCoDuLieuIn);
+                    return;
+                }
                 ds.Tables[0].TableName = "DaoTaoDH";
                 ds.Tables[1].TableName = "info";
                 SaveFileDialog saveFileDialog = new SaveFileDialog();
@@ -181,16 +219,19 @@ namespace Vs.Recruit
 
             }
         }
-
         private void rdo_ChonBaoCao_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (rdo_ChonBaoCao.SelectedIndex == 0)
             {
-                dNgayIn.Enabled = false;
+                lblTuNgay.Visibility = LayoutVisibility.Never;
+                lblDenNgay.Visibility = LayoutVisibility.Never;
+                lblUngVien.Visibility = LayoutVisibility.Always;
             }
             else
             {
-                dNgayIn.Enabled = true;
+                lblTuNgay.Visibility = LayoutVisibility.Always;
+                lblDenNgay.Visibility = LayoutVisibility.Always;
+                lblUngVien.Visibility = LayoutVisibility.Never;
             }
         }
     }

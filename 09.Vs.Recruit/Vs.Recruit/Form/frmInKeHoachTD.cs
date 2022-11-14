@@ -343,7 +343,6 @@ namespace Vs.Recruit
                     title1 = Commons.Modules.MExcel.GetRange(excelWorkSheet, DONG, COT, DONG, TCot);
                     title.AutoFill(title1, Microsoft.Office.Interop.Excel.XlAutoFillType.xlFillCopy);
 
-
                     title = Commons.Modules.MExcel.GetRange(excelWorkSheet, DONG + 1, 1, DONG + dt.Rows.Count, dt.Columns.Count);
                     Commons.Modules.MExcel.MExportExcel(dt, excelWorkSheet, title, false);
 

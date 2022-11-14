@@ -2371,7 +2371,6 @@ D:\01.SourceCode\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Vs.HRM.dll
 D:\01.SourceCode\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Vs.Payroll.dll
 D:\01.SourceCode\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Vs.Recruit.dll
 D:\01.SourceCode\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\VS.Report.dll
-D:\01.SourceCode\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Vs.TimeAttendance.dll
 D:\01.SourceCode\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\EPPlus.dll
 D:\01.SourceCode\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\DevExpress.Docs.v22.1.dll
 D:\01.SourceCode\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\DevExpress.XtraReports.v22.1.Extensions.dll
@@ -2391,7 +2390,6 @@ D:\01.SourceCode\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Vs.HRM.exe.config
 D:\01.SourceCode\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\VS.Report.pdb
 D:\01.SourceCode\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\VS.Report.dll.config
 D:\01.SourceCode\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Vs.TimeAttendance.pdb
-D:\01.SourceCode\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Vs.TimeAttendance.dll.config
 D:\01.SourceCode\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Vs.Payroll.pdb
 D:\01.SourceCode\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Vs.Payroll.dll.config
 D:\01.SourceCode\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Vs.Recruit.pdb
@@ -2583,3 +2581,5 @@ D:\01.SourceCode\02.HRM\01.VietSoftHRM\VietSoftHRM\obj\Debug\VietSoftHRM.csproj.
 D:\01.SourceCode\02.HRM\01.VietSoftHRM\VietSoftHRM\obj\Debug\VietSoftHRM.csproj.CopyComplete
 D:\01.SourceCode\02.HRM\01.VietSoftHRM\VietSoftHRM\obj\Debug\VietSoftHRM.exe
 D:\01.SourceCode\02.HRM\01.VietSoftHRM\VietSoftHRM\obj\Debug\VietSoftHRM.pdb
+D:\01.SourceCode\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Vs.TimeAttendance.exe
+D:\01.SourceCode\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Vs.TimeAttendance.exe.config

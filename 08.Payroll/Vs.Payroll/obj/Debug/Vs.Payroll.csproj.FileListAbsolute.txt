@@ -2632,7 +2632,6 @@ D:\01.SourceCode\02.HRM\08.Payroll\Vs.Payroll\bin\Debug\NPOI.OpenXmlFormats.dll
 D:\01.SourceCode\02.HRM\08.Payroll\Vs.Payroll\bin\Debug\EPPlus.dll
 D:\01.SourceCode\02.HRM\08.Payroll\Vs.Payroll\bin\Debug\DevExpress.Snap.v22.1.Core.dll
 D:\01.SourceCode\02.HRM\08.Payroll\Vs.Payroll\bin\Debug\DevExpress.Pdf.v22.1.Drawing.dll
-D:\01.SourceCode\02.HRM\08.Payroll\Vs.Payroll\bin\Debug\ICSharpCode.SharpZipLib.dll
 D:\01.SourceCode\02.HRM\08.Payroll\Vs.Payroll\bin\Debug\DevExpress.XtraReports.v22.1.Extensions.dll
 D:\01.SourceCode\02.HRM\08.Payroll\Vs.Payroll\bin\Debug\DevExpress.Utils.v22.1.UI.dll
 D:\01.SourceCode\02.HRM\08.Payroll\Vs.Payroll\bin\Debug\DevExpress.DataAccess.v22.1.UI.dll
@@ -2849,6 +2848,7 @@ D:\01.SourceCode\02.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.ucBCLuongThan
 D:\01.SourceCode\02.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.ucBCLuongThang.resources
 D:\01.SourceCode\02.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.ucBCLuongSanPham.resources
 D:\01.SourceCode\02.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.ucBaoCaoDMCD.resources
+D:\01.SourceCode\02.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.TimeAttendance.UAC.BaoCao.WaitForm1.resources
 D:\01.SourceCode\02.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.ucCachTinhLuong.resources
 D:\01.SourceCode\02.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.ucBangLuongThang13.resources
 D:\01.SourceCode\02.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.ucDanhSachTamUng.resources

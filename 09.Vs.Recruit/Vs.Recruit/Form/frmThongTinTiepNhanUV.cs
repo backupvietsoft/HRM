@@ -38,7 +38,7 @@ namespace Vs.Recruit
                 Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_LHDLD, dt, "ID_LHDLD", "TEN_LHDLD", "TEN_LHDLD", true, true);
 
                 Commons.OSystems.SetDateEditFormat(datNgayHenDL);
-                //Commons.OSystems.SetDateEditFormat(datNGAY_NHAN_VIEC);
+                Commons.OSystems.SetDateEditFormat(datNgayDTDH);
                 Commons.Modules.sLoad = "";
                 cboID_LHDLD.EditValue = 7;
                 cboNGUOI_DT.EditValue = -99;
@@ -76,7 +76,7 @@ namespace Vs.Recruit
                             cmd.Parameters.Add("@iLoai", SqlDbType.Int).Value = 0;
                             cmd.Parameters.Add("@sBT1", SqlDbType.NVarChar).Value = sBT;
                             cmd.Parameters.Add("@DNgay1", SqlDbType.DateTime).Value = datNgayHenDL.Text == "" ? datNgayHenDL.EditValue = null : Commons.Modules.ObjSystems.ConvertDateTime(datNgayHenDL.Text);
-                            cmd.Parameters.Add("@DNgay2", SqlDbType.DateTime).Value = null;
+                            cmd.Parameters.Add("@DNgay2", SqlDbType.DateTime).Value = datNgayDTDH.Text == "" ? datNgayDTDH.EditValue = null : Commons.Modules.ObjSystems.ConvertDateTime(datNgayDTDH.Text);
                             cmd.Parameters.Add("@iCot1", SqlDbType.BigInt).Value = cboID_LHDLD.Text == "" ? cboID_LHDLD.EditValue = null : Convert.ToInt64(cboID_LHDLD.EditValue);
                             cmd.Parameters.Add("@bCot1", SqlDbType.Bit).Value = chkHOAN_THANH_DT.EditValue;
                             cmd.Parameters.Add("@iCot2", SqlDbType.BigInt).Value = cboNGUOI_DT.Text == "" ? cboNGUOI_DT.EditValue = null : Convert.ToInt64(cboNGUOI_DT.EditValue);
@@ -97,7 +97,7 @@ namespace Vs.Recruit
                         }
                 }
             }
-            catch (Exception ex)
+            catch
             {
                 Commons.Modules.ObjSystems.XoaTable("sBTUngVien" + Commons.Modules.iIDUser);
             }

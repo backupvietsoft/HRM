@@ -22,11 +22,11 @@ namespace Vs.TimeAttendance
             DataSet ds = new DataSet();
             //ds.ReadXml(AppDomain.CurrentDomain.BaseDirectory + "\\vsconfig.xml");
             Commons.IConnections.Username = "sa";
-            Commons.IConnections.Server = "192.168.2.5";
-            Commons.IConnections.Database = "VS_HRM_DEMO";
-            Commons.IConnections.Password = "123";
+            Commons.IConnections.Server = "27.74.240.29";
+            Commons.IConnections.Database = "VS_HRM_EXCEL";
+            Commons.IConnections.Password = "codaikadaiku";
 
-            Commons.Modules.sPrivate = @"PILMICO";
+            Commons.Modules.KyHieuDV = @"EX";
             //Commons.Modules.sPrivate = @"ADC";
 
             Commons.Modules.iSoLeSL = 1;
@@ -52,7 +52,7 @@ namespace Vs.TimeAttendance
         {
             try
             {
-                //Application.Run(new frmLinkDuLieuChamCong(1));
+                Application.Run(new XtraForm1());
             }
             catch (Exception ex)
             {

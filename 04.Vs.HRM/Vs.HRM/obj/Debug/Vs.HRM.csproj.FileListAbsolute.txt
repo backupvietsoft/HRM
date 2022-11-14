@@ -2841,7 +2841,6 @@ D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\DevExpress.Diagram.v22.1.Core
 D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\DevExpress.XtraVerticalGrid.v22.1.dll
 D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\DevExpress.XtraNavBar.v22.1.dll
 D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\DevExpress.XtraCharts.v22.1.Extensions.dll
-D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\ICSharpCode.SharpZipLib.dll
 D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\NPOI.OpenXmlFormats.dll
 D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\NPOI.OpenXml4Net.dll
 D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\Spire.License.dll
@@ -3052,6 +3051,7 @@ D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.ucBaoCaoBDTangGiamCN.r
 D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.ucBaoCaoXiNghiep.resources
 D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.ucBlank.resources
 D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.ucBaoCaoTinhHinhSuDungLaoDong.resources
+D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.TimeAttendance.UAC.BaoCao.WaitForm1.resources
 D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.ucThamGiaBHXH.resources
 D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.frmImportNhanSu.resources
 D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.frmImportView.resources

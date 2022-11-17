@@ -28,6 +28,7 @@ namespace Vs.HRM
         public ucTaoHopDong()
         {
             InitializeComponent();
+            Commons.Modules.ObjSystems.ThayDoiNN(this, new List<LayoutControlGroup> { Root }, btnALL);
         }
         #region even
         private void ucTaoHopDong_Load(object sender, EventArgs e)
@@ -46,7 +47,6 @@ namespace Vs.HRM
                 enabel(true);
                 btnALL.Buttons[0].Properties.Visible = false;
                 btnALL.Buttons[1].Properties.Visible = false;
-                Commons.Modules.ObjSystems.ThayDoiNN(this, new List<LayoutControlGroup> { Root }, btnALL);
             }
             catch (Exception ex)
             {
@@ -426,8 +426,19 @@ namespace Vs.HRM
                 {
                     case "InHDThuViec":
                         {
+
                             DataTable dt = new DataTable();
-                            dt = (DataTable)grdDSUngVien.DataSource;
+                            try
+                            {
+                                dt = Commons.Modules.ObjSystems.ConvertDatatable(grvDSUngVien);
+                                dt.DefaultView.RowFilter = grvDSUngVien.ActiveFilterString.ToString();
+                                dt = dt.DefaultView.ToTable();
+                            }
+                            catch (Exception ex)
+                            {
+                                dt = null;
+                            }
+
                             frmInThuMoi frm = new frmInThuMoi(dt);
                             frm.ShowDialog();
                             //HopDongThuViecAll_DM();
@@ -678,7 +689,7 @@ namespace Vs.HRM
                     DevExpress.Utils.Menu.DXMenuItem itemCapNhatAll = MCreateMenuCapNhatAll(view, irow);
                     e.Menu.Items.Add(itemCapNhatAll);
 
-                   
+
                     //if (flag == false) return;
                 }
             }
@@ -1104,6 +1115,27 @@ namespace Vs.HRM
         private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void grvDSUngVien_RowCountChanged_1(object sender, EventArgs e)
+        {
+            GridView view = sender as GridView;
+            try
+            {
+                int index = ItemForSumNhanVien.Text.IndexOf(':');
+                if (view.RowCount > 0)
+                {
+                    ItemForSumNhanVien.Text = ItemForSumNhanVien.Text.Substring(0, index) + ": " + view.RowCount.ToString();
+                }
+                else
+                {
+                    ItemForSumNhanVien.Text = ItemForSumNhanVien.Text.Substring(0, index) + ": 0";
+                }
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show(ex.Message.ToString());
+            }
         }
     }
 }

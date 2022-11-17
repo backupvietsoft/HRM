@@ -11,6 +11,7 @@ using System.Threading;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraLayout;
 using System.Collections.Generic;
+using System.Drawing;
 using DevExpress.Utils.Menu;
 
 namespace Vs.HRM
@@ -364,20 +365,12 @@ namespace Vs.HRM
         private void grvDSCongNhan_RowCountChanged(object sender, EventArgs e)
         {
             GridView view = sender as GridView;
+
             try
             {
-                int index = ItemForSumNhanVien.Text.IndexOf(':');
-                if (index > 0)
-                {
-                    if (view.RowCount > 0)
-                    {
-                        ItemForSumNhanVien.Text = ItemForSumNhanVien.Text.Substring(0, index) + ": " + view.RowCount.ToString();
-                    }
-                    else
-                    {
-                        ItemForSumNhanVien.Text = ItemForSumNhanVien.Text.Substring(0, index) + ": 0";
-                    }
-                }
+                DataTable dt = new DataTable();
+                dt = Commons.Modules.ObjSystems.ConvertDatatable(grvDSCongNhan);
+                ItemForSumNhanVien.Text = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "SumNhanVien") + ": " + dt.Rows.Count.ToString();
             }
             catch
             {

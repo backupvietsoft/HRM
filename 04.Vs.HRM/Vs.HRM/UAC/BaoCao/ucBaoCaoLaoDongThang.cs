@@ -59,8 +59,10 @@ namespace Vs.HRM
                             dt.TableName = "DA_TA";
                             frm.AddDataSource(dt);
                         }
-                        catch (Exception EX)
-                        { }
+                        catch (Exception ex)
+                        { 
+
+                        }
 
 
                         frm.ShowDialog();

@@ -523,6 +523,12 @@
     <Compile Include="UAC\CongNhan\ucKeHoachThaiSan.Designer.cs">
       <DependentUpon>ucKeHoachThaiSan.cs</DependentUpon>
     </Compile>
+    <Compile Include="UAC\CongNhan\ucPhatDongPhuc.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UAC\CongNhan\ucPhatDongPhuc.Designer.cs">
+      <DependentUpon>ucPhatDongPhuc.cs</DependentUpon>
+    </Compile>
     <Compile Include="UAC\CongNhan\ucQLNS.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -866,6 +872,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UAC\CongNhan\ucKeHoachThaiSan.resx">
       <DependentUpon>ucKeHoachThaiSan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UAC\CongNhan\ucPhatDongPhuc.resx">
+      <DependentUpon>ucPhatDongPhuc.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UAC\CongNhan\ucQLNS.resx">
       <DependentUpon>ucQLNS.cs</DependentUpon>

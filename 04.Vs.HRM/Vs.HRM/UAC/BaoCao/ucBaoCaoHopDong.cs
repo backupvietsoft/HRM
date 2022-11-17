@@ -298,7 +298,7 @@ namespace Vs.HRM
                                             }
                                         default:
                                             {
-                                                BaoCaoTongHopThamNien_HN();
+                                                BaoCaoTongHopThamNien_DM();
                                                 break;
                                             }
                                     }
@@ -318,14 +318,13 @@ namespace Vs.HRM
             LoadCboDonVi();
             LoadCboXiNghiep();
             LoadCboTo();
-            if (Commons.Modules.KyHieuDV == "DM")
-            {
-                rdo_ChonBaoCao.Properties.Items.RemoveAt(7);
-                rdo_ChonBaoCao.Properties.Items.RemoveAt(6);
-                rdo_ChonBaoCao.Properties.Items.RemoveAt(5);
-                rdo_ChonBaoCao.Properties.Items.RemoveAt(4);
-                rdo_ChonBaoCao.Properties.Items.RemoveAt(3);
-            }
+
+            rdo_ChonBaoCao.Properties.Items.RemoveAt(7);
+            rdo_ChonBaoCao.Properties.Items.RemoveAt(6);
+            rdo_ChonBaoCao.Properties.Items.RemoveAt(5);
+            rdo_ChonBaoCao.Properties.Items.RemoveAt(4);
+            rdo_ChonBaoCao.Properties.Items.RemoveAt(3);
+            
             Commons.OSystems.SetDateEditFormat(dTuNgay);
             Commons.OSystems.SetDateEditFormat(dDenNgay);
             Commons.OSystems.SetDateEditFormat(lk_NgayIn);

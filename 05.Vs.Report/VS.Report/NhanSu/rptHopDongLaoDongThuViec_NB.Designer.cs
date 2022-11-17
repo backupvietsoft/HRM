@@ -1389,7 +1389,7 @@
             this.xrLabel85.SizeF = new System.Drawing.SizeF(1112.564F, 59.41674F);
             this.xrLabel85.StylePriority.UseFont = false;
             this.xrLabel85.StylePriority.UseTextAlignment = false;
-            this.xrLabel85.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft;
+            this.xrLabel85.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
             // 
             // xrLabel69
             // 
@@ -1406,7 +1406,7 @@
             this.xrLabel69.SizeF = new System.Drawing.SizeF(1112.564F, 59.41671F);
             this.xrLabel69.StylePriority.UseFont = false;
             this.xrLabel69.StylePriority.UseTextAlignment = false;
-            this.xrLabel69.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft;
+            this.xrLabel69.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
             // 
             // lb0
             // 
@@ -1423,7 +1423,7 @@
             this.lb0.SizeF = new System.Drawing.SizeF(1112.564F, 63.27089F);
             this.lb0.StylePriority.UseFont = false;
             this.lb0.StylePriority.UseTextAlignment = false;
-            this.lb0.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft;
+            this.lb0.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
             // 
             // xrLabel117
             // 

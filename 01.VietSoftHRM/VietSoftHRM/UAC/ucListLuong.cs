@@ -140,7 +140,7 @@ namespace VietSoftHRM
                     }
                 case "mnuPhieuCongDoan":
                     {
-                        frmPhieuCongDoan ctl = new frmPhieuCongDoan();
+                        frmPhieuCongDoan_CN ctl = new frmPhieuCongDoan_CN();
                         panel2.Controls.Clear();
                         panel2.Controls.Add(ctl);
                         Commons.Modules.ObjSystems.HideWaitForm();

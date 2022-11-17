@@ -96,50 +96,56 @@ namespace Vs.HRM
         #region hàm xử lý dữ liệu
         private void LoadData()
         {
-            System.Data.SqlClient.SqlConnection conn;
-            conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
-            conn.Open();
-            System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spHoanChinhHSNhanSu", conn);
-            cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
-            cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
-            cmd.Parameters.Add("@DVi", SqlDbType.Int).Value = Convert.ToInt32(cboDV.EditValue);
-            cmd.Parameters.Add("@XN", SqlDbType.Int).Value = Convert.ToInt32(cboXN.EditValue);
-            cmd.Parameters.Add("@TO", SqlDbType.Int).Value = Convert.ToInt32(cboTo.EditValue);
-            cmd.Parameters.Add("@iLoai", SqlDbType.Int).Value = 0;
-            cmd.CommandType = CommandType.StoredProcedure;
-            System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
-            DataSet ds = new DataSet();
-            adp.Fill(ds);
-            DataTable dt = new DataTable();
-            dt = ds.Tables[0].Copy();
-            dt.PrimaryKey = new DataColumn[] { dt.Columns["ID_CN"] };
+            try
+            {
+                System.Data.SqlClient.SqlConnection conn;
+                conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                conn.Open();
+                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spHoanChinhHSNhanSu", conn);
+                cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                cmd.Parameters.Add("@DVi", SqlDbType.Int).Value = Convert.ToInt32(cboDV.EditValue);
+                cmd.Parameters.Add("@XN", SqlDbType.Int).Value = Convert.ToInt32(cboXN.EditValue);
+                cmd.Parameters.Add("@TO", SqlDbType.Int).Value = Convert.ToInt32(cboTo.EditValue);
+                cmd.Parameters.Add("@iLoai", SqlDbType.Int).Value = 0;
+                cmd.CommandType = CommandType.StoredProcedure;
+                System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+                DataSet ds = new DataSet();
+                adp.Fill(ds);
+                DataTable dt = new DataTable();
+                dt = ds.Tables[0].Copy();
+                dt.PrimaryKey = new DataColumn[] { dt.Columns["ID_CN"] };
 
-            if (grdData.DataSource == null)
-            {
-                Commons.Modules.ObjSystems.MLoadXtraGrid(grdData, grvData, dt, false, false, false, false, true, this.Name);
-                grvData.Columns["ID_CN"].Visible = false;
-                grvData.Columns["ID_HDLD"].Visible = false;
-                grvData.Columns["TT_HDLD_DANG_SOAN"].AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-                grvData.Columns["TT_HDLD_CHUA_CO"].AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-                grvData.Columns["TT_HDLD_HET_HD"].AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-                grvData.Columns["TT_QTCT"].AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-                grvData.Columns["TT_QTCT"].AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-                grvData.Columns["TT_LUONG"].AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-                grvData.Columns["TT_LUONG"].AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-                grvData.Columns["TT_KHEN_THUONG"].AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-                grvData.Columns["TT_KHEN_THUONG"].AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            }
-            else
-            {
-                grdData.DataSource = dt;
-            }
+                if (grdData.DataSource == null)
+                {
+                    Commons.Modules.ObjSystems.MLoadXtraGrid(grdData, grvData, dt, false, false, false, false, true, this.Name);
+                    grvData.Columns["ID_CN"].Visible = false;
+                    grvData.Columns["ID_HDLD"].Visible = false;
+                    ////grvData.Columns["TT_HDLD_DANG_SOAN"].AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+                    ////grvData.Columns["TT_HDLD_CHUA_CO"].AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+                    ////grvData.Columns["TT_HDLD_HET_HD"].AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+                    grvData.Columns["TT_QTCT"].AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+                    grvData.Columns["TT_QTCT"].AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+                    grvData.Columns["TT_LUONG"].AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+                    grvData.Columns["TT_LUONG"].AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+                    grvData.Columns["TT_KHEN_THUONG"].AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+                    grvData.Columns["TT_KHEN_THUONG"].AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+                }
+                else
+                {
+                    grdData.DataSource = dt;
+                }
 
-            if (iID_NS != -1)
-            {
-                int index = dt.Rows.IndexOf(dt.Rows.Find(iID_NS));
-                grvData.FocusedRowHandle = grvData.GetRowHandle(index);
-                grvData.ClearSelection();
-                grvData.SelectRow(index);
+                if (iID_NS != -1)
+                {
+                    int index = dt.Rows.IndexOf(dt.Rows.Find(iID_NS));
+                    grvData.FocusedRowHandle = grvData.GetRowHandle(index);
+                    grvData.ClearSelection();
+                    grvData.SelectRow(index);
+                }
+            }
+            catch(Exception ex) {
+                XtraMessageBox.Show(ex.Message.ToString());
             }
         }
         #endregion

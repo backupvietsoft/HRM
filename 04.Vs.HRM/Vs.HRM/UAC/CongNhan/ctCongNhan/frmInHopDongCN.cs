@@ -11,7 +11,7 @@ namespace Vs.HRM
     {
         private long idCN;
         private long idHD;
-        public frmInHopDongCN(Int64 idCongNhan, Int64 idHopDong, string tencn)
+        public frmInHopDongCN(Int64 idCongNhan, Int64 idHopDong, string tencn )
         {
             InitializeComponent();
             NONN_HoTenCN.Text = tencn.ToUpper();
@@ -40,6 +40,8 @@ namespace Vs.HRM
             else
             {
                 rdo_ChonBaoCao.Properties.Items.RemoveAt(4);
+                rdo_ChonBaoCao.Properties.Items.RemoveAt(3);
+                rdo_ChonBaoCao.Properties.Items.RemoveAt(1);
             }
             dNgayIn.EditValue = DateTime.Today;
             Commons.OSystems.SetDateEditFormat(dNgayIn);
@@ -54,12 +56,12 @@ namespace Vs.HRM
             switch (btn.Tag.ToString())
             {
                 case "In":
-                    {
+                     {
                         switch (rdo_ChonBaoCao.Properties.Items[rdo_ChonBaoCao.SelectedIndex].Tag)
                         {
                             case "rdo_HopDongLaoDong":
                                 {
-                                    switch (Commons.Modules.KyHieuDV)
+                                    switch (Commons.Modules.ObjSystems.KyHieuDV(1))
                                     {
                                         case "MT":
                                             {
@@ -91,7 +93,16 @@ namespace Vs.HRM
                                             }
                                         case "NB":
                                             {
-                                                HopDongLaoDong_NB();
+                                                bool kiemHD = Convert.ToBoolean(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT ISNULL(HD_GIA_HAN,0) FROM dbo.HOP_DONG_LAO_DONG WHERE ID_HDLD = " + idHD + ""));
+                                                if (kiemHD)
+                                                {
+                                                    HopDongLaoDong_NB();
+                                                }
+                                                else
+                                                {
+                                                    HopDongThuViec_NB();
+                                                }
+                                                break;
                                                 break;
                                             }
                                         default:
@@ -103,7 +114,7 @@ namespace Vs.HRM
                                 break;
                             case "rdo_HopDongThuViec":
                                 {
-                                    switch (Commons.Modules.KyHieuDV)
+                                    switch (Commons.Modules.ObjSystems.KyHieuDV(1))
                                     {
                                         case "MT":
                                             {
@@ -127,7 +138,15 @@ namespace Vs.HRM
                                             }
                                         case "NB":
                                             {
-                                                HopDongThuViec_NB();
+                                                bool kiemHD = Convert.ToBoolean(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT ISNULL(HD_GIA_HAN,0) FROM dbo.HOP_DONG_LAO_DONG WHERE ID_HDLD = " + idHD + ""));
+                                                if (kiemHD)
+                                                {
+                                                    HopDongLaoDong_NB();
+                                                }
+                                                else
+                                                {
+                                                    HopDongThuViec_NB();
+                                                }
                                                 break;
                                             }
                                         default:
@@ -139,7 +158,7 @@ namespace Vs.HRM
                                 break;
                             case "rdo_HopDongThucViecCN_QC":
                                 {
-                                    switch (Commons.Modules.KyHieuDV)
+                                    switch (Commons.Modules.ObjSystems.KyHieuDV(1))
                                     {
                                         case "MT":
                                             {
@@ -170,7 +189,7 @@ namespace Vs.HRM
                                 break;
                             case "rdo_HopDongDaoTao":
                                 {
-                                    switch (Commons.Modules.KyHieuDV)
+                                    switch (Commons.Modules.ObjSystems.KyHieuDV(1))
                                     {
                                         case "MT":
                                             {

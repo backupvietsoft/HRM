@@ -40,7 +40,7 @@ namespace Vs.HRM
                                 break;
                             case 1:
                                 {
-                                    switch (Commons.Modules.KyHieuDV)
+                                    switch (Commons.Modules.ObjSystems.KyHieuDV_CN(Convert.ToInt64(Commons.Modules.iCongNhan)))
                                     {
                                         case "DM":
                                             {
@@ -139,9 +139,11 @@ namespace Vs.HRM
                                             {
                                                 break;
                                             }
-                                        default:
-                                            InPhieuDanhGiaKetQuaThuViecCongNhan_NB();
-                                            break;
+                                        case "NB":
+                                            {
+                                               InPhieuDanhGiaKetQuaThuViecCongNhan_NB();
+                                                break;
+                                            }
                                     }
 
                                 }
@@ -163,11 +165,9 @@ namespace Vs.HRM
                                             }
                                         case "NB":
                                             {
+                                                InDanhGiaKetQuaQuaTrinhLamViec_NB();
                                                 break;
                                             }
-                                        default:
-                                            InDanhGiaKetQuaQuaTrinhLamViec_NB();
-                                            break;
                                     }
 
                                 }
@@ -190,11 +190,9 @@ namespace Vs.HRM
                                             }
                                         case "NB":
                                             {
+                                                InPhieuDanhGiaKetQuaQuaTrinhLamViecCongNhan_NB();
                                                 break;
                                             }
-                                        default:
-                                            InPhieuDanhGiaKetQuaQuaTrinhLamViecCongNhan_NB();
-                                            break;
                                     }
                                 }
                                 break;
@@ -217,13 +215,29 @@ namespace Vs.HRM
         }
 
         private void formInLyLich_Load(object sender, EventArgs e)
-        {
-            if (Commons.Modules.KyHieuDV == "DM")
+        { 
+            switch(Commons.Modules.KyHieuDV)
             {
-                rdo_ChonBaoCao.Properties.Items.RemoveAt(4);
-                rdo_ChonBaoCao.Properties.Items.RemoveAt(3);
-                rdo_ChonBaoCao.Properties.Items.RemoveAt(2);
+                case "DM":
+                    {
+                        rdo_ChonBaoCao.Properties.Items.RemoveAt(4);
+                        rdo_ChonBaoCao.Properties.Items.RemoveAt(3);
+                        rdo_ChonBaoCao.Properties.Items.RemoveAt(2);
+                        break;
+                    }
+                case "NB":
+                    {
+                        rdo_ChonBaoCao.Properties.Items.RemoveAt(2);
+                        break;
+                    }
             }
+                
+            //if (Commons.Modules.KyHieuDV == "DM")
+            //{
+            //    rdo_ChonBaoCao.Properties.Items.RemoveAt(4);
+            //    rdo_ChonBaoCao.Properties.Items.RemoveAt(3);
+            //    rdo_ChonBaoCao.Properties.Items.RemoveAt(2);
+            //}
             dNgayIn.EditValue = DateTime.Today;
             Commons.OSystems.SetDateEditFormat(dNgayIn);
             Commons.Modules.sLoad = "";

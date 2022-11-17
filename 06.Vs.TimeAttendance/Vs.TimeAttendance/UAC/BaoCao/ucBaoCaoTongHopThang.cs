@@ -68,16 +68,23 @@ namespace Vs.TimeAttendance
                 sKyHieuDV = Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString();
                 if (sKyHieuDV == "SB")
                 {
-                    rdo_ChonBaoCao.Properties.Items.RemoveAt(7);
+                    rdo_ChonBaoCao.Properties.Items.RemoveAt(8);
                 }
                 else if (sKyHieuDV == "DM")
                 {
-                    rdo_ChonBaoCao.Properties.Items.RemoveAt(7);
-                    rdo_ChonBaoCao.Properties.Items.RemoveAt(4);
+                    rdo_ChonBaoCao.Properties.Items.RemoveAt(8);
+                    rdo_ChonBaoCao.Properties.Items.RemoveAt(5);
+                    rdo_ChonBaoCao.Properties.Items.Remove(rdo_ChonBaoCao.Properties.Items.Where(x => x.Tag.ToString() == "rdo_BangChamCongThangNgayCong").FirstOrDefault());
+                }
+                else if (sKyHieuDV == "NB")
+                {
+                    rdo_ChonBaoCao.Properties.Items.Remove(rdo_ChonBaoCao.Properties.Items.Where(x=>x.Tag.ToString() == "rdo_BangChamCongTangCaThang").FirstOrDefault());
+                    rdo_ChonBaoCao.Properties.Items.Remove(rdo_ChonBaoCao.Properties.Items.Where(x => x.Tag.ToString() == "rdo_BCSoLanXacNhanCongThang").FirstOrDefault());
+                    rdo_ChonBaoCao.Properties.Items.Remove(rdo_ChonBaoCao.Properties.Items.Where(x => x.Tag.ToString() == "rdo_ThongTinNhomCCThang").FirstOrDefault());
                 }
                 else
                 {
-                    rdo_ChonBaoCao.Properties.Items.RemoveAt(8);
+                    rdo_ChonBaoCao.Properties.Items.RemoveAt(9);
                 }
 
                 LK_Thang.EditValue = DateTime.Today;
@@ -219,7 +226,7 @@ namespace Vs.TimeAttendance
             {
                 excelApplication.Cells.Borders.LineStyle = 0;
                 excelApplication.Cells.Font.Name = "Times New Roman";
-                excelApplication.Cells.Font.Size = 13;
+                excelApplication.Cells.Font.Size = 11;
                 excelWorkSheet.AutoFilterMode = false;
                 excelWorkSheet.Application.ActiveWindow.FreezePanes = false;
                 int DONG = 0;
@@ -450,7 +457,7 @@ namespace Vs.TimeAttendance
             {
                 excelApplication.Cells.Borders.LineStyle = 0;
                 excelApplication.Cells.Font.Name = "Times New Roman";
-                excelApplication.Cells.Font.Size = 13;
+                excelApplication.Cells.Font.Size = 11;
                 excelWorkSheet.AutoFilterMode = false;
                 excelWorkSheet.Application.ActiveWindow.FreezePanes = false;
                 int DONG = 0;
@@ -525,15 +532,14 @@ namespace Vs.TimeAttendance
                 Commons.Modules.MExcel.ColumnWidth(excelWorkSheet, 23, "@", true, DONG , 2, DONG, 2);
                 Commons.Modules.MExcel.ColumnWidth(excelWorkSheet, 18, "@", true, DONG , 4, DONG, 4);
                 Commons.Modules.MExcel.ColumnWidth(excelWorkSheet, 15, "@", true, DONG , 5, DONG, 5);
-                Commons.Modules.MExcel.ColumnWidth(excelWorkSheet, 5, "@", true, DONG  -TDong , 6, DONG, TCot - 4);
+                Commons.Modules.MExcel.ColumnWidth(excelWorkSheet, 5, "@", true, DONG   , 6, DONG + TDong, TCot - 4);
 
 
                 //alight dữ liệu
-                //title = Commons.Modules.MExcel.GetRange(excelWorkSheet, DONG - TDong, 6, DONG, TCot - 4);
-                //title.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
-                //title.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+                title = Commons.Modules.MExcel.GetRange(excelWorkSheet, DONG, 1, DONG + TDong, TCot);
+                title.Borders.LineStyle = 1;
 
-               
+
 
                 excelWorkbook.Save();
                 excelApplication.Visible = true;
@@ -691,7 +697,7 @@ namespace Vs.TimeAttendance
                                                 BaoCaoTongHopThang_DM();
                                                 break;
                                             }
-                                        case "EX":
+                                        case "NB":
                                             {
                                                 try
                                                 {
@@ -718,7 +724,7 @@ namespace Vs.TimeAttendance
                                 {
                                     switch (sKyHieuDV)
                                     {
-                                        case "EX":
+                                        case "NB":
                                             {
                                                 try
                                                 {
@@ -789,7 +795,7 @@ namespace Vs.TimeAttendance
                                 }
                             case "rdo_DanhSachThang":
                                 {
-                                    if (Commons.Modules.KyHieuDV == "DM")
+                                    if (Commons.Modules.KyHieuDV == "DM" || Commons.Modules.KyHieuDV == "NB")
                                     {
                                         XacNhanQuetThe_DM(false);
                                     }
@@ -920,7 +926,7 @@ namespace Vs.TimeAttendance
             {
                 case "rdo_BangTongHopDiTreVeSomThang":
                     {
-                        rdo_DiTreVeSom.Visible = true;
+                        rdo_DiTreVeSom.Visible = false;
                         chkThayDoiCa.Enabled = false;
                         lblThayDoiCa.Enabled = false;
                     }
@@ -960,18 +966,18 @@ namespace Vs.TimeAttendance
             {
                 case "rdo_BangChamCongThang":
                     {
-                        rdo_DiTreVeSom.Visible = true;
+                        rdo_DiTreVeSom.Visible = false;
 
                     }
                     break;
                 case "rdo_BangChamCongTangCaThang":
                     {
-                        rdo_DiTreVeSom.Visible = true;
+                        rdo_DiTreVeSom.Visible = false;
                     }
                     break;
                 case "rdo_BangTongHopDiTreVeSomThang":
                     {
-                        rdo_DiTreVeSom.Visible = true;
+                        rdo_DiTreVeSom.Visible = false;
                     }
                     break;
                 default:
@@ -3236,7 +3242,7 @@ namespace Vs.TimeAttendance
                 cmd.Parameters.Add("@TO", SqlDbType.Int).Value = LK_TO.EditValue;
                 cmd.Parameters.Add("@TNgay", SqlDbType.Date).Value = Convert.ToDateTime(lk_TuNgay.EditValue);
                 cmd.Parameters.Add("@DNgay", SqlDbType.Date).Value = Convert.ToDateTime(lk_DenNgay.EditValue);
-                cmd.Parameters.Add("@Loai", SqlDbType.Int).Value = rdo_DiTreVeSom.SelectedIndex;
+                cmd.Parameters.Add("@Loai", SqlDbType.Int).Value = 2;
                 cmd.CommandType = CommandType.StoredProcedure;
                 System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
                 if (Convert.ToDateTime(lk_TuNgay.EditValue).Month != Convert.ToDateTime(lk_DenNgay.EditValue).Month)

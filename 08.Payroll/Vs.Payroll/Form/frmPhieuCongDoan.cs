@@ -103,7 +103,7 @@ namespace Vs.Payroll
 
             try
             {
-                string sSql = "SELECT DISTINCT CONVERT(NVARCHAR(10),[NGAY],103) AS NGAY_THANG,[NGAY] FROM PHIEU_CONG_DOAN ORDER BY [NGAY] DESC";
+                string sSql = "SELECT DISTINCT CONVERT(NVARCHAR(10),[NGAY],103) AS NGAY_THANG,[NGAY] FROM PHIEU_CONG_DOAN PCD INNER JOIN dbo.DON_HANG_BAN_ORDER DHBORD ON DHBORD.ID_ORD = PCD.ID_ORD WHERE DHBORD.ID_DV = " + cboDV.EditValue + " ORDER BY [NGAY] DESC";
                 DataTable dt = new DataTable();
                 dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSql));
                 Commons.Modules.ObjSystems.MLoadXtraGrid(grdNgay, grvNgay, dt, false, false, true, true, true, this.Name);
@@ -479,6 +479,7 @@ namespace Vs.Payroll
             {
                 if (Commons.Modules.sLoad == "0Load") return;
                 Commons.Modules.sLoad = "0Load";
+                LoadThang();
                 LoadCboXN();
                 LoadCboTo();
                 LoadChuyen();

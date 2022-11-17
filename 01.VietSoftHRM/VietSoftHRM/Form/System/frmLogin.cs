@@ -72,6 +72,7 @@ namespace VietSoftHRM
         }
         private void FrmLogin_Load(object sender, EventArgs e)
         {
+
             //Thread.Sleep(1000);
             LoadcboDataBase();
             LoadUserPass();
@@ -108,7 +109,7 @@ namespace VietSoftHRM
                     DataTable dt = new DataTable();
                     dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSetUp));
                     Commons.Modules.iIDNhom = Convert.ToInt64(dt.Rows[0]["ID_NHOM"]);
-                    if(Commons.Modules.iIDNhom == 1 || Commons.Modules.iIDNhom == 1)
+                    if(Convert.ToBoolean(dt.Rows[0]["SET_UP"]) == true )
                     {
                         Commons.Modules.bSetUp = true;
                     }

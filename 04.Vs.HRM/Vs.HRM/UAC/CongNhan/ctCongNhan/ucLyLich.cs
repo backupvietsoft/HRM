@@ -495,7 +495,7 @@ namespace Vs.HRM
                     }
                 case "in":
                     {
-                        if (Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString() == "DM")
+                        if (Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString() == "DM"|| Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString() == "NB")
                         {
                             frmInLyLichCN InLyLichCN = new frmInLyLichCN(Commons.Modules.iCongNhan);
                             InLyLichCN.ShowDialog();
@@ -891,7 +891,10 @@ namespace Vs.HRM
             windowsUIButton.Buttons[12].Properties.Visible = visible;
             Commons.Modules.bEnabel = !visible;
 
-            //MS_CNTextEdit.Properties.ReadOnly = visible;
+
+            if(Commons.Modules.ObjSystems.KyHieuDV(Convert.ToInt64(ID_DVLookUpEdit.EditValue)) != "DM"){
+                MS_CNTextEdit.Properties.ReadOnly = visible;
+            }
             //MS_THE_CCTextEdit.Properties.ReadOnly = visible;
 
             ID_QGLookUpEdit.Properties.ReadOnly = visible;
@@ -1229,17 +1232,27 @@ namespace Vs.HRM
         private void ID_DVLookUpEdit_EditValueChanged(object sender, EventArgs e)
         {
             if (Commons.Modules.sLoad == "0Load") return;
-            if (Commons.Modules.iCongNhan == -1 || idcn == -1)
+            switch (Commons.Modules.ObjSystems.KyHieuDV(Convert.ToInt64(ID_DVLookUpEdit.EditValue)))
             {
-                try
-                {
-                    MS_CNTextEdit.Text = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.AUTO_CREATE_SO_CONG_NHAN(" + ID_DVLookUpEdit.EditValue + ",1)").ToString();
-                    MS_THE_CCTextEdit.Text = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.AUTO_CREATE_SO_CONG_NHAN(" + ID_DVLookUpEdit.EditValue + ",2)").ToString();
-                    //MS_CNTextEdit.Properties.ReadOnly = false;
-                    //MS_THE_CCTextEdit.Properties.ReadOnly = false;
-                }
-                catch { }
+                case "DM":
+                    {
+                        if (Commons.Modules.iCongNhan == -1 || idcn == -1)
+                        {
+                            try
+                            {
+                                MS_CNTextEdit.Text = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.AUTO_CREATE_SO_CONG_NHAN(" + ID_DVLookUpEdit.EditValue + ",1)").ToString();
+                                MS_THE_CCTextEdit.Text = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.AUTO_CREATE_SO_CONG_NHAN(" + ID_DVLookUpEdit.EditValue + ",2)").ToString();
+                                //MS_CNTextEdit.Properties.ReadOnly = false;
+                                //MS_THE_CCTextEdit.Properties.ReadOnly = false;
+                            }
+                            catch { }
+                        }
+
+                        break; 
+                    }
+             
             }
+           
             if (isCancel) return;
             Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(ID_XNLookUpEdit, Commons.Modules.ObjSystems.DataXiNghiep(Convert.ToInt32(ID_DVLookUpEdit.EditValue), false), "ID_XN", "TEN_XN", "TEN_XN", true, true);
             //CheckMS();
@@ -1354,8 +1367,6 @@ namespace Vs.HRM
         {
             try
             {
-
-
                 bool isCorrectMS = true;
                 string MS = "";
                 if (MS_CNTextEdit.EditValue != null)
@@ -1633,12 +1644,19 @@ namespace Vs.HRM
         }
         private void MS_CNTextEdit_Validated(object sender, EventArgs e)
         {
-            CheckMS();
+            if(Commons.Modules.ObjSystems.KyHieuDV(Convert.ToInt64(ID_DVLookUpEdit.EditValue)) == "DM")
+            {
+                CheckMS();
+            }
+           
         }
 
         private void MS_THE_CCTextEdit_Validated(object sender, EventArgs e)
         {
-            CheckMT();
+            if (Commons.Modules.ObjSystems.KyHieuDV(Convert.ToInt64(ID_DVLookUpEdit.EditValue)) == "DM")
+            {
+                CheckMT();
+            }
         }
 
         private void NGAY_SINHDateEdit_Validated(object sender, EventArgs e)
@@ -1711,6 +1729,23 @@ namespace Vs.HRM
             if (Commons.Modules.sLoad == "0Load") return;
             if (cboID_QUAN_KS.EditValue == null || cboID_QUAN_KS.EditValue.ToString() == "") return;
             Commons.Modules.ObjSystems.MLoadLookUpEdit(cboID_PX_KS, Commons.Modules.ObjSystems.DataPhuongXa(Convert.ToInt32(cboID_QUAN_KS.EditValue), false), "ID_PX", "TEN_PX", "TEN_PX", true);
+        }
+
+        private void MS_THE_CCTextEdit_EditValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MS_CNTextEdit_EditValueChanged(object sender, EventArgs e)
+        {
+           
+            try
+            {
+                MS_THE_CCTextEdit.Text = MS_CNTextEdit.Text;
+            }
+            catch { };
+                    
+            
         }
     }
 }

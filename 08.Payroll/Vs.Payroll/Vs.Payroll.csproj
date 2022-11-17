@@ -207,6 +207,12 @@
     <Compile Include="Form\frmLayDuLieuLuongT13.Designer.cs">
       <DependentUpon>frmLayDuLieuLuongT13.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form\frmPhieuCongDoan_CN.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Form\frmPhieuCongDoan_CN.Designer.cs">
+      <DependentUpon>frmPhieuCongDoan_CN.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form\frmPhieuNhapKho_Import.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -680,6 +686,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form\frmLayDuLieuLuongT13.resx">
       <DependentUpon>frmLayDuLieuLuongT13.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\frmPhieuCongDoan_CN.resx">
+      <DependentUpon>frmPhieuCongDoan_CN.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\frmPhieuNhapKho_Import.resx">
       <DependentUpon>frmPhieuNhapKho_Import.cs</DependentUpon>

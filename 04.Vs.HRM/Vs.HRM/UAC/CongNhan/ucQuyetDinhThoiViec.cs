@@ -134,8 +134,32 @@ namespace Vs.HRM
             }
             else
             {
-                DateTime datNgayThoiViec = Convert.ToDateTime(grvCongNhan.GetFocusedRowCellValue("NGAY_THOI_VIEC"));
-                frmInQuyetDinhThoiViec frm = new frmInQuyetDinhThoiViec(Convert.ToInt32(grvCongNhan.GetFocusedRowCellValue("ID_QDTV")), Convert.ToInt32(grvCongNhan.GetFocusedRowCellValue("ID_CN")), datNgayThoiViec);
+                System.Data.SqlClient.SqlConnection conn;
+                frmViewReport frm = new frmViewReport();
+
+                frm.rpt = new rptQuyetDinhThoiViec_NB(DateTime.Now, 1);
+
+
+                conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                conn.Open();
+
+                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptQuyetDinhThoiViec_NB", conn);
+                cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                cmd.Parameters.Add("@ID_SQD", SqlDbType.Int).Value = Convert.ToInt32(grvCongNhan.GetFocusedRowCellValue("ID_QDTV"));
+                cmd.Parameters.Add("@ID_CN", SqlDbType.Int).Value = Convert.ToInt32(grvCongNhan.GetFocusedRowCellValue("ID_CN")); ;
+                cmd.Parameters.Add("@NgayThoiViec", SqlDbType.DateTime).Value = Convert.ToDateTime(grvCongNhan.GetFocusedRowCellValue("NGAY_THOI_VIEC"));
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+                DataSet ds = new DataSet();
+                adp.Fill(ds);
+                DataTable dt = new DataTable();
+                dt = ds.Tables[0].Copy();
+                dt.TableName = "DATA";
+                frm.AddDataSource(dt);
+                ////DateTime datNgayThoiViec = Convert.ToDateTime(grvCongNhan.GetFocusedRowCellValue("NGAY_THOI_VIEC"));
+                ////frmInQuyetDinhThoiViec frm = new frmInQuyetDinhThoiViec(Convert.ToInt32(grvCongNhan.GetFocusedRowCellValue("ID_QDTV")), Convert.ToInt32(grvCongNhan.GetFocusedRowCellValue("ID_CN")), datNgayThoiViec);
                 frm.ShowDialog();
             }
         }
@@ -180,6 +204,7 @@ namespace Vs.HRM
                     }
                 case "in":
                     {
+
                         InDuLieu();
                         break;
                     }

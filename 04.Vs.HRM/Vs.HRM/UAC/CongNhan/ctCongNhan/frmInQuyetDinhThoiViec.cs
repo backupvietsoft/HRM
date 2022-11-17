@@ -65,7 +65,7 @@ namespace Vs.HRM
                                                 QuyetDinhThoiViec();
                                                 break;
                                             }
-                                        case "SB":
+                                        case "NB":
                                             {
                                                 QuyetDinhThoiViec_SB();
                                                 break;
@@ -453,6 +453,44 @@ namespace Vs.HRM
                 frm.ShowDialog();
             }
             catch { }
+        }
+
+
+        private void QuyetDinhThoiViec_NB()
+        {
+            System.Data.SqlClient.SqlConnection conn;
+            frmViewReport frm = new frmViewReport();
+            if (chkTiengAnh.Checked == false)
+            {
+                frm.rpt = new rptQuyetDinhThoiViec_SB(DateTime.Now, 1);
+                NNgu = 0;
+            }
+            else
+            {
+                frm.rpt = new rptQuyetDinhThoiViecTiengAnh_SB(DateTime.Now, 1);
+                NNgu = 1;
+            }
+
+            conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+            conn.Open();
+
+            System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptQuyetDinhThoiViec_SB", conn);
+            cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+            cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = NNgu;
+            cmd.Parameters.Add("@KHDV", SqlDbType.NVarChar).Value = "SB";
+            cmd.Parameters.Add("@ID_SQD", SqlDbType.Int).Value = iID_QDTV;
+            cmd.Parameters.Add("@ID_CN", SqlDbType.Int).Value = iID_CN;
+            cmd.Parameters.Add("@NgayThoiViec", SqlDbType.DateTime).Value = dtNgayThoiViec;
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+            DataSet ds = new DataSet();
+            adp.Fill(ds);
+            DataTable dt = new DataTable();
+            dt = ds.Tables[0].Copy();
+            dt.TableName = "DATA";
+            frm.AddDataSource(dt);
+
         }
         private void QuyetDinhThoiViecTroCap_SB()
         {

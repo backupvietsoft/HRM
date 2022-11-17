@@ -283,6 +283,12 @@ namespace Vs.HRM
                                                 dt = ds.Tables[0].Copy();
                                                 dt.TableName = "DA_TA";
                                                 frm.AddDataSource(dt);
+
+                                                DataTable dt1 = new DataTable();
+                                                dt1 = new DataTable();
+                                                dt1 = ds.Tables[1].Copy();
+                                                dt1.TableName = "DA_TA1";
+                                                frm.AddDataSource(dt1);
                                             }
                                             catch
                                             { }
@@ -352,11 +358,11 @@ namespace Vs.HRM
             {
                 case "rdo_TinhHinhSDLaoDong":
                     {
-                        lbXiNghiep.Rows[8].Height = 36;
-                        lbXiNghiep.Rows[7].Height = 36;
-                        lbXiNghiep.Rows[6].Height = 36;
-                        lbXiNghiep.Rows[5].Height = 36;
-                        lbXiNghiep.Rows[4].Height = 36;
+                        lbXiNghiep.Rows[8].Height = 0;
+                        lbXiNghiep.Rows[7].Height = 0;
+                        lbXiNghiep.Rows[6].Height = 0;
+                        lbXiNghiep.Rows[5].Height = 0;
+                        lbXiNghiep.Rows[4].Height = 0;
                         break;
                     }
                 default:

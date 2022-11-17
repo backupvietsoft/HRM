@@ -60,7 +60,7 @@ namespace Vs.HRM
                                         DataSet ds = new DataSet();
                                         adp.Fill(ds);
                                         dt = new DataTable();
-                                        dt = ds.Tables[1].Copy();
+                                        dt = ds.Tables[0].Copy();
                                         dt.TableName = "DA_TA";
                                         frm.AddDataSource(dt);
                                     }
@@ -80,7 +80,7 @@ namespace Vs.HRM
                                             }
                                         default:
                                             {
-                                                BaoCaoTongHopThamNien_HN();
+                                                BaoCaoTongHopThamNien_DM();
                                                 break;
                                             }
                                     }

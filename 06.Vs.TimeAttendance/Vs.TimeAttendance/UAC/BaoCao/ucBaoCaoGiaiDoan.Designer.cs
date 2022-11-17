@@ -28,13 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions4 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions3 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
             this.windowsUIButton = new DevExpress.XtraBars.Docking2010.WindowsUIButtonPanel();
             this.grdCN = new DevExpress.XtraGrid.GridControl();
             this.grvCN = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridView3 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.lbDonVi = new DevExpress.Utils.Layout.TablePanel();
+            this.searchControl1 = new DevExpress.XtraEditors.SearchControl();
             this.searchControl = new DevExpress.XtraEditors.SearchControl();
             this.lblLyDoNghi = new DevExpress.XtraEditors.LabelControl();
             this.chkInTheoCongNhan = new DevExpress.XtraEditors.CheckEdit();
@@ -47,7 +48,6 @@
             this.lbNgayIn = new DevExpress.XtraEditors.LabelControl();
             this.lk_NgayIn = new DevExpress.XtraEditors.DateEdit();
             this.lk_DenNgay = new DevExpress.XtraEditors.DateEdit();
-            this.rdo_ChonBaoCao = new DevExpress.XtraEditors.RadioGroup();
             this.lbTo = new DevExpress.XtraEditors.LabelControl();
             this.lbXiNghiep = new DevExpress.XtraEditors.LabelControl();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
@@ -56,11 +56,11 @@
             this.LK_XI_NGHIEP = new DevExpress.XtraEditors.SearchLookUpEdit();
             this.LK_DON_VI = new DevExpress.XtraEditors.SearchLookUpEdit();
             this.LK_TO = new DevExpress.XtraEditors.SearchLookUpEdit();
+            this.rdo_ChonBaoCao = new DevExpress.XtraEditors.RadioGroup();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.searchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.searchControl1 = new DevExpress.XtraEditors.SearchControl();
             ((System.ComponentModel.ISupportInitialize)(this.grdCN)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grvCN)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView3)).BeginInit();
@@ -68,6 +68,7 @@
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lbDonVi)).BeginInit();
             this.lbDonVi.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.searchControl1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchControl.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkInTheoCongNhan.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboLydoVang.Properties)).BeginInit();
@@ -80,17 +81,16 @@
             ((System.ComponentModel.ISupportInitialize)(this.lk_NgayIn.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lk_DenNgay.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lk_DenNgay.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.rdo_ChonBaoCao.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lk_TuNgay.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lk_TuNgay.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.LK_XI_NGHIEP.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.LK_DON_VI.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.LK_TO.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rdo_ChonBaoCao.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.searchControl1.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // windowsUIButton
@@ -110,9 +110,9 @@
             this.windowsUIButton.AppearanceButton.Pressed.Options.UseFont = true;
             this.windowsUIButton.AppearanceButton.Pressed.Options.UseImage = true;
             this.windowsUIButton.AppearanceButton.Pressed.Options.UseTextOptions = true;
-            windowsUIButtonImageOptions4.ImageUri.Uri = "Print";
+            windowsUIButtonImageOptions3.ImageUri.Uri = "Print";
             this.windowsUIButton.Buttons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] {
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions4, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "Print", -1, false)});
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions3, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "Print", -1, false)});
             this.windowsUIButton.ContentAlignment = System.Drawing.ContentAlignment.MiddleRight;
             this.windowsUIButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.windowsUIButton.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -128,16 +128,15 @@
             // 
             // grdCN
             // 
-            this.lbDonVi.SetColumn(this.grdCN, 4);
-            this.lbDonVi.SetColumnSpan(this.grdCN, 3);
+            this.lbDonVi.SetColumn(this.grdCN, 1);
+            this.lbDonVi.SetColumnSpan(this.grdCN, 6);
             this.grdCN.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.grdCN.Location = new System.Drawing.Point(455, 147);
+            this.grdCN.Location = new System.Drawing.Point(31, 111);
             this.grdCN.MainView = this.grvCN;
-            this.grdCN.Margin = new System.Windows.Forms.Padding(3, 3, 3, 17);
             this.grdCN.Name = "grdCN";
-            this.lbDonVi.SetRow(this.grdCN, 4);
-            this.lbDonVi.SetRowSpan(this.grdCN, 6);
-            this.grdCN.Size = new System.Drawing.Size(434, 236);
+            this.lbDonVi.SetRow(this.grdCN, 3);
+            this.lbDonVi.SetRowSpan(this.grdCN, 3);
+            this.grdCN.Size = new System.Drawing.Size(870, 295);
             this.grdCN.TabIndex = 27;
             this.grdCN.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grvCN,
@@ -148,6 +147,8 @@
             this.grvCN.DetailHeight = 297;
             this.grvCN.GridControl = this.grdCN;
             this.grvCN.Name = "grvCN";
+            this.grvCN.OptionsMenu.ShowFooterItem = true;
+            this.grvCN.OptionsView.ShowGroupPanel = false;
             // 
             // gridView3
             // 
@@ -190,7 +191,6 @@
             this.lbDonVi.Controls.Add(this.lbNgayIn);
             this.lbDonVi.Controls.Add(this.lk_NgayIn);
             this.lbDonVi.Controls.Add(this.lk_DenNgay);
-            this.lbDonVi.Controls.Add(this.rdo_ChonBaoCao);
             this.lbDonVi.Controls.Add(this.lbTo);
             this.lbDonVi.Controls.Add(this.lbXiNghiep);
             this.lbDonVi.Controls.Add(this.labelControl1);
@@ -199,7 +199,8 @@
             this.lbDonVi.Controls.Add(this.LK_XI_NGHIEP);
             this.lbDonVi.Controls.Add(this.LK_DON_VI);
             this.lbDonVi.Controls.Add(this.LK_TO);
-            this.lbDonVi.Location = new System.Drawing.Point(12, 12);
+            this.lbDonVi.Controls.Add(this.rdo_ChonBaoCao);
+            this.lbDonVi.Location = new System.Drawing.Point(6, 6);
             this.lbDonVi.Name = "lbDonVi";
             this.lbDonVi.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] {
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 36F),
@@ -207,14 +208,24 @@
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 36F),
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 36F),
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 36F),
-            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 25F),
-            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 36F),
-            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 108F),
-            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 36F),
-            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 15F),
-            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 269F)});
-            this.lbDonVi.Size = new System.Drawing.Size(920, 422);
+            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 100F),
+            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 30F)});
+            this.lbDonVi.Size = new System.Drawing.Size(932, 439);
             this.lbDonVi.TabIndex = 4;
+            // 
+            // searchControl1
+            // 
+            this.searchControl1.Client = this.grdCN;
+            this.lbDonVi.SetColumn(this.searchControl1, 1);
+            this.searchControl1.Location = new System.Drawing.Point(31, 412);
+            this.searchControl1.Name = "searchControl1";
+            this.searchControl1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Repository.ClearButton(),
+            new DevExpress.XtraEditors.Repository.SearchButton()});
+            this.searchControl1.Properties.Client = this.grdCN;
+            this.lbDonVi.SetRow(this.searchControl1, 6);
+            this.searchControl1.Size = new System.Drawing.Size(126, 24);
+            this.searchControl1.TabIndex = 33;
             // 
             // searchControl
             // 
@@ -236,31 +247,30 @@
             // 
             // lblLyDoNghi
             // 
-            this.lbDonVi.SetColumn(this.lblLyDoNghi, 3);
-            this.lblLyDoNghi.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblLyDoNghi.Location = new System.Drawing.Point(333, 75);
+            this.lbDonVi.SetColumn(this.lblLyDoNghi, 0);
+            this.lblLyDoNghi.Location = new System.Drawing.Point(0, 0);
             this.lblLyDoNghi.Margin = new System.Windows.Forms.Padding(28, 3, 3, 3);
             this.lblLyDoNghi.Name = "lblLyDoNghi";
             this.lbDonVi.SetRow(this.lblLyDoNghi, 2);
-            this.lblLyDoNghi.Size = new System.Drawing.Size(116, 30);
+            this.lblLyDoNghi.Size = new System.Drawing.Size(0, 0);
             this.lblLyDoNghi.TabIndex = 31;
             this.lblLyDoNghi.Text = "lblLyDoNghi";
+            this.lblLyDoNghi.Visible = false;
             // 
             // chkInTheoCongNhan
             // 
             this.lbDonVi.SetColumn(this.chkInTheoCongNhan, 4);
-            this.chkInTheoCongNhan.Location = new System.Drawing.Point(455, 115);
+            this.chkInTheoCongNhan.Location = new System.Drawing.Point(461, 79);
             this.chkInTheoCongNhan.Name = "chkInTheoCongNhan";
             this.chkInTheoCongNhan.Properties.Caption = "In theo CN";
-            this.lbDonVi.SetRow(this.chkInTheoCongNhan, 3);
-            this.chkInTheoCongNhan.Size = new System.Drawing.Size(141, 21);
+            this.lbDonVi.SetRow(this.chkInTheoCongNhan, 2);
+            this.chkInTheoCongNhan.Size = new System.Drawing.Size(143, 21);
             this.chkInTheoCongNhan.TabIndex = 26;
             // 
             // cboLydoVang
             // 
-            this.lbDonVi.SetColumn(this.cboLydoVang, 4);
-            this.cboLydoVang.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cboLydoVang.Location = new System.Drawing.Point(455, 75);
+            this.lbDonVi.SetColumn(this.cboLydoVang, 0);
+            this.cboLydoVang.Location = new System.Drawing.Point(3, 42);
             this.cboLydoVang.Name = "cboLydoVang";
             this.cboLydoVang.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -268,9 +278,10 @@
             this.cboLydoVang.Properties.DefaultPopupControl = this.popListLyDo;
             this.cboLydoVang.Properties.DifferentActionButtonIndex = 0;
             this.cboLydoVang.Properties.DifferentPopupControl = null;
-            this.lbDonVi.SetRow(this.cboLydoVang, 2);
-            this.cboLydoVang.Size = new System.Drawing.Size(141, 24);
+            this.lbDonVi.SetRow(this.cboLydoVang, 1);
+            this.cboLydoVang.Size = new System.Drawing.Size(22, 24);
             this.cboLydoVang.TabIndex = 25;
+            this.cboLydoVang.Visible = false;
             // 
             // popListLyDo
             // 
@@ -278,10 +289,10 @@
             this.lbDonVi.SetColumn(this.popListLyDo, 6);
             this.lbDonVi.SetColumnSpan(this.popListLyDo, 3);
             this.popListLyDo.Controls.Add(this.grdLydovang);
-            this.popListLyDo.Location = new System.Drawing.Point(748, 183);
+            this.popListLyDo.Location = new System.Drawing.Point(758, 75);
             this.popListLyDo.MinimumSize = new System.Drawing.Size(500, 220);
             this.popListLyDo.Name = "popListLyDo";
-            this.lbDonVi.SetRow(this.popListLyDo, 5);
+            this.lbDonVi.SetRow(this.popListLyDo, 2);
             this.popListLyDo.Size = new System.Drawing.Size(500, 220);
             this.popListLyDo.TabIndex = 24;
             // 
@@ -316,11 +327,11 @@
             // 
             this.lbDonVi.SetColumn(this.lbDenNgay, 3);
             this.lbDenNgay.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbDenNgay.Location = new System.Drawing.Point(333, 39);
+            this.lbDenNgay.Location = new System.Drawing.Point(337, 39);
             this.lbDenNgay.Margin = new System.Windows.Forms.Padding(28, 3, 3, 3);
             this.lbDenNgay.Name = "lbDenNgay";
             this.lbDonVi.SetRow(this.lbDenNgay, 1);
-            this.lbDenNgay.Size = new System.Drawing.Size(116, 30);
+            this.lbDenNgay.Size = new System.Drawing.Size(118, 30);
             this.lbDenNgay.TabIndex = 20;
             this.lbDenNgay.Text = "Đến ngày";
             // 
@@ -329,11 +340,11 @@
             this.lbNgayIn.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.Horizontal;
             this.lbDonVi.SetColumn(this.lbNgayIn, 5);
             this.lbNgayIn.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbNgayIn.Location = new System.Drawing.Point(627, 39);
+            this.lbNgayIn.Location = new System.Drawing.Point(634, 39);
             this.lbNgayIn.Margin = new System.Windows.Forms.Padding(28, 3, 3, 3);
             this.lbNgayIn.Name = "lbNgayIn";
             this.lbDonVi.SetRow(this.lbNgayIn, 1);
-            this.lbNgayIn.Size = new System.Drawing.Size(116, 30);
+            this.lbNgayIn.Size = new System.Drawing.Size(118, 30);
             this.lbNgayIn.TabIndex = 21;
             this.lbNgayIn.Text = "Ngày in";
             // 
@@ -341,66 +352,40 @@
             // 
             this.lbDonVi.SetColumn(this.lk_NgayIn, 6);
             this.lk_NgayIn.EditValue = null;
-            this.lk_NgayIn.Location = new System.Drawing.Point(748, 42);
+            this.lk_NgayIn.Location = new System.Drawing.Point(758, 42);
             this.lk_NgayIn.Name = "lk_NgayIn";
-            this.lk_NgayIn.Properties.Appearance.Options.UseTextOptions = true;
-            this.lk_NgayIn.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.lk_NgayIn.Properties.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             this.lk_NgayIn.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.lk_NgayIn.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.lbDonVi.SetRow(this.lk_NgayIn, 1);
-            this.lk_NgayIn.Size = new System.Drawing.Size(141, 24);
+            this.lk_NgayIn.Size = new System.Drawing.Size(143, 24);
             this.lk_NgayIn.TabIndex = 18;
             // 
             // lk_DenNgay
             // 
             this.lbDonVi.SetColumn(this.lk_DenNgay, 4);
             this.lk_DenNgay.EditValue = null;
-            this.lk_DenNgay.Location = new System.Drawing.Point(455, 42);
+            this.lk_DenNgay.Location = new System.Drawing.Point(461, 42);
             this.lk_DenNgay.Name = "lk_DenNgay";
-            this.lk_DenNgay.Properties.Appearance.Options.UseTextOptions = true;
-            this.lk_DenNgay.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.lk_DenNgay.Properties.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             this.lk_DenNgay.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.lk_DenNgay.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.lk_DenNgay.Properties.Mask.UseMaskAsDisplayFormat = true;
             this.lbDonVi.SetRow(this.lk_DenNgay, 1);
-            this.lk_DenNgay.Size = new System.Drawing.Size(141, 24);
+            this.lk_DenNgay.Size = new System.Drawing.Size(143, 24);
             this.lk_DenNgay.TabIndex = 19;
-            // 
-            // rdo_ChonBaoCao
-            // 
-            this.lbDonVi.SetColumn(this.rdo_ChonBaoCao, 1);
-            this.lbDonVi.SetColumnSpan(this.rdo_ChonBaoCao, 3);
-            this.rdo_ChonBaoCao.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rdo_ChonBaoCao.Location = new System.Drawing.Point(31, 147);
-            this.rdo_ChonBaoCao.Name = "rdo_ChonBaoCao";
-            this.rdo_ChonBaoCao.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] {
-            new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "DSNV đi trễ về sớm giai đoạn", true, "rdo_ditrevesomgiaidoan"),
-            new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "DS vắng đầu giờ giai đoạn", true, "rdo_vangdaugiogiaidoan"),
-            new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "DS chấm vắng giai đoạn", true, "rdo_chamvanggiaidoan"),
-            new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "DS chấm công vắng lũy kế", true, "rdo_chamcongvangluyke"),
-            new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Xác nhận quẹt thẻ", true, "rdo_xacnhanquetthe"),
-            new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Chấm công chi tiết công nhân giai đoạn", true, "rdo_congnhangiaidoan")});
-            this.lbDonVi.SetRow(this.rdo_ChonBaoCao, 4);
-            this.lbDonVi.SetRowSpan(this.rdo_ChonBaoCao, 5);
-            this.rdo_ChonBaoCao.Size = new System.Drawing.Size(418, 235);
-            this.rdo_ChonBaoCao.TabIndex = 17;
-            this.rdo_ChonBaoCao.SelectedIndexChanged += new System.EventHandler(this.rdo_ChonBaoCao_SelectedIndexChanged);
             // 
             // lbTo
             // 
             this.lbDonVi.SetColumn(this.lbTo, 5);
             this.lbTo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbTo.Location = new System.Drawing.Point(627, 3);
+            this.lbTo.Location = new System.Drawing.Point(634, 3);
             this.lbTo.Margin = new System.Windows.Forms.Padding(28, 3, 3, 3);
             this.lbTo.Name = "lbTo";
             this.lbDonVi.SetRow(this.lbTo, 0);
-            this.lbTo.Size = new System.Drawing.Size(116, 30);
+            this.lbTo.Size = new System.Drawing.Size(118, 30);
             this.lbTo.TabIndex = 11;
             this.lbTo.Text = "labelControl3";
             // 
@@ -408,11 +393,11 @@
             // 
             this.lbDonVi.SetColumn(this.lbXiNghiep, 3);
             this.lbXiNghiep.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbXiNghiep.Location = new System.Drawing.Point(333, 3);
+            this.lbXiNghiep.Location = new System.Drawing.Point(337, 3);
             this.lbXiNghiep.Margin = new System.Windows.Forms.Padding(28, 3, 3, 3);
             this.lbXiNghiep.Name = "lbXiNghiep";
             this.lbDonVi.SetRow(this.lbXiNghiep, 0);
-            this.lbXiNghiep.Size = new System.Drawing.Size(116, 30);
+            this.lbXiNghiep.Size = new System.Drawing.Size(118, 30);
             this.lbXiNghiep.TabIndex = 10;
             this.lbXiNghiep.Text = "labelControl2";
             // 
@@ -423,7 +408,7 @@
             this.labelControl1.Location = new System.Drawing.Point(31, 3);
             this.labelControl1.Name = "labelControl1";
             this.lbDonVi.SetRow(this.labelControl1, 0);
-            this.labelControl1.Size = new System.Drawing.Size(124, 30);
+            this.labelControl1.Size = new System.Drawing.Size(126, 30);
             this.labelControl1.TabIndex = 9;
             this.labelControl1.Text = "labelControl1";
             // 
@@ -434,7 +419,7 @@
             this.lbTuNgay.Location = new System.Drawing.Point(31, 39);
             this.lbTuNgay.Name = "lbTuNgay";
             this.lbDonVi.SetRow(this.lbTuNgay, 1);
-            this.lbTuNgay.Size = new System.Drawing.Size(124, 30);
+            this.lbTuNgay.Size = new System.Drawing.Size(126, 30);
             this.lbTuNgay.TabIndex = 7;
             this.lbTuNgay.Text = "Từ ngày";
             // 
@@ -442,30 +427,27 @@
             // 
             this.lbDonVi.SetColumn(this.lk_TuNgay, 2);
             this.lk_TuNgay.EditValue = null;
-            this.lk_TuNgay.Location = new System.Drawing.Point(161, 42);
+            this.lk_TuNgay.Location = new System.Drawing.Point(163, 42);
             this.lk_TuNgay.Name = "lk_TuNgay";
-            this.lk_TuNgay.Properties.Appearance.Options.UseTextOptions = true;
-            this.lk_TuNgay.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.lk_TuNgay.Properties.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             this.lk_TuNgay.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.lk_TuNgay.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.lk_TuNgay.Properties.Mask.UseMaskAsDisplayFormat = true;
             this.lbDonVi.SetRow(this.lk_TuNgay, 1);
-            this.lk_TuNgay.Size = new System.Drawing.Size(141, 24);
+            this.lk_TuNgay.Size = new System.Drawing.Size(143, 24);
             this.lk_TuNgay.TabIndex = 5;
             this.lk_TuNgay.EditValueChanged += new System.EventHandler(this.lk_TuNgay_EditValueChanged);
             // 
             // LK_XI_NGHIEP
             // 
             this.lbDonVi.SetColumn(this.LK_XI_NGHIEP, 4);
-            this.LK_XI_NGHIEP.Location = new System.Drawing.Point(455, 6);
+            this.LK_XI_NGHIEP.Location = new System.Drawing.Point(461, 6);
             this.LK_XI_NGHIEP.Name = "LK_XI_NGHIEP";
             this.LK_XI_NGHIEP.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.lbDonVi.SetRow(this.LK_XI_NGHIEP, 0);
-            this.LK_XI_NGHIEP.Size = new System.Drawing.Size(141, 24);
+            this.LK_XI_NGHIEP.Size = new System.Drawing.Size(143, 24);
             this.LK_XI_NGHIEP.TabIndex = 3;
             this.LK_XI_NGHIEP.EditValueChanged += new System.EventHandler(this.LK_XI_NGHIEP_EditValueChanged);
             // 
@@ -473,26 +455,44 @@
             // 
             this.lbDonVi.SetColumn(this.LK_DON_VI, 2);
             this.LK_DON_VI.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.LK_DON_VI.Location = new System.Drawing.Point(161, 3);
+            this.LK_DON_VI.Location = new System.Drawing.Point(163, 3);
             this.LK_DON_VI.Name = "LK_DON_VI";
             this.LK_DON_VI.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.lbDonVi.SetRow(this.LK_DON_VI, 0);
-            this.LK_DON_VI.Size = new System.Drawing.Size(141, 24);
+            this.LK_DON_VI.Size = new System.Drawing.Size(143, 24);
             this.LK_DON_VI.TabIndex = 1;
             this.LK_DON_VI.EditValueChanged += new System.EventHandler(this.LK_DON_VI_EditValueChanged);
             // 
             // LK_TO
             // 
             this.lbDonVi.SetColumn(this.LK_TO, 6);
-            this.LK_TO.Location = new System.Drawing.Point(748, 6);
+            this.LK_TO.Location = new System.Drawing.Point(758, 6);
             this.LK_TO.Name = "LK_TO";
             this.LK_TO.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.lbDonVi.SetRow(this.LK_TO, 0);
-            this.LK_TO.Size = new System.Drawing.Size(141, 24);
+            this.LK_TO.Size = new System.Drawing.Size(143, 24);
             this.LK_TO.TabIndex = 3;
             this.LK_TO.EditValueChanged += new System.EventHandler(this.LK_TO_EditValueChanged);
+            // 
+            // rdo_ChonBaoCao
+            // 
+            this.lbDonVi.SetColumn(this.rdo_ChonBaoCao, 5);
+            this.rdo_ChonBaoCao.Location = new System.Drawing.Point(609, 75);
+            this.rdo_ChonBaoCao.Name = "rdo_ChonBaoCao";
+            this.rdo_ChonBaoCao.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] {
+            new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "DSNV đi trễ về sớm giai đoạn", true, "rdo_ditrevesomgiaidoan"),
+            new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "DS vắng đầu giờ giai đoạn", true, "rdo_vangdaugiogiaidoan"),
+            new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "DS chấm vắng giai đoạn", true, "rdo_chamvanggiaidoan"),
+            new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "DS chấm công vắng lũy kế", true, "rdo_chamcongvangluyke"),
+            new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Xác nhận quẹt thẻ", true, "rdo_xacnhanquetthe"),
+            new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Chấm công chi tiết công nhân giai đoạn", true, "rdo_congnhangiaidoan")});
+            this.lbDonVi.SetRow(this.rdo_ChonBaoCao, 2);
+            this.rdo_ChonBaoCao.Size = new System.Drawing.Size(143, 30);
+            this.rdo_ChonBaoCao.TabIndex = 17;
+            this.rdo_ChonBaoCao.Visible = false;
+            this.rdo_ChonBaoCao.SelectedIndexChanged += new System.EventHandler(this.rdo_ChonBaoCao_SelectedIndexChanged);
             // 
             // Root
             // 
@@ -501,6 +501,7 @@
             this.Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlItem1});
             this.Root.Name = "Root";
+            this.Root.Padding = new DevExpress.XtraLayout.Utils.Padding(5, 5, 5, 0);
             this.Root.Size = new System.Drawing.Size(944, 446);
             this.Root.TextVisible = false;
             // 
@@ -509,7 +510,7 @@
             this.layoutControlItem1.Control = this.lbDonVi;
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(924, 426);
+            this.layoutControlItem1.Size = new System.Drawing.Size(934, 441);
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
             // 
@@ -530,21 +531,6 @@
             this.gridView1.OptionsSelection.EnableAppearanceFocusedCell = false;
             this.gridView1.OptionsView.ShowGroupPanel = false;
             // 
-            // searchControl1
-            // 
-            this.searchControl1.Client = this.grdCN;
-            this.lbDonVi.SetColumn(this.searchControl1, 4);
-            this.searchControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.searchControl1.Location = new System.Drawing.Point(455, 403);
-            this.searchControl1.Name = "searchControl1";
-            this.searchControl1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Repository.ClearButton(),
-            new DevExpress.XtraEditors.Repository.SearchButton()});
-            this.searchControl1.Properties.Client = this.grdCN;
-            this.lbDonVi.SetRow(this.searchControl1, 10);
-            this.searchControl1.Size = new System.Drawing.Size(141, 24);
-            this.searchControl1.TabIndex = 33;
-            // 
             // ucBaoCaoGiaiDoan
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -563,6 +549,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.lbDonVi)).EndInit();
             this.lbDonVi.ResumeLayout(false);
             this.lbDonVi.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.searchControl1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchControl.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkInTheoCongNhan.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboLydoVang.Properties)).EndInit();
@@ -575,17 +562,16 @@
             ((System.ComponentModel.ISupportInitialize)(this.lk_NgayIn.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lk_DenNgay.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lk_DenNgay.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.rdo_ChonBaoCao.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lk_TuNgay.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lk_TuNgay.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.LK_XI_NGHIEP.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.LK_DON_VI.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.LK_TO.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rdo_ChonBaoCao.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.searchControl1.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -609,7 +595,6 @@
         private DevExpress.XtraEditors.LabelControl lbNgayIn;
         private DevExpress.XtraEditors.DateEdit lk_NgayIn;
         private DevExpress.XtraEditors.DateEdit lk_DenNgay;
-        private DevExpress.XtraEditors.RadioGroup rdo_ChonBaoCao;
         private DevExpress.XtraEditors.LabelControl lbTo;
         private DevExpress.XtraEditors.LabelControl lbXiNghiep;
         private DevExpress.XtraEditors.LabelControl labelControl1;
@@ -624,5 +609,6 @@
         private DevExpress.XtraEditors.LabelControl lblLyDoNghi;
         private DevExpress.XtraEditors.SearchControl searchControl;
         private DevExpress.XtraEditors.SearchControl searchControl1;
+        private DevExpress.XtraEditors.RadioGroup rdo_ChonBaoCao;
     }
 }

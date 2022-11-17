@@ -108,16 +108,10 @@ namespace VietSoftHRM
                     DataTable dt = new DataTable();
                     dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSetUp));
                     Commons.Modules.iIDNhom = Convert.ToInt64(dt.Rows[0]["ID_NHOM"]);
-                    if(Commons.Modules.iIDNhom == 1 || Commons.Modules.iIDNhom == 1)
-                    {
-                        Commons.Modules.bSetUp = true;
-                    }
-                    else
-                    {
-                        Commons.Modules.bSetUp = false;
-                    }
+                    Commons.Modules.bSetUp = Convert.ToBoolean(dt.Rows[0]["SET_UP"]);
                 }
-                catch {
+                catch
+                {
                     Commons.Modules.bSetUp = false;
                 }
 

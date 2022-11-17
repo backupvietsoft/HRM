@@ -26,7 +26,7 @@ namespace Vs.TimeAttendance
             Commons.IConnections.Database = "VS_HRM_EXCEL";
             Commons.IConnections.Password = "codaikadaiku";
 
-            Commons.Modules.KyHieuDV = @"EX";
+            //Commons.Modules.KyHieuDV = @"EX";
             //Commons.Modules.sPrivate = @"ADC";
 
             Commons.Modules.iSoLeSL = 1;

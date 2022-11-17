@@ -62,7 +62,7 @@ namespace VietSoftHRM
                 Commons.Modules.iSNNgay = 4;
                 Commons.Modules.iSNTuan = 12;
                 Commons.Modules.iSNThang = 40;
-                Commons.Modules.connect = "Server=27.74.240.29;database=DATA_CHAM_CONG_DM2;uid=sa;pwd=codaikadaiku;Connect Timeout=9999;";
+
             }
             catch
             {
@@ -77,9 +77,18 @@ namespace VietSoftHRM
                 Commons.Modules.sUrlCheckServer = Commons.Modules.ObjSystems.Decrypt(dt.Rows[0]["APIServer"].ToString(), true).Replace("VietSoftIP", Commons.Modules.sIP);
                 Commons.Modules.iCustomerID = Convert.ToInt32(dt.Rows[0]["CustomerID"]);
                 Commons.Modules.iLOAI_CN = Convert.ToInt32(dt.Rows[0]["LOAI_CN"]);//1 cập nhật trên server//2 cập nhật net.
-                Commons.Modules.bKiemPCD = Convert.ToBoolean(dt.Rows[0]["CHECK_PCD"]);
                 Commons.Modules.KyHieuDV = Convert.ToString(dt.Rows[0]["KY_HIEU_DV"]);
                 Commons.Modules.sHideMenu = Commons.Modules.ObjSystems.Decrypt(dt.Rows[0]["HIDE_MENU"].ToString(), true);
+                Commons.Modules.connect = Convert.ToString(dt.Rows[0]["CON_NECT"]);
+                try
+                {
+                    Commons.Modules.bKiemPCD = Convert.ToBoolean(dt.Rows[0]["CHECK_PCD"]);
+
+                }
+                catch 
+                {
+                }
+
                 try
                 {
                     using (new ConnectToSharedFolder(dt.Rows[0]["DUONG_DAN_TL"].ToString(), new NetworkCredential(dt.Rows[0]["USER_TL"].ToString(), dt.Rows[0]["PASS_TL"].ToString())))

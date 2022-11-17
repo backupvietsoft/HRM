@@ -1,25 +1,20 @@
-﻿using Commons;
-using DevExpress.XtraBars.Docking2010;
+﻿using DevExpress.XtraBars.Docking2010;
 using DevExpress.XtraEditors;
-using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraLayout;
 using Microsoft.ApplicationBlocks.Data;
 using System;
-using Microsoft.Office.Interop.Excel;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
-using System.Reflection;
-using System.Drawing;
 
-using Vs.Report;
 //using Microsoft.Office.Interop.Excel;
 using DataTable = System.Data.DataTable;
 using DevExpress.ClipboardSource.SpreadsheetML;
 using System.Diagnostics;
 using DevExpress.Utils;
+using DevExpress.XtraGrid.Columns;
 
 namespace Vs.TimeAttendance
 {
@@ -170,7 +165,7 @@ namespace Vs.TimeAttendance
                         try
                         {
                             DataTable dt = new DataTable();
-                            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString() == "DM" ? "spTinhThuongChuyenCanThang_DM" : "spTinhDiemThang", Commons.Modules.UserName, Commons.Modules.TypeLanguage, Convert.ToInt32(cboDV.EditValue), Convert.ToInt32(cboXN.EditValue), Convert.ToInt32(cboTo.EditValue), Convert.ToInt32(txtNgayCongQD.EditValue), Convert.ToDateTime(cboThang.EditValue)));
+                            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, Commons.Modules.KyHieuDV == "DM" ? "spTinhThuongChuyenCanThang_DM" : Commons.Modules.KyHieuDV == "NB" ? "spTinhDiemThang_NB" : "spTinhDiemThang", Commons.Modules.UserName, Commons.Modules.TypeLanguage, Convert.ToInt32(cboDV.EditValue), Convert.ToInt32(cboXN.EditValue), Convert.ToInt32(cboTo.EditValue), Convert.ToInt32(txtNgayCongQD.EditValue), Convert.ToDateTime(cboThang.EditValue)));
                             grdDiemThang.DataSource = dt;
                             enableButon(false);
                         }
@@ -227,7 +222,7 @@ namespace Vs.TimeAttendance
             {
                 Commons.Modules.sLoad = "0Load";
                 DataTable dt = new DataTable();
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString() == "DM" ? "spGetListDiemThang_DM" : "spGetListDiemThang", Commons.Modules.UserName, Commons.Modules.TypeLanguage, Convert.ToInt32(cboDV.EditValue), Convert.ToInt32(cboXN.EditValue), Convert.ToInt32(cboTo.EditValue), Convert.ToDateTime(cboThang.EditValue)));
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, Commons.Modules.KyHieuDV == "DM" ? "spGetListDiemThang_DM" : Commons.Modules.KyHieuDV == "NB" ? "spGetListDiemThang_NB" : "spGetListDiemThang", Commons.Modules.UserName, Commons.Modules.TypeLanguage, Convert.ToInt32(cboDV.EditValue), Convert.ToInt32(cboXN.EditValue), Convert.ToInt32(cboTo.EditValue), Convert.ToDateTime(cboThang.EditValue)));
 
                 for (int i = 4; i < dt.Columns.Count; i++)
                 {
@@ -242,18 +237,42 @@ namespace Vs.TimeAttendance
                     Commons.Modules.ObjSystems.MLoadXtraGrid(grdDiemThang, grvDiemThang, dt, true, true, false, true, true, this.Name);
                     grvDiemThang.Columns["ID_CN"].Visible = false;
                     grvDiemThang.Columns["THANG"].Visible = false;
-                    grvDiemThang.Columns["MS_CN"].OptionsColumn.AllowEdit = false;
-                    grvDiemThang.Columns["HO_TEN"].OptionsColumn.AllowEdit = false;
-                    grvDiemThang.Columns["TEN_TO"].OptionsColumn.AllowEdit = false;
-                    grvDiemThang.Columns["NGAY_VAO_CTY"].OptionsColumn.AllowEdit = false;
-                    grvDiemThang.Columns["NGAY_CONG"].OptionsColumn.AllowEdit = false;
-                    grvDiemThang.Columns["NGHI_VR"].OptionsColumn.AllowEdit = false;
-                    grvDiemThang.Columns["DT_VS"].OptionsColumn.AllowEdit = false;
-                    grvDiemThang.Columns["SP_DT_VS"].OptionsColumn.AllowEdit = false;
-                    grvDiemThang.Columns["VP_NQ"].OptionsColumn.AllowEdit = false;
-                    grvDiemThang.Columns["NGHI_P"].OptionsColumn.AllowEdit = false;
-                    grvDiemThang.Columns["NGHI_KP"].OptionsColumn.AllowEdit = false;
-                    grvDiemThang.Columns["NGHI_VRKL"].OptionsColumn.AllowEdit = false;
+                    //grvDiemThang.Columns["MS_CN"].OptionsColumn.AllowEdit = false;
+                    //grvDiemThang.Columns["HO_TEN"].OptionsColumn.AllowEdit = false;
+                    //grvDiemThang.Columns["TEN_TO"].OptionsColumn.AllowEdit = false;
+                    //grvDiemThang.Columns["NGAY_VAO_CTY"].OptionsColumn.AllowEdit = false;
+                    //grvDiemThang.Columns["NGAY_CONG"].OptionsColumn.AllowEdit = false;
+                    //grvDiemThang.Columns["NGHI_VR"].OptionsColumn.AllowEdit = false;
+                    //grvDiemThang.Columns["DT_VS"].OptionsColumn.AllowEdit = false;
+
+                    foreach (GridColumn item in grvDiemThang.Columns)
+                    {
+                        if(item.FieldName != "TIEN_THUONG")
+                        {
+                            grvDiemThang.Columns[item.FieldName].OptionsColumn.AllowEdit = false;
+                        }    
+                    }
+                    if (Commons.Modules.KyHieuDV == "NB")
+                    {
+                        //nếu là nb
+                        grvDiemThang.Columns["NGHI_P"].DisplayFormat.FormatType = FormatType.Numeric;
+                        grvDiemThang.Columns["NGHI_P"].DisplayFormat.FormatString = Commons.Modules.sSoLeTT;
+
+                        grvDiemThang.Columns["TIEN_DT_VS"].DisplayFormat.FormatType = FormatType.Numeric;
+                        grvDiemThang.Columns["TIEN_DT_VS"].DisplayFormat.FormatString = Commons.Modules.sSoLeTT;
+
+                        grvDiemThang.Columns["TIEN_GIO_NGHI"].DisplayFormat.FormatType = FormatType.Numeric;
+                        grvDiemThang.Columns["TIEN_GIO_NGHI"].DisplayFormat.FormatString = Commons.Modules.sSoLeTT;
+
+                        grvDiemThang.Columns["TIEN_VI_PHAM"].DisplayFormat.FormatType = FormatType.Numeric;
+                        grvDiemThang.Columns["TIEN_VI_PHAM"].DisplayFormat.FormatString = Commons.Modules.sSoLeTT;
+
+                        grvDiemThang.Columns["NGHI_VR"].DisplayFormat.FormatType = FormatType.Numeric;
+                        grvDiemThang.Columns["NGHI_VR"].DisplayFormat.FormatString = Commons.Modules.sSoLeTT;
+
+                    }    
+                    Commons.Modules.ObjSystems.MFormatCol(grvDiemThang, "TIEN_THUONG", Commons.Modules.iSoLeTT);
+
 
                 }
                 else
@@ -261,8 +280,9 @@ namespace Vs.TimeAttendance
                     grdDiemThang.DataSource = dt;
                 }
 
-                grvDiemThang.Columns["TIEN_THUONG"].DisplayFormat.FormatType = FormatType.Numeric;
-                grvDiemThang.Columns["TIEN_THUONG"].DisplayFormat.FormatString = "N0";
+
+
+
 
                 ////visible tháng lớn hơn tháng đang chọn
                 //for (int i = Convert.ToDateTime(cboThang.EditValue).Month + 1; i <= 12; i++)
@@ -272,7 +292,7 @@ namespace Vs.TimeAttendance
                 //}
                 Commons.Modules.sLoad = "";
             }
-            catch (Exception)
+            catch (Exception ex)
             {
             }
         }
@@ -283,11 +303,11 @@ namespace Vs.TimeAttendance
             try
             {
                 Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBT, Commons.Modules.ObjSystems.ConvertDatatable(grvDiemThang), "");
-                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString() == "DM" ? "sPsaveTinhDiemThang_DM" : "sPsaveTinhDiemThang", sBT, Convert.ToDateTime(cboThang.EditValue));
+                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, Commons.Modules.KyHieuDV == "DM" ? "sPsaveTinhDiemThang_DM" : Commons.Modules.KyHieuDV == "NB" ? "sPsaveTinhDiemThang_NB" : "sPsaveTinhDiemThang", sBT, Convert.ToDateTime(cboThang.EditValue));
                 Commons.Modules.ObjSystems.XoaTable(sBT);
                 return true;
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 Commons.Modules.ObjSystems.XoaTable(sBT);
                 return false;
@@ -316,10 +336,9 @@ namespace Vs.TimeAttendance
         private void cboThang_EditValueChanged(object sender, EventArgs e)
         {
             if (Commons.Modules.sLoad == "0Load") return;
-            Commons.Modules.sLoad = "0Load";
             LoadGrdDiemThang();
-            Commons.Modules.sLoad = "";
         }
+
         public void LoadThang()
         {
             try

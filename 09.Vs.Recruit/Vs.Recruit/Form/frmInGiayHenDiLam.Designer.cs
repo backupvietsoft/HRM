@@ -32,9 +32,10 @@
             DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions2 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
             this.windowsUIButton = new DevExpress.XtraBars.Docking2010.WindowsUIButtonPanel();
             this.datTuNgay = new DevExpress.XtraEditors.DateEdit();
-            this.rdo_ChonBaoCao = new DevExpress.XtraEditors.RadioGroup();
-            this.datDenNgay = new DevExpress.XtraEditors.DateEdit();
             this.dataLayoutControl1 = new DevExpress.XtraDataLayout.DataLayoutControl();
+            this.datDenNgay = new DevExpress.XtraEditors.DateEdit();
+            this.rdo_ChonBaoCao = new DevExpress.XtraEditors.RadioGroup();
+            this.cboUngVien = new DevExpress.XtraEditors.CheckedComboBoxEdit();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.NONN_HoTenCN = new DevExpress.XtraLayout.SimpleLabelItem();
             this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
@@ -42,14 +43,14 @@
             this.lblTuNgay = new DevExpress.XtraLayout.LayoutControlItem();
             this.lblDenNgay = new DevExpress.XtraLayout.LayoutControlItem();
             this.lblUngVien = new DevExpress.XtraLayout.LayoutControlItem();
-            this.cboUngVien = new DevExpress.XtraEditors.CheckedComboBoxEdit();
             ((System.ComponentModel.ISupportInitialize)(this.datTuNgay.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.datTuNgay.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.rdo_ChonBaoCao.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.datDenNgay.Properties.CalendarTimeProperties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.datDenNgay.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataLayoutControl1)).BeginInit();
             this.dataLayoutControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.datDenNgay.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.datDenNgay.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rdo_ChonBaoCao.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cboUngVien.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NONN_HoTenCN)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).BeginInit();
@@ -57,7 +58,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.lblTuNgay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblDenNgay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblUngVien)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cboUngVien.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // windowsUIButton
@@ -110,18 +110,19 @@
             this.datTuNgay.StyleController = this.dataLayoutControl1;
             this.datTuNgay.TabIndex = 3;
             // 
-            // rdo_ChonBaoCao
+            // dataLayoutControl1
             // 
-            this.rdo_ChonBaoCao.Location = new System.Drawing.Point(12, 33);
-            this.rdo_ChonBaoCao.Name = "rdo_ChonBaoCao";
-            this.rdo_ChonBaoCao.Properties.Columns = 1;
-            this.rdo_ChonBaoCao.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] {
-            new DevExpress.XtraEditors.Controls.RadioGroupItem("", "In giấy hẹn đi làm", true, "rdo_GiayHenDiLam"),
-            new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Danh sách ứng viên được đào tạo định hướng", true, "rdo_DSUVDuocDTDinhHuong")});
-            this.rdo_ChonBaoCao.Size = new System.Drawing.Size(500, 80);
-            this.rdo_ChonBaoCao.StyleController = this.dataLayoutControl1;
-            this.rdo_ChonBaoCao.TabIndex = 1;
-            this.rdo_ChonBaoCao.SelectedIndexChanged += new System.EventHandler(this.rdo_ChonBaoCao_SelectedIndexChanged);
+            this.dataLayoutControl1.Controls.Add(this.datTuNgay);
+            this.dataLayoutControl1.Controls.Add(this.datDenNgay);
+            this.dataLayoutControl1.Controls.Add(this.rdo_ChonBaoCao);
+            this.dataLayoutControl1.Controls.Add(this.cboUngVien);
+            this.dataLayoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataLayoutControl1.Location = new System.Drawing.Point(0, 0);
+            this.dataLayoutControl1.Name = "dataLayoutControl1";
+            this.dataLayoutControl1.Root = this.Root;
+            this.dataLayoutControl1.Size = new System.Drawing.Size(524, 210);
+            this.dataLayoutControl1.TabIndex = 10;
+            this.dataLayoutControl1.Text = "dataLayoutControl1";
             // 
             // datDenNgay
             // 
@@ -136,19 +137,28 @@
             this.datDenNgay.StyleController = this.dataLayoutControl1;
             this.datDenNgay.TabIndex = 3;
             // 
-            // dataLayoutControl1
+            // rdo_ChonBaoCao
             // 
-            this.dataLayoutControl1.Controls.Add(this.datTuNgay);
-            this.dataLayoutControl1.Controls.Add(this.datDenNgay);
-            this.dataLayoutControl1.Controls.Add(this.rdo_ChonBaoCao);
-            this.dataLayoutControl1.Controls.Add(this.cboUngVien);
-            this.dataLayoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataLayoutControl1.Location = new System.Drawing.Point(0, 0);
-            this.dataLayoutControl1.Name = "dataLayoutControl1";
-            this.dataLayoutControl1.Root = this.Root;
-            this.dataLayoutControl1.Size = new System.Drawing.Size(524, 210);
-            this.dataLayoutControl1.TabIndex = 10;
-            this.dataLayoutControl1.Text = "dataLayoutControl1";
+            this.rdo_ChonBaoCao.Location = new System.Drawing.Point(12, 33);
+            this.rdo_ChonBaoCao.Name = "rdo_ChonBaoCao";
+            this.rdo_ChonBaoCao.Properties.Columns = 1;
+            this.rdo_ChonBaoCao.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] {
+            new DevExpress.XtraEditors.Controls.RadioGroupItem("", "In giấy hẹn đi làm", true, "rdo_GiayHenDiLam"),
+            new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Danh sách ứng viên được đào tạo định hướng", true, "rdo_DSUVDuocDTDinhHuong")});
+            this.rdo_ChonBaoCao.Size = new System.Drawing.Size(500, 80);
+            this.rdo_ChonBaoCao.StyleController = this.dataLayoutControl1;
+            this.rdo_ChonBaoCao.TabIndex = 1;
+            this.rdo_ChonBaoCao.SelectedIndexChanged += new System.EventHandler(this.rdo_ChonBaoCao_SelectedIndexChanged);
+            // 
+            // cboUngVien
+            // 
+            this.cboUngVien.Location = new System.Drawing.Point(148, 145);
+            this.cboUngVien.Name = "cboUngVien";
+            this.cboUngVien.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cboUngVien.Size = new System.Drawing.Size(364, 24);
+            this.cboUngVien.StyleController = this.dataLayoutControl1;
+            this.cboUngVien.TabIndex = 4;
             // 
             // Root
             // 
@@ -168,6 +178,11 @@
             // NONN_HoTenCN
             // 
             this.NONN_HoTenCN.AllowHotTrack = false;
+            this.NONN_HoTenCN.AppearanceItemCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.NONN_HoTenCN.AppearanceItemCaption.Options.UseForeColor = true;
+            this.NONN_HoTenCN.AppearanceItemCaption.Options.UseTextOptions = true;
+            this.NONN_HoTenCN.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.NONN_HoTenCN.AppearanceItemCaption.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             this.NONN_HoTenCN.Location = new System.Drawing.Point(0, 0);
             this.NONN_HoTenCN.Name = "NONN_HoTenCN";
             this.NONN_HoTenCN.Size = new System.Drawing.Size(504, 21);
@@ -214,16 +229,6 @@
             this.lblUngVien.Size = new System.Drawing.Size(504, 28);
             this.lblUngVien.TextSize = new System.Drawing.Size(132, 17);
             // 
-            // cboUngVien
-            // 
-            this.cboUngVien.Location = new System.Drawing.Point(148, 145);
-            this.cboUngVien.Name = "cboUngVien";
-            this.cboUngVien.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cboUngVien.Size = new System.Drawing.Size(364, 24);
-            this.cboUngVien.StyleController = this.dataLayoutControl1;
-            this.cboUngVien.TabIndex = 4;
-            // 
             // frmInGiayHenDiLam
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -237,11 +242,12 @@
             this.Load += new System.EventHandler(this.frmInGiayHenDiLam_Load);
             ((System.ComponentModel.ISupportInitialize)(this.datTuNgay.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.datTuNgay.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.rdo_ChonBaoCao.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.datDenNgay.Properties.CalendarTimeProperties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.datDenNgay.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataLayoutControl1)).EndInit();
             this.dataLayoutControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.datDenNgay.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.datDenNgay.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rdo_ChonBaoCao.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cboUngVien.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NONN_HoTenCN)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).EndInit();
@@ -249,7 +255,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.lblTuNgay)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblDenNgay)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblUngVien)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cboUngVien.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }

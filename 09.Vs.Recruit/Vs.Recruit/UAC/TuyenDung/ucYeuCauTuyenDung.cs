@@ -114,6 +114,7 @@ namespace Vs.Recruit
                     grvViTri.Columns["SL_DINH_BIEN"].OptionsColumn.AllowEdit = false;
                     grvViTri.Columns["SL_DAT"].OptionsColumn.AllowEdit = false;
                     grvViTri.Columns["SL_CL"].OptionsColumn.AllowEdit = false;
+                    grvViTri.Columns["NGAY_DUYET"].OptionsColumn.AllowEdit = false;
 
                     cboViTri.BeforePopup += CboViTri_BeforePopup;
                     cboViTri.EditValueChanged += CboViTri_EditValueChanged;

@@ -33,8 +33,8 @@
             DevExpress.XtraEditors.DXErrorProvider.CompareAgainstControlValidationRule compareAgainstControlValidationRule1 = new DevExpress.XtraEditors.DXErrorProvider.CompareAgainstControlValidationRule();
             DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions1 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
             DevExpress.XtraGrid.GridLevelNode gridLevelNode1 = new DevExpress.XtraGrid.GridLevelNode();
-            this.datTThang = new DevExpress.XtraEditors.DateEdit();
             this.datDThang = new DevExpress.XtraEditors.DateEdit();
+            this.datTThang = new DevExpress.XtraEditors.DateEdit();
             this.windowsUIButton = new DevExpress.XtraBars.Docking2010.WindowsUIButtonPanel();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.popupContainerControl2 = new DevExpress.XtraEditors.PopupContainerControl();
@@ -43,6 +43,7 @@
             this.grdThang = new DevExpress.XtraGrid.GridControl();
             this.grvThang = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.Table = new DevExpress.Utils.Layout.TablePanel();
+            this.rdo_ChonNam = new DevExpress.XtraEditors.RadioGroup();
             this.datNam = new DevExpress.XtraEditors.DateEdit();
             this.lblTuThang = new DevExpress.XtraEditors.LabelControl();
             this.rdo_ChonBaoCao = new DevExpress.XtraEditors.RadioGroup();
@@ -59,11 +60,10 @@
             this.searchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.dxValidationProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
-            this.rdo_ChonNam = new DevExpress.XtraEditors.RadioGroup();
-            ((System.ComponentModel.ISupportInitialize)(this.datTThang.Properties.CalendarTimeProperties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.datTThang.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.datDThang.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.datDThang.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.datTThang.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.datTThang.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.popupContainerControl2)).BeginInit();
@@ -75,6 +75,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.grvThang)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Table)).BeginInit();
             this.Table.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.rdo_ChonNam.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.datNam.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.datNam.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rdo_ChonBaoCao.Properties)).BeginInit();
@@ -86,14 +87,40 @@
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.rdo_ChonNam.Properties)).BeginInit();
             this.SuspendLayout();
+            // 
+            // datDThang
+            // 
+            this.Table.SetColumn(this.datDThang, 6);
+            this.datDThang.EditValue = null;
+            this.datDThang.Location = new System.Drawing.Point(798, 68);
+            this.datDThang.Margin = new System.Windows.Forms.Padding(4);
+            this.datDThang.Name = "datDThang";
+            this.datDThang.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.datDThang.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.datDThang.Properties.DisplayFormat.FormatString = "MM/yyyy";
+            this.datDThang.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.datDThang.Properties.EditFormat.FormatString = "MM/yyyy";
+            this.datDThang.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.datDThang.Properties.Mask.UseMaskAsDisplayFormat = true;
+            this.datDThang.Properties.MaskSettings.Set("mask", "MM/yyyy");
+            this.datDThang.Properties.VistaCalendarInitialViewStyle = DevExpress.XtraEditors.VistaCalendarInitialViewStyle.YearView;
+            this.datDThang.Properties.VistaCalendarViewStyle = DevExpress.XtraEditors.VistaCalendarViewStyle.YearView;
+            this.Table.SetRow(this.datDThang, 2);
+            this.datDThang.Size = new System.Drawing.Size(145, 24);
+            this.datDThang.TabIndex = 5;
+            compareAgainstControlValidationRule2.CompareControlOperator = DevExpress.XtraEditors.DXErrorProvider.CompareControlOperator.Less;
+            compareAgainstControlValidationRule2.Control = this.datTThang;
+            compareAgainstControlValidationRule2.ErrorText = "This value is not valid";
+            this.dxValidationProvider1.SetValidationRule(this.datDThang, compareAgainstControlValidationRule2);
             // 
             // datTThang
             // 
             this.Table.SetColumn(this.datTThang, 4);
             this.datTThang.EditValue = null;
-            this.datTThang.Location = new System.Drawing.Point(486, 57);
+            this.datTThang.Location = new System.Drawing.Point(491, 68);
             this.datTThang.Name = "datTThang";
             this.datTThang.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -109,40 +136,10 @@
             this.Table.SetRow(this.datTThang, 2);
             this.datTThang.Size = new System.Drawing.Size(147, 24);
             this.datTThang.TabIndex = 26;
-            compareAgainstControlValidationRule2.CompareControlOperator = DevExpress.XtraEditors.DXErrorProvider.CompareControlOperator.GreaterOrEqual;
-            compareAgainstControlValidationRule2.Control = this.datDThang;
-            compareAgainstControlValidationRule2.ErrorText = "This value is not valid";
-            this.dxValidationProvider1.SetValidationRule(this.datTThang, compareAgainstControlValidationRule2);
-            // 
-            // datDThang
-            // 
-            this.Table.SetColumn(this.datDThang, 6);
-            this.datDThang.EditValue = null;
-            this.datDThang.Location = new System.Drawing.Point(792, 58);
-            this.datDThang.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.datDThang.Name = "datDThang";
-            this.datDThang.Properties.Appearance.Options.UseTextOptions = true;
-            this.datDThang.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.datDThang.Properties.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.datDThang.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.datDThang.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.datDThang.Properties.DisplayFormat.FormatString = "MM/yyyy";
-            this.datDThang.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
-            this.datDThang.Properties.EditFormat.FormatString = "MM/yyyy";
-            this.datDThang.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
-            this.datDThang.Properties.Mask.EditMask = "MM/yyyy";
-            this.datDThang.Properties.Mask.UseMaskAsDisplayFormat = true;
-            this.datDThang.Properties.VistaCalendarInitialViewStyle = DevExpress.XtraEditors.VistaCalendarInitialViewStyle.YearView;
-            this.datDThang.Properties.VistaCalendarViewStyle = DevExpress.XtraEditors.VistaCalendarViewStyle.YearView;
-            this.Table.SetRow(this.datDThang, 2);
-            this.datDThang.Size = new System.Drawing.Size(145, 24);
-            this.datDThang.TabIndex = 5;
-            compareAgainstControlValidationRule1.CompareControlOperator = DevExpress.XtraEditors.DXErrorProvider.CompareControlOperator.Less;
-            compareAgainstControlValidationRule1.Control = this.datTThang;
+            compareAgainstControlValidationRule1.CompareControlOperator = DevExpress.XtraEditors.DXErrorProvider.CompareControlOperator.GreaterOrEqual;
+            compareAgainstControlValidationRule1.Control = this.datDThang;
             compareAgainstControlValidationRule1.ErrorText = "This value is not valid";
-            this.dxValidationProvider1.SetValidationRule(this.datDThang, compareAgainstControlValidationRule1);
+            this.dxValidationProvider1.SetValidationRule(this.datTThang, compareAgainstControlValidationRule1);
             // 
             // windowsUIButton
             // 
@@ -168,9 +165,9 @@
             this.windowsUIButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.windowsUIButton.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.windowsUIButton.Location = new System.Drawing.Point(0, 525);
-            this.windowsUIButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.windowsUIButton.Margin = new System.Windows.Forms.Padding(4);
             this.windowsUIButton.Name = "windowsUIButton";
-            this.windowsUIButton.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.windowsUIButton.Padding = new System.Windows.Forms.Padding(4);
             this.windowsUIButton.Size = new System.Drawing.Size(987, 34);
             this.windowsUIButton.TabIndex = 16;
             this.windowsUIButton.Text = "windowsUIButtonPanel1";
@@ -185,7 +182,7 @@
             this.layoutControl1.Controls.Add(this.Table);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl1.Location = new System.Drawing.Point(0, 0);
-            this.layoutControl1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.layoutControl1.Margin = new System.Windows.Forms.Padding(4);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.Root = this.Root;
             this.layoutControl1.Size = new System.Drawing.Size(987, 525);
@@ -271,7 +268,7 @@
             this.Table.Controls.Add(this.LK_XI_NGHIEP);
             this.Table.Controls.Add(this.LK_DON_VI);
             this.Table.Controls.Add(this.LK_TO);
-            this.Table.Location = new System.Drawing.Point(11, 10);
+            this.Table.Location = new System.Drawing.Point(6, 6);
             this.Table.Margin = new System.Windows.Forms.Padding(28, 3, 3, 3);
             this.Table.Name = "Table";
             this.Table.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] {
@@ -288,14 +285,30 @@
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 32F),
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 32F),
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F)});
-            this.Table.Size = new System.Drawing.Size(965, 505);
+            this.Table.Size = new System.Drawing.Size(975, 513);
             this.Table.TabIndex = 4;
+            // 
+            // rdo_ChonNam
+            // 
+            this.Table.SetColumn(this.rdo_ChonNam, 3);
+            this.rdo_ChonNam.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rdo_ChonNam.Location = new System.Drawing.Point(394, 165);
+            this.rdo_ChonNam.Margin = new System.Windows.Forms.Padding(60, 5, 3, 3);
+            this.rdo_ChonNam.Name = "rdo_ChonNam";
+            this.rdo_ChonNam.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] {
+            new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Tuần", true, "rdo_Tuan"),
+            new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Quý", true, "rdo_Quy"),
+            new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Năm", true, "rdo_Nam")});
+            this.Table.SetRow(this.rdo_ChonNam, 5);
+            this.Table.SetRowSpan(this.rdo_ChonNam, 3);
+            this.rdo_ChonNam.Size = new System.Drawing.Size(90, 96);
+            this.rdo_ChonNam.TabIndex = 29;
             // 
             // datNam
             // 
             this.Table.SetColumn(this.datNam, 2);
             this.datNam.EditValue = null;
-            this.datNam.Location = new System.Drawing.Point(180, 57);
+            this.datNam.Location = new System.Drawing.Point(184, 68);
             this.datNam.Name = "datNam";
             this.datNam.Properties.Appearance.Options.UseTextOptions = true;
             this.datNam.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
@@ -319,7 +332,7 @@
             // lblTuThang
             // 
             this.Table.SetColumn(this.lblTuThang, 3);
-            this.lblTuThang.Location = new System.Drawing.Point(358, 60);
+            this.lblTuThang.Location = new System.Drawing.Point(362, 71);
             this.lblTuThang.Margin = new System.Windows.Forms.Padding(28, 3, 3, 3);
             this.lblTuThang.Name = "lblTuThang";
             this.Table.SetRow(this.lblTuThang, 2);
@@ -332,7 +345,7 @@
             this.Table.SetColumn(this.rdo_ChonBaoCao, 1);
             this.Table.SetColumnSpan(this.rdo_ChonBaoCao, 2);
             this.rdo_ChonBaoCao.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rdo_ChonBaoCao.Location = new System.Drawing.Point(28, 140);
+            this.rdo_ChonBaoCao.Location = new System.Drawing.Point(31, 165);
             this.rdo_ChonBaoCao.Margin = new System.Windows.Forms.Padding(3, 5, 3, 3);
             this.rdo_ChonBaoCao.Name = "rdo_ChonBaoCao";
             this.rdo_ChonBaoCao.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] {
@@ -341,7 +354,7 @@
             new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Bảng tổng hợp công vắng năm", true, "rdo_BangTongCongVangNam")});
             this.Table.SetRow(this.rdo_ChonBaoCao, 5);
             this.Table.SetRowSpan(this.rdo_ChonBaoCao, 3);
-            this.rdo_ChonBaoCao.Size = new System.Drawing.Size(299, 81);
+            this.rdo_ChonBaoCao.Size = new System.Drawing.Size(300, 96);
             this.rdo_ChonBaoCao.TabIndex = 22;
             this.rdo_ChonBaoCao.SelectedIndexChanged += new System.EventHandler(this.rdo_ChonBaoCao_SelectedIndexChanged);
             // 
@@ -350,10 +363,10 @@
             this.lbNam.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.Horizontal;
             this.Table.SetColumn(this.lbNam, 1);
             this.lbNam.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbNam.Location = new System.Drawing.Point(28, 57);
+            this.lbNam.Location = new System.Drawing.Point(31, 67);
             this.lbNam.Name = "lbNam";
             this.Table.SetRow(this.lbNam, 2);
-            this.lbNam.Size = new System.Drawing.Size(147, 21);
+            this.lbNam.Size = new System.Drawing.Size(147, 26);
             this.lbNam.TabIndex = 21;
             this.lbNam.Text = "Năm";
             // 
@@ -361,11 +374,11 @@
             // 
             this.Table.SetColumn(this.lbTo, 5);
             this.lbTo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbTo.Location = new System.Drawing.Point(663, 30);
+            this.lbTo.Location = new System.Drawing.Point(669, 35);
             this.lbTo.Margin = new System.Windows.Forms.Padding(28, 3, 3, 3);
             this.lbTo.Name = "lbTo";
             this.Table.SetRow(this.lbTo, 1);
-            this.lbTo.Size = new System.Drawing.Size(122, 21);
+            this.lbTo.Size = new System.Drawing.Size(122, 26);
             this.lbTo.TabIndex = 11;
             this.lbTo.Text = "Tổ";
             // 
@@ -373,11 +386,11 @@
             // 
             this.Table.SetColumn(this.lbXiNghiep, 3);
             this.lbXiNghiep.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbXiNghiep.Location = new System.Drawing.Point(358, 30);
+            this.lbXiNghiep.Location = new System.Drawing.Point(362, 35);
             this.lbXiNghiep.Margin = new System.Windows.Forms.Padding(28, 3, 3, 3);
             this.lbXiNghiep.Name = "lbXiNghiep";
             this.Table.SetRow(this.lbXiNghiep, 1);
-            this.lbXiNghiep.Size = new System.Drawing.Size(122, 21);
+            this.lbXiNghiep.Size = new System.Drawing.Size(122, 26);
             this.lbXiNghiep.TabIndex = 10;
             this.lbXiNghiep.Text = "Xí nghiệp";
             // 
@@ -385,10 +398,10 @@
             // 
             this.Table.SetColumn(this.lbDonVi, 1);
             this.lbDonVi.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbDonVi.Location = new System.Drawing.Point(28, 30);
+            this.lbDonVi.Location = new System.Drawing.Point(31, 35);
             this.lbDonVi.Name = "lbDonVi";
             this.Table.SetRow(this.lbDonVi, 1);
-            this.lbDonVi.Size = new System.Drawing.Size(147, 21);
+            this.lbDonVi.Size = new System.Drawing.Size(147, 26);
             this.lbDonVi.TabIndex = 9;
             this.lbDonVi.Text = "Đơn vị";
             // 
@@ -396,18 +409,18 @@
             // 
             this.Table.SetColumn(this.lbDenThang, 5);
             this.lbDenThang.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbDenThang.Location = new System.Drawing.Point(663, 57);
+            this.lbDenThang.Location = new System.Drawing.Point(669, 67);
             this.lbDenThang.Margin = new System.Windows.Forms.Padding(28, 3, 3, 3);
             this.lbDenThang.Name = "lbDenThang";
             this.Table.SetRow(this.lbDenThang, 2);
-            this.lbDenThang.Size = new System.Drawing.Size(122, 21);
+            this.lbDenThang.Size = new System.Drawing.Size(122, 26);
             this.lbDenThang.TabIndex = 7;
             this.lbDenThang.Text = "Đến tháng";
             // 
             // LK_XI_NGHIEP
             // 
             this.Table.SetColumn(this.LK_XI_NGHIEP, 4);
-            this.LK_XI_NGHIEP.Location = new System.Drawing.Point(486, 30);
+            this.LK_XI_NGHIEP.Location = new System.Drawing.Point(491, 36);
             this.LK_XI_NGHIEP.Name = "LK_XI_NGHIEP";
             this.LK_XI_NGHIEP.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -419,7 +432,7 @@
             // LK_DON_VI
             // 
             this.Table.SetColumn(this.LK_DON_VI, 2);
-            this.LK_DON_VI.Location = new System.Drawing.Point(180, 30);
+            this.LK_DON_VI.Location = new System.Drawing.Point(184, 36);
             this.LK_DON_VI.Name = "LK_DON_VI";
             this.LK_DON_VI.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -431,7 +444,7 @@
             // LK_TO
             // 
             this.Table.SetColumn(this.LK_TO, 6);
-            this.LK_TO.Location = new System.Drawing.Point(791, 30);
+            this.LK_TO.Location = new System.Drawing.Point(797, 36);
             this.LK_TO.Name = "LK_TO";
             this.LK_TO.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -454,7 +467,7 @@
             this.layoutControlItem1.Control = this.Table;
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(969, 509);
+            this.layoutControlItem1.Size = new System.Drawing.Size(977, 515);
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
             // 
@@ -475,37 +488,21 @@
             this.gridView1.OptionsSelection.EnableAppearanceFocusedCell = false;
             this.gridView1.OptionsView.ShowGroupPanel = false;
             // 
-            // rdo_ChonNam
-            // 
-            this.Table.SetColumn(this.rdo_ChonNam, 3);
-            this.rdo_ChonNam.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rdo_ChonNam.Location = new System.Drawing.Point(390, 140);
-            this.rdo_ChonNam.Margin = new System.Windows.Forms.Padding(60, 5, 3, 3);
-            this.rdo_ChonNam.Name = "rdo_ChonNam";
-            this.rdo_ChonNam.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] {
-            new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Tuần", true, "rdo_Tuan"),
-            new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Quý", true, "rdo_Quy"),
-            new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Năm", true, "rdo_Nam")});
-            this.Table.SetRow(this.rdo_ChonNam, 5);
-            this.Table.SetRowSpan(this.rdo_ChonNam, 3);
-            this.rdo_ChonNam.Size = new System.Drawing.Size(90, 81);
-            this.rdo_ChonNam.TabIndex = 29;
-            // 
             // ucBaoCaoTongHopNam
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.layoutControl1);
             this.Controls.Add(this.windowsUIButton);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ucBaoCaoTongHopNam";
             this.Size = new System.Drawing.Size(987, 559);
             this.Tag = "ucBaoCaoTongHopNam";
             this.Load += new System.EventHandler(this.ucBaoCaoTongHopThang_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.datTThang.Properties.CalendarTimeProperties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.datTThang.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.datDThang.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.datDThang.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.datTThang.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.datTThang.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.popupContainerControl2)).EndInit();
@@ -519,6 +516,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.Table)).EndInit();
             this.Table.ResumeLayout(false);
             this.Table.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.rdo_ChonNam.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.datNam.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.datNam.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.rdo_ChonBaoCao.Properties)).EndInit();
@@ -530,7 +528,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.rdo_ChonNam.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }

@@ -193,7 +193,7 @@ namespace Vs.TimeAttendance
             // lbTimKiem
             // 
             this.lbTimKiem.Client = this.grdDSCN;
-            this.lbTimKiem.Location = new System.Drawing.Point(199, 300);
+            this.lbTimKiem.Location = new System.Drawing.Point(199, 304);
             this.lbTimKiem.Name = "lbTimKiem";
             this.lbTimKiem.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Repository.ClearButton(),
@@ -209,7 +209,7 @@ namespace Vs.TimeAttendance
             this.grdDSCN.Location = new System.Drawing.Point(199, 77);
             this.grdDSCN.MainView = this.grvDSCN;
             this.grdDSCN.Name = "grdDSCN";
-            this.grdDSCN.Size = new System.Drawing.Size(695, 221);
+            this.grdDSCN.Size = new System.Drawing.Size(695, 225);
             this.grdDSCN.TabIndex = 40;
             this.grdDSCN.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grvDSCN,
@@ -281,7 +281,7 @@ namespace Vs.TimeAttendance
             this.windowsUIButton.ContentAlignment = System.Drawing.ContentAlignment.MiddleRight;
             this.windowsUIButton.Controls.Add(this.windowsUIButtonPanel1);
             this.windowsUIButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.windowsUIButton.Location = new System.Drawing.Point(6, 370);
+            this.windowsUIButton.Location = new System.Drawing.Point(6, 375);
             this.windowsUIButton.Margin = new System.Windows.Forms.Padding(4);
             this.windowsUIButton.Name = "windowsUIButton";
             this.windowsUIButton.Padding = new System.Windows.Forms.Padding(4);
@@ -327,10 +327,10 @@ namespace Vs.TimeAttendance
             // grdChamCong
             // 
             this.grdChamCong.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2);
-            this.grdChamCong.Location = new System.Drawing.Point(199, 324);
+            this.grdChamCong.Location = new System.Drawing.Point(199, 328);
             this.grdChamCong.MainView = this.grvChamCong;
             this.grdChamCong.Name = "grdChamCong";
-            this.grdChamCong.Size = new System.Drawing.Size(695, 44);
+            this.grdChamCong.Size = new System.Drawing.Size(695, 45);
             this.grdChamCong.TabIndex = 42;
             this.grdChamCong.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grvChamCong,
@@ -356,7 +356,7 @@ namespace Vs.TimeAttendance
             this.grdNgay.Location = new System.Drawing.Point(6, 77);
             this.grdNgay.MainView = this.grvNgay;
             this.grdNgay.Name = "grdNgay";
-            this.grdNgay.Size = new System.Drawing.Size(191, 291);
+            this.grdNgay.Size = new System.Drawing.Size(191, 296);
             this.grdNgay.TabIndex = 39;
             this.grdNgay.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grvNgay,
@@ -471,6 +471,7 @@ namespace Vs.TimeAttendance
             this.ItemForSumNhanVien,
             this.lblDataLink});
             this.layoutControlGroup1.Name = "Root";
+            this.layoutControlGroup1.Padding = new DevExpress.XtraLayout.Utils.Padding(5, 5, 5, 0);
             this.layoutControlGroup1.Size = new System.Drawing.Size(900, 408);
             this.layoutControlGroup1.TextVisible = false;
             // 
@@ -542,7 +543,7 @@ namespace Vs.TimeAttendance
             this.layoutControlItem2.Control = this.grdNgay;
             this.layoutControlItem2.Location = new System.Drawing.Point(0, 71);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(193, 293);
+            this.layoutControlItem2.Size = new System.Drawing.Size(193, 298);
             this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem2.TextVisible = false;
             // 
@@ -551,14 +552,14 @@ namespace Vs.TimeAttendance
             this.layoutControlItem3.Control = this.grdDSCN;
             this.layoutControlItem3.Location = new System.Drawing.Point(193, 71);
             this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Size = new System.Drawing.Size(697, 223);
+            this.layoutControlItem3.Size = new System.Drawing.Size(697, 227);
             this.layoutControlItem3.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem3.TextVisible = false;
             // 
             // emptySpaceItem3
             // 
             this.emptySpaceItem3.AllowHotTrack = false;
-            this.emptySpaceItem3.Location = new System.Drawing.Point(351, 294);
+            this.emptySpaceItem3.Location = new System.Drawing.Point(351, 298);
             this.emptySpaceItem3.Name = "emptySpaceItem3";
             this.emptySpaceItem3.Size = new System.Drawing.Size(539, 24);
             this.emptySpaceItem3.TextSize = new System.Drawing.Size(0, 0);
@@ -566,16 +567,16 @@ namespace Vs.TimeAttendance
             // layoutControlItem5
             // 
             this.layoutControlItem5.Control = this.grdChamCong;
-            this.layoutControlItem5.Location = new System.Drawing.Point(193, 318);
+            this.layoutControlItem5.Location = new System.Drawing.Point(193, 322);
             this.layoutControlItem5.Name = "layoutControlItem5";
-            this.layoutControlItem5.Size = new System.Drawing.Size(697, 46);
+            this.layoutControlItem5.Size = new System.Drawing.Size(697, 47);
             this.layoutControlItem5.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem5.TextVisible = false;
             // 
             // layoutControlItem1
             // 
             this.layoutControlItem1.Control = this.windowsUIButton;
-            this.layoutControlItem1.Location = new System.Drawing.Point(0, 364);
+            this.layoutControlItem1.Location = new System.Drawing.Point(0, 369);
             this.layoutControlItem1.Name = "layoutControlItem1";
             this.layoutControlItem1.Size = new System.Drawing.Size(890, 34);
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
@@ -584,7 +585,7 @@ namespace Vs.TimeAttendance
             // layoutControlItem4
             // 
             this.layoutControlItem4.Control = this.lbTimKiem;
-            this.layoutControlItem4.Location = new System.Drawing.Point(193, 294);
+            this.layoutControlItem4.Location = new System.Drawing.Point(193, 298);
             this.layoutControlItem4.MaxSize = new System.Drawing.Size(158, 24);
             this.layoutControlItem4.MinSize = new System.Drawing.Size(158, 24);
             this.layoutControlItem4.Name = "layoutControlItem4";

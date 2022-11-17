@@ -2262,8 +2262,11 @@ namespace Commons
 
 
                         }
-                        catch
-                        { }
+                        catch(Exception ex)
+                        {
+                            control1.Text = GetNN(dtTmp, control1.Name, frm.Name); 
+
+                        }
                     }
                     catch (Exception)
                     {
@@ -3879,6 +3882,19 @@ namespace Commons
             string MName = "";
             try { MName = Environment.MachineName; } catch { }
             sSql = "SELECT COUNT(*) FROM dbo.LOGIN WHERE USER_LOGIN = '" + sUserName + "' AND M_NAME <> N'" + MName + "'";
+            if (Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, sSql).ToString()) > 0)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public bool checkExitsUserLG(string sUserName)
+        {
+            string sSql = "";
+            string MName = "";
+            try { MName = Environment.MachineName; } catch { }
+            sSql = "SELECT COUNT(*) FROM dbo.LOGIN WHERE USER_LOGIN = '" + sUserName + "'";
             if (Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, sSql).ToString()) > 0)
             {
                 return false;

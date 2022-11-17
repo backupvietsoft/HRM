@@ -500,8 +500,7 @@ namespace VietSoftHRM
                 //cập nhật số ngường dùng
                 barLogin.Caption = "Total " + SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, " SELECT COUNT(*) FROM dbo.LOGIN ").ToString() + "/" + Commons.Modules.iLic + " user login";
                 //cập nhật thời gian login
-                Commons.Modules.ObjSystems.User(Commons.Modules.UserName, 3);
-                if (!Commons.Modules.ObjSystems.checkExitsUser(Commons.Modules.UserName))
+                if (Commons.Modules.ObjSystems.checkExitsUserLG(Commons.Modules.UserName))
                 {
                     Thread thread = new Thread(delegate ()
                     {
@@ -523,6 +522,10 @@ namespace VietSoftHRM
                     }, Convert.ToInt32(TimeSpan.FromMinutes(5).TotalMilliseconds));
                     thread.Start();
                 }
+                else
+                {
+                    Commons.Modules.ObjSystems.User(Commons.Modules.UserName, 1);
+                }    
             }
             catch { }
         }

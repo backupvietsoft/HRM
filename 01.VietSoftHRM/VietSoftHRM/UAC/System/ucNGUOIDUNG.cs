@@ -75,6 +75,7 @@ namespace VietSoftHRM
                         Resettest();
                         co = true;
                         Enablecontrol(false);
+                        PASSWORDTextEdit.Properties.ReadOnly = false;
                         break;
                     }
                 case "xoa":
@@ -86,6 +87,7 @@ namespace VietSoftHRM
                         enableButon(false);
                         co = false;
                         Enablecontrol(false);
+                        PASSWORDTextEdit.Properties.ReadOnly = true;
                         break;
                     }
                 case "luu":
@@ -231,6 +233,7 @@ namespace VietSoftHRM
             DESCRIPTIONMemoExEdit.Properties.ReadOnly = enable;
             grdNguoiDung.Enabled = enable;
             cboNhomUser.Properties.ReadOnly = !enable;
+            
         }
         private void Resettest()
         {

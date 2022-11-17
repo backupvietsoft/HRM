@@ -4,6 +4,7 @@ using System.Collections;
 using System.ComponentModel;
 using DevExpress.XtraReports.UI;
 using System.Data;
+using Commons;
 
 namespace Vs.Report
 {
@@ -14,6 +15,8 @@ namespace Vs.Report
             InitializeComponent();
             DataTable dtNgu = new DataTable();
             dtNgu.Load(Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT KEYWORD, CASE " + Commons.Modules.TypeLanguage + " WHEN 0 THEN VIETNAM WHEN 1 THEN ENGLISH ELSE CHINESE END AS NN  FROM LANGUAGES WHERE FORM = N'NgayThangNam' "));
+
+            xrSubreport1.ReportSource = new SubReportHeader();
 
             string Ngay = "0" + DateTime.Now.Day;
             string Thang = "0" + DateTime.Now.Month;

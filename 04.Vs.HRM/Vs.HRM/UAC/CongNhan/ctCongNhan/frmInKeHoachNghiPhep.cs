@@ -26,8 +26,8 @@ namespace Vs.HRM
             Commons.Modules.ObjSystems.LoadCboLDV(slkLDV);
             Commons.Modules.ObjSystems.LoadCboCN(slkCN);
             //LoadCboLDV();
-            dTuNgay.EditValue = Convert.ToDateTime((DateTime.Today.Month + "/01/" + DateTime.Today.Year)).ToShortDateString();
-            dDenNgay.EditValue = Convert.ToDateTime((DateTime.Today.Month + "/01/" + DateTime.Today.Year)).AddMonths(1).AddDays(-1).ToShortDateString();
+            dTuNgay.DateTime = DateTime.Now.Date.AddDays(-DateTime.Now.Date.Day + 1);
+            dDenNgay.DateTime = DateTime.Now.Date.AddMonths(1).AddDays(-DateTime.Now.Date.Day);
             int SoNgay = DateTime.Today.Day - 1;
             dTuNgay.EditValue = DateTime.Today.AddDays(-SoNgay);
             dNgayIn.EditValue = DateTime.Today;
@@ -106,7 +106,7 @@ namespace Vs.HRM
                             frm.ShowDialog();
                             break;
                         }
-                        catch (Exception EX)
+                        catch
                         { }
 
                         break;

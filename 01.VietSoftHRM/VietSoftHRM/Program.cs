@@ -39,7 +39,7 @@ namespace VietSoftHRM
                 clsMain.CheckUpdate();
                 Application.EnableVisualStyles();
 
-                if (args.Length > 0)
+                if (args.Length > 0) 
                 {
 
                     Commons.Modules.ObjSystems.User(Commons.Modules.UserName, 1);

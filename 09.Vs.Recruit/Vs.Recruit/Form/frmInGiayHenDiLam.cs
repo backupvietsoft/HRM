@@ -1,7 +1,9 @@
 ﻿using DevExpress.XtraBars.Docking2010;
 using DevExpress.XtraEditors;
+using DevExpress.XtraLayout;
 using DevExpress.XtraLayout.Utils;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
 using System.Windows.Forms;
@@ -18,7 +20,7 @@ namespace Vs.Recruit
         public frmInGiayHenDiLam()
         {
             InitializeComponent();
-            Commons.Modules.ObjSystems.ThayDoiNN(this);
+            Commons.Modules.ObjSystems.ThayDoiNN(this, Root, windowsUIButton);
         }
 
         //sự kiên load form

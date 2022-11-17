@@ -203,9 +203,6 @@
             this.ReportHeader = new DevExpress.XtraReports.UI.ReportHeaderBand();
             this.NONlblTIEU_DE = new DevExpress.XtraReports.UI.XRLabel();
             this.NONNlbTieuDe2 = new DevExpress.XtraReports.UI.XRLabel();
-            this.lblDIA_CHI = new DevExpress.XtraReports.UI.XRLabel();
-            this.lblCONG_TY = new DevExpress.XtraReports.UI.XRLabel();
-            this.xrLabel88 = new DevExpress.XtraReports.UI.XRLabel();
             this.GroupHeader1 = new DevExpress.XtraReports.UI.GroupHeaderBand();
             this.PageFooter = new DevExpress.XtraReports.UI.PageFooterBand();
             this.xrLabel4 = new DevExpress.XtraReports.UI.XRLabel();
@@ -254,6 +251,7 @@
             this.xrLabel3 = new DevExpress.XtraReports.UI.XRLabel();
             this.ReportFooter = new DevExpress.XtraReports.UI.ReportFooterBand();
             this.lblNgay = new DevExpress.XtraReports.UI.XRLabel();
+            this.xrSubreport1 = new DevExpress.XtraReports.UI.XRSubreport();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable3)).BeginInit();
@@ -1707,18 +1705,16 @@
             // ReportHeader
             // 
             this.ReportHeader.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
+            this.xrSubreport1,
             this.NONlblTIEU_DE,
-            this.NONNlbTieuDe2,
-            this.lblDIA_CHI,
-            this.lblCONG_TY,
-            this.xrLabel88});
-            this.ReportHeader.HeightF = 185.0757F;
+            this.NONNlbTieuDe2});
+            this.ReportHeader.HeightF = 104.8674F;
             this.ReportHeader.Name = "ReportHeader";
             // 
             // NONlblTIEU_DE
             // 
             this.NONlblTIEU_DE.Font = new System.Drawing.Font("Times New Roman", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.NONlblTIEU_DE.LocationFloat = new DevExpress.Utils.PointFloat(0F, 117.794F);
+            this.NONlblTIEU_DE.LocationFloat = new DevExpress.Utils.PointFloat(0F, 34.61348F);
             this.NONlblTIEU_DE.Multiline = true;
             this.NONlblTIEU_DE.Name = "NONlblTIEU_DE";
             this.NONlblTIEU_DE.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
@@ -1732,7 +1728,7 @@
             // NONNlbTieuDe2
             // 
             this.NONNlbTieuDe2.Font = new System.Drawing.Font("Times New Roman", 16F, System.Drawing.FontStyle.Bold);
-            this.NONNlbTieuDe2.LocationFloat = new DevExpress.Utils.PointFloat(0F, 157.164F);
+            this.NONNlbTieuDe2.LocationFloat = new DevExpress.Utils.PointFloat(0F, 73.98347F);
             this.NONNlbTieuDe2.Multiline = true;
             this.NONNlbTieuDe2.Name = "NONNlbTieuDe2";
             this.NONNlbTieuDe2.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
@@ -1742,57 +1738,6 @@
             this.NONNlbTieuDe2.StylePriority.UseTextAlignment = false;
             this.NONNlbTieuDe2.Text = "Ngày : 05/06/2020";
             this.NONNlbTieuDe2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
-            // 
-            // lblDIA_CHI
-            // 
-            this.lblDIA_CHI.AllowMarkupText = true;
-            this.lblDIA_CHI.AutoWidth = true;
-            this.lblDIA_CHI.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[DATA].[DIA_CHI_DV]")});
-            this.lblDIA_CHI.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDIA_CHI.LocationFloat = new DevExpress.Utils.PointFloat(0.0001629194F, 27.55904F);
-            this.lblDIA_CHI.Multiline = true;
-            this.lblDIA_CHI.Name = "lblDIA_CHI";
-            this.lblDIA_CHI.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.lblDIA_CHI.SizeF = new System.Drawing.SizeF(1614F, 27.55906F);
-            this.lblDIA_CHI.StylePriority.UseFont = false;
-            this.lblDIA_CHI.StylePriority.UsePadding = false;
-            this.lblDIA_CHI.StylePriority.UseTextAlignment = false;
-            this.lblDIA_CHI.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            // 
-            // lblCONG_TY
-            // 
-            this.lblCONG_TY.AllowMarkupText = true;
-            this.lblCONG_TY.AutoWidth = true;
-            this.lblCONG_TY.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[DATA].[TEN_DV]")});
-            this.lblCONG_TY.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCONG_TY.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
-            this.lblCONG_TY.Multiline = true;
-            this.lblCONG_TY.Name = "lblCONG_TY";
-            this.lblCONG_TY.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.lblCONG_TY.SizeF = new System.Drawing.SizeF(1614F, 27.55906F);
-            this.lblCONG_TY.StylePriority.UseFont = false;
-            this.lblCONG_TY.StylePriority.UsePadding = false;
-            this.lblCONG_TY.StylePriority.UseTextAlignment = false;
-            this.lblCONG_TY.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            // 
-            // xrLabel88
-            // 
-            this.xrLabel88.AllowMarkupText = true;
-            this.xrLabel88.AutoWidth = true;
-            this.xrLabel88.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "\'Tel: \' + [TTC].[DIEN_THOAI] + \' - Fax: \' + [TTC].[FAX]")});
-            this.xrLabel88.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.xrLabel88.LocationFloat = new DevExpress.Utils.PointFloat(0F, 55.11805F);
-            this.xrLabel88.Multiline = true;
-            this.xrLabel88.Name = "xrLabel88";
-            this.xrLabel88.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.xrLabel88.SizeF = new System.Drawing.SizeF(1614F, 27.55906F);
-            this.xrLabel88.StylePriority.UseFont = false;
-            this.xrLabel88.StylePriority.UsePadding = false;
-            this.xrLabel88.StylePriority.UseTextAlignment = false;
-            this.xrLabel88.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
             // 
             // GroupHeader1
             // 
@@ -2427,6 +2372,13 @@
             this.lblNgay.Text = "Tiền Giang, ngày 06 tháng 05 năm 2022";
             this.lblNgay.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
             // 
+            // xrSubreport1
+            // 
+            this.xrSubreport1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
+            this.xrSubreport1.LockedInUserDesigner = true;
+            this.xrSubreport1.Name = "xrSubreport1";
+            this.xrSubreport1.SizeF = new System.Drawing.SizeF(1614F, 16.90513F);
+            // 
             // rptBCChenhLechTangCa
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
@@ -2443,7 +2395,7 @@
             this.PageHeight = 1169;
             this.PageWidth = 1654;
             this.PaperKind = System.Drawing.Printing.PaperKind.A3;
-            this.Version = "20.1";
+            this.Version = "22.1";
             this.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.rptBCChenhLechTangCa_BeforePrint);
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).EndInit();
@@ -2458,9 +2410,6 @@
         private DevExpress.XtraReports.UI.BottomMarginBand BottomMargin;
         private DevExpress.XtraReports.UI.DetailBand Detail;
         private DevExpress.XtraReports.UI.ReportHeaderBand ReportHeader;
-        private DevExpress.XtraReports.UI.XRLabel lblDIA_CHI;
-        private DevExpress.XtraReports.UI.XRLabel lblCONG_TY;
-        private DevExpress.XtraReports.UI.XRLabel xrLabel88;
         private DevExpress.XtraReports.UI.XRTable xrTable2;
         private DevExpress.XtraReports.UI.XRTableRow xrTableRow2;
         private DevExpress.XtraReports.UI.XRTableCell Title_Stt;
@@ -2644,5 +2593,6 @@
         private DevExpress.XtraReports.UI.XRLabel xrLabel3;
         private DevExpress.XtraReports.UI.ReportFooterBand ReportFooter;
         private DevExpress.XtraReports.UI.XRLabel lblNgay;
+        private DevExpress.XtraReports.UI.XRSubreport xrSubreport1;
     }
 }

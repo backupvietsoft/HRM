@@ -65,87 +65,98 @@ namespace Vs.HRM
             {
                 case "Print":
                     {
-                        switch (rdo_ChonBaoCao.Properties.Items[rdo_ChonBaoCao.SelectedIndex].Tag)
+                        //switch (rdo_ChonBaoCao.Properties.Items[rdo_ChonBaoCao.SelectedIndex].Tag)
+                        //{
+                        //    case "rdo_ditrevesomgiaidoan":
+                        //        {
+                        //            switch (sKyHieuDV)
+                        //            {
+                        //                case "MT":
+                        //                    {
+                        //                        DSNVDiTreVeSomGiaiDoan();
+                        //                        break;
+                        //                    }
+                        //                case "SB":
+                        //                    {
+                        //                        BCCThangGioDenGioVe_SB();
+                        //                        break;
+                        //                    }
+                        //                default:
+                        //                    DSNVDiTreVeSomGiaiDoan();
+                        //                    break;
+                        //            }
+                        //        }
+                        //        break;
+                        //    case "rdo_vangdaugiogiaidoan":
+                        //        {
+                        //            DSVangDauGioGiaiDoan();
+
+                        //        }
+                        //        break;
+                        //    case "rdo_chamvanggiaidoan":
+                        //        {
+                        //            DSChamVangGiaiDoan();
+                        //        }
+                        //        break;
+                        //    case "rdo_chamcongvangluyke":
+                        //        {
+                        //            DSChamCongVangLuyKe();
+                        //        }
+                        //        break;
+                        //    case "rdo_xacnhanquetthe":
+                        //        {
+                        //            switch (sKyHieuDV)
+                        //            {
+                        //                case "MT":
+                        //                    {
+                        //                        XacNhanQuetThe();
+                        //                        break;
+                        //                    }
+                        //                case "SB":
+                        //                    {
+                        //                        XacNhanQuetThe();
+                        //                        //BCCThangGioDenGioVe_SB();
+                        //                        break;
+                        //                    }
+                        //                default:
+                        //                    XacNhanQuetThe_DM();
+                        //                    //XacNhanQuetThe();
+                        //                    break;
+                        //            }
+                        //        }
+
+                        //        break;
+                        //    case "rdo_congnhangiaidoan":
+                        //        {
+                        //            switch (Commons.Modules.ObjSystems.KyHieuDV(Convert.ToInt64(LK_DON_VI.EditValue)))
+                        //            {
+                        //                case "MT":
+                        //                    {
+                        //                        ChamCongChiTietCN();
+                        //                        break;
+                        //                    }
+                        //                default:
+                        //                    ChamCongChiTietCN();
+                        //                    break;
+                        //            }
+                        //            break;
+                        //        }
+                        //    case "rdo_BaoCaoHangNgayTheoGiaiDoan":
+                        //        {
+                        //            BaoCaoHangNgayTheoGiaiDoan_DM();
+                        //            break;
+                        //        }
+                        //}
+                        switch (Commons.Modules.ObjSystems.KyHieuDV(Convert.ToInt64(LK_DON_VI.EditValue)))
                         {
-                            case "rdo_ditrevesomgiaidoan":
+                            case "MT":
                                 {
-                                    switch (sKyHieuDV)
-                                    {
-                                        case "MT":
-                                            {
-                                                DSNVDiTreVeSomGiaiDoan();
-                                                break;
-                                            }
-                                        case "SB":
-                                            {
-                                                BCCThangGioDenGioVe_SB();
-                                                break;
-                                            }
-                                        default:
-                                            DSNVDiTreVeSomGiaiDoan();
-                                            break;
-                                    }
-                                }
-                                break;
-                            case "rdo_vangdaugiogiaidoan":
-                                {
-                                    DSVangDauGioGiaiDoan();
-
-                                }
-                                break;
-                            case "rdo_chamvanggiaidoan":
-                                {
-                                    DSChamVangGiaiDoan();
-                                }
-                                break;
-                            case "rdo_chamcongvangluyke":
-                                {
-                                    DSChamCongVangLuyKe();
-                                }
-                                break;
-                            case "rdo_xacnhanquetthe":
-                                {
-                                    switch (sKyHieuDV)
-                                    {
-                                        case "MT":
-                                            {
-                                                XacNhanQuetThe();
-                                                break;
-                                            }
-                                        case "SB":
-                                            {
-                                                XacNhanQuetThe();
-                                                //BCCThangGioDenGioVe_SB();
-                                                break;
-                                            }
-                                        default:
-                                            XacNhanQuetThe_DM();
-                                            //XacNhanQuetThe();
-                                            break;
-                                    }
-                                }
-
-                                break;
-                            case "rdo_congnhangiaidoan":
-                                {
-                                    switch (Commons.Modules.ObjSystems.KyHieuDV(Convert.ToInt64(LK_DON_VI.EditValue)))
-                                    {
-                                        case "MT":
-                                            {
-                                                ChamCongChiTietCN();
-                                                break;
-                                            }
-                                        default:
-                                            ChamCongChiTietCN();
-                                            break;
-                                    }
+                                    ChamCongChiTietCN();
                                     break;
                                 }
-                            case "rdo_BaoCaoHangNgayTheoGiaiDoan":
-                                {
-                                    BaoCaoHangNgayTheoGiaiDoan_DM();
-                                    break;
-                                }
+                            default:
+                                ChamCongChiTietCN();
+                                break;
                         }
 
                         break;
@@ -165,14 +176,14 @@ namespace Vs.HRM
             LoadCboTo();
 
             sKyHieuDV = Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString();
-            if (sKyHieuDV == "DM")
-            {
-                rdo_ChonBaoCao.Properties.Items.RemoveAt(0);
-            }
-            else
-            {
-                rdo_ChonBaoCao.Properties.Items.RemoveAt(6);
-            }
+            //if (sKyHieuDV == "DM")
+            //{
+            //    rdo_ChonBaoCao.Properties.Items.RemoveAt(0);
+            //}
+            //else
+            //{
+            //    rdo_ChonBaoCao.Properties.Items.RemoveAt(6);
+            //}
 
             LoadGrvLydovang();
             DateTime dtTN = DateTime.Today;
@@ -228,24 +239,24 @@ namespace Vs.HRM
 
         private void rdo_ChonBaoCao_SelectedIndexChanged(object sender, EventArgs e)
         {
-            switch (rdo_ChonBaoCao.Properties.Items[rdo_ChonBaoCao.SelectedIndex].Tag)
-            {
-                case "rdo_congnhangiaidoan":
-                    {
-                        chkInTheoCongNhan.Enabled = true;
-                        grdCN.Visible = true;
-                        searchControl1.Visible = true;
-                        break;
-                    }
+            //switch (rdo_ChonBaoCao.Properties.Items[rdo_ChonBaoCao.SelectedIndex].Tag)
+            //{
+            //    case "rdo_congnhangiaidoan":
+            //        {
+            //            chkInTheoCongNhan.Enabled = true;
+            //            grdCN.Visible = true;
+            //            searchControl1.Visible = true;
+            //            break;
+            //        }
 
-                default:
-                    {
-                        chkInTheoCongNhan.Enabled = false;
-                        grdCN.Visible = false;
-                        searchControl1.Visible = false;
-                        break;
-                    }
-            }
+            //    default:
+            //        {
+            //            chkInTheoCongNhan.Enabled = false;
+            //            grdCN.Visible = false;
+            //            searchControl1.Visible = false;
+            //            break;
+            //        }
+            //}
         }
         #endregion
 

@@ -125,7 +125,7 @@ namespace Vs.TimeAttendance
                 windowsUIButton.Buttons[9].Properties.Visible = visible;
                 windowsUIButton.Buttons[10].Properties.Visible = visible;
                 windowsUIButton.Buttons[11].Properties.Visible = visible;
-                if (Commons.Modules.KyHieuDV == "DM")
+                if (Commons.Modules.KyHieuDV == "DM" || Commons.Modules.KyHieuDV == "NB")
                 {
                     windowsUIButton.Buttons[12].Properties.Visible = visible;
                 }
@@ -138,6 +138,12 @@ namespace Vs.TimeAttendance
                 windowsUIButton.Buttons[15].Properties.Visible = visible;
             }
             //      groupDanhSachKhoaHoc.Enabled = visible;
+
+            if (Commons.Modules.KyHieuDV == "NB")
+            {
+                windowsUIButton.Buttons[13].Properties.Visible = false;
+                windowsUIButtonPanel1.Visible = false;
+            }
         }
         private void LoadCboDataLink()
         {
@@ -357,7 +363,7 @@ namespace Vs.TimeAttendance
                         break;
                 }
             }
-            catch
+            catch (Exception ex)
             {
                 this.Cursor = Cursors.Default;
             }
@@ -426,7 +432,7 @@ namespace Vs.TimeAttendance
             DataTable tbDLQT = new DataTable("DLQT");
             DataTable dtTTC = new DataTable(); // Lấy ký hiệu đơn vị trong thông tin chung
             dtTTC = Commons.Modules.ObjSystems.DataThongTinChung();
-            switch (dtTTC.Rows[0]["KY_HIEU_DV"].ToString())
+            switch (Commons.Modules.KyHieuDV)
             {
                 case "MT":
                     {
@@ -725,28 +731,88 @@ namespace Vs.TimeAttendance
                         break;
                     }
 
-                //case 2:
-                //    {
-                //        //load access
-                //        //Provider = Microsoft.Jet.OLEDB.4.0; Data Source = G:\READFILE\WiseEyeOn39.mdb; Persist Security Info = False; Jet OLEDB:Database Password = 12112009; Jet OLEDB:Compact Without Replica Repair = True
-                //        string queryString = @"SELECT UserEnrollNumber as MS_THE_CC,TimeStr AS NGAY  FROM CheckInOut WHERE FORMAT(TimeStr,""dd/MM/yyyy"") = #" + dtNgayChamCong.Text + "#";
-                //        using (OleDbConnection connection = new OleDbConnection(Commons.Modules.connect))
-                //        using (OleDbCommand command = new OleDbCommand(queryString, connection))
-                //        {
-                //            try
-                //            {
-                //                connection.Open();
-                //                OleDbDataReader reader = command.ExecuteReader();
-                //                tbDLQT.Load(reader);
-                //                reader.Close();
-                //            }
-                //            catch (Exception ex)
-                //            {
-                //                Console.WriteLine(ex.Message);
-                //            }
-                //        }
-                //        break;
-                //    }
+                case "NB":
+                    {
+                        //load access
+                        try
+                        {
+
+                            Int64 iIdCN = -1;
+                            //kiem tra du lieu link da co chua
+                            if (KiemDL())
+                            {
+                                if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msg_KiemTraDuLieuLink"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) return;
+                            }
+
+                            if (NONN_TheoNhanVienCheckEdit.Checked)
+                            {
+                                iIdCN = Convert.ToInt64(grvDSCN.GetFocusedRowCellValue("ID_CN").ToString());
+                            }
+                            string connect = "Provider = Microsoft.Jet.OLEDB.4.0; Data Source = "+ Commons.Modules.sDDTaiLieu +@"\"+ cboDataLink.Text +"; Persist Security Info = False; Jet OLEDB:Database Password = 12112009; Jet OLEDB:Compact Without Replica Repair = True";
+                            string queryString = @"SELECT UserInfo.UserFullCode AS MS_THE_CC, CheckInOut.TimeStr AS NGAY FROM CheckInOut INNER JOIN UserInfo ON CheckInOut.UserEnrollNumber = UserInfo.UserEnrollNumber WHERE (((Format([TimeStr],""dd/mm/yyyy""))=#"+ dtNgayChamCong.Text + "#))";
+                            using (OleDbConnection connection = new OleDbConnection(connect))
+                            using (OleDbCommand command = new OleDbCommand(queryString, connection))
+                            {
+                                try
+                                {
+                                    connection.Open();
+                                    OleDbDataReader reader = command.ExecuteReader();
+                                    tbDLQT.Load(reader);
+                                    reader.Close();
+                                }
+                                catch (Exception ex)
+                                {
+                                    Console.WriteLine(ex.Message);
+                                    return;
+                                }
+                            }
+                            System.Data.SqlClient.SqlConnection conn;
+                            conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                            conn.Open();
+                            System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("usp_InsertDLQT", conn);
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.Parameters.AddWithValue("@tableDLQT", tbDLQT);
+                            cmd.Parameters.AddWithValue("@UName", Commons.Modules.UserName);
+                            cmd.Parameters.AddWithValue("@NNgu", Commons.Modules.TypeLanguage);
+                            cmd.Parameters.AddWithValue("@DVi", cbDonVi.EditValue);
+                            cmd.Parameters.AddWithValue("@XN", cbXiNghiep.EditValue);
+                            cmd.Parameters.AddWithValue("@TO", cbTo.EditValue);
+                            cmd.Parameters.AddWithValue("@ID_CN", iIdCN);
+                            cmd.Parameters.AddWithValue("@Ngay", dtNgayChamCong.DateTime);
+                            cmd.ExecuteNonQuery();
+
+                            if (KiemQuetTheLoi())
+                            {
+                                if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msg_QuetTheLoi"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                                {
+                                    Commons.Modules.bolLinkCC = true;
+                                    Commons.Modules.dLinkCC = dtNgayChamCong.DateTime;
+                                    frmVachTheLoi frm = new frmVachTheLoi();
+                                    frm.ShowDialog();
+
+                                    Commons.Modules.bolLinkCC = false;
+                                }
+                            }
+
+                            LoadLuoiNgay(dtNgayChamCong.DateTime);
+                            grvDSCN_FocusedRowChanged(null, null);
+                            if (KiemDL())
+                            {
+                                bLinkOK = true;
+                            }
+                            else
+                            {
+                                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msg_KhongCoDuLieuLink"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                bLinkOK = false;
+                            }
+
+
+                        }
+                        catch (Exception ex)
+                        {
+                        }
+                        break;
+                    }
 
                 //case 3:
                 //    {

@@ -154,7 +154,7 @@ namespace Vs.HRM
         private void LoadGrdCongNhan(bool cochon)
         {
             DataTable dt = new DataTable();
-            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetCongNhanNghiPhep", cboSearch_DV.EditValue, cboSearch_XN.EditValue, cboSearch_TO.EditValue, dateNam.DateTime.Year, Commons.Modules.UserName, Commons.Modules.TypeLanguage));
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, Commons.Modules.KyHieuDV =="NB" ? "spGetCongNhanNghiPhep_NB" : "spGetCongNhanNghiPhep", cboSearch_DV.EditValue, cboSearch_XN.EditValue, cboSearch_TO.EditValue, dateNam.DateTime.Year, Commons.Modules.UserName, Commons.Modules.TypeLanguage));
             dt.PrimaryKey = new DataColumn[] { dt.Columns["ID_CN"] };
             if (grdDSCN.DataSource == null)
             {
@@ -195,7 +195,7 @@ namespace Vs.HRM
             try
             {
                 DataTable dt = new DataTable();
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetListKeHoachNghiPhep", dateNam.DateTime.Year, grvDSCN.GetFocusedRowCellValue("ID_CN"), Commons.Modules.UserName, Commons.Modules.TypeLanguage));
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, Commons.Modules.KyHieuDV == "NB" ? "spGetListKeHoachNghiPhep_NB" : "spGetListKeHoachNghiPhep", dateNam.DateTime.Year, grvDSCN.GetFocusedRowCellValue("ID_CN"), Commons.Modules.UserName, Commons.Modules.TypeLanguage));
                 dt.Columns["NGHI_NUA_NGAY"].ReadOnly = false;
                 Commons.Modules.ObjSystems.MLoadXtraGrid(grdKHNP, grvKHNP, dt, false, true, false, false, true, this.Name);
                 Commons.Modules.ObjSystems.AddCombXtra("ID_LDV", "TEN_LDV", grvKHNP, Commons.Modules.ObjSystems.DataLyDoVang(false, -1), "ID_LDV", this.Name);
@@ -204,9 +204,17 @@ namespace Vs.HRM
 
                 grvKHNP.Columns["SO_GIO"].Visible = false;
                 grvKHNP.Columns["NGAY_VAO_LAM_LAI"].Visible = false;
+
+                if(Commons.Modules.KyHieuDV =="NB")
+                {
+                    grvKHNP.Columns["NGHI_NUA_NGAY"].Visible = false;
+                }
+
                 grvKHNP.Columns["TU_NGAY"].ColumnEdit = dEditN;
                 grvKHNP.Columns["DEN_NGAY"].ColumnEdit = dEditN;
                 grvKHNP.Columns["NGAY_VAO_LAM_LAI"].ColumnEdit = dEditN;
+
+
 
                 grvKHNP.Columns["TU_NGAY"].DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
                 grvKHNP.Columns["TU_NGAY"].DisplayFormat.FormatString = "dd/MM/yyyy";

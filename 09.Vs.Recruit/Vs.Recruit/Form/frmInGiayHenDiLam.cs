@@ -125,7 +125,6 @@ namespace Vs.Recruit
                                         default:
                                             {
                                                 frmViewReport frm = new frmViewReport();
-                                                Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBTCongNhan, dtTemp, "");
                                                 System.Data.SqlClient.SqlConnection conn1;
                                                 DataTable dt = new DataTable();
                                                 frm.rpt = new rptGiayHenDiLam();

@@ -87,6 +87,7 @@ namespace Vs.Recruit
                 grvDSUngVien.Columns["MUC_LUONG_DN"].OptionsColumn.AllowEdit = false;
                 grvDSUngVien.Columns["TEN_LHDLD"].OptionsColumn.AllowEdit = false;
                 grvDSUngVien.Columns["ID_CN"].OptionsColumn.AllowEdit = false;
+                grvDSUngVien.Columns["NGAY_HOAN_THANH_DT"].OptionsColumn.AllowEdit = false;
                 grvDSUngVien.Columns["ID_UV"].Visible = false;
                 grvDSUngVien.Columns["MS_CV"].Visible = false;
                 grvDSUngVien.Columns["ID_YCTD"].Visible = false;

@@ -445,14 +445,14 @@ namespace Vs.TimeAttendance
 
         private void calNgay_DateTimeCommit(object sender, EventArgs e)
         {
+            
             try
             {
-                cboNgay.Text = calNgay.DateTime.Date.ToShortDateString();
+                cboNgay.Text = calNgay.DateTime.ToString("MM/yyyy");
             }
-            catch (Exception ex)
+            catch 
             {
-                XtraMessageBox.Show(ex.Message.ToString());
-                cboNgay.Text = DateTime.Now.ToShortDateString();
+                cboNgay.Text = calNgay.DateTime.ToString("MM/yyyy");
             }
             cboNgay.ClosePopup();
         }

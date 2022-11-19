@@ -749,7 +749,7 @@ namespace Vs.TimeAttendance
                                 iIdCN = Convert.ToInt64(grvDSCN.GetFocusedRowCellValue("ID_CN").ToString());
                             }
                             string connect = "Provider = Microsoft.Jet.OLEDB.4.0; Data Source = "+ Commons.Modules.sDDTaiLieu +@"\"+ cboDataLink.Text +"; Persist Security Info = False; Jet OLEDB:Database Password = 12112009; Jet OLEDB:Compact Without Replica Repair = True";
-                            string queryString = @"SELECT UserInfo.UserFullCode AS MS_THE_CC, CheckInOut.TimeStr AS NGAY FROM CheckInOut INNER JOIN UserInfo ON CheckInOut.UserEnrollNumber = UserInfo.UserEnrollNumber WHERE (((Format([TimeStr],""dd/mm/yyyy""))=#"+ dtNgayChamCong.Text + "#))";
+                            string queryString = @"SELECT UserInfo.UserFullCode AS MS_THE_CC, CheckInOut.TimeStr AS NGAY FROM CheckInOut INNER JOIN UserInfo ON CheckInOut.UserEnrollNumber = UserInfo.UserEnrollNumber WHERE (((CheckInOut.TimeDate)=#"+ dtNgayChamCong.DateTime.ToString("MM/dd/yyyy") + "#));";
                             using (OleDbConnection connection = new OleDbConnection(connect))
                             using (OleDbCommand command = new OleDbCommand(queryString, connection))
                             {

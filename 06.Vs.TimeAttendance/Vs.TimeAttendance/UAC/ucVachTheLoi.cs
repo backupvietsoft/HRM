@@ -707,16 +707,16 @@ namespace Vs.TimeAttendance
 
         private void grvCongNhan_RowStyle(object sender, RowStyleEventArgs e)
         {
-            try
-            {
-                if (grvCongNhan.GetRowCellValue(e.RowHandle, grvCongNhan.Columns["CA"]).ToString() == grvCongNhan.GetRowCellValue(e.RowHandle, grvCongNhan.Columns["CA_DC"]).ToString()) return;
-                e.Appearance.BackColor = System.Drawing.ColorTranslator.FromHtml("#A9F5BC");
-                e.HighPriority = true;
-            }
-            catch
-            {
+            //try
+            //{
+            //    if (grvCongNhan.GetRowCellValue(e.RowHandle, grvCongNhan.Columns["CA"]).ToString() == grvCongNhan.GetRowCellValue(e.RowHandle, grvCongNhan.Columns["CA_DC"]).ToString()) return;
+            //    e.Appearance.BackColor = System.Drawing.ColorTranslator.FromHtml("#A9F5BC");
+            //    e.HighPriority = true;
+            //}
+            //catch
+            //{
 
-            }
+            //}
         }
 
         private void grvCongNhan_InitNewRow(object sender, InitNewRowEventArgs e)

@@ -2798,6 +2798,7 @@ D:\01.SourceCode\02.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.frmImportTien
 D:\01.SourceCode\02.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.frmInBaoCaoPCD.resources
 D:\01.SourceCode\02.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.frmInBaoCaoHTTienDo.resources
 D:\01.SourceCode\02.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.frmLayDuLieuLuongT13.resources
+D:\01.SourceCode\02.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.frmPhieuCongDoan_CN.resources
 D:\01.SourceCode\02.HRM\08.Payroll\Vs.Payroll\obj\Debug\VS.ERP.frmPhieuNhapKho_Import.resources
 D:\01.SourceCode\02.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.frmQTCN_View.resources
 D:\01.SourceCode\02.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.frmDonHangBanView_Order.resources

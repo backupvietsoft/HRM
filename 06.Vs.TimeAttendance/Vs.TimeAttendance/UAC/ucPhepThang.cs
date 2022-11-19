@@ -1,7 +1,6 @@
 ﻿using Commons;
 using DevExpress.XtraBars.Docking2010;
 using DevExpress.XtraEditors;
-using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraLayout;
 using Microsoft.ApplicationBlocks.Data;
@@ -828,7 +827,7 @@ namespace Vs.TimeAttendance
                 dt.Columns[1].ReadOnly = true;
                 dt.Columns[2].ReadOnly = true;
                 dt.Columns[3].ReadOnly = true;
-                Commons.Modules.ObjSystems.MLoadXtraGrid(grdPhepThang, grvPhepThang, dt, bThem, true, false, true, true,this.Name);
+                Commons.Modules.ObjSystems.MLoadXtraGrid(grdPhepThang, grvPhepThang, dt, bThem, true, false, true,true,this.Name);
                 grvPhepThang.Columns["MS_CN"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
                 grvPhepThang.Columns["HO_TEN"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
                 grvPhepThang.Columns["NGAY_VAO_LAM"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
@@ -838,11 +837,30 @@ namespace Vs.TimeAttendance
                 grvPhepThang.Columns["PHEP_CON_LAI"].UnboundType = DevExpress.Data.UnboundColumnType.Decimal;
                 grvPhepThang.Columns["ID_CN"].Visible = false;
                 //visible tháng lớn hơn tháng đang chọn
-                for (int i = Convert.ToDateTime(cboThang.EditValue).Month + 1; i <= 12; i++)
+                int iVisible = 6;
+                for (int i = 1; i <= 12; i++)
                 {
-                    grvPhepThang.Columns["T_" + i + ""].Visible = false;
-                    grvPhepThang.Columns["TT_" + i + ""].Visible = false;
+                    grvPhepThang.Columns["T_" + i + ""].VisibleIndex = iVisible + 1;
+                    grvPhepThang.Columns["TT_" + i + ""].VisibleIndex = iVisible + 2;
+                    if (i > Convert.ToDateTime(cboThang.EditValue).Month)
+                    {
+                        grvPhepThang.Columns["T_" + i + ""].VisibleIndex = iVisible + 1;
+                        grvPhepThang.Columns["TT_" + i + ""].VisibleIndex = iVisible + 2;
+                        grvPhepThang.Columns["T_" + i + ""].Visible = false;
+                        grvPhepThang.Columns["TT_" + i + ""].Visible = false;
+                    }
+                    else
+                    {
+                        grvPhepThang.Columns["T_" + i + ""].Visible = true;
+                        grvPhepThang.Columns["TT_" + i + ""].Visible = true;
+                    }
+                    iVisible = iVisible + 2;
                 }
+
+                grvPhepThang.Columns["PHEP_DA_NGHI"].VisibleIndex = 50;
+                grvPhepThang.Columns["PHEP_TIEU_CHUAN"].VisibleIndex = 51;
+                grvPhepThang.Columns["SO_THANG_LAM_VIEC"].VisibleIndex = 52;
+                grvPhepThang.Columns["PHEP_CON_LAI"].VisibleIndex = 53;
                 Commons.Modules.sLoad = "";
             }
             catch (Exception)
@@ -890,7 +908,6 @@ namespace Vs.TimeAttendance
         private void cboThang_EditValueChanged(object sender, EventArgs e)
         {
             if (Commons.Modules.sLoad == "0Load") return;
-            Commons.Modules.sLoad = "0Load";
             LoadGrdPhepThang(false);
             Commons.Modules.sLoad = "";
         }

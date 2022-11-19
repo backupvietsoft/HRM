@@ -3082,6 +3082,7 @@ D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.frmInQTCT.resources
 D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.ucHoanChinhHSNhanSu.resources
 D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.ucDanhGiaThuViec.resources
 D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.ucKeHoachThaiSan.resources
+D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.Payroll.ucPhatDongPhuc.resources
 D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.ucQLNS.resources
 D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.ucTaoHopDong.resources
 D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.ucInNhanVien.resources
@@ -3111,3 +3112,4 @@ D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.csproj.CoreCompileInpu
 D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.csproj.CopyComplete
 D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.dll
 D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.pdb
+D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.ucBaoCaoHuongTroCapBHXH.resources

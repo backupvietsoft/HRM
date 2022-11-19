@@ -103,9 +103,11 @@
             this.grvData.DetailHeight = 297;
             this.grvData.GridControl = this.grdData;
             this.grvData.Name = "grvData";
+            this.grvData.OptionsSelection.MultiSelect = true;
             this.grvData.OptionsView.AllowHtmlDrawHeaders = true;
             this.grvData.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.True;
             this.grvData.OptionsView.ShowGroupPanel = false;
+            this.grvData.PopupMenuShowing += new DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler(this.grvData_PopupMenuShowing);
             this.grvData.DoubleClick += new System.EventHandler(this.grvData_DoubleClick);
             this.grvData.RowCountChanged += new System.EventHandler(this.grvData_RowCountChanged);
             // 

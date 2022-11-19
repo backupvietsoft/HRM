@@ -412,6 +412,8 @@
             this.grvPCD.GridControl = this.grdPCD;
             this.grvPCD.Name = "grvPCD";
             this.grvPCD.OptionsView.ShowGroupPanel = false;
+            this.grvPCD.RowStyle += new DevExpress.XtraGrid.Views.Grid.RowStyleEventHandler(this.grvPCD_RowStyle);
+            this.grvPCD.PopupMenuShowing += new DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler(this.grvPCD_PopupMenuShowing);
             this.grvPCD.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.grvPCD_FocusedRowChanged);
             this.grvPCD.RowCountChanged += new System.EventHandler(this.grvPCD_RowCountChanged);
             // 

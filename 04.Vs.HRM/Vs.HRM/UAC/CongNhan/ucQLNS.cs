@@ -45,6 +45,29 @@ namespace Vs.HRM
             LoadNhanSu(-1);
             Commons.Modules.sLoad = "";
             setMauTT();
+            switch (Commons.Modules.ObjSystems.KyHieuDV(Convert.ToInt64(cboDV.EditValue)))
+            {
+                case "NB":
+                    {
+                        btnBinhThuong.Visible = false;
+                        lblBinhThuong.Visible = false;
+                        btnSapNghiViec.Visible = false;
+                        lblSapNghiViec.Visible = false;
+                        btnNghiDe.Visible = false;
+                        lblNghiDe.Visible = false;
+                        btnCheDo1Nam.Visible = false;
+                        lblCheDo1Nam.Visible = false;
+                        btnDaNghiViec.Visible = false;
+                        lblDaNghiViec.Visible = false;
+                        btnBoViec.Visible = false;
+                        lblBoViec.Visible = false;
+                        btnSapHetHanHD.Visible = false;
+                        lblSapHetHanHD.Visible = false;
+                        btnSapNghiSinh.Visible = false;
+                        lblSapNghiSinh.Visible = false;
+                        break;
+                    }
+            }
         }
 
         private void LoadCboDonVi()
@@ -368,9 +391,19 @@ namespace Vs.HRM
 
             try
             {
-                DataTable dt = new DataTable();
-                dt = Commons.Modules.ObjSystems.ConvertDatatable(grvDSCongNhan);
-                ItemForSumNhanVien.Text = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "SumNhanVien") + ": " + dt.Rows.Count.ToString();
+                int index = ItemForSumNhanVien.Text.IndexOf(':');
+                if (index > 0)
+                {
+                    if (view.RowCount > 0)
+                    {
+                        ItemForSumNhanVien.Text = ItemForSumNhanVien.Text.Substring(0, index) + ": " + view.RowCount.ToString();
+                    }
+                    else
+                    {
+                        ItemForSumNhanVien.Text = ItemForSumNhanVien.Text.Substring(0, index) + ": 0";
+                    }
+
+                }
             }
             catch
             {

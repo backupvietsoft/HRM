@@ -30,8 +30,17 @@ namespace Vs.HRM
             Commons.Modules.ObjSystems.ThayDoiNN(this, windowsUIButton);
 
             //Danh cho NB
-            this.chkInAll.Visible = false;
-            this.lblInTatCa.Visible = false;
+            switch (Commons.Modules.ObjSystems.KyHieuDV_CN(Convert.ToInt64(Commons.Modules.iCongNhan)))
+            {
+                case "NB":
+                    {
+                        this.chkInAll.Visible = false;
+                        this.lblInTatCa.Visible = false;
+                        break;
+                    }
+            }
+            ////this.chkInAll.Visible = false;
+            ////this.lblInTatCa.Visible = false;
 
         }
 
@@ -136,32 +145,43 @@ namespace Vs.HRM
                     }
                 case "Print":
                     {
-                        DataTable dt = new DataTable();
-                        dt = (DataTable)grdChonCot.DataSource;
-                        if (dt.AsEnumerable().Where(x => x["CHON"].ToString() == "1").Count() == 0)
+                        switch (Commons.Modules.ObjSystems.KyHieuDV_CN(Convert.ToInt64(Commons.Modules.iCongNhan)))
                         {
-                            XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgBanChuaChonCotIn"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
+                            case "DM":
+                                {
+                                    DataTable dt = new DataTable();
+                                    dt = (DataTable)grdChonCot.DataSource;
+                                    if (dt.AsEnumerable().Where(x => x["CHON"].ToString() == "1").Count() == 0)
+                                    {
+                                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgBanChuaChonCotIn"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                        return;
+                                    }
+
+                                    DanhSachNhanVien();
+                                    break;
+                                }
+                            case "NB":
+                                {
+
+                                    if (chkInAll.Checked == true)
+                                    {
+                                        DanhSachCanBoCongNhanVien();
+                                    }
+                                    else
+                                    {
+
+                                        DataTable dt = new DataTable();
+                                        dt = (DataTable)grdChonCot.DataSource;
+                                        if (dt.AsEnumerable().Where(x => x["CHON"].ToString() == "1").Count() == 0)
+                                        {
+                                            XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgBanChuaChonCotIn"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                            return;
+                                        }
+                                        DanhSachNhanVien();
+                                    }
+                                    break;
+                                }
                         }
-
-                        DanhSachNhanVien();
-
-                        //if (chkInAll.Checked == true)
-                        //{
-                        //    DanhSachCanBoCongNhanVien();
-                        //}
-                        //else
-                        //{
-
-                        //    DataTable dt = new DataTable();
-                        //    dt = (DataTable)grdChonCot.DataSource;
-                        //    if (dt.AsEnumerable().Where(x => x["CHON"].ToString() == "1").Count() == 0)
-                        //    {
-                        //        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgBanChuaChonCotIn"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        //        return;
-                        //    }
-                        //    DanhSachNhanVien();
-                        //}
                         break;
                     }
                 case "luu":

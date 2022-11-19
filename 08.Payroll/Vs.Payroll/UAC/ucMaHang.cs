@@ -9,6 +9,7 @@ using DevExpress.XtraBars.Docking2010;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraLayout;
 using DataTable = System.Data.DataTable;
+using DevExpress.Utils.Menu;
 
 namespace Vs.Payroll
 {
@@ -83,9 +84,11 @@ namespace Vs.Payroll
             try { TEN_LHH = cboLHH.EditValue.ToString(); } catch { }
             try { TNgay = datTNgay.DateTime.Date; } catch { }
             try { DNgay = datDNgay.DateTime.Date; } catch { }
-            try {
+            try
+            {
                 if (chkDaDong.Checked) @DDong = 1; else DDong = 0;
-            } catch { }
+            }
+            catch { }
 
             System.Data.SqlClient.SqlConnection conn;
             conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
@@ -109,14 +112,14 @@ namespace Vs.Payroll
             adp.Fill(ds);
             DataTable dt = new DataTable();
             dt = ds.Tables[0].Copy();
-            dt.PrimaryKey = new DataColumn[] { dt.Columns[0]};
+            dt.PrimaryKey = new DataColumn[] { dt.Columns[0] };
 
-            
+
 
 
             if (grdData.DataSource == null)
             {
-                Commons.Modules.ObjSystems.MLoadXtraGrid(grdData, grvData, dt, false, false, false, false, true, this.Name);
+                Commons.Modules.ObjSystems.MLoadXtraGrid(grdData, grvData, dt, true, false, false, false, true, this.Name);
             }
             else
                 try { grdData.DataSource = dt; } catch { }
@@ -150,7 +153,8 @@ namespace Vs.Payroll
                         break;
                     }
                 case "sua":
-                    {   ThemSua(false);
+                    {
+                        ThemSua(false);
                         EnableButon(isAdd);
                         break;
                     }
@@ -191,13 +195,15 @@ namespace Vs.Payroll
                                 }
                                 XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", dt.Rows[0][1].ToString()), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                             }
-                            else { XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgXoaKhongThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            else
+                            {
+                                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgXoaKhongThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 return;
                             }
-                            
+
                         }
-                        catch 
-                        {}
+                        catch
+                        { }
                         break;
                     }
                 case "In":
@@ -339,9 +345,62 @@ namespace Vs.Payroll
             }
         }
 
-        private void windowsUIButton_Click(object sender, EventArgs e)
+        #region chuotphai
+        class RowInfo
         {
+            public RowInfo(DevExpress.XtraGrid.Views.Grid.GridView view, int rowHandle)
+            {
+                this.RowHandle = rowHandle;
+                this.View = view;
+            }
+            public DevExpress.XtraGrid.Views.Grid.GridView View;
+            public int RowHandle;
+        }
 
+        public DXMenuItem MCreateMenuCapNhat(DevExpress.XtraGrid.Views.Grid.GridView view, int rowHandle)
+        {
+            string sStr = Commons.Modules.ObjLanguages.GetLanguage(Commons.Modules.ModuleName, this.Name, "lblCapNhatTinhTrang", Commons.Modules.TypeLanguage);
+            DXMenuItem menuThongTinNS = new DXMenuItem(sStr, new EventHandler(CapNhat));
+            menuThongTinNS.Tag = new RowInfo(view, rowHandle);
+            return menuThongTinNS;
+        }
+        public void CapNhat(object sender, EventArgs e)
+        {
+            if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgBanCoChacMuonCapNhat"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) return;
+
+            string sCotCN = grvData.FocusedColumn.FieldName.ToString();
+            try
+            {
+                if (grvData.GetFocusedRowCellValue(grvData.FocusedColumn.FieldName).ToString() == "") return;
+                string sBT = "sBTMaHang" + Commons.Modules.iIDUser;
+                Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBT, Commons.Modules.ObjSystems.GetDataTableMultiSelect(grdData, grvData), "");
+
+                DataTable dt = new DataTable();
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spUpdateHoanChinhMaHang", sBT, sCotCN, sCotCN.Substring(0, 4) == "NGAY" ? Convert.ToDateTime(grvData.GetFocusedRowCellValue(grvData.FocusedColumn.FieldName)).ToString("MM/dd/yyyy") : grvData.GetFocusedRowCellValue(grvData.FocusedColumn.FieldName)));
+                LoadData(-1);
+                Commons.Modules.ObjSystems.XoaTable(sCotCN);
+            }
+            catch (Exception ex) { }
+        }
+        #endregion
+
+        private void grvData_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
+        {
+            try
+            {
+                if (grvData.FocusedColumn.FieldName.ToString() != "CLOSED" && grvData.FocusedColumn.FieldName.ToString() != "QUI_TRINH_HOAN_CHINH") return;
+                DevExpress.XtraGrid.Views.Grid.GridView view = sender as DevExpress.XtraGrid.Views.Grid.GridView;
+                if (e.MenuType == DevExpress.XtraGrid.Views.Grid.GridMenuType.Row)
+                {
+                    int irow = e.HitInfo.RowHandle;
+                    e.Menu.Items.Clear();
+                    DevExpress.Utils.Menu.DXMenuItem itemTTNS = MCreateMenuCapNhat(view, irow);
+                    e.Menu.Items.Add(itemTTNS);
+                }
+            }
+            catch
+            {
+            }
         }
     }
 }

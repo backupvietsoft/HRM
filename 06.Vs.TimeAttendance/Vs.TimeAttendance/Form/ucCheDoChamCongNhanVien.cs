@@ -447,12 +447,12 @@ namespace Vs.TimeAttendance
         {
             try
             {
-                cboNgay.Text = calNgay.DateTime.Date.ToShortDateString();
+                cboNgay.Text = calNgay.DateTime.Date.ToString("MM/yyyy");
             }
             catch (Exception ex)
             {
                 XtraMessageBox.Show(ex.Message.ToString());
-                cboNgay.Text = DateTime.Now.ToShortDateString();
+                cboNgay.Text = DateTime.Now.ToString("MM/yyyy");
             }
             cboNgay.ClosePopup();
         }
@@ -476,7 +476,7 @@ namespace Vs.TimeAttendance
         {
             try
             {
-                if (cboNgay.Text == "") cboNgay.Text = DateTime.Now.ToShortDateString();
+                if (cboNgay.Text == "") cboNgay.Text = DateTime.Now.ToString("MM/yyyy");
             }
             catch (Exception ex)
             {

@@ -236,8 +236,7 @@ namespace Vs.TimeAttendance
                                 Process.Start(saveFileDialog.FileName);
                             }
                         }
-                        catch (Exception EX
-                        )
+                        catch (Exception EX)
                         {
 
                         }

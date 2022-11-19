@@ -19,7 +19,7 @@ namespace VietSoftHRM
         public int iLoai;
         public int iIDOut;
         public string slinkcha;
-        public string sLoad="";
+        public string sLoad = "";
         public ucListLuong(TileBar tileBar)
         {
             InitializeComponent();
@@ -49,7 +49,8 @@ namespace VietSoftHRM
                         elementchill.Text = itemchill["NAME"].ToString();
                         elementchill.Name = itemchill["KEY_MENU"].ToString();
                         elementchill.Tag = itemchill["CONTROLS"].ToString();
-                        elementchill.Click += Elementchill_Click;
+
+                        elementchill.Click += delegate (object a, EventArgs b) { Elementchill_Click(a, b, false); };
                         element.Elements.Add(elementchill);
                     }
                 }
@@ -109,10 +110,13 @@ namespace VietSoftHRM
 
         //}
         //sự kiện click con
-        private void Elementchill_Click(object sender, EventArgs e)
+        private void Elementchill_Click(object sender, EventArgs e, bool f5)
         {
             var button = sender as AccordionControlElement;
-            if (sLoad == button.Name) return;
+            if (f5 == false)
+            {
+                if (sLoad == button.Name) return;
+            }
             Commons.Modules.ObjSystems.ShowWaitForm(this);
             Commons.Modules.ObjSystems.GetPhanQuyen(button);
             sLoad = button.Name;
@@ -140,11 +144,58 @@ namespace VietSoftHRM
                     }
                 case "mnuPhieuCongDoan":
                     {
-                        frmPhieuCongDoan_CN ctl = new frmPhieuCongDoan_CN();
-                        panel2.Controls.Clear();
-                        panel2.Controls.Add(ctl);
-                        Commons.Modules.ObjSystems.HideWaitForm();
-                        ctl.Dock = DockStyle.Fill;
+                        if(f5 == true)
+                        {
+                            frmPhieuCongDoan ctl = new frmPhieuCongDoan();
+                            panel2.Controls.Clear();
+                            panel2.Controls.Add(ctl);
+                            Commons.Modules.ObjSystems.HideWaitForm();
+                            ctl.Dock = DockStyle.Fill;
+                        }
+                        else
+                        {
+                            if (!panel2.Controls.Contains(frmPhieuCongDoan.Instance))
+                            {
+                                //frmPhieuCongDoan ctl = new frmPhieuCongDoan();
+                                //panel2.Controls.Clear();
+                                //panel2.Controls.Add(ctl);
+                                //Commons.Modules.ObjSystems.HideWaitForm();
+                                //ctl.Dock = DockStyle.Fill;
+                                panel2.Controls.Clear();
+                                panel2.Controls.Add(frmPhieuCongDoan.Instance);
+                                frmPhieuCongDoan.Instance.Dock = DockStyle.Fill;
+                                frmPhieuCongDoan.Instance.BringToFront();
+                                Commons.Modules.ObjSystems.HideWaitForm();
+                            }
+                        }
+                        break;
+                    }
+                case "mnuPhieuCongDoanCN":
+                    {
+                        if (f5 == true)
+                        {
+                            frmPhieuCongDoan_CN ctl = new frmPhieuCongDoan_CN();
+                            panel2.Controls.Clear();
+                            panel2.Controls.Add(ctl);
+                            Commons.Modules.ObjSystems.HideWaitForm();
+                            ctl.Dock = DockStyle.Fill;
+                        }
+                        else
+                        {
+                            if (!panel2.Controls.Contains(frmPhieuCongDoan_CN.Instance))
+                            {
+                                //frmPhieuCongDoan ctl = new frmPhieuCongDoan();
+                                //panel2.Controls.Clear();
+                                //panel2.Controls.Add(ctl);
+                                //Commons.Modules.ObjSystems.HideWaitForm();
+                                //ctl.Dock = DockStyle.Fill;
+                                panel2.Controls.Clear();
+                                panel2.Controls.Add(frmPhieuCongDoan_CN.Instance);
+                                frmPhieuCongDoan_CN.Instance.Dock = DockStyle.Fill;
+                                frmPhieuCongDoan_CN.Instance.BringToFront();
+                                Commons.Modules.ObjSystems.HideWaitForm();
+                            }
+                        }
                         break;
                     }
                 case "mnuDoanhThuCat":
@@ -412,12 +463,31 @@ namespace VietSoftHRM
             try
             {
                 accorMenuleft.SelectElement(accorMenuleft.Elements[0].Elements[0]);
-                Elementchill_Click(accorMenuleft.Elements[0].Elements[0], null);
+                Elementchill_Click(accorMenuleft.Elements[0].Elements[0], null, false);
             }
             catch
             {
             }
         }
-        
+
+        protected override bool ProcessCmdKey(ref System.Windows.Forms.Message msg, Keys keyData)
+        {
+            switch (keyData)
+            {
+                //case Keys.Escape:
+                //    Control cl = FindFocusedControl(this);
+                //    if (cl != null && cl.GetType() == typeof(TextBox))
+                //        return base.ProcessCmdKey(ref msg, keyData);
+                //    else
+                //        if (this.Name != "frmMain")
+                //        this.Close();
+                //    return true;
+                case (Keys.F5):
+                    Elementchill_Click(accorMenuleft.SelectedElement, null, true);
+
+                    return true;
+                default: return base.ProcessCmdKey(ref msg, keyData);
+            }
+        }
     }
 }

@@ -74,6 +74,7 @@ namespace Vs.TimeAttendance
                 {
                     rdo_ChonBaoCao.Properties.Items.RemoveAt(8);
                     rdo_ChonBaoCao.Properties.Items.RemoveAt(5);
+                    rdo_ChonBaoCao.Properties.Items.Remove(rdo_ChonBaoCao.Properties.Items.Where(x => x.Tag.ToString() == "rdo_BangChamCongThangNgayCong").FirstOrDefault());
                 }
                 else if (sKyHieuDV == "NB")
                 {

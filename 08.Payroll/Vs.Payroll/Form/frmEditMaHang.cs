@@ -96,16 +96,17 @@ namespace Vs.Payroll
             try
             {
                 string sSql = "";
-                sSql = "SELECT ID_DV, ID_DT,TEN_LOAI_HH, TEN_HH, NGAY_LAP, ISNULL(CLOSED,0) AS CLOSED,ID_ORD FROM dbo.DON_HANG_BAN_ORDER WHERE ID_ORD = " + iIdOrder.ToString();
+                sSql = "SELECT ID_DV, ID_DT,TEN_LOAI_HH, TEN_HH, NGAY_LAP, ISNULL(CLOSED,0) AS CLOSED,ID_ORD,ISNULL(QUI_TRINH_HOAN_CHINH,0) QUI_TRINH_HOAN_CHINH FROM dbo.DON_HANG_BAN_ORDER WHERE ID_ORD = " + iIdOrder.ToString();
                 DataTable dtTmp = new DataTable();
                 dtTmp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSql));
                 if (dtTmp.Rows.Count <= 0) return;
-                try {cboDonVi.EditValue = dtTmp.Rows[0]["ID_DV"];}catch { }
-                try{cboKhachHang.EditValue = dtTmp.Rows[0]["ID_DT"];}catch { }
-                try{txtLHH.EditValue = dtTmp.Rows[0]["TEN_LOAI_HH"];}catch { }
-                try { txtTEN_HH.EditValue = dtTmp.Rows[0]["TEN_HH"];}catch { }
-                try { datNGAY_LAP.DateTime = DateTime.Parse(dtTmp.Rows[0]["NGAY_LAP"].ToString());}catch { }
-                try { chkCLOSED.EditValue = dtTmp.Rows[0]["CLOSED"]; }catch { }
+                try { cboDonVi.EditValue = dtTmp.Rows[0]["ID_DV"]; } catch { }
+                try { cboKhachHang.EditValue = dtTmp.Rows[0]["ID_DT"]; } catch { }
+                try { txtLHH.EditValue = dtTmp.Rows[0]["TEN_LOAI_HH"]; } catch { }
+                try { txtTEN_HH.EditValue = dtTmp.Rows[0]["TEN_HH"]; } catch { }
+                try { datNGAY_LAP.DateTime = DateTime.Parse(dtTmp.Rows[0]["NGAY_LAP"].ToString()); } catch { }
+                try { chkCLOSED.EditValue = dtTmp.Rows[0]["CLOSED"]; } catch { }
+                try { chkHoanChinh.EditValue = dtTmp.Rows[0]["QUI_TRINH_HOAN_CHINH"]; } catch { }
             }
             catch { }
         }
@@ -120,6 +121,7 @@ namespace Vs.Payroll
             datNGAY_LAP.DateTime = DateTime.Now.Date;
             chkCLOSED.Checked = false;
             cboDonVi.Focus();
+            chkHoanChinh.Checked = false;
         }
 
 
@@ -156,16 +158,16 @@ namespace Vs.Payroll
                     case "luu":
                         {
 
-                            
+
                             if (!KiemNull()) return;
                             if (KiemTrung()) return;
                             Luu();
-                            
+
                             break;
                         }
                     case "huy":
                         {
-                            if (iIdOrder == -1) LoadNull();else LoadText();
+                            if (iIdOrder == -1) LoadNull(); else LoadText();
                             enableButon(false);
                             break;
                         }
@@ -177,7 +179,8 @@ namespace Vs.Payroll
                         }
                     default: break;
                 }
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 XtraMessageBox.Show(ex.Message.ToString());
             }
@@ -215,7 +218,7 @@ namespace Vs.Payroll
                     //XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgChuaChonDonVi"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                     //cboDonVi.Focus();
                     cboDonVi.ErrorText = Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgChuaChonDonVi");
-                    bOK=false;
+                    bOK = false;
                 }
             }
             catch (Exception ex)
@@ -249,7 +252,7 @@ namespace Vs.Payroll
                 dt = ds.Tables[0].Copy();
                 if (dt.Rows.Count > 0)
                 {
-                    if (dt.Rows[0][0].ToString()!="0")
+                    if (dt.Rows[0][0].ToString() != "0")
                     {
                         XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", dt.Rows[0][1].ToString()), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return true;
@@ -282,7 +285,8 @@ namespace Vs.Payroll
                 cmd.Parameters.Add("@TEN_LHH", SqlDbType.NVarChar).Value = txtLHH.Text;
                 cmd.Parameters.Add("@TNgay", SqlDbType.Date).Value = datNGAY_LAP.DateTime.Date;
                 cmd.Parameters.Add("@DDong", SqlDbType.Int).Value = (chkCLOSED.Checked ? 1 : 0);
-                
+                cmd.Parameters.Add("@HOAN_CHINH", SqlDbType.Bit).Value = (chkHoanChinh.Checked ? 1 : 0);
+
                 cmd.CommandType = CommandType.StoredProcedure;
                 System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
 
@@ -311,9 +315,10 @@ namespace Vs.Payroll
 
                         enableButon(false);
                         return false;
-                        
+
                     }
-                } else
+                }
+                else
                 {
                     XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgLuuKhongThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return true;

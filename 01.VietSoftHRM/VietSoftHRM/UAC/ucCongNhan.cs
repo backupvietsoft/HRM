@@ -618,7 +618,6 @@ namespace VietSoftHRM
                         tmp.Dock = DockStyle.Fill;
                         break;
                     }
-
                 case "mnuBCDanhGiaThuViec":
                     {
                         ucBaoCaoDanhGiaTTThuViec tmp = new ucBaoCaoDanhGiaTTThuViec();

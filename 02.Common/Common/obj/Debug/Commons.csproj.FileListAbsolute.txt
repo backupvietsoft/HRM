@@ -1046,7 +1046,6 @@ F:\01.HRM\02.Common\Common\bin\Debug\DevExpress.PivotGrid.v22.1.Core.xml
 F:\01.HRM\02.Common\Common\bin\Debug\DevExpress.XtraGauges.v22.1.Core.xml
 F:\01.HRM\02.Common\Common\bin\Debug\DevExpress.RichEdit.v22.1.Core.xml
 F:\01.HRM\02.Common\Common\bin\Debug\DevExpress.Office.v22.1.Core.xml
-F:\01.HRM\02.Common\Common\obj\Debug\Commons.csprojAssemblyReference.cache
 F:\01.HRM\02.Common\Common\obj\Debug\Commons.frmYKienYC.resources
 F:\01.HRM\02.Common\Common\obj\Debug\Commons.frmPopUp.resources
 F:\01.HRM\02.Common\Common\obj\Debug\Commons.frmWaitForm.resources

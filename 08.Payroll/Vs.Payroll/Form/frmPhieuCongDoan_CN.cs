@@ -584,6 +584,7 @@ namespace Vs.Payroll
 
                     grvCN.SetFocusedRowCellValue("HO_TEN", dt.Rows[0]["HO_TEN"]);
                     grvCN.SetFocusedRowCellValue("ID_CD", grvCD.GetFocusedRowCellValue("ID_CD"));
+                    grvCN.SetFocusedRowCellValue("SO_LUONG", grvPCD.GetFocusedRowCellValue("SL_NGAY"));
                     grvCN.SetFocusedRowCellValue("ID_CN", dt.Rows[0]["ID_CN"]);
                 }
                 catch
@@ -1140,7 +1141,13 @@ namespace Vs.Payroll
                 var result = XtraInputBox.Show(args);
                 if (result == null || result.ToString() == "") return;
                 iIDPCD_TEMP = Convert.ToInt64(grvPCD.GetFocusedRowCellValue("ID_TEMP"));
-                SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spSavePhieuCDChotNgay", Commons.Modules.UserName, Commons.Modules.TypeLanguage, Convert.ToInt32(grvPCD.GetFocusedRowCellValue("ID_CHUYEN_SD")), Convert.ToInt32(grvPCD.GetFocusedRowCellValue("ID_ORD")), cboNgay.EditValue, result);
+                DataTable dt = new DataTable();
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spSavePhieuCDChotNgay", Commons.Modules.UserName, Commons.Modules.TypeLanguage, Convert.ToInt32(grvPCD.GetFocusedRowCellValue("ID_CHUYEN_SD")), Convert.ToInt32(grvPCD.GetFocusedRowCellValue("ID_ORD")), cboNgay.EditValue, result));
+                if (dt.Rows[0][0].ToString() == "99")
+                {
+                    XtraMessageBox.Show(dt.Rows[0][1].ToString());
+                    return;
+                }
                 XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgLuuThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK);
                 cboNgay_EditValueChanged_1(null, null);
             }
@@ -1153,7 +1160,7 @@ namespace Vs.Payroll
             try
             {
                 if (Convert.ToBoolean(grvPCD.GetRowCellValue(e.RowHandle, grvPCD.Columns["QUI_TRINH_HOAN_CHINH"].FieldName)) == false) return;
-                e.Appearance.BackColor = System.Drawing.ColorTranslator.FromHtml("#A9F5BC");
+                e.Appearance.BackColor = System.Drawing.ColorTranslator.FromHtml("#FFF2CC");
                 e.HighPriority = true;
             }
             catch

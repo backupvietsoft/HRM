@@ -47,7 +47,7 @@ namespace Vs.Category
 
                         string strSQLPB = "SELECT T.PHAN_BO FROM dbo.[TO] T WHERE T.ID_TO = " + iIdTo;
                         var obj = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, strSQLPB);
-                        if(obj == null)
+                        if (obj == null)
                         {
                             ID_PBLookUpEdit.EditValue = -1;
                         }
@@ -63,7 +63,7 @@ namespace Vs.Category
 
                         DataTable dt = new DataTable();
                         dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboCongNhan", Commons.Modules.UserName, Commons.Modules.TypeLanguage, 3));
-                        Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_CN, dt, "ID_CN", "HO_TEN", "HO_TEN",true, false, false);
+                        Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_CN, dt, "ID_CN", "HO_TEN", "HO_TEN", true, false, false);
                         ItemForToTruong.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
 
                         DataTable dt1 = new DataTable();
@@ -71,12 +71,12 @@ namespace Vs.Category
                         Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(ID_PBLookUpEdit, dt1, "ID_LPB", "TEN_LPB", "TEN_LPB", true, false, false);
                     }
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     throw ex;
                 }
             }
-
+            LoadCboLoaiChuyen();
             LoadXiNghiep();
             if (!bAddEditTo)
             {
@@ -102,7 +102,7 @@ namespace Vs.Category
 
             try
             {
-                
+
                 ID_XNLookUpEdit.Properties.View.Columns["ID_XN"].Visible = false;
                 ID_XNLookUpEdit.Properties.View.Columns["ID_DV"].Visible = false;
                 ID_XNLookUpEdit.Properties.View.Columns["TEN_DV"].Visible = false;
@@ -112,7 +112,7 @@ namespace Vs.Category
                 ID_XNLookUpEdit.Properties.View.Columns["GOP_TH"].Visible = false;
                 ID_XNLookUpEdit.Properties.View.Columns["STT_DV"].Visible = false;
                 ID_XNLookUpEdit.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.None;
-                
+
                 ID_XNLookUpEdit.Properties.View.Columns["TEN_XN"].Caption = Commons.Modules.ObjLanguages.GetLanguage("ucListDMuc", "TEN_XN");
 
                 ID_XNLookUpEdit.Properties.View.Columns["TEN_XN"].AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
@@ -134,22 +134,33 @@ namespace Vs.Category
                     catch
                     {
 
-                        if(dt.Rows.Count>0) ID_XNLookUpEdit.EditValue = dt.Rows[0][0];
+                        if (dt.Rows.Count > 0) ID_XNLookUpEdit.EditValue = dt.Rows[0][0];
                     }
                 }
 
 
             }
-            catch(Exception EX)
+            catch (Exception EX)
             {
                 XtraMessageBox.Show(EX.Message.ToString());
 
             }
         }
+        private void LoadCboLoaiChuyen()
+        {
+            try
+            {
+                DataTable dtLoaiChuyen = new DataTable();
+                dtLoaiChuyen.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT ID ID_LOAI_CHUYEN, CASE " + Commons.Modules.TypeLanguage + " WHEN 0 THEN TEN_LOAI_CHUYEN ELSE ISNULL(NULLIF(TEN_LOAI_CHUYEN_A,''), TEN_LOAI_CHUYEN) END TEN_LOAI_CHUYEN FROM dbo.LOAI_CHUYEN ORDER BY ID"));
+                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_LOAI_CHUYEN, dtLoaiChuyen, "ID_LOAI_CHUYEN", "TEN_LOAI_CHUYEN", "TEN_LOAI_CHUYEN", true, true, false);
+                ID_DVLookUpEdit.EditValue = -1;
+            }
+            catch { }
+        }
         private void LoadText()
         {
             string sSql = "";
-            sSql = "SELECT ID_TO,ID_XN,MS_TO,TEN_TO,TEN_TO_A,TEN_TO_H,STT_TO,ID_CN FROM dbo.[TO] WHERE ID_TO = " + iIdTo.ToString();
+            sSql = "SELECT ID_TO,ID_XN,MS_TO,TEN_TO,TEN_TO_A,TEN_TO_H,STT_TO,ID_CN, ID_LOAI_CHUYEN FROM dbo.[TO] WHERE ID_TO = " + iIdTo.ToString();
             DataTable dtTmp = new DataTable();
             dtTmp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSql));
             if (dtTmp.Rows.Count <= 0) return;
@@ -162,6 +173,7 @@ namespace Vs.Category
             TEN_TO_HOATextEdit.EditValue = dtTmp.Rows[0]["TEN_TO_H"];
             STT_TOTextEdit.EditValue = dtTmp.Rows[0]["STT_TO"];
             cboID_CN.EditValue = dtTmp.Rows[0]["ID_CN"].ToString() == "" ? -1 : Convert.ToInt64(dtTmp.Rows[0]["ID_CN"]);
+            cboID_LOAI_CHUYEN.EditValue = dtTmp.Rows[0]["ID_LOAI_CHUYEN"];
         }
 
         private void LoadTextNull()
@@ -176,6 +188,7 @@ namespace Vs.Category
                 STT_TOTextEdit.EditValue = String.Empty;
                 cboID_CN.EditValue = -1;
                 MS_TOTextEdit.Focus();
+                cboID_LOAI_CHUYEN.EditValue = -1;
             }
             catch { }
         }
@@ -192,7 +205,7 @@ namespace Vs.Category
                         {
                             if (!dxValidationProvider1.Validate()) return;
                             if (KiemTrung()) return;
-                            Commons.Modules.sId = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spUpdateTo", (bAddEditTo ? -1 : iIdTo), ID_XNLookUpEdit.EditValue, ID_PBLookUpEdit.EditValue, MS_TOTextEdit.EditValue, TEN_TOTextEdit.EditValue, TEN_TO_ANHTextEdit.EditValue, TEN_TO_HOATextEdit.EditValue, STT_TOTextEdit.EditValue, Convert.ToInt64(cboID_CN.Text == "" ? cboID_CN.EditValue = null : cboID_CN.EditValue), Commons.Modules.UserName).ToString();
+                            Commons.Modules.sId = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spUpdateTo", (bAddEditTo ? -1 : iIdTo), ID_XNLookUpEdit.EditValue, ID_PBLookUpEdit.EditValue, MS_TOTextEdit.EditValue, TEN_TOTextEdit.EditValue, TEN_TO_ANHTextEdit.EditValue, TEN_TO_HOATextEdit.EditValue, STT_TOTextEdit.EditValue, Convert.ToInt64(cboID_CN.Text == "" ? cboID_CN.EditValue = null : cboID_CN.EditValue), Commons.Modules.UserName, cboID_LOAI_CHUYEN.Text == "" ? null : cboID_LOAI_CHUYEN.EditValue).ToString();
                             if (bAddEditTo)
                             {
                                 if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msg_ThemThanhCongBanCoMuonTiepTuc"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
@@ -213,7 +226,8 @@ namespace Vs.Category
                         }
                     default: break;
                 }
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 XtraMessageBox.Show(ex.Message.ToString());
             }

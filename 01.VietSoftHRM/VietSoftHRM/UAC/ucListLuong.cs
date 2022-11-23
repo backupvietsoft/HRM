@@ -144,7 +144,7 @@ namespace VietSoftHRM
                     }
                 case "mnuPhieuCongDoan":
                     {
-                        if(f5 == true)
+                        if (f5 == true)
                         {
                             frmPhieuCongDoan ctl = new frmPhieuCongDoan();
                             panel2.Controls.Clear();
@@ -201,6 +201,24 @@ namespace VietSoftHRM
                 case "mnuDoanhThuCat":
                     {
                         ucDoanhThuCat ctl = new ucDoanhThuCat();
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(ctl);
+                        Commons.Modules.ObjSystems.HideWaitForm();
+                        ctl.Dock = DockStyle.Fill;
+                        break;
+                    }
+                case "mnuQuyDinhHQSX":
+                    {
+                        ucQuyDinhHQSX ctl = new ucQuyDinhHQSX();
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(ctl);
+                        Commons.Modules.ObjSystems.HideWaitForm();
+                        ctl.Dock = DockStyle.Fill;
+                        break;
+                    }
+                case "mnuQuyDinhThuongPC":
+                    {
+                        ucQuyDinhThuongPC ctl = new ucQuyDinhThuongPC();
                         panel2.Controls.Clear();
                         panel2.Controls.Add(ctl);
                         Commons.Modules.ObjSystems.HideWaitForm();

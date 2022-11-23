@@ -1,9 +1,9 @@
 <?xml version="1.0" standalone="yes"?>
 <Import>
   <Row>
-    <U>huong</U>
+    <U>dat</U>
     <P>123</P>
     <N>0</N>
-    <D>VS_HRM_DM</D>
+    <D>VS_HRM_UAT</D>
   </Row>
 </Import>

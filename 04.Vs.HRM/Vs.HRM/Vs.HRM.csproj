@@ -179,12 +179,6 @@
     <Compile Include="UAC\BaoCao\ucBaoCaoQHGD.Designer.cs">
       <DependentUpon>ucBaoCaoQHGD.cs</DependentUpon>
     </Compile>
-    <Compile Include="UAC\BaoCao\ucBaoCaoHuongTroCapBHXH.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UAC\BaoCao\ucBaoCaoHuongTroCapBHXH.designer.cs">
-      <DependentUpon>ucBaoCaoHuongTroCapBHXH.cs</DependentUpon>
-    </Compile>
     <Compile Include="UAC\BaoCao\ucBaoCaoThongKeCongNhanBD.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -700,9 +694,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UAC\BaoCao\ucBaoCaoQHGD.resx">
       <DependentUpon>ucBaoCaoQHGD.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UAC\BaoCao\ucBaoCaoHuongTroCapBHXH.resx">
-      <DependentUpon>ucBaoCaoHuongTroCapBHXH.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UAC\BaoCao\ucBaoCaoThongKeCongNhanBD.resx">
       <DependentUpon>ucBaoCaoThongKeCongNhanBD.cs</DependentUpon>

@@ -2858,6 +2858,8 @@ F:\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.ucDangKyBHXH.resources
 F:\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.ucLSPKiemSoat.resources
 F:\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.ucDoanhThuCat.resources
 F:\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.ucMaHang.resources
+F:\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.ucQuyDinhHQSX.resources
+F:\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.ucQuyDinhThuongPC.resources
 F:\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.ucTienThuongPhuCap.resources
 F:\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.ucDSCNHoTroTienDo.resources
 F:\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.ucNangSuatChuyen.resources

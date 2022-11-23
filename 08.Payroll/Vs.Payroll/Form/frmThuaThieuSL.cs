@@ -42,6 +42,10 @@ namespace Vs.Payroll.Form
             cboID_DT.EditValue = iID_DT;
             cboID_ORD.EditValue = iID_ORD;
             cboID_CHUYEN.EditValue = iID_CHUYEN_SD;
+            datTNgay.EditValue = Ngay;
+            datDNgay.EditValue = Ngay;
+            Commons.OSystems.SetDateEditFormat(datTNgay);
+            Commons.OSystems.SetDateEditFormat(datDNgay);
 
             LoadgrvCDThuaThieu();
             LoadgrvCN();
@@ -178,8 +182,7 @@ namespace Vs.Payroll.Form
         private void LoadNN()
         {
 
-            Commons.Modules.ObjSystems.ThayDoiNN(this, Root, windowsUIButton);
-            Commons.Modules.ObjSystems.ThayDoiNN(this);
+            Commons.Modules.ObjSystems.ThayDoiNN(this, windowsUIButton);
             Commons.Modules.ObjSystems.MLoadNNXtraGrid(grvCDThuaThieu, this.Name);
             Commons.Modules.ObjSystems.MLoadNNXtraGrid(grvCNThucHien, this.Name);
         }
@@ -214,7 +217,7 @@ namespace Vs.Payroll.Form
                 cmd.Parameters.Add("@UName", SqlDbType.NVarChar).Value = Commons.Modules.UserName;
                 cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
                 cmd.Parameters.Add("@iLoai", SqlDbType.Int).Value = 5;
-                cmd.Parameters.Add("@DNgay", SqlDbType.DateTime).Value = Ngay;
+                cmd.Parameters.Add("@Ngay", SqlDbType.DateTime).Value = Ngay;
                 cmd.Parameters.Add("@ID_CHUYEN_SD", SqlDbType.Int).Value = Convert.ToInt32(iID_CHUYEN_SD);
                 cmd.Parameters.Add("@ID_ORD", SqlDbType.Int).Value = cboID_ORD.EditValue;
                 cmd.CommandType = CommandType.StoredProcedure;
@@ -265,7 +268,7 @@ namespace Vs.Payroll.Form
                 if (conn.State == ConnectionState.Open)
                     conn.Close();
             }
-            catch { }
+            catch (Exception ex) { }
         }
 
         private void LoadcboORD()
@@ -302,8 +305,11 @@ namespace Vs.Payroll.Form
                 System.Data.SqlClient.SqlConnection conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
                 conn.Open();
                 System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spThuaThieuSL", conn);
-                cmd.Parameters.Add("@DNgay", SqlDbType.DateTime).Value = Ngay;
+                cmd.Parameters.Add("@TNgay", SqlDbType.DateTime).Value = datTNgay.DateTime;
+                cmd.Parameters.Add("@DNgay", SqlDbType.DateTime).Value = datDNgay.DateTime;
+                cmd.Parameters.Add("@Ngay", SqlDbType.DateTime).Value = Ngay;
                 cmd.Parameters.Add("@iLoai", SqlDbType.Int).Value = 2;
+                cmd.Parameters.Add("@bChon", SqlDbType.Bit).Value = rdoChonThang.SelectedIndex;
                 cmd.Parameters.Add("@ID_CHUYEN_SD", SqlDbType.BigInt).Value = cboID_CHUYEN.EditValue;
                 cmd.Parameters.Add("@ID_ORD", SqlDbType.BigInt).Value = cboID_ORD.EditValue;
                 cmd.CommandType = CommandType.StoredProcedure;
@@ -356,7 +362,14 @@ namespace Vs.Payroll.Form
         {
             try
             {
-                slChot = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.fnGetSLChot('" + Ngay.ToString("MM/dd/yyyy") + "', " + cboID_CHUYEN.EditValue + ", " + cboID_ORD.EditValue + ")"));
+                if (rdoChonThang.SelectedIndex == 1)
+                {
+                    slChot = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.fnGetSLChot('" + Ngay.ToString("MM/dd/yyyy") + "', " + cboID_CHUYEN.EditValue + ", " + cboID_ORD.EditValue + ")"));
+                }
+                else
+                {
+                    slChot = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.fnGetSLChot_Ngay('" + datTNgay.DateTime.ToString("MM/dd/yyyy") + "', '" + datDNgay.DateTime.ToString("MM/dd/yyyy") + "' , " + cboID_CHUYEN.EditValue + ", " + cboID_ORD.EditValue + ")"));
+                }
                 lblSLChot.Text = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "SL_chot : ") + slChot.ToString("N0");
             }
             catch { }
@@ -371,8 +384,11 @@ namespace Vs.Payroll.Form
                 System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spThuaThieuSL", conn);
                 cmd.Parameters.Add("@UName", SqlDbType.NVarChar).Value = Commons.Modules.UserName;
                 cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
-                cmd.Parameters.Add("@DNgay", SqlDbType.DateTime).Value = Ngay;
+                cmd.Parameters.Add("@Ngay", SqlDbType.DateTime).Value = Ngay;
+                cmd.Parameters.Add("@TNgay", SqlDbType.DateTime).Value = datTNgay.DateTime;
+                cmd.Parameters.Add("@DNgay", SqlDbType.DateTime).Value = datDNgay.DateTime;
                 cmd.Parameters.Add("@iLoai", SqlDbType.Int).Value = 3;
+                cmd.Parameters.Add("@bChon", SqlDbType.Int).Value = rdoChonThang.SelectedIndex;
                 cmd.Parameters.Add("@ID_CHUYEN", SqlDbType.BigInt).Value = -1;
                 cmd.Parameters.Add("@ID_CHUYEN_SD", SqlDbType.BigInt).Value = cboID_CHUYEN.EditValue;
                 cmd.Parameters.Add("@ID_ORD", SqlDbType.BigInt).Value = cboID_ORD.EditValue;
@@ -404,10 +420,52 @@ namespace Vs.Payroll.Form
             }
             catch { }
         }
-
-
         #endregion
 
+        private void rdoChonThang_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadSLChot();
+            if (rdoChonThang.SelectedIndex == 0)
+            {
+                tableLayoutPanel1.RowStyles[4].Height = 25;
+            }
+            else
+            {
+                tableLayoutPanel1.RowStyles[4].Height = 0;
+            }
+            LoadgrvCDThuaThieu();
+        }
 
+        private void datTNgay_EditValueChanged(object sender, EventArgs e)
+        {
+            if (Commons.Modules.sLoad == "0Load") return;
+            LoadSLChot();
+            LoadgrvCDThuaThieu();
+            LoadgrvCN();
+            grvCDThuaThieu_FocusedRowChanged(null, null);
+        }
+
+        private void datDNgay_EditValueChanged(object sender, EventArgs e)
+        {
+            if (Commons.Modules.sLoad == "0Load") return;
+            LoadSLChot();
+            LoadgrvCDThuaThieu();
+            LoadgrvCN();
+            grvCDThuaThieu_FocusedRowChanged(null, null);
+        }
+
+        private void grvCDThuaThieu_RowStyle(object sender, DevExpress.XtraGrid.Views.Grid.RowStyleEventArgs e)
+        {
+            try
+            {
+                if (Convert.ToInt32(grvCDThuaThieu.GetRowCellValue(e.RowHandle, grvCDThuaThieu.Columns["SL_TH"].FieldName)) != 0) return;
+                e.Appearance.BackColor = System.Drawing.ColorTranslator.FromHtml("#FFF2CC");
+                e.HighPriority = true;
+            }
+            catch
+            {
+
+            }
+        }
     }
 }

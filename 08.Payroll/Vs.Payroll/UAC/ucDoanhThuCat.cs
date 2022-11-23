@@ -112,6 +112,7 @@ namespace Vs.Payroll
                 if (grdData.DataSource == null)
                 {
                     Commons.Modules.ObjSystems.MLoadXtraGrid(grdData, grvData, dt, true, true, true, true, true, this.Name);
+                    grvData.Columns["STT"].Visible = false;
                     grvData.Columns["ID_ORD"].Visible = false;
                     grvData.Columns["ID_DTC"].Visible = false;
                     grvData.Columns["DON_GIA"].DisplayFormat.FormatType = FormatType.Numeric;
@@ -514,12 +515,13 @@ namespace Vs.Payroll
                 DataView dv = dt.DefaultView;
 
                 DataTable dt1 = new DataTable();
-                dt1 = dv.ToTable(false, "TEN_KH", "TEN_HH", "DON_GIA", "SO_LUONG", "THANH_TIEN");
+                dt1 = dv.ToTable(false, "STT", "TEN_KH", "TEN_HH", "SO_LUONG", "DON_GIA", "THANH_TIEN");
                 dt1.Columns["TEN_KH"].ColumnName = "Khách hàng";
                 dt1.Columns["TEN_HH"].ColumnName = "Mã hàng";
                 dt1.Columns["DON_GIA"].ColumnName = "Đơn giá";
                 dt1.Columns["SO_LUONG"].ColumnName = "Số lượng";
                 dt1.Columns["THANH_TIEN"].ColumnName = "Thành tiền";
+                dt1.Columns["STT"].ColumnName = "STT";
 
 
                 TaoTTChung(excelWorkSheet, 1, 2, 1, 7, 0, 0);
@@ -527,25 +529,109 @@ namespace Vs.Payroll
                 Microsoft.Office.Interop.Excel.Range Ranges1 = excelWorkSheet.Range[excelWorkSheet.Cells[7, 1], excelWorkSheet.Cells[dt1.Rows.Count + 7, dt1.Columns.Count]];
                 Ranges1.Font.Name = "Times New Roman";
                 MExportExcel(dt1, excelWorkSheet, Ranges1);
-                BorderAround(Ranges1);
 
-                Ranges1 = excelWorkSheet.Range[excelWorkSheet.Cells[5, 1], excelWorkSheet.Cells[5, 1]];
+                Ranges1 = excelWorkSheet.Range[excelWorkSheet.Cells[5, 1], excelWorkSheet.Cells[5, 5]];
+                Ranges1.Merge();
                 Ranges1.Font.Name = "Times New Roman";
                 Ranges1.Font.Size = 16;
                 Ranges1.Font.Bold = true;
                 Ranges1.Value = "DOANH THU BỘ PHẬN CẮT THÁNG " + cboThang.Text;
+                Ranges1.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
 
 
-                Ranges1 = excelWorkSheet.Range[excelWorkSheet.Cells[7, 1], excelWorkSheet.Cells[7, 5]];
+
+                //FORMAT tiêu đề
+                Ranges1 = excelWorkSheet.Range[excelWorkSheet.Cells[7, 1], excelWorkSheet.Cells[7, 6]];
                 Ranges1.Font.Bold = true;
                 Ranges1.Font.Name = "Times New Roman";
+                Ranges1.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
 
+                //format cột 1 STT canh giữa
                 Ranges1 = excelWorkSheet.Range[excelWorkSheet.Cells[7, 1], excelWorkSheet.Cells[dt1.Rows.Count + 7, 1]];
-                Ranges1.ColumnWidth = 13;
-                Ranges1 = excelWorkSheet.Range[excelWorkSheet.Cells[7, 2], excelWorkSheet.Cells[dt1.Rows.Count + 7, 2]];
+                Ranges1.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                Ranges1.ColumnWidth = 9;
+
+                //FORMAT cột 4
+                Ranges1 = excelWorkSheet.Range[excelWorkSheet.Cells[8, 4], excelWorkSheet.Cells[dt1.Rows.Count + 7, 4]];
+                Ranges1.NumberFormat = "#,##0;(#,##0); ; ";
+
+                //FORMAT cột 6
+                Ranges1 = excelWorkSheet.Range[excelWorkSheet.Cells[8, 6], excelWorkSheet.Cells[dt1.Rows.Count + 7, 6]];
+                Ranges1.NumberFormat = "#,##0;(#,##0); ; ";
+
+
+                // canh trái cột 3
+                Ranges1 = excelWorkSheet.Range[excelWorkSheet.Cells[8, 3], excelWorkSheet.Cells[dt1.Rows.Count + 7, 3]];
                 Ranges1.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignLeft;
-                Ranges1 = excelWorkSheet.Range[excelWorkSheet.Cells[7, 2], excelWorkSheet.Cells[dt1.Rows.Count + 7, 5]];
+
+                //set column wid từ cột 2 đến cột 6
+                Ranges1 = excelWorkSheet.Range[excelWorkSheet.Cells[7, 2], excelWorkSheet.Cells[dt1.Rows.Count + 7, 6]];
                 Ranges1.ColumnWidth = 25;
+
+                int rowCnt = 0;
+                rowCnt = dt1.Rows.Count + 7;
+                rowCnt++;
+
+                Ranges1 = excelWorkSheet.Range[excelWorkSheet.Cells[rowCnt, 1], excelWorkSheet.Cells[rowCnt, 3]];
+                Ranges1.Merge();
+                Ranges1.Value = "Tổng";
+                Ranges1.Font.Bold = true;
+                Ranges1.Font.Name = "Times New Roman";
+                Ranges1.Font.Size = 12;
+
+                // cột tổng số lượng
+                Ranges1 = excelWorkSheet.Range[excelWorkSheet.Cells[rowCnt, 4], excelWorkSheet.Cells[rowCnt, 4]];
+                Ranges1.Font.Bold = true;
+                Ranges1.Font.Name = "Times New Roman";
+                Ranges1.Font.Size = 12;
+                Ranges1.Value = "=SUBTOTAL(9," + CellAddress(excelWorkSheet, 8, 4) + ":" + CellAddress(excelWorkSheet, rowCnt - 1, 4) + ")";
+                Ranges1.NumberFormat = "#,##0;(#,##0); ; ";
+
+                // cột tổng thành tiền
+                Ranges1 = excelWorkSheet.Range[excelWorkSheet.Cells[rowCnt, 6], excelWorkSheet.Cells[rowCnt, 6]];
+                Ranges1.Font.Bold = true;
+                Ranges1.Font.Name = "Times New Roman";
+                Ranges1.Font.Size = 12;
+                Ranges1.Value = "=SUBTOTAL(9," + CellAddress(excelWorkSheet, 8, 6) + ":" + CellAddress(excelWorkSheet, rowCnt - 1, 6) + ")";
+                Ranges1.NumberFormat = "#,##0;(#,##0); ; ";
+
+
+                rowCnt++;
+
+                Ranges1 = excelWorkSheet.Range[excelWorkSheet.Cells[rowCnt, 1], excelWorkSheet.Cells[rowCnt, 3]];
+                Ranges1.Merge();
+                Ranges1.Value = "Lương 1h";
+                Ranges1.Font.Bold = true;
+                Ranges1.Font.Name = "Times New Roman";
+                Ranges1.Font.Size = 12;
+
+                double iSGLV = 0;
+                DateTime dtNgayDauThang;
+                DateTime dtNgayCuoiThang;
+                dtNgayDauThang = new DateTime(Commons.Modules.ObjSystems.ConvertDateTime(cboThang.Text).Year, Commons.Modules.ObjSystems.ConvertDateTime(cboThang.Text).Month, 1);
+                dtNgayCuoiThang = dtNgayDauThang.AddMonths(1).AddDays(-1);
+                try
+                {
+
+                    iSGLV = Convert.ToDouble(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text,
+                        "SELECT ROUND(SUM(T3.SGLV),2) SG_LV FROM dbo.LUONG_CONG_NHAN_CAT T1 INNER JOIN dbo.CONG_NHAN CN ON CN.ID_CN = T1.ID_CN INNER JOIN(SELECT CCCT.ID_CN, SUM(CCCT.SG_LV_TT) SGLV " +
+                    "FROM dbo.CHAM_CONG_CHI_TIET CCCT INNER JOIN dbo.CHAM_CONG CC ON CC.NGAY = CCCT.NGAY AND CC.ID_CN = CCCT.ID_CN WHERE CCCT.NGAY BETWEEN '" + dtNgayDauThang.ToString("MM/dd/yyyy") + "' AND '" + dtNgayCuoiThang.ToString("MM/dd/yyyy") + "' GROUP BY CCCT.ID_CN) T3 ON T3.ID_CN = T1.ID_CN  WHERE T1.THANG BETWEEN '" + dtNgayDauThang.ToString("MM/dd/yyyy") + "' AND '" + dtNgayCuoiThang.ToString("MM/dd/yyyy") + "'"
+                        ));
+                }
+                catch { }
+
+                // cột tổng thành tiền
+                Ranges1 = excelWorkSheet.Range[excelWorkSheet.Cells[rowCnt, 6], excelWorkSheet.Cells[rowCnt, 6]];
+                Ranges1.Font.Bold = true;
+                Ranges1.Font.Name = "Times New Roman";
+                Ranges1.Font.Size = 12;
+                Ranges1.Value = "=" + CellAddress(excelWorkSheet, rowCnt - 1, 6) + ":" + CellAddress(excelWorkSheet, rowCnt - 1, 6) + "/" + iSGLV + "";
+                Ranges1.NumberFormat = "#,##0;(#,##0); ; ";
+
+                // border từ cột 7 đến dòng cuối cùng
+                Ranges1 = excelWorkSheet.Range[excelWorkSheet.Cells[7, 1], excelWorkSheet.Cells[rowCnt, 6]];
+                BorderAround(Ranges1);
+
                 this.Cursor = Cursors.Default;
                 excelApplication.Visible = true;
             }
@@ -673,6 +759,15 @@ namespace Vs.Payroll
             borders[XlBordersIndex.xlDiagonalUp].LineStyle = XlLineStyle.xlLineStyleNone;
             borders[XlBordersIndex.xlDiagonalDown].LineStyle = XlLineStyle.xlLineStyleNone;
         }
-
+        private string CellAddress(Excel.Worksheet sht, int row, int col)
+        {
+            return RangeAddress(sht.Cells[row, col]);
+        }
+        private string RangeAddress(Microsoft.Office.Interop.Excel.Range rng)
+        {
+            object missing = null;
+            return rng.get_AddressLocal(false, false, Microsoft.Office.Interop.Excel.XlReferenceStyle.xlA1,
+                   missing, missing);
+        }
     }
 }

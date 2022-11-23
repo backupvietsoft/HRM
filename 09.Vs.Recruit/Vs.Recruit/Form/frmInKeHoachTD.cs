@@ -74,7 +74,6 @@ namespace Vs.Recruit
                     {
                         try
                         {
-
                             if(Datain() ==false)
                             {
                                 Commons.Modules.ObjSystems.msgChung(Commons.ThongBao.msgKhongCoDuLieuIn);

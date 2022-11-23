@@ -48,6 +48,8 @@
             this.btnALL = new DevExpress.XtraBars.Docking2010.WindowsUIButtonPanel();
             this.searchControl1 = new DevExpress.XtraEditors.SearchControl();
             this.layoutControlGroup2 = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
+            this.emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataLayoutControl1)).BeginInit();
             this.dataLayoutControl1.SuspendLayout();
@@ -67,6 +69,8 @@
             this.btnALL.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.searchControl1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -103,14 +107,14 @@
             // 
             // cboMS_CV
             // 
-            this.cboMS_CV.Location = new System.Drawing.Point(53, 2);
+            this.cboMS_CV.Location = new System.Drawing.Point(395, 2);
             this.cboMS_CV.Margin = new System.Windows.Forms.Padding(2);
             this.cboMS_CV.Name = "cboMS_CV";
             this.cboMS_CV.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cboMS_CV.Properties.NullText = "";
             this.cboMS_CV.Properties.PopupView = this.searchLookUpEdit1View;
-            this.cboMS_CV.Size = new System.Drawing.Size(971, 24);
+            this.cboMS_CV.Size = new System.Drawing.Size(287, 24);
             this.cboMS_CV.StyleController = this.dataLayoutControl1;
             this.cboMS_CV.TabIndex = 12;
             this.cboMS_CV.EditValueChanged += new System.EventHandler(this.cboMS_CV_EditValueChanged);
@@ -195,7 +199,9 @@
             this.Root.GroupBordersVisible = false;
             this.Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlItem5,
-            this.lblID_CV});
+            this.lblID_CV,
+            this.emptySpaceItem1,
+            this.emptySpaceItem2});
             this.Root.Name = "Root";
             this.Root.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
             this.Root.Size = new System.Drawing.Size(1026, 709);
@@ -213,9 +219,9 @@
             // lblID_CV
             // 
             this.lblID_CV.Control = this.cboMS_CV;
-            this.lblID_CV.Location = new System.Drawing.Point(0, 0);
+            this.lblID_CV.Location = new System.Drawing.Point(342, 0);
             this.lblID_CV.Name = "lblID_CV";
-            this.lblID_CV.Size = new System.Drawing.Size(1026, 28);
+            this.lblID_CV.Size = new System.Drawing.Size(342, 28);
             this.lblID_CV.TextSize = new System.Drawing.Size(47, 17);
             // 
             // btnALL
@@ -279,6 +285,22 @@
             this.layoutControlGroup2.Size = new System.Drawing.Size(1282, 247);
             this.layoutControlGroup2.TextVisible = false;
             // 
+            // emptySpaceItem1
+            // 
+            this.emptySpaceItem1.AllowHotTrack = false;
+            this.emptySpaceItem1.Location = new System.Drawing.Point(684, 0);
+            this.emptySpaceItem1.Name = "emptySpaceItem1";
+            this.emptySpaceItem1.Size = new System.Drawing.Size(342, 28);
+            this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
+            // 
+            // emptySpaceItem2
+            // 
+            this.emptySpaceItem2.AllowHotTrack = false;
+            this.emptySpaceItem2.Location = new System.Drawing.Point(0, 0);
+            this.emptySpaceItem2.Name = "emptySpaceItem2";
+            this.emptySpaceItem2.Size = new System.Drawing.Size(342, 28);
+            this.emptySpaceItem2.TextSize = new System.Drawing.Size(0, 0);
+            // 
             // ucTiepNhanUngVien
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -307,6 +329,8 @@
             this.btnALL.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.searchControl1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -329,5 +353,7 @@
         private DevExpress.XtraEditors.SearchLookUpEdit cboMS_CV;
         private DevExpress.XtraGrid.Views.Grid.GridView searchLookUpEdit1View;
         private DevExpress.XtraLayout.LayoutControlItem lblID_CV;
+        private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem1;
+        private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem2;
     }
 }

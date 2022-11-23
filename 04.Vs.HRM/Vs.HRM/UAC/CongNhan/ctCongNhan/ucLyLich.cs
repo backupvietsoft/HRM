@@ -9,7 +9,6 @@ using System.Windows.Forms;
 using Vs.Report;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
-
 namespace Vs.HRM
 {
     public partial class ucLyLich : DevExpress.XtraEditors.XtraUserControl
@@ -21,6 +20,7 @@ namespace Vs.HRM
         bool HopLeMT = true;
         bool HopLeNgaySinh = true;
         bool isCancel = false;
+        string strDuongDan = "";
         private ucCTQLNS uc;
         public ucLyLich(Int64 id)
         {
@@ -369,7 +369,7 @@ namespace Vs.HRM
                     {
                         cothem = true;
                         idcn = -1;
-                        LoadCmbLoc(1);
+                        //LoadCmbLoc(1);
                         BinDingData(true);
                         enableButon(false);
                         Commons.Modules.ObjSystems.AddnewRow(grvBangCapCN, true);
@@ -386,7 +386,7 @@ namespace Vs.HRM
                         }
                         cothem = false;
                         idcn = Commons.Modules.iCongNhan;
-                        LoadCmbLoc(2);
+                        //LoadCmbLoc(2);
                         enableButon(false);
 
                         int TongSoQTCT = 0;
@@ -444,6 +444,7 @@ namespace Vs.HRM
                         }
                         if (SaveData())
                         {
+                            Commons.Modules.ObjSystems.LuuDuongDan(strDuongDan, txtTaiLieu.Text);
                             this.ClearError();
                             BinDingData(false);
                             enableButon(true);
@@ -455,7 +456,7 @@ namespace Vs.HRM
                     {
                         isCancel = true;
                         Commons.Modules.sLoad = "0Load";
-                        LoadCmbLoc(3);
+                        //LoadCmbLoc(3);
                         BinDingData(false);
                         enableButon(true);
                         Commons.Modules.ObjSystems.ClearValidationProvider(dxValidationProvider1);
@@ -678,6 +679,7 @@ namespace Vs.HRM
                 ID_TT_HDLookUpEdit.EditValue = null;
                 ID_TT_HTLookUpEdit.EditValue = null;
                 ID_LHDLDLookUpEdit.EditValue = "";
+                txtTaiLieu.EditValue = "";
                 HINH_THUC_TUYENTextEdit.EditValue = "";
                 LD_TINHCheckEdit.EditValue = false;
                 LAO_DONG_CNCheckEdit.EditValue = false;
@@ -783,6 +785,7 @@ namespace Vs.HRM
                     ID_TT_HDLookUpEdit.EditValue = dt.Rows[0]["ID_TT_HD"];
                     ID_TT_HTLookUpEdit.EditValue = dt.Rows[0]["ID_TT_HT"];
                     ID_LHDLDLookUpEdit.EditValue = dt.Rows[0]["ID_LHDLD"];
+                    txtTaiLieu.EditValue = dt.Rows[0]["FILE_DK"];
                     HINH_THUC_TUYENTextEdit.EditValue = dt.Rows[0]["HINH_THUC_TUYEN"];
                     LD_TINHCheckEdit.EditValue = dt.Rows[0]["LD_TINH"];
                     LAO_DONG_CNCheckEdit.EditValue = dt.Rows[0]["LAO_DONG_CONG_NHAT"];
@@ -989,7 +992,7 @@ namespace Vs.HRM
         private void LockTheoHDLD()
         {
             NGAY_THU_VIECDateEdit.Properties.ReadOnly = true;
-            NGAY_VAO_LAMDateEdit.Properties.ReadOnly = true;
+            //NGAY_VAO_LAMDateEdit.Properties.ReadOnly = true;
             ID_TT_HDLookUpEdit.Properties.ReadOnly = true;
             ID_LHDLDLookUpEdit.Properties.ReadOnly = true;
         }
@@ -1746,6 +1749,62 @@ namespace Vs.HRM
             catch { };
                     
             
+        }
+        private void LayDuongDan()
+        {
+            string strPath_DH = txtTaiLieu.Text;
+            strDuongDan = ofdfile.FileName;
+
+            var strDuongDanTmp = Commons.Modules.ObjSystems.CapnhatTL("Tai_Lieu_CN");
+            string[] sFile;
+            string TenFile;
+
+            TenFile = ofdfile.SafeFileName.ToString();
+            sFile = System.IO.Directory.GetFiles(strDuongDanTmp);
+
+            if (Commons.Modules.ObjSystems.KiemFileTonTai(strDuongDanTmp + @"\" + ofdfile.SafeFileName.ToString()) == false)
+                txtTaiLieu.Text = strDuongDanTmp + @"\" + ofdfile.SafeFileName.ToString();
+            else
+            {
+                TenFile = Commons.Modules.ObjSystems.STTFileCungThuMuc(strDuongDanTmp, TenFile);
+                txtTaiLieu.Text = strDuongDanTmp + @"\" + TenFile;
+            }
+        }
+
+        private void txtTaiLieu_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+            if (e.Button.Index == 0)
+            {
+                try
+                {
+                    if (windowsUIButton.Buttons[10].Properties.Visible)
+                    {
+                            if (ofdfile.ShowDialog() == DialogResult.Cancel) return;
+                            LayDuongDan();
+                    }
+                    else
+                    {
+                        if (txtTaiLieu.Text == "")
+                            return;
+                        Commons.Modules.ObjSystems.OpenHinh(txtTaiLieu.Text);
+                    }
+                }
+                catch
+                {
+                }
+            }
+            else
+            {
+                try
+                {
+                    Commons.Modules.ObjSystems.Xoahinh(txtTaiLieu.Text);
+                    txtTaiLieu.ResetText();
+                    SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "UPDATE dbo.CONG_NHAN SET FILE_DK = NULL WHERE ID_CN =" + Commons.Modules.iCongNhan + "");
+                }
+                catch
+                {
+                }
+            }
         }
     }
 }

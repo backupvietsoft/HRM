@@ -35,7 +35,7 @@ namespace Vs.Recruit
         {
             try
             {
-                dtTemp = dtTemp.AsEnumerable().Where(x => x["NGAY_HEN_DI_LAM"].ToString() != "").CopyToDataTable();
+                dtTemp = dtTemp.AsEnumerable().Where(x => x["NGAY_HEN_DI_LAM"].ToString() != "" && x["MS_CV"].ToString() != "1").CopyToDataTable();
             }
             catch
             {

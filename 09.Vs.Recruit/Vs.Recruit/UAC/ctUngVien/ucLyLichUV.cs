@@ -456,8 +456,11 @@ namespace Vs.Recruit
             cboID_CN.Properties.ReadOnly = visible;
             datNGAY_HEN_DL.Properties.ReadOnly = true;
             datNGAY_HEN_DL.Properties.Buttons[0].Enabled = !datNGAY_HEN_DL.Properties.ReadOnly;
-            datNGAY_NHAN_VIEC.Properties.ReadOnly = true;
+
+            //datNGAY_NHAN_VIEC.Properties.ReadOnly = datNGAY_NHAN_VIEC.Text == "" ? true : visible;
+            datNGAY_NHAN_VIEC.Properties.ReadOnly = visible;
             datNGAY_NHAN_VIEC.Properties.Buttons[0].Enabled = !datNGAY_NHAN_VIEC.Properties.ReadOnly;
+
             txtGHI_CHU.Properties.ReadOnly = visible;
             datNGAY_SINH.Properties.ReadOnly = visible;
             datNGAY_SINH.Properties.Buttons[0].Enabled = !datNGAY_SINH.Properties.ReadOnly;

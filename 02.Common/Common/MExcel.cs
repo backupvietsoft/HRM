@@ -790,7 +790,7 @@ public class MExcel
 
             System.IO.DirectoryInfo dir = new System.IO.DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory + "Masters");
             GetImage((byte[])dtTmp.Rows[0]["LOGO"], Application.StartupPath, "logo.bmp");
-            MWsheet.Shapes.AddPicture(Application.StartupPath + @"\logo.bmp", Office.MsoTriState.msoFalse, Office.MsoTriState.msoCTrue, MLeft, MTop, (float)Convert.ToDecimal(dtTmp.Rows[0]["LG_WITH"]), (float)Convert.ToDecimal(dtTmp.Rows[0]["LG_HEIGHT"]));
+            MWsheet.Shapes.AddPicture(Application.StartupPath + @"\logo.bmp", Office.MsoTriState.msoFalse, Office.MsoTriState.msoCTrue, MLeft, MTop, (float)Convert.ToDecimal(dtTmp.Rows[0]["LG_WITH"]) -30, (float)Convert.ToDecimal(dtTmp.Rows[0]["LG_HEIGHT"]) -  30);
             System.IO.File.Delete(Application.StartupPath + @"\logo.bmp");
 
             return DongBD + 1;

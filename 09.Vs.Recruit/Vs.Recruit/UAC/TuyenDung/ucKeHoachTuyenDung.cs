@@ -81,7 +81,7 @@ namespace Vs.Recruit
             catch
             {
             }
-            
+
         }
 
         private DataTable TinhSoTuanCuaTHang(DateTime TN, DateTime DN)
@@ -257,7 +257,7 @@ namespace Vs.Recruit
                 grvVTYC.Columns["ID_VTTD"].Visible = false;
                 grvVTYC.Columns["ID_TT_VT"].Visible = false;
                 grvVTYC.Columns["LY_DO_TUYEN"].Visible = false;
-                
+
                 for (int i = 0; i < grvVTYC.Columns.Count; i++)
                 {
                     if (i < 17)
@@ -410,13 +410,34 @@ namespace Vs.Recruit
                         //    return;
                         //}
                         grvVTYC.OptionsBehavior.Editable = true;
-                        for (int i = 17; i < grvVTYC.Columns.Count; i++)
+                        if (datNamTuan.DateTime.Year < DateTime.Now.Year)
                         {
-                            //grvVTYC.Columns[i].Caption = grvVTYC.Columns[i].FieldName.Substring(5, grvVTYC.Columns[i].FieldName.Length - 5);
-                            if (Convert.ToInt32(grvVTYC.Columns[i].FieldName.Substring(5, 2)) < tuanHT)
+                            grvVTYC.OptionsBehavior.Editable = false;
+                            for (int i = 17; i < grvVTYC.Columns.Count; i++)
                             {
-                                grvVTYC.Columns[i].OptionsColumn.AllowEdit = false;
                                 grvVTYC.Columns[i].AppearanceHeader.BackColor = Color.PaleVioletRed;
+                            }
+                        }
+                        else
+                        {
+                            if (datNamTuan.DateTime.Year > DateTime.Now.Year)
+                            {
+                                for (int i = 17; i < grvVTYC.Columns.Count; i++)
+                                {
+                                    grvVTYC.Columns[i].OptionsColumn.AllowEdit = true;
+                                }
+                            }
+                            else
+                            {
+                                for (int i = 17; i < grvVTYC.Columns.Count; i++)
+                                {
+                                    //grvVTYC.Columns[i].Caption = grvVTYC.Columns[i].FieldName.Substring(5, grvVTYC.Columns[i].FieldName.Length - 5);
+                                    if (Convert.ToInt32(grvVTYC.Columns[i].FieldName.Substring(5, 2)) < tuanHT)
+                                    {
+                                        grvVTYC.Columns[i].OptionsColumn.AllowEdit = false;
+                                        grvVTYC.Columns[i].AppearanceHeader.BackColor = Color.PaleVioletRed;
+                                    }
+                                }
                             }
                         }
                         enableButon(false);
@@ -436,17 +457,10 @@ namespace Vs.Recruit
 
                 case "luu":
                     {
-                        //if (Convert.ToInt32(grvVTYC.GetFocusedRowCellValue("ID_TT")) != 1)
-                        //{
-                        //    XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDuLieuDaPhatSinhKhongSua"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        //    return;
-                        //}
                         Validate();
-                        int n = grvVTYC.FocusedRowHandle;
+                        if (grvVTYC.HasColumnErrors) return;
                         if (!SaveData()) return;
                         LoadgrdVTYC();
-                        //grvVTYC.FocusedRowHandle = n;
-                        //grvVTYC.SelectRow(n);
                         enableButon(true);
                         break;
                     }
@@ -621,8 +635,9 @@ namespace Vs.Recruit
                 if (SLDATA + SLTL > Convert.ToInt32(grvVTYC.GetFocusedRowCellValue("SL_TUYEN")))
                 {
                     e.Valid = false;
-                    //View.SetColumnError(, "Tổ không được bỏ trống"); return;
+                    View.SetColumnError(grvVTYC.Columns[0], Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgSoLuongPhanBoKhongLonHonSLKH"));
                     XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgSoLuongPhanBoKhongLonHonSLKH"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+
                 }
             }
             catch (Exception ex) { }
@@ -644,13 +659,7 @@ namespace Vs.Recruit
             }
         }
 
-        private void spinTuTuan_Validated(object sender, EventArgs e)
-        {
-            if (Commons.Modules.sLoad == "0Load") return;
-            LoadgrdVTYC();
-        }
-
-        private void spinDenTuan_Validated(object sender, EventArgs e)
+        private void spinTuTuan_Leave(object sender, EventArgs e)
         {
             if (Commons.Modules.sLoad == "0Load") return;
             LoadgrdVTYC();

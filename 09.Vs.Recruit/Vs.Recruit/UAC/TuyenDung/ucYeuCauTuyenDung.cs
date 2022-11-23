@@ -512,6 +512,7 @@ namespace Vs.Recruit
             {
                 XtraMessageBox.Show(ex.ToString());
             }
+            
             return resulst;
 
         }

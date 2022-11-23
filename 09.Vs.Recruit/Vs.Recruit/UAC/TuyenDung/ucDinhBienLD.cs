@@ -255,6 +255,8 @@ namespace Vs.Recruit
                 title = Commons.Modules.MExcel.GetRange(excelWorkSheet, DONG, 1, DONG, 14);
                 title.Interior.Color = System.Drawing.Color.FromArgb(180, 198, 231);
                 title.Font.Bold = true;
+                title.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                title.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
 
                 title = Commons.Modules.MExcel.GetRange(excelWorkSheet, DONG, 2, DONG, 2);
                 title.Value2 = "Tổng số CNV " + dtNM.Rows.Count + " nhà máy";

@@ -221,6 +221,8 @@
             // 
             this.xrLabel71.AllowMarkupText = true;
             this.xrLabel71.Dpi = 254F;
+            this.xrLabel71.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "\'<b>ĐT liên hệ:</b>\' + [DATA].[PHONE] + \'– Hotline:\' + [DATA].[HOTLINE]")});
             this.xrLabel71.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.xrLabel71.LocationFloat = new DevExpress.Utils.PointFloat(0F, 1373.615F);
             this.xrLabel71.Multiline = true;
@@ -237,6 +239,8 @@
             // 
             this.xrLabel70.AllowMarkupText = true;
             this.xrLabel70.Dpi = 254F;
+            this.xrLabel70.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "\'<b>Email tuyển dụng:</b>\'+ [DATA].[EMAIL]")});
             this.xrLabel70.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.xrLabel70.LocationFloat = new DevExpress.Utils.PointFloat(0F, 1313.615F);
             this.xrLabel70.Multiline = true;

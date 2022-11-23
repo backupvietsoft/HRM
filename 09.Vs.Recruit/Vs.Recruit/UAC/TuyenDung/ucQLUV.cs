@@ -448,6 +448,10 @@ namespace Vs.Recruit
                     int index = dtTmp.Rows.IndexOf(dtTmp.Rows.Find(iIdUV));
                     grvUngVien.FocusedRowHandle = grvUngVien.GetRowHandle(index);
                 }
+                grvUngVien.Columns["MS_UV"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
+                grvUngVien.Columns["HO_TEN"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
+                grvUngVien.Columns["NGAY_SINH"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
+                grvUngVien.Columns["GIOI_TINH"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
             }
             catch { }
         }

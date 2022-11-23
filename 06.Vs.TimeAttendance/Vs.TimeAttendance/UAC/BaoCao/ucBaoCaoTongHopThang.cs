@@ -5866,6 +5866,15 @@ namespace Vs.TimeAttendance
                 Microsoft.Office.Interop.Excel.Range row5_TieuDe6 = oSheet.get_Range("F3");
                 row5_TieuDe6.Value2 = "Thứ";
 
+                Microsoft.Office.Interop.Excel.Range row5_TieuDe7 = oSheet.get_Range("M3");
+                row5_TieuDe7.Value2 = "Giờ LV";
+
+                Microsoft.Office.Interop.Excel.Range row5_TieuDe8 = oSheet.get_Range("N3");
+                row5_TieuDe8.Value2 = "Giờ TC";
+
+                Microsoft.Office.Interop.Excel.Range row5_TieuDe9 = oSheet.get_Range("O3");
+                row5_TieuDe9.Value2 = "Lý do vắng";
+
                 //tô màu
                 //Range range = oSheet.get_Range("A" + redRows.ToString(), "J" + redRows.ToString());
                 //range.Cells.Interior.Color = System.Drawing.Color.Red;
@@ -5874,15 +5883,17 @@ namespace Vs.TimeAttendance
                 Microsoft.Office.Interop.Excel.Range formatRange;
                 int col = 7;
                 int colvr = 1;
-                while (col < dtBCGaiDoan.Columns.Count)
+                while (col < dtBCGaiDoan.Columns.Count-3)
                 {
                     formatRange = oSheet.get_Range("" + CharacterIncrement(col - 1) + "3");
                     formatRange.Merge();
                     formatRange.Value = "Vào " + colvr.ToString();
+                    formatRange.ColumnWidth = 10;
 
                     formatRange = oSheet.get_Range("" + CharacterIncrement(col) + "3");
                     formatRange.Merge();
                     formatRange.Value = "Ra " + colvr.ToString();
+                    formatRange.ColumnWidth = 10;
                     //oSheet.Cells[4, col] = "Vào " + colvr.ToString();
                     //oSheet.Cells[4, col + 1] = "Ra " + colvr.ToString();
 
@@ -5919,7 +5930,7 @@ namespace Vs.TimeAttendance
                 formatRange.ColumnWidth = 15;
                 //ma nv
                 formatRange = oSheet.get_Range("B4", "B" + rowCnt.ToString());
-                formatRange.ColumnWidth = 35;
+                formatRange.ColumnWidth = 25;
                 //ho ten
                 formatRange = oSheet.get_Range("C4", "C" + rowCnt.ToString());
                 formatRange.ColumnWidth = 20;
@@ -5931,14 +5942,26 @@ namespace Vs.TimeAttendance
                 formatRange.EntireColumn.NumberFormat = "DD/MM/YYYY";
                 formatRange.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignRight;
                 try { formatRange.TextToColumns(Type.Missing, Microsoft.Office.Interop.Excel.XlTextParsingType.xlDelimited, Microsoft.Office.Interop.Excel.XlTextQualifier.xlTextQualifierDoubleQuote); } catch { }
-                formatRange.ColumnWidth = 20;
+                formatRange.ColumnWidth = 12;
 
                 //CẠNH giữa côt động
                 formatRange = oSheet.get_Range("F4", lastColumn + rowCnt.ToString());
                 formatRange.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
-                formatRange.ColumnWidth = 15;
+                formatRange.ColumnWidth = 10;
 
-                for (int i = 7; i < dtBCGaiDoan.Columns.Count; i++)
+                formatRange = oSheet.get_Range("M4", "M" + rowCnt.ToString());
+                formatRange.NumberFormat = "#,##0.00;(#,##0.00); ; ";
+                try { formatRange.TextToColumns(Type.Missing, Microsoft.Office.Interop.Excel.XlTextParsingType.xlDelimited, Microsoft.Office.Interop.Excel.XlTextQualifier.xlTextQualifierDoubleQuote); } catch { }
+                formatRange.ColumnWidth = 10;
+
+                formatRange = oSheet.get_Range("N4", "N" + rowCnt.ToString());
+                formatRange.NumberFormat = "#,##0.00;(#,##0.00); ; ";
+                try { formatRange.TextToColumns(Type.Missing, Microsoft.Office.Interop.Excel.XlTextParsingType.xlDelimited, Microsoft.Office.Interop.Excel.XlTextQualifier.xlTextQualifierDoubleQuote); } catch { }
+                formatRange.ColumnWidth = 10;
+
+                formatRange = oSheet.get_Range("O4", "O" + rowCnt.ToString());
+                formatRange.ColumnWidth = 25;
+                for (int i = 7; i < dtBCGaiDoan.Columns.Count-3; i++)
                 {
                     formatRange = oSheet.get_Range("" + CharacterIncrement(i - 1) + "4", "" + CharacterIncrement(i - 1) + "" + rowCnt.ToString());
                     formatRange.EntireColumn.NumberFormat = "hh:mm";

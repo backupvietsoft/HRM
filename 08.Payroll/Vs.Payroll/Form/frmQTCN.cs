@@ -138,14 +138,6 @@ namespace Vs.Payroll
                 adp.Fill(ds);
                 dt = new DataTable();
                 dt = ds.Tables[2].Copy();
-                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboChuyen, dt, "ID_TO", "TEN_TO", "TEN_TO", true);
-                cboChuyen.Properties.View.Columns[0].Caption = "STT Chuyền";
-                cboChuyen.Properties.View.Columns[1].Caption = "Tên Chuyền";
-                cboChuyen.Properties.View.Columns[1].AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-                cboChuyen.Properties.View.Columns[1].AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-                cboChuyen.Properties.View.Columns[0].AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-                cboChuyen.Properties.View.Columns[0].AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-
                 Commons.Modules.ObjSystems.MLoadCheckedComboBoxEdit(chkCboEditChuyen, dt, "ID_TO", "TEN_TO", "TEN_TO", true);
                 chkCboEditChuyen.SetEditValue(dt.Rows[0]["ID_TO"]);
                 //chkCboEditChuyen.EditValue
@@ -159,7 +151,6 @@ namespace Vs.Payroll
             try
             {
                 DataTable dt = new DataTable();
-                //dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboCUM", Convert.ToInt64(cboChuyen.EditValue), cboMH.Text == "" ? -99 : Convert.ToInt64(cboMH.EditValue), 1));
                 dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboCUM", chkCboEditChuyen.EditValue.ToString(), cboMH.Text == "" ? -99 : Convert.ToInt64(cboMH.EditValue), 1));
                 if (cboCum.Properties.DataSource == null)
                 {
@@ -255,20 +246,10 @@ namespace Vs.Payroll
         {
             //if (rdoXemCuLapMoi.SelectedIndex == 1) return;
             LoadCboTo();
-            cboChuyen_EditValueChanged(null, null);
             chkCboEditChuyen_EditValueChanged(null, null);
             //LoadCboCum(s);
             //LoadData();
         }
-
-        private void cboChuyen_EditValueChanged(object sender, EventArgs e)
-        {
-            //LoadCboCum();
-            //LoadData();
-            //datNgayLap.DateTime = Convert.ToDateTime(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT TOP 1 NGAY_LAP FROM dbo.QUI_TRINH_CONG_NGHE_CHI_TIET WHERE ID = " + (grvQT.GetFocusedRowCellValue("ID_CD") == null ? -1 : Convert.ToInt64(grvQT.GetFocusedRowCellValue("ID_CD"))).ToString() + ""));
-            //datNgayLap.DateTime = datNgayLap.DateTime == DateTime.MinValue ? DateTime.Now : datNgayLap.DateTime;
-        }
-
         private void LocData()
         {
             if (Commons.Modules.sLoad == "0Load") return;
@@ -311,7 +292,6 @@ namespace Vs.Payroll
             cboKH.Enabled = !isAdd;
             cboDV.Enabled = !isAdd;
             cboMH.Enabled = !isAdd;
-            cboChuyen.Enabled = !isAdd;
             chkCboEditChuyen.Enabled = !isAdd;
             datNgayLap.Enabled = isAdd;
             datTNgay.Enabled = !isAdd;
@@ -343,7 +323,6 @@ namespace Vs.Payroll
                     cmd.Parameters.Add("@iLoai", SqlDbType.Int).Value = 2;
                     cmd.Parameters.Add("@NGAY_LAP", SqlDbType.DateTime).Value = Convert.ToDateTime(datNgayLap.Text);
                     cmd.Parameters.Add("@sBT", SqlDbType.NVarChar).Value = stbQT;
-                    //cmd.Parameters.Add("@ID_TO", SqlDbType.BigInt).Value = cboChuyen.EditValue;
                     cmd.Parameters.Add("@ID_TO", SqlDbType.NVarChar).Value = chkCboEditChuyen.EditValue.ToString();
                     cmd.Parameters.Add("@ID_MH", SqlDbType.BigInt).Value = cboMH.EditValue;
                     cmd.CommandType = CommandType.StoredProcedure;
@@ -396,7 +375,6 @@ namespace Vs.Payroll
                             //System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptQuiTrinhCongNgheChiTiet", conn);
                             //cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
                             //cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
-                            //cmd.Parameters.Add("@ID_CHUYEN", SqlDbType.Int).Value = cboChuyen.EditValue;
                             //cmd.Parameters.Add("@ID_ORD", SqlDbType.Int).Value = cboOrd.EditValue;
                             //cmd.CommandType = CommandType.StoredProcedure;
                             //System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
@@ -926,7 +904,6 @@ namespace Vs.Payroll
                                 Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBTQTCN, dt, "");
                                 Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBTQTCN_Current, Commons.Modules.ObjSystems.ConvertDatatable(grvQT), "");
                                 dt = new DataTable();
-                                //dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetListQTCNImport", Convert.ToInt64(cboChuyen.EditValue), Convert.ToInt64(cboMH.EditValue), sBTQTCN, sBTQTCN_Current));
                                 dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetListQTCNImport", chkCboEditChuyen.EditValue.ToString().IndexOf(',') != -1 ? chkCboEditChuyen.EditValue.ToString().Substring(0, chkCboEditChuyen.EditValue.ToString().IndexOf(',')) : chkCboEditChuyen.EditValue.ToString(), Convert.ToInt64(cboMH.EditValue), sBTQTCN, sBTQTCN_Current));
                                 grdQT.DataSource = dt;
                                 //Commons.Modules.ObjSystems.MLoadXtraGrid(grdQT, grvQT, dt, true, true, false, false, true, this.Name);
@@ -1004,12 +981,6 @@ namespace Vs.Payroll
                             if (cboMH.Text == "")
                             {
                                 Commons.Modules.ObjSystems.msgChung("@ChuaNhapMaHang@");
-                                return;
-                            }
-
-                            if (cboChuyen.Text == "")
-                            {
-                                Commons.Modules.ObjSystems.msgChung("@ChuaNhapSttChuyen@");
                                 return;
                             }
 
@@ -1484,15 +1455,7 @@ namespace Vs.Payroll
                 }
                 else
                 {
-                    //if (Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT COUNT(*) FROM dbo.QUI_TRINH_CONG_NGHE_CHI_TIET WHERE ID_TO = " + cboChuyen.EditValue + " AND ID_ORD = " + cboMH.EditValue + " AND MaQL = " + sDLKiem + "")) > 0)
-                    //{
-                    //    sTenKTra = Commons.Modules.ObjLanguages.GetLanguage(sform, "msgTrungDLCSDL");
-                    //    dr.SetColumnError(sCot, sTenKTra);
-                    //    return false;
-                    //}
-                    //else
-                    //{
-                    //}
+
                     return true;
 
                 }
@@ -1554,11 +1517,60 @@ namespace Vs.Payroll
         }
         public void Delete(object sender, EventArgs e)
         {
+            string sBT = "sBTQTCN" + Commons.Modules.iIDUser;
             try
             {
+                //Load worksheet
+                XtraInputBoxArgs args = new XtraInputBoxArgs();
+                // set required Input Box options
+                args.Caption = "Chọn chuyền cần update";
+                args.Prompt = "Chọn chuyền cần update";
+                args.DefaultButtonIndex = 0;
 
+                // initialize a DateEdit editor with custom settings
+                CheckedComboBoxEdit editor = new CheckedComboBoxEdit();
+                //editor.Properties.Items.AddRange(wSheet);
+                //editor.EditValue = wSheet[0].ToString();
+                Commons.Modules.ObjSystems.MLoadCheckedComboBoxEdit(editor, (DataTable)chkCboEditChuyen.Properties.DataSource, "ID_TO", "TEN_TO", "TEN_TO", true);
+                editor.SetEditValue(chkCboEditChuyen.EditValue);
+
+                args.Editor = editor;
+                // a default DateEdit value
+                //args.DefaultResponse = chkCboEditChuyen.EditValue;
+                // display an Input Box with the custom editor
+                var result = XtraInputBox.Show(args);
+                if (result == null || result.ToString() == "") return;
+
+
+                Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBT, Commons.Modules.ObjSystems.GetDataTableMultiSelect(grdQT, grvQT), "");
+                System.Data.SqlClient.SqlConnection conn;
+                DataTable dt = new DataTable();
+                conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                conn.Open();
+                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spQTCN", conn);
+                cmd.Parameters.Add("@iLoai", SqlDbType.Int).Value = 3;
+                cmd.Parameters.Add("@sBT", SqlDbType.NVarChar).Value = sBT;
+                cmd.Parameters.Add("@ID_TO", SqlDbType.NVarChar).Value = result.ToString();
+                cmd.Parameters.Add("@ID_MH", SqlDbType.BigInt).Value = cboMH.Text == "" ? -99 : cboMH.EditValue;
+                cmd.Parameters.Add("@ACTION", SqlDbType.NVarChar).Value = "DELETE";
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.ExecuteNonQuery();
+                dt = new DataTable();
+                dt.Load(cmd.ExecuteReader());
+                if (dt.Rows[0][0].ToString() == "-99")
+                {
+                    XtraMessageBox.Show(dt.Rows[0][1].ToString());
+                }
+                Commons.Modules.ObjSystems.DeleteAddRow(grvQT);
+                LoadData();
+                LocData();
+                SetButton(false);
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgXoaThanhCongVuiLongKiemTraLai"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
-            catch { }
+            catch (Exception ex)
+            {
+                Commons.Modules.ObjSystems.XoaTable(sBT);
+            }
         }
         public DXMenuItem MCreateMenuUpdate(DevExpress.XtraGrid.Views.Grid.GridView view, int rowHandle)
         {
@@ -1569,10 +1581,79 @@ namespace Vs.Payroll
         }
         public void Update(object sender, EventArgs e)
         {
+
+            grvQT.CloseEditor();
+            grvQT.UpdateCurrentRow();
+
+            if (datNgayLap.Text == "")
+            {
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgChuaNhapNgay"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            isAdd = false;
+            grvQT.PostEditor();
+            grvQT.UpdateCurrentRow();
+            DataTable dtSource = new DataTable();
+            dtSource = (DataTable)grdQT.DataSource;
+            grvQT.Columns.View.ClearColumnErrors();
+            this.Cursor = Cursors.WaitCursor;
+            if (!KiemTraLuoi(dtSource))
+            {
+                this.Cursor = Cursors.Default;
+                return;
+            }
+            this.Cursor = Cursors.Default;
+
             string sBT = "sBTQTCN" + Commons.Modules.iIDUser;
             try
             {
+                //Load worksheet
+                XtraInputBoxArgs args = new XtraInputBoxArgs();
+                // set required Input Box options
+                args.Caption = "Chọn chuyền cần update";
+                args.Prompt = "Chọn chuyền cần update";
+                args.DefaultButtonIndex = 0;
 
+                // initialize a DateEdit editor with custom settings
+                CheckedComboBoxEdit editor = new CheckedComboBoxEdit();
+                //editor.Properties.Items.AddRange(wSheet);
+                //editor.EditValue = wSheet[0].ToString();
+                Commons.Modules.ObjSystems.MLoadCheckedComboBoxEdit(editor, (DataTable)chkCboEditChuyen.Properties.DataSource, "ID_TO", "TEN_TO", "TEN_TO", true);
+                editor.SetEditValue(chkCboEditChuyen.EditValue);
+
+                args.Editor = editor;
+                // a default DateEdit value
+                //args.DefaultResponse = chkCboEditChuyen.EditValue;
+                // display an Input Box with the custom editor
+                var result = XtraInputBox.Show(args);
+                if (result == null || result.ToString() == "") return;
+
+
+                Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBT, Commons.Modules.ObjSystems.GetDataTableMultiSelect(grdQT, grvQT), "");
+                System.Data.SqlClient.SqlConnection conn;
+                DataTable dt = new DataTable();
+                conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                conn.Open();
+                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spQTCN", conn);
+                cmd.Parameters.Add("@iLoai", SqlDbType.Int).Value = 3;
+                cmd.Parameters.Add("@sBT", SqlDbType.NVarChar).Value = sBT;
+                cmd.Parameters.Add("@ID_TO", SqlDbType.NVarChar).Value = result.ToString();
+                cmd.Parameters.Add("@ID_MH", SqlDbType.BigInt).Value = cboMH.Text == "" ? -99 : cboMH.EditValue;
+                cmd.Parameters.Add("@ACTION", SqlDbType.NVarChar).Value = "UPDATE";
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.ExecuteNonQuery();
+                dt = new DataTable();
+                dt.Load(cmd.ExecuteReader());
+                if (dt.Rows[0][0].ToString() == "-99")
+                {
+                    XtraMessageBox.Show(dt.Rows[0][1].ToString());
+                }
+
+                Commons.Modules.ObjSystems.DeleteAddRow(grvQT);
+                LoadData();
+                LocData();
+                SetButton(false);
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgCapNhatThanhCongVuiLongKiemTraLai"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
             catch (Exception ex)
             {
@@ -1587,7 +1668,6 @@ namespace Vs.Payroll
             LoadCboHangHoa();
 
             LoadCboTo();
-            cboChuyen_EditValueChanged(null, null);
             chkCboEditChuyen_EditValueChanged(null, null);
         }
 
@@ -1625,7 +1705,6 @@ namespace Vs.Payroll
                     try
                     {
                         Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBT, dtTempCopy, "");
-                        //grdQT.DataSource = SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spCopyQTCN", sBT, cboMH.EditValue, cboChuyen.EditValue);
                         DataTable dt = new DataTable();
                         dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spCopyQTCN", sBT, cboMH.EditValue, chkCboEditChuyen.EditValue.ToString().IndexOf(',') != -1 ? chkCboEditChuyen.EditValue.ToString().Substring(0, chkCboEditChuyen.EditValue.ToString().IndexOf(',')) : chkCboEditChuyen.EditValue.ToString()));
                         grdQT.DataSource = dt;
@@ -1671,7 +1750,6 @@ namespace Vs.Payroll
                 }
                 LoadCboHangHoa();
                 LoadCboTo();
-                cboChuyen_EditValueChanged(null, null);
                 chkCboEditChuyen_EditValueChanged(null, null);
             }
             catch (Exception ex) { }
@@ -1702,7 +1780,9 @@ namespace Vs.Payroll
         {
             try
             {
+                if (windowsUIButton.Buttons[0].Properties.Visible) return;
                 DevExpress.XtraGrid.Views.Grid.GridView view = sender as DevExpress.XtraGrid.Views.Grid.GridView;
+                if (grvQT.GetFocusedRowCellValue(view.FocusedColumn.FieldName).ToString() == "") return;
                 int irow = e.HitInfo.RowHandle;
                 if (e.MenuType == DevExpress.XtraGrid.Views.Grid.GridMenuType.Row)
                 {

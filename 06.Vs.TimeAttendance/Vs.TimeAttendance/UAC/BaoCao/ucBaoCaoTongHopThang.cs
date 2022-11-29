@@ -25,7 +25,7 @@ namespace Vs.TimeAttendance
         public ucBaoCaoTongHopThang()
         {
             InitializeComponent();
-            Commons.Modules.ObjSystems.ThayDoiNN(this, windowsUIButton);
+            Commons.Modules.ObjSystems.ThayDoiNN(this, windowsUIButton );
         }
         static string CharacterIncrement(int colCount)
         {
@@ -62,6 +62,19 @@ namespace Vs.TimeAttendance
             {
 
                 Commons.Modules.sLoad = "0Load";
+                LK_Thang.EditValue = DateTime.Today;
+                Commons.OSystems.SetDateEditFormat(lk_TuNgay);
+                Commons.OSystems.SetDateEditFormat(lk_DenNgay);
+                LoadNgay();
+
+                lk_DenNgay.EditValue = DateTime.Today;
+                DateTime dtTN = DateTime.Today;
+                DateTime dtDN = DateTime.Today;
+                //dTuNgay.EditValue = dtTN.AddDays((-dtTN.Day) + 1);
+                dtDN = dtDN.AddMonths(1);
+                dtDN = dtDN.AddDays(-(dtDN.Day));
+     
+                NgayIn.EditValue = DateTime.Today;
                 LoadCboDonVi();
                 LoadCboXiNghiep();
                 LoadCboTo();
@@ -87,22 +100,17 @@ namespace Vs.TimeAttendance
                     rdo_ChonBaoCao.Properties.Items.RemoveAt(9);
                 }
 
-                LK_Thang.EditValue = DateTime.Today;
-                Commons.OSystems.SetDateEditFormat(lk_TuNgay);
-                Commons.OSystems.SetDateEditFormat(lk_DenNgay);
+                
                 chkThayDoiCa.Checked = true;
-                //LoadTinhTrangHopDong();
+                LoadTinhTrangHopDong();
                 Commons.Modules.sLoad = "";
-                LoadNgay();
+                grdTTNhanVien.Visible = false;
+                if (rdo_ChonBaoCao.Properties.Items[rdo_ChonBaoCao.SelectedIndex].Tag != "rdo_DanhSachThang")
+                {
+                    grdTTNhanVien.Visible = false;
+                }
+                
 
-                //lk_DenNgay.EditValue = DateTime.Today;
-                //DateTime dtTN = DateTime.Today;
-                //DateTime dtDN = DateTime.Today;
-                ////dTuNgay.EditValue = dtTN.AddDays((-dtTN.Day) + 1);
-                //dtDN = dtDN.AddMonths(1);
-                //dtDN = dtDN.AddDays(-(dtDN.Day));
-                //LK_NgayXemBaoCao.EditValue = dtDN;
-                NgayIn.EditValue = DateTime.Today;
             }
             catch { }
 
@@ -909,19 +917,45 @@ namespace Vs.TimeAttendance
 
         private void LK_DON_VI_EditValueChanged(object sender, EventArgs e)
         {
-            if (Commons.Modules.sLoad == "0Load") return;
-            LoadCboXiNghiep();
-            LoadCboTo();
+            try
+            {
+
+                if (Commons.Modules.sLoad == "0Load") return;
+                Commons.Modules.sLoad = "0Load";
+                LoadCboXiNghiep();
+                LoadCboTo();
+                LoadGridThongTinNhanVien();
+                Commons.Modules.sLoad = "";
+            }
+            catch { }
         }
 
         private void LK_XI_NGHIEP_EditValueChanged(object sender, EventArgs e)
         {
-            if (Commons.Modules.sLoad == "0Load") return;
-            LoadCboTo();
+            try
+            {
+                if (Commons.Modules.sLoad == "0Load") return;
+                Commons.Modules.sLoad = "0Load";
+                LoadCboTo();
+                LoadGridThongTinNhanVien();
+                Commons.Modules.sLoad = "";
+               
+            }
+            catch { }
         }
 
         private void rdo_ChonBaoCao_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (rdo_ChonBaoCao.Properties.Items[rdo_ChonBaoCao.SelectedIndex].Tag == "rdo_DanhSachThang")
+            {
+                grdTTNhanVien.Visible = true;
+                LoadGridThongTinNhanVien();
+            }
+            else
+            {
+                grdTTNhanVien.Visible = false;
+            }
+
             switch (rdo_ChonBaoCao.Properties.Items[rdo_ChonBaoCao.SelectedIndex].Tag)
             {
                 case "rdo_BangTongHopDiTreVeSomThang":
@@ -957,27 +991,31 @@ namespace Vs.TimeAttendance
 
         private void rdo_DiTreVeSom_SelectedIndexChanged(object sender, EventArgs e)
         {
-            switch (rdo_ChonBaoCao.Properties.Items[rdo_ChonBaoCao.SelectedIndex].Tag)
+            try
             {
-                case "rdo_BangChamCongThang":
-                    {
-                        rdo_DiTreVeSom.Visible = false;
+                switch (rdo_ChonBaoCao.Properties.Items[rdo_ChonBaoCao.SelectedIndex].Tag)
+                {
+                    case "rdo_BangChamCongThang":
+                        {
+                            rdo_DiTreVeSom.Visible = false;
 
-                    }
-                    break;
-                case "rdo_BangChamCongTangCaThang":
-                    {
-                        rdo_DiTreVeSom.Visible = false;
-                    }
-                    break;
-                case "rdo_BangTongHopDiTreVeSomThang":
-                    {
-                        rdo_DiTreVeSom.Visible = false;
-                    }
-                    break;
-                default:
-                    break;
+                        }
+                        break;
+                    case "rdo_BangChamCongTangCaThang":
+                        {
+                            rdo_DiTreVeSom.Visible = false;
+                        }
+                        break;
+                    case "rdo_BangTongHopDiTreVeSomThang":
+                        {
+                            rdo_DiTreVeSom.Visible = false;
+                        }
+                        break;
+                    default:
+                        break;
+                }
             }
+            catch { }
         }
 
         private void calThang_DateTimeCommit_1(object sender, EventArgs e)
@@ -1001,7 +1039,7 @@ namespace Vs.TimeAttendance
         }
         private void LK_Thang_EditValueChanged(object sender, EventArgs e)
         {
-            if (Commons.Modules.sLoad == "0Load") return;
+            ///////////if (Commons.Modules.sLoad == "0Load") return;
             DateTime tungay = Convert.ToDateTime(LK_Thang.EditValue);
             DateTime denngay = Convert.ToDateTime(LK_Thang.EditValue).AddMonths(+1);
             lk_TuNgay.EditValue = Convert.ToDateTime("01/" + tungay.Month + "/" + tungay.Year);
@@ -1016,7 +1054,40 @@ namespace Vs.TimeAttendance
             }
         }
         #endregion
-
+        private void LoadGridThongTinNhanVien()
+        {
+            try
+            {
+                DataTable dt = new DataTable();
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spListCNBCTHT", LK_DON_VI.EditValue, LK_XI_NGHIEP.EditValue, LK_TO.EditValue, Commons.Modules.UserName , Convert.ToDateTime(lk_TuNgay.EditValue), Convert.ToDateTime(lk_DenNgay.EditValue), Commons.Modules.TypeLanguage));
+                dt.Columns["CHON"].ReadOnly = false;
+                if (grdTTNhanVien.DataSource == null)
+                {
+                    Commons.Modules.ObjSystems.MLoadXtraGrid(grdTTNhanVien, grvTTNhanVien, dt, true, true, false, true, true, this.Name);
+                    grvTTNhanVien.Columns["CHON"].Visible = false;
+                    grvTTNhanVien.Columns["ID_CN"].Visible = false;
+                    grvTTNhanVien.Columns["MS_CN"].OptionsColumn.AllowEdit = false;
+                    grvTTNhanVien.Columns["TEN_XN"].OptionsColumn.AllowEdit = false;
+                    grvTTNhanVien.Columns["TEN_TO"].OptionsColumn.AllowEdit = false;
+                    grvTTNhanVien.Columns["HO_TEN"].OptionsColumn.AllowEdit = false;
+                }
+                else
+                {
+                    grdTTNhanVien.DataSource = dt;
+                }
+                try
+                {
+                    grvTTNhanVien.OptionsSelection.CheckBoxSelectorField = "CHON";
+                    grvTTNhanVien.Columns["CHON"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
+                }
+                catch { }
+                lblTongCN.Text = "Số nhân viên :" + Convert.ToString(grvTTNhanVien.RowCount);
+            }
+            catch(Exception ex) 
+            {
+                XtraMessageBox.Show(ex.Message.ToString());
+            };
+        }
         #region function
 
         private void BorderAround(Range range)
@@ -1067,10 +1138,7 @@ namespace Vs.TimeAttendance
                 dtthang.PrimaryKey = new DataColumn[] { dtthang.Columns["M"] };
 
 
-                //ItemForDateThang.Visibility = LayoutVisibility.Never;
-                //DataTable dtthang = new DataTable();
-                //string sSql = "SELECT DISTINCT SUBSTRING(CONVERT(VARCHAR(10),TU_NGAY,103),4,2) as M, RIGHT(CONVERT(VARCHAR(10),TU_NGAY,103),4) AS Y ,RIGHT(CONVERT(VARCHAR(10),TU_NGAY,103),7) AS THANG FROM dbo.CHAM_CONG ORDER BY Y DESC , M DESC";
-                //dtthang.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSql));
+              
                 int index = dtthang.Rows.IndexOf(dtthang.Rows.Find(grvThang.GetFocusedRowCellValue("M")));
                 if (grdThang.DataSource == null)
                 {
@@ -1547,6 +1615,7 @@ namespace Vs.TimeAttendance
                     AccessMode: Microsoft.Office.Interop.Excel.XlSaveAsAccessMode.xlShared);
             }
             catch { }
+            
         }
 
         //In Excel
@@ -5767,6 +5836,8 @@ namespace Vs.TimeAttendance
         {
             try
             {
+                string strSaveThongTinNhanVien = "rptBangXacNhanGioQuetThe_DM" + Commons.Modules.UserName;
+                Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, strSaveThongTinNhanVien, Commons.Modules.ObjSystems.ConvertDatatable(grvTTNhanVien), "");
                 this.Cursor = Cursors.WaitCursor;
                 System.Data.SqlClient.SqlConnection conn;
                 conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
@@ -5775,13 +5846,14 @@ namespace Vs.TimeAttendance
 
                 System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand(Commons.Modules.ObjSystems.returnSps(F3, "rptBangXacNhanGioQuetThe_DM"), conn);
 
-                cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                 cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
                 cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
                 cmd.Parameters.Add("@Dvi", SqlDbType.Int).Value = LK_DON_VI.EditValue;
                 cmd.Parameters.Add("@XN", SqlDbType.Int).Value = LK_XI_NGHIEP.EditValue;
                 cmd.Parameters.Add("@TO", SqlDbType.Int).Value = LK_TO.EditValue;
                 cmd.Parameters.Add("@TNgay", SqlDbType.Date).Value = Convert.ToDateTime(lk_TuNgay.EditValue);
                 cmd.Parameters.Add("@DNgay", SqlDbType.Date).Value = Convert.ToDateTime(lk_DenNgay.EditValue);
+                cmd.Parameters.Add("@BT", SqlDbType.NVarChar, 50).Value = strSaveThongTinNhanVien;
                 cmd.CommandType = CommandType.StoredProcedure;
                 System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
 
@@ -6049,5 +6121,23 @@ namespace Vs.TimeAttendance
             }
 
         }
+
+        private void LK_TO_EditValueChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (Commons.Modules.sLoad == "0Load") return;
+                Commons.Modules.sLoad = "0Load";
+                LoadCboTo();
+                LoadGridThongTinNhanVien();
+                Commons.Modules.sLoad = "";
+
+                
+                
+            }
+            catch { }
+        }
+
+
     }
 }

@@ -625,7 +625,6 @@ namespace Vs.TimeAttendance
                 }
                 rowCnt = keepRowCnt;
                 Microsoft.Office.Interop.Excel.Range formatRange; // range hien tai
-                Microsoft.Office.Interop.Excel.Range formatRange2; // range truoc
                 Microsoft.Office.Interop.Excel.Range formatRange1; // range ke tiep
                 Microsoft.Office.Interop.Excel.Range formatRange3;
                 string CurentColumn = string.Empty;

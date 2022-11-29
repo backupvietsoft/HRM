@@ -167,6 +167,12 @@
     <Compile Include="UAC\BaoCao\ucBaoCaoDanhGiaTTThuViec.Designer.cs">
       <DependentUpon>ucBaoCaoDanhGiaTTThuViec.cs</DependentUpon>
     </Compile>
+    <Compile Include="UAC\BaoCao\ucBaoCaoHuongTroCapBHXH.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UAC\BaoCao\ucBaoCaoHuongTroCapBHXH.designer.cs">
+      <DependentUpon>ucBaoCaoHuongTroCapBHXH.cs</DependentUpon>
+    </Compile>
     <Compile Include="UAC\BaoCao\ucBaoCaoQHGD.cs">
       <SubType>UserControl</SubType>
     </Compile>

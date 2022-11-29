@@ -204,6 +204,7 @@
             this.grvCDThuaThieu.OptionsView.ShowGroupPanel = false;
             this.grvCDThuaThieu.RowStyle += new DevExpress.XtraGrid.Views.Grid.RowStyleEventHandler(this.grvCDThuaThieu_RowStyle);
             this.grvCDThuaThieu.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.grvCDThuaThieu_FocusedRowChanged);
+            this.grvCDThuaThieu.DoubleClick += new System.EventHandler(this.grvCDThuaThieu_DoubleClick);
             // 
             // lblKhachHang
             // 

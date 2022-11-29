@@ -45,26 +45,21 @@ namespace Vs.HRM
             LoadNhanSu(-1);
             Commons.Modules.sLoad = "";
             setMauTT();
-            switch (Commons.Modules.ObjSystems.KyHieuDV(Convert.ToInt64(cboDV.EditValue)))
+            switch (Commons.Modules.KyHieuDV)
             {
                 case "NB":
                     {
-                        btnBinhThuong.Visible = false;
-                        lblBinhThuong.Visible = false;
-                        btnSapNghiViec.Visible = false;
-                        lblSapNghiViec.Visible = false;
-                        btnNghiDe.Visible = false;
-                        lblNghiDe.Visible = false;
-                        btnCheDo1Nam.Visible = false;
-                        lblCheDo1Nam.Visible = false;
+
                         btnDaNghiViec.Visible = false;
                         lblDaNghiViec.Visible = false;
                         btnBoViec.Visible = false;
                         lblBoViec.Visible = false;
-                        btnSapHetHanHD.Visible = false;
-                        lblSapHetHanHD.Visible = false;
-                        btnSapNghiSinh.Visible = false;
-                        lblSapNghiSinh.Visible = false;
+                        lblSapNghiSinh.Text = "Nghỉ sẩy thai đình chỉ thai";
+                        lblNghiDe.Text = "Nghỉ thai sản";
+                        lblCheDo1Nam.Text = "Đã nghỉ việc";
+                        lblSapNghiViec.Text = "Nghỉ không lương";
+                        btnDaNghiViec.Visible = false;
+                        lblDaNghiViec.Visible = false;
                         break;
                     }
             }
@@ -164,7 +159,7 @@ namespace Vs.HRM
                     grvDSCongNhan.FocusedRowHandle = grvDSCongNhan.GetRowHandle(index);
                 }
             }
-            catch (Exception ex) { }
+            catch (Exception ex) { XtraMessageBox.Show(ex.Message.ToString()); }
         }
         private void tileView1_ItemCustomize(object sender, TileViewItemCustomizeEventArgs e)
         {
@@ -387,23 +382,11 @@ namespace Vs.HRM
 
         private void grvDSCongNhan_RowCountChanged(object sender, EventArgs e)
         {
-            GridView view = sender as GridView;
-
             try
             {
-                int index = ItemForSumNhanVien.Text.IndexOf(':');
-                if (index > 0)
-                {
-                    if (view.RowCount > 0)
-                    {
-                        ItemForSumNhanVien.Text = ItemForSumNhanVien.Text.Substring(0, index) + ": " + view.RowCount.ToString();
-                    }
-                    else
-                    {
-                        ItemForSumNhanVien.Text = ItemForSumNhanVien.Text.Substring(0, index) + ": 0";
-                    }
-
-                }
+                DataTable dt = new DataTable();
+                dt = (DataTable)grdDSCongNhan.DataSource;
+                ItemForSumNhanVien.Text = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "SumNhanVien") + ": " + dt.Rows.Count;
             }
             catch
             {
@@ -421,7 +404,7 @@ namespace Vs.HRM
         {
             try
             {
-                if (grvDSCongNhan.RowCount == 0) 
+                if (grvDSCongNhan.RowCount == 0)
                     return;
                 if (grvDSCongNhan.GetRowCellValue(e.RowHandle, grvDSCongNhan.Columns["MAU_TT"]).ToString().Trim() == "#FFFFFF") return;
                 {
@@ -502,6 +485,7 @@ namespace Vs.HRM
             Commons.Modules.ObjSystems.MLoadLookUpEdit(cbo_TTHT, Commons.Modules.ObjSystems.DataTinHTrangHT(Convert.ToInt32(cboID_LTTHT.EditValue), true), "ID_TT_HT", "TEN_TT_HT", "TEN_TT_HT");
             Commons.Modules.sLoad = "";
             cbo_TTHT.EditValue = Convert.ToInt64(5);
+
         }
 
         private void btnDaNghiViec_Click(object sender, EventArgs e)

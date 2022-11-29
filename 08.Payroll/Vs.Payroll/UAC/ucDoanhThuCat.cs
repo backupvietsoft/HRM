@@ -600,7 +600,7 @@ namespace Vs.Payroll
 
                 Ranges1 = excelWorkSheet.Range[excelWorkSheet.Cells[rowCnt, 1], excelWorkSheet.Cells[rowCnt, 3]];
                 Ranges1.Merge();
-                Ranges1.Value = "Lương 1h";
+                Ranges1.Value = "Lương bình quân/giờ";
                 Ranges1.Font.Bold = true;
                 Ranges1.Font.Name = "Times New Roman";
                 Ranges1.Font.Size = 12;
@@ -614,19 +614,35 @@ namespace Vs.Payroll
                 {
 
                     iSGLV = Convert.ToDouble(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text,
-                        "SELECT ROUND(SUM(T3.SGLV),2) SG_LV FROM dbo.LUONG_CONG_NHAN_CAT T1 INNER JOIN dbo.CONG_NHAN CN ON CN.ID_CN = T1.ID_CN INNER JOIN(SELECT CCCT.ID_CN, SUM(CCCT.SG_LV_TT) SGLV " +
+                        "SELECT ISNULL(ROUND(SUM(T3.SGLV),2),0) SG_LV FROM dbo.LUONG_CONG_NHAN_CAT T1 INNER JOIN dbo.CONG_NHAN CN ON CN.ID_CN = T1.ID_CN INNER JOIN(SELECT CCCT.ID_CN, SUM(CCCT.SG_LV_TT) SGLV " +
                     "FROM dbo.CHAM_CONG_CHI_TIET CCCT INNER JOIN dbo.CHAM_CONG CC ON CC.NGAY = CCCT.NGAY AND CC.ID_CN = CCCT.ID_CN WHERE CCCT.NGAY BETWEEN '" + dtNgayDauThang.ToString("MM/dd/yyyy") + "' AND '" + dtNgayCuoiThang.ToString("MM/dd/yyyy") + "' GROUP BY CCCT.ID_CN) T3 ON T3.ID_CN = T1.ID_CN  WHERE T1.THANG BETWEEN '" + dtNgayDauThang.ToString("MM/dd/yyyy") + "' AND '" + dtNgayCuoiThang.ToString("MM/dd/yyyy") + "'"
                         ));
                 }
                 catch { }
 
-                // cột tổng thành tiền
+                // lương 1h
                 Ranges1 = excelWorkSheet.Range[excelWorkSheet.Cells[rowCnt, 6], excelWorkSheet.Cells[rowCnt, 6]];
                 Ranges1.Font.Bold = true;
                 Ranges1.Font.Name = "Times New Roman";
                 Ranges1.Font.Size = 12;
                 Ranges1.Value = "=" + CellAddress(excelWorkSheet, rowCnt - 1, 6) + ":" + CellAddress(excelWorkSheet, rowCnt - 1, 6) + "/" + iSGLV + "";
                 Ranges1.NumberFormat = "#,##0;(#,##0); ; ";
+
+                rowCnt++;
+                Ranges1 = excelWorkSheet.Range[excelWorkSheet.Cells[rowCnt, 1], excelWorkSheet.Cells[rowCnt, 3]];
+                Ranges1.Merge();
+                Ranges1.Value = "Số giờ làm việc";
+                Ranges1.Font.Bold = true;
+                Ranges1.Font.Name = "Times New Roman";
+                Ranges1.Font.Size = 12;
+
+                Ranges1 = excelWorkSheet.Range[excelWorkSheet.Cells[rowCnt, 6], excelWorkSheet.Cells[rowCnt, 6]];
+                Ranges1.Font.Bold = true;
+                Ranges1.Font.Name = "Times New Roman";
+                Ranges1.Font.Size = 12;
+                Ranges1.Value = iSGLV;
+                Ranges1.NumberFormat = "#,##0.00;(#,##0.000); ; ";
+
 
                 // border từ cột 7 đến dòng cuối cùng
                 Ranges1 = excelWorkSheet.Range[excelWorkSheet.Cells[7, 1], excelWorkSheet.Cells[rowCnt, 6]];

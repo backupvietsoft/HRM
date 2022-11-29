@@ -382,7 +382,14 @@ namespace VietSoftHRM
                         tc.Dock = DockStyle.Fill;
                         break;
                     }
-
+                case "mnuThaiSan":
+                    {
+                        ucKeHoachThaiSan tc = new ucKeHoachThaiSan();
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(tc);
+                        tc.Dock = DockStyle.Fill;
+                        break;
+                    }
                 #region BaoCao
                 case "mnuBCDonVi":
                     {

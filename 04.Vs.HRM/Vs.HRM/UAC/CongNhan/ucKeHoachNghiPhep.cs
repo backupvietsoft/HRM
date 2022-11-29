@@ -202,7 +202,6 @@ namespace Vs.HRM
                 RepositoryItemDateEdit dEditN = new RepositoryItemDateEdit();
                 Commons.OSystems.SetDateRepositoryItemDateEdit(dEditN);
 
-                grvKHNP.Columns["SO_GIO"].Visible = false;
                 grvKHNP.Columns["NGAY_VAO_LAM_LAI"].Visible = false;
 
                 if(Commons.Modules.KyHieuDV =="NB")

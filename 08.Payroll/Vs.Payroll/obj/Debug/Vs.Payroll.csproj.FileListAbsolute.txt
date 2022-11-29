@@ -2796,6 +2796,7 @@ F:\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.frmDonHangBanView.resources
 F:\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.frmEditMaHang.resources
 F:\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\VS.OEE.frmImport.resources
 F:\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.frmImportTienThuongPhuCap.resources
+F:\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.frmCapNhatNhanhThuaThieu.resources
 F:\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.frmInBaoCaoPCD.resources
 F:\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.frmInBaoCaoHTTienDo.resources
 F:\01.HRM\08.Payroll\Vs.Payroll\obj\Debug\Vs.Payroll.frmLayDuLieuLuongT13.resources

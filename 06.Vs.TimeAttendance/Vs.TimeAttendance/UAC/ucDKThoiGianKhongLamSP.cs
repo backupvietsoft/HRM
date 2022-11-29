@@ -74,6 +74,16 @@ namespace Vs.TimeAttendance
                 dt.Columns["HO_TEN"].ReadOnly = true;
                 dt.Columns["TEN_XN"].ReadOnly = true;
                 dt.Columns["TEN_TO"].ReadOnly = true;
+                dt.Columns["COT_1"].ReadOnly = false;
+                dt.Columns["COT_2"].ReadOnly = false;
+                dt.Columns["COT_3"].ReadOnly = false;
+                dt.Columns["COT_4"].ReadOnly = false;
+                dt.Columns["COT_5"].ReadOnly = false;
+                dt.Columns["COT_6"].ReadOnly = false;
+                dt.Columns["COT_7"].ReadOnly = false;
+                dt.Columns["TG_HC"].ReadOnly = false;
+                dt.Columns["TG_TC_NT"].ReadOnly = false;
+                dt.Columns["TG_TC_CN"].ReadOnly = false;
                 if (grdData.DataSource == null)
                 {
                     Commons.Modules.ObjSystems.MLoadXtraGrid(grdData, grvData, dt, isAdd ? true : false, true, false, true, true, this.Name);
@@ -82,11 +92,11 @@ namespace Vs.TimeAttendance
                     grvData.Columns["NGAY"].Visible = false;
 
                     RepositoryItemTextEdit txtEdit = new RepositoryItemTextEdit();
-                    txtEdit.Properties.DisplayFormat.FormatString = "0.00";
+                    txtEdit.Properties.DisplayFormat.FormatString = "N2";
                     txtEdit.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-                    txtEdit.Properties.EditFormat.FormatString = "0.00";
+                    txtEdit.Properties.EditFormat.FormatString = "N2";
                     txtEdit.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-                    txtEdit.Properties.Mask.EditMask = "0.00";
+                    txtEdit.Properties.Mask.EditMask = "N2";
                     txtEdit.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
                     txtEdit.Properties.Mask.UseMaskAsDisplayFormat = true;
                     grvData.Columns["COT_1"].ColumnEdit = txtEdit;
@@ -247,7 +257,7 @@ namespace Vs.TimeAttendance
                     }
                 case "import":
                     {
-                        
+
                         frmImportDangKyKLSP frm = new frmImportDangKyKLSP();
                         if (frm.ShowDialog() == DialogResult.OK)
                         {
@@ -264,6 +274,7 @@ namespace Vs.TimeAttendance
                     }
                 case "themsua":
                     {
+                        grdData.DataSource = null;
                         isAdd = true;
                         LoadData();
                         Commons.Modules.ObjSystems.AddnewRow(grvData, false);

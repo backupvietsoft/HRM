@@ -216,6 +216,7 @@ namespace Vs.Payroll
             grvQT.Columns["ID_CD"].Visible = false;
             grvQT.Columns["ID_TO"].Visible = false;
             grvQT.Columns["ID_ORD"].Visible = false;
+            grvQT.Columns["QUI_TRINH_HOAN_CHINH"].Visible = false;
 
             grvQT.Columns["THOI_GIAN_THIET_KE"].DisplayFormat.FormatType = FormatType.Numeric;
             grvQT.Columns["THOI_GIAN_THIET_KE"].DisplayFormat.FormatString = "N3";
@@ -1554,12 +1555,12 @@ namespace Vs.Payroll
                 cmd.Parameters.Add("@ID_MH", SqlDbType.BigInt).Value = cboMH.Text == "" ? -99 : cboMH.EditValue;
                 cmd.Parameters.Add("@ACTION", SqlDbType.NVarChar).Value = "DELETE";
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.ExecuteNonQuery();
                 dt = new DataTable();
                 dt.Load(cmd.ExecuteReader());
                 if (dt.Rows[0][0].ToString() == "-99")
                 {
                     XtraMessageBox.Show(dt.Rows[0][1].ToString());
+                    return;
                 }
                 Commons.Modules.ObjSystems.DeleteAddRow(grvQT);
                 LoadData();
@@ -1641,7 +1642,65 @@ namespace Vs.Payroll
                 cmd.Parameters.Add("@ID_MH", SqlDbType.BigInt).Value = cboMH.Text == "" ? -99 : cboMH.EditValue;
                 cmd.Parameters.Add("@ACTION", SqlDbType.NVarChar).Value = "UPDATE";
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.ExecuteNonQuery();
+                dt = new DataTable();
+                dt.Load(cmd.ExecuteReader());
+                if (dt.Rows[0][0].ToString() == "-99")
+                {
+                    XtraMessageBox.Show(dt.Rows[0][1].ToString());
+                    return;
+                }
+
+                Commons.Modules.ObjSystems.DeleteAddRow(grvQT);
+                LoadData();
+                LocData();
+                SetButton(false);
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgCapNhatThanhCongVuiLongKiemTraLai"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            }
+            catch (Exception ex)
+            {
+                Commons.Modules.ObjSystems.XoaTable(sBT);
+            }
+        }
+        public DXMenuItem MCreateMenuCapNhatQuiTrinhHC(DevExpress.XtraGrid.Views.Grid.GridView view, int rowHandle)
+        {
+            string sStr = Commons.Modules.ObjLanguages.GetLanguage(Commons.Modules.ModuleName, this.Name, "lblQuyTrinhHoanChinh", Commons.Modules.TypeLanguage);
+            DXMenuItem menuPatse = new DXMenuItem(sStr, new EventHandler(UpdateQTHC));
+            menuPatse.Tag = new RowInfo(view, rowHandle);
+            return menuPatse;
+        }
+        public void UpdateQTHC(object sender, EventArgs e)
+        {
+            try
+            {
+
+
+                XtraInputBoxArgs args = new XtraInputBoxArgs();
+                // set required Input Box options
+                args.Caption = "Chọn chuyền cần update";
+                args.Prompt = "Chọn chuyền cần update";
+                args.DefaultButtonIndex = 0;
+
+                CheckedComboBoxEdit editor = new CheckedComboBoxEdit();
+
+                Commons.Modules.ObjSystems.MLoadCheckedComboBoxEdit(editor, (DataTable)chkCboEditChuyen.Properties.DataSource, "ID_TO", "TEN_TO", "TEN_TO", true);
+                editor.SetEditValue(chkCboEditChuyen.EditValue);
+
+                args.Editor = editor;
+
+                var result = XtraInputBox.Show(args);
+                if (result == null || result.ToString() == "") return;
+
+
+                System.Data.SqlClient.SqlConnection conn;
+                DataTable dt = new DataTable();
+                conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                conn.Open();
+                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spQTCN", conn);
+                cmd.Parameters.Add("@iLoai", SqlDbType.Int).Value = 4;
+                cmd.Parameters.Add("@bCot1", SqlDbType.Bit).Value = true;
+                cmd.Parameters.Add("@ID_TO", SqlDbType.NVarChar).Value = result.ToString();
+                cmd.Parameters.Add("@ID_MH", SqlDbType.BigInt).Value = cboMH.Text == "" ? -99 : cboMH.EditValue;
+                cmd.CommandType = CommandType.StoredProcedure;
                 dt = new DataTable();
                 dt.Load(cmd.ExecuteReader());
                 if (dt.Rows[0][0].ToString() == "-99")
@@ -1657,7 +1716,62 @@ namespace Vs.Payroll
             }
             catch (Exception ex)
             {
-                Commons.Modules.ObjSystems.XoaTable(sBT);
+            }
+        }
+        public DXMenuItem MCreateMenuCapNhatQuiTrinhKhongHC(DevExpress.XtraGrid.Views.Grid.GridView view, int rowHandle)
+        {
+            string sStr = Commons.Modules.ObjLanguages.GetLanguage(Commons.Modules.ModuleName, this.Name, "lblQuyTrinhKhongHoanChinh", Commons.Modules.TypeLanguage);
+            DXMenuItem menuPatse = new DXMenuItem(sStr, new EventHandler(UpdateQTKHC));
+            menuPatse.Tag = new RowInfo(view, rowHandle);
+            return menuPatse;
+        }
+        public void UpdateQTKHC(object sender, EventArgs e) // qui trình không hoàn chỉnh
+        {
+            try
+            {
+
+
+                XtraInputBoxArgs args = new XtraInputBoxArgs();
+                // set required Input Box options
+                args.Caption = "Chọn chuyền cần update";
+                args.Prompt = "Chọn chuyền cần update";
+                args.DefaultButtonIndex = 0;
+
+                CheckedComboBoxEdit editor = new CheckedComboBoxEdit();
+
+                Commons.Modules.ObjSystems.MLoadCheckedComboBoxEdit(editor, (DataTable)chkCboEditChuyen.Properties.DataSource, "ID_TO", "TEN_TO", "TEN_TO", true);
+                editor.SetEditValue(chkCboEditChuyen.EditValue);
+
+                args.Editor = editor;
+
+                var result = XtraInputBox.Show(args);
+                if (result == null || result.ToString() == "") return;
+
+                System.Data.SqlClient.SqlConnection conn;
+                DataTable dt = new DataTable();
+                conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                conn.Open();
+                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spQTCN", conn);
+                cmd.Parameters.Add("@iLoai", SqlDbType.Int).Value = 4;
+                cmd.Parameters.Add("@bCot1", SqlDbType.Bit).Value = false;
+                cmd.Parameters.Add("@ID_TO", SqlDbType.NVarChar).Value = result.ToString();
+                cmd.Parameters.Add("@ID_MH", SqlDbType.BigInt).Value = cboMH.Text == "" ? -99 : cboMH.EditValue;
+                cmd.CommandType = CommandType.StoredProcedure;
+                dt = new DataTable();
+                dt.Load(cmd.ExecuteReader());
+                if (dt.Rows[0][0].ToString() == "-99")
+                {
+                    XtraMessageBox.Show(dt.Rows[0][1].ToString());
+                }
+
+                Commons.Modules.ObjSystems.DeleteAddRow(grvQT);
+                LoadData();
+                LocData();
+                SetButton(false);
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgCapNhatThanhCongVuiLongKiemTraLai"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            }
+            catch (Exception ex)
+            {
             }
         }
 
@@ -1776,26 +1890,70 @@ namespace Vs.Payroll
             datNgayLap.DateTime = datNgayLap.DateTime == DateTime.MinValue ? DateTime.Now : datNgayLap.DateTime;
         }
 
+        private void grvQT_RowStyle(object sender, RowStyleEventArgs e)
+        {
+            try
+            {
+                if (Convert.ToBoolean(grvQT.GetRowCellValue(e.RowHandle, grvQT.Columns["QUI_TRINH_HOAN_CHINH"].FieldName)) == false) return;
+                e.Appearance.BackColor = System.Drawing.ColorTranslator.FromHtml("#FFF2CC");
+            }
+            catch
+            {
+
+            }
+        }
+
+        private void grvQT_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
+        {
+            GridView view = sender as GridView;
+            string sMaGopCurrent;
+            try
+            {
+                var row = view.GetFocusedDataRow();
+
+                if (e.Column.FieldName == "MA_GOP")
+                {
+                    sMaGopCurrent = grvQT.GetFocusedRowCellValue("MaQL").ToString().Trim();
+                    DataTable dt = new DataTable();
+                    dt = (DataTable)grdQT.DataSource;
+                    if (dt.AsEnumerable().Count(x => x["MA_GOP"].Equals(sMaGopCurrent)) > 0)
+                    {
+                        XtraMessageBox.Show("Mã này đã có mã gộp không được chọn nữa");
+                        row["MA_GOP"] = DBNull.Value;
+
+                    }
+                }
+            }
+            catch (Exception ex) { }
+        }
+
         private void grvDSUngVien_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
         {
             try
             {
-                if (windowsUIButton.Buttons[0].Properties.Visible) return;
                 DevExpress.XtraGrid.Views.Grid.GridView view = sender as DevExpress.XtraGrid.Views.Grid.GridView;
-                if (grvQT.GetFocusedRowCellValue(view.FocusedColumn.FieldName).ToString() == "") return;
                 int irow = e.HitInfo.RowHandle;
-                if (e.MenuType == DevExpress.XtraGrid.Views.Grid.GridMenuType.Row)
+
+                if (windowsUIButton.Buttons[0].Properties.Visible)
                 {
-                    e.Menu.Items.Clear();
+                    DevExpress.Utils.Menu.DXMenuItem itemUpdate_QTHC = MCreateMenuCapNhatQuiTrinhHC(view, irow);
+                    e.Menu.Items.Add(itemUpdate_QTHC);
 
-                    DevExpress.Utils.Menu.DXMenuItem itemCopy = MCreateMenuUpdate(view, irow);
-                    e.Menu.Items.Add(itemCopy);
-
-                    DevExpress.Utils.Menu.DXMenuItem itemDelete = MCreateMenuDelete(view, irow);
-                    e.Menu.Items.Add(itemDelete);
-
-                    //if (flag == false) return;
+                    DevExpress.Utils.Menu.DXMenuItem itemUpdate_QKTHC = MCreateMenuCapNhatQuiTrinhKhongHC(view, irow);
+                    e.Menu.Items.Add(itemUpdate_QKTHC);
                 }
+                else
+                {
+                    if (e.MenuType == DevExpress.XtraGrid.Views.Grid.GridMenuType.Row)
+                    {
+                        e.Menu.Items.Clear();
+                        DevExpress.Utils.Menu.DXMenuItem itemCopy = MCreateMenuUpdate(view, irow);
+                        e.Menu.Items.Add(itemCopy);
+                        DevExpress.Utils.Menu.DXMenuItem itemDelete = MCreateMenuDelete(view, irow);
+                        e.Menu.Items.Add(itemDelete);
+                    }
+                }
+
                 //else
                 //{
                 //    if (bCheckCopy == true)

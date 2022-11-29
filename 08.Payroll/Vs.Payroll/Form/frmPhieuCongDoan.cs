@@ -63,6 +63,7 @@ namespace Vs.Payroll
                 LoadPCD();
                 LoadCN();
                 LoadCD();
+                //LoadCboMSCN();
                 Commons.Modules.sLoad = "";
                 grvPCD_FocusedRowChanged(null, null);
                 grvTo_FocusedRowChanged(null, null);
@@ -421,11 +422,13 @@ namespace Vs.Payroll
             }
             catch (Exception ex) { }
 
+            //LoadCboMSCN();
             if (Commons.Modules.sPS != "0Focus")
             {
                 iCN = Convert.ToInt32(grvTo.GetFocusedRowCellValue("ID_CN"));
             }
             else return;
+
         }
 
         private void TSua(Boolean TSua)
@@ -499,6 +502,7 @@ namespace Vs.Payroll
                 LoadPCD();
                 LoadCN();
                 LoadCD();
+                //LoadCboMSCN();
                 Commons.Modules.sLoad = "";
             }
             catch { }
@@ -513,6 +517,7 @@ namespace Vs.Payroll
             LoadPCD();
             LoadCN();
             LoadCD();
+            //LoadCboMSCN();
             Commons.Modules.sLoad = "";
         }
 
@@ -522,6 +527,7 @@ namespace Vs.Payroll
             LoadPCD();
             LoadCN();
             LoadCD();
+            //LoadCboMSCN();
             grvPCD_FocusedRowChanged(null, null);
             grvTo_FocusedRowChanged(null, null);
         }
@@ -532,6 +538,7 @@ namespace Vs.Payroll
             LoadPCD();
             LoadCD();
             LoadCN();
+            //LoadCboMSCN();
             grvPCD_FocusedRowChanged(null, null);
             grvTo_FocusedRowChanged(null, null);
         }
@@ -1186,5 +1193,55 @@ namespace Vs.Payroll
 
             }
         }
+
+        //private void LoadCboMSCN()
+        //{
+        //    try
+        //    {
+        //        DateTime dtNgay;
+        //        try
+        //        {
+        //            dtNgay = DateTime.ParseExact(cboNgay.Text, "dd/MM/yyyy", cultures);
+        //        }
+        //        catch { dtNgay = DateTime.Now; }
+
+        //        //optXCLP.SelectedIndex = 0  XEM CU
+
+        //        DataTable dt = new DataTable();
+        //        dt = Commons.Modules.ObjSystems.ConvertDatatable(grvTo);
+        //        if (cboMSCN.Properties.DataSource == null)
+        //        {
+        //            //Commons.Modules.ObjSystems.MLoadLookUpEditN(cboMSCN, dt, "ID_CN", "MS_CN", "MS_CN", "");
+
+        //            cboMSCN.Properties.DataSource = dt;
+        //            cboMSCN.Properties.PopulateViewColumns();
+        //            cboMSCN.Properties.View.PopulateColumns();
+        //            cboMSCN.Properties.DisplayMember = "MS_CN";
+        //            cboMSCN.Properties.ValueMember = "ID_CN";
+
+        //            cboMSCN.Properties.View.PopulateColumns(cboMSCN.Properties.DataSource);
+        //            cboMSCN.Properties.View.Columns["ID_CN"].Visible = false;
+        //            cboMSCN.Properties.View.Columns["HO_TEN"].Visible = true;
+        //            cboMSCN.Properties.View.Columns["CDL"].Visible = false;
+        //            try { cboMSCN.Properties.View.Columns["MS_CN"].Caption = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "MS_CN"); } catch { }
+
+        //            cboMSCN.Properties.ShowDropDown = DevExpress.XtraEditors.Controls.ShowDropDown.Never;
+        //            cboMSCN.Properties.PopupFilterMode = DevExpress.XtraEditors.PopupFilterMode.Contains;
+        //            cboMSCN.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard;
+        //            cboMSCN.Properties.ImmediatePopup = true;
+        //        }
+        //        else
+        //        {
+        //            cboMSCN.Properties.DataSource = dt;
+        //        }
+
+        //        cboMSCN.GotFocus += cboMSCN_Click;
+        //    }
+        //    catch { }
+        //}
+        //private void cboMSCN_Click(object sender, EventArgs e)
+        //{
+        //    cboMSCN.SelectAll();
+        //}
     }
 }

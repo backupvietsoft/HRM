@@ -12,19 +12,23 @@ namespace Vs.HRM
     {
         bool cothem = false;
         int idhdld = 0;
+        string sSoHD = "";
+        string sNgayHD = "";
         public frmPhuLucHDLD(string sohd, string ngayhd, int idhd)
         {
             InitializeComponent();
-            Commons.Modules.ObjSystems.ThayDoiNN(this, layoutControlGroup1, windowsUIButton);
-            lbl_SoHD.Text = sohd;
-            lbl_NgayHD.Text = ngayhd;
+            sSoHD = sohd;
+            sNgayHD = ngayhd;
             idhdld = idhd;
+            Commons.Modules.ObjSystems.ThayDoiNN(this, layoutControlGroup1, windowsUIButton);
         }
 
         #region sự kiện của form
         private void frmPhuLucHDLD_Load(object sender, EventArgs e)
         {
             //load combobox ID_QHLookUpEdit
+            lbl_SoHD.Text = sSoHD;
+            lbl_NgayHD.Text = sNgayHD;
             Commons.OSystems.SetDateEditFormat(NGAY_KYDateEdit);
             Commons.Modules.ObjSystems.MLoadLookUpEdit(NGUOI_KYLookUpEdit, Commons.Modules.ObjSystems.DataNguoiKy(), "ID_NK", "HO_TEN", "HO_TEN");
             LoadgrdPhuLucHopDong("-1");

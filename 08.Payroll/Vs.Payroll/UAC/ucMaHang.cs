@@ -120,6 +120,12 @@ namespace Vs.Payroll
             if (grdData.DataSource == null)
             {
                 Commons.Modules.ObjSystems.MLoadXtraGrid(grdData, grvData, dt, true, false, false, false, true, this.Name);
+                grvData.Columns["TEN_DV"].OptionsColumn.AllowEdit = false;
+                grvData.Columns["TEN_NGAN"].OptionsColumn.AllowEdit = false;
+                grvData.Columns["TEN_LOAI_HH"].OptionsColumn.AllowEdit = false;
+                grvData.Columns["TEN_HH"].OptionsColumn.AllowEdit = false;
+                grvData.Columns["NGAY_LAP"].OptionsColumn.AllowEdit = false;
+
             }
             else
                 try { grdData.DataSource = dt; } catch { }
@@ -388,7 +394,7 @@ namespace Vs.Payroll
         {
             try
             {
-                if (grvData.FocusedColumn.FieldName.ToString() != "CLOSED" && grvData.FocusedColumn.FieldName.ToString() != "QUI_TRINH_HOAN_CHINH") return;
+                if (grvData.FocusedColumn.FieldName.ToString() != "CLOSED") return;
                 DevExpress.XtraGrid.Views.Grid.GridView view = sender as DevExpress.XtraGrid.Views.Grid.GridView;
                 if (e.MenuType == DevExpress.XtraGrid.Views.Grid.GridMenuType.Row)
                 {

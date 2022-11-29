@@ -2414,12 +2414,12 @@ D:\01.SourceCode\02.HRM\01.VietSoftHRM\VietSoftHRM\obj\Debug\VietSoftHRM.csproj.
 D:\01.SourceCode\02.HRM\01.VietSoftHRM\VietSoftHRM\obj\Debug\VietSoftHRM.csproj.CopyComplete
 D:\01.SourceCode\02.HRM\01.VietSoftHRM\VietSoftHRM\obj\Debug\VietSoftHRM.exe
 D:\01.SourceCode\02.HRM\01.VietSoftHRM\VietSoftHRM\obj\Debug\VietSoftHRM.pdb
+F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\VietSoftHRM.exe
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Template\TemplateGiamLaoDong.xlsx
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Template\TemplateTaiNanLaoDong.xlsx
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Template\TemplateTangLaoDong.xlsx
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\lib\vsconfig.xml
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\VietSoftHRM.exe.config
-F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\VietSoftHRM.exe
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\VietSoftHRM.pdb
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Commons.dll
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\CredentialManagement.dll

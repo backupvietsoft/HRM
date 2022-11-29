@@ -576,8 +576,13 @@ namespace Vs.Recruit
                     int selectedRowHandle = selectedRowHandles[i];
                     if (selectedRowHandle >= 0)
                     {
-
-                        SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "UPDATE dbo.YCTD_VI_TRI_TUYEN SET ID_TT_VT = 7 WHERE ID_YCTD = " + grvVTYC.GetRowCellValue(selectedRowHandle, "ID_YCTD") + " AND ID_VTTD = " + grvVTYC.GetRowCellValue(selectedRowHandle, "ID_VTTD") + "");
+                        SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "UPDATE dbo.YCTD_VI_TRI_TUYEN SET ID_TT_VT = 8 WHERE ID_YCTD = " + grvVTYC.GetRowCellValue(selectedRowHandle, "ID_YCTD") + " AND ID_VTTD = " + grvVTYC.GetRowCellValue(selectedRowHandle, "ID_VTTD") + "");
+                        //kiểm tra cập nhật tình trạng YCTD
+                        int n = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT COUNT(*) FROM dbo.YCTD_VI_TRI_TUYEN A WHERE A.ID_TT_VT NOT IN (4,7,8) AND A.ID_YCTD = "+ grvVTYC.GetRowCellValue(selectedRowHandle, "ID_YCTD") + " "));
+                        if(n == 0)
+                        {
+                            SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "UPDATE dbo.YEU_CAU_TUYEN_DUNG SET ID_TT = 3 WHERE ID_YCTD = " + grvVTYC.GetRowCellValue(selectedRowHandle, "ID_YCTD") + "");
+                        }    
                     }
                 }
                 LoadgrdVTYC();

@@ -117,7 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="lblLuuY1.ExpressionBindings" xml:space="preserve">
-    <value>Iif([DATA].[MSDV] == 'DMT','&lt;i&gt;&lt;u&gt;&lt;b&gt;Lưu ý&lt;/b&gt;:Đi giày dép kín mũi đến công ty 7h30 có mặt tại phòng TD&lt;/u&gt;&lt;/i&gt;','&lt;i&gt;&lt;u&gt;&lt;b&gt;Lưu ý&lt;/b&gt;:Đi giày dép kín mũi đến công ty&lt;/u&gt;&lt;/i&gt;&lt;br/&gt; -&lt;u&gt;Mang theo CCCD gốc&lt;/u&gt;&lt;br/&gt;- &lt;u&gt;&lt;b&gt;07:30&lt;/b&gt; Có mặt tại phòng bảo vệ&lt;/u&gt;')</value>
-  </data>
 </root>

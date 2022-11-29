@@ -207,6 +207,9 @@ namespace Vs.Category
                     grvChung.Columns["ID_DTL"].Visible = false;
                     grvChung.Columns["ID_USER_CHUYEN"].Visible = false;
                     grvChung.Columns["ID_USER_DEN"].Visible = false;
+                    grvChung.Columns["ID_DU"].Visible = false;
+                    grvChung.Columns["ID_DB"].Visible = false;
+                    grvChung.Columns["TAI_LIEU_DINH_KEM"].Visible = false;
                 }
                 else
                     grdChung.DataSource = dt;
@@ -226,6 +229,7 @@ namespace Vs.Category
                 {
                     chkDINH_KEM.Checked = string.IsNullOrEmpty(Convert.ToString(dt1.Rows[0]["DINH_KEM"])) ? false : Convert.ToBoolean(dt1.Rows[0]["DINH_KEM"]);
                     chkKHAN_CAP.Checked = string.IsNullOrEmpty(Convert.ToString(dt1.Rows[0]["KHAN_CAP"])) ? false : Convert.ToBoolean(dt1.Rows[0]["KHAN_CAP"]);
+                    txtTaiLieu.Text = dt1.Rows[0]["TAI_LIEU_DINH_KEM"].ToString();
                 }
             }
             catch (Exception ex)
@@ -268,5 +272,9 @@ namespace Vs.Category
 
         #endregion
 
+        private void txtTaiLieu_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+            Commons.Modules.ObjSystems.OpenHinh(txtTaiLieu.Text);
+        }
     }
 }

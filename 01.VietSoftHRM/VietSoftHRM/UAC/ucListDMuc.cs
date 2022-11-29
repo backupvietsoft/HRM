@@ -130,6 +130,7 @@ namespace VietSoftHRM
                                 break;
                             }
                         case "spGetListXI_NGHIEP":
+                        case "spGetListXI_DON_VI":
                             {
                                 grdDanhMuc.ContextMenuStrip = contextMenuStrip1;
                                 break;
@@ -676,6 +677,8 @@ namespace VietSoftHRM
             frm.iiD_XN = Convert.ToInt64(grvDanhMuc.GetFocusedRowCellValue("ID_XN"));
             frm.ShowDialog();
         }
+
+
         private void toolThongBaoTuyenDung_Click(object sender, EventArgs e)
         {
             frmThongBaoTuyenDung frm = new frmThongBaoTuyenDung();
@@ -686,6 +689,18 @@ namespace VietSoftHRM
             frm.iID_LCV = Convert.ToInt64(grvDanhMuc.GetFocusedRowCellValue("ID_LCV"));
             frm.ShowDialog();
         }
+        private void toolNguoiDanhGia_Click(object sender, EventArgs e)
+        {
+            frmNguoiDanhGia frm = new frmNguoiDanhGia();
+            double iW, iH;
+            iW = Screen.PrimaryScreen.WorkingArea.Width / 1.5;
+            iH = Screen.PrimaryScreen.WorkingArea.Height / 1.5;
+            frm.Size = new Size((int)iW, (int)iH);
+            frm.iiD_DV = Convert.ToInt64(grvDanhMuc.GetFocusedRowCellValue("ID_DV"));
+            frm.sTEN_DV = grvDanhMuc.GetFocusedRowCellValue("TEN_DV").ToString();
+            frm.ShowDialog();
+        }
+
         private void grvDanhMuc_PopupMenuShowing(object sender, PopupMenuShowingEventArgs e)
         {
             try
@@ -694,6 +709,7 @@ namespace VietSoftHRM
                 {
                     contextMenuStrip1.Items[0].Visible = true;
                     contextMenuStrip1.Items[1].Visible = false;
+                    contextMenuStrip1.Items[2].Visible = false;
                     if (e.HitInfo.InDataRow)
                     {
                         contextMenuStrip1.Show(Cursor.Position.X, Cursor.Position.Y);
@@ -707,6 +723,21 @@ namespace VietSoftHRM
                 {
                     contextMenuStrip1.Items[0].Visible = false;
                     contextMenuStrip1.Items[1].Visible = true;
+                    contextMenuStrip1.Items[2].Visible = false;
+                    if (e.HitInfo.InDataRow)
+                    {
+                        contextMenuStrip1.Show(Cursor.Position.X, Cursor.Position.Y);
+                    }
+                    else
+                    {
+                        contextMenuStrip1.Hide();
+                    }
+                }
+                if (Commons.Modules.sPS == "spGetListDON_VI")
+                {
+                    contextMenuStrip1.Items[0].Visible = false;
+                    contextMenuStrip1.Items[1].Visible = false;
+                    contextMenuStrip1.Items[2].Visible = true;
                     if (e.HitInfo.InDataRow)
                     {
                         contextMenuStrip1.Show(Cursor.Position.X, Cursor.Position.Y);
@@ -722,6 +753,6 @@ namespace VietSoftHRM
             }
         }
 
-       
+   
     }
 }

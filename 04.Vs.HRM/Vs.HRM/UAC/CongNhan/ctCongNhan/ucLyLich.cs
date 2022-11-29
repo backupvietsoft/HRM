@@ -9,6 +9,12 @@ using System.Windows.Forms;
 using Vs.Report;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
+using System.Linq;
+using DevExpress.Utils.Menu;
+using DevExpress.XtraEditors.Repository;
+using DevExpress.Utils;
+using DevExpress.XtraGrid.Views.Grid.ViewInfo;
+
 namespace Vs.HRM
 {
     public partial class ucLyLich : DevExpress.XtraEditors.XtraUserControl
@@ -20,12 +26,30 @@ namespace Vs.HRM
         bool HopLeMT = true;
         bool HopLeNgaySinh = true;
         bool isCancel = false;
-        string strDuongDan = "";
+        //string strDuongDan = "";
         private ucCTQLNS uc;
         public ucLyLich(Int64 id)
         {
+            DevExpress.Utils.Paint.TextRendererHelper.UseScriptAnalyse = false;
             InitializeComponent();
+            //Control.CheckForIllegalCrossThreadCalls = false;
             Commons.Modules.ObjSystems.ThayDoiNN(this, Root, Tab, windowsUIButton);
+            //string f = "c:\\Layout.xml";
+            // Save the layout to an XML file.
+            //dataLayoutControl1.SaveLayoutToXml(f);
+            // ...
+            // Restore a previously saved layout.
+            //dataLayoutControl1.RestoreLayoutFromXml(f);
+            //Thread threadLoadNN = new Thread(delegate ()
+            //{
+            //    if (this.InvokeRequired)
+            //    {
+            //        this.Invoke(new MethodInvoker(delegate
+            //        {
+            //            dataLayoutControl1.RestoreLayoutFromXml(f);
+            //        }));
+            //    }
+            //}, 100); threadLoadNN.Start();
             idcn = id;
         }
         private void ucLyLich_Load(object sender, EventArgs e)
@@ -163,6 +187,7 @@ namespace Vs.HRM
                 cothem = true;
             BinDingData(cothem);
             LoadgrdBangCap();
+            LoadgrdTaiLieu();
             Commons.Modules.sLoad = "";
         }
 
@@ -372,7 +397,10 @@ namespace Vs.HRM
                         //LoadCmbLoc(1);
                         BinDingData(true);
                         enableButon(false);
+                        LoadgrdBangCap();
+                        LoadgrdTaiLieu();
                         Commons.Modules.ObjSystems.AddnewRow(grvBangCapCN, true);
+                        Commons.Modules.ObjSystems.AddnewRow(grvTaiLieu, true);
                         THAM_GIA_BHXHCheckEdit_CheckedChanged(null, null);
                         LD_NNCheckEdit_CheckedChanged(null, null);
                         break;
@@ -402,6 +430,7 @@ namespace Vs.HRM
                             this.LockTheoHDLD();
                         }
                         Commons.Modules.ObjSystems.AddnewRow(grvBangCapCN, true);
+                        Commons.Modules.ObjSystems.AddnewRow(grvTaiLieu, true);
                         THAM_GIA_BHXHCheckEdit_CheckedChanged(null, null);
                         LD_NNCheckEdit_CheckedChanged(null, null);
                         break;
@@ -444,12 +473,13 @@ namespace Vs.HRM
                         }
                         if (SaveData())
                         {
-                            Commons.Modules.ObjSystems.LuuDuongDan(strDuongDan, txtTaiLieu.Text);
+                            //Commons.Modules.ObjSystems.LuuDuongDan(strDuongDan, txtTaiLieu.Text);
                             this.ClearError();
                             BinDingData(false);
                             enableButon(true);
                         }
                         Commons.Modules.ObjSystems.DeleteAddRow(grvBangCapCN);
+                        Commons.Modules.ObjSystems.DeleteAddRow(grvTaiLieu);
                         break;
                     }
                 case "khongluu":
@@ -459,8 +489,24 @@ namespace Vs.HRM
                         //LoadCmbLoc(3);
                         BinDingData(false);
                         enableButon(true);
+                        LoadgrdTaiLieu();
+                        try
+                        {
+                            string[] fileList = Directory.GetFiles(Commons.Modules.sDDTaiLieu + '\\' + this.Name.Replace("uc", "") + '\\' + MS_CNTextEdit.Text);
+                            foreach (string item in fileList)
+                            {
+                                if (Commons.Modules.ObjSystems.ConvertDatatable(grvTaiLieu).AsEnumerable().Count(x => x["DUONG_DAN"].Equals(item)) == 0)
+                                {
+                                    Commons.Modules.ObjSystems.Xoahinh(item);
+                                }
+                            }
+                        }
+                        catch
+                        {
+                        }
                         Commons.Modules.ObjSystems.ClearValidationProvider(dxValidationProvider1);
                         Commons.Modules.ObjSystems.DeleteAddRow(grvBangCapCN);
+                        Commons.Modules.ObjSystems.DeleteAddRow(grvTaiLieu);
                         Commons.Modules.sLoad = "";
                         this.ClearError();
                         break;
@@ -496,7 +542,7 @@ namespace Vs.HRM
                     }
                 case "in":
                     {
-                        if (Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString() == "DM"|| Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString() == "NB")
+                        if (Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString() == "DM" || Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString() == "NB")
                         {
                             frmInLyLichCN InLyLichCN = new frmInLyLichCN(Commons.Modules.iCongNhan);
                             InLyLichCN.ShowDialog();
@@ -557,7 +603,17 @@ namespace Vs.HRM
                 SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "DELETE dbo.BAO_HIEM_Y_TE WHERE ID_CN =  " + Commons.Modules.iCongNhan + "");
                 SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "DELETE dbo.BANG_CAP WHERE ID_CN =  " + Commons.Modules.iCongNhan + "");
                 SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "DELETE dbo.CONG_NHAN WHERE ID_CN = " + Commons.Modules.iCongNhan + "");
+                try
+                {
+                    Directory.Delete(Commons.Modules.sDDTaiLieu + '\\' + this.Name.Replace("uc", "") + '\\' + MS_CNTextEdit.Text,true);
+                }
+                catch
+                {
+                }
                 BinDingData(true);
+                LoadgrdBangCap();
+                LoadgrdTaiLieu();
+             
             }
             catch (Exception ex)
             {
@@ -679,7 +735,7 @@ namespace Vs.HRM
                 ID_TT_HDLookUpEdit.EditValue = null;
                 ID_TT_HTLookUpEdit.EditValue = null;
                 ID_LHDLDLookUpEdit.EditValue = "";
-                txtTaiLieu.EditValue = "";
+                //txtTaiLieu.EditValue = "";
                 HINH_THUC_TUYENTextEdit.EditValue = "";
                 LD_TINHCheckEdit.EditValue = false;
                 LAO_DONG_CNCheckEdit.EditValue = false;
@@ -785,7 +841,7 @@ namespace Vs.HRM
                     ID_TT_HDLookUpEdit.EditValue = dt.Rows[0]["ID_TT_HD"];
                     ID_TT_HTLookUpEdit.EditValue = dt.Rows[0]["ID_TT_HT"];
                     ID_LHDLDLookUpEdit.EditValue = dt.Rows[0]["ID_LHDLD"];
-                    txtTaiLieu.EditValue = dt.Rows[0]["FILE_DK"];
+                    //txtTaiLieu.EditValue = dt.Rows[0]["FILE_DK"];
                     HINH_THUC_TUYENTextEdit.EditValue = dt.Rows[0]["HINH_THUC_TUYEN"];
                     LD_TINHCheckEdit.EditValue = dt.Rows[0]["LD_TINH"];
                     LAO_DONG_CNCheckEdit.EditValue = dt.Rows[0]["LAO_DONG_CONG_NHAT"];
@@ -877,6 +933,88 @@ namespace Vs.HRM
             }
         }
 
+        private void LoadgrdTaiLieu()
+        {
+            //DataTable dt = new DataTable();
+            //dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr,CommandType.Text, "SELECT ID_CN,DUONG_DAN,TEN_TAI_LIEU,NGUOI_UL,THOI_GIAN_UL,GHI_CHU FROM dbo.CONG_NHAN_TAI_LIEU WHERE ID_CN = "+idcn+""));
+            //if (grdTaiLIeu.DataSource == null)
+            //{
+            //    Commons.Modules.ObjSystems.MLoadXtraGrid(grdTaiLIeu, grvTaiLieu, dt, false, false, true, true, true, this.Name);
+            //}
+            //else
+            //{
+            //    grdBangCapCN.DataSource = dt;
+            //}
+
+            try
+            {
+                DataTable dt = new DataTable();
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT ID_CN,DUONG_DAN,TEN_TAI_LIEU,NGUOI_UL,THOI_GIAN_UL,GHI_CHU FROM dbo.CONG_NHAN_TAI_LIEU WHERE ID_CN = " + idcn + ""));
+                if (grdTaiLIeu.DataSource == null)
+                {
+                    Commons.Modules.ObjSystems.MLoadXtraGrid(grdTaiLIeu, grvTaiLieu, dt, true, true, true, true, true, this.Name);
+                    grvTaiLieu.Columns["ID_CN"].Visible = false;
+                    RepositoryItemButtonEdit btnEdit = new RepositoryItemButtonEdit();
+                    grvTaiLieu.Columns["DUONG_DAN"].ColumnEdit = btnEdit;
+                    btnEdit.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+                    btnEdit.ButtonClick += BtnEdit_ButtonClick;
+                    //btnEdit.DoubleClick += BtnEdit_DoubleClick;
+                    for (int i = 2; i < grvTaiLieu.Columns.Count -1; i++)
+                    {
+                        grvTaiLieu.Columns[i].OptionsColumn.AllowEdit = false;
+                    }
+                }
+                else
+                {
+                    grdTaiLIeu.DataSource = dt;
+                }
+            }
+            catch
+            {
+            }
+
+        }
+
+        private void BtnEdit_DoubleClick(object sender, EventArgs e)
+        {
+            //try
+            //{
+            //    ButtonEdit a = sender as ButtonEdit;
+            //    Commons.Modules.ObjSystems.OpenHinh(Commons.Modules.sDDTaiLieu + '\\' + this.Name.Replace("uc", "") + '\\' + MS_CNTextEdit.Text + '\\' + a.Text);
+            //}
+            //catch
+            //{
+            //}
+        }
+
+        private void BtnEdit_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+            try
+            {
+                if (Commons.Modules.iLOAI_CN == 0)
+                {
+                    XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgBanKhongCoQuyenTruyCapDD"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgfrmThongBao"), MessageBoxButtons.OK);
+                    return;
+                }
+                ButtonEdit a = sender as ButtonEdit;
+                ofdfile.Filter = "All Files|*.txt;*.docx;*.doc;*.pdf*.xls;*.xlsx;*.pptx;*.ppt|Text File (.txt)|*.txt|Word File (.docx ,.doc)|*.docx;*.doc|Spreadsheet (.xls ,.xlsx)|  *.xls ;*.xlsx";
+                ofdfile.FileName = "";
+                if (ofdfile.ShowDialog() == DialogResult.OK)
+                {
+                    string sduongDan = ofdfile.FileName.ToString().Trim();
+                    if (ofdfile.FileName.ToString().Trim() == "") return;
+                    Commons.Modules.ObjSystems.LuuDuongDan(ofdfile.FileName, ofdfile.SafeFileName, this.Name.Replace("uc", "") + '\\' + MS_CNTextEdit.Text);
+                    string folderLocation = Commons.Modules.sDDTaiLieu + '\\' + this.Name.Replace("uc", "") + '\\' + MS_CNTextEdit.Text + '\\' + ofdfile.SafeFileName;
+                    a.Text = folderLocation;
+                }
+            }
+            catch
+            {
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgBanKhongCoQuyenTruyCapDD"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgfrmThongBao"), MessageBoxButtons.OK);
+            }
+        }
+
+
         private void enableButon(bool visible)
         {
             windowsUIButton.Buttons[0].Properties.Visible = visible;
@@ -895,11 +1033,11 @@ namespace Vs.HRM
             Commons.Modules.bEnabel = !visible;
 
 
-            if(Commons.Modules.ObjSystems.KyHieuDV(Convert.ToInt64(ID_DVLookUpEdit.EditValue)) != "DM"){
+            if (Commons.Modules.KyHieuDV != "DM")
+            {
                 MS_CNTextEdit.Properties.ReadOnly = visible;
             }
             //MS_THE_CCTextEdit.Properties.ReadOnly = visible;
-
             ID_QGLookUpEdit.Properties.ReadOnly = visible;
             HOTextEdit.Properties.ReadOnly = visible;
             TENTextEdit.Properties.ReadOnly = visible;
@@ -1034,12 +1172,19 @@ namespace Vs.HRM
             try
             {
                 //tạo bảng tạm bằng cấp
-                string sTBBangCap = "sbtBC" + Commons.Modules.UserName;
+                string sTBBangCap = "sbtBC" + Commons.Modules.iIDUser;
                 if (Commons.Modules.ObjSystems.ConvertDatatable(grvBangCapCN) == null)
                 {
                     sTBBangCap = "";
                 }
                 Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sTBBangCap, Commons.Modules.ObjSystems.ConvertDatatable(grvBangCapCN), "");
+
+                string sTBTaiLieu = "sbtTL" + Commons.Modules.iIDUser;
+                if (Commons.Modules.ObjSystems.ConvertDatatable(grvTaiLieu) == null)
+                {
+                    sTBTaiLieu = "";
+                }
+                Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sTBTaiLieu, Commons.Modules.ObjSystems.ConvertDatatable(grvTaiLieu), "");
 
                 System.Data.SqlClient.SqlConnection conn;
                 conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
@@ -1117,12 +1262,34 @@ namespace Vs.HRM
                 cmd.Parameters.Add("@ID_KV", SqlDbType.BigInt).Value = cboID_KV.Text == "" ? DBNull.Value : cboID_KV.EditValue;
                 cmd.Parameters.Add("@Them", SqlDbType.Bit).Value = cothem;
                 cmd.Parameters.Add("@sbtBC", SqlDbType.NVarChar).Value = sTBBangCap;
+                cmd.Parameters.Add("@sbtTL", SqlDbType.NVarChar).Value = sTBTaiLieu;
                 cmd.Parameters.Add("@DC_KHAI_SINH", SqlDbType.NVarChar).Value = txtDIA_CHI_KS.Text;
                 cmd.Parameters.Add("@ID_TP_KS", SqlDbType.BigInt).Value = cboID_TP_KS.Text == "" ? DBNull.Value : cboID_TP_KS.EditValue;
                 cmd.Parameters.Add("@ID_QUAN_KS", SqlDbType.BigInt).Value = cboID_QUAN_KS.Text == "" ? DBNull.Value : cboID_QUAN_KS.EditValue;
                 cmd.Parameters.Add("@ID_PX_KS", SqlDbType.BigInt).Value = cboID_PX_KS.Text == "" ? DBNull.Value : cboID_PX_KS.EditValue;
                 cmd.CommandType = CommandType.StoredProcedure;
                 Commons.Modules.iCongNhan = Convert.ToInt64(cmd.ExecuteScalar());
+                try
+                {
+
+
+                    //xóa hết file không có trong 
+                    string[] fileList = Directory.GetFiles(Commons.Modules.sDDTaiLieu + '\\' + this.Name.Replace("uc", "") + '\\' + MS_CNTextEdit.Text);//lay danh sách file cho vao mảng
+                                                                                                                                                     //duyet mang file trong thư mục
+                                                                                                                                                     //duyệt list file không có trong lưới thì xóa
+                    foreach (string item in fileList)
+                    {
+                        //kiểm tra item có trong table không
+                        if (Commons.Modules.ObjSystems.ConvertDatatable(grvTaiLieu).AsEnumerable().Count(x => x["DUONG_DAN"].Equals(item)) == 0)
+                        {
+                            Commons.Modules.ObjSystems.Xoahinh(item);
+                        }
+                    }
+                }
+                catch
+                {
+                }
+
                 return true;
             }
             catch (Exception ex)
@@ -1251,11 +1418,11 @@ namespace Vs.HRM
                             catch { }
                         }
 
-                        break; 
+                        break;
                     }
-             
+
             }
-           
+
             if (isCancel) return;
             Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(ID_XNLookUpEdit, Commons.Modules.ObjSystems.DataXiNghiep(Convert.ToInt32(ID_DVLookUpEdit.EditValue), false), "ID_XN", "TEN_XN", "TEN_XN", true, true);
             //CheckMS();
@@ -1647,11 +1814,11 @@ namespace Vs.HRM
         }
         private void MS_CNTextEdit_Validated(object sender, EventArgs e)
         {
-            if(Commons.Modules.ObjSystems.KyHieuDV(Convert.ToInt64(ID_DVLookUpEdit.EditValue)) == "DM")
+            if (Commons.Modules.ObjSystems.KyHieuDV(Convert.ToInt64(ID_DVLookUpEdit.EditValue)) == "DM")
             {
                 CheckMS();
             }
-           
+
         }
 
         private void MS_THE_CCTextEdit_Validated(object sender, EventArgs e)
@@ -1741,69 +1908,142 @@ namespace Vs.HRM
 
         private void MS_CNTextEdit_EditValueChanged(object sender, EventArgs e)
         {
-           
+
             try
             {
                 MS_THE_CCTextEdit.Text = MS_CNTextEdit.Text;
             }
             catch { };
-                    
-            
+
+
         }
-        private void LayDuongDan()
+        //private void LayDuongDan()
+        //{
+        //    string strPath_DH = txtTaiLieu.Text;
+        //    strDuongDan = ofdfile.FileName;
+
+        //    var strDuongDanTmp = Commons.Modules.ObjSystems.CapnhatTL("Tai_Lieu_CN");
+        //    string[] sFile;
+        //    string TenFile;
+
+        //    TenFile = ofdfile.SafeFileName.ToString();
+        //    sFile = System.IO.Directory.GetFiles(strDuongDanTmp);
+
+        //    if (Commons.Modules.ObjSystems.KiemFileTonTai(strDuongDanTmp + @"\" + ofdfile.SafeFileName.ToString()) == false)
+        //        txtTaiLieu.Text = strDuongDanTmp + @"\" + ofdfile.SafeFileName.ToString();
+        //    else
+        //    {
+        //        TenFile = Commons.Modules.ObjSystems.STTFileCungThuMuc(strDuongDanTmp, TenFile);
+        //        txtTaiLieu.Text = strDuongDanTmp + @"\" + TenFile;
+        //    }
+        //}
+
+        //private void txtTaiLieu_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        //{
+        //    if (e.Button.Index == 0)
+        //    {
+        //        try
+        //        {
+        //            if (windowsUIButton.Buttons[10].Properties.Visible)
+        //            {
+        //                if (ofdfile.ShowDialog() == DialogResult.Cancel) return;
+        //                LayDuongDan();
+        //            }
+        //            else
+        //            {
+        //                if (txtTaiLieu.Text == "")
+        //                    return;
+        //                Commons.Modules.ObjSystems.OpenHinh(txtTaiLieu.Text);
+        //            }
+        //        }
+        //        catch
+        //        {
+        //        }
+        //    }
+        //    else
+        //    {
+        //        try
+        //        {
+        //            Commons.Modules.ObjSystems.Xoahinh(txtTaiLieu.Text);
+        //            txtTaiLieu.ResetText();
+        //            SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "UPDATE dbo.CONG_NHAN SET FILE_DK = NULL WHERE ID_CN =" + Commons.Modules.iCongNhan + "");
+        //        }
+        //        catch
+        //        {
+        //        }
+        //    }
+        //}
+
+        private void dataLayoutControl1_PopupMenuShowing(object sender, DevExpress.XtraLayout.PopupMenuShowingEventArgs e)
         {
-            string strPath_DH = txtTaiLieu.Text;
-            strDuongDan = ofdfile.FileName;
-
-            var strDuongDanTmp = Commons.Modules.ObjSystems.CapnhatTL("Tai_Lieu_CN");
-            string[] sFile;
-            string TenFile;
-
-            TenFile = ofdfile.SafeFileName.ToString();
-            sFile = System.IO.Directory.GetFiles(strDuongDanTmp);
-
-            if (Commons.Modules.ObjSystems.KiemFileTonTai(strDuongDanTmp + @"\" + ofdfile.SafeFileName.ToString()) == false)
-                txtTaiLieu.Text = strDuongDanTmp + @"\" + ofdfile.SafeFileName.ToString();
-            else
+            try
             {
-                TenFile = Commons.Modules.ObjSystems.STTFileCungThuMuc(strDuongDanTmp, TenFile);
-                txtTaiLieu.Text = strDuongDanTmp + @"\" + TenFile;
+                e.Menu.Items.Add(new DXMenuItem("&Save Layout", new EventHandler(SaveLayout)));
+            }
+            catch
+            {
             }
         }
-
-        private void txtTaiLieu_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        private void SaveLayout(object sender, EventArgs e)
         {
-            if (e.Button.Index == 0)
+        }
+
+        private void grvTaiLieu_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
+        {
+            if (e.Column.FieldName == "DUONG_DAN")
             {
                 try
                 {
-                    if (windowsUIButton.Buttons[10].Properties.Visible)
-                    {
-                            if (ofdfile.ShowDialog() == DialogResult.Cancel) return;
-                            LayDuongDan();
-                    }
-                    else
-                    {
-                        if (txtTaiLieu.Text == "")
-                            return;
-                        Commons.Modules.ObjSystems.OpenHinh(txtTaiLieu.Text);
-                    }
+                    grvTaiLieu.SetFocusedRowCellValue("TEN_TAI_LIEU", ofdfile.SafeFileName);
                 }
                 catch
                 {
                 }
             }
-            else
+        }
+
+        private void grvTaiLieu_InitNewRow(object sender, InitNewRowEventArgs e)
+        {
+            try
             {
-                try
+                GridView view = sender as GridView;
+                view.SetFocusedRowCellValue(view.Columns["ID_CN"], idcn);
+                view.SetFocusedRowCellValue(view.Columns["NGUOI_UL"], Commons.Modules.UserName);
+                view.SetFocusedRowCellValue(view.Columns["THOI_GIAN_UL"], DateTime.Now);
+            }
+            catch
+            {
+            }
+        }
+
+        private void grvTaiLieu_CellValueChanging(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
+        {
+            //if (e.Column.FieldName == "DUONG_DAN")
+            //{
+            //    try
+            //    {
+            //        grvTaiLieu.SetFocusedRowCellValue("TEN_TAI_LIEU", ofdfile.SafeFileName);
+            //    }
+            //    catch
+            //    {
+            //    }
+        }
+
+        private void grvTaiLieu_DoubleClick(object sender, EventArgs e)
+        {
+            DXMouseEventArgs ea = e as DXMouseEventArgs;
+            GridView view = sender as GridView;
+            GridHitInfo info = view.CalcHitInfo(ea.Location);
+
+            try
+            {
+                if (info.Column.FieldName == "DUONG_DAN" && info.RowHandle >= 0)
                 {
-                    Commons.Modules.ObjSystems.Xoahinh(txtTaiLieu.Text);
-                    txtTaiLieu.ResetText();
-                    SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "UPDATE dbo.CONG_NHAN SET FILE_DK = NULL WHERE ID_CN =" + Commons.Modules.iCongNhan + "");
+                    Commons.Modules.ObjSystems.OpenHinh(grvTaiLieu.GetFocusedRowCellValue("DUONG_DAN").ToString());
                 }
-                catch
-                {
-                }
+            }
+            catch
+            {
             }
         }
     }

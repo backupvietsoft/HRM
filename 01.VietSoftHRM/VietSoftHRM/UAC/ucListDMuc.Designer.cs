@@ -50,6 +50,7 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolDuLieuChoTD = new System.Windows.Forms.ToolStripMenuItem();
             this.toolThongBaoTuyenDung = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolNguoiDanhGia = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.grdDanhMuc)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grvDanhMuc)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
@@ -273,23 +274,31 @@
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolDuLieuChoTD,
-            this.toolThongBaoTuyenDung});
+            this.toolThongBaoTuyenDung,
+            this.toolNguoiDanhGia});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(199, 70);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(206, 92);
             // 
             // toolDuLieuChoTD
             // 
             this.toolDuLieuChoTD.Name = "toolDuLieuChoTD";
-            this.toolDuLieuChoTD.Size = new System.Drawing.Size(198, 22);
+            this.toolDuLieuChoTD.Size = new System.Drawing.Size(205, 22);
             this.toolDuLieuChoTD.Text = "Dữ liệu cho tuyển dụng";
             this.toolDuLieuChoTD.Click += new System.EventHandler(this.toolDuLieuChoTD_Click);
             // 
             // toolThongBaoTuyenDung
             // 
             this.toolThongBaoTuyenDung.Name = "toolThongBaoTuyenDung";
-            this.toolThongBaoTuyenDung.Size = new System.Drawing.Size(198, 22);
+            this.toolThongBaoTuyenDung.Size = new System.Drawing.Size(205, 22);
             this.toolThongBaoTuyenDung.Text = "Thông báo tuyển dụng";
             this.toolThongBaoTuyenDung.Click += new System.EventHandler(this.toolThongBaoTuyenDung_Click);
+            // 
+            // toolNguoiDanhGia
+            // 
+            this.toolNguoiDanhGia.Name = "toolNguoiDanhGia";
+            this.toolNguoiDanhGia.Size = new System.Drawing.Size(205, 22);
+            this.toolNguoiDanhGia.Text = "Người đánh giá tây nghề";
+            this.toolNguoiDanhGia.Click += new System.EventHandler(this.toolNguoiDanhGia_Click);
             // 
             // ucListDMuc
             // 
@@ -334,5 +343,6 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem toolDuLieuChoTD;
         private System.Windows.Forms.ToolStripMenuItem toolThongBaoTuyenDung;
+        private System.Windows.Forms.ToolStripMenuItem toolNguoiDanhGia;
     }
 }

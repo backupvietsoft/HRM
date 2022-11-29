@@ -92,34 +92,40 @@ namespace VietSoftHRM
         //login
         private void btn_login_Click(object sender, EventArgs e)
         {
-            if (checkLogin())
+            try
             {
-                SaveLogin();
-                SaveDatabase();
-                string strSQL = "SELECT ISNULL(USER_KHACH,0) USER_KHACH FROM dbo.USERS WHERE [USER_NAME] = '" + txt_user.Text.Trim() + "'";
-                try
+                if (checkLogin())
                 {
-
-                    if (Convert.ToBoolean(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, strSQL)) == true)
+                    SaveLogin();
+                    SaveDatabase();
+                    string strSQL = "SELECT ISNULL(USER_KHACH,0) USER_KHACH FROM dbo.USERS WHERE [USER_NAME] = '" + txt_user.Text.Trim() + "'";
+                    try
                     {
-                        Commons.Modules.chamCongK = true;
-                    }
-                    string sSetUp = "SELECT  ISNULL(N.SET_UP,0) SET_UP,US.ID_NHOM FROM dbo.USERS US INNER JOIN dbo.NHOM N ON N.ID_NHOM = US.ID_NHOM WHERE US.[USER_NAME] = '" + txt_user.Text.Trim().ToLower() + "'";
-                    DataTable dt = new DataTable();
-                    dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSetUp));
-                    Commons.Modules.iIDNhom = Convert.ToInt64(dt.Rows[0]["ID_NHOM"]);
-                    Commons.Modules.bSetUp = Convert.ToBoolean(dt.Rows[0]["SET_UP"]);
-                }
-                catch
-                {
-                    Commons.Modules.bSetUp = false;
-                }
 
-                //add user
-                this.Hide();
-                frmMain form2 = new frmMain();
-                form2.ShowDialog();
-                this.Close();
+                        if (Convert.ToBoolean(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, strSQL)) == true)
+                        {
+                            Commons.Modules.chamCongK = true;
+                        }
+                        string sSetUp = "SELECT  ISNULL(N.SET_UP,0) SET_UP,US.ID_NHOM FROM dbo.USERS US INNER JOIN dbo.NHOM N ON N.ID_NHOM = US.ID_NHOM WHERE US.[USER_NAME] = '" + txt_user.Text.Trim().ToLower() + "'";
+                        DataTable dt = new DataTable();
+                        dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSetUp));
+                        Commons.Modules.iIDNhom = Convert.ToInt64(dt.Rows[0]["ID_NHOM"]);
+                        Commons.Modules.bSetUp = Convert.ToBoolean(dt.Rows[0]["SET_UP"]);
+                    }
+                    catch
+                    {
+                        Commons.Modules.bSetUp = false;
+                    }
+
+                    //add user
+                    this.Hide();
+                    frmMain form2 = new frmMain();
+                    form2.ShowDialog();
+                    this.Close();
+                }
+            }
+            catch 
+            {
             }
         }
         private bool checkLogin()

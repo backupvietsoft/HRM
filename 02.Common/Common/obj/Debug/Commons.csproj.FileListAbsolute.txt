@@ -1047,6 +1047,7 @@ D:\01.SourceCode\02.HRM\02.Common\Common\bin\Debug\ja\DevExpress.RichEdit.v22.1.
 D:\01.SourceCode\02.HRM\02.Common\Common\bin\Debug\de\DevExpress.Office.v22.1.Core.resources.dll
 D:\01.SourceCode\02.HRM\02.Common\Common\bin\Debug\es\DevExpress.Office.v22.1.Core.resources.dll
 D:\01.SourceCode\02.HRM\02.Common\Common\bin\Debug\ja\DevExpress.Office.v22.1.Core.resources.dll
+D:\01.SourceCode\02.HRM\02.Common\Common\obj\Debug\Commons.csproj.AssemblyReference.cache
 D:\01.SourceCode\02.HRM\02.Common\Common\obj\Debug\Commons.frmYKienYC.resources
 D:\01.SourceCode\02.HRM\02.Common\Common\obj\Debug\Commons.frmPopUp.resources
 D:\01.SourceCode\02.HRM\02.Common\Common\obj\Debug\Commons.frmWaitForm.resources
@@ -1060,4 +1061,3 @@ D:\01.SourceCode\02.HRM\02.Common\Common\obj\Debug\Commons.csproj.CoreCompileInp
 D:\01.SourceCode\02.HRM\02.Common\Common\obj\Debug\Commons.csproj.CopyComplete
 D:\01.SourceCode\02.HRM\02.Common\Common\obj\Debug\Commons.dll
 D:\01.SourceCode\02.HRM\02.Common\Common\obj\Debug\Commons.pdb
-D:\01.SourceCode\02.HRM\02.Common\Common\obj\Debug\Commons.csproj.AssemblyReference.cache

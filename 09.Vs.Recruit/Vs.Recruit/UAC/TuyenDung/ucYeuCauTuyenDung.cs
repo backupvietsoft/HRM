@@ -224,7 +224,7 @@ namespace Vs.Recruit
                     cboNhanVien.NullText = "";
                     cboNhanVien.ValueMember = "ID_CN";
                     cboNhanVien.DisplayMember = "TEN_CN";
-                    cboNhanVien.DataSource = Commons.Modules.ObjSystems.DataCongNhanTheoLoaiCV(-1);
+                    cboNhanVien.DataSource = Commons.Modules.ObjSystems.DataCongNhanTheoBoPhan(-1);
                     cboNhanVien.View.PopulateColumns(cboNhanVien.DataSource);
                     cboNhanVien.View.Columns["ID_CN"].Visible = false;
                     cboNhanVien.View.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
@@ -236,9 +236,7 @@ namespace Vs.Recruit
 
                     //cboNhanVien.EditValueChanged += CboViTri_EditValueChanged;
                     //Convert.ToInt64(grvViTri.GetFocusedRowCellValue("ID_VTTD"))
-
-
-                    Commons.Modules.ObjSystems.AddCombXtra("ID_LCV", "TEN_LCV", grvThayThe, Commons.Modules.ObjSystems.DataLoaiCV(false, Convert.ToInt32(cboBPYC.EditValue)), true, "ID_LCV", this.Name, true);
+                    Commons.Modules.ObjSystems.AddCombXtra("ID_LCV", "TEN_LCV", grvThayThe, Commons.Modules.ObjSystems.DataLoaiCV(false), true, "ID_LCV", this.Name, true);
                 }
                 else
                 {
@@ -257,7 +255,7 @@ namespace Vs.Recruit
             {
                 DataTable dt = new DataTable();
                 SearchLookUpEdit lookUp = sender as SearchLookUpEdit;
-                dt = Commons.Modules.ObjSystems.DataCongNhanTheoLoaiCV(Convert.ToInt64(grvViTri.GetFocusedRowCellValue("ID_LCV")));
+                dt = Commons.Modules.ObjSystems.DataCongNhanTheoBoPhan(Convert.ToInt64(cboBPYC.EditValue));
                 lookUp.Properties.DataSource = dt;
 
                 DataTable dtTmp = new DataTable();
@@ -1311,7 +1309,7 @@ namespace Vs.Recruit
                     if (Commons.Modules.sLoad == "0Load") return;
                     try
                     {
-                        int n = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT COUNT(*)  FROM  dbo.MGetListNhanSuFormToDate('" + Commons.Modules.UserName + "'," + Commons.Modules.TypeLanguage + ",-1,-1,-1,GETDATE(),GETDATE()) WHERE ID_LCV = " + e.Value + ""));
+                        int n = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT COUNT(*)  FROM  dbo.MGetListNhanSuFormToDate('" + Commons.Modules.UserName + "'," + Commons.Modules.TypeLanguage + ",(SELECT TOP 1 ID_DV FROM dbo.XI_NGHIEP WHERE ID_XN = " + cboBPYC.EditValue + "),-1,-1,GETDATE(),GETDATE()) WHERE ID_LCV = " + e.Value + ""));
                         grvViTri.SetFocusedRowCellValue("SL_HC", n);
                     }
                     catch
@@ -1321,7 +1319,7 @@ namespace Vs.Recruit
 
                     try
                     {
-                        int n = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT  [dbo].[fnGetSoLuongDBLD]((SELECT TOP 1 ID_DV FROM dbo.XI_NGHIEP WHERE ID_XN = "+ cboBPYC.EditValue +"),"+ e.Value +",GETDATE())"));
+                        int n = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT  [dbo].[fnGetSoLuongDBLD]((SELECT TOP 1 ID_DV FROM dbo.XI_NGHIEP WHERE ID_XN = "+ cboBPYC.EditValue +"),"+ e.Value +",'"+ datNgayYC.DateTime.ToString("MM/dd/yyyy") + "')"));
                         grvViTri.SetFocusedRowCellValue("SL_DINH_BIEN", n);
                     }
                     catch { grvViTri.SetFocusedRowCellValue("SL_DINH_BIEN", 0); }

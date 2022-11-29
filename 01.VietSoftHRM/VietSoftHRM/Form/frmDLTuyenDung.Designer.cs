@@ -76,7 +76,7 @@
             this.dataLayoutControl1.Location = new System.Drawing.Point(0, 0);
             this.dataLayoutControl1.Name = "dataLayoutControl1";
             this.dataLayoutControl1.Root = this.Root;
-            this.dataLayoutControl1.Size = new System.Drawing.Size(565, 338);
+            this.dataLayoutControl1.Size = new System.Drawing.Size(975, 559);
             this.dataLayoutControl1.TabIndex = 7;
             this.dataLayoutControl1.Text = "dataLayoutControl1";
             // 
@@ -113,11 +113,11 @@
             this.btnALL.ContentAlignment = System.Drawing.ContentAlignment.MiddleRight;
             this.btnALL.Controls.Add(this.searchControl1);
             this.btnALL.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnALL.Location = new System.Drawing.Point(6, 300);
+            this.btnALL.Location = new System.Drawing.Point(12, 515);
             this.btnALL.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnALL.Name = "btnALL";
             this.btnALL.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            this.btnALL.Size = new System.Drawing.Size(553, 32);
+            this.btnALL.Size = new System.Drawing.Size(951, 32);
             this.btnALL.TabIndex = 34;
             this.btnALL.Text = "S";
             this.btnALL.UseButtonBackgroundImages = false;
@@ -138,10 +138,10 @@
             // 
             // grdThamGiaTD
             // 
-            this.grdThamGiaTD.Location = new System.Drawing.Point(12, 70);
+            this.grdThamGiaTD.Location = new System.Drawing.Point(24, 81);
             this.grdThamGiaTD.MainView = this.grvThamGiaTD;
             this.grdThamGiaTD.Name = "grdThamGiaTD";
-            this.grdThamGiaTD.Size = new System.Drawing.Size(541, 222);
+            this.grdThamGiaTD.Size = new System.Drawing.Size(927, 418);
             this.grdThamGiaTD.TabIndex = 5;
             this.grdThamGiaTD.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grvThamGiaTD});
@@ -159,10 +159,10 @@
             // 
             // grdViTri
             // 
-            this.grdViTri.Location = new System.Drawing.Point(12, 70);
+            this.grdViTri.Location = new System.Drawing.Point(24, 81);
             this.grdViTri.MainView = this.grvViTri;
             this.grdViTri.Name = "grdViTri";
-            this.grdViTri.Size = new System.Drawing.Size(541, 222);
+            this.grdViTri.Size = new System.Drawing.Size(927, 418);
             this.grdViTri.TabIndex = 4;
             this.grdViTri.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grvViTri});
@@ -188,7 +188,7 @@
             this.lblNhaMayBoPhan,
             this.layoutControlItem3});
             this.Root.Name = "Root";
-            this.Root.Size = new System.Drawing.Size(565, 338);
+            this.Root.Size = new System.Drawing.Size(975, 559);
             this.Root.TextVisible = false;
             // 
             // tabControl
@@ -196,7 +196,7 @@
             this.tabControl.Location = new System.Drawing.Point(0, 33);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedTabPage = this.tabThamGiaTD;
-            this.tabControl.Size = new System.Drawing.Size(555, 261);
+            this.tabControl.Size = new System.Drawing.Size(955, 470);
             this.tabControl.TabPages.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.tabVitri,
             this.tabThamGiaTD});
@@ -208,14 +208,14 @@
             this.layoutControlItem2});
             this.tabThamGiaTD.Location = new System.Drawing.Point(0, 0);
             this.tabThamGiaTD.Name = "tabThamGiaTD";
-            this.tabThamGiaTD.Size = new System.Drawing.Size(543, 224);
+            this.tabThamGiaTD.Size = new System.Drawing.Size(931, 422);
             // 
             // layoutControlItem2
             // 
             this.layoutControlItem2.Control = this.grdThamGiaTD;
             this.layoutControlItem2.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(543, 224);
+            this.layoutControlItem2.Size = new System.Drawing.Size(931, 422);
             this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem2.TextVisible = false;
             // 
@@ -225,14 +225,14 @@
             this.layoutControlItem1});
             this.tabVitri.Location = new System.Drawing.Point(0, 0);
             this.tabVitri.Name = "tabVitri";
-            this.tabVitri.Size = new System.Drawing.Size(543, 224);
+            this.tabVitri.Size = new System.Drawing.Size(931, 422);
             // 
             // layoutControlItem1
             // 
             this.layoutControlItem1.Control = this.grdViTri;
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(543, 224);
+            this.layoutControlItem1.Size = new System.Drawing.Size(931, 422);
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
             // 
@@ -251,16 +251,16 @@
             this.lblNhaMayBoPhan.MaxSize = new System.Drawing.Size(0, 33);
             this.lblNhaMayBoPhan.MinSize = new System.Drawing.Size(136, 33);
             this.lblNhaMayBoPhan.Name = "lblNhaMayBoPhan";
-            this.lblNhaMayBoPhan.Size = new System.Drawing.Size(555, 33);
+            this.lblNhaMayBoPhan.Size = new System.Drawing.Size(955, 33);
             this.lblNhaMayBoPhan.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.lblNhaMayBoPhan.TextSize = new System.Drawing.Size(166, 21);
             // 
             // layoutControlItem3
             // 
             this.layoutControlItem3.Control = this.btnALL;
-            this.layoutControlItem3.Location = new System.Drawing.Point(0, 294);
+            this.layoutControlItem3.Location = new System.Drawing.Point(0, 503);
             this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Size = new System.Drawing.Size(555, 34);
+            this.layoutControlItem3.Size = new System.Drawing.Size(955, 36);
             this.layoutControlItem3.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem3.TextVisible = false;
             // 
@@ -268,7 +268,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(565, 338);
+            this.ClientSize = new System.Drawing.Size(975, 559);
             this.Controls.Add(this.dataLayoutControl1);
             this.Name = "frmDLTuyenDung";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

@@ -38,14 +38,15 @@ namespace Vs.Recruit
                     {
                         try
                         {
-
-                            if(Datain() ==false)
+                            windowsUIButton.Focus();
+                            DateTime dt =  datTuThang.DateTime;
+                            if (Datain() == false)
                             {
                                 Commons.Modules.ObjSystems.msgChung(Commons.ThongBao.msgKhongCoDuLieuIn);
                                 return;
                             }
                             tbdonvi = new DataTable();
-                            tbdonvi.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr,CommandType.Text, "SELECT ID_DV,TEN_DV FROM dbo.DON_VI WHERE (ID_DV =" + cboDV.EditValue + " OR -1 = " + cboDV.EditValue +") ORDER BY ID_DV"));
+                            tbdonvi.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT ID_DV,TEN_DV FROM dbo.DON_VI WHERE (ID_DV =" + cboDV.EditValue + " OR -1 = " + cboDV.EditValue + ") ORDER BY ID_DV"));
                             InTinhHinhTD();
                         }
                         catch { }
@@ -75,7 +76,9 @@ namespace Vs.Recruit
                     return false;
                 }
                 //Commons.Modules.ObjSystems.MLoadXtraGrid(grdData, grvData, dt, false, true, false, true, false, this.Name);
+                grdData.DataSource = null;
                 grdData.DataSource = dt;
+                grvData.PopulateColumns(); 
                 grvData.Columns["ID_DV"].Visible = false;
                 grvData.Columns[0].Caption = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "colSTT"); /*"STT";*/
                 grvData.Columns[1].Caption = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "colVTTD");  /*"VỊ TRÍ CẦN TUYỂN DỤNG";*/
@@ -91,8 +94,7 @@ namespace Vs.Recruit
         {
             string resulst = MWsheet.Cells[DongBD, CotBD].Value;
             string[] array = resulst.Split('!');
-            return array[1];
-
+            return array[1] +"/"+array[0];
         }
         private void InTinhHinhTD()
         {

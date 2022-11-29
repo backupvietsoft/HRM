@@ -32,7 +32,7 @@ namespace Vs.HRM
 
             Commons.Modules.ObjSystems.ThayDoiNN(this);
             Commons.Modules.iCongNhan = iIdCN;
-            Commons.Modules.bEnabel = false; //bEnabel == false load view, bEnabel == true thì ko cho click ở chỗ khác
+            //Commons.Modules.bEnabel = false; //bEnabel == false load view, bEnabel == true thì ko cho click ở chỗ khác
         }
         private void ucCTQLNS_Load(object sender, EventArgs e)
         {
@@ -82,10 +82,10 @@ namespace Vs.HRM
         }
         private void Lb_Click(object sender, EventArgs e)
         {
-            if (Commons.Modules.bEnabel == true)
-            {
-                return;
-            }
+            //if (Commons.Modules.bEnabel == true)
+            //{
+            //    return;
+            //}
             try
             {
                 var lable = sender as LabelControl;
@@ -99,7 +99,7 @@ namespace Vs.HRM
                 {
                     if (lable.Name == lc.Name)
                     {
-                        lc.Appearance.ForeColor = Color.FromArgb(0, 0, 192);   //CommonColors.GetQuestionColor(DevExpress.LookAndFeel.UserLookAndFeel.Default);
+                        lc.Appearance.ForeColor = Color.FromArgb(0, 0, 192);
                         LoaduacCongNhan(lc.Name);
                         tab = lable.Name;
                         //return;

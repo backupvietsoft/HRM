@@ -31,48 +31,48 @@ namespace Vs.Category
         private void grvChung_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
         {
             return;
-            try
-            {
-                DevExpress.XtraGrid.Views.Grid.GridView view = sender as DevExpress.XtraGrid.Views.Grid.GridView;
-                if (e.MenuType == DevExpress.XtraGrid.Views.Grid.GridMenuType.Row)
-                {
-                    int rowHandle = e.HitInfo.RowHandle;
-                    e.Menu.Items.Clear();
+            //try
+            //{
+            //    DevExpress.XtraGrid.Views.Grid.GridView view = sender as DevExpress.XtraGrid.Views.Grid.GridView;
+            //    if (e.MenuType == DevExpress.XtraGrid.Views.Grid.GridMenuType.Row)
+            //    {
+            //        int rowHandle = e.HitInfo.RowHandle;
+            //        e.Menu.Items.Clear();
 
-                    string sStr = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "btnLinkDocument");
-                    DevExpress.Utils.Menu.DXMenuItem itemLinkDocument = new DevExpress.Utils.Menu.DXMenuItem(sStr, new EventHandler(LinkDocument));
-                    itemLinkDocument.Tag = string.IsNullOrEmpty(Convert.ToString(view.GetFocusedRowCellValue("ID_DQT"))) ? 0 : Convert.ToInt64(view.GetFocusedRowCellValue("ID_DQT"));
-                    e.Menu.Items.Add(itemLinkDocument);
+            //        string sStr = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "btnLinkDocument");
+            //        DevExpress.Utils.Menu.DXMenuItem itemLinkDocument = new DevExpress.Utils.Menu.DXMenuItem(sStr, new EventHandler(LinkDocument));
+            //        itemLinkDocument.Tag = string.IsNullOrEmpty(Convert.ToString(view.GetFocusedRowCellValue("ID_DQT"))) ? 0 : Convert.ToInt64(view.GetFocusedRowCellValue("ID_DQT"));
+            //        e.Menu.Items.Add(itemLinkDocument);
 
-                }
-            }
-            catch (Exception ex)
-            {
-                XtraMessageBox.Show(ex.Message);
-            }
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    XtraMessageBox.Show(ex.Message);
+            //}
         }
 
         private void grvDaDuyet_PopupMenuShowing(object sender, PopupMenuShowingEventArgs e)
         {
-            try
-            {
-                DevExpress.XtraGrid.Views.Grid.GridView view = sender as DevExpress.XtraGrid.Views.Grid.GridView;
-                if (e.MenuType == DevExpress.XtraGrid.Views.Grid.GridMenuType.Row)
-                {
-                    int rowHandle = e.HitInfo.RowHandle;
-                    e.Menu.Items.Clear();
+            //try
+            //{
+            //    DevExpress.XtraGrid.Views.Grid.GridView view = sender as DevExpress.XtraGrid.Views.Grid.GridView;
+            //    if (e.MenuType == DevExpress.XtraGrid.Views.Grid.GridMenuType.Row)
+            //    {
+            //        int rowHandle = e.HitInfo.RowHandle;
+            //        e.Menu.Items.Clear();
 
-                    string sStr = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "btnLinkDocument");
-                    DevExpress.Utils.Menu.DXMenuItem itemLinkDocument = new DevExpress.Utils.Menu.DXMenuItem(sStr, new EventHandler(LinkDocument));
-                    itemLinkDocument.Tag = string.IsNullOrEmpty(Convert.ToString(view.GetFocusedRowCellValue("ID_DQT"))) ? 0 : Convert.ToInt64(view.GetFocusedRowCellValue("ID_DQT"));
-                    e.Menu.Items.Add(itemLinkDocument);
+            //        string sStr = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "btnLinkDocument");
+            //        DevExpress.Utils.Menu.DXMenuItem itemLinkDocument = new DevExpress.Utils.Menu.DXMenuItem(sStr, new EventHandler(LinkDocument));
+            //        itemLinkDocument.Tag = string.IsNullOrEmpty(Convert.ToString(view.GetFocusedRowCellValue("ID_DQT"))) ? 0 : Convert.ToInt64(view.GetFocusedRowCellValue("ID_DQT"));
+            //        e.Menu.Items.Add(itemLinkDocument);
 
-                }
-            }
-            catch (Exception ex)
-            {
-                XtraMessageBox.Show(ex.Message);
-            }
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    XtraMessageBox.Show(ex.Message);
+            //}
         }
 
         private void LinkDocument(object sender, EventArgs e)

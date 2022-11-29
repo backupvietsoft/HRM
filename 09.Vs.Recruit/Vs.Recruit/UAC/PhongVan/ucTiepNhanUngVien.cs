@@ -453,6 +453,7 @@ namespace Vs.Recruit
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.ExecuteNonQuery();
                 Commons.Modules.ObjSystems.XoaTable(sBT);
+                LoadData();
             }
             catch (Exception ex) { }
         }

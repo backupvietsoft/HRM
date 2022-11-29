@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(rptGiayHenDiLam));
             this.TopMargin = new DevExpress.XtraReports.UI.TopMarginBand();
             this.BottomMargin = new DevExpress.XtraReports.UI.BottomMarginBand();
             this.Detail = new DevExpress.XtraReports.UI.DetailBand();
@@ -144,8 +143,6 @@
             this.lblLuuY1.Borders = DevExpress.XtraPrinting.BorderSide.None;
             this.lblLuuY1.BorderWidth = 1F;
             this.lblLuuY1.Dpi = 254F;
-            this.lblLuuY1.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", resources.GetString("lblLuuY1.ExpressionBindings"))});
             this.lblLuuY1.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblLuuY1.LocationFloat = new DevExpress.Utils.PointFloat(50.00002F, 1256.877F);
             this.lblLuuY1.Multiline = true;
@@ -156,7 +153,8 @@
             this.lblLuuY1.StylePriority.UseBorderWidth = false;
             this.lblLuuY1.StylePriority.UseFont = false;
             this.lblLuuY1.StylePriority.UseTextAlignment = false;
-            this.lblLuuY1.Text = "xrLabel4";
+            this.lblLuuY1.Text = "<i><u><b>Lưu ý</b>:Đi giày dép kín mũi đến công ty 7h25 có mặt tại phòng TD</u></" +
+    "i>";
             this.lblLuuY1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
             // 
             // xrLabel4
@@ -433,10 +431,6 @@
             this.xrLabel17.Borders = DevExpress.XtraPrinting.BorderSide.None;
             this.xrLabel17.BorderWidth = 1F;
             this.xrLabel17.Dpi = 254F;
-            this.xrLabel17.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif([DATA].[MSDV] == \'DMT\',\'Ảnh 4*6 hoặc 3*4<b> - 01 Bản</b>\' ,\'Giấy chứng nhận s" +
-                    "ức khỏe của <u><b>Cơ quan y tế từ cấp huyện trở lên</b></u>/Ảnh 4x6 <b>- 01 bản<" +
-                    "/b>\' ) ")});
             this.xrLabel17.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.xrLabel17.LocationFloat = new DevExpress.Utils.PointFloat(155.8328F, 734.1661F);
             this.xrLabel17.Multiline = true;
@@ -447,7 +441,7 @@
             this.xrLabel17.StylePriority.UseBorderWidth = false;
             this.xrLabel17.StylePriority.UseFont = false;
             this.xrLabel17.StylePriority.UseTextAlignment = false;
-            this.xrLabel17.Text = "xrLabel4";
+            this.xrLabel17.Text = "Ảnh 4*6 hoặc 3*4<b> - 01 ảnh</b>";
             this.xrLabel17.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
             // 
             // xrLabel18

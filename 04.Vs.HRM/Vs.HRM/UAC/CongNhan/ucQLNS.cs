@@ -387,23 +387,11 @@ namespace Vs.HRM
 
         private void grvDSCongNhan_RowCountChanged(object sender, EventArgs e)
         {
-            GridView view = sender as GridView;
-
             try
             {
-                int index = ItemForSumNhanVien.Text.IndexOf(':');
-                if (index > 0)
-                {
-                    if (view.RowCount > 0)
-                    {
-                        ItemForSumNhanVien.Text = ItemForSumNhanVien.Text.Substring(0, index) + ": " + view.RowCount.ToString();
-                    }
-                    else
-                    {
-                        ItemForSumNhanVien.Text = ItemForSumNhanVien.Text.Substring(0, index) + ": 0";
-                    }
-
-                }
+                DataTable dt = new DataTable();
+                dt = (DataTable)grdDSCongNhan.DataSource;
+                ItemForSumNhanVien.Text = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "SumNhanVien") + ": " + dt.Rows.Count;
             }
             catch
             {
@@ -421,7 +409,7 @@ namespace Vs.HRM
         {
             try
             {
-                if (grvDSCongNhan.RowCount == 0) 
+                if (grvDSCongNhan.RowCount == 0)
                     return;
                 if (grvDSCongNhan.GetRowCellValue(e.RowHandle, grvDSCongNhan.Columns["MAU_TT"]).ToString().Trim() == "#FFFFFF") return;
                 {

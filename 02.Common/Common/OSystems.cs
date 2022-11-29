@@ -795,7 +795,7 @@ namespace Commons
                 cbo.Properties.Columns[Ten].Caption = Modules.ObjLanguages.GetLanguage(Modules.ModuleName, "LookUpEdit", Ten, Modules.TypeLanguage);
                 return true;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return false;
             }
@@ -1525,8 +1525,19 @@ namespace Commons
                 grv.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
                 grv.Appearance.HeaderPanel.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
                 if (MloadNNgu)
-                    MLoadNNXtraGrid(grv, fName);
+                {
+                    Thread Thread3 = new Thread(delegate ()
+                    {
+                        if (grd.InvokeRequired)
+                        {
+                            grd.Invoke(new MethodInvoker(delegate
+                            {
+                                MLoadNNXtraGrid(grv, fName);
 
+                            }));
+                        }
+                    }, 100); Thread3.Start();
+                }
                 grv.OptionsBehavior.FocusLeaveOnTab = true;
                 //Commons.Modules.OXtraGrid.loadXmlgrd(grd);
                 return true;
@@ -1723,7 +1734,6 @@ namespace Commons
         {
 
             grv.OptionsView.RowAutoHeight = true;
-
             DataTable dtTmp = new DataTable();
             dtTmp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT DISTINCT KEYWORD , CASE " + Modules.TypeLanguage + " WHEN 0 THEN VIETNAM WHEN 1 THEN ENGLISH ELSE CHINESE END AS NN  FROM LANGUAGES WHERE FORM = N'" + fName + "' "));
             foreach (DevExpress.XtraGrid.Columns.GridColumn col in grv.Columns)
@@ -1733,6 +1743,7 @@ namespace Commons
                     col.Caption = GetNN(dtTmp, col.FieldName, fName);
                 }
             }
+
         }
 
         public void MLoadNNXtraGrid(DevExpress.XtraGrid.Views.Grid.GridView grv, string fName, int NN)
@@ -2262,9 +2273,9 @@ namespace Commons
 
 
                         }
-                        catch(Exception ex)
+                        catch (Exception ex)
                         {
-                            control1.Text = GetNN(dtTmp, control1.Name, frm.Name); 
+                            control1.Text = GetNN(dtTmp, control1.Name, frm.Name);
 
                         }
                     }
@@ -2409,56 +2420,54 @@ namespace Commons
 
         private void LoadNNGroupControl(XtraUserControl frm, LayoutControlGroup group, DataTable dtTmp)
         {
-            //TabbedControlGroup
-            foreach (var gr in group.Items)
+            try
             {
-                if (gr.GetType().Name == "LayoutControlGroup")
-                {
-                    LayoutControlGroup gro = (LayoutControlGroup)gr;
-                    gro.Text = GetNN(dtTmp, gro.Name, frm.Name);
-                    gro.AppearanceGroup.ForeColor = Color.FromArgb(0, 0, 192);
-                    gro.DoubleClick += delegate (object a, EventArgs b) { ControlGroup_DoubleClick(gro, b, frm.Name); };
-                    LoadNNGroupControl(frm, (LayoutControlGroup)gr, dtTmp);
 
-
-                }
-                else
+                foreach (var gr in group.Items.Where(x=>x.GetType().Name.Substring(0,6).ToLower() == "layout"))
                 {
-                    try
+                    if (gr.GetType().Name == "LayoutControlGroup")
                     {
-                        LayoutControlItem control1 = (LayoutControlItem)gr;
+                        LayoutControlGroup gro = (LayoutControlGroup)gr;
+                        gro.Text = GetNN(dtTmp, gro.Name, frm.Name);
+                        gro.AppearanceGroup.ForeColor = Color.FromArgb(0, 0, 192);
+                        gro.DoubleClick += delegate (object a, EventArgs b) { ControlGroup_DoubleClick(gro, b, frm.Name); };
+                        LoadNNGroupControl(frm, (LayoutControlGroup)gr, dtTmp);
+                    }
+                    else
+                    {
                         try
                         {
-                            //if (control1.Control.GetType().Name.ToLower() == "checkedit")
-                            //{
-                            //    control1.Control.Text = GetNN(dtTmp, control1.Name, frm.Name);
-                            //    control1.Control.DoubleClick += delegate (object a, EventArgs b) { CheckEdit_DoubleClick(control1.Control, b, frm.Name); };
-                            //}
-                            //else
-                            if (control1.AppearanceItemCaption.ForeColor == Color.FromArgb(192, 0, 0))
+                            LayoutControlItem control1 = (LayoutControlItem)gr;
+                            try
                             {
-                                control1.AppearanceItemCaption.ForeColor = Color.FromArgb(128, 0, 0);
+                                if (control1.AppearanceItemCaption.ForeColor == Color.FromArgb(192, 0, 0))
+                                {
+                                    control1.AppearanceItemCaption.ForeColor = Color.FromArgb(128, 0, 0);
+                                }
+                                if (control1.Control.GetType().Name.ToLower() == "radiogroup")
+                                {
+                                    DoiNN(control1.Control, frm, dtTmp);
+                                }
+                                else
+                                {
+                                    control1.Text = GetNN(dtTmp, control1.Name, frm.Name);
+                                    control1.DoubleClick += delegate (object a, EventArgs b) { Control1_DoubleClick(control1, b, frm.Name); };
+                                }
+                                //control1.Padding = new DevExpress.XtraLayout.Utils.Padding(5, 5, 2, 2);
+                                //((DevExpress.XtraEditors.BaseEdit)control1.Control).EnterMoveNextControl = true;
                             }
-                            if (control1.Control.GetType().Name.ToLower() == "radiogroup")
-                            {
-                                DoiNN(control1.Control, frm, dtTmp);
-                            }
-                            else
-                            {
-                                control1.Text = GetNN(dtTmp, control1.Name, frm.Name);
-                                control1.DoubleClick += delegate (object a, EventArgs b) { Control1_DoubleClick(control1, b, frm.Name); };
-                            }
-                            control1.Padding = new DevExpress.XtraLayout.Utils.Padding(5, 5, 2, 2);
-                            ((DevExpress.XtraEditors.BaseEdit)control1.Control).EnterMoveNextControl = true;
+                            catch
+                            { }
                         }
-                        catch
-                        { }
+                        catch (Exception)
+                        {
+                        }
                     }
-                    catch (Exception)
-                    {
-                    }
-                }
 
+                }
+            }
+            catch
+            {
             }
         }
 
@@ -2468,18 +2477,21 @@ namespace Commons
         }
         public void ThayDoiNN(XtraUserControl frm, LayoutControlGroup group, TabbedControlGroup Tab, WindowsUIButtonPanel btnWinUIB)
         {
-            DataTable dtTmp = new DataTable();
-            dtTmp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT KEYWORD , CASE " + Modules.TypeLanguage + " WHEN 0 THEN VIETNAM WHEN 1 THEN ENGLISH ELSE CHINESE END AS NN  FROM LANGUAGES WHERE FORM = N'" + frm.Name + "' "));
-            LoadNNGroupControl(frm, group, dtTmp);
-            Tab.DoubleClick += delegate (object a, EventArgs b) { TabbedControlGroup_DoubleClick(Tab, b, frm.Name); };
-            Tab.AppearanceTabPage.HeaderActive.ForeColor = Color.FromArgb(0, 0, 192);
-            foreach (LayoutControlGroup item in Tab.TabPages)
-            {
-                item.Text = GetNN(dtTmp, item.Name, frm.Name);
-                LoadNNGroupControl(frm, item, dtTmp);
-            }
             try
             {
+                DataTable dtTmp = new DataTable();
+                dtTmp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT KEYWORD , CASE " + Modules.TypeLanguage + " WHEN 0 THEN VIETNAM WHEN 1 THEN ENGLISH ELSE CHINESE END AS NN  FROM LANGUAGES WHERE FORM = N'" + frm.Name + "' "));
+
+
+                LoadNNGroupControl(frm, group, dtTmp);
+                Tab.DoubleClick += delegate (object a, EventArgs b) { TabbedControlGroup_DoubleClick(Tab, b, frm.Name); };
+                Tab.AppearanceTabPage.HeaderActive.ForeColor = Color.FromArgb(0, 0, 192);
+                foreach (LayoutControlGroup item in Tab.TabPages)
+                {
+                    item.Text = GetNN(dtTmp, item.Name, frm.Name);
+                    LoadNNGroupControl(frm, item, dtTmp);
+                }
+
                 for (int i = 0; i < btnWinUIB.Buttons.Count; i++)
                 {
                     try
@@ -4868,6 +4880,13 @@ namespace Commons
             dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboLoaiCV", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll, idXN, iIDDV));
             return dt;
         }
+        public DataTable DataLoaiDanhGia(bool coAll)
+        {
+            //ID_LDG,TEN_LOAI_DANH_GIA
+            DataTable dt = new DataTable();
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboLoaiDanhGia", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll));
+            return dt;
+        }
 
         public DataTable DataChucVu(bool coAll, int idLCV)
         {
@@ -5476,6 +5495,12 @@ namespace Commons
             dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetCongNhanTheoLoaiCV", Commons.Modules.UserName, Commons.Modules.TypeLanguage, iIDLCV));
             return dt;
         }
+        public DataTable DataCongNhanTheoBoPhan(Int64 iIDXN)
+        {
+            DataTable dt = new DataTable();
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetCongNhanTheoBP", Commons.Modules.UserName, Commons.Modules.TypeLanguage, iIDXN));
+            return dt;
+        }
 
         public DataTable TruongBoPhan(Int64 iID_YCTD)
         {
@@ -5489,7 +5514,7 @@ namespace Commons
             //1 còn làm
             //2 đã nghĩ
             DataTable dt = new DataTable();
-            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetCongNhanTheoTT", Commons.Modules.UserName, TT, Commons.Modules.TypeLanguage, coAll));
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComBoCongNhanTheoTT", Commons.Modules.UserName, TT, Commons.Modules.TypeLanguage, coAll));
             return dt;
         }
         public DataTable DataUngVienTheoTT(bool coAll, int TT)

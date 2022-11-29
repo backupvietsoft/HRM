@@ -31,9 +31,15 @@
             DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions1 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
             DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions2 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
             this.dataLayoutControl1 = new DevExpress.XtraDataLayout.DataLayoutControl();
+            this.datDenThang = new DevExpress.XtraEditors.DateEdit();
+            this.datTuThang = new DevExpress.XtraEditors.DateEdit();
+            this.cboLCV = new DevExpress.XtraEditors.SearchLookUpEdit();
+            this.searchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.grdData = new DevExpress.XtraGrid.GridControl();
             this.grvData = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.windowsUIButton = new DevExpress.XtraBars.Docking2010.WindowsUIButtonPanel();
+            this.cboDV = new DevExpress.XtraEditors.SearchLookUpEdit();
+            this.searchLookUpEdit1View1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.emptySpaceItem5 = new DevExpress.XtraLayout.EmptySpaceItem();
@@ -41,20 +47,22 @@
             this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
-            this.cboDV = new DevExpress.XtraEditors.SearchLookUpEdit();
-            this.searchLookUpEdit1View1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.ItemForDON_VI = new DevExpress.XtraLayout.LayoutControlItem();
-            this.cboLCV = new DevExpress.XtraEditors.SearchLookUpEdit();
             this.lblLoaiCV = new DevExpress.XtraLayout.LayoutControlItem();
-            this.searchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.datTuThang = new DevExpress.XtraEditors.DateEdit();
             this.lblTuThang = new DevExpress.XtraLayout.LayoutControlItem();
-            this.datDenThang = new DevExpress.XtraEditors.DateEdit();
             this.lblDenThang = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataLayoutControl1)).BeginInit();
             this.dataLayoutControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.datDenThang.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.datDenThang.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.datTuThang.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.datTuThang.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cboLCV.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grvData)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cboDV.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem5)).BeginInit();
@@ -62,17 +70,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cboDV.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForDON_VI)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cboLCV.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblLoaiCV)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.datTuThang.Properties.CalendarTimeProperties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.datTuThang.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblTuThang)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.datDenThang.Properties.CalendarTimeProperties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.datDenThang.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblDenThang)).BeginInit();
             this.SuspendLayout();
             // 
@@ -94,6 +94,67 @@
             this.dataLayoutControl1.Size = new System.Drawing.Size(417, 202);
             this.dataLayoutControl1.TabIndex = 0;
             this.dataLayoutControl1.Text = "dataLayoutControl1";
+            // 
+            // datDenThang
+            // 
+            this.datDenThang.EditValue = null;
+            this.datDenThang.Location = new System.Drawing.Point(105, 104);
+            this.datDenThang.Name = "datDenThang";
+            this.datDenThang.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.datDenThang.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.datDenThang.Properties.DisplayFormat.FormatString = "MM/yyyy";
+            this.datDenThang.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.datDenThang.Properties.EditFormat.FormatString = "MM/yyyy";
+            this.datDenThang.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.datDenThang.Properties.MaskSettings.Set("mask", "MM/yyyy");
+            this.datDenThang.Properties.UseMaskAsDisplayFormat = false;
+            this.datDenThang.Properties.VistaCalendarInitialViewStyle = DevExpress.XtraEditors.VistaCalendarInitialViewStyle.YearView;
+            this.datDenThang.Properties.VistaCalendarViewStyle = DevExpress.XtraEditors.VistaCalendarViewStyle.YearView;
+            this.datDenThang.Size = new System.Drawing.Size(284, 24);
+            this.datDenThang.StyleController = this.dataLayoutControl1;
+            this.datDenThang.TabIndex = 15;
+            // 
+            // datTuThang
+            // 
+            this.datTuThang.EditValue = null;
+            this.datTuThang.Location = new System.Drawing.Point(105, 76);
+            this.datTuThang.Name = "datTuThang";
+            this.datTuThang.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.datTuThang.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.datTuThang.Properties.DisplayFormat.FormatString = "MM/yyyy";
+            this.datTuThang.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.datTuThang.Properties.EditFormat.FormatString = "MM/yyyy";
+            this.datTuThang.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.datTuThang.Properties.MaskSettings.Set("mask", "MM/yyyy");
+            this.datTuThang.Properties.UseMaskAsDisplayFormat = true;
+            this.datTuThang.Properties.VistaCalendarInitialViewStyle = DevExpress.XtraEditors.VistaCalendarInitialViewStyle.YearView;
+            this.datTuThang.Properties.VistaCalendarViewStyle = DevExpress.XtraEditors.VistaCalendarViewStyle.YearView;
+            this.datTuThang.Size = new System.Drawing.Size(284, 24);
+            this.datTuThang.StyleController = this.dataLayoutControl1;
+            this.datTuThang.TabIndex = 14;
+            // 
+            // cboLCV
+            // 
+            this.cboLCV.Location = new System.Drawing.Point(105, 48);
+            this.cboLCV.Name = "cboLCV";
+            this.cboLCV.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cboLCV.Properties.NullText = "";
+            this.cboLCV.Properties.PopupView = this.searchLookUpEdit1View;
+            this.cboLCV.Size = new System.Drawing.Size(284, 24);
+            this.cboLCV.StyleController = this.dataLayoutControl1;
+            this.cboLCV.TabIndex = 13;
+            // 
+            // searchLookUpEdit1View
+            // 
+            this.searchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            this.searchLookUpEdit1View.Name = "searchLookUpEdit1View";
+            this.searchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.searchLookUpEdit1View.OptionsView.ShowGroupPanel = false;
             // 
             // grdData
             // 
@@ -147,6 +208,26 @@
             this.windowsUIButton.Text = "windowsUIButtonPanel1";
             this.windowsUIButton.UseButtonBackgroundImages = false;
             this.windowsUIButton.ButtonClick += new DevExpress.XtraBars.Docking2010.ButtonEventHandler(this.windowsUIButton_ButtonClick);
+            // 
+            // cboDV
+            // 
+            this.cboDV.Location = new System.Drawing.Point(105, 20);
+            this.cboDV.Name = "cboDV";
+            this.cboDV.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cboDV.Properties.NullText = "";
+            this.cboDV.Properties.PopupView = this.searchLookUpEdit1View1;
+            this.cboDV.Size = new System.Drawing.Size(284, 24);
+            this.cboDV.StyleController = this.dataLayoutControl1;
+            this.cboDV.TabIndex = 7;
+            // 
+            // searchLookUpEdit1View1
+            // 
+            this.searchLookUpEdit1View1.DetailHeight = 297;
+            this.searchLookUpEdit1View1.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            this.searchLookUpEdit1View1.Name = "searchLookUpEdit1View1";
+            this.searchLookUpEdit1View1.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.searchLookUpEdit1View1.OptionsView.ShowGroupPanel = false;
             // 
             // layoutControlItem2
             // 
@@ -224,26 +305,6 @@
             this.emptySpaceItem2.Size = new System.Drawing.Size(365, 10);
             this.emptySpaceItem2.TextSize = new System.Drawing.Size(0, 0);
             // 
-            // cboDV
-            // 
-            this.cboDV.Location = new System.Drawing.Point(105, 20);
-            this.cboDV.Name = "cboDV";
-            this.cboDV.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cboDV.Properties.NullText = "";
-            this.cboDV.Properties.PopupView = this.searchLookUpEdit1View1;
-            this.cboDV.Size = new System.Drawing.Size(284, 24);
-            this.cboDV.StyleController = this.dataLayoutControl1;
-            this.cboDV.TabIndex = 7;
-            // 
-            // searchLookUpEdit1View1
-            // 
-            this.searchLookUpEdit1View1.DetailHeight = 297;
-            this.searchLookUpEdit1View1.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
-            this.searchLookUpEdit1View1.Name = "searchLookUpEdit1View1";
-            this.searchLookUpEdit1View1.OptionsSelection.EnableAppearanceFocusedCell = false;
-            this.searchLookUpEdit1View1.OptionsView.ShowGroupPanel = false;
-            // 
             // ItemForDON_VI
             // 
             this.ItemForDON_VI.Control = this.cboDV;
@@ -255,18 +316,6 @@
             this.ItemForDON_VI.Text = "DON_VI";
             this.ItemForDON_VI.TextSize = new System.Drawing.Size(73, 17);
             // 
-            // cboLCV
-            // 
-            this.cboLCV.Location = new System.Drawing.Point(105, 48);
-            this.cboLCV.Name = "cboLCV";
-            this.cboLCV.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cboLCV.Properties.NullText = "";
-            this.cboLCV.Properties.PopupView = this.searchLookUpEdit1View;
-            this.cboLCV.Size = new System.Drawing.Size(284, 24);
-            this.cboLCV.StyleController = this.dataLayoutControl1;
-            this.cboLCV.TabIndex = 13;
-            // 
             // lblLoaiCV
             // 
             this.lblLoaiCV.Control = this.cboLCV;
@@ -275,34 +324,6 @@
             this.lblLoaiCV.Size = new System.Drawing.Size(365, 28);
             this.lblLoaiCV.TextSize = new System.Drawing.Size(73, 17);
             // 
-            // searchLookUpEdit1View
-            // 
-            this.searchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
-            this.searchLookUpEdit1View.Name = "searchLookUpEdit1View";
-            this.searchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
-            this.searchLookUpEdit1View.OptionsView.ShowGroupPanel = false;
-            // 
-            // datTuThang
-            // 
-            this.datTuThang.EditValue = null;
-            this.datTuThang.Location = new System.Drawing.Point(105, 76);
-            this.datTuThang.Name = "datTuThang";
-            this.datTuThang.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.datTuThang.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.datTuThang.Properties.DisplayFormat.FormatString = "MM/yyyy";
-            this.datTuThang.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
-            this.datTuThang.Properties.EditFormat.FormatString = "MM/yyyy";
-            this.datTuThang.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
-            this.datTuThang.Properties.MaskSettings.Set("mask", "MM/yyyy");
-            this.datTuThang.Properties.UseMaskAsDisplayFormat = true;
-            this.datTuThang.Properties.VistaCalendarInitialViewStyle = DevExpress.XtraEditors.VistaCalendarInitialViewStyle.YearView;
-            this.datTuThang.Properties.VistaCalendarViewStyle = DevExpress.XtraEditors.VistaCalendarViewStyle.YearView;
-            this.datTuThang.Size = new System.Drawing.Size(284, 24);
-            this.datTuThang.StyleController = this.dataLayoutControl1;
-            this.datTuThang.TabIndex = 14;
-            // 
             // lblTuThang
             // 
             this.lblTuThang.Control = this.datTuThang;
@@ -310,27 +331,6 @@
             this.lblTuThang.Name = "lblTuThang";
             this.lblTuThang.Size = new System.Drawing.Size(365, 28);
             this.lblTuThang.TextSize = new System.Drawing.Size(73, 17);
-            // 
-            // datDenThang
-            // 
-            this.datDenThang.EditValue = null;
-            this.datDenThang.Location = new System.Drawing.Point(105, 104);
-            this.datDenThang.Name = "datDenThang";
-            this.datDenThang.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.datDenThang.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.datDenThang.Properties.DisplayFormat.FormatString = "MM/yyyy";
-            this.datDenThang.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
-            this.datDenThang.Properties.EditFormat.FormatString = "MM/yyyy";
-            this.datDenThang.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
-            this.datDenThang.Properties.MaskSettings.Set("mask", "MM/yyyy");
-            this.datDenThang.Properties.UseMaskAsDisplayFormat = true;
-            this.datDenThang.Properties.VistaCalendarInitialViewStyle = DevExpress.XtraEditors.VistaCalendarInitialViewStyle.YearView;
-            this.datDenThang.Properties.VistaCalendarViewStyle = DevExpress.XtraEditors.VistaCalendarViewStyle.YearView;
-            this.datDenThang.Size = new System.Drawing.Size(284, 24);
-            this.datDenThang.StyleController = this.dataLayoutControl1;
-            this.datDenThang.TabIndex = 15;
             // 
             // lblDenThang
             // 
@@ -353,8 +353,16 @@
             this.Load += new System.EventHandler(this.frmInTinhHinhTD_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataLayoutControl1)).EndInit();
             this.dataLayoutControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.datDenThang.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.datDenThang.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.datTuThang.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.datTuThang.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cboLCV.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdData)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grvData)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cboDV.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem5)).EndInit();
@@ -362,17 +370,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cboDV.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForDON_VI)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cboLCV.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblLoaiCV)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.datTuThang.Properties.CalendarTimeProperties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.datTuThang.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblTuThang)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.datDenThang.Properties.CalendarTimeProperties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.datDenThang.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblDenThang)).EndInit();
             this.ResumeLayout(false);
 

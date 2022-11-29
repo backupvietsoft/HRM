@@ -96,7 +96,7 @@ namespace Vs.Payroll
             try
             {
                 string sSql = "";
-                sSql = "SELECT ID_DV, ID_DT,TEN_LOAI_HH, TEN_HH, NGAY_LAP, ISNULL(CLOSED,0) AS CLOSED,ID_ORD,ISNULL(QUI_TRINH_HOAN_CHINH,0) QUI_TRINH_HOAN_CHINH FROM dbo.DON_HANG_BAN_ORDER WHERE ID_ORD = " + iIdOrder.ToString();
+                sSql = "SELECT ID_DV, ID_DT,TEN_LOAI_HH, TEN_HH, NGAY_LAP, ISNULL(CLOSED,0) AS CLOSED,ID_ORD FROM dbo.DON_HANG_BAN_ORDER WHERE ID_ORD = " + iIdOrder.ToString();
                 DataTable dtTmp = new DataTable();
                 dtTmp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSql));
                 if (dtTmp.Rows.Count <= 0) return;
@@ -106,7 +106,6 @@ namespace Vs.Payroll
                 try { txtTEN_HH.EditValue = dtTmp.Rows[0]["TEN_HH"]; } catch { }
                 try { datNGAY_LAP.DateTime = DateTime.Parse(dtTmp.Rows[0]["NGAY_LAP"].ToString()); } catch { }
                 try { chkCLOSED.EditValue = dtTmp.Rows[0]["CLOSED"]; } catch { }
-                try { chkHoanChinh.EditValue = dtTmp.Rows[0]["QUI_TRINH_HOAN_CHINH"]; } catch { }
             }
             catch { }
         }
@@ -121,7 +120,6 @@ namespace Vs.Payroll
             datNGAY_LAP.DateTime = DateTime.Now.Date;
             chkCLOSED.Checked = false;
             cboDonVi.Focus();
-            chkHoanChinh.Checked = false;
         }
 
 
@@ -285,7 +283,6 @@ namespace Vs.Payroll
                 cmd.Parameters.Add("@TEN_LHH", SqlDbType.NVarChar).Value = txtLHH.Text;
                 cmd.Parameters.Add("@TNgay", SqlDbType.Date).Value = datNGAY_LAP.DateTime.Date;
                 cmd.Parameters.Add("@DDong", SqlDbType.Int).Value = (chkCLOSED.Checked ? 1 : 0);
-                cmd.Parameters.Add("@HOAN_CHINH", SqlDbType.Bit).Value = (chkHoanChinh.Checked ? 1 : 0);
 
                 cmd.CommandType = CommandType.StoredProcedure;
                 System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);

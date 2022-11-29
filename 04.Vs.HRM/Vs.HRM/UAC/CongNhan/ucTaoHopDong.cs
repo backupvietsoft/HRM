@@ -83,26 +83,52 @@ namespace Vs.HRM
         {
             try
             {
-                //DataTable dt = new DataTable();
-                //dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spTiepNhanUV", Commons.Modules.UserName, Commons.Modules.TypeLanguage, Convert.ToInt64(cboID_PV.EditValue)));
                 System.Data.SqlClient.SqlConnection conn;
                 conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
-                conn.Open();
-                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spGetListCNChuaCoHD", conn);
-                cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
-                cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
-                cmd.Parameters.Add("@DVi", SqlDbType.Int).Value = Convert.ToInt32(cboDV.EditValue);
-                cmd.Parameters.Add("@XN", SqlDbType.Int).Value = Convert.ToInt32(cboXN.EditValue);
-                cmd.Parameters.Add("@TO", SqlDbType.Int).Value = Convert.ToInt32(cboTo.EditValue);
-                cmd.Parameters.Add("@TNgay", SqlDbType.DateTime).Value = Commons.Modules.ObjSystems.ConvertDateTime(datTNgay.Text);
-                cmd.Parameters.Add("@DNgay", SqlDbType.DateTime).Value = Commons.Modules.ObjSystems.ConvertDateTime(datDNgay.Text);
-                cmd.Parameters.Add("@iCot1", SqlDbType.BigInt).Value = -1;
-                cmd.Parameters.Add("@iCot2", SqlDbType.BigInt).Value = -1;
-                cmd.Parameters.Add("@Them", SqlDbType.Int).Value = rdoChonXem.SelectedIndex;
-                cmd.CommandType = CommandType.StoredProcedure;
-                System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
                 DataSet ds = new DataSet();
-                adp.Fill(ds);
+                conn.Open();
+                switch (Commons.Modules.KyHieuDV){
+                    case "DM":
+                        {
+                           
+                            System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spGetListCNChuaCoHD", conn);
+                            cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                            cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                            cmd.Parameters.Add("@DVi", SqlDbType.Int).Value = Convert.ToInt32(cboDV.EditValue);
+                            cmd.Parameters.Add("@XN", SqlDbType.Int).Value = Convert.ToInt32(cboXN.EditValue);
+                            cmd.Parameters.Add("@TO", SqlDbType.Int).Value = Convert.ToInt32(cboTo.EditValue);
+                            cmd.Parameters.Add("@TNgay", SqlDbType.DateTime).Value = Commons.Modules.ObjSystems.ConvertDateTime(datTNgay.Text);
+                            cmd.Parameters.Add("@DNgay", SqlDbType.DateTime).Value = Commons.Modules.ObjSystems.ConvertDateTime(datDNgay.Text);
+                            cmd.Parameters.Add("@iCot1", SqlDbType.BigInt).Value = -1;
+                            cmd.Parameters.Add("@iCot2", SqlDbType.BigInt).Value = -1;
+                            cmd.Parameters.Add("@Them", SqlDbType.Int).Value = rdoChonXem.SelectedIndex;
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+                       
+                            adp.Fill(ds);
+                            break;
+                    }
+                    case "NB":
+                        {
+                            System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spGetListCNChuaCoHD_NB", conn);
+                            cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                            cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                            cmd.Parameters.Add("@DVi", SqlDbType.Int).Value = Convert.ToInt32(cboDV.EditValue);
+                            cmd.Parameters.Add("@XN", SqlDbType.Int).Value = Convert.ToInt32(cboXN.EditValue);
+                            cmd.Parameters.Add("@TO", SqlDbType.Int).Value = Convert.ToInt32(cboTo.EditValue);
+                            cmd.Parameters.Add("@TNgay", SqlDbType.DateTime).Value = Commons.Modules.ObjSystems.ConvertDateTime(datTNgay.Text);
+                            cmd.Parameters.Add("@DNgay", SqlDbType.DateTime).Value = Commons.Modules.ObjSystems.ConvertDateTime(datDNgay.Text);
+                            cmd.Parameters.Add("@iCot1", SqlDbType.BigInt).Value = -1;
+                            cmd.Parameters.Add("@iCot2", SqlDbType.BigInt).Value = -1;
+                            cmd.Parameters.Add("@Them", SqlDbType.Int).Value = rdoChonXem.SelectedIndex;
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+
+                            adp.Fill(ds);
+                            break;
+                        }
+                }
+               
                 DataTable dt = new DataTable();
                 dt = ds.Tables[0].Copy();
                 dt.Columns["CHON"].ReadOnly = false;
@@ -115,6 +141,9 @@ namespace Vs.HRM
                 {
                     dt.Columns["TAI_LIEU"].ReadOnly = false;
                 }
+                //DataTable dt = new DataTable();
+                //dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spTiepNhanUV", Commons.Modules.UserName, Commons.Modules.TypeLanguage, Convert.ToInt64(cboID_PV.EditValue)));
+
                 if (grdDSUngVien.DataSource == null)
                 {
                     Commons.Modules.ObjSystems.MLoadXtraGrid(grdDSUngVien, grvDSUngVien, dt, true, true, false, true, true, this.Name);
@@ -127,7 +156,7 @@ namespace Vs.HRM
                     grvDSUngVien.Columns["HO_TEN"].OptionsColumn.AllowEdit = false;
                     grvDSUngVien.Columns["CONG_VIEC"].OptionsColumn.AllowEdit = false;
                     grvDSUngVien.Columns["SO_HDLD"].OptionsColumn.AllowEdit = false;
-                    grvDSUngVien.Columns["CONG_VIEC_ENG"].OptionsColumn.AllowEdit = false;
+                    //grvDSUngVien.Columns["TEN_LHDLD"].OptionsColumn.AllowEdit = false;
                     grvDSUngVien.Columns["MO_TA_CV"].OptionsColumn.AllowEdit = false;
                     grvDSUngVien.Columns["MO_TA_CV_A"].OptionsColumn.AllowEdit = false;
                     grvDSUngVien.Columns["NGAY_VAO_LAM"].OptionsColumn.AllowEdit = false;
@@ -280,7 +309,7 @@ namespace Vs.HRM
                     {
                         string sduongDan = ofileDialog.FileName.ToString().Trim();
                         if (ofileDialog.FileName.ToString().Trim() == "") return;
-                        var strDuongDanTmp = Commons.Modules.ObjSystems.CapnhatTL("Tai_Lieu_HD" + '\\' + grvDSUngVien.GetFocusedRowCellValue("MS_CN"), false);
+                        var strDuongDanTmp = Commons.Modules.ObjSystems.CapnhatTL("Tai_Lieu_HD\\HDTV" + '\\' + grvDSUngVien.GetFocusedRowCellValue("MS_CN"), false);
                         strDuongDan = ofileDialog.FileName;
                         string[] sFile;
                         string TenFile;
@@ -416,6 +445,52 @@ namespace Vs.HRM
             //    txtTaiLieu.Text = strDuongDanTmp + @"\" + TenFile;
             //}
         }
+
+        private void HopDongThuViecAll_NB(DataTable dtTemp)
+        {
+            DataTable dtbc = new DataTable();
+            string sBTCongNhan = "sBTCongNhan" + Commons.Modules.iIDUser;
+            try
+            {
+                Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBTCongNhan, Commons.Modules.ObjSystems.ConvertDatatable(grvDSUngVien), "");
+
+                System.Data.SqlClient.SqlConnection conn1;
+                frmViewReport frm = new frmViewReport();
+                frm.rpt = new rptHopDongLaoDongThuViec_NB(DateTime.Now);
+                dtTemp = new DataTable();
+                conn1 = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                conn1.Open();
+
+                System.Data.SqlClient.SqlCommand cmd1 = new System.Data.SqlClient.SqlCommand("rptHopDongThuViec_NB", conn1);
+                cmd1.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                cmd1.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                cmd1.Parameters.Add("@ID_CN", SqlDbType.BigInt).Value = -1;
+                cmd1.Parameters.Add("@ID_SQD", SqlDbType.BigInt).Value = -1;
+                cmd1.Parameters.Add("@sBT", SqlDbType.NVarChar).Value = sBTCongNhan;
+                cmd1.CommandType = CommandType.StoredProcedure;
+
+                System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd1);
+                DataSet ds = new DataSet();
+                adp.Fill(ds);
+                dtTemp = new DataTable();
+                dtTemp = ds.Tables[0].Copy();
+                dtTemp.TableName = "DATA";
+                frm.AddDataSource(dtTemp);
+
+                dtbc = new DataTable();
+                dtbc = ds.Tables[1].Copy();
+                dtbc.TableName = "NOI_DUNG";
+                frm.AddDataSource(dtbc);
+
+                Commons.Modules.ObjSystems.XoaTable(sBTCongNhan);
+
+                frm.ShowDialog();
+            }
+            catch
+            {
+                Commons.Modules.ObjSystems.XoaTable(sBTCongNhan);
+            }
+        }
         private void btnALL_ButtonClick(object sender, DevExpress.XtraBars.Docking2010.ButtonEventArgs e)
         {
             try
@@ -427,21 +502,42 @@ namespace Vs.HRM
                     case "InHDThuViec":
                         {
 
-                            DataTable dt = new DataTable();
-                            try
-                            {
-                                dt = Commons.Modules.ObjSystems.ConvertDatatable(grvDSUngVien);
-                                dt.DefaultView.RowFilter = grvDSUngVien.ActiveFilterString.ToString();
-                                dt = dt.DefaultView.ToTable();
-                            }
-                            catch (Exception ex)
-                            {
-                                dt = null;
-                            }
+                            switch (Commons.Modules.KyHieuDV){
+                                case "NB":
+                                    {
+                                        DataTable dt = new DataTable();
+                                        try
+                                        {
+                                            dt = Commons.Modules.ObjSystems.ConvertDatatable(grvDSUngVien);
+                                            dt.DefaultView.RowFilter = grvDSUngVien.ActiveFilterString.ToString();
+                                            dt = dt.DefaultView.ToTable();
+                                            HopDongThuViecAll_NB(dt);
+                                        }
+                                        catch (Exception ex)
+                                        {
+                                            dt = null;
+                                        }
+                                        break;
+                                    }
+                                case "DM":
+                                    {
+                                        DataTable dt = new DataTable();
+                                        try
+                                        {
+                                            dt = Commons.Modules.ObjSystems.ConvertDatatable(grvDSUngVien);
+                                            dt.DefaultView.RowFilter = grvDSUngVien.ActiveFilterString.ToString();
+                                            dt = dt.DefaultView.ToTable();
+                                        }
+                                        catch (Exception ex)
+                                        {
+                                            dt = null;
+                                        }
 
-                            frmInThuMoi frm = new frmInThuMoi(dt);
-                            frm.ShowDialog();
-                            //HopDongThuViecAll_DM();
+                                        frmInThuMoi frm = new frmInThuMoi(dt);
+                                        frm.ShowDialog();
+                                        break;
+                                    }
+                            }                                                   
                             break;
                         }
                     case "sua":

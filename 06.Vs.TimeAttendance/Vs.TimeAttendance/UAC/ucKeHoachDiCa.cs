@@ -60,7 +60,6 @@ namespace Vs.TimeAttendance
             else
             {
                 enableButon(true);
-
             }
         }
         private void cboDV_EditValueChanged(object sender, EventArgs e)
@@ -143,7 +142,7 @@ namespace Vs.TimeAttendance
                         }
                         catch
                         {
-                            XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgCapNhatKhongCong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgCapNhatKhongThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                         break;
                     }

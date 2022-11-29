@@ -116,14 +116,15 @@ namespace Vs.HRM
 
                 title1 = Commons.Modules.MExcel.GetRange(excelWorkSheet, DONG, 4, DONG, 8);
                 title.AutoFill(title1, Microsoft.Office.Interop.Excel.XlAutoFillType.xlFillCopy);
-                title1.NumberFormat = "#,##0.00";
+                title1.NumberFormat = "#,##0";
 
 
                 Commons.Modules.MExcel.ColumnWidth(excelWorkSheet, 10, "@", true, 1, 1, DONG, 1);
                 Commons.Modules.MExcel.ColumnWidth(excelWorkSheet, 10, "@", true, 1, 2, DONG, 2);
                 Commons.Modules.MExcel.ColumnWidth(excelWorkSheet, 30, "@", true, 1, 3, DONG, 3);
-                Commons.Modules.MExcel.ColumnWidth(excelWorkSheet, 30, "#,##0.00", true, 1, 8, DONG, 8);
-                Commons.Modules.MExcel.ColumnWidth(excelWorkSheet, 19, "@", true, 1, 9, DONG, 10);
+                Commons.Modules.MExcel.ColumnWidth(excelWorkSheet, 30, "#,##0", true, 1, 5, DONG, 7);
+                Commons.Modules.MExcel.ColumnWidth(excelWorkSheet, 30, "#,##0", true, 1, 8, DONG, 8);
+                Commons.Modules.MExcel.ColumnWidth(excelWorkSheet, 19, "MM/yyyy", true, 1, 9, DONG, 10);
 
 
                 title = Commons.Modules.MExcel.GetRange(excelWorkSheet, DONG - TDong - 1, 1,DONG , TCot);

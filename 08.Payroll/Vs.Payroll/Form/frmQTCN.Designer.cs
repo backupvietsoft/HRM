@@ -134,7 +134,7 @@
             // 
             this.tableLayoutPanel1.SetColumnSpan(this.grdQT, 8);
             this.grdQT.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.grdQT.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grdQT.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4);
             this.grdQT.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grdQT.Location = new System.Drawing.Point(3, 127);
             this.grdQT.MainView = this.grvQT;
@@ -154,8 +154,10 @@
             this.grvQT.Name = "grvQT";
             this.grvQT.OptionsSelection.MultiSelect = true;
             this.grvQT.OptionsView.ShowGroupPanel = false;
+            this.grvQT.RowStyle += new DevExpress.XtraGrid.Views.Grid.RowStyleEventHandler(this.grvQT_RowStyle);
             this.grvQT.PopupMenuShowing += new DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler(this.grvDSUngVien_PopupMenuShowing);
             this.grvQT.InitNewRow += new DevExpress.XtraGrid.Views.Grid.InitNewRowEventHandler(this.grvQT_InitNewRow);
+            this.grvQT.CellValueChanged += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.grvQT_CellValueChanged);
             this.grvQT.InvalidRowException += new DevExpress.XtraGrid.Views.Base.InvalidRowExceptionEventHandler(this.grvQT_InvalidRowException);
             this.grvQT.InvalidValueException += new DevExpress.XtraEditors.Controls.InvalidValueExceptionEventHandler(this.grvQT_InvalidValueException);
             // 
@@ -200,9 +202,9 @@
             this.windowsUIButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.windowsUIButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.windowsUIButton.Location = new System.Drawing.Point(2, 2);
-            this.windowsUIButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.windowsUIButton.Margin = new System.Windows.Forms.Padding(4);
             this.windowsUIButton.Name = "windowsUIButton";
-            this.windowsUIButton.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.windowsUIButton.Padding = new System.Windows.Forms.Padding(4);
             this.windowsUIButton.Size = new System.Drawing.Size(1218, 60);
             this.windowsUIButton.TabIndex = 2;
             this.windowsUIButton.Text = "windowsUIButtonPanel1";

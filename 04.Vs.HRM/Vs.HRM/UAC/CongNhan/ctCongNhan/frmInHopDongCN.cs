@@ -61,7 +61,7 @@ namespace Vs.HRM
                         {
                             case "rdo_HopDongLaoDong":
                                 {
-                                    switch (Commons.Modules.ObjSystems.KyHieuDV(1))
+                                    switch (Commons.Modules.KyHieuDV)
                                     {
                                         case "MT":
                                             {
@@ -97,12 +97,14 @@ namespace Vs.HRM
                                                 if (kiemHD)
                                                 {
                                                     HopDongLaoDong_NB();
+                                                   
                                                 }
                                                 else
                                                 {
                                                     HopDongThuViec_NB();
+
+
                                                 }
-                                                break;
                                                 break;
                                             }
                                         default:
@@ -114,7 +116,7 @@ namespace Vs.HRM
                                 break;
                             case "rdo_HopDongThuViec":
                                 {
-                                    switch (Commons.Modules.ObjSystems.KyHieuDV(1))
+                                    switch (Commons.Modules.KyHieuDV)
                                     {
                                         case "MT":
                                             {
@@ -158,7 +160,7 @@ namespace Vs.HRM
                                 break;
                             case "rdo_HopDongThucViecCN_QC":
                                 {
-                                    switch (Commons.Modules.ObjSystems.KyHieuDV(1))
+                                    switch (Commons.Modules.KyHieuDV)
                                     {
                                         case "MT":
                                             {
@@ -189,7 +191,7 @@ namespace Vs.HRM
                                 break;
                             case "rdo_HopDongDaoTao":
                                 {
-                                    switch (Commons.Modules.ObjSystems.KyHieuDV(1))
+                                    switch (Commons.Modules.KyHieuDV)
                                     {
                                         case "MT":
                                             {

@@ -45,26 +45,21 @@ namespace Vs.HRM
             LoadNhanSu(-1);
             Commons.Modules.sLoad = "";
             setMauTT();
-            switch (Commons.Modules.ObjSystems.KyHieuDV(Convert.ToInt64(cboDV.EditValue)))
+            switch (Commons.Modules.KyHieuDV)
             {
                 case "NB":
                     {
-                        btnBinhThuong.Visible = false;
-                        lblBinhThuong.Visible = false;
-                        btnSapNghiViec.Visible = false;
-                        lblSapNghiViec.Visible = false;
-                        btnNghiDe.Visible = false;
-                        lblNghiDe.Visible = false;
-                        btnCheDo1Nam.Visible = false;
-                        lblCheDo1Nam.Visible = false;
+
                         btnDaNghiViec.Visible = false;
                         lblDaNghiViec.Visible = false;
                         btnBoViec.Visible = false;
                         lblBoViec.Visible = false;
-                        btnSapHetHanHD.Visible = false;
-                        lblSapHetHanHD.Visible = false;
-                        btnSapNghiSinh.Visible = false;
-                        lblSapNghiSinh.Visible = false;
+                        lblSapNghiSinh.Text = "Nghỉ sẩy thai đình chỉ thai";
+                        lblNghiDe.Text = "Nghỉ thai sản";
+                        lblCheDo1Nam.Text = "Đã nghỉ việc";
+                        lblSapNghiViec.Text = "Nghỉ không lương";
+                        btnDaNghiViec.Visible = false;
+                        lblDaNghiViec.Visible = false;
                         break;
                     }
             }
@@ -164,7 +159,7 @@ namespace Vs.HRM
                     grvDSCongNhan.FocusedRowHandle = grvDSCongNhan.GetRowHandle(index);
                 }
             }
-            catch (Exception ex) { }
+            catch (Exception ex) { XtraMessageBox.Show(ex.Message.ToString()); }
         }
         private void tileView1_ItemCustomize(object sender, TileViewItemCustomizeEventArgs e)
         {
@@ -490,6 +485,7 @@ namespace Vs.HRM
             Commons.Modules.ObjSystems.MLoadLookUpEdit(cbo_TTHT, Commons.Modules.ObjSystems.DataTinHTrangHT(Convert.ToInt32(cboID_LTTHT.EditValue), true), "ID_TT_HT", "TEN_TT_HT", "TEN_TT_HT");
             Commons.Modules.sLoad = "";
             cbo_TTHT.EditValue = Convert.ToInt64(5);
+
         }
 
         private void btnDaNghiViec_Click(object sender, EventArgs e)

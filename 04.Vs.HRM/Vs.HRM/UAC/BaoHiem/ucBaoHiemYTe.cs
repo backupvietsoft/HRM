@@ -37,16 +37,20 @@ namespace Vs.HRM
         #region bảo hiểm y tế
         private void ucBaoHiemYTe_Load(object sender, EventArgs e)
         {
-            Thread.Sleep(1000);
-            Commons.Modules.sPS = "0Load";
-            Commons.Modules.ObjSystems.LoadCboDonVi(cboDV);
-            Commons.Modules.ObjSystems.LoadCboXiNghiep(cboDV, cboXN);
-            Commons.Modules.ObjSystems.LoadCboTo(cboDV, cboXN, cboTo);
-            Commons.Modules.ObjSystems.MLoadLookUpEdit(cboID_LTTHT, Commons.Modules.ObjSystems.DataLoaiTinHTrangHT(false), "ID_LTTHT", "TEN_LOAI_TTHT", "TEN_LOAI_TTHT");
+            try
+            {
+                Thread.Sleep(1000);
+                Commons.Modules.sPS = "0Load";
+                Commons.Modules.ObjSystems.LoadCboDonVi(cboDV);
+                Commons.Modules.ObjSystems.LoadCboXiNghiep(cboDV, cboXN);
+                Commons.Modules.ObjSystems.LoadCboTo(cboDV, cboXN, cboTo);
+                Commons.Modules.ObjSystems.MLoadLookUpEdit(cboID_LTTHT, Commons.Modules.ObjSystems.DataLoaiTinHTrangHT(false), "ID_LTTHT", "TEN_LOAI_TTHT", "TEN_LOAI_TTHT");
 
-            LoadGridBaoHiemYTe();
-            Commons.Modules.sPS = "";
-            enableButon(true);
+                LoadGridBaoHiemYTe();
+                Commons.Modules.sPS = "";
+                enableButon(true);
+            }
+            catch { }
         }
         private void cboDV_EditValueChanged(object sender, EventArgs e)
         {
@@ -89,7 +93,7 @@ namespace Vs.HRM
                     {
                         enableButon(false);
                         Commons.Modules.ObjSystems.AddnewRow(grvNgungDongBHXH, false);
-                        
+
                         break;
                     }
 
@@ -180,7 +184,7 @@ namespace Vs.HRM
         private void LoadGridBaoHiemYTe()
         {
             DataTable dt = new DataTable();
-            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetCongNhanBHYT", cboDV.EditValue, cboXN.EditValue, cboTo.EditValue,cboID_LTTHT.EditValue, Commons.Modules.UserName, Commons.Modules.TypeLanguage));
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetCongNhanBHYT", cboDV.EditValue, cboXN.EditValue, cboTo.EditValue, cboID_LTTHT.EditValue, Commons.Modules.UserName, Commons.Modules.TypeLanguage));
             if (grdBHYT.DataSource == null)
             {
                 Commons.Modules.ObjSystems.MLoadXtraGrid(grdBHYT, grvNgungDongBHXH, dt, false, false, false, false, true, this.Name);
@@ -396,7 +400,7 @@ namespace Vs.HRM
             Commons.Modules.sPS = "0Load";
             Commons.Modules.ObjSystems.MLoadLookUpEdit(null, Commons.Modules.ObjSystems.DataTinHTrangHT(Convert.ToInt32(cboID_LTTHT.EditValue), true), "ID_TT_HT", "TEN_TT_HT", "TEN_TT_HT");
             LoadGridBaoHiemYTe();
-            Commons.Modules.sPS = "";         
+            Commons.Modules.sPS = "";
         }
     }
 }

@@ -42,6 +42,11 @@ namespace Vs.TimeAttendance
 
             dNgayIn.EditValue = DateTime.Today;
             Commons.OSystems.SetDateEditFormat(dNgayIn);
+            datTNgay.EditValue = dNgayDL;
+            datDNgay.EditValue = dNgayDL;
+            Commons.OSystems.SetDateEditFormat(datTNgay);
+            Commons.OSystems.SetDateEditFormat(datDNgay);
+            rdo_ChonBaoCao_SelectedIndexChanged(null, null);
             Commons.Modules.sLoad = "";
         }
         //sự kiện các nút xử lí
@@ -184,7 +189,7 @@ namespace Vs.TimeAttendance
                                     DataTable dt;
                                     System.Data.SqlClient.SqlConnection conn;
                                     dt = new DataTable();
-                                    frm.rpt = new rptDSNVVachTheLoi(dNgayDL, dNgayIn.DateTime);
+                                    frm.rpt = new rptDSNVVachTheLoi(datTNgay.DateTime, datDNgay.DateTime, dNgayIn.DateTime);
                                     try
                                     {
                                         conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
@@ -197,7 +202,8 @@ namespace Vs.TimeAttendance
                                         cmd.Parameters.Add("@Dvi", SqlDbType.Int).Value = ID_DV;
                                         cmd.Parameters.Add("@XN", SqlDbType.Int).Value = ID_XN;
                                         cmd.Parameters.Add("@TO", SqlDbType.Int).Value = ID_TO;
-                                        cmd.Parameters.Add("@NGAY", SqlDbType.DateTime).Value = dNgayDL;  //Convert.ToDateTime(LK_NgayXemBaoCao.EditValue);
+                                        cmd.Parameters.Add("@TNGAY", SqlDbType.DateTime).Value = datTNgay.DateTime;  //Convert.ToDateTime(LK_NgayXemBaoCao.EditValue);
+                                        cmd.Parameters.Add("@DNGAY", SqlDbType.DateTime).Value = datDNgay.DateTime;  //Convert.ToDateTime(LK_NgayXemBaoCao.EditValue);
                                         cmd.CommandType = CommandType.StoredProcedure;
                                         System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
 
@@ -1786,5 +1792,26 @@ namespace Vs.TimeAttendance
                    missing, missing);
         }
         #endregion
+
+        private void rdo_ChonBaoCao_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                switch (rdo_ChonBaoCao.Properties.Items[rdo_ChonBaoCao.SelectedIndex].Tag)
+                {
+                    case "rdo_DSNhanVienVachTheLoi":
+                        {
+                            tablePanel1.Rows[2].Visible = true;
+                            break;
+                        }
+                    default:
+                        {
+                            tablePanel1.Rows[2].Visible = false;
+                            break;
+                        }
+                }
+            }
+            catch { }
+        }
     }
 }

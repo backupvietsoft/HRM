@@ -189,8 +189,12 @@ namespace Vs.Recruit
                     {
                         sID = sID + dtTmp.Rows[i]["ID_LCV"].ToString() + ",";
                     }
-                    sID = sID.Substring(0, sID.Length - 1);
-                    sdkien = "(ID_LCV NOT IN (" + sID + "))";
+                    if (dtTmp.Rows.Count != 0)
+                    {
+                        sID = sID.Substring(0, sID.Length - 1);
+                        sdkien = "(ID_LCV NOT IN (" + sID + "))";
+                    }
+
                     dt.DefaultView.RowFilter = sdkien;
                 }
                 catch
@@ -365,13 +369,13 @@ namespace Vs.Recruit
                             for (int i = 0; i < grvViTri.RowCount; i++)
                             {
                                 SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spQuyDinhDuyetTaiLieu",
-                                    Commons.Modules.iIDUser, 
+                                    Commons.Modules.iIDUser,
                                     this.Name,
                                     iID_YCTD,
-                                    grvViTri.GetRowCellValue(i, "ID_LCV"), 
+                                    grvViTri.GetRowCellValue(i, "ID_LCV"),
                                     txtMA_YCTD.Text + " " + grvViTri.GetRowCellDisplayText(i, "ID_LCV").ToString(),
-                                    1, 
-                                    InDuLieuCD("SELECT T2.TEN_LCV, T1.SL_TUYEN AS SO_LUONG, T1.MO_TA_CV, T1.YEU_CAU, T1.YEU_CAU_KHAC, T1.THOI_GIAN_LAM_VIEC, T1.CHE_DO_PHUC_LOI FROM dbo.YCTD_VI_TRI_TUYEN T1 INNER JOIN dbo.LOAI_CONG_VIEC T2 ON T2.ID_LCV = T1.ID_VTTD WHERE T1.ID_YCTD = "+ iID_YCTD + " AND T1.ID_VTTD = "+ grvViTri.GetRowCellValue(i, "ID_LCV") + ""),
+                                    1,
+                                    InDuLieuCD("SELECT T2.TEN_LCV, T1.SL_TUYEN AS SO_LUONG, T1.MO_TA_CV, T1.YEU_CAU, T1.YEU_CAU_KHAC, T1.THOI_GIAN_LAM_VIEC, T1.CHE_DO_PHUC_LOI FROM dbo.YCTD_VI_TRI_TUYEN T1 INNER JOIN dbo.LOAI_CONG_VIEC T2 ON T2.ID_LCV = T1.ID_VTTD WHERE T1.ID_YCTD = " + iID_YCTD + " AND T1.ID_VTTD = " + grvViTri.GetRowCellValue(i, "ID_LCV") + ""),
                                     Convert.ToInt32(grvViTri.GetRowCellValue(i, "ID_MUT")) == 1 ? true : false,
                                     txtLyDo.Text,
                                     Commons.Modules.UserName,
@@ -381,7 +385,7 @@ namespace Vs.Recruit
                             cboTrangThai.EditValue = 2;
                             btnALL.Buttons[0].Properties.Visible = false;
                         }
-                        catch(Exception ex)
+                        catch (Exception ex)
                         {
                             XtraMessageBox.Show(ex.ToString());
                         }
@@ -494,7 +498,7 @@ namespace Vs.Recruit
         private string InDuLieuCD(string sSql)
         {
             DataTable dt = new DataTable();
-            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr,CommandType.Text,sSql));
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSql));
             frmViewReport frm = new frmViewReport();
             frm.rpt = new rptThongBaoTuyenDung();
             frm.AddDataSource(dt);
@@ -506,11 +510,11 @@ namespace Vs.Recruit
             {
                 File.Delete(file);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 XtraMessageBox.Show(ex.ToString());
             }
-            
+
             return resulst;
 
         }
@@ -755,7 +759,7 @@ namespace Vs.Recruit
                 }
                 catch
                 {
-                }  
+                }
             }
         }
         private void grvPYC_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
@@ -1008,7 +1012,9 @@ namespace Vs.Recruit
                 if (Commons.Modules.ObjSystems.IsnullorEmpty(View.GetRowCellValue(e.RowHandle, colSL)))
                 {
                     e.Valid = false;
-                    View.SetColumnError(colSL, Commons.Modules.ObjLanguages.GetLanguage(Commons.Modules.ModuleName, this.Name, "MsgSoLuongLonHonKhong", Commons.Modules.TypeLanguage)); return;
+                    View.SetColumnError(colSL, Commons.Modules.ObjLanguages.GetLanguage(Commons.Modules.ModuleName, this.Name, "MsgSoLuongLonHonKhong", Commons.Modules.TypeLanguage));
+                    XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgSLTuyenPhaiLonHon0"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
                 }
                 else
                 {
@@ -1319,7 +1325,7 @@ namespace Vs.Recruit
 
                     try
                     {
-                        int n = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT  [dbo].[fnGetSoLuongDBLD]((SELECT TOP 1 ID_DV FROM dbo.XI_NGHIEP WHERE ID_XN = "+ cboBPYC.EditValue +"),"+ e.Value +",'"+ datNgayYC.DateTime.ToString("MM/dd/yyyy") + "')"));
+                        int n = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT  [dbo].[fnGetSoLuongDBLD]((SELECT TOP 1 ID_DV FROM dbo.XI_NGHIEP WHERE ID_XN = " + cboBPYC.EditValue + ")," + e.Value + ",'" + datNgayYC.DateTime.ToString("MM/dd/yyyy") + "')"));
                         grvViTri.SetFocusedRowCellValue("SL_DINH_BIEN", n);
                     }
                     catch { grvViTri.SetFocusedRowCellValue("SL_DINH_BIEN", 0); }

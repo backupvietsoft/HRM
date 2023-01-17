@@ -238,6 +238,7 @@ namespace VietSoftHRM
                 case "mnuTinhLuongThang":
                     {
                         ucTinhLuong ctl = new ucTinhLuong();
+                        ctl.iLoaiTL = 1;
                         panel2.Controls.Clear();
                         panel2.Controls.Add(ctl);
                         Commons.Modules.ObjSystems.HideWaitForm();
@@ -402,7 +403,6 @@ namespace VietSoftHRM
                     }
                 case "mnuDanhSachCNKhongTinhPhuCap":
                     {
-                        //ucTienCongTru ctl = new ucTienCongTru();
                         ucDSCNKhongTinhPhuCap ctl = new ucDSCNKhongTinhPhuCap();
                         panel2.Controls.Clear();
                         panel2.Controls.Add(ctl);
@@ -412,7 +412,6 @@ namespace VietSoftHRM
                     }
                 case "mnuLayChamCong":
                     {
-                        //ucTienCongTru ctl = new ucTienCongTru();
                         ucLayChamCong ctl = new ucLayChamCong();
                         panel2.Controls.Clear();
                         panel2.Controls.Add(ctl);
@@ -420,10 +419,21 @@ namespace VietSoftHRM
                         ctl.Dock = DockStyle.Fill;
                         break;
                     }
-                case "mnuTinhLuong":
+                case "mnuTinhLuongThangCN": // tính lương công nhân
                     {
-                        //ucTienCongTru ctl = new ucTienCongTru();
                         ucTinhLuong ctl = new ucTinhLuong();
+                        ctl.iLoaiTL = 1;
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(ctl);
+                        Commons.Modules.ObjSystems.HideWaitForm();
+                        ctl.Dock = DockStyle.Fill;
+                        break;
+                    }
+
+                case "mnuTinhLuongThangNV": // tính lương nhân viên
+                    {
+                        ucTinhLuong ctl = new ucTinhLuong();
+                        ctl.iLoaiTL = 2;
                         panel2.Controls.Clear();
                         panel2.Controls.Add(ctl);
                         Commons.Modules.ObjSystems.HideWaitForm();

@@ -192,7 +192,7 @@ namespace Vs.Recruit
                 title = Commons.Modules.MExcel.GetRange(excelWorkSheet, DONG, 1, DONG, 18);
                 title.Merge(true);
                 title.Value2 = Commons.Modules.ObjLanguages.GetLanguage(this.Name,"BCKeHoachTuyenDung");  /*"BÁO CÁO THEO DÕI THỰC HIỆN KẾ HOẠCH TUYỂN DỤNG";*/
-                title.Font.Size = 18;
+                title.Font.Size = 16;
                 title.RowHeight = 54;
                 title.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
                 title.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
@@ -381,6 +381,9 @@ namespace Vs.Recruit
                 title.Value2 = "=SUM(" + GetSumLastRow(list, COT) + ")";
                 title1 = Commons.Modules.MExcel.GetRange(excelWorkSheet, DONG, COT, DONG, TCot);
                 title.AutoFill(title1, Microsoft.Office.Interop.Excel.XlAutoFillType.xlFillCopy);
+
+                title = Commons.Modules.MExcel.GetRange(excelWorkSheet, 6, 1, DONG, TCot);
+                title.Borders.LineStyle = 1;
 
                 excelWorkSheet.Application.ActiveWindow.SplitRow = 8;
                 excelWorkSheet.Application.ActiveWindow.SplitColumn = 3;

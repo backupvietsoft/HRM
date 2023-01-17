@@ -131,6 +131,8 @@ namespace Vs.HRM
             }, 100); thread.Start();
         }
         private ucLyLich ll;
+        private ucHopDong hd;
+        private ucTienLuong tl;
         private void LoaduacCongNhan(string tenlable)
         {
             switch (tenlable)
@@ -165,9 +167,13 @@ namespace Vs.HRM
                     {
                         if (navigationPage3.Controls.Count == 0)
                         {
-                            ucTienLuong tl = new ucTienLuong(Commons.Modules.iCongNhan);
+                            tl = new ucTienLuong(Commons.Modules.iCongNhan);
                             tl.Dock = DockStyle.Fill;
                             navigationPage3.Controls.Add(tl);
+                        }
+                        else
+                        {
+                            tl.LoadgrdTienLuong(Convert.ToInt32(Commons.Modules.iCongNhan));
                         }
                         Selecttab(navigationPage3);
                         break;
@@ -176,10 +182,14 @@ namespace Vs.HRM
                     {
                         if (navigationPage4.Controls.Count == 0)
                         {
-                            ucHopDong hd = new ucHopDong(Commons.Modules.iCongNhan);
+                            hd = new ucHopDong(Commons.Modules.iCongNhan);
                             //hd.ucNS = new ucCTQLNS(Commons.Modules.iCongNhan);
                             hd.Dock = DockStyle.Fill;
                             navigationPage4.Controls.Add(hd);
+                        }
+                        else
+                        {
+                            hd.LoadgrdHopDong(-1);
                         }
                         Selecttab(navigationPage4);
 

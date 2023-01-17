@@ -24,12 +24,24 @@ namespace Vs.Category
             try
             {
                 ItemForTruongDonVi.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
-                if (Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString() == "DM")
+                DIEN_THOAI_TD.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                EMAIL_TD.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                HOTLINE_TD.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                ItemForFB.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                lblTenDataLink.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                lblDuongDanDataLink.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                if (Commons.Modules.KyHieuDV == "DM")
                 {
                     DataTable dt = new DataTable();
                     dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboCongNhan", Commons.Modules.UserName, Commons.Modules.TypeLanguage, 3));
                     Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_CN, dt, "ID_CN", "HO_TEN", "HO_TEN");
                     ItemForTruongDonVi.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+                    DIEN_THOAI_TD.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+                    EMAIL_TD.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+                    HOTLINE_TD.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+                    ItemForFB.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+                    lblTenDataLink.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+                    lblDuongDanDataLink.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
                     if (Commons.Modules.UserName != "admin")
                     {
                         lblTenDataLink.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;

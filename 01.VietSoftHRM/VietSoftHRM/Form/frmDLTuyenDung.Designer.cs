@@ -195,7 +195,7 @@
             // 
             this.tabControl.Location = new System.Drawing.Point(0, 33);
             this.tabControl.Name = "tabControl";
-            this.tabControl.SelectedTabPage = this.tabThamGiaTD;
+            this.tabControl.SelectedTabPage = this.tabVitri;
             this.tabControl.Size = new System.Drawing.Size(955, 470);
             this.tabControl.TabPages.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.tabVitri,

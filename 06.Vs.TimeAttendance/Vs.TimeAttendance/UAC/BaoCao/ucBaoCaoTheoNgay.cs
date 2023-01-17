@@ -607,7 +607,7 @@ namespace Vs.TimeAttendance
             DataTable dt;
             System.Data.SqlClient.SqlConnection conn;
             dt = new DataTable();
-            frm.rpt = new rptDSNVVachTheLoi(Convert.ToDateTime(LK_NgayXemBaoCao.EditValue), lk_NgayIn.DateTime);
+            frm.rpt = new rptDSNVVachTheLoi(Convert.ToDateTime(LK_NgayXemBaoCao.EditValue), Convert.ToDateTime(LK_NgayXemBaoCao.EditValue), lk_NgayIn.DateTime);
             try
             {
                 conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
@@ -681,7 +681,7 @@ namespace Vs.TimeAttendance
             DataTable dt;
             System.Data.SqlClient.SqlConnection conn;
             dt = new DataTable();
-            frm.rpt = new rptDKLamThemGio_DM(lk_NgayIn.DateTime, LK_XI_NGHIEP.Text.ToString());
+            frm.rpt = new rptDKLamThemGio_DM(lk_NgayIn.DateTime, LK_XI_NGHIEP.Text.ToString(),Convert.ToInt32(LK_DON_VI.EditValue));
 
             try
             {

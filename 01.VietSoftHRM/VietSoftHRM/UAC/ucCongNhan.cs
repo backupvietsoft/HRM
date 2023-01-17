@@ -117,7 +117,22 @@ namespace VietSoftHRM
                         ns.Dock = DockStyle.Fill;
                         break;
                     }
-
+                case "mnuPhatChiaKhoa":
+                    {
+                        ucPhatChiaKhoa tc = new ucPhatChiaKhoa();
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(tc);
+                        tc.Dock = DockStyle.Fill;
+                        break;
+                    }
+                case "mnuPhatChoiVeSinh":
+                    {
+                        ucPhatChoiVeSinh tc = new ucPhatChoiVeSinh();
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(tc);
+                        tc.Dock = DockStyle.Fill;
+                        break;
+                    }
                 case "mnuDangKyBHXH":
                     {
                         ucDangKyBHXH ttn = new ucDangKyBHXH();
@@ -287,6 +302,22 @@ namespace VietSoftHRM
                 case "mnuNgungBHXH":
                     {
                         ucNgungDongBHXH tc = new ucNgungDongBHXH();
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(tc);
+                        tc.Dock = DockStyle.Fill;
+                        break;
+                    }
+                case "mnuPhatChiaKhoa":
+                    {
+                        ucPhatChiaKhoa tc = new ucPhatChiaKhoa();
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(tc);
+                        tc.Dock = DockStyle.Fill;
+                        break;
+                    }
+                case "mnuPhatChoiVeSinh":
+                    {
+                        ucPhatChoiVeSinh tc = new ucPhatChoiVeSinh();
                         panel2.Controls.Clear();
                         panel2.Controls.Add(tc);
                         tc.Dock = DockStyle.Fill;

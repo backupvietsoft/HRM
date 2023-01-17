@@ -145,7 +145,7 @@ namespace Vs.HRM
                     }
                 case "Print":
                     {
-                        switch (Commons.Modules.ObjSystems.KyHieuDV_CN(Convert.ToInt64(Commons.Modules.iCongNhan)))
+                        switch (Commons.Modules.KyHieuDV)
                         {
                             case "DM":
                                 {
@@ -177,8 +177,20 @@ namespace Vs.HRM
                                             XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgBanChuaChonCotIn"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                             return;
                                         }
-                                        DanhSachNhanVien();
+                                        DanhSachNhanVien_Chung();
                                     }
+                                    break;
+                                }
+                            default:
+                                {
+                                    DataTable dt = new DataTable();
+                                    dt = (DataTable)grdChonCot.DataSource;
+                                    if (dt.AsEnumerable().Where(x => x["CHON"].ToString() == "1").Count() == 0)
+                                    {
+                                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgBanChuaChonCotIn"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                        return;
+                                    }
+                                    DanhSachNhanVien_Chung();
                                     break;
                                 }
                         }
@@ -329,7 +341,7 @@ namespace Vs.HRM
 
                     iSLCT = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, sSQL));
                 }
-                catch{ }
+                catch { }
                 dt = new DataTable();
                 dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spCapNhatDS_FIELD_CN_CHON", Commons.Modules.UserName, Commons.Modules.TypeLanguage, sBT, iSLCT, 1));
             }
@@ -339,7 +351,7 @@ namespace Vs.HRM
             try
             {
                 this.Cursor = Cursors.WaitCursor;
-                splashScreenManager1.ShowWaitForm();
+                Commons.Modules.ObjSystems.ShowWaitForm(this);
                 conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
                 conn.Open();
 
@@ -363,7 +375,13 @@ namespace Vs.HRM
                 adp.Fill(ds);
                 DataTable dtBCThang = new DataTable();
                 dtBCThang = ds.Tables[0].Copy();
-                
+                if (dtBCThang.Rows.Count == 0)
+                {
+                    this.Cursor = Cursors.Default;
+                    Commons.Modules.ObjSystems.HideWaitForm();
+                    XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgKhongCoDuLieuIn"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
                 this.Cursor = Cursors.WaitCursor;
                 Excel.Application oXL;
                 Excel.Workbook oWB;
@@ -511,16 +529,7 @@ namespace Vs.HRM
                         row_groupXI_NGHIEP_Format.Merge();
                         oSheet.Cells[rowBD, 1] = TEN_TO[j].ToString();
                         oSheet.Range[oSheet.Cells[Convert.ToInt32(rowBD), 1], oSheet.Cells[Convert.ToInt32(rowBD), 1]].Font.Bold = true;
-
-                        //for (col = 3; col < dtBCThang.Columns.Count - 2; col++)
-                        //{
-                        //    oSheet.Cells[rowBD, col] = "=+SUM(" + CharacterIncrement(col - 1) + "" + (rowBD + 1).ToString() + ":" + CharacterIncrement(col - 1) + "" + (rowCnt + 1).ToString() + ")";
-                        //    oSheet.Cells[rowBD, col].Font.Bold = true;
-                        //    oSheet.Cells[rowBD, col].Font.Size = 12;
-                        //}
-
-                        //sRowBD_XN = sRowBD_XN + rowBD.ToString() + "+;";
-                        //sRowBD_XN_Temp = sRowBD_XN;
+                     
                         //Đổ dữ liệu của xí nghiệp
                         oSheet.get_Range("A" + (rowBD + 1) + "", lastColumn + (rowCnt + 1).ToString()).Value2 = rowData;
 
@@ -535,8 +544,6 @@ namespace Vs.HRM
                             else if (dt.Rows[col - 1]["DINH_DANG"].ToString() == "Date")
                             {
 
-                                //System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
-                                //DateTime.FromOADate(((Excel.Range)oSheet.Cells[7, 2]).Value2);
                                 formatRange.NumberFormat = "dd/MM/yyyy";
                                 formatRange.Cells.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
                                 formatRange.Cells.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
@@ -549,13 +556,6 @@ namespace Vs.HRM
                             }
                         }
 
-                        //// Dữ liệu cột tổng tăng
-                        //for (int k = rowBD + 1; k <= rowCnt + 1; k++)
-                        //{
-                        //    oSheet.Cells[k, 3] = "=D" + k + "+E" + k + "";
-                        //    oSheet.Cells[k, 6] = "=M" + k + "+N" + k + "";
-                        //    oSheet.Cells[k, 15] = "=C" + k + "-F" + k + "";
-                        //}
                         dr_Cu = current_dr;
                         keepRowCnt = rowCnt;
                         rowCnt = 0;
@@ -568,9 +568,7 @@ namespace Vs.HRM
                 formatRange.Font.Size = fontSizeNoiDung;
                 formatRange.Cells.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
                 BorderAround(oSheet.get_Range("A4", lastColumn + (rowCnt + 1).ToString()));
-                //formatRange = oSheet.get_Range("C5", "C31");
-                //System.Globalization.CultureInfo cultures = new System.Globalization.CultureInfo("en-US");
-                //formatRange.NumberFormat = cultures.DateTimeFormat.ShortestDayNames;
+             
                 if (dtBCThang.Rows.Count == 0)
                 {
                     Excel.Range myRange = oSheet.get_Range("A4", lastColumn + "4");
@@ -582,16 +580,330 @@ namespace Vs.HRM
                     myRange.AutoFilter("1", "<>", Excel.XlAutoFilterOperator.xlOr, "", true);
                 }
                 this.Cursor = Cursors.Default;
-                splashScreenManager1.CloseWaitForm();
+                Commons.Modules.ObjSystems.HideWaitForm();
                 oXL.Visible = true;
                 oXL.UserControl = true;
             }
             catch (Exception ex)
             {
-                splashScreenManager1.CloseWaitForm();
+                Commons.Modules.ObjSystems.HideWaitForm();
                 this.Cursor = Cursors.Default;
                 MessageBox.Show(ex.Message);
             }
+        }
+        private void DanhSachNhanVien_Chung()
+        {
+            try
+            {
+
+
+                string dsCol = "";
+                System.Data.SqlClient.SqlConnection conn;
+
+                DataTable dt = new DataTable();
+                dt = Commons.Modules.ObjSystems.ConvertDatatable(grdChonCot);
+                dt = dt.AsEnumerable().Where(x => x["CHON"].ToString() == "1").OrderBy(x => x.Field<Int32>("STT")).CopyToDataTable();
+                foreach (DataRow dr in dt.Rows)
+                {
+                    if (dr["CHON"].ToString() == "1")
+                    {
+                        if (dsCol == "")
+                        {
+                            dsCol = dsCol + (dr["TEN_FIELD"].ToString() == "TEN_TO" ? "TEN_TO AS BO_PHAN" : dr["TEN_FIELD"].ToString());
+                        }
+                        else
+                        {
+                            dsCol = dsCol + "," + (dr["TEN_FIELD"].ToString() == "TEN_TO" ? "TEN_TO AS BO_PHAN" : dr["TEN_FIELD"].ToString());
+                        }
+                    }
+                }
+                if (dsCol.IndexOf("LICH_SU_HD") != -1)
+                {
+
+                    conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                    conn.Open();
+
+                    System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptDSCongNhan_Chung", conn);
+
+                    cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                    cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                    cmd.Parameters.Add("@DVi", SqlDbType.Int).Value = lkDonVi.EditValue;
+                    cmd.Parameters.Add("@XN", SqlDbType.Int).Value = lkXiNghiep.EditValue;
+                    cmd.Parameters.Add("@TO", SqlDbType.Int).Value = lkTo.EditValue;
+                    cmd.Parameters.Add("@DNGAY", SqlDbType.DateTime).Value = NgayIn.DateTime;
+                    cmd.Parameters.Add("@Loai", SqlDbType.Int).Value = rdoChonBC.SelectedIndex;
+                    cmd.Parameters.Add("@iCot1", SqlDbType.Int).Value = 0;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    int SLHDMax = Convert.ToInt32(cmd.ExecuteScalar());
+                    string sBT = "sBTrptBCCN" + Commons.Modules.iIDUser;
+                    Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBT, dt, "");
+                    dt = new DataTable();
+                    dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spCapNhatDS_FIELD_CN_CHON_Chung", Commons.Modules.UserName, Commons.Modules.TypeLanguage, sBT, SLHDMax, 0));
+                }
+
+                if (dsCol.IndexOf("LICH_SU_CT") != -1)
+                {
+                    string sBT = "sBTrptBCCN" + Commons.Modules.iIDUser;
+                    Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBT, dt, "");
+                    string sSQL = "SELECT MAX(T3.SLCT) FROM (SELECT T1.ID_CN ,COUNT(T1.SO_QUYET_DINH) SLCT FROM dbo.QUA_TRINH_CONG_TAC T1 INNER JOIN ( SELECT CN.ID_CN FROM dbo.CONG_NHAN CN INNER JOIN dbo.MGetToUser('" + Commons.Modules.UserName + "'," + Commons.Modules.TypeLanguage + ") T ON T.ID_TO = CN.ID_TO WHERE(T.ID_DV = " + lkDonVi.EditValue + " OR " + lkDonVi.EditValue + " = -1) AND(T.ID_XN = " + lkXiNghiep.EditValue + " OR " + lkXiNghiep.EditValue + " = -1) AND(T.ID_TO = " + lkTo.EditValue + " OR " + lkTo.EditValue + " = -1) AND((" + rdoChonBC.SelectedIndex + " = 0 AND ISNULL(CN.NGAY_NGHI_VIEC, '') = '') OR(" + rdoChonBC.SelectedIndex + " <> 0 AND ISNULL(CN.NGAY_NGHI_VIEC, '') <> ''))) T2 ON T2.ID_CN = T1.ID_CN GROUP BY T1.ID_CN) T3";
+                    int iSLCT = 1;
+                    try
+                    {
+
+                        iSLCT = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, sSQL));
+                    }
+                    catch { }
+                    dt = new DataTable();
+                    dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spCapNhatDS_FIELD_CN_CHON_Chung", Commons.Modules.UserName, Commons.Modules.TypeLanguage, sBT, iSLCT, 1));
+                }
+
+                try
+                {
+                    this.Cursor = Cursors.WaitCursor;
+                    Commons.Modules.ObjSystems.ShowWaitForm(this);
+
+                    conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                    conn.Open();
+
+                    System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptDSCongNhan_Chung", conn);
+
+                    cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                    cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                    cmd.Parameters.Add("@DVi", SqlDbType.Int).Value = lkDonVi.EditValue;
+                    cmd.Parameters.Add("@XN", SqlDbType.Int).Value = lkXiNghiep.EditValue;
+                    cmd.Parameters.Add("@TO", SqlDbType.Int).Value = lkTo.EditValue;
+                    cmd.Parameters.Add("@TTHD", SqlDbType.Int).Value = lkTTHD.EditValue;
+                    cmd.Parameters.Add("@TTHT", SqlDbType.Int).Value = lkTTHT.EditValue;
+                    cmd.Parameters.Add("@DNGAY", SqlDbType.DateTime).Value = NgayIn.DateTime;
+                    cmd.Parameters.Add("@Loai", SqlDbType.Int).Value = rdoChonBC.SelectedIndex;
+                    cmd.Parameters.Add("@Field", SqlDbType.NVarChar, 1000).Value = dsCol;
+                    cmd.Parameters.Add("@ID_CV", SqlDbType.BigInt, 1000).Value = cboChucVu.EditValue;
+                    cmd.Parameters.Add("@Loai_sort", SqlDbType.Bit).Value = chkGroup.Checked;
+                    cmd.Parameters.Add("@iCot1", SqlDbType.Int).Value = 1;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+                    DataSet ds = new DataSet();
+                    adp.Fill(ds);
+                    DataTable dtBCThang = new DataTable();
+                    dtBCThang = ds.Tables[0].Copy();
+                    if (dtBCThang.Rows[0][0].ToString() == "0")
+                    {
+                        this.Cursor = Cursors.Default;
+                        Commons.Modules.ObjSystems.HideWaitForm();
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgKhongCoDuLieuIn"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return;
+                    }
+                    this.Cursor = Cursors.WaitCursor;
+                    Excel.Application oXL;
+                    Excel.Workbook oWB;
+                    Excel.Worksheet oSheet;
+                    oXL = new Excel.Application();
+                    oXL.Visible = false;
+
+                    oWB = (Excel.Workbook)(oXL.Workbooks.Add(Missing.Value));
+                    oSheet = oWB.ActiveSheet;
+
+                    string fontName = "Times New Roman";
+                    int fontSizeTieuDe = 12;
+                    int fontSizeNoiDung = 9;
+
+
+                    string lastColumn = string.Empty;
+                    lastColumn = CharacterIncrement(dtBCThang.Columns.Count - 2);
+
+
+                    Range row2_TieuDe_BaoCao = oSheet.get_Range("A1", lastColumn + "1");
+                    row2_TieuDe_BaoCao.Merge();
+                    row2_TieuDe_BaoCao.Font.Size = 16;
+                    row2_TieuDe_BaoCao.Font.Name = fontName;
+                    row2_TieuDe_BaoCao.Font.Bold = true;
+                    row2_TieuDe_BaoCao.Cells.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
+                    row2_TieuDe_BaoCao.Cells.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
+                    row2_TieuDe_BaoCao.RowHeight = 50;
+                    row2_TieuDe_BaoCao.Value2 = "DANH SÁCH NHÂN VIÊN";
+
+                    Excel.Range row5_TieuDe_Format = oSheet.get_Range("A4", lastColumn + "4"); //27 + 31
+                    row5_TieuDe_Format.Font.Size = fontSizeTieuDe;
+                    row5_TieuDe_Format.Font.Name = fontName;
+                    row5_TieuDe_Format.Font.Bold = true;
+                    row5_TieuDe_Format.WrapText = true;
+                    row5_TieuDe_Format.NumberFormat = "@";
+                    row5_TieuDe_Format.Cells.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
+                    row5_TieuDe_Format.Cells.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
+                    row5_TieuDe_Format.Interior.Color = Color.FromArgb(255, 255, 0);
+
+                    int col = 0;
+                    int row_dl = 4;
+                    for (col = 0; col < dtBCThang.Columns.Count - 1; col++)
+                    {
+                        try
+                        {
+                            oSheet.Cells[row_dl, col + 1] = dt.Rows[col]["DIEN_GIAI"];
+                            oSheet.Cells[row_dl, col + 1].ColumnWidth = dt.Rows[col]["CHIEU_RONG"];
+                        }
+                        catch (Exception ex)
+                        {
+                            throw ex;
+                        }
+                    }
+
+                    int rowCnt = 0;
+                    Excel.Range formatRange;
+                    int keepRowCnt = 0; // Biến này dùng để lưu lại giá trị của biến rowCnt
+                    if (chkGroup.Checked == false)
+                    {
+                        DataRow[] dr = dtBCThang.Select();
+                        string[,] rowData = new string[dr.Count(), dtBCThang.Columns.Count];
+
+                        foreach (DataRow row in dr)
+                        {
+                            for (col = 0; col < dtBCThang.Columns.Count; col++)
+                            {
+                                rowData[rowCnt, col] = row[col].ToString();
+                            }
+                            rowCnt++;
+                            keepRowCnt = rowCnt;
+                        }
+                        keepRowCnt = rowCnt + 4;
+                        oSheet.get_Range("A5", lastColumn + (keepRowCnt).ToString()).Value2 = rowData;
+
+                        for (col = 1; col < dtBCThang.Columns.Count; col++)
+                        {
+                            formatRange = oSheet.get_Range(CharacterIncrement(col - 1) + "5" + "", CharacterIncrement(col - 1) + (rowCnt + 1).ToString());
+                            if (dt.Rows[col - 1]["DINH_DANG"].ToString() == "Num")
+                            {
+                                formatRange.NumberFormat = "#,##0;(#,##0); ; ";
+                                try { formatRange.TextToColumns(Type.Missing, Excel.XlTextParsingType.xlDelimited, Excel.XlTextQualifier.xlTextQualifierDoubleQuote); } catch (Exception ex) { }
+                            }
+                            else if (dt.Rows[col - 1]["DINH_DANG"].ToString() == "Date")
+                            {
+                                formatRange.NumberFormat = "dd/mm/yyyy";
+                                formatRange.Cells.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
+                                formatRange.Cells.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
+                                try { formatRange.TextToColumns(Type.Missing, Excel.XlTextParsingType.xlDelimited, Excel.XlTextQualifier.xlTextQualifierDoubleQuote); } catch (Exception ex) { }
+                            }
+                            else if (dt.Rows[col - 1]["DINH_DANG"].ToString() == "Num1")
+                            {
+                                formatRange.NumberFormat = "0";
+                                try { formatRange.TextToColumns(Type.Missing, Excel.XlTextParsingType.xlDelimited, Excel.XlTextQualifier.xlTextQualifierDoubleQuote); } catch { }
+                            }
+                        }
+                        //oSheet.get_Range("A" + (rowBD + 1) + "", lastColumn + (rowCnt + 1).ToString()).Value2 = rowData;
+                    }
+                    else
+                    {
+                        int dr_Cu = 0; // Count số nhân viên của xí nghiệp đổ dữ liệu trước
+                        int current_dr = 0; // Count số nhân viên của xí nghiệp đang được đổ dữ liệu
+                        int rowBD_XN = 0; // Row để insert dòng xí nghiệp
+                        int rowCONG = 0; // Row để insert dòng tổng
+                                         //int rowBD_XN = 7; // Row bắt đầu đổ dữ liệu group XI_NGHIEP
+                        string sRowBD_DV = ";"; // Lưu lại các dòng của row đơn vị
+                        string sRowBD_XN = ";"; // Lưu lại các dòng của row xí nghiệp
+                        int rowBD = 5;
+                        string[] TEN_TO = dtBCThang.AsEnumerable().Select(r => r.Field<string>("TEN_TO")).Distinct().ToArray();
+                        string chanVongDau = "Chan";// chặn lần đầu để lần đầu tiên sẽ load data từ cột số 7 trở đi, các vòng lặp tiếp theo bỏ chặn
+                        DataTable dt_temp = new DataTable();
+                        dt_temp = ds.Tables[0].Copy(); // Dữ row count data
+                        string sRowBD_XN_Temp = "";
+                        for (int j = 0; j < TEN_TO.Count(); j++)
+                        {
+                            dtBCThang = ds.Tables[0].Copy();
+                            dtBCThang = dtBCThang.AsEnumerable().Where(r => r.Field<string>("TEN_TO") == TEN_TO[j]).CopyToDataTable().Copy();
+                            DataRow[] dr = dtBCThang.Select();
+                            current_dr = dr.Count();
+                            string[,] rowData = new string[dr.Count(), dtBCThang.Columns.Count];
+                            foreach (DataRow row in dr)
+                            {
+                                for (col = 0; col < dtBCThang.Columns.Count; col++)
+                                {
+                                    rowData[rowCnt, col] = row[col].ToString();
+                                }
+                                rowCnt++;
+                            }
+                            if (chanVongDau == "Chan") // Chạy vòng đầu tiên, rowBD_XN = 0, vì nó nằm dòng đầu tiên thì rowBD lúc này sẽ  = 7, các vòng tiếp theo sẽ lấy cái dòng BĐ của + thêm rowBD_XN = 1 vào để không bị nằm đè lên dòng thứ 9
+                            {
+                                dr_Cu = 0;
+                                rowBD_XN = 0;
+                                chanVongDau = "";
+                            }
+                            else
+                            {
+                                rowBD_XN = 1;
+                            }
+                            rowBD = rowBD + dr_Cu + rowBD_XN;
+                            //rowCnt = rowCnt + 6 + dr_Cu;
+                            rowCnt = rowBD + current_dr - 1;
+
+                            // Tạo group tổ
+                            Range row_groupXI_NGHIEP_Format = oSheet.get_Range("A" + rowBD + "".ToString(), lastColumn + "" + rowBD + "".ToString()); //27 + 31
+                            row_groupXI_NGHIEP_Format.Interior.Color = Color.FromArgb(146, 208, 80);
+                            row_groupXI_NGHIEP_Format.Merge();
+                            oSheet.Cells[rowBD, 1] = TEN_TO[j].ToString();
+                            oSheet.Range[oSheet.Cells[Convert.ToInt32(rowBD), 1], oSheet.Cells[Convert.ToInt32(rowBD), 1]].Font.Bold = true;
+
+                    
+                            //Đổ dữ liệu của xí nghiệp
+                            oSheet.get_Range("A" + (rowBD + 1) + "", lastColumn + (rowCnt + 1).ToString()).Value2 = rowData;
+
+                            for (col = 1; col < dtBCThang.Columns.Count; col++)
+                            {
+                                formatRange = oSheet.get_Range(CharacterIncrement(col - 1) + "" + (rowBD + 1).ToString() + "", CharacterIncrement(col - 1) + (rowCnt + 1).ToString());
+                                if (dt.Rows[col - 1]["DINH_DANG"].ToString() == "Num")
+                                {
+                                    formatRange.NumberFormat = "#,##0;(#,##0); ; ";
+                                    try { formatRange.TextToColumns(Type.Missing, Excel.XlTextParsingType.xlDelimited, Excel.XlTextQualifier.xlTextQualifierDoubleQuote); } catch (Exception ex) { }
+                                }
+                                else if (dt.Rows[col - 1]["DINH_DANG"].ToString() == "Date")
+                                {
+
+                                    formatRange.NumberFormat = "dd/MM/yyyy";
+                                    formatRange.Cells.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
+                                    formatRange.Cells.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
+                                    try { formatRange.TextToColumns(Type.Missing, Excel.XlTextParsingType.xlDelimited, Excel.XlTextQualifier.xlTextQualifierDoubleQuote); } catch (Exception ex) { }
+                                }
+                                else if (dt.Rows[col - 1]["DINH_DANG"].ToString() == "Num1")
+                                {
+                                    formatRange.NumberFormat = "0";
+                                    try { formatRange.TextToColumns(Type.Missing, Excel.XlTextParsingType.xlDelimited, Excel.XlTextQualifier.xlTextQualifierDoubleQuote); } catch { }
+                                }
+                            }
+                         
+                            dr_Cu = current_dr;
+                            keepRowCnt = rowCnt;
+                            rowCnt = 0;
+                        }
+                    }
+                    rowCnt = keepRowCnt;
+                    formatRange = oSheet.get_Range("A5", "" + lastColumn + "" + (rowCnt + 1).ToString() + "");
+                    formatRange.Font.Name = fontName;
+                    formatRange.WrapText = true;
+                    formatRange.Font.Size = fontSizeNoiDung;
+                    formatRange.Cells.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
+                    BorderAround(oSheet.get_Range("A4", lastColumn + (rowCnt + 1).ToString()));
+                 
+                    if (dtBCThang.Rows.Count == 0)
+                    {
+                        Excel.Range myRange = oSheet.get_Range("A4", lastColumn + "4");
+                        myRange.AutoFilter("1", "<>", Excel.XlAutoFilterOperator.xlOr, "", true);
+                    }
+                    else
+                    {
+                        Excel.Range myRange = oSheet.get_Range("A4", lastColumn + (rowCnt - 1).ToString());
+                        myRange.AutoFilter("1", "<>", Excel.XlAutoFilterOperator.xlOr, "", true);
+                    }
+                    this.Cursor = Cursors.Default;
+                    Commons.Modules.ObjSystems.HideWaitForm();
+                    oXL.Visible = true;
+                    oXL.UserControl = true;
+                }
+                catch (Exception ex)
+                {
+                    Commons.Modules.ObjSystems.HideWaitForm();
+                    this.Cursor = Cursors.Default;
+                    MessageBox.Show(ex.Message);
+                }
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
 
         private void grvMauBC_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)

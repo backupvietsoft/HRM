@@ -66,7 +66,24 @@ namespace Vs.Payroll.Form
                 XtraUserControl ctl = new XtraUserControl();
                 switch (btn.Tag.ToString())
                 {
-
+                    case "import":
+                        {
+                            frmImportCDChinhSua frm = new frmImportCDChinhSua();
+                            frm.dtThang = Ngay;
+                            if (frm.ShowDialog() == DialogResult.OK)
+                            {
+                                LoadgrvCDThuaThieu();
+                                LoadgrvCN();
+                                grvCDThuaThieu_FocusedRowChanged(null, null);
+                            }
+                            else
+                            {
+                                LoadgrvCDThuaThieu();
+                                LoadgrvCN();
+                                grvCDThuaThieu_FocusedRowChanged(null, null);
+                            }
+                            break;
+                        }
                     case "sua":
                         {
                             iID_CD_TMP = Convert.ToInt64(grvCNThucHien.GetFocusedRowCellValue("ID_CD"));
@@ -135,10 +152,12 @@ namespace Vs.Payroll.Form
         private void cboID_DT_EditValueChanged(object sender, EventArgs e)
         {
             LoadcboORD();
+            LoadSLChot();
         }
         private void cboID_ORD_EditValueChanged(object sender, EventArgs e)
         {
             if (Commons.Modules.sLoad == "0Load") return;
+            LoadSLChot();
             LoadgrvCDThuaThieu();
             LoadgrvCN();
             grvCDThuaThieu_FocusedRowChanged(null, null);
@@ -176,6 +195,7 @@ namespace Vs.Payroll.Form
                 dtTmp.DefaultView.RowFilter = sDK;
             }
             catch { }
+            LoadTextTongLSP();
         }
         #endregion
 
@@ -193,9 +213,10 @@ namespace Vs.Payroll.Form
             windowsUIButton.Buttons[0].Properties.Visible = visible;
             windowsUIButton.Buttons[1].Properties.Visible = visible;
             windowsUIButton.Buttons[2].Properties.Visible = visible;
-            windowsUIButton.Buttons[3].Properties.Visible = !visible;
+            windowsUIButton.Buttons[3].Properties.Visible = visible;
             windowsUIButton.Buttons[4].Properties.Visible = !visible;
-            windowsUIButton.Buttons[5].Properties.Visible = visible;
+            windowsUIButton.Buttons[5].Properties.Visible = !visible;
+            windowsUIButton.Buttons[6].Properties.Visible = visible;
 
             grdCDThuaThieu.Enabled = visible;
             grvCNThucHien.OptionsBehavior.Editable = !visible;
@@ -623,6 +644,20 @@ namespace Vs.Payroll.Form
             catch { }
         }
 
+        private void LoadTextTongLSP()
+        {
+            try
+            {
+                DataTable dt1 = new DataTable();
+                dt1 = Commons.Modules.ObjSystems.ConvertDatatable(grvCNThucHien);
+                lbl.Text = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "lblTongSoLuong") + " " + (Convert.ToDouble(dt1.Compute("Sum(SO_LUONG)", "")).ToString("N0") == "" ? "0" : Convert.ToDouble(dt1.Compute("Sum(SO_LUONG)", "")).ToString("N0")).ToString();
+            }
+            catch
+            {
+                lbl.Text = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "lblTongSoLuong") + " 0";
+            }
+        }
+
         private void LoadgrvCN()
         {
             try
@@ -682,6 +717,8 @@ namespace Vs.Payroll.Form
                 tableLayoutPanel1.RowStyles[4].Height = 0;
             }
             LoadgrvCDThuaThieu();
+            LoadgrvCN();
+            grvCDThuaThieu_FocusedRowChanged(null, null);
         }
 
         private void datTNgay_EditValueChanged(object sender, EventArgs e)
@@ -822,6 +859,11 @@ namespace Vs.Payroll.Form
                 grvCDThuaThieu_FocusedRowChanged(null, null);
             }
             catch (Exception ex) { }
+        }
+
+        private void grvCNThucHien_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
+        {
+            LoadTextTongLSP();
         }
     }
 }

@@ -10,10 +10,11 @@ namespace Vs.HRM
 {
     public partial class frmPhuLucHDLD : DevExpress.XtraEditors.XtraForm
     {
-        bool cothem = false;
-        int idhdld = 0;
-        string sSoHD = "";
-        string sNgayHD = "";
+        private bool cothem = false;
+        private int idhdld = 0;
+        private string sSoHD = "";
+        private string sNgayHD = "";
+
         public frmPhuLucHDLD(string sohd, string ngayhd, int idhd)
         {
             InitializeComponent();
@@ -24,6 +25,7 @@ namespace Vs.HRM
         }
 
         #region sự kiện của form
+
         private void frmPhuLucHDLD_Load(object sender, EventArgs e)
         {
             //load combobox ID_QHLookUpEdit
@@ -35,6 +37,7 @@ namespace Vs.HRM
             enableButon(true);
             Commons.Modules.ObjSystems.SetPhanQuyen(windowsUIButton);
         }
+
         private void windowsUIButton_ButtonClick(object sender, DevExpress.XtraBars.Docking2010.ButtonEventArgs e)
         {
             WindowsUIButton btn = e.Button as WindowsUIButton;
@@ -114,10 +117,12 @@ namespace Vs.HRM
                     break;
             }
         }
+
         private void grvPLHD_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
             Bindingdata(false);
         }
+
         private void grdPLHD_ProcessGridKey(object sender, KeyEventArgs e)
         {
             if (e.KeyData == Keys.Delete)
@@ -125,9 +130,11 @@ namespace Vs.HRM
                 DeleteData();
             }
         }
-        #endregion
+
+        #endregion sự kiện của form
 
         #region hàm load form
+
         //hàm load gridview
         private void LoadgrdPhuLucHopDong(string id)
         {
@@ -161,8 +168,8 @@ namespace Vs.HRM
             dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetListPhuLucHopDong", id, Commons.Modules.UserName, Commons.Modules.TypeLanguage));
             dt.PrimaryKey = new DataColumn[] { dt.Columns["SO_PLHD"] };
             Commons.Modules.ObjSystems.MLoadXtraGrid(grdPLHD, grvPLHD, dt, false, true, true, true, true, this.Name);
-
         }
+
         //hàm bingding dữ liệu
         private void Bindingdata(bool bthem)
         {
@@ -182,7 +189,6 @@ namespace Vs.HRM
                     NGAY_KYDateEdit.EditValue = DateTime.Today;
                     NGUOI_KYLookUpEdit.EditValue = null;
                     GHI_CHUMemoEdit.EditValue = "";
-
                 }
                 catch (Exception ex)
                 {
@@ -199,6 +205,7 @@ namespace Vs.HRM
                 GHI_CHUMemoEdit.EditValue = grvPLHD.GetFocusedRowCellValue("GHI_CHU");
             }
         }
+
         //hàm tắc mở control
         private void enableButon(bool visible)
         {
@@ -220,6 +227,7 @@ namespace Vs.HRM
             NGUOI_KYLookUpEdit.Properties.ReadOnly = visible;
             GHI_CHUMemoEdit.Properties.ReadOnly = visible;
         }
+
         private void InPLHD_MT()
         {
             try
@@ -251,9 +259,9 @@ namespace Vs.HRM
             }
             catch
             {
-
             }
         }
+
         private void InPLHD_SB()
         {
             try
@@ -290,9 +298,9 @@ namespace Vs.HRM
             }
             catch
             {
-
             }
         }
+
         private void InPLHD_DM()
         {
             try
@@ -329,12 +337,13 @@ namespace Vs.HRM
             }
             catch
             {
-
             }
         }
-        #endregion
+
+        #endregion hàm load form
 
         #region hàm sử lý data
+
         //hàm sử lý khi lưu dữ liệu(thêm/Sửa)
         private bool SaveData()
         {
@@ -369,6 +378,7 @@ namespace Vs.HRM
                 return false;
             }
         }
+
         //hàm xử lý khi xóa dữ liệu
         private void DeleteData()
         {
@@ -383,6 +393,7 @@ namespace Vs.HRM
             {
             }
         }
-        #endregion
+
+        #endregion hàm sử lý data
     }
 }

@@ -16,8 +16,6 @@ namespace VietSoftHRM
         {
             try
             {
-
-
                 clsMain.setConfig();
                 Thread t;
 

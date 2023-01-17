@@ -411,7 +411,7 @@ namespace Vs.TimeAttendance
 
                 Range row4_E = oSheet.Range[oSheet.Cells[4, 5], oSheet.Cells[4, 5]];
                 row4_E.ColumnWidth = 35;
-                row4_E.Value2 = "P.BAN/X.NGHIỆP";
+                row4_E.Value2 = "Bộ phận";
 
                 Range row4_F = oSheet.Range[oSheet.Cells[4, 6], oSheet.Cells[4, 6]];
                 row4_F.ColumnWidth = 35;
@@ -436,7 +436,7 @@ namespace Vs.TimeAttendance
                 int col = 11;
                 string currentColumn = string.Empty;
 
-                while (col <= 21)
+                while (col <= 22)
                 {
                     Range row4_T = oSheet.Range[oSheet.Cells[4, col], oSheet.Cells[4, col]]; 
                     row4_T.ColumnWidth = 8;

@@ -124,9 +124,25 @@ namespace Vs.HRM
 
         private void XI_NGHIEPLookUpEdit_EditValueChanged(object sender, EventArgs e)
         {
-            if (Commons.Modules.sLoad == "0Load") return;
-            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(ID_TOLookUpEdit, Commons.Modules.ObjSystems.DataTo(Convert.ToInt32(DON_VILookUpEdit.EditValue), Convert.ToInt32(XI_NGHIEPLookUpEdit.EditValue), false), "ID_TO", "TEN_TO", "TEN_TO", true, true);
-            Commons.Modules.ObjSystems.MLoadLookUpEdit(ID_LCVLookUpEdit, Commons.Modules.ObjSystems.DataLoaiCV(false, Convert.ToInt32(XI_NGHIEPLookUpEdit.EditValue)), "ID_LCV", "TEN_LCV", "TEN_LCV", true);
+            try
+            {
+                if (Commons.Modules.sLoad == "0Load") return;
+                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(ID_TOLookUpEdit, Commons.Modules.ObjSystems.DataTo(Convert.ToInt32(DON_VILookUpEdit.EditValue), Convert.ToInt32(XI_NGHIEPLookUpEdit.EditValue), false), "ID_TO", "TEN_TO", "TEN_TO", true, true);
+                switch (Commons.Modules.KyHieuDV)
+                {
+                    case "DM":
+                        {
+                            Commons.Modules.ObjSystems.MLoadLookUpEdit(ID_LCVLookUpEdit, Commons.Modules.ObjSystems.DataLoaiCV(false, Convert.ToInt32(XI_NGHIEPLookUpEdit.EditValue)), "ID_LCV", "TEN_LCV", "TEN_LCV", true);
+                            break;
+                        }
+                    default:
+                        {
+                            Commons.Modules.ObjSystems.MLoadLookUpEdit(ID_LCVLookUpEdit, Commons.Modules.ObjSystems.DataLoaiCV(false, -1), "ID_LCV", "TEN_LCV", "TEN_LCV", true);
+                            break;
+                        }
+                }
+            }
+            catch { }
         }
 
         private void XI_NGHIEP_CUTextEdit_EditValueChanged(object sender, EventArgs e)
@@ -347,7 +363,11 @@ namespace Vs.HRM
                     XI_NGHIEPLookUpEdit.EditValue = grvCongTac.GetFocusedRowCellValue("ID_XN");
                     ID_TOLookUpEdit.EditValue = grvCongTac.GetFocusedRowCellValue("ID_TO");
                     ID_CVLookUpEdit.EditValue = grvCongTac.GetFocusedRowCellValue("ID_CV");
-                    ID_LCVLookUpEdit.EditValue = grvCongTac.GetFocusedRowCellValue("ID_LCV");
+                    try
+                    {
+                        ID_LCVLookUpEdit.EditValue = grvCongTac.GetFocusedRowCellValue("ID_LCV");
+                    }
+                    catch { }
                     ID_CTLLookUpEdit.EditValue = grvCongTac.GetFocusedRowCellValue("ID_CTL").ToString() == "" ? -99 : Convert.ToInt64(grvCongTac.GetFocusedRowCellValue("ID_CTL"));
 
                     //error: string.IsNullOrEmpt();
@@ -417,8 +437,23 @@ namespace Vs.HRM
                 ID_TOLookUpEdit.EditValue = grvCongTac.GetFocusedRowCellValue("ID_TO");
                 Commons.Modules.ObjSystems.MLoadLookUpEditN(ID_CV_CULookUpEdit, Commons.Modules.ObjSystems.DataChucVu(false, Convert.ToInt32(ID_LCV_CULookUpEdit.EditValue)), "ID_CV", "TEN_CV", "TEN_CV", "", true);
                 ID_CV_CULookUpEdit.EditValue = grvCongTac.GetFocusedRowCellValue("ID_CV_CU");
-                Commons.Modules.ObjSystems.MLoadLookUpEdit(ID_LCVLookUpEdit, Commons.Modules.ObjSystems.DataLoaiCV(false, Convert.ToInt32(XI_NGHIEPLookUpEdit.EditValue)), "ID_LCV", "TEN_LCV", "TEN_LCV", true);
-                ID_LCVLookUpEdit.EditValue = grvCongTac.GetFocusedRowCellValue("ID_LCV");
+                switch (Commons.Modules.KyHieuDV)
+                {
+                    case "DM":
+                        {
+                            Commons.Modules.ObjSystems.MLoadLookUpEdit(ID_LCVLookUpEdit, Commons.Modules.ObjSystems.DataLoaiCV(false, Convert.ToInt32(XI_NGHIEPLookUpEdit.EditValue)), "ID_LCV", "TEN_LCV", "TEN_LCV", true);
+                            ID_LCVLookUpEdit.EditValue = grvCongTac.GetFocusedRowCellValue("ID_LCV");
+                            break;
+                        }
+                    default:
+                        {
+                            Commons.Modules.ObjSystems.MLoadLookUpEdit(ID_LCVLookUpEdit, Commons.Modules.ObjSystems.DataLoaiCV(false, -1), "ID_LCV", "TEN_LCV", "TEN_LCV", true);
+                            ID_LCVLookUpEdit.EditValue = grvCongTac.GetFocusedRowCellValue("ID_LCV");
+                            break;
+                        }
+
+                }
+
                 Commons.Modules.ObjSystems.MLoadLookUpEditN(ID_CVLookUpEdit, Commons.Modules.ObjSystems.DataChucVu(false, Convert.ToInt32(ID_LCVLookUpEdit.EditValue)), "ID_CV", "TEN_CV", "TEN_CV", "", true);
                 ID_CVLookUpEdit.EditValue = grvCongTac.GetFocusedRowCellValue("ID_CV");
             }
@@ -924,6 +959,11 @@ namespace Vs.HRM
             {
                 throw ex;
             }
+        }
+
+        private void ID_TOLookUpEdit_EditValueChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -132,16 +132,23 @@ namespace Vs.Payroll
                 }
                 if (!isAdd)
                 {
+                    double fTongSL = 0;
+                    try
+                    {
+                        fTongSL = Convert.ToDouble(dt.Compute("Sum(SO_LUONG)", ""));
+                    }
+                    catch { }
                     dt = new DataTable();
                     dt = ds.Tables[1].Copy();
+
                     DataTable dt1 = new DataTable();
                     dt1 = ds.Tables[2].Copy();
-                    iTongDoanhThu = Convert.ToDouble(dt1.Rows[0][0]);
-                    lblTextDoanhThu.Text = "Doanh thu theo ngày : " + dt.Rows[0][0].ToString() + " đồng    Doanh thu tháng : " + Convert.ToDouble(dt1.Rows[0][0]).ToString("#,##0") + " đồng";
-                    dt1 = new DataTable();
-                    dt1 = ds.Tables[3].Copy();
+                    iTongDoanhThu = Convert.ToDouble(dt.Rows[0][0]) + Convert.ToDouble(dt1.Rows[0][0]); // doanh thu tháng + doanh thu ngoài
+                    lbl.Text = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "lblTongSoLuong") + " : " + fTongSL.ToString("N0") + "     " + Commons.Modules.ObjLanguages.GetLanguage(this.Name, "lblDoanhThuNgoai") + " : " + Convert.ToDouble(dt1.Rows[0][0]).ToString("#,##0") + " " + Commons.Modules.ObjLanguages.GetLanguage(this.Name, "lblDong") + "     " + Commons.Modules.ObjLanguages.GetLanguage(this.Name, "lblDoanhThuThang") + " : " + Convert.ToDouble(dt.Rows[0][0]).ToString("#,##0") + " " + Commons.Modules.ObjLanguages.GetLanguage(this.Name, "lblDong");
+                    dt = new DataTable();
+                    dt = ds.Tables[3].Copy();
                     iTinhTrang = 1;
-                    iTinhTrang = Convert.ToInt32(dt1.Rows[0][0]);
+                    iTinhTrang = Convert.ToInt32(dt.Rows[0][0]);
                 }
             }
             catch (Exception ex)
@@ -219,7 +226,8 @@ namespace Vs.Payroll
                         {
                             if (grvData.RowCount == 0) return;
                             if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msg_XoaDong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) return;
-                            SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "DELETE FROM dbo.DOANH_THU_CAT WHERE ID = " + grvData.GetFocusedRowCellValue("ID") + "");
+                            SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "DELETE FROM dbo.DOANH_THU_CAT WHERE ID = " + grvData.GetFocusedRowCellValue("ID_DTC") + "");
+                            LoadData();
                             break;
                         }
                     case "thoat":
@@ -243,6 +251,8 @@ namespace Vs.Payroll
                         {
                             frmTinhLuongCNToCat frm = new frmTinhLuongCNToCat();
                             frm.iID_TO = Convert.ToInt32(cboTo.EditValue);
+                            frm.iID_XN = Convert.ToInt32(cboXiNghiep.EditValue);
+                            frm.iID_DV = Convert.ToInt32(cboDonVi.EditValue);
                             frm.dNgay = Commons.Modules.ObjSystems.ConvertDateTime(cboThang.Text);
                             frm.fTongDoanhThu = iTongDoanhThu;
                             if (frm.ShowDialog() == DialogResult.OK)
@@ -267,6 +277,7 @@ namespace Vs.Payroll
                 btnALL.Buttons[1].Properties.Visible = false;
                 btnALL.Buttons[2].Properties.Visible = false;
                 btnALL.Buttons[3].Properties.Visible = false;
+                btnALL.Buttons[4].Properties.Visible = false;
                 btnCNCat.Visible = false;
             }
             else
@@ -276,8 +287,9 @@ namespace Vs.Payroll
                 btnALL.Buttons[2].Properties.Visible = !visible;
                 btnALL.Buttons[3].Properties.Visible = !visible;
                 btnALL.Buttons[4].Properties.Visible = !visible;
-                btnALL.Buttons[5].Properties.Visible = visible;
+                btnALL.Buttons[5].Properties.Visible = !visible;
                 btnALL.Buttons[6].Properties.Visible = visible;
+                btnALL.Buttons[7].Properties.Visible = visible;
                 btnCNCat.Visible = !visible;
                 cboTo.Enabled = !visible;
                 cboThang.Enabled = !visible;
@@ -512,6 +524,13 @@ namespace Vs.Payroll
 
                 DataTable dt = new DataTable();
                 dt = ((DataTable)grdData.DataSource).Copy();
+                if (dt.Rows.Count == 0)
+                {
+                    this.Cursor = Cursors.Default;
+                    Commons.Modules.ObjSystems.HideWaitForm();
+                    XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgKhongCoDuLieuIn"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
                 DataView dv = dt.DefaultView;
 
                 DataTable dt1 = new DataTable();

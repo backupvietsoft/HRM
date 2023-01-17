@@ -36,10 +36,13 @@ namespace Vs.HRM
 
             Commons.Modules.ObjSystems.MLoadLookUpEdit(ID_LHDLDLookUpEdit, Commons.Modules.ObjSystems.DataLoaiHDLD(false), "ID_LHDLD", "TEN_LHDLD", "TEN_LHDLD", true);
             Commons.Modules.ObjSystems.MLoadLookUpEdit(NGUOI_KY_GIA_HANLookUpEdit, Commons.Modules.ObjSystems.DataNguoiKy(), "ID_NK", "HO_TEN", "HO_TEN");
-            Commons.Modules.ObjSystems.MLoadLookUpEdit(NGUOI_KY_GIA_HANLookUpEdit, Commons.Modules.ObjSystems.DataNguoiKy(), "ID_NK", "HO_TEN", "HO_TEN");
-            Commons.Modules.ObjSystems.MLoadLookUpEdit(cboTinhTrang, Commons.Modules.ObjSystems.DataTinhTrang(false), "ID_TT", "TenTT", "TenTT");
-            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboNgachLuong, Commons.Modules.ObjSystems.DataNgachLuong(false), "ID_NL", "MS_NL", "MS_NL", true, true);
-            //Commons.Modules.ObjSystems.MLoadLookUpEdit(cboBAC_LUONG, Commons.Modules.ObjSystems.DataBacLuong(-1, DateTime.Today, true), "ID_BL", "TEN_BL", "TEN_BL", true);
+            string sSQL = "SELECT TOP 2 ID_TT,CASE " + Commons.Modules.TypeLanguage + " WHEN 0 THEN TenTT WHEN 1 THEN ISNULL(NULLIF(TenTT_A,''),TenTT) ELSE ISNULL(NULLIF(TenTT_H,''),TenTT) END AS TenTT FROM dbo.TINH_TRANG ORDER BY ID_TT";
+            DataTable dtTT = new DataTable();
+            dtTT.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSQL));
+            Commons.Modules.ObjSystems.MLoadLookUpEdit(cboTinhTrang, dtTT, "ID_TT", "TenTT", "TenTT");
+
+            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboNgachLuong, Commons.Modules.ObjSystems.DataNgachLuong(false), "ID_NL", "TEN_NL", "TEN_NL", true);
+            Commons.Modules.ObjSystems.MLoadLookUpEdit(cboBAC_LUONG, Commons.Modules.ObjSystems.DataBacLuong(Convert.ToInt64(cboNgachLuong.EditValue), DateTime.Today, true), "ID_BL", "TEN_BL", "TEN_BL", false);
             LoadgrdHopDong(-1);
             enableButon(true);
             Commons.Modules.sLoad = "";
@@ -115,7 +118,7 @@ namespace Vs.HRM
 
                     if (grvHopDong.RowCount == 0)
                     {
-                        NGAY_BAT_DAU_HDDateEdit.EditValue = DateTime.Now;
+                        NGAY_BAT_DAU_HDDateEdit.EditValue = Convert.ToDateTime(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT NGAY_VAO_LAM FROM dbo.CONG_NHAN  WHERE ID_CN = " + Commons.Modules.iCongNhan));
                     }
                     else
                     {
@@ -138,8 +141,8 @@ namespace Vs.HRM
                     txtTaiLieu.ResetText();
                     ID_LHDLDLookUpEdit.EditValue = null;
                     cboTinhTrang.EditValue = 1;
-                    cboNgachLuong.EditValue = "";
-                    cboBAC_LUONG.EditValue = "";
+                    try { cboNgachLuong.EditValue = tableTTC_CN.Rows[0]["NGACH_LUONG"]; } catch { }
+                    try { cboBAC_LUONG.EditValue = tableTTC_CN.Rows[0]["BAC_LUONG"]; } catch { }
 
                     sMO_TA_CV_A = "";
                 }
@@ -159,11 +162,7 @@ namespace Vs.HRM
                     NGAY_HET_HDDateEdit.EditValue = grvHopDong.GetFocusedRowCellValue("NGAY_HET_HD");
                     NGAY_KYDateEdit.EditValue = Convert.ToDateTime(grvHopDong.GetFocusedRowCellValue("NGAY_KY")) == DateTime.MinValue ? NGAY_KYDateEdit.EditValue = null : Convert.ToDateTime(grvHopDong.GetFocusedRowCellValue("NGAY_KY"));
                     HD_GIA_HANCheckEdit.EditValue = Convert.ToBoolean(grvHopDong.GetFocusedRowCellValue("HD_GIA_HAN"));
-                    try
-                    {
-                        cboNgachLuong.EditValue = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT ID_NL FROM dbo.NGACH_LUONG WHERE MS_NL =  " + Convert.ToInt32(grvHopDong.GetFocusedRowCellValue("NGACH_LUONG")) + ""));
-                    }
-                    catch { }
+                    cboNgachLuong.EditValue = grvHopDong.GetFocusedRowCellValue("NGACH_LUONG");
                     cboBAC_LUONG.EditValue = grvHopDong.GetFocusedRowCellValue("BAC_LUONG");
                     MUC_LUONG_CHINHTextEdit.EditValue = grvHopDong.GetFocusedRowCellValue("MUC_LUONG_CHINH");
                     CHI_SO_PHU_CAPTextEdit.EditValue = grvHopDong.GetFocusedRowCellValue("CHI_SO_PHU_CAP");
@@ -193,7 +192,7 @@ namespace Vs.HRM
                 DateTime NGAY_HET_HD;
                 bool IsCorrectFormatDateTime = false;
 
-                if (getID_TT_HD() == 3)
+                if (Convert.ToString(getID_TT_HD().Rows[0]["KY_HIEU"]) == "HĐTV")
                 {
                     IsCorrectFormatDateTime = System.DateTime.TryParse(NGAY_HET_HDDateEdit.EditValue.ToString().Trim(), out NGAY_HET_HD);
                     if (!IsCorrectFormatDateTime)
@@ -224,7 +223,7 @@ namespace Vs.HRM
                 txtMO_TA_CV.Text,
                 sMO_TA_CV_A,
                 ID_CVLookUpEdit.EditValue,
-                SO_NGAY_PHEPTextEdit.EditValue,
+                SO_NGAY_PHEPTextEdit.Text,
                 NGUOI_KY_GIA_HANLookUpEdit.EditValue, cboTinhTrang.EditValue, txtTaiLieu.EditValue,
                 cothem,
                 Convert.ToInt32(cboTinhTrang.EditValue)
@@ -258,7 +257,7 @@ namespace Vs.HRM
             }
         }
 
-        private void LoadgrdHopDong(int id)
+        public void LoadgrdHopDong(int id)
         {
             DataTable dt = new DataTable();
             dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetListHopDong", idcn, Commons.Modules.UserName, Commons.Modules.TypeLanguage));
@@ -320,46 +319,82 @@ namespace Vs.HRM
         {
             ngayhethan(Convert.ToInt32(ID_LHDLDLookUpEdit.EditValue));
             if (windowsUIButton.Buttons[2].Properties.Visible) return;
-            switch (getID_TT_HD())
+
+            switch (Commons.Modules.KyHieuDV)
             {
-                case 1: // hợp đồng xác định thời hạn
+                case "DM":
                     {
-                        HD_GIA_HANCheckEdit.Properties.ReadOnly = true;
-                        HD_GIA_HANCheckEdit.Checked = true;
-                        NGAY_HET_HDDateEdit.Properties.ReadOnly = false;
-                        NGAY_HET_HDDateEdit.EditValue = Convert.ToDateTime(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.fnNgayKetThucHD('" + Convert.ToDateTime(NGAY_BAT_DAU_HDDateEdit.DateTime.AddYears(1)).ToString("MM/dd/yyyy") + "'," + 1 + ")"));
+                        switch (Convert.ToString(getID_TT_HD().Rows[0]["KY_HIEU"]))
+                        {
+                            case "XĐTH": // hợp đồng xác định thời hạn
+                                {
+                                    HD_GIA_HANCheckEdit.Properties.ReadOnly = true;
+                                    HD_GIA_HANCheckEdit.Checked = true;
+                                    NGAY_HET_HDDateEdit.Properties.ReadOnly = false;
+                                    NGAY_HET_HDDateEdit.EditValue = Convert.ToDateTime(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.fnNgayKetThucHD('" + Convert.ToDateTime(NGAY_BAT_DAU_HDDateEdit.DateTime.AddYears(1)).ToString("MM/dd/yyyy") + "'," + 1 + ")"));
+                                    break;
+                                }
+                            case "KXĐTH": // Không xác định thời hạn
+                                {
+                                    NGAY_HET_HDDateEdit.Properties.ReadOnly = true;
+                                    NGAY_HET_HDDateEdit.EditValue = null;
+                                    HD_GIA_HANCheckEdit.Properties.ReadOnly = true;
+                                    HD_GIA_HANCheckEdit.Checked = true;
+                                    break;
+                                }
+                            case "HĐTV": // Hợp đồng thử việc
+                                {
+                                    try
+                                    {
+                                        NGAY_KYDateEdit.DateTime = DateTime.Now;
+                                        NGAY_HET_HDDateEdit.Properties.ReadOnly = false;
+                                        HD_GIA_HANCheckEdit.Properties.ReadOnly = true;
+                                        HD_GIA_HANCheckEdit.Checked = false;
+                                        int iNgayTV = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT ISNULL(SO_NGAY,0) SO_NGAY FROM dbo.LOAI_HDLD WHERE ID_LHDLD = " + Convert.ToInt32(ID_LHDLDLookUpEdit.EditValue) + ""));
+                                        if (iNgayTV == 0)
+                                        {
+                                            NGAY_HET_HDDateEdit.EditValue = null;
+                                        }
+                                        else
+                                        {
+
+                                            NGAY_BAT_DAU_HDDateEdit.EditValue = Convert.ToDateTime(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.fnLayNgayBDHD(" + Commons.Modules.iCongNhan + ")"));
+                                            NGAY_HET_HDDateEdit.EditValue = Convert.ToDateTime(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.fnNgayKetThucHD('" + Convert.ToDateTime(NGAY_BAT_DAU_HDDateEdit.DateTime).ToString("MM/dd/yyyy") + "'," + iNgayTV + ")"));
+                                        }
+
+                                    }
+                                    catch { }
+                                    break;
+                                }
+                            default:
+                                {
+                                    NGAY_BAT_DAU_HDDateEdit.EditValue = Convert.ToDateTime(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.fnLayNgayBDHD(" + Commons.Modules.iCongNhan + ")"));
+                                    break;
+                                }
+                        }
                         break;
                     }
-                case 2: // Không xác định thời hạn
-                    {
-                        NGAY_HET_HDDateEdit.Properties.ReadOnly = true;
-                        NGAY_HET_HDDateEdit.EditValue = null;
-                        HD_GIA_HANCheckEdit.Properties.ReadOnly = true;
-                        HD_GIA_HANCheckEdit.Checked = true;
-                        break;
-                    }
-                case 3: // Hợp đồng thử việc
+
+                default:
                     {
                         try
                         {
-                            NGAY_KYDateEdit.DateTime = DateTime.Now;
-                            NGAY_HET_HDDateEdit.Properties.ReadOnly = false;
-                            HD_GIA_HANCheckEdit.Properties.ReadOnly = true;
-                            HD_GIA_HANCheckEdit.Checked = false;
-                            int iNgayTV = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT ISNULL(SO_NGAY,0) SO_NGAY FROM dbo.LOAI_HDLD WHERE ID_LHDLD = " + Convert.ToInt32(ID_LHDLDLookUpEdit.EditValue) + ""));
-                            if (iNgayTV == 0)
+                            int SoNgay = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT SO_NGAY FROM dbo.LOAI_HDLD WHERE ID_LHDLD =" + Convert.ToInt32(ID_LHDLDLookUpEdit.EditValue)));
+                            if (SoNgay == 0)
                             {
                                 NGAY_HET_HDDateEdit.EditValue = null;
                             }
                             else
                             {
-
-                                NGAY_BAT_DAU_HDDateEdit.EditValue = Convert.ToDateTime(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.fnLayNgayBDHD(" + Commons.Modules.iCongNhan + ")"));
-                                NGAY_HET_HDDateEdit.EditValue = Convert.ToDateTime(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.fnNgayKetThucHD('" + Convert.ToDateTime(NGAY_BAT_DAU_HDDateEdit.DateTime).ToString("MM/dd/yyyy") + "'," + iNgayTV + ")"));
+                                NGAY_HET_HDDateEdit.EditValue = Convert.ToDateTime(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.fnNgayKetThucHD('" + Convert.ToDateTime(NGAY_BAT_DAU_HDDateEdit.DateTime).ToString("MM/dd/yyyy") + "'," + SoNgay + ")"));
                             }
+                        }
+
+                        catch (Exception ex)
+                        {
+                            XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgBanChuaThietLapSoNgayChoLoaiHDNayf"));
 
                         }
-                        catch { }
                         break;
                     }
             }
@@ -393,6 +428,7 @@ namespace Vs.HRM
                 {
                     case "them":
                         {
+
                             if (Commons.Modules.iCongNhan == -1)
                             {
 
@@ -407,7 +443,7 @@ namespace Vs.HRM
                         }
                     case "sua":
                         {
-                            if ((Convert.ToInt32(cboTinhTrang.EditValue) == 2 && (Commons.Modules.UserName != "admin" || Commons.Modules.UserName != "administrator")) || (Convert.ToInt32(cboTinhTrang.EditValue) == 3 && (Commons.Modules.UserName != "admin" || Commons.Modules.UserName != "administrator")))
+                            if ((Convert.ToInt32(cboTinhTrang.EditValue) == 2 && (Commons.Modules.UserName.Trim().ToLower() != "admin" && Commons.Modules.UserName.Trim().ToLower() != "administrator")))
                             {
                                 XtraMessageBox.Show(cboTinhTrang.Text + Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgTinhTrangKhongSuaDuoc"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "sThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 return;
@@ -462,9 +498,9 @@ namespace Vs.HRM
                                 return;
                             }
 
-                            if (getID_TT_HD() == 1 || getID_TT_HD() == 2)
+                            if (Convert.ToInt32(getID_TT_HD().Rows[0]["ID_TT_HD"]) == 1 || Convert.ToInt32(getID_TT_HD().Rows[0]["ID_TT_HD"]) == 2)
                             {
-                                if (getID_TT_HD() == 1)
+                                if (Convert.ToInt32(getID_TT_HD().Rows[0]["ID_TT_HD"]) == 1)
                                 {
                                     if (NGAY_BAT_DAU_HDDateEdit.Text == "" || NGAY_HET_HDDateEdit.Text == "")
                                     {
@@ -510,10 +546,13 @@ namespace Vs.HRM
                                 return;
                             }
                             conn.Close();
-
-                            if (Convert.ToInt32(cboTinhTrang.EditValue) != 2 && grvHopDong.RowCount > 0)
+                            int slchuaKy = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT COUNT(*) FROM dbo.HOP_DONG_LAO_DONG WHERE ID_CN =  " + Commons.Modules.iCongNhan + " AND ID_TT = 1 AND ID_HDLD !=" + grvHopDong.GetFocusedRowCellValue("ID_HDLD")));
+                            if (Convert.ToInt32(cboTinhTrang.EditValue) != 2 && grvHopDong.RowCount > 1 && slchuaKy > 0)
                             {
-                                if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgCoHDchuaky"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "sThongBao"), MessageBoxButtons.YesNo) == DialogResult.No) return;
+                                if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgCoHDchuaky"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "sThongBao")) == DialogResult.OK) return;
+                            }
+                            else
+                            {
                                 SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "UPDATE dbo.HOP_DONG_LAO_DONG SET ID_TT = 2 WHERE ID_CN =" + Commons.Modules.iCongNhan + "");
                             }
                             if (SaveData())
@@ -587,37 +626,42 @@ namespace Vs.HRM
                         break;
                 }
             }
-            catch { }
+            catch (Exception ex) { }
         }
 
         private void NGAY_BAT_DAU_HDDateEdit_EditValueChanged(object sender, EventArgs e)
         {
             try
             {
-                int iNgayTV = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT ISNULL(SO_NGAY,0) SO_NGAY FROM dbo.LOAI_HDLD WHERE ID_LHDLD = " + Convert.ToInt32(ID_LHDLDLookUpEdit.EditValue) + ""));
-
-
                 if (windowsUIButton.Buttons[6].Properties.Visible == false)
                 {
-                    if (NGAY_HET_HDDateEdit.EditValue != null)
+                    int A = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.fnKiemNgayBDHD(" + Commons.Modules.iCongNhan + ",'" + Convert.ToDateTime(NGAY_BAT_DAU_HDDateEdit.EditValue).ToString("MM/dd/yyyy") + "'," + (cothem == true ? -1 : Convert.ToInt64(grvHopDong.GetFocusedRowCellValue("ID_HDLD"))) + ")"));
+                    if (A == 1)
                     {
-                        if (checkNgay(Convert.ToDateTime(NGAY_BAT_DAU_HDDateEdit.EditValue), Convert.ToDateTime(NGAY_HET_HDDateEdit.EditValue)) == 3)
-                        {
-                            XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgNgayBatDauKhongDuocLonHonNgayKetThuc"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "sThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            NGAY_BAT_DAU_HDDateEdit.EditValue = Convert.ToDateTime(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.fnLayNgayBDHD(" + Commons.Modules.iCongNhan + ")"));
-                        }
-                        int A = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.fnKiemNgayBDHD(" + Commons.Modules.iCongNhan + ",'" + Convert.ToDateTime(NGAY_BAT_DAU_HDDateEdit.EditValue).ToString("MM/dd/yyyy") + "')"));
-                        if (A == 1)
-                        {
-                            XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgNgayBatDauKhongDuocLonHonNVL"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "sThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            NGAY_BAT_DAU_HDDateEdit.EditValue = Convert.ToDateTime(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.fnLayNgayBDHD(" + Commons.Modules.iCongNhan + ")"));
-                        }
-                        else
-                        {
-                            NGAY_HET_HDDateEdit.EditValue = Convert.ToDateTime(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.fnNgayKetThucHD('" + Convert.ToDateTime(NGAY_BAT_DAU_HDDateEdit.DateTime).ToString("MM/dd/yyyy") + "'," + iNgayTV + ")"));
-                            return;
-                        }
+                        NGAY_BAT_DAU_HDDateEdit.ErrorText = Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgNgayBatDauKhongDuocLonHonNVL");
+                        return;
                     }
+                    if (A == 2)
+                    {
+                        NGAY_BAT_DAU_HDDateEdit.ErrorText = Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgNgayDaTonTai");
+                        return;
+                    }
+
+                    //if (NGAY_HET_HDDateEdit.EditValue != null)
+                    //{
+                    //    if (checkNgay(Convert.ToDateTime(NGAY_BAT_DAU_HDDateEdit.EditValue), Convert.ToDateTime(NGAY_HET_HDDateEdit.EditValue)) == 3)
+                    //    {
+                    //        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgNgayBatDauKhongDuocLonHonNgayKetThuc"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "sThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    //        NGAY_BAT_DAU_HDDateEdit.EditValue = Convert.ToDateTime(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.fnLayNgayBDHD(" + Commons.Modules.iCongNhan + ")"));
+                    //    }
+
+                    //    else
+                    //    {
+                    //        int iNgayTV = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT ISNULL(SO_NGAY,0) SO_NGAY FROM dbo.LOAI_HDLD WHERE ID_LHDLD = " + Convert.ToInt32(ID_LHDLDLookUpEdit.EditValue) + ""));
+                    //        NGAY_HET_HDDateEdit.EditValue = Convert.ToDateTime(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.fnNgayKetThucHD('" + Convert.ToDateTime(NGAY_BAT_DAU_HDDateEdit.DateTime).ToString("MM/dd/yyyy") + "'," + iNgayTV + ")"));
+                    //        return;
+                    //    }
+                    //}
                 }
             }
             catch
@@ -707,16 +751,17 @@ namespace Vs.HRM
             }
         }
 
-        private int getID_TT_HD()
+        private DataTable getID_TT_HD()
         {
-            int id_TT_HD = -1;
+            DataTable dt = new DataTable();
             try
             {
-                return id_TT_HD = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT T1.ID_TT_HD FROM dbo.TINH_TRANG_HD T1 INNER JOIN dbo.LOAI_HDLD T2 ON T2.ID_TT_HD = T1.ID_TT_HD WHERE T2.ID_LHDLD = " + (ID_LHDLDLookUpEdit.Text == "" ? -1 : Convert.ToInt32(ID_LHDLDLookUpEdit.EditValue)) + ""));
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT T1.ID_TT_HD ,T1.KY_HIEU FROM dbo.TINH_TRANG_HD T1 INNER JOIN dbo.LOAI_HDLD T2 ON T2.ID_TT_HD = T1.ID_TT_HD WHERE T2.ID_LHDLD = " + (ID_LHDLDLookUpEdit.Text == "" ? -1 : Convert.ToInt32(ID_LHDLDLookUpEdit.EditValue)) + ""));
+                return dt;
             }
             catch
             {
-                return id_TT_HD;
+                return dt = null;
             }
         }
 
@@ -739,27 +784,26 @@ namespace Vs.HRM
 
         private void NGAY_HET_HDDateEdit_EditValueChanged(object sender, EventArgs e)
         {
-            ngayhethan(Convert.ToInt32(ID_LHDLDLookUpEdit.EditValue));
-            int iNgayTV = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT ISNULL(SO_NGAY,0) SO_NGAY FROM dbo.LOAI_HDLD WHERE ID_LHDLD = " + Convert.ToInt32(ID_LHDLDLookUpEdit.EditValue) + ""));
-            int A = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.fnKiemNgayBDHD(" + Commons.Modules.iCongNhan + ",'" + Convert.ToDateTime(NGAY_BAT_DAU_HDDateEdit.EditValue).ToString("MM/dd/yyyy") + "')"));
-            if (windowsUIButton.Buttons[6].Properties.Visible == false)
-            {
-                if (NGAY_HET_HDDateEdit.EditValue != null)
-                {
-                    if (checkNgay(Convert.ToDateTime(NGAY_BAT_DAU_HDDateEdit.EditValue), Convert.ToDateTime(NGAY_HET_HDDateEdit.EditValue)) == 3)
-                    {
-                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgNgayBatDauKhongDuocLonHonNgayKetThuc"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "sThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        NGAY_HET_HDDateEdit.EditValue = Convert.ToDateTime(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.fnNgayKetThucHD('" + Convert.ToDateTime(NGAY_BAT_DAU_HDDateEdit.DateTime).ToString("MM/dd/yyyy") + "'," + iNgayTV + ")"));
-                        return;
-                    }
+            //ngayhethan(Convert.ToInt32(ID_LHDLDLookUpEdit.EditValue));
+            //int iNgayTV = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT ISNULL(SO_NGAY,0) SO_NGAY FROM dbo.LOAI_HDLD WHERE ID_LHDLD = " + Convert.ToInt32(ID_LHDLDLookUpEdit.EditValue) + ""));
+            //int A = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.fnKiemNgayBDHD(" + Commons.Modules.iCongNhan + ",'" + Convert.ToDateTime(NGAY_BAT_DAU_HDDateEdit.EditValue).ToString("MM/dd/yyyy") + "'," + (cothem == true ? -1 : Convert.ToInt64(grvHopDong.GetFocusedRowCellValue("ID_HDLD"))) + ")"));
+            //if (windowsUIButton.Buttons[6].Properties.Visible == false)
+            //{
+            //    if (NGAY_HET_HDDateEdit.EditValue != null)
+            //    {
+            //        if (checkNgay(Convert.ToDateTime(NGAY_BAT_DAU_HDDateEdit.EditValue), Convert.ToDateTime(NGAY_HET_HDDateEdit.EditValue)) == 3)
+            //        {
+            //            XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgNgayBatDauKhongDuocLonHonNgayKetThuc"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "sThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //            NGAY_HET_HDDateEdit.EditValue = Convert.ToDateTime(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.fnNgayKetThucHD('" + Convert.ToDateTime(NGAY_BAT_DAU_HDDateEdit.DateTime).ToString("MM/dd/yyyy") + "'," + iNgayTV + ")"));
+            //            return;
+            //        }
 
-                }
-            }
+            //    }
+            //}
         }
 
         private void cboNgachLuong_EditValueChanged(object sender, EventArgs e)
         {
-            if (Commons.Modules.sLoad == "0Load") return;
             ngayhethan(Convert.ToInt32(ID_LHDLDLookUpEdit.EditValue));
             try
             {

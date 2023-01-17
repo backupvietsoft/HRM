@@ -256,6 +256,9 @@ namespace Vs.Recruit
                     DONG = DONG + 1 + Commons.Modules.ObjSystems.ConvertDatatable(grdData).AsEnumerable().Count(x => x["ID_DV"].Equals(tbdonvi.Rows[i][0]));
                 }
 
+                title = Commons.Modules.MExcel.GetRange(excelWorkSheet, 8, 1, DONG, TCot);
+                title.Borders.LineStyle = 1;
+
                 excelWorkSheet.Application.ActiveWindow.SplitRow = 9;
                 excelWorkSheet.Application.ActiveWindow.FreezePanes = true;
 

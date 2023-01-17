@@ -112,6 +112,7 @@
             this.ItemForGHI_CHU = new DevExpress.XtraLayout.LayoutControlItem();
             this.dxValidationProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
             this.ofdfile = new System.Windows.Forms.OpenFileDialog();
+            this.dxValidationProvider11 = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
             this.windowsUIButton.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.searchControl.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdCongTac)).BeginInit();
@@ -177,6 +178,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForGHI_CHU)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider11)).BeginInit();
             this.SuspendLayout();
             // 
             // windowsUIButton
@@ -589,6 +591,7 @@
             conditionValidationRule13.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.Critical;
             conditionValidationRule13.Value1 = 0;
             this.dxValidationProvider1.SetValidationRule(this.ID_TOLookUpEdit, conditionValidationRule13);
+            this.ID_TOLookUpEdit.EditValueChanged += new System.EventHandler(this.ID_TOLookUpEdit_EditValueChanged);
             // 
             // gridView2
             // 
@@ -1040,6 +1043,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForGHI_CHU)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider11)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1109,5 +1113,6 @@
         private DevExpress.XtraEditors.LookUpEdit cboTinhTrang;
         private DevExpress.XtraLayout.LayoutControlItem ItemForTinhTrang;
         private System.Windows.Forms.OpenFileDialog ofdfile;
+        private DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider dxValidationProvider11;
     }
 }

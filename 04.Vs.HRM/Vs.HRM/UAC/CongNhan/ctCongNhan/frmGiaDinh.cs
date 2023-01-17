@@ -236,22 +236,24 @@ namespace Vs.HRM
                 //catch (Exception ex)
                 //{
                 //}
-                ID_QHLookUpEdit.EditValue = Convert.ToInt64(grvGiaDinh.GetFocusedRowCellValue("ID_QHGD"));
-                //rdo_CongTy.SelectedIndex = grvGiaDinh.GetFocusedRowCellValue("ID_CN_QH").ToString() == "" ? 1 : 0;
-                NGAY_SINHDateEdit.EditValue = grvGiaDinh.GetFocusedRowCellValue("NGAY_SINH");
-                NGHE_NGHIEPTextEdit.EditValue = grvGiaDinh.GetFocusedRowCellValue("NGHE_NGHIEP");
-                DIA_CHITextEdit.EditValue = grvGiaDinh.GetFocusedRowCellValue("DIA_CHI");
-                NGUOI_GHCheckEdit.EditValue = Convert.ToBoolean(grvGiaDinh.GetFocusedRowCellValue("NGUOI_GH"));
-                HO_TENTextEdit.EditValue = grvGiaDinh.GetFocusedRowCellValue("HO_TEN");
-                txtMS_BHXH.EditValue = grvGiaDinh.GetFocusedRowCellValue("MS_BHXH");
-                txtCMND.EditValue = grvGiaDinh.GetFocusedRowCellValue("SO_CMND");
-                cboID_QG.EditValue = grvGiaDinh.GetFocusedRowCellValue("ID_QG");
-                cboID_DanToc.EditValue = grvGiaDinh.GetFocusedRowCellValue("ID_DT");
-                cboQH_CH.EditValue = string.IsNullOrEmpty(grvGiaDinh.GetFocusedRowCellValue("QH_CH").ToString()) ? -1 : Convert.ToInt64(grvGiaDinh.GetFocusedRowCellValue("QH_CH"));
-                txt_GHI_CHU.EditValue = grvGiaDinh.GetFocusedRowCellValue("GHI_CHU");
-                cboGIOI_TINH.EditValue = string.IsNullOrEmpty(grvGiaDinh.GetFocusedRowCellValue("GIOI_TINH").ToString()) ? 0 : Convert.ToInt32(grvGiaDinh.GetFocusedRowCellValue("GIOI_TINH"));
-
-
+                try
+                {
+                    ID_QHLookUpEdit.EditValue = Convert.ToInt64(grvGiaDinh.GetFocusedRowCellValue("ID_QHGD"));
+                    //rdo_CongTy.SelectedIndex = grvGiaDinh.GetFocusedRowCellValue("ID_CN_QH").ToString() == "" ? 1 : 0;
+                    NGAY_SINHDateEdit.EditValue = grvGiaDinh.GetFocusedRowCellValue("NGAY_SINH");
+                    NGHE_NGHIEPTextEdit.EditValue = grvGiaDinh.GetFocusedRowCellValue("NGHE_NGHIEP");
+                    DIA_CHITextEdit.EditValue = grvGiaDinh.GetFocusedRowCellValue("DIA_CHI");                  
+                    HO_TENTextEdit.EditValue = grvGiaDinh.GetFocusedRowCellValue("HO_TEN");
+                    txtMS_BHXH.EditValue = grvGiaDinh.GetFocusedRowCellValue("MS_BHXH");
+                    txtCMND.EditValue = grvGiaDinh.GetFocusedRowCellValue("SO_CMND");
+                    cboID_QG.EditValue = grvGiaDinh.GetFocusedRowCellValue("ID_QG");
+                    cboID_DanToc.EditValue = grvGiaDinh.GetFocusedRowCellValue("ID_DT");
+                    cboQH_CH.EditValue = string.IsNullOrEmpty(grvGiaDinh.GetFocusedRowCellValue("QH_CH").ToString()) ? -1 : Convert.ToInt64(grvGiaDinh.GetFocusedRowCellValue("QH_CH"));
+                    txt_GHI_CHU.EditValue = grvGiaDinh.GetFocusedRowCellValue("GHI_CHU");
+                    cboGIOI_TINH.EditValue = string.IsNullOrEmpty(grvGiaDinh.GetFocusedRowCellValue("GIOI_TINH").ToString()) ? 0 : Convert.ToInt32(grvGiaDinh.GetFocusedRowCellValue("GIOI_TINH"));
+                    NGUOI_GHCheckEdit.EditValue = Convert.ToBoolean(grvGiaDinh.GetFocusedRowCellValue("NGUOI_GH"));
+                }
+                catch { }
             }
         }
         private void enableButon(bool visible)

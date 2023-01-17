@@ -74,6 +74,10 @@
     <Reference Include="DevExpress.XtraScheduler.v22.1.Core, Version=22.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraScheduler.v22.1.Reporting, Version=22.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraTreeList.v22.1, Version=22.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="EPPlus, Version=4.5.3.3, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\02.Common\Common\bin\Debug\EPPlus.dll</HintPath>
+    </Reference>
     <Reference Include="Interop.Excel, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <EmbedInteropTypes>True</EmbedInteropTypes>
@@ -128,6 +132,7 @@
     <Reference Include="System.Security" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Transactions" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Windows.Input.Manipulations" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
@@ -159,6 +164,42 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form\frmCapNhatCDTheoMH.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\frmCapNhatCDTheoMH.Designer.cs">
+      <DependentUpon>frmCapNhatCDTheoMH.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form\frmPhieuCongDoanLog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\frmPhieuCongDoanLog.Designer.cs">
+      <DependentUpon>frmPhieuCongDoanLog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form\frmNhapDLKhoiTaoTLNV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\frmNhapDLKhoiTaoTLNV.Designer.cs">
+      <DependentUpon>frmNhapDLKhoiTaoTLNV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form\frmNhapDLThangTLNV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\frmNhapDLThangTLNV.Designer.cs">
+      <DependentUpon>frmNhapDLThangTLNV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form\frmCapNhatNhanhPCD.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\frmCapNhatNhanhPCD.Designer.cs">
+      <DependentUpon>frmCapNhatNhanhPCD.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form\frmPhieuCongDoanPacking.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\frmPhieuCongDoanPacking.Designer.cs">
+      <DependentUpon>frmPhieuCongDoanPacking.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form\frmDonHangBan.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -171,6 +212,12 @@
     <Compile Include="Form\frmDonHangBanView.Designer.cs">
       <DependentUpon>frmDonHangBanView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form\frmsendMail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\frmsendMail.Designer.cs">
+      <DependentUpon>frmsendMail.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form\frmEditMaHang.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -182,6 +229,12 @@
     </Compile>
     <Compile Include="Form\frmImport.Designer.cs">
       <DependentUpon>frmImport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form\frmImportCDChinhSua.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\frmImportCDChinhSua.Designer.cs">
+      <DependentUpon>frmImportCDChinhSua.cs</DependentUpon>
     </Compile>
     <Compile Include="Form\frmImportTienThuongPhuCap.cs">
       <SubType>Form</SubType>
@@ -362,6 +415,18 @@
     </Compile>
     <Compile Include="Form\frmThuaThieuSL.Designer.cs">
       <DependentUpon>frmThuaThieuSL.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form\frmEditCHUC_VU_SAN_XUAT.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\frmEditCHUC_VU_SAN_XUAT.Designer.cs">
+      <DependentUpon>frmEditCHUC_VU_SAN_XUAT.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form\frmTinhHeSoCNC.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\frmTinhHeSoCNC.Designer.cs">
+      <DependentUpon>frmTinhHeSoCNC.cs</DependentUpon>
     </Compile>
     <Compile Include="Form\frmTinhLuongCNToCat.cs">
       <SubType>Form</SubType>
@@ -681,17 +746,41 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form\frmCapNhatCDTheoMH.resx">
+      <DependentUpon>frmCapNhatCDTheoMH.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\frmPhieuCongDoanLog.resx">
+      <DependentUpon>frmPhieuCongDoanLog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\frmNhapDLKhoiTaoTLNV.resx">
+      <DependentUpon>frmNhapDLKhoiTaoTLNV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\frmNhapDLThangTLNV.resx">
+      <DependentUpon>frmNhapDLThangTLNV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\frmCapNhatNhanhPCD.resx">
+      <DependentUpon>frmCapNhatNhanhPCD.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\frmPhieuCongDoanPacking.resx">
+      <DependentUpon>frmPhieuCongDoanPacking.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form\frmDonHangBan.resx">
       <DependentUpon>frmDonHangBan.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\frmDonHangBanView.resx">
       <DependentUpon>frmDonHangBanView.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form\frmsendMail.resx">
+      <DependentUpon>frmsendMail.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form\frmEditMaHang.resx">
       <DependentUpon>frmEditMaHang.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\frmImport.resx">
       <DependentUpon>frmImport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\frmImportCDChinhSua.resx">
+      <DependentUpon>frmImportCDChinhSua.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\frmImportTienThuongPhuCap.resx">
       <DependentUpon>frmImportTienThuongPhuCap.cs</DependentUpon>
@@ -782,6 +871,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form\frmThuaThieuSL.resx">
       <DependentUpon>frmThuaThieuSL.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\frmEditCHUC_VU_SAN_XUAT.resx">
+      <DependentUpon>frmEditCHUC_VU_SAN_XUAT.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\frmTinhHeSoCNC.resx">
+      <DependentUpon>frmTinhHeSoCNC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\frmTinhLuongCNToCat.resx">
       <DependentUpon>frmTinhLuongCNToCat.cs</DependentUpon>
@@ -1064,6 +1159,14 @@
       <Project>{375704a9-ba2d-4325-aa66-2fdd8ee246ca}</Project>
       <Name>Commons</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Resources\error.png" />
+    <Content Include="Resources\icons8_cancel_25px.png" />
+    <Content Include="Resources\info.png" />
+    <Content Include="Resources\success.png" />
+    <Content Include="Resources\warning.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

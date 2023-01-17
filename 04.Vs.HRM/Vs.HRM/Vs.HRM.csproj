@@ -529,6 +529,18 @@
     <Compile Include="UAC\CongNhan\ucKeHoachThaiSan.Designer.cs">
       <DependentUpon>ucKeHoachThaiSan.cs</DependentUpon>
     </Compile>
+    <Compile Include="UAC\CongNhan\ucPhatChiaKhoa.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UAC\CongNhan\ucPhatChiaKhoa.Designer.cs">
+      <DependentUpon>ucPhatChiaKhoa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UAC\CongNhan\ucPhatChoiVeSinh.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UAC\CongNhan\ucPhatChoiVeSinh.Designer.cs">
+      <DependentUpon>ucPhatChoiVeSinh.cs</DependentUpon>
+    </Compile>
     <Compile Include="UAC\CongNhan\ucPhatDongPhuc.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -881,6 +893,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UAC\CongNhan\ucKeHoachThaiSan.resx">
       <DependentUpon>ucKeHoachThaiSan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UAC\CongNhan\ucPhatChiaKhoa.resx">
+      <DependentUpon>ucPhatChiaKhoa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UAC\CongNhan\ucPhatChoiVeSinh.resx">
+      <DependentUpon>ucPhatChoiVeSinh.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UAC\CongNhan\ucPhatDongPhuc.resx">
       <DependentUpon>ucPhatDongPhuc.cs</DependentUpon>

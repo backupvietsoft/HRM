@@ -25,7 +25,7 @@ namespace Vs.HRM
             idcn = id;
         }
         #region function form Load
-        private void LoadgrdTienLuong(int id)
+        public void LoadgrdTienLuong(int id)
         {
             try
             {
@@ -67,6 +67,7 @@ namespace Vs.HRM
                     int index = dt.Rows.IndexOf(dt.Rows.Find(id));
                     grvTienLuong.FocusedRowHandle = grvTienLuong.GetRowHandle(index);
                 }
+                grvTienLuong_FocusedRowChanged(null, null);
             }
             catch (Exception ex)
             {
@@ -351,7 +352,7 @@ namespace Vs.HRM
                         }
                         if (grvTienLuong.RowCount != 0)
                         {
-                            if(cothem == true)
+                            if (cothem == true)
                             {
                                 if (Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT COUNT(*) FROM dbo.LUONG_CO_BAN WHERE ID_CN = " + Commons.Modules.iCongNhan + " AND ID_TT = 1")) > 0)
                                 {
@@ -439,7 +440,7 @@ namespace Vs.HRM
             Commons.Modules.ObjSystems.MLoadLookUpEdit(ID_CVLookUpEdit, Commons.Modules.ObjSystems.DataChucVu(false, System.Convert.ToInt32(-1)), "ID_CV", "TEN_CV", "TEN_CV");
 
             Commons.Modules.sLoad = "0Load";
-            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(NGACH_LUONGLookUpEdit, Commons.Modules.ObjSystems.DataNgachLuong(false), "ID_NL", "MS_NL", "MS_NL", true);
+            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(NGACH_LUONGLookUpEdit, Commons.Modules.ObjSystems.DataNgachLuong(false), "ID_NL", "TEN_NL", "TEN_NL", true);
             Commons.Modules.ObjSystems.MLoadLookUpEdit(BAC_LUONGLookUpEdit, Commons.Modules.ObjSystems.DataBacLuong(-1, DateTime.Today, true), "ID_BL", "TEN_BL", "TEN_BL", true);
             Commons.Modules.ObjSystems.MLoadLookUpEdit(cboTinhTrang, Commons.Modules.ObjSystems.DataTinhTrang(false), "ID_TT", "TenTT", "TenTT");
             enableButon(true);

@@ -83,7 +83,6 @@ namespace VietSoftHRM
                 try
                 {
                     Commons.Modules.bKiemPCD = Convert.ToBoolean(dt.Rows[0]["CHECK_PCD"]);
-
                 }
                 catch 
                 {
@@ -91,7 +90,9 @@ namespace VietSoftHRM
 
                 try
                 {
-                    using (new ConnectToSharedFolder(dt.Rows[0]["DUONG_DAN_TL"].ToString(), new NetworkCredential(dt.Rows[0]["USER_TL"].ToString(), dt.Rows[0]["PASS_TL"].ToString())))
+                    string sUserTL = Commons.Modules.ObjSystems.Decrypt(dt.Rows[0]["USER_TL"].ToString(), true);
+                    string sPassTL = Commons.Modules.ObjSystems.Decrypt(dt.Rows[0]["PASS_TL"].ToString(), true);
+                    using (new ConnectToSharedFolder(dt.Rows[0]["DUONG_DAN_TL"].ToString(), new NetworkCredential(sUserTL, sPassTL)))
                     {
                         Commons.Modules.sDDTaiLieu = dt.Rows[0]["DUONG_DAN_TL"].ToString();
                         bool exists = System.IO.Directory.Exists(Commons.Modules.sDDTaiLieu);
@@ -101,8 +102,8 @@ namespace VietSoftHRM
                         }
                         using (var cred = new Credential())
                         {
-                            cred.Username = dt.Rows[0]["USER_TL"].ToString();
-                            cred.Password = dt.Rows[0]["PASS_TL"].ToString();
+                            cred.Username = sUserTL;
+                            cred.Password = sPassTL;
                             cred.Target = Commons.Modules.sDDTaiLieu.Substring(2, Commons.Modules.sDDTaiLieu.Substring(2).IndexOf("\\"));
                             cred.Type = CredentialType.DomainPassword;
                             cred.PersistanceType = PersistanceType.LocalComputer;
@@ -110,7 +111,7 @@ namespace VietSoftHRM
                         }
                     }
                 }
-                catch 
+                catch (Exception ex)
                 {
                     Commons.Modules.sDDTaiLieu = "";
                     Commons.Modules.iLOAI_CN = 0;
@@ -246,6 +247,7 @@ namespace VietSoftHRM
                                 return;
                             }
                             MUpdate(loai, ".", ".", link3);
+                            Commons.Modules.sInfoSer = Commons.Modules.sInfoClient;
                             break;
                         }
                     case 2: // Updatetren dropbox

@@ -187,7 +187,7 @@ namespace Vs.TimeAttendance
                         System.Data.SqlClient.SqlConnection conn;
                         dt = new DataTable();
                         //string sTieuDe = "DANH SÁCH NHÂN VIÊN CHƯA ĐỦ DỮ LIỆU";
-                        frm.rpt = new rptDSNVVachTheLoi(datNgayChamCong.DateTime, datNgayChamCong.DateTime);
+                        frm.rpt = new rptDSNVVachTheLoi(datNgayChamCong.DateTime, datNgayChamCong.DateTime, datNgayChamCong.DateTime);
 
                         try
                         {

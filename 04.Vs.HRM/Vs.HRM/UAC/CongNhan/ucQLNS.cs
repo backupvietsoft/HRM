@@ -42,12 +42,33 @@ namespace Vs.HRM
             LoadCboTo();
             Commons.Modules.ObjSystems.MLoadLookUpEdit(cboID_LTTHT, Commons.Modules.ObjSystems.DataLoaiTinHTrangHT(false), "ID_LTTHT", "TEN_LOAI_TTHT", "TEN_LOAI_TTHT");
             Commons.Modules.ObjSystems.MLoadLookUpEdit(cbo_TTHT, Commons.Modules.ObjSystems.DataTinHTrangHT(Convert.ToInt32(cboID_LTTHT.EditValue), true), "ID_TT_HT", "TEN_TT_HT", "TEN_TT_HT");
+            datTNgay.DateTime = DateTime.Now.AddDays(10).AddMonths(-2);
+            datDNgay.DateTime = DateTime.Now.AddDays(10);
+            Commons.OSystems.SetDateEditFormat(datTNgay);
+            Commons.OSystems.SetDateEditFormat(datDNgay);
+            lblTheoNgay.Visibility = LayoutVisibility.Never;
+            lblDenNgay.Visibility = LayoutVisibility.Never;
             LoadNhanSu(-1);
             Commons.Modules.sLoad = "";
             setMauTT();
             switch (Commons.Modules.KyHieuDV)
             {
                 case "NB":
+                    {
+
+                        btnDaNghiViec.Visible = false;
+                        lblDaNghiViec.Visible = false;
+                        btnBoViec.Visible = false;
+                        lblBoViec.Visible = false;
+                        lblSapNghiSinh.Text = "Nghỉ sẩy thai";
+                        lblNghiDe.Text = "Nghỉ thai sản";
+                        lblCheDo1Nam.Text = "Đã nghỉ việc";
+                        lblSapNghiViec.Text = "Nghỉ không lương";
+                        btnDaNghiViec.Visible = false;
+                        lblDaNghiViec.Visible = false;
+                        break;
+                    }
+                case "NC":
                     {
 
                         btnDaNghiViec.Visible = false;
@@ -137,6 +158,18 @@ namespace Vs.HRM
         {
             if (Commons.Modules.sLoad == "0Load") return;
             Commons.Modules.sLoad = "0Load";
+
+            DataRowView drv = (DataRowView)cbo_TTHT.GetSelectedDataRow();
+            if (drv.Row["KY_HIEU"].ToString().Trim() != "SHHHD")
+            {
+                lblTheoNgay.Visibility = LayoutVisibility.Never;
+                lblDenNgay.Visibility = LayoutVisibility.Never;
+            }
+            else
+            {
+                lblTheoNgay.Visibility = LayoutVisibility.Always;
+                lblDenNgay.Visibility = LayoutVisibility.Always;
+            }
             LoadNhanSu(-1);
             Commons.Modules.sLoad = "";
         }
@@ -146,7 +179,8 @@ namespace Vs.HRM
             {
 
                 DataTable dtTmp = new DataTable();
-                dtTmp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetListNS_DanhSach", cboDV.EditValue, cboXN.EditValue, cboTo.EditValue, cbo_TTHT.EditValue, cboID_LTTHT.EditValue, Commons.Modules.UserName, Commons.Modules.TypeLanguage));
+                DataRowView drv = (DataRowView)cbo_TTHT.GetSelectedDataRow(); // lấy ký hiệu của tình trạng đang chọn
+                dtTmp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetListNS_DanhSach", cboDV.EditValue, cboXN.EditValue, cboTo.EditValue, cbo_TTHT.EditValue, drv.Row["KY_HIEU"].ToString().Trim(), cboID_LTTHT.EditValue, Commons.Modules.UserName, Commons.Modules.TypeLanguage, datTNgay.DateTime, datDNgay.DateTime));
                 dtTmp.PrimaryKey = new DataColumn[] { dtTmp.Columns["ID_CN"] };
                 Commons.Modules.ObjSystems.MLoadXtraGrid(grdDSCongNhan, grvDSCongNhan, dtTmp, false, false, false, true, true, this.Name);
                 //grdDSCongNhan.DataSource = dtTmp;
@@ -419,16 +453,36 @@ namespace Vs.HRM
         {
             try
             {
-                DataTable dt = new DataTable();
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT ID_TT_HT, MAU_TT FROM dbo.TINH_TRANG_HT ORDER BY STT"));
-                btnBinhThuong.BackColor = System.Drawing.ColorTranslator.FromHtml(dt.Rows[0]["MAU_TT"].ToString());
-                btnSapNghiViec.BackColor = System.Drawing.ColorTranslator.FromHtml(dt.Rows[1]["MAU_TT"].ToString());
-                btnSapNghiSinh.BackColor = System.Drawing.ColorTranslator.FromHtml(dt.Rows[2]["MAU_TT"].ToString());
-                btnNghiDe.BackColor = System.Drawing.ColorTranslator.FromHtml(dt.Rows[3]["MAU_TT"].ToString());
-                btnCheDo1Nam.BackColor = System.Drawing.ColorTranslator.FromHtml(dt.Rows[4]["MAU_TT"].ToString());
-                btnDaNghiViec.BackColor = System.Drawing.ColorTranslator.FromHtml(dt.Rows[5]["MAU_TT"].ToString());
-                btnBoViec.BackColor = System.Drawing.ColorTranslator.FromHtml(dt.Rows[6]["MAU_TT"].ToString());
-                btnSapHetHanHD.BackColor = System.Drawing.ColorTranslator.FromHtml(dt.Rows[7]["MAU_TT"].ToString());
+                switch (Commons.Modules.KyHieuDV)
+                {
+                    case "DM":
+                        {
+
+                            DataTable dt = new DataTable();
+                            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT ID_TT_HT, MAU_TT FROM dbo.TINH_TRANG_HT ORDER BY STT"));
+                            btnBinhThuong.BackColor = System.Drawing.ColorTranslator.FromHtml(dt.Rows[0]["MAU_TT"].ToString());
+                            btnSapNghiViec.BackColor = System.Drawing.ColorTranslator.FromHtml(dt.Rows[1]["MAU_TT"].ToString());
+                            btnSapNghiSinh.BackColor = System.Drawing.ColorTranslator.FromHtml(dt.Rows[2]["MAU_TT"].ToString());
+                            btnNghiDe.BackColor = System.Drawing.ColorTranslator.FromHtml(dt.Rows[3]["MAU_TT"].ToString());
+                            btnCheDo1Nam.BackColor = System.Drawing.ColorTranslator.FromHtml(dt.Rows[4]["MAU_TT"].ToString());
+                            btnDaNghiViec.BackColor = System.Drawing.ColorTranslator.FromHtml(dt.Rows[5]["MAU_TT"].ToString());
+                            btnBoViec.BackColor = System.Drawing.ColorTranslator.FromHtml(dt.Rows[6]["MAU_TT"].ToString());
+                            btnSapHetHanHD.BackColor = System.Drawing.ColorTranslator.FromHtml(dt.Rows[7]["MAU_TT"].ToString());
+                            break;
+                        }
+                    default:
+                        {
+                            DataTable dt = new DataTable();
+                            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT ID_TT_HT, MAU_TT FROM dbo.TINH_TRANG_HT ORDER BY STT"));
+                            btnBinhThuong.BackColor = System.Drawing.ColorTranslator.FromHtml(dt.Rows[0]["MAU_TT"].ToString());
+                            btnSapNghiViec.BackColor = System.Drawing.ColorTranslator.FromHtml(dt.Rows[1]["MAU_TT"].ToString());
+                            btnSapNghiSinh.BackColor = System.Drawing.ColorTranslator.FromHtml(dt.Rows[2]["MAU_TT"].ToString());
+                            btnNghiDe.BackColor = System.Drawing.ColorTranslator.FromHtml(dt.Rows[3]["MAU_TT"].ToString());
+                            btnCheDo1Nam.BackColor = System.Drawing.ColorTranslator.FromHtml(dt.Rows[4]["MAU_TT"].ToString());
+                            btnSapHetHanHD.BackColor = System.Drawing.ColorTranslator.FromHtml(dt.Rows[5]["MAU_TT"].ToString());
+                            break;
+                        }
+                }
             }
             catch { }
         }

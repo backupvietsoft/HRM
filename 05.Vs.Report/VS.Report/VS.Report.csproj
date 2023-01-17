@@ -258,6 +258,12 @@
     <Compile Include="NhanSu\rptBCHopDongHetHan.Designer.cs">
       <DependentUpon>rptBCHopDongHetHan.cs</DependentUpon>
     </Compile>
+    <Compile Include="NhanSu\rptBCKeHoachNghiPhepNgayVL.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptBCKeHoachNghiPhepNgayVL.Designer.cs">
+      <DependentUpon>rptBCKeHoachNghiPhepNgayVL.cs</DependentUpon>
+    </Compile>
     <Compile Include="NhanSu\rptBCKeHoachNghiPhep.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -1105,6 +1111,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="NhanSu\rptBCHopDongHetHan.resx">
       <DependentUpon>rptBCHopDongHetHan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\rptBCKeHoachNghiPhepNgayVL.resx">
+      <DependentUpon>rptBCKeHoachNghiPhepNgayVL.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NhanSu\rptBCKeHoachNghiPhep.resx">
       <DependentUpon>rptBCKeHoachNghiPhep.cs</DependentUpon>

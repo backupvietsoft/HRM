@@ -31,7 +31,7 @@ namespace Vs.Recruit
             Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboDV, Commons.Modules.ObjSystems.DataDonVi(false), "ID_DV", "TEN_DV", "TEN_DV");
             Commons.Modules.ObjSystems.ThayDoiNN(this, new List<LayoutControlGroup> { Root }, windowsUIButton);
             Commons.Modules.sLoad = "";
-            LoadGrdDinhBienLD(-1,"");
+            LoadGrdDinhBienLD(-1, "");
         }
         private void LoadGrdDinhBienLD(Int64 iID_LCV, string KieuLoad)
         {
@@ -39,7 +39,7 @@ namespace Vs.Recruit
             {
                 if (Commons.Modules.sLoad == "0Load") return;
                 DataTable dt = new DataTable();
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetListDinhBienLD", datNam.DateTime.Year, cboDV.EditValue, KieuLoad,Commons.Modules.UserName,Commons.Modules.TypeLanguage));
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetListDinhBienLD", datNam.DateTime.Year, cboDV.EditValue, KieuLoad, Commons.Modules.UserName, Commons.Modules.TypeLanguage));
                 //dt.Columns["DINH_BIEN"].ReadOnly = false;
                 for (int i = 1; i < dt.Columns.Count; i++)
                 {
@@ -236,7 +236,7 @@ namespace Vs.Recruit
             try
             {
                 excelApplication.Cells.Borders.LineStyle = 0;
-                excelApplication.Cells.Font.Name = "Tahoma";
+                excelApplication.Cells.Font.Name = "Times New Roman";
                 excelApplication.Cells.Font.Size = 10;
                 excelWorkSheet.AutoFilterMode = false;
                 excelWorkSheet.Application.ActiveWindow.FreezePanes = false;
@@ -287,14 +287,14 @@ namespace Vs.Recruit
                     //{
                     title = Commons.Modules.MExcel.GetRange(excelWorkSheet, DONG - 1, COT, DONG - 1, COT);
                     title.Value2 = "=SUM(" + Commons.Modules.MExcel.TimDiemExcel(DONG, COT) + ":" + Commons.Modules.MExcel.TimDiemExcel(DONG + dt.Rows.Count - 1, COT) + "";
-                    title1 = Commons.Modules.MExcel.GetRange(excelWorkSheet, DONG - 1, COT, DONG -1, COT + 11);
+                    title1 = Commons.Modules.MExcel.GetRange(excelWorkSheet, DONG - 1, COT, DONG - 1, COT + 11);
                     title.AutoFill(title1, Microsoft.Office.Interop.Excel.XlAutoFillType.xlFillCopy);
 
                     //}
 
                     title = Commons.Modules.MExcel.GetRange(excelWorkSheet, DONG, 1, DONG + dt.Rows.Count - 1, dt.Columns.Count);
                     Commons.Modules.MExcel.MExportExcel(dt, excelWorkSheet, title, false);
-                    
+
                     for (int i = 0; i < 11; i++)
                     {
                         title = Commons.Modules.MExcel.GetRange(excelWorkSheet, DONG - 2, TCot + 3 + i, DONG - 2, TCot + 3 + i);
@@ -302,19 +302,22 @@ namespace Vs.Recruit
                         title.Font.Bold = true;
                         title.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
                         title.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+                        title.Borders.LineStyle = 1;
                     }
 
                     title = Commons.Modules.MExcel.GetRange(excelWorkSheet, DONG - 1, TCot + COT, DONG - 1, TCot + COT);
-                    title.Value2 = "=SUM(" + Commons.Modules.MExcel.TimDiemExcel(DONG, TCot + COT) + ":" + Commons.Modules.MExcel.TimDiemExcel(DONG + dt.Rows.Count - 1,TCot + COT) + "";
+                    title.Value2 = "=SUM(" + Commons.Modules.MExcel.TimDiemExcel(DONG, TCot + COT) + ":" + Commons.Modules.MExcel.TimDiemExcel(DONG + dt.Rows.Count - 1, TCot + COT) + "";
                     title.Interior.Color = System.Drawing.Color.FromArgb(0, 176, 80);
                     title.Font.Bold = true;
-                    title1 = Commons.Modules.MExcel.GetRange(excelWorkSheet, DONG - 1, TCot + COT, DONG -1, TCot + COT + 10);
+                    title.Borders.LineStyle = 1;
+                    title1 = Commons.Modules.MExcel.GetRange(excelWorkSheet, DONG - 1, TCot + COT, DONG - 1, TCot + COT + 10);
                     title.AutoFill(title1, Microsoft.Office.Interop.Excel.XlAutoFillType.xlFillCopy);
 
 
                     title = Commons.Modules.MExcel.GetRange(excelWorkSheet, DONG, TCot + COT, DONG, TCot + COT);
                     title.Value2 = "=" + Commons.Modules.MExcel.TimDiemExcel(DONG, COT + 1) + "-" +
                        Commons.Modules.MExcel.TimDiemExcel(DONG, COT) + "";
+                    title.Borders.LineStyle = 1;
 
                     title1 = Commons.Modules.MExcel.GetRange(excelWorkSheet, DONG, TCot + COT, DONG, TCot + COT + 10);
                     title.AutoFill(title1, Microsoft.Office.Interop.Excel.XlAutoFillType.xlFillCopy);
@@ -324,10 +327,27 @@ namespace Vs.Recruit
                     DONG = DONG + dt.Rows.Count + 2;
                 }
 
-                Commons.Modules.MExcel.ColumnWidth(excelWorkSheet, 8, "@", true, 1, 1, 1, 1);
+                title = Commons.Modules.MExcel.GetRange(excelWorkSheet, 1, 1, DONG, 14);
+                title.Borders.LineStyle = 1;
+
+
+                Commons.Modules.MExcel.ThemDong(excelWorkSheet, Microsoft.Office.Interop.Excel.XlInsertShiftDirection.xlShiftDown, 6, 1);
+                Commons.Modules.MExcel.TaoTTChung(excelWorkSheet, 1, 2, 1, 7, 0, 0);
+
+                title = Commons.Modules.MExcel.GetRange(excelWorkSheet, 6, 1, 6, 14);
+                title.Merge();
+                title.Value2 = "KẾ HOẠCH LAO ĐỘNG NĂM " + datNam.Text;
+                title.Font.FontStyle = "Times New Roman";
+                title.Font.Size = 16;
+                title.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                title.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+                title.Font.Bold = true;
+
+
+                Commons.Modules.MExcel.ColumnWidth(excelWorkSheet, 10, "@", true, 1, 1, 1, 1);
                 Commons.Modules.MExcel.ColumnWidth(excelWorkSheet, 43, "@", true, 1, 2, 1, 2);
 
-                excelWorkSheet.Application.ActiveWindow.SplitRow = 1;
+                excelWorkSheet.Application.ActiveWindow.SplitRow = 8;
                 excelWorkSheet.Application.ActiveWindow.SplitColumn = 2;
                 excelWorkSheet.Application.ActiveWindow.FreezePanes = true;
 
@@ -413,7 +433,7 @@ namespace Vs.Recruit
         }
         private void datNam_EditValueChanged(object sender, EventArgs e)
         {
-            LoadGrdDinhBienLD(-1,"");
+            LoadGrdDinhBienLD(-1, "");
         }
         private void XoaDinhBien()
         {

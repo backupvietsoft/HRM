@@ -13,6 +13,7 @@ using DataTable = System.Data.DataTable;
 using System.Windows.Forms;
 using System.Reflection;
 using System.Collections.Generic;
+using DevExpress.DataAccess.ConnectionParameters;
 
 namespace Vs.Payroll
 {
@@ -99,7 +100,7 @@ namespace Vs.Payroll
                         DataTable dt;
                         switch (rdo_ChonBaoCao.Properties.Items[rdo_ChonBaoCao.SelectedIndex].Tag)
                         {
-                            case "rdo_bangluongsanphamtonghop": // 2
+                            case "rdo_bangluongsanphamtonghop": // 1
                                 {
                                     switch (Commons.Modules.KyHieuDV)
                                     {
@@ -147,7 +148,7 @@ namespace Vs.Payroll
                                     }
                                 }
                                 break;
-                            case "rdo_bangluongsnaphamtonghoptheoMH": //3
+                            case "rdo_bangluongsnaphamtonghoptheoMH": //2
                                 {
                                     switch (Commons.Modules.KyHieuDV)
                                     {
@@ -200,7 +201,7 @@ namespace Vs.Payroll
                                     }
                                 }
                                 break;
-                            case "rdo_luongspcanhan": //0
+                            case "rdo_luongspcanhan": //3
                                 {
                                     try
                                     {
@@ -351,19 +352,23 @@ namespace Vs.Payroll
                                             oSheet.Cells[oRow, 7].ColumnWidth = 35;
                                             oSheet.Cells[oRow, 8] = "Tổng sản lượng cá nhân đã kê";
                                             oSheet.Cells[oRow, 8].ColumnWidth = 10;
-                                            oSheet.Cells[oRow, 9] = "Tổng sản lượng công đoạn";
+                                            oSheet.Cells[oRow, 9] = "Sản lượng nhập";
                                             oSheet.Cells[oRow, 9].ColumnWidth = 10;
-                                            oSheet.Cells[oRow, 10] = "Sản lượng chốt tính lương";
-                                            oSheet.Cells[oRow, 10].ColumnWidth = 15;
-                                            oSheet.Cells[oRow, 11] = "Thừa(-)/ Thiếu(+)";
+                                            oSheet.Cells[oRow, 10] = "Sản lượng sau điều chỉnh";
+                                            oSheet.Cells[oRow, 10].ColumnWidth = 10;
+                                            oSheet.Cells[oRow, 11] = "Tổng sản lượng công đoạn";
                                             oSheet.Cells[oRow, 11].ColumnWidth = 10;
-                                            oSheet.Cells[oRow, 12] = "Đơn giá";
-                                            oSheet.Cells[oRow, 12].ColumnWidth = 10;
-                                            oSheet.Cells[oRow, 13] = "Thành tiền";
-                                            oSheet.Cells[oRow, 13].ColumnWidth = 15;
+                                            oSheet.Cells[oRow, 12] = "Sản lượng chốt tính lương";
+                                            oSheet.Cells[oRow, 12].ColumnWidth = 15;
+                                            oSheet.Cells[oRow, 13] = "Thừa(-)/ Thiếu(+)";
+                                            oSheet.Cells[oRow, 13].ColumnWidth = 10;
+                                            oSheet.Cells[oRow, 14] = "Đơn giá";
+                                            oSheet.Cells[oRow, 14].ColumnWidth = 10;
+                                            oSheet.Cells[oRow, 15] = "Thành tiền";
+                                            oSheet.Cells[oRow, 15].ColumnWidth = 15;
 
                                             string LastTitleColumn = string.Empty;
-                                            LastTitleColumn = "M";
+                                            LastTitleColumn = "O";
                                             Microsoft.Office.Interop.Excel.Range row_TieuDe_BaoCao = oSheet.get_Range("A" + oRow.ToString(), LastTitleColumn + oRow.ToString());
                                             row_TieuDe_BaoCao.Font.Size = fontSizeNoiDung;
                                             row_TieuDe_BaoCao.Font.Name = fontName;
@@ -387,6 +392,9 @@ namespace Vs.Payroll
                                                 }
                                                 rowCnt++;
                                             }
+
+
+
                                             oRow = rowBD + rowCnt - 1;
                                             oSheet.get_Range("A" + rowBD, lastColumn + oRow.ToString()).Value2 = rowData;
                                             oSheet.get_Range("A" + rowBD, LastTitleColumn + oRow.ToString()).Font.Size = fontSizeNoiDung;
@@ -395,6 +403,35 @@ namespace Vs.Payroll
                                             BorderAround(oSheet.get_Range("A" + rowBD, LastTitleColumn + oRow.ToString()));
 
                                             Microsoft.Office.Interop.Excel.Range formatRange;
+                                            Microsoft.Office.Interop.Excel.Range formatRange1;
+
+                                            formatRange1 = oSheet.get_Range("J" + rowBD, "J" + rowBD.ToString());
+                                            formatRange1.Value2 = "=H8+I8";
+                                            formatRange = oSheet.get_Range("J" + rowBD, "J" + oRow.ToString());
+
+                                            if (dtBCLSP.Rows.Count > 1)
+                                            {
+                                                formatRange1.AutoFill(formatRange, Microsoft.Office.Interop.Excel.XlAutoFillType.xlFillCopy);
+                                            }
+
+                                            formatRange1 = oSheet.get_Range("M" + rowBD, "M" + rowBD.ToString());
+                                            formatRange1.Value2 = "=L8-K8";
+                                            formatRange = oSheet.get_Range("M" + rowBD, "M" + oRow.ToString());
+
+                                            if (dtBCLSP.Rows.Count > 1)
+                                            {
+                                                formatRange1.AutoFill(formatRange, Microsoft.Office.Interop.Excel.XlAutoFillType.xlFillCopy);
+                                            }
+
+                                            formatRange1 = oSheet.get_Range("O" + rowBD, "O" + rowBD.ToString());
+                                            formatRange1.Value2 = "=J8*N8";
+                                            formatRange = oSheet.get_Range("O" + rowBD, "O" + oRow.ToString());
+
+                                            if (dtBCLSP.Rows.Count > 1)
+                                            {
+                                                formatRange1.AutoFill(formatRange, Microsoft.Office.Interop.Excel.XlAutoFillType.xlFillCopy);
+                                            }
+
                                             formatRange = oSheet.get_Range("H" + rowBD, "H" + oRow.ToString());
                                             formatRange.NumberFormat = "#,##0;(#,##0); ; ";
                                             formatRange.TextToColumns(Type.Missing, Microsoft.Office.Interop.Excel.XlTextParsingType.xlDelimited, Microsoft.Office.Interop.Excel.XlTextQualifier.xlTextQualifierDoubleQuote);
@@ -408,19 +445,28 @@ namespace Vs.Payroll
                                             formatRange.NumberFormat = "#,##0;(#,##0); ; ";
                                             formatRange.TextToColumns(Type.Missing, Microsoft.Office.Interop.Excel.XlTextParsingType.xlDelimited, Microsoft.Office.Interop.Excel.XlTextQualifier.xlTextQualifierDoubleQuote);
                                             formatRange = oSheet.get_Range("L" + rowBD, "L" + oRow.ToString());
-                                            formatRange.NumberFormat = "#,##0.000;(#,##0.000); ; ";
+                                            formatRange.NumberFormat = "#,##0;(#,##0); ; ";
                                             formatRange.TextToColumns(Type.Missing, Microsoft.Office.Interop.Excel.XlTextParsingType.xlDelimited, Microsoft.Office.Interop.Excel.XlTextQualifier.xlTextQualifierDoubleQuote);
 
                                             formatRange = oSheet.get_Range("M" + rowBD, "M" + oRow.ToString());
                                             formatRange.NumberFormat = "#,##0;(#,##0); ; ";
                                             formatRange.TextToColumns(Type.Missing, Microsoft.Office.Interop.Excel.XlTextParsingType.xlDelimited, Microsoft.Office.Interop.Excel.XlTextQualifier.xlTextQualifierDoubleQuote);
 
-                                            oSheet.get_Range("M" + (rowBD - 2).ToString() + "").Value2 = "=SUBTOTAL(9,M" + rowBD + ":M" + oRow.ToString() + ")";
-                                            oSheet.get_Range("M" + (rowBD - 2).ToString() + "").NumberFormat = "#,##0;(#,##0); ; ";
-                                            oSheet.get_Range("M" + (rowBD - 2).ToString() + "").Font.Size = fontSizeNoiDung;
-                                            oSheet.get_Range("M" + (rowBD - 2).ToString() + "").Font.Name = fontName;
-                                            oSheet.get_Range("M" + (rowBD - 2).ToString() + "").Font.Bold = true;
-                                            oSheet.get_Range("M" + (rowBD - 2).ToString() + "").Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+                                            formatRange = oSheet.get_Range("N" + rowBD, "N" + oRow.ToString());
+                                            formatRange.NumberFormat = "#,##0;(#,##0); ; ";
+                                            formatRange.TextToColumns(Type.Missing, Microsoft.Office.Interop.Excel.XlTextParsingType.xlDelimited, Microsoft.Office.Interop.Excel.XlTextQualifier.xlTextQualifierDoubleQuote);
+
+                                            formatRange = oSheet.get_Range("O" + rowBD, "O" + oRow.ToString());
+                                            formatRange.NumberFormat = "#,##0;(#,##0); ; ";
+                                            formatRange.TextToColumns(Type.Missing, Microsoft.Office.Interop.Excel.XlTextParsingType.xlDelimited, Microsoft.Office.Interop.Excel.XlTextQualifier.xlTextQualifierDoubleQuote);
+
+
+                                            oSheet.get_Range("O" + (rowBD - 2).ToString() + "").Value2 = "=SUBTOTAL(9,O" + rowBD + ":O" + oRow.ToString() + ")";
+                                            oSheet.get_Range("O" + (rowBD - 2).ToString() + "").NumberFormat = "#,##0;(#,##0); ; ";
+                                            oSheet.get_Range("O" + (rowBD - 2).ToString() + "").Font.Size = fontSizeNoiDung;
+                                            oSheet.get_Range("O" + (rowBD - 2).ToString() + "").Font.Name = fontName;
+                                            oSheet.get_Range("O" + (rowBD - 2).ToString() + "").Font.Bold = true;
+                                            oSheet.get_Range("O" + (rowBD - 2).ToString() + "").Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
 
                                             oRow = 1;
                                             oSheet = (Microsoft.Office.Interop.Excel.Worksheet)oBook.ActiveSheet;
@@ -439,12 +485,12 @@ namespace Vs.Payroll
                                     }
                                 }
                                 break;
-                            case "rdo_luongspchitiet": // 4
+                            case "rdo_luongspchitiet": // 6
                                 {
                                     LuongSPTongHopTN();
                                     break;
                                 }
-                            case "rdo_luongspchitietcanhan": // 1
+                            case "rdo_luongspchitietcanhan": // 4
                                 {
                                     try
                                     {
@@ -689,7 +735,7 @@ namespace Vs.Payroll
                                     // frm.ShowDialog();
                                 }
                                 break;
-                            case "rdo_bangtonghopluongmahang": // 5
+                            case "rdo_bangtonghopluongmahang": // 7
                                 {
                                     System.Data.SqlClient.SqlConnection conn;
                                     dt = new DataTable();
@@ -730,17 +776,17 @@ namespace Vs.Payroll
                                     frm.ShowDialog();
                                     break;
                                 }
-                            case "rdo_BaoCaoChiTietHangNgay":
+                            case "rdo_BaoCaoChiTietHangNgay": // 0
                                 {
                                     LuongSPChiTietTheoNgay();
                                     break;
                                 }
-                            case "rdo_BCSanLuongTheoCN": // 6
+                            case "rdo_BCSanLuongTheoCN": // 5
                                 {
                                     LuongSPTheoCongNhan();
                                     break;
                                 }
-                            case "rdo_BCDoanhThuTongHop":
+                            case "rdo_BCDoanhThuTongHop": //8
                                 {
                                     BaoCaoDoanhThuTL();
                                     break;
@@ -752,6 +798,12 @@ namespace Vs.Payroll
                 case "thoat":
                     {
                         Commons.Modules.ObjSystems.GotoHome(this);
+                        break;
+                    }
+                case "guimail":
+                    {
+                        frmsendMail frm = new frmsendMail(2, Convert.ToInt32(LK_DON_VI.EditValue), LK_DON_VI.Text);
+                        frm.ShowDialog();
                         break;
                     }
                 default:
@@ -1385,13 +1437,21 @@ namespace Vs.Payroll
 
                 oWB = (Microsoft.Office.Interop.Excel.Workbook)(oXL.Workbooks.Add(Missing.Value));
                 oSheet = (Excel.Worksheet)oWB.ActiveSheet;
-
                 string fontName = "Times New Roman";
                 int fontSizeTieuDe = 10;
                 int fontSizeNoiDung = 10;
 
                 int lastColumn = 0;
                 lastColumn = dtBCThang.Columns.Count;
+                int ngayCongChuanThang = 1;
+                try
+                {
+                    DateTime NgayDauThang = new DateTime(datTNgay.DateTime.Year, datTNgay.DateTime.Month, 1);
+                    DateTime NgayCuoiThang = NgayDauThang.AddMonths(1).AddDays(-1);
+
+                    ngayCongChuanThang = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.fnGetSoNgayCongQuiDinhThang('" + NgayDauThang.ToString("MM/dd/yyyy") + "','" + NgayCuoiThang.ToString("MM/dd/yyyy") + "')"));
+                }
+                catch { }
 
                 TaoTTChung(oSheet, 1, 2, 1, 7, 0, 0);
 
@@ -1530,7 +1590,7 @@ namespace Vs.Payroll
 
                 iCot++;
                 row4_TieuDe_TTC = oSheet.Range[oSheet.Cells[7, iCot], oSheet.Cells[7, iCot]];
-                row4_TieuDe_TTC.Value2 = "Summarry (Summarry (Tổng lương SP HC dự tính Tháng 10-21 ngày))";
+                row4_TieuDe_TTC.Value2 = "Summarry (Summarry (Tổng lương SP HC dự tính Tháng " + datTNgay.DateTime.Month + "-" + ngayCongChuanThang + " ngày))";
                 row4_TieuDe_TTC.ColumnWidth = 25;
 
                 iCot++;
@@ -1552,12 +1612,7 @@ namespace Vs.Payroll
                 int stt = 0;
 
                 int iCotSauNgay = 8 + soNgay + 1;
-                int ngayCongChuanThang = 1;
-                try
-                {
-                    ngayCongChuanThang = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.fnGetSoNgayCongQuiDinhThang('" + dNgayDauThang.ToString("MM/dd/yyyy") + "','" + dNgayCuoiThang.ToString("MM/dd/yyyy") + "')"));
-                }
-                catch { }
+
                 TuNgay = TuNgay = dNgayDauThang;
                 foreach (DataRow row2 in dtBCThang.Rows)
                 {
@@ -1588,8 +1643,8 @@ namespace Vs.Payroll
                     arr = arr.Append("=IFERROR(" + CellAddress(oSheet, rowCnt, iCotSauNgay + 3) + "/(" + CellAddress(oSheet, rowCnt, iCotSauNgay + 4) + "+" + CellAddress(oSheet, rowCnt, iCotSauNgay + 5) + "+" + CellAddress(oSheet, rowCnt, iCotSauNgay + 6) + "+" + CellAddress(oSheet, rowCnt, iCotSauNgay + 7) + "),0)").ToArray();
                     arr = arr.Append("=IFERROR(" + CellAddress(oSheet, rowCnt, iCotSauNgay + 4) + "*" + CellAddress(oSheet, rowCnt, iCotSauNgay + 8) + ",0)").ToArray();
                     arr = arr.Append("=IFERROR(" + CellAddress(oSheet, rowCnt, iCotSauNgay + 8) + "*9.6*" + ngayCongChuanThang + ",0)").ToArray();
-                    arr = arr.Append(@"=+IF(" + CellAddress(oSheet, rowCnt, iCotSauNgay + 3) + @"<500000,"" < 500.000"",IF(AND(" + CellAddress(oSheet, rowCnt, iCotSauNgay + 3) + @">=500000," + CellAddress(oSheet, rowCnt, iCotSauNgay + 3) + @"<=1000000),""500.000 -<= 1000.000"",IF(AND(" + CellAddress(oSheet, rowCnt, iCotSauNgay + 3) + ">100000," + CellAddress(oSheet, rowCnt, iCotSauNgay + 3) + @"<=1500000),"" > 1.000.000 -<= 1.500.000"",IF(AND(" + CellAddress(oSheet, rowCnt, iCotSauNgay + 3) + ">1500000," + CellAddress(oSheet, rowCnt, iCotSauNgay + 3) + @"<=2000000),"" > 1.500.000 -<= 2.000.000"",IF(AND(" + CellAddress(oSheet, rowCnt, iCotSauNgay + 3) + ">=2000000," + CellAddress(oSheet, rowCnt, iCotSauNgay + 3) + @"<=2500000),""2.000.000 -<= 2.500.000"",IF(AND(" + CellAddress(oSheet, rowCnt, iCotSauNgay + 3) + ">=2500000," + CellAddress(oSheet, rowCnt, iCotSauNgay + 3) + @"<=3000000),""2.500.000 -<= 3.000.000"",IF(AND(" + CellAddress(oSheet, rowCnt, iCotSauNgay + 3) + ">=3000000," + CellAddress(oSheet, rowCnt, iCotSauNgay + 3) + @"<=3500000),""3.000.000 -<= 3.500.000"",IF(AND(" + CellAddress(oSheet, rowCnt, iCotSauNgay + 3) + ">=3500000," + CellAddress(oSheet, rowCnt, iCotSauNgay + 3) + @"<=4100000),""3.500.000 -<= 4.100.000"",IF(AND(" + CellAddress(oSheet, rowCnt, iCotSauNgay + 3) + @">=4100000),"" >= 4.100.000"",0)))))))))").ToArray();
-                    arr = arr.Append(@"=+IF(" + CellAddress(oSheet, rowCnt, iCotSauNgay + 9) + @"<500000,"" < 500.000"",IF(AND(" + CellAddress(oSheet, rowCnt, iCotSauNgay + 9) + ">=500000," + CellAddress(oSheet, rowCnt, iCotSauNgay + 9) + @"<=1000000),""500.000 -<= 1000.000"",IF(AND(" + CellAddress(oSheet, rowCnt, iCotSauNgay + 9) + ">100000," + CellAddress(oSheet, rowCnt, iCotSauNgay + 9) + @"<=1500000),"" > 1.000.000 -<= 1.500.000"",IF(AND(" + CellAddress(oSheet, rowCnt, iCotSauNgay + 9) + ">1500000," + CellAddress(oSheet, rowCnt, iCotSauNgay + 9) + @"<=2000000),"" > 1.500.000 -<= 2.000.000"",IF(AND(" + CellAddress(oSheet, rowCnt, iCotSauNgay + 9) + ">=2000000," + CellAddress(oSheet, rowCnt, iCotSauNgay + 9) + @"<=2500000),""2.000.000 -<= 2.500.000"",IF(AND(" + CellAddress(oSheet, rowCnt, iCotSauNgay + 9) + ">=2500000," + CellAddress(oSheet, rowCnt, iCotSauNgay + 9) + @"<=3000000),""2.500.000 -<= 3.000.000"",IF(AND(" + CellAddress(oSheet, rowCnt, iCotSauNgay + 9) + ">=3000000," + CellAddress(oSheet, rowCnt, iCotSauNgay + 9) + @"<=3500000),""3.000.000 -<= 3.500.000"",IF(AND(" + CellAddress(oSheet, rowCnt, iCotSauNgay + 9) + ">=3500000," + CellAddress(oSheet, rowCnt, iCotSauNgay + 9) + @"<=4100000),""3.500.000 -<= 4.100.000"",IF(AND(" + CellAddress(oSheet, rowCnt, iCotSauNgay + 9) + @">=4100000),"" >= 4.100.000"",0)))))))))").ToArray();
+                    arr = arr.Append(@"=+IF(" + CellAddress(oSheet, rowCnt, iCotSauNgay + 3) + @"<500000,"" < 500.000"",IF(AND(" + CellAddress(oSheet, rowCnt, iCotSauNgay + 3) + @">=500000," + CellAddress(oSheet, rowCnt, iCotSauNgay + 3) + @"<=1000000),""500.000 -<= 1000.000"",IF(AND(" + CellAddress(oSheet, rowCnt, iCotSauNgay + 3) + ">100000," + CellAddress(oSheet, rowCnt, iCotSauNgay + 3) + @"<=1500000),"" > 1.000.000 -<= 1.500.000"",IF(AND(" + CellAddress(oSheet, rowCnt, iCotSauNgay + 3) + ">1500000," + CellAddress(oSheet, rowCnt, iCotSauNgay + 3) + @"<=2000000),"" > 1.500.000 -<= 2.000.000"",IF(AND(" + CellAddress(oSheet, rowCnt, iCotSauNgay + 3) + ">=2000000," + CellAddress(oSheet, rowCnt, iCotSauNgay + 3) + @"<=2500000),""2.000.000 -<= 2.500.000"",IF(AND(" + CellAddress(oSheet, rowCnt, iCotSauNgay + 3) + ">=2500000," + CellAddress(oSheet, rowCnt, iCotSauNgay + 3) + @"<=3000000),""2.500.000 -<= 3.000.000"",IF(AND(" + CellAddress(oSheet, rowCnt, iCotSauNgay + 3) + ">=3000000," + CellAddress(oSheet, rowCnt, iCotSauNgay + 3) + @"<=3500000),""3.000.000 -<= 3.500.000"",IF(AND(" + CellAddress(oSheet, rowCnt, iCotSauNgay + 3) + ">=3500000," + CellAddress(oSheet, rowCnt, iCotSauNgay + 3) + @"<4100000),""3.500.000 -= 4.100.000"",IF(AND(" + CellAddress(oSheet, rowCnt, iCotSauNgay + 3) + @">=4100000),"" >= 4.100.000"",0)))))))))").ToArray();
+                    arr = arr.Append(@"=+IF(" + CellAddress(oSheet, rowCnt, iCotSauNgay + 10) + @"<500000,"" < 500.000"",IF(AND(" + CellAddress(oSheet, rowCnt, iCotSauNgay + 10) + ">=500000," + CellAddress(oSheet, rowCnt, iCotSauNgay + 10) + @"<=1000000),""500.000 -<= 1000.000"",IF(AND(" + CellAddress(oSheet, rowCnt, iCotSauNgay + 10) + ">100000," + CellAddress(oSheet, rowCnt, iCotSauNgay + 10) + @"<=1500000),"" > 1.000.000 -<= 1.500.000"",IF(AND(" + CellAddress(oSheet, rowCnt, iCotSauNgay + 10) + ">1500000," + CellAddress(oSheet, rowCnt, iCotSauNgay + 10) + @"<=2000000),"" > 1.500.000 -<= 2.000.000"",IF(AND(" + CellAddress(oSheet, rowCnt, iCotSauNgay + 10) + ">=2000000," + CellAddress(oSheet, rowCnt, iCotSauNgay + 10) + @"<=2500000),""2.000.000 -<= 2.500.000"",IF(AND(" + CellAddress(oSheet, rowCnt, iCotSauNgay + 10) + ">=2500000," + CellAddress(oSheet, rowCnt, iCotSauNgay + 10) + @"<=3000000),""2.500.000 -<= 3.000.000"",IF(AND(" + CellAddress(oSheet, rowCnt, iCotSauNgay + 10) + ">=3000000," + CellAddress(oSheet, rowCnt, iCotSauNgay + 10) + @"<=3500000),""3.000.000 -<= 3.500.000"",IF(AND(" + CellAddress(oSheet, rowCnt, iCotSauNgay + 10) + ">=3500000," + CellAddress(oSheet, rowCnt, iCotSauNgay + 10) + @"<4100000),""3.500.000 -< 4.100.000"",IF(AND(" + CellAddress(oSheet, rowCnt, iCotSauNgay + 10) + @">=4100000),"" >= 4.100.000"",0)))))))))").ToArray();
                     arr = arr.Append("=" + CellAddress(oSheet, rowCnt, iCotSauNgay + 8) + "*9.6").ToArray();
                     arr = arr.Append(row2["GHI_CHU"].ToString()).ToArray();
 
@@ -1713,10 +1768,11 @@ namespace Vs.Payroll
                 conn.Open();
                 DataTable dtBCThang;
 
+                DateTime NgayDauThang = new DateTime(datTNgay.DateTime.Year, datTNgay.DateTime.Month, 1);
+                DateTime NgayCuoiThang = NgayDauThang.AddMonths(1).AddDays(-1);
+
                 DateTime TuNgay = datTNgay.DateTime;
                 DateTime DenNgay = datDNgay.DateTime;
-
-                int soNgay = DenNgay.Day - TuNgay.Day;
 
                 System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptPVTheoThamNien", conn);
                 cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
@@ -1778,7 +1834,6 @@ namespace Vs.Payroll
                 row2_TieuDe_BaoCao.RowHeight = 20;
                 row2_TieuDe_BaoCao.Value2 = "Từ ngày " + Convert.ToDateTime(datTNgay.EditValue).ToString("dd/MM/yyyy") + " đến ngày " + Convert.ToDateTime(datDNgay.EditValue).ToString("dd/MM/yyyy");
 
-
                 Range row4_TieuDe_Format = oSheet.Range[oSheet.Cells[7, 1], oSheet.Cells[8, lastColumn]];
                 row4_TieuDe_Format.Font.Size = fontSizeTieuDe;
                 row4_TieuDe_Format.Font.Name = fontName;
@@ -1797,7 +1852,7 @@ namespace Vs.Payroll
                 string SoTienCongChuanThang = "0";
                 try
                 {
-                    SoTienCongChuanThang = Convert.ToString(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT FORMAT(ROUND(CONVERT(INT,T1.LUONG_TOI_THIEU / dbo.fnGetSoNgayCongQuiDinhThang('" + datTNgay.DateTime.ToString("MM/dd/yyyy") + "','" + datDNgay.DateTime.ToString("MM/dd/yyyy") + "')),2),'N0') FROM dbo.LUONG_TOI_THIEU T1 INNER JOIN (SELECT ID_LTT, MAX(NGAY_QD) MAX_NGAY FROM dbo.LUONG_TOI_THIEU WHERE ID_DV = " + LK_DON_VI.EditValue + " GROUP BY ID_LTT) T2 ON T2.ID_LTT = T1.ID_LTT AND T1.NGAY_QD = T2.MAX_NGAY"));
+                    SoTienCongChuanThang = Convert.ToString(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT FORMAT(ROUND(CONVERT(INT,T1.LUONG_TOI_THIEU / dbo.fnGetSoNgayCongQuiDinhThang('" + NgayDauThang.ToString("MM/dd/yyyy") + "','" + NgayCuoiThang.ToString("MM/dd/yyyy") + "')),2),'N0') FROM dbo.LUONG_TOI_THIEU T1 INNER JOIN (SELECT ID_LTT, MAX(NGAY_QD) MAX_NGAY FROM dbo.LUONG_TOI_THIEU WHERE ID_DV = " + LK_DON_VI.EditValue + " GROUP BY ID_LTT) T2 ON T2.ID_LTT = T1.ID_LTT AND T1.NGAY_QD = T2.MAX_NGAY"));
                     //string s = Convert.ToString(SoTienCongChuanThang).ToString("#,##0.00");
                 }
                 catch { }
@@ -1885,7 +1940,7 @@ namespace Vs.Payroll
                 int luongCBNgay = 0;
                 try
                 {
-                    luongCBNgay = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.fnGetSoNgayCongQuiDinhThang('" + datTNgay.DateTime.ToString("MM/dd/yyyy") + "','" + datDNgay.DateTime.ToString("MM/dd/yyyy") + "')"));
+                    luongCBNgay = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.fnGetSoNgayCongQuiDinhThang('" + NgayDauThang.ToString("MM/dd/yyyy") + "','" + NgayCuoiThang.ToString("MM/dd/yyyy") + "')"));
                 }
                 catch { }
 
@@ -1942,7 +1997,7 @@ namespace Vs.Payroll
 
 
                 row4_TieuDe_TTC = oSheet.Range[oSheet.Cells[rowCnt, 9], oSheet.Cells[rowCnt, 9]];
-                row4_TieuDe_TTC.Value2 = "3.500.000-<=4.100.000";
+                row4_TieuDe_TTC.Value2 = "3.500.000-<4.100.000";
                 row4_TieuDe_TTC.ColumnWidth = 10;
 
                 row4_TieuDe_TTC = oSheet.Range[oSheet.Cells[rowCnt, 10], oSheet.Cells[rowCnt, 10]];
@@ -2444,6 +2499,7 @@ namespace Vs.Payroll
                     cmdCT.Parameters.Add("@CHUYEN", SqlDbType.Int).Value = rowC[0];
                     cmdCT.Parameters.Add("@TNgay", SqlDbType.Date).Value = datTNgay.DateTime;
                     cmdCT.Parameters.Add("@DNgay", SqlDbType.Date).Value = datDNgay.DateTime;
+                    cmdCT.Parameters.Add("@SendMail", SqlDbType.Bit).Value = 0;
 
                     cmdCT.CommandType = CommandType.StoredProcedure;
                     System.Data.SqlClient.SqlDataAdapter adpCT = new System.Data.SqlClient.SqlDataAdapter(cmdCT);
@@ -2625,6 +2681,7 @@ namespace Vs.Payroll
                 cmdCT.Parameters.Add("@TNgay", SqlDbType.Date).Value = datTNgay.DateTime;
                 cmdCT.Parameters.Add("@DNgay", SqlDbType.Date).Value = datDNgay.DateTime;
                 cmdCT.Parameters.Add("@sBT", SqlDbType.NVarChar).Value = sBTCongNhan;
+                cmdCT.Parameters.Add("@SendMail", SqlDbType.Bit).Value = 0;
 
                 cmdCT.CommandType = CommandType.StoredProcedure;
                 System.Data.SqlClient.SqlDataAdapter adpCT = new System.Data.SqlClient.SqlDataAdapter(cmdCT);

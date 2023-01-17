@@ -2959,7 +2959,7 @@ F:\01.HRM\05.Vs.Report\Vs.Report\bin\Debug\DevExpress.XtraNavBar.v22.1.xml
 F:\01.HRM\05.Vs.Report\Vs.Report\bin\Debug\DevExpress.XtraPivotGrid.v22.1.xml
 F:\01.HRM\05.Vs.Report\Vs.Report\bin\Debug\DevExpress.XtraDiagram.v22.1.xml
 F:\01.HRM\05.Vs.Report\Vs.Report\bin\Debug\DevExpress.Diagram.v22.1.Core.xml
-F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.csprojAssemblyReference.cache
+F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.csproj.AssemblyReference.cache
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptThamGiaBHXH.resources
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptDSTo.resources
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptDSXiNghiep.resources
@@ -2988,6 +2988,7 @@ F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptBCDSLaoDong_NB.resources
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptBCGiamLaoDongThang.resources
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptBCGiamLaoDongThang_NB.resources
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptBCHopDongHetHan.resources
+F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptBCKeHoachNghiPhepNgayVL.resources
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptBCKeHoachNghiPhep.resources
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptBCKetQuaDaoTao.resources
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptBCKhenThuongKyLuat.resources

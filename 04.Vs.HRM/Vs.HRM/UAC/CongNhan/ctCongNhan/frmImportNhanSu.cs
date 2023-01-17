@@ -507,6 +507,49 @@ namespace Vs.HRM
                 XtraMessageBox.Show(EX.Message);
             }
         }
+        private bool KiemTrungDL_MTCC(GridView grvData, DataTable dt, DataRow dr, int iCot, string sDLKiem, string tabName, string ColName,string ColName_NGHI  , string sform)
+        {
+            string sTenKTra = Commons.Modules.ObjLanguages.GetLanguage(sform, "msgTrungDL");
+            try
+            {
+                DataTable DTTMP = new DataTable();
+                DTTMP = dt.Copy();
+                try
+                {
+
+                    DTTMP = DTTMP.AsEnumerable().Where(x => x.Field<string>(iCot).Trim().Equals(sDLKiem) && (string.IsNullOrEmpty(Convert.ToString(x[ColName_NGHI])) ? "" : " ") == "").CopyToDataTable();
+                }
+                catch { DTTMP.Clear(); }
+                DTTMP.AcceptChanges();
+
+                if (DTTMP.Rows.Count > 1)
+                {
+                    sTenKTra = Commons.Modules.ObjLanguages.GetLanguage(sform, "msgTrungDLLuoi");
+                    dr.SetColumnError(grvData.Columns[iCot].FieldName.ToString(), sTenKTra);
+                    dr["XOA"] = 1;
+                    return false;
+                }
+                else
+                {
+                    if (Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT COUNT(*) FROM dbo.[" + tabName + "] WHERE " + ColName + " = N'" + sDLKiem + "' AND " + ColName_NGHI +" IS NOT NULL ")) > 0)
+                    {
+
+                        sTenKTra = Commons.Modules.ObjLanguages.GetLanguage(sform, "msgTrungDLCSDL");
+                        dr.SetColumnError(grvData.Columns[iCot].FieldName.ToString(), sTenKTra);
+                        dr["XOA"] = 1;
+                        return false;
+                    }
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                dr.SetColumnError(grvData.Columns[iCot].FieldName.ToString(), sTenKTra);
+                dr["XOA"] = 1;
+                return false;
+            }
+        }
+
         #region import ứng viên
         private void ImportUngVien(DataTable dtSource)
         {
@@ -555,7 +598,8 @@ namespace Vs.HRM
                 }
                 else
                 {
-                    if (!Commons.Modules.MExcel.KiemTrungDL(grvData, dtSource, dr, col, sMS_The_CC, "CONG_NHAN", "MS_THE_CC", this.Name))
+   
+                    if (!KiemTrungDL_MTCC(grvData, dtSource, dr, col, sMS_The_CC, "CONG_NHAN", "MS_THE_CC","NGAY_NGHI_VIEC", this.Name))
                     {
                         errorCount++;
                         errorMS++;

@@ -139,10 +139,10 @@ public class MExcel
         }
         return sTmp;
     }
-    public string getValueCell(Excel.Worksheet MWsheet,int DongBD, int CotBD)
+    public string getValueCell(Excel.Worksheet MWsheet, int DongBD, int CotBD)
     {
         string resulst = MWsheet.Cells[DongBD, CotBD].Value;
-        MWsheet.Cells[DongBD, CotBD].Value2 ="";
+        MWsheet.Cells[DongBD, CotBD].Value2 = "";
         return resulst;
     }
     public void MFuntion(Microsoft.Office.Interop.Excel.Worksheet MWsheet, string MFuntion, int DongBD, int CotBD, int DongBDFuntion, int CotBDFuntion, float MFontSize, bool MFontBold, float MColumnWidth, string MNumberFormat)
@@ -262,7 +262,7 @@ public class MExcel
         }
     }
 
-    public void ThemCot(Microsoft.Office.Interop.Excel.Worksheet MWsheet, Microsoft.Office.Interop.Excel.XlInsertShiftDirection DangThem, int SoCotThem, int CotBDThem)
+    public void ThemCot(Excel.Worksheet MWsheet, Microsoft.Office.Interop.Excel.XlInsertShiftDirection DangThem, int SoCotThem, int CotBDThem)
     {
         try
         {
@@ -274,7 +274,7 @@ public class MExcel
         {
         }
     }
-    public void AddExcelDataValidationList(OfficeOpenXml.ExcelWorksheet wsWorkSheet, int iFromRow, int iFromCol, int iToRow, int iToCol, string sFomula , string[] list, string sErrorTitle = "", string sError = "", OfficeOpenXml.DataValidation.ExcelDataValidationWarningStyle ErrorStyle = OfficeOpenXml.DataValidation.ExcelDataValidationWarningStyle.stop, string sPromptTitle = "", string sPrompt = "")
+    public void AddExcelDataValidationList(OfficeOpenXml.ExcelWorksheet wsWorkSheet, int iFromRow, int iFromCol, int iToRow, int iToCol, string sFomula, string[] list, string sErrorTitle = "", string sError = "", OfficeOpenXml.DataValidation.ExcelDataValidationWarningStyle ErrorStyle = OfficeOpenXml.DataValidation.ExcelDataValidationWarningStyle.stop, string sPromptTitle = "", string sPrompt = "")
     {
         try
         {
@@ -308,7 +308,7 @@ public class MExcel
             }
 
         }
-        catch(Exception ex) { }
+        catch (Exception ex) { }
     }
     public void ColumnWidth(Excel.Worksheet MWsheet, float MColumnWidth, string MNumberFormat, bool MWrapText, int DongBD, int CotBD, int DongKT, int CotKT)
     {
@@ -396,7 +396,7 @@ public class MExcel
     //        return DongBD + 1;
     //    }
     //}
-    
+
 
     public void ExcelEnd(Microsoft.Office.Interop.Excel.Application MApp, Microsoft.Office.Interop.Excel.Workbook MWbook, Microsoft.Office.Interop.Excel.Worksheet MWsheet, bool MVisible, bool MDisplayGridlines, bool MRowFit, bool MColumnsFit, Microsoft.Office.Interop.Excel.XlPaperSize MPaperSize, Microsoft.Office.Interop.Excel.XlPageOrientation MOrientation, float MTopMargin, float MBottomMargin, float MLeftMargin, float MRightMargin, float MHeaderMargin, float MFooterMargin, float MZoom)
     {
@@ -431,7 +431,7 @@ public class MExcel
         }
     }
 
-    
+
     public void MReleaseObject(object obj)
     {
         try
@@ -678,7 +678,7 @@ public class MExcel
         return sTmp;
     }
 
-    public void MExportExcel(DataTable dtTmp,Excel.Worksheet ExcelSheets,Microsoft.Office.Interop.Excel.Range sRange, bool bheader)
+    public void MExportExcel(DataTable dtTmp, Excel.Worksheet ExcelSheets, Microsoft.Office.Interop.Excel.Range sRange, bool bheader)
     {
         if (bheader)
         {
@@ -742,13 +742,13 @@ public class MExcel
             Microsoft.Office.Interop.Excel.Range CurCell = MWsheet.Range[MWsheet.Cells[DongBD, 1], MWsheet.Cells[DongKT, 1]];
             CurCell.EntireRow.Insert(Microsoft.Office.Interop.Excel.XlInsertShiftDirection.xlShiftDown);
 
-            CurCell = MWsheet.Range[MWsheet.Cells[DongBD, CotKT - 2], MWsheet.Cells[DongKT, CotKT]];
-            CurCell.Merge(true);
-            CurCell.Font.Bold = true;
-            CurCell.Borders.LineStyle = 0;
-            CurCell.Value2 = "Ngày in:" + DateTime.Today.ToString("dd/MM/yyyy");
-            CurCell.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignRight;
-            CurCell.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+            //CurCell = MWsheet.Range[MWsheet.Cells[DongBD, CotKT - 2], MWsheet.Cells[DongKT, CotKT]];
+            //CurCell.Merge(true);
+            //CurCell.Font.Bold = true;
+            //CurCell.Borders.LineStyle = 0;
+            //CurCell.Value2 = "Ngày in:" + DateTime.Today.ToString("dd/MM/yyyy");
+            //CurCell.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignRight;
+            //CurCell.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
 
             CurCell = MWsheet.Range[MWsheet.Cells[DongBD, CotBD], MWsheet.Cells[DongKT, CotKT - 3]];
             CurCell.Merge(true);
@@ -778,19 +778,9 @@ public class MExcel
             CurCell.Borders.LineStyle = 0;
             CurCell.Value2 = Commons.Modules.ObjLanguages.GetLanguage("frmChung", "dienthoai") + " : " + dtTmp.Rows[0]["DIEN_THOAI"] + "  " + Commons.Modules.ObjLanguages.GetLanguage("frmChung", "Fax") + " : " + dtTmp.Rows[0]["FAX"].ToString();
 
-            //DongBD += 1;
-            //DongKT += 1;
-            //CurCell = MWsheet.Range[MWsheet.Cells[DongBD, "A"], MWsheet.Cells[DongKT, "A"]];
-            //CurCell.EntireRow.Insert(Microsoft.Office.Interop.Excel.XlInsertShiftDirection.xlShiftDown);
-            //CurCell = MWsheet.Range[MWsheet.Cells[DongBD, CotBD], MWsheet.Cells[DongKT, CotKT]];
-            //CurCell.Merge(true);
-            //CurCell.Font.Bold = true;
-            //CurCell.Borders.LineStyle = 0;
-            //CurCell.Value2 = "Email : " + dtTmp.Rows[0]["EMAIL"];
-
             System.IO.DirectoryInfo dir = new System.IO.DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory + "Masters");
             GetImage((byte[])dtTmp.Rows[0]["LOGO"], Application.StartupPath, "logo.bmp");
-            MWsheet.Shapes.AddPicture(Application.StartupPath + @"\logo.bmp", Office.MsoTriState.msoFalse, Office.MsoTriState.msoCTrue, MLeft, MTop, (float)Convert.ToDecimal(dtTmp.Rows[0]["LG_WITH"]) -30, (float)Convert.ToDecimal(dtTmp.Rows[0]["LG_HEIGHT"]) -  30);
+            MWsheet.Shapes.AddPicture(Application.StartupPath + @"\logo.bmp", Office.MsoTriState.msoFalse, Office.MsoTriState.msoCTrue, MLeft, MTop, (float)Convert.ToDecimal(dtTmp.Rows[0]["LG_WITH"]) - 30, (float)Convert.ToDecimal(dtTmp.Rows[0]["LG_HEIGHT"]) - 30);
             System.IO.File.Delete(Application.StartupPath + @"\logo.bmp");
 
             return DongBD + 1;
@@ -1905,7 +1895,7 @@ public class MExcel
         return true;
     }
 
-    public bool KiemTonTai(GridView grvData, DataRow dr, int iCot, string sDLKiem, string tabName, string ColName, string ColName1,string sform)
+    public bool KiemTonTai(GridView grvData, DataRow dr, int iCot, string sDLKiem, string tabName, string ColName, string ColName1, string sform)
     {
         //null không kiểm
         if (!string.IsNullOrEmpty(sDLKiem))

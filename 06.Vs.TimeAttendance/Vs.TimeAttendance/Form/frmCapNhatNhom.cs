@@ -331,7 +331,6 @@ namespace Vs.TimeAttendance
             try
             {
                 txtSoGioTC.Text = (Convert.ToDouble(((Convert.ToDouble(datGioKT.DateTime.Hour * 60) + Convert.ToDouble(datGioKT.DateTime.Minute)) - (Convert.ToDouble(datGioBD.DateTime.Hour * 60) + Convert.ToDouble(datGioBD.DateTime.Minute)) - (txtPhutAnCa.Text == "" ? 0 : Convert.ToDouble(txtPhutAnCa.Text)))) / 60).ToString();
-
             }
             catch { }
         }

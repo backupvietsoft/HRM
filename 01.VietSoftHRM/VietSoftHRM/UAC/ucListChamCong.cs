@@ -131,13 +131,14 @@ namespace VietSoftHRM
                         panel2.Controls.Add(tmp);
                         tmp.Dock = DockStyle.Fill;
                         break;
-                        //if (!panel2.Controls.Contains(ucKeHoachNghiPhep.Instance))
-                        //{
-                        //    panel2.Controls.Clear();
-                        //    panel2.Controls.Add(ucKeHoachNghiPhep.Instance);
-                        //    ucKeHoachNghiPhep.Instance.Dock = DockStyle.Fill;
-                        //    ucKeHoachNghiPhep.Instance.BringToFront();
-                        //}
+                    }
+                case "mnuDKNghiPhep":
+                    {
+                        ucDangKyNghiPhep tmp = new ucDangKyNghiPhep();
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(tmp);
+                        tmp.Dock = DockStyle.Fill;
+                        break;
                     }
                 case "mnuDangKiLamThem":
                     {

@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions1 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ucDoanhThuCat));
             DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions2 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
             DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions3 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ucDoanhThuCat));
             DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions4 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
             DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions5 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
             DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions6 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
@@ -43,7 +43,7 @@
             this.ItemForDonVi = new DevExpress.XtraLayout.LayoutControlItem();
             this.cboDonVi = new DevExpress.XtraEditors.SearchLookUpEdit();
             this.layoutControl = new DevExpress.XtraLayout.LayoutControl();
-            this.lblTextDoanhThu = new DevExpress.XtraEditors.LabelControl();
+            this.lbl = new DevExpress.XtraEditors.LabelControl();
             this.popListNgay = new DevExpress.XtraEditors.PopupContainerControl();
             this.grdThang = new DevExpress.XtraGrid.GridControl();
             this.grvThang1 = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -109,6 +109,7 @@
             this.grvData.DetailHeight = 297;
             this.grvData.GridControl = this.grdData;
             this.grvData.Name = "grvData";
+            this.grvData.OptionsSelection.MultiSelect = true;
             this.grvData.OptionsView.AllowHtmlDrawHeaders = true;
             this.grvData.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.True;
             this.grvData.OptionsView.ShowGroupPanel = false;
@@ -173,7 +174,7 @@
             // 
             // layoutControl
             // 
-            this.layoutControl.Controls.Add(this.lblTextDoanhThu);
+            this.layoutControl.Controls.Add(this.lbl);
             this.layoutControl.Controls.Add(this.popListNgay);
             this.layoutControl.Controls.Add(this.popNgay);
             this.layoutControl.Controls.Add(this.grdData);
@@ -190,14 +191,14 @@
             this.layoutControl.TabIndex = 3;
             this.layoutControl.Text = "layoutControl1";
             // 
-            // lblTextDoanhThu
+            // lbl
             // 
-            this.lblTextDoanhThu.Location = new System.Drawing.Point(902, 70);
-            this.lblTextDoanhThu.Name = "lblTextDoanhThu";
-            this.lblTextDoanhThu.Size = new System.Drawing.Size(87, 17);
-            this.lblTextDoanhThu.StyleController = this.layoutControl;
-            this.lblTextDoanhThu.TabIndex = 24;
-            this.lblTextDoanhThu.Text = "Text doanh thu";
+            this.lbl.Location = new System.Drawing.Point(902, 70);
+            this.lbl.Name = "lbl";
+            this.lbl.Size = new System.Drawing.Size(87, 17);
+            this.lbl.StyleController = this.layoutControl;
+            this.lbl.TabIndex = 24;
+            this.lbl.Text = "Text doanh thu";
             // 
             // popListNgay
             // 
@@ -243,9 +244,7 @@
             // 
             this.calThang.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.calThang.DateTime = new System.DateTime(2684, 10, 18, 0, 0, 0, 0);
             this.calThang.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.calThang.EditValue = new System.DateTime(2684, 10, 18, 0, 0, 0, 0);
             this.calThang.Location = new System.Drawing.Point(0, 0);
             this.calThang.Name = "calThang";
             this.calThang.Padding = new System.Windows.Forms.Padding(0);
@@ -344,7 +343,7 @@
             // layoutControlItem2
             // 
             this.layoutControlItem2.ContentHorzAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.layoutControlItem2.Control = this.lblTextDoanhThu;
+            this.layoutControlItem2.Control = this.lbl;
             this.layoutControlItem2.Location = new System.Drawing.Point(0, 58);
             this.layoutControlItem2.Name = "layoutControlItem2";
             this.layoutControlItem2.Size = new System.Drawing.Size(981, 21);
@@ -377,16 +376,17 @@
             this.btnALL.AppearanceButton.Pressed.Options.UseFont = true;
             this.btnALL.AppearanceButton.Pressed.Options.UseImage = true;
             this.btnALL.AppearanceButton.Pressed.Options.UseTextOptions = true;
-            windowsUIButtonImageOptions1.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("windowsUIButtonImageOptions1.SvgImage")));
-            windowsUIButtonImageOptions2.ImageUri.Uri = "Edit;Size32x32;GrayScaled";
-            windowsUIButtonImageOptions3.ImageUri.Uri = "snap/snapdeletelist";
+            windowsUIButtonImageOptions1.ImageUri.Uri = "Edit;Size32x32;GrayScaled";
+            windowsUIButtonImageOptions2.ImageUri.Uri = "snap/snapdeletelist";
+            windowsUIButtonImageOptions3.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("windowsUIButtonImageOptions3.SvgImage")));
             windowsUIButtonImageOptions4.ImageUri.Uri = "richedit/clearheaderandfooter";
             windowsUIButtonImageOptions5.ImageUri.Uri = "SaveAll";
             windowsUIButtonImageOptions6.ImageUri.Uri = "SaveAndClose";
             this.btnALL.Buttons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] {
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions1, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "In", -1, false),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions2, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "themsua", -1, false),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions3, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "xoa", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions1, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "themsua", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions2, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "xoa", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUISeparator(),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions3, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "In", -1, false),
             new DevExpress.XtraBars.Docking2010.WindowsUISeparator(),
             new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions4, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "thoat", -1, false),
             new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions5, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "ghi", -1, false),
@@ -509,7 +509,7 @@
         private DevExpress.XtraEditors.SearchLookUpEdit cboXiNghiep;
         private DevExpress.XtraLayout.LayoutControlItem ItemForxn;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem1;
-        private DevExpress.XtraEditors.LabelControl lblTextDoanhThu;
+        private DevExpress.XtraEditors.LabelControl lbl;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
         private DevExpress.XtraBars.Docking2010.WindowsUIButtonPanel btnCNCat;
     }

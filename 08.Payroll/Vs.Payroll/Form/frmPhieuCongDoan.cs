@@ -12,6 +12,7 @@ using System.Globalization;
 using System.Windows.Forms;
 using DevExpress.XtraPrinting.Export;
 using DevExpress.Utils.Menu;
+using static NPOI.HSSF.Util.HSSFColor;
 
 namespace Vs.Payroll
 {
@@ -228,6 +229,7 @@ namespace Vs.Payroll
                     grvTo.Columns["ID_CN"].Visible = false;
                     grvTo.Columns["ID_CHUYEN"].Visible = false;
                     grvTo.Columns["ID_ORD"].Visible = false;
+                    grvTo.Columns["MS_CN_INT"].Visible = false;
                 }
                 else
                 {
@@ -264,6 +266,7 @@ namespace Vs.Payroll
                 dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spPCDGetCDoan", cboDV.EditValue, cboXN.EditValue, cboTo.EditValue, Commons.Modules.UserName,
                         Commons.Modules.TypeLanguage, iChuyenSuDung, iOrd, dtNgay, sBT));
                 dt.Columns["ID_CD"].ReadOnly = false;
+                dt.Columns["THANH_TIEN"].ReadOnly = false;
                 dtCD = dt;
                 Commons.Modules.ObjSystems.XoaTable(sBT);
                 if (grdCD.DataSource == null)
@@ -272,6 +275,10 @@ namespace Vs.Payroll
                     Commons.Modules.ObjSystems.MLoadXtraGrid(grdCD, grvCD, dt, false, true, false, true, true, this.Name);
                     grvCD.Columns["TEN_CD"].OptionsColumn.AllowFocus = false;
                     grvCD.Columns["TEN_CD"].OptionsColumn.ReadOnly = true;
+                    grvCD.Columns["DON_GIA"].OptionsColumn.AllowFocus = false;
+                    grvCD.Columns["DON_GIA"].OptionsColumn.ReadOnly = true;
+                    grvCD.Columns["THANH_TIEN"].OptionsColumn.AllowFocus = false;
+                    grvCD.Columns["THANH_TIEN"].OptionsColumn.ReadOnly = false;
                     grvCD.Columns["ID_CN"].Visible = false;
                     grvCD.Columns["ID_CHUYEN"].Visible = false;
                     grvCD.Columns["ID_CHUYEN_SD"].Visible = false;
@@ -279,6 +286,9 @@ namespace Vs.Payroll
 
                     grvCD.Columns["SO_LUONG"].DisplayFormat.FormatType = FormatType.Numeric;
                     grvCD.Columns["SO_LUONG"].DisplayFormat.FormatString = "N0";
+
+                    grvCD.Columns["THANH_TIEN"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvCD.Columns["THANH_TIEN"].DisplayFormat.FormatString = "N0";
                 }
                 else
                 {
@@ -384,6 +394,7 @@ namespace Vs.Payroll
             cboMQL.ShowDropDown = DevExpress.XtraEditors.Controls.ShowDropDown.Never;
             cboMQL.SearchMode = DevExpress.XtraEditors.Controls.SearchMode.AutoComplete;
             grvTo_FocusedRowChanged(null, null);
+
         }
 
         private void grvTo_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
@@ -418,10 +429,9 @@ namespace Vs.Payroll
                 }
 
                 dtTmp.DefaultView.RowFilter = sDK;
-
             }
             catch (Exception ex) { }
-
+            LoadTextTongLSP();
             //LoadCboMSCN();
             if (Commons.Modules.sPS != "0Focus")
             {
@@ -615,14 +625,18 @@ namespace Vs.Payroll
                 {
 
                     grvCD.SetFocusedRowCellValue("TEN_CD", dt.Rows[0]["TEN_CD"]);
+                    grvCD.SetFocusedRowCellValue("DON_GIA", dt.Rows[0]["DON_GIA"]);
                     grvCD.SetFocusedRowCellValue("SO_LUONG", grvPCD.GetFocusedRowCellValue("SL_NGAY"));
+                    grvCD.SetFocusedRowCellValue("THANH_TIEN", Convert.ToDouble(grvPCD.GetFocusedRowCellValue("SL_NGAY")) * Convert.ToDouble(dt.Rows[0]["DON_GIA"]));
                     grvCD.SetFocusedRowCellValue("ID_CD", dt.Rows[0]["ID_CD"]);
-                    grvCD.SetFocusedRowCellValue("ID_CN", grvTo.GetFocusedRowCellValue("ID_CN"));
+                    //grvCD.SetFocusedRowCellValue("ID_CN", grvTo.GetFocusedRowCellValue("ID_CN"));
+
                 }
                 catch
                 {
                 }
             }
+
 
             if (chkKT.Checked == false)
             {
@@ -678,28 +692,40 @@ namespace Vs.Payroll
         }
         private void grvCD_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
         {
-            //try
-            //{
-            //    GridView view = sender as GridView;
-            //    if (e.Column.FieldName == "SO_LUONG")
-            //    {
-            //        int iSLNhap = 0;
-            //        iSLNhap = view.GetFocusedRowCellValue("SO_LUONG") == null ? 0 : Convert.ToInt32(grvCD.GetFocusedRowCellValue("SO_LUONG"));
-            //        if (iSLNhap == 0)
-            //        {
-            //            //string sError = Commons.Modules.TypeLanguage == 0 ? "Số lượng phải lớn hơn 0" : "The number must be greater than 0";
-            //            //view.SetColumnError(view.Columns["SO_LUONG"], sError);
-            //            bKiemSL = true;
-            //            return;
-            //        }
-            //    }
-            //    bKiemSL = false;
-            //}
-            //catch
-            //{
-            //    bKiemSL = true;
-            //}
+            try
+            {
+                if (e.Column.FieldName == "SO_LUONG")
+                {
+                    DataTable dt = dtMQL.AsEnumerable().Where(x => x["ID_CD"].ToString().Equals(grvCD.GetFocusedRowCellValue("ID_CD").ToString())).CopyToDataTable();
+                    grvCD.SetFocusedRowCellValue("THANH_TIEN", (Convert.ToDouble(e.Value) * Convert.ToDouble(dt.Rows[0]["DON_GIA"])));
+
+                    //dt = (DataTable)grdCD.DataSource;
+                    //DataTable dt1 = new DataTable();
+                    //dt1 = Commons.Modules.ObjSystems.ConvertDatatable(grvCD);
+                    //dt.AsEnumerable().Where(x => x["ID_CN"].ToString() == grvTo.GetFocusedRowCellValue("ID_CN").ToString() && Convert.ToString(x["ID_CHUYEN_SD"]) == Convert.ToString(grvPCD.GetFocusedRowCellValue("ID_CHUYEN_SD"))
+                    //&& Convert.ToString(x["ID_ORD"]) == Convert.ToString(grvPCD.GetFocusedRowCellValue("ID_ORD"))
+                    //).ToList<DataRow>().ForEach(r => r["TONG_LSP"] = (Convert.ToInt32(dt1.Compute("Sum(THANH_TIEN)", ""))));
+
+                    //dt.AcceptChanges();
+                    LoadTextTongLSP();
+                }
+            }
+            catch { }
         }
+        private void LoadTextTongLSP()
+        {
+            try
+            {
+                DataTable dt1 = new DataTable();
+                dt1 = Commons.Modules.ObjSystems.ConvertDatatable(grvCD);
+                lbl.Text = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "lblTongLSP") + " " + (Convert.ToDouble(dt1.Compute("Sum(THANH_TIEN)", "")).ToString("N0") == "" ? "0" : Convert.ToDouble(dt1.Compute("Sum(THANH_TIEN)", "")).ToString("N0")).ToString();
+            }
+            catch
+            {
+                lbl.Text = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "lblTongLSP") + " 0";
+            }
+        }
+
         private void grvCD_InvalidRowException(object sender, DevExpress.XtraGrid.Views.Base.InvalidRowExceptionEventArgs e)
         {
             e.ExceptionMode = DevExpress.XtraEditors.Controls.ExceptionMode.NoAction;
@@ -823,10 +849,6 @@ namespace Vs.Payroll
                             XemCu = 0;
                             Commons.Modules.ObjSystems.DeleteAddRow(grvCD);
                             grvCD.UpdateCurrentRow();
-                            //LoadPCD();
-                            //LoadCD();
-                            //LoadCN();
-                            //LoadCboMSCN();
                             cboNgay_EditValueChanged_1(null, null);
                             break;
                         }
@@ -867,6 +889,7 @@ namespace Vs.Payroll
                 grvCD.SetFocusedRowCellValue("ID_CHUYEN_SD", grvPCD.GetFocusedRowCellValue("ID_CHUYEN_SD"));
                 grvCD.SetFocusedRowCellValue("ID_ORD", grvPCD.GetFocusedRowCellValue("ID_ORD"));
                 grvTo.SetFocusedRowCellValue("CDL", grvCD.RowCount);
+                grvCD.SetFocusedRowCellValue("ID_CN", grvTo.GetFocusedRowCellValue("ID_CN"));
             }
             catch { }
         }
@@ -883,6 +906,8 @@ namespace Vs.Payroll
                     DataTable dt = new DataTable();
                     dt = Commons.Modules.ObjSystems.ConvertDatatable(grvCD);
                     grvTo.SetFocusedRowCellValue("CDL", dt.Rows.Count == 0 ? (object)(DBNull.Value) : dt.Rows.Count);
+
+                    LoadTextTongLSP();
                 }
             }
             catch { }
@@ -895,7 +920,7 @@ namespace Vs.Payroll
 
         private void grvCD_CellValueChanging(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
         {
-            
+
         }
 
         #region kiemDL
@@ -971,10 +996,9 @@ namespace Vs.Payroll
                     {
                         if (GTSoSanh != -999999)
                         {
-                            if (DLKiem < GTSoSanh)
+                            if (DLKiem == 0)
                             {
-                                dr.SetColumnError(sCot, sTenKTra + Commons.Modules.ObjLanguages.GetLanguage(sForm, "msgKhongNhoHon") + GTSoSanh.ToString());
-                                dr["XOA"] = 1;
+                                dr.SetColumnError(sCot, Commons.Modules.ObjLanguages.GetLanguage(sForm, "msgSoLuongKhongNhoHon") + GTSoSanh.ToString());
                                 return false;
                             }
 
@@ -1106,24 +1130,7 @@ namespace Vs.Payroll
             catch { }
         }
 
-        private void grvPCD_PopupMenuShowing(object sender, PopupMenuShowingEventArgs e)
-        {
-            try
-            {
-                if (windowsUIButton.Buttons[0].Properties.Visible) return;
-                DevExpress.XtraGrid.Views.Grid.GridView view = sender as DevExpress.XtraGrid.Views.Grid.GridView;
-                if (e.MenuType == DevExpress.XtraGrid.Views.Grid.GridMenuType.Row)
-                {
-                    int irow = e.HitInfo.RowHandle;
-                    e.Menu.Items.Clear();
-                    DevExpress.Utils.Menu.DXMenuItem itemTTNS = MCreateMenuCapNhatSLChotNgay(view, irow);
-                    e.Menu.Items.Add(itemTTNS);
-                }
-            }
-            catch
-            {
-            }
-        }
+
 
         #region chuotphai
         class RowInfo
@@ -1178,6 +1185,150 @@ namespace Vs.Payroll
             }
             catch (Exception ex) { }
         }
+        public DXMenuItem MCreateMenuNhapPCDPacking(DevExpress.XtraGrid.Views.Grid.GridView view, int rowHandle)
+        {
+            string sStr = Commons.Modules.ObjLanguages.GetLanguage(Commons.Modules.ModuleName, this.Name, "lblNhapCongDoanPacking", Commons.Modules.TypeLanguage);
+            DXMenuItem menuThongTinNS = new DXMenuItem(sStr, new EventHandler(NhapCDPacKing));
+            menuThongTinNS.Tag = new RowInfo(view, rowHandle);
+            return menuThongTinNS;
+        }
+        public void NhapCDPacKing(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!Convert.ToBoolean(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT ISNULL(TINH_DOANH_THU,0) FROM dbo.[TO] WHERE ID_TO = " + cboChuyen.EditValue + "")))
+                {
+                    XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgChonChuyenTinhDoanhThu"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                frmPhieuCongDoanPacking frm = new frmPhieuCongDoanPacking();
+                frm.iID_CHUYEN_SD = Convert.ToInt32(cboChuyen.EditValue);
+                frm.iID_DV = Convert.ToInt32(cboDV.EditValue);
+                frm.iID_XN = Convert.ToInt32(cboXN.EditValue);
+                frm.IID_TO = Convert.ToInt32(cboTo.EditValue);
+                frm.dNgay = Convert.ToDateTime(cboNgay.Text);
+                if (frm.ShowDialog() == DialogResult.OK)
+                {
+                    cboNgay_EditValueChanged_1(null, null);
+
+                }
+                else
+                {
+                    cboNgay_EditValueChanged_1(null, null);
+                }
+            }
+            catch (Exception ex) { }
+        }
+        public DXMenuItem MCreateMenuNhapMultyCD(DevExpress.XtraGrid.Views.Grid.GridView view, int rowHandle)
+        {
+            string sStr = Commons.Modules.ObjLanguages.GetLanguage(Commons.Modules.ModuleName, this.Name, "lblChonCongDoan", Commons.Modules.TypeLanguage);
+            DXMenuItem menuThongTinNS = new DXMenuItem(sStr, new EventHandler(NhapMultyCD));
+            menuThongTinNS.Tag = new RowInfo(view, rowHandle);
+            return menuThongTinNS;
+        }
+        public void NhapMultyCD(object sender, EventArgs e)
+        {
+            try
+            {
+                grvCD.CloseEditor();
+                grvCD.UpdateCurrentRow();
+
+
+                DataTable dtTmp = new DataTable(); // loc du lieu, chỉ lấy những công đoạn chưa có trong danh sách view
+                dtTmp = dtMQL.Copy();
+                try
+                {
+                    var dt_temp = dtTmp.AsEnumerable().Where(row => !Commons.Modules.ObjSystems.ConvertDatatable(grvCD).AsEnumerable()
+                                                             .Select(r => r.Field<Int64>("ID_CD"))
+                                                             .Any(x => x == row.Field<Int64>("ID_CD"))
+                                                             ).CopyToDataTable();
+                    dtTmp = new DataTable();
+                    dtTmp = (DataTable)dt_temp;
+                }
+                catch
+                {
+                    dtTmp.Clear();
+                }
+                dtTmp.AcceptChanges();
+
+
+                frmCapNhatNhanhPCD frm = new frmCapNhatNhanhPCD(); // mở form set các thuộc tính
+                frm.dtTemp = new DataTable();
+                frm.dtTemp = dtTmp;
+                frm.iLoai = 2;
+                frm.isoLuong = Convert.ToInt32(grvCD.GetFocusedRowCellValue("SO_LUONG"));
+                DataTable dt = new DataTable();
+                if (frm.ShowDialog() == DialogResult.OK)
+                {
+                    dt = frm.dtTemp.Copy(); // nhận giữ liệu khi người dùng nhấn lưu
+                    string sBTUpdate = "sBTUpdate" + Commons.Modules.iIDUser; // bảng tạm dữ liệu ng dùng chọn công nhân
+                    string sBTCurrent = "sBTCurrent" + Commons.Modules.iIDUser; // bảng tạm cả datasoure
+                    string sBTFocus = "sBTFocus" + Commons.Modules.iIDUser; // bảng tạm dữ liệud đang focus
+                    Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBTUpdate, dt, "");
+                    Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBTCurrent, Commons.Modules.ObjSystems.ConvertDatatable(grdCD), "");
+                    Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBTFocus, Commons.Modules.ObjSystems.GetDataTableMultiSelect(grdCD, grvCD), "");
+                    dt = new DataTable();
+                    dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spNhapNhanhPCD", Commons.Modules.UserName, Commons.Modules.TypeLanguage, 2, sBTUpdate, sBTCurrent, sBTFocus));
+                    dt.Columns["ID_CD"].ReadOnly = false;
+                    dt.Columns["THANH_TIEN"].ReadOnly = false;
+
+                    grdCD.DataSource = dt;
+                    grvTo_FocusedRowChanged(null, null);
+
+                    dt = new DataTable();
+                    dt = Commons.Modules.ObjSystems.ConvertDatatable(grvCD);
+                    grvTo.SetFocusedRowCellValue("CDL", dt.Rows.Count == 0 ? (object)(DBNull.Value) : dt.Rows.Count); // set lại cột số lượng công nhân
+                }
+            }
+            catch (Exception ex) { }
+        }
+        private void grvPCD_PopupMenuShowing(object sender, PopupMenuShowingEventArgs e)
+        {
+            try
+            {
+                DevExpress.XtraGrid.Views.Grid.GridView view = sender as DevExpress.XtraGrid.Views.Grid.GridView;
+                int irow = e.HitInfo.RowHandle;
+                if (e.MenuType == DevExpress.XtraGrid.Views.Grid.GridMenuType.Row)
+                {
+                    e.Menu.Items.Clear();
+                    DevExpress.Utils.Menu.DXMenuItem itemTTNS = MCreateMenuCapNhatSLChotNgay(view, irow);
+                    e.Menu.Items.Add(itemTTNS);
+
+                    DevExpress.Utils.Menu.DXMenuItem itemPCDPacking = MCreateMenuNhapPCDPacking(view, irow);
+                    e.Menu.Items.Add(itemPCDPacking);
+                }
+                else
+                {
+                    DevExpress.Utils.Menu.DXMenuItem itemPCDPacking = MCreateMenuNhapPCDPacking(view, irow);
+                    e.Menu = new DevExpress.XtraGrid.Menu.GridViewMenu(view);
+                    e.Menu.Items.Add(itemPCDPacking);
+                }
+            }
+            catch
+            {
+            }
+        }
+
+        //chuột phải công đoạn
+        private void grvCD_PopupMenuShowing(object sender, PopupMenuShowingEventArgs e)
+        {
+            try
+            {
+                if (windowsUIButton.Buttons[0].Properties.Visible || Convert.ToString(grvCD.GetFocusedRowCellValue("ID_CD")) == "") return;
+                DevExpress.XtraGrid.Views.Grid.GridView view = sender as DevExpress.XtraGrid.Views.Grid.GridView;
+                int irow = e.HitInfo.RowHandle;
+                if (e.MenuType == DevExpress.XtraGrid.Views.Grid.GridMenuType.Row)
+                {
+                    e.Menu.Items.Clear();
+                    DevExpress.Utils.Menu.DXMenuItem itemTTNS = MCreateMenuNhapMultyCD(view, irow);
+                    e.Menu.Items.Add(itemTTNS);
+                }
+            }
+            catch
+            {
+            }
+        }
+
         #endregion
 
         private void grvPCD_RowStyle(object sender, RowStyleEventArgs e)
@@ -1194,54 +1345,45 @@ namespace Vs.Payroll
             }
         }
 
-        //private void LoadCboMSCN()
-        //{
-        //    try
-        //    {
-        //        DateTime dtNgay;
-        //        try
-        //        {
-        //            dtNgay = DateTime.ParseExact(cboNgay.Text, "dd/MM/yyyy", cultures);
-        //        }
-        //        catch { dtNgay = DateTime.Now; }
+        private void grvTo_RowCountChanged(object sender, EventArgs e)
+        {
+            grvTo_FocusedRowChanged(null, null);
+        }
 
-        //        //optXCLP.SelectedIndex = 0  XEM CU
-
-        //        DataTable dt = new DataTable();
-        //        dt = Commons.Modules.ObjSystems.ConvertDatatable(grvTo);
-        //        if (cboMSCN.Properties.DataSource == null)
-        //        {
-        //            //Commons.Modules.ObjSystems.MLoadLookUpEditN(cboMSCN, dt, "ID_CN", "MS_CN", "MS_CN", "");
-
-        //            cboMSCN.Properties.DataSource = dt;
-        //            cboMSCN.Properties.PopulateViewColumns();
-        //            cboMSCN.Properties.View.PopulateColumns();
-        //            cboMSCN.Properties.DisplayMember = "MS_CN";
-        //            cboMSCN.Properties.ValueMember = "ID_CN";
-
-        //            cboMSCN.Properties.View.PopulateColumns(cboMSCN.Properties.DataSource);
-        //            cboMSCN.Properties.View.Columns["ID_CN"].Visible = false;
-        //            cboMSCN.Properties.View.Columns["HO_TEN"].Visible = true;
-        //            cboMSCN.Properties.View.Columns["CDL"].Visible = false;
-        //            try { cboMSCN.Properties.View.Columns["MS_CN"].Caption = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "MS_CN"); } catch { }
-
-        //            cboMSCN.Properties.ShowDropDown = DevExpress.XtraEditors.Controls.ShowDropDown.Never;
-        //            cboMSCN.Properties.PopupFilterMode = DevExpress.XtraEditors.PopupFilterMode.Contains;
-        //            cboMSCN.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard;
-        //            cboMSCN.Properties.ImmediatePopup = true;
-        //        }
-        //        else
-        //        {
-        //            cboMSCN.Properties.DataSource = dt;
-        //        }
-
-        //        cboMSCN.GotFocus += cboMSCN_Click;
-        //    }
-        //    catch { }
-        //}
-        //private void cboMSCN_Click(object sender, EventArgs e)
-        //{
-        //    cboMSCN.SelectAll();
-        //}
+        private void searchControl2_EditValueChanged(object sender, EventArgs e)
+        {
+            DataTable dtTmp = new DataTable();
+            dtTmp = (DataTable)grdTo.DataSource;
+            //dtTmp = Commons.Modules.ObjSystems.ConvertDatatable(grvTo);
+            String sMSCN;
+            try
+            {
+                string sDK = "";
+                sMSCN = "";
+                sDK = "MS_CN_INT = '" + Convert.ToInt32(searchControl2.EditValue) + "'";
+                dtTmp.DefaultView.RowFilter = sDK;
+            }
+            catch (Exception ex)
+            {
+                dtTmp.DefaultView.RowFilter = "";
+            }
+        }
+        private void grvPCD_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Modifiers == Keys.Control && e.KeyCode == Keys.F3)
+            {
+                frmPhieuCongDoanLog frm = new frmPhieuCongDoanLog();
+                frm.iID_DV = Convert.ToInt32(cboDV.EditValue);
+                frm.dThang = Commons.Modules.ObjSystems.ConvertDateTime(cboNgay.Text);
+                if (frm.ShowDialog() == DialogResult.OK)
+                {
+                    cboNgay_EditValueChanged_1(null, null);
+                }
+                else
+                {
+                    cboNgay_EditValueChanged_1(null, null);
+                }
+            }
+        }
     }
 }

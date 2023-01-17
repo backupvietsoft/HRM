@@ -543,7 +543,7 @@ namespace Vs.HRM
                                 oSheet.Cells[row_dl, col + 6] = "Phần trăm CN may";
                                 break;
                             }
-                        case "TONG_SO_CMN":
+                        case "TONG_SO_CNM":
                             {
                                 oSheet.Cells[row_dl, col + 6] = "Tổng số";
                                 break;
@@ -651,9 +651,18 @@ namespace Vs.HRM
                 LoadBieuDoTron(oSheet, XlChartType.xl3DPie, CharacterIncrement(10), 5, CharacterIncrement(10), 6, CharacterIncrement(12), 5, CharacterIncrement(12), 6, "lblIDD", 1, 690, 155, 245, 240, true);
                 #endregion
 
-                formatRange = oSheet.get_Range("A5", "M7"); //27 + 31
+                formatRange = oSheet.get_Range("A5", "M7"); 
                 formatRange.Font.Size = fontSizeNoiDung;
                 formatRange.Font.Name = fontName;
+
+                formatRange = oSheet.get_Range("C5", "C7");
+                formatRange.NumberFormat = @"0%";
+
+                formatRange = oSheet.get_Range("H5", "H7");
+                formatRange.NumberFormat = @"0%";
+
+                formatRange = oSheet.get_Range("M5", "M7");
+                formatRange.NumberFormat = @"0%";
 
                 oXL.Visible = true;
                 oXL.UserControl = true;

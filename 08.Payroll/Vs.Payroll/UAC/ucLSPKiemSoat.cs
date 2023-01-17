@@ -223,7 +223,6 @@ namespace Vs.Payroll
         {
             if (Commons.Modules.sLoad == "0Load") return;
             Commons.Modules.sLoad = "0Load";
-            LoadThang();
             LoadData();
             Commons.Modules.sLoad = "";
         }
@@ -244,7 +243,6 @@ namespace Vs.Payroll
             if (Commons.Modules.sLoad == "0Load") return;
             Commons.Modules.sLoad = "0Load";
             Commons.Modules.ObjSystems.LoadCboTo(cboDonVi, cboXiNghiep, cboTo);
-            LoadThang();
             LoadData();
             Commons.Modules.sLoad = "";
         }

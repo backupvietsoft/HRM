@@ -39,6 +39,7 @@ namespace VietSoftHRM
             Element_Click(accorMenuleft.Elements[0].Elements[0], null);
             Commons.Modules.ObjSystems.ThayDoiNN(this, windowsUIButton);
             //Commons.Modules.ObjSystems.MLoadNNXtraGrid(grvDanhMuc, this.Name);
+
             foreach (ToolStripMenuItem item in contextMenuStrip1.Items)
             {
                 item.Text = Commons.Modules.ObjLanguages.GetLanguage(this.Name, item.Name);
@@ -132,7 +133,10 @@ namespace VietSoftHRM
                         case "spGetListXI_NGHIEP":
                         case "spGetListXI_DON_VI":
                             {
-                                grdDanhMuc.ContextMenuStrip = contextMenuStrip1;
+                                if (Commons.Modules.KyHieuDV == "DM")
+                                {
+                                    grdDanhMuc.ContextMenuStrip = contextMenuStrip1;
+                                }
                                 break;
                             }
                         default:
@@ -186,7 +190,7 @@ namespace VietSoftHRM
                     windowsUIButton.Visible = false;
                     //Commons.Modules.ObjSystems.HideWaitForm();
                 }
-                else if(Commons.Modules.sPS == "spGetListDuyetTL")
+                else if (Commons.Modules.sPS == "spGetListDuyetTL")
                 {
                     frmXetDuyet ctl = new frmXetDuyet(1);
                     panel3.Show();
@@ -196,9 +200,19 @@ namespace VietSoftHRM
                     ctl.Dock = DockStyle.Fill;
                     windowsUIButton.Visible = false;
                 }
-                else if(Commons.Modules.sPS == "spGetListQDDuyet")
+                else if (Commons.Modules.sPS == "spGetListQDDuyet")
                 {
                     frmDuyetQuyDinh ctl = new frmDuyetQuyDinh(1);
+                    panel3.Show();
+                    //Commons.Modules.ObjSystems.ShowWaitForm(this);
+                    panel3.Controls.Clear();
+                    panel3.Controls.Add(ctl);
+                    ctl.Dock = DockStyle.Fill;
+                    windowsUIButton.Visible = false;
+                }
+                else if (Commons.Modules.sPS == "spGetListQuiDinhTCThang")
+                {
+                    Vs.TimeAttendance.ucQuiDinhTCThang ctl = new Vs.TimeAttendance.ucQuiDinhTCThang();
                     panel3.Show();
                     //Commons.Modules.ObjSystems.ShowWaitForm(this);
                     panel3.Controls.Clear();
@@ -705,6 +719,7 @@ namespace VietSoftHRM
         {
             try
             {
+                if (Commons.Modules.KyHieuDV != "DM") return;
                 if (Commons.Modules.sPS == "spGetListXI_NGHIEP")
                 {
                     contextMenuStrip1.Items[0].Visible = true;
@@ -719,7 +734,7 @@ namespace VietSoftHRM
                         contextMenuStrip1.Hide();
                     }
                 }
-                if(Commons.Modules.sPS == "spGetListLOAI_CONG_VIEC")
+                if (Commons.Modules.sPS == "spGetListLOAI_CONG_VIEC")
                 {
                     contextMenuStrip1.Items[0].Visible = false;
                     contextMenuStrip1.Items[1].Visible = true;
@@ -753,6 +768,6 @@ namespace VietSoftHRM
             }
         }
 
-   
+
     }
 }

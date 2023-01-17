@@ -144,7 +144,8 @@ namespace Vs.HRM
                     grvData.SelectRow(index);
                 }
             }
-            catch(Exception ex) {
+            catch (Exception ex)
+            {
                 XtraMessageBox.Show(ex.Message.ToString());
             }
         }
@@ -243,12 +244,30 @@ namespace Vs.HRM
         {
             try
             {
-                iID_NS = Convert.ToInt64(grvData.GetFocusedRowCellValue("ID_CN"));
-                string sSQL = "UPDATE dbo.HOP_DONG_LAO_DONG SET ID_TT = 2 WHERE ID_CN = " + grvData.GetFocusedRowCellValue("ID_CN") + " AND ID_HDLD = " + grvData.GetFocusedRowCellValue("ID_HDLD") + "";
-                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, sSQL);
-                LoadData();
 
-                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgLuuThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "sThongBao"), MessageBoxButtons.OK);
+                iID_NS = Convert.ToInt64(grvData.GetFocusedRowCellValue("ID_CN"));
+                System.Data.SqlClient.SqlConnection conn;
+                conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                conn.Open();
+                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spHoanChinhHSNhanSu", conn);
+                cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                cmd.Parameters.Add("@ID_CN", SqlDbType.BigInt).Value = Convert.ToInt64(grvData.GetFocusedRowCellValue("ID_CN"));
+                cmd.Parameters.Add("@ID_HDLD", SqlDbType.BigInt).Value = Convert.ToInt64(grvData.GetFocusedRowCellValue("ID_HDLD"));
+                cmd.Parameters.Add("@iLoai", SqlDbType.Int).Value = 1;
+                cmd.CommandType = CommandType.StoredProcedure;
+                System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+                DataSet ds = new DataSet();
+                adp.Fill(ds);
+                DataTable dt = new DataTable();
+                dt = ds.Tables[0].Copy();
+                if (Convert.ToString(dt.Rows[0][0]) == "-99")
+                {
+                    Commons.Modules.ObjSystems.Alert(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgCapNhatKhongCong"), Commons.Form_Alert.enmType.Error);
+                    return;
+                }
+                LoadData();
+                Commons.Modules.ObjSystems.Alert(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgLuuThanhCong"), Commons.Form_Alert.enmType.Success);
             }
             catch (Exception ex) { }
         }

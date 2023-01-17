@@ -30,10 +30,11 @@
         {
             DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions1 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
             DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions2 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmThuaThieuSL));
             DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions3 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmThuaThieuSL));
             DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions4 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
             DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions5 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions6 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.windowsUIButton = new DevExpress.XtraBars.Docking2010.WindowsUIButtonPanel();
             this.searchControl1 = new DevExpress.XtraEditors.SearchControl();
@@ -60,6 +61,7 @@
             this.datDNgay = new DevExpress.XtraEditors.DateEdit();
             this.lblTuNgay = new DevExpress.XtraEditors.LabelControl();
             this.lblDenNgay = new DevExpress.XtraEditors.LabelControl();
+            this.lbl = new DevExpress.XtraEditors.LabelControl();
             this.lblDanhSachVatTu1 = new DevExpress.XtraEditors.LabelControl();
             this.tableLayoutPanel1.SuspendLayout();
             this.windowsUIButton.SuspendLayout();
@@ -113,6 +115,7 @@
             this.tableLayoutPanel1.Controls.Add(this.datDNgay, 5, 4);
             this.tableLayoutPanel1.Controls.Add(this.lblTuNgay, 1, 4);
             this.tableLayoutPanel1.Controls.Add(this.lblDenNgay, 4, 4);
+            this.tableLayoutPanel1.Controls.Add(this.lbl, 8, 5);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -145,18 +148,20 @@
             this.windowsUIButton.AppearanceButton.Pressed.Options.UseFont = true;
             this.windowsUIButton.AppearanceButton.Pressed.Options.UseImage = true;
             this.windowsUIButton.AppearanceButton.Pressed.Options.UseTextOptions = true;
-            windowsUIButtonImageOptions1.ImageUri.Uri = "Edit;Size32x32;GrayScaled";
-            windowsUIButtonImageOptions2.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("windowsUIButtonImageOptions2.SvgImage")));
-            windowsUIButtonImageOptions3.ImageUri.Uri = "SaveAll";
-            windowsUIButtonImageOptions4.ImageUri.Uri = "SaveAndClose";
-            windowsUIButtonImageOptions5.ImageUri.Uri = "richedit/clearheaderandfooter";
+            windowsUIButtonImageOptions1.ImageUri.Uri = "scheduling/import";
+            windowsUIButtonImageOptions2.ImageUri.Uri = "Edit;Size32x32;GrayScaled";
+            windowsUIButtonImageOptions3.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("windowsUIButtonImageOptions3.SvgImage")));
+            windowsUIButtonImageOptions4.ImageUri.Uri = "SaveAll";
+            windowsUIButtonImageOptions5.ImageUri.Uri = "SaveAndClose";
+            windowsUIButtonImageOptions6.ImageUri.Uri = "richedit/clearheaderandfooter";
             this.windowsUIButton.Buttons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] {
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions1, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "sua", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions1, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "import", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions2, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "sua", -1, false),
             new DevExpress.XtraBars.Docking2010.WindowsUISeparator(),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions2, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "in", -1, false),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions3, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "ghi", -1, false),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions4, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "khongghi", -1, false),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions5, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "thoat", -1, false)});
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions3, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "in", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions4, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "ghi", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions5, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "khongghi", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions6, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "thoat", -1, false)});
             this.tableLayoutPanel1.SetColumnSpan(this.windowsUIButton, 8);
             this.windowsUIButton.ContentAlignment = System.Drawing.ContentAlignment.MiddleRight;
             this.windowsUIButton.Controls.Add(this.searchControl1);
@@ -336,14 +341,15 @@
             this.grvCNThucHien.GridControl = this.grdCNThucHien;
             this.grvCNThucHien.Name = "grvCNThucHien";
             this.grvCNThucHien.OptionsView.ShowGroupPanel = false;
+            this.grvCNThucHien.CellValueChanged += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.grvCNThucHien_CellValueChanged);
             // 
             // lblDSCNThucHien
             // 
-            this.tableLayoutPanel1.SetColumnSpan(this.lblDSCNThucHien, 4);
+            this.tableLayoutPanel1.SetColumnSpan(this.lblDSCNThucHien, 3);
             this.lblDSCNThucHien.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblDSCNThucHien.Location = new System.Drawing.Point(379, 122);
             this.lblDSCNThucHien.Name = "lblDSCNThucHien";
-            this.lblDSCNThucHien.Size = new System.Drawing.Size(380, 24);
+            this.lblDSCNThucHien.Size = new System.Drawing.Size(248, 24);
             this.lblDSCNThucHien.TabIndex = 36;
             this.lblDSCNThucHien.Text = "lblDSCNThucHien";
             // 
@@ -427,6 +433,15 @@
             this.lblDenNgay.TabIndex = 46;
             this.lblDenNgay.Text = "Đến ngày";
             // 
+            // lbl
+            // 
+            this.lbl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lbl.Location = new System.Drawing.Point(633, 122);
+            this.lbl.Name = "lbl";
+            this.lbl.Size = new System.Drawing.Size(126, 24);
+            this.lbl.TabIndex = 47;
+            this.lbl.Text = "lbl";
+            // 
             // lblDanhSachVatTu1
             // 
             this.lblDanhSachVatTu1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -499,5 +514,6 @@
         private DevExpress.XtraEditors.DateEdit datDNgay;
         private DevExpress.XtraEditors.LabelControl lblTuNgay;
         private DevExpress.XtraEditors.LabelControl lblDenNgay;
+        private DevExpress.XtraEditors.LabelControl lbl;
     }
 }

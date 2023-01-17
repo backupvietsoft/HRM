@@ -222,7 +222,11 @@ namespace Commons
                 }
             }
         }
-
+        public void Alert(string msg, Form_Alert.enmType type)
+        {
+            Form_Alert frm = new Form_Alert();
+            frm.showAlert(msg, type);
+        }
         public string returnSps(bool khach, string sPs)
         {
             if (khach == true)
@@ -1526,17 +1530,18 @@ namespace Commons
                 grv.Appearance.HeaderPanel.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
                 if (MloadNNgu)
                 {
-                    Thread Thread3 = new Thread(delegate ()
-                    {
-                        if (grd.InvokeRequired)
-                        {
-                            grd.Invoke(new MethodInvoker(delegate
-                            {
-                                MLoadNNXtraGrid(grv, fName);
+                    //Thread Thread3 = new Thread(delegate ()
+                    //{
+                    //    if (grd.InvokeRequired)
+                    //    {
+                    //        grd.Invoke(new MethodInvoker(delegate
+                    //        {
+                    //            MLoadNNXtraGrid(grv, fName);
 
-                            }));
-                        }
-                    }, 100); Thread3.Start();
+                    //        }));
+                    //    }
+                    //}, 100); Thread3.Start();
+                    MLoadNNXtraGrid(grv, fName);
                 }
                 grv.OptionsBehavior.FocusLeaveOnTab = true;
                 //Commons.Modules.OXtraGrid.loadXmlgrd(grd);
@@ -1636,7 +1641,7 @@ namespace Commons
                 }
                 return dt;
             }
-            catch { return null; }
+            catch (Exception ex) { return null; }
         }
 
         private void Grv_DoubleClickDM(object sender, EventArgs e, string sName)
@@ -2423,7 +2428,7 @@ namespace Commons
             try
             {
 
-                foreach (var gr in group.Items.Where(x=>x.GetType().Name.Substring(0,6).ToLower() == "layout"))
+                foreach (var gr in group.Items.Where(x => x.GetType().Name.Substring(0, 6).ToLower() == "layout"))
                 {
                     if (gr.GetType().Name == "LayoutControlGroup")
                     {
@@ -3136,14 +3141,14 @@ namespace Commons
 
                                 // Modules.ObjLanguages.GetLanguage(Modules.ModuleName, frm.Name, radGroup.Properties.Items(i).Description, Modules.TypeLanguage)
                             }
-                            try
-                            {
-                                if (radGroup.SelectedIndex == -1)
-                                    radGroup.SelectedIndex = 0;
-                            }
-                            catch
-                            {
-                            }
+                            //try
+                            //{
+                            //    if (radGroup.SelectedIndex == -1)
+                            //        radGroup.SelectedIndex = 0;
+                            //}
+                            //catch
+                            //{
+                            //}
 
                             break;
                         }
@@ -5075,6 +5080,14 @@ namespace Commons
             //ID_CV,TEN_CV
             DataTable dt = new DataTable();
             dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetThongTinChung", Commons.Modules.UserName, Commons.Modules.TypeLanguage));
+            dt.TableName = "TTC";
+            return dt;
+        }
+        public DataTable DataReportHeader(int ID_DV)
+        {
+            //ID_CV,TEN_CV
+            DataTable dt = new DataTable();
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetThongTinDonVi", Commons.Modules.UserName, Commons.Modules.TypeLanguage, ID_DV));
             dt.TableName = "TTC";
             return dt;
         }

@@ -10,7 +10,7 @@ namespace Vs.Report
 {
     public partial class rptBCKeHoachNghiPhep : DevExpress.XtraReports.UI.XtraReport
     {
-        public rptBCKeHoachNghiPhep(DateTime ngayin, DateTime TuNgay, DateTime DenNgay,String tieude)
+        public rptBCKeHoachNghiPhep(DateTime ngayin, DateTime TuNgay, DateTime DenNgay, String tieude)
         {
 
             InitializeComponent();
@@ -34,5 +34,9 @@ namespace Vs.Report
 
         }
 
+        private void rptBCKeHoachNghiPhep_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        {
+            
+        }
     }
 }

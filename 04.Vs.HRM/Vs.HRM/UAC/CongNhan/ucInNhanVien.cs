@@ -189,6 +189,36 @@ namespace Vs.HRM
                                                 catch {}
                                             }
                                             break;
+                                        case "NC":
+                                            {
+                                                try
+                                                {
+                                                    cmd = new System.Data.SqlClient.SqlCommand("spSaveThongTinNhanVienNB", conn);
+                                                    cmd.Parameters.Add("@sBT", SqlDbType.NVarChar, 50).Value = strSaveThongTinNhanVien;
+                                                    cmd.CommandType = CommandType.StoredProcedure;
+                                                    System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+                                                    DataSet ds = new DataSet();
+                                                    adp.Fill(ds);
+                                                    DataTable dt1 = new DataTable();
+                                                    dt1 = ds.Tables[1].Copy();
+                                                    dt1.TableName = "DATA";
+                                                    //frm.rpt = new Vs.Recruit.rptTheNhanVien(dt1);
+                                                    frm.rpt = new rptTheNhanVien(DateTime.Now);
+                                                    frm.AddDataSource(dt1);
+
+                                                    dt = new DataTable();
+                                                    dt = ds.Tables[0].Copy();
+                                                    dt.TableName = "DON_VI";
+                                                    frm.AddDataSource(dt);
+
+                                                    frm.ShowDialog();
+
+                                                    Commons.Modules.ObjSystems.XoaTable(strSaveThongTinNhanVien);
+                                                    conn.Close();
+                                                }
+                                                catch { }
+                                            }
+                                            break;
                                     }
                                     
                                    

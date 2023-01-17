@@ -17,6 +17,7 @@ using Microsoft.Office.Interop.Excel;
 using DataTable = System.Data.DataTable;
 using DevExpress.Utils.Menu;
 using System.Diagnostics;
+using System.Drawing.Drawing2D;
 
 namespace Vs.Payroll
 {
@@ -189,20 +190,22 @@ namespace Vs.Payroll
                 dt = new DataTable();
                 dt = ds.Tables[0].Copy();
                 dt.Columns["ID_CD"].ReadOnly = false;
-                if (grdQT.DataSource == null)
-                {
-                    Commons.Modules.ObjSystems.MLoadXtraGrid(grdQT, grvQT, dt, false, false, false, false, true, this.Name);
-                }
-                else
-                {
-                    try { grdQT.DataSource = dt; } catch { }
-                }
+                Commons.Modules.ObjSystems.MLoadXtraGrid(grdQT, grvQT, dt, false, true, false, false, true, this.Name);
+                //if (grdQT.DataSource == null)
+                //{
+                //    Commons.Modules.ObjSystems.MLoadXtraGrid(grdQT, grvQT, dt, false, true, false, false, true, this.Name);
+                //}
+                //else
+                //{
+                //    try { grdQT.DataSource = dt; } catch { }
+                //}
                 if (!isAdd)
                 {
                     grvQT.OptionsView.NewItemRowPosition = NewItemRowPosition.None;
                 }
                 FormatGrid();
                 SetButton(isAdd);
+                LoadTextTongDonGia();
             }
             catch (Exception ex)
             {
@@ -265,6 +268,8 @@ namespace Vs.Payroll
                 if (sCum != "-1") sDK = "NHOM_CD LIKE '" + sCum + "'";
 
                 dtTmp.DefaultView.RowFilter = sDK;
+
+                LoadTextTongDonGia();
             }
             catch { dtTmp.DefaultView.RowFilter = ""; }
         }
@@ -906,8 +911,9 @@ namespace Vs.Payroll
                                 Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBTQTCN_Current, Commons.Modules.ObjSystems.ConvertDatatable(grvQT), "");
                                 dt = new DataTable();
                                 dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetListQTCNImport", chkCboEditChuyen.EditValue.ToString().IndexOf(',') != -1 ? chkCboEditChuyen.EditValue.ToString().Substring(0, chkCboEditChuyen.EditValue.ToString().IndexOf(',')) : chkCboEditChuyen.EditValue.ToString(), Convert.ToInt64(cboMH.EditValue), sBTQTCN, sBTQTCN_Current));
-                                grdQT.DataSource = dt;
-                                //Commons.Modules.ObjSystems.MLoadXtraGrid(grdQT, grvQT, dt, true, true, false, false, true, this.Name);
+                                //grdQT.DataSource = dt;
+                                Commons.Modules.ObjSystems.MLoadXtraGrid(grdQT, grvQT, dt, true, true, false, false, true, this.Name);
+                                grvQT.Columns["TINH_TRANG_CD"].Visible = false;
                                 Commons.Modules.ObjSystems.XoaTable(sBTQTCN);
                                 Commons.Modules.ObjSystems.XoaTable(sBTQTCN_Current);
 
@@ -1073,7 +1079,23 @@ namespace Vs.Payroll
             }
             catch { }
         }
+        private void LoadTextTongDonGia()
+        {
+            try
+            {
+                DataTable dt1 = new DataTable();
+                dt1 = Commons.Modules.ObjSystems.ConvertDatatable(grvQT);
+                lbl.Text = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "lblTongDonGia") + " " + Convert.ToDouble(dt1.Compute("Sum(DON_GIA_THUC_TE)", "")).ToString();
+            }
+            catch
+            {
+                lbl.Text = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "lblTongDonGia") + " 0";
+            }
+        }
+        private void Save()
+        {
 
+        }
         private void BorderAround(Microsoft.Office.Interop.Excel.Range range)
         {
             Microsoft.Office.Interop.Excel.Borders borders = range.Borders;
@@ -1113,53 +1135,59 @@ namespace Vs.Payroll
                         }
                     case 2:
                         {
-                            sTenCot = "NHOM_CD";
+                            sTenCot = "BUOC_CV_A";
                             table.Columns.Add(sTenCot.Trim(), prop.PropertyType);
                             break;
                         }
                     case 3:
                         {
-                            sTenCot = "THIET_BI";
+                            sTenCot = "NHOM_CD";
                             table.Columns.Add(sTenCot.Trim(), prop.PropertyType);
                             break;
                         }
                     case 4:
                         {
-                            sTenCot = "SMV";
+                            sTenCot = "THIET_BI";
                             table.Columns.Add(sTenCot.Trim(), prop.PropertyType);
                             break;
                         }
                     case 5:
                         {
-                            sTenCot = "CONG_CU_HT";
+                            sTenCot = "SMV";
                             table.Columns.Add(sTenCot.Trim(), prop.PropertyType);
                             break;
                         }
                     case 6:
                         {
-                            sTenCot = "BAC_CD";
+                            sTenCot = "CONG_CU_HT";
                             table.Columns.Add(sTenCot.Trim(), prop.PropertyType);
                             break;
                         }
                     case 7:
                         {
-                            sTenCot = "SMV_THEO_BAC";
+                            sTenCot = "BAC_CD";
                             table.Columns.Add(sTenCot.Trim(), prop.PropertyType);
                             break;
                         }
                     case 8:
                         {
-                            sTenCot = "DON_GIA_PHUT";
+                            sTenCot = "SMV_THEO_BAC";
                             table.Columns.Add(sTenCot.Trim(), prop.PropertyType);
                             break;
                         }
                     case 9:
                         {
-                            sTenCot = "DON_GIA_HO_TRO";
+                            sTenCot = "DON_GIA_PHUT";
                             table.Columns.Add(sTenCot.Trim(), prop.PropertyType);
                             break;
                         }
                     case 10:
+                        {
+                            sTenCot = "DON_GIA_HO_TRO";
+                            table.Columns.Add(sTenCot.Trim(), prop.PropertyType);
+                            break;
+                        }
+                    case 11:
                         {
                             sTenCot = "SO_CONG_NHAN";
                             table.Columns.Add(sTenCot.Trim(), typeof(float));
@@ -1562,6 +1590,8 @@ namespace Vs.Payroll
                     XtraMessageBox.Show(dt.Rows[0][1].ToString());
                     return;
                 }
+
+
                 Commons.Modules.ObjSystems.DeleteAddRow(grvQT);
                 LoadData();
                 LocData();
@@ -1655,6 +1685,57 @@ namespace Vs.Payroll
                 LocData();
                 SetButton(false);
                 XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgCapNhatThanhCongVuiLongKiemTraLai"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            }
+            catch (Exception ex)
+            {
+                Commons.Modules.ObjSystems.XoaTable(sBT);
+            }
+        }
+
+        //Update công đoạn mã hàng
+        public DXMenuItem MCreateMenuUpdateCDMaHang(DevExpress.XtraGrid.Views.Grid.GridView view, int rowHandle)
+        {
+            string sStr = Commons.Modules.ObjLanguages.GetLanguage(Commons.Modules.ModuleName, this.Name, "lblUpdateCDMaHang", Commons.Modules.TypeLanguage);
+            DXMenuItem menuPatse = new DXMenuItem(sStr, new EventHandler(UpdateCDMaHang));
+            menuPatse.Tag = new RowInfo(view, rowHandle);
+            return menuPatse;
+        }
+        public void UpdateCDMaHang(object sender, EventArgs e)
+        {
+
+            if (datNgayLap.Text == "")
+            {
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgChuaNhapNgay"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            isAdd = false;
+            grvQT.PostEditor();
+            grvQT.UpdateCurrentRow();
+            DataTable dtSource = new DataTable();
+            dtSource = (DataTable)grdQT.DataSource;
+            grvQT.Columns.View.ClearColumnErrors();
+            this.Cursor = Cursors.WaitCursor;
+            if (!KiemTraLuoi(dtSource))
+            {
+                this.Cursor = Cursors.Default;
+                return;
+            }
+            this.Cursor = Cursors.Default;
+
+            string sBT = "sBTQTCN" + Commons.Modules.iIDUser;
+            try
+            {
+                frmCapNhatCDTheoMH frm = new frmCapNhatCDTheoMH();
+                frm.iID_DV = Convert.ToInt32(cboDV.EditValue);
+                frm.iID_CHUYEN_SD = Convert.ToInt32(chkCboEditChuyen.EditValue);
+                frm.iID_ORD = Convert.ToInt32(grvQT.GetFocusedRowCellValue("ID_CD")) == 0 ? Convert.ToInt32(cboMH.EditValue) : -1;
+                frm.dtTemp = new DataTable();
+                frm.dtTemp = Commons.Modules.ObjSystems.GetDataTableMultiSelect(grdQT, grvQT);
+                if (frm.ShowDialog() == DialogResult.OK)
+                {
+                    Commons.Modules.ObjSystems.Alert(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgCapNhatThanhCong"), Commons.Form_Alert.enmType.Success);
+                    LoadData();
+                }
             }
             catch (Exception ex)
             {
@@ -1791,8 +1872,22 @@ namespace Vs.Payroll
             {
                 if (e.KeyCode == Keys.Delete && !windowsUIButton.Buttons[0].Properties.Visible)
                 {
-                    grvQT.DeleteSelectedRows();
-                    ((DataTable)grdQT.DataSource).AcceptChanges();
+                    try
+                    {
+                        if (Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT COUNT(*) FROM dbo.PHIEU_CONG_DOAN WHERE ID_CD = " + grvQT.GetFocusedRowCellValue("ID_CD") + "")) > 0)
+                        {
+                            XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDelDangSuDung"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                            return;
+                        }
+                        else
+                        {
+                            if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgBanCoMuonXoaCDNayKhong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) return;
+                            SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "DELETE FROM dbo.QUI_TRINH_CONG_NGHE_CHI_TIET WHERE ID = " + grvQT.GetFocusedRowCellValue("ID_CD") + "");
+                            grvQT.DeleteSelectedRows();
+                            ((DataTable)grdQT.DataSource).AcceptChanges();
+                        }
+                    }
+                    catch { }
                 }
                 if (e.Control && e.KeyCode == Keys.C)
                 {
@@ -1894,8 +1989,29 @@ namespace Vs.Payroll
         {
             try
             {
-                if (Convert.ToBoolean(grvQT.GetRowCellValue(e.RowHandle, grvQT.Columns["QUI_TRINH_HOAN_CHINH"].FieldName)) == false) return;
-                e.Appearance.BackColor = System.Drawing.ColorTranslator.FromHtml("#FFF2CC");
+
+                if (Convert.ToBoolean(grvQT.GetRowCellValue(e.RowHandle, grvQT.Columns["QUI_TRINH_HOAN_CHINH"].FieldName)) != false)
+                {
+                    e.Appearance.BackColor = System.Drawing.ColorTranslator.FromHtml("#FFF2CC");
+                    e.HighPriority = true;
+                }
+
+                if (!windowsUIButton.Buttons[0].Properties.Visible)
+                {
+                    if (Convert.ToInt32(grvQT.GetRowCellValue(e.RowHandle, grvQT.Columns["TINH_TRANG_CD"].FieldName)) == 2)
+                    {
+                        e.Appearance.BackColor = Color.Salmon;
+                        e.Appearance.BackColor2 = Color.SeaShell;
+                        e.HighPriority = true;
+                    }
+                    if (grvQT.GetRowCellValue(e.RowHandle, grvQT.Columns["TINH_TRANG_CD"].FieldName).ToString() == "1")
+                    {
+                        e.Appearance.BackColor = Color.LightGreen;
+                        e.Appearance.BackColor2 = Color.SeaShell;
+                        e.HighPriority = true;
+                    }
+
+                }
             }
             catch
             {
@@ -1913,14 +2029,29 @@ namespace Vs.Payroll
 
                 if (e.Column.FieldName == "MA_GOP")
                 {
-                    sMaGopCurrent = grvQT.GetFocusedRowCellValue("MaQL").ToString().Trim();
+                    sMaGopCurrent = grvQT.GetFocusedRowCellValue("MA_GOP").ToString().Trim();
                     DataTable dt = new DataTable();
                     dt = (DataTable)grdQT.DataSource;
-                    if (dt.AsEnumerable().Count(x => x["MA_GOP"].Equals(sMaGopCurrent)) > 0)
-                    {
-                        XtraMessageBox.Show("Mã này đã có mã gộp không được chọn nữa");
-                        row["MA_GOP"] = DBNull.Value;
+                    //if (dt.AsEnumerable().Count(x => x["MA_GOP"].Equals(sMaGopCurrent)) > 1)
+                    //{
+                    //    row["MA_GOP"] = DBNull.Value;
+                    //    XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDaCoMaGop"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    //    return;
+                    //}
 
+                    try
+                    {
+                        dt = dt.AsEnumerable().Where(r => Convert.ToString(r["MA_GOP"]) != "").CopyToDataTable();
+
+                    }
+                    catch { dt.Clear(); }
+                    dt.AcceptChanges();
+
+                    if (dt.AsEnumerable().Count(x => x["MaQL"].Equals(sMaGopCurrent)) > 0)
+                    {
+                        row["MA_GOP"] = DBNull.Value;
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDaCoMaGop"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return;
                     }
                 }
             }
@@ -1947,10 +2078,15 @@ namespace Vs.Payroll
                     if (e.MenuType == DevExpress.XtraGrid.Views.Grid.GridMenuType.Row)
                     {
                         e.Menu.Items.Clear();
-                        DevExpress.Utils.Menu.DXMenuItem itemCopy = MCreateMenuUpdate(view, irow);
-                        e.Menu.Items.Add(itemCopy);
-                        DevExpress.Utils.Menu.DXMenuItem itemDelete = MCreateMenuDelete(view, irow);
-                        e.Menu.Items.Add(itemDelete);
+                        if (Convert.ToString(grvQT.GetFocusedRowCellValue("MaQL")) != "")
+                        {
+                            DevExpress.Utils.Menu.DXMenuItem itemCapNhatCDMH = MCreateMenuUpdateCDMaHang(view, irow);
+                            e.Menu.Items.Add(itemCapNhatCDMH);
+                            DevExpress.Utils.Menu.DXMenuItem itemCopy = MCreateMenuUpdate(view, irow);
+                            e.Menu.Items.Add(itemCopy);
+                            DevExpress.Utils.Menu.DXMenuItem itemDelete = MCreateMenuDelete(view, irow);
+                            e.Menu.Items.Add(itemDelete);
+                        }
                     }
                 }
 

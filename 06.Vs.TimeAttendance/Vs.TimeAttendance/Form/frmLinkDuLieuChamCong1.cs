@@ -73,8 +73,8 @@ namespace Vs.TimeAttendance
                 Commons.OSystems.SetDateEditFormat(dtNgayChamCong);
                 dtNgayChamCong.DateTime = DateTime.Now;
                 LoadLuoiNgay(dt);
-                grdDSCN.DataSource = null;
-                grvDSCN.RefreshData();
+                //grdDSCN.DataSource = null;
+                //grvDSCN.RefreshData();
                 iTinhTrangCong = Commons.Modules.ObjSystems.getTinhTrangLuongThang(dtNgayChamCong.DateTime, Convert.ToInt64(cbDonVi.EditValue));
                 enableButon(true);
                 //lblTongCong.Text = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgTongSoCN") + "0";
@@ -1124,7 +1124,7 @@ namespace Vs.TimeAttendance
             DataTable dt = new DataTable();
             try
             {
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetDuLieuQuetTheCN", dtNgay, Commons.Modules.UserName, Commons.Modules.TypeLanguage, cbDonVi.EditValue, cbXiNghiep.EditValue, cbTo.EditValue));
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetDuLieuQuetTheCN", dtNgay, Commons.Modules.UserName, Commons.Modules.TypeLanguage, cbDonVi.EditValue, cbXiNghiep.EditValue, cbTo.EditValue, Commons.Modules.chamCongK));
                 dt.Columns["ID_CN"].ReadOnly = false;
                 dt.Columns["HO_TEN"].ReadOnly = true;
                 dt.Columns["MS_THE_CC"].ReadOnly = true;

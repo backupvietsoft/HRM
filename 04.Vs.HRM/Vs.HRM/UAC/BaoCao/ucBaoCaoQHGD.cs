@@ -782,6 +782,8 @@ namespace Vs.HRM
                                 cmd.Parameters.Add("@TuoiTu", SqlDbType.Int).Value = txt_Tu.Text.ToString() == "" ? 0 : txt_Tu.EditValue;
                                 cmd.Parameters.Add("@TuoiDen", SqlDbType.Int).Value = txt_Den.Text.ToString() == "" ? 99 : txt_Den.EditValue;
                                 cmd.Parameters.Add("@LoaiQH", SqlDbType.Int).Value = lk_QuanHeGD.EditValue;
+                                cmd.Parameters.Add("@TuNgay", SqlDbType.Date).Value = tuNgay.EditValue;
+                                cmd.Parameters.Add("@DenNgay", SqlDbType.Date).Value = denNgay.EditValue;
                                 cmd.CommandType = CommandType.StoredProcedure;
                                 System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
                                 DataSet ds = new DataSet();

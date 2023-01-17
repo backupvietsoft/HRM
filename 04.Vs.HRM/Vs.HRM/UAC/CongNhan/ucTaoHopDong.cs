@@ -127,6 +127,25 @@ namespace Vs.HRM
                             adp.Fill(ds);
                             break;
                         }
+                    case "NC":
+                        {
+                            System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spGetListCNChuaCoHD_NB", conn);
+                            cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                            cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                            cmd.Parameters.Add("@DVi", SqlDbType.Int).Value = Convert.ToInt32(cboDV.EditValue);
+                            cmd.Parameters.Add("@XN", SqlDbType.Int).Value = Convert.ToInt32(cboXN.EditValue);
+                            cmd.Parameters.Add("@TO", SqlDbType.Int).Value = Convert.ToInt32(cboTo.EditValue);
+                            cmd.Parameters.Add("@TNgay", SqlDbType.DateTime).Value = Commons.Modules.ObjSystems.ConvertDateTime(datTNgay.Text);
+                            cmd.Parameters.Add("@DNgay", SqlDbType.DateTime).Value = Commons.Modules.ObjSystems.ConvertDateTime(datDNgay.Text);
+                            cmd.Parameters.Add("@iCot1", SqlDbType.BigInt).Value = -1;
+                            cmd.Parameters.Add("@iCot2", SqlDbType.BigInt).Value = -1;
+                            cmd.Parameters.Add("@Them", SqlDbType.Int).Value = rdoChonXem.SelectedIndex;
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+
+                            adp.Fill(ds);
+                            break;
+                        }
                 }
                
                 DataTable dt = new DataTable();
@@ -410,7 +429,6 @@ namespace Vs.HRM
             try
             {
                 LookUpEdit lookUp = sender as LookUpEdit;
-                lookUp.Properties.DataSource = Commons.Modules.ObjSystems.DataTinhTrang(false);
             }
             catch { }
         }
@@ -519,6 +537,22 @@ namespace Vs.HRM
                                         }
                                         break;
                                     }
+                                case "NC":
+                                    {
+                                        DataTable dt = new DataTable();
+                                        try
+                                        {
+                                            dt = Commons.Modules.ObjSystems.ConvertDatatable(grvDSUngVien);
+                                            dt.DefaultView.RowFilter = grvDSUngVien.ActiveFilterString.ToString();
+                                            dt = dt.DefaultView.ToTable();
+                                            HopDongThuViecAll_NB(dt);
+                                        }
+                                        catch (Exception ex)
+                                        {
+                                            dt = null;
+                                        }
+                                        break;
+                                    }
                                 case "DM":
                                     {
                                         DataTable dt = new DataTable();
@@ -543,7 +577,6 @@ namespace Vs.HRM
                     case "sua":
                         {
                             iAdd = 1;
-                            //LoadData();
                             enabel(false);
                             break;
                         }
@@ -561,7 +594,6 @@ namespace Vs.HRM
                             grvDSUngVien.UpdateCurrentRow();
                             DataTable dt_CHON = new DataTable();
                             dt_CHON = ((DataTable)grdDSUngVien.DataSource);
-                            //dt_CHON = Commons.Modules.ObjSystems.ConvertDatatable(grvDSUngVien);
                             if (dt_CHON.AsEnumerable().Where(r => r.Field<Boolean>("CHON") == true).Count() == 0)
                             {
                                 XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgChuaChonCongNhan"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -577,16 +609,11 @@ namespace Vs.HRM
                             if (!SaveData()) return;
                             rdoChonXem.SelectedIndex = 0;
                             rdoChonXem_SelectedIndexChanged(null, null);
-                            //LoadData();
                             enabel(true);
                             break;
                         }
                     case "khongghi":
                         {
-                            //Commons.Modules.sLoad = "0Load";
-                            //iAdd = 0;
-                            //LoadData();
-                            //Commons.Modules.sLoad = "";
                             rdoChonXem.SelectedIndex = 0;
                             rdoChonXem_SelectedIndexChanged(null, null);
                             break;

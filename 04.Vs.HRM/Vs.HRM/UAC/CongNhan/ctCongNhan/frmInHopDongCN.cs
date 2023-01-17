@@ -107,6 +107,22 @@ namespace Vs.HRM
                                                 }
                                                 break;
                                             }
+                                        case "NC":
+                                            {
+                                                bool kiemHD = Convert.ToBoolean(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT ISNULL(HD_GIA_HAN,0) FROM dbo.HOP_DONG_LAO_DONG WHERE ID_HDLD = " + idHD + ""));
+                                                if (kiemHD)
+                                                {
+                                                    HopDongLaoDong_NB();
+
+                                                }
+                                                else
+                                                {
+                                                    HopDongThuViec_NB();
+
+
+                                                }
+                                                break;
+                                            }
                                         default:
                                             HopDongLaoDong();
                                             break;
@@ -151,6 +167,19 @@ namespace Vs.HRM
                                                 }
                                                 break;
                                             }
+                                        case "NC":
+                                            {
+                                                bool kiemHD = Convert.ToBoolean(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT ISNULL(HD_GIA_HAN,0) FROM dbo.HOP_DONG_LAO_DONG WHERE ID_HDLD = " + idHD + ""));
+                                                if (kiemHD)
+                                                {
+                                                    HopDongLaoDong_NB();
+                                                }
+                                                else
+                                                {
+                                                    HopDongThuViec_NB();
+                                                }
+                                                break;
+                                            }
                                         default:
                                             HopDongThuViecCDDH();
                                             break;
@@ -178,6 +207,11 @@ namespace Vs.HRM
                                                 break;
                                             }
                                         case "NB":
+                                            {
+                                                ThongBaoKetThucHDLD();
+                                                break;
+                                            }
+                                        case "NC":
                                             {
                                                 ThongBaoKetThucHDLD();
                                                 break;

@@ -45,7 +45,7 @@ namespace Vs.Category
 
             try
             {
-                string sSql = "SELECT ID_NHOM, TEN_NHOM, TEN_NHOM_A, TEN_NHOM_H, CA_TU_DONG, NHOM_CHE_DO ,STT " +
+                string sSql = "SELECT ID_NHOM, TEN_NHOM, TEN_NHOM_A, TEN_NHOM_H, CA_TU_DONG, ISNULL(NHOM_CHE_DO,0) NHOM_CHE_DO ,STT " +
                     "FROM NHOM_CHAM_CONG WHERE ID_NHOM = " + Id.ToString();
                 DataTable dtTmp = new DataTable();
                 dtTmp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSql));

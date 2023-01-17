@@ -100,7 +100,7 @@ namespace VietSoftHRM
                             if (chkLIC.Checked)
                             {
                                 int lic = 0;
-                                try { lic = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT COUNT(*) FROM dbo.USERS WHERE LIC = 1 AND ID_USER != " + grvNguoiDung.GetFocusedRowCellValue("ID_USER") + "")); } catch { }
+                                try { lic = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT COUNT(*) FROM dbo.USERS WHERE LIC = 1 AND ID_USER != " + (grvNguoiDung.GetFocusedRowCellValue("ID_USER") == null ? "0" : grvNguoiDung.GetFocusedRowCellValue("ID_USER").ToString()) + " AND [USER_NAME] <> N'admin'")); } catch { }
                                 if (lic >= Commons.Modules.iLic)
                                 {
                                     XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgLincenseDaHet"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -143,19 +143,29 @@ namespace VietSoftHRM
         }
         private void grvNguoiDung_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
-            Commons.Modules.sLoad = "0Load";
-            USER_NAMETextEdit.EditValue = grvNguoiDung.GetFocusedRowCellValue("USER_NAME");
-            ACTIVECheckEdit.EditValue = Convert.ToBoolean(grvNguoiDung.GetFocusedRowCellValue("ACTIVE"));
-            chkLIC.EditValue = Convert.ToBoolean(grvNguoiDung.GetFocusedRowCellValue("LIC"));
-            ID_NHOMComboBoxEdit.EditValue = grvNguoiDung.GetFocusedRowCellValue("ID_NHOM");
-            /// ID_TOComboBoxEdit.EditValue = grvNguoiDung.GetFocusedRowCellValue("ID_TO");
-            ////ID_CNSearchLookUpEdit.EditValue = grvNguoiDung.GetFocusedRowCellValue("ID_CN");
-            FULL_NAMETextEdit.EditValue = grvNguoiDung.GetFocusedRowCellValue("FULL_NAME");
-            PASSWORDTextEdit.EditValue = Commons.Modules.ObjSystems.Decrypt(grvNguoiDung.GetFocusedRowCellValue("PASSWORD").ToString(), true);
-            USER_MAILTextEdit.EditValue = grvNguoiDung.GetFocusedRowCellValue("USER_MAIL");
-            DESCRIPTIONMemoExEdit.EditValue = grvNguoiDung.GetFocusedRowCellValue("DESCRIPTION");
-            chkKhach.EditValue = Convert.ToBoolean(grvNguoiDung.GetFocusedRowCellValue("USER_KHACH"));
-            Commons.Modules.sLoad = "";
+            try
+            {
+
+
+                Commons.Modules.sLoad = "0Load";
+                USER_NAMETextEdit.EditValue = grvNguoiDung.GetFocusedRowCellValue("USER_NAME");
+                ACTIVECheckEdit.EditValue = Convert.ToBoolean(grvNguoiDung.GetFocusedRowCellValue("ACTIVE"));
+                chkLIC.EditValue = Convert.ToBoolean(grvNguoiDung.GetFocusedRowCellValue("LIC"));
+                ID_NHOMComboBoxEdit.EditValue = grvNguoiDung.GetFocusedRowCellValue("ID_NHOM");
+                /// ID_TOComboBoxEdit.EditValue = grvNguoiDung.GetFocusedRowCellValue("ID_TO");
+                ////ID_CNSearchLookUpEdit.EditValue = grvNguoiDung.GetFocusedRowCellValue("ID_CN");
+                FULL_NAMETextEdit.EditValue = grvNguoiDung.GetFocusedRowCellValue("FULL_NAME");
+                try
+                {
+                    PASSWORDTextEdit.EditValue = Commons.Modules.ObjSystems.Decrypt(grvNguoiDung.GetFocusedRowCellValue("PASSWORD").ToString(), true);
+                }
+                catch { }
+                USER_MAILTextEdit.EditValue = grvNguoiDung.GetFocusedRowCellValue("USER_MAIL");
+                DESCRIPTIONMemoExEdit.EditValue = grvNguoiDung.GetFocusedRowCellValue("DESCRIPTION");
+                chkKhach.EditValue = Convert.ToBoolean(grvNguoiDung.GetFocusedRowCellValue("USER_KHACH"));
+                Commons.Modules.sLoad = "";
+            }
+            catch (Exception ex) { }
         }
         #endregion
 
@@ -233,7 +243,7 @@ namespace VietSoftHRM
             DESCRIPTIONMemoExEdit.Properties.ReadOnly = enable;
             grdNguoiDung.Enabled = enable;
             cboNhomUser.Properties.ReadOnly = !enable;
-            
+            chkKhach.Properties.ReadOnly = enable;
         }
         private void Resettest()
         {

@@ -29,9 +29,10 @@ namespace Vs.Category
         private void frmEditLOAI_CONG_VIEC_Load(object sender, EventArgs e)
         {
             ItemForTEN_CV.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboNGACH_LUONG, Commons.Modules.ObjSystems.DataNgachLuong(false), "ID_NL", "TEN_NL", "TEN_NL", true, true);
+
             //ItemForTEN_XN.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
-            if (Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString() == "DM")
-            {
+
                 //DataTable dt = new DataTable();
                 //dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboCongNhan", Commons.Modules.UserName, Commons.Modules.TypeLanguage, 3));
 
@@ -39,7 +40,7 @@ namespace Vs.Category
 
                 //Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboChucVu, Commons.Modules.ObjSystems.DataXiNghiep(-1,false) , "ID_XN", "TEN_XN", "TEN_XN");
                 ItemForTEN_CV.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
-            }
+            
 
             LoadLoaiTO();
             //Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(ID_CVSearchLookUpEdit, Commons.Modules.ObjSystems.DataChucVu(false), "ID_CV", "TEN_CV", "TEN_CV", true, true);
@@ -86,11 +87,16 @@ namespace Vs.Category
                 PHEP_CTTextEdit.EditValue = dtTmp.Rows[0]["PHEP_CT"].ToString();
                 ID_LTSearchLookUpEdit.EditValue = dtTmp.Rows[0]["ID_LT"];
                 cboChucVu.EditValue = dtTmp.Rows[0]["ID_CV"].ToString() == "" ? -1 : Convert.ToInt64(dtTmp.Rows[0]["ID_CV"]);
-                txtSTT.EditValue = Convert.ToInt32(dtTmp.Rows[0]["STT"]);
+                try
+                {
+                    txtSTT.EditValue = Convert.ToInt32(dtTmp.Rows[0]["STT"]);
+                }
+                catch { }
                 txtCHUC_DANH.EditValue = dtTmp.Rows[0]["CHUC_DANH"];
                 txtMO_TA_CV.EditValue = dtTmp.Rows[0]["MO_TA_CV_BHXH"];
                 txtCHUC_DANH_A.EditValue = dtTmp.Rows[0]["CHUC_DANH_A"];
                 txtMO_TA_CV_A.EditValue = dtTmp.Rows[0]["MO_TA_CV_BHXH_A"];
+                cboNGACH_LUONG.EditValue = dtTmp.Rows[0]["ID_NL"].ToString() == "" ? -1 : Convert.ToInt64(dtTmp.Rows[0]["ID_NL"]); ;
             }
             catch
             {
@@ -112,6 +118,7 @@ namespace Vs.Category
                 txtMO_TA_CV.Text = "";
                 txtCHUC_DANH_A.Text = "";
                 txtMO_TA_CV_A.Text = "";
+                cboNGACH_LUONG.EditValue = -1;
             }
             catch { }
         }
@@ -136,7 +143,7 @@ namespace Vs.Category
                                 Convert.ToInt64(cboChucVu.Text == "" ? cboChucVu.EditValue = null : cboChucVu.EditValue),
                                 (txtSTT.Text == "") ? txtSTT.EditValue = null : txtSTT.EditValue,
                                 txtCHUC_DANH.Text, txtCHUC_DANH_A.Text,
-                                txtMO_TA_CV.Text, txtMO_TA_CV_A.Text
+                                txtMO_TA_CV.Text, txtMO_TA_CV_A.Text , cboNGACH_LUONG.EditValue
                                 ).ToString();
                             if (AddEdit)
                             {
@@ -218,5 +225,7 @@ namespace Vs.Category
             }
             return false;
         }
+
+        
     }
 }

@@ -409,6 +409,8 @@
             this.xrLabel3.AllowMarkupText = true;
             this.xrLabel3.AutoWidth = true;
             this.xrLabel3.Dpi = 254F;
+            this.xrLabel3.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[DA_TA1].[DIA_CHI]")});
             this.xrLabel3.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.xrLabel3.LocationFloat = new DevExpress.Utils.PointFloat(0F, 78.79158F);
             this.xrLabel3.Multiline = true;
@@ -457,6 +459,8 @@
             this.lb0.AllowMarkupText = true;
             this.lb0.AutoWidth = true;
             this.lb0.Dpi = 254F;
+            this.lb0.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[DA_TA1].[TEN_CTY]")});
             this.lb0.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb0.LocationFloat = new DevExpress.Utils.PointFloat(0F, 19.37487F);
             this.lb0.Multiline = true;
@@ -626,6 +630,8 @@
             // 
             this.xrLabel129.AllowMarkupText = true;
             this.xrLabel129.Dpi = 254F;
+            this.xrLabel129.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[DA_TA1].[TEN_CTY]")});
             this.xrLabel129.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold);
             this.xrLabel129.LocationFloat = new DevExpress.Utils.PointFloat(607.736F, 25.00009F);
             this.xrLabel129.Multiline = true;

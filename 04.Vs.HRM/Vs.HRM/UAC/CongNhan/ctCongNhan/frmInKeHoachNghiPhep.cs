@@ -70,40 +70,68 @@ namespace Vs.HRM
                             {
 
                                 tieude = Commons.Modules.ObjLanguages.GetLanguage("rptBCKeHoachNghiPhep", "lblTieuDe_DSNVNGHIPHEPTHEOKH");
+                                frm.rpt = new rptBCKeHoachNghiPhep(dNgayIn.DateTime, dTuNgay.DateTime, dDenNgay.DateTime, tieude);
+
+                                conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                                conn.Open();
+
+                                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptBCKeHoachNghiPhep", conn);
+                                cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                                cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                                cmd.Parameters.Add("@Dvi", SqlDbType.Int).Value = slkDonVi.EditValue;
+                                cmd.Parameters.Add("@XN", SqlDbType.Int).Value = slkXiNghiep.EditValue;
+                                cmd.Parameters.Add("@TO", SqlDbType.Int).Value = slkTo.EditValue;
+                                cmd.Parameters.Add("@ID_CN", SqlDbType.BigInt).Value = slkCN.EditValue;
+                                cmd.Parameters.Add("@ID_LDV", SqlDbType.BigInt).Value = slkLDV.EditValue;
+                                cmd.Parameters.Add("@TNgay", SqlDbType.Date).Value = dTuNgay.EditValue;
+                                cmd.Parameters.Add("@DNgay", SqlDbType.Date).Value = dDenNgay.EditValue;
+
+                                cmd.Parameters.Add("@Loai", SqlDbType.Int).Value = rdo_ChonBaoCao.SelectedIndex;
+                                cmd.CommandType = CommandType.StoredProcedure;
+
+                                System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+                                DataSet ds = new DataSet();
+                                adp.Fill(ds);
+                                dt = new DataTable();
+                                dt = ds.Tables[0].Copy();
+                                dt.TableName = "DA_TA";
+                                frm.AddDataSource(dt);
+
+                                frm.ShowDialog();
                             }
                             else
                             {
-
                                 tieude = Commons.Modules.ObjLanguages.GetLanguage("rptBCKeHoachNghiPhep", "lblTieuDe_DSNVDILAMLAITHEOKH");
+                                frm.rpt = new rptBCKeHoachNghiPhepNgayVL(dNgayIn.DateTime, dTuNgay.DateTime, dDenNgay.DateTime, tieude);
+
+                                conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                                conn.Open();
+
+                                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptBCKeHoachNghiPhep", conn);
+                                cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                                cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                                cmd.Parameters.Add("@Dvi", SqlDbType.Int).Value = slkDonVi.EditValue;
+                                cmd.Parameters.Add("@XN", SqlDbType.Int).Value = slkXiNghiep.EditValue;
+                                cmd.Parameters.Add("@TO", SqlDbType.Int).Value = slkTo.EditValue;
+                                cmd.Parameters.Add("@ID_CN", SqlDbType.BigInt).Value = slkCN.EditValue;
+                                cmd.Parameters.Add("@ID_LDV", SqlDbType.BigInt).Value = slkLDV.EditValue;
+                                cmd.Parameters.Add("@TNgay", SqlDbType.Date).Value = dTuNgay.EditValue;
+                                cmd.Parameters.Add("@DNgay", SqlDbType.Date).Value = dDenNgay.EditValue;
+
+                                cmd.Parameters.Add("@Loai", SqlDbType.Int).Value = rdo_ChonBaoCao.SelectedIndex;
+                                cmd.CommandType = CommandType.StoredProcedure;
+
+                                System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+                                DataSet ds = new DataSet();
+                                adp.Fill(ds);
+                                dt = new DataTable();
+                                dt = ds.Tables[0].Copy();
+                                dt.TableName = "DA_TA";
+                                frm.AddDataSource(dt);
+
+                                frm.ShowDialog();
                             }
-                            frm.rpt = new rptBCKeHoachNghiPhep(dNgayIn.DateTime, dTuNgay.DateTime, dDenNgay.DateTime, tieude);
-
-                            conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
-                            conn.Open();
-
-                            System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptBCKeHoachNghiPhep", conn);
-                            cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
-                            cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
-                            cmd.Parameters.Add("@Dvi", SqlDbType.Int).Value = slkDonVi.EditValue;
-                            cmd.Parameters.Add("@XN", SqlDbType.Int).Value = slkXiNghiep.EditValue;
-                            cmd.Parameters.Add("@TO", SqlDbType.Int).Value = slkTo.EditValue;
-                            cmd.Parameters.Add("@ID_CN", SqlDbType.BigInt).Value = slkCN.EditValue;
-                            cmd.Parameters.Add("@ID_LDV", SqlDbType.BigInt).Value = slkLDV.EditValue;
-                            cmd.Parameters.Add("@TNgay", SqlDbType.Date).Value = dTuNgay.EditValue;
-                            cmd.Parameters.Add("@DNgay", SqlDbType.Date).Value = dDenNgay.EditValue;
-
-                            cmd.Parameters.Add("@Loai", SqlDbType.Int).Value = rdo_ChonBaoCao.SelectedIndex;
-                            cmd.CommandType = CommandType.StoredProcedure;
-
-                            System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
-                            DataSet ds = new DataSet();
-                            adp.Fill(ds);
-                            dt = new DataTable();
-                            dt = ds.Tables[0].Copy();
-                            dt.TableName = "DA_TA";
-                            frm.AddDataSource(dt);
-
-                            frm.ShowDialog();
+                            
                             break;
                         }
                         catch

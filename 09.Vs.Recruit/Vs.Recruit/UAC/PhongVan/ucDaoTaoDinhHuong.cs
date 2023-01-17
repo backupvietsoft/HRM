@@ -13,6 +13,7 @@ using System.Drawing;
 using DataTable = System.Data.DataTable;
 using System.Globalization;
 using Excel;
+using OfficeOpenXml;
 
 namespace Vs.Recruit
 {
@@ -437,6 +438,8 @@ namespace Vs.Recruit
                     row5_TieuDe_Stt.Value2 = "STT";
                     row5_TieuDe_Stt.ColumnWidth = 5;
 
+                 
+
                     Range row6_TieuDe_Stt = oSheet.get_Range("B3", "B4");
                     row6_TieuDe_Stt.Merge();
                     row6_TieuDe_Stt.Value2 = "Họ và tên";
@@ -506,6 +509,12 @@ namespace Vs.Recruit
                     row6_TieuDe_P.Merge();
                     row6_TieuDe_P.Value2 = "Học Viên (Ký Nhận)";
                     row6_TieuDe_P.ColumnWidth = 10;
+
+                    Commons.Modules.MExcel.ThemCot(oSheet, Microsoft.Office.Interop.Excel.XlInsertShiftDirection.xlShiftDown, 1, 2);
+                    Range row6_TieuDe_MSUV = oSheet.get_Range("B3", "B4");
+                    row6_TieuDe_MSUV.Merge();
+                    row6_TieuDe_MSUV.Value2 = "Mã số ứng viên";
+                    row6_TieuDe_MSUV.ColumnWidth = 15;
 
                     DataRow[] dr = dt.Select();
                     string[,] rowData = new string[dr.Count(), dt.Columns.Count];

@@ -122,16 +122,16 @@ namespace Vs.Category
                             if (!dxValidationProvider1.Validate()) return;
                             if (bKiemTrung()) return;
                             Commons.Modules.sId = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spUpdateLY_DO_VANG", (AddEdit ? -1 : Id),
-                                MS_LDVTextEdit.EditValue,
-                                TEN_LDVTextEdit.EditValue,
-                                TEN_LDV_ATextEdit.EditValue,
-                                TEN_LDV_HTextEdit.EditValue,
-                                ID_CHE_DOSearchLookUpEdit.EditValue,
-                                PHEPCheckEdit.EditValue,
-                                (PHAN_TRAM_TRO_CAPTextEdit.EditValue == null) ? 0 : PHAN_TRAM_TRO_CAPTextEdit.EditValue,
-                                TINH_BHXHCheckEdit.EditValue,
-                                TINH_LUONGCheckEdit.EditValue,
-                                (STT_LDVTextEdit.Text == "") ? STT_LDVTextEdit.EditValue = null : STT_LDVTextEdit.EditValue, cboID_TT_HT.Text.ToString() == "" ? cboID_TT_HT.EditValue = null : cboID_TT_HT.EditValue).ToString();
+                            MS_LDVTextEdit.EditValue,
+                            TEN_LDVTextEdit.EditValue,
+                            TEN_LDV_ATextEdit.EditValue,
+                            TEN_LDV_HTextEdit.EditValue,
+                            ID_CHE_DOSearchLookUpEdit.EditValue,
+                            PHEPCheckEdit.EditValue,
+                            PHAN_TRAM_TRO_CAPTextEdit.Text == "" ? PHAN_TRAM_TRO_CAPTextEdit.EditValue = null : Convert.ToInt64(PHAN_TRAM_TRO_CAPTextEdit.EditValue),
+                            TINH_BHXHCheckEdit.EditValue,
+                            TINH_LUONGCheckEdit.EditValue,
+                            STT_LDVTextEdit.Text == "" ? STT_LDVTextEdit.EditValue = null : STT_LDVTextEdit.EditValue, cboID_TT_HT.Text == "" ? cboID_TT_HT.EditValue = null : Convert.ToInt64(cboID_TT_HT.EditValue)).ToString();
                             if (AddEdit)
                             {
                                 if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msg_ThemThanhCongBanCoMuonTiepTuc"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)

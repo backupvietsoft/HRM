@@ -33,9 +33,6 @@
             this.BottomMargin = new DevExpress.XtraReports.UI.BottomMarginBand();
             this.Detail = new DevExpress.XtraReports.UI.DetailBand();
             this.xrPictureBox1 = new DevExpress.XtraReports.UI.XRPictureBox();
-            this.lblDIA_CHI = new DevExpress.XtraReports.UI.XRLabel();
-            this.xrLabel9 = new DevExpress.XtraReports.UI.XRLabel();
-            this.lblDienThoai = new DevExpress.XtraReports.UI.XRLabel();
             this.lblCONG_TY = new DevExpress.XtraReports.UI.XRLabel();
             this.xrPageBreak1 = new DevExpress.XtraReports.UI.XRPageBreak();
             this.xrLabel72 = new DevExpress.XtraReports.UI.XRLabel();
@@ -79,9 +76,6 @@
             // 
             this.Detail.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
             this.xrPictureBox1,
-            this.lblDIA_CHI,
-            this.xrLabel9,
-            this.lblDienThoai,
             this.lblCONG_TY,
             this.xrPageBreak1,
             this.xrLabel72,
@@ -124,58 +118,6 @@
             this.xrPictureBox1.SizeF = new System.Drawing.SizeF(210F, 210F);
             this.xrPictureBox1.Sizing = DevExpress.XtraPrinting.ImageSizeMode.StretchImage;
             // 
-            // lblDIA_CHI
-            // 
-            this.lblDIA_CHI.AllowMarkupText = true;
-            this.lblDIA_CHI.AutoWidth = true;
-            this.lblDIA_CHI.Dpi = 254F;
-            this.lblDIA_CHI.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[TTC].[DIA_CHI]")});
-            this.lblDIA_CHI.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDIA_CHI.LocationFloat = new DevExpress.Utils.PointFloat(210.0001F, 70.00003F);
-            this.lblDIA_CHI.Multiline = true;
-            this.lblDIA_CHI.Name = "lblDIA_CHI";
-            this.lblDIA_CHI.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
-            this.lblDIA_CHI.SizeF = new System.Drawing.SizeF(710.034F, 70F);
-            this.lblDIA_CHI.StylePriority.UseFont = false;
-            this.lblDIA_CHI.StylePriority.UsePadding = false;
-            this.lblDIA_CHI.StylePriority.UseTextAlignment = false;
-            this.lblDIA_CHI.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            // 
-            // xrLabel9
-            // 
-            this.xrLabel9.AllowMarkupText = true;
-            this.xrLabel9.AutoWidth = true;
-            this.xrLabel9.Dpi = 254F;
-            this.xrLabel9.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.xrLabel9.LocationFloat = new DevExpress.Utils.PointFloat(318.9227F, 140F);
-            this.xrLabel9.Multiline = true;
-            this.xrLabel9.Name = "xrLabel9";
-            this.xrLabel9.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
-            this.xrLabel9.SizeF = new System.Drawing.SizeF(601.1113F, 70F);
-            this.xrLabel9.StylePriority.UseFont = false;
-            this.xrLabel9.StylePriority.UsePadding = false;
-            this.xrLabel9.StylePriority.UseTextAlignment = false;
-            this.xrLabel9.Text = "+84 228 6556 777";
-            this.xrLabel9.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            // 
-            // lblDienThoai
-            // 
-            this.lblDienThoai.AllowMarkupText = true;
-            this.lblDienThoai.AutoWidth = true;
-            this.lblDienThoai.Dpi = 254F;
-            this.lblDienThoai.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDienThoai.LocationFloat = new DevExpress.Utils.PointFloat(210.0001F, 140F);
-            this.lblDienThoai.Multiline = true;
-            this.lblDienThoai.Name = "lblDienThoai";
-            this.lblDienThoai.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
-            this.lblDienThoai.SizeF = new System.Drawing.SizeF(108.9226F, 70F);
-            this.lblDienThoai.StylePriority.UseFont = false;
-            this.lblDienThoai.StylePriority.UsePadding = false;
-            this.lblDienThoai.StylePriority.UseTextAlignment = false;
-            this.lblDienThoai.Text = "DT";
-            this.lblDienThoai.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            // 
             // lblCONG_TY
             // 
             this.lblCONG_TY.AllowMarkupText = true;
@@ -184,7 +126,7 @@
             this.lblCONG_TY.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[TTC].[TEN_CTY]")});
             this.lblCONG_TY.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCONG_TY.LocationFloat = new DevExpress.Utils.PointFloat(210.0001F, 0F);
+            this.lblCONG_TY.LocationFloat = new DevExpress.Utils.PointFloat(210.0001F, 58.41993F);
             this.lblCONG_TY.Multiline = true;
             this.lblCONG_TY.Name = "lblCONG_TY";
             this.lblCONG_TY.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
@@ -458,7 +400,7 @@
             this.xrLabel57.StylePriority.UseFont = false;
             this.xrLabel57.StylePriority.UsePadding = false;
             this.xrLabel57.StylePriority.UseTextAlignment = false;
-            this.xrLabel57.Text = "  •   Cở sở 1: Lô CN4, KCN Bảo Minh, xã Liên Bảo, huyện Vụ Bản, tỉnh Nam Định.";
+            this.xrLabel57.Text = "  •   Cơ sở 1: Lô CN4, KCN Bảo Minh, xã Liên Bảo, huyện Vụ Bản, tỉnh Nam Định.";
             this.xrLabel57.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
             // 
             // xrLabel7
@@ -499,8 +441,8 @@
             this.xrLabel1.AllowMarkupText = true;
             this.xrLabel1.Dpi = 254F;
             this.xrLabel1.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "\'<i>Nam Định</i>,ngày \' + GetDay([DATA].[NGAY_DUYET]) + \' tháng \' + GetMonth([DAT" +
-                    "A].[NGAY_DUYET]) + \' năm \' + GetYear([DATA].[NGAY_DUYET])\n")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "\'<i>\'+[DATA].[TEN_TINH]+\'</i>,ngày \' + GetDay([DATA].[NGAY_DUYET]) + \' tháng \' + " +
+                    "GetMonth([DATA].[NGAY_DUYET]) + \' năm \' + GetYear([DATA].[NGAY_DUYET])\n")});
             this.xrLabel1.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.xrLabel1.LocationFloat = new DevExpress.Utils.PointFloat(956.6216F, 175.2599F);
             this.xrLabel1.Multiline = true;
@@ -610,9 +552,6 @@
         private DevExpress.XtraReports.UI.XRPageBreak xrPageBreak1;
         private DevExpress.XtraReports.UI.XRLabel xrLabel61;
         private DevExpress.XtraReports.UI.XRPictureBox xrPictureBox1;
-        private DevExpress.XtraReports.UI.XRLabel lblDIA_CHI;
-        private DevExpress.XtraReports.UI.XRLabel xrLabel9;
-        private DevExpress.XtraReports.UI.XRLabel lblDienThoai;
         private DevExpress.XtraReports.UI.XRLabel lblCONG_TY;
         private DevExpress.XtraReports.UI.XRLabel xrLabel4;
     }

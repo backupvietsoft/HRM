@@ -63,6 +63,7 @@
             this.rdoXemCuLapMoi = new DevExpress.XtraEditors.RadioGroup();
             this.labelControl6 = new DevExpress.XtraEditors.LabelControl();
             this.chkCboEditChuyen = new DevExpress.XtraEditors.CheckedComboBoxEdit();
+            this.lbl = new DevExpress.XtraEditors.LabelControl();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdQT)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grvQT)).BeginInit();
@@ -116,6 +117,7 @@
             this.tableLayoutPanel1.Controls.Add(this.rdoXemCuLapMoi, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.labelControl6, 1, 3);
             this.tableLayoutPanel1.Controls.Add(this.chkCboEditChuyen, 2, 3);
+            this.tableLayoutPanel1.Controls.Add(this.lbl, 6, 4);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -438,6 +440,17 @@
             this.chkCboEditChuyen.TabIndex = 51;
             this.chkCboEditChuyen.EditValueChanged += new System.EventHandler(this.chkCboEditChuyen_EditValueChanged);
             // 
+            // lbl
+            // 
+            this.tableLayoutPanel1.SetColumnSpan(this.lbl, 2);
+            this.lbl.Dock = System.Windows.Forms.DockStyle.Right;
+            this.lbl.Location = new System.Drawing.Point(1147, 103);
+            this.lbl.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
+            this.lbl.Name = "lbl";
+            this.lbl.Size = new System.Drawing.Size(78, 17);
+            this.lbl.TabIndex = 52;
+            this.lbl.Text = "labelControl4";
+            // 
             // frmQTCN
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -501,5 +514,6 @@
         private DevExpress.XtraEditors.DateEdit datTNgay;
         private DevExpress.XtraEditors.DateEdit datDNgay;
         private DevExpress.XtraEditors.CheckedComboBoxEdit chkCboEditChuyen;
+        private DevExpress.XtraEditors.LabelControl lbl;
     }
 }

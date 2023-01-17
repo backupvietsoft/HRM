@@ -29,6 +29,15 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            DevExpress.XtraEditors.DXErrorProvider.CompareAgainstControlValidationRule compareAgainstControlValidationRule2 = new DevExpress.XtraEditors.DXErrorProvider.CompareAgainstControlValidationRule();
+            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule1 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
+            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule2 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
+            DevExpress.XtraEditors.DXErrorProvider.CompareAgainstControlValidationRule compareAgainstControlValidationRule1 = new DevExpress.XtraEditors.DXErrorProvider.CompareAgainstControlValidationRule();
+            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule3 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
+            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule4 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
+            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule5 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
+            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule6 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
+            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule7 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions1 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
             DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions2 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
             DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions3 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
@@ -37,21 +46,13 @@
             DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions6 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
             DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions7 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
             DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions8 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule1 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
-            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule2 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
-            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule3 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
-            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule4 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
-            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule5 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
-            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule6 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
-            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule7 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
-            this.windowsUIButton = new DevExpress.XtraBars.Docking2010.WindowsUIButtonPanel();
-            this.searchControl = new DevExpress.XtraEditors.SearchControl();
-            this.grdHopDong = new DevExpress.XtraGrid.GridControl();
-            this.grvHopDong = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.NGAY_HET_HDDateEdit = new DevExpress.XtraEditors.DateEdit();
             this.dataLayoutControl1 = new DevExpress.XtraDataLayout.DataLayoutControl();
             this.txtMO_TA_CV = new DevExpress.XtraEditors.MemoEdit();
             this.cboTinhTrang = new DevExpress.XtraEditors.LookUpEdit();
             this.cboBAC_LUONG = new DevExpress.XtraEditors.LookUpEdit();
+            this.grdHopDong = new DevExpress.XtraGrid.GridControl();
+            this.grvHopDong = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.SO_HDLDTextEdit = new DevExpress.XtraEditors.TextEdit();
             this.ID_LHDLDLookUpEdit = new DevExpress.XtraEditors.LookUpEdit();
             this.HD_GIA_HANCheckEdit = new DevExpress.XtraEditors.CheckEdit();
@@ -61,7 +62,6 @@
             this.MUC_LUONG_CHINHTextEdit = new DevExpress.XtraEditors.TextEdit();
             this.SO_NGAY_PHEPTextEdit = new DevExpress.XtraEditors.TextEdit();
             this.NGAY_BAT_DAU_HDDateEdit = new DevExpress.XtraEditors.DateEdit();
-            this.NGAY_HET_HDDateEdit = new DevExpress.XtraEditors.DateEdit();
             this.NGAY_KYDateEdit = new DevExpress.XtraEditors.DateEdit();
             this.CHI_SO_PHU_CAPTextEdit = new DevExpress.XtraEditors.TextEdit();
             this.MUC_LUONG_THUC_LINHTextEdit = new DevExpress.XtraEditors.TextEdit();
@@ -94,17 +94,19 @@
             this.ItemForSO_NGAY_PHEP = new DevExpress.XtraLayout.LayoutControlItem();
             this.ItemForTinhTrang = new DevExpress.XtraLayout.LayoutControlItem();
             this.lblMO_TA_CV = new DevExpress.XtraLayout.LayoutControlItem();
+            this.windowsUIButton = new DevExpress.XtraBars.Docking2010.WindowsUIButtonPanel();
+            this.searchControl = new DevExpress.XtraEditors.SearchControl();
             this.dxValidationProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
             this.ofdfile = new System.Windows.Forms.OpenFileDialog();
-            this.windowsUIButton.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.searchControl.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.grdHopDong)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.grvHopDong)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NGAY_HET_HDDateEdit.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NGAY_HET_HDDateEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataLayoutControl1)).BeginInit();
             this.dataLayoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtMO_TA_CV.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboTinhTrang.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboBAC_LUONG.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grdHopDong)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grvHopDong)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SO_HDLDTextEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ID_LHDLDLookUpEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.HD_GIA_HANCheckEdit.Properties)).BeginInit();
@@ -115,8 +117,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.SO_NGAY_PHEPTextEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NGAY_BAT_DAU_HDDateEdit.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NGAY_BAT_DAU_HDDateEdit.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NGAY_HET_HDDateEdit.Properties.CalendarTimeProperties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NGAY_HET_HDDateEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NGAY_KYDateEdit.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NGAY_KYDateEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.CHI_SO_PHU_CAPTextEdit.Properties)).BeginInit();
@@ -150,95 +150,30 @@
             ((System.ComponentModel.ISupportInitialize)(this.ItemForSO_NGAY_PHEP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForTinhTrang)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblMO_TA_CV)).BeginInit();
+            this.windowsUIButton.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.searchControl.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).BeginInit();
             this.SuspendLayout();
             // 
-            // windowsUIButton
+            // NGAY_HET_HDDateEdit
             // 
-            this.windowsUIButton.AppearanceButton.Hovered.FontSizeDelta = -1;
-            this.windowsUIButton.AppearanceButton.Hovered.ForeColor = System.Drawing.Color.Gray;
-            this.windowsUIButton.AppearanceButton.Hovered.Options.UseFont = true;
-            this.windowsUIButton.AppearanceButton.Hovered.Options.UseForeColor = true;
-            this.windowsUIButton.AppearanceButton.Normal.FontSizeDelta = -1;
-            this.windowsUIButton.AppearanceButton.Normal.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.windowsUIButton.AppearanceButton.Normal.Options.UseFont = true;
-            this.windowsUIButton.AppearanceButton.Normal.Options.UseForeColor = true;
-            this.windowsUIButton.AppearanceButton.Pressed.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.windowsUIButton.AppearanceButton.Pressed.FontSizeDelta = -1;
-            this.windowsUIButton.AppearanceButton.Pressed.Options.UseBackColor = true;
-            this.windowsUIButton.AppearanceButton.Pressed.Options.UseBorderColor = true;
-            this.windowsUIButton.AppearanceButton.Pressed.Options.UseFont = true;
-            this.windowsUIButton.AppearanceButton.Pressed.Options.UseImage = true;
-            this.windowsUIButton.AppearanceButton.Pressed.Options.UseTextOptions = true;
-            windowsUIButtonImageOptions1.ImageUri.Uri = "business%20objects/bo_report";
-            windowsUIButtonImageOptions2.ImageUri.Uri = "AddItem";
-            windowsUIButtonImageOptions3.ImageUri.Uri = "Edit;Size32x32;GrayScaled";
-            windowsUIButtonImageOptions4.ImageUri.Uri = "snap/snapdeletelist";
-            windowsUIButtonImageOptions5.ImageUri.Uri = "Print";
-            windowsUIButtonImageOptions6.ImageUri.Uri = "SaveAll";
-            windowsUIButtonImageOptions7.ImageUri.Uri = "SaveAndClose";
-            windowsUIButtonImageOptions8.ImageUri.Uri = "richedit/clearheaderandfooter";
-            this.windowsUIButton.Buttons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] {
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions1, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "phuluchd", -1, false),
-            new DevExpress.XtraBars.Docking2010.WindowsUISeparator(),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions2, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "them", -1, false),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions3, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "sua", -1, false),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions4, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "xoa", -1, false),
-            new DevExpress.XtraBars.Docking2010.WindowsUISeparator(),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions5, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "In", -1, false),
-            new DevExpress.XtraBars.Docking2010.WindowsUISeparator(),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions6, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "luu", -1, false),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions7, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "khongluu", -1, false),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions8, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "thoat", -1, false)});
-            this.windowsUIButton.ContentAlignment = System.Drawing.ContentAlignment.MiddleRight;
-            this.windowsUIButton.Controls.Add(this.searchControl);
-            this.windowsUIButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.windowsUIButton.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.windowsUIButton.Location = new System.Drawing.Point(0, 581);
-            this.windowsUIButton.Margin = new System.Windows.Forms.Padding(4);
-            this.windowsUIButton.Name = "windowsUIButton";
-            this.windowsUIButton.Padding = new System.Windows.Forms.Padding(4);
-            this.windowsUIButton.Size = new System.Drawing.Size(1220, 34);
-            this.windowsUIButton.TabIndex = 17;
-            this.windowsUIButton.Text = "S";
-            this.windowsUIButton.UseButtonBackgroundImages = false;
-            this.windowsUIButton.ButtonClick += new DevExpress.XtraBars.Docking2010.ButtonEventHandler(this.windowsUIButton_ButtonClick_1);
-            // 
-            // searchControl
-            // 
-            this.searchControl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.searchControl.Client = this.grdHopDong;
-            this.searchControl.Location = new System.Drawing.Point(13, 7);
-            this.searchControl.Margin = new System.Windows.Forms.Padding(4);
-            this.searchControl.Name = "searchControl";
-            this.searchControl.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Repository.ClearButton(),
-            new DevExpress.XtraEditors.Repository.SearchButton()});
-            this.searchControl.Properties.Client = this.grdHopDong;
-            this.searchControl.Properties.FindDelay = 100;
-            this.searchControl.Size = new System.Drawing.Size(192, 24);
-            this.searchControl.TabIndex = 12;
-            // 
-            // grdHopDong
-            // 
-            this.grdHopDong.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.grdHopDong.Location = new System.Drawing.Point(6, 218);
-            this.grdHopDong.MainView = this.grvHopDong;
-            this.grdHopDong.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.grdHopDong.Name = "grdHopDong";
-            this.grdHopDong.Size = new System.Drawing.Size(1208, 357);
-            this.grdHopDong.TabIndex = 70;
-            this.grdHopDong.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.grvHopDong});
-            this.grdHopDong.ProcessGridKey += new System.Windows.Forms.KeyEventHandler(this.GrdHopDong_ProcessGridKey);
-            // 
-            // grvHopDong
-            // 
-            this.grvHopDong.DetailHeight = 297;
-            this.grvHopDong.GridControl = this.grdHopDong;
-            this.grvHopDong.Name = "grvHopDong";
-            this.grvHopDong.OptionsView.ShowGroupPanel = false;
-            this.grvHopDong.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.GrvHopDong_FocusedRowChanged);
+            this.NGAY_HET_HDDateEdit.EditValue = null;
+            this.NGAY_HET_HDDateEdit.Location = new System.Drawing.Point(1060, 32);
+            this.NGAY_HET_HDDateEdit.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.NGAY_HET_HDDateEdit.Name = "NGAY_HET_HDDateEdit";
+            this.NGAY_HET_HDDateEdit.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.NGAY_HET_HDDateEdit.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.NGAY_HET_HDDateEdit.Size = new System.Drawing.Size(154, 24);
+            this.NGAY_HET_HDDateEdit.StyleController = this.dataLayoutControl1;
+            this.NGAY_HET_HDDateEdit.TabIndex = 24;
+            compareAgainstControlValidationRule2.CompareControlOperator = DevExpress.XtraEditors.DXErrorProvider.CompareControlOperator.Greater;
+            compareAgainstControlValidationRule2.Control = this.NGAY_BAT_DAU_HDDateEdit;
+            compareAgainstControlValidationRule2.ErrorText = "Ngày hết hợp đồng phải bé hơn ngày kết thúc";
+            compareAgainstControlValidationRule2.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.Critical;
+            this.dxValidationProvider1.SetValidationRule(this.NGAY_HET_HDDateEdit, compareAgainstControlValidationRule2);
+            this.NGAY_HET_HDDateEdit.EditValueChanged += new System.EventHandler(this.NGAY_HET_HDDateEdit_EditValueChanged);
             // 
             // dataLayoutControl1
             // 
@@ -309,6 +244,27 @@
             this.dxValidationProvider1.SetValidationRule(this.cboBAC_LUONG, conditionValidationRule2);
             this.cboBAC_LUONG.EditValueChanged += new System.EventHandler(this.cboBAC_LUONG_EditValueChanged);
             // 
+            // grdHopDong
+            // 
+            this.grdHopDong.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.grdHopDong.Location = new System.Drawing.Point(6, 218);
+            this.grdHopDong.MainView = this.grvHopDong;
+            this.grdHopDong.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.grdHopDong.Name = "grdHopDong";
+            this.grdHopDong.Size = new System.Drawing.Size(1208, 357);
+            this.grdHopDong.TabIndex = 70;
+            this.grdHopDong.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.grvHopDong});
+            this.grdHopDong.ProcessGridKey += new System.Windows.Forms.KeyEventHandler(this.GrdHopDong_ProcessGridKey);
+            // 
+            // grvHopDong
+            // 
+            this.grvHopDong.DetailHeight = 297;
+            this.grvHopDong.GridControl = this.grdHopDong;
+            this.grvHopDong.Name = "grvHopDong";
+            this.grvHopDong.OptionsView.ShowGroupPanel = false;
+            this.grvHopDong.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.GrvHopDong_FocusedRowChanged);
+            // 
             // SO_HDLDTextEdit
             // 
             this.SO_HDLDTextEdit.Location = new System.Drawing.Point(153, 6);
@@ -317,10 +273,8 @@
             this.SO_HDLDTextEdit.Size = new System.Drawing.Size(153, 24);
             this.SO_HDLDTextEdit.StyleController = this.dataLayoutControl1;
             this.SO_HDLDTextEdit.TabIndex = 5;
-            conditionValidationRule3.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule3.ErrorText = "This value is not valid";
-            conditionValidationRule3.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.Critical;
-            this.dxValidationProvider1.SetValidationRule(this.SO_HDLDTextEdit, conditionValidationRule3);
+            compareAgainstControlValidationRule1.ErrorText = "This value is not valid";
+            this.dxValidationProvider1.SetValidationRule(this.SO_HDLDTextEdit, compareAgainstControlValidationRule1);
             // 
             // ID_LHDLDLookUpEdit
             // 
@@ -333,10 +287,10 @@
             this.ID_LHDLDLookUpEdit.Size = new System.Drawing.Size(154, 24);
             this.ID_LHDLDLookUpEdit.StyleController = this.dataLayoutControl1;
             this.ID_LHDLDLookUpEdit.TabIndex = 7;
-            conditionValidationRule4.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule4.ErrorText = "This value is not valid";
-            conditionValidationRule4.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.Critical;
-            this.dxValidationProvider1.SetValidationRule(this.ID_LHDLDLookUpEdit, conditionValidationRule4);
+            conditionValidationRule3.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule3.ErrorText = "This value is not valid";
+            conditionValidationRule3.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.Critical;
+            this.dxValidationProvider1.SetValidationRule(this.ID_LHDLDLookUpEdit, conditionValidationRule3);
             this.ID_LHDLDLookUpEdit.EditValueChanged += new System.EventHandler(this.ID_LHDLDLookUpEdit_EditValueChanged);
             // 
             // HD_GIA_HANCheckEdit
@@ -418,22 +372,11 @@
             this.NGAY_BAT_DAU_HDDateEdit.Size = new System.Drawing.Size(153, 24);
             this.NGAY_BAT_DAU_HDDateEdit.StyleController = this.dataLayoutControl1;
             this.NGAY_BAT_DAU_HDDateEdit.TabIndex = 23;
+            conditionValidationRule4.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule4.ErrorText = "Không được trống";
+            conditionValidationRule4.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.Critical;
+            this.dxValidationProvider1.SetValidationRule(this.NGAY_BAT_DAU_HDDateEdit, conditionValidationRule4);
             this.NGAY_BAT_DAU_HDDateEdit.EditValueChanged += new System.EventHandler(this.NGAY_BAT_DAU_HDDateEdit_EditValueChanged);
-            // 
-            // NGAY_HET_HDDateEdit
-            // 
-            this.NGAY_HET_HDDateEdit.EditValue = null;
-            this.NGAY_HET_HDDateEdit.Location = new System.Drawing.Point(1060, 32);
-            this.NGAY_HET_HDDateEdit.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.NGAY_HET_HDDateEdit.Name = "NGAY_HET_HDDateEdit";
-            this.NGAY_HET_HDDateEdit.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.NGAY_HET_HDDateEdit.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.NGAY_HET_HDDateEdit.Size = new System.Drawing.Size(154, 24);
-            this.NGAY_HET_HDDateEdit.StyleController = this.dataLayoutControl1;
-            this.NGAY_HET_HDDateEdit.TabIndex = 24;
-            this.NGAY_HET_HDDateEdit.EditValueChanged += new System.EventHandler(this.NGAY_HET_HDDateEdit_EditValueChanged);
             // 
             // NGAY_KYDateEdit
             // 
@@ -680,6 +623,8 @@
             // 
             // ItemForNGAY_BAT_DAU_HD
             // 
+            this.ItemForNGAY_BAT_DAU_HD.AppearanceItemCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.ItemForNGAY_BAT_DAU_HD.AppearanceItemCaption.Options.UseForeColor = true;
             this.ItemForNGAY_BAT_DAU_HD.Control = this.NGAY_BAT_DAU_HDDateEdit;
             this.ItemForNGAY_BAT_DAU_HD.Location = new System.Drawing.Point(605, 26);
             this.ItemForNGAY_BAT_DAU_HD.Name = "ItemForNGAY_BAT_DAU_HD";
@@ -812,6 +757,72 @@
             this.lblMO_TA_CV.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.lblMO_TA_CV.TextSize = new System.Drawing.Size(135, 17);
             // 
+            // windowsUIButton
+            // 
+            this.windowsUIButton.AppearanceButton.Hovered.FontSizeDelta = -1;
+            this.windowsUIButton.AppearanceButton.Hovered.ForeColor = System.Drawing.Color.Gray;
+            this.windowsUIButton.AppearanceButton.Hovered.Options.UseFont = true;
+            this.windowsUIButton.AppearanceButton.Hovered.Options.UseForeColor = true;
+            this.windowsUIButton.AppearanceButton.Normal.FontSizeDelta = -1;
+            this.windowsUIButton.AppearanceButton.Normal.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.windowsUIButton.AppearanceButton.Normal.Options.UseFont = true;
+            this.windowsUIButton.AppearanceButton.Normal.Options.UseForeColor = true;
+            this.windowsUIButton.AppearanceButton.Pressed.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.windowsUIButton.AppearanceButton.Pressed.FontSizeDelta = -1;
+            this.windowsUIButton.AppearanceButton.Pressed.Options.UseBackColor = true;
+            this.windowsUIButton.AppearanceButton.Pressed.Options.UseBorderColor = true;
+            this.windowsUIButton.AppearanceButton.Pressed.Options.UseFont = true;
+            this.windowsUIButton.AppearanceButton.Pressed.Options.UseImage = true;
+            this.windowsUIButton.AppearanceButton.Pressed.Options.UseTextOptions = true;
+            windowsUIButtonImageOptions1.ImageUri.Uri = "business%20objects/bo_report";
+            windowsUIButtonImageOptions2.ImageUri.Uri = "AddItem";
+            windowsUIButtonImageOptions3.ImageUri.Uri = "Edit;Size32x32;GrayScaled";
+            windowsUIButtonImageOptions4.ImageUri.Uri = "snap/snapdeletelist";
+            windowsUIButtonImageOptions5.ImageUri.Uri = "Print";
+            windowsUIButtonImageOptions6.ImageUri.Uri = "SaveAll";
+            windowsUIButtonImageOptions7.ImageUri.Uri = "SaveAndClose";
+            windowsUIButtonImageOptions8.ImageUri.Uri = "richedit/clearheaderandfooter";
+            this.windowsUIButton.Buttons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] {
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions1, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "phuluchd", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUISeparator(),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions2, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "them", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions3, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "sua", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions4, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "xoa", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUISeparator(),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions5, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "In", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUISeparator(),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions6, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "luu", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions7, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "khongluu", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions8, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "thoat", -1, false)});
+            this.windowsUIButton.ContentAlignment = System.Drawing.ContentAlignment.MiddleRight;
+            this.windowsUIButton.Controls.Add(this.searchControl);
+            this.windowsUIButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.windowsUIButton.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.windowsUIButton.Location = new System.Drawing.Point(0, 581);
+            this.windowsUIButton.Margin = new System.Windows.Forms.Padding(4);
+            this.windowsUIButton.Name = "windowsUIButton";
+            this.windowsUIButton.Padding = new System.Windows.Forms.Padding(4);
+            this.windowsUIButton.Size = new System.Drawing.Size(1220, 34);
+            this.windowsUIButton.TabIndex = 17;
+            this.windowsUIButton.Text = "S";
+            this.windowsUIButton.UseButtonBackgroundImages = false;
+            this.windowsUIButton.ButtonClick += new DevExpress.XtraBars.Docking2010.ButtonEventHandler(this.windowsUIButton_ButtonClick_1);
+            // 
+            // searchControl
+            // 
+            this.searchControl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.searchControl.Client = this.grdHopDong;
+            this.searchControl.Location = new System.Drawing.Point(13, 7);
+            this.searchControl.Margin = new System.Windows.Forms.Padding(4);
+            this.searchControl.Name = "searchControl";
+            this.searchControl.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Repository.ClearButton(),
+            new DevExpress.XtraEditors.Repository.SearchButton()});
+            this.searchControl.Properties.Client = this.grdHopDong;
+            this.searchControl.Properties.FindDelay = 100;
+            this.searchControl.Size = new System.Drawing.Size(192, 24);
+            this.searchControl.TabIndex = 12;
+            // 
             // ofdfile
             // 
             this.ofdfile.FileName = "openFileDialog1";
@@ -826,15 +837,15 @@
             this.Name = "ucHopDong";
             this.Size = new System.Drawing.Size(1220, 615);
             this.Load += new System.EventHandler(this.UcHopDong_Load);
-            this.windowsUIButton.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.searchControl.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.grdHopDong)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.grvHopDong)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NGAY_HET_HDDateEdit.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NGAY_HET_HDDateEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataLayoutControl1)).EndInit();
             this.dataLayoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.txtMO_TA_CV.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboTinhTrang.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboBAC_LUONG.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grdHopDong)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grvHopDong)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.SO_HDLDTextEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ID_LHDLDLookUpEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.HD_GIA_HANCheckEdit.Properties)).EndInit();
@@ -845,8 +856,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.SO_NGAY_PHEPTextEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NGAY_BAT_DAU_HDDateEdit.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NGAY_BAT_DAU_HDDateEdit.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NGAY_HET_HDDateEdit.Properties.CalendarTimeProperties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NGAY_HET_HDDateEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NGAY_KYDateEdit.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NGAY_KYDateEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.CHI_SO_PHU_CAPTextEdit.Properties)).EndInit();
@@ -880,6 +889,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.ItemForSO_NGAY_PHEP)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForTinhTrang)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblMO_TA_CV)).EndInit();
+            this.windowsUIButton.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.searchControl.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).EndInit();
             this.ResumeLayout(false);
 

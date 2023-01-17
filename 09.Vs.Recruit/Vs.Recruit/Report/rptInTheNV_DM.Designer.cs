@@ -115,7 +115,7 @@
             this.xrPanel6.LocationFloat = new DevExpress.Utils.PointFloat(505F, 4.666677F);
             this.xrPanel6.Name = "xrPanel6";
             this.xrPanel6.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 254F);
-            this.xrPanel6.SizeF = new System.Drawing.SizeF(505F, 923.512F);
+            this.xrPanel6.SizeF = new System.Drawing.SizeF(505F, 825F);
             this.xrPanel6.StylePriority.UsePadding = false;
             // 
             // xrLabel6
@@ -262,7 +262,7 @@
             this.xrPanel5.LocationFloat = new DevExpress.Utils.PointFloat(6.103516E-05F, 4.66665F);
             this.xrPanel5.Name = "xrPanel5";
             this.xrPanel5.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 254F);
-            this.xrPanel5.SizeF = new System.Drawing.SizeF(505F, 923.512F);
+            this.xrPanel5.SizeF = new System.Drawing.SizeF(505F, 825F);
             this.xrPanel5.StylePriority.UseBackColor = false;
             this.xrPanel5.StylePriority.UsePadding = false;
             // 
@@ -368,7 +368,7 @@
             this.lblHO_TEN.Dpi = 254F;
             this.lblHO_TEN.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[DATA].[HO_TEN]")});
-            this.lblHO_TEN.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblHO_TEN.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblHO_TEN.ForeColor = System.Drawing.Color.Black;
             this.lblHO_TEN.LocationFloat = new DevExpress.Utils.PointFloat(0F, 548.8541F);
             this.lblHO_TEN.Multiline = true;

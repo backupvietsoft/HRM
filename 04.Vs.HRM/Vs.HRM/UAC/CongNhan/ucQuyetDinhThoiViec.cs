@@ -57,6 +57,7 @@ namespace Vs.HRM
             Commons.OSystems.SetDateEditFormat(dTNgay);
             Commons.OSystems.SetDateEditFormat(dDNgay);
             NGAY_VAO_LAMdateEdit.Properties.ReadOnly = true;
+            radChonXem.SelectedIndex = 0;
             LoadGridCongNhan(-1);
             LoadCboLyDoThoiViec();
             LoadNguoiKy();
@@ -242,32 +243,39 @@ namespace Vs.HRM
         {
             try
             {
-                LoadGridCongNhan(Convert.ToInt32(
-                SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spGetUpdateQuyetDinhThoiViec",
-                        (grvCongNhan.GetFocusedRowCellValue("ID_QDTV").ToString() == string.Empty) ? -1 : Convert.ToInt32(grvCongNhan.GetFocusedRowCellValue("ID_QDTV")),
-                        grvCongNhan.GetFocusedRowCellValue("ID_CN"),
-                        SO_QDTextEdit.EditValue,
-                        NGAY_NHAN_DONDateEdit.EditValue,
-                        NGAY_THOI_VIECDateEdit.EditValue,
-                        LUONG_TINH_TRO_CAPTextEdit.EditValue,
-                        TIEN_TRO_CAPTextEdit.EditValue,
-                        TIEN_PHEPTextEdit.EditValue,
-                        TONG_CONGTextEdit.EditValue,
-                        NGAY_KYDateEdit.EditValue,
-                        ID_LD_TVLookUpEdit.EditValue,
-                        NGAY_VAO_LAMdateEdit.EditValue,
-                        SO_PHEP_HUONGTextEdit.EditValue,
-                        NGUYEN_NHANTextEdit.EditValue,
-                        ID_NKLookUpEdit.EditValue,
-                        LUONG_TINH_PHEPTextEdit.EditValue,
-                        SO_NAM_TRO_CAPTextEdit.EditValue,
-                        NGAY_PHEP_CHUANTextEdit.EditValue,
-                        NGAY_PHEP_COTextEdit.EditValue,
-                        NGAY_PHEP_NGHITextEdit.EditValue,
-                        SoThangPhep,
-                        txtTaiLieu.EditValue,
-                        txtTaiLieuQD.EditValue
-                )));
+                if (Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT COUNT(*) FROM dbo.QUYET_DINH_THOI_VIEC WHERE ID_CN = " + Convert.ToString(grvCongNhan.GetFocusedRowCellValue("ID_CN")) + " AND NGAY_THOI_VIEC = '" + NGAY_THOI_VIECDateEdit.DateTime.ToString("MM/dd/yyyy") + "' AND ID_QDTV <> "+Convert.ToString(grvCongNhan.GetFocusedRowCellValue("ID_QDTV")) +"")) != 0)
+                {
+                    XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgNgayNghiViecDaTonTai"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning); return;
+                }
+                else
+                {
+                    LoadGridCongNhan(Convert.ToInt32(
+                    SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spGetUpdateQuyetDinhThoiViec",
+                            (grvCongNhan.GetFocusedRowCellValue("ID_QDTV").ToString() == string.Empty) ? -1 : Convert.ToInt32(grvCongNhan.GetFocusedRowCellValue("ID_QDTV")),
+                            grvCongNhan.GetFocusedRowCellValue("ID_CN"),
+                            SO_QDTextEdit.EditValue,
+                            NGAY_NHAN_DONDateEdit.EditValue,
+                            NGAY_THOI_VIECDateEdit.EditValue,
+                            LUONG_TINH_TRO_CAPTextEdit.EditValue,
+                            TIEN_TRO_CAPTextEdit.EditValue,
+                            TIEN_PHEPTextEdit.EditValue,
+                            TONG_CONGTextEdit.EditValue,
+                            NGAY_KYDateEdit.EditValue,
+                            ID_LD_TVLookUpEdit.EditValue,
+                            NGAY_VAO_LAMdateEdit.EditValue,
+                            SO_PHEP_HUONGTextEdit.EditValue,
+                            NGUYEN_NHANTextEdit.EditValue,
+                            ID_NKLookUpEdit.EditValue,
+                            LUONG_TINH_PHEPTextEdit.EditValue,
+                            SO_NAM_TRO_CAPTextEdit.EditValue,
+                            NGAY_PHEP_CHUANTextEdit.EditValue,
+                            NGAY_PHEP_COTextEdit.EditValue,
+                            NGAY_PHEP_NGHITextEdit.EditValue,
+                            SoThangPhep,
+                            txtTaiLieu.EditValue,
+                            txtTaiLieuQD.EditValue
+                    )));
+                }
             }
             catch (Exception ex)
             {
@@ -448,7 +456,10 @@ namespace Vs.HRM
             navigationFrame.SelectedPage = navigationPage2;
             dxValidationProvider1.ValidateHiddenControls = true;
             dxValidationProvider1.RemoveControlError(ID_LD_TVLookUpEdit);
-            enableButon(false);
+            if (grvCongNhan.RowCount != 0)
+            {
+                enableButon(false);
+            }
         }
         private void LoadText()
         {

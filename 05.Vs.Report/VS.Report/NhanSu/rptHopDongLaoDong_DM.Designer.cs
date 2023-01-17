@@ -1016,8 +1016,7 @@
             this.xrLabel74.Dpi = 254F;
             this.xrLabel74.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "\'Term of contract: Definite time, from \' + FormatString(\'{0:dd/MM/yyyy}\',[DATA].[" +
-                    "NGAY_BAT_DAU_HD]) + \' to \' + FormatString(\'{0:dd/MM/yyyy}\',[DATA].[NGAY_HET_HD])" +
-                    " ")});
+                    "NGAY_BAT_DAU_HD]) + [DATA].[DEN_NGAY_A] ")});
             this.xrLabel74.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.xrLabel74.LocationFloat = new DevExpress.Utils.PointFloat(36.02097F, 2274.624F);
             this.xrLabel74.Multiline = true;
@@ -1566,8 +1565,7 @@
             this.xrLabel50.Dpi = 254F;
             this.xrLabel50.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "\'Loại hợp đồng: \'+[DATA].[TEN_LHDLD]+\', từ ngày <b>\' + FormatString(\'{0:dd/MM/yyy" +
-                    "y}\',[DATA].[NGAY_BAT_DAU_HD]) + \'</b> đến ngày <b>\' + FormatString(\'{0:dd/MM/yyy" +
-                    "y}\',[DATA].[NGAY_HET_HD]) + \'</b>\'")});
+                    "y}\',[DATA].[NGAY_BAT_DAU_HD]) + \'</b>\' + [DATA].[DEN_NGAY]")});
             this.xrLabel50.Font = new System.Drawing.Font("Times New Roman", 11.25F);
             this.xrLabel50.LocationFloat = new DevExpress.Utils.PointFloat(36.02001F, 2214.624F);
             this.xrLabel50.Multiline = true;

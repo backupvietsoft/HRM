@@ -23,6 +23,10 @@ namespace Vs.Category
         {
             Commons.Modules.sLoad = "0Load";
             ItemForToTruong.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+            ItemForPhanBo.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+            lblLoaiChuyen.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+            lblTinhDoanhThu.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(ID_DVLookUpEdit, Commons.Modules.ObjSystems.DataDonVi(false), "ID_DV", "TEN_DV", "TEN_DV", true, false, false);
             if (Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString() == "DM")
             {
 
@@ -30,7 +34,6 @@ namespace Vs.Category
                 {
                     if (iIdTo > 0)
                     {
-                        Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(ID_DVLookUpEdit, Commons.Modules.ObjSystems.DataDonVi(true), "ID_DV", "TEN_DV", "TEN_DV", true, false, false);
 
                         string strSQLDV = "SELECT XN.ID_DV FROM [TO] T INNER JOIN XI_NGHIEP XN ON T.ID_XN = XN.ID_XN WHERE ID_TO = " + iIdTo;
                         int EditValueDV = System.Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, strSQLDV));
@@ -44,6 +47,8 @@ namespace Vs.Category
                         DataTable dt1 = new DataTable();
                         dt1.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboPhanBo", Commons.Modules.UserName, Commons.Modules.TypeLanguage, false));
                         Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(ID_PBLookUpEdit, dt1, "ID_LPB", "TEN_LPB", "TEN_LPB", true, false, false);
+                        ItemForPhanBo.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+
 
                         string strSQLPB = "SELECT T.PHAN_BO FROM dbo.[TO] T WHERE T.ID_TO = " + iIdTo;
                         var obj = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, strSQLPB);
@@ -69,14 +74,19 @@ namespace Vs.Category
                         DataTable dt1 = new DataTable();
                         dt1.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboPhanBo", Commons.Modules.UserName, Commons.Modules.TypeLanguage, false));
                         Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(ID_PBLookUpEdit, dt1, "ID_LPB", "TEN_LPB", "TEN_LPB", true, false, false);
+                        ItemForPhanBo.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+
                     }
                 }
                 catch (Exception ex)
                 {
                     throw ex;
                 }
+
+                LoadCboLoaiChuyen();
+                lblLoaiChuyen.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+                lblTinhDoanhThu.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
             }
-            LoadCboLoaiChuyen();
             LoadXiNghiep();
             if (!bAddEditTo)
             {
@@ -160,12 +170,13 @@ namespace Vs.Category
         private void LoadText()
         {
             string sSql = "";
-            sSql = "SELECT ID_TO,ID_XN,MS_TO,TEN_TO,TEN_TO_A,TEN_TO_H,STT_TO,ID_CN, ID_LOAI_CHUYEN FROM dbo.[TO] WHERE ID_TO = " + iIdTo.ToString();
+            sSql = "SELECT T.ID_TO,T.ID_XN, XN.ID_DV ,T.MS_TO,T.TEN_TO,T.TEN_TO_A,T.TEN_TO_H,T.STT_TO,T.ID_CN, T.ID_LOAI_CHUYEN, ISNULL(TINH_DOANH_THU,0) TINH_DOANH_THU FROM dbo.[TO] T INNER JOIN dbo.XI_NGHIEP XN ON XN.ID_XN = T.ID_XN WHERE ID_TO = " + iIdTo.ToString();
             DataTable dtTmp = new DataTable();
             dtTmp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSql));
             if (dtTmp.Rows.Count <= 0) return;
 
             ID_XNLookUpEdit.EditValue = dtTmp.Rows[0]["ID_XN"];
+            ID_DVLookUpEdit.EditValue = dtTmp.Rows[0]["ID_DV"];
             MS_TOTextEdit.EditValue = dtTmp.Rows[0]["MS_TO"];
             MSTO = dtTmp.Rows[0]["MS_TO"].ToString();
             TEN_TOTextEdit.EditValue = dtTmp.Rows[0]["TEN_TO"];
@@ -174,6 +185,7 @@ namespace Vs.Category
             STT_TOTextEdit.EditValue = dtTmp.Rows[0]["STT_TO"];
             cboID_CN.EditValue = dtTmp.Rows[0]["ID_CN"].ToString() == "" ? -1 : Convert.ToInt64(dtTmp.Rows[0]["ID_CN"]);
             cboID_LOAI_CHUYEN.EditValue = dtTmp.Rows[0]["ID_LOAI_CHUYEN"];
+            chkTinhDoanhThu.EditValue = dtTmp.Rows[0]["TINH_DOANH_THU"];
         }
 
         private void LoadTextNull()
@@ -189,6 +201,7 @@ namespace Vs.Category
                 cboID_CN.EditValue = -1;
                 MS_TOTextEdit.Focus();
                 cboID_LOAI_CHUYEN.EditValue = -1;
+                chkTinhDoanhThu.EditValue = false;
             }
             catch { }
         }
@@ -205,7 +218,7 @@ namespace Vs.Category
                         {
                             if (!dxValidationProvider1.Validate()) return;
                             if (KiemTrung()) return;
-                            Commons.Modules.sId = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spUpdateTo", (bAddEditTo ? -1 : iIdTo), ID_XNLookUpEdit.EditValue, ID_PBLookUpEdit.EditValue, MS_TOTextEdit.EditValue, TEN_TOTextEdit.EditValue, TEN_TO_ANHTextEdit.EditValue, TEN_TO_HOATextEdit.EditValue, STT_TOTextEdit.EditValue, Convert.ToInt64(cboID_CN.Text == "" ? cboID_CN.EditValue = null : cboID_CN.EditValue), Commons.Modules.UserName, cboID_LOAI_CHUYEN.Text == "" ? null : cboID_LOAI_CHUYEN.EditValue).ToString();
+                            Commons.Modules.sId = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spUpdateTo", (bAddEditTo ? -1 : iIdTo), ID_XNLookUpEdit.EditValue, ID_PBLookUpEdit.Text == "" ? null : ID_PBLookUpEdit.EditValue, MS_TOTextEdit.EditValue, TEN_TOTextEdit.EditValue, TEN_TO_ANHTextEdit.EditValue, TEN_TO_HOATextEdit.EditValue, STT_TOTextEdit.EditValue, cboID_CN.Text == "" ? null : cboID_CN.EditValue, Commons.Modules.UserName, cboID_LOAI_CHUYEN.Text == "" ? null : cboID_LOAI_CHUYEN.EditValue, chkTinhDoanhThu.EditValue).ToString();
                             if (bAddEditTo)
                             {
                                 if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msg_ThemThanhCongBanCoMuonTiepTuc"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)

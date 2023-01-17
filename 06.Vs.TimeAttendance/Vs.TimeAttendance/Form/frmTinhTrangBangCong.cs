@@ -20,6 +20,8 @@ namespace Vs.TimeAttendance
     {
         public DateTime dNgay;
         public Int64 iID_DV = -1;
+        public Int64 iID_XN = -1;
+        public Int64 iID_TO = -1;
         public frmTinhTrangBangCong()
         {
             InitializeComponent();
@@ -40,6 +42,11 @@ namespace Vs.TimeAttendance
                 datThang.Properties.Mask.EditMask = "MM/yyyy";
                 Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboDV, Commons.Modules.ObjSystems.DataDonVi(false), "ID_DV", "TEN_DV", "TEN_DV");
                 cboDV.EditValue = iID_DV;
+                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboXN, Commons.Modules.ObjSystems.DataXiNghiep(Convert.ToInt32(cboDV.EditValue), true), "ID_XN", "TEN_XN", "TEN_XN");
+                cboXN.EditValue = iID_XN;
+                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboTo, Commons.Modules.ObjSystems.DataTo(Convert.ToInt32(cboDV.EditValue), Convert.ToInt32(cboXN.EditValue), true), "ID_TO", "TEN_TO", "TEN_TO");
+                cboTo.EditValue = iID_TO;
+
                 LoadData();
                 Commons.Modules.sLoad = "";
             }
@@ -54,7 +61,9 @@ namespace Vs.TimeAttendance
             System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spTinhTrangCong", conn);
             cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
             cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
-            cmd.Parameters.Add("@DVi", SqlDbType.Int).Value = Convert.ToInt32(cboDV.EditValue);
+            cmd.Parameters.Add("@Dvi", SqlDbType.Int).Value = iID_DV;
+            cmd.Parameters.Add("@XN", SqlDbType.Int).Value = Convert.ToInt32(cboXN.EditValue);
+            cmd.Parameters.Add("@TO", SqlDbType.Int).Value = Convert.ToInt32(cboTo.EditValue);
             cmd.Parameters.Add("@Ngay", SqlDbType.DateTime).Value = Commons.Modules.ObjSystems.ConvertDateTime(datThang.Text);
             cmd.Parameters.Add("@iLoai", SqlDbType.Int).Value = 0;
             cmd.CommandType = CommandType.StoredProcedure;
@@ -64,7 +73,7 @@ namespace Vs.TimeAttendance
             DataTable dt = new DataTable();
             dt = ds.Tables[0].Copy();
             Commons.Modules.ObjSystems.MLoadXtraGrid(grdData, grvData, dt, false, false, false, true, true, this.Name);
-            grvData.Columns["ID_NM"].Visible = false;
+            grvData.Columns["ID_TO"].Visible = false;
             dt = new DataTable();
             dt = ds.Tables[1].Copy();
 
@@ -96,7 +105,7 @@ namespace Vs.TimeAttendance
             public DevExpress.XtraGrid.Views.Grid.GridView View;
             public int RowHandle;
         }
-        
+
         public DXMenuItem MCreateMenuLenWeb(DevExpress.XtraGrid.Views.Grid.GridView view, int rowHandle)
         {
             string sStr = Commons.Modules.ObjLanguages.GetLanguage(Commons.Modules.ModuleName, this.Name, "lblLenWeb", Commons.Modules.TypeLanguage);
@@ -124,11 +133,12 @@ namespace Vs.TimeAttendance
                 Commons.Modules.ObjSystems.XoaTable(sBT);
                 LoadData();
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 Commons.Modules.ObjSystems.XoaTable("sBTKiemSoatCong" + Commons.Modules.iIDUser);
             }
         }
-       
+
         private void grvData_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
         {
             try
@@ -149,5 +159,18 @@ namespace Vs.TimeAttendance
         }
 
         #endregion
+
+        private void cboXN_EditValueChanged(object sender, EventArgs e)
+        {
+            if (Commons.Modules.sLoad == "0Load") return;
+            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboTo, Commons.Modules.ObjSystems.DataTo(Convert.ToInt32(cboDV.EditValue), Convert.ToInt32(cboXN.EditValue), false), "ID_TO", "TEN_TO", "TEN_TO");
+            LoadData();
+        }
+
+        private void cboTo_EditValueChanged(object sender, EventArgs e)
+        {
+            if (Commons.Modules.sLoad == "0Load") return;
+            LoadData();
+        }
     }
 }

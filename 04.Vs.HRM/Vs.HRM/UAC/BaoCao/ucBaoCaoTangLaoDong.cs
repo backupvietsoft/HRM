@@ -11,6 +11,7 @@ using System.Reflection;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using DevExpress.XtraCharts.Design;
 
 namespace Vs.HRM
 {
@@ -25,7 +26,6 @@ namespace Vs.HRM
         {
             InitializeComponent();
             Commons.Modules.ObjSystems.ThayDoiNN(this, windowsUIButton);
-            txtNam.EditValue = DateTime.Now;
             dtTmp = LoadText();
             ShowText(dtTmp);
         }
@@ -51,15 +51,15 @@ namespace Vs.HRM
                                         string sTieuDe;
                                         if (rdo_ChonThang.SelectedIndex == 0)
                                         {
-                                            firstDateTime = new DateTime(Convert.ToInt32(txtNam.EditValue), 1, 1);
-                                            secondDateTime = new DateTime(Convert.ToInt32(txtNam.EditValue), 6, 30);
-                                            sTieuDe = "BÁO CÁO TĂNG LAO ĐỘNG 6 THÁNG ĐẦU NĂM " + Convert.ToString(txtNam.EditValue);
+                                            firstDateTime = new DateTime(Convert.ToInt32(txtNam.Text), 1, 1);
+                                            secondDateTime = new DateTime(Convert.ToInt32(txtNam.Text), 6, 30);
+                                            sTieuDe = "BÁO CÁO TĂNG LAO ĐỘNG 6 THÁNG ĐẦU NĂM " + Convert.ToString(txtNam.Text);
                                         }
                                         else
                                         {
-                                            firstDateTime = new DateTime(Convert.ToInt32(txtNam.EditValue), 7, 1);
-                                            secondDateTime = new DateTime(Convert.ToInt32(txtNam.EditValue), 12, 31);
-                                            sTieuDe = "BÁO CÁO TĂNG LAO ĐỘNG 6 THÁNG CUỐI NĂM " + Convert.ToString(txtNam.EditValue);
+                                            firstDateTime = new DateTime(Convert.ToInt32(txtNam.Text), 7, 1);
+                                            secondDateTime = new DateTime(Convert.ToInt32(txtNam.Text), 12, 31);
+                                            sTieuDe = "BÁO CÁO TĂNG LAO ĐỘNG 6 THÁNG CUỐI NĂM " + Convert.ToString(txtNam.Text);
                                         }
 
                                         System.Data.SqlClient.SqlConnection conn1;
@@ -103,8 +103,8 @@ namespace Vs.HRM
                                         //{
                                         //    case "NB":
                                         //        {
-                                        //            DateTime firstDateTime = new DateTime(Convert.ToDateTime(txtNam.EditValue).Year, 1, 1);
-                                        //            DateTime secondDateTime = new DateTime(Convert.ToDateTime(txtNam.EditValue).Year, 6, 30);
+                                        //            DateTime firstDateTime = new DateTime(Convert.ToDateTime(txtNam.Text).Year, 1, 1);
+                                        //            DateTime secondDateTime = new DateTime(Convert.ToDateTime(txtNam.Text).Year, 6, 30);
 
                                         //            System.Data.SqlClient.SqlConnection conn1;
                                         //            System.Data.DataTable dt = new System.Data.DataTable();
@@ -152,15 +152,15 @@ namespace Vs.HRM
                                         string sTieuDe;
                                         if (rdo_ChonThang.SelectedIndex == 0)
                                         {
-                                            firstDateTime = new DateTime(Convert.ToInt32(txtNam.EditValue), 1, 1);
-                                            secondDateTime = new DateTime(Convert.ToInt32(txtNam.EditValue), 6, 30);
-                                            sTieuDe = "BÁO CÁO GIẢM LAO ĐỘNG 6 THÁNG ĐẦU NĂM " + Convert.ToString(txtNam.EditValue);
+                                            firstDateTime = new DateTime(Convert.ToInt32(txtNam.Text), 1, 1);
+                                            secondDateTime = new DateTime(Convert.ToInt32(txtNam.Text), 6, 30);
+                                            sTieuDe = "BÁO CÁO GIẢM LAO ĐỘNG 6 THÁNG ĐẦU NĂM " + Convert.ToString(txtNam.Text);
                                         }
                                         else
                                         {
-                                            firstDateTime = new DateTime(Convert.ToInt32(txtNam.EditValue), 7, 1);
-                                            secondDateTime = new DateTime(Convert.ToInt32(txtNam.EditValue), 12, 31);
-                                            sTieuDe = "BÁO CÁO GIẢM LAO ĐỘNG 6 THÁNG CUỐI NĂM " + Convert.ToString(txtNam.EditValue);
+                                            firstDateTime = new DateTime(Convert.ToInt32(txtNam.Text), 7, 1);
+                                            secondDateTime = new DateTime(Convert.ToInt32(txtNam.Text), 12, 31);
+                                            sTieuDe = "BÁO CÁO GIẢM LAO ĐỘNG 6 THÁNG CUỐI NĂM " + Convert.ToString(txtNam.Text);
                                         }
 
                                         System.Data.SqlClient.SqlConnection conn1;
@@ -315,8 +315,10 @@ namespace Vs.HRM
             Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(LK_DON_VI, Commons.Modules.ObjSystems.DataDonVi(false), "ID_DV", "TEN_DV", "TEN_DV");
 
             Commons.OSystems.SetDateEditFormat(lk_NgayIn);
-            txtNam.EditValue = DateTime.Today.Year;
+            txtNam.Text = DateTime.Now.Year.ToString();
             lk_NgayIn.EditValue = DateTime.Today;
+            rdoChonBaoCao.EditValue= 0;
+            rdo_ChonThang.SelectedIndex = 0;
             Commons.Modules.sLoad = "";
         }
 
@@ -324,25 +326,6 @@ namespace Vs.HRM
         {
             if (Commons.Modules.sLoad == "0Load") return;
         }
-
-        private void mPopupContainerEdit1_BeforePopup(object sender, EventArgs e)
-        {
-            popNam.Width = calNam.Width;
-            popNam.Height = calNam.Height;
-        }
-
-        private void calNam_DateTimeCommit(object sender, EventArgs e)
-        {
-            try
-            {
-                txtNam.EditValue = calNam.DateTime.Date.Year;
-            }
-            catch
-            {
-            }
-            txtNam.ClosePopup();
-        }
-
         private void rdoChonBaoCao_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (Commons.Modules.KyHieuDV == "DM")
@@ -471,7 +454,7 @@ namespace Vs.HRM
             {
                 Commons.Modules.sId = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spUpdateLAO_DONG_DU_KIEN",
                     (AddEdit ? -1 : Id).ToString(),
-                    (txtNam.Text == "") ? 0 : txtNam.EditValue,
+                    (txtNam.Text == "") ? "0" : txtNam.Text,
                     (rdo_ChonThang.SelectedIndex == 0) ? 1 : 0,
                     (txTONG_DK.EditValue == null) ? 0 : txTONG_DK.EditValue,
                     (txTONG_DK_NU.EditValue == null) ? 0 : txTONG_DK_NU.EditValue,

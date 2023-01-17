@@ -144,7 +144,7 @@ namespace Vs.TimeAttendance
             DataTable dt;
             System.Data.SqlClient.SqlConnection conn;
             dt = new DataTable();
-            frm.rpt = new rptDKLamThemGio_DM(dNgayIn.DateTime, sTenXN);
+            frm.rpt = new rptDKLamThemGio_DM(dNgayIn.DateTime, sTenXN, Convert.ToInt32(ID_DV));
 
             try
             {

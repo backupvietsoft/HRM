@@ -25,7 +25,7 @@ namespace Vs.Payroll
         private string sKyHieuDV = "";
 
         public static ucTinhLuong _instance;
-
+        public int iLoaiTL = 1; // 1 tính lương công nhân, 2 tính lương nhân viên
         public static ucTinhLuong Instance
         {
             get
@@ -51,10 +51,10 @@ namespace Vs.Payroll
         {
             try
             {
+                EnableButon();
                 sKyHieuDV = Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString();
                 Commons.Modules.sLoad = "0Load";
                 LoadThang();
-                LoadCboLoaiCNV();
                 if (sKyHieuDV != "DM")
                 {
                     LoadGrdGTGC();
@@ -66,16 +66,6 @@ namespace Vs.Payroll
                 txtNgayCongChuan.Text = getNgayCongChuan().ToString();
                 txtNgayCongLV.Text = getNgayCongChuan().ToString();
                 Commons.Modules.sLoad = "";
-            }
-            catch { }
-        }
-        private void LoadCboLoaiCNV()
-        {
-            try
-            {
-                DataTable dt = new DataTable();
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboLoaiCNV", Commons.Modules.TypeLanguage));
-                Commons.Modules.ObjSystems.MLoadLookUpEdit(cboLoaiTinhLuong, dt, "ID_LOAI", "TEN_LOAI", "");
             }
             catch { }
         }
@@ -188,7 +178,7 @@ namespace Vs.Payroll
                 DataTable dt = new DataTable();
                 DateTime Tngay = Convert.ToDateTime(cboThang.EditValue);
                 DateTime Dngay = Convert.ToDateTime(cboThang.EditValue).AddMonths(1).AddDays(-1);
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetBangLuong_DM", Commons.Modules.UserName, Commons.Modules.TypeLanguage, cboDonVi.EditValue, cboXiNghiep.EditValue, cboTo.EditValue, Tngay, Dngay, cboLoaiTinhLuong.EditValue));
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetBangLuong_DM", Commons.Modules.UserName, Commons.Modules.TypeLanguage, cboDonVi.EditValue, cboXiNghiep.EditValue, cboTo.EditValue, Tngay, Dngay, iLoaiTL));
                 if (grdData.DataSource == null)
                 {
                     Commons.Modules.ObjSystems.MLoadXtraGrid(grdData, grvData, dt, false, false, false, true, true, this.Name);
@@ -401,6 +391,27 @@ namespace Vs.Payroll
             XtraUserControl ctl = new XtraUserControl();
             switch (btn.Tag.ToString())
             {
+                case "khoitao":
+                    {
+                        frmNhapDLKhoiTaoTLNV frm = new frmNhapDLKhoiTaoTLNV();
+                        if (frm.ShowDialog() == DialogResult.OK)
+                        {
+
+                        }
+                        break;
+                    }
+                case "dulieuthang":
+                    {
+                        frmNhapDLThangTLNV frm = new frmNhapDLThangTLNV();
+                        frm.iID_DV = Convert.ToInt32(cboDonVi.EditValue);
+                        frm.iID_XN = Convert.ToInt32(cboXiNghiep.EditValue);
+                        frm.iID_TO = Convert.ToInt32(cboTo.EditValue);
+                        if (frm.ShowDialog() == DialogResult.OK)
+                        {
+
+                        }
+                        break;
+                    }
                 case "xoa":
                     {
                         XoaCheDoLV();
@@ -426,7 +437,7 @@ namespace Vs.Payroll
                             DateTime Tngay = Convert.ToDateTime(cboThang.EditValue);
                             DateTime Dngay = Convert.ToDateTime(cboThang.EditValue).AddMonths(1).AddDays(-1);
                             DataTable dt = new DataTable();
-                            SqlHelper.ExecuteReader(Commons.IConnections.CNStr, sKyHieuDV == "DM" ? "spGetTinhLuongThang_DM" : "spGetTinhLuongThang", Commons.Modules.UserName, Commons.Modules.TypeLanguage, cboDonVi.EditValue, cboXiNghiep.EditValue, cboTo.EditValue, Convert.ToInt32(txtNgayCongLV.EditValue), Convert.ToInt32(txtNgayCongChuan.EditValue), Tngay, Dngay, cboLoaiTinhLuong.EditValue);
+                            SqlHelper.ExecuteReader(Commons.IConnections.CNStr, sKyHieuDV == "DM" ? "spGetTinhLuongThang_DM" : "spGetTinhLuongThang", Commons.Modules.UserName, Commons.Modules.TypeLanguage, cboDonVi.EditValue, cboXiNghiep.EditValue, cboTo.EditValue, Convert.ToInt32(txtNgayCongLV.EditValue), Convert.ToInt32(txtNgayCongChuan.EditValue), Tngay, Dngay, iLoaiTL);
                             if (sKyHieuDV != "DM")
                             {
                                 LoadGrdGTGC();
@@ -452,18 +463,21 @@ namespace Vs.Payroll
             }
         }
 
-        private void EnableButon(bool visible)
+        private void EnableButon()
         {
-            btnALL.Buttons[0].Properties.Visible = !visible;
-            btnALL.Buttons[1].Properties.Visible = !visible;
-            btnALL.Buttons[2].Properties.Visible = !visible;
-            btnALL.Buttons[3].Properties.Visible = !visible;
-            //btnALL.Buttons[4].Properties.Visible = !visible;
-            //btnALL.Buttons[5].Properties.Visible = !visible;
-            cboTo.Enabled = !visible;
-            cboThang.Enabled = !visible;
-            cboDonVi.Enabled = !visible;
-            cboXiNghiep.Enabled = !visible;
+            if (iLoaiTL == 1)
+            {
+                btnALL.Buttons[0].Properties.Visible = false;
+                btnALL.Buttons[1].Properties.Visible = false;
+                btnALL.Buttons[2].Properties.Visible = false;
+            }
+            else
+            {
+                btnALL.Buttons[0].Properties.Visible = true;
+                btnALL.Buttons[1].Properties.Visible = true;
+                btnALL.Buttons[2].Properties.Visible = true;
+            }
+
         }
 
         private int getNgayCongChuan()

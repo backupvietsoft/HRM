@@ -17,7 +17,7 @@ namespace Commons
                 //picLogo.LocationF = new PointF((float)Convert.ToDecimal(dt.Rows[0]["LG_LEFT"]), (float)Convert.ToDecimal(dt.Rows[0]["LG_TOP"]));
                 lblCONG_TY.LocationF = new PointF(picLogo.SizeF.Width, (float)Convert.ToDecimal(dt.Rows[0]["LG_TOP"]));
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
             }
         }

@@ -266,6 +266,11 @@ namespace Vs.HRM
                                                 InQuyetDinhDieuChuyen_NB();
                                                 break;
                                             }
+                                        case "NC":
+                                            {
+                                                InQuyetDinhDieuChuyen_NB();
+                                                break;
+                                            }
                                         default:
                                             InQuyetDinhDieuChuyen_MT();
                                             break;

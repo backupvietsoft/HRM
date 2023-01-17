@@ -78,7 +78,6 @@ namespace Vs.HRM
                                                 System.Data.SqlClient.SqlConnection conn;
                                                 DataTable dtbc = new DataTable();
                                                 frmViewReport frm = new frmViewReport();
-                                                //frm.rpt = new rptTheNhanVien_DM(dt);
 
 
                                                 conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);

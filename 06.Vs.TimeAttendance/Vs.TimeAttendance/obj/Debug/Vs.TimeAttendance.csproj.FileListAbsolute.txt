@@ -2533,3 +2533,5 @@ F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.TimeAttendance.csp
 F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.TimeAttendance.csproj.CopyComplete
 F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.TimeAttendance.dll
 F:\01.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.TimeAttendance.pdb
+D:\01.SourceCode\02.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.TimeAttendance.ucDangKyNghiPhep.resources
+D:\01.SourceCode\02.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.TimeAttendance.ucQuiDinhTCThang.resources

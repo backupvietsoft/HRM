@@ -3465,3 +3465,6 @@ F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.csproj.CoreCompileInputs.cache
 F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.csproj.CopyComplete
 F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.dll
 F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.pdb
+D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.Payroll.ucPhatChiaKhoa.resources
+D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.Payroll.ucPhatChoiVeSinh.resources
+D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\Vs.Recruit.exe.config

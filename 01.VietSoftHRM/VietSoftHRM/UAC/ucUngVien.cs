@@ -355,6 +355,20 @@ namespace VietSoftHRM
                         tmp.ShowDialog();
                         break;
                     }
+                case "mnuBDLoaiHinhTD":
+                    {
+                        frmInBDNguonTuyenDung tmp = new frmInBDNguonTuyenDung();
+                        Commons.Modules.ObjSystems.HideWaitForm();
+                        tmp.ShowDialog();
+                        break;
+                    }
+                case "mnuBDChiaTheoDiaLy":
+                    {
+                        frmInBDUngVienTheoKhuVuc tmp = new frmInBDUngVienTheoKhuVuc();
+                        Commons.Modules.ObjSystems.HideWaitForm();
+                        tmp.ShowDialog();
+                        break;
+                    }
                 #endregion  
 
                 default:

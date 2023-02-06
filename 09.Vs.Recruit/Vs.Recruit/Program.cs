@@ -30,7 +30,7 @@ namespace Vs.Recruit
             //ds.ReadXml(AppDomain.CurrentDomain.BaseDirectory + "\\vsconfig.xml");
             Commons.IConnections.Username = "sa";
             Commons.IConnections.Server = @"27.74.240.29";
-            Commons.IConnections.Database = "VS_HRM_DEMO";
+            Commons.IConnections.Database = "VS_HRM_DM";
             Commons.IConnections.Password = "codaikadaiku";
             Commons.Modules.sPrivate = @"PILMICO";
             try
@@ -88,7 +88,7 @@ namespace Vs.Recruit
                 //int weekNum = ciCurr.Calendar.GetWeekOfYear(Convert.ToDateTime("31/12/2022"), CalendarWeekRule.FirstDay, DayOfWeek.Monday);
                 //int n = DateTime.Now.DayOfYear;
                 //var firstDayWeek = ciCurr.Calendar.
-                Application.Run(new Form1());
+                Application.Run(new frmInBDNguonTuyenDung());
                 //frmViewReport frm = new frmViewReport();
                 //XtraReport1 fpt = new XtraReport1();
                 //frm.rpt = fpt;

@@ -211,30 +211,6 @@ namespace Vs.HRM
                 double sChan;
                 double sKQ;
 
-                //iSLan = iSoLan;
-                //sKQ = 0;
-                //if (sCuoi)
-                //{
-                //    sChan = Math.Floor(iSLan / 10);
-                //    sLe = iSLan - sChan * 10;
-                //    if (sLe != 0)
-                //    {
-                //        sKQ = ((sChan + 1) * 10) + 1;
-
-                //    }
-
-
-                //    iSoLan = int.Parse(sKQ.ToString());
-
-
-                //}
-
-                //double iTmp = (iSoLan - 1);
-                //iTmp = Math.Floor(iTmp / 10);
-                //double iLan = (iSoLan - 1) % 10;
-                //iLeft = iLeft + iLan * iWidth;
-                //iTop = iTop + iHeight * iTmp;
-
 
                 Microsoft.Office.Interop.Excel.ChartObjects chartObjs = (Microsoft.Office.Interop.Excel.ChartObjects)ExcelSheets.ChartObjects(Type.Missing);
                 Microsoft.Office.Interop.Excel.ChartObject chartObj = chartObjs.Add(iLeft, iTop, iWidth, iHeight);
@@ -249,9 +225,7 @@ namespace Vs.HRM
                 var _with1 = xlSeries;
                 _with1.Name = Commons.Modules.ObjLanguages.GetLanguage(Commons.Modules.ModuleName, "ucBaoCaoThongKeCongNhanBD", "Thang", Commons.Modules.TypeLanguage);// "=Sheet1!$A$" + (vDong + 1);                 //"=A" + vDong;
                 _with1.XValues = ExcelSheets.get_Range("" + sTenCotBD + "" + iDongBD + "", "" + sTenCotKT + "" + iDongKT); // cột tên (Nam - nữ -khác)
-                _with1.Values = ExcelSheets.get_Range("" + sTenCotBDTyLe + "" + iDongBD_TL + "", "" + sTenCotKTTyLe + "" + iDongKT_TL); //"B33"); // Cột dữ liệu (Tỷ lệ :50% -50%)
-                //Microsoft.Office.Interop.Excel.Range title = Commons.Modules.MExcel.GetRange(ExcelSheets, iDong, 2, iDong, 2);
-                //Microsoft.Office.Interop.Excel.Range title1 = Commons.Modules.MExcel.GetRange(ExcelSheets, iDong, 3, iDong, 3);
+                _with1.Values = ExcelSheets.get_Range("" + sTenCotBDTyLe + "" + iDongBD_TL + "", "" + sTenCotKTTyLe + "" + iDongKT_TL); //"B33"); // Cột dữ liệu
 
                 if (bTitile)
                     xlChart.ChartTitle.Text = Commons.Modules.ObjLanguages.GetLanguage(

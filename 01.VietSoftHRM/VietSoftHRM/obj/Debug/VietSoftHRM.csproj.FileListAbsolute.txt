@@ -2590,3 +2590,6 @@ F:\01.HRM\01.VietSoftHRM\VietSoftHRM\obj\Debug\VietSoftHRM.csproj.CoreCompileInp
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\obj\Debug\VietSoftHRM.csproj.CopyComplete
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\obj\Debug\VietSoftHRM.exe
 F:\01.HRM\01.VietSoftHRM\VietSoftHRM\obj\Debug\VietSoftHRM.pdb
+D:\01.SourceCode\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Vs.TimeAttendance.exe.config
+D:\01.SourceCode\02.HRM\01.VietSoftHRM\VietSoftHRM\obj\Debug\VietSoftHRM.csproj.SuggestedBindingRedirects.cache
+D:\01.SourceCode\02.HRM\01.VietSoftHRM\VietSoftHRM\bin\Debug\Vs.Recruit.exe.config

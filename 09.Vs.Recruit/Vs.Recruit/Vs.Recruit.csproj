@@ -235,6 +235,12 @@
     <Compile Include="Form\frmCapNhatNhanh.Designer.cs">
       <DependentUpon>frmCapNhatNhanh.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form\frmInBDUngVienTheoKhuVuc.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\frmInBDUngVienTheoKhuVuc.designer.cs">
+      <DependentUpon>frmInBDUngVienTheoKhuVuc.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form\frmInGiayHenDiLam.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -246,6 +252,12 @@
     </Compile>
     <Compile Include="Form\frmAuToKeHoachPhongVan.Designer.cs">
       <DependentUpon>frmAuToKeHoachPhongVan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form\frmInBDNguonTuyenDung.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\frmInBDNguonTuyenDung.designer.cs">
+      <DependentUpon>frmInBDNguonTuyenDung.cs</DependentUpon>
     </Compile>
     <Compile Include="Form\frmInTinhHinhTD.cs">
       <SubType>Form</SubType>
@@ -537,11 +549,17 @@
     <EmbeddedResource Include="Form\frmCapNhatNhanh.resx">
       <DependentUpon>frmCapNhatNhanh.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form\frmInBDUngVienTheoKhuVuc.resx">
+      <DependentUpon>frmInBDUngVienTheoKhuVuc.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form\frmInGiayHenDiLam.resx">
       <DependentUpon>frmInGiayHenDiLam.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\frmAuToKeHoachPhongVan.resx">
       <DependentUpon>frmAuToKeHoachPhongVan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\frmInBDNguonTuyenDung.resx">
+      <DependentUpon>frmInBDNguonTuyenDung.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\frmInTinhHinhTD.resx">
       <DependentUpon>frmInTinhHinhTD.cs</DependentUpon>

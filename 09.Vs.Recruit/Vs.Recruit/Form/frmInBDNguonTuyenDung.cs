@@ -30,7 +30,9 @@ namespace Vs.Recruit
             {
                 case "In":
                     {
+                        Commons.Modules.ObjSystems.ShowWaitForm(this);
                         BieuDoPhanLoai();
+                        Commons.Modules.ObjSystems.HideWaitForm();
                         break;
                     }
                 case "thoat":
@@ -75,6 +77,7 @@ namespace Vs.Recruit
 
                 if(dt.Rows.Count == 0)
                 {
+                    Commons.Modules.ObjSystems.HideWaitForm();
                     Commons.Modules.ObjSystems.msgChung(Commons.ThongBao.msgKhongCoDuLieuIn);
                     return;
                 }   
@@ -82,6 +85,7 @@ namespace Vs.Recruit
                 SaveExcelFile = SaveFiles("Excel Workbook |*.xlsx|Excel 97-2003 Workbook |*.xls|Word Document |*.docx|Rich Text Format |*.rtf|PDF File |*.pdf|Web Page |*.html|Single File Web Page |*.mht");
                 if (SaveExcelFile == "")
                 {
+                    Commons.Modules.ObjSystems.HideWaitForm();
                     return;
                 }
                 Microsoft.Office.Interop.Excel.Application oXL;
@@ -97,6 +101,18 @@ namespace Vs.Recruit
 
                 oWB = (Microsoft.Office.Interop.Excel.Workbook)(oXL.Workbooks.Add(Missing.Value));
                 oSheet = (Microsoft.Office.Interop.Excel.Worksheet)oWB.ActiveSheet;
+                try
+                {
+                    Microsoft.Office.Interop.Excel.Worksheet worksheet2 = (Worksheet)oWB.Worksheets["Sheet2"];
+                    worksheet2.Delete();
+                    Microsoft.Office.Interop.Excel.Worksheet worksheet3 = (Worksheet)oWB.Worksheets["Sheet3"];
+                    worksheet3.Delete();
+                }
+                catch
+                {
+                }
+               
+
 
                 string fontName = "Times New Roman";
                 int fontSizeTieuDe = 11;
@@ -174,7 +190,7 @@ namespace Vs.Recruit
                 for (col = 1; col <= 3; col++)
                 {
                     formatRange = oSheet.get_Range("" + CharacterIncrement(col - 1) + "5", "" + CharacterIncrement(col - 1) + ""+ 5 + dt.Rows.Count +"");
-                    formatRange.NumberFormat = "0.0;-0;;@";
+                    formatRange.NumberFormat = "0";
                     try { formatRange.TextToColumns(Type.Missing, Microsoft.Office.Interop.Excel.XlTextParsingType.xlDelimited, Microsoft.Office.Interop.Excel.XlTextQualifier.xlTextQualifierDoubleQuote); } catch { }
                 }
                 rowCnt++;

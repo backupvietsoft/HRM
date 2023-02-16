@@ -9,7 +9,7 @@ using System.Reflection;
 using System.Linq;
 using Microsoft.ApplicationBlocks.Data;
 using Microsoft.Office.Interop.Excel;
-
+using DevExpress.XtraEditors.Filtering.Templates;
 
 namespace Vs.Recruit
 {
@@ -30,7 +30,9 @@ namespace Vs.Recruit
             {
                 case "In":
                     {
+                        Commons.Modules.ObjSystems.ShowWaitForm(this);
                         BieuDoChiaTheoDiaLy();
+                        Commons.Modules.ObjSystems.HideWaitForm();
                         break;
                     }
                 case "thoat":
@@ -81,6 +83,7 @@ namespace Vs.Recruit
 
                 if (dtQuan.Rows.Count == 0)
                 {
+                    Commons.Modules.ObjSystems.HideWaitForm();
                     Commons.Modules.ObjSystems.msgChung(Commons.ThongBao.msgKhongCoDuLieuIn);
                     return;
                 }
@@ -88,6 +91,7 @@ namespace Vs.Recruit
                 SaveExcelFile = SaveFiles("Excel Workbook |*.xlsx|Excel 97-2003 Workbook |*.xls|Word Document |*.docx|Rich Text Format |*.rtf|PDF File |*.pdf|Web Page |*.html|Single File Web Page |*.mht");
                 if (SaveExcelFile == "")
                 {
+                    Commons.Modules.ObjSystems.HideWaitForm();
                     return;
                 }
                 this.Cursor = Cursors.WaitCursor;
@@ -104,6 +108,19 @@ namespace Vs.Recruit
 
                 oWB = (Microsoft.Office.Interop.Excel.Workbook)(oXL.Workbooks.Add(Missing.Value));
                 oSheet = (Microsoft.Office.Interop.Excel.Worksheet)oWB.ActiveSheet;
+
+
+                try
+                {
+                    Microsoft.Office.Interop.Excel.Worksheet worksheet2 = (Worksheet)oWB.Worksheets["Sheet2"];
+                    worksheet2.Delete();
+                    Microsoft.Office.Interop.Excel.Worksheet worksheet3 = (Worksheet)oWB.Worksheets["Sheet3"];
+                    worksheet3.Delete();
+                }
+                catch
+                {
+                }
+
                 oSheet.Name = "Tổng hợp";
                 string fontName = "Times New Roman";
                 int fontSizeTieuDe = 11;
@@ -190,7 +207,7 @@ namespace Vs.Recruit
                 for (col = 1; col <= 3; col++)
                 {
                     formatRange = oSheet.get_Range("" + CharacterIncrement(col - 1) + "5", "" + CharacterIncrement(col - 1) + "" + rowCnt + "");
-                    formatRange.NumberFormat = "0.0;-0;;@";
+                    formatRange.NumberFormat = "0";
                     try { formatRange.TextToColumns(Type.Missing, Microsoft.Office.Interop.Excel.XlTextParsingType.xlDelimited, Microsoft.Office.Interop.Excel.XlTextQualifier.xlTextQualifierDoubleQuote); } catch { }
                 }
 
@@ -331,7 +348,7 @@ namespace Vs.Recruit
                     for (col = 4; col <= 6; col++)
                     {
                         formatRange = sheet2.get_Range("" + CharacterIncrement(col - 1) + "2", "" + CharacterIncrement(col - 1) + "" + (rowCnt + 1).ToString() + "");
-                        formatRange.NumberFormat = "0.0;-0;;@";
+                        formatRange.NumberFormat = "0";
                         try { formatRange.TextToColumns(Type.Missing, Microsoft.Office.Interop.Excel.XlTextParsingType.xlDelimited, Microsoft.Office.Interop.Excel.XlTextQualifier.xlTextQualifierDoubleQuote); } catch { }
                     }
                     BorderAround(sheet2.get_Range("A1", "F" + (rowCnt + 1).ToString() + ""));

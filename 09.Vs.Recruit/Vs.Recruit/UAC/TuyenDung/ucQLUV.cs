@@ -87,7 +87,55 @@ namespace Vs.Recruit
                     }
                 case "sua":
                     {
-                        grvUngVien_DoubleClick(null, null);
+                        if (grvUngVien.RowCount == 0)
+                        {
+                            ucCTQLUV dl = new ucCTQLUV(-1);
+                            navigationFrame1.SelectedPage.Visible = false;
+                            PageDetails.Controls.Add(dl);
+                            dl.Dock = DockStyle.Fill;
+                            dl.backWindowsUIButtonPanel.ButtonClick += BackWindowsUIButtonPanel_ButtonClick;
+                            Thread thread = new Thread(delegate ()
+                            {
+                                if (this.InvokeRequired)
+                                {
+                                    this.Invoke(new MethodInvoker(delegate
+                                    {
+                                        navigationFrame1.SelectedPage = PageDetails;
+                                    }));
+                                }
+                            }, 100);
+                            thread.Start();
+                            accorMenuleft.Visible = false;
+                        }
+                        else
+                        {
+                            try
+                            {
+                                lblUV.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                                lblUV.ForeColor = System.Drawing.Color.FromArgb(0, 0, 255);
+                                lblUV.Text = grvUngVien.GetFocusedRowCellValue(grvUngVien.Columns["MS_UV"]).ToString() + " - " + grvUngVien.GetFocusedRowCellValue(grvUngVien.Columns["HO_TEN"]).ToString();
+                            }
+                            catch
+                            {
+                            }
+                            ucCTQLUV dl = new ucCTQLUV(Convert.ToInt64(grvUngVien.GetFocusedRowCellValue(grvUngVien.Columns["ID_UV"])));
+                            navigationFrame1.SelectedPage.Visible = false;
+                            PageDetails.Controls.Add(dl);
+                            dl.Dock = DockStyle.Fill;
+                            dl.backWindowsUIButtonPanel.ButtonClick += BackWindowsUIButtonPanel_ButtonClick;
+                            Thread thread = new Thread(delegate ()
+                            {
+                                if (this.InvokeRequired)
+                                {
+                                    this.Invoke(new MethodInvoker(delegate
+                                    {
+                                        navigationFrame1.SelectedPage = PageDetails;
+                                    }));
+                                }
+                            }, 100);
+                            thread.Start();
+                            accorMenuleft.Visible = false;
+                        }
                         break;
                     }
                 case "xoa":
@@ -524,8 +572,6 @@ namespace Vs.Recruit
             GridHitInfo info = grvUngVien.CalcHitInfo(ea.Location);
             if (info.InRow || info.InRowCell)
             {
-
-
                 if (grvUngVien.RowCount == 0)
                 {
                     ucCTQLUV dl = new ucCTQLUV(-1);

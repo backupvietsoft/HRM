@@ -28,10 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions3 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions2 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
             this.windowsUIButton = new DevExpress.XtraBars.Docking2010.WindowsUIButtonPanel();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.lbDonVi = new DevExpress.Utils.Layout.TablePanel();
+            this.rdo_ChucVu = new DevExpress.XtraEditors.RadioGroup();
             this.lblCachTinhLuong = new DevExpress.XtraEditors.LabelControl();
             this.cboCachTinhLuong = new DevExpress.XtraEditors.SearchLookUpEdit();
             this.gridView3 = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -61,6 +62,7 @@
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lbDonVi)).BeginInit();
             this.lbDonVi.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.rdo_ChucVu.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboCachTinhLuong.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.popListThang)).BeginInit();
@@ -102,9 +104,9 @@
             this.windowsUIButton.AppearanceButton.Pressed.Options.UseFont = true;
             this.windowsUIButton.AppearanceButton.Pressed.Options.UseImage = true;
             this.windowsUIButton.AppearanceButton.Pressed.Options.UseTextOptions = true;
-            windowsUIButtonImageOptions3.ImageUri.Uri = "Print";
+            windowsUIButtonImageOptions2.ImageUri.Uri = "Print";
             this.windowsUIButton.Buttons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] {
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions3, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "Print", -1, false)});
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions2, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "Print", -1, false)});
             this.windowsUIButton.ContentAlignment = System.Drawing.ContentAlignment.MiddleRight;
             this.windowsUIButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.windowsUIButton.Location = new System.Drawing.Point(6, 496);
@@ -143,6 +145,7 @@
             new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 18F),
             new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 18F),
             new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 18F)});
+            this.lbDonVi.Controls.Add(this.rdo_ChucVu);
             this.lbDonVi.Controls.Add(this.lblCachTinhLuong);
             this.lbDonVi.Controls.Add(this.cboCachTinhLuong);
             this.lbDonVi.Controls.Add(this.popListThang);
@@ -174,6 +177,20 @@
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.AutoSize, 26F)});
             this.lbDonVi.Size = new System.Drawing.Size(977, 488);
             this.lbDonVi.TabIndex = 4;
+            // 
+            // rdo_ChucVu
+            // 
+            this.lbDonVi.SetColumn(this.rdo_ChucVu, 3);
+            this.rdo_ChucVu.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rdo_ChucVu.Location = new System.Drawing.Point(323, 143);
+            this.rdo_ChucVu.Name = "rdo_ChucVu";
+            this.rdo_ChucVu.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] {
+            new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Công nhân", true, "rdo_CongNhan"),
+            new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Nhân viên", true, "rdo_NhanVien")});
+            this.lbDonVi.SetRow(this.rdo_ChucVu, 5);
+            this.lbDonVi.SetRowSpan(this.rdo_ChucVu, 2);
+            this.rdo_ChucVu.Size = new System.Drawing.Size(154, 58);
+            this.rdo_ChucVu.TabIndex = 47;
             // 
             // lblCachTinhLuong
             // 
@@ -337,6 +354,7 @@
             this.rdo_ChonBaoCao.Name = "rdo_ChonBaoCao";
             this.rdo_ChonBaoCao.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] {
             new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Bảng lương tháng sản xuất", true, "rdo_BangLuongThangSanXuat"),
+            new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Bảng lương tháng nhân viên", true, "rdo_BangLuongThangNV"),
             new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Bảng lương tháng cán bộ quản lý chuyền", true, "rdo_BangLuongThangCBQLChuyen"),
             new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Bảng lương tháng sản thời gian", true, "rdo_BangLuongThangThoiGian"),
             new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Bảng lương tháng QC", true, "rdo_BangLuongThangQC"),
@@ -484,6 +502,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.lbDonVi)).EndInit();
             this.lbDonVi.ResumeLayout(false);
             this.lbDonVi.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.rdo_ChucVu.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboCachTinhLuong.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.popListThang)).EndInit();
@@ -542,5 +561,6 @@
         private DevExpress.XtraEditors.LabelControl lblCachTinhLuong;
         private DevExpress.XtraEditors.SearchLookUpEdit cboCachTinhLuong;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView3;
+        private DevExpress.XtraEditors.RadioGroup rdo_ChucVu;
     }
 }

@@ -777,7 +777,7 @@ namespace Vs.HRM
                             }
                             else if (dt.Rows[col - 1]["DINH_DANG"].ToString() == "Date")
                             {
-                                formatRange.NumberFormat = "dd/mm/yyyy";
+                                formatRange.NumberFormat = "dd/MM/yyyy";
                                 formatRange.Cells.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
                                 formatRange.Cells.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
                                 try { formatRange.TextToColumns(Type.Missing, Excel.XlTextParsingType.xlDelimited, Excel.XlTextQualifier.xlTextQualifierDoubleQuote); } catch (Exception ex) { }

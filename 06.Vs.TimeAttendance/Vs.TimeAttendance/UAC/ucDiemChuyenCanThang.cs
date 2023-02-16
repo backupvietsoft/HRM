@@ -71,8 +71,11 @@ namespace Vs.TimeAttendance
         private void ucPhepThang_Load(object sender, EventArgs e)
         {
             Commons.Modules.sLoad = "0Load";
-            ItemForNgayCongQuyDinh.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
-            txtNgayCongQD.EditValue = 18;
+            if (Commons.Modules.KyHieuDV == "DM")
+            {
+                ItemForNgayCongQuyDinh.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+            }
+            txtNgayCongQD.EditValue = 208;
             LoadThang();
             Commons.Modules.ObjSystems.LoadCboDonVi(cboDV);
             Commons.Modules.ObjSystems.LoadCboXiNghiep(cboDV, cboXN);
@@ -123,7 +126,7 @@ namespace Vs.TimeAttendance
                         {
                             conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
                             conn.Open();
-                            System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptTinhDiemThang_DM", conn);
+                            System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand(Commons.Modules.KyHieuDV == "DM" ? "rptTinhDiemThang_DM" : Commons.Modules.KyHieuDV == "NC" ? "rptTinhDiemThang_NC" : "rptTinhDiemThang_DM", conn);
                             cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
                             cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
                             cmd.Parameters.Add("@DVi", SqlDbType.Int).Value = cboDV.EditValue;
@@ -148,7 +151,19 @@ namespace Vs.TimeAttendance
                             // If the file name is not an empty string open it for saving.
                             if (res == DialogResult.OK)
                             {
-                                Commons.TemplateExcel.FillReport(saveFileDialog.FileName, System.Windows.Forms.Application.StartupPath + "\\Template\\TemplateDiemChuyenCanThang.xlsx", ds, new string[] { "{", "}" });
+                                if (Commons.Modules.KyHieuDV == "DM")
+                                {
+                                    Commons.TemplateExcel.FillReport(saveFileDialog.FileName, System.Windows.Forms.Application.StartupPath + "\\Template\\TemplateDiemChuyenCanThang.xlsx", ds, new string[] { "{", "}" });
+                                }
+                                else if (Commons.Modules.KyHieuDV == "NC") 
+                                {
+                                    Commons.TemplateExcel.FillReport(saveFileDialog.FileName, System.Windows.Forms.Application.StartupPath + "\\Template\\TemplateDiemChuyenCanThangNC.xlsx", ds, new string[] { "{", "}" });
+                                }
+                                else
+                                {
+                                    Commons.TemplateExcel.FillReport(saveFileDialog.FileName, System.Windows.Forms.Application.StartupPath + "\\Template\\TemplateDiemChuyenCanThang.xlsx", ds, new string[] { "{", "}" });
+                                }
+                                
                                 Process.Start(saveFileDialog.FileName);
                             }
                         }
@@ -165,7 +180,7 @@ namespace Vs.TimeAttendance
                         try
                         {
                             DataTable dt = new DataTable();
-                            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, Commons.Modules.KyHieuDV == "DM" ? "spTinhThuongChuyenCanThang_DM" : Commons.Modules.KyHieuDV == "NB" ? "spTinhDiemThang_NB" : "spTinhDiemThang", Commons.Modules.UserName, Commons.Modules.TypeLanguage, Convert.ToInt32(cboDV.EditValue), Convert.ToInt32(cboXN.EditValue), Convert.ToInt32(cboTo.EditValue), Convert.ToInt32(txtNgayCongQD.EditValue), Convert.ToDateTime(cboThang.EditValue)));
+                            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, Commons.Modules.KyHieuDV == "DM" ? "spTinhThuongChuyenCanThang_DM" : Commons.Modules.KyHieuDV == "NB" ? "spTinhDiemThang_NB" : Commons.Modules.KyHieuDV == "NC" ? "spTinhDiemThang_NC" : "spTinhDiemThang", Commons.Modules.UserName, Commons.Modules.TypeLanguage, Convert.ToInt32(cboDV.EditValue), Convert.ToInt32(cboXN.EditValue), Convert.ToInt32(cboTo.EditValue), Convert.ToInt32(txtNgayCongQD.EditValue), Convert.ToDateTime(cboThang.EditValue)));
                             grdDiemThang.DataSource = dt;
                             enableButon(false);
                         }
@@ -195,7 +210,7 @@ namespace Vs.TimeAttendance
                     {
                         LoadGrdDiemThang();
                         //Commons.Modules.ObjSystems.DeleteAddRow(grvPhepThang);
-                        txtNgayCongQD.EditValue = 18;
+                        txtNgayCongQD.EditValue = 208;
                         enableButon(true);
                         break;
                     }
@@ -222,7 +237,7 @@ namespace Vs.TimeAttendance
             {
                 Commons.Modules.sLoad = "0Load";
                 DataTable dt = new DataTable();
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, Commons.Modules.KyHieuDV == "DM" ? "spGetListDiemThang_DM" : Commons.Modules.KyHieuDV == "NB" ? "spGetListDiemThang_NB" : "spGetListDiemThang", Commons.Modules.UserName, Commons.Modules.TypeLanguage, Convert.ToInt32(cboDV.EditValue), Convert.ToInt32(cboXN.EditValue), Convert.ToInt32(cboTo.EditValue), Convert.ToDateTime(cboThang.EditValue)));
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, Commons.Modules.KyHieuDV == "DM" ? "spGetListDiemThang_DM" : Commons.Modules.KyHieuDV == "NB" ? "spGetListDiemThang_NB" : Commons.Modules.KyHieuDV == "NC" ? "spGetListDiemThang_NC" : "spGetListDiemThang", Commons.Modules.UserName, Commons.Modules.TypeLanguage, Convert.ToInt32(cboDV.EditValue), Convert.ToInt32(cboXN.EditValue), Convert.ToInt32(cboTo.EditValue), Convert.ToDateTime(cboThang.EditValue)));
 
                 for (int i = 4; i < dt.Columns.Count; i++)
                 {
@@ -270,7 +285,19 @@ namespace Vs.TimeAttendance
                         grvDiemThang.Columns["NGHI_VR"].DisplayFormat.FormatType = FormatType.Numeric;
                         grvDiemThang.Columns["NGHI_VR"].DisplayFormat.FormatString = Commons.Modules.sSoLeTT;
 
-                    }    
+                    }
+                    if (Commons.Modules.KyHieuDV == "NC")
+                    {
+                        //nếu là nam co
+                        grvDiemThang.Columns["TIEN_DT_VS"].DisplayFormat.FormatType = FormatType.Numeric;
+                        grvDiemThang.Columns["TIEN_DT_VS"].DisplayFormat.FormatString = Commons.Modules.sSoLeTT;
+
+                        grvDiemThang.Columns["TIEN_GIO_NGHI"].DisplayFormat.FormatType = FormatType.Numeric;
+                        grvDiemThang.Columns["TIEN_GIO_NGHI"].DisplayFormat.FormatString = Commons.Modules.sSoLeTT;
+
+                        grvDiemThang.Columns["TIEN_VI_PHAM"].DisplayFormat.FormatType = FormatType.Numeric;
+                        grvDiemThang.Columns["TIEN_VI_PHAM"].DisplayFormat.FormatString = Commons.Modules.sSoLeTT;
+                    }
                     Commons.Modules.ObjSystems.MFormatCol(grvDiemThang, "TIEN_THUONG", Commons.Modules.iSoLeTT);
 
 
@@ -303,7 +330,7 @@ namespace Vs.TimeAttendance
             try
             {
                 Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBT, Commons.Modules.ObjSystems.ConvertDatatable(grvDiemThang), "");
-                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, Commons.Modules.KyHieuDV == "DM" ? "sPsaveTinhDiemThang_DM" : Commons.Modules.KyHieuDV == "NB" ? "sPsaveTinhDiemThang_NB" : "sPsaveTinhDiemThang", sBT, Convert.ToDateTime(cboThang.EditValue));
+                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, Commons.Modules.KyHieuDV == "DM" ? "sPsaveTinhDiemThang_DM" : Commons.Modules.KyHieuDV == "NB" ? "sPsaveTinhDiemThang_NB" : Commons.Modules.KyHieuDV == "NC" ? "sPsaveTinhDiemThang_NC" : "sPsaveTinhDiemThang", sBT, Convert.ToDateTime(cboThang.EditValue));
                 Commons.Modules.ObjSystems.XoaTable(sBT);
                 return true;
             }
@@ -345,13 +372,14 @@ namespace Vs.TimeAttendance
             {
                 //ItemForDateThang.Visibility = LayoutVisibility.Never;
                 DataTable dtthang = new DataTable();
-                string sSql = "SELECT disTINCT SUBSTRING(CONVERT(VARCHAR(10),THANG,103),4,2) as M, RIGHT(CONVERT(VARCHAR(10),THANG,103),4) AS Y ,RIGHT(CONVERT(VARCHAR(10),THANG,103),7) AS THANG FROM dbo.DIEM_THANG ORDER BY Y DESC , M DESC";
+                string sSql = "SELECT DISTINCT SUBSTRING(CONVERT(VARCHAR(10),THANG,103),4,2) as M, RIGHT(CONVERT(VARCHAR(10),THANG,103),4) AS Y ,RIGHT(CONVERT(VARCHAR(10),THANG,103),7) AS THANG, ISNULL(NGAY_CONG_CHUAN,208) NC_CHUAN FROM dbo.DIEM_THANG ORDER BY Y DESC , M DESC";
                 dtthang.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSql));
                 if (grdThang.DataSource == null)
                 {
                     Commons.Modules.ObjSystems.MLoadXtraGrid(grdThang, grvThang, dtthang, false, true, true, true, true, this.Name);
                     grvThang.Columns["M"].Visible = false;
                     grvThang.Columns["Y"].Visible = false;
+                    grvThang.Columns["NC_CHUAN"].Visible = false;
                 }
                 else
                 {

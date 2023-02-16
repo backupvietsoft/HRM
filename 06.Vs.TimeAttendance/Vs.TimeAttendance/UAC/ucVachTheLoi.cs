@@ -90,6 +90,8 @@ namespace Vs.TimeAttendance
                     enableButon(true);
                 }
             }
+
+            searchControl1.Client = grdCongNhan;
         }
         private void cboDV_EditValueChanged(object sender, EventArgs e)
         {
@@ -199,10 +201,11 @@ namespace Vs.TimeAttendance
                             cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
                             cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
                             //theo code cũ 
-                            cmd.Parameters.Add("@Dvi", SqlDbType.Int).Value = cboMSCN.EditValue;
-                            cmd.Parameters.Add("@XN", SqlDbType.Int).Value = datNgayDen.EditValue;
-                            cmd.Parameters.Add("@TO", SqlDbType.Int).Value = txtCN.EditValue;
-                            cmd.Parameters.Add("@NGAY", SqlDbType.DateTime).Value = Convert.ToDateTime(datNgayChamCong.EditValue).ToString("yyyy/MM/dd");
+                            cmd.Parameters.Add("@Dvi", SqlDbType.Int).Value = cboDV.EditValue;
+                            cmd.Parameters.Add("@XN", SqlDbType.Int).Value = cboXN.EditValue;
+                            cmd.Parameters.Add("@TO", SqlDbType.Int).Value = cboTo.EditValue;
+                            cmd.Parameters.Add("@TNGAY", SqlDbType.DateTime).Value = Convert.ToDateTime(datNgayChamCong.EditValue).ToString("yyyy/MM/dd");
+                            cmd.Parameters.Add("@DNGAY", SqlDbType.DateTime).Value = Convert.ToDateTime(datNgayChamCong.EditValue).ToString("yyyy/MM/dd");
                             cmd.CommandType = CommandType.StoredProcedure;
                             System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
 

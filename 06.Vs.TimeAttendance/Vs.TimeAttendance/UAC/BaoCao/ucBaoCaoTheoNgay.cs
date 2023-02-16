@@ -681,7 +681,7 @@ namespace Vs.TimeAttendance
             DataTable dt;
             System.Data.SqlClient.SqlConnection conn;
             dt = new DataTable();
-            frm.rpt = new rptDKLamThemGio_DM(lk_NgayIn.DateTime, LK_XI_NGHIEP.Text.ToString(),Convert.ToInt32(LK_DON_VI.EditValue));
+            frm.rpt = new rptDKLamThemGio_DM(lk_NgayIn.DateTime, LK_XI_NGHIEP.Text.ToString());
 
             try
             {

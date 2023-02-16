@@ -22,8 +22,6 @@ namespace Vs.Payroll
 {
     public partial class ucTinhLuong : DevExpress.XtraEditors.XtraUserControl
     {
-        private string sKyHieuDV = "";
-
         public static ucTinhLuong _instance;
         public int iLoaiTL = 1; // 1 tính lương công nhân, 2 tính lương nhân viên
         public static ucTinhLuong Instance
@@ -41,7 +39,9 @@ namespace Vs.Payroll
             InitializeComponent();
             Commons.Modules.ObjSystems.ThayDoiNN(this, new List<LayoutControlGroup>() { Root }, btnALL);
             Commons.Modules.sLoad = "0Load";
-            Commons.Modules.ObjSystems.LoadCboDonVi(cboDonVi);
+            DataTable dt = new DataTable();
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboDON_VI", Commons.Modules.UserName, Commons.Modules.TypeLanguage, 0));
+            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboDonVi, dt, "ID_DV", "TEN_DV", "TEN_DV");
             Commons.Modules.ObjSystems.LoadCboXiNghiep(cboDonVi, cboXiNghiep);
             Commons.Modules.ObjSystems.LoadCboTo(cboDonVi, cboXiNghiep, cboTo);
             Commons.Modules.sLoad = "";
@@ -52,16 +52,22 @@ namespace Vs.Payroll
             try
             {
                 EnableButon();
-                sKyHieuDV = Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString();
                 Commons.Modules.sLoad = "0Load";
                 LoadThang();
-                if (sKyHieuDV != "DM")
+                if (Commons.Modules.KyHieuDV != "DM")
                 {
                     LoadGrdGTGC();
                 }
                 else
                 {
-                    LoadGrdGTGC_DM();
+                    if (iLoaiTL == 1)
+                    {
+                        LoadGrdGTGC_DM();
+                    }
+                    else
+                    {
+                        LoadGrdGTGCNV_DM();
+                    }
                 }
                 txtNgayCongChuan.Text = getNgayCongChuan().ToString();
                 txtNgayCongLV.Text = getNgayCongChuan().ToString();
@@ -354,6 +360,135 @@ namespace Vs.Payroll
             //    grvData.Columns[i].DisplayFormat.FormatString = "N0";
             //}
         }
+        private void LoadGrdGTGCNV_DM() // load bảng lương nhân viên
+        {
+            try
+            {
+                DataTable dt = new DataTable();
+                DateTime Tngay = Convert.ToDateTime(cboThang.EditValue);
+                DateTime Dngay = Convert.ToDateTime(cboThang.EditValue).AddMonths(1).AddDays(-1);
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetBangLuongNV_DM", Commons.Modules.UserName, Commons.Modules.TypeLanguage, cboDonVi.EditValue, cboXiNghiep.EditValue, cboTo.EditValue, Tngay, Dngay, iLoaiTL));
+                if (grdData.DataSource == null)
+                {
+                    Commons.Modules.ObjSystems.MLoadXtraGrid(grdData, grvData, dt, false, false, false, true, true, "ucTinhLuongNV");
+                    grvData.Columns["ID_CN"].Visible = false;
+                    grvData.Columns["ID_CTL"].Visible = false;
+                    grvData.Columns["ID_TO"].Visible = false;
+                    grvData.Columns["MS_CN"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
+                    grvData.Columns["HO_TEN"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
+                    grvData.Columns["TEN_TO"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
+                    grvData.Columns["TEN_TT_HT"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
+                    grvData.Columns["TEN_LCV"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
+
+                    grvData.Columns["LUONG_HDLD"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["LUONG_HDLD"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["HTL_TRUOC_NGAY"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["HTL_TRUOC_NGAY"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["HTL_TU_NGAY"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["HTL_TU_NGAY"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["TONG_LCB_HTL"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["TONG_LCB_HTL"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["LUONG_NGAY_LVTT"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["LUONG_NGAY_LVTT"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["LUONG_NLVR_HL"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["LUONG_NLVR_HL"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["LUONG_PHEP_NAM"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["LUONG_PHEP_NAM"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["LUONG_CD"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["LUONG_CD"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["TONG_LUONG_TG_HC"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["TONG_LUONG_TG_HC"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["TONG_GIO_TC"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["TONG_GIO_TC"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["LUONG_LAM_THEM"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["LUONG_LAM_THEM"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["ATVSV"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["ATVSV"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["HO_TRO_AN"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["HO_TRO_AN"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["PC_CON_NHO"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["PC_CON_NHO"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["THUONG_CN_MOI"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["THUONG_CN_MOI"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["THUONG_HQ_NV"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["THUONG_HQ_NV"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["PC_QUA_DO"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["PC_QUA_DO"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["THANH_TIEN_HTL_TRUOC_NGAY"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["THANH_TIEN_HTL_TRUOC_NGAY"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["THANH_TIEN_HTL_TU_NGAY"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["THANH_TIEN_HTL_TU_NGAY"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["THUONG_HQ_QUAN_LY"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["THUONG_HQ_QUAN_LY"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["PC_KHAC"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["PC_KHAC"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["TONG_PHU_CAP"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["TONG_PHU_CAP"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["TL_TRUOC_GIAM_TRU"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["TL_TRUOC_GIAM_TRU"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["TIEN_BHXH"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["TIEN_BHXH"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["TIEN_BHYT"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["TIEN_BHYT"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["TIEN_BHTN"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["TIEN_BHTN"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["TONG_TIEN_BHXH"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["TONG_TIEN_BHXH"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["TN_CHIU_THUE"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["TN_CHIU_THUE"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["TIEN_LUONG_GIAM_TRU"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["TIEN_LUONG_GIAM_TRU"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["THUE_GIAM_TRU_TC"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["THUE_GIAM_TRU_TC"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["THU_NHAP_TINH_THUE"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["THU_NHAP_TINH_THUE"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["THUE_TNCN"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["THUE_TNCN"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["PHI_CONG_DOAN"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["PHI_CONG_DOAN"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["THU_BHYT"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["THU_BHYT"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["TRU_KHAC"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["TRU_KHAC"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["TONG_GIAM_TRU"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["TONG_GIAM_TRU"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["THU_NHAP_TRUOC_GT"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["THU_NHAP_TRUOC_GT"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["TL_THUC_NHAN"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["TL_THUC_NHAN"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["BHXH_CTY_TRA"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["BHXH_CTY_TRA"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["BHYT_CTY_TRA"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["BHYT_CTY_TRA"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["BHTNLD_CTY_TRA"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["BHTNLD_CTY_TRA"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["TONG_BH_CTY_TRA"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["TONG_BH_CTY_TRA"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["QUY_CONG_DOAN"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["QUY_CONG_DOAN"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["TL_CTY_TRA"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["TL_CTY_TRA"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["LUONG_THANG_13"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["LUONG_THANG_13"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["LCB"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["LCB"].DisplayFormat.FormatString = "N0";
+                }
+                else
+                {
+                    grdData.DataSource = dt;
+                }
+            }
+            catch
+            {
+
+            }
+            //for (int i = 6; i < grvData.Columns.Count; i++)
+            //{
+
+            //    grvData.Columns[i].DisplayFormat.FormatType = FormatType.Numeric;
+            //    grvData.Columns[i].DisplayFormat.FormatString = "N0";
+            //}
+        }
 
         public void LoadThang()
         {
@@ -363,13 +498,13 @@ namespace Vs.Payroll
                 string sSql = "";
                 //ItemForDateThang.Visibility = LayoutVisibility.Never;
                 DataTable dtthang = new DataTable();
-                if (sKyHieuDV == "DM")
+                if (Commons.Modules.KyHieuDV == "DM")
                 {
-                    sSql = "SELECT disTINCT SUBSTRING(CONVERT(VARCHAR(10),THANG,103),4,2) as M, RIGHT(CONVERT(VARCHAR(10),THANG,103),4) AS Y ,RIGHT(CONVERT(VARCHAR(10),THANG,103),7) AS THANG FROM dbo.BANG_LUONG_DM ORDER BY Y DESC , M DESC";
+                    sSql = "SELECT disTINCT SUBSTRING(CONVERT(VARCHAR(10),THANG,103),4,2) as M, RIGHT(CONVERT(VARCHAR(10),THANG,103),4) AS Y ,RIGHT(CONVERT(VARCHAR(10),THANG,103),7) AS THANG FROM dbo.BANG_LUONG_DM WHERE ID_DV = " + cboDonVi.EditValue + " ORDER BY Y DESC , M DESC";
                 }
                 else
                 {
-                    sSql = "SELECT disTINCT SUBSTRING(CONVERT(VARCHAR(10),THANG,103),4,2) as M, RIGHT(CONVERT(VARCHAR(10),THANG,103),4) AS Y ,RIGHT(CONVERT(VARCHAR(10),THANG,103),7) AS THANG FROM dbo.BANG_LUONG ORDER BY Y DESC , M DESC";
+                    sSql = "SELECT disTINCT SUBSTRING(CONVERT(VARCHAR(10),THANG,103),4,2) as M, RIGHT(CONVERT(VARCHAR(10),THANG,103),4) AS Y ,RIGHT(CONVERT(VARCHAR(10),THANG,103),7) AS THANG FROM dbo.BANG_LUONG WHERE ID_DV = " + cboDonVi.EditValue + " ORDER BY Y DESC , M DESC";
                 }
                 dtthang.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSql));
                 Commons.Modules.ObjSystems.MLoadXtraGrid(grdThang, grvThang1, dtthang, false, true, true, true, true, this.Name);
@@ -394,6 +529,7 @@ namespace Vs.Payroll
                 case "khoitao":
                     {
                         frmNhapDLKhoiTaoTLNV frm = new frmNhapDLKhoiTaoTLNV();
+                        frm.ID_DV = Convert.ToInt32(cboDonVi.EditValue);
                         if (frm.ShowDialog() == DialogResult.OK)
                         {
 
@@ -437,15 +573,31 @@ namespace Vs.Payroll
                             DateTime Tngay = Convert.ToDateTime(cboThang.EditValue);
                             DateTime Dngay = Convert.ToDateTime(cboThang.EditValue).AddMonths(1).AddDays(-1);
                             DataTable dt = new DataTable();
-                            SqlHelper.ExecuteReader(Commons.IConnections.CNStr, sKyHieuDV == "DM" ? "spGetTinhLuongThang_DM" : "spGetTinhLuongThang", Commons.Modules.UserName, Commons.Modules.TypeLanguage, cboDonVi.EditValue, cboXiNghiep.EditValue, cboTo.EditValue, Convert.ToInt32(txtNgayCongLV.EditValue), Convert.ToInt32(txtNgayCongChuan.EditValue), Tngay, Dngay, iLoaiTL);
-                            if (sKyHieuDV != "DM")
+                            if (iLoaiTL == 1) // tính lương công nhân
                             {
-                                LoadGrdGTGC();
+                                SqlHelper.ExecuteReader(Commons.IConnections.CNStr, Commons.Modules.KyHieuDV == "DM" ? "spGetTinhLuongThang_DM" : "spGetTinhLuongThang", Commons.Modules.UserName, Commons.Modules.TypeLanguage, cboDonVi.EditValue, cboXiNghiep.EditValue, cboTo.EditValue, Convert.ToInt32(txtNgayCongLV.EditValue), Convert.ToInt32(txtNgayCongChuan.EditValue), Tngay, Dngay, iLoaiTL);
+                                if (Commons.Modules.KyHieuDV != "DM")
+                                {
+                                    LoadGrdGTGC();
+                                }
+                                else
+                                {
+                                    LoadGrdGTGC_DM();
+                                }
                             }
-                            else
+                            else // tính lương nhân viên
                             {
-                                LoadGrdGTGC_DM();
+                                SqlHelper.ExecuteReader(Commons.IConnections.CNStr, Commons.Modules.KyHieuDV == "DM" ? "spGetTinhLuongThangNV_DM" : "spGetTinhLuongThang", Commons.Modules.UserName, Commons.Modules.TypeLanguage, cboDonVi.EditValue, cboXiNghiep.EditValue, cboTo.EditValue, Convert.ToInt32(txtNgayCongLV.EditValue), Convert.ToInt32(txtNgayCongChuan.EditValue), Tngay, Dngay, iLoaiTL);
+                                if (Commons.Modules.KyHieuDV != "DM")
+                                {
+                                    LoadGrdGTGC();
+                                }
+                                else
+                                {
+                                    LoadGrdGTGCNV_DM();
+                                }
                             }
+
                             this.Cursor = Cursors.Default;
                         }
                         catch
@@ -501,7 +653,7 @@ namespace Vs.Payroll
             //xóa
             try
             {
-                SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "XoaTinhLuongThang", cboDonVi.EditValue, cboXiNghiep.EditValue, cboTo.EditValue, Convert.ToDateTime(cboThang.EditValue), sKyHieuDV);
+                SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "XoaTinhLuongThang", cboDonVi.EditValue, cboXiNghiep.EditValue, cboTo.EditValue, Convert.ToDateTime(cboThang.EditValue), Commons.Modules.KyHieuDV);
                 grdData.DataSource = null;
 
             }
@@ -563,13 +715,20 @@ namespace Vs.Payroll
             Commons.Modules.sLoad = "0Load";
             txtNgayCongChuan.Text = getNgayCongChuan().ToString();
             txtNgayCongLV.Text = getNgayCongChuan().ToString();
-            if (sKyHieuDV != "DM")
+            if (Commons.Modules.KyHieuDV != "DM")
             {
                 LoadGrdGTGC();
             }
             else
             {
-                LoadGrdGTGC_DM();
+                if (iLoaiTL == 1)
+                {
+                    LoadGrdGTGC_DM();
+                }
+                else
+                {
+                    LoadGrdGTGCNV_DM();
+                }
             }
             //EnableButon(true);
             Commons.Modules.sLoad = "";
@@ -599,13 +758,20 @@ namespace Vs.Payroll
         {
             if (Commons.Modules.sLoad == "0Load") return;
             Commons.Modules.sLoad = "0Load";
-            if (sKyHieuDV != "DM")
+            if (Commons.Modules.KyHieuDV != "DM")
             {
                 LoadGrdGTGC();
             }
             else
             {
-                LoadGrdGTGC_DM();
+                if (iLoaiTL == 1)
+                {
+                    LoadGrdGTGC_DM();
+                }
+                else
+                {
+                    LoadGrdGTGCNV_DM();
+                }
             }
             //EnableButon(true);
             Commons.Modules.sLoad = "";
@@ -617,13 +783,20 @@ namespace Vs.Payroll
             Commons.Modules.sLoad = "0Load";
             Commons.Modules.ObjSystems.LoadCboXiNghiep(cboDonVi, cboXiNghiep);
             Commons.Modules.ObjSystems.LoadCboTo(cboDonVi, cboXiNghiep, cboTo);
-            if (sKyHieuDV != "DM")
+            if (Commons.Modules.KyHieuDV != "DM")
             {
                 LoadGrdGTGC();
             }
             else
             {
-                LoadGrdGTGC_DM();
+                if (iLoaiTL == 1)
+                {
+                    LoadGrdGTGC_DM();
+                }
+                else
+                {
+                    LoadGrdGTGCNV_DM();
+                }
             }
             //EnableButon(true);
             Commons.Modules.sLoad = "";
@@ -634,13 +807,20 @@ namespace Vs.Payroll
             if (Commons.Modules.sLoad == "0Load") return;
             Commons.Modules.sLoad = "0Load";
             Commons.Modules.ObjSystems.LoadCboTo(cboDonVi, cboXiNghiep, cboTo);
-            if (sKyHieuDV != "DM")
+            if (Commons.Modules.KyHieuDV != "DM")
             {
                 LoadGrdGTGC();
             }
             else
             {
-                LoadGrdGTGC_DM();
+                if (iLoaiTL == 1)
+                {
+                    LoadGrdGTGC_DM();
+                }
+                else
+                {
+                    LoadGrdGTGCNV_DM();
+                }
             }
             //EnableButon(true);
             Commons.Modules.sLoad = "";
@@ -674,13 +854,20 @@ namespace Vs.Payroll
         private void cboLoaiTinhLuong_EditValueChanged(object sender, EventArgs e)
         {
             if (Commons.Modules.sLoad == "0Load") return;
-            if (sKyHieuDV != "DM")
+            if (Commons.Modules.KyHieuDV != "DM")
             {
                 LoadGrdGTGC();
             }
             else
             {
-                LoadGrdGTGC_DM();
+                if (iLoaiTL == 1)
+                {
+                    LoadGrdGTGC_DM();
+                }
+                else
+                {
+                    LoadGrdGTGCNV_DM();
+                }
             }
         }
     }

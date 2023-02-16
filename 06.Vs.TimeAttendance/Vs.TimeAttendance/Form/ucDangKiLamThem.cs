@@ -24,8 +24,15 @@ namespace Vs.TimeAttendance
     public partial class ucDangKiLamThem : DevExpress.XtraEditors.XtraUserControl
     {
         private static bool isAdd = false;
-        private DateTime dGioBatDau;
-        private DateTime dGioKetThuc;
+        private DateTime dGioBatDau = new DateTime();
+        private DateTime dGioKetThuc = new DateTime();
+        private int iPhutBatDau = 0;
+        private int iPhutKetThuc = 0;
+        private int iPhutBatDauQuyDinh = 0;
+        private int iPhutKetThucQuyDinh = 0;
+        private int iPhutAnCa = 0;
+        private double dbGioTangCa = 0;
+
         public static ucDangKiLamThem _instance;
         public static ucDangKiLamThem Instance
         {
@@ -70,9 +77,7 @@ namespace Vs.TimeAttendance
 
             EnableButon();
             LoadNgay();
-            DataTable dt = new DataTable();
-            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboDON_VI", Commons.Modules.UserName, Commons.Modules.TypeLanguage, 0));
-            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboDonVi, dt, "ID_DV", "TEN_DV", "TEN_DV");
+            Commons.Modules.ObjSystems.LoadCboDonVi(cboDonVi);
             Commons.Modules.ObjSystems.LoadCboXiNghiep(cboDonVi, cboXiNghiep);
             Commons.Modules.ObjSystems.LoadCboTo(cboDonVi, cboXiNghiep, cboTo);
 
@@ -112,12 +117,18 @@ namespace Vs.TimeAttendance
 
                 grvLamThem.SetFocusedRowCellValue("GIO_BD", dataRow.Row["GIO_BD"]);
                 grvLamThem.SetFocusedRowCellValue("GIO_KT", dataRow.Row["GIO_KT"]);
+                grvLamThem.SetFocusedRowCellValue("PHUT_BD", dataRow.Row["PHUT_BD"]);
+                grvLamThem.SetFocusedRowCellValue("PHUT_KT", dataRow.Row["PHUT_KT"]);
+                grvLamThem.SetFocusedRowCellValue("PBD_QD", dataRow.Row["PHUT_BD"]);
+                grvLamThem.SetFocusedRowCellValue("PKT_QD", dataRow.Row["PHUT_KT"]);
                 grvLamThem.SetFocusedRowCellValue("ID_CDLV", dataRow.Row["ID_CDLV"].ToString());
 
-                dGioBatDau = new DateTime();
-                dGioKetThuc = new DateTime();
-                dGioBatDau = Convert.ToDateTime(dataRow.Row["GIO_BD"]);
-                dGioKetThuc = Convert.ToDateTime(dataRow.Row["GIO_KT"]);
+                //dGioBatDau = new DateTime();
+                //dGioKetThuc = new DateTime();
+                //dGioBatDau = Convert.ToDateTime(dataRow.Row["GIO_BD"]);
+                //dGioKetThuc = Convert.ToDateTime(dataRow.Row["GIO_KT"]);
+                //iPhutBatDau = Convert.ToInt32(dataRow.Row["PHUT_BD"]);
+                //iPhutKetThuc = Convert.ToInt32(dataRow.Row["PHUT_KT"]);
             }
             catch { }
         }
@@ -652,7 +663,7 @@ namespace Vs.TimeAttendance
                                     System.Data.SqlClient.SqlConnection conn;
                                     conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
                                     conn.Open();
-                                    System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spCapNhatNhomDKLT", conn);
+                                    System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand(Commons.Modules.KyHieuDV == "DM" ? "spCapNhatNhomDKLT" : Commons.Modules.KyHieuDV == "HN" ? "spCapNhatNhomDKLT" : "spCapNhatNhomDKLT_NB", conn);
                                     cmd.Parameters.Add("@sBTCapNhatNhom", SqlDbType.NVarChar, 50).Value = sBTCapNhatNhom;
                                     cmd.Parameters.Add("@sBTCongNhan", SqlDbType.NVarChar, 50).Value = sBTCongNhan;
                                     cmd.Parameters.Add("@sBTLamThem", SqlDbType.NVarChar, 50).Value = sBTLamThem;
@@ -661,12 +672,12 @@ namespace Vs.TimeAttendance
                                     System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
                                     DataSet ds = new DataSet();
                                     adp.Fill(ds);
-                                    dt = new DataTable();
-                                    dt = ds.Tables[0].Copy();
-                                    if (Convert.ToInt32(dt.Rows[0][0]) > 1)
-                                    {
-                                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgBanDaChon2CaKhacDeThucHien"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                    }
+                                    //dt = new DataTable();
+                                    //dt = ds.Tables[0].Copy();
+                                    //if (Convert.ToInt32(dt.Rows[0][0]) > 1)
+                                    //{
+                                    //    XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgBanDaChon2CaKhacDeThucHien"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    //}
 
                                     dt = new DataTable();
                                     dt = ds.Tables[1].Copy();
@@ -1235,39 +1246,40 @@ namespace Vs.TimeAttendance
 
         private void grvLamThem_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
         {
-            DateTime gioBD = new DateTime();
-            DateTime gioKT = new DateTime();
-            double phutBD = 0;
-            double phutKT = 0;
-            double phutAnCom = 0;
-            double gioTangCa = 0;
             GridView view = sender as GridView;
             try
             {
                 if (e.Column.FieldName == "ID_CDLV")
                 {
-                    gioBD = DateTime.Parse(view.GetFocusedRowCellValue("GIO_BD").ToString());
-                    gioKT = DateTime.Parse(view.GetFocusedRowCellValue("GIO_KT").ToString());
-                    phutAnCom = Convert.ToDouble(view.GetFocusedRowCellValue("PHUT_AN_CA").ToString() == "" ? 0 : Convert.ToDecimal(view.GetFocusedRowCellValue("PHUT_AN_CA")));
-                    view.SetRowCellValue(e.RowHandle, view.Columns["SO_GIO_TC"], ((gioKT.Hour * 60 + gioKT.Minute) - (gioBD.Hour * 60 + gioBD.Minute) - phutAnCom) / 60);
+                    dGioBatDau = DateTime.Parse(view.GetFocusedRowCellValue("GIO_BD").ToString());
+                    dGioKetThuc = DateTime.Parse(view.GetFocusedRowCellValue("GIO_KT").ToString());
+                    iPhutBatDau = view.GetFocusedRowCellValue("PHUT_BD") == DBNull.Value ? 0 : Convert.ToInt32(view.GetFocusedRowCellValue("PHUT_BD"));
+                    iPhutKetThuc = view.GetFocusedRowCellValue("PHUT_KT") == DBNull.Value ? 0 : Convert.ToInt32(view.GetFocusedRowCellValue("PHUT_KT"));
+                    iPhutAnCa = view.GetFocusedRowCellValue("PHUT_AN_CA") == DBNull.Value ? 0 : Convert.ToInt32(view.GetFocusedRowCellValue("PHUT_AN_CA"));
+                    dbGioTangCa =  Convert.ToDouble(iPhutKetThuc - (iPhutBatDau + iPhutAnCa)) / 60;
+                    view.SetRowCellValue(e.RowHandle, view.Columns["SO_GIO_TC"], dbGioTangCa);
                 }
                 if (e.Column.FieldName == "GIO_BD")
                 {
                     DataTable dt = new DataTable();
-                    if (DateTime.TryParse(view.GetFocusedRowCellValue("GIO_BD").ToString(), out gioBD))
+                    if (DateTime.TryParse(view.GetFocusedRowCellValue("GIO_BD").ToString(), out dGioBatDau))
                     {
-                        gioBD = DateTime.Parse(view.GetFocusedRowCellValue("GIO_BD").ToString());
-                        phutBD = gioBD.Hour * 60 + gioBD.Minute;
-                        view.SetFocusedRowCellValue("PHUT_BD", phutBD);
-                        view.SetRowCellValue(e.RowHandle, view.Columns["ID_CN"], grvCongNhan.GetFocusedRowCellValue("ID_CN").ToString());
-                        view.SetRowCellValue(e.RowHandle, view.Columns["NGAY"], Convert.ToDateTime(cboNgay.EditValue).ToString());
-
                         try
                         {
-                            gioKT = DateTime.Parse(view.GetFocusedRowCellValue("GIO_KT").ToString());
-                            phutAnCom = view.GetFocusedRowCellValue("PHUT_AN_CA") == DBNull.Value ? 0 : Convert.ToDouble(view.GetFocusedRowCellValue("PHUT_AN_CA"));
-                            gioTangCa = ((gioKT.Hour * 60 + gioKT.Minute) - (gioBD.Hour * 60 + gioBD.Minute) - phutAnCom) / 60;
-                            view.SetRowCellValue(e.RowHandle, view.Columns["SO_GIO_TC"], gioTangCa);
+                            dGioBatDau = DateTime.Parse(view.GetFocusedRowCellValue("GIO_BD").ToString());
+                            iPhutBatDau = dGioBatDau.Hour * 60 + dGioBatDau.Minute;
+                            iPhutKetThuc = view.GetFocusedRowCellValue("PHUT_KT") == DBNull.Value ? 0 : Convert.ToInt32(view.GetFocusedRowCellValue("PHUT_KT"));
+                            iPhutKetThucQuyDinh = view.GetFocusedRowCellValue("PKT_QD") == DBNull.Value ? 0 : Convert.ToInt32(view.GetFocusedRowCellValue("PKT_QD"));
+                            iPhutAnCa = view.GetFocusedRowCellValue("PHUT_AN_CA") == DBNull.Value ? 0 : Convert.ToInt32(view.GetFocusedRowCellValue("PHUT_AN_CA"));
+                            if (iPhutBatDau < iPhutKetThucQuyDinh - 1440)
+                            {
+                                iPhutBatDau = iPhutBatDau + 1440;
+                            }
+                            dbGioTangCa = Convert.ToDouble(iPhutKetThuc - (iPhutBatDau + iPhutAnCa)) / 60;
+                            view.SetRowCellValue(e.RowHandle, view.Columns["SO_GIO_TC"], dbGioTangCa);
+                            view.SetFocusedRowCellValue("PHUT_BD", iPhutBatDau);
+                            view.SetRowCellValue(e.RowHandle, view.Columns["ID_CN"], grvCongNhan.GetFocusedRowCellValue("ID_CN").ToString());
+                            view.SetRowCellValue(e.RowHandle, view.Columns["NGAY"], Convert.ToDateTime(cboNgay.EditValue).ToString());
                         }
                         catch { }
                     }
@@ -1277,37 +1289,37 @@ namespace Vs.TimeAttendance
                 {
                     try
                     {
-                        gioBD = DateTime.Parse(view.GetFocusedRowCellValue("GIO_BD").ToString());
-                        gioKT = DateTime.Parse(view.GetFocusedRowCellValue("GIO_KT").ToString());
-                        phutAnCom = view.GetFocusedRowCellValue("PHUT_AN_CA") == DBNull.Value ? 0 : Convert.ToDouble(view.GetFocusedRowCellValue("PHUT_AN_CA"));
-
-                        gioTangCa = ((gioKT.Hour * 60 + gioKT.Minute) - (gioBD.Hour * 60 + gioBD.Minute) - phutAnCom) / 60;
-                        view.SetRowCellValue(e.RowHandle, view.Columns["SO_GIO_TC"], gioTangCa);
+                        iPhutBatDau = view.GetFocusedRowCellValue("PHUT_BD") == DBNull.Value ? 0 : Convert.ToInt32(view.GetFocusedRowCellValue("PHUT_BD"));
+                        iPhutKetThuc = view.GetFocusedRowCellValue("PHUT_KT") == DBNull.Value ? 0 : Convert.ToInt32(view.GetFocusedRowCellValue("PHUT_KT"));
+                        iPhutAnCa = view.GetFocusedRowCellValue("PHUT_AN_CA") == DBNull.Value ? 0 : Convert.ToInt32(view.GetFocusedRowCellValue("PHUT_AN_CA"));
+                        dbGioTangCa = Convert.ToDouble(iPhutKetThuc - (iPhutBatDau + iPhutAnCa)) / 60;
+                        view.SetRowCellValue(e.RowHandle, view.Columns["SO_GIO_TC"], dbGioTangCa);
+                        
                     }
                     catch { }
                 }
                 if (e.Column.FieldName == "GIO_KT")
                 {
-                    if (DateTime.TryParse(view.GetFocusedRowCellValue("GIO_KT").ToString(), out gioKT))
+                    if (DateTime.TryParse(view.GetFocusedRowCellValue("GIO_KT").ToString(), out dGioKetThuc))
                     {
-                        gioKT = DateTime.Parse(view.GetFocusedRowCellValue("GIO_KT").ToString());
-                        phutKT = gioKT.Hour * 60 + gioKT.Minute;
-                        view.SetFocusedRowCellValue("PHUT_KT", phutKT);
-
                         try
                         {
-                            gioBD = DateTime.Parse(view.GetFocusedRowCellValue("GIO_BD").ToString());
-                            phutAnCom = view.GetFocusedRowCellValue("PHUT_AN_CA") == DBNull.Value ? 0 : Convert.ToDouble(view.GetFocusedRowCellValue("PHUT_AN_CA"));
-                            gioTangCa = ((gioKT.Hour * 60 + gioKT.Minute) - (gioBD.Hour * 60 + gioBD.Minute) - phutAnCom) / 60;
-                            view.SetRowCellValue(e.RowHandle, view.Columns["SO_GIO_TC"], gioTangCa);
+                            dGioKetThuc = DateTime.Parse(view.GetFocusedRowCellValue("GIO_KT").ToString());
+                            iPhutKetThuc = dGioKetThuc.Hour * 60 + dGioKetThuc.Minute;
+                            iPhutBatDau = view.GetFocusedRowCellValue("PHUT_BD") == DBNull.Value ? 0 : Convert.ToInt32(view.GetFocusedRowCellValue("PHUT_BD"));
+                            iPhutKetThucQuyDinh = view.GetFocusedRowCellValue("PKT_QD") == DBNull.Value ? 0 : Convert.ToInt32(view.GetFocusedRowCellValue("PKT_QD"));
+                            iPhutAnCa = view.GetFocusedRowCellValue("PHUT_AN_CA") == DBNull.Value ? 0 : Convert.ToInt32(view.GetFocusedRowCellValue("PHUT_AN_CA"));
+                            if (iPhutKetThuc < iPhutBatDau && iPhutKetThucQuyDinh > 1440) 
+                            {
+                                iPhutKetThuc = iPhutKetThuc + 1440;
+                            }
+                            dbGioTangCa = Convert.ToDouble(iPhutKetThuc - (iPhutBatDau + iPhutAnCa)) / 60;
+                            view.SetRowCellValue(e.RowHandle, view.Columns["SO_GIO_TC"], dbGioTangCa);
+                            view.SetFocusedRowCellValue("PHUT_KT", iPhutKetThuc);
                         }
                         catch { }
-
                     }
                 }
-
-
-
             }
             catch (Exception ex)
             {
@@ -1423,11 +1435,6 @@ namespace Vs.TimeAttendance
             e.ExceptionMode = DevExpress.XtraEditors.Controls.ExceptionMode.NoAction;
         }
 
-        private void grvLamThem_ValidatingEditor(object sender, BaseContainerValidateEditorEventArgs e)
-        {
-
-        }
-
         private void grvLamThem_ValidateRow(object sender, DevExpress.XtraGrid.Views.Base.ValidateRowEventArgs e)
         {
             try
@@ -1436,120 +1443,20 @@ namespace Vs.TimeAttendance
 
                 DevExpress.XtraGrid.Views.Grid.GridView View = (DevExpress.XtraGrid.Views.Grid.GridView)sender;
                 DevExpress.XtraGrid.Columns.GridColumn ID_CDLV = View.Columns["ID_CDLV"];
-                DevExpress.XtraGrid.Columns.GridColumn gioBD = View.Columns["GIO_BD"];
-                DevExpress.XtraGrid.Columns.GridColumn gioKT = View.Columns["GIO_KT"];
                 try
                 {
-                    if (View.FocusedColumn.Name.ToString() == "colGIO_BD")
+                    DataTable dtKT = new DataTable();
+                    dtKT = Commons.Modules.ObjSystems.ConvertDatatable(grvLamThem);
+                    string sCa = grvLamThem.GetFocusedRowCellValue("ID_CDLV").ToString();
+                    if (dtKT.AsEnumerable().Where(x => x.Field<string>("ID_CDLV").Trim().Equals(sCa)).CopyToDataTable().Rows.Count > 1)
                     {
-                        if (Convert.ToDateTime(grvLamThem.GetFocusedRowCellValue("GIO_BD")) > Convert.ToDateTime(grvLamThem.GetFocusedRowCellValue("GIO_KT")))
-                        {
-                            grvLamThem.SetColumnError(grvLamThem.Columns["GIO_BD"], "Giờ bắt đầu phải nhỏ hơn giờ kết thúc");
-                            e.Valid = false;
-                            View.SetColumnError(gioBD, "Giờ bắt đầu phải nhỏ hơn ngày kết thúc"); return;
-                        }
-
-                        if (Convert.ToDateTime(cboNgay.Text).DayOfWeek.ToString() != "Sunday" && Convert.ToDateTime(cboNgay.Text).DayOfWeek.ToString() != "Saturday")
-                        {
-                            DataTable dt = new DataTable();
-                            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT NGAY FROM dbo.NGAY_NGHI_LE"));
-                            try
-                            {
-                                if (dt.AsEnumerable().Where(x => x.Field<string>("NGAY").Trim().Equals(cboNgay.Text)).CopyToDataTable().Rows.Count > 1)
-                                {
-                                }
-                            }
-                            catch
-                            {
-                                try
-                                {
-                                    DateTime dGioBD = Convert.ToDateTime(grvLamThem.GetFocusedRowCellValue("GIO_BD"));
-                                    DateTime dGioKT = Convert.ToDateTime(grvLamThem.GetFocusedRowCellValue("GIO_KT"));
-                                    if (Convert.ToDateTime("01/01/1900 " + dGioBD.TimeOfDay.ToString()) < dGioBatDau || Convert.ToDateTime("01/01/1900 " + dGioBD.TimeOfDay.ToString()) > dGioKetThuc)
-                                    {
-                                        grvLamThem.SetColumnError(grvLamThem.Columns["GIO_BD"], "Giờ bắt đầu phải thuộc khoảng cho phép");
-                                        e.Valid = false;
-                                        View.SetColumnError(gioBD, "Giờ bắt đầu phải thuộc khoảng cho phép"); return;
-                                    }
-                                    if (Convert.ToDateTime("01/01/1900 " + dGioKT.TimeOfDay.ToString()) < dGioBatDau || Convert.ToDateTime("01/01/1900 " + dGioKT.TimeOfDay.ToString()) > dGioKetThuc)
-                                    {
-                                        grvLamThem.SetColumnError(grvLamThem.Columns["GIO_KT"], "Giờ kết thúc phải nằm trong khoảng cho phép");
-                                        e.Valid = false;
-                                        View.SetColumnError(gioKT, "Giờ kết thúc phải nằm trong khoảng cho phép"); return;
-                                    }
-                                }
-                                catch { }
-
-                            }
-
-                        }
-
-                    }
-                    if (View.FocusedColumn.Name.ToString() == "colGIO_KT")
-                    {
-                        if (Convert.ToDateTime(grvLamThem.GetFocusedRowCellValue("GIO_KT")) < Convert.ToDateTime(grvLamThem.GetFocusedRowCellValue("GIO_BD")))
-                        {
-                            grvLamThem.SetColumnError(grvLamThem.Columns["GIO_KT"], "Giờ kết thúc phải lớn hơn giờ bắt đầu");
-                            e.Valid = false;
-                            View.SetColumnError(gioKT, "Giờ kết thúc phải lớn hơn giờ bắt đầu"); return;
-                        }
-
-                        if (Convert.ToDateTime(cboNgay.Text).DayOfWeek.ToString() != "Sunday" && Convert.ToDateTime(cboNgay.Text).DayOfWeek.ToString() != "Saturday")
-                        {
-                            DataTable dt = new DataTable();
-                            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT NGAY FROM dbo.NGAY_NGHI_LE"));
-                            try
-                            {
-                                if (dt.AsEnumerable().Where(x => x.Field<string>("NGAY").Trim().Equals(cboNgay.Text)).CopyToDataTable().Rows.Count > 1)
-                                {
-                                }
-                            }
-                            catch
-                            {
-                                try
-                                {
-                                    DateTime dGioBD = Convert.ToDateTime(grvLamThem.GetFocusedRowCellValue("GIO_BD"));
-                                    DateTime dGioKT = Convert.ToDateTime(grvLamThem.GetFocusedRowCellValue("GIO_KT"));
-                                    if (Convert.ToDateTime("01/01/1900 " + dGioBD.TimeOfDay.ToString()) < dGioBatDau || Convert.ToDateTime("01/01/1900 " + dGioBD.TimeOfDay.ToString()) > dGioKetThuc)
-                                    {
-                                        grvLamThem.SetColumnError(grvLamThem.Columns["GIO_BD"], "Giờ bắt đầu phải thuộc khoảng cho phép");
-                                        e.Valid = false;
-                                        View.SetColumnError(gioBD, "Giờ bắt đầu phải thuộc khoảng cho phép"); return;
-                                    }
-                                    if (Convert.ToDateTime("01/01/1900 " + dGioKT.TimeOfDay.ToString()) < dGioBatDau || Convert.ToDateTime("01/01/1900 " + dGioKT.TimeOfDay.ToString()) > dGioKetThuc)
-                                    {
-                                        grvLamThem.SetColumnError(grvLamThem.Columns["GIO_KT"], "Giờ kết thúc phải nằm trong khoảng cho phép");
-                                        e.Valid = false;
-                                        View.SetColumnError(gioKT, "Giờ kết thúc phải nằm trong khoảng cho phép"); return;
-                                    }
-                                }
-                                catch { }
-
-                            }
-
-                        }
-                    }
-
-                    if (View.FocusedColumn.Name.ToString() == "colID_CDLV")
-                    {
-                        DataTable dt = new DataTable();
-                        dt = Commons.Modules.ObjSystems.ConvertDatatable(grvLamThem);
-                        string sCa = grvLamThem.GetFocusedRowCellValue("ID_CDLV").ToString();
-                        if (dt.AsEnumerable().Where(x => x.Field<string>("ID_CDLV").Trim().Equals(sCa)).CopyToDataTable().Rows.Count > 1)
-                        {
-                            //string sTenKTra = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgTrungDLLuoi");
-                            string sTenKTra = "Trùng dữ liệu";
-                            grvLamThem.SetColumnError(grvLamThem.Columns["ID_CDLV"], sTenKTra);
-                            e.Valid = false;
-                            View.SetColumnError(ID_CDLV, "Trùng dữ liệu"); return;
-                            //dr.SetColumnError(sCot, sTenKTra);
-                        }
+                        string sTenKTra = "Trùng dữ liệu";
+                        grvLamThem.SetColumnError(grvLamThem.Columns["ID_CDLV"], sTenKTra);
+                        e.Valid = false;
+                        View.SetColumnError(ID_CDLV, "Trùng dữ liệu"); return;
                     }
                 }
                 catch { }
-
-
-
             }
             catch (Exception ex) { }
         }
@@ -1591,6 +1498,7 @@ namespace Vs.TimeAttendance
             }
             catch { }
         }
+
         public bool KiemTrungDL(GridView grvData, DataTable dt, DataRow dr, string sCot, string sDLKiem, string tabName, string ColName, string sform)
         {
             string sTenKTra = Commons.Modules.ObjLanguages.GetLanguage(sform, "msgTrungDL");
@@ -1620,6 +1528,7 @@ namespace Vs.TimeAttendance
                 return false;
             }
         }
+
         private bool KiemTraLuoi(DataTable dtSource)
         {
             int errorCount = 0;
@@ -1659,6 +1568,101 @@ namespace Vs.TimeAttendance
                 this.Cursor = Cursors.Default;
                 return true;
             }
+        }
+
+        private void grvLamThem_ValidatingEditor(object sender, BaseContainerValidateEditorEventArgs e)
+        {
+            var view = sender as GridView;
+            int iRes = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT [dbo].[fnKiemTraNgayNghi]('" + Convert.ToDateTime(cboNgay.Text).ToString("MM/dd/yyyy") + "')"));
+            if (view != null && view.FocusedColumn.FieldName == "GIO_BD")
+            {
+                var focusedRowHandle = view.FocusedRowHandle;
+                var focusedColumn = view.FocusedColumn;
+                var edit = (TextEdit)view.ActiveEditor;
+
+                DateTime.TryParse(e.Value.ToString(), out dGioBatDau);
+                Int32.TryParse(view.GetFocusedRowCellValue("PBD_QD").ToString(), out iPhutBatDauQuyDinh);
+                Int32.TryParse(view.GetFocusedRowCellValue("PHUT_KT").ToString(), out iPhutKetThuc);
+
+                iPhutBatDau = dGioBatDau.Hour * 60 + dGioBatDau.Minute;
+                if (iPhutBatDau < iPhutBatDauQuyDinh && iPhutKetThucQuyDinh > 1440)
+                {
+                    iPhutBatDau = iPhutBatDau + 1440;
+                }
+
+                if (iPhutBatDau < iPhutBatDauQuyDinh && iRes == 0)
+                {
+                    e.Value = edit.OldEditValue;
+                    e.Valid = false;
+                    MessageBox.Show("Giờ bắt đầu phải nằm trong khoảng cho phép");
+                    BeginInvoke(new Action(() => {
+                        view.ShowEditor();
+                    }));
+                }
+                if (iPhutBatDau > iPhutKetThuc)
+                {
+                    e.Value = edit.OldEditValue;
+                    e.Valid = false;
+                    MessageBox.Show("Giờ bắt đầu phải nhỏ hơn giờ kết thúc","Error");
+                    BeginInvoke(new Action(() => {
+                        view.ShowEditor();
+                    }));
+                }
+            }
+            if (view != null && view.FocusedColumn.FieldName == "GIO_KT")
+            {
+                var focusedRowHandle = view.FocusedRowHandle;
+                var focusedColumn = view.FocusedColumn;
+                var edit = (TextEdit)view.ActiveEditor;
+
+                DateTime.TryParse(e.Value.ToString(), out dGioKetThuc);
+                iPhutKetThuc = dGioKetThuc.Hour * 60 + dGioKetThuc.Minute;
+                Int32.TryParse(view.GetFocusedRowCellValue("PKT_QD").ToString(), out iPhutKetThucQuyDinh);
+                Int32.TryParse(view.GetFocusedRowCellValue("PHUT_BD").ToString(), out iPhutBatDau);
+
+                if (iPhutKetThuc > iPhutKetThucQuyDinh && iRes == 0)
+                {
+                    e.Value = edit.OldEditValue;
+                    e.Valid = false;
+                    MessageBox.Show("Giờ kết thúc phải nằm trong khoảng cho phép");
+                    BeginInvoke(new Action(() => {
+                        view.ShowEditor();
+                    }));
+                }
+                if (iPhutKetThuc < iPhutBatDau && iPhutKetThucQuyDinh > 1440)
+                {
+                    iPhutKetThuc = iPhutKetThuc + 1440;
+                }
+                if (iPhutKetThuc < iPhutBatDau)
+                {
+                    e.Value = edit.OldEditValue;
+                    e.Valid = false;
+                    MessageBox.Show("Giờ giờ kết thúc phải lớn hơn giờ bắt đầu", "Error");
+                    BeginInvoke(new Action(() => {
+                        view.ShowEditor();
+                    }));
+                }
+            }           
+        }
+
+        private void searchControl_EditValueChanged(object sender, EventArgs e)
+        {
+            DataTable dtTmp = new DataTable();
+            dtTmp = (DataTable)grdCongNhan.DataSource;
+            //dtTmp = Commons.Modules.ObjSystems.ConvertDatatable(grvTo);
+            String sMSCN;
+            try
+            {
+                string sDK = "";
+                sMSCN = "";
+                sDK = "MS_CN_INT = '" + Convert.ToInt32(searchControl.EditValue) + "'";
+                dtTmp.DefaultView.RowFilter = sDK;
+            }
+            catch (Exception ex)
+            {
+                dtTmp.DefaultView.RowFilter = "";
+            }
+            grvCongNhan_FocusedRowChanged(null, null);
         }
     }
 }

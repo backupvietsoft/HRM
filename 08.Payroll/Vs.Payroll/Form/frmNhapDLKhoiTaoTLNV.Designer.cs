@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions11 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions12 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions13 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions14 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions16 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions17 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions18 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions19 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmNhapDLKhoiTaoTLNV));
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions15 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions20 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
             this.dataLayoutControl1 = new DevExpress.XtraDataLayout.DataLayoutControl();
             this.cboThangADTGD = new Commons.MPopupContainerEdit();
             this.popListNgay = new DevExpress.XtraEditors.PopupContainerControl();
@@ -60,10 +60,6 @@
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.tabControl = new DevExpress.XtraLayout.TabbedControlGroup();
-            this.tabThuongGiamDocNhaMay = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.lblThangADThuongGDNM = new DevExpress.XtraLayout.LayoutControlItem();
-            this.emptySpaceItem6 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.tabPhanBoLuong = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.ItemForThang = new DevExpress.XtraLayout.LayoutControlItem();
@@ -78,6 +74,10 @@
             this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
             this.lblNgayADTruLuong = new DevExpress.XtraLayout.LayoutControlItem();
             this.emptySpaceItem5 = new DevExpress.XtraLayout.EmptySpaceItem();
+            this.tabThuongGiamDocNhaMay = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.lblThangADThuongGDNM = new DevExpress.XtraLayout.LayoutControlItem();
+            this.emptySpaceItem6 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -108,10 +108,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tabThuongGiamDocNhaMay)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lblThangADThuongGDNM)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabPhanBoLuong)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForThang)).BeginInit();
@@ -126,6 +122,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblNgayADTruLuong)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tabThuongGiamDocNhaMay)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lblThangADThuongGDNM)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
@@ -168,6 +168,7 @@
             this.cboThangADTGD.Size = new System.Drawing.Size(125, 24);
             this.cboThangADTGD.StyleController = this.dataLayoutControl1;
             this.cboThangADTGD.TabIndex = 32;
+            this.cboThangADTGD.EditValueChanged += new System.EventHandler(this.cboThang_EditValueChanged);
             // 
             // popListNgay
             // 
@@ -274,19 +275,19 @@
             this.windowsUIButton.AppearanceButton.Pressed.Options.UseFont = true;
             this.windowsUIButton.AppearanceButton.Pressed.Options.UseImage = true;
             this.windowsUIButton.AppearanceButton.Pressed.Options.UseTextOptions = true;
-            windowsUIButtonImageOptions11.ImageUri.Uri = "Edit";
-            windowsUIButtonImageOptions12.ImageUri.Uri = "snap/snapdeletelist";
-            windowsUIButtonImageOptions13.ImageUri.Uri = "richedit/clearheaderandfooter";
-            windowsUIButtonImageOptions14.ImageUri.Uri = "Print";
-            windowsUIButtonImageOptions14.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("windowsUIButtonImageOptions14.SvgImage")));
-            windowsUIButtonImageOptions15.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("windowsUIButtonImageOptions15.SvgImage")));
+            windowsUIButtonImageOptions16.ImageUri.Uri = "Edit";
+            windowsUIButtonImageOptions17.ImageUri.Uri = "snap/snapdeletelist";
+            windowsUIButtonImageOptions18.ImageUri.Uri = "richedit/clearheaderandfooter";
+            windowsUIButtonImageOptions19.ImageUri.Uri = "Print";
+            windowsUIButtonImageOptions19.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("windowsUIButtonImageOptions19.SvgImage")));
+            windowsUIButtonImageOptions20.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("windowsUIButtonImageOptions20.SvgImage")));
             this.windowsUIButton.Buttons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] {
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions11, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "themsua", -1, false),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions12, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "xoa", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions16, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "themsua", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions17, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "xoa", -1, false),
             new DevExpress.XtraBars.Docking2010.WindowsUISeparator(),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions13, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "thoat", -1, false),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions14, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "luu", -1, false),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions15, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "khongluu", -1, false)});
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions18, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "thoat", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions19, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "luu", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions20, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "khongluu", -1, false)});
             this.windowsUIButton.ContentAlignment = System.Drawing.ContentAlignment.MiddleRight;
             this.windowsUIButton.Controls.Add(this.searchControl1);
             this.windowsUIButton.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -388,6 +389,9 @@
             this.grvPTTruLuong.OptionsSelection.MultiSelect = true;
             this.grvPTTruLuong.OptionsView.ShowGroupPanel = false;
             this.grvPTTruLuong.InitNewRow += new DevExpress.XtraGrid.Views.Grid.InitNewRowEventHandler(this.grvPTTruLuong_InitNewRow);
+            this.grvPTTruLuong.InvalidRowException += new DevExpress.XtraGrid.Views.Base.InvalidRowExceptionEventHandler(this.grvPTTruLuong_InvalidRowException);
+            this.grvPTTruLuong.ValidateRow += new DevExpress.XtraGrid.Views.Base.ValidateRowEventHandler(this.grvPTTruLuong_ValidateRow);
+            this.grvPTTruLuong.InvalidValueException += new DevExpress.XtraEditors.Controls.InvalidValueExceptionEventHandler(this.grvPTTruLuong_InvalidValueException);
             // 
             // grdTGDNM
             // 
@@ -459,44 +463,6 @@
             this.tabThuongGiamDocNhaMay});
             this.tabControl.SelectedPageChanged += new DevExpress.XtraLayout.LayoutTabPageChangedEventHandler(this.tabControl_SelectedPageChanged);
             this.tabControl.SelectedPageChanging += new DevExpress.XtraLayout.LayoutTabPageChangingEventHandler(this.tabControl_SelectedPageChanging);
-            // 
-            // tabThuongGiamDocNhaMay
-            // 
-            this.tabThuongGiamDocNhaMay.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlItem5,
-            this.lblThangADThuongGDNM,
-            this.emptySpaceItem6});
-            this.tabThuongGiamDocNhaMay.Location = new System.Drawing.Point(0, 0);
-            this.tabThuongGiamDocNhaMay.Name = "tabThuongGiamDocNhaMay";
-            this.tabThuongGiamDocNhaMay.Size = new System.Drawing.Size(856, 433);
-            // 
-            // layoutControlItem5
-            // 
-            this.layoutControlItem5.Control = this.grdTGDNM;
-            this.layoutControlItem5.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
-            this.layoutControlItem5.CustomizationFormText = "layoutControlItem2";
-            this.layoutControlItem5.Location = new System.Drawing.Point(0, 28);
-            this.layoutControlItem5.Name = "layoutControlItem5";
-            this.layoutControlItem5.Size = new System.Drawing.Size(856, 405);
-            this.layoutControlItem5.Text = "layoutControlItem2";
-            this.layoutControlItem5.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem5.TextVisible = false;
-            // 
-            // lblThangADThuongGDNM
-            // 
-            this.lblThangADThuongGDNM.Control = this.cboThangADTGD;
-            this.lblThangADThuongGDNM.Location = new System.Drawing.Point(0, 0);
-            this.lblThangADThuongGDNM.Name = "lblThangADThuongGDNM";
-            this.lblThangADThuongGDNM.Size = new System.Drawing.Size(284, 28);
-            this.lblThangADThuongGDNM.TextSize = new System.Drawing.Size(151, 17);
-            // 
-            // emptySpaceItem6
-            // 
-            this.emptySpaceItem6.AllowHotTrack = false;
-            this.emptySpaceItem6.Location = new System.Drawing.Point(284, 0);
-            this.emptySpaceItem6.Name = "emptySpaceItem6";
-            this.emptySpaceItem6.Size = new System.Drawing.Size(572, 28);
-            this.emptySpaceItem6.TextSize = new System.Drawing.Size(0, 0);
             // 
             // tabPhanBoLuong
             // 
@@ -644,6 +610,44 @@
             this.emptySpaceItem5.Size = new System.Drawing.Size(572, 28);
             this.emptySpaceItem5.TextSize = new System.Drawing.Size(0, 0);
             // 
+            // tabThuongGiamDocNhaMay
+            // 
+            this.tabThuongGiamDocNhaMay.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItem5,
+            this.lblThangADThuongGDNM,
+            this.emptySpaceItem6});
+            this.tabThuongGiamDocNhaMay.Location = new System.Drawing.Point(0, 0);
+            this.tabThuongGiamDocNhaMay.Name = "tabThuongGiamDocNhaMay";
+            this.tabThuongGiamDocNhaMay.Size = new System.Drawing.Size(856, 433);
+            // 
+            // layoutControlItem5
+            // 
+            this.layoutControlItem5.Control = this.grdTGDNM;
+            this.layoutControlItem5.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
+            this.layoutControlItem5.CustomizationFormText = "layoutControlItem2";
+            this.layoutControlItem5.Location = new System.Drawing.Point(0, 28);
+            this.layoutControlItem5.Name = "layoutControlItem5";
+            this.layoutControlItem5.Size = new System.Drawing.Size(856, 405);
+            this.layoutControlItem5.Text = "layoutControlItem2";
+            this.layoutControlItem5.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem5.TextVisible = false;
+            // 
+            // lblThangADThuongGDNM
+            // 
+            this.lblThangADThuongGDNM.Control = this.cboThangADTGD;
+            this.lblThangADThuongGDNM.Location = new System.Drawing.Point(0, 0);
+            this.lblThangADThuongGDNM.Name = "lblThangADThuongGDNM";
+            this.lblThangADThuongGDNM.Size = new System.Drawing.Size(284, 28);
+            this.lblThangADThuongGDNM.TextSize = new System.Drawing.Size(151, 17);
+            // 
+            // emptySpaceItem6
+            // 
+            this.emptySpaceItem6.AllowHotTrack = false;
+            this.emptySpaceItem6.Location = new System.Drawing.Point(284, 0);
+            this.emptySpaceItem6.Name = "emptySpaceItem6";
+            this.emptySpaceItem6.Size = new System.Drawing.Size(572, 28);
+            this.emptySpaceItem6.TextSize = new System.Drawing.Size(0, 0);
+            // 
             // emptySpaceItem1
             // 
             this.emptySpaceItem1.AllowHotTrack = false;
@@ -717,10 +721,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tabThuongGiamDocNhaMay)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lblThangADThuongGDNM)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabPhanBoLuong)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForThang)).EndInit();
@@ -735,6 +735,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblNgayADTruLuong)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tabThuongGiamDocNhaMay)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lblThangADThuongGDNM)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);

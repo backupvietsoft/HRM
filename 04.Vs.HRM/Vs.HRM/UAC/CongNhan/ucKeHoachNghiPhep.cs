@@ -597,6 +597,7 @@ namespace Vs.HRM
                             }
                             UpdateTinhTrangNghiPhep(-1);
                             LoadGrdCongNhan(false);
+                            LoadGrdKHNP();
                             grvDSCN_FocusedRowChanged(null, null);
                             Commons.Modules.ObjSystems.DeleteAddRow(grvKHNP);
                             enableButon(true);

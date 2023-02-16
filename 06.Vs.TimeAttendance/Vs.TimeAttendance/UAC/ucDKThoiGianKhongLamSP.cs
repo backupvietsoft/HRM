@@ -84,7 +84,6 @@ namespace Vs.TimeAttendance
                 dt.Columns["TG_HC"].ReadOnly = false;
                 dt.Columns["TG_TC_NT"].ReadOnly = false;
                 dt.Columns["TG_TC_CN"].ReadOnly = false;
-                dt.Columns["TG_TC_NL"].ReadOnly = false;
                 if (grdData.DataSource == null)
                 {
                     Commons.Modules.ObjSystems.MLoadXtraGrid(grdData, grvData, dt, isAdd ? true : false, true, false, true, true, this.Name);
@@ -110,7 +109,6 @@ namespace Vs.TimeAttendance
                     grvData.Columns["TG_HC"].ColumnEdit = txtEdit;
                     grvData.Columns["TG_TC_NT"].ColumnEdit = txtEdit;
                     grvData.Columns["TG_TC_CN"].ColumnEdit = txtEdit;
-                    grvData.Columns["TG_TC_NL"].ColumnEdit = txtEdit;
                 }
                 else
                 {
@@ -431,12 +429,6 @@ namespace Vs.TimeAttendance
                             break;
                         }
                     case 13:
-                        {
-                            sTenCot = "TG_TC_NL";
-                            table.Columns.Add(sTenCot.Trim(), typeof(float));
-                            break;
-                        }
-                    case 14:
                         {
                             sTenCot = "GHI_CHU";
                             table.Columns.Add(sTenCot.Trim(), typeof(string));
@@ -852,15 +844,9 @@ namespace Vs.TimeAttendance
                     errorCount++;
                 }
 
-                if (!KiemDuLieuSo(grvData, dr, "TG_TC_NL", grvData.Columns["TG_TC_NL"].FieldName.ToString(), 0, 0, false, this.Name))
-                {
-                    errorCount++;
-                }
-
                 Double dTG_HC = Convert.ToDouble(dr[grvData.Columns["TG_HC"].FieldName.ToString()]);
                 Double dTG_TC_NT = Convert.ToDouble(dr[grvData.Columns["TG_TC_NT"].FieldName.ToString()]);
                 Double dTG_TC_CN = Convert.ToDouble(dr[grvData.Columns["TG_TC_CN"].FieldName.ToString()]);
-                Double dTG_TC_NL = Convert.ToDouble(dr[grvData.Columns["TG_TC_NL"].FieldName.ToString()]);
                 Double dCOT_1 = Convert.ToDouble(dr[grvData.Columns["COT_1"].FieldName.ToString()]);
                 Double dCOT_2 = Convert.ToDouble(dr[grvData.Columns["COT_2"].FieldName.ToString()]);
                 Double dCOT_3 = Convert.ToDouble(dr[grvData.Columns["COT_3"].FieldName.ToString()]);
@@ -869,7 +855,7 @@ namespace Vs.TimeAttendance
                 Double dCOT_6 = Convert.ToDouble(dr[grvData.Columns["COT_6"].FieldName.ToString()]);
                 Double dCOT_7 = Convert.ToDouble(dr[grvData.Columns["COT_7"].FieldName.ToString()]);
 
-                Double dTong3Cot = dTG_HC + dTG_TC_NT + dTG_TC_CN + dTG_TC_NL;
+                Double dTong3Cot = dTG_HC + dTG_TC_NT + dTG_TC_CN;
                 Double dTong7Cot = dCOT_1 + dCOT_2 + dCOT_3 + dCOT_4 + dCOT_5 + dCOT_6 + dCOT_7;
                 if (dTong3Cot != dTong7Cot)
                 {
@@ -877,7 +863,6 @@ namespace Vs.TimeAttendance
                     dr.SetColumnError("TG_HC", Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgGioLamViecKhongCan"));
                     dr.SetColumnError("TG_TC_NT", Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgGioLamViecKhongCan"));
                     dr.SetColumnError("TG_TC_CN", Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgGioLamViecKhongCan"));
-                    dr.SetColumnError("TG_TC_NL", Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgGioLamViecKhongCan"));
                     dr.SetColumnError("COT_1", Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgGioLamViecKhongCan"));
                     dr.SetColumnError("COT_2", Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgGioLamViecKhongCan"));
                     dr.SetColumnError("COT_3", Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgGioLamViecKhongCan"));

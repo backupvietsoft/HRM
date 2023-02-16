@@ -90,11 +90,10 @@ namespace Vs.TimeAttendance
                                                     cboNhomChamCong.EditValue, Commons.Modules.UserName, Commons.Modules.TypeLanguage));
                     dt.Columns["GIO_BD"].ReadOnly = false;
                     dt.Columns["GIO_KT"].ReadOnly = false;
-                    dt.Columns["ID_CDLV"].ReadOnly = false;
                     Commons.Modules.ObjSystems.MLoadXtraGrid(grdData, grvData, dt, false, false, false, true, true, this.Name);
 
-                    grvData.Columns["TRU_DAU_GIO"].ColumnEdit = txtEdit;
-                    grvData.Columns["TRU_CUOI_GIO"].ColumnEdit = txtEdit;
+                    //grvData.Columns["TRU_DAU_GIO"].ColumnEdit = txtEdit;
+                    //grvData.Columns["TRU_CUOI_GIO"].ColumnEdit = txtEdit;
                     grvData.Columns["HE_SO_NGAY_THUONG"].ColumnEdit = txtEdit;
                     grvData.Columns["HE_SO_NGAY_CN"].ColumnEdit = txtEdit;
                     grvData.Columns["HE_SO_NGAY_LE"].ColumnEdit = txtEdit;
@@ -266,7 +265,6 @@ namespace Vs.TimeAttendance
                 view.SetFocusedRowCellValue("CA_NGAY_HOM_SAU", false);
                 view.SetFocusedRowCellValue("KIEM_TRA", false);
                 view.SetFocusedRowCellValue("CHE_DO", false);
-                view.SetFocusedRowCellValue("ID_CDLV", 0);
             }
             catch (Exception ex)
             {

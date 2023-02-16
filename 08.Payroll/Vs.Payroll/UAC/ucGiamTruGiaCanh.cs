@@ -18,6 +18,7 @@ using DevExpress.XtraEditors.Mask;
 using DevExpress.XtraLayout;
 using DevExpress.Utils;
 using DevExpress.Utils.Menu;
+using static NPOI.HSSF.Util.HSSFColor;
 
 namespace Vs.Payroll
 {
@@ -248,8 +249,14 @@ namespace Vs.Payroll
 
         private void grvData_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
         {
-            GridView view = sender as GridView;
-
+            try
+            {
+                if (e.Column.FieldName == "SN_GTGC")
+                {
+                    grvData.SetFocusedRowCellValue("SO_TIEN", (Convert.ToDouble(e.Value) * Convert.ToDouble(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.funGetMucGiamTru(" + grvData.GetFocusedRowCellValue("ID_CN") + ",'" + Commons.Modules.ObjSystems.ConvertDateTime(cboThang.Text) + "')"))));
+                }
+            }
+            catch { }
         }
 
 
@@ -357,7 +364,7 @@ namespace Vs.Payroll
                 dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spUpdateSO_TIEN", sBTCongNhan, sCotCN, Convert.ToDouble(grvData.GetFocusedRowCellValue("SO_TIEN"))));
                 grdData.DataSource = dt;
             }
-            catch  { }
+            catch { }
         }
 
         private void grvData_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)

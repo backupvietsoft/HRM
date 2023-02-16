@@ -48,7 +48,6 @@
             this.grvDKNP = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.groupDSCongNhan = new DevExpress.XtraEditors.GroupControl();
             this.tablePanel1 = new DevExpress.Utils.Layout.TablePanel();
-            this.rdo_TinhTrang = new DevExpress.XtraEditors.RadioGroup();
             this.ItemForSumNhanVien = new DevExpress.XtraEditors.LabelControl();
             this.cboSearch_TO = new DevExpress.XtraEditors.SearchLookUpEdit();
             this.cboSearch_TOView = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -89,7 +88,6 @@
             this.groupDSCongNhan.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).BeginInit();
             this.tablePanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.rdo_TinhTrang.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboSearch_TO.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboSearch_TOView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboSearch_XN.Properties)).BeginInit();
@@ -167,11 +165,11 @@
             // 
             this.tablePanel1.SetColumn(this.grdDSCN, 0);
             this.grdDSCN.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.grdDSCN.Location = new System.Drawing.Point(3, 62);
+            this.grdDSCN.Location = new System.Drawing.Point(3, 26);
             this.grdDSCN.MainView = this.grvDSCN;
             this.grdDSCN.Name = "grdDSCN";
-            this.tablePanel1.SetRow(this.grdDSCN, 2);
-            this.grdDSCN.Size = new System.Drawing.Size(296, 605);
+            this.tablePanel1.SetRow(this.grdDSCN, 1);
+            this.grdDSCN.Size = new System.Drawing.Size(171, 641);
             this.grdDSCN.TabIndex = 0;
             this.grdDSCN.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grvDSCN});
@@ -234,9 +232,9 @@
             // groupKHNghiPhep
             // 
             this.groupKHNghiPhep.Controls.Add(this.navigationFrame1);
-            this.groupKHNghiPhep.Location = new System.Drawing.Point(324, 58);
+            this.groupKHNghiPhep.Location = new System.Drawing.Point(199, 58);
             this.groupKHNghiPhep.Name = "groupKHNghiPhep";
-            this.groupKHNghiPhep.Size = new System.Drawing.Size(604, 693);
+            this.groupKHNghiPhep.Size = new System.Drawing.Size(729, 693);
             this.groupKHNghiPhep.TabIndex = 9;
             this.groupKHNghiPhep.Text = "Kế hoạch nghĩ phép";
             // 
@@ -249,7 +247,7 @@
             this.navigationFrame1.Pages.AddRange(new DevExpress.XtraBars.Navigation.NavigationPageBase[] {
             this.navigationPage1});
             this.navigationFrame1.SelectedPage = this.navigationPage1;
-            this.navigationFrame1.Size = new System.Drawing.Size(600, 670);
+            this.navigationFrame1.Size = new System.Drawing.Size(725, 670);
             this.navigationFrame1.TabIndex = 3;
             this.navigationFrame1.Text = "navigationFrame1";
             // 
@@ -258,7 +256,7 @@
             this.navigationPage1.Caption = "navigationPage1";
             this.navigationPage1.Controls.Add(this.tablePanel2);
             this.navigationPage1.Name = "navigationPage1";
-            this.navigationPage1.Size = new System.Drawing.Size(600, 670);
+            this.navigationPage1.Size = new System.Drawing.Size(725, 670);
             // 
             // tablePanel2
             // 
@@ -271,7 +269,7 @@
             this.tablePanel2.Name = "tablePanel2";
             this.tablePanel2.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] {
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 100F)});
-            this.tablePanel2.Size = new System.Drawing.Size(600, 670);
+            this.tablePanel2.Size = new System.Drawing.Size(725, 670);
             this.tablePanel2.TabIndex = 2;
             // 
             // grdDKNP
@@ -283,7 +281,7 @@
             this.grdDKNP.MainView = this.grvDKNP;
             this.grdDKNP.Name = "grdDKNP";
             this.tablePanel2.SetRow(this.grdDKNP, 0);
-            this.grdDKNP.Size = new System.Drawing.Size(594, 664);
+            this.grdDKNP.Size = new System.Drawing.Size(719, 664);
             this.grdDKNP.TabIndex = 0;
             this.grdDKNP.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grvDKNP});
@@ -296,7 +294,6 @@
             this.grvDKNP.Name = "grvDKNP";
             this.grvDKNP.OptionsView.ShowGroupPanel = false;
             this.grvDKNP.RowStyle += new DevExpress.XtraGrid.Views.Grid.RowStyleEventHandler(this.grvDKNP_RowStyle);
-            this.grvDKNP.PopupMenuShowing += new DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler(this.grvData_PopupMenuShowing);
             this.grvDKNP.ShowingEditor += new System.ComponentModel.CancelEventHandler(this.grvKHNP_ShowingEditor);
             this.grvDKNP.CellValueChanged += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.grvKHNP_CellValueChanged);
             this.grvDKNP.CellValueChanging += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.grvKHNP_CellValueChanging);
@@ -311,7 +308,7 @@
             this.groupDSCongNhan.Controls.Add(this.tablePanel1);
             this.groupDSCongNhan.Location = new System.Drawing.Point(6, 58);
             this.groupDSCongNhan.Name = "groupDSCongNhan";
-            this.groupDSCongNhan.Size = new System.Drawing.Size(306, 693);
+            this.groupDSCongNhan.Size = new System.Drawing.Size(181, 693);
             this.groupDSCongNhan.TabIndex = 8;
             this.groupDSCongNhan.Text = "Danh sách công nhân";
             // 
@@ -319,7 +316,6 @@
             // 
             this.tablePanel1.Columns.AddRange(new DevExpress.Utils.Layout.TablePanelColumn[] {
             new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 55F)});
-            this.tablePanel1.Controls.Add(this.rdo_TinhTrang);
             this.tablePanel1.Controls.Add(this.ItemForSumNhanVien);
             this.tablePanel1.Controls.Add(this.grdDSCN);
             this.tablePanel1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -327,24 +323,9 @@
             this.tablePanel1.Name = "tablePanel1";
             this.tablePanel1.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] {
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 23F),
-            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 36F),
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 100F)});
-            this.tablePanel1.Size = new System.Drawing.Size(302, 670);
+            this.tablePanel1.Size = new System.Drawing.Size(177, 670);
             this.tablePanel1.TabIndex = 1;
-            // 
-            // rdo_TinhTrang
-            // 
-            this.tablePanel1.SetColumn(this.rdo_TinhTrang, 0);
-            this.rdo_TinhTrang.Location = new System.Drawing.Point(3, 26);
-            this.rdo_TinhTrang.Name = "rdo_TinhTrang";
-            this.rdo_TinhTrang.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] {
-            new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Đã duyệt", true, "rdo_DaDuyet"),
-            new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Không duyệt", true, "rdo_KhongDuyet"),
-            new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Chưa duyệt", true, "rdo_ChuaDuyet")});
-            this.tablePanel1.SetRow(this.rdo_TinhTrang, 1);
-            this.rdo_TinhTrang.Size = new System.Drawing.Size(296, 30);
-            this.rdo_TinhTrang.TabIndex = 3;
-            this.rdo_TinhTrang.SelectedIndexChanged += new System.EventHandler(this.rdo_TinhTrang_SelectedIndexChanged);
             // 
             // ItemForSumNhanVien
             // 
@@ -356,7 +337,7 @@
             this.ItemForSumNhanVien.Location = new System.Drawing.Point(3, 3);
             this.ItemForSumNhanVien.Name = "ItemForSumNhanVien";
             this.tablePanel1.SetRow(this.ItemForSumNhanVien, 0);
-            this.ItemForSumNhanVien.Size = new System.Drawing.Size(296, 17);
+            this.ItemForSumNhanVien.Size = new System.Drawing.Size(171, 17);
             this.ItemForSumNhanVien.TabIndex = 2;
             this.ItemForSumNhanVien.Text = "SumNhanVien";
             // 
@@ -458,7 +439,7 @@
             this.layoutControlItem5.Location = new System.Drawing.Point(0, 52);
             this.layoutControlItem5.MinSize = new System.Drawing.Size(7, 26);
             this.layoutControlItem5.Name = "layoutControlItem5";
-            this.layoutControlItem5.Size = new System.Drawing.Size(308, 695);
+            this.layoutControlItem5.Size = new System.Drawing.Size(183, 695);
             this.layoutControlItem5.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlItem5.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem5.TextVisible = false;
@@ -466,10 +447,10 @@
             // layoutControlItem6
             // 
             this.layoutControlItem6.Control = this.groupKHNghiPhep;
-            this.layoutControlItem6.Location = new System.Drawing.Point(318, 52);
+            this.layoutControlItem6.Location = new System.Drawing.Point(193, 52);
             this.layoutControlItem6.MinSize = new System.Drawing.Size(3, 3);
             this.layoutControlItem6.Name = "layoutControlItem6";
-            this.layoutControlItem6.Size = new System.Drawing.Size(606, 695);
+            this.layoutControlItem6.Size = new System.Drawing.Size(731, 695);
             this.layoutControlItem6.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlItem6.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem6.TextVisible = false;
@@ -495,7 +476,7 @@
             this.splitterItem1.AllowHotTrack = true;
             this.splitterItem1.Inverted = true;
             this.splitterItem1.IsCollapsible = DevExpress.Utils.DefaultBoolean.True;
-            this.splitterItem1.Location = new System.Drawing.Point(308, 52);
+            this.splitterItem1.Location = new System.Drawing.Point(183, 52);
             this.splitterItem1.Name = "splitterItem1";
             this.splitterItem1.Size = new System.Drawing.Size(10, 695);
             // 
@@ -556,7 +537,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).EndInit();
             this.tablePanel1.ResumeLayout(false);
             this.tablePanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.rdo_TinhTrang.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboSearch_TO.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboSearch_TOView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboSearch_XN.Properties)).EndInit();
@@ -611,6 +591,5 @@
         private DevExpress.XtraLayout.LayoutControlItem lblTuNgay;
         private DevExpress.XtraLayout.LayoutControlItem lblDenNgay;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem1;
-        private DevExpress.XtraEditors.RadioGroup rdo_TinhTrang;
     }
 }

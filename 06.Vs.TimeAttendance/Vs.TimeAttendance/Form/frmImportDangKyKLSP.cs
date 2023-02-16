@@ -147,7 +147,6 @@ namespace Vs.TimeAttendance
                 grvData.Columns["TG_HC"].ColumnEdit = txtEdit;
                 grvData.Columns["TG_TC_NT"].ColumnEdit = txtEdit;
                 grvData.Columns["TG_TC_CN"].ColumnEdit = txtEdit;
-                grvData.Columns["TG_TC_NL"].ColumnEdit = txtEdit;
 
 
                 grvData.Columns[0].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
@@ -352,15 +351,8 @@ namespace Vs.TimeAttendance
                     }
                     Double dTG_TC_CN = Convert.ToDouble(dr[grvData.Columns[col].FieldName.ToString()]);
 
-                    col = 13;
-                    if (!Commons.Modules.MExcel.KiemDuLieuSo(grvData, dr, col, "Thời gian OT 300%", 0, 0, false, this.Name))
-                    {
-                        errorCount++;
-                    }
-                    Double dTG_TC_NL = Convert.ToDouble(dr[grvData.Columns[col].FieldName.ToString()]);
 
-
-                    Double dTong3Cot = dTG_HC + dTG_TC_NT + dTG_TC_CN + dTG_TC_NL;
+                    Double dTong3Cot = dTG_HC + dTG_TC_NT + dTG_TC_CN;
                     Double dTong7Cot = dCOT_1 + dCOT_2 + dCOT_3 + dCOT_4 + dCOT_5 + dCOT_6 + dCOT_7;
                     if (dTong3Cot != dTong7Cot)
                     {
@@ -375,7 +367,6 @@ namespace Vs.TimeAttendance
                         dr.SetColumnError("TG_HC", Commons.Modules.ObjLanguages.GetLanguage("ucDKThoiGianKhongLamSP", "msgGioLamViecKhongCan"));
                         dr.SetColumnError("TG_TC_NT", Commons.Modules.ObjLanguages.GetLanguage("ucDKThoiGianKhongLamSP", "msgGioLamViecKhongCan"));
                         dr.SetColumnError("TG_TC_CN", Commons.Modules.ObjLanguages.GetLanguage("ucDKThoiGianKhongLamSP", "msgGioLamViecKhongCan"));
-                        dr.SetColumnError("TG_TC_NL", Commons.Modules.ObjLanguages.GetLanguage("ucDKThoiGianKhongLamSP", "msgGioLamViecKhongCan"));
                     }
                 }
             }
@@ -515,7 +506,7 @@ namespace Vs.TimeAttendance
         {
             DevExpress.DataAccess.Native.Excel.DataView dv_temp = ((IListSource)excelDataSource).GetList() as DevExpress.DataAccess.Native.Excel.DataView;
 
-            excelDataSource.SourceOptions = new CsvSourceOptions() { CellRange = "A6:" + "O" + (dv_temp.Count + 6) + "" };
+            excelDataSource.SourceOptions = new CsvSourceOptions() { CellRange = "A6:" + "N" + (dv_temp.Count + 6) + "" };
             excelDataSource.SourceOptions.SkipEmptyRows = false;
             excelDataSource.SourceOptions.UseFirstRowAsHeader = true;
             excelDataSource.Fill();
@@ -620,12 +611,6 @@ namespace Vs.TimeAttendance
                             break;
                         }
                     case 13:
-                        {
-                            sTenCot = "TG_TC_NL";
-                            table.Columns.Add(sTenCot.Trim(), typeof(float));
-                            break;
-                        }
-                    case 14:
                         {
                             sTenCot = "GHI_CHU";
                             table.Columns.Add(sTenCot.Trim(), typeof(string));

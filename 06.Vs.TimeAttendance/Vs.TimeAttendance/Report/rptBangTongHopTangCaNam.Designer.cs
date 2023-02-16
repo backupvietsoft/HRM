@@ -200,7 +200,7 @@
             this.xrTableCell21.Padding = new DevExpress.XtraPrinting.PaddingInfo(10, 10, 10, 10, 100F);
             this.xrTableCell21.StylePriority.UseFont = false;
             this.xrTableCell21.StylePriority.UsePadding = false;
-            this.xrTableCell21.TextFormatString = "{0:n1}";
+            this.xrTableCell21.TextFormatString = "{0:0.0;0.-0;#}";
             this.xrTableCell21.Weight = 0.73461899878344417D;
             // 
             // xrTableCell22
@@ -213,7 +213,7 @@
             this.xrTableCell22.Padding = new DevExpress.XtraPrinting.PaddingInfo(10, 10, 10, 10, 100F);
             this.xrTableCell22.StylePriority.UseFont = false;
             this.xrTableCell22.StylePriority.UsePadding = false;
-            this.xrTableCell22.TextFormatString = "{0:n1}";
+            this.xrTableCell22.TextFormatString = "{0:0.0;0.-0;#}";
             this.xrTableCell22.Weight = 0.73461855040759039D;
             // 
             // xrTableCell23
@@ -226,7 +226,7 @@
             this.xrTableCell23.Padding = new DevExpress.XtraPrinting.PaddingInfo(10, 10, 10, 10, 100F);
             this.xrTableCell23.StylePriority.UseFont = false;
             this.xrTableCell23.StylePriority.UsePadding = false;
-            this.xrTableCell23.TextFormatString = "{0:n1}";
+            this.xrTableCell23.TextFormatString = "{0:0.0;0.-0;#}";
             this.xrTableCell23.Weight = 0.73461899878344439D;
             // 
             // xrTableCell24
@@ -239,7 +239,7 @@
             this.xrTableCell24.Padding = new DevExpress.XtraPrinting.PaddingInfo(10, 10, 10, 10, 100F);
             this.xrTableCell24.StylePriority.UseFont = false;
             this.xrTableCell24.StylePriority.UsePadding = false;
-            this.xrTableCell24.TextFormatString = "{0:n1}";
+            this.xrTableCell24.TextFormatString = "{0:0.0;0.-0;#}";
             this.xrTableCell24.Weight = 0.73461899878344394D;
             // 
             // tiNxrTableCell25
@@ -252,7 +252,7 @@
             this.tiNxrTableCell25.Padding = new DevExpress.XtraPrinting.PaddingInfo(10, 10, 10, 10, 100F);
             this.tiNxrTableCell25.StylePriority.UseFont = false;
             this.tiNxrTableCell25.StylePriority.UsePadding = false;
-            this.tiNxrTableCell25.TextFormatString = "{0:n1}";
+            this.tiNxrTableCell25.TextFormatString = "{0:0.0;0.-0;#}";
             this.tiNxrTableCell25.Weight = 0.73461899878344417D;
             // 
             // tiNxrTableCell26
@@ -265,7 +265,7 @@
             this.tiNxrTableCell26.Padding = new DevExpress.XtraPrinting.PaddingInfo(10, 10, 10, 10, 100F);
             this.tiNxrTableCell26.StylePriority.UseFont = false;
             this.tiNxrTableCell26.StylePriority.UsePadding = false;
-            this.tiNxrTableCell26.TextFormatString = "{0:n1}";
+            this.tiNxrTableCell26.TextFormatString = "{0:0.0;0.-0;#}";
             this.tiNxrTableCell26.Weight = 0.73461888668948072D;
             // 
             // xrTableCell27
@@ -278,7 +278,7 @@
             this.xrTableCell27.Padding = new DevExpress.XtraPrinting.PaddingInfo(10, 10, 10, 10, 100F);
             this.xrTableCell27.StylePriority.UseFont = false;
             this.xrTableCell27.StylePriority.UsePadding = false;
-            this.xrTableCell27.TextFormatString = "{0:n1}";
+            this.xrTableCell27.TextFormatString = "{0:0.0;0.-0;#}";
             this.xrTableCell27.Weight = 0.73461888668948072D;
             // 
             // xrTableCell28
@@ -291,7 +291,7 @@
             this.xrTableCell28.Padding = new DevExpress.XtraPrinting.PaddingInfo(10, 10, 10, 10, 100F);
             this.xrTableCell28.StylePriority.UseFont = false;
             this.xrTableCell28.StylePriority.UsePadding = false;
-            this.xrTableCell28.TextFormatString = "{0:n1}";
+            this.xrTableCell28.TextFormatString = "{0:0.0;0.-0;#}";
             this.xrTableCell28.Weight = 0.73461888668948117D;
             // 
             // xrTableCell29
@@ -304,7 +304,7 @@
             this.xrTableCell29.Padding = new DevExpress.XtraPrinting.PaddingInfo(10, 10, 10, 10, 100F);
             this.xrTableCell29.StylePriority.UseFont = false;
             this.xrTableCell29.StylePriority.UsePadding = false;
-            this.xrTableCell29.TextFormatString = "{0:n1}";
+            this.xrTableCell29.TextFormatString = "{0:0.0;0.-0;#}";
             this.xrTableCell29.Weight = 0.73461899878344417D;
             // 
             // xrTableCell30
@@ -317,7 +317,7 @@
             this.xrTableCell30.Padding = new DevExpress.XtraPrinting.PaddingInfo(10, 10, 10, 10, 100F);
             this.xrTableCell30.StylePriority.UseFont = false;
             this.xrTableCell30.StylePriority.UsePadding = false;
-            this.xrTableCell30.TextFormatString = "{0:n1}";
+            this.xrTableCell30.TextFormatString = "{0:0.0;0.-0;#}";
             this.xrTableCell30.Weight = 0.73461899878344417D;
             // 
             // xrTableCell31
@@ -330,7 +330,7 @@
             this.xrTableCell31.Padding = new DevExpress.XtraPrinting.PaddingInfo(10, 10, 10, 10, 100F);
             this.xrTableCell31.StylePriority.UseFont = false;
             this.xrTableCell31.StylePriority.UsePadding = false;
-            this.xrTableCell31.TextFormatString = "{0:n1}";
+            this.xrTableCell31.TextFormatString = "{0:0.0;0.-0;#}";
             this.xrTableCell31.Weight = 0.73461899878344417D;
             // 
             // xrTableCell32
@@ -343,7 +343,7 @@
             this.xrTableCell32.Padding = new DevExpress.XtraPrinting.PaddingInfo(10, 10, 10, 10, 100F);
             this.xrTableCell32.StylePriority.UseFont = false;
             this.xrTableCell32.StylePriority.UsePadding = false;
-            this.xrTableCell32.TextFormatString = "{0:n1}";
+            this.xrTableCell32.TextFormatString = "{0:0.0;0.-0;#}";
             this.xrTableCell32.Weight = 0.73461899878344417D;
             // 
             // xrTableCell33
@@ -356,7 +356,7 @@
             this.xrTableCell33.Padding = new DevExpress.XtraPrinting.PaddingInfo(10, 10, 10, 10, 100F);
             this.xrTableCell33.StylePriority.UseFont = false;
             this.xrTableCell33.StylePriority.UsePadding = false;
-            this.xrTableCell33.TextFormatString = "{0:n1}";
+            this.xrTableCell33.TextFormatString = "{0:0.0;0.-0;#}";
             this.xrTableCell33.Weight = 2.1891636075289931D;
             // 
             // ReportHeader
@@ -768,7 +768,7 @@
             this.PageWidth = 1169;
             this.PaperKind = System.Drawing.Printing.PaperKind.A4;
             this.Tag = "rptBangTongHopTangCaNam";
-            this.Version = "20.1";
+            this.Version = "22.1";
             ((System.ComponentModel.ISupportInitialize)(this.xrTable4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).EndInit();

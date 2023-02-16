@@ -40,7 +40,6 @@
             this.lbNgayVaoLam = new DevExpress.XtraReports.UI.XRTableCell();
             this.lbLTP = new DevExpress.XtraReports.UI.XRTableCell();
             this.lbPhepNam = new DevExpress.XtraReports.UI.XRTableCell();
-            this.lbPhepTN = new DevExpress.XtraReports.UI.XRTableCell();
             this.lbPhepNghi = new DevExpress.XtraReports.UI.XRTableCell();
             this.lbPhepCon = new DevExpress.XtraReports.UI.XRTableCell();
             this.lbThanhTien = new DevExpress.XtraReports.UI.XRTableCell();
@@ -53,7 +52,6 @@
             this.xrTableCell5 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell9 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell6 = new DevExpress.XtraReports.UI.XRTableCell();
-            this.xrTableCell7 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell8 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell10 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell11 = new DevExpress.XtraReports.UI.XRTableCell();
@@ -113,7 +111,6 @@
             this.lbNgayVaoLam,
             this.lbLTP,
             this.lbPhepNam,
-            this.lbPhepTN,
             this.lbPhepNghi,
             this.lbPhepCon,
             this.lbThanhTien});
@@ -196,16 +193,6 @@
             this.lbPhepNam.Text = "Phép năm";
             this.lbPhepNam.Weight = 1.7380380548965717D;
             // 
-            // lbPhepTN
-            // 
-            this.lbPhepTN.Dpi = 254F;
-            this.lbPhepTN.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbPhepTN.Multiline = true;
-            this.lbPhepTN.Name = "lbPhepTN";
-            this.lbPhepTN.StylePriority.UseFont = false;
-            this.lbPhepTN.Text = "Phép thêm (5 năm)";
-            this.lbPhepTN.Weight = 1.3417966135323882D;
-            // 
             // lbPhepNghi
             // 
             this.lbPhepNghi.Dpi = 254F;
@@ -261,7 +248,6 @@
             this.xrTableCell5,
             this.xrTableCell9,
             this.xrTableCell6,
-            this.xrTableCell7,
             this.xrTableCell8,
             this.xrTableCell10,
             this.xrTableCell11});
@@ -382,23 +368,6 @@
             this.xrTableCell6.TextFormatString = "{0:#,#}";
             this.xrTableCell6.Weight = 1.2071437044106763D;
             // 
-            // xrTableCell7
-            // 
-            this.xrTableCell7.Dpi = 254F;
-            this.xrTableCell7.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[DATA].[PHEP_TN]")});
-            this.xrTableCell7.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.xrTableCell7.Multiline = true;
-            this.xrTableCell7.Name = "xrTableCell7";
-            this.xrTableCell7.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
-            this.xrTableCell7.StylePriority.UseFont = false;
-            this.xrTableCell7.StylePriority.UsePadding = false;
-            this.xrTableCell7.StylePriority.UseTextAlignment = false;
-            this.xrTableCell7.Text = "xrTableCell7";
-            this.xrTableCell7.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
-            this.xrTableCell7.TextFormatString = "{0:#,#}";
-            this.xrTableCell7.Weight = 0.93193610643767943D;
-            // 
             // xrTableCell8
             // 
             this.xrTableCell8.Dpi = 254F;
@@ -485,7 +454,6 @@
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell3;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell4;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell5;
-        private DevExpress.XtraReports.UI.XRTableCell xrTableCell7;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell8;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell10;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell11;
@@ -498,7 +466,6 @@
         private DevExpress.XtraReports.UI.XRTableCell lbNgayVaoLam;
         private DevExpress.XtraReports.UI.XRTableCell lbLTP;
         private DevExpress.XtraReports.UI.XRTableCell lbPhepNam;
-        private DevExpress.XtraReports.UI.XRTableCell lbPhepTN;
         private DevExpress.XtraReports.UI.XRTableCell lbPhepNghi;
         private DevExpress.XtraReports.UI.XRTableCell lbPhepCon;
         private DevExpress.XtraReports.UI.XRTableCell lbThanhTien;

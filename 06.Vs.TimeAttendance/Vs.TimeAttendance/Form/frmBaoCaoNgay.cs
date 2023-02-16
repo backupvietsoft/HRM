@@ -99,43 +99,234 @@ namespace Vs.TimeAttendance
                                 }
                             case "rdo_DSChiTietVangDG":
                                 {
-                                    frmViewReport frm = new frmViewReport();
-                                    DataTable dt;
-                                    System.Data.SqlClient.SqlConnection conn1;
-                                    dt = new DataTable();
-                                    frm.rpt = new rptDSVangDauGioTheoNgay(dNgayIn.DateTime, dNgayDL);
-
-                                    try
+                                    if (Commons.Modules.KyHieuDV == "NB")
                                     {
-                                        conn1 = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
-                                        conn1.Open();
+                                        try
+                                        {
+                                            System.Data.SqlClient.SqlConnection conn;
+                                            conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                                            conn.Open();
+                                            DataTable dtBCVangDG;
 
-                                        System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand(Commons.Modules.ObjSystems.returnSps(Commons.Modules.chamCongK, "rptDSVangNgayDV"), conn1);
+                                            System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptDSVangNgayDV_NB", conn);
+                                            cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                                            cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                                            cmd.Parameters.Add("@Dvi", SqlDbType.Int).Value = ID_DV;
+                                            cmd.Parameters.Add("@XN", SqlDbType.Int).Value = ID_XN;
+                                            cmd.Parameters.Add("@TO", SqlDbType.Int).Value = ID_TO;
+                                            cmd.Parameters.Add("@DNgay", SqlDbType.Date).Value = dNgayDL;
+                                            cmd.Parameters.Add("@LoaiBC", SqlDbType.Int).Value = 0;
+                                            cmd.CommandType = CommandType.StoredProcedure;
+                                            System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
 
-                                        cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
-                                        cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
-                                        cmd.Parameters.Add("@Dvi", SqlDbType.Int).Value = ID_DV;
-                                        cmd.Parameters.Add("@XN", SqlDbType.Int).Value = ID_XN;
-                                        cmd.Parameters.Add("@TO", SqlDbType.Int).Value = ID_TO;
-                                        cmd.Parameters.Add("@DNgay", SqlDbType.Date).Value = dNgayDL;
-                                        cmd.Parameters.Add("@LoaiBC", SqlDbType.Int).Value = 0;
-                                        cmd.CommandType = CommandType.StoredProcedure;
-                                        System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+                                            DataSet ds = new DataSet();
+                                            adp.Fill(ds);
+                                            dtBCVangDG = new DataTable();
+                                            dtBCVangDG = ds.Tables[0].Copy();
+                                            if (dtBCVangDG.Rows.Count == 0)
+                                            {
+                                                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgKhongCoDuLieuIn"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                                return;
+                                            }
+                                            this.Cursor = Cursors.WaitCursor;
+                                            Microsoft.Office.Interop.Excel.Application oXL;
+                                            Microsoft.Office.Interop.Excel.Workbook oWB;
+                                            Excel.Worksheet oSheet;
+                                            oXL = new Microsoft.Office.Interop.Excel.Application();
+                                            oXL.Visible = true;
+
+                                            //OfficeOpenXml.ExcelPackage ExcelPkg = new OfficeOpenXml.ExcelPackage();
+                                            //OfficeOpenXml.ExcelWorksheet wsSheet1 = ExcelPkg.Workbook.Worksheets.Add("Sheet1");
+
+                                            oWB = (Microsoft.Office.Interop.Excel.Workbook)(oXL.Workbooks.Add(Missing.Value));
+                                            oSheet = (Excel.Worksheet)oWB.ActiveSheet;
+
+                                            string fontName = "Times New Roman";
+                                            int fontSizeTieuDe = 16;
+                                            int fontSizeNoiDung = 11;
+
+                                            oSheet.Cells[1, 1].Value2 = "Excel Tailoring Co.Ltd,";
+                                            oSheet.Cells[1, 1].Font.Size = fontSizeNoiDung;
+                                            oSheet.Cells[1, 1].Font.Bold = true;
+                                            oSheet.Cells[1, 1].Font.Name = fontName;
+                                            oSheet.Cells[1, 1].WrapText = false;
+
+                                            oSheet.Cells[2, 1].Value2 = "Yen Ninh Town - Yen Khanh District - Ninh Binh Province";
+                                            oSheet.Cells[2, 1].Font.Size = fontSizeNoiDung;
+                                            oSheet.Cells[2, 1].Font.Bold = true;
+                                            oSheet.Cells[2, 1].Font.Name = fontName;
+                                            oSheet.Cells[2, 1].WrapText = false;
+
+                                            Excel.Range formatRange;
+                                            formatRange = oSheet.Range[oSheet.Cells[4, 1], oSheet.Cells[4,9]];
+                                            formatRange.Merge();
+                                            formatRange.Value2 = "DANH SÁCH NHÂN VIÊN VẮNG MẶT";
+                                            formatRange.Font.Size = fontSizeTieuDe;
+                                            formatRange.Font.Bold = true;
+                                            formatRange.Font.Name = fontName;
+                                            formatRange.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
+
+                                            formatRange = oSheet.Range[oSheet.Cells[5, 1], oSheet.Cells[5, 9]];
+                                            formatRange.Merge();
+                                            formatRange.Value2 = "NGAY : " + Convert.ToDateTime(datDNgay.EditValue).ToString("dd/MM/yyyy");
+                                            formatRange.Font.Size = 14;
+                                            formatRange.Font.Bold = true;
+                                            formatRange.Font.Name = fontName;
+                                            formatRange.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
+
+                                            oSheet.Cells[7, 1].Value2 = "STT";
+                                            oSheet.Cells[7, 1].ColumnWidth = 6;
+                                            oSheet.Cells[7, 2].Value2 = "HỌ TÊN";
+                                            oSheet.Cells[7, 2].ColumnWidth = 30;
+                                            oSheet.Cells[7, 3].Value2 = "MSCN";
+                                            oSheet.Cells[7, 3].ColumnWidth = 10;
+                                            oSheet.Cells[7, 4].Value2 = "BỘ PHẬN";
+                                            oSheet.Cells[7, 4].ColumnWidth = 30;
+                                            oSheet.Cells[7, 5].Value2 = "GIỜ ĐẾN";
+                                            oSheet.Cells[7, 5].ColumnWidth = 10;
+                                            oSheet.Cells[7, 6].Value2 = "LÝ DO VẮNG";
+                                            oSheet.Cells[7, 6].ColumnWidth = 30;
+                                            oSheet.Cells[7, 7].Value2 = "GHI CHÚ";
+                                            oSheet.Cells[7, 7].ColumnWidth = 30;
+                                            oSheet.Cells[7, 8].Value2 = "TỪ NGÀY";
+                                            oSheet.Cells[7, 8].ColumnWidth = 15;
+                                            oSheet.Cells[7, 9].Value2 = "ĐẾN NGÀY";
+                                            oSheet.Cells[7, 9].ColumnWidth = 15;
+
+                                            formatRange = oSheet.Range[oSheet.Cells[7, 1], oSheet.Cells[7, 9]];
+                                            formatRange.Font.Size = fontSizeNoiDung;
+                                            formatRange.Font.Bold = true;
+                                            formatRange.Font.Name = fontName;
+                                            formatRange.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
+                                            formatRange.Interior.Color = Color.FromArgb(191, 250, 253);
+
+                                            BorderAround(oSheet.Range[oSheet.Cells[7, 1], oSheet.Cells[7, 9]]);
+
+                                            DataRow[] dr = dtBCVangDG.Select();
+                                            string[,] rowData = new string[dr.Count(), dtBCVangDG.Columns.Count];
+
+                                            int col = 0;
+                                            int rowCnt = 0;
+                                            int lastColumn = 0;
+                                            lastColumn = dtBCVangDG.Columns.Count;
+                                            foreach (DataRow row in dr)
+                                            {
+                                                for (col = 0; col < lastColumn; col++)
+                                                {
+                                                    rowData[rowCnt, col] = row[col].ToString();
+                                                }
+
+                                                rowCnt++;
+                                            }
+                                            //rowCnt = rowCnt + 5;
+                                            //oSheet.get_Range("A6", lastColumn + rowCnt.ToString()).Value2 = rowData;
+                                            formatRange = oSheet.Range[oSheet.Cells[8, 1], oSheet.Cells[rowCnt, lastColumn]];
+                                            formatRange.Value2 = rowData;
+                                            formatRange.Font.Name = fontName;
+                                            formatRange.Font.Size = fontSizeNoiDung;
 
 
-                                        DataSet ds = new DataSet();
-                                        adp.Fill(ds);
+                                            formatRange = oSheet.Range[oSheet.Cells[8, 1], oSheet.Cells[rowCnt, 1]];
+                                            formatRange.NumberFormat = "";
+                                            formatRange.Cells.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
+                                            formatRange.Cells.VerticalAlignment = Excel.XlVAlign.xlVAlignBottom;
+                                            try
+                                            {
+                                                formatRange.TextToColumns(Type.Missing, Excel.XlTextParsingType.xlDelimited, Excel.XlTextQualifier.xlTextQualifierDoubleQuote);
+                                            }
+                                            catch { }
+
+                                            formatRange = oSheet.Range[oSheet.Cells[8, 3], oSheet.Cells[rowCnt, 3]];
+                                            formatRange.NumberFormat = "";
+                                            //formatRange.Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                                            formatRange.Cells.VerticalAlignment = Excel.XlVAlign.xlVAlignBottom;
+                                            try
+                                            {
+                                                formatRange.TextToColumns(Type.Missing, Excel.XlTextParsingType.xlDelimited, Excel.XlTextQualifier.xlTextQualifierDoubleQuote);
+                                            }
+                                            catch { }
+
+                                            formatRange = oSheet.Range[oSheet.Cells[8, 5], oSheet.Cells[rowCnt, 5]];
+                                            formatRange.NumberFormat = "";
+                                            formatRange.Cells.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
+                                            formatRange.Cells.VerticalAlignment = Excel.XlVAlign.xlVAlignBottom;
+                                            try
+                                            {
+                                                formatRange.TextToColumns(Type.Missing, Excel.XlTextParsingType.xlDelimited, Excel.XlTextQualifier.xlTextQualifierDoubleQuote);
+                                            }
+                                            catch { }
+
+
+                                            formatRange = oSheet.Range[oSheet.Cells[8, 8], oSheet.Cells[rowCnt, 8]];
+                                            formatRange.NumberFormat = "";
+                                            formatRange.Cells.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
+                                            formatRange.Cells.VerticalAlignment = Excel.XlVAlign.xlVAlignBottom;
+                                            try
+                                            {
+                                                formatRange.TextToColumns(Type.Missing, Excel.XlTextParsingType.xlDelimited, Excel.XlTextQualifier.xlTextQualifierDoubleQuote);
+                                            }
+                                            catch { }
+
+
+                                            formatRange = oSheet.Range[oSheet.Cells[8, 9], oSheet.Cells[rowCnt, 9]];
+                                            formatRange.NumberFormat = "";
+                                            formatRange.Cells.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
+                                            formatRange.Cells.VerticalAlignment = Excel.XlVAlign.xlVAlignBottom;
+                                            try
+                                            {
+                                                formatRange.TextToColumns(Type.Missing, Excel.XlTextParsingType.xlDelimited, Excel.XlTextQualifier.xlTextQualifierDoubleQuote);
+                                            }
+                                            catch { }
+
+                                            BorderAround(oSheet.Range[oSheet.Cells[8, 1], oSheet.Cells[rowCnt, lastColumn]]);
+
+                                        }
+                                        catch (Exception ex)
+                                        {
+                                            XtraMessageBox.Show(ex.Message.ToString());
+                                        }
+                                    }
+                                    else
+                                    {
+                                        frmViewReport frm = new frmViewReport();
+                                        DataTable dt;
+                                        System.Data.SqlClient.SqlConnection conn1;
                                         dt = new DataTable();
-                                        dt = ds.Tables[0].Copy();
-                                        dt.TableName = "DA_TA";
-                                        frm.AddDataSource(dt);
-                                        frm.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung());
+                                        frm.rpt = new rptDSVangDauGioTheoNgay(dNgayIn.DateTime, dNgayDL);
+
+                                        try
+                                        {
+                                            conn1 = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                                            conn1.Open();
+
+                                            System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand(Commons.Modules.ObjSystems.returnSps(Commons.Modules.chamCongK, "rptDSVangNgayDV"), conn1);
+
+                                            cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                                            cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                                            cmd.Parameters.Add("@Dvi", SqlDbType.Int).Value = ID_DV;
+                                            cmd.Parameters.Add("@XN", SqlDbType.Int).Value = ID_XN;
+                                            cmd.Parameters.Add("@TO", SqlDbType.Int).Value = ID_TO;
+                                            cmd.Parameters.Add("@DNgay", SqlDbType.Date).Value = dNgayDL;
+                                            cmd.Parameters.Add("@LoaiBC", SqlDbType.Int).Value = 0;
+                                            cmd.CommandType = CommandType.StoredProcedure;
+                                            System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+
+
+                                            DataSet ds = new DataSet();
+                                            adp.Fill(ds);
+                                            dt = new DataTable();
+                                            dt = ds.Tables[0].Copy();
+                                            dt.TableName = "DA_TA";
+                                            frm.AddDataSource(dt);
+                                            frm.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung());
+                                        }
+                                        catch (Exception ex)
+                                        {
+                                            XtraMessageBox.Show(ex.Message.ToString());
+                                        }
+                                        frm.ShowDialog();
                                     }
-                                    catch (Exception ex)
-                                    {
-                                        XtraMessageBox.Show(ex.Message.ToString());
-                                    }
-                                    frm.ShowDialog();
+                                    
                                     break;
                                 }
                             case "rdo_DSDiTreVeSom":

@@ -37,7 +37,7 @@ namespace Vs.TimeAttendance
             dNgayIn.EditValue = DateTime.Today;
             Commons.OSystems.SetDateEditFormat(dNgayIn);
             Commons.Modules.sLoad = "";
-            if(Commons.Modules.KyHieuDV == "NB")
+            if(Commons.Modules.KyHieuDV == "NB" || Commons.Modules.KyHieuDV == "NC" || Commons.Modules.KyHieuDV == "SB" || Commons.Modules.KyHieuDV == "HN")
             {
                 rdo_ChonBaoCao.Properties.Items.Remove(rdo_ChonBaoCao.Properties.Items.Where(x => x.Tag.ToString() == "rdo_BieuMauLamThemGio").FirstOrDefault());
                 rdo_ChonBaoCao.SelectedIndex = 0;
@@ -144,7 +144,7 @@ namespace Vs.TimeAttendance
             DataTable dt;
             System.Data.SqlClient.SqlConnection conn;
             dt = new DataTable();
-            frm.rpt = new rptDKLamThemGio_DM(dNgayIn.DateTime, sTenXN, Convert.ToInt32(ID_DV));
+            frm.rpt = new rptDKLamThemGio_DM(dNgayIn.DateTime, sTenXN);
 
             try
             {

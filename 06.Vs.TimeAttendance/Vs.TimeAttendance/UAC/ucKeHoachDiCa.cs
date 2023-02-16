@@ -136,11 +136,12 @@ namespace Vs.TimeAttendance
                         {
                             if (grvCongNhan.RowCount == 0 || grvKeHoachDiCa.RowCount == 0) return;
                             DataTable dt = new DataTable();
-                            SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spCapNhatDieuChinh", Commons.Modules.UserName, Commons.Modules.TypeLanguage, grvCongNhan.GetFocusedRowCellValue("ID_CN"), grvKeHoachDiCa.GetFocusedRowCellValue("ID_NHOM"), grvKeHoachDiCa.GetFocusedRowCellValue("CA"), grvKeHoachDiCa.GetFocusedRowCellValue("TU_NGAY"), grvKeHoachDiCa.GetFocusedRowCellValue("DEN_NGAY"));
+                            SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spCapNhatDieuChinh", Commons.Modules.UserName, Commons.Modules.TypeLanguage, grvCongNhan.GetFocusedRowCellValue("ID_CN"), grvKeHoachDiCa.GetFocusedRowCellValue("ID_NHOM"), grvKeHoachDiCa.GetFocusedRowCellValue("CA"), grvKeHoachDiCa.GetFocusedRowCellValue("TU_NGAY"), grvKeHoachDiCa.GetFocusedRowCellValue("DEN_NGAY"), Commons.Modules.KyHieuDV.ToString());
                             LoadgrdKeHoachDiCa();
+                            grvCongNhan_FocusedRowChanged(null, null);
                             XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgCapNhatThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
-                        catch
+                        catch (Exception ex)
                         {
                             XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgCapNhatKhongThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }

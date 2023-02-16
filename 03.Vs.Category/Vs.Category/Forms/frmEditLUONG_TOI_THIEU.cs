@@ -30,7 +30,7 @@ namespace Vs.Category
             try
             {
                 string sSql = "SELECT T1.ID_LTT, T1.NGAY_QD, T1.ID_DV, T1.LUONG_TOI_THIEU, T1.LUONG_TOI_THIEU_NN, " +
-                    "T1.BHXH_CN, T1.BHYT_CN, T1.BHTN_CN, T1.BHXH_CT, T1.BHYT_CT, T1.BHTN_CT " +
+                    "T1.BHXH_CN, T1.MUC_GIAM_TRU, MUC_TN_TINH_THUE ,T1.BHYT_CN, T1.BHTN_CN, T1.BHXH_CT, T1.BHYT_CT, T1.BHTN_CT " +
                     "FROM LUONG_TOI_THIEU T1 " +
                     "WHERE T1.ID_LTT = " + Id.ToString(); 
                 DataTable dtTmp = new DataTable();
@@ -39,6 +39,8 @@ namespace Vs.Category
                 ID_DVSearchLookUpEdit.EditValue = dtTmp.Rows[0]["ID_DV"].ToString();
                 LUONG_TOI_THIEUTextEdit.EditValue = string.IsNullOrEmpty(dtTmp.Rows[0]["LUONG_TOI_THIEU"].ToString()) ? 0 : Convert.ToDecimal(dtTmp.Rows[0]["LUONG_TOI_THIEU"]);
                 LUONG_TOI_THIEU_NNTextEdit.EditValue = string.IsNullOrEmpty(dtTmp.Rows[0]["LUONG_TOI_THIEU_NN"].ToString()) ? 0 : Convert.ToDecimal(dtTmp.Rows[0]["LUONG_TOI_THIEU_NN"]);
+                txtMUC_GIAM_TRU.EditValue = string.IsNullOrEmpty(dtTmp.Rows[0]["MUC_GIAM_TRU"].ToString()) ? 0 : Convert.ToDecimal(dtTmp.Rows[0]["MUC_GIAM_TRU"]);
+                txtTN_TINH_THUE.EditValue = string.IsNullOrEmpty(dtTmp.Rows[0]["MUC_TN_TINH_THUE"].ToString()) ? 0 : Convert.ToDecimal(dtTmp.Rows[0]["MUC_TN_TINH_THUE"]);
                 BHXH_CNTextEdit.EditValue = string.IsNullOrEmpty(dtTmp.Rows[0]["BHXH_CN"].ToString()) ? 0 : Convert.ToDouble(dtTmp.Rows[0]["BHXH_CN"]);
                 BHYT_CNTextEdit.EditValue = string.IsNullOrEmpty(dtTmp.Rows[0]["BHYT_CN"].ToString()) ? 0 : Convert.ToDouble(dtTmp.Rows[0]["BHYT_CN"]);
                 BHTN_CNTextEdit.EditValue = string.IsNullOrEmpty(dtTmp.Rows[0]["BHTN_CN"].ToString()) ? 0 : Convert.ToDouble(dtTmp.Rows[0]["BHTN_CN"]);
@@ -132,6 +134,8 @@ namespace Vs.Category
                                 NGAY_QDDateEdit.EditValue, ID_DVSearchLookUpEdit.EditValue, 
                                 (string.IsNullOrEmpty(LUONG_TOI_THIEUTextEdit.Text)) ? 0 : LUONG_TOI_THIEUTextEdit.EditValue,
                                 (string.IsNullOrEmpty(LUONG_TOI_THIEU_NNTextEdit.Text)) ? 0 : LUONG_TOI_THIEU_NNTextEdit.EditValue,
+                                (string.IsNullOrEmpty(txtMUC_GIAM_TRU.Text)) ? 0 : txtMUC_GIAM_TRU.EditValue,
+                                (string.IsNullOrEmpty(txtTN_TINH_THUE.Text)) ? 0 : txtTN_TINH_THUE.EditValue,
                                 (string.IsNullOrEmpty(BHXH_CNTextEdit.Text)) ? 0 : BHXH_CNTextEdit.EditValue,
                                 (string.IsNullOrEmpty(BHYT_CNTextEdit.Text)) ? 0 : BHYT_CNTextEdit.EditValue,
                                 (string.IsNullOrEmpty(BHTN_CNTextEdit.Text)) ? 0 : BHTN_CNTextEdit.EditValue,

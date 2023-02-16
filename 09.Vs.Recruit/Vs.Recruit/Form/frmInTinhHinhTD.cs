@@ -212,10 +212,10 @@ namespace Vs.Recruit
                             {
                                 title.Value2 = "Số LĐ hiện tại trong tháng";
 
-                                title = Commons.Modules.MExcel.GetRange(excelWorkSheet, DONG + 1, i, DONG + 1, i);
-                                title.Value2 = "=SUM(" + Commons.Modules.MExcel.TimDiemExcel(DONG + 1, i - 5) + "," + Commons.Modules.MExcel.TimDiemExcel(DONG + 1, i - 1) + ")";
-                                title1 = Commons.Modules.MExcel.GetRange(excelWorkSheet, DONG + 1, i, DONG + TDong, i);
-                                title.AutoFill(title1, Microsoft.Office.Interop.Excel.XlAutoFillType.xlFillCopy);
+                                //title = Commons.Modules.MExcel.GetRange(excelWorkSheet, DONG + 1, i, DONG + 1, i);
+                                //title.Value2 = "=SUM(" + Commons.Modules.MExcel.TimDiemExcel(DONG + 1, i - 5) + "," + Commons.Modules.MExcel.TimDiemExcel(DONG + 1, i - 1) + ")";
+                                //title1 = Commons.Modules.MExcel.GetRange(excelWorkSheet, DONG + 1, i, DONG + TDong, i);
+                                //title.AutoFill(title1, Microsoft.Office.Interop.Excel.XlAutoFillType.xlFillCopy);
 
                                 break;
                             }

@@ -183,13 +183,11 @@
             // searchControl1
             // 
             this.searchControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.searchControl1.Client = this.grdCongNhan;
             this.searchControl1.Location = new System.Drawing.Point(3, 7);
             this.searchControl1.Name = "searchControl1";
             this.searchControl1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Repository.ClearButton(),
             new DevExpress.XtraEditors.Repository.SearchButton()});
-            this.searchControl1.Properties.Client = this.grdCongNhan;
             this.searchControl1.Size = new System.Drawing.Size(220, 24);
             this.searchControl1.TabIndex = 0;
             // 

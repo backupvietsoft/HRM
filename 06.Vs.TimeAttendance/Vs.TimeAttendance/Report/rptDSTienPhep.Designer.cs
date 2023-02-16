@@ -43,7 +43,6 @@
             this.xrTableCell6 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell7 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell8 = new DevExpress.XtraReports.UI.XRTableCell();
-            this.xrTableCell10 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell11 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell16 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell17 = new DevExpress.XtraReports.UI.XRTableCell();
@@ -61,7 +60,6 @@
             this.lbTo = new DevExpress.XtraReports.UI.XRTableCell();
             this.lbLTP = new DevExpress.XtraReports.UI.XRTableCell();
             this.lbPhepNam = new DevExpress.XtraReports.UI.XRTableCell();
-            this.lbPhepThem5Nam = new DevExpress.XtraReports.UI.XRTableCell();
             this.lbSoPhepDaNghi = new DevExpress.XtraReports.UI.XRTableCell();
             this.lbPhepCon = new DevExpress.XtraReports.UI.XRTableCell();
             this.lbThanhTien = new DevExpress.XtraReports.UI.XRTableCell();
@@ -127,7 +125,6 @@
             this.xrTableCell6,
             this.xrTableCell7,
             this.xrTableCell8,
-            this.xrTableCell10,
             this.xrTableCell11,
             this.xrTableCell16,
             this.xrTableCell17,
@@ -283,23 +280,6 @@
             this.xrTableCell8.TextFormatString = "{0:#,#}";
             this.xrTableCell8.Weight = 1.0783528022551785D;
             // 
-            // xrTableCell10
-            // 
-            this.xrTableCell10.Dpi = 254F;
-            this.xrTableCell10.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[DATA].[PHEP_TN]")});
-            this.xrTableCell10.Font = new System.Drawing.Font("Times New Roman", 9F);
-            this.xrTableCell10.Multiline = true;
-            this.xrTableCell10.Name = "xrTableCell10";
-            this.xrTableCell10.Padding = new DevExpress.XtraPrinting.PaddingInfo(10, 10, 10, 10, 254F);
-            this.xrTableCell10.StylePriority.UseFont = false;
-            this.xrTableCell10.StylePriority.UsePadding = false;
-            this.xrTableCell10.StylePriority.UseTextAlignment = false;
-            this.xrTableCell10.Text = "xrTableCell10";
-            this.xrTableCell10.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
-            this.xrTableCell10.TextFormatString = "{0:#,#}";
-            this.xrTableCell10.Weight = 1.0323896771377639D;
-            // 
             // xrTableCell11
             // 
             this.xrTableCell11.Dpi = 254F;
@@ -349,7 +329,7 @@
             this.xrTableCell17.Text = "xrTableCell17";
             this.xrTableCell17.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             this.xrTableCell17.TextFormatString = "{0:#,#}";
-            this.xrTableCell17.Weight = 2.3802503317083916D;
+            this.xrTableCell17.Weight = 2.3802456330702393D;
             // 
             // xrTableCell13
             // 
@@ -364,7 +344,7 @@
             this.xrTableCell13.StylePriority.UsePadding = false;
             this.xrTableCell13.StylePriority.UseTextAlignment = false;
             this.xrTableCell13.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
-            this.xrTableCell13.Weight = 1.7768171506205666D;
+            this.xrTableCell13.Weight = 2.8092113227345203D;
             // 
             // NONlblTIEU_DE
             // 
@@ -419,7 +399,6 @@
             this.lbTo,
             this.lbLTP,
             this.lbPhepNam,
-            this.lbPhepThem5Nam,
             this.lbSoPhepDaNghi,
             this.lbPhepCon,
             this.lbThanhTien,
@@ -521,16 +500,6 @@
             this.lbPhepNam.Text = "Phép năm";
             this.lbPhepNam.Weight = 1.119508597386019D;
             // 
-            // lbPhepThem5Nam
-            // 
-            this.lbPhepThem5Nam.Dpi = 254F;
-            this.lbPhepThem5Nam.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbPhepThem5Nam.Multiline = true;
-            this.lbPhepThem5Nam.Name = "lbPhepThem5Nam";
-            this.lbPhepThem5Nam.StylePriority.UseFont = false;
-            this.lbPhepThem5Nam.Text = "Phép thêm 5 năm";
-            this.lbPhepThem5Nam.Weight = 1.0717876290340409D;
-            // 
             // lbSoPhepDaNghi
             // 
             this.lbSoPhepDaNghi.Dpi = 254F;
@@ -569,7 +538,7 @@
             this.lbKyNhan.Name = "lbKyNhan";
             this.lbKyNhan.StylePriority.UseFont = false;
             this.lbKyNhan.Text = "Ký nhận";
-            this.lbKyNhan.Weight = 1.84462657582859D;
+            this.lbKyNhan.Weight = 2.9164190878549543D;
             // 
             // ReportFooter
             // 
@@ -579,7 +548,7 @@
             this.lblNguoiKy,
             this.lblNgay});
             this.ReportFooter.Dpi = 254F;
-            this.ReportFooter.HeightF = 152.4233F;
+            this.ReportFooter.HeightF = 152.4234F;
             this.ReportFooter.Name = "ReportFooter";
             this.ReportFooter.Tag = "rptDSThamGiaCongDoan";
             // 
@@ -605,7 +574,7 @@
             this.lbPT.AutoWidth = true;
             this.lbPT.Dpi = 254F;
             this.lbPT.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Bold);
-            this.lbPT.LocationFloat = new DevExpress.Utils.PointFloat(1086.746F, 88.71164F);
+            this.lbPT.LocationFloat = new DevExpress.Utils.PointFloat(1152.218F, 88.71172F);
             this.lbPT.Multiline = true;
             this.lbPT.Name = "lbPT";
             this.lbPT.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
@@ -621,7 +590,7 @@
             this.lblNguoiKy.AutoWidth = true;
             this.lblNguoiKy.Dpi = 254F;
             this.lblNguoiKy.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Bold);
-            this.lblNguoiKy.LocationFloat = new DevExpress.Utils.PointFloat(2200.778F, 88.71156F);
+            this.lblNguoiKy.LocationFloat = new DevExpress.Utils.PointFloat(2276.75F, 88.71156F);
             this.lblNguoiKy.Multiline = true;
             this.lblNguoiKy.Name = "lblNguoiKy";
             this.lblNguoiKy.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
@@ -637,7 +606,7 @@
             this.lblNgay.AutoWidth = true;
             this.lblNgay.Dpi = 254F;
             this.lblNgay.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Bold);
-            this.lblNgay.LocationFloat = new DevExpress.Utils.PointFloat(2200.778F, 25.00001F);
+            this.lblNgay.LocationFloat = new DevExpress.Utils.PointFloat(2276.75F, 25.00001F);
             this.lblNgay.Multiline = true;
             this.lblNgay.Name = "lblNgay";
             this.lblNgay.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
@@ -683,7 +652,7 @@
             this.ReportUnit = DevExpress.XtraReports.UI.ReportUnit.TenthsOfAMillimeter;
             this.SnapGridSize = 25F;
             this.Tag = "rptDSTienPhep";
-            this.Version = "20.1";
+            this.Version = "22.1";
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
@@ -710,7 +679,6 @@
         private DevExpress.XtraReports.UI.XRTableCell lbNgayVaoLam;
         private DevExpress.XtraReports.UI.XRTableCell lbLTP;
         private DevExpress.XtraReports.UI.XRTableCell lbPhepNam;
-        private DevExpress.XtraReports.UI.XRTableCell lbPhepThem5Nam;
         private DevExpress.XtraReports.UI.XRTableCell lbSoPhepDaNghi;
         private DevExpress.XtraReports.UI.XRTableCell lbPhepCon;
         private DevExpress.XtraReports.UI.XRTableCell lbThanhTien;
@@ -725,7 +693,6 @@
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell6;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell7;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell8;
-        private DevExpress.XtraReports.UI.XRTableCell xrTableCell10;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell11;
         private DevExpress.XtraReports.UI.XRTableCell lbKyNhan;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell13;

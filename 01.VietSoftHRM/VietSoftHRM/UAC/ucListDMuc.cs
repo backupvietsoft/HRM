@@ -719,7 +719,6 @@ namespace VietSoftHRM
         {
             try
             {
-                if (Commons.Modules.KyHieuDV != "DM") return;
                 if (Commons.Modules.sPS == "spGetListXI_NGHIEP")
                 {
                     contextMenuStrip1.Items[0].Visible = true;
@@ -734,6 +733,7 @@ namespace VietSoftHRM
                         contextMenuStrip1.Hide();
                     }
                 }
+                if (Commons.Modules.KyHieuDV != "DM") return;
                 if (Commons.Modules.sPS == "spGetListLOAI_CONG_VIEC")
                 {
                     contextMenuStrip1.Items[0].Visible = false;

@@ -2,32 +2,23 @@
 using DevExpress.XtraEditors;
 using System;
 using System.Data;
-using Vs.Report;
-using Microsoft.Office.Interop.Excel;
-using Microsoft.Office.Interop.Excel;
 using System.Windows.Forms;
 using DataTable = System.Data.DataTable;
-using System.Drawing;
-using System.Reflection;
 using System.Linq;
 using Microsoft.ApplicationBlocks.Data;
 using DevExpress.XtraGrid.Views.Grid;
-using DevExpress.Utils.Menu;
-using NPOI.OpenXmlFormats.Dml.Diagram;
-using static NPOI.HSSF.Util.HSSFColor;
-using DevExpress.XtraEditors.DXErrorProvider;
-using static DevExpress.XtraPrinting.Native.ExportOptionsPropertiesNames;
 
 namespace Vs.Payroll
 {
     public partial class frmNhapDLKhoiTaoTLNV : DevExpress.XtraEditors.XtraForm
     {
         public DateTime dNgay;
-        private int iThem = 0;
+        public int ID_DV = -1;
         public frmNhapDLKhoiTaoTLNV()
         {
             InitializeComponent();
             Commons.Modules.ObjSystems.ThayDoiNN(this, Root, tabControl, windowsUIButton);
+            Commons.Modules.ObjSystems.ThayDoiNN(this);
         }
 
         //sự kiên load form
@@ -51,7 +42,6 @@ namespace Vs.Payroll
             {
                 case "themsua":
                     {
-                        iThem = 1;
                         switch (tabControl.SelectedTabPageIndex)
                         {
                             case 0:
@@ -66,10 +56,7 @@ namespace Vs.Payroll
                                 }
                             case 2:
                                 {
-                                    if (grvPTTruLuong.RowCount == 0)
-                                    {
-                                        Commons.Modules.ObjSystems.AddnewRow(grvPTTruLuong, true);
-                                    }
+                                    Commons.Modules.ObjSystems.AddnewRow(grvPTTruLuong, true);
                                     break;
                                 }
                             case 3:
@@ -152,7 +139,6 @@ namespace Vs.Payroll
                     }
                 case "khongluu":
                     {
-                        iThem = 0;
                         switch (tabControl.SelectedTabPageIndex)
                         {
                             case 0:
@@ -181,6 +167,66 @@ namespace Vs.Payroll
                                 }
                         }
                         VisibleButton(true);
+                        break;
+                    }
+                case "xoa":
+                    {
+                        if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgBanCoMuonXoaKhong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) return;
+                        switch (tabControl.SelectedTabPageIndex)
+                        {
+                            case 0:
+                                {
+                                    if (!DeleteData("PBL", Commons.Modules.ObjSystems.GetDataTableMultiSelect(grdPBL, grvPBL), Commons.Modules.ObjSystems.ConvertDateTime(cboThang.Text)))
+                                    {
+                                        Commons.Modules.ObjSystems.Alert(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgCapNhatKhongCong"), Commons.Form_Alert.enmType.Error);
+                                    }
+                                    else
+                                    {
+                                        Commons.Modules.ObjSystems.Alert(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgCapNhatThanhCong"), Commons.Form_Alert.enmType.Success);
+                                    }
+                                    LoadDataPBL();
+                                    break;
+                                }
+                            case 1:
+                                {
+                                    if (!DeleteData("PT_THUONG_TT", Commons.Modules.ObjSystems.GetDataTableMultiSelect(grdPTTToTruong, grvPTTToTruong), Commons.Modules.ObjSystems.ConvertDateTime(cboThangADPTTT.Text)))
+                                    {
+                                        Commons.Modules.ObjSystems.Alert(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgCapNhatKhongCong"), Commons.Form_Alert.enmType.Error);
+                                    }
+                                    else
+                                    {
+                                        Commons.Modules.ObjSystems.Alert(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgCapNhatThanhCong"), Commons.Form_Alert.enmType.Success);
+                                    }
+                                    LoadDataPTThuongTT();
+                                    break;
+                                }
+                            case 2:
+                                {
+                                    if (!DeleteData("PT_TRU_LUONG", Commons.Modules.ObjSystems.GetDataTableMultiSelect(grdPTTruLuong, grvPTTruLuong), Commons.Modules.ObjSystems.ConvertDateTime(cboNgayADTruLuong.Text)))
+                                    {
+                                        Commons.Modules.ObjSystems.Alert(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgCapNhatKhongCong"), Commons.Form_Alert.enmType.Error);
+                                    }
+                                    else
+                                    {
+                                        Commons.Modules.ObjSystems.Alert(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgCapNhatThanhCong"), Commons.Form_Alert.enmType.Success);
+                                    }
+                                    LoadDataPTTruLuong();
+                                    break;
+                                }
+                            case 3:
+                                {
+                                    if (!DeleteData("THUONG_GDNM", Commons.Modules.ObjSystems.GetDataTableMultiSelect(grdTGDNM, grvTGDNM), Commons.Modules.ObjSystems.ConvertDateTime(cboThangADTGD.Text)))
+                                    {
+                                        Commons.Modules.ObjSystems.Alert(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgCapNhatKhongCong"), Commons.Form_Alert.enmType.Error);
+                                    }
+                                    else
+                                    {
+                                        Commons.Modules.ObjSystems.Alert(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgCapNhatThanhCong"), Commons.Form_Alert.enmType.Success);
+                                    }
+                                    LoadDataThuongGDNM();
+                                    break;
+                                }
+                        }
                         break;
                     }
                 case "thoat":
@@ -399,33 +445,37 @@ namespace Vs.Payroll
                 dt = ds.Tables[1].Copy();
                 SearchLookUpEdit lookUp = sender as SearchLookUpEdit;
                 lookUp.Properties.DataSource = dt;
-                DataTable dtTmp = new DataTable();
-                string sdkien = "( 1 = 1 )";
-                try
-                {
-                    string sID = "";
-                    DataTable dtTemp = new DataTable();
-                    dtTmp = Commons.Modules.ObjSystems.ConvertDatatable(grvPBL).Copy();
-                    for (int i = 0; i < dtTmp.Rows.Count; i++)
-                    {
-                        sID = sID + dtTmp.Rows[i]["ID_CN"].ToString() + ",";
-                    }
-                    if (dtTmp.Rows.Count != 0)
-                    {
-                        sID = sID.Substring(0, sID.Length - 1);
-                        sdkien = "(ID_CN NOT IN (" + sID + "))";
-                    }
 
-                    dt.DefaultView.RowFilter = sdkien;
-                }
-                catch
-                {
-                    try
-                    {
-                        dtTmp.DefaultView.RowFilter = "";
-                    }
-                    catch { }
-                }
+
+                // không hiển thị nhân viên đã có trên lưới
+
+                //DataTable dtTmp = new DataTable();
+                //string sdkien = "( 1 = 1 )";
+                //try
+                //{
+                //    string sID = "";
+                //    DataTable dtTemp = new DataTable();
+                //    dtTmp = Commons.Modules.ObjSystems.ConvertDatatable(grvPBL).Copy();
+                //    for (int i = 0; i < dtTmp.Rows.Count; i++)
+                //    {
+                //        sID = sID + dtTmp.Rows[i]["ID_CN"].ToString() + ",";
+                //    }
+                //    if (dtTmp.Rows.Count != 0)
+                //    {
+                //        sID = sID.Substring(0, sID.Length - 1);
+                //        sdkien = "(ID_CN NOT IN (" + sID + "))";
+                //    }
+
+                //    dt.DefaultView.RowFilter = sdkien;
+                //}
+                //catch
+                //{
+                //    try
+                //    {
+                //        dtTmp.DefaultView.RowFilter = "";
+                //    }
+                //    catch { }
+                //}
             }
             catch { }
         }
@@ -443,6 +493,7 @@ namespace Vs.Payroll
                 cmd.Parameters.Add("@Tab", SqlDbType.NVarChar).Value = "PT_THUONG_TT";
                 cmd.Parameters.Add("@iLoai", SqlDbType.Int).Value = 0;
                 cmd.Parameters.Add("@Ngay", SqlDbType.DateTime).Value = Commons.Modules.ObjSystems.ConvertDateTime(cboThangADPTTT.Text);
+                cmd.Parameters.Add("@DVi", SqlDbType.Int).Value = ID_DV;
                 cmd.CommandType = CommandType.StoredProcedure;
                 System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
 
@@ -484,6 +535,7 @@ namespace Vs.Payroll
                 cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
                 cmd.Parameters.Add("@Tab", SqlDbType.NVarChar).Value = "PT_TRU_LUONG";
                 cmd.Parameters.Add("@iLoai", SqlDbType.Int).Value = 0;
+                cmd.Parameters.Add("@DVi", SqlDbType.Int).Value = ID_DV;
                 cmd.Parameters.Add("@Ngay", SqlDbType.DateTime).Value = Commons.Modules.ObjSystems.ConvertDateTime(cboNgayADTruLuong.Text);
                 cmd.CommandType = CommandType.StoredProcedure;
                 System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
@@ -501,6 +553,9 @@ namespace Vs.Payroll
                 {
                     grdPTTruLuong.DataSource = dt;
                 }
+
+                DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit cbo1 = new DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit();
+                Commons.Modules.ObjSystems.AddCombSearchLookUpEdit(cbo1, "ID_DV", "TEN_DV", "ID_DV", grvPTTruLuong, Commons.Modules.ObjSystems.DataDonVi(false), "frmPhanTramTruLuong");
             }
             catch { }
         }
@@ -517,7 +572,7 @@ namespace Vs.Payroll
                 cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
                 cmd.Parameters.Add("@Tab", SqlDbType.NVarChar).Value = "THUONG_GDNM";
                 cmd.Parameters.Add("@iLoai", SqlDbType.Int).Value = 0;
-                cmd.Parameters.Add("@Ngay", SqlDbType.DateTime).Value = Commons.Modules.ObjSystems.ConvertDateTime(cboThang.Text);
+                cmd.Parameters.Add("@Ngay", SqlDbType.DateTime).Value = Commons.Modules.ObjSystems.ConvertDateTime(cboThangADTGD.Text);
                 cmd.CommandType = CommandType.StoredProcedure;
                 System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
 
@@ -553,6 +608,32 @@ namespace Vs.Payroll
                 cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
                 cmd.Parameters.Add("@Tab", SqlDbType.NVarChar).Value = sTab;
                 cmd.Parameters.Add("@iLoai", SqlDbType.Int).Value = 1;
+                cmd.Parameters.Add("@sBT", SqlDbType.NVarChar).Value = sBTKhoiTaoTLNL;
+                cmd.Parameters.Add("@Ngay", SqlDbType.DateTime).Value = dNgay;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        private bool DeleteData(string sTab, DataTable dt, DateTime dNgay)
+        {
+            try
+            {
+                string sBTKhoiTaoTLNL = "sBTKhoiTaoTLNL" + Commons.Modules.iIDUser;
+                Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBTKhoiTaoTLNL, dt, "");
+                System.Data.SqlClient.SqlConnection conn;
+                conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                DataSet ds = new DataSet();
+                conn.Open();
+                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spNhapDLKhoiTaoTLNV", conn);
+                cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                cmd.Parameters.Add("@Tab", SqlDbType.NVarChar).Value = sTab.Trim();
+                cmd.Parameters.Add("@iLoai", SqlDbType.Int).Value = 2;
                 cmd.Parameters.Add("@sBT", SqlDbType.NVarChar).Value = sBTKhoiTaoTLNL;
                 cmd.Parameters.Add("@Ngay", SqlDbType.DateTime).Value = dNgay;
                 cmd.CommandType = CommandType.StoredProcedure;
@@ -630,6 +711,11 @@ namespace Vs.Payroll
             grvPTTToTruong.OptionsBehavior.Editable = !visible;
             grvPTTruLuong.OptionsBehavior.Editable = !visible;
             grvTGDNM.OptionsBehavior.Editable = !visible;
+
+            cboThang.Enabled = visible;
+            cboThangADPTTT.Enabled = visible;
+            cboThangADTGD.Enabled = visible;
+            cboNgayADTruLuong.Enabled = visible;
         }
 
         private void LoadTextPBL()
@@ -819,6 +905,12 @@ namespace Vs.Payroll
                             cboNgayADTruLuong.ClosePopup();
                             break;
                         }
+                    case 3:
+                        {
+                            cboThangADTGD.Text = grv.GetFocusedRowCellValue("THANG").ToString();
+                            cboThangADTGD.ClosePopup();
+                            break;
+                        }
                 }
             }
             catch { }
@@ -869,10 +961,18 @@ namespace Vs.Payroll
             {
                 DataTable dt1 = new DataTable();
                 dt1 = Commons.Modules.ObjSystems.ConvertDatatable(view);
-                if (Convert.ToDouble(dt1.Compute("Sum(PHAN_TRAM)", "")) > 100)
+                if (Convert.ToDouble(dt1.Compute("Sum(PHAN_TRAM)", "ID_CN = " + view.GetFocusedRowCellValue("ID_CN") + "")) > 100)
                 {
                     e.Valid = false;
                     view.SetColumnError(ptPhanBo, Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgPhanTramPhanBoKhongHopLe"));
+                    return;
+                }
+
+                if (dt1.AsEnumerable().Where(x => x.Field<Int64>("ID_CN").Equals(view.GetFocusedRowCellValue("ID_CN")) && x["ID_DV"].Equals(view.GetFocusedRowCellValue("ID_DV"))).CopyToDataTable().Rows.Count > 1)
+                {
+                    e.Valid = false;
+                    e.ErrorText = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgTrungDLLuoi");
+                    view.SetColumnError(view.Columns["ID_DV"], e.ErrorText);
                     return;
                 }
             }
@@ -923,6 +1023,38 @@ namespace Vs.Payroll
             }
         }
 
+        private void grvPTTruLuong_ValidateRow(object sender, DevExpress.XtraGrid.Views.Base.ValidateRowEventArgs e)
+        {
+            grvPTTruLuong.ClearColumnErrors();
+
+            GridView view = sender as GridView;
+            DevExpress.XtraGrid.Columns.GridColumn PhanTram = view.Columns["PHAN_TRAM"];
+
+            try
+            {
+                DataTable dt1 = new DataTable();
+                dt1 = Commons.Modules.ObjSystems.ConvertDatatable(view);
+                if (Convert.ToDouble(dt1.Compute("Sum(PHAN_TRAM)", "")) > 100)
+                {
+                    e.Valid = false;
+                    view.SetColumnError(PhanTram, Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgPhanTramKhongHopLe"));
+                    return;
+                }
+
+                if (dt1.AsEnumerable().Where(x => x.Field<Int64>("ID_DV").Equals(view.GetFocusedRowCellValue("ID_DV"))).CopyToDataTable().Rows.Count > 1)
+                {
+                    e.Valid = false;
+                    e.ErrorText = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgTrungDLLuoi");
+                    view.SetColumnError(view.Columns["ID_DV"], e.ErrorText);
+                    return;
+                }
+            }
+            catch
+            {
+
+            }
+        }
+
         private void grvPTTToTruong_InvalidRowException(object sender, DevExpress.XtraGrid.Views.Base.InvalidRowExceptionEventArgs e)
         {
             e.ExceptionMode = DevExpress.XtraEditors.Controls.ExceptionMode.NoAction;
@@ -932,6 +1064,16 @@ namespace Vs.Payroll
         {
             e.ExceptionMode = DevExpress.XtraEditors.Controls.ExceptionMode.NoAction;
         }
+        private void grvPTTruLuong_InvalidRowException(object sender, DevExpress.XtraGrid.Views.Base.InvalidRowExceptionEventArgs e)
+        {
+            e.ExceptionMode = DevExpress.XtraEditors.Controls.ExceptionMode.NoAction;
+        }
+
+        private void grvPTTruLuong_InvalidValueException(object sender, DevExpress.XtraEditors.Controls.InvalidValueExceptionEventArgs e)
+        {
+            e.ExceptionMode = DevExpress.XtraEditors.Controls.ExceptionMode.NoAction;
+        }
+
 
         #endregion
 

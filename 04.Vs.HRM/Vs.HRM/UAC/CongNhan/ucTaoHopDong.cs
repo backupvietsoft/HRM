@@ -87,10 +87,11 @@ namespace Vs.HRM
                 conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
                 DataSet ds = new DataSet();
                 conn.Open();
-                switch (Commons.Modules.KyHieuDV){
+                switch (Commons.Modules.KyHieuDV)
+                {
                     case "DM":
                         {
-                           
+
                             System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spGetListCNChuaCoHD", conn);
                             cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
                             cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
@@ -104,10 +105,10 @@ namespace Vs.HRM
                             cmd.Parameters.Add("@Them", SqlDbType.Int).Value = rdoChonXem.SelectedIndex;
                             cmd.CommandType = CommandType.StoredProcedure;
                             System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
-                       
+
                             adp.Fill(ds);
                             break;
-                    }
+                        }
                     case "NB":
                         {
                             System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spGetListCNChuaCoHD_NB", conn);
@@ -147,7 +148,7 @@ namespace Vs.HRM
                             break;
                         }
                 }
-               
+
                 DataTable dt = new DataTable();
                 dt = ds.Tables[0].Copy();
                 dt.Columns["CHON"].ReadOnly = false;
@@ -520,7 +521,8 @@ namespace Vs.HRM
                     case "InHDThuViec":
                         {
 
-                            switch (Commons.Modules.KyHieuDV){
+                            switch (Commons.Modules.KyHieuDV)
+                            {
                                 case "NB":
                                     {
                                         DataTable dt = new DataTable();
@@ -571,7 +573,7 @@ namespace Vs.HRM
                                         frm.ShowDialog();
                                         break;
                                     }
-                            }                                                   
+                            }
                             break;
                         }
                     case "sua":
@@ -606,7 +608,17 @@ namespace Vs.HRM
                                 return;
                             }
                             this.Cursor = Cursors.Default;
-                            if (!SaveData()) return;
+                            if (!SaveData())
+                            {
+                                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgCapNhatKhongCong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return;
+
+                            }
+                            else
+                            {
+                                Commons.Modules.ObjSystems.Alert(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgCapNhatThanhCong"), Commons.Form_Alert.enmType.Success);
+                            }
+
                             rdoChonXem.SelectedIndex = 0;
                             rdoChonXem_SelectedIndexChanged(null, null);
                             enabel(true);
@@ -776,10 +788,14 @@ namespace Vs.HRM
             try
             {
                 iID_CN = Convert.ToInt64(grvDSUngVien.GetFocusedRowCellValue("ID_CN"));
-                string sSQL = "UPDATE dbo.HOP_DONG_LAO_DONG SET ID_TT = 2 WHERE ID_CN = " + grvDSUngVien.GetFocusedRowCellValue("ID_CN") + " AND ID_HDLD = " + grvDSUngVien.GetFocusedRowCellValue("ID_HDLD") + "";
-                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, sSQL);
+                DataTable dt = new DataTable();
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spCapNhatTinhTrangHD",Commons.Modules.UserName, Commons.Modules.TypeLanguage, grvDSUngVien.GetFocusedRowCellValue("ID_CN"), grvDSUngVien.GetFocusedRowCellValue("ID_HDLD")));
+                if (dt.Rows[0][0].ToString() == "-99")
+                {
+                    Commons.Modules.ObjSystems.Alert(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgCapNhatKhongCong"), Commons.Form_Alert.enmType.Error);
+                }
                 LoadData();
-                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgLuuThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "sThongBao"), MessageBoxButtons.OK);
+                Commons.Modules.ObjSystems.Alert(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgLuuThanhCong"), Commons.Form_Alert.enmType.Success);
             }
             catch (Exception ex) { }
         }

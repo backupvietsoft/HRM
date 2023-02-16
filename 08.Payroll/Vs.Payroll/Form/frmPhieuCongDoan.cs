@@ -866,10 +866,10 @@ namespace Vs.Payroll
 
         private void grvCD_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Home)
-            {
-                searchControl2.Focus();
-            }
+            //if (e.KeyCode == Keys.Home)
+            //{
+            //    searchControl2.Focus();
+            //}
         }
         //private void cboMSCN_KeyDown(object sender, KeyEventArgs e)
         //{
@@ -898,6 +898,16 @@ namespace Vs.Payroll
         {
             try
             {
+                if (e.KeyCode == Keys.Enter)
+                {
+                   
+                    grvCD.Focus();
+                    grvCD.FocusedColumn = grvCD.Columns["ID_CD"];
+                    grvCD.FocusedRowHandle = DevExpress.XtraGrid.GridControl.NewItemRowHandle;
+
+                    int currentRow = grvTo.FocusedRowHandle;
+                    grvTo.FocusedRowHandle = currentRow + 1;
+                }
                 //grvCD.SetFocusedRowCellValue("ID_CD", cboMQL.GetDataSourceValue("ID_CD", 1));
                 if (e.KeyCode == Keys.Delete && !windowsUIButton.Buttons[0].Properties.Visible)
                 {
@@ -1075,12 +1085,12 @@ namespace Vs.Payroll
 
         private void searchControl2_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
-            {
-                grvCD.Focus();
-                grvCD.FocusedColumn = grvCD.Columns["ID_CD"];
-                grvCD.FocusedRowHandle = DevExpress.XtraGrid.GridControl.NewItemRowHandle;
-            }
+            //if (e.KeyCode == Keys.Enter)
+            //{
+            //    grvCD.Focus();
+            //    grvCD.FocusedColumn = grvCD.Columns["ID_CD"];
+            //    grvCD.FocusedRowHandle = DevExpress.XtraGrid.GridControl.NewItemRowHandle;
+            //}
         }
         private void LoadCboXN()
         {

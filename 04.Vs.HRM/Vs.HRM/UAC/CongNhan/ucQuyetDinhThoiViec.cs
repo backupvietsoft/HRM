@@ -243,7 +243,7 @@ namespace Vs.HRM
         {
             try
             {
-                if (Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT COUNT(*) FROM dbo.QUYET_DINH_THOI_VIEC WHERE ID_CN = " + Convert.ToString(grvCongNhan.GetFocusedRowCellValue("ID_CN")) + " AND NGAY_THOI_VIEC = '" + NGAY_THOI_VIECDateEdit.DateTime.ToString("MM/dd/yyyy") + "' AND ID_QDTV <> "+Convert.ToString(grvCongNhan.GetFocusedRowCellValue("ID_QDTV")) +"")) != 0)
+                if (Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT COUNT(*) FROM dbo.QUYET_DINH_THOI_VIEC WHERE ID_CN = " + Convert.ToString(grvCongNhan.GetFocusedRowCellValue("ID_CN")) + " AND NGAY_THOI_VIEC = '" + NGAY_THOI_VIECDateEdit.DateTime.ToString("MM/dd/yyyy") + "' AND ID_QDTV <> " + (Convert.ToString(grvCongNhan.GetFocusedRowCellValue("ID_QDTV")) == "" ? -1 : Convert.ToInt64(grvCongNhan.GetFocusedRowCellValue("ID_QDTV"))) + "")) != 0)
                 {
                     XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgNgayNghiViecDaTonTai"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning); return;
                 }

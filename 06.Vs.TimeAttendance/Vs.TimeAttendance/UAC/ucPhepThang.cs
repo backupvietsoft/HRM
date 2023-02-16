@@ -16,7 +16,7 @@ using System.Drawing;
 using Vs.Report;
 //using Microsoft.Office.Interop.Excel;
 using DataTable = System.Data.DataTable;
-
+using DevExpress.XtraEditors.Repository;
 
 namespace Vs.TimeAttendance
 {
@@ -178,7 +178,7 @@ namespace Vs.TimeAttendance
                             string COTUPDATE= "TT_" + i + "";
                                
                             
-                            SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "update " + sBT + " SET PHEP_DA_NGHI = ISNULL(T_1,0) + ISNULL(T_2,0) + ISNULL(T_3,0) + ISNULL(T_4,0) + ISNULL(T_5,0) +ISNULL(T_6,0) + ISNULL(T_7,0) + ISNULL(T_8,0) + ISNULL(T_9,0) + ISNULL(T_10,0) + ISNULL(T_11,0)+ISNULL(T_12,0) update " + sBT + " SET "+COTUPDATE+ " = PHEP_CON_LAI, PHEP_CON_LAI = 0");
+                            SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "update " + sBT + " SET PHEP_DA_NGHI = ISNULL(T_1,0) + ISNULL(T_2,0) + ISNULL(T_3,0) + ISNULL(T_4,0) + ISNULL(T_5,0) +ISNULL(T_6,0) + ISNULL(T_7,0) + ISNULL(T_8,0) + ISNULL(T_9,0) + ISNULL(T_10,0) + ISNULL(T_11,0)+ISNULL(T_12,0) update " + sBT + " SET "+COTUPDATE+ " = PHEP_CON_LAI, PHEP_CON_LAI = 0 WHERE ISNULL(PHEP_CON_LAI,0) > 0");
                             //Load lại lưới vừa tính
                             DataTable dt = new DataTable();
                             dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, " SELECT * FROM " + sBT + " "));
@@ -828,6 +828,16 @@ namespace Vs.TimeAttendance
                 dt.Columns[2].ReadOnly = true;
                 dt.Columns[3].ReadOnly = true;
                 Commons.Modules.ObjSystems.MLoadXtraGrid(grdPhepThang, grvPhepThang, dt, bThem, true, false, true,true,this.Name);
+
+                RepositoryItemTextEdit txtEdit = new RepositoryItemTextEdit();
+                txtEdit.Properties.DisplayFormat.FormatString = "N1";
+                txtEdit.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+                txtEdit.Properties.EditFormat.FormatString = "N1";
+                txtEdit.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+                txtEdit.Properties.Mask.EditMask = "N1";
+                txtEdit.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
+                txtEdit.Properties.Mask.UseMaskAsDisplayFormat = true;
+
                 grvPhepThang.Columns["MS_CN"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
                 grvPhepThang.Columns["HO_TEN"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
                 grvPhepThang.Columns["NGAY_VAO_LAM"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
@@ -835,6 +845,11 @@ namespace Vs.TimeAttendance
                 grvPhepThang.Columns["PHEP_UNG_TRUOC"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
 
                 grvPhepThang.Columns["PHEP_CON_LAI"].UnboundType = DevExpress.Data.UnboundColumnType.Decimal;
+
+                grvPhepThang.Columns["PHEP_THAM_NIEN"].ColumnEdit = txtEdit;
+                grvPhepThang.Columns["PHEP_UNG_TRUOC"].ColumnEdit = txtEdit;
+
+
                 grvPhepThang.Columns["ID_CN"].Visible = false;
                 //visible tháng lớn hơn tháng đang chọn
                 int iVisible = 6;
@@ -842,25 +857,37 @@ namespace Vs.TimeAttendance
                 {
                     grvPhepThang.Columns["T_" + i + ""].VisibleIndex = iVisible + 1;
                     grvPhepThang.Columns["TT_" + i + ""].VisibleIndex = iVisible + 2;
+                    grvPhepThang.Columns["T_" + i + ""].ColumnEdit = txtEdit;
+                    grvPhepThang.Columns["TT_" + i + ""].ColumnEdit = txtEdit;
                     if (i > Convert.ToDateTime(cboThang.EditValue).Month)
                     {
                         grvPhepThang.Columns["T_" + i + ""].VisibleIndex = iVisible + 1;
                         grvPhepThang.Columns["TT_" + i + ""].VisibleIndex = iVisible + 2;
                         grvPhepThang.Columns["T_" + i + ""].Visible = false;
                         grvPhepThang.Columns["TT_" + i + ""].Visible = false;
+                        grvPhepThang.Columns["T_" + i + ""].ColumnEdit = txtEdit;
+                        grvPhepThang.Columns["TT_" + i + ""].ColumnEdit = txtEdit;
                     }
                     else
                     {
                         grvPhepThang.Columns["T_" + i + ""].Visible = true;
                         grvPhepThang.Columns["TT_" + i + ""].Visible = true;
+                        grvPhepThang.Columns["T_" + i + ""].ColumnEdit = txtEdit;
+                        grvPhepThang.Columns["TT_" + i + ""].ColumnEdit = txtEdit;
                     }
                     iVisible = iVisible + 2;
                 }
 
                 grvPhepThang.Columns["PHEP_DA_NGHI"].VisibleIndex = 50;
                 grvPhepThang.Columns["PHEP_TIEU_CHUAN"].VisibleIndex = 51;
-                grvPhepThang.Columns["SO_THANG_LAM_VIEC"].VisibleIndex = 52;
+                grvPhepThang.Columns["SO_THANG_LV"].VisibleIndex = 52;
                 grvPhepThang.Columns["PHEP_CON_LAI"].VisibleIndex = 53;
+
+                grvPhepThang.Columns["PHEP_DA_NGHI"].ColumnEdit = txtEdit;
+                grvPhepThang.Columns["PHEP_TIEU_CHUAN"].ColumnEdit = txtEdit;
+                grvPhepThang.Columns["SO_THANG_LV"].ColumnEdit = txtEdit;
+                grvPhepThang.Columns["PHEP_CON_LAI"].ColumnEdit = txtEdit;
+
                 Commons.Modules.sLoad = "";
             }
             catch (Exception)

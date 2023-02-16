@@ -104,7 +104,6 @@ namespace Vs.Payroll
                             string sTB = "sBTTinhLuong" + Commons.Modules.iIDUser;
                             try
                             {
-
                                 Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sTB, Commons.Modules.ObjSystems.ConvertDatatable(grdData), "");
                                 System.Data.SqlClient.SqlConnection conn;
                                 conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);

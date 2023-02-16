@@ -342,6 +342,7 @@
             this.grvCNThucHien.Name = "grvCNThucHien";
             this.grvCNThucHien.OptionsView.ShowGroupPanel = false;
             this.grvCNThucHien.CellValueChanged += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.grvCNThucHien_CellValueChanged);
+            this.grvCNThucHien.ColumnFilterChanged += new System.EventHandler(this.grvCNThucHien_ColumnFilterChanged);
             // 
             // lblDSCNThucHien
             // 

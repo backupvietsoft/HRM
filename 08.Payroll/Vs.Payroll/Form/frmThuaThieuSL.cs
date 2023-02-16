@@ -648,8 +648,11 @@ namespace Vs.Payroll.Form
         {
             try
             {
+
                 DataTable dt1 = new DataTable();
                 dt1 = Commons.Modules.ObjSystems.ConvertDatatable(grvCNThucHien);
+                dt1.DefaultView.RowFilter = grvCNThucHien.ActiveFilterString.ToString();
+                dt1 = dt1.DefaultView.ToTable();
                 lbl.Text = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "lblTongSoLuong") + " " + (Convert.ToDouble(dt1.Compute("Sum(SO_LUONG)", "")).ToString("N0") == "" ? "0" : Convert.ToDouble(dt1.Compute("Sum(SO_LUONG)", "")).ToString("N0")).ToString();
             }
             catch
@@ -862,6 +865,11 @@ namespace Vs.Payroll.Form
         }
 
         private void grvCNThucHien_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
+        {
+            LoadTextTongLSP();
+        }
+
+        private void grvCNThucHien_ColumnFilterChanged(object sender, EventArgs e)
         {
             LoadTextTongLSP();
         }

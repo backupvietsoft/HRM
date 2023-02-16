@@ -283,6 +283,15 @@ namespace VietSoftHRM
                         break;
                     }
                 
+                case "mnuTinhPhepTon":
+                    {
+                        ucPhepTon tmp = new ucPhepTon();
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(tmp);
+                        tmp.Dock = DockStyle.Fill;
+                        break;
+                    }
+                
                 case "mnuDKTGKhongLamSP":
                     {
                         ucDKThoiGianKhongLamSP ctl = new ucDKThoiGianKhongLamSP();

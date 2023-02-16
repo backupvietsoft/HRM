@@ -52,9 +52,7 @@ namespace VietSoftHRM
                 Commons.Modules.iSoLeSL = 1;
                 Commons.Modules.iSoLeDG = 2;
                 Commons.Modules.iSoLeTT = 0;
-                Commons.Modules.iGio = 9.6;
                 Commons.Modules.iNNghi = 1;
-                Commons.Modules.iLamTronGio = 0;
                 Commons.Modules.sSoLeSL = Commons.Modules.ObjSystems.sDinhDangSoLe(Commons.Modules.iSoLeSL);
                 Commons.Modules.sSoLeDG = Commons.Modules.ObjSystems.sDinhDangSoLe(Commons.Modules.iSoLeDG);
                 Commons.Modules.sSoLeTT = Commons.Modules.ObjSystems.sDinhDangSoLe(Commons.Modules.iSoLeTT);
@@ -80,9 +78,12 @@ namespace VietSoftHRM
                 Commons.Modules.KyHieuDV = Convert.ToString(dt.Rows[0]["KY_HIEU_DV"]);
                 Commons.Modules.sHideMenu = Commons.Modules.ObjSystems.Decrypt(dt.Rows[0]["HIDE_MENU"].ToString(), true);
                 Commons.Modules.connect = Convert.ToString(dt.Rows[0]["CON_NECT"]);
+                Commons.Modules.iGio = Convert.ToDouble(dt.Rows[0]["SG_LV"]);
+                Commons.Modules.iLamTronGio = Convert.ToInt32(dt.Rows[0]["LOAI_LT_CC"]); //0 Khong lam tron giờ//1 làm tròn giờ
                 try
                 {
                     Commons.Modules.bKiemPCD = Convert.ToBoolean(dt.Rows[0]["CHECK_PCD"]);
+
                 }
                 catch 
                 {
@@ -90,9 +91,7 @@ namespace VietSoftHRM
 
                 try
                 {
-                    string sUserTL = Commons.Modules.ObjSystems.Decrypt(dt.Rows[0]["USER_TL"].ToString(), true);
-                    string sPassTL = Commons.Modules.ObjSystems.Decrypt(dt.Rows[0]["PASS_TL"].ToString(), true);
-                    using (new ConnectToSharedFolder(dt.Rows[0]["DUONG_DAN_TL"].ToString(), new NetworkCredential(sUserTL, sPassTL)))
+                    using (new ConnectToSharedFolder(dt.Rows[0]["DUONG_DAN_TL"].ToString(), new NetworkCredential(dt.Rows[0]["USER_TL"].ToString(), dt.Rows[0]["PASS_TL"].ToString())))
                     {
                         Commons.Modules.sDDTaiLieu = dt.Rows[0]["DUONG_DAN_TL"].ToString();
                         bool exists = System.IO.Directory.Exists(Commons.Modules.sDDTaiLieu);
@@ -102,16 +101,17 @@ namespace VietSoftHRM
                         }
                         using (var cred = new Credential())
                         {
-                            cred.Username = sUserTL;
-                            cred.Password = sPassTL;
+                            cred.Username = dt.Rows[0]["USER_TL"].ToString();
+                            cred.Password = dt.Rows[0]["PASS_TL"].ToString();
                             cred.Target = Commons.Modules.sDDTaiLieu.Substring(2, Commons.Modules.sDDTaiLieu.Substring(2).IndexOf("\\"));
                             cred.Type = CredentialType.DomainPassword;
                             cred.PersistanceType = PersistanceType.LocalComputer;
                             cred.Save();
                         }
+                        
                     }
                 }
-                catch (Exception ex)
+                catch 
                 {
                     Commons.Modules.sDDTaiLieu = "";
                     Commons.Modules.iLOAI_CN = 0;
@@ -247,18 +247,17 @@ namespace VietSoftHRM
                                 return;
                             }
                             MUpdate(loai, ".", ".", link3);
-                            Commons.Modules.sInfoSer = Commons.Modules.sInfoClient;
                             break;
                         }
                     case 2: // Updatetren dropbox
                         {
                             if (string.IsNullOrEmpty(link1)) return;
                             MUpdate(loai, link1, link2, ".");
-                            Commons.Modules.sInfoSer = Commons.Modules.sInfoClient;
                             break;
                         }
                     default: { break; }
                 }
+                Commons.Modules.sInfoSer = Commons.Modules.sInfoClient;
             }
             catch
             { }

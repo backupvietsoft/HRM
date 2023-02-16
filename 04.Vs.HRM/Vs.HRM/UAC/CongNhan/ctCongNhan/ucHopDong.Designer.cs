@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.XtraEditors.DXErrorProvider.CompareAgainstControlValidationRule compareAgainstControlValidationRule2 = new DevExpress.XtraEditors.DXErrorProvider.CompareAgainstControlValidationRule();
+            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule8 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule1 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule2 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
-            DevExpress.XtraEditors.DXErrorProvider.CompareAgainstControlValidationRule compareAgainstControlValidationRule1 = new DevExpress.XtraEditors.DXErrorProvider.CompareAgainstControlValidationRule();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule3 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule4 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
+            DevExpress.XtraEditors.DXErrorProvider.CompareAgainstControlValidationRule compareAgainstControlValidationRule1 = new DevExpress.XtraEditors.DXErrorProvider.CompareAgainstControlValidationRule();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule5 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule6 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule7 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
@@ -46,7 +46,7 @@
             DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions6 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
             DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions7 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
             DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions8 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            this.NGAY_HET_HDDateEdit = new DevExpress.XtraEditors.DateEdit();
+            this.NGAY_BAT_DAU_HDDateEdit = new DevExpress.XtraEditors.DateEdit();
             this.dataLayoutControl1 = new DevExpress.XtraDataLayout.DataLayoutControl();
             this.txtMO_TA_CV = new DevExpress.XtraEditors.MemoEdit();
             this.cboTinhTrang = new DevExpress.XtraEditors.LookUpEdit();
@@ -61,7 +61,7 @@
             this.CONG_VIECTextEdit = new DevExpress.XtraEditors.TextEdit();
             this.MUC_LUONG_CHINHTextEdit = new DevExpress.XtraEditors.TextEdit();
             this.SO_NGAY_PHEPTextEdit = new DevExpress.XtraEditors.TextEdit();
-            this.NGAY_BAT_DAU_HDDateEdit = new DevExpress.XtraEditors.DateEdit();
+            this.NGAY_HET_HDDateEdit = new DevExpress.XtraEditors.DateEdit();
             this.NGAY_KYDateEdit = new DevExpress.XtraEditors.DateEdit();
             this.CHI_SO_PHU_CAPTextEdit = new DevExpress.XtraEditors.TextEdit();
             this.MUC_LUONG_THUC_LINHTextEdit = new DevExpress.XtraEditors.TextEdit();
@@ -98,8 +98,8 @@
             this.searchControl = new DevExpress.XtraEditors.SearchControl();
             this.dxValidationProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
             this.ofdfile = new System.Windows.Forms.OpenFileDialog();
-            ((System.ComponentModel.ISupportInitialize)(this.NGAY_HET_HDDateEdit.Properties.CalendarTimeProperties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NGAY_HET_HDDateEdit.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NGAY_BAT_DAU_HDDateEdit.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NGAY_BAT_DAU_HDDateEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataLayoutControl1)).BeginInit();
             this.dataLayoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtMO_TA_CV.Properties)).BeginInit();
@@ -115,8 +115,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.CONG_VIECTextEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.MUC_LUONG_CHINHTextEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SO_NGAY_PHEPTextEdit.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NGAY_BAT_DAU_HDDateEdit.Properties.CalendarTimeProperties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NGAY_BAT_DAU_HDDateEdit.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NGAY_HET_HDDateEdit.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NGAY_HET_HDDateEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NGAY_KYDateEdit.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NGAY_KYDateEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.CHI_SO_PHU_CAPTextEdit.Properties)).BeginInit();
@@ -155,25 +155,26 @@
             ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).BeginInit();
             this.SuspendLayout();
             // 
-            // NGAY_HET_HDDateEdit
+            // NGAY_BAT_DAU_HDDateEdit
             // 
-            this.NGAY_HET_HDDateEdit.EditValue = null;
-            this.NGAY_HET_HDDateEdit.Location = new System.Drawing.Point(1060, 32);
-            this.NGAY_HET_HDDateEdit.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.NGAY_HET_HDDateEdit.Name = "NGAY_HET_HDDateEdit";
-            this.NGAY_HET_HDDateEdit.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.NGAY_BAT_DAU_HDDateEdit.EditValue = null;
+            this.NGAY_BAT_DAU_HDDateEdit.Location = new System.Drawing.Point(758, 32);
+            this.NGAY_BAT_DAU_HDDateEdit.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.NGAY_BAT_DAU_HDDateEdit.Name = "NGAY_BAT_DAU_HDDateEdit";
+            this.NGAY_BAT_DAU_HDDateEdit.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.NGAY_HET_HDDateEdit.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.NGAY_BAT_DAU_HDDateEdit.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.NGAY_HET_HDDateEdit.Size = new System.Drawing.Size(154, 24);
-            this.NGAY_HET_HDDateEdit.StyleController = this.dataLayoutControl1;
-            this.NGAY_HET_HDDateEdit.TabIndex = 24;
-            compareAgainstControlValidationRule2.CompareControlOperator = DevExpress.XtraEditors.DXErrorProvider.CompareControlOperator.Greater;
-            compareAgainstControlValidationRule2.Control = this.NGAY_BAT_DAU_HDDateEdit;
-            compareAgainstControlValidationRule2.ErrorText = "Ngày hết hợp đồng phải bé hơn ngày kết thúc";
-            compareAgainstControlValidationRule2.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.Critical;
-            this.dxValidationProvider1.SetValidationRule(this.NGAY_HET_HDDateEdit, compareAgainstControlValidationRule2);
-            this.NGAY_HET_HDDateEdit.EditValueChanged += new System.EventHandler(this.NGAY_HET_HDDateEdit_EditValueChanged);
+            this.NGAY_BAT_DAU_HDDateEdit.Properties.CalendarView = DevExpress.XtraEditors.Repository.CalendarView.Classic;
+            this.NGAY_BAT_DAU_HDDateEdit.Properties.VistaDisplayMode = DevExpress.Utils.DefaultBoolean.False;
+            this.NGAY_BAT_DAU_HDDateEdit.Size = new System.Drawing.Size(153, 24);
+            this.NGAY_BAT_DAU_HDDateEdit.StyleController = this.dataLayoutControl1;
+            this.NGAY_BAT_DAU_HDDateEdit.TabIndex = 23;
+            conditionValidationRule8.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule8.ErrorText = "Không được trống";
+            conditionValidationRule8.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.Critical;
+            this.dxValidationProvider1.SetValidationRule(this.NGAY_BAT_DAU_HDDateEdit, conditionValidationRule8);
+            this.NGAY_BAT_DAU_HDDateEdit.EditValueChanged += new System.EventHandler(this.NGAY_BAT_DAU_HDDateEdit_EditValueChanged);
             // 
             // dataLayoutControl1
             // 
@@ -273,8 +274,10 @@
             this.SO_HDLDTextEdit.Size = new System.Drawing.Size(153, 24);
             this.SO_HDLDTextEdit.StyleController = this.dataLayoutControl1;
             this.SO_HDLDTextEdit.TabIndex = 5;
-            compareAgainstControlValidationRule1.ErrorText = "This value is not valid";
-            this.dxValidationProvider1.SetValidationRule(this.SO_HDLDTextEdit, compareAgainstControlValidationRule1);
+            conditionValidationRule3.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule3.ErrorText = "Không được trống";
+            conditionValidationRule3.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.Critical;
+            this.dxValidationProvider1.SetValidationRule(this.SO_HDLDTextEdit, conditionValidationRule3);
             // 
             // ID_LHDLDLookUpEdit
             // 
@@ -287,10 +290,10 @@
             this.ID_LHDLDLookUpEdit.Size = new System.Drawing.Size(154, 24);
             this.ID_LHDLDLookUpEdit.StyleController = this.dataLayoutControl1;
             this.ID_LHDLDLookUpEdit.TabIndex = 7;
-            conditionValidationRule3.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule3.ErrorText = "This value is not valid";
-            conditionValidationRule3.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.Critical;
-            this.dxValidationProvider1.SetValidationRule(this.ID_LHDLDLookUpEdit, conditionValidationRule3);
+            conditionValidationRule4.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule4.ErrorText = "Không được trống";
+            conditionValidationRule4.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.Critical;
+            this.dxValidationProvider1.SetValidationRule(this.ID_LHDLDLookUpEdit, conditionValidationRule4);
             this.ID_LHDLDLookUpEdit.EditValueChanged += new System.EventHandler(this.ID_LHDLDLookUpEdit_EditValueChanged);
             // 
             // HD_GIA_HANCheckEdit
@@ -357,26 +360,25 @@
             this.SO_NGAY_PHEPTextEdit.StyleController = this.dataLayoutControl1;
             this.SO_NGAY_PHEPTextEdit.TabIndex = 19;
             // 
-            // NGAY_BAT_DAU_HDDateEdit
+            // NGAY_HET_HDDateEdit
             // 
-            this.NGAY_BAT_DAU_HDDateEdit.EditValue = null;
-            this.NGAY_BAT_DAU_HDDateEdit.Location = new System.Drawing.Point(758, 32);
-            this.NGAY_BAT_DAU_HDDateEdit.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.NGAY_BAT_DAU_HDDateEdit.Name = "NGAY_BAT_DAU_HDDateEdit";
-            this.NGAY_BAT_DAU_HDDateEdit.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.NGAY_HET_HDDateEdit.EditValue = null;
+            this.NGAY_HET_HDDateEdit.Location = new System.Drawing.Point(1060, 32);
+            this.NGAY_HET_HDDateEdit.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.NGAY_HET_HDDateEdit.Name = "NGAY_HET_HDDateEdit";
+            this.NGAY_HET_HDDateEdit.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.NGAY_BAT_DAU_HDDateEdit.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.NGAY_HET_HDDateEdit.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.NGAY_BAT_DAU_HDDateEdit.Properties.CalendarView = DevExpress.XtraEditors.Repository.CalendarView.Classic;
-            this.NGAY_BAT_DAU_HDDateEdit.Properties.VistaDisplayMode = DevExpress.Utils.DefaultBoolean.False;
-            this.NGAY_BAT_DAU_HDDateEdit.Size = new System.Drawing.Size(153, 24);
-            this.NGAY_BAT_DAU_HDDateEdit.StyleController = this.dataLayoutControl1;
-            this.NGAY_BAT_DAU_HDDateEdit.TabIndex = 23;
-            conditionValidationRule4.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule4.ErrorText = "Không được trống";
-            conditionValidationRule4.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.Critical;
-            this.dxValidationProvider1.SetValidationRule(this.NGAY_BAT_DAU_HDDateEdit, conditionValidationRule4);
-            this.NGAY_BAT_DAU_HDDateEdit.EditValueChanged += new System.EventHandler(this.NGAY_BAT_DAU_HDDateEdit_EditValueChanged);
+            this.NGAY_HET_HDDateEdit.Size = new System.Drawing.Size(154, 24);
+            this.NGAY_HET_HDDateEdit.StyleController = this.dataLayoutControl1;
+            this.NGAY_HET_HDDateEdit.TabIndex = 24;
+            compareAgainstControlValidationRule1.CompareControlOperator = DevExpress.XtraEditors.DXErrorProvider.CompareControlOperator.Greater;
+            compareAgainstControlValidationRule1.Control = this.NGAY_BAT_DAU_HDDateEdit;
+            compareAgainstControlValidationRule1.ErrorText = "Ngày hết hợp đồng phải bé hơn ngày kết thúc";
+            compareAgainstControlValidationRule1.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.Critical;
+            this.dxValidationProvider1.SetValidationRule(this.NGAY_HET_HDDateEdit, compareAgainstControlValidationRule1);
+            this.NGAY_HET_HDDateEdit.EditValueChanged += new System.EventHandler(this.NGAY_HET_HDDateEdit_EditValueChanged);
             // 
             // NGAY_KYDateEdit
             // 
@@ -634,6 +636,8 @@
             // 
             // ItemForNGAY_HET_HD
             // 
+            this.ItemForNGAY_HET_HD.AppearanceItemCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.ItemForNGAY_HET_HD.AppearanceItemCaption.Options.UseForeColor = true;
             this.ItemForNGAY_HET_HD.Control = this.NGAY_HET_HDDateEdit;
             this.ItemForNGAY_HET_HD.Location = new System.Drawing.Point(907, 26);
             this.ItemForNGAY_HET_HD.Name = "ItemForNGAY_HET_HD";
@@ -837,8 +841,8 @@
             this.Name = "ucHopDong";
             this.Size = new System.Drawing.Size(1220, 615);
             this.Load += new System.EventHandler(this.UcHopDong_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.NGAY_HET_HDDateEdit.Properties.CalendarTimeProperties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NGAY_HET_HDDateEdit.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NGAY_BAT_DAU_HDDateEdit.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NGAY_BAT_DAU_HDDateEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataLayoutControl1)).EndInit();
             this.dataLayoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.txtMO_TA_CV.Properties)).EndInit();
@@ -854,8 +858,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.CONG_VIECTextEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.MUC_LUONG_CHINHTextEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.SO_NGAY_PHEPTextEdit.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NGAY_BAT_DAU_HDDateEdit.Properties.CalendarTimeProperties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NGAY_BAT_DAU_HDDateEdit.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NGAY_HET_HDDateEdit.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NGAY_HET_HDDateEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NGAY_KYDateEdit.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NGAY_KYDateEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.CHI_SO_PHU_CAPTextEdit.Properties)).EndInit();

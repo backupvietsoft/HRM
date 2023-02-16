@@ -21,13 +21,23 @@ namespace Vs.TimeAttendance
         RepositoryItemTimeEdit repositoryItemTimeEdit1;
         DateTime dNgay;
         public DataTable dtCapNhat;
+        private DateTime dGioBatDau = new DateTime();
+        private DateTime dGioKetThuc = new DateTime();
+        private int iPhutBatDau = 0;
+        private int iPhutKetThuc = 0;
+        private int iPhutBatDauQuyDinh = 0;
+        private int iPhutKetThucQuyDinh = 0;
+        private int iPhutAnCa = 0;
+        private double dbGioTangCa = 0;
+        private int iRes = 0;
+        private bool flag = false;
         public frmCapNhatNhom(DateTime dngay)
         {
             dNgay = dngay;
             InitializeComponent();
             Commons.Modules.ObjSystems.ThayDoiNN(this, Root,windowsUIButton);
             repositoryItemTimeEdit1 = new RepositoryItemTimeEdit();
-
+            iRes = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT [dbo].[fnKiemTraNgayNghi]('" + Convert.ToDateTime(dngay).ToString("MM/dd/yyyy") + "')"));
         }
 
         private void frmCapNhatNhom_Load(object sender, EventArgs e)
@@ -94,12 +104,14 @@ namespace Vs.TimeAttendance
             {
                 DataTable dt = new DataTable();
 
-                string sSql = "SELECT DISTINCT ID_CDLV ID_CA, CA, GIO_BD, GIO_KT FROM CHE_DO_LAM_VIEC WHERE ID_NHOM= " + cboID_NHOM.EditValue + " AND TANG_CA = 1 ORDER BY CA";
+                string sSql = "SELECT DISTINCT ID_CDLV ID_CA, CA, GIO_BD, GIO_KT, PHUT_BD, PHUT_KT FROM CHE_DO_LAM_VIEC WHERE ID_NHOM= " + cboID_NHOM.EditValue + " AND TANG_CA = 1 ORDER BY CA";
                 dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSql));
 
                 Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboCA, dt, "ID_CA", "CA", "Ca_lam");
                 cboCA.Properties.View.Columns["GIO_BD"].ColumnEdit = this.repositoryItemTimeEdit1;
                 cboCA.Properties.View.Columns["GIO_KT"].ColumnEdit = this.repositoryItemTimeEdit1;
+                cboCA.Properties.View.Columns["PHUT_BD"].Visible = false;
+                cboCA.Properties.View.Columns["PHUT_KT"].Visible = false;
 
                 cboCA.EditValue = -1;
 
@@ -145,44 +157,44 @@ namespace Vs.TimeAttendance
                 datGioKT.Focus();
                 return false;
             }
-            if (Convert.ToDateTime(datGioKT.EditValue) <= Convert.ToDateTime(datGioBD.EditValue))
-            {
-                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgGioKTPhaiLonHonGioBD"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return false;
-            }
-            if (Convert.ToDateTime(dNgay).DayOfWeek.ToString() != "Sunday" && Convert.ToDateTime(dNgay).DayOfWeek.ToString() != "Saturday")
-            {
-                DataTable dt = new DataTable();
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT NGAY FROM dbo.NGAY_NGHI_LE"));
-                try
-                {
-                    if (dt.AsEnumerable().Where(x => x.Field<string>("NGAY").Trim().Equals(dNgay.ToString())).CopyToDataTable().Rows.Count > 1)
-                    {
-                        return true;
-                    }
-                }
-                catch
-                {
-                    try
-                    {
-                        DateTime dGioBD = Convert.ToDateTime(cboCA.Properties.View.GetFocusedRowCellValue("GIO_BD"));
-                        DateTime dGioKT = Convert.ToDateTime(cboCA.Properties.View.GetFocusedRowCellValue("GIO_KT"));
-                        if (Convert.ToDateTime("01/01/1900 " + Convert.ToDateTime(datGioBD.EditValue).TimeOfDay.ToString()) < dGioBD || Convert.ToDateTime("01/01/1900 " + Convert.ToDateTime(datGioBD.EditValue).TimeOfDay.ToString()) > dGioKT)
-                        {
-                            XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgGioBatDauPhaiTrongKhoangThoiGianChoPhep"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return false;
-                        }
-                        if (Convert.ToDateTime("01/01/1900 " + Convert.ToDateTime(datGioKT.EditValue).TimeOfDay.ToString()) < dGioBD || Convert.ToDateTime("01/01/1900 " + Convert.ToDateTime(datGioKT.EditValue).TimeOfDay.ToString()) > dGioKT)
-                        {
-                            XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgGioKetThucPhaiTrongKhoangThoiGianChoPhep"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return false;
-                        }
-                    }
-                    catch { }
+            //if (Convert.ToDateTime(datGioKT.EditValue) <= Convert.ToDateTime(datGioBD.EditValue))
+            //{
+            //    XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgGioKTPhaiLonHonGioBD"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //    return false;
+            //}
+            //if (Convert.ToDateTime(dNgay).DayOfWeek.ToString() != "Sunday" && Convert.ToDateTime(dNgay).DayOfWeek.ToString() != "Saturday")
+            //{
+            //    DataTable dt = new DataTable();
+            //    dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT NGAY FROM dbo.NGAY_NGHI_LE"));
+            //    try
+            //    {
+            //        if (dt.AsEnumerable().Where(x => x.Field<string>("NGAY").Trim().Equals(dNgay.ToString())).CopyToDataTable().Rows.Count > 1)
+            //        {
+            //            return true;
+            //        }
+            //    }
+            //    catch
+            //    {
+            //        try
+            //        {
+            //            DateTime dGioBD = Convert.ToDateTime(cboCA.Properties.View.GetFocusedRowCellValue("GIO_BD"));
+            //            DateTime dGioKT = Convert.ToDateTime(cboCA.Properties.View.GetFocusedRowCellValue("GIO_KT"));
+            //            if (Convert.ToDateTime("01/01/1900 " + Convert.ToDateTime(datGioBD.EditValue).TimeOfDay.ToString()) < dGioBD || Convert.ToDateTime("01/01/1900 " + Convert.ToDateTime(datGioBD.EditValue).TimeOfDay.ToString()) > dGioKT)
+            //            {
+            //                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgGioBatDauPhaiTrongKhoangThoiGianChoPhep"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //                return false;
+            //            }
+            //            if (Convert.ToDateTime("01/01/1900 " + Convert.ToDateTime(datGioKT.EditValue).TimeOfDay.ToString()) < dGioBD || Convert.ToDateTime("01/01/1900 " + Convert.ToDateTime(datGioKT.EditValue).TimeOfDay.ToString()) > dGioKT)
+            //            {
+            //                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgGioKetThucPhaiTrongKhoangThoiGianChoPhep"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //                return false;
+            //            }
+            //        }
+            //        catch { }
 
-                }
+            //    }
 
-            }
+            //}
             return true;
         }
 
@@ -196,6 +208,7 @@ namespace Vs.TimeAttendance
                 {
                     case "capnhat":
                         {
+                            if (flag == true) return;
                             if (!kiemtrong()) return;
 
                             //ID_NHOM = Convert.ToInt32(cboID_NHOM.EditValue);
@@ -299,6 +312,9 @@ namespace Vs.TimeAttendance
             try
             {
                 if (Commons.Modules.sLoad == "0Load") return;
+                iPhutBatDauQuyDinh = Convert.ToInt32(cboCA.Properties.View.GetFocusedRowCellValue("PHUT_BD"));
+                iPhutKetThucQuyDinh = Convert.ToInt32(cboCA.Properties.View.GetFocusedRowCellValue("PHUT_KT"));
+                iPhutAnCa = 0;
                 datGioBD.DateTime = Convert.ToDateTime(cboCA.Properties.View.GetFocusedRowCellValue("GIO_BD"));
                 datGioKT.DateTime = Convert.ToDateTime(cboCA.Properties.View.GetFocusedRowCellValue("GIO_KT"));
             }
@@ -310,8 +326,16 @@ namespace Vs.TimeAttendance
         {
             try
             {
-               txtSoGioTC.Text = (Convert.ToDouble(((Convert.ToDouble(datGioKT.DateTime.Hour * 60) + Convert.ToDouble(datGioKT.DateTime.Minute)) - (Convert.ToDouble(datGioBD.DateTime.Hour * 60) + Convert.ToDouble(datGioBD.DateTime.Minute)) - (txtPhutAnCa.Text == "" ? 0 : Convert.ToDouble(txtPhutAnCa.Text)))) / 60).ToString();
+                iPhutBatDau = datGioBD.Text == "" ? 0 : Convert.ToInt32(datGioBD.DateTime.Hour * 60 + datGioBD.DateTime.Minute);
 
+                if (iPhutBatDau < iPhutKetThucQuyDinh - 1440)
+                {
+                    iPhutBatDau = iPhutBatDau + 1440;
+                }
+
+                dbGioTangCa = Convert.ToDouble((iPhutKetThuc - (iPhutBatDau + iPhutAnCa))) / 60;
+
+                txtSoGioTC.Text = dbGioTangCa.ToString();
             }
             catch { }
         }
@@ -320,8 +344,15 @@ namespace Vs.TimeAttendance
         {
             try
             {
-                txtSoGioTC.Text = (Convert.ToDouble(((Convert.ToDouble(datGioKT.DateTime.Hour * 60) + Convert.ToDouble(datGioKT.DateTime.Minute)) - (Convert.ToDouble(datGioBD.DateTime.Hour * 60) + Convert.ToDouble(datGioBD.DateTime.Minute)) - (txtPhutAnCa.Text == "" ? 0 : Convert.ToDouble(txtPhutAnCa.Text)))) / 60).ToString();
+                iPhutKetThuc = datGioKT.Text == "" ? 0 : Convert.ToInt32(datGioKT.DateTime.Hour * 60 + datGioKT.DateTime.Minute);
+                if (iPhutKetThuc < iPhutBatDau && iPhutKetThucQuyDinh > 1440)
+                {
+                    iPhutKetThuc = iPhutKetThuc + 1440;
+                }
 
+                dbGioTangCa = Convert.ToDouble((iPhutKetThuc - (iPhutBatDau + iPhutAnCa))) / 60;
+
+                txtSoGioTC.Text = dbGioTangCa.ToString();
             }
             catch { }
         }
@@ -330,9 +361,65 @@ namespace Vs.TimeAttendance
         {
             try
             {
-                txtSoGioTC.Text = (Convert.ToDouble(((Convert.ToDouble(datGioKT.DateTime.Hour * 60) + Convert.ToDouble(datGioKT.DateTime.Minute)) - (Convert.ToDouble(datGioBD.DateTime.Hour * 60) + Convert.ToDouble(datGioBD.DateTime.Minute)) - (txtPhutAnCa.Text == "" ? 0 : Convert.ToDouble(txtPhutAnCa.Text)))) / 60).ToString();
+                iPhutAnCa = txtPhutAnCa.Text == "" ? 0 : Convert.ToInt32(txtPhutAnCa.Text);
+                dbGioTangCa = Convert.ToDouble((iPhutKetThuc - (iPhutBatDau + iPhutAnCa))) / 60;
+
+                txtSoGioTC.Text = dbGioTangCa.ToString();
+
             }
             catch { }
         }
+
+        private void datGioBD_Validating(object sender, CancelEventArgs e)
+        {
+            var edit = sender as DateEdit;
+            flag = false;
+            DateTime.TryParse(edit.DateTime.ToString(), out dGioBatDau);
+            iPhutBatDau = dGioBatDau.Hour * 60 + dGioBatDau.Minute;
+            if (iPhutBatDau < iPhutKetThucQuyDinh - 1440)
+            {
+                iPhutBatDau = iPhutBatDau + 1440;
+            }
+ 
+            if (iPhutBatDau < iPhutBatDauQuyDinh && iRes == 0)
+            {
+                flag = true;
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgGioBatDauPhaiTrongKhoangThoiGianChoPhep"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                e.Cancel = true;
+            }
+            if (iPhutBatDau > iPhutKetThuc)
+            {
+                flag = true;
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgGioBDPhaiNhoHonGioKT"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                e.Cancel = true;
+            }
+        }
+
+        private void datGioKT_Validating(object sender, CancelEventArgs e)
+        {
+            var edit = sender as DateEdit;
+            flag = false;
+            DateTime.TryParse(edit.DateTime.ToString(), out dGioKetThuc);
+            iPhutKetThuc = dGioKetThuc.Hour * 60 + dGioKetThuc.Minute;
+            if (iPhutKetThuc < iPhutBatDau && iPhutKetThucQuyDinh > 1440)
+            {
+                iPhutKetThuc = iPhutKetThuc + 1440;
+            }            
+
+            if (iPhutKetThuc > iPhutKetThucQuyDinh && iRes == 0)
+            {
+                flag = true;
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgGioKetThucPhaiTrongKhoangThoiGianChoPhep"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                e.Cancel = true;
+            }
+ 
+            if (iPhutKetThuc < iPhutBatDau)
+            {
+                flag = true;
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgGioKTPhaiLonHonGioBD"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                e.Cancel = true;
+            }
+        }
+
     }
 }

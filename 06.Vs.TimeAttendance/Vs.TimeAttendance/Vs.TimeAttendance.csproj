@@ -195,6 +195,12 @@
     <Compile Include="Form\ucDangKiLamThem.Designer.cs">
       <DependentUpon>ucDangKiLamThem.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form\ucDangKyCatTangCa.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Form\ucDangKyCatTangCa.Designer.cs">
+      <DependentUpon>ucDangKyCatTangCa.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form\ucViPhamQuetThe.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -569,6 +575,12 @@
     <Compile Include="UAC\ucDangKyNghiPhep.Designer.cs">
       <DependentUpon>ucDangKyNghiPhep.cs</DependentUpon>
     </Compile>
+    <Compile Include="UAC\ucPhepTon.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UAC\ucPhepTon.Designer.cs">
+      <DependentUpon>ucPhepTon.cs</DependentUpon>
+    </Compile>
     <Compile Include="UAC\ucQuiDinhTCThang.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -646,6 +658,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form\ucDangKiLamThem.resx">
       <DependentUpon>ucDangKiLamThem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\ucDangKyCatTangCa.resx">
+      <DependentUpon>ucDangKyCatTangCa.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\ucViPhamQuetThe.resx">
       <DependentUpon>ucViPhamQuetThe.cs</DependentUpon>
@@ -843,6 +858,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UAC\ucDangKyNghiPhep.resx">
       <DependentUpon>ucDangKyNghiPhep.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UAC\ucPhepTon.resx">
+      <DependentUpon>ucPhepTon.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UAC\ucQuiDinhTCThang.resx">
       <DependentUpon>ucQuiDinhTCThang.cs</DependentUpon>

@@ -42,24 +42,28 @@ namespace VietSoftHRM
         {
             var grid = sender as GridControl;
             var view = grid.FocusedView as GridView;
-            if (e.KeyData == Keys.Delete)
+            if (Commons.Modules.UserName.ToLower() == "admin" || Commons.Modules.UserName.ToLower() == "administrator")
             {
-                try
-                {
-                    if (grvNguoiDung.RowCount == 0)
-                    {
-                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgKhongCoDuLieuDeXoa"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        return;
-                    }
-                    if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDeleteUser"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) return;
-                    //xóa
-                    SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "DELETE FROM	dbo.USERS WHERE ID_USER = " + grvNguoiDung.GetFocusedRowCellValue("ID_USER") + " ");
-                    view.DeleteSelectedRows();
-                }
-                catch (Exception ex)
-                {
-                    XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDelDangSuDung") + "\n" + ex.Message.ToString(), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
 
+                if (e.KeyData == Keys.Delete)
+                {
+                    try
+                    {
+                        if (grvNguoiDung.RowCount == 0)
+                        {
+                            XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgKhongCoDuLieuDeXoa"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            return;
+                        }
+                        if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDeleteUser"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) return;
+                        //xóa
+                        SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "DELETE FROM	dbo.USERS WHERE ID_USER = " + grvNguoiDung.GetFocusedRowCellValue("ID_USER") + " ");
+                        view.DeleteSelectedRows();
+                    }
+                    catch (Exception ex)
+                    {
+                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDelDangSuDung") + "\n" + ex.Message.ToString(), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    }
                 }
             }
         }
@@ -80,6 +84,26 @@ namespace VietSoftHRM
                     }
                 case "xoa":
                     {
+                        if (Commons.Modules.UserName.ToLower() == "admin" || Commons.Modules.UserName.ToLower() == "administrator")
+                        {
+                            try
+                            {
+                                if (grvNguoiDung.RowCount == 0)
+                                {
+                                    XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgKhongCoDuLieuDeXoa"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    return;
+                                }
+                                if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDeleteUser"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) return;
+                                //xóa
+                                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "DELETE FROM	dbo.USERS WHERE ID_USER = " + grvNguoiDung.GetFocusedRowCellValue("ID_USER") + " ");
+                                grvNguoiDung.DeleteSelectedRows();
+                            }
+                            catch (Exception ex)
+                            {
+                                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDelDangSuDung") + "\n" + ex.Message.ToString(), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                            }
+                        }
                         break;
                     }
                 case "sua":

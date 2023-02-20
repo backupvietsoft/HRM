@@ -325,6 +325,7 @@ namespace VietSoftHRM
                 {
                     e.Appearance.BackColor = Color.LimeGreen;
                     e.Appearance.BackColor2 = Color.LightCyan;
+                    e.HighPriority = true;
                 }
             }
             catch
@@ -354,13 +355,31 @@ namespace VietSoftHRM
         {
             try
             {
-                if (e.HitInfo.InDataRow)
+                if (Commons.Modules.UserName != "admin" && Commons.Modules.UserName != "administrator")
                 {
-                    contextMenuStrip1.Show(Cursor.Position.X, Cursor.Position.Y);
+                    if (grvNguoiDung.GetFocusedRowCellValue("USER_NAME").ToString() == Commons.Modules.UserName)
+                    {
+                        if (e.HitInfo.InDataRow)
+                        {
+                            contextMenuStrip1.Show(Cursor.Position.X, Cursor.Position.Y);
+                        }
+                        else
+                        {
+                            contextMenuStrip1.Hide();
+                        }
+                    }
                 }
                 else
                 {
-                    contextMenuStrip1.Hide();
+                    if (grvNguoiDung.GetFocusedRowCellValue("USER_NAME").ToString() == "admin" && Commons.Modules.UserName != "admin") return;
+                    if (e.HitInfo.InDataRow)
+                    {
+                        contextMenuStrip1.Show(Cursor.Position.X, Cursor.Position.Y);
+                    }
+                    else
+                    {
+                        contextMenuStrip1.Hide();
+                    }
                 }
             }
             catch

@@ -269,6 +269,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Report\rptBangCCTheoGD_AP.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\rptBangCCTheoGD_AP.Designer.cs">
+      <DependentUpon>rptBangCCTheoGD_AP.cs</DependentUpon>
+    </Compile>
     <Compile Include="Report\rptBangCongTongHopThang_SB.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -706,6 +712,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Report\rptBangCCTheoGD_AP.resx">
+      <DependentUpon>rptBangCCTheoGD_AP.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Report\rptBangCongTongHopThang_SB.resx">
       <DependentUpon>rptBangCongTongHopThang_SB.cs</DependentUpon>
     </EmbeddedResource>

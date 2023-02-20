@@ -260,7 +260,6 @@ namespace VietSoftHRM
                 }
                 else
                 {
-
                     if (Commons.Modules.sPS == "spGetListMAU_BAO_CAO")
                     {
                         DataTable dtTTC = new DataTable();

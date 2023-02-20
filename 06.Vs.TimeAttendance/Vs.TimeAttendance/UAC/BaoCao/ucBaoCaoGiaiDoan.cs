@@ -147,7 +147,7 @@ namespace Vs.HRM
                         //            break;
                         //        }
                         //}
-                        switch (Commons.Modules.ObjSystems.KyHieuDV(Convert.ToInt64(LK_DON_VI.EditValue)))
+                        switch (Commons.Modules.KyHieuDV)
                         {
                             case "MT":
                                 {

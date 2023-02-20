@@ -1820,6 +1820,7 @@ D:\01.SourceCode\02.HRM\03.Vs.Category\Vs.Category\obj\Debug\Vs.Category.csproj.
 D:\01.SourceCode\02.HRM\03.Vs.Category\Vs.Category\obj\Debug\Vs.Category.csproj.CopyComplete
 D:\01.SourceCode\02.HRM\03.Vs.Category\Vs.Category\obj\Debug\Vs.Category.dll
 D:\01.SourceCode\02.HRM\03.Vs.Category\Vs.Category\obj\Debug\Vs.Category.pdb
+D:\01.SourceCode\02.HRM\03.Vs.Category\Vs.Category\bin\Debug\Vs.Recruit.exe.config
 F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\Vs.Category.dll.config
 F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\Vs.Category.dll
 F:\01.HRM\03.Vs.Category\Vs.Category\bin\Debug\Vs.Category.pdb
@@ -1975,4 +1976,3 @@ F:\01.HRM\03.Vs.Category\Vs.Category\obj\Debug\Vs.Category.csproj.CoreCompileInp
 F:\01.HRM\03.Vs.Category\Vs.Category\obj\Debug\Vs.Category.csproj.CopyComplete
 F:\01.HRM\03.Vs.Category\Vs.Category\obj\Debug\Vs.Category.dll
 F:\01.HRM\03.Vs.Category\Vs.Category\obj\Debug\Vs.Category.pdb
-D:\01.SourceCode\02.HRM\03.Vs.Category\Vs.Category\bin\Debug\Vs.Recruit.exe.config

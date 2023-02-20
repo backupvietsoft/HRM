@@ -435,6 +435,12 @@ namespace VietSoftHRM
                     Vs.HRM.frmHelp_View fr = new Vs.HRM.frmHelp_View();
                     fr.ShowDiaLogControls(this);
                     return true;
+                case (Keys.Control | Keys.P):
+                    {
+                        frmChangePass change = new frmChangePass("-1");
+                        change.ShowDialog();
+                        return true;
+                    }
                 default: return base.ProcessCmdKey(ref msg, keyData);
             }
         }
@@ -495,40 +501,40 @@ namespace VietSoftHRM
         }
         private void timer1_Tick(object sender, EventArgs e)
         {
-            try
-            {
+            //try
+            //{
 
-                //cập nhật số ngường dùng
-                barLogin.Caption = "Total " + SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, " SELECT COUNT(*) FROM dbo.LOGIN ").ToString() + "/" + Commons.Modules.iLic + " user login";
-                //cập nhật thời gian login
-                if (Commons.Modules.ObjSystems.checkExitsUserLG(Commons.Modules.UserName))
-                {
-                    Thread thread = new Thread(delegate ()
-                    {
-                        timer1.Stop();
-                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgPhanMemTuDongThoatsau5p"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        Thread.Sleep(300000);//chi nghỉ 5 phút
-                        if (this.InvokeRequired)
-                        {
-                            this.Invoke(new MethodInvoker(delegate
-                            {
-                                this.Hide();
-                                Commons.Modules.ObjSystems.User(Commons.Modules.UserName, 2);
-                                timer1.Stop();
-                                frmLogin login = new frmLogin();
-                                login.ShowDialog();
-                                this.Close();
-                            }));
-                        }
-                    }, Convert.ToInt32(TimeSpan.FromMinutes(5).TotalMilliseconds));
-                    thread.Start();
-                }
-                else
-                {
-                    Commons.Modules.ObjSystems.User(Commons.Modules.UserName, 1);
-                }    
-            }
-            catch { }
+            //    //cập nhật số ngường dùng
+            //    barLogin.Caption = "Total " + SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, " SELECT COUNT(*) FROM dbo.LOGIN ").ToString() + "/" + Commons.Modules.iLic + " user login";
+            //    //cập nhật thời gian login
+            //    if (Commons.Modules.ObjSystems.checkExitsUserLG(Commons.Modules.UserName))
+            //    {
+            //        Thread thread = new Thread(delegate ()
+            //        {
+            //            timer1.Stop();
+            //            XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgPhanMemTuDongThoatsau5p"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //            Thread.Sleep(300000);//chi nghỉ 5 phút
+            //            if (this.InvokeRequired)
+            //            {
+            //                this.Invoke(new MethodInvoker(delegate
+            //                {
+            //                    this.Hide();
+            //                    Commons.Modules.ObjSystems.User(Commons.Modules.UserName, 2);
+            //                    timer1.Stop();
+            //                    frmLogin login = new frmLogin();
+            //                    login.ShowDialog();
+            //                    this.Close();
+            //                }));
+            //            }
+            //        }, Convert.ToInt32(TimeSpan.FromMinutes(5).TotalMilliseconds));
+            //        thread.Start();
+            //    }
+            //    else
+            //    {
+            //        Commons.Modules.ObjSystems.User(Commons.Modules.UserName, 1);
+            //    }
+            //}
+            //catch { }
         }
 
         private void frmMain_FormClosing(object sender, FormClosingEventArgs e)

@@ -1256,7 +1256,7 @@ namespace Vs.TimeAttendance
                     iPhutBatDau = view.GetFocusedRowCellValue("PHUT_BD") == DBNull.Value ? 0 : Convert.ToInt32(view.GetFocusedRowCellValue("PHUT_BD"));
                     iPhutKetThuc = view.GetFocusedRowCellValue("PHUT_KT") == DBNull.Value ? 0 : Convert.ToInt32(view.GetFocusedRowCellValue("PHUT_KT"));
                     iPhutAnCa = view.GetFocusedRowCellValue("PHUT_AN_CA") == DBNull.Value ? 0 : Convert.ToInt32(view.GetFocusedRowCellValue("PHUT_AN_CA"));
-                    dbGioTangCa =  Convert.ToDouble(iPhutKetThuc - (iPhutBatDau + iPhutAnCa)) / 60;
+                    dbGioTangCa = Convert.ToDouble(iPhutKetThuc - (iPhutBatDau + iPhutAnCa)) / 60;
                     view.SetRowCellValue(e.RowHandle, view.Columns["SO_GIO_TC"], dbGioTangCa);
                 }
                 if (e.Column.FieldName == "GIO_BD")
@@ -1294,7 +1294,7 @@ namespace Vs.TimeAttendance
                         iPhutAnCa = view.GetFocusedRowCellValue("PHUT_AN_CA") == DBNull.Value ? 0 : Convert.ToInt32(view.GetFocusedRowCellValue("PHUT_AN_CA"));
                         dbGioTangCa = Convert.ToDouble(iPhutKetThuc - (iPhutBatDau + iPhutAnCa)) / 60;
                         view.SetRowCellValue(e.RowHandle, view.Columns["SO_GIO_TC"], dbGioTangCa);
-                        
+
                     }
                     catch { }
                 }
@@ -1309,7 +1309,7 @@ namespace Vs.TimeAttendance
                             iPhutBatDau = view.GetFocusedRowCellValue("PHUT_BD") == DBNull.Value ? 0 : Convert.ToInt32(view.GetFocusedRowCellValue("PHUT_BD"));
                             iPhutKetThucQuyDinh = view.GetFocusedRowCellValue("PKT_QD") == DBNull.Value ? 0 : Convert.ToInt32(view.GetFocusedRowCellValue("PKT_QD"));
                             iPhutAnCa = view.GetFocusedRowCellValue("PHUT_AN_CA") == DBNull.Value ? 0 : Convert.ToInt32(view.GetFocusedRowCellValue("PHUT_AN_CA"));
-                            if (iPhutKetThuc < iPhutBatDau && iPhutKetThucQuyDinh > 1440) 
+                            if (iPhutKetThuc < iPhutBatDau && iPhutKetThucQuyDinh > 1440)
                             {
                                 iPhutKetThuc = iPhutKetThuc + 1440;
                             }
@@ -1595,7 +1595,8 @@ namespace Vs.TimeAttendance
                     e.Value = edit.OldEditValue;
                     e.Valid = false;
                     MessageBox.Show("Giờ bắt đầu phải nằm trong khoảng cho phép");
-                    BeginInvoke(new Action(() => {
+                    BeginInvoke(new Action(() =>
+                    {
                         view.ShowEditor();
                     }));
                 }
@@ -1603,8 +1604,9 @@ namespace Vs.TimeAttendance
                 {
                     e.Value = edit.OldEditValue;
                     e.Valid = false;
-                    MessageBox.Show("Giờ bắt đầu phải nhỏ hơn giờ kết thúc","Error");
-                    BeginInvoke(new Action(() => {
+                    MessageBox.Show("Giờ bắt đầu phải nhỏ hơn giờ kết thúc", "Error");
+                    BeginInvoke(new Action(() =>
+                    {
                         view.ShowEditor();
                     }));
                 }
@@ -1617,7 +1619,11 @@ namespace Vs.TimeAttendance
 
                 DateTime.TryParse(e.Value.ToString(), out dGioKetThuc);
                 iPhutKetThuc = dGioKetThuc.Hour * 60 + dGioKetThuc.Minute;
-                Int32.TryParse(view.GetFocusedRowCellValue("PKT_QD").ToString(), out iPhutKetThucQuyDinh);
+                try
+                {
+                    Int32.TryParse(view.GetFocusedRowCellValue("PKT_QD").ToString(), out iPhutKetThucQuyDinh);
+                }
+                catch { }
                 Int32.TryParse(view.GetFocusedRowCellValue("PHUT_BD").ToString(), out iPhutBatDau);
 
                 if (iPhutKetThuc > iPhutKetThucQuyDinh && iRes == 0)
@@ -1625,7 +1631,8 @@ namespace Vs.TimeAttendance
                     e.Value = edit.OldEditValue;
                     e.Valid = false;
                     MessageBox.Show("Giờ kết thúc phải nằm trong khoảng cho phép");
-                    BeginInvoke(new Action(() => {
+                    BeginInvoke(new Action(() =>
+                    {
                         view.ShowEditor();
                     }));
                 }
@@ -1638,11 +1645,12 @@ namespace Vs.TimeAttendance
                     e.Value = edit.OldEditValue;
                     e.Valid = false;
                     MessageBox.Show("Giờ giờ kết thúc phải lớn hơn giờ bắt đầu", "Error");
-                    BeginInvoke(new Action(() => {
+                    BeginInvoke(new Action(() =>
+                    {
                         view.ShowEditor();
                     }));
                 }
-            }           
+            }
         }
 
         private void searchControl_EditValueChanged(object sender, EventArgs e)

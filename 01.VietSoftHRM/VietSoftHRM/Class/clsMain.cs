@@ -91,7 +91,7 @@ namespace VietSoftHRM
 
                 try
                 {
-                    using (new ConnectToSharedFolder(dt.Rows[0]["DUONG_DAN_TL"].ToString(), new NetworkCredential(dt.Rows[0]["USER_TL"].ToString(), dt.Rows[0]["PASS_TL"].ToString())))
+                    using (new ConnectToSharedFolder(dt.Rows[0]["DUONG_DAN_TL"].ToString(), new NetworkCredential(Commons.Modules.ObjSystems.Decrypt(dt.Rows[0]["USER_TL"].ToString(),true), Commons.Modules.ObjSystems.Decrypt(dt.Rows[0]["PASS_TL"].ToString(),true))))
                     {
                         Commons.Modules.sDDTaiLieu = dt.Rows[0]["DUONG_DAN_TL"].ToString();
                         bool exists = System.IO.Directory.Exists(Commons.Modules.sDDTaiLieu);
@@ -101,8 +101,8 @@ namespace VietSoftHRM
                         }
                         using (var cred = new Credential())
                         {
-                            cred.Username = dt.Rows[0]["USER_TL"].ToString();
-                            cred.Password = dt.Rows[0]["PASS_TL"].ToString();
+                            cred.Username = Commons.Modules.ObjSystems.Decrypt(dt.Rows[0]["USER_TL"].ToString(),true);
+                            cred.Password = Commons.Modules.ObjSystems.Decrypt(dt.Rows[0]["PASS_TL"].ToString(), true);
                             cred.Target = Commons.Modules.sDDTaiLieu.Substring(2, Commons.Modules.sDDTaiLieu.Substring(2).IndexOf("\\"));
                             cred.Type = CredentialType.DomainPassword;
                             cred.PersistanceType = PersistanceType.LocalComputer;

@@ -943,6 +943,11 @@ namespace Vs.Payroll
                                 try
                                 {
                                     if (grvQT.RowCount == 0) { Commons.Modules.ObjSystems.msgChung(Commons.ThongBao.msgKhongCoDuLieuXoa); return; }
+                                    if (Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT COUNT(*) FROM dbo.PHIEU_CONG_DOAN WHERE ID_CD = " + grvQT.GetFocusedRowCellValue("ID_CD") + "")) > 0)
+                                    {
+                                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDelDangSuDung"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                                        return;
+                                    }
                                     sSql = "DELETE QUI_TRINH_CONG_NGHE_CHI_TIET WHERE ID_TO = " + grvQT.GetFocusedRowCellValue("ID_TO") +
                                                                             " AND ID_ORD = " + grvQT.GetFocusedRowCellValue("ID_ORD") + "";
                                     SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, sSql);

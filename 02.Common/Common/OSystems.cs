@@ -4026,9 +4026,11 @@ namespace Commons
                 // columns
                 foreach (DataColumn col in table.Columns)
                 {
-                    sql += "[" + col.ColumnName + "] " + MGetTypeSql(col.DataType, col.MaxLength, 10, 2) + "," + "\n";
+
+                    sql += "[" + col.ColumnName + "] " + MGetTypeSql(col.DataType, col.MaxLength > 500 ? 500 : col.MaxLength, 10, 2) + "," + "\n";
                     i += 1;
                 }
+                sql = sql.Substring(0, sql.Length - 2);
                 sql += ")";
 
                 Commons.Modules.ObjSystems.XoaTable(tableName);

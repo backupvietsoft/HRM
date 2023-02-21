@@ -9,6 +9,7 @@ using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using VietSoftHRM;
 using Vs.Report;
 
 namespace Vs.Recruit
@@ -88,7 +89,8 @@ namespace Vs.Recruit
                 //int weekNum = ciCurr.Calendar.GetWeekOfYear(Convert.ToDateTime("31/12/2022"), CalendarWeekRule.FirstDay, DayOfWeek.Monday);
                 //int n = DateTime.Now.DayOfYear;
                 //var firstDayWeek = ciCurr.Calendar.
-                Application.Run(new frmInBDUngVienTheoKhuVuc());
+                Application.Run(new frmNguoiDanhGia());
+                //Application.Run(new frmInBDUngVienTheoKhuVuc());
                 //frmViewReport frm = new frmViewReport();
                 //XtraReport1 fpt = new XtraReport1();
                 //frm.rpt = fpt;

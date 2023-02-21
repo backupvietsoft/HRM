@@ -3551,6 +3551,7 @@ D:\01.SourceCode\02.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.Time
 D:\01.SourceCode\02.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.TimeAttendance.frmDangKyKeHoachDiCa.resources
 D:\01.SourceCode\02.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.TimeAttendance.frmLinklBangTay.resources
 D:\01.SourceCode\02.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.TimeAttendance.Properties.Resources.resources
+D:\01.SourceCode\02.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.Report.rptBangCCTheoGD_AP.resources
 D:\01.SourceCode\02.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.Report.rptBangCongTongHopThang_SB.resources
 D:\01.SourceCode\02.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.Report.rptBangCongTangCaThang_SB.resources
 D:\01.SourceCode\02.HRM\06.Vs.TimeAttendance\Vs.TimeAttendance\obj\Debug\Vs.Report.rptBangCongTangCaThang_MT.resources

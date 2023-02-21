@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
+using VietSoftHRM;
 
 namespace Vs.Recruit
 {
@@ -355,8 +356,9 @@ namespace Vs.Recruit
             btnALL.Buttons[1].Properties.Visible = visible;
             btnALL.Buttons[2].Properties.Visible = visible;
             btnALL.Buttons[3].Properties.Visible = visible;
-            btnALL.Buttons[4].Properties.Visible = !visible;
+            btnALL.Buttons[4].Properties.Visible = visible;
             btnALL.Buttons[5].Properties.Visible = !visible;
+            btnALL.Buttons[6].Properties.Visible = !visible;
 
             datTNgay.Properties.ReadOnly = !visible;
             datDNgay.Properties.ReadOnly = !visible;
@@ -375,6 +377,32 @@ namespace Vs.Recruit
                 XtraUserControl ctl = new XtraUserControl();
                 switch (btn.Tag.ToString())
                 {
+                    case "nguoidanhgia":
+                        {
+                            frmNguoiDanhGia frm = new frmNguoiDanhGia();
+                            try
+                            {
+                                frm.iiD_LCV = Convert.ToInt64(cboID_VTTD.EditValue);
+
+                            }
+                            catch
+                            {
+                                frm.iiD_LCV = 1;
+                            }
+                            try
+                            {
+                                frm.iiD_DV = Convert.ToInt64(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT TOP 1 ID_DV FROM dbo.XI_NGHIEP WHERE ID_XN = (SELECT ID_XN FROM dbo.YEU_CAU_TUYEN_DUNG WHERE ID_YCTD = " + cboYCTD.EditValue + ")"));
+                            }
+                            catch 
+                            {
+                                frm.iiD_DV = 1;
+                            }
+                            if ( frm.ShowDialog() == DialogResult.OK)
+                            {
+                                LoadData();
+                            }    
+                            break;
+                        }
                     case "them":
                         {
                             iAdd = 1;

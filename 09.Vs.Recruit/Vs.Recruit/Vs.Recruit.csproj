@@ -265,6 +265,12 @@
     <Compile Include="Form\frmInTinhHinhTD.Designer.cs">
       <DependentUpon>frmInTinhHinhTD.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form\frmNguoiDanhGia.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\frmNguoiDanhGia.Designer.cs">
+      <DependentUpon>frmNguoiDanhGia.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form\frmPhieuDTDH.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -563,6 +569,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form\frmInTinhHinhTD.resx">
       <DependentUpon>frmInTinhHinhTD.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\frmNguoiDanhGia.resx">
+      <DependentUpon>frmNguoiDanhGia.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\frmPhieuDTDH.resx">
       <DependentUpon>frmPhieuDTDH.cs</DependentUpon>

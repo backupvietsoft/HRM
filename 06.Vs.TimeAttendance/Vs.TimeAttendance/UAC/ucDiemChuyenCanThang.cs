@@ -77,7 +77,9 @@ namespace Vs.TimeAttendance
             }
             txtNgayCongQD.EditValue = 208;
             LoadThang();
-            Commons.Modules.ObjSystems.LoadCboDonVi(cboDV);
+            DataTable dt = new DataTable();
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboDON_VI", Commons.Modules.UserName, Commons.Modules.TypeLanguage, 0));
+            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboDV, dt, "ID_DV", "TEN_DV", "TEN_DV");
             Commons.Modules.ObjSystems.LoadCboXiNghiep(cboDV, cboXN);
             Commons.Modules.ObjSystems.LoadCboTo(cboDV, cboXN, cboTo);
             LoadGrdDiemThang();
@@ -91,6 +93,7 @@ namespace Vs.TimeAttendance
             Commons.Modules.ObjSystems.LoadCboXiNghiep(cboDV, cboXN);
             Commons.Modules.ObjSystems.LoadCboTo(cboDV, cboXN, cboTo);
             LoadGrdDiemThang();
+            enableButon(true);
             Commons.Modules.sLoad = "";
         }
         private void cboXN_EditValueChanged(object sender, EventArgs e)
@@ -155,7 +158,7 @@ namespace Vs.TimeAttendance
                                 {
                                     Commons.TemplateExcel.FillReport(saveFileDialog.FileName, System.Windows.Forms.Application.StartupPath + "\\Template\\TemplateDiemChuyenCanThang.xlsx", ds, new string[] { "{", "}" });
                                 }
-                                else if (Commons.Modules.KyHieuDV == "NC") 
+                                else if (Commons.Modules.KyHieuDV == "NC")
                                 {
                                     Commons.TemplateExcel.FillReport(saveFileDialog.FileName, System.Windows.Forms.Application.StartupPath + "\\Template\\TemplateDiemChuyenCanThangNC.xlsx", ds, new string[] { "{", "}" });
                                 }
@@ -163,7 +166,7 @@ namespace Vs.TimeAttendance
                                 {
                                     Commons.TemplateExcel.FillReport(saveFileDialog.FileName, System.Windows.Forms.Application.StartupPath + "\\Template\\TemplateDiemChuyenCanThang.xlsx", ds, new string[] { "{", "}" });
                                 }
-                                
+
                                 Process.Start(saveFileDialog.FileName);
                             }
                         }
@@ -262,10 +265,10 @@ namespace Vs.TimeAttendance
 
                     foreach (GridColumn item in grvDiemThang.Columns)
                     {
-                        if(item.FieldName != "TIEN_THUONG")
+                        if (item.FieldName != "TIEN_THUONG")
                         {
                             grvDiemThang.Columns[item.FieldName].OptionsColumn.AllowEdit = false;
-                        }    
+                        }
                     }
                     if (Commons.Modules.KyHieuDV == "NB")
                     {
@@ -334,7 +337,7 @@ namespace Vs.TimeAttendance
                 Commons.Modules.ObjSystems.XoaTable(sBT);
                 return true;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Commons.Modules.ObjSystems.XoaTable(sBT);
                 return false;
@@ -342,28 +345,42 @@ namespace Vs.TimeAttendance
         }
         private void enableButon(bool visible)
         {
-            windowsUIButton.Buttons[0].Properties.Visible = visible;
-            windowsUIButton.Buttons[1].Properties.Visible = visible;
-            windowsUIButton.Buttons[2].Properties.Visible = visible;
-            windowsUIButton.Buttons[3].Properties.Visible = visible;
-            windowsUIButton.Buttons[5].Properties.Visible = visible;
-            windowsUIButton.Buttons[6].Properties.Visible = visible;
-            windowsUIButton.Buttons[7].Properties.Visible = visible;
+            if (Commons.Modules.ObjSystems.DataTinhTrangBangLuong(Convert.ToInt32(cboDV.EditValue), Commons.Modules.ObjSystems.ConvertDateTime(cboThang.Text)) == 2)
+            {
+                windowsUIButton.Buttons[0].Properties.Visible = false;
+                windowsUIButton.Buttons[1].Properties.Visible = false;
+                windowsUIButton.Buttons[2].Properties.Visible = false;
+                windowsUIButton.Buttons[3].Properties.Visible = false;
+                windowsUIButton.Buttons[4].Properties.Visible = false;
+                windowsUIButton.Buttons[5].Properties.Visible = false;
+                windowsUIButton.Buttons[6].Properties.Visible = false;
+            }
+            else
+            {
+                windowsUIButton.Buttons[0].Properties.Visible = visible;
+                windowsUIButton.Buttons[1].Properties.Visible = visible;
+                windowsUIButton.Buttons[2].Properties.Visible = visible;
+                windowsUIButton.Buttons[3].Properties.Visible = visible;
+                windowsUIButton.Buttons[5].Properties.Visible = visible;
+                windowsUIButton.Buttons[6].Properties.Visible = visible;
+                windowsUIButton.Buttons[7].Properties.Visible = visible;
 
-            windowsUIButton.Buttons[4].Properties.Visible = !visible;
-            windowsUIButton.Buttons[5].Properties.Visible = !visible;
-            grvDiemThang.OptionsBehavior.Editable = !visible;
-            //searchControl.Visible = visible;
-            cboThang.Properties.ReadOnly = !visible;
-            cboDV.Properties.ReadOnly = !visible;
-            cboXN.Properties.ReadOnly = !visible;
-            cboTo.Properties.ReadOnly = !visible;
+                windowsUIButton.Buttons[4].Properties.Visible = !visible;
+                windowsUIButton.Buttons[5].Properties.Visible = !visible;
+                grvDiemThang.OptionsBehavior.Editable = !visible;
+                //searchControl.Visible = visible;
+                cboThang.Properties.ReadOnly = !visible;
+                cboDV.Properties.ReadOnly = !visible;
+                cboXN.Properties.ReadOnly = !visible;
+                cboTo.Properties.ReadOnly = !visible;
+            }
         }
         #endregion
         private void cboThang_EditValueChanged(object sender, EventArgs e)
         {
             if (Commons.Modules.sLoad == "0Load") return;
             LoadGrdDiemThang();
+            enableButon(true);
         }
 
         public void LoadThang()
@@ -372,7 +389,7 @@ namespace Vs.TimeAttendance
             {
                 //ItemForDateThang.Visibility = LayoutVisibility.Never;
                 DataTable dtthang = new DataTable();
-                string sSql = "SELECT DISTINCT SUBSTRING(CONVERT(VARCHAR(10),THANG,103),4,2) as M, RIGHT(CONVERT(VARCHAR(10),THANG,103),4) AS Y ,RIGHT(CONVERT(VARCHAR(10),THANG,103),7) AS THANG, ISNULL(NGAY_CONG_CHUAN,208) NC_CHUAN FROM dbo.DIEM_THANG ORDER BY Y DESC , M DESC";
+                string sSql = "SELECT DISTINCT SUBSTRING(CONVERT(VARCHAR(10),THANG,103),4,2) as M, RIGHT(CONVERT(VARCHAR(10),THANG,103),4) AS Y ,RIGHT(CONVERT(VARCHAR(10),THANG,103),7) AS THANG FROM dbo.DIEM_THANG ORDER BY Y DESC , M DESC";
                 dtthang.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSql));
                 if (grdThang.DataSource == null)
                 {

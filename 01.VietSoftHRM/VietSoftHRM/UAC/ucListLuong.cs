@@ -439,6 +439,15 @@ namespace VietSoftHRM
                         Commons.Modules.ObjSystems.HideWaitForm();
                         ctl.Dock = DockStyle.Fill;
                         break;
+                    } 
+                case "mnuTinhKhoaBangLuong": // Khóa bảng lương
+                    {
+                        ucKhoaBangLuong ctl = new ucKhoaBangLuong();
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(ctl);
+                        Commons.Modules.ObjSystems.HideWaitForm();
+                        ctl.Dock = DockStyle.Fill;
+                        break;
                     }
 
                 #region Bao cao

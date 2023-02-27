@@ -458,25 +458,35 @@ namespace Vs.Payroll
         private void TSua(Boolean TSua)
         {
             //grdPCD.Enabled = !TSua;
+            if (Commons.Modules.ObjSystems.DataTinhTrangBangLuong(Convert.ToInt32(cboDV.EditValue), Commons.Modules.ObjSystems.ConvertDateTime(cboNgay.Text)) == 2)
+            {
+                windowsUIButton.Buttons[2].Properties.Visible = false;
+                windowsUIButton.Buttons[3].Properties.Visible = false;
+                windowsUIButton.Buttons[4].Properties.Visible = false;
+                windowsUIButton.Buttons[5].Properties.Visible = false;
+                windowsUIButton.Buttons[6].Properties.Visible = false;
+            }
+            else
+            {
+                windowsUIButton.Buttons[0].Properties.Visible = !TSua;
+                windowsUIButton.Buttons[1].Properties.Visible = !TSua;
+                windowsUIButton.Buttons[2].Properties.Visible = !TSua;
+                windowsUIButton.Buttons[3].Properties.Visible = !TSua;
+                windowsUIButton.Buttons[4].Properties.Visible = !TSua;
+                windowsUIButton.Buttons[7].Properties.Visible = !TSua;
 
-            windowsUIButton.Buttons[0].Properties.Visible = !TSua;
-            windowsUIButton.Buttons[1].Properties.Visible = !TSua;
-            windowsUIButton.Buttons[2].Properties.Visible = !TSua;
-            windowsUIButton.Buttons[3].Properties.Visible = !TSua;
-            windowsUIButton.Buttons[4].Properties.Visible = !TSua;
-            windowsUIButton.Buttons[7].Properties.Visible = !TSua;
-
-            windowsUIButton.Buttons[5].Properties.Visible = TSua;
-            windowsUIButton.Buttons[6].Properties.Visible = TSua;
+                windowsUIButton.Buttons[5].Properties.Visible = TSua;
+                windowsUIButton.Buttons[6].Properties.Visible = TSua;
 
 
-            cboDV.Properties.ReadOnly = TSua;
-            cboXN.Properties.ReadOnly = TSua;
-            cboTo.Properties.ReadOnly = TSua;
-            cboChuyen.Properties.ReadOnly = TSua;
-            cboNgay.Properties.ReadOnly = TSua;
-            lblMaHang.Enabled = TSua;
-            cboMaHang.Properties.ReadOnly = !TSua;
+                cboDV.Properties.ReadOnly = TSua;
+                cboXN.Properties.ReadOnly = TSua;
+                cboTo.Properties.ReadOnly = TSua;
+                cboChuyen.Properties.ReadOnly = TSua;
+                cboNgay.Properties.ReadOnly = TSua;
+                lblMaHang.Enabled = TSua;
+                cboMaHang.Properties.ReadOnly = !TSua;
+            }
 
         }
 
@@ -526,6 +536,7 @@ namespace Vs.Payroll
                 LoadPCD();
                 LoadCD();
                 LoadCN();
+                TSua(false);
                 Commons.Modules.sLoad = "";
             }
             catch { }
@@ -561,6 +572,7 @@ namespace Vs.Payroll
             LoadCN();
             grvPCD_FocusedRowChanged(null, null);
             grvCD_FocusedRowChanged(null, null);
+            TSua(false);
         }
 
         private void cboNgay_BeforePopup(object sender, EventArgs e)
@@ -901,7 +913,7 @@ namespace Vs.Payroll
         {
             try
             {
-                if(e.KeyCode == Keys.Enter)
+                if (e.KeyCode == Keys.Enter)
                 {
                     grvCN.Focus();
                     grvCN.FocusedColumn = grvCN.Columns["MS_CN"];
@@ -1323,6 +1335,7 @@ namespace Vs.Payroll
         {
             try
             {
+                if (Commons.Modules.ObjSystems.DataTinhTrangBangLuong(Convert.ToInt32(cboDV.EditValue), Commons.Modules.ObjSystems.ConvertDateTime(cboNgay.Text)) == 2) return;
                 DevExpress.XtraGrid.Views.Grid.GridView view = sender as DevExpress.XtraGrid.Views.Grid.GridView;
                 int irow = e.HitInfo.RowHandle;
                 if (e.MenuType == DevExpress.XtraGrid.Views.Grid.GridMenuType.Row)
@@ -1351,6 +1364,7 @@ namespace Vs.Payroll
         {
             try
             {
+                if (Commons.Modules.ObjSystems.DataTinhTrangBangLuong(Convert.ToInt32(cboDV.EditValue), Commons.Modules.ObjSystems.ConvertDateTime(cboNgay.Text)) == 2) return;
                 if (windowsUIButton.Buttons[0].Properties.Visible || Convert.ToString(grvCN.GetFocusedRowCellValue("ID_CN")) == "") return;
                 DevExpress.XtraGrid.Views.Grid.GridView view = sender as DevExpress.XtraGrid.Views.Grid.GridView;
                 int irow = e.HitInfo.RowHandle;

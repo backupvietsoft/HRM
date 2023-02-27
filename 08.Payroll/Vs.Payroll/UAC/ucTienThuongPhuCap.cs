@@ -271,7 +271,7 @@ namespace Vs.Payroll
 
         private void EnableButon(bool visible, int iTinhTrang)
         {
-            if (iTinhTrang == 1)
+            if (Commons.Modules.ObjSystems.DataTinhTrangBangLuong(Convert.ToInt32(cboDonVi.EditValue), Commons.Modules.ObjSystems.ConvertDateTime(cboThang.Text)) == 2)
             {
                 btnALL.Buttons[0].Properties.Visible = false;
                 btnALL.Buttons[1].Properties.Visible = false;
@@ -280,30 +280,46 @@ namespace Vs.Payroll
                 btnALL.Buttons[3].Properties.Visible = false;
                 btnALL.Buttons[4].Properties.Visible = false;
                 btnALL.Buttons[5].Properties.Visible = false;
-                btnALL.Buttons[6].Properties.Visible = true;
 
                 btnALL.Buttons[7].Properties.Visible = false;
                 btnALL.Buttons[8].Properties.Visible = false;
             }
             else
             {
-                btnALL.Buttons[0].Properties.Visible = visible;
-                btnALL.Buttons[1].Properties.Visible = !visible;
-                btnALL.Buttons[2].Properties.Visible = visible;
+                if (iTinhTrang == 1)
+                {
+                    btnALL.Buttons[0].Properties.Visible = false;
+                    btnALL.Buttons[1].Properties.Visible = false;
+                    btnALL.Buttons[2].Properties.Visible = false;
 
-                btnALL.Buttons[3].Properties.Visible = !visible;
-                btnALL.Buttons[4].Properties.Visible = !visible;
-                btnALL.Buttons[5].Properties.Visible = !visible;
-                btnALL.Buttons[6].Properties.Visible = !visible;
+                    btnALL.Buttons[3].Properties.Visible = false;
+                    btnALL.Buttons[4].Properties.Visible = false;
+                    btnALL.Buttons[5].Properties.Visible = false;
+                    btnALL.Buttons[6].Properties.Visible = true;
 
-                btnALL.Buttons[7].Properties.Visible = visible;
-                btnALL.Buttons[8].Properties.Visible = visible;
-                cboTo.Enabled = !visible;
-                cboThang.Enabled = !visible;
-                cboDonVi.Enabled = !visible;
-                cboXiNghiep.Enabled = !visible;
+                    btnALL.Buttons[7].Properties.Visible = false;
+                    btnALL.Buttons[8].Properties.Visible = false;
+                }
+                else
+                {
+                    btnALL.Buttons[0].Properties.Visible = visible;
+                    btnALL.Buttons[1].Properties.Visible = !visible;
+                    btnALL.Buttons[2].Properties.Visible = visible;
+
+                    btnALL.Buttons[3].Properties.Visible = !visible;
+                    btnALL.Buttons[4].Properties.Visible = !visible;
+                    btnALL.Buttons[5].Properties.Visible = !visible;
+                    btnALL.Buttons[6].Properties.Visible = !visible;
+
+                    btnALL.Buttons[7].Properties.Visible = visible;
+                    btnALL.Buttons[8].Properties.Visible = visible;
+                    cboTo.Enabled = !visible;
+                    cboThang.Enabled = !visible;
+                    cboDonVi.Enabled = !visible;
+                    cboXiNghiep.Enabled = !visible;
+                }
+                cboTinhTrang.Properties.ReadOnly = true;
             }
-            cboTinhTrang.Properties.ReadOnly = true;
         }
 
         private void XoaTienThuongPC()
@@ -324,7 +340,7 @@ namespace Vs.Payroll
                     Commons.Modules.ObjSystems.XoaTable(sBT);
                     LoadData();
                 }
-                catch(Exception EX)
+                catch (Exception EX)
                 {
                     Commons.Modules.ObjSystems.XoaTable(sBT);
                     Commons.Modules.ObjSystems.msgChung(Commons.ThongBao.msgKhongCoDuLieuXoa);
@@ -459,7 +475,7 @@ namespace Vs.Payroll
             Commons.Modules.ObjSystems.LoadCboTo(cboDonVi, cboXiNghiep, cboTo);
             LoadComboThang();
             LoadData();
-            //EnableButon(true);
+            EnableButon(false,Convert.ToInt32(cboTinhTrang.EditValue));
             Commons.Modules.sLoad = "";
         }
 
@@ -641,14 +657,14 @@ namespace Vs.Payroll
                     errorCount++;
                 }
                 Double dSoTien = Convert.ToDouble(dr[grvData.Columns["SO_TIEN"].FieldName.ToString()]);
-                if(dSoTien != 0)
+                if (dSoTien != 0)
                 {
                     if (!KiemDuLieu(grvData, dr, "ID_DM_LTT", true, 0, this.Name))
                     {
                         errorCount++;
                     }
                 }
-                
+
             }
             #endregion
             Commons.Modules.ObjSystems.HideWaitForm();
@@ -823,6 +839,7 @@ namespace Vs.Payroll
                 cboTinhTrang.EditValue = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT ISNULL(TRANG_THAI,0) TINH_TRANG FROM dbo.DM_TIEN_THUONG_THANG WHERE ID = " + (grvThang.GetFocusedRowCellValue("ID") == null ? -1 : Convert.ToInt32(grvThang.GetFocusedRowCellValue("ID"))) + ""));
             }
             catch { }
+            EnableButon(false, Convert.ToInt32(cboTinhTrang.EditValue));
             Commons.Modules.sLoad = "";
         }
 

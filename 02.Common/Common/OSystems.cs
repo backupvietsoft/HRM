@@ -201,8 +201,16 @@ namespace Commons
             }
             catch
             {
-                ngay = DateTime.ParseExact("01/" + sDate, "dd/MM/yyyy", cultures);
-                return ngay;
+                try
+                {
+                    ngay = DateTime.ParseExact("01/" + sDate, "dd/MM/yyyy", cultures);
+                    return ngay;
+                }
+                catch
+                {
+                    ngay = DateTime.ParseExact("01/01/" + sDate, "dd/MM/yyyy", cultures);
+                    return ngay;
+                }
             }
         }
 
@@ -4657,12 +4665,11 @@ namespace Commons
             try
             {
                 DataTable dt = new DataTable();
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboDON_VI", Commons.Modules.UserName, Commons.Modules.TypeLanguage, 1));
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboDON_VI", Commons.Modules.UserName, Commons.Modules.TypeLanguage, 0));
                 Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboSearch_DV, dt, "ID_DV", "TEN_DV", "TEN_DV");
                 //Modules.ObjLanguages.GetLanguage(Modules.ModuleName, fName, col.FieldName, Modules.TypeLanguage);
                 //abc
 
-                cboSearch_DV.EditValue = -1;
             }
             catch (Exception ex)
             {
@@ -5593,6 +5600,20 @@ namespace Commons
             DataTable dt = new DataTable();
             dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboLyDoGiamLDNN", Commons.Modules.UserName, Commons.Modules.TypeLanguage, CoAll));
             return dt;
+        }
+
+        public int DataTinhTrangBangLuong(int ID_DV, DateTime dThang) // 1: Đang tính lương, 2 đã khóa
+        {
+            try
+            {
+                DataTable dt = new DataTable();
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetTinhTrangThang", Commons.Modules.UserName, Commons.Modules.TypeLanguage, ID_DV, dThang));
+                return Convert.ToInt32(dt.Rows[0][0]);
+            }
+            catch
+            {
+                return -1;
+            }
         }
 
         #endregion

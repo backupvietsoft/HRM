@@ -163,8 +163,15 @@ namespace Vs.TimeAttendance
             LoadCboXiNghiep();
             LoadCboTo();
             LoadTinhTrangHopDong();
+            datThangXem.DateTime = DateTime.Now;
+            datThangXem.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            datThangXem.Properties.DisplayFormat.FormatString = "MM/yyyy";
+            datThangXem.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            datThangXem.Properties.EditFormat.FormatString = "MM/yyyy";
+            datThangXem.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.DateTimeAdvancingCaret;
+            datThangXem.Properties.Mask.EditMask = "MM/yyyy";
             lk_Nam.Text = DateTime.Now.ToString("yyyy");
-            lk_NgayIn.Text = DateTime.Now.ToString("dd/MM/yyyy");
+            lk_NgayIn.Text = DateTime.Now.ToString("MM/yyyy");
             rdo_DiTreVeSom.SelectedIndex = 2;
             //lk_DenNgay.EditValue = DateTime.Today;
             //DateTime dtTN = DateTime.Today;
@@ -321,7 +328,7 @@ namespace Vs.TimeAttendance
 
                 TaoTTChung(oSheet, 1, 2, 1, 7, 0, 0);
 
-                Range row2_TieuDe_BaoCao0 = oSheet.Range[oSheet.Cells[2, 1], oSheet.Cells[2, 35]];
+                Range row2_TieuDe_BaoCao0 = oSheet.Range[oSheet.Cells[2, 1], oSheet.Cells[2, 36]];
                 row2_TieuDe_BaoCao0.Merge();
                 row2_TieuDe_BaoCao0.Font.Size = fontSizeTieuDe;
                 row2_TieuDe_BaoCao0.Font.Name = fontName;
@@ -330,7 +337,7 @@ namespace Vs.TimeAttendance
                 row2_TieuDe_BaoCao0.Cells.VerticalAlignment = Excell.XlVAlign.xlVAlignCenter;
                 row2_TieuDe_BaoCao0.Value2 = "THEO DÕI PHÉP NĂM " + lk_Nam.Text;
 
-                Range row4_TieuDe_Format = oSheet.Range[oSheet.Cells[4, 1], oSheet.Cells[4, 35]];
+                Range row4_TieuDe_Format = oSheet.Range[oSheet.Cells[4, 1], oSheet.Cells[4, 36]];
                 row4_TieuDe_Format.Font.Size = fontSizeNoiDung;
                 row4_TieuDe_Format.Font.Name = fontName;
                 row4_TieuDe_Format.Font.Bold = true;
@@ -436,15 +443,14 @@ namespace Vs.TimeAttendance
                 int col = 24;
                 string currentColumn = string.Empty;
 
-                while (col <= 34)
+                while (col <= 35)
                 {
                     Range row4_X = oSheet.Range[oSheet.Cells[4, col], oSheet.Cells[4, col]];
                     row4_X.ColumnWidth = 8;
-                    row4_X.Value2 = "Phép  đã dùng-T" + Convert.ToString(col - 22);
+                    row4_X.Value2 = "Phép  đã dùng-T" + Convert.ToString(col - 23);
 
                     col++;
                 }
-
                 Range row4_Z = oSheet.Range[oSheet.Cells[4, col], oSheet.Cells[4, col]];
                 row4_Z.ColumnWidth = 10;
                 row4_Z.Value2 = "Ghi chú";

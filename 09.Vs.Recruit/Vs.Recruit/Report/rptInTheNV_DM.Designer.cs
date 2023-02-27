@@ -444,6 +444,7 @@
             this.SnapGridSize = 25F;
             this.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter;
             this.Version = "22.1";
+            this.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.rptInTheNV_DM_BeforePrint);
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
 
         }

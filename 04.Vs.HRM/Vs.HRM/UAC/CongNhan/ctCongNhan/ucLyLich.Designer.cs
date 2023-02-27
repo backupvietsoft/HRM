@@ -156,8 +156,25 @@ namespace Vs.HRM
             this.ItemForID_DV = new DevExpress.XtraLayout.LayoutControlItem();
             this.ItemForID_XN = new DevExpress.XtraLayout.LayoutControlItem();
             this.Tab = new DevExpress.XtraLayout.TabbedControlGroup();
-            this.groupTaiLieu = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.groupThongTinBaoHiem = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.ItemForSO_THE_BHYT = new DevExpress.XtraLayout.LayoutControlItem();
+            this.ItemForSO_BHXH = new DevExpress.XtraLayout.LayoutControlItem();
+            this.ItemForNGAY_DBHXH = new DevExpress.XtraLayout.LayoutControlItem();
+            this.ItemForSO_GIAY_PHEP = new DevExpress.XtraLayout.LayoutControlItem();
+            this.ItemForNGAY_CAP_GP = new DevExpress.XtraLayout.LayoutControlItem();
+            this.ItemForLD_GIAM_LDNN = new DevExpress.XtraLayout.LayoutControlItem();
+            this.ItemForNGAY_CHAM_DUT_NOP_BHXH = new DevExpress.XtraLayout.LayoutControlItem();
+            this.ItemForNGAY_HET_HAN = new DevExpress.XtraLayout.LayoutControlItem();
+            this.ItemForNGAY_HH_GP = new DevExpress.XtraLayout.LayoutControlItem();
+            this.ItemForTINH_THANH = new DevExpress.XtraLayout.LayoutControlItem();
+            this.ItemForCAP_GIAY_PHEP = new DevExpress.XtraLayout.LayoutControlItem();
+            this.ItemForTHAM_GIA_BHXH = new DevExpress.XtraLayout.LayoutControlItem();
+            this.emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
+            this.ItemForBENH_VIEN = new DevExpress.XtraLayout.LayoutControlItem();
+            this.emptySpaceItem3 = new DevExpress.XtraLayout.EmptySpaceItem();
+            this.ItemForLD_NN = new DevExpress.XtraLayout.LayoutControlItem();
+            this.ItemForLOAI_QUOC_TICH = new DevExpress.XtraLayout.LayoutControlItem();
+            this.emptySpaceItem4 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.groupThongTinBoXung = new DevExpress.XtraLayout.LayoutControlGroup();
             this.ItemForMA_THE_ATM = new DevExpress.XtraLayout.LayoutControlItem();
             this.ItemForSO_CMND = new DevExpress.XtraLayout.LayoutControlItem();
@@ -200,27 +217,10 @@ namespace Vs.HRM
             this.lblID_QUAN_KS = new DevExpress.XtraLayout.LayoutControlItem();
             this.lblID_PX_KS = new DevExpress.XtraLayout.LayoutControlItem();
             this.ItemForKHU_VUC = new DevExpress.XtraLayout.LayoutControlItem();
-            this.groupThongTinBaoHiem = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.ItemForSO_THE_BHYT = new DevExpress.XtraLayout.LayoutControlItem();
-            this.ItemForSO_BHXH = new DevExpress.XtraLayout.LayoutControlItem();
-            this.ItemForNGAY_DBHXH = new DevExpress.XtraLayout.LayoutControlItem();
-            this.ItemForSO_GIAY_PHEP = new DevExpress.XtraLayout.LayoutControlItem();
-            this.ItemForNGAY_CAP_GP = new DevExpress.XtraLayout.LayoutControlItem();
-            this.ItemForLD_GIAM_LDNN = new DevExpress.XtraLayout.LayoutControlItem();
-            this.ItemForNGAY_CHAM_DUT_NOP_BHXH = new DevExpress.XtraLayout.LayoutControlItem();
-            this.ItemForNGAY_HET_HAN = new DevExpress.XtraLayout.LayoutControlItem();
-            this.ItemForNGAY_HH_GP = new DevExpress.XtraLayout.LayoutControlItem();
-            this.ItemForTINH_THANH = new DevExpress.XtraLayout.LayoutControlItem();
-            this.ItemForCAP_GIAY_PHEP = new DevExpress.XtraLayout.LayoutControlItem();
-            this.ItemForTHAM_GIA_BHXH = new DevExpress.XtraLayout.LayoutControlItem();
-            this.emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
-            this.ItemForBENH_VIEN = new DevExpress.XtraLayout.LayoutControlItem();
-            this.emptySpaceItem3 = new DevExpress.XtraLayout.EmptySpaceItem();
-            this.ItemForLD_NN = new DevExpress.XtraLayout.LayoutControlItem();
-            this.ItemForLOAI_QUOC_TICH = new DevExpress.XtraLayout.LayoutControlItem();
-            this.emptySpaceItem4 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.groupBangCap = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.groupTaiLieu = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.ItemForTEN_KHONG_DAU = new DevExpress.XtraLayout.LayoutControlItem();
             this.ItemForPHAI = new DevExpress.XtraLayout.LayoutControlItem();
             this.ItemForID_TO = new DevExpress.XtraLayout.LayoutControlItem();
@@ -350,8 +350,25 @@ namespace Vs.HRM
             ((System.ComponentModel.ISupportInitialize)(this.ItemForID_DV)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForID_XN)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Tab)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.groupTaiLieu)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupThongTinBaoHiem)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForSO_THE_BHYT)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForSO_BHXH)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForNGAY_DBHXH)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForSO_GIAY_PHEP)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForNGAY_CAP_GP)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForLD_GIAM_LDNN)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForNGAY_CHAM_DUT_NOP_BHXH)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForNGAY_HET_HAN)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForNGAY_HH_GP)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForTINH_THANH)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForCAP_GIAY_PHEP)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForTHAM_GIA_BHXH)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForBENH_VIEN)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForLD_NN)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForLOAI_QUOC_TICH)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupThongTinBoXung)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForMA_THE_ATM)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForSO_CMND)).BeginInit();
@@ -394,27 +411,10 @@ namespace Vs.HRM
             ((System.ComponentModel.ISupportInitialize)(this.lblID_QUAN_KS)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblID_PX_KS)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForKHU_VUC)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.groupThongTinBaoHiem)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemForSO_THE_BHYT)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemForSO_BHXH)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemForNGAY_DBHXH)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemForSO_GIAY_PHEP)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemForNGAY_CAP_GP)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemForLD_GIAM_LDNN)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemForNGAY_CHAM_DUT_NOP_BHXH)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemForNGAY_HET_HAN)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemForNGAY_HH_GP)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemForTINH_THANH)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemForCAP_GIAY_PHEP)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemForTHAM_GIA_BHXH)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemForBENH_VIEN)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemForLD_NN)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemForLOAI_QUOC_TICH)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupBangCap)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupTaiLieu)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForTEN_KHONG_DAU)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForPHAI)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForID_TO)).BeginInit();
@@ -696,6 +696,7 @@ namespace Vs.HRM
             this.HINH_CNPictureEdit.Size = new System.Drawing.Size(168, 222);
             this.HINH_CNPictureEdit.StyleController = this.dataLayoutControl1;
             this.HINH_CNPictureEdit.TabIndex = 4;
+            this.HINH_CNPictureEdit.EditValueChanged += new System.EventHandler(this.HINH_CNPictureEdit_EditValueChanged);
             // 
             // MS_CNTextEdit
             // 
@@ -1741,22 +1742,205 @@ namespace Vs.HRM
             this.groupBangCap,
             this.groupTaiLieu});
             // 
-            // groupTaiLieu
+            // groupThongTinBaoHiem
             // 
-            this.groupTaiLieu.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlItem2});
-            this.groupTaiLieu.Location = new System.Drawing.Point(0, 0);
-            this.groupTaiLieu.Name = "groupTaiLieu";
-            this.groupTaiLieu.Size = new System.Drawing.Size(1109, 350);
+            this.groupThongTinBaoHiem.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.ItemForSO_THE_BHYT,
+            this.ItemForSO_BHXH,
+            this.ItemForNGAY_DBHXH,
+            this.ItemForSO_GIAY_PHEP,
+            this.ItemForNGAY_CAP_GP,
+            this.ItemForLD_GIAM_LDNN,
+            this.ItemForNGAY_CHAM_DUT_NOP_BHXH,
+            this.ItemForNGAY_HET_HAN,
+            this.ItemForNGAY_HH_GP,
+            this.ItemForTINH_THANH,
+            this.ItemForCAP_GIAY_PHEP,
+            this.ItemForTHAM_GIA_BHXH,
+            this.emptySpaceItem2,
+            this.ItemForBENH_VIEN,
+            this.emptySpaceItem3,
+            this.ItemForLD_NN,
+            this.ItemForLOAI_QUOC_TICH,
+            this.emptySpaceItem4});
+            this.groupThongTinBaoHiem.Location = new System.Drawing.Point(0, 0);
+            this.groupThongTinBaoHiem.Name = "groupThongTinBaoHiem";
+            this.groupThongTinBaoHiem.Size = new System.Drawing.Size(1109, 350);
             // 
-            // layoutControlItem2
+            // ItemForSO_THE_BHYT
             // 
-            this.layoutControlItem2.Control = this.grdTaiLIeu;
-            this.layoutControlItem2.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(1109, 350);
-            this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem2.TextVisible = false;
+            this.ItemForSO_THE_BHYT.Control = this.SO_THE_BHYTTextEdit;
+            this.ItemForSO_THE_BHYT.Location = new System.Drawing.Point(0, 52);
+            this.ItemForSO_THE_BHYT.Name = "ItemForSO_THE_BHYT";
+            this.ItemForSO_THE_BHYT.Padding = new DevExpress.XtraLayout.Utils.Padding(4, 4, 2, 2);
+            this.ItemForSO_THE_BHYT.Size = new System.Drawing.Size(276, 28);
+            this.ItemForSO_THE_BHYT.Text = "SO_THE_BHYT";
+            this.ItemForSO_THE_BHYT.TextSize = new System.Drawing.Size(145, 17);
+            // 
+            // ItemForSO_BHXH
+            // 
+            this.ItemForSO_BHXH.Control = this.SO_BHXHTextEdit;
+            this.ItemForSO_BHXH.Location = new System.Drawing.Point(0, 24);
+            this.ItemForSO_BHXH.Name = "ItemForSO_BHXH";
+            this.ItemForSO_BHXH.Padding = new DevExpress.XtraLayout.Utils.Padding(4, 4, 2, 2);
+            this.ItemForSO_BHXH.Size = new System.Drawing.Size(276, 28);
+            this.ItemForSO_BHXH.Text = "SO_BHXH";
+            this.ItemForSO_BHXH.TextSize = new System.Drawing.Size(145, 17);
+            // 
+            // ItemForNGAY_DBHXH
+            // 
+            this.ItemForNGAY_DBHXH.Control = this.NGAY_DBHXHDateEdit;
+            this.ItemForNGAY_DBHXH.Location = new System.Drawing.Point(276, 24);
+            this.ItemForNGAY_DBHXH.Name = "ItemForNGAY_DBHXH";
+            this.ItemForNGAY_DBHXH.Padding = new DevExpress.XtraLayout.Utils.Padding(4, 4, 2, 2);
+            this.ItemForNGAY_DBHXH.Size = new System.Drawing.Size(278, 28);
+            this.ItemForNGAY_DBHXH.Text = "NGAY_DBHXH";
+            this.ItemForNGAY_DBHXH.TextSize = new System.Drawing.Size(145, 17);
+            // 
+            // ItemForSO_GIAY_PHEP
+            // 
+            this.ItemForSO_GIAY_PHEP.Control = this.SO_GIAY_PHEPTextEdit;
+            this.ItemForSO_GIAY_PHEP.Location = new System.Drawing.Point(0, 132);
+            this.ItemForSO_GIAY_PHEP.Name = "ItemForSO_GIAY_PHEP";
+            this.ItemForSO_GIAY_PHEP.Padding = new DevExpress.XtraLayout.Utils.Padding(4, 4, 2, 2);
+            this.ItemForSO_GIAY_PHEP.Size = new System.Drawing.Size(276, 28);
+            this.ItemForSO_GIAY_PHEP.Text = "SO_GIAY_PHEP";
+            this.ItemForSO_GIAY_PHEP.TextSize = new System.Drawing.Size(145, 17);
+            // 
+            // ItemForNGAY_CAP_GP
+            // 
+            this.ItemForNGAY_CAP_GP.Control = this.NGAY_CAP_GPDateEdit;
+            this.ItemForNGAY_CAP_GP.Location = new System.Drawing.Point(276, 132);
+            this.ItemForNGAY_CAP_GP.Name = "ItemForNGAY_CAP_GP";
+            this.ItemForNGAY_CAP_GP.Padding = new DevExpress.XtraLayout.Utils.Padding(4, 4, 2, 2);
+            this.ItemForNGAY_CAP_GP.Size = new System.Drawing.Size(278, 28);
+            this.ItemForNGAY_CAP_GP.Text = "NGAY_CAP_GP";
+            this.ItemForNGAY_CAP_GP.TextSize = new System.Drawing.Size(145, 17);
+            // 
+            // ItemForLD_GIAM_LDNN
+            // 
+            this.ItemForLD_GIAM_LDNN.Control = this.LD_GIAM_LDNNLookUpEdit;
+            this.ItemForLD_GIAM_LDNN.Location = new System.Drawing.Point(554, 160);
+            this.ItemForLD_GIAM_LDNN.Name = "ItemForLD_GIAM_LDNN";
+            this.ItemForLD_GIAM_LDNN.Padding = new DevExpress.XtraLayout.Utils.Padding(4, 4, 2, 2);
+            this.ItemForLD_GIAM_LDNN.Size = new System.Drawing.Size(555, 28);
+            this.ItemForLD_GIAM_LDNN.Text = "LD_GIAM_LDNN";
+            this.ItemForLD_GIAM_LDNN.TextSize = new System.Drawing.Size(145, 17);
+            // 
+            // ItemForNGAY_CHAM_DUT_NOP_BHXH
+            // 
+            this.ItemForNGAY_CHAM_DUT_NOP_BHXH.Control = this.NGAY_CHAM_DUT_NOP_BHXHDateEdit;
+            this.ItemForNGAY_CHAM_DUT_NOP_BHXH.CustomizationFormText = "NGAY_CD_BHYT";
+            this.ItemForNGAY_CHAM_DUT_NOP_BHXH.Location = new System.Drawing.Point(554, 24);
+            this.ItemForNGAY_CHAM_DUT_NOP_BHXH.Name = "ItemForNGAY_CHAM_DUT_NOP_BHXH";
+            this.ItemForNGAY_CHAM_DUT_NOP_BHXH.Padding = new DevExpress.XtraLayout.Utils.Padding(4, 4, 2, 2);
+            this.ItemForNGAY_CHAM_DUT_NOP_BHXH.Size = new System.Drawing.Size(276, 28);
+            this.ItemForNGAY_CHAM_DUT_NOP_BHXH.Text = "NGAY_CD_BHYT";
+            this.ItemForNGAY_CHAM_DUT_NOP_BHXH.TextSize = new System.Drawing.Size(145, 17);
+            // 
+            // ItemForNGAY_HET_HAN
+            // 
+            this.ItemForNGAY_HET_HAN.Control = this.NGAY_HET_HANDateEdit;
+            this.ItemForNGAY_HET_HAN.Location = new System.Drawing.Point(276, 52);
+            this.ItemForNGAY_HET_HAN.Name = "ItemForNGAY_HET_HAN";
+            this.ItemForNGAY_HET_HAN.Padding = new DevExpress.XtraLayout.Utils.Padding(4, 4, 2, 2);
+            this.ItemForNGAY_HET_HAN.Size = new System.Drawing.Size(278, 28);
+            this.ItemForNGAY_HET_HAN.Text = "NGAY_HET_HAN";
+            this.ItemForNGAY_HET_HAN.TextSize = new System.Drawing.Size(145, 17);
+            // 
+            // ItemForNGAY_HH_GP
+            // 
+            this.ItemForNGAY_HH_GP.Control = this.NGAY_HH_GPDateEdit;
+            this.ItemForNGAY_HH_GP.Location = new System.Drawing.Point(276, 160);
+            this.ItemForNGAY_HH_GP.Name = "ItemForNGAY_HH_GP";
+            this.ItemForNGAY_HH_GP.Padding = new DevExpress.XtraLayout.Utils.Padding(4, 4, 2, 2);
+            this.ItemForNGAY_HH_GP.Size = new System.Drawing.Size(278, 28);
+            this.ItemForNGAY_HH_GP.Text = "NGAY_HH_GP";
+            this.ItemForNGAY_HH_GP.TextSize = new System.Drawing.Size(145, 17);
+            // 
+            // ItemForTINH_THANH
+            // 
+            this.ItemForTINH_THANH.Control = this.TINH_THANHLookUpEdit;
+            this.ItemForTINH_THANH.Location = new System.Drawing.Point(554, 52);
+            this.ItemForTINH_THANH.Name = "ItemForTINH_THANH";
+            this.ItemForTINH_THANH.Padding = new DevExpress.XtraLayout.Utils.Padding(4, 4, 2, 2);
+            this.ItemForTINH_THANH.Size = new System.Drawing.Size(555, 28);
+            this.ItemForTINH_THANH.Text = "TINH_THANH";
+            this.ItemForTINH_THANH.TextSize = new System.Drawing.Size(145, 17);
+            // 
+            // ItemForCAP_GIAY_PHEP
+            // 
+            this.ItemForCAP_GIAY_PHEP.Control = this.CAP_GIAY_PHEPLookUpEdit;
+            this.ItemForCAP_GIAY_PHEP.Location = new System.Drawing.Point(0, 160);
+            this.ItemForCAP_GIAY_PHEP.Name = "ItemForCAP_GIAY_PHEP";
+            this.ItemForCAP_GIAY_PHEP.Padding = new DevExpress.XtraLayout.Utils.Padding(4, 4, 2, 2);
+            this.ItemForCAP_GIAY_PHEP.Size = new System.Drawing.Size(276, 28);
+            this.ItemForCAP_GIAY_PHEP.Text = "CAP_GIAY_PHEP";
+            this.ItemForCAP_GIAY_PHEP.TextSize = new System.Drawing.Size(145, 17);
+            // 
+            // ItemForTHAM_GIA_BHXH
+            // 
+            this.ItemForTHAM_GIA_BHXH.Control = this.THAM_GIA_BHXHCheckEdit;
+            this.ItemForTHAM_GIA_BHXH.Location = new System.Drawing.Point(0, 0);
+            this.ItemForTHAM_GIA_BHXH.Name = "ItemForTHAM_GIA_BHXH";
+            this.ItemForTHAM_GIA_BHXH.Padding = new DevExpress.XtraLayout.Utils.Padding(4, 4, 2, 2);
+            this.ItemForTHAM_GIA_BHXH.Size = new System.Drawing.Size(1109, 24);
+            this.ItemForTHAM_GIA_BHXH.Text = "THAM_GIA_BHXH";
+            this.ItemForTHAM_GIA_BHXH.TextSize = new System.Drawing.Size(145, 17);
+            // 
+            // emptySpaceItem2
+            // 
+            this.emptySpaceItem2.AllowHotTrack = false;
+            this.emptySpaceItem2.Location = new System.Drawing.Point(830, 24);
+            this.emptySpaceItem2.Name = "emptySpaceItem2";
+            this.emptySpaceItem2.Size = new System.Drawing.Size(279, 28);
+            this.emptySpaceItem2.TextSize = new System.Drawing.Size(0, 0);
+            // 
+            // ItemForBENH_VIEN
+            // 
+            this.ItemForBENH_VIEN.Control = this.BENH_VIENLookUpEdit;
+            this.ItemForBENH_VIEN.Location = new System.Drawing.Point(0, 80);
+            this.ItemForBENH_VIEN.Name = "ItemForBENH_VIEN";
+            this.ItemForBENH_VIEN.Padding = new DevExpress.XtraLayout.Utils.Padding(4, 4, 2, 2);
+            this.ItemForBENH_VIEN.Size = new System.Drawing.Size(554, 28);
+            this.ItemForBENH_VIEN.Text = "BENH_VIEN";
+            this.ItemForBENH_VIEN.TextSize = new System.Drawing.Size(145, 17);
+            // 
+            // emptySpaceItem3
+            // 
+            this.emptySpaceItem3.AllowHotTrack = false;
+            this.emptySpaceItem3.Location = new System.Drawing.Point(554, 80);
+            this.emptySpaceItem3.Name = "emptySpaceItem3";
+            this.emptySpaceItem3.Size = new System.Drawing.Size(555, 52);
+            this.emptySpaceItem3.TextSize = new System.Drawing.Size(0, 0);
+            // 
+            // ItemForLD_NN
+            // 
+            this.ItemForLD_NN.Control = this.LD_NNCheckEdit;
+            this.ItemForLD_NN.Location = new System.Drawing.Point(0, 108);
+            this.ItemForLD_NN.Name = "ItemForLD_NN";
+            this.ItemForLD_NN.Padding = new DevExpress.XtraLayout.Utils.Padding(4, 4, 2, 2);
+            this.ItemForLD_NN.Size = new System.Drawing.Size(554, 24);
+            this.ItemForLD_NN.Text = "LD_NN";
+            this.ItemForLD_NN.TextSize = new System.Drawing.Size(145, 17);
+            // 
+            // ItemForLOAI_QUOC_TICH
+            // 
+            this.ItemForLOAI_QUOC_TICH.Control = this.LOAI_QUOC_TICHLookUpEdit;
+            this.ItemForLOAI_QUOC_TICH.Location = new System.Drawing.Point(554, 132);
+            this.ItemForLOAI_QUOC_TICH.Name = "ItemForLOAI_QUOC_TICH";
+            this.ItemForLOAI_QUOC_TICH.Padding = new DevExpress.XtraLayout.Utils.Padding(4, 4, 2, 2);
+            this.ItemForLOAI_QUOC_TICH.Size = new System.Drawing.Size(555, 28);
+            this.ItemForLOAI_QUOC_TICH.Text = "LOAI_QUOC_TICH";
+            this.ItemForLOAI_QUOC_TICH.TextSize = new System.Drawing.Size(145, 17);
+            // 
+            // emptySpaceItem4
+            // 
+            this.emptySpaceItem4.AllowHotTrack = false;
+            this.emptySpaceItem4.Location = new System.Drawing.Point(0, 188);
+            this.emptySpaceItem4.Name = "emptySpaceItem4";
+            this.emptySpaceItem4.Size = new System.Drawing.Size(1109, 162);
+            this.emptySpaceItem4.TextSize = new System.Drawing.Size(0, 0);
             // 
             // groupThongTinBoXung
             // 
@@ -2253,206 +2437,6 @@ namespace Vs.HRM
             this.ItemForKHU_VUC.Size = new System.Drawing.Size(238, 184);
             this.ItemForKHU_VUC.TextSize = new System.Drawing.Size(145, 17);
             // 
-            // groupThongTinBaoHiem
-            // 
-            this.groupThongTinBaoHiem.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.ItemForSO_THE_BHYT,
-            this.ItemForSO_BHXH,
-            this.ItemForNGAY_DBHXH,
-            this.ItemForSO_GIAY_PHEP,
-            this.ItemForNGAY_CAP_GP,
-            this.ItemForLD_GIAM_LDNN,
-            this.ItemForNGAY_CHAM_DUT_NOP_BHXH,
-            this.ItemForNGAY_HET_HAN,
-            this.ItemForNGAY_HH_GP,
-            this.ItemForTINH_THANH,
-            this.ItemForCAP_GIAY_PHEP,
-            this.ItemForTHAM_GIA_BHXH,
-            this.emptySpaceItem2,
-            this.ItemForBENH_VIEN,
-            this.emptySpaceItem3,
-            this.ItemForLD_NN,
-            this.ItemForLOAI_QUOC_TICH,
-            this.emptySpaceItem4});
-            this.groupThongTinBaoHiem.Location = new System.Drawing.Point(0, 0);
-            this.groupThongTinBaoHiem.Name = "groupThongTinBaoHiem";
-            this.groupThongTinBaoHiem.Size = new System.Drawing.Size(1109, 350);
-            // 
-            // ItemForSO_THE_BHYT
-            // 
-            this.ItemForSO_THE_BHYT.Control = this.SO_THE_BHYTTextEdit;
-            this.ItemForSO_THE_BHYT.Location = new System.Drawing.Point(0, 52);
-            this.ItemForSO_THE_BHYT.Name = "ItemForSO_THE_BHYT";
-            this.ItemForSO_THE_BHYT.Padding = new DevExpress.XtraLayout.Utils.Padding(4, 4, 2, 2);
-            this.ItemForSO_THE_BHYT.Size = new System.Drawing.Size(276, 28);
-            this.ItemForSO_THE_BHYT.Text = "SO_THE_BHYT";
-            this.ItemForSO_THE_BHYT.TextSize = new System.Drawing.Size(145, 17);
-            // 
-            // ItemForSO_BHXH
-            // 
-            this.ItemForSO_BHXH.Control = this.SO_BHXHTextEdit;
-            this.ItemForSO_BHXH.Location = new System.Drawing.Point(0, 24);
-            this.ItemForSO_BHXH.Name = "ItemForSO_BHXH";
-            this.ItemForSO_BHXH.Padding = new DevExpress.XtraLayout.Utils.Padding(4, 4, 2, 2);
-            this.ItemForSO_BHXH.Size = new System.Drawing.Size(276, 28);
-            this.ItemForSO_BHXH.Text = "SO_BHXH";
-            this.ItemForSO_BHXH.TextSize = new System.Drawing.Size(145, 17);
-            // 
-            // ItemForNGAY_DBHXH
-            // 
-            this.ItemForNGAY_DBHXH.Control = this.NGAY_DBHXHDateEdit;
-            this.ItemForNGAY_DBHXH.Location = new System.Drawing.Point(276, 24);
-            this.ItemForNGAY_DBHXH.Name = "ItemForNGAY_DBHXH";
-            this.ItemForNGAY_DBHXH.Padding = new DevExpress.XtraLayout.Utils.Padding(4, 4, 2, 2);
-            this.ItemForNGAY_DBHXH.Size = new System.Drawing.Size(278, 28);
-            this.ItemForNGAY_DBHXH.Text = "NGAY_DBHXH";
-            this.ItemForNGAY_DBHXH.TextSize = new System.Drawing.Size(145, 17);
-            // 
-            // ItemForSO_GIAY_PHEP
-            // 
-            this.ItemForSO_GIAY_PHEP.Control = this.SO_GIAY_PHEPTextEdit;
-            this.ItemForSO_GIAY_PHEP.Location = new System.Drawing.Point(0, 132);
-            this.ItemForSO_GIAY_PHEP.Name = "ItemForSO_GIAY_PHEP";
-            this.ItemForSO_GIAY_PHEP.Padding = new DevExpress.XtraLayout.Utils.Padding(4, 4, 2, 2);
-            this.ItemForSO_GIAY_PHEP.Size = new System.Drawing.Size(276, 28);
-            this.ItemForSO_GIAY_PHEP.Text = "SO_GIAY_PHEP";
-            this.ItemForSO_GIAY_PHEP.TextSize = new System.Drawing.Size(145, 17);
-            // 
-            // ItemForNGAY_CAP_GP
-            // 
-            this.ItemForNGAY_CAP_GP.Control = this.NGAY_CAP_GPDateEdit;
-            this.ItemForNGAY_CAP_GP.Location = new System.Drawing.Point(276, 132);
-            this.ItemForNGAY_CAP_GP.Name = "ItemForNGAY_CAP_GP";
-            this.ItemForNGAY_CAP_GP.Padding = new DevExpress.XtraLayout.Utils.Padding(4, 4, 2, 2);
-            this.ItemForNGAY_CAP_GP.Size = new System.Drawing.Size(278, 28);
-            this.ItemForNGAY_CAP_GP.Text = "NGAY_CAP_GP";
-            this.ItemForNGAY_CAP_GP.TextSize = new System.Drawing.Size(145, 17);
-            // 
-            // ItemForLD_GIAM_LDNN
-            // 
-            this.ItemForLD_GIAM_LDNN.Control = this.LD_GIAM_LDNNLookUpEdit;
-            this.ItemForLD_GIAM_LDNN.Location = new System.Drawing.Point(554, 160);
-            this.ItemForLD_GIAM_LDNN.Name = "ItemForLD_GIAM_LDNN";
-            this.ItemForLD_GIAM_LDNN.Padding = new DevExpress.XtraLayout.Utils.Padding(4, 4, 2, 2);
-            this.ItemForLD_GIAM_LDNN.Size = new System.Drawing.Size(555, 28);
-            this.ItemForLD_GIAM_LDNN.Text = "LD_GIAM_LDNN";
-            this.ItemForLD_GIAM_LDNN.TextSize = new System.Drawing.Size(145, 17);
-            // 
-            // ItemForNGAY_CHAM_DUT_NOP_BHXH
-            // 
-            this.ItemForNGAY_CHAM_DUT_NOP_BHXH.Control = this.NGAY_CHAM_DUT_NOP_BHXHDateEdit;
-            this.ItemForNGAY_CHAM_DUT_NOP_BHXH.CustomizationFormText = "NGAY_CD_BHYT";
-            this.ItemForNGAY_CHAM_DUT_NOP_BHXH.Location = new System.Drawing.Point(554, 24);
-            this.ItemForNGAY_CHAM_DUT_NOP_BHXH.Name = "ItemForNGAY_CHAM_DUT_NOP_BHXH";
-            this.ItemForNGAY_CHAM_DUT_NOP_BHXH.Padding = new DevExpress.XtraLayout.Utils.Padding(4, 4, 2, 2);
-            this.ItemForNGAY_CHAM_DUT_NOP_BHXH.Size = new System.Drawing.Size(276, 28);
-            this.ItemForNGAY_CHAM_DUT_NOP_BHXH.Text = "NGAY_CD_BHYT";
-            this.ItemForNGAY_CHAM_DUT_NOP_BHXH.TextSize = new System.Drawing.Size(145, 17);
-            // 
-            // ItemForNGAY_HET_HAN
-            // 
-            this.ItemForNGAY_HET_HAN.Control = this.NGAY_HET_HANDateEdit;
-            this.ItemForNGAY_HET_HAN.Location = new System.Drawing.Point(276, 52);
-            this.ItemForNGAY_HET_HAN.Name = "ItemForNGAY_HET_HAN";
-            this.ItemForNGAY_HET_HAN.Padding = new DevExpress.XtraLayout.Utils.Padding(4, 4, 2, 2);
-            this.ItemForNGAY_HET_HAN.Size = new System.Drawing.Size(278, 28);
-            this.ItemForNGAY_HET_HAN.Text = "NGAY_HET_HAN";
-            this.ItemForNGAY_HET_HAN.TextSize = new System.Drawing.Size(145, 17);
-            // 
-            // ItemForNGAY_HH_GP
-            // 
-            this.ItemForNGAY_HH_GP.Control = this.NGAY_HH_GPDateEdit;
-            this.ItemForNGAY_HH_GP.Location = new System.Drawing.Point(276, 160);
-            this.ItemForNGAY_HH_GP.Name = "ItemForNGAY_HH_GP";
-            this.ItemForNGAY_HH_GP.Padding = new DevExpress.XtraLayout.Utils.Padding(4, 4, 2, 2);
-            this.ItemForNGAY_HH_GP.Size = new System.Drawing.Size(278, 28);
-            this.ItemForNGAY_HH_GP.Text = "NGAY_HH_GP";
-            this.ItemForNGAY_HH_GP.TextSize = new System.Drawing.Size(145, 17);
-            // 
-            // ItemForTINH_THANH
-            // 
-            this.ItemForTINH_THANH.Control = this.TINH_THANHLookUpEdit;
-            this.ItemForTINH_THANH.Location = new System.Drawing.Point(554, 52);
-            this.ItemForTINH_THANH.Name = "ItemForTINH_THANH";
-            this.ItemForTINH_THANH.Padding = new DevExpress.XtraLayout.Utils.Padding(4, 4, 2, 2);
-            this.ItemForTINH_THANH.Size = new System.Drawing.Size(555, 28);
-            this.ItemForTINH_THANH.Text = "TINH_THANH";
-            this.ItemForTINH_THANH.TextSize = new System.Drawing.Size(145, 17);
-            // 
-            // ItemForCAP_GIAY_PHEP
-            // 
-            this.ItemForCAP_GIAY_PHEP.Control = this.CAP_GIAY_PHEPLookUpEdit;
-            this.ItemForCAP_GIAY_PHEP.Location = new System.Drawing.Point(0, 160);
-            this.ItemForCAP_GIAY_PHEP.Name = "ItemForCAP_GIAY_PHEP";
-            this.ItemForCAP_GIAY_PHEP.Padding = new DevExpress.XtraLayout.Utils.Padding(4, 4, 2, 2);
-            this.ItemForCAP_GIAY_PHEP.Size = new System.Drawing.Size(276, 28);
-            this.ItemForCAP_GIAY_PHEP.Text = "CAP_GIAY_PHEP";
-            this.ItemForCAP_GIAY_PHEP.TextSize = new System.Drawing.Size(145, 17);
-            // 
-            // ItemForTHAM_GIA_BHXH
-            // 
-            this.ItemForTHAM_GIA_BHXH.Control = this.THAM_GIA_BHXHCheckEdit;
-            this.ItemForTHAM_GIA_BHXH.Location = new System.Drawing.Point(0, 0);
-            this.ItemForTHAM_GIA_BHXH.Name = "ItemForTHAM_GIA_BHXH";
-            this.ItemForTHAM_GIA_BHXH.Padding = new DevExpress.XtraLayout.Utils.Padding(4, 4, 2, 2);
-            this.ItemForTHAM_GIA_BHXH.Size = new System.Drawing.Size(1109, 24);
-            this.ItemForTHAM_GIA_BHXH.Text = "THAM_GIA_BHXH";
-            this.ItemForTHAM_GIA_BHXH.TextSize = new System.Drawing.Size(145, 17);
-            // 
-            // emptySpaceItem2
-            // 
-            this.emptySpaceItem2.AllowHotTrack = false;
-            this.emptySpaceItem2.Location = new System.Drawing.Point(830, 24);
-            this.emptySpaceItem2.Name = "emptySpaceItem2";
-            this.emptySpaceItem2.Size = new System.Drawing.Size(279, 28);
-            this.emptySpaceItem2.TextSize = new System.Drawing.Size(0, 0);
-            // 
-            // ItemForBENH_VIEN
-            // 
-            this.ItemForBENH_VIEN.Control = this.BENH_VIENLookUpEdit;
-            this.ItemForBENH_VIEN.Location = new System.Drawing.Point(0, 80);
-            this.ItemForBENH_VIEN.Name = "ItemForBENH_VIEN";
-            this.ItemForBENH_VIEN.Padding = new DevExpress.XtraLayout.Utils.Padding(4, 4, 2, 2);
-            this.ItemForBENH_VIEN.Size = new System.Drawing.Size(554, 28);
-            this.ItemForBENH_VIEN.Text = "BENH_VIEN";
-            this.ItemForBENH_VIEN.TextSize = new System.Drawing.Size(145, 17);
-            // 
-            // emptySpaceItem3
-            // 
-            this.emptySpaceItem3.AllowHotTrack = false;
-            this.emptySpaceItem3.Location = new System.Drawing.Point(554, 80);
-            this.emptySpaceItem3.Name = "emptySpaceItem3";
-            this.emptySpaceItem3.Size = new System.Drawing.Size(555, 52);
-            this.emptySpaceItem3.TextSize = new System.Drawing.Size(0, 0);
-            // 
-            // ItemForLD_NN
-            // 
-            this.ItemForLD_NN.Control = this.LD_NNCheckEdit;
-            this.ItemForLD_NN.Location = new System.Drawing.Point(0, 108);
-            this.ItemForLD_NN.Name = "ItemForLD_NN";
-            this.ItemForLD_NN.Padding = new DevExpress.XtraLayout.Utils.Padding(4, 4, 2, 2);
-            this.ItemForLD_NN.Size = new System.Drawing.Size(554, 24);
-            this.ItemForLD_NN.Text = "LD_NN";
-            this.ItemForLD_NN.TextSize = new System.Drawing.Size(145, 17);
-            // 
-            // ItemForLOAI_QUOC_TICH
-            // 
-            this.ItemForLOAI_QUOC_TICH.Control = this.LOAI_QUOC_TICHLookUpEdit;
-            this.ItemForLOAI_QUOC_TICH.Location = new System.Drawing.Point(554, 132);
-            this.ItemForLOAI_QUOC_TICH.Name = "ItemForLOAI_QUOC_TICH";
-            this.ItemForLOAI_QUOC_TICH.Padding = new DevExpress.XtraLayout.Utils.Padding(4, 4, 2, 2);
-            this.ItemForLOAI_QUOC_TICH.Size = new System.Drawing.Size(555, 28);
-            this.ItemForLOAI_QUOC_TICH.Text = "LOAI_QUOC_TICH";
-            this.ItemForLOAI_QUOC_TICH.TextSize = new System.Drawing.Size(145, 17);
-            // 
-            // emptySpaceItem4
-            // 
-            this.emptySpaceItem4.AllowHotTrack = false;
-            this.emptySpaceItem4.Location = new System.Drawing.Point(0, 188);
-            this.emptySpaceItem4.Name = "emptySpaceItem4";
-            this.emptySpaceItem4.Size = new System.Drawing.Size(1109, 162);
-            this.emptySpaceItem4.TextSize = new System.Drawing.Size(0, 0);
-            // 
             // groupBangCap
             // 
             this.groupBangCap.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
@@ -2472,6 +2456,23 @@ namespace Vs.HRM
             this.layoutControlItem1.Size = new System.Drawing.Size(1109, 350);
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
+            // 
+            // groupTaiLieu
+            // 
+            this.groupTaiLieu.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItem2});
+            this.groupTaiLieu.Location = new System.Drawing.Point(0, 0);
+            this.groupTaiLieu.Name = "groupTaiLieu";
+            this.groupTaiLieu.Size = new System.Drawing.Size(1109, 350);
+            // 
+            // layoutControlItem2
+            // 
+            this.layoutControlItem2.Control = this.grdTaiLIeu;
+            this.layoutControlItem2.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlItem2.Name = "layoutControlItem2";
+            this.layoutControlItem2.Size = new System.Drawing.Size(1109, 350);
+            this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem2.TextVisible = false;
             // 
             // ItemForTEN_KHONG_DAU
             // 
@@ -2780,8 +2781,25 @@ namespace Vs.HRM
             ((System.ComponentModel.ISupportInitialize)(this.ItemForID_DV)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForID_XN)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Tab)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.groupTaiLieu)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupThongTinBaoHiem)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForSO_THE_BHYT)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForSO_BHXH)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForNGAY_DBHXH)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForSO_GIAY_PHEP)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForNGAY_CAP_GP)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForLD_GIAM_LDNN)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForNGAY_CHAM_DUT_NOP_BHXH)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForNGAY_HET_HAN)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForNGAY_HH_GP)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForTINH_THANH)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForCAP_GIAY_PHEP)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForTHAM_GIA_BHXH)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForBENH_VIEN)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForLD_NN)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForLOAI_QUOC_TICH)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupThongTinBoXung)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForMA_THE_ATM)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForSO_CMND)).EndInit();
@@ -2824,27 +2842,10 @@ namespace Vs.HRM
             ((System.ComponentModel.ISupportInitialize)(this.lblID_QUAN_KS)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblID_PX_KS)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForKHU_VUC)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.groupThongTinBaoHiem)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemForSO_THE_BHYT)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemForSO_BHXH)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemForNGAY_DBHXH)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemForSO_GIAY_PHEP)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemForNGAY_CAP_GP)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemForLD_GIAM_LDNN)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemForNGAY_CHAM_DUT_NOP_BHXH)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemForNGAY_HET_HAN)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemForNGAY_HH_GP)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemForTINH_THANH)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemForCAP_GIAY_PHEP)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemForTHAM_GIA_BHXH)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemForBENH_VIEN)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemForLD_NN)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemForLOAI_QUOC_TICH)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupBangCap)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupTaiLieu)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForTEN_KHONG_DAU)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForPHAI)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForID_TO)).EndInit();

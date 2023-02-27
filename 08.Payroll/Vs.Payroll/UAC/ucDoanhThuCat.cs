@@ -35,7 +35,6 @@ namespace Vs.Payroll
                 return _instance;
             }
         }
-        private int iTinhTrang = 1;
         private double iTongDoanhThu = 0;
         RepositoryItemTimeEdit repositoryItemTimeEdit1;
         public ucDoanhThuCat()
@@ -145,15 +144,10 @@ namespace Vs.Payroll
                     dt1 = ds.Tables[2].Copy();
                     iTongDoanhThu = Convert.ToDouble(dt.Rows[0][0]) + Convert.ToDouble(dt1.Rows[0][0]); // doanh thu tháng + doanh thu ngoài
                     lbl.Text = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "lblTongSoLuong") + " : " + fTongSL.ToString("N0") + "     " + Commons.Modules.ObjLanguages.GetLanguage(this.Name, "lblDoanhThuNgoai") + " : " + Convert.ToDouble(dt1.Rows[0][0]).ToString("#,##0") + " " + Commons.Modules.ObjLanguages.GetLanguage(this.Name, "lblDong") + "     " + Commons.Modules.ObjLanguages.GetLanguage(this.Name, "lblDoanhThuThang") + " : " + Convert.ToDouble(dt.Rows[0][0]).ToString("#,##0") + " " + Commons.Modules.ObjLanguages.GetLanguage(this.Name, "lblDong");
-                    dt = new DataTable();
-                    dt = ds.Tables[3].Copy();
-                    iTinhTrang = 1;
-                    iTinhTrang = Convert.ToInt32(dt.Rows[0][0]);
                 }
             }
             catch (Exception ex)
             {
-                iTinhTrang = 1;
             }
             EnableButon(isAdd);
         }
@@ -271,14 +265,13 @@ namespace Vs.Payroll
         }
         private void EnableButon(bool visible)
         {
-            if (iTinhTrang == 3)
+            if (Commons.Modules.ObjSystems.DataTinhTrangBangLuong(Convert.ToInt32(cboDonVi.EditValue), Commons.Modules.ObjSystems.ConvertDateTime(cboThang.Text)) == 2)
             {
                 btnALL.Buttons[0].Properties.Visible = false;
                 btnALL.Buttons[1].Properties.Visible = false;
                 btnALL.Buttons[2].Properties.Visible = false;
-                btnALL.Buttons[3].Properties.Visible = false;
-                btnALL.Buttons[4].Properties.Visible = false;
-                btnCNCat.Visible = false;
+                btnALL.Buttons[6].Properties.Visible = false;
+                btnALL.Buttons[7].Properties.Visible = false;
             }
             else
             {
@@ -379,7 +372,7 @@ namespace Vs.Payroll
             if (Commons.Modules.sLoad == "0Load") return;
             Commons.Modules.sLoad = "0Load";
             LoadData();
-            //EnableButon(true);
+            EnableButon(isAdd);
             Commons.Modules.sLoad = "";
         }
 
@@ -420,7 +413,7 @@ namespace Vs.Payroll
             LoadCboTo();
             LoadThang();
             LoadData();
-            //EnableButon(true);
+            EnableButon(isAdd);
             Commons.Modules.sLoad = "";
         }
 

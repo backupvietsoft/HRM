@@ -51,7 +51,6 @@ namespace Vs.Payroll
         {
             try
             {
-                EnableButon();
                 Commons.Modules.sLoad = "0Load";
                 LoadThang();
                 if (Commons.Modules.KyHieuDV != "DM")
@@ -72,6 +71,7 @@ namespace Vs.Payroll
                 txtNgayCongChuan.Text = getNgayCongChuan().ToString();
                 txtNgayCongLV.Text = getNgayCongChuan().ToString();
                 Commons.Modules.sLoad = "";
+                EnableButon();
             }
             catch { }
         }
@@ -489,7 +489,6 @@ namespace Vs.Payroll
             //    grvData.Columns[i].DisplayFormat.FormatString = "N0";
             //}
         }
-
         public void LoadThang()
         {
             try
@@ -617,19 +616,33 @@ namespace Vs.Payroll
 
         private void EnableButon()
         {
-            if (iLoaiTL == 1)
+            if (Commons.Modules.ObjSystems.DataTinhTrangBangLuong(Convert.ToInt32(cboDonVi.EditValue), Commons.Modules.ObjSystems.ConvertDateTime(cboThang.Text)) == 1)
+            {
+                if (iLoaiTL == 1)
+                {
+                    btnALL.Buttons[0].Properties.Visible = false;
+                    btnALL.Buttons[1].Properties.Visible = false;
+                    btnALL.Buttons[2].Properties.Visible = false;
+                }
+                else
+                {
+                    btnALL.Buttons[0].Properties.Visible = true;
+                    btnALL.Buttons[1].Properties.Visible = true;
+                    btnALL.Buttons[2].Properties.Visible = true;
+                }
+                btnALL.Buttons[3].Properties.Visible = true;
+                btnALL.Buttons[4].Properties.Visible = true;
+                btnALL.Buttons[5].Properties.Visible = true;
+            }
+            else
             {
                 btnALL.Buttons[0].Properties.Visible = false;
                 btnALL.Buttons[1].Properties.Visible = false;
                 btnALL.Buttons[2].Properties.Visible = false;
+                btnALL.Buttons[3].Properties.Visible = false;
+                btnALL.Buttons[4].Properties.Visible = false;
+                btnALL.Buttons[5].Properties.Visible = false;
             }
-            else
-            {
-                btnALL.Buttons[0].Properties.Visible = true;
-                btnALL.Buttons[1].Properties.Visible = true;
-                btnALL.Buttons[2].Properties.Visible = true;
-            }
-
         }
 
         private int getNgayCongChuan()
@@ -730,6 +743,7 @@ namespace Vs.Payroll
                     LoadGrdGTGCNV_DM();
                 }
             }
+            EnableButon();
             //EnableButon(true);
             Commons.Modules.sLoad = "";
         }
@@ -798,7 +812,7 @@ namespace Vs.Payroll
                     LoadGrdGTGCNV_DM();
                 }
             }
-            //EnableButon(true);
+            EnableButon();
             Commons.Modules.sLoad = "";
         }
 

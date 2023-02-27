@@ -18,6 +18,7 @@ using System.Collections;
 using DevExpress.Spreadsheet;
 using DevExpress.Utils;
 using System.Drawing;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Tab;
 
 namespace Vs.TimeAttendance
 {
@@ -75,7 +76,6 @@ namespace Vs.TimeAttendance
             repositoryItemTimeEdit1.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             repositoryItemTimeEdit1.EditFormat.FormatString = "HH:mm";
 
-            EnableButon();
             LoadNgay();
             Commons.Modules.ObjSystems.LoadCboDonVi(cboDonVi);
             Commons.Modules.ObjSystems.LoadCboXiNghiep(cboDonVi, cboXiNghiep);
@@ -99,7 +99,7 @@ namespace Vs.TimeAttendance
             //cboCa.Click += CboCa_EditValueChanged;
             Commons.Modules.sLoad = "";
             grvCongNhan_FocusedRowChanged(null, null);
-
+            EnableButon();
         }
 
         private void CboCa_EditValueChanged(object sender, EventArgs e)
@@ -329,6 +329,7 @@ namespace Vs.TimeAttendance
             Commons.Modules.ObjSystems.LoadCboTo(cboDonVi, cboXiNghiep, cboTo);
             LoadGridCongNhan();
             LoadGrdDSLamThem();
+            EnableButon();
             Commons.Modules.sLoad = "";
             grvCongNhan_FocusedRowChanged(null, null);
         }
@@ -365,6 +366,7 @@ namespace Vs.TimeAttendance
             Commons.Modules.sLoad = "0Load";
             LoadGridCongNhan();
             LoadGrdDSLamThem();
+            EnableButon();
             Commons.Modules.sLoad = "";
             grvCongNhan_FocusedRowChanged(null, null);
         }
@@ -1021,21 +1023,33 @@ namespace Vs.TimeAttendance
         /// <param name="visible"></param>
         private void EnableButon()
         {
+            if (Commons.Modules.ObjSystems.DataTinhTrangBangLuong(Convert.ToInt32(cboDonVi.EditValue), Commons.Modules.ObjSystems.ConvertDateTime(cboNgay.Text)) == 2)
+            {
+                btnALL.Buttons[0].Properties.Visible = false;
+                btnALL.Buttons[1].Properties.Visible = false;
+                btnALL.Buttons[3].Properties.Visible = false;
+                btnALL.Buttons[4].Properties.Visible = false;
+                btnALL.Buttons[5].Properties.Visible = false;
+                btnALL.Buttons[6].Properties.Visible = false;
+                btnALL.Buttons[7].Properties.Visible = false;
+            }
+            else
+            {
+                btnALL.Buttons[0].Properties.Visible = !isAdd;
+                btnALL.Buttons[1].Properties.Visible = !isAdd;
+                btnALL.Buttons[2].Properties.Visible = !isAdd;
+                btnALL.Buttons[3].Properties.Visible = !isAdd;
+                btnALL.Buttons[4].Properties.Visible = isAdd;
+                btnALL.Buttons[5].Properties.Visible = isAdd;
+                btnALL.Buttons[6].Properties.Visible = isAdd;
+                btnALL.Buttons[7].Properties.Visible = isAdd;
+                btnALL.Buttons[8].Properties.Visible = !isAdd;
 
-            btnALL.Buttons[0].Properties.Visible = !isAdd;
-            btnALL.Buttons[1].Properties.Visible = !isAdd;
-            btnALL.Buttons[2].Properties.Visible = !isAdd;
-            btnALL.Buttons[3].Properties.Visible = !isAdd;
-            btnALL.Buttons[4].Properties.Visible = isAdd;
-            btnALL.Buttons[5].Properties.Visible = isAdd;
-            btnALL.Buttons[6].Properties.Visible = isAdd;
-            btnALL.Buttons[7].Properties.Visible = isAdd;
-            btnALL.Buttons[8].Properties.Visible = !isAdd;
-
-            cboNgay.Enabled = !isAdd;
-            cboDonVi.Enabled = !isAdd;
-            cboXiNghiep.Enabled = !isAdd;
-            cboTo.Enabled = !isAdd;
+                cboNgay.Enabled = !isAdd;
+                cboDonVi.Enabled = !isAdd;
+                cboXiNghiep.Enabled = !isAdd;
+                cboTo.Enabled = !isAdd;
+            }
         }
 
         private void grvData_InitNewRow(object sender, DevExpress.XtraGrid.Views.Grid.InitNewRowEventArgs e)

@@ -27,7 +27,7 @@ namespace Vs.Report
 
         private void rptSoYeuLyLich_AfterPrint(object sender, EventArgs e)
         {
-          
+
         }
 
         private void rptSoYeuLyLich_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
@@ -50,6 +50,12 @@ namespace Vs.Report
                 DataSet ds = new DataSet();
                 adp.Fill(ds);
 
+                dt = new DataTable();
+                dt = ds.Tables[0].Copy();
+                dt.TableName = "DATA";
+
+                //xrPictureBox1.ImageUrl = Commons.Modules.sDDTaiLieu + "\\" + "ImageEmployees\\" + dt.Rows[0]["MS_CN"].ToString().Trim() + ".jpg";
+
                 //Hop dong lao dong
                 DataTable dtHDLD = new DataTable();
                 dtHDLD = ds.Tables[1].Copy();
@@ -62,7 +68,7 @@ namespace Vs.Report
                 dtQTLV = ds.Tables[2].Copy();
                 dtQTLV.TableName = "DATA2";
                 this.xrSubreport1.ReportSource = new srptQuaTrinhLamViec(dtQTLV);
-                
+
 
 
                 // Qua trinh luong

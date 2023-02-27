@@ -38,6 +38,12 @@ namespace Vs.HRM
                         this.lblInTatCa.Visible = false;
                         break;
                     }
+                case "HN":
+                    {
+                        this.chkInAll.Visible = false;
+                        this.lblInTatCa.Visible = false;
+                        break;
+                    }
             }
             ////this.chkInAll.Visible = false;
             ////this.lblInTatCa.Visible = false;
@@ -46,8 +52,8 @@ namespace Vs.HRM
 
         public void SaveDinhDangBaoCaoCongNhan()
         {
-            grvMauBC.CloseEditor();
-            grvMauBC.UpdateCurrentRow();
+            grvChonCot.CloseEditor();
+            grvChonCot.UpdateCurrentRow();
             string sResult = "";
             Int64 iID = -1;
             if (sNameButton == "them")
@@ -181,16 +187,54 @@ namespace Vs.HRM
                                     }
                                     break;
                                 }
+                            case "NC":
+                                {
+
+                                    if (chkInAll.Checked == true)
+                                    {
+                                        DanhSachCanBoCongNhanVien();
+                                    }
+                                    else
+                                    {
+
+                                        DataTable dt = new DataTable();
+                                        dt = (DataTable)grdChonCot.DataSource;
+                                        if (dt.AsEnumerable().Where(x => x["CHON"].ToString() == "1").Count() == 0)
+                                        {
+                                            XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgBanChuaChonCotIn"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                            return;
+                                        }
+                                        DanhSachNhanVien_Chung();
+                                    }
+                                    break;
+                                }
                             default:
                                 {
-                                    DataTable dt = new DataTable();
-                                    dt = (DataTable)grdChonCot.DataSource;
-                                    if (dt.AsEnumerable().Where(x => x["CHON"].ToString() == "1").Count() == 0)
+                                    ////DataTable dt = new DataTable();
+                                    ////dt = (DataTable)grdChonCot.DataSource;
+                                    ////if (dt.AsEnumerable().Where(x => x["CHON"].ToString() == "1").Count() == 0)
+                                    ////{
+                                    ////    XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgBanChuaChonCotIn"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    ////    return;
+                                    ////}
+                                    ////DanhSachNhanVien_Chung();
+                                    ////break
+                                    if (chkInAll.Checked == true)
                                     {
-                                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgBanChuaChonCotIn"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                        return;
+                                        DanhSachCanBoCongNhanVien();
                                     }
-                                    DanhSachNhanVien_Chung();
+                                    else
+                                    {
+
+                                        DataTable dt = new DataTable();
+                                        dt = (DataTable)grdChonCot.DataSource;
+                                        if (dt.AsEnumerable().Where(x => x["CHON"].ToString() == "1").Count() == 0)
+                                        {
+                                            XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgBanChuaChonCotIn"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                            return;
+                                        }
+                                        DanhSachNhanVien_Chung();
+                                    }
                                     break;
                                 }
                         }
@@ -458,7 +502,7 @@ namespace Vs.HRM
 
                     for (col = 1; col < dtBCThang.Columns.Count; col++)
                     {
-                        formatRange = oSheet.get_Range(CharacterIncrement(col - 1) + "5" + "", CharacterIncrement(col - 1) + (rowCnt + 1).ToString());
+                        formatRange = oSheet.get_Range(CharacterIncrement(col - 1) + "5" + "", CharacterIncrement(col - 1) + (rowCnt + 10).ToString());
                         if (dt.Rows[col - 1]["DINH_DANG"].ToString() == "Num")
                         {
                             formatRange.NumberFormat = "#,##0;(#,##0); ; ";
@@ -535,7 +579,7 @@ namespace Vs.HRM
 
                         for (col = 1; col < dtBCThang.Columns.Count; col++)
                         {
-                            formatRange = oSheet.get_Range(CharacterIncrement(col - 1) + "" + (rowBD + 1).ToString() + "", CharacterIncrement(col - 1) + (rowCnt + 1).ToString());
+                            formatRange = oSheet.get_Range(CharacterIncrement(col - 1) + "" + (rowBD + 1).ToString() + "", CharacterIncrement(col - 1) + (rowCnt + 10).ToString());
                             if (dt.Rows[col - 1]["DINH_DANG"].ToString() == "Num")
                             {
                                 formatRange.NumberFormat = "#,##0;(#,##0); ; ";
@@ -769,7 +813,8 @@ namespace Vs.HRM
 
                         for (col = 1; col < dtBCThang.Columns.Count; col++)
                         {
-                            formatRange = oSheet.get_Range(CharacterIncrement(col - 1) + "5" + "", CharacterIncrement(col - 1) + (rowCnt + 1).ToString());
+
+                            formatRange = oSheet.get_Range(CharacterIncrement(col - 1) + "5" + "", CharacterIncrement(col - 1) + (rowCnt + 4).ToString());
                             if (dt.Rows[col - 1]["DINH_DANG"].ToString() == "Num")
                             {
                                 formatRange.NumberFormat = "#,##0;(#,##0); ; ";
@@ -777,7 +822,7 @@ namespace Vs.HRM
                             }
                             else if (dt.Rows[col - 1]["DINH_DANG"].ToString() == "Date")
                             {
-                                formatRange.NumberFormat = "dd/MM/yyyy";
+                                formatRange.NumberFormat = "dd/mm/yyyy";
                                 formatRange.Cells.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
                                 formatRange.Cells.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
                                 try { formatRange.TextToColumns(Type.Missing, Excel.XlTextParsingType.xlDelimited, Excel.XlTextQualifier.xlTextQualifierDoubleQuote); } catch (Exception ex) { }
@@ -785,6 +830,11 @@ namespace Vs.HRM
                             else if (dt.Rows[col - 1]["DINH_DANG"].ToString() == "Num1")
                             {
                                 formatRange.NumberFormat = "0";
+                                try { formatRange.TextToColumns(Type.Missing, Excel.XlTextParsingType.xlDelimited, Excel.XlTextQualifier.xlTextQualifierDoubleQuote); } catch { }
+                            }
+                            else if (dt.Rows[col - 1]["DINH_DANG"].ToString() == "Text")
+                            {
+                                formatRange.NumberFormat = "@";
                                 try { formatRange.TextToColumns(Type.Missing, Excel.XlTextParsingType.xlDelimited, Excel.XlTextQualifier.xlTextQualifierDoubleQuote); } catch { }
                             }
                         }
@@ -864,6 +914,11 @@ namespace Vs.HRM
                                 else if (dt.Rows[col - 1]["DINH_DANG"].ToString() == "Num1")
                                 {
                                     formatRange.NumberFormat = "0";
+                                    try { formatRange.TextToColumns(Type.Missing, Excel.XlTextParsingType.xlDelimited, Excel.XlTextQualifier.xlTextQualifierDoubleQuote); } catch { }
+                                }
+                                else if (dt.Rows[col - 1]["DINH_DANG"].ToString() == "Text")
+                                {
+                                    formatRange.NumberFormat = "@";
                                     try { formatRange.TextToColumns(Type.Missing, Excel.XlTextParsingType.xlDelimited, Excel.XlTextQualifier.xlTextQualifierDoubleQuote); } catch { }
                                 }
                             }
@@ -1733,7 +1788,7 @@ namespace Vs.HRM
                 formatRange1.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
                 formatRange2.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
                 formatRange2.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
-                formatRange3.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
+                formatRange3.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;   
                 formatRange3.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
                 formatRange4.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
                 formatRange4.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;

@@ -177,12 +177,13 @@ namespace Vs.Payroll
         {
             try
             {
-                DataTable dt  = new DataTable();
+                DataTable dt = new DataTable();
                 dt = (DataTable)grdData.DataSource;
                 lbl.Text = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "lblPhanTramDieuChinh") + " : " + Convert.ToDouble(dt.Compute("Sum(PT_DIEU_CHINH)", "")) + "%     " + Commons.Modules.ObjLanguages.GetLanguage(this.Name, "lblTongDoanhThu") + " : " + fTongDoanhThu.ToString("N0");
             }
-            catch {
-                lbl.Text = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "lblPhanTramDieuChinh") + " : 0"  + " " + Commons.Modules.ObjLanguages.GetLanguage(this.Name, "lblTongDoanhThu") + " : " + fTongDoanhThu.ToString("N0");
+            catch
+            {
+                lbl.Text = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "lblPhanTramDieuChinh") + " : 0" + " " + Commons.Modules.ObjLanguages.GetLanguage(this.Name, "lblTongDoanhThu") + " : " + fTongDoanhThu.ToString("N0");
             }
         }
         private bool Savedata()
@@ -392,15 +393,28 @@ namespace Vs.Payroll
         }
         private void EnabelButton(bool visible)
         {
-            windowsUIButton.Buttons[0].Properties.Visible = visible;
-            windowsUIButton.Buttons[1].Properties.Visible = visible;
-            windowsUIButton.Buttons[2].Properties.Visible = visible;
-            windowsUIButton.Buttons[3].Properties.Visible = visible;
-            windowsUIButton.Buttons[4].Properties.Visible = visible;
-            windowsUIButton.Buttons[5].Properties.Visible = !visible;
-            windowsUIButton.Buttons[6].Properties.Visible = !visible;
+            if (Commons.Modules.ObjSystems.DataTinhTrangBangLuong(iID_DV, dNgay) == 2)
+            {
+                windowsUIButton.Buttons[0].Properties.Visible = false;
+                windowsUIButton.Buttons[1].Properties.Visible = false;
+                windowsUIButton.Buttons[2].Properties.Visible = false;
+                windowsUIButton.Buttons[3].Properties.Visible = false;
+                windowsUIButton.Buttons[5].Properties.Visible = false;
+                windowsUIButton.Buttons[6].Properties.Visible = false;
+                grvData.OptionsBehavior.Editable = false;
+            }
+            else
+            {
+                windowsUIButton.Buttons[0].Properties.Visible = false;
+                windowsUIButton.Buttons[1].Properties.Visible = visible;
+                windowsUIButton.Buttons[2].Properties.Visible = visible;
+                windowsUIButton.Buttons[3].Properties.Visible = visible;
+                windowsUIButton.Buttons[4].Properties.Visible = visible;
+                windowsUIButton.Buttons[5].Properties.Visible = !visible;
+                windowsUIButton.Buttons[6].Properties.Visible = !visible;
+                grvData.OptionsBehavior.Editable = !visible;
+            }
 
-            grvData.OptionsBehavior.Editable = !visible;
 
         }
         private void grvData_InvalidRowException(object sender, DevExpress.XtraGrid.Views.Base.InvalidRowExceptionEventArgs e)

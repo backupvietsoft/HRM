@@ -158,7 +158,7 @@ namespace Vs.TimeAttendance
                                             oSheet.Cells[2, 1].WrapText = false;
 
                                             Excel.Range formatRange;
-                                            formatRange = oSheet.Range[oSheet.Cells[4, 1], oSheet.Cells[4,9]];
+                                            formatRange = oSheet.Range[oSheet.Cells[4, 1], oSheet.Cells[4, 9]];
                                             formatRange.Merge();
                                             formatRange.Value2 = "DANH SÁCH NHÂN VIÊN VẮNG MẶT";
                                             formatRange.Font.Size = fontSizeTieuDe;
@@ -326,7 +326,7 @@ namespace Vs.TimeAttendance
                                         }
                                         frm.ShowDialog();
                                     }
-                                    
+
                                     break;
                                 }
                             case "rdo_DSDiTreVeSom":
@@ -780,12 +780,14 @@ namespace Vs.TimeAttendance
 
 
                     oSheet.Cells[rowBD, 12] = "=SUM(I" + rowBD + ":K" + rowBD + ")";
+                    //oSheet.Cells[rowBD, 12] = "=SUM(H" + rowBD + ":K" + rowBD + ")";
                     oSheet.Cells[rowBD, 12].Font.Bold = true;
                     oSheet.Cells[rowBD, 12].Font.Color = Color.FromArgb(255, 0, 0);
                     sTenCotL = sTenCotL + CharacterIncrement(11) + rowBD + "+";
 
 
                     oSheet.Cells[rowBD, 13] = "=G" + rowBD + "-L" + rowBD + "-H" + rowBD + "";
+                    //oSheet.Cells[rowBD, 13] = "=G" + rowBD + "-L" + rowBD + "";
                     oSheet.Cells[rowBD, 13].Font.Bold = true;
                     sTenCotM = sTenCotM + CharacterIncrement(12) + rowBD + "+";
 
@@ -1166,26 +1168,30 @@ namespace Vs.TimeAttendance
                             oSheet.Range[oSheet.Cells[5, Convert.ToInt32(col_td + 1)], oSheet.Cells[6, Convert.ToInt32(col_td + 1)]].Merge();
                             oSheet.Range[oSheet.Cells[5, Convert.ToInt32(col_td + 1)], oSheet.Cells[6, Convert.ToInt32(col_td + 1)]].Interior.Color = Color.FromArgb(255, 230, 153);
 
+                            //cột số lao động vắng thai sản
+                            oSheet.Cells[5, col_td + 2] = "Số lao động vắng thai sản";
+                            oSheet.Range[oSheet.Cells[5, Convert.ToInt32(col_td + 2)], oSheet.Cells[6, Convert.ToInt32(col_td + 2)]].Merge();
+                            oSheet.Range[oSheet.Cells[5, Convert.ToInt32(col_td + 2)], oSheet.Cells[6, Convert.ToInt32(col_td + 2)]].Interior.Color = Color.FromArgb(255, 230, 153);
 
                             //cột Số lao động có mặt
-                            oSheet.Cells[5, col_td + 2] = "Số lao động có mặt/ Total employees present";
-                            oSheet.Range[oSheet.Cells[5, Convert.ToInt32(col_td + 2)], oSheet.Cells[6, Convert.ToInt32(col_td + 2)]].Merge();
-                            oSheet.Range[oSheet.Cells[5, Convert.ToInt32(col_td + 2)], oSheet.Cells[6, Convert.ToInt32(col_td + 2)]].Interior.Color = Color.FromArgb(189, 215, 238);
+                            oSheet.Cells[5, col_td + 3] = "Số lao động có mặt/ Total employees present";
+                            oSheet.Range[oSheet.Cells[5, Convert.ToInt32(col_td + 3)], oSheet.Cells[6, Convert.ToInt32(col_td + 3)]].Merge();
+                            oSheet.Range[oSheet.Cells[5, Convert.ToInt32(col_td + 3)], oSheet.Cells[6, Convert.ToInt32(col_td + 3)]].Interior.Color = Color.FromArgb(189, 215, 238);
 
 
                             //cột Tỷ lệ vắng (%)
-                            oSheet.Cells[5, col_td + 3] = "Tỷ lệ vắng (%)";
-                            oSheet.Range[oSheet.Cells[5, Convert.ToInt32(col_td + 3)], oSheet.Cells[6, Convert.ToInt32(col_td + 3)]].Merge();
-                            oSheet.Range[oSheet.Cells[5, Convert.ToInt32(col_td + 3)], oSheet.Cells[6, Convert.ToInt32(col_td + 3)]].Interior.Color = Color.FromArgb(255, 255, 0);
+                            oSheet.Cells[5, col_td + 4] = "Tỷ lệ vắng (%)";
+                            oSheet.Range[oSheet.Cells[5, Convert.ToInt32(col_td + 4)], oSheet.Cells[6, Convert.ToInt32(col_td + 4)]].Merge();
+                            oSheet.Range[oSheet.Cells[5, Convert.ToInt32(col_td + 4)], oSheet.Cells[6, Convert.ToInt32(col_td + 4)]].Interior.Color = Color.FromArgb(255, 255, 0);
 
 
 
                             //cột Tỷ lệ có mặt/ tổng số (%)
-                            oSheet.Cells[5, col_td + 4] = "Tỷ lệ có mặt/ tổng số (%)";
-                            oSheet.Range[oSheet.Cells[5, Convert.ToInt32(col_td + 4)], oSheet.Cells[6, Convert.ToInt32(col_td + 4)]].Merge();
-                            oSheet.Range[oSheet.Cells[5, Convert.ToInt32(col_td + 4)], oSheet.Cells[6, Convert.ToInt32(col_td + 4)]].Interior.Color = Color.FromArgb(255, 255, 0);
+                            oSheet.Cells[5, col_td + 5] = "Tỷ lệ có mặt/ tổng số (%)";
+                            oSheet.Range[oSheet.Cells[5, Convert.ToInt32(col_td + 5)], oSheet.Cells[6, Convert.ToInt32(col_td + 5)]].Merge();
+                            oSheet.Range[oSheet.Cells[5, Convert.ToInt32(col_td + 5)], oSheet.Cells[6, Convert.ToInt32(col_td + 5)]].Interior.Color = Color.FromArgb(255, 255, 0);
 
-                            col_td = col_td + 5;
+                            col_td = col_td + 6;
                             TuNgayTemp = TuNgayTemp.AddDays(1);
                         }
                     }
@@ -1284,23 +1290,24 @@ namespace Vs.TimeAttendance
                                 //cột số lao động vắng mặt
                                 oSheet.Cells[rowBD, col_td + 1] = "=SUM(" + CharacterIncrement(col_td) + "" + (rowBD + 1) + ":" + CharacterIncrement(col_td) + "" + (rowCnt + 1) + ")";
 
+                                //cột số lao động vắng thai sản
+                                oSheet.Cells[rowBD, col_td + 2] = "=SUM(" + CharacterIncrement(col_td + 1) + "" + (rowBD + 1) + ":" + CharacterIncrement(col_td + 1) + "" + (rowCnt + 1) + ")";
 
                                 //cột Số lao động có mặt
-                                formatRange11 = oSheet.get_Range("" + CharacterIncrement(col_td + 1) + "" + rowBD + "", "" + CharacterIncrement(col_td + 1) + "" + (rowCnt + 1) + "");
+                                formatRange11 = oSheet.get_Range("" + CharacterIncrement(col_td + 2) + "" + rowBD + "", "" + CharacterIncrement(col_td + 2) + "" + (rowCnt + 1) + "");
                                 //oSheet.Cells[rowBD, col_td + 2] = "=" + CharacterIncrement(col_td - 1) + ""+rowBD+"-"+ CharacterIncrement(col_td) + ""+rowBD+"";
-                                formatRange11.Value = "=" + CharacterIncrement(col_td - 1) + "" + rowBD + "-" + CharacterIncrement(col_td) + "" + rowBD + "";
-
+                                formatRange11.Value = "=" + CharacterIncrement(col_td - 1) + "" + rowBD + "-" + CharacterIncrement(col_td) + "" + rowBD + " - " + CharacterIncrement(col_td + 1) + "" + rowBD + "";
 
                                 //cột Tỷ lệ vắng (%)
-                                formatRange11 = oSheet.get_Range("" + CharacterIncrement(col_td + 2) + "" + rowBD + "", "" + CharacterIncrement(col_td + 2) + "" + (rowCnt + 1) + "");
+                                formatRange11 = oSheet.get_Range("" + CharacterIncrement(col_td + 3) + "" + rowBD + "", "" + CharacterIncrement(col_td + 3) + "" + (rowCnt + 1) + "");
                                 formatRange11.Value = "=IFERROR(" + CharacterIncrement(col_td) + "" + rowBD.ToString() + "/" + CharacterIncrement(col_td - 1) + "" + rowBD.ToString() + ",0)";
 
 
                                 //cột Tỷ lệ có mặt/ tổng số (%)
-                                formatRange11 = oSheet.get_Range("" + CharacterIncrement(col_td + 3) + "" + rowBD + "", "" + CharacterIncrement(col_td + 3) + "" + (rowCnt + 1) + "");
-                                formatRange11.Value = "=IFERROR(" + CharacterIncrement(col_td + 1) + "" + rowBD + "/" + CharacterIncrement(col_td - 1) + "" + rowBD + ",0)";
+                                formatRange11 = oSheet.get_Range("" + CharacterIncrement(col_td + 4) + "" + rowBD + "", "" + CharacterIncrement(col_td + 4) + "" + (rowCnt + 1) + "");
+                                formatRange11.Value = "=IFERROR(" + CharacterIncrement(col_td + 2) + "" + rowBD + "/" + CharacterIncrement(col_td - 1) + "" + rowBD + ",0)";
 
-                                col_td = col_td + 5;
+                                col_td = col_td + 6;
                                 TuNgayTemp = TuNgayTemp.AddDays(1);
                             }
                         }
@@ -1400,32 +1407,37 @@ namespace Vs.TimeAttendance
                             try { formatRange4.TextToColumns(Type.Missing, Microsoft.Office.Interop.Excel.XlTextParsingType.xlDelimited, Microsoft.Office.Interop.Excel.XlTextQualifier.xlTextQualifierDoubleQuote); } catch { }
                             oSheet.Cells[rowCnt, col_td + 1] = "=SUM(" + CellAddress(oSheet, 7, col_td + 1) + ":" + CellAddress(oSheet, rowCnt - 1, col_td + 1) + ")/2";
 
-
-                            //cột Số lao động có mặt
+                            //cột số lao động vắng thai sản
                             formatRange4 = oSheet.get_Range(CharacterIncrement(col_td + 1) + "7" + "", CharacterIncrement(col_td + 1) + (rowCnt).ToString());
-                            formatRange4.Interior.Color = Color.FromArgb(189, 215, 238);
+                            formatRange4.Interior.Color = Color.FromArgb(255, 230, 153);
                             formatRange4.NumberFormat = "0";
                             try { formatRange4.TextToColumns(Type.Missing, Microsoft.Office.Interop.Excel.XlTextParsingType.xlDelimited, Microsoft.Office.Interop.Excel.XlTextQualifier.xlTextQualifierDoubleQuote); } catch { }
                             oSheet.Cells[rowCnt, col_td + 2] = "=SUM(" + CellAddress(oSheet, 7, col_td + 2) + ":" + CellAddress(oSheet, rowCnt - 1, col_td + 2) + ")/2";
 
 
-                            //cột Tỷ lệ vắng (%)
+                            //cột Số lao động có mặt
                             formatRange4 = oSheet.get_Range(CharacterIncrement(col_td + 2) + "7" + "", CharacterIncrement(col_td + 2) + (rowCnt).ToString());
-                            formatRange4.Interior.Color = Color.FromArgb(255, 255, 0);
-                            formatRange4.NumberFormat = @"0%";
+                            formatRange4.Interior.Color = Color.FromArgb(189, 215, 238);
+                            formatRange4.NumberFormat = "0";
                             try { formatRange4.TextToColumns(Type.Missing, Microsoft.Office.Interop.Excel.XlTextParsingType.xlDelimited, Microsoft.Office.Interop.Excel.XlTextQualifier.xlTextQualifierDoubleQuote); } catch { }
-                            oSheet.Cells[rowCnt, col_td + 3] = "=IFERROR(" + CellAddress(oSheet, rowCnt, col_td + 1) + "/" + CellAddress(oSheet, rowCnt, col_td) + ",0)";
+                            oSheet.Cells[rowCnt, col_td + 3] = "=SUM(" + CellAddress(oSheet, 7, col_td + 3) + ":" + CellAddress(oSheet, rowCnt - 1, col_td + 3) + ")/2";
 
 
-
-                            //cột Tỷ lệ có mặt/ tổng số (%)
+                            //cột Tỷ lệ vắng (%)
                             formatRange4 = oSheet.get_Range(CharacterIncrement(col_td + 3) + "7" + "", CharacterIncrement(col_td + 3) + (rowCnt).ToString());
                             formatRange4.Interior.Color = Color.FromArgb(255, 255, 0);
                             formatRange4.NumberFormat = @"0%";
                             try { formatRange4.TextToColumns(Type.Missing, Microsoft.Office.Interop.Excel.XlTextParsingType.xlDelimited, Microsoft.Office.Interop.Excel.XlTextQualifier.xlTextQualifierDoubleQuote); } catch { }
-                            oSheet.Cells[rowCnt, col_td + 4] = "=IFERROR(" + CellAddress(oSheet, rowCnt, col_td + 2) + "/" + CellAddress(oSheet, rowCnt, col_td) + ",0)";
+                            oSheet.Cells[rowCnt, col_td + 4] = "=IFERROR(" + CellAddress(oSheet, rowCnt, col_td + 1) + "/" + CellAddress(oSheet, rowCnt, col_td) + ",0)";
 
-                            col_td = col_td + 5;
+                            //cột Tỷ lệ có mặt/ tổng số (%)
+                            formatRange4 = oSheet.get_Range(CharacterIncrement(col_td + 4) + "7" + "", CharacterIncrement(col_td + 4) + (rowCnt).ToString());
+                            formatRange4.Interior.Color = Color.FromArgb(255, 255, 0);
+                            formatRange4.NumberFormat = @"0%";
+                            try { formatRange4.TextToColumns(Type.Missing, Microsoft.Office.Interop.Excel.XlTextParsingType.xlDelimited, Microsoft.Office.Interop.Excel.XlTextQualifier.xlTextQualifierDoubleQuote); } catch { }
+                            oSheet.Cells[rowCnt, col_td + 5] = "=IFERROR(" + CellAddress(oSheet, rowCnt, col_td + 3) + "/" + CellAddress(oSheet, rowCnt, col_td) + ",0)";
+
+                            col_td = col_td + 6;
                             TuNgayTemp = TuNgayTemp.AddDays(1);
                         }
                     }

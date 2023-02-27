@@ -386,7 +386,7 @@
             this.PicHINH_CN.Borders = DevExpress.XtraPrinting.BorderSide.None;
             this.PicHINH_CN.Dpi = 254F;
             this.PicHINH_CN.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "ImageSource", "[DATA].[HINH_CN]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "ImageUrl", "[DATA].[HINH_CN_URL]")});
             this.PicHINH_CN.ImageAlignment = DevExpress.XtraPrinting.ImageAlignment.MiddleCenter;
             this.PicHINH_CN.LocationFloat = new DevExpress.Utils.PointFloat(110.0561F, 196.4489F);
             this.PicHINH_CN.Name = "PicHINH_CN";

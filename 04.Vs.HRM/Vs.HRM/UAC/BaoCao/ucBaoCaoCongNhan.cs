@@ -13,6 +13,7 @@ using System.Reflection;
 using System.Linq;
 using System.Drawing;
 using System.Globalization;
+using DevExpress.XtraCharts.Design;
 
 namespace Vs.HRM
 {
@@ -30,7 +31,7 @@ namespace Vs.HRM
             Commons.Modules.ObjSystems.ThayDoiNN(this, windowsUIButton);
 
             //Danh cho NB
-            switch (Commons.Modules.ObjSystems.KyHieuDV_CN(Convert.ToInt64(Commons.Modules.iCongNhan)))
+            switch (Commons.Modules.KyHieuDV)
             {
                 case "NB":
                     {
@@ -258,8 +259,6 @@ namespace Vs.HRM
         {
             try
             {
-
-
                 rdoChonBC.SelectedIndex = 0;
                 Commons.Modules.sLoad = "0Load";
                 Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(lkDonVi, Commons.Modules.ObjSystems.DataDonVi(false), "ID_DV", "TEN_DV", "TEN_DV");
@@ -281,6 +280,7 @@ namespace Vs.HRM
                 chkGroup.Checked = true;
                 Commons.Modules.sLoad = "";
                 EnabledButton(true);
+                rdoChonBC_SelectedIndexChanged(null, null);
             }
             catch { }
         }
@@ -1890,6 +1890,30 @@ namespace Vs.HRM
             catch (Exception ex)
             {
                 throw ex;
+            }
+        }
+
+        private void rdoChonBC_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(rdoChonBC.SelectedIndex == 0)
+            {
+                NgayIn.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+                NgayIn.Properties.DisplayFormat.FormatString = "MM/yyyy";
+                NgayIn.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+                NgayIn.Properties.EditFormat.FormatString = "MM/yyyy";
+                NgayIn.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.DateTimeAdvancingCaret;
+                NgayIn.Properties.Mask.EditMask = "MM/yyyy";
+                NgayIn.Properties.VistaCalendarViewStyle = VistaCalendarViewStyle.YearView;
+            }
+            else
+            {
+                NgayIn.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+                NgayIn.Properties.DisplayFormat.FormatString = "dd/MM/yyyy";
+                NgayIn.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+                NgayIn.Properties.EditFormat.FormatString = "dd/MM/yyyy";
+                NgayIn.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.DateTimeAdvancingCaret;
+                NgayIn.Properties.Mask.EditMask = "dd/MM/yyyy";
+                NgayIn.Properties.VistaCalendarViewStyle = VistaCalendarViewStyle.Default;
             }
         }
     }

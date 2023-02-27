@@ -14,6 +14,7 @@ using DevExpress.Utils.Menu;
 using DevExpress.XtraEditors.Repository;
 using DevExpress.Utils;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
+using DevExpress.Map.Native;
 
 namespace Vs.HRM
 {
@@ -724,13 +725,13 @@ namespace Vs.HRM
                     MS_CNTextEdit.EditValue = dt.Rows[0]["MS_CN"];
                     try
                     {
-                        Byte[] data = new Byte[0];
-                        data = (Byte[])(dt.Rows[0]["Hinh_CN"]);
-                        MemoryStream mem = new MemoryStream(data);
-                        HINH_CNPictureEdit.EditValue = Image.FromStream(mem);
+                        //Byte[] data = new Byte[0];
+                        //data = (Byte[])(dt.Rows[0]["Hinh_CN"]);
+                        //MemoryStream mem = new MemoryStream(data);
+                        //HINH_CNPictureEdit.EditValue = Image.FromStream(mem);
 
-                        //string imagePath = Commons.Modules.sDDTaiLieu + "\\" + "ImageEmployees\\" + MS_CNTextEdit.Text.ToString().Trim() + ".jpg";
-                        //HINH_CNPictureEdit.Image = Image.FromFile(imagePath);
+                        string imagePath = dt.Rows[0]["HINH_CN_URL"].ToString();
+                        HINH_CNPictureEdit.Image = Image.FromFile(imagePath);
                     }
                     catch
                     {
@@ -1081,12 +1082,12 @@ namespace Vs.HRM
 
             return currentByteImageArray;
         }
-        private void SaveImage(string imageURL) // sLoai
+        private string SaveImage(string imageURL) // sLoai
         {
             try
             {
-                if (imageURL.Trim() == "") return;
-                var strDuongDanTmp = Commons.Modules.ObjSystems.CapnhatTL("ImageEmployees\\", false);
+                if (imageURL.Trim() == "") return "";
+                var strDuongDanTmp = Commons.Modules.ObjSystems.CapnhatTL("HinhCongNhan\\", false);
                 string strDuongDan = "";
                 strDuongDan = imageURL;
                 string[] sFile;
@@ -1101,11 +1102,19 @@ namespace Vs.HRM
                     TenFile = Commons.Modules.ObjSystems.STTFileCungThuMuc(strDuongDanTmp, MS_CNTextEdit.Text + ".jpg");
                     a = strDuongDanTmp + @"\" + MS_CNTextEdit.Text + ".jpg";
                 }
+                try
+                {
+                    FileInfo file = new FileInfo(a);
+                    file.Delete();
+                }
+                catch { }
+
                 Commons.Modules.ObjSystems.LuuDuongDan(strDuongDan, a);
+                return a;
             }
             catch
             {
-                return;
+                return "";
             }
         }
         private bool SaveData()
@@ -1113,8 +1122,7 @@ namespace Vs.HRM
             //test();
             try
             {
-                //SaveImage(HINH_CNPictureEdit.GetLoadedImageLocation());
-
+                
                 //tạo bảng tạm bằng cấp
                 string sTBBangCap = "sbtBC" + Commons.Modules.iIDUser;
                 if (Commons.Modules.ObjSystems.ConvertDatatable(grvBangCapCN) == null)
@@ -1135,7 +1143,8 @@ namespace Vs.HRM
                 conn.Open();
                 System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spUpdateCongNhan", conn);
                 cmd.Parameters.Add("@ID_CN", SqlDbType.BigInt).Value = Commons.Modules.iCongNhan;
-                cmd.Parameters.Add("@HINH_CN", SqlDbType.Image).Value = imgToByteConverter(HINH_CNPictureEdit.Image);
+                cmd.Parameters.Add("@HINH_CN", SqlDbType.Image).Value = HINH_CNPictureEdit.EditValue;
+                cmd.Parameters.Add("@HINH_CN_URL", SqlDbType.NVarChar).Value = HINH_CNPictureEdit.EditValue == null ? "-1" : SaveImage(HINH_CNPictureEdit.GetLoadedImageLocation());
                 cmd.Parameters.Add("@MS_CN", SqlDbType.NVarChar).Value = MS_CNTextEdit.Text;
                 cmd.Parameters.Add("@MS_THE_CC", SqlDbType.NVarChar).Value = MS_THE_CCTextEdit.Text;
                 cmd.Parameters.Add("@ID_QG", SqlDbType.BigInt).Value = ID_QGLookUpEdit.Text.ToString() == "" ? DBNull.Value : ID_QGLookUpEdit.EditValue;

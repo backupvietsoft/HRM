@@ -4,6 +4,10 @@ using Microsoft.ApplicationBlocks.Data;
 using System;
 using System.Data;
 using Vs.Report;
+using Aspose.Words;
+using System.Diagnostics;
+using DevExpress.ClipboardSource.SpreadsheetML;
+using DevExpress.XtraEditors.Filtering.Templates;
 
 namespace Vs.HRM
 {
@@ -11,7 +15,7 @@ namespace Vs.HRM
     {
         private long idCN;
         private long idHD;
-        public frmInHopDongCN(Int64 idCongNhan, Int64 idHopDong, string tencn )
+        public frmInHopDongCN(Int64 idCongNhan, Int64 idHopDong, string tencn)
         {
             InitializeComponent();
             NONN_HoTenCN.Text = tencn.ToUpper();
@@ -48,6 +52,58 @@ namespace Vs.HRM
             Commons.Modules.sLoad = "";
         }
         //sự kiện các nút xử lí
+        private void InHopDongLaoDongAP()
+        {
+            try
+            {
+                //lấy data dữ liệu
+                DataTable dt = new DataTable();
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "rptHopDongLaoDong_AP", Commons.Modules.UserName, Commons.Modules.TypeLanguage, idCN, idHD));
+                DataRow row = dt.Rows[0];
+                string sPath = "";
+                sPath = Commons.Modules.MExcel.SaveFiles("Work file (*.doc)|*.docx");
+                if (sPath == "") return;
+
+                //fill vào báo cáo
+                //var date = Convert.ToDateTime(row["NGAY_BAT_DAU_HD"]);
+                var date = dNgayIn.DateTime;
+                Document baoCao = new Document("Template\\TemplateAP\\HopDongLaoDong.doc");
+                baoCao.MailMerge.Execute(new[] { "Ngay_Thang_Nam_BC" }, new[] { string.Format("Hôm nay, ngày {0} tháng {1} năm {2}", date.Day, date.Month, date.Year) });
+                foreach (DataColumn item in dt.Columns)
+                {
+                    if(Commons.Modules.ObjSystems.IsnullorEmpty(row[item]))
+                    {
+                        baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { "................." });
+
+                        continue;
+                    }    
+                    switch (item.DataType.Name)
+                    {
+                        case "DateTime":
+                            {
+                                baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { Convert.ToDateTime(row[item]).ToString("dd/MM/yyyy") });
+                                break;
+                            }
+                        case "Double":
+                            {
+                                baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { string.Format("{0:#,##0}", row[item]) });
+                                break;
+                            }
+                        default:
+                            {
+                                baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] {  row[item] });
+                                break;
+
+                            }
+                    }
+                }
+                baoCao.Save(sPath);
+                Process.Start(sPath);
+            }
+            catch (Exception ex)
+            {
+            }
+        }
         private void windowsUIButton_ButtonClick(object sender, DevExpress.XtraBars.Docking2010.ButtonEventArgs e)
         {
             WindowsUIButton btn = e.Button as WindowsUIButton;
@@ -56,7 +112,7 @@ namespace Vs.HRM
             switch (btn.Tag.ToString())
             {
                 case "In":
-                     {
+                    {
                         switch (rdo_ChonBaoCao.Properties.Items[rdo_ChonBaoCao.SelectedIndex].Tag)
                         {
                             case "rdo_HopDongLaoDong":
@@ -73,10 +129,15 @@ namespace Vs.HRM
                                                 HopDongLaoDong_SB();
                                                 break;
                                             }
+                                        case "AP":
+                                            {
+                                                InHopDongLaoDongAP();
+                                                break;
+                                            }
                                         case "DM":
                                             {
                                                 bool kiemHD = Convert.ToBoolean(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT ISNULL(HD_GIA_HAN,0) FROM dbo.HOP_DONG_LAO_DONG WHERE ID_HDLD = " + idHD + ""));
-                                                if(kiemHD)
+                                                if (kiemHD)
                                                 {
                                                     HopDongLaoDong_DM();
                                                 }
@@ -97,7 +158,7 @@ namespace Vs.HRM
                                                 if (kiemHD)
                                                 {
                                                     HopDongLaoDong_NB();
-                                                   
+
                                                 }
                                                 else
                                                 {
@@ -278,9 +339,9 @@ namespace Vs.HRM
             dt = new DataTable();
             frmViewReport frm = new frmViewReport();
             frm.rpt = new rptHopDongLaoDong_MT(dNgayIn.DateTime);
+
             conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
             conn.Open();
-
             System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptHopDongLaoDong", conn);
             cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
             cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;

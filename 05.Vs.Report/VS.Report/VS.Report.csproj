@@ -582,6 +582,12 @@
     <Compile Include="NhanSu\rptHopDongLaoDong_MT.Designer.cs">
       <DependentUpon>rptHopDongLaoDong_MT.cs</DependentUpon>
     </Compile>
+    <Compile Include="NhanSu\rptHopDongLaoDong_AP.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptHopDongLaoDong_AP.Designer.cs">
+      <DependentUpon>rptHopDongLaoDong_AP.cs</DependentUpon>
+    </Compile>
     <Compile Include="NhanSu\rptHopDongLaoDong_NB.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -684,6 +690,12 @@
     <Compile Include="NhanSu\rptQuyetDinhDieuChuyen.Designer.cs">
       <DependentUpon>rptQuyetDinhDieuChuyen.cs</DependentUpon>
     </Compile>
+    <Compile Include="NhanSu\rptQuyetDinhDieuChuyen_AP.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptQuyetDinhDieuChuyen_AP.Designer.cs">
+      <DependentUpon>rptQuyetDinhDieuChuyen_AP.cs</DependentUpon>
+    </Compile>
     <Compile Include="NhanSu\rptQuyetDinhDieuChuyen_DM.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -713,6 +725,18 @@
     </Compile>
     <Compile Include="NhanSu\rptQuyetDinhDieuChuyen_SB.Designer.cs">
       <DependentUpon>rptQuyetDinhDieuChuyen_SB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\rptQuyetDinhThoiViec_AP.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptQuyetDinhThoiViec_AP.Designer.cs">
+      <DependentUpon>rptQuyetDinhThoiViec_AP.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanSu\rptQuyetDinhLuongCN _AP.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NhanSu\rptQuyetDinhLuongCN _AP.Designer.cs">
+      <DependentUpon>rptQuyetDinhLuongCN _AP.cs</DependentUpon>
     </Compile>
     <Compile Include="NhanSu\rptQuyetDinhLuongCN.cs">
       <SubType>Component</SubType>
@@ -1274,6 +1298,9 @@
     <EmbeddedResource Include="NhanSu\rptHopDongLaoDong_MT.resx">
       <DependentUpon>rptHopDongLaoDong_MT.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\rptHopDongLaoDong_AP.resx">
+      <DependentUpon>rptHopDongLaoDong_AP.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="NhanSu\rptHopDongLaoDong_NB.resx">
       <DependentUpon>rptHopDongLaoDong_NB.cs</DependentUpon>
     </EmbeddedResource>
@@ -1326,6 +1353,9 @@
     <EmbeddedResource Include="NhanSu\rptQuyetDinhDieuChuyen.resx">
       <DependentUpon>rptQuyetDinhDieuChuyen.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\rptQuyetDinhDieuChuyen_AP.resx">
+      <DependentUpon>rptQuyetDinhDieuChuyen_AP.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="NhanSu\rptQuyetDinhDieuChuyen_DM.resx">
       <DependentUpon>rptQuyetDinhDieuChuyen_DM.cs</DependentUpon>
     </EmbeddedResource>
@@ -1340,6 +1370,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="NhanSu\rptQuyetDinhDieuChuyen_SB.resx">
       <DependentUpon>rptQuyetDinhDieuChuyen_SB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\rptQuyetDinhThoiViec_AP.resx">
+      <DependentUpon>rptQuyetDinhThoiViec_AP.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanSu\rptQuyetDinhLuongCN _AP.resx">
+      <DependentUpon>rptQuyetDinhLuongCN _AP.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NhanSu\rptQuyetDinhLuongCN.resx">
       <DependentUpon>rptQuyetDinhLuongCN.cs</DependentUpon>

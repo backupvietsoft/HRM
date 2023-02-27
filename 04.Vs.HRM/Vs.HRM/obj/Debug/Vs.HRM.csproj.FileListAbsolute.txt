@@ -3122,8 +3122,8 @@ F:\01.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.pdb
 D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\Template\TemplateGiamLaoDong.xlsx
 D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\Template\TemplateTaiNanLaoDong.xlsx
 D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\Template\TemplateTangLaoDong.xlsx
-D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\Vs.HRM.dll.config
-D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\Vs.HRM.dll
+D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\Vs.HRM.exe.config
+D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\Vs.HRM.exe
 D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\Vs.HRM.pdb
 D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\Commons.dll
 D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\DevExpress.BonusSkins.v22.1.dll
@@ -3187,6 +3187,7 @@ D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\EPPlus.dll
 D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\NPOI.dll
 D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\NPOI.OOXML.dll
 D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\Newtonsoft.Json.dll
+D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\Vs.HRM.dll
 D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\Spire.XLS.dll
 D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\DevExpress.XtraDiagram.v22.1.dll
 D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\DevExpress.Diagram.v22.1.Core.dll
@@ -3369,6 +3370,7 @@ D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\de\DevExpress.XtraNavBar.v22.
 D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\es\DevExpress.XtraNavBar.v22.1.resources.dll
 D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\ja\DevExpress.XtraNavBar.v22.1.resources.dll
 D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.csproj.AssemblyReference.cache
+D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.csproj.SuggestedBindingRedirects.cache
 D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.csproj.ResolveComReference.cache
 D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.frmChonNhanVien.resources
 D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.frmHelp_View.resources
@@ -3462,9 +3464,8 @@ D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.ucXepLoaiKhenThuong.re
 D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.ucBHXHThang.resources
 D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.XtraForm1.resources
 D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.csproj.GenerateResource.cache
-D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.dll.licenses
+D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.exe.licenses
 D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.csproj.CoreCompileInputs.cache
 D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.csproj.CopyComplete
-D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.dll
+D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.exe
 D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\obj\Debug\Vs.HRM.pdb
-D:\01.SourceCode\02.HRM\04.Vs.HRM\Vs.HRM\bin\Debug\Vs.Recruit.exe.config

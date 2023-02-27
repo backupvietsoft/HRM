@@ -121,7 +121,7 @@ namespace Vs.Recruit
                 string lastColumn = string.Empty;
                 //lastColumn = CharacterIncrement(dtBCThang.Columns.Count - 1);
 
-                Range row2_TieuDe_BaoCao = oSheet.get_Range("A2", "C2");
+                Range row2_TieuDe_BaoCao = oSheet.get_Range("A2", "E2");
                 row2_TieuDe_BaoCao.Merge();
                 row2_TieuDe_BaoCao.Font.Size = 16;
                 row2_TieuDe_BaoCao.Font.Name = fontName;
@@ -132,7 +132,7 @@ namespace Vs.Recruit
                 row2_TieuDe_BaoCao.Value2 = "BIỂU ĐỒ NGUỒN TUYỂN DỤNG";
 
 
-                Range row4_TieuDe_Format = oSheet.get_Range("A4", "C4"); //27 + 31
+                Range row4_TieuDe_Format = oSheet.get_Range("A4", "E4"); //27 + 31
                 row4_TieuDe_Format.Font.Size = fontSizeTieuDe;
                 row4_TieuDe_Format.Font.Name = fontName;
                 row4_TieuDe_Format.Font.Bold = true;
@@ -159,6 +159,16 @@ namespace Vs.Recruit
                                 oSheet.Cells[row_dl, col + 1] = "SL tuyển";
                                 break;
                             }
+                        case "SLMAY":
+                            {
+                                oSheet.Cells[row_dl, col + 1] = "Số công nhân may";
+                                break;
+                            }
+                        case "PT_MAY":
+                            {
+                                oSheet.Cells[row_dl, col + 1] = "Phần trăm CN may";
+                                break;
+                            }
                         case "TY_LE":
                             {
                                 oSheet.Cells[row_dl, col + 1] = "Phần trăm";
@@ -171,7 +181,6 @@ namespace Vs.Recruit
                     oSheet.Cells[row_dl, col + 1].Interior.Color = Color.FromArgb(255, 255, 0);
                 }
 
-                //Load dữ liệu Giới tính
                 DataRow[] dr = dt.Select();
                 string[,] rowData = new string[dr.Count(), dt.Columns.Count];
 
@@ -185,9 +194,9 @@ namespace Vs.Recruit
                     rowCnt++;
                 }
                 rowCnt = rowCnt + 4;
-                oSheet.get_Range("A5", "C" + rowCnt.ToString()).Value2 = rowData;
+                oSheet.get_Range("A5", "E" + rowCnt.ToString()).Value2 = rowData;
                 Microsoft.Office.Interop.Excel.Range formatRange;
-                for (col = 1; col <= 3; col++)
+                for (col = 1; col <= 5; col++)
                 {
                     formatRange = oSheet.get_Range("" + CharacterIncrement(col - 1) + "5", "" + CharacterIncrement(col - 1) + ""+ 5 + dt.Rows.Count +"");
                     formatRange.NumberFormat = "0";
@@ -199,22 +208,29 @@ namespace Vs.Recruit
                 formatRange.ColumnWidth = 25;
                 formatRange = oSheet.get_Range("B"+ (5 + dt.Rows.Count)  + "");
                 formatRange.Value = "=SUM(B5:B"+ (4 + dt.Rows.Count) + ")";
-                formatRange = oSheet.get_Range("C"+ (5 + dt.Rows.Count)  + "");
-                formatRange.Value = "=SUM(C5:C"+ (4 + dt.Rows.Count) + ")";
-                LoadBieuDoTron(oSheet, XlChartType.xl3DPie, CharacterIncrement(0), 5, CharacterIncrement(0), dt.Rows.Count + 4, CharacterIncrement(2), 5, CharacterIncrement(2),dt.Rows.Count + 4, "lblNguonTuyenDung", 1, 400, 10, 240, 240, true);
+
+                formatRange = oSheet.get_Range("C" + (5 + dt.Rows.Count) + "");
+                formatRange.Value = "=SUM(C5:C" + (4 + dt.Rows.Count) + ")";
+
+                formatRange = oSheet.get_Range("D" + (5 + dt.Rows.Count) + "");
+                formatRange.Value = "=SUM(D5:D" + (4 + dt.Rows.Count) + ")";
+
+                formatRange = oSheet.get_Range("E"+ (5 + dt.Rows.Count)  + "");
+                formatRange.Value = "=SUM(E5:E"+ (4 + dt.Rows.Count) + ")";
+                LoadBieuDoTron(oSheet, XlChartType.xl3DPie, CharacterIncrement(0), 5, CharacterIncrement(0), dt.Rows.Count + 4, CharacterIncrement(4), 5, CharacterIncrement(4),dt.Rows.Count + 4, "lblNguonTuyenDung", 1, 500, 10, 240, 240, true);
                 #endregion
 
-                BorderAround(oSheet.get_Range("A4", "C" + (5 + dt.Rows.Count) + ""));
+                BorderAround(oSheet.get_Range("A4", "E" + (5 + dt.Rows.Count) + ""));
 
-                formatRange = oSheet.get_Range("A5", "C"+ (5 + dt.Rows.Count) + "");
+                formatRange = oSheet.get_Range("A5", "E" + (5 + dt.Rows.Count) + "");
                 formatRange.Font.Size = fontSizeNoiDung;
                 formatRange.Font.Name = fontName;
 
-                formatRange = oSheet.get_Range("C5", "C" + (5 + dt.Rows.Count) + "");
+                formatRange = oSheet.get_Range("D5", "E" + (5 + dt.Rows.Count) + "");
                 formatRange.NumberFormat = @"0%";
 
                 Commons.Modules.MExcel.ThemDong((Excel.Worksheet)oSheet, XlInsertShiftDirection.xlShiftDown, 1, 3);
-                Range row4_Sub_TieuDe_BaoCao = oSheet.get_Range("A3", "C3"); //A3 - V21
+                Range row4_Sub_TieuDe_BaoCao = oSheet.get_Range("A3", "E3"); //A3 - V21
                 row4_Sub_TieuDe_BaoCao.Merge();
                 row4_Sub_TieuDe_BaoCao.Font.Size = fontSizeTieuDe;
                 row4_Sub_TieuDe_BaoCao.Font.Name = fontName;

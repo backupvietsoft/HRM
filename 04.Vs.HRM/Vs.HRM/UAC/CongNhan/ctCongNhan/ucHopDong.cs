@@ -90,8 +90,10 @@ namespace Vs.HRM
             MUC_LUONG_THUC_LINHTextEdit.Properties.ReadOnly = visible;
             DIA_DIEM_LAM_VIECTextEdit.Properties.ReadOnly = visible;
             DIA_CHI_NOI_LAM_VIECTextEdit.Properties.ReadOnly = visible;
-            CONG_VIECTextEdit.Properties.ReadOnly = true;
-            txtMO_TA_CV.Properties.ReadOnly = true;
+            //CONG_VIECTextEdit.Properties.ReadOnly = true;
+            //txtMO_TA_CV.Properties.ReadOnly = true;
+            CONG_VIECTextEdit.Properties.ReadOnly = visible;
+            txtMO_TA_CV.Properties.ReadOnly = visible;
             ID_CVLookUpEdit.Properties.ReadOnly = visible;
             SO_NGAY_PHEPTextEdit.Properties.ReadOnly = visible;
             NGUOI_KY_GIA_HANLookUpEdit.Properties.ReadOnly = visible;
@@ -694,6 +696,9 @@ namespace Vs.HRM
             }
             catch (Exception ex) { }
         }
+
+ 
+
         private void clearError()
         {
             try

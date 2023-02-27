@@ -63,6 +63,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Accessibility" />
+    <Reference Include="Aspose.Words, Version=11.3.0.0, Culture=neutral, PublicKeyToken=47d5d0e1ef9d080b, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\Aspose.Words.dll</HintPath>
+    </Reference>
     <Reference Include="CredentialManagement, Version=1.0.2.0, Culture=neutral, PublicKeyToken=e68f3ed8c7ef0ab8, processorArchitecture=MSIL">
       <HintPath>..\packages\CredentialManagement.Signed.ClsCompliant.1.0.2\lib\net35\CredentialManagement.dll</HintPath>
     </Reference>
@@ -570,6 +574,10 @@
     <Content Include="Template\TemplateTangLaoDong.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Template\TemplateAP\HopDongLaoDong.doc" />
+    <None Include="Template\TemplateAP\QuyetDinhBoNhiem.doc" />
+    <None Include="Template\TemplateAP\QuyetDinhDieuChuyenCT.docx" />
+    <None Include="Template\TemplateAP\QuyetDinhThoiViec.doc" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\icon_data.png" />

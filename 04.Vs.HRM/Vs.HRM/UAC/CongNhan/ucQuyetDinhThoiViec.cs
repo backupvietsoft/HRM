@@ -13,6 +13,10 @@ using Vs.Report;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.Utils.Menu;
 using DevExpress.XtraEditors.Repository;
+using DevExpress.XtraEditors.Filtering.Templates;
+using DevExpress.Map.Dashboard;
+using System.Diagnostics;
+using Aspose.Words;
 
 namespace Vs.HRM
 {
@@ -164,6 +168,60 @@ namespace Vs.HRM
                 frm.ShowDialog();
             }
         }
+
+        private void InDuLieu_AP()
+        {
+            try
+            {
+                //lấy data dữ liệu
+                DataTable dt = new DataTable();
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "rptQuyetDinhThoiViec_AP", Commons.Modules.UserName, Commons.Modules.TypeLanguage, Convert.ToInt64(grvCongNhan.GetFocusedRowCellValue("ID_QDTV")), Convert.ToInt64(grvCongNhan.GetFocusedRowCellValue("ID_CN"))));
+                DataRow row = dt.Rows[0];
+                string sPath = "";
+                sPath = Commons.Modules.MExcel.SaveFiles("Work file (*.doc)|*.docx");
+                if (sPath == "") return;
+
+                //fill vào báo cáo
+                //var date = Convert.ToDateTime(row["NGAY_BAT_DAU_HD"]);
+                var date = DateTime.Now;
+                Document baoCao = new Document("Template\\TemplateAP\\QuyetDinhThoiViec.doc");
+                baoCao.MailMerge.Execute(new[] { "Ngay_Thang_Nam_BC" }, new[] { string.Format("ngày {0} tháng {1} năm {2}", date.Day, date.Month, date.Year) });
+                foreach (DataColumn item in dt.Columns)
+                {
+                    if (Commons.Modules.ObjSystems.IsnullorEmpty(row[item]))
+                    {
+                        baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { ".................................." });
+
+                        continue;
+                    }
+                    switch (item.DataType.Name)
+                    {
+                        case "DateTime":
+                            {
+                                baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { Convert.ToDateTime(row[item]).ToString("dd/MM/yyyy") });
+                                break;
+                            }
+                        case "Double":
+                            {
+                                baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { string.Format("{0:#,##0}", row[item]) });
+                                break;
+                            }
+                        default:
+                            {
+                                baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { row[item] });
+                                break;
+
+                            }
+                    }
+                }
+                baoCao.Save(sPath);
+                Process.Start(sPath);
+            }
+            catch
+            {
+            }
+        }
+
         private void windowsUIButton_ButtonClick(object sender, DevExpress.XtraBars.Docking2010.ButtonEventArgs e)
         {
             WindowsUIButton btn = e.Button as WindowsUIButton;
@@ -205,8 +263,19 @@ namespace Vs.HRM
                     }
                 case "in":
                     {
-
-                        InDuLieu();
+                        switch (Commons.Modules.KyHieuDV)
+                        {
+                            case "AP":
+                                {
+                                    InDuLieu_AP();
+                                    break;
+                                }
+                            default:
+                                {
+                                    InDuLieu();
+                                    break;
+                                }
+                        }
                         break;
                     }
                 case "luu":

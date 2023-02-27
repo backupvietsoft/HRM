@@ -3043,6 +3043,7 @@ D:\01.SourceCode\02.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptHopDongLao
 D:\01.SourceCode\02.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptHopDongLaoDong_DM.resources
 D:\01.SourceCode\02.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptHopDongLaoDong_HN.resources
 D:\01.SourceCode\02.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptHopDongLaoDong_MT.resources
+D:\01.SourceCode\02.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptHopDongLaoDong_AP.resources
 D:\01.SourceCode\02.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptHopDongLaoDong_NB.resources
 D:\01.SourceCode\02.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptHopDongLaoDong_SB.resources
 D:\01.SourceCode\02.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptHopDongThoiVu_HN.resources
@@ -3060,11 +3061,14 @@ D:\01.SourceCode\02.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptPhuLucHopD
 D:\01.SourceCode\02.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptQuyetDinhBoNhiem_DM.resources
 D:\01.SourceCode\02.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptQuyetDinhChamDutHDLD_DM.resources
 D:\01.SourceCode\02.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptQuyetDinhDieuChuyen.resources
+D:\01.SourceCode\02.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptQuyetDinhDieuChuyen_AP.resources
 D:\01.SourceCode\02.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptQuyetDinhDieuChuyen_DM.resources
 D:\01.SourceCode\02.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptQuyetDinhDieuChuyen_HN.resources
 D:\01.SourceCode\02.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptQuyetDinhDieuChuyen_MT.resources
 D:\01.SourceCode\02.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptQuyetDinhDieuChuyen_NB.resources
 D:\01.SourceCode\02.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptQuyetDinhDieuChuyen_SB.resources
+D:\01.SourceCode\02.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptQuyetDinhThoiViec_AP.resources
+D:\01.SourceCode\02.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptQuyetDinhLuongCN_AP.resources
 D:\01.SourceCode\02.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptQuyetDinhLuongCN.resources
 D:\01.SourceCode\02.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptQuyetDinhLuongCN_HN.resources
 D:\01.SourceCode\02.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptQuyetDinhLuongTapThe_HN.resources

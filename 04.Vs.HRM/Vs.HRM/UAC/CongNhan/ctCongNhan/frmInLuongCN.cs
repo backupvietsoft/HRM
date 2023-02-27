@@ -1,7 +1,11 @@
-﻿using DevExpress.XtraBars.Docking2010;
+﻿using Aspose.Words;
+using DevExpress.XtraBars.Docking2010;
 using DevExpress.XtraEditors;
+using DevExpress.XtraRichEdit.Commands.Internal;
+using Microsoft.ApplicationBlocks.Data;
 using System;
 using System.Data;
+using System.Diagnostics;
 using Vs.Report;
 
 namespace Vs.HRM
@@ -37,8 +41,6 @@ namespace Vs.HRM
         {
             try
             {
-
-
                 WindowsUIButton btn = e.Button as WindowsUIButton;
                 XtraUserControl ctl = new XtraUserControl();
                 if (btn == null || btn.Tag == null) return;
@@ -56,25 +58,21 @@ namespace Vs.HRM
                             {
                                 case 0:
                                     {
+                                        #region in cu
                                         System.Data.SqlClient.SqlConnection conn;
                                         DataTable dt = new DataTable();
                                         try
                                         {
-
                                             frmViewReport frm = new frmViewReport();
-
                                             frm.rpt = new rptQuyetDinhLuongCN(dNgayIn.DateTime);
-
                                             conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
                                             conn.Open();
-
                                             System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptQuyetDinhLuongCN", conn);
                                             cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
                                             cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
                                             cmd.Parameters.Add("@ID_CN", SqlDbType.Int).Value = idCN;
                                             cmd.Parameters.Add("@ID_SQD", SqlDbType.Int).Value = idL;
                                             cmd.CommandType = CommandType.StoredProcedure;
-
                                             System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
                                             DataSet ds = new DataSet();
                                             adp.Fill(ds);
@@ -95,6 +93,10 @@ namespace Vs.HRM
                                         {
 
                                         }
+                                        #endregion
+                                        #region in mới
+
+                                        #endregion
                                         break;
                                     }
                                 case 1:
@@ -135,7 +137,7 @@ namespace Vs.HRM
                                     }
                                 case 2:
                                     {
-                                        switch (Commons.Modules.ObjSystems.KyHieuDV_CN(Convert.ToInt64(Commons.Modules.iCongNhan)))
+                                        switch (Commons.Modules.KyHieuDV)
                                         {
                                             case "DM":
                                                 {
@@ -170,11 +172,64 @@ namespace Vs.HRM
                                                         dt1.TableName = "NOI_DUNG";
                                                         frm.AddDataSource(dt1);
 
-                                                        frm.ShowDialog();
+                                                        frm.ShowDialog(); 
                                                     }
                                                     catch
                                                     {
 
+                                                    }
+                                                    break;
+                                                }
+                                            case "AP":
+                                                {
+
+                                                    try
+                                                    {
+                                                        //lấy data dữ liệu
+                                                        DataTable dt = new DataTable();
+                                                        dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "rptQuyetDinhNangLuong_AP", Commons.Modules.UserName, Commons.Modules.TypeLanguage,idCN,idL));
+                                                        DataRow row = dt.Rows[0];
+                                                        string sPath = "";
+                                                        sPath = Commons.Modules.MExcel.SaveFiles("Work file (*.doc)|*.docx");
+                                                        if (sPath == "") return;
+                                                        //fill vào báo cáo
+                                                        var dateHL = Convert.ToDateTime(row["NGAY_HIEU_LUC"]);
+                                                        var date = DateTime.Now;
+                                                        Document baoCao = new Document("Template\\TemplateAP\\QuyetDinhNangLuong.doc");
+                                                        baoCao.MailMerge.Execute(new[] { "Ngay_Thang_Nam_BC" }, new[] { string.Format("ngày {0} tháng {1} năm {2}", date.Day, date.Month, date.Year) });
+                                                        baoCao.MailMerge.Execute(new[] { "Ngay_Thang_Nam_HL" }, new[] { string.Format("ngày {0} tháng {1} năm {2}", dateHL.Day, dateHL.Month, dateHL.Year) });
+                                                        foreach (DataColumn item in dt.Columns)
+                                                        {
+                                                            if (Commons.Modules.ObjSystems.IsnullorEmpty(row[item]))
+                                                            {
+                                                                baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { "............." });
+                                                                continue;
+                                                            }
+                                                            switch (item.DataType.Name)
+                                                            {
+                                                                case "DateTime":
+                                                                    {
+                                                                        baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { Convert.ToDateTime(row[item]).ToString("dd/MM/yyyy") });
+                                                                        break;
+                                                                    }
+                                                                case "Double":
+                                                                    {
+                                                                        baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { string.Format("{0:#,##0}", row[item]) });
+                                                                        break;
+                                                                    }
+                                                                default:
+                                                                    {
+                                                                        baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { row[item] });
+                                                                        break;
+
+                                                                    }
+                                                            }
+                                                        }
+                                                        baoCao.Save(sPath);
+                                                        Process.Start(sPath);
+                                                    }
+                                                    catch
+                                                    {
                                                     }
                                                     break;
                                                 }

@@ -1,7 +1,10 @@
-﻿using DevExpress.XtraBars.Docking2010;
+﻿using Aspose.Words;
+using DevExpress.XtraBars.Docking2010;
 using DevExpress.XtraEditors;
+using Microsoft.ApplicationBlocks.Data;
 using System;
 using System.Data;
+using System.Diagnostics;
 using Vs.Report;
 
 namespace Vs.HRM
@@ -36,7 +39,7 @@ namespace Vs.HRM
             }
             else
             {
-                rdo_ChonBaoCao.Properties.Items.RemoveAt(1);
+                //rdo_ChonBaoCao.Properties.Items.RemoveAt(1);
             }
         }
 
@@ -157,6 +160,153 @@ namespace Vs.HRM
             }
             catch { }
         }
+
+        private void InQuyetDinhDieuChuyen_AP()
+        {
+            #region in củ
+            //try
+            //{
+            //    System.Data.SqlClient.SqlConnection conn;
+            //    DataTable dt = new DataTable();
+            //    frmViewReport frm = new frmViewReport();
+            //    frm.rpt = new rptQuyetDinhDieuChuyen_AP(dNgayIn.DateTime);
+
+            //    conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+            //    conn.Open();
+
+            //    System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptQuyetDinhDieuChuyen_AP", conn);
+            //    cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+            //    cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+            //    cmd.Parameters.Add("@ID_CN", SqlDbType.Int).Value = idCN;
+            //    cmd.Parameters.Add("@ID_SQD", SqlDbType.Int).Value = idCT;
+            //    cmd.CommandType = CommandType.StoredProcedure;
+
+            //    System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+            //    DataSet ds = new DataSet();
+            //    adp.Fill(ds);
+            //    dt = new DataTable();
+            //    dt = ds.Tables[0].Copy();
+            //    dt.TableName = "DATA";
+            //    frm.AddDataSource(dt);
+
+            //    //DataTable dt1 = new DataTable();
+            //    //dt1 = ds.Tables[1].Copy();
+            //    //dt1.TableName = "NOI_DUNG";
+            //    //frm.AddDataSource(dt1);
+
+            //    frm.ShowDialog();
+            //}
+            //catch { }
+            #endregion
+            #region in mới
+            try
+            {
+                //lấy data dữ liệu
+                DataTable dt = new DataTable();
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "rptQuyetDinhDieuChuyen_AP", Commons.Modules.UserName, Commons.Modules.TypeLanguage, idCN, idCT,1));
+                DataRow row = dt.Rows[0];
+                string sPath = "";
+                sPath = Commons.Modules.MExcel.SaveFiles("Work file (*.doc)|*.docx");
+                if (sPath == "") return;
+
+                //fill vào báo cáo
+                //var date = Convert.ToDateTime(row["NGAY_BAT_DAU_HD"]);
+                var date = dNgayIn.DateTime;
+                Document baoCao = new Document("Template\\TemplateAP\\QuyetDinhDieuChuyenCT.doc");
+                baoCao.MailMerge.Execute(new[] { "Ngay_Thang_Nam_BC" }, new[] { string.Format("ngày {0} tháng {1} năm {2}", date.Day, date.Month, date.Year) });
+                foreach (DataColumn item in dt.Columns)
+                {
+                    if (Commons.Modules.ObjSystems.IsnullorEmpty(row[item]))
+                    {
+                        baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { ".................................." });
+
+                        continue;
+                    }
+                    switch (item.DataType.Name)
+                    {
+                        case "DateTime":
+                            {
+                                baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { Convert.ToDateTime(row[item]).ToString("dd/MM/yyyy") });
+                                break;
+                            }
+                        case "Double":
+                            {
+                                baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { string.Format("{0:#,##0}", row[item]) });
+                                break;
+                            }
+                        default:
+                            {
+                                baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { row[item] });
+                                break;
+
+                            }
+                    }
+                }
+                baoCao.Save(sPath);
+                Process.Start(sPath);
+            }
+            catch (Exception ex)
+            {
+            }
+            #endregion
+        }
+        private void InQuyetDinhBoNhiem_AP()
+        {
+            
+            #region in mới
+            try
+            {
+                //lấy data dữ liệu
+                DataTable dt = new DataTable();
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "rptQuyetDinhDieuChuyen_AP", Commons.Modules.UserName, Commons.Modules.TypeLanguage, idCN, idCT,2));
+                DataRow row = dt.Rows[0];
+                string sPath = "";
+                sPath = Commons.Modules.MExcel.SaveFiles("Work file (*.doc)|*.docx");
+                if (sPath == "") return;
+
+                //fill vào báo cáo
+                //var date = Convert.ToDateTime(row["NGAY_BAT_DAU_HD"]);
+                var date = dNgayIn.DateTime;
+                Document baoCao = new Document("Template\\TemplateAP\\QuyetDinhBoNhiem.doc");
+                baoCao.MailMerge.Execute(new[] { "Ngay_Thang_Nam_BC" }, new[] { string.Format("ngày {0} tháng {1} năm {2}", date.Day, date.Month, date.Year) });
+                foreach (DataColumn item in dt.Columns)
+                {
+                    if (Commons.Modules.ObjSystems.IsnullorEmpty(row[item]))
+                    {
+                        baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { ".................................." });
+
+                        continue;
+                    }
+                    switch (item.DataType.Name)
+                    {
+                        case "DateTime":
+                            {
+                                baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { Convert.ToDateTime(row[item]).ToString("dd/MM/yyyy") });
+                                break;
+                            }
+                        case "Double":
+                            {
+                                baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { string.Format("{0:#,##0}", row[item]) });
+                                break;
+                            }
+                        default:
+                            {
+                                baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { row[item] });
+                                break;
+
+                            }
+                    }
+                }
+                baoCao.Save(sPath);
+                Process.Start(sPath);
+            }
+            catch (Exception ex)
+            {
+            }
+            #endregion
+        }
+
+
         private void InQuyetDinhDieuChuyen_DM()
         {
             try
@@ -244,7 +394,7 @@ namespace Vs.HRM
                         {
                             case 0:
                                 {
-                                    switch (Commons.Modules.ObjSystems.KyHieuDV_CN(idCN))
+                                    switch (Commons.Modules.KyHieuDV)
                                     {
                                         case "MT":
                                             {
@@ -271,6 +421,11 @@ namespace Vs.HRM
                                                 InQuyetDinhDieuChuyen_NB();
                                                 break;
                                             }
+                                        case "AP":
+                                            {
+                                                InQuyetDinhDieuChuyen_AP();
+                                                break;
+                                            }
                                         default:
                                             InQuyetDinhDieuChuyen_MT();
                                             break;
@@ -279,11 +434,16 @@ namespace Vs.HRM
                                 }
                             case 1:
                                 {
-                                    switch (Commons.Modules.ObjSystems.KyHieuDV_CN(idCN))
+                                    switch (Commons.Modules.KyHieuDV)
                                     {
                                         case "MT":
                                             {
                                                 InQuyetDinhTuyenDung_SB();
+                                                break;
+                                            }
+                                        case "AP":
+                                            {
+                                                InQuyetDinhBoNhiem_AP();
                                                 break;
                                             }
                                         case "SB":

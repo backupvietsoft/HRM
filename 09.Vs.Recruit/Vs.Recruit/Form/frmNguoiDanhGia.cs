@@ -92,9 +92,9 @@ namespace VietSoftHRM
                         }
                     case "xoa":
                         {
-                            if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDeleteViTri"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+                            if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDeleteNguoiDanhGia"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
                                 return;
-                            SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "DELETE FROM dbo.LOAI_CONG_VIEC_XI_NGHIEP WHERE ID_XN = " + iiD_DV + " AND ID_LCV = " + grvNGD.GetFocusedRowCellValue("ID_LCV") + "");
+                            SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "DELETE  dbo.NGUOI_DANH_GIA_TAY_NGHE WHERE ID_DON_VI = "+ cboDV.EditValue +" AND ID_LOAI_CONG_VIEC = "+cboID_VTTD.EditValue+" AND ID_NGUOI_DGTN = "+ grvNGD.GetFocusedRowCellValue("ID_NGUOI_DGTN") +"");
                             LoadNguoiDanhGia();
                             break;
                         }
@@ -187,7 +187,7 @@ namespace VietSoftHRM
                 }
                 else if (grvNGD.FocusedRowHandle != GridControl.InvalidRowHandle)
                 {
-                    vigrvNGDew.DeleteRow(grvNGD.FocusedRowHandle);
+                    grvNGD.DeleteRow(grvNGD.FocusedRowHandle);
                 }
             }
         }

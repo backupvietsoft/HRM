@@ -1,6 +1,7 @@
 ﻿using DevExpress.XtraBars.Docking2010;
 using DevExpress.XtraEditors;
 using Microsoft.ApplicationBlocks.Data;
+using OfficeOpenXml.FormulaParsing.Excel.Functions.DateTime;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -210,16 +211,29 @@ namespace Vs.Payroll.Form
 
         private void enableButon(bool visible)
         {
-            windowsUIButton.Buttons[0].Properties.Visible = visible;
-            windowsUIButton.Buttons[1].Properties.Visible = visible;
-            windowsUIButton.Buttons[2].Properties.Visible = visible;
-            windowsUIButton.Buttons[3].Properties.Visible = visible;
-            windowsUIButton.Buttons[4].Properties.Visible = !visible;
-            windowsUIButton.Buttons[5].Properties.Visible = !visible;
-            windowsUIButton.Buttons[6].Properties.Visible = visible;
+            if (Commons.Modules.ObjSystems.DataTinhTrangBangLuong(iID_DV, Ngay) == 2)
+            {
+                windowsUIButton.Buttons[0].Properties.Visible = false;
+                windowsUIButton.Buttons[1].Properties.Visible = false;
+                windowsUIButton.Buttons[2].Properties.Visible = false;
+                windowsUIButton.Buttons[4].Properties.Visible = false;
+                windowsUIButton.Buttons[5].Properties.Visible = false;
 
-            grdCDThuaThieu.Enabled = visible;
-            grvCNThucHien.OptionsBehavior.Editable = !visible;
+                grvCNThucHien.OptionsBehavior.Editable = false;
+            }
+            else
+            {
+                windowsUIButton.Buttons[0].Properties.Visible = visible;
+                windowsUIButton.Buttons[1].Properties.Visible = visible;
+                windowsUIButton.Buttons[2].Properties.Visible = visible;
+                windowsUIButton.Buttons[3].Properties.Visible = visible;
+                windowsUIButton.Buttons[4].Properties.Visible = !visible;
+                windowsUIButton.Buttons[5].Properties.Visible = !visible;
+                windowsUIButton.Buttons[6].Properties.Visible = visible;
+
+                grdCDThuaThieu.Enabled = visible;
+                grvCNThucHien.OptionsBehavior.Editable = !visible;
+            }
         }
 
         private void InDuLieu()
@@ -731,6 +745,7 @@ namespace Vs.Payroll.Form
             LoadgrvCDThuaThieu();
             LoadgrvCN();
             grvCDThuaThieu_FocusedRowChanged(null, null);
+            enableButon(true);
         }
 
         private void datDNgay_EditValueChanged(object sender, EventArgs e)

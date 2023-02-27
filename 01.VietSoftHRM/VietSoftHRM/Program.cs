@@ -58,9 +58,9 @@ namespace VietSoftHRM
             {
                 //MRunInt();
                 //Application.Run(new Form1());
-                //Application.Run(new frmLogin());
+                Application.Run(new frmLogin());
                 //Application.Run(new Vs.HRM.frmPhuLucHDLD("", "", 1));
-                Application.Run(new frmMain());
+                //Application.Run(new frmMain());
                 //Application.Run(new XtraForm1());
                 //Application.Run(new Vs.HRM.frmImportNhanSu());
                 //Vs.Report.frmViewReport frm = new Vs.Report.frmViewReport();

@@ -24,7 +24,7 @@ namespace Vs.Payroll
     public partial class ucQuyDinhThuongPC : DevExpress.XtraEditors.XtraUserControl
     {
         private static bool isAdd = false;
-        
+
         public static ucQuyDinhThuongPC _instance;
         public static ucQuyDinhThuongPC Instance
         {
@@ -41,7 +41,7 @@ namespace Vs.Payroll
         {
             InitializeComponent();
             Commons.Modules.ObjSystems.ThayDoiNN(this, new List<LayoutControlGroup>() { Root }, btnALL);
-           
+
         }
 
         private void ucQuyDinhThuongPC_Load(object sender, EventArgs e)
@@ -59,7 +59,7 @@ namespace Vs.Payroll
             Commons.Modules.ObjSystems.LoadCboXiNghiep(cboDonVi, cboXiNghiep);
             Commons.Modules.ObjSystems.LoadCboTo(cboDonVi, cboXiNghiep, cboTo);
             LoadGrdGTGC();
-            EnableButon(isAdd); 
+            EnableButon(isAdd);
             Commons.Modules.sLoad = "";
         }
 
@@ -71,8 +71,8 @@ namespace Vs.Payroll
                 if (isAdd)
                 {
                     dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetlistQuyDinhThuongPC", Convert.ToDateTime(cboThang.EditValue),
-                                                cboDonVi.EditValue, cboXiNghiep.EditValue, cboTo.EditValue, Commons.Modules.UserName, Commons.Modules.TypeLanguage,0));
-                    if(grdData.DataSource == null)
+                                                cboDonVi.EditValue, cboXiNghiep.EditValue, cboTo.EditValue, Commons.Modules.UserName, Commons.Modules.TypeLanguage, 0));
+                    if (grdData.DataSource == null)
                     {
                         Commons.Modules.ObjSystems.MLoadXtraGrid(grdData, grvData, dt, true, false, false, true, true, this.Name);
                         dt.Columns["MS_CN"].ReadOnly = true;
@@ -86,8 +86,8 @@ namespace Vs.Payroll
                 else
                 {
                     dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetlistQuyDinhThuongPC", Convert.ToDateTime(cboThang.EditValue),
-                                                cboDonVi.EditValue, cboXiNghiep.EditValue, cboTo.EditValue, Commons.Modules.UserName, Commons.Modules.TypeLanguage,1));
-                    if(grdData.DataSource == null)
+                                                cboDonVi.EditValue, cboXiNghiep.EditValue, cboTo.EditValue, Commons.Modules.UserName, Commons.Modules.TypeLanguage, 1));
+                    if (grdData.DataSource == null)
                     {
                         Commons.Modules.ObjSystems.MLoadXtraGrid(grdData, grvData, dt, false, false, false, true, true, this.Name);
                         ////grvData.Columns["ID_CN"].Visible = false;
@@ -95,7 +95,7 @@ namespace Vs.Payroll
                         grvData.Columns["TIEN_PC_AT"].DisplayFormat.FormatString = "N0";
                         grvData.Columns["TIEN_HT_NHA"].DisplayFormat.FormatType = FormatType.Numeric;
                         grvData.Columns["TIEN_HT_NHA"].DisplayFormat.FormatString = "N0";
-                       
+
                     }
                     else
                     {
@@ -111,7 +111,7 @@ namespace Vs.Payroll
             {
 
             }
-            
+
             //, , ,, , , 
         }
 
@@ -135,12 +135,12 @@ namespace Vs.Payroll
             catch (Exception ex)
             {
                 DateTime now = DateTime.Now;
-                
-                cboThang.Text =  now.Month+ "/"+now.Year.ToString();
+
+                cboThang.Text = now.Month + "/" + now.Year.ToString();
             }
         }
 
-       
+
 
         private void windowsUIButtonPanel1_ButtonClick(object sender, DevExpress.XtraBars.Docking2010.ButtonEventArgs e)
         {
@@ -152,10 +152,10 @@ namespace Vs.Payroll
                     {
                         isAdd = true;
                         LoadGrdGTGC();
-                        Commons.Modules.ObjSystems.AddnewRow(grvData,false);
+                        Commons.Modules.ObjSystems.AddnewRow(grvData, false);
                         EnableButon(isAdd);
                         break;
-                        
+
                     }
                 case "xoa":
                     {
@@ -181,7 +181,7 @@ namespace Vs.Payroll
                     {
                         Commons.Modules.ObjSystems.DeleteAddRow(grvData);
                         isAdd = false;
-                        LoadGrdGTGC();                        
+                        LoadGrdGTGC();
                         EnableButon(isAdd);
                         break;
                     }
@@ -195,16 +195,27 @@ namespace Vs.Payroll
 
         private void EnableButon(bool visible)
         {
-            btnALL.Buttons[0].Properties.Visible = !visible;
-            btnALL.Buttons[1].Properties.Visible = !visible;
-            btnALL.Buttons[2].Properties.Visible = !visible;
-            btnALL.Buttons[3].Properties.Visible = !visible;
-            btnALL.Buttons[4].Properties.Visible = visible;
-            btnALL.Buttons[5].Properties.Visible = visible;
-            cboTo.Enabled = !visible;
-            cboThang.Enabled = !visible;
-            cboDonVi.Enabled = !visible;
-            cboXiNghiep.Enabled = !visible;
+            if (Commons.Modules.ObjSystems.DataTinhTrangBangLuong(Convert.ToInt32(cboDonVi.EditValue), Commons.Modules.ObjSystems.ConvertDateTime(cboThang.Text)) == 2)
+            {
+                btnALL.Buttons[0].Properties.Visible = false;
+                btnALL.Buttons[1].Properties.Visible = false;
+                btnALL.Buttons[2].Properties.Visible = false;
+                btnALL.Buttons[4].Properties.Visible = false;
+                btnALL.Buttons[5].Properties.Visible = false;
+            }
+            else
+            {
+                btnALL.Buttons[0].Properties.Visible = !visible;
+                btnALL.Buttons[1].Properties.Visible = !visible;
+                btnALL.Buttons[2].Properties.Visible = !visible;
+                btnALL.Buttons[3].Properties.Visible = !visible;
+                btnALL.Buttons[4].Properties.Visible = visible;
+                btnALL.Buttons[5].Properties.Visible = visible;
+                cboTo.Enabled = !visible;
+                cboThang.Enabled = !visible;
+                cboDonVi.Enabled = !visible;
+                cboXiNghiep.Enabled = !visible;
+            }
         }
 
         private void XoaQuyDinhPC()
@@ -258,7 +269,7 @@ namespace Vs.Payroll
             string sTB = "TCT_Tam" + Commons.Modules.UserName;
             try
             {
-                
+
                 Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sTB, Commons.Modules.ObjSystems.ConvertDatatable(grvData), "");
                 SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spSaveQuyDinhPCCN", sTB);
                 Commons.Modules.ObjSystems.XoaTable(sTB);
@@ -270,14 +281,14 @@ namespace Vs.Payroll
                 return false;
             }
         }
-       
+
         private void grvData_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
-            {
+        {
             GridView view = sender as GridView;
-          
+
         }
 
-        
+
         private void grvNgay_RowCellClick(object sender, RowCellClickEventArgs e)
         {
             try
@@ -295,7 +306,7 @@ namespace Vs.Payroll
             if (Commons.Modules.sLoad == "0Load") return;
             Commons.Modules.sLoad = "0Load";
             LoadGrdGTGC();
-            //EnableButon(true);
+            EnableButon(isAdd);
             Commons.Modules.sLoad = "";
         }
 
@@ -335,7 +346,7 @@ namespace Vs.Payroll
             Commons.Modules.ObjSystems.LoadCboXiNghiep(cboDonVi, cboXiNghiep);
             Commons.Modules.ObjSystems.LoadCboTo(cboDonVi, cboXiNghiep, cboTo);
             LoadGrdGTGC();
-            //EnableButon(true);
+            EnableButon(isAdd);
             Commons.Modules.sLoad = "";
         }
 

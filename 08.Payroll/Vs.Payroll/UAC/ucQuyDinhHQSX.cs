@@ -196,16 +196,27 @@ namespace Vs.Payroll
 
         private void EnableButon(bool visible)
         {
-            btnALL.Buttons[0].Properties.Visible = !visible;
-            btnALL.Buttons[1].Properties.Visible = !visible;
-            btnALL.Buttons[2].Properties.Visible = !visible;
-            btnALL.Buttons[3].Properties.Visible = !visible;
-            btnALL.Buttons[4].Properties.Visible = visible;
-            btnALL.Buttons[5].Properties.Visible = visible;
-            cboTo.Enabled = !visible;
-            cboThang.Enabled = !visible;
-            cboDonVi.Enabled = !visible;
-            cboXiNghiep.Enabled = !visible;
+            if (Commons.Modules.ObjSystems.DataTinhTrangBangLuong(Convert.ToInt32(cboDonVi.EditValue), Commons.Modules.ObjSystems.ConvertDateTime(cboThang.Text)) == 2)
+            {
+                btnALL.Buttons[0].Properties.Visible = false;
+                btnALL.Buttons[1].Properties.Visible = false;
+                btnALL.Buttons[2].Properties.Visible = false;
+                btnALL.Buttons[4].Properties.Visible = false;
+                btnALL.Buttons[5].Properties.Visible = false;
+            }
+            else
+            {
+                btnALL.Buttons[0].Properties.Visible = !visible;
+                btnALL.Buttons[1].Properties.Visible = !visible;
+                btnALL.Buttons[2].Properties.Visible = !visible;
+                btnALL.Buttons[3].Properties.Visible = !visible;
+                btnALL.Buttons[4].Properties.Visible = visible;
+                btnALL.Buttons[5].Properties.Visible = visible;
+                cboTo.Enabled = !visible;
+                cboThang.Enabled = !visible;
+                cboDonVi.Enabled = !visible;
+                cboXiNghiep.Enabled = !visible;
+            }
         }
 
         private void XoaHQSX()
@@ -299,7 +310,7 @@ namespace Vs.Payroll
             if (Commons.Modules.sLoad == "0Load") return;
             Commons.Modules.sLoad = "0Load";
             LoadGrdHQSX();
-            //EnableButon(true);
+            EnableButon(isAdd);
             Commons.Modules.sLoad = "";
         }
 
@@ -340,6 +351,7 @@ namespace Vs.Payroll
             Commons.Modules.ObjSystems.LoadCboTo(cboDonVi, cboXiNghiep, cboTo);
             LoadThang();
             LoadGrdHQSX();
+            EnableButon(isAdd);
             Commons.Modules.sLoad = "";
         }
 

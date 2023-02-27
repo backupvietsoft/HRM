@@ -69,6 +69,7 @@ namespace Vs.TimeAttendance
             Commons.Modules.ObjSystems.LoadCboXiNghiep(cboDV, cboXN);
             Commons.Modules.ObjSystems.LoadCboTo(cboDV, cboXN, cboTo);
             LoadGridVPQuetThe();
+            enableButon();
             Commons.Modules.sLoad = "";
         }
         private void cboXN_EditValueChanged(object sender, EventArgs e)
@@ -99,6 +100,7 @@ namespace Vs.TimeAttendance
             if (Commons.Modules.sLoad == "0Load") return;
             Commons.Modules.sLoad = "0Load";
             LoadGridVPQuetThe();
+            enableButon();
             Commons.Modules.sLoad = "";
         }
         private void windowsUIButton_ButtonClick(object sender, DevExpress.XtraBars.Docking2010.ButtonEventArgs e)
@@ -278,16 +280,29 @@ namespace Vs.TimeAttendance
         }
         private void enableButon()
         {
+            if (Commons.Modules.ObjSystems.DataTinhTrangBangLuong(Convert.ToInt32(cboDV.EditValue), Commons.Modules.ObjSystems.ConvertDateTime(cboNgay.Text)) == 2)
+            {
+                windowsUIButton.Buttons[0].Properties.Visible = false;
+                windowsUIButton.Buttons[1].Properties.Visible = false;
+                windowsUIButton.Buttons[2].Properties.Visible = false;
+                windowsUIButton.Buttons[3].Properties.Visible = false;
+                windowsUIButton.Buttons[4].Properties.Visible = false;
 
-            windowsUIButton.Buttons[0].Properties.Visible = !isAdd;
-            windowsUIButton.Buttons[1].Properties.Visible = !isAdd;
-            windowsUIButton.Buttons[2].Properties.Visible = !isAdd;
-            windowsUIButton.Buttons[3].Properties.Visible = !isAdd;
-            windowsUIButton.Buttons[4].Properties.Visible = !isAdd;
-            windowsUIButton.Buttons[7].Properties.Visible = !isAdd;
+                windowsUIButton.Buttons[5].Properties.Visible = false;
+                windowsUIButton.Buttons[6].Properties.Visible = false;
+            }
+            else
+            {
+                windowsUIButton.Buttons[0].Properties.Visible = !isAdd;
+                windowsUIButton.Buttons[1].Properties.Visible = !isAdd;
+                windowsUIButton.Buttons[2].Properties.Visible = !isAdd;
+                windowsUIButton.Buttons[3].Properties.Visible = !isAdd;
+                windowsUIButton.Buttons[4].Properties.Visible = !isAdd;
+                windowsUIButton.Buttons[7].Properties.Visible = !isAdd;
 
-            windowsUIButton.Buttons[5].Properties.Visible = isAdd;
-            windowsUIButton.Buttons[6].Properties.Visible = isAdd;
+                windowsUIButton.Buttons[5].Properties.Visible = isAdd;
+                windowsUIButton.Buttons[6].Properties.Visible = isAdd;
+            }
         }
         #endregion
 

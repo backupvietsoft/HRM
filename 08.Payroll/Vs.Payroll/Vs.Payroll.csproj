@@ -611,6 +611,12 @@
     <Compile Include="UAC\ucDangKyBHXH.Designer.cs">
       <DependentUpon>ucDangKyBHXH.cs</DependentUpon>
     </Compile>
+    <Compile Include="UAC\ucKhoaBangLuong.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UAC\ucKhoaBangLuong.Designer.cs">
+      <DependentUpon>ucKhoaBangLuong.cs</DependentUpon>
+    </Compile>
     <Compile Include="UAC\ucLSPKiemSoat.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -978,6 +984,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UAC\ucDangKyBHXH.resx">
       <DependentUpon>ucDangKyBHXH.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UAC\ucKhoaBangLuong.resx">
+      <DependentUpon>ucKhoaBangLuong.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UAC\ucLSPKiemSoat.resx">
       <DependentUpon>ucLSPKiemSoat.cs</DependentUpon>

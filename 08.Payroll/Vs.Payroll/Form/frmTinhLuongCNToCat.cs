@@ -197,19 +197,36 @@ namespace Vs.Payroll
         }
         private void EnabelButton(bool visible)
         {
-            windowsUIButton.Buttons[0].Properties.Visible = !visible;
-            windowsUIButton.Buttons[1].Properties.Visible = !visible;
-            windowsUIButton.Buttons[2].Properties.Visible = !visible;
-            windowsUIButton.Buttons[3].Properties.Visible = !visible;
-            windowsUIButton.Buttons[4].Properties.Visible = !visible;
-            windowsUIButton.Buttons[5].Properties.Visible = !visible;
-            windowsUIButton.Buttons[6].Properties.Visible = !visible;
-            windowsUIButton.Buttons[7].Properties.Visible = !visible;
-            windowsUIButton.Buttons[8].Properties.Visible = visible;
-            windowsUIButton.Buttons[9].Properties.Visible = visible;
-            windowsUIButton.Buttons[10].Properties.Visible = visible;
-            windowsUIButton.Buttons[11].Properties.Visible = visible;
-            grvData.OptionsBehavior.Editable = visible;
+            if (Commons.Modules.ObjSystems.DataTinhTrangBangLuong(iID_DV, dNgay) == 2)
+            {
+                windowsUIButton.Buttons[0].Properties.Visible = false;
+                windowsUIButton.Buttons[1].Properties.Visible = false;
+                windowsUIButton.Buttons[3].Properties.Visible = false;
+                windowsUIButton.Buttons[4].Properties.Visible = false;
+                windowsUIButton.Buttons[5].Properties.Visible = false;
+                windowsUIButton.Buttons[6].Properties.Visible = false;
+                windowsUIButton.Buttons[8].Properties.Visible = false;
+                windowsUIButton.Buttons[9].Properties.Visible = false;
+                windowsUIButton.Buttons[10].Properties.Visible = false;
+                windowsUIButton.Buttons[11].Properties.Visible = false;
+                grvData.OptionsBehavior.Editable = false;
+            }
+            else
+            {
+                windowsUIButton.Buttons[0].Properties.Visible = !visible;
+                windowsUIButton.Buttons[1].Properties.Visible = !visible;
+                windowsUIButton.Buttons[2].Properties.Visible = !visible;
+                windowsUIButton.Buttons[3].Properties.Visible = !visible;
+                windowsUIButton.Buttons[4].Properties.Visible = !visible;
+                windowsUIButton.Buttons[5].Properties.Visible = !visible;
+                windowsUIButton.Buttons[6].Properties.Visible = !visible;
+                windowsUIButton.Buttons[7].Properties.Visible = !visible;
+                windowsUIButton.Buttons[8].Properties.Visible = visible;
+                windowsUIButton.Buttons[9].Properties.Visible = visible;
+                windowsUIButton.Buttons[10].Properties.Visible = visible;
+                windowsUIButton.Buttons[11].Properties.Visible = visible;
+                grvData.OptionsBehavior.Editable = visible;
+            }
         }
         private void LoadData()
         {

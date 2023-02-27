@@ -107,7 +107,7 @@ namespace Vs.TimeAttendance
                 string sSql = "SELECT DISTINCT ID_CDLV ID_CA, CA, GIO_BD, GIO_KT, PHUT_BD, PHUT_KT FROM CHE_DO_LAM_VIEC WHERE ID_NHOM= " + cboID_NHOM.EditValue + " AND TANG_CA = 1 ORDER BY CA";
                 dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSql));
 
-                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboCA, dt, "ID_CA", "CA", "Ca_lam");
+                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboCA, dt, "ID_CA", "CA", "Ca_lam",true);
                 cboCA.Properties.View.Columns["GIO_BD"].ColumnEdit = this.repositoryItemTimeEdit1;
                 cboCA.Properties.View.Columns["GIO_KT"].ColumnEdit = this.repositoryItemTimeEdit1;
                 cboCA.Properties.View.Columns["PHUT_BD"].Visible = false;

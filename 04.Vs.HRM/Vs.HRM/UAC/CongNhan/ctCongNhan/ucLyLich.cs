@@ -721,17 +721,20 @@ namespace Vs.HRM
                 }
                 try
                 {
-                    Byte[] data = new Byte[0];
-                    data = (Byte[])(dt.Rows[0]["Hinh_CN"]);
-                    MemoryStream mem = new MemoryStream(data);
-                    HINH_CNPictureEdit.EditValue = Image.FromStream(mem);
-                }
-                catch
-                {
-                }
-                try
-                {
                     MS_CNTextEdit.EditValue = dt.Rows[0]["MS_CN"];
+                    try
+                    {
+                        Byte[] data = new Byte[0];
+                        data = (Byte[])(dt.Rows[0]["Hinh_CN"]);
+                        MemoryStream mem = new MemoryStream(data);
+                        HINH_CNPictureEdit.EditValue = Image.FromStream(mem);
+
+                        //string imagePath = Commons.Modules.sDDTaiLieu + "\\" + "ImageEmployees\\" + MS_CNTextEdit.Text.ToString().Trim() + ".jpg";
+                        //HINH_CNPictureEdit.Image = Image.FromFile(imagePath);
+                    }
+                    catch
+                    {
+                    }
                     MS_THE_CCTextEdit.EditValue = dt.Rows[0]["MS_THE_CC"];
                     ID_QGLookUpEdit.EditValue = dt.Rows[0]["ID_QG"];
                     HOTextEdit.EditValue = dt.Rows[0]["HO"];
@@ -1078,11 +1081,40 @@ namespace Vs.HRM
 
             return currentByteImageArray;
         }
+        private void SaveImage(string imageURL) // sLoai
+        {
+            try
+            {
+                if (imageURL.Trim() == "") return;
+                var strDuongDanTmp = Commons.Modules.ObjSystems.CapnhatTL("ImageEmployees\\", false);
+                string strDuongDan = "";
+                strDuongDan = imageURL;
+                string[] sFile;
+                string TenFile;
+                TenFile = System.IO.Path.GetFileName(imageURL);
+                sFile = System.IO.Directory.GetFiles(strDuongDanTmp);
+                string a = "";
+                if (Commons.Modules.ObjSystems.KiemFileTonTai(strDuongDanTmp + @"\" + MS_CNTextEdit.Text + ".jpg") == false)
+                    a = strDuongDanTmp + @"\" + MS_CNTextEdit.Text + ".jpg";
+                else
+                {
+                    TenFile = Commons.Modules.ObjSystems.STTFileCungThuMuc(strDuongDanTmp, MS_CNTextEdit.Text + ".jpg");
+                    a = strDuongDanTmp + @"\" + MS_CNTextEdit.Text + ".jpg";
+                }
+                Commons.Modules.ObjSystems.LuuDuongDan(strDuongDan, a);
+            }
+            catch
+            {
+                return;
+            }
+        }
         private bool SaveData()
         {
             //test();
             try
             {
+                //SaveImage(HINH_CNPictureEdit.GetLoadedImageLocation());
+
                 //tạo bảng tạm bằng cấp
                 string sTBBangCap = "sbtBC" + Commons.Modules.iIDUser;
                 if (Commons.Modules.ObjSystems.ConvertDatatable(grvBangCapCN) == null)
@@ -1957,6 +1989,11 @@ namespace Vs.HRM
             catch
             {
             }
+        }
+
+        private void HINH_CNPictureEdit_EditValueChanged(object sender, EventArgs e)
+        {
+            
         }
     }
 }

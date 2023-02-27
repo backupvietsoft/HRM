@@ -100,6 +100,7 @@ namespace Vs.TimeAttendance
             Commons.Modules.ObjSystems.LoadCboXiNghiep(cboDV, cboXN);
             Commons.Modules.ObjSystems.LoadCboTo(cboDV, cboXN, cboTo);
             LoadGrdCongNhan();
+            enableButon(true);
             Commons.Modules.sLoad = "";
         }
         private void cboXN_EditValueChanged(object sender, EventArgs e)
@@ -115,6 +116,7 @@ namespace Vs.TimeAttendance
             if (Commons.Modules.sLoad == "0Load") return;
             Commons.Modules.sLoad = "0Load";
             LoadGrdCongNhan();
+            enableButon(true);
             Commons.Modules.sLoad = "";
         }
         private void windowsUIButton_ButtonClick(object sender, DevExpress.XtraBars.Docking2010.ButtonEventArgs e)
@@ -434,17 +436,28 @@ namespace Vs.TimeAttendance
         }
         private void enableButon(bool visible)
         {
-            windowsUIButton.Buttons[0].Properties.Visible = visible;
-            windowsUIButton.Buttons[1].Properties.Visible = visible;
-            windowsUIButton.Buttons[2].Properties.Visible = visible;
-            windowsUIButton.Buttons[3].Properties.Visible = visible;
-            windowsUIButton.Buttons[4].Properties.Visible = visible;
-            windowsUIButton.Buttons[5].Properties.Visible = visible;
-            windowsUIButton.Buttons[6].Properties.Visible = !visible;
-            windowsUIButton.Buttons[7].Properties.Visible = !visible;
-            navigationFrame1.SelectedPageIndex = visible == true ? 0 : 1;
+            if (Commons.Modules.ObjSystems.DataTinhTrangBangLuong(Convert.ToInt32(cboDV.EditValue), datNgayChamCong.DateTime) == 2)
+            {
+                windowsUIButton.Buttons[0].Properties.Visible = false;
+                windowsUIButton.Buttons[1].Properties.Visible = false;
+                windowsUIButton.Buttons[2].Properties.Visible = false;
+                windowsUIButton.Buttons[6].Properties.Visible = false;
+                windowsUIButton.Buttons[7].Properties.Visible = false;
+            }
+            else
+            {
+                windowsUIButton.Buttons[0].Properties.Visible = visible;
+                windowsUIButton.Buttons[1].Properties.Visible = visible;
+                windowsUIButton.Buttons[2].Properties.Visible = visible;
+                windowsUIButton.Buttons[3].Properties.Visible = visible;
+                windowsUIButton.Buttons[4].Properties.Visible = visible;
+                windowsUIButton.Buttons[5].Properties.Visible = visible;
+                windowsUIButton.Buttons[6].Properties.Visible = !visible;
+                windowsUIButton.Buttons[7].Properties.Visible = !visible;
+                navigationFrame1.SelectedPageIndex = visible == true ? 0 : 1;
 
-            grvCongNhan.OptionsBehavior.Editable = !visible;
+                grvCongNhan.OptionsBehavior.Editable = !visible;
+            }
 
         }
         private void BingdingData()
@@ -688,6 +701,8 @@ namespace Vs.TimeAttendance
         {
             if (e.KeyCode == Keys.Delete)
             {
+                if (Commons.Modules.ObjSystems.DataTinhTrangBangLuong(Convert.ToInt32(cboDV.EditValue), datNgayChamCong.DateTime) == 2) return;
+
                 Int64 idcn = Convert.ToInt64(grvCongNhan.GetFocusedRowCellValue("ID_CN"));
                 if (grvCongNhan.RowCount == 0) { Commons.Modules.ObjSystems.msgChung(Commons.ThongBao.msgKhongCoDuLieuXoa); return; }
                 if (Commons.Modules.ObjSystems.msgHoi(Commons.ThongBao.msgXoa) == DialogResult.No) return;

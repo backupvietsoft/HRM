@@ -142,9 +142,6 @@ namespace Vs.HRM
                                                     dt.TableName = "DATA1";
                                                     frm.AddDataSource(dt);
 
-
-
-
                                                     DataTable dt2 = new DataTable();
                                                     dt2 = ds.Tables[2].Copy();
                                                     dt2.TableName = "DATA2";

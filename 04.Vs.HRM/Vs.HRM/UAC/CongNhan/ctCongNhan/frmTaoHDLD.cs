@@ -70,7 +70,7 @@ namespace Vs.HRM
                 {
 
                     case "luu":
-                        
+
                         {
                             grvData.CloseEditor();
                             grvData.UpdateCurrentRow();
@@ -87,6 +87,7 @@ namespace Vs.HRM
                             if (!KiemTraLuoi(dt)) return;
                             if (SaveData(dt) == false)
                             {
+
                                 return;
                             }
                             else
@@ -315,7 +316,7 @@ namespace Vs.HRM
                     grvData.Columns["TEN_NL"].OptionsColumn.AllowEdit = false;
                     grvData.Columns["MUC_LUONG"].OptionsColumn.AllowEdit = true;
                 }
-                catch {}
+                catch { }
                 DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit cboID_LHDLD = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
                 cboID_LHDLD.NullText = "";
                 cboID_LHDLD.ValueMember = "ID_LHDLD";
@@ -371,7 +372,7 @@ namespace Vs.HRM
                 cboID_BL.NullText = "";
                 cboID_BL.ValueMember = "ID_BL";
                 cboID_BL.DisplayMember = "TEN_BL";
-                cboID_BL.DataSource = Commons.Modules.ObjSystems.DataBacLuong(grvData.GetFocusedRowCellValue("ID_NL").ToString() == "" ? -1 : Convert.ToInt64(grvData.GetFocusedRowCellValue("ID_NL")), DateTime.Now , true);
+                cboID_BL.DataSource = Commons.Modules.ObjSystems.DataBacLuong(grvData.GetFocusedRowCellValue("ID_NL").ToString() == "" ? -1 : Convert.ToInt64(grvData.GetFocusedRowCellValue("ID_NL")), DateTime.Now, true);
                 cboID_BL.Columns.Clear();
                 cboID_BL.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID_BL"));
                 cboID_BL.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("TEN_BL"));
@@ -537,7 +538,7 @@ namespace Vs.HRM
                 //////dt1.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT ID_BL, MUCLUONG FROM dbo.BAC_LUONG " ));
                 dt1 = Commons.Modules.ObjSystems.DataBacLuong(Convert.ToInt64(grvData.GetFocusedRowCellValue("ID_NL")), DateTime.Now, false);
                 lookUp.Properties.DataSource = dt1;
-                
+
             }
             catch { }
         }
@@ -602,10 +603,19 @@ namespace Vs.HRM
                             cmd.Parameters.Add("@sBT1", SqlDbType.NVarChar).Value = sBT;
                             cmd.Parameters.Add("@iLoai", SqlDbType.Int).Value = 2;
                             cmd.CommandType = CommandType.StoredProcedure;
-                            cmd.ExecuteNonQuery();
+                            System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+                            DataSet ds = new DataSet();
+                            adp.Fill(ds);
+                            dt = new DataTable();
+                            dt = ds.Tables[0].Copy();
+                            if (dt.Rows[0][0].ToString() == "-99")
+                            {
+                                Commons.Modules.ObjSystems.XoaTable("sBTTaoHDLD" + Commons.Modules.iIDUser);
+                                return false;
+                            }
                             //Commons.Modules.ObjSystems.XoaTable(sBT);
                             break;
-                        }              
+                        }
                     default:
                         {
                             string sBT = "sBTTaoHDLD" + Commons.Modules.iIDUser;

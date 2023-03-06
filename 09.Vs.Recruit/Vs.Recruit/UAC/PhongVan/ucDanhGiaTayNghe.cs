@@ -100,8 +100,13 @@ namespace Vs.Recruit
                 grvDSUngVien.Columns["MS_CN"].OptionsColumn.AllowEdit = false;
                 grvDSUngVien.Columns["TEN_TT_UV"].OptionsColumn.AllowEdit = false;
                 grvDSUngVien.Columns["HO_TEN_NGT"].OptionsColumn.AllowEdit = false;
+                grvDSUngVien.Columns["THUONG_GT"].OptionsColumn.AllowEdit = false;
+                grvDSUngVien.Columns["THUONG_GT"].OptionsColumn.AllowEdit = false;
                 grvDSUngVien.Columns["THUONG_TAY_NGHE"].DisplayFormat.FormatType = FormatType.Numeric;
                 grvDSUngVien.Columns["THUONG_TAY_NGHE"].DisplayFormat.FormatString = "n0";
+
+                grvDSUngVien.Columns["THUONG_GT"].DisplayFormat.FormatType = FormatType.Numeric;
+                grvDSUngVien.Columns["THUONG_GT"].DisplayFormat.FormatString = "n0";
 
                 DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit cboDGTN = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
                 cboDGTN.NullText = "";
@@ -180,12 +185,14 @@ namespace Vs.Recruit
                             grvDSUngVien.Columns["NGUOI_DANH_GIA_2"].Visible = false;
                             grvDSUngVien.Columns["MS_CN"].Visible = true;
                             grvDSUngVien.Columns["HO_TEN_NGT"].Visible = true;
+                            grvDSUngVien.Columns["THUONG_GT"].Visible = true;
                             grvDSUngVien.Columns["THUONG_TAY_NGHE"].Visible = false;
 
                             grvDSUngVien.Columns["DAT"].VisibleIndex = 14;
                             grvDSUngVien.Columns["MS_CN"].VisibleIndex = 15;
                             grvDSUngVien.Columns["HO_TEN_NGT"].VisibleIndex = 16;
-                            grvDSUngVien.Columns["GHI_CHU"].VisibleIndex = 17;
+                            grvDSUngVien.Columns["THUONG_GT"].VisibleIndex = 17;
+                            grvDSUngVien.Columns["GHI_CHU"].VisibleIndex = 18;
 
                         }
                         else
@@ -203,10 +210,12 @@ namespace Vs.Recruit
                             //DAT	ID_CN	GHI_CHU
                             grvDSUngVien.Columns["MS_CN"].Visible = true;
                             grvDSUngVien.Columns["HO_TEN_NGT"].Visible = true;
+                            grvDSUngVien.Columns["THUONG_GT"].Visible = true;
                             grvDSUngVien.Columns["DAT"].VisibleIndex = 15;
                             grvDSUngVien.Columns["MS_CN"].VisibleIndex = 16;
                             grvDSUngVien.Columns["HO_TEN_NGT"].VisibleIndex = 17;
-                            grvDSUngVien.Columns["GHI_CHU"].VisibleIndex = 18;
+                            grvDSUngVien.Columns["THUONG_GT"].VisibleIndex = 18;
+                            grvDSUngVien.Columns["GHI_CHU"].VisibleIndex = 19;
                         }
                         grvDSUngVien.Columns["KQ_GIAY"].Caption = "KQKT bài giấy";
                     }
@@ -219,6 +228,7 @@ namespace Vs.Recruit
                         grvDSUngVien.Columns["NGUOI_DANH_GIA_2"].Visible = false;
                         grvDSUngVien.Columns["MS_CN"].Visible = false;
                         grvDSUngVien.Columns["HO_TEN_NGT"].Visible = false;
+                        grvDSUngVien.Columns["THUONG_GT"].Visible = false;
                         grvDSUngVien.Columns["THUONG_TAY_NGHE"].Visible = false;
                         grvDSUngVien.Columns["DAT"].VisibleIndex = 14;
                         grvDSUngVien.Columns["GHI_CHU"].VisibleIndex = 15;

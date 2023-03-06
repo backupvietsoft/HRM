@@ -93,7 +93,7 @@ namespace Vs.TimeAttendance
                 // 10 rdo_ThongTinNhomCCThang
 
 
-                if (sKyHieuDV == "SB")
+                if (sKyHieuDV == "SB" )
                 {
                     //rdo_ChonBaoCao.Properties.Items.RemoveAt(8);
 
@@ -768,7 +768,6 @@ namespace Vs.TimeAttendance
             {
                 case "Print":
                     {
-
                         switch (rdo_ChonBaoCao.Properties.Items[rdo_ChonBaoCao.SelectedIndex].Tag)
                         {
                             case "rdo_BangChamCongThang":
@@ -787,7 +786,7 @@ namespace Vs.TimeAttendance
                                             }
                                         case "AP":
                                             {
-                                                BangChamCongThang_AP(3);
+                                                BangChamCongThang_AP(2);
                                                 break;
                                             }
                                         case "DM":
@@ -854,6 +853,11 @@ namespace Vs.TimeAttendance
                                     switch (sKyHieuDV)
                                     {
                                         case "NC":
+                                        case "AP":
+                                            {
+                                                BangChamCongThang_AP(1);
+                                                break;
+                                            }
                                         case "NB":
                                             {
                                                 try
@@ -882,6 +886,11 @@ namespace Vs.TimeAttendance
                                         case "MT":
                                             {
                                                 BangChamCongTangCaThang_MT();
+                                                break;
+                                            }
+                                        case "AP":
+                                            {
+                                                BangChamCongThang_AP(3);
                                                 break;
                                             }
                                         case "SB":
@@ -1357,6 +1366,7 @@ namespace Vs.TimeAttendance
             }
         }
         #endregion
+
         #region functionInTheoDonVi
         private void BangChamCongThang()
         {
@@ -3461,9 +3471,7 @@ namespace Vs.TimeAttendance
             {
                 System.Data.SqlClient.SqlConnection conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
                 conn.Open();
-
                 System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptBangCongThangTangCa_SB", conn);
-
                 cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
                 cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
                 cmd.Parameters.Add("@DVi", SqlDbType.Int).Value = LK_DON_VI.EditValue;
@@ -5975,13 +5983,32 @@ namespace Vs.TimeAttendance
         {
             try
             {
+                string storename = "";
+                switch (type)
+                {
+                    case 1:
+                        {
+                            storename = "rptBangCongThang_AP";
+                            break;
+                        }
+                    case 2:
+                        {
+                            storename = "rptBangCongThangGio_AP";
+                            break;
+                        }
+                    case 3:
+                        {
+                            storename = "rptBangCongThangNgoaiGio_AP";
+                            break;
+                        }
+                    default:
+                        break;
+                }
                 System.Data.SqlClient.SqlConnection conn;
                 conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
                 conn.Open();
                 DataTable dtBCThang;
-
-                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptBangCongThang_AP", conn);
-
+                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand(storename, conn);
                 cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
                 cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
                 cmd.Parameters.Add("@Dvi", SqlDbType.Int).Value = LK_DON_VI.EditValue;
@@ -5989,10 +6016,8 @@ namespace Vs.TimeAttendance
                 cmd.Parameters.Add("@TO", SqlDbType.Int).Value = LK_TO.EditValue;
                 cmd.Parameters.Add("@TNgay", SqlDbType.Date).Value = Convert.ToDateTime(lk_TuNgay.EditValue);
                 cmd.Parameters.Add("@DNgay", SqlDbType.Date).Value = Convert.ToDateTime(lk_DenNgay.EditValue);
-                cmd.Parameters.Add("@TYPE", SqlDbType.Int).Value = type;
                 cmd.CommandType = CommandType.StoredProcedure;
                 System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
-
                 DataSet ds = new DataSet();
                 adp.Fill(ds);
                 dtBCThang = new DataTable();
@@ -6081,10 +6106,14 @@ namespace Vs.TimeAttendance
                     col++;
                     oSheet.Cells[6, col] = "Lễ, Tết";
                     col++;
-                    oSheet.Cells[6, col] = "Tổng công";
+                    oSheet.Cells[6, col] = "Tổng cộng";
                 }
                 if (type == 2 || type == 3)
                 {
+                    if(type == 2)
+                    {
+                        col++;
+                    }
                     oSheet.Cells[6, col] = "Giờ làm thêm BT";
                     col++;
                     oSheet.Cells[6, col] = "Giờ làm thêm CN";
@@ -6119,21 +6148,19 @@ namespace Vs.TimeAttendance
                     }
                     rowCnt++;
                 }
-
                 //Đổ dữ liệu của xí nghiệp
-                oSheet.Range[oSheet.Cells[7 + 1, 1], oSheet.Cells[rowCnt, lastColumn]].Value2 = rowData;
+                oSheet.Range[oSheet.Cells[7, 1], oSheet.Cells[rowCnt, lastColumn]].Value2 = rowData;
 
-                formatRange = oSheet.Range[oSheet.Cells[7, 1], oSheet.Cells[rowCnt, lastColumn]]; //27 + 31
+                formatRange = oSheet.Range[oSheet.Cells[6, 1], oSheet.Cells[rowCnt, lastColumn]]; //27 + 31
                 formatRange.Font.Name = fontName;
-
-
-                for (col = 3; col <= lastColumn; col++)
+                for (col = 3; col <= lastColumn - 2; col++)
                 {
-                    formatRange = oSheet.Range[oSheet.Cells[8, col], oSheet.Cells[rowCnt, col]];
+                    formatRange = oSheet.Range[oSheet.Cells[7, col], oSheet.Cells[rowCnt, col]];
                     formatRange.NumberFormat = "0.00;-0;;@";
+                    formatRange.Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                    formatRange.Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
                     try { formatRange.TextToColumns(Type.Missing, Microsoft.Office.Interop.Excel.XlTextParsingType.xlDelimited, Microsoft.Office.Interop.Excel.XlTextQualifier.xlTextQualifierDoubleQuote); } catch { }
                 }
-
                 dTNgay = lk_TuNgay.DateTime;
                 col = 4;
                 while (dTNgay <= dDNgay)

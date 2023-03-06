@@ -5,6 +5,7 @@ using Microsoft.ApplicationBlocks.Data;
 using System;
 using System.Data;
 using System.Diagnostics;
+using System.Linq;
 using Vs.Report;
 
 namespace Vs.HRM
@@ -35,7 +36,8 @@ namespace Vs.HRM
             }
             else if (Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString() == "DM")
             {
-                rdo_ChonBaoCao.Properties.Items.RemoveAt(2);
+                rdo_ChonBaoCao.Properties.Items.Remove(rdo_ChonBaoCao.Properties.Items.Where(x => x.Tag.ToString() == "rdo_QuaTrinhCongTacCN").FirstOrDefault());
+                rdo_ChonBaoCao.Properties.Items.Remove(rdo_ChonBaoCao.Properties.Items.Where(x => x.Tag.ToString() == "rdo_QuyetDinhDieuChuyenNS").FirstOrDefault());
             }
             else
             {
@@ -142,7 +144,6 @@ namespace Vs.HRM
                 cmd.Parameters.Add("@ID_CN", SqlDbType.Int).Value = idCN;
                 cmd.Parameters.Add("@ID_SQD", SqlDbType.Int).Value = idCT;
                 cmd.CommandType = CommandType.StoredProcedure;
-
                 System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
                 DataSet ds = new DataSet();
                 adp.Fill(ds);
@@ -250,6 +251,63 @@ namespace Vs.HRM
             }
             #endregion
         }
+
+        private void InQuyetDinhDieuChuyenNS_AP()
+        {
+            #region in mới
+            try
+            {
+                //lấy data dữ liệu
+                DataTable dt = new DataTable();
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "rptQuyetDinhDieuChuyen_AP", Commons.Modules.UserName, Commons.Modules.TypeLanguage, idCN, idCT, 3));
+                DataRow row = dt.Rows[0];
+                string sPath = "";
+                sPath = Commons.Modules.MExcel.SaveFiles("Work file (*.doc)|*.docx");
+                if (sPath == "") return;
+
+                //fill vào báo cáo
+                //var date = Convert.ToDateTime(row["NGAY_BAT_DAU_HD"]);
+                var date = dNgayIn.DateTime;
+                Document baoCao = new Document("Template\\TemplateAP\\QuyetDinhDieuChuyenNS.doc");
+                baoCao.MailMerge.Execute(new[] { "Ngay_Thang_Nam_BC" }, new[] { string.Format("ngày {0} tháng {1} năm {2}", date.Day, date.Month, date.Year) });
+                foreach (DataColumn item in dt.Columns)
+                {
+                    if (Commons.Modules.ObjSystems.IsnullorEmpty(row[item]))
+                    {
+                        baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { ".................................." });
+
+                        continue;
+                    }
+                    switch (item.DataType.Name)
+                    {
+                        case "DateTime":
+                            {
+                                baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { Convert.ToDateTime(row[item]).ToString("dd/MM/yyyy") });
+                                break;
+                            }
+                        case "Double":
+                            {
+                                baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { string.Format("{0:#,##0}", row[item]) });
+                                break;
+                            }
+                        default:
+                            {
+                                baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { row[item] });
+                                break;
+
+                            }
+                    }
+                }
+                baoCao.Save(sPath);
+                Process.Start(sPath);
+            }
+            catch (Exception ex)
+            {
+            }
+            #endregion
+        }
+
+
         private void InQuyetDinhBoNhiem_AP()
         {
             
@@ -382,17 +440,17 @@ namespace Vs.HRM
             {
                 case "In":
                     {
-                        int n = rdo_ChonBaoCao.SelectedIndex;
-                        if (rdo_ChonBaoCao.Properties.Items.Count < 3)
+                        //int n = rdo_ChonBaoCao.SelectedIndex;
+                        //if (rdo_ChonBaoCao.Properties.Items.Count < 4)
+                        //{
+                        //    if (Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString() != "DM")
+                        //    {
+                        //        n = (n >= 1 ? n + 1 : n);
+                        //    }
+                        //}
+                        switch (rdo_ChonBaoCao.Properties.Items[rdo_ChonBaoCao.SelectedIndex].Tag)
                         {
-                            if (Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString() != "DM")
-                            {
-                                n = (n >= 1 ? n + 1 : n);
-                            }
-                        }
-                        switch (n)
-                        {
-                            case 0:
+                            case "rdo_QuyetDinhDieuChuyen":
                                 {
                                     switch (Commons.Modules.KyHieuDV)
                                     {
@@ -432,7 +490,13 @@ namespace Vs.HRM
                                     }
                                     break;
                                 }
-                            case 1:
+                            case "rdo_QuyetDinhDieuChuyenNS":
+                                {
+                                    InQuyetDinhDieuChuyenNS_AP();
+                                    break;
+
+                                }
+                            case "rdo_QuyetDinhTuyenDung":
                                 {
                                     switch (Commons.Modules.KyHieuDV)
                                     {
@@ -463,9 +527,9 @@ namespace Vs.HRM
 
                                     break;
                                 }
-                            case 2:
+                            case "rdo_QuaTrinhCongTacCN":
                                 {
-                                    switch (Commons.Modules.ObjSystems.KyHieuDV_CN(idCN))
+                                    switch (Commons.Modules.KyHieuDV)
                                     {
                                         case "NB":
                                             {

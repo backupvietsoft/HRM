@@ -49,9 +49,10 @@ namespace Vs.Recruit
             enableButon(false);
             Commons.Modules.sPS = "";
             cboTayNghe_EditValueChanged(null, null);
+            //txtThuongGT.Properties.Mask.EditMask = "N" + Commons.Modules.iSoLeTT.ToString() + "";
+            //txtThuongTN.Properties.Mask.EditMask = "N" + Commons.Modules.iSoLeTT.ToString() + "";
             Commons.Modules.ObjSystems.HideWaitForm();
         }
-
 
         private void LoadCombo()
         {
@@ -312,6 +313,7 @@ namespace Vs.Recruit
                     txtID_VTTD_1.EditValue = null;
                     txtID_VTTD_2.EditValue = null;
                     txtMUC_LUONG_MONG_MUON.EditValue = "";
+                    txtMSCN.EditValue = "";
                     datNGAY_CO_THE_DI_LAM.EditValue = null;
                     cboID_CN.EditValue = null;
                     datNGAY_HEN_DL.EditValue = null;
@@ -341,10 +343,15 @@ namespace Vs.Recruit
                     if (dt.Rows.Count == 0) return;
                     try
                     {
-                        Byte[] data = new Byte[0];
-                        data = (Byte[])(dt.Rows[0]["HINH_UV"]);
-                        MemoryStream mem = new MemoryStream(data);
-                        HINH_UVPictureEdit.EditValue = Image.FromStream(mem);
+                        string imagePath = dt.Rows[0]["HINH_UV_URL"].ToString();
+                        if (System.IO.File.Exists(imagePath))
+                        {
+                            HINH_UVPictureEdit.LoadAsync(imagePath);
+                        }
+                        else
+                        {
+                            HINH_UVPictureEdit.EditValue = null;
+                        }
                     }
                     catch
                     {
@@ -385,6 +392,9 @@ namespace Vs.Recruit
                         txtID_VTTD_1.EditValue = dt.Rows[0]["VI_TRI_TD_1"];
                         txtID_VTTD_2.EditValue = dt.Rows[0]["VI_TRI_TD_2"];
                         txtMUC_LUONG_MONG_MUON.EditValue = dt.Rows[0]["MUC_LUONG_MONG_MUON"];
+                        txtThuongGT.EditValue = dt.Rows[0]["THUONG_GT"];
+                        txtThuongTN.EditValue = dt.Rows[0]["THUONG_TN"];
+                        txtMSCN.EditValue = dt.Rows[0]["MS_CN"];
                         datNGAY_CO_THE_DI_LAM.EditValue = dt.Rows[0]["NGAY_CO_THE_DI_LAM"];
                         cboID_CN.EditValue = dt.Rows[0]["ID_CN"];
                         datNGAY_HEN_DL.EditValue = dt.Rows[0]["NGAY_HEN_DI_LAM"];
@@ -492,6 +502,14 @@ namespace Vs.Recruit
             cboTrinhDoHocVan.Properties.ReadOnly = visible;
             txtCongDoan.Properties.ReadOnly = visible;
             cboVTPhuHop.Properties.ReadOnly = visible;
+            if(visible == false)
+            {
+                cboID_CN_EditValueChanged(null,null);
+            }   
+            else
+            {
+                txtThuongGT.Properties.ReadOnly = visible;
+            }
 
         }
         private byte[] imgToByteConverter(Image inImg)
@@ -524,6 +542,41 @@ namespace Vs.Recruit
             }
             return currentByteImageArray;
         }
+
+        private string SaveImage(string imageURL) // sLoai
+        {
+            try
+            {
+                if (imageURL.Trim() == "") return "";
+                var strDuongDanTmp = Commons.Modules.ObjSystems.CapnhatTL("HinhCongNhan\\", false);
+                string strDuongDan = "";
+                strDuongDan = imageURL;
+                string TenFile;
+                TenFile = System.IO.Path.GetFileName(imageURL);
+                string a = "";
+                if (Commons.Modules.ObjSystems.KiemFileTonTai(strDuongDanTmp + @"\" + txtMS_UV.Text + ".jpg") == false)
+                    a = strDuongDanTmp + @"\" + txtMS_UV.Text + ".jpg";
+                else
+                {
+                    TenFile = Commons.Modules.ObjSystems.STTFileCungThuMuc(strDuongDanTmp, txtMS_UV.Text + ".jpg");
+                    a = strDuongDanTmp + @"\" + txtMS_UV.Text + ".jpg";
+                }
+                try
+                {
+                    FileInfo file = new FileInfo(a);
+                    file.Delete();
+                }
+                catch { }
+
+                Commons.Modules.ObjSystems.LuuDuongDan(strDuongDan, a);
+                return a;
+            }
+            catch
+            {
+                return "";
+            }
+        }
+
         private bool SaveData()
         {
             try
@@ -534,7 +587,7 @@ namespace Vs.Recruit
                 iIDUV = Convert.ToInt64(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spUpdateUngVien",
                 iIDUV,
                 txtMS_UV.EditValue,
-                imgToByteConverter(HINH_UVPictureEdit.Image),
+                HINH_UVPictureEdit.EditValue == null ? "-1" : SaveImage(HINH_UVPictureEdit.GetLoadedImageLocation()),
                 txtHO.EditValue,
                 txtTEN.EditValue,
                 datNGAY_SINH.Text.ToString() == "" ? DBNull.Value : datNGAY_SINH.EditValue,
@@ -564,6 +617,7 @@ namespace Vs.Recruit
                 txtID_VTTD_1.EditValue,
                 txtID_VTTD_2.EditValue,
                 txtMUC_LUONG_MONG_MUON.EditValue,
+                txtThuongGT.EditValue.ToString() == "" ? 0 : txtThuongGT.EditValue,
                 datNGAY_CO_THE_DI_LAM.Text.ToString() == "" ? DBNull.Value : datNGAY_CO_THE_DI_LAM.EditValue,
                 txtNGUOI_LIEN_HE.EditValue,
                 txtDT_NGUOI_LIEN_HE.EditValue,
@@ -796,7 +850,6 @@ namespace Vs.Recruit
             }
             catch
             {
-
             }
         }
 
@@ -808,6 +861,18 @@ namespace Vs.Recruit
         private void grvKNLV_InvalidValueException(object sender, DevExpress.XtraEditors.Controls.InvalidValueExceptionEventArgs e)
         {
             e.ExceptionMode = DevExpress.XtraEditors.Controls.ExceptionMode.NoAction;
+        }
+
+        private void cboID_CN_EditValueChanged(object sender, EventArgs e)
+        {
+            if(cboID_CN.Text != "")
+            {
+                txtThuongGT.Properties.ReadOnly = false;
+            }    
+            else
+            {
+                txtThuongGT.Properties.ReadOnly = true;
+            }    
         }
     }
 }

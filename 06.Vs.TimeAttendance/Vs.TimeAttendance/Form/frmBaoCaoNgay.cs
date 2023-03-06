@@ -68,7 +68,6 @@ namespace Vs.TimeAttendance
                                     System.Data.SqlClient.SqlConnection conn;
                                     dt = new DataTable();
                                     frm.rpt = new rptDSVangDauGioTheoDV(dNgayIn.DateTime, dNgayDL);
-
                                     try
                                     {
                                         conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
@@ -79,7 +78,7 @@ namespace Vs.TimeAttendance
                                         cmd.Parameters.Add("@Dvi", SqlDbType.Int).Value = ID_DV;
                                         cmd.Parameters.Add("@XN", SqlDbType.Int).Value = ID_XN;
                                         cmd.Parameters.Add("@TO", SqlDbType.Int).Value = ID_TO;
-                                        cmd.Parameters.Add("@DNgay", SqlDbType.Date).Value = dNgayDL;
+                                        cmd.Parameters.Add("@DNgay", SqlDbType.DateTime).Value = dNgayDL;
                                         cmd.Parameters.Add("@LoaiBC", SqlDbType.Int).Value = 1;
                                         cmd.CommandType = CommandType.StoredProcedure;
                                         System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
@@ -92,7 +91,7 @@ namespace Vs.TimeAttendance
                                         frm.AddDataSource(dt);
                                         frm.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung());
                                     }
-                                    catch
+                                    catch(Exception ex)
                                     { }
                                     frm.ShowDialog();
                                     break;

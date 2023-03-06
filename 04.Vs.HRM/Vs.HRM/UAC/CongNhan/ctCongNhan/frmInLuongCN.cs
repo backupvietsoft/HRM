@@ -24,7 +24,6 @@ namespace Vs.HRM
             dNgayHL = ngayhl;
             Commons.Modules.ObjSystems.ThayDoiNN(this);
         }
-
         //sự kiên load form
         private void formInLuongCN_Load(object sender, EventArgs e)
         {
@@ -35,6 +34,12 @@ namespace Vs.HRM
             {
                 rdo_ChonBaoCao.Properties.Items.RemoveAt(1);
             }
+
+            if (Commons.Modules.KyHieuDV == "AP")
+            {
+                rdo_ChonBaoCao.Properties.Items.RemoveAt(0);
+            }
+
         }
         //sự kiện các nút xử lí
         private void windowsUIButton_ButtonClick(object sender, DevExpress.XtraBars.Docking2010.ButtonEventArgs e)

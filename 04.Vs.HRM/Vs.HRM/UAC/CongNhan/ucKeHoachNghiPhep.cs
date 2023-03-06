@@ -165,43 +165,50 @@ namespace Vs.HRM
         }
         private void LoadGrdCongNhan(bool cochon)
         {
-            DataTable dt = new DataTable();
-            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, Commons.Modules.KyHieuDV == "NB" ? "spGetCongNhanNghiPhep_NB" : "spGetCongNhanNghiPhep", cboSearch_DV.EditValue, cboSearch_XN.EditValue, cboSearch_TO.EditValue, dateNam.DateTime.Year, Commons.Modules.UserName, Commons.Modules.TypeLanguage));
-            dt.PrimaryKey = new DataColumn[] { dt.Columns["ID_CN"] };
-            if (grdDSCN.DataSource == null)
+            try
             {
-                Commons.Modules.ObjSystems.MLoadXtraGrid(grdDSCN, grvDSCN, dt, false, false, true, true, true, this.Name);
-            }
-            else
-            {
-                grdDSCN.DataSource = dt;
-            }
-            dt.Columns["CHON"].ReadOnly = false;
-            grvDSCN.Columns["ID_CN"].Visible = false;
-            grvDSCN.Columns["CHON"].Visible = false;
-            grvDSCN.Columns["MS_CN_INT"].Visible = false;
-            grvDSCN.Columns["TinhTrang"].Visible = false;
-            if (cochon == false)
-            {
-                grvDSCN.OptionsSelection.ShowCheckBoxSelectorInColumnHeader = DevExpress.Utils.DefaultBoolean.False;
-                grvDSCN.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.RowSelect;
-            }
-            else
-            {
+                DataTable dt = new DataTable();
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, Commons.Modules.KyHieuDV == "NB" ? "spGetCongNhanNghiPhep_NB" : "spGetCongNhanNghiPhep", cboSearch_DV.EditValue, cboSearch_XN.EditValue, cboSearch_TO.EditValue, dateNam.DateTime.Year, Commons.Modules.UserName, Commons.Modules.TypeLanguage));
+                dt.PrimaryKey = new DataColumn[] { dt.Columns["ID_CN"] };
+                if (grdDSCN.DataSource == null)
+                {
+                    Commons.Modules.ObjSystems.MLoadXtraGrid(grdDSCN, grvDSCN, dt, false, false, true, true, true, this.Name);
+                }
+                else
+                {
+                    grdDSCN.DataSource = dt;
+                }
+                dt.Columns["CHON"].ReadOnly = false;
+                grvDSCN.Columns["ID_CN"].Visible = false;
+                grvDSCN.Columns["CHON"].Visible = false;
+                grvDSCN.Columns["MS_CN"].Visible = false;
+                grvDSCN.Columns["TinhTrang"].Visible = false;
+                if (cochon == false)
+                {
+                    grvDSCN.OptionsSelection.ShowCheckBoxSelectorInColumnHeader = DevExpress.Utils.DefaultBoolean.False;
+                    grvDSCN.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.RowSelect;
+                }
+                else
+                {
 
-                grvDSCN.OptionsSelection.ShowCheckBoxSelectorInColumnHeader = DevExpress.Utils.DefaultBoolean.True;
-                grvDSCN.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CheckBoxRowSelect;
-                grvDSCN.OptionsSelection.CheckBoxSelectorField = "CHON";
-            }
+                    grvDSCN.OptionsSelection.ShowCheckBoxSelectorInColumnHeader = DevExpress.Utils.DefaultBoolean.True;
+                    grvDSCN.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CheckBoxRowSelect;
+                    grvDSCN.OptionsSelection.CheckBoxSelectorField = "CHON";
+                }
 
-            if (iIDCN_Temp != -1)
-            {
-                int index = dt.Rows.IndexOf(dt.Rows.Find(iIDCN_Temp));
-                grvDSCN.FocusedRowHandle = grvDSCN.GetRowHandle(index);
-                grvDSCN.ClearSelection();
-                grvDSCN.SelectRow(index);
+                if (iIDCN_Temp != -1)
+                {
+                    int index = dt.Rows.IndexOf(dt.Rows.Find(iIDCN_Temp));
+                    grvDSCN.FocusedRowHandle = grvDSCN.GetRowHandle(index);
+                    grvDSCN.ClearSelection();
+                    grvDSCN.SelectRow(index);
+                }
+                //grvDSCN.OptionsView.ColumnAutoWidth = true;
             }
-            //grvDSCN.OptionsView.ColumnAutoWidth = true;
+            catch (Exception ex)
+            {
+            }
+           
         }
         private void LoadGrdKHNP()
         {
@@ -609,11 +616,18 @@ namespace Vs.HRM
                     }
                 case "khongluu":
                     {
-                        ((DataTable)grdKHNP.DataSource).Clear();
-                        LoadGrdKHNP();
-                        grvDSCN_FocusedRowChanged(null, null);
-                        Commons.Modules.ObjSystems.DeleteAddRow(grvKHNP);
-                        enableButon(true);
+                        try
+                        {
+                            ((DataTable)grdKHNP.DataSource).Clear();
+                            LoadGrdKHNP();
+                            grvDSCN_FocusedRowChanged(null, null);
+                            Commons.Modules.ObjSystems.DeleteAddRow(grvKHNP);
+                            enableButon(true);
+                        }
+                        catch
+                        {
+                        }
+                     
                         break;
                     }
                 case "thoat":

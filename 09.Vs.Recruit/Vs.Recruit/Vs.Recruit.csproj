@@ -259,6 +259,12 @@
     <Compile Include="Form\frmInBDNguonTuyenDung.designer.cs">
       <DependentUpon>frmInBDNguonTuyenDung.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form\frmInChiTraTN_NGT.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\frmInChiTraTN_NGT.Designer.cs">
+      <DependentUpon>frmInChiTraTN_NGT.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form\frmInTinhHinhTD.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -566,6 +572,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form\frmInBDNguonTuyenDung.resx">
       <DependentUpon>frmInBDNguonTuyenDung.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\frmInChiTraTN_NGT.resx">
+      <DependentUpon>frmInChiTraTN_NGT.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\frmInTinhHinhTD.resx">
       <DependentUpon>frmInTinhHinhTD.cs</DependentUpon>

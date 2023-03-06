@@ -77,7 +77,7 @@ namespace VietSoftHRM
                 Commons.Modules.iLOAI_CN = Convert.ToInt32(dt.Rows[0]["LOAI_CN"]);//1 cập nhật trên server//2 cập nhật net.
                 Commons.Modules.KyHieuDV = Convert.ToString(dt.Rows[0]["KY_HIEU_DV"]);
                 Commons.Modules.sHideMenu = Commons.Modules.ObjSystems.Decrypt(dt.Rows[0]["HIDE_MENU"].ToString(), true);
-                Commons.Modules.connect = Convert.ToString(dt.Rows[0]["CON_NECT"]);
+                Commons.Modules.connect = Commons.Modules.ObjSystems.Decrypt(dt.Rows[0]["CON_NECT"].ToString(), true);
                 Commons.Modules.iGio = Convert.ToDouble(dt.Rows[0]["SG_LV"]);
                 Commons.Modules.iLamTronGio = Convert.ToInt32(dt.Rows[0]["LOAI_LT_CC"]); //0 Khong lam tron giờ//1 làm tròn giờ
                 try

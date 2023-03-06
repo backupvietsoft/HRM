@@ -476,37 +476,44 @@ namespace Vs.TimeAttendance
 
         private void EnableButon(bool visible)
         {
-            if (Commons.Modules.ObjSystems.DataTinhTrangBangLuong(Convert.ToInt32(cboDonVi.EditValue), Commons.Modules.ObjSystems.ConvertDateTime(cboThang.Text)) == 2)
+            try
             {
-                btnALL.Buttons[0].Properties.Visible = false;
-                btnALL.Buttons[1].Properties.Visible = false;
-                btnALL.Buttons[2].Properties.Visible = false;
+                if (Commons.Modules.ObjSystems.DataTinhTrangBangLuong(Convert.ToInt32(cboDonVi.EditValue), Commons.Modules.ObjSystems.ConvertDateTime(cboThang.Text)) == 2)
+                {
+                    btnALL.Buttons[0].Properties.Visible = false;
+                    btnALL.Buttons[1].Properties.Visible = false;
+                    btnALL.Buttons[2].Properties.Visible = false;
 
-                btnALL.Buttons[3].Properties.Visible = false;
-                btnALL.Buttons[4].Properties.Visible = false;
-                btnALL.Buttons[5].Properties.Visible = false;
+                    btnALL.Buttons[3].Properties.Visible = false;
+                    btnALL.Buttons[4].Properties.Visible = false;
+                    btnALL.Buttons[5].Properties.Visible = false;
 
-                btnALL.Buttons[7].Properties.Visible = false;
-                btnALL.Buttons[8].Properties.Visible = false;
+                    btnALL.Buttons[7].Properties.Visible = false;
+                    btnALL.Buttons[8].Properties.Visible = false;
+                }
+                else
+                {
+                    btnALL.Buttons[0].Properties.Visible = visible;
+                    btnALL.Buttons[1].Properties.Visible = !visible;
+                    btnALL.Buttons[2].Properties.Visible = visible;
+
+                    btnALL.Buttons[3].Properties.Visible = !visible;
+                    btnALL.Buttons[4].Properties.Visible = !visible;
+                    btnALL.Buttons[5].Properties.Visible = !visible;
+                    btnALL.Buttons[6].Properties.Visible = !visible;
+
+                    btnALL.Buttons[7].Properties.Visible = visible;
+                    btnALL.Buttons[8].Properties.Visible = visible;
+                    cboTo.Enabled = !visible;
+                    cboThang.Enabled = !visible;
+                    cboDonVi.Enabled = !visible;
+                    cboXiNghiep.Enabled = !visible;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                btnALL.Buttons[0].Properties.Visible = visible;
-                btnALL.Buttons[1].Properties.Visible = !visible;
-                btnALL.Buttons[2].Properties.Visible = visible;
-
-                btnALL.Buttons[3].Properties.Visible = !visible;
-                btnALL.Buttons[4].Properties.Visible = !visible;
-                btnALL.Buttons[5].Properties.Visible = !visible;
-                btnALL.Buttons[6].Properties.Visible = !visible;
-
-                btnALL.Buttons[7].Properties.Visible = visible;
-                btnALL.Buttons[8].Properties.Visible = visible;
-                cboTo.Enabled = !visible;
-                cboThang.Enabled = !visible;
-                cboDonVi.Enabled = !visible;
-                cboXiNghiep.Enabled = !visible;
             }
+    
         }
 
         private void XoaCheDoLV()

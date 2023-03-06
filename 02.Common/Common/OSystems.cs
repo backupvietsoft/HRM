@@ -208,8 +208,16 @@ namespace Commons
                 }
                 catch
                 {
-                    ngay = DateTime.ParseExact("01/01/" + sDate, "dd/MM/yyyy", cultures);
-                    return ngay;
+                    try
+                    {
+                        ngay = DateTime.ParseExact("01/0" + sDate, "dd/MM/yyyy", cultures);
+                        return ngay;
+                    }
+                    catch
+                    {
+                        ngay = DateTime.ParseExact("01/01/" + sDate, "dd/MM/yyyy", cultures);
+                        return ngay;
+                    }
                 }
             }
         }

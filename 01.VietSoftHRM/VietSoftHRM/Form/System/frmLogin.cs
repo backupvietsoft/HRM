@@ -298,10 +298,10 @@ namespace VietSoftHRM
         }
         private void frmLogin_Shown(object sender, EventArgs e)
         {
-            if (!clsMain.CheckServer())
-            {
-                Application.Exit();
-            }
+            //if (!clsMain.CheckServer())
+            //{
+            //    Application.Exit();
+            //}
         }
 
         private void pic_database_DoubleClick(object sender, EventArgs e)

@@ -13,8 +13,6 @@ using Microsoft.Office.Interop.Excel;
 using System.Windows.Forms;
 using DataTable = System.Data.DataTable;
 
-
-
 namespace Vs.HRM
 {
     public partial class ucBaoCaoGiaiDoan : DevExpress.XtraEditors.XtraUserControl
@@ -27,6 +25,7 @@ namespace Vs.HRM
         {
             InitializeComponent();
             Commons.Modules.ObjSystems.ThayDoiNN(this, windowsUIButton);
+            chkInTheoCongNhan.Checked = true;
         }
         static string CharacterIncrement(int colCount)
         {
@@ -152,6 +151,11 @@ namespace Vs.HRM
                             case "MT":
                                 {
                                     ChamCongChiTietCN();
+                                    break;
+                                }
+                            case "AP":
+                                {
+                                    ChamCongChiTietCN_AP();
                                     break;
                                 }
                             default:
@@ -1025,6 +1029,52 @@ namespace Vs.HRM
 
             }
         }
+
+        private void ChamCongChiTietCN_AP()
+        {
+            frmViewReport frm = new frmViewReport();
+            DataTable dt;
+            System.Data.SqlClient.SqlConnection conn2;
+            dt = new DataTable();
+            frm.rpt = new rptBangCCTheoGD_AP(lk_TuNgay.DateTime, lk_DenNgay.DateTime, lk_NgayIn.DateTime);
+            try
+            {
+                conn2 = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                conn2.Open();
+                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand(Commons.Modules.ObjSystems.returnSps(Commons.Modules.chamCongK, "rptChiTietQuetTheCNGD_AP"), conn2);
+                cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                cmd.Parameters.Add("@Dvi", SqlDbType.Int).Value = LK_DON_VI.EditValue;
+                cmd.Parameters.Add("@XN", SqlDbType.Int).Value = LK_XI_NGHIEP.EditValue;
+                cmd.Parameters.Add("@TO", SqlDbType.Int).Value = LK_TO.EditValue;
+                cmd.Parameters.Add("@TNgay", SqlDbType.Date).Value = lk_TuNgay.DateTime;
+                cmd.Parameters.Add("@DNgay", SqlDbType.Date).Value = lk_DenNgay.DateTime;
+                cmd.CommandType = CommandType.StoredProcedure;
+                System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+                //LOAD BÁO CÁO CỦA 1 CÔNG ANH ĐƯỢC CHỌN
+                if (chkInTheoCongNhan.Checked)
+                {
+                    cmd.Parameters.Add("@CN", SqlDbType.Int).Value = Convert.ToInt32(grvCN.GetFocusedRowCellValue("ID_CN"));
+                }
+                else
+                {
+                    //LOAD BÁO CÁO TẤT CẢ CÔNG NHÂN
+                    cmd.Parameters.Add("@CN", SqlDbType.Int).Value = -1;
+                }
+                DataSet ds = new DataSet();
+                adp.Fill(ds);
+                dt = new DataTable();
+                dt = ds.Tables[0].Copy();
+                dt.TableName = "DA_TA";
+                frm.AddDataSource(dt);
+                frm.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung());
+            }
+            catch(Exception ex)
+            { }
+            frm.ShowDialog();
+        }
+
+
         private void ChamCongChiTietCN()
         {
             frmViewReport frm = new frmViewReport();
@@ -1068,7 +1118,6 @@ namespace Vs.HRM
                 frm.AddDataSource(dt);
                 frm.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung());
             }
-
             catch
             { }
 

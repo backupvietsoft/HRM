@@ -12,15 +12,11 @@ namespace Vs.Report
     {
         public rptBangCCTheoGD_AP(DateTime tngay,DateTime dngay, DateTime ngayin)
         {
-
-
             InitializeComponent();
             Commons.Modules.ObjSystems.ThayDoiNN(this);
             xrSubreport1.ReportSource = new SubReportHeader();
-
             DataTable dtNgu = new DataTable();
             dtNgu.Load(Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT KEYWORD, CASE " + Commons.Modules.TypeLanguage + " WHEN 0 THEN VIETNAM WHEN 1 THEN ENGLISH ELSE CHINESE END AS NN  FROM LANGUAGES WHERE FORM = N'NgayThangNam' "));
-
             string Ngay = "0" + ngayin.Day;
             string Thang = "0" + ngayin.Month;
             string Nam = "00" + ngayin.Year;
@@ -46,6 +42,5 @@ namespace Vs.Report
                 Commons.Modules.ObjSystems.GetNN(dtNgu, "Nam", "NgayThangNam") + " " + Nam.Substring(Nam.Length - 4, 4);
 
         }
-
     }
 }

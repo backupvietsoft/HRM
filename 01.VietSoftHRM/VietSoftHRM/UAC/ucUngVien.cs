@@ -369,6 +369,13 @@ namespace VietSoftHRM
                         tmp.ShowDialog();
                         break;
                     }
+                case "mnuBCChiTraChinhSach":
+                    {
+                        frmInChiTraTN_NGT tmp = new frmInChiTraTN_NGT();
+                        Commons.Modules.ObjSystems.HideWaitForm();
+                        tmp.ShowDialog();
+                        break;
+                    }
                 #endregion  
 
                 default:

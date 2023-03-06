@@ -89,7 +89,7 @@ namespace Vs.Recruit
                 //int weekNum = ciCurr.Calendar.GetWeekOfYear(Convert.ToDateTime("31/12/2022"), CalendarWeekRule.FirstDay, DayOfWeek.Monday);
                 //int n = DateTime.Now.DayOfYear;
                 //var firstDayWeek = ciCurr.Calendar.
-                Application.Run(new frmInBDNguonTuyenDung());
+                Application.Run(new frmInChiTraTN_NGT());
                 //Application.Run(new frmInBDUngVienTheoKhuVuc());
                 //frmViewReport frm = new frmViewReport();
                 //XtraReport1 fpt = new XtraReport1();

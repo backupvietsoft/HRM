@@ -159,14 +159,14 @@ namespace Vs.Recruit
                     {
                         if (!dxValidationProvider1.Validate()) return;
                         //kiểm tra nếu là công nhân may thì phải nhập tây nghề
-                        if(Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr,CommandType.Text, "SELECT ISNULL(ID_LT,0) FROM dbo.LOAI_CONG_VIEC WHERE ID_LCV = " + cboVTPhuHop.EditValue + "")) ==1 )
+                        if (Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT ISNULL(ID_LT,0) FROM dbo.LOAI_CONG_VIEC WHERE ID_LCV = " + cboVTPhuHop.EditValue + "")) == 1)
                         {
-                            if(cboTayNghe.Text == "")
+                            if (cboTayNghe.Text == "")
                             {
                                 XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgBanChuaNhap") + lblTayNghe.Text, Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 return;
-                            }    
-                        }    
+                            }
+                        }
                         System.Data.SqlClient.SqlConnection conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
                         conn.Open();
                         System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spkiemtrungMSUV", conn);
@@ -341,10 +341,20 @@ namespace Vs.Recruit
                     if (dt.Rows.Count == 0) return;
                     try
                     {
-                        Byte[] data = new Byte[0];
-                        data = (Byte[])(dt.Rows[0]["HINH_UV"]);
-                        MemoryStream mem = new MemoryStream(data);
-                        HINH_UVPictureEdit.EditValue = Image.FromStream(mem);
+                        //Byte[] data = new Byte[0];
+                        //data = (Byte[])(dt.Rows[0]["HINH_UV"]);
+                        //MemoryStream mem = new MemoryStream(data);
+                        //HINH_UVPictureEdit.EditValue = Image.FromStream(mem);
+
+                        string imagePath = dt.Rows[0]["HINH_UV_URL"].ToString();
+                        if(System.IO.File.Exists(imagePath))
+                        {
+                            HINH_UVPictureEdit.LoadAsync(imagePath);
+                        }
+                        else
+                        {
+                            HINH_UVPictureEdit.EditValue = null;
+                        }
                     }
                     catch
                     {
@@ -524,6 +534,39 @@ namespace Vs.Recruit
             }
             return currentByteImageArray;
         }
+        private string SaveImage(string imageURL) // sLoai
+        {
+            try
+            {
+                if (imageURL.Trim() == "") return "";
+                var strDuongDanTmp = Commons.Modules.ObjSystems.CapnhatTL("HinhCongNhan\\", false);
+                string strDuongDan = "";
+                strDuongDan = imageURL;
+                string TenFile;
+                TenFile = System.IO.Path.GetFileName(imageURL);
+                string a = "";
+                if (Commons.Modules.ObjSystems.KiemFileTonTai(strDuongDanTmp + @"\" + txtMS_UV.Text + ".jpg") == false)
+                    a = strDuongDanTmp + @"\" + txtMS_UV.Text + ".jpg";
+                else
+                {
+                    TenFile = Commons.Modules.ObjSystems.STTFileCungThuMuc(strDuongDanTmp, txtMS_UV.Text + ".jpg");
+                    a = strDuongDanTmp + @"\" + txtMS_UV.Text + ".jpg";
+                }
+                try
+                {
+                    FileInfo file = new FileInfo(a);
+                    file.Delete();
+                }
+                catch { }
+
+                Commons.Modules.ObjSystems.LuuDuongDan(strDuongDan, a);
+                return a;
+            }
+            catch
+            {
+                return "";
+            }
+        }
         private bool SaveData()
         {
             try
@@ -534,7 +577,7 @@ namespace Vs.Recruit
                 iIDUV = Convert.ToInt64(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spUpdateUngVien",
                 iIDUV,
                 txtMS_UV.EditValue,
-                imgToByteConverter(HINH_UVPictureEdit.Image),
+                HINH_UVPictureEdit.EditValue == null ? "-1" : SaveImage(HINH_UVPictureEdit.GetLoadedImageLocation()),
                 txtHO.EditValue,
                 txtTEN.EditValue,
                 datNGAY_SINH.Text.ToString() == "" ? DBNull.Value : datNGAY_SINH.EditValue,
@@ -746,15 +789,15 @@ namespace Vs.Recruit
             {
                 if (e.Column.FieldName == "TU_NAM" || e.Column.FieldName == "DEN_NAM")
                 {
-                    if(!string.IsNullOrEmpty(grvKNLV.GetRowCellValue(grvKNLV.FocusedRowHandle, grvKNLV.Columns["TU_NAM"]).ToString()) && !string.IsNullOrEmpty(grvKNLV.GetRowCellValue(grvKNLV.FocusedRowHandle, grvKNLV.Columns["DEN_NAM"]).ToString()))
+                    if (!string.IsNullOrEmpty(grvKNLV.GetRowCellValue(grvKNLV.FocusedRowHandle, grvKNLV.Columns["TU_NAM"]).ToString()) && !string.IsNullOrEmpty(grvKNLV.GetRowCellValue(grvKNLV.FocusedRowHandle, grvKNLV.Columns["DEN_NAM"]).ToString()))
                     {
                         //tính giá trị của từ năm đến năm
                         DateTime TN = Convert.ToDateTime(grvKNLV.GetRowCellValue(grvKNLV.FocusedRowHandle, grvKNLV.Columns["TU_NAM"]).ToString());
                         DateTime DN = Convert.ToDateTime(grvKNLV.GetRowCellValue(grvKNLV.FocusedRowHandle, grvKNLV.Columns["DEN_NAM"]).ToString());
                         TimeSpan tim = DN - TN;
                         string s = (int)(tim.TotalDays / 365) + (Commons.Modules.TypeLanguage == 0 ? " Năm " : " Year ") + (int)((tim.TotalDays % 365) / 30) + (Commons.Modules.TypeLanguage == 0 ? " Tháng" : " Month");
-                        grvKNLV.SetRowCellValue(e.RowHandle, "SO_NAM",s);
-                    }    
+                        grvKNLV.SetRowCellValue(e.RowHandle, "SO_NAM", s);
+                    }
 
                 }
             }

@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using DevExpress.Utils;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -57,11 +58,27 @@ namespace VietSoftHRM
             var input = InputTextBox.Text;
             var output = SendRequest(input);
             OutputListBox.Items.Add(output);
+            
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            
+            timer1.Start();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            int x = labelControl1.Location.X;
+            int y = labelControl1.Location.Y;
+            if (x > this.Width)
+            {
+                x = -labelControl1.Width;
+            }
+            else
+            {
+                x += 10; // tốc độ di chuyển
+            }
+            labelControl1.Location = new Point(x, y);
         }
     }
 }

@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions1 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions2 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
             this.windowsUIButton = new DevExpress.XtraBars.Docking2010.WindowsUIButtonPanel();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.popupContainerControl2 = new DevExpress.XtraEditors.PopupContainerControl();
@@ -51,7 +51,7 @@
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.searchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.lk_Nam = new Commons.MPopupContainerEdit();
+            this.lk_Nam = new DevExpress.XtraEditors.DateEdit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.popupContainerControl2)).BeginInit();
@@ -72,6 +72,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lk_Nam.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lk_Nam.Properties)).BeginInit();
             this.SuspendLayout();
             // 
@@ -92,9 +93,9 @@
             this.windowsUIButton.AppearanceButton.Pressed.Options.UseFont = true;
             this.windowsUIButton.AppearanceButton.Pressed.Options.UseImage = true;
             this.windowsUIButton.AppearanceButton.Pressed.Options.UseTextOptions = true;
-            windowsUIButtonImageOptions1.ImageUri.Uri = "Print";
+            windowsUIButtonImageOptions2.ImageUri.Uri = "Print";
             this.windowsUIButton.Buttons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] {
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions1, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "Print", -1, false)});
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions2, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "Print", -1, false)});
             this.windowsUIButton.ContentAlignment = System.Drawing.ContentAlignment.MiddleRight;
             this.windowsUIButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.windowsUIButton.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -156,9 +157,9 @@
             new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 20F),
             new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 20F),
             new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 28F)});
+            this.nam.Controls.Add(this.lk_Nam);
             this.nam.Controls.Add(this.lblThangXem);
             this.nam.Controls.Add(this.datThangXem);
-            this.nam.Controls.Add(this.lk_Nam);
             this.nam.Controls.Add(this.rdo_DiTreVeSom);
             this.nam.Controls.Add(this.rdo_ChonBaoCao);
             this.nam.Controls.Add(this.lbNam);
@@ -400,18 +401,20 @@
             // lk_Nam
             // 
             this.nam.SetColumn(this.lk_Nam, 4);
-            this.lk_Nam.EditValue = "";
+            this.lk_Nam.EditValue = null;
             this.lk_Nam.Location = new System.Drawing.Point(482, 82);
             this.lk_Nam.Name = "lk_Nam";
             this.lk_Nam.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.lk_Nam.Properties.DefaultActionButtonIndex = 0;
-            this.lk_Nam.Properties.DefaultPopupControl = this.popupContainerControl2;
-            this.lk_Nam.Properties.DifferentActionButtonIndex = 0;
-            this.lk_Nam.Properties.DifferentPopupControl = null;
+            this.lk_Nam.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.lk_Nam.Properties.CalendarTimeProperties.DisplayFormat.FormatString = "yyyy";
+            this.lk_Nam.Properties.CalendarTimeProperties.EditFormat.FormatString = "yyyy";
+            this.lk_Nam.Properties.CalendarTimeProperties.MaskSettings.Set("useAdvancingCaret", true);
+            this.lk_Nam.Properties.VistaCalendarViewStyle = DevExpress.XtraEditors.VistaCalendarViewStyle.YearsGroupView;
             this.nam.SetRow(this.lk_Nam, 2);
             this.lk_Nam.Size = new System.Drawing.Size(150, 24);
-            this.lk_Nam.TabIndex = 28;
+            this.lk_Nam.TabIndex = 31;
             // 
             // ucBaoCaoQuanLyPhep
             // 
@@ -446,6 +449,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lk_Nam.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lk_Nam.Properties)).EndInit();
             this.ResumeLayout(false);
 
@@ -473,8 +477,8 @@
         private DevExpress.XtraEditors.RadioGroup rdo_ChonBaoCao;
         private DevExpress.XtraEditors.PopupContainerControl popupContainerControl2;
         private DevExpress.XtraEditors.Controls.CalendarControl calThang;
-        private Commons.MPopupContainerEdit lk_Nam;
         private DevExpress.XtraEditors.LabelControl lblThangXem;
         private DevExpress.XtraEditors.DateEdit datThangXem;
+        private DevExpress.XtraEditors.DateEdit lk_Nam;
     }
 }

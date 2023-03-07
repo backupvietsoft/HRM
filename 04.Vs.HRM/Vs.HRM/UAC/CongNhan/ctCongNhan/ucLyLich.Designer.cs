@@ -1733,7 +1733,7 @@ namespace Vs.HRM
             this.Tab.AppearanceTabPage.PageClient.Options.UseForeColor = true;
             this.Tab.Location = new System.Drawing.Point(0, 239);
             this.Tab.Name = "Tab";
-            this.Tab.SelectedTabPage = this.groupThongTinBaoHiem;
+            this.Tab.SelectedTabPage = this.groupTamTruThuongTru;
             this.Tab.Size = new System.Drawing.Size(1121, 387);
             this.Tab.TabPages.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.groupThongTinBoXung,

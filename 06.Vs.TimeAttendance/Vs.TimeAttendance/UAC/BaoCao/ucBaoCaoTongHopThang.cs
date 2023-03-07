@@ -2074,75 +2074,75 @@ namespace Vs.TimeAttendance
                         formatRange1.AutoFill(formatRange, Microsoft.Office.Interop.Excel.XlAutoFillType.xlFillCopy);
                     }
 
-                    colCT++;
-                    // P Anmual
-                    formatRange1 = oSheet.get_Range(CharacterIncrement(colCT) + (rowBD + 1), CharacterIncrement(colCT) + (rowBD + 1).ToString());
-                    formatRange1.Value2 = "=COUNTIF(E" + (rowBD + 1) + ":" + CharacterIncrement(3 + iSoNgay * 2) + "" + (rowBD + 1) + @",""F"")";
-                    formatRange = oSheet.get_Range(CharacterIncrement(colCT) + (rowBD + 1), CharacterIncrement(colCT) + (rowCnt + 1).ToString());
-                    if (current_dr > 1)
-                    {
-                        formatRange1.AutoFill(formatRange, Microsoft.Office.Interop.Excel.XlAutoFillType.xlFillCopy);
-                    }
+                    //colCT++;
+                    //// P Anmual
+                    //formatRange1 = oSheet.get_Range(CharacterIncrement(colCT) + (rowBD + 1), CharacterIncrement(colCT) + (rowBD + 1).ToString());
+                    //formatRange1.Value2 = "=COUNTIF(E" + (rowBD + 1) + ":" + CharacterIncrement(3 + iSoNgay * 2) + "" + (rowBD + 1) + @",""F"")";
+                    //formatRange = oSheet.get_Range(CharacterIncrement(colCT) + (rowBD + 1), CharacterIncrement(colCT) + (rowCnt + 1).ToString());
+                    //if (current_dr > 1)
+                    //{
+                    //    formatRange1.AutoFill(formatRange, Microsoft.Office.Interop.Excel.XlAutoFillType.xlFillCopy);
+                    //}
 
-                    colCT++;
-                    // CĐ Policy
-                    formatRange1 = oSheet.get_Range(CharacterIncrement(colCT) + (rowBD + 1), CharacterIncrement(colCT) + (rowBD + 1).ToString());
-                    formatRange1.Value2 = "=COUNTIF(E" + (rowBD + 1) + ":" + CharacterIncrement(3 + iSoNgay * 2) + "" + (rowBD + 1) + @",""CĐ"")";
-                    formatRange = oSheet.get_Range(CharacterIncrement(colCT) + (rowBD + 1), CharacterIncrement(colCT) + (rowCnt + 1).ToString());
-                    if (current_dr > 1)
-                    {
-                        formatRange1.AutoFill(formatRange, Microsoft.Office.Interop.Excel.XlAutoFillType.xlFillCopy);
-                    }
+                    //colCT++;
+                    //// CĐ Policy
+                    //formatRange1 = oSheet.get_Range(CharacterIncrement(colCT) + (rowBD + 1), CharacterIncrement(colCT) + (rowBD + 1).ToString());
+                    //formatRange1.Value2 = "=COUNTIF(E" + (rowBD + 1) + ":" + CharacterIncrement(3 + iSoNgay * 2) + "" + (rowBD + 1) + @",""CĐ"")";
+                    //formatRange = oSheet.get_Range(CharacterIncrement(colCT) + (rowBD + 1), CharacterIncrement(colCT) + (rowCnt + 1).ToString());
+                    //if (current_dr > 1)
+                    //{
+                    //    formatRange1.AutoFill(formatRange, Microsoft.Office.Interop.Excel.XlAutoFillType.xlFillCopy);
+                    //}
 
-                    colCT++;
-                    // KL Comp
-                    formatRange1 = oSheet.get_Range(CharacterIncrement(colCT) + (rowBD + 1), CharacterIncrement(colCT) + (rowBD + 1).ToString());
-                    formatRange1.Value2 = "=COUNTIF(E" + (rowBD + 1) + ":" + CharacterIncrement(3 + iSoNgay * 2) + "" + (rowBD + 1) + @",""KL"")";
-                    formatRange = oSheet.get_Range(CharacterIncrement(colCT) + (rowBD + 1), CharacterIncrement(colCT) + (rowCnt + 1).ToString());
-                    if (current_dr > 1)
-                    {
-                        formatRange1.AutoFill(formatRange, Microsoft.Office.Interop.Excel.XlAutoFillType.xlFillCopy);
-                    }
+                    //colCT++;
+                    //// KL Comp
+                    //formatRange1 = oSheet.get_Range(CharacterIncrement(colCT) + (rowBD + 1), CharacterIncrement(colCT) + (rowBD + 1).ToString());
+                    //formatRange1.Value2 = "=COUNTIF(E" + (rowBD + 1) + ":" + CharacterIncrement(3 + iSoNgay * 2) + "" + (rowBD + 1) + @",""KL"")";
+                    //formatRange = oSheet.get_Range(CharacterIncrement(colCT) + (rowBD + 1), CharacterIncrement(colCT) + (rowCnt + 1).ToString());
+                    //if (current_dr > 1)
+                    //{
+                    //    formatRange1.AutoFill(formatRange, Microsoft.Office.Interop.Excel.XlAutoFillType.xlFillCopy);
+                    //}
 
-                    colCT++;
-                    // O1
-                    formatRange1 = oSheet.get_Range(CharacterIncrement(colCT) + (rowBD + 1), CharacterIncrement(colCT) + (rowBD + 1).ToString());
-                    formatRange1.Value2 = "=COUNTIF(E" + (rowBD + 1) + ":" + CharacterIncrement(3 + iSoNgay * 2) + "" + (rowBD + 1) + @",""O1"")" + "+ COUNTIF(E" + (rowBD + 1) + ":" + CharacterIncrement(3 + iSoNgay * 2) + "" + (rowBD + 1) + @",""O2"")";
-                    formatRange = oSheet.get_Range(CharacterIncrement(colCT) + (rowBD + 1), CharacterIncrement(colCT) + (rowCnt + 1).ToString());
-                    if (current_dr > 1)
-                    {
-                        formatRange1.AutoFill(formatRange, Microsoft.Office.Interop.Excel.XlAutoFillType.xlFillCopy);
-                    }
+                    //colCT++;
+                    //// O1
+                    //formatRange1 = oSheet.get_Range(CharacterIncrement(colCT) + (rowBD + 1), CharacterIncrement(colCT) + (rowBD + 1).ToString());
+                    //formatRange1.Value2 = "=COUNTIF(E" + (rowBD + 1) + ":" + CharacterIncrement(3 + iSoNgay * 2) + "" + (rowBD + 1) + @",""O1"")" + "+ COUNTIF(E" + (rowBD + 1) + ":" + CharacterIncrement(3 + iSoNgay * 2) + "" + (rowBD + 1) + @",""O2"")";
+                    //formatRange = oSheet.get_Range(CharacterIncrement(colCT) + (rowBD + 1), CharacterIncrement(colCT) + (rowCnt + 1).ToString());
+                    //if (current_dr > 1)
+                    //{
+                    //    formatRange1.AutoFill(formatRange, Microsoft.Office.Interop.Excel.XlAutoFillType.xlFillCopy);
+                    //}
 
-                    colCT++;
-                    // O3
-                    formatRange1 = oSheet.get_Range(CharacterIncrement(colCT) + (rowBD + 1), CharacterIncrement(colCT) + (rowBD + 1).ToString());
-                    formatRange1.Value2 = "=COUNTIF(E" + (rowBD + 1) + ":" + CharacterIncrement(3 + iSoNgay * 2) + "" + (rowBD + 1) + @",""O3"")";
-                    formatRange = oSheet.get_Range(CharacterIncrement(colCT) + (rowBD + 1), CharacterIncrement(colCT) + (rowCnt + 1).ToString());
-                    if (current_dr > 1)
-                    {
-                        formatRange1.AutoFill(formatRange, Microsoft.Office.Interop.Excel.XlAutoFillType.xlFillCopy);
-                    }
+                    //colCT++;
+                    //// O3
+                    //formatRange1 = oSheet.get_Range(CharacterIncrement(colCT) + (rowBD + 1), CharacterIncrement(colCT) + (rowBD + 1).ToString());
+                    //formatRange1.Value2 = "=COUNTIF(E" + (rowBD + 1) + ":" + CharacterIncrement(3 + iSoNgay * 2) + "" + (rowBD + 1) + @",""O3"")";
+                    //formatRange = oSheet.get_Range(CharacterIncrement(colCT) + (rowBD + 1), CharacterIncrement(colCT) + (rowCnt + 1).ToString());
+                    //if (current_dr > 1)
+                    //{
+                    //    formatRange1.AutoFill(formatRange, Microsoft.Office.Interop.Excel.XlAutoFillType.xlFillCopy);
+                    //}
 
-                    colCT++;
-                    // VLD Unreasonab
-                    formatRange1 = oSheet.get_Range(CharacterIncrement(colCT) + (rowBD + 1), CharacterIncrement(colCT) + (rowBD + 1).ToString());
-                    formatRange1.Value2 = "=COUNTIF(E" + (rowBD + 1) + ":" + CharacterIncrement(3 + iSoNgay * 2) + "" + (rowBD + 1) + @",""O"")";
-                    formatRange = oSheet.get_Range(CharacterIncrement(colCT) + (rowBD + 1), CharacterIncrement(colCT) + (rowCnt + 1).ToString());
-                    if (current_dr > 1)
-                    {
-                        formatRange1.AutoFill(formatRange, Microsoft.Office.Interop.Excel.XlAutoFillType.xlFillCopy);
-                    }
+                    //colCT++;
+                    //// VLD Unreasonab
+                    //formatRange1 = oSheet.get_Range(CharacterIncrement(colCT) + (rowBD + 1), CharacterIncrement(colCT) + (rowBD + 1).ToString());
+                    //formatRange1.Value2 = "=COUNTIF(E" + (rowBD + 1) + ":" + CharacterIncrement(3 + iSoNgay * 2) + "" + (rowBD + 1) + @",""O"")";
+                    //formatRange = oSheet.get_Range(CharacterIncrement(colCT) + (rowBD + 1), CharacterIncrement(colCT) + (rowCnt + 1).ToString());
+                    //if (current_dr > 1)
+                    //{
+                    //    formatRange1.AutoFill(formatRange, Microsoft.Office.Interop.Excel.XlAutoFillType.xlFillCopy);
+                    //}
 
-                    colCT++;
-                    // TR/S Late
-                    formatRange1 = oSheet.get_Range(CharacterIncrement(colCT) + (rowBD + 1), CharacterIncrement(colCT) + (rowBD + 1).ToString());
-                    formatRange1.Value2 = "=COUNTIF(E" + (rowBD + 1) + ":" + CharacterIncrement(3 + iSoNgay * 2) + "" + (rowBD + 1) + @",""ST"")";
-                    formatRange = oSheet.get_Range(CharacterIncrement(colCT) + (rowBD + 1), CharacterIncrement(colCT) + (rowCnt + 1).ToString());
-                    if (current_dr > 1)
-                    {
-                        formatRange1.AutoFill(formatRange, Microsoft.Office.Interop.Excel.XlAutoFillType.xlFillCopy);
-                    }
+                    //colCT++;
+                    //// TR/S Late
+                    //formatRange1 = oSheet.get_Range(CharacterIncrement(colCT) + (rowBD + 1), CharacterIncrement(colCT) + (rowBD + 1).ToString());
+                    //formatRange1.Value2 = "=COUNTIF(E" + (rowBD + 1) + ":" + CharacterIncrement(3 + iSoNgay * 2) + "" + (rowBD + 1) + @",""ST"")";
+                    //formatRange = oSheet.get_Range(CharacterIncrement(colCT) + (rowBD + 1), CharacterIncrement(colCT) + (rowCnt + 1).ToString());
+                    //if (current_dr > 1)
+                    //{
+                    //    formatRange1.AutoFill(formatRange, Microsoft.Office.Interop.Excel.XlAutoFillType.xlFillCopy);
+                    //}
 
 
                     dr_Cu = current_dr;

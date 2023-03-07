@@ -1,4 +1,5 @@
-﻿using DevExpress.Utils;
+﻿using DevExpress.CodeParser;
+using DevExpress.Utils;
 using DevExpress.Utils.Menu;
 using DevExpress.XtraBars.Docking2010;
 using DevExpress.XtraEditors;
@@ -9,6 +10,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -74,7 +76,12 @@ namespace Vs.Recruit
                                 cmd.Parameters.Add("@sBT1", SqlDbType.NVarChar).Value = sBT;
                                 cmd.Parameters.Add("@sBT2", SqlDbType.NVarChar).Value = sBTCNN;
                                 cmd.CommandType = CommandType.StoredProcedure;
-                                cmd.ExecuteNonQuery();
+                                System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+                                DataSet ds = new DataSet();
+                                adp.Fill(ds);
+                                dt = new DataTable();
+                                dt = ds.Tables[0].Copy();
+
                                 them = 0;
                                 LoadData();
                                 Commons.Modules.ObjSystems.XoaTable(sBT);
@@ -83,7 +90,10 @@ namespace Vs.Recruit
                             {
                                 Commons.Modules.ObjSystems.XoaTable(sBT);
                             }
+
                             this.DialogResult = DialogResult.OK;
+                            dt1 = new DataTable();
+                            dt1 = dt;
                             this.Close();
                             break;
                         }

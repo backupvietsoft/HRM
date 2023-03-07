@@ -13,6 +13,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -331,6 +332,26 @@ namespace Vs.Recruit
 
                 if (frm.ShowDialog() == DialogResult.OK)
                 {
+                    DataTable dttemp = new DataTable();
+                    dttemp  = frm.dt1.Copy();
+                    // chạy vòng for trên danh sách ảnh cần đổi đường dẫn
+                    for (int i = 0; i < dttemp.Rows.Count; i++)
+                    {
+                        // copy ảnh url ứng viên = url công nhân
+                        try
+                        {
+                            if (System.IO.File.Exists(dttemp.Rows[i]["FILE_OLD"].ToString()))
+                            {
+                                using (FileStream fs = new FileStream(dttemp.Rows[i]["FILE_OLD"].ToString(), FileMode.Open, FileAccess.ReadWrite))
+                                {
+                                    fs.Close();
+                                    System.IO.File.Move(dttemp.Rows[i]["FILE_OLD"].ToString(), dttemp.Rows[i]["FILE_NEW"].ToString());
+                                }
+                            }
+                           
+                        }
+                        catch { }
+                    }
                     LoadData();
                 }
             }

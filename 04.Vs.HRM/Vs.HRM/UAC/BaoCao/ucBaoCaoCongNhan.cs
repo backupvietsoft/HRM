@@ -639,8 +639,6 @@ namespace Vs.HRM
         {
             try
             {
-
-
                 string dsCol = "";
                 System.Data.SqlClient.SqlConnection conn;
 
@@ -753,7 +751,7 @@ namespace Vs.HRM
 
 
                     string lastColumn = string.Empty;
-                    lastColumn = CharacterIncrement(dtBCThang.Columns.Count - 2);
+                    lastColumn = CharacterIncrement(dtBCThang.Columns.Count - 6);
 
 
                     Range row2_TieuDe_BaoCao = oSheet.get_Range("A1", lastColumn + "1");
@@ -778,12 +776,16 @@ namespace Vs.HRM
 
                     int col = 0;
                     int row_dl = 4;
-                    for (col = 0; col < dtBCThang.Columns.Count - 1; col++)
+
+                    oSheet.Cells[row_dl, 1] = "STT";
+                    oSheet.Cells[row_dl, 1].ColumnWidth = 10;
+
+                    for (col = 0; col < dtBCThang.Columns.Count - 6; col++)
                     {
                         try
                         {
-                            oSheet.Cells[row_dl, col + 1] = dt.Rows[col]["DIEN_GIAI"];
-                            oSheet.Cells[row_dl, col + 1].ColumnWidth = dt.Rows[col]["CHIEU_RONG"];
+                            oSheet.Cells[row_dl, col + 2] = dt.Rows[col]["DIEN_GIAI"];
+                            oSheet.Cells[row_dl, col + 2].ColumnWidth = dt.Rows[col]["CHIEU_RONG"];
                         }
                         catch (Exception ex)
                         {
@@ -811,10 +813,13 @@ namespace Vs.HRM
                         keepRowCnt = rowCnt + 4;
                         oSheet.get_Range("A5", lastColumn + (keepRowCnt).ToString()).Value2 = rowData;
 
-                        for (col = 1; col < dtBCThang.Columns.Count; col++)
+                        formatRange = oSheet.get_Range(CharacterIncrement(0) + "5", CharacterIncrement(0) + (rowCnt + 1).ToString());
+                        formatRange.NumberFormat = "#,##0;(#,##0); ; ";
+
+                        for (col = 1; col < dtBCThang.Columns.Count - 6; col++)
                         {
 
-                            formatRange = oSheet.get_Range(CharacterIncrement(col - 1) + "5" + "", CharacterIncrement(col - 1) + (rowCnt + 4).ToString());
+                            formatRange = oSheet.get_Range(CharacterIncrement(col) + "5" + "", CharacterIncrement(col) + (rowCnt + 4).ToString());
                             if (dt.Rows[col - 1]["DINH_DANG"].ToString() == "Num")
                             {
                                 formatRange.NumberFormat = "#,##0;(#,##0); ; ";
@@ -895,9 +900,13 @@ namespace Vs.HRM
                             //Đổ dữ liệu của xí nghiệp
                             oSheet.get_Range("A" + (rowBD + 1) + "", lastColumn + (rowCnt + 1).ToString()).Value2 = rowData;
 
-                            for (col = 1; col < dtBCThang.Columns.Count; col++)
+                            formatRange = oSheet.get_Range(CharacterIncrement(0) + "" + (rowBD + 1).ToString() + "", CharacterIncrement(0) + (rowCnt + 1).ToString());
+                            formatRange.NumberFormat = "#,##0;(#,##0); ; ";
+                            try { formatRange.TextToColumns(Type.Missing, Excel.XlTextParsingType.xlDelimited, Excel.XlTextQualifier.xlTextQualifierDoubleQuote); } catch (Exception ex) { }
+
+                            for (col = 1; col < dtBCThang.Columns.Count - 6; col++)
                             {
-                                formatRange = oSheet.get_Range(CharacterIncrement(col - 1) + "" + (rowBD + 1).ToString() + "", CharacterIncrement(col - 1) + (rowCnt + 1).ToString());
+                                formatRange = oSheet.get_Range(CharacterIncrement(col) + "" + (rowBD + 1).ToString() + "", CharacterIncrement(col) + (rowCnt + 1).ToString());
                                 if (dt.Rows[col - 1]["DINH_DANG"].ToString() == "Num")
                                 {
                                     formatRange.NumberFormat = "#,##0;(#,##0); ; ";

@@ -6153,7 +6153,7 @@ namespace Vs.TimeAttendance
 
                 formatRange = oSheet.Range[oSheet.Cells[6, 1], oSheet.Cells[rowCnt, lastColumn]]; //27 + 31
                 formatRange.Font.Name = fontName;
-                for (col = 3; col <= lastColumn - 2; col++)
+                for (col = 4; col <= lastColumn - 2; col++)
                 {
                     formatRange = oSheet.Range[oSheet.Cells[7, col], oSheet.Cells[rowCnt, col]];
                     formatRange.NumberFormat = "0.00;-0;;@";

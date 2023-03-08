@@ -117,8 +117,6 @@ namespace Vs.TimeAttendance
                     {
                         try
                         {
-
-
                             Validate();
                             if (grvKDCTD.HasColumnErrors) return;
                             DataTable dt = new DataTable();
@@ -137,8 +135,15 @@ namespace Vs.TimeAttendance
                             dt = new DataTable();
                             dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT MIN(NGAY) MIN_NGAY, MAX(NGAY) MAX_NGAY FROM " + "sBTCongNhan" + Commons.Modules.iIDUser + ""));
                             Commons.Modules.ObjSystems.XoaTable("sBTCongNhan" + Commons.Modules.iIDUser);
-                            datTNgay.EditValue = Convert.ToDateTime(dt.Rows[0]["MIN_NGAY"]);
-                            datDenNgay.EditValue = Convert.ToDateTime(dt.Rows[0]["MAX_NGAY"]);
+                            try
+                            {
+                                datTNgay.EditValue = Convert.ToDateTime(dt.Rows[0]["MIN_NGAY"]);
+                                datDenNgay.EditValue = Convert.ToDateTime(dt.Rows[0]["MAX_NGAY"]);
+                            }
+                            catch
+                            {
+                            }
+                            
                             Commons.Modules.sLoad = "";
                             enableButon(true);
                             LoadGridDKChamTuDong(isAdd);

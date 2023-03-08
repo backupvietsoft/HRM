@@ -186,13 +186,14 @@ namespace Vs.Recruit
                             grvDSUngVien.Columns["MS_CN"].Visible = true;
                             grvDSUngVien.Columns["HO_TEN_NGT"].Visible = true;
                             grvDSUngVien.Columns["THUONG_GT"].Visible = true;
-                            grvDSUngVien.Columns["THUONG_TAY_NGHE"].Visible = false;
+                            grvDSUngVien.Columns["THUONG_TAY_NGHE"].Visible = true;
 
-                            grvDSUngVien.Columns["DAT"].VisibleIndex = 14;
-                            grvDSUngVien.Columns["MS_CN"].VisibleIndex = 15;
-                            grvDSUngVien.Columns["HO_TEN_NGT"].VisibleIndex = 16;
-                            grvDSUngVien.Columns["THUONG_GT"].VisibleIndex = 17;
-                            grvDSUngVien.Columns["GHI_CHU"].VisibleIndex = 18;
+                            grvDSUngVien.Columns["THUONG_TAY_NGHE"].VisibleIndex = 14;
+                            grvDSUngVien.Columns["DAT"].VisibleIndex = 15;
+                            grvDSUngVien.Columns["MS_CN"].VisibleIndex = 16;
+                            grvDSUngVien.Columns["HO_TEN_NGT"].VisibleIndex = 17;
+                            grvDSUngVien.Columns["THUONG_GT"].VisibleIndex = 18;
+                            grvDSUngVien.Columns["GHI_CHU"].VisibleIndex = 19;
 
                         }
                         else

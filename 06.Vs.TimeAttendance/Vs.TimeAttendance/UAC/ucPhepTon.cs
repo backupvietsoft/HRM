@@ -326,7 +326,7 @@ namespace Vs.TimeAttendance
                     grvPhepTon.Columns["TEN_TO"].OptionsColumn.AllowEdit = false;
                     grvPhepTon.Columns["NGAY_VAO_LAM"].OptionsColumn.AllowEdit = false;
                     grvPhepTon.Columns["PHEP_CON_LAI"].OptionsColumn.AllowEdit = false;
-                    grvPhepTon.Columns["PHEP_TON"].OptionsColumn.AllowEdit = false;
+                    //grvPhepTon.Columns["PHEP_TON"].OptionsColumn.AllowEdit = false;
                 }
                 else
                 {
@@ -567,5 +567,23 @@ namespace Vs.TimeAttendance
         }
 
         #endregion
+
+        private void grvPhepTon_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Modifiers == Keys.Control && e.KeyCode == Keys.I)
+            {
+                frmImportPhepTon frm = new frmImportPhepTon();
+                frm.Nam = Convert.ToInt32(cboNam.Text);
+                if(frm.ShowDialog() == DialogResult.OK)
+                {
+                    LoadData(bThem);
+                }
+                else
+                {
+                    LoadData(bThem);
+                }
+
+            }
+        }
     }
 }

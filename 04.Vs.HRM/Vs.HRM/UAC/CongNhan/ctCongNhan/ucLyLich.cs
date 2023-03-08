@@ -14,6 +14,7 @@ using DevExpress.Utils.Menu;
 using DevExpress.XtraEditors.Repository;
 using DevExpress.Utils;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
+using DevExpress.Map.Native;
 
 namespace Vs.HRM
 {
@@ -435,7 +436,7 @@ namespace Vs.HRM
                             XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgChuaChonCongNhan"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "sThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                             return;
                         }
-                        frmGiaDinh gd = new frmGiaDinh(HOTextEdit.EditValue + " " + TENTextEdit.EditValue);
+                        frmGiaDinh gd = new frmGiaDinh(HOTextEdit.EditValue + " " + TENTextEdit.EditValue, Commons.Modules.iCongNhan);
                         gd.ShowDialog();
                         break;
                     }
@@ -724,16 +725,24 @@ namespace Vs.HRM
                     MS_CNTextEdit.EditValue = dt.Rows[0]["MS_CN"];
                     try
                     {
-                        Byte[] data = new Byte[0];
-                        data = (Byte[])(dt.Rows[0]["Hinh_CN"]);
-                        MemoryStream mem = new MemoryStream(data);
-                        HINH_CNPictureEdit.EditValue = Image.FromStream(mem);
+                        //Byte[] data = new Byte[0];
+                        //data = (Byte[])(dt.Rows[0]["Hinh_CN"]);
+                        //MemoryStream mem = new MemoryStream(data);
+                        //HINH_CNPictureEdit.EditValue = Image.FromStream(mem);
 
-                        //string imagePath = Commons.Modules.sDDTaiLieu + "\\" + "ImageEmployees\\" + MS_CNTextEdit.Text.ToString().Trim() + ".jpg";
-                        //HINH_CNPictureEdit.Image = Image.FromFile(imagePath);
+                        string imagePath = dt.Rows[0]["HINH_CN_URL"].ToString();
+                        if (System.IO.File.Exists(imagePath))
+                        {
+                            HINH_CNPictureEdit.LoadAsync(imagePath);
+                        }
+                        else
+                        {
+                            HINH_CNPictureEdit.EditValue = null;
+                        }
                     }
                     catch
                     {
+                        HINH_CNPictureEdit.EditValue = null;
                     }
                     MS_THE_CCTextEdit.EditValue = dt.Rows[0]["MS_THE_CC"];
                     ID_QGLookUpEdit.EditValue = dt.Rows[0]["ID_QG"];
@@ -951,6 +960,7 @@ namespace Vs.HRM
             if (Commons.Modules.KyHieuDV != "DM")
             {
                 MS_CNTextEdit.Properties.ReadOnly = visible;
+                MS_THE_CCTextEdit.Properties.ReadOnly = visible;
             }
             //MS_THE_CCTextEdit.Properties.ReadOnly = visible;
             ID_QGLookUpEdit.Properties.ReadOnly = visible;
@@ -1081,18 +1091,16 @@ namespace Vs.HRM
 
             return currentByteImageArray;
         }
-        private void SaveImage(string imageURL) // sLoai
+        private string SaveImage(string imageURL) // sLoai
         {
             try
             {
-                if (imageURL.Trim() == "") return;
-                var strDuongDanTmp = Commons.Modules.ObjSystems.CapnhatTL("ImageEmployees\\", false);
+                if (imageURL.Trim() == "") return "-2";
+                var strDuongDanTmp = Commons.Modules.ObjSystems.CapnhatTL("HinhCongNhan\\", false);
                 string strDuongDan = "";
                 strDuongDan = imageURL;
-                string[] sFile;
                 string TenFile;
                 TenFile = System.IO.Path.GetFileName(imageURL);
-                sFile = System.IO.Directory.GetFiles(strDuongDanTmp);
                 string a = "";
                 if (Commons.Modules.ObjSystems.KiemFileTonTai(strDuongDanTmp + @"\" + MS_CNTextEdit.Text + ".jpg") == false)
                     a = strDuongDanTmp + @"\" + MS_CNTextEdit.Text + ".jpg";
@@ -1101,11 +1109,19 @@ namespace Vs.HRM
                     TenFile = Commons.Modules.ObjSystems.STTFileCungThuMuc(strDuongDanTmp, MS_CNTextEdit.Text + ".jpg");
                     a = strDuongDanTmp + @"\" + MS_CNTextEdit.Text + ".jpg";
                 }
+                try
+                {
+                    FileInfo file = new FileInfo(a);
+                    file.Delete();
+                }
+                catch { }
+
                 Commons.Modules.ObjSystems.LuuDuongDan(strDuongDan, a);
+                return a;
             }
             catch
             {
-                return;
+                return "-2";
             }
         }
         private bool SaveData()
@@ -1113,7 +1129,6 @@ namespace Vs.HRM
             //test();
             try
             {
-                //SaveImage(HINH_CNPictureEdit.GetLoadedImageLocation());
 
                 //tạo bảng tạm bằng cấp
                 string sTBBangCap = "sbtBC" + Commons.Modules.iIDUser;
@@ -1135,25 +1150,26 @@ namespace Vs.HRM
                 conn.Open();
                 System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spUpdateCongNhan", conn);
                 cmd.Parameters.Add("@ID_CN", SqlDbType.BigInt).Value = Commons.Modules.iCongNhan;
-                cmd.Parameters.Add("@HINH_CN", SqlDbType.Image).Value = imgToByteConverter(HINH_CNPictureEdit.Image);
+                //cmd.Parameters.Add("@HINH_CN", SqlDbType.Image).Value = DBNull.Value;
+                cmd.Parameters.Add("@HINH_CN_URL", SqlDbType.NVarChar).Value = HINH_CNPictureEdit.EditValue == null ? "-1" : SaveImage(HINH_CNPictureEdit.GetLoadedImageLocation());
                 cmd.Parameters.Add("@MS_CN", SqlDbType.NVarChar).Value = MS_CNTextEdit.Text;
                 cmd.Parameters.Add("@MS_THE_CC", SqlDbType.NVarChar).Value = MS_THE_CCTextEdit.Text;
-                cmd.Parameters.Add("@ID_QG", SqlDbType.BigInt).Value = ID_QGLookUpEdit.Text.ToString() == "" ? DBNull.Value : ID_QGLookUpEdit.EditValue;
+                cmd.Parameters.Add("@ID_QG", SqlDbType.BigInt).Value = Convert.ToString(ID_QGLookUpEdit.EditValue) == "" ? DBNull.Value : ID_QGLookUpEdit.EditValue;
                 cmd.Parameters.Add("@HO", SqlDbType.NVarChar).Value = HOTextEdit.Text;
                 cmd.Parameters.Add("@TEN", SqlDbType.NVarChar).Value = TENTextEdit.Text;
                 cmd.Parameters.Add("@TEN_KHONG_DAU", SqlDbType.NVarChar).Value = TEN_KHONG_DAUTextEdit.Text;
                 cmd.Parameters.Add("@NGAY_SINH", SqlDbType.DateTime).Value = Commons.Modules.ObjSystems.ConvertDateTime(NGAY_SINHDateEdit.Text);
                 cmd.Parameters.Add("@NAM_SINH", SqlDbType.Int).Value = NAM_SINHDateEdit.Text == "" ? NAM_SINHDateEdit.EditValue = null : Convert.ToInt32(NAM_SINHDateEdit.EditValue);
                 cmd.Parameters.Add("@PHAI", SqlDbType.Bit).Value = PHAILookupEdit.EditValue;
-                cmd.Parameters.Add("@ID_TO", SqlDbType.BigInt).Value = ID_TOLookupEdit.Text == "" ? DBNull.Value : ID_TOLookupEdit.EditValue;
-                cmd.Parameters.Add("@ID_CV", SqlDbType.BigInt).Value = ID_CVLookUpEdit.Text == "" ? DBNull.Value : ID_CVLookUpEdit.EditValue;
-                cmd.Parameters.Add("@ID_LCV", SqlDbType.BigInt).Value = ID_LCVLookUpEdit.Text == "" ? DBNull.Value : ID_LCVLookUpEdit.EditValue;
+                cmd.Parameters.Add("@ID_TO", SqlDbType.BigInt).Value = Convert.ToString(ID_TOLookupEdit.EditValue) == "" ? DBNull.Value : ID_TOLookupEdit.EditValue;
+                cmd.Parameters.Add("@ID_CV", SqlDbType.BigInt).Value = Convert.ToString(ID_CVLookUpEdit.EditValue) == "" ? DBNull.Value : ID_CVLookUpEdit.EditValue;
+                cmd.Parameters.Add("@ID_LCV", SqlDbType.BigInt).Value = Convert.ToString(ID_LCVLookUpEdit.EditValue) == "" ? DBNull.Value : ID_LCVLookUpEdit.EditValue;
                 cmd.Parameters.Add("@PHEP_CT", SqlDbType.Float).Value = PHEP_CTTextEdit.EditValue;
                 cmd.Parameters.Add("@NGAY_HOC_VIEC", SqlDbType.DateTime).Value = NGAY_HOC_VIECDateEdit.Text == "" ? DBNull.Value : NGAY_HOC_VIECDateEdit.EditValue;
                 cmd.Parameters.Add("@NGAY_THU_VIEC", SqlDbType.DateTime).Value = NGAY_THU_VIECDateEdit.Text == "" ? DBNull.Value : NGAY_THU_VIECDateEdit.EditValue;
                 cmd.Parameters.Add("@NGAY_VAO_LAM", SqlDbType.DateTime).Value = NGAY_VAO_LAMDateEdit.Text == "" ? DBNull.Value : NGAY_VAO_LAMDateEdit.EditValue;
-                cmd.Parameters.Add("@ID_TT_HD", SqlDbType.BigInt).Value = ID_TT_HDLookUpEdit.Text == "" ? DBNull.Value : ID_TT_HDLookUpEdit.EditValue;
-                cmd.Parameters.Add("@ID_TT_HT", SqlDbType.BigInt).Value = ID_TT_HTLookUpEdit.Text == "" ? DBNull.Value : ID_TT_HTLookUpEdit.EditValue;
+                cmd.Parameters.Add("@ID_TT_HD", SqlDbType.BigInt).Value = Convert.ToString(ID_TT_HDLookUpEdit.EditValue) == "" ? DBNull.Value : ID_TT_HDLookUpEdit.EditValue;
+                cmd.Parameters.Add("@ID_TT_HT", SqlDbType.BigInt).Value = Convert.ToString(ID_TT_HTLookUpEdit.EditValue) == "" ? DBNull.Value : ID_TT_HTLookUpEdit.EditValue;
                 cmd.Parameters.Add("@HINH_THUC_TUYEN", SqlDbType.NVarChar).Value = HINH_THUC_TUYENTextEdit.Text;
                 cmd.Parameters.Add("@LD_TINH", SqlDbType.Bit).Value = LD_TINHCheckEdit.EditValue;
                 cmd.Parameters.Add("@TRUC_TIEP_SX", SqlDbType.Bit).Value = TRUC_TIEP_SXCheckEdit.EditValue;
@@ -1162,13 +1178,13 @@ namespace Vs.HRM
                 cmd.Parameters.Add("@SO_CMND", SqlDbType.NVarChar).Value = SO_CMNDTextEdit.Text;
                 cmd.Parameters.Add("@NGAY_CAP", SqlDbType.DateTime).Value = NGAY_CAPDateEdit.Text == "" ? DBNull.Value : NGAY_CAPDateEdit.EditValue;
                 cmd.Parameters.Add("@NOI_CAP", SqlDbType.NVarChar).Value = txtNOI_CAP.Text;
-                cmd.Parameters.Add("@ID_TT_HN", SqlDbType.BigInt).Value = ID_TT_HNLookUpEdit.Text == "" ? DBNull.Value : ID_TT_HNLookUpEdit.EditValue;
+                cmd.Parameters.Add("@ID_TT_HN", SqlDbType.BigInt).Value = Convert.ToString(ID_TT_HNLookUpEdit.EditValue) == "" ? DBNull.Value : ID_TT_HNLookUpEdit.EditValue;
                 cmd.Parameters.Add("@MS_THUE", SqlDbType.NVarChar).Value = MS_THUETextEdit.Text;
                 cmd.Parameters.Add("@MA_THE_ATM", SqlDbType.NVarChar).Value = MA_THE_ATMTextEdit.Text;
                 cmd.Parameters.Add("@SO_TAI_KHOAN", SqlDbType.NVarChar).Value = SO_TAI_KHOANTextEdit.Text;
                 cmd.Parameters.Add("@CHUYEN_MON", SqlDbType.NVarChar).Value = CHUYEN_MONTextEdit.Text;
-                cmd.Parameters.Add("@ID_LOAI_TD", SqlDbType.BigInt).Value = ID_LOAI_TDLookUpEdit.Text == "" ? DBNull.Value : ID_LOAI_TDLookUpEdit.EditValue;
-                cmd.Parameters.Add("@ID_TDVH", SqlDbType.BigInt).Value = ID_TDVHLookUpEdit.Text == "" ? DBNull.Value : ID_TDVHLookUpEdit.EditValue;
+                cmd.Parameters.Add("@ID_LOAI_TD", SqlDbType.BigInt).Value = Convert.ToString(ID_LOAI_TDLookUpEdit.EditValue) == "" ? DBNull.Value : ID_LOAI_TDLookUpEdit.EditValue;
+                cmd.Parameters.Add("@ID_TDVH", SqlDbType.BigInt).Value = Convert.ToString(ID_TDVHLookUpEdit.EditValue) == "" ? DBNull.Value : ID_TDVHLookUpEdit.EditValue;
                 cmd.Parameters.Add("@NGOAI_NGU", SqlDbType.NVarChar).Value = NGOAI_NGUTextEdit.Text;
                 cmd.Parameters.Add("@DT_NHA", SqlDbType.NVarChar).Value = DT_NHATextEdit.Text;
                 cmd.Parameters.Add("@DT_NGUOI_THAN", SqlDbType.NVarChar).Value = DT_NGUOI_THANTextEdit.Text;
@@ -1176,17 +1192,17 @@ namespace Vs.HRM
                 cmd.Parameters.Add("@EMAIL", SqlDbType.NVarChar).Value = EMAILTextEdit.Text;
                 cmd.Parameters.Add("@NOI_SINH", SqlDbType.NVarChar).Value = NOI_SINHTextEdit.Text;
                 cmd.Parameters.Add("@NGUYEN_QUAN", SqlDbType.NVarChar).Value = NGUYEN_QUANTextEdit.Text;
-                cmd.Parameters.Add("@ID_DT", SqlDbType.BigInt).Value = ID_DTLookUpEdit.Text == "" ? DBNull.Value : ID_DTLookUpEdit.EditValue;
+                cmd.Parameters.Add("@ID_DT", SqlDbType.BigInt).Value = Convert.ToString(ID_DTLookUpEdit.EditValue) == "" ? DBNull.Value : ID_DTLookUpEdit.EditValue;
                 cmd.Parameters.Add("@TON_GIAO", SqlDbType.NVarChar).Value = TON_GIAOTextEdit.Text;
                 cmd.Parameters.Add("@DIA_CHI_THUONG_TRU", SqlDbType.NVarChar).Value = DIA_CHI_THUONG_TRUTextEdit.Text;
-                cmd.Parameters.Add("@ID_TP", SqlDbType.BigInt).Value = ID_TPLookUpEdit.Text == "" ? DBNull.Value : ID_TPLookUpEdit.EditValue;
-                cmd.Parameters.Add("@ID_QUAN", SqlDbType.BigInt).Value = ID_QUANLookEdit.Text == "" ? DBNull.Value : ID_QUANLookEdit.EditValue;
-                cmd.Parameters.Add("@ID_PX", SqlDbType.BigInt).Value = ID_PXLookUpEdit.Text == "" ? DBNull.Value : ID_PXLookUpEdit.EditValue;
+                cmd.Parameters.Add("@ID_TP", SqlDbType.BigInt).Value = Convert.ToString(ID_TPLookUpEdit.EditValue) == "" ? DBNull.Value : ID_TPLookUpEdit.EditValue;
+                cmd.Parameters.Add("@ID_QUAN", SqlDbType.BigInt).Value = Convert.ToString(ID_QUANLookEdit.EditValue) == "" ? DBNull.Value : ID_QUANLookEdit.EditValue;
+                cmd.Parameters.Add("@ID_PX", SqlDbType.BigInt).Value = Convert.ToString(ID_PXLookUpEdit.EditValue) == "" ? DBNull.Value : ID_PXLookUpEdit.EditValue;
                 cmd.Parameters.Add("@THON_XOM", SqlDbType.NVarChar).Value = THON_XOMTextEdit.Text;
                 cmd.Parameters.Add("@DIA_CHI_TAM_TRU", SqlDbType.NVarChar).Value = DIA_CHI_TAM_TRUTextEdit.Text;
-                cmd.Parameters.Add("@ID_TP_TAM_TRU", SqlDbType.BigInt).Value = ID_TP_TAM_TRULookUpEdit.Text == "" ? DBNull.Value : ID_TP_TAM_TRULookUpEdit.EditValue;
-                cmd.Parameters.Add("@ID_QUAN_TAM_TRU", SqlDbType.BigInt).Value = ID_QUAN_TAM_TRULookUpEdit.Text == "" ? DBNull.Value : ID_QUAN_TAM_TRULookUpEdit.EditValue;
-                cmd.Parameters.Add("@ID_PX_TAM_TRU", SqlDbType.BigInt).Value = ID_PX_TAM_TRULookUpEdit.Text == "" ? DBNull.Value : ID_PX_TAM_TRULookUpEdit.EditValue;
+                cmd.Parameters.Add("@ID_TP_TAM_TRU", SqlDbType.BigInt).Value = Convert.ToString(ID_TP_TAM_TRULookUpEdit.EditValue) == "" ? DBNull.Value : ID_TP_TAM_TRULookUpEdit.EditValue;
+                cmd.Parameters.Add("@ID_QUAN_TAM_TRU", SqlDbType.BigInt).Value = Convert.ToString(ID_QUAN_TAM_TRULookUpEdit.EditValue) == "" ? DBNull.Value : ID_QUAN_TAM_TRULookUpEdit.EditValue;
+                cmd.Parameters.Add("@ID_PX_TAM_TRU", SqlDbType.BigInt).Value = Convert.ToString(ID_PX_TAM_TRULookUpEdit.EditValue) == "" ? DBNull.Value : ID_PX_TAM_TRULookUpEdit.EditValue;
                 cmd.Parameters.Add("@THON_XOM_TAM_TRU", SqlDbType.NVarChar).Value = THON_XOM_TAM_TRUTextEdit.Text;
                 cmd.Parameters.Add("@SO_BHXH", SqlDbType.NVarChar).Value = SO_BHXHTextEdit.Text;
                 cmd.Parameters.Add("@NGAY_DBHXH", SqlDbType.DateTime).Value = NGAY_DBHXHDateEdit.Text == "" ? DBNull.Value : NGAY_DBHXHDateEdit.EditValue;
@@ -1194,29 +1210,27 @@ namespace Vs.HRM
                 cmd.Parameters.Add("@THAM_GIA_BHXH", SqlDbType.Bit).Value = THAM_GIA_BHXHCheckEdit.EditValue;
                 cmd.Parameters.Add("@SO_THE_BHYT", SqlDbType.NVarChar).Value = SO_THE_BHYTTextEdit.Text;
                 cmd.Parameters.Add("@NGAY_HET_HAN", SqlDbType.DateTime).Value = NGAY_HET_HANDateEdit.Text == "" ? DBNull.Value : NGAY_HET_HANDateEdit.EditValue;
-                cmd.Parameters.Add("@ID_TT", SqlDbType.BigInt).Value = TINH_THANHLookUpEdit.Text == "" ? DBNull.Value : TINH_THANHLookUpEdit.EditValue;
-                cmd.Parameters.Add("@ID_BV", SqlDbType.BigInt).Value = BENH_VIENLookUpEdit.Text == "" ? DBNull.Value : BENH_VIENLookUpEdit.EditValue;
+                cmd.Parameters.Add("@ID_TT", SqlDbType.BigInt).Value = Convert.ToString(TINH_THANHLookUpEdit.EditValue) == "" ? DBNull.Value : TINH_THANHLookUpEdit.EditValue;
+                cmd.Parameters.Add("@ID_BV", SqlDbType.BigInt).Value = Convert.ToString(BENH_VIENLookUpEdit.EditValue) == "" ? DBNull.Value : BENH_VIENLookUpEdit.EditValue;
                 cmd.Parameters.Add("@LD_NN", SqlDbType.Bit).Value = LD_NNCheckEdit.EditValue;
                 cmd.Parameters.Add("@SO_GIAY_PHEP", SqlDbType.NVarChar).Value = SO_GIAY_PHEPTextEdit.Text;
                 cmd.Parameters.Add("@NGAY_CAP_GP", SqlDbType.Bit).Value = NGAY_CAP_GPDateEdit.Text == "" ? DBNull.Value : NGAY_CAP_GPDateEdit.EditValue;
-                cmd.Parameters.Add("@LOAI_QUOC_TICH", SqlDbType.Int).Value = LOAI_QUOC_TICHLookUpEdit.Text == "" ? DBNull.Value : LOAI_QUOC_TICHLookUpEdit.EditValue;
+                cmd.Parameters.Add("@LOAI_QUOC_TICH", SqlDbType.Int).Value = Convert.ToString(LOAI_QUOC_TICHLookUpEdit.EditValue) == "" ? DBNull.Value : LOAI_QUOC_TICHLookUpEdit.EditValue;
                 cmd.Parameters.Add("@CAP_GIAY_PHEP", SqlDbType.Int).Value = CAP_GIAY_PHEPLookUpEdit.Text == "" ? DBNull.Value : CAP_GIAY_PHEPLookUpEdit.EditValue;
                 cmd.Parameters.Add("@NGAY_HH_GP", SqlDbType.DateTime).Value = NGAY_HH_GPDateEdit.Text == "" ? DBNull.Value : NGAY_HH_GPDateEdit.EditValue;
                 cmd.Parameters.Add("@LD_GIAM_LDNN", SqlDbType.BigInt).Value = LD_GIAM_LDNNLookUpEdit.Text == "" ? DBNull.Value : LD_GIAM_LDNNLookUpEdit.EditValue;
-                cmd.Parameters.Add("@ID_KV", SqlDbType.BigInt).Value = cboID_KV.Text == "" ? DBNull.Value : cboID_KV.EditValue;
+                cmd.Parameters.Add("@ID_KV", SqlDbType.BigInt).Value = Convert.ToString(cboID_KV.EditValue) == "" ? DBNull.Value : cboID_KV.EditValue;
                 cmd.Parameters.Add("@Them", SqlDbType.Bit).Value = cothem;
                 cmd.Parameters.Add("@sbtBC", SqlDbType.NVarChar).Value = sTBBangCap;
                 cmd.Parameters.Add("@sbtTL", SqlDbType.NVarChar).Value = sTBTaiLieu;
                 cmd.Parameters.Add("@DC_KHAI_SINH", SqlDbType.NVarChar).Value = txtDIA_CHI_KS.Text;
-                cmd.Parameters.Add("@ID_TP_KS", SqlDbType.BigInt).Value = cboID_TP_KS.Text == "" ? DBNull.Value : cboID_TP_KS.EditValue;
-                cmd.Parameters.Add("@ID_QUAN_KS", SqlDbType.BigInt).Value = cboID_QUAN_KS.Text == "" ? DBNull.Value : cboID_QUAN_KS.EditValue;
-                cmd.Parameters.Add("@ID_PX_KS", SqlDbType.BigInt).Value = cboID_PX_KS.Text == "" ? DBNull.Value : cboID_PX_KS.EditValue;
+                cmd.Parameters.Add("@ID_TP_KS", SqlDbType.BigInt).Value = Convert.ToString(cboID_TP_KS.EditValue) == "" ? DBNull.Value : cboID_TP_KS.EditValue;
+                cmd.Parameters.Add("@ID_QUAN_KS", SqlDbType.BigInt).Value = Convert.ToString(cboID_QUAN_KS.EditValue) == "" ? DBNull.Value : cboID_QUAN_KS.EditValue;
+                cmd.Parameters.Add("@ID_PX_KS", SqlDbType.BigInt).Value = Convert.ToString(cboID_PX_KS.EditValue) == "" ? DBNull.Value : cboID_PX_KS.EditValue;
                 cmd.CommandType = CommandType.StoredProcedure;
                 Commons.Modules.iCongNhan = Convert.ToInt64(cmd.ExecuteScalar());
                 try
                 {
-
-
                     //xóa hết file không có trong 
                     string[] fileList = Directory.GetFiles(Commons.Modules.sDDTaiLieu + '\\' + this.Name.Replace("uc", "") + '\\' + MS_CNTextEdit.Text);//lay danh sách file cho vao mảng
                                                                                                                                                         //duyet mang file trong thư mục
@@ -1303,9 +1317,9 @@ namespace Vs.HRM
 
         private void ID_QGLookUpEdit_EditValueChanged(object sender, EventArgs e)
         {
-            if (Commons.Modules.sLoad == "0Load") return;
-            if (ID_QGLookUpEdit.EditValue.ToString() == "") return;
-            Commons.Modules.ObjSystems.MLoadLookUpEdit(ID_TPLookUpEdit, Commons.Modules.ObjSystems.DataThanhPho(Convert.ToInt32(ID_QGLookUpEdit.EditValue), false), "ID_TP", "TEN_TP", "TEN_TP", true);
+            //////if (Commons.Modules.sLoad == "0Load") return;
+            //////if (ID_QGLookUpEdit.EditValue.ToString() == "") return;
+            //////Commons.Modules.ObjSystems.MLoadLookUpEdit(ID_TPLookUpEdit, Commons.Modules.ObjSystems.DataThanhPho(Convert.ToInt32(ID_QGLookUpEdit.EditValue), false), "ID_TP", "TEN_TP", "TEN_TP", true);
         }
 
         private void ID_TPLookUpEdit_EditValueChanged(object sender, EventArgs e)
@@ -1993,7 +2007,7 @@ namespace Vs.HRM
 
         private void HINH_CNPictureEdit_EditValueChanged(object sender, EventArgs e)
         {
-            
+
         }
     }
 }

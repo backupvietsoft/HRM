@@ -1230,7 +1230,7 @@ namespace Vs.Payroll
                     return;
                 }
                 XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgLuuThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK);
-                cboNgay_EditValueChanged_1(null, null);
+                cboTo_EditValueChanged(null, null);
             }
             catch (Exception ex) { }
         }

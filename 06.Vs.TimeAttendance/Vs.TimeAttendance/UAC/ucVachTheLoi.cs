@@ -268,7 +268,7 @@ namespace Vs.TimeAttendance
 
                 RepositoryItemSearchLookUpEdit cbo1 = new RepositoryItemSearchLookUpEdit();
                 dt = new DataTable();
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT ID_CN, MS_CN, HO_TEN FROM dbo.MGetListNhanSuToDate('" + Commons.Modules.UserName + "', " + Commons.Modules.TypeLanguage + ", " + cboDV.EditValue + ", " + cboXN.EditValue + ", " + cboTo.EditValue + ", '" + datNgayChamCong.DateTime.ToString("MM/dd/yyyy") + "')"));
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT ID_CN, MS_CN, HO_TEN, TEN_TO FROM dbo.MGetListNhanSuToDate('" + Commons.Modules.UserName + "', " + Commons.Modules.TypeLanguage + ", " + cboDV.EditValue + ", " + cboXN.EditValue + ", " + cboTo.EditValue + ", '" + datNgayChamCong.DateTime.ToString("MM/dd/yyyy") + "')"));
                 Commons.Modules.ObjSystems.AddCombSearchLookUpEdit(cbo1, "ID_CN", "MS_CN", "ID_CN", grvCongNhan, dt, this.Name);
                 cbo1.BeforePopup += cboID_CN_BeforePopup;
                 cbo1.EditValueChanged += cboID_CN_EditValueChanged;
@@ -408,6 +408,7 @@ namespace Vs.TimeAttendance
                 grvCongNhan.SetFocusedRowCellValue("NGAY_DEN", datNgayDen.EditValue);
                 grvCongNhan.SetFocusedRowCellValue("NGAY_VE", datNgayVe.EditValue);
                 grvCongNhan.SetFocusedRowCellValue("NGAY", datNgayChamCong.EditValue);
+                grvCongNhan.SetFocusedRowCellValue("TEN_TO", (dataRow.Row[4]).ToString());
             }
             catch { }
 
@@ -418,7 +419,7 @@ namespace Vs.TimeAttendance
             {
                 SearchLookUpEdit lookUp = sender as SearchLookUpEdit;
                 DataTable dt = new DataTable();
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT ID_CN, MS_CN, HO_TEN, MS_THE_CC FROM dbo.MGetListNhanSuToDate('" + Commons.Modules.UserName + "', " + Commons.Modules.TypeLanguage + ", " + cboDV.EditValue + ", " + cboXN.EditValue + ", " + cboTo.EditValue + ", '" + datNgayChamCong.DateTime.ToString("MM/dd/yyyy") + "')"));
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT ID_CN, MS_CN, HO_TEN, MS_THE_CC, TEN_TO FROM dbo.MGetListNhanSuToDate('" + Commons.Modules.UserName + "', " + Commons.Modules.TypeLanguage + ", " + cboDV.EditValue + ", " + cboXN.EditValue + ", " + cboTo.EditValue + ", '" + datNgayChamCong.DateTime.ToString("MM/dd/yyyy") + "')"));
                 lookUp.Properties.DataSource = dt;
             }
             catch { }

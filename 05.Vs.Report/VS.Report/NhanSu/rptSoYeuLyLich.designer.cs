@@ -230,7 +230,7 @@
             // 
             this.xrPictureBox1.Dpi = 254F;
             this.xrPictureBox1.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "ImageSource", "[DATA].[HINH_CN]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "ImageUrl", "[DATA].[HINH_CN_URL]")});
             this.xrPictureBox1.ImageAlignment = DevExpress.XtraPrinting.ImageAlignment.MiddleCenter;
             this.xrPictureBox1.LocationFloat = new DevExpress.Utils.PointFloat(49.54901F, 260.5281F);
             this.xrPictureBox1.Name = "xrPictureBox1";

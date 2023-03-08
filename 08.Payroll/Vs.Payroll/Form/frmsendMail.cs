@@ -399,7 +399,7 @@ namespace Vs.Payroll
                         row4_TieuDe_BaoCao.Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
                         row4_TieuDe_BaoCao.Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
                         row4_TieuDe_BaoCao.RowHeight = 30;
-                        row4_TieuDe_BaoCao.Value2 = "BẢNG KÊ SẢN LƯỢNG CHUYỀN MAY THÁNG " + Convert.ToDateTime(DateTime.Now).ToString("MM/yyyy");
+                        row4_TieuDe_BaoCao.Value2 = "BẢNG KÊ SẢN LƯỢNG CHUYỀN MAY THÁNG " + datDNgay.DateTime.ToString("MM/yyyy");
                         oRow = 6;
                     }
 
@@ -1658,7 +1658,7 @@ namespace Vs.Payroll
         {
             try
             {
-                if (System.IO.File.Exists(path + @"\LSPTheoCongDoan_" + (iID_DV == 1 ? "DM1" : "DM2") + "_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".xlsx")) return;
+                if (System.IO.File.Exists(path + @"\LSPTheoCongDoan_" + (iID_DV == 1 ? "DM1" : "DM2") + "_" + datDNgay.DateTime.ToString("yyyyMMdd") + ".xlsx")) return;
 
                 System.Data.SqlClient.SqlConnection conn;
                 conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
@@ -1925,7 +1925,7 @@ namespace Vs.Payroll
         {
             try
             {
-                if (System.IO.File.Exists(path + @"\LSPCNTheoChuyen_" + (iID_DV == 1 ? "DM1" : "DM2") + "_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".xlsx")) return;
+                if (System.IO.File.Exists(path + @"\LSPCNTheoChuyen_" + (iID_DV == 1 ? "DM1" : "DM2") + "_" + datDNgay.DateTime.ToString("yyyyMMdd") + ".xlsx")) return;
 
                 System.Data.SqlClient.SqlConnection conn;
                 conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
@@ -2172,7 +2172,7 @@ namespace Vs.Payroll
 
             try
             {
-                if (System.IO.File.Exists(path + @"\BCSanLuongTheoCN_" + (iID_DV == 1 ? "DM1" : "DM2") + "_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".xlsx")) return;
+                if (System.IO.File.Exists(path + @"\BCSanLuongTheoCN_" + (iID_DV == 1 ? "DM1" : "DM2") + "_" + datDNgay.DateTime.ToString("yyyyMMdd") + ".xlsx")) return;
 
                 System.Data.SqlClient.SqlConnection conn;
                 conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);

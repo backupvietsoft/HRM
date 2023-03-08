@@ -1,4 +1,5 @@
-﻿using DevExpress.XtraBars.Docking2010;
+﻿using DevExpress.Map.Dashboard;
+using DevExpress.XtraBars.Docking2010;
 using DevExpress.XtraEditors;
 using DevExpress.XtraLayout.Utils;
 using Microsoft.ApplicationBlocks.Data;
@@ -13,10 +14,14 @@ namespace Vs.HRM
         bool cothem = false;
         bool flag_CH = false;
         bool flag_NT = false;
-        public frmGiaDinh(string tencn)
+        private string tenCN;
+        private Int64 idCN;
+        public frmGiaDinh(string tencn , Int64 id)
         {
             InitializeComponent();
             lbl_HoTenCN.Text = tencn.ToUpper();
+            tenCN = tencn.ToUpper();
+            idCN = id;
             Commons.Modules.ObjSystems.ThayDoiNN(this, layoutControlGroup1, windowsUIButton);
             Commons.OSystems.SetDateEditFormat(NGAY_SINHDateEdit);
         }
@@ -147,7 +152,6 @@ namespace Vs.HRM
         //sự kiện radio button cùng công ty hay không
         private void rdo_CongTy_SelectedIndexChanged(object sender, EventArgs e)
         {
-
             //if (rdo_CongTy.SelectedIndex == 1)
             //{
             //    ItemForHO_TEN.Visibility = LayoutVisibility.Always;
@@ -187,7 +191,7 @@ namespace Vs.HRM
 
             grvGiaDinh.Columns["NGAY_SINH"].DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             grvGiaDinh.Columns["NGAY_SINH"].DisplayFormat.FormatString = "dd/MM/yyyy";
-
+            lbl_HoTenCN.Text = tenCN.ToUpper();
 
             if (id != -1)
             {
@@ -229,17 +233,9 @@ namespace Vs.HRM
             }
             else
             {
-                //try
-                //{
-                //    HO_TENLookupEdit.EditValue = Convert.ToInt64(grvGiaDinh.GetFocusedRowCellValue("ID_CN_QH"));
-                //}
-                //catch (Exception ex)
-                //{
-                //}
                 try
                 {
                     ID_QHLookUpEdit.EditValue = Convert.ToInt64(grvGiaDinh.GetFocusedRowCellValue("ID_QHGD"));
-                    //rdo_CongTy.SelectedIndex = grvGiaDinh.GetFocusedRowCellValue("ID_CN_QH").ToString() == "" ? 1 : 0;
                     NGAY_SINHDateEdit.EditValue = grvGiaDinh.GetFocusedRowCellValue("NGAY_SINH");
                     NGHE_NGHIEPTextEdit.EditValue = grvGiaDinh.GetFocusedRowCellValue("NGHE_NGHIEP");
                     DIA_CHITextEdit.EditValue = grvGiaDinh.GetFocusedRowCellValue("DIA_CHI");                  
@@ -252,6 +248,7 @@ namespace Vs.HRM
                     txt_GHI_CHU.EditValue = grvGiaDinh.GetFocusedRowCellValue("GHI_CHU");
                     cboGIOI_TINH.EditValue = string.IsNullOrEmpty(grvGiaDinh.GetFocusedRowCellValue("GIOI_TINH").ToString()) ? 0 : Convert.ToInt32(grvGiaDinh.GetFocusedRowCellValue("GIOI_TINH"));
                     NGUOI_GHCheckEdit.EditValue = Convert.ToBoolean(grvGiaDinh.GetFocusedRowCellValue("NGUOI_GH"));
+                    chkCungCongTy.EditValue = Convert.ToBoolean(grvGiaDinh.GetFocusedRowCellValue("CUNG_CONG_TY"));
                 }
                 catch { }
             }
@@ -277,6 +274,7 @@ namespace Vs.HRM
             cboID_PX.Properties.ReadOnly = visible;
             txtTHON_XOM.Properties.ReadOnly = visible;
             chkChuHo.Properties.ReadOnly = visible;
+            chkChuHo.Properties.ReadOnly = visible;
 
             grdGiaDinh.Enabled = visible;
             ID_QHLookUpEdit.Properties.ReadOnly = visible;
@@ -293,6 +291,9 @@ namespace Vs.HRM
             //HO_TENLookupEdit.Properties.ReadOnly = visible;
             HO_TENTextEdit.Properties.ReadOnly = visible;
             cboGIOI_TINH.Properties.ReadOnly = visible;
+            chkCungCongTy.Properties.ReadOnly= visible;
+            txtCN.Properties.ReadOnly = true;
+
 
 
         }
@@ -332,7 +333,7 @@ namespace Vs.HRM
             cboGIOI_TINH.EditValue,
             flag_CH,
             flag_NT,
-            cothem, chkChuHo.EditValue
+            cothem, chkChuHo.EditValue, chkHoNgheo.EditValue , chkCungCongTy.EditValue
                 ));
                 LoadgrdGiaDinh(n);
             }
@@ -392,7 +393,10 @@ namespace Vs.HRM
                 cboID_QUAN.EditValue = dt.Rows[0]["ID_QUAN"].ToString() == "" ? DBNull.Value : dt.Rows[0]["ID_QUAN"];
                 cboID_PX.EditValue = dt.Rows[0]["ID_PX"].ToString() == "" ? DBNull.Value : dt.Rows[0]["ID_PX"];
                 txtTHON_XOM.EditValue = dt.Rows[0]["THON_XOM"].ToString();
-                chkChuHo.EditValue = dt.Rows[0]["CHU_HO"].ToString();
+                chkChuHo.EditValue = dt.Rows[0]["CHU_HO"];
+                chkHoNgheo.EditValue = dt.Rows[0]["HO_NGHEO"];
+                
+
             }
             catch (Exception EX) { }
         }
@@ -409,6 +413,52 @@ namespace Vs.HRM
             if (Commons.Modules.sLoad == "0Load") return;
             if (cboID_QUAN.EditValue == null || cboID_QUAN.EditValue.ToString() == "") return;
             Commons.Modules.ObjSystems.MLoadLookUpEdit(cboID_PX, Commons.Modules.ObjSystems.DataPhuongXa(Convert.ToInt32(cboID_QUAN.EditValue), false), "ID_PX", "TEN_PX", "TEN_PX", true);
+        }
+
+        private void chkChuHo_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (Commons.Modules.sLoad == "0Load") return;
+                string strSQL = "SELECT HO+' '+TEN HO_TEN, SO_BHXH, NGAY_SINH, PHAI, SO_CMND, ID_QG, DIA_CHI_THUONG_TRU, ID_QUAN, ID_TP, THON_XOM,ID_PX, DT_DI_DONG FROM dbo.CONG_NHAN WHERE ID_CN =  " + idCN;
+                DataTable dt = new DataTable();
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, strSQL));
+                txtHO_TEN_CH.Text = Convert.ToString(dt.Rows[0]["HO_TEN"]);
+                txtDT_LIEN_HE.Text = Convert.ToString(dt.Rows[0]["DT_DI_DONG"]);
+                txtDIA_CHI_HK.Text = Convert.ToString(dt.Rows[0]["DIA_CHI_THUONG_TRU"]);
+                cboID_TP.EditValue = Convert.ToInt32(dt.Rows[0]["ID_TP"]);
+                cboID_QUAN.EditValue = Convert.ToInt32(dt.Rows[0]["ID_QUAN"]);
+                cboID_PX.EditValue = Convert.ToInt32(dt.Rows[0]["ID_PX"]);
+                txtTHON_XOM.Text = Convert.ToString(dt.Rows[0]["THON_XOM"]);
+            }
+            catch { }
+        }
+
+        private void txtCN_Validated(object sender, EventArgs e)
+        {
+            try
+            {
+                string strSQL = "SELECT HO+' '+TEN HO_TEN, SO_BHXH, NGAY_SINH, PHAI, SO_CMND, ID_QG, DIA_CHI_THUONG_TRU, ID_QUAN, ID_TP, THON_XOM, DT_DI_DONG FROM dbo.CONG_NHAN WHERE MS_CN =  N'" + Convert.ToString(txtCN.Text) + "'";
+                DataTable dt = new DataTable();
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, strSQL));
+                HO_TENTextEdit.Text = Convert.ToString(dt.Rows[0]["HO_TEN"]);
+                NGAY_SINHDateEdit.DateTime = Convert.ToDateTime(dt.Rows[0]["NGAY_SINH"]);
+                txtMS_BHXH.Text = Convert.ToString(dt.Rows[0]["SO_BHXH"]);
+                cboGIOI_TINH.EditValue = Convert.ToInt32(dt.Rows[0]["PHAI"]);
+                DIA_CHITextEdit.Text = Convert.ToString(dt.Rows[0]["DIA_CHI_THUONG_TRU"]);
+                cboID_QG.EditValue = Convert.ToInt32(dt.Rows[0]["ID_QG"]); 
+                cboID_DanToc.EditValue = Convert.ToInt32(dt.Rows[0]["ID_DT"]);
+            }
+            catch { }
+        }
+
+        private void chkCungCongTy_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                txtCN.Properties.ReadOnly = !Convert.ToBoolean(chkCungCongTy.EditValue);
+            }
+            catch { }
         }
     }
 }

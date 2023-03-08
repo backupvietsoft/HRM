@@ -170,6 +170,15 @@ namespace Vs.TimeAttendance
             datThangXem.Properties.EditFormat.FormatString = "MM/yyyy";
             datThangXem.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.DateTimeAdvancingCaret;
             datThangXem.Properties.Mask.EditMask = "MM/yyyy";
+
+            lk_Nam.DateTime = DateTime.Now;
+            lk_Nam.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            lk_Nam.Properties.DisplayFormat.FormatString = "yyyy";
+            lk_Nam.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            lk_Nam.Properties.EditFormat.FormatString = "yyyy";
+            lk_Nam.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.DateTimeAdvancingCaret;
+            lk_Nam.Properties.Mask.EditMask = "yyyy";
+
             lk_Nam.Text = DateTime.Now.ToString("yyyy");
             lk_NgayIn.Text = DateTime.Now.ToString("MM/yyyy");
             rdo_DiTreVeSom.SelectedIndex = 2;
@@ -697,9 +706,8 @@ namespace Vs.TimeAttendance
                     Range row4_T = oSheet.get_Range(currentColumn + 5);
                     row4_T.ColumnWidth = 8;
                     //row4_T.Merge();
-                    row4_T.Value2 = "THÁNG " + Convert.ToString(col - 9) + "/" + lk_Nam.Text;
-
                     col++;
+                    row4_T.Value2 = "THÁNG " + Convert.ToString(col - 8) + "/" + lk_Nam.Text;
                 }
 
                 Range row4_W = oSheet.get_Range("U4", "U5");

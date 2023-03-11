@@ -28,7 +28,7 @@ namespace Vs.HRM
             //ds.ReadXml(AppDomain.CurrentDomain.BaseDirectory + "\\vsconfig.xml");
             Commons.IConnections.Username = "sa";
             Commons.IConnections.Server = @"27.74.240.29,1433";
-            Commons.IConnections.Database = "VS_HRM_DEMO";
+            Commons.IConnections.Database = "VS_HRM_DM";
             Commons.IConnections.Password = "codaikadaiku";
 
             Commons.Modules.sPrivate = @"PILMICO";
@@ -55,8 +55,7 @@ namespace Vs.HRM
         {
             try
             {
-                Application.Run(new XtraForm1());
-
+                Application.Run(new frmCNQuaTrinhCongTac());
             }
             catch (Exception ex)
             {

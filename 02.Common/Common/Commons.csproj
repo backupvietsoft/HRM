@@ -199,7 +199,9 @@
     <EmbeddedResource Include="SubReport\SubReportHeader.resx">
       <DependentUpon>SubReportHeader.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ThongBao.resx" />
+    <EmbeddedResource Include="ThongBao.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="UAC\XtraForm1.resx">
       <DependentUpon>XtraForm1.cs</DependentUpon>
     </EmbeddedResource>

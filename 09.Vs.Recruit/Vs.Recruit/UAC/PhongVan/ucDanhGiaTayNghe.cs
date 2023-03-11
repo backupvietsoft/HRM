@@ -368,8 +368,9 @@ namespace Vs.Recruit
             btnALL.Buttons[2].Properties.Visible = visible;
             btnALL.Buttons[3].Properties.Visible = visible;
             btnALL.Buttons[4].Properties.Visible = visible;
-            btnALL.Buttons[5].Properties.Visible = !visible;
+            btnALL.Buttons[5].Properties.Visible = visible;
             btnALL.Buttons[6].Properties.Visible = !visible;
+            btnALL.Buttons[7].Properties.Visible = !visible;
 
             datTNgay.Properties.ReadOnly = !visible;
             datDNgay.Properties.ReadOnly = !visible;
@@ -379,6 +380,30 @@ namespace Vs.Recruit
 
             grvDSUngVien.OptionsBehavior.Editable = !visible;
         }
+
+        private void XoaTayNghe()
+        {
+            //kiểm tra ứng viên đã đi làm hay chưa
+            if (Convert.ToBoolean(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT XAC_NHAN_DL FROM dbo.UNG_VIEN WHERE ID_UV = " + grvDSUngVien.GetFocusedRowCellValue("ID_UV") + "")) == true)
+            {
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDuLieuDaPhatSinhKhongXoa"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgDeleteDanhGiaTayNghe"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) return;
+            //xóa
+            try
+            {
+                //xóa đánh giá tây nghề
+                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "DELETE dbo.DANH_GIA_TAY_NGHE_UNG_VIEN WHERE ID_UV =  " + grvDSUngVien.GetFocusedRowCellValue("ID_UV") + " ");
+                LoadData();
+
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDelDangSuDung") + "\n" + ex.Message.ToString(), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
 
         private void btnALL_ButtonClick(object sender, DevExpress.XtraBars.Docking2010.ButtonEventArgs e)
         {
@@ -404,14 +429,14 @@ namespace Vs.Recruit
                             {
                                 frm.iiD_DV = Convert.ToInt64(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT TOP 1 ID_DV FROM dbo.XI_NGHIEP WHERE ID_XN = (SELECT ID_XN FROM dbo.YEU_CAU_TUYEN_DUNG WHERE ID_YCTD = " + cboYCTD.EditValue + ")"));
                             }
-                            catch 
+                            catch
                             {
                                 frm.iiD_DV = 1;
                             }
-                            if ( frm.ShowDialog() == DialogResult.OK)
+                            if (frm.ShowDialog() == DialogResult.OK)
                             {
                                 LoadData();
-                            }    
+                            }
                             break;
                         }
                     case "them":
@@ -443,6 +468,11 @@ namespace Vs.Recruit
                             iAdd = 0;
                             LoadData();
                             EnabelButton(true);
+                            break;
+                        }
+                    case "xoa":
+                        {
+                            XoaTayNghe();
                             break;
                         }
                     case "khongluu":
@@ -710,26 +740,34 @@ namespace Vs.Recruit
             }
         }
 
-        //private void grvDSUngVien_CellValueChanging(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
-        //{
-        //    try
-        //    {
-        //        if (Commons.Modules.sLoad == "0Load") return;
-        //        if (e.Column.FieldName == "ID_CN")
-        //        {
-        //            string TenCN = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT HO + ' '+ TEN  FROM dbo.CONG_NHAN WHERE ID_CN = " + e.Value + "").ToString();
-        //            grvDSUngVien.SetRowCellValue(grvDSUngVien.FocusedRowHandle, "HO_TEN_NGT", TenCN);
-        //            Commons.Modules.sLoad = "0Load";
-        //            grvDSUngVien.SetRowCellValue(grvDSUngVien.FocusedRowHandle, "ID_CN", e.Value);
-        //            Commons.Modules.sLoad = "";
-        //            return;
-        //        }
-        //        return;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        XtraMessageBox.Show(ex.Message);
-        //    }
-        //}
+        private void grdDSUngVien_ProcessGridKey(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Delete)
+            {
+                XoaTayNghe();
+            }
+
+            //private void grvDSUngVien_CellValueChanging(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
+            //{
+            //    try
+            //    {
+            //        if (Commons.Modules.sLoad == "0Load") return;
+            //        if (e.Column.FieldName == "ID_CN")
+            //        {
+            //            string TenCN = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT HO + ' '+ TEN  FROM dbo.CONG_NHAN WHERE ID_CN = " + e.Value + "").ToString();
+            //            grvDSUngVien.SetRowCellValue(grvDSUngVien.FocusedRowHandle, "HO_TEN_NGT", TenCN);
+            //            Commons.Modules.sLoad = "0Load";
+            //            grvDSUngVien.SetRowCellValue(grvDSUngVien.FocusedRowHandle, "ID_CN", e.Value);
+            //            Commons.Modules.sLoad = "";
+            //            return;
+            //        }
+            //        return;
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        XtraMessageBox.Show(ex.Message);
+            //    }
+            //}
+        }
     }
 }

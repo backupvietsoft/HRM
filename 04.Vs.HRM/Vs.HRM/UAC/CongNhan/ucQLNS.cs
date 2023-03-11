@@ -84,6 +84,11 @@ namespace Vs.HRM
                         break;
                     }
             }
+
+            foreach (ToolStripMenuItem item in contextMenuStrip1.Items)
+            {
+                item.Text = Commons.Modules.ObjLanguages.GetLanguage(this.Name, item.Name);
+            }
         }
 
         private void LoadCboDonVi()
@@ -597,6 +602,15 @@ namespace Vs.HRM
             menuLapHopDong.Tag = new RowInfo(view, rowHandle);
             return menuLapHopDong;
         }
+
+        public DXMenuItem MCreateCNQuaTrinhCT(DevExpress.XtraGrid.Views.Grid.GridView view, int rowHandle)
+        {
+            string sStr = Commons.Modules.ObjLanguages.GetLanguage(Commons.Modules.ModuleName, this.Name, "lblLapCongTac", Commons.Modules.TypeLanguage);
+            DXMenuItem menuLapCongTac = new DXMenuItem(sStr, new EventHandler(LoadCNCongTac));
+            menuLapCongTac.Tag = new RowInfo(view, rowHandle);
+            return menuLapCongTac;
+        }
+
         public void LapHopDong(object sender, EventArgs e)
         {
             try
@@ -615,23 +629,53 @@ namespace Vs.HRM
             }
             catch (Exception ex) { }
         }
-        private void grvDSCongNhan_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
+
+        public void LoadCNCongTac(object sender, EventArgs e)
         {
-            if (Convert.ToInt32(cbo_TTHT.EditValue) != 8) return;
             try
             {
-                DevExpress.XtraGrid.Views.Grid.GridView view = sender as DevExpress.XtraGrid.Views.Grid.GridView;
-                if (e.MenuType == DevExpress.XtraGrid.Views.Grid.GridMenuType.Row)
-                {
-                    int irow = e.HitInfo.RowHandle;
-                    e.Menu.Items.Clear();
-                    DevExpress.Utils.Menu.DXMenuItem itemLapHopDong = MCreateMenuLapHopDong(view, irow);
-                    e.Menu.Items.Add(itemLapHopDong);
-                }
+                frmCNQuaTrinhCongTac frm = new frmCNQuaTrinhCongTac();
+                frm.dtTmp = new DataTable();
+                frm.dtTmp = Commons.Modules.ObjSystems.ConvertDatatable(grdDSCongNhan);
+                frm.ShowDialog();
             }
-            catch
+            catch (Exception ex) { }
+        }
+
+        private void grvDSCongNhan_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
+        {
+            if (Convert.ToInt32(cbo_TTHT.EditValue) == 8)
             {
-            }
+                try
+                {
+                    DevExpress.XtraGrid.Views.Grid.GridView view = sender as DevExpress.XtraGrid.Views.Grid.GridView;
+                    if (e.MenuType == DevExpress.XtraGrid.Views.Grid.GridMenuType.Row)
+                    {
+                        int irow = e.HitInfo.RowHandle;
+                        e.Menu.Items.Clear();
+                        DevExpress.Utils.Menu.DXMenuItem itemLapHopDong = MCreateMenuLapHopDong(view, irow);
+                        e.Menu.Items.Add(itemLapHopDong);
+                    }
+                }
+                catch
+                {
+                }
+            }    
+            if(Convert.ToInt32(cboID_LTTHT.EditValue) == 1)
+                try
+                {
+                    DevExpress.XtraGrid.Views.Grid.GridView view = sender as DevExpress.XtraGrid.Views.Grid.GridView;
+                    if (e.MenuType == DevExpress.XtraGrid.Views.Grid.GridMenuType.Row)
+                    {
+                        int irow = e.HitInfo.RowHandle;
+                        e.Menu.Items.Clear();
+                        DevExpress.Utils.Menu.DXMenuItem itemCNQD = MCreateCNQuaTrinhCT(view, irow);
+                        e.Menu.Items.Add(itemCNQD);
+                    }
+                }
+                catch
+                {
+                }
         }
 
         #endregion

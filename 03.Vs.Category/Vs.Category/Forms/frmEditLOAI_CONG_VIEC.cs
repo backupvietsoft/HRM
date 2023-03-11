@@ -33,14 +33,19 @@ namespace Vs.Category
 
             //ItemForTEN_XN.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
 
-                //DataTable dt = new DataTable();
-                //dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboCongNhan", Commons.Modules.UserName, Commons.Modules.TypeLanguage, 3));
+            //DataTable dt = new DataTable();
+            //dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboCongNhan", Commons.Modules.UserName, Commons.Modules.TypeLanguage, 3));
 
-                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboChucVu, Commons.Modules.ObjSystems.DataChucVu(false, Convert.ToInt32(-1)), "ID_CV", "TEN_CV", "TEN_CV");
+            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboChucVu, Commons.Modules.ObjSystems.DataChucVu(true, Convert.ToInt32(-1)), "ID_CV", "TEN_CV", "TEN_CV");
 
-                //Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboChucVu, Commons.Modules.ObjSystems.DataXiNghiep(-1,false) , "ID_XN", "TEN_XN", "TEN_XN");
-                ItemForTEN_CV.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
-            
+            //Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboChucVu, Commons.Modules.ObjSystems.DataXiNghiep(-1,false) , "ID_XN", "TEN_XN", "TEN_XN");
+            ItemForTEN_CV.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+            string strSQL = "SELECT QL_NBL FROM dbo.THONG_TIN_CHUNG";
+            int QL = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, strSQL));
+            if (QL == 0)
+            {
+                lblNGACH_LUONG.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+            }
 
             LoadLoaiTO();
             //Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(ID_CVSearchLookUpEdit, Commons.Modules.ObjSystems.DataChucVu(false), "ID_CV", "TEN_CV", "TEN_CV", true, true);
@@ -50,7 +55,7 @@ namespace Vs.Category
             }
             else
             {
-                string strSQL = "SELECT MAX(STT) FROM dbo.LOAI_CONG_VIEC";
+                strSQL = "SELECT MAX(STT) FROM dbo.LOAI_CONG_VIEC";
                 txtSTT.EditValue = (string.IsNullOrEmpty(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, strSQL).ToString()) ? 0 : Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, strSQL))) + 1;
             }
         }
@@ -135,6 +140,21 @@ namespace Vs.Category
                         {
                             if (!dxValidationProvider1.Validate()) return;
                             if (bKiemTrung()) return;
+                            if (AddEdit == false)
+                            {
+                                //kiểm tra vị trí công việc có sử dụng trong nhân viên chưa
+                                if (Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT ID_CV FROM dbo.LOAI_CONG_VIEC WHERE ID_LCV  = " + Id + "")) != Convert.ToInt32(cboChucVu.EditValue))
+                                {
+                                    //kiểm tra vị trí công việc có sử dụng trong nhân viên chưa
+                                    if (Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT COUNT(*) FROM dbo.CONG_NHAN WHERE ID_LCV = " + Id + "")) > 0)
+                                    {
+                                        if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgBanCoMuonCapNhatLaiCVchoNV"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                                        {
+                                            return;
+                                        }
+                                    }
+                                }
+                            }
                             Commons.Modules.sId = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spUpdateLOAI_CONG_VIEC", (AddEdit ? -1 : Id),
                                 TEN_LCVTextEdit.EditValue, TEN_LCV_ATextEdit.EditValue,
                                 TEN_LCV_HTextEdit.EditValue, DOC_HAICheckEdit.EditValue,
@@ -143,7 +163,7 @@ namespace Vs.Category
                                 Convert.ToInt64(cboChucVu.Text == "" ? cboChucVu.EditValue = null : cboChucVu.EditValue),
                                 (txtSTT.Text == "") ? txtSTT.EditValue = null : txtSTT.EditValue,
                                 txtCHUC_DANH.Text, txtCHUC_DANH_A.Text,
-                                txtMO_TA_CV.Text, txtMO_TA_CV_A.Text , cboNGACH_LUONG.EditValue
+                                txtMO_TA_CV.Text, txtMO_TA_CV_A.Text, cboNGACH_LUONG.EditValue
                                 ).ToString();
                             if (AddEdit)
                             {
@@ -226,6 +246,6 @@ namespace Vs.Category
             return false;
         }
 
-        
+
     }
 }

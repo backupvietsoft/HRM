@@ -605,20 +605,20 @@ namespace Vs.HRM
             // 
             // txtDIA_CHI_KS
             // 
-            this.txtDIA_CHI_KS.Location = new System.Drawing.Point(169, 416);
+            this.txtDIA_CHI_KS.Location = new System.Drawing.Point(172, 417);
             this.txtDIA_CHI_KS.Name = "txtDIA_CHI_KS";
-            this.txtDIA_CHI_KS.Size = new System.Drawing.Size(395, 24);
+            this.txtDIA_CHI_KS.Size = new System.Drawing.Size(389, 24);
             this.txtDIA_CHI_KS.StyleController = this.dataLayoutControl1;
             this.txtDIA_CHI_KS.TabIndex = 86;
             // 
             // cboID_KV
             // 
-            this.cboID_KV.Location = new System.Drawing.Point(1040, 442);
+            this.cboID_KV.Location = new System.Drawing.Point(1043, 445);
             this.cboID_KV.Name = "cboID_KV";
             this.cboID_KV.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cboID_KV.Properties.NullText = "";
-            this.cboID_KV.Size = new System.Drawing.Size(79, 24);
+            this.cboID_KV.Size = new System.Drawing.Size(73, 24);
             this.cboID_KV.StyleController = this.dataLayoutControl1;
             this.cboID_KV.TabIndex = 82;
             // 
@@ -1130,6 +1130,7 @@ namespace Vs.HRM
             conditionValidationRule10.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.Critical;
             conditionValidationRule10.Value1 = 0;
             this.dxValidationProvider1.SetValidationRule(this.ID_TT_HDLookUpEdit, conditionValidationRule10);
+            this.ID_TT_HDLookUpEdit.BeforePopup += new System.EventHandler(this.ID_TT_HDLookUpEdit_BeforePopup);
             // 
             // ID_TT_HTLookUpEdit
             // 
@@ -1146,6 +1147,7 @@ namespace Vs.HRM
             conditionValidationRule11.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.Critical;
             conditionValidationRule11.Value1 = 0;
             this.dxValidationProvider1.SetValidationRule(this.ID_TT_HTLookUpEdit, conditionValidationRule11);
+            this.ID_TT_HTLookUpEdit.EditValueChanged += new System.EventHandler(this.ID_TT_HTLookUpEdit_EditValueChanged);
             // 
             // ID_CVLookUpEdit
             // 
@@ -1535,36 +1537,36 @@ namespace Vs.HRM
             // 
             // cboID_TP_KS
             // 
-            this.cboID_TP_KS.Location = new System.Drawing.Point(723, 416);
+            this.cboID_TP_KS.Location = new System.Drawing.Point(726, 417);
             this.cboID_TP_KS.Name = "cboID_TP_KS";
             this.cboID_TP_KS.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cboID_TP_KS.Properties.NullText = "";
-            this.cboID_TP_KS.Size = new System.Drawing.Size(396, 24);
+            this.cboID_TP_KS.Size = new System.Drawing.Size(390, 24);
             this.cboID_TP_KS.StyleController = this.dataLayoutControl1;
             this.cboID_TP_KS.TabIndex = 87;
             this.cboID_TP_KS.EditValueChanged += new System.EventHandler(this.cboID_TP_KS_EditValueChanged);
             // 
             // cboID_QUAN_KS
             // 
-            this.cboID_QUAN_KS.Location = new System.Drawing.Point(169, 442);
+            this.cboID_QUAN_KS.Location = new System.Drawing.Point(172, 445);
             this.cboID_QUAN_KS.Name = "cboID_QUAN_KS";
             this.cboID_QUAN_KS.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cboID_QUAN_KS.Properties.NullText = "";
-            this.cboID_QUAN_KS.Size = new System.Drawing.Size(395, 24);
+            this.cboID_QUAN_KS.Size = new System.Drawing.Size(389, 24);
             this.cboID_QUAN_KS.StyleController = this.dataLayoutControl1;
             this.cboID_QUAN_KS.TabIndex = 88;
             this.cboID_QUAN_KS.EditValueChanged += new System.EventHandler(this.cboID_QUAN_KS_EditValueChanged);
             // 
             // cboID_PX_KS
             // 
-            this.cboID_PX_KS.Location = new System.Drawing.Point(723, 442);
+            this.cboID_PX_KS.Location = new System.Drawing.Point(726, 445);
             this.cboID_PX_KS.Name = "cboID_PX_KS";
             this.cboID_PX_KS.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cboID_PX_KS.Properties.NullText = "";
-            this.cboID_PX_KS.Size = new System.Drawing.Size(158, 24);
+            this.cboID_PX_KS.Size = new System.Drawing.Size(152, 24);
             this.cboID_PX_KS.StyleController = this.dataLayoutControl1;
             this.cboID_PX_KS.TabIndex = 89;
             // 
@@ -1733,7 +1735,7 @@ namespace Vs.HRM
             this.Tab.AppearanceTabPage.PageClient.Options.UseForeColor = true;
             this.Tab.Location = new System.Drawing.Point(0, 239);
             this.Tab.Name = "Tab";
-            this.Tab.SelectedTabPage = this.groupTamTruThuongTru;
+            this.Tab.SelectedTabPage = this.groupThongTinBaoHiem;
             this.Tab.Size = new System.Drawing.Size(1121, 387);
             this.Tab.TabPages.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.groupThongTinBoXung,
@@ -2402,7 +2404,8 @@ namespace Vs.HRM
             this.lblDIA_CHI_KS.Control = this.txtDIA_CHI_KS;
             this.lblDIA_CHI_KS.Location = new System.Drawing.Point(0, 140);
             this.lblDIA_CHI_KS.Name = "lblDIA_CHI_KS";
-            this.lblDIA_CHI_KS.Size = new System.Drawing.Size(554, 26);
+            this.lblDIA_CHI_KS.Padding = new DevExpress.XtraLayout.Utils.Padding(4, 4, 2, 2);
+            this.lblDIA_CHI_KS.Size = new System.Drawing.Size(554, 28);
             this.lblDIA_CHI_KS.TextSize = new System.Drawing.Size(145, 17);
             // 
             // lblID_TP_KS
@@ -2410,31 +2413,35 @@ namespace Vs.HRM
             this.lblID_TP_KS.Control = this.cboID_TP_KS;
             this.lblID_TP_KS.Location = new System.Drawing.Point(554, 140);
             this.lblID_TP_KS.Name = "lblID_TP_KS";
-            this.lblID_TP_KS.Size = new System.Drawing.Size(555, 26);
+            this.lblID_TP_KS.Padding = new DevExpress.XtraLayout.Utils.Padding(4, 4, 2, 2);
+            this.lblID_TP_KS.Size = new System.Drawing.Size(555, 28);
             this.lblID_TP_KS.TextSize = new System.Drawing.Size(145, 17);
             // 
             // lblID_QUAN_KS
             // 
             this.lblID_QUAN_KS.Control = this.cboID_QUAN_KS;
-            this.lblID_QUAN_KS.Location = new System.Drawing.Point(0, 166);
+            this.lblID_QUAN_KS.Location = new System.Drawing.Point(0, 168);
             this.lblID_QUAN_KS.Name = "lblID_QUAN_KS";
-            this.lblID_QUAN_KS.Size = new System.Drawing.Size(554, 184);
+            this.lblID_QUAN_KS.Padding = new DevExpress.XtraLayout.Utils.Padding(4, 4, 2, 2);
+            this.lblID_QUAN_KS.Size = new System.Drawing.Size(554, 182);
             this.lblID_QUAN_KS.TextSize = new System.Drawing.Size(145, 17);
             // 
             // lblID_PX_KS
             // 
             this.lblID_PX_KS.Control = this.cboID_PX_KS;
-            this.lblID_PX_KS.Location = new System.Drawing.Point(554, 166);
+            this.lblID_PX_KS.Location = new System.Drawing.Point(554, 168);
             this.lblID_PX_KS.Name = "lblID_PX_KS";
-            this.lblID_PX_KS.Size = new System.Drawing.Size(317, 184);
+            this.lblID_PX_KS.Padding = new DevExpress.XtraLayout.Utils.Padding(4, 4, 2, 2);
+            this.lblID_PX_KS.Size = new System.Drawing.Size(317, 182);
             this.lblID_PX_KS.TextSize = new System.Drawing.Size(145, 17);
             // 
             // ItemForKHU_VUC
             // 
             this.ItemForKHU_VUC.Control = this.cboID_KV;
-            this.ItemForKHU_VUC.Location = new System.Drawing.Point(871, 166);
+            this.ItemForKHU_VUC.Location = new System.Drawing.Point(871, 168);
             this.ItemForKHU_VUC.Name = "ItemForKHU_VUC";
-            this.ItemForKHU_VUC.Size = new System.Drawing.Size(238, 184);
+            this.ItemForKHU_VUC.Padding = new DevExpress.XtraLayout.Utils.Padding(4, 4, 2, 2);
+            this.ItemForKHU_VUC.Size = new System.Drawing.Size(238, 182);
             this.ItemForKHU_VUC.TextSize = new System.Drawing.Size(145, 17);
             // 
             // groupBangCap

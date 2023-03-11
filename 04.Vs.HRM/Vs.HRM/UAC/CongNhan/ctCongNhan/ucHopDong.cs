@@ -447,6 +447,7 @@ namespace Vs.HRM
                             cothem = true;
                             enableButon(false);
                             ID_LHDLDLookUpEdit_EditValueChanged(null, null);
+                            CONG_VIECTextEdit.Text = Convert.ToString(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr,CommandType.Text, "SELECT TEN_LCV FROM dbo.LOAI_CONG_VIEC  WHERE ID_LCV =( SELECT TOP 1 ID_LCV FROM dbo.CONG_NHAN WHERE ID_CN = " + idcn+" )"));
                             break;
                         }
                     case "sua":

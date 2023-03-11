@@ -153,6 +153,12 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Form\frmCNQuaTrinhCongTac.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\frmCNQuaTrinhCongTac.Designer.cs">
+      <DependentUpon>frmCNQuaTrinhCongTac.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form\frmChonNhanVien.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -696,6 +702,9 @@
     <Compile Include="XtraForm1.Designer.cs">
       <DependentUpon>XtraForm1.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Form\frmCNQuaTrinhCongTac.resx">
+      <DependentUpon>frmCNQuaTrinhCongTac.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form\frmChonNhanVien.resx">
       <DependentUpon>frmChonNhanVien.cs</DependentUpon>
     </EmbeddedResource>

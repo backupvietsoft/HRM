@@ -15,6 +15,8 @@ using DevExpress.XtraEditors.Repository;
 using DevExpress.Utils;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using DevExpress.Map.Native;
+using DevExpress.XtraEditors.Filtering.Templates;
+using DevExpress.DataProcessing.InMemoryDataProcessor;
 
 namespace Vs.HRM
 {
@@ -27,6 +29,7 @@ namespace Vs.HRM
         bool HopLeMT = true;
         bool HopLeNgaySinh = true;
         bool isCancel = false;
+        Int64 idlcv = 0;
         //string strDuongDan = "";
         private ucCTQLNS uc;
         public ucLyLich(Int64 id)
@@ -368,6 +371,45 @@ namespace Vs.HRM
                         if (MS_CNTextEdit.Text != "") if (!kiemtrung(1)) return;
                         if (MS_THE_CCTextEdit.Text != "") if (!kiemtrung(2)) return;
                         if (!kiemtrung(3)) return;
+                        //kiểm tra chức vụ
+                        if(cothem == false)
+                        {
+                            //chỉ khi sữa mới kiểm tra xem chức vụ củ và hiện tại giống nhau không
+                            if(Convert.ToInt64(ID_CVLookUpEdit.EditValue) != Convert.ToInt64(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT ID_CV FROM dbo.LOAI_CONG_VIEC WHERE ID_LCV = "+ idlcv +"")))
+                            {
+                                if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgBanCoMuonCapNhatLaiCVchoNV"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                                {
+                                    ID_LCVLookUpEdit.EditValue = idlcv;
+                                    return;
+                                }
+                            }    
+                        }    
+                        //kiểm tra khi chọn đã nghĩ việc
+                        try
+                        {
+                            string skHNV = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT ISNULL(KY_HIEU,'') FROM dbo.TINH_TRANG_HT WHERE ID_TT_HT =  " + ID_TT_HTLookUpEdit.EditValue + "").ToString();
+                            if (skHNV.ToLower().Trim() == "nv")
+                            {
+                                //kiểm tra có hợp đồng lao động hay quá trình công tác chưa
+                                if (Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr,CommandType.Text, "SELECT(SELECT COUNT(*) FROM dbo.HOP_DONG_LAO_DONG WHERE ID_CN = " + idcn + ") + (SELECT COUNT(*) FROM dbo.QUA_TRINH_CONG_TAC WHERE ID_CN = " + idcn + ")")) > 0)
+                                {
+                                    //kiểm tra có quyết định thôi việc chưa.
+                                    if (Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr,CommandType.Text, "SELECT COUNT(*) FROM dbo.QUYET_DINH_THOI_VIEC WHERE ID_CN = " + idcn + "")) == 0)
+                                    //nếu có phải thông báo bạn phải lập quyết định thôi việc
+                                    {
+                                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgBanPhaiLapQuyetDinhThoiViec"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Question);
+                                        return;
+                                    }
+                                }
+                                //nếu có kiểm tra có trong nghĩ việc chưa, nếu chưa có thì báo phải làm bên nghĩ việc
+                                ID_TT_HDLookUpEdit.EditValue = 5;
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+
+                        }
+
                         if (Commons.Modules.iCongNhan == -1)
                         {
 
@@ -758,6 +800,13 @@ namespace Vs.HRM
                     ID_TOLookupEdit.EditValue = dt.Rows[0]["ID_TO"];
                     ID_CVLookUpEdit.EditValue = dt.Rows[0]["ID_CV"];
                     ID_LCVLookUpEdit.EditValue = dt.Rows[0]["ID_LCV"];
+                    try
+                    {
+                        idlcv = Convert.ToInt64(ID_LCVLookUpEdit.EditValue);
+                    }
+                    catch
+                    {
+                    }
                     PHEP_CTTextEdit.EditValue = dt.Rows[0]["PHEP_CT"];
                     NGAY_HOC_VIECDateEdit.EditValue = dt.Rows[0]["NGAY_HOC_VIEC"];
                     NGAY_THU_VIECDateEdit.EditValue = dt.Rows[0]["NGAY_THU_VIEC"];
@@ -2008,6 +2057,30 @@ namespace Vs.HRM
         private void HINH_CNPictureEdit_EditValueChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void ID_TT_HDLookUpEdit_BeforePopup(object sender, EventArgs e)
+        {
+            Commons.Modules.ObjSystems.MLoadLookUpEditN(ID_TT_HDLookUpEdit, Commons.Modules.ObjSystems.DataTinHTrangHD(false).AsEnumerable().Where(x => x["ID_TT_HD"].ToString() != "5").CopyToDataTable(), "ID_TT_HD", "TEN_TT_HD", "TEN_TT_HD", "", true);
+
+        }
+
+        private void ID_TT_HTLookUpEdit_EditValueChanged(object sender, EventArgs e)
+        {
+            //
+            if (windowsUIButton.Buttons[5].Properties.Visible == true) return;
+                string skHNV = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT ISNULL(KY_HIEU,'') FROM dbo.TINH_TRANG_HT WHERE ID_TT_HT =  " + ID_TT_HTLookUpEdit.EditValue + "").ToString();
+            if (skHNV.ToLower().Trim() == "nv")
+            {
+                Commons.Modules.ObjSystems.MLoadLookUpEditN(ID_TT_HDLookUpEdit, Commons.Modules.ObjSystems.DataTinHTrangHD(false), "ID_TT_HD", "TEN_TT_HD", "TEN_TT_HD", "", true);
+                ID_TT_HDLookUpEdit.EditValue = Convert.ToInt64(5);
+                ID_TT_HDLookUpEdit.Properties.ReadOnly =true;
+            }
+            else
+            {
+                ID_TT_HDLookUpEdit.EditValue = Convert.ToInt64(1);
+                ID_TT_HDLookUpEdit.Properties.ReadOnly = false;
+            }    
         }
     }
 }

@@ -617,7 +617,7 @@ namespace Vs.Recruit
                 txtID_VTTD_1.EditValue,
                 txtID_VTTD_2.EditValue,
                 txtMUC_LUONG_MONG_MUON.EditValue,
-                txtThuongGT.EditValue.ToString() == "" ? 0 : txtThuongGT.EditValue,
+                txtThuongGT.Text.ToString() == "" ? 0 : txtThuongGT.EditValue,
                 datNGAY_CO_THE_DI_LAM.Text.ToString() == "" ? DBNull.Value : datNGAY_CO_THE_DI_LAM.EditValue,
                 txtNGUOI_LIEN_HE.EditValue,
                 txtDT_NGUOI_LIEN_HE.EditValue,

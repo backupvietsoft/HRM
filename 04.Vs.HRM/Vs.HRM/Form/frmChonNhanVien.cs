@@ -93,6 +93,8 @@ namespace Vs.HRM
                 grvChonNV.OptionsSelection.ShowCheckBoxSelectorInColumnHeader = DevExpress.Utils.DefaultBoolean.True;
                 grvChonNV.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CheckBoxRowSelect;
                 grvChonNV.OptionsSelection.CheckBoxSelectorField = "CHON";
+
+
             }
             catch { }
         }

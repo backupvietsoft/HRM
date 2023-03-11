@@ -29,11 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions5 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions6 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule3 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
-            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule4 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions1 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions2 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule1 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
+            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule2 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             this.btnALL = new DevExpress.XtraBars.Docking2010.WindowsUIButtonPanel();
             this.tablePanel1 = new DevExpress.Utils.Layout.TablePanel();
             this.dataLayoutControl1 = new DevExpress.XtraDataLayout.DataLayoutControl();
@@ -70,12 +69,6 @@
             this.lblMO_TA_CV_A = new DevExpress.XtraLayout.LayoutControlItem();
             this.lblNGACH_LUONG = new DevExpress.XtraLayout.LayoutControlItem();
             this.dxValidationProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
-            this.dxValidationProvider11 = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
-            this.dxValidationProvider111 = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
-            this.dxValidationProvider12 = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
-            this.dxValidationProvider13 = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
-            this.dxValidationProvider14 = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
-            this.dxValidationProvider121 = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).BeginInit();
             this.tablePanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataLayoutControl1)).BeginInit();
@@ -113,12 +106,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.lblMO_TA_CV_A)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblNGACH_LUONG)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider11)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider111)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider12)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider13)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider14)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider121)).BeginInit();
             this.SuspendLayout();
             // 
             // btnALL
@@ -138,11 +125,11 @@
             this.btnALL.AppearanceButton.Pressed.Options.UseFont = true;
             this.btnALL.AppearanceButton.Pressed.Options.UseImage = true;
             this.btnALL.AppearanceButton.Pressed.Options.UseTextOptions = true;
-            windowsUIButtonImageOptions5.ImageUri.Uri = "SaveAll";
-            windowsUIButtonImageOptions6.ImageUri.Uri = "richedit/clearheaderandfooter";
+            windowsUIButtonImageOptions1.ImageUri.Uri = "SaveAll";
+            windowsUIButtonImageOptions2.ImageUri.Uri = "richedit/clearheaderandfooter";
             this.btnALL.Buttons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] {
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions5, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "luu", -1, false),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions6, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "huy", -1, false)});
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions1, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "luu", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions2, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "huy", -1, false)});
             this.btnALL.ContentAlignment = System.Drawing.ContentAlignment.MiddleRight;
             this.btnALL.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnALL.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -200,7 +187,7 @@
             // 
             // txtMO_TA_CV_A
             // 
-            this.txtMO_TA_CV_A.Location = new System.Drawing.Point(120, 255);
+            this.txtMO_TA_CV_A.Location = new System.Drawing.Point(120, 230);
             this.txtMO_TA_CV_A.Name = "txtMO_TA_CV_A";
             this.txtMO_TA_CV_A.Size = new System.Drawing.Size(417, 67);
             this.txtMO_TA_CV_A.StyleController = this.dataLayoutControl1;
@@ -208,7 +195,7 @@
             // 
             // txtCHUC_DANH_A
             // 
-            this.txtCHUC_DANH_A.Location = new System.Drawing.Point(120, 162);
+            this.txtCHUC_DANH_A.Location = new System.Drawing.Point(120, 137);
             this.txtCHUC_DANH_A.Name = "txtCHUC_DANH_A";
             this.txtCHUC_DANH_A.Size = new System.Drawing.Size(417, 24);
             this.txtCHUC_DANH_A.StyleController = this.dataLayoutControl1;
@@ -216,7 +203,7 @@
             // 
             // txtMO_TA_CV
             // 
-            this.txtMO_TA_CV.Location = new System.Drawing.Point(120, 188);
+            this.txtMO_TA_CV.Location = new System.Drawing.Point(120, 163);
             this.txtMO_TA_CV.Name = "txtMO_TA_CV";
             this.txtMO_TA_CV.Size = new System.Drawing.Size(417, 65);
             this.txtMO_TA_CV.StyleController = this.dataLayoutControl1;
@@ -224,7 +211,7 @@
             // 
             // txtCHUC_DANH
             // 
-            this.txtCHUC_DANH.Location = new System.Drawing.Point(120, 136);
+            this.txtCHUC_DANH.Location = new System.Drawing.Point(120, 111);
             this.txtCHUC_DANH.Name = "txtCHUC_DANH";
             this.txtCHUC_DANH.Size = new System.Drawing.Size(417, 24);
             this.txtCHUC_DANH.StyleController = this.dataLayoutControl1;
@@ -232,7 +219,7 @@
             // 
             // cboChucVu
             // 
-            this.cboChucVu.Location = new System.Drawing.Point(120, 84);
+            this.cboChucVu.Location = new System.Drawing.Point(120, 59);
             this.cboChucVu.Name = "cboChucVu";
             this.cboChucVu.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -241,10 +228,10 @@
             this.cboChucVu.Size = new System.Drawing.Size(417, 24);
             this.cboChucVu.StyleController = this.dataLayoutControl1;
             this.cboChucVu.TabIndex = 12;
-            conditionValidationRule3.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule3.ErrorText = "This value is not valid";
-            conditionValidationRule3.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.Critical;
-            this.dxValidationProvider1.SetValidationRule(this.cboChucVu, conditionValidationRule3);
+            conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule1.ErrorText = "This value is not valid";
+            conditionValidationRule1.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.Critical;
+            this.dxValidationProvider1.SetValidationRule(this.cboChucVu, conditionValidationRule1);
             // 
             // gridView2
             // 
@@ -255,19 +242,19 @@
             // 
             // TEN_LCVTextEdit
             // 
-            this.TEN_LCVTextEdit.Location = new System.Drawing.Point(120, 6);
+            this.TEN_LCVTextEdit.Location = new System.Drawing.Point(120, -19);
             this.TEN_LCVTextEdit.Margin = new System.Windows.Forms.Padding(4);
             this.TEN_LCVTextEdit.Name = "TEN_LCVTextEdit";
             this.TEN_LCVTextEdit.Size = new System.Drawing.Size(417, 24);
             this.TEN_LCVTextEdit.StyleController = this.dataLayoutControl1;
             this.TEN_LCVTextEdit.TabIndex = 4;
-            conditionValidationRule4.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule4.ErrorText = "This value is not valid";
-            this.dxValidationProvider1.SetValidationRule(this.TEN_LCVTextEdit, conditionValidationRule4);
+            conditionValidationRule2.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule2.ErrorText = "This value is not valid";
+            this.dxValidationProvider1.SetValidationRule(this.TEN_LCVTextEdit, conditionValidationRule2);
             // 
             // TEN_LCV_ATextEdit
             // 
-            this.TEN_LCV_ATextEdit.Location = new System.Drawing.Point(120, 32);
+            this.TEN_LCV_ATextEdit.Location = new System.Drawing.Point(120, 7);
             this.TEN_LCV_ATextEdit.Margin = new System.Windows.Forms.Padding(4);
             this.TEN_LCV_ATextEdit.Name = "TEN_LCV_ATextEdit";
             this.TEN_LCV_ATextEdit.Size = new System.Drawing.Size(417, 24);
@@ -276,7 +263,7 @@
             // 
             // TEN_LCV_HTextEdit
             // 
-            this.TEN_LCV_HTextEdit.Location = new System.Drawing.Point(120, 58);
+            this.TEN_LCV_HTextEdit.Location = new System.Drawing.Point(120, 33);
             this.TEN_LCV_HTextEdit.Margin = new System.Windows.Forms.Padding(4);
             this.TEN_LCV_HTextEdit.Name = "TEN_LCV_HTextEdit";
             this.TEN_LCV_HTextEdit.Size = new System.Drawing.Size(417, 24);
@@ -285,7 +272,7 @@
             // 
             // DOC_HAICheckEdit
             // 
-            this.DOC_HAICheckEdit.Location = new System.Drawing.Point(507, 352);
+            this.DOC_HAICheckEdit.Location = new System.Drawing.Point(507, 327);
             this.DOC_HAICheckEdit.Margin = new System.Windows.Forms.Padding(4);
             this.DOC_HAICheckEdit.Name = "DOC_HAICheckEdit";
             this.DOC_HAICheckEdit.Properties.Caption = "";
@@ -297,7 +284,7 @@
             // 
             // PHEP_CTTextEdit
             // 
-            this.PHEP_CTTextEdit.Location = new System.Drawing.Point(120, 350);
+            this.PHEP_CTTextEdit.Location = new System.Drawing.Point(120, 325);
             this.PHEP_CTTextEdit.Margin = new System.Windows.Forms.Padding(4);
             this.PHEP_CTTextEdit.Name = "PHEP_CTTextEdit";
             this.PHEP_CTTextEdit.Properties.Appearance.Options.UseTextOptions = true;
@@ -310,7 +297,7 @@
             // 
             // ID_LTSearchLookUpEdit
             // 
-            this.ID_LTSearchLookUpEdit.Location = new System.Drawing.Point(120, 110);
+            this.ID_LTSearchLookUpEdit.Location = new System.Drawing.Point(120, 85);
             this.ID_LTSearchLookUpEdit.Margin = new System.Windows.Forms.Padding(4);
             this.ID_LTSearchLookUpEdit.Name = "ID_LTSearchLookUpEdit";
             this.ID_LTSearchLookUpEdit.Properties.Appearance.Options.UseTextOptions = true;
@@ -335,7 +322,7 @@
             // txtSTT
             // 
             this.txtSTT.EditValue = "";
-            this.txtSTT.Location = new System.Drawing.Point(345, 350);
+            this.txtSTT.Location = new System.Drawing.Point(345, 325);
             this.txtSTT.Name = "txtSTT";
             this.txtSTT.Properties.Appearance.Options.UseTextOptions = true;
             this.txtSTT.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
@@ -347,7 +334,7 @@
             // 
             // cboNGACH_LUONG
             // 
-            this.cboNGACH_LUONG.Location = new System.Drawing.Point(120, 324);
+            this.cboNGACH_LUONG.Location = new System.Drawing.Point(120, 299);
             this.cboNGACH_LUONG.Name = "cboNGACH_LUONG";
             this.cboNGACH_LUONG.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -356,10 +343,6 @@
             this.cboNGACH_LUONG.Size = new System.Drawing.Size(417, 24);
             this.cboNGACH_LUONG.StyleController = this.dataLayoutControl1;
             this.cboNGACH_LUONG.TabIndex = 12;
-            conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule1.ErrorText = "This value is not valid";
-            conditionValidationRule1.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.Critical;
-            this.dxValidationProvider12.SetValidationRule(this.cboNGACH_LUONG, conditionValidationRule1);
             // 
             // gridView21
             // 
@@ -587,12 +570,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.lblMO_TA_CV_A)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblNGACH_LUONG)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider11)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider111)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider12)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider13)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider14)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider121)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -632,14 +609,8 @@
         private DevExpress.XtraEditors.TextEdit txtCHUC_DANH_A;
         private DevExpress.XtraLayout.LayoutControlItem lblCHUC_DANH_A;
         private DevExpress.XtraLayout.LayoutControlItem lblMO_TA_CV_A;
-        private DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider dxValidationProvider11;
-        private DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider dxValidationProvider111;
         private DevExpress.XtraEditors.SearchLookUpEdit cboNGACH_LUONG;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView21;
-        private DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider dxValidationProvider12;
-        private DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider dxValidationProvider13;
         private DevExpress.XtraLayout.LayoutControlItem lblNGACH_LUONG;
-        private DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider dxValidationProvider14;
-        private DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider dxValidationProvider121;
     }
 }

@@ -127,6 +127,7 @@ namespace Vs.HRM
             try
             {
                 if (Commons.Modules.sLoad == "0Load") return;
+                if (!windowsUIButton.Buttons[6].Properties.Visible) return;
                 Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(ID_TOLookUpEdit, Commons.Modules.ObjSystems.DataTo(Convert.ToInt32(DON_VILookUpEdit.EditValue), Convert.ToInt32(XI_NGHIEPLookUpEdit.EditValue), false), "ID_TO", "TEN_TO", "TEN_TO", true, true);
                 switch (Commons.Modules.KyHieuDV)
                 {

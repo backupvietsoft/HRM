@@ -1568,6 +1568,80 @@ namespace Commons
                 return false;
             }
         }
+
+
+        public bool MLoadXtraGrid(DevExpress.XtraGrid.GridControl grd, DevExpress.XtraGrid.Views.BandedGrid.BandedGridView grv, DataTable dtTmp, bool MEditable, bool MPopulateColumns, bool MColumnAutoWidth, bool MBestFitColumns, bool MloadNNgu, string fName)
+        {
+            try
+            {
+                grd.BindingContext = new BindingContext();
+                grd.DataSource = dtTmp;
+                grv.OptionsBehavior.Editable = MEditable;
+                grv.OptionsView.RowAutoHeight = true;
+
+                if (MPopulateColumns == true)
+                    grv.PopulateColumns();
+                grv.OptionsView.ColumnAutoWidth = MColumnAutoWidth;
+                grv.OptionsView.AllowHtmlDrawHeaders = true;
+                //grv.Appearance.HeaderPanel.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+                grv.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.True;
+                if (Commons.Modules.bSetUp == true)
+                {
+                    grv.DoubleClick += delegate (object a, EventArgs b) { Grv_DoubleClick(a, b, fName); };
+                }
+                if (MBestFitColumns)
+                    grv.BestFitColumns();
+
+                //kiểm tra có trong table định dạng lưới chưa có thì load
+                if (Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT COUNT(*) FROM dbo.DINH_DANG_LUOI WHERE TEN_GRID ='" + grv.Name + "' AND TEN_FORM = '" + fName + "' ")) == 1)
+                {
+                    //Co roi thi lay dinh dang dem vao
+                    string text = (Convert.ToString(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT DINH_DANG FROM dbo.DINH_DANG_LUOI WHERE TEN_GRID ='" + grv.Name + "' AND TEN_FORM = '" + fName + "'")));
+                    byte[] byteArray = Encoding.ASCII.GetBytes(text);
+                    MemoryStream stream = new MemoryStream(byteArray);
+                    grv.RestoreLayoutFromStream(stream);
+                }
+                else
+                {
+                    //chua co thi luu vao dinh dang voi mac dinh
+                    Stream str = new System.IO.MemoryStream();
+                    grv.SaveLayoutToStream(str);
+                    str.Seek(0, System.IO.SeekOrigin.Begin);
+                    StreamReader reader = new StreamReader(str);
+                    string text = reader.ReadToEnd();
+                    SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "INSERT INTO dbo.DINH_DANG_LUOI(TEN_FORM,TEN_GRID,DINH_DANG,MAC_DINH)VALUES(N'" + fName + "',N'" + grv.Name + "',N'" + text + "',N'" + text + "')");
+                }
+                if (Commons.Modules.bSetUp == true)
+                {
+                    grv.PopupMenuShowing += delegate (object a, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs b) { Grv_PopupMenuShowing(grv, b, grv, fName); };
+                }
+                grv.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+                grv.Appearance.HeaderPanel.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+                if (MloadNNgu)
+                {
+                    //Thread Thread3 = new Thread(delegate ()
+                    //{
+                    //    if (grd.InvokeRequired)
+                    //    {
+                    //        grd.Invoke(new MethodInvoker(delegate
+                    //        {
+                    //            MLoadNNXtraGrid(grv, fName);
+
+                    //        }));
+                    //    }
+                    //}, 100); Thread3.Start();
+                    MLoadNNXtraGrid(grv, fName);
+                }
+                grv.OptionsBehavior.FocusLeaveOnTab = true;
+                //Commons.Modules.OXtraGrid.loadXmlgrd(grd);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
         public bool MLoadXtraGridDM(DevExpress.XtraGrid.GridControl grd, DevExpress.XtraGrid.Views.Grid.GridView grv, DataTable dtTmp, bool MEditable, bool MPopulateColumns, bool MColumnAutoWidth, bool MBestFitColumns, bool MloadNNgu)
         {
             try

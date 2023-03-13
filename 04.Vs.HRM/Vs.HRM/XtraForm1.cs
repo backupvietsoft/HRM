@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
+using Microsoft.ApplicationBlocks.Data;
 
 namespace Vs.HRM
 {
@@ -20,6 +21,9 @@ namespace Vs.HRM
 
         private void XtraForm1_Load(object sender, EventArgs e)
         {
+
+
+
 
             Commons.Modules.iCongNhan = 161;
             //ucThuongKhacLuong ns = new ucThuongKhacLuong();

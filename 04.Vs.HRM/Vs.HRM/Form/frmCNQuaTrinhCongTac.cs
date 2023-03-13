@@ -35,8 +35,9 @@ namespace Vs.HRM
             {
                 item.Text = Commons.Modules.ObjLanguages.GetLanguage(this.Name, item.Name);
             }
+            grdBandCT.Caption = Commons.Modules.ObjLanguages.GetLanguage(this.Name, grdBandCT.Name);
+            grdBandCD.Caption = Commons.Modules.ObjLanguages.GetLanguage(this.Name, grdBandCD.Name);
         }
-
         private void btnALL_ButtonClick(object sender, DevExpress.XtraBars.Docking2010.ButtonEventArgs e)
         {
             try
@@ -99,12 +100,32 @@ namespace Vs.HRM
 
                 Commons.Modules.ObjSystems.MLoadXtraGrid(grdChonNV, grvChonNV, dt, true, true, false,false, true, this.Name);
 
+                grdBandCT.Columns.Add(grvChonNV.Columns["DV_CU"]);
+                grdBandCT.Columns.Add(grvChonNV.Columns["XN_CU"]);
+                grdBandCT.Columns.Add(grvChonNV.Columns["TO_CU"]);
+                grdBandCT.Columns.Add(grvChonNV.Columns["LCV_CU"]);
+                grdBandCT.Columns.Add(grvChonNV.Columns["CV_CU"]);
+                grdBandCT.Columns.Add(grvChonNV.Columns["CTL_CU"]);
+
+
+                grdBandCD.Columns.Add(grvChonNV.Columns["DV"]);
+                grdBandCD.Columns.Add(grvChonNV.Columns["XN"]);
+                grdBandCD.Columns.Add(grvChonNV.Columns["TO"]);
+                grdBandCD.Columns.Add(grvChonNV.Columns["LCV"]);
+                grdBandCD.Columns.Add(grvChonNV.Columns["CV"]);
+                grdBandCD.Columns.Add(grvChonNV.Columns["CTL"]);
+                grdBandCD.Columns.Add(grvChonNV.Columns["GHI_CHU"]);
+
+                gridBand1.Columns.Add(grvChonNV.Columns["CHON"]);
+                gridBand1.Columns.Add(grvChonNV.Columns["ID_CN"]);
+                gridBand1.Columns.Add(grvChonNV.Columns["MS_CN"]);
+                gridBand1.Columns.Add(grvChonNV.Columns["HO_TEN"]);
+
                 grvChonNV.Columns["CHON"].Visible = false;
                 grvChonNV.Columns["ID_CN"].Visible = false;
 
                 grvChonNV.Columns["MS_CN"].OptionsColumn.AllowEdit = false;
                 grvChonNV.Columns["HO_TEN"].OptionsColumn.AllowEdit = false;
-                grvChonNV.Columns["DV_CU"].OptionsColumn.AllowEdit = false;
                 grvChonNV.Columns["DV_CU"].OptionsColumn.AllowEdit = false;
                 grvChonNV.Columns["XN_CU"].OptionsColumn.AllowEdit = false;
                 grvChonNV.Columns["TO_CU"].OptionsColumn.AllowEdit = false;

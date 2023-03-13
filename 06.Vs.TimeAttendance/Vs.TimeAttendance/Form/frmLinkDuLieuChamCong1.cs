@@ -1134,8 +1134,7 @@ namespace Vs.TimeAttendance
                 string sLoad = "";
                 if (sKyHieuDV == "DM")
                 {
-                    sLoad = "spTongHopDuLieu";
-                    if (Commons.Modules.chamCongK == true) sLoad = "spTongHopDuLieu_K";
+                    sLoad = "spTongHopDuLieu_DM";
                 }
                 else if (sKyHieuDV == "NB")
                 {

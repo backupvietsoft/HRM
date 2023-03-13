@@ -14,6 +14,8 @@ namespace VietSoftHRM
 {
     public partial class frmMain : DevExpress.XtraEditors.XtraForm
     {
+        private int iTinhTrang = 0;
+        private string sNoiDung = "";
         public frmMain()
         {
             InitializeComponent();
@@ -22,6 +24,8 @@ namespace VietSoftHRM
         private void frmMain_Load(object sender, EventArgs e)
         {
             timer1.Start();
+            timer2.Start();
+            timer3.Start();
             SetThongTinChung();
             UpdateTinhTrangNghiPhep(-1);
             Commons.Modules.ObjSystems.ShowWaitForm(this);
@@ -540,6 +544,56 @@ namespace VietSoftHRM
         private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
             Commons.Modules.ObjSystems.User(Commons.Modules.UserName, 2);
+        }
+
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            try
+            {
+                if (iTinhTrang == 1)
+                {
+                    tablePanel1.Rows[3].Height = 20;
+                    int x = lbl.Location.X;
+                    int y = lbl.Location.Y;
+                    if (x > this.Width)
+                    {
+                        x = -lbl.Width;
+                    }
+                    else
+                    {
+                        x += 10; // tốc độ di chuyển
+                    }
+                    lbl.Location = new Point(x, y);
+                }
+                else
+                {
+                    tablePanel1.Rows[3].Height = 0;
+                }
+            }
+            catch { }
+
+        }
+
+        private void timer3_Tick(object sender, EventArgs e)
+        {
+            try
+            {
+                DataTable dt = new DataTable();
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT TOP 1 ISNULL(TINH_TRANG,0) TINH_TRANG, NOI_DUNG FROM dbo.NOTIFICATION"));
+                if (Convert.ToInt32(dt.Rows[0]["TINH_TRANG"]) == 1)
+                {
+                    iTinhTrang = 1;
+                }
+                else
+                {
+                    iTinhTrang = 0;
+                }
+                lbl.Text = Convert.ToString(dt.Rows[0]["NOI_DUNG"]);
+            }
+            catch
+            {
+                iTinhTrang = 0;
+            }
         }
     }
 }

@@ -128,26 +128,26 @@ namespace Vs.TimeAttendance
 
                 Commons.Modules.ObjSystems.MLoadXtraGrid(grdData, grvData, dt1, true, true, false, true, true, this.Name);
 
-                RepositoryItemTextEdit txtEdit = new RepositoryItemTextEdit();
-                txtEdit.Properties.DisplayFormat.FormatString = "0.00";
-                txtEdit.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-                txtEdit.Properties.EditFormat.FormatString = "0.00";
-                txtEdit.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-                txtEdit.Properties.Mask.EditMask = "0.00";
-                txtEdit.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
-                txtEdit.Properties.Mask.UseMaskAsDisplayFormat = true;
+                //RepositoryItemTextEdit txtEdit = new RepositoryItemTextEdit();
+                //txtEdit.Properties.DisplayFormat.FormatString = "0.00";
+                //txtEdit.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+                //txtEdit.Properties.EditFormat.FormatString = "0.00";
+                //txtEdit.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+                //txtEdit.Properties.Mask.EditMask = "0.00";
+                //txtEdit.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
+                //txtEdit.Properties.Mask.UseMaskAsDisplayFormat = true;
 
-                grvData.Columns["COT_1"].ColumnEdit = txtEdit;
-                grvData.Columns["COT_2"].ColumnEdit = txtEdit;
-                grvData.Columns["COT_3"].ColumnEdit = txtEdit;
-                grvData.Columns["COT_4"].ColumnEdit = txtEdit;
-                grvData.Columns["COT_5"].ColumnEdit = txtEdit;
-                grvData.Columns["COT_6"].ColumnEdit = txtEdit;
-                grvData.Columns["COT_7"].ColumnEdit = txtEdit;
-                grvData.Columns["TG_HC"].ColumnEdit = txtEdit;
-                grvData.Columns["TG_TC_NT"].ColumnEdit = txtEdit;
-                grvData.Columns["TG_TC_CN"].ColumnEdit = txtEdit;
-                grvData.Columns["TG_TC_NL"].ColumnEdit = txtEdit;
+                //grvData.Columns["COT_1"].ColumnEdit = txtEdit;
+                //grvData.Columns["COT_2"].ColumnEdit = txtEdit;
+                //grvData.Columns["COT_3"].ColumnEdit = txtEdit;
+                //grvData.Columns["COT_4"].ColumnEdit = txtEdit;
+                //grvData.Columns["COT_5"].ColumnEdit = txtEdit;
+                //grvData.Columns["COT_6"].ColumnEdit = txtEdit;
+                //grvData.Columns["COT_7"].ColumnEdit = txtEdit;
+                //grvData.Columns["TG_HC"].ColumnEdit = txtEdit;
+                //grvData.Columns["TG_TC_NT"].ColumnEdit = txtEdit;
+                //grvData.Columns["TG_TC_CN"].ColumnEdit = txtEdit;
+                //grvData.Columns["TG_TC_NL"].ColumnEdit = txtEdit;
 
 
                 grvData.Columns[0].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
@@ -288,80 +288,80 @@ namespace Vs.TimeAttendance
                     {
                         errorCount++;
                     }
-                    Double dCOT_1 = Convert.ToDouble(dr[grvData.Columns[col].FieldName.ToString()]);
+                    decimal dCOT_1 = Convert.ToDecimal(dr[grvData.Columns[col].FieldName.ToString()]);
 
                     col = 4;
                     if (!Commons.Modules.MExcel.KiemDuLieuSo(grvData, dr, col, "Thời gian hỗ trợ", 0, 0, false, this.Name))
                     {
                         errorCount++;
                     }
-                    Double dCOT_2 = Convert.ToDouble(dr[grvData.Columns[col].FieldName.ToString()]);
+                    decimal dCOT_2 = Convert.ToDecimal(dr[grvData.Columns[col].FieldName.ToString()]);
                     col = 5;
                     if (!Commons.Modules.MExcel.KiemDuLieuSo(grvData, dr, col, "Sửa hàng không do lỗi của chuyền", 0, 0, false, this.Name))
                     {
                         errorCount++;
                     }
-                    Double dCOT_3 = Convert.ToDouble(dr[grvData.Columns[col].FieldName.ToString()]);
+                    decimal dCOT_3 = Convert.ToDecimal(dr[grvData.Columns[col].FieldName.ToString()]);
 
                     col = 6;
                     if (!Commons.Modules.MExcel.KiemDuLieuSo(grvData, dr, col, "Hoạt động", 0, 0, false, this.Name))
                     {
                         errorCount++;
                     }
-                    Double dCOT_4 = Convert.ToDouble(dr[grvData.Columns[col].FieldName.ToString()]);
+                    decimal dCOT_4 = Convert.ToDecimal(dr[grvData.Columns[col].FieldName.ToString()]);
 
                     col = 7;
                     if (!Commons.Modules.MExcel.KiemDuLieuSo(grvData, dr, col, "Chờ NPL", 0, 0, false, this.Name))
                     {
                         errorCount++;
                     }
-                    Double dCOT_5 = Convert.ToDouble(dr[grvData.Columns[col].FieldName.ToString()]);
+                    decimal dCOT_5 = Convert.ToDecimal(dr[grvData.Columns[col].FieldName.ToString()]);
 
                     col = 8;
                     if (!Commons.Modules.MExcel.KiemDuLieuSo(grvData, dr, col, " Sửa máy", 0, 0, false, this.Name))
                     {
                         errorCount++;
                     }
-                    Double dCOT_6 = Convert.ToDouble(dr[grvData.Columns[col].FieldName.ToString()]);
+                    decimal dCOT_6 = Convert.ToDecimal(dr[grvData.Columns[col].FieldName.ToString()]);
 
                     col = 9;
                     if (!Commons.Modules.MExcel.KiemDuLieuSo(grvData, dr, col, "Thời gian khác", 0, 0, false, this.Name))
                     {
                         errorCount++;
                     }
-                    Double dCOT_7 = Convert.ToDouble(dr[grvData.Columns[col].FieldName.ToString()]);
+                    decimal dCOT_7 = Convert.ToDecimal(dr[grvData.Columns[col].FieldName.ToString()]);
 
                     col = 10;
                     if (!Commons.Modules.MExcel.KiemDuLieuSo(grvData, dr, col, "Thời gian HC", 0, 0, false, this.Name))
                     {
                         errorCount++;
                     }
-                    Double dTG_HC = Convert.ToDouble(dr[grvData.Columns[col].FieldName.ToString()]);
+                    decimal dTG_HC = Convert.ToDecimal(dr[grvData.Columns[col].FieldName.ToString()]);
 
                     col = 11;
                     if (!Commons.Modules.MExcel.KiemDuLieuSo(grvData, dr, col, "Thời gian OT 150%", 0, 0, false, this.Name))
                     {
                         errorCount++;
                     }
-                    Double dTG_TC_NT = Convert.ToDouble(dr[grvData.Columns[col].FieldName.ToString()]);
+                    decimal dTG_TC_NT = Convert.ToDecimal(dr[grvData.Columns[col].FieldName.ToString()]);
 
                     col = 12;
                     if (!Commons.Modules.MExcel.KiemDuLieuSo(grvData, dr, col, "Thời gian OT 200%", 0, 0, false, this.Name))
                     {
                         errorCount++;
                     }
-                    Double dTG_TC_CN = Convert.ToDouble(dr[grvData.Columns[col].FieldName.ToString()]);
+                    decimal dTG_TC_CN = Convert.ToDecimal(dr[grvData.Columns[col].FieldName.ToString()]);
 
                     col = 13;
                     if (!Commons.Modules.MExcel.KiemDuLieuSo(grvData, dr, col, "Thời gian OT 300%", 0, 0, false, this.Name))
                     {
                         errorCount++;
                     }
-                    Double dTG_TC_NL = Convert.ToDouble(dr[grvData.Columns[col].FieldName.ToString()]);
+                    decimal dTG_TC_NL = Convert.ToDecimal(dr[grvData.Columns[col].FieldName.ToString()]);
 
 
-                    Double dTong3Cot = dTG_HC + dTG_TC_NT + dTG_TC_CN + dTG_TC_NL;
-                    Double dTong7Cot = dCOT_1 + dCOT_2 + dCOT_3 + dCOT_4 + dCOT_5 + dCOT_6 + dCOT_7;
+                    decimal dTong3Cot = dTG_HC + dTG_TC_NT + dTG_TC_CN + dTG_TC_NL;
+                    decimal dTong7Cot = dCOT_1 + dCOT_2 + dCOT_3 + dCOT_4 + dCOT_5 + dCOT_6 + dCOT_7;
                     if (dTong3Cot != dTong7Cot)
                     {
                         errorCount++;

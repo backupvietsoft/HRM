@@ -725,20 +725,26 @@ namespace Vs.HRM
                     MS_CNTextEdit.EditValue = dt.Rows[0]["MS_CN"];
                     try
                     {
-                        //Byte[] data = new Byte[0];
-                        //data = (Byte[])(dt.Rows[0]["Hinh_CN"]);
-                        //MemoryStream mem = new MemoryStream(data);
-                        //HINH_CNPictureEdit.EditValue = Image.FromStream(mem);
-
-                        string imagePath = dt.Rows[0]["HINH_CN_URL"].ToString();
-                        if (System.IO.File.Exists(imagePath))
+                        if (Commons.Modules.KyHieuDV == "SB")
                         {
-                            HINH_CNPictureEdit.LoadAsync(imagePath);
+                            Byte[] data = new Byte[0];
+                            data = (Byte[])(dt.Rows[0]["Hinh_CN"]);
+                            MemoryStream mem = new MemoryStream(data);
+                            HINH_CNPictureEdit.EditValue = Image.FromStream(mem);
                         }
                         else
                         {
-                            HINH_CNPictureEdit.EditValue = null;
+                            string imagePath = dt.Rows[0]["HINH_CN_URL"].ToString();
+                            if (System.IO.File.Exists(imagePath))
+                            {
+                                HINH_CNPictureEdit.LoadAsync(imagePath);
+                            }
+                            else
+                            {
+                                HINH_CNPictureEdit.EditValue = null;
+                            }
                         }
+
                     }
                     catch
                     {
@@ -1150,7 +1156,7 @@ namespace Vs.HRM
                 conn.Open();
                 System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spUpdateCongNhan", conn);
                 cmd.Parameters.Add("@ID_CN", SqlDbType.BigInt).Value = Commons.Modules.iCongNhan;
-                //cmd.Parameters.Add("@HINH_CN", SqlDbType.Image).Value = DBNull.Value;
+                cmd.Parameters.Add("@HINH_CN", SqlDbType.Image).Value = Commons.Modules.KyHieuDV == "SB" ? imgToByteConverter(HINH_CNPictureEdit.Image) : null;
                 cmd.Parameters.Add("@HINH_CN_URL", SqlDbType.NVarChar).Value = HINH_CNPictureEdit.EditValue == null ? "-1" : SaveImage(HINH_CNPictureEdit.GetLoadedImageLocation());
                 cmd.Parameters.Add("@MS_CN", SqlDbType.NVarChar).Value = MS_CNTextEdit.Text;
                 cmd.Parameters.Add("@MS_THE_CC", SqlDbType.NVarChar).Value = MS_THE_CCTextEdit.Text;

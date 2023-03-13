@@ -55,8 +55,12 @@
             this.tileBar = new DevExpress.XtraBars.Navigation.TileBar();
             this.titlegroup = new DevExpress.XtraBars.Navigation.TileBarGroup();
             this.tablePanel1 = new DevExpress.Utils.Layout.TablePanel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.lbl = new DevExpress.XtraEditors.LabelControl();
             this.panel1 = new System.Windows.Forms.Panel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.timer2 = new System.Windows.Forms.Timer(this.components);
+            this.timer3 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.navigationFrame)).BeginInit();
             this.navigationFrame.SuspendLayout();
             this.navigationPageHome.SuspendLayout();
@@ -65,6 +69,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).BeginInit();
             this.tablePanel1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -75,15 +80,15 @@
             this.tablePanel1.SetColumnSpan(this.navigationFrame, 2);
             this.navigationFrame.Controls.Add(this.navigationPageHome);
             this.navigationFrame.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.navigationFrame.Location = new System.Drawing.Point(4, 60);
+            this.navigationFrame.Location = new System.Drawing.Point(4, 80);
             this.navigationFrame.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.navigationFrame.Name = "navigationFrame";
             this.navigationFrame.Pages.AddRange(new DevExpress.XtraBars.Navigation.NavigationPageBase[] {
             this.navigationPageHome});
             this.navigationFrame.RibbonAndBarsMergeStyle = DevExpress.XtraBars.Docking2010.Views.RibbonAndBarsMergeStyle.Always;
-            this.tablePanel1.SetRow(this.navigationFrame, 3);
+            this.tablePanel1.SetRow(this.navigationFrame, 4);
             this.navigationFrame.SelectedPage = this.navigationPageHome;
-            this.navigationFrame.Size = new System.Drawing.Size(1057, 534);
+            this.navigationFrame.Size = new System.Drawing.Size(1057, 514);
             this.navigationFrame.TabIndex = 5;
             this.navigationFrame.Text = "navigationFrame1";
             this.navigationFrame.TransitionAnimationProperties.FrameInterval = 5000;
@@ -93,7 +98,7 @@
             // 
             this.navigationPageHome.Controls.Add(this.pictureBox1);
             this.navigationPageHome.Name = "navigationPageHome";
-            this.navigationPageHome.Size = new System.Drawing.Size(1057, 534);
+            this.navigationPageHome.Size = new System.Drawing.Size(1057, 514);
             // 
             // pictureBox1
             // 
@@ -102,7 +107,7 @@
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(1057, 534);
+            this.pictureBox1.Size = new System.Drawing.Size(1057, 514);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
@@ -335,6 +340,7 @@
             this.tablePanel1.Columns.AddRange(new DevExpress.Utils.Layout.TablePanelColumn[] {
             new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 100F),
             new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 106F)});
+            this.tablePanel1.Controls.Add(this.panel2);
             this.tablePanel1.Controls.Add(this.panel1);
             this.tablePanel1.Controls.Add(this.tileBar);
             this.tablePanel1.Controls.Add(this.navigationFrame);
@@ -346,9 +352,37 @@
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 8F),
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 38F),
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 11F),
+            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 20F),
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 100F)});
             this.tablePanel1.Size = new System.Drawing.Size(1065, 597);
             this.tablePanel1.TabIndex = 0;
+            // 
+            // panel2
+            // 
+            this.tablePanel1.SetColumn(this.panel2, 0);
+            this.tablePanel1.SetColumnSpan(this.panel2, 2);
+            this.panel2.Controls.Add(this.lbl);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(3, 60);
+            this.panel2.Name = "panel2";
+            this.tablePanel1.SetRow(this.panel2, 3);
+            this.panel2.Size = new System.Drawing.Size(1059, 14);
+            this.panel2.TabIndex = 14;
+            // 
+            // lbl
+            // 
+            this.lbl.Appearance.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl.Appearance.ForeColor = System.Drawing.Color.Red;
+            this.lbl.Appearance.Options.UseFont = true;
+            this.lbl.Appearance.Options.UseForeColor = true;
+            this.lbl.Appearance.Options.UseTextOptions = true;
+            this.lbl.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.NoWrap;
+            this.lbl.Location = new System.Drawing.Point(0, -3);
+            this.lbl.Margin = new System.Windows.Forms.Padding(0);
+            this.lbl.Name = "lbl";
+            this.lbl.Size = new System.Drawing.Size(222, 17);
+            this.lbl.TabIndex = 9;
+            this.lbl.Text = "Công ty TNHH Phần mềm Nam Việt";
             // 
             // panel1
             // 
@@ -365,8 +399,19 @@
             this.timer1.Interval = 5000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // timer2
+            // 
+            this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
+            // 
+            // timer3
+            // 
+            this.timer3.Interval = 60000;
+            this.timer3.Tick += new System.EventHandler(this.timer3_Tick);
+            // 
             // frmMain
             // 
+            this.Appearance.Options.UseTextOptions = true;
+            this.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.NoWrap;
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(1065, 625);
             this.Controls.Add(this.tablePanel1);
@@ -391,6 +436,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).EndInit();
             this.tablePanel1.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
@@ -426,5 +473,9 @@
         private DevExpress.XtraBars.BarStaticItem barLogin;
         private System.Windows.Forms.PictureBox pictureBox1;
         public System.Windows.Forms.Timer timer1;
+        private DevExpress.XtraEditors.LabelControl lbl;
+        private System.Windows.Forms.Timer timer2;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Timer timer3;
     }
 }

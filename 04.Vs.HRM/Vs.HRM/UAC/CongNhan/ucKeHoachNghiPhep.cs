@@ -181,7 +181,6 @@ namespace Vs.HRM
                 dt.Columns["CHON"].ReadOnly = false;
                 grvDSCN.Columns["ID_CN"].Visible = false;
                 grvDSCN.Columns["CHON"].Visible = false;
-                grvDSCN.Columns["MS_CN"].Visible = false;
                 grvDSCN.Columns["TinhTrang"].Visible = false;
                 if (cochon == false)
                 {
@@ -342,7 +341,6 @@ namespace Vs.HRM
         }
         private void grvDSCN_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
-            if (Commons.Modules.sLoad == "0Load") return;
             DataTable dtTmp = new DataTable();
             String sIDCN;
             try
@@ -1206,22 +1204,25 @@ namespace Vs.HRM
 
         private void searchControl1_EditValueChanged(object sender, EventArgs e)
         {
-            DataTable dtTmp = new DataTable();
-            dtTmp = (DataTable)grdDSCN.DataSource;
-            //dtTmp = Commons.Modules.ObjSystems.ConvertDatatable(grvTo);
-            String sMSCN;
-            try
+            if(Commons.Modules.KyHieuDV != "DM")
             {
-                string sDK = "";
-                sMSCN = "";
-                sDK = "MS_CN_INT = '" + Convert.ToInt32(searchControl1.EditValue) + "'";
-                dtTmp.DefaultView.RowFilter = sDK;
+                DataTable dtTmp = new DataTable();
+                dtTmp = (DataTable)grdDSCN.DataSource;
+                //dtTmp = Commons.Modules.ObjSystems.ConvertDatatable(grvTo);
+                String sMSCN;
+                try
+                {
+                    string sDK = "";
+                    sMSCN = "";
+                    sDK = "MS_CN_INT = '" + Convert.ToInt32(searchControl1.EditValue) + "'";
+                    dtTmp.DefaultView.RowFilter = sDK;
+                }
+                catch (Exception ex)
+                {
+                    dtTmp.DefaultView.RowFilter = "";
+                }
+                grvDSCN_FocusedRowChanged(null, null);
             }
-            catch (Exception ex)
-            {
-                dtTmp.DefaultView.RowFilter = "";
-            }
-            grvDSCN_FocusedRowChanged(null, null);
         }
     }
 }

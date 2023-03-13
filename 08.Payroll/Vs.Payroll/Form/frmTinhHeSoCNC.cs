@@ -379,7 +379,7 @@ namespace Vs.Payroll
             {
                 DataTable dt1 = new DataTable();
                 dt1 = Commons.Modules.ObjSystems.ConvertDatatable(view);
-                if (Convert.ToDouble(dt1.Compute("Sum(PT_DIEU_CHINH)", "")) > 100)
+                if (Convert.ToDecimal(dt1.Compute("Sum(PT_DIEU_CHINH)", "")) > 100)
                 {
                     e.Valid = false;
                     view.SetColumnError(ptDieuChinh, Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgPhanTramDieuChinhKhongHopLe"));
@@ -405,7 +405,7 @@ namespace Vs.Payroll
             }
             else
             {
-                windowsUIButton.Buttons[0].Properties.Visible = false;
+                windowsUIButton.Buttons[0].Properties.Visible = visible;
                 windowsUIButton.Buttons[1].Properties.Visible = visible;
                 windowsUIButton.Buttons[2].Properties.Visible = visible;
                 windowsUIButton.Buttons[3].Properties.Visible = visible;

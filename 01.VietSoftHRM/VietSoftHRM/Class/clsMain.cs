@@ -60,7 +60,6 @@ namespace VietSoftHRM
                 Commons.Modules.iSNNgay = 4;
                 Commons.Modules.iSNTuan = 12;
                 Commons.Modules.iSNThang = 40;
-
             }
             catch
             {
@@ -108,7 +107,6 @@ namespace VietSoftHRM
                             cred.PersistanceType = PersistanceType.LocalComputer;
                             cred.Save();
                         }
-                        
                     }
                 }
                 catch 

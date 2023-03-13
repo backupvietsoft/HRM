@@ -283,13 +283,15 @@ namespace Vs.Payroll
                         cmd.Parameters.AddWithValue("@sBT", sTB);
                         cmd.Parameters.AddWithValue("@Ngay", dtThang);
                         cmd.CommandType = CommandType.StoredProcedure;
-
+                        System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+                        DataSet ds = new DataSet();
+                        adp.Fill(ds);
                         DataTable dt = new DataTable();
-                        dt.Load(cmd.ExecuteReader());
+                        dt = ds.Tables[0].Copy();
                         Commons.Modules.ObjSystems.XoaTable(sTB);
-                        if (dt.Rows[0][1].ToString() == "-99")
+                        if (dt.Rows[0][0].ToString() == "-99")
                         {
-                            XtraMessageBox.Show(dt.Rows[0][1].ToString());
+                            XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgImportKhongThanhCong") + " error(" + dt.Rows[0][1].ToString() + ")", Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                         else
                         {

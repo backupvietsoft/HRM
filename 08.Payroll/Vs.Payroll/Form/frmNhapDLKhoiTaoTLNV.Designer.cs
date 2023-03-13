@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions16 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions17 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions18 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions19 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions1 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions2 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions3 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions4 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmNhapDLKhoiTaoTLNV));
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions20 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions5 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
             this.dataLayoutControl1 = new DevExpress.XtraDataLayout.DataLayoutControl();
             this.cboThangADTGD = new Commons.MPopupContainerEdit();
             this.popListNgay = new DevExpress.XtraEditors.PopupContainerControl();
@@ -57,9 +57,16 @@
             this.grdTGDNM = new DevExpress.XtraGrid.GridControl();
             this.grvTGDNM = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.cboThangADPTTT = new Commons.MPopupContainerEdit();
+            this.grdPTPhuChuyen = new DevExpress.XtraGrid.GridControl();
+            this.grvPTPhuChuyen = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.cboThangADPTPhuChuyen = new Commons.MPopupContainerEdit();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.tabControl = new DevExpress.XtraLayout.TabbedControlGroup();
+            this.tabPhanTramPhuChuyen = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.emptySpaceItem7 = new DevExpress.XtraLayout.EmptySpaceItem();
+            this.lblThangADPTPhuChuyen = new DevExpress.XtraLayout.LayoutControlItem();
             this.tabPhanBoLuong = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.ItemForThang = new DevExpress.XtraLayout.LayoutControlItem();
@@ -105,9 +112,16 @@
             ((System.ComponentModel.ISupportInitialize)(this.grdTGDNM)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grvTGDNM)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboThangADPTTT.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grdPTPhuChuyen)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grvPTPhuChuyen)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cboThangADPTPhuChuyen.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tabPhanTramPhuChuyen)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lblThangADPTPhuChuyen)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabPhanBoLuong)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForThang)).BeginInit();
@@ -146,6 +160,8 @@
             this.dataLayoutControl1.Controls.Add(this.grdPTTruLuong);
             this.dataLayoutControl1.Controls.Add(this.grdTGDNM);
             this.dataLayoutControl1.Controls.Add(this.cboThangADPTTT);
+            this.dataLayoutControl1.Controls.Add(this.grdPTPhuChuyen);
+            this.dataLayoutControl1.Controls.Add(this.cboThangADPTPhuChuyen);
             this.dataLayoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataLayoutControl1.Location = new System.Drawing.Point(0, 0);
             this.dataLayoutControl1.Name = "dataLayoutControl1";
@@ -275,19 +291,19 @@
             this.windowsUIButton.AppearanceButton.Pressed.Options.UseFont = true;
             this.windowsUIButton.AppearanceButton.Pressed.Options.UseImage = true;
             this.windowsUIButton.AppearanceButton.Pressed.Options.UseTextOptions = true;
-            windowsUIButtonImageOptions16.ImageUri.Uri = "Edit";
-            windowsUIButtonImageOptions17.ImageUri.Uri = "snap/snapdeletelist";
-            windowsUIButtonImageOptions18.ImageUri.Uri = "richedit/clearheaderandfooter";
-            windowsUIButtonImageOptions19.ImageUri.Uri = "Print";
-            windowsUIButtonImageOptions19.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("windowsUIButtonImageOptions19.SvgImage")));
-            windowsUIButtonImageOptions20.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("windowsUIButtonImageOptions20.SvgImage")));
+            windowsUIButtonImageOptions1.ImageUri.Uri = "Edit";
+            windowsUIButtonImageOptions2.ImageUri.Uri = "snap/snapdeletelist";
+            windowsUIButtonImageOptions3.ImageUri.Uri = "richedit/clearheaderandfooter";
+            windowsUIButtonImageOptions4.ImageUri.Uri = "Print";
+            windowsUIButtonImageOptions4.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("windowsUIButtonImageOptions4.SvgImage")));
+            windowsUIButtonImageOptions5.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("windowsUIButtonImageOptions5.SvgImage")));
             this.windowsUIButton.Buttons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] {
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions16, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "themsua", -1, false),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions17, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "xoa", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions1, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "themsua", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions2, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "xoa", -1, false),
             new DevExpress.XtraBars.Docking2010.WindowsUISeparator(),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions18, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "thoat", -1, false),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions19, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "luu", -1, false),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions20, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "khongluu", -1, false)});
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions3, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "thoat", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions4, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "luu", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions5, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "khongluu", -1, false)});
             this.windowsUIButton.ContentAlignment = System.Drawing.ContentAlignment.MiddleRight;
             this.windowsUIButton.Controls.Add(this.searchControl1);
             this.windowsUIButton.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -427,6 +443,43 @@
             this.cboThangADPTTT.TabIndex = 18;
             this.cboThangADPTTT.EditValueChanged += new System.EventHandler(this.cboThang_EditValueChanged);
             // 
+            // grdPTPhuChuyen
+            // 
+            this.grdPTPhuChuyen.Location = new System.Drawing.Point(24, 86);
+            this.grdPTPhuChuyen.MainView = this.grvPTPhuChuyen;
+            this.grdPTPhuChuyen.Name = "grdPTPhuChuyen";
+            this.grdPTPhuChuyen.Size = new System.Drawing.Size(852, 401);
+            this.grdPTPhuChuyen.TabIndex = 5;
+            this.grdPTPhuChuyen.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.grvPTPhuChuyen});
+            // 
+            // grvPTPhuChuyen
+            // 
+            this.grvPTPhuChuyen.GridControl = this.grdPTPhuChuyen;
+            this.grvPTPhuChuyen.Name = "grvPTPhuChuyen";
+            this.grvPTPhuChuyen.OptionsSelection.MultiSelect = true;
+            this.grvPTPhuChuyen.OptionsView.ShowGroupPanel = false;
+            this.grvPTPhuChuyen.InitNewRow += new DevExpress.XtraGrid.Views.Grid.InitNewRowEventHandler(this.grvPTPhuChuyen_InitNewRow);
+            this.grvPTPhuChuyen.InvalidRowException += new DevExpress.XtraGrid.Views.Base.InvalidRowExceptionEventHandler(this.grvPTPhuChuyen_InvalidRowException);
+            this.grvPTPhuChuyen.ValidateRow += new DevExpress.XtraGrid.Views.Base.ValidateRowEventHandler(this.grvPTPhuChuyen_ValidateRow);
+            this.grvPTPhuChuyen.InvalidValueException += new DevExpress.XtraEditors.Controls.InvalidValueExceptionEventHandler(this.grvPTPhuChuyen_InvalidValueException);
+            // 
+            // cboThangADPTPhuChuyen
+            // 
+            this.cboThangADPTPhuChuyen.Location = new System.Drawing.Point(179, 58);
+            this.cboThangADPTPhuChuyen.Name = "cboThangADPTPhuChuyen";
+            this.cboThangADPTPhuChuyen.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo),
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+            this.cboThangADPTPhuChuyen.Properties.DefaultActionButtonIndex = 0;
+            this.cboThangADPTPhuChuyen.Properties.DefaultPopupControl = this.popListNgay;
+            this.cboThangADPTPhuChuyen.Properties.DifferentActionButtonIndex = 1;
+            this.cboThangADPTPhuChuyen.Properties.DifferentPopupControl = this.popNgay;
+            this.cboThangADPTPhuChuyen.Size = new System.Drawing.Size(127, 24);
+            this.cboThangADPTPhuChuyen.StyleController = this.dataLayoutControl1;
+            this.cboThangADPTPhuChuyen.TabIndex = 32;
+            this.cboThangADPTPhuChuyen.EditValueChanged += new System.EventHandler(this.cboThang_EditValueChanged);
+            // 
             // Root
             // 
             this.Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
@@ -460,9 +513,51 @@
             this.tabPhanBoLuong,
             this.tabPhanTramThuongToTruong,
             this.TabPhanTramTruLuong,
-            this.tabThuongGiamDocNhaMay});
+            this.tabThuongGiamDocNhaMay,
+            this.tabPhanTramPhuChuyen});
             this.tabControl.SelectedPageChanged += new DevExpress.XtraLayout.LayoutTabPageChangedEventHandler(this.tabControl_SelectedPageChanged);
             this.tabControl.SelectedPageChanging += new DevExpress.XtraLayout.LayoutTabPageChangingEventHandler(this.tabControl_SelectedPageChanging);
+            // 
+            // tabPhanTramPhuChuyen
+            // 
+            this.tabPhanTramPhuChuyen.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItem8,
+            this.emptySpaceItem7,
+            this.lblThangADPTPhuChuyen});
+            this.tabPhanTramPhuChuyen.Location = new System.Drawing.Point(0, 0);
+            this.tabPhanTramPhuChuyen.Name = "tabPhanTramPhuChuyen";
+            this.tabPhanTramPhuChuyen.Size = new System.Drawing.Size(856, 433);
+            // 
+            // layoutControlItem8
+            // 
+            this.layoutControlItem8.Control = this.grdPTPhuChuyen;
+            this.layoutControlItem8.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
+            this.layoutControlItem8.CustomizationFormText = "layoutControlItem2";
+            this.layoutControlItem8.Location = new System.Drawing.Point(0, 28);
+            this.layoutControlItem8.Name = "layoutControlItem8";
+            this.layoutControlItem8.Size = new System.Drawing.Size(856, 405);
+            this.layoutControlItem8.Text = "layoutControlItem2";
+            this.layoutControlItem8.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem8.TextVisible = false;
+            // 
+            // emptySpaceItem7
+            // 
+            this.emptySpaceItem7.AllowHotTrack = false;
+            this.emptySpaceItem7.Location = new System.Drawing.Point(286, 0);
+            this.emptySpaceItem7.Name = "emptySpaceItem7";
+            this.emptySpaceItem7.Size = new System.Drawing.Size(570, 28);
+            this.emptySpaceItem7.TextSize = new System.Drawing.Size(0, 0);
+            // 
+            // lblThangADPTPhuChuyen
+            // 
+            this.lblThangADPTPhuChuyen.Control = this.cboThangADPTPhuChuyen;
+            this.lblThangADPTPhuChuyen.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
+            this.lblThangADPTPhuChuyen.CustomizationFormText = "lblThangADThuongGDNM";
+            this.lblThangADPTPhuChuyen.Location = new System.Drawing.Point(0, 0);
+            this.lblThangADPTPhuChuyen.Name = "lblThangADPTPhuChuyen";
+            this.lblThangADPTPhuChuyen.Size = new System.Drawing.Size(286, 28);
+            this.lblThangADPTPhuChuyen.Text = "lblThangADThuongGDNM";
+            this.lblThangADPTPhuChuyen.TextSize = new System.Drawing.Size(151, 17);
             // 
             // tabPhanBoLuong
             // 
@@ -718,9 +813,16 @@
             ((System.ComponentModel.ISupportInitialize)(this.grdTGDNM)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grvTGDNM)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboThangADPTTT.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grdPTPhuChuyen)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grvPTPhuChuyen)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cboThangADPTPhuChuyen.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tabPhanTramPhuChuyen)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lblThangADPTPhuChuyen)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabPhanBoLuong)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForThang)).EndInit();
@@ -795,5 +897,12 @@
         private Commons.MPopupContainerEdit cboThangADTGD;
         private DevExpress.XtraLayout.LayoutControlItem lblThangADThuongGDNM;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem6;
+        private DevExpress.XtraLayout.LayoutControlGroup tabPhanTramPhuChuyen;
+        private DevExpress.XtraGrid.GridControl grdPTPhuChuyen;
+        private DevExpress.XtraGrid.Views.Grid.GridView grvPTPhuChuyen;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem8;
+        private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem7;
+        private Commons.MPopupContainerEdit cboThangADPTPhuChuyen;
+        private DevExpress.XtraLayout.LayoutControlItem lblThangADPTPhuChuyen;
     }
 }

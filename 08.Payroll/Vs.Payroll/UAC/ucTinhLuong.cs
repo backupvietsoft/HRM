@@ -529,6 +529,7 @@ namespace Vs.Payroll
                     {
                         frmNhapDLKhoiTaoTLNV frm = new frmNhapDLKhoiTaoTLNV();
                         frm.ID_DV = Convert.ToInt32(cboDonVi.EditValue);
+                        frm.iLoai = iLoaiTL;
                         if (frm.ShowDialog() == DialogResult.OK)
                         {
 
@@ -574,7 +575,7 @@ namespace Vs.Payroll
                             DataTable dt = new DataTable();
                             if (iLoaiTL == 1) // tính lương công nhân
                             {
-                                SqlHelper.ExecuteReader(Commons.IConnections.CNStr, Commons.Modules.KyHieuDV == "DM" ? "" : "spGetTinhLuongThang", Commons.Modules.UserName, Commons.Modules.TypeLanguage, cboDonVi.EditValue, cboXiNghiep.EditValue, cboTo.EditValue, Convert.ToInt32(txtNgayCongLV.EditValue), Convert.ToInt32(txtNgayCongChuan.EditValue), Tngay, Dngay, iLoaiTL);
+                                SqlHelper.ExecuteReader(Commons.IConnections.CNStr, Commons.Modules.KyHieuDV == "DM" ? "spGetTinhLuongThang_DM" : "spGetTinhLuongThang", Commons.Modules.UserName, Commons.Modules.TypeLanguage, cboDonVi.EditValue, cboXiNghiep.EditValue, cboTo.EditValue, Convert.ToInt32(txtNgayCongLV.EditValue), Convert.ToInt32(txtNgayCongChuan.EditValue), Tngay, Dngay, iLoaiTL);
                                 if (Commons.Modules.KyHieuDV != "DM")
                                 {
                                     LoadGrdGTGC();
@@ -598,10 +599,13 @@ namespace Vs.Payroll
                             }
 
                             this.Cursor = Cursors.Default;
+                            Commons.Modules.ObjSystems.Alert(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgTinhLuongThanhCong"), Commons.Form_Alert.enmType.Success);
                         }
-                        catch
+                        catch (Exception ex)    
                         {
                             this.Cursor = Cursors.Default;
+                            Commons.Modules.ObjSystems.Alert(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgTinhLuongKhongThanhCong"), Commons.Form_Alert.enmType.Error);
+                            MessageBox.Show(ex.Message);    
                         }
 
                         break;
@@ -616,25 +620,7 @@ namespace Vs.Payroll
 
         private void EnableButon()
         {
-            if (Commons.Modules.ObjSystems.DataTinhTrangBangLuong(Convert.ToInt32(cboDonVi.EditValue), Commons.Modules.ObjSystems.ConvertDateTime(cboThang.Text)) == 1)
-            {
-                if (iLoaiTL == 1)
-                {
-                    btnALL.Buttons[0].Properties.Visible = false;
-                    btnALL.Buttons[1].Properties.Visible = false;
-                    btnALL.Buttons[2].Properties.Visible = false;
-                }
-                else
-                {
-                    btnALL.Buttons[0].Properties.Visible = true;
-                    btnALL.Buttons[1].Properties.Visible = true;
-                    btnALL.Buttons[2].Properties.Visible = true;
-                }
-                btnALL.Buttons[3].Properties.Visible = true;
-                btnALL.Buttons[4].Properties.Visible = true;
-                btnALL.Buttons[5].Properties.Visible = true;
-            }
-            else
+            if (Commons.Modules.ObjSystems.DataTinhTrangBangLuong(Convert.ToInt32(cboDonVi.EditValue), Commons.Modules.ObjSystems.ConvertDateTime(cboThang.Text)) == 2)
             {
                 btnALL.Buttons[0].Properties.Visible = false;
                 btnALL.Buttons[1].Properties.Visible = false;
@@ -642,6 +628,20 @@ namespace Vs.Payroll
                 btnALL.Buttons[3].Properties.Visible = false;
                 btnALL.Buttons[4].Properties.Visible = false;
                 btnALL.Buttons[5].Properties.Visible = false;
+            }
+            else
+            {
+                if (iLoaiTL == 1)
+                {
+                    btnALL.Buttons[1].Properties.Visible = false;
+                }
+                else
+                {
+                    btnALL.Buttons[1].Properties.Visible = true;
+                }
+                btnALL.Buttons[3].Properties.Visible = true;
+                btnALL.Buttons[4].Properties.Visible = true;
+                btnALL.Buttons[5].Properties.Visible = true;
             }
         }
 

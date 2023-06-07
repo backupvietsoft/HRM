@@ -37,14 +37,19 @@ namespace Vs.Payroll
         public ucTinhLuong()
         {
             InitializeComponent();
-            Commons.Modules.ObjSystems.ThayDoiNN(this, new List<LayoutControlGroup>() { Root }, btnALL);
-            Commons.Modules.sLoad = "0Load";
-            DataTable dt = new DataTable();
-            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboDON_VI", Commons.Modules.UserName, Commons.Modules.TypeLanguage, 0));
-            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboDonVi, dt, "ID_DV", "TEN_DV", "TEN_DV");
-            Commons.Modules.ObjSystems.LoadCboXiNghiep(cboDonVi, cboXiNghiep);
-            Commons.Modules.ObjSystems.LoadCboTo(cboDonVi, cboXiNghiep, cboTo);
-            Commons.Modules.sLoad = "";
+
+            try
+            {
+                Commons.Modules.ObjSystems.ThayDoiNN(this, new List<LayoutControlGroup>() { Root }, btnALL);
+                Commons.Modules.sLoad = "0Load";
+                DataTable dt = new DataTable();
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboDON_VI", Commons.Modules.UserName, Commons.Modules.TypeLanguage, 0));
+                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboDonVi, dt, "ID_DV", "TEN_DV", "TEN_DV");
+                Commons.Modules.ObjSystems.LoadCboXiNghiep(cboDonVi, cboXiNghiep);
+                Commons.Modules.ObjSystems.LoadCboTo(cboDonVi, cboXiNghiep, cboTo);
+                Commons.Modules.sLoad = "";
+            }
+            catch { }
         }
 
         private void ucTinhLuong_Load(object sender, EventArgs e)
@@ -55,7 +60,14 @@ namespace Vs.Payroll
                 LoadThang();
                 if (Commons.Modules.KyHieuDV != "DM")
                 {
-                    LoadGrdGTGC();
+                    switch (Commons.Modules.KyHieuDV)
+                    {
+                        default:
+                            {
+                                LoadGrdGTGC_BT();
+                                break;
+                            }
+                    }
                 }
                 else
                 {
@@ -67,11 +79,16 @@ namespace Vs.Payroll
                     {
                         LoadGrdGTGCNV_DM();
                     }
+
+                    lblNgayBuLuong.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                    lblThuongDoanhThu.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
                 }
-                txtNgayCongChuan.Text = getNgayCongChuan().ToString();
+                txtNgayCongChuan.EditValue = Commons.Modules.KyHieuDV == "DM" ? getNgayCongChuan() : 26;
                 txtNgayCongLV.Text = getNgayCongChuan().ToString();
+                txtNgayBuLuong.EditValue = 0;
                 Commons.Modules.sLoad = "";
                 EnableButon();
+                Commons.Modules.ObjSystems.SetPhanQuyen(btnALL);
             }
             catch { }
         }
@@ -176,6 +193,64 @@ namespace Vs.Payroll
             //    grvData.Columns[i].DisplayFormat.FormatString = "N0";
             //}
 
+        }
+        private void LoadGrdGTGC_BT()
+        {
+            try
+            {
+                DataTable dt = new DataTable();
+                DateTime Tngay = Convert.ToDateTime(cboThang.EditValue);
+                DateTime Dngay = Convert.ToDateTime(cboThang.EditValue).AddMonths(1).AddDays(-1);
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetBangLuong_BT", Commons.Modules.UserName, Commons.Modules.TypeLanguage, cboDonVi.EditValue, cboXiNghiep.EditValue, cboTo.EditValue, Tngay, Dngay));
+                if (grdData.DataSource == null)
+                {
+                    Commons.Modules.ObjSystems.MLoadXtraGrid(grdData, grvData, dt, false, false, false, true, true, this.Name);
+                    grvData.Columns["ID_CN"].Visible = false;
+                    grvData.Columns["ID_CTL"].Visible = false;
+                    grvData.Columns["ID_TO"].Visible = false;
+                    grvData.Columns["MS_CN"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
+                    grvData.Columns["HO_TEN"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
+                    grvData.Columns["TEN_TO"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
+                    grvData.Columns["TEN_LPB"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
+                    grvData.Columns["CACH_TL"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
+                    grvData.Columns["TEN_LCV"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
+
+                    for (int i = 0; i < grvData.Columns.Count; i++)
+                    {
+                        if (grvData.Columns[i].FieldName.ToString().Substring(0, grvData.Columns[i].FieldName.ToString().IndexOf("_")) == "LUONG" || grvData.Columns[i].FieldName.ToString().Substring(0, grvData.Columns[i].FieldName.ToString().IndexOf("_")) == "PC" || grvData.Columns[i].FieldName.ToString().Substring(0, grvData.Columns[i].FieldName.ToString().IndexOf("_")) == "THUONG" || grvData.Columns[i].FieldName.ToString().Substring(0, grvData.Columns[i].FieldName.ToString().IndexOf("_")) == "TIEN" || grvData.Columns[i].FieldName.ToString().Substring(0, grvData.Columns[i].FieldName.ToString().IndexOf("_")) == "LSP")
+                        {
+                            grvData.Columns[grvData.Columns[i].FieldName].DisplayFormat.FormatType = FormatType.Numeric;
+                            grvData.Columns[grvData.Columns[i].FieldName].DisplayFormat.FormatString = "N0";
+                        }
+                    }
+
+                    grvData.Columns["BU_LUONG"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["BU_LUONG"].DisplayFormat.FormatString = "N0";
+
+                    grvData.Columns["TONG_BU_LUONG"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["TONG_BU_LUONG"].DisplayFormat.FormatString = "N0";
+
+
+                    grvData.Columns["TONG_LSP"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["TONG_LSP"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["TRU_THUONG"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["TRU_THUONG"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["TRUY_THU_BHXH"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["TRUY_THU_BHXH"].DisplayFormat.FormatString = "N0";
+                    grvData.Columns["TRU_KHAC"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvData.Columns["TRU_KHAC"].DisplayFormat.FormatString = "N0";
+
+
+                }
+                else
+                {
+                    grdData.DataSource = dt;
+                }
+            }
+            catch
+            {
+
+            }
         }
         private void LoadGrdGTGC_DM()
         {
@@ -503,7 +578,7 @@ namespace Vs.Payroll
                 }
                 else
                 {
-                    sSql = "SELECT disTINCT SUBSTRING(CONVERT(VARCHAR(10),THANG,103),4,2) as M, RIGHT(CONVERT(VARCHAR(10),THANG,103),4) AS Y ,RIGHT(CONVERT(VARCHAR(10),THANG,103),7) AS THANG FROM dbo.BANG_LUONG WHERE ID_DV = " + cboDonVi.EditValue + " ORDER BY Y DESC , M DESC";
+                    sSql = "SELECT disTINCT SUBSTRING(CONVERT(VARCHAR(10),THANG,103),4,2) as M, RIGHT(CONVERT(VARCHAR(10),THANG,103),4) AS Y ,RIGHT(CONVERT(VARCHAR(10),THANG,103),7) AS THANG FROM dbo.BANG_LUONG_BT WHERE ID_DV = " + cboDonVi.EditValue + " ORDER BY Y DESC , M DESC";
                 }
                 dtthang.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSql));
                 Commons.Modules.ObjSystems.MLoadXtraGrid(grdThang, grvThang1, dtthang, false, true, true, true, true, this.Name);
@@ -519,6 +594,7 @@ namespace Vs.Payroll
                 cboThang.Text = now.ToString("MM/yyyy");
             }
         }
+
         private void windowsUIButtonPanel1_ButtonClick(object sender, DevExpress.XtraBars.Docking2010.ButtonEventArgs e)
         {
             WindowsUIButton btn = e.Button as WindowsUIButton;
@@ -538,14 +614,31 @@ namespace Vs.Payroll
                     }
                 case "dulieuthang":
                     {
-                        frmNhapDLThangTLNV frm = new frmNhapDLThangTLNV();
-                        frm.iID_DV = Convert.ToInt32(cboDonVi.EditValue);
-                        frm.iID_XN = Convert.ToInt32(cboXiNghiep.EditValue);
-                        frm.iID_TO = Convert.ToInt32(cboTo.EditValue);
-                        if (frm.ShowDialog() == DialogResult.OK)
+                        if (Commons.Modules.KyHieuDV == "DM")
                         {
+                            frmNhapDLThangTLNV frm = new frmNhapDLThangTLNV();
+                            frm.iID_DV = Convert.ToInt32(cboDonVi.EditValue);
+                            frm.iID_XN = Convert.ToInt32(cboXiNghiep.EditValue);
+                            frm.iID_TO = Convert.ToInt32(cboTo.EditValue);
+                            frm.iLoai = iLoaiTL;
+                            if (frm.ShowDialog() == DialogResult.OK)
+                            {
 
+                            }
                         }
+                        else
+                        {
+                            frmNhapHoTroLuong frm = new frmNhapHoTroLuong();
+                            frm.iID_DV = Convert.ToInt32(cboDonVi.EditValue);
+                            frm.iID_XN = Convert.ToInt32(cboXiNghiep.EditValue);
+                            frm.iID_TO = Convert.ToInt32(cboTo.EditValue);
+                            frm.iLoai = iLoaiTL;
+                            if (frm.ShowDialog() == DialogResult.OK)
+                            {
+
+                            }
+                        }
+
                         break;
                     }
                 case "xoa":
@@ -575,13 +668,34 @@ namespace Vs.Payroll
                             DataTable dt = new DataTable();
                             if (iLoaiTL == 1) // tính lương công nhân
                             {
-                                SqlHelper.ExecuteReader(Commons.IConnections.CNStr, Commons.Modules.KyHieuDV == "DM" ? "spGetTinhLuongThang_DM" : "spGetTinhLuongThang", Commons.Modules.UserName, Commons.Modules.TypeLanguage, cboDonVi.EditValue, cboXiNghiep.EditValue, cboTo.EditValue, Convert.ToInt32(txtNgayCongLV.EditValue), Convert.ToInt32(txtNgayCongChuan.EditValue), Tngay, Dngay, iLoaiTL);
+
                                 if (Commons.Modules.KyHieuDV != "DM")
                                 {
-                                    LoadGrdGTGC();
+                                    System.Data.SqlClient.SqlConnection conn;
+                                    dt = new DataTable();
+                                    conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                                    conn.Open();
+
+                                    System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spGetTinhLuongThang_BT", conn);
+                                    cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                                    cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                                    cmd.Parameters.Add("@DVi", SqlDbType.Int).Value = cboDonVi.EditValue;
+                                    cmd.Parameters.Add("@XN", SqlDbType.Int).Value = cboXiNghiep.EditValue;
+                                    cmd.Parameters.Add("@TO", SqlDbType.Int).Value = cboTo.EditValue;
+                                    cmd.Parameters.Add("@NgayCC", SqlDbType.Int).Value = txtNgayCongLV.EditValue;
+                                    cmd.Parameters.Add("@NgayCLV", SqlDbType.NVarChar).Value = txtNgayCongChuan.EditValue;
+                                    cmd.Parameters.Add("@TNGAY", SqlDbType.Date).Value = Tngay;
+                                    cmd.Parameters.Add("@DNGAY", SqlDbType.Date).Value = Dngay;
+                                    cmd.Parameters.Add("@NgayBu", SqlDbType.Float).Value = txtNgayBuLuong.EditValue;
+                                    cmd.Parameters.Add("@ThuongDoanhThu", SqlDbType.Bit).Value = chkThuongDoanhThu.Checked;
+                                    cmd.Parameters.Add("@LOAI", SqlDbType.Int).Value = 1;
+                                    cmd.CommandType = CommandType.StoredProcedure;
+                                    cmd.ExecuteNonQuery();
+                                    LoadGrdGTGC_BT();
                                 }
                                 else
                                 {
+                                    SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetTinhLuongThang_DM", Commons.Modules.UserName, Commons.Modules.TypeLanguage, cboDonVi.EditValue, cboXiNghiep.EditValue, cboTo.EditValue, Convert.ToInt32(txtNgayCongLV.EditValue), Convert.ToInt32(txtNgayCongChuan.EditValue), Tngay, Dngay, iLoaiTL);
                                     LoadGrdGTGC_DM();
                                 }
                             }
@@ -601,11 +715,11 @@ namespace Vs.Payroll
                             this.Cursor = Cursors.Default;
                             Commons.Modules.ObjSystems.Alert(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgTinhLuongThanhCong"), Commons.Form_Alert.enmType.Success);
                         }
-                        catch (Exception ex)    
+                        catch (Exception ex)
                         {
                             this.Cursor = Cursors.Default;
                             Commons.Modules.ObjSystems.Alert(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgTinhLuongKhongThanhCong"), Commons.Form_Alert.enmType.Error);
-                            MessageBox.Show(ex.Message);    
+                            MessageBox.Show(ex.Message);
                         }
 
                         break;
@@ -631,14 +745,8 @@ namespace Vs.Payroll
             }
             else
             {
-                if (iLoaiTL == 1)
-                {
-                    btnALL.Buttons[1].Properties.Visible = false;
-                }
-                else
-                {
-                    btnALL.Buttons[1].Properties.Visible = true;
-                }
+                btnALL.Buttons[0].Properties.Visible = Commons.Modules.KyHieuDV == "DM" ? true : false;
+                btnALL.Buttons[1].Properties.Visible = true;
                 btnALL.Buttons[3].Properties.Visible = true;
                 btnALL.Buttons[4].Properties.Visible = true;
                 btnALL.Buttons[5].Properties.Visible = true;
@@ -661,8 +769,8 @@ namespace Vs.Payroll
 
         private void XoaCheDoLV()
         {
-            if (grvData.RowCount == 0) { Commons.Modules.ObjSystems.msgChung(Commons.ThongBao.msgKhongCoDuLieuXoa); return; }
-            if (Commons.Modules.ObjSystems.msgHoi(Commons.ThongBao.msgXoa) == DialogResult.No) return;
+            if (grvData.RowCount == 0) { Commons.Modules.ObjSystems.MsgWarning(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgKhongCoDuLieuXoa")); return; }
+            if (Commons.Modules.ObjSystems.MsgQuestion(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msg_XoaDong")) == 0) return;
             //xóa
             try
             {
@@ -672,7 +780,7 @@ namespace Vs.Payroll
             }
             catch
             {
-                Commons.Modules.ObjSystems.msgChung(Commons.ThongBao.msgKhongCoDuLieuXoa);
+                Commons.Modules.ObjSystems.MsgWarning(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgKhongCoDuLieuXoa"));
             }
         }
 
@@ -730,7 +838,14 @@ namespace Vs.Payroll
             txtNgayCongLV.Text = getNgayCongChuan().ToString();
             if (Commons.Modules.KyHieuDV != "DM")
             {
-                LoadGrdGTGC();
+                switch (Commons.Modules.KyHieuDV)
+                {
+                    default:
+                        {
+                            LoadGrdGTGC_BT();
+                            break;
+                        }
+                }
             }
             else
             {
@@ -744,7 +859,6 @@ namespace Vs.Payroll
                 }
             }
             EnableButon();
-            //EnableButon(true);
             Commons.Modules.sLoad = "";
         }
 
@@ -774,7 +888,14 @@ namespace Vs.Payroll
             Commons.Modules.sLoad = "0Load";
             if (Commons.Modules.KyHieuDV != "DM")
             {
-                LoadGrdGTGC();
+                switch (Commons.Modules.KyHieuDV)
+                {
+                    default:
+                        {
+                            LoadGrdGTGC_BT();
+                            break;
+                        }
+                }
             }
             else
             {
@@ -799,7 +920,14 @@ namespace Vs.Payroll
             Commons.Modules.ObjSystems.LoadCboTo(cboDonVi, cboXiNghiep, cboTo);
             if (Commons.Modules.KyHieuDV != "DM")
             {
-                LoadGrdGTGC();
+                switch (Commons.Modules.KyHieuDV)
+                {
+                    default:
+                        {
+                            LoadGrdGTGC_BT();
+                            break;
+                        }
+                }
             }
             else
             {
@@ -823,7 +951,14 @@ namespace Vs.Payroll
             Commons.Modules.ObjSystems.LoadCboTo(cboDonVi, cboXiNghiep, cboTo);
             if (Commons.Modules.KyHieuDV != "DM")
             {
-                LoadGrdGTGC();
+                switch (Commons.Modules.KyHieuDV)
+                {
+                    default:
+                        {
+                            LoadGrdGTGC_BT();
+                            break;
+                        }
+                }
             }
             else
             {
@@ -862,26 +997,6 @@ namespace Vs.Payroll
             catch (Exception ex)
             {
                 XtraMessageBox.Show(ex.Message.ToString());
-            }
-        }
-
-        private void cboLoaiTinhLuong_EditValueChanged(object sender, EventArgs e)
-        {
-            if (Commons.Modules.sLoad == "0Load") return;
-            if (Commons.Modules.KyHieuDV != "DM")
-            {
-                LoadGrdGTGC();
-            }
-            else
-            {
-                if (iLoaiTL == 1)
-                {
-                    LoadGrdGTGC_DM();
-                }
-                else
-                {
-                    LoadGrdGTGCNV_DM();
-                }
             }
         }
     }

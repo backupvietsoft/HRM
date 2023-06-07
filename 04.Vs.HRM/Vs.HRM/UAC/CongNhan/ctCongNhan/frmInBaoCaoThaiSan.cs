@@ -13,6 +13,11 @@ using System.Drawing;
 using System.Linq;
 using System.Globalization;
 using Vs.Report;
+using DevExpress.XtraEditors.Filtering.Templates;
+using DevExpress.Charts.Native;
+using System.Windows.Automation.Peers;
+using DevExpress.XtraLayout.Filtering.Templates;
+using DevExpress.ClipboardSource.SpreadsheetML;
 
 namespace Vs.HRM
 {
@@ -26,17 +31,17 @@ namespace Vs.HRM
         public frmInBaoCaoThaiSan(DateTime Thang, int DV, int TO, int XN, int TT)
         {
             InitializeComponent();
-            dThang.Properties.Mask.EditMask = "MM/yyyy";
-            dThang.Properties.Mask.UseMaskAsDisplayFormat = true;
-            Commons.Modules.ObjSystems.ThayDoiNN(this);
-            try
-            {
-                dThang.EditValue = Thang;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            //dThang.Properties.Mask.EditMask = "MM/yyyy";
+            //dThang.Properties.Mask.UseMaskAsDisplayFormat = true;
+            //Commons.Modules.ObjSystems.ThayDoiNN(this);
+            //try
+            //{
+            //    dThang.EditValue = Thang;
+            //}
+            //////catch (Exception ex)
+            //////{
+            //////    throw ex;
+            //////}
             this.DV = DV;
             this.TO = TO;
             this.XN = XN;
@@ -47,7 +52,12 @@ namespace Vs.HRM
         //sự kiên load form
         private void formInLuongCN_Load(object sender, EventArgs e)
         {
-            rad_ChonBaoCao.SelectedIndex = 0; 
+            rad_ChonBaoCao.SelectedIndex = 0;
+
+            DateTime tungay = Convert.ToDateTime(DateTime.Now);
+ 
+            datTuNgay.EditValue = Convert.ToDateTime("01/" + tungay.Month + "/" + tungay.Year);
+           
         }
         //sự kiện các nút xử lí
         private void windowsUIButton_ButtonClick(object sender, DevExpress.XtraBars.Docking2010.ButtonEventArgs e)
@@ -88,7 +98,7 @@ namespace Vs.HRM
             System.Data.SqlClient.SqlConnection conn;
 
             CultureInfo culture = CultureInfo.CreateSpecificCulture("en-US");
-            DateTime ChonThang = System.DateTime.Parse(dThang.EditValue.ToString().Trim(), culture);
+            DateTime ChonThang = datTuNgay.DateTime;
             string Ngay = ChonThang.Day.ToString();
             string Thang1 = ChonThang.Month.ToString();
             string Nam = ChonThang.Year.ToString();
@@ -99,10 +109,11 @@ namespace Vs.HRM
             try
             {
                 int Thang = ChonThang.Month;
+                int Nam1 = ChonThang.Year;
 
                 conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
                 conn.Open();
-
+            
                 System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptDanhSachMangThai_NB", conn);
 
                 cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
@@ -112,7 +123,8 @@ namespace Vs.HRM
                 cmd.Parameters.Add("@ID_XN", SqlDbType.Int).Value = this.XN;
                 cmd.Parameters.Add("@ID_TO", SqlDbType.Int).Value = this.TO;
                 cmd.Parameters.Add("@RadTH", SqlDbType.Int).Value = this.TT;
-                cmd.Parameters.Add("@THANG", SqlDbType.Int).Value = Thang;
+                cmd.Parameters.Add("@tNgay", SqlDbType.Date).Value = datTuNgay.EditValue;
+                cmd.Parameters.Add("@dNgay", SqlDbType.Date).Value = datDenNgay.EditValue;
                 cmd.CommandType = CommandType.StoredProcedure;
                 System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
 
@@ -138,7 +150,8 @@ namespace Vs.HRM
             System.Data.SqlClient.SqlConnection conn;
 
             CultureInfo culture = CultureInfo.CreateSpecificCulture("en-US");
-            DateTime ChonThang = System.DateTime.Parse(dThang.EditValue.ToString().Trim(), culture);
+            DateTime ChonThang = datTuNgay.DateTime;
+
             string Ngay = ChonThang.Day.ToString();
             string Thang1 = ChonThang.Month.ToString();
             string Nam = ChonThang.Year.ToString();
@@ -180,5 +193,14 @@ namespace Vs.HRM
             frm.ShowDialog();
         }
 
+        private void datTuNgay_EditValueChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                DateTime denngay = Convert.ToDateTime(DateTime.Now).AddMonths(+1);
+                datDenNgay.EditValue = Convert.ToDateTime("01/" + denngay.Month + "/" + denngay.Year).AddDays(-1);
+            }
+            catch { }
+        }
     }
 }

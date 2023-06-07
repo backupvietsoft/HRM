@@ -133,7 +133,7 @@ namespace Vs.Recruit
                     {
                         if (iIDUV == -1)
                         {
-                            XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgChonDongCanXuLy"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            Commons.Modules.ObjSystems.MsgWarning(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgChonDongCanXuLy"));
                             return;
                         }
                         Commons.Modules.iUngVien = iIDUV;
@@ -146,7 +146,7 @@ namespace Vs.Recruit
                     {
                         if (iIDUV == -1)
                         {
-                            XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgChonDongCanXuLy"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            Commons.Modules.ObjSystems.MsgWarning(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgChonDongCanXuLy"));
                             return;
                         }
                         if (DeleteData() == true)
@@ -164,7 +164,7 @@ namespace Vs.Recruit
                         {
                             if(cboTayNghe.Text == "")
                             {
-                                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgBanChuaNhap") + lblTayNghe.Text, Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                Commons.Modules.ObjSystems.MsgWarning(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgBanChuaNhap") + lblTayNghe.Text);
                                 return;
                             }    
                         }    
@@ -176,8 +176,8 @@ namespace Vs.Recruit
                         cmd.CommandType = CommandType.StoredProcedure;
                         if (Convert.ToInt16(cmd.ExecuteScalar()) == 1)
                         {
-                            DialogResult dl = XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgMSUV_NayDaTonTai_taoMoi"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-                            if (dl == DialogResult.Yes)
+                            int res = Commons.Modules.ObjSystems.MsgQuestion(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgMSUV_NayDaTonTai_taoMoi"));
+                            if (res == 1)
                             {
                                 txtMS_UV.EditValue = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.AUTO_CREATE_SO_UNG_VIEN()").ToString();
                             }
@@ -255,7 +255,7 @@ namespace Vs.Recruit
         {
             if (iIDUV == -1)
                 return false;
-            if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgDeleteUngVien"), Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgTieuDeXoa"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) return false;
+            if (Commons.Modules.ObjSystems.MsgDelete(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgDeleteUngVien")) == 0) return false;
             //xóa
             try
             {
@@ -268,7 +268,7 @@ namespace Vs.Recruit
             }
             catch (Exception ex)
             {
-                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgDelDangSuDung") + "\n" + ex.Message.ToString(), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Commons.Modules.ObjSystems.MsgError(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgDelDangSuDung") + "\n" + ex.Message.ToString());
                 return false;
             }
         }
@@ -645,7 +645,7 @@ namespace Vs.Recruit
             }
             catch (Exception ex)
             {
-                XtraMessageBox.Show(ex.Message.ToString());
+                Commons.Modules.ObjSystems.MsgError(ex.Message);
                 return false;
             }
         }

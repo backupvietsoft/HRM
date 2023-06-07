@@ -623,13 +623,12 @@ namespace Vs.Recruit
             if (btnALL.Buttons[0].Properties.Visible == true) return;
             Commons.Modules.sLoad = "0Load";
             Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboSoKeHoach, Commons.Modules.ObjSystems.DataKeHoachPV(false, 1), "ID_KHPV", "SO_KHPV", "SO_KHPV", true, true);
-            cboSoKeHoach.EditValue = -99;
+            cboSoKeHoach.EditValue = Convert.ToInt64(-99);
             Commons.Modules.sLoad = "";
         }
 
         private void cboTinhTrang_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
-
             if (iID_PV == -1) return;
             if (e.Button.Index == 1)
             {

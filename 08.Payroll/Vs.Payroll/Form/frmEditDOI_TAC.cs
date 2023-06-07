@@ -33,8 +33,7 @@ namespace Vs.Payroll
             }
             else
             {
-                string strSQL = "SELECT MAX(STT) FROM dbo.DOI_TAC";
-                txtSTT.EditValue = (string.IsNullOrEmpty(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, strSQL).ToString()) ? 0 : Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, strSQL))) + 1;
+                LoadTextNull();
             }
             Commons.Modules.ObjSystems.ThayDoiNN(this, layoutControlGroup1, btnALL);
         }
@@ -56,7 +55,7 @@ namespace Vs.Payroll
                             if (!dxValidationProvider1.Validate()) return;
                             if (bKiemTrung()) return;
 
-                            Commons.Modules.sId = Convert.ToString(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spUpdateDOI_TAC", (AddEdit ? -1 : Id), txtMA_SO.EditValue.ToString(), txtTEN_NGAN.EditValue.ToString(), txtTEN_CTY_DAY_DU.EditValue.ToString(),  (txtSTT.EditValue == "") ? txtSTT.EditValue = null : txtSTT.EditValue));
+                            Commons.Modules.sId = Convert.ToString(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spUpdateDOI_TAC", (AddEdit ? -1 : Id),  txtTEN_NGAN.EditValue.ToString()));
                             if (AddEdit)
                             {
                                 if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msg_ThemThanhCongBanCoMuonTiepTuc"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
@@ -89,14 +88,14 @@ namespace Vs.Payroll
         {
             try
             {
-                string sSql = "SELECT ID_DT, MA_SO, TEN_NGAN, TEN_CTY_DAY_DU, INACTIVE, STT " +
+                string sSql = "SELECT ID_DT, TEN_NGAN " +
                     "FROM DOI_TAC WHERE ID_DT = " + Id.ToString();
                 DataTable dtTmp = new DataTable();
                 dtTmp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSql));
-                txtMA_SO.EditValue = dtTmp.Rows[0]["MA_SO"].ToString();
+                //txtMA_SO.EditValue = dtTmp.Rows[0]["MA_SO"].ToString();
                 txtTEN_NGAN.EditValue = dtTmp.Rows[0]["TEN_NGAN"].ToString();
-                txtTEN_CTY_DAY_DU.EditValue = dtTmp.Rows[0]["TEN_CTY_DAY_DU"].ToString();
-                txtSTT.EditValue = dtTmp.Rows[0]["STT"].ToString();
+                //txtTEN_CTY_DAY_DU.EditValue = dtTmp.Rows[0]["TEN_CTY_DAY_DU"].ToString();
+                //txtSTT.EditValue = dtTmp.Rows[0]["STT"].ToString();
             }
             catch (Exception EX)
             {
@@ -107,11 +106,7 @@ namespace Vs.Payroll
         {
             try
             {
-                txtMA_SO.EditValue = String.Empty;
                 txtTEN_NGAN.EditValue = String.Empty;
-                txtTEN_CTY_DAY_DU.EditValue = String.Empty;
-                txtSTT.EditValue = 1;
-                txtMA_SO.Focus();
             }
             catch { }
         }
@@ -123,18 +118,6 @@ namespace Vs.Payroll
                 DataTable dtTmp = new DataTable();
                 Int16 iKiem = 0;
 
-                iKiem = Convert.ToInt16(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spCheckData", "ID_DT",
-                    (AddEdit ? "-1" : Id.ToString()), "DOI_TAC", "MA_SO", txtMA_SO.EditValue.ToString(),
-                    "", "", "", ""));
-                if (iKiem > 0)
-                {
-                    XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msg_TenTrung"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    txtMA_SO.Focus();
-                    return true;
-                }
-
-                iKiem = 0;
-
                 if (!string.IsNullOrEmpty(txtTEN_NGAN.Text))
                 {
                     iKiem = Convert.ToInt16(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spCheckData", "ID_DT",
@@ -144,20 +127,6 @@ namespace Vs.Payroll
                     {
                         XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msg_TenTrung"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                         txtTEN_NGAN.Focus();
-                        return true;
-                    }
-                }
-
-                iKiem = 0;
-                if (!string.IsNullOrEmpty(txtTEN_CTY_DAY_DU.Text))
-                {
-                    iKiem = Convert.ToInt16(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spCheckData", "ID_DT",
-                        (AddEdit ? "-1" : Id.ToString()), "DOI_TAC", "TEN_CTY_DAY_DU", txtTEN_CTY_DAY_DU.EditValue.ToString(),
-                        "", "", "", ""));
-                    if (iKiem > 0)
-                    {
-                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msg_TenTrung"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        txtTEN_CTY_DAY_DU.Focus();
                         return true;
                     }
                 }

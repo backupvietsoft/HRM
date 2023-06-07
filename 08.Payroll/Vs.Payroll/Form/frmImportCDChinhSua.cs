@@ -269,8 +269,8 @@ namespace Vs.Payroll
                 {
                     SqlConnection conn = new SqlConnection(Commons.IConnections.CNStr);
                     if (conn.State != ConnectionState.Open) conn.Open();
-
-                    string sTB = "LK_Tam" + Commons.Modules.UserName;
+                    string sTB = "LK_Tam" + Commons.Modules.iIDUser;
+                    Commons.Modules.ObjSystems.XoaTable(sTB);
                     try
                     {
                         //tạo bảm tạm trên lưới
@@ -303,10 +303,8 @@ namespace Vs.Payroll
                     {
                         Commons.Modules.ObjSystems.XoaTable(sTB);
                         XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgImportKhongThanhCong") + " error(" + ex.ToString() + ")", Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
-
                     }
                     if (conn.State != ConnectionState.Closed) conn.Close();
-
                 }
             }
         }

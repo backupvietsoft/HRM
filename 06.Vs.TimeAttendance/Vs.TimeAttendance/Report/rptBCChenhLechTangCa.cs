@@ -36,12 +36,12 @@ namespace Vs.Report
                 Commons.Modules.ObjSystems.GetNN(dtNgu, "Nam", "NgayThangNam") + " " + NamXem.Substring(NamXem.Length - 4, 4);
         }
 
-        private void xrTable1_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        private void xrTable1_BeforePrint(object sender, CancelEventArgs e)
         {
            
         }
 
-        private void rptBCChenhLechTangCa_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        private void rptBCChenhLechTangCa_BeforePrint(object sender, CancelEventArgs e)
         {
 
         }

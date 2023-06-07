@@ -77,6 +77,7 @@ namespace Vs.TimeAttendance
                 txtSoGioTC.Properties.Mask.EditMask = "00.00";
                 txtSoGioTC.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
                 txtSoGioTC.Properties.Mask.UseMaskAsDisplayFormat = true;
+                Commons.Modules.sLoad = "0Load";
             }
             catch { }
             //Commons.OSystems.SetDateEditFormat(datGioBD);
@@ -112,22 +113,19 @@ namespace Vs.TimeAttendance
                 cboCA.Properties.View.Columns["GIO_KT"].ColumnEdit = this.repositoryItemTimeEdit1;
                 cboCA.Properties.View.Columns["PHUT_BD"].Visible = false;
                 cboCA.Properties.View.Columns["PHUT_KT"].Visible = false;
-
-                cboCA.EditValue = -1;
-
+                cboCA.EditValue = Convert.ToInt64(-1);
             }
             catch (Exception ex)
             {
-                XtraMessageBox.Show(ex.Message.ToString());
+                
             }
         }
 
 
         private void cboID_nhom_EditValueChanged(object sender, EventArgs e)
         {
-            Commons.Modules.sLoad = "0Load";
-            loadcbm_ca();
             Commons.Modules.sLoad = "";
+            loadcbm_ca();
         }
 
         private Boolean kiemtrong()

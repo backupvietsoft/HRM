@@ -37,7 +37,7 @@ namespace Vs.Payroll
             try
             {
                 Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboTO, Commons.Modules.ObjSystems.DataTo(-1, -1, false), "ID_TO", "TEN_TO", "TEN_TO");
-                cboTO.EditValue = iID_TO;
+                cboTO.EditValue = Convert.ToInt64(iID_TO);
 
                 datThang.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
                 datThang.Properties.DisplayFormat.FormatString = "MM/yyyy";
@@ -49,6 +49,11 @@ namespace Vs.Payroll
                 LoadData(false);
                 EnabelButton(true);
                 LoadText();
+                Commons.Modules.ObjSystems.SetPhanQuyen(windowsUIButton);
+                if(Commons.Modules.iPermission != 1)
+                {
+                    windowsUIButton.Buttons[0].Properties.Enabled = false;
+                }
                 //lbl.Text = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "lblTongDoanhThu") + " : " + fTongDoanhThu.ToString("N0");
             }
             catch { }

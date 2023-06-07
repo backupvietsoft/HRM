@@ -278,10 +278,11 @@ namespace Vs.TimeAttendance
                                             catch { }
 
                                             BorderAround(oSheet.Range[oSheet.Cells[8, 1], oSheet.Cells[rowCnt, lastColumn]]);
-
+                                            this.Cursor = Cursors.Default;
                                         }
                                         catch (Exception ex)
                                         {
+                                            this.Cursor = Cursors.Default;
                                             XtraMessageBox.Show(ex.Message.ToString());
                                         }
                                     }

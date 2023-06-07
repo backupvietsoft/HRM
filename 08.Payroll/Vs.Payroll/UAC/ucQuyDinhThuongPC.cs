@@ -46,21 +46,26 @@ namespace Vs.Payroll
 
         private void ucQuyDinhThuongPC_Load(object sender, EventArgs e)
         {
-            Commons.Modules.sLoad = "0Load";
-            LoadThang();
             try
             {
-                DataTable dt = new DataTable();
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboDON_VI", Commons.Modules.UserName, Commons.Modules.TypeLanguage, 0));
-                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboDonVi, dt, "ID_DV", "TEN_DV", "TEN_DV");
+                Commons.Modules.sLoad = "0Load";
+                LoadThang();
+                try
+                {
+                    DataTable dt = new DataTable();
+                    dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboDON_VI", Commons.Modules.UserName, Commons.Modules.TypeLanguage, 0));
+                    Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboDonVi, dt, "ID_DV", "TEN_DV", "TEN_DV");
+                }
+                catch { }
+
+                Commons.Modules.ObjSystems.LoadCboXiNghiep(cboDonVi, cboXiNghiep);
+                Commons.Modules.ObjSystems.LoadCboTo(cboDonVi, cboXiNghiep, cboTo);
+                LoadGrdGTGC();
+                EnableButon(isAdd);
+                Commons.Modules.sLoad = "";
+                Commons.Modules.ObjSystems.SetPhanQuyen(btnALL);
             }
             catch { }
-
-            Commons.Modules.ObjSystems.LoadCboXiNghiep(cboDonVi, cboXiNghiep);
-            Commons.Modules.ObjSystems.LoadCboTo(cboDonVi, cboXiNghiep, cboTo);
-            LoadGrdGTGC();
-            EnableButon(isAdd);
-            Commons.Modules.sLoad = "";
         }
 
         private void LoadGrdGTGC()

@@ -48,6 +48,7 @@ namespace Vs.TimeAttendance
                 Commons.Modules.sLoad = "";
                 datTNgay.EditValue = Convert.ToDateTime(("01/" + DateTime.Now.Month + "/" + DateTime.Now.Year));
                 enableButon(true);
+                Commons.Modules.ObjSystems.SetPhanQuyen(windowsUIButton);
             }
             catch { }
 
@@ -312,6 +313,8 @@ namespace Vs.TimeAttendance
                 cmd.Parameters.Add("@ID_DV", SqlDbType.Int).Value = Convert.ToInt32(cboDV.EditValue);
                 cmd.Parameters.Add("@ID_XN", SqlDbType.Int).Value = Convert.ToInt32(cboXN.EditValue);
                 cmd.Parameters.Add("@ID_TO", SqlDbType.Int).Value = Convert.ToInt32(cboTo.EditValue);
+                cmd.Parameters.Add("@TNgay", SqlDbType.DateTime).Value = Commons.Modules.ObjSystems.ConvertDateTime(datTNgay.Text);
+                cmd.Parameters.Add("@DNgay", SqlDbType.DateTime).Value = Commons.Modules.ObjSystems.ConvertDateTime(datDenNgay.Text);
                 cmd.CommandType = CommandType.StoredProcedure;
                 System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
                 DataSet ds = new DataSet();

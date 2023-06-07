@@ -44,7 +44,7 @@ namespace Vs.Category
         {
             try
             {
-                string sSql = "SELECT ID_LD_TV, TEN_LD_TV, TEN_LD_TV_A, TEN_LD_TV_H, HE_SO, ID_TT_HT, KY_HIEU ,STT " +
+                string sSql = "SELECT * " +
                     "FROM LY_DO_THOI_VIEC WHERE ID_LD_TV = " + Id.ToString();
                 DataTable dtTmp = new DataTable();
                 dtTmp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSql));
@@ -52,9 +52,11 @@ namespace Vs.Category
                 TEN_LD_TV_ATextEdit.EditValue = dtTmp.Rows[0]["TEN_LD_TV_A"].ToString();
                 TEN_LD_TV_HTextEdit.EditValue = dtTmp.Rows[0]["TEN_LD_TV_H"].ToString();
                 HE_SOTextEdit.EditValue = dtTmp.Rows[0]["HE_SO"].ToString();
-                cboID_TT_HT.EditValue = dtTmp.Rows[0]["ID_TT_HT"].ToString();
+                cboID_TT_HT.EditValue = Convert.ToInt64(dtTmp.Rows[0]["ID_TT_HT"]);
                 txtKyHieu.Text = dtTmp.Rows[0]["KY_HIEU"].ToString();
                 txtSTT.EditValue = Convert.ToInt32(dtTmp.Rows[0]["STT"]);
+                chkBoViec.EditValue = dtTmp.Rows[0]["BO_VIEC"];
+                chkXinNghiViec.EditValue = dtTmp.Rows[0]["XIN_THOI_VIEC"];
             }
             catch (Exception EX)
             {
@@ -74,6 +76,8 @@ namespace Vs.Category
                 cboID_TT_HT.EditValue = -1;
                 txtSTT.EditValue = 1;
                 TEN_LD_TVTextEdit.Focus();
+                chkBoViec.Checked = false;
+                chkXinNghiViec.Checked = false;
             }
             catch { }
         }
@@ -98,7 +102,7 @@ namespace Vs.Category
                             }
                             Commons.Modules.sId = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spUpdateLY_DO_THOI_VIEC", (AddEdit ? -1 : Id),
                                 TEN_LD_TVTextEdit.EditValue, TEN_LD_TV_ATextEdit.EditValue, TEN_LD_TV_HTextEdit.EditValue,
-                                (HE_SOTextEdit.EditValue == null) ? 0 : HE_SOTextEdit.EditValue, Convert.ToInt64(cboID_TT_HT.EditValue), txtKyHieu.Text, (txtSTT.EditValue == "") ? txtSTT.EditValue = null : txtSTT.EditValue).ToString();
+                                (HE_SOTextEdit.EditValue == null) ? 0 : HE_SOTextEdit.EditValue, Convert.ToInt64(cboID_TT_HT.EditValue), txtKyHieu.Text, (txtSTT.EditValue == "") ? txtSTT.EditValue = null : txtSTT.EditValue, chkBoViec.EditValue, chkXinNghiViec.EditValue).ToString();
                             if (AddEdit)
                             {
                                 if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msg_ThemThanhCongBanCoMuonTiepTuc"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)

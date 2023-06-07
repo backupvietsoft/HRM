@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Media;
 using System.Windows.Forms;
 
 namespace Commons
@@ -105,18 +106,26 @@ namespace Commons
                 case enmType.Success:
                     this.pictureBox1.Image = Commons.Properties.Resources.success;
                     this.BackColor = Color.SeaGreen;
+                    //SoundPlayer successSoundPlayer = new SoundPlayer("Template\\Sound\\success.wav");
+                    //successSoundPlayer.Play();
                     break;
                 case enmType.Error:
                     this.pictureBox1.Image = Commons.Properties.Resources.error;
                     this.BackColor = Color.DarkRed;
+                    //SoundPlayer errorSoundPlayer = new SoundPlayer("Template\\Sound\\error.wav");
+                    //errorSoundPlayer.Play();
                     break;
                 case enmType.Info:
                     this.pictureBox1.Image = Commons.Properties.Resources.info;
                     this.BackColor = Color.RoyalBlue;
+                    //SoundPlayer infoSoundPlayer = new SoundPlayer("Template\\Sound\\info.wav");
+                    //infoSoundPlayer.Play();
                     break;
                 case enmType.Warning:
                     this.pictureBox1.Image = Commons.Properties.Resources.warning;
                     this.BackColor = Color.DarkOrange;
+                    //SoundPlayer warningSoundPlayer = new SoundPlayer("Template\\Sound\\warning.wav");
+                    //warningSoundPlayer.Play();
                     break;
             }
 

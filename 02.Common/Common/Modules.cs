@@ -117,6 +117,20 @@ namespace Commons
                 _msgTitle = value;
             }
         }
+
+        // Hợp đồng lương theo hệ số hay mức lương // 0 mức lương, 1 hệ số
+        private static int _iHeSo;
+        public static int iHeSo
+        {
+            get
+            {
+                return _iHeSo;
+            }
+            set
+            {
+                _iHeSo = value;
+            }
+        }
         //định nghĩa giờ làm mặc định
         private static double _iGio;
         public static double iGio

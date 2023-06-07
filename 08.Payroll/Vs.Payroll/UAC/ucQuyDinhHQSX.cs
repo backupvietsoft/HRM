@@ -43,15 +43,20 @@ namespace Vs.Payroll
 
         private void ucQuyDinhHQSX_Load(object sender, EventArgs e)
         {
-            Commons.Modules.sLoad = "0Load";
-            LoadCboDonvi();
-            Commons.Modules.ObjSystems.LoadCboXiNghiep(cboDonVi, cboXiNghiep);
-            Commons.Modules.ObjSystems.LoadCboTo(cboDonVi, cboXiNghiep, cboTo);
-            LoadThang();
-            LoadGrdHQSX();
-            Commons.Modules.ObjSystems.DeleteAddRow(grvData);
-            EnableButon(isAdd);
-            Commons.Modules.sLoad = "";
+            try
+            {
+                Commons.Modules.sLoad = "0Load";
+                LoadCboDonvi();
+                Commons.Modules.ObjSystems.LoadCboXiNghiep(cboDonVi, cboXiNghiep);
+                Commons.Modules.ObjSystems.LoadCboTo(cboDonVi, cboXiNghiep, cboTo);
+                LoadThang();
+                LoadGrdHQSX();
+                Commons.Modules.ObjSystems.DeleteAddRow(grvData);
+                EnableButon(isAdd);
+                Commons.Modules.sLoad = "";
+                Commons.Modules.ObjSystems.SetPhanQuyen(btnALL);
+            }
+            catch { }
         }
 
         private void LoadCboDonvi()
@@ -305,7 +310,7 @@ namespace Vs.Payroll
                         if (grvData.HasColumnErrors) return;
                         if (Savedata() == false)
                         {
-                            Commons.Modules.ObjSystems.msgChung(Commons.ThongBao.msgDuLieuDangSuDung);
+                            Commons.Modules.ObjSystems.MsgWarning(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDelDangSuDung"));
                         }
                         isAdd = false;
                         LoadGrdHQSX();
@@ -404,8 +409,8 @@ namespace Vs.Payroll
 
         private void XoaHQSX()
         {
-            if (grvData.RowCount == 0) { Commons.Modules.ObjSystems.msgChung(Commons.ThongBao.msgKhongCoDuLieuXoa); return; }
-            if (Commons.Modules.ObjSystems.msgHoi(Commons.ThongBao.msgXoa) == DialogResult.No) return;
+            if (grvData.RowCount == 0) { Commons.Modules.ObjSystems.MsgWarning(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgKhongCoDuLieuXoa")); return; }
+            if (Commons.Modules.ObjSystems.MsgQuestion(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msg_XoaDong")) == 0) return;
             //xóa
             try
             {
@@ -415,7 +420,7 @@ namespace Vs.Payroll
             }
             catch
             {
-                Commons.Modules.ObjSystems.msgChung(Commons.ThongBao.msgKhongCoDuLieuXoa);
+                Commons.Modules.ObjSystems.MsgWarning(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgKhongCoDuLieuXoa"));
             }
         }
 

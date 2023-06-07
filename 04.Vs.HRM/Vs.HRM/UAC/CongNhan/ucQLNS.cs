@@ -13,6 +13,7 @@ using DevExpress.XtraLayout;
 using System.Collections.Generic;
 using System.Drawing;
 using DevExpress.Utils.Menu;
+using DevExpress.CodeParser;
 
 namespace Vs.HRM
 {
@@ -21,6 +22,23 @@ namespace Vs.HRM
         public DataTable dt;
         public AccordionControl accorMenuleft;
         public LabelControl labelNV;
+        private Int64 ID_TT_1 = -1;
+        private Int64 ID_TT_2 = -1;
+        private Int64 ID_TT_3 = -1;
+        private Int64 ID_TT_4 = -1;
+        private Int64 ID_TT_5 = -1;
+        private Int64 ID_TT_6 = -1;
+        private Int64 ID_TT_7 = -1;
+        private Int64 ID_TT_8 = -1;
+
+        private int ID_LTTHT_1 = -1;
+        private int ID_LTTHT_2 = -1;
+        private int ID_LTTHT_3 = -1;
+        private int ID_LTTHT_4 = -1;
+        private int ID_LTTHT_5 = -1;
+        private int ID_LTTHT_6 = -1;
+        private int ID_LTTHT_7 = -1;
+        private int ID_LTTHT_8 = -1;
         public ucQLNS()
         {
             InitializeComponent();
@@ -29,66 +47,173 @@ namespace Vs.HRM
 
         private void ucQLNS_Load(object sender, EventArgs e)
         {
-            DataTable dt = new DataTable();
-            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT TOP 1 MS_CN FROM dbo.CONG_NHAN ORDER BY MS_CN"));
-            if (dt.Rows.Count == 0)
+            try
             {
-                grvDSCongNhan_DoubleClick(null, null);
-                return;
+                visibleButton();
+
+                DataTable dt = new DataTable();
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT TOP 1 MS_CN FROM dbo.CONG_NHAN ORDER BY MS_CN"));
+                if (dt.Rows.Count == 0)
+                {
+                    grvDSCongNhan_DoubleClick(null, null);
+                    return;
+                }
+                Commons.Modules.sLoad = "0Load";
+                LoadCboDonVi();
+                LoadCboXiNghiep();
+                LoadCboTo();
+                Commons.Modules.ObjSystems.MLoadLookUpEdit(cboID_LTTHT, Commons.Modules.ObjSystems.DataLoaiTinHTrangHT(false), "ID_LTTHT", "TEN_LOAI_TTHT", "TEN_LOAI_TTHT");
+                Commons.Modules.ObjSystems.MLoadLookUpEdit(cbo_TTHT, Commons.Modules.ObjSystems.DataTinHTrangHT(Convert.ToInt32(cboID_LTTHT.EditValue), true), "ID_TT_HT", "TEN_TT_HT", "TEN_TT_HT");
+                datTNgay.DateTime = DateTime.Now.AddDays(10).AddMonths(-2);
+                datDNgay.DateTime = DateTime.Now.AddDays(10);
+                Commons.OSystems.SetDateEditFormat(datTNgay);
+                Commons.OSystems.SetDateEditFormat(datDNgay);
+                lblTheoNgay.Visibility = LayoutVisibility.Never;
+                lblDenNgay.Visibility = LayoutVisibility.Never;
+                LoadNhanSu(-1);
+                Commons.Modules.sLoad = "";
+                Commons.Modules.ObjSystems.SetPhanQuyen(windowsUIButtonPanel1);
             }
-            Commons.Modules.sLoad = "0Load";
-            LoadCboDonVi();
-            LoadCboXiNghiep();
-            LoadCboTo();
-            Commons.Modules.ObjSystems.MLoadLookUpEdit(cboID_LTTHT, Commons.Modules.ObjSystems.DataLoaiTinHTrangHT(false), "ID_LTTHT", "TEN_LOAI_TTHT", "TEN_LOAI_TTHT");
-            Commons.Modules.ObjSystems.MLoadLookUpEdit(cbo_TTHT, Commons.Modules.ObjSystems.DataTinHTrangHT(Convert.ToInt32(cboID_LTTHT.EditValue), true), "ID_TT_HT", "TEN_TT_HT", "TEN_TT_HT");
-            datTNgay.DateTime = DateTime.Now.AddDays(10).AddMonths(-2);
-            datDNgay.DateTime = DateTime.Now.AddDays(10);
-            Commons.OSystems.SetDateEditFormat(datTNgay);
-            Commons.OSystems.SetDateEditFormat(datDNgay);
-            lblTheoNgay.Visibility = LayoutVisibility.Never;
-            lblDenNgay.Visibility = LayoutVisibility.Never;
-            LoadNhanSu(-1);
-            Commons.Modules.sLoad = "";
-            setMauTT();
-            switch (Commons.Modules.KyHieuDV)
+            catch { }
+        }
+
+        private void visibleButton()
+        {
+            try
             {
-                case "NB":
+                btn1.Visible = false;
+                btn2.Visible = false;
+                btn3.Visible = false;
+                btn4.Visible = false;
+                btn5.Visible = false;
+                btn6.Visible = false;
+                btn7.Visible = false;
+                btn8.Visible = false;
+
+                lbl1.Visible = false;
+                lbl2.Visible = false;
+                lbl3.Visible = false;
+                lbl4.Visible = false;
+                lbl5.Visible = false;
+                lbl6.Visible = false;
+                lbl7.Visible = false;
+                lbl8.Visible = false;
+
+                tablePanel1.Columns[1].Width = 0;
+                tablePanel1.Columns[2].Width = 0;
+                tablePanel1.Columns[3].Width = 0;
+                tablePanel1.Columns[4].Width = 0;
+                tablePanel1.Columns[5].Width = 0;
+                tablePanel1.Columns[6].Width = 0;
+                tablePanel1.Columns[7].Width = 0;
+                tablePanel1.Columns[8].Width = 0;
+
+                DataTable dt = new DataTable();
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT ID_TT_HT, MAU_TT, TEN_TT_HT, ISNULL(ID_LTTHT,1) ID_LTTHT FROM dbo.TINH_TRANG_HT ORDER BY STT"));
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    switch (i)
                     {
+                        case 0:
+                            {
+                                tablePanel1.Columns[1].Width = 7.5F;
 
-                        btnDaNghiViec.Visible = false;
-                        lblDaNghiViec.Visible = false;
-                        btnBoViec.Visible = false;
-                        lblBoViec.Visible = false;
-                        lblSapNghiSinh.Text = "Nghỉ sẩy thai";
-                        lblNghiDe.Text = "Nghỉ thai sản";
-                        lblCheDo1Nam.Text = "Đã nghỉ việc";
-                        lblSapNghiViec.Text = "Nghỉ không lương";
-                        btnDaNghiViec.Visible = false;
-                        lblDaNghiViec.Visible = false;
-                        break;
+                                ID_LTTHT_1 = Convert.ToInt32(dt.Rows[i]["ID_LTTHT"]);
+                                ID_TT_1 = Convert.ToInt64(dt.Rows[i]["ID_TT_HT"]);
+                                lbl1.Visible = true;
+                                lbl1.Text = dt.Rows[i]["TEN_TT_HT"].ToString();
+                                btn1.Visible = true;
+                                btn1.BackColor = System.Drawing.ColorTranslator.FromHtml(dt.Rows[i]["MAU_TT"].ToString());
+                                break;
+                            }
+                        case 1:
+                            {
+                                tablePanel1.Columns[2].Width = 7.5F;
+
+                                ID_LTTHT_2 = Convert.ToInt32(dt.Rows[i]["ID_LTTHT"]);
+                                ID_TT_2 = Convert.ToInt64(dt.Rows[i]["ID_TT_HT"]);
+                                lbl2.Visible = true;
+                                lbl2.Text = dt.Rows[i]["TEN_TT_HT"].ToString();
+                                btn2.Visible = true;
+                                btn2.BackColor = System.Drawing.ColorTranslator.FromHtml(dt.Rows[i]["MAU_TT"].ToString());
+                                break;
+                            }
+                        case 2:
+                            {
+                                tablePanel1.Columns[3].Width = 7.5F;
+
+                                ID_LTTHT_3 = Convert.ToInt32(dt.Rows[i]["ID_LTTHT"]);
+                                ID_TT_3 = Convert.ToInt64(dt.Rows[i]["ID_TT_HT"]);
+                                lbl3.Visible = true;
+                                lbl3.Text = dt.Rows[i]["TEN_TT_HT"].ToString();
+                                btn3.Visible = true;
+                                btn3.BackColor = System.Drawing.ColorTranslator.FromHtml(dt.Rows[i]["MAU_TT"].ToString());
+                                break;
+                            }
+                        case 3:
+                            {
+                                tablePanel1.Columns[4].Width = 7.5F;
+
+                                ID_LTTHT_4 = Convert.ToInt32(dt.Rows[i]["ID_LTTHT"]);
+                                ID_TT_4 = Convert.ToInt64(dt.Rows[i]["ID_TT_HT"]);
+                                lbl4.Visible = true;
+                                lbl4.Text = dt.Rows[i]["TEN_TT_HT"].ToString();
+                                btn4.Visible = true;
+                                btn4.BackColor = System.Drawing.ColorTranslator.FromHtml(dt.Rows[i]["MAU_TT"].ToString());
+                                break;
+                            }
+                        case 4:
+                            {
+                                tablePanel1.Columns[5].Width = 7.5F;
+
+                                ID_LTTHT_5 = Convert.ToInt32(dt.Rows[i]["ID_LTTHT"]);
+                                ID_TT_5 = Convert.ToInt64(dt.Rows[i]["ID_TT_HT"]);
+                                lbl5.Visible = true;
+                                lbl5.Text = dt.Rows[i]["TEN_TT_HT"].ToString();
+                                btn5.Visible = true;
+                                btn5.BackColor = System.Drawing.ColorTranslator.FromHtml(dt.Rows[i]["MAU_TT"].ToString());
+                                break;
+                            }
+                        case 5:
+                            {
+                                tablePanel1.Columns[6].Width = 7.5F;
+
+                                ID_LTTHT_6 = Convert.ToInt32(dt.Rows[i]["ID_LTTHT"]);
+                                ID_TT_6 = Convert.ToInt64(dt.Rows[i]["ID_TT_HT"]);
+                                lbl6.Visible = true;
+                                lbl6.Text = dt.Rows[i]["TEN_TT_HT"].ToString();
+                                btn6.Visible = true;
+                                btn6.BackColor = System.Drawing.ColorTranslator.FromHtml(dt.Rows[i]["MAU_TT"].ToString());
+                                break;
+                            }
+                        case 6:
+                            {
+                                tablePanel1.Columns[7].Width = 7.5F;
+
+                                ID_LTTHT_7 = Convert.ToInt32(dt.Rows[i]["ID_LTTHT"]);
+                                ID_TT_7 = Convert.ToInt64(dt.Rows[i]["ID_TT_HT"]);
+                                lbl7.Visible = true;
+                                lbl7.Text = dt.Rows[i]["TEN_TT_HT"].ToString();
+                                btn7.Visible = true;
+                                btn7.BackColor = System.Drawing.ColorTranslator.FromHtml(dt.Rows[i]["MAU_TT"].ToString());
+                                break;
+                            }
+                        case 7:
+                            {
+                                tablePanel1.Columns[8].Width = 7.5F;
+
+                                ID_LTTHT_8 = Convert.ToInt32(dt.Rows[i]["ID_LTTHT"]);
+                                ID_TT_8 = Convert.ToInt64(dt.Rows[i]["ID_TT_HT"]);
+                                lbl8.Visible = true;
+                                lbl8.Text = dt.Rows[i]["TEN_TT_HT"].ToString();
+                                btn8.Visible = true;
+                                btn8.BackColor = System.Drawing.ColorTranslator.FromHtml(dt.Rows[i]["MAU_TT"].ToString());
+                                break;
+                            }
                     }
-                case "NC":
-                    {
-
-                        btnDaNghiViec.Visible = false;
-                        lblDaNghiViec.Visible = false;
-                        btnBoViec.Visible = false;
-                        lblBoViec.Visible = false;
-                        lblSapNghiSinh.Text = "Nghỉ sẩy thai đình chỉ thai";
-                        lblNghiDe.Text = "Nghỉ thai sản";
-                        lblCheDo1Nam.Text = "Đã nghỉ việc";
-                        lblSapNghiViec.Text = "Nghỉ không lương";
-                        btnDaNghiViec.Visible = false;
-                        lblDaNghiViec.Visible = false;
-                        break;
-                    }
+                }
             }
-
-            foreach (ToolStripMenuItem item in contextMenuStrip1.Items)
-            {
-                item.Text = Commons.Modules.ObjLanguages.GetLanguage(this.Name, item.Name);
-            }
+            catch { }
         }
 
         private void LoadCboDonVi()
@@ -159,30 +284,34 @@ namespace Vs.HRM
             LoadNhanSu(-1);
             Commons.Modules.sLoad = "";
         }
+
         private void cbo_TTHT_EditValueChanged(object sender, EventArgs e)
         {
             if (Commons.Modules.sLoad == "0Load") return;
             Commons.Modules.sLoad = "0Load";
+            try
+            {
+                DataRowView drv = (DataRowView)cbo_TTHT.GetSelectedDataRow();
+                if ((drv == null ? "" : drv.Row["KY_HIEU"].ToString().Trim()) != "SHHHD")
+                {
+                    lblTheoNgay.Visibility = LayoutVisibility.Never;
+                    lblDenNgay.Visibility = LayoutVisibility.Never;
+                }
+                else
+                {
+                    lblTheoNgay.Visibility = LayoutVisibility.Always;
+                    lblDenNgay.Visibility = LayoutVisibility.Always;
+                }
+                LoadNhanSu(-1);
+            }
+            catch { }
 
-            DataRowView drv = (DataRowView)cbo_TTHT.GetSelectedDataRow();
-            if (drv.Row["KY_HIEU"].ToString().Trim() != "SHHHD")
-            {
-                lblTheoNgay.Visibility = LayoutVisibility.Never;
-                lblDenNgay.Visibility = LayoutVisibility.Never;
-            }
-            else
-            {
-                lblTheoNgay.Visibility = LayoutVisibility.Always;
-                lblDenNgay.Visibility = LayoutVisibility.Always;
-            }
-            LoadNhanSu(-1);
             Commons.Modules.sLoad = "";
         }
         private void LoadNhanSu(Int64 iIdNs)
         {
             try
             {
-
                 DataTable dtTmp = new DataTable();
                 DataRowView drv = (DataRowView)cbo_TTHT.GetSelectedDataRow(); // lấy ký hiệu của tình trạng đang chọn
                 dtTmp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetListNS_DanhSach", cboDV.EditValue, cboXN.EditValue, cboTo.EditValue, cbo_TTHT.EditValue, drv.Row["KY_HIEU"].ToString().Trim(), cboID_LTTHT.EditValue, Commons.Modules.UserName, Commons.Modules.TypeLanguage, datTNgay.DateTime, datDNgay.DateTime));
@@ -223,11 +352,12 @@ namespace Vs.HRM
                     {
                         labelNV.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
                         labelNV.ForeColor = System.Drawing.Color.FromArgb(0, 0, 255);
-                        labelNV.Text = grvDSCongNhan.GetFocusedRowCellValue(grvDSCongNhan.Columns["MS_CN"]).ToString() + " - " + grvDSCongNhan.GetFocusedRowCellValue(grvDSCongNhan.Columns["HO_TEN"]).ToString();
+                        labelNV.Text = grvDSCongNhan.GetFocusedRowCellValue(grvDSCongNhan.Columns["MS_CN"]).ToString() + " - " + grvDSCongNhan.GetFocusedRowCellValue(grvDSCongNhan.Columns["HO_TEN"]).ToString() + " - " + grvDSCongNhan.GetFocusedRowCellValue(grvDSCongNhan.Columns["TEN_TO"]).ToString();
                     }
                     catch (Exception ex) { }
                     grdDSCongNhan.Visible = false;
                     ucCTQLNS dl = new ucCTQLNS(Convert.ToInt64(grvDSCongNhan.GetFocusedRowCellValue(grvDSCongNhan.Columns["ID_CN"])));
+                    dl.labelNV = labelNV;
                     dl.Refresh();
                     dt = dl.dt;
                     navigationFrame1.SelectedPage.Visible = false;
@@ -321,7 +451,7 @@ namespace Vs.HRM
                 XtraUserControl ctl = new XtraUserControl();
                 switch (btn.Tag.ToString())
                 {
-                    case "importNhanSu":
+                    case "import":
                         {
                             frmImportNhanSu frm = new frmImportNhanSu();
                             if (frm.ShowDialog() == DialogResult.OK)
@@ -367,11 +497,18 @@ namespace Vs.HRM
                             {
                                 iIDCN = -1;
                             }
-
+                            try
+                            {
+                                labelNV.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                                labelNV.ForeColor = System.Drawing.Color.FromArgb(0, 0, 255);
+                                labelNV.Text = grvDSCongNhan.GetFocusedRowCellValue(grvDSCongNhan.Columns["MS_CN"]).ToString() + " - " + grvDSCongNhan.GetFocusedRowCellValue(grvDSCongNhan.Columns["HO_TEN"]).ToString() + " - " + grvDSCongNhan.GetFocusedRowCellValue(grvDSCongNhan.Columns["TEN_TO"]).ToString();
+                            }
+                            catch (Exception ex) { }
                             grdDSCongNhan.Visible = false;
                             ucCTQLNS dl = new ucCTQLNS(iIDCN);
                             Commons.Modules.ObjSystems.ShowWaitForm(this);
                             dl.Refresh();
+                            dl.labelNV = labelNV;
                             dt = dl.dt;
                             navigationFrame1.SelectedPage.Visible = false;
                             if (dt != null && dt.Rows.Count > 0)
@@ -454,115 +591,78 @@ namespace Vs.HRM
             {
             }
         }
-        private void setMauTT()
-        {
-            try
-            {
-                switch (Commons.Modules.KyHieuDV)
-                {
-                    case "DM":
-                        {
-
-                            DataTable dt = new DataTable();
-                            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT ID_TT_HT, MAU_TT FROM dbo.TINH_TRANG_HT ORDER BY STT"));
-                            btnBinhThuong.BackColor = System.Drawing.ColorTranslator.FromHtml(dt.Rows[0]["MAU_TT"].ToString());
-                            btnSapNghiViec.BackColor = System.Drawing.ColorTranslator.FromHtml(dt.Rows[1]["MAU_TT"].ToString());
-                            btnSapNghiSinh.BackColor = System.Drawing.ColorTranslator.FromHtml(dt.Rows[2]["MAU_TT"].ToString());
-                            btnNghiDe.BackColor = System.Drawing.ColorTranslator.FromHtml(dt.Rows[3]["MAU_TT"].ToString());
-                            btnCheDo1Nam.BackColor = System.Drawing.ColorTranslator.FromHtml(dt.Rows[4]["MAU_TT"].ToString());
-                            btnDaNghiViec.BackColor = System.Drawing.ColorTranslator.FromHtml(dt.Rows[5]["MAU_TT"].ToString());
-                            btnBoViec.BackColor = System.Drawing.ColorTranslator.FromHtml(dt.Rows[6]["MAU_TT"].ToString());
-                            btnSapHetHanHD.BackColor = System.Drawing.ColorTranslator.FromHtml(dt.Rows[7]["MAU_TT"].ToString());
-                            break;
-                        }
-                    default:
-                        {
-                            DataTable dt = new DataTable();
-                            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT ID_TT_HT, MAU_TT FROM dbo.TINH_TRANG_HT ORDER BY STT"));
-                            btnBinhThuong.BackColor = System.Drawing.ColorTranslator.FromHtml(dt.Rows[0]["MAU_TT"].ToString());
-                            btnSapNghiViec.BackColor = System.Drawing.ColorTranslator.FromHtml(dt.Rows[1]["MAU_TT"].ToString());
-                            btnSapNghiSinh.BackColor = System.Drawing.ColorTranslator.FromHtml(dt.Rows[2]["MAU_TT"].ToString());
-                            btnNghiDe.BackColor = System.Drawing.ColorTranslator.FromHtml(dt.Rows[3]["MAU_TT"].ToString());
-                            btnCheDo1Nam.BackColor = System.Drawing.ColorTranslator.FromHtml(dt.Rows[4]["MAU_TT"].ToString());
-                            btnSapHetHanHD.BackColor = System.Drawing.ColorTranslator.FromHtml(dt.Rows[5]["MAU_TT"].ToString());
-                            break;
-                        }
-                }
-            }
-            catch { }
-        }
         #region click mau
-        private void btnBinhThuong_Click(object sender, EventArgs e)
+        private void btn1_Click(object sender, EventArgs e)
         {
             Commons.Modules.sLoad = "0Load";
-            cboID_LTTHT.EditValue = Convert.ToInt32(1);
+            cboID_LTTHT.EditValue = ID_LTTHT_1;
             Commons.Modules.ObjSystems.MLoadLookUpEdit(cbo_TTHT, Commons.Modules.ObjSystems.DataTinHTrangHT(Convert.ToInt32(cboID_LTTHT.EditValue), true), "ID_TT_HT", "TEN_TT_HT", "TEN_TT_HT");
             Commons.Modules.sLoad = "";
-            cbo_TTHT.EditValue = Convert.ToInt64(1);
+            cbo_TTHT.EditValue = ID_TT_1;
         }
 
-        private void btnSapHetHanHD_Click(object sender, EventArgs e)
+        private void btn2_Click(object sender, EventArgs e)
         {
             Commons.Modules.sLoad = "0Load";
-            cboID_LTTHT.EditValue = Convert.ToInt32(1);
+            cboID_LTTHT.EditValue = ID_LTTHT_2;
             Commons.Modules.ObjSystems.MLoadLookUpEdit(cbo_TTHT, Commons.Modules.ObjSystems.DataTinHTrangHT(Convert.ToInt32(cboID_LTTHT.EditValue), true), "ID_TT_HT", "TEN_TT_HT", "TEN_TT_HT");
             Commons.Modules.sLoad = "";
-            cbo_TTHT.EditValue = Convert.ToInt64(8);
+            cbo_TTHT.EditValue = ID_TT_2;
         }
 
-        private void btnSapNghiViec_Click(object sender, EventArgs e)
+        private void btn3_Click(object sender, EventArgs e)
         {
             Commons.Modules.sLoad = "0Load";
-            cboID_LTTHT.EditValue = Convert.ToInt32(1);
+            cboID_LTTHT.EditValue = ID_LTTHT_3;
             Commons.Modules.ObjSystems.MLoadLookUpEdit(cbo_TTHT, Commons.Modules.ObjSystems.DataTinHTrangHT(Convert.ToInt32(cboID_LTTHT.EditValue), true), "ID_TT_HT", "TEN_TT_HT", "TEN_TT_HT");
             Commons.Modules.sLoad = "";
-            cbo_TTHT.EditValue = Convert.ToInt64(2);
+            cbo_TTHT.EditValue = ID_TT_3;
         }
 
-        private void btnSapNghiSinh_Click(object sender, EventArgs e)
+        private void btn4_Click(object sender, EventArgs e)
         {
             Commons.Modules.sLoad = "0Load";
-            cboID_LTTHT.EditValue = Convert.ToInt32(1);
+            cboID_LTTHT.EditValue = ID_LTTHT_4;
             Commons.Modules.ObjSystems.MLoadLookUpEdit(cbo_TTHT, Commons.Modules.ObjSystems.DataTinHTrangHT(Convert.ToInt32(cboID_LTTHT.EditValue), true), "ID_TT_HT", "TEN_TT_HT", "TEN_TT_HT");
             Commons.Modules.sLoad = "";
-            cbo_TTHT.EditValue = Convert.ToInt64(3);
+            cbo_TTHT.EditValue = ID_TT_4;
         }
 
-        private void btnNghiDe_Click(object sender, EventArgs e)
+        private void btn5_Click(object sender, EventArgs e)
         {
             Commons.Modules.sLoad = "0Load";
-            cboID_LTTHT.EditValue = Convert.ToInt32(1);
+            cboID_LTTHT.EditValue = ID_LTTHT_5;
             Commons.Modules.ObjSystems.MLoadLookUpEdit(cbo_TTHT, Commons.Modules.ObjSystems.DataTinHTrangHT(Convert.ToInt32(cboID_LTTHT.EditValue), true), "ID_TT_HT", "TEN_TT_HT", "TEN_TT_HT");
             Commons.Modules.sLoad = "";
-            cbo_TTHT.EditValue = Convert.ToInt64(4);
+            cbo_TTHT.EditValue = ID_TT_5;
         }
 
-        private void btnCheDo1Nam_Click(object sender, EventArgs e)
+        private void btn6_Click(object sender, EventArgs e)
         {
             Commons.Modules.sLoad = "0Load";
-            cboID_LTTHT.EditValue = Convert.ToInt32(1);
+            cboID_LTTHT.EditValue = ID_LTTHT_6;
             Commons.Modules.ObjSystems.MLoadLookUpEdit(cbo_TTHT, Commons.Modules.ObjSystems.DataTinHTrangHT(Convert.ToInt32(cboID_LTTHT.EditValue), true), "ID_TT_HT", "TEN_TT_HT", "TEN_TT_HT");
             Commons.Modules.sLoad = "";
-            cbo_TTHT.EditValue = Convert.ToInt64(5);
+            cbo_TTHT.EditValue = ID_TT_6;
 
         }
 
-        private void btnDaNghiViec_Click(object sender, EventArgs e)
+        private void btn7_Click(object sender, EventArgs e)
         {
             Commons.Modules.sLoad = "0Load";
-            cboID_LTTHT.EditValue = Convert.ToInt32(2);
+            cboID_LTTHT.EditValue = ID_LTTHT_7;
             Commons.Modules.ObjSystems.MLoadLookUpEdit(cbo_TTHT, Commons.Modules.ObjSystems.DataTinHTrangHT(Convert.ToInt32(cboID_LTTHT.EditValue), true), "ID_TT_HT", "TEN_TT_HT", "TEN_TT_HT");
             Commons.Modules.sLoad = "";
-            cbo_TTHT.EditValue = Convert.ToInt64(6);
+            cbo_TTHT.EditValue = ID_TT_7;
         }
 
-        private void btnBoViec_Click(object sender, EventArgs e)
+        private void btn8_Click(object sender, EventArgs e)
         {
             Commons.Modules.sLoad = "0Load";
-            cboID_LTTHT.EditValue = Convert.ToInt32(2);
+            cboID_LTTHT.EditValue = ID_LTTHT_8;
             Commons.Modules.ObjSystems.MLoadLookUpEdit(cbo_TTHT, Commons.Modules.ObjSystems.DataTinHTrangHT(Convert.ToInt32(cboID_LTTHT.EditValue), true), "ID_TT_HT", "TEN_TT_HT", "TEN_TT_HT");
             Commons.Modules.sLoad = "";
-            cbo_TTHT.EditValue = Convert.ToInt64(7);
+            cbo_TTHT.EditValue = ID_TT_8;
         }
         //private void LoadMau()
         //{
@@ -602,7 +702,6 @@ namespace Vs.HRM
             menuLapHopDong.Tag = new RowInfo(view, rowHandle);
             return menuLapHopDong;
         }
-
         public DXMenuItem MCreateCNQuaTrinhCT(DevExpress.XtraGrid.Views.Grid.GridView view, int rowHandle)
         {
             string sStr = Commons.Modules.ObjLanguages.GetLanguage(Commons.Modules.ModuleName, this.Name, "lblLapCongTac", Commons.Modules.TypeLanguage);
@@ -610,7 +709,6 @@ namespace Vs.HRM
             menuLapCongTac.Tag = new RowInfo(view, rowHandle);
             return menuLapCongTac;
         }
-
         public void LapHopDong(object sender, EventArgs e)
         {
             try
@@ -629,7 +727,6 @@ namespace Vs.HRM
             }
             catch (Exception ex) { }
         }
-
         public void LoadCNCongTac(object sender, EventArgs e)
         {
             try
@@ -641,41 +738,29 @@ namespace Vs.HRM
             }
             catch (Exception ex) { }
         }
-
         private void grvDSCongNhan_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
         {
-            if (Convert.ToInt32(cbo_TTHT.EditValue) == 8)
+            if (Commons.Modules.iPermission != 1) return;
+            try
             {
-                try
+                DevExpress.XtraGrid.Views.Grid.GridView view = sender as DevExpress.XtraGrid.Views.Grid.GridView;
+                if (e.MenuType == DevExpress.XtraGrid.Views.Grid.GridMenuType.Row)
                 {
-                    DevExpress.XtraGrid.Views.Grid.GridView view = sender as DevExpress.XtraGrid.Views.Grid.GridView;
-                    if (e.MenuType == DevExpress.XtraGrid.Views.Grid.GridMenuType.Row)
+                    int irow = e.HitInfo.RowHandle;
+                    e.Menu.Items.Clear();
+                    DataRowView drv = (DataRowView)cbo_TTHT.GetSelectedDataRow();
+                    if (drv.Row["KY_HIEU"].ToString().Trim() == "SHHHD")
                     {
-                        int irow = e.HitInfo.RowHandle;
-                        e.Menu.Items.Clear();
                         DevExpress.Utils.Menu.DXMenuItem itemLapHopDong = MCreateMenuLapHopDong(view, irow);
                         e.Menu.Items.Add(itemLapHopDong);
                     }
+                    DevExpress.Utils.Menu.DXMenuItem itemCNQD = MCreateCNQuaTrinhCT(view, irow);
+                    e.Menu.Items.Add(itemCNQD);
                 }
-                catch
-                {
-                }
-            }    
-            if(Convert.ToInt32(cboID_LTTHT.EditValue) == 1)
-                try
-                {
-                    DevExpress.XtraGrid.Views.Grid.GridView view = sender as DevExpress.XtraGrid.Views.Grid.GridView;
-                    if (e.MenuType == DevExpress.XtraGrid.Views.Grid.GridMenuType.Row)
-                    {
-                        int irow = e.HitInfo.RowHandle;
-                        e.Menu.Items.Clear();
-                        DevExpress.Utils.Menu.DXMenuItem itemCNQD = MCreateCNQuaTrinhCT(view, irow);
-                        e.Menu.Items.Add(itemCNQD);
-                    }
-                }
-                catch
-                {
-                }
+            }
+            catch
+            {
+            }
         }
 
         #endregion

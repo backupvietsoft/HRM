@@ -24,7 +24,7 @@ namespace Vs.Report
 
         }
 
-        private void srptQuaTrinhDaoTao_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        private void srptQuaTrinhDaoTao_BeforePrint(object sender, CancelEventArgs e)
         {
           
         }

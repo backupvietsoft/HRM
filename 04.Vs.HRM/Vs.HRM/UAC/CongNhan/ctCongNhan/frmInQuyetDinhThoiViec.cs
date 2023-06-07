@@ -1,8 +1,11 @@
-﻿using DevExpress.XtraBars.Docking2010;
+﻿using Aspose.Words;
+using DevExpress.XtraBars.Docking2010;
 using DevExpress.XtraEditors;
+using DevExpress.XtraReports.Templates;
 using Microsoft.ApplicationBlocks.Data;
 using System;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using Vs.Report;
 
@@ -13,22 +16,17 @@ namespace Vs.HRM
         private int iID_CN = 494;
         private int iID_QDTV = 13;
         DateTime dtNgayThoiViec;
-        int NNgu = 0;
         public frmInQuyetDinhThoiViec(int ID_QDTV, int ID_CN, DateTime ngaythoiviec)
         {
             InitializeComponent();
             iID_CN = ID_CN;
             iID_QDTV = ID_QDTV;
             dtNgayThoiViec = ngaythoiviec;
-
         }
-
-
-
         //sự kiên load form
         private void frmInQuyetDinhThoiViec_Load(object sender, EventArgs e)
         {
-            if (Commons.Modules.ObjSystems.KyHieuDV_CN(Convert.ToInt64(iID_CN)) == "SB")
+            if (Commons.Modules.KyHieuDV == "SB")
             {
                 rdo_ChonBaoCao.Properties.Items.RemoveAt(5);
                 rdo_ChonBaoCao.Properties.Items.RemoveAt(4);
@@ -58,14 +56,14 @@ namespace Vs.HRM
                             // Quyết định thôi việc
                             case 0:
                                 {
-                                    switch (Commons.Modules.ObjSystems.KyHieuDV_CN(Convert.ToInt64(iID_CN)))
+                                    switch (Commons.Modules.KyHieuDV)
                                     {
                                         case "MT":
                                             {
                                                 QuyetDinhThoiViec();
                                                 break;
                                             }
-                                        case "NB":
+                                        case "SB":
                                             {
                                                 QuyetDinhThoiViec_SB();
                                                 break;
@@ -80,7 +78,7 @@ namespace Vs.HRM
                             //Quyết định sa thải
                             case 1:
                                 {
-                                    switch (Commons.Modules.ObjSystems.KyHieuDV_CN(Convert.ToInt64(iID_CN)))
+                                    switch (Commons.Modules.KyHieuDV)
                                     {
                                         case "MT":
                                             {
@@ -102,7 +100,7 @@ namespace Vs.HRM
                             //Quyết định thanh lý hợp đồng trước năm 2008
                             case 2:
                                 {
-                                    switch (Commons.Modules.ObjSystems.KyHieuDV_CN(Convert.ToInt64(iID_CN)))
+                                    switch (Commons.Modules.KyHieuDV)
                                     {
                                         case "MT":
                                             {
@@ -124,7 +122,7 @@ namespace Vs.HRM
                             //Quyết định thanh lý hợp đồng sau năm 2008 có trợ cấp
                             case 3:
                                 {
-                                    switch (Commons.Modules.ObjSystems.KyHieuDV_CN(Convert.ToInt64(iID_CN)))
+                                    switch (Commons.Modules.KyHieuDV)
                                     {
                                         case "MT":
                                             {
@@ -141,7 +139,7 @@ namespace Vs.HRM
                             //Quyết định sa thải có trợ cấp
                             case 4:
                                 {
-                                    switch (Commons.Modules.ObjSystems.KyHieuDV_CN(Convert.ToInt64(iID_CN)))
+                                    switch (Commons.Modules.KyHieuDV)
                                     {
                                         case "MT":
                                             {
@@ -152,13 +150,13 @@ namespace Vs.HRM
                                             QuyetDinhSaThaiTroCap();
                                             break;
                                     }
-                                    
+
                                 }
                                 break;
                             //Quyết định thôi việc vi phạm thời gian báo trước
                             case 5:
                                 {
-                                    switch (Commons.Modules.ObjSystems.KyHieuDV_CN(Convert.ToInt64(iID_CN)))
+                                    switch (Commons.Modules.KyHieuDV)
                                     {
                                         case "MT":
                                             {
@@ -169,7 +167,7 @@ namespace Vs.HRM
                                             QuyetDinhThoiViecVPThoiGian();
                                             break;
                                     }
-                                    
+
                                 }
                                 break;
 
@@ -187,7 +185,6 @@ namespace Vs.HRM
                     break;
             }
         }
-
         private void QuyetDinhThoiViec()
         {
             try
@@ -413,16 +410,12 @@ namespace Vs.HRM
             try
             {
                 System.Data.SqlClient.SqlConnection conn;
-                frmViewReport frm = new frmViewReport();
-                if(chkTiengAnh.Checked == false)
+                string sPathFile = "Template\\TemplateSB\\QuyetDinhThoiViec.docx";
+                int NNgu = 0;
+                if (chkTiengAnh.Checked == true)
                 {
-                    frm.rpt = new rptQuyetDinhThoiViec_SB(DateTime.Now, 1);
-                    NNgu = 0;
-                }
-                else
-                {
-                    frm.rpt = new rptQuyetDinhThoiViecTiengAnh_SB(DateTime.Now, 1);
                     NNgu = 1;
+                    sPathFile = "Template\\TemplateSB\\QuyetDinhThoiViecTA.docx";
                 }
 
                 conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
@@ -435,6 +428,7 @@ namespace Vs.HRM
                 cmd.Parameters.Add("@ID_SQD", SqlDbType.Int).Value = iID_QDTV;
                 cmd.Parameters.Add("@ID_CN", SqlDbType.Int).Value = iID_CN;
                 cmd.Parameters.Add("@NgayThoiViec", SqlDbType.DateTime).Value = dtNgayThoiViec;
+                cmd.Parameters.Add("@Lydo", SqlDbType.Int).Value = 1;
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
@@ -442,24 +436,60 @@ namespace Vs.HRM
                 adp.Fill(ds);
                 DataTable dt = new DataTable();
                 dt = ds.Tables[0].Copy();
-                dt.TableName = "DATA";
-                frm.AddDataSource(dt);
+                DataRow row = dt.Rows[0];
 
-                DataTable dt1 = new DataTable();
-                dt1 = ds.Tables[1].Copy();
-                dt1.TableName = "NOI_DUNG";
-                frm.AddDataSource(dt1);
+                string sPath = "";
 
-                frm.ShowDialog();
+                if (!System.IO.Directory.Exists("Report")) // kiểm tra xem forder đã có chưa , nếu chưa có thì tạo 
+                {
+                    System.IO.Directory.CreateDirectory("Report");
+                }
+                sPath = "Report\\" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".docx";
+
+                Document baoCao = new Document(sPathFile);
+
+                //fill vào báo cáo
+                //var date = Convert.ToDateTime(row["NGAY_BAT_DAU_HD"]);
+                //baoCao.MailMerge.Execute(new[] { "NGAY_BD_HD" }, new[] { string.Format("ngày {0} tháng {1} năm {2}", date.Day, date.Month, date.Year) });
+                //baoCao.MailMerge.Execute(new[] { "NGAY_KY" }, new[] { string.Format("ngày {0} tháng {1} năm {2}", date.Day, date.Month, date.Year) });
+                //baoCao.MailMerge.Execute(new[] { "NGAY_KT_HD" }, new[] { string.Format("ngày {0} tháng {1} năm {2}", date.Day, date.Month, date.Year) });
+                foreach (DataColumn item in dt.Columns)
+                {
+                    if (Commons.Modules.ObjSystems.IsnullorEmpty(row[item]))
+                    {
+                        baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { "..." });
+
+                        continue;
+                    }
+                    switch (item.DataType.Name)
+                    {
+                        case "DateTime":
+                            {
+                                baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { Convert.ToDateTime(row[item]).ToString("dd/MM/yyyy") });
+                                break;
+                            }
+                        case "Double":
+                            {
+                                baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { string.Format("{0:#,##0}", row[item]) });
+                                break;
+                            }
+                        default:
+                            {
+                                baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { row[item] });
+                                break;
+
+                            }
+                    }
+                }
+                baoCao.SaveAndOpenFile(sPath);
             }
-            catch { }
+            catch (Exception ex) { Commons.Modules.ObjSystems.MsgError(ex.Message); }
         }
-
-
         private void QuyetDinhThoiViec_NB()
         {
             System.Data.SqlClient.SqlConnection conn;
             frmViewReport frm = new frmViewReport();
+            int NNgu = 0;
             if (chkTiengAnh.Checked == false)
             {
                 frm.rpt = new rptQuyetDinhThoiViec_SB(DateTime.Now, 1);
@@ -498,6 +528,7 @@ namespace Vs.HRM
             {
                 System.Data.SqlClient.SqlConnection conn;
                 frmViewReport frm = new frmViewReport();
+                int NNgu = 0;
                 if (chkTiengAnh.Checked == false)
                 {
                     frm.rpt = new rptQuyetDinhThoiViecTroCap_SB(DateTime.Now, 1);
@@ -519,6 +550,7 @@ namespace Vs.HRM
                 cmd.Parameters.Add("@ID_SQD", SqlDbType.Int).Value = iID_QDTV;
                 cmd.Parameters.Add("@ID_CN", SqlDbType.Int).Value = iID_CN;
                 cmd.Parameters.Add("@NgayThoiViec", SqlDbType.DateTime).Value = dtNgayThoiViec;
+                cmd.Parameters.Add("@Lydo", SqlDbType.Int).Value = 1;
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
@@ -544,15 +576,12 @@ namespace Vs.HRM
             {
                 System.Data.SqlClient.SqlConnection conn;
                 frmViewReport frm = new frmViewReport();
-                if (chkTiengAnh.Checked == false)
+                int NNgu = 0;
+                string sPathFile = "Template\\TemplateSB\\QuyetDinhBoViec.docx";
+                if (chkTiengAnh.Checked == true)
                 {
-                    frm.rpt = new rptQuyetDinhThoiViecBoViec_SB(DateTime.Now, 1);
-                    NNgu = 0;
-                }
-                else
-                {
-                    frm.rpt = new rptQuyetDinhThoiViecBoViecTiengAnh_SB(DateTime.Now, 1);
                     NNgu = 1;
+                    sPathFile = "Template\\TemplateSB\\QuyetDinhBoViecTA.docx";
                 }
 
                 conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
@@ -565,6 +594,7 @@ namespace Vs.HRM
                 cmd.Parameters.Add("@ID_SQD", SqlDbType.Int).Value = iID_QDTV;
                 cmd.Parameters.Add("@ID_CN", SqlDbType.Int).Value = iID_CN;
                 cmd.Parameters.Add("@NgayThoiViec", SqlDbType.DateTime).Value = dtNgayThoiViec;
+                cmd.Parameters.Add("@Lydo", SqlDbType.Int).Value = 2;
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
@@ -572,17 +602,54 @@ namespace Vs.HRM
                 adp.Fill(ds);
                 DataTable dt = new DataTable();
                 dt = ds.Tables[0].Copy();
-                dt.TableName = "DATA";
-                frm.AddDataSource(dt);
+                DataRow row = dt.Rows[0];
 
-                DataTable dt1 = new DataTable();
-                dt1 = ds.Tables[1].Copy();
-                dt1.TableName = "NOI_DUNG";
-                frm.AddDataSource(dt1);
+                string sPath = "";
 
-                frm.ShowDialog();
+                if (!System.IO.Directory.Exists("Report")) // kiểm tra xem forder đã có chưa , nếu chưa có thì tạo 
+                {
+                    System.IO.Directory.CreateDirectory("Report");
+                }
+                sPath = "Report\\" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".docx";
+
+                Document baoCao = new Document(sPathFile);
+
+                //fill vào báo cáo
+                //var date = Convert.ToDateTime(row["NGAY_BAT_DAU_HD"]);
+                //baoCao.MailMerge.Execute(new[] { "NGAY_BD_HD" }, new[] { string.Format("ngày {0} tháng {1} năm {2}", date.Day, date.Month, date.Year) });
+                //baoCao.MailMerge.Execute(new[] { "NGAY_KY" }, new[] { string.Format("ngày {0} tháng {1} năm {2}", date.Day, date.Month, date.Year) });
+                //baoCao.MailMerge.Execute(new[] { "NGAY_KT_HD" }, new[] { string.Format("ngày {0} tháng {1} năm {2}", date.Day, date.Month, date.Year) });
+                foreach (DataColumn item in dt.Columns)
+                {
+                    if (Commons.Modules.ObjSystems.IsnullorEmpty(row[item]))
+                    {
+                        baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { "..." });
+
+                        continue;
+                    }
+                    switch (item.DataType.Name)
+                    {
+                        case "DateTime":
+                            {
+                                baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { Convert.ToDateTime(row[item]).ToString("dd/MM/yyyy") });
+                                break;
+                            }
+                        case "Double":
+                            {
+                                baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { string.Format("{0:#,##0}", row[item]) });
+                                break;
+                            }
+                        default:
+                            {
+                                baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { row[item] });
+                                break;
+
+                            }
+                    }
+                }
+                baoCao.SaveAndOpenFile(sPath);
             }
-            catch { }
+            catch (Exception ex) { Commons.Modules.ObjSystems.MsgError(ex.Message); }
         }
     }
 }

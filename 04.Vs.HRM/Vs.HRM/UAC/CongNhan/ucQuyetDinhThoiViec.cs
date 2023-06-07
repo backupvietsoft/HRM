@@ -17,6 +17,7 @@ using DevExpress.XtraEditors.Filtering.Templates;
 using DevExpress.Map.Dashboard;
 using System.Diagnostics;
 using Aspose.Words;
+using DevExpress.XtraCharts.Native;
 
 namespace Vs.HRM
 {
@@ -98,26 +99,66 @@ namespace Vs.HRM
         }
         private void InDuLieu()
         {
-            if (Convert.ToInt64(string.IsNullOrEmpty(grvCongNhan.GetFocusedRowCellValue("ID_QDTV").ToString()) ? 0 : Convert.ToInt64(grvCongNhan.GetFocusedRowCellValue("ID_QDTV"))) == 0)
+            try
             {
-                return;
-            }
-            if (Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString() == "DM")
-            {
-                try
+
+
+                if (Convert.ToInt64(string.IsNullOrEmpty(grvCongNhan.GetFocusedRowCellValue("ID_QDTV").ToString()) ? 0 : Convert.ToInt64(grvCongNhan.GetFocusedRowCellValue("ID_QDTV"))) == 0)
+                {
+                    return;
+                }
+                if (Commons.Modules.KyHieuDV == "DM")
+                {
+                    try
+                    {
+                        System.Data.SqlClient.SqlConnection conn;
+                        frmViewReport frm = new frmViewReport();
+                        frm.rpt = new rptQuyetDinhChamDutHDLD_DM(DateTime.Now);
+
+                        conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                        conn.Open();
+
+                        System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptQuyetDinhChamDutHDLD_DM", conn);
+                        cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                        cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                        cmd.Parameters.Add("@ID_SQD", SqlDbType.Int).Value = Convert.ToInt32(grvCongNhan.GetFocusedRowCellValue("ID_QDTV"));
+                        cmd.Parameters.Add("@ID_CN", SqlDbType.Int).Value = Convert.ToInt32(grvCongNhan.GetFocusedRowCellValue("ID_CN"));
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+                        DataSet ds = new DataSet();
+                        adp.Fill(ds);
+                        DataTable dt = new DataTable();
+                        dt = ds.Tables[0].Copy();
+                        dt.TableName = "DATA";
+                        frm.AddDataSource(dt);
+
+                        //DataTable dt1 = new DataTable();
+                        //dt1 = ds.Tables[1].Copy();
+                        //dt1.TableName = "NOI_DUNG";
+                        //frm.AddDataSource(dt1);
+
+                        frm.ShowDialog();
+                    }
+                    catch (Exception ex) { }
+                }
+                else
                 {
                     System.Data.SqlClient.SqlConnection conn;
                     frmViewReport frm = new frmViewReport();
-                    frm.rpt = new rptQuyetDinhChamDutHDLD_DM(DateTime.Now);
+
+                    frm.rpt = new rptQuyetDinhThoiViec_NB(DateTime.Now);
+
 
                     conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
                     conn.Open();
 
-                    System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptQuyetDinhChamDutHDLD_DM", conn);
+                    System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptQuyetDinhThoiViec_NB", conn);
                     cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
                     cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
                     cmd.Parameters.Add("@ID_SQD", SqlDbType.Int).Value = Convert.ToInt32(grvCongNhan.GetFocusedRowCellValue("ID_QDTV"));
-                    cmd.Parameters.Add("@ID_CN", SqlDbType.Int).Value = Convert.ToInt32(grvCongNhan.GetFocusedRowCellValue("ID_CN"));
+                    cmd.Parameters.Add("@ID_CN", SqlDbType.Int).Value = Convert.ToInt32(grvCongNhan.GetFocusedRowCellValue("ID_CN")); ;
+                    cmd.Parameters.Add("@NgayThoiViec", SqlDbType.DateTime).Value = Convert.ToDateTime(grvCongNhan.GetFocusedRowCellValue("NGAY_THOI_VIEC"));
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
@@ -127,48 +168,16 @@ namespace Vs.HRM
                     dt = ds.Tables[0].Copy();
                     dt.TableName = "DATA";
                     frm.AddDataSource(dt);
-
-                    //DataTable dt1 = new DataTable();
-                    //dt1 = ds.Tables[1].Copy();
-                    //dt1.TableName = "NOI_DUNG";
-                    //frm.AddDataSource(dt1);
-
+                    ////DateTime datNgayThoiViec = Convert.ToDateTime(grvCongNhan.GetFocusedRowCellValue("NGAY_THOI_VIEC"));
+                    ////frmInQuyetDinhThoiViec frm = new frmInQuyetDinhThoiViec(Convert.ToInt32(grvCongNhan.GetFocusedRowCellValue("ID_QDTV")), Convert.ToInt32(grvCongNhan.GetFocusedRowCellValue("ID_CN")), datNgayThoiViec);
                     frm.ShowDialog();
                 }
-                catch (Exception ex) { }
             }
-            else
+            catch (Exception ex)
             {
-                System.Data.SqlClient.SqlConnection conn;
-                frmViewReport frm = new frmViewReport();
-
-                frm.rpt = new rptQuyetDinhThoiViec_NB(DateTime.Now, 1);
-
-
-                conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
-                conn.Open();
-
-                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptQuyetDinhThoiViec_NB", conn);
-                cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
-                cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
-                cmd.Parameters.Add("@ID_SQD", SqlDbType.Int).Value = Convert.ToInt32(grvCongNhan.GetFocusedRowCellValue("ID_QDTV"));
-                cmd.Parameters.Add("@ID_CN", SqlDbType.Int).Value = Convert.ToInt32(grvCongNhan.GetFocusedRowCellValue("ID_CN")); ;
-                cmd.Parameters.Add("@NgayThoiViec", SqlDbType.DateTime).Value = Convert.ToDateTime(grvCongNhan.GetFocusedRowCellValue("NGAY_THOI_VIEC"));
-                cmd.CommandType = CommandType.StoredProcedure;
-
-                System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
-                DataSet ds = new DataSet();
-                adp.Fill(ds);
-                DataTable dt = new DataTable();
-                dt = ds.Tables[0].Copy();
-                dt.TableName = "DATA";
-                frm.AddDataSource(dt);
-                ////DateTime datNgayThoiViec = Convert.ToDateTime(grvCongNhan.GetFocusedRowCellValue("NGAY_THOI_VIEC"));
-                ////frmInQuyetDinhThoiViec frm = new frmInQuyetDinhThoiViec(Convert.ToInt32(grvCongNhan.GetFocusedRowCellValue("ID_QDTV")), Convert.ToInt32(grvCongNhan.GetFocusedRowCellValue("ID_CN")), datNgayThoiViec);
-                frm.ShowDialog();
+                Commons.Modules.ObjSystems.MsgError(ex.Message);
             }
         }
-
         private void InDuLieu_AP()
         {
             try
@@ -221,7 +230,177 @@ namespace Vs.HRM
             {
             }
         }
+        private void InDuLieu_VV()
+        {
+            try
+            {
+                //lấy data dữ liệu
 
+                System.Data.SqlClient.SqlConnection conn1;
+                DataTable dt = new DataTable();
+
+                conn1 = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                conn1.Open();
+
+                System.Data.SqlClient.SqlCommand cmd1 = new System.Data.SqlClient.SqlCommand("rptQuyetDinhChamDutHDLD_VV", conn1);
+                cmd1.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                cmd1.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                cmd1.Parameters.Add("@ID_SQD", SqlDbType.Int).Value = Convert.ToInt32(grvCongNhan.GetFocusedRowCellValue("ID_QDTV"));
+                cmd1.Parameters.Add("@ID_CN", SqlDbType.Int).Value = Convert.ToInt32(grvCongNhan.GetFocusedRowCellValue("ID_CN"));
+                cmd1.CommandType = CommandType.StoredProcedure;
+                System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd1);
+                DataSet ds = new DataSet();
+                adp.Fill(ds);
+                dt = new DataTable();
+                dt = ds.Tables[0].Copy();
+                DataRow row = dt.Rows[0];
+                string sPath = "";
+                sPath = Commons.Modules.MExcel.SaveFiles("Work file (*.doc)|*.docx");
+                if (sPath == "") return;
+
+                //fill vào báo cáo
+                //var date = Convert.ToDateTime(row["NGAY_BAT_DAU_HD"]);
+                Document baoCao = new Document("Template\\TemplateVV\\QuyetDinhThoiViec.doc");
+                //baoCao.MailMerge.Execute(new[] { "NGAY_BD_HD" }, new[] { string.Format("ngày {0} tháng {1} năm {2}", date.Day, date.Month, date.Year) });
+                //baoCao.MailMerge.Execute(new[] { "NGAY_KY" }, new[] { string.Format("ngày {0} tháng {1} năm {2}", date.Day, date.Month, date.Year) });
+                //baoCao.MailMerge.Execute(new[] { "NGAY_KT_HD" }, new[] { string.Format("ngày {0} tháng {1} năm {2}", date.Day, date.Month, date.Year) });
+                foreach (DataColumn item in dt.Columns)
+                {
+                    if (Commons.Modules.ObjSystems.IsnullorEmpty(row[item]))
+                    {
+                        baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { "..." });
+
+                        continue;
+                    }
+                    switch (item.DataType.Name)
+                    {
+                        case "DateTime":
+                            {
+                                baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { Convert.ToDateTime(row[item]).ToString("dd/MM/yyyy") });
+                                break;
+                            }
+                        case "Double":
+                            {
+                                baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { string.Format("{0:#,##0}", row[item]) });
+                                break;
+                            }
+                        default:
+                            {
+                                baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { row[item] });
+                                break;
+
+                            }
+                    }
+                }
+                baoCao.Save(sPath);
+                Process.Start(sPath);
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+        private void InDuLieu_BT()
+        {
+            try
+            {
+                //lấy data dữ liệu
+
+                System.Data.SqlClient.SqlConnection conn1;
+                DataTable dt = new DataTable();
+
+                conn1 = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                conn1.Open();
+
+                System.Data.SqlClient.SqlCommand cmd1 = new System.Data.SqlClient.SqlCommand("rptQuyetDinhChamDutHDLD_BT", conn1);
+                cmd1.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                cmd1.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                cmd1.Parameters.Add("@ID_SQD", SqlDbType.Int).Value = Convert.ToInt32(grvCongNhan.GetFocusedRowCellValue("ID_QDTV"));
+                cmd1.Parameters.Add("@ID_CN", SqlDbType.Int).Value = Convert.ToInt32(grvCongNhan.GetFocusedRowCellValue("ID_CN"));
+                cmd1.CommandType = CommandType.StoredProcedure;
+                System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd1);
+                DataSet ds = new DataSet();
+                adp.Fill(ds);
+                dt = new DataTable();
+                dt = ds.Tables[0].Copy();
+                DataRow row = dt.Rows[0];
+                string sPath = "";
+                sPath = Commons.Modules.MExcel.SaveFiles("Work file (*.doc)|*.docx");
+                if (sPath == "") return;
+
+                //fill vào báo cáo
+                //var date = Convert.ToDateTime(row["NGAY_BAT_DAU_HD"]);
+                Document baoCao = new Document("Template\\TemplateBT\\QuyetDinhThoiViec.docX");
+                //baoCao.MailMerge.Execute(new[] { "NGAY_BD_HD" }, new[] { string.Format("ngày {0} tháng {1} năm {2}", date.Day, date.Month, date.Year) });
+                //baoCao.MailMerge.Execute(new[] { "NGAY_KY" }, new[] { string.Format("ngày {0} tháng {1} năm {2}", date.Day, date.Month, date.Year) });
+                //baoCao.MailMerge.Execute(new[] { "NGAY_KT_HD" }, new[] { string.Format("ngày {0} tháng {1} năm {2}", date.Day, date.Month, date.Year) });
+                foreach (DataColumn item in dt.Columns)
+                {
+                    if (Commons.Modules.ObjSystems.IsnullorEmpty(row[item]))
+                    {
+                        baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { "..." });
+
+                        continue;
+                    }
+                    switch (item.DataType.Name)
+                    {
+                        case "DateTime":
+                            {
+                                baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { Convert.ToDateTime(row[item]).ToString("dd/MM/yyyy") });
+                                break;
+                            }
+                        case "Double":
+                            {
+                                baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { string.Format("{0:#,##0}", row[item]) });
+                                break;
+                            }
+                        default:
+                            {
+                                baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { row[item] });
+                                break;
+
+                            }
+                    }
+                }
+                baoCao.Save(sPath);
+                Process.Start(sPath);
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+        private void InDuLieu_NB()
+        {
+            DataTable dt = new DataTable();
+            DataTable dtbc = new DataTable();
+            try
+            {
+                System.Data.SqlClient.SqlConnection conn;
+                conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                conn.Open();
+
+                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptQuyetDinhThoiViec_NB", conn);
+                cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                cmd.Parameters.Add("@ID_SQD", SqlDbType.Int).Value = Convert.ToInt32(grvCongNhan.GetFocusedRowCellValue("ID_QDTV"));
+                cmd.Parameters.Add("@ID_CN", SqlDbType.Int).Value = Convert.ToInt32(grvCongNhan.GetFocusedRowCellValue("ID_CN")); ;
+                cmd.Parameters.Add("@NgayThoiViec", SqlDbType.DateTime).Value = Convert.ToDateTime(grvCongNhan.GetFocusedRowCellValue("NGAY_THOI_VIEC"));
+                cmd.CommandType = CommandType.StoredProcedure;
+                System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+                DataSet ds = new DataSet();
+                adp.Fill(ds);
+                ds.Tables[0].TableName = "HDTV";
+
+                string sPath = "";
+                if (!System.IO.Directory.Exists("Report")) // kiểm tra xem forder đã có chưa , nếu chưa có thì tạo 
+                {
+                    System.IO.Directory.CreateDirectory("Report");
+                }
+                sPath = "Report\\" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".xlsx";
+                Commons.TemplateExcel.FillReport(sPath, System.Windows.Forms.Application.StartupPath + "\\Template\\TemplateNB\\QuyetDinhThoiViec.xlsx", ds, new string[] { "{", "}" });
+                Process.Start(sPath);
+            }
+            catch { }
+        }
         private void windowsUIButton_ButtonClick(object sender, DevExpress.XtraBars.Docking2010.ButtonEventArgs e)
         {
             WindowsUIButton btn = e.Button as WindowsUIButton;
@@ -263,11 +442,37 @@ namespace Vs.HRM
                     }
                 case "in":
                     {
+                        if (grvCongNhan.RowCount == 0) return;
                         switch (Commons.Modules.KyHieuDV)
                         {
                             case "AP":
                                 {
                                     InDuLieu_AP();
+                                    break;
+                                }
+                            case "VV":
+                                {
+                                    InDuLieu_VV();
+                                    break;
+                                }
+                            case "BT":
+                                {
+                                    InDuLieu_BT();
+                                    break;
+                                }
+                            case "SB":
+                                {
+                                    frmInQuyetDinhThoiViec frm = new frmInQuyetDinhThoiViec(Convert.ToInt32(grvCongNhan.GetFocusedRowCellValue("ID_QDTV")), Convert.ToInt32(grvCongNhan.GetFocusedRowCellValue("ID_CN")), Convert.ToDateTime(grvCongNhan.GetFocusedRowCellValue("NGAY_THOI_VIEC")));
+                                    frm.ShowDialog();
+                                    break;
+                                }
+                            case "MT":
+                                {
+                                    break;
+                                }
+                            case "NB":
+                                {
+                                    InDuLieu_NB();
                                     break;
                                 }
                             default:
@@ -575,6 +780,9 @@ namespace Vs.HRM
                     NGUYEN_NHANTextEdit.EditValue = "";
                     txtTaiLieu.ResetText();
                     txtTaiLieuQD.ResetText();
+                    NGAY_VAO_LAMdateEdit.EditValue = Convert.ToDateTime(grvCongNhan.GetFocusedRowCellValue("NGAY_VAO_LAM"));
+                    GetTienPhep();
+                    GetTienTroCap();
                 }
             }
             catch (Exception ex)
@@ -669,8 +877,10 @@ namespace Vs.HRM
 
         private void dTNgay_EditValueChanged(object sender, EventArgs e)
         {
+
             if (dTNgay.DateTime != Convert.ToDateTime("01/01/0001") || dDNgay.DateTime != Convert.ToDateTime("01/01/0001"))
             {
+                if (Commons.Modules.sLoad == "0Load") return;
                 LoadGridCongNhan(-1);
             }
         }
@@ -679,6 +889,7 @@ namespace Vs.HRM
         {
             if (dTNgay.DateTime != Convert.ToDateTime("01/01/0001") || dDNgay.DateTime != Convert.ToDateTime("01/01/0001"))
             {
+                if (Commons.Modules.sLoad == "0Load") return;
                 LoadGridCongNhan(-1);
             }
         }
@@ -877,28 +1088,51 @@ namespace Vs.HRM
 
         private void ID_LD_TVLookUpEdit_EditValueChanged(object sender, EventArgs e)
         {
-            int intLDTV = 0;
-            try { intLDTV = Convert.ToInt32(ID_LD_TVLookUpEdit.EditValue.ToString()); } catch { }
-            if (intLDTV == 3)
+            if (Commons.Modules.sLoad == "0Load") return;
+            DataTable dt = new DataTable();
+            try { dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT ISNULL(BO_VIEC,0) BO_VIEC, ISNULL(XIN_THOI_VIEC,0) XIN_THOI_VIEC FROM dbo.LY_DO_THOI_VIEC WHERE ID_LD_TV = " + ID_LD_TVLookUpEdit.EditValue + "")); } catch { }
+            if (Convert.ToInt32(dt.Rows[0]["BO_VIEC"]) == 1) // = bỏ việc
             {
-                SO_QDTextEdit.Properties.ReadOnly = true;
-                ItemForNGAY_NHAN_DON.AppearanceItemCaption.Options.UseForeColor = false;
-                NGAY_NHAN_DONDateEdit.Properties.ReadOnly = true;
-                NGAY_KYDateEdit.Properties.ReadOnly = true;
-                NGUYEN_NHANTextEdit.Properties.ReadOnly = true;
-                ID_NKLookUpEdit.Properties.ReadOnly = true;
-                SO_NAM_TRO_CAPTextEdit.Properties.ReadOnly = true;
-                TIEN_TRO_CAPTextEdit.Properties.ReadOnly = true;
-                TIEN_PHEPTextEdit.Properties.ReadOnly = true;
-                SO_PHEP_HUONGTextEdit.Properties.ReadOnly = true;
+                if(Commons.Modules.KyHieuDV == "DM")
+                {
+                    SO_QDTextEdit.Properties.ReadOnly = true;
+                    ItemForNGAY_NHAN_DON.AppearanceItemCaption.Options.UseForeColor = false;
+                    NGAY_NHAN_DONDateEdit.Properties.ReadOnly = true;
+                    NGAY_KYDateEdit.Properties.ReadOnly = true;
+                    NGUYEN_NHANTextEdit.Properties.ReadOnly = true;
+                    ID_NKLookUpEdit.Properties.ReadOnly = true;
+                    SO_NAM_TRO_CAPTextEdit.Properties.ReadOnly = true;
+                    TIEN_TRO_CAPTextEdit.Properties.ReadOnly = true;
+                    TIEN_PHEPTextEdit.Properties.ReadOnly = true;
+                    SO_PHEP_HUONGTextEdit.Properties.ReadOnly = true;
 
-                SO_QDTextEdit.EditValue = "";
-                NGAY_NHAN_DONDateEdit.EditValue = null;
-                NGAY_KYDateEdit.EditValue = null;
-                NGUYEN_NHANTextEdit.EditValue = "";
-                ID_NKLookUpEdit.EditValue = null;
+                    SO_QDTextEdit.EditValue = "";
+                    NGAY_NHAN_DONDateEdit.EditValue = null;
+                    NGAY_KYDateEdit.EditValue = null;
+                    NGUYEN_NHANTextEdit.EditValue = "";
+                    ID_NKLookUpEdit.EditValue = null;
+                }
+                else
+                {
+                    SO_QDTextEdit.Properties.ReadOnly = false;
+                    ItemForNGAY_NHAN_DON.AppearanceItemCaption.Options.UseForeColor = true;
+                    NGAY_NHAN_DONDateEdit.Properties.ReadOnly = false;
+                    NGAY_KYDateEdit.Properties.ReadOnly = false;
+                    NGUYEN_NHANTextEdit.Properties.ReadOnly = false;
+                    ID_NKLookUpEdit.Properties.ReadOnly = false;
+                    SO_NAM_TRO_CAPTextEdit.Properties.ReadOnly = false;
+                    TIEN_TRO_CAPTextEdit.Properties.ReadOnly = false;
+                    TIEN_PHEPTextEdit.Properties.ReadOnly = false;
+                    SO_PHEP_HUONGTextEdit.Properties.ReadOnly = false;
+
+                    SO_QDTextEdit.EditValue = "";
+                    NGAY_NHAN_DONDateEdit.EditValue = null;
+                    NGAY_KYDateEdit.EditValue = null;
+                    NGUYEN_NHANTextEdit.EditValue = "";
+                    ID_NKLookUpEdit.EditValue = null;
+                }
             }
-            if (intLDTV != 1 && intLDTV != 3)
+            if (Convert.ToInt32(dt.Rows[0]["BO_VIEC"]) != 1 && Convert.ToInt32(dt.Rows[0]["XIN_THOI_VIEC"]) != 1) // != xin nghỉ việc và bỏ việc
             {
                 SO_QDTextEdit.EditValue = "";
                 ItemForNGAY_NHAN_DON.AppearanceItemCaption.Options.UseForeColor = false;
@@ -919,7 +1153,7 @@ namespace Vs.HRM
                 SO_PHEP_HUONGTextEdit.Properties.ReadOnly = false;
 
             }
-            if (intLDTV == 1)
+            if (Convert.ToInt32(dt.Rows[0]["XIN_THOI_VIEC"]) == 1)// = xin nghỉ việc
             {
                 //ItemForNGAY_NHAN_DON.AppearanceItemCaption.ForeColor = System.Drawing.Color.FromArgb(192, 0, 0);
                 ItemForNGAY_NHAN_DON.AppearanceItemCaption.Options.UseForeColor = true;

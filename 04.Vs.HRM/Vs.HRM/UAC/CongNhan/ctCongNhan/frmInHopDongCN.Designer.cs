@@ -40,8 +40,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).BeginInit();
             this.tablePanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chkDaThamGia.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dNgayIn.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dNgayIn.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dNgayIn.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rdo_ChonBaoCao.Properties)).BeginInit();
             this.SuspendLayout();
             // 
@@ -154,7 +154,7 @@
             this.rdo_ChonBaoCao.Properties.GlyphAlignment = DevExpress.Utils.HorzAlignment.Default;
             this.rdo_ChonBaoCao.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] {
             new DevExpress.XtraEditors.Controls.RadioGroupItem("", "Hợp đồng lao động", true, "rdo_HopDongLaoDong"),
-            new DevExpress.XtraEditors.Controls.RadioGroupItem("rdo_HopDongThuViec", "Hợp đồng thử việc CD, DH", true, "rdo_HopDongThuViec"),
+            new DevExpress.XtraEditors.Controls.RadioGroupItem("rdo_QuaTrinhThamGiaBHXH", "Quá trình tham gia BHXH", true, "rdo_QuaTrinhThamGiaBHXH"),
             new DevExpress.XtraEditors.Controls.RadioGroupItem("rdo_HopDongThucViecCN_QC", "Hợp đồng thử việc CN, QC", true, "rdo_HopDongThucViecCN_QC"),
             new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Hợp đồng đào tạo", true, "rdo_HopDongDaoTao"),
             new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Hợp đồng lao động khoáng", true, "rdo_HopDongLaoDongKhoang"),
@@ -193,6 +193,7 @@
             this.Name = "frmInHopDongCN";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "formInQTCT";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmInHopDongCN_FormClosed);
             this.Load += new System.EventHandler(this.formInHopDongCN_Load);
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).EndInit();
             this.tablePanel1.ResumeLayout(false);

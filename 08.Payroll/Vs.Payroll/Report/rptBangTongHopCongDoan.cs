@@ -37,7 +37,7 @@ namespace Vs.Report
 
         }
 
-        private void rptBangTongHopCongDoan_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        private void rptBangTongHopCongDoan_BeforePrint(object sender, CancelEventArgs e)
         {
             xrLabel5.Text = TNgay.ToShortDateString();
             xrLabel6.Text = DNgay.ToShortDateString();

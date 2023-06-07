@@ -11,7 +11,7 @@ namespace Vs.Category
     {
         Int64 iIdCV = 0;
         Boolean bAddEditCV = true;  // true la add false la edit
-        string MS = "", TEN="";
+        string MS = "", TEN = "";
 
         public frmEditCHUC_VU(Int64 iId, Boolean bAddEdit)
         {
@@ -22,6 +22,7 @@ namespace Vs.Category
         private void frmEditCHUC_VU_Load(object sender, EventArgs e)
         {
             LoadLoaiCV();
+            LoadCboCachTinhLuong();
             if (!bAddEditCV)
             {
                 LoadText();
@@ -39,18 +40,10 @@ namespace Vs.Category
             DataTable dt = new DataTable();
             dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetListLOAI_CHUC_VU", Commons.Modules.UserName, Commons.Modules.TypeLanguage));
             Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(ID_LOAI_CVSearchLookUpEdit, dt, "ID_LOAI_CV", "TEN_LOAI_CV", "TEN_LOAI_CV");
-         //   ID_LOAI_CVSearchLookUpEdit.Properties.DataSource = dt;
-         //   ID_LOAI_CVSearchLookUpEdit.Properties.ValueMember = "ID_LOAI_CV";
-         //   ID_LOAI_CVSearchLookUpEdit.Properties.DisplayMember = "TEN_LOAI_CV";
-         //   ID_LOAI_CVSearchLookUpEdit.Properties.PopulateViewColumns();
-
             try
             {
 
-              if(ID_LOAI_CVSearchLookUpEdit.Properties.View.Columns["ID_LOAI_CV"]!=null)  ID_LOAI_CVSearchLookUpEdit.Properties.View.Columns["ID_LOAI_CV"].Visible = false;
-           //     ID_LOAI_CVSearchLookUpEdit.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.None;
-            //    ID_LOAI_CVSearchLookUpEdit.Properties.View.Columns["TEN_LOAI_CV"].Caption = Commons.Modules.ObjLanguages.GetLanguage("ucListDMuc", "TEN_LOAI_CV");
-             //   ID_LOAI_CVSearchLookUpEdit.Properties.View.Columns["TEN_LOAI_CV"].AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+                if (ID_LOAI_CVSearchLookUpEdit.Properties.View.Columns["ID_LOAI_CV"] != null) ID_LOAI_CVSearchLookUpEdit.Properties.View.Columns["ID_LOAI_CV"].Visible = false;
 
                 if (bAddEditCV)
                 {
@@ -69,11 +62,20 @@ namespace Vs.Category
                 XtraMessageBox.Show(EX.Message.ToString());
             }
         }
+
+        private void LoadCboCachTinhLuong()
+        {
+            try
+            {
+                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_CTL, Commons.Modules.ObjSystems.DataCTL(false), "ID_CTL", "TEN_CTL", "TEN_CTL");
+            }
+            catch { }
+        }
         private void LoadText()
         {
             try
             {
-                string sSql = "SELECT MS_CV, TEN_CV, TEN_CV_A, TEN_CV_H, ID_LOAI_CV, STT_IN_CV " +
+                string sSql = "SELECT MS_CV, TEN_CV, TEN_CV_A, TEN_CV_H, ID_LOAI_CV, STT_IN_CV, ID_CTL " +
                     "FROM CHUC_VU WHERE ID_CV =	" + iIdCV.ToString();
                 DataTable dtTmp = new DataTable();
                 dtTmp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSql));
@@ -85,7 +87,7 @@ namespace Vs.Category
                 ItemForTEN_CV_H.Control.Text = dtTmp.Rows[0]["TEN_CV_H"].ToString();
                 ID_LOAI_CVSearchLookUpEdit.EditValue = dtTmp.Rows[0]["ID_LOAI_CV"];
                 ItemForSTT_IN_CV.Control.Text = dtTmp.Rows[0]["STT_IN_CV"].ToString();
-                
+                cboID_CTL.EditValue = Convert.ToString(dtTmp.Rows[0]["ID_CTL"]) == "" ? (object)null : Convert.ToInt64(dtTmp.Rows[0]["ID_CTL"]);
             }
             catch (Exception EX)
             {
@@ -107,9 +109,9 @@ namespace Vs.Category
                         {
                             if (!dxValidationProvider1.Validate()) return;
                             if (KiemTrung()) return;
-                            Commons.Modules.sId = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spUpdateCHUC_VU", (bAddEditCV ? -1 : Convert.ToInt32(iIdCV)), 
-                                MS_CVTextEdit.EditValue, TEN_CVTextEdit.EditValue, TEN_CV_ATextEdit.EditValue, 
-                                TEN_CV_HTextEdit.EditValue, ID_LOAI_CVSearchLookUpEdit.EditValue, (STT_IN_CVTextEdit.EditValue == "") ? STT_IN_CVTextEdit.EditValue = null : STT_IN_CVTextEdit.EditValue).ToString();
+                            Commons.Modules.sId = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spUpdateCHUC_VU", (bAddEditCV ? -1 : Convert.ToInt32(iIdCV)),
+                                MS_CVTextEdit.EditValue, TEN_CVTextEdit.EditValue, TEN_CV_ATextEdit.EditValue,
+                                TEN_CV_HTextEdit.EditValue, ID_LOAI_CVSearchLookUpEdit.EditValue, (STT_IN_CVTextEdit.EditValue == "") ? STT_IN_CVTextEdit.EditValue = null : STT_IN_CVTextEdit.EditValue, Convert.ToString(cboID_CTL.EditValue) == "" ? (object)null : cboID_CTL.EditValue).ToString();
                             if (bAddEditCV)
                             {
                                 if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msg_ThemThanhCongBanCoMuonTiepTuc"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
@@ -148,6 +150,7 @@ namespace Vs.Category
                 TEN_CV_ATextEdit.EditValue = String.Empty;
                 TEN_CV_HTextEdit.EditValue = String.Empty;
                 TEN_CVTextEdit.Focus();
+                cboID_CTL.EditValue = null;
             }
             catch { }
         }
@@ -157,9 +160,9 @@ namespace Vs.Category
             {
                 string sSql = "";
                 string tenSql = "";
-                if (bAddEditCV || MS != MS_CVTextEdit.EditValue.ToString()|| TEN != TEN_CVTextEdit.EditValue.ToString())
+                if (bAddEditCV || MS != MS_CVTextEdit.EditValue.ToString() || TEN != TEN_CVTextEdit.EditValue.ToString())
                 {
-                    sSql = "SELECT COUNT(*) FROM CHUC_VU WHERE MS_CV = '" + MS_CVTextEdit.Text + "' AND ID_LOAI_CV ="+ ID_LOAI_CVSearchLookUpEdit.EditValue + " AND ID_CV <> "+iIdCV+"";
+                    sSql = "SELECT COUNT(*) FROM CHUC_VU WHERE MS_CV = '" + MS_CVTextEdit.Text + "' AND ID_LOAI_CV =" + ID_LOAI_CVSearchLookUpEdit.EditValue + " AND ID_CV <> " + iIdCV + "";
                     tenSql = "SELECT COUNT(*) FROM CHUC_VU WHERE TEN_CV = N'" + TEN_CVTextEdit.Text + "' AND ID_LOAI_CV =" + ID_LOAI_CVSearchLookUpEdit.EditValue + " AND ID_CV <> " + iIdCV + "";
                     if (Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, sSql)) != 0)
                     {

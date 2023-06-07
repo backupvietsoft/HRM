@@ -73,6 +73,10 @@ namespace Vs.Report
 
         }
 
+        private void xrLabel90_AfterPrint(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 

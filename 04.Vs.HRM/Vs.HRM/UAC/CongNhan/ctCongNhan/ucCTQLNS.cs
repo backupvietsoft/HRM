@@ -1,5 +1,6 @@
 ﻿using DevExpress.XtraBars.Navigation;
 using DevExpress.XtraEditors;
+using Microsoft.ApplicationBlocks.Data;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -16,6 +17,9 @@ namespace Vs.HRM
         public DataTable dt;
         public bool flag = false; // flag = false load như bình thường, flag == true thì load theo từng tab được chỉ định
         public string sTenLab = "";
+        private LabelControl labelTemp;
+        private bool changeCN = false;
+        public LabelControl labelNV;
         public ucCTQLNS(Int64 iIdCN)
         {
             InitializeComponent();
@@ -36,41 +40,50 @@ namespace Vs.HRM
         }
         private void ucCTQLNS_Load(object sender, EventArgs e)
         {
-            XuLyTab();
-            if (flag == true)
+            
+            try
             {
-                switch (sTenLab)
+                XuLyTab();
+                if (flag == true)
                 {
-                    case "labHopDong":
-                        {
-                            Lb_Click(labHopDong, null);
-                            break;
-                        }
-                    case "labCongTac":
-                        {
-                            Lb_Click(labCongTac, null);
-                            break;
-                        }
-                    case "labTienLuong":
-                        {
-                            Lb_Click(labTienLuong, null);
-                            break;
-                        }
-                    case "LabKhenThuong":
-                        {
-                            Lb_Click(labKhanThuong, null);
-                            break;
-                        }
-                    default:
-                        {
-                            break;
-                        }
+                    switch (sTenLab)
+                    {
+                        case "labHopDong":
+                            {
+                                Lb_Click(labHopDong, null);
+                                break;
+                            }
+                        case "labCongTac":
+                            {
+                                Lb_Click(labCongTac, null);
+                                break;
+                            }
+                        case "labTienLuong":
+                            {
+                                Lb_Click(labTienLuong, null);
+                                break;
+                            }
+                        case "LabKhenThuong":
+                            {
+                                Lb_Click(labKhanThuong, null);
+                                break;
+                            }
+                        default:
+                            {
+                                break;
+                            }
+                    }
                 }
+                else
+                {
+                    Lb_Click(labLyLich, null);
+                }
+                Commons.Modules.sLoad = "0Load";
+                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboCongNhan, Commons.Modules.ObjSystems.DataCongNhan(false), "ID_CN", "MS_CN", "MS_CN", true, true, false);
+                cboCongNhan.EditValue = Convert.ToInt64(Commons.Modules.iCongNhan);
+                Commons.Modules.sLoad = "";
             }
-            else
-            {
-                Lb_Click(labLyLich, null);
-            }
+            catch { }
         }
         private void XuLyTab()
         {
@@ -93,7 +106,8 @@ namespace Vs.HRM
                 {
                     if (Commons.Modules.iCongNhan == 0 && lable.Name != "labLyLich") return;
                 }
-                if (tab == lable.Name) return;
+                if (tab == lable.Name && !changeCN) return;
+                changeCN = false;
                 Commons.Modules.ObjSystems.ShowWaitForm(this);
                 foreach (LabelControl lc in List)
                 {
@@ -110,7 +124,9 @@ namespace Vs.HRM
                         //lc.Appearance.Font = this.Font;
                     }
                 }
+                labelTemp = lable;
                 Commons.Modules.ObjSystems.HideWaitForm();
+
             }
             catch
             {
@@ -133,6 +149,10 @@ namespace Vs.HRM
         private ucLyLich ll;
         private ucHopDong hd;
         private ucTienLuong tl;
+        private ucQTCongTac qtct;
+        private ucKhenThuong ktkl;
+        private ucTaiNanLD tnld;
+        private ucDanhGia dg;
         private void LoaduacCongNhan(string tenlable)
         {
             switch (tenlable)
@@ -156,9 +176,13 @@ namespace Vs.HRM
                     {
                         if (navigationPage2.Controls.Count == 0)
                         {
-                            ucQTCongTac ct = new ucQTCongTac(Commons.Modules.iCongNhan);
-                            ct.Dock = DockStyle.Fill;
-                            navigationPage2.Controls.Add(ct);
+                            qtct = new ucQTCongTac(Commons.Modules.iCongNhan);
+                            qtct.Dock = DockStyle.Fill;
+                            navigationPage2.Controls.Add(qtct);
+                        }
+                        else
+                        {
+                            qtct.LoadgrdCongTac(Convert.ToInt32(Commons.Modules.iCongNhan));
                         }
                         Selecttab(navigationPage2);
                         break;
@@ -192,7 +216,6 @@ namespace Vs.HRM
                             hd.LoadgrdHopDong(-1);
                         }
                         Selecttab(navigationPage4);
-
                         break;
                     }
 
@@ -200,9 +223,13 @@ namespace Vs.HRM
                     {
                         if (navigationPage5.Controls.Count == 0)
                         {
-                            ucKhenThuong kt = new ucKhenThuong(Commons.Modules.iCongNhan);
-                            kt.Dock = DockStyle.Fill;
-                            navigationPage5.Controls.Add(kt);
+                            ktkl = new ucKhenThuong(Commons.Modules.iCongNhan);
+                            ktkl.Dock = DockStyle.Fill;
+                            navigationPage5.Controls.Add(ktkl);
+                        }
+                        else
+                        {
+                            ktkl.LoadgrdKhenThuong(-1);
                         }
                         Selecttab(navigationPage5);
                         break;
@@ -211,9 +238,13 @@ namespace Vs.HRM
                     {
                         if (navigationPage6.Controls.Count == 0)
                         {
-                            ucTaiNanLD tn = new ucTaiNanLD(Commons.Modules.iCongNhan);
-                            tn.Dock = DockStyle.Fill;
-                            navigationPage6.Controls.Add(tn);
+                            tnld = new ucTaiNanLD(Commons.Modules.iCongNhan);
+                            tnld.Dock = DockStyle.Fill;
+                            navigationPage6.Controls.Add(tnld);
+                        }
+                        else
+                        {
+                            tnld.LoadgrdTaiNan(-1);
                         }
                         Selecttab(navigationPage6);
                         break;
@@ -222,12 +253,15 @@ namespace Vs.HRM
                     {
                         if (navigationPage7.Controls.Count == 0)
                         {
-                            ucDanhGia dg = new ucDanhGia(Commons.Modules.iCongNhan);
+                            dg = new ucDanhGia(Commons.Modules.iCongNhan);
                             dg.Dock = DockStyle.Fill;
                             navigationPage7.Controls.Add(dg);
                         }
+                        else
+                        {
+                            dg.LoadGrdBangDanhGia(-1);
+                        }
                         Selecttab(navigationPage7);
-
                         break;
                     }
                 //case "labBangCap":
@@ -270,5 +304,20 @@ namespace Vs.HRM
             }
         }
 
+        private void cboCongNhan_EditValueChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (Commons.Modules.sLoad == "0Load") return;
+                Commons.Modules.iCongNhan = Convert.ToInt64(cboCongNhan.EditValue);
+                changeCN = true;
+                Lb_Click(labelTemp, null);
+                string sSQL = "SELECT TOP 1 TEN_TO FROM dbo.[TO] T1 INNER JOIN dbo.CONG_NHAN T2 ON T1.ID_TO = T2.ID_TO WHERE T2.ID_CN = " + Commons.Modules.iCongNhan + "";
+                string sTenTo = Convert.ToString(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text,sSQL));
+                labelNV.Text = cboCongNhan.Text + " - " + ((System.Data.DataRowView)cboCongNhan.GetSelectedDataRow()).Row.ItemArray[2].ToString() + " - " + sTenTo;
+            }
+            catch { }
+            
+        }
     }
 }

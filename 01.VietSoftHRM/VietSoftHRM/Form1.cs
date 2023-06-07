@@ -1,4 +1,7 @@
 ﻿using DevExpress.Utils;
+using DevExpress.XtraGrid;
+using DevExpress.XtraGrid.Views.Grid;
+using Microsoft.ApplicationBlocks.Data;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -20,65 +23,49 @@ namespace VietSoftHRM
 {
     public partial class Form1 : Form
     {
-        private const string ApiKey = "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";
-        private const string Endpoint = "https://api.openai.com/v1/completions";
         public Form1()
         {
             InitializeComponent();
-        }
-        private async Task<string> SendRequest(string input)
-        {
-            var httpClient = new HttpClient();
-            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", ApiKey);
-            
-            var requestBody = new
-            {
-                model = "text-davinci-003",
-                prompt = input,
-                max_tokens = 60,
-                temperature = 0.5,
-            };
-            var response = await httpClient.PostAsJsonAsync(Endpoint, requestBody);
-            var responseBody = await response.Content.ReadAsAsync<CompletionResponse>();
-            return responseBody.choices[0].text;
-        }
-
-        private class CompletionResponse
-        {
-            public Choice[] choices { get; set; }
-        }
-
-        private class Choice
-        {
-            public string text { get; set; }
-        }
-
-        private void SendButton_Click(object sender, EventArgs e)
-        {
-            var input = InputTextBox.Text;
-            var output = SendRequest(input);
-            OutputListBox.Items.Add(output);
             
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            timer1.Start();
+            DataSet ds = new DataSet();
+            DataTable dt1 = new DataTable();
+            string sSQL = "SELECT TOP 20 ID_CN, ID_CV, HO + TEN HO_TEN, NGAY_SINH, NAM_SINH, DIA_CHI_THUONG_TRU, DT_DI_DONG FROM dbo.CONG_NHAN";
+            dt1.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSQL));
+            dt1.TableName = "CONG_NHAN";
+            DataTable dt2 = new DataTable();
+            dt2.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT * FROM dbo.CHUC_VU"));
+            dt2.TableName = "CHUC_VU";
+
+            ds.Tables.Add(dt1);
+            ds.Tables.Add(dt2);
+
+            ds.Relations.Add("ChucVu", dt2.Columns["ID_CV"], dt1.Columns["ID_CV"]);
+            gridControl1.DataSource = ds;
+            gridControl1.DataMember = "CHUC_VU";
+            Commons.Modules.ObjSystems.MLoadNNXtraGrid(gridView1,this.Name);
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
+        private void gridView1_MasterRowGetChildList(object sender, MasterRowGetChildListEventArgs e)
         {
-            int x = labelControl1.Location.X;
-            int y = labelControl1.Location.Y;
-            if (x > this.Width)
-            {
-                x = -labelControl1.Width;
-            }
-            else
-            {
-                x += 10; // tốc độ di chuyển
-            }
-            labelControl1.Location = new Point(x, y);
+            //GridControl grid = sender as GridControl;
+            //if(grid != null)
+            //{
+            //    GridView detailView = grid.FocusedView as GridView;
+            //    if (detailView != null)
+            //    {
+            //        int masterRowHandle = e.RowHandle;
+            //        int childRowCount = detailView.GetChildRowCount(masterRowHandle);
+            //        for (int i = 0; i < childRowCount; i++)
+            //        {
+            //            object row = detailView.GetRow(detailView.GetChildRowHandle(masterRowHandle, i));
+            //            // Do something with the row data here
+            //        }
+            //    }
+            //}
         }
     }
 }

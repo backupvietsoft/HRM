@@ -59,15 +59,20 @@ namespace Vs.Payroll
 
         private void ucMaHang_Load(object sender, EventArgs e)
         {
-            Commons.Modules.sLoad = "0Load";
-            Commons.Modules.ObjSystems.LoadCboDonVi(cboDonVi);
-            DateTime dNgay = DateTime.Now.AddMonths(-4);
-            datTNgay.DateTime = Convert.ToDateTime(("01/" + dNgay.Month + "/" + dNgay.Year)); ;
-            datDNgay.DateTime = datTNgay.DateTime.AddMonths(5).AddDays(-1);
-            LoadCbo();
-            EnableButon(isAdd);
-            Commons.Modules.sLoad = "";
-            LoadData(-1);
+            try
+            {
+                Commons.Modules.sLoad = "0Load";
+                Commons.Modules.ObjSystems.LoadCboDonVi(cboDonVi);
+                DateTime dNgay = DateTime.Now.AddMonths(-4);
+                datTNgay.DateTime = Convert.ToDateTime(("01/" + dNgay.Month + "/" + dNgay.Year)); ;
+                datDNgay.DateTime = datTNgay.DateTime.AddMonths(5).AddDays(-1);
+                LoadCbo();
+                EnableButon(isAdd);
+                Commons.Modules.sLoad = "";
+                LoadData(-1);
+                Commons.Modules.ObjSystems.SetPhanQuyen(btnALL);
+            }
+            catch { }
         }
         private void LoadData(Int64 key)
         {

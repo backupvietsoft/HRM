@@ -8,6 +8,7 @@ using Vs.HRM;
 using Vs.TimeAttendance;
 using Vs.Report;
 using System.Diagnostics;
+using DevExpress.Mvvm.Native;
 
 namespace VietSoftHRM
 {
@@ -148,7 +149,13 @@ namespace VietSoftHRM
                         tmp.Dock = DockStyle.Fill;
                         break;
                     }
-
+                case "mnuDangKyCatTangCa": {
+                        ucDangKyCatTangCa tmp = new ucDangKyCatTangCa();
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(tmp);
+                        tmp.Dock = DockStyle.Fill;
+                        break;
+                    }
                 case "mnuTinhDiemThang":
                     {
                         ucDiemChuyenCanThang tmp = new ucDiemChuyenCanThang();
@@ -276,13 +283,34 @@ namespace VietSoftHRM
                     }
                 case "mnuTinhPhepThang":
                     {
-                        ucPhepThang tmp = new ucPhepThang();
+                        if (Commons.Modules.chamCongK)
+                        {
+                            Commons.Modules.ObjSystems.Alert(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "lblBanVuiLongVaoTinhPhepKhach"), Commons.Form_Alert.enmType.Warning);
+                            panel2.Controls.Clear();
+                            break;
+                        }
+                        ucPhepThang tmp = new ucPhepThang(Commons.Modules.chamCongK);
                         panel2.Controls.Clear();
                         panel2.Controls.Add(tmp);
                         tmp.Dock = DockStyle.Fill;
                         break;
                     }
-                
+                case "mnuTinhPhepThangKhach":
+                    {
+                        if (!Commons.Modules.chamCongK)
+                        {
+                            Commons.Modules.ObjSystems.Alert(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "lblBanVuiLongVaoTinhPhepChinh"), Commons.Form_Alert.enmType.Warning);
+                            panel2.Controls.Clear();
+                            break;
+                        }
+                        ucPhepThang tmp = new ucPhepThang(Commons.Modules.chamCongK);
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(tmp);
+                        tmp.Dock = DockStyle.Fill;
+                        break;
+                    }
+
+
                 case "mnuTinhPhepTon":
                     {
                         ucPhepTon tmp = new ucPhepTon();

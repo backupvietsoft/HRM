@@ -57,6 +57,7 @@ namespace Vs.Payroll
                 LoadData();
                 EnableButon(isAdd);
                 Commons.Modules.sLoad = "";
+                Commons.Modules.ObjSystems.SetPhanQuyen(btnALL);
             }
             catch { }
         }

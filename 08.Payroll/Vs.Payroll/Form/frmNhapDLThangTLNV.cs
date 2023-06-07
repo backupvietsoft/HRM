@@ -21,6 +21,7 @@ namespace Vs.Payroll
         public int iID_TO = -1;
         public DateTime dNgay;
         private int iThem = 0;
+        public int iLoai = 0;
         public frmNhapDLThangTLNV()
         {
             InitializeComponent();
@@ -30,20 +31,25 @@ namespace Vs.Payroll
         //sự kiên load form
         private void frmNhapDLThangTLNV_Load(object sender, EventArgs e)
         {
-            Commons.Modules.sLoad = "0Load";
-            Commons.Modules.ObjSystems.LoadCboDonVi(cboDonVi);
-            Commons.Modules.ObjSystems.LoadCboXiNghiep(cboDonVi, cboXiNghiep);
-            Commons.Modules.ObjSystems.LoadCboTo(cboDonVi, cboXiNghiep, cboTo);
-            cboDonVi.EditValue = iID_DV;
-            cboXiNghiep.EditValue = iID_XN;
-            cboTo.EditValue = iID_TO;
-            tabControl_SelectedPageChanged(null, null);
-            VisibleButton(true);
-            foreach (ToolStripMenuItem item in contextMenuStrip1.Items)
+            try
             {
-                item.Text = Commons.Modules.ObjLanguages.GetLanguage(this.Name, item.Name);
+                Commons.Modules.sLoad = "0Load";
+                Commons.Modules.ObjSystems.LoadCboDonVi(cboDonVi);
+                Commons.Modules.ObjSystems.LoadCboXiNghiep(cboDonVi, cboXiNghiep);
+                Commons.Modules.ObjSystems.LoadCboTo(cboDonVi, cboXiNghiep, cboTo);
+                cboDonVi.EditValue = Convert.ToInt64(iID_DV);
+                cboXiNghiep.EditValue = Convert.ToInt64(iID_XN);
+                cboTo.EditValue = Convert.ToInt64(iID_TO);
+                tabControl_SelectedPageChanged(null, null);
+                VisibleButton(true);
+                foreach (ToolStripMenuItem item in contextMenuStrip1.Items)
+                {
+                    item.Text = Commons.Modules.ObjLanguages.GetLanguage(this.Name, item.Name);
+                }
+                Commons.Modules.sLoad = "";
+                Commons.Modules.ObjSystems.SetPhanQuyen(windowsUIButton);
             }
-            Commons.Modules.sLoad = "";
+            catch { }
         }
 
         private void windowsUIButton_ButtonClick(object sender, ButtonEventArgs e)
@@ -82,6 +88,11 @@ namespace Vs.Payroll
                                 {
                                     LoadDataTGDNM();
                                     Commons.Modules.ObjSystems.AddnewRow(grvTGDNM, true);
+                                    break;
+                                }
+                            case "tabPTBuLuong":
+                                {
+                                    LoadDataPTBuLuong();
                                     break;
                                 }
                         }
@@ -129,6 +140,19 @@ namespace Vs.Payroll
                                         Commons.Modules.ObjSystems.Alert(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgCopyThanhCong"), Commons.Form_Alert.enmType.Success);
                                     }
                                     Commons.Modules.ObjSystems.AddnewRow(grvDTNM, true);
+                                    break;
+                                }
+                            case "tabPTBuLuong":
+                                {
+                                    if (!CopyData("PT_BL", Commons.Modules.ObjSystems.ConvertDateTime(cboThang.Text), grdPTBuLuong))
+                                    {
+                                        Commons.Modules.ObjSystems.Alert(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgKhongCoDuLieuCu"), Commons.Form_Alert.enmType.Warning);
+                                    }
+                                    else
+                                    {
+                                        Commons.Modules.ObjSystems.Alert(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgCopyThanhCong"), Commons.Form_Alert.enmType.Success);
+                                    }
+                                    Commons.Modules.ObjSystems.AddnewRow(grvPTBuLuong, true);
                                     break;
                                 }
                         }
@@ -211,6 +235,21 @@ namespace Vs.Payroll
                                     Commons.Modules.ObjSystems.DeleteAddRow(grvTGDNM);
                                     break;
                                 }
+                            case "tabPTBuLuong":
+                                {
+                                    grvPTBuLuong.CloseEditor();
+                                    grvPTBuLuong.UpdateCurrentRow();
+                                    if (grvPTBuLuong.HasColumnErrors) return;
+                                    if (!SaveData("PT_BL", grdPTBuLuong, Commons.Modules.ObjSystems.ConvertDateTime(cboThang.Text)))
+                                    {
+                                        Commons.Modules.ObjSystems.Alert(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgCapNhatKhongCong"), Commons.Form_Alert.enmType.Error);
+                                        return;
+                                    }
+                                    iThem = 0;
+                                    LoadDataPTBuLuong();
+                                    Commons.Modules.ObjSystems.DeleteAddRow(grvPTBuLuong);
+                                    break;
+                                }
                             default:
                                 {
                                     break;
@@ -251,6 +290,12 @@ namespace Vs.Payroll
                                 {
                                     LoadDataTGDNM();
                                     Commons.Modules.ObjSystems.DeleteAddRow(grvTGDNM);
+                                    break;
+                                }
+                            case "tabPTBuLuong":
+                                {
+                                    LoadDataPTBuLuong();
+                                    Commons.Modules.ObjSystems.DeleteAddRow(grvPTBuLuong);
                                     break;
                                 }
                         }
@@ -325,6 +370,20 @@ namespace Vs.Payroll
                                         Commons.Modules.ObjSystems.Alert(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgCapNhatThanhCong"), Commons.Form_Alert.enmType.Success);
                                     }
                                     LoadDataTGDNM();
+                                    break;
+                                }
+
+                            case "tabPTBuLuong":
+                                {
+                                    if (!DeleteData("PT_BL", Commons.Modules.ObjSystems.GetDataTableMultiSelect(grdPTBuLuong, grvPTBuLuong), Commons.Modules.ObjSystems.ConvertDateTime(cboThang.Text)))
+                                    {
+                                        Commons.Modules.ObjSystems.Alert(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgCapNhatKhongCong"), Commons.Form_Alert.enmType.Error);
+                                    }
+                                    else
+                                    {
+                                        Commons.Modules.ObjSystems.Alert(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgCapNhatThanhCong"), Commons.Form_Alert.enmType.Success);
+                                    }
+                                    LoadDataPTBuLuong();
                                     break;
                                 }
                         }
@@ -441,6 +500,24 @@ namespace Vs.Payroll
                     case 4:
                         {
                             sSql = "SELECT disTINCT RIGHT(CONVERT(VARCHAR(10),THANG,103),7) AS THANG , CONVERT(VARCHAR(10),THANG,103) NGAY FROM dbo.THUONG_GD_NHA_MAY ORDER BY THANG DESC , NGAY DESC";
+                            dtthang.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSql));
+                            Commons.Modules.ObjSystems.MLoadXtraGrid(grdNgay, grvNgay1, dtthang, false, true, true, true, true, this.Name);
+                            grvNgay1.Columns["NGAY"].Visible = false;
+
+                            try
+                            {
+                                cboThang.Text = grvNgay1.GetFocusedRowCellValue("THANG").ToString();
+                            }
+                            catch
+                            {
+                                cboThang.Text = DateTime.Now.ToString("MM/yyyy");
+                            }
+                            break;
+                        }
+
+                    case 5:
+                        {
+                            sSql = "SELECT disTINCT RIGHT(CONVERT(VARCHAR(10),THANG,103),7) AS THANG , CONVERT(VARCHAR(10),THANG,103) NGAY FROM dbo.PT_BU_LUONG ORDER BY THANG DESC , NGAY DESC";
                             dtthang.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSql));
                             Commons.Modules.ObjSystems.MLoadXtraGrid(grdNgay, grvNgay1, dtthang, false, true, true, true, true, this.Name);
                             grvNgay1.Columns["NGAY"].Visible = false;
@@ -730,6 +807,64 @@ namespace Vs.Payroll
             }
             catch { }
         }
+        private void LoadDataPTBuLuong()
+        {
+            try
+            {
+                System.Data.SqlClient.SqlConnection conn;
+                conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                DataSet ds = new DataSet();
+                conn.Open();
+                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spNhapDLThangTLNV", conn);
+                cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                cmd.Parameters.Add("@DVi", SqlDbType.Int).Value = Convert.ToInt32(cboDonVi.EditValue);
+                cmd.Parameters.Add("@XN", SqlDbType.Int).Value = Convert.ToInt32(cboXiNghiep.EditValue);
+                cmd.Parameters.Add("@TO", SqlDbType.Int).Value = Convert.ToInt32(cboTo.EditValue);
+                cmd.Parameters.Add("@Tab", SqlDbType.NVarChar).Value = "PT_BL";
+                cmd.Parameters.Add("@iLoai", SqlDbType.Int).Value = 0;
+                cmd.Parameters.Add("@iThem", SqlDbType.Int).Value = iThem;
+                cmd.Parameters.Add("@Ngay", SqlDbType.DateTime).Value = Commons.Modules.ObjSystems.ConvertDateTime(cboThang.Text);
+                cmd.CommandType = CommandType.StoredProcedure;
+                System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+
+                adp.Fill(ds);
+                DataTable dt = new DataTable();
+                dt = ds.Tables[0].Copy();
+                if (grdPTBuLuong.DataSource == null)
+                {
+                    Commons.Modules.ObjSystems.MLoadXtraGrid(grdPTBuLuong, grvPTBuLuong, dt, true, true, false, true, true, "frmPTBuLuong");
+                    grvPTBuLuong.Columns["ID_PT_BL"].Visible = false;
+                    grvPTBuLuong.Columns["ID_CN"].Visible = false;
+                    grvPTBuLuong.Columns["CHON"].Visible = false;
+                    grvPTBuLuong.Columns["PHAN_TRAM"].DisplayFormat.FormatType = FormatType.Numeric;
+                    grvPTBuLuong.Columns["PHAN_TRAM"].DisplayFormat.FormatString = "N0";
+                    grvPTBuLuong.Columns["MS_CN"].OptionsColumn.AllowEdit = false;
+                    grvPTBuLuong.Columns["HO_TEN"].OptionsColumn.AllowEdit = false;
+                    grvPTBuLuong.Columns["TEN_TO"].OptionsColumn.AllowEdit = false;
+                    grvPTBuLuong.Columns["NGAY_VAO_LAM"].OptionsColumn.AllowEdit = false;
+                }
+                else
+                {
+                    grdPTBuLuong.DataSource = dt;
+                }
+                if (iThem == 0)
+                {
+                    grvPTBuLuong.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.RowSelect;
+                }
+                else
+                {
+                    grvPTBuLuong.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CheckBoxRowSelect;
+                }
+                try
+                {
+                    grvPTBuLuong.OptionsSelection.CheckBoxSelectorField = "CHON";
+                    grvPTBuLuong.Columns["CHON"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
+                }
+                catch { }
+            }
+            catch { }
+        }
         private void LoadDataTHQQLKhac(int iThem)
         {
             try
@@ -893,6 +1028,11 @@ namespace Vs.Payroll
                         LoadDataTGDNM();
                         break;
                     }
+                case "tabPTBuLuong":
+                    {
+                        LoadDataPTBuLuong();
+                        break;
+                    }
                 default:
                     {
                         break;
@@ -1026,6 +1166,24 @@ namespace Vs.Payroll
 
         private void VisibleButton(bool visible)
         {
+            if (iLoai == 1)
+            {
+                tabHoTroLuong.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                tabPhanCongTo.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                tabDSGiamDoc.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                TabDoanhThuNhaMay.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                tabThuongHQQLKhac.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+            }
+            else
+            {
+                tabHoTroLuong.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+                tabPhanCongTo.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+                tabDSGiamDoc.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+                TabDoanhThuNhaMay.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+                tabThuongHQQLKhac.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+                tabPTBuLuong.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+            }
+
             windowsUIButton.Buttons[0].Properties.Visible = visible;
             windowsUIButton.Buttons[1].Properties.Visible = visible;
             windowsUIButton.Buttons[4].Properties.Visible = visible;
@@ -1038,6 +1196,7 @@ namespace Vs.Payroll
             grvDTNM.OptionsBehavior.Editable = !visible;
             grvTHQQL.OptionsBehavior.Editable = !visible;
             grvTGDNM.OptionsBehavior.Editable = !visible;
+            grvPTBuLuong.OptionsBehavior.Editable = !visible;
 
             cboThang.Enabled = visible;
             cboDonVi.Enabled = visible;
@@ -1151,6 +1310,15 @@ namespace Vs.Payroll
                             searchControl1.Client = grdTGDNM;
                             break;
                         }
+                    case "tabPTBuLuong":
+                        {
+                            calThang.VistaCalendarViewStyle = VistaCalendarViewStyle.YearView;
+                            LoadThang(5);
+                            LoadDataPTBuLuong();
+                            Commons.Modules.ObjSystems.DeleteAddRow(grvPTBuLuong);
+                            searchControl1.Client = grdPTBuLuong;
+                            break;
+                        }
                 }
             }
             catch { }
@@ -1249,6 +1417,15 @@ namespace Vs.Payroll
             catch { }
         }
 
+        private void grvPTBuLuong_InitNewRow(object sender, InitNewRowEventArgs e)
+        {
+            try
+            {
+                grvPTBuLuong.SetFocusedRowCellValue("ID_PT_BL", 0);
+            }
+            catch { }
+        }
+
         private void grvTGDNM_InvalidRowException(object sender, DevExpress.XtraGrid.Views.Base.InvalidRowExceptionEventArgs e)
         {
             e.ExceptionMode = DevExpress.XtraEditors.Controls.ExceptionMode.NoAction;
@@ -1259,6 +1436,15 @@ namespace Vs.Payroll
             e.ExceptionMode = DevExpress.XtraEditors.Controls.ExceptionMode.NoAction;
         }
 
+        private void grvPTBuLuong_InvalidRowException(object sender, DevExpress.XtraGrid.Views.Base.InvalidRowExceptionEventArgs e)
+        {
+            e.ExceptionMode = DevExpress.XtraEditors.Controls.ExceptionMode.NoAction;
+        }
+
+        private void grvPTBuLuong_InvalidValueException(object sender, DevExpress.XtraEditors.Controls.InvalidValueExceptionEventArgs e)
+        {
+            e.ExceptionMode = DevExpress.XtraEditors.Controls.ExceptionMode.NoAction;
+        }
         private void grvTGDNM_ValidateRow(object sender, DevExpress.XtraGrid.Views.Base.ValidateRowEventArgs e)
         {
             grvTGDNM.ClearColumnErrors();
@@ -1279,5 +1465,7 @@ namespace Vs.Payroll
             }
             catch { }
         }
+
+
     }
 }

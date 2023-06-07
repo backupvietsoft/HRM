@@ -113,6 +113,17 @@ namespace Vs.Recruit
             this.ItemForID_QUAN = new DevExpress.XtraLayout.LayoutControlItem();
             this.ItemForID_TT_HN = new DevExpress.XtraLayout.LayoutControlItem();
             this.tab = new DevExpress.XtraLayout.TabbedControlGroup();
+            this.tabThongTinNhanViec = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.ItemForNgayHenLam = new DevExpress.XtraLayout.LayoutControlItem();
+            this.emptySpaceItem5 = new DevExpress.XtraLayout.EmptySpaceItem();
+            this.ItemForXacNhanDTDH = new DevExpress.XtraLayout.LayoutControlItem();
+            this.chkChuyenSangNS = new DevExpress.XtraLayout.LayoutControlItem();
+            this.chkXacNhanDiLam = new DevExpress.XtraLayout.LayoutControlItem();
+            this.chkDaGioiThieu = new DevExpress.XtraLayout.LayoutControlItem();
+            this.ItemForHuyTD = new DevExpress.XtraLayout.LayoutControlItem();
+            this.ItemForNgayNhanViec = new DevExpress.XtraLayout.LayoutControlItem();
+            this.ItemForMucLuong = new DevExpress.XtraLayout.LayoutControlItem();
+            this.ItemForMSNV = new DevExpress.XtraLayout.LayoutControlItem();
             this.tabBangCap = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem18 = new DevExpress.XtraLayout.LayoutControlItem();
             this.lblTrinhDoHocVan = new DevExpress.XtraLayout.LayoutControlItem();
@@ -125,17 +136,6 @@ namespace Vs.Recruit
             this.lblCongDoan = new DevExpress.XtraLayout.LayoutControlItem();
             this.emptySpaceItem11 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.lblThuongTN = new DevExpress.XtraLayout.LayoutControlItem();
-            this.tabThongTinNhanViec = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.ItemForNgayHenLam = new DevExpress.XtraLayout.LayoutControlItem();
-            this.emptySpaceItem5 = new DevExpress.XtraLayout.EmptySpaceItem();
-            this.ItemForXacNhanDTDH = new DevExpress.XtraLayout.LayoutControlItem();
-            this.chkChuyenSangNS = new DevExpress.XtraLayout.LayoutControlItem();
-            this.chkXacNhanDiLam = new DevExpress.XtraLayout.LayoutControlItem();
-            this.chkDaGioiThieu = new DevExpress.XtraLayout.LayoutControlItem();
-            this.ItemForHuyTD = new DevExpress.XtraLayout.LayoutControlItem();
-            this.ItemForNgayNhanViec = new DevExpress.XtraLayout.LayoutControlItem();
-            this.ItemForMucLuong = new DevExpress.XtraLayout.LayoutControlItem();
-            this.ItemForMSNV = new DevExpress.XtraLayout.LayoutControlItem();
             this.tabThongTinKhac = new DevExpress.XtraLayout.LayoutControlGroup();
             this.ItemForNguoiLH = new DevExpress.XtraLayout.LayoutControlItem();
             this.emptySpaceItem7 = new DevExpress.XtraLayout.EmptySpaceItem();
@@ -182,8 +182,8 @@ namespace Vs.Recruit
             ((System.ComponentModel.ISupportInitialize)(this.cboTayNghe.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboVTPhuHop.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.datNGAY_CO_THE_DI_LAM.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.datNGAY_CO_THE_DI_LAM.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.datNGAY_CO_THE_DI_LAM.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTiengKhac.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboTiengHoa.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboTiengAnh.Properties)).BeginInit();
@@ -193,13 +193,13 @@ namespace Vs.Recruit
             ((System.ComponentModel.ISupportInitialize)(this.grvKNLV)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdBangCap)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grvBangCap)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.datNGAY_NHAN_VIEC.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.datNGAY_NHAN_VIEC.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.datNGAY_NHAN_VIEC.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkHUY_TUYEN_DUNG.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkDA_GIOI_THIEU.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkXAC_NHAN_DL.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.datNGAY_HEN_DL.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.datNGAY_HEN_DL.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.datNGAY_HEN_DL.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboID_CN.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtQUAN_HE.Properties)).BeginInit();
@@ -211,11 +211,11 @@ namespace Vs.Recruit
             ((System.ComponentModel.ISupportInitialize)(this.cboID_NTD.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.HINH_UVPictureEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTEN.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.datNGAY_SINH.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.datNGAY_SINH.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.datNGAY_SINH.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSO_CMND.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.datNGAY_CAP.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.datNGAY_CAP.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.datNGAY_CAP.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDT_DI_DONG.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDT_NGUOI_LIEN_HE.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTHON_XOM.Properties)).BeginInit();
@@ -237,8 +237,8 @@ namespace Vs.Recruit
             ((System.ComponentModel.ISupportInitialize)(this.cboTrinhDoHocVan.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtID_VTTD_1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtID_VTTD_2.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.datNgayNhanCV.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.datNgayNhanCV.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.datNgayNhanCV.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtGHI_CHU.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtMSCN.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtThuongTN.Properties)).BeginInit();
@@ -252,6 +252,17 @@ namespace Vs.Recruit
             ((System.ComponentModel.ISupportInitialize)(this.ItemForID_QUAN)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForID_TT_HN)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tab)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tabThongTinNhanViec)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForNgayHenLam)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForXacNhanDTDH)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chkChuyenSangNS)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chkXacNhanDiLam)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chkDaGioiThieu)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForHuyTD)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForNgayNhanViec)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForMucLuong)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForMSNV)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabBangCap)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem18)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblTrinhDoHocVan)).BeginInit();
@@ -264,17 +275,6 @@ namespace Vs.Recruit
             ((System.ComponentModel.ISupportInitialize)(this.lblCongDoan)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblThuongTN)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tabThongTinNhanViec)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemForNgayHenLam)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemForXacNhanDTDH)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chkChuyenSangNS)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chkXacNhanDiLam)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chkDaGioiThieu)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemForHuyTD)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemForNgayNhanViec)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemForMucLuong)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemForMSNV)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabThongTinKhac)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForNguoiLH)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem7)).BeginInit();
@@ -695,6 +695,11 @@ namespace Vs.Recruit
             this.txtSO_CON.Location = new System.Drawing.Point(1027, 173);
             this.txtSO_CON.Margin = new System.Windows.Forms.Padding(4);
             this.txtSO_CON.Name = "txtSO_CON";
+            this.txtSO_CON.Properties.Appearance.Options.UseTextOptions = true;
+            this.txtSO_CON.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.txtSO_CON.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.NumericMaskManager));
+            this.txtSO_CON.Properties.MaskSettings.Set("MaskManagerSignature", "allowNull=False");
+            this.txtSO_CON.Properties.MaskSettings.Set("mask", "N0");
             this.txtSO_CON.Size = new System.Drawing.Size(125, 24);
             this.txtSO_CON.StyleController = this.dataLayoutControl1;
             this.txtSO_CON.TabIndex = 208;
@@ -1202,125 +1207,6 @@ namespace Vs.Recruit
             this.tabThongTinNhanViec,
             this.tabThongTinKhac});
             // 
-            // tabBangCap
-            // 
-            this.tabBangCap.AppearanceGroup.ForeColor = System.Drawing.Color.White;
-            this.tabBangCap.AppearanceGroup.Options.UseForeColor = true;
-            this.tabBangCap.AppearanceItemCaption.ForeColor = System.Drawing.Color.White;
-            this.tabBangCap.AppearanceItemCaption.Options.UseForeColor = true;
-            this.tabBangCap.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlItem18,
-            this.lblTrinhDoHocVan,
-            this.emptySpaceItem9,
-            this.emptySpaceItem10,
-            this.emptySpaceItem12});
-            this.tabBangCap.Location = new System.Drawing.Point(0, 0);
-            this.tabBangCap.Name = "tabBangCap";
-            this.tabBangCap.Size = new System.Drawing.Size(1139, 285);
-            this.tabBangCap.Text = "Bằng cấp";
-            // 
-            // layoutControlItem18
-            // 
-            this.layoutControlItem18.Control = this.grdBangCap;
-            this.layoutControlItem18.Location = new System.Drawing.Point(0, 26);
-            this.layoutControlItem18.Name = "layoutControlItem18";
-            this.layoutControlItem18.Size = new System.Drawing.Size(1139, 259);
-            this.layoutControlItem18.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem18.TextVisible = false;
-            // 
-            // lblTrinhDoHocVan
-            // 
-            this.lblTrinhDoHocVan.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
-            this.lblTrinhDoHocVan.AppearanceItemCaption.Options.UseForeColor = true;
-            this.lblTrinhDoHocVan.Control = this.cboTrinhDoHocVan;
-            this.lblTrinhDoHocVan.Location = new System.Drawing.Point(0, 0);
-            this.lblTrinhDoHocVan.Name = "lblTrinhDoHocVan";
-            this.lblTrinhDoHocVan.Size = new System.Drawing.Size(284, 26);
-            this.lblTrinhDoHocVan.Text = "Trình độ học vấn";
-            this.lblTrinhDoHocVan.TextSize = new System.Drawing.Size(174, 17);
-            // 
-            // emptySpaceItem9
-            // 
-            this.emptySpaceItem9.AllowHotTrack = false;
-            this.emptySpaceItem9.Location = new System.Drawing.Point(853, 0);
-            this.emptySpaceItem9.Name = "emptySpaceItem9";
-            this.emptySpaceItem9.Size = new System.Drawing.Size(286, 26);
-            this.emptySpaceItem9.TextSize = new System.Drawing.Size(0, 0);
-            // 
-            // emptySpaceItem10
-            // 
-            this.emptySpaceItem10.AllowHotTrack = false;
-            this.emptySpaceItem10.Location = new System.Drawing.Point(284, 0);
-            this.emptySpaceItem10.Name = "emptySpaceItem10";
-            this.emptySpaceItem10.Size = new System.Drawing.Size(286, 26);
-            this.emptySpaceItem10.TextSize = new System.Drawing.Size(0, 0);
-            // 
-            // emptySpaceItem12
-            // 
-            this.emptySpaceItem12.AllowHotTrack = false;
-            this.emptySpaceItem12.Location = new System.Drawing.Point(570, 0);
-            this.emptySpaceItem12.Name = "emptySpaceItem12";
-            this.emptySpaceItem12.Size = new System.Drawing.Size(283, 26);
-            this.emptySpaceItem12.TextSize = new System.Drawing.Size(0, 0);
-            // 
-            // tabKNLV
-            // 
-            this.tabKNLV.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlItem19,
-            this.lblTayNghe,
-            this.lblCongDoan,
-            this.emptySpaceItem11,
-            this.lblThuongTN});
-            this.tabKNLV.Location = new System.Drawing.Point(0, 0);
-            this.tabKNLV.Name = "tabKNLV";
-            this.tabKNLV.Size = new System.Drawing.Size(1139, 285);
-            this.tabKNLV.Text = "Kinh nghiệm làm việc";
-            // 
-            // layoutControlItem19
-            // 
-            this.layoutControlItem19.Control = this.grdKNLV;
-            this.layoutControlItem19.Location = new System.Drawing.Point(0, 26);
-            this.layoutControlItem19.Name = "layoutControlItem19";
-            this.layoutControlItem19.Size = new System.Drawing.Size(1139, 259);
-            this.layoutControlItem19.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem19.TextVisible = false;
-            // 
-            // lblTayNghe
-            // 
-            this.lblTayNghe.Control = this.cboTayNghe;
-            this.lblTayNghe.Location = new System.Drawing.Point(0, 0);
-            this.lblTayNghe.Name = "lblTayNghe";
-            this.lblTayNghe.Size = new System.Drawing.Size(284, 26);
-            this.lblTayNghe.Text = "Tay nghề";
-            this.lblTayNghe.TextSize = new System.Drawing.Size(174, 17);
-            // 
-            // lblCongDoan
-            // 
-            this.lblCongDoan.Control = this.txtCongDoan;
-            this.lblCongDoan.Location = new System.Drawing.Point(569, 0);
-            this.lblCongDoan.Name = "lblCongDoan";
-            this.lblCongDoan.Size = new System.Drawing.Size(284, 26);
-            this.lblCongDoan.TextSize = new System.Drawing.Size(174, 17);
-            // 
-            // emptySpaceItem11
-            // 
-            this.emptySpaceItem11.AllowHotTrack = false;
-            this.emptySpaceItem11.Location = new System.Drawing.Point(853, 0);
-            this.emptySpaceItem11.Name = "emptySpaceItem11";
-            this.emptySpaceItem11.Size = new System.Drawing.Size(286, 26);
-            this.emptySpaceItem11.TextSize = new System.Drawing.Size(0, 0);
-            // 
-            // lblThuongTN
-            // 
-            this.lblThuongTN.Control = this.txtThuongTN;
-            this.lblThuongTN.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
-            this.lblThuongTN.CustomizationFormText = "lblThuongTN";
-            this.lblThuongTN.Location = new System.Drawing.Point(284, 0);
-            this.lblThuongTN.Name = "lblThuongTN";
-            this.lblThuongTN.Size = new System.Drawing.Size(285, 26);
-            this.lblThuongTN.Text = "Thưởng tây nhề";
-            this.lblThuongTN.TextSize = new System.Drawing.Size(174, 17);
-            // 
             // tabThongTinNhanViec
             // 
             this.tabThongTinNhanViec.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
@@ -1453,6 +1339,125 @@ namespace Vs.Recruit
             this.ItemForMSNV.Size = new System.Drawing.Size(380, 28);
             this.ItemForMSNV.Text = "Mã số CN";
             this.ItemForMSNV.TextSize = new System.Drawing.Size(174, 17);
+            // 
+            // tabBangCap
+            // 
+            this.tabBangCap.AppearanceGroup.ForeColor = System.Drawing.Color.White;
+            this.tabBangCap.AppearanceGroup.Options.UseForeColor = true;
+            this.tabBangCap.AppearanceItemCaption.ForeColor = System.Drawing.Color.White;
+            this.tabBangCap.AppearanceItemCaption.Options.UseForeColor = true;
+            this.tabBangCap.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItem18,
+            this.lblTrinhDoHocVan,
+            this.emptySpaceItem9,
+            this.emptySpaceItem10,
+            this.emptySpaceItem12});
+            this.tabBangCap.Location = new System.Drawing.Point(0, 0);
+            this.tabBangCap.Name = "tabBangCap";
+            this.tabBangCap.Size = new System.Drawing.Size(1139, 285);
+            this.tabBangCap.Text = "Bằng cấp";
+            // 
+            // layoutControlItem18
+            // 
+            this.layoutControlItem18.Control = this.grdBangCap;
+            this.layoutControlItem18.Location = new System.Drawing.Point(0, 26);
+            this.layoutControlItem18.Name = "layoutControlItem18";
+            this.layoutControlItem18.Size = new System.Drawing.Size(1139, 259);
+            this.layoutControlItem18.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem18.TextVisible = false;
+            // 
+            // lblTrinhDoHocVan
+            // 
+            this.lblTrinhDoHocVan.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
+            this.lblTrinhDoHocVan.AppearanceItemCaption.Options.UseForeColor = true;
+            this.lblTrinhDoHocVan.Control = this.cboTrinhDoHocVan;
+            this.lblTrinhDoHocVan.Location = new System.Drawing.Point(0, 0);
+            this.lblTrinhDoHocVan.Name = "lblTrinhDoHocVan";
+            this.lblTrinhDoHocVan.Size = new System.Drawing.Size(284, 26);
+            this.lblTrinhDoHocVan.Text = "Trình độ học vấn";
+            this.lblTrinhDoHocVan.TextSize = new System.Drawing.Size(174, 17);
+            // 
+            // emptySpaceItem9
+            // 
+            this.emptySpaceItem9.AllowHotTrack = false;
+            this.emptySpaceItem9.Location = new System.Drawing.Point(853, 0);
+            this.emptySpaceItem9.Name = "emptySpaceItem9";
+            this.emptySpaceItem9.Size = new System.Drawing.Size(286, 26);
+            this.emptySpaceItem9.TextSize = new System.Drawing.Size(0, 0);
+            // 
+            // emptySpaceItem10
+            // 
+            this.emptySpaceItem10.AllowHotTrack = false;
+            this.emptySpaceItem10.Location = new System.Drawing.Point(284, 0);
+            this.emptySpaceItem10.Name = "emptySpaceItem10";
+            this.emptySpaceItem10.Size = new System.Drawing.Size(286, 26);
+            this.emptySpaceItem10.TextSize = new System.Drawing.Size(0, 0);
+            // 
+            // emptySpaceItem12
+            // 
+            this.emptySpaceItem12.AllowHotTrack = false;
+            this.emptySpaceItem12.Location = new System.Drawing.Point(570, 0);
+            this.emptySpaceItem12.Name = "emptySpaceItem12";
+            this.emptySpaceItem12.Size = new System.Drawing.Size(283, 26);
+            this.emptySpaceItem12.TextSize = new System.Drawing.Size(0, 0);
+            // 
+            // tabKNLV
+            // 
+            this.tabKNLV.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItem19,
+            this.lblTayNghe,
+            this.lblCongDoan,
+            this.emptySpaceItem11,
+            this.lblThuongTN});
+            this.tabKNLV.Location = new System.Drawing.Point(0, 0);
+            this.tabKNLV.Name = "tabKNLV";
+            this.tabKNLV.Size = new System.Drawing.Size(1139, 285);
+            this.tabKNLV.Text = "Kinh nghiệm làm việc";
+            // 
+            // layoutControlItem19
+            // 
+            this.layoutControlItem19.Control = this.grdKNLV;
+            this.layoutControlItem19.Location = new System.Drawing.Point(0, 26);
+            this.layoutControlItem19.Name = "layoutControlItem19";
+            this.layoutControlItem19.Size = new System.Drawing.Size(1139, 259);
+            this.layoutControlItem19.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem19.TextVisible = false;
+            // 
+            // lblTayNghe
+            // 
+            this.lblTayNghe.Control = this.cboTayNghe;
+            this.lblTayNghe.Location = new System.Drawing.Point(0, 0);
+            this.lblTayNghe.Name = "lblTayNghe";
+            this.lblTayNghe.Size = new System.Drawing.Size(284, 26);
+            this.lblTayNghe.Text = "Tay nghề";
+            this.lblTayNghe.TextSize = new System.Drawing.Size(174, 17);
+            // 
+            // lblCongDoan
+            // 
+            this.lblCongDoan.Control = this.txtCongDoan;
+            this.lblCongDoan.Location = new System.Drawing.Point(569, 0);
+            this.lblCongDoan.Name = "lblCongDoan";
+            this.lblCongDoan.Size = new System.Drawing.Size(284, 26);
+            this.lblCongDoan.TextSize = new System.Drawing.Size(174, 17);
+            // 
+            // emptySpaceItem11
+            // 
+            this.emptySpaceItem11.AllowHotTrack = false;
+            this.emptySpaceItem11.Location = new System.Drawing.Point(853, 0);
+            this.emptySpaceItem11.Name = "emptySpaceItem11";
+            this.emptySpaceItem11.Size = new System.Drawing.Size(286, 26);
+            this.emptySpaceItem11.TextSize = new System.Drawing.Size(0, 0);
+            // 
+            // lblThuongTN
+            // 
+            this.lblThuongTN.Control = this.txtThuongTN;
+            this.lblThuongTN.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
+            this.lblThuongTN.CustomizationFormText = "lblThuongTN";
+            this.lblThuongTN.Location = new System.Drawing.Point(284, 0);
+            this.lblThuongTN.Name = "lblThuongTN";
+            this.lblThuongTN.Size = new System.Drawing.Size(285, 26);
+            this.lblThuongTN.Text = "Thưởng tây nhề";
+            this.lblThuongTN.TextSize = new System.Drawing.Size(174, 17);
             // 
             // tabThongTinKhac
             // 
@@ -1957,6 +1962,17 @@ namespace Vs.Recruit
             ((System.ComponentModel.ISupportInitialize)(this.ItemForID_QUAN)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForID_TT_HN)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tab)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tabThongTinNhanViec)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForNgayHenLam)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForXacNhanDTDH)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chkChuyenSangNS)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chkXacNhanDiLam)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chkDaGioiThieu)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForHuyTD)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForNgayNhanViec)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForMucLuong)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForMSNV)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabBangCap)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem18)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblTrinhDoHocVan)).EndInit();
@@ -1969,17 +1985,6 @@ namespace Vs.Recruit
             ((System.ComponentModel.ISupportInitialize)(this.lblCongDoan)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem11)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblThuongTN)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tabThongTinNhanViec)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemForNgayHenLam)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemForXacNhanDTDH)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chkChuyenSangNS)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chkXacNhanDiLam)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chkDaGioiThieu)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemForHuyTD)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemForNgayNhanViec)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemForMucLuong)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemForMSNV)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabThongTinKhac)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForNguoiLH)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem7)).EndInit();

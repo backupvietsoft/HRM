@@ -1,8 +1,10 @@
-﻿using DevExpress.XtraBars.Docking2010;
+﻿using DevExpress.Map.Dashboard;
+using DevExpress.XtraBars.Docking2010;
 using DevExpress.XtraEditors;
 using Microsoft.ApplicationBlocks.Data;
 using System;
 using System.Data;
+using System.Diagnostics;
 using System.Windows.Forms;
 using Vs.Report;
 
@@ -28,14 +30,18 @@ namespace Vs.HRM
 
         private void frmPhuLucHDLD_Load(object sender, EventArgs e)
         {
+            try
+            {
+                lbl_SoHD.Text = sSoHD;
+                lbl_NgayHD.Text = sNgayHD;
+                Commons.OSystems.SetDateEditFormat(NGAY_KYDateEdit);
+                Commons.Modules.ObjSystems.MLoadLookUpEdit(NGUOI_KYLookUpEdit, Commons.Modules.ObjSystems.DataNguoiKy(), "ID_NK", "HO_TEN", "HO_TEN");
+                LoadgrdPhuLucHopDong("-1");
+                enableButon(true);
+                Commons.Modules.ObjSystems.SetPhanQuyen(windowsUIButton);
+            }
+            catch { }
             //load combobox ID_QHLookUpEdit
-            lbl_SoHD.Text = sSoHD;
-            lbl_NgayHD.Text = sNgayHD;
-            Commons.OSystems.SetDateEditFormat(NGAY_KYDateEdit);
-            Commons.Modules.ObjSystems.MLoadLookUpEdit(NGUOI_KYLookUpEdit, Commons.Modules.ObjSystems.DataNguoiKy(), "ID_NK", "HO_TEN", "HO_TEN");
-            LoadgrdPhuLucHopDong("-1");
-            enableButon(true);
-            Commons.Modules.ObjSystems.SetPhanQuyen(windowsUIButton);
         }
 
         private void windowsUIButton_ButtonClick(object sender, DevExpress.XtraBars.Docking2010.ButtonEventArgs e)
@@ -69,29 +75,7 @@ namespace Vs.HRM
                 case "In":
                     {
                         if (grvPLHD.RowCount == 0) return;
-                        switch (Commons.Modules.ObjSystems.KyHieuDV_CN(Commons.Modules.iCongNhan))
-                        {
-                            case "MT":
-                                {
-                                    InPLHD_MT();
-                                    break;
-                                }
-                            case "SB":
-                                {
-                                    InPLHD_SB();
-                                    break;
-                                }
-                            case "DM":
-                                {
-                                    InPLHD_DM();
-                                    break;
-                                }
-                            default:
-                                {
-                                    InPLHD_MT();
-                                    break;
-                                }
-                        }
+                        InPLHD();
                         break;
                     }
                 case "luu":
@@ -146,6 +130,7 @@ namespace Vs.HRM
             grvPLHD.Columns["THOI_GIAN_THUC_HIEN"].Visible = false;
             grvPLHD.Columns["GHI_CHU"].Visible = false;
             grvPLHD.Columns["NGUOI_KY"].Visible = false;
+            grvPLHD.Columns["ID_PLHD"].Visible = false;
 
             //format column
             grvPLHD.Columns["NGAY_KY"].DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
@@ -228,118 +213,107 @@ namespace Vs.HRM
             GHI_CHUMemoEdit.Properties.ReadOnly = visible;
         }
 
-        private void InPLHD_MT()
+        private void InPLHD()
         {
             try
             {
+                int iLoaiIn = 0; // 0 in report , 1 in excel, 2 in word
+                string sForderTemplateExcel = "";
+                string sForderTemplateWord = "";
+                string sPs = "rptPhuLucHopDong";
                 System.Data.SqlClient.SqlConnection conn;
                 DataTable dt = new DataTable();
                 frmViewReport frm = new frmViewReport();
-                frm.rpt = new rptPhuLucHopDongLaoDong(NGAY_KYDateEdit.DateTime);
+                switch (Commons.Modules.KyHieuDV)
+                {
+                    case "SB":
+                        {
+                            frm.rpt = new rptPhuLucHopDongLaoDong_SB(NGAY_KYDateEdit.DateTime);
+                            break;
+                        }
+                    case "DM":
+                        {
+                            frm.rpt = new rptPhuLucHopDongLaoDong_DM(NGAY_KYDateEdit.DateTime);
+                            break;
+                        }
+                    case "BT":
+                        {
+                            iLoaiIn = 1;
+                            sForderTemplateExcel = "TemplateBT";
+                            break;
+                        }
+                    case "NB":
+                        {
+                            frm.rpt = new rptPhuLucHopDongLaoDong_NB(NGAY_KYDateEdit.DateTime);
+                            break;
+                        }
+                    default:
+                        {
+                            frm.rpt = new rptPhuLucHopDongLaoDong(NGAY_KYDateEdit.DateTime);
+                            break;
+                        }
+                }
 
                 conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
                 conn.Open();
 
-                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptPhuLucHopDong", conn);
+                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand(sPs, conn);
                 cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
                 cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
-                cmd.Parameters.Add("@ID_HDLD", SqlDbType.Int).Value = idhdld;
-                cmd.Parameters.Add("@SO_PLHD", SqlDbType.NVarChar, 30).Value = SO_PLHDTextEdit.EditValue;
+                cmd.Parameters.Add("@ID_PLHD", SqlDbType.BigInt).Value = grvPLHD.GetFocusedRowCellValue("ID_PLHD");
+                cmd.Parameters.Add("@KY_HIEU_DV", SqlDbType.NVarChar).Value = Commons.Modules.KyHieuDV;
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
                 DataSet ds = new DataSet();
                 adp.Fill(ds);
-                dt = new DataTable();
-                dt = ds.Tables[0].Copy();
-                dt.TableName = "DA_TA";
-                frm.AddDataSource(dt);
 
-                frm.ShowDialog();
+                if (iLoaiIn == 0) // in report
+                {
+                    dt = new DataTable();
+                    dt = ds.Tables[0].Copy();
+                    dt.TableName = "DA_TA";
+                    frm.AddDataSource(dt);
+
+                    try
+                    {
+                        DataTable dt1 = new DataTable();
+                        dt1 = ds.Tables[1].Copy();
+                        dt1.TableName = "NOI_DUNG";
+                        frm.AddDataSource(dt1);
+                    }
+                    catch { }
+                    frm.ShowDialog();
+                }
+                else if (iLoaiIn == 1) // in excel
+                {
+                    ds.Tables[0].TableName = "PLHD";
+                    SaveFileDialog saveFileDialog = new SaveFileDialog();
+                    saveFileDialog.Filter = "Excel file (*.xlsx)|*.xlsx";
+                    saveFileDialog.FilterIndex = 0;
+                    saveFileDialog.RestoreDirectory = true;
+                    //saveFileDialog.CreatePrompt = true;
+                    saveFileDialog.CheckFileExists = false;
+                    saveFileDialog.CheckPathExists = false;
+                    saveFileDialog.Title = "Export Excel File To";
+                    saveFileDialog.FileName = DateTime.Now.ToString("yyyyMMdd_HHmmss");
+                    DialogResult res = saveFileDialog.ShowDialog();
+                    // If the file name is not an empty string open it for saving.
+                    if (res == DialogResult.OK)
+                    {
+                        Commons.TemplateExcel.FillReport(saveFileDialog.FileName, System.Windows.Forms.Application.StartupPath + "\\Template\\" + sForderTemplateExcel + "\\PhuLucHopDong.xlsx", ds, new string[] { "{", "}" });
+                        Process.Start(saveFileDialog.FileName);
+                    }
+                }
+                else // in word
+                {
+
+                }
             }
             catch
             {
             }
         }
-
-        private void InPLHD_SB()
-        {
-            try
-            {
-                System.Data.SqlClient.SqlConnection conn;
-                DataTable dt = new DataTable();
-                frmViewReport frm = new frmViewReport();
-                frm.rpt = new rptPhuLucHopDongLaoDong_SB(NGAY_KYDateEdit.DateTime);
-
-                conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
-                conn.Open();
-
-                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptPhuLucHopDong_SB", conn);
-                cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
-                cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
-                cmd.Parameters.Add("@ID_HDLD", SqlDbType.Int).Value = idhdld;
-                cmd.Parameters.Add("@SO_PLHD", SqlDbType.NVarChar, 30).Value = SO_PLHDTextEdit.EditValue;
-                cmd.CommandType = CommandType.StoredProcedure;
-
-                System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
-                DataSet ds = new DataSet();
-                adp.Fill(ds);
-                dt = new DataTable();
-                dt = ds.Tables[0].Copy();
-                dt.TableName = "DA_TA";
-                frm.AddDataSource(dt);
-
-                DataTable dt1 = new DataTable();
-                dt1 = ds.Tables[1].Copy();
-                dt1.TableName = "NOI_DUNG";
-                frm.AddDataSource(dt1);
-
-                frm.ShowDialog();
-            }
-            catch
-            {
-            }
-        }
-
-        private void InPLHD_DM()
-        {
-            try
-            {
-                System.Data.SqlClient.SqlConnection conn;
-                DataTable dt = new DataTable();
-                frmViewReport frm = new frmViewReport();
-                frm.rpt = new rptPhuLucHopDongLaoDong_DM(NGAY_KYDateEdit.DateTime);
-
-                conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
-                conn.Open();
-
-                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptPhuLucHopDong_DM", conn);
-                cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
-                cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
-                cmd.Parameters.Add("@ID_HDLD", SqlDbType.Int).Value = idhdld;
-                cmd.Parameters.Add("@SO_PLHD", SqlDbType.NVarChar, 30).Value = SO_PLHDTextEdit.EditValue;
-                cmd.CommandType = CommandType.StoredProcedure;
-
-                System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
-                DataSet ds = new DataSet();
-                adp.Fill(ds);
-                dt = new DataTable();
-                dt = ds.Tables[0].Copy();
-                dt.TableName = "DA_TA";
-                frm.AddDataSource(dt);
-
-                DataTable dt1 = new DataTable();
-                dt1 = ds.Tables[1].Copy();
-                dt1.TableName = "NOI_DUNG";
-                frm.AddDataSource(dt1);
-
-                frm.ShowDialog();
-            }
-            catch
-            {
-            }
-        }
-
         #endregion hàm load form
 
         #region hàm sử lý data
@@ -360,8 +334,8 @@ namespace Vs.HRM
                 }
 
                 string n = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spUpdatePhuLucHopDong",
+                    cothem ? -1 : Convert.ToInt64(grvPLHD.GetFocusedRowCellValue("ID_PLHD")),
                     idhdld,
-                    sophieu,
                     SO_PLHDTextEdit.EditValue.ToString(),
                     NOI_DUNG_THAY_DOIMemoEdit.EditValue,
                     THOI_GIAN_THUC_HIENMemoEdit.EditValue,
@@ -386,7 +360,7 @@ namespace Vs.HRM
             //xóa
             try
             {
-                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "DELETE	dbo.PHU_LUC_HDLD WHERE ID_HDLD  = " + idhdld + " AND SO_PLHD = N'" + grvPLHD.GetFocusedRowCellValue("SO_PLHD").ToString().Trim() + "'");
+                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "DELETE	dbo.PHU_LUC_HDLD WHERE ID_PLHD  = "+grvPLHD.GetFocusedRowCellValue("ID_PLHD")+"");
                 grvPLHD.DeleteSelectedRows();
             }
             catch (Exception ex)

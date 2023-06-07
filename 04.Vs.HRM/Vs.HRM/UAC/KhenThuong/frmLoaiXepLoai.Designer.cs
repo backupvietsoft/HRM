@@ -138,7 +138,7 @@
             // 
             // cboThang
             // 
-            this.cboThang.Location = new System.Drawing.Point(295, 12);
+            this.cboThang.Location = new System.Drawing.Point(300, 6);
             this.cboThang.Name = "cboThang";
             this.cboThang.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo),
@@ -147,17 +147,17 @@
             this.cboThang.Properties.DefaultPopupControl = this.popListThang;
             this.cboThang.Properties.DifferentActionButtonIndex = 1;
             this.cboThang.Properties.DifferentPopupControl = this.popThang;
-            this.cboThang.Size = new System.Drawing.Size(219, 24);
+            this.cboThang.Size = new System.Drawing.Size(217, 24);
             this.cboThang.StyleController = this.dataLayoutControl1;
             this.cboThang.TabIndex = 6;
             this.cboThang.EditValueChanged += new System.EventHandler(this.cboThang_EditValueChanged);
             // 
             // grdLXL
             // 
-            this.grdLXL.Location = new System.Drawing.Point(12, 40);
+            this.grdLXL.Location = new System.Drawing.Point(6, 32);
             this.grdLXL.MainView = this.grvLXL;
             this.grdLXL.Name = "grdLXL";
-            this.grdLXL.Size = new System.Drawing.Size(676, 318);
+            this.grdLXL.Size = new System.Drawing.Size(688, 332);
             this.grdLXL.TabIndex = 5;
             this.grdLXL.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grvLXL});
@@ -174,6 +174,7 @@
             this.grvLXL.InitNewRow += new DevExpress.XtraGrid.Views.Grid.InitNewRowEventHandler(this.grvLXL_InitNewRow);
             this.grvLXL.InvalidRowException += new DevExpress.XtraGrid.Views.Base.InvalidRowExceptionEventHandler(this.grvLXL_InvalidRowException);
             this.grvLXL.ValidateRow += new DevExpress.XtraGrid.Views.Base.ValidateRowEventHandler(this.grvLXL_ValidateRow);
+            this.grvLXL.InvalidValueException += new DevExpress.XtraEditors.Controls.InvalidValueExceptionEventHandler(this.grvLXL_InvalidValueException);
             // 
             // Root
             // 
@@ -191,18 +192,18 @@
             // layoutControlItem1
             // 
             this.layoutControlItem1.Control = this.grdLXL;
-            this.layoutControlItem1.Location = new System.Drawing.Point(0, 28);
+            this.layoutControlItem1.Location = new System.Drawing.Point(0, 26);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(680, 322);
+            this.layoutControlItem1.Size = new System.Drawing.Size(690, 334);
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
             // 
             // layoutControlItem2
             // 
             this.layoutControlItem2.Control = this.cboThang;
-            this.layoutControlItem2.Location = new System.Drawing.Point(170, 0);
+            this.layoutControlItem2.Location = new System.Drawing.Point(172, 0);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(336, 28);
+            this.layoutControlItem2.Size = new System.Drawing.Size(341, 26);
             this.layoutControlItem2.TextSize = new System.Drawing.Size(110, 17);
             // 
             // emptySpaceItem2
@@ -210,15 +211,15 @@
             this.emptySpaceItem2.AllowHotTrack = false;
             this.emptySpaceItem2.Location = new System.Drawing.Point(0, 0);
             this.emptySpaceItem2.Name = "emptySpaceItem2";
-            this.emptySpaceItem2.Size = new System.Drawing.Size(170, 28);
+            this.emptySpaceItem2.Size = new System.Drawing.Size(172, 26);
             this.emptySpaceItem2.TextSize = new System.Drawing.Size(0, 0);
             // 
             // emptySpaceItem1
             // 
             this.emptySpaceItem1.AllowHotTrack = false;
-            this.emptySpaceItem1.Location = new System.Drawing.Point(506, 0);
+            this.emptySpaceItem1.Location = new System.Drawing.Point(513, 0);
             this.emptySpaceItem1.Name = "emptySpaceItem1";
-            this.emptySpaceItem1.Size = new System.Drawing.Size(174, 28);
+            this.emptySpaceItem1.Size = new System.Drawing.Size(177, 26);
             this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
             // 
             // windowsUIButton
@@ -244,7 +245,7 @@
             windowsUIButtonImageOptions4.ImageUri.Uri = "SaveAll";
             windowsUIButtonImageOptions5.ImageUri.Uri = "SaveAndClose";
             this.windowsUIButton.Buttons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] {
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions1, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "them", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions1, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "themsua", -1, false),
             new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions2, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "xoa", -1, false),
             new DevExpress.XtraBars.Docking2010.WindowsUISeparator(),
             new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions3, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "thoat", -1, false),

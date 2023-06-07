@@ -39,47 +39,35 @@ namespace Vs.TimeAttendance
 
         private void ucVachTheLoi_Load(object sender, EventArgs e)
         {
-            Commons.Modules.sLoad = "0Load";
-
-
-            if (Commons.Modules.bolLinkCC)
+            try
             {
-                datNgayChamCong.EditValue = Commons.Modules.dLinkCC;
-            }
-            else
-            {
-                datNgayChamCong.EditValue = DateTime.Now.Date;
-            }
+                Commons.Modules.sLoad = "0Load";
 
 
+                if (Commons.Modules.bolLinkCC)
+                {
+                    datNgayChamCong.EditValue = Commons.Modules.dLinkCC;
+                }
+                else
+                {
+                    datNgayChamCong.EditValue = DateTime.Now.Date;
+                }
+                //dinh dang ngay gio
+                Commons.OSystems.SetDateEditFormat(datNgayDen);
+                Commons.OSystems.SetDateEditFormat(datNgayVe);
+                Commons.OSystems.SetDateEditFormat(datNgayChamCong);
+                Commons.OSystems.SetTimeEditFormat(timDen);
+                Commons.OSystems.SetTimeEditFormat(timVe);
+
+                Commons.Modules.ObjSystems.LoadCboDonVi(cboDV);
+                Commons.Modules.ObjSystems.LoadCboXiNghiep(cboDV, cboXN);
+                Commons.Modules.ObjSystems.LoadCboTo(cboDV, cboXN, cboTo);
+                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_XNG, Commons.Modules.ObjSystems.DataXacNhanGio(false), "ID_XNG", "TEN_XNG", "", true, true);
+                cboID_XNG.EditValue = -99;
+                LoadGrdCongNhan();
+                Commons.Modules.sLoad = "";
 
 
-
-            //dinh dang ngay gio
-            Commons.OSystems.SetDateEditFormat(datNgayDen);
-            Commons.OSystems.SetDateEditFormat(datNgayVe);
-            Commons.OSystems.SetDateEditFormat(datNgayChamCong);
-            Commons.OSystems.SetTimeEditFormat(timDen);
-            Commons.OSystems.SetTimeEditFormat(timVe);
-
-            Commons.Modules.ObjSystems.LoadCboDonVi(cboDV);
-            Commons.Modules.ObjSystems.LoadCboXiNghiep(cboDV, cboXN);
-            Commons.Modules.ObjSystems.LoadCboTo(cboDV, cboXN, cboTo);
-            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_XNG, Commons.Modules.ObjSystems.DataXacNhanGio(false), "ID_XNG", "TEN_XNG", "", true, true);
-            cboID_XNG.EditValue = -99;
-            LoadGrdCongNhan();
-            Commons.Modules.sLoad = "";
-
-            if (Modules.iPermission != 1)
-            {
-                windowsUIButton.Buttons[0].Properties.Visible = false;
-                windowsUIButton.Buttons[1].Properties.Visible = false;
-                windowsUIButton.Buttons[2].Properties.Visible = false;
-                windowsUIButton.Buttons[6].Properties.Visible = false;
-                windowsUIButton.Buttons[7].Properties.Visible = false;
-            }
-            else
-            {
                 if (Commons.Modules.bolLinkCC)
                 {
                     Commons.Modules.ObjSystems.MLoadLookUpEdit(cboMSCN, Commons.Modules.ObjSystems.ConvertDatatable(grdCongNhan), "ID_CN", "MS_CN", Commons.Modules.ObjLanguages.GetLanguage(this.Name, "MS_CN"));
@@ -89,9 +77,11 @@ namespace Vs.TimeAttendance
                 {
                     enableButon(true);
                 }
-            }
 
-            searchControl1.Client = grdCongNhan;
+                searchControl1.Client = grdCongNhan;
+                Commons.Modules.ObjSystems.SetPhanQuyen(windowsUIButton);
+            }
+            catch { }
         }
         private void cboDV_EditValueChanged(object sender, EventArgs e)
         {
@@ -371,7 +361,6 @@ namespace Vs.TimeAttendance
             try
             {
                 LookUpEdit lookUp = sender as LookUpEdit;
-
                 DataRowView dataRow = lookUp.GetSelectedDataRow() as DataRowView;
                 DataTable dt = new DataTable();
                 dt = (DataTable)grdCongNhan.DataSource;
@@ -497,18 +486,29 @@ namespace Vs.TimeAttendance
                     Commons.Modules.ObjSystems.msgChung(Commons.ThongBao.msgNgayKhongHopLe);
                     return;
                 }
-                for (int i = 0; i <= grvCongNhan.RowCount; i++)
-                {
-                    grvCongNhan.SetRowCellValue(i, "NGAY_DEN", NgayDen.Date);
-                    grvCongNhan.SetRowCellValue(i, "NGAY_VE", NgayVe.Date);
-                    grvCongNhan.SetRowCellValue(i, "GIO_DEN", NgayDen.TimeOfDay.ToString());
-                    grvCongNhan.SetRowCellValue(i, "GIO_VE", NgayVe.TimeOfDay.ToString());
-                    grvCongNhan.SetRowCellValue(i, "ID_XNG", cboID_XNG.EditValue);
-                }
+
+                DataTable dt = new DataTable();
+                dt = (DataTable)grdCongNhan.DataSource;
+                dt.AsEnumerable().ToList<DataRow>().ForEach(r => r["NGAY_DEN"] = NgayDen.Date);
+                dt.AsEnumerable().ToList<DataRow>().ForEach(r => r["NGAY_VE"] = NgayVe.Date);
+                dt.AsEnumerable().ToList<DataRow>().ForEach(r => r["GIO_DEN"] = NgayDen.TimeOfDay.ToString());
+                dt.AsEnumerable().ToList<DataRow>().ForEach(r => r["GIO_VE"] = NgayVe.TimeOfDay.ToString());
+                dt.AsEnumerable().ToList<DataRow>().ForEach(r => r["ID_XNG"] = cboID_XNG.EditValue);
+                dt.AcceptChanges();
+
+                Commons.Modules.ObjSystems.Alert(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgLuuThanhCong"), Commons.Form_Alert.enmType.Success);
+                //for (int i = 0; i <= grvCongNhan.RowCount; i++)
+                //{
+                //    grvCongNhan.SetRowCellValue(i, "NGAY_DEN", NgayDen.Date);
+                //    grvCongNhan.SetRowCellValue(i, "NGAY_VE", NgayVe.Date);
+                //    grvCongNhan.SetRowCellValue(i, "GIO_DEN", NgayDen.TimeOfDay.ToString());
+                //    grvCongNhan.SetRowCellValue(i, "GIO_VE", NgayVe.TimeOfDay.ToString());
+                //    grvCongNhan.SetRowCellValue(i, "ID_XNG", cboID_XNG.EditValue);
+                //}
             }
             catch (Exception ex)
             {
-                XtraMessageBox.Show(ex.Message.ToString());
+                Commons.Modules.ObjSystems.MsgError(ex.Message);
             }
         }
         private void btnGhiMot_Click(object sender, EventArgs e)

@@ -44,54 +44,58 @@ namespace Vs.TimeAttendance
 
         private void ucCheDoChamCongNhanVien_Load(object sender, EventArgs e)
         {
-            Commons.Modules.sLoad = "0Load";
-            calNgay.EditValue = DateTime.Now;
-            EnableButon();
             try
             {
+                Commons.Modules.sLoad = "0Load";
+                calNgay.EditValue = DateTime.Now;
+                EnableButon();
+                try
+                {
+                    LoadNgay();
+                }
+                catch
+                {
+                    MessageBox.Show("err Datetime System");
+                }
+                Commons.Modules.ObjSystems.LoadCboDonVi(cboDonVi);
+                Commons.Modules.ObjSystems.LoadCboXiNghiep(cboDonVi, cboXiNghiep);
+                Commons.Modules.ObjSystems.LoadCboTo(cboDonVi, cboXiNghiep, cboTo);
 
-                LoadNgay(Convert.ToDateTime("01/01/1900"));
+                LoadGrdCDCCNV();
+                Commons.Modules.sLoad = "";
+
+                DataTable dCa = new DataTable();
+                RepositoryItemLookUpEdit cboCa = new RepositoryItemLookUpEdit();
+                dCa.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT DISTINCT ID_CDLV, CA ,GIO_BD,GIO_KT FROM CHE_DO_LAM_VIEC"));
+
+                cboCa.NullText = "";
+                cboCa.ValueMember = "ID_CDLV";
+                cboCa.DisplayMember = "CA";
+
+
+                cboCa.DataSource = dCa;
+                cboCa.Columns.Clear();
+                cboCa.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("CA"));
+                cboCa.Columns["CA"].Caption = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "CA");
+
+                cboCa.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("GIO_BD"));
+                cboCa.Columns["GIO_BD"].Caption = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "GIO_BDChamCong");
+                cboCa.Columns["GIO_BD"].FormatType = DevExpress.Utils.FormatType.DateTime;
+                cboCa.Columns["GIO_BD"].FormatString = "HH:mm";
+
+                cboCa.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("GIO_KT"));
+                cboCa.Columns["GIO_KT"].Caption = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "GIO_KTChamcong");
+                cboCa.Columns["GIO_KT"].FormatType = DevExpress.Utils.FormatType.DateTime;
+                cboCa.Columns["GIO_KT"].FormatString = "HH:mm";
+
+                cboCa.AppearanceDropDownHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+                cboCa.AppearanceDropDownHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+                grvCDCCNV.Columns["CA"].ColumnEdit = cboCa;
+                cboCa.BeforePopup += cboCa_BeforePopup;
+                cboCa.EditValueChanged += CboCa_EditValueChanged;
+                Commons.Modules.ObjSystems.SetPhanQuyen(btnALL);
             }
-            catch
-            {
-                MessageBox.Show("err Datetime System");
-            }
-            Commons.Modules.ObjSystems.LoadCboDonVi(cboDonVi);
-            Commons.Modules.ObjSystems.LoadCboXiNghiep(cboDonVi, cboXiNghiep);
-            Commons.Modules.ObjSystems.LoadCboTo(cboDonVi, cboXiNghiep, cboTo);
-
-            LoadGrdCDCCNV();
-            Commons.Modules.sLoad = "";
-
-            DataTable dCa = new DataTable();
-            RepositoryItemLookUpEdit cboCa = new RepositoryItemLookUpEdit();
-            dCa.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT DISTINCT ID_CDLV, CA ,GIO_BD,GIO_KT FROM CHE_DO_LAM_VIEC"));
-
-            cboCa.NullText = "";
-            cboCa.ValueMember = "ID_CDLV";
-            cboCa.DisplayMember = "CA";
-
-
-            cboCa.DataSource = dCa;
-            cboCa.Columns.Clear();
-            cboCa.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("CA"));
-            cboCa.Columns["CA"].Caption = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "CA");
-
-            cboCa.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("GIO_BD"));
-            cboCa.Columns["GIO_BD"].Caption = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "GIO_BDChamCong");
-            cboCa.Columns["GIO_BD"].FormatType = DevExpress.Utils.FormatType.DateTime;
-            cboCa.Columns["GIO_BD"].FormatString = "HH:mm";
-
-            cboCa.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("GIO_KT"));
-            cboCa.Columns["GIO_KT"].Caption = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "GIO_KTChamcong");
-            cboCa.Columns["GIO_KT"].FormatType = DevExpress.Utils.FormatType.DateTime;
-            cboCa.Columns["GIO_KT"].FormatString = "HH:mm";
-
-            cboCa.AppearanceDropDownHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            cboCa.AppearanceDropDownHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            grvCDCCNV.Columns["CA"].ColumnEdit = cboCa;
-            cboCa.BeforePopup += cboCa_BeforePopup;
-            cboCa.EditValueChanged += CboCa_EditValueChanged;
+            catch { }
         }
 
         private void CboCa_EditValueChanged(object sender, EventArgs e)
@@ -238,7 +242,12 @@ namespace Vs.TimeAttendance
                         //if (grvCDCCNV.HasColumnErrors) return;
                         if (Savedata() == false)
                         {
-                            Commons.Modules.ObjSystems.msgChung(Commons.ThongBao.msgDuLieuDangSuDung);
+                            Commons.Modules.ObjSystems.Alert(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgThemKhongThanhCong"), Commons.Form_Alert.enmType.Error);
+                            return;
+                        }
+                        else
+                        {
+                            Commons.Modules.ObjSystems.Alert(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgdacongnhanthanhcong"), Commons.Form_Alert.enmType.Success);
                         }
                         isAdd = false;
                         EnableButon();
@@ -354,7 +363,7 @@ namespace Vs.TimeAttendance
         private void XoaCDCCNV()
         {
             if (grvCDCCNV.RowCount == 0) { Commons.Modules.ObjSystems.msgChung(Commons.ThongBao.msgKhongCoDuLieuXoa); return; }
-            if (Commons.Modules.ObjSystems.msgHoi(Commons.ThongBao.msgXoa) == DialogResult.No) return;
+            if (Commons.Modules.ObjSystems.MsgDelete(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msg_XoaDong")) == 0) return;
             //xóa
             try
             {
@@ -399,14 +408,11 @@ namespace Vs.TimeAttendance
         {
             string sTB = "CDCC_NV_TMP" + Commons.Modules.UserName;
             string sTB_CU = "CDCC_CU" + Commons.Modules.UserName;
-            string sSql = "";
             try
             {
                 Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sTB, Commons.Modules.ObjSystems.ConvertDatatable(grdData), "");
                 Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sTB_CU, dt_Temp, "");
-                DateTime dNgay;
-                dNgay = DateTime.ParseExact("01/" + cboNgay.Text, "dd/MM/yyyy", cultures);
-                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "sPsaveCheDoChamCongNV", dNgay, sTB_CU, sTB);
+                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "sPsaveCheDoChamCongNV", Commons.Modules.ObjSystems.ConvertDateTime(cboNgay.Text), sTB_CU, sTB);
                 Commons.Modules.ObjSystems.XoaTable(sTB);
                 Commons.Modules.ObjSystems.XoaTable(sTB_CU);
                 return true;
@@ -421,10 +427,10 @@ namespace Vs.TimeAttendance
         }
 
         //LOAD THANG
-        private void LoadNgay(DateTime dNgay)
+        private void LoadNgay()
         {
             DataTable dt = new DataTable();
-            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetListNgayCDCCNV", Commons.Modules.UserName, Commons.Modules.TypeLanguage));
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT NGAY_AD FROM (SELECT NGAY_AD, NGAY_AD AS NGAY FROM CHE_DO_CHAM_CONG_NHAN_VIEN GROUP BY NGAY_AD) T1 ORDER BY NGAY DESC"));
 
             if (grdNgay.DataSource == null)
             {
@@ -439,20 +445,20 @@ namespace Vs.TimeAttendance
             }
             else
             {
-                cboNgay.EditValue = dt.Rows[0]["NGAY_AD"];
+                cboNgay.EditValue = Convert.ToDateTime(dt.Rows[0]["NGAY_AD"]);
             }
         }
 
         private void calNgay_DateTimeCommit(object sender, EventArgs e)
         {
-            
+
             try
             {
-                cboNgay.Text = calNgay.DateTime.ToString("MM/yyyy");
+                cboNgay.Text = calNgay.DateTime.ToString("dd/MM/yyyy");
             }
-            catch 
+            catch
             {
-                cboNgay.Text = calNgay.DateTime.ToString("MM/yyyy");
+                cboNgay.Text = calNgay.DateTime.ToString("dd/MM/yyyy");
             }
             cboNgay.ClosePopup();
         }
@@ -490,7 +496,7 @@ namespace Vs.TimeAttendance
             try
             {
                 GridView grv = (GridView)sender;
-                cboNgay.Text = Convert.ToDateTime(grv.GetFocusedRowCellValue("NGAY_AD").ToString()).ToString("MM/yyyy");
+                cboNgay.Text = Convert.ToDateTime(grv.GetFocusedRowCellValue("NGAY_AD").ToString()).ToShortDateString();
             }
             catch { LoadNull(); }
             cboNgay.ClosePopup();

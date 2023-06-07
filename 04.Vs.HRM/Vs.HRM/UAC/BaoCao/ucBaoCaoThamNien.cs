@@ -10,6 +10,7 @@ using DataTable = System.Data.DataTable;
 using System.Reflection;
 using System.Linq;
 using System.Collections.Generic;
+using Microsoft.ApplicationBlocks.Data;
 
 namespace Vs.HRM
 {
@@ -19,7 +20,7 @@ namespace Vs.HRM
         public ucBaoCaoThamNien()
         {
             InitializeComponent();
-            Commons.Modules.ObjSystems.ThayDoiNN(this,windowsUIButton);
+            Commons.Modules.ObjSystems.ThayDoiNN(this, windowsUIButton);
         }
 
         private void windowsUIButton_ButtonClick(object sender, ButtonEventArgs e)
@@ -71,7 +72,7 @@ namespace Vs.HRM
                                 }
                             case 1:
                                 {
-                                    switch (Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString())
+                                    switch (Commons.Modules.KyHieuDV)
                                     {
                                         case "DM":
                                             {
@@ -501,8 +502,8 @@ namespace Vs.HRM
                 Microsoft.Office.Interop.Excel.Workbook oWB;
                 Microsoft.Office.Interop.Excel.Worksheet oSheet;
                 oXL = new Microsoft.Office.Interop.Excel.Application();
-                oXL.Visible = true;
-
+                oXL.Visible = false;
+                this.Cursor = Cursors.WaitCursor;
                 oWB = (Microsoft.Office.Interop.Excel.Workbook)(oXL.Workbooks.Add(Missing.Value));
                 oSheet = (Microsoft.Office.Interop.Excel.Worksheet)oWB.ActiveSheet;
 
@@ -538,7 +539,7 @@ namespace Vs.HRM
                 Microsoft.Office.Interop.Excel.Range row5_TieuDe_DV = oSheet.get_Range("A3", "A4");
                 row5_TieuDe_DV.Merge();
                 row5_TieuDe_DV.Value2 = "STT";
-                row5_TieuDe_DV.ColumnWidth = 6;
+                row5_TieuDe_DV.ColumnWidth = 15;
 
                 Microsoft.Office.Interop.Excel.Range row5_TieuDe_LDBQ = oSheet.get_Range("B3", "B4");
                 row5_TieuDe_LDBQ.Merge();
@@ -569,30 +570,66 @@ namespace Vs.HRM
                 row5_TieuDe_LDG.Value2 = "Thâm niên";
                 row5_TieuDe_LDG.ColumnWidth = 44;
 
-                Range row6_TieuDe_TG = oSheet.get_Range("F4");
-                row6_TieuDe_TG.Value2 = "0-3 months";
-                row6_TieuDe_TG.ColumnWidth = 11;
-
-                Range row6_TieuDe_D1T = oSheet.get_Range("G4");
-                row6_TieuDe_D1T.Value2 = "3-6 months";
+                Range row6_TieuDe_D1T = oSheet.get_Range("F4");
+                row6_TieuDe_D1T.Value2 = "Dưới 1 tháng";
                 row6_TieuDe_D1T.ColumnWidth = 11;
 
-                Range row6_TieuDe_1_3_T = oSheet.get_Range("H4");
+                Range row6_TieuDe_TG = oSheet.get_Range("G4");
+                row6_TieuDe_TG.Value2 = "1-3 Tháng";
+                row6_TieuDe_TG.ColumnWidth = 11;
+
+                Range row6_TieuDe_36 = oSheet.get_Range("H4");
+                row6_TieuDe_36.Value2 = "3-6 Tháng";
+                row6_TieuDe_36.ColumnWidth = 11;
+
+                Range row6_TieuDe_1_3_T = oSheet.get_Range("I4");
                 row6_TieuDe_1_3_T.Merge();
-                row6_TieuDe_1_3_T.Value2 = "6-9 months";
+                row6_TieuDe_1_3_T.Value2 = "6-9 Tháng";
                 row6_TieuDe_1_3_T.ColumnWidth = 11;
 
-                Range row6_TieuDe_3_6_T = oSheet.get_Range("I4");
-                row6_TieuDe_3_6_T.Value2 = "9-12 months";
+                Range row6_TieuDe_3_6_T = oSheet.get_Range("J4");
+                row6_TieuDe_3_6_T.Value2 = "9-12 Tháng";
                 row6_TieuDe_3_6_T.ColumnWidth = 11;
 
-                Range row6_TieuDe_6_9_T = oSheet.get_Range("J4");
+                Range row6_TieuDe_6_9_T = oSheet.get_Range("K4");
                 row6_TieuDe_6_9_T.Value2 = "Trên 1 năm";
                 row6_TieuDe_6_9_T.ColumnWidth = 11;
 
-                Range row6_TieuDe_9_12_T = oSheet.get_Range("K4");
-                row6_TieuDe_9_12_T.Value2 = "Ghi chú";
-                row6_TieuDe_9_12_T.ColumnWidth = 20;
+                Range row6_TieuDe_9_12_T = oSheet.get_Range("L4");
+                row6_TieuDe_9_12_T.Value2 = "Trên 1.5 năm";
+                row6_TieuDe_9_12_T.ColumnWidth = 11;
+
+                Range row6_TieuDe_T2N = oSheet.get_Range("M4");
+                row6_TieuDe_T2N.Value2 = "Trên 2 năm";
+                row6_TieuDe_T2N.ColumnWidth = 11;
+
+                Range row6_TieuDe_T2_5N = oSheet.get_Range("N4");
+                row6_TieuDe_T2_5N.Value2 = "Trên 2.5 năm";
+                row6_TieuDe_T2_5N.ColumnWidth = 11;
+
+                Range row6_TieuDe_T3N = oSheet.get_Range("O4");
+                row6_TieuDe_T3N.Value2 = "Trên 3 năm";
+                row6_TieuDe_T3N.ColumnWidth = 11;
+
+                Range row6_TieuDe_T3_5N = oSheet.get_Range("P4");
+                row6_TieuDe_T3_5N.Value2 = "Trên 3.5 năm";
+                row6_TieuDe_T3_5N.ColumnWidth = 11;
+
+                Range row6_TieuDe_T4N = oSheet.get_Range("Q4");
+                row6_TieuDe_T4N.Value2 = "Trên 4 năm";
+                row6_TieuDe_T4N.ColumnWidth = 11;
+
+                Range row6_TieuDe_T4_5N = oSheet.get_Range("R4");
+                row6_TieuDe_T4_5N.Value2 = "Trên 4.5 năm";
+                row6_TieuDe_T4_5N.ColumnWidth = 11;
+
+                Range row6_TieuDe_T5N = oSheet.get_Range("S4");
+                row6_TieuDe_T5N.Value2 = "Trên 5 năm";
+                row6_TieuDe_T5N.ColumnWidth = 11;
+
+                Range row6_TieuDe_GC = oSheet.get_Range("T4");
+                row6_TieuDe_GC.Value2 = "Ghi chú";
+                row6_TieuDe_GC.ColumnWidth = 20;
 
                 Microsoft.Office.Interop.Excel.Range fortmatTitleTable = oSheet.get_Range("A3", "K4");
                 fortmatTitleTable.Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
@@ -742,33 +779,6 @@ namespace Vs.HRM
 
                 BorderAround(oSheet.get_Range("A3", nameColumn + rowCnt.ToString()));
 
-                rowCnt++;
-                rowCnt++;
-                formatRange = oSheet.get_Range("K" + rowCnt + "", "" + lastColumn + "" + rowCnt + "");
-                formatRange.Merge();
-                formatRange.Font.Bold = true;
-                formatRange.Font.Name = fontName;
-                formatRange.Font.Size = 12;
-                formatRange.Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
-                formatRange.Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
-                formatRange.Value = "Tp.HCM , ngày " + lk_NgayIn.DateTime.Day.ToString() + " tháng " + lk_NgayIn.DateTime.Month.ToString() + " năm " + lk_NgayIn.DateTime.Year.ToString() + "";
-                rowCnt++;
-                formatRange = oSheet.get_Range("E" + rowCnt + "");
-                formatRange.Value = "P.TCLĐ";
-                formatRange.Font.Bold = true;
-                formatRange.Font.Name = fontName;
-                formatRange.Font.Size = 12;
-                formatRange.Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
-                formatRange.Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
-                formatRange = oSheet.get_Range("K" + rowCnt + "", "" + lastColumn + "" + rowCnt + "");
-                formatRange.Merge();
-                formatRange.Font.Bold = true;
-                formatRange.Font.Name = fontName;
-                formatRange.Font.Size = 12;
-                formatRange.Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
-                formatRange.Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
-                formatRange.Value = "Tổng giám đốc";
-
 
                 ////dịnh dạng
                 ////Commons.Modules.MExcel.ThemDong(oSheet, Microsoft.Office.Interop.Excel.XlInsertShiftDirection.xlShiftDown, 1, 7);
@@ -800,6 +810,7 @@ namespace Vs.HRM
                 //// filter
                 //oSheet.Application.ActiveWindow.SplitColumn = 4;
                 //oSheet.Application.ActiveWindow.FreezePanes = true;
+                this.Cursor = Cursors.Default;
                 oXL.Visible = true;
                 oXL.UserControl = true;
 
@@ -808,6 +819,7 @@ namespace Vs.HRM
             }
             catch (Exception ex)
             {
+                this.Cursor = Cursors.Default;
                 System.Windows.MessageBox.Show(ex.Message);
             }
         }

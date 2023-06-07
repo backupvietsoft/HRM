@@ -76,22 +76,29 @@ namespace Vs.TimeAttendance
         }
         private void ucPhepTon_Load(object sender, EventArgs e)
         {
-            Commons.Modules.sLoad = "0Load";
-            LoadThang();
+            try
+            {
 
-            string datetime = "01/01/" + Convert.ToString(cboNam.Text);
-            dNgayCuoiNam = Convert.ToDateTime(datetime);
-            datetime = "31/12/" + Convert.ToString(cboNam.Text);
-            dNgayCuoiNam = Convert.ToDateTime(datetime);
 
-            DataTable dt = new DataTable();
-            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboDON_VI", Commons.Modules.UserName, Commons.Modules.TypeLanguage, 0));
-            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboDV, dt, "ID_DV", "TEN_DV", "TEN_DV");
-            Commons.Modules.ObjSystems.LoadCboXiNghiep(cboDV, cboXN);
-            Commons.Modules.ObjSystems.LoadCboTo(cboDV, cboXN, cboTo);
-            LoadData(bThem);
-            Commons.Modules.sLoad = "";
-            enableButon(true);
+                Commons.Modules.sLoad = "0Load";
+                LoadThang();
+
+                string datetime = "01/01/" + Convert.ToString(cboNam.Text);
+                dNgayCuoiNam = Convert.ToDateTime(datetime);
+                datetime = "31/12/" + Convert.ToString(cboNam.Text);
+                dNgayCuoiNam = Convert.ToDateTime(datetime);
+
+                DataTable dt = new DataTable();
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboDON_VI", Commons.Modules.UserName, Commons.Modules.TypeLanguage, 0));
+                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboDV, dt, "ID_DV", "TEN_DV", "TEN_DV");
+                Commons.Modules.ObjSystems.LoadCboXiNghiep(cboDV, cboXN);
+                Commons.Modules.ObjSystems.LoadCboTo(cboDV, cboXN, cboTo);
+                LoadData(bThem);
+                Commons.Modules.sLoad = "";
+                enableButon(true);
+                Commons.Modules.ObjSystems.SetPhanQuyen(windowsUIButton);
+            }
+            catch { }
         }
         private void cboDV_EditValueChanged(object sender, EventArgs e)
         {
@@ -194,7 +201,7 @@ namespace Vs.TimeAttendance
                         {
                             string sBT = "sBTPhepTon" + Commons.Modules.iIDUser;
                             //tạo bảng tạm
-                            Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBT, Commons.Modules.ObjSystems.GetDataTableMultiSelect(grdPhepTon,grvPhepTon), "");
+                            Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBT, Commons.Modules.ObjSystems.GetDataTableMultiSelect(grdPhepTon, grvPhepTon), "");
 
                             System.Data.SqlClient.SqlConnection conn;
                             conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
@@ -536,7 +543,7 @@ namespace Vs.TimeAttendance
                 dt.AsEnumerable().Where(row1 => dt1.AsEnumerable()
                                                          .Select(r => r.Field<Int64>("ID_CN"))
                                                          .Any(x => x == row1.Field<Int64>("ID_CN"))
-                                                         ).ToList<DataRow>().ForEach(r => r["PHEP_CON_LAI"] =  Convert.ToDouble(r["PHEP_TON"]) - (data));
+                                                         ).ToList<DataRow>().ForEach(r => r["PHEP_CON_LAI"] = Convert.ToDouble(r["PHEP_TON"]) - (data));
                 dt.AcceptChanges();
             }
             catch
@@ -553,7 +560,7 @@ namespace Vs.TimeAttendance
                 {
                     int irow = e.HitInfo.RowHandle;
                     e.Menu.Items.Clear();
-                    
+
                     if (windowsUIButton.Buttons[0].Properties.Visible) return;
                     if (grvPhepTon.FocusedColumn.FieldName.ToString() != "PHEP_THANH_TOAN") return;
                     DevExpress.Utils.Menu.DXMenuItem itemCapNhatAll = MCreateMenuCapNhatAll(view, irow);
@@ -574,7 +581,7 @@ namespace Vs.TimeAttendance
             {
                 frmImportPhepTon frm = new frmImportPhepTon();
                 frm.Nam = Convert.ToInt32(cboNam.Text);
-                if(frm.ShowDialog() == DialogResult.OK)
+                if (frm.ShowDialog() == DialogResult.OK)
                 {
                     LoadData(bThem);
                 }

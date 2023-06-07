@@ -30,6 +30,37 @@ namespace Vs.HRM
             InitializeComponent();
             Commons.Modules.ObjSystems.ThayDoiNN(this, Root, windowsUIButton);
         }
+        private void frmImportNhanSu_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                sCheck = Commons.Modules.ObjSystems.getCheckImport();
+                if (sCheck != "")
+                {
+                    string[] sArray = sCheck.Split(',');
+                    DateTime datOld;
+                    datOld = Convert.ToDateTime(sArray[0]).AddHours(1);
+                    DateTime datCurren = DateTime.Now;
+                    try
+                    {
+                        datCurren = Convert.ToDateTime(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT GETDATE()"));
+                    }
+                    catch { }
+                    if (datOld < datCurren)
+                    {
+                        Commons.Modules.ObjSystems.setCheckImport(0);
+                    }
+                    else
+                    {
+                        XtraMessageBox.Show("User " + sArray[2] + " " + Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgdangimportdulieu"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        this.Close();
+                    }
+                }
+                if (!Commons.Modules.ObjSystems.setCheckImport(1)) this.Close();
+            }
+            catch { }
+        }
+
         private void btnFile_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
             //try
@@ -613,8 +644,9 @@ namespace Vs.HRM
                     errorCount++;
                 }
                 col = 3;
+                
                 //Tên 
-                if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, true, 20, this.Name))
+                if (!Commons.Modules.MExcel.KiemDuLieu(grvData, dr, col, Commons.Modules.KyHieuDV == "NB" ? false : true, 20, this.Name))
                 {
                     errorCount++;
                 }
@@ -1256,7 +1288,6 @@ namespace Vs.HRM
                 DialogResult res = XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDuLieuSanSangImport"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (res == DialogResult.Yes)
                 {
-
                     string sbt = "sBTUV" + Commons.Modules.iIDUser;
                     try
                     {
@@ -1766,36 +1797,6 @@ namespace Vs.HRM
             }
             catch { }
             return null;
-        }
-        private void frmImportNhanSu_Load(object sender, EventArgs e)
-        {
-            try
-            {
-                sCheck = Commons.Modules.ObjSystems.getCheckImport();
-                if (sCheck != "")
-                {
-                    string[] sArray = sCheck.Split(',');
-                    DateTime datOld;
-                    datOld = Convert.ToDateTime(sArray[0]).AddHours(1);
-                    DateTime datCurren = DateTime.Now;
-                    try
-                    {
-                        datCurren = Convert.ToDateTime(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT GETDATE()"));
-                    }
-                    catch { }
-                    if (datOld < datCurren)
-                    {
-                        Commons.Modules.ObjSystems.setCheckImport(0);
-                    }
-                    else
-                    {
-                        XtraMessageBox.Show("User " + sArray[2] + " " + Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgdangimportdulieu"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        this.Close();
-                    }
-                }
-                if (!Commons.Modules.ObjSystems.setCheckImport(1)) this.Close();
-            }
-            catch { }
         }
         public string SaveFiles(string MFilter)
         {

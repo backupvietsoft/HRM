@@ -60,6 +60,7 @@ namespace Vs.TimeAttendance
             Commons.Modules.ObjSystems.LoadCboTo(cboDonVi, cboXiNghiep, cboTo);
             LoadData();
             EnableButon(isAdd);
+            Commons.Modules.ObjSystems.SetPhanQuyen(btnALL);
             Commons.Modules.sLoad = "";
         }
 

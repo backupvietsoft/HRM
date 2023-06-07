@@ -29,14 +29,19 @@ namespace Vs.Payroll
         //sự kiên load form
         private void frmNhapDLKhoiTaoTLNV_Load(object sender, EventArgs e)
         {
-            Commons.Modules.sLoad = "0Load";
-            tabControl_SelectedPageChanged(null, null);
-            VisibleButton(true);
-            foreach (ToolStripMenuItem item in contextMenuStrip1.Items)
+            try
             {
-                item.Text = Commons.Modules.ObjLanguages.GetLanguage(this.Name, item.Name);
+                Commons.Modules.sLoad = "0Load";
+                tabControl_SelectedPageChanged(null, null);
+                VisibleButton(true);
+                foreach (ToolStripMenuItem item in contextMenuStrip1.Items)
+                {
+                    item.Text = Commons.Modules.ObjLanguages.GetLanguage(this.Name, item.Name);
+                }
+                Commons.Modules.sLoad = "";
+                Commons.Modules.ObjSystems.SetPhanQuyen(windowsUIButton);
             }
-            Commons.Modules.sLoad = "";
+            catch { }
         }
 
         private void windowsUIButton_ButtonClick(object sender, ButtonEventArgs e)
@@ -801,7 +806,7 @@ namespace Vs.Payroll
                 cbo.BeforePopup += cbo1_BeforePopup;
 
                 DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit cbo1 = new DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit();
-                Commons.Modules.ObjSystems.AddCombSearchLookUpEdit(cbo1, "ID_TO", "TEN_TO", "ID_TO", grvPTPhuChuyen, Commons.Modules.ObjSystems.DataTo(ID_DV,-1,false), "frmPTPhuChuyen");
+                Commons.Modules.ObjSystems.AddCombSearchLookUpEdit(cbo1, "ID_TO", "TEN_TO", "ID_TO", grvPTPhuChuyen, Commons.Modules.ObjSystems.DataTo(ID_DV, -1, false), "frmPTPhuChuyen");
             }
             catch { }
         }
@@ -917,7 +922,7 @@ namespace Vs.Payroll
 
         private void VisibleButton(bool visible)
         {
-            if(iLoai == 1)
+            if (iLoai == 1)
             {
                 tabPhanBoLuong.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
                 tabPhanTramThuongToTruong.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
@@ -1363,7 +1368,7 @@ namespace Vs.Payroll
             e.ExceptionMode = DevExpress.XtraEditors.Controls.ExceptionMode.NoAction;
         }
 
-        
+
         #endregion
 
 

@@ -37,11 +37,6 @@ namespace Vs.TimeAttendance
             dNgayIn.EditValue = DateTime.Today;
             Commons.OSystems.SetDateEditFormat(dNgayIn);
             Commons.Modules.sLoad = "";
-            if(Commons.Modules.KyHieuDV == "NB" || Commons.Modules.KyHieuDV == "NC" || Commons.Modules.KyHieuDV == "SB" || Commons.Modules.KyHieuDV == "HN")
-            {
-                rdo_ChonBaoCao.Properties.Items.Remove(rdo_ChonBaoCao.Properties.Items.Where(x => x.Tag.ToString() == "rdo_BieuMauLamThemGio").FirstOrDefault());
-                rdo_ChonBaoCao.SelectedIndex = 0;
-            }    
         }
         //sự kiện các nút xử lí
         private void windowsUIButton_ButtonClick(object sender, DevExpress.XtraBars.Docking2010.ButtonEventArgs e)

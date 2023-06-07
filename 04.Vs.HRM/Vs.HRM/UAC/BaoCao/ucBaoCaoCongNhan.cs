@@ -35,11 +35,12 @@ namespace Vs.HRM
             {
                 case "NB":
                     {
-                        this.chkInAll.Visible = false;
-                        this.lblInTatCa.Visible = false;
+                        this.chkInAll.Visible = true;
+                        this.lblInTatCa.Visible = true;
+                        chkInAll.Checked = true;
                         break;
                     }
-                case "HN":
+                default:
                     {
                         this.chkInAll.Visible = false;
                         this.lblInTatCa.Visible = false;
@@ -211,15 +212,7 @@ namespace Vs.HRM
                                 }
                             default:
                                 {
-                                    ////DataTable dt = new DataTable();
-                                    ////dt = (DataTable)grdChonCot.DataSource;
-                                    ////if (dt.AsEnumerable().Where(x => x["CHON"].ToString() == "1").Count() == 0)
-                                    ////{
-                                    ////    XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgBanChuaChonCotIn"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                    ////    return;
-                                    ////}
-                                    ////DanhSachNhanVien_Chung();
-                                    ////break
+                                    
                                     if (chkInAll.Checked == true)
                                     {
                                         DanhSachCanBoCongNhanVien();
@@ -281,6 +274,7 @@ namespace Vs.HRM
                 Commons.Modules.sLoad = "";
                 EnabledButton(true);
                 rdoChonBC_SelectedIndexChanged(null, null);
+                Commons.Modules.ObjSystems.SetPhanQuyen(windowsUIButton);
             }
             catch { }
         }
@@ -338,7 +332,6 @@ namespace Vs.HRM
             Commons.Modules.ObjSystems.LoadCboXiNghiep(lkDonVi, lkXiNghiep);
             Commons.Modules.ObjSystems.LoadCboTo(lkDonVi, lkXiNghiep, lkTo);
         }
-
         private void lkXiNghiep_EditValueChanged(object sender, EventArgs e)
         {
             if (Commons.Modules.sLoad == "0Load") return;
@@ -662,21 +655,9 @@ namespace Vs.HRM
                 if (dsCol.IndexOf("LICH_SU_HD") != -1)
                 {
 
-                    conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
-                    conn.Open();
-
-                    System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptDSCongNhan_Chung", conn);
-
-                    cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
-                    cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
-                    cmd.Parameters.Add("@DVi", SqlDbType.Int).Value = lkDonVi.EditValue;
-                    cmd.Parameters.Add("@XN", SqlDbType.Int).Value = lkXiNghiep.EditValue;
-                    cmd.Parameters.Add("@TO", SqlDbType.Int).Value = lkTo.EditValue;
-                    cmd.Parameters.Add("@DNGAY", SqlDbType.DateTime).Value = NgayIn.DateTime;
-                    cmd.Parameters.Add("@Loai", SqlDbType.Int).Value = rdoChonBC.SelectedIndex;
-                    cmd.Parameters.Add("@iCot1", SqlDbType.Int).Value = 0;
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    int SLHDMax = Convert.ToInt32(cmd.ExecuteScalar());
+                    int SLHDMax = 0;
+                    string sSQL = "SELECT MAX(T.SLHD) FROM (SELECT DISTINCT T1.ID_CN,COUNT(*) SLHD FROM dbo.HOP_DONG_LAO_DONG T1 INNER JOIN dbo.MGetListNhanSuToDate('"+Commons.Modules.UserName+"',"+Commons.Modules.TypeLanguage+","+ lkDonVi.EditValue + ","+lkXiNghiep.EditValue+","+lkTo.EditValue+",'"+ NgayIn.DateTime.ToString("MM/dd/yyyy") + "') T3 ON T3.ID_CN = T1.ID_CN GROUP BY T1.ID_CN) T";
+                    SLHDMax = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, sSQL));
                     string sBT = "sBTrptBCCN" + Commons.Modules.iIDUser;
                     Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBT, dt, "");
                     dt = new DataTable();
@@ -886,13 +867,11 @@ namespace Vs.HRM
                                 rowBD_XN = 1;
                             }
                             rowBD = rowBD + dr_Cu + rowBD_XN;
-                            //rowCnt = rowCnt + 6 + dr_Cu;
                             rowCnt = rowBD + current_dr - 1;
 
                             // Tạo group tổ
                             Range row_groupXI_NGHIEP_Format = oSheet.get_Range("A" + rowBD + "".ToString(), lastColumn + "" + rowBD + "".ToString()); //27 + 31
                             row_groupXI_NGHIEP_Format.Interior.Color = Color.FromArgb(146, 208, 80);
-                            row_groupXI_NGHIEP_Format.Merge();
                             oSheet.Cells[rowBD, 1] = TEN_TO[j].ToString();
                             oSheet.Range[oSheet.Cells[Convert.ToInt32(rowBD), 1], oSheet.Cells[Convert.ToInt32(rowBD), 1]].Font.Bold = true;
 
@@ -925,11 +904,11 @@ namespace Vs.HRM
                                     formatRange.NumberFormat = "0";
                                     try { formatRange.TextToColumns(Type.Missing, Excel.XlTextParsingType.xlDelimited, Excel.XlTextQualifier.xlTextQualifierDoubleQuote); } catch { }
                                 }
-                                else if (dt.Rows[col - 1]["DINH_DANG"].ToString() == "Text")
-                                {
-                                    formatRange.NumberFormat = "@";
-                                    try { formatRange.TextToColumns(Type.Missing, Excel.XlTextParsingType.xlDelimited, Excel.XlTextQualifier.xlTextQualifierDoubleQuote); } catch { }
-                                }
+                                //else if (dt.Rows[col - 1]["DINH_DANG"].ToString() == "Text")
+                                //{
+                                //    formatRange.NumberFormat = "@";
+                                //    try { formatRange.TextToColumns(Type.Missing, Excel.XlTextParsingType.xlDelimited, Excel.XlTextQualifier.xlTextQualifierDoubleQuote); } catch { }
+                                //}
                             }
                          
                             dr_Cu = current_dr;
@@ -1051,9 +1030,9 @@ namespace Vs.HRM
                     SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "DELETE dbo.MAU_BC_NHAN_SU WHERE ID_TPL = " + Convert.ToInt64(grvMauBC.GetFocusedRowCellValue("ID_TPL")) + "");
                     grvMauBC.DeleteSelectedRows();
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    Commons.Modules.ObjSystems.msgChung(Commons.ThongBao.msgDuLieuDangSuDung);
+                    Commons.Modules.ObjSystems.MsgError(ex.Message);
                 }
             }
         }
@@ -1713,18 +1692,14 @@ namespace Vs.HRM
                 dt.TableName = "DA_TA";
 
                 // Format for an Excel file
-                SaveExcelFile = SaveFiles("Excel Workbook |*.xlsx|Excel 97-2003 Workbook |*.xls|Word Document |*.docx|Rich Text Format |*.rtf|PDF File |*.pdf|Web Page |*.html|Single File Web Page |*.mht");
-                if (SaveExcelFile == "")
-                {
-                    return;
-                }
-
+          
                 //Init object to work with Excel
                 Excel.Application oXL;
                 Excel.Workbook oWB;
                 Excel.Worksheet oSheet;
                 oXL = new Excel.Application();
-                oXL.Visible = true;
+                oXL.Visible = false;
+                this.Cursor = Cursors.WaitCursor;
 
                 oWB = (Excel.Workbook)(oXL.Workbooks.Add(Missing.Value));
                 oSheet = oWB.ActiveSheet;
@@ -1821,20 +1796,21 @@ namespace Vs.HRM
                 formatRange12.HorizontalAlignment = Excel.XlHAlign.xlHAlignRight;
                 formatRange12.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
 
+                this.Cursor = Cursors.Default;
                 oXL.Visible = true;
                 oXL.UserControl = true;
 
-                oWB.SaveAs(SaveExcelFile, AccessMode: Excel.XlSaveAsAccessMode.xlShared);
+               
 
 
             }
             catch (Exception ex)
             {
+                this.Cursor = Cursors.Default;
                 throw ex;
             }
         }
         #endregion
-
         private void grvMauBC_DoubleClick(object sender, EventArgs e)
         {
             try

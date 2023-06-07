@@ -70,21 +70,26 @@ namespace Vs.TimeAttendance
         }
         private void ucPhepThang_Load(object sender, EventArgs e)
         {
-            Commons.Modules.sLoad = "0Load";
-            if (Commons.Modules.KyHieuDV == "DM")
+            try
             {
-                ItemForNgayCongQuyDinh.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                Commons.Modules.sLoad = "0Load";
+                if (Commons.Modules.KyHieuDV == "DM")
+                {
+                    ItemForNgayCongQuyDinh.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                }
+                txtNgayCongQD.EditValue = 208;
+                LoadThang();
+                DataTable dt = new DataTable();
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboDON_VI", Commons.Modules.UserName, Commons.Modules.TypeLanguage, 0));
+                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboDV, dt, "ID_DV", "TEN_DV", "TEN_DV");
+                Commons.Modules.ObjSystems.LoadCboXiNghiep(cboDV, cboXN);
+                Commons.Modules.ObjSystems.LoadCboTo(cboDV, cboXN, cboTo);
+                LoadGrdDiemThang();
+                Commons.Modules.sLoad = "";
+                enableButon(true);
+                Commons.Modules.ObjSystems.SetPhanQuyen(windowsUIButton);
             }
-            txtNgayCongQD.EditValue = 208;
-            LoadThang();
-            DataTable dt = new DataTable();
-            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboDON_VI", Commons.Modules.UserName, Commons.Modules.TypeLanguage, 0));
-            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboDV, dt, "ID_DV", "TEN_DV", "TEN_DV");
-            Commons.Modules.ObjSystems.LoadCboXiNghiep(cboDV, cboXN);
-            Commons.Modules.ObjSystems.LoadCboTo(cboDV, cboXN, cboTo);
-            LoadGrdDiemThang();
-            Commons.Modules.sLoad = "";
-            enableButon(true);
+            catch { }
         }
         private void cboDV_EditValueChanged(object sender, EventArgs e)
         {
@@ -182,8 +187,32 @@ namespace Vs.TimeAttendance
                     {
                         try
                         {
+                            string sSP = "";
+                            switch (Commons.Modules.KyHieuDV)
+                            {
+                                case "DM":
+                                    {
+                                        sSP = "spTinhThuongChuyenCanThang_DM";
+                                        break;
+                                    }
+                                case "NB":
+                                    {
+                                        sSP = "spTinhDiemThang_NB";
+                                        break;
+                                    }
+                                case "NC":
+                                    {
+                                        sSP = "spTinhDiemThang_NC";
+                                        break;
+                                    }
+                                default:
+                                    {
+                                        sSP = "spTinhDiemThang";
+                                        break;
+                                    }
+                            }
                             DataTable dt = new DataTable();
-                            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, Commons.Modules.KyHieuDV == "DM" ? "spTinhThuongChuyenCanThang_DM" : Commons.Modules.KyHieuDV == "NB" ? "spTinhDiemThang_NB" : Commons.Modules.KyHieuDV == "NC" ? "spTinhDiemThang_NC" : "spTinhDiemThang", Commons.Modules.UserName, Commons.Modules.TypeLanguage, Convert.ToInt32(cboDV.EditValue), Convert.ToInt32(cboXN.EditValue), Convert.ToInt32(cboTo.EditValue), Convert.ToInt32(txtNgayCongQD.EditValue), Convert.ToDateTime(cboThang.EditValue)));
+                            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, sSP, Commons.Modules.UserName, Commons.Modules.TypeLanguage, Convert.ToInt32(cboDV.EditValue), Convert.ToInt32(cboXN.EditValue), Convert.ToInt32(cboTo.EditValue), Convert.ToInt32(txtNgayCongQD.EditValue), Convert.ToDateTime(cboThang.EditValue)));
                             grdDiemThang.DataSource = dt;
                             enableButon(false);
                         }

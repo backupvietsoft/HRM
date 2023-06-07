@@ -317,9 +317,10 @@ namespace Vs.HRM
             Commons.OSystems.SetDateEditFormat(lk_NgayIn);
             txtNam.Text = DateTime.Now.Year.ToString();
             lk_NgayIn.EditValue = DateTime.Today;
-            rdoChonBaoCao.EditValue= 0;
+            rdoChonBaoCao.SelectedIndex= 0;
             rdo_ChonThang.SelectedIndex = 0;
             Commons.Modules.sLoad = "";
+            rdoChonBaoCao_SelectedIndexChanged(null,null);
         }
 
         private void LK_DON_VI_EditValueChanged(object sender, EventArgs e)

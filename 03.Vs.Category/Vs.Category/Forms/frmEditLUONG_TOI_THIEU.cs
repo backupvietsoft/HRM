@@ -36,7 +36,7 @@ namespace Vs.Category
                 DataTable dtTmp = new DataTable();
                 dtTmp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSql));
                 NGAY_QDDateEdit.EditValue = Convert.ToDateTime(dtTmp.Rows[0]["NGAY_QD"].ToString());
-                ID_DVSearchLookUpEdit.EditValue = dtTmp.Rows[0]["ID_DV"].ToString();
+                ID_DVSearchLookUpEdit.EditValue = Convert.ToInt64(dtTmp.Rows[0]["ID_DV"]);
                 LUONG_TOI_THIEUTextEdit.EditValue = string.IsNullOrEmpty(dtTmp.Rows[0]["LUONG_TOI_THIEU"].ToString()) ? 0 : Convert.ToDecimal(dtTmp.Rows[0]["LUONG_TOI_THIEU"]);
                 LUONG_TOI_THIEU_NNTextEdit.EditValue = string.IsNullOrEmpty(dtTmp.Rows[0]["LUONG_TOI_THIEU_NN"].ToString()) ? 0 : Convert.ToDecimal(dtTmp.Rows[0]["LUONG_TOI_THIEU_NN"]);
                 txtMUC_GIAM_TRU.EditValue = string.IsNullOrEmpty(dtTmp.Rows[0]["MUC_GIAM_TRU"].ToString()) ? 0 : Convert.ToDecimal(dtTmp.Rows[0]["MUC_GIAM_TRU"]);

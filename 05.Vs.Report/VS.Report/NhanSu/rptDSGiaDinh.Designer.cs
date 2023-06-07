@@ -166,6 +166,7 @@
             this.xrTableCell2.StylePriority.UseTextAlignment = false;
             this.xrTableCell2.Text = "xrTableCell2";
             this.xrTableCell2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
+            this.xrTableCell2.TextFormatString = "{0:#}";
             this.xrTableCell2.Weight = 0.49043056829793641D;
             // 
             // xrTableCell3
@@ -279,7 +280,6 @@
             this.xrTableCell10.StylePriority.UseTextAlignment = false;
             this.xrTableCell10.Text = "xrTableCell10";
             this.xrTableCell10.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
-            this.xrTableCell10.TextFormatString = "{0:#,#}";
             this.xrTableCell10.Weight = 0.34402095176871561D;
             // 
             // lblTIEU_DE
@@ -459,38 +459,36 @@
             this.lblNguoiKy,
             this.lblNgay});
             this.ReportFooter.Dpi = 254F;
-            this.ReportFooter.HeightF = 152.4233F;
+            this.ReportFooter.HeightF = 152.4234F;
             this.ReportFooter.Name = "ReportFooter";
             this.ReportFooter.Tag = "rptDSThamGiaCongDoan";
             // 
             // lblNguoiKy
             // 
-            this.lblNguoiKy.AllowMarkupText = true;
-            this.lblNguoiKy.AutoWidth = true;
             this.lblNguoiKy.Dpi = 254F;
-            this.lblNguoiKy.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Bold);
-            this.lblNguoiKy.LocationFloat = new DevExpress.Utils.PointFloat(2144.75F, 88.71156F);
+            this.lblNguoiKy.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNguoiKy.LocationFloat = new DevExpress.Utils.PointFloat(1630.104F, 0F);
             this.lblNguoiKy.Multiline = true;
             this.lblNguoiKy.Name = "lblNguoiKy";
-            this.lblNguoiKy.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
-            this.lblNguoiKy.SizeF = new System.Drawing.SizeF(603.25F, 63.7117F);
+            this.lblNguoiKy.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 254F);
+            this.lblNguoiKy.SizeF = new System.Drawing.SizeF(963.5737F, 77.42321F);
             this.lblNguoiKy.StylePriority.UseFont = false;
+            this.lblNguoiKy.StylePriority.UsePadding = false;
             this.lblNguoiKy.StylePriority.UseTextAlignment = false;
-            this.lblNguoiKy.Text = "NGUOI_KY";
+            this.lblNguoiKy.Text = "lblTIEU_DE";
             this.lblNguoiKy.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
             // 
             // lblNgay
             // 
-            this.lblNgay.AllowMarkupText = true;
-            this.lblNgay.AutoWidth = true;
             this.lblNgay.Dpi = 254F;
-            this.lblNgay.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Bold);
-            this.lblNgay.LocationFloat = new DevExpress.Utils.PointFloat(2144.75F, 24.99985F);
+            this.lblNgay.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNgay.LocationFloat = new DevExpress.Utils.PointFloat(1630.104F, 77.42325F);
             this.lblNgay.Multiline = true;
             this.lblNgay.Name = "lblNgay";
-            this.lblNgay.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
-            this.lblNgay.SizeF = new System.Drawing.SizeF(603.25F, 63.71169F);
+            this.lblNgay.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 254F);
+            this.lblNgay.SizeF = new System.Drawing.SizeF(963.5735F, 75.00011F);
             this.lblNgay.StylePriority.UseFont = false;
+            this.lblNgay.StylePriority.UsePadding = false;
             this.lblNgay.StylePriority.UseTextAlignment = false;
             this.lblNgay.Text = "NGAY";
             this.lblNgay.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
@@ -531,7 +529,7 @@
             this.ReportUnit = DevExpress.XtraReports.UI.ReportUnit.TenthsOfAMillimeter;
             this.SnapGridSize = 25F;
             this.Tag = "rptDSGiaDinh";
-            this.Version = "20.1";
+            this.Version = "22.1";
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
@@ -559,8 +557,6 @@
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell4;
         private DevExpress.XtraReports.UI.ReportFooterBand ReportFooter;
         private DevExpress.XtraReports.UI.ReportHeaderBand ReportHeader;
-        private DevExpress.XtraReports.UI.XRLabel lblNguoiKy;
-        private DevExpress.XtraReports.UI.XRLabel lblNgay;
         private DevExpress.XtraReports.UI.XRTableCell Title_To;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell5;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell6;
@@ -573,5 +569,7 @@
         private DevExpress.XtraReports.UI.XRTableCell Title_Tuoi;
         private DevExpress.XtraReports.UI.XRPageInfo NONNpage;
         private DevExpress.XtraReports.UI.XRSubreport xrSubreport1;
+        private DevExpress.XtraReports.UI.XRLabel lblNguoiKy;
+        private DevExpress.XtraReports.UI.XRLabel lblNgay;
     }
 }

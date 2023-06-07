@@ -28,7 +28,7 @@ namespace Vs.Category
         private void frmEditXI_NGHIEP_Load(object sender, EventArgs e)
         {
             ItemForTruongXiNghiep.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
-            if (Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString() == "DM")
+            if (Commons.Modules.KyHieuDV == "DM")
             {
                 DataTable dt = new DataTable();
                 dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboCongNhan", Commons.Modules.UserName, Commons.Modules.TypeLanguage, 3));
@@ -110,7 +110,7 @@ namespace Vs.Category
         private void LoadText()
         {
             string sSql = "";
-            sSql = "SELECT ID_XN, ID_DV, MS_XN, TEN_XN, TEN_XN_A, TEN_XN_H, STT_XN, ID_CN FROM dbo.XI_NGHIEP WHERE ID_XN =  " + iId.ToString();
+            sSql = "SELECT ID_XN, ID_DV, MS_XN, TEN_XN, TEN_XN_A, TEN_XN_H, STT_XN, ID_CN, ISNULL(ACTIVE_XN,0) ACTIVE_XN FROM dbo.XI_NGHIEP WHERE ID_XN =  " + iId.ToString();
             DataTable dtTmp = new DataTable();
             dtTmp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSql));
             if (dtTmp.Rows.Count <= 0) return;
@@ -123,6 +123,7 @@ namespace Vs.Category
             TEN_XN_HTextEdit.EditValue = dtTmp.Rows[0]["TEN_XN_H"];
             STT_XNTextEdit.EditValue = dtTmp.Rows[0]["STT_XN"];
             cboID_CN.EditValue = dtTmp.Rows[0]["ID_CN"].ToString() == "" ? -1 : Convert.ToInt64(dtTmp.Rows[0]["ID_CN"]);
+            chkActive.EditValue = dtTmp.Rows[0]["ACTIVE_XN"];
         }
 
         private void LoadTextNull()
@@ -136,6 +137,7 @@ namespace Vs.Category
                 TEN_XN_HTextEdit.EditValue = String.Empty;
                 STT_XNTextEdit.EditValue = String.Empty;
                 cboID_CN.EditValue = -1;
+                chkActive.Checked = false;
                 MS_XNTextEdit.Focus();
             }
             catch { }
@@ -153,7 +155,7 @@ namespace Vs.Category
                         {
                             if (!dxValidationProvider1.Validate()) return;
                             if (KiemTrung()) return;
-                            Commons.Modules.sId = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spUpdateXiNghiep", (bAddEdit ? -1 : iId), ID_DVSearchLookUpEdit.EditValue, MS_XNTextEdit.EditValue, TEN_XNTextEdit.EditValue, TEN_XN_ATextEdit.EditValue, TEN_XN_HTextEdit.EditValue, STT_XNTextEdit.EditValue, Convert.ToInt64(cboID_CN.Text == "" ? cboID_CN.EditValue = null : cboID_CN.EditValue)).ToString();
+                            Commons.Modules.sId = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spUpdateXiNghiep", (bAddEdit ? -1 : iId), ID_DVSearchLookUpEdit.EditValue, MS_XNTextEdit.EditValue, TEN_XNTextEdit.EditValue, TEN_XN_ATextEdit.EditValue, TEN_XN_HTextEdit.EditValue, STT_XNTextEdit.EditValue, Convert.ToInt64(cboID_CN.Text == "" ? cboID_CN.EditValue = null : cboID_CN.EditValue), chkActive.EditValue).ToString();
                             if (bAddEdit)
                             {
                                 if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msg_ThemThanhCongBanCoMuonTiepTuc"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)

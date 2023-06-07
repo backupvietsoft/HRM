@@ -18,11 +18,24 @@ using DataTable = System.Data.DataTable;
 using DevExpress.Utils.Menu;
 using System.Diagnostics;
 using System.Drawing.Drawing2D;
+using NPOI.HSSF.Record.Chart;
 
 namespace Vs.Payroll
 {
     public partial class frmQTCN : DevExpress.XtraEditors.XtraUserControl
     {
+
+        public static frmQTCN _instance;
+        public static frmQTCN Instance
+        {
+            get
+            {
+                if (_instance == null)
+                    _instance = new frmQTCN();
+                return _instance;
+            }
+        }
+
         private bool bCheckCopy = false;
         private bool isAdd = false;
         private string ChuoiKT = "";
@@ -35,6 +48,7 @@ namespace Vs.Payroll
         public frmQTCN()
         {
             InitializeComponent();
+            Commons.Modules.ObjSystems.ThayDoiNN(this, windowsUIButton);
         }
 
         private void frmQTCN_Load(object sender, EventArgs e)
@@ -48,17 +62,21 @@ namespace Vs.Payroll
                 Commons.OSystems.SetDateEditFormat(datDNgay);
                 datTNgay.EditValue = DateTime.Now.AddMonths(-4);
                 datDNgay.EditValue = DateTime.Now;
-                LoadCboDoiTac();
-                LoadCboHangHoa();
-                LoadCboTo();
-                LoadCboCum();
-                LoadData();
-                rdoXemCuLapMoi.SelectedIndex = 1;
+
+
+                datThang.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+                datThang.Properties.DisplayFormat.FormatString = "MM/yyyy";
+                datThang.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+                datThang.Properties.EditFormat.FormatString = "MM/yyyy";
+                datThang.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.DateTimeAdvancingCaret;
+                datThang.Properties.Mask.EditMask = "MM/yyyy";
+                datThang.DateTime = DateTime.Now;
             }
             catch (Exception ex) { XtraMessageBox.Show(ex.Message.ToString()); }
 
             Commons.Modules.sLoad = "";
-            Commons.Modules.ObjSystems.ThayDoiNN(this, windowsUIButton);
+            rdoXemCuLapMoi.SelectedIndex = 1;
+            Commons.Modules.ObjSystems.SetPhanQuyen(windowsUIButton);
         }
 
         private void LoadCboDoiTac()
@@ -140,8 +158,16 @@ namespace Vs.Payroll
                 dt = new DataTable();
                 dt = ds.Tables[2].Copy();
                 Commons.Modules.ObjSystems.MLoadCheckedComboBoxEdit(chkCboEditChuyen, dt, "ID_TO", "TEN_TO", "TEN_TO", true);
-                chkCboEditChuyen.SetEditValue(dt.Rows[0]["ID_TO"]);
-                //chkCboEditChuyen.EditValue
+                if (dt.Rows.Count > 0)
+                {
+                    chkCboEditChuyen.SetEditValue(Convert.ToString(dt.Rows[0]["ID_TO"]) + chkCboEditChuyen.Properties.SeparatorChar);
+                }
+                else
+                {
+                    chkCboEditChuyen.SetEditValue(0);
+                }
+                //chkCboEditChuyen.EditValue = dt.Rows[0]["ID_TO"];
+                //chkCboEditChuyen.Properties.Items[0].CheckState = CheckState.Checked;
                 //LoadCboCum(id_NHH);
             }
             catch (Exception ex) { }
@@ -183,6 +209,7 @@ namespace Vs.Payroll
                 cmd.Parameters.Add("@iLoai", SqlDbType.Int).Value = 1;
                 cmd.Parameters.Add("@ID_TO", SqlDbType.NVarChar).Value = chkCboEditChuyen.EditValue.ToString();
                 cmd.Parameters.Add("@ID_MH", SqlDbType.BigInt).Value = cboMH.Text == "" ? -99 : cboMH.EditValue;
+                cmd.Parameters.Add("@Thang", SqlDbType.Date).Value = datThang.DateTime;
                 cmd.CommandType = CommandType.StoredProcedure;
                 System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
                 DataSet ds = new DataSet();
@@ -240,19 +267,25 @@ namespace Vs.Payroll
 
         private void cboKH_EditValueChanged(object sender, EventArgs e)
         {
-            if (Commons.Modules.sLoad == "0Load") return;
-            LoadCboHangHoa();
-            LoadCboTo();
-            Commons.Modules.sLoad = "";
+            try
+            {
+                if (Commons.Modules.sLoad == "0Load") return;
+                Commons.Modules.sLoad = "0Load";
+                LoadCboHangHoa();
+                LoadCboTo();
+                Commons.Modules.sLoad = "";
+                chkCboEditChuyen_EditValueChanged(null, null);
+            }
+            catch { Commons.Modules.sLoad = ""; }
         }
 
         private void cboMH_EditValueChanged(object sender, EventArgs e)
         {
-            //if (rdoXemCuLapMoi.SelectedIndex == 1) return;
+            if (Commons.Modules.sLoad == "0Load") return;
+            Commons.Modules.sLoad = "0Load";
             LoadCboTo();
+            Commons.Modules.sLoad = "";
             chkCboEditChuyen_EditValueChanged(null, null);
-            //LoadCboCum(s);
-            //LoadData();
         }
         private void LocData()
         {
@@ -283,18 +316,40 @@ namespace Vs.Payroll
 
         private void SetButton(bool isAdd)
         {
-            windowsUIButton.Buttons[0].Properties.Visible = !isAdd;
-            windowsUIButton.Buttons[1].Properties.Visible = !isAdd;
-            windowsUIButton.Buttons[2].Properties.Visible = !isAdd;
-            windowsUIButton.Buttons[4].Properties.Visible = true;
-            windowsUIButton.Buttons[9].Properties.Visible = !isAdd;
+            if (Commons.Modules.ObjSystems.DataTinhTrangBangLuong(Convert.ToInt32(cboDV.EditValue), datThang.DateTime) == 2)
+            {
+                windowsUIButton.Buttons[0].Properties.Visible = false;
+                windowsUIButton.Buttons[1].Properties.Visible = false;
+                windowsUIButton.Buttons[2].Properties.Visible = false;
+                windowsUIButton.Buttons[3].Properties.Visible = false;
+                windowsUIButton.Buttons[4].Properties.Visible = false;
+                windowsUIButton.Buttons[6].Properties.Visible = false;
+                windowsUIButton.Buttons[11].Properties.Visible = true;
 
-            windowsUIButton.Buttons[3].Properties.Visible = isAdd;
-            windowsUIButton.Buttons[5].Properties.Visible = isAdd;
-            windowsUIButton.Buttons[6].Properties.Visible = isAdd;
-            windowsUIButton.Buttons[7].Properties.Visible = isAdd;
-            windowsUIButton.Buttons[8].Properties.Visible = isAdd;
+                windowsUIButton.Buttons[5].Properties.Visible = false;
+                windowsUIButton.Buttons[6].Properties.Visible = false;
+                windowsUIButton.Buttons[7].Properties.Visible = false;
+                windowsUIButton.Buttons[8].Properties.Visible = false;
+                windowsUIButton.Buttons[9].Properties.Visible = false;
+                windowsUIButton.Buttons[10].Properties.Visible = false;
+            }
+            else
+            {
+                windowsUIButton.Buttons[0].Properties.Visible = !isAdd;
+                windowsUIButton.Buttons[1].Properties.Visible = !isAdd;
+                windowsUIButton.Buttons[2].Properties.Visible = !isAdd;
+                windowsUIButton.Buttons[3].Properties.Visible = !isAdd;
+                windowsUIButton.Buttons[4].Properties.Visible = !isAdd;
+                windowsUIButton.Buttons[6].Properties.Visible = !isAdd;
+                windowsUIButton.Buttons[11].Properties.Visible = !isAdd;
 
+                windowsUIButton.Buttons[5].Properties.Visible = isAdd;
+                windowsUIButton.Buttons[6].Properties.Visible = isAdd;
+                windowsUIButton.Buttons[7].Properties.Visible = isAdd;
+                windowsUIButton.Buttons[8].Properties.Visible = isAdd;
+                windowsUIButton.Buttons[9].Properties.Visible = isAdd;
+                windowsUIButton.Buttons[10].Properties.Visible = isAdd;
+            }
             cboKH.Enabled = !isAdd;
             cboDV.Enabled = !isAdd;
             cboMH.Enabled = !isAdd;
@@ -303,6 +358,7 @@ namespace Vs.Payroll
             datTNgay.Enabled = !isAdd;
             datDNgay.Enabled = !isAdd;
             cboCum.Enabled = !isAdd;
+            datThang.Enabled = !isAdd;
         }
 
         int ttCD, ttChuyen;
@@ -331,6 +387,7 @@ namespace Vs.Payroll
                     cmd.Parameters.Add("@sBT", SqlDbType.NVarChar).Value = stbQT;
                     cmd.Parameters.Add("@ID_TO", SqlDbType.NVarChar).Value = chkCboEditChuyen.EditValue.ToString();
                     cmd.Parameters.Add("@ID_MH", SqlDbType.BigInt).Value = cboMH.EditValue;
+                    cmd.Parameters.Add("@Thang", SqlDbType.DateTime).Value = datThang.DateTime;
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.ExecuteNonQuery();
                 }
@@ -368,6 +425,18 @@ namespace Vs.Payroll
                 XtraUserControl ctl = new XtraUserControl();
                 switch (btn.Tag.ToString())
                 {
+                    case "copycongdoan":
+                        {
+                            frmCopyCongDoan frm = new frmCopyCongDoan();
+                            frm.iID_DV = Convert.ToInt32(cboDV.EditValue);
+                            frm.dNgay = datThang.DateTime;
+                            if (frm.ShowDialog() == DialogResult.OK)
+                            {
+                                Commons.Modules.ObjSystems.Alert(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgLuuThanhCong"), Commons.Form_Alert.enmType.Success);
+                                LoadData();
+                            }
+                            break;
+                        }
                     case "in":
                         {
                             //String sTongTGTK = "";
@@ -929,13 +998,12 @@ namespace Vs.Payroll
                             {
                                 Commons.Modules.ObjSystems.XoaTable(sBTQTCN);
                                 Commons.Modules.ObjSystems.XoaTable(sBTQTCN_Current);
+                                Commons.Modules.ObjSystems.MsgError(ex.Message);
                             }
                             break;
                         }
                     case "xoa":
                         {
-
-
                             DialogResult res = XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgDeleteDangKyLamThem"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgfrmThongBao"), MessageBoxButtons.YesNoCancel);
                             if (res == DialogResult.Yes)
                             {
@@ -948,9 +1016,12 @@ namespace Vs.Payroll
                                         XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDelDangSuDung"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                                         return;
                                     }
-                                    sSql = "DELETE QUI_TRINH_CONG_NGHE_CHI_TIET WHERE ID_TO = " + grvQT.GetFocusedRowCellValue("ID_TO") +
-                                                                            " AND ID_ORD = " + grvQT.GetFocusedRowCellValue("ID_ORD") + "";
+                                    string sBT = "sBTQTCN" + Commons.Modules.iIDUser;
+                                    Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBT, Commons.Modules.ObjSystems.ConvertDatatable(grdQT), "");
+
+                                    sSql = "DELETE QUI_TRINH_CONG_NGHE_CHI_TIET FROM dbo.QUI_TRINH_CONG_NGHE_CHI_TIET T1 INNER JOIN "+ sBT +" T2 ON T1.ID = T2.ID_CD";
                                     SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, sSql);
+                                    Commons.Modules.ObjSystems.XoaTable(sBT);
                                     LoadData();
                                 }
                                 catch
@@ -964,9 +1035,7 @@ namespace Vs.Payroll
                                 try
                                 {
                                     if (grvQT.RowCount == 0) { Commons.Modules.ObjSystems.msgChung(Commons.ThongBao.msgKhongCoDuLieuXoa); return; }
-                                    sSql = "DELETE QUI_TRINH_CONG_NGHE_CHI_TIET WHERE ID_TO = " + grvQT.GetFocusedRowCellValue("ID_TO") +
-                                                                            " AND ID_ORD = " + grvQT.GetFocusedRowCellValue("ID_ORD") +
-                                                                            " AND ID = '" + grvQT.GetFocusedRowCellValue("ID_CD") + "'";
+                                    sSql = "DELETE QUI_TRINH_CONG_NGHE_CHI_TIET WHERE ID = " + grvQT.GetFocusedRowCellValue("ID_CD") +"";
                                     SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, sSql);
                                     grvQT.DeleteSelectedRows();
                                 }
@@ -1096,10 +1165,6 @@ namespace Vs.Payroll
             {
                 lbl.Text = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "lblTongDonGia") + " 0";
             }
-        }
-        private void Save()
-        {
-
         }
         private void BorderAround(Microsoft.Office.Interop.Excel.Range range)
         {
@@ -1587,6 +1652,7 @@ namespace Vs.Payroll
                 cmd.Parameters.Add("@ID_TO", SqlDbType.NVarChar).Value = result.ToString();
                 cmd.Parameters.Add("@ID_MH", SqlDbType.BigInt).Value = cboMH.Text == "" ? -99 : cboMH.EditValue;
                 cmd.Parameters.Add("@ACTION", SqlDbType.NVarChar).Value = "DELETE";
+                cmd.Parameters.Add("@Thang", SqlDbType.DateTime).Value = datThang.DateTime;
                 cmd.CommandType = CommandType.StoredProcedure;
                 dt = new DataTable();
                 dt.Load(cmd.ExecuteReader());
@@ -1676,6 +1742,7 @@ namespace Vs.Payroll
                 cmd.Parameters.Add("@ID_TO", SqlDbType.NVarChar).Value = result.ToString();
                 cmd.Parameters.Add("@ID_MH", SqlDbType.BigInt).Value = cboMH.Text == "" ? -99 : cboMH.EditValue;
                 cmd.Parameters.Add("@ACTION", SqlDbType.NVarChar).Value = "UPDATE";
+                cmd.Parameters.Add("@Thang", SqlDbType.DateTime).Value = datThang.DateTime;
                 cmd.CommandType = CommandType.StoredProcedure;
                 dt = new DataTable();
                 dt.Load(cmd.ExecuteReader());
@@ -1736,6 +1803,7 @@ namespace Vs.Payroll
                 frm.iID_ORD = Convert.ToInt32(grvQT.GetFocusedRowCellValue("ID_CD")) == 0 ? Convert.ToInt32(cboMH.EditValue) : -1;
                 frm.dtTemp = new DataTable();
                 frm.dtTemp = Commons.Modules.ObjSystems.GetDataTableMultiSelect(grdQT, grvQT);
+                frm.datThang = datThang.DateTime;
                 if (frm.ShowDialog() == DialogResult.OK)
                 {
                     Commons.Modules.ObjSystems.Alert(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgCapNhatThanhCong"), Commons.Form_Alert.enmType.Success);
@@ -1786,6 +1854,7 @@ namespace Vs.Payroll
                 cmd.Parameters.Add("@bCot1", SqlDbType.Bit).Value = true;
                 cmd.Parameters.Add("@ID_TO", SqlDbType.NVarChar).Value = result.ToString();
                 cmd.Parameters.Add("@ID_MH", SqlDbType.BigInt).Value = cboMH.Text == "" ? -99 : cboMH.EditValue;
+                cmd.Parameters.Add("@Thang", SqlDbType.DateTime).Value = datThang.DateTime;
                 cmd.CommandType = CommandType.StoredProcedure;
                 dt = new DataTable();
                 dt.Load(cmd.ExecuteReader());
@@ -1842,6 +1911,7 @@ namespace Vs.Payroll
                 cmd.Parameters.Add("@bCot1", SqlDbType.Bit).Value = false;
                 cmd.Parameters.Add("@ID_TO", SqlDbType.NVarChar).Value = result.ToString();
                 cmd.Parameters.Add("@ID_MH", SqlDbType.BigInt).Value = cboMH.Text == "" ? -99 : cboMH.EditValue;
+                cmd.Parameters.Add("@Thang", SqlDbType.DateTime).Value = datThang.DateTime;
                 cmd.CommandType = CommandType.StoredProcedure;
                 dt = new DataTable();
                 dt.Load(cmd.ExecuteReader());
@@ -1863,12 +1933,17 @@ namespace Vs.Payroll
 
         private void cboDV_EditValueChanged(object sender, EventArgs e)
         {
-            if (Commons.Modules.sLoad == "0Load") return;
-            LoadCboDoiTac();
-            LoadCboHangHoa();
-
-            LoadCboTo();
-            chkCboEditChuyen_EditValueChanged(null, null);
+            try
+            {
+                if (Commons.Modules.sLoad == "0Load") return;
+                Commons.Modules.sLoad = "0Load";
+                LoadCboDoiTac();
+                LoadCboHangHoa();
+                LoadCboTo();
+                Commons.Modules.sLoad = "";
+                chkCboEditChuyen_EditValueChanged(null, null);
+            }
+            catch { Commons.Modules.sLoad = ""; }
         }
 
         private void grdQT_ProcessGridKey(object sender, KeyEventArgs e)
@@ -1904,11 +1979,8 @@ namespace Vs.Payroll
                     dtTempCopy = Commons.Modules.ObjSystems.GetDataTableMultiSelect(grdQT, grvQT);
                     bCheckCopy = true;
 
+                    Commons.Modules.ObjSystems.Alert("Copied", Commons.Form_Alert.enmType.Success);
                     XtraMessageBoxArgs args = new XtraMessageBoxArgs();
-                    args.AutoCloseOptions.Delay = 500;
-                    args.Caption = "";
-                    args.Text = "Copied";
-                    XtraMessageBox.Show(args).ToString();
                 }
                 if (e.Control && e.KeyCode == Keys.V)
                 {
@@ -1962,8 +2034,12 @@ namespace Vs.Payroll
                     datTNgay.Visible = false;
                     datDNgay.Visible = false;
                 }
+                if (Commons.Modules.sLoad == "0Load") return;
+                Commons.Modules.sLoad = "0Load";
+                LoadCboDoiTac();
                 LoadCboHangHoa();
                 LoadCboTo();
+                Commons.Modules.sLoad = "";
                 chkCboEditChuyen_EditValueChanged(null, null);
             }
             catch (Exception ex) { }
@@ -1984,10 +2060,17 @@ namespace Vs.Payroll
 
         private void chkCboEditChuyen_EditValueChanged(object sender, EventArgs e)
         {
+            if (Commons.Modules.sLoad == "0Load") return;
+            Commons.Modules.sLoad = "0Load";
+
+            // Code xử lý khi sự kiện EditValueChanged xảy ra ở đây
             LoadCboCum();
             LoadData();
             datNgayLap.DateTime = Convert.ToDateTime(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT TOP 1 NGAY_LAP FROM dbo.QUI_TRINH_CONG_NGHE_CHI_TIET WHERE ID = " + (grvQT.GetFocusedRowCellValue("ID_CD") == null ? -1 : Convert.ToInt64(grvQT.GetFocusedRowCellValue("ID_CD"))).ToString() + ""));
             datNgayLap.DateTime = datNgayLap.DateTime == DateTime.MinValue ? DateTime.Now : datNgayLap.DateTime;
+
+
+            Commons.Modules.sLoad = "";
         }
 
         private void grvQT_RowStyle(object sender, RowStyleEventArgs e)
@@ -2063,8 +2146,24 @@ namespace Vs.Payroll
             catch (Exception ex) { }
         }
 
+        private void cboThang_EditValueChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (Commons.Modules.sLoad == "0Load") return;
+                Commons.Modules.sLoad = "0Load";
+                LoadCboCum();
+                LoadData();
+                datNgayLap.DateTime = Convert.ToDateTime(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT TOP 1 NGAY_LAP FROM dbo.QUI_TRINH_CONG_NGHE_CHI_TIET WHERE ID = " + (grvQT.GetFocusedRowCellValue("ID_CD") == null ? -1 : Convert.ToInt64(grvQT.GetFocusedRowCellValue("ID_CD"))).ToString() + ""));
+                datNgayLap.DateTime = datNgayLap.DateTime == DateTime.MinValue ? DateTime.Now : datNgayLap.DateTime;
+                Commons.Modules.sLoad = "";
+            }
+            catch { }
+        }
+
         private void grvDSUngVien_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
         {
+            if (Commons.Modules.iPermission != 1) return;
             try
             {
                 DevExpress.XtraGrid.Views.Grid.GridView view = sender as DevExpress.XtraGrid.Views.Grid.GridView;

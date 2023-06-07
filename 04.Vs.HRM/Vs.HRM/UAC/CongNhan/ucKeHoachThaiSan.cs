@@ -747,5 +747,21 @@ namespace Vs.HRM
                     break;
             }
         }
+
+        private void grvNgay_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
+        {
+            try
+            {
+                GridView view = sender as GridView;
+
+                var row = view.GetFocusedDataRow();
+
+                DateTime ngay = Convert.ToDateTime(row["NGAY_KINH_CUOI"]);
+
+                row["NGAY_NGHI_TS"] = ngay.AddMonths(9).AddDays(10);
+            }
+            catch (Exception ex) { }
+
+        }
     }
 }

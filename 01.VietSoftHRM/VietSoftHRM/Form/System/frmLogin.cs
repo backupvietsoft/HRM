@@ -6,6 +6,9 @@ using System.Threading;
 using DevExpress.XtraEditors;
 using System.Windows.Forms;
 using DevExpress.LookAndFeel;
+using System.IO;
+using System.Data.SqlClient;
+using DevExpress.CodeParser;
 
 namespace VietSoftHRM
 {
@@ -72,11 +75,25 @@ namespace VietSoftHRM
         }
         private void FrmLogin_Load(object sender, EventArgs e)
         {
-            //Thread.Sleep(1000);
-            LoadcboDataBase();
-            LoadUserPass();
-            Commons.Modules.chamCongK = false;
-            Commons.Modules.ObjSystems.ThayDoiNN(this);
+            try
+            {
+
+                    DateTime dNgay = DateTime.Now;
+                if (Commons.Modules.ObjSystems.checkVerDemo(-1, -1, -1, out dNgay) && Commons.Modules.KyHieuDV == "DM")
+                {
+                    Commons.Modules.ObjSystems.MsgWarningVer();
+                    Application.Exit();
+                }
+                else
+                {
+                    //Thread.Sleep(1000);
+                    LoadcboDataBase();
+                    LoadUserPass();
+                    Commons.Modules.chamCongK = false;
+                    Commons.Modules.ObjSystems.ThayDoiNN(this);
+                }
+            }
+            catch { }
         }
         #endregion
 
@@ -111,6 +128,30 @@ namespace VietSoftHRM
                         dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSetUp));
                         Commons.Modules.iIDNhom = Convert.ToInt64(dt.Rows[0]["ID_NHOM"]);
                         Commons.Modules.bSetUp = Convert.ToBoolean(dt.Rows[0]["SET_UP"]);
+
+
+                        // cập nhật store SQL
+                        if (!Commons.Modules.ObjSystems.UpdateSQL("SQL"))
+                        {
+                            Commons.Modules.ObjSystems.MsgError(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "lblUpdateSQLKhongThanhCong"));
+                        }
+
+
+                        // mỗi lần đăng nhập vào sẽ xóa hết các file report trong thư mục report 
+                        try
+                        {
+                            DirectoryInfo d = new DirectoryInfo("Report"); //Assuming Test is your Folder
+                            FileInfo[] Files = d.GetFiles(); //Getting Text files
+                            foreach (FileInfo file in Files)
+                            {
+                                try
+                                {
+                                    file.Delete();
+                                }
+                                catch { }
+                            }
+                        }
+                        catch { }
                     }
                     catch
                     {
@@ -124,7 +165,7 @@ namespace VietSoftHRM
                     this.Close();
                 }
             }
-            catch 
+            catch (Exception ex)
             {
             }
         }
@@ -277,13 +318,20 @@ namespace VietSoftHRM
         }
         private void SaveDatabase()
         {
-            DataSet ds = new DataSet();
-            ds.ReadXml(AppDomain.CurrentDomain.BaseDirectory + "\\vsconfig.xml");
-            ds.Tables[0].Rows[0]["D"] = cbo_database.EditValue;
-            ds.WriteXml(AppDomain.CurrentDomain.BaseDirectory + "\\vsconfig.xml");
-            Commons.IConnections.Database = cbo_database.Text.Trim();
-            //insert vao user
-            Commons.Modules.ObjSystems.User(Commons.Modules.UserName, 1);
+            try
+            {
+                DataSet ds = new DataSet();
+                ds.ReadXml(AppDomain.CurrentDomain.BaseDirectory + "\\vsconfig.xml");
+                ds.Tables[0].Rows[0]["D"] = cbo_database.EditValue;
+                ds.WriteXml(AppDomain.CurrentDomain.BaseDirectory + "\\vsconfig.xml");
+                Commons.IConnections.Database = cbo_database.Text.Trim();
+                Commons.Modules.ObjSystems.User(Commons.Modules.UserName, 1);
+                //insert vao user
+            }
+            catch
+            {
+            }
+
         }
         private void btn_Register_Click(object sender, EventArgs e)
         {

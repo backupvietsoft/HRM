@@ -27,7 +27,7 @@ namespace Vs.Category
             lblLoaiChuyen.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             lblTinhDoanhThu.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(ID_DVLookUpEdit, Commons.Modules.ObjSystems.DataDonVi(false), "ID_DV", "TEN_DV", "TEN_DV", true, false, false);
-            if (Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString() == "DM")
+            if (Commons.Modules.KyHieuDV == "DM" || Commons.Modules.KyHieuDV == "BT" || Commons.Modules.KyHieuDV == "MT")
             {
 
                 try
@@ -170,7 +170,7 @@ namespace Vs.Category
         private void LoadText()
         {
             string sSql = "";
-            sSql = "SELECT T.ID_TO,T.ID_XN, XN.ID_DV ,T.MS_TO,T.TEN_TO,T.TEN_TO_A,T.TEN_TO_H,T.STT_TO,T.ID_CN, T.ID_LOAI_CHUYEN, ISNULL(TINH_DOANH_THU,0) TINH_DOANH_THU FROM dbo.[TO] T INNER JOIN dbo.XI_NGHIEP XN ON XN.ID_XN = T.ID_XN WHERE ID_TO = " + iIdTo.ToString();
+            sSql = "SELECT T.ID_TO,T.ID_XN, XN.ID_DV ,T.MS_TO,T.TEN_TO,T.TEN_TO_A,T.TEN_TO_H,T.STT_TO,T.ID_CN, T.ID_LOAI_CHUYEN, ISNULL(TINH_DOANH_THU,0) TINH_DOANH_THU, ISNULL(T.ACTIVE_TO,0) ACTIVE_TO FROM dbo.[TO] T INNER JOIN dbo.XI_NGHIEP XN ON XN.ID_XN = T.ID_XN WHERE ID_TO = " + iIdTo.ToString();
             DataTable dtTmp = new DataTable();
             dtTmp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSql));
             if (dtTmp.Rows.Count <= 0) return;
@@ -186,6 +186,7 @@ namespace Vs.Category
             cboID_CN.EditValue = dtTmp.Rows[0]["ID_CN"].ToString() == "" ? -1 : Convert.ToInt64(dtTmp.Rows[0]["ID_CN"]);
             cboID_LOAI_CHUYEN.EditValue = dtTmp.Rows[0]["ID_LOAI_CHUYEN"];
             chkTinhDoanhThu.EditValue = dtTmp.Rows[0]["TINH_DOANH_THU"];
+            chkActive.EditValue = dtTmp.Rows[0]["ACTIVE_TO"];
         }
 
         private void LoadTextNull()
@@ -202,6 +203,7 @@ namespace Vs.Category
                 MS_TOTextEdit.Focus();
                 cboID_LOAI_CHUYEN.EditValue = -1;
                 chkTinhDoanhThu.EditValue = false;
+                chkActive.EditValue = false;    
             }
             catch { }
         }
@@ -218,7 +220,7 @@ namespace Vs.Category
                         {
                             if (!dxValidationProvider1.Validate()) return;
                             if (KiemTrung()) return;
-                            Commons.Modules.sId = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spUpdateTo", (bAddEditTo ? -1 : iIdTo), ID_XNLookUpEdit.EditValue, ID_PBLookUpEdit.Text == "" ? null : ID_PBLookUpEdit.EditValue, MS_TOTextEdit.EditValue, TEN_TOTextEdit.EditValue, TEN_TO_ANHTextEdit.EditValue, TEN_TO_HOATextEdit.EditValue, STT_TOTextEdit.EditValue, cboID_CN.Text == "" ? null : cboID_CN.EditValue, Commons.Modules.UserName, cboID_LOAI_CHUYEN.Text == "" ? null : cboID_LOAI_CHUYEN.EditValue, chkTinhDoanhThu.EditValue).ToString();
+                            Commons.Modules.sId = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spUpdateTo", (bAddEditTo ? -1 : iIdTo), ID_XNLookUpEdit.EditValue, ID_PBLookUpEdit.Text == "" ? null : ID_PBLookUpEdit.EditValue, MS_TOTextEdit.EditValue, TEN_TOTextEdit.EditValue, TEN_TO_ANHTextEdit.EditValue, TEN_TO_HOATextEdit.EditValue, STT_TOTextEdit.EditValue, cboID_CN.Text == "" ? null : cboID_CN.EditValue, Commons.Modules.UserName, cboID_LOAI_CHUYEN.Text == "" ? null : cboID_LOAI_CHUYEN.EditValue, chkTinhDoanhThu.EditValue, chkActive.EditValue).ToString();
                             if (bAddEditTo)
                             {
                                 if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msg_ThemThanhCongBanCoMuonTiepTuc"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)

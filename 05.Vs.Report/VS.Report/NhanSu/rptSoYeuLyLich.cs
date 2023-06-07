@@ -30,7 +30,7 @@ namespace Vs.Report
 
         }
 
-        private void rptSoYeuLyLich_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        private void rptSoYeuLyLich_BeforePrint(object sender, CancelEventArgs e)
         {
             System.Data.SqlClient.SqlConnection conn;
             DataTable dt = new DataTable();

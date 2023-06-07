@@ -102,13 +102,13 @@
             this.tablePanel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numSoGio.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.memoGhiChu.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.datTNgay.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.datTNgay.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.datTNgay.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboLDV.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.datDNgay.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.datDNgay.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.datNVao.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.datDNgay.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.datNVao.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.datNVao.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupDSCongNhan)).BeginInit();
             this.groupDSCongNhan.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).BeginInit();
@@ -310,6 +310,7 @@
             this.grvNgay.OptionsView.ShowAutoFilterRow = true;
             this.grvNgay.OptionsView.ShowGroupPanel = false;
             this.grvNgay.InitNewRow += new DevExpress.XtraGrid.Views.Grid.InitNewRowEventHandler(this.grvNgay_InitNewRow);
+            this.grvNgay.CellValueChanged += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.grvNgay_CellValueChanged);
             this.grvNgay.InvalidRowException += new DevExpress.XtraGrid.Views.Base.InvalidRowExceptionEventHandler(this.grvNgay_InvalidRowException);
             this.grvNgay.ValidateRow += new DevExpress.XtraGrid.Views.Base.ValidateRowEventHandler(this.grvNgay_ValidateRow);
             this.grvNgay.ValidatingEditor += new DevExpress.XtraEditors.Controls.BaseContainerValidateEditorEventHandler(this.grvNgay_ValidatingEditor);

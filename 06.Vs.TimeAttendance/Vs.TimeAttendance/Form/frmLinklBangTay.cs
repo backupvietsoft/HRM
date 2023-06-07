@@ -95,8 +95,6 @@ namespace Vs.TimeAttendance
             if (grdChamCongTay.DataSource == null)
             {
                 Commons.Modules.ObjSystems.MLoadXtraGrid(grdChamCongTay, grvChamCongTay, dt, true, false, true, true, true,this.Name);
-                grvChamCongTay.Columns["CHON"].Visible = true;
-                grvChamCongTay.Columns["CHON"].Width = 100;
                 grvChamCongTay.OptionsSelection.ShowCheckBoxSelectorInColumnHeader = DevExpress.Utils.DefaultBoolean.True;
                 grvChamCongTay.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CheckBoxRowSelect;
                 grvChamCongTay.OptionsSelection.CheckBoxSelectorField = "CHON";
@@ -110,6 +108,13 @@ namespace Vs.TimeAttendance
             {
                 grdChamCongTay.DataSource = dt;
             }
+
+            try
+            {
+                grvChamCongTay.OptionsSelection.CheckBoxSelectorField = "CHON";
+                grvChamCongTay.Columns["CHON"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
+            }
+            catch { }
         }
 
         private void cboDV_EditValueChanged(object sender, EventArgs e)

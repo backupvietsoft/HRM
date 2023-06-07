@@ -23,7 +23,7 @@ namespace Vs.Payroll
     public partial class ucThueThuNhap : DevExpress.XtraEditors.XtraUserControl
     {
         private static bool isAdd = false;
-        
+
         public static ucThueThuNhap _instance;
         public static ucThueThuNhap Instance
         {
@@ -45,13 +45,20 @@ namespace Vs.Payroll
 
         private void ucThueThuNhap_Load(object sender, EventArgs e)
         {
-            Commons.Modules.sPS = "0Load";
-           
-            LoadThang();
-           
-            LoadGrdThueThuNhap();
-            EnableButon(isAdd); 
-            Commons.Modules.sPS = "";
+            try
+            {
+
+
+                Commons.Modules.sPS = "0Load";
+
+                LoadThang();
+
+                LoadGrdThueThuNhap();
+                EnableButon(isAdd);
+                Commons.Modules.sPS = "";
+                Commons.Modules.ObjSystems.SetPhanQuyen(btnALL);
+            }
+            catch { }
         }
 
         private void LoadGrdThueThuNhap()
@@ -59,9 +66,9 @@ namespace Vs.Payroll
             DataTable dt = new DataTable();
             try
             {
-                    dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetListThueThuNhap", Convert.ToDateTime(cboNgay.EditValue)));
-                    Commons.Modules.ObjSystems.MLoadXtraGrid(grdData, grvData, dt, false, false, false, true, true, this.Name);
-                    dt.Columns["TT"].ReadOnly = false;
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetListThueThuNhap", Convert.ToDateTime(cboNgay.EditValue)));
+                Commons.Modules.ObjSystems.MLoadXtraGrid(grdData, grvData, dt, false, false, false, true, true, this.Name);
+                dt.Columns["TT"].ReadOnly = false;
 
                 grvData.Columns["ID_TTN"].Visible = false;
                 grvData.Columns["THANG"].Visible = false;
@@ -79,7 +86,7 @@ namespace Vs.Payroll
             catch
             {
             }
-            
+
         }
         public void LoadThang()
         {
@@ -102,7 +109,7 @@ namespace Vs.Payroll
             }
         }
 
-       
+
 
         private void windowsUIButtonPanel1_ButtonClick(object sender, DevExpress.XtraBars.Docking2010.ButtonEventArgs e)
         {
@@ -116,7 +123,7 @@ namespace Vs.Payroll
                         isAdd = true;
                         EnableButon(isAdd);
                         break;
-                        
+
                     }
                 case "xoa":
                     {
@@ -189,7 +196,7 @@ namespace Vs.Payroll
                 view.SetFocusedRowCellValue("THANG", cboNgay.EditValue);
                 view.SetFocusedRowCellValue("TT", true);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 XtraMessageBox.Show(ex.Message.ToString());
             }
@@ -227,11 +234,11 @@ namespace Vs.Payroll
         }
 
         private void grvData_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
-            {
-           
+        {
+
         }
 
-        
+
         private void grvNgay_RowCellClick(object sender, RowCellClickEventArgs e)
         {
             try
@@ -241,7 +248,7 @@ namespace Vs.Payroll
             }
             catch { }
             cboNgay.ClosePopup();
-            
+
         }
 
         private void cboNgay_EditValueChanged(object sender, EventArgs e)

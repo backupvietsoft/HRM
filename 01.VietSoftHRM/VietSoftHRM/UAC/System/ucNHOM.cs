@@ -24,6 +24,7 @@ namespace VietSoftHRM
         #region sự kiện form
         private void ucNHOM_Load(object sender, EventArgs e)
         {
+            Commons.Modules.ObjSystems.SetPhanQuyen(windowsUIButton);
             LoadgrdNhom();
             enableButon(true);
 

@@ -42,7 +42,6 @@ namespace Vs.Category
             {
                 ItemForTINH_CHEDO.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             }
-
         }
         private void frmEditLY_DO_VANG_Resize(object sender, EventArgs e) => dataLayoutControl1.Refresh();
 
@@ -73,7 +72,7 @@ namespace Vs.Category
             try
             {
                 string sSql = "SELECT ID_LDV, MS_LDV, TEN_LDV, TEN_LDV_A, TEN_LDV_H, ID_CHE_DO, " +
-                    "PHEP, PHAN_TRAM_TRO_CAP, TINH_BHXH, KY_HIEU, TINH_LUONG, STT_LDV, ID_TT_HT , CHE_DO " +
+                    "PHEP, PHAN_TRAM_TRO_CAP, TINH_BHXH, KY_HIEU, TINH_LUONG, STT_LDV, ID_TT_HT , CHE_DO, ID_LN " +
                     "FROM LY_DO_VANG WHERE ID_LDV =	" + Id.ToString();
                 DataTable dtTmp = new DataTable();
                 dtTmp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSql));
@@ -93,13 +92,10 @@ namespace Vs.Category
                     chkCheDo.EditValue = dtTmp.Rows[0]["CHE_DO"];
                 }
                 catch { }
-
-
+                cboID_LOAI_NGHI.EditValue = dtTmp.Rows[0]["ID_LN"];
             }
             catch (Exception EX)
             {
-
-                XtraMessageBox.Show(EX.Message.ToString());
             }
         }
         private void LoadTextNull()
@@ -117,6 +113,7 @@ namespace Vs.Category
                 TINH_LUONGCheckEdit.EditValue = false;
                 chkCheDo.EditValue = false;
                 cboID_TT_HT.EditValue = -1;
+                cboID_LOAI_NGHI.EditValue = null;
                 MS_LDVTextEdit.Focus();
             }
             catch { }
@@ -135,17 +132,18 @@ namespace Vs.Category
                             if (!dxValidationProvider1.Validate()) return;
                             if (bKiemTrung()) return;
                             Commons.Modules.sId = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spUpdateLY_DO_VANG", (AddEdit ? -1 : Id),
-                            MS_LDVTextEdit.EditValue,
-                            TEN_LDVTextEdit.EditValue,
-                            TEN_LDV_ATextEdit.EditValue,
-                            TEN_LDV_HTextEdit.EditValue,
+                            MS_LDVTextEdit.Text,
+                            TEN_LDVTextEdit.Text,
+                            TEN_LDV_ATextEdit.Text,
+                            TEN_LDV_HTextEdit.Text,
                             ID_CHE_DOSearchLookUpEdit.EditValue,
                             PHEPCheckEdit.EditValue,
-                            PHAN_TRAM_TRO_CAPTextEdit.Text == "" ? PHAN_TRAM_TRO_CAPTextEdit.EditValue = null : Convert.ToInt64(PHAN_TRAM_TRO_CAPTextEdit.EditValue),
+                            PHAN_TRAM_TRO_CAPTextEdit.EditValue.ToString() == "" ? (object)null : Convert.ToDouble(PHAN_TRAM_TRO_CAPTextEdit.EditValue),
                             TINH_BHXHCheckEdit.EditValue,
                             TINH_LUONGCheckEdit.EditValue,
                             chkCheDo.EditValue, 
-                            STT_LDVTextEdit.Text == "" ? STT_LDVTextEdit.EditValue = null : STT_LDVTextEdit.EditValue, cboID_TT_HT.Text == "" ? cboID_TT_HT.EditValue = null : Convert.ToInt64(cboID_TT_HT.EditValue)).ToString();
+                            Convert.ToString(STT_LDVTextEdit.EditValue) == "" ? (object)null : STT_LDVTextEdit.EditValue , cboID_TT_HT.Text == "" ? (object)null : Convert.ToInt64(cboID_TT_HT.EditValue) ,
+                            cboID_LOAI_NGHI.Text == "" ? (object)null : Convert.ToInt64(cboID_LOAI_NGHI.EditValue)).ToString();
 
                             if (AddEdit)
                             {
@@ -233,6 +231,11 @@ namespace Vs.Category
             try
             {
                 Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_TT_HT, Commons.Modules.ObjSystems.DataTinHTrangHT(-1, false), "ID_TT_HT", "TEN_TT_HT", "TEN_TT_HT", true, true);
+
+                DataTable dt = new DataTable();
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT ID_LOAI_NGHI, TEN_LOAI_NGHI FROM dbo.LOAI_NGHI_PHEP WHERE ISNULL(SU_DUNG,0) = 1 ORDER BY STT_IN"));
+
+                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_LOAI_NGHI, dt, "ID_LOAI_NGHI", "TEN_LOAI_NGHI", "TEN_LOAI_NGHI", true, true, false);
             }
             catch { }
         }

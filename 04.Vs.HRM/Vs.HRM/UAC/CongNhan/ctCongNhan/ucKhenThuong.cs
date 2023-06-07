@@ -35,10 +35,10 @@ namespace Vs.HRM
             Commons.Modules.ObjSystems.SetPhanQuyen(windowsUIButton);
             LoadgrdKhenThuong(-1);
         }
-        private void LoadgrdKhenThuong(int id)
+        public void LoadgrdKhenThuong(int id)
         {
             DataTable dt = new DataTable();
-            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetListKhenThuong", idcn, Commons.Modules.UserName, Commons.Modules.TypeLanguage));
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetListKhenThuong", Commons.Modules.iCongNhan, Commons.Modules.UserName, Commons.Modules.TypeLanguage));
             dt.PrimaryKey = new DataColumn[] { dt.Columns["ID_KTHUONG"] };
             if (grdKhenThuong.DataSource == null)
             {
@@ -158,7 +158,7 @@ namespace Vs.HRM
             {
                 int n = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spUpdateKhenThuong",
                         grvKhenThuong.GetFocusedRowCellValue("ID_KTHUONG"),
-                        idcn,
+                        Commons.Modules.iCongNhan,
                         SO_QUYET_DINHTextEdit.EditValue,
                         NGAY_HIEU_LUCDateEdit.EditValue,
                         NGAY_KYDateEdit.EditValue,
@@ -254,7 +254,12 @@ namespace Vs.HRM
                     }
                 case "In":
                     {
-                        frmInKhenThuongKyLuatCN InKTKLCN = new frmInKhenThuongKyLuatCN(idcn, "", Convert.ToInt64(grvKhenThuong.GetFocusedRowCellValue("ID_KTHUONG")));
+                        if (grvKhenThuong.RowCount == 0)
+                        {
+                            Commons.Modules.ObjSystems.MsgWarning(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgChonDongCanXuLy"));
+                            return;
+                        }
+                        frmInKhenThuongKyLuatCN InKTKLCN = new frmInKhenThuongKyLuatCN(Commons.Modules.iCongNhan, "", Convert.ToInt64(grvKhenThuong.GetFocusedRowCellValue("ID_KTHUONG")));
                         InKTKLCN.ShowDialog();
                         break;
                     }
@@ -273,7 +278,7 @@ namespace Vs.HRM
                         else { id_kT = Convert.ToInt64(grvKhenThuong.GetFocusedRowCellValue("ID_KTHUONG")); }
                         System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spkiemtrungKhenThuong", conn);
                         cmd.Parameters.Add("@ID_HD", SqlDbType.BigInt).Value = id_kT;
-                        cmd.Parameters.Add("@ID_CN", SqlDbType.BigInt).Value = idcn;
+                        cmd.Parameters.Add("@ID_CN", SqlDbType.BigInt).Value = Commons.Modules.iCongNhan;
                         cmd.Parameters.Add("@SO_HD", SqlDbType.NVarChar).Value = SO_QUYET_DINHTextEdit.Text;
                         cmd.CommandType = CommandType.StoredProcedure;
                         if (Convert.ToInt16(cmd.ExecuteScalar()) == 1)

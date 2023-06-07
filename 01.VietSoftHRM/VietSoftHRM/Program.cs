@@ -3,6 +3,8 @@ using System.Windows.Forms;
 using System.Threading;
 using System.Data;
 using Microsoft.ApplicationBlocks.Data;
+using Commons;
+
 namespace VietSoftHRM
 {
     static class Program
@@ -58,14 +60,10 @@ namespace VietSoftHRM
             {
                 //MRunInt();
                 //Application.Run(new Form1());
-                Application.Run(new frmLogin());
-                //Application.Run(new Vs.HRM.frmPhuLucHDLD("", "", 1));
                 //Application.Run(new frmMain());
+
+                Application.Run(new frmLogin());
                 //Application.Run(new XtraForm1());
-                //Application.Run(new Vs.HRM.frmImportNhanSu());
-                //Vs.Report.frmViewReport frm = new Vs.Report.frmViewReport();
-                //frm.rpt = new VS.Report.NhanSu.XtraReport1();
-                //frm.ShowDialog();
                 //Application.Run(new frmThongTinChung(1));
                 //Application.Run(new frmImportHinhCN(1));
             }

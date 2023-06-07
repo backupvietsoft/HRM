@@ -123,7 +123,7 @@ namespace Vs.HRM
 
                 System.Data.SqlClient.SqlConnection conn1;
                 frmViewReport frm = new frmViewReport();
-                frm.rpt = new Recruit.rptThuMoi();
+                //frm.rpt = new Recruit.rptThuMoi();
                 conn1 = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
                 conn1.Open();
 

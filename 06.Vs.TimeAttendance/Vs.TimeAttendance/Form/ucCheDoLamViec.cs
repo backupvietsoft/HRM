@@ -72,6 +72,7 @@ namespace Vs.TimeAttendance
             LoadcboNhomChamCong(cboNhomChamCong);
             LoadGrdChedochamcong();
             EnableButon();
+            Commons.Modules.ObjSystems.SetPhanQuyen(btnALL);
             Commons.Modules.sLoad = "";
         }
 
@@ -87,9 +88,12 @@ namespace Vs.TimeAttendance
                 else
                 {
                     dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetListCheDoLamViec", Convert.ToDateTime(cboNgay.EditValue),
-                                                    cboNhomChamCong.EditValue, Commons.Modules.UserName, Commons.Modules.TypeLanguage));
+                                                    Convert.ToString(cboNhomChamCong.EditValue) == "" ? 0 : cboNhomChamCong.EditValue, Commons.Modules.UserName, Commons.Modules.TypeLanguage));
                     dt.Columns["GIO_BD"].ReadOnly = false;
                     dt.Columns["GIO_KT"].ReadOnly = false;
+                    dt.Columns["ID_CDLV"].ReadOnly = false;
+                    try
+                    {dt.Columns["TANG_CA_MD"].ReadOnly = false;}catch { }
                     Commons.Modules.ObjSystems.MLoadXtraGrid(grdData, grvData, dt, false, false, false, true, true, this.Name);
 
                     //grvData.Columns["TRU_DAU_GIO"].ColumnEdit = txtEdit;
@@ -154,7 +158,7 @@ namespace Vs.TimeAttendance
             }
             catch (Exception ex)
             {
-                XtraMessageBox.Show(ex.Message.ToString());
+                Commons.Modules.ObjSystems.MsgError(ex.Message);
             }
         }
 
@@ -265,10 +269,11 @@ namespace Vs.TimeAttendance
                 view.SetFocusedRowCellValue("CA_NGAY_HOM_SAU", false);
                 view.SetFocusedRowCellValue("KIEM_TRA", false);
                 view.SetFocusedRowCellValue("CHE_DO", false);
+                view.SetFocusedRowCellValue("ID_CDLV", 0);
             }
             catch (Exception ex)
             {
-                XtraMessageBox.Show(ex.Message.ToString());
+                Commons.Modules.ObjSystems.MsgError(ex.Message);
             }
         }
 
@@ -309,6 +314,7 @@ namespace Vs.TimeAttendance
             catch (Exception ex)
             {
                 Commons.Modules.ObjSystems.XoaTable(sTB);
+                Commons.Modules.ObjSystems.MsgError(ex.Message);
                 return false;
             }
         }

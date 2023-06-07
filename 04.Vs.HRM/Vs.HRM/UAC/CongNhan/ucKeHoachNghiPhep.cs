@@ -48,9 +48,6 @@ namespace Vs.HRM
             {
                 lblSoGio.Visible = false;
                 numSoGio.Visible = false;
-                lblNVao.Visible = false;
-                datNVao.Visible = false;
-
                 Thread.Sleep(100);
 
                 enableButon(true);
@@ -72,7 +69,9 @@ namespace Vs.HRM
                 Commons.OSystems.SetDateEditFormat(datDNgay);
                 Commons.OSystems.SetDateEditFormat(datNVao);
             }
-            catch { }
+            catch(Exception ex) {
+                Commons.Modules.ObjSystems.MsgError(ex.Message);
+            }
         }
         public void CheckDuplicateKHNP(GridView grid, DataTable GridDataTable, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
         {
@@ -106,48 +105,6 @@ namespace Vs.HRM
             }
 
         }
-        private void LoadCboDonVi()
-        {
-            try
-            {
-                DataTable dt = new DataTable();
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboDON_VI", Commons.Modules.UserName, Commons.Modules.TypeLanguage, 1));
-                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboSearch_DV, dt, "ID_DV", "TEN_DV", "TEN_DV");
-            }
-            catch (Exception ex)
-            {
-                XtraMessageBox.Show(ex.Message.ToString());
-            }
-        }
-        private void LoadCboXiNghiep()
-        {
-            try
-            {
-                DataTable dt = new DataTable();
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboXI_NGHIEP", cboSearch_DV.EditValue, Commons.Modules.UserName, Commons.Modules.TypeLanguage, 1));
-                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboSearch_XN, dt, "ID_XN", "TEN_XN", "TEN_XN");
-                cboSearch_XN.EditValue = -1;
-            }
-            catch (Exception ex)
-            {
-                XtraMessageBox.Show(ex.Message.ToString());
-            }
-        }
-        private void LoadCboTo()
-        {
-            try
-            {
-                DataTable dt = new DataTable();
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboTO", cboSearch_DV.EditValue, cboSearch_XN.EditValue, Commons.Modules.UserName, Commons.Modules.TypeLanguage, 1));
-                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboSearch_TO, dt, "ID_TO", "TEN_TO", "TEN_TO");
-                cboSearch_TO.EditValue = -1;
-            }
-            catch (Exception ex)
-            {
-                XtraMessageBox.Show(ex.Message.ToString());
-            }
-
-        }
         private void LoadCboLDV()
         {
             try
@@ -160,7 +117,7 @@ namespace Vs.HRM
             }
             catch (Exception ex)
             {
-                XtraMessageBox.Show(ex.Message.ToString());
+                Commons.Modules.ObjSystems.MsgWarning(ex.Message);  
             }
         }
         private void LoadGrdCongNhan(bool cochon)
@@ -168,7 +125,7 @@ namespace Vs.HRM
             try
             {
                 DataTable dt = new DataTable();
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, Commons.Modules.KyHieuDV == "NB" ? "spGetCongNhanNghiPhep_NB" : "spGetCongNhanNghiPhep", cboSearch_DV.EditValue, cboSearch_XN.EditValue, cboSearch_TO.EditValue, dateNam.DateTime.Year, Commons.Modules.UserName, Commons.Modules.TypeLanguage));
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, Commons.Modules.KyHieuDV == "NB" ? "spGetCongNhanNghiPhep_NB" : Commons.Modules.KyHieuDV == "NC" ? "spGetCongNhanNghiPhep_NB" : Commons.Modules.KyHieuDV == "HN" ? "spGetCongNhanNghiPhep_HN" : "spGetCongNhanNghiPhep", cboSearch_DV.EditValue, cboSearch_XN.EditValue, cboSearch_TO.EditValue, dateNam.DateTime.Year, Commons.Modules.UserName, Commons.Modules.TypeLanguage));
                 dt.PrimaryKey = new DataColumn[] { dt.Columns["ID_CN"] };
                 if (grdDSCN.DataSource == null)
                 {
@@ -207,7 +164,7 @@ namespace Vs.HRM
             catch (Exception ex)
             {
             }
-           
+
         }
         private void LoadGrdKHNP()
         {
@@ -279,18 +236,22 @@ namespace Vs.HRM
                 RepositoryItemDateEdit dEditN = new RepositoryItemDateEdit();
                 Commons.OSystems.SetDateRepositoryItemDateEdit(dEditN);
 
-                grvKHNP.Columns["NGAY_VAO_LAM_LAI"].Visible = false;
+                //grvKHNP.Columns["NGAY_VAO_LAM_LAI"].Visible = true;
                 grvKHNP.Columns["THANG_KTP"].Visible = false;
                 grvKHNP.Columns["NGAY_NOP_DON"].Visible = false;
                 grvKHNP.Columns["GIO_NOP_DON"].Visible = false;
                 grvKHNP.Columns["LAN_NGHI"].Visible = false;
                 grvKHNP.Columns["NGHI_HV"].Visible = false;
-
+                grvKHNP.Columns["TINH_CHUYEN_CAN"].Visible = false;
+                grvKHNP.Columns["NGHI_NUA_NGAY"].Visible = false;
+                if (Commons.Modules.KyHieuDV == "DM")
+                {
+                    //grvKHNP.Columns["NGAY_VAO_LAM_LAI"].Visible = false;
+                    grvKHNP.Columns["TINH_CHUYEN_CAN"].Visible = true;
+                    grvKHNP.Columns["NGHI_NUA_NGAY"].Visible = true;
+                }
                 if (Commons.Modules.KyHieuDV == "NB")
                 {
-
-                    grvKHNP.Columns["NGHI_NUA_NGAY"].Visible = false;
-                    grvKHNP.Columns["NGAY_VAO_LAM_LAI"].Visible = true;
                     grvKHNP.Columns["THANG_KTP"].Visible = true;
                     grvKHNP.Columns["NGAY_NOP_DON"].Visible = true;
                     grvKHNP.Columns["GIO_NOP_DON"].Visible = true;
@@ -455,6 +416,26 @@ namespace Vs.HRM
             datTNgay.DateTime = DateTime.Now;
             datNVao.DateTime = datDNgay.DateTime.AddDays(1);
             numSoGio.Value = Convert.ToDecimal(Commons.Modules.iGio);
+            chkKhongTinhChuyenCan.Checked = false;
+
+            if (Commons.Modules.KyHieuDV == "DM")
+            {
+                lblNVao.Visible = false;
+                datNVao.Visible = false;
+                tablePanel3.Rows[4].Height = 0;
+            }
+            else
+            {
+                lblNVao.Visible = true;
+                datNVao.Visible = true;
+                tablePanel3.Rows[4].Height = 36;
+                tablePanel3.Rows[3].Height = 0;
+                lblNGHI_NUA_NGAY.Visible = false;
+                chkNGHI_NUA_NGAY.Visible = false;
+                lblKhongTinhChuyenCan.Visible = false;
+                chkKhongTinhChuyenCan.Visible = false;
+            }
+
             Commons.Modules.sPrivate = "";
         }
         private bool KiemTraCapNhatPhep(DataTable dt)
@@ -491,7 +472,7 @@ namespace Vs.HRM
                         int n = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.fuKiemTraKeHoachNghiPhep(" + Convert.ToInt64(item["ID_CN"]) + ",'" + datTNgay.DateTime.ToString("MM/dd/yyyy") + "','" + datDNgay.DateTime.ToString("MM/dd/yyyy") + "')"));
                         if (n == 0)
                         {
-                            SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spInSertKeHoachNghiPhep", cboLDV.EditValue, Convert.ToInt64(item["ID_CN"]), datTNgay.EditValue, datDNgay.EditValue, datNVao.EditValue, numSoGio.Value, cboTINH_TRANG.EditValue, chkNGHI_NUA_NGAY.EditValue, memoGhiChu.EditValue);
+                            SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spInSertKeHoachNghiPhep", cboLDV.EditValue, Convert.ToInt64(item["ID_CN"]), datTNgay.EditValue, datDNgay.EditValue, datNVao.EditValue, numSoGio.Value, cboTINH_TRANG.EditValue, chkNGHI_NUA_NGAY.EditValue, chkKhongTinhChuyenCan.EditValue, memoGhiChu.EditValue);
                         }
                     }
                     catch
@@ -558,15 +539,21 @@ namespace Vs.HRM
                     }
                 case "xoa":
                     {
-                        //if (iKiemTinhTrang() == 1)
-                        //{
-                        //    XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDaDuyetKhongTheXoa"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning); return;
-                        //    return;
-                        //}
-                        if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDeleteCapNhatPhep"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) return;
+
+                        if (iKiemTinhTrang() == 1)
+                        {
+                            Commons.Modules.ObjSystems.MsgWarning(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDaDuyetKhongTheXoa")); return;
+                        }
+                        if (grvKHNP.RowCount == 0)
+                        {
+                            Commons.Modules.ObjSystems.MsgWarning(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgChuaCoDuLieu"));
+                            return;
+                        }
+                        if (Commons.Modules.ObjSystems.MsgDelete(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDeleteCapNhatPhep")) == 0) return;
                         if (navigationFrame1.SelectedPage == navigationPage1)
                         {
                             XoaKHNP();
+                            LoadGrdCongNhan(false);
                         }
                         else
                         {
@@ -575,9 +562,13 @@ namespace Vs.HRM
                             int n = dt.AsEnumerable().Count(x => x.Field<bool>("CHON").Equals(true));
                             if (n < 1)
                             {
-                                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgChuaConCongNhan"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning); return;
+                                Commons.Modules.ObjSystems.MsgWarning(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgChuaConCongNhan")); return;
                             }
                             DeleteCapNhatPhep(dt);
+                            navigationFrame1.SelectedPage = navigationPage1;
+                            LoadGrdCongNhan(false);
+                            LoadGrdKHNP();
+                            enableButon(true);
                         }
                         grvDSCN_FocusedRowChanged(null, null);
                         break;
@@ -625,7 +616,7 @@ namespace Vs.HRM
                         catch
                         {
                         }
-                     
+
                         break;
                     }
                 case "thoat":
@@ -640,24 +631,26 @@ namespace Vs.HRM
                         int n = dt.AsEnumerable().Count(x => x.Field<bool>("CHON").Equals(true));
                         if (n < 1)
                         {
-                            XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgChuaChonCongNhan"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning); return;
+                            Commons.Modules.ObjSystems.MsgWarning(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgChuaChonCongNhan")); return;
                         }
                         if (KiemTraCapNhatPhep(dt) == false)
                         {
-                            DialogResult dl = XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDaBiTrungNgayBanCoMuonCapNhat"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
-
-                            if (dl == DialogResult.OK)
+                            if (Commons.Modules.ObjSystems.MsgQuestion(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDaBiTrungNgayBanCoMuonCapNhat")) == 1)
                             {
                                 InsertCapNhatPhep(dt);
+                                LoadGrdCongNhan(false);
+                                LoadGrdKHNP();
                             }
                         }
                         else
                         {
                             InsertCapNhatPhep(dt);
-                            XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgdacongnhanthanhcong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                            Commons.Modules.ObjSystems.Alert(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgdacongnhanthanhcong"), Commons.Form_Alert.enmType.Success);
                             navigationFrame1.SelectedPage = navigationPage1;
                             LoadGrdCongNhan(false);
+                            LoadGrdKHNP();
                             enableButon(true);
+                            grvDSCN_FocusedRowChanged(null, null);
                         }
 
                         break;
@@ -728,7 +721,7 @@ namespace Vs.HRM
                     e.Valid = false;
                     View.SetColumnError(tungay, Commons.Modules.ObjLanguages.GetLanguage(this.Name, "lblDuLieuTrung"));
                     View.SetColumnError(denngay, Commons.Modules.ObjLanguages.GetLanguage(this.Name, "lblDuLieuTrung"));
-                    XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "lblDuLieuTrung"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Commons.Modules.ObjSystems.MsgWarning(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "lblDuLieuTrung"));
                     return;
                 }
                 //CheckDuplicateKHNP(grvKHNP, (DataTable)grdKHNP.DataSource, e);
@@ -747,7 +740,7 @@ namespace Vs.HRM
             }
             catch (Exception ex)
             {
-                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDelDangSuDung") + "\n" + ex.Message.ToString(), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Commons.Modules.ObjSystems.MsgError(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDelDangSuDung") + "\n" + ex.Message.ToString());
             }
         }
         private void enableButon(bool visible)
@@ -778,7 +771,7 @@ namespace Vs.HRM
         {
             if (e.KeyData == Keys.Delete)
             {
-                if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDeleteCapNhatPhep"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) return;
+                if (Commons.Modules.ObjSystems.MsgQuestion(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDeleteCapNhatPhep")) == 0) return;
                 XoaKHNP();
             }
         }
@@ -791,11 +784,11 @@ namespace Vs.HRM
             TimeSpan time1 = datNVao.DateTime - datTNgay.DateTime;
             if (time.Days < 0)
             {
-                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgTuNgayKhongLonHonDenNgay"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning); return;
+                Commons.Modules.ObjSystems.MsgWarning(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgTuNgayKhongLonHonDenNgay")); return;
             }
             if (time1.Days < 0)
             {
-                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgTuNgayKhongLonHonNgayVaoLam"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning); return;
+                Commons.Modules.ObjSystems.MsgWarning(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgTuNgayKhongLonHonNgayVaoLam")); return;
             }
             try
             {
@@ -932,7 +925,7 @@ namespace Vs.HRM
                         {
                             if (dt.Value.DayOfWeek.ToString() == "Sunday" || dt.Value.DayOfWeek.ToString() == "Saturday")
                             {
-                                if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgNgayBanConNamTrongThu7ChuNhatBanCoMuonTiepTuc"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
+                                if (Commons.Modules.ObjSystems.MsgQuestion(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgNgayBanConNamTrongThu7ChuNhatBanCoMuonTiepTuc")) == 0)
                                 {
                                     view.SetRowCellValue(e.RowHandle, view.Columns["SO_GIO"], 0);
                                     view.SetRowCellValue(e.RowHandle, view.Columns["NGAY_VAO_LAM_LAI"], null);
@@ -973,7 +966,7 @@ namespace Vs.HRM
                         {
                             if (dt.Value.DayOfWeek.ToString() == "Sunday" || dt.Value.DayOfWeek.ToString() == "Saturday")
                             {
-                                if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgNgayBanConNamTrongThu7ChuNhatBanCoMuonTiepTuc"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
+                                if(Commons.Modules.ObjSystems.MsgQuestion(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgNgayBanConNamTrongThu7ChuNhatBanCoMuonTiepTuc")) == 0)
                                 {
                                     view.SetRowCellValue(e.RowHandle, view.Columns["SO_GIO"], 0);
                                     view.SetRowCellValue(e.RowHandle, view.Columns["NGAY_VAO_LAM_LAI"], null);
@@ -1057,7 +1050,7 @@ namespace Vs.HRM
             }
             catch (Exception ex)
             {
-                XtraMessageBox.Show(ex.Message.ToString());
+                Commons.Modules.ObjSystems.MsgError(ex.Message.ToString());
             }
             grvDSCN_FocusedRowChanged(null, null);
         }
@@ -1132,7 +1125,13 @@ namespace Vs.HRM
         {
             try
             {
-                return Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT ISNULL(TINH_TRANG_DUYET,2) FROM dbo.KE_HOACH_NGHI_PHEP WHERE ID_KHNP =" + grvKHNP.GetFocusedRowCellValue("ID_KHNP") + ""));
+                if (Commons.Modules.KyHieuDV == "DM")
+                {
+                    return Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT ISNULL(TINH_TRANG_DUYET,2) FROM dbo.KE_HOACH_NGHI_PHEP WHERE ID_KHNP =" + grvKHNP.GetFocusedRowCellValue("ID_KHNP") + ""));
+
+                }
+                else
+                    return 0;
             }
             catch (Exception ex)
             {
@@ -1204,7 +1203,7 @@ namespace Vs.HRM
 
         private void searchControl1_EditValueChanged(object sender, EventArgs e)
         {
-            if(Commons.Modules.KyHieuDV != "DM")
+            if (Commons.Modules.KyHieuDV != "DM")
             {
                 DataTable dtTmp = new DataTable();
                 dtTmp = (DataTable)grdDSCN.DataSource;

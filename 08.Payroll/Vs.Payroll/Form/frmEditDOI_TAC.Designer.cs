@@ -31,33 +31,20 @@
             this.components = new System.ComponentModel.Container();
             DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions3 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
             DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions4 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule2 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             this.tablePanel1 = new DevExpress.Utils.Layout.TablePanel();
             this.btnALL = new DevExpress.XtraBars.Docking2010.WindowsUIButtonPanel();
             this.dataLayoutControl1 = new DevExpress.XtraDataLayout.DataLayoutControl();
-            this.txtSTT = new DevExpress.XtraEditors.TextEdit();
-            this.txtTEN_CTY_DAY_DU = new DevExpress.XtraEditors.TextEdit();
             this.txtTEN_NGAN = new DevExpress.XtraEditors.TextEdit();
-            this.txtMA_SO = new DevExpress.XtraEditors.TextEdit();
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.lblMA_SO = new DevExpress.XtraLayout.LayoutControlItem();
             this.lblTEN_NGAN = new DevExpress.XtraLayout.LayoutControlItem();
-            this.lblTEN_CTY_DAY_DU = new DevExpress.XtraLayout.LayoutControlItem();
-            this.ItemForSTT = new DevExpress.XtraLayout.LayoutControlItem();
             this.dxValidationProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).BeginInit();
             this.tablePanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataLayoutControl1)).BeginInit();
             this.dataLayoutControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtSTT.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtTEN_CTY_DAY_DU.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTEN_NGAN.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtMA_SO.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lblMA_SO)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblTEN_NGAN)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lblTEN_CTY_DAY_DU)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemForSTT)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -118,10 +105,7 @@
             // dataLayoutControl1
             // 
             this.tablePanel1.SetColumn(this.dataLayoutControl1, 1);
-            this.dataLayoutControl1.Controls.Add(this.txtSTT);
-            this.dataLayoutControl1.Controls.Add(this.txtTEN_CTY_DAY_DU);
             this.dataLayoutControl1.Controls.Add(this.txtTEN_NGAN);
-            this.dataLayoutControl1.Controls.Add(this.txtMA_SO);
             this.dataLayoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataLayoutControl1.Location = new System.Drawing.Point(83, 24);
             this.dataLayoutControl1.Name = "dataLayoutControl1";
@@ -131,93 +115,33 @@
             this.dataLayoutControl1.TabIndex = 0;
             this.dataLayoutControl1.Text = "dataLayoutControl1";
             // 
-            // txtSTT
-            // 
-            this.txtSTT.Location = new System.Drawing.Point(126, 84);
-            this.txtSTT.Name = "txtSTT";
-            this.txtSTT.Properties.Appearance.Options.UseTextOptions = true;
-            this.txtSTT.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.txtSTT.Properties.Mask.EditMask = "N0";
-            this.txtSTT.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
-            this.txtSTT.Size = new System.Drawing.Size(502, 24);
-            this.txtSTT.StyleController = this.dataLayoutControl1;
-            this.txtSTT.TabIndex = 8;
-            // 
-            // txtTEN_CTY_DAY_DU
-            // 
-            this.txtTEN_CTY_DAY_DU.Location = new System.Drawing.Point(126, 58);
-            this.txtTEN_CTY_DAY_DU.Name = "txtTEN_CTY_DAY_DU";
-            this.txtTEN_CTY_DAY_DU.Size = new System.Drawing.Size(502, 24);
-            this.txtTEN_CTY_DAY_DU.StyleController = this.dataLayoutControl1;
-            this.txtTEN_CTY_DAY_DU.TabIndex = 6;
-            // 
             // txtTEN_NGAN
             // 
-            this.txtTEN_NGAN.Location = new System.Drawing.Point(126, 32);
+            this.txtTEN_NGAN.Location = new System.Drawing.Point(98, 6);
             this.txtTEN_NGAN.Name = "txtTEN_NGAN";
-            this.txtTEN_NGAN.Size = new System.Drawing.Size(502, 24);
+            this.txtTEN_NGAN.Size = new System.Drawing.Size(530, 24);
             this.txtTEN_NGAN.StyleController = this.dataLayoutControl1;
             this.txtTEN_NGAN.TabIndex = 5;
-            // 
-            // txtMA_SO
-            // 
-            this.txtMA_SO.Location = new System.Drawing.Point(126, 6);
-            this.txtMA_SO.Name = "txtMA_SO";
-            this.txtMA_SO.Size = new System.Drawing.Size(502, 24);
-            this.txtMA_SO.StyleController = this.dataLayoutControl1;
-            this.txtMA_SO.TabIndex = 4;
-            conditionValidationRule2.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule2.ErrorText = "This value is not valid";
-            this.dxValidationProvider1.SetValidationRule(this.txtMA_SO, conditionValidationRule2);
             // 
             // layoutControlGroup1
             // 
             this.layoutControlGroup1.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
             this.layoutControlGroup1.GroupBordersVisible = false;
             this.layoutControlGroup1.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.lblMA_SO,
-            this.lblTEN_NGAN,
-            this.lblTEN_CTY_DAY_DU,
-            this.ItemForSTT});
+            this.lblTEN_NGAN});
             this.layoutControlGroup1.Name = "layoutControlGroup1";
             this.layoutControlGroup1.Size = new System.Drawing.Size(634, 377);
             this.layoutControlGroup1.TextVisible = false;
             // 
-            // lblMA_SO
-            // 
-            this.lblMA_SO.AppearanceItemCaption.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMA_SO.AppearanceItemCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.lblMA_SO.AppearanceItemCaption.Options.UseFont = true;
-            this.lblMA_SO.AppearanceItemCaption.Options.UseForeColor = true;
-            this.lblMA_SO.Control = this.txtMA_SO;
-            this.lblMA_SO.Location = new System.Drawing.Point(0, 0);
-            this.lblMA_SO.Name = "lblMA_SO";
-            this.lblMA_SO.Size = new System.Drawing.Size(624, 26);
-            this.lblMA_SO.TextSize = new System.Drawing.Size(117, 20);
-            // 
             // lblTEN_NGAN
             // 
+            this.lblTEN_NGAN.AppearanceItemCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.lblTEN_NGAN.AppearanceItemCaption.Options.UseForeColor = true;
             this.lblTEN_NGAN.Control = this.txtTEN_NGAN;
-            this.lblTEN_NGAN.Location = new System.Drawing.Point(0, 26);
+            this.lblTEN_NGAN.Location = new System.Drawing.Point(0, 0);
             this.lblTEN_NGAN.Name = "lblTEN_NGAN";
-            this.lblTEN_NGAN.Size = new System.Drawing.Size(624, 26);
-            this.lblTEN_NGAN.TextSize = new System.Drawing.Size(117, 17);
-            // 
-            // lblTEN_CTY_DAY_DU
-            // 
-            this.lblTEN_CTY_DAY_DU.Control = this.txtTEN_CTY_DAY_DU;
-            this.lblTEN_CTY_DAY_DU.Location = new System.Drawing.Point(0, 52);
-            this.lblTEN_CTY_DAY_DU.Name = "lblTEN_CTY_DAY_DU";
-            this.lblTEN_CTY_DAY_DU.Size = new System.Drawing.Size(624, 26);
-            this.lblTEN_CTY_DAY_DU.TextSize = new System.Drawing.Size(117, 17);
-            // 
-            // ItemForSTT
-            // 
-            this.ItemForSTT.Control = this.txtSTT;
-            this.ItemForSTT.Location = new System.Drawing.Point(0, 78);
-            this.ItemForSTT.Name = "ItemForSTT";
-            this.ItemForSTT.Size = new System.Drawing.Size(624, 289);
-            this.ItemForSTT.TextSize = new System.Drawing.Size(117, 17);
+            this.lblTEN_NGAN.Size = new System.Drawing.Size(624, 367);
+            this.lblTEN_NGAN.TextSize = new System.Drawing.Size(80, 17);
             // 
             // frmEditDOI_TAC
             // 
@@ -232,15 +156,9 @@
             this.tablePanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataLayoutControl1)).EndInit();
             this.dataLayoutControl1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.txtSTT.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtTEN_CTY_DAY_DU.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTEN_NGAN.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtMA_SO.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lblMA_SO)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblTEN_NGAN)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lblTEN_CTY_DAY_DU)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemForSTT)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).EndInit();
             this.ResumeLayout(false);
 
@@ -250,16 +168,10 @@
 
         private DevExpress.Utils.Layout.TablePanel tablePanel1;
         private DevExpress.XtraDataLayout.DataLayoutControl dataLayoutControl1;
-        private DevExpress.XtraEditors.TextEdit txtTEN_CTY_DAY_DU;
         private DevExpress.XtraEditors.TextEdit txtTEN_NGAN;
-        private DevExpress.XtraEditors.TextEdit txtMA_SO;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup1;
-        private DevExpress.XtraLayout.LayoutControlItem lblMA_SO;
         private DevExpress.XtraLayout.LayoutControlItem lblTEN_NGAN;
-        private DevExpress.XtraLayout.LayoutControlItem lblTEN_CTY_DAY_DU;
         private DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider dxValidationProvider1;
-        private DevExpress.XtraEditors.TextEdit txtSTT;
-        private DevExpress.XtraLayout.LayoutControlItem ItemForSTT;
         private DevExpress.XtraBars.Docking2010.WindowsUIButtonPanel btnALL;
     }
 }

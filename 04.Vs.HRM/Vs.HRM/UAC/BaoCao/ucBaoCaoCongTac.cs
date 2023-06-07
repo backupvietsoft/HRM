@@ -101,7 +101,6 @@ namespace Vs.HRM
                                                 break;
                                             }
                                     }
-                                    
                                 }
                                 break;
                             case 1:
@@ -113,14 +112,23 @@ namespace Vs.HRM
 
                                     System.Data.SqlClient.SqlConnection conn1;
                                     DataTable dt = new DataTable();
-                                    frm.rpt = new rptDSCBNVDieuChuyen(lk_NgayIn.DateTime, dTuNgay.DateTime, dDenNgay.DateTime);
+                                    string sPS = "rptDSCBCNVDieuChuyen";
+                                    if (Commons.Modules.KyHieuDV == "NB")
+                                    {
+                                        sPS = "rptDSCBCNVDieuChuyen_NB";
+                                        frm.rpt = new rptDSCBNVDieuChuyen_NB(lk_NgayIn.DateTime, dTuNgay.DateTime, dDenNgay.DateTime);
+                                    }
+                                    else
+                                    {
+                                        frm.rpt = new rptDSCBNVDieuChuyen(lk_NgayIn.DateTime, dTuNgay.DateTime, dDenNgay.DateTime);
+                                    }
 
                                     try
                                     {
                                         conn1 = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
                                         conn1.Open();
 
-                                        System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptDSCBCNVDieuChuyen", conn1);
+                                        System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand(sPS, conn1);
 
                                         cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
                                         cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
@@ -175,9 +183,6 @@ namespace Vs.HRM
             dTuNgay.EditValue = Convert.ToDateTime(("01/" + DateTime.Today.Month + "/" + DateTime.Today.Year));
             dDenNgay.EditValue = Convert.ToDateTime(("01/" + DateTime.Today.Month + "/" + DateTime.Today.Year)).AddMonths(1).AddDays(-1);
             lk_NgayIn.EditValue = DateTime.Today;
-            tablePanel1.Rows[2].Height = 0;
-            tablePanel1.Rows[3].Height = 0;
-            rdo_ChonBaoCao.SelectedIndex = 1;
             Commons.Modules.sLoad = "";
         }
 

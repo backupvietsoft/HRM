@@ -23,7 +23,7 @@ namespace Vs.Payroll
     public partial class ucQuyDinhPhuCap : DevExpress.XtraEditors.XtraUserControl
     {
         private static bool isAdd = false;
-        
+
         public static ucQuyDinhPhuCap _instance;
         public static ucQuyDinhPhuCap Instance
         {
@@ -40,31 +40,38 @@ namespace Vs.Payroll
         {
             InitializeComponent();
             Commons.Modules.ObjSystems.ThayDoiNN(this, new List<LayoutControlGroup>() { Root }, btnALL);
-       
+
         }
 
         private void ucQuyDinhPhuCap_Load(object sender, EventArgs e)
         {
-            Commons.Modules.sLoad = "0Load";
-            Commons.Modules.ObjSystems.LoadCboDonViKO(cboDonVi);
-            LoaddNgayApDung();
-            LoadGrdQDTPC();
-            //addMay
-            RepositoryItemLookUpEdit cboID_PC = new RepositoryItemLookUpEdit();
-            cboID_PC.NullText = "";
-            cboID_PC.ValueMember = "ID_PC";
-            cboID_PC.DisplayMember = "TEN_PC";
-            cboID_PC.DataSource = Commons.Modules.ObjSystems.DataPhuCap(Convert.ToString(cboNgay.EditValue));
-            cboID_PC.Columns.Clear();
-            cboID_PC.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("TEN_PC"));
-            cboID_PC.Columns["TEN_PC"].Caption = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "TEN_PC");
-            cboID_PC.AppearanceDropDownHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            cboID_PC.AppearanceDropDownHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            grvData.Columns["ID_PC"].ColumnEdit = cboID_PC;
-            cboID_PC.BeforePopup += CboID_PC_BeforePopup;
-            EnableButon(isAdd);
-            LoadGrdQDTPC();
-            Commons.Modules.sLoad = "";
+            try
+            {
+
+
+                Commons.Modules.sLoad = "0Load";
+                Commons.Modules.ObjSystems.LoadCboDonViKO(cboDonVi);
+                LoaddNgayApDung();
+                LoadGrdQDTPC();
+                //addMay
+                RepositoryItemLookUpEdit cboID_PC = new RepositoryItemLookUpEdit();
+                cboID_PC.NullText = "";
+                cboID_PC.ValueMember = "ID_PC";
+                cboID_PC.DisplayMember = "TEN_PC";
+                cboID_PC.DataSource = Commons.Modules.ObjSystems.DataPhuCap(Convert.ToString(cboNgay.EditValue));
+                cboID_PC.Columns.Clear();
+                cboID_PC.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("TEN_PC"));
+                cboID_PC.Columns["TEN_PC"].Caption = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "TEN_PC");
+                cboID_PC.AppearanceDropDownHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+                cboID_PC.AppearanceDropDownHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+                grvData.Columns["ID_PC"].ColumnEdit = cboID_PC;
+                cboID_PC.BeforePopup += CboID_PC_BeforePopup;
+                EnableButon(isAdd);
+                LoadGrdQDTPC();
+                Commons.Modules.sLoad = "";
+                Commons.Modules.ObjSystems.SetPhanQuyen(btnALL);
+            }
+            catch { }
         }
         private void CboID_PC_BeforePopup(object sender, EventArgs e)
         {
@@ -102,7 +109,7 @@ namespace Vs.Payroll
                 dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetListQDTPC", Convert.ToDateTime(cboNgay.EditValue), cboDonVi.EditValue));
 
                 Commons.Modules.ObjSystems.MLoadXtraGrid(grdData, grvData, dt, false, false, false, true, true, this.Name);
-                
+
             }
             catch
             {
@@ -114,7 +121,7 @@ namespace Vs.Payroll
             grvData.Columns["TT"].Visible = false;
             grvData.Columns["SO_TIEN_QD"].DisplayFormat.FormatType = FormatType.Numeric;
             grvData.Columns["SO_TIEN_QD"].DisplayFormat.FormatString = "N0";
-            
+
         }
 
 
@@ -138,7 +145,7 @@ namespace Vs.Payroll
             }
         }
 
-        
+
         private void windowsUIButtonPanel1_ButtonClick(object sender, DevExpress.XtraBars.Docking2010.ButtonEventArgs e)
         {
             WindowsUIButton btn = e.Button as WindowsUIButton;
@@ -152,7 +159,7 @@ namespace Vs.Payroll
                         Commons.Modules.ObjSystems.AddnewRow(grvData, true);
                         EnableButon(isAdd);
                         break;
-                        
+
                     }
                 case "xoa":
                     {
@@ -165,7 +172,7 @@ namespace Vs.Payroll
                         if (grvData.HasColumnErrors) return;
                         if (Savedata() == false)
                         {
-                            Commons.Modules.ObjSystems.msgChung(Commons.ThongBao.msgDuLieuDangSuDung);
+                            Commons.Modules.ObjSystems.MsgWarning(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDelDangSuDung"));
                         }
                         LoadGrdQDTPC();
                         isAdd = false;
@@ -203,8 +210,8 @@ namespace Vs.Payroll
 
         private void XoaQDTPC()
         {
-            if (grvData.RowCount == 0) { Commons.Modules.ObjSystems.msgChung(Commons.ThongBao.msgKhongCoDuLieuXoa); return; }
-            if (Commons.Modules.ObjSystems.msgHoi(Commons.ThongBao.msgXoa) == DialogResult.No) return;
+            if (grvData.RowCount == 0) { Commons.Modules.ObjSystems.MsgWarning(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgKhongCoDuLieuXoa")); return; }
+            if (Commons.Modules.ObjSystems.MsgQuestion(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msg_XoaDong")) == 0) return;
             //xóa
             try
             {
@@ -214,7 +221,7 @@ namespace Vs.Payroll
             }
             catch
             {
-                Commons.Modules.ObjSystems.msgChung(Commons.ThongBao.msgKhongCoDuLieuXoa);
+                Commons.Modules.ObjSystems.MsgWarning(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgKhongCoDuLieuXoa"));
             }
         }
 
@@ -226,7 +233,7 @@ namespace Vs.Payroll
                 view.SetFocusedRowCellValue("TT", false);
                 view.SetFocusedRowCellValue("NGAY_AD", cboNgay.EditValue);
                 view.SetFocusedRowCellValue("ID_DV", cboDonVi.EditValue);
-                
+
             }
             catch (Exception ex)
             {
@@ -267,10 +274,10 @@ namespace Vs.Payroll
 
         private void grvData_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
         {
-            
+
         }
 
-        
+
         private void grvNgay_RowCellClick(object sender, RowCellClickEventArgs e)
         {
             try
@@ -280,7 +287,7 @@ namespace Vs.Payroll
             }
             catch { }
             cboNgay.ClosePopup();
-            
+
         }
 
         private void cboNgay_EditValueChanged(object sender, EventArgs e)
@@ -292,7 +299,7 @@ namespace Vs.Payroll
             Commons.Modules.sLoad = "";
         }
 
-        
+
         private void cboDonVi_EditValueChanged(object sender, EventArgs e)
         {
             if (Commons.Modules.sLoad == "0Load") return;

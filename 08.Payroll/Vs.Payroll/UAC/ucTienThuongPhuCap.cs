@@ -55,15 +55,20 @@ namespace Vs.Payroll
 
         private void ucTienThuongPhuCap_Load(object sender, EventArgs e)
         {
-            Commons.Modules.sLoad = "0Load";
-            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboDonVi, Commons.Modules.ObjSystems.DataDonVi(false), "ID_DV", "TEN_DV", "TEN_DV");
-            Commons.Modules.ObjSystems.LoadCboXiNghiep(cboDonVi, cboXiNghiep);
-            Commons.Modules.ObjSystems.LoadCboTo(cboDonVi, cboXiNghiep, cboTo);
-            LoadComboThang();
-            LoadComboTinhTrang();
-            LoadData();
-            EnableButon(isAdd, Convert.ToInt32(cboTinhTrang.EditValue));
-            Commons.Modules.sLoad = "";
+            try
+            {
+                Commons.Modules.sLoad = "0Load";
+                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboDonVi, Commons.Modules.ObjSystems.DataDonVi(false), "ID_DV", "TEN_DV", "TEN_DV");
+                Commons.Modules.ObjSystems.LoadCboXiNghiep(cboDonVi, cboXiNghiep);
+                Commons.Modules.ObjSystems.LoadCboTo(cboDonVi, cboXiNghiep, cboTo);
+                LoadComboThang();
+                LoadComboTinhTrang();
+                LoadData();
+                EnableButon(isAdd, Convert.ToInt32(cboTinhTrang.EditValue));
+                Commons.Modules.sLoad = "";
+                Commons.Modules.ObjSystems.SetPhanQuyen(btnALL);
+            }
+            catch { }
         }
 
         private void LoadData()
@@ -475,7 +480,7 @@ namespace Vs.Payroll
             Commons.Modules.ObjSystems.LoadCboTo(cboDonVi, cboXiNghiep, cboTo);
             LoadComboThang();
             LoadData();
-            EnableButon(false,Convert.ToInt32(cboTinhTrang.EditValue));
+            EnableButon(false, Convert.ToInt32(cboTinhTrang.EditValue));
             Commons.Modules.sLoad = "";
         }
 

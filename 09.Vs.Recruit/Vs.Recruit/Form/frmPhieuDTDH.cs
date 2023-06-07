@@ -215,6 +215,7 @@ namespace Vs.Recruit
             datDNgay.EditValue = secondDateTime;
             LoadData();
             Commons.Modules.sLoad = "";
+            Commons.Modules.ObjSystems.SetPhanQuyen(btnALL);
         }
 
         private void datDNgay_EditValueChanged(object sender, EventArgs e)

@@ -100,7 +100,7 @@ namespace Vs.Payroll
                 DataTable dtTmp = new DataTable();
                 dtTmp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSql));
                 if (dtTmp.Rows.Count <= 0) return;
-                try { cboDonVi.EditValue = dtTmp.Rows[0]["ID_DV"]; } catch { }
+                try { cboDonVi.EditValue = Convert.ToInt64(dtTmp.Rows[0]["ID_DV"]); } catch { }
                 try { cboKhachHang.EditValue = dtTmp.Rows[0]["ID_DT"]; } catch { }
                 try { txtLHH.EditValue = dtTmp.Rows[0]["TEN_LOAI_HH"]; } catch { }
                 try { txtTEN_HH.EditValue = dtTmp.Rows[0]["TEN_HH"]; } catch { }

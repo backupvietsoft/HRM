@@ -64,6 +64,8 @@ namespace Vs.HRM
 
                 Commons.Modules.sLoad = "";
                 enableButon(true);
+
+                Commons.Modules.ObjSystems.SetPhanQuyen(windowsUIButton);
             }
             catch { }
         }

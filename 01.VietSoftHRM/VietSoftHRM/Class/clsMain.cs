@@ -1,4 +1,5 @@
 ﻿using CredentialManagement;
+using DevExpress.CodeParser;
 using DevExpress.XtraEditors;
 using Microsoft.ApplicationBlocks.Data;
 using System;
@@ -84,13 +85,14 @@ namespace VietSoftHRM
                     Commons.Modules.bKiemPCD = Convert.ToBoolean(dt.Rows[0]["CHECK_PCD"]);
 
                 }
-                catch 
+                catch
                 {
                 }
+                try { Commons.Modules.iHeSo = Convert.ToInt32(dt.Rows[0]["HE_SO"]); } catch { Commons.Modules.iHeSo = 0; }
 
                 try
                 {
-                    using (new ConnectToSharedFolder(dt.Rows[0]["DUONG_DAN_TL"].ToString(), new NetworkCredential(Commons.Modules.ObjSystems.Decrypt(dt.Rows[0]["USER_TL"].ToString(),true), Commons.Modules.ObjSystems.Decrypt(dt.Rows[0]["PASS_TL"].ToString(),true))))
+                    using (new ConnectToSharedFolder(dt.Rows[0]["DUONG_DAN_TL"].ToString(), new NetworkCredential(Commons.Modules.ObjSystems.Decrypt(dt.Rows[0]["USER_TL"].ToString(), true), Commons.Modules.ObjSystems.Decrypt(dt.Rows[0]["PASS_TL"].ToString(), true))))
                     {
                         Commons.Modules.sDDTaiLieu = dt.Rows[0]["DUONG_DAN_TL"].ToString();
                         bool exists = System.IO.Directory.Exists(Commons.Modules.sDDTaiLieu);
@@ -100,7 +102,7 @@ namespace VietSoftHRM
                         }
                         using (var cred = new Credential())
                         {
-                            cred.Username = Commons.Modules.ObjSystems.Decrypt(dt.Rows[0]["USER_TL"].ToString(),true);
+                            cred.Username = Commons.Modules.ObjSystems.Decrypt(dt.Rows[0]["USER_TL"].ToString(), true);
                             cred.Password = Commons.Modules.ObjSystems.Decrypt(dt.Rows[0]["PASS_TL"].ToString(), true);
                             cred.Target = Commons.Modules.sDDTaiLieu.Substring(2, Commons.Modules.sDDTaiLieu.Substring(2).IndexOf("\\"));
                             cred.Type = CredentialType.DomainPassword;
@@ -109,7 +111,7 @@ namespace VietSoftHRM
                         }
                     }
                 }
-                catch 
+                catch
                 {
                     Commons.Modules.sDDTaiLieu = "";
                     Commons.Modules.iLOAI_CN = 0;
@@ -232,6 +234,7 @@ namespace VietSoftHRM
                 String link3 = sArr[3];
                 //Khong có loai update thi thoát
                 if (loai <= -1) return;
+
                 switch (loai)
                 {
                     //Loai 2 xai link1,2 : path link tren dropbox 
@@ -275,7 +278,6 @@ namespace VietSoftHRM
                 XtraMessageBox.Show(ex.ToString());
             }
         }
-
         public static string LayDuLieu(string TenFile)
         {
             StreamReader sr;
@@ -303,6 +305,5 @@ namespace VietSoftHRM
             }
             return sText;
         }
-
     }
 }

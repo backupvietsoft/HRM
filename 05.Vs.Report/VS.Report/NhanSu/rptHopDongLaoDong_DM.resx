@@ -124,10 +124,10 @@
     <value>'Vào ngày thường ít nhất bằng 150%&lt;br&gt;&lt;i&gt;'+[NOI_DUNG].[31] +'&lt;/i&gt;&lt;br&gt;Vào ngày nghỉ hàng tuần, ít nhất bằng 200%&lt;br&gt;&lt;i&gt;' +[NOI_DUNG].[30] + '&lt;/i&gt;&lt;br&gt;' +[NOI_DUNG].[5] +'&lt;br&gt;&lt;i&gt;' + [NOI_DUNG].[29] + '&lt;/i&gt;'</value>
   </data>
   <data name="xrLabel102.ExpressionBindings" xml:space="preserve">
-    <value>'Pursuant to the power of attorney No. 0601/2022UQ-DM of the General Director, effective from June 1, 2022. Authorized recipient: '+[DATA].[GIOI_TINH_NUQ_A]+' '+[DATA].[TEN_NUQ]+' – HR&amp; Compliance &amp; Salary Manager. Citizen identity card No. '+[DATA].[SO_CMND_NUQ]+''</value>
+    <value>'Pursuant to the power of attorney No. '+ [DATA].[NGAY_HIEU_LUC_GUQ] +' of the General Director, effective from '+ [DATA].[NGAY_HIEU_LUC_GUQ] +'. Authorized recipient: '+[DATA].[GIOI_TINH_NUQ_A]+' '+[DATA].[TEN_NUQ]+' – HR&amp; Compliance &amp; Salary Manager. Citizen identity card No. '+[DATA].[SO_CMND_NUQ]+''</value>
   </data>
   <data name="xrLabel101.ExpressionBindings" xml:space="preserve">
-    <value>'Căn cứ giấy ủy quyền số 0601/2022UQ-DM của TGĐ có hiệu lực ngày 01/06/2022. Người nhận ủy quyền: &lt;b&gt;'+[DATA].[GIOI_TINH_NUQ]+' '+[DATA].[TEN_NUQ]+' – TP Nhân sự tuân thủ &amp; tiền lương &lt;/b&gt;. Số CCCD '+[DATA].[SO_CMND_NUQ]+''</value>
+    <value>'Căn cứ giấy ủy quyền số ' + [DATA].[GIAY_UY_QUYEN] +  ' của TGĐ có hiệu lực ngày '+ [DATA].[NGAY_HIEU_LUC_GUQ] +'. Người nhận ủy quyền: &lt;b&gt;'+[DATA].[GIOI_TINH_NUQ]+' '+[DATA].[TEN_NUQ]+' – TP Nhân sự tuân thủ &amp; tiền lương &lt;/b&gt;. Số CCCD '+[DATA].[SO_CMND_NUQ]+''</value>
   </data>
   <data name="xrLabel56.ExpressionBindings" xml:space="preserve">
     <value>'&lt;b&gt;3.2.4. &lt;/b&gt;' + [NOI_DUNG].[20]+ '&lt;br&gt;&lt;i&gt;' + [NOI_DUNG].[42] + '&lt;/i&gt;&lt;br&gt;'+ [NOI_DUNG].[53] + '&lt;br&gt;&lt;i&gt;' + [NOI_DUNG].[54] + '&lt;/i&gt;&lt;br&gt;'+ [NOI_DUNG].[55] + '&lt;br&gt;&lt;i&gt;' + [NOI_DUNG].[56] + '&lt;/i&gt;&lt;br&gt;'+ [NOI_DUNG].[57] + '&lt;br&gt;&lt;i&gt;' + [NOI_DUNG].[58] + '&lt;/i&gt;'</value>

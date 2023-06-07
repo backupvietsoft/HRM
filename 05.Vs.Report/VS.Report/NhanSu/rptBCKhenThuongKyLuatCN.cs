@@ -5,6 +5,7 @@ using System.ComponentModel;
 using DevExpress.XtraReports.UI;
 using System.Data;
 using Commons;
+using Microsoft.ApplicationBlocks.Data;
 
 namespace Vs.Report
 {
@@ -24,7 +25,9 @@ namespace Vs.Report
             string Thang = "0" + ngayin.Month;
             string Nam = "00" + ngayin.Year;
 
-            lblNgay.Text = Commons.Modules.ObjSystems.GetNN(dtNgu, "Ngay", "NgayThangNam") + " " + Ngay.Substring(Ngay.Length - 2, 2) + " " +
+            string sSQL = "SELECT TOP 1 TEN_TINH FROM dbo.DON_VI";
+            string sTenTinh = Convert.ToString(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, sSQL));
+            lblNgay.Text = sTenTinh + ", " + Commons.Modules.ObjSystems.GetNN(dtNgu, "Ngay", "NgayThangNam") + " " + Ngay.Substring(Ngay.Length - 2, 2) + " " +
                 Commons.Modules.ObjSystems.GetNN(dtNgu, "Thang", "NgayThangNam") + " " + Thang.Substring(Thang.Length - 2, 2) + " " +
                 Commons.Modules.ObjSystems.GetNN(dtNgu, "Nam", "NgayThangNam") + " " + Nam.Substring(Nam.Length - 4, 4);
         }

@@ -45,6 +45,7 @@ namespace Vs.HRM
             radTinHTrang_SelectedIndexChanged(null, null);
             Commons.Modules.sPS = "";
             enableButon(true);
+            Commons.Modules.ObjSystems.SetPhanQuyen(windowsUIButton);
         }
 
         private void cboDV_EditValueChanged(object sender, EventArgs e)

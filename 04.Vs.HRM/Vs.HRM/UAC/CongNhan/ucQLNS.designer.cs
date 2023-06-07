@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions1 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
             DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions2 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
             DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions3 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
@@ -38,22 +37,22 @@
             this.datDNgay = new DevExpress.XtraEditors.DateEdit();
             this.datTNgay = new DevExpress.XtraEditors.DateEdit();
             this.tablePanel1 = new DevExpress.Utils.Layout.TablePanel();
-            this.btnBoViec = new System.Windows.Forms.Button();
-            this.lblBoViec = new DevExpress.XtraEditors.LabelControl();
-            this.btnDaNghiViec = new System.Windows.Forms.Button();
-            this.lblDaNghiViec = new DevExpress.XtraEditors.LabelControl();
-            this.btnCheDo1Nam = new System.Windows.Forms.Button();
-            this.lblCheDo1Nam = new DevExpress.XtraEditors.LabelControl();
-            this.btnNghiDe = new System.Windows.Forms.Button();
-            this.lblNghiDe = new DevExpress.XtraEditors.LabelControl();
-            this.btnSapNghiSinh = new System.Windows.Forms.Button();
-            this.lblSapNghiSinh = new DevExpress.XtraEditors.LabelControl();
-            this.btnSapNghiViec = new System.Windows.Forms.Button();
-            this.lblSapNghiViec = new DevExpress.XtraEditors.LabelControl();
-            this.btnSapHetHanHD = new System.Windows.Forms.Button();
-            this.lblSapHetHanHD = new DevExpress.XtraEditors.LabelControl();
-            this.btnBinhThuong = new System.Windows.Forms.Button();
-            this.lblBinhThuong = new DevExpress.XtraEditors.LabelControl();
+            this.btn8 = new System.Windows.Forms.Button();
+            this.lbl8 = new DevExpress.XtraEditors.LabelControl();
+            this.btn7 = new System.Windows.Forms.Button();
+            this.lbl7 = new DevExpress.XtraEditors.LabelControl();
+            this.btn6 = new System.Windows.Forms.Button();
+            this.lbl6 = new DevExpress.XtraEditors.LabelControl();
+            this.btn5 = new System.Windows.Forms.Button();
+            this.lbl5 = new DevExpress.XtraEditors.LabelControl();
+            this.btn4 = new System.Windows.Forms.Button();
+            this.lbl4 = new DevExpress.XtraEditors.LabelControl();
+            this.btn3 = new System.Windows.Forms.Button();
+            this.lbl3 = new DevExpress.XtraEditors.LabelControl();
+            this.btn2 = new System.Windows.Forms.Button();
+            this.lbl2 = new DevExpress.XtraEditors.LabelControl();
+            this.btn1 = new System.Windows.Forms.Button();
+            this.lbl1 = new DevExpress.XtraEditors.LabelControl();
             this.windowsUIButtonPanel1 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonPanel();
             this.searchControl2 = new DevExpress.XtraEditors.SearchControl();
             this.grdDSCongNhan = new DevExpress.XtraGrid.GridControl();
@@ -102,14 +101,12 @@
             this.colNVL = new DevExpress.XtraGrid.Columns.TileViewColumn();
             this.tabbedControlGroup1 = new DevExpress.XtraLayout.TabbedControlGroup();
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.mnuLinkUngVienToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.datDNgay.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.datDNgay.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.datTNgay.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.datDNgay.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.datTNgay.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.datTNgay.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).BeginInit();
             this.tablePanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.searchControl2.Properties)).BeginInit();
@@ -139,7 +136,6 @@
             this.navigationPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tabbedControlGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
-            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // layoutControl1
@@ -193,7 +189,7 @@
             // tablePanel1
             // 
             this.tablePanel1.Columns.AddRange(new DevExpress.Utils.Layout.TablePanelColumn[] {
-            new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 200F),
+            new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 150F),
             new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 7.5F),
             new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 7.5F),
             new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 7.5F),
@@ -203,22 +199,22 @@
             new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 7.5F),
             new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 7.5F),
             new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 25F)});
-            this.tablePanel1.Controls.Add(this.btnBoViec);
-            this.tablePanel1.Controls.Add(this.lblBoViec);
-            this.tablePanel1.Controls.Add(this.btnDaNghiViec);
-            this.tablePanel1.Controls.Add(this.lblDaNghiViec);
-            this.tablePanel1.Controls.Add(this.btnCheDo1Nam);
-            this.tablePanel1.Controls.Add(this.lblCheDo1Nam);
-            this.tablePanel1.Controls.Add(this.btnNghiDe);
-            this.tablePanel1.Controls.Add(this.lblNghiDe);
-            this.tablePanel1.Controls.Add(this.btnSapNghiSinh);
-            this.tablePanel1.Controls.Add(this.lblSapNghiSinh);
-            this.tablePanel1.Controls.Add(this.btnSapNghiViec);
-            this.tablePanel1.Controls.Add(this.lblSapNghiViec);
-            this.tablePanel1.Controls.Add(this.btnSapHetHanHD);
-            this.tablePanel1.Controls.Add(this.lblSapHetHanHD);
-            this.tablePanel1.Controls.Add(this.btnBinhThuong);
-            this.tablePanel1.Controls.Add(this.lblBinhThuong);
+            this.tablePanel1.Controls.Add(this.btn8);
+            this.tablePanel1.Controls.Add(this.lbl8);
+            this.tablePanel1.Controls.Add(this.btn7);
+            this.tablePanel1.Controls.Add(this.lbl7);
+            this.tablePanel1.Controls.Add(this.btn6);
+            this.tablePanel1.Controls.Add(this.lbl6);
+            this.tablePanel1.Controls.Add(this.btn5);
+            this.tablePanel1.Controls.Add(this.lbl5);
+            this.tablePanel1.Controls.Add(this.btn4);
+            this.tablePanel1.Controls.Add(this.lbl4);
+            this.tablePanel1.Controls.Add(this.btn3);
+            this.tablePanel1.Controls.Add(this.lbl3);
+            this.tablePanel1.Controls.Add(this.btn2);
+            this.tablePanel1.Controls.Add(this.lbl2);
+            this.tablePanel1.Controls.Add(this.btn1);
+            this.tablePanel1.Controls.Add(this.lbl1);
             this.tablePanel1.Controls.Add(this.windowsUIButtonPanel1);
             this.tablePanel1.Controls.Add(this.searchControl2);
             this.tablePanel1.Location = new System.Drawing.Point(1, 520);
@@ -232,218 +228,218 @@
             this.tablePanel1.Size = new System.Drawing.Size(1009, 57);
             this.tablePanel1.TabIndex = 20;
             // 
-            // btnBoViec
+            // btn8
             // 
-            this.tablePanel1.SetColumn(this.btnBoViec, 8);
-            this.btnBoViec.Location = new System.Drawing.Point(717, 7);
-            this.btnBoViec.Margin = new System.Windows.Forms.Padding(17, 3, 3, 3);
-            this.btnBoViec.MaximumSize = new System.Drawing.Size(20, 20);
-            this.btnBoViec.MinimumSize = new System.Drawing.Size(2, 20);
-            this.btnBoViec.Name = "btnBoViec";
-            this.tablePanel1.SetRow(this.btnBoViec, 0);
-            this.btnBoViec.Size = new System.Drawing.Size(20, 20);
-            this.btnBoViec.TabIndex = 93;
-            this.btnBoViec.UseVisualStyleBackColor = true;
-            this.btnBoViec.Click += new System.EventHandler(this.btnBoViec_Click);
+            this.tablePanel1.SetColumn(this.btn8, 8);
+            this.btn8.Location = new System.Drawing.Point(698, 7);
+            this.btn8.Margin = new System.Windows.Forms.Padding(17, 3, 3, 3);
+            this.btn8.MaximumSize = new System.Drawing.Size(20, 20);
+            this.btn8.MinimumSize = new System.Drawing.Size(2, 20);
+            this.btn8.Name = "btn8";
+            this.tablePanel1.SetRow(this.btn8, 0);
+            this.btn8.Size = new System.Drawing.Size(20, 20);
+            this.btn8.TabIndex = 93;
+            this.btn8.UseVisualStyleBackColor = true;
+            this.btn8.Click += new System.EventHandler(this.btn8_Click);
             // 
-            // lblBoViec
+            // lbl8
             // 
-            this.lblBoViec.Appearance.Font = new System.Drawing.Font("Segoe UI", 7.75F);
-            this.lblBoViec.Appearance.Options.UseFont = true;
-            this.tablePanel1.SetColumn(this.lblBoViec, 8);
-            this.lblBoViec.Location = new System.Drawing.Point(705, 39);
-            this.lblBoViec.Margin = new System.Windows.Forms.Padding(5, 3, 3, 3);
-            this.lblBoViec.Name = "lblBoViec";
-            this.tablePanel1.SetRow(this.lblBoViec, 1);
-            this.lblBoViec.Size = new System.Drawing.Size(35, 13);
-            this.lblBoViec.TabIndex = 92;
-            this.lblBoViec.Text = "Bỏ việc";
+            this.lbl8.Appearance.Font = new System.Drawing.Font("Segoe UI", 7.75F);
+            this.lbl8.Appearance.Options.UseFont = true;
+            this.tablePanel1.SetColumn(this.lbl8, 8);
+            this.lbl8.Location = new System.Drawing.Point(686, 39);
+            this.lbl8.Margin = new System.Windows.Forms.Padding(5, 3, 3, 3);
+            this.lbl8.Name = "lbl8";
+            this.tablePanel1.SetRow(this.lbl8, 1);
+            this.lbl8.Size = new System.Drawing.Size(35, 13);
+            this.lbl8.TabIndex = 92;
+            this.lbl8.Text = "Bỏ việc";
             // 
-            // btnDaNghiViec
+            // btn7
             // 
-            this.tablePanel1.SetColumn(this.btnDaNghiViec, 7);
-            this.btnDaNghiViec.Location = new System.Drawing.Point(645, 7);
-            this.btnDaNghiViec.Margin = new System.Windows.Forms.Padding(17, 3, 3, 3);
-            this.btnDaNghiViec.MaximumSize = new System.Drawing.Size(20, 20);
-            this.btnDaNghiViec.MinimumSize = new System.Drawing.Size(2, 20);
-            this.btnDaNghiViec.Name = "btnDaNghiViec";
-            this.tablePanel1.SetRow(this.btnDaNghiViec, 0);
-            this.btnDaNghiViec.Size = new System.Drawing.Size(20, 20);
-            this.btnDaNghiViec.TabIndex = 91;
-            this.btnDaNghiViec.UseVisualStyleBackColor = true;
-            this.btnDaNghiViec.Click += new System.EventHandler(this.btnDaNghiViec_Click);
+            this.tablePanel1.SetColumn(this.btn7, 7);
+            this.btn7.Location = new System.Drawing.Point(622, 7);
+            this.btn7.Margin = new System.Windows.Forms.Padding(17, 3, 3, 3);
+            this.btn7.MaximumSize = new System.Drawing.Size(20, 20);
+            this.btn7.MinimumSize = new System.Drawing.Size(2, 20);
+            this.btn7.Name = "btn7";
+            this.tablePanel1.SetRow(this.btn7, 0);
+            this.btn7.Size = new System.Drawing.Size(20, 20);
+            this.btn7.TabIndex = 91;
+            this.btn7.UseVisualStyleBackColor = true;
+            this.btn7.Click += new System.EventHandler(this.btn7_Click);
             // 
-            // lblDaNghiViec
+            // lbl7
             // 
-            this.lblDaNghiViec.Appearance.Font = new System.Drawing.Font("Segoe UI", 7.75F);
-            this.lblDaNghiViec.Appearance.Options.UseFont = true;
-            this.tablePanel1.SetColumn(this.lblDaNghiViec, 7);
-            this.lblDaNghiViec.Location = new System.Drawing.Point(633, 39);
-            this.lblDaNghiViec.Margin = new System.Windows.Forms.Padding(5, 3, 3, 3);
-            this.lblDaNghiViec.Name = "lblDaNghiViec";
-            this.tablePanel1.SetRow(this.lblDaNghiViec, 1);
-            this.lblDaNghiViec.Size = new System.Drawing.Size(63, 13);
-            this.lblDaNghiViec.TabIndex = 90;
-            this.lblDaNghiViec.Text = "Đã nghỉ việc";
+            this.lbl7.Appearance.Font = new System.Drawing.Font("Segoe UI", 7.75F);
+            this.lbl7.Appearance.Options.UseFont = true;
+            this.tablePanel1.SetColumn(this.lbl7, 7);
+            this.lbl7.Location = new System.Drawing.Point(610, 39);
+            this.lbl7.Margin = new System.Windows.Forms.Padding(5, 3, 3, 3);
+            this.lbl7.Name = "lbl7";
+            this.tablePanel1.SetRow(this.lbl7, 1);
+            this.lbl7.Size = new System.Drawing.Size(63, 13);
+            this.lbl7.TabIndex = 90;
+            this.lbl7.Text = "Đã nghỉ việc";
             // 
-            // btnCheDo1Nam
+            // btn6
             // 
-            this.tablePanel1.SetColumn(this.btnCheDo1Nam, 6);
-            this.btnCheDo1Nam.Location = new System.Drawing.Point(574, 7);
-            this.btnCheDo1Nam.Margin = new System.Windows.Forms.Padding(17, 3, 3, 3);
-            this.btnCheDo1Nam.MaximumSize = new System.Drawing.Size(20, 20);
-            this.btnCheDo1Nam.MinimumSize = new System.Drawing.Size(2, 20);
-            this.btnCheDo1Nam.Name = "btnCheDo1Nam";
-            this.tablePanel1.SetRow(this.btnCheDo1Nam, 0);
-            this.btnCheDo1Nam.Size = new System.Drawing.Size(20, 20);
-            this.btnCheDo1Nam.TabIndex = 89;
-            this.btnCheDo1Nam.UseVisualStyleBackColor = true;
-            this.btnCheDo1Nam.Click += new System.EventHandler(this.btnCheDo1Nam_Click);
+            this.tablePanel1.SetColumn(this.btn6, 6);
+            this.btn6.Location = new System.Drawing.Point(546, 7);
+            this.btn6.Margin = new System.Windows.Forms.Padding(17, 3, 3, 3);
+            this.btn6.MaximumSize = new System.Drawing.Size(20, 20);
+            this.btn6.MinimumSize = new System.Drawing.Size(2, 20);
+            this.btn6.Name = "btn6";
+            this.tablePanel1.SetRow(this.btn6, 0);
+            this.btn6.Size = new System.Drawing.Size(20, 20);
+            this.btn6.TabIndex = 89;
+            this.btn6.UseVisualStyleBackColor = true;
+            this.btn6.Click += new System.EventHandler(this.btn6_Click);
             // 
-            // lblCheDo1Nam
+            // lbl6
             // 
-            this.lblCheDo1Nam.Appearance.Font = new System.Drawing.Font("Segoe UI", 7.75F);
-            this.lblCheDo1Nam.Appearance.Options.UseFont = true;
-            this.tablePanel1.SetColumn(this.lblCheDo1Nam, 6);
-            this.lblCheDo1Nam.Location = new System.Drawing.Point(560, 40);
-            this.lblCheDo1Nam.Name = "lblCheDo1Nam";
-            this.tablePanel1.SetRow(this.lblCheDo1Nam, 1);
-            this.lblCheDo1Nam.Size = new System.Drawing.Size(44, 12);
-            this.lblCheDo1Nam.TabIndex = 88;
-            this.lblCheDo1Nam.Text = "CĐ 1 năm";
+            this.lbl6.Appearance.Font = new System.Drawing.Font("Segoe UI", 7.75F);
+            this.lbl6.Appearance.Options.UseFont = true;
+            this.tablePanel1.SetColumn(this.lbl6, 6);
+            this.lbl6.Location = new System.Drawing.Point(532, 40);
+            this.lbl6.Name = "lbl6";
+            this.tablePanel1.SetRow(this.lbl6, 1);
+            this.lbl6.Size = new System.Drawing.Size(44, 12);
+            this.lbl6.TabIndex = 88;
+            this.lbl6.Text = "CĐ 1 năm";
             // 
-            // btnNghiDe
+            // btn5
             // 
-            this.tablePanel1.SetColumn(this.btnNghiDe, 5);
-            this.btnNghiDe.Location = new System.Drawing.Point(503, 7);
-            this.btnNghiDe.Margin = new System.Windows.Forms.Padding(17, 3, 3, 3);
-            this.btnNghiDe.MaximumSize = new System.Drawing.Size(20, 20);
-            this.btnNghiDe.MinimumSize = new System.Drawing.Size(2, 20);
-            this.btnNghiDe.Name = "btnNghiDe";
-            this.tablePanel1.SetRow(this.btnNghiDe, 0);
-            this.btnNghiDe.Size = new System.Drawing.Size(20, 20);
-            this.btnNghiDe.TabIndex = 87;
-            this.btnNghiDe.UseVisualStyleBackColor = true;
-            this.btnNghiDe.Click += new System.EventHandler(this.btnNghiDe_Click);
+            this.tablePanel1.SetColumn(this.btn5, 5);
+            this.btn5.Location = new System.Drawing.Point(470, 7);
+            this.btn5.Margin = new System.Windows.Forms.Padding(17, 3, 3, 3);
+            this.btn5.MaximumSize = new System.Drawing.Size(20, 20);
+            this.btn5.MinimumSize = new System.Drawing.Size(2, 20);
+            this.btn5.Name = "btn5";
+            this.tablePanel1.SetRow(this.btn5, 0);
+            this.btn5.Size = new System.Drawing.Size(20, 20);
+            this.btn5.TabIndex = 87;
+            this.btn5.UseVisualStyleBackColor = true;
+            this.btn5.Click += new System.EventHandler(this.btn5_Click);
             // 
-            // lblNghiDe
+            // lbl5
             // 
-            this.lblNghiDe.Appearance.Font = new System.Drawing.Font("Segoe UI", 7.75F);
-            this.lblNghiDe.Appearance.Options.UseFont = true;
-            this.tablePanel1.SetColumn(this.lblNghiDe, 5);
-            this.lblNghiDe.Location = new System.Drawing.Point(491, 39);
-            this.lblNghiDe.Margin = new System.Windows.Forms.Padding(5, 3, 3, 3);
-            this.lblNghiDe.Name = "lblNghiDe";
-            this.tablePanel1.SetRow(this.lblNghiDe, 1);
-            this.lblNghiDe.Size = new System.Drawing.Size(41, 13);
-            this.lblNghiDe.TabIndex = 86;
-            this.lblNghiDe.Text = "Nghỉ đẻ";
+            this.lbl5.Appearance.Font = new System.Drawing.Font("Segoe UI", 7.75F);
+            this.lbl5.Appearance.Options.UseFont = true;
+            this.tablePanel1.SetColumn(this.lbl5, 5);
+            this.lbl5.Location = new System.Drawing.Point(458, 39);
+            this.lbl5.Margin = new System.Windows.Forms.Padding(5, 3, 3, 3);
+            this.lbl5.Name = "lbl5";
+            this.tablePanel1.SetRow(this.lbl5, 1);
+            this.lbl5.Size = new System.Drawing.Size(41, 13);
+            this.lbl5.TabIndex = 86;
+            this.lbl5.Text = "Nghỉ đẻ";
             // 
-            // btnSapNghiSinh
+            // btn4
             // 
-            this.tablePanel1.SetColumn(this.btnSapNghiSinh, 4);
-            this.btnSapNghiSinh.Location = new System.Drawing.Point(431, 7);
-            this.btnSapNghiSinh.Margin = new System.Windows.Forms.Padding(17, 3, 3, 3);
-            this.btnSapNghiSinh.MaximumSize = new System.Drawing.Size(20, 20);
-            this.btnSapNghiSinh.MinimumSize = new System.Drawing.Size(2, 20);
-            this.btnSapNghiSinh.Name = "btnSapNghiSinh";
-            this.tablePanel1.SetRow(this.btnSapNghiSinh, 0);
-            this.btnSapNghiSinh.Size = new System.Drawing.Size(20, 20);
-            this.btnSapNghiSinh.TabIndex = 85;
-            this.btnSapNghiSinh.UseVisualStyleBackColor = true;
-            this.btnSapNghiSinh.Click += new System.EventHandler(this.btnSapNghiSinh_Click);
+            this.tablePanel1.SetColumn(this.btn4, 4);
+            this.btn4.Location = new System.Drawing.Point(394, 7);
+            this.btn4.Margin = new System.Windows.Forms.Padding(17, 3, 3, 3);
+            this.btn4.MaximumSize = new System.Drawing.Size(20, 20);
+            this.btn4.MinimumSize = new System.Drawing.Size(2, 20);
+            this.btn4.Name = "btn4";
+            this.tablePanel1.SetRow(this.btn4, 0);
+            this.btn4.Size = new System.Drawing.Size(20, 20);
+            this.btn4.TabIndex = 85;
+            this.btn4.UseVisualStyleBackColor = true;
+            this.btn4.Click += new System.EventHandler(this.btn4_Click);
             // 
-            // lblSapNghiSinh
+            // lbl4
             // 
-            this.lblSapNghiSinh.Appearance.Font = new System.Drawing.Font("Segoe UI", 7.75F);
-            this.lblSapNghiSinh.Appearance.Options.UseFont = true;
-            this.tablePanel1.SetColumn(this.lblSapNghiSinh, 4);
-            this.lblSapNghiSinh.Location = new System.Drawing.Point(417, 39);
-            this.lblSapNghiSinh.Margin = new System.Windows.Forms.Padding(3, 3, 2, 3);
-            this.lblSapNghiSinh.Name = "lblSapNghiSinh";
-            this.tablePanel1.SetRow(this.lblSapNghiSinh, 1);
-            this.lblSapNghiSinh.Size = new System.Drawing.Size(66, 13);
-            this.lblSapNghiSinh.TabIndex = 84;
-            this.lblSapNghiSinh.Text = "Sắp nghỉ sinh";
+            this.lbl4.Appearance.Font = new System.Drawing.Font("Segoe UI", 7.75F);
+            this.lbl4.Appearance.Options.UseFont = true;
+            this.tablePanel1.SetColumn(this.lbl4, 4);
+            this.lbl4.Location = new System.Drawing.Point(380, 39);
+            this.lbl4.Margin = new System.Windows.Forms.Padding(3, 3, 2, 3);
+            this.lbl4.Name = "lbl4";
+            this.tablePanel1.SetRow(this.lbl4, 1);
+            this.lbl4.Size = new System.Drawing.Size(71, 13);
+            this.lbl4.TabIndex = 84;
+            this.lbl4.Text = "Sắp nghỉ sinh";
             // 
-            // btnSapNghiViec
+            // btn3
             // 
-            this.tablePanel1.SetColumn(this.btnSapNghiViec, 3);
-            this.btnSapNghiViec.Location = new System.Drawing.Point(360, 7);
-            this.btnSapNghiViec.Margin = new System.Windows.Forms.Padding(17, 3, 3, 3);
-            this.btnSapNghiViec.MaximumSize = new System.Drawing.Size(20, 20);
-            this.btnSapNghiViec.MinimumSize = new System.Drawing.Size(2, 20);
-            this.btnSapNghiViec.Name = "btnSapNghiViec";
-            this.tablePanel1.SetRow(this.btnSapNghiViec, 0);
-            this.btnSapNghiViec.Size = new System.Drawing.Size(20, 20);
-            this.btnSapNghiViec.TabIndex = 83;
-            this.btnSapNghiViec.UseVisualStyleBackColor = true;
-            this.btnSapNghiViec.Click += new System.EventHandler(this.btnSapNghiViec_Click);
+            this.tablePanel1.SetColumn(this.btn3, 3);
+            this.btn3.Location = new System.Drawing.Point(319, 7);
+            this.btn3.Margin = new System.Windows.Forms.Padding(17, 3, 3, 3);
+            this.btn3.MaximumSize = new System.Drawing.Size(20, 20);
+            this.btn3.MinimumSize = new System.Drawing.Size(2, 20);
+            this.btn3.Name = "btn3";
+            this.tablePanel1.SetRow(this.btn3, 0);
+            this.btn3.Size = new System.Drawing.Size(20, 20);
+            this.btn3.TabIndex = 83;
+            this.btn3.UseVisualStyleBackColor = true;
+            this.btn3.Click += new System.EventHandler(this.btn3_Click);
             // 
-            // lblSapNghiViec
+            // lbl3
             // 
-            this.lblSapNghiViec.Appearance.Font = new System.Drawing.Font("Segoe UI", 7.75F);
-            this.lblSapNghiViec.Appearance.Options.UseFont = true;
-            this.tablePanel1.SetColumn(this.lblSapNghiViec, 3);
-            this.lblSapNghiViec.Location = new System.Drawing.Point(346, 39);
-            this.lblSapNghiViec.Name = "lblSapNghiViec";
-            this.tablePanel1.SetRow(this.lblSapNghiViec, 1);
-            this.lblSapNghiViec.Size = new System.Drawing.Size(65, 13);
-            this.lblSapNghiViec.TabIndex = 82;
-            this.lblSapNghiViec.Text = "Sắp nghỉ việc";
+            this.lbl3.Appearance.Font = new System.Drawing.Font("Segoe UI", 7.75F);
+            this.lbl3.Appearance.Options.UseFont = true;
+            this.tablePanel1.SetColumn(this.lbl3, 3);
+            this.lbl3.Location = new System.Drawing.Point(305, 39);
+            this.lbl3.Name = "lbl3";
+            this.tablePanel1.SetRow(this.lbl3, 1);
+            this.lbl3.Size = new System.Drawing.Size(68, 13);
+            this.lbl3.TabIndex = 82;
+            this.lbl3.Text = "Sắp nghỉ việc";
             // 
-            // btnSapHetHanHD
+            // btn2
             // 
-            this.tablePanel1.SetColumn(this.btnSapHetHanHD, 2);
-            this.btnSapHetHanHD.Location = new System.Drawing.Point(288, 7);
-            this.btnSapHetHanHD.Margin = new System.Windows.Forms.Padding(17, 3, 3, 3);
-            this.btnSapHetHanHD.MaximumSize = new System.Drawing.Size(20, 20);
-            this.btnSapHetHanHD.MinimumSize = new System.Drawing.Size(2, 20);
-            this.btnSapHetHanHD.Name = "btnSapHetHanHD";
-            this.tablePanel1.SetRow(this.btnSapHetHanHD, 0);
-            this.btnSapHetHanHD.Size = new System.Drawing.Size(20, 20);
-            this.btnSapHetHanHD.TabIndex = 81;
-            this.btnSapHetHanHD.UseVisualStyleBackColor = true;
-            this.btnSapHetHanHD.Click += new System.EventHandler(this.btnSapHetHanHD_Click);
+            this.tablePanel1.SetColumn(this.btn2, 2);
+            this.btn2.Location = new System.Drawing.Point(243, 7);
+            this.btn2.Margin = new System.Windows.Forms.Padding(17, 3, 3, 3);
+            this.btn2.MaximumSize = new System.Drawing.Size(20, 20);
+            this.btn2.MinimumSize = new System.Drawing.Size(2, 20);
+            this.btn2.Name = "btn2";
+            this.tablePanel1.SetRow(this.btn2, 0);
+            this.btn2.Size = new System.Drawing.Size(20, 20);
+            this.btn2.TabIndex = 81;
+            this.btn2.UseVisualStyleBackColor = true;
+            this.btn2.Click += new System.EventHandler(this.btn2_Click);
             // 
-            // lblSapHetHanHD
+            // lbl2
             // 
-            this.lblSapHetHanHD.Appearance.Font = new System.Drawing.Font("Segoe UI", 7.75F);
-            this.lblSapHetHanHD.Appearance.Options.UseFont = true;
-            this.tablePanel1.SetColumn(this.lblSapHetHanHD, 2);
-            this.lblSapHetHanHD.Location = new System.Drawing.Point(274, 39);
-            this.lblSapHetHanHD.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
-            this.lblSapHetHanHD.Name = "lblSapHetHanHD";
-            this.tablePanel1.SetRow(this.lblSapHetHanHD, 1);
-            this.lblSapHetHanHD.Size = new System.Drawing.Size(58, 13);
-            this.lblSapHetHanHD.TabIndex = 80;
-            this.lblSapHetHanHD.Text = "Sắp hết HĐ";
+            this.lbl2.Appearance.Font = new System.Drawing.Font("Segoe UI", 7.75F);
+            this.lbl2.Appearance.Options.UseFont = true;
+            this.tablePanel1.SetColumn(this.lbl2, 2);
+            this.lbl2.Location = new System.Drawing.Point(229, 39);
+            this.lbl2.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
+            this.lbl2.Name = "lbl2";
+            this.tablePanel1.SetRow(this.lbl2, 1);
+            this.lbl2.Size = new System.Drawing.Size(58, 13);
+            this.lbl2.TabIndex = 80;
+            this.lbl2.Text = "Sắp hết HĐ";
             // 
-            // btnBinhThuong
+            // btn1
             // 
-            this.tablePanel1.SetColumn(this.btnBinhThuong, 1);
-            this.btnBinhThuong.Location = new System.Drawing.Point(217, 7);
-            this.btnBinhThuong.Margin = new System.Windows.Forms.Padding(17, 3, 3, 3);
-            this.btnBinhThuong.MaximumSize = new System.Drawing.Size(20, 20);
-            this.btnBinhThuong.MinimumSize = new System.Drawing.Size(2, 20);
-            this.btnBinhThuong.Name = "btnBinhThuong";
-            this.tablePanel1.SetRow(this.btnBinhThuong, 0);
-            this.btnBinhThuong.Size = new System.Drawing.Size(20, 20);
-            this.btnBinhThuong.TabIndex = 79;
-            this.btnBinhThuong.UseVisualStyleBackColor = true;
-            this.btnBinhThuong.Click += new System.EventHandler(this.btnBinhThuong_Click);
+            this.tablePanel1.SetColumn(this.btn1, 1);
+            this.btn1.Location = new System.Drawing.Point(167, 7);
+            this.btn1.Margin = new System.Windows.Forms.Padding(17, 3, 3, 3);
+            this.btn1.MaximumSize = new System.Drawing.Size(20, 20);
+            this.btn1.MinimumSize = new System.Drawing.Size(2, 20);
+            this.btn1.Name = "btn1";
+            this.tablePanel1.SetRow(this.btn1, 0);
+            this.btn1.Size = new System.Drawing.Size(20, 20);
+            this.btn1.TabIndex = 79;
+            this.btn1.UseVisualStyleBackColor = true;
+            this.btn1.Click += new System.EventHandler(this.btn1_Click);
             // 
-            // lblBinhThuong
+            // lbl1
             // 
-            this.lblBinhThuong.Appearance.Font = new System.Drawing.Font("Segoe UI", 7.75F);
-            this.lblBinhThuong.Appearance.Options.UseFont = true;
-            this.tablePanel1.SetColumn(this.lblBinhThuong, 1);
-            this.lblBinhThuong.Location = new System.Drawing.Point(203, 39);
-            this.lblBinhThuong.Name = "lblBinhThuong";
-            this.tablePanel1.SetRow(this.lblBinhThuong, 1);
-            this.lblBinhThuong.Size = new System.Drawing.Size(65, 13);
-            this.lblBinhThuong.TabIndex = 78;
-            this.lblBinhThuong.Text = "Bình thường";
+            this.lbl1.Appearance.Font = new System.Drawing.Font("Segoe UI", 7.75F);
+            this.lbl1.Appearance.Options.UseFont = true;
+            this.tablePanel1.SetColumn(this.lbl1, 1);
+            this.lbl1.Location = new System.Drawing.Point(153, 39);
+            this.lbl1.Name = "lbl1";
+            this.tablePanel1.SetRow(this.lbl1, 1);
+            this.lbl1.Size = new System.Drawing.Size(65, 13);
+            this.lbl1.TabIndex = 78;
+            this.lbl1.Text = "Bình thường";
             // 
             // windowsUIButtonPanel1
             // 
@@ -468,7 +464,7 @@
             windowsUIButtonImageOptions4.ImageUri.Uri = "snap/snapdeletelist";
             windowsUIButtonImageOptions5.ImageUri.Uri = "richedit/clearheaderandfooter";
             this.windowsUIButtonPanel1.Buttons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] {
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions1, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "importNhanSu", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions1, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "import", -1, false),
             new DevExpress.XtraBars.Docking2010.WindowsUISeparator(),
             new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions2, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "them", -1, false),
             new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions3, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "sua", -1, false),
@@ -479,12 +475,12 @@
             this.windowsUIButtonPanel1.ContentAlignment = System.Drawing.ContentAlignment.MiddleRight;
             this.windowsUIButtonPanel1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.windowsUIButtonPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.windowsUIButtonPanel1.Location = new System.Drawing.Point(771, 4);
+            this.windowsUIButtonPanel1.Location = new System.Drawing.Point(756, 4);
             this.windowsUIButtonPanel1.Margin = new System.Windows.Forms.Padding(0, 4, 4, 4);
             this.windowsUIButtonPanel1.Name = "windowsUIButtonPanel1";
             this.tablePanel1.SetRow(this.windowsUIButtonPanel1, 0);
             this.tablePanel1.SetRowSpan(this.windowsUIButtonPanel1, 2);
-            this.windowsUIButtonPanel1.Size = new System.Drawing.Size(234, 49);
+            this.windowsUIButtonPanel1.Size = new System.Drawing.Size(249, 49);
             this.windowsUIButtonPanel1.TabIndex = 21;
             this.windowsUIButtonPanel1.Text = "S";
             this.windowsUIButtonPanel1.UseButtonBackgroundImages = false;
@@ -502,7 +498,7 @@
             this.searchControl2.Properties.Client = this.grdDSCongNhan;
             this.tablePanel1.SetRow(this.searchControl2, 0);
             this.tablePanel1.SetRowSpan(this.searchControl2, 2);
-            this.searchControl2.Size = new System.Drawing.Size(194, 24);
+            this.searchControl2.Size = new System.Drawing.Size(144, 24);
             this.searchControl2.TabIndex = 2;
             // 
             // grdDSCongNhan
@@ -961,20 +957,6 @@
             this.layoutControlGroup1.Name = "layoutControlGroup1";
             this.layoutControlGroup1.Size = new System.Drawing.Size(999, 31);
             // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuLinkUngVienToolStripMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(204, 48);
-            // 
-            // mnuLinkUngVienToolStripMenuItem
-            // 
-            this.mnuLinkUngVienToolStripMenuItem.Name = "mnuLinkUngVienToolStripMenuItem";
-            this.mnuLinkUngVienToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
-            this.mnuLinkUngVienToolStripMenuItem.Text = "mnuCapnhatquatrinhCT";
-            // 
             // ucQLNS
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -1019,7 +1001,6 @@
             this.navigationPage1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.tabbedControlGroup1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
-            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1070,29 +1051,27 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;
         private DevExpress.XtraEditors.SearchControl searchControl2;
         private DevExpress.XtraBars.Docking2010.WindowsUIButtonPanel windowsUIButtonPanel1;
-        private DevExpress.XtraEditors.LabelControl lblBinhThuong;
-        private System.Windows.Forms.Button btnBinhThuong;
-        private DevExpress.XtraEditors.LabelControl lblSapHetHanHD;
-        private System.Windows.Forms.Button btnSapHetHanHD;
-        private DevExpress.XtraEditors.LabelControl lblSapNghiViec;
-        private System.Windows.Forms.Button btnSapNghiViec;
-        private DevExpress.XtraEditors.LabelControl lblSapNghiSinh;
-        private System.Windows.Forms.Button btnSapNghiSinh;
-        private DevExpress.XtraEditors.LabelControl lblNghiDe;
-        private System.Windows.Forms.Button btnNghiDe;
-        private DevExpress.XtraEditors.LabelControl lblCheDo1Nam;
-        private System.Windows.Forms.Button btnCheDo1Nam;
-        private DevExpress.XtraEditors.LabelControl lblDaNghiViec;
-        private System.Windows.Forms.Button btnDaNghiViec;
-        private DevExpress.XtraEditors.LabelControl lblBoViec;
-        private System.Windows.Forms.Button btnBoViec;
+        private DevExpress.XtraEditors.LabelControl lbl1;
+        private System.Windows.Forms.Button btn1;
+        private DevExpress.XtraEditors.LabelControl lbl2;
+        private System.Windows.Forms.Button btn2;
+        private DevExpress.XtraEditors.LabelControl lbl3;
+        private System.Windows.Forms.Button btn3;
+        private DevExpress.XtraEditors.LabelControl lbl4;
+        private System.Windows.Forms.Button btn4;
+        private DevExpress.XtraEditors.LabelControl lbl5;
+        private System.Windows.Forms.Button btn5;
+        private DevExpress.XtraEditors.LabelControl lbl6;
+        private System.Windows.Forms.Button btn6;
+        private DevExpress.XtraEditors.LabelControl lbl7;
+        private System.Windows.Forms.Button btn7;
+        private DevExpress.XtraEditors.LabelControl lbl8;
+        private System.Windows.Forms.Button btn8;
         private DevExpress.XtraLayout.TabbedControlGroup tabbedControlGroup1;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup1;
         private DevExpress.XtraEditors.DateEdit datDNgay;
         private DevExpress.XtraEditors.DateEdit datTNgay;
         private DevExpress.XtraLayout.LayoutControlItem lblTheoNgay;
         private DevExpress.XtraLayout.LayoutControlItem lblDenNgay;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem mnuLinkUngVienToolStripMenuItem;
     }
 }

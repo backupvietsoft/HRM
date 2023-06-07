@@ -53,15 +53,9 @@ namespace Vs.HRM
                 {
                     case "In":
                         {
-                            int n = rdo_ChonBaoCao.SelectedIndex;
-                            if (rdo_ChonBaoCao.Properties.Items.Count < 3)
+                            switch (rdo_ChonBaoCao.Properties.Items[rdo_ChonBaoCao.SelectedIndex].Tag)
                             {
-                                n = (n >= 1 ? n + 1 : n);
-                            }
-
-                            switch (n)
-                            {
-                                case 0:
+                                case "rdo_QuyetDinhLuong":
                                     {
                                         #region in cu
                                         System.Data.SqlClient.SqlConnection conn;
@@ -104,7 +98,7 @@ namespace Vs.HRM
                                         #endregion
                                         break;
                                     }
-                                case 1:
+                                case "rdo_QuaTrinhLuongCN":
                                     {
 
                                         System.Data.SqlClient.SqlConnection conn;
@@ -140,7 +134,7 @@ namespace Vs.HRM
 
                                         break;
                                     }
-                                case 2:
+                                case "rdo_QuyetDinhNangLuong":
                                     {
                                         switch (Commons.Modules.KyHieuDV)
                                         {

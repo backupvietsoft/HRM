@@ -17,6 +17,7 @@ namespace Vs.Payroll
         public int iID_ORD = -1;
         public int iID_CD = 0; // ID_CD = 0 thêm mới, ngược lại là dữ liệu cũ
         public DataTable dtTemp;
+        public DateTime datThang = DateTime.Now;
         public frmCapNhatCDTheoMH()
         {
             InitializeComponent();
@@ -101,6 +102,7 @@ namespace Vs.Payroll
                 cmd.Parameters.Add("@ID_DV", SqlDbType.Int).Value = iID_DV;
                 cmd.Parameters.Add("@ID_CHUYEN_SD", SqlDbType.BigInt).Value = cboChuyen.EditValue;
                 cmd.Parameters.Add("@ID_ORD", SqlDbType.BigInt).Value = iID_ORD;
+                cmd.Parameters.Add("@Thang", SqlDbType.DateTime).Value = datThang;
                 cmd.CommandType = CommandType.StoredProcedure;
                 System.Data.SqlClient.SqlDataAdapter da = new System.Data.SqlClient.SqlDataAdapter(cmd);
                 DataSet ds = new DataSet();
@@ -143,6 +145,7 @@ namespace Vs.Payroll
                 cmd.Parameters.Add("@iLoai", SqlDbType.Int).Value = 1;
                 cmd.Parameters.Add("@sBT", SqlDbType.NVarChar).Value = sBTData;
                 cmd.Parameters.Add("@sBT1", SqlDbType.NVarChar).Value = sBTDSMH;
+                cmd.Parameters.Add("@Thang", SqlDbType.DateTime).Value = datThang;
                 cmd.CommandType = CommandType.StoredProcedure;
                 System.Data.SqlClient.SqlDataAdapter da = new System.Data.SqlClient.SqlDataAdapter(cmd);
                 DataSet ds = new DataSet();

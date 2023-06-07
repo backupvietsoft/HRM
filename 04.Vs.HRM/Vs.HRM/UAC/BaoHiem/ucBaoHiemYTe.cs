@@ -18,6 +18,7 @@ namespace Vs.HRM
         public static ucBaoHiemYTe _instance;
         DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit cboID_BV;
         int MS_TINH;
+        private int iThem = 0;
         public static ucBaoHiemYTe Instance
         {
             get
@@ -27,8 +28,6 @@ namespace Vs.HRM
                 return _instance;
             }
         }
-
-
         public ucBaoHiemYTe()
         {
             InitializeComponent();
@@ -49,6 +48,7 @@ namespace Vs.HRM
                 LoadGridBaoHiemYTe();
                 Commons.Modules.sPS = "";
                 enableButon(true);
+                Commons.Modules.ObjSystems.SetPhanQuyen(windowsUIButton);
             }
             catch { }
         }
@@ -91,9 +91,10 @@ namespace Vs.HRM
             {
                 case "themsua":
                     {
+                        iThem = 1;
+                        LoadGridBaoHiemYTe();
                         enableButon(false);
                         Commons.Modules.ObjSystems.AddnewRow(grvNgungDongBHXH, false);
-
                         break;
                     }
 
@@ -105,6 +106,7 @@ namespace Vs.HRM
                 case "luu":
                     {
                         Savedata();
+                        iThem = 0;
                         LoadGridBaoHiemYTe();
                         enableButon(true);
                         Commons.Modules.ObjSystems.DeleteAddRow(grvNgungDongBHXH);
@@ -112,6 +114,7 @@ namespace Vs.HRM
                     }
                 case "khongluu":
                     {
+                        iThem = 0;
                         Commons.Modules.ObjSystems.DeleteAddRow(grvNgungDongBHXH);
                         enableButon(true);
                         LoadGridBaoHiemYTe();
@@ -184,12 +187,19 @@ namespace Vs.HRM
         private void LoadGridBaoHiemYTe()
         {
             DataTable dt = new DataTable();
-            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetCongNhanBHYT", cboDV.EditValue, cboXN.EditValue, cboTo.EditValue, cboID_LTTHT.EditValue, Commons.Modules.UserName, Commons.Modules.TypeLanguage));
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetCongNhanBHYT", cboDV.EditValue, cboXN.EditValue, cboTo.EditValue, cboID_LTTHT.EditValue, Commons.Modules.UserName, Commons.Modules.TypeLanguage, iThem));
+            dt.Columns["SO_THE"].ReadOnly = false;
+            dt.Columns["ID_TP"].ReadOnly = false;
+            dt.Columns["ID_BV"].ReadOnly = false;
+            dt.Columns["NGAY_HET_HAN"].ReadOnly = false;
             if (grdBHYT.DataSource == null)
             {
-                Commons.Modules.ObjSystems.MLoadXtraGrid(grdBHYT, grvNgungDongBHXH, dt, false, false, false, false, true, this.Name);
+                Commons.Modules.ObjSystems.MLoadXtraGrid(grdBHYT, grvNgungDongBHXH, dt, true, true, false, false, true, this.Name);
                 grvNgungDongBHXH.Columns["ID_CN"].Visible = false;
                 grvNgungDongBHXH.Columns["ID_BHYT"].Visible = false;
+
+                grvNgungDongBHXH.Columns["MS_CN"].OptionsColumn.AllowEdit = false;
+                grvNgungDongBHXH.Columns["HO_TEN"].OptionsColumn.AllowEdit = false;
             }
             else
             {

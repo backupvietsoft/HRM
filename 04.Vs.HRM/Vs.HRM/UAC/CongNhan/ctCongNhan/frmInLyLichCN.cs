@@ -93,7 +93,7 @@ namespace Vs.HRM
                                                 DataTable dt1 = new DataTable();
                                                 dt1 = ds.Tables[1].Copy();
                                                 dt1.TableName = "DATA";
-                                                frm.rpt = new Vs.Recruit.rptInTheNV_DM(dt1);
+                                                //frm.rpt = new Vs.Recruit.rptInTheNV_DM(dt1);
                                                 frm.AddDataSource(dt1);
 
                                                 dt = new DataTable();
@@ -224,11 +224,6 @@ namespace Vs.HRM
                         rdo_ChonBaoCao.Properties.Items.RemoveAt(2);
                         break;
                     }
-                case "NB":
-                    {
-                        rdo_ChonBaoCao.Properties.Items.RemoveAt(2);
-                        break;
-                    }
             }
                 
             //if (Commons.Modules.KyHieuDV == "DM")
@@ -320,7 +315,6 @@ namespace Vs.HRM
 
             }
         }
-
         private void InPhieuDanhGiaKetQuaThuViecCongNhan_NB()
         {
             try

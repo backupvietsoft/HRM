@@ -91,7 +91,7 @@ namespace VS.Report.NhanSu
 
         }
 
-        private void rptBieuDoTangGiamCongNhan_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        private void rptBieuDoTangGiamCongNhan_BeforePrint(object sender, CancelEventArgs e)
         {
             loadcharTinhTrangCN(dt1);
         }

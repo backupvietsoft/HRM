@@ -34,7 +34,7 @@ namespace Vs.Report
 
         }
 
-        private void rptBCKeHoachNghiPhepNgayVL_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        private void rptBCKeHoachNghiPhepNgayVL_BeforePrint(object sender, CancelEventArgs e)
         {
             
         }

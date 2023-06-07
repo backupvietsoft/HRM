@@ -45,15 +45,21 @@ namespace Vs.Payroll
 
         private void ucBangLuongThang13_Load(object sender, EventArgs e)
         {
-            Commons.Modules.sLoad = "0Load";
-            datNam.EditValue = DateTime.Now;
-            Commons.Modules.ObjSystems.LoadCboDonVi(cboDonVi);
-            Commons.Modules.ObjSystems.LoadCboXiNghiep(cboDonVi, cboXiNghiep);
-            Commons.Modules.ObjSystems.LoadCboTo(cboDonVi, cboXiNghiep, cboTo);
-            LoadData();
+            try
+            {
+                Commons.Modules.sLoad = "0Load";
+                datNam.EditValue = DateTime.Now;
+                Commons.Modules.ObjSystems.LoadCboDonVi(cboDonVi);
+                Commons.Modules.ObjSystems.LoadCboXiNghiep(cboDonVi, cboXiNghiep);
+                Commons.Modules.ObjSystems.LoadCboTo(cboDonVi, cboXiNghiep, cboTo);
+                LoadData();
 
-            EnableButon(true);
-            Commons.Modules.sLoad = "";
+                EnableButon(true);
+                Commons.Modules.sLoad = "";
+                Commons.Modules.ObjSystems.SetPhanQuyen(btnALL);
+            }
+            catch { }
+           
         }
         private void LoadData()
         {

@@ -299,6 +299,7 @@ namespace Vs.Payroll
         }
         private void grvData_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
         {
+            if (Commons.Modules.iPermission != 1) return;
             try
             {
                 if (grvData.GetFocusedRowCellValue("ID_TT").ToString() == "2" && (Commons.Modules.UserName != "admin" && Commons.Modules.UserName != "administrator")) return;

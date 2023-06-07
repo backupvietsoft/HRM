@@ -110,7 +110,7 @@ namespace Vs.HRM
                             System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptBCDanhGiaCN", conn);
                             cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
                             cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
-                            cmd.Parameters.Add("@ID_CN", SqlDbType.Int).Value = idcn;
+                            cmd.Parameters.Add("@ID_CN", SqlDbType.Int).Value = Commons.Modules.iCongNhan;
                             cmd.CommandType = CommandType.StoredProcedure;
 
                             System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
@@ -230,10 +230,10 @@ namespace Vs.HRM
 
         #region function Load
 
-        private void LoadGrdBangDanhGia(int iID)
+        public void LoadGrdBangDanhGia(int iID)
         {
             DataTable dt = new DataTable();
-            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetListBangDanhGia", idcn));
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetListBangDanhGia", Commons.Modules.iCongNhan));
             dt.PrimaryKey = new DataColumn[] { dt.Columns["ID_DG"] };
             Commons.Modules.ObjSystems.MLoadXtraGrid(grdDanhGia, grvDanhGia, dt, false, false, true, true, true, this.Name);
             grvDanhGia.Columns["ID_DG"].Visible = false;
@@ -311,7 +311,7 @@ namespace Vs.HRM
                     LoadGrdBangDanhGia(
                     Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spUpdateBangDanhGia",
                         grvDanhGia.GetFocusedRowCellValue("ID_DG"),
-                        idcn,
+                        Commons.Modules.iCongNhan,
                         NGAY_DGDateEdit.EditValue,
                         NGUOI_DGTextEdit.EditValue,
                         NOI_DUNGMemoEdit.EditValue,

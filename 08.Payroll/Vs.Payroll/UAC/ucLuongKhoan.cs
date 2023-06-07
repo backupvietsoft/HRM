@@ -146,7 +146,7 @@ namespace Vs.Payroll
                         if (grvData.HasColumnErrors) return;
                         if (Savedata() == false)
                         {
-                            Commons.Modules.ObjSystems.msgChung(Commons.ThongBao.msgDuLieuDangSuDung);
+                            Commons.Modules.ObjSystems.MsgWarning(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDelDangSuDung"));
                         }
                         isAdd = false;
                         LoadGrdGTGC();
@@ -187,8 +187,8 @@ namespace Vs.Payroll
 
         private void XoaCheDoLV()
         {
-            if (grvData.RowCount == 0) { Commons.Modules.ObjSystems.msgChung(Commons.ThongBao.msgKhongCoDuLieuXoa); return; }
-            if (Commons.Modules.ObjSystems.msgHoi(Commons.ThongBao.msgXoa) == DialogResult.No) return;
+            if (grvData.RowCount == 0) { Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgKhongCoDuLieuXoa"); return; }
+            if (Commons.Modules.ObjSystems.MsgQuestion(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msg_XoaDong")) == 0) return;
             //xóa
             try
             {
@@ -202,7 +202,7 @@ namespace Vs.Payroll
             }
             catch
             {
-                Commons.Modules.ObjSystems.msgChung(Commons.ThongBao.msgKhongCoDuLieuXoa);
+                Commons.Modules.ObjSystems.MsgWarning(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgKhongCoDuLieuXoa"));
             }
         }
 

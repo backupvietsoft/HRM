@@ -3378,11 +3378,11 @@ style='mso-spacerun:yes'>   </span><o:p></o:p></span></i></b></p>
             switch (e.Side)
             {
                 case DevExpress.XtraPrinting.MarginSide.Left:
-                    Margins = new System.Drawing.Printing.Margins((int)e.Value, Margins.Right, Margins.Top, Margins.Bottom);
+                    Margins = new System.Drawing.Printing.Margins((int)e.Value, (int)Margins.Right, (int)Margins.Top, (int)Margins.Bottom);
                     CreateDocument();
                     break;
                 case DevExpress.XtraPrinting.MarginSide.Right:
-                    Margins = new System.Drawing.Printing.Margins(Margins.Left, (int)e.Value, Margins.Top, Margins.Bottom);
+                    Margins = new System.Drawing.Printing.Margins((int)Margins.Left, (int)e.Value, (int)Margins.Top, (int)Margins.Bottom);
                     CreateDocument();
                     break;
                 case DevExpress.XtraPrinting.MarginSide.All:
@@ -3402,7 +3402,7 @@ style='mso-spacerun:yes'>   </span><o:p></o:p></span></i></b></p>
             CreateDocument();
         }
 
-        private void XtraReport1_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        private void XtraReport1_BeforePrint(object sender, CancelEventArgs e)
         {
 
         }

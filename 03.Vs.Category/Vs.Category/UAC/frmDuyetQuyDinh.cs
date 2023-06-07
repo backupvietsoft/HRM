@@ -41,6 +41,7 @@ namespace Vs.Category
         #region Event
         private void frmDuyetQuyDinh_Load(object sender, EventArgs e)
         {
+            Commons.Modules.ObjSystems.SetPhanQuyen(btnALL);
             try
             {
                 Commons.Modules.sLoad = "0Load";

@@ -23,25 +23,29 @@ namespace VietSoftHRM
         //load menugroup
         private void frmMain_Load(object sender, EventArgs e)
         {
-            timer1.Start();
-            timer2.Start();
-            timer3.Start();
-            SetThongTinChung();
-            UpdateTinhTrangNghiPhep(-1);
-            Commons.Modules.ObjSystems.ShowWaitForm(this);
-            LoadMenuCha();
-            Commons.Modules.ObjSystems.ThayDoiNN(this);
+            try
+            {
+                timer1.Start();
+                timer2.Start();
+                timer3.Start();
+                SetThongTinChung();
+                UpdateTinhTrangNghiPhep(-1);
+                Commons.Modules.ObjSystems.ShowWaitForm(this);
+                LoadMenuCha();
+                Commons.Modules.ObjSystems.ThayDoiNN(this);
 
-            LoadNNMenu();
-            btnUserName.Text = Commons.Modules.UserName;
-            //radialMenu1.AddItems(GetRadialMenuItems(barManager1));
-            //Load Biểu đồ
-            //loadcharTinhTrangCN();
-            Commons.Modules.ObjSystems.HideWaitForm();
-            barServer.Caption = "Server : " + Commons.IConnections.Server + "- Database : " + Commons.IConnections.Database;
-            barTTC.Caption = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "select TEN_CTY from THONG_TIN_CHUNG").ToString().ToUpper();
-            barVer.Caption = "Version Curent: " + Commons.Modules.sInfoSer + "";
-            barLogin.Caption = "Total " + SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, " SELECT COUNT(*) FROM dbo.LOGIN ").ToString() + "/" + Commons.Modules.iLic + " user login";
+                LoadNNMenu();
+                btnUserName.Text = Commons.Modules.UserName;
+                //radialMenu1.AddItems(GetRadialMenuItems(barManager1));
+                //Load Biểu đồ
+                //loadcharTinhTrangCN();
+                Commons.Modules.ObjSystems.HideWaitForm();
+                barServer.Caption = "Server : " + Commons.IConnections.Server + "- Database : " + Commons.IConnections.Database;
+                barTTC.Caption = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "select TEN_CTY from THONG_TIN_CHUNG").ToString().ToUpper();
+                barVer.Caption = "Version Curent: " + Commons.Modules.sInfoSer + "";
+                barLogin.Caption = "Total " + SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, " SELECT COUNT(*) FROM dbo.LOGIN ").ToString() + "/" + Commons.Modules.iLic + " user login";
+            }
+            catch (Exception ex) { XtraMessageBox.Show(ex.Message); }
         }
 
         private void SetThongTinChung()
@@ -443,6 +447,12 @@ namespace VietSoftHRM
                     {
                         frmChangePass change = new frmChangePass("-1");
                         change.ShowDialog();
+                        return true;
+                    }
+                case (Keys.Control | Keys.N):
+                    {
+                        frmNotification frm = new frmNotification();
+                        frm.ShowDialog();
                         return true;
                     }
                 default: return base.ProcessCmdKey(ref msg, keyData);

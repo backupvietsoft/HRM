@@ -39,6 +39,7 @@ namespace VietSoftHRM
             Commons.Modules.ObjSystems.DeleteAddRow(grvNGD);
             enableButon(true);
             searchControl1.Client = grdNDG;
+            Commons.Modules.ObjSystems.SetPhanQuyen(btnALL);
         }
         private void LoadNguoiDanhGia()
         {

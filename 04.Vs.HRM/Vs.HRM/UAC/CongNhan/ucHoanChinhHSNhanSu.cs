@@ -11,6 +11,7 @@ using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Columns;
 using DevExpress.Utils.Menu;
+using Vs.Report;
 
 namespace Vs.HRM
 {
@@ -255,6 +256,7 @@ namespace Vs.HRM
                 cmd.Parameters.Add("@ID_CN", SqlDbType.BigInt).Value = Convert.ToInt64(grvData.GetFocusedRowCellValue("ID_CN"));
                 cmd.Parameters.Add("@ID_HDLD", SqlDbType.BigInt).Value = Convert.ToInt64(grvData.GetFocusedRowCellValue("ID_HDLD"));
                 cmd.Parameters.Add("@iLoai", SqlDbType.Int).Value = 1;
+                cmd.Parameters.Add("@HE_SO", SqlDbType.Int).Value = Commons.Modules.iHeSo;
                 cmd.CommandType = CommandType.StoredProcedure;
                 System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
                 DataSet ds = new DataSet();
@@ -290,6 +292,8 @@ namespace Vs.HRM
                     e.Menu.Items.Clear();
                     DevExpress.Utils.Menu.DXMenuItem itemTTNS = MCreateMenuThongTinNS(view, irow);
                     e.Menu.Items.Add(itemTTNS);
+
+                    if (Commons.Modules.iPermission != 1) return;
                     if (grvData.FocusedColumn.FieldName.ToString() == "TT_HDLD_DANG_SOAN" && grvData.GetFocusedRowCellValue("TT_HDLD_DANG_SOAN").ToString() != "")
                     {
                         DevExpress.Utils.Menu.DXMenuItem itemCapNhatTT = MCreateMenuCapNhatTT(view, irow);

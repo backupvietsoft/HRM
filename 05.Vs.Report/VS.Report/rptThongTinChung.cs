@@ -13,7 +13,7 @@ namespace Vs.Report
             InitializeComponent();
         }
 
-        private void TopMargin_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        private void TopMargin_BeforePrint(object sender, CancelEventArgs e)
         {
             xrLabel3.Text = DateTime.Now.Date.ToShortDateString();
         }

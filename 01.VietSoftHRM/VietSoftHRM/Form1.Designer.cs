@@ -28,88 +28,47 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.SendButton = new System.Windows.Forms.Button();
-            this.InputTextBox = new System.Windows.Forms.TextBox();
-            this.OutputListBox = new System.Windows.Forms.ListBox();
-            this.textEdit1 = new DevExpress.XtraEditors.TextEdit();
-            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).BeginInit();
+            this.gridControl1 = new DevExpress.XtraGrid.GridControl();
+            this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             this.SuspendLayout();
             // 
-            // SendButton
+            // gridControl1
             // 
-            this.SendButton.Location = new System.Drawing.Point(72, 375);
-            this.SendButton.Name = "SendButton";
-            this.SendButton.Size = new System.Drawing.Size(94, 23);
-            this.SendButton.TabIndex = 0;
-            this.SendButton.Text = "SendButton";
-            this.SendButton.UseVisualStyleBackColor = true;
-            this.SendButton.Click += new System.EventHandler(this.SendButton_Click);
+            this.gridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridControl1.Location = new System.Drawing.Point(0, 0);
+            this.gridControl1.MainView = this.gridView1;
+            this.gridControl1.Name = "gridControl1";
+            this.gridControl1.Size = new System.Drawing.Size(1179, 767);
+            this.gridControl1.TabIndex = 0;
+            this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gridView1});
             // 
-            // InputTextBox
+            // gridView1
             // 
-            this.InputTextBox.Location = new System.Drawing.Point(72, 38);
-            this.InputTextBox.Name = "InputTextBox";
-            this.InputTextBox.Size = new System.Drawing.Size(257, 20);
-            this.InputTextBox.TabIndex = 1;
-            // 
-            // OutputListBox
-            // 
-            this.OutputListBox.FormattingEnabled = true;
-            this.OutputListBox.Location = new System.Drawing.Point(446, 38);
-            this.OutputListBox.Name = "OutputListBox";
-            this.OutputListBox.Size = new System.Drawing.Size(226, 160);
-            this.OutputListBox.TabIndex = 2;
-            // 
-            // textEdit1
-            // 
-            this.textEdit1.Location = new System.Drawing.Point(85, 133);
-            this.textEdit1.Name = "textEdit1";
-            this.textEdit1.Size = new System.Drawing.Size(258, 24);
-            this.textEdit1.TabIndex = 3;
-            // 
-            // labelControl1
-            // 
-            this.labelControl1.Appearance.Options.UseTextOptions = true;
-            this.labelControl1.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.NoWrap;
-            this.labelControl1.Location = new System.Drawing.Point(85, 260);
-            this.labelControl1.Name = "labelControl1";
-            this.labelControl1.Size = new System.Drawing.Size(208, 17);
-            this.labelControl1.TabIndex = 4;
-            this.labelControl1.Text = "Công ty TNHH phần mềm Nam Việt";
-            // 
-            // timer1
-            // 
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            this.gridView1.GridControl = this.gridControl1;
+            this.gridView1.Name = "gridView1";
+            this.gridView1.MasterRowGetChildList += new DevExpress.XtraGrid.Views.Grid.MasterRowGetChildListEventHandler(this.gridView1_MasterRowGetChildList);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.labelControl1);
-            this.Controls.Add(this.textEdit1);
-            this.Controls.Add(this.OutputListBox);
-            this.Controls.Add(this.InputTextBox);
-            this.Controls.Add(this.SendButton);
+            this.ClientSize = new System.Drawing.Size(1179, 767);
+            this.Controls.Add(this.gridControl1);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button SendButton;
-        private System.Windows.Forms.TextBox InputTextBox;
-        private System.Windows.Forms.ListBox OutputListBox;
-        private DevExpress.XtraEditors.TextEdit textEdit1;
-        private DevExpress.XtraEditors.LabelControl labelControl1;
-        private System.Windows.Forms.Timer timer1;
+        private DevExpress.XtraGrid.GridControl gridControl1;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
     }
 }

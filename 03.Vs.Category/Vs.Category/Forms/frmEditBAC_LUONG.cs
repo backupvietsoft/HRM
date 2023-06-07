@@ -11,14 +11,12 @@ namespace Vs.Category
     {
         static Int64 Id = 0;
         static Boolean AddEdit = true;  // true la add false la edit
-
         public frmEditBAC_LUONG(Int64 iId, Boolean bAddEdit)
         {
             InitializeComponent();
             Id = iId;
             AddEdit = bAddEdit;
         }
-
         private void frmEditBAC_LUONG_Load(object sender, EventArgs e)
         {
             LoadDonVi();
@@ -41,12 +39,12 @@ namespace Vs.Category
             try
             {
                 string sSql = "SELECT ID_BL, ID_DV, ID_NL, NGAY_QD, TEN_BL, MUC_LUONG, " +
-                    "PC_DH, THUONG_TC, THUONG_CV_CC, PC_SINH_HOAT, PC_KY_NANG, STT " +
+                    "PC_DH, THUONG_TC, THUONG_CV_CC, PC_SINH_HOAT, PC_KY_NANG, STT , BL_DAU_TIEN " +
                     "FROM BAC_LUONG WHERE ID_BL = " + Id.ToString();
                 DataTable dtTmp = new DataTable();
                 dtTmp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSql));
-                ID_DVSearchLookUpEdit.EditValue = dtTmp.Rows[0]["ID_DV"].ToString();
-                ID_NLSearchLookUpEdit.EditValue = dtTmp.Rows[0]["ID_NL"].ToString();
+                ID_DVSearchLookUpEdit.EditValue = Convert.ToInt64(dtTmp.Rows[0]["ID_DV"]);
+                ID_NLSearchLookUpEdit.EditValue = Convert.ToInt64(dtTmp.Rows[0]["ID_NL"]);
                 NGAY_QDDateEdit.EditValue = Convert.ToDateTime(dtTmp.Rows[0]["NGAY_QD"].ToString());
                 TEN_BLTextEdit.EditValue = dtTmp.Rows[0]["TEN_BL"].ToString();
                 MUC_LUONGTextEdit.EditValue = dtTmp.Rows[0]["MUC_LUONG"].ToString();
@@ -56,6 +54,7 @@ namespace Vs.Category
                 PC_SINH_HOATTextEdit.EditValue = dtTmp.Rows[0]["PC_SINH_HOAT"].ToString();
                 PC_KY_NANGTextEdit.EditValue = dtTmp.Rows[0]["PC_KY_NANG"].ToString();
                 txtSTT.EditValue = dtTmp.Rows[0]["STT"].ToString();
+                chkDL_DAU_TIEN.EditValue = Convert.ToBoolean(dtTmp.Rows[0]["BL_DAU_TIEN"]);
             }
             catch 
             {
@@ -169,9 +168,16 @@ namespace Vs.Category
                         {
                             if (!dxValidationProvider1.Validate()) return;
                             if (bKiemTrung()) return;
+                            string strSQL = "SELECT COUNT(ID_BL) SL FROM dbo.BAC_LUONG WHERE BL_DAU_TIEN = 1 AND ID_NL = " + Convert.ToInt64(ID_NLSearchLookUpEdit.EditValue) + " AND NGAY_QD =" +"'"+ Convert.ToDateTime(NGAY_QDDateEdit.EditValue).ToString("yyyyMMdd")+"'";
+                            DataTable dt = new DataTable();
+                            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, strSQL));
+                            if (Convert.ToInt32(dt.Rows[0]["SL"]) > 1 && chkDL_DAU_TIEN.Checked == true)
+                            {
+                                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDaCoBLBatDau"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "sThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                return;
+                            }
                             try
                             {
-
                                 Commons.Modules.sId = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spUpdateBAC_LUONG", (AddEdit ? -1 : Id).ToString(),
                                     ID_DVSearchLookUpEdit.EditValue, ID_NLSearchLookUpEdit.EditValue,
                                     NGAY_QDDateEdit.EditValue, TEN_BLTextEdit.EditValue,
@@ -181,7 +187,7 @@ namespace Vs.Category
                                     (string.IsNullOrEmpty(Convert.ToString(THUONG_CV_CCTextEdit.EditValue))) ? 0 : Convert.ToDouble(THUONG_CV_CCTextEdit.EditValue),
                                     (string.IsNullOrEmpty(Convert.ToString(PC_SINH_HOATTextEdit.EditValue))) ? 0 : Convert.ToDouble(PC_SINH_HOATTextEdit.EditValue),
                                     (string.IsNullOrEmpty(Convert.ToString(PC_KY_NANGTextEdit.EditValue))) ? 0 : Convert.ToDouble(PC_KY_NANGTextEdit.EditValue),
-                                    (txtSTT.Text == "") ? txtSTT.EditValue = null : txtSTT.EditValue
+                                    (txtSTT.Text == "") ? txtSTT.EditValue = null : txtSTT.EditValue, chkDL_DAU_TIEN.EditValue
                                     ).ToString();
                             }
                             catch 
@@ -232,6 +238,8 @@ namespace Vs.Category
                     TEN_BLTextEdit.Focus();
                     return true;
                 }
+                string strSQL = "SELECT COUNT(BL_DAU_TIEN) FROM dbo.BAC_LUONG WHERE BL_DAU_TIEN = 1 AND ID_NL = "+ Convert.ToInt64(ID_NLSearchLookUpEdit.EditValue) + " AND NGAY_QD = "+ Convert.ToDateTime(NGAY_QDDateEdit.EditValue);
+
             }
             catch (Exception ex)
             {

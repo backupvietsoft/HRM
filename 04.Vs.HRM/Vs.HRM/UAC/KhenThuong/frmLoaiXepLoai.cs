@@ -89,7 +89,7 @@ namespace Vs.HRM
             if (!bThemSua)
             {
                 dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spLoaiXepLoai", dtThang, Commons.Modules.UserName, Commons.Modules.TypeLanguage, "", "Grd"));
-                dt.PrimaryKey = new DataColumn[] { dt.Columns["ID_LXL"] };
+                dt.Columns["ID_LXL"].ReadOnly = false;
 
                 if (grdLXL.DataSource == null)
                 {
@@ -106,8 +106,8 @@ namespace Vs.HRM
             else
             {
                 dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spLoaiXepLoai", dtThang, Commons.Modules.UserName, Commons.Modules.TypeLanguage, "", "Add"));
-                dt.PrimaryKey = new DataColumn[] { dt.Columns["ID_LXL"] };
                 dt.Columns["THANG_LXL"].ReadOnly = false;
+                dt.Columns["ID_LXL"].ReadOnly = false;
 
                 Commons.Modules.ObjSystems.MLoadXtraGrid(grdLXL, grvLXL, dt, true, true, true, true, true, this.Name);
                 if (grdLXL.DataSource == null)
@@ -125,7 +125,7 @@ namespace Vs.HRM
             grvLXL.Columns["THANG_LXL"].Visible = false;
 
             grvLXL.Columns["HE_SO_LXL"].DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            grvLXL.Columns["HE_SO_LXL"].DisplayFormat.FormatString = Commons.Modules.sSoLeDG;
+            grvLXL.Columns["HE_SO_LXL"].DisplayFormat.FormatString = "N0";
 
             if (id != -1)
             {
@@ -149,7 +149,7 @@ namespace Vs.HRM
             {
                 switch (btn.Tag.ToString())
                 {
-                    case "them":
+                    case "themsua":
                         {
                             enableButon(false);
                             LoadLuoi(true, -1);
@@ -166,7 +166,7 @@ namespace Vs.HRM
                     case "ghi":
                         {
 
-                            grvLXL.PostEditor();
+                            grvLXL.CloseEditor();
                             grvLXL.UpdateCurrentRow();
                             if(!SaveXepLoaiKhenThuong())return;
                             enableButon(true);
@@ -190,12 +190,12 @@ namespace Vs.HRM
                         }
                     case "xoa":
                         {
-                            if (DeleteData(-1))
+                            if (DeleteData(int.Parse(grvLXL.GetFocusedRowCellValue("ID_LXL").ToString())))
                             {
                                 Commons.Modules.sPS = "0Load";
                                 LoadThang(Convert.ToDateTime("01/01/1900"));
-                                LoadLuoi(false, -1);
                                 Commons.Modules.sPS = "";
+                                LoadLuoi(false, -1);
                             }
                             break;
                         }
@@ -233,7 +233,7 @@ namespace Vs.HRM
             try
             {
                 string sBT = "LXLHRM" + Commons.Modules.UserName;
-                Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBT, (DataTable)grdLXL.DataSource, "");
+                Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBT, Commons.Modules.ObjSystems.ConvertDatatable(grvLXL), "");
                 DateTime dtThang = Convert.ToDateTime("01/01/1900");
                 try
                 {
@@ -254,15 +254,11 @@ namespace Vs.HRM
 
         private void grvLXL_InitNewRow(object sender, InitNewRowEventArgs e)
         {
-            DateTime dtThang = Convert.ToDateTime("01/01/1900");
             try
             {
-                dtThang = Convert.ToDateTime("01/" + cboThang.Text.ToString());
+                grvLXL.SetFocusedRowCellValue("ID_LXL", Convert.ToInt32(0));
             }
             catch { }
-
-            GridView view = sender as GridView;
-            view.SetRowCellValue(e.RowHandle, view.Columns["THANG_LXL"], dtThang.Date);
         }
 
         private void grvLXL_ValidateRow(object sender, DevExpress.XtraGrid.Views.Base.ValidateRowEventArgs e)
@@ -285,29 +281,28 @@ namespace Vs.HRM
                 }
 
             }
-            if (grv.GetRowCellValue(e.RowHandle, grv.Columns["HE_SO_LXL"]).ToString() == "")
-            {
-                e.Valid = false;
-                grv.SetColumnError(grv.Columns["HE_SO_LXL"], Commons.Modules.ObjLanguages.GetLanguage(Commons.Modules.ModuleName, this.Name, "msgChuaNhapHE_SO_LXL", Commons.Modules.TypeLanguage)); return;
-            }
-            else
-            {
-                float iHS = -1;
-                try
-                {
-                    float.TryParse(grv.GetRowCellValue(e.RowHandle, grv.Columns["HE_SO_LXL"]).ToString(),out iHS) ;
-                    if (iHS ==0)
-                    {
-                        e.Valid = false;
-                        grv.SetColumnError(grv.Columns["HE_SO_LXL"], Commons.Modules.ObjLanguages.GetLanguage(Commons.Modules.ModuleName, this.Name, "msgHE_SO_LXLLonHonKhong", Commons.Modules.TypeLanguage)); return;
-                    }
-                }
-                catch {
-                    e.Valid = false;
-                    grv.SetColumnError(grv.Columns["HE_SO_LXL"], Commons.Modules.ObjLanguages.GetLanguage(Commons.Modules.ModuleName, this.Name, "msgChuaNhapHE_SO_LXL", Commons.Modules.TypeLanguage)); return;
-                }
-
-            }
+            //if (grv.GetRowCellValue(e.RowHandle, grv.Columns["HE_SO_LXL"]).ToString() == "")
+            //{
+            //    e.Valid = false;
+            //    grv.SetColumnError(grv.Columns["HE_SO_LXL"], Commons.Modules.ObjLanguages.GetLanguage(Commons.Modules.ModuleName, this.Name, "msgChuaNhapHE_SO_LXL", Commons.Modules.TypeLanguage)); return;
+            //}
+            //else
+            //{
+            //    //float iHS = -1;
+            //    //try
+            //    //{
+            //    //    float.TryParse(grv.GetRowCellValue(e.RowHandle, grv.Columns["HE_SO_LXL"]).ToString(),out iHS) ;
+            //    //    if (iHS ==0)
+            //    //    {
+            //    //        e.Valid = false;
+            //    //        grv.SetColumnError(grv.Columns["HE_SO_LXL"], Commons.Modules.ObjLanguages.GetLanguage(Commons.Modules.ModuleName, this.Name, "msgHE_SO_LXLLonHonKhong", Commons.Modules.TypeLanguage)); return;
+            //    //    }
+            //    //}
+            //    //catch {
+            //    //    e.Valid = false;
+            //    //    grv.SetColumnError(grv.Columns["HE_SO_LXL"], Commons.Modules.ObjLanguages.GetLanguage(Commons.Modules.ModuleName, this.Name, "msgChuaNhapHE_SO_LXL", Commons.Modules.TypeLanguage)); return;
+            //    //}
+            //}
             if (grv.GetRowCellValue(e.RowHandle, grv.Columns["TEN_LXL_A"]).ToString() != "")
             {
                 if (!KiemTrung(grv, "TEN_LXL_A", grv.GetRowCellValue(e.RowHandle, grv.Columns["TEN_LXL_A"]).ToString().ToUpper()))
@@ -358,7 +353,7 @@ namespace Vs.HRM
             try { iIdLXL = int.Parse(grvLXL.GetFocusedRowCellValue("ID_LXL").ToString()); } catch { }
             if (iIdLXL == -1)
             {
-                Commons.Modules.ObjSystems.msgChung(Commons.ThongBao.msgDuLieuDangSuDung);
+                Commons.Modules.ObjSystems.MsgError(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDelDangSuDung"));
                 return;
                 
             }
@@ -388,17 +383,17 @@ namespace Vs.HRM
         {
             if (grvLXL.RowCount == 0)
             {   
-                Commons.Modules.ObjSystems.msgChung(Commons.ThongBao.msgKhongCoDuLieuXoa);
+                Commons.Modules.ObjSystems.MsgWarning(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgKhongCoDuLieuXoa"));
                 return false;
             }
 
             if (iIdLXL == -1)
             {
-                if (Commons.Modules.ObjSystems.msgHoi(Commons.ThongBao.msgXoaAll) == DialogResult.No) return false;
+                if (Commons.Modules.ObjSystems.MsgQuestion(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msg_XoaDong")) == 0) return false;
             }
             else
             {
-                if (Commons.Modules.ObjSystems.msgHoi(Commons.ThongBao.msgXoa) == DialogResult.No) return false;
+                if (Commons.Modules.ObjSystems.MsgQuestion(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msg_XoaDong")) == 0) return false;
             }
 
             DateTime dThang = Convert.ToDateTime("01/01/1900");
@@ -419,7 +414,7 @@ namespace Vs.HRM
                 }
                 else
                 {
-                    Commons.Modules.ObjSystems.msgChung(Commons.ThongBao.msgDuLieuDangSuDung);
+                    Commons.Modules.ObjSystems.MsgWarning(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDelDangSuDung"));
                     return false;
                 }
 
@@ -427,9 +422,14 @@ namespace Vs.HRM
             catch (Exception ex)
             {
 
-                Commons.Modules.ObjSystems.msgChung(Commons.ThongBao.msgDuLieuDangSuDung, ex.Message.ToString());
+                Commons.Modules.ObjSystems.MsgError(ex.Message.ToString());
                 return false;
             }
+        }
+
+        private void grvLXL_InvalidValueException(object sender, DevExpress.XtraEditors.Controls.InvalidValueExceptionEventArgs e)
+        {
+            e.ExceptionMode = DevExpress.XtraEditors.Controls.ExceptionMode.NoAction;
         }
     }
 }

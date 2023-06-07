@@ -47,7 +47,7 @@ namespace Vs.Report
             return a;
         }
 
-        private void txA_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        private void txA_BeforePrint(object sender, CancelEventArgs e)
         {
 
             txA.Text = count("A").ToString();

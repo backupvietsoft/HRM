@@ -37,7 +37,6 @@ namespace Vs.Category
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule2 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule3 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule4 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
-            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule5 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             this.btnALL = new DevExpress.XtraBars.Docking2010.WindowsUIButtonPanel();
             this.tablePanel1 = new DevExpress.Utils.Layout.TablePanel();
             this.dataLayoutControl1 = new DevExpress.XtraDataLayout.DataLayoutControl();
@@ -54,6 +53,7 @@ namespace Vs.Category
             this.chkHD_DAU_TIEN = new DevExpress.XtraEditors.CheckEdit();
             this.txtTenNgan = new DevExpress.XtraEditors.TextEdit();
             this.txtKY_HIEU_HD = new DevExpress.XtraEditors.TextEdit();
+            this.txtSoNgay = new DevExpress.XtraEditors.TextEdit();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.ItemForTEN_LHDLD = new DevExpress.XtraLayout.LayoutControlItem();
@@ -67,10 +67,9 @@ namespace Vs.Category
             this.lblKY_HIEU_HD = new DevExpress.XtraLayout.LayoutControlItem();
             this.lblCHINH_THUC = new DevExpress.XtraLayout.LayoutControlItem();
             this.lblHD_DAUTIEN = new DevExpress.XtraLayout.LayoutControlItem();
+            this.lblSO_NGAY = new DevExpress.XtraLayout.LayoutControlItem();
             this.dxValidationProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
-            this.dxValidationProvider11 = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
-            this.dxValidationProvider12 = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
-            this.dxValidationProvider13 = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
+            this.dxValidationProvider2 = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).BeginInit();
             this.tablePanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataLayoutControl1)).BeginInit();
@@ -88,6 +87,7 @@ namespace Vs.Category
             ((System.ComponentModel.ISupportInitialize)(this.chkHD_DAU_TIEN.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTenNgan.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtKY_HIEU_HD.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtSoNgay.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForTEN_LHDLD)).BeginInit();
@@ -101,10 +101,9 @@ namespace Vs.Category
             ((System.ComponentModel.ISupportInitialize)(this.lblKY_HIEU_HD)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblCHINH_THUC)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblHD_DAUTIEN)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lblSO_NGAY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider11)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider12)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider13)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider2)).BeginInit();
             this.SuspendLayout();
             // 
             // btnALL
@@ -171,6 +170,7 @@ namespace Vs.Category
             this.dataLayoutControl1.Controls.Add(this.chkHD_DAU_TIEN);
             this.dataLayoutControl1.Controls.Add(this.txtTenNgan);
             this.dataLayoutControl1.Controls.Add(this.txtKY_HIEU_HD);
+            this.dataLayoutControl1.Controls.Add(this.txtSoNgay);
             this.dataLayoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataLayoutControl1.Location = new System.Drawing.Point(65, 23);
             this.dataLayoutControl1.Margin = new System.Windows.Forms.Padding(4);
@@ -184,7 +184,7 @@ namespace Vs.Category
             // 
             // cboID_TT_HT
             // 
-            this.cboID_TT_HT.Location = new System.Drawing.Point(131, 128);
+            this.cboID_TT_HT.Location = new System.Drawing.Point(131, 158);
             this.cboID_TT_HT.Name = "cboID_TT_HT";
             this.cboID_TT_HT.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -213,6 +213,9 @@ namespace Vs.Category
             conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
             conditionValidationRule1.ErrorText = "This value is not valid";
             this.dxValidationProvider1.SetValidationRule(this.TEN_LHDLDTextEdit, conditionValidationRule1);
+            conditionValidationRule2.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule2.ErrorText = "Tên hợp đồng không được trống";
+            this.dxValidationProvider2.SetValidationRule(this.TEN_LHDLDTextEdit, conditionValidationRule2);
             // 
             // TEN_LHDLD_ATextEdit
             // 
@@ -222,8 +225,8 @@ namespace Vs.Category
             this.TEN_LHDLD_ATextEdit.Size = new System.Drawing.Size(340, 24);
             this.TEN_LHDLD_ATextEdit.StyleController = this.dataLayoutControl1;
             this.TEN_LHDLD_ATextEdit.TabIndex = 5;
-            conditionValidationRule2.ErrorText = "This value is not valid";
-            this.dxValidationProvider1.SetValidationRule(this.TEN_LHDLD_ATextEdit, conditionValidationRule2);
+            conditionValidationRule3.ErrorText = "This value is not valid";
+            this.dxValidationProvider1.SetValidationRule(this.TEN_LHDLD_ATextEdit, conditionValidationRule3);
             // 
             // TEN_LHDLD_HTextEdit
             // 
@@ -241,8 +244,8 @@ namespace Vs.Category
             this.SO_THANGTextEdit.Name = "SO_THANGTextEdit";
             this.SO_THANGTextEdit.Properties.Appearance.Options.UseTextOptions = true;
             this.SO_THANGTextEdit.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.SO_THANGTextEdit.Properties.Mask.EditMask = "N0";
-            this.SO_THANGTextEdit.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
+            this.SO_THANGTextEdit.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.NumericMaskManager));
+            this.SO_THANGTextEdit.Properties.MaskSettings.Set("mask", "N0");
             this.SO_THANGTextEdit.Size = new System.Drawing.Size(340, 24);
             this.SO_THANGTextEdit.StyleController = this.dataLayoutControl1;
             this.SO_THANGTextEdit.TabIndex = 7;
@@ -250,12 +253,12 @@ namespace Vs.Category
             // txtSTT
             // 
             this.txtSTT.EditValue = "";
-            this.txtSTT.Location = new System.Drawing.Point(131, 158);
+            this.txtSTT.Location = new System.Drawing.Point(131, 278);
             this.txtSTT.Name = "txtSTT";
             this.txtSTT.Properties.Appearance.Options.UseTextOptions = true;
             this.txtSTT.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.txtSTT.Properties.Mask.EditMask = "N0";
-            this.txtSTT.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
+            this.txtSTT.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.NumericMaskManager));
+            this.txtSTT.Properties.MaskSettings.Set("mask", "N0");
             this.txtSTT.Size = new System.Drawing.Size(340, 24);
             this.txtSTT.StyleController = this.dataLayoutControl1;
             this.txtSTT.TabIndex = 9;
@@ -271,10 +274,6 @@ namespace Vs.Category
             this.cboHDLD_K.Size = new System.Drawing.Size(340, 24);
             this.cboHDLD_K.StyleController = this.dataLayoutControl1;
             this.cboHDLD_K.TabIndex = 12;
-            conditionValidationRule3.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule3.ErrorText = "This value is not valid";
-            conditionValidationRule3.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.Critical;
-            this.dxValidationProvider11.SetValidationRule(this.cboHDLD_K, conditionValidationRule3);
             this.cboHDLD_K.EditValueChanged += new System.EventHandler(this.cboID_HDLDKE_EditValueChanged);
             // 
             // gridView2
@@ -286,7 +285,7 @@ namespace Vs.Category
             // 
             // chkChinhThuc
             // 
-            this.chkChinhThuc.Location = new System.Drawing.Point(348, 246);
+            this.chkChinhThuc.Location = new System.Drawing.Point(338, 246);
             this.chkChinhThuc.Margin = new System.Windows.Forms.Padding(4);
             this.chkChinhThuc.Name = "chkChinhThuc";
             this.chkChinhThuc.Properties.Caption = "";
@@ -298,13 +297,13 @@ namespace Vs.Category
             // 
             // chkHD_DAU_TIEN
             // 
-            this.chkHD_DAU_TIEN.Location = new System.Drawing.Point(456, 246);
+            this.chkHD_DAU_TIEN.Location = new System.Drawing.Point(446, 246);
             this.chkHD_DAU_TIEN.Margin = new System.Windows.Forms.Padding(4);
             this.chkHD_DAU_TIEN.Name = "chkHD_DAU_TIEN";
             this.chkHD_DAU_TIEN.Properties.Caption = "";
             this.chkHD_DAU_TIEN.Properties.GlyphAlignment = DevExpress.Utils.HorzAlignment.Default;
             this.chkHD_DAU_TIEN.Properties.GlyphVerticalAlignment = DevExpress.Utils.VertAlignment.Bottom;
-            this.chkHD_DAU_TIEN.Size = new System.Drawing.Size(20, 20);
+            this.chkHD_DAU_TIEN.Size = new System.Drawing.Size(30, 20);
             this.chkHD_DAU_TIEN.StyleController = this.dataLayoutControl1;
             this.chkHD_DAU_TIEN.TabIndex = 7;
             // 
@@ -316,31 +315,38 @@ namespace Vs.Category
             this.txtTenNgan.Size = new System.Drawing.Size(340, 24);
             this.txtTenNgan.StyleController = this.dataLayoutControl1;
             this.txtTenNgan.TabIndex = 5;
-            conditionValidationRule4.ErrorText = "This value is not valid";
-            this.dxValidationProvider12.SetValidationRule(this.txtTenNgan, conditionValidationRule4);
             // 
             // txtKY_HIEU_HD
             // 
             this.txtKY_HIEU_HD.Location = new System.Drawing.Point(131, 248);
             this.txtKY_HIEU_HD.Margin = new System.Windows.Forms.Padding(4);
             this.txtKY_HIEU_HD.Name = "txtKY_HIEU_HD";
-            this.txtKY_HIEU_HD.Size = new System.Drawing.Size(114, 24);
+            this.txtKY_HIEU_HD.Size = new System.Drawing.Size(104, 24);
             this.txtKY_HIEU_HD.StyleController = this.dataLayoutControl1;
             this.txtKY_HIEU_HD.TabIndex = 5;
-            conditionValidationRule5.ErrorText = "This value is not valid";
-            this.dxValidationProvider13.SetValidationRule(this.txtKY_HIEU_HD, conditionValidationRule5);
+            // 
+            // txtSoNgay
+            // 
+            this.txtSoNgay.Location = new System.Drawing.Point(131, 128);
+            this.txtSoNgay.Margin = new System.Windows.Forms.Padding(4);
+            this.txtSoNgay.Name = "txtSoNgay";
+            this.txtSoNgay.Properties.Appearance.Options.UseTextOptions = true;
+            this.txtSoNgay.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.txtSoNgay.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.NumericMaskManager));
+            this.txtSoNgay.Properties.MaskSettings.Set("mask", "N0");
+            this.txtSoNgay.Size = new System.Drawing.Size(340, 24);
+            this.txtSoNgay.StyleController = this.dataLayoutControl1;
+            this.txtSoNgay.TabIndex = 7;
+            conditionValidationRule4.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule4.ErrorText = "Không được trống";
+            this.dxValidationProvider1.SetValidationRule(this.txtSoNgay, conditionValidationRule4);
             // 
             // Root
             // 
             this.Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
             this.Root.GroupBordersVisible = false;
             this.Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlGroup1,
-            this.lblID_HDLDKE,
-            this.lblTEN_NGAN,
-            this.lblKY_HIEU_HD,
-            this.lblCHINH_THUC,
-            this.lblHD_DAUTIEN});
+            this.layoutControlGroup1});
             this.Root.Name = "Root";
             this.Root.Size = new System.Drawing.Size(482, 343);
             this.Root.TextVisible = false;
@@ -355,10 +361,16 @@ namespace Vs.Category
             this.ItemForTEN_LHDLD_H,
             this.ItemForTEN_TT_HT,
             this.ItemForSO_THANG,
-            this.ItemForSTT});
+            this.ItemForSTT,
+            this.lblID_HDLDKE,
+            this.lblTEN_NGAN,
+            this.lblKY_HIEU_HD,
+            this.lblCHINH_THUC,
+            this.lblHD_DAUTIEN,
+            this.lblSO_NGAY});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "autoGeneratedGroup0";
-            this.layoutControlGroup1.Size = new System.Drawing.Size(472, 180);
+            this.layoutControlGroup1.Size = new System.Drawing.Size(472, 333);
             // 
             // ItemForTEN_LHDLD
             // 
@@ -395,7 +407,7 @@ namespace Vs.Category
             // ItemForTEN_TT_HT
             // 
             this.ItemForTEN_TT_HT.Control = this.cboID_TT_HT;
-            this.ItemForTEN_TT_HT.Location = new System.Drawing.Point(0, 120);
+            this.ItemForTEN_TT_HT.Location = new System.Drawing.Point(0, 150);
             this.ItemForTEN_TT_HT.Name = "ItemForTEN_TT_HT";
             this.ItemForTEN_TT_HT.Padding = new DevExpress.XtraLayout.Utils.Padding(6, 6, 3, 3);
             this.ItemForTEN_TT_HT.Size = new System.Drawing.Size(472, 30);
@@ -414,10 +426,10 @@ namespace Vs.Category
             // ItemForSTT
             // 
             this.ItemForSTT.Control = this.txtSTT;
-            this.ItemForSTT.Location = new System.Drawing.Point(0, 150);
+            this.ItemForSTT.Location = new System.Drawing.Point(0, 270);
             this.ItemForSTT.Name = "ItemForSTT";
             this.ItemForSTT.Padding = new DevExpress.XtraLayout.Utils.Padding(6, 6, 3, 3);
-            this.ItemForSTT.Size = new System.Drawing.Size(472, 30);
+            this.ItemForSTT.Size = new System.Drawing.Size(472, 63);
             this.ItemForSTT.TextSize = new System.Drawing.Size(108, 17);
             // 
             // lblID_HDLDKE
@@ -452,7 +464,7 @@ namespace Vs.Category
             this.lblKY_HIEU_HD.Location = new System.Drawing.Point(0, 240);
             this.lblKY_HIEU_HD.Name = "lblKY_HIEU_HD";
             this.lblKY_HIEU_HD.Padding = new DevExpress.XtraLayout.Utils.Padding(6, 6, 3, 3);
-            this.lblKY_HIEU_HD.Size = new System.Drawing.Size(246, 93);
+            this.lblKY_HIEU_HD.Size = new System.Drawing.Size(236, 30);
             this.lblKY_HIEU_HD.TextSize = new System.Drawing.Size(108, 17);
             // 
             // lblCHINH_THUC
@@ -461,9 +473,9 @@ namespace Vs.Category
             this.lblCHINH_THUC.Control = this.chkChinhThuc;
             this.lblCHINH_THUC.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
             this.lblCHINH_THUC.CustomizationFormText = "CHINH_THUC";
-            this.lblCHINH_THUC.Location = new System.Drawing.Point(246, 240);
+            this.lblCHINH_THUC.Location = new System.Drawing.Point(236, 240);
             this.lblCHINH_THUC.Name = "lblCHINH_THUC";
-            this.lblCHINH_THUC.Size = new System.Drawing.Size(118, 93);
+            this.lblCHINH_THUC.Size = new System.Drawing.Size(118, 30);
             this.lblCHINH_THUC.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.AutoSize;
             this.lblCHINH_THUC.TextLocation = DevExpress.Utils.Locations.Left;
             this.lblCHINH_THUC.TextSize = new System.Drawing.Size(91, 17);
@@ -475,14 +487,28 @@ namespace Vs.Category
             this.lblHD_DAUTIEN.Control = this.chkHD_DAU_TIEN;
             this.lblHD_DAUTIEN.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
             this.lblHD_DAUTIEN.CustomizationFormText = "HD_DAU_TIEN";
-            this.lblHD_DAUTIEN.Location = new System.Drawing.Point(364, 240);
+            this.lblHD_DAUTIEN.Location = new System.Drawing.Point(354, 240);
             this.lblHD_DAUTIEN.Name = "lblHD_DAUTIEN";
-            this.lblHD_DAUTIEN.Size = new System.Drawing.Size(108, 93);
+            this.lblHD_DAUTIEN.Size = new System.Drawing.Size(118, 30);
             this.lblHD_DAUTIEN.Text = "HD_DAU_TIEN";
             this.lblHD_DAUTIEN.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.AutoSize;
             this.lblHD_DAUTIEN.TextLocation = DevExpress.Utils.Locations.Left;
             this.lblHD_DAUTIEN.TextSize = new System.Drawing.Size(81, 17);
             this.lblHD_DAUTIEN.TextToControlDistance = 5;
+            // 
+            // lblSO_NGAY
+            // 
+            this.lblSO_NGAY.AppearanceItemCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.lblSO_NGAY.AppearanceItemCaption.Options.UseForeColor = true;
+            this.lblSO_NGAY.Control = this.txtSoNgay;
+            this.lblSO_NGAY.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
+            this.lblSO_NGAY.CustomizationFormText = "SO_THANG";
+            this.lblSO_NGAY.Location = new System.Drawing.Point(0, 120);
+            this.lblSO_NGAY.Name = "lblSO_NGAY";
+            this.lblSO_NGAY.Padding = new DevExpress.XtraLayout.Utils.Padding(6, 6, 3, 3);
+            this.lblSO_NGAY.Size = new System.Drawing.Size(472, 30);
+            this.lblSO_NGAY.Text = "SO_NGAY";
+            this.lblSO_NGAY.TextSize = new System.Drawing.Size(108, 17);
             // 
             // frmEditLOAI_HDLD
             // 
@@ -513,6 +539,7 @@ namespace Vs.Category
             ((System.ComponentModel.ISupportInitialize)(this.chkHD_DAU_TIEN.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTenNgan.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtKY_HIEU_HD.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtSoNgay.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForTEN_LHDLD)).EndInit();
@@ -526,10 +553,9 @@ namespace Vs.Category
             ((System.ComponentModel.ISupportInitialize)(this.lblKY_HIEU_HD)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblCHINH_THUC)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblHD_DAUTIEN)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lblSO_NGAY)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider11)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider12)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider13)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -555,7 +581,6 @@ namespace Vs.Category
         private DevExpress.XtraLayout.LayoutControlItem ItemForTEN_TT_HT;
         private DevExpress.XtraEditors.SearchLookUpEdit cboHDLD_K;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView2;
-        private DXValidationProvider dxValidationProvider11;
         private DevExpress.XtraLayout.LayoutControlItem lblID_HDLDKE;
         private DevExpress.XtraEditors.CheckEdit chkChinhThuc;
         private DevExpress.XtraLayout.LayoutControlItem lblCHINH_THUC;
@@ -564,10 +589,11 @@ namespace Vs.Category
         private DevExpress.XtraEditors.CheckEdit chkHD_DAU_TIEN;
         private DevExpress.XtraLayout.LayoutControlItem lblHD_DAUTIEN;
         private DevExpress.XtraEditors.TextEdit txtTenNgan;
-        private DXValidationProvider dxValidationProvider12;
         private DevExpress.XtraEditors.TextEdit txtKY_HIEU_HD;
-        private DXValidationProvider dxValidationProvider13;
         private DevExpress.XtraLayout.LayoutControlItem lblTEN_NGAN;
         private DevExpress.XtraLayout.LayoutControlItem lblKY_HIEU_HD;
+        private DevExpress.XtraEditors.TextEdit txtSoNgay;
+        private DevExpress.XtraLayout.LayoutControlItem lblSO_NGAY;
+        private DXValidationProvider dxValidationProvider2;
     }
 }

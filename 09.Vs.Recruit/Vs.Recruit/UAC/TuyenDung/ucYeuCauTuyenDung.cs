@@ -445,7 +445,7 @@ namespace Vs.Recruit
                             dt = ds.Tables[0].Copy();
                             if (dt.Rows.Count == 0)
                             {
-                                Commons.Modules.ObjSystems.msgChung("msgChuaDuocDuyetKhongTheIn");
+                                Commons.Modules.ObjSystems.MsgWarning(Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgChuaDuocDuyetKhongTheIn"));
                                 return;
                             }
                             dt.TableName = "DA_TA";

@@ -12,6 +12,12 @@ using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Columns;
 using System.Linq;
 using Vs.Report;
+using DevExpress.XtraReports.UI;
+using DevExpress.XtraCharts.Native;
+using DevExpress.XtraBars;
+using System.Collections;
+using DevExpress.XtraReports;
+using static Vs.Report.rptInHangLoat;
 
 namespace Vs.HRM
 {
@@ -50,6 +56,10 @@ namespace Vs.HRM
                 Commons.Modules.ObjSystems.LoadCboDonVi(cboDV);
                 Commons.Modules.ObjSystems.LoadCboXiNghiep(cboDV, cboXN);
                 Commons.Modules.ObjSystems.LoadCboTo(cboDV, cboXN, cboTo);
+                string sSQL = "SELECT ID_IHL , KY_HIEU, TEN_LOAI_IN FROM IN_HANG_LOAT WHERE HIDE = 0   ORDER BY STT";
+                DataTable dtTT = new DataTable();
+                dtTT.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSQL));
+                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_IHL, dtTT, "ID_IHL", "TEN_LOAI_IN", "TEN_LOAI_IN");
                 LoadGridThongTinNhanVien();
                 Commons.Modules.sLoad = "";
             }
@@ -106,14 +116,10 @@ namespace Vs.HRM
                                     //tạo một datatable 
                                     string strSaveThongTinNhanVien = "strSaveThongTinNhanVien" + Commons.Modules.UserName;
                                     Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, strSaveThongTinNhanVien, Commons.Modules.ObjSystems.ConvertDatatable(grvTTNhanVien), "");
-
                                     System.Data.SqlClient.SqlConnection conn;
                                     DataTable dt = new DataTable();
                                     DataTable dtbc = new DataTable();
                                     frmViewReport frm = new frmViewReport();
-                                    //frm.rpt = new rptTheNhanVien_DM(dt);
-
-
                                     conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
                                     conn.Open();
                                     Commons.Modules.ObjSystems.KyHieuDV(Convert.ToInt64(cboDV.EditValue));
@@ -124,104 +130,49 @@ namespace Vs.HRM
                                             {
                                                 try
                                                 {
-                                                    cmd = new System.Data.SqlClient.SqlCommand("spSaveThongTinNhanVienDM", conn);
-                                                    cmd.Parameters.Add("@sBT", SqlDbType.NVarChar, 50).Value = strSaveThongTinNhanVien;
-                                                    cmd.CommandType = CommandType.StoredProcedure;
-                                                    System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
-                                                    DataSet ds = new DataSet();
-                                                    adp.Fill(ds);
-                                                    DataTable dt1 = new DataTable();
-                                                    dt1 = ds.Tables[1].Copy();
-                                                    dt1.TableName = "DATA";
-                                                    frm.rpt = new Vs.Recruit.rptInTheNV_DM(dt1);
-             
-                                                    frm.AddDataSource(dt1);
+                                                    ////////cmd = new System.Data.SqlClient.SqlCommand("spSaveThongTinNhanVienDM", conn);
+                                                    ////////cmd.Parameters.Add("@sBT", SqlDbType.NVarChar, 50).Value = strSaveThongTinNhanVien;
+                                                    ////////cmd.CommandType = CommandType.StoredProcedure;
+                                                    ////////System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+                                                    ////////DataSet ds = new DataSet();
+                                                    ////////adp.Fill(ds);
 
-                                                    dt = new DataTable();
-                                                    dt = ds.Tables[0].Copy();
-                                                    dt.TableName = "DATA1";
-                                                    frm.AddDataSource(dt);
+                                                    ////////DataTable dt1 = new DataTable();
+                                                    ////////dt1 = ds.Tables[1].Copy();
+                                                    ////////dt1.TableName = "DATA";
+                                                    ////////frm.rpt = new Vs.Recruit.rptInTheNV_DM(dt1);
+                                                    ////////frm.AddDataSource(dt1);
 
-                                                    DataTable dt2 = new DataTable();
-                                                    dt2 = ds.Tables[2].Copy();
-                                                    dt2.TableName = "DATA2";
-                                                    frm.AddDataSource(dt2);
+                                                    ////////dt = new DataTable();
+                                                    ////////dt = ds.Tables[0].Copy();
+                                                    ////////dt.TableName = "DATA1";
+                                                    ////////frm.AddDataSource(dt);
 
-                                                    frm.ShowDialog();
+                                                    ////////DataTable dt2 = new DataTable();
+                                                    ////////dt2 = ds.Tables[2].Copy();
+                                                    ////////dt2.TableName = "DATA2";
+                                                    ////////frm.AddDataSource(dt2);
 
-                                                    Commons.Modules.ObjSystems.XoaTable(strSaveThongTinNhanVien);
-                                                    conn.Close();
+                                                    ////////frm.ShowDialog();
+                                                    ////////Commons.Modules.ObjSystems.XoaTable(strSaveThongTinNhanVien);
+                                                    ////////conn.Close();
                                                 }
                                                 catch { }
                                             }
                                             break;
-
-                                        case "NB":
+                                        default:
                                             {
                                                 try
                                                 {
-                                                    cmd = new System.Data.SqlClient.SqlCommand("spSaveThongTinNhanVienNB", conn);
-                                                    cmd.Parameters.Add("@sBT", SqlDbType.NVarChar, 50).Value = strSaveThongTinNhanVien;
-                                                    cmd.CommandType = CommandType.StoredProcedure;
-                                                    System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
-                                                    DataSet ds = new DataSet();
-                                                    adp.Fill(ds);
-                                                    DataTable dt1 = new DataTable();
-                                                    dt1 = ds.Tables[1].Copy();
-                                                    dt1.TableName = "DATA";
-                                                    //frm.rpt = new Vs.Recruit.rptTheNhanVien(dt1);
-                                                    frm.rpt = new rptTheNhanVien(DateTime.Now);
-                                                    frm.AddDataSource(dt1);
-
-                                                    dt = new DataTable();
-                                                    dt = ds.Tables[0].Copy();
-                                                    dt.TableName = "DON_VI";
-                                                    frm.AddDataSource(dt);
-
-                                                    frm.ShowDialog();
-
-                                                    Commons.Modules.ObjSystems.XoaTable(strSaveThongTinNhanVien);
-                                                    conn.Close();
+                                                    ////Lay ky hieu
+                                                    string sql = "SELECT KY_HIEU FROM dbo.IN_HANG_LOAT WHERE ID_IHL = " + Convert.ToString(cboID_IHL.EditValue);
+                                                    string SQL_LoaiIn = Convert.ToString(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, sql));
+                                                    inHangLoat("spSaveThongTinNhanVienNB", strSaveThongTinNhanVien, Convert.ToString(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT TEN_RPT FROM dbo.IN_HANG_LOAT WHERE ID_IHL = " + Convert.ToString(cboID_IHL.EditValue))), SQL_LoaiIn ,Convert.ToInt64(Convert.ToString(cboID_IHL.EditValue)));
                                                 }
-                                                catch {}
+                                                catch (Exception ex) { }
                                             }
                                             break;
-                                        case "NC":
-                                            {
-                                                try
-                                                {
-                                                    cmd = new System.Data.SqlClient.SqlCommand("spSaveThongTinNhanVienNB", conn);
-                                                    cmd.Parameters.Add("@sBT", SqlDbType.NVarChar, 50).Value = strSaveThongTinNhanVien;
-                                                    cmd.CommandType = CommandType.StoredProcedure;
-                                                    System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
-                                                    DataSet ds = new DataSet();
-                                                    adp.Fill(ds);
-                                                    DataTable dt1 = new DataTable();
-                                                    dt1 = ds.Tables[1].Copy();
-                                                    dt1.TableName = "DATA";
-                                                    //frm.rpt = new Vs.Recruit.rptTheNhanVien(dt1);
-                                                    frm.rpt = new rptTheNhanVien(DateTime.Now);
-                                                    frm.AddDataSource(dt1);
-
-                                                    dt = new DataTable();
-                                                    dt = ds.Tables[0].Copy();
-                                                    dt.TableName = "DON_VI";
-                                                    frm.AddDataSource(dt);
-
-                                                    frm.ShowDialog();
-
-                                                    Commons.Modules.ObjSystems.XoaTable(strSaveThongTinNhanVien);
-                                                    conn.Close();
-                                                }
-                                                catch { }
-                                            }
-                                            break;
-                                    }
-                                    
-                                   
-                                  
-
-                                    
+                                    }                                                                                                                                       
                                 }
                                 catch (Exception ex)
                                 {
@@ -248,28 +199,47 @@ namespace Vs.HRM
         }
         #endregion
 
+        private void inHangLoat (string SQL , string dataTable , string reportTypeName , string tenLHDLD , Int64 id_IHL)
+        {
+            string strSaveThongTinNhanVien = "strSaveThongTinNhanVien" + Commons.Modules.UserName;
+
+
+            frmViewReport frm = new frmViewReport();
+            try
+            {
+                System.Data.SqlClient.SqlConnection conn;
+                DataTable dt = new DataTable();
+                DataTable dtbc = new DataTable();
+                conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                conn.Open();
+                frm.rpt = new rptInHangLoat(SQL, dataTable, reportTypeName, tenLHDLD, Commons.Modules.ObjSystems.ConvertDatatable(grvTTNhanVien), id_IHL);
+                frm.ShowDialog();
+                conn.Close();
+                Commons.Modules.ObjSystems.XoaTable(strSaveThongTinNhanVien);
+            }
+            catch(Exception ex) {}
+
+        }
+        
         #region hàm xử lý dữ liệu
         private void LoadGridThongTinNhanVien()
         {
             try
             {
                 DataTable dt = new DataTable();
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spLayDanhSachThongTinNhanVien", cboDV.EditValue, cboXN.EditValue, cboTo.EditValue, Commons.Modules.UserName, Commons.Modules.TypeLanguage, datTuNgay.EditValue, datDNgay.EditValue));
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spLayDanhSachThongTinNhanVien", cboDV.EditValue, cboXN.EditValue, cboTo.EditValue, Commons.Modules.UserName, Commons.Modules.TypeLanguage, datTuNgay.EditValue, datDNgay.EditValue, Convert.ToInt32(cboID_IHL.EditValue)));
                 dt.Columns["CHON"].ReadOnly = false;
-                if (grdTTNhanVien.DataSource == null)
-                {
-                    Commons.Modules.ObjSystems.MLoadXtraGrid(grdTTNhanVien, grvTTNhanVien, dt, true, false, false, false, true, this.Name);
-                    grvTTNhanVien.Columns["CHON"].Visible = false;
-                    grvTTNhanVien.Columns["ID_CN"].Visible = false;
-                    grvTTNhanVien.Columns["MS_CN"].OptionsColumn.AllowEdit = false;
-                    grvTTNhanVien.Columns["TEN_XN"].OptionsColumn.AllowEdit = false;
-                    grvTTNhanVien.Columns["TEN_TO"].OptionsColumn.AllowEdit = false;
-                    grvTTNhanVien.Columns["HO_TEN"].OptionsColumn.AllowEdit = false;
+                grvTTNhanVien.Name = "grvTTNhanVien";
+                grvTTNhanVien.Name = grvTTNhanVien.Name + cboID_IHL.EditValue;
+                grdTTNhanVien.Name = grdTTNhanVien.Name + cboID_IHL.EditValue;
+
+
+                Commons.Modules.ObjSystems.MLoadXtraGrid(grdTTNhanVien, grvTTNhanVien, dt, true, true, false, false, true, this.Name);
+                foreach (GridColumn column in grvTTNhanVien.Columns)
+                {             
+                   column.OptionsColumn.ReadOnly = true;
                 }
-                else
-                {
-                    grdTTNhanVien.DataSource = dt;
-                }
+
                 try
                 {
                     grvTTNhanVien.OptionsSelection.CheckBoxSelectorField = "CHON";
@@ -305,15 +275,7 @@ namespace Vs.HRM
                 XtraMessageBox.Show(ex.Message.ToString());
             }
         }
-        private void GetsThongTinNhanVienCheked()
-        {
-
-        }
-        private void windowsUIButton_Click(object sender, EventArgs e)
-        {
-
-        }
-
+ 
         private void datTuNgay_EditValueChanged(object sender, EventArgs e)
         {
             try
@@ -325,6 +287,16 @@ namespace Vs.HRM
         }
 
         private void datDNgay_EditValueChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (Commons.Modules.sLoad == "0Load") return;
+                LoadGridThongTinNhanVien();
+            }
+            catch { }
+        }
+
+        private void cboID_IHL_EditValueChanged(object sender, EventArgs e)
         {
             try
             {

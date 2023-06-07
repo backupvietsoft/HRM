@@ -48,6 +48,7 @@ namespace Vs.Recruit
                 Commons.Modules.sLoad = "";
                 cboID_VTTD_EditValueChanged(null, null);
                 EnabelButton(true);
+                Commons.Modules.ObjSystems.SetPhanQuyen(btnALL);
             }
             catch
             {

@@ -207,19 +207,10 @@
             // 
             // grvCongNhan
             // 
-            this.grvCongNhan.Appearance.HeaderPanel.Options.UseTextOptions = true;
-            this.grvCongNhan.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.grvCongNhan.Appearance.HeaderPanel.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Top;
-            this.grvCongNhan.Appearance.HideSelectionRow.ForeColor = System.Drawing.Color.Black;
-            this.grvCongNhan.Appearance.HideSelectionRow.Options.UseBackColor = true;
-            this.grvCongNhan.Appearance.HideSelectionRow.Options.UseFont = true;
-            this.grvCongNhan.Appearance.HideSelectionRow.Options.UseForeColor = true;
-            this.grvCongNhan.Appearance.SelectedRow.Options.UseBackColor = true;
             this.grvCongNhan.DetailHeight = 297;
             this.grvCongNhan.GridControl = this.grdCongNhan;
             this.grvCongNhan.Name = "grvCongNhan";
             this.grvCongNhan.OptionsSelection.UseIndicatorForSelection = false;
-            this.grvCongNhan.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.False;
             this.grvCongNhan.OptionsView.ShowGroupPanel = false;
             this.grvCongNhan.PopupMenuShowing += new DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler(this.grvDSUngVien_PopupMenuShowing);
             this.grvCongNhan.RowCountChanged += new System.EventHandler(this.grvCongNhan_RowCountChanged);

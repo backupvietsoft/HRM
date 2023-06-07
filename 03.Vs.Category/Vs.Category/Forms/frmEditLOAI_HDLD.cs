@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -45,6 +46,7 @@ namespace Vs.Category
                 lblKY_HIEU_HD.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
                 lblTEN_NGAN.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
                 lblCHINH_THUC.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                lblSO_NGAY.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             }
         }
         private void frmEditLOAI_HDLD_Resize(object sender, EventArgs e) => dataLayoutControl1.Refresh();
@@ -52,7 +54,7 @@ namespace Vs.Category
         {
             try
             {
-                string sSql = "SELECT ID_LHDLD, TEN_LHDLD, TEN_LHDLD_A, TEN_LHDLD_H, SO_THANG, ID_TT_HD,(SELECT ID_LHDLD_KE FROM dbo.LOAI_HDLD WHERE ID_LHDLD = ID_LHDLD_KE) HDKE, CHINH_THUC,TEN_NGAN, KY_HIEU_HD,HOP_DONG_BAT_DAU, STT " +
+                string sSql = "SELECT ID_LHDLD, TEN_LHDLD, TEN_LHDLD_A, TEN_LHDLD_H, SO_THANG,SO_NGAY, ID_TT_HD,(SELECT ID_LHDLD_KE FROM dbo.LOAI_HDLD WHERE ID_LHDLD = "+iIdLHD.ToString() + ") HDKE, CHINH_THUC,TEN_NGAN, KY_HIEU_HD,HOP_DONG_BAT_DAU, STT " +
                     "FROM LOAI_HDLD WHERE ID_LHDLD = " + iIdLHD.ToString();
                 DataTable dtTmp = new DataTable();
                 dtTmp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSql));
@@ -60,13 +62,26 @@ namespace Vs.Category
                 TEN_LHDLD_ATextEdit.EditValue = dtTmp.Rows[0]["TEN_LHDLD_A"].ToString();
                 TEN_LHDLD_HTextEdit.EditValue = dtTmp.Rows[0]["TEN_LHDLD_H"].ToString();
                 SO_THANGTextEdit.EditValue = dtTmp.Rows[0]["SO_THANG"].ToString();
-                cboID_TT_HT.EditValue = dtTmp.Rows[0]["ID_TT_HD"].ToString();
+                cboID_TT_HT.EditValue = Convert.ToString(dtTmp.Rows[0]["ID_TT_HD"]) == "" ? 0 : Convert.ToInt64(dtTmp.Rows[0]["ID_TT_HD"]);
                 txtSTT.EditValue = dtTmp.Rows[0]["STT"].ToString();
-                cboHDLD_K.EditValue = dtTmp.Rows[0]["HDKE"].ToString();
+                cboHDLD_K.EditValue = Convert.ToString(dtTmp.Rows[0]["HDKE"]) == "" ? 0 : Convert.ToInt64(dtTmp.Rows[0]["HDKE"]);
                 txtTenNgan.EditValue = dtTmp.Rows[0]["TEN_NGAN"].ToString();
                 chkChinhThuc.EditValue = Convert.ToBoolean(dtTmp.Rows[0]["CHINH_THUC"]);
                 txtKY_HIEU_HD.EditValue = dtTmp.Rows[0]["KY_HIEU_HD"].ToString();
-                chkHD_DAU_TIEN.EditValue = Convert.ToBoolean(dtTmp.Rows[0]["HOP_DONG_BAT_DAU"]);
+                try
+                {
+                    chkHD_DAU_TIEN.EditValue = Convert.ToBoolean(dtTmp.Rows[0]["HOP_DONG_BAT_DAU"]);
+                }
+                catch { }
+                try
+                {
+                    txtSoNgay.EditValue =  (dtTmp.Rows[0]["SO_NGAY"].ToString()) == "" ? "" : (dtTmp.Rows[0]["SO_NGAY"].ToString()); 
+                }
+                catch
+                {
+
+                }
+
             }
             catch (Exception EX)
             {
@@ -102,7 +117,15 @@ namespace Vs.Category
 
                     case "luu":
                         {
-                            if (!dxValidationProvider1.Validate()) return;
+                            if(Commons.Modules.KyHieuDV == "DM")
+                            {
+                                if (!dxValidationProvider2.Validate()) return;
+                            }
+                            else
+                            {
+                                if (!dxValidationProvider1.Validate()) return;
+                            }
+                            
                             if (bKiemTrung()) return;
                             if (Convert.ToInt64(cboID_TT_HT.EditValue) < 0)
                             {
@@ -112,7 +135,8 @@ namespace Vs.Category
                             }
                             Commons.Modules.sId = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spUpdateLOAI_HDLD", (bAddEditLHD ? -1 : iIdLHD),
                                 TEN_LHDLDTextEdit.EditValue, TEN_LHDLD_ATextEdit.EditValue,
-                                TEN_LHDLD_HTextEdit.EditValue, SO_THANGTextEdit.Text == "" ? SO_THANGTextEdit.EditValue = null : Convert.ToInt32(SO_THANGTextEdit.EditValue), Convert.ToInt64(cboID_TT_HT.EditValue), (txtSTT.Text == "") ? txtSTT.EditValue = null : txtSTT.EditValue , Convert.ToInt64(cboHDLD_K.EditValue),txtTenNgan.EditValue ,txtKY_HIEU_HD.EditValue, chkChinhThuc.EditValue, chkHD_DAU_TIEN.EditValue).ToString();
+
+                                TEN_LHDLD_HTextEdit.EditValue, SO_THANGTextEdit.Text == "" ? SO_THANGTextEdit.EditValue = null : Convert.ToInt32(SO_THANGTextEdit.EditValue), Convert.ToInt64(cboID_TT_HT.EditValue), (txtSTT.Text == "") ? txtSTT.EditValue = null : txtSTT.EditValue , cboHDLD_K.Text == "" ? cboHDLD_K.EditValue = null: Convert.ToInt64(cboHDLD_K.EditValue),txtTenNgan.Text == "" ? null : txtTenNgan.Text, txtKY_HIEU_HD.Text == "" ? null : txtKY_HIEU_HD.EditValue, chkChinhThuc.EditValue, chkHD_DAU_TIEN.EditValue, txtSoNgay.Text == "" ? 0 : Convert.ToInt32(txtSoNgay.EditValue)).ToString();
                             if (bAddEditLHD)
                             {
                                 if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msg_ThemThanhCongBanCoMuonTiepTuc"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
@@ -156,12 +180,13 @@ namespace Vs.Category
                 }
                 if(Convert.ToInt32(chkHD_DAU_TIEN.EditValue) == 1)
                 {
-                    string sSql = "SELECT COUNT(HOP_DONG_BAT_DAU) SL FROM dbo.LOAI_HDLD WHERE HOP_DONG_BAT_DAU = 1";
+                    string sSql = "SELECT COUNT(HOP_DONG_BAT_DAU) SL FROM dbo.LOAI_HDLD WHERE HOP_DONG_BAT_DAU = 1 AND ID_LHDLD <>" + iIdLHD;
                     DataTable dt = new DataTable();
                     dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSql));                   
                     if ( Convert.ToInt32(dt.Rows[0]["SL"]) > 0)
                     {
                         XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "DaCoHDBD"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return true;
                     }
                 }
             }

@@ -161,7 +161,7 @@ namespace Vs.Report
             //this.Controls.Add(chart_GT);
         }
 
-        private void rptBieuDoPhanLoai_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        private void rptBieuDoPhanLoai_BeforePrint(object sender, CancelEventArgs e)
         {
             this.xrSubreport4.ReportSource = new srptBDGioiTinh(dt);
             this.xrSubreport2.ReportSource = new srptBDLoaiCV(dt1);

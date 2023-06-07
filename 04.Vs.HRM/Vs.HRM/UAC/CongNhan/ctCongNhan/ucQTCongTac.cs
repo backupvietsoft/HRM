@@ -75,7 +75,7 @@ namespace Vs.HRM
 
             //ID_CTLookUpEdit.EditValue = "";
             Commons.Modules.ObjSystems.MLoadLookUpEdit(ID_CTLLookUpEdit, Commons.Modules.ObjSystems.DataCTL(false), "ID_CTL", "TEN_CTL", "TEN_CTL", true);
-
+            
             Commons.Modules.ObjSystems.MLoadLookUpEdit(cboTinhTrang, Commons.Modules.ObjSystems.DataTinhTrang(false), "ID_TT", "TenTT", "TenTT");
             LoadgrdCongTac(-1);
 
@@ -94,8 +94,8 @@ namespace Vs.HRM
         {
             try
             {
-                tableLyLich.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT DV.ID_DV, DV.TEN_DV, T.ID_TO, T.TEN_TO, XN.ID_XN, XN.TEN_XN, LCV.ID_LCV, LCV.TEN_LCV, CV.ID_CV, CV.TEN_CV , CASE CV.MS_CV WHEN 2 THEN 2 WHEN 1 THEN 1 ELSE 1 END AS ID_CTL, " +
-                                                                "CASE CV.MS_CV WHEN 2 THEN N'Lương sản phẩm' WHEN 1 THEN N'Lương thời gian' ELSE N'Lương thời gian' END AS TEN_CTL, " +
+                tableLyLich.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT DV.ID_DV, DV.TEN_DV, T.ID_TO, T.TEN_TO, XN.ID_XN, XN.TEN_XN, LCV.ID_LCV, LCV.TEN_LCV, CV.ID_CV, CV.TEN_CV , CASE CV.MS_CV WHEN '2' THEN 2 WHEN '1' THEN 1 ELSE 1 END AS ID_CTL, " +
+                                                                "CASE CV.MS_CV WHEN '2' THEN N'Lương sản phẩm' WHEN '1' THEN N'Lương thời gian' ELSE N'Lương thời gian' END AS TEN_CTL, " +
                                                                 "''" + "NHIEM_VU," + "''" + "NOI_CONG_TAC " +
                                                                 "FROM CONG_NHAN A LEFT JOIN dbo.[TO] T ON T.ID_TO = A.ID_TO LEFT JOIN dbo.XI_NGHIEP XN ON T.ID_XN = XN.ID_XN "
                                                                 + "LEFT JOIN dbo.DON_VI DV ON DV.ID_DV = XN.ID_DV "
@@ -106,7 +106,7 @@ namespace Vs.HRM
             }
             catch (Exception ex)
             {
-                throw ex;
+                
             }
         }
         private void grvCongTac_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
@@ -178,10 +178,10 @@ namespace Vs.HRM
         #endregion
 
         #region function load
-        private void LoadgrdCongTac(int id)
+        public void LoadgrdCongTac(int id)
         {
             DataTable dt = new DataTable();
-            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetListCongTac", idcn, Commons.Modules.UserName, Commons.Modules.TypeLanguage));
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetListCongTac", Commons.Modules.iCongNhan, Commons.Modules.UserName, Commons.Modules.TypeLanguage));
             dt.PrimaryKey = new DataColumn[] { dt.Columns["ID_QTCT"] };
             Commons.Modules.ObjSystems.MLoadXtraGrid(grdCongTac, grvCongTac, dt, false, true, true, true, true, this.Name);
 
@@ -257,7 +257,6 @@ namespace Vs.HRM
             ID_LCV_CULookUpEdit.Properties.ReadOnly = visible;
             ID_CTL_CULookUpEdit.Properties.ReadOnly = visible;
 
-
             DON_VILookUpEdit.Properties.ReadOnly = visible;
             XI_NGHIEPLookUpEdit.Properties.ReadOnly = visible;
             ID_TOLookUpEdit.Properties.ReadOnly = visible;
@@ -327,6 +326,12 @@ namespace Vs.HRM
                     DON_VILookUpEdit.EditValue = null;
                     XI_NGHIEPLookUpEdit.EditValue = null;
                     ID_TOLookUpEdit.EditValue = null;
+                    try
+                    {
+                        txtMoTaCVCu.EditValue = tableTTC_CN.Rows[0]["MO_TA_CV_CU"];
+                        txtMoTaCVMoi.EditValue = tableTTC_CN.Rows[0]["MO_TA_CV_MOI"];
+                    }
+                    catch { }
 
                 }
                 catch (Exception ex)
@@ -376,10 +381,16 @@ namespace Vs.HRM
                     cboTinhTrang.EditValue = (grvCongTac.GetFocusedRowCellValue("ID_TT") == null || grvCongTac.GetFocusedRowCellValue("ID_TT").ToString().Trim() == "") ? cboTinhTrang.EditValue = null : Convert.ToInt32(grvCongTac.GetFocusedRowCellValue("ID_TT"));
 
                     txtTaiLieu.EditValue = grvCongTac.GetFocusedRowCellValue("TAI_LIEU");
+                    try
+                    {
+                        txtMoTaCVCu.EditValue = grvCongTac.GetFocusedRowCellValue("MO_TA_CV_CU");
+                        txtMoTaCVMoi.EditValue = grvCongTac.GetFocusedRowCellValue("MO_TA_CV_MOI");
+                    }
+                    catch { }
                 }
                 catch (Exception ex)
                 {
-                    throw ex;
+
                 }
 
             }
@@ -708,9 +719,9 @@ namespace Vs.HRM
                 case "In":
                     {
 
-                        if (ID_CNTextEdit.EditValue == null || ID_CNTextEdit.EditValue.ToString() == "")
+                        if (grvCongTac.RowCount == 0)
                         {
-                            XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgChonDongCanXuLy"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            Commons.Modules.ObjSystems.MsgWarning(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgChonDongCanXuLy"));
                             return;
                         }
                         idQTCT = Convert.ToInt32(grvCongTac.GetFocusedRowCellValue("ID_QTCT"));

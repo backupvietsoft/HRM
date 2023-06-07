@@ -36,28 +36,33 @@ namespace Vs.Payroll.Form
         #region even
         private void frmThuaThieuSL_Load(object sender, EventArgs e)
         {
-            Commons.Modules.sLoad = "0Load";
-            LoadcboKH_CHUYEN();
-            LoadcboORD();
+            try
+            {
+                Commons.Modules.sLoad = "0Load";
+                LoadcboKH_CHUYEN();
+                LoadcboORD();
 
-            cboID_DT.EditValue = iID_DT;
-            cboID_ORD.EditValue = iID_ORD;
-            cboID_CHUYEN.EditValue = iID_CHUYEN_SD;
-            datTNgay.EditValue = Ngay;
-            datDNgay.EditValue = Ngay;
-            Commons.OSystems.SetDateEditFormat(datTNgay);
-            Commons.OSystems.SetDateEditFormat(datDNgay);
+                cboID_DT.EditValue = Convert.ToInt64(iID_DT);
+                cboID_ORD.EditValue = iID_ORD;
+                cboID_CHUYEN.EditValue = iID_CHUYEN_SD;
+                datTNgay.EditValue = Ngay;
+                datDNgay.EditValue = Ngay;
+                Commons.OSystems.SetDateEditFormat(datTNgay);
+                Commons.OSystems.SetDateEditFormat(datDNgay);
 
-            LoadgrvCDThuaThieu();
-            LoadgrvCN();
-            Commons.Modules.sLoad = "";
+                LoadgrvCDThuaThieu();
+                LoadgrvCN();
+                Commons.Modules.sLoad = "";
 
-            grvCDThuaThieu_FocusedRowChanged(null, null);
+                grvCDThuaThieu_FocusedRowChanged(null, null);
 
-            enableButon(true);
-            LoadNN();
-            LoadSLChot();
-            lblThangDoiChieu.Text = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "lblThangDoiChieu") + " : " + Ngay.ToString("MM/yyyy");
+                enableButon(true);
+                LoadNN();
+                LoadSLChot();
+                lblThangDoiChieu.Text = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "lblThangDoiChieu") + " : " + Ngay.ToString("MM/yyyy");
+                Commons.Modules.ObjSystems.SetPhanQuyen(windowsUIButton);
+            }
+            catch { }
         }
         private void windowsUIButton_ButtonClick(object sender, DevExpress.XtraBars.Docking2010.ButtonEventArgs e)
         {
@@ -532,6 +537,7 @@ namespace Vs.Payroll.Form
                 cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
                 cmd.Parameters.Add("@iLoai", SqlDbType.Int).Value = 0;
                 cmd.Parameters.Add("@DVi", SqlDbType.Int).Value = iID_DV;
+                cmd.Parameters.Add("@Ngay", SqlDbType.Date).Value = Ngay;
                 cmd.CommandType = CommandType.StoredProcedure;
                 System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
                 DataSet ds = new DataSet();
@@ -568,6 +574,7 @@ namespace Vs.Payroll.Form
                 cmd.Parameters.Add("@iLoai", SqlDbType.Int).Value = 1;
                 cmd.Parameters.Add("@DVi", SqlDbType.Int).Value = iID_DV;
                 cmd.Parameters.Add("@iCot1", SqlDbType.BigInt).Value = Convert.ToInt64(cboID_DT.EditValue);
+                cmd.Parameters.Add("@Ngay", SqlDbType.Date).Value = Ngay;
                 cmd.CommandType = CommandType.StoredProcedure;
                 System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
                 DataSet ds = new DataSet();

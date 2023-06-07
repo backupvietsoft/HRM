@@ -16,15 +16,18 @@ namespace Vs.Report
             InitializeComponent();
             Commons.Modules.ObjSystems.ThayDoiNN(this);
         
-            xrSubreport1.ReportSource = new SubReportHeader();
+           if(Commons.Modules.KyHieuDV == "DM")
+            {
+                xrSubreport1.ReportSource = new SubReportHeader();
+            }    
+                 
             DataTable dtNgu = new DataTable();
             dtNgu.Load(Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT KEYWORD, CASE " + Commons.Modules.TypeLanguage + " WHEN 0 THEN VIETNAM WHEN 1 THEN ENGLISH ELSE CHINESE END AS NN  FROM LANGUAGES WHERE FORM = N'NgayThangNam' "));
 
             lblNgay.Text = Commons.Modules.ObjSystems.GetNN(dtNgu, "Ngay", "NgayThangNam") + " " + Ngay + " " +
-                Commons.Modules.ObjSystems.GetNN(dtNgu, "Thang", "NgayThangNam") + " " + Thang + " " +
-                Commons.Modules.ObjSystems.GetNN(dtNgu, "Nam", "NgayThangNam") + " " + Nam;
+            Commons.Modules.ObjSystems.GetNN(dtNgu, "Thang", "NgayThangNam") + " " + Thang + " " +
+            Commons.Modules.ObjSystems.GetNN(dtNgu, "Nam", "NgayThangNam") + " " + Nam;
             lblThang.Text = "THÁNG " + Thang + " NĂM " + Nam;
-
         }
 
     }

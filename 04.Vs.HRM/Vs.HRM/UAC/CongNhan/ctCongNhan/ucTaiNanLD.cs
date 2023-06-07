@@ -121,10 +121,10 @@ namespace Vs.HRM
         #endregion
 
         #region function Load form
-        private void LoadgrdTaiNan(int id)
+        public void LoadgrdTaiNan(int id)
         {
             DataTable dt = new DataTable();
-            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetListTaiNanLD", idcn, Commons.Modules.UserName, Commons.Modules.TypeLanguage));
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetListTaiNanLD", Commons.Modules.iCongNhan, Commons.Modules.UserName, Commons.Modules.TypeLanguage));
             dt.PrimaryKey = new DataColumn[] { dt.Columns["ID_TNLD"] };
             Commons.Modules.ObjSystems.MLoadXtraGrid(grdTaiNan, grvTaiNan, dt, false, true, true, true, true, this.Name);
             grvTaiNan.Columns["ID_TNLD"].Visible = false;
@@ -259,7 +259,7 @@ namespace Vs.HRM
             {
                 int n = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spUpdateTaiNanLD",
                 grvTaiNan.GetFocusedRowCellValue("ID_TNLD"),
-                idcn,
+                Commons.Modules.iCongNhan,
                 ID_NGUYEN_NHANLookUpEdit.EditValue,
                 ID_GAY_TAI_NANLookUpEdit.EditValue,
                 ID_NGHE_NGHIEPLookUpEdit.EditValue,

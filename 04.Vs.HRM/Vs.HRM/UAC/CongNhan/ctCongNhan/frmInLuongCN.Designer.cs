@@ -38,8 +38,8 @@
             this.NONN_HoTenCN = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).BeginInit();
             this.tablePanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dNgayIn.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dNgayIn.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dNgayIn.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rdo_ChonBaoCao.Properties)).BeginInit();
             this.SuspendLayout();
             // 
@@ -69,9 +69,9 @@
             this.windowsUIButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.windowsUIButton.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.windowsUIButton.Location = new System.Drawing.Point(0, 162);
-            this.windowsUIButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.windowsUIButton.Margin = new System.Windows.Forms.Padding(4);
             this.windowsUIButton.Name = "windowsUIButton";
-            this.windowsUIButton.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.windowsUIButton.Padding = new System.Windows.Forms.Padding(4);
             this.windowsUIButton.Size = new System.Drawing.Size(311, 34);
             this.windowsUIButton.TabIndex = 8;
             this.windowsUIButton.Text = "windowsUIButtonPanel1";
@@ -107,25 +107,25 @@
             this.tablePanel1.SetColumn(this.dNgayIn, 2);
             this.dNgayIn.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dNgayIn.EditValue = null;
-            this.dNgayIn.Location = new System.Drawing.Point(159, 30);
+            this.dNgayIn.Location = new System.Drawing.Point(159, 35);
             this.dNgayIn.Name = "dNgayIn";
             this.dNgayIn.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.dNgayIn.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.tablePanel1.SetRow(this.dNgayIn, 1);
-            this.dNgayIn.Size = new System.Drawing.Size(132, 24);
+            this.dNgayIn.Size = new System.Drawing.Size(130, 24);
             this.dNgayIn.TabIndex = 3;
             // 
             // lbNgayIn
             // 
             this.tablePanel1.SetColumn(this.lbNgayIn, 1);
             this.lbNgayIn.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbNgayIn.Location = new System.Drawing.Point(34, 30);
+            this.lbNgayIn.Location = new System.Drawing.Point(36, 35);
             this.lbNgayIn.Margin = new System.Windows.Forms.Padding(16, 3, 3, 3);
             this.lbNgayIn.Name = "lbNgayIn";
             this.tablePanel1.SetRow(this.lbNgayIn, 1);
-            this.lbNgayIn.Size = new System.Drawing.Size(119, 21);
+            this.lbNgayIn.Size = new System.Drawing.Size(117, 26);
             this.lbNgayIn.TabIndex = 2;
             this.lbNgayIn.Text = "labelControl1";
             // 
@@ -134,7 +134,7 @@
             this.tablePanel1.SetColumn(this.rdo_ChonBaoCao, 1);
             this.tablePanel1.SetColumnSpan(this.rdo_ChonBaoCao, 2);
             this.rdo_ChonBaoCao.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rdo_ChonBaoCao.Location = new System.Drawing.Point(21, 57);
+            this.rdo_ChonBaoCao.Location = new System.Drawing.Point(23, 67);
             this.rdo_ChonBaoCao.Name = "rdo_ChonBaoCao";
             this.rdo_ChonBaoCao.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] {
             new DevExpress.XtraEditors.Controls.RadioGroupItem("rdo_QuyetDinhLuong", "Quyết định lương", true, "rdo_QuyetDinhLuong"),
@@ -143,7 +143,7 @@
             this.rdo_ChonBaoCao.Properties.ItemsLayout = DevExpress.XtraEditors.RadioGroupItemsLayout.Column;
             this.tablePanel1.SetRow(this.rdo_ChonBaoCao, 2);
             this.tablePanel1.SetRowSpan(this.rdo_ChonBaoCao, 4);
-            this.rdo_ChonBaoCao.Size = new System.Drawing.Size(270, 102);
+            this.rdo_ChonBaoCao.Size = new System.Drawing.Size(266, 92);
             this.rdo_ChonBaoCao.TabIndex = 1;
             // 
             // NONN_HoTenCN
@@ -157,10 +157,10 @@
             this.tablePanel1.SetColumnSpan(this.NONN_HoTenCN, 2);
             this.NONN_HoTenCN.Dock = System.Windows.Forms.DockStyle.Fill;
             this.NONN_HoTenCN.LineStyle = System.Drawing.Drawing2D.DashStyle.Dot;
-            this.NONN_HoTenCN.Location = new System.Drawing.Point(21, 3);
+            this.NONN_HoTenCN.Location = new System.Drawing.Point(23, 3);
             this.NONN_HoTenCN.Name = "NONN_HoTenCN";
             this.tablePanel1.SetRow(this.NONN_HoTenCN, 0);
-            this.NONN_HoTenCN.Size = new System.Drawing.Size(270, 21);
+            this.NONN_HoTenCN.Size = new System.Drawing.Size(266, 26);
             this.NONN_HoTenCN.TabIndex = 0;
             this.NONN_HoTenCN.Text = "labelControl1";
             // 

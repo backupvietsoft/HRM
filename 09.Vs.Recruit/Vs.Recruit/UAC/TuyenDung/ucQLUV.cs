@@ -36,11 +36,19 @@ namespace Vs.Recruit
 
         private void ucQLUV_Load(object sender, EventArgs e)
         {
-            Commons.Modules.sLoad = "0Load";
-            LoadCombo();
-            cboTinhTrangUV.EditValue = 1;
-            Commons.Modules.sLoad = "";
-            LoadUNG_VIEN(-1);
+            Commons.Modules.ObjSystems.SetPhanQuyen(windowsUIButton);
+            try
+            {
+                Commons.Modules.sLoad = "0Load";
+                LoadCombo();
+                cboTinhTrangUV.EditValue = 1;
+                Commons.Modules.sLoad = "";
+                LoadUNG_VIEN(-1);
+            }
+            catch
+            {
+            }
+            
         }
         private void windowsUIButton_ButtonClick(object sender, ButtonEventArgs e)
         {

@@ -22,17 +22,6 @@ namespace Vs.TimeAttendance
 {
     public partial class ucPhepThang : DevExpress.XtraEditors.XtraUserControl
     {
-        public static ucPhepThang _instance;
-        public static ucPhepThang Instance
-        {
-            get
-            {
-                if (_instance == null)
-                    _instance = new ucPhepThang();
-                return _instance;
-            }
-        }
-
         static string CharacterIncrement(int colCount)
         {
             int TempCount = 0;
@@ -62,14 +51,15 @@ namespace Vs.TimeAttendance
         }
 
         string sBT = "tabKeHoachDiCa" + Commons.Modules.ModuleName;
-       // private SqlConnection conn;
-
-        public ucPhepThang()
+        // private SqlConnection conn;
+        private bool bChamCongKhach;
+        public ucPhepThang(bool bChamCongKhach)
         {
             InitializeComponent();
             Commons.Modules.ObjSystems.ThayDoiNN(this, new List<LayoutControlGroup>() { Root }, windowsUIButton);
             Commons.Modules.ObjSystems.MLoadNNXtraGrid(grvPhepThang, "Phep_thang");
             Commons.Modules.ObjSystems.MLoadNNXtraGrid(grvThang, "Phep_thang");
+            this.bChamCongKhach = bChamCongKhach;
         }
         private void ucPhepThang_Load(object sender, EventArgs e)
         {
@@ -137,8 +127,8 @@ namespace Vs.TimeAttendance
                         }
                         else
                         {
-                           if(XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "MsgDuLieuCoBanCoMuonCapNhatLai"),
-                            (Commons.Modules.TypeLanguage == 0 ? ThongBao.msgTBV.ToString() : ThongBao.msgTBA), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                            if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "MsgDuLieuCoBanCoMuonCapNhatLai"),
+                             (Commons.Modules.TypeLanguage == 0 ? ThongBao.msgTBV.ToString() : ThongBao.msgTBA), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                             {
                                 Commons.Modules.ObjSystems.ShowWaitForm(this);
                                 LoadGrdPhepThang(true);
@@ -163,7 +153,8 @@ namespace Vs.TimeAttendance
                             grdPhepThang.DataSource = dt;
                             //xóa bảng tạm
                             Commons.Modules.ObjSystems.XoaTable(sBT);
-                        }catch{}
+                        }
+                        catch { }
                         break;
                     }
                 case "ThanhToan":
@@ -175,10 +166,10 @@ namespace Vs.TimeAttendance
                             Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBT, Commons.Modules.ObjSystems.ConvertDatatable(grvPhepThang), "");
                             //tính trên bảng tạm
                             int i = Convert.ToDateTime(cboThang.EditValue).Month;
-                            string COTUPDATE= "TT_" + i + "";
-                               
-                            
-                            SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "update " + sBT + " SET PHEP_DA_NGHI = ISNULL(T_1,0) + ISNULL(T_2,0) + ISNULL(T_3,0) + ISNULL(T_4,0) + ISNULL(T_5,0) +ISNULL(T_6,0) + ISNULL(T_7,0) + ISNULL(T_8,0) + ISNULL(T_9,0) + ISNULL(T_10,0) + ISNULL(T_11,0)+ISNULL(T_12,0) update " + sBT + " SET "+COTUPDATE+ " = PHEP_CON_LAI, PHEP_CON_LAI = 0 WHERE ISNULL(PHEP_CON_LAI,0) > 0");
+                            string COTUPDATE = "TT_" + i + "";
+
+
+                            SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "update " + sBT + " SET PHEP_DA_NGHI = ISNULL(T_1,0) + ISNULL(T_2,0) + ISNULL(T_3,0) + ISNULL(T_4,0) + ISNULL(T_5,0) +ISNULL(T_6,0) + ISNULL(T_7,0) + ISNULL(T_8,0) + ISNULL(T_9,0) + ISNULL(T_10,0) + ISNULL(T_11,0)+ISNULL(T_12,0) update " + sBT + " SET " + COTUPDATE + " = PHEP_CON_LAI, PHEP_CON_LAI = 0 WHERE ISNULL(PHEP_CON_LAI,0) > 0");
                             //Load lại lưới vừa tính
                             DataTable dt = new DataTable();
                             dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, " SELECT * FROM " + sBT + " "));
@@ -202,7 +193,7 @@ namespace Vs.TimeAttendance
                         //xóa
                         try
                         {
-                            string sSql = "DELETE dbo.PHEP_THANG WHERE THANG = " + "'"+Convert.ToDateTime(cboThang.EditValue).ToString("yyyyMMdd") + "'";
+                            string sSql = "DELETE " + (bChamCongKhach ? "dbo.PHEP_THANG_K" : "dbo.PHEP_THANG") + " WHERE THANG = " + "'" + Convert.ToDateTime(cboThang.EditValue).ToString("yyyyMMdd") + "'";
                             SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, sSql);
                             grvPhepThang.DeleteSelectedRows();
                         }
@@ -223,7 +214,7 @@ namespace Vs.TimeAttendance
                         string sBT = "sBTPhepThang" + Commons.Modules.UserName;
                         //tạo bảng tạm
                         Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBT, Commons.Modules.ObjSystems.ConvertDatatable(grvPhepThang), "");
-                        SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "sPsaveTinhPhepThang", sBT, Convert.ToDateTime(cboThang.EditValue));
+                        SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, Commons.Modules.ObjSystems.returnSps(bChamCongKhach, "sPsaveTinhPhepThang"), sBT, Convert.ToDateTime(cboThang.EditValue));
                         Commons.Modules.ObjSystems.XoaTable(sBT);
                         LoadThang();
                         LoadGrdPhepThang(false);
@@ -238,7 +229,7 @@ namespace Vs.TimeAttendance
                             conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
                             conn.Open();
 
-                            System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptCongNhanPhepThang", conn);
+                            System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand(Commons.Modules.ObjSystems.returnSps(bChamCongKhach, "rptCongNhanPhepThang"), conn);
                             cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
                             cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
                             cmd.Parameters.Add("@ID_DV", SqlDbType.Int).Value = cboDV.EditValue;
@@ -815,9 +806,19 @@ namespace Vs.TimeAttendance
         {
             try
             {
+                string sPs = "spGetCongNhanPhepThang";
+                switch (Commons.Modules.KyHieuDV)
+                {
+                    case "NB":
+                    case "NC":
+                        {
+                            sPs = "spGetCongNhanPhepThang_NC";
+                            break;
+                        }
+                }
                 Commons.Modules.sLoad = "0Load";
                 DataTable dt = new DataTable();
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetCongNhanPhepThang", bThem, cboDV.EditValue, cboXN.EditValue, cboTo.EditValue, Convert.ToDateTime(cboThang.EditValue), Commons.Modules.UserName, Commons.Modules.TypeLanguage));
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, Commons.Modules.ObjSystems.returnSps(bChamCongKhach, sPs), bThem, cboDV.EditValue, cboXN.EditValue, cboTo.EditValue, Convert.ToDateTime(cboThang.EditValue), Commons.Modules.UserName, Commons.Modules.TypeLanguage));
 
                 for (int i = 4; i < dt.Columns.Count; i++)
                 {
@@ -827,7 +828,7 @@ namespace Vs.TimeAttendance
                 dt.Columns[1].ReadOnly = true;
                 dt.Columns[2].ReadOnly = true;
                 dt.Columns[3].ReadOnly = true;
-                Commons.Modules.ObjSystems.MLoadXtraGrid(grdPhepThang, grvPhepThang, dt, bThem, true, false, true,true,this.Name);
+                Commons.Modules.ObjSystems.MLoadXtraGrid(grdPhepThang, grvPhepThang, dt, bThem, true, false, true, true, this.Name);
 
                 RepositoryItemTextEdit txtEdit = new RepositoryItemTextEdit();
                 txtEdit.Properties.DisplayFormat.FormatString = "N1";
@@ -842,12 +843,15 @@ namespace Vs.TimeAttendance
                 grvPhepThang.Columns["HO_TEN"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
                 grvPhepThang.Columns["NGAY_VAO_LAM"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
                 grvPhepThang.Columns["PHEP_THAM_NIEN"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
+                try { grvPhepThang.Columns["PHEP_NAM"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left; } catch { }
                 grvPhepThang.Columns["PHEP_UNG_TRUOC"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
 
                 grvPhepThang.Columns["PHEP_CON_LAI"].UnboundType = DevExpress.Data.UnboundColumnType.Decimal;
 
-                grvPhepThang.Columns["PHEP_THAM_NIEN"].ColumnEdit = txtEdit;
                 grvPhepThang.Columns["PHEP_UNG_TRUOC"].ColumnEdit = txtEdit;
+                grvPhepThang.Columns["PHEP_TIEU_CHUAN"].OptionsColumn.AllowEdit = false;
+
+
 
 
                 grvPhepThang.Columns["ID_CN"].Visible = false;
@@ -878,6 +882,9 @@ namespace Vs.TimeAttendance
                     iVisible = iVisible + 2;
                 }
 
+
+                grvPhepThang.Columns["PHEP_UNG_TRUOC"].Caption = grvPhepThang.Columns["PHEP_UNG_TRUOC"].Caption + " " + ((Commons.Modules.ObjSystems.ConvertDateTime(cboThang.Text).Year) - 1) + " (ngày)";
+
                 grvPhepThang.Columns["PHEP_DA_NGHI"].VisibleIndex = 50;
                 grvPhepThang.Columns["PHEP_TIEU_CHUAN"].VisibleIndex = 51;
                 grvPhepThang.Columns["SO_THANG_LV"].VisibleIndex = 52;
@@ -887,8 +894,12 @@ namespace Vs.TimeAttendance
                 grvPhepThang.Columns["PHEP_TIEU_CHUAN"].ColumnEdit = txtEdit;
                 grvPhepThang.Columns["SO_THANG_LV"].ColumnEdit = txtEdit;
                 grvPhepThang.Columns["PHEP_CON_LAI"].ColumnEdit = txtEdit;
+                grvPhepThang.Columns["PHEP_THAM_NIEN"].ColumnEdit = txtEdit;
 
                 Commons.Modules.sLoad = "";
+
+                grvPhepThang.Columns["PHEP_NAM"].OptionsColumn.AllowEdit = false;
+                grvPhepThang.Columns["PHEP_NAM"].Caption = grvPhepThang.Columns["PHEP_NAM"].Caption + " " + Commons.Modules.ObjSystems.ConvertDateTime(cboThang.Text).Year + " (ngày)";
             }
             catch (Exception)
             {
@@ -944,7 +955,7 @@ namespace Vs.TimeAttendance
             {
                 //ItemForDateThang.Visibility = LayoutVisibility.Never;
                 DataTable dtthang = new DataTable();
-                string sSql = "SELECT disTINCT SUBSTRING(CONVERT(VARCHAR(10),THANG,103),4,2) as M, RIGHT(CONVERT(VARCHAR(10),THANG,103),4) AS Y ,RIGHT(CONVERT(VARCHAR(10),THANG,103),7) AS THANG FROM dbo.PHEP_THANG ORDER BY Y DESC , M DESC";
+                string sSql = "SELECT disTINCT SUBSTRING(CONVERT(VARCHAR(10),THANG,103),4,2) as M, RIGHT(CONVERT(VARCHAR(10),THANG,103),4) AS Y ,RIGHT(CONVERT(VARCHAR(10),THANG,103),7) AS THANG FROM " + (bChamCongKhach ? "dbo.PHEP_THANG_K" : "dbo.PHEP_THANG") + " ORDER BY Y DESC , M DESC";
                 dtthang.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSql));
                 Commons.Modules.ObjSystems.MLoadXtraGrid(grdThang, grvThang, dtthang, false, true, true, true, true, this.Name);
                 grvThang.Columns["M"].Visible = false;
@@ -1043,6 +1054,78 @@ namespace Vs.TimeAttendance
             {
                 XtraMessageBox.Show(ex.Message.ToString());
             }
+        }
+
+        private void grvPhepThang_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
+        {
+            if (Commons.Modules.KyHieuDV != "NC" && Commons.Modules.KyHieuDV != "NB") return;
+            GridView view = sender as GridView;
+            double dPhepDaNghi;
+            double dPhepTieuChuan;
+            double dPhepTon;
+            double dPhepConLai;
+            double dPhepThamNien;
+            try
+            {
+                var row = view.GetFocusedDataRow();
+
+                if (e.Column.FieldName.Substring(0, e.Column.FieldName.IndexOf('_') + 1) == "T_")
+                {
+                    double tongPhepDaNghi = 0;
+                    double tongPhepDaTT = 0;
+                    for (int i = 1; i <= 12; i++)
+                    {
+                        try
+                        {
+                            tongPhepDaNghi = tongPhepDaNghi + Convert.ToDouble(Convert.ToString(grvPhepThang.GetFocusedRowCellValue("T_" + i.ToString())) == "" ? 0 : grvPhepThang.GetFocusedRowCellValue("T_" + i.ToString()));
+                            tongPhepDaTT = tongPhepDaTT + Convert.ToDouble(Convert.ToString(grvPhepThang.GetFocusedRowCellValue("TT_" + i.ToString())) == "" ? 0 : grvPhepThang.GetFocusedRowCellValue("TT_" + i.ToString()));
+                        }
+                        catch { }
+                    }
+                    row["PHEP_DA_NGHI"] = tongPhepDaNghi;
+
+                    dPhepTieuChuan = Convert.ToDouble(Convert.ToString(grvPhepThang.GetFocusedRowCellValue("PHEP_TIEU_CHUAN")) == "" ? 0 : grvPhepThang.GetFocusedRowCellValue("PHEP_TIEU_CHUAN"));
+                    dPhepTon = Convert.ToDouble(Convert.ToString(grvPhepThang.GetFocusedRowCellValue("PHEP_UNG_TRUOC")) == "" ? 0 : grvPhepThang.GetFocusedRowCellValue("PHEP_UNG_TRUOC"));
+                    dPhepThamNien = Convert.ToDouble(Convert.ToString(grvPhepThang.GetFocusedRowCellValue("PHEP_THAM_NIEN")) == "" ? 0 : grvPhepThang.GetFocusedRowCellValue("PHEP_THAM_NIEN"));
+                    row["PHEP_CON_LAI"] = dPhepTon + dPhepTieuChuan + dPhepThamNien - tongPhepDaTT - tongPhepDaTT;
+                }
+
+                if (e.Column.FieldName.Substring(0, e.Column.FieldName.IndexOf('_') + 1) == "TT_")
+                {
+                    double tongPhepDaTT = 0;
+                    for (int i = 1; i <= 12; i++)
+                    {
+                        try
+                        {
+                            tongPhepDaTT = tongPhepDaTT + Convert.ToDouble(Convert.ToString(grvPhepThang.GetFocusedRowCellValue("TT_" + i.ToString())) == "" ? 0 : grvPhepThang.GetFocusedRowCellValue("TT_" + i.ToString()));
+                        }
+                        catch { }
+                    }
+                    dPhepTieuChuan = Convert.ToDouble(Convert.ToString(grvPhepThang.GetFocusedRowCellValue("PHEP_TIEU_CHUAN")) == "" ? 0 : grvPhepThang.GetFocusedRowCellValue("PHEP_TIEU_CHUAN"));
+                    dPhepDaNghi = Convert.ToDouble(Convert.ToString(grvPhepThang.GetFocusedRowCellValue("PHEP_DA_NGHI")) == "" ? 0 : grvPhepThang.GetFocusedRowCellValue("PHEP_DA_NGHI"));
+                    dPhepTon = Convert.ToDouble(Convert.ToString(grvPhepThang.GetFocusedRowCellValue("PHEP_UNG_TRUOC")) == "" ? 0 : grvPhepThang.GetFocusedRowCellValue("PHEP_UNG_TRUOC"));
+                    dPhepThamNien = Convert.ToDouble(Convert.ToString(grvPhepThang.GetFocusedRowCellValue("PHEP_THAM_NIEN")) == "" ? 0 : grvPhepThang.GetFocusedRowCellValue("PHEP_THAM_NIEN"));
+                    row["PHEP_CON_LAI"] = dPhepTon + dPhepTieuChuan + dPhepThamNien - dPhepDaNghi - tongPhepDaTT;
+                }
+
+                if (e.Column.FieldName == "PHEP_UNG_TRUOC")
+                {
+                    dPhepTieuChuan = Convert.ToDouble(Convert.ToString(grvPhepThang.GetFocusedRowCellValue("PHEP_TIEU_CHUAN")) == "" ? 0 : grvPhepThang.GetFocusedRowCellValue("PHEP_TIEU_CHUAN"));
+                    dPhepDaNghi = Convert.ToDouble(Convert.ToString(grvPhepThang.GetFocusedRowCellValue("PHEP_DA_NGHI")) == "" ? 0 : grvPhepThang.GetFocusedRowCellValue("PHEP_DA_NGHI"));
+                    dPhepThamNien = Convert.ToDouble(Convert.ToString(grvPhepThang.GetFocusedRowCellValue("PHEP_THAM_NIEN")) == "" ? 0 : grvPhepThang.GetFocusedRowCellValue("PHEP_THAM_NIEN"));
+                    double tongPhepDaTT = 0;
+                    for (int i = 1; i <= 12; i++)
+                    {
+                        try
+                        {
+                            tongPhepDaTT = tongPhepDaTT + Convert.ToDouble(Convert.ToString(grvPhepThang.GetFocusedRowCellValue("TT_" + i.ToString())) == "" ? 0 : grvPhepThang.GetFocusedRowCellValue("TT_" + i.ToString()));
+                        }
+                        catch { }
+                    }
+                    row["PHEP_CON_LAI"] = Convert.ToDouble(e.Value) + dPhepTieuChuan + dPhepThamNien - dPhepDaNghi - tongPhepDaTT;
+                }
+            }
+            catch (Exception ex) { }
         }
     }
 }

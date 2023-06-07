@@ -1,5 +1,8 @@
-﻿using DevExpress.Utils;
+﻿using Commons.Properties;
+using DevExpress.Utils;
+using DevExpress.Utils.Html;
 using DevExpress.Utils.Layout;
+using DevExpress.Xpo.DB;
 using DevExpress.XtraBars.Docking2010;
 using DevExpress.XtraBars.Navigation;
 using DevExpress.XtraEditors;
@@ -21,9 +24,11 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Media;
 using System.Net;
 using System.Net.Sockets;
 using System.Reflection;
@@ -222,6 +227,229 @@ namespace Commons
             }
         }
 
+        #region MessageChung
+        //xoa
+        public DialogResult msgHoi(string sThongBao)
+        {
+            //ThongBao.Thông_Báo
+
+            DialogResult dl = XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmChung", sThongBao),
+                 (Commons.Modules.TypeLanguage == 0 ? ThongBao.msgTBV.ToString() : ThongBao.msgTBA), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            return dl;
+        }
+
+        public void msgChung(string sThongBao)
+        {
+            XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmChung", sThongBao), (Commons.Modules.TypeLanguage == 0 ? ThongBao.msgTBV.ToString() : ThongBao.msgTBA), MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+        public void msgChung(string sThongBao, string sLoi)
+        {
+            XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmChung", sThongBao) + "\n" + sLoi, (Commons.Modules.TypeLanguage == 0 ? ThongBao.msgTBV.ToString() : ThongBao.msgTBA), MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        #endregion
+        public void MsgWarningVer()
+        {
+            System.ComponentModel.IContainer components = null;
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager();
+
+            DevExpress.Utils.Html.HtmlTemplateCollection htmlTemplateCollection1 = new DevExpress.Utils.Html.HtmlTemplateCollection();
+            DevExpress.Utils.Html.HtmlTemplate htmlTemplate1 = new DevExpress.Utils.Html.HtmlTemplate();
+
+
+            htmlTemplate1.Name = "htmlTemplate1";
+            htmlTemplate1.Template = "<div class=\"frame\" id=\"frame\">\r\n\t<div class=\"content\">\r\n\t    <div class=\"text caption\">Thông báo</div>\r\n\t\t<div id=\"content\">\r\n\t\t   \t<div class=\"text message\">\r\n\t\t   \t\t<div class=\"title\">\r\n\t\t   \t\t\t<p>Phần mềm đang tạm thời ngưng hoạt động.<br> <br>Vui lòng liên hệ Vietsoft.</p>\r\n\t\t   \t\t</div>\r\n\t\t   \t\t<div class=\"container\"><p><b>Thông tin liên hệ:</b> <br><br> Ms Nguyễn thị Thùy Dương, MP và Zalo: 0986 778 578 <br><br>Email: <a href=\"mailto:sale@vietsoft.com.vn\">sale@vietsoft.com.vn</a> </p></div>\r\n\t\t   \t</div>\r\n\t\t</div>\r\n\t</div>\r\n\t<div class=\"buttons\">\r\n    \t<div class=\"button\" tabindex=\"3\" id=\"dialogresult-ok\">Exit</div>\r\n    </div>\r\n</div>\r\n";
+
+
+            htmlTemplate1.Styles = "body{\r\n\tpadding: 15px;\r\n\tfont-size: 12pt;\r\n\tfont-family: \"Segoe UI\";\r\n\ttext-align: center;\r\n}\r\na{\r\n\tcolor: Blue;\r\n}\r\n\r\n.frame{\r\n\tcolor: Black;\r\n\tbackground-color: White;\r\n\tborder: 1px solid @Black/0.2;\r\n\tborder-radius: 10px;\r\n\tbox-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.2);\r\n\twidth: 500px;\r\n}\r\n.content {\r\n\tpadding: 15px;\r\n}\r\n.text {\r\n\tpadding: 10px;\r\n\ttext-align: left;\r\n}\r\n.caption {\r\n\tfont-size: 15pt;\r\n\tfont-family: 'Segoe UI Semibold';\r\n}\r\n.title{\r\n\tdisplay: flex;\r\n\talign-items: center;\r\n\tjustify-content: center;\r\n\ttext-align: center;\r\n}\r\n.buttons {\r\n\tpadding: 20px;\r\n\tdisplay: flex;\r\n\tflex-direction: row;\r\n\tjustify-content: center;\r\n\tborder-top: 1px solid @Black/0.1;\r\n\tborder-radius: 0px 0px 10px 10px;\r\n}\r\n.button {\r\n\tcolor: Black;\r\n\tbackground-color: White;\r\n\tmin-width: 80px;\r\n\tmargin: 0px 5px;\r\n\tpadding: 5px;\r\n    border: 1px solid Black;\r\n    border-radius: 5px;\r\n    cursor: pointer;\r\n}\r\n.button:hover {\r\n\tbackground-color: Black;\r\n\tcolor: White;\r\n}\r\n";
+            htmlTemplateCollection1.AddRange(new DevExpress.Utils.Html.HtmlTemplate[] {
+            htmlTemplate1});
+
+            DevExpress.Utils.SvgImageCollection svgImageCollection1 = new DevExpress.Utils.SvgImageCollection(components);
+
+            svgImageCollection1.Add("del", "image://svgimages/diagramicons/del.svg");
+            svgImageCollection1.Add("warning", "image://svgimages/icon builder/security_warningcircled2.svg");
+
+            var args = new XtraMessageBoxArgs();
+            args.HtmlTemplate.Assign(htmlTemplate1);
+            args.HtmlImages = svgImageCollection1;
+            args.Caption = "Thông báo";
+            args.Text = "";
+            args.DefaultButtonIndex = 1;
+
+            DialogResult dr;
+            dr = XtraMessageBox.Show(args);
+            Application.Exit();
+
+        }
+        public int MsgDelete(string sText)
+        {
+            //Version osVersion = System.Environment.OSVersion.Version;
+            //XtraMessageBox.Show(osVersion.Major.ToString());
+
+            int result = 0;
+            System.ComponentModel.IContainer components = null;
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager();
+
+            DevExpress.Utils.Html.HtmlTemplateCollection htmlTemplateCollection1 = new DevExpress.Utils.Html.HtmlTemplateCollection();
+            DevExpress.Utils.Html.HtmlTemplate htmlTemplate1 = new DevExpress.Utils.Html.HtmlTemplate();
+
+
+            htmlTemplate1.Name = "htmlTemplate1";
+            htmlTemplate1.Template = "<div class=\"frame\" id=\"frame\">\r\n\t<div class=\"header\">\r\n\t\t<div class=\"header-element caption\">${Caption}</div>\r\n\t\t<div class=\"header-element close-button\" id=\"closebutton\">\r\n\t\t\t<img src=\"del\" class=\"close-button-img\">\r\n\t\t</div>\r\n\t</div>\r\n\t<div class=\"message-text\" id=\"content\">${MessageText}</div>\r\n\t<div class=\"buttons\">\r\n\t\t<div class=\"button delete\" tabindex=\"1\" id=\"dialogresult-ok\">DELETE</div>\r\n\t\t<div class=\"button cancel\" tabindex=\"2\" id=\"dialogresult-cancel\">CANCEL</div>\r\n\t</div>\r\n</div>";
+            htmlTemplate1.Styles = "body{\r\n\tpadding: 15px;\r\n\tfont-size: 14px;\r\n\tfont-family: 'Segoe UI';\r\n}\r\n.frame {\r\n\tmin-width: 470px;\r\n\tbackground-color: @Window;\r\n\tborder-radius: 10px;\r\n\tbox-shadow: 0px 8px 10px 0px rgba(0, 0, 0, 0.2);\r\n}\r\n.header {\r\n\tbackground-color: @Critical;\r\n\tpadding: 5px;\r\n\tdisplay: flex;\r\n\talign-items: center;\r\n\tjustify-content: space-between;\r\n\tborder-radius: 10px 10px 0px 0px;\r\n}\r\n.header-element {\r\n\tmargin: 5px 5px 5px 25px;\r\n}\r\n.caption {\r\n\tcolor: @White;\r\n\tfont-weight: bold;\r\n}\r\n.close-button-img {\r\n\tfill: @White;\r\n\twidth: 18px;\r\n\theight: 18px;\r\n\topacity: 0.8;\r\n}\r\n.close-button {\r\n\tpadding: 5px;\r\n\tborder-radius: 4px;\r\n}\r\n.close-button:hover {\r\n\tbackground-color: @WindowText/0.1;\r\n}\r\n.close-button:active {\r\n\tbackground-color: @ControlText/0.05;\r\n}\r\n.message-text {\r\n\tmargin: 15px 30px;\r\n\tfont-size: 14px;\r\n\twhite-space: pre;\r\n\tcolor: @WindowText/0.8;\r\n}\r\n.buttons {\r\n\tmargin: 10px;\r\n\tdisplay: flex;\r\n\tjustify-content: flex-end;\r\n}\r\n.button {\r\n\tcolor: @Critical;\r\n\tborder-radius: 5px;\r\n\tpadding: 8px 24px;\r\n\tmargin: 0px 5px;\r\n\tborder: solid 1px @Transparent;\r\n}\r\n.button:hover {\r\n\tcolor: @White;\r\n\tbackground-color: @Critical;\r\n\tbox-shadow: 0px 0px 10px @Critical/0.5;\r\n}\r\n.button:focus {\r\n\tborder-color: @Critical;\r\n}\r\n#cancel {\r\n\tborder-color: @Critical;\r\n}";
+            htmlTemplateCollection1.AddRange(new DevExpress.Utils.Html.HtmlTemplate[] {
+            htmlTemplate1});
+            // 
+            // htmlTemplate1
+            // 
+
+            DevExpress.Utils.SvgImageCollection svgImageCollection1 = new DevExpress.Utils.SvgImageCollection(components);
+
+
+            svgImageCollection1.Add("del", "image://svgimages/diagramicons/del.svg");
+
+            var args = new XtraMessageBoxArgs();
+            args.HtmlTemplate.Assign(htmlTemplate1);
+            args.HtmlImages = svgImageCollection1;
+            args.Caption = Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption");
+            args.Text = sText;
+            args.DefaultButtonIndex = 1;
+            args.HtmlElementMouseClick += (s, argss) =>
+            {
+                //var status = argss.Element.ParentElement.ParentElement.ParentElement.FindElementById("frame");
+                //status.ClearChildren();
+                if (argss.HasClassName("cancel", false))
+                {
+                    result = 0;
+                }
+                if (argss.HasClassName("delete", false))
+                {
+                    result = 1;
+                }
+            };
+            //SoundPlayer infoSoundPlayer = new SoundPlayer("Template\\Sound\\info.wav");
+            //infoSoundPlayer.Play();
+            XtraMessageBox.Show(args);
+            return result;
+        }
+        public void MsgWarning(string sText)
+        {
+            int result = 0;
+            System.ComponentModel.IContainer components = null;
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager();
+
+            DevExpress.Utils.Html.HtmlTemplateCollection htmlTemplateCollection1 = new DevExpress.Utils.Html.HtmlTemplateCollection();
+            DevExpress.Utils.Html.HtmlTemplate htmlTemplate1 = new DevExpress.Utils.Html.HtmlTemplate();
+
+
+            htmlTemplate1.Name = "htmlTemplate1";
+            htmlTemplate1.Template = "<div class=\"frame\" id=\"frame\">\r\n    <div class=\"header\">\r\n        <div class=\"caption\">${Caption}</div>\r\n    \t<div class=\"close-button\" id=\"closebutton\">\r\n\t\t\t<img src=\"del\" class=\"close-button-img\" id=\"close\">\r\n\t\t</div>\r\n    </div>\r\n    <div class=\"content\" id=\"content\">\r\n    \t<img src=\"warning\" class=\"message icon\">\r\n    \t<div class=\"message text\">${MessageText}</div>\r\n    \t<div class=\"message button\" tabindex=\"1\" id=\"dialogresult-ok\">OK</div>\r\n    </div>\r\n</div>";
+            htmlTemplate1.Styles = "body{\t\r\n\tpadding: 20px;\r\n\tfont-size: 14px;\r\n\tfont-family: 'Segoe UI';\r\n}\r\n.frame {\r\n\twidth: 350px;\r\n\tcolor: @ControlText;\r\n\tbackground-color: @Window;\r\n\tborder: 1px solid @Warning;\r\n\tborder-radius: 16px;\r\n\tdisplay: flex;\r\n\tflex-direction: column;\r\n\tjustify-content: center;\r\n\tbox-shadow: 0px 8px 16px @Warning/0.6;\r\n}\r\n.header {\r\n\tpadding: 8px;\r\n\tcolor: @White;\r\n\tbackground-color: @Warning;\r\n\tborder-radius: 15px 15px 0px 0px;\r\n\tdisplay: flex;\r\n\tjustify-content: space-between;\r\n\talign-items: center;\r\n}\r\n.caption {\r\n\tmargin: 0px 10px;\r\n\tfont-weight: bold;\r\n}\r\n.close-button {\r\n\tpadding: 8px;\r\n\tborder-radius: 5px;\r\n}\r\n.close-button:hover {\r\n\tbackground-color: @WindowText/0.1;\r\n}\r\n.close-button:active {\r\n\tbackground-color: @ControlText/0.05;\r\n}\r\n.close-button-img {\r\n\tfill: White;\r\n\twidth: 18px;\r\n\theight: 18px;\r\n\topacity: 0.8;\r\n}\r\n.content {\r\n\tdisplay: flex;\r\n\talign-items: center;\r\n\tflex-direction: column;\r\n\tpadding: 10px;\r\n}\r\n.message {\r\n\tmargin: 7px;\r\n}\r\n.icon {\r\n\twidth: 48px;\r\n\theight: 48px;\r\n\topacity: 0.8;\r\n}\r\n.text {\r\n\tcolor: @ControlText;\r\n\ttext-align: center;\r\n}\r\n.button {\r\n\tcolor: @Warning;\r\n\tpadding: 8px 24px;\r\n\tborder: 1px solid @Warning;\r\n\tborder-radius: 5px;\r\n}\r\n.button:hover {\r\n\tcolor: @White;\r\n\tbackground-color: @Warning;\r\n\tbox-shadow: 0px 0px 10px @Warning/0.5;\r\n}";
+            htmlTemplateCollection1.AddRange(new DevExpress.Utils.Html.HtmlTemplate[] {
+            htmlTemplate1});
+            // 
+            // htmlTemplate1
+            // 
+
+            DevExpress.Utils.SvgImageCollection svgImageCollection1 = new DevExpress.Utils.SvgImageCollection(components);
+
+            svgImageCollection1.Add("del", "image://svgimages/diagramicons/del.svg");
+            svgImageCollection1.Add("warning", "image://svgimages/icon builder/security_warningcircled2.svg");
+
+            var args = new XtraMessageBoxArgs();
+            args.HtmlTemplate.Assign(htmlTemplate1);
+            args.HtmlImages = svgImageCollection1;
+            args.Caption = Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption");
+            args.Text = sText;
+            args.DefaultButtonIndex = 1;
+            //SoundPlayer warningSoundPlayer = new SoundPlayer("Template\\Sound\\warning.wav");
+            //warningSoundPlayer.Play();
+            XtraMessageBox.Show(args);
+        }
+        public int MsgQuestion(string sText)
+        {
+            int result = 0;
+            System.ComponentModel.IContainer components = null;
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager();
+
+            DevExpress.Utils.Html.HtmlTemplateCollection htmlTemplateCollection1 = new DevExpress.Utils.Html.HtmlTemplateCollection();
+            DevExpress.Utils.Html.HtmlTemplate htmlTemplate1 = new DevExpress.Utils.Html.HtmlTemplate();
+
+
+            htmlTemplate1.Name = "htmlTemplate1";
+            htmlTemplate1.Template = "<div class=\"frame\" id=\"frame\">\r\n    <div class=\"header\">\r\n        <div class=\"caption\">${Caption}</div>\r\n    \t<div class=\"close-button\" id=\"closebutton\">\r\n\t\t\t<img src=\"del\" class=\"close-button-img\" id=\"close\">\r\n\t\t</div>\r\n    </div>\r\n    <div class=\"content\" id=\"content\">\r\n    \t<img src=\"question\" class=\"message icon\">\r\n    \t<div class=\"message text\">${MessageText}</div>\r\n    \t<div class=\"btn\">\r\n    \t\t<div class=\"message button save\" tabindex=\"1\" id=\"dialogresult-ok\">Yes</div>\r\n\t    \t<div class=\"message button dontsave\" tabindex=\"2\" id=\"dialogresult-ok\">No</div>\r\n\t    \t<div class=\"message button cancel\" tabindex=\"3\" id=\"dialogresult-ok\">Cancel</div>\r\n    \t</div>\r\n    </div>\r\n</div>";
+            htmlTemplate1.Styles = "body{\t\r\n\tpadding: 20px;\r\n\tfont-size: 14px;\r\n\tfont-family: 'Segoe UI';\r\n}\r\n.frame {\r\n\twidth: 450px;\r\n\tcolor: @ControlText;\r\n\tbackground-color: @Window;\r\n\tborder: 1px solid @Question;\r\n\tborder-radius: 16px;\r\n\tdisplay: flex;\r\n\tflex-direction: column;\r\n\tjustify-content: center;\r\n\tbox-shadow: 0px 8px 16px @Question/0.6;\r\n}\r\n.header {\r\n\tpadding: 8px;\r\n\tcolor: @White;\r\n\tbackground-color: @Question;\r\n\tborder-radius: 15px 15px 0px 0px;\r\n\tdisplay: flex;\r\n\tjustify-content: space-between;\r\n\talign-items: center;\r\n}\r\n.caption {\r\n\tmargin: 0px 10px;\r\n\tfont-weight: bold;\r\n}\r\n.close-button {\r\n\tpadding: 8px;\r\n\tborder-radius: 5px;\r\n}\r\n.close-button:hover {\r\n\tbackground-color: @WindowText/0.1;\r\n}\r\n.close-button:active {\r\n\tbackground-color: @ControlText/0.05;\r\n}\r\n.close-button-img {\r\n\tfill: White;\r\n\twidth: 18px;\r\n\theight: 18px;\r\n\topacity: 0.8;\r\n}\r\n.content {\r\n\tdisplay: flex;\r\n\talign-items: center;\r\n\tflex-direction: column;\r\n\tpadding: 10px;\r\n}\r\n.message {\r\n\tmargin: 7px;\r\n\t\r\n}\r\n.icon {\r\n\twidth: 48px;\r\n\theight: 48px;\r\n\topacity: 0.8;\r\n}\r\n.text {\r\n\tcolor: @ControlText;\r\n\ttext-align: center;\r\n}\r\n.btn {\r\n\ttext-align: center;\r\n\tflex-direction: row;\r\n\tdisplay: flex;\r\n\tjustify-content: space-around;\r\n}\r\n.button {\r\n\tcolor: @Question;\r\n\tpadding: 8px 24px;\r\n\tborder: 1px solid @Question;\r\n\tborder-radius: 5px;\r\n}\r\n.button:hover {\r\n\tcolor: @White;\r\n\tbackground-color: @Question;\r\n\tbox-shadow: 0px 0px 10px @Question/0.5;\r\n}";
+            htmlTemplateCollection1.AddRange(new DevExpress.Utils.Html.HtmlTemplate[] {
+            htmlTemplate1});
+            // 
+            // htmlTemplate1
+            // 
+
+            DevExpress.Utils.SvgImageCollection svgImageCollection1 = new DevExpress.Utils.SvgImageCollection(components);
+
+            svgImageCollection1.Add("del", "image://svgimages/diagramicons/del.svg");
+            svgImageCollection1.Add("question", "image://svgimages/icon builder/actions_question.svg");
+
+            var args = new XtraMessageBoxArgs();
+            args.HtmlTemplate.Assign(htmlTemplate1);
+            args.HtmlImages = svgImageCollection1;
+            args.Caption = Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption");
+            args.Text = sText;
+            args.DefaultButtonIndex = 1;
+            args.HtmlElementMouseClick += (s, argss) =>
+            {
+                //var status = argss.Element.ParentElement.ParentElement.ParentElement.FindElementById("frame");
+                //status.ClearChildren();
+                if (argss.HasClassName("save", false))
+                {
+                    result = 1;
+                }
+                else
+                {
+                    result = 0;
+                }
+
+            };
+            //SoundPlayer warningSoundPlayer = new SoundPlayer("Template\\Sound\\info.wav");
+            //warningSoundPlayer.Play();
+            XtraMessageBox.Show(args);
+            return result;
+        }
+        public void MsgError(string sText)
+        {
+            int result = 0;
+            System.ComponentModel.IContainer components = null;
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager();
+
+            DevExpress.Utils.Html.HtmlTemplateCollection htmlTemplateCollection1 = new DevExpress.Utils.Html.HtmlTemplateCollection();
+            DevExpress.Utils.Html.HtmlTemplate htmlTemplate1 = new DevExpress.Utils.Html.HtmlTemplate();
+
+
+            htmlTemplate1.Name = "htmlTemplate1";
+            htmlTemplate1.Template = "<div class=\"frame\" id=\"frame\">\r\n    <div class=\"header\">\r\n        <div class=\"caption\">${Caption}</div>\r\n    \t<div class=\"close-button\" id=\"closebutton\">\r\n\t\t\t<img src=\"del\" class=\"close-button-img\" id=\"close\">\r\n\t\t</div>\r\n    </div>\r\n    <div class=\"content\" id=\"content\">\r\n    \t<img src=\"error\" class=\"message icon\">\r\n    \t<div class=\"message text\">${MessageText}</div>\r\n    \t<div class=\"btn\">\r\n    \t\t<div class=\"message button\" tabindex=\"1\" id=\"dialogresult-ok\">OK</div>\r\n    \t</div>\r\n    </div>\r\n</div>";
+            htmlTemplate1.Styles = "body{\t\r\n\tpadding: 20px;\r\n\tfont-size: 14px;\r\n\tfont-family: 'Segoe UI';\r\n}\r\n.frame {\r\n\twidth: 450px;\r\n\tcolor: @ControlText;\r\n\tbackground-color: @Window;\r\n\tborder: 1px solid #d64550;\r\n\tborder-radius: 16px;\r\n\tdisplay: flex;\r\n\tflex-direction: column;\r\n\tjustify-content: center;\r\n\tbox-shadow: 0px 8px 16px @#d64550/0.6;\r\n}\r\n.header {\r\n\tpadding: 8px;\r\n\tcolor: @White;\r\n\tbackground-color: #d64550;\r\n\tborder-radius: 15px 15px 0px 0px;\r\n\tdisplay: flex;\r\n\tjustify-content: space-between;\r\n\talign-items: center;\r\n}\r\n.caption {\r\n\tmargin: 0px 10px;\r\n\tfont-weight: bold;\r\n}\r\n.close-button {\r\n\tpadding: 8px;\r\n\tborder-radius: 5px;\r\n}\r\n.close-button:hover {\r\n\tbackground-color: @WindowText/0.1;\r\n}\r\n.close-button:active {\r\n\tbackground-color: @ControlText/0.05;\r\n}\r\n.close-button-img {\r\n\tfill: White;\r\n\twidth: 18px;\r\n\theight: 18px;\r\n\topacity: 0.8;\r\n}\r\n.content {\r\n\tdisplay: flex;\r\n\talign-items: center;\r\n\tflex-direction: column;\r\n\tpadding: 10px;\r\n}\r\n.message {\r\n\tmargin: 7px;\r\n\t\r\n}\r\n.icon {\r\n\twidth: 48px;\r\n\theight: 48px;\r\n\topacity: 0.8;\r\n}\r\n.text {\r\n\tcolor: @ControlText;\r\n\ttext-align: center;\r\n}\r\n.btn {\r\n\ttext-align: center;\r\n\tflex-direction: row;\r\n\tdisplay: flex;\r\n\tjustify-content: space-around;\r\n}\r\n.button {\r\n\tcolor: @#d64550;\r\n\tpadding: 8px 24px;\r\n\tborder: 1px solid @#d64550;\r\n\tborder-radius: 5px;\r\n}\r\n.button:hover {\r\n\tcolor: @White;\r\n\tbackground-color: @#d64550;\r\n\tbox-shadow: 0px 0px 10px @#d64550/0.5;\r\n}";
+            htmlTemplateCollection1.AddRange(new DevExpress.Utils.Html.HtmlTemplate[] {
+            htmlTemplate1});
+            // 
+            // htmlTemplate1
+            // 
+
+            DevExpress.Utils.SvgImageCollection svgImageCollection1 = new DevExpress.Utils.SvgImageCollection(components);
+
+            svgImageCollection1.Add("del", "image://svgimages/diagramicons/del.svg");
+            svgImageCollection1.Add("error", "image://svgimages/outlook inspired/highimportance.svg");
+
+            var args = new XtraMessageBoxArgs();
+            args.HtmlTemplate.Assign(htmlTemplate1);
+            args.HtmlImages = svgImageCollection1;
+            args.Caption = Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption");
+            args.Text = sText;
+            args.DefaultButtonIndex = 1;
+            //SoundPlayer errorSoundPlayer = new SoundPlayer("Template\\Sound\\error.wav");
+            //errorSoundPlayer.Play();
+            XtraMessageBox.Show(args);
+        }
         public void OpenHinh(string strDuongdan)
         {
             if (strDuongdan.Equals(""))
@@ -288,7 +516,70 @@ namespace Commons
             }
             return SERVER_FOLDER_PATH;
         }
+        private void WriteLog(string message)
+        {
+            string path = AppDomain.CurrentDomain.BaseDirectory + "\\Logs\\";
+            if (!System.IO.Directory.Exists(path))
+            {
+                System.IO.Directory.CreateDirectory(path);
+            }
+            string file = path + DateTime.Now.ToString("dd-MM-yyyy") + ".txt";
 
+            if (!System.IO.File.Exists(file))
+            {
+                using (StreamWriter sw = File.CreateText(file))
+                {
+                    sw.WriteLine(message);
+                }
+            }
+            else
+            {
+                using (StreamWriter sw = File.AppendText(file))
+                {
+                    sw.WriteLine(message);
+                }
+            }
+        }
+        public bool UpdateSQL(string folderPath)
+        {
+            try
+            {
+                bool status = true;
+                if (!System.IO.Directory.Exists(folderPath)) // kiểm tra xem forder đã có chưa , nếu chưa có thì tạo 
+                {
+                    System.IO.Directory.CreateDirectory(folderPath);
+                }
+
+                DirectoryInfo directory = new DirectoryInfo(folderPath);
+                FileInfo[] files = directory.GetFiles("*.sql"); // lấy các file có đuôi là .sql
+                if (files.Length == 0) return status; // nếu không có file nào thì return luôn
+                System.Data.SqlClient.SqlConnection conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                conn.Open();
+                foreach (FileInfo file in files)
+                {
+                    string script = File.ReadAllText(file.FullName); // đọc text từng file
+
+                    SqlCommand command = new SqlCommand(script, conn);
+                    try
+                    {
+                        command.ExecuteNonQuery(); // chạy store
+                        file.Delete(); // sau khi chạy xong thì xóa file
+                        WriteLog("Executed script: " + file.Name + ""); // in ra kết quả
+                    }
+                    catch (Exception ex)
+                    {
+                        WriteLog(file.Name + " - " + ex.Message); // nếu sai sẽ in ra lỗi của câu store
+                        status = false;
+                    }
+                }
+                return status;
+            }
+            catch (Exception ex)
+            {
+                WriteLog(ex.Message);
+                return false;
+            }
+        }
         public string STTFileCungThuMuc(string sThuMuc, string sFile, string sFileGoc)
         {
             string TenFile = sFile;
@@ -426,6 +717,26 @@ namespace Commons
             timeEdit.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.DateTimeAdvancingCaret;
         }
 
+        public DateTime setDate1Month(DateTime date, int iLoai) // 0 ngay dau thang, 1 ngay cuoi thang
+        {
+            try
+            {
+                if (iLoai == 0)
+                {
+                    return date.AddDays((-date.Day) + 1);
+                }
+                else
+                {
+                    return date.AddMonths(+1).AddDays(-1);
+                }
+            }
+            catch
+            {
+                return DateTime.Now;
+            }
+
+        }
+
 
         public string KyHieuDV(Int64 ID_DV)
         {
@@ -549,6 +860,31 @@ namespace Commons
             catch
             {
                 return false;
+            }
+        }
+
+        public bool checkVerDemo(Int64 idCustomer, Int64 idContract, int LoaiSP, out DateTime dNgayHH)
+        {
+            DateTime dNgay = DateTime.Now;
+            dNgayHH = dNgay;
+            try
+            {
+                DataTable dt = new DataTable();
+                dt = getDataAPI("https://api.vietsoft.com.vn/VS.Api/Support/getLicense?NNgu=0&idCustomer=" + idCustomer + "&idContract=" + idContract + "&ID_LSP=" + LoaiSP + "");
+                try
+                {
+                    dNgayHH = Convert.ToDateTime(dt.Rows[0]["NGAY_DEMO"]);
+                }
+                catch { }
+
+                if (Convert.ToBoolean(dt.Rows[0]["HH_DEMO"]))
+                    return true;
+                else
+                    return false;
+            }
+            catch
+            {
+                return true;
             }
         }
 
@@ -1188,6 +1524,7 @@ namespace Commons
         #endregion
 
         #region AutoComplete
+
         public bool MAutoCompleteTextEdit(DevExpress.XtraEditors.TextEdit txt, string sQuery, string Ma)
         {
             try
@@ -1198,6 +1535,26 @@ namespace Commons
                 string[] postSource;
                 dtTmp = dtTmp.DefaultView.ToTable(true, Ma);
                 postSource = dtTmp.Rows.Cast<DataRow>().Select(dr => dr[Ma].ToString()).ToArray();
+                var source = new AutoCompleteStringCollection();
+                source.AddRange(postSource);
+                txt.MaskBox.AutoCompleteCustomSource = source;
+                txt.MaskBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
+                txt.MaskBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        public bool MAutoCompleteMemoEdit(DevExpress.XtraEditors.MemoEdit txt, DataTable dtData, string Ma)
+        {
+            try
+            {
+                txt.MaskBox.AutoCompleteCustomSource = null;
+                string[] postSource;
+                dtData = dtData.DefaultView.ToTable(true, Ma);
+                postSource = dtData.Rows.Cast<DataRow>().Select(dr => dr[Ma].ToString()).ToArray();
                 var source = new AutoCompleteStringCollection();
                 source.AddRange(postSource);
                 txt.MaskBox.AutoCompleteCustomSource = source;
@@ -1232,9 +1589,89 @@ namespace Commons
             }
         }
 
+        //public bool MAutoCompleteTextEdit(DevExpress.XtraEditors.Tẽt txt, DataTable dtData, string Ma)
+        //{
+        //    try
+        //    {
+        //        txt.MaskBox.AutoCompleteCustomSource = null;
+        //        string[] postSource;
+        //        dtData = dtData.DefaultView.ToTable(true, Ma);
+        //        postSource = dtData.Rows.Cast<DataRow>().Select(dr => dr[Ma].ToString()).ToArray();
+        //        var source = new AutoCompleteStringCollection();
+        //        source.AddRange(postSource);
+        //        txt.MaskBox.AutoCompleteCustomSource = source;
+        //        txt.MaskBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
+        //        txt.MaskBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+        //        return true;
+        //    }
+        //    catch
+        //    {
+        //        return false;
+        //    }
+        //}
+
         #endregion
 
         #region Load xtraserch
+        //public void MLoadSearchLookUpEdit(DevExpress.XtraEditors.SearchLookUpEdit cbo, DataTable dtTmp, string Ma, string Ten, string TenCot, bool isNgonNgu = true, bool CoNull = false, bool GanGT = true, string GiaTri = "")
+        //{
+        //    try
+        //    {
+        //        if (CoNull)
+        //        {
+        //            DataRow row = dtTmp.NewRow();
+        //            row[0] = -99;
+        //            row[1] = "";
+        //            dtTmp.Rows.InsertAt(row, 0);
+        //        }
+        //        cbo.Properties.DataSource = null;
+        //        cbo.Properties.DisplayMember = "";
+        //        cbo.Properties.ValueMember = "";
+        //        //cbo.BindingContext = new BindingContext();
+        //        cbo.Properties.DataSource = dtTmp;
+        //        cbo.Properties.DisplayMember = Ten;
+        //        cbo.Properties.ValueMember = Ma;
+        //        cbo.Properties.BestFitMode = BestFitMode.BestFit;
+        //        if (GanGT)
+        //        {
+        //            if (GiaTri == "")
+        //            {
+        //                if (CoNull)
+        //                    cbo.EditValue = dtTmp.Rows[dtTmp.Rows.Count - 1][Ma];
+        //                else
+        //                    cbo.EditValue = dtTmp.Rows[0][Ma];
+        //            }
+        //            else
+        //            {
+        //                cbo.EditValue = GiaTri;
+        //            }
+        //        }
+
+        //        cbo.Properties.PopulateViewColumns();
+        //        cbo.Properties.View.Columns[0].Visible = false;
+        //        cbo.Properties.View.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+        //        cbo.Properties.View.Appearance.HeaderPanel.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+        //        cbo.Properties.View.Appearance.HeaderPanel.Options.UseTextOptions = true;
+        //        if (isNgonNgu)
+        //        {
+        //            DevExpress.XtraGrid.Views.Grid.GridView grv = (DevExpress.XtraGrid.Views.Grid.GridView)cbo.Properties.PopupView;
+        //            foreach (DevExpress.XtraGrid.Columns.GridColumn col in grv.Columns)
+        //            {
+        //                if (col.Visible)
+        //                {
+        //                    col.Caption = Modules.ObjLanguages.GetLanguage(Modules.ModuleName, "SearchLookUpEdit", col.FieldName, Modules.TypeLanguage);
+        //                }
+        //            }
+        //            cbo.Refresh();
+        //        }
+
+        //    }
+        //    catch
+        //    {
+
+        //    }
+        //}
+
         public void MLoadSearchLookUpEdit(DevExpress.XtraEditors.SearchLookUpEdit cbo, DataTable dtTmp, string Ma, string Ten, string TenCot, bool isNgonNgu = true, bool CoNull = false, bool GanGT = true, string GiaTri = "")
         {
             try
@@ -1290,9 +1727,10 @@ namespace Commons
             }
             catch
             {
-
+                cbo.EditValue = -1;
             }
         }
+
         public void AddCombSearchLookUpEdit(RepositoryItemSearchLookUpEdit cboSearch, string Value, string Display, string cot, GridView grv, DataTable dtTmp, string form)
         {
             cboSearch.NullText = "";
@@ -2061,7 +2499,6 @@ namespace Commons
                         {
 
                             windowsUIButton.Buttons[i].Properties.Enabled = true;
-
                         }
                         else if (Commons.Modules.iPermission == 2)
                         {
@@ -2080,7 +2517,22 @@ namespace Commons
                                 case "update":
                                 case "resetpass":
                                 case "CapNhap":
+                                case "capnhatdieuchinh":
+                                case "xoangay":
+                                case "TongHopThongTin":
+                                case "LinkTay":
+                                case "LinkDuLieu":
+                                case "linkExcel":
+                                case "capnhatgio":
                                 case "thuchien":
+                                case "copycongdoan":
+                                case "chamtudong":
+                                case "laycong":
+                                case "tinhdiemthang":
+                                case "tinhluong":
+                                case "ghi":
+                                case "import":
+                                case "export":
                                     //    windowsUIButton.Buttons[i].Properties.Visible = false;
                                     windowsUIButton.Buttons[i].Properties.Enabled = false;
                                     windowsUIButton.Buttons[i].Properties.ToolTip = "Chức năng chưa được phân quyền";
@@ -4034,13 +4486,14 @@ namespace Commons
                     sSql = "DELETE FROM dbo.LOGIN WHERE USER_LOGIN = '" + User + "' ";
                     SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, sSql);
 
-                    sSql = "INSERT dbo.LOGIN(USER_LOGIN, TIME_LOGIN, ID,[USER_NAME],[M_NAME], [VERSION]) VALUES(N'" + User + "',GETDATE(), " + Commons.Modules.iIDUser.ToString() + " , N'" + LoadIPLocal() + "', N'" + MName + "', '"+ Commons.Modules.sInfoSer+ "' )";
+                    sSql = "INSERT dbo.LOGIN(USER_LOGIN, TIME_LOGIN, ID,[USER_NAME],[M_NAME], [VERSION]) VALUES(N'" + User + "',GETDATE(), " + Commons.Modules.iIDUser.ToString() + " , N'" + LoadIPLocal() + "', N'" + MName + "', '" + Commons.Modules.sInfoSer + "' )";
                     SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, sSql);
                     return true;
                 }
             }
             catch (Exception ex)
             {
+                Commons.Modules.ObjSystems.MsgError(ex.Message);
                 return false;
             }
             //if (iHD == 3)
@@ -4340,7 +4793,6 @@ namespace Commons
             cbo.View.PopulateColumns(cbo.DataSource);
             cbo.View.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             cbo.View.Appearance.HeaderPanel.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            //cbo.View.Columns[Display].SortOrder = DevExpress.Data.ColumnSortOrder.Ascending;
             Commons.Modules.ObjSystems.MLoadNNXtraGrid(cbo.View, fName);
             cbo.View.Columns[cotan].Visible = false;
         }
@@ -4365,10 +4817,6 @@ namespace Commons
                 cbo.View.Columns[cotan].Visible = false;
                 cbo.View.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
                 cbo.View.Appearance.HeaderPanel.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-                if (sort == true)
-                {
-                    cbo.View.Columns[Display].SortOrder = DevExpress.Data.ColumnSortOrder.Ascending;
-                }
                 Commons.Modules.ObjSystems.MLoadNNXtraGrid(cbo.View, fName);
                 grv.Columns[Value].ColumnEdit = cbo;
             }
@@ -4385,7 +4833,6 @@ namespace Commons
                 if (sort == true)
                 {
                     cbo.SortColumnIndex = 1;
-                    cbo.Columns[Display].SortOrder = DevExpress.Data.ColumnSortOrder.Ascending;
                 }
                 cbo.AppearanceDropDownHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
                 cbo.AppearanceDropDownHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
@@ -4409,7 +4856,6 @@ namespace Commons
                 cbo.View.Columns[cotan].Visible = false;
                 cbo.View.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
                 cbo.View.Appearance.HeaderPanel.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-                cbo.View.Columns[Display].SortOrder = DevExpress.Data.ColumnSortOrder.Ascending;
                 Commons.Modules.ObjSystems.MLoadNNXtraGrid(cbo.View, fName);
                 grv.Columns[Cot].ColumnEdit = cbo;
             }
@@ -4424,7 +4870,6 @@ namespace Commons
                 cbo.PopulateColumns();
                 cbo.Columns[cotan].Visible = false;
                 cbo.SortColumnIndex = 1;
-                cbo.Columns[Display].SortOrder = DevExpress.Data.ColumnSortOrder.Ascending;
                 cbo.AppearanceDropDownHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
                 cbo.AppearanceDropDownHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
                 cbo.Columns[Display].Caption = Commons.Modules.ObjLanguages.GetLanguage(fName, Display);
@@ -5070,6 +5515,14 @@ namespace Commons
             dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboBenhVien", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll));
             return dt;
         }
+
+        public DataTable DataBenhVien(bool coAll,int ID_TINH)
+        {
+            //ID_BV,TEN_BV
+            DataTable dt = new DataTable();
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboBenhVien_Loc", ID_TINH, Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll));
+            return dt;
+        }
         public DataTable DataQuan(int ID_TP, bool coAll)
         {
             //ID_QUAN,TEN_QUAN
@@ -5649,6 +6102,13 @@ namespace Commons
             return dt;
         }
 
+        public DataTable DataToTheoLoaiChuyen(int iddv, int idxn, bool CoAll)
+        {
+            DataTable dt = new DataTable();
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboToTheoLoaiChuyen", iddv, idxn, Commons.Modules.UserName, Commons.Modules.TypeLanguage, CoAll));
+            return dt;
+        }
+
         public DataTable DataTDVH(int LoaiTD, bool CoAll)
         {
             //ID_TDVH,TEN_TDVH
@@ -5724,28 +6184,6 @@ namespace Commons
             return sChuoi;
         }
         #endregion
-        #region MessageChung
-        //xoa
-        public DialogResult msgHoi(string sThongBao)
-        {
-            //ThongBao.Thông_Báo
-
-            DialogResult dl = XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmChung", sThongBao),
-                 (Commons.Modules.TypeLanguage == 0 ? ThongBao.msgTBV.ToString() : ThongBao.msgTBA), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            return dl;
-        }
-
-        public void msgChung(string sThongBao)
-        {
-            XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmChung", sThongBao), (Commons.Modules.TypeLanguage == 0 ? ThongBao.msgTBV.ToString() : ThongBao.msgTBA), MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-        public void msgChung(string sThongBao, string sLoi)
-        {
-            XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmChung", sThongBao) + "\n" + sLoi, (Commons.Modules.TypeLanguage == 0 ? ThongBao.msgTBV.ToString() : ThongBao.msgTBA), MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-
-        #endregion
-
         public bool IsnullorEmpty(object input)
         {
             bool resust = false;

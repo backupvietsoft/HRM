@@ -41,7 +41,7 @@ namespace Vs.Report
 
         }
 
-        private void rptDSCDThuaThieu_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        private void rptDSCDThuaThieu_BeforePrint(object sender, CancelEventArgs e)
         {
         }
     }

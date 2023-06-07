@@ -55,9 +55,9 @@ namespace Vs.Payroll
                 Commons.Modules.ObjSystems.LoadCboXiNghiep(cboDonVi, cboXiNghiep);
                 Commons.Modules.ObjSystems.LoadCboTo(cboDonVi, cboXiNghiep, cboTo);
                 LoadGrdGTGC();
-                //LoadGrdGTGC_DM();
                 EnableButon(isAdd);
                 Commons.Modules.sLoad = "";
+                Commons.Modules.ObjSystems.SetPhanQuyen(btnALL);
             }
             catch { }
         }
@@ -68,8 +68,21 @@ namespace Vs.Payroll
             {
                 DataTable dt = new DataTable();
 
-
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, kyHieuDV == "DM" ? "spGetListLayChamCong_DM" : "spGetListLayChamCong", Convert.ToDateTime(cboThang.EditValue),
+                string sPS = "spGetListLayChamCong_DM";
+                switch(Commons.Modules.KyHieuDV)
+                {
+                    case "DM":
+                        {
+                            sPS = "spGetListLayChamCong_DM";
+                            break;
+                        }
+                    default:
+                        {
+                            sPS = "spGetListLayChamCong";
+                            break;
+                        }
+                }
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, sPS, Convert.ToDateTime(cboThang.EditValue),
                                             cboDonVi.EditValue, cboXiNghiep.EditValue, cboTo.EditValue, Commons.Modules.UserName, Commons.Modules.TypeLanguage));
                 if (grdData.DataSource == null)
                 {
@@ -91,27 +104,6 @@ namespace Vs.Payroll
 
             }
 
-        }
-
-        private void LoadGrdGTGC_DM()
-        {
-            try
-            {
-                DataTable dt = new DataTable();
-                DateTime Tngay = Convert.ToDateTime(cboThang.EditValue);
-                DateTime Dngay = Convert.ToDateTime(cboThang.EditValue).AddMonths(1).AddDays(-1);
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetChamCongThang_DM", Commons.Modules.UserName, Commons.Modules.TypeLanguage, cboDonVi.EditValue, cboXiNghiep.EditValue, cboTo.EditValue, Tngay, Dngay));
-                if (grdData.DataSource == null)
-                {
-                    Commons.Modules.ObjSystems.MLoadXtraGrid(grdData, grvData, dt, false, false, false, true, true, this.Name);
-                }
-                else
-                {
-                    grdData.DataSource = dt;
-                }
-
-            }
-            catch { }
         }
         public void LoadThang()
         {
@@ -156,20 +148,14 @@ namespace Vs.Payroll
                         {
                             XoaCheDoLV();
                             LoadGrdGTGC();
-                            //LoadGrdGTGC_DM();
-
                             break;
                         }
                     case "ghi":
                         {
                             Validate();
                             if (grvData.HasColumnErrors) return;
-                            if (Savedata() == false)
-                            {
-                                Commons.Modules.ObjSystems.msgChung(Commons.ThongBao.msgDuLieuDangSuDung);
-                            }
+                            Savedata();
                             LoadGrdGTGC();
-                            //LoadGrdGTGC_DM();
 
                             EnableButon(false);
                             break;
@@ -178,7 +164,6 @@ namespace Vs.Payroll
                         {
                             grvData.OptionsBehavior.Editable = false;
                             LoadGrdGTGC();
-                            //LoadGrdGTGC_DM();
                             EnableButon(false);
                             break;
                         }
@@ -186,11 +171,25 @@ namespace Vs.Payroll
                         {
                             try
                             {
+                                string sPS = "spGetChamCongThang_DM";
+                                switch (Commons.Modules.KyHieuDV)
+                                {
+                                    case "DM":
+                                        {
+                                            sPS = "spGetChamCongThang_DM";
+                                            break;
+                                        }
+                                    default:
+                                        {
+                                            sPS = "spGetChamCongThang";
+                                            break;
+                                        }
+                                }
                                 grdData.DataSource = null;
                                 DateTime Tngay = Convert.ToDateTime(cboThang.EditValue);
                                 DateTime Dngay = Convert.ToDateTime(cboThang.EditValue).AddMonths(1).AddDays(-1);
                                 DataTable dt = new DataTable();
-                                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, (kyHieuDV == "DM" ? "spGetChamCongThang_DM" : "spGetChamCongThang"), Commons.Modules.UserName, Commons.Modules.TypeLanguage, cboDonVi.EditValue, cboXiNghiep.EditValue, cboTo.EditValue, Tngay, Dngay));
+                                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, sPS, Commons.Modules.UserName, Commons.Modules.TypeLanguage, cboDonVi.EditValue, cboXiNghiep.EditValue, cboTo.EditValue, Tngay, Dngay));
                                 Commons.Modules.ObjSystems.MLoadXtraGrid(grdData, grvData, dt, true, false, true, true, true, this.Name);
                                 EnableButon(true);
                                 dt.Columns["MS_CN"].ReadOnly = true;
@@ -302,6 +301,7 @@ namespace Vs.Payroll
             catch (Exception EX)
             {
                 Commons.Modules.ObjSystems.XoaTable(sTB);
+                Commons.Modules.ObjSystems.MsgError(EX.Message);
                 return false;
             }
         }
@@ -330,7 +330,6 @@ namespace Vs.Payroll
             if (Commons.Modules.sLoad == "0Load") return;
             Commons.Modules.sLoad = "0Load";
             LoadGrdGTGC();
-            //LoadGrdGTGC_DM();
             EnableButon(false);
             Commons.Modules.sLoad = "";
         }
@@ -360,9 +359,6 @@ namespace Vs.Payroll
             if (Commons.Modules.sLoad == "0Load") return;
             Commons.Modules.sLoad = "0Load";
             LoadGrdGTGC();
-            //LoadGrdGTGC_DM();
-
-            //EnableButon(true);
             Commons.Modules.sLoad = "";
         }
 
@@ -373,7 +369,6 @@ namespace Vs.Payroll
             Commons.Modules.ObjSystems.LoadCboXiNghiep(cboDonVi, cboXiNghiep);
             Commons.Modules.ObjSystems.LoadCboTo(cboDonVi, cboXiNghiep, cboTo);
             LoadGrdGTGC();
-            //LoadGrdGTGC_DM();
 
             EnableButon(false);
             Commons.Modules.sLoad = "";
@@ -385,8 +380,6 @@ namespace Vs.Payroll
             Commons.Modules.sLoad = "0Load";
             Commons.Modules.ObjSystems.LoadCboTo(cboDonVi, cboXiNghiep, cboTo);
             LoadGrdGTGC();
-            //LoadGrdGTGC_DM();
-            //EnableButon(true);
             Commons.Modules.sLoad = "";
         }
 

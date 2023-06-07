@@ -44,7 +44,7 @@
             this.xrLabel1});
             this.TopMargin.HeightF = 60.5F;
             this.TopMargin.Name = "TopMargin";
-            this.TopMargin.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.TopMargin_BeforePrint);
+            this.TopMargin.BeforePrint += new DevExpress.XtraReports.UI.BeforePrintEventHandler(this.TopMargin_BeforePrint);
             // 
             // BottomMargin
             // 
@@ -95,8 +95,8 @@
             this.TopMargin,
             this.BottomMargin,
             this.Detail});
-            this.Font = new System.Drawing.Font("Arial", 9.75F);
-            this.Margins = new System.Drawing.Printing.Margins(33, 18, 61, 0);
+            this.Font = new DevExpress.Drawing.DXFont("Arial", 9.75F);
+            this.Margins = new DevExpress.Drawing.DXMargins(33, 18, 61, 0);
             this.Version = "19.1";
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
 

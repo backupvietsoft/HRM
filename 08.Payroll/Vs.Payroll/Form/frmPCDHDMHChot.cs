@@ -47,6 +47,7 @@ namespace Vs.Payroll
                 LoadLuoi();
                 EnabelButton(true);
                 Commons.Modules.sLoad = "";
+                Commons.Modules.ObjSystems.SetPhanQuyen(windowsUIButton);
             }
             catch (Exception ex) { }
         }

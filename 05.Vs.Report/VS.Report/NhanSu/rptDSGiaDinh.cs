@@ -16,14 +16,21 @@ namespace Vs.Report
 
             InitializeComponent();
             Commons.Modules.ObjSystems.ThayDoiNN(this);
-            xrSubreport1.ReportSource = new SubReportHeader();
+            if (Commons.Modules.KyHieuDV != "NC")
+            {
+                xrSubreport1.ReportSource = new SubReportHeader();
+            }
 
             string Ngay = "0" + ngayin.Day;
             string Thang = "0" + ngayin.Month;
             string Nam = "00" + ngayin.Year;
 
             lblNgay.Text = " Ngày " + Ngay.Substring(Ngay.Length-2,2) + " Tháng " + Thang.Substring(Thang.Length - 2, 2) + " Năm " + Nam.Substring(Nam.Length - 4, 4);
-            MergeByTag();
+            if (Commons.Modules.KyHieuDV != "NC")
+            {
+                MergeByTag();
+            }
+
         }
         public void MergeByTag()
         {

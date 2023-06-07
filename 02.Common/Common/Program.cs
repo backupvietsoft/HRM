@@ -15,7 +15,6 @@ namespace Commons
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             BonusSkins.Register();
-            
         }
     }
 }

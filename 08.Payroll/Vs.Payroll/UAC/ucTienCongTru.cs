@@ -46,14 +46,20 @@ namespace Vs.Payroll
 
         private void ucTienCongTru_Load(object sender, EventArgs e)
         {
-            Commons.Modules.sLoad = "0Load";
-            LoadThang();
-            Commons.Modules.ObjSystems.LoadCboDonVi(cboDonVi);
-            Commons.Modules.ObjSystems.LoadCboXiNghiep(cboDonVi, cboXiNghiep);
-            Commons.Modules.ObjSystems.LoadCboTo(cboDonVi, cboXiNghiep, cboTo);
-            LoadGrdGTGC();
-            EnableButon(isAdd);
-            Commons.Modules.sLoad = "";
+            try
+            {
+                Commons.Modules.sLoad = "0Load";
+                LoadThang();
+                Commons.Modules.ObjSystems.LoadCboDonVi(cboDonVi);
+                Commons.Modules.ObjSystems.LoadCboXiNghiep(cboDonVi, cboXiNghiep);
+                Commons.Modules.ObjSystems.LoadCboTo(cboDonVi, cboXiNghiep, cboTo);
+                LoadGrdGTGC();
+                EnableButon(isAdd);
+                Commons.Modules.sLoad = "";
+                Commons.Modules.ObjSystems.SetPhanQuyen(btnALL);
+            }
+            catch { }
+            
         }
 
         private void LoadGrdGTGC()
@@ -439,7 +445,6 @@ namespace Vs.Payroll
                     {
                         ItemForSumNhanVien.Text = ItemForSumNhanVien.Text.Substring(0, index) + ": 0";
                     }
-
                 }
             }
             catch (Exception ex)
@@ -487,6 +492,7 @@ namespace Vs.Payroll
 
         private void grvData_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
         {
+            if (Commons.Modules.iPermission != 1) return;
             try
             {
                 if (btnALL.Buttons[0].Properties.Visible == true) return;

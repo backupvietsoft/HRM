@@ -21,7 +21,7 @@ namespace Vs.Recruit
             
         }
 
-        private void rptInTheNV_DM_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        private void rptInTheNV_DM_BeforePrint(object sender, System.ComponentModel.CancelEventArgs e)
         {
             //XRPictureBox pictureBox = (XRPictureBox)this.FindControl("PicHINH_CN", true);
             //pictureBox.ImageUrl = Commons.Modules.sDDTaiLieu + "\\" + "ImageEmployees\\" + dtemp.Rows[iCount]["MS_CN"].ToString().Trim() + ".jpg";

@@ -46,6 +46,7 @@ namespace Vs.HRM
                 LoadCboTheoYC();
                 Commons.Modules.ObjSystems.MLoadLookUpEdit(cboTinhTrang, Commons.Modules.ObjSystems.DataTinhTrangDT(false), "ID_TT_DT", "TEN_TT_DT", "TEN_TT_DT");
                 LoadGridControl(-1);
+                LoadGridKeHoachDaoTao();
                 Commons.Modules.ObjSystems.SetPhanQuyen(windowsUIButton);
             }
             catch
@@ -229,7 +230,7 @@ namespace Vs.HRM
         #region Các hàm xử lý
         private void enableButon(bool visible)
         {
-            windowsUIButton.Buttons[0].Properties.Visible = visible;
+            windowsUIButton.Buttons[0].Properties.Visible = Commons.Modules.KyHieuDV == "DM" ? visible : false;
             windowsUIButton.Buttons[1].Properties.Visible = visible;
             windowsUIButton.Buttons[2].Properties.Visible = visible;
             windowsUIButton.Buttons[3].Properties.Visible = visible;
@@ -269,7 +270,7 @@ namespace Vs.HRM
                     }
                     else
                     {
-                        windowsUIButton.Buttons[0].Properties.Visible = true;
+                        windowsUIButton.Buttons[0].Properties.Visible = Commons.Modules.KyHieuDV == "DM" ? true : false;
                         windowsUIButton.Buttons[2].Properties.Visible = true;
                         windowsUIButton.Buttons[3].Properties.Visible = true;
                     }    

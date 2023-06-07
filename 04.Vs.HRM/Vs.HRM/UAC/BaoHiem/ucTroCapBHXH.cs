@@ -59,6 +59,7 @@ namespace Vs.HRM
             Commons.OSystems.DinhDangNgayThang(grvTroCapBHXH);
             enableButon(true);
             Commons.Modules.sPS = "";
+            Commons.Modules.ObjSystems.SetPhanQuyen(windowsUIButton);
         }
 
         private void grvThang_RowCellClick(object sender, RowCellClickEventArgs e)

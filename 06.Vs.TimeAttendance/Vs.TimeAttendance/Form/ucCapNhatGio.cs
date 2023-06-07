@@ -37,33 +37,40 @@ namespace Vs.HRM
         #region Cập nhật giờ
         private void ucCapNhatGio_Load(object sender, EventArgs e)
         {
-            Thread.Sleep(1000);
-            Commons.Modules.sLoad = "0Load";
+            try
+            {
 
-            string sSql = "SELECT * FROM dbo.NGAY_NGHI_LE";
-            dtNgayNghiLe = new DataTable();
-            dtNgayNghiLe.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSql));
-            repositoryItemTimeEdit1 = new RepositoryItemTimeEdit();
-            repositoryItemTimeEdit1.TimeEditStyle = TimeEditStyle.TouchUI;
-            repositoryItemTimeEdit1.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.DateTimeAdvancingCaret;
-            repositoryItemTimeEdit1.Mask.EditMask = "HH:mm:ss";
 
-            repositoryItemTimeEdit1.NullText = "00:00:00";
-            repositoryItemTimeEdit1.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
-            repositoryItemTimeEdit1.DisplayFormat.FormatString = "HH:mm:ss";
-            repositoryItemTimeEdit1.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
-            repositoryItemTimeEdit1.EditFormat.FormatString = "HH:mm:ss";
+                Thread.Sleep(1000);
+                Commons.Modules.sLoad = "0Load";
 
-            Commons.OSystems.SetDateEditFormat(dTuNgay);
-            Commons.OSystems.SetDateEditFormat(dDenNgay);
+                string sSql = "SELECT * FROM dbo.NGAY_NGHI_LE";
+                dtNgayNghiLe = new DataTable();
+                dtNgayNghiLe.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSql));
+                repositoryItemTimeEdit1 = new RepositoryItemTimeEdit();
+                repositoryItemTimeEdit1.TimeEditStyle = TimeEditStyle.TouchUI;
+                repositoryItemTimeEdit1.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.DateTimeAdvancingCaret;
+                repositoryItemTimeEdit1.Mask.EditMask = "HH:mm:ss";
 
-            Commons.Modules.ObjSystems.LoadCboDonVi(cboDV);
-            Commons.Modules.ObjSystems.LoadCboXiNghiep(cboDV, cboXN);
-            Commons.Modules.ObjSystems.LoadCboTo(cboDV, cboXN, cboTo);
+                repositoryItemTimeEdit1.NullText = "00:00:00";
+                repositoryItemTimeEdit1.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+                repositoryItemTimeEdit1.DisplayFormat.FormatString = "HH:mm:ss";
+                repositoryItemTimeEdit1.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+                repositoryItemTimeEdit1.EditFormat.FormatString = "HH:mm:ss";
 
-            Commons.Modules.sLoad = "";
-            dTuNgay.EditValue = Convert.ToDateTime(("01/" + DateTime.Now.Month + "/" + DateTime.Now.Year));
-            EnabelButton(true);
+                Commons.OSystems.SetDateEditFormat(dTuNgay);
+                Commons.OSystems.SetDateEditFormat(dDenNgay);
+
+                Commons.Modules.ObjSystems.LoadCboDonVi(cboDV);
+                Commons.Modules.ObjSystems.LoadCboXiNghiep(cboDV, cboXN);
+                Commons.Modules.ObjSystems.LoadCboTo(cboDV, cboXN, cboTo);
+
+                Commons.Modules.sLoad = "";
+                dTuNgay.EditValue = Convert.ToDateTime(("01/" + DateTime.Now.Month + "/" + DateTime.Now.Year));
+                EnabelButton(true);
+                Commons.Modules.ObjSystems.SetPhanQuyen(windowsUIButton);
+            }
+            catch { }
         }
         private void cboDV_EditValueChanged(object sender, EventArgs e)
         {
@@ -310,7 +317,7 @@ namespace Vs.HRM
                     e.Appearance.BackColor = System.Drawing.ColorTranslator.FromHtml("#A9F5BC");
                     e.HighPriority = true;
                 }
-                
+
             }
             catch
             {

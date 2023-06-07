@@ -131,6 +131,7 @@
             this.grvData.OptionsSelection.MultiSelect = true;
             this.grvData.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CheckBoxRowSelect;
             this.grvData.OptionsView.ShowGroupPanel = false;
+            this.grvData.RowStyle += new DevExpress.XtraGrid.Views.Grid.RowStyleEventHandler(this.grvData_RowStyle);
             this.grvData.PopupMenuShowing += new DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler(this.grvData_PopupMenuShowing);
             this.grvData.CellValueChanged += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.grvData_CellValueChanged);
             this.grvData.RowCountChanged += new System.EventHandler(this.grvData_RowCountChanged);
@@ -266,8 +267,8 @@
         private DevExpress.XtraEditors.SearchControl searchControl1;
         private DevExpress.XtraLayout.LayoutControlGroup groThongTinHopDong;
         private DevExpress.XtraEditors.LabelControl ItemForSumNhanVien;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;
         private DevExpress.XtraLayout.SimpleLabelItem labelControl1;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
     }
 }

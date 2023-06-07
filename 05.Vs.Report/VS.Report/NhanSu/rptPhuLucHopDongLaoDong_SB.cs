@@ -73,17 +73,17 @@ namespace Vs.Report
 
         }
 
-        private void xrLabel35_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        private void xrLabel35_BeforePrint(object sender, CancelEventArgs e)
         {
 
         }
 
-        private void xrLabel36_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        private void xrLabel36_BeforePrint(object sender, CancelEventArgs e)
         {
 
         }
 
-        private void xrLabel37_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        private void xrLabel37_BeforePrint(object sender, CancelEventArgs e)
         {
 
         }

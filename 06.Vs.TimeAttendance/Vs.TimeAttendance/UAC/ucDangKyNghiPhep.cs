@@ -839,6 +839,7 @@ namespace Vs.TimeAttendance
         }
         private void grvData_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
         {
+            if (Commons.Modules.iPermission != 1) return;
             try
             {
                 if (rdo_TinhTrang.SelectedIndex != 2) return;

@@ -52,6 +52,7 @@ namespace VietSoftHRM
         }
         private void ucDU_LIEU_Load(object sender, EventArgs e)
         {
+            Commons.Modules.ObjSystems.SetPhanQuyen(windowsUIButton);
             Commons.Modules.sLoad = "0Load";
             LoadTo(false);
             enableButon(true);

@@ -23,7 +23,7 @@ namespace VS.Report
             iLoai = Loai;
         }
 
-        private void rptBCTaiNanLD_DM_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        private void rptBCTaiNanLD_DM_BeforePrint(object sender, CancelEventArgs e)
         {
             try
             {

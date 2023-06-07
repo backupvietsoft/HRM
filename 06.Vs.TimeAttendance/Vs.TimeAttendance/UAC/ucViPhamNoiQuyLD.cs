@@ -39,30 +39,25 @@ namespace Vs.TimeAttendance
         }
         private void ucViPhamNoiQuyLD_Load(object sender, EventArgs e)
         {
-            Commons.Modules.sLoad = "0Load";
-            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboDV, Commons.Modules.ObjSystems.DataDonVi(false), "ID_DV", "TEN_DV", "TEN_DV");
-            Commons.Modules.ObjSystems.LoadCboXiNghiep(cboDV, cboXN);
-            Commons.Modules.ObjSystems.LoadCboTo(cboDV, cboXN, cboTo);
-            LoadThang();
-            LoadGrdCongNhan();
-            radTinHTrang_SelectedIndexChanged(null, null);
-            LoadGrdVPNoiQuy();
-            grvCongNhan_FocusedRowChanged(null, null);
-            Commons.Modules.sLoad = "";
-            if (Modules.iPermission != 1)
+            try
             {
-                windowsUIButton.Buttons[0].Properties.Visible = false;
-                windowsUIButton.Buttons[1].Properties.Visible = false;
-                windowsUIButton.Buttons[2].Properties.Visible = false;
-                windowsUIButton.Buttons[4].Properties.Visible = false;
-                windowsUIButton.Buttons[7].Properties.Visible = false;
-                windowsUIButton.Buttons[8].Properties.Visible = false;
-            }
-            else
-            {
+
+
+                Commons.Modules.sLoad = "0Load";
+                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboDV, Commons.Modules.ObjSystems.DataDonVi(false), "ID_DV", "TEN_DV", "TEN_DV");
+                Commons.Modules.ObjSystems.LoadCboXiNghiep(cboDV, cboXN);
+                Commons.Modules.ObjSystems.LoadCboTo(cboDV, cboXN, cboTo);
+                LoadThang();
+                LoadGrdCongNhan();
+                radTinHTrang_SelectedIndexChanged(null, null);
+                LoadGrdVPNoiQuy();
+                grvCongNhan_FocusedRowChanged(null, null);
+                Commons.Modules.sLoad = "";
                 enableButon(true);
+                grvViPhamNoiQuyLD.OptionsView.NewItemRowPosition = NewItemRowPosition.None;
+                Commons.Modules.ObjSystems.SetPhanQuyen(windowsUIButton);
             }
-            grvViPhamNoiQuyLD.OptionsView.NewItemRowPosition = NewItemRowPosition.None;
+            catch { }
         }
         private void cboDV_EditValueChanged(object sender, EventArgs e)
         {

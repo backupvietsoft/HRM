@@ -36,6 +36,8 @@
             DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions2 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
             this.tablePanel1 = new DevExpress.Utils.Layout.TablePanel();
             this.dataLayoutControl1 = new DevExpress.XtraDataLayout.DataLayoutControl();
+            this.cboID_CN = new DevExpress.XtraEditors.SearchLookUpEdit();
+            this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.ID_DVSearchLookUpEdit = new DevExpress.XtraEditors.SearchLookUpEdit();
             this.searchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.MS_XNTextEdit = new DevExpress.XtraEditors.TextEdit();
@@ -55,16 +57,18 @@
             this.ItemForGOP_PB = new DevExpress.XtraLayout.LayoutControlItem();
             this.ItemForSTT_XN = new DevExpress.XtraLayout.LayoutControlItem();
             this.ItemForGOP_TH = new DevExpress.XtraLayout.LayoutControlItem();
+            this.ItemForTruongXiNghiep = new DevExpress.XtraLayout.LayoutControlItem();
             this.btnALL = new DevExpress.XtraBars.Docking2010.WindowsUIButtonPanel();
             this.dxValidationProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
             this.behaviorManager1 = new DevExpress.Utils.Behaviors.BehaviorManager(this.components);
-            this.cboID_CN = new DevExpress.XtraEditors.SearchLookUpEdit();
-            this.ItemForTruongXiNghiep = new DevExpress.XtraLayout.LayoutControlItem();
-            this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.chkActive = new DevExpress.XtraEditors.CheckEdit();
+            this.lblActive = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).BeginInit();
             this.tablePanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataLayoutControl1)).BeginInit();
             this.dataLayoutControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cboID_CN.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ID_DVSearchLookUpEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.MS_XNTextEdit.Properties)).BeginInit();
@@ -84,11 +88,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.ItemForGOP_PB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForSTT_XN)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForGOP_TH)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForTruongXiNghiep)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.behaviorManager1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cboID_CN.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemForTruongXiNghiep)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chkActive.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lblActive)).BeginInit();
             this.SuspendLayout();
             // 
             // tablePanel1
@@ -111,6 +115,7 @@
             // dataLayoutControl1
             // 
             this.tablePanel1.SetColumn(this.dataLayoutControl1, 1);
+            this.dataLayoutControl1.Controls.Add(this.chkActive);
             this.dataLayoutControl1.Controls.Add(this.cboID_CN);
             this.dataLayoutControl1.Controls.Add(this.ID_DVSearchLookUpEdit);
             this.dataLayoutControl1.Controls.Add(this.MS_XNTextEdit);
@@ -129,6 +134,25 @@
             this.dataLayoutControl1.TabIndex = 0;
             this.dataLayoutControl1.Text = "dataLayoutControl1";
             // 
+            // cboID_CN
+            // 
+            this.cboID_CN.Location = new System.Drawing.Point(158, 146);
+            this.cboID_CN.Name = "cboID_CN";
+            this.cboID_CN.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cboID_CN.Properties.NullText = "";
+            this.cboID_CN.Properties.PopupView = this.gridView1;
+            this.cboID_CN.Size = new System.Drawing.Size(404, 24);
+            this.cboID_CN.StyleController = this.dataLayoutControl1;
+            this.cboID_CN.TabIndex = 12;
+            // 
+            // gridView1
+            // 
+            this.gridView1.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            this.gridView1.Name = "gridView1";
+            this.gridView1.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.gridView1.OptionsView.ShowGroupPanel = false;
+            // 
             // ID_DVSearchLookUpEdit
             // 
             this.ID_DVSearchLookUpEdit.EnterMoveNextControl = true;
@@ -139,7 +163,7 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.ID_DVSearchLookUpEdit.Properties.NullText = "";
             this.ID_DVSearchLookUpEdit.Properties.PopupView = this.searchLookUpEdit1View;
-            this.ID_DVSearchLookUpEdit.Size = new System.Drawing.Size(398, 24);
+            this.ID_DVSearchLookUpEdit.Size = new System.Drawing.Size(119, 24);
             this.ID_DVSearchLookUpEdit.StyleController = this.dataLayoutControl1;
             this.ID_DVSearchLookUpEdit.TabIndex = 4;
             conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
@@ -265,7 +289,8 @@
             this.ItemForGOP_PB,
             this.ItemForSTT_XN,
             this.ItemForGOP_TH,
-            this.ItemForTruongXiNghiep});
+            this.ItemForTruongXiNghiep,
+            this.lblActive});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "autoGeneratedGroup0";
             this.layoutControlGroup1.Size = new System.Drawing.Size(558, 194);
@@ -278,7 +303,7 @@
             this.ItemForID_DV.Location = new System.Drawing.Point(0, 0);
             this.ItemForID_DV.Name = "ItemForID_DV";
             this.ItemForID_DV.Padding = new DevExpress.XtraLayout.Utils.Padding(4, 4, 2, 2);
-            this.ItemForID_DV.Size = new System.Drawing.Size(558, 28);
+            this.ItemForID_DV.Size = new System.Drawing.Size(279, 28);
             this.ItemForID_DV.Text = "ID_DV";
             this.ItemForID_DV.TextSize = new System.Drawing.Size(140, 17);
             // 
@@ -356,6 +381,14 @@
             this.ItemForGOP_TH.TextSize = new System.Drawing.Size(140, 17);
             this.ItemForGOP_TH.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             // 
+            // ItemForTruongXiNghiep
+            // 
+            this.ItemForTruongXiNghiep.Control = this.cboID_CN;
+            this.ItemForTruongXiNghiep.Location = new System.Drawing.Point(0, 140);
+            this.ItemForTruongXiNghiep.Name = "ItemForTruongXiNghiep";
+            this.ItemForTruongXiNghiep.Size = new System.Drawing.Size(558, 26);
+            this.ItemForTruongXiNghiep.TextSize = new System.Drawing.Size(140, 17);
+            // 
             // btnALL
             // 
             this.btnALL.AppearanceButton.Hovered.FontSizeDelta = -1;
@@ -390,32 +423,23 @@
             this.btnALL.UseButtonBackgroundImages = false;
             this.btnALL.ButtonClick += new DevExpress.XtraBars.Docking2010.ButtonEventHandler(this.btnWDUI_ButtonClick);
             // 
-            // cboID_CN
+            // chkActive
             // 
-            this.cboID_CN.Location = new System.Drawing.Point(158, 146);
-            this.cboID_CN.Name = "cboID_CN";
-            this.cboID_CN.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cboID_CN.Properties.NullText = "";
-            this.cboID_CN.Properties.PopupView = this.gridView1;
-            this.cboID_CN.Size = new System.Drawing.Size(404, 24);
-            this.cboID_CN.StyleController = this.dataLayoutControl1;
-            this.cboID_CN.TabIndex = 12;
+            this.chkActive.Location = new System.Drawing.Point(440, 7);
+            this.chkActive.Name = "chkActive";
+            this.chkActive.Properties.Caption = "";
+            this.chkActive.Size = new System.Drawing.Size(119, 20);
+            this.chkActive.StyleController = this.dataLayoutControl1;
+            this.chkActive.TabIndex = 13;
             // 
-            // ItemForTruongXiNghiep
+            // lblActive
             // 
-            this.ItemForTruongXiNghiep.Control = this.cboID_CN;
-            this.ItemForTruongXiNghiep.Location = new System.Drawing.Point(0, 140);
-            this.ItemForTruongXiNghiep.Name = "ItemForTruongXiNghiep";
-            this.ItemForTruongXiNghiep.Size = new System.Drawing.Size(558, 26);
-            this.ItemForTruongXiNghiep.TextSize = new System.Drawing.Size(140, 17);
-            // 
-            // gridView1
-            // 
-            this.gridView1.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
-            this.gridView1.Name = "gridView1";
-            this.gridView1.OptionsSelection.EnableAppearanceFocusedCell = false;
-            this.gridView1.OptionsView.ShowGroupPanel = false;
+            this.lblActive.Control = this.chkActive;
+            this.lblActive.Location = new System.Drawing.Point(279, 0);
+            this.lblActive.Name = "lblActive";
+            this.lblActive.Padding = new DevExpress.XtraLayout.Utils.Padding(4, 4, 2, 2);
+            this.lblActive.Size = new System.Drawing.Size(279, 28);
+            this.lblActive.TextSize = new System.Drawing.Size(140, 17);
             // 
             // frmEditXI_NGHIEP
             // 
@@ -434,6 +458,8 @@
             this.tablePanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataLayoutControl1)).EndInit();
             this.dataLayoutControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.cboID_CN.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ID_DVSearchLookUpEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.MS_XNTextEdit.Properties)).EndInit();
@@ -453,11 +479,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.ItemForGOP_PB)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForSTT_XN)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForGOP_TH)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForTruongXiNghiep)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.behaviorManager1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cboID_CN.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemForTruongXiNghiep)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chkActive.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lblActive)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -491,5 +517,7 @@
         private DevExpress.XtraEditors.SearchLookUpEdit cboID_CN;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
         private DevExpress.XtraLayout.LayoutControlItem ItemForTruongXiNghiep;
+        private DevExpress.XtraEditors.CheckEdit chkActive;
+        private DevExpress.XtraLayout.LayoutControlItem lblActive;
     }
 }

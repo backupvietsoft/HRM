@@ -380,7 +380,7 @@ namespace VietSoftHRM
                 ctl.MinimizeBox = false;
                 double iW, iH;
                 iW = Screen.PrimaryScreen.WorkingArea.Width / 2;
-                iH = Screen.PrimaryScreen.WorkingArea.Height / 2;
+                iH = Commons.Modules.KyHieuDV == "NB" ? 600 : Screen.PrimaryScreen.WorkingArea.Height / 2;
                 if (iW < 800)
                 {
                     iW = iW * 1.2;

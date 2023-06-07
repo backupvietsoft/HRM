@@ -45,6 +45,7 @@ namespace Vs.TimeAttendance
             LoadGridMaTheChamCong();
             Commons.Modules.sLoad = "";
             enableButon();
+            Commons.Modules.ObjSystems.SetPhanQuyen(windowsUIButton);
         }
         private void cboDV_EditValueChanged(object sender, EventArgs e)
         {

@@ -37,7 +37,7 @@ namespace Vs.Report
 
         }
 
-        private void rptBangNangSuat_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        private void rptBangNangSuat_BeforePrint(object sender, CancelEventArgs e)
         {
             xrLabel5.Text = TNgay.ToShortDateString();
             xrLabel3.Text = DNgay.ToShortDateString();

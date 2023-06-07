@@ -47,14 +47,21 @@ namespace Vs.Payroll
 
         private void ucGiamTruGiaCanh_Load(object sender, EventArgs e)
         {
-            Commons.Modules.sLoad = "0Load";
-            LoadThang();
-            Commons.Modules.ObjSystems.LoadCboDonVi(cboDonVi);
-            Commons.Modules.ObjSystems.LoadCboXiNghiep(cboDonVi, cboXiNghiep);
-            Commons.Modules.ObjSystems.LoadCboTo(cboDonVi, cboXiNghiep, cboTo);
-            LoadGrdGTGC();
-            EnableButon(isAdd);
-            Commons.Modules.sLoad = "";
+            try
+            {
+
+
+                Commons.Modules.sLoad = "0Load";
+                LoadThang();
+                Commons.Modules.ObjSystems.LoadCboDonVi(cboDonVi);
+                Commons.Modules.ObjSystems.LoadCboXiNghiep(cboDonVi, cboXiNghiep);
+                Commons.Modules.ObjSystems.LoadCboTo(cboDonVi, cboXiNghiep, cboTo);
+                LoadGrdGTGC();
+                EnableButon(isAdd);
+                Commons.Modules.sLoad = "";
+                Commons.Modules.ObjSystems.SetPhanQuyen(btnALL);
+            }
+            catch { }
         }
 
         private void LoadGrdGTGC()

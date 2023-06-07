@@ -12,6 +12,7 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using Vs.TimeAttendance.Form;
 
 namespace Vs.TimeAttendance
 {
@@ -47,20 +48,8 @@ namespace Vs.TimeAttendance
             LoadgrdKeHoachDiCa();
             grvCongNhan_FocusedRowChanged(null, null);
             Commons.Modules.sLoad = "";
-            if (Modules.iPermission != 1)
-            {
-                windowsUIButton.Buttons[0].Properties.Visible = false;
-                windowsUIButton.Buttons[1].Properties.Visible = false;
-                windowsUIButton.Buttons[2].Properties.Visible = false;
-                windowsUIButton.Buttons[4].Properties.Visible = false;
-                windowsUIButton.Buttons[7].Properties.Visible = false;
-                windowsUIButton.Buttons[8].Properties.Visible = false;
-                windowsUIButton.Buttons[9].Properties.Visible = false;
-            }
-            else
-            {
-                enableButon(true);
-            }
+            enableButon(true);
+            Commons.Modules.ObjSystems.SetPhanQuyen(windowsUIButton);
         }
         private void cboDV_EditValueChanged(object sender, EventArgs e)
         {
@@ -134,16 +123,20 @@ namespace Vs.TimeAttendance
                     {
                         try
                         {
+                            
                             if (grvCongNhan.RowCount == 0 || grvKeHoachDiCa.RowCount == 0) return;
-                            DataTable dt = new DataTable();
-                            SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spCapNhatDieuChinh", Commons.Modules.UserName, Commons.Modules.TypeLanguage, grvCongNhan.GetFocusedRowCellValue("ID_CN"), grvKeHoachDiCa.GetFocusedRowCellValue("ID_NHOM"), grvKeHoachDiCa.GetFocusedRowCellValue("CA"), grvKeHoachDiCa.GetFocusedRowCellValue("TU_NGAY"), grvKeHoachDiCa.GetFocusedRowCellValue("DEN_NGAY"), Commons.Modules.KyHieuDV.ToString());
+                            frmSaveKeHoachDiCa KeHoachDiCa = new frmSaveKeHoachDiCa(Convert.ToInt64(grvCongNhan.GetFocusedRowCellValue("ID_CN")), Convert.ToInt64(grvKeHoachDiCa.GetFocusedRowCellValue("ID_NHOM")), Convert.ToString(grvKeHoachDiCa.GetFocusedRowCellValue("CA")), Convert.ToDateTime(grvKeHoachDiCa.GetFocusedRowCellValue("TU_NGAY")), Convert.ToDateTime(grvKeHoachDiCa.GetFocusedRowCellValue("DEN_NGAY")));
+                            KeHoachDiCa.ShowDialog();
+                            if(KeHoachDiCa.result == true)
+                            {
+                                Commons.Modules.ObjSystems.Alert(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgCapNhatThanhCong"), Commons.Form_Alert.enmType.Success);
+                            }
                             LoadgrdKeHoachDiCa();
                             grvCongNhan_FocusedRowChanged(null, null);
-                            XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgCapNhatThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                         catch (Exception ex)
                         {
-                            XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgCapNhatKhongThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            Commons.Modules.ObjSystems.MsgError(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgCapNhatKhongThanhCong"));
                         }
                         break;
                     }
@@ -151,10 +144,7 @@ namespace Vs.TimeAttendance
                     {
                         if (!Validate()) return;
                         if (grvCongNhan.HasColumnErrors) return;
-                        if (XtraMessageBox.Show("Bạn có muốn cập nhật nhóm: " + grvKeHoachDiCa.GetFocusedRowCellDisplayText("ID_NHOM") + ", ca: " + grvKeHoachDiCa.GetFocusedRowCellDisplayText("CA") + " cho các nhân viên được chọn", "", MessageBoxButtons.YesNo) == DialogResult.No)
-                        {
-                            return;
-                        }
+                        if (Commons.Modules.ObjSystems.MsgQuestion("Bạn có muốn cập nhật nhóm: " + grvKeHoachDiCa.GetFocusedRowCellDisplayText("ID_NHOM") + ", ca: " + grvKeHoachDiCa.GetFocusedRowCellDisplayText("CA") + " cho các nhân viên được chọn") == 0) return;
                         CapNhatNhom();
                         break;
                     }
@@ -188,7 +178,7 @@ namespace Vs.TimeAttendance
                         dt_CHON = ((DataTable)grdCongNhan.DataSource);
                         if (dt_CHON.AsEnumerable().Where(r => r.Field<Boolean>("CHON") == true).Count() == 0)
                         {
-                            XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgChuaChonNhanVien"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            Commons.Modules.ObjSystems.MsgWarning(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgChuaChonNhanVien"));
                             return;
                         }
                         if (Savedata() == false)
@@ -569,7 +559,7 @@ namespace Vs.TimeAttendance
             }
             catch (Exception ex)
             {
-                XtraMessageBox.Show(ex.Message.ToString());
+                Commons.Modules.ObjSystems.MsgError(ex.Message);
             }
             grvCongNhan_FocusedRowChanged(null, null);
         }

@@ -135,11 +135,25 @@ namespace VietSoftHRM
 
                 case "mnuQuyTrinhCongNghe":
                     {
-                        frmQTCN ctl = new frmQTCN();
-                        panel2.Controls.Clear();
-                        panel2.Controls.Add(ctl);
-                        Commons.Modules.ObjSystems.HideWaitForm();
-                        ctl.Dock = DockStyle.Fill;
+                        if(f5 == true)
+                        {
+                            frmQTCN ctl = new frmQTCN();
+                            panel2.Controls.Clear();
+                            panel2.Controls.Add(ctl);
+                            Commons.Modules.ObjSystems.HideWaitForm();
+                            ctl.Dock = DockStyle.Fill;
+                        }
+                        else
+                        {
+                            if (!panel2.Controls.Contains(frmQTCN.Instance))
+                            {
+                                panel2.Controls.Clear();
+                                panel2.Controls.Add(frmQTCN.Instance);
+                                frmQTCN.Instance.Dock = DockStyle.Fill;
+                                frmQTCN.Instance.BringToFront();
+                                Commons.Modules.ObjSystems.HideWaitForm();
+                            }
+                        }
                         break;
                     }
                 case "mnuPhieuCongDoan":
@@ -156,16 +170,18 @@ namespace VietSoftHRM
                         {
                             if (!panel2.Controls.Contains(frmPhieuCongDoan.Instance))
                             {
-                                //frmPhieuCongDoan ctl = new frmPhieuCongDoan();
-                                //panel2.Controls.Clear();
-                                //panel2.Controls.Add(ctl);
-                                //Commons.Modules.ObjSystems.HideWaitForm();
-                                //ctl.Dock = DockStyle.Fill;
+
+                                frmPhieuCongDoan ctl = new frmPhieuCongDoan();
                                 panel2.Controls.Clear();
-                                panel2.Controls.Add(frmPhieuCongDoan.Instance);
-                                frmPhieuCongDoan.Instance.Dock = DockStyle.Fill;
-                                frmPhieuCongDoan.Instance.BringToFront();
+                                panel2.Controls.Add(ctl);
                                 Commons.Modules.ObjSystems.HideWaitForm();
+                                ctl.Dock = DockStyle.Fill;
+
+                                //panel2.Controls.Clear();
+                                //panel2.Controls.Add(frmPhieuCongDoan.Instance);
+                                //frmPhieuCongDoan.Instance.Dock = DockStyle.Fill;
+                                //frmPhieuCongDoan.Instance.BringToFront();
+                                //Commons.Modules.ObjSystems.HideWaitForm();
                             }
                         }
                         break;
@@ -184,16 +200,18 @@ namespace VietSoftHRM
                         {
                             if (!panel2.Controls.Contains(frmPhieuCongDoan_CN.Instance))
                             {
-                                //frmPhieuCongDoan ctl = new frmPhieuCongDoan();
-                                //panel2.Controls.Clear();
-                                //panel2.Controls.Add(ctl);
-                                //Commons.Modules.ObjSystems.HideWaitForm();
-                                //ctl.Dock = DockStyle.Fill;
+                                frmPhieuCongDoan_CN ctl = new frmPhieuCongDoan_CN();
                                 panel2.Controls.Clear();
-                                panel2.Controls.Add(frmPhieuCongDoan_CN.Instance);
-                                frmPhieuCongDoan_CN.Instance.Dock = DockStyle.Fill;
-                                frmPhieuCongDoan_CN.Instance.BringToFront();
+                                panel2.Controls.Add(ctl);
                                 Commons.Modules.ObjSystems.HideWaitForm();
+                                ctl.Dock = DockStyle.Fill;
+
+
+                                //panel2.Controls.Clear();
+                                //panel2.Controls.Add(frmPhieuCongDoan_CN.Instance);
+                                //frmPhieuCongDoan_CN.Instance.Dock = DockStyle.Fill;
+                                //frmPhieuCongDoan_CN.Instance.BringToFront();
+                                //Commons.Modules.ObjSystems.HideWaitForm();
                             }
                         }
                         break;

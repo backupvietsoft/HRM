@@ -16,16 +16,9 @@ namespace Vs.Payroll
         public Form1()
         {
             InitializeComponent();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void checkEdit1_CheckedChanged(object sender, EventArgs e)
-        {
-
+            ucBCLuongThang uac = new ucBCLuongThang();
+            this.Controls.Add(uac);
+            uac.Dock = DockStyle.Fill;
         }
     }
 }

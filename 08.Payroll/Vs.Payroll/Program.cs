@@ -21,15 +21,16 @@ namespace Vs.Payroll
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             BonusSkins.Register();
-            Commons.Modules.ModuleName = "HRM";
+            Commons.Modules.ModuleName = "VS_HRM";
             Commons.Modules.UserName = "admin";
+            Commons.Modules.KyHieuDV = "TG";
             DataSet ds = new DataSet();
             //ds.ReadXml(AppDomain.CurrentDomain.BaseDirectory + "\\vsconfig.xml");
             Commons.IConnections.Username = "sa";
-            Commons.IConnections.Server = "192.168.2.5";
-            Commons.IConnections.Database = "VS_HRM_DEMO";
-            Commons.IConnections.Password = "123";
-            Commons.Modules.sPrivate = @"PILMICO";
+            Commons.IConnections.Server = "27.74.240.29";
+            Commons.IConnections.Database = "VS_HRM_TG";
+            Commons.IConnections.Password = "codaikadaiku";
+            Commons.Modules.sPrivate = @"TG";
             //Commons.Modules.sPrivate = @"ADC";
 
             Commons.Modules.iSoLeSL = 1;

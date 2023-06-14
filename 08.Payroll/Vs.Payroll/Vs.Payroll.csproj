@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{6903CADB-EC02-45CA-AC93-9E1385FE3BD2}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <OutputType>WinExe</OutputType>
     <RootNamespace>Vs.Payroll</RootNamespace>
     <AssemblyName>Vs.Payroll</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
@@ -457,6 +457,12 @@
     </Compile>
     <Compile Include="Report\rptBangNangSuat.Designer.cs">
       <DependentUpon>rptBangNangSuat.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Report\rptBangLuongThang_TG.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\rptBangLuongThang_TG.Designer.cs">
+      <DependentUpon>rptBangLuongThang_TG.cs</DependentUpon>
     </Compile>
     <Compile Include="Report\rptDanhSachCongNhan.cs">
       <SubType>Component</SubType>
@@ -916,6 +922,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Report\rptBangNangSuat.resx">
       <DependentUpon>rptBangNangSuat.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\rptBangLuongThang_TG.resx">
+      <DependentUpon>rptBangLuongThang_TG.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\rptDanhSachCongNhan.resx">
       <DependentUpon>rptDanhSachCongNhan.cs</DependentUpon>

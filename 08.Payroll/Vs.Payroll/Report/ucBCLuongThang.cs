@@ -149,16 +149,23 @@ namespace Vs.Payroll
                                                 BangLuongThang_DM();
                                                 break;
                                             }
-                                        default:
-                                            {
-                                                PhieuLuongThang();
-                                                break;
-                                            }
+                                    
                                         case "BT":
                                             {
                                                 BangLuongThang_BT();
                                                 break;
                                             }
+                                        case "TG":
+                                            {
+                                                BangLuongThang_TG();
+                                                break;
+                                            }
+                                        default:
+                                            {
+                                                PhieuLuongThang();
+                                                break;
+                                            }
+
                                     }
                                     break;
                                 }
@@ -171,6 +178,7 @@ namespace Vs.Payroll
                                                 BangLuongThangNV_DM();
                                                 break;
                                             }
+                                        
                                     }
                                     break;
 
@@ -3811,6 +3819,45 @@ namespace Vs.Payroll
             catch
             { }
         }
+
+
+        #region Báo cáo TG
+        private void BangLuongThang_TG()
+        {
+            DataTable dt = new DataTable();
+            DataTable dtbc = new DataTable();
+            System.Data.SqlClient.SqlConnection conn;
+            dt = new DataTable();
+            frmViewReport frm = new frmViewReport();
+            frm.rpt = new rptBangLuongThang_TG(cboThang.Text, labelControl1.Text +" : " + LK_DON_VI.Text, lbXiNghiep.Text + " : " + LK_XI_NGHIEP.Text, lbTo.Text + " : " + LK_TO.Text);
+            conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+            conn.Open();
+            System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptBangLuongThang_TG", conn);
+            cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+            cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+            cmd.Parameters.Add("@Dvi", SqlDbType.Int).Value = LK_DON_VI.EditValue;
+            cmd.Parameters.Add("@XN", SqlDbType.Int).Value = LK_XI_NGHIEP.EditValue;
+            cmd.Parameters.Add("@TO", SqlDbType.Int).Value = LK_TO.EditValue;
+            cmd.Parameters.Add("@Thang", SqlDbType.Date).Value = Convert.ToDateTime(cboThang.EditValue).ToString("yyyy-MM-dd");
+            cmd.CommandType = CommandType.StoredProcedure;
+            System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+
+
+            DataSet ds = new DataSet();
+            adp.Fill(ds);
+            dt = new DataTable();
+            dt = ds.Tables[0].Copy();
+            if (dt.Rows.Count == 0)
+            {
+                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgKhongCoDuLieuIn"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            dt.TableName = "DATA";
+            frm.AddDataSource(dt);
+            frm.ShowDialog();
+        }
+        #endregion
+
         private int TaoTTChung(Excel.Worksheet MWsheet, int DongBD, int CotBD, int DongKT, int CotKT, float MLeft, float MTop)
         {
             try

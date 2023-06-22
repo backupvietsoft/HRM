@@ -130,18 +130,9 @@ namespace VietSoftHRM
                     {
                         enabledControl(true);
                         enableButon(true);
-                        if (grid == 1)
-                        {
-                            grvNhom.PostEditor();
-                            grvNhom.UpdateCurrentRow();
-                            GhiNhom();
-                        }
-                        else
-                        {
-                            grvUser.PostEditor();
-                            grvUser.UpdateCurrentRow();
-                            GhiUser();
-                        }
+                        grvNhom.PostEditor();
+                        grvNhom.UpdateCurrentRow();
+                        GhiNhom();
                         DeleteAddRow(grvNhom);
                         DeleteAddRow(grvUser);
                         break;
@@ -172,19 +163,21 @@ namespace VietSoftHRM
         private void LoadgrdNhom()
         {
             DataTable dt = new DataTable();
-            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetAllNhom", Commons.Modules.UserName, Commons.Modules.TypeLanguage));
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT ID_NHOM,T1.TEN_NHOM, T1.TEN_NHOM_A, T1.TEN_NHOM_H, GHI_CHU, ISNULL(T1.SET_UP,0) SET_UP FROM dbo.NHOM T1"));
             dt.Columns["TEN_NHOM"].ReadOnly = false;
             dt.Columns["GHI_CHU"].ReadOnly = false;
-            dt.PrimaryKey = new DataColumn[] { dt.Columns["ID_NHOM"] };
-            Commons.Modules.ObjSystems.MLoadXtraGrid(grdNhom, grvNhom, dt, false, false, false, true, true, this.Name);
+            //dt.PrimaryKey = new DataColumn[] { dt.Columns["ID_NHOM"] };
+            dt.Columns["ID_NHOM"].ReadOnly = false;
+            dt.Columns["SET_UP"].ReadOnly = false;
+            Commons.Modules.ObjSystems.MLoadXtraGrid(grdNhom, grvNhom, dt, true, false, false, true, true, this.Name);
             grdNhom.DataSource = dt;
             grvNhom.Columns["ID_NHOM"].Visible = false;
             grvNhom.Columns["GHI_CHU"].Width = 200;
-            if (!string.IsNullOrEmpty(Commons.Modules.sIdHT))
-            {
-                int index = dt.Rows.IndexOf(dt.Rows.Find(Convert.ToInt32(Commons.Modules.sIdHT)));
-                grvNhom.FocusedRowHandle = grvNhom.GetRowHandle(index);
-            }
+            //if (!string.IsNullOrEmpty(Commons.Modules.sIdHT))
+            //{
+            //    int index = dt.Rows.IndexOf(dt.Rows.Find(Convert.ToInt32(Commons.Modules.sIdHT)));
+            //    grvNhom.FocusedRowHandle = grvNhom.GetRowHandle(index);
+            //}
             grvNhom_Click(null, null);
 
         }
@@ -260,50 +253,41 @@ namespace VietSoftHRM
                 XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDelDangSuDung") + "\n" + ex.Message.ToString(), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
-        private void GhiUser()
-        {
-            try
-            {
-                if (co == false)
-                {
-                    for (int i = 0; i < grvUser.RowCount; i++)
-                    {
-                        //sữa những dòng đã có
-                        SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spGhiUser", grvUser.GetRowCellValue(i, "ID_USER"), grvNhom.GetFocusedRowCellValue("ID_NHOM"), grvUser.GetRowCellValue(i, "ID_TO"), grvUser.GetRowCellValue(i, "ID_CN"), grvUser.GetRowCellValue(i, "USER_NAME"), grvUser.GetRowCellValue(i, "FULL_NAME"), grvUser.GetRowCellValue(i, "PASSWORD"), grvUser.GetRowCellValue(i, "DESCRIPTION"), grvUser.GetRowCellValue(i, "USER_MAIL"), grvUser.GetRowCellValue(i, "ACTIVE"), 0, Commons.Modules.ObjSystems.Encrypt(grvUser.GetRowCellValue(i, "USER_NAME").ToString() + grvUser.GetRowCellValue(i, "LIC"), true), grvUser.GetRowCellValue(i, "LIC"));
-                    }
-                }
-                else
-                {
-                    //thêm thì lấy những dòng nào chưa có trong table 
-                    for (int i = dem; i < grvUser.RowCount; i++)
-                    {
-                        if (string.IsNullOrEmpty(grvUser.GetRowCellValue(i, "USER_NAME") + "")) break;
-                        SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spGhiUser", -1, grvNhom.GetFocusedRowCellValue("ID_NHOM"), grvUser.GetRowCellValue(i, "ID_TO"), grvUser.GetRowCellValue(i, "ID_CN"), grvUser.GetRowCellValue(i, "USER_NAME"), grvUser.GetRowCellValue(i, "FULL_NAME"), Commons.Modules.ObjSystems.Encrypt("123", true), grvUser.GetRowCellValue(i, "DESCRIPTION"), grvUser.GetRowCellValue(i, "USER_MAIL"), grvUser.GetRowCellValue(i, "ACTIVE"), 1, Commons.Modules.ObjSystems.Encrypt(grvUser.GetRowCellValue(i, "USER_NAME").ToString() + grvUser.GetRowCellValue(i, "LIC"), true), grvUser.GetRowCellValue(i, "LIC"));
-                    }
-                }
-            }
-            catch
-            {
-            }
-        }
         private void GhiNhom()
         {
+            string sBT = "sBTNHOM" + Commons.Modules.iIDUser;
             try
             {
-                for (int i = 0; i < grvNhom.RowCount; i++)
-                {
-                    //sữa những dòng đã có
-                    if(Commons.Modules.ObjSystems.IsnullorEmpty(grvNhom.GetRowCellValue(i, "TEN_NHOM")))
-                    { break; }
-                    SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spGhiNhom", grvNhom.GetRowCellValue(i, "ID_NHOM"), grvNhom.GetRowCellValue(i, "TEN_NHOM"), grvNhom.GetRowCellValue(i, "GHI_CHU"));
-                }
+                Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBT, Commons.Modules.ObjSystems.ConvertDatatable(grdNhom), "");
+                string sSQL = "INSERT INTO dbo.NHOM(TEN_NHOM, TEN_NHOM_A, TEN_NHOM_H, GHI_CHU, SET_UP)\r\nSELECT TEN_NHOM, TEN_NHOM_A, TEN_NHOM_H, GHI_CHU, SET_UP FROM " + sBT + " WHERE ISNULL(ID_NHOM,0) = 0\r\n\r\nUPDATE T1\r\nSET T1.TEN_NHOM = T2.TEN_NHOM,\r\n\tT1.TEN_NHOM_A = T2.TEN_NHOM_A,\r\n\tT1.TEN_NHOM_H = T2.TEN_NHOM_H,\r\n\tT1.GHI_CHU = T2.GHI_CHU,\r\n\tT1.SET_UP = T2.SET_UP\r\nFROM dbo.NHOM T1 INNER JOIN " + sBT + " T2 ON T1.ID_NHOM = T2.ID_NHOM";
+                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, sSQL);
+                Commons.Modules.ObjSystems.Alert("Lưu thành công", Commons.Form_Alert.enmType.Success);
+                Commons.Modules.ObjSystems.XoaTable(sBT);
             }
             catch (Exception ex)
             {
-                XtraMessageBox.Show(ex.Message.ToString());
+                Commons.Modules.ObjSystems.MsgError(ex.Message);
+                Commons.Modules.ObjSystems.XoaTable(sBT);
             }
-
         }
+        //private void GhiNhom()
+        //{
+        //    try
+        //    {
+        //        for (int i = 0; i < grvNhom.RowCount; i++)
+        //        {
+        //            //sữa những dòng đã có
+        //            if(Commons.Modules.ObjSystems.IsnullorEmpty(grvNhom.GetRowCellValue(i, "TEN_NHOM")))
+        //            { break; }
+        //            SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spGhiNhom", grvNhom.GetRowCellValue(i, "ID_NHOM"), grvNhom.GetRowCellValue(i, "TEN_NHOM"), grvNhom.GetRowCellValue(i, "GHI_CHU"));
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        XtraMessageBox.Show(ex.Message.ToString());
+        //    }
+
+        //}
         private void enableButon(bool visible)
         {
             windowsUIButton.Buttons[0].Properties.Visible = visible;
@@ -421,6 +405,27 @@ namespace VietSoftHRM
                     return;
                 }
             }
+        }
+
+        private void grvNhom_InitNewRow(object sender, InitNewRowEventArgs e)
+        {
+            try
+            {
+                GridView view = sender as GridView;
+                view.SetFocusedRowCellValue("ID_NHOM", Convert.ToInt64(0));
+                view.SetFocusedRowCellValue("SET_UP", 0);
+            }
+            catch { }
+        }
+
+        private void grvNhom_InvalidRowException(object sender, DevExpress.XtraGrid.Views.Base.InvalidRowExceptionEventArgs e)
+        {
+            e.ExceptionMode = DevExpress.XtraEditors.Controls.ExceptionMode.NoAction;
+        }
+
+        private void grvNhom_InvalidValueException(object sender, DevExpress.XtraEditors.Controls.InvalidValueExceptionEventArgs e)
+        {
+            e.ExceptionMode = DevExpress.XtraEditors.Controls.ExceptionMode.NoAction;
         }
     }
     #endregion

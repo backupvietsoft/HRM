@@ -31,9 +31,6 @@
             this.components = new System.ComponentModel.Container();
             this.TopMargin = new DevExpress.XtraReports.UI.TopMarginBand();
             this.BottomMargin = new DevExpress.XtraReports.UI.BottomMarginBand();
-            this.lblPrinter = new DevExpress.XtraReports.UI.XRPageInfo();
-            this.lblPrintDate = new DevExpress.XtraReports.UI.XRPageInfo();
-            this.lblPages = new DevExpress.XtraReports.UI.XRPageInfo();
             this.Detail = new DevExpress.XtraReports.UI.DetailBand();
             this.xrSubreport2 = new DevExpress.XtraReports.UI.XRSubreport();
             this.numericChartRangeControlClient1 = new DevExpress.XtraEditors.NumericChartRangeControlClient();
@@ -49,58 +46,15 @@
             // TopMargin
             // 
             this.TopMargin.Dpi = 254F;
-            this.TopMargin.HeightF = 31.35419F;
+            this.TopMargin.HeightF = 10F;
             this.TopMargin.Name = "TopMargin";
             // 
             // BottomMargin
             // 
-            this.BottomMargin.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
-            this.lblPrinter,
-            this.lblPrintDate,
-            this.lblPages});
             this.BottomMargin.Dpi = 254F;
-            this.BottomMargin.HeightF = 64.74847F;
+            this.BottomMargin.HeightF = 0F;
             this.BottomMargin.Name = "BottomMargin";
-            // 
-            // lblPrinter
-            // 
-            this.lblPrinter.Dpi = 254F;
-            this.lblPrinter.Font = new DevExpress.Drawing.DXFont("Times New Roman", 9.75F, DevExpress.Drawing.DXFontStyle.Bold);
-            this.lblPrinter.LocationFloat = new DevExpress.Utils.PointFloat(796.3958F, 0F);
-            this.lblPrinter.Name = "lblPrinter";
-            this.lblPrinter.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
-            this.lblPrinter.PageInfo = DevExpress.XtraPrinting.PageInfo.UserName;
-            this.lblPrinter.SizeF = new System.Drawing.SizeF(411.3331F, 58.42F);
-            this.lblPrinter.StylePriority.UseFont = false;
-            this.lblPrinter.StylePriority.UseTextAlignment = false;
-            this.lblPrinter.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
-            // 
-            // lblPrintDate
-            // 
-            this.lblPrintDate.Dpi = 254F;
-            this.lblPrintDate.Font = new DevExpress.Drawing.DXFont("Times New Roman", 9.75F, DevExpress.Drawing.DXFontStyle.Bold);
-            this.lblPrintDate.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
-            this.lblPrintDate.Name = "lblPrintDate";
-            this.lblPrintDate.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
-            this.lblPrintDate.PageInfo = DevExpress.XtraPrinting.PageInfo.DateTime;
-            this.lblPrintDate.SizeF = new System.Drawing.SizeF(400F, 58.42F);
-            this.lblPrintDate.StylePriority.UseFont = false;
-            this.lblPrintDate.StylePriority.UseTextAlignment = false;
-            this.lblPrintDate.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            this.lblPrintDate.TextFormatString = "Date: {0:dd/MM/yyyy HH:mm:ss}";
-            // 
-            // lblPages
-            // 
-            this.lblPages.Dpi = 254F;
-            this.lblPages.Font = new DevExpress.Drawing.DXFont("Times New Roman", 9.75F, DevExpress.Drawing.DXFontStyle.Bold);
-            this.lblPages.LocationFloat = new DevExpress.Utils.PointFloat(1379.38F, 0F);
-            this.lblPages.Name = "lblPages";
-            this.lblPages.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
-            this.lblPages.SizeF = new System.Drawing.SizeF(398.62F, 59.99999F);
-            this.lblPages.StylePriority.UseFont = false;
-            this.lblPages.StylePriority.UseTextAlignment = false;
-            this.lblPages.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
-            this.lblPages.TextFormatString = "Page {0} of {1}";
+            this.BottomMargin.Visible = false;
             // 
             // Detail
             // 
@@ -135,7 +89,7 @@
             this.Detail});
             this.Dpi = 254F;
             this.Font = new DevExpress.Drawing.DXFont("Arial", 9.75F, DevExpress.Drawing.DXFontStyle.Bold);
-            this.Margins = new DevExpress.Drawing.DXMargins(161F, 161F, 31.35419F, 64.74847F);
+            this.Margins = new DevExpress.Drawing.DXMargins(161F, 161F, 10F, 0F);
             this.PageHeight = 2970;
             this.PageWidth = 2100;
             this.PaperKind = System.Drawing.Printing.PaperKind.A4;
@@ -160,9 +114,6 @@
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.ComponentModel.BackgroundWorker backgroundWorker2;
         private System.Diagnostics.EventLog eventLog1;
-        private DevExpress.XtraReports.UI.XRPageInfo lblPrinter;
-        private DevExpress.XtraReports.UI.XRPageInfo lblPrintDate;
-        private DevExpress.XtraReports.UI.XRPageInfo lblPages;
         private DevExpress.XtraReports.UI.XRSubreport xrSubreport2;
     }
 }

@@ -1,4 +1,5 @@
 ﻿using CredentialManagement;
+using DevExpress.Charts.Native;
 using DevExpress.CodeParser;
 using DevExpress.XtraEditors;
 using Microsoft.ApplicationBlocks.Data;
@@ -83,12 +84,26 @@ namespace VietSoftHRM
                 try
                 {
                     Commons.Modules.bKiemPCD = Convert.ToBoolean(dt.Rows[0]["CHECK_PCD"]);
-
                 }
                 catch
                 {
                 }
-                try { Commons.Modules.iHeSo = Convert.ToInt32(dt.Rows[0]["HE_SO"]); } catch { Commons.Modules.iHeSo = 0; }
+                try
+                {
+                    Commons.Modules.iHeSo = Convert.ToInt32(dt.Rows[0]["HE_SO"]);
+                }
+                catch
+                {
+                    Commons.Modules.iHeSo = 0;
+                }
+                try
+                {
+                    Commons.Modules.bKiemLCVCV = Convert.ToBoolean(dt.Rows[0]["LOC_CHUC_VU"]); // có lọc chức vụ theo loại công việc không , 1 có 0 = 0
+                }
+                catch
+                {
+                    Commons.Modules.bKiemLCVCV = true;
+                }
 
                 try
                 {
@@ -159,8 +174,13 @@ namespace VietSoftHRM
                 }
                 else
                     Commons.Modules.iLic = Commons.Modules.ObjSystems.MCot(items[1].ToString().Split('~')[1].ToString());
+
+                return true;
             }
-            catch { }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
             if (sSql.Split('|')[0].ToUpper() == "DEMO")
             {
                 //5.kiểm tra hết hạn
@@ -224,6 +244,7 @@ namespace VietSoftHRM
                 }
                 #endregion
                 try { if (double.Parse(sVerClient) == double.Parse(sSql)) return; } catch { return; }
+                //sSql = "SELECT TOP 1 (CONVERT(NVARCHAR,LOAI_CN) + '!' + isnull(LINK1, '-1') + '!' + isnull(LINK2, '-1') + '!' + isnull(LINK3, '-1') + '!' + isnull(G_LINK_UD, '-1') + '!' + isnull(G_LINK_VERSION, '-1')) AS CAPNHAT FROM THONG_TIN_CHUNG";
                 sSql = "SELECT TOP 1 (CONVERT(NVARCHAR,LOAI_CN) + '!' + isnull(LINK1, '-1') + '!' + isnull(LINK2, '-1') + '!' + isnull(LINK3, '-1')) AS CAPNHAT FROM THONG_TIN_CHUNG";
                 sSql = Convert.ToString(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, System.Data.CommandType.Text, sSql));
 
@@ -232,10 +253,14 @@ namespace VietSoftHRM
                 String link1 = sArr[1];
                 String link2 = sArr[2];
                 String link3 = sArr[3];
+
+                //string g_link_ud = sArr[4]; // link update toàn cục (tất cả các khách hàng đều update)
+                //string g_link_ver = sArr[5]; // link version toàn cục
+
                 //Khong có loai update thi thoát
                 if (loai <= -1) return;
 
-                switch (loai)
+                switch (loai) // update cho từng khách hàng
                 {
                     //Loai 2 xai link1,2 : path link tren dropbox 
                     //Loai 1 xai link3: path link tren server
@@ -258,7 +283,11 @@ namespace VietSoftHRM
                         }
                     default: { break; }
                 }
-                Commons.Modules.sInfoSer = Commons.Modules.sInfoClient;
+
+                //// update toàn cục
+                //if (string.IsNullOrEmpty(g_link_ud)) return;
+                //MUpdate(loai, g_link_ud, g_link_ver, ".");
+                //Commons.Modules.sInfoSer = Commons.Modules.sInfoClient;
             }
             catch
             { }

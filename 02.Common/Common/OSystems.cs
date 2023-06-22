@@ -721,13 +721,14 @@ namespace Commons
         {
             try
             {
+                DateTime dNgaydauThang = new DateTime(date.Year, date.Month, 1);
                 if (iLoai == 0)
                 {
-                    return date.AddDays((-date.Day) + 1);
+                    return dNgaydauThang;
                 }
                 else
                 {
-                    return date.AddMonths(+1).AddDays(-1);
+                    return dNgaydauThang.AddMonths(+1).AddDays(-1);
                 }
             }
             catch
@@ -862,7 +863,6 @@ namespace Commons
                 return false;
             }
         }
-
         public bool checkVerDemo(Int64 idCustomer, Int64 idContract, int LoaiSP, out DateTime dNgayHH)
         {
             DateTime dNgay = DateTime.Now;
@@ -4486,7 +4486,7 @@ namespace Commons
                     sSql = "DELETE FROM dbo.LOGIN WHERE USER_LOGIN = '" + User + "' ";
                     SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, sSql);
 
-                    sSql = "INSERT dbo.LOGIN(USER_LOGIN, TIME_LOGIN, ID,[USER_NAME],[M_NAME], [VERSION]) VALUES(N'" + User + "',GETDATE(), " + Commons.Modules.iIDUser.ToString() + " , N'" + LoadIPLocal() + "', N'" + MName + "', '" + Commons.Modules.sInfoSer + "' )";
+                    sSql = "INSERT dbo.LOGIN(USER_LOGIN, TIME_LOGIN, ID,[USER_NAME],[M_NAME], [VERSION]) VALUES(N'" + User + "',GETDATE(), " + Commons.Modules.iIDUser.ToString() + " , N'" + LoadIPLocal() + "', N'" + MName + "', '" + Commons.Modules.sInfoClient + "' )";
                     SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, sSql);
                     return true;
                 }
@@ -5579,11 +5579,11 @@ namespace Commons
             dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboCotCapNhat", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll));
             return dt;
         }
-        public DataTable DataBacLuong(Int64 idnl, DateTime ngayQD, bool coAll)
+        public DataTable DataBacLuong(Int64 idnl, Int64 ID_DV ,DateTime ngayQD, bool coAll)
         {
             //ID_BL, T1.TEN_BL
             DataTable dt = new DataTable();
-            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboBacLuong", idnl, ngayQD, Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll));
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboBacLuong", idnl, ID_DV, ngayQD, Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll));
             return dt;
         }
 
@@ -5748,6 +5748,17 @@ namespace Commons
             {
 
                 throw;
+            }
+        }
+
+        public Int64 GetNguoiKyMacDinh()
+        {
+            try
+            {
+                return Convert.ToInt64(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.fnGetNguoiKyMacDinh()"));
+            }
+            catch {
+                return 0;
             }
         }
         public DataTable DataQuocGia(bool coAll)

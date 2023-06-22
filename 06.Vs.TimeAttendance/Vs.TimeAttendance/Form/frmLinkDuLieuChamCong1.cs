@@ -87,7 +87,6 @@ namespace Vs.TimeAttendance
             {
             }
         }
-
         #region Các hàm xử lý
         private void enableButon(bool visible)
         {
@@ -392,7 +391,7 @@ namespace Vs.TimeAttendance
             }
             catch (Exception ex)
             {
-                Commons.Modules.ObjSystems.MsgError(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msg_LinkKhongThanhCong"));
+                Commons.Modules.ObjSystems.MsgError(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msg_LinkKhongThanhCong" + ex.Message));
                 this.Cursor = Cursors.Default;
             }
         }
@@ -890,6 +889,7 @@ namespace Vs.TimeAttendance
                             {
                                 queryString = @"SELECT UserInfo.UserFullCode AS MS_THE_CC, CheckInOut.TimeStr AS NGAY FROM CheckInOut INNER JOIN UserInfo ON CheckInOut.UserEnrollNumber = UserInfo.UserEnrollNumber WHERE (((CheckInOut.TimeDate)=#" + dtNgayChamCong.DateTime.ToString("MM/dd/yyyy") + "#));";
                             }
+                            XtraMessageBox.Show(connect);
                             using (OleDbConnection connection = new OleDbConnection(connect))
                             using (OleDbCommand command = new OleDbCommand(queryString, connection))
                             {
@@ -902,7 +902,7 @@ namespace Vs.TimeAttendance
                                 }
                                 catch (Exception ex)
                                 {
-                                    Console.WriteLine(ex.Message);
+                                    XtraMessageBox.Show(ex.Message);
                                     return;
                                 }
                             }
@@ -1048,7 +1048,7 @@ namespace Vs.TimeAttendance
                     {
                         string sSQL = "SELECT TOP 1 ISNULL(KY_HIEU,'') KY_HIEU FROM dbo.DON_VI";
                         string sKyHieuDV = Convert.ToString(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, sSQL));
-                        if(sKyHieuDV == "HN7")
+                        if (sKyHieuDV == "HN7")
                         {
                             try
                             {
@@ -1533,6 +1533,12 @@ namespace Vs.TimeAttendance
                             if (Commons.Modules.chamCongK == true) sLoad = "spTongHopDuLieu_BTK";
                             break;
                         }
+                    case "TG":
+                        {
+                            sLoad = "spTongHopDuLieu_TG";
+                            if (Commons.Modules.chamCongK == true) sLoad = "spTongHopDuLieu_TGK";
+                            break;
+                        }
                     default:
                         {
                             sLoad = "spTongHopDuLieu";
@@ -1677,7 +1683,6 @@ namespace Vs.TimeAttendance
         }
         #endregion
 
-
         #region Cac Ham Load Tab 1
         private void LoadLuoiNgay(DateTime dtLoad)
         {
@@ -1803,14 +1808,42 @@ namespace Vs.TimeAttendance
 
         private void cbDonVi_EditValueChanged(object sender, EventArgs e)
         {
+            if (Commons.Modules.sLoad == "0Load") return;
+            Commons.Modules.sLoad = "0Load";
             Commons.Modules.ObjSystems.LoadCboXiNghiep(cbDonVi, cbXiNghiep);
             LoadCboDataLink();
+            Commons.Modules.sLoad = "";
+            grdDSCN.DataSource = null;
+            grvDSCN.RefreshData();
+            try
+            {
+                LoadLuoiNgay(dtNgayChamCong.DateTime);
+                LoadGridCongNhan(dtNgayChamCong.DateTime);
+            }
+            catch
+            {
+
+            }
             enableButon(true);
         }
 
         private void cbXiNghiep_EditValueChanged(object sender, EventArgs e)
         {
+            if (Commons.Modules.sLoad == "0Load") return;
+            Commons.Modules.sLoad = "0Load";
             Commons.Modules.ObjSystems.LoadCboTo(cbDonVi, cbXiNghiep, cbTo);
+            Commons.Modules.sLoad = "";
+            grdDSCN.DataSource = null;
+            grvDSCN.RefreshData();
+            try
+            {
+                LoadLuoiNgay(dtNgayChamCong.DateTime);
+                LoadGridCongNhan(dtNgayChamCong.DateTime);
+            }
+            catch
+            {
+
+            }
         }
 
         private void cbTo_EditValueChanged(object sender, EventArgs e)
@@ -1819,10 +1852,8 @@ namespace Vs.TimeAttendance
             Commons.Modules.sLoad = "0Load";
             grdDSCN.DataSource = null;
             grvDSCN.RefreshData();
-            //lblTongCong.Text = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgTongSoCN") + "0";
             try
             {
-                //DateTime ngay = (DateTime)grvNgay.GetFocusedRowCellValue("NGAY");
                 LoadLuoiNgay(dtNgayChamCong.DateTime);
                 LoadGridCongNhan(dtNgayChamCong.DateTime);
             }
@@ -2116,7 +2147,7 @@ namespace Vs.TimeAttendance
         {
             try
             {
-                if (Convert.ToBoolean(grvDSCN.GetRowCellValue(e.RowHandle, grvDSCN.Columns["CHINH_SUA"].FieldName)) == false) return;
+                if (Convert.ToBoolean(grvDSCN.GetRowCellValue(e.RowHandle, grvDSCN.Columns["CHINH_SUA"].FieldName)) == false || Commons.Modules.KyHieuDV == "SB") return;
                 e.Appearance.BackColor = System.Drawing.ColorTranslator.FromHtml("#CC99FF");
                 e.HighPriority = true;
             }

@@ -86,7 +86,7 @@ namespace Vs.HRM
                             if (!KiemTraLuoi(dt)) return;
                             if (SaveData(dt) == false)
                             {
-                                Commons.Modules.ObjSystems.Alert(Commons.Modules.ObjLanguages.GetLanguage("frmMessage","lblLuuKhongThanhCong"), Commons.Form_Alert.enmType.Error);
+                                Commons.Modules.ObjSystems.Alert(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "lblLuuKhongThanhCong"), Commons.Form_Alert.enmType.Error);
                                 return;
                             }
                             else
@@ -323,7 +323,7 @@ namespace Vs.HRM
                 catch { }
             }
             catch (Exception ex) { }
-        } 
+        }
         private void LoadData() // load data chung
         {
             try
@@ -353,7 +353,6 @@ namespace Vs.HRM
                 grvData.Columns["CHON"].Visible = false;
                 grvData.Columns["ID_TT"].Visible = false;
                 grvData.Columns["CONG_VIEC_ENG"].Visible = false;
-                grvData.Columns["MO_TA_CV_BHXH"].Visible = false;
                 grvData.Columns["MO_TA_CV_BHXH_A"].Visible = false;
                 grvData.Columns["MS_CN"].OptionsColumn.AllowEdit = false;
                 grvData.Columns["HO_TEN"].OptionsColumn.AllowEdit = false;
@@ -420,7 +419,7 @@ namespace Vs.HRM
                 cboID_BL.NullText = "";
                 cboID_BL.ValueMember = "ID_BL";
                 cboID_BL.DisplayMember = "TEN_BL";
-                cboID_BL.DataSource = Commons.Modules.ObjSystems.DataBacLuong(grvData.GetFocusedRowCellValue("ID_NL").ToString() == "" ? -1 : Convert.ToInt64(grvData.GetFocusedRowCellValue("ID_NL")), DateTime.Now, false);
+                cboID_BL.DataSource = Commons.Modules.ObjSystems.DataBacLuong(grvData.GetFocusedRowCellValue("ID_NL").ToString() == "" ? -1 : Convert.ToInt64(grvData.GetFocusedRowCellValue("ID_NL")), -1, DateTime.Now, false);
                 cboID_BL.Columns.Clear();
                 cboID_BL.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID_BL"));
                 cboID_BL.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("TEN_BL"));
@@ -555,7 +554,7 @@ namespace Vs.HRM
                 cboID_BL.NullText = "";
                 cboID_BL.ValueMember = "ID_BL";
                 cboID_BL.DisplayMember = "TEN_BL";
-                cboID_BL.DataSource = Commons.Modules.ObjSystems.DataBacLuong(grvData.GetFocusedRowCellValue("ID_NL").ToString() == "" ? -1 : Convert.ToInt64(grvData.GetFocusedRowCellValue("ID_NL")), DateTime.Now, true);
+                cboID_BL.DataSource = Commons.Modules.ObjSystems.DataBacLuong(grvData.GetFocusedRowCellValue("ID_NL").ToString() == "" ? -1 : Convert.ToInt64(grvData.GetFocusedRowCellValue("ID_NL")), -1, DateTime.Now, true);
                 cboID_BL.Columns.Clear();
                 cboID_BL.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID_BL"));
                 cboID_BL.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("TEN_BL"));
@@ -729,7 +728,15 @@ namespace Vs.HRM
                 LookUpEdit lookUp = sender as LookUpEdit;
                 DataTable dt1 = new DataTable();
                 //////dt1.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT ID_BL, MUCLUONG FROM dbo.BAC_LUONG " ));
-                dt1 = Commons.Modules.ObjSystems.DataBacLuong(Convert.ToInt64(grvData.GetFocusedRowCellValue("ID_NL")), DateTime.Now, false);
+
+                Int64 iID_DV = -1;
+                try
+                {
+                    string sSQL = "SELECT T1.ID_DV FROM dbo.CONG_NHAN CN INNER JOIN dbo.MGetToUser('" + Commons.Modules.UserName + "',0) T1 ON T1.ID_TO = CN.ID_TO WHERE CN.ID_CN = " + grvData.GetFocusedRowCellValue("ID_CN");
+                    iID_DV = Convert.ToInt64(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, sSQL));
+                }
+                catch { }
+                dt1 = Commons.Modules.ObjSystems.DataBacLuong(Convert.ToInt64(grvData.GetFocusedRowCellValue("ID_NL")), iID_DV, DateTime.Now, false);
                 lookUp.Properties.DataSource = dt1;
 
             }
@@ -1077,7 +1084,7 @@ namespace Vs.HRM
                     {
                         errorCount++;
                     }
-                    if(Commons.Modules.KyHieuDV == "BT")
+                    if (Commons.Modules.KyHieuDV == "BT")
                     {
                         // NGẠCH LƯƠNG
                         if (!KiemDuLieu(grvData, dr, "ID_NL", true, 250, this.Name))
@@ -1511,7 +1518,7 @@ namespace Vs.HRM
                 adp.Fill(ds);
                 dt = new DataTable();
                 dt = ds.Tables[0].Copy();
-                
+
                 string sPath = "";
                 sPath = SaveFiles("Work file (*.doc)|*.docx");
                 if (sPath == "") return;

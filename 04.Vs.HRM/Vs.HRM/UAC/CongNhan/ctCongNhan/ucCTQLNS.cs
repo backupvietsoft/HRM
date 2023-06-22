@@ -79,7 +79,9 @@ namespace Vs.HRM
                     Lb_Click(labLyLich, null);
                 }
                 Commons.Modules.sLoad = "0Load";
-                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboCongNhan, Commons.Modules.ObjSystems.DataCongNhan(false), "ID_CN", "MS_CN", "MS_CN", true, true, false);
+                DataTable dt = new DataTable();
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT ID_CN, MS_CN, HO + ' ' + ISNULL(TEN,'') HO_TEN FROM dbo.CONG_NHAN ORDER BY MS_CN"));
+                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboCongNhan, dt, "ID_CN", "MS_CN", "MS_CN", true, true, false);
                 cboCongNhan.EditValue = Convert.ToInt64(Commons.Modules.iCongNhan);
                 Commons.Modules.sLoad = "";
             }
@@ -183,6 +185,7 @@ namespace Vs.HRM
                         else
                         {
                             qtct.LoadgrdCongTac(Convert.ToInt32(Commons.Modules.iCongNhan));
+                            qtct.Load_ChuyenTu();
                         }
                         Selecttab(navigationPage2);
                         break;

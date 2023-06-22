@@ -121,7 +121,7 @@ namespace Vs.HRM
 
                     ID_TOLookUpEdit.EditValue = tableTTC_CN.Rows[0]["ID_TO"];
                     ID_CVLookUpEdit.EditValue = tableTTC_CN.Rows[0]["ID_CV"];
-                    ID_NKLookUpEdit.EditValue = tableTTC_CN.Rows[0]["ID_NK"];
+                    ID_NKLookUpEdit.EditValue = Commons.Modules.ObjSystems.GetNguoiKyMacDinh();
                     NGAY_KYDateEdit.EditValue = DateTime.Today;
                     SO_QUYET_DINHTextEdit.EditValue = "";
                     NGAY_HIEU_LUCDateEdit.EditValue = DateTime.Today;
@@ -170,7 +170,7 @@ namespace Vs.HRM
             }
             catch (Exception ex)
             {
-                throw ex;
+                Commons.Modules.ObjSystems.MsgError(ex.Message);
             }
         }
         private void SaveData()
@@ -434,7 +434,8 @@ namespace Vs.HRM
 
             Commons.Modules.sLoad = "0Load";
             Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(NGACH_LUONGLookUpEdit, Commons.Modules.ObjSystems.DataNgachLuong(false), "ID_NL", "TEN_NL", "TEN_NL", true);
-            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(BAC_LUONGLookUpEdit, Commons.Modules.ObjSystems.DataBacLuong(-1, DateTime.Today, false), "ID_BL", "TEN_BL", "TEN_BL", true);
+
+            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(BAC_LUONGLookUpEdit, Commons.Modules.ObjSystems.DataBacLuong(-1, -1, DateTime.Today, false), "ID_BL", "TEN_BL", "TEN_BL", true);
             Commons.Modules.ObjSystems.MLoadLookUpEdit(cboTinhTrang, Commons.Modules.ObjSystems.DataTinhTrang(false), "ID_TT", "TenTT", "TenTT");
             enableButon(true);
             Commons.Modules.ObjSystems.SetPhanQuyen(windowsUIButton);
@@ -477,7 +478,15 @@ namespace Vs.HRM
         private void NGACH_LUONGLookUpEdit_EditValueChanged(object sender, EventArgs e)
         {
             if (Commons.Modules.sLoad == "0Load") return;
-            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(BAC_LUONGLookUpEdit, Commons.Modules.ObjSystems.DataBacLuong(Convert.ToInt32(NGACH_LUONGLookUpEdit.EditValue), Convert.ToDateTime(NGAY_HIEU_LUCDateEdit.EditValue), false), "ID_BL", "TEN_BL", "TEN_BL", true);
+
+            Int64 iID_DV = -1;
+            try
+            {
+                string sSQL = "SELECT T1.ID_DV FROM dbo.CONG_NHAN CN INNER JOIN dbo.MGetToUser('" + Commons.Modules.UserName + "',0) T1 ON T1.ID_TO = CN.ID_TO WHERE CN.ID_CN = " + Commons.Modules.iCongNhan;
+                iID_DV = Convert.ToInt64(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, sSQL));
+            }
+            catch { }
+            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(BAC_LUONGLookUpEdit, Commons.Modules.ObjSystems.DataBacLuong(Convert.ToInt32(NGACH_LUONGLookUpEdit.EditValue), iID_DV, Convert.ToDateTime(NGAY_HIEU_LUCDateEdit.EditValue), false), "ID_BL", "TEN_BL", "TEN_BL", true);
         }
         private void BAC_LUONGLookUpEdit_EditValueChanged(object sender, EventArgs e)
         {
@@ -569,7 +578,14 @@ namespace Vs.HRM
         {
             if (NGACH_LUONGLookUpEdit.Text != "")
             {
-                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(BAC_LUONGLookUpEdit, Commons.Modules.ObjSystems.DataBacLuong(Convert.ToInt32(NGACH_LUONGLookUpEdit.EditValue), Convert.ToDateTime(NGAY_HIEU_LUCDateEdit.EditValue), false), "ID_BL", "TEN_BL", "TEN_BL", true);
+                Int64 iID_DV = -1;
+                try
+                {
+                    string sSQL = "SELECT T1.ID_DV FROM dbo.CONG_NHAN CN INNER JOIN dbo.MGetToUser('" + Commons.Modules.UserName + "',0) T1 ON T1.ID_TO = CN.ID_TO WHERE CN.ID_CN = " + Commons.Modules.iCongNhan;
+                    iID_DV = Convert.ToInt64(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, sSQL));
+                }
+                catch { }
+                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(BAC_LUONGLookUpEdit, Commons.Modules.ObjSystems.DataBacLuong(Convert.ToInt32(NGACH_LUONGLookUpEdit.EditValue), iID_DV ,Convert.ToDateTime(NGAY_HIEU_LUCDateEdit.EditValue), false), "ID_BL", "TEN_BL", "TEN_BL", true);
             }
         }
 

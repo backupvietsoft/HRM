@@ -20,7 +20,9 @@ namespace Vs.Report
 
             //lbNgay.Text = "Tp.HCM, Ngày " + NgayBC.Substring(NgayBC.Length - 2, 2) + " Tháng " + ThangBC.Substring(ThangBC.Length - 2, 2) + " Năm " + NamBC.Substring(NamBC.Length - 4, 4);
 
-
+            this.Margins.Top = 0;
+            this.Margins.Bottom = 0; 
+            
         }
 
     }

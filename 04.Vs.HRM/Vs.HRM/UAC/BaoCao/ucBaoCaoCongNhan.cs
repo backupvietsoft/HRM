@@ -38,12 +38,23 @@ namespace Vs.HRM
                         this.chkInAll.Visible = true;
                         this.lblInTatCa.Visible = true;
                         chkInAll.Checked = true;
+                        rdoLoaiIn.Visible = false;
+
+                        break;
+                    }
+                case "TG":
+                    {
+                        this.chkInAll.Visible = false;
+                        this.lblInTatCa.Visible = false;
+                        rdoLoaiIn.Visible = true;
+                        rdoLoaiIn.SelectedIndex = 0;
                         break;
                     }
                 default:
                     {
                         this.chkInAll.Visible = false;
                         this.lblInTatCa.Visible = false;
+                        rdoLoaiIn.Visible = false;
                         break;
                     }
             }
@@ -58,6 +69,7 @@ namespace Vs.HRM
             grvChonCot.UpdateCurrentRow();
             string sResult = "";
             Int64 iID = -1;
+            
             if (sNameButton == "them")
             {
 
@@ -87,6 +99,7 @@ namespace Vs.HRM
                     XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgTenMauDaTonTai"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
+
             }
             else
             {
@@ -254,7 +267,7 @@ namespace Vs.HRM
             {
                 rdoChonBC.SelectedIndex = 0;
                 Commons.Modules.sLoad = "0Load";
-                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(lkDonVi, Commons.Modules.ObjSystems.DataDonVi(false), "ID_DV", "TEN_DV", "TEN_DV");
+                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(lkDonVi, Commons.Modules.ObjSystems.DataDonVi(true), "ID_DV", "TEN_DV", "TEN_DV");
                 Commons.Modules.ObjSystems.LoadCboXiNghiep(lkDonVi, lkXiNghiep);
                 Commons.Modules.ObjSystems.LoadCboTo(lkDonVi, lkXiNghiep, lkTo);
                 Commons.Modules.ObjSystems.LoadCboTTHD(lkTTHD);
@@ -270,7 +283,10 @@ namespace Vs.HRM
                 LoadGrdChonCot();
                 LoadMauBaoCaoCN();
                 NgayIn.EditValue = DateTime.Today;
+                datTuNgay.EditValue = DateTime.Today;
+                datDenNgay.EditValue = DateTime.Today;
                 chkGroup.Checked = true;
+                rdoLoaiIn.SelectedIndex = 0;
                 Commons.Modules.sLoad = "";
                 EnabledButton(true);
                 rdoChonBC_SelectedIndexChanged(null, null);
@@ -703,6 +719,13 @@ namespace Vs.HRM
                     cmd.Parameters.Add("@ID_CV", SqlDbType.BigInt, 1000).Value = cboChucVu.EditValue;
                     cmd.Parameters.Add("@Loai_sort", SqlDbType.Bit).Value = chkGroup.Checked;
                     cmd.Parameters.Add("@iCot1", SqlDbType.Int).Value = 1;
+                    try
+                    {
+                        cmd.Parameters.Add("@TUNGAY", SqlDbType.DateTime).Value = datTuNgay.DateTime;
+                        cmd.Parameters.Add("@DENNGAY", SqlDbType.DateTime).Value = datDenNgay.DateTime;
+                        cmd.Parameters.Add("@CHINH_THUC", SqlDbType.Int).Value = rdoLoaiIn.EditValue;
+                    }
+                    catch { }
                     cmd.CommandType = CommandType.StoredProcedure;
                     System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
                     DataSet ds = new DataSet();
@@ -883,7 +906,7 @@ namespace Vs.HRM
                             formatRange.NumberFormat = "#,##0;(#,##0); ; ";
                             try { formatRange.TextToColumns(Type.Missing, Excel.XlTextParsingType.xlDelimited, Excel.XlTextQualifier.xlTextQualifierDoubleQuote); } catch (Exception ex) { }
 
-                            for (col = 1; col < dtBCThang.Columns.Count - 6; col++)
+                            for (col = 1; col <= dtBCThang.Columns.Count - 6; col++)
                             {
                                 formatRange = oSheet.get_Range(CharacterIncrement(col) + "" + (rowBD + 1).ToString() + "", CharacterIncrement(col) + (rowCnt + 1).ToString());
                                 if (dt.Rows[col - 1]["DINH_DANG"].ToString() == "Num")
@@ -1900,6 +1923,24 @@ namespace Vs.HRM
                 NgayIn.Properties.Mask.EditMask = "dd/MM/yyyy";
                 NgayIn.Properties.VistaCalendarViewStyle = VistaCalendarViewStyle.Default;
             }
+
+            if(rdoChonBC.SelectedIndex == 2 || rdoChonBC.SelectedIndex == 3)
+            {
+                datTuNgay.Visible = true;
+                datDenNgay.Visible = true;
+
+
+            }
+            else
+            {
+                datTuNgay.Visible = false;
+                datDenNgay.Visible = false;
+            }
+        }
+
+        private void cboChucVu_EditValueChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

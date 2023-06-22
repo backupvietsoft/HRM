@@ -105,6 +105,19 @@ namespace Commons
             }
         }
 
+        private static bool _bKiemLCVCV; // kiểm tra xem có lọc chức vụ theo loại công việc không ?
+        public static bool bKiemLCVCV
+        {
+            get
+            {
+                return _bKiemLCVCV;
+            }
+            set
+            {
+                _bKiemLCVCV = value;
+            }
+        }
+
         private static string _msgTitle;
         public static string msgTitle
         {

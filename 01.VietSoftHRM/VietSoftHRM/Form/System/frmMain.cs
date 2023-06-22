@@ -42,7 +42,7 @@ namespace VietSoftHRM
                 Commons.Modules.ObjSystems.HideWaitForm();
                 barServer.Caption = "Server : " + Commons.IConnections.Server + "- Database : " + Commons.IConnections.Database;
                 barTTC.Caption = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "select TEN_CTY from THONG_TIN_CHUNG").ToString().ToUpper();
-                barVer.Caption = "Version Curent: " + Commons.Modules.sInfoSer + "";
+                barVer.Caption = "Version Curent: " + Commons.Modules.sInfoClient + "";
                 barLogin.Caption = "Total " + SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, " SELECT COUNT(*) FROM dbo.LOGIN ").ToString() + "/" + Commons.Modules.iLic + " user login";
             }
             catch (Exception ex) { XtraMessageBox.Show(ex.Message); }

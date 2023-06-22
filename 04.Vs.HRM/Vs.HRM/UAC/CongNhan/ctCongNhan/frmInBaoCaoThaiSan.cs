@@ -18,6 +18,8 @@ using DevExpress.Charts.Native;
 using System.Windows.Automation.Peers;
 using DevExpress.XtraLayout.Filtering.Templates;
 using DevExpress.ClipboardSource.SpreadsheetML;
+using DevExpress.Utils.Commands;
+using DevExpress.PivotGrid.Design;
 
 namespace Vs.HRM
 {
@@ -31,22 +33,20 @@ namespace Vs.HRM
         public frmInBaoCaoThaiSan(DateTime Thang, int DV, int TO, int XN, int TT)
         {
             InitializeComponent();
-            //dThang.Properties.Mask.EditMask = "MM/yyyy";
-            //dThang.Properties.Mask.UseMaskAsDisplayFormat = true;
-            //Commons.Modules.ObjSystems.ThayDoiNN(this);
-            //try
-            //{
-            //    dThang.EditValue = Thang;
-            //}
-            //////catch (Exception ex)
-            //////{
-            //////    throw ex;
-            //////}
+            if (Commons.Modules.KyHieuDV == "NB")
+            {
+                datTuNgay.Properties.Mask.EditMask = "MM/yyyy";
+                datDenNgay.Visible = false;
+                lblDenNgay.Visible = false;
+            }
+
             this.DV = DV;
             this.TO = TO;
             this.XN = XN;
             this.TT = TT;
             this.ThangBC = Thang;
+
+
         }
 
         //sự kiên load form
@@ -94,28 +94,41 @@ namespace Vs.HRM
 
         private void InDanhSachMangThai()
         {
-            frmViewReport frm = new frmViewReport();
-            System.Data.SqlClient.SqlConnection conn;
-
-            CultureInfo culture = CultureInfo.CreateSpecificCulture("en-US");
-            DateTime ChonThang = datTuNgay.DateTime;
-            string Ngay = ChonThang.Day.ToString();
-            string Thang1 = ChonThang.Month.ToString();
-            string Nam = ChonThang.Year.ToString();
-            frm.rpt = new rptBCDangKyThaiSan_NB(Ngay, Thang1, Nam);
-
-            DataTable dt = new DataTable();
-
             try
             {
-                int Thang = ChonThang.Month;
-                int Nam1 = ChonThang.Year;
+                frmViewReport frm = new frmViewReport();
+                System.Data.SqlClient.SqlConnection conn;
+                CultureInfo culture = CultureInfo.CreateSpecificCulture("en-US");
+                DateTime ChonThang = datTuNgay.DateTime;
+                string Ngay = ChonThang.Day.ToString();
+                string Thang1 = ChonThang.Month.ToString();
+                string Nam = ChonThang.Year.ToString();
+                frm.rpt = new rptBCDangKyThaiSan_NB(Ngay, Thang1, Nam);
+                DataTable dt = new DataTable();
+
+                DateTime firstDayOfMonth = DateTime.Today;
+                DateTime lastDayOfMonth = DateTime.Today;
+                switch (Commons.Modules.KyHieuDV)
+                {
+                    case "NB":
+                        {
+                            DateTime date = datTuNgay.DateTime;
+                            firstDayOfMonth = new DateTime(date.Year, date.Month, 1);
+                            lastDayOfMonth = firstDayOfMonth.AddMonths(1).AddDays(-1);
+                            break;
+                        }
+                    default:
+                        {
+                            firstDayOfMonth = Convert.ToDateTime(datTuNgay.EditValue);
+                            lastDayOfMonth = Convert.ToDateTime(datDenNgay.EditValue);
+                            break;
+                        }
+                }
 
                 conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
                 conn.Open();
             
                 System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptDanhSachMangThai_NB", conn);
-
                 cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
                 cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
                 cmd.Parameters.Add("@ID_CN", SqlDbType.BigInt).Value = Commons.Modules.iCongNhan;
@@ -123,8 +136,9 @@ namespace Vs.HRM
                 cmd.Parameters.Add("@ID_XN", SqlDbType.Int).Value = this.XN;
                 cmd.Parameters.Add("@ID_TO", SqlDbType.Int).Value = this.TO;
                 cmd.Parameters.Add("@RadTH", SqlDbType.Int).Value = this.TT;
-                cmd.Parameters.Add("@tNgay", SqlDbType.Date).Value = datTuNgay.EditValue;
-                cmd.Parameters.Add("@dNgay", SqlDbType.Date).Value = datDenNgay.EditValue;
+                cmd.Parameters.Add("@tNgay", SqlDbType.DateTime).Value = firstDayOfMonth;
+                cmd.Parameters.Add("@dNgay", SqlDbType.DateTime).Value = lastDayOfMonth;
+                cmd.Parameters.Add("@sKyHieu", SqlDbType.NVarChar).Value = Commons.Modules.KyHieuDV;
                 cmd.CommandType = CommandType.StoredProcedure;
                 System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
 
@@ -134,14 +148,13 @@ namespace Vs.HRM
                 dt = new DataTable();
                 dt = ds.Tables[0].Copy();
                 dt.TableName = "DATA";
+
                 frm.AddDataSource(dt);
 
+                frm.ShowDialog();
             }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            frm.ShowDialog();
+            catch { }
+            
         }
 
         private void InDanhSachTheoDoiCheDoKhamThai()
@@ -201,6 +214,11 @@ namespace Vs.HRM
                 datDenNgay.EditValue = Convert.ToDateTime("01/" + denngay.Month + "/" + denngay.Year).AddDays(-1);
             }
             catch { }
+        }
+
+        private void lblTuNgay_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -44,7 +44,7 @@ namespace Vs.HRM
             Commons.OSystems.SetDateEditFormat(NGAY_HIEU_LUCDateEdit);
 
             //load combo
-            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(DON_VILookUpEdit, Commons.Modules.ObjSystems.DataDonVi(true), "ID_DV", "TEN_DV", "TEN_DV", true, false, false);
+            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(DON_VILookUpEdit, Commons.Modules.ObjSystems.DataDonVi(false), "ID_DV", "TEN_DV", "TEN_DV", true, false, false);
 
             //xí nghiệp 
             Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(XI_NGHIEPLookUpEdit, Commons.Modules.ObjSystems.DataXiNghiep(Convert.ToInt32(-1), false), "ID_XN", "TEN_XN", "TEN_XN", true, false, false);
@@ -56,7 +56,7 @@ namespace Vs.HRM
             Commons.Modules.ObjSystems.MLoadLookUpEdit(ID_LQDLookUpEdit, Commons.Modules.ObjSystems.DataLoaiQuyetDinh(false), "ID_LQD", "TEN_LQD", "TEN_LQD", true);
 
             //ID_LCVLookUpEdit.EditValue = "";
-            Commons.Modules.ObjSystems.MLoadLookUpEdit(ID_LCVLookUpEdit, Commons.Modules.ObjSystems.DataLoaiCV(false, Convert.ToInt32(-1)), "ID_LCV", "TEN_LCV", "TEN_LCV", true);
+            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(ID_LCVLookUpEdit, Commons.Modules.ObjSystems.DataLoaiCV(false, Convert.ToInt32(-1)), "ID_LCV", "TEN_LCV", "TEN_LCV", true);
 
             //ID_CVLookUpEdit.EditValue = "";
             Commons.Modules.ObjSystems.MLoadLookUpEdit(ID_CVLookUpEdit, Commons.Modules.ObjSystems.DataChucVu(false, Convert.ToInt32(-1)), "ID_CV", "TEN_CV", "TEN_CV", true);
@@ -68,32 +68,30 @@ namespace Vs.HRM
             Commons.Modules.ObjSystems.MLoadLookUpEdit(ID_NKLookUpEdit, Commons.Modules.ObjSystems.DataNguoiKy(), "ID_NK", "HO_TEN", "HO_TEN");
 
             //ID_LCV_CULookUpEdit.EditValue = "";
-            Commons.Modules.ObjSystems.MLoadLookUpEdit(ID_LCV_CULookUpEdit, Commons.Modules.ObjSystems.DataLoaiCV(false, Convert.ToInt32(-1)), "ID_LCV", "TEN_LCV", "TEN_LCV", true);
+            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(ID_LCV_CULookUpEdit, Commons.Modules.ObjSystems.DataLoaiCV(false, Convert.ToInt32(-1)), "ID_LCV", "TEN_LCV", "TEN_LCV", true);
 
             //ID_CTL_CULookUpEdit.EditValue = "";
             Commons.Modules.ObjSystems.MLoadLookUpEdit(ID_CTL_CULookUpEdit, Commons.Modules.ObjSystems.DataCTL(false), "ID_CTL", "TEN_CTL", "TEN_CTL", true);
 
             //ID_CTLookUpEdit.EditValue = "";
             Commons.Modules.ObjSystems.MLoadLookUpEdit(ID_CTLLookUpEdit, Commons.Modules.ObjSystems.DataCTL(false), "ID_CTL", "TEN_CTL", "TEN_CTL", true);
-            
+
             Commons.Modules.ObjSystems.MLoadLookUpEdit(cboTinhTrang, Commons.Modules.ObjSystems.DataTinhTrang(false), "ID_TT", "TenTT", "TenTT");
             LoadgrdCongTac(-1);
 
-            if (grvCongTac.RowCount == 0)
-            {
-                this.Load_ChuyenTu();
-            }
-
+            Load_ChuyenTu();
             enableButon(true);
             Commons.Modules.ObjSystems.SetPhanQuyen(windowsUIButton);
             Commons.Modules.sLoad = "";
 
         }
 
-        private void Load_ChuyenTu()
+        public void Load_ChuyenTu()
         {
+            if (grvCongTac.RowCount != 0) return;
             try
             {
+                tableLyLich = new DataTable();
                 tableLyLich.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT DV.ID_DV, DV.TEN_DV, T.ID_TO, T.TEN_TO, XN.ID_XN, XN.TEN_XN, LCV.ID_LCV, LCV.TEN_LCV, CV.ID_CV, CV.TEN_CV , CASE CV.MS_CV WHEN '2' THEN 2 WHEN '1' THEN 1 ELSE 1 END AS ID_CTL, " +
                                                                 "CASE CV.MS_CV WHEN '2' THEN N'Lương sản phẩm' WHEN '1' THEN N'Lương thời gian' ELSE N'Lương thời gian' END AS TEN_CTL, " +
                                                                 "''" + "NHIEM_VU," + "''" + "NOI_CONG_TAC " +
@@ -106,7 +104,7 @@ namespace Vs.HRM
             }
             catch (Exception ex)
             {
-                
+
             }
         }
         private void grvCongTac_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
@@ -133,12 +131,7 @@ namespace Vs.HRM
                 {
                     case "DM":
                         {
-                            Commons.Modules.ObjSystems.MLoadLookUpEdit(ID_LCVLookUpEdit, Commons.Modules.ObjSystems.DataLoaiCV(false, Convert.ToInt32(XI_NGHIEPLookUpEdit.EditValue)), "ID_LCV", "TEN_LCV", "TEN_LCV", true);
-                            break;
-                        }
-                    default:
-                        {
-                            Commons.Modules.ObjSystems.MLoadLookUpEdit(ID_LCVLookUpEdit, Commons.Modules.ObjSystems.DataLoaiCV(false, -1), "ID_LCV", "TEN_LCV", "TEN_LCV", true);
+                            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(ID_LCVLookUpEdit, Commons.Modules.ObjSystems.DataLoaiCV(false, Convert.ToInt32(XI_NGHIEPLookUpEdit.EditValue)), "ID_LCV", "TEN_LCV", "TEN_LCV", true);
                             break;
                         }
                 }
@@ -152,20 +145,34 @@ namespace Vs.HRM
 
         private void ID_LCV_CULookUpEdit_EditValueChanged(object sender, EventArgs e)
         {
-            if (Commons.Modules.sLoad == "0Load") return;
-            ID_CV_CULookUpEdit.Properties.ReadOnly = false;
-            Commons.Modules.ObjSystems.MLoadLookUpEditN(ID_CV_CULookUpEdit, Commons.Modules.ObjSystems.DataChucVu(false, Convert.ToInt32(ID_LCV_CULookUpEdit.EditValue)), "ID_CV", "TEN_CV", "TEN_CV", "", false);
-            ID_CV_CULookUpEdit.ItemIndex = 0;
-            ID_CV_CULookUpEdit.Properties.ReadOnly = true;
+            try
+            {
+                if (Commons.Modules.sLoad == "0Load") return;
+                ID_CV_CULookUpEdit.Properties.ReadOnly = false;
+                Commons.Modules.ObjSystems.MLoadLookUpEditN(ID_CV_CULookUpEdit, Commons.Modules.ObjSystems.DataChucVu(false, Convert.ToInt32(ID_LCV_CULookUpEdit.EditValue)), "ID_CV", "TEN_CV", "TEN_CV", "", false);
+                ID_CV_CULookUpEdit.ItemIndex = 0;
+                ID_CV_CULookUpEdit.Properties.ReadOnly = true;
+                txtMoTaCVCu.EditValue = Convert.ToString(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT MO_TA_CV_BHXH FROM dbo.LOAI_CONG_VIEC WHERE ID_LCV = " + ID_LCV_CULookUpEdit.EditValue + ""));
+            }
+            catch { }
         }
 
         private void ID_LCVLookUpEdit_EditValueChanged(object sender, EventArgs e)
         {
-            if (Commons.Modules.sLoad == "0Load") return;
-            ID_CVLookUpEdit.Properties.ReadOnly = false;
-            Commons.Modules.ObjSystems.MLoadLookUpEdit(ID_CVLookUpEdit, Commons.Modules.ObjSystems.DataChucVu(false, Convert.ToInt32(ID_LCVLookUpEdit.EditValue)), "ID_CV", "TEN_CV", "TEN_CV", false);
-            ID_CVLookUpEdit.ItemIndex = 0;
-            ID_CVLookUpEdit.Properties.ReadOnly = true;
+            try
+            {
+                if (Commons.Modules.sLoad == "0Load") return;
+                if (Commons.Modules.bKiemLCVCV == true)
+                {
+                    ID_CVLookUpEdit.Properties.ReadOnly = false;
+                    Commons.Modules.ObjSystems.MLoadLookUpEdit(ID_CVLookUpEdit, Commons.Modules.ObjSystems.DataChucVu(false, Convert.ToInt32(ID_LCVLookUpEdit.EditValue)), "ID_CV", "TEN_CV", "TEN_CV", false);
+                    ID_CVLookUpEdit.ItemIndex = 0;
+                    ID_CVLookUpEdit.Properties.ReadOnly = true;
+                }
+
+                txtMoTaCVMoi.EditValue = Convert.ToString(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT MO_TA_CV_BHXH FROM dbo.LOAI_CONG_VIEC WHERE ID_LCV = " + ID_LCVLookUpEdit.EditValue + ""));
+            }
+            catch { }
         }
         private void grdCongTac_ProcessGridKey(object sender, KeyEventArgs e)
         {
@@ -221,7 +228,7 @@ namespace Vs.HRM
                 int index = dt.Rows.IndexOf(dt.Rows.Find(id));
                 grvCongTac.FocusedRowHandle = grvCongTac.GetRowHandle(index);
             }
-
+            grvCongTac_FocusedRowChanged(null, null);
         }
 
         #endregion
@@ -260,7 +267,7 @@ namespace Vs.HRM
             DON_VILookUpEdit.Properties.ReadOnly = visible;
             XI_NGHIEPLookUpEdit.Properties.ReadOnly = visible;
             ID_TOLookUpEdit.Properties.ReadOnly = visible;
-            ID_CVLookUpEdit.Properties.ReadOnly = true;
+            ID_CVLookUpEdit.Properties.ReadOnly = visible;
             ID_LCVLookUpEdit.Properties.ReadOnly = visible;
             //MUC_LUONGTextEdit.Properties.ReadOnly = visible;
             GHI_CHUTextEdit.Properties.ReadOnly = visible;
@@ -282,10 +289,10 @@ namespace Vs.HRM
                     NGAY_HIEU_LUCDateEdit.EditValue = DateTime.Today;
                     SO_QUYET_DINHTextEdit.EditValue = "";
 
+                    ID_NKLookUpEdit.EditValue = Commons.Modules.ObjSystems.GetNguoiKyMacDinh();
                     if (grvCongTac.RowCount > 0)
                     {
                         int index = SearchMaxNgayHieuLuc();
-                        ID_NKLookUpEdit.EditValue = tableTTC_CN.Rows[index]["ID_NK"];
                         idToCu = Convert.ToInt32(tableTTC_CN.Rows[index]["ID_TO"]);
                         //MUC_LUONG_CUTextEdit.EditValue = tableTTC_CN.Rows[0]["MUC_LUONG_CU"];
                         DON_VI_CUTextEdit.EditValue = tableTTC_CN.Rows[index]["TEN_DV"];
@@ -299,7 +306,6 @@ namespace Vs.HRM
                     }
                     else
                     {
-                        ID_NKLookUpEdit.EditValue = tableTTC_CN.Rows[0]["ID_NK"];
                         idToCu = Convert.ToInt32(tableLyLich.Rows[0]["ID_TO"]);
                         //MUC_LUONG_CUTextEdit.EditValue = tableTTC_CN.Rows[0]["MUC_LUONG_CU"];
                         DON_VI_CUTextEdit.EditValue = tableLyLich.Rows[0]["TEN_DV"];
@@ -311,7 +317,6 @@ namespace Vs.HRM
                         NHIEM_VUMemoEdit.EditValue = tableLyLich.Rows[0]["NHIEM_VU"];
                         NOI_CONG_TACTextEdit.EditValue = tableLyLich.Rows[0]["NOI_CONG_TAC"];
                     }
-
                     //MUC_LUONGTextEdit.EditValue = 0;
                     GHI_CHUTextEdit.EditValue = "";
                     ID_LQDLookUpEdit.EditValue = null;
@@ -319,8 +324,16 @@ namespace Vs.HRM
                     ID_CNTextEdit.EditValue = tableTTC_CN.Rows[0]["HO_TEN"];
                     ID_CVLookUpEdit.EditValue = null;
                     ID_LCVLookUpEdit.EditValue = null;
-                    ID_CTLLookUpEdit.EditValue = null;
-
+                    Int64 iID_CTL = 0;
+                    try
+                    {
+                        string sSQL = "SELECT TOP 1 ISNULL(ID_CTL,0) ID_CTL FROM dbo.CHUC_VU WHERE ID_CV = " + tableTTC_CN.Rows[0]["ID_CV"];
+                        iID_CTL = Convert.ToInt64(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, sSQL));
+                    }
+                    catch
+                    {
+                    }
+                    ID_CTLLookUpEdit.EditValue = iID_CTL;
                     cboTinhTrang.EditValue = 1;
                     txtTaiLieu.ResetText();
                     DON_VILookUpEdit.EditValue = null;
@@ -328,8 +341,8 @@ namespace Vs.HRM
                     ID_TOLookUpEdit.EditValue = null;
                     try
                     {
-                        txtMoTaCVCu.EditValue = tableTTC_CN.Rows[0]["MO_TA_CV_CU"];
-                        txtMoTaCVMoi.EditValue = tableTTC_CN.Rows[0]["MO_TA_CV_MOI"];
+                        txtMoTaCVCu.EditValue = tableTTC_CN.Rows[0]["MO_TA_CV_MOI"];
+                        txtMoTaCVMoi.EditValue = string.Empty;
                     }
                     catch { }
 
@@ -399,7 +412,7 @@ namespace Vs.HRM
                 try
                 {
                     NGAY_KYDateEdit.EditValue = DateTime.Today;
-                    ID_NKLookUpEdit.EditValue = tableTTC_CN.Rows[0]["ID_NK"];
+                    ID_NKLookUpEdit.EditValue = Commons.Modules.ObjSystems.GetNguoiKyMacDinh();
                     NGAY_HIEU_LUCDateEdit.EditValue = DateTime.Today;
                     SO_QUYET_DINHTextEdit.EditValue = "";
 
@@ -453,20 +466,14 @@ namespace Vs.HRM
                 {
                     case "DM":
                         {
-                            Commons.Modules.ObjSystems.MLoadLookUpEdit(ID_LCVLookUpEdit, Commons.Modules.ObjSystems.DataLoaiCV(false, Convert.ToInt32(XI_NGHIEPLookUpEdit.EditValue)), "ID_LCV", "TEN_LCV", "TEN_LCV", true);
+                            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(ID_LCVLookUpEdit, Commons.Modules.ObjSystems.DataLoaiCV(false, Convert.ToInt32(XI_NGHIEPLookUpEdit.EditValue)), "ID_LCV", "TEN_LCV", "TEN_LCV", true);
                             ID_LCVLookUpEdit.EditValue = grvCongTac.GetFocusedRowCellValue("ID_LCV");
                             break;
                         }
-                    default:
-                        {
-                            Commons.Modules.ObjSystems.MLoadLookUpEdit(ID_LCVLookUpEdit, Commons.Modules.ObjSystems.DataLoaiCV(false, -1), "ID_LCV", "TEN_LCV", "TEN_LCV", true);
-                            ID_LCVLookUpEdit.EditValue = grvCongTac.GetFocusedRowCellValue("ID_LCV");
-                            break;
-                        }
-
                 }
 
-                Commons.Modules.ObjSystems.MLoadLookUpEditN(ID_CVLookUpEdit, Commons.Modules.ObjSystems.DataChucVu(false, Convert.ToInt32(ID_LCVLookUpEdit.EditValue)), "ID_CV", "TEN_CV", "TEN_CV", "", true);
+                Commons.Modules.ObjSystems.MLoadLookUpEditN(ID_CVLookUpEdit, Commons.Modules.ObjSystems.DataChucVu(false, Commons.Modules.bKiemLCVCV ? Convert.ToInt32(ID_LCVLookUpEdit.EditValue) : -1), "ID_CV", "TEN_CV", "TEN_CV", "", true);
+
                 ID_CVLookUpEdit.EditValue = grvCongTac.GetFocusedRowCellValue("ID_CV");
             }
             catch (Exception ex)
@@ -533,7 +540,7 @@ namespace Vs.HRM
             ID_CV_CULookUpEdit.Properties.ReadOnly = true;
             //MUC_LUONG_CUTextEdit.Properties.ReadOnly = true;
 
-            ID_CTL_CULookUpEdit.Properties.ReadOnly = true;
+            //ID_CTL_CULookUpEdit.Properties.ReadOnly = true;
             NOI_CONG_TACTextEdit.Properties.ReadOnly = true;
             NHIEM_VUMemoEdit.Properties.ReadOnly = true;
         }

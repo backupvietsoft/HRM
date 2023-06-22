@@ -31,24 +31,20 @@ namespace Vs.Category
             ItemForTEN_CV.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboNGACH_LUONG, Commons.Modules.ObjSystems.DataNgachLuong(false), "ID_NL", "TEN_NL", "TEN_NL", true, true);
 
-            //ItemForTEN_XN.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
-
-                //DataTable dt = new DataTable();
-                //dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboCongNhan", Commons.Modules.UserName, Commons.Modules.TypeLanguage, 3));
-
-                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboChucVu, Commons.Modules.ObjSystems.DataChucVu(true, Convert.ToInt32(-1)), "ID_CV", "TEN_CV", "TEN_CV");
-
-                //Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboChucVu, Commons.Modules.ObjSystems.DataXiNghiep(-1,false) , "ID_XN", "TEN_XN", "TEN_XN");
+            if (Commons.Modules.bKiemLCVCV)
+            {
+                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboChucVu, Commons.Modules.ObjSystems.DataChucVu(false, Convert.ToInt32(-1)), "ID_CV", "TEN_CV", "TEN_CV");
                 ItemForTEN_CV.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+            }
             string strSQL = "SELECT ISNULL(QL_NBL,0) FROM dbo.THONG_TIN_CHUNG";
-            int QL =  Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, strSQL));
+            int QL = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, strSQL));
             if (QL == 0)
             {
                 lblNGACH_LUONG.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             }
 
             LoadLoaiTO();
-            //Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(ID_CVSearchLookUpEdit, Commons.Modules.ObjSystems.DataChucVu(false), "ID_CV", "TEN_CV", "TEN_CV", true, true);
+
             if (!AddEdit)
             {
                 LoadText();
@@ -126,7 +122,7 @@ namespace Vs.Category
                 txtCHUC_DANH_A.Text = "";
                 txtMO_TA_CV_A.Text = "";
                 cboNGACH_LUONG.EditValue = -1;
-                chkActive.EditValue = false;   
+                chkActive.EditValue = false;
             }
             catch { }
         }
@@ -151,7 +147,7 @@ namespace Vs.Category
                                 Convert.ToInt64(cboChucVu.Text == "" ? cboChucVu.EditValue = null : cboChucVu.EditValue),
                                 (txtSTT.Text == "") ? txtSTT.EditValue = null : txtSTT.EditValue,
                                 txtCHUC_DANH.Text, txtCHUC_DANH_A.Text,
-                                txtMO_TA_CV.Text, txtMO_TA_CV_A.Text , cboNGACH_LUONG.EditValue, chkActive.EditValue
+                                txtMO_TA_CV.Text, txtMO_TA_CV_A.Text, cboNGACH_LUONG.EditValue, chkActive.EditValue
                                 ).ToString();
                             if (AddEdit)
                             {
@@ -234,6 +230,6 @@ namespace Vs.Category
             return false;
         }
 
-        
+
     }
 }

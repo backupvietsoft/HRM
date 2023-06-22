@@ -53,7 +53,7 @@ namespace Vs.Category
             try
             {
                 string sSql = "SELECT ID_NK, HO_TEN, CHUC_VU, CHUC_VU_A, CHUC_VU_H, QUOC_TICH, NGAY_SINH, " +
-                    "SO_CMND, CAP_NGAY, NOI_CAP, DIA_CHI, GIAY_UY_QUYEN, STT, ID_NUQ , ACTIVE , PHAI,NOI_SINH, DIEN_THOAI  " +
+                    "SO_CMND, CAP_NGAY, NOI_CAP, DIA_CHI, GIAY_UY_QUYEN, STT, ID_NUQ , ACTIVE , PHAI,NOI_SINH, DIEN_THOAI, ISNULL(MAC_DINH,0) MAC_DINH  " +
                     "FROM NGUOI_KY_GIAY_TO WHERE ID_NK = " + Id.ToString();
                 DataTable dtTmp = new DataTable();
                 dtTmp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSql));
@@ -93,6 +93,7 @@ namespace Vs.Category
                 chkACTIVE.EditValue = Convert.ToBoolean(dtTmp.Rows[0]["ACTIVE"]);
                 txtNOISINH.EditValue = dtTmp.Rows[0]["NOI_SINH"].ToString();
                 txtDTDD.EditValue = Convert.ToString(dtTmp.Rows[0]["DIEN_THOAI"]);
+                chkMacDinh.EditValue = dtTmp.Rows[0]["MAC_DINH"];
             }
             catch
             {
@@ -121,6 +122,7 @@ namespace Vs.Category
                 chkACTIVE.EditValue = false;
                 txtPhai.EditValue = 1;
                 txtDTDD.EditValue = String.Empty;
+                chkMacDinh.EditValue = false;
             }
             catch { }
         }
@@ -141,7 +143,7 @@ namespace Vs.Category
                                 HO_TENTextEdit.EditValue, CHUC_VUTextEdit.EditValue, CHUC_VU_ATextEdit.EditValue, txtCHUC_VU_H.EditValue,
                                 QUOC_TICHTextEdit.EditValue, NGAY_SINHDateEdit.Text == "" ? null : NGAY_SINHDateEdit.EditValue,
                                 SO_CMNDTextEdit.EditValue, CAP_NGAYDateEdit.Text == "" ? null : CAP_NGAYDateEdit.EditValue, NOI_CAPTextEdit.EditValue,
-                                DIA_CHITextEdit.EditValue, cboID_NUQ.Text == "" ? cboID_NUQ.EditValue = null : cboID_NUQ.EditValue, GIAY_UY_QUYENTextEdit.Text == "" ? GIAY_UY_QUYENTextEdit.EditValue = null : GIAY_UY_QUYENTextEdit.EditValue, chkACTIVE.EditValue, txtPhai.EditValue, txtNOISINH.EditValue, txtDTDD.Text).ToString();
+                                DIA_CHITextEdit.EditValue, cboID_NUQ.Text == "" ? cboID_NUQ.EditValue = null : cboID_NUQ.EditValue, GIAY_UY_QUYENTextEdit.Text == "" ? GIAY_UY_QUYENTextEdit.EditValue = null : GIAY_UY_QUYENTextEdit.EditValue, chkACTIVE.EditValue, txtPhai.EditValue, txtNOISINH.EditValue, txtDTDD.Text,chkMacDinh.Checked).ToString();
                             if (AddEdit)
                             {
                                 if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msg_ThemThanhCongBanCoMuonTiepTuc"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)

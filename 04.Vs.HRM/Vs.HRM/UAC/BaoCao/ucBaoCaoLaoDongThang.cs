@@ -26,8 +26,6 @@ namespace Vs.HRM
             {
                 case "Print":
                     {
-                       
-
                         DateTime dtTN = new DateTime(dtThang.DateTime.Year, dtThang.DateTime.Month, 1);
                         DateTime dtDN = dtTN.AddMonths(1);
                         dtDN = dtDN.AddDays(-1);

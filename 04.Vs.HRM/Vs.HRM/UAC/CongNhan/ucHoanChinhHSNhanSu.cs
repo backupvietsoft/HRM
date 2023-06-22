@@ -141,6 +141,7 @@ namespace Vs.HRM
                 {
                     int index = dt.Rows.IndexOf(dt.Rows.Find(iID_NS));
                     grvData.FocusedRowHandle = grvData.GetRowHandle(index);
+                    
                     grvData.ClearSelection();
                     grvData.SelectRow(index);
                 }

@@ -163,46 +163,57 @@ namespace Vs.HRM
         //hàm load gridview
         private void LoadgrdGiaDinh(int id)
         {
-            DataTable dt = new DataTable();
-            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetListGiaDinh", Commons.Modules.iCongNhan, Commons.Modules.UserName, Commons.Modules.TypeLanguage));
-            dt.PrimaryKey = new DataColumn[] { dt.Columns["ID_GD"] };
-            Commons.Modules.ObjSystems.MLoadXtraGrid(grdGiaDinh, grvGiaDinh, dt, false, true, true, true, true, this.Name);
-            grvGiaDinh.Columns["ID_GD"].Visible = false;
-            grvGiaDinh.Columns["ID_CN"].Visible = false;
-            grvGiaDinh.Columns["ID_QHGD"].Visible = false;
-            grvGiaDinh.Columns["DIA_CHI"].Visible = false;
-            grvGiaDinh.Columns["ID_CN_QH"].Visible = false;
-            grvGiaDinh.Columns["NGUOI_GH"].Visible = false;
-            grvGiaDinh.Columns["MS_BHXH"].Visible = false;
-            grvGiaDinh.Columns["SO_CMND"].Visible = false;
-            grvGiaDinh.Columns["ID_QG"].Visible = false;
-            grvGiaDinh.Columns["ID_DT"].Visible = false;
-            grvGiaDinh.Columns["QH_CH"].Visible = false;
-            grvGiaDinh.Columns["GIOI_TINH"].Visible = false;
-            grvGiaDinh.Columns["MS_HGD"].Visible = false;
-            grvGiaDinh.Columns["HO_TEN_CH"].Visible = false;
-            grvGiaDinh.Columns["SO_HO_KHAU"].Visible = false;
-            grvGiaDinh.Columns["DT_LIEN_HE"].Visible = false;
-            grvGiaDinh.Columns["CHU_HO"].Visible = false;
-            grvGiaDinh.Columns["HO_NGHEO"].Visible = false;
-            grvGiaDinh.Columns["ID_TP_CH"].Visible = false;
-            grvGiaDinh.Columns["ID_QUAN_CH"].Visible = false;
-            grvGiaDinh.Columns["ID_PX_CH"].Visible = false;
-            grvGiaDinh.Columns["THON_XOM_CH"].Visible = false;
-            grvGiaDinh.Columns["DIA_CHI_HK"].Visible = false;
-
-            grvGiaDinh.Columns["NGAY_SINH"].DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
-            grvGiaDinh.Columns["NGAY_SINH"].DisplayFormat.FormatString = "dd/MM/yyyy";
-            lbl_HoTenCN.Text = tenCN.ToUpper();
-
-            if (id != -1)
+            try
             {
-                int index = dt.Rows.IndexOf(dt.Rows.Find(id));
-                grvGiaDinh.FocusedRowHandle = grvGiaDinh.GetRowHandle(index);
+
+
+                DataTable dt = new DataTable();
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetListGiaDinh", Commons.Modules.iCongNhan, Commons.Modules.UserName, Commons.Modules.TypeLanguage));
+                dt.PrimaryKey = new DataColumn[] { dt.Columns["ID_GD"] };
+                Commons.Modules.ObjSystems.MLoadXtraGrid(grdGiaDinh, grvGiaDinh, dt, false, true, true, true, true, this.Name);
+                grvGiaDinh.Columns["ID_GD"].Visible = false;
+                grvGiaDinh.Columns["ID_CN"].Visible = false;
+                grvGiaDinh.Columns["ID_QHGD"].Visible = false;
+                grvGiaDinh.Columns["DIA_CHI"].Visible = false;
+                grvGiaDinh.Columns["ID_CN_QH"].Visible = false;
+                grvGiaDinh.Columns["NGUOI_GH"].Visible = false;
+                grvGiaDinh.Columns["MS_BHXH"].Visible = false;
+                grvGiaDinh.Columns["SO_CMND"].Visible = false;
+                grvGiaDinh.Columns["ID_QG"].Visible = false;
+                grvGiaDinh.Columns["ID_DT"].Visible = false;
+                grvGiaDinh.Columns["QH_CH"].Visible = false;
+                grvGiaDinh.Columns["GIOI_TINH"].Visible = false;
+                grvGiaDinh.Columns["MS_HGD"].Visible = false;
+                grvGiaDinh.Columns["HO_TEN_CH"].Visible = false;
+                grvGiaDinh.Columns["SO_HO_KHAU"].Visible = false;
+                grvGiaDinh.Columns["DT_LIEN_HE"].Visible = false;
+                grvGiaDinh.Columns["CHU_HO"].Visible = false;
+                grvGiaDinh.Columns["HO_NGHEO"].Visible = false;
+                grvGiaDinh.Columns["ID_TP_CH"].Visible = false;
+                grvGiaDinh.Columns["ID_QUAN_CH"].Visible = false;
+                grvGiaDinh.Columns["ID_PX_CH"].Visible = false;
+                grvGiaDinh.Columns["THON_XOM_CH"].Visible = false;
+                grvGiaDinh.Columns["DIA_CHI_HK"].Visible = false;
+
+                grvGiaDinh.Columns["NGAY_SINH"].DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+                grvGiaDinh.Columns["NGAY_SINH"].DisplayFormat.FormatString = "dd/MM/yyyy";
+                lbl_HoTenCN.Text = tenCN.ToUpper();
+
+                if (id != -1)
+                {
+                    int index = dt.Rows.IndexOf(dt.Rows.Find(id));
+                    grvGiaDinh.FocusedRowHandle = grvGiaDinh.GetRowHandle(index);
+                }
+                if (grvGiaDinh.RowCount == 1)
+                {
+                    Bindingdata(false);
+                }
+                grvGiaDinh.Columns["CD_CON_NHO"].Visible = false;
             }
-            if (grvGiaDinh.RowCount == 1)
+
+            catch (Exception ex)
             {
-                Bindingdata(false);
+                Commons.Modules.ObjSystems.MsgError(ex.Message);
             }
         }
         //hàm bingding dữ liệu
@@ -244,6 +255,7 @@ namespace Vs.HRM
                     cboID_PX.EditValue = null;
                     txtTHON_XOM.EditValue = string.Empty;
                     txtDIA_CHI_HK.EditValue = string.Empty;
+                    chkCheDoConNho.Checked = false;
                     // chủ hộ
                 }
                 catch (Exception ex)
@@ -282,6 +294,7 @@ namespace Vs.HRM
                     cboID_PX.EditValue = Convert.ToString(grvGiaDinh.GetFocusedRowCellValue("ID_PX_CH")) == "" ? (object)null : Convert.ToInt64(grvGiaDinh.GetFocusedRowCellValue("ID_PX_CH"));
                     txtTHON_XOM.EditValue = Convert.ToString(grvGiaDinh.GetFocusedRowCellValue("THON_XOM_CH"));
                     txtDIA_CHI_HK.EditValue = Convert.ToString(grvGiaDinh.GetFocusedRowCellValue("DIA_CHI_HK"));
+                    chkCheDoConNho.EditValue = Convert.ToBoolean(grvGiaDinh.GetFocusedRowCellValue("CD_CON_NHO"));
                 }
                 catch { }
             }
@@ -328,6 +341,7 @@ namespace Vs.HRM
             cboGIOI_TINH.Properties.ReadOnly = visible;
             chkCungCongTy.Properties.ReadOnly = visible;
             txtCN.Properties.ReadOnly = true;
+            chkCheDoConNho.Properties.ReadOnly = visible;
         }
         #endregion
 
@@ -365,7 +379,7 @@ namespace Vs.HRM
             cboGIOI_TINH.EditValue,
             flag_CH,
             flag_NT,
-            cothem, chkChuHo.EditValue, chkHoNgheo.EditValue, chkCungCongTy.EditValue, datNGAY_DK.EditValue
+            cothem, chkChuHo.EditValue, chkHoNgheo.EditValue, chkCungCongTy.EditValue, datNGAY_DK.EditValue, chkCheDoConNho.EditValue
                 ));
                 LoadgrdGiaDinh(n);
             }

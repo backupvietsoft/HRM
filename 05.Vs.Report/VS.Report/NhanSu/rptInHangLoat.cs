@@ -26,13 +26,13 @@ namespace Vs.Report
         public rptInHangLoat(string connectSQL,string DataTable, string ReportTypeName, string TenLHDLD, DataTable SbNV, Int64 idIHL  )
         {
             InitializeComponent();
-            BottomMargin.Visible = false;
             reportTypeName = ReportTypeName;
             SQL = connectSQL;
             dataTable = DataTable;
             tenLHDLD = TenLHDLD;
             sbNV = SbNV;
             intInHl = idIHL;
+            this.Controls.Remove(BottomMargin);
             string sSql = "SELECT MARGIN_RIGHT, MARGIN_TOP,MARGIN_LEFT,MARGIN_BOTTOM FROM dbo.IN_HANG_LOAT WHERE ID_IHL = " + idIHL.ToString();
             DataTable dtTmp = new DataTable();
             dtTmp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSql));
@@ -80,6 +80,7 @@ namespace Vs.Report
                 {
                     ds.Tables[i].TableName = (ds.Tables[ds.Tables.Count - 1]).Rows[i][0].ToString();
                 }
+                
                 xrSubreport2.ReportSource = report;
                 conn.Close();
             }

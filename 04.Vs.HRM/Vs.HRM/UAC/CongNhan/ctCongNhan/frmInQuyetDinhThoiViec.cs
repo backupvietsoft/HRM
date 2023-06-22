@@ -407,15 +407,102 @@ namespace Vs.HRM
         }
         private void QuyetDinhThoiViec_SB()
         {
+            #region in cách mới
+            //try
+            //{
+            //    System.Data.SqlClient.SqlConnection conn;
+            //    string sPathFile = "Template\\TemplateSB\\QuyetDinhThoiViec.docx";
+            //    int NNgu = 0;
+            //    if (chkTiengAnh.Checked == true)
+            //    {
+            //        NNgu = 1;
+            //        sPathFile = "Template\\TemplateSB\\QuyetDinhThoiViecTA.docx";
+            //    }
+
+            //    conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+            //    conn.Open();
+
+            //    System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptQuyetDinhThoiViec_SB", conn);
+            //    cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+            //    cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = NNgu;
+            //    cmd.Parameters.Add("@KHDV", SqlDbType.NVarChar).Value = "SB";
+            //    cmd.Parameters.Add("@ID_SQD", SqlDbType.Int).Value = iID_QDTV;
+            //    cmd.Parameters.Add("@ID_CN", SqlDbType.Int).Value = iID_CN;
+            //    cmd.Parameters.Add("@NgayThoiViec", SqlDbType.DateTime).Value = dtNgayThoiViec;
+            //    cmd.Parameters.Add("@Lydo", SqlDbType.Int).Value = 1;
+            //    cmd.CommandType = CommandType.StoredProcedure;
+
+            //    System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+            //    DataSet ds = new DataSet();
+            //    adp.Fill(ds);
+            //    DataTable dt = new DataTable();
+            //    dt = ds.Tables[0].Copy();
+            //    DataRow row = dt.Rows[0];
+
+            //    string sPath = "";
+
+            //    if (!System.IO.Directory.Exists("Report")) // kiểm tra xem forder đã có chưa , nếu chưa có thì tạo 
+            //    {
+            //        System.IO.Directory.CreateDirectory("Report");
+            //    }
+            //    sPath = "Report\\" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".docx";
+
+            //    Document baoCao = new Document(sPathFile);
+
+            //    //fill vào báo cáo
+            //    //var date = Convert.ToDateTime(row["NGAY_BAT_DAU_HD"]);
+            //    //baoCao.MailMerge.Execute(new[] { "NGAY_BD_HD" }, new[] { string.Format("ngày {0} tháng {1} năm {2}", date.Day, date.Month, date.Year) });
+            //    //baoCao.MailMerge.Execute(new[] { "NGAY_KY" }, new[] { string.Format("ngày {0} tháng {1} năm {2}", date.Day, date.Month, date.Year) });
+            //    //baoCao.MailMerge.Execute(new[] { "NGAY_KT_HD" }, new[] { string.Format("ngày {0} tháng {1} năm {2}", date.Day, date.Month, date.Year) });
+            //    foreach (DataColumn item in dt.Columns)
+            //    {
+            //        if (Commons.Modules.ObjSystems.IsnullorEmpty(row[item]))
+            //        {
+            //            baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { "..." });
+
+            //            continue;
+            //        }
+            //        switch (item.DataType.Name)
+            //        {
+            //            case "DateTime":
+            //                {
+            //                    baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { Convert.ToDateTime(row[item]).ToString("dd/MM/yyyy") });
+            //                    break;
+            //                }
+            //            case "Double":
+            //                {
+            //                    baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { string.Format("{0:#,##0}", row[item]) });
+            //                    break;
+            //                }
+            //            default:
+            //                {
+            //                    baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { row[item] });
+            //                    break;
+
+            //                }
+            //        }
+            //    }
+            //    baoCao.SaveAndOpenFile(sPath);
+            //}
+            //catch (Exception ex) { Commons.Modules.ObjSystems.MsgError(ex.Message); }
+
+            #endregion
+
+            #region in cách cũ
             try
             {
                 System.Data.SqlClient.SqlConnection conn;
-                string sPathFile = "Template\\TemplateSB\\QuyetDinhThoiViec.docx";
+                frmViewReport frm = new frmViewReport();
                 int NNgu = 0;
-                if (chkTiengAnh.Checked == true)
+                if (chkTiengAnh.Checked == false)
                 {
+                    frm.rpt = new rptQuyetDinhThoiViec_SB();
+                    NNgu = 0;
+                }
+                else
+                {
+                    frm.rpt = new rptQuyetDinhThoiViecTiengAnh_SB();
                     NNgu = 1;
-                    sPathFile = "Template\\TemplateSB\\QuyetDinhThoiViecTA.docx";
                 }
 
                 conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
@@ -428,7 +515,6 @@ namespace Vs.HRM
                 cmd.Parameters.Add("@ID_SQD", SqlDbType.Int).Value = iID_QDTV;
                 cmd.Parameters.Add("@ID_CN", SqlDbType.Int).Value = iID_CN;
                 cmd.Parameters.Add("@NgayThoiViec", SqlDbType.DateTime).Value = dtNgayThoiViec;
-                cmd.Parameters.Add("@Lydo", SqlDbType.Int).Value = 1;
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
@@ -436,91 +522,12 @@ namespace Vs.HRM
                 adp.Fill(ds);
                 DataTable dt = new DataTable();
                 dt = ds.Tables[0].Copy();
-                DataRow row = dt.Rows[0];
-
-                string sPath = "";
-
-                if (!System.IO.Directory.Exists("Report")) // kiểm tra xem forder đã có chưa , nếu chưa có thì tạo 
-                {
-                    System.IO.Directory.CreateDirectory("Report");
-                }
-                sPath = "Report\\" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".docx";
-
-                Document baoCao = new Document(sPathFile);
-
-                //fill vào báo cáo
-                //var date = Convert.ToDateTime(row["NGAY_BAT_DAU_HD"]);
-                //baoCao.MailMerge.Execute(new[] { "NGAY_BD_HD" }, new[] { string.Format("ngày {0} tháng {1} năm {2}", date.Day, date.Month, date.Year) });
-                //baoCao.MailMerge.Execute(new[] { "NGAY_KY" }, new[] { string.Format("ngày {0} tháng {1} năm {2}", date.Day, date.Month, date.Year) });
-                //baoCao.MailMerge.Execute(new[] { "NGAY_KT_HD" }, new[] { string.Format("ngày {0} tháng {1} năm {2}", date.Day, date.Month, date.Year) });
-                foreach (DataColumn item in dt.Columns)
-                {
-                    if (Commons.Modules.ObjSystems.IsnullorEmpty(row[item]))
-                    {
-                        baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { "..." });
-
-                        continue;
-                    }
-                    switch (item.DataType.Name)
-                    {
-                        case "DateTime":
-                            {
-                                baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { Convert.ToDateTime(row[item]).ToString("dd/MM/yyyy") });
-                                break;
-                            }
-                        case "Double":
-                            {
-                                baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { string.Format("{0:#,##0}", row[item]) });
-                                break;
-                            }
-                        default:
-                            {
-                                baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { row[item] });
-                                break;
-
-                            }
-                    }
-                }
-                baoCao.SaveAndOpenFile(sPath);
+                dt.TableName = "DATA";
+                frm.AddDataSource(dt);
+                frm.ShowDialog();
             }
             catch (Exception ex) { Commons.Modules.ObjSystems.MsgError(ex.Message); }
-        }
-        private void QuyetDinhThoiViec_NB()
-        {
-            System.Data.SqlClient.SqlConnection conn;
-            frmViewReport frm = new frmViewReport();
-            int NNgu = 0;
-            if (chkTiengAnh.Checked == false)
-            {
-                frm.rpt = new rptQuyetDinhThoiViec_SB(DateTime.Now, 1);
-                NNgu = 0;
-            }
-            else
-            {
-                frm.rpt = new rptQuyetDinhThoiViecTiengAnh_SB(DateTime.Now, 1);
-                NNgu = 1;
-            }
-
-            conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
-            conn.Open();
-
-            System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptQuyetDinhThoiViec_SB", conn);
-            cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
-            cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = NNgu;
-            cmd.Parameters.Add("@KHDV", SqlDbType.NVarChar).Value = "SB";
-            cmd.Parameters.Add("@ID_SQD", SqlDbType.Int).Value = iID_QDTV;
-            cmd.Parameters.Add("@ID_CN", SqlDbType.Int).Value = iID_CN;
-            cmd.Parameters.Add("@NgayThoiViec", SqlDbType.DateTime).Value = dtNgayThoiViec;
-            cmd.CommandType = CommandType.StoredProcedure;
-
-            System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
-            DataSet ds = new DataSet();
-            adp.Fill(ds);
-            DataTable dt = new DataTable();
-            dt = ds.Tables[0].Copy();
-            dt.TableName = "DATA";
-            frm.AddDataSource(dt);
-
+            #endregion
         }
         private void QuyetDinhThoiViecTroCap_SB()
         {
@@ -572,18 +579,98 @@ namespace Vs.HRM
         }
         private void QuyetDinhThoiViecBoViec_SB()
         {
+            #region in cách mới
             try
             {
+                //    System.Data.SqlClient.SqlConnection conn;
+                //    frmViewReport frm = new frmViewReport();
+                //    int NNgu = 0;
+                //    string sPathFile = "Template\\TemplateSB\\QuyetDinhBoViec.docx";
+                //    if (chkTiengAnh.Checked == true)
+                //    {
+                //        NNgu = 1;
+                //        sPathFile = "Template\\TemplateSB\\QuyetDinhBoViecTA.docx";
+                //    }
+
+                //    conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                //    conn.Open();
+
+                //    System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptQuyetDinhThoiViec_SB", conn);
+                //    cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                //    cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = NNgu;
+                //    cmd.Parameters.Add("@KHDV", SqlDbType.NVarChar).Value = "SB";
+                //    cmd.Parameters.Add("@ID_SQD", SqlDbType.Int).Value = iID_QDTV;
+                //    cmd.Parameters.Add("@ID_CN", SqlDbType.Int).Value = iID_CN;
+                //    cmd.Parameters.Add("@NgayThoiViec", SqlDbType.DateTime).Value = dtNgayThoiViec;
+                //    cmd.Parameters.Add("@Lydo", SqlDbType.Int).Value = 2;
+                //    cmd.CommandType = CommandType.StoredProcedure;
+
+                //    System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+                //    DataSet ds = new DataSet();
+                //    adp.Fill(ds);
+                //    DataTable dt = new DataTable();
+                //    dt = ds.Tables[0].Copy();
+                //    DataRow row = dt.Rows[0];
+
+                //    string sPath = "";
+
+                //    if (!System.IO.Directory.Exists("Report")) // kiểm tra xem forder đã có chưa , nếu chưa có thì tạo 
+                //    {
+                //        System.IO.Directory.CreateDirectory("Report");
+                //    }
+                //    sPath = "Report\\" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".docx";
+
+                //    Document baoCao = new Document(sPathFile);
+
+                //    //fill vào báo cáo
+                //    //var date = Convert.ToDateTime(row["NGAY_BAT_DAU_HD"]);
+                //    //baoCao.MailMerge.Execute(new[] { "NGAY_BD_HD" }, new[] { string.Format("ngày {0} tháng {1} năm {2}", date.Day, date.Month, date.Year) });
+                //    //baoCao.MailMerge.Execute(new[] { "NGAY_KY" }, new[] { string.Format("ngày {0} tháng {1} năm {2}", date.Day, date.Month, date.Year) });
+                //    //baoCao.MailMerge.Execute(new[] { "NGAY_KT_HD" }, new[] { string.Format("ngày {0} tháng {1} năm {2}", date.Day, date.Month, date.Year) });
+                //    foreach (DataColumn item in dt.Columns)
+                //    {
+                //        if (Commons.Modules.ObjSystems.IsnullorEmpty(row[item]))
+                //        {
+                //            baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { "..." });
+
+                //            continue;
+                //        }
+                //        switch (item.DataType.Name)
+                //        {
+                //            case "DateTime":
+                //                {
+                //                    baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { Convert.ToDateTime(row[item]).ToString("dd/MM/yyyy") });
+                //                    break;
+                //                }
+                //            case "Double":
+                //                {
+                //                    baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { string.Format("{0:#,##0}", row[item]) });
+                //                    break;
+                //                }
+                //            default:
+                //                {
+                //                    baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { row[item] });
+                //                    break;
+
+                //                }
+                //        }
+                //    }
+                //    baoCao.SaveAndOpenFile(sPath);
+                //}
+                //catch (Exception ex) { Commons.Modules.ObjSystems.MsgError(ex.Message); }
+                #endregion
+
+                #region in cách cũ
+                //rptQuyetDinhThoiViecBoViec_SB
                 System.Data.SqlClient.SqlConnection conn;
                 frmViewReport frm = new frmViewReport();
+                frm.rpt = new rptQuyetDinhThoiViecBoViec_SB();
                 int NNgu = 0;
-                string sPathFile = "Template\\TemplateSB\\QuyetDinhBoViec.docx";
                 if (chkTiengAnh.Checked == true)
                 {
                     NNgu = 1;
-                    sPathFile = "Template\\TemplateSB\\QuyetDinhBoViecTA.docx";
+                    frm.rpt = new rptQuyetDinhThoiViecBoViecTiengAnh_SB();
                 }
-
                 conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
                 conn.Open();
 
@@ -602,54 +689,13 @@ namespace Vs.HRM
                 adp.Fill(ds);
                 DataTable dt = new DataTable();
                 dt = ds.Tables[0].Copy();
-                DataRow row = dt.Rows[0];
+                dt.TableName = "DATA";
+                frm.AddDataSource(dt);
 
-                string sPath = "";
-
-                if (!System.IO.Directory.Exists("Report")) // kiểm tra xem forder đã có chưa , nếu chưa có thì tạo 
-                {
-                    System.IO.Directory.CreateDirectory("Report");
-                }
-                sPath = "Report\\" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".docx";
-
-                Document baoCao = new Document(sPathFile);
-
-                //fill vào báo cáo
-                //var date = Convert.ToDateTime(row["NGAY_BAT_DAU_HD"]);
-                //baoCao.MailMerge.Execute(new[] { "NGAY_BD_HD" }, new[] { string.Format("ngày {0} tháng {1} năm {2}", date.Day, date.Month, date.Year) });
-                //baoCao.MailMerge.Execute(new[] { "NGAY_KY" }, new[] { string.Format("ngày {0} tháng {1} năm {2}", date.Day, date.Month, date.Year) });
-                //baoCao.MailMerge.Execute(new[] { "NGAY_KT_HD" }, new[] { string.Format("ngày {0} tháng {1} năm {2}", date.Day, date.Month, date.Year) });
-                foreach (DataColumn item in dt.Columns)
-                {
-                    if (Commons.Modules.ObjSystems.IsnullorEmpty(row[item]))
-                    {
-                        baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { "..." });
-
-                        continue;
-                    }
-                    switch (item.DataType.Name)
-                    {
-                        case "DateTime":
-                            {
-                                baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { Convert.ToDateTime(row[item]).ToString("dd/MM/yyyy") });
-                                break;
-                            }
-                        case "Double":
-                            {
-                                baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { string.Format("{0:#,##0}", row[item]) });
-                                break;
-                            }
-                        default:
-                            {
-                                baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { row[item] });
-                                break;
-
-                            }
-                    }
-                }
-                baoCao.SaveAndOpenFile(sPath);
+                frm.ShowDialog();
             }
             catch (Exception ex) { Commons.Modules.ObjSystems.MsgError(ex.Message); }
+            #endregion
         }
     }
 }

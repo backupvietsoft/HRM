@@ -172,7 +172,7 @@ namespace Vs.HRM
                     NOI_DUNG_THAY_DOIMemoEdit.EditValue = "";
                     THOI_GIAN_THUC_HIENMemoEdit.EditValue = "";
                     NGAY_KYDateEdit.EditValue = DateTime.Today;
-                    NGUOI_KYLookUpEdit.EditValue = null;
+                    NGUOI_KYLookUpEdit.EditValue = Commons.Modules.ObjSystems.GetNguoiKyMacDinh();
                     GHI_CHUMemoEdit.EditValue = "";
                 }
                 catch (Exception ex)

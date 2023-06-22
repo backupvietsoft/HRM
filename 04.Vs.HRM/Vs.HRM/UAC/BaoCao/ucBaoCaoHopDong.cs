@@ -74,8 +74,6 @@ namespace Vs.HRM
                                         }
                                         catch
                                         { }
-
-
                                         frm.ShowDialog();
                                     }
                                     break;
@@ -132,187 +130,180 @@ namespace Vs.HRM
                                     break;
                                 case "rdo_HDKyGiaiDoan":
                                     {
-                                        switch (Commons.Modules.ObjSystems.KyHieuDV(Convert.ToInt64(LK_DON_VI.EditValue)))
+                                        if (chkInHopDong.Checked)
                                         {
+                                            grvCongNhan.CloseEditor();
+                                            grvCongNhan.UpdateCurrentRow();
+                                            string sBT = "sBTTaoHDLD" + Commons.Modules.iIDUser;
+                                            dt = new DataTable();
+                                            try
+                                            {
+                                                dt = ((DataTable)grdCongNhan.DataSource).AsEnumerable().Where(r => r.Field<Boolean>("CHON") == true).CopyToDataTable();
+                                            }
+                                            catch
+                                            {
+                                                Commons.Modules.ObjSystems.MsgWarning(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgChuaChonCongNhan"));
+                                                return;
+                                            }
+                                            if (dt.Rows.Count == 0)
+                                            {
+                                                return;
+                                            }
+                                            Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBT, dt, "");
 
-                                            case "SB":
-                                                {
-                                                    BaoCaoHopDongGiaiDoan_SB();
-                                                    break;
-                                                }
-                                            default:
-                                                if (chkInHopDong.Checked)
-                                                {
-                                                    grvCongNhan.CloseEditor();
-                                                    grvCongNhan.UpdateCurrentRow();
-                                                    string sBT = "sBTTaoHDLD" + Commons.Modules.iIDUser;
-                                                    dt = new DataTable();
-                                                    try
+                                            bool kiemHD = Convert.ToBoolean(((DataTable)grdCongNhan.DataSource).AsEnumerable().Where(r => r.Field<Boolean>("CHON") == true).CopyToDataTable().Rows[0]["HD_GIA_HAN"]);
+                                            switch (Commons.Modules.KyHieuDV)
+                                            {
+                                                case "DM":
                                                     {
-                                                        dt = ((DataTable)grdCongNhan.DataSource).AsEnumerable().Where(r => r.Field<Boolean>("CHON") == true).CopyToDataTable();
+                                                        if (kiemHD)
+                                                        {
+                                                            InHDLD_DM(sBT);
+                                                        }
+                                                        else
+                                                        {
+                                                            InHDTV_DM(sBT);
+                                                        }
+                                                        break;
                                                     }
-                                                    catch
+                                                case "BT":
                                                     {
-                                                        Commons.Modules.ObjSystems.MsgWarning(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgChuaChonCongNhan"));
-                                                        return;
+                                                        if (kiemHD)
+                                                        {
+                                                            InHopDongLaoDong_BT(sBT);
+                                                        }
+                                                        else
+                                                        {
+                                                            InHopDongThuViec_BT(sBT);
+                                                        }
+                                                        break;
                                                     }
-                                                    if (dt.Rows.Count == 0)
+                                                case "NC":
                                                     {
-                                                        return;
+                                                        if (kiemHD)
+                                                        {
+                                                            HopDongLaoDong_NC(sBT);
+                                                        }
+                                                        else
+                                                        {
+                                                            HopDongThuViec_NC(sBT);
+                                                        }
+                                                        break;
                                                     }
-                                                    Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBT, dt, "");
-
-                                                    bool kiemHD = Convert.ToBoolean(((DataTable)grdCongNhan.DataSource).AsEnumerable().Where(r => r.Field<Boolean>("CHON") == true).CopyToDataTable().Rows[0]["HD_GIA_HAN"]);
-                                                    switch (Commons.Modules.KyHieuDV)
+                                                case "NB":
                                                     {
-                                                        case "DM":
-                                                            {
-                                                                if (kiemHD)
-                                                                {
-                                                                    InHDLD_DM(sBT);
-                                                                }
-                                                                else
-                                                                {
-                                                                    InHDTV_DM(sBT);
-                                                                }
-                                                                break;
-                                                            }
-                                                        case "BT":
-                                                            {
-                                                                if (kiemHD)
-                                                                {
-                                                                    InHopDongLaoDong_BT(sBT);
-                                                                }
-                                                                else
-                                                                {
-                                                                    InHopDongThuViec_BT(sBT);
-                                                                }
-                                                                break;
-                                                            }
-                                                        case "NC":
-                                                            {
-                                                                if (kiemHD)
-                                                                {
-                                                                    HopDongLaoDong_NC(sBT);
-                                                                }
-                                                                else
-                                                                {
-                                                                    HopDongThuViec_NC(sBT);
-                                                                }
-                                                                break;
-                                                            }
-                                                        case "NB":
-                                                            {
-                                                                if (kiemHD)
-                                                                {
-                                                                    HopDongLaoDong_NB(sBT);
-                                                                }
-                                                                else
-                                                                {
-                                                                    HopDongThuViec_NB(sBT);
-                                                                }
-                                                                break;
-                                                            }
-                                                        case "HN":
-                                                            {
-                                                                HopDongLaoDong_HN(sBT);
-                                                                break;
-                                                            }
-                                                        case "SB":
-                                                            {
-                                                                if (kiemHD)
-                                                                {
-                                                                    HopDongLaoDong_SB(sBT);
-                                                                }
-                                                                else
-                                                                {
-                                                                    InHopDongThuViec_SB(sBT);
-                                                                }
-                                                                break;
-                                                            }
-                                                        case "VV":
-                                                            {
-                                                                if (kiemHD)
-                                                                {
-                                                                    InHopDongLaoDong_VV(sBT);
-                                                                }
-                                                                else
-                                                                {
-                                                                    InHopDongThuViec_VV(sBT);
-                                                                }
-                                                                break;
-                                                            }
-                                                        case "AP":
-                                                            {
-                                                                InHopDongLaoDong_AP(sBT);
-                                                                break;
-                                                            }
-                                                        case "TG":
-                                                            {
-                                                                if (kiemHD)
-                                                                {
-                                                                    InHopDongLaoDong_TG(sBT);
-                                                                }
-                                                                else
-                                                                {
-                                                                    InHopDongThuViec_TG(sBT);
-                                                                }
-                                                                break;
-                                                            }
-
-                                                        case "MT":
-                                                            {
-                                                                if (kiemHD)
-                                                                {
-                                                                    InHopDongLaoDong_MT(sBT);
-                                                                }
-                                                                else
-                                                                {
-                                                                    InHopDongThuViec_MT(sBT);
-                                                                }
-                                                                break;
-                                                            }
+                                                        if (kiemHD)
+                                                        {
+                                                            HopDongLaoDong_NB(sBT);
+                                                        }
+                                                        else
+                                                        {
+                                                            HopDongThuViec_NB(sBT);
+                                                        }
+                                                        break;
                                                     }
-                                                }
-                                                else
-                                                {
-                                                    System.Data.SqlClient.SqlConnection conn2;
-                                                    dt = new DataTable();
-                                                    string sTieuDe2 = "DANH SÁCH CÔNG NHÂN KÝ HỢP ĐỒNG";
-                                                    frm.rpt = new rptBCHopDongHetHan(lk_NgayIn.DateTime, sTieuDe2, dTuNgay.DateTime, dDenNgay.DateTime);
-
-                                                    try
+                                                case "HN":
                                                     {
-                                                        conn2 = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
-                                                        conn2.Open();
-
-                                                        System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptBCHopDongGiaiDoan", conn2);
-
-                                                        cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
-                                                        cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
-                                                        cmd.Parameters.Add("@Dvi", SqlDbType.Int).Value = LK_DON_VI.EditValue;
-                                                        cmd.Parameters.Add("@XN", SqlDbType.Int).Value = LK_XI_NGHIEP.EditValue;
-                                                        cmd.Parameters.Add("@TO", SqlDbType.Int).Value = LK_TO.EditValue;
-                                                        cmd.Parameters.Add("@TNgay", SqlDbType.Date).Value = dTuNgay.DateTime;
-                                                        cmd.Parameters.Add("@DNgay", SqlDbType.Date).Value = dDenNgay.DateTime;
-                                                        cmd.CommandType = CommandType.StoredProcedure;
-                                                        System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
-
-
-                                                        DataSet ds = new DataSet();
-                                                        adp.Fill(ds);
-                                                        dt = new DataTable();
-                                                        dt = ds.Tables[0].Copy();
-                                                        dt.TableName = "DA_TA";
-                                                        frm.AddDataSource(dt);
-                                                        frm.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung());
+                                                        HopDongLaoDong_HN(sBT);
+                                                        break;
                                                     }
-                                                    catch
-                                                    { }
-                                                    frm.ShowDialog();
-                                                }
+                                                case "SB":
+                                                    {
+                                                        if (kiemHD)
+                                                        {
+                                                            HopDongLaoDong_SB(sBT);
+                                                        }
+                                                        else
+                                                        {
+                                                            InHopDongThuViec_SB(sBT);
+                                                        }
+                                                        break;
+                                                    }
+                                                case "VV":
+                                                    {
+                                                        if (kiemHD)
+                                                        {
+                                                            InHopDongLaoDong_VV(sBT);
+                                                        }
+                                                        else
+                                                        {
+                                                            InHopDongThuViec_VV(sBT);
+                                                        }
+                                                        break;
+                                                    }
+                                                case "AP":
+                                                    {
+                                                        InHopDongLaoDong_AP(sBT);
+                                                        break;
+                                                    }
+                                                case "TG":
+                                                    {
+                                                        if (kiemHD)
+                                                        {
+                                                            InHopDongLaoDong_TG(sBT);
+                                                        }
+                                                        else
+                                                        {
+                                                            InHopDongThuViec_TG(sBT);
+                                                        }
+                                                        break;
+                                                    }
 
-                                                break;
+                                                case "MT":
+                                                    {
+                                                        if (kiemHD)
+                                                        {
+                                                            InHopDongLaoDong_MT(sBT);
+                                                        }
+                                                        else
+                                                        {
+                                                            InHopDongThuViec_MT(sBT);
+                                                        }
+                                                        break;
+                                                    }
+                                            }
+                                        }
+                                        else
+                                        {
+                                            if(Commons.Modules.KyHieuDV == "SB")
+                                            {
+                                                BaoCaoHopDongGiaiDoan_SB();
+                                                return;
+                                            }
+                                            System.Data.SqlClient.SqlConnection conn2;
+                                            dt = new DataTable();
+                                            string sTieuDe2 = "DANH SÁCH CÔNG NHÂN KÝ HỢP ĐỒNG";
+                                            frm.rpt = new rptBCHopDongHetHan(lk_NgayIn.DateTime, sTieuDe2, dTuNgay.DateTime, dDenNgay.DateTime);
+
+                                            try
+                                            {
+                                                conn2 = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                                                conn2.Open();
+
+                                                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptBCHopDongGiaiDoan", conn2);
+
+                                                cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                                                cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                                                cmd.Parameters.Add("@Dvi", SqlDbType.Int).Value = LK_DON_VI.EditValue;
+                                                cmd.Parameters.Add("@XN", SqlDbType.Int).Value = LK_XI_NGHIEP.EditValue;
+                                                cmd.Parameters.Add("@TO", SqlDbType.Int).Value = LK_TO.EditValue;
+                                                cmd.Parameters.Add("@TNgay", SqlDbType.Date).Value = dTuNgay.DateTime;
+                                                cmd.Parameters.Add("@DNgay", SqlDbType.Date).Value = dDenNgay.DateTime;
+                                                cmd.CommandType = CommandType.StoredProcedure;
+                                                System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+
+
+                                                DataSet ds = new DataSet();
+                                                adp.Fill(ds);
+                                                dt = new DataTable();
+                                                dt = ds.Tables[0].Copy();
+                                                dt.TableName = "DA_TA";
+                                                frm.AddDataSource(dt);
+                                                frm.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung());
+                                            }
+                                            catch
+                                            { }
+                                            frm.ShowDialog();
                                         }
                                     }
                                     break;
@@ -1844,86 +1835,131 @@ namespace Vs.HRM
         }
         private void HopDongLaoDong_SB(string sBT)
         {
-            DataTable dt = new DataTable();
-            DataTable dtbc = new DataTable();
+            #region in cách mới
+            //DataTable dt = new DataTable();
+            //DataTable dtbc = new DataTable();
+            //try
+            //{
+            //    System.Data.SqlClient.SqlConnection conn1;
+            //    dt = new DataTable();
+            //    frmViewReport frm = new frmViewReport();
+            //    frm.rpt = new rptHopDongLaoDong_SB(DateTime.Now);
+
+            //    conn1 = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+            //    conn1.Open();
+
+            //    System.Data.SqlClient.SqlCommand cmd1 = new System.Data.SqlClient.SqlCommand("rptHopDongLaoDong_SB", conn1);
+            //    cmd1.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+            //    cmd1.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+            //    cmd1.Parameters.Add("@sBT", SqlDbType.NVarChar).Value = sBT;
+            //    cmd1.Parameters.Add("@ID_CN", SqlDbType.Int).Value = -1;
+            //    cmd1.Parameters.Add("@ID_SQD", SqlDbType.Int).Value = -1;
+            //    cmd1.CommandType = CommandType.StoredProcedure;
+
+            //    System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd1);
+            //    DataSet ds = new DataSet();
+            //    adp.Fill(ds);
+            //    dt = new DataTable();
+            //    dt = ds.Tables[0].Copy();
+            //    string sPath = "";
+            //    sPath = SaveFiles("Work file (*.doc)|*.docx");
+            //    if (sPath == "") return;
+
+            //    sPath = sPath.Substring(0, sPath.IndexOf(DateTime.Now.ToString("yyyyMMdd")));
+            //    for (int i = 0; i < dt.Rows.Count; i++)
+            //    {
+            //        DataRow row = dt.Rows[i];
+            //        string sPathTemp = "";
+            //        sPathTemp = sPath + Convert.ToString(dt.Rows[i]["MS_CN"]) + "_HĐLĐ.docx";
+            //        if (System.IO.File.Exists(sPathTemp))
+            //        {
+            //            try
+            //            {
+            //                FileInfo file = new FileInfo(sPathTemp);
+            //                file.Delete();
+            //            }
+            //            catch { }
+            //        }
+            //        //fill vào báo cáo
+            //        Document baoCao = new Document("Template\\TemplateSB\\HopDongLaoDong.doc");
+            //        foreach (DataColumn item in dt.Columns)
+            //        {
+            //            if (Commons.Modules.ObjSystems.IsnullorEmpty(row[item]))
+            //            {
+            //                baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { "" });
+
+            //                continue;
+            //            }
+            //            switch (item.DataType.Name)
+            //            {
+            //                case "DateTime":
+            //                    {
+            //                        baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { Convert.ToDateTime(row[item]).ToString("dd/MM/yyyy") });
+            //                        break;
+            //                    }
+            //                case "Double":
+            //                    {
+            //                        baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { string.Format("{0:#,##0}", row[item]) });
+            //                        break;
+            //                    }
+            //                default:
+            //                    {
+            //                        baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { row[item] });
+            //                        break;
+
+            //                    }
+            //            }
+            //        }
+            //        baoCao.Save(sPathTemp);
+            //        //Process.Start(sPath);
+            //    }
+            //    Commons.Modules.ObjSystems.Alert(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgInThanhCong"), Commons.Form_Alert.enmType.Success);
+            //}
+            //catch { }
+            #endregion
+
+            #region in cách cũ
             try
             {
-                System.Data.SqlClient.SqlConnection conn1;
+                DataTable dt = new DataTable();
+                DataTable dtbc = new DataTable();
+                System.Data.SqlClient.SqlConnection conn;
                 dt = new DataTable();
                 frmViewReport frm = new frmViewReport();
-                frm.rpt = new rptHopDongLaoDong_SB(DateTime.Now);
+                frm.rpt = new rptHopDongLaoDong_SB(lk_NgayIn.DateTime);
 
-                conn1 = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
-                conn1.Open();
+                conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                conn.Open();
 
-                System.Data.SqlClient.SqlCommand cmd1 = new System.Data.SqlClient.SqlCommand("rptHopDongLaoDong_SB", conn1);
-                cmd1.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
-                cmd1.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
-                cmd1.Parameters.Add("@sBT", SqlDbType.NVarChar).Value = sBT;
-                cmd1.Parameters.Add("@ID_CN", SqlDbType.Int).Value = -1;
-                cmd1.Parameters.Add("@ID_SQD", SqlDbType.Int).Value = -1;
-                cmd1.CommandType = CommandType.StoredProcedure;
+                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptHopDongLaoDong_SB", conn);
+                cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                cmd.Parameters.Add("@ID_CN", SqlDbType.Int).Value = -1;
+                cmd.Parameters.Add("@ID_SQD", SqlDbType.Int).Value = -1;
+                cmd.Parameters.Add("@sBT", SqlDbType.NVarChar).Value = sBT;
+                cmd.CommandType = CommandType.StoredProcedure;
 
-                System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd1);
+                System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
                 DataSet ds = new DataSet();
                 adp.Fill(ds);
                 dt = new DataTable();
                 dt = ds.Tables[0].Copy();
-                string sPath = "";
-                sPath = SaveFiles("Work file (*.doc)|*.docx");
-                if (sPath == "") return;
+                dt.TableName = "DATA";
+                frm.AddDataSource(dt);
 
-                sPath = sPath.Substring(0, sPath.IndexOf(DateTime.Now.ToString("yyyyMMdd")));
-                for (int i = 0; i < dt.Rows.Count; i++)
-                {
-                    DataRow row = dt.Rows[i];
-                    string sPathTemp = "";
-                    sPathTemp = sPath + Convert.ToString(dt.Rows[i]["MS_CN"]) + "_HĐLĐ.docx";
-                    if (System.IO.File.Exists(sPathTemp))
-                    {
-                        try
-                        {
-                            FileInfo file = new FileInfo(sPathTemp);
-                            file.Delete();
-                        }
-                        catch { }
-                    }
-                    //fill vào báo cáo
-                    Document baoCao = new Document("Template\\TemplateSB\\HopDongLaoDong.doc");
-                    foreach (DataColumn item in dt.Columns)
-                    {
-                        if (Commons.Modules.ObjSystems.IsnullorEmpty(row[item]))
-                        {
-                            baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { "" });
+                dtbc = new DataTable();
+                dtbc = ds.Tables[1].Copy();
+                dtbc.TableName = "NOI_DUNG";
+                frm.AddDataSource(dtbc);
 
-                            continue;
-                        }
-                        switch (item.DataType.Name)
-                        {
-                            case "DateTime":
-                                {
-                                    baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { Convert.ToDateTime(row[item]).ToString("dd/MM/yyyy") });
-                                    break;
-                                }
-                            case "Double":
-                                {
-                                    baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { string.Format("{0:#,##0}", row[item]) });
-                                    break;
-                                }
-                            default:
-                                {
-                                    baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { row[item] });
-                                    break;
+                frm.ShowDialog();
 
-                                }
-                        }
-                    }
-                    baoCao.Save(sPathTemp);
-                    //Process.Start(sPath);
-                }
-                Commons.Modules.ObjSystems.Alert(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgInThanhCong"), Commons.Form_Alert.enmType.Success);
             }
-            catch { }
+            catch (Exception ex)
+            {
+                Commons.Modules.ObjSystems.MsgError(ex.Message);
+            }
+            #endregion
         }
         private void InHopDongLaoDong_VV(string sBT)
         {
@@ -2008,6 +2044,7 @@ namespace Vs.HRM
         }
         private void InHopDongLaoDong_TG(string sBT)
         {
+            #region In cách mới
             try
             {
                 //lấy data dữ liệu
@@ -2086,6 +2123,8 @@ namespace Vs.HRM
             {
                 MessageBox.Show(ex.Message);
             }
+            #endregion
+
         }
         private void InHopDongLaoDong_BT(string sBT)
         {

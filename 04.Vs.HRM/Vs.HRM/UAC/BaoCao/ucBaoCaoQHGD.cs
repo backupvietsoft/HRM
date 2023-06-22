@@ -192,10 +192,10 @@ namespace Vs.HRM
                 throw ex;
             }
             Excel.Range row6_TieuDe_BaoCao = oSheet.get_Range("A6", lastColumn + "6"); // = A6 - N6
-            FormatTieuDeBaoCao(ref row6_TieuDe_BaoCao, true, true, 18, fontName, "@", XlHAlign.xlHAlignCenter, XlVAlign.xlVAlignCenter, "DANH SÁCH ĐĂNG KÝ CON DƯỚI 6 TUỔI CỦA NỮ CBCNV NHÀ MÁY");
+            FormatTieuDeBaoCao(ref row6_TieuDe_BaoCao, true, true, 18, fontName, "@", XlHAlign.xlHAlignCenter, XlVAlign.xlVAlignCenter, "DANH SÁCH ĐĂNG KÝ CON DƯỚI 6 TUỔI CỦA CBCNV NHÀ MÁY");
 
             Excel.Range row7_TieuDe_BaoCao = oSheet.get_Range("A7", lastColumn + "7"); // = A7 - N7
-            FormatTieuDeBaoCao(ref row7_TieuDe_BaoCao, true, true, 11, fontName, "@", XlHAlign.xlHAlignCenter, XlVAlign.xlVAlignCenter, "Từ ngày: " + System.Convert.ToDateTime(tuNgay.EditValue).ToString("dd/MM/yyyy") + "   Đến ngày: " + System.Convert.ToDateTime(denNgay.EditValue).ToString("dd/MM/yyyy"));
+            FormatTieuDeBaoCao(ref row7_TieuDe_BaoCao, true, true, 11, fontName, "@", XlHAlign.xlHAlignCenter, XlVAlign.xlVAlignCenter, rdo_ConCongNhan.SelectedIndex == 2 ? "Từ ngày: " + System.Convert.ToDateTime(tuNgay.EditValue).ToString("dd/MM/yyyy") + "   Đến ngày: " + System.Convert.ToDateTime(denNgay.EditValue).ToString("dd/MM/yyyy") : "Tháng " + System.Convert.ToDateTime(denNgay.EditValue).ToString("MM/yyyy"));
 
             return;
         }
@@ -330,8 +330,6 @@ namespace Vs.HRM
             borders[XlBordersIndex.xlDiagonalUp].LineStyle = XlLineStyle.xlLineStyleNone;
             borders[XlBordersIndex.xlDiagonalDown].LineStyle = XlLineStyle.xlLineStyleNone;
         }
-
-
         public void CreateHeaderTable_DSGDCBCNV(int dt, ref Excel.Worksheet oSheet, string fontName = "Times New Roman", int fontSizeNoiDung = 11, string lastColumn = "", int RowCount = 0)
         {
 
@@ -736,95 +734,56 @@ namespace Vs.HRM
                 {
                     case "Print":
                         {
-                            if (Commons.Modules.KyHieuDV != "NB")
-                            {
-                                System.Data.SqlClient.SqlConnection conn;
-                                DataTable dt = new DataTable();
-                                frmViewReport frm = new frmViewReport();
-                                frm.rpt = new rptDSGiaDinh(lk_NgayIn.DateTime);
-                                try
-                                {
-                                    conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
-                                    conn.Open();
-
-                                    System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptDSGiaDinh", conn);
-
-                                    cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
-                                    cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
-                                    cmd.Parameters.Add("@DVi", SqlDbType.Int).Value = lkDonVi.EditValue;
-                                    cmd.Parameters.Add("@XN", SqlDbType.Int).Value = lkXiNghiep.EditValue;
-                                    cmd.Parameters.Add("@TO", SqlDbType.Int).Value = lkTo.EditValue;
-                                    cmd.Parameters.Add("@Type", SqlDbType.Int).Value = rdo_ConCongNhan.SelectedIndex;
-                                    cmd.Parameters.Add("@Ngay", SqlDbType.Date).Value = lk_NgayTinh.EditValue;
-                                    cmd.Parameters.Add("@TuoiTu", SqlDbType.Int).Value = txt_Tu.Text.ToString() == "" ? 0 : txt_Tu.EditValue;
-                                    cmd.Parameters.Add("@TuoiDen", SqlDbType.Int).Value = txt_Den.Text.ToString() == "" ? 99 : txt_Den.EditValue;
-                                    cmd.Parameters.Add("@LoaiQH", SqlDbType.Int).Value = lk_QuanHeGD.EditValue;
-                                    cmd.Parameters.Add("@TuNgay", SqlDbType.Date).Value = tuNgay.EditValue;
-                                    cmd.Parameters.Add("@DenNgay", SqlDbType.Date).Value = denNgay.EditValue;
-                                    cmd.CommandType = CommandType.StoredProcedure;
-                                    System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
-                                    DataSet ds = new DataSet();
-                                    adp.Fill(ds);
-                                    dt = new DataTable();
-                                    dt = ds.Tables[0].Copy();
-                                    dt.TableName = "DA_TA";
-                                    frm.AddDataSource(dt);
-                                    frm.ShowDialog();
-                                }
-                                catch { }
-                            }
-                            else
-                            {
-                                switch (rdo_ConCongNhan.SelectedIndex)
-                                {
-                                    case 0:
+                            switch (rdo_ConCongNhan.SelectedIndex)
+                            {   
+                                case 0:
+                                    {
+                                        DanhSachGDCBCNV();
+                                        break;
+                                    }
+                                case 1:
+                                    {
+                                        System.Data.SqlClient.SqlConnection conn;
+                                        DataTable dt = new DataTable();
+                                        frmViewReport frm = new frmViewReport();
+                                        frm.rpt = new rptDSGiaDinh(lk_NgayIn.DateTime);
+                                        try
                                         {
-                                            DanhSachGDCBCNV();
-                                            break;
-                                        }
-                                    case 1:
-                                        {
-                                            System.Data.SqlClient.SqlConnection conn;
-                                            DataTable dt = new DataTable();
-                                            frmViewReport frm = new frmViewReport();
-                                            frm.rpt = new rptDSGiaDinh(lk_NgayIn.DateTime);
-                                            try
-                                            {
-                                                conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
-                                                conn.Open();
+                                            conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                                            conn.Open();
 
-                                                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptDSGiaDinh", conn);
+                                            System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptDSGiaDinh", conn);
 
-                                                cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
-                                                cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
-                                                cmd.Parameters.Add("@DVi", SqlDbType.Int).Value = lkDonVi.EditValue;
-                                                cmd.Parameters.Add("@XN", SqlDbType.Int).Value = lkXiNghiep.EditValue;
-                                                cmd.Parameters.Add("@TO", SqlDbType.Int).Value = lkTo.EditValue;
-                                                cmd.Parameters.Add("@Type", SqlDbType.Int).Value = rdo_ConCongNhan.SelectedIndex;
-                                                cmd.Parameters.Add("@Ngay", SqlDbType.Date).Value = lk_NgayTinh.EditValue;
-                                                cmd.Parameters.Add("@TuoiTu", SqlDbType.Int).Value = txt_Tu.Text.ToString() == "" ? 0 : txt_Tu.EditValue;
-                                                cmd.Parameters.Add("@TuoiDen", SqlDbType.Int).Value = txt_Den.Text.ToString() == "" ? 99 : txt_Den.EditValue;
-                                                cmd.Parameters.Add("@LoaiQH", SqlDbType.Int).Value = lk_QuanHeGD.EditValue;
-                                                cmd.CommandType = CommandType.StoredProcedure;
-                                                System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
-                                                DataSet ds = new DataSet();
-                                                adp.Fill(ds);
-                                                dt = new DataTable();
-                                                dt = ds.Tables[0].Copy();
-                                                dt.TableName = "DA_TA";
-                                                frm.AddDataSource(dt);
-                                                frm.ShowDialog();
-                                            }
-                                            catch { }
-                                            break;
+                                            cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                                            cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                                            cmd.Parameters.Add("@DVi", SqlDbType.Int).Value = lkDonVi.EditValue;
+                                            cmd.Parameters.Add("@XN", SqlDbType.Int).Value = lkXiNghiep.EditValue;
+                                            cmd.Parameters.Add("@TO", SqlDbType.Int).Value = lkTo.EditValue;
+                                            cmd.Parameters.Add("@Type", SqlDbType.Int).Value = rdo_ConCongNhan.SelectedIndex;
+                                            cmd.Parameters.Add("@Ngay", SqlDbType.Date).Value = lk_NgayTinh.EditValue;
+                                            cmd.Parameters.Add("@TuoiTu", SqlDbType.Int).Value = txt_Tu.Text.ToString() == "" ? 0 : txt_Tu.EditValue;
+                                            cmd.Parameters.Add("@TuoiDen", SqlDbType.Int).Value = txt_Den.Text.ToString() == "" ? 99 : txt_Den.EditValue;
+                                            cmd.Parameters.Add("@LoaiQH", SqlDbType.Int).Value = lk_QuanHeGD.EditValue;
+                                            cmd.CommandType = CommandType.StoredProcedure;
+                                            System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+                                            DataSet ds = new DataSet();
+                                            adp.Fill(ds);
+                                            dt = new DataTable();
+                                            dt = ds.Tables[0].Copy();
+                                            dt.TableName = "DA_TA";
+                                            frm.AddDataSource(dt);
+                                            frm.ShowDialog();
                                         }
+                                        catch { }
+                                        break;
+                                    }
 
-                                    case 2:
-                                        {
-                                            DanhSachDangKyConDuoiSauTuoi();
-                                            break;
-                                        }
-                                }
+                                case 2:
+                                case 3:
+                                    {
+                                        DanhSachDangKyConDuoiSauTuoi();
+                                        break;
+                                    }
                             }
                             break;
                         }
@@ -858,9 +817,9 @@ namespace Vs.HRM
 
         private void rdo_ConCongNhan_SelectedIndexChanged(object sender, EventArgs e)
         {
-            switch (rdo_ConCongNhan.SelectedIndex)
+            switch (rdo_ConCongNhan.Properties.Items[rdo_ConCongNhan.SelectedIndex].Tag)
             {
-                case 0:
+                case "rdo_DenNgay":
                     {
                         lk_NgayTinh.Enabled = true;
                         txt_Tu.Enabled = false;
@@ -873,7 +832,7 @@ namespace Vs.HRM
                         checkBoxLamCungCongTy.Enabled = true;
                     }
                     break;
-                case 1:
+                case "rdo_DoTuoi":
                     {
                         lk_NgayTinh.Enabled = false;
                         txt_Tu.Enabled = true;
@@ -886,7 +845,7 @@ namespace Vs.HRM
                         checkBoxLamCungCongTy.Enabled = false;
                     }
                     break;
-                case 2:
+                case "rdo_DuoiSauTuoi":
                     {
                         tuNgay.Enabled = true;
                         denNgay.Enabled = true;
@@ -897,9 +856,21 @@ namespace Vs.HRM
                         txt_Den.Enabled = false;
                         lk_QuanHeGD.Enabled = false;
                         checkBoxLamCungCongTy.Enabled = false;
-
+                        break;
                     }
-                    break;
+                case "rdo_DSDKCon6TuoiTongHop":
+                    {
+                        tuNgay.Enabled = false;
+                        denNgay.Enabled = true;
+                        lk_NgayTinh.Enabled = false;
+
+                        txt_Tu.Enabled = false;
+                        txt_Den.Enabled = false;
+                        lk_QuanHeGD.Enabled = false;
+                        checkBoxLamCungCongTy.Enabled = false;
+                        denNgay.EditValue = Commons.Modules.ObjSystems.setDate1Month(denNgay.DateTime, 1);
+                        break;
+                    }
 
                 default:
                     lk_NgayTinh.Enabled = true;

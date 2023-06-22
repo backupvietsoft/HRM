@@ -103,7 +103,8 @@ namespace Vs.HRM
                                             {
                                                 if (kiemHD)
                                                 {
-                                                    HopDongLaoDong_SB();
+                                                    HopDongLaoDong_SB_Report();
+                                                    //HopDongLaoDong_SB();
                                                 }
                                                 else
                                                 {
@@ -532,6 +533,7 @@ namespace Vs.HRM
                 cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
                 cmd.Parameters.Add("@ID_CN", SqlDbType.Int).Value = idCN;
                 cmd.Parameters.Add("@ID_SQD", SqlDbType.Int).Value = idHD;
+                cmd.Parameters.Add("@sBT", SqlDbType.NVarChar).Value = "";
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
@@ -817,84 +819,6 @@ namespace Vs.HRM
                 frm.ShowDialog();
             }
             catch { }
-        }
-        private void HopDongThoiVu_TG()
-        {
-            DataTable dt = new DataTable();
-            DataTable dtbc = new DataTable();
-            try
-            {
-                System.Data.SqlClient.SqlConnection conn1;
-                dt = new DataTable();
-                frmViewReport frm = new frmViewReport();
-                frm.rpt = new rptHopDongThoiVu_HN(dNgayIn.DateTime);
-
-                conn1 = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
-                conn1.Open();
-
-                System.Data.SqlClient.SqlCommand cmd1 = new System.Data.SqlClient.SqlCommand("rptHopDongThoiVu_TG", conn1);
-                cmd1.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
-                cmd1.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
-                cmd1.Parameters.Add("@ID_CN", SqlDbType.Int).Value = idCN;
-                cmd1.Parameters.Add("@ID_SQD", SqlDbType.Int).Value = idHD;
-                cmd1.CommandType = CommandType.StoredProcedure;
-
-                System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd1);
-                DataSet ds = new DataSet();
-                adp.Fill(ds);
-                dt = new DataTable();
-                dt = ds.Tables[0].Copy();
-                DataTable dt2 = new DataTable();
-                dt2 = ds.Tables[1].Copy();
-
-                DataRow row = dt.Rows[0];
-                string sPath = "";
-                sPath = Commons.Modules.MExcel.SaveFiles("Work file (*.doc)|*.docx");
-                if (sPath == "") return;
-
-                //fill vào báo cáo
-                //var date = Convert.ToDateTime(row["NGAY_BAT_DAU_HD"]);
-                var date = dNgayIn.DateTime;
-                string sFileName = Convert.ToString(dt2.Rows[0][0]) != "3" ? "HopDongThoiVuCL_TG.doc" : "HopDongThoiVuCT.doc";
-                Document baoCao = new Document("Template\\TemplateTG\\" + sFileName);
-                //baoCao.MailMerge.Execute(new[] { "NGAY_BD_HD" }, new[] { string.Format("ngày {0} tháng {1} năm {2}", date.Day, date.Month, date.Year) });
-                //baoCao.MailMerge.Execute(new[] { "NGAY_KY" }, new[] { string.Format("ngày {0} tháng {1} năm {2}", date.Day, date.Month, date.Year) });
-                //baoCao.MailMerge.Execute(new[] { "NGAY_KT_HD" }, new[] { string.Format("ngày {0} tháng {1} năm {2}", date.Day, date.Month, date.Year) });
-                foreach (DataColumn item in dt.Columns)
-                {
-                    if (Commons.Modules.ObjSystems.IsnullorEmpty(row[item]))
-                    {
-                        baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { "..." });
-
-                        continue;
-                    }
-                    switch (item.DataType.Name)
-                    {
-                        case "DateTime":
-                            {
-                                baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { Convert.ToDateTime(row[item]).ToString("dd/MM/yyyy") });
-                                break;
-                            }
-                        case "Double":
-                            {
-                                baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { string.Format("{0:#,##0}", row[item]) });
-                                break;
-                            }
-                        default:
-                            {
-                                baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { row[item] });
-                                break;
-
-                            }
-                    }
-                }
-                baoCao.Save(sPath);
-                Process.Start(sPath);
-            }
-            catch (Exception ex)
-            {
-                Commons.Modules.ObjSystems.MsgError(ex.Message);
-            }
         }
         private void HopDongLaoDongKhoang_SB()
         {
@@ -1654,7 +1578,90 @@ namespace Vs.HRM
                 {
                     if (Commons.Modules.ObjSystems.IsnullorEmpty(row[item]))
                     {
-                        baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { "..." });
+                        baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { "" });
+
+                        continue;
+                    }
+                    switch (item.DataType.Name)
+                    {
+                        case "DateTime":
+                            {
+                                baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { Convert.ToDateTime(row[item]).ToString("dd/MM/yyyy") });
+                                break;
+                            }
+                        case "Double":
+                            {
+                                baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { string.Format("{0:#,##0}", row[item]) });
+                                break;
+                            }
+                        default:
+                            {
+                                baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { row[item] });
+                                break;
+
+                            }
+                    }
+                }
+                baoCao.Save(sPath);
+                Process.Start(sPath);
+            }
+            catch (Exception ex)
+            {
+                Commons.Modules.ObjSystems.MsgError(ex.Message);
+            }
+        }
+
+        private void HopDongThoiVu_TG()
+        {
+            DataTable dt = new DataTable();
+            DataTable dtbc = new DataTable();
+            try
+            {
+                System.Data.SqlClient.SqlConnection conn1;
+                dt = new DataTable();
+                frmViewReport frm = new frmViewReport();
+                frm.rpt = new rptHopDongThoiVu_HN(dNgayIn.DateTime);
+
+                conn1 = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                conn1.Open();
+
+                System.Data.SqlClient.SqlCommand cmd1 = new System.Data.SqlClient.SqlCommand("rptHopDongThoiVu_TG", conn1);
+                cmd1.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                cmd1.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                cmd1.Parameters.Add("@ID_CN", SqlDbType.Int).Value = idCN;
+                cmd1.Parameters.Add("@ID_SQD", SqlDbType.Int).Value = idHD;
+                cmd1.CommandType = CommandType.StoredProcedure;
+
+                System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd1);
+                DataSet ds = new DataSet();
+                adp.Fill(ds);
+                dt = new DataTable();
+                dt = ds.Tables[0].Copy();
+                DataTable dt2 = new DataTable();
+                dt2 = ds.Tables[1].Copy();
+
+                DataRow row = dt.Rows[0];
+
+                string sPath = "";
+
+                if (!System.IO.Directory.Exists("Report")) // kiểm tra xem forder đã có chưa , nếu chưa có thì tạo 
+                {
+                    System.IO.Directory.CreateDirectory("Report");
+                }
+                sPath = "Report\\" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".docx";
+
+                //fill vào báo cáo
+                //var date = Convert.ToDateTime(row["NGAY_BAT_DAU_HD"]);
+                var date = dNgayIn.DateTime;
+                Document baoCao = new Document("Template\\TemplateTG\\HDLDThoiVu.doc");
+                //baoCao.MailMerge.Execute(new[] { "NGAY_BD_HD" }, new[] { string.Format("ngày {0} tháng {1} năm {2}", date.Day, date.Month, date.Year) });
+                //baoCao.MailMerge.Execute(new[] { "NGAY_KY" }, new[] { string.Format("ngày {0} tháng {1} năm {2}", date.Day, date.Month, date.Year) });
+                //baoCao.MailMerge.Execute(new[] { "NGAY_KT_HD" }, new[] { string.Format("ngày {0} tháng {1} năm {2}", date.Day, date.Month, date.Year) });
+                foreach (DataColumn item in dt.Columns)
+                {
+                    if (Commons.Modules.ObjSystems.IsnullorEmpty(row[item]))
+                    {
+                        baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { "" });
 
                         continue;
                     }

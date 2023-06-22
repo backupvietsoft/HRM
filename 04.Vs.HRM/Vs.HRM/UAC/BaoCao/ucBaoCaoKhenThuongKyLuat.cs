@@ -401,8 +401,6 @@ namespace Vs.HRM
                 int rowCnt = 0;
                 int rowBD = 7;
                 string[] LOAI_KT = dt.AsEnumerable().Select(r => r.Field<string>("HINH_THUC_XL")).Distinct().ToArray();
-                DataTable dt_temp = new DataTable();
-                dt_temp = ds.Tables[0].Copy(); // Dữ row count data
                 int demRoman = 0;
                 if(cbKhenThuongKyLuat.SelectedIndex == 0)
                 {

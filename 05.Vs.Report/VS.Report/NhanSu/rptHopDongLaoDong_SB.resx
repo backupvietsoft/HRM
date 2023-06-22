@@ -117,15 +117,18 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="xrLabel94.Text" xml:space="preserve">
+    <value>- Chế độ nghỉ ngơi (nghỉ lễ, phép, việc riêng...) : Nghỉ Lễ, Tết, phép theo chế độ quy định của Bộ luật Lao động, nghỉ việc riêng căn cứ theo đơn đề nghị sẽ xem xét giải quyết tùy theo hoàn cảnh cụ thể.</value>
+  </data>
   <data name="xrLabel80.ExpressionBindings" xml:space="preserve">
-    <value>'- Thử việc từ ngày ' + GetDay([DATA].[NGAY_BD_THU_VIEC]) + ' Tháng ' + GetMonth([DATA].[NGAY_BD_THU_VIEC]) + ' Năm ' + GetYear([DATA].[NGAY_BD_THU_VIEC]) + '   đến ngày   ' + GetDay([DATA].[NGAY_KT_THU_VIEC]) + ' tháng ' + GetMonth([DATA].[NGAY_KT_THU_VIEC]) + ' năm ' + GetYear([DATA].[NGAY_KT_THU_VIEC])</value>
+    <value>'- Thử việc từ ngày ' + [DATA].[NGAY_BDTV] + ' Tháng ' + [DATA].[THANG_BDTV] + ' Năm ' + [DATA].[NAM_BDTV] + '   đến ngày   ' + [DATA].[NGAY_KTTV] + ' tháng ' + [DATA].[THANG_KTTV] + ' năm ' + [DATA].[NAM_KTTV]</value>
   </data>
   <data name="xrLabel84.ExpressionBindings" xml:space="preserve">
-    <value>'- Hợp đồng lao động này làm thành 02 bản có giá trị ngang nhau, mỗi bên giữ một bản và có hiệu lực từ ngày ' + GetDay([DATA].[NGAY_BAT_DAU_HD]) + ' tháng ' + GetMonth([DATA].[NGAY_BAT_DAU_HD]) + ' năm ' + GetYear([DATA].[NGAY_BAT_DAU_HD]) + '   đến ngày   ' + GetDay([DATA].[NGAY_HET_HD]) + ' tháng ' + GetMonth([DATA].[NGAY_HET_HD]) + ' năm ' + GetYear([DATA].[NGAY_HET_HD]) + '. Khi hai bên ' + [NOI_DUNG].[24]
+    <value>'- Hợp đồng lao động này làm thành 02 bản có giá trị ngang nhau, mỗi bên giữ một bản và có hiệu lực từ ngày ' + [DATA].[NGAY_BDHD] + ' tháng ' + [DATA].[THANG_BDHD] + ' năm ' + [DATA].[NAM_BDHD] + '   đến ngày   ' + [DATA].[NGAY_KTHD] + ' tháng ' + [DATA].[THANG_KTHD] + ' năm ' + [DATA].[NAM_KTHD] + '. Khi hai bên ' + [NOI_DUNG].[24]
 </value>
   </data>
   <data name="xrLabel6.ExpressionBindings" xml:space="preserve">
-    <value>'- Từ ngày ' + GetDay([DATA].[NGAY_BAT_DAU_HD]) + ' Tháng ' + GetMonth([DATA].[NGAY_BAT_DAU_HD]) + ' Năm ' + GetYear([DATA].[NGAY_BAT_DAU_HD]) + '   đến ngày   ' + GetDay([DATA].[NGAY_HET_HD]) + ' tháng ' + GetMonth([DATA].[NGAY_HET_HD]) + ' năm ' + GetYear([DATA].[NGAY_HET_HD])
+    <value>'- Từ ngày ' + [DATA].[NGAY_BDHD] + ' Tháng ' + [DATA].[THANG_BDHD] + ' Năm ' + [DATA].[NAM_BDHD] + '   đến ngày   ' + [DATA].[NGAY_KTHD] + ' tháng ' + [DATA].[THANG_KTHD] + ' năm ' + [DATA].[NAM_KTHD]
 
 </value>
   </data>

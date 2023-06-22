@@ -40,12 +40,14 @@ namespace VietSoftHRM
         {
             try
             {
+
                 Commons.Modules.sLoad = "0Load";
                 DataTable dt = new DataTable();
                 dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT NOI_DUNG, ISNULL(T2.FULL_NAME, T2.USER_NAME) UNAME , TINH_TRANG FROM dbo.NOTIFICATION T1 LEFT JOIN dbo.USERS T2 ON T2.ID_USER = T1.ID_USER"));
                 Commons.Modules.ObjSystems.MLoadXtraGrid(grdSource, grvSource, dt, true, true, false, true, true, this.Name);
                 LoadCboSP();
                 Commons.Modules.sLoad = "";
+                //Commons.Modules.ObjSystems.MAutoCompleteMemoEdit(txtCauQuery, Commons.Modules.ObjSystems.DataCongNhan(false), "TEN_CN");
             }
             catch { }
         }
@@ -141,11 +143,16 @@ namespace VietSoftHRM
         private void cboSearchSP_EditValueChanged(object sender, EventArgs e)
         {
             if (Commons.Modules.sLoad == "0Load") return;
-            string sSQL = "SELECT 'ALTER' + SUBSTRING(OBJECT_DEFINITION(object_id),7,LEN(OBJECT_DEFINITION(object_id)))  From sys.objects where name='" + cboSearchSP.Text + "'";
+            string sSQL = "SELECT STUFF(OBJECT_DEFINITION(object_id),CHARINDEX('CREATE',OBJECT_DEFINITION(object_id)),LEN('CREATE'),'ALTER')  From sys.objects where name='" + cboSearchSP.Text + "'";
 
             string sProc = Convert.ToString(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, sSQL));
             //Commons.Modules.ObjSystems.MAutoCompleteMemoEdit(txtCauQuery, dt, "TEN_TABLE");
             txtCauQuery.Text = sProc;
+        }
+
+        private void txtCauQuery_TextChanged(object sender, EventArgs e)
+        {
+           
         }
     }
 }

@@ -10,7 +10,7 @@ namespace Vs.Report
 {
     public partial class rptQuyetDinhThoiViecBoViec_SB : DevExpress.XtraReports.UI.XtraReport
     {
-        public rptQuyetDinhThoiViecBoViec_SB(DateTime ngayin, int QDTV )
+        public rptQuyetDinhThoiViecBoViec_SB()
         {   //DateTime ngayin
             InitializeComponent();
         }

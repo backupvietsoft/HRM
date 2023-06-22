@@ -589,6 +589,8 @@ namespace Vs.HRM
                     }
 
                 }
+                if (Commons.Modules.sLoad == "0Load") return;
+                grvDSCN_FocusedRowChanged(null, null);
             }
             catch (Exception ex)
             {

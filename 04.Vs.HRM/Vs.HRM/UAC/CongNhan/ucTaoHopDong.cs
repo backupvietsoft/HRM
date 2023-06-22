@@ -297,7 +297,7 @@ namespace Vs.HRM
                     cboID_BL.NullText = "";
                     cboID_BL.ValueMember = "ID_BL";
                     cboID_BL.DisplayMember = "TEN_BL";
-                    cboID_BL.DataSource = Commons.Modules.ObjSystems.DataBacLuong(Convert.ToString(grvDSUngVien.GetFocusedRowCellValue("ID_NL")) == "" ? -1 : Convert.ToInt64(grvDSUngVien.GetFocusedRowCellValue("ID_NL")), DateTime.Now, false);
+                    cboID_BL.DataSource = Commons.Modules.ObjSystems.DataBacLuong(-1, Convert.ToInt64(cboDV.EditValue), DateTime.Now, false);
                     cboID_BL.Columns.Clear();
                     cboID_BL.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ID_BL"));
                     cboID_BL.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("TEN_BL"));
@@ -488,7 +488,7 @@ namespace Vs.HRM
                 LookUpEdit lookUp = sender as LookUpEdit;
                 DataTable dt1 = new DataTable();
                 //////dt1.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT ID_BL, MUCLUONG FROM dbo.BAC_LUONG " ));
-                dt1 = Commons.Modules.ObjSystems.DataBacLuong(Convert.ToInt64(grvDSUngVien.GetFocusedRowCellValue("ID_NL")), DateTime.Now, false);
+                dt1 = Commons.Modules.ObjSystems.DataBacLuong(Convert.ToInt64(grvDSUngVien.GetFocusedRowCellValue("ID_NL")), Convert.ToInt64(cboDV.EditValue), DateTime.Now, false);
                 lookUp.Properties.DataSource = dt1;
 
             }
@@ -778,7 +778,7 @@ namespace Vs.HRM
                 adp.Fill(ds);
                 dt = new DataTable();
                 dt = ds.Tables[0].Copy();
-                
+
                 string sPath = "";
                 sPath = SaveFiles("Work file (*.doc)|*.docx");
                 if (sPath == "") return;

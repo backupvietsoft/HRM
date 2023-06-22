@@ -17,7 +17,6 @@ namespace Vs.TimeAttendance
 {
     public partial class ucBaoCaoQuanLyPhep : DevExpress.XtraEditors.XtraUserControl
     {
-        private string SaveExcelFile;
         public ucBaoCaoQuanLyPhep()
         {
             InitializeComponent();
@@ -602,12 +601,6 @@ namespace Vs.TimeAttendance
                 dtBCPhep = new DataTable();
                 dtBCPhep = ds.Tables[0].Copy();
 
-                SaveExcelFile = SaveFiles("Excel Workbook |*.xlsx|Excel 97-2003 Workbook |*.xls|Word Document |*.docx|Rich Text Format |*.rtf|PDF File |*.pdf|Web Page |*.html|Single File Web Page |*.mht");
-                if (SaveExcelFile == "")
-                {
-                    return;
-                }
-
                 Excell.Application oXL;
                 Excell._Workbook oWB;
                 Excell._Worksheet oSheet;
@@ -819,7 +812,6 @@ namespace Vs.TimeAttendance
                     // Tạo group tổ
                     Range row_groupXI_NGHIEP_Format = oSheet.get_Range("A" + rowBD + "".ToString(), lastColumn + "" + rowBD + "".ToString()); //27 + 31
                     row_groupXI_NGHIEP_Format.Interior.Color = Color.FromArgb(146, 208, 80);
-                    row_groupXI_NGHIEP_Format.Merge();
                     oSheet.Cells[rowBD, 1] = TEN_TO[j].ToString();
                     oSheet.Range[oSheet.Cells[Convert.ToInt32(rowBD), 1], oSheet.Cells[Convert.ToInt32(rowBD), 1]].Font.Bold = true;
 
@@ -906,9 +898,6 @@ namespace Vs.TimeAttendance
                 BorderAround(oSheet.get_Range("A4", "W" + rowCnt.ToString()));
                 oXL.Visible = true;
                 oXL.UserControl = true;
-                oWB.SaveAs(SaveExcelFile,
-                    AccessMode: Excell.XlSaveAsAccessMode.xlExclusive);
-
             }
             catch
             {
@@ -1287,12 +1276,6 @@ namespace Vs.TimeAttendance
                 dtBCPhep = new DataTable();
                 dtBCPhep = ds.Tables[0].Copy();
 
-                SaveExcelFile = SaveFiles("Excel Workbook |*.xlsx|Excel 97-2003 Workbook |*.xls|Word Document |*.docx|Rich Text Format |*.rtf|PDF File |*.pdf|Web Page |*.html|Single File Web Page |*.mht");
-                if (SaveExcelFile == "")
-                {
-                    return;
-                }
-
                 Excell.Application oXL;
                 Excell._Workbook oWB;
                 Excell._Worksheet oSheet;
@@ -1590,9 +1573,6 @@ namespace Vs.TimeAttendance
                 BorderAround(oSheet.get_Range("A4", "W" + rowCnt.ToString()));
                 oXL.Visible = true;
                 oXL.UserControl = true;
-                oWB.SaveAs(SaveExcelFile,
-                                    AccessMode: Excell.XlSaveAsAccessMode.xlExclusive);
-
             }
             catch
             {

@@ -32,6 +32,8 @@
             this.windowsUIButton = new DevExpress.XtraBars.Docking2010.WindowsUIButtonPanel();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.tablePanel1 = new DevExpress.Utils.Layout.TablePanel();
+            this.checkBoxLamCungCongTy = new DevExpress.XtraEditors.CheckEdit();
+            this.labelControl8 = new DevExpress.XtraEditors.LabelControl();
             this.lkTo = new DevExpress.XtraEditors.SearchLookUpEdit();
             this.searchLookUpEdit3View = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.lbTo = new DevExpress.XtraEditors.LabelControl();
@@ -59,34 +61,32 @@
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.labelControl8 = new DevExpress.XtraEditors.LabelControl();
-            this.checkBoxLamCungCongTy = new DevExpress.XtraEditors.CheckEdit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).BeginInit();
             this.tablePanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.checkBoxLamCungCongTy.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lkTo.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit3View)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lkXiNghiep.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit2View)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lkDonVi.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.denNgay.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.denNgay.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tuNgay.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.denNgay.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tuNgay.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tuNgay.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rdo_ConCongNhan.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lk_QuanHeGD.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txt_Tu.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txt_Den.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lk_NgayTinh.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lk_NgayTinh.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lk_NgayIn.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lk_NgayTinh.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lk_NgayIn.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lk_NgayIn.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkBoxLamCungCongTy.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // windowsUIButton
@@ -182,6 +182,28 @@
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F)});
             this.tablePanel1.Size = new System.Drawing.Size(975, 513);
             this.tablePanel1.TabIndex = 4;
+            // 
+            // checkBoxLamCungCongTy
+            // 
+            this.tablePanel1.SetColumn(this.checkBoxLamCungCongTy, 4);
+            this.checkBoxLamCungCongTy.Location = new System.Drawing.Point(492, 83);
+            this.checkBoxLamCungCongTy.Margin = new System.Windows.Forms.Padding(4);
+            this.checkBoxLamCungCongTy.Name = "checkBoxLamCungCongTy";
+            this.checkBoxLamCungCongTy.Properties.Caption = "";
+            this.tablePanel1.SetRow(this.checkBoxLamCungCongTy, 3);
+            this.checkBoxLamCungCongTy.Size = new System.Drawing.Size(145, 20);
+            this.checkBoxLamCungCongTy.TabIndex = 29;
+            // 
+            // labelControl8
+            // 
+            this.tablePanel1.SetColumn(this.labelControl8, 3);
+            this.labelControl8.Location = new System.Drawing.Point(362, 86);
+            this.labelControl8.Margin = new System.Windows.Forms.Padding(28, 7, 4, 4);
+            this.labelControl8.Name = "labelControl8";
+            this.tablePanel1.SetRow(this.labelControl8, 3);
+            this.labelControl8.Size = new System.Drawing.Size(78, 17);
+            this.labelControl8.TabIndex = 25;
+            this.labelControl8.Text = "labelControl8";
             // 
             // lkTo
             // 
@@ -365,18 +387,19 @@
             this.tablePanel1.SetColumn(this.rdo_ConCongNhan, 1);
             this.tablePanel1.SetColumnSpan(this.rdo_ConCongNhan, 2);
             this.rdo_ConCongNhan.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rdo_ConCongNhan.Location = new System.Drawing.Point(31, 76);
+            this.rdo_ConCongNhan.Location = new System.Drawing.Point(31, 42);
             this.rdo_ConCongNhan.Margin = new System.Windows.Forms.Padding(3, 0, 0, 0);
             this.rdo_ConCongNhan.Name = "rdo_ConCongNhan";
             this.rdo_ConCongNhan.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
             this.rdo_ConCongNhan.Properties.Appearance.Options.UseBackColor = true;
             this.rdo_ConCongNhan.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] {
-            new DevExpress.XtraEditors.Controls.RadioGroupItem("rdo_DenNgay", "Danh sách gia đình đến ngày", true, null, "rdo_DenNgay"),
-            new DevExpress.XtraEditors.Controls.RadioGroupItem("rdo_DoTuoi", "Danh sách gia đình theo độ tuổi", true, null, "rdo_DoTuoi"),
-            new DevExpress.XtraEditors.Controls.RadioGroupItem("rdo_DuoiSauTuoi", "Danh sách đăng ký con dưới 6 tuổi", true, null, "rdo_DuoiSauTuoi")});
-            this.tablePanel1.SetRow(this.rdo_ConCongNhan, 3);
-            this.tablePanel1.SetRowSpan(this.rdo_ConCongNhan, 3);
-            this.rdo_ConCongNhan.Size = new System.Drawing.Size(303, 102);
+            new DevExpress.XtraEditors.Controls.RadioGroupItem("", "Danh sách gia đình đến ngày", true, "rdo_DenNgay", "rdo_DenNgay"),
+            new DevExpress.XtraEditors.Controls.RadioGroupItem("", "Danh sách gia đình theo độ tuổi", true, "rdo_DoTuoi", "rdo_DoTuoi"),
+            new DevExpress.XtraEditors.Controls.RadioGroupItem("", "Danh sách đăng ký con dưới 6 tuổi", true, "rdo_DuoiSauTuoi", "rdo_DuoiSauTuoi"),
+            new DevExpress.XtraEditors.Controls.RadioGroupItem("", "Danh sách đăng ký con dưới 6 tuổi tổng hợp", true, "rdo_DSDKCon6TuoiTongHop")});
+            this.tablePanel1.SetRow(this.rdo_ConCongNhan, 2);
+            this.tablePanel1.SetRowSpan(this.rdo_ConCongNhan, 4);
+            this.rdo_ConCongNhan.Size = new System.Drawing.Size(303, 136);
             this.rdo_ConCongNhan.TabIndex = 10;
             this.rdo_ConCongNhan.SelectedIndexChanged += new System.EventHandler(this.rdo_ConCongNhan_SelectedIndexChanged);
             // 
@@ -509,28 +532,6 @@
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
             // 
-            // labelControl8
-            // 
-            this.tablePanel1.SetColumn(this.labelControl8, 3);
-            this.labelControl8.Location = new System.Drawing.Point(362, 86);
-            this.labelControl8.Margin = new System.Windows.Forms.Padding(28, 7, 4, 4);
-            this.labelControl8.Name = "labelControl8";
-            this.tablePanel1.SetRow(this.labelControl8, 3);
-            this.labelControl8.Size = new System.Drawing.Size(78, 17);
-            this.labelControl8.TabIndex = 25;
-            this.labelControl8.Text = "labelControl8";
-            // 
-            // checkBoxLamCungCongTy
-            // 
-            this.tablePanel1.SetColumn(this.checkBoxLamCungCongTy, 4);
-            this.checkBoxLamCungCongTy.Location = new System.Drawing.Point(492, 83);
-            this.checkBoxLamCungCongTy.Margin = new System.Windows.Forms.Padding(4);
-            this.checkBoxLamCungCongTy.Name = "checkBoxLamCungCongTy";
-            this.checkBoxLamCungCongTy.Properties.Caption = "";
-            this.tablePanel1.SetRow(this.checkBoxLamCungCongTy, 3);
-            this.checkBoxLamCungCongTy.Size = new System.Drawing.Size(145, 20);
-            this.checkBoxLamCungCongTy.TabIndex = 29;
-            // 
             // ucBaoCaoQHGD
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -546,6 +547,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).EndInit();
             this.tablePanel1.ResumeLayout(false);
             this.tablePanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.checkBoxLamCungCongTy.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lkTo.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit3View)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lkXiNghiep.Properties)).EndInit();
@@ -567,7 +569,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.lk_NgayIn.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkBoxLamCungCongTy.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }

@@ -32,11 +32,10 @@
             DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions1 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
             DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions2 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule1 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
-            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule2 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
-            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule3 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             this.btnALL = new DevExpress.XtraBars.Docking2010.WindowsUIButtonPanel();
             this.tablePanel1 = new DevExpress.Utils.Layout.TablePanel();
             this.dataLayoutControl1 = new DevExpress.XtraDataLayout.DataLayoutControl();
+            this.chkActive = new DevExpress.XtraEditors.CheckEdit();
             this.txtMO_TA_CV_A = new DevExpress.XtraEditors.MemoEdit();
             this.txtCHUC_DANH_A = new DevExpress.XtraEditors.TextEdit();
             this.txtMO_TA_CV = new DevExpress.XtraEditors.MemoEdit();
@@ -69,19 +68,13 @@
             this.lblCHUC_DANH_A = new DevExpress.XtraLayout.LayoutControlItem();
             this.lblMO_TA_CV_A = new DevExpress.XtraLayout.LayoutControlItem();
             this.lblNGACH_LUONG = new DevExpress.XtraLayout.LayoutControlItem();
-            this.dxValidationProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
-            this.dxValidationProvider11 = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
-            this.dxValidationProvider111 = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
-            this.dxValidationProvider12 = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
-            this.dxValidationProvider13 = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
-            this.dxValidationProvider14 = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
-            this.dxValidationProvider121 = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
-            this.chkActive = new DevExpress.XtraEditors.CheckEdit();
             this.lblActive = new DevExpress.XtraLayout.LayoutControlItem();
+            this.dxValidationProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).BeginInit();
             this.tablePanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataLayoutControl1)).BeginInit();
             this.dataLayoutControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chkActive.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtMO_TA_CV_A.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCHUC_DANH_A.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtMO_TA_CV.Properties)).BeginInit();
@@ -114,15 +107,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.lblCHUC_DANH_A)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblMO_TA_CV_A)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblNGACH_LUONG)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider11)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider111)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider12)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider13)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider14)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider121)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chkActive.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblActive)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // btnALL
@@ -204,6 +190,15 @@
             this.dataLayoutControl1.TabIndex = 0;
             this.dataLayoutControl1.Text = "dataLayoutControl1";
             // 
+            // chkActive
+            // 
+            this.chkActive.Location = new System.Drawing.Point(460, 6);
+            this.chkActive.Name = "chkActive";
+            this.chkActive.Properties.Caption = "";
+            this.chkActive.Size = new System.Drawing.Size(224, 20);
+            this.chkActive.StyleController = this.dataLayoutControl1;
+            this.chkActive.TabIndex = 17;
+            // 
             // txtMO_TA_CV_A
             // 
             this.txtMO_TA_CV_A.Location = new System.Drawing.Point(120, 255);
@@ -247,10 +242,6 @@
             this.cboChucVu.Size = new System.Drawing.Size(564, 24);
             this.cboChucVu.StyleController = this.dataLayoutControl1;
             this.cboChucVu.TabIndex = 12;
-            conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule1.ErrorText = "This value is not valid";
-            conditionValidationRule1.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.Critical;
-            this.dxValidationProvider1.SetValidationRule(this.cboChucVu, conditionValidationRule1);
             // 
             // gridView2
             // 
@@ -267,9 +258,9 @@
             this.TEN_LCVTextEdit.Size = new System.Drawing.Size(224, 24);
             this.TEN_LCVTextEdit.StyleController = this.dataLayoutControl1;
             this.TEN_LCVTextEdit.TabIndex = 4;
-            conditionValidationRule2.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule2.ErrorText = "This value is not valid";
-            this.dxValidationProvider1.SetValidationRule(this.TEN_LCVTextEdit, conditionValidationRule2);
+            conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule1.ErrorText = "This value is not valid";
+            this.dxValidationProvider1.SetValidationRule(this.TEN_LCVTextEdit, conditionValidationRule1);
             // 
             // TEN_LCV_ATextEdit
             // 
@@ -362,10 +353,6 @@
             this.cboNGACH_LUONG.Size = new System.Drawing.Size(564, 24);
             this.cboNGACH_LUONG.StyleController = this.dataLayoutControl1;
             this.cboNGACH_LUONG.TabIndex = 12;
-            conditionValidationRule3.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule3.ErrorText = "This value is not valid";
-            conditionValidationRule3.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.Critical;
-            this.dxValidationProvider12.SetValidationRule(this.cboNGACH_LUONG, conditionValidationRule3);
             // 
             // gridView21
             // 
@@ -465,8 +452,6 @@
             // 
             // ItemForTEN_CV
             // 
-            this.ItemForTEN_CV.AppearanceItemCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.ItemForTEN_CV.AppearanceItemCaption.Options.UseForeColor = true;
             this.ItemForTEN_CV.Control = this.cboChucVu;
             this.ItemForTEN_CV.Location = new System.Drawing.Point(0, 78);
             this.ItemForTEN_CV.Name = "ItemForTEN_CV";
@@ -545,15 +530,6 @@
             this.lblNGACH_LUONG.Text = "NGACH_LUONG";
             this.lblNGACH_LUONG.TextSize = new System.Drawing.Size(102, 17);
             // 
-            // chkActive
-            // 
-            this.chkActive.Location = new System.Drawing.Point(460, 6);
-            this.chkActive.Name = "chkActive";
-            this.chkActive.Properties.Caption = "";
-            this.chkActive.Size = new System.Drawing.Size(224, 20);
-            this.chkActive.StyleController = this.dataLayoutControl1;
-            this.chkActive.TabIndex = 17;
-            // 
             // lblActive
             // 
             this.lblActive.Control = this.chkActive;
@@ -578,6 +554,7 @@
             this.tablePanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataLayoutControl1)).EndInit();
             this.dataLayoutControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.chkActive.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtMO_TA_CV_A.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCHUC_DANH_A.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtMO_TA_CV.Properties)).EndInit();
@@ -610,15 +587,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.lblCHUC_DANH_A)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblMO_TA_CV_A)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblNGACH_LUONG)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider11)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider111)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider12)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider13)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider14)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider121)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chkActive.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblActive)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -658,15 +628,9 @@
         private DevExpress.XtraEditors.TextEdit txtCHUC_DANH_A;
         private DevExpress.XtraLayout.LayoutControlItem lblCHUC_DANH_A;
         private DevExpress.XtraLayout.LayoutControlItem lblMO_TA_CV_A;
-        private DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider dxValidationProvider11;
-        private DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider dxValidationProvider111;
         private DevExpress.XtraEditors.SearchLookUpEdit cboNGACH_LUONG;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView21;
-        private DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider dxValidationProvider12;
-        private DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider dxValidationProvider13;
         private DevExpress.XtraLayout.LayoutControlItem lblNGACH_LUONG;
-        private DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider dxValidationProvider14;
-        private DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider dxValidationProvider121;
         private DevExpress.XtraEditors.CheckEdit chkActive;
         private DevExpress.XtraLayout.LayoutControlItem lblActive;
     }

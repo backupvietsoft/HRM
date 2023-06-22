@@ -344,7 +344,6 @@ namespace Vs.HRM
             windowsUIButton.Buttons[5].Properties.Visible = !visible;
             windowsUIButton.Buttons[6].Properties.Visible = !visible;
             windowsUIButton.Buttons[7].Properties.Visible = visible;
-            searchControl.Visible = visible;
         }
         private void XoaBaoHiemYTe()
         {

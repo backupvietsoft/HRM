@@ -102,92 +102,92 @@ namespace Vs.HRM
         private void InQuyetDinhDieuChuyen_SB()
         {
             #region in moi
-            try
-            {
-                //lấy data dữ liệu
-                DataTable dt = new DataTable();
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "rptQuyetDinhDieuChuyen_SB", Commons.Modules.UserName, Commons.Modules.TypeLanguage, idCN, idCT));
-                DataRow row = dt.Rows[0];
-                string sPath = "";
-                sPath = Commons.Modules.MExcel.SaveFiles("Word file (*.doc)|*.docx");
-                if (sPath == "") return;
-
-                //fill vào báo cáo
-                //var date = Convert.ToDateTime(row["NGAY_BAT_DAU_HD"]);
-                var date = dNgayIn.DateTime;
-                string Ngay = "0" + date.Day;
-                string Thang = "0" + date.Month;
-                string Nam = "00" + date.Year;
-
-                Document baoCao = new Document("Template\\TemplateSB\\QuyetDinhDieuChuyenCT.doc");
-                baoCao.MailMerge.Execute(new[] { "Ngay_Thang_Nam_BC" }, new[] { string.Format("ngày {0} tháng {1} năm {2}", Ngay.Substring(Ngay.Length - 2, 2), Thang.Substring(Thang.Length - 2, 2), Nam.Substring(Nam.Length - 4, 4)) });
-                foreach (DataColumn item in dt.Columns)
-                {
-                    if (Commons.Modules.ObjSystems.IsnullorEmpty(row[item]))
-                    {
-                        baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { ".................................." });
-
-                        continue;
-                    }
-                    switch (item.DataType.Name)
-                    {
-                        case "DateTime":
-                            {
-                                baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { Convert.ToDateTime(row[item]).ToString("dd/MM/yyyy") });
-                                break;
-                            }
-                        case "Double":
-                            {
-                                baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { string.Format("{0:#,##0}", row[item]) });
-                                break;
-                            }
-                        default:
-                            {
-                                baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { row[item] });
-                                break;
-                            }
-                    }
-                }
-                Process.Start(sPath);
-            }
-            catch (Exception ex)
-            {
-            }
-            #endregion
-            #region in cu
             //try
             //{
-            //    System.Data.SqlClient.SqlConnection conn;
+            //    //lấy data dữ liệu
             //    DataTable dt = new DataTable();
-            //    frmViewReport frm = new frmViewReport();
-            //    frm.rpt = new rptQuyetDinhDieuChuyen_SB(dNgayIn.DateTime);
+            //    dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "rptQuyetDinhDieuChuyen_SB", Commons.Modules.UserName, Commons.Modules.TypeLanguage, idCN, idCT));
+            //    DataRow row = dt.Rows[0];
+            //    string sPath = "";
+            //    sPath = Commons.Modules.MExcel.SaveFiles("Word file (*.doc)|*.docx");
+            //    if (sPath == "") return;
 
-            //    conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
-            //    conn.Open();
+            //    //fill vào báo cáo
+            //    //var date = Convert.ToDateTime(row["NGAY_BAT_DAU_HD"]);
+            //    var date = dNgayIn.DateTime;
+            //    string Ngay = "0" + date.Day;
+            //    string Thang = "0" + date.Month;
+            //    string Nam = "00" + date.Year;
 
-            //    System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptQuyetDinhDieuChuyen_SB", conn);
-            //    cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
-            //    cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
-            //    cmd.Parameters.Add("@ID_CN", SqlDbType.Int).Value = idCN;
-            //    cmd.Parameters.Add("@ID_SQD", SqlDbType.Int).Value = idCT;
-            //    cmd.CommandType = CommandType.StoredProcedure;
+            //    Document baoCao = new Document("Template\\TemplateSB\\QuyetDinhDieuChuyenCT.doc");
+            //    baoCao.MailMerge.Execute(new[] { "Ngay_Thang_Nam_BC" }, new[] { string.Format("ngày {0} tháng {1} năm {2}", Ngay.Substring(Ngay.Length - 2, 2), Thang.Substring(Thang.Length - 2, 2), Nam.Substring(Nam.Length - 4, 4)) });
+            //    foreach (DataColumn item in dt.Columns)
+            //    {
+            //        if (Commons.Modules.ObjSystems.IsnullorEmpty(row[item]))
+            //        {
+            //            baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { ".................................." });
 
-            //    System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
-            //    DataSet ds = new DataSet();
-            //    adp.Fill(ds);
-            //    dt = new DataTable();
-            //    dt = ds.Tables[0].Copy();
-            //    dt.TableName = "DATA";
-            //    frm.AddDataSource(dt);
-
-            //    DataTable dt1 = new DataTable();
-            //    dt1 = ds.Tables[1].Copy();
-            //    dt1.TableName = "NOI_DUNG";
-            //    frm.AddDataSource(dt1);
-
-            //    frm.ShowDialog();
+            //            continue;
+            //        }
+            //        switch (item.DataType.Name)
+            //        {
+            //            case "DateTime":
+            //                {
+            //                    baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { Convert.ToDateTime(row[item]).ToString("dd/MM/yyyy") });
+            //                    break;
+            //                }
+            //            case "Double":
+            //                {
+            //                    baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { string.Format("{0:#,##0}", row[item]) });
+            //                    break;
+            //                }
+            //            default:
+            //                {
+            //                    baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { row[item] });
+            //                    break;
+            //                }
+            //        }
+            //    }
+            //    Process.Start(sPath);
             //}
-            //catch { }
+            //catch (Exception ex)
+            //{
+            //}
+            #endregion
+            #region in cu
+            try
+            {
+                System.Data.SqlClient.SqlConnection conn;
+                DataTable dt = new DataTable();
+                frmViewReport frm = new frmViewReport();
+                frm.rpt = new rptQuyetDinhDieuChuyen_SB(dNgayIn.DateTime);
+
+                conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                conn.Open();
+
+                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptQuyetDinhDieuChuyen_SB", conn);
+                cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                cmd.Parameters.Add("@ID_CN", SqlDbType.Int).Value = idCN;
+                cmd.Parameters.Add("@ID_SQD", SqlDbType.Int).Value = idCT;
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+                DataSet ds = new DataSet();
+                adp.Fill(ds);
+                dt = new DataTable();
+                dt = ds.Tables[0].Copy();
+                dt.TableName = "DATA";
+                frm.AddDataSource(dt);
+
+                //DataTable dt1 = new DataTable();
+                //dt1 = ds.Tables[1].Copy();
+                //dt1.TableName = "NOI_DUNG";
+                //frm.AddDataSource(dt1);
+
+                frm.ShowDialog();
+            }
+            catch { }
             #endregion
         }
         private void InQuyetDinhDieuChuyen_NC()
@@ -306,9 +306,14 @@ namespace Vs.HRM
                 DataTable dt = new DataTable();
                 dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "rptQuyetDinhDieuChuyen_AP", Commons.Modules.UserName, Commons.Modules.TypeLanguage, idCN, idCT, 1));
                 DataRow row = dt.Rows[0];
+
                 string sPath = "";
-                sPath = Commons.Modules.MExcel.SaveFiles("Work file (*.doc)|*.docx");
-                if (sPath == "") return;
+
+                if (!System.IO.Directory.Exists("Report")) // kiểm tra xem forder đã có chưa , nếu chưa có thì tạo 
+                {
+                    System.IO.Directory.CreateDirectory("Report");
+                }
+                sPath = "Report\\" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".docx";
 
                 //fill vào báo cáo
                 //var date = Convert.ToDateTime(row["NGAY_BAT_DAU_HD"]);
@@ -360,9 +365,14 @@ namespace Vs.HRM
                 DataTable dt = new DataTable();
                 dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "rptQuyetDinhDieuChuyen_TG", Commons.Modules.UserName, Commons.Modules.TypeLanguage, idCN, idCT, 1));
                 DataRow row = dt.Rows[0];
+
                 string sPath = "";
-                sPath = Commons.Modules.MExcel.SaveFiles("Work file (*.doc)|*.docx");
-                if (sPath == "") return;
+
+                if (!System.IO.Directory.Exists("Report")) // kiểm tra xem forder đã có chưa , nếu chưa có thì tạo 
+                {
+                    System.IO.Directory.CreateDirectory("Report");
+                }
+                sPath = "Report\\" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".docx";
 
                 //fill vào báo cáo
                 //var date = Convert.ToDateTime(row["NGAY_BAT_DAU_HD"]);
@@ -416,9 +426,14 @@ namespace Vs.HRM
                 DataTable dt = new DataTable();
                 dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "rptQuyetDinhDieuChuyen_AP", Commons.Modules.UserName, Commons.Modules.TypeLanguage, idCN, idCT, 3));
                 DataRow row = dt.Rows[0];
+
                 string sPath = "";
-                sPath = Commons.Modules.MExcel.SaveFiles("Work file (*.doc)|*.docx");
-                if (sPath == "") return;
+
+                if (!System.IO.Directory.Exists("Report")) // kiểm tra xem forder đã có chưa , nếu chưa có thì tạo 
+                {
+                    System.IO.Directory.CreateDirectory("Report");
+                }
+                sPath = "Report\\" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".docx";
 
                 //fill vào báo cáo
                 //var date = Convert.ToDateTime(row["NGAY_BAT_DAU_HD"]);
@@ -472,9 +487,14 @@ namespace Vs.HRM
                 DataTable dt = new DataTable();
                 dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "rptQuyetDinhDieuChuyen_AP", Commons.Modules.UserName, Commons.Modules.TypeLanguage, idCN, idCT, 2));
                 DataRow row = dt.Rows[0];
+
                 string sPath = "";
-                sPath = Commons.Modules.MExcel.SaveFiles("Work file (*.doc)|*.docx");
-                if (sPath == "") return;
+
+                if (!System.IO.Directory.Exists("Report")) // kiểm tra xem forder đã có chưa , nếu chưa có thì tạo 
+                {
+                    System.IO.Directory.CreateDirectory("Report");
+                }
+                sPath = "Report\\" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".docx";
 
                 //fill vào báo cáo
                 //var date = Convert.ToDateTime(row["NGAY_BAT_DAU_HD"]);
@@ -558,86 +578,86 @@ namespace Vs.HRM
         private void InQuyetDinhTuyenDung_SB()
         {
             #region in moi
-            try
-            {
-                //lấy data dữ liệu
-                DataTable dt = new DataTable();
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "rptQuyetDinhTuyenDung", Commons.Modules.UserName, Commons.Modules.TypeLanguage, idCN, idCT));
-                DataRow row = dt.Rows[0];
-                string sPath = "";
-                sPath = Commons.Modules.MExcel.SaveFiles("Word file (*.doc)|*.docx");
-                if (sPath == "") return;
-
-                //fill vào báo cáo
-                //var date = Convert.ToDateTime(row["NGAY_BAT_DAU_HD"]);
-                var date = dNgayIn.DateTime;
-                string Ngay = "0" + date.Day;
-                string Thang = "0" + date.Month;
-                string Nam = "00" + date.Year;
-
-                Document baoCao = new Document("Template\\TemplateSB\\QuyetDinhTuyenDung.doc");
-                baoCao.MailMerge.Execute(new[] { "Ngay_Thang_Nam_BC" }, new[] { string.Format("ngày {0} tháng {1} năm {2}", Ngay.Substring(Ngay.Length - 2, 2), Thang.Substring(Thang.Length - 2, 2), Nam.Substring(Nam.Length - 4, 4)) });
-                foreach (DataColumn item in dt.Columns)
-                {
-                    if (Commons.Modules.ObjSystems.IsnullorEmpty(row[item]))
-                    {
-                        baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { ".................................." });
-
-                        continue;
-                    }
-                    switch (item.DataType.Name)
-                    {
-                        case "DateTime":
-                            {
-                                baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { Convert.ToDateTime(row[item]).ToString("dd/MM/yyyy") });
-                                break;
-                            }
-                        case "Double":
-                            {
-                                baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { string.Format("{0:#,##0}", row[item]) });
-                                break;
-                            }
-                        default:
-                            {
-                                baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { row[item] });
-                                break;
-                            }
-                    }
-                }
-                Process.Start(sPath);
-            }
-            catch (Exception ex)
-            {
-            }
-            #endregion
             //try
             //{
-            //    System.Data.SqlClient.SqlConnection conn;
+            //    //lấy data dữ liệu
             //    DataTable dt = new DataTable();
-            //    frmViewReport frm = new frmViewReport();
-            //    frm.rpt = new rptQuyetDinhTuyenDung_SB(dNgayIn.DateTime);
+            //    dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "rptQuyetDinhTuyenDung", Commons.Modules.UserName, Commons.Modules.TypeLanguage, idCN, idCT));
+            //    DataRow row = dt.Rows[0];
+            //    string sPath = "";
+            //    sPath = Commons.Modules.MExcel.SaveFiles("Word file (*.doc)|*.docx");
+            //    if (sPath == "") return;
 
-            //    conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
-            //    conn.Open();
+            //    //fill vào báo cáo
+            //    //var date = Convert.ToDateTime(row["NGAY_BAT_DAU_HD"]);
+            //    var date = dNgayIn.DateTime;
+            //    string Ngay = "0" + date.Day;
+            //    string Thang = "0" + date.Month;
+            //    string Nam = "00" + date.Year;
 
-            //    System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptQuyetDinhTuyenDung", conn);
-            //    cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
-            //    cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
-            //    cmd.Parameters.Add("@ID_CN", SqlDbType.Int).Value = idCN;
-            //    cmd.Parameters.Add("@ID_SQD", SqlDbType.Int).Value = idCT;
-            //    cmd.CommandType = CommandType.StoredProcedure;
+            //    Document baoCao = new Document("Template\\TemplateSB\\QuyetDinhTuyenDung.doc");
+            //    baoCao.MailMerge.Execute(new[] { "Ngay_Thang_Nam_BC" }, new[] { string.Format("ngày {0} tháng {1} năm {2}", Ngay.Substring(Ngay.Length - 2, 2), Thang.Substring(Thang.Length - 2, 2), Nam.Substring(Nam.Length - 4, 4)) });
+            //    foreach (DataColumn item in dt.Columns)
+            //    {
+            //        if (Commons.Modules.ObjSystems.IsnullorEmpty(row[item]))
+            //        {
+            //            baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { ".................................." });
 
-            //    System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
-            //    DataSet ds = new DataSet();
-            //    adp.Fill(ds);
-            //    dt = new DataTable();
-            //    dt = ds.Tables[0].Copy();
-            //    dt.TableName = "DATA";
-            //    frm.AddDataSource(dt);
-
-            //    frm.ShowDialog();
+            //            continue;
+            //        }
+            //        switch (item.DataType.Name)
+            //        {
+            //            case "DateTime":
+            //                {
+            //                    baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { Convert.ToDateTime(row[item]).ToString("dd/MM/yyyy") });
+            //                    break;
+            //                }
+            //            case "Double":
+            //                {
+            //                    baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { string.Format("{0:#,##0}", row[item]) });
+            //                    break;
+            //                }
+            //            default:
+            //                {
+            //                    baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { row[item] });
+            //                    break;
+            //                }
+            //        }
+            //    }
+            //    Process.Start(sPath);
             //}
-            //catch { }
+            //catch (Exception ex)
+            //{
+            //}
+            #endregion
+            try
+            {
+                System.Data.SqlClient.SqlConnection conn;
+                DataTable dt = new DataTable();
+                frmViewReport frm = new frmViewReport();
+                frm.rpt = new rptQuyetDinhTuyenDung_SB(dNgayIn.DateTime);
+
+                conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                conn.Open();
+
+                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptQuyetDinhTuyenDung", conn);
+                cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                cmd.Parameters.Add("@ID_CN", SqlDbType.Int).Value = idCN;
+                cmd.Parameters.Add("@ID_SQD", SqlDbType.Int).Value = idCT;
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+                DataSet ds = new DataSet();
+                adp.Fill(ds);
+                dt = new DataTable();
+                dt = ds.Tables[0].Copy();
+                dt.TableName = "DATA";
+                frm.AddDataSource(dt);
+
+                frm.ShowDialog();
+            }
+            catch { }
         }
         private void windowsUIButton_ButtonClick(object sender, ButtonEventArgs e)
         {
@@ -841,9 +861,14 @@ namespace Vs.HRM
                 dt = new DataTable();
                 dt = ds.Tables[0].Copy();
                 DataRow row = dt.Rows[0];
+
                 string sPath = "";
-                sPath = Commons.Modules.MExcel.SaveFiles("Work file (*.doc)|*.docx");
-                if (sPath == "") return;
+
+                if (!System.IO.Directory.Exists("Report")) // kiểm tra xem forder đã có chưa , nếu chưa có thì tạo 
+                {
+                    System.IO.Directory.CreateDirectory("Report");
+                }
+                sPath = "Report\\" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".docx";
 
                 //fill vào báo cáo
                 //var date = Convert.ToDateTime(row["NGAY_BAT_DAU_HD"]);

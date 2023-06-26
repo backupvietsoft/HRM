@@ -670,7 +670,7 @@ namespace Vs.HRM
                         //int n = rdo_ChonBaoCao.SelectedIndex;
                         //if (rdo_ChonBaoCao.Properties.Items.Count < 4)
                         //{
-                        //    if (Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString() != "DM")
+                        //    if (Commons.Modules.ObjSystems.DataThongTinChung(-1).Rows[0]["KY_HIEU_DV"].ToString() != "DM")
                         //    {
                         //        n = (n >= 1 ? n + 1 : n);
                         //    }

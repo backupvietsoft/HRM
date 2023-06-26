@@ -205,7 +205,7 @@ namespace Vs.Recruit
                             dt = ds.Tables[1].Copy();
                             dt.TableName = "NOI_DUNG";
                             frm.AddDataSource(dt);
-                            frm.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung());
+                            frm.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung(-1));
                         }
                         catch
                         {

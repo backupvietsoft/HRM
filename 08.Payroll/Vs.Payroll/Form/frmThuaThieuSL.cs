@@ -782,7 +782,7 @@ namespace Vs.Payroll.Form
         {
             try
             {
-                DataTable dtTmp = Commons.Modules.ObjSystems.DataThongTinChung();
+                DataTable dtTmp = Commons.Modules.ObjSystems.DataThongTinChung(-1);
                 Microsoft.Office.Interop.Excel.Range CurCell = MWsheet.Range[MWsheet.Cells[DongBD, 1], MWsheet.Cells[DongKT, 1]];
                 CurCell.EntireRow.Insert(Microsoft.Office.Interop.Excel.XlInsertShiftDirection.xlShiftDown);
 

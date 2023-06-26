@@ -29,7 +29,7 @@ namespace Vs.Category
         private void frmEditPHUONG_XA_Load(object sender, EventArgs e)
         {
 
-            if(Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString() != "DM")
+            if(Commons.Modules.ObjSystems.DataThongTinChung(-1).Rows[0]["KY_HIEU_DV"].ToString() != "DM")
             {
                 ItemFor_KHOANG_CACH.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
                 ItemForDI_DO.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;

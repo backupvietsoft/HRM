@@ -78,7 +78,7 @@ namespace VietSoftHRM
             try
             {
 
-                    DateTime dNgay = DateTime.Now;
+                DateTime dNgay = DateTime.Now;
                 if (Commons.Modules.ObjSystems.checkVerDemo(-1, -1, -1, out dNgay) && Commons.Modules.KyHieuDV == "DM")
                 {
                     Commons.Modules.ObjSystems.MsgWarningVer();
@@ -346,6 +346,10 @@ namespace VietSoftHRM
         }
         private void frmLogin_Shown(object sender, EventArgs e)
         {
+            //string sSQL = "SELECT CASE WHEN GETDATE() > '20230701' THEN 1 ELSE 0 END";
+            //bool bLoad = Convert.ToBoolean(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, sSQL));
+            //if (bLoad) { MessageBox.Show("Hết hạn sử dụng"); Application.Exit(); }
+
             if (!clsMain.CheckServer())
             {
                 Application.Exit();

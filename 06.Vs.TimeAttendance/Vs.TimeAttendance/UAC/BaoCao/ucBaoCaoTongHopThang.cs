@@ -119,6 +119,12 @@ namespace Vs.TimeAttendance
                     //rdo_ChonBaoCao.Properties.Items.Remove(rdo_ChonBaoCao.Properties.Items.Where(x => x.Tag.ToString() == "rdo_BCSoLanXacNhanCongThang").FirstOrDefault());
                     rdo_ChonBaoCao.Properties.Items.Remove(rdo_ChonBaoCao.Properties.Items.Where(x => x.Tag.ToString() == "rdo_ThongTinNhomCCThang").FirstOrDefault());
                 }
+                else if(Commons.Modules.KyHieuDV == "VV")
+                {
+                    rdo_ChonBaoCao.Properties.Items.Remove(rdo_ChonBaoCao.Properties.Items.Where(x => x.Tag.ToString() == "rdo_ThongTinNhomCCThang").FirstOrDefault());
+                    rdo_ChonBaoCao.Properties.Items.Remove(rdo_ChonBaoCao.Properties.Items.Where(x => x.Tag.ToString() == "rdo_BangChamCongThangNgayCong").FirstOrDefault());
+                    rdo_ChonBaoCao.Properties.Items.Remove(rdo_ChonBaoCao.Properties.Items.Where(x => x.Tag.ToString() == "rdo_BangTongHopCongThang").FirstOrDefault());
+                }
                 else
                 {
                     rdo_ChonBaoCao.Properties.Items.Remove(rdo_ChonBaoCao.Properties.Items.Where(x => x.Tag.ToString() == "rdo_ThongTinNhomCCThang").FirstOrDefault());
@@ -273,8 +279,6 @@ namespace Vs.TimeAttendance
                 return false;
             }
         }
-
-
         private void BaoCaoChamCongThang_EX()
         {
 
@@ -319,7 +323,7 @@ namespace Vs.TimeAttendance
                 int DONG = 0;
 
 
-                DONG = Commons.Modules.MExcel.TaoTTChung(excelWorkSheet, 1, 2, 1, TCot, 0, 0);
+                DONG = TaoTTChung(excelWorkSheet, 1, 2, 1, TCot, 0, 0);
                 Commons.Modules.MExcel.ThemDong(excelWorkSheet, Microsoft.Office.Interop.Excel.XlInsertShiftDirection.xlShiftDown, 4, DONG);
 
                 title = Commons.Modules.MExcel.GetRange(excelWorkSheet, DONG, 1, DONG, TCot);
@@ -555,7 +559,6 @@ namespace Vs.TimeAttendance
                 XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage(Commons.Modules.ModuleName, this.Name, "InKhongThanhCong", Commons.Modules.TypeLanguage) + ": " + ex.Message);
             }
         }
-
         private void BaoCaoChamCongThangNgay_EX()
         {
 
@@ -591,7 +594,7 @@ namespace Vs.TimeAttendance
 
 
 
-                DONG = Commons.Modules.MExcel.TaoTTChung(excelWorkSheet, 1, 2, 1, TCot, 0, 0);
+                DONG = TaoTTChung_TheoDV(excelWorkSheet, 1, 2, 1, TCot, 0, 0);
                 Commons.Modules.MExcel.ThemDong(excelWorkSheet, Microsoft.Office.Interop.Excel.XlInsertShiftDirection.xlShiftDown, 5, DONG);
 
                 title = Commons.Modules.MExcel.GetRange(excelWorkSheet, DONG, 1, DONG, TCot);
@@ -680,7 +683,6 @@ namespace Vs.TimeAttendance
                 Commons.Modules.ObjSystems.MsgError(Commons.Modules.ObjLanguages.GetLanguage(Commons.Modules.ModuleName, this.Name, "InKhongThanhCong", 0) + " " + ex.Message);
             }
         }
-
         private string GetThu(Excel.Worksheet sheet, int Dong, int Cot, int lasrow)
         {
             string resulst = "";
@@ -1064,7 +1066,7 @@ namespace Vs.TimeAttendance
                                         }
                                         dt.TableName = "DATA";
                                         frm.AddDataSource(dt);
-                                        frm.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung());
+                                        frm.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung(-1));
                                     }
                                     catch
                                     { }
@@ -3343,7 +3345,7 @@ namespace Vs.TimeAttendance
 
                 int lastColumn = dtBCThang.Columns.Count - 1;
 
-                TaoTTChung(oSheet, 1, 2, 1, 7, 0, 0);
+                TaoTTChung_TheoDV(oSheet, 1, 2, 1, 7, 0, 0);
 
 
                 Range row2_TieuDe_BaoCao = oSheet.Range[oSheet.Cells[4, 1], oSheet.Cells[4, lastColumn]];
@@ -4528,7 +4530,7 @@ namespace Vs.TimeAttendance
                 lastColumn = dtBCThang.Columns.Count - 1;
 
 
-                TaoTTChung(oSheet, 1, 2, 1, 7, 0, 0);
+                TaoTTChung_TheoDV(oSheet, 1, 2, 1, 7, 0, 0);
 
                 Range row2_TieuDe_BaoCao = oSheet.Range[oSheet.Cells[4, 1], oSheet.Cells[4, lastColumn]];
                 row2_TieuDe_BaoCao.Merge();
@@ -5213,7 +5215,8 @@ namespace Vs.TimeAttendance
                 int DONG = 0;
 
                 //DONG = Commons.Modules.MExcel.TaoTTChung(oSheet, 1, 2, 1, 4, 0, 0);
-                DONG = Commons.Modules.MExcel.TaoTTChung(oSheet, 1, 2, 1, dtBCGaiDoan.Columns.Count, 0, 0);
+                DONG = TaoTTChung_TheoDV(oSheet, 1, 2, 1, dtBCGaiDoan.Columns.Count, 0, 0);
+                //DONG = Commons.Modules.MExcel.TaoTTChung(oSheet, 1, 2, 1, dtBCGaiDoan.Columns.Count, 0, 0);
                 Microsoft.Office.Interop.Excel.Range row2_TieuDe_BaoCao = oSheet.Range[oSheet.Cells[3, 1], oSheet.Cells[3, lastColumn]];
                 row2_TieuDe_BaoCao.Merge();
                 row2_TieuDe_BaoCao.Font.Size = fontSizeTieuDe;
@@ -5221,7 +5224,7 @@ namespace Vs.TimeAttendance
                 row2_TieuDe_BaoCao.Font.Bold = true;
                 row2_TieuDe_BaoCao.Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
                 row2_TieuDe_BaoCao.Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
-                row2_TieuDe_BaoCao.RowHeight = 50;
+                row2_TieuDe_BaoCao.RowHeight = 30;
                 if (rdo_DiTreVeSom.SelectedIndex == 0)
                 {
                     row2_TieuDe_BaoCao.Value2 = "BẢNG TỔNG HỢP ĐI TRỄ (" + Convert.ToDateTime(LK_Thang.EditValue).ToString("MM/yyyy") + ")";
@@ -5611,7 +5614,7 @@ namespace Vs.TimeAttendance
 
                 int DONG = 0;
 
-                DONG = Commons.Modules.MExcel.TaoTTChung(oSheet, 1, 2, 1, 7, 0, 0);
+                DONG = TaoTTChung_TheoDV(oSheet, 1, 2, 1, 7, 0, 0);
 
                 //=====
 
@@ -5855,7 +5858,7 @@ namespace Vs.TimeAttendance
                 System.Data.SqlClient.SqlConnection conn;
                 dt = new DataTable();
                 string sTieuDe = "BÁO CÁO NGHỈ VIỆC";
-                frm.rpt = new rptBaoCaoNghiBoViecThang(Convert.ToDateTime(LK_Thang.EditValue), sTieuDe);
+                frm.rpt = new rptBaoCaoNghiBoViecThang(Convert.ToDateTime(LK_Thang.EditValue), sTieuDe,Convert.ToInt32(LK_DON_VI.EditValue));
                 try
                 {
                     conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
@@ -5884,7 +5887,7 @@ namespace Vs.TimeAttendance
                     }
                     dt.TableName = "DA_TA";
                     frm.AddDataSource(dt);
-                    frm.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung());
+                    frm.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung(-1));
                 }
                 catch
                 { }
@@ -5933,7 +5936,7 @@ namespace Vs.TimeAttendance
                 }
                 dt.TableName = "DA_TA";
                 frm.AddDataSource(dt);
-                frm.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung());
+                frm.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung(-1));
             }
             catch
             { }
@@ -5952,7 +5955,7 @@ namespace Vs.TimeAttendance
         {
             frmViewReport frm = new frmViewReport();
             string sTieuDe = "BẢNG CHÊNH LỆCH TĂNG CA ";
-            frm.rpt = new rptBCChenhLechTangCa(sTieuDe, Convert.ToDateTime(NgayIn.EditValue), Convert.ToDateTime(lk_TuNgay.EditValue), Convert.ToDateTime(lk_DenNgay.EditValue));
+            frm.rpt = new rptBCChenhLechTangCa(sTieuDe, Convert.ToDateTime(NgayIn.EditValue), Convert.ToDateTime(lk_TuNgay.EditValue), Convert.ToDateTime(lk_DenNgay.EditValue), Convert.ToInt32(LK_DON_VI.EditValue));
             try
             {
                 System.Data.SqlClient.SqlConnection conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
@@ -7601,7 +7604,7 @@ namespace Vs.TimeAttendance
 
                 int DONG = 0;
 
-                DONG = TaoTTChung(oSheet, 1, 2, 1, 5, 0, 0);
+                DONG = TaoTTChung_TheoDV(oSheet, 1, 2, 1, 5, 0, 0);
 
                 this.Cursor = Cursors.Default;
                 // filter
@@ -7688,7 +7691,7 @@ namespace Vs.TimeAttendance
                 lastColumn = dtBCThang.Columns.Count;
 
 
-                TaoTTChung(oSheet, 1, 3, 1, 8, 0, 0);
+                TaoTTChung_TheoDV(oSheet, 1, 3, 1, 8, 0, 0);
 
                 Range row2_TieuDe_BaoCao = oSheet.Range[oSheet.Cells[4, 1], oSheet.Cells[4, lastColumn]];
                 row2_TieuDe_BaoCao.Merge();
@@ -7903,7 +7906,7 @@ namespace Vs.TimeAttendance
                 lastColumn = dtBCThang.Columns.Count;
 
 
-                TaoTTChung(oSheet, 1, 2, 1, 7, 0, 0);
+                TaoTTChung_TheoDV(oSheet, 1, 2, 1, 7, 0, 0);
 
                 Range row2_TieuDe_BaoCao = oSheet.Range[oSheet.Cells[4, 1], oSheet.Cells[4, lastColumn]];
                 row2_TieuDe_BaoCao.Merge();
@@ -8201,7 +8204,7 @@ namespace Vs.TimeAttendance
                 //CurCell.Borders.LineStyle = 0;
                 //CurCell.Value2 = "Email : " + dtTmp.Rows[0]["EMAIL"];
 
-                DataTable dtLogo = Commons.Modules.ObjSystems.DataThongTinChung();
+                DataTable dtLogo = Commons.Modules.ObjSystems.DataThongTinChung(-1);
                 System.IO.DirectoryInfo dir = new System.IO.DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory + "Masters");
                 GetImage((byte[])dtLogo.Rows[0]["LOGO"], System.Windows.Forms.Application.StartupPath, "logo.bmp");
                 MWsheet.Shapes.AddPicture(System.Windows.Forms.Application.StartupPath + @"\logo.bmp", Office.MsoTriState.msoFalse, Office.MsoTriState.msoCTrue, MLeft, MTop, 50, 50);
@@ -8218,7 +8221,7 @@ namespace Vs.TimeAttendance
         {
             try
             {
-                DataTable dtTmp = Commons.Modules.ObjSystems.DataThongTinChung();
+                DataTable dtTmp = Commons.Modules.ObjSystems.DataThongTinChung(-1);
                 Microsoft.Office.Interop.Excel.Range CurCell = MWsheet.Range[MWsheet.Cells[DongBD, 1], MWsheet.Cells[DongKT, 1]];
                 CurCell.EntireRow.Insert(Microsoft.Office.Interop.Excel.XlInsertShiftDirection.xlShiftDown);
 

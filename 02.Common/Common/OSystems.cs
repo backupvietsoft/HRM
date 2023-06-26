@@ -750,7 +750,7 @@ namespace Commons
             }
             catch
             {
-                if (Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString() == "MT")
+                if (Commons.Modules.ObjSystems.DataThongTinChung(-1).Rows[0]["KY_HIEU_DV"].ToString() == "MT")
                 {
                     return KyHieuDV = "MT";
                 }
@@ -1681,7 +1681,11 @@ namespace Commons
                     DataRow row = dtTmp.NewRow();
                     row[0] = -99;
                     row[1] = "";
-                    dtTmp.Rows.InsertAt(row, 0);
+                    try
+                    {
+                        dtTmp.Rows.InsertAt(row, 0);
+                    }
+                    catch { }
                 }
                 cbo.Properties.DataSource = null;
                 cbo.Properties.DisplayMember = "";
@@ -5619,11 +5623,11 @@ namespace Commons
             return dt;
         }
 
-        public DataTable DataThongTinChung()
+        public DataTable DataThongTinChung(int? iID_DV = -1)
         {
             //ID_CV,TEN_CV
             DataTable dt = new DataTable();
-            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetThongTinChung", Commons.Modules.UserName, Commons.Modules.TypeLanguage));
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetThongTinChung", Commons.Modules.UserName, Commons.Modules.TypeLanguage, iID_DV));
             dt.TableName = "TTC";
             return dt;
         }

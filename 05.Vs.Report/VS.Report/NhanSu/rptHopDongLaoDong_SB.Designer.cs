@@ -32,6 +32,7 @@
             this.TopMargin = new DevExpress.XtraReports.UI.TopMarginBand();
             this.BottomMargin = new DevExpress.XtraReports.UI.BottomMarginBand();
             this.Detail = new DevExpress.XtraReports.UI.DetailBand();
+            this.xrLabel101 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel18 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrPageBreak1 = new DevExpress.XtraReports.UI.XRPageBreak();
             this.xrLabel76 = new DevExpress.XtraReports.UI.XRLabel();
@@ -173,7 +174,6 @@
             this.xrLabel7 = new DevExpress.XtraReports.UI.XRLabel();
             this.lb6 = new DevExpress.XtraReports.UI.XRLabel();
             this.PageHeader = new DevExpress.XtraReports.UI.PageHeaderBand();
-            this.xrLabel101 = new DevExpress.XtraReports.UI.XRLabel();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             // 
             // TopMargin
@@ -336,6 +336,24 @@
             this.Detail.HeightF = 5064.765F;
             this.Detail.HierarchyPrintOptions.Indent = 50.8F;
             this.Detail.Name = "Detail";
+            // 
+            // xrLabel101
+            // 
+            this.xrLabel101.AllowMarkupText = true;
+            this.xrLabel101.Dpi = 254F;
+            this.xrLabel101.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[DATA].[HD_CT_DAU_TIEN]")});
+            this.xrLabel101.Font = new DevExpress.Drawing.DXFont("Times New Roman", 11.25F);
+            this.xrLabel101.LocationFloat = new DevExpress.Utils.PointFloat(2.207983F, 4429.68F);
+            this.xrLabel101.Multiline = true;
+            this.xrLabel101.Name = "xrLabel101";
+            this.xrLabel101.Padding = new DevExpress.XtraPrinting.PaddingInfo(20, 5, 0, 0, 254F);
+            this.xrLabel101.SizeF = new System.Drawing.SizeF(1720.584F, 66.5835F);
+            this.xrLabel101.StylePriority.UseFont = false;
+            this.xrLabel101.StylePriority.UsePadding = false;
+            this.xrLabel101.StylePriority.UseTextAlignment = false;
+            this.xrLabel101.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
+            this.xrLabel101.TextTrimming = System.Drawing.StringTrimming.Word;
             // 
             // xrLabel18
             // 
@@ -1742,7 +1760,6 @@
             this.xrLabel66.StylePriority.UseTextAlignment = false;
             this.xrLabel66.Text = "<u>Điều 2:</u> Chế độ làm việc";
             this.xrLabel66.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
-            this.xrLabel66.BeforePrint += new DevExpress.XtraReports.UI.BeforePrintEventHandler(this.xrLabel66_BeforePrint);
             // 
             // xrLabel63
             // 
@@ -2567,25 +2584,6 @@
             this.PageHeader.HeightF = 0F;
             this.PageHeader.Name = "PageHeader";
             // 
-            // xrLabel101
-            // 
-            this.xrLabel101.AllowMarkupText = true;
-            this.xrLabel101.Dpi = 254F;
-            this.xrLabel101.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "\'- Sau khi hợp đồng lao động này được ký kết thì Hợp đồng thử việc số <b>\'+ [DATA" +
-                    "].[SO_QD_TV] +\'</b> sẽ hết hiệu lực\'")});
-            this.xrLabel101.Font = new DevExpress.Drawing.DXFont("Times New Roman", 11.25F);
-            this.xrLabel101.LocationFloat = new DevExpress.Utils.PointFloat(2.207983F, 4429.68F);
-            this.xrLabel101.Multiline = true;
-            this.xrLabel101.Name = "xrLabel101";
-            this.xrLabel101.Padding = new DevExpress.XtraPrinting.PaddingInfo(20, 5, 0, 0, 254F);
-            this.xrLabel101.SizeF = new System.Drawing.SizeF(1720.584F, 66.5835F);
-            this.xrLabel101.StylePriority.UseFont = false;
-            this.xrLabel101.StylePriority.UsePadding = false;
-            this.xrLabel101.StylePriority.UseTextAlignment = false;
-            this.xrLabel101.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            this.xrLabel101.TextTrimming = System.Drawing.StringTrimming.Word;
-            // 
             // rptHopDongLaoDong_SB
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
@@ -2604,6 +2602,7 @@
             this.Tag = "rptHopDongLaoDong_SB";
             this.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter;
             this.Version = "22.2";
+            this.BeforePrint += new DevExpress.XtraReports.UI.BeforePrintEventHandler(this.rptHopDongLaoDong_SB_BeforePrint);
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
 
         }

@@ -85,7 +85,7 @@ namespace Vs.Report
                 //// with the specified look and feel settings.
                 //designTool.ShowRibbonDesignerDialog(DevExpress.LookAndFeel.UserLookAndFeel.Default);
 
-                this.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung());
+                this.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung(-1));
 
 
             }

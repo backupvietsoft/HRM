@@ -54,7 +54,7 @@ namespace Vs.HRM
                                         dt = ds.Tables[0].Copy();
                                         dt.TableName = "DA_TA";
                                         frm.AddDataSource(dt);
-                                        frm.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung());
+                                        frm.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung(-1));
                                     }
                                     catch 
                                     {
@@ -97,7 +97,7 @@ namespace Vs.HRM
                                                         dt = ds.Tables[0].Copy();
                                                         dt.TableName = "DA_TA";
                                                         frm.AddDataSource(dt);
-                                                        frm.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung());
+                                                        frm.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung(-1));
                                                     }
                                                     catch
                                                     {
@@ -137,7 +137,7 @@ namespace Vs.HRM
                                                     dt = ds.Tables[0].Copy();
                                                     dt.TableName = "DA_TA";
                                                     frm.AddDataSource(dt);
-                                                    frm.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung());
+                                                    frm.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung(-1));
                                                 }
                                                 catch
                                                 {
@@ -187,7 +187,7 @@ namespace Vs.HRM
                                             dt = ds.Tables[0].Copy();
                                             dt.TableName = "DA_TA";
                                             frm.AddDataSource(dt);
-                                            frm.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung());
+                                            frm.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung(-1));
                                         }
                                         catch (Exception ex)
                                         {

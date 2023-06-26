@@ -74,7 +74,7 @@ namespace Vs.TimeAttendance
                                     frmViewReport frm = new frmViewReport();
                                     //Convert.ToInt64(grvCongNhan.GetFocusedRowCellValue("ID_CN"))
                                     string tieuDe = "DANH SÁCH NHÂN VIÊN ĐĂNG KÍ TĂNG CA";
-                                    frm.rpt = new rptDKTangCa(dNgayDL, tieuDe);
+                                    frm.rpt = new rptDKTangCa(dNgayDL, tieuDe,Convert.ToInt32(ID_DV));
                                     if (dt == null || dt.Rows.Count == 0) return;
                                     dt.TableName = "DATA";
                                     frm.AddDataSource(dt);
@@ -100,7 +100,7 @@ namespace Vs.TimeAttendance
             DataTable dt;
             System.Data.SqlClient.SqlConnection conn;
             dt = new DataTable();
-            frm.rpt = new rptDKLamThemGio(dNgayIn.DateTime, sTenXN);
+            frm.rpt = new rptDKLamThemGio(dNgayIn.DateTime, sTenXN, Convert.ToInt32(ID_DV));
 
             try
             {
@@ -126,7 +126,7 @@ namespace Vs.TimeAttendance
                 //dt = ds.Tables[0].Copy();
                 dt.TableName = "DA_TA";
                 frm.AddDataSource(dt);
-                frm.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung());
+                frm.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung(-1));
             }
             catch (Exception ex)
             { }
@@ -165,7 +165,7 @@ namespace Vs.TimeAttendance
                 //dt = ds.Tables[0].Copy();
                 dt.TableName = "DA_TA";
                 frm.AddDataSource(dt);
-                frm.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung());
+                frm.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung(-1));
             }
             catch
             { }

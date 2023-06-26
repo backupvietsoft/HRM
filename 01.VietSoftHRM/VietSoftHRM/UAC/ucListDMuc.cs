@@ -263,7 +263,7 @@ namespace VietSoftHRM
                     if (Commons.Modules.sPS == "spGetListMAU_BAO_CAO")
                     {
                         DataTable dtTTC = new DataTable();
-                        dtTTC = Commons.Modules.ObjSystems.DataThongTinChung();
+                        dtTTC = Commons.Modules.ObjSystems.DataThongTinChung(-1);
                         dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, Commons.Modules.sPS, Commons.Modules.UserName, Commons.Modules.TypeLanguage, dtTTC.Rows[0]["KY_HIEU_DV"].ToString()));
                     }
                     else

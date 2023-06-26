@@ -66,7 +66,7 @@ namespace Vs.Recruit
                     {
                         System.Data.SqlClient.SqlConnection conn;
                         DataTable dtTTC = new DataTable(); // Lấy ký hiệu đơn vị trong thông tin chung
-                        dtTTC = Commons.Modules.ObjSystems.DataThongTinChung();
+                        dtTTC = Commons.Modules.ObjSystems.DataThongTinChung(-1);
                         switch (rdo_ChonBaoCao.SelectedIndex)
                         {
                             case 0:

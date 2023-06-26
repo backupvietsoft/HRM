@@ -10,14 +10,14 @@ namespace Vs.Report
 {
     public partial class rptBCChenhLechTangCa : DevExpress.XtraReports.UI.XtraReport
     {
-        public rptBCChenhLechTangCa(string TieuDe, DateTime ngayin, DateTime TNgay, DateTime DNgay)
+        public rptBCChenhLechTangCa(string TieuDe, DateTime ngayin, DateTime TNgay, DateTime DNgay, int iddv)
         {
             InitializeComponent();
             DataTable dtNgu = new DataTable();
             dtNgu.Load(Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT KEYWORD, CASE " + Commons.Modules.TypeLanguage + " WHEN 0 THEN VIETNAM WHEN 1 THEN ENGLISH ELSE CHINESE END AS NN  FROM LANGUAGES WHERE FORM = N'NgayThangNam' "));
 
-            xrSubreport1.ReportSource = new SubReportHeader();
-
+            xrSubreport1.ReportSource = new SubReportHeader(iddv);
+            
             string Ngay = "0" + DateTime.Now.Day;
             string Thang = "0" + DateTime.Now.Month;
             string Nam = "00" + DateTime.Now.Year;

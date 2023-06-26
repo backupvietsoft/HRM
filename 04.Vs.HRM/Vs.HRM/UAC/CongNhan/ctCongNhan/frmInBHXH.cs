@@ -46,7 +46,7 @@ namespace Vs.HRM
                         System.Data.SqlClient.SqlConnection conn;
                         DataTable dtTTC = new DataTable(); // Lấy ký hiệu đơn vị trong thông tin chung
 
-                        dtTTC = Commons.Modules.ObjSystems.DataThongTinChung();
+                        dtTTC = Commons.Modules.ObjSystems.DataThongTinChung(-1);
                         switch (rdo_ChonBaoCao.SelectedIndex)
                         {
                             case 0:
@@ -329,7 +329,7 @@ namespace Vs.HRM
                 row1_TieuDe.Merge();
                 row1_TieuDe.Font.Size = fontSizeTieuDe;
                 row1_TieuDe.Font.Name = fontName;
-                row1_TieuDe.Value2 = "Tên đơn vị: " + Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["TEN_CTY"].ToString().ToUpper() + "";
+                row1_TieuDe.Value2 = "Tên đơn vị: " + Commons.Modules.ObjSystems.DataThongTinChung(-1).Rows[0]["TEN_CTY"].ToString().ToUpper() + "";
 
                 Range row1_TieuDe_MAU = oSheet.get_Range("I1", "L1");
                 row1_TieuDe_MAU.Merge();
@@ -345,7 +345,7 @@ namespace Vs.HRM
                 row2_TieuDe.Merge();
                 row2_TieuDe.Font.Size = fontSizeTieuDe;
                 row2_TieuDe.Font.Name = fontName;
-                row2_TieuDe.Value2 = "Mã đơn vị: " + Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["TEN_NGAN"].ToString() + "";
+                row2_TieuDe.Value2 = "Mã đơn vị: " + Commons.Modules.ObjSystems.DataThongTinChung(-1).Rows[0]["TEN_NGAN"].ToString() + "";
 
                 Range row2_TieuDe_MAU = oSheet.get_Range("I2", "L2");
                 row2_TieuDe_MAU.Merge();
@@ -359,7 +359,7 @@ namespace Vs.HRM
                 row3_TieuDe.Merge();
                 row3_TieuDe.Font.Size = fontSizeTieuDe;
                 row3_TieuDe.Font.Name = fontName;
-                row3_TieuDe.Value2 = "Địa chỉ: " + Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["DIA_CHI"].ToString() + "";
+                row3_TieuDe.Value2 = "Địa chỉ: " + Commons.Modules.ObjSystems.DataThongTinChung(-1).Rows[0]["DIA_CHI"].ToString() + "";
 
                 Range row3_TieuDe_MAU = oSheet.get_Range("I3", "L3");
                 row3_TieuDe_MAU.Merge();

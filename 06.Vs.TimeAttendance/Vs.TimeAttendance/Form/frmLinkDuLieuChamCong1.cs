@@ -458,7 +458,7 @@ namespace Vs.TimeAttendance
             //tạo một table để chứa dữ liệu
             DataTable tbDLQT = new DataTable("DLQT");
             DataTable dtTTC = new DataTable(); // Lấy ký hiệu đơn vị trong thông tin chung
-            dtTTC = Commons.Modules.ObjSystems.DataThongTinChung();
+            dtTTC = Commons.Modules.ObjSystems.DataThongTinChung(-1);
             switch (Commons.Modules.KyHieuDV)
             {
                 case "MT":
@@ -889,7 +889,6 @@ namespace Vs.TimeAttendance
                             {
                                 queryString = @"SELECT UserInfo.UserFullCode AS MS_THE_CC, CheckInOut.TimeStr AS NGAY FROM CheckInOut INNER JOIN UserInfo ON CheckInOut.UserEnrollNumber = UserInfo.UserEnrollNumber WHERE (((CheckInOut.TimeDate)=#" + dtNgayChamCong.DateTime.ToString("MM/dd/yyyy") + "#));";
                             }
-                            XtraMessageBox.Show(connect);
                             using (OleDbConnection connection = new OleDbConnection(connect))
                             using (OleDbCommand command = new OleDbCommand(queryString, connection))
                             {
@@ -973,9 +972,8 @@ namespace Vs.TimeAttendance
                                 iIdCN = Convert.ToInt64(grvDSCN.GetFocusedRowCellValue("ID_CN").ToString());
                             }
                             string connect = "";
-                            connect = "Provider = Microsoft.Jet.OLEDB.4.0; Data Source = D:\\att2000.mdb; Persist Security Info = False; Jet OLEDB:Compact Without Replica Repair = True";
-                            //connect = "Provider = Microsoft.Jet.OLEDB.4.0; Data Source = " + Commons.Modules.sDDTaiLieu + @"\" + cboDataLink.Text + "; Persist Security Info = False; Jet OLEDB:Database Password = 12112009; Jet OLEDB:Compact Without Replica Repair = True";
-                            //string connect = "Provider = Microsoft.Jet.OLEDB.4.0; Data Source = "+ Commons.Modules.sDDTaiLieu +@"\"+ cboDataLink.Text +"; Persist Security Info = False; Jet OLEDB:Database Password = 12112009; Jet OLEDB:Compact Without Replica Repair = True";
+                            connect = "Provider = Microsoft.Jet.OLEDB.4.0; Data Source = " + cboDataLink.Properties.GetDataSourceValue("DUONG_DAN_DATA_LINK", cboDataLink.ItemIndex).ToString().Trim() + "; Persist Security Info = False; Jet OLEDB:Compact Without Replica Repair = True";
+                         
 
                             string queryString = "";
                             queryString = @"SELECT UserInfo.CardNo AS MS_THE_CC, CheckInOut.CHECKTIME AS NGAY FROM CheckInOut INNER JOIN UserInfo ON CheckInOut.USERID = UserInfo.USERID WHERE (((CDATE(Format(CheckInOut.CHECKTIME,""MM/dd/yyyy"")))=#" + dtNgayChamCong.DateTime.ToString("MM/dd/yyyy") + "#));";
@@ -2339,7 +2337,7 @@ namespace Vs.TimeAttendance
             GridView view = sender as GridView;
             try
             {
-                if (Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString() == "NB")
+                if (Commons.Modules.KyHieuDV == "NB")
                 {
                     if (e.Column.FieldName == "GIO_DEN")
                     {

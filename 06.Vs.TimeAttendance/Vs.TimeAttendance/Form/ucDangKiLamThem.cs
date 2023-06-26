@@ -624,7 +624,7 @@ namespace Vs.TimeAttendance
                                 frmViewReport frm = new frmViewReport();
                                 //Convert.ToInt64(grvCongNhan.GetFocusedRowCellValue("ID_CN"))
                                 string tieuDe = "DANH SÁCH NHÂN VIÊN ĐĂNG KÍ TĂNG CA";
-                                frm.rpt = new rptDKTangCa(Commons.Modules.ObjSystems.ConvertDateTime(cboNgay.Text), tieuDe);
+                                frm.rpt = new rptDKTangCa(Commons.Modules.ObjSystems.ConvertDateTime(cboNgay.Text), tieuDe, Convert.ToInt32(cboDonVi.EditValue));
                                 if (dt == null || dt.Rows.Count == 0) return;
                                 dt.TableName = "DATA";
                                 frm.AddDataSource(dt);
@@ -801,21 +801,6 @@ namespace Vs.TimeAttendance
         //        status.ClearChildren();
         //    }
         //}
-        private void InBaoCao()
-        {
-            DataTable dt = new DataTable();
-            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "rptBCDKTangCa", Convert.ToDateTime(cboNgay.EditValue).ToString("yyyyMMdd"),
-                                            cboDonVi.EditValue, cboXiNghiep.EditValue, cboTo.EditValue, Commons.Modules.UserName, Commons.Modules.TypeLanguage));
-
-            frmViewReport frm = new frmViewReport();
-            //Convert.ToInt64(grvCongNhan.GetFocusedRowCellValue("ID_CN"))
-            string tieuDe = "DANH SÁCH NHÂN VIÊN ĐĂNG KÍ TĂNG CA";
-            frm.rpt = new rptDKTangCa(Convert.ToDateTime(cboNgay.EditValue), tieuDe);
-            if (dt == null || dt.Rows.Count == 0) return;
-            dt.TableName = "DATA";
-            frm.AddDataSource(dt);
-            frm.ShowDialog();
-        }
         private void ChonTatCa()
         {
             int i;

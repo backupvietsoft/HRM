@@ -104,8 +104,7 @@ namespace Vs.TimeAttendance
             try
             {
                 DataTable dt = new DataTable();
-
-                string sSql = "SELECT DISTINCT ID_CDLV ID_CA, CA, GIO_BD, GIO_KT, PHUT_BD, PHUT_KT FROM CHE_DO_LAM_VIEC WHERE ID_NHOM= " + cboID_NHOM.EditValue + " AND TANG_CA = 1 ORDER BY CA";
+                string sSql = "SELECT DISTINCT ID_CDLV ID_CA, CA, GIO_BD, GIO_KT, PHUT_BD, PHUT_KT FROM CHE_DO_LAM_VIEC WHERE ID_NHOM= " + cboID_NHOM.EditValue + " AND TANG_CA = 1 AND NGAY = (SELECT MAX(NGAY) FROM CHE_DO_LAM_VIEC WHERE NGAY <= '"+dNgay.ToString("MM/dd/yyyy")+"') ORDER BY CA";
                 dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSql));
 
                 Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboCA, dt, "ID_CA", "CA", "Ca_lam",true);

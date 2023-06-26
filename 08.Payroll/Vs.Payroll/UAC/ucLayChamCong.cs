@@ -23,7 +23,6 @@ namespace Vs.Payroll
     public partial class ucLayChamCong : DevExpress.XtraEditors.XtraUserControl
     {
         private static bool isAdd = false;
-        string kyHieuDV = "";
         public static ucLayChamCong _instance;
         private bool thangtruoc;
 
@@ -48,7 +47,6 @@ namespace Vs.Payroll
         {
             try
             {
-                kyHieuDV = Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString();
                 Commons.Modules.sLoad = "0Load";
                 LoadThang();
                 Commons.Modules.ObjSystems.LoadCboDonVi(cboDonVi);
@@ -293,7 +291,7 @@ namespace Vs.Payroll
             try
             {
                 Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sTB, Commons.Modules.ObjSystems.ConvertDatatable(grdData), "");
-                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, (kyHieuDV == "DM" ? "spSaveLayChamCong_DM" : "spSaveLayChamCong"), sTB, Convert.ToDateTime(cboThang.EditValue));
+                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, (Commons.Modules.KyHieuDV == "DM" ? "spSaveLayChamCong_DM" : "spSaveLayChamCong"), sTB, Convert.ToDateTime(cboThang.EditValue));
                 Commons.Modules.ObjSystems.XoaTable(sTB);
 
                 return true;

@@ -564,9 +564,9 @@
             this.lb3.StylePriority.UseFont = false;
             this.lb3.StylePriority.UsePadding = false;
             this.lb3.StylePriority.UseTextAlignment = false;
-            this.lb3.Text = "- Căn cứ vào Giấy Phép Đầu Tư số 412043000148 của Ban Quản Lý Các Khu Chế Xuất Th" +
-    "ành Phố Hồ Chí Minh về việc thành lập xí nghiệp 100% vốn nước ngoài đối với Công" +
-    " Ty TNHH Thời Trang S.B SaiGon ";
+            this.lb3.Text = "- Căn cứ vào Giấy Phép Đầu Tư số 5483146048 của Ban Quản Lý Các Khu Chế Xuất Thàn" +
+    "h Phố Hồ Chí Minh về việc thành lập xí nghiệp 100% vốn nước ngoài đối với Công T" +
+    "y TNHH Thời Trang S.B SaiGon ";
             this.lb3.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft;
             // 
             // xrLabel1

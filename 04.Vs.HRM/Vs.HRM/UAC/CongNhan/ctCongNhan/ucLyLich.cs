@@ -164,6 +164,12 @@ namespace Vs.HRM
             //Mã thẻ cũ
             Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboMS_CN_CU, dt, "ID_CN", "MS_CN", "MS_CN", true, true);
 
+            DataTable dtLoaiLaoDong = new DataTable();
+            dtLoaiLaoDong.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT ID_LLD, TEN_LOAI_LD FROM dbo.LOAI_LAO_DONG"));
+            //Mã thẻ cũ
+            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboLaoDongChinhThuc, dtLoaiLaoDong, "ID_LLD", "TEN_LOAI_LD", "TEN_LOAI_LD", true, true);
+
+
             // PHAILookUpEdit
             DataTable dt_Phai = new DataTable();
             dt_Phai.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboPhai", Commons.Modules.TypeLanguage));
@@ -814,7 +820,7 @@ namespace Vs.HRM
                 CAP_GIAY_PHEPLookUpEdit.EditValue = null;
                 NGAY_HH_GPDateEdit.EditValue = null;
                 LD_GIAM_LDNNLookUpEdit.EditValue = "";
-                chkLaoDongChinhThuc.Checked = true;
+                cboLaoDongChinhThuc.EditValue = Convert.ToInt64(1);
                 txtMoTaCongViec.EditValue = string.Empty;
 
                 datNgayNhanSoBHXH.EditValue = null;
@@ -954,9 +960,9 @@ namespace Vs.HRM
                     CAP_GIAY_PHEPLookUpEdit.EditValue = dt.Rows[0]["CAP_GIAY_PHEP"];
                     NGAY_HH_GPDateEdit.EditValue = dt.Rows[0]["NGAY_HH_GP"];
                     LD_GIAM_LDNNLookUpEdit.EditValue = dt.Rows[0]["LD_GIAM_LDNN"];
-                    chkLaoDongChinhThuc.EditValue = dt.Rows[0]["CHINH_THUC"];
                     try
                     {
+                        cboLaoDongChinhThuc.EditValue = dt.Rows[0]["ID_LLD"];
                         txtMoTaCongViec.EditValue = dt.Rows[0]["MO_TA_CV"];
                         datNgayNhanSoBHXH.EditValue = dt.Rows[0]["NGAY_NHAN_SO_BHXH"];
                         datNgayTraBH.EditValue = dt.Rows[0]["NGAY_TRA_BHXH"];
@@ -1184,7 +1190,7 @@ namespace Vs.HRM
             NGAY_HH_GPDateEdit.Properties.ReadOnly = visible;
             LD_GIAM_LDNNLookUpEdit.Properties.ReadOnly = visible;
 
-            chkLaoDongChinhThuc.Properties.ReadOnly = visible;
+            cboLaoDongChinhThuc.Properties.ReadOnly = visible;
 
             datNgayNhanSoBHXH.Properties.ReadOnly = visible;
             txtSoToRoiBHXH.Properties.ReadOnly = visible;
@@ -1383,7 +1389,7 @@ namespace Vs.HRM
                 cmd.Parameters.Add("@ID_TP_KS", SqlDbType.BigInt).Value = Convert.ToString(cboID_TP_KS.EditValue) == "" ? DBNull.Value : cboID_TP_KS.EditValue;
                 cmd.Parameters.Add("@ID_QUAN_KS", SqlDbType.BigInt).Value = Convert.ToString(cboID_QUAN_KS.EditValue) == "" ? DBNull.Value : cboID_QUAN_KS.EditValue;
                 cmd.Parameters.Add("@ID_PX_KS", SqlDbType.BigInt).Value = Convert.ToString(cboID_PX_KS.EditValue) == "" ? DBNull.Value : cboID_PX_KS.EditValue;
-                cmd.Parameters.Add("@CHINH_THUC", SqlDbType.Bit).Value = chkLaoDongChinhThuc.EditValue;
+                cmd.Parameters.Add("@CHINH_THUC", SqlDbType.Bit).Value = true;
                 cmd.Parameters.Add("@NGAY_NHAN_SO_BHXH", SqlDbType.DateTime).Value = Convert.ToString(datNgayNhanSoBHXH.EditValue) == "" ? DBNull.Value : datNgayNhanSoBHXH.EditValue;
                 cmd.Parameters.Add("@SO_TO_ROI_BHXH", SqlDbType.Int).Value = Convert.ToString(txtSoToRoiBHXH.EditValue) == "" ? DBNull.Value : txtSoToRoiBHXH.EditValue;
                 cmd.Parameters.Add("@NGAY_TRA_BHXH", SqlDbType.DateTime).Value = Convert.ToString(datNgayTraBH.EditValue) == "" ? DBNull.Value : datNgayTraBH.EditValue;
@@ -1391,6 +1397,7 @@ namespace Vs.HRM
                 cmd.Parameters.Add("@ID_CN_CU", SqlDbType.BigInt).Value = Convert.ToString(cboMS_CN_CU.EditValue) == "" ? DBNull.Value : cboMS_CN_CU.EditValue;
                 cmd.Parameters.Add("@NGAY_KT_HV", SqlDbType.DateTime).Value = Convert.ToString(datNgayKTHocViec.EditValue) == "" ? DBNull.Value : datNgayKTHocViec.EditValue;
                 cmd.Parameters.Add("@MUC_LUONG_HV", SqlDbType.Float).Value = Convert.ToString(txtLuongHocViec.Text) == "" ? 0 : txtLuongHocViec.EditValue;
+                cmd.Parameters.Add("@ID_LLD", SqlDbType.BigInt).Value = Convert.ToString(cboLaoDongChinhThuc.EditValue) == "" ? DBNull.Value : cboLaoDongChinhThuc.EditValue;
                 cmd.CommandType = CommandType.StoredProcedure;
                 Commons.Modules.iCongNhan = Convert.ToInt64(cmd.ExecuteScalar());
                 try

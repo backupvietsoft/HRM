@@ -30,7 +30,7 @@ namespace Vs.HRM
             rdo_ChonBaoCao.SelectedIndex = 0;
             dNgayIn.EditValue = DateTime.Today;
             Commons.OSystems.SetDateEditFormat(dNgayIn);
-            if (Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString() == "DM")
+            if (Commons.Modules.ObjSystems.DataThongTinChung(-1).Rows[0]["KY_HIEU_DV"].ToString() == "DM")
             {
                 rdo_ChonBaoCao.Properties.Items.RemoveAt(1);
             }

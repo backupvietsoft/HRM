@@ -14,7 +14,7 @@ namespace Vs.Payroll
         {
 
             InitializeComponent();
-            DataTable dt = Commons.Modules.ObjSystems.DataThongTinChung();
+            DataTable dt = Commons.Modules.ObjSystems.DataThongTinChung(-1);
             this.DataSource = dt;
             Commons.Modules.ObjSystems.ThayDoiNN(this);
             NONNX.Text = nx;

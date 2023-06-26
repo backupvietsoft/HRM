@@ -1,4 +1,4 @@
-﻿ using System;
+﻿using System;
 using System.Drawing;
 using System.Data;
 
@@ -6,10 +6,10 @@ namespace Commons
 {
     public partial class SubReportHeader : DevExpress.XtraReports.UI.XtraReport
     {
-        public SubReportHeader()
+        public SubReportHeader(int? iID_DV = -1)
         {
             InitializeComponent();
-            DataTable dt = Commons.Modules.ObjSystems.DataThongTinChung();
+            DataTable dt = Commons.Modules.ObjSystems.DataThongTinChung(iID_DV);
             this.DataSource = dt;
             try
             {

@@ -33,7 +33,7 @@ namespace Vs.HRM
             int SoNgay = DateTime.Today.Day - 1;
             dTuNgay.EditValue = DateTime.Today.AddDays(-SoNgay);
 
-            if (Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString() == "DM")
+            if (Commons.Modules.ObjSystems.DataThongTinChung(-1).Rows[0]["KY_HIEU_DV"].ToString() == "DM")
             {
                 rdo_ChonBaoCao.Properties.Items.RemoveAt(1);
                 rdo_ChonBaoCao.Properties.Items.RemoveAt(0);
@@ -54,7 +54,7 @@ namespace Vs.HRM
                         try
                         {
                             int n = rdo_ChonBaoCao.SelectedIndex;
-                            if (Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString() == "DM") n = 2;
+                            if (Commons.Modules.ObjSystems.DataThongTinChung(-1).Rows[0]["KY_HIEU_DV"].ToString() == "DM") n = 2;
                             switch (n)
                             {
                                 case 0:

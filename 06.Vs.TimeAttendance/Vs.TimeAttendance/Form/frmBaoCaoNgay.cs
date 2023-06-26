@@ -10,6 +10,7 @@ using DataTable = System.Data.DataTable;
 using System.Drawing;
 using System.Reflection;
 using System.Linq;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Tab;
 
 namespace Vs.TimeAttendance
 {
@@ -89,7 +90,7 @@ namespace Vs.TimeAttendance
                                         dt = ds.Tables[0].Copy();
                                         dt.TableName = "DA_TA";
                                         frm.AddDataSource(dt);
-                                        frm.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung());
+                                        frm.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung(-1));
                                     }
                                     catch(Exception ex)
                                     { }
@@ -318,7 +319,7 @@ namespace Vs.TimeAttendance
                                             dt = ds.Tables[0].Copy();
                                             dt.TableName = "DA_TA";
                                             frm.AddDataSource(dt);
-                                            frm.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung());
+                                            frm.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung(-1));
                                         }
                                         catch (Exception ex)
                                         {
@@ -364,7 +365,7 @@ namespace Vs.TimeAttendance
                                         dt = new DataTable();
                                         dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, " select ID_CN,MS_CN,HO_TEN,TEN_XN,TEN_TO,GIO_DEN,PHUT_TRE,GIO_VE,case PHUT_VS WHEN 0 THEN null else  PHUT_VS END as PHUT_VS from sbT" + Commons.Modules.UserName + ""));
                                         frm.AddDataSource(dt);
-                                        frm.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung());
+                                        frm.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung(-1));
                                         Commons.Modules.ObjSystems.XoaTable("sbT" + Commons.Modules.UserName);
                                     }
                                     catch
@@ -380,7 +381,7 @@ namespace Vs.TimeAttendance
                                     DataTable dt;
                                     System.Data.SqlClient.SqlConnection conn;
                                     dt = new DataTable();
-                                    frm.rpt = new rptDSNVVachTheLoi(datTNgay.DateTime, datDNgay.DateTime, dNgayIn.DateTime);
+                                    frm.rpt = new rptDSNVVachTheLoi(datTNgay.DateTime, datDNgay.DateTime, dNgayIn.DateTime, Convert.ToInt32(ID_DV));
                                     try
                                     {
                                         conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
@@ -405,7 +406,7 @@ namespace Vs.TimeAttendance
                                         //dt = ds.Tables[0].Copy();
                                         dt.TableName = "DA_TA";
                                         frm.AddDataSource(dt);
-                                        frm.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung());
+                                        frm.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung(-1));
                                     }
                                     catch (Exception ex)
                                     { }

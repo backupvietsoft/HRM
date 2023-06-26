@@ -189,11 +189,11 @@
             this.tablePanel1.SetColumn(this.grdChonCot, 1);
             this.tablePanel1.SetColumnSpan(this.grdChonCot, 5);
             this.grdChonCot.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.grdChonCot.Location = new System.Drawing.Point(31, 174);
+            this.grdChonCot.Location = new System.Drawing.Point(31, 233);
             this.grdChonCot.MainView = this.grvChonCot;
             this.grdChonCot.Name = "grdChonCot";
-            this.tablePanel1.SetRow(this.grdChonCot, 6);
-            this.grdChonCot.Size = new System.Drawing.Size(758, 376);
+            this.tablePanel1.SetRow(this.grdChonCot, 8);
+            this.grdChonCot.Size = new System.Drawing.Size(758, 317);
             this.grdChonCot.TabIndex = 8;
             this.grdChonCot.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grvChonCot});
@@ -247,9 +247,11 @@
             this.tablePanel1.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] {
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 10F),
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 32F),
+            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 31F),
+            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 33F),
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 32F),
-            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 32F),
-            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 32F),
+            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 33F),
+            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F),
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 33F),
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F)});
             this.tablePanel1.Size = new System.Drawing.Size(988, 553);
@@ -260,7 +262,7 @@
             this.tablePanel1.SetColumn(this.datDenNgay, 6);
             this.datDenNgay.Dock = System.Windows.Forms.DockStyle.Fill;
             this.datDenNgay.EditValue = null;
-            this.datDenNgay.Location = new System.Drawing.Point(796, 109);
+            this.datDenNgay.Location = new System.Drawing.Point(796, 174);
             this.datDenNgay.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.datDenNgay.Name = "datDenNgay";
             this.datDenNgay.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -269,7 +271,7 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.datDenNgay.Properties.CalendarView = DevExpress.XtraEditors.Repository.CalendarView.Classic;
             this.datDenNgay.Properties.VistaDisplayMode = DevExpress.Utils.DefaultBoolean.False;
-            this.tablePanel1.SetRow(this.datDenNgay, 4);
+            this.tablePanel1.SetRow(this.datDenNgay, 6);
             this.datDenNgay.Size = new System.Drawing.Size(160, 24);
             this.datDenNgay.TabIndex = 32;
             // 
@@ -278,7 +280,7 @@
             this.tablePanel1.SetColumn(this.datTuNgay, 5);
             this.datTuNgay.Dock = System.Windows.Forms.DockStyle.Fill;
             this.datTuNgay.EditValue = null;
-            this.datTuNgay.Location = new System.Drawing.Point(653, 109);
+            this.datTuNgay.Location = new System.Drawing.Point(653, 174);
             this.datTuNgay.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.datTuNgay.Name = "datTuNgay";
             this.datTuNgay.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -287,7 +289,7 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.datTuNgay.Properties.CalendarView = DevExpress.XtraEditors.Repository.CalendarView.Classic;
             this.datTuNgay.Properties.VistaDisplayMode = DevExpress.Utils.DefaultBoolean.False;
-            this.tablePanel1.SetRow(this.datTuNgay, 4);
+            this.tablePanel1.SetRow(this.datTuNgay, 6);
             this.datTuNgay.Size = new System.Drawing.Size(135, 24);
             this.datTuNgay.TabIndex = 31;
             // 
@@ -296,11 +298,11 @@
             this.lblInTatCa.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             this.tablePanel1.SetColumn(this.lblInTatCa, 5);
             this.lblInTatCa.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblInTatCa.Location = new System.Drawing.Point(677, 77);
+            this.lblInTatCa.Location = new System.Drawing.Point(677, 76);
             this.lblInTatCa.Margin = new System.Windows.Forms.Padding(28, 3, 3, 3);
             this.lblInTatCa.Name = "lblInTatCa";
             this.tablePanel1.SetRow(this.lblInTatCa, 3);
-            this.lblInTatCa.Size = new System.Drawing.Size(112, 26);
+            this.lblInTatCa.Size = new System.Drawing.Size(112, 27);
             this.lblInTatCa.TabIndex = 30;
             this.lblInTatCa.Text = "lblInTatCa";
             // 
@@ -308,22 +310,22 @@
             // 
             this.tablePanel1.SetColumn(this.chkInAll, 6);
             this.chkInAll.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.chkInAll.Location = new System.Drawing.Point(795, 77);
+            this.chkInAll.Location = new System.Drawing.Point(795, 76);
             this.chkInAll.Name = "chkInAll";
             this.chkInAll.Properties.Caption = "";
             this.tablePanel1.SetRow(this.chkInAll, 3);
-            this.chkInAll.Size = new System.Drawing.Size(162, 26);
+            this.chkInAll.Size = new System.Drawing.Size(162, 27);
             this.chkInAll.TabIndex = 29;
             // 
             // chkGroup
             // 
             this.tablePanel1.SetColumn(this.chkGroup, 4);
             this.chkGroup.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.chkGroup.Location = new System.Drawing.Point(484, 77);
+            this.chkGroup.Location = new System.Drawing.Point(484, 76);
             this.chkGroup.Name = "chkGroup";
             this.chkGroup.Properties.Caption = "";
             this.tablePanel1.SetRow(this.chkGroup, 3);
-            this.chkGroup.Size = new System.Drawing.Size(162, 26);
+            this.chkGroup.Size = new System.Drawing.Size(162, 27);
             this.chkGroup.TabIndex = 28;
             // 
             // lblGroup
@@ -331,11 +333,11 @@
             this.lblGroup.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             this.tablePanel1.SetColumn(this.lblGroup, 3);
             this.lblGroup.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblGroup.Location = new System.Drawing.Point(367, 77);
+            this.lblGroup.Location = new System.Drawing.Point(367, 76);
             this.lblGroup.Margin = new System.Windows.Forms.Padding(28, 3, 3, 3);
             this.lblGroup.Name = "lblGroup";
             this.tablePanel1.SetRow(this.lblGroup, 3);
-            this.lblGroup.Size = new System.Drawing.Size(112, 26);
+            this.lblGroup.Size = new System.Drawing.Size(112, 27);
             this.lblGroup.TabIndex = 27;
             this.lblGroup.Text = "labelGroup";
             // 
@@ -343,11 +345,11 @@
             // 
             this.tablePanel1.SetColumn(this.grdMauBC, 6);
             this.grdMauBC.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.grdMauBC.Location = new System.Drawing.Point(795, 174);
+            this.grdMauBC.Location = new System.Drawing.Point(795, 233);
             this.grdMauBC.MainView = this.grvMauBC;
             this.grdMauBC.Name = "grdMauBC";
-            this.tablePanel1.SetRow(this.grdMauBC, 6);
-            this.grdMauBC.Size = new System.Drawing.Size(162, 376);
+            this.tablePanel1.SetRow(this.grdMauBC, 8);
+            this.grdMauBC.Size = new System.Drawing.Size(162, 317);
             this.grdMauBC.TabIndex = 26;
             this.grdMauBC.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grvMauBC});
@@ -394,7 +396,7 @@
             this.lblChucVu.Margin = new System.Windows.Forms.Padding(28, 3, 3, 3);
             this.lblChucVu.Name = "lblChucVu";
             this.tablePanel1.SetRow(this.lblChucVu, 2);
-            this.lblChucVu.Size = new System.Drawing.Size(112, 26);
+            this.lblChucVu.Size = new System.Drawing.Size(112, 25);
             this.lblChucVu.TabIndex = 21;
             this.lblChucVu.Text = "Chức vụ";
             // 
@@ -422,7 +424,7 @@
             this.lbNgayIn.Margin = new System.Windows.Forms.Padding(28, 3, 3, 3);
             this.lbNgayIn.Name = "lbNgayIn";
             this.tablePanel1.SetRow(this.lbNgayIn, 2);
-            this.lbNgayIn.Size = new System.Drawing.Size(112, 26);
+            this.lbNgayIn.Size = new System.Drawing.Size(112, 25);
             this.lbNgayIn.TabIndex = 18;
             this.lbNgayIn.Text = "lbNgayIn";
             // 
@@ -430,13 +432,13 @@
             // 
             this.tablePanel1.SetColumn(this.lkTTHD, 2);
             this.lkTTHD.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lkTTHD.Location = new System.Drawing.Point(174, 109);
+            this.lkTTHD.Location = new System.Drawing.Point(174, 174);
             this.lkTTHD.Name = "lkTTHD";
             this.lkTTHD.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.lkTTHD.Properties.NullText = "";
             this.lkTTHD.Properties.PopupView = this.gridView1;
-            this.tablePanel1.SetRow(this.lkTTHD, 4);
+            this.tablePanel1.SetRow(this.lkTTHD, 6);
             this.lkTTHD.Size = new System.Drawing.Size(162, 24);
             this.lkTTHD.TabIndex = 17;
             // 
@@ -521,11 +523,11 @@
             this.lbTTHT.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             this.tablePanel1.SetColumn(this.lbTTHT, 3);
             this.lbTTHT.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbTTHT.Location = new System.Drawing.Point(367, 109);
+            this.lbTTHT.Location = new System.Drawing.Point(367, 174);
             this.lbTTHT.Margin = new System.Windows.Forms.Padding(28, 3, 3, 3);
             this.lbTTHT.Name = "lbTTHT";
-            this.tablePanel1.SetRow(this.lbTTHT, 4);
-            this.lbTTHT.Size = new System.Drawing.Size(112, 26);
+            this.tablePanel1.SetRow(this.lbTTHT, 6);
+            this.lbTTHT.Size = new System.Drawing.Size(112, 20);
             this.lbTTHT.TabIndex = 5;
             this.lbTTHT.Text = "Tình trạng hiện tại";
             // 
@@ -534,10 +536,10 @@
             this.lbTTHD.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             this.tablePanel1.SetColumn(this.lbTTHD, 1);
             this.lbTTHD.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbTTHD.Location = new System.Drawing.Point(31, 109);
+            this.lbTTHD.Location = new System.Drawing.Point(31, 174);
             this.lbTTHD.Name = "lbTTHD";
-            this.tablePanel1.SetRow(this.lbTTHD, 4);
-            this.lbTTHD.Size = new System.Drawing.Size(137, 26);
+            this.tablePanel1.SetRow(this.lbTTHD, 6);
+            this.lbTTHD.Size = new System.Drawing.Size(137, 20);
             this.lbTTHD.TabIndex = 4;
             this.lbTTHD.Text = "Tình trạng hợp đồng";
             // 
@@ -577,8 +579,11 @@
             new DevExpress.XtraEditors.Controls.RadioGroupItem("rdo_DSCNThang", "Danh sách công nhân tháng", true, "rdo_DSCNThang", "rdo_DSCNThang"),
             new DevExpress.XtraEditors.Controls.RadioGroupItem("rdo_DangLamViec", "Đang làm việc đến ngày hiện tại", true, "rdo_DangLamViec", "rdo_DangLamViec"),
             new DevExpress.XtraEditors.Controls.RadioGroupItem("rdo_VaoLam", "Danh sách công nhân vào làm", true, "rdo_VaoLam", "rdo_VaoLam"),
-            new DevExpress.XtraEditors.Controls.RadioGroupItem("rdo_Nghi", "Danh sách công nhân nghỉ", true, "rdo_Nghi", "rdo_Nghi")});
-            this.rdoChonBC.Size = new System.Drawing.Size(305, 58);
+            new DevExpress.XtraEditors.Controls.RadioGroupItem("rdo_Nghi", "Danh sách công nhân nghỉ", true, "rdo_Nghi", "rdo_Nghi"),
+            new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Danh sách công nhân đổi hồ sơ", true, "rdo_DSCongNhanDoiHoSo")});
+            this.tablePanel1.SetRow(this.rdoChonBC, 2);
+            this.tablePanel1.SetRowSpan(this.rdoChonBC, 4);
+            this.rdoChonBC.Size = new System.Drawing.Size(305, 123);
             this.rdoChonBC.TabIndex = 0;
             this.rdoChonBC.SelectedIndexChanged += new System.EventHandler(this.rdoChonBC_SelectedIndexChanged);
             // 
@@ -599,13 +604,13 @@
             // 
             this.tablePanel1.SetColumn(this.lkTTHT, 4);
             this.lkTTHT.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lkTTHT.Location = new System.Drawing.Point(484, 109);
+            this.lkTTHT.Location = new System.Drawing.Point(484, 174);
             this.lkTTHT.Name = "lkTTHT";
             this.lkTTHT.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.lkTTHT.Properties.NullText = "";
             this.lkTTHT.Properties.PopupView = this.gridView2;
-            this.tablePanel1.SetRow(this.lkTTHT, 4);
+            this.tablePanel1.SetRow(this.lkTTHT, 6);
             this.lkTTHT.Size = new System.Drawing.Size(162, 24);
             this.lkTTHT.TabIndex = 17;
             // 
@@ -622,7 +627,7 @@
             this.tablePanel1.SetColumn(this.rdoLoaiIn, 1);
             this.tablePanel1.SetColumnSpan(this.rdoLoaiIn, 6);
             this.rdoLoaiIn.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rdoLoaiIn.Location = new System.Drawing.Point(32, 141);
+            this.rdoLoaiIn.Location = new System.Drawing.Point(32, 200);
             this.rdoLoaiIn.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.rdoLoaiIn.Name = "rdoLoaiIn";
             this.rdoLoaiIn.Properties.DisplayFormat.FormatString = "d";
@@ -633,7 +638,7 @@
             new DevExpress.XtraEditors.Controls.RadioGroupItem(-1, "rdoALL", true, "rdoALL", "rdoALL"),
             new DevExpress.XtraEditors.Controls.RadioGroupItem(1, "rdoCHINHTHUC", true, "rdoCHINHTHUC", "rdoCHINHTHUC"),
             new DevExpress.XtraEditors.Controls.RadioGroupItem(0, "rdoKCHINHTHUC", true, "rdoKCHINHTHUC", "rdoKCHINHTHUC")});
-            this.tablePanel1.SetRow(this.rdoLoaiIn, 5);
+            this.tablePanel1.SetRow(this.rdoLoaiIn, 7);
             this.rdoLoaiIn.Size = new System.Drawing.Size(924, 27);
             this.rdoLoaiIn.TabIndex = 33;
             // 

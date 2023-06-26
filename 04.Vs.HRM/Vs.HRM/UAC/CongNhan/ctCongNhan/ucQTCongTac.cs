@@ -1,11 +1,11 @@
-﻿using System;
+﻿using DevExpress.XtraBars.Docking2010;
+using DevExpress.XtraEditors;
+using DevExpress.XtraLayout;
+using Microsoft.ApplicationBlocks.Data;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
-using DevExpress.XtraEditors;
-using Microsoft.ApplicationBlocks.Data;
-using DevExpress.XtraBars.Docking2010;
-using DevExpress.XtraLayout;
 
 namespace Vs.HRM
 {
@@ -228,7 +228,10 @@ namespace Vs.HRM
                 int index = dt.Rows.IndexOf(dt.Rows.Find(id));
                 grvCongTac.FocusedRowHandle = grvCongTac.GetRowHandle(index);
             }
-            grvCongTac_FocusedRowChanged(null, null);
+            if(dt.Rows.Count > 0)
+            {
+                grvCongTac_FocusedRowChanged(null, null);
+            }
         }
 
         #endregion
@@ -277,7 +280,6 @@ namespace Vs.HRM
         }
         private void Bindingdata(bool bthem)
         {
-
             //Commons.Modules.sLoad = "0Load";
             if (bthem == true)
             {

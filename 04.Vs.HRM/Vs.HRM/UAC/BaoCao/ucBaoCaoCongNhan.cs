@@ -14,6 +14,12 @@ using System.Linq;
 using System.Drawing;
 using System.Globalization;
 using DevExpress.XtraCharts.Design;
+using System.IO;
+using System.Collections.Generic;
+using OfficeOpenXml;
+using OfficeOpenXml.Style;
+using DevExpress.DataAccess.Sql;
+using DevExpress.Mvvm.POCO;
 
 namespace Vs.HRM
 {
@@ -69,7 +75,7 @@ namespace Vs.HRM
             grvChonCot.UpdateCurrentRow();
             string sResult = "";
             Int64 iID = -1;
-            
+
             if (sNameButton == "them")
             {
 
@@ -166,6 +172,11 @@ namespace Vs.HRM
                     }
                 case "Print":
                     {
+                        if (rdoChonBC.SelectedIndex == 4)
+                        {
+                            InExcelBCDanhSachCongNhanDoiHoSo();
+                            return;
+                        }
                         switch (Commons.Modules.KyHieuDV)
                         {
                             case "DM":
@@ -225,7 +236,7 @@ namespace Vs.HRM
                                 }
                             default:
                                 {
-                                    
+
                                     if (chkInAll.Checked == true)
                                     {
                                         DanhSachCanBoCongNhanVien();
@@ -280,6 +291,8 @@ namespace Vs.HRM
 
 
                 Commons.OSystems.SetDateEditFormat(NgayIn);
+                Commons.OSystems.SetDateEditFormat(datTuNgay);
+                Commons.OSystems.SetDateEditFormat(datDenNgay);
                 LoadGrdChonCot();
                 LoadMauBaoCaoCN();
                 NgayIn.EditValue = DateTime.Today;
@@ -582,7 +595,7 @@ namespace Vs.HRM
                         row_groupXI_NGHIEP_Format.Merge();
                         oSheet.Cells[rowBD, 1] = TEN_TO[j].ToString();
                         oSheet.Range[oSheet.Cells[Convert.ToInt32(rowBD), 1], oSheet.Cells[Convert.ToInt32(rowBD), 1]].Font.Bold = true;
-                     
+
                         //Đổ dữ liệu của xí nghiệp
                         oSheet.get_Range("A" + (rowBD + 1) + "", lastColumn + (rowCnt + 1).ToString()).Value2 = rowData;
 
@@ -621,7 +634,7 @@ namespace Vs.HRM
                 formatRange.Font.Size = fontSizeNoiDung;
                 formatRange.Cells.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
                 BorderAround(oSheet.get_Range("A4", lastColumn + (rowCnt + 1).ToString()));
-             
+
                 if (dtBCThang.Rows.Count == 0)
                 {
                     Excel.Range myRange = oSheet.get_Range("A4", lastColumn + "4");
@@ -672,7 +685,7 @@ namespace Vs.HRM
                 {
 
                     int SLHDMax = 0;
-                    string sSQL = "SELECT MAX(T.SLHD) FROM (SELECT DISTINCT T1.ID_CN,COUNT(*) SLHD FROM dbo.HOP_DONG_LAO_DONG T1 INNER JOIN dbo.MGetListNhanSuToDate('"+Commons.Modules.UserName+"',"+Commons.Modules.TypeLanguage+","+ lkDonVi.EditValue + ","+lkXiNghiep.EditValue+","+lkTo.EditValue+",'"+ NgayIn.DateTime.ToString("MM/dd/yyyy") + "') T3 ON T3.ID_CN = T1.ID_CN GROUP BY T1.ID_CN) T";
+                    string sSQL = "SELECT MAX(T.SLHD) FROM (SELECT DISTINCT T1.ID_CN,COUNT(*) SLHD FROM dbo.HOP_DONG_LAO_DONG T1 INNER JOIN dbo.MGetListNhanSuToDate('" + Commons.Modules.UserName + "'," + Commons.Modules.TypeLanguage + "," + lkDonVi.EditValue + "," + lkXiNghiep.EditValue + "," + lkTo.EditValue + ",'" + NgayIn.DateTime.ToString("MM/dd/yyyy") + "') T3 ON T3.ID_CN = T1.ID_CN GROUP BY T1.ID_CN) T";
                     SLHDMax = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, sSQL));
                     string sBT = "sBTrptBCCN" + Commons.Modules.iIDUser;
                     Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBT, dt, "");
@@ -898,7 +911,7 @@ namespace Vs.HRM
                             oSheet.Cells[rowBD, 1] = TEN_TO[j].ToString();
                             oSheet.Range[oSheet.Cells[Convert.ToInt32(rowBD), 1], oSheet.Cells[Convert.ToInt32(rowBD), 1]].Font.Bold = true;
 
-                    
+
                             //Đổ dữ liệu của xí nghiệp
                             oSheet.get_Range("A" + (rowBD + 1) + "", lastColumn + (rowCnt + 1).ToString()).Value2 = rowData;
 
@@ -933,7 +946,7 @@ namespace Vs.HRM
                                 //    try { formatRange.TextToColumns(Type.Missing, Excel.XlTextParsingType.xlDelimited, Excel.XlTextQualifier.xlTextQualifierDoubleQuote); } catch { }
                                 //}
                             }
-                         
+
                             dr_Cu = current_dr;
                             keepRowCnt = rowCnt;
                             rowCnt = 0;
@@ -946,7 +959,7 @@ namespace Vs.HRM
                     formatRange.Font.Size = fontSizeNoiDung;
                     formatRange.Cells.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
                     BorderAround(oSheet.get_Range("A4", lastColumn + (rowCnt + 1).ToString()));
-                 
+
                     if (dtBCThang.Rows.Count == 0)
                     {
                         Excel.Range myRange = oSheet.get_Range("A4", lastColumn + "4");
@@ -1715,7 +1728,7 @@ namespace Vs.HRM
                 dt.TableName = "DA_TA";
 
                 // Format for an Excel file
-          
+
                 //Init object to work with Excel
                 Excel.Application oXL;
                 Excel.Workbook oWB;
@@ -1795,7 +1808,7 @@ namespace Vs.HRM
                 formatRange1.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
                 formatRange2.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
                 formatRange2.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
-                formatRange3.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;   
+                formatRange3.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
                 formatRange3.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
                 formatRange4.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
                 formatRange4.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
@@ -1823,7 +1836,7 @@ namespace Vs.HRM
                 oXL.Visible = true;
                 oXL.UserControl = true;
 
-               
+
 
 
             }
@@ -1903,7 +1916,7 @@ namespace Vs.HRM
 
         private void rdoChonBC_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(rdoChonBC.SelectedIndex == 0)
+            if (rdoChonBC.SelectedIndex == 0)
             {
                 NgayIn.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
                 NgayIn.Properties.DisplayFormat.FormatString = "MM/yyyy";
@@ -1924,12 +1937,10 @@ namespace Vs.HRM
                 NgayIn.Properties.VistaCalendarViewStyle = VistaCalendarViewStyle.Default;
             }
 
-            if(rdoChonBC.SelectedIndex == 2 || rdoChonBC.SelectedIndex == 3)
+            if (rdoChonBC.SelectedIndex == 2 || rdoChonBC.SelectedIndex == 3 || rdoChonBC.SelectedIndex == 4)
             {
                 datTuNgay.Visible = true;
                 datDenNgay.Visible = true;
-
-
             }
             else
             {
@@ -1942,5 +1953,132 @@ namespace Vs.HRM
         {
 
         }
+        private void InExcelBCDanhSachCongNhanDoiHoSo()
+        {
+            this.Cursor = Cursors.WaitCursor;
+            try
+            {
+                System.Data.SqlClient.SqlConnection conn;
+                conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                conn.Open();
+                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptDSCongNhanDoiHoSo", conn);
+                cmd.Parameters.Add("@UName", SqlDbType.NVarChar).Value = Commons.Modules.UserName;
+                cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                cmd.Parameters.Add("@DVi", SqlDbType.Int).Value = lkDonVi.EditValue;
+                cmd.Parameters.Add("@XN", SqlDbType.Int).Value = lkXiNghiep.EditValue;
+                cmd.Parameters.Add("@TO", SqlDbType.Int).Value = lkTo.EditValue;
+                cmd.Parameters.Add("@TNgay", SqlDbType.Date).Value = datTuNgay.DateTime;
+                cmd.Parameters.Add("@DNgay", SqlDbType.Date).Value = datDenNgay.DateTime;
+                cmd.CommandType = CommandType.StoredProcedure;
+                System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+                DataSet ds = new DataSet();
+                adp.Fill(ds);
+                System.Data.DataTable dt = new System.Data.DataTable();
+                dt = ds.Tables[0].Copy();
+                System.Data.DataTable dt1 = new System.Data.DataTable();
+                dt1 = ds.Tables[1].Copy();
+                if(dt1.Rows.Count == 0)
+                {
+                    XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgKhongCoDuLieuIn"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                string sPath = "";
+                if (!System.IO.Directory.Exists("Report")) // kiểm tra xem forder đã có chưa , nếu chưa có thì tạo 
+                {
+                    System.IO.Directory.CreateDirectory("Report");
+                }
+                sPath = "Report\\" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".xlsx";
+
+                FileInfo file = new FileInfo(sPath);
+                if (file.Exists)
+                {
+                    file.Delete();
+                }
+
+                ExcelPackage pck = new ExcelPackage(file);
+                var ws1 = pck.Workbook.Worksheets.Add(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "sBCDanhSachCongNhanDoiHoSo"));
+
+                int iDong = 1;
+
+                Commons.Modules.MExcel.MText(ws1, this.Name, "sBCDanhSachCongNhanDoiHoSo", iDong, 1, iDong, dt1.Columns.Count - 1, true, true, 16, OfficeOpenXml.Style.ExcelHorizontalAlignment.Center, OfficeOpenXml.Style.ExcelVerticalAlignment.Center);
+                iDong++;
+                Commons.Modules.MExcel.MText(ws1, "", Commons.Modules.ObjLanguages.GetLanguage(this.Name, "sTNgay") + " " + datTuNgay.DateTime.ToString("dd/MM/yyyy") + " " + Commons.Modules.ObjLanguages.GetLanguage(this.Name, "sDNgay") + " " + datDenNgay.DateTime.ToString("dd/MM/yyyy"), iDong, 1, iDong, dt1.Columns.Count - 1, true, true, 16, OfficeOpenXml.Style.ExcelHorizontalAlignment.Center, OfficeOpenXml.Style.ExcelVerticalAlignment.Center);
+
+                iDong = iDong + 2;
+
+                System.Data.DataTable dtTMP = new System.Data.DataTable();
+                List<List<Object>> WidthColumns = new List<List<Object>>();
+                List<Object> WidthColumnsName = new List<Object>();
+                int iRowBorder = 0;
+
+                foreach (DataRow dr in dt.Rows)
+                {
+                    Int64 iID_TO = string.IsNullOrEmpty(Convert.ToString(dr["ID_TO"])) ? 0 : Convert.ToInt64(dr["ID_TO"]);
+                    try
+                    {
+                        dtTMP = dt1.AsEnumerable().Where(r => r.Field<Int64>("ID_TO").Equals(iID_TO)).CopyToDataTable();
+                    }
+                    catch { dtTMP = dt1.Clone(); }
+
+                    if (dtTMP == null || dtTMP.Rows.Count == 0) continue;
+                    dtTMP.Columns.Remove("ID_TO");
+
+                    Commons.Modules.MExcel.MText(ws1, "", string.IsNullOrEmpty(Convert.ToString(dr["TEN_TO"])) ? "" : Convert.ToString(dr["TEN_TO"]), iDong, 1, iDong, dtTMP.Columns.Count, true, true, 13, OfficeOpenXml.Style.ExcelHorizontalAlignment.Left, OfficeOpenXml.Style.ExcelVerticalAlignment.Center);
+
+                    iDong++;
+
+                    WidthColumnsName = new List<Object>() { "STT", 10 };
+                    WidthColumns.Add(WidthColumnsName);
+                    WidthColumnsName = new List<Object>() { "MS_CN", 15 };
+                    WidthColumns.Add(WidthColumnsName);
+                    WidthColumnsName = new List<Object>() { "HO_TEN", 30 };
+                    WidthColumns.Add(WidthColumnsName);
+                    WidthColumnsName = new List<Object>() { "NGAY_SINH", 15, "dd/MM/yyyy" };
+                    WidthColumns.Add(WidthColumnsName);
+                    WidthColumnsName = new List<Object>() { "NGAY_VAO_LAM", 15, "dd/MM/yyyy" };
+                    WidthColumns.Add(WidthColumnsName);
+                    WidthColumnsName = new List<Object>() { "MS_CN_CU", 15 };
+                    WidthColumns.Add(WidthColumnsName);
+                    for (int i = 6; i < dtTMP.Columns.Count; i++)
+                    {
+                        if (dtTMP.Columns[i].ColumnName.Substring(0, 9) == "MS_CN_CU_")
+                        {
+                            WidthColumnsName = new List<Object>() { dtTMP.Columns[i].ColumnName, 15 };
+                            WidthColumns.Add(WidthColumnsName);
+                        }
+                        else if (dtTMP.Columns[i].ColumnName.Substring(0, 15) == "NGAY_DOI_MS_CN_")
+                        {
+                            WidthColumnsName = new List<Object>() { dtTMP.Columns[i].ColumnName, 20, "dd/MM/yyyy" };
+                            WidthColumns.Add(WidthColumnsName);
+                        }
+                    }
+                    ws1.Cells[iDong, 1].LoadFromDataTable(dtTMP, true);
+                    Commons.Modules.MExcel.MFormatExcel(ws1, dtTMP, iDong, this.Name, WidthColumns, true, true, true);
+
+                    iDong = iDong + dtTMP.Rows.Count + 1;
+                    iRowBorder = iRowBorder + dtTMP.Rows.Count + 2;
+                }
+
+                var border = ws1.Cells[4, 1, iRowBorder + 3, dt1.Columns.Count - 1].Style.Border;
+                border.Top.Style = ExcelBorderStyle.Thin;
+                border.Left.Style = ExcelBorderStyle.Thin;
+                border.Bottom.Style = ExcelBorderStyle.Thin;
+                border.Right.Style = ExcelBorderStyle.Thin;
+
+                ws1.Cells[1, 1, iRowBorder + 3, dt1.Columns.Count - 1].Style.Font.Name = "Times New Roman";
+                ws1.Cells[1, 1, iRowBorder + 3, dt1.Columns.Count - 1].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
+                ws1.Cells[1, 1, iRowBorder + 3, dt1.Columns.Count - 1].Style.VerticalAlignment = OfficeOpenXml.Style.ExcelVerticalAlignment.Center;
+
+
+                if (file.Exists)
+                    file.Delete();
+                pck.SaveAs(file);
+                System.Diagnostics.Process.Start(file.FullName);
+            }
+            catch (Exception ex) { XtraMessageBox.Show(ex.Message); }
+            finally { this.Cursor = Cursors.Default; }
+        }
+
     }
 }

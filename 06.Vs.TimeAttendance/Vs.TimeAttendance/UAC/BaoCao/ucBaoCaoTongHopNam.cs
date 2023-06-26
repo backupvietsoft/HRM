@@ -277,7 +277,7 @@ namespace Vs.TimeAttendance
 
         private void rdo_ChonBaoCao_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //if (Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString() != "DM")
+            //if (Commons.Modules.ObjSystems.DataThongTinChung(-1).Rows[0]["KY_HIEU_DV"].ToString() != "DM")
             //{
             //    return;
             //}
@@ -426,7 +426,7 @@ namespace Vs.TimeAttendance
                     }
                     dt.TableName = "DATA";
                     frm.AddDataSource(dt);
-                    frm.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung());
+                    frm.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung(-1));
                 }
                 catch (Exception ex)
                 { }
@@ -471,7 +471,7 @@ namespace Vs.TimeAttendance
                     }
                     dt.TableName = "DATA";
                     frm.AddDataSource(dt);
-                    frm.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung());
+                    frm.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung(-1));
                 }
                 catch
                 { }
@@ -515,7 +515,7 @@ namespace Vs.TimeAttendance
                     }
                     dt.TableName = "DATA";
                     frm.AddDataSource(dt);
-                    frm.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung());
+                    frm.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung(-1));
                 }
                 catch
                 { }
@@ -559,7 +559,7 @@ namespace Vs.TimeAttendance
                     }
                     dt.TableName = "DATA";
                     frm.AddDataSource(dt);
-                    frm.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung());
+                    frm.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung(-1));
                 }
                 catch
                 { }
@@ -606,7 +606,7 @@ namespace Vs.TimeAttendance
                     }
                     dt.TableName = "DATA";
                     frm.AddDataSource(dt);
-                    frm.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung());
+                    frm.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung(-1));
                 }
                 catch
                 { }
@@ -653,7 +653,7 @@ namespace Vs.TimeAttendance
                     }
                     dt.TableName = "DATA";
                     frm.AddDataSource(dt);
-                    frm.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung());
+                    frm.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung(-1));
                 }
                 catch
                 { }
@@ -712,7 +712,7 @@ namespace Vs.TimeAttendance
 
                 int col = 1;
 
-                TaoTTChung(oSheet, 1, 2, 1, 7, 0, 0);
+                TaoTTChung_TheoDV(oSheet, 1, 2, 1, 7, 0, 0);
 
                 Range row2_TieuDe_BaoCao = oSheet.Range[oSheet.Cells[4, 1], oSheet.Cells[4, lastColumn]];
                 row2_TieuDe_BaoCao.Merge();
@@ -881,7 +881,7 @@ namespace Vs.TimeAttendance
 
                 int col = 1;
 
-                TaoTTChung(oSheet, 1, 2, 1, 7, 0, 0);
+                TaoTTChung_TheoDV(oSheet, 1, 2, 1, 7, 0, 0);
 
                 Range row2_TieuDe_BaoCao = oSheet.Range[oSheet.Cells[4, 1], oSheet.Cells[4, lastColumn]];
                 row2_TieuDe_BaoCao.Merge();
@@ -1053,7 +1053,7 @@ namespace Vs.TimeAttendance
 
                 int col = 1;
 
-                TaoTTChung(oSheet, 1, 2, 1, 7, 0, 0);
+                TaoTTChung_TheoDV(oSheet, 1, 2, 1, 7, 0, 0);
 
                 Range row2_TieuDe_BaoCao = oSheet.Range[oSheet.Cells[4, 1], oSheet.Cells[4, lastColumn]];
                 row2_TieuDe_BaoCao.Merge();
@@ -1228,7 +1228,7 @@ namespace Vs.TimeAttendance
 
                 int col = 1;
 
-                TaoTTChung(oSheet, 1, 2, 1, 7, 0, 0);
+                TaoTTChung_TheoDV(oSheet, 1, 2, 1, 7, 0, 0);
 
                 Range row2_TieuDe_BaoCao = oSheet.Range[oSheet.Cells[4, 1], oSheet.Cells[4, lastColumn]];
                 row2_TieuDe_BaoCao.Merge();
@@ -1442,7 +1442,7 @@ namespace Vs.TimeAttendance
                 int lastColumn = 0;
                 lastColumn = dtBCThang.Columns.Count;
 
-                TaoTTChung(oSheet, 1, 2, 1, 7, 0, 0);
+                TaoTTChung_TheoDV(oSheet, 1, 2, 1, 7, 0, 0);
 
                 Range row2_TieuDe_BaoCao = oSheet.Range[oSheet.Cells[4, 1], oSheet.Cells[4, 23]];
                 row2_TieuDe_BaoCao.Merge();
@@ -1694,7 +1694,7 @@ namespace Vs.TimeAttendance
                 int lastColumn = 0;
                 lastColumn = dtBCThang.Columns.Count;
 
-                TaoTTChung(oSheet, 1, 2, 1, 7, 0, 0);
+                TaoTTChung_TheoDV(oSheet, 1, 2, 1, 7, 0, 0);
 
                 Range row2_TieuDe_BaoCao = oSheet.Range[oSheet.Cells[4, 1], oSheet.Cells[4, 19]];
                 row2_TieuDe_BaoCao.Merge();
@@ -1908,7 +1908,7 @@ namespace Vs.TimeAttendance
                 lastColumn = dtBCThang.Columns.Count;
 
 
-                TaoTTChung(oSheet, 1, 2, 1, 7, 0, 0);
+                TaoTTChung_TheoDV(oSheet, 1, 2, 1, 7, 0, 0);
 
                 Range row2_TieuDe_BaoCao = oSheet.Range[oSheet.Cells[4, 1], oSheet.Cells[4, 64]];
                 row2_TieuDe_BaoCao.Merge();
@@ -2123,7 +2123,7 @@ namespace Vs.TimeAttendance
                 lastColumn = dtBCThang.Columns.Count;
 
 
-                TaoTTChung(oSheet, 1, 2, 1, 7, 0, 0);
+                TaoTTChung_TheoDV(oSheet, 1, 2, 1, 7, 0, 0);
 
                 Range row2_TieuDe_BaoCao = oSheet.Range[oSheet.Cells[4, 1], oSheet.Cells[4, 63]];
                 row2_TieuDe_BaoCao.Merge();
@@ -2331,7 +2331,7 @@ namespace Vs.TimeAttendance
                 int lastColumn = 0;
                 lastColumn = dtBCThang.Columns.Count;
 
-                TaoTTChung(oSheet, 1, 2, 1, 7, 0, 0);
+                TaoTTChung_TheoDV(oSheet, 1, 2, 1, 7, 0, 0);
 
                 Range row2_TieuDe_BaoCao = oSheet.Range[oSheet.Cells[4, 1], oSheet.Cells[4, 19]];
                 row2_TieuDe_BaoCao.Merge();
@@ -2538,7 +2538,7 @@ namespace Vs.TimeAttendance
                 int lastColumn = 0;
                 lastColumn = dtBCThang.Columns.Count;
 
-                TaoTTChung(oSheet, 1, 2, 1, 7, 0, 0);
+                TaoTTChung_TheoDV(oSheet, 1, 2, 1, 7, 0, 0);
 
                 Range row2_TieuDe_BaoCao = oSheet.Range[oSheet.Cells[4, 1], oSheet.Cells[4, 22]];
                 row2_TieuDe_BaoCao.Merge();
@@ -2791,7 +2791,7 @@ namespace Vs.TimeAttendance
                 int fontSizeTieuDe = 16;
                 int fontSizeNoiDung = 12;
                 int oRow = 5;
-                TaoTTChung(oSheet, 1, 2, 1, 7, 0, 0);
+                TaoTTChung_TheoDV(oSheet, 1, 2, 1, 8, 0, 0);
                 foreach (DataRow rowTo in dtTo.Rows)
                 {
                     //oSheet.Name = rowTo[1].ToString();
@@ -3530,7 +3530,7 @@ namespace Vs.TimeAttendance
         {
             try
             {
-                DataTable dtTmp = Commons.Modules.ObjSystems.DataThongTinChung();
+                DataTable dtTmp = Commons.Modules.ObjSystems.DataThongTinChung(-1);
                 Microsoft.Office.Interop.Excel.Range CurCell = MWsheet.Range[MWsheet.Cells[DongBD, 1], MWsheet.Cells[DongKT, 1]];
                 CurCell.EntireRow.Insert(Microsoft.Office.Interop.Excel.XlInsertShiftDirection.xlShiftDown);
 
@@ -3638,7 +3638,7 @@ namespace Vs.TimeAttendance
                 //CurCell.Borders.LineStyle = 0;
                 //CurCell.Value2 = "Email : " + dtTmp.Rows[0]["EMAIL"];
 
-                DataTable dtLogo = Commons.Modules.ObjSystems.DataThongTinChung();
+                DataTable dtLogo = Commons.Modules.ObjSystems.DataThongTinChung(-1);
                 System.IO.DirectoryInfo dir = new System.IO.DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory + "Masters");
                 GetImage((byte[])dtLogo.Rows[0]["LOGO"], System.Windows.Forms.Application.StartupPath, "logo.bmp");
                 MWsheet.Shapes.AddPicture(System.Windows.Forms.Application.StartupPath + @"\logo.bmp", Office.MsoTriState.msoFalse, Office.MsoTriState.msoCTrue, MLeft, MTop, 50, 50);

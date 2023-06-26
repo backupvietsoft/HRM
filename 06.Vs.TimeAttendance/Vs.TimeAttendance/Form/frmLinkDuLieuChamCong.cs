@@ -293,7 +293,7 @@ namespace Vs.TimeAttendance
             DataTable tbDLQT = new DataTable("DLQT");
             DataTable dtTTC = new DataTable(); // Lấy ký hiệu đơn vị trong thông tin chung
             
-            dtTTC = Commons.Modules.ObjSystems.DataThongTinChung();
+            dtTTC = Commons.Modules.ObjSystems.DataThongTinChung(-1);
             switch (dtTTC.Rows[0]["KY_HIEU_DV"].ToString())
             {
                 case "MT":

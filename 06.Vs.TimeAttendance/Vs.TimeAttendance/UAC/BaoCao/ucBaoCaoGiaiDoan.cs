@@ -103,7 +103,7 @@ namespace Vs.HRM
             Commons.Modules.ObjSystems.LoadCboXiNghiep(LK_DON_VI,LK_XI_NGHIEP);
             Commons.Modules.ObjSystems.LoadCboTo(LK_DON_VI,LK_XI_NGHIEP,LK_TO);
 
-            sKyHieuDV = Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString();
+            sKyHieuDV = Commons.Modules.KyHieuDV;
             //if (sKyHieuDV == "DM")
             //{
             //    rdo_ChonBaoCao.Properties.Items.RemoveAt(0);
@@ -277,7 +277,7 @@ namespace Vs.HRM
                 dt = ds.Tables[0].Copy();
                 dt.TableName = "DA_TA";
                 frm.AddDataSource(dt);
-                frm.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung());
+                frm.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung(-1));
             }
             catch
             {
@@ -318,7 +318,7 @@ namespace Vs.HRM
                 dt = ds.Tables[0].Copy();
                 dt.TableName = "DA_TA";
                 frm.AddDataSource(dt);
-                frm.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung());
+                frm.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung(-1));
             }
             catch
             {
@@ -392,7 +392,7 @@ namespace Vs.HRM
                 dt = ds.Tables[0].Copy();
                 dt.TableName = "DA_TA";
                 frm.AddDataSource(dt);
-                frm.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung());
+                frm.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung(-1));
             }
             catch
             {
@@ -464,7 +464,7 @@ namespace Vs.HRM
                 dt = ds.Tables[0].Copy();
                 dt.TableName = "DA_TA";
                 frm.AddDataSource(dt);
-                frm.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung());
+                frm.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung(-1));
             }
             catch
             { }
@@ -1179,7 +1179,7 @@ namespace Vs.HRM
                 foreach (DataRow rowC in dt.Rows)
                 {
                     oSheet.Name = rowC[2].ToString();
-                    TaoTTChung(oSheet, 1, 2, 1, 7, 0, 0);
+                    TaoTTChung_TheoDV(oSheet, 1, 2, 1, 10, 0, 0);
                     int oRow = 10;
 
                     Microsoft.Office.Interop.Excel.Range row4_TieuDe_BaoCao = oSheet.Range[oSheet.Cells[5, 1], oSheet.Cells[5, 10]];
@@ -1210,7 +1210,7 @@ namespace Vs.HRM
                     row4_TieuDe_BaoCao.Value2 = "Mã nhân viên : " + rowC[1].ToString();
 
 
-                    row4_TieuDe_BaoCao = oSheet.Range[oSheet.Cells[8, 5], oSheet.Cells[8, 5]];
+                    row4_TieuDe_BaoCao = oSheet.Range[oSheet.Cells[8, 4], oSheet.Cells[8, 4]];
                     row4_TieuDe_BaoCao.Font.Size = fontSizeNoiDung;
                     row4_TieuDe_BaoCao.Font.Name = fontName;
                     row4_TieuDe_BaoCao.Font.Bold = true;
@@ -1407,7 +1407,7 @@ namespace Vs.HRM
                 dt = ds.Tables[0].Copy();
                 dt.TableName = "DA_TA";
                 frm.AddDataSource(dt);
-                frm.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung());
+                frm.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung(-1));
             }
             catch
             { }
@@ -2385,7 +2385,7 @@ namespace Vs.HRM
         {
             try
             {
-                DataTable dtTmp = Commons.Modules.ObjSystems.DataThongTinChung();
+                DataTable dtTmp = Commons.Modules.ObjSystems.DataThongTinChung(-1);
                 Microsoft.Office.Interop.Excel.Range CurCell = MWsheet.Range[MWsheet.Cells[DongBD, 1], MWsheet.Cells[DongKT, 1]];
                 CurCell.EntireRow.Insert(Microsoft.Office.Interop.Excel.XlInsertShiftDirection.xlShiftDown);
 
@@ -2427,6 +2427,73 @@ namespace Vs.HRM
 
                 System.IO.DirectoryInfo dir = new System.IO.DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory + "Masters");
                 GetImage((byte[])dtTmp.Rows[0]["LOGO"], System.Windows.Forms.Application.StartupPath, "logo.bmp");
+                MWsheet.Shapes.AddPicture(System.Windows.Forms.Application.StartupPath + @"\logo.bmp", Office.MsoTriState.msoFalse, Office.MsoTriState.msoCTrue, MLeft, MTop, 50, 50);
+                System.IO.File.Delete(System.Windows.Forms.Application.StartupPath + @"\logo.bmp");
+
+                return DongBD + 1;
+            }
+            catch
+            {
+                return DongBD + 1;
+            }
+        }
+        public int TaoTTChung_TheoDV(Excel.Worksheet MWsheet, int DongBD, int CotBD, int DongKT, int CotKT, float MLeft, float MTop)
+        {
+            try
+            {
+                string sSQL = "SELECT * FROM dbo.DON_VI WHERE ID_DV = " + LK_DON_VI.EditValue;
+                DataTable dtTmp = new DataTable();
+                dtTmp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSQL));
+
+                Microsoft.Office.Interop.Excel.Range CurCell = MWsheet.Range[MWsheet.Cells[DongBD, 1], MWsheet.Cells[DongKT, 1]];
+                CurCell.EntireRow.Insert(Microsoft.Office.Interop.Excel.XlInsertShiftDirection.xlShiftDown);
+
+                CurCell = MWsheet.Range[MWsheet.Cells[DongBD, CotBD], MWsheet.Cells[DongKT, CotKT - 3]];
+                CurCell.Merge(true);
+                CurCell.Font.Bold = true;
+                CurCell.Borders.LineStyle = 0;
+                CurCell.Value2 = dtTmp.Rows[0]["TEN_DV"];
+                CurCell.Font.Name = "Times New Roman";
+                CurCell.Font.Size = 12;
+
+
+                DongBD += 1;
+                DongKT += 1;
+                CurCell = MWsheet.Range[MWsheet.Cells[DongBD, "A"], MWsheet.Cells[DongKT, "A"]];
+                CurCell.EntireRow.Insert(Microsoft.Office.Interop.Excel.XlInsertShiftDirection.xlShiftDown);
+                CurCell = MWsheet.Range[MWsheet.Cells[DongBD, CotBD], MWsheet.Cells[DongKT, CotKT]];
+                CurCell.Merge(true);
+                CurCell.Font.Bold = true;
+                CurCell.Borders.LineStyle = 0;
+                CurCell.Value2 = Commons.Modules.ObjLanguages.GetLanguage("frmChung", "diachi") + " : " + dtTmp.Rows[0]["DIA_CHI"].ToString();
+                CurCell.Font.Name = "Times New Roman";
+                CurCell.Font.Size = 12;
+
+                DongBD += 1;
+                DongKT += 1;
+                CurCell = MWsheet.Range[MWsheet.Cells[DongBD, "A"], MWsheet.Cells[DongKT, "A"]];
+                CurCell.EntireRow.Insert(Microsoft.Office.Interop.Excel.XlInsertShiftDirection.xlShiftDown);
+                CurCell = MWsheet.Range[MWsheet.Cells[DongBD, CotBD], MWsheet.Cells[DongKT, CotKT]];
+                CurCell.Merge(true);
+                CurCell.Font.Bold = true;
+                CurCell.Borders.LineStyle = 0;
+                CurCell.Value2 = Commons.Modules.ObjLanguages.GetLanguage("frmChung", "dienthoai") + " : " + dtTmp.Rows[0]["DIEN_THOAI"] + "  " + Commons.Modules.ObjLanguages.GetLanguage("frmChung", "Fax") + " : " + dtTmp.Rows[0]["FAX"].ToString();
+                CurCell.Font.Name = "Times New Roman";
+                CurCell.Font.Size = 12;
+
+                //DongBD += 1;
+                //DongKT += 1;
+                //CurCell = MWsheet.Range[MWsheet.Cells[DongBD, "A"], MWsheet.Cells[DongKT, "A"]];
+                //CurCell.EntireRow.Insert(Microsoft.Office.Interop.Excel.XlInsertShiftDirection.xlShiftDown);
+                //CurCell = MWsheet.Range[MWsheet.Cells[DongBD, CotBD], MWsheet.Cells[DongKT, CotKT]];
+                //CurCell.Merge(true);
+                //CurCell.Font.Bold = true;
+                //CurCell.Borders.LineStyle = 0;
+                //CurCell.Value2 = "Email : " + dtTmp.Rows[0]["EMAIL"];
+
+                DataTable dtLogo = Commons.Modules.ObjSystems.DataThongTinChung(-1);
+                System.IO.DirectoryInfo dir = new System.IO.DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory + "Masters");
+                GetImage((byte[])dtLogo.Rows[0]["LOGO"], System.Windows.Forms.Application.StartupPath, "logo.bmp");
                 MWsheet.Shapes.AddPicture(System.Windows.Forms.Application.StartupPath + @"\logo.bmp", Office.MsoTriState.msoFalse, Office.MsoTriState.msoCTrue, MLeft, MTop, 50, 50);
                 System.IO.File.Delete(System.Windows.Forms.Application.StartupPath + @"\logo.bmp");
 

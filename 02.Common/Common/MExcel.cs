@@ -741,7 +741,7 @@ public class MExcel
     {
         try
         {
-            DataTable dtTmp = Commons.Modules.ObjSystems.DataThongTinChung();
+            DataTable dtTmp = Commons.Modules.ObjSystems.DataThongTinChung(-1);
             Microsoft.Office.Interop.Excel.Range CurCell = MWsheet.Range[MWsheet.Cells[DongBD, 1], MWsheet.Cells[DongKT, 1]];
             CurCell.EntireRow.Insert(Microsoft.Office.Interop.Excel.XlInsertShiftDirection.xlShiftDown);
 
@@ -985,6 +985,12 @@ public class MExcel
                             if (WidthColumns[j][0].ToString().Contains(ws.Cells[iRow, i].Value.ToString()))
                             {
                                 ws.Column(i).Width = int.Parse(WidthColumns[j][1].ToString());
+                                try
+                                {
+                                    if (WidthColumns[j][2].ToString() != "")
+                                        ws.Column(i).Style.Numberformat.Format = WidthColumns[j][2].ToString();
+                                }
+                                catch { }
                                 break;
                             }
                         }

@@ -10,21 +10,18 @@ namespace Vs.Report
 {
     public partial class rptHopDongLaoDong_SB : DevExpress.XtraReports.UI.XtraReport
     {
-        public rptHopDongLaoDong_SB(DateTime ngayin)
+        public rptHopDongLaoDong_SB(DateTime ngayin) // hợp đồng đầu tiên
         {   //DateTime ngayin
             InitializeComponent();
 
             string NgayBC = "0" + ngayin.Day;
             string ThangBC = "0" + ngayin.Month;
             string NamBC = "00" + ngayin.Year;
-
-            
-
         }
 
-        private void xrLabel66_BeforePrint(object sender, CancelEventArgs e)
+        private void rptHopDongLaoDong_SB_BeforePrint(object sender, CancelEventArgs e)
         {
-
+            
         }
     }
 }

@@ -230,6 +230,7 @@ namespace Vs.HRM
                     txtCHE_DO_NANG_LUONG_A.EditValue = tableTTC_CN.Rows[0]["CHE_DO_NANG_LUONG_A"];
                     txtMO_TA_CV_A.EditValue = tableTTC_CN.Rows[0]["MO_TA_CV_A"];
                     sGiayUyQuyen = Convert.ToString(tableTTC_CN.Rows[0]["GIAY_UY_QUYEN"]);
+                    txtLuongThuViec.EditValue = 0;
                 }
                 catch (Exception ex)
                 {
@@ -407,7 +408,10 @@ namespace Vs.HRM
                     grvHopDong.FocusedRowHandle = grvHopDong.GetRowHandle(index);
                 }
                 grvHopDong.Columns["GIAY_UY_QUYEN"].Visible = false;
-                GrvHopDong_FocusedRowChanged(null, null);
+                if (dt.Rows.Count > 0)
+                {
+                    GrvHopDong_FocusedRowChanged(null, null);
+                }
             }
             catch { }
         }

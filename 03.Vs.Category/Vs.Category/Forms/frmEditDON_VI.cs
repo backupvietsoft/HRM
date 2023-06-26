@@ -40,13 +40,11 @@ namespace Vs.Category
                     EMAIL_TD.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
                     HOTLINE_TD.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
                     ItemForFB.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+                }
+                if (Commons.Modules.UserName == "admin" || Commons.Modules.UserName == "administrator")
+                {
                     lblTenDataLink.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
                     lblDuongDanDataLink.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
-                    if (Commons.Modules.UserName != "admin" && Commons.Modules.UserName != "administrator")
-                    {
-                        lblTenDataLink.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
-                        lblDuongDanDataLink.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
-                    }
                 }
                 if (!bAddEditDV)
                 {

@@ -13,7 +13,7 @@ namespace Vs.Report
         public rptBangLuongThang_TG(string ngay,string nx,string xn, string to,DateTime ngayin)
         {
             InitializeComponent();
-            DataTable dt = Commons.Modules.ObjSystems.DataThongTinChung();
+            DataTable dt = Commons.Modules.ObjSystems.DataThongTinChung(-1);
             this.DataSource = dt;
             Commons.Modules.ObjSystems.ThayDoiNN(this);
             NONNX.Text = nx;

@@ -10,12 +10,12 @@ namespace Vs.Payroll
 {
     public partial class rptBaoCaoNghiBoViecThang : DevExpress.XtraReports.UI.XtraReport
     {
-        public rptBaoCaoNghiBoViecThang(DateTime lthang, string tde)
+        public rptBaoCaoNghiBoViecThang(DateTime lthang, string tde, int iddv)
         {
 
             InitializeComponent();
             Commons.Modules.ObjSystems.ThayDoiNN(this);
-            xrSubreport1.ReportSource = new SubReportHeader();
+            xrSubreport1.ReportSource = new SubReportHeader(iddv);
 
             string Thang = "0" + lthang.Month;
             string Nam = "00" + lthang.Year;

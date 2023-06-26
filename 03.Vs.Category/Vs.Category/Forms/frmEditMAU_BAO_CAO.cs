@@ -120,7 +120,7 @@ namespace Vs.Category
             try
             {
                 DataTable dt = new DataTable();
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboLOAI_RPT", Commons.Modules.TypeLanguage, 0, Commons.Modules.ObjSystems.DataThongTinChung().Rows[0]["KY_HIEU_DV"].ToString()));
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboLOAI_RPT", Commons.Modules.TypeLanguage, 0, Commons.Modules.ObjSystems.DataThongTinChung(-1).Rows[0]["KY_HIEU_DV"].ToString()));
                 Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboLoai_RPT, dt, "ID_LOAI_RPT", "TEN_NGAN", "TEN_NGAN", true, false);
             }
             catch (Exception ex)
@@ -165,7 +165,7 @@ namespace Vs.Category
 
                 DataTable dt = new DataTable();
                 DataTable dtTTC = new DataTable();
-                dtTTC = Commons.Modules.ObjSystems.DataThongTinChung();
+                dtTTC = Commons.Modules.ObjSystems.DataThongTinChung(-1);
                 dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetMauBaoCao", Commons.Modules.TypeLanguage, Convert.ToInt64(cboLoai_RPT.EditValue), dtTTC.Rows[0]["KY_HIEU_DV"].ToString()));
                 Commons.Modules.ObjSystems.MLoadXtraGrid(grdMauBC, grvMauBC, dt, false, false, false, false, true, this.Name);
 

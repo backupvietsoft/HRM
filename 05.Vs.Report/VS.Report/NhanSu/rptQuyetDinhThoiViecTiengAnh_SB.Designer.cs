@@ -548,8 +548,8 @@
             this.lb3.StylePriority.UseFont = false;
             this.lb3.StylePriority.UsePadding = false;
             this.lb3.StylePriority.UseTextAlignment = false;
-            this.lb3.Text = "-Basing on The Investment licence No 412043000148 issued by HEPZA about the formi" +
-    "ng of 100% foreign capital company to SB SAIGON FASHION CO., LTD";
+            this.lb3.Text = "-Basing on The Investment licence No 5483146048 issued by HEPZA about the forming" +
+    " of 100% foreign capital company to SB SAIGON FASHION CO., LTD";
             this.lb3.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
             // 
             // xrLabel1

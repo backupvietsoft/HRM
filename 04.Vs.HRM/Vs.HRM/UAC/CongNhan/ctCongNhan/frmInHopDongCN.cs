@@ -53,6 +53,10 @@ namespace Vs.HRM
                 rdo_ChonBaoCao.Properties.Items.Remove(rdo_ChonBaoCao.Properties.Items.Where(x => x.Tag.ToString() == "rdo_HopDongDaoTao").FirstOrDefault());
                 rdo_ChonBaoCao.Properties.Items.Remove(rdo_ChonBaoCao.Properties.Items.Where(x => x.Tag.ToString() == "rdo_HopDongThucViecCN_QC").FirstOrDefault());
             }
+            else if(Commons.Modules.KyHieuDV == "TG")
+            {
+                rdo_ChonBaoCao.Properties.Items.Remove(rdo_ChonBaoCao.Properties.Items.Where(x => x.Tag.ToString() == "rdo_HopDongLaoDongKhoang").FirstOrDefault());
+            }
             else
             {
                 rdo_ChonBaoCao.Properties.Items.Remove(rdo_ChonBaoCao.Properties.Items.Where(x => x.Tag.ToString() == "rdo_HopDongLaoDongKhoang").FirstOrDefault());
@@ -275,6 +279,11 @@ namespace Vs.HRM
                                         case "SB":
                                             {
                                                 HopDongThoiVu_SB();
+                                                break;
+                                            }
+                                        case "TG":
+                                            {
+                                                InToKhaiDangKyThue(idCN);
                                                 break;
                                             }
                                         default:
@@ -1410,7 +1419,7 @@ namespace Vs.HRM
                 adp.Fill(ds);
 
                 ds.Tables[0].TableName = "HDLD";
-               
+
                 string sPath = "";
                 if (!System.IO.Directory.Exists("Report")) // kiểm tra xem forder đã có chưa , nếu chưa có thì tạo 
                 {
@@ -1494,14 +1503,19 @@ namespace Vs.HRM
                 }
                 sPath = "Report\\" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".docx";
 
+                string sTenHopDong = "HopDongThuViec.doc";
+                if (dt.Rows[0]["KY_HIEU_HD"].ToString() == "DT")
+                {
+                    sTenHopDong = "HopDongDaoTao.doc";
+                }
                 //fill vào báo cáo
                 var date = dNgayIn.DateTime;
-                Document baoCao = new Document("Template\\TemplateTG\\HopDongThuViec.doc");
+                Document baoCao = new Document("Template\\TemplateTG\\" + sTenHopDong + "");
                 foreach (DataColumn item in dt.Columns)
                 {
                     if (Commons.Modules.ObjSystems.IsnullorEmpty(row[item]))
                     {
-                        baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { "..." });
+                        baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { "" });
 
                         continue;
                     }
@@ -1610,17 +1624,14 @@ namespace Vs.HRM
                 Commons.Modules.ObjSystems.MsgError(ex.Message);
             }
         }
-
         private void HopDongThoiVu_TG()
         {
             DataTable dt = new DataTable();
-            DataTable dtbc = new DataTable();
+
             try
             {
                 System.Data.SqlClient.SqlConnection conn1;
                 dt = new DataTable();
-                frmViewReport frm = new frmViewReport();
-                frm.rpt = new rptHopDongThoiVu_HN(dNgayIn.DateTime);
 
                 conn1 = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
                 conn1.Open();
@@ -1692,6 +1703,70 @@ namespace Vs.HRM
             {
                 Commons.Modules.ObjSystems.MsgError(ex.Message);
             }
+        }
+        private void InToKhaiDangKyThue(Int64 ID_CN)
+        {
+            this.Cursor = Cursors.WaitCursor;
+            try
+            {
+                System.Data.SqlClient.SqlConnection conn;
+                System.Data.DataTable dt = new System.Data.DataTable();
+
+                conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                conn.Open();
+
+                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptToKhaiDangKyThue", conn);
+                cmd.Parameters.Add("@ID_CN", SqlDbType.BigInt).Value = ID_CN;
+                cmd.CommandType = CommandType.StoredProcedure;
+                System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+                DataSet ds = new DataSet();
+                adp.Fill(ds);
+                dt = new System.Data.DataTable();
+                dt = ds.Tables[0].Copy();
+                DataRow row = dt.Rows[0];
+
+                string sPath = "";
+
+                if (!System.IO.Directory.Exists("Report")) // kiểm tra xem forder đã có chưa , nếu chưa có thì tạo 
+                {
+                    System.IO.Directory.CreateDirectory("Report");
+                }
+                sPath = "Report\\" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".docx";
+
+                //fill vào báo cáo
+                Document baoCao = new Document("Template\\TemplateTG\\ToKhaiThueTNCN.doc");
+                foreach (DataColumn item in dt.Columns)
+                {
+                    if (string.IsNullOrEmpty(Convert.ToString(row[item])))
+                    {
+                        baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { "" });
+                        continue;
+                    }
+                    switch (item.DataType.Name)
+                    {
+                        case "DateTime":
+                            {
+                                baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { Convert.ToDateTime(row[item]).ToString("dd/MM/yyyy") });
+                                break;
+                            }
+
+                        default:
+                            {
+                                baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { Convert.ToString(row[item]) });
+                                break;
+
+                            }
+                    }
+                }
+                baoCao.Save(sPath);
+                Process.Start(sPath);
+            }
+            catch (Exception ex)
+            {
+                Commons.Modules.ObjSystems.MsgError(ex.Message);
+            }
+
+            this.Cursor = Cursors.Default;
         }
         private void ThongBaoKetThucHDLD()
         {

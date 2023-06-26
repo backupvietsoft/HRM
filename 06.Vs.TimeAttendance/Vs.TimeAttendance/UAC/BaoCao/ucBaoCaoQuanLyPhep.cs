@@ -1618,7 +1618,7 @@ namespace Vs.TimeAttendance
                 dtBCPhep = ds.Tables[0].Copy();
                 dtBCPhep.TableName = "DA_TA";
                 frm.AddDataSource(dtBCPhep);
-                frm.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung());
+                frm.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung(-1));
             }
             catch
             { }
@@ -1849,7 +1849,7 @@ namespace Vs.TimeAttendance
                 dtBCPhep = ds.Tables[0].Copy();
                 dtBCPhep.TableName = "DA_TA";
                 frm.AddDataSource(dtBCPhep);
-                frm.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung());
+                frm.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung(-1));
             }
             catch
             { }
@@ -1891,7 +1891,7 @@ namespace Vs.TimeAttendance
                 dtBCPhep = ds.Tables[0].Copy();
                 dtBCPhep.TableName = "DA_TA";
                 frm.AddDataSource(dtBCPhep);
-                //frm.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung());
+                //frm.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung(-1));
             }
             catch
             { }
@@ -1925,7 +1925,7 @@ namespace Vs.TimeAttendance
         {
             try
             {
-                DataTable dtTmp = Commons.Modules.ObjSystems.DataThongTinChung();
+                DataTable dtTmp = Commons.Modules.ObjSystems.DataThongTinChung(-1);
                 Microsoft.Office.Interop.Excel.Range CurCell = MWsheet.Range[MWsheet.Cells[DongBD, 1], MWsheet.Cells[DongKT, 1]];
                 CurCell.EntireRow.Insert(Microsoft.Office.Interop.Excel.XlInsertShiftDirection.xlShiftDown);
 

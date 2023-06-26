@@ -10,12 +10,12 @@ namespace Vs.Report
 {
     public partial class rptDSNVVachTheLoi : DevExpress.XtraReports.UI.XtraReport
     {
-        public rptDSNVVachTheLoi(DateTime dTNgay, DateTime dDNgay, DateTime ngayin)
+        public rptDSNVVachTheLoi(DateTime dTNgay, DateTime dDNgay, DateTime ngayin, int iddv)
         {
 
             InitializeComponent();
             Commons.Modules.ObjSystems.ThayDoiNN(this);
-            xrSubreport1.ReportSource = new SubReportHeader();
+            xrSubreport1.ReportSource = new SubReportHeader(iddv);
             try
             {
                 //lblTIEU_DE.Text = tieuDe;

@@ -350,7 +350,7 @@ namespace Vs.Payroll
                 DataTable dtBCLSP;
 
                 dtTTChung = new DataTable();
-                dtTTChung = Commons.Modules.ObjSystems.DataThongTinChung();
+                dtTTChung = Commons.Modules.ObjSystems.DataThongTinChung(-1);
 
                 System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spGetLSPChuyen", conn);
                 cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = "admin";
@@ -1668,7 +1668,7 @@ namespace Vs.Payroll
                 DataTable dtBCLSP;
 
                 dtTTChung = new DataTable();
-                dtTTChung = Commons.Modules.ObjSystems.DataThongTinChung();
+                dtTTChung = Commons.Modules.ObjSystems.DataThongTinChung(-1);
 
                 System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spGetLSPChuyen", conn);
                 cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
@@ -1935,7 +1935,7 @@ namespace Vs.Payroll
                 DataTable dtBCLSP;
 
                 dtTTChung = new DataTable();
-                dtTTChung = Commons.Modules.ObjSystems.DataThongTinChung();
+                dtTTChung = Commons.Modules.ObjSystems.DataThongTinChung(-1);
 
                 System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spGetLSPChuyen", conn);
                 cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
@@ -2774,7 +2774,7 @@ namespace Vs.Payroll
         {
             try
             {
-                DataTable dtTmp = Commons.Modules.ObjSystems.DataThongTinChung();
+                DataTable dtTmp = Commons.Modules.ObjSystems.DataThongTinChung(-1);
                 Microsoft.Office.Interop.Excel.Range CurCell = MWsheet.Range[MWsheet.Cells[DongBD, 1], MWsheet.Cells[DongKT, 1]];
                 CurCell.EntireRow.Insert(Microsoft.Office.Interop.Excel.XlInsertShiftDirection.xlShiftDown);
 

@@ -46,7 +46,7 @@ namespace Vs.HRM
                                         System.Data.SqlClient.SqlConnection conn;
                                         dt = new DataTable();
                                         string sTieuDe = "DANH SÁCH CÔNG NHÂN HỢP ĐỒNG";
-                                        frm.rpt = new rptBCHopDongHetHan(lk_NgayTinh.DateTime, sTieuDe, lk_NgayIn.DateTime, lk_NgayIn.DateTime);
+                                        frm.rpt = new rptBCHopDongHetHan(lk_NgayTinh.DateTime, sTieuDe, lk_NgayIn.DateTime, lk_NgayIn.DateTime, Convert.ToInt32(LK_DON_VI.EditValue));
 
                                         try
                                         {
@@ -70,7 +70,7 @@ namespace Vs.HRM
                                             dt = ds.Tables[0].Copy();
                                             dt.TableName = "DA_TA";
                                             frm.AddDataSource(dt);
-                                            frm.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung());
+                                            frm.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung(-1));
                                         }
                                         catch
                                         { }
@@ -91,7 +91,7 @@ namespace Vs.HRM
                                                 }
                                             default:
                                                 {
-                                                    frm.rpt = new rptBCHopDongHetHan(lk_NgayTinh.DateTime, sTieuDe1, lk_NgayIn.DateTime, lk_NgayIn.DateTime);
+                                                    frm.rpt = new rptBCHopDongHetHan(lk_NgayTinh.DateTime, sTieuDe1, lk_NgayIn.DateTime, lk_NgayIn.DateTime, Convert.ToInt32(LK_DON_VI.EditValue));
                                                     break;
                                                 }
                                         }
@@ -119,7 +119,7 @@ namespace Vs.HRM
                                             dt = ds.Tables[0].Copy();
                                             dt.TableName = "DA_TA";
                                             frm.AddDataSource(dt);
-                                            frm.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung());
+                                            frm.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung(-1));
                                         }
                                         catch
                                         { }
@@ -265,7 +265,7 @@ namespace Vs.HRM
                                         }
                                         else
                                         {
-                                            if(Commons.Modules.KyHieuDV == "SB")
+                                            if (Commons.Modules.KyHieuDV == "SB")
                                             {
                                                 BaoCaoHopDongGiaiDoan_SB();
                                                 return;
@@ -273,7 +273,7 @@ namespace Vs.HRM
                                             System.Data.SqlClient.SqlConnection conn2;
                                             dt = new DataTable();
                                             string sTieuDe2 = "DANH SÁCH CÔNG NHÂN KÝ HỢP ĐỒNG";
-                                            frm.rpt = new rptBCHopDongHetHan(lk_NgayIn.DateTime, sTieuDe2, dTuNgay.DateTime, dDenNgay.DateTime);
+                                            frm.rpt = new rptBCHopDongHetHan(lk_NgayIn.DateTime, sTieuDe2, dTuNgay.DateTime, dDenNgay.DateTime, Convert.ToInt32(LK_DON_VI.EditValue));
 
                                             try
                                             {
@@ -299,7 +299,7 @@ namespace Vs.HRM
                                                 dt = ds.Tables[0].Copy();
                                                 dt.TableName = "DA_TA";
                                                 frm.AddDataSource(dt);
-                                                frm.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung());
+                                                frm.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung(-1));
                                             }
                                             catch
                                             { }
@@ -341,7 +341,7 @@ namespace Vs.HRM
                                         //    dt = ds.Tables[0].Copy();
                                         //    dt.TableName = "DATA";
                                         //    frm.AddDataSource(dt);
-                                        //    frm.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung());
+                                        //    frm.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung(-1));
                                         //}
                                         //catch
                                         //{ }
@@ -383,7 +383,7 @@ namespace Vs.HRM
                                         //    dt = ds.Tables[0].Copy();
                                         //    dt.TableName = "DATA";
                                         //    frm.AddDataSource(dt);
-                                        //    frm.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung());
+                                        //    frm.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung(-1));
                                         //}
                                         //catch
                                         //{ }

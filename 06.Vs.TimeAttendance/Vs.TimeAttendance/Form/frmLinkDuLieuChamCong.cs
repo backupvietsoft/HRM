@@ -96,7 +96,7 @@ namespace Vs.TimeAttendance
             windowsUIButton.Buttons[13].Properties.Visible = visible;
             //      groupDanhSachKhoaHoc.Enabled = visible;
         }
-        
+
         private void windowsUIButton_ButtonClick(object sender, DevExpress.XtraBars.Docking2010.ButtonEventArgs e)
         {
             WindowsUIButton btn = e.Button as WindowsUIButton;
@@ -116,21 +116,21 @@ namespace Vs.TimeAttendance
                             Commons.Modules.ObjSystems.AddnewRow(grvChamCong, true);
                         }
                         catch
-                        {}
+                        { }
                         break;
                     }
                 case "sua":
                     {
                         try
                         {
-                        them = true;
-                        enableButon(false);
-                        DateTime ngay = dtNgayChamCong.DateTime;
-                        Int32 idcn = int.Parse(grvDSCN.GetFocusedRowCellValue("ID_CN").ToString());
-                        LoadGridChamCong(ngay, idcn);
+                            them = true;
+                            enableButon(false);
+                            DateTime ngay = dtNgayChamCong.DateTime;
+                            Int32 idcn = int.Parse(grvDSCN.GetFocusedRowCellValue("ID_CN").ToString());
+                            LoadGridChamCong(ngay, idcn);
                         }
                         catch
-                        {}
+                        { }
                         break;
                     }
                 case "xoangay":
@@ -190,8 +190,8 @@ namespace Vs.TimeAttendance
                             Commons.Modules.ObjSystems.DeleteAddRow(grvChamCong);
                         }
                         catch
-                        {  }
-                        
+                        { }
+
                         break;
                     }
                 case "TongHopThongTin":
@@ -247,7 +247,7 @@ namespace Vs.TimeAttendance
                                                         + Convert.ToDateTime(dtNgayChamCong.EditValue).ToString("yyyy/MM/dd") +
                                                         "' AND CONVERT(nvarchar(10),GIO_DEN,108) = '"
                                                         + Convert.ToDateTime(grvChamCong.GetFocusedRowCellValue("GIO_DEN")).ToString("HH:mm:ss") + "'";
-                
+
 
                 SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, sSql);
                 grvChamCong.DeleteSelectedRows();
@@ -266,13 +266,13 @@ namespace Vs.TimeAttendance
             Int32 idcn = int.Parse(grvDSCN.GetFocusedRowCellValue("ID_CN").ToString());
             try
             {
-                Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, stbChamCong,Commons.Modules.ObjSystems.ConvertDatatable(grvChamCong), "");
+                Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, stbChamCong, Commons.Modules.ObjSystems.ConvertDatatable(grvChamCong), "");
                 sSql = " DELETE FROM DU_LIEU_QUET_THE WHERE NGAY = '" + Convert.ToDateTime(dtNgayChamCong.EditValue).ToString("yyyyMMdd") +
-                       "' AND ID_CN = "+ idcn+ "" +
+                       "' AND ID_CN = " + idcn + "" +
                        " INSERT INTO DU_LIEU_QUET_THE (ID_CN, NGAY, ID_NHOM, CA, NGAY_DEN, GIO_DEN, PHUT_DEN, NGAY_VE, GIO_VE, PHUT_VE, CHINH_SUA) " +
-                       " SELECT '"+idcn+"','" + Convert.ToDateTime(dtNgayChamCong.EditValue).ToString("yyyyMMdd") + "', ID_NHOM, CA, " +
+                       " SELECT '" + idcn + "','" + Convert.ToDateTime(dtNgayChamCong.EditValue).ToString("yyyyMMdd") + "', ID_NHOM, CA, " +
                        " NGAY_DEN, GIO_DEN, (DATEPART(HH,GIO_DEN)*60) + DATEPART(MI,GIO_DEN) PD, NGAY_VE, GIO_VE, (DATEPART(HH,GIO_VE)*60) + DATEPART(MI,GIO_VE) PV, 1" +
-                       " FROM " + stbChamCong+"";
+                       " FROM " + stbChamCong + "";
                 SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, sSql);
                 Commons.Modules.ObjSystems.XoaTable(stbChamCong);
                 return true;
@@ -292,7 +292,7 @@ namespace Vs.TimeAttendance
             //tạo một table để chứa dữ liệu
             DataTable tbDLQT = new DataTable("DLQT");
             DataTable dtTTC = new DataTable(); // Lấy ký hiệu đơn vị trong thông tin chung
-            
+
             dtTTC = Commons.Modules.ObjSystems.DataThongTinChung(-1);
             switch (dtTTC.Rows[0]["KY_HIEU_DV"].ToString())
             {
@@ -363,7 +363,7 @@ namespace Vs.TimeAttendance
                         grvDSCN_FocusedRowChanged(null, null);
                         if (KiemDL())
                         {
-                            bLinkOK = true; 
+                            bLinkOK = true;
                         }
                         else
                         {
@@ -518,7 +518,7 @@ namespace Vs.TimeAttendance
             {
                 XtraMessageBox.Show(ex.Message.ToString());
             }
-            
+
         }
         private void Convert1(string File, DataTable dt, string delimiter)
         {
@@ -552,7 +552,7 @@ namespace Vs.TimeAttendance
                         ", '" + Convert.ToDateTime(dtNgayChamCong.EditValue).ToString("yyyyMMdd") + "')) T2 ON T1.ID_CN = T2.ID_CN " +
                         "WHERE T1.NGAY = '" + Convert.ToDateTime(dtNgayChamCong.EditValue).ToString("yyyyMMdd") + "'";
                 }
-                
+
                 if (Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, sSql)) != 0)
                 {
                     return true;
@@ -702,7 +702,7 @@ namespace Vs.TimeAttendance
             }
         }
         #endregion
-        
+
         private void cbDonVi_EditValueChanged(object sender, EventArgs e)
         {
             Commons.Modules.ObjSystems.LoadCboXiNghiep(cbDonVi, cbXiNghiep);
@@ -751,13 +751,13 @@ namespace Vs.TimeAttendance
             {
                 LoadGridCongNhan(dtNgayChamCong.DateTime);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
 
             }
             Commons.Modules.sLoad = "";
         }
-        
+
         private void grvDSCN_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
             try
@@ -825,7 +825,7 @@ namespace Vs.TimeAttendance
 
             // Access the currently selected data row
             DataRowView dataRow = lookUp.GetSelectedDataRow() as DataRowView;
-            
+
             grvChamCong.SetFocusedRowCellValue("CA", (dataRow.Row[1]));
             //grvLamThem.SetFocusedRowCellValue("PHUT_BD", dataRow.Row["PHUT_BD"]);
             //grvLamThem.SetFocusedRowCellValue("PHUT_KT", dataRow.Row["PHUT_KT"]);
@@ -867,9 +867,9 @@ namespace Vs.TimeAttendance
 
         private void grvChamCong_InitNewRow(object sender, DevExpress.XtraGrid.Views.Grid.InitNewRowEventArgs e)
         {
-            grvChamCong.SetFocusedRowCellValue("NGAY_DEN", dtNgayChamCong.EditValue );
-            grvChamCong.SetFocusedRowCellValue("NGAY_VE", dtNgayChamCong.EditValue );
-            grvChamCong.SetFocusedRowCellValue("GIO_DEN", dtNgayChamCong.EditValue );
+            grvChamCong.SetFocusedRowCellValue("NGAY_DEN", dtNgayChamCong.EditValue);
+            grvChamCong.SetFocusedRowCellValue("NGAY_VE", dtNgayChamCong.EditValue);
+            grvChamCong.SetFocusedRowCellValue("GIO_DEN", dtNgayChamCong.EditValue);
         }
 
         private void grvDSCN_RowCountChanged(object sender, EventArgs e)

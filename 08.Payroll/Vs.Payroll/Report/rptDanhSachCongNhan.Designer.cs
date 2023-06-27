@@ -155,7 +155,7 @@
             this.xrTableCell1.Dpi = 254F;
             this.xrTableCell1.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "sumRecordNumber()")});
-            this.xrTableCell1.Font = new DevExpress.Drawing.DXFont("Times New Roman", 11.25F, DevExpress.Drawing.DXFontStyle.Regular, DevExpress.Drawing.DXGraphicsUnit.Point, new DevExpress.Drawing.DXFontAdditionalProperty[] {new DevExpress.Drawing.DXFontAdditionalProperty("GdiCharSet", ((byte)(0)))});
+            this.xrTableCell1.Font = new DevExpress.Drawing.DXFont("Times New Roman", 9.25F, DevExpress.Drawing.DXFontStyle.Regular, DevExpress.Drawing.DXGraphicsUnit.Point, new DevExpress.Drawing.DXFontAdditionalProperty[] {new DevExpress.Drawing.DXFontAdditionalProperty("GdiCharSet", ((byte)(0)))});
             this.xrTableCell1.Multiline = true;
             this.xrTableCell1.Name = "xrTableCell1";
             this.xrTableCell1.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
@@ -174,7 +174,7 @@
             this.xrTableCell7.Dpi = 254F;
             this.xrTableCell7.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[DATA2].[MS_CN]")});
-            this.xrTableCell7.Font = new DevExpress.Drawing.DXFont("Times New Roman", 11.25F, DevExpress.Drawing.DXFontStyle.Regular, DevExpress.Drawing.DXGraphicsUnit.Point, new DevExpress.Drawing.DXFontAdditionalProperty[] {new DevExpress.Drawing.DXFontAdditionalProperty("GdiCharSet", ((byte)(0)))});
+            this.xrTableCell7.Font = new DevExpress.Drawing.DXFont("Times New Roman", 9.25F, DevExpress.Drawing.DXFontStyle.Regular, DevExpress.Drawing.DXGraphicsUnit.Point, new DevExpress.Drawing.DXFontAdditionalProperty[] {new DevExpress.Drawing.DXFontAdditionalProperty("GdiCharSet", ((byte)(0)))});
             this.xrTableCell7.Multiline = true;
             this.xrTableCell7.Name = "xrTableCell7";
             this.xrTableCell7.Padding = new DevExpress.XtraPrinting.PaddingInfo(10, 10, 0, 0, 254F);
@@ -191,7 +191,7 @@
             this.xrTableCell5.Dpi = 254F;
             this.xrTableCell5.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[DATA2].[HO_TEN]")});
-            this.xrTableCell5.Font = new DevExpress.Drawing.DXFont("Times New Roman", 11.25F, DevExpress.Drawing.DXFontStyle.Regular, DevExpress.Drawing.DXGraphicsUnit.Point, new DevExpress.Drawing.DXFontAdditionalProperty[] {new DevExpress.Drawing.DXFontAdditionalProperty("GdiCharSet", ((byte)(0)))});
+            this.xrTableCell5.Font = new DevExpress.Drawing.DXFont("Times New Roman", 9.25F, DevExpress.Drawing.DXFontStyle.Regular, DevExpress.Drawing.DXGraphicsUnit.Point, new DevExpress.Drawing.DXFontAdditionalProperty[] {new DevExpress.Drawing.DXFontAdditionalProperty("GdiCharSet", ((byte)(0)))});
             this.xrTableCell5.Multiline = true;
             this.xrTableCell5.Name = "xrTableCell5";
             this.xrTableCell5.Padding = new DevExpress.XtraPrinting.PaddingInfo(10, 10, 0, 0, 254F);
@@ -207,7 +207,7 @@
             this.xrTableCell3.Dpi = 254F;
             this.xrTableCell3.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[DATA2].[TSL_NHAP_GD]")});
-            this.xrTableCell3.Font = new DevExpress.Drawing.DXFont("Times New Roman", 11.25F, DevExpress.Drawing.DXFontStyle.Regular, DevExpress.Drawing.DXGraphicsUnit.Point, new DevExpress.Drawing.DXFontAdditionalProperty[] {new DevExpress.Drawing.DXFontAdditionalProperty("GdiCharSet", ((byte)(0)))});
+            this.xrTableCell3.Font = new DevExpress.Drawing.DXFont("Times New Roman", 9.25F, DevExpress.Drawing.DXFontStyle.Regular, DevExpress.Drawing.DXGraphicsUnit.Point, new DevExpress.Drawing.DXFontAdditionalProperty[] {new DevExpress.Drawing.DXFontAdditionalProperty("GdiCharSet", ((byte)(0)))});
             this.xrTableCell3.Multiline = true;
             this.xrTableCell3.Name = "xrTableCell3";
             this.xrTableCell3.Padding = new DevExpress.XtraPrinting.PaddingInfo(10, 10, 0, 0, 254F);
@@ -224,7 +224,7 @@
             this.xrTableCell4.Dpi = 254F;
             this.xrTableCell4.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[DATA2].[TSL_NHAP_LK]")});
-            this.xrTableCell4.Font = new DevExpress.Drawing.DXFont("Times New Roman", 11.25F, DevExpress.Drawing.DXFontStyle.Regular, DevExpress.Drawing.DXGraphicsUnit.Point, new DevExpress.Drawing.DXFontAdditionalProperty[] {new DevExpress.Drawing.DXFontAdditionalProperty("GdiCharSet", ((byte)(0)))});
+            this.xrTableCell4.Font = new DevExpress.Drawing.DXFont("Times New Roman", 9.25F, DevExpress.Drawing.DXFontStyle.Regular, DevExpress.Drawing.DXGraphicsUnit.Point, new DevExpress.Drawing.DXFontAdditionalProperty[] {new DevExpress.Drawing.DXFontAdditionalProperty("GdiCharSet", ((byte)(0)))});
             this.xrTableCell4.Multiline = true;
             this.xrTableCell4.Name = "xrTableCell4";
             this.xrTableCell4.Padding = new DevExpress.XtraPrinting.PaddingInfo(10, 10, 0, 0, 254F);
@@ -287,7 +287,7 @@
             // lbTong
             // 
             this.lbTong.Dpi = 254F;
-            this.lbTong.Font = new DevExpress.Drawing.DXFont("Times New Roman", 11.25F, DevExpress.Drawing.DXFontStyle.Bold, DevExpress.Drawing.DXGraphicsUnit.Point, new DevExpress.Drawing.DXFontAdditionalProperty[] {new DevExpress.Drawing.DXFontAdditionalProperty("GdiCharSet", ((byte)(0)))});
+            this.lbTong.Font = new DevExpress.Drawing.DXFont("Times New Roman", 9.25F, DevExpress.Drawing.DXFontStyle.Bold, DevExpress.Drawing.DXGraphicsUnit.Point, new DevExpress.Drawing.DXFontAdditionalProperty[] {new DevExpress.Drawing.DXFontAdditionalProperty("GdiCharSet", ((byte)(0)))});
             this.lbTong.Multiline = true;
             this.lbTong.Name = "lbTong";
             this.lbTong.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 10, 0, 0, 254F);
@@ -303,7 +303,7 @@
             this.xrTableCell2.Dpi = 254F;
             this.xrTableCell2.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "sumSum([DATA2.TSL_NHAP_GD])")});
-            this.xrTableCell2.Font = new DevExpress.Drawing.DXFont("Times New Roman", 11.25F, DevExpress.Drawing.DXFontStyle.Bold, DevExpress.Drawing.DXGraphicsUnit.Point, new DevExpress.Drawing.DXFontAdditionalProperty[] {new DevExpress.Drawing.DXFontAdditionalProperty("GdiCharSet", ((byte)(0)))});
+            this.xrTableCell2.Font = new DevExpress.Drawing.DXFont("Times New Roman", 9.25F, DevExpress.Drawing.DXFontStyle.Bold, DevExpress.Drawing.DXGraphicsUnit.Point, new DevExpress.Drawing.DXFontAdditionalProperty[] {new DevExpress.Drawing.DXFontAdditionalProperty("GdiCharSet", ((byte)(0)))});
             this.xrTableCell2.Multiline = true;
             this.xrTableCell2.Name = "xrTableCell2";
             this.xrTableCell2.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 10, 0, 0, 254F);
@@ -322,7 +322,7 @@
             this.xrTableCell6.Dpi = 254F;
             this.xrTableCell6.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "sumSum(DATA2.TSL_NHAP_LK)")});
-            this.xrTableCell6.Font = new DevExpress.Drawing.DXFont("Times New Roman", 11.25F, DevExpress.Drawing.DXFontStyle.Bold, DevExpress.Drawing.DXGraphicsUnit.Point, new DevExpress.Drawing.DXFontAdditionalProperty[] {new DevExpress.Drawing.DXFontAdditionalProperty("GdiCharSet", ((byte)(0)))});
+            this.xrTableCell6.Font = new DevExpress.Drawing.DXFont("Times New Roman", 9.25F, DevExpress.Drawing.DXFontStyle.Bold, DevExpress.Drawing.DXGraphicsUnit.Point, new DevExpress.Drawing.DXFontAdditionalProperty[] {new DevExpress.Drawing.DXFontAdditionalProperty("GdiCharSet", ((byte)(0)))});
             this.xrTableCell6.Multiline = true;
             this.xrTableCell6.Name = "xrTableCell6";
             this.xrTableCell6.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 10, 0, 0, 254F);
@@ -341,7 +341,7 @@
             this.tiNguoiLapBieu.AllowMarkupText = true;
             this.tiNguoiLapBieu.AutoWidth = true;
             this.tiNguoiLapBieu.Dpi = 254F;
-            this.tiNguoiLapBieu.Font = new DevExpress.Drawing.DXFont("Times New Roman", 11.25F, DevExpress.Drawing.DXFontStyle.Bold, DevExpress.Drawing.DXGraphicsUnit.Point, new DevExpress.Drawing.DXFontAdditionalProperty[] {new DevExpress.Drawing.DXFontAdditionalProperty("GdiCharSet", ((byte)(0)))});
+            this.tiNguoiLapBieu.Font = new DevExpress.Drawing.DXFont("Times New Roman", 9.25F, DevExpress.Drawing.DXFontStyle.Bold, DevExpress.Drawing.DXGraphicsUnit.Point, new DevExpress.Drawing.DXFontAdditionalProperty[] {new DevExpress.Drawing.DXFontAdditionalProperty("GdiCharSet", ((byte)(0)))});
             this.tiNguoiLapBieu.LocationFloat = new DevExpress.Utils.PointFloat(1199.686F, 186.7238F);
             this.tiNguoiLapBieu.Multiline = true;
             this.tiNguoiLapBieu.Name = "tiNguoiLapBieu";
@@ -357,7 +357,7 @@
             this.lblNgay.AllowMarkupText = true;
             this.lblNgay.AutoWidth = true;
             this.lblNgay.Dpi = 254F;
-            this.lblNgay.Font = new DevExpress.Drawing.DXFont("Times New Roman", 11.25F, DevExpress.Drawing.DXFontStyle.Bold, DevExpress.Drawing.DXGraphicsUnit.Point, new DevExpress.Drawing.DXFontAdditionalProperty[] {new DevExpress.Drawing.DXFontAdditionalProperty("GdiCharSet", ((byte)(0)))});
+            this.lblNgay.Font = new DevExpress.Drawing.DXFont("Times New Roman", 9.25F, DevExpress.Drawing.DXFontStyle.Bold, DevExpress.Drawing.DXGraphicsUnit.Point, new DevExpress.Drawing.DXFontAdditionalProperty[] {new DevExpress.Drawing.DXFontAdditionalProperty("GdiCharSet", ((byte)(0)))});
             this.lblNgay.LocationFloat = new DevExpress.Utils.PointFloat(1199.686F, 123.012F);
             this.lblNgay.Multiline = true;
             this.lblNgay.Name = "lblNgay";
@@ -468,7 +468,7 @@
             // lbTNgay
             // 
             this.lbTNgay.Dpi = 254F;
-            this.lbTNgay.Font = new DevExpress.Drawing.DXFont("Times New Roman", 11.25F, DevExpress.Drawing.DXFontStyle.Regular, DevExpress.Drawing.DXGraphicsUnit.Point, new DevExpress.Drawing.DXFontAdditionalProperty[] {new DevExpress.Drawing.DXFontAdditionalProperty("GdiCharSet", ((byte)(0)))});
+            this.lbTNgay.Font = new DevExpress.Drawing.DXFont("Times New Roman", 9.25F, DevExpress.Drawing.DXFontStyle.Regular, DevExpress.Drawing.DXGraphicsUnit.Point, new DevExpress.Drawing.DXFontAdditionalProperty[] {new DevExpress.Drawing.DXFontAdditionalProperty("GdiCharSet", ((byte)(0)))});
             this.lbTNgay.LocationFloat = new DevExpress.Utils.PointFloat(289.7086F, 190.1219F);
             this.lbTNgay.Multiline = true;
             this.lbTNgay.Name = "lbTNgay";
@@ -480,7 +480,7 @@
             // xrLabel5
             // 
             this.xrLabel5.Dpi = 254F;
-            this.xrLabel5.Font = new DevExpress.Drawing.DXFont("Times New Roman", 11.25F, DevExpress.Drawing.DXFontStyle.Regular, DevExpress.Drawing.DXGraphicsUnit.Point, new DevExpress.Drawing.DXFontAdditionalProperty[] {new DevExpress.Drawing.DXFontAdditionalProperty("GdiCharSet", ((byte)(0)))});
+            this.xrLabel5.Font = new DevExpress.Drawing.DXFont("Times New Roman", 9.25F, DevExpress.Drawing.DXFontStyle.Regular, DevExpress.Drawing.DXGraphicsUnit.Point, new DevExpress.Drawing.DXFontAdditionalProperty[] {new DevExpress.Drawing.DXFontAdditionalProperty("GdiCharSet", ((byte)(0)))});
             this.xrLabel5.LocationFloat = new DevExpress.Utils.PointFloat(543.7086F, 190.1219F);
             this.xrLabel5.Multiline = true;
             this.xrLabel5.Name = "xrLabel5";
@@ -492,7 +492,7 @@
             // xrLabel3
             // 
             this.xrLabel3.Dpi = 254F;
-            this.xrLabel3.Font = new DevExpress.Drawing.DXFont("Times New Roman", 11.25F, DevExpress.Drawing.DXFontStyle.Regular, DevExpress.Drawing.DXGraphicsUnit.Point, new DevExpress.Drawing.DXFontAdditionalProperty[] {new DevExpress.Drawing.DXFontAdditionalProperty("GdiCharSet", ((byte)(0)))});
+            this.xrLabel3.Font = new DevExpress.Drawing.DXFont("Times New Roman", 9.25F, DevExpress.Drawing.DXFontStyle.Regular, DevExpress.Drawing.DXGraphicsUnit.Point, new DevExpress.Drawing.DXFontAdditionalProperty[] {new DevExpress.Drawing.DXFontAdditionalProperty("GdiCharSet", ((byte)(0)))});
             this.xrLabel3.LocationFloat = new DevExpress.Utils.PointFloat(1276.416F, 190.1219F);
             this.xrLabel3.Multiline = true;
             this.xrLabel3.Name = "xrLabel3";
@@ -504,7 +504,7 @@
             // lbDNgay
             // 
             this.lbDNgay.Dpi = 254F;
-            this.lbDNgay.Font = new DevExpress.Drawing.DXFont("Times New Roman", 11.25F, DevExpress.Drawing.DXFontStyle.Regular, DevExpress.Drawing.DXGraphicsUnit.Point, new DevExpress.Drawing.DXFontAdditionalProperty[] {new DevExpress.Drawing.DXFontAdditionalProperty("GdiCharSet", ((byte)(0)))});
+            this.lbDNgay.Font = new DevExpress.Drawing.DXFont("Times New Roman", 9.25F, DevExpress.Drawing.DXFontStyle.Regular, DevExpress.Drawing.DXGraphicsUnit.Point, new DevExpress.Drawing.DXFontAdditionalProperty[] {new DevExpress.Drawing.DXFontAdditionalProperty("GdiCharSet", ((byte)(0)))});
             this.lbDNgay.LocationFloat = new DevExpress.Utils.PointFloat(1022.416F, 190.1219F);
             this.lbDNgay.Multiline = true;
             this.lbDNgay.Name = "lbDNgay";
@@ -516,7 +516,7 @@
             // lbTenCD
             // 
             this.lbTenCD.Dpi = 254F;
-            this.lbTenCD.Font = new DevExpress.Drawing.DXFont("Times New Roman", 11.25F, DevExpress.Drawing.DXFontStyle.Bold, DevExpress.Drawing.DXGraphicsUnit.Point, new DevExpress.Drawing.DXFontAdditionalProperty[] {new DevExpress.Drawing.DXFontAdditionalProperty("GdiCharSet", ((byte)(0)))});
+            this.lbTenCD.Font = new DevExpress.Drawing.DXFont("Times New Roman", 9.25F, DevExpress.Drawing.DXFontStyle.Bold, DevExpress.Drawing.DXGraphicsUnit.Point, new DevExpress.Drawing.DXFontAdditionalProperty[] {new DevExpress.Drawing.DXFontAdditionalProperty("GdiCharSet", ((byte)(0)))});
             this.lbTenCD.LocationFloat = new DevExpress.Utils.PointFloat(934.0677F, 366.1667F);
             this.lbTenCD.Multiline = true;
             this.lbTenCD.Name = "lbTenCD";
@@ -531,7 +531,7 @@
             this.xrLabel7.Dpi = 254F;
             this.xrLabel7.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[DATA2].[TEN_CD]")});
-            this.xrLabel7.Font = new DevExpress.Drawing.DXFont("Times New Roman", 11.25F, DevExpress.Drawing.DXFontStyle.Regular, DevExpress.Drawing.DXGraphicsUnit.Point, new DevExpress.Drawing.DXFontAdditionalProperty[] {new DevExpress.Drawing.DXFontAdditionalProperty("GdiCharSet", ((byte)(0)))});
+            this.xrLabel7.Font = new DevExpress.Drawing.DXFont("Times New Roman", 9.25F, DevExpress.Drawing.DXFontStyle.Regular, DevExpress.Drawing.DXGraphicsUnit.Point, new DevExpress.Drawing.DXFontAdditionalProperty[] {new DevExpress.Drawing.DXFontAdditionalProperty("GdiCharSet", ((byte)(0)))});
             this.xrLabel7.LocationFloat = new DevExpress.Utils.PointFloat(1276.416F, 366.1667F);
             this.xrLabel7.Multiline = true;
             this.xrLabel7.Name = "xrLabel7";
@@ -548,7 +548,7 @@
             this.xrLabel6.Dpi = 254F;
             this.xrLabel6.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[DATA2].[MaQL]")});
-            this.xrLabel6.Font = new DevExpress.Drawing.DXFont("Times New Roman", 11.25F, DevExpress.Drawing.DXFontStyle.Regular, DevExpress.Drawing.DXGraphicsUnit.Point, new DevExpress.Drawing.DXFontAdditionalProperty[] {new DevExpress.Drawing.DXFontAdditionalProperty("GdiCharSet", ((byte)(0)))});
+            this.xrLabel6.Font = new DevExpress.Drawing.DXFont("Times New Roman", 9.25F, DevExpress.Drawing.DXFontStyle.Regular, DevExpress.Drawing.DXGraphicsUnit.Point, new DevExpress.Drawing.DXFontAdditionalProperty[] {new DevExpress.Drawing.DXFontAdditionalProperty("GdiCharSet", ((byte)(0)))});
             this.xrLabel6.LocationFloat = new DevExpress.Utils.PointFloat(372.2646F, 436.1668F);
             this.xrLabel6.Multiline = true;
             this.xrLabel6.Name = "xrLabel6";
@@ -563,7 +563,7 @@
             // lbMaQL
             // 
             this.lbMaQL.Dpi = 254F;
-            this.lbMaQL.Font = new DevExpress.Drawing.DXFont("Times New Roman", 11.25F, DevExpress.Drawing.DXFontStyle.Bold, DevExpress.Drawing.DXGraphicsUnit.Point, new DevExpress.Drawing.DXFontAdditionalProperty[] {new DevExpress.Drawing.DXFontAdditionalProperty("GdiCharSet", ((byte)(0)))});
+            this.lbMaQL.Font = new DevExpress.Drawing.DXFont("Times New Roman", 9.25F, DevExpress.Drawing.DXFontStyle.Bold, DevExpress.Drawing.DXGraphicsUnit.Point, new DevExpress.Drawing.DXFontAdditionalProperty[] {new DevExpress.Drawing.DXFontAdditionalProperty("GdiCharSet", ((byte)(0)))});
             this.lbMaQL.LocationFloat = new DevExpress.Utils.PointFloat(79.2429F, 436.1668F);
             this.lbMaQL.Multiline = true;
             this.lbMaQL.Name = "lbMaQL";
@@ -579,7 +579,7 @@
             | DevExpress.XtraPrinting.BorderSide.Right) 
             | DevExpress.XtraPrinting.BorderSide.Bottom)));
             this.xrTable2.Dpi = 254F;
-            this.xrTable2.Font = new DevExpress.Drawing.DXFont("Times New Roman", 11.25F, DevExpress.Drawing.DXFontStyle.Bold, DevExpress.Drawing.DXGraphicsUnit.Point, new DevExpress.Drawing.DXFontAdditionalProperty[] {new DevExpress.Drawing.DXFontAdditionalProperty("GdiCharSet", ((byte)(0)))});
+            this.xrTable2.Font = new DevExpress.Drawing.DXFont("Times New Roman", 9.25F, DevExpress.Drawing.DXFontStyle.Bold, DevExpress.Drawing.DXGraphicsUnit.Point, new DevExpress.Drawing.DXFontAdditionalProperty[] {new DevExpress.Drawing.DXFontAdditionalProperty("GdiCharSet", ((byte)(0)))});
             this.xrTable2.LocationFloat = new DevExpress.Utils.PointFloat(0.0007850152F, 527.3958F);
             this.xrTable2.Name = "xrTable2";
             this.xrTable2.Padding = new DevExpress.XtraPrinting.PaddingInfo(10, 10, 0, 0, 254F);
@@ -607,7 +607,7 @@
             // tiSTT
             // 
             this.tiSTT.Dpi = 254F;
-            this.tiSTT.Font = new DevExpress.Drawing.DXFont("Times New Roman", 11.25F, DevExpress.Drawing.DXFontStyle.Bold, DevExpress.Drawing.DXGraphicsUnit.Point, new DevExpress.Drawing.DXFontAdditionalProperty[] {new DevExpress.Drawing.DXFontAdditionalProperty("GdiCharSet", ((byte)(0)))});
+            this.tiSTT.Font = new DevExpress.Drawing.DXFont("Times New Roman", 9.25F, DevExpress.Drawing.DXFontStyle.Bold, DevExpress.Drawing.DXGraphicsUnit.Point, new DevExpress.Drawing.DXFontAdditionalProperty[] {new DevExpress.Drawing.DXFontAdditionalProperty("GdiCharSet", ((byte)(0)))});
             this.tiSTT.Multiline = true;
             this.tiSTT.Name = "tiSTT";
             this.tiSTT.Padding = new DevExpress.XtraPrinting.PaddingInfo(10, 10, 0, 0, 254F);
@@ -620,7 +620,7 @@
             // tiMSCN
             // 
             this.tiMSCN.Dpi = 254F;
-            this.tiMSCN.Font = new DevExpress.Drawing.DXFont("Times New Roman", 11.25F, DevExpress.Drawing.DXFontStyle.Bold, DevExpress.Drawing.DXGraphicsUnit.Point, new DevExpress.Drawing.DXFontAdditionalProperty[] {new DevExpress.Drawing.DXFontAdditionalProperty("GdiCharSet", ((byte)(0)))});
+            this.tiMSCN.Font = new DevExpress.Drawing.DXFont("Times New Roman", 9.25F, DevExpress.Drawing.DXFontStyle.Bold, DevExpress.Drawing.DXGraphicsUnit.Point, new DevExpress.Drawing.DXFontAdditionalProperty[] {new DevExpress.Drawing.DXFontAdditionalProperty("GdiCharSet", ((byte)(0)))});
             this.tiMSCN.Multiline = true;
             this.tiMSCN.Name = "tiMSCN";
             this.tiMSCN.Padding = new DevExpress.XtraPrinting.PaddingInfo(10, 10, 0, 0, 254F);
@@ -632,7 +632,7 @@
             // tiTenCN
             // 
             this.tiTenCN.Dpi = 254F;
-            this.tiTenCN.Font = new DevExpress.Drawing.DXFont("Times New Roman", 11.25F, DevExpress.Drawing.DXFontStyle.Bold, DevExpress.Drawing.DXGraphicsUnit.Point, new DevExpress.Drawing.DXFontAdditionalProperty[] {new DevExpress.Drawing.DXFontAdditionalProperty("GdiCharSet", ((byte)(0)))});
+            this.tiTenCN.Font = new DevExpress.Drawing.DXFont("Times New Roman", 9.25F, DevExpress.Drawing.DXFontStyle.Bold, DevExpress.Drawing.DXGraphicsUnit.Point, new DevExpress.Drawing.DXFontAdditionalProperty[] {new DevExpress.Drawing.DXFontAdditionalProperty("GdiCharSet", ((byte)(0)))});
             this.tiTenCN.Multiline = true;
             this.tiTenCN.Name = "tiTenCN";
             this.tiTenCN.Padding = new DevExpress.XtraPrinting.PaddingInfo(10, 10, 0, 0, 254F);
@@ -644,7 +644,7 @@
             // tiSoLuong
             // 
             this.tiSoLuong.Dpi = 254F;
-            this.tiSoLuong.Font = new DevExpress.Drawing.DXFont("Times New Roman", 11.25F, DevExpress.Drawing.DXFontStyle.Bold, DevExpress.Drawing.DXGraphicsUnit.Point, new DevExpress.Drawing.DXFontAdditionalProperty[] {new DevExpress.Drawing.DXFontAdditionalProperty("GdiCharSet", ((byte)(0)))});
+            this.tiSoLuong.Font = new DevExpress.Drawing.DXFont("Times New Roman", 9.25F, DevExpress.Drawing.DXFontStyle.Bold, DevExpress.Drawing.DXGraphicsUnit.Point, new DevExpress.Drawing.DXFontAdditionalProperty[] {new DevExpress.Drawing.DXFontAdditionalProperty("GdiCharSet", ((byte)(0)))});
             this.tiSoLuong.Multiline = true;
             this.tiSoLuong.Name = "tiSoLuong";
             this.tiSoLuong.Padding = new DevExpress.XtraPrinting.PaddingInfo(10, 10, 0, 0, 254F);
@@ -656,7 +656,7 @@
             // tiSLLuyKe
             // 
             this.tiSLLuyKe.Dpi = 254F;
-            this.tiSLLuyKe.Font = new DevExpress.Drawing.DXFont("Times New Roman", 11.25F, DevExpress.Drawing.DXFontStyle.Bold, DevExpress.Drawing.DXGraphicsUnit.Point, new DevExpress.Drawing.DXFontAdditionalProperty[] {new DevExpress.Drawing.DXFontAdditionalProperty("GdiCharSet", ((byte)(0)))});
+            this.tiSLLuyKe.Font = new DevExpress.Drawing.DXFont("Times New Roman", 9.25F, DevExpress.Drawing.DXFontStyle.Bold, DevExpress.Drawing.DXGraphicsUnit.Point, new DevExpress.Drawing.DXFontAdditionalProperty[] {new DevExpress.Drawing.DXFontAdditionalProperty("GdiCharSet", ((byte)(0)))});
             this.tiSLLuyKe.Multiline = true;
             this.tiSLLuyKe.Name = "tiSLLuyKe";
             this.tiSLLuyKe.Padding = new DevExpress.XtraPrinting.PaddingInfo(10, 10, 0, 0, 254F);
@@ -670,7 +670,7 @@
             this.lbChuyen.AllowMarkupText = true;
             this.lbChuyen.AutoWidth = true;
             this.lbChuyen.Dpi = 254F;
-            this.lbChuyen.Font = new DevExpress.Drawing.DXFont("Times New Roman", 11.25F, DevExpress.Drawing.DXFontStyle.Regular, DevExpress.Drawing.DXGraphicsUnit.Point, new DevExpress.Drawing.DXFontAdditionalProperty[] {new DevExpress.Drawing.DXFontAdditionalProperty("GdiCharSet", ((byte)(0)))});
+            this.lbChuyen.Font = new DevExpress.Drawing.DXFont("Times New Roman", 9.25F, DevExpress.Drawing.DXFontStyle.Regular, DevExpress.Drawing.DXGraphicsUnit.Point, new DevExpress.Drawing.DXFontAdditionalProperty[] {new DevExpress.Drawing.DXFontAdditionalProperty("GdiCharSet", ((byte)(0)))});
             this.lbChuyen.LocationFloat = new DevExpress.Utils.PointFloat(934.0683F, 296.1667F);
             this.lbChuyen.Multiline = true;
             this.lbChuyen.Name = "lbChuyen";
@@ -689,7 +689,7 @@
             this.xrLabel16.Dpi = 254F;
             this.xrLabel16.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[DATA1].[CHUYEN_TH]")});
-            this.xrLabel16.Font = new DevExpress.Drawing.DXFont("Times New Roman", 11.25F, DevExpress.Drawing.DXFontStyle.Bold, DevExpress.Drawing.DXGraphicsUnit.Point, new DevExpress.Drawing.DXFontAdditionalProperty[] {new DevExpress.Drawing.DXFontAdditionalProperty("GdiCharSet", ((byte)(0)))});
+            this.xrLabel16.Font = new DevExpress.Drawing.DXFont("Times New Roman", 9.25F, DevExpress.Drawing.DXFontStyle.Bold, DevExpress.Drawing.DXGraphicsUnit.Point, new DevExpress.Drawing.DXFontAdditionalProperty[] {new DevExpress.Drawing.DXFontAdditionalProperty("GdiCharSet", ((byte)(0)))});
             this.xrLabel16.LocationFloat = new DevExpress.Utils.PointFloat(1276.416F, 296.1667F);
             this.xrLabel16.Multiline = true;
             this.xrLabel16.Name = "xrLabel16";
@@ -707,7 +707,7 @@
             this.xrLabel10.Dpi = 254F;
             this.xrLabel10.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[DATA1].[TEN_HH]")});
-            this.xrLabel10.Font = new DevExpress.Drawing.DXFont("Times New Roman", 11.25F, DevExpress.Drawing.DXFontStyle.Bold, DevExpress.Drawing.DXGraphicsUnit.Point, new DevExpress.Drawing.DXFontAdditionalProperty[] {new DevExpress.Drawing.DXFontAdditionalProperty("GdiCharSet", ((byte)(0)))});
+            this.xrLabel10.Font = new DevExpress.Drawing.DXFont("Times New Roman", 9.25F, DevExpress.Drawing.DXFontStyle.Bold, DevExpress.Drawing.DXGraphicsUnit.Point, new DevExpress.Drawing.DXFontAdditionalProperty[] {new DevExpress.Drawing.DXFontAdditionalProperty("GdiCharSet", ((byte)(0)))});
             this.xrLabel10.LocationFloat = new DevExpress.Utils.PointFloat(372.2649F, 366.1667F);
             this.xrLabel10.Multiline = true;
             this.xrLabel10.Name = "xrLabel10";
@@ -725,7 +725,7 @@
             this.xrLabel11.Dpi = 254F;
             this.xrLabel11.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[DATA1].[TEN_KH]")});
-            this.xrLabel11.Font = new DevExpress.Drawing.DXFont("Times New Roman", 11.25F, DevExpress.Drawing.DXFontStyle.Bold, DevExpress.Drawing.DXGraphicsUnit.Point, new DevExpress.Drawing.DXFontAdditionalProperty[] {new DevExpress.Drawing.DXFontAdditionalProperty("GdiCharSet", ((byte)(0)))});
+            this.xrLabel11.Font = new DevExpress.Drawing.DXFont("Times New Roman", 9.25F, DevExpress.Drawing.DXFontStyle.Bold, DevExpress.Drawing.DXGraphicsUnit.Point, new DevExpress.Drawing.DXFontAdditionalProperty[] {new DevExpress.Drawing.DXFontAdditionalProperty("GdiCharSet", ((byte)(0)))});
             this.xrLabel11.LocationFloat = new DevExpress.Utils.PointFloat(372.2649F, 296.1667F);
             this.xrLabel11.Multiline = true;
             this.xrLabel11.Name = "xrLabel11";
@@ -741,7 +741,7 @@
             this.lbKhachHang.AllowMarkupText = true;
             this.lbKhachHang.AutoWidth = true;
             this.lbKhachHang.Dpi = 254F;
-            this.lbKhachHang.Font = new DevExpress.Drawing.DXFont("Times New Roman", 11.25F, DevExpress.Drawing.DXFontStyle.Regular, DevExpress.Drawing.DXGraphicsUnit.Point, new DevExpress.Drawing.DXFontAdditionalProperty[] {new DevExpress.Drawing.DXFontAdditionalProperty("GdiCharSet", ((byte)(0)))});
+            this.lbKhachHang.Font = new DevExpress.Drawing.DXFont("Times New Roman", 9.25F, DevExpress.Drawing.DXFontStyle.Regular, DevExpress.Drawing.DXGraphicsUnit.Point, new DevExpress.Drawing.DXFontAdditionalProperty[] {new DevExpress.Drawing.DXFontAdditionalProperty("GdiCharSet", ((byte)(0)))});
             this.lbKhachHang.LocationFloat = new DevExpress.Utils.PointFloat(79.2429F, 296.1667F);
             this.lbKhachHang.Multiline = true;
             this.lbKhachHang.Name = "lbKhachHang";
@@ -758,7 +758,7 @@
             this.lbMaHang.AllowMarkupText = true;
             this.lbMaHang.AutoWidth = true;
             this.lbMaHang.Dpi = 254F;
-            this.lbMaHang.Font = new DevExpress.Drawing.DXFont("Times New Roman", 11.25F, DevExpress.Drawing.DXFontStyle.Regular, DevExpress.Drawing.DXGraphicsUnit.Point, new DevExpress.Drawing.DXFontAdditionalProperty[] {new DevExpress.Drawing.DXFontAdditionalProperty("GdiCharSet", ((byte)(0)))});
+            this.lbMaHang.Font = new DevExpress.Drawing.DXFont("Times New Roman", 9.25F, DevExpress.Drawing.DXFontStyle.Regular, DevExpress.Drawing.DXGraphicsUnit.Point, new DevExpress.Drawing.DXFontAdditionalProperty[] {new DevExpress.Drawing.DXFontAdditionalProperty("GdiCharSet", ((byte)(0)))});
             this.lbMaHang.LocationFloat = new DevExpress.Utils.PointFloat(79.2429F, 366.1667F);
             this.lbMaHang.Multiline = true;
             this.lbMaHang.Name = "lbMaHang";

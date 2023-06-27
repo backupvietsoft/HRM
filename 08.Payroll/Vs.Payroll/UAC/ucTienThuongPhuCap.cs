@@ -194,8 +194,6 @@ namespace Vs.Payroll
         {
             try
             {
-
-
                 WindowsUIButton btn = e.Button as WindowsUIButton;
                 XtraUserControl ctl = new XtraUserControl();
                 switch (btn.Tag.ToString())
@@ -212,7 +210,7 @@ namespace Vs.Payroll
                                 XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgChuaChonThang"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                 return;
                             }
-                            frmImportTienThuongPhuCap frm = new frmImportTienThuongPhuCap();
+                            frmImportTinhLuong_TG frm = new frmImportTinhLuong_TG();
                             frm.dtThang = Convert.ToDateTime(cboThang.Text);
                             frm.iID_DV = Convert.ToInt32(cboDonVi.EditValue);
                             if (frm.ShowDialog() == DialogResult.OK)

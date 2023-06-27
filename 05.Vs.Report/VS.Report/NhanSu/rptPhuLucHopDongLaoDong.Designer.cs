@@ -1252,7 +1252,8 @@
             this.xrLabel143.Dpi = 254F;
             this.xrLabel143.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[DATA].[MS_CN]")});
-            this.xrLabel143.Font = new DevExpress.Drawing.DXFont("Times New Roman", 11.25F, DevExpress.Drawing.DXFontStyle.Bold, DevExpress.Drawing.DXGraphicsUnit.Point, new DevExpress.Drawing.DXFontAdditionalProperty[] {new DevExpress.Drawing.DXFontAdditionalProperty("GdiCharSet", ((byte)(0)))});
+            this.xrLabel143.Font = new DevExpress.Drawing.DXFont("Times New Roman", 11.25F, DevExpress.Drawing.DXFontStyle.Bold, DevExpress.Drawing.DXGraphicsUnit.Point, new DevExpress.Drawing.DXFontAdditionalProperty[] {
+            new DevExpress.Drawing.DXFontAdditionalProperty("GdiCharSet", ((byte)(0)))});
             this.xrLabel143.LocationFloat = new DevExpress.Utils.PointFloat(359.8605F, 118.8333F);
             this.xrLabel143.Multiline = true;
             this.xrLabel143.Name = "xrLabel143";
@@ -1315,7 +1316,8 @@
             this.xrLabel70.AllowMarkupText = true;
             this.xrLabel70.AutoWidth = true;
             this.xrLabel70.Dpi = 254F;
-            this.xrLabel70.Font = new DevExpress.Drawing.DXFont("Times New Roman", 11.25F, DevExpress.Drawing.DXFontStyle.Bold, DevExpress.Drawing.DXGraphicsUnit.Point, new DevExpress.Drawing.DXFontAdditionalProperty[] {new DevExpress.Drawing.DXFontAdditionalProperty("GdiCharSet", ((byte)(0)))});
+            this.xrLabel70.Font = new DevExpress.Drawing.DXFont("Times New Roman", 11.25F, DevExpress.Drawing.DXFontStyle.Bold, DevExpress.Drawing.DXGraphicsUnit.Point, new DevExpress.Drawing.DXFontAdditionalProperty[] {
+            new DevExpress.Drawing.DXFontAdditionalProperty("GdiCharSet", ((byte)(0)))});
             this.xrLabel70.LocationFloat = new DevExpress.Utils.PointFloat(846.873F, 0F);
             this.xrLabel70.Multiline = true;
             this.xrLabel70.Name = "xrLabel70";
@@ -1349,7 +1351,8 @@
             this.lb1.Dpi = 254F;
             this.lb1.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[DATA].[SO_PLHD]+\'/HĐLĐPL\'")});
-            this.lb1.Font = new DevExpress.Drawing.DXFont("Times New Roman", 11.25F, DevExpress.Drawing.DXFontStyle.Bold, DevExpress.Drawing.DXGraphicsUnit.Point, new DevExpress.Drawing.DXFontAdditionalProperty[] {new DevExpress.Drawing.DXFontAdditionalProperty("GdiCharSet", ((byte)(0)))});
+            this.lb1.Font = new DevExpress.Drawing.DXFont("Times New Roman", 11.25F, DevExpress.Drawing.DXFontStyle.Bold, DevExpress.Drawing.DXGraphicsUnit.Point, new DevExpress.Drawing.DXFontAdditionalProperty[] {
+            new DevExpress.Drawing.DXFontAdditionalProperty("GdiCharSet", ((byte)(0)))});
             this.lb1.LocationFloat = new DevExpress.Utils.PointFloat(120.2499F, 59.41667F);
             this.lb1.Multiline = true;
             this.lb1.Name = "lb1";
@@ -1362,7 +1365,8 @@
             // lblTieuDe
             // 
             this.lblTieuDe.Dpi = 254F;
-            this.lblTieuDe.Font = new DevExpress.Drawing.DXFont("Times New Roman", 20.25F, DevExpress.Drawing.DXFontStyle.Bold, DevExpress.Drawing.DXGraphicsUnit.Point, new DevExpress.Drawing.DXFontAdditionalProperty[] {new DevExpress.Drawing.DXFontAdditionalProperty("GdiCharSet", ((byte)(0)))});
+            this.lblTieuDe.Font = new DevExpress.Drawing.DXFont("Times New Roman", 20.25F, DevExpress.Drawing.DXFontStyle.Bold, DevExpress.Drawing.DXGraphicsUnit.Point, new DevExpress.Drawing.DXFontAdditionalProperty[] {
+            new DevExpress.Drawing.DXFontAdditionalProperty("GdiCharSet", ((byte)(0)))});
             this.lblTieuDe.LocationFloat = new DevExpress.Utils.PointFloat(0.0005099648F, 197.625F);
             this.lblTieuDe.Multiline = true;
             this.lblTieuDe.Name = "lblTieuDe";
@@ -1462,7 +1466,7 @@
             this.ReportFooter});
             this.Dpi = 254F;
             this.Font = new DevExpress.Drawing.DXFont("Arial", 9.75F);
-            this.Margins = new DevExpress.Drawing.DXMargins(190, 185, 91, 96);
+            this.Margins = new DevExpress.Drawing.DXMargins(190F, 185F, 91F, 96F);
             this.PageHeight = 2970;
             this.PageWidth = 2100;
             this.PaperKind = System.Drawing.Printing.PaperKind.A4;
@@ -1470,7 +1474,7 @@
             this.SnapGridSize = 25F;
             this.Tag = "rptQuyetDinhLuongCN";
             this.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter;
-            this.Version = "20.1";
+            this.Version = "22.2";
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
 
         }

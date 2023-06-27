@@ -47,8 +47,8 @@ namespace Vs.Payroll
             this.lblChonSheet = new DevExpress.XtraLayout.LayoutControlItem();
             this.groDLImport = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.ItemForSumNhanVien = new DevExpress.XtraLayout.SimpleLabelItem();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.windowsUIButton.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.searchControl.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdData)).BeginInit();
@@ -96,11 +96,11 @@ namespace Vs.Payroll
             this.windowsUIButton.Controls.Add(this.searchControl);
             this.windowsUIButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.windowsUIButton.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.windowsUIButton.Location = new System.Drawing.Point(0, 501);
+            this.windowsUIButton.Location = new System.Drawing.Point(0, 672);
             this.windowsUIButton.Margin = new System.Windows.Forms.Padding(4);
             this.windowsUIButton.Name = "windowsUIButton";
             this.windowsUIButton.Padding = new System.Windows.Forms.Padding(4);
-            this.windowsUIButton.Size = new System.Drawing.Size(998, 34);
+            this.windowsUIButton.Size = new System.Drawing.Size(1167, 68);
             this.windowsUIButton.TabIndex = 5;
             this.windowsUIButton.Text = "windowsUIButtonPanel1";
             this.windowsUIButton.UseButtonBackgroundImages = false;
@@ -110,7 +110,7 @@ namespace Vs.Payroll
             // 
             this.searchControl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.searchControl.Client = this.grdData;
-            this.searchControl.Location = new System.Drawing.Point(12, 7);
+            this.searchControl.Location = new System.Drawing.Point(13, 21);
             this.searchControl.Margin = new System.Windows.Forms.Padding(4);
             this.searchControl.Name = "searchControl";
             this.searchControl.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -118,15 +118,15 @@ namespace Vs.Payroll
             new DevExpress.XtraEditors.Repository.SearchButton()});
             this.searchControl.Properties.Client = this.grdData;
             this.searchControl.Properties.FindDelay = 100;
-            this.searchControl.Size = new System.Drawing.Size(192, 24);
+            this.searchControl.Size = new System.Drawing.Size(246, 34);
             this.searchControl.TabIndex = 10;
             // 
             // grdData
             // 
-            this.grdData.Location = new System.Drawing.Point(24, 143);
+            this.grdData.Location = new System.Drawing.Point(24, 188);
             this.grdData.MainView = this.grvData;
             this.grdData.Name = "grdData";
-            this.grdData.Size = new System.Drawing.Size(950, 334);
+            this.grdData.Size = new System.Drawing.Size(1119, 460);
             this.grdData.TabIndex = 9;
             this.grdData.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grvData});
@@ -158,29 +158,29 @@ namespace Vs.Payroll
             this.layoutControl1.Location = new System.Drawing.Point(0, 0);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.Root = this.Root;
-            this.layoutControl1.Size = new System.Drawing.Size(998, 501);
+            this.layoutControl1.Size = new System.Drawing.Size(1167, 672);
             this.layoutControl1.TabIndex = 6;
             this.layoutControl1.Text = "layoutControl1";
             // 
             // btnFile
             // 
-            this.btnFile.Location = new System.Drawing.Point(109, 47);
+            this.btnFile.Location = new System.Drawing.Point(152, 59);
             this.btnFile.Name = "btnFile";
             this.btnFile.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.btnFile.Size = new System.Drawing.Size(388, 24);
+            this.btnFile.Size = new System.Drawing.Size(429, 34);
             this.btnFile.StyleController = this.layoutControl1;
             this.btnFile.TabIndex = 0;
             this.btnFile.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.btnFile_ButtonClick);
             // 
             // cboChonSheet
             // 
-            this.cboChonSheet.Location = new System.Drawing.Point(586, 47);
+            this.cboChonSheet.Location = new System.Drawing.Point(713, 59);
             this.cboChonSheet.Name = "cboChonSheet";
             this.cboChonSheet.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cboChonSheet.Properties.NullText = "";
-            this.cboChonSheet.Size = new System.Drawing.Size(388, 24);
+            this.cboChonSheet.Size = new System.Drawing.Size(430, 34);
             this.cboChonSheet.StyleController = this.layoutControl1;
             this.cboChonSheet.TabIndex = 6;
             this.cboChonSheet.EditValueChanged += new System.EventHandler(this.cboChonSheet_EditValueChanged);
@@ -193,7 +193,7 @@ namespace Vs.Payroll
             this.groThongTinImport,
             this.groDLImport});
             this.Root.Name = "Root";
-            this.Root.Size = new System.Drawing.Size(998, 501);
+            this.Root.Size = new System.Drawing.Size(1167, 672);
             this.Root.TextVisible = false;
             // 
             // groThongTinImport
@@ -204,7 +204,7 @@ namespace Vs.Payroll
             this.lblChonSheet});
             this.groThongTinImport.Location = new System.Drawing.Point(0, 0);
             this.groThongTinImport.Name = "groThongTinImport";
-            this.groThongTinImport.Size = new System.Drawing.Size(978, 75);
+            this.groThongTinImport.Size = new System.Drawing.Size(1147, 97);
             // 
             // lblChonFile
             // 
@@ -213,18 +213,18 @@ namespace Vs.Payroll
             this.lblChonFile.CustomizationFormText = "lblChonFile";
             this.lblChonFile.Location = new System.Drawing.Point(0, 0);
             this.lblChonFile.Name = "lblChonFile";
-            this.lblChonFile.Size = new System.Drawing.Size(477, 28);
-            this.lblChonFile.TextSize = new System.Drawing.Size(81, 17);
+            this.lblChonFile.Size = new System.Drawing.Size(561, 38);
+            this.lblChonFile.TextSize = new System.Drawing.Size(124, 28);
             // 
             // lblChonSheet
             // 
             this.lblChonSheet.Control = this.cboChonSheet;
             this.lblChonSheet.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
             this.lblChonSheet.CustomizationFormText = "lblChonSheet";
-            this.lblChonSheet.Location = new System.Drawing.Point(477, 0);
+            this.lblChonSheet.Location = new System.Drawing.Point(561, 0);
             this.lblChonSheet.Name = "lblChonSheet";
-            this.lblChonSheet.Size = new System.Drawing.Size(477, 28);
-            this.lblChonSheet.TextSize = new System.Drawing.Size(81, 17);
+            this.lblChonSheet.Size = new System.Drawing.Size(562, 38);
+            this.lblChonSheet.TextSize = new System.Drawing.Size(124, 28);
             // 
             // groDLImport
             // 
@@ -232,24 +232,20 @@ namespace Vs.Payroll
             this.groDLImport.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlItem2,
             this.ItemForSumNhanVien});
-            this.groDLImport.Location = new System.Drawing.Point(0, 75);
+            this.groDLImport.Location = new System.Drawing.Point(0, 97);
             this.groDLImport.Name = "groDLImport";
-            this.groDLImport.Size = new System.Drawing.Size(978, 406);
+            this.groDLImport.Size = new System.Drawing.Size(1147, 555);
             // 
             // layoutControlItem2
             // 
             this.layoutControlItem2.Control = this.grdData;
             this.layoutControlItem2.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
             this.layoutControlItem2.CustomizationFormText = "layoutControlItem2";
-            this.layoutControlItem2.Location = new System.Drawing.Point(0, 21);
+            this.layoutControlItem2.Location = new System.Drawing.Point(0, 32);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(954, 338);
+            this.layoutControlItem2.Size = new System.Drawing.Size(1123, 464);
             this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem2.TextVisible = false;
-            // 
-            // timer1
-            // 
-            this.timer1.Interval = 5000;
             // 
             // ItemForSumNhanVien
             // 
@@ -258,14 +254,18 @@ namespace Vs.Payroll
             this.ItemForSumNhanVien.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.ItemForSumNhanVien.Location = new System.Drawing.Point(0, 0);
             this.ItemForSumNhanVien.Name = "ItemForSumNhanVien";
-            this.ItemForSumNhanVien.Size = new System.Drawing.Size(954, 21);
+            this.ItemForSumNhanVien.Size = new System.Drawing.Size(1123, 32);
             this.ItemForSumNhanVien.Text = "SumNhanVien";
-            this.ItemForSumNhanVien.TextSize = new System.Drawing.Size(81, 17);
+            this.ItemForSumNhanVien.TextSize = new System.Drawing.Size(124, 28);
+            // 
+            // timer1
+            // 
+            this.timer1.Interval = 5000;
             // 
             // frmImportTienThuongPhuCap
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
-            this.ClientSize = new System.Drawing.Size(998, 535);
+            this.ClientSize = new System.Drawing.Size(1167, 740);
             this.Controls.Add(this.layoutControl1);
             this.Controls.Add(this.windowsUIButton);
             this.MinimizeBox = false;

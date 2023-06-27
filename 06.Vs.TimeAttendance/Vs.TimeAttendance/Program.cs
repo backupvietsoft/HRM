@@ -23,7 +23,7 @@ namespace Vs.TimeAttendance
             //ds.ReadXml(AppDomain.CurrentDomain.BaseDirectory + "\\vsconfig.xml");
             Commons.IConnections.Username = "sa";
             Commons.IConnections.Server = "27.74.240.29";
-            Commons.IConnections.Database = "VS_HRM_EXCEL";
+            Commons.IConnections.Database = "VS_HRM_BTNB";
             Commons.IConnections.Password = "codaikadaiku";
 
             //Commons.Modules.KyHieuDV = @"EX";

@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{6903CADB-EC02-45CA-AC93-9E1385FE3BD2}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Library</OutputType>
     <RootNamespace>Vs.Payroll</RootNamespace>
     <AssemblyName>Vs.Payroll</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
@@ -167,6 +167,12 @@
     </Compile>
     <Compile Include="Form\frmCopyCongDoan.Designer.cs">
       <DependentUpon>frmCopyCongDoan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form\frmImportTinhLuong_TG.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\frmImportTinhLuong_TG.Designer.cs">
+      <DependentUpon>frmImportTinhLuong_TG.cs</DependentUpon>
     </Compile>
     <Compile Include="Form\frmNhapHoTroLuong.cs">
       <SubType>Form</SubType>
@@ -452,6 +458,12 @@
     <Compile Include="Report\rptBangLuongSanPhamTheoMaHang.Designer.cs">
       <DependentUpon>rptBangLuongSanPhamTheoMaHang.cs</DependentUpon>
     </Compile>
+    <Compile Include="Report\rptBangLuongThangVanPhong_TG.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\rptBangLuongThangVanPhong_TG.Designer.cs">
+      <DependentUpon>rptBangLuongThangVanPhong_TG.cs</DependentUpon>
+    </Compile>
     <Compile Include="Report\rptBangNangSuat.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -463,6 +475,12 @@
     </Compile>
     <Compile Include="Report\rptBangLuongThang_TG.Designer.cs">
       <DependentUpon>rptBangLuongThang_TG.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Report\rptBangLuongThangHoTro_TG.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\rptBangLuongThangHoTro_TG.Designer.cs">
+      <DependentUpon>rptBangLuongThangHoTro_TG.cs</DependentUpon>
     </Compile>
     <Compile Include="Report\rptDanhSachCongNhan.cs">
       <SubType>Component</SubType>
@@ -494,6 +512,18 @@
     <Compile Include="Report\rptBangTongHopCongDoan.Designer.cs">
       <DependentUpon>rptBangTongHopCongDoan.cs</DependentUpon>
     </Compile>
+    <Compile Include="Report\rptLuongTienMat_TG.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\rptLuongTienMat_TG.Designer.cs">
+      <DependentUpon>rptLuongTienMat_TG.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Report\rptLuongChuyenKhoan_TG.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\rptLuongChuyenKhoan_TG.Designer.cs">
+      <DependentUpon>rptLuongChuyenKhoan_TG.cs</DependentUpon>
+    </Compile>
     <Compile Include="Report\rptDSCNToCat.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -523,6 +553,12 @@
     </Compile>
     <Compile Include="Report\rptBangLSPChiTietMHNgayTheoCN.Designer.cs">
       <DependentUpon>rptBangLSPChiTietMHNgayTheoCN.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Report\rptPhieuLuongThang_TG.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\rptPhieuLuongThang_TG.Designer.cs">
+      <DependentUpon>rptPhieuLuongThang_TG.cs</DependentUpon>
     </Compile>
     <Compile Include="Report\rptPhieuLuongThang_DM.cs">
       <SubType>Component</SubType>
@@ -768,6 +804,9 @@
     <EmbeddedResource Include="Form\frmCopyCongDoan.resx">
       <DependentUpon>frmCopyCongDoan.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form\frmImportTinhLuong_TG.resx">
+      <DependentUpon>frmImportTinhLuong_TG.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form\frmNhapHoTroLuong.resx">
       <DependentUpon>frmNhapHoTroLuong.cs</DependentUpon>
     </EmbeddedResource>
@@ -920,11 +959,17 @@
     <EmbeddedResource Include="Report\rptBangLuongSanPhamTheoMaHang.resx">
       <DependentUpon>rptBangLuongSanPhamTheoMaHang.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Report\rptBangLuongThangVanPhong_TG.resx">
+      <DependentUpon>rptBangLuongThangVanPhong_TG.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Report\rptBangNangSuat.resx">
       <DependentUpon>rptBangNangSuat.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\rptBangLuongThang_TG.resx">
       <DependentUpon>rptBangLuongThang_TG.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\rptBangLuongThangHoTro_TG.resx">
+      <DependentUpon>rptBangLuongThangHoTro_TG.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\rptDanhSachCongNhan.resx">
       <DependentUpon>rptDanhSachCongNhan.cs</DependentUpon>
@@ -941,6 +986,12 @@
     <EmbeddedResource Include="Report\rptBangTongHopCongDoan.resx">
       <DependentUpon>rptBangTongHopCongDoan.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Report\rptLuongTienMat_TG.resx">
+      <DependentUpon>rptLuongTienMat_TG.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\rptLuongChuyenKhoan_TG.resx">
+      <DependentUpon>rptLuongChuyenKhoan_TG.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Report\rptDSCNToCat.resx">
       <DependentUpon>rptDSCNToCat.cs</DependentUpon>
     </EmbeddedResource>
@@ -955,6 +1006,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Report\rptBangLSPChiTietMHNgayTheoCN.resx">
       <DependentUpon>rptBangLSPChiTietMHNgayTheoCN.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\rptPhieuLuongThang_TG.resx">
+      <DependentUpon>rptPhieuLuongThang_TG.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\rptPhieuLuongThang_DM.resx">
       <DependentUpon>rptPhieuLuongThang_DM.cs</DependentUpon>

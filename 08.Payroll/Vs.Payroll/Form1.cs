@@ -16,7 +16,8 @@ namespace Vs.Payroll
         public Form1()
         {
             InitializeComponent();
-            ucBCLuongThang uac = new ucBCLuongThang();
+            ucTinhLuong uac = new ucTinhLuong();
+            //ucBCLuongThang uac = new ucBCLuongThang();
             this.Controls.Add(uac);
             uac.Dock = DockStyle.Fill;
         }

@@ -28,7 +28,7 @@ namespace Vs.Payroll
             //ds.ReadXml(AppDomain.CurrentDomain.BaseDirectory + "\\vsconfig.xml");
             Commons.IConnections.Username = "sa";
             Commons.IConnections.Server = "27.74.240.29";
-            Commons.IConnections.Database = "VS_HRM_TG";
+            Commons.IConnections.Database = "VS_HRM_BTNB";
             Commons.IConnections.Password = "codaikadaiku";
             Commons.Modules.sPrivate = @"TG";
             //Commons.Modules.sPrivate = @"ADC";
@@ -39,10 +39,7 @@ namespace Vs.Payroll
             //Commons.Modules.sSoLeSL = Commons.Modules.ObjSystems.sDinhDangSoLe(Commons.Modules.iSoLeSL);
             //Commons.Modules.sSoLeDG = Commons.Modules.ObjSystems.sDinhDangSoLe(Commons.Modules.iSoLeDG);
             //Commons.Modules.sSoLeTT = Commons.Modules.ObjSystems.sDinhDangSoLe(Commons.Modules.iSoLeTT);
-
             //Commons.Modules.sFontReport = "Monotype Corsiva";
-
-
             Commons.Modules.TypeLanguage = 0;
             Application.EnableVisualStyles();
             //Application.SetCompatibleTextRenderingDefault(false);

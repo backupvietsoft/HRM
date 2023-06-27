@@ -96,6 +96,22 @@ namespace ConvertVNI
          
         }
 
+        private void LoadgrdDataALL(string stable)
+        {
+            try
+            {
+                dt = new DataTable();
+                string sSql = "SELECT  * FROM [" + stable + "]";
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSql));
+                Commons.Modules.ObjSystems.MLoadXtraGrid(grdData, grvData, dt, false, true, false, false, false, "");
+            }
+            catch
+            {
+            }
+
+
+        }
+
         private void grvChua_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
             LoadgrdData(grvChua.GetFocusedRowCellValue("TABLE_NAME").ToString());
@@ -344,7 +360,7 @@ namespace ConvertVNI
                 {
                     grvChua.FocusedRowHandle = rowHandle;
                     grvChua.SelectRow(rowHandle);
-                    LoadgrdData(item[1].ToString());
+                    LoadgrdDataALL(item[1].ToString());
                     if (!ConvertTableVNI(item[1].ToString()))
                     {
                         continue;

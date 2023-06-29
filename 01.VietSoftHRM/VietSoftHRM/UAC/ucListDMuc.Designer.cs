@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions1 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions2 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions3 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions4 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions5 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions6 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions7 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions8 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions9 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions10 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
             this.grdDanhMuc = new DevExpress.XtraGrid.GridControl();
             this.grvDanhMuc = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.NONNlab_Link = new DevExpress.XtraEditors.LabelControl();
@@ -51,6 +51,7 @@
             this.toolDuLieuChoTD = new System.Windows.Forms.ToolStripMenuItem();
             this.toolThongBaoTuyenDung = new System.Windows.Forms.ToolStripMenuItem();
             this.toolNguoiDanhGia = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolQuaTrinhLDV = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.grdDanhMuc)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grvDanhMuc)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
@@ -74,7 +75,7 @@
             this.grdDanhMuc.MainView = this.grvDanhMuc;
             this.grdDanhMuc.Margin = new System.Windows.Forms.Padding(2);
             this.grdDanhMuc.Name = "grdDanhMuc";
-            this.grdDanhMuc.Size = new System.Drawing.Size(770, 340);
+            this.grdDanhMuc.Size = new System.Drawing.Size(772, 342);
             this.grdDanhMuc.TabIndex = 2;
             this.grdDanhMuc.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grvDanhMuc});
@@ -136,10 +137,10 @@
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Controls.Add(this.windowsUIButton);
             this.panel1.Controls.Add(this.accorMenuleft);
-            this.panel1.Location = new System.Drawing.Point(2, 21);
+            this.panel1.Location = new System.Drawing.Point(1, 20);
             this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(989, 374);
+            this.panel1.Size = new System.Drawing.Size(991, 376);
             this.panel1.TabIndex = 3;
             // 
             // panel2
@@ -149,7 +150,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(219, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(770, 340);
+            this.panel2.Size = new System.Drawing.Size(772, 342);
             this.panel2.TabIndex = 12;
             // 
             // panel3
@@ -157,7 +158,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(770, 340);
+            this.panel3.Size = new System.Drawing.Size(772, 342);
             this.panel3.TabIndex = 5;
             // 
             // windowsUIButton
@@ -178,29 +179,29 @@
             this.windowsUIButton.AppearanceButton.Pressed.Options.UseImage = true;
             this.windowsUIButton.AppearanceButton.Pressed.Options.UseTextOptions = true;
             this.windowsUIButton.AutoSizeInLayoutControl = false;
-            windowsUIButtonImageOptions1.ImageUri.Uri = "AddItem";
-            windowsUIButtonImageOptions2.ImageUri.Uri = "Edit;Size32x32;GrayScaled";
-            windowsUIButtonImageOptions3.ImageUri.Uri = "snap/snapdeletelist";
-            windowsUIButtonImageOptions4.ImageUri.Uri = "ExportToXLSX";
-            windowsUIButtonImageOptions5.ImageUri.Uri = "richedit/clearheaderandfooter";
+            windowsUIButtonImageOptions6.ImageUri.Uri = "AddItem";
+            windowsUIButtonImageOptions7.ImageUri.Uri = "Edit;Size32x32;GrayScaled";
+            windowsUIButtonImageOptions8.ImageUri.Uri = "snap/snapdeletelist";
+            windowsUIButtonImageOptions9.ImageUri.Uri = "ExportToXLSX";
+            windowsUIButtonImageOptions10.ImageUri.Uri = "richedit/clearheaderandfooter";
             this.windowsUIButton.Buttons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] {
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions1, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "them", -1, false),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions2, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "sua", -1, false),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions3, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "xoa", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions6, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "them", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions7, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "sua", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions8, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "xoa", -1, false),
             new DevExpress.XtraBars.Docking2010.WindowsUISeparator(),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions4, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "excel", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions9, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "excel", -1, false),
             new DevExpress.XtraBars.Docking2010.WindowsUISeparator(),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions5, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "thoat", -1, false)});
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions10, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "thoat", -1, false)});
             this.windowsUIButton.ContentAlignment = System.Drawing.ContentAlignment.MiddleRight;
             this.windowsUIButton.Controls.Add(this.searchControl1);
             this.windowsUIButton.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.windowsUIButton.ForeColor = System.Drawing.Color.White;
-            this.windowsUIButton.Location = new System.Drawing.Point(219, 340);
+            this.windowsUIButton.Location = new System.Drawing.Point(219, 342);
             this.windowsUIButton.Margin = new System.Windows.Forms.Padding(4, 7, 4, 7);
             this.windowsUIButton.MaximumSize = new System.Drawing.Size(0, 78);
             this.windowsUIButton.MinimumSize = new System.Drawing.Size(9, 9);
             this.windowsUIButton.Name = "windowsUIButton";
-            this.windowsUIButton.Size = new System.Drawing.Size(770, 34);
+            this.windowsUIButton.Size = new System.Drawing.Size(772, 34);
             this.windowsUIButton.TabIndex = 11;
             this.windowsUIButton.Text = "windowsUIButtonPanel";
             this.windowsUIButton.UseButtonBackgroundImages = false;
@@ -233,7 +234,7 @@
             this.accorMenuleft.Name = "accorMenuleft";
             this.accorMenuleft.ScrollBarMode = DevExpress.XtraBars.Navigation.ScrollBarMode.Auto;
             this.accorMenuleft.ShowFilterControl = DevExpress.XtraBars.Navigation.ShowFilterControl.Always;
-            this.accorMenuleft.Size = new System.Drawing.Size(219, 374);
+            this.accorMenuleft.Size = new System.Drawing.Size(219, 376);
             this.accorMenuleft.TabIndex = 3;
             this.accorMenuleft.ViewType = DevExpress.XtraBars.Navigation.AccordionControlViewType.HamburgerMenu;
             // 
@@ -275,9 +276,10 @@
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolDuLieuChoTD,
             this.toolThongBaoTuyenDung,
-            this.toolNguoiDanhGia});
+            this.toolNguoiDanhGia,
+            this.toolQuaTrinhLDV});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(206, 92);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(206, 114);
             // 
             // toolDuLieuChoTD
             // 
@@ -299,6 +301,13 @@
             this.toolNguoiDanhGia.Size = new System.Drawing.Size(205, 22);
             this.toolNguoiDanhGia.Text = "Người đánh giá tây nghề";
             this.toolNguoiDanhGia.Click += new System.EventHandler(this.toolNguoiDanhGia_Click);
+            // 
+            // toolQuaTrinhLDV
+            // 
+            this.toolQuaTrinhLDV.Name = "toolQuaTrinhLDV";
+            this.toolQuaTrinhLDV.Size = new System.Drawing.Size(205, 22);
+            this.toolQuaTrinhLDV.Text = "Quá trình lý do vắng";
+            this.toolQuaTrinhLDV.Click += new System.EventHandler(this.toolQuaTrinhLDV_Click);
             // 
             // ucListDMuc
             // 
@@ -344,5 +353,6 @@
         private System.Windows.Forms.ToolStripMenuItem toolDuLieuChoTD;
         private System.Windows.Forms.ToolStripMenuItem toolThongBaoTuyenDung;
         private System.Windows.Forms.ToolStripMenuItem toolNguoiDanhGia;
+        private System.Windows.Forms.ToolStripMenuItem toolQuaTrinhLDV;
     }
 }

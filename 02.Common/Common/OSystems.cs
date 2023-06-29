@@ -5412,6 +5412,12 @@ namespace Commons
             dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboLDV", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll, tinhBH));
             return dt;
         }
+        public DataTable DataLyDoVang(bool coAll, int tinhBH = -1, string msHienThi = "-1") // -1 hiện tất cả(dùng để load các combo các dữ liệu cũ cho không bị null) , -2 chỉ hiển thị các mã số có mã số hiển thị khác null, dùng để sử dụng các before pubpoup
+        {
+            DataTable dt = new DataTable();
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboLDV", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll, tinhBH, msHienThi));
+            return dt;
+        }
         public DataTable DataLoaiDieuChinh(bool coAll)
         {
             DataTable dt = new DataTable();
@@ -5520,7 +5526,7 @@ namespace Commons
             return dt;
         }
 
-        public DataTable DataBenhVien(bool coAll,int ID_TINH)
+        public DataTable DataBenhVien(bool coAll, int ID_TINH)
         {
             //ID_BV,TEN_BV
             DataTable dt = new DataTable();
@@ -5583,7 +5589,7 @@ namespace Commons
             dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboCotCapNhat", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll));
             return dt;
         }
-        public DataTable DataBacLuong(Int64 idnl, Int64 ID_DV ,DateTime ngayQD, bool coAll)
+        public DataTable DataBacLuong(Int64 idnl, Int64 ID_DV, DateTime ngayQD, bool coAll)
         {
             //ID_BL, T1.TEN_BL
             DataTable dt = new DataTable();
@@ -5620,6 +5626,15 @@ namespace Commons
             //ID_LPB,TEN_LPB
             DataTable dt = new DataTable();
             dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboPhanBo", Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll));
+            return dt;
+        }
+
+        public DataTable DataThongTinChung()
+        {
+            //ID_CV,TEN_CV
+            DataTable dt = new DataTable();
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetThongTinChung", Commons.Modules.UserName, Commons.Modules.TypeLanguage, -1));
+            dt.TableName = "TTC";
             return dt;
         }
 
@@ -5761,7 +5776,8 @@ namespace Commons
             {
                 return Convert.ToInt64(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.fnGetNguoiKyMacDinh()"));
             }
-            catch {
+            catch
+            {
                 return 0;
             }
         }

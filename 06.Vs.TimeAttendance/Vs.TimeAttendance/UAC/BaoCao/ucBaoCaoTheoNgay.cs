@@ -326,7 +326,7 @@ namespace Vs.TimeAttendance
             DataTable dt;
             System.Data.SqlClient.SqlConnection conn;
             dt = new DataTable();
-            frm.rpt = new rptDSVangDauGioTheoDV(lk_NgayIn.DateTime, Convert.ToDateTime(LK_NgayXemBaoCao.EditValue));
+            frm.rpt = new rptDSVangDauGioTheoDV(lk_NgayIn.DateTime, Convert.ToDateTime(LK_NgayXemBaoCao.EditValue), Convert.ToInt32(LK_DON_VI.EditValue));
 
             try
             {
@@ -365,7 +365,7 @@ namespace Vs.TimeAttendance
             DataTable dt;
             System.Data.SqlClient.SqlConnection conn1;
             dt = new DataTable();
-            frm.rpt = new rptDSVangDauGioTheoNgay(lk_NgayIn.DateTime, Convert.ToDateTime(LK_NgayXemBaoCao.EditValue));
+            frm.rpt = new rptDSVangDauGioTheoNgay(lk_NgayIn.DateTime, Convert.ToDateTime(LK_NgayXemBaoCao.EditValue), Convert.ToInt32(LK_DON_VI.EditValue));
 
             try
             {
@@ -474,7 +474,7 @@ namespace Vs.TimeAttendance
                     break;
             }
 
-            frm.rpt = new rptDSDiTreVeSom(Convert.ToDateTime(LK_NgayXemBaoCao.EditValue), sTieuDe2, Convert.ToDateTime(lk_NgayIn.EditValue));
+            frm.rpt = new rptDSDiTreVeSom(Convert.ToDateTime(LK_NgayXemBaoCao.EditValue), sTieuDe2, Convert.ToDateTime(lk_NgayIn.EditValue), Convert.ToInt32(LK_DON_VI.EditValue));
 
             try
             {

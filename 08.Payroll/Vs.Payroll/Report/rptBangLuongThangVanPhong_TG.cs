@@ -6,7 +6,7 @@ using DevExpress.XtraReports.UI;
 using System.Data;
 using Commons;
 
-namespace Vs.Report
+namespace Vs.Payroll
 {
     public partial class rptBangLuongThangVanPhong_TG : DevExpress.XtraReports.UI.XtraReport
     {

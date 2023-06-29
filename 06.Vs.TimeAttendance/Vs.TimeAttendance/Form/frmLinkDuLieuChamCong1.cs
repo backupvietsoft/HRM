@@ -8,14 +8,17 @@ using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraLayout;
 using Microsoft.ApplicationBlocks.Data;
+using OfficeOpenXml.FormulaParsing.Excel.Functions.DateTime;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.OleDb;
+using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Vs.TimeAttendance
@@ -973,7 +976,6 @@ namespace Vs.TimeAttendance
                             }
                             string connect = "";
                             connect = "Provider = Microsoft.Jet.OLEDB.4.0; Data Source = " + cboDataLink.Properties.GetDataSourceValue("DUONG_DAN_DATA_LINK", cboDataLink.ItemIndex).ToString().Trim() + "; Persist Security Info = False; Jet OLEDB:Compact Without Replica Repair = True";
-                         
 
                             string queryString = "";
                             queryString = @"SELECT UserInfo.CardNo AS MS_THE_CC, CheckInOut.CHECKTIME AS NGAY FROM CheckInOut INNER JOIN UserInfo ON CheckInOut.USERID = UserInfo.USERID WHERE (((CDATE(Format(CheckInOut.CHECKTIME,""MM/dd/yyyy"")))=#" + dtNgayChamCong.DateTime.ToString("MM/dd/yyyy") + "#));";
@@ -983,16 +985,22 @@ namespace Vs.TimeAttendance
                                 try
                                 {
                                     connection.Open();
+                                    //OleDbDataReader reader = command.ExecuteReader(CommandBehavior.SequentialAccess);
                                     OleDbDataReader reader = command.ExecuteReader();
+                                    //tbDLQT = GetDataTableFromDataReader(reader);
                                     tbDLQT.Load(reader);
                                     reader.Close();
+                                    connection.Close();
                                 }
                                 catch (Exception ex)
                                 {
+                                    connection.Close();
                                     Console.WriteLine(ex.Message);
                                     return;
                                 }
                             }
+                            
+
                             System.Data.SqlClient.SqlConnection conn;
                             conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
                             conn.Open();
@@ -2352,6 +2360,36 @@ namespace Vs.TimeAttendance
             {
 
             }
+        }
+        public DataTable GetDataTableFromDataReader(IDataReader dataReader)
+        {
+            DataTable schemaTable = dataReader.GetSchemaTable();
+            DataTable resultTable = new DataTable();
+
+            foreach (DataRow dataRow in schemaTable.Rows)
+            {
+                DataColumn dataColumn = new DataColumn();
+                dataColumn.ColumnName = dataRow["ColumnName"].ToString();
+                dataColumn.DataType = Type.GetType(dataRow["DataType"].ToString());
+                dataColumn.ReadOnly = (bool)dataRow["IsReadOnly"];
+                dataColumn.AutoIncrement = (bool)dataRow["IsAutoIncrement"];
+                dataColumn.Unique = (bool)dataRow["IsUnique"];
+
+
+                resultTable.Columns.Add(dataColumn);
+            }
+
+            while (dataReader.Read())
+            {
+                DataRow dataRow = resultTable.NewRow();
+                for (int i = 0; i < resultTable.Columns.Count; i++)
+                {
+                    dataRow[i] = dataReader[i];
+                }
+                resultTable.Rows.Add(dataRow);
+            }
+
+            return resultTable;
         }
     }
 }

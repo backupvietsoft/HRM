@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions5 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions1 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmNotification));
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions6 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions2 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
             this.windowsUIButton = new DevExpress.XtraBars.Docking2010.WindowsUIButtonPanel();
             this.searchControl = new DevExpress.XtraEditors.SearchControl();
             this.grdSource = new DevExpress.XtraGrid.GridControl();
@@ -38,20 +38,33 @@
             this.lblTabbedControlGroup = new DevExpress.XtraLayout.TabbedControlGroup();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.tabbedControlGroup1 = new DevExpress.XtraLayout.TabbedControlGroup();
+            this.tabBKData = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControl2 = new DevExpress.XtraLayout.LayoutControl();
+            this.txtDuongDanFile = new DevExpress.XtraEditors.TextEdit();
+            this.grdBKData = new DevExpress.XtraGrid.GridControl();
+            this.grvBKData = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.radioGroup1 = new DevExpress.XtraEditors.RadioGroup();
+            this.layoutControlGroup2 = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.lblDuongDanFile = new DevExpress.XtraLayout.LayoutControlItem();
+            this.tabThongBao = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.tabQuery = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            this.txtCauQuery = new DevExpress.XtraEditors.MemoEdit();
             this.cboSearchSP = new DevExpress.XtraEditors.SearchLookUpEdit();
             this.searchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.txtCauQuery = new DevExpress.XtraEditors.MemoEdit();
             this.grdQuery = new DevExpress.XtraGrid.GridControl();
             this.grvQuery = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             this.lblCauQuery = new DevExpress.XtraLayout.LayoutControlItem();
             this.lblStoredProcedures = new DevExpress.XtraLayout.LayoutControlItem();
-            this.tabThongBao = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.dataLayoutControl1 = new DevExpress.XtraDataLayout.DataLayoutControl();
             this.windowsUIButton.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.searchControl.Properties)).BeginInit();
@@ -60,21 +73,34 @@
             ((System.ComponentModel.ISupportInitialize)(this.lblTabbedControlGroup)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabbedControlGroup1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tabBKData)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControl2)).BeginInit();
+            this.layoutControl2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDuongDanFile.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grdBKData)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grvBKData)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radioGroup1.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lblDuongDanFile)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tabThongBao)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabQuery)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCauQuery.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboSearchSP.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtCauQuery.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdQuery)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grvQuery)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblCauQuery)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblStoredProcedures)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tabThongBao)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataLayoutControl1)).BeginInit();
             this.dataLayoutControl1.SuspendLayout();
             this.SuspendLayout();
@@ -96,20 +122,20 @@
             this.windowsUIButton.AppearanceButton.Pressed.Options.UseFont = true;
             this.windowsUIButton.AppearanceButton.Pressed.Options.UseImage = true;
             this.windowsUIButton.AppearanceButton.Pressed.Options.UseTextOptions = true;
-            windowsUIButtonImageOptions5.ImageUri.Uri = "SaveAll";
-            windowsUIButtonImageOptions5.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("windowsUIButtonImageOptions5.SvgImage")));
-            windowsUIButtonImageOptions6.ImageUri.Uri = "richedit/clearheaderandfooter";
+            windowsUIButtonImageOptions1.ImageUri.Uri = "SaveAll";
+            windowsUIButtonImageOptions1.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("windowsUIButtonImageOptions1.SvgImage")));
+            windowsUIButtonImageOptions2.ImageUri.Uri = "richedit/clearheaderandfooter";
             this.windowsUIButton.Buttons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] {
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions5, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "EXEC", -1, false),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions6, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "thoat", -1, false)});
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions1, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "EXEC", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions2, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "thoat", -1, false)});
             this.windowsUIButton.ContentAlignment = System.Drawing.ContentAlignment.MiddleRight;
             this.windowsUIButton.Controls.Add(this.searchControl);
             this.windowsUIButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.windowsUIButton.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.windowsUIButton.Location = new System.Drawing.Point(0, 454);
-            this.windowsUIButton.Margin = new System.Windows.Forms.Padding(4);
+            this.windowsUIButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.windowsUIButton.Name = "windowsUIButton";
-            this.windowsUIButton.Padding = new System.Windows.Forms.Padding(4);
+            this.windowsUIButton.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.windowsUIButton.Size = new System.Drawing.Size(780, 34);
             this.windowsUIButton.TabIndex = 5;
             this.windowsUIButton.Text = "windowsUIButtonPanel1";
@@ -121,7 +147,7 @@
             this.searchControl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.searchControl.Client = this.grdSource;
             this.searchControl.Location = new System.Drawing.Point(2, 7);
-            this.searchControl.Margin = new System.Windows.Forms.Padding(2);
+            this.searchControl.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.searchControl.Name = "searchControl";
             this.searchControl.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Repository.ClearButton(),
@@ -134,10 +160,10 @@
             // grdSource
             // 
             this.grdSource.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.grdSource.Location = new System.Drawing.Point(12, 37);
+            this.grdSource.Location = new System.Drawing.Point(8, 28);
             this.grdSource.MainView = this.grvSource;
             this.grdSource.Name = "grdSource";
-            this.grdSource.Size = new System.Drawing.Size(756, 405);
+            this.grdSource.Size = new System.Drawing.Size(591, 312);
             this.grdSource.TabIndex = 6;
             this.grdSource.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grvSource});
@@ -162,7 +188,8 @@
             this.Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
             this.Root.GroupBordersVisible = false;
             this.Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.tabbedControlGroup1});
+            this.tabbedControlGroup1,
+            this.layoutControlItem7});
             this.Root.Name = "Root";
             this.Root.Size = new System.Drawing.Size(780, 454);
             this.Root.TextVisible = false;
@@ -171,11 +198,140 @@
             // 
             this.tabbedControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.tabbedControlGroup1.Name = "tabbedControlGroup1";
-            this.tabbedControlGroup1.SelectedTabPage = this.tabQuery;
-            this.tabbedControlGroup1.Size = new System.Drawing.Size(770, 444);
+            this.tabbedControlGroup1.SelectedTabPage = this.tabBKData;
+            this.tabbedControlGroup1.Size = new System.Drawing.Size(772, 422);
             this.tabbedControlGroup1.TabPages.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.tabThongBao,
-            this.tabQuery});
+            this.tabQuery,
+            this.tabBKData});
+            this.tabbedControlGroup1.SelectedPageChanged += new DevExpress.XtraLayout.LayoutTabPageChangedEventHandler(this.tabbedControlGroup1_SelectedPageChanged);
+            // 
+            // tabBKData
+            // 
+            this.tabBKData.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItem4});
+            this.tabBKData.Location = new System.Drawing.Point(0, 0);
+            this.tabBKData.Name = "tabBKData";
+            this.tabBKData.Size = new System.Drawing.Size(762, 387);
+            // 
+            // layoutControlItem4
+            // 
+            this.layoutControlItem4.Control = this.layoutControl2;
+            this.layoutControlItem4.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlItem4.Name = "layoutControlItem4";
+            this.layoutControlItem4.Size = new System.Drawing.Size(762, 387);
+            this.layoutControlItem4.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem4.TextVisible = false;
+            // 
+            // layoutControl2
+            // 
+            this.layoutControl2.Controls.Add(this.txtDuongDanFile);
+            this.layoutControl2.Controls.Add(this.grdBKData);
+            this.layoutControl2.Controls.Add(this.radioGroup1);
+            this.layoutControl2.Location = new System.Drawing.Point(10, 35);
+            this.layoutControl2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.layoutControl2.Name = "layoutControl2";
+            this.layoutControl2.Root = this.layoutControlGroup2;
+            this.layoutControl2.Size = new System.Drawing.Size(760, 385);
+            this.layoutControl2.TabIndex = 8;
+            this.layoutControl2.Text = "layoutControl2";
+            // 
+            // txtDuongDanFile
+            // 
+            this.txtDuongDanFile.Location = new System.Drawing.Point(101, 41);
+            this.txtDuongDanFile.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtDuongDanFile.Name = "txtDuongDanFile";
+            this.txtDuongDanFile.Size = new System.Drawing.Size(654, 24);
+            this.txtDuongDanFile.StyleController = this.layoutControl2;
+            this.txtDuongDanFile.TabIndex = 6;
+            this.txtDuongDanFile.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtDuongDanFile_KeyDown);
+            // 
+            // grdBKData
+            // 
+            this.grdBKData.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.grdBKData.Location = new System.Drawing.Point(5, 67);
+            this.grdBKData.MainView = this.grvBKData;
+            this.grdBKData.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.grdBKData.Name = "grdBKData";
+            this.grdBKData.Size = new System.Drawing.Size(750, 313);
+            this.grdBKData.TabIndex = 5;
+            this.grdBKData.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.grvBKData});
+            // 
+            // grvBKData
+            // 
+            this.grvBKData.DetailHeight = 283;
+            this.grvBKData.GridControl = this.grdBKData;
+            this.grvBKData.Name = "grvBKData";
+            this.grvBKData.OptionsView.ShowGroupPanel = false;
+            // 
+            // radioGroup1
+            // 
+            this.radioGroup1.Location = new System.Drawing.Point(5, 5);
+            this.radioGroup1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.radioGroup1.Name = "radioGroup1";
+            this.radioGroup1.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] {
+            new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "File Upload"),
+            new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "File DownLoad")});
+            this.radioGroup1.Size = new System.Drawing.Size(750, 34);
+            this.radioGroup1.StyleController = this.layoutControl2;
+            this.radioGroup1.TabIndex = 4;
+            // 
+            // layoutControlGroup2
+            // 
+            this.layoutControlGroup2.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
+            this.layoutControlGroup2.GroupBordersVisible = false;
+            this.layoutControlGroup2.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItem5,
+            this.layoutControlItem6,
+            this.lblDuongDanFile});
+            this.layoutControlGroup2.Name = "layoutControlGroup2";
+            this.layoutControlGroup2.Size = new System.Drawing.Size(760, 385);
+            this.layoutControlGroup2.TextVisible = false;
+            // 
+            // layoutControlItem5
+            // 
+            this.layoutControlItem5.Control = this.radioGroup1;
+            this.layoutControlItem5.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlItem5.Name = "layoutControlItem5";
+            this.layoutControlItem5.Size = new System.Drawing.Size(752, 36);
+            this.layoutControlItem5.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem5.TextVisible = false;
+            // 
+            // layoutControlItem6
+            // 
+            this.layoutControlItem6.Control = this.grdBKData;
+            this.layoutControlItem6.Location = new System.Drawing.Point(0, 62);
+            this.layoutControlItem6.Name = "layoutControlItem6";
+            this.layoutControlItem6.Size = new System.Drawing.Size(752, 315);
+            this.layoutControlItem6.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem6.TextVisible = false;
+            // 
+            // lblDuongDanFile
+            // 
+            this.lblDuongDanFile.Control = this.txtDuongDanFile;
+            this.lblDuongDanFile.Location = new System.Drawing.Point(0, 36);
+            this.lblDuongDanFile.Name = "lblDuongDanFile";
+            this.lblDuongDanFile.Size = new System.Drawing.Size(752, 26);
+            this.lblDuongDanFile.Text = "Đường dẫn file";
+            this.lblDuongDanFile.TextSize = new System.Drawing.Size(87, 17);
+            // 
+            // tabThongBao
+            // 
+            this.tabThongBao.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItem1});
+            this.tabThongBao.Location = new System.Drawing.Point(0, 0);
+            this.tabThongBao.Name = "tabThongBao";
+            this.tabThongBao.Size = new System.Drawing.Size(762, 387);
+            // 
+            // layoutControlItem1
+            // 
+            this.layoutControlItem1.Control = this.grdSource;
+            this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlItem1.Name = "layoutControlItem1";
+            this.layoutControlItem1.Size = new System.Drawing.Size(762, 387);
+            this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem1.TextVisible = false;
             // 
             // tabQuery
             // 
@@ -183,14 +339,14 @@
             this.layoutControlItem2});
             this.tabQuery.Location = new System.Drawing.Point(0, 0);
             this.tabQuery.Name = "tabQuery";
-            this.tabQuery.Size = new System.Drawing.Size(758, 407);
+            this.tabQuery.Size = new System.Drawing.Size(762, 387);
             // 
             // layoutControlItem2
             // 
             this.layoutControlItem2.Control = this.layoutControl1;
             this.layoutControlItem2.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(758, 407);
+            this.layoutControlItem2.Size = new System.Drawing.Size(762, 387);
             this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem2.TextVisible = false;
             // 
@@ -199,22 +355,32 @@
             this.layoutControl1.Controls.Add(this.txtCauQuery);
             this.layoutControl1.Controls.Add(this.cboSearchSP);
             this.layoutControl1.Controls.Add(this.grdQuery);
-            this.layoutControl1.Location = new System.Drawing.Point(12, 37);
+            this.layoutControl1.Location = new System.Drawing.Point(10, 35);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.Root = this.layoutControlGroup1;
-            this.layoutControl1.Size = new System.Drawing.Size(756, 405);
+            this.layoutControl1.Size = new System.Drawing.Size(760, 385);
             this.layoutControl1.TabIndex = 7;
             this.layoutControl1.Text = "layoutControl1";
             // 
+            // txtCauQuery
+            // 
+            this.txtCauQuery.Location = new System.Drawing.Point(5, 31);
+            this.txtCauQuery.Name = "txtCauQuery";
+            this.txtCauQuery.Size = new System.Drawing.Size(750, 108);
+            this.txtCauQuery.StyleController = this.layoutControl1;
+            this.txtCauQuery.TabIndex = 6;
+            this.txtCauQuery.TextChanged += new System.EventHandler(this.txtCauQuery_TextChanged);
+            this.txtCauQuery.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtCauQuery_KeyDown);
+            // 
             // cboSearchSP
             // 
-            this.cboSearchSP.Location = new System.Drawing.Point(127, 6);
+            this.cboSearchSP.Location = new System.Drawing.Point(123, 5);
             this.cboSearchSP.Name = "cboSearchSP";
             this.cboSearchSP.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cboSearchSP.Properties.NullText = "";
             this.cboSearchSP.Properties.PopupView = this.searchLookUpEdit1View;
-            this.cboSearchSP.Size = new System.Drawing.Size(623, 24);
+            this.cboSearchSP.Size = new System.Drawing.Size(632, 24);
             this.cboSearchSP.StyleController = this.layoutControl1;
             this.cboSearchSP.TabIndex = 7;
             this.cboSearchSP.EditValueChanged += new System.EventHandler(this.cboSearchSP_EditValueChanged);
@@ -226,22 +392,12 @@
             this.searchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
             this.searchLookUpEdit1View.OptionsView.ShowGroupPanel = false;
             // 
-            // txtCauQuery
-            // 
-            this.txtCauQuery.Location = new System.Drawing.Point(6, 32);
-            this.txtCauQuery.Name = "txtCauQuery";
-            this.txtCauQuery.Size = new System.Drawing.Size(744, 113);
-            this.txtCauQuery.StyleController = this.layoutControl1;
-            this.txtCauQuery.TabIndex = 6;
-            this.txtCauQuery.TextChanged += new System.EventHandler(this.txtCauQuery_TextChanged);
-            this.txtCauQuery.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtCauQuery_KeyDown);
-            // 
             // grdQuery
             // 
-            this.grdQuery.Location = new System.Drawing.Point(6, 147);
+            this.grdQuery.Location = new System.Drawing.Point(5, 141);
             this.grdQuery.MainView = this.grvQuery;
             this.grdQuery.Name = "grdQuery";
-            this.grdQuery.Size = new System.Drawing.Size(744, 252);
+            this.grdQuery.Size = new System.Drawing.Size(750, 239);
             this.grdQuery.TabIndex = 5;
             this.grdQuery.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grvQuery});
@@ -261,15 +417,15 @@
             this.lblCauQuery,
             this.lblStoredProcedures});
             this.layoutControlGroup1.Name = "layoutControlGroup1";
-            this.layoutControlGroup1.Size = new System.Drawing.Size(756, 405);
+            this.layoutControlGroup1.Size = new System.Drawing.Size(760, 385);
             this.layoutControlGroup1.TextVisible = false;
             // 
             // layoutControlItem3
             // 
             this.layoutControlItem3.Control = this.grdQuery;
-            this.layoutControlItem3.Location = new System.Drawing.Point(0, 141);
+            this.layoutControlItem3.Location = new System.Drawing.Point(0, 136);
             this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Size = new System.Drawing.Size(746, 254);
+            this.layoutControlItem3.Size = new System.Drawing.Size(752, 241);
             this.layoutControlItem3.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem3.TextVisible = false;
             // 
@@ -278,7 +434,7 @@
             this.lblCauQuery.Control = this.txtCauQuery;
             this.lblCauQuery.Location = new System.Drawing.Point(0, 26);
             this.lblCauQuery.Name = "lblCauQuery";
-            this.lblCauQuery.Size = new System.Drawing.Size(746, 115);
+            this.lblCauQuery.Size = new System.Drawing.Size(752, 110);
             this.lblCauQuery.TextSize = new System.Drawing.Size(0, 0);
             this.lblCauQuery.TextVisible = false;
             // 
@@ -287,29 +443,31 @@
             this.lblStoredProcedures.Control = this.cboSearchSP;
             this.lblStoredProcedures.Location = new System.Drawing.Point(0, 0);
             this.lblStoredProcedures.Name = "lblStoredProcedures";
-            this.lblStoredProcedures.Size = new System.Drawing.Size(746, 26);
+            this.lblStoredProcedures.Size = new System.Drawing.Size(752, 26);
             this.lblStoredProcedures.Text = "Stored Procedures";
             this.lblStoredProcedures.TextSize = new System.Drawing.Size(109, 17);
             // 
-            // tabThongBao
+            // layoutControlItem7
             // 
-            this.tabThongBao.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlItem1});
-            this.tabThongBao.Location = new System.Drawing.Point(0, 0);
-            this.tabThongBao.Name = "tabThongBao";
-            this.tabThongBao.Size = new System.Drawing.Size(758, 407);
+            this.layoutControlItem7.Control = this.progressBar1;
+            this.layoutControlItem7.Location = new System.Drawing.Point(0, 422);
+            this.layoutControlItem7.Name = "layoutControlItem7";
+            this.layoutControlItem7.Size = new System.Drawing.Size(772, 24);
+            this.layoutControlItem7.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem7.TextVisible = false;
             // 
-            // layoutControlItem1
+            // progressBar1
             // 
-            this.layoutControlItem1.Control = this.grdSource;
-            this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(758, 407);
-            this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem1.TextVisible = false;
+            this.progressBar1.Location = new System.Drawing.Point(5, 427);
+            this.progressBar1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(770, 22);
+            this.progressBar1.TabIndex = 9;
             // 
             // dataLayoutControl1
             // 
+            this.dataLayoutControl1.Controls.Add(this.progressBar1);
+            this.dataLayoutControl1.Controls.Add(this.layoutControl2);
             this.dataLayoutControl1.Controls.Add(this.layoutControl1);
             this.dataLayoutControl1.Controls.Add(this.grdSource);
             this.dataLayoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -339,21 +497,34 @@
             ((System.ComponentModel.ISupportInitialize)(this.lblTabbedControlGroup)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabbedControlGroup1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tabBKData)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControl2)).EndInit();
+            this.layoutControl2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.txtDuongDanFile.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grdBKData)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grvBKData)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radioGroup1.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lblDuongDanFile)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tabThongBao)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabQuery)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.txtCauQuery.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboSearchSP.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtCauQuery.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdQuery)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grvQuery)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblCauQuery)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblStoredProcedures)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tabThongBao)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataLayoutControl1)).EndInit();
             this.dataLayoutControl1.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -384,5 +555,18 @@
         private DevExpress.XtraEditors.SearchLookUpEdit cboSearchSP;
         private DevExpress.XtraGrid.Views.Grid.GridView searchLookUpEdit1View;
         private DevExpress.XtraLayout.LayoutControlItem lblStoredProcedures;
-    }
+		private DevExpress.XtraLayout.LayoutControlGroup tabBKData;
+		private DevExpress.XtraLayout.LayoutControlItem layoutControlItem4;
+		private DevExpress.XtraLayout.LayoutControl layoutControl2;
+		private DevExpress.XtraGrid.GridControl grdBKData;
+		private DevExpress.XtraGrid.Views.Grid.GridView grvBKData;
+		private DevExpress.XtraEditors.RadioGroup radioGroup1;
+		private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup2;
+		private DevExpress.XtraLayout.LayoutControlItem layoutControlItem5;
+		private DevExpress.XtraLayout.LayoutControlItem layoutControlItem6;
+		private DevExpress.XtraEditors.TextEdit txtDuongDanFile;
+		private DevExpress.XtraLayout.LayoutControlItem lblDuongDanFile;
+		private DevExpress.XtraLayout.LayoutControlItem layoutControlItem7;
+		private System.Windows.Forms.ProgressBar progressBar1;
+	}
 }

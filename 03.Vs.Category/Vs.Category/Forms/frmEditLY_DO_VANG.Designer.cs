@@ -29,14 +29,16 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions3 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions4 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule4 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions1 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions2 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule1 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule2 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
+            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule3 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             this.btnALL = new DevExpress.XtraBars.Docking2010.WindowsUIButtonPanel();
             this.tablePanel1 = new DevExpress.Utils.Layout.TablePanel();
             this.dataLayoutControl1 = new DevExpress.XtraDataLayout.DataLayoutControl();
+            this.cboID_LOAI_NGHI = new DevExpress.XtraEditors.SearchLookUpEdit();
+            this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.cboID_TT_HT = new DevExpress.XtraEditors.SearchLookUpEdit();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.MS_LDVTextEdit = new DevExpress.XtraEditors.TextEdit();
@@ -66,14 +68,16 @@
             this.ItemForPHEP = new DevExpress.XtraLayout.LayoutControlItem();
             this.ItemForTINH_BHXH = new DevExpress.XtraLayout.LayoutControlItem();
             this.ItemForTINH_CHEDO = new DevExpress.XtraLayout.LayoutControlItem();
-            this.dxValidationProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
-            this.cboID_LOAI_NGHI = new DevExpress.XtraEditors.SearchLookUpEdit();
             this.lblLoaiNghi = new DevExpress.XtraLayout.LayoutControlItem();
-            this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.dxValidationProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
+            this.textEdit1 = new DevExpress.XtraEditors.TextEdit();
+            this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).BeginInit();
             this.tablePanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataLayoutControl1)).BeginInit();
             this.dataLayoutControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cboID_LOAI_NGHI.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboID_TT_HT.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.MS_LDVTextEdit.Properties)).BeginInit();
@@ -103,10 +107,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.ItemForPHEP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForTINH_BHXH)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForTINH_CHEDO)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cboID_LOAI_NGHI.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblLoaiNghi)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             this.SuspendLayout();
             // 
             // btnALL
@@ -126,11 +130,11 @@
             this.btnALL.AppearanceButton.Pressed.Options.UseFont = true;
             this.btnALL.AppearanceButton.Pressed.Options.UseImage = true;
             this.btnALL.AppearanceButton.Pressed.Options.UseTextOptions = true;
-            windowsUIButtonImageOptions3.ImageUri.Uri = "SaveAll";
-            windowsUIButtonImageOptions4.ImageUri.Uri = "richedit/clearheaderandfooter";
+            windowsUIButtonImageOptions1.ImageUri.Uri = "SaveAll";
+            windowsUIButtonImageOptions2.ImageUri.Uri = "richedit/clearheaderandfooter";
             this.btnALL.Buttons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] {
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions3, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "luu", -1, false),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions4, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "thoat", -1, false)});
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions1, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "luu", -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("", true, windowsUIButtonImageOptions2, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "thoat", -1, false)});
             this.btnALL.ContentAlignment = System.Drawing.ContentAlignment.MiddleRight;
             this.btnALL.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnALL.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -161,6 +165,7 @@
             // dataLayoutControl1
             // 
             this.tablePanel1.SetColumn(this.dataLayoutControl1, 1);
+            this.dataLayoutControl1.Controls.Add(this.textEdit1);
             this.dataLayoutControl1.Controls.Add(this.cboID_LOAI_NGHI);
             this.dataLayoutControl1.Controls.Add(this.cboID_TT_HT);
             this.dataLayoutControl1.Controls.Add(this.MS_LDVTextEdit);
@@ -185,6 +190,25 @@
             this.dataLayoutControl1.TabIndex = 0;
             this.dataLayoutControl1.Text = "dataLayoutControl1";
             // 
+            // cboID_LOAI_NGHI
+            // 
+            this.cboID_LOAI_NGHI.Location = new System.Drawing.Point(148, 180);
+            this.cboID_LOAI_NGHI.Name = "cboID_LOAI_NGHI";
+            this.cboID_LOAI_NGHI.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cboID_LOAI_NGHI.Properties.NullText = "";
+            this.cboID_LOAI_NGHI.Properties.PopupView = this.gridView2;
+            this.cboID_LOAI_NGHI.Size = new System.Drawing.Size(414, 24);
+            this.cboID_LOAI_NGHI.StyleController = this.dataLayoutControl1;
+            this.cboID_LOAI_NGHI.TabIndex = 16;
+            // 
+            // gridView2
+            // 
+            this.gridView2.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            this.gridView2.Name = "gridView2";
+            this.gridView2.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.gridView2.OptionsView.ShowGroupPanel = false;
+            // 
             // cboID_TT_HT
             // 
             this.cboID_TT_HT.Location = new System.Drawing.Point(148, 152);
@@ -207,15 +231,15 @@
             // 
             // MS_LDVTextEdit
             // 
-            this.MS_LDVTextEdit.Location = new System.Drawing.Point(148, 40);
+            this.MS_LDVTextEdit.Location = new System.Drawing.Point(425, 12);
             this.MS_LDVTextEdit.Margin = new System.Windows.Forms.Padding(4);
             this.MS_LDVTextEdit.Name = "MS_LDVTextEdit";
-            this.MS_LDVTextEdit.Size = new System.Drawing.Size(101, 24);
+            this.MS_LDVTextEdit.Size = new System.Drawing.Size(137, 24);
             this.MS_LDVTextEdit.StyleController = this.dataLayoutControl1;
             this.MS_LDVTextEdit.TabIndex = 4;
-            conditionValidationRule4.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule4.ErrorText = "This value is not valid";
-            this.dxValidationProvider1.SetValidationRule(this.MS_LDVTextEdit, conditionValidationRule4);
+            conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule1.ErrorText = "This value is not valid";
+            this.dxValidationProvider1.SetValidationRule(this.MS_LDVTextEdit, conditionValidationRule1);
             // 
             // TEN_LDVTextEdit
             // 
@@ -225,9 +249,9 @@
             this.TEN_LDVTextEdit.Size = new System.Drawing.Size(414, 24);
             this.TEN_LDVTextEdit.StyleController = this.dataLayoutControl1;
             this.TEN_LDVTextEdit.TabIndex = 5;
-            conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule1.ErrorText = "This value is not valid";
-            this.dxValidationProvider1.SetValidationRule(this.TEN_LDVTextEdit, conditionValidationRule1);
+            conditionValidationRule2.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule2.ErrorText = "This value is not valid";
+            this.dxValidationProvider1.SetValidationRule(this.TEN_LDVTextEdit, conditionValidationRule2);
             // 
             // TEN_LDV_ATextEdit
             // 
@@ -258,12 +282,12 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.ID_CHE_DOSearchLookUpEdit.Properties.NullText = "";
             this.ID_CHE_DOSearchLookUpEdit.Properties.PopupView = this.searchLookUpEdit1View;
-            this.ID_CHE_DOSearchLookUpEdit.Size = new System.Drawing.Size(414, 24);
+            this.ID_CHE_DOSearchLookUpEdit.Size = new System.Drawing.Size(137, 24);
             this.ID_CHE_DOSearchLookUpEdit.StyleController = this.dataLayoutControl1;
             this.ID_CHE_DOSearchLookUpEdit.TabIndex = 8;
-            conditionValidationRule2.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule2.ErrorText = "This value is not valid";
-            this.dxValidationProvider1.SetValidationRule(this.ID_CHE_DOSearchLookUpEdit, conditionValidationRule2);
+            conditionValidationRule3.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule3.ErrorText = "This value is not valid";
+            this.dxValidationProvider1.SetValidationRule(this.ID_CHE_DOSearchLookUpEdit, conditionValidationRule3);
             // 
             // searchLookUpEdit1View
             // 
@@ -326,7 +350,7 @@
             // 
             // STT_LDVTextEdit
             // 
-            this.STT_LDVTextEdit.Location = new System.Drawing.Point(389, 40);
+            this.STT_LDVTextEdit.Location = new System.Drawing.Point(425, 40);
             this.STT_LDVTextEdit.Margin = new System.Windows.Forms.Padding(4);
             this.STT_LDVTextEdit.Name = "STT_LDVTextEdit";
             this.STT_LDVTextEdit.Properties.Appearance.Options.UseTextOptions = true;
@@ -334,7 +358,7 @@
             this.STT_LDVTextEdit.Properties.Mask.EditMask = "N0";
             this.STT_LDVTextEdit.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.STT_LDVTextEdit.Properties.Mask.UseMaskAsDisplayFormat = true;
-            this.STT_LDVTextEdit.Size = new System.Drawing.Size(173, 24);
+            this.STT_LDVTextEdit.Size = new System.Drawing.Size(137, 24);
             this.STT_LDVTextEdit.StyleController = this.dataLayoutControl1;
             this.STT_LDVTextEdit.TabIndex = 14;
             // 
@@ -365,7 +389,6 @@
             this.layoutControlGroup1.AllowDrawBackground = false;
             this.layoutControlGroup1.GroupBordersVisible = false;
             this.layoutControlGroup1.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.ItemForMS_LDV,
             this.ItemForTEN_LDV,
             this.ItemForTEN_LDV_A,
             this.ItemForTEN_LDV_H,
@@ -378,7 +401,9 @@
             this.ItemForPHEP,
             this.ItemForTINH_BHXH,
             this.ItemForTINH_CHEDO,
-            this.lblLoaiNghi});
+            this.lblLoaiNghi,
+            this.ItemForMS_LDV,
+            this.layoutControlItem1});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "autoGeneratedGroup0";
             this.layoutControlGroup1.Size = new System.Drawing.Size(554, 316);
@@ -388,9 +413,9 @@
             this.ItemForMS_LDV.AppearanceItemCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.ItemForMS_LDV.AppearanceItemCaption.Options.UseForeColor = true;
             this.ItemForMS_LDV.Control = this.MS_LDVTextEdit;
-            this.ItemForMS_LDV.Location = new System.Drawing.Point(0, 28);
+            this.ItemForMS_LDV.Location = new System.Drawing.Point(277, 0);
             this.ItemForMS_LDV.Name = "ItemForMS_LDV";
-            this.ItemForMS_LDV.Size = new System.Drawing.Size(241, 28);
+            this.ItemForMS_LDV.Size = new System.Drawing.Size(277, 28);
             this.ItemForMS_LDV.Text = "MS_LDV";
             this.ItemForMS_LDV.TextSize = new System.Drawing.Size(132, 17);
             // 
@@ -430,16 +455,16 @@
             this.ItemForID_CHE_DO.Control = this.ID_CHE_DOSearchLookUpEdit;
             this.ItemForID_CHE_DO.Location = new System.Drawing.Point(0, 0);
             this.ItemForID_CHE_DO.Name = "ItemForID_CHE_DO";
-            this.ItemForID_CHE_DO.Size = new System.Drawing.Size(554, 28);
+            this.ItemForID_CHE_DO.Size = new System.Drawing.Size(277, 28);
             this.ItemForID_CHE_DO.Text = "ID_CHE_DO";
             this.ItemForID_CHE_DO.TextSize = new System.Drawing.Size(132, 17);
             // 
             // ItemForSTT_LDV
             // 
             this.ItemForSTT_LDV.Control = this.STT_LDVTextEdit;
-            this.ItemForSTT_LDV.Location = new System.Drawing.Point(241, 28);
+            this.ItemForSTT_LDV.Location = new System.Drawing.Point(277, 28);
             this.ItemForSTT_LDV.Name = "ItemForSTT_LDV";
-            this.ItemForSTT_LDV.Size = new System.Drawing.Size(313, 28);
+            this.ItemForSTT_LDV.Size = new System.Drawing.Size(277, 28);
             this.ItemForSTT_LDV.Text = "STT_LDV";
             this.ItemForSTT_LDV.TextSize = new System.Drawing.Size(132, 17);
             // 
@@ -522,18 +547,6 @@
             this.ItemForTINH_CHEDO.TextSize = new System.Drawing.Size(77, 17);
             this.ItemForTINH_CHEDO.TextToControlDistance = 5;
             // 
-            // cboID_LOAI_NGHI
-            // 
-            this.cboID_LOAI_NGHI.Location = new System.Drawing.Point(148, 180);
-            this.cboID_LOAI_NGHI.Name = "cboID_LOAI_NGHI";
-            this.cboID_LOAI_NGHI.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cboID_LOAI_NGHI.Properties.NullText = "";
-            this.cboID_LOAI_NGHI.Properties.PopupView = this.gridView2;
-            this.cboID_LOAI_NGHI.Size = new System.Drawing.Size(414, 24);
-            this.cboID_LOAI_NGHI.StyleController = this.dataLayoutControl1;
-            this.cboID_LOAI_NGHI.TabIndex = 16;
-            // 
             // lblLoaiNghi
             // 
             this.lblLoaiNghi.Control = this.cboID_LOAI_NGHI;
@@ -542,12 +555,21 @@
             this.lblLoaiNghi.Size = new System.Drawing.Size(554, 28);
             this.lblLoaiNghi.TextSize = new System.Drawing.Size(132, 17);
             // 
-            // gridView2
+            // textEdit1
             // 
-            this.gridView2.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
-            this.gridView2.Name = "gridView2";
-            this.gridView2.OptionsSelection.EnableAppearanceFocusedCell = false;
-            this.gridView2.OptionsView.ShowGroupPanel = false;
+            this.textEdit1.Location = new System.Drawing.Point(148, 40);
+            this.textEdit1.Name = "textEdit1";
+            this.textEdit1.Size = new System.Drawing.Size(137, 24);
+            this.textEdit1.StyleController = this.dataLayoutControl1;
+            this.textEdit1.TabIndex = 17;
+            // 
+            // layoutControlItem1
+            // 
+            this.layoutControlItem1.Control = this.textEdit1;
+            this.layoutControlItem1.Location = new System.Drawing.Point(0, 28);
+            this.layoutControlItem1.Name = "layoutControlItem1";
+            this.layoutControlItem1.Size = new System.Drawing.Size(277, 28);
+            this.layoutControlItem1.TextSize = new System.Drawing.Size(132, 17);
             // 
             // frmEditLY_DO_VANG
             // 
@@ -565,6 +587,8 @@
             this.tablePanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataLayoutControl1)).EndInit();
             this.dataLayoutControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.cboID_LOAI_NGHI.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboID_TT_HT.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.MS_LDVTextEdit.Properties)).EndInit();
@@ -594,10 +618,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.ItemForPHEP)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForTINH_BHXH)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForTINH_CHEDO)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cboID_LOAI_NGHI.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblLoaiNghi)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -640,5 +664,7 @@
         private DevExpress.XtraEditors.SearchLookUpEdit cboID_LOAI_NGHI;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView2;
         private DevExpress.XtraLayout.LayoutControlItem lblLoaiNghi;
+        private DevExpress.XtraEditors.TextEdit textEdit1;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
     }
 }

@@ -300,6 +300,10 @@ namespace Vs.HRM
                 datDenNgay.EditValue = DateTime.Today;
                 chkGroup.Checked = true;
                 rdoLoaiIn.SelectedIndex = 0;
+                if(Commons.Modules.KyHieuDV != "TG")
+                {
+                    rdoChonBC.Properties.Items.Remove(rdoChonBC.Properties.Items.Where(x => x.Tag.ToString() == "rdo_DSCongNhanDoiHoSo").FirstOrDefault());
+                }
                 Commons.Modules.sLoad = "";
                 EnabledButton(true);
                 rdoChonBC_SelectedIndexChanged(null, null);
@@ -1702,7 +1706,6 @@ namespace Vs.HRM
 
             return;
         }
-
         private void DanhSachCanBoCongNhanVien()
         {
             System.Data.SqlClient.SqlConnection conn;
@@ -1801,7 +1804,6 @@ namespace Vs.HRM
                 Excel.Range formatRange11 = oSheet.get_Range("AX12", "AX" + rowCnt.ToString());////Format colum AX8 of Data table
                 Excel.Range formatRange13 = oSheet.get_Range("BC12", lastColumn + rowCnt.ToString());////Format colum BC->lastColumn of Data table
 
-
                 Excel.Range formatRange12 = oSheet.get_Range("AW12", "AW" + rowCnt.ToString());////Format colum AW8 of Data table
 
                 formatRange1.HorizontalAlignment = XlHAlign.xlHAlignCenter;
@@ -1832,13 +1834,20 @@ namespace Vs.HRM
                 formatRange12.HorizontalAlignment = Excel.XlHAlign.xlHAlignRight;
                 formatRange12.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
 
+                oSheet.Columns["G"].Delete();////xóa cột nơi sinh : 7
+                for (int i = 7; i < dt.Columns.Count; i++)
+                {
+                    Excel.Range formatRange15 = oSheet.get_Range("" + CharacterIncrement(i - 1) + "11", CharacterIncrement(i - 1) + "11");////xóa cột nơi sinh : 7
+                    formatRange15.Value2 = i;
+                }
+
+                Excel.Range formatRange14 = oSheet.get_Range("AV12", "AV" + rowCnt.ToString());////Format colum AW8 of Data table
+                formatRange14.NumberFormat = "#,##0;(#,##0);;";
+                try { formatRange14.TextToColumns(Type.Missing, Excel.XlTextParsingType.xlDelimited, Excel.XlTextQualifier.xlTextQualifierDoubleQuote); } catch { }
+
                 this.Cursor = Cursors.Default;
                 oXL.Visible = true;
                 oXL.UserControl = true;
-
-
-
-
             }
             catch (Exception ex)
             {

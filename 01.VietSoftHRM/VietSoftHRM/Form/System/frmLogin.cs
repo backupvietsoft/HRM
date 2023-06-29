@@ -27,7 +27,6 @@ namespace VietSoftHRM
             txt_user.ForeColor = Color.SteelBlue;
             pan_user.BackColor = Color.SteelBlue;
             pic_user.Image = Properties.Resources.icon_user1;
-
         }
 
         private void Txt_pass_Click(object sender, EventArgs e)
@@ -43,7 +42,6 @@ namespace VietSoftHRM
             cbo_database.ForeColor = Color.SteelBlue;
             pan_database.BackColor = Color.SteelBlue;
             pic_database.Image = Properties.Resources.icon_data1;
-
         }
         private void Txt_user_Validated(object sender, EventArgs e)
         {
@@ -358,6 +356,7 @@ namespace VietSoftHRM
 
         private void pic_database_DoubleClick(object sender, EventArgs e)
         {
+
         }
 
         private void pictureBox1_DoubleClick(object sender, EventArgs e)

@@ -1,4 +1,4 @@
-﻿namespace Vs.Report
+﻿namespace Vs.Payroll
 {
     partial class rptBangLuongThang_TG
     {

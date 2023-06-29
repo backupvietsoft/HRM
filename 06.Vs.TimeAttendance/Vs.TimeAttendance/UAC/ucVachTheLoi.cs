@@ -8,6 +8,7 @@ using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraLayout;
 using Microsoft.ApplicationBlocks.Data;
+using OfficeOpenXml.FormulaParsing.Excel.Functions.Math;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -618,22 +619,35 @@ namespace Vs.TimeAttendance
         {
             try
             {
-                string sCotCN = grvCongNhan.FocusedColumn.FieldName.ToString();
-                try
-                {
-                    if (grvCongNhan.GetFocusedRowCellValue(grvCongNhan.FocusedColumn.FieldName).ToString() == "") return;
-                    string sBTCongNhan = "sBTCongNhan" + Commons.Modules.iIDUser;
-                    Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBTCongNhan, Commons.Modules.ObjSystems.ConvertDatatable(grvCongNhan), "");
+                //string sCotCN = grvCongNhan.FocusedColumn.FieldName.ToString();
+                //try
+                //{
+                //    if (grvCongNhan.GetFocusedRowCellValue(grvCongNhan.FocusedColumn.FieldName).ToString() == "") return;
+                //    string sBTCongNhan = "sBTCongNhan" + Commons.Modules.iIDUser;
+                //    Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBTCongNhan, Commons.Modules.ObjSystems.ConvertDatatable(grvCongNhan), "");
 
-                    DataTable dt = new DataTable();
-                    dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spUpdateChuotPhai_TiepNhan", sBTCongNhan, sCotCN, sCotCN.Substring(0, 4) == "NGAY" ? Convert.ToDateTime(grvCongNhan.GetFocusedRowCellValue(grvCongNhan.FocusedColumn.FieldName)).ToString("MM/dd/yyyy") : grvCongNhan.GetFocusedRowCellValue(grvCongNhan.FocusedColumn.FieldName)));
-                    grdCongNhan.DataSource = dt;
-                    Commons.Modules.ObjSystems.XoaTable(sCotCN);
-                }
-                catch (Exception ex)
-                {
-                    Commons.Modules.ObjSystems.XoaTable(sCotCN);
-                }
+                //    DataTable dt = new DataTable();
+                //    dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spUpdateChuotPhai_TiepNhan", sBTCongNhan, sCotCN, sCotCN.Substring(0, 4) == "NGAY" ? Convert.ToDateTime(grvCongNhan.GetFocusedRowCellValue(grvCongNhan.FocusedColumn.FieldName)).ToString("MM/dd/yyyy") : grvCongNhan.GetFocusedRowCellValue(grvCongNhan.FocusedColumn.FieldName)));
+                //    grdCongNhan.DataSource = dt;
+                //    Commons.Modules.ObjSystems.XoaTable(sCotCN);
+                //}
+                //catch (Exception ex)
+                //{
+                //    Commons.Modules.ObjSystems.XoaTable(sCotCN);
+                //}
+
+                DataTable dt = new DataTable();
+                DataTable dt1 = new DataTable();
+                string sCotCN = grvCongNhan.FocusedColumn.FieldName;
+                var data = grvCongNhan.GetFocusedRowCellValue(sCotCN);
+
+                dt1 = Commons.Modules.ObjSystems.ConvertDatatable(grdCongNhan);
+                dt = (DataTable)grdCongNhan.DataSource;
+
+                dt.AsEnumerable().Where(row => dt1.AsEnumerable()
+                                                         .Select(r => r.Field<Int64>("ID_CN"))
+                                                         .Any(x => x == row.Field<Int64>("ID_CN"))
+                                                         ).ToList<DataRow>().ForEach(r => r[sCotCN] = (data));
             }
             catch (Exception ex) { }
         }

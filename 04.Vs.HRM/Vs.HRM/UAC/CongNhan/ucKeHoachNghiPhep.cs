@@ -16,6 +16,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.Tab;
 using DevExpress.XtraPrinting.Native;
 using static DevExpress.XtraPrinting.Native.ExportOptionsPropertiesNames;
 using DevExpress.XtraEditors.Designer.Utils;
+using DevExpress.Mvvm.Native;
 
 namespace Vs.HRM
 {
@@ -46,6 +47,8 @@ namespace Vs.HRM
         {
             try
             {
+                Commons.OSystems.SetDateEditFormat(datNgayHieuLuc);
+                datNgayHieuLuc.DateTime = DateTime.Now;
                 lblSoGio.Visible = false;
                 numSoGio.Visible = false;
                 Thread.Sleep(100);
@@ -205,7 +208,7 @@ namespace Vs.HRM
 
                 cboLDVGrv = new RepositoryItemLookUpEdit();
                 dtCboLDV = new DataTable();
-                dtCboLDV = Commons.Modules.ObjSystems.DataLyDoVang(false, -1);
+                dtCboLDV = Commons.Modules.ObjSystems.DataLyDoVang(false, -1,"-1");
                 //dtMQL.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT DISTINCT T1.ID_CD, T1.MaQL, T1.TEN_CD_QT AS TEN_CD FROM QUI_TRINH_CONG_NGHE_CHI_TIET T1 LEFT JOIN PHIEU_CONG_DOAN T2 ON T1.ID_CD = T2.ID_CD"));
                 cboLDVGrv.NullText = "";
                 cboLDVGrv.ValueMember = "ID_LDV";

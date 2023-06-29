@@ -15,6 +15,7 @@ using DataTable = System.Data.DataTable;
 using DevExpress.CodeParser;
 using DevExpress.DataProcessing;
 using DevExpress.XtraCharts.Native;
+using OfficeOpenXml;
 
 namespace Vs.Payroll
 {
@@ -4325,16 +4326,28 @@ namespace Vs.Payroll
                     formatRange.Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
                     formatRange.Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
 
-                    formatRange = oSheet.Range[oSheet.Cells[oRow, 6], oSheet.Cells[oRow, 6]]; // 
-                    formatRange.Value2 = "GIÁM ĐỐC XN";
+                    if (Convert.ToInt32(LK_DON_VI.EditValue) == 2)
+                    {
+                        formatRange = oSheet.Range[oSheet.Cells[oRow, 6], oSheet.Cells[oRow, 6]]; // 
+                        formatRange.Value2 = "GĐĐH Khu CL";
+                        formatRange.Font.Size = fontSizeNoiDung;
+                        formatRange.Font.Name = fontName;
+                        formatRange.Font.Bold = true;
+                        formatRange.Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                        formatRange.Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+                    }
+
+                    formatRange = oSheet.Range[oSheet.Cells[oRow, 12], oSheet.Cells[oRow, 12]]; // 
+                    formatRange.Value2 = Convert.ToInt32(LK_DON_VI.EditValue) == 2 ? "GĐNM CL" : "GIÁM ĐỐC NM";
                     formatRange.Font.Size = fontSizeNoiDung;
                     formatRange.Font.Name = fontName;
                     formatRange.Font.Bold = true;
                     formatRange.Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
                     formatRange.Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
 
+
                     formatRange = oSheet.Range[oSheet.Cells[oRow, 20], oSheet.Cells[oRow, 20]]; // 
-                    formatRange.Value2 = "P.TCKT";
+                    formatRange.Value2 = "P.KT-NS";
                     formatRange.Font.Size = fontSizeNoiDung;
                     formatRange.Font.Name = fontName;
                     formatRange.Font.Bold = true;
@@ -4349,6 +4362,26 @@ namespace Vs.Payroll
                     formatRange.Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
                     formatRange.Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
 
+                    //DocumentFormat.OpenXml.Spreadsheet.SheetProperties sheetProperties = new DocumentFormat.OpenXml.Spreadsheet.SheetProperties();
+                    //DocumentFormat.OpenXml.Spreadsheet.PageSetupProperties pageSetupProperties = new DocumentFormat.OpenXml.Spreadsheet.PageSetupProperties() { FitToPage = true };
+                    //sheetProperties.Append(pageSetupProperties);
+                    ////worksheetPart.Worksheet.InsertBefore(sheetProperties, sheetData);
+                    //// this changes the fit to width and height
+                    //DocumentFormat.OpenXml.Spreadsheet.PageSetup pageSetup = new DocumentFormat.OpenXml.Spreadsheet.PageSetup() { FitToWidth = 1, FitToHeight = 43 };
+                    //worksheetPart.Worksheet.AppendChild(pageSetup);
+                    //Microsoft.Office.Interop.Excel.Worksheet ws = (Microsoft.Office.Interop.Excel.Worksheet)wb.Worksheets[sheetName];
+
+                    oSheet.PageSetup.FitToPagesWide = 1;
+                    oSheet.PageSetup.FitToPagesTall = 1;
+                    oSheet.PageSetup.Zoom = false;
+                    oSheet.PageSetup.PaperSize = Excel.XlPaperSize.xlPaperA4;
+                    oSheet.PageSetup.LeftMargin = oApp.InchesToPoints(0.25);
+                    oSheet.PageSetup.RightMargin = oApp.InchesToPoints(0.25);
+                    oSheet.PageSetup.TopMargin = oApp.InchesToPoints(0.25);
+                    oSheet.PageSetup.BottomMargin = oApp.InchesToPoints(0.25);
+                    oSheet.PageSetup.HeaderMargin = oApp.InchesToPoints(0.3);
+                    oSheet.PageSetup.FooterMargin = oApp.InchesToPoints(0.3);
+                    oSheet.PageSetup.Orientation = Excel.XlPageOrientation.xlLandscape;
                     oRow = 1;
                     oSheet = (Excel.Worksheet)oBook.ActiveSheet;
                     oSheet = oBook.Worksheets.Add(After: oBook.Sheets[oBook.Sheets.Count]);
@@ -4389,7 +4422,7 @@ namespace Vs.Payroll
             ds.Tables[1].TableName = "DATA";
 
             frmViewReport frm = new frmViewReport();
-            frm.rpt = new rptLuongChuyenKhoan_TG(lk_NgayIn.DateTime, ds.Tables[1].Rows[0]["TINH_TP"].ToString());
+            frm.rpt = new rptLuongChuyenKhoan_TG(lk_NgayIn.DateTime, ds.Tables[1].Rows[0]["TINH_TP"].ToString(), Convert.ToInt32(LK_DON_VI.EditValue));
 
             if (ds.Tables[0].Rows.Count == 0)
             {
@@ -4422,7 +4455,7 @@ namespace Vs.Payroll
             ds.Tables[0].TableName = "DATA";
 
             frmViewReport frm = new frmViewReport();
-            frm.rpt = new rptLuongTienMat_TG(cboThang.Text, labelControl1.Text + " : " + LK_DON_VI.Text, lbXiNghiep.Text + " : " + LK_XI_NGHIEP.Text, lbTo.Text + " : " + LK_TO.Text, lk_NgayIn.DateTime);
+            frm.rpt = new rptLuongTienMat_TG(cboThang.Text, labelControl1.Text + " : " + LK_DON_VI.Text,Convert.ToInt32(LK_DON_VI.EditValue), lbXiNghiep.Text + " : " + LK_XI_NGHIEP.Text, lbTo.Text + " : " + LK_TO.Text, lk_NgayIn.DateTime);
 
             if (ds.Tables[0].Rows.Count == 0)
             {
@@ -4537,7 +4570,7 @@ namespace Vs.Payroll
         {
             try
             {
-                DataTable dtTmp = Commons.Modules.ObjSystems.DataThongTinChung();
+                DataTable dtTmp = Commons.Modules.ObjSystems.DataReportHeader(Convert.ToInt32(LK_DON_VI.EditValue));
                 Microsoft.Office.Interop.Excel.Range CurCell = MWsheet.Range[MWsheet.Cells[DongBD, 1], MWsheet.Cells[DongKT, 1]];
                 CurCell.EntireRow.Insert(Microsoft.Office.Interop.Excel.XlInsertShiftDirection.xlShiftDown);
 

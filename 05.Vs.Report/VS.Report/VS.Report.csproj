@@ -138,42 +138,6 @@
     <Compile Include="KhenThuong\rptTienThuongXepLoaiTH.Designer.cs">
       <DependentUpon>rptTienThuongXepLoaiTH.cs</DependentUpon>
     </Compile>
-    <Compile Include="Luong\rptBangLuongThangHoTro_TG.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Luong\rptBangLuongThangHoTro_TG.Designer.cs">
-      <DependentUpon>rptBangLuongThangHoTro_TG.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Luong\rptBangLuongThangVanPhong_TG.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Luong\rptBangLuongThangVanPhong_TG.Designer.cs">
-      <DependentUpon>rptBangLuongThangVanPhong_TG.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Luong\rptBangLuongThang_TG.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Luong\rptBangLuongThang_TG.Designer.cs">
-      <DependentUpon>rptBangLuongThang_TG.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Luong\rptLuongChuyenKhoan_TG.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Luong\rptLuongChuyenKhoan_TG.Designer.cs">
-      <DependentUpon>rptLuongChuyenKhoan_TG.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Luong\rptLuongTienMat_TG.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Luong\rptLuongTienMat_TG.Designer.cs">
-      <DependentUpon>rptLuongTienMat_TG.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Luong\rptPhieuLuongThang_TG.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Luong\rptPhieuLuongThang_TG.Designer.cs">
-      <DependentUpon>rptPhieuLuongThang_TG.cs</DependentUpon>
-    </Compile>
     <Compile Include="NhanSu\rptBanCamKet_HN.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -1136,24 +1100,6 @@
     <EmbeddedResource Include="KhenThuong\rptTienThuongXepLoaiTH.resx">
       <DependentUpon>rptTienThuongXepLoaiTH.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Luong\rptBangLuongThangHoTro_TG.resx">
-      <DependentUpon>rptBangLuongThangHoTro_TG.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Luong\rptBangLuongThangVanPhong_TG.resx">
-      <DependentUpon>rptBangLuongThangVanPhong_TG.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Luong\rptBangLuongThang_TG.resx">
-      <DependentUpon>rptBangLuongThang_TG.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Luong\rptLuongChuyenKhoan_TG.resx">
-      <DependentUpon>rptLuongChuyenKhoan_TG.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Luong\rptLuongTienMat_TG.resx">
-      <DependentUpon>rptLuongTienMat_TG.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Luong\rptPhieuLuongThang_TG.resx">
-      <DependentUpon>rptPhieuLuongThang_TG.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="NhanSu\rptBanCamKet_HN.resx">
       <DependentUpon>rptBanCamKet_HN.cs</DependentUpon>
     </EmbeddedResource>
@@ -1653,6 +1599,9 @@
       <Project>{375704a9-ba2d-4325-aa66-2fdd8ee246ca}</Project>
       <Name>Commons</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Luong\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

@@ -154,6 +154,7 @@ namespace Vs.TimeAttendance
 
                         them = true;
                         LoadGrdCongNhan(them);
+                        radTinHTrang_SelectedIndexChanged(null, null);
                         grvCongNhan_FocusedRowChanged(null, null);
                         Commons.Modules.ObjSystems.AddnewRow(grvKeHoachDiCa, true);
                         enableButon(false);

@@ -183,6 +183,8 @@ namespace Vs.Payroll
                     grvData.Columns["TIEN_THUE"].DisplayFormat.FormatString = "N0";
                     grvData.Columns["TIEN_PHEP_TT"].DisplayFormat.FormatType = FormatType.Numeric;
                     grvData.Columns["TIEN_PHEP_TT"].DisplayFormat.FormatString = "N0";
+
+
                 }
                 else
                 {
@@ -289,6 +291,9 @@ namespace Vs.Payroll
                             grvData.Columns[grvData.Columns[i].FieldName].DisplayFormat.FormatString = "N0";
                         }
                     }
+
+                    grvData.OptionsSelection.MultiSelect = true;
+                    grvData.OptionsSelection.MultiSelectMode = GridMultiSelectMode.RowSelect;
                 }
                 else
                 {

@@ -2973,12 +2973,6 @@ F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.frmViewReport.resources
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptTienThuongXepLoai.resources
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptTienThuongKhacLuongTH.resources
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptTienThuongXepLoaiTH.resources
-F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Payroll.rptBangLuongThangHoTro_TG.resources
-F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptBangLuongThangVanPhong_TG.resources
-F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptBangLuongThang_TG.resources
-F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Payroll.rptLuongChuyenKhoan_TG.resources
-F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Payroll.rptLuongTienMat_TG.resources
-F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Payroll.rptPhieuLuongThang_TG.resources
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptBanCamKet_HN.resources
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptBangLuongThangNhanVien.resources
 F:\01.HRM\05.Vs.Report\Vs.Report\obj\Debug\Vs.Report.rptBaoCaoLaoDongThang.resources

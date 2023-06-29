@@ -68,7 +68,7 @@ namespace Vs.TimeAttendance
                                     DataTable dt;
                                     System.Data.SqlClient.SqlConnection conn;
                                     dt = new DataTable();
-                                    frm.rpt = new rptDSVangDauGioTheoDV(dNgayIn.DateTime, dNgayDL);
+                                    frm.rpt = new rptDSVangDauGioTheoDV(dNgayIn.DateTime, dNgayDL,Convert.ToInt32(ID_DV));
                                     try
                                     {
                                         conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
@@ -293,7 +293,7 @@ namespace Vs.TimeAttendance
                                         DataTable dt;
                                         System.Data.SqlClient.SqlConnection conn1;
                                         dt = new DataTable();
-                                        frm.rpt = new rptDSVangDauGioTheoNgay(dNgayIn.DateTime, dNgayDL);
+                                        frm.rpt = new rptDSVangDauGioTheoNgay(dNgayIn.DateTime, dNgayDL, Convert.ToInt32(ID_DV));
 
                                         try
                                         {
@@ -337,7 +337,7 @@ namespace Vs.TimeAttendance
                                     System.Data.SqlClient.SqlConnection conn2;
                                     dt = new DataTable();
                                     string sTieuDe = Commons.Modules.ObjLanguages.GetLanguage("rptDSDiTreVeSom", "lblDSNhanVienDiTreVeSom");
-                                    frm.rpt = new rptDSDiTreVeSom(dNgayDL, sTieuDe, dNgayIn.DateTime);
+                                    frm.rpt = new rptDSDiTreVeSom(dNgayDL, sTieuDe, dNgayIn.DateTime, Convert.ToInt32(ID_DV));
 
                                     try
                                     {

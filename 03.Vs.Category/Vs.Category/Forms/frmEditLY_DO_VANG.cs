@@ -138,7 +138,7 @@ namespace Vs.Category
                             TEN_LDV_HTextEdit.Text,
                             ID_CHE_DOSearchLookUpEdit.EditValue,
                             PHEPCheckEdit.EditValue,
-                            PHAN_TRAM_TRO_CAPTextEdit.EditValue.ToString() == "" ? (object)null : Convert.ToDouble(PHAN_TRAM_TRO_CAPTextEdit.EditValue),
+                            Convert.ToString(PHAN_TRAM_TRO_CAPTextEdit.EditValue) == "" ? (object)null : Convert.ToDouble(PHAN_TRAM_TRO_CAPTextEdit.EditValue),
                             TINH_BHXHCheckEdit.EditValue,
                             TINH_LUONGCheckEdit.EditValue,
                             chkCheDo.EditValue, 

@@ -11,6 +11,7 @@ using DevExpress.XtraGrid.Views.Grid;
 using System.IO;
 using DevExpress.Utils;
 using Vs.Category;
+using Vs.Payroll;
 
 namespace VietSoftHRM
 {
@@ -732,6 +733,21 @@ namespace VietSoftHRM
                         contextMenuStrip1.Hide();
                     }
                 }
+                if (Commons.Modules.sPS == "spGetListLY_DO_VANG")
+                {
+                    contextMenuStrip1.Items[0].Visible = false;
+                    contextMenuStrip1.Items[1].Visible = false;
+                    contextMenuStrip1.Items[2].Visible = false;
+                    contextMenuStrip1.Items[3].Visible = true;
+                    if (e.HitInfo.InDataRow)
+                    {
+                        contextMenuStrip1.Show(Cursor.Position.X, Cursor.Position.Y);
+                    }
+                    else
+                    {
+                        contextMenuStrip1.Hide();
+                    }
+                }
                 if (Commons.Modules.KyHieuDV != "DM") return;
                 if (Commons.Modules.sPS == "spGetListLOAI_CONG_VIEC")
                 {
@@ -767,6 +783,14 @@ namespace VietSoftHRM
             }
         }
 
-
+        private void toolQuaTrinhLDV_Click(object sender, EventArgs e)
+        {
+            frmQuaTrinhLDV frm = new frmQuaTrinhLDV();
+            double iW, iH;
+            iW = Screen.PrimaryScreen.WorkingArea.Width / 1.5;
+            iH = Screen.PrimaryScreen.WorkingArea.Height / 1.5;
+            frm.Size = new Size((int)iW, (int)iH);
+            frm.ShowDialog();
+        }
     }
 }

@@ -10,12 +10,12 @@ namespace Vs.Report
 {
     public partial class rptDSDiTreVeSom : DevExpress.XtraReports.UI.XtraReport
     {
-        public rptDSDiTreVeSom(DateTime bcngay,string tieuDe, DateTime ngayxem)
+        public rptDSDiTreVeSom(DateTime bcngay,string tieuDe, DateTime ngayxem, int iddv)
         {
 
             InitializeComponent();
             Commons.Modules.ObjSystems.ThayDoiNN(this);
-            xrSubreport1.ReportSource = new SubReportHeader();
+            xrSubreport1.ReportSource = new SubReportHeader(iddv);
 
             NONlblTIEU_DE.Text = tieuDe;
             DataTable dtNgu = new DataTable();

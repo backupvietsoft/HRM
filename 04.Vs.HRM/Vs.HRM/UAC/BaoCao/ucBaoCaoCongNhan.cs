@@ -39,6 +39,7 @@ namespace Vs.HRM
             //Danh cho NB
             switch (Commons.Modules.KyHieuDV)
             {
+                case "NC":
                 case "NB":
                     {
                         this.chkInAll.Visible = true;

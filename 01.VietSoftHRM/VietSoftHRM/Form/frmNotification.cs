@@ -218,7 +218,8 @@ namespace VietSoftHRM
 		{
 			try
 			{
-				var result = await callAPI("http://192.168.2.114:7174/api/home/upload-file?fileName=" + grvBKData.GetFocusedRowCellValue("TEN_FILE") + "&path=" + txtDuongDanFile.Text + "");
+				//var result = await callAPI("http://192.168.2.114:7174/api/home/upload-file?fileName=" + grvBKData.GetFocusedRowCellValue("TEN_FILE") + "&path=" + txtDuongDanFile.Text + "");
+				var result = await callAPI("http://192.168.2.114:7174/api/home/upload-file");
 				if (result.isSuccessStatusCode)
 				{
 					Commons.Modules.ObjSystems.Alert("Upload file thành công", Commons.Form_Alert.enmType.Success);
@@ -247,33 +248,46 @@ namespace VietSoftHRM
 		{
 			try
 			{
-				System.Net.ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
 
-				WebClient client = new WebClient();
-				client.Encoding = Encoding.UTF8;
-                // Đăng ký sự kiện ProgressChanged để cập nhật giá trị của progressBar
 
-                client.DownloadProgressChanged += (s, ev) =>
-                {
-                    progressBar1.BeginInvoke(new Action(() =>
-                    {
-                        progressBar1.Value = ev.ProgressPercentage;
-                    }));
-                };
+                //WebClient client = new WebClient();
+                //client.Encoding = Encoding.UTF8;
+                //// Đăng ký sự kiện ProgressChanged để cập nhật giá trị của progressBar
 
-                string response = await client.DownloadStringTaskAsync(path);
-				DataTable dt = new DataTable();
-				//dt = JsonConvert.DeserializeObject<DataTable>(JsonConvert.DeserializeObject(response).ToString());
-				BaseResponse result = JsonConvert.DeserializeObject<BaseResponse>(response);
-				return result;
+                //client.UploadProgressChanged += (s, ev) =>
+                //{
+                //                progressBar1.Value = ev.ProgressPercentage;
+                //            };
+                //            //client.Headers.Add("Content-Type", "application/octet-stream");
+                //            client.UploadFileAsync(new Uri(path), "Release.zip");
+                //            //string response = await client.DownloadStringTaskAsync(path);
+
+                string requestUrl = $"{path}?path={Uri.EscapeDataString(txtDuongDanFile.Text)}&fileName={Uri.EscapeDataString(grvBKData.GetFocusedRowCellValue("TEN_FILE").ToString())}";
+
+                string filePath = txtDuongDanFile.Text + grvBKData.GetFocusedRowCellValue("TEN_FILE").ToString();
+                byte[] fileData = File.ReadAllBytes(filePath);
+
+                var client = new WebClient();
+                client.UploadProgressChanged += Client_UploadProgressChanged;
+                client.Headers.Add("Content-Type", "binary/octet-stream");
+                byte[] response = await client.UploadDataTaskAsync(requestUrl, "POST", fileData);
+
+
+                //BaseResponse result = JsonConvert.DeserializeObject<BaseResponse>(null);
+				return null;
 			}
-			catch
+			catch(Exception ex)
 			{
+				Commons.Modules.ObjSystems.MsgError(ex.Message);
 				return null;
 			}
 		}
-		
-		public class BaseResponse
+        private void Client_UploadProgressChanged(object sender, UploadProgressChangedEventArgs e)
+        {
+            progressBar1.Value = e.ProgressPercentage;
+        }
+
+        public class BaseResponse
 		{
 			public int statusCode { get; set; }
 			public string message { get; set; }

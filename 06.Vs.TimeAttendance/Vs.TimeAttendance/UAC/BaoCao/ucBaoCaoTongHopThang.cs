@@ -1153,7 +1153,7 @@ namespace Vs.TimeAttendance
             {
                 case "rdo_BangTongHopDiTreVeSomThang":
                     {
-                        rdo_DiTreVeSom.Visible = false;
+                        rdo_DiTreVeSom.Visible = true;
                         chkThayDoiCa.Enabled = false;
                         lblThayDoiCa.Enabled = false;
                     }
@@ -1203,31 +1203,7 @@ namespace Vs.TimeAttendance
 
         private void rdo_DiTreVeSom_SelectedIndexChanged(object sender, EventArgs e)
         {
-            try
-            {
-                switch (rdo_ChonBaoCao.Properties.Items[rdo_ChonBaoCao.SelectedIndex].Tag)
-                {
-                    case "rdo_BangChamCongThang":
-                        {
-                            rdo_DiTreVeSom.Visible = false;
 
-                        }
-                        break;
-                    case "rdo_BangChamCongTangCaThang":
-                        {
-                            rdo_DiTreVeSom.Visible = false;
-                        }
-                        break;
-                    case "rdo_BangTongHopDiTreVeSomThang":
-                        {
-                            rdo_DiTreVeSom.Visible = false;
-                        }
-                        break;
-                    default:
-                        break;
-                }
-            }
-            catch { }
         }
 
         private void calThang_DateTimeCommit_1(object sender, EventArgs e)
@@ -3821,6 +3797,18 @@ namespace Vs.TimeAttendance
                     oRow = 1;
                 }
 
+                oSheet.PageSetup.FitToPagesWide = 1;
+                oSheet.PageSetup.FitToPagesTall = 1;
+                oSheet.PageSetup.Zoom = false;
+                oSheet.PageSetup.PaperSize = Excel.XlPaperSize.xlPaperA4;
+                oSheet.PageSetup.LeftMargin = oApp.InchesToPoints(0.25);
+                oSheet.PageSetup.RightMargin = oApp.InchesToPoints(0.25);
+                oSheet.PageSetup.TopMargin = oApp.InchesToPoints(0.25);
+                oSheet.PageSetup.BottomMargin = oApp.InchesToPoints(0.25);
+                oSheet.PageSetup.HeaderMargin = oApp.InchesToPoints(0.3);
+                oSheet.PageSetup.FooterMargin = oApp.InchesToPoints(0.3);
+                oSheet.PageSetup.Orientation = Excel.XlPageOrientation.xlLandscape;
+
                 //oSheet = (Excel.Worksheet)oBook.ActiveSheet;
                 //oSheet = oBook.Worksheets.Add(After: oBook.Sheets[oBook.Sheets.Count]);
                 this.Cursor = Cursors.Default;
@@ -4047,6 +4035,18 @@ namespace Vs.TimeAttendance
                     oApp.Visible = true;
                     Commons.Modules.ObjSystems.HideWaitForm();
                 }
+
+                oSheet.PageSetup.FitToPagesWide = 1;
+                oSheet.PageSetup.FitToPagesTall = 1;
+                oSheet.PageSetup.Zoom = false;
+                oSheet.PageSetup.PaperSize = Excel.XlPaperSize.xlPaperA4;
+                oSheet.PageSetup.LeftMargin = oApp.InchesToPoints(0.25);
+                oSheet.PageSetup.RightMargin = oApp.InchesToPoints(0.25);
+                oSheet.PageSetup.TopMargin = oApp.InchesToPoints(0.25);
+                oSheet.PageSetup.BottomMargin = oApp.InchesToPoints(0.25);
+                oSheet.PageSetup.HeaderMargin = oApp.InchesToPoints(0.3);
+                oSheet.PageSetup.FooterMargin = oApp.InchesToPoints(0.3);
+                oSheet.PageSetup.Orientation = Excel.XlPageOrientation.xlLandscape;
             }
             catch (Exception ex)
             {
@@ -4311,6 +4311,18 @@ namespace Vs.TimeAttendance
                     oApp.Visible = true;
                     Commons.Modules.ObjSystems.HideWaitForm();
                 }
+
+                oSheet.PageSetup.FitToPagesWide = 1;
+                oSheet.PageSetup.FitToPagesTall = 1;
+                oSheet.PageSetup.Zoom = false;
+                oSheet.PageSetup.PaperSize = Excel.XlPaperSize.xlPaperA4;
+                oSheet.PageSetup.LeftMargin = oApp.InchesToPoints(0.25);
+                oSheet.PageSetup.RightMargin = oApp.InchesToPoints(0.25);
+                oSheet.PageSetup.TopMargin = oApp.InchesToPoints(0.25);
+                oSheet.PageSetup.BottomMargin = oApp.InchesToPoints(0.25);
+                oSheet.PageSetup.HeaderMargin = oApp.InchesToPoints(0.3);
+                oSheet.PageSetup.FooterMargin = oApp.InchesToPoints(0.3);
+                oSheet.PageSetup.Orientation = Excel.XlPageOrientation.xlLandscape;
             }
             catch (Exception ex)
             {
@@ -4493,6 +4505,19 @@ namespace Vs.TimeAttendance
                     oSheet = (Excel.Worksheet)oBook.ActiveSheet;
                     oSheet = oBook.Worksheets.Add(After: oBook.Sheets[oBook.Sheets.Count]);
                 }
+
+                oSheet.PageSetup.FitToPagesWide = 1;
+                oSheet.PageSetup.FitToPagesTall = 1;
+                oSheet.PageSetup.Zoom = false;
+                oSheet.PageSetup.PaperSize = Excel.XlPaperSize.xlPaperA4;
+                oSheet.PageSetup.LeftMargin = oApp.InchesToPoints(0.25);
+                oSheet.PageSetup.RightMargin = oApp.InchesToPoints(0.25);
+                oSheet.PageSetup.TopMargin = oApp.InchesToPoints(0.25);
+                oSheet.PageSetup.BottomMargin = oApp.InchesToPoints(0.25);
+                oSheet.PageSetup.HeaderMargin = oApp.InchesToPoints(0.3);
+                oSheet.PageSetup.FooterMargin = oApp.InchesToPoints(0.3);
+                oSheet.PageSetup.Orientation = Excel.XlPageOrientation.xlLandscape;
+
                 this.Cursor = Cursors.Default;
                 oBook.Sheets[1].Activate();
                 oApp.Visible = true;
@@ -5195,7 +5220,8 @@ namespace Vs.TimeAttendance
                 cmd.Parameters.Add("@TO", SqlDbType.Int).Value = LK_TO.EditValue;
                 cmd.Parameters.Add("@TNgay", SqlDbType.Date).Value = Convert.ToDateTime(lk_TuNgay.EditValue);
                 cmd.Parameters.Add("@DNgay", SqlDbType.Date).Value = Convert.ToDateTime(lk_DenNgay.EditValue);
-                cmd.Parameters.Add("@Loai", SqlDbType.Int).Value = 2;
+                cmd.Parameters.Add("@Loai", SqlDbType.Int).Value = rdo_DiTreVeSom.SelectedIndex;
+                cmd.Parameters.Add("@LOAI_DL", SqlDbType.Int).Value = Commons.Modules.KyHieuDV == "TG" ? 1 : 0;
                 cmd.CommandType = CommandType.StoredProcedure;
                 System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
                 if (Convert.ToDateTime(lk_TuNgay.EditValue).Month != Convert.ToDateTime(lk_DenNgay.EditValue).Month)
@@ -5312,152 +5338,282 @@ namespace Vs.TimeAttendance
 
                 while (iTNgay <= iDNgay)
                 {
-                    oSheet.Cells[4, col] = Convert.ToDateTime(lk_TuNgay.EditValue).AddDays(iTNgay - 1);
+                    oSheet.Cells[4, col] = Convert.ToDateTime(lk_TuNgay.EditValue).AddDays(iTNgay - 1).Day;
                     oSheet.Cells[4, col].Font.Name = fontName;
                     oSheet.Cells[4, col].Font.Bold = true;
                     oSheet.Cells[4, col].Interior.Color = Color.FromArgb(198, 224, 180);
                     oSheet.Cells[4, col].Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
                     oSheet.Cells[4, col].Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
 
+                    switch (rdo_DiTreVeSom.SelectedIndex)
+                    {
+                        case 0:
+                            {
+                                oSheet.Cells[5, col] = "Đi trễ";
 
-                    oSheet.Cells[5, col] = "Đi trễ";
-                    //oSheet.Cells[6, col] = "Being late";
+                                oSheet.Cells[5, col].Font.Bold = true;
+                                oSheet.Cells[5, col].Interior.Color = Color.FromArgb(198, 224, 180);
+                                oSheet.Cells[5, col].Font.Name = fontName;
+                                oSheet.Cells[5, col].Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                                oSheet.Cells[5, col].Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+                                oSheet.Range[oSheet.Cells[5, col], oSheet.Cells[5, col]].Merge();
+                                col = col + 1;
+                                break;
+                            }
+                        case 1:
+                            {
+                                oSheet.Cells[5, col] = "Về sớm";
 
-                    oSheet.Cells[5, col].Font.Bold = true;
-                    //oSheet.Cells[6, col].Font.Bold = true;
-                    oSheet.Cells[5, col].Interior.Color = Color.FromArgb(198, 224, 180);
-                    //oSheet.Cells[6, col].Interior.Color = Color.Yellow;
-                    oSheet.Cells[5, col].Font.Name = fontName;
-                    //oSheet.Cells[6, col].Font.Name = fontName;
-                    oSheet.Cells[5, col].Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
-                    oSheet.Cells[5, col].Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
-                    //oSheet.Cells[6, col].Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignRight;
-                    //oSheet.Cells[6, col].Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+                                oSheet.Cells[5, col].Font.Bold = true;
+                                oSheet.Cells[5, col].Interior.Color = Color.FromArgb(198, 224, 180);
+                                oSheet.Cells[5, col].Font.Name = fontName;
+                                oSheet.Cells[5, col].Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                                oSheet.Cells[5, col].Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+
+                                oSheet.Range[oSheet.Cells[5, col], oSheet.Cells[5, col]].Merge();
+                                col = col + 1;
+                                break;
+                            }
+                        default:
+                            {
+                                oSheet.Cells[5, col] = "Đi trễ";
+
+                                oSheet.Cells[5, col].Font.Bold = true;
+                                oSheet.Cells[5, col].Interior.Color = Color.FromArgb(198, 224, 180);
+                                oSheet.Cells[5, col].Font.Name = fontName;
+                                oSheet.Cells[5, col].Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                                oSheet.Cells[5, col].Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
 
 
+                                oSheet.Cells[5, col + 1] = "Về sớm";
+                                //oSheet.Cells[6, col + 1] = "Early leave";
+                                oSheet.Cells[5, col + 1].Interior.Color = Color.FromArgb(198, 224, 180);
+                                //oSheet.Cells[6, col + 1].Interior.Color = Color.Yellow;
+                                oSheet.Cells[5, col + 1].Font.Bold = true;
+                                //oSheet.Cells[6, col + 1].Font.Bold = true;
+                                oSheet.Cells[5, col + 1].Font.Name = fontName;
+                                //oSheet.Cells[6, col + 1].Font.Name = fontName;
+                                oSheet.Cells[5, col + 1].HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                                oSheet.Cells[5, col + 1].VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+                                //oSheet.Cells[6, col + 1].HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignRight;
+                                //oSheet.Cells[6, col + 1].VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+                                oSheet.Range[oSheet.Cells[4, col], oSheet.Cells[4, col + 1]].Merge();
+                                oSheet.Range[oSheet.Cells[5, col + 1], oSheet.Cells[5, col + 1]].Merge();
+                                col = col + 2;
+                                break;
+                            }
+                    }
+                    //oSheet.Range[oSheet.Cells[5, col], oSheet.Cells[5, col]].Merge();
 
-                    oSheet.Cells[5, col + 1] = "Về sớm";
-                    //oSheet.Cells[6, col + 1] = "Early leave";
-                    oSheet.Cells[5, col + 1].Interior.Color = Color.FromArgb(198, 224, 180);
-                    //oSheet.Cells[6, col + 1].Interior.Color = Color.Yellow;
-                    oSheet.Cells[5, col + 1].Font.Bold = true;
-                    //oSheet.Cells[6, col + 1].Font.Bold = true;
-                    oSheet.Cells[5, col + 1].Font.Name = fontName;
-                    //oSheet.Cells[6, col + 1].Font.Name = fontName;
-                    oSheet.Cells[5, col + 1].HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
-                    oSheet.Cells[5, col + 1].VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
-                    //oSheet.Cells[6, col + 1].HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignRight;
-                    //oSheet.Cells[6, col + 1].VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
-
-
-                    oSheet.Range[oSheet.Cells[4, col], oSheet.Cells[4, col + 1]].Merge();
-                    oSheet.Range[oSheet.Cells[5, col], oSheet.Cells[5, col]].Merge();
-                    oSheet.Range[oSheet.Cells[5, col + 1], oSheet.Cells[5, col + 1]].Merge();
-
-                    col = col + 2;
                     iTNgay++;
                 }
-                oSheet.Cells[4, col] = "Đi trễ";
-                oSheet.Cells[4, col].Font.Name = fontName;
-                oSheet.Cells[4, col].Font.Bold = true;
-                oSheet.Cells[4, col].Interior.Color = Color.FromArgb(198, 224, 180);
-                oSheet.Cells[4, col].Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
-                oSheet.Cells[4, col].Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+
+                switch (rdo_DiTreVeSom.SelectedIndex)
+                {
+                    case 0:
+                        {
+                            oSheet.Cells[4, col] = "Đi trễ";
+                            oSheet.Cells[4, col].Font.Name = fontName;
+                            oSheet.Cells[4, col].Font.Bold = true;
+                            oSheet.Cells[4, col].Interior.Color = Color.FromArgb(198, 224, 180);
+                            oSheet.Cells[4, col].Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                            oSheet.Cells[4, col].Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
 
 
-                oSheet.Cells[5, col] = "Số lần đi trễ";
-                //oSheet.Cells[6, col] = "Number of being late";
-                //oSheet.Cells[6, col].Interior.Color = Color.Yellow;
-                oSheet.Cells[5, col].Font.Bold = true;
-                //oSheet.Cells[6, col].Font.Bold = true;
-                oSheet.Cells[5, col].RowHeight = 20;
-                oSheet.Cells[5, col].Interior.Color = Color.FromArgb(198, 224, 180);
-                oSheet.Cells[5, col].Font.Name = fontName;
-                //oSheet.Cells[6, col].Font.Name = fontName;
-                oSheet.Cells[5, col].Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
-                oSheet.Cells[5, col].Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
-                //oSheet.Cells[6, col].Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignRight;
-                //oSheet.Cells[6, col].Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+                            oSheet.Cells[5, col] = "Số lần đi trễ";
+                            //oSheet.Cells[6, col] = "Number of being late";
+                            //oSheet.Cells[6, col].Interior.Color = Color.Yellow;
+                            oSheet.Cells[5, col].Font.Bold = true;
+                            //oSheet.Cells[6, col].Font.Bold = true;
+                            oSheet.Cells[5, col].RowHeight = 20;
+                            oSheet.Cells[5, col].Interior.Color = Color.FromArgb(198, 224, 180);
+                            oSheet.Cells[5, col].Font.Name = fontName;
+                            //oSheet.Cells[6, col].Font.Name = fontName;
+                            oSheet.Cells[5, col].Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                            oSheet.Cells[5, col].Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+                            //oSheet.Cells[6, col].Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignRight;
+                            //oSheet.Cells[6, col].Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
 
 
-                oSheet.Cells[5, col + 1] = "Số phút đi trễ";
-                //oSheet.Cells[6, col + 1] = "Number of minutes late";
-                oSheet.Cells[5, col + 1].Interior.Color = Color.FromArgb(198, 224, 180);
-                //oSheet.Cells[6, col + 1].Interior.Color = Color.Yellow;
-                oSheet.Cells[5, col + 1].Font.Bold = true;
-                //oSheet.Cells[6, col + 1].Font.Bold = true;
-                oSheet.Cells[5, col + 1].RowHeight = 20;
-                oSheet.Cells[5, col + 1].Font.Name = fontName;
-                //oSheet.Cells[6, col + 1].Font.Name = fontName;
-                oSheet.Cells[5, col + 1].HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
-                oSheet.Cells[5, col + 1].VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
-                //oSheet.Cells[6, col + 1].HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignRight;
-                //oSheet.Cells[6, col + 1].VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+                            oSheet.Cells[5, col + 1] = "Số giờ đi trễ";
+                            //oSheet.Cells[6, col + 1] = "Number of minutes late";
+                            oSheet.Cells[5, col + 1].Interior.Color = Color.FromArgb(198, 224, 180);
+                            //oSheet.Cells[6, col + 1].Interior.Color = Color.Yellow;
+                            oSheet.Cells[5, col + 1].Font.Bold = true;
+                            //oSheet.Cells[6, col + 1].Font.Bold = true;
+                            oSheet.Cells[5, col + 1].RowHeight = 20;
+                            oSheet.Cells[5, col + 1].Font.Name = fontName;
+                            //oSheet.Cells[6, col + 1].Font.Name = fontName;
+                            oSheet.Cells[5, col + 1].HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                            oSheet.Cells[5, col + 1].VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+                            //oSheet.Cells[6, col + 1].HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignRight;
+                            //oSheet.Cells[6, col + 1].VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
 
-                oSheet.Range[oSheet.Cells[4, col], oSheet.Cells[4, col + 1]].Merge();
-                oSheet.Range[oSheet.Cells[5, col], oSheet.Cells[5, col]].Merge();
-                formatRange = oSheet.Range[oSheet.Cells[5, col], oSheet.Cells[5, col]];
-                formatRange.ColumnWidth = 15;
+                            oSheet.Range[oSheet.Cells[4, col], oSheet.Cells[4, col + 1]].Merge();
+                            oSheet.Range[oSheet.Cells[5, col], oSheet.Cells[5, col]].Merge();
+                            formatRange = oSheet.Range[oSheet.Cells[5, col], oSheet.Cells[5, col]];
+                            formatRange.ColumnWidth = 15;
 
-                oSheet.Range[oSheet.Cells[5, col + 1], oSheet.Cells[5, col + 1]].Merge();
-                formatRange = oSheet.Range[oSheet.Cells[5, col + 1], oSheet.Cells[5, col + 1]];
-                formatRange.ColumnWidth = 15;
-
-
-                col = col + 2;
-                oSheet.Cells[4, col] = "Về sớm";
-                oSheet.Cells[4, col].Font.Name = fontName;
-                oSheet.Cells[4, col].Font.Bold = true;
-
-                oSheet.Cells[4, col].Interior.Color = Color.FromArgb(198, 224, 180);
-                oSheet.Cells[4, col].Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
-                oSheet.Cells[4, col].Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
-
-
-                oSheet.Cells[5, col] = "Số lần Về sớm";
-                //oSheet.Cells[6, col] = "Number of early leave";
-                oSheet.Cells[5, col].Font.Bold = true;
-                //oSheet.Cells[6, col].Font.Bold = true;
-                oSheet.Cells[5, col].Interior.Color = Color.FromArgb(198, 224, 180);
-                //oSheet.Cells[6, col].Interior.Color = Color.Yellow;
-
-                oSheet.Cells[5, col].RowHeight = 20;
-                oSheet.Cells[5, col].Font.Name = fontName;
-                oSheet.Cells[5, col].Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
-                oSheet.Cells[5, col].Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
-                //oSheet.Cells[6, col].Font.Name = fontName;
-                //oSheet.Cells[6, col].Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignRight;
-                //oSheet.Cells[6, col].Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+                            oSheet.Range[oSheet.Cells[5, col + 1], oSheet.Cells[5, col + 1]].Merge();
+                            formatRange = oSheet.Range[oSheet.Cells[5, col + 1], oSheet.Cells[5, col + 1]];
+                            formatRange.ColumnWidth = 15;
+                            break;
+                        }
+                    case 1:
+                        {
+                            oSheet.Cells[4, col] = "Về sớm";
+                            oSheet.Cells[4, col].Font.Name = fontName;
+                            oSheet.Cells[4, col].Font.Bold = true;
+                            oSheet.Cells[4, col].Interior.Color = Color.FromArgb(198, 224, 180);
+                            oSheet.Cells[4, col].Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                            oSheet.Cells[4, col].Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
 
 
-
-                oSheet.Cells[5, col + 1] = "Số phút Về sớm";
-                //oSheet.Cells[6, col + 1] = "Minutes leaving early";
-                oSheet.Cells[5, col + 1].Interior.Color = Color.FromArgb(198, 224, 180);
-                //oSheet.Cells[6, col + 1].Interior.Color = Color.Yellow;
-                oSheet.Cells[5, col + 1].RowHeight = 20;
-                oSheet.Cells[5, col + 1].Font.Bold = true;
-                oSheet.Cells[5, col + 1].Font.Name = fontName;
-                oSheet.Cells[5, col + 1].HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
-                oSheet.Cells[5, col + 1].VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
-
-                //oSheet.Cells[6, col + 1].Font.Bold = true;
-                //oSheet.Cells[6, col + 1].Font.Name = fontName;
-                //oSheet.Cells[6, col + 1].HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignRight;
-                //oSheet.Cells[6, col + 1].VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+                            oSheet.Cells[5, col] = "Số lần về sớm";
+                            //oSheet.Cells[6, col] = "Number of being late";
+                            //oSheet.Cells[6, col].Interior.Color = Color.Yellow;
+                            oSheet.Cells[5, col].Font.Bold = true;
+                            //oSheet.Cells[6, col].Font.Bold = true;
+                            oSheet.Cells[5, col].RowHeight = 20;
+                            oSheet.Cells[5, col].Interior.Color = Color.FromArgb(198, 224, 180);
+                            oSheet.Cells[5, col].Font.Name = fontName;
+                            //oSheet.Cells[6, col].Font.Name = fontName;
+                            oSheet.Cells[5, col].Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                            oSheet.Cells[5, col].Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+                            //oSheet.Cells[6, col].Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignRight;
+                            //oSheet.Cells[6, col].Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
 
 
-                oSheet.Range[oSheet.Cells[4, col], oSheet.Cells[4, col + 1]].Merge();
-                oSheet.Range[oSheet.Cells[5, col], oSheet.Cells[5, col]].Merge();
-                formatRange = oSheet.Range[oSheet.Cells[5, col], oSheet.Cells[5, col]];
-                formatRange.ColumnWidth = 15;
+                            oSheet.Cells[5, col + 1] = "Số giờ về sớm";
+                            //oSheet.Cells[6, col + 1] = "Number of minutes late";
+                            oSheet.Cells[5, col + 1].Interior.Color = Color.FromArgb(198, 224, 180);
+                            //oSheet.Cells[6, col + 1].Interior.Color = Color.Yellow;
+                            oSheet.Cells[5, col + 1].Font.Bold = true;
+                            //oSheet.Cells[6, col + 1].Font.Bold = true;
+                            oSheet.Cells[5, col + 1].RowHeight = 20;
+                            oSheet.Cells[5, col + 1].Font.Name = fontName;
+                            //oSheet.Cells[6, col + 1].Font.Name = fontName;
+                            oSheet.Cells[5, col + 1].HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                            oSheet.Cells[5, col + 1].VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+                            //oSheet.Cells[6, col + 1].HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignRight;
+                            //oSheet.Cells[6, col + 1].VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+
+                            oSheet.Range[oSheet.Cells[4, col], oSheet.Cells[4, col + 1]].Merge();
+                            oSheet.Range[oSheet.Cells[5, col], oSheet.Cells[5, col]].Merge();
+                            formatRange = oSheet.Range[oSheet.Cells[5, col], oSheet.Cells[5, col]];
+                            formatRange.ColumnWidth = 15;
+
+                            oSheet.Range[oSheet.Cells[5, col + 1], oSheet.Cells[5, col + 1]].Merge();
+                            formatRange = oSheet.Range[oSheet.Cells[5, col + 1], oSheet.Cells[5, col + 1]];
+                            formatRange.ColumnWidth = 15;
+                            break;
+                        }
+                    default:
+                        {
+
+                            oSheet.Cells[4, col] = "Đi trễ";
+                            oSheet.Cells[4, col].Font.Name = fontName;
+                            oSheet.Cells[4, col].Font.Bold = true;
+                            oSheet.Cells[4, col].Interior.Color = Color.FromArgb(198, 224, 180);
+                            oSheet.Cells[4, col].Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                            oSheet.Cells[4, col].Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
 
 
-                oSheet.Range[oSheet.Cells[5, col + 1], oSheet.Cells[5, col + 1]].Merge();
-                formatRange = oSheet.Range[oSheet.Cells[5, col + 1], oSheet.Cells[5, col + 1]];
-                formatRange.ColumnWidth = 15;
+                            oSheet.Cells[5, col] = "Số lần đi trễ";
+                            //oSheet.Cells[6, col] = "Number of being late";
+                            //oSheet.Cells[6, col].Interior.Color = Color.Yellow;
+                            oSheet.Cells[5, col].Font.Bold = true;
+                            //oSheet.Cells[6, col].Font.Bold = true;
+                            oSheet.Cells[5, col].RowHeight = 20;
+                            oSheet.Cells[5, col].Interior.Color = Color.FromArgb(198, 224, 180);
+                            oSheet.Cells[5, col].Font.Name = fontName;
+                            //oSheet.Cells[6, col].Font.Name = fontName;
+                            oSheet.Cells[5, col].Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                            oSheet.Cells[5, col].Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+                            //oSheet.Cells[6, col].Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignRight;
+                            //oSheet.Cells[6, col].Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
 
 
+                            oSheet.Cells[5, col + 1] = "Số phút đi trễ";
+                            //oSheet.Cells[6, col + 1] = "Number of minutes late";
+                            oSheet.Cells[5, col + 1].Interior.Color = Color.FromArgb(198, 224, 180);
+                            //oSheet.Cells[6, col + 1].Interior.Color = Color.Yellow;
+                            oSheet.Cells[5, col + 1].Font.Bold = true;
+                            //oSheet.Cells[6, col + 1].Font.Bold = true;
+                            oSheet.Cells[5, col + 1].RowHeight = 20;
+                            oSheet.Cells[5, col + 1].Font.Name = fontName;
+                            //oSheet.Cells[6, col + 1].Font.Name = fontName;
+                            oSheet.Cells[5, col + 1].HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                            oSheet.Cells[5, col + 1].VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+                            //oSheet.Cells[6, col + 1].HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignRight;
+                            //oSheet.Cells[6, col + 1].VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+
+                            oSheet.Range[oSheet.Cells[4, col], oSheet.Cells[4, col + 1]].Merge();
+                            oSheet.Range[oSheet.Cells[5, col], oSheet.Cells[5, col]].Merge();
+                            formatRange = oSheet.Range[oSheet.Cells[5, col], oSheet.Cells[5, col]];
+                            formatRange.ColumnWidth = 15;
+
+                            oSheet.Range[oSheet.Cells[5, col + 1], oSheet.Cells[5, col + 1]].Merge();
+                            formatRange = oSheet.Range[oSheet.Cells[5, col + 1], oSheet.Cells[5, col + 1]];
+                            formatRange.ColumnWidth = 15;
+
+
+                            col = col + 2;
+                            oSheet.Cells[4, col] = "Về sớm";
+                            oSheet.Cells[4, col].Font.Name = fontName;
+                            oSheet.Cells[4, col].Font.Bold = true;
+
+                            oSheet.Cells[4, col].Interior.Color = Color.FromArgb(198, 224, 180);
+                            oSheet.Cells[4, col].Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                            oSheet.Cells[4, col].Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+
+
+                            oSheet.Cells[5, col] = "Số lần Về sớm";
+                            //oSheet.Cells[6, col] = "Number of early leave";
+                            oSheet.Cells[5, col].Font.Bold = true;
+                            //oSheet.Cells[6, col].Font.Bold = true;
+                            oSheet.Cells[5, col].Interior.Color = Color.FromArgb(198, 224, 180);
+                            //oSheet.Cells[6, col].Interior.Color = Color.Yellow;
+
+                            oSheet.Cells[5, col].RowHeight = 20;
+                            oSheet.Cells[5, col].Font.Name = fontName;
+                            oSheet.Cells[5, col].Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                            oSheet.Cells[5, col].Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+                            //oSheet.Cells[6, col].Font.Name = fontName;
+                            //oSheet.Cells[6, col].Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignRight;
+                            //oSheet.Cells[6, col].Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+
+
+
+                            oSheet.Cells[5, col + 1] = "Số phút Về sớm";
+                            //oSheet.Cells[6, col + 1] = "Minutes leaving early";
+                            oSheet.Cells[5, col + 1].Interior.Color = Color.FromArgb(198, 224, 180);
+                            //oSheet.Cells[6, col + 1].Interior.Color = Color.Yellow;
+                            oSheet.Cells[5, col + 1].RowHeight = 20;
+                            oSheet.Cells[5, col + 1].Font.Bold = true;
+                            oSheet.Cells[5, col + 1].Font.Name = fontName;
+                            oSheet.Cells[5, col + 1].HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                            oSheet.Cells[5, col + 1].VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+
+                            //oSheet.Cells[6, col + 1].Font.Bold = true;
+                            //oSheet.Cells[6, col + 1].Font.Name = fontName;
+                            //oSheet.Cells[6, col + 1].HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignRight;
+                            //oSheet.Cells[6, col + 1].VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+
+
+                            oSheet.Range[oSheet.Cells[4, col], oSheet.Cells[4, col + 1]].Merge();
+                            oSheet.Range[oSheet.Cells[5, col], oSheet.Cells[5, col]].Merge();
+                            formatRange = oSheet.Range[oSheet.Cells[5, col], oSheet.Cells[5, col]];
+                            formatRange.ColumnWidth = 15;
+
+
+                            oSheet.Range[oSheet.Cells[5, col + 1], oSheet.Cells[5, col + 1]].Merge();
+                            formatRange = oSheet.Range[oSheet.Cells[5, col + 1], oSheet.Cells[5, col + 1]];
+                            formatRange.ColumnWidth = 15;
+                            break;
+                        }
+                }
+                
                 col = col + 2;
 
                 oSheet.Range[oSheet.Cells[4, col], oSheet.Cells[5, col]].Merge();
@@ -5477,7 +5633,7 @@ namespace Vs.TimeAttendance
                 formatRange.ColumnWidth = 15;
 
                 oSheet.Range[oSheet.Cells[4, col + 1], oSheet.Cells[5, col + 1]].Merge();
-                oSheet.Cells[4, col + 1] = "Tổng số phút";
+                oSheet.Cells[4, col + 1] = "Tổng số giờ";
                 //oSheet.Cells[6, col + 1] = "Total minutes";
                 oSheet.Cells[4, col + 1].Font.Name = fontName;
                 oSheet.Cells[4, col + 1].Font.Bold = true;
@@ -5518,7 +5674,7 @@ namespace Vs.TimeAttendance
                 for (col = 6; col <= lastColumn; col++)
                 {
                     formatRange = oSheet.Range[oSheet.Cells[6, col], oSheet.Cells[rowCnt, col]];
-                    formatRange.NumberFormat = "#,##0;(#,##0); ; ";
+                    formatRange.NumberFormat = "0.0;-0;;@";
                     try { formatRange.TextToColumns(Type.Missing, Microsoft.Office.Interop.Excel.XlTextParsingType.xlDelimited, Microsoft.Office.Interop.Excel.XlTextQualifier.xlTextQualifierDoubleQuote); } catch { }
                 }
 

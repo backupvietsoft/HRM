@@ -54,7 +54,8 @@ namespace Vs.Report
             dsReport.Tables.Clear();
         }
 
-        public frmViewReport()
+        private Int32 iddv = -1;
+        public frmViewReport(Int32 iIDDV = -1)
         {
             //frmWait = new XtraForm()
             //{
@@ -64,6 +65,7 @@ namespace Vs.Report
             //    StartPosition = FormStartPosition.CenterScreen,
             //    TopMost = true
             //};
+            iddv = iIDDV;
             Commons.Modules.ObjSystems.ShowWaitForm(this);
             InitializeComponent();
 
@@ -85,9 +87,7 @@ namespace Vs.Report
                 //// with the specified look and feel settings.
                 //designTool.ShowRibbonDesignerDialog(DevExpress.LookAndFeel.UserLookAndFeel.Default);
 
-                this.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung(-1));
-
-
+                this.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung(iddv));
             }
             catch { }
 

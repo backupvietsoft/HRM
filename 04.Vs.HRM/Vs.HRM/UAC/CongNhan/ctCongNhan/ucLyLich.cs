@@ -944,7 +944,13 @@ namespace Vs.HRM
                     NGAY_CHAM_DUT_NOP_BHXHDateEdit.EditValue = dt.Rows[0]["NGAY_CHAM_DUT_NOP_BHXH"];
                     THAM_GIA_BHXHCheckEdit.EditValue = dt.Rows[0]["THAM_GIA_BHXH"];
                     SO_THE_BHYTTextEdit.EditValue = dt.Rows[0]["SO_THE"];
-                    TINH_THANHLookUpEdit.EditValue = dt.Rows[0]["TINH_THANH"];
+                    try
+                    {
+                        TINH_THANHLookUpEdit.EditValue = dt.Rows[0]["TINH_THANH"];
+                    }
+                    catch
+                    {
+                    }
                     BENH_VIENLookUpEdit.EditValue = dt.Rows[0]["ID_BV"];
                     NGAY_HET_HANDateEdit.EditValue = dt.Rows[0]["NGAY_HET_HAN"];
                     LD_NNCheckEdit.EditValue = dt.Rows[0]["LD_NN"];
@@ -968,8 +974,9 @@ namespace Vs.HRM
                     }
                     catch { }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    Commons.Modules.ObjSystems.MsgError(ex.Message);
                     isCancel = false;
                 }
 
@@ -1193,7 +1200,7 @@ namespace Vs.HRM
             cboMS_CN_CU.Properties.ReadOnly = visible;
             datNgayKTHocViec.Properties.ReadOnly = visible;
             txtLuongHocViec.Properties.ReadOnly = visible;
-            
+
         }
         private void LockTheoQTCT()
         {
@@ -1281,7 +1288,6 @@ namespace Vs.HRM
             //test();
             try
             {
-
                 //tạo bảng tạm bằng cấp
                 string sTBBangCap = "sbtBC" + Commons.Modules.iIDUser;
                 if (Commons.Modules.ObjSystems.ConvertDatatable(grvBangCapCN) == null)
@@ -1532,7 +1538,7 @@ namespace Vs.HRM
 
             if (isCancel) return;
             Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(ID_XNLookUpEdit, Commons.Modules.ObjSystems.DataXiNghiep(Convert.ToInt32(ID_DVLookUpEdit.EditValue), false), "ID_XN", "TEN_XN", "TEN_XN", true, true);
-           
+
         }
 
         private void ID_XNLookUpEdit_EditValueChanged(object sender, EventArgs e)
@@ -1629,11 +1635,16 @@ namespace Vs.HRM
 
         private void NGAY_SINHDateEdit_EditValueChanged(object sender, EventArgs e)
         {
-            NAM_SINHDateEdit.Properties.ReadOnly = false;
-            DateTime NgaySinh = Convert.ToDateTime(NGAY_SINHDateEdit.EditValue);
-            NAM_SINHDateEdit.EditValue = NgaySinh.Year.ToString().Trim();
-            NAM_SINHDateEdit.Text = NgaySinh.Year.ToString().Trim();
-            NAM_SINHDateEdit.Properties.ReadOnly = true;
+            if (Commons.Modules.sLoad == "0Load") return;
+            try
+            {
+                NAM_SINHDateEdit.Properties.ReadOnly = false;
+                DateTime NgaySinh = Convert.ToDateTime(NGAY_SINHDateEdit.EditValue);
+                NAM_SINHDateEdit.EditValue = NgaySinh.Year.ToString().Trim();
+                NAM_SINHDateEdit.Text = NgaySinh.Year.ToString().Trim();
+                NAM_SINHDateEdit.Properties.ReadOnly = true;
+            }
+            catch { }
         }
 
         private void SO_CMNDTextEdit_KeyPress(object sender, KeyPressEventArgs e)

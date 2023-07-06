@@ -9,6 +9,7 @@ using Vs.TimeAttendance;
 using Vs.Report;
 using System.Diagnostics;
 using DevExpress.Mvvm.Native;
+using Vs.Payroll;
 
 namespace VietSoftHRM
 {
@@ -319,10 +320,21 @@ namespace VietSoftHRM
                         tmp.Dock = DockStyle.Fill;
                         break;
                     }
+
                 
                 case "mnuDKTGKhongLamSP":
                     {
                         ucDKThoiGianKhongLamSP ctl = new ucDKThoiGianKhongLamSP();
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(ctl);
+                        Commons.Modules.ObjSystems.HideWaitForm();
+                        ctl.Dock = DockStyle.Fill;
+                        break;
+                    }
+
+                case "mnuKhoaBangCong":
+                    {
+                        ucKhoaBangLuong ctl = new ucKhoaBangLuong();
                         panel2.Controls.Clear();
                         panel2.Controls.Add(ctl);
                         Commons.Modules.ObjSystems.HideWaitForm();

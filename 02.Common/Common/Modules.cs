@@ -79,6 +79,19 @@ namespace Commons
                 _bSetUp = value;
             }
         }
+        //Loại khóa, 1 khóa bảng công , 2 khóa bảng lương
+        private static int _iLoaiKhoa;
+        public static int iLoaiKhoa
+        {
+            get
+            {
+                return _iLoaiKhoa;
+            }
+            set
+            {
+                _iLoaiKhoa = value;
+            }
+        }
         private static bool _bEnabel;
         public static bool bEnabel
         {

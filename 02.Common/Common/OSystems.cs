@@ -20,6 +20,7 @@ using DevExpress.XtraTab;
 using DevExpress.XtraTreeList;
 using Microsoft.ApplicationBlocks.Data;
 using Newtonsoft.Json;
+using NPOI.XWPF.UserModel;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -5317,12 +5318,26 @@ namespace Commons
                 XtraMessageBox.Show(ex.Message.ToString());
             }
         }
+        public void LoadCboTo(SearchLookUpEdit cboSearch_DV, SearchLookUpEdit cboSearch_XN, SearchLookUpEdit cboSearch_TO, bool bLuong = false)
+        {
+            try
+            {
+                DataTable dt = new DataTable();
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, bLuong ? "spGetComboToTinhLuong" : "spGetComboTO", cboSearch_DV.EditValue, cboSearch_XN.EditValue, Commons.Modules.UserName, Commons.Modules.TypeLanguage, 1));
+                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboSearch_TO, dt, "ID_TO", "TEN_TO", "TEN_TO");
+                cboSearch_TO.EditValue = -1;
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show(ex.Message.ToString());
+            }
+        }
         public void LoadCboLDV(SearchLookUpEdit cboSearch_LDV)
         {
             try
             {
                 DataTable dt = new DataTable();
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboLDV", Commons.Modules.UserName, Commons.Modules.TypeLanguage, 1, -1));
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboLDV", Commons.Modules.UserName, Commons.Modules.TypeLanguage, 1, -1, "-1"));
                 Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboSearch_LDV, dt, "ID_LDV", "TEN_LDV", "TEN_LDV");
                 cboSearch_LDV.EditValue = -1;
             }
@@ -6180,7 +6195,7 @@ namespace Commons
             try
             {
                 DataTable dt = new DataTable();
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetTinhTrangThang", Commons.Modules.UserName, Commons.Modules.TypeLanguage, ID_DV, dThang));
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetTinhTrangThang", Commons.Modules.UserName, Commons.Modules.TypeLanguage, ID_DV, dThang, Commons.Modules.iLoaiKhoa));
                 return Convert.ToInt32(dt.Rows[0][0]);
             }
             catch

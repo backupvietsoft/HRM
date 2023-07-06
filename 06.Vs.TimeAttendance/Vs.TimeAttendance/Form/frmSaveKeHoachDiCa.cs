@@ -24,6 +24,7 @@ namespace Vs.TimeAttendance.Form
         private DateTime dTuNgay;
         private DateTime dDenNgay;
         public bool result = false;
+        public int ID_DV = -1;
         public frmSaveKeHoachDiCa(Int64 IDCN, Int64 NHOM, string CA, DateTime TNgay, DateTime DenNgay)
         {
             InitializeComponent();
@@ -58,6 +59,19 @@ namespace Vs.TimeAttendance.Form
                     {
                         try
                         {
+                            try
+                            {
+                                string sSQL = "SELECT COUNT(*) FROM dbo.BANG_LUONG_DM_CHA WHERE (THANG BETWEEN '" + Commons.Modules.ObjSystems.setDate1Month(txtTngay.DateTime, 0).ToString("MM/dd/yyyy") + "' AND '" + Commons.Modules.ObjSystems.setDate1Month(txtTngay.DateTime, 1).ToString("MM/dd/yyyy") + "' OR THANG BETWEEN '" + Commons.Modules.ObjSystems.setDate1Month(txtDngay.DateTime, 0).ToString("MM/dd/yyyy") + "' AND '" + Commons.Modules.ObjSystems.setDate1Month(txtDngay.DateTime, 1).ToString("MM/dd/yyyy") + "') AND LOAI_KHOA = " + Commons.Modules.iLoaiKhoa + " AND ISNULL(TINH_TRANG,1) = 2 AND ID_DV = " + ID_DV + "";
+
+                                int iDL = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, sSQL));
+                                if (iDL > 0)
+                                {
+                                    Commons.Modules.ObjSystems.MsgError(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgBangCongNgayChonDaKhoa"));
+                                    return;
+                                }
+                            }
+                            catch { }
+
                             SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spCapNhatDieuChinh", Commons.Modules.UserName, Commons.Modules.TypeLanguage, idCN, idNHOM, iCA, txtTngay.EditValue, txtDngay.EditValue, Commons.Modules.KyHieuDV.ToString());
                             result = true;
                         }

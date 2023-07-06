@@ -267,7 +267,7 @@ namespace Vs.HRM
                                         {
                                             if (Commons.Modules.KyHieuDV == "SB")
                                             {
-                                                BaoCaoHopDongGiaiDoan_SB();
+                                                BaoCaoHopDongGiaiDoan_SB(1);
                                                 return;
                                             }
                                             System.Data.SqlClient.SqlConnection conn2;
@@ -311,42 +311,50 @@ namespace Vs.HRM
                                 //Tai ký hợp đồng
                                 case "rdo_TaiKyHDLD":
                                     {
-                                        #region Tái ký 
-                                        //System.Data.SqlClient.SqlConnection conn2;
-                                        //dt = new DataTable();
-                                        //string sTieuDe2 = Commons.Modules.TypeLanguage == 1 ? "LIST OF EMPLOYEES WHO ARE DUE TO RENEW THEIR LABOR CONTRACTS IN " : "DANH SÁCH CB-CNV TỚI HẠN TÁI KÝ HĐLĐ THÁNG ";
-                                        //frm.rpt = new rptBCTaiKyHopDongLaoDong(lk_NgayIn.DateTime, sTieuDe2, dTuNgay.DateTime, dDenNgay.DateTime);
+                                        if (Commons.Modules.KyHieuDV == "SB")
+                                        {
+                                            BaoCaoHopDongGiaiDoan_SB(2);
+                                        }
+                                        else
+                                        {
 
-                                        //try
-                                        //{
-                                        //    conn2 = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
-                                        //    conn2.Open();
+                                            #region Tái ký 
+                                            System.Data.SqlClient.SqlConnection conn2;
+                                            dt = new DataTable();
+                                            string sTieuDe2 = Commons.Modules.TypeLanguage == 1 ? "LIST OF EMPLOYEES WHO ARE DUE TO RENEW THEIR LABOR CONTRACTS IN " : "DANH SÁCH CB-CNV TỚI HẠN TÁI KÝ HĐLĐ THÁNG ";
+                                            frm.rpt = new rptBCTaiKyHopDongLaoDong(lk_NgayIn.DateTime, sTieuDe2, dTuNgay.DateTime, dDenNgay.DateTime);
 
-                                        //    System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptDSNVToiHanTaiKyHopDong", conn2);
+                                            try
+                                            {
+                                                conn2 = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                                                conn2.Open();
 
-                                        //    cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
-                                        //    cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
-                                        //    cmd.Parameters.Add("@Dvi", SqlDbType.Int).Value = LK_DON_VI.EditValue;
-                                        //    cmd.Parameters.Add("@XN", SqlDbType.Int).Value = LK_XI_NGHIEP.EditValue;
-                                        //    cmd.Parameters.Add("@TO", SqlDbType.Int).Value = LK_TO.EditValue;
-                                        //    cmd.Parameters.Add("@TNgay", SqlDbType.DateTime).Value = Convert.ToDateTime(dTuNgay.EditValue);
-                                        //    cmd.Parameters.Add("@DNgay", SqlDbType.DateTime).Value = Convert.ToDateTime(dDenNgay.EditValue);
-                                        //    cmd.CommandType = CommandType.StoredProcedure;
-                                        //    System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+                                                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptDSNVToiHanTaiKyHopDong", conn2);
+
+                                                cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                                                cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                                                cmd.Parameters.Add("@Dvi", SqlDbType.Int).Value = LK_DON_VI.EditValue;
+                                                cmd.Parameters.Add("@XN", SqlDbType.Int).Value = LK_XI_NGHIEP.EditValue;
+                                                cmd.Parameters.Add("@TO", SqlDbType.Int).Value = LK_TO.EditValue;
+                                                cmd.Parameters.Add("@TNgay", SqlDbType.DateTime).Value = Convert.ToDateTime(dTuNgay.EditValue);
+                                                cmd.Parameters.Add("@DNgay", SqlDbType.DateTime).Value = Convert.ToDateTime(dDenNgay.EditValue);
+                                                cmd.CommandType = CommandType.StoredProcedure;
+                                                System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
 
 
-                                        //    DataSet ds = new DataSet();
-                                        //    adp.Fill(ds);
-                                        //    dt = new DataTable();
-                                        //    dt = ds.Tables[0].Copy();
-                                        //    dt.TableName = "DATA";
-                                        //    frm.AddDataSource(dt);
-                                        //    frm.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung(-1));
-                                        //}
-                                        //catch
-                                        //{ }
-                                        //frm.ShowDialog();
-                                        #endregion
+                                                DataSet ds = new DataSet();
+                                                adp.Fill(ds);
+                                                dt = new DataTable();
+                                                dt = ds.Tables[0].Copy();
+                                                dt.TableName = "DATA";
+                                                frm.AddDataSource(dt);
+                                                frm.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung(-1));
+                                            }
+                                            catch
+                                            { }
+                                            frm.ShowDialog();
+                                            #endregion
+                                        }
                                     }
                                     break;
 
@@ -354,103 +362,95 @@ namespace Vs.HRM
                                 case "rdo_ToiHanKyHDLD":
                                     {
                                         #region Tới hạn ký hợp đồng
-                                        //System.Data.SqlClient.SqlConnection conn2;
-                                        //dt = new DataTable();
-                                        //string sTieuDe2 = Commons.Modules.TypeLanguage == 1 ? "LIST OF EMPLOYEES DUE TO SIGN LABOR CONTRACTS IN " : "DANH SÁCH CB-CNV TỚI HẠN KÝ HĐLĐ THÁNG ";
-                                        //frm.rpt = new rptBCToiHanKyHopDongLaoDong(lk_NgayIn.DateTime, sTieuDe2, dTuNgay.DateTime, dDenNgay.DateTime);
-
-                                        //try
-                                        //{
-                                        //    conn2 = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
-                                        //    conn2.Open();
-
-                                        //    System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptDSNVToiHanKyHopDong", conn2);
-
-                                        //    cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
-                                        //    cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
-                                        //    cmd.Parameters.Add("@Dvi", SqlDbType.Int).Value = LK_DON_VI.EditValue;
-                                        //    cmd.Parameters.Add("@XN", SqlDbType.Int).Value = LK_XI_NGHIEP.EditValue;
-                                        //    cmd.Parameters.Add("@TO", SqlDbType.Int).Value = LK_TO.EditValue;
-                                        //    cmd.Parameters.Add("@TNgay", SqlDbType.DateTime).Value = Convert.ToDateTime(dTuNgay.EditValue);
-                                        //    cmd.Parameters.Add("@DNgay", SqlDbType.DateTime).Value = Convert.ToDateTime(dDenNgay.EditValue);
-                                        //    cmd.CommandType = CommandType.StoredProcedure;
-                                        //    System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
-
-
-                                        //    DataSet ds = new DataSet();
-                                        //    adp.Fill(ds);
-                                        //    dt = new DataTable();
-                                        //    dt = ds.Tables[0].Copy();
-                                        //    dt.TableName = "DATA";
-                                        //    frm.AddDataSource(dt);
-                                        //    frm.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung(-1));
-                                        //}
-                                        //catch
-                                        //{ }
-                                        //frm.ShowDialog();
-                                        #endregion
-                                        break;
-                                    }
-                                case "rdoLichSuHDLDCuaCBCNV":
-                                    {
-                                        break;
-                                    }
-                                case "rdoLichSuQuaTrinhLamViec":
-                                    {
-                                        break;
-                                    }
-                                case "rdoThamNienCuaCNV":
-                                    {
-                                        System.Data.SqlClient.SqlConnection conn;
+                                        System.Data.SqlClient.SqlConnection conn2;
                                         dt = new DataTable();
-                                        frm = new frmViewReport();
-                                        frm.rpt = new rptDSThamNien(lk_NgayIn.DateTime);
+                                        string sTieuDe2 = Commons.Modules.TypeLanguage == 1 ? "LIST OF EMPLOYEES DUE TO SIGN LABOR CONTRACTS IN " : "DANH SÁCH CB-CNV TỚI HẠN KÝ HĐLĐ THÁNG ";
+                                        frm.rpt = new rptBCToiHanKyHopDongLaoDong(lk_NgayIn.DateTime, sTieuDe2, dTuNgay.DateTime, dDenNgay.DateTime);
 
                                         try
                                         {
-                                            conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
-                                            conn.Open();
+                                            conn2 = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                                            conn2.Open();
 
-                                            System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptDSThamNien", conn);
+                                            System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptDSNVToiHanKyHopDong", conn2);
 
                                             cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
                                             cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
                                             cmd.Parameters.Add("@Dvi", SqlDbType.Int).Value = LK_DON_VI.EditValue;
                                             cmd.Parameters.Add("@XN", SqlDbType.Int).Value = LK_XI_NGHIEP.EditValue;
                                             cmd.Parameters.Add("@TO", SqlDbType.Int).Value = LK_TO.EditValue;
-                                            cmd.Parameters.Add("@Ngay", SqlDbType.Date).Value = lk_NgayTinh.EditValue;
+                                            cmd.Parameters.Add("@TNgay", SqlDbType.DateTime).Value = Convert.ToDateTime(dTuNgay.EditValue);
+                                            cmd.Parameters.Add("@DNgay", SqlDbType.DateTime).Value = Convert.ToDateTime(dDenNgay.EditValue);
                                             cmd.CommandType = CommandType.StoredProcedure;
                                             System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+
 
                                             DataSet ds = new DataSet();
                                             adp.Fill(ds);
                                             dt = new DataTable();
                                             dt = ds.Tables[0].Copy();
-                                            dt.TableName = "DA_TA";
+                                            dt.TableName = "DATA";
                                             frm.AddDataSource(dt);
+                                            frm.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung(-1));
                                         }
                                         catch
                                         { }
                                         frm.ShowDialog();
+                                        #endregion
                                         break;
                                     }
-                                case "rdo_BaoCaoThamNien":
-                                    {
-                                        switch (Commons.Modules.KyHieuDV)
-                                        {
-                                            case "DM":
-                                                {
-                                                    BaoCaoTongHopThamNien_DM();
-                                                    break;
-                                                }
-                                            default:
-                                                {
-                                                    BaoCaoTongHopThamNien_DM();
-                                                    break;
-                                                }
-                                        }
-                                        break;
-                                    }
+                                    //case "rdoThamNienCuaCNV":
+                                    //    {
+                                    //        System.Data.SqlClient.SqlConnection conn;
+                                    //        dt = new DataTable();
+                                    //        frm = new frmViewReport();
+                                    //        frm.rpt = new rptDSThamNien(lk_NgayIn.DateTime);
+
+                                    //        try
+                                    //        {
+                                    //            conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                                    //            conn.Open();
+
+                                    //            System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptDSThamNien", conn);
+
+                                    //            cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                                    //            cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                                    //            cmd.Parameters.Add("@Dvi", SqlDbType.Int).Value = LK_DON_VI.EditValue;
+                                    //            cmd.Parameters.Add("@XN", SqlDbType.Int).Value = LK_XI_NGHIEP.EditValue;
+                                    //            cmd.Parameters.Add("@TO", SqlDbType.Int).Value = LK_TO.EditValue;
+                                    //            cmd.Parameters.Add("@Ngay", SqlDbType.Date).Value = lk_NgayTinh.EditValue;
+                                    //            cmd.CommandType = CommandType.StoredProcedure;
+                                    //            System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+
+                                    //            DataSet ds = new DataSet();
+                                    //            adp.Fill(ds);
+                                    //            dt = new DataTable();
+                                    //            dt = ds.Tables[0].Copy();
+                                    //            dt.TableName = "DA_TA";
+                                    //            frm.AddDataSource(dt);
+                                    //        }
+                                    //        catch
+                                    //        { }
+                                    //        frm.ShowDialog();
+                                    //        break;
+                                    //    }
+                                    //case "rdo_BaoCaoThamNien":
+                                    //    {
+                                    //        switch (Commons.Modules.KyHieuDV)
+                                    //        {
+                                    //            case "DM":
+                                    //                {
+                                    //                    BaoCaoTongHopThamNien_DM();
+                                    //                    break;
+                                    //                }
+                                    //            default:
+                                    //                {
+                                    //                    BaoCaoTongHopThamNien_DM();
+                                    //                    break;
+                                    //                }
+                                    //        }
+                                    //        break;
+                                    //    }
                             }
                             break;
                         }
@@ -467,15 +467,6 @@ namespace Vs.HRM
             LoadCboDonVi();
             LoadCboXiNghiep();
             LoadCboTo();
-            if (Commons.Modules.KyHieuDV != "DM")
-            {
-                rdo_ChonBaoCao.Properties.Items.RemoveAt(8);
-            }
-            rdo_ChonBaoCao.Properties.Items.RemoveAt(7);
-            rdo_ChonBaoCao.Properties.Items.RemoveAt(6);
-            rdo_ChonBaoCao.Properties.Items.RemoveAt(5);
-            rdo_ChonBaoCao.Properties.Items.RemoveAt(4);
-            rdo_ChonBaoCao.Properties.Items.RemoveAt(3);
 
             Commons.OSystems.SetDateEditFormat(dTuNgay);
             Commons.OSystems.SetDateEditFormat(dDenNgay);
@@ -491,6 +482,7 @@ namespace Vs.HRM
             dTuNgay.EditValue = dtTN;
             dDenNgay.EditValue = dtDN;
             rdo_ChonBaoCao_SelectedIndexChanged(null, null);
+            rdo_ChonBaoCao.Properties.Items.Remove(rdo_ChonBaoCao.Properties.Items.Where(x => x.Tag.ToString() == "rdo_ToiHanKyHDLD").FirstOrDefault());
             Commons.Modules.sLoad = "";
         }
         private void LoadCboDonVi()
@@ -627,10 +619,10 @@ namespace Vs.HRM
                         }
                         break;
                     default:
-                        lblTNgay.Visible = false;
-                        lblDNgay.Visible = false;
-                        dTuNgay.Visible = false;
-                        dDenNgay.Visible = false;
+                        lblTNgay.Visible = true;
+                        lblDNgay.Visible = true;
+                        dTuNgay.Visible = true;
+                        dDenNgay.Visible = true;
                         grdCongNhan.Visible = false;
                         lblInHopDong.Visible = false;
                         chkInHopDong.Visible = false;
@@ -641,7 +633,7 @@ namespace Vs.HRM
             { }
         }
 
-        private void BaoCaoHopDongGiaiDoan_SB()
+        private void BaoCaoHopDongGiaiDoan_SB(int iLoai) // -- 1 hợp đồng  giai đoạn, 2 công nhân tái ký
         {
             //string datetime = "01/01/" + Convert.ToString(lk_Nam.EditValue);
             //DateTime tungay = Convert.ToDateTime(datetime);
@@ -665,6 +657,7 @@ namespace Vs.HRM
                 cmd.Parameters.Add("@TO", SqlDbType.Int).Value = LK_TO.EditValue;
                 cmd.Parameters.Add("@TNgay", SqlDbType.Date).Value = dTuNgay.DateTime;
                 cmd.Parameters.Add("@DNgay", SqlDbType.Date).Value = dDenNgay.DateTime;
+                cmd.Parameters.Add("@LoaiHD", SqlDbType.Int).Value = iLoai;
                 cmd.CommandType = CommandType.StoredProcedure;
                 System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
 
@@ -715,7 +708,7 @@ namespace Vs.HRM
                 row2_TieuDe_BaoCao0.Font.Bold = true;
                 row2_TieuDe_BaoCao0.Cells.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
                 row2_TieuDe_BaoCao0.Cells.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
-                row2_TieuDe_BaoCao0.Value2 = "DANH SÁCH LAO ĐỘNG VIỆT NAM KÝ HỢP ĐỒNG LAO ĐỘNG THÁNG " + Convert.ToDateTime(dTuNgay.EditValue).ToString("MM/yyyy");
+                row2_TieuDe_BaoCao0.Value2 = "DANH SÁCH LAO ĐỘNG VIỆT NAM "+ (iLoai == 1 ? "" : "TÁI") +" KÝ HỢP ĐỒNG LAO ĐỘNG THÁNG " + Convert.ToDateTime(dTuNgay.EditValue).ToString("MM/yyyy");
                 row2_TieuDe_BaoCao0.Font.Color = Color.FromArgb(0, 0, 255);
 
                 Microsoft.Office.Interop.Excel.Range row4_TieuDe_Format = oSheet.get_Range("A5", lastColumn + "5");
@@ -732,7 +725,6 @@ namespace Vs.HRM
                 row4_A.ColumnWidth = 5;
                 row4_A.RowHeight = 45;
                 row4_A.Value2 = "STT";
-
 
 
                 Microsoft.Office.Interop.Excel.Range row4_C = oSheet.get_Range("B5");

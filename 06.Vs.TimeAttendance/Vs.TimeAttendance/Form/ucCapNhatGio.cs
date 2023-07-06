@@ -80,6 +80,7 @@ namespace Vs.HRM
             Commons.Modules.ObjSystems.LoadCboTo(cboDV, cboXN, cboTo);
             LoadData();
             Commons.Modules.sLoad = "";
+            EnabelButton(true);
         }
         private void cboXN_EditValueChanged(object sender, EventArgs e)
         {
@@ -294,6 +295,7 @@ namespace Vs.HRM
             dDenNgay.EditValue = secondDateTime;
             LoadData();
             Commons.Modules.sLoad = "";
+            EnabelButton(true);
         }
 
         private void dDenNgay_EditValueChanged(object sender, EventArgs e)
@@ -326,11 +328,19 @@ namespace Vs.HRM
         }
         private void EnabelButton(bool visible)
         {
-            windowsUIButton.Buttons[0].Properties.Visible = visible;
-            windowsUIButton.Buttons[1].Properties.Visible = visible;
-            windowsUIButton.Buttons[2].Properties.Visible = visible;
-            windowsUIButton.Buttons[3].Properties.Visible = !visible;
-            windowsUIButton.Buttons[4].Properties.Visible = !visible;
+            if (Commons.Modules.ObjSystems.DataTinhTrangBangLuong(Convert.ToInt32(cboDV.EditValue), dTuNgay.DateTime) == 2)
+            {
+                windowsUIButton.Buttons[0].Properties.Visible = false;
+                windowsUIButton.Buttons[1].Properties.Visible = false;
+            }
+            else
+            {
+                windowsUIButton.Buttons[0].Properties.Visible = visible;
+                windowsUIButton.Buttons[1].Properties.Visible = visible;
+                windowsUIButton.Buttons[2].Properties.Visible = visible;
+                windowsUIButton.Buttons[3].Properties.Visible = !visible;
+                windowsUIButton.Buttons[4].Properties.Visible = !visible;
+            }
             grvData.OptionsBehavior.Editable = !visible;
         }
     }

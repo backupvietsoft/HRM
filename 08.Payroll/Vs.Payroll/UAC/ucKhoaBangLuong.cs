@@ -82,6 +82,7 @@ namespace Vs.Payroll
                 cmd.Parameters.Add("@DVi", SqlDbType.Int).Value = Convert.ToInt32(cboDonVi.EditValue);
                 cmd.Parameters.Add("@NAM", SqlDbType.Int).Value = Convert.ToInt32(cboThang.Text);
                 cmd.Parameters.Add("@iLoai", SqlDbType.Int).Value = 1;
+                cmd.Parameters.Add("@LOAI_KHOA", SqlDbType.Int).Value = Commons.Modules.iLoaiKhoa;
                 cmd.CommandType = CommandType.StoredProcedure;
                 System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
                 DataSet ds = new DataSet();
@@ -123,6 +124,7 @@ namespace Vs.Payroll
                 cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
                 cmd.Parameters.Add("@DVi", SqlDbType.Int).Value = Convert.ToInt32(cboDonVi.EditValue);
                 cmd.Parameters.Add("@iLoai", SqlDbType.Int).Value = 0;
+                cmd.Parameters.Add("@LOAI_KHOA", SqlDbType.Int).Value = Commons.Modules.iLoaiKhoa;
                 cmd.CommandType = CommandType.StoredProcedure;
                 System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
                 DataSet ds = new DataSet();
@@ -153,34 +155,6 @@ namespace Vs.Payroll
                 }
             }
             catch { }
-        }
-
-        private bool Savedata()
-        {
-            string sTB = "sBTDoanhThuCat" + Commons.Modules.iIDUser;
-            try
-            {
-
-                Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sTB, Commons.Modules.ObjSystems.ConvertDatatable(grdData), "");
-                System.Data.SqlClient.SqlConnection conn;
-                conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
-                conn.Open();
-                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spDoanhThuCat", conn);
-                cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
-                cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
-                cmd.Parameters.Add("@iLoai", SqlDbType.Int).Value = 2;
-                cmd.Parameters.Add("@Ngay", SqlDbType.DateTime).Value = Commons.Modules.ObjSystems.ConvertDateTime(cboThang.Text);
-                cmd.Parameters.Add("@sBT", SqlDbType.NVarChar).Value = sTB;
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.ExecuteNonQuery();
-                Commons.Modules.ObjSystems.XoaTable(sTB);
-                return true;
-            }
-            catch
-            {
-                Commons.Modules.ObjSystems.XoaTable(sTB);
-                return false;
-            }
         }
 
         private void grvNgay_RowCellClick(object sender, RowCellClickEventArgs e)
@@ -247,7 +221,7 @@ namespace Vs.Payroll
             }
             else if (grvData.GetFocusedRowCellValue("ID_TT").ToString() == "1")
             {
-                sStr = Commons.Modules.ObjLanguages.GetLanguage(Commons.Modules.ModuleName, this.Name, "lblKhoaBangLuong", Commons.Modules.TypeLanguage);
+                sStr = Commons.Modules.ObjLanguages.GetLanguage(Commons.Modules.ModuleName, this.Name, Commons.Modules.iLoaiKhoa == 2 ? "lblKhoaBangLuong" : "lblKhoaBangCong", Commons.Modules.TypeLanguage);
             }
             DXMenuItem menuKhoaBangLuong = new DXMenuItem(sStr, new EventHandler(KhoaBangLuong));
             menuKhoaBangLuong.Tag = new RowInfo(view, rowHandle);
@@ -260,11 +234,11 @@ namespace Vs.Payroll
                 DialogResult res;
                 if (grvData.GetFocusedRowCellValue("ID_TT").ToString() == "2" && (Commons.Modules.UserName == "admin" || Commons.Modules.UserName == "administrator"))
                 {
-                    res = XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgBanCoChacMuonMoKhoaKhoaBangLuongKhong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    res = XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", Commons.Modules.iLoaiKhoa == 2 ? "msgBanCoChacMuonMoKhoaKhoaBangLuongKhong": "msgBanCoChacMuonMoKhoaKhoaBangCongKhong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 }
                 else
                 {
-                    res = XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgBanCoChacMuonKhoaBangLuongKhong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    res = XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", Commons.Modules.iLoaiKhoa == 2 ? "msgBanCoChacMuonKhoaBangLuongKhong" : "msgBanCoChacMuonKhoaBangCongKhong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 }
                 if (res == DialogResult.No) return;
                 System.Data.SqlClient.SqlConnection conn;
@@ -276,6 +250,7 @@ namespace Vs.Payroll
                 cmd.Parameters.Add("@Ngay", SqlDbType.Date).Value = Convert.ToDateTime(grvData.GetFocusedRowCellValue("THANG"));
                 cmd.Parameters.Add("@DVi", SqlDbType.Int).Value = cboDonVi.EditValue;
                 cmd.Parameters.Add("@ID_TT", SqlDbType.Int).Value = Convert.ToInt32(grvData.GetFocusedRowCellValue("ID_TT"));
+                cmd.Parameters.Add("@LOAI_KHOA", SqlDbType.Int).Value = Commons.Modules.iLoaiKhoa;
                 cmd.CommandType = CommandType.StoredProcedure;
                 System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
                 DataSet ds = new DataSet();

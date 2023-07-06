@@ -301,7 +301,7 @@ namespace Vs.HRM
                 datDenNgay.EditValue = DateTime.Today;
                 chkGroup.Checked = true;
                 rdoLoaiIn.SelectedIndex = 0;
-                if(Commons.Modules.KyHieuDV != "TG")
+                if (Commons.Modules.KyHieuDV != "TG")
                 {
                     rdoChonBC.Properties.Items.Remove(rdoChonBC.Properties.Items.Where(x => x.Tag.ToString() == "rdo_DSCongNhanDoiHoSo").FirstOrDefault());
                 }
@@ -762,7 +762,7 @@ namespace Vs.HRM
                     Excel.Workbook oWB;
                     Excel.Worksheet oSheet;
                     oXL = new Excel.Application();
-                    oXL.Visible = false;
+                    oXL.Visible = true;
 
                     oWB = (Excel.Workbook)(oXL.Workbooks.Add(Missing.Value));
                     oSheet = oWB.ActiveSheet;
@@ -975,6 +975,127 @@ namespace Vs.HRM
                         Excel.Range myRange = oSheet.get_Range("A4", lastColumn + (rowCnt - 1).ToString());
                         myRange.AutoFilter("1", "<>", Excel.XlAutoFilterOperator.xlOr, "", true);
                     }
+
+
+
+                    rowCnt = rowCnt + 5;
+
+                    //DataTable dtTongCN = new DataTable();
+                    //dtTongCN = ds.Tables[1].Copy();
+                    //string[] TEN_XN = dtTongCN.AsEnumerable().Select(r => r.Field<string>("TEN_XN")).Distinct().ToArray();
+                    //for (int j = 0; j < TEN_XN.Count(); j++)
+                    //{
+                    //    dtTongCN = ds.Tables[1].Copy();
+                    //    dtTongCN = dtTongCN.AsEnumerable().Where(r => r.Field<string>("TEN_XN") == TEN_XN[j]).CopyToDataTable().Copy();
+
+
+                    //    // TẠO GROUP TỔ
+
+                    //    DataRow[] dr1 = dtTongCN.Select();
+                    //    string[,] rowData1 = new string[dr1.Count(), dtTongCN.Columns.Count];
+                    //    int rowTongCN = 0;
+                    //    foreach (DataRow row in dr1)
+                    //    {
+                    //        for (col = 0; col < dtTongCN.Columns.Count; col++)
+                    //        {
+                    //            rowData1[rowTongCN, col] = row[col].ToString();
+                    //        }
+                    //        rowTongCN++;
+                    //    }
+
+                    //    oSheet.get_Range("C" + (rowCnt) + "", "F" + (rowCnt + rowTongCN - 1).ToString()).Value2 = rowData1;
+                    //    oSheet.get_Range("C" + (rowCnt) + "", "F" + (rowCnt + rowTongCN - 1).ToString()).Font.Size = fontSizeNoiDung;
+                    //    oSheet.get_Range("C" + (rowCnt) + "", "F" + (rowCnt + rowTongCN - 1).ToString()).Font.Bold = true;
+                    //    oSheet.get_Range("C" + (rowCnt) + "", "F" + (rowCnt + rowTongCN - 1).ToString()).Font.Name = fontName;
+                    //    oSheet.get_Range("C" + (rowCnt) + "", "F" + (rowCnt + rowTongCN - 1).ToString()).Font.Underline = true;
+
+                    //    oSheet.get_Range("F" + (rowCnt) + "", "F" + (rowCnt + rowTongCN - 1).ToString()).NumberFormat = "0";
+                    //    try { oSheet.get_Range("F" + (rowCnt) + "", "F" + (rowCnt + rowTongCN - 1).ToString()).TextToColumns(Type.Missing, Excel.XlTextParsingType.xlDelimited, Excel.XlTextQualifier.xlTextQualifierDoubleQuote); } catch { }
+
+                    //    rowTongCN = 0;
+                    //}
+                    #region tổng công nhân
+
+                    formatRange = oSheet.Range[oSheet.Cells[rowCnt -1, 1], oSheet.Cells[rowCnt -1, 1]];
+                    formatRange.Value2 = "LÝ LỊCH TRÍCH NGANG CB CNV";
+                    formatRange.Font.Bold = true;
+                    formatRange.Font.Size = 15;
+                    formatRange.Font.Name = fontName;
+
+                    dt = new DataTable();
+                    dt = ds.Tables[1].Copy();
+                    int rowTongCN = 0;
+                    int dongBD = rowCnt;
+                    string[] TEN_XN = dt.AsEnumerable().Select(r => r.Field<string>("TEN_XN")).Distinct().ToArray();
+                    int demRoman = 0;
+
+                    for (int j = 0; j < TEN_XN.Count(); j++)
+                    {
+                        dt = ds.Tables[1].Copy();
+                        dt = dt.AsEnumerable().Where(r => r.Field<string>("TEN_XN") == TEN_XN[j]).CopyToDataTable().Copy();
+                        DataRow[] dr = dt.Select();
+
+                        // Tạo group tổ
+                        Range row_groupXI_NGHIEP_Format = oSheet.Range[oSheet.Cells[dongBD, 2], oSheet.Cells[dongBD, 2]];
+                        row_groupXI_NGHIEP_Format.Value2 = TEN_XN[j].ToString();
+                        row_groupXI_NGHIEP_Format.Font.Bold = true;
+                        row_groupXI_NGHIEP_Format.Font.Name = fontName;
+                        row_groupXI_NGHIEP_Format.Font.Size = 11;
+                        row_groupXI_NGHIEP_Format.Font.Underline = true;
+
+                        row_groupXI_NGHIEP_Format = oSheet.Range[oSheet.Cells[dongBD, 1], oSheet.Cells[dongBD, 1]];
+                        row_groupXI_NGHIEP_Format.Value2 = "Đơn vị";
+                        row_groupXI_NGHIEP_Format.Font.Bold = true;
+                        row_groupXI_NGHIEP_Format.Font.Name = fontName;
+                        row_groupXI_NGHIEP_Format.Font.Size = 11;
+                        row_groupXI_NGHIEP_Format.Font.Underline = true;
+
+                        row_groupXI_NGHIEP_Format = oSheet.Range[oSheet.Cells[dongBD, 6], oSheet.Cells[dongBD, 6]];
+                        row_groupXI_NGHIEP_Format.Value2 = "=SUM(F" + (dongBD + 1) + ":F" + (dongBD + dr.Count()) + ")";
+                        row_groupXI_NGHIEP_Format.Font.Name = fontName;
+
+                        dongBD++;
+                        rowCnt = dongBD;
+                        foreach (DataRow row in dr)
+                        {
+                            dynamic[] arr = { row["TEXT_TO"].ToString(), row["TEN_TO"].ToString(), row["TEXT_TONG_CN"].ToString(), row["TEXT_TRONG"].ToString(),row["SLCN"].ToString()
+                        };
+                            Range rowData = oSheet.Range[oSheet.Cells[rowCnt, 2], oSheet.Cells[rowCnt, 6]];
+                            rowData.Value2 = arr;
+                            rowData.Font.Bold = true;
+                            rowData.Font.Name = fontName;
+                            rowData.Font.Size = 11;
+                            rowData.Font.Underline = true;
+
+                            rowCnt++;
+                        }
+                        dongBD = rowCnt;
+                    }
+
+                    #endregion
+
+
+
+
+                    //rowCnt = rowCnt + rowTongCN - 1 + 3;
+                    oSheet.get_Range("G" + (rowCnt) + "", "G" + (rowCnt).ToString()).Value2 = "Ngày...... ngày ..... năm ......";
+                    oSheet.get_Range("G" + (rowCnt) + "", "G" + (rowCnt).ToString()).Font.Size = 12;
+                    oSheet.get_Range("G" + (rowCnt) + "", "G" + (rowCnt).ToString()).Font.Name = fontName;
+                    oSheet.get_Range("G" + (rowCnt) + "", "G" + (rowCnt).ToString()).Cells.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
+                    oSheet.get_Range("G" + (rowCnt) + "", "G" + (rowCnt).ToString()).Cells.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
+
+                    rowCnt++;
+                    oSheet.get_Range("G" + (rowCnt) + "", "G" + (rowCnt).ToString()).Value2 = "Người lập biểu";
+                    oSheet.get_Range("G" + (rowCnt) + "", "G" + (rowCnt).ToString()).Font.Size = 12;
+                    oSheet.get_Range("G" + (rowCnt) + "", "G" + (rowCnt).ToString()).Font.Name = fontName;
+                    oSheet.get_Range("G" + (rowCnt) + "", "G" + (rowCnt).ToString()).Cells.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
+                    oSheet.get_Range("G" + (rowCnt) + "", "G" + (rowCnt).ToString()).Cells.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
+
+
+
+
+
+
                     this.Cursor = Cursors.Default;
                     Commons.Modules.ObjSystems.HideWaitForm();
                     oXL.Visible = true;
@@ -1987,7 +2108,7 @@ namespace Vs.HRM
                 dt = ds.Tables[0].Copy();
                 System.Data.DataTable dt1 = new System.Data.DataTable();
                 dt1 = ds.Tables[1].Copy();
-                if(dt1.Rows.Count == 0)
+                if (dt1.Rows.Count == 0)
                 {
                     XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgKhongCoDuLieuIn"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;

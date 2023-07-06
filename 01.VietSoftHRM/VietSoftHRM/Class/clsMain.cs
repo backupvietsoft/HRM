@@ -131,6 +131,8 @@ namespace VietSoftHRM
                     Commons.Modules.sDDTaiLieu = "";
                     Commons.Modules.iLOAI_CN = 0;
                 }
+
+                //System.Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", $"firebase-auth.json");
             }
             catch
             {

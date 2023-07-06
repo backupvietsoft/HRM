@@ -186,11 +186,13 @@ namespace VietSoftHRM
 
                 case 15:
                     {
+                        Commons.Modules.iLoaiKhoa = 1;
                         LoaducChamCong(e.Item);
                         break;
                     }
                 case 16:
                     {
+                        Commons.Modules.iLoaiKhoa = 2;
                         LoaducLuong(e.Item);
                         break;
                     }

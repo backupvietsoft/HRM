@@ -21,7 +21,6 @@ namespace Vs.Category
         {
             InitializeComponent();
             Commons.Modules.ObjSystems.ThayDoiNN(this, layoutControlGroup1, btnALL);
-
             Id = iId;
             AddEdit = bAddEdit;
         }

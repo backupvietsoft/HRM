@@ -36,17 +36,17 @@ namespace Vs.HRM
             Commons.Modules.sLoad = "0Load";
             formatText();
 
-            Commons.Modules.ObjSystems.MLoadLookUpEdit(ID_CVLookUpEdit, Commons.Modules.ObjSystems.DataChucVu(false, Convert.ToInt32(-1)), "ID_CV", "TEN_CV", "TEN_CV");
+            try
+            {
+                Commons.Modules.ObjSystems.MLoadLookUpEdit(ID_CVLookUpEdit, Commons.Modules.ObjSystems.DataChucVu(false, Convert.ToInt32(-1)), "ID_CV", "TEN_CV", "TEN_CV");
+                Commons.Modules.ObjSystems.MLoadLookUpEdit(ID_LHDLDLookUpEdit, Commons.Modules.ObjSystems.DataLoaiHDLD(false), "ID_LHDLD", "TEN_LHDLD", "TEN_LHDLD", true);
+                Commons.Modules.ObjSystems.MLoadLookUpEdit(NGUOI_KY_GIA_HANLookUpEdit, Commons.Modules.ObjSystems.DataNguoiKy(), "ID_NK", "HO_TEN", "HO_TEN");
+                Commons.Modules.ObjSystems.MLoadLookUpEdit(cboTinhTrang, Commons.Modules.ObjSystems.DataTinhTrang(false), "ID_TT", "TenTT", "TenTT");
+                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboNgachLuong, Commons.Modules.ObjSystems.DataNgachLuong(false), "ID_NL", "TEN_NL", "TEN_NL", true);
+                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboBAC_LUONG, Commons.Modules.ObjSystems.DataBacLuong(Convert.ToInt64(cboNgachLuong.EditValue), -1, DateTime.Today, false), "ID_BL", "TEN_BL", "TEN_BL", true);
 
-            Commons.Modules.ObjSystems.MLoadLookUpEdit(ID_LHDLDLookUpEdit, Commons.Modules.ObjSystems.DataLoaiHDLD(false), "ID_LHDLD", "TEN_LHDLD", "TEN_LHDLD", true);
-            Commons.Modules.ObjSystems.MLoadLookUpEdit(NGUOI_KY_GIA_HANLookUpEdit, Commons.Modules.ObjSystems.DataNguoiKy(), "ID_NK", "HO_TEN", "HO_TEN");
-            Commons.Modules.ObjSystems.MLoadLookUpEdit(cboTinhTrang, Commons.Modules.ObjSystems.DataTinhTrang(false), "ID_TT", "TenTT", "TenTT");
-            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboNgachLuong, Commons.Modules.ObjSystems.DataNgachLuong(false), "ID_NL", "TEN_NL", "TEN_NL", true);
-
-
-
-            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboBAC_LUONG, Commons.Modules.ObjSystems.DataBacLuong(Convert.ToInt64(cboNgachLuong.EditValue), -1, DateTime.Today, false), "ID_BL", "TEN_BL", "TEN_BL", true);
-
+            }
+            catch { }
 
             lblLuongThuViec.Visibility = LayoutVisibility.Never;
             emptySpaceItem2.Visibility = LayoutVisibility.Never;
@@ -223,9 +223,9 @@ namespace Vs.HRM
                     }
                     try { cboBAC_LUONG.EditValue = tableTTC_CN.Rows[0]["BAC_LUONG"]; } catch { }
 
-                    txtCachTinhLuong.Text = Convert.ToString(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT CASE ISNULL((SELECT ID_CTL FROM dbo.QUA_TRINH_CONG_TAC WHERE NGAY_HIEU_LUC = (SELECT MAX(NGAY_HIEU_LUC) FROM dbo.QUA_TRINH_CONG_TAC WHERE ID_CN = " + Commons.Modules.iCongNhan + ")AND ID_CN =" + Commons.Modules.iCongNhan + ") ,2) WHEN NULL THEN (SELECT TEN FROM dbo.CACH_TINH_LUONG WHERE ID_CTL = ISNULL((SELECT ID_CTL FROM dbo.QUA_TRINH_CONG_TAC WHERE NGAY_HIEU_LUC = (SELECT MAX(NGAY_HIEU_LUC) FROM dbo.QUA_TRINH_CONG_TAC WHERE ID_CN = " + Commons.Modules.iCongNhan + ")AND ID_CN =" + Commons.Modules.iCongNhan + ") ,2)) ELSE (SELECT T3.TEN FROM dbo.CONG_NHAN T1 INNER JOIN dbo.CHUC_VU T2 ON T2.ID_CV = T1.ID_CV INNER JOIN dbo.CACH_TINH_LUONG T3 ON T3.ID_CTL = T2.ID_CTL WHERE T1.ID_CN = " + Commons.Modules.iCongNhan + ") END "));
+                    txtCachTinhLuong.Text = Convert.ToString(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT TEN FROM dbo.CACH_TINH_LUONG WHERE ID_CTL =(SELECT ISNULL((SELECT T1.ID_CTL FROM dbo.QUA_TRINH_CONG_TAC T1 WHERE T1.NGAY_HIEU_LUC = (SELECT MAX(NGAY_HIEU_LUC) FROM dbo.QUA_TRINH_CONG_TAC WHERE ID_CN = " + Commons.Modules.iCongNhan + ") AND T1.ID_CN = " + Commons.Modules.iCongNhan + "),(SELECT CV.ID_CTL FROM dbo.CONG_NHAN T1 INNER JOIN dbo.CHUC_VU CV ON CV.ID_CV = T1.ID_CV WHERE ID_CN = " + Commons.Modules.iCongNhan + ")))"));
 
-                    txtCachTinhLuong_A.Text = Convert.ToString(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT CASE ISNULL((SELECT ID_CTL FROM dbo.QUA_TRINH_CONG_TAC WHERE NGAY_HIEU_LUC = (SELECT MAX(NGAY_HIEU_LUC) FROM dbo.QUA_TRINH_CONG_TAC WHERE ID_CN = " + Commons.Modules.iCongNhan + ")AND ID_CN =" + Commons.Modules.iCongNhan + ") ,2) WHEN NULL THEN (SELECT TEN_A FROM dbo.CACH_TINH_LUONG WHERE ID_CTL = ISNULL((SELECT ID_CTL FROM dbo.QUA_TRINH_CONG_TAC WHERE NGAY_HIEU_LUC = (SELECT MAX(NGAY_HIEU_LUC) FROM dbo.QUA_TRINH_CONG_TAC WHERE ID_CN = " + Commons.Modules.iCongNhan + ")AND ID_CN =" + Commons.Modules.iCongNhan + ") ,2)) ELSE (SELECT T3.TEN_A FROM dbo.CONG_NHAN T1 INNER JOIN dbo.CHUC_VU T2 ON T2.ID_CV = T1.ID_CV INNER JOIN dbo.CACH_TINH_LUONG T3 ON T3.ID_CTL = T2.ID_CTL WHERE T1.ID_CN = " + Commons.Modules.iCongNhan + ") END "));
+                    txtCachTinhLuong_A.Text = Convert.ToString(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT TEN_A FROM dbo.CACH_TINH_LUONG WHERE ID_CTL =(SELECT ISNULL((SELECT T1.ID_CTL FROM dbo.QUA_TRINH_CONG_TAC T1 WHERE T1.NGAY_HIEU_LUC = (SELECT MAX(NGAY_HIEU_LUC) FROM dbo.QUA_TRINH_CONG_TAC WHERE ID_CN = " + Commons.Modules.iCongNhan + ") AND T1.ID_CN = " + Commons.Modules.iCongNhan + "),(SELECT CV.ID_CTL FROM dbo.CONG_NHAN T1 INNER JOIN dbo.CHUC_VU CV ON CV.ID_CV = T1.ID_CV WHERE ID_CN = " + Commons.Modules.iCongNhan + ")))"));
                     txtCHE_DO_NANG_LUONG.EditValue = tableTTC_CN.Rows[0]["CHE_DO_NANG_LUONG"];
                     txtCHE_DO_NANG_LUONG_A.EditValue = tableTTC_CN.Rows[0]["CHE_DO_NANG_LUONG_A"];
                     txtMO_TA_CV_A.EditValue = tableTTC_CN.Rows[0]["MO_TA_CV_A"];
@@ -431,6 +431,7 @@ namespace Vs.HRM
 
         private void ID_LHDLDLookUpEdit_EditValueChanged(object sender, EventArgs e)
         {
+            if (Commons.Modules.sLoad == "0Load") return;
             try
             {
                 ngayhethan(Convert.ToInt32(ID_LHDLDLookUpEdit.EditValue));
@@ -509,7 +510,7 @@ namespace Vs.HRM
                                     {
                                         NGAY_HET_HDDateEdit.EditValue = Convert.ToDateTime(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.fnNgayKetThucHD_NB('" + Convert.ToDateTime(NGAY_BAT_DAU_HDDateEdit.DateTime).ToString("MM/dd/yyyy") + "', " + Convert.ToInt32(dt.Rows[0]["SO_THANG"]) + ", 2)"));
                                     }
-                                    else if(Commons.Modules.KyHieuDV == "SB")
+                                    else if (Commons.Modules.KyHieuDV == "SB")
                                     {
                                         NGAY_HET_HDDateEdit.EditValue = Convert.ToDateTime(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.fnNgayKetThucHD_KhongKTNN('" + Convert.ToDateTime(NGAY_BAT_DAU_HDDateEdit.DateTime).ToString("MM/dd/yyyy") + "'," + Convert.ToInt32(dt.Rows[0]["SO_THANG"]) + ",3)"));
                                     }
@@ -1056,6 +1057,7 @@ namespace Vs.HRM
 
         private void cboNgachLuong_EditValueChanged(object sender, EventArgs e)
         {
+            if (Commons.Modules.sLoad == "0Load") return;
             ngayhethan(Convert.ToInt32(ID_LHDLDLookUpEdit.EditValue));
             try
             {

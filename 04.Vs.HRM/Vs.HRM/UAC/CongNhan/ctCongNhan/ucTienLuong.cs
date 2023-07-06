@@ -413,7 +413,6 @@ namespace Vs.HRM
             Bindingdata(false);
         }
         #endregion
-
         private void UcTienLuong_Load(object sender, EventArgs e)
         {
             if (Commons.Modules.KyHieuDV == "SB")
@@ -447,7 +446,6 @@ namespace Vs.HRM
             Commons.Modules.sLoad = "";
             LoadgrdTienLuong(-1);
         }
-
         private void formatText()
         {
             Commons.OSystems.SetDateEditFormat(NGAY_HIEU_LUCDateEdit);

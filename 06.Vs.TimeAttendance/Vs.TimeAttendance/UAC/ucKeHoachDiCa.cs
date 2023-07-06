@@ -123,11 +123,12 @@ namespace Vs.TimeAttendance
                     {
                         try
                         {
-                            
+
                             if (grvCongNhan.RowCount == 0 || grvKeHoachDiCa.RowCount == 0) return;
                             frmSaveKeHoachDiCa KeHoachDiCa = new frmSaveKeHoachDiCa(Convert.ToInt64(grvCongNhan.GetFocusedRowCellValue("ID_CN")), Convert.ToInt64(grvKeHoachDiCa.GetFocusedRowCellValue("ID_NHOM")), Convert.ToString(grvKeHoachDiCa.GetFocusedRowCellValue("CA")), Convert.ToDateTime(grvKeHoachDiCa.GetFocusedRowCellValue("TU_NGAY")), Convert.ToDateTime(grvKeHoachDiCa.GetFocusedRowCellValue("DEN_NGAY")));
+                            KeHoachDiCa.ID_DV = Convert.ToInt32(cboDV.EditValue);
                             KeHoachDiCa.ShowDialog();
-                            if(KeHoachDiCa.result == true)
+                            if (KeHoachDiCa.result == true)
                             {
                                 Commons.Modules.ObjSystems.Alert(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgCapNhatThanhCong"), Commons.Form_Alert.enmType.Success);
                             }

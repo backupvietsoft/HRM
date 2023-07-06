@@ -40,7 +40,7 @@ namespace Vs.HRM
         }
         private void ucCTQLNS_Load(object sender, EventArgs e)
         {
-            
+
             try
             {
                 XuLyTab();
@@ -317,15 +317,17 @@ namespace Vs.HRM
             try
             {
                 if (Commons.Modules.sLoad == "0Load") return;
+                Commons.Modules.sLoad = "0Load";
                 Commons.Modules.iCongNhan = Convert.ToInt64(cboCongNhan.EditValue);
                 changeCN = true;
                 Lb_Click(labelTemp, null);
                 string sSQL = "SELECT TOP 1 TEN_TO FROM dbo.[TO] T1 INNER JOIN dbo.CONG_NHAN T2 ON T1.ID_TO = T2.ID_TO WHERE T2.ID_CN = " + Commons.Modules.iCongNhan + "";
-                string sTenTo = Convert.ToString(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text,sSQL));
+                string sTenTo = Convert.ToString(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, sSQL));
                 labelNV.Text = cboCongNhan.Text + " - " + ((System.Data.DataRowView)cboCongNhan.GetSelectedDataRow()).Row.ItemArray[2].ToString() + " - " + sTenTo;
+                Commons.Modules.sLoad = "";
             }
             catch { }
-            
+
         }
     }
 }

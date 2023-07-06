@@ -2791,7 +2791,7 @@ namespace Vs.TimeAttendance
                 int fontSizeTieuDe = 16;
                 int fontSizeNoiDung = 12;
                 int oRow = 5;
-                TaoTTChung_TheoDV(oSheet, 1, 2, 1, 8, 0, 0);
+                TaoTTChung_TheoDV(oSheet, 1, 3, 1, lastColumn, 0, 0);
                 foreach (DataRow rowTo in dtTo.Rows)
                 {
                     //oSheet.Name = rowTo[1].ToString();
@@ -2799,24 +2799,24 @@ namespace Vs.TimeAttendance
 
                     Range row2_TieuDe_BaoCao = oSheet.Range[oSheet.Cells[oRow, 1], oSheet.Cells[oRow, lastColumn]];
                     row2_TieuDe_BaoCao.Merge();
-                    row2_TieuDe_BaoCao.Font.Size = 15;
+                    row2_TieuDe_BaoCao.Font.Size = 20;
                     row2_TieuDe_BaoCao.Font.Name = fontName;
                     row2_TieuDe_BaoCao.Font.Bold = true;
                     row2_TieuDe_BaoCao.Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
                     row2_TieuDe_BaoCao.Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
-                    row2_TieuDe_BaoCao.RowHeight = 20;
+                    row2_TieuDe_BaoCao.RowHeight = 25;
                     row2_TieuDe_BaoCao.Value2 = "DANH SÁCH XẾP LOẠI A,B,C -" + rowTo[1].ToString();
 
                     oRow++;
 
                     row2_TieuDe_BaoCao = oSheet.Range[oSheet.Cells[oRow, 1], oSheet.Cells[oRow, lastColumn]];
                     row2_TieuDe_BaoCao.Merge();
-                    row2_TieuDe_BaoCao.Font.Size = 15;
+                    row2_TieuDe_BaoCao.Font.Size = 20;
                     row2_TieuDe_BaoCao.Font.Name = fontName;
                     row2_TieuDe_BaoCao.Font.Bold = true;
                     row2_TieuDe_BaoCao.Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
                     row2_TieuDe_BaoCao.Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
-                    row2_TieuDe_BaoCao.RowHeight = 20;
+                    row2_TieuDe_BaoCao.RowHeight = 25;
                     row2_TieuDe_BaoCao.Value2 = "TỪ THÁNG " + datTThang.DateTime.ToString("MM/yyyy") + " ĐẾN THÁNG " + datDThang.DateTime.ToString("MM/yyyy") + "";
 
                     oRow = oRow + 3;
@@ -2826,78 +2826,143 @@ namespace Vs.TimeAttendance
                     row2_TieuDeCot_BaoCao = oSheet.Range[oSheet.Cells[oRow, oCol], oSheet.Cells[oRow + 1, oCol]];
                     row2_TieuDeCot_BaoCao.Merge();
                     row2_TieuDeCot_BaoCao.Value2 = "STT";
-                    row2_TieuDeCot_BaoCao.ColumnWidth = 10;
+                    row2_TieuDeCot_BaoCao.ColumnWidth = 4.75;
 
                     oCol++;
                     row2_TieuDeCot_BaoCao = oSheet.Range[oSheet.Cells[oRow, oCol], oSheet.Cells[oRow + 1, oCol]];
                     row2_TieuDeCot_BaoCao.Merge();
                     row2_TieuDeCot_BaoCao.Value2 = "Số thẻ";
-                    row2_TieuDeCot_BaoCao.ColumnWidth = 15;
+                    row2_TieuDeCot_BaoCao.ColumnWidth = 9.71;
 
 
                     oCol++;
                     row2_TieuDeCot_BaoCao = oSheet.Range[oSheet.Cells[oRow, oCol], oSheet.Cells[oRow + 1, oCol]];
                     row2_TieuDeCot_BaoCao.Merge();
                     row2_TieuDeCot_BaoCao.Value2 = "Họ và tên";
-                    row2_TieuDeCot_BaoCao.ColumnWidth = 25;
+                    row2_TieuDeCot_BaoCao.ColumnWidth = 21.29;
 
 
                     oCol++;
                     row2_TieuDeCot_BaoCao = oSheet.Range[oSheet.Cells[oRow, oCol], oSheet.Cells[oRow + 1, oCol]];
                     row2_TieuDeCot_BaoCao.Merge();
                     row2_TieuDeCot_BaoCao.Value2 = "Ngày vào làm";
-                    row2_TieuDeCot_BaoCao.ColumnWidth = 15;
+                    row2_TieuDeCot_BaoCao.ColumnWidth = 11.57;
 
                     oCol++;
                     row2_TieuDeCot_BaoCao = oSheet.Range[oSheet.Cells[oRow, oCol], oSheet.Cells[oRow + 1, oCol]];
                     row2_TieuDeCot_BaoCao.Merge();
                     row2_TieuDeCot_BaoCao.Value2 = "Ngày công đi làm";
+                    row2_TieuDeCot_BaoCao.ColumnWidth = 6.71;
 
                     oCol++;
-                    row2_TieuDeCot_BaoCao = oSheet.Range[oSheet.Cells[oRow, oCol], oSheet.Cells[oRow, oCol + dtLoaiNghi.Rows.Count - 1]];
+                    row2_TieuDeCot_BaoCao = oSheet.Range[oSheet.Cells[oRow, oCol], oSheet.Cells[oRow, oCol + 7]];
                     row2_TieuDeCot_BaoCao.Merge();
                     row2_TieuDeCot_BaoCao.Value2 = "Vắng mặt";
 
-                    //lay tieu de cot nghi 
-                    DataRow[] drN = dtLoaiNghi.Select();
-                    //string[,] rowData = new string[dr.Count(), dtBCThang.Columns.Count];
-                    foreach (DataRow rowN in drN)
-                    {
-                        oSheet.Range[oSheet.Cells[oRow + 1, oCol], oSheet.Cells[oRow + 1, oCol]] = rowN[1].ToString();
-                        oCol++;
-                    }
+                    ////lay tieu de cot nghi 
+                    //DataRow[] drN = dtLoaiNghi.Select();
+                    ////string[,] rowData = new string[dr.Count(), dtBCThang.Columns.Count];
+                    //foreach (DataRow rowN in drN)
+                    //{
+                    //    oSheet.Range[oSheet.Cells[oRow + 1, oCol], oSheet.Cells[oRow + 1, oCol]] = rowN[1].ToString();
+                    //    oSheet.Range[oSheet.Cells[oRow + 1, oCol], oSheet.Cells[oRow + 1, oCol]].ColumnWidth = 6.71;
+                    //    oCol++;
+                    //}
 
+                    row2_TieuDeCot_BaoCao = oSheet.Range[oSheet.Cells[oRow + 1, oCol], oSheet.Cells[oRow + 1, oCol]];
+                    row2_TieuDeCot_BaoCao.Value2 = "Phép";
+                    row2_TieuDeCot_BaoCao.ColumnWidth = 5.71;
+                    row2_TieuDeCot_BaoCao.WrapText = true;
+
+                    oCol++;
+                    row2_TieuDeCot_BaoCao = oSheet.Range[oSheet.Cells[oRow + 1, oCol], oSheet.Cells[oRow + 1, oCol]];
+                    row2_TieuDeCot_BaoCao.Value2 = "Nghỉ tự do";
+                    row2_TieuDeCot_BaoCao.ColumnWidth = 5.86;
+                    row2_TieuDeCot_BaoCao.WrapText = true;
+
+                    oCol++;
+                    row2_TieuDeCot_BaoCao = oSheet.Range[oSheet.Cells[oRow + 1, oCol], oSheet.Cells[oRow + 1, oCol]];
+                    row2_TieuDeCot_BaoCao.Value2 = "Nghỉ việc riêng không lương";
+                    row2_TieuDeCot_BaoCao.ColumnWidth = 7.71;
+                    row2_TieuDeCot_BaoCao.WrapText = true;
+
+
+                    oCol++;
+                    row2_TieuDeCot_BaoCao = oSheet.Range[oSheet.Cells[oRow + 1, oCol], oSheet.Cells[oRow + 1, oCol]];
+                    row2_TieuDeCot_BaoCao.Value2 = "Nghỉ việc riêng có lương";
+                    row2_TieuDeCot_BaoCao.ColumnWidth = 7.29;
+                    row2_TieuDeCot_BaoCao.WrapText = true;
+
+
+                    oCol++;
+                    row2_TieuDeCot_BaoCao = oSheet.Range[oSheet.Cells[oRow + 1, oCol], oSheet.Cells[oRow + 1, oCol]];
+                    row2_TieuDeCot_BaoCao.Value2 = "Nghỉ ốm";
+                    row2_TieuDeCot_BaoCao.ColumnWidth = 5.71;
+                    row2_TieuDeCot_BaoCao.WrapText = true;
+
+
+                    oCol++;
+                    row2_TieuDeCot_BaoCao = oSheet.Range[oSheet.Cells[oRow + 1, oCol], oSheet.Cells[oRow + 1, oCol]];
+                    row2_TieuDeCot_BaoCao.Value2 = "Nghỉ con ốm";
+                    row2_TieuDeCot_BaoCao.ColumnWidth = 6.71;
+                    row2_TieuDeCot_BaoCao.WrapText = true;
+
+
+
+                    oCol++;
+                    row2_TieuDeCot_BaoCao = oSheet.Range[oSheet.Cells[oRow + 1, oCol], oSheet.Cells[oRow + 1, oCol]];
+                    row2_TieuDeCot_BaoCao.Value2 = "Nghỉ thai sản";
+                    row2_TieuDeCot_BaoCao.ColumnWidth = 6;
+                    row2_TieuDeCot_BaoCao.WrapText = true;
+
+
+                    oCol++;
+                    row2_TieuDeCot_BaoCao = oSheet.Range[oSheet.Cells[oRow + 1, oCol], oSheet.Cells[oRow + 1, oCol]];
+                    row2_TieuDeCot_BaoCao.Value2 = "Nghỉ lễ tết";
+                    row2_TieuDeCot_BaoCao.ColumnWidth = 6;
+                    row2_TieuDeCot_BaoCao.WrapText = true;
+
+
+                    oCol++;
                     row2_TieuDeCot_BaoCao = oSheet.Range[oSheet.Cells[oRow, oCol], oSheet.Cells[oRow + 1, oCol]];
                     row2_TieuDeCot_BaoCao.Merge();
                     row2_TieuDeCot_BaoCao.Value2 = "Cá nhân tự xếp loại";
-                    row2_TieuDeCot_BaoCao.ColumnWidth = 15;
+                    row2_TieuDeCot_BaoCao.ColumnWidth = 9.43;
+                    row2_TieuDeCot_BaoCao.WrapText = true;
+
 
 
                     oCol++;
                     row2_TieuDeCot_BaoCao = oSheet.Range[oSheet.Cells[oRow, oCol], oSheet.Cells[oRow + 1, oCol]];
                     row2_TieuDeCot_BaoCao.Merge();
                     row2_TieuDeCot_BaoCao.Value2 = "Tổ trưởng XN xếp loại";
-                    row2_TieuDeCot_BaoCao.ColumnWidth = 15;
+                    row2_TieuDeCot_BaoCao.ColumnWidth = 9;
+                    row2_TieuDeCot_BaoCao.WrapText = true;
+
 
 
                     oCol++;
                     row2_TieuDeCot_BaoCao = oSheet.Range[oSheet.Cells[oRow, oCol], oSheet.Cells[oRow + 1, oCol]];
                     row2_TieuDeCot_BaoCao.Merge();
                     row2_TieuDeCot_BaoCao.Value2 = "Ghi chú";
-                    row2_TieuDeCot_BaoCao.ColumnWidth = 15;
+                    row2_TieuDeCot_BaoCao.ColumnWidth = 7.71;
+                    row2_TieuDeCot_BaoCao.WrapText = true;
+
 
                     oCol++;
                     row2_TieuDeCot_BaoCao = oSheet.Range[oSheet.Cells[oRow, oCol], oSheet.Cells[oRow + 1, oCol]];
                     row2_TieuDeCot_BaoCao.Merge();
                     row2_TieuDeCot_BaoCao.Value2 = "Ký tên";
-                    row2_TieuDeCot_BaoCao.ColumnWidth = 15;
+                    row2_TieuDeCot_BaoCao.ColumnWidth = 7.86;
+                    row2_TieuDeCot_BaoCao.WrapText = true;
+
 
 
                     oCol++;
                     row2_TieuDeCot_BaoCao = oSheet.Range[oSheet.Cells[oRow, oCol], oSheet.Cells[oRow + 1, oCol]];
                     row2_TieuDeCot_BaoCao.Merge();
                     row2_TieuDeCot_BaoCao.Value2 = "Mã số cũ";
-                    row2_TieuDeCot_BaoCao.ColumnWidth = 30;
+                    row2_TieuDeCot_BaoCao.ColumnWidth = 0;
 
 
                     Microsoft.Office.Interop.Excel.Range row_TieuDe_Format = oSheet.Range[oSheet.Cells[oRow, 1], oSheet.Cells[oRow + 1, lastColumn]];
@@ -2967,7 +3032,7 @@ namespace Vs.TimeAttendance
                     for (int colFormat = 5; colFormat <= lastColumn - 5; colFormat++) // format từ cột t
                     {
                         formatRange = oSheet.Range[oSheet.Cells[rowBD, colFormat], oSheet.Cells[oRow, colFormat]];
-                        formatRange.NumberFormat = "0.00;-0;;@";
+                        formatRange.NumberFormat = "0.0;-0;;@";
                         try
                         {
                             formatRange.TextToColumns(Type.Missing, Microsoft.Office.Interop.Excel.XlTextParsingType.xlDelimited, Microsoft.Office.Interop.Excel.XlTextQualifier.xlTextQualifierDoubleQuote);
@@ -3000,6 +3065,18 @@ namespace Vs.TimeAttendance
                 formatRange2.Font.Name = fontName;
                 formatRange2.Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
                 formatRange2.Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+
+                oSheet.PageSetup.FitToPagesWide = 1;
+                oSheet.PageSetup.FitToPagesTall = false;
+                oSheet.PageSetup.Zoom = false;
+                oSheet.PageSetup.PaperSize = Excel.XlPaperSize.xlPaperA4;
+                oSheet.PageSetup.LeftMargin = oApp.InchesToPoints(0.25);
+                oSheet.PageSetup.RightMargin = oApp.InchesToPoints(0.25);
+                oSheet.PageSetup.TopMargin = oApp.InchesToPoints(0.25);
+                oSheet.PageSetup.BottomMargin = oApp.InchesToPoints(0.25);
+                oSheet.PageSetup.HeaderMargin = oApp.InchesToPoints(0.3);
+                oSheet.PageSetup.FooterMargin = oApp.InchesToPoints(0.3);
+                oSheet.PageSetup.Orientation = Excel.XlPageOrientation.xlLandscape;
 
                 this.Cursor = Cursors.Default;
                 oBook.Sheets[1].Activate();

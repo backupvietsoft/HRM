@@ -63,6 +63,7 @@ namespace VietSoftHRM
                 //Application.Run(new frmMain());
 
                 Application.Run(new frmLogin());
+                //Application.Run(new frmNotification());
                 //Application.Run(new XtraForm1());
                 //Application.Run(new frmThongTinChung(1));
                 //Application.Run(new frmImportHinhCN(1));

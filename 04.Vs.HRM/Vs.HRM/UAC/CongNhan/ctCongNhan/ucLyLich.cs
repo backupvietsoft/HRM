@@ -322,9 +322,11 @@ namespace Vs.HRM
                 {
                     case "them":
                         {
+                            Commons.Modules.sLoad = "0Load";
                             cothem = true;
                             idcn = -1;
                             BinDingData(true);
+                            Commons.Modules.sLoad = "";
                             enableButon(false);
                             LoadgrdBangCap();
                             LoadgrdTaiLieu();
@@ -1529,8 +1531,11 @@ namespace Vs.HRM
                     }
                 case "TG":
                     {
-                        MS_CNTextEdit.Text = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.AUTO_CREATE_MS_CN(" + ID_DVLookUpEdit.EditValue + ",1)").ToString();
-                        MS_THE_CCTextEdit.Text = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.AUTO_CREATE_MS_CN(" + ID_DVLookUpEdit.EditValue + ",2)").ToString();
+                        if (Commons.Modules.iCongNhan == -1 || idcn == -1)
+                        {
+                            MS_CNTextEdit.Text = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.AUTO_CREATE_MS_CN(" + ID_DVLookUpEdit.EditValue + ",1)").ToString();
+                            MS_THE_CCTextEdit.Text = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.AUTO_CREATE_MS_CN(" + ID_DVLookUpEdit.EditValue + ",2)").ToString();
+                        }
                         break;
                     }
 
@@ -1930,6 +1935,28 @@ namespace Vs.HRM
         {
             if (Commons.Modules.sLoad == "0Load") return;
             NGAY_HOC_VIECDateEdit.EditValue = NGAY_VAO_LAMDateEdit.EditValue;
+        }
+
+        private void cboMS_CN_CU_EditValueChanged(object sender, EventArgs e)
+        {
+            if (Commons.Modules.sLoad == "0Load") return;
+            Commons.Modules.sLoad = "0Load";
+            try
+            {
+                if (idcn == -1)
+                {
+                    string sSQL = "SELECT SO_TAI_KHOAN, MS_THUE FROM dbo.CONG_NHAN WHERE ID_CN = " + (Convert.ToString(cboMS_CN_CU.EditValue) == "" ? -1 : cboMS_CN_CU.EditValue);
+                    DataTable dtData = new DataTable();
+                    dtData.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSQL));
+                    SO_TAI_KHOANTextEdit.EditValue = dtData.Rows[0]["SO_TAI_KHOAN"];
+                    MS_THUETextEdit.EditValue = dtData.Rows[0]["MS_THUE"];
+                }
+            }
+            catch (Exception ex)
+            {
+                Commons.Modules.ObjSystems.MsgError(ex.Message);
+            }
+            Commons.Modules.sLoad = "";
         }
     }
 }

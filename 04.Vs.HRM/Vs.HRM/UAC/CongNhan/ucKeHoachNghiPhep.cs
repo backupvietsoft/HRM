@@ -72,7 +72,8 @@ namespace Vs.HRM
                 Commons.OSystems.SetDateEditFormat(datDNgay);
                 Commons.OSystems.SetDateEditFormat(datNVao);
             }
-            catch(Exception ex) {
+            catch (Exception ex)
+            {
                 Commons.Modules.ObjSystems.MsgError(ex.Message);
             }
         }
@@ -113,14 +114,14 @@ namespace Vs.HRM
             try
             {
                 DataTable dt = new DataTable();
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboLDV", Commons.Modules.UserName, Commons.Modules.TypeLanguage, 0, -1));
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboLDV", Commons.Modules.UserName, Commons.Modules.TypeLanguage, 0, -1, "-1"));
                 Commons.Modules.ObjSystems.MLoadLookUpEdit(cboLDV, dt, "ID_LDV", "TEN_LDV", "TEN_LDV");
 
                 Commons.Modules.sPrivate = "0LOAD";
             }
             catch (Exception ex)
             {
-                Commons.Modules.ObjSystems.MsgWarning(ex.Message);  
+                Commons.Modules.ObjSystems.MsgWarning(ex.Message);
             }
         }
         private void LoadGrdCongNhan(bool cochon)
@@ -208,7 +209,7 @@ namespace Vs.HRM
 
                 cboLDVGrv = new RepositoryItemLookUpEdit();
                 dtCboLDV = new DataTable();
-                dtCboLDV = Commons.Modules.ObjSystems.DataLyDoVang(false, -1,"-1");
+                dtCboLDV = Commons.Modules.ObjSystems.DataLyDoVang(false, -1, "-1");
                 //dtMQL.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT DISTINCT T1.ID_CD, T1.MaQL, T1.TEN_CD_QT AS TEN_CD FROM QUI_TRINH_CONG_NGHE_CHI_TIET T1 LEFT JOIN PHIEU_CONG_DOAN T2 ON T1.ID_CD = T2.ID_CD"));
                 cboLDVGrv.NullText = "";
                 cboLDVGrv.ValueMember = "ID_LDV";
@@ -391,7 +392,7 @@ namespace Vs.HRM
             {
                 Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, "tabKHNP" + Commons.Modules.iIDUser, Commons.Modules.ObjSystems.ConvertDatatable(grdKHNP), "");
                 DataTable dt = new DataTable();
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spUpdateKHNP", "tabKHNP" + Commons.Modules.iIDUser));
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spUpdateKHNP", Commons.Modules.UserName, "tabKHNP" + Commons.Modules.iIDUser));
                 //SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spUpdateKHNP", "tabKHNP" + Commons.Modules.iIDUser);
                 if (dt.Rows[0][0].ToString() == "-99")
                 {
@@ -493,7 +494,9 @@ namespace Vs.HRM
                 {
                     try
                     {
-                        string sSql = "DELETE dbo.KE_HOACH_NGHI_PHEP WHERE ID_CN = " + +Convert.ToInt64(item["ID_CN"]) + " AND ID_LDV = " + cboLDV.EditValue + " AND CONVERT(DATE,TU_NGAY) = '" + datTNgay.DateTime.ToString("MM/dd/yyyy") + "' AND CONVERT(DATE,DEN_NGAY) ='" + datDNgay.DateTime.ToString("MM/dd/yyyy") + "'";
+                        string sSql = "UPDATE dbo.KE_HOACH_NGHI_PHEP SET USER_DEL = '" + Commons.Modules.UserName + "' WHERE ID_CN = " + +Convert.ToInt64(item["ID_CN"]) + " AND ID_LDV = " + cboLDV.EditValue + " AND CONVERT(DATE,TU_NGAY) = '" + datTNgay.DateTime.ToString("MM/dd/yyyy") + "' AND CONVERT(DATE,DEN_NGAY) ='" + datDNgay.DateTime.ToString("MM/dd/yyyy") + "'";
+
+                        sSql = "DELETE dbo.KE_HOACH_NGHI_PHEP WHERE ID_CN = " + +Convert.ToInt64(item["ID_CN"]) + " AND ID_LDV = " + cboLDV.EditValue + " AND CONVERT(DATE,TU_NGAY) = '" + datTNgay.DateTime.ToString("MM/dd/yyyy") + "' AND CONVERT(DATE,DEN_NGAY) ='" + datDNgay.DateTime.ToString("MM/dd/yyyy") + "'";
                         SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, sSql);
                     }
                     catch
@@ -738,6 +741,8 @@ namespace Vs.HRM
             if (grvKHNP.RowCount == 0) return;
             try
             {
+                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "UPDATE dbo.KE_HOACH_NGHI_PHEP SET USER_DEL = '" + Commons.Modules.UserName + "' WHERE ID_KHNP  = " + grvKHNP.GetFocusedRowCellValue("ID_KHNP") + "");
+
                 SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "DELETE dbo.KE_HOACH_NGHI_PHEP WHERE ID_KHNP  = " + grvKHNP.GetFocusedRowCellValue("ID_KHNP") + "");
                 grvKHNP.DeleteSelectedRows();
             }
@@ -947,7 +952,10 @@ namespace Vs.HRM
                         toDate = fromDate;
                         bChanKiemTT = true;
                         view.SetRowCellValue(e.RowHandle, view.Columns["DEN_NGAY"], fromDate);
-                        view.SetRowCellValue(e.RowHandle, view.Columns["NGAY_VAO_LAM_LAI"], Convert.ToDateTime(view.GetRowCellValue(e.RowHandle, view.Columns["DEN_NGAY"])).AddDays(TinhNgayVaoLam(Convert.ToDateTime(view.GetRowCellValue(e.RowHandle, view.Columns["DEN_NGAY"])))));
+                        if (Commons.Modules.KyHieuDV != "NB")
+                        {
+                            view.SetRowCellValue(e.RowHandle, view.Columns["NGAY_VAO_LAM_LAI"], Convert.ToDateTime(view.GetRowCellValue(e.RowHandle, view.Columns["DEN_NGAY"])).AddDays(TinhNgayVaoLam(Convert.ToDateTime(view.GetRowCellValue(e.RowHandle, view.Columns["DEN_NGAY"])))));
+                        }
                         bChanKiemTT = false;
                     }
                     if (fromDate != null && toDate != null)
@@ -969,7 +977,7 @@ namespace Vs.HRM
                         {
                             if (dt.Value.DayOfWeek.ToString() == "Sunday" || dt.Value.DayOfWeek.ToString() == "Saturday")
                             {
-                                if(Commons.Modules.ObjSystems.MsgQuestion(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgNgayBanConNamTrongThu7ChuNhatBanCoMuonTiepTuc")) == 0)
+                                if (Commons.Modules.ObjSystems.MsgQuestion(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgNgayBanConNamTrongThu7ChuNhatBanCoMuonTiepTuc")) == 0)
                                 {
                                     view.SetRowCellValue(e.RowHandle, view.Columns["SO_GIO"], 0);
                                     view.SetRowCellValue(e.RowHandle, view.Columns["NGAY_VAO_LAM_LAI"], null);
@@ -987,7 +995,10 @@ namespace Vs.HRM
                     {
                         double SoGio = Commons.Modules.ObjSystems.TinhSoNgayTruLeChuNhat(Convert.ToDateTime(fromDate), Convert.ToDateTime(toDate)) * Commons.Modules.iGio;
                         view.SetRowCellValue(e.RowHandle, view.Columns["SO_GIO"], SoGio);
-                        view.SetRowCellValue(e.RowHandle, view.Columns["NGAY_VAO_LAM_LAI"], Convert.ToDateTime(view.GetRowCellValue(e.RowHandle, view.Columns["DEN_NGAY"])).AddDays(TinhNgayVaoLam(Convert.ToDateTime(view.GetRowCellValue(e.RowHandle, view.Columns["DEN_NGAY"])))));
+                        if (Commons.Modules.KyHieuDV != "NB")
+                        {
+                            view.SetRowCellValue(e.RowHandle, view.Columns["NGAY_VAO_LAM_LAI"], Convert.ToDateTime(view.GetRowCellValue(e.RowHandle, view.Columns["DEN_NGAY"])).AddDays(TinhNgayVaoLam(Convert.ToDateTime(view.GetRowCellValue(e.RowHandle, view.Columns["DEN_NGAY"])))));
+                        }
                     }
                     grvKHNP.UpdateCurrentRow();
                 }
@@ -1151,6 +1162,7 @@ namespace Vs.HRM
         }
         private int kiemTrung()
         {
+            this.Cursor = Cursors.WaitCursor;
             string btKHNP = "TMPPRORUN" + Commons.Modules.UserName;
             try
             {
@@ -1175,9 +1187,11 @@ namespace Vs.HRM
                         cmd.Parameters.Add("@TuNgay", SqlDbType.DateTime).Value = dt.Rows[i]["TU_NGAY"];
                         cmd.Parameters.Add("@DenNgay", SqlDbType.DateTime).Value = dt.Rows[i]["DEN_NGAY"];
                         cmd.Parameters.Add("@ID_CN", SqlDbType.BigInt).Value = Convert.ToInt64(grvDSCN.GetFocusedRowCellValue("ID_CN"));
+                        cmd.Parameters.Add("@ID_KHNP", SqlDbType.BigInt).Value = dt.Rows[i]["ID_KHNP"];
                         cmd.CommandType = CommandType.StoredProcedure;
                         System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
                         adp.Fill(ds);
+                        conn.Close();
                         DataTable dt1 = new DataTable();
                         dt1 = ds.Tables[0].Copy();
                         if (Convert.ToInt32(dt1.Rows[0][0]) > 1)
@@ -1201,6 +1215,11 @@ namespace Vs.HRM
             catch
             {
                 return -1;
+            }
+            finally
+            {
+                Commons.Modules.ObjSystems.XoaTable(btKHNP);
+                this.Cursor = Cursors.Default;
             }
         }
 

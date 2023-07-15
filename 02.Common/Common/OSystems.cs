@@ -570,6 +570,7 @@ namespace Commons
                     catch (Exception ex)
                     {
                         WriteLog(file.Name + " - " + ex.Message); // nếu sai sẽ in ra lỗi của câu store
+                        file.Delete(); // báo lỗi thì xóa file luôn 
                         status = false;
                     }
                 }

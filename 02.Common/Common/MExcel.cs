@@ -771,8 +771,8 @@ public class MExcel
             CurCell.Borders.LineStyle = 0;
             CurCell.Value2 = Commons.Modules.ObjLanguages.GetLanguage("frmChung", "diachi") + " : " + dtTmp.Rows[0]["DIA_CHI"].ToString();
 
-            DongBD += 1;
-            DongKT += 1;
+            DongBD += 2;
+            DongKT += 2;
             CurCell = MWsheet.Range[MWsheet.Cells[DongBD, "A"], MWsheet.Cells[DongKT, "A"]];
             CurCell.EntireRow.Insert(Microsoft.Office.Interop.Excel.XlInsertShiftDirection.xlShiftDown);
             CurCell = MWsheet.Range[MWsheet.Cells[DongBD, CotBD], MWsheet.Cells[DongKT, CotKT]];
@@ -809,7 +809,7 @@ public class MExcel
                 logoWidth = 110;
             if (logoHeight == 0)
                 logoHeight = 45;
-            excelImage = ws.Drawings.AddPicture(Commons.Modules.sPrivate, img);
+            excelImage = ws.Drawings.AddPicture(Commons.Modules.KyHieuDV, img);
             excelImage.From.Column = CotBD;
             excelImage.From.Row = DongBD;
             excelImage.SetSize(logoWidth, logoHeight);
@@ -947,6 +947,30 @@ public class MExcel
             DevExpress.XtraEditors.XtraMessageBox.Show(ex.Message);
         }
     }
+
+
+    public void MTTChung(ExcelWorksheet ws ,int DongBD, int CotBD, int logoWidth, int logoHeight)
+    {
+        System.Data.DataTable dtTmp = new System.Data.DataTable();
+        string sSql = "";
+        if (dtTmp.Rows.Count == 0)
+        {
+            sSql = " SELECT CASE WHEN " + Commons.Modules.TypeLanguage + "=0 " +
+                    " THEN TEN_CTY ELSE TEN_CTY_A END AS TEN_CTY,LOGO,LG_HEIGHT,LG_WITH , " +
+                    " CASE WHEN " + Commons.Modules.TypeLanguage + "=0 THEN DIA_CHI  ELSE DIA_CHI_A  END AS DIA_CHI,DIEN_THOAI," +
+                    " Fax FROM THONG_TIN_CHUNG ";
+            dtTmp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, System.Data.CommandType.Text, sSql));
+        }
+
+        AddImage(ws, 0, 0, Convert.ToInt32(dtTmp.Rows[0]["LG_WITH"]), Convert.ToInt32(dtTmp.Rows[0]["LG_HEIGHT"]), dtTmp, "LOGO");
+
+        ws.Cells["C1"].Value = dtTmp.Rows[0]["TEN_CTY"].ToString();
+        ws.Cells["C2"].Value = Commons.Modules.ObjLanguages.GetLanguage(Commons.Modules.ModuleName, "frmReportBaoTri_Huda", "diachi", Commons.Modules.TypeLanguage) + " : " + dtTmp.Rows[0]["DIA_CHI"].ToString();
+
+        ws.Cells["C3"].Value = ((Commons.Modules.ObjLanguages.GetLanguage(Commons.Modules.ModuleName, "frmReportBaoTri_Huda", "dienthoai", Commons.Modules.TypeLanguage) + " : ") + dtTmp.Rows[0]["DIEN_THOAI"] + "  " + Commons.Modules.ObjLanguages.GetLanguage(Commons.Modules.ModuleName, "frmReportBaoTri_Huda", "fax", Commons.Modules.TypeLanguage) + " : ") + dtTmp.Rows[0]["FAX"];
+
+    }
+
 
     public void MFormatExcel(ExcelWorksheet ws, DataTable dtData, int iRow, string sBC, List<List<Object>> WidthColumns, bool mNNgu = true, bool mAutoFitColumns = true, bool mWrapText = true)
     {
@@ -1371,6 +1395,9 @@ public class MExcel
 
     public void MText(ExcelWorksheet ws, string sBC, string sKeyWord, int DongBD, int CotBD, int DongKT, int CotKT, bool mMerge, bool mBold, float mSize, OfficeOpenXml.Style.ExcelHorizontalAlignment mHorAli, OfficeOpenXml.Style.ExcelVerticalAlignment mVerAli)
     {
+
+        
+
         var allCells = ws.Cells[DongBD, CotBD, DongKT, CotKT];
         allCells.Merge = mMerge;
         allCells.Style.Font.Bold = mBold;
@@ -2347,7 +2374,8 @@ public class MExcel
         catch { }
     }
 
-
+   
+    
     #endregion
 
 }

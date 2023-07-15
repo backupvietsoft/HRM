@@ -11,13 +11,9 @@ namespace Vs.Payroll
     public partial class rptLuongChuyenKhoan_TG : DevExpress.XtraReports.UI.XtraReport
     {
         string sNgay = "";
-        public rptLuongChuyenKhoan_TG(DateTime ngayin,string sTinh,int iIDDV)
+        public rptLuongChuyenKhoan_TG(DateTime ngayin,string sTinh)
         {
-
             InitializeComponent();
-
-            DataTable dt = Commons.Modules.ObjSystems.DataReportHeader(iIDDV);
-
             string NgayBC = "0" + ngayin.Day;
             string ThangBC = "0" + ngayin.Month;
             string NamBC = "00" + ngayin.Year;

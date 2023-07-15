@@ -195,7 +195,7 @@ namespace Vs.HRM
                         Convert.ToString(PC_KY_NANGTextEdit.EditValue) == "" ? 0 : PC_KY_NANGTextEdit.EditValue,
                         Convert.ToString(PC_SINH_HOATTextEdit.EditValue) == "" ? 0 : PC_SINH_HOATTextEdit.EditValue,
                         Convert.ToString(PC_CON_NHOTextEdit.EditValue) == "" ? 0 : PC_CON_NHOTextEdit.EditValue, cboTinhTrang.EditValue, txtTaiLieu.EditValue,
-                         cothem));
+                         cothem, Commons.Modules.UserName));
                 LoadgrdTienLuong(n);
             }
             catch (Exception ex)
@@ -239,6 +239,7 @@ namespace Vs.HRM
             //xóa
             try
             {
+                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "UPDATE dbo.LUONG_CO_BAN SET USER_DEL = '"+Commons.Modules.UserName+"' WHERE ID_LCB = " + grvTienLuong.GetFocusedRowCellValue("ID_LCB") + "");
                 SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "DELETE dbo.LUONG_CO_BAN WHERE ID_LCB = " + grvTienLuong.GetFocusedRowCellValue("ID_LCB") + "");
                 grvTienLuong.DeleteSelectedRows();
                 Bindingdata(false);
@@ -438,8 +439,11 @@ namespace Vs.HRM
 
             Commons.Modules.sLoad = "0Load";
             Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(NGACH_LUONGLookUpEdit, Commons.Modules.ObjSystems.DataNgachLuong(false), "ID_NL", "TEN_NL", "TEN_NL", true);
+            
+            DataTable dtBL = new DataTable();
+            dtBL.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT T1.ID_BL, T1.TEN_BL, T1.MUC_LUONG FROM BAC_LUONG T1"));
+            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(BAC_LUONGLookUpEdit, dtBL, "ID_BL", "TEN_BL", "TEN_BL", true);
 
-            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(BAC_LUONGLookUpEdit, Commons.Modules.ObjSystems.DataBacLuong(-1, -1, DateTime.Today, false), "ID_BL", "TEN_BL", "TEN_BL", true);
             Commons.Modules.ObjSystems.MLoadLookUpEdit(cboTinhTrang, Commons.Modules.ObjSystems.DataTinhTrang(false), "ID_TT", "TenTT", "TenTT");
             enableButon(true);
             Commons.Modules.ObjSystems.SetPhanQuyen(windowsUIButton);

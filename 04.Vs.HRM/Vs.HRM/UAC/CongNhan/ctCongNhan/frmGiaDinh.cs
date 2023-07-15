@@ -51,13 +51,19 @@ namespace Vs.HRM
             Commons.Modules.ObjSystems.MLoadLookUpEdit(cboQH_CH, Commons.Modules.ObjSystems.DataQHGD(false), "ID_QH", "TEN_QH", "TEN_QH");
 
             //ID_TPLookUpEdit 
-            Commons.Modules.ObjSystems.MLoadLookUpEditN(cboID_TP, Commons.Modules.ObjSystems.DataThanhPho(Convert.ToInt32(-1), false), "ID_TP", "TEN_TP", "TEN_TP", "");
+            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_TP, Commons.Modules.ObjSystems.DataThanhPho(Convert.ToInt32(-1), false), "ID_TP", "TEN_TP", "TEN_TP", true, true);
 
             //ID_QUANLookEdit
-            Commons.Modules.ObjSystems.MLoadLookUpEditN(cboID_QUAN, Commons.Modules.ObjSystems.DataQuan(Convert.ToInt32(-1), false), "ID_QUAN", "TEN_QUAN", "TEN_QUAN", "");
+            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_QUAN, Commons.Modules.ObjSystems.DataQuan(Convert.ToInt32(-1), false), "ID_QUAN", "TEN_QUAN", "TEN_QUAN", true, true);
 
             //ID_PXLookUpEdit
-            Commons.Modules.ObjSystems.MLoadLookUpEditN(cboID_PX, Commons.Modules.ObjSystems.DataPhuongXa(Convert.ToInt32(-1), false), "ID_PX", "TEN_PX", "TEN_PX", "");
+            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_PX, Commons.Modules.ObjSystems.DataPhuongXa(Convert.ToInt32(-1), false), "ID_PX", "TEN_PX", "TEN_PX", true, true);
+
+            string strLHN = "SELECT ID_LHN,TEN_LHN FROM dbo.LOAI_HO_NGHEO \r\nUNION \r\nSELECT -1,''";
+            DataTable dt = new DataTable();
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, strLHN));
+            Commons.Modules.ObjSystems.MLoadLookUpEditN(cboID_LHN, dt, "ID_LHN", "TEN_LHN", "TEN_LHN", "");
+
             LoadTT_CH();
             LoadgrdGiaDinh(-1);
             enableButon(true);
@@ -165,8 +171,6 @@ namespace Vs.HRM
         {
             try
             {
-
-
                 DataTable dt = new DataTable();
                 dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetListGiaDinh", Commons.Modules.iCongNhan, Commons.Modules.UserName, Commons.Modules.TypeLanguage));
                 dt.PrimaryKey = new DataColumn[] { dt.Columns["ID_GD"] };
@@ -241,7 +245,7 @@ namespace Vs.HRM
                     txt_GHI_CHU.EditValue = "";
                     cboGIOI_TINH.EditValue = 0;
                     chkCungCongTy.Checked = false;
-                    txtCN.EditValue = string.Empty;
+                    txtCN.EditValue = "";
 
 
                     txtMS_HGD.EditValue = string.Empty;
@@ -249,7 +253,7 @@ namespace Vs.HRM
                     txtSO_HO_KHAU.EditValue = string.Empty;
                     txtDT_LIEN_HE.EditValue = string.Empty;
                     chkChuHo.Checked = false;
-                    chkHoNgheo.Checked = false;
+                    cboID_LHN.EditValue = -1;
                     cboID_TP.EditValue = null;
                     cboID_QUAN.EditValue = null;
                     cboID_PX.EditValue = null;
@@ -288,13 +292,18 @@ namespace Vs.HRM
                     txtSO_HO_KHAU.EditValue = Convert.ToString(grvGiaDinh.GetFocusedRowCellValue("SO_HO_KHAU"));
                     txtDT_LIEN_HE.EditValue = Convert.ToString(grvGiaDinh.GetFocusedRowCellValue("DT_LIEN_HE"));
                     chkChuHo.EditValue = Convert.ToString(grvGiaDinh.GetFocusedRowCellValue("CHU_HO")) == "" ? false : Convert.ToBoolean(grvGiaDinh.GetFocusedRowCellValue("CHU_HO"));
-                    chkHoNgheo.EditValue = Convert.ToString(grvGiaDinh.GetFocusedRowCellValue("HO_NGHEO")) == "" ? false : Convert.ToBoolean(grvGiaDinh.GetFocusedRowCellValue("HO_NGHEO"));
+                    cboID_LHN.EditValue = Convert.ToString(grvGiaDinh.GetFocusedRowCellValue("HO_NGHEO")) == "" ? false : Convert.ToBoolean(grvGiaDinh.GetFocusedRowCellValue("HO_NGHEO"));
                     cboID_TP.EditValue = Convert.ToString(grvGiaDinh.GetFocusedRowCellValue("ID_TP_CH")) == "" ? (object)null : Convert.ToInt64(grvGiaDinh.GetFocusedRowCellValue("ID_TP_CH"));
                     cboID_QUAN.EditValue = Convert.ToString(grvGiaDinh.GetFocusedRowCellValue("ID_QUAN_CH")) == "" ? (object)null : Convert.ToInt64(grvGiaDinh.GetFocusedRowCellValue("ID_QUAN_CH"));
                     cboID_PX.EditValue = Convert.ToString(grvGiaDinh.GetFocusedRowCellValue("ID_PX_CH")) == "" ? (object)null : Convert.ToInt64(grvGiaDinh.GetFocusedRowCellValue("ID_PX_CH"));
                     txtTHON_XOM.EditValue = Convert.ToString(grvGiaDinh.GetFocusedRowCellValue("THON_XOM_CH"));
                     txtDIA_CHI_HK.EditValue = Convert.ToString(grvGiaDinh.GetFocusedRowCellValue("DIA_CHI_HK"));
                     chkCheDoConNho.EditValue = Convert.ToBoolean(grvGiaDinh.GetFocusedRowCellValue("CD_CON_NHO"));
+
+                    chkCungCongTy.EditValue = Convert.ToString(grvGiaDinh.GetFocusedRowCellValue("CUNG_CONG_TY")) == "" ? false : Convert.ToBoolean(grvGiaDinh.GetFocusedRowCellValue("CUNG_CONG_TY"));
+
+                    txtCN.EditValue = Convert.ToString(grvGiaDinh.GetFocusedRowCellValue("MS_CN"));
+
                 }
                 catch { }
             }
@@ -319,6 +328,7 @@ namespace Vs.HRM
             cboID_TP.Properties.ReadOnly = visible;
             cboID_QUAN.Properties.ReadOnly = visible;
             cboID_PX.Properties.ReadOnly = visible;
+            cboID_LHN.Properties.ReadOnly = visible;
             txtTHON_XOM.Properties.ReadOnly = visible;
             chkChuHo.Properties.ReadOnly = visible;
             chkChuHo.Properties.ReadOnly = visible;
@@ -379,7 +389,7 @@ namespace Vs.HRM
             cboGIOI_TINH.EditValue,
             flag_CH,
             flag_NT,
-            cothem, chkChuHo.EditValue, chkHoNgheo.EditValue, chkCungCongTy.EditValue, datNGAY_DK.EditValue, chkCheDoConNho.EditValue
+            cothem, chkChuHo.EditValue, cboID_LHN.EditValue, chkCungCongTy.EditValue, datNGAY_DK.EditValue, chkCheDoConNho.EditValue
                 ));
                 LoadgrdGiaDinh(n);
             }
@@ -456,7 +466,7 @@ namespace Vs.HRM
                 cboID_PX.EditValue = Convert.ToString(dt.Rows[0]["ID_PX"]) == "" ? (object)null : Convert.ToInt64(dt.Rows[0]["ID_PX"]);
                 txtTHON_XOM.EditValue = dt.Rows[0]["THON_XOM"].ToString();
                 chkChuHo.EditValue = dt.Rows[0]["CHU_HO"];
-                chkHoNgheo.EditValue = dt.Rows[0]["HO_NGHEO"];
+                cboID_LHN.EditValue = Convert.ToString(dt.Rows[0]["TEN_LHN"]) == "" ? (object)null : Convert.ToInt64(dt.Rows[0]["TEN_LHN"]);
             }
             catch (Exception EX) { }
         }
@@ -465,14 +475,14 @@ namespace Vs.HRM
         {
             if (Commons.Modules.sLoad == "0Load") return;
             if (cboID_TP.EditValue == null || cboID_TP.EditValue.ToString() == "") return;
-            Commons.Modules.ObjSystems.MLoadLookUpEdit(cboID_QUAN, Commons.Modules.ObjSystems.DataQuan(Convert.ToInt32(cboID_TP.EditValue), false), "ID_QUAN", "TEN_QUAN", "TEN_QUAN", true);
+            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_QUAN, Commons.Modules.ObjSystems.DataQuan(Convert.ToInt32(cboID_TP.EditValue), false), "ID_QUAN", "TEN_QUAN", "TEN_QUAN", true, true);
         }
 
         private void cboID_QUAN_EditValueChanged(object sender, EventArgs e)
         {
             if (Commons.Modules.sLoad == "0Load") return;
             if (cboID_QUAN.EditValue == null || cboID_QUAN.EditValue.ToString() == "") return;
-            Commons.Modules.ObjSystems.MLoadLookUpEdit(cboID_PX, Commons.Modules.ObjSystems.DataPhuongXa(Convert.ToInt32(cboID_QUAN.EditValue), false), "ID_PX", "TEN_PX", "TEN_PX", true);
+            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_PX, Commons.Modules.ObjSystems.DataPhuongXa(Convert.ToInt32(cboID_QUAN.EditValue), false), "ID_PX", "TEN_PX", "TEN_PX", true, true);
         }
 
         private void chkChuHo_CheckedChanged(object sender, EventArgs e)
@@ -503,7 +513,7 @@ namespace Vs.HRM
                 dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, strSQL));
                 HO_TENTextEdit.Text = Convert.ToString(dt.Rows[0]["HO_TEN"]);
                 NGAY_SINHDateEdit.DateTime = Convert.ToDateTime(dt.Rows[0]["NGAY_SINH"]);
-                datNGAY_DK.DateTime = Convert.ToDateTime(dt.Rows[0]["NGAY_DK"]);
+                txtCMND.Text = Convert.ToString(dt.Rows[0]["SO_CMND"]);
                 txtMS_BHXH.Text = Convert.ToString(dt.Rows[0]["SO_BHXH"]);
                 cboGIOI_TINH.EditValue = Convert.ToInt32(dt.Rows[0]["PHAI"]);
                 DIA_CHITextEdit.Text = Convert.ToString(dt.Rows[0]["DIA_CHI_THUONG_TRU"]);

@@ -43,7 +43,10 @@ namespace Vs.HRM
                 Commons.Modules.ObjSystems.MLoadLookUpEdit(NGUOI_KY_GIA_HANLookUpEdit, Commons.Modules.ObjSystems.DataNguoiKy(), "ID_NK", "HO_TEN", "HO_TEN");
                 Commons.Modules.ObjSystems.MLoadLookUpEdit(cboTinhTrang, Commons.Modules.ObjSystems.DataTinhTrang(false), "ID_TT", "TenTT", "TenTT");
                 Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboNgachLuong, Commons.Modules.ObjSystems.DataNgachLuong(false), "ID_NL", "TEN_NL", "TEN_NL", true);
-                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboBAC_LUONG, Commons.Modules.ObjSystems.DataBacLuong(Convert.ToInt64(cboNgachLuong.EditValue), -1, DateTime.Today, false), "ID_BL", "TEN_BL", "TEN_BL", true);
+
+                DataTable dtBL = new DataTable();
+                dtBL.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT T1.ID_BL, T1.TEN_BL, T1.MUC_LUONG FROM BAC_LUONG T1"));
+                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboBAC_LUONG, dtBL, "ID_BL", "TEN_BL", "TEN_BL", true);
 
             }
             catch { }
@@ -352,7 +355,7 @@ namespace Vs.HRM
             try
             {
                 //SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "DELETE dbo.HOP_DONG_LAO_DONG WHERE ID_HDLD =" + grvHopDong.GetFocusedRowCellValue("ID_HDLD") + "");
-                SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spDeleteHopDong", grvHopDong.GetFocusedRowCellValue("ID_HDLD"), Commons.Modules.iCongNhan);
+                SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spDeleteHopDong", grvHopDong.GetFocusedRowCellValue("ID_HDLD"), Commons.Modules.iCongNhan, Commons.Modules.UserName);
                 grvHopDong.DeleteSelectedRows();
                 Bindingdata(false);
             }

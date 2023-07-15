@@ -335,7 +335,7 @@ namespace Vs.TimeAttendance
                 Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sbtKeHoachDiCa, (DataTable)grdKeHoachDiCa.DataSource, "");
                 Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sbtCongNhan, (DataTable)grdCongNhan.DataSource, "");
 
-                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "sPsaveKeHoachDiCa", dateNam.Text, sbtKeHoachDiCa, sbtCongNhan);
+                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "sPsaveKeHoachDiCa", Commons.Modules.UserName, dateNam.Text, sbtKeHoachDiCa, sbtCongNhan);
                 Commons.Modules.ObjSystems.XoaTable(sbtKeHoachDiCa);
                 Commons.Modules.ObjSystems.XoaTable(sbtCongNhan);
                 return true;
@@ -369,7 +369,10 @@ namespace Vs.TimeAttendance
             //xóa
             try
             {
-                string sSql = "DELETE dbo.KE_HOACH_DI_CA WHERE ID_CN = " + grvKeHoachDiCa.GetFocusedRowCellValue("ID_CN") + "  AND TU_NGAY = '" + Convert.ToDateTime(grvKeHoachDiCa.GetFocusedRowCellValue("TU_NGAY")).ToString("MM/dd/yyyy") + "' ";
+                string sSql = "UPDATE dbo.KE_HOACH_DI_CA SET USER_DEL = '" + Commons.Modules.UserName + "'  WHERE ID_CN = " + grvKeHoachDiCa.GetFocusedRowCellValue("ID_CN") + "  AND TU_NGAY = '" + Convert.ToDateTime(grvKeHoachDiCa.GetFocusedRowCellValue("TU_NGAY")).ToString("MM/dd/yyyy") + "' ";
+                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, sSql);
+
+                sSql = "DELETE dbo.KE_HOACH_DI_CA WHERE ID_CN = " + grvKeHoachDiCa.GetFocusedRowCellValue("ID_CN") + "  AND TU_NGAY = '" + Convert.ToDateTime(grvKeHoachDiCa.GetFocusedRowCellValue("TU_NGAY")).ToString("MM/dd/yyyy") + "' ";
                 SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, sSql);
                 grvKeHoachDiCa.DeleteSelectedRows();
             }
@@ -488,27 +491,27 @@ namespace Vs.TimeAttendance
             GridView view = sender as GridView;
             if (view == null) return;
 
-            if (view.FocusedColumn.Name == "colTU_NGAY")
-            {
-                if (Convert.ToDateTime(e.Value) > Convert.ToDateTime(view.GetFocusedRowCellValue("DEN_NGAY")))
-                {
-                    e.Valid = false;
-                    e.ErrorText = "This value is not valid";
-                    view.SetColumnError(view.Columns["DEN_NGAY"], e.ErrorText);
+            //if (view.FocusedColumn.Name == "colTU_NGAY")
+            //{
+            //    if (Convert.ToDateTime(e.Value) > Convert.ToDateTime(view.GetFocusedRowCellValue("DEN_NGAY")))
+            //    {
+            //        e.Valid = false;
+            //        e.ErrorText = "This value is not valid";
+            //        view.SetColumnError(view.Columns["DEN_NGAY"], e.ErrorText);
 
-                    return;
-                }
-            }
-            if (view.FocusedColumn.Name == "colDEN_NGAY")
-            {
-                if (Convert.ToDateTime(e.Value) < Convert.ToDateTime(view.GetFocusedRowCellValue("TU_NGAY")))
-                {
-                    e.Valid = false;
-                    e.ErrorText = "This value is not valid";
-                    view.SetColumnError(view.Columns["DEN_NGAY"], e.ErrorText);
-                    return;
-                }
-            }
+            //        return;
+            //    }
+            //}
+            //if (view.FocusedColumn.Name == "colDEN_NGAY")
+            //{
+            //    if (Convert.ToDateTime(e.Value) < Convert.ToDateTime(view.GetFocusedRowCellValue("TU_NGAY")))
+            //    {
+            //        e.Valid = false;
+            //        e.ErrorText = "This value is not valid";
+            //        view.SetColumnError(view.Columns["DEN_NGAY"], e.ErrorText);
+            //        return;
+            //    }
+            //}
             if (view.FocusedColumn.Name == "colCA")
             {
                 view.SetFocusedRowCellValue(view.Columns["CA"], e.Value);
@@ -532,8 +535,7 @@ namespace Vs.TimeAttendance
             {
 
                 GridView view = sender as GridView;
-                view.SetFocusedRowCellValue("TU_NGAY", Convert.ToDateTime(DateTime.Now.Date));
-                view.SetFocusedRowCellValue("DEN_NGAY", Convert.ToDateTime(DateTime.Now.Date));
+
             }
             catch
             {

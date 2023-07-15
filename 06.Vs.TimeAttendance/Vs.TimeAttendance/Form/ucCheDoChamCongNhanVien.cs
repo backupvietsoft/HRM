@@ -17,6 +17,7 @@ using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraEditors.Mask;
 using DevExpress.XtraLayout;
 using System.Globalization;
+using DevExpress.Utils.Menu;
 
 namespace Vs.TimeAttendance
 {
@@ -439,14 +440,16 @@ namespace Vs.TimeAttendance
             else
                 Commons.Modules.ObjSystems.MLoadXtraGrid(grdNgay, grvNgay, dt, false, false, true, false, false, this.Name);
 
-            if (dt.Rows.Count <= 0)
-            {
-                cboNgay.EditValue = DateTime.Today;
-            }
-            else
-            {
-                cboNgay.EditValue = Convert.ToDateTime(dt.Rows[0]["NGAY_AD"]);
-            }
+
+            cboNgay.EditValue = DateTime.Today;
+            //if (dt.Rows.Count <= 0)
+            //{
+            //    cboNgay.EditValue = DateTime.Today;
+            //}
+            //else
+            //{
+            //    cboNgay.EditValue = Convert.ToDateTime(dt.Rows[0]["NGAY_AD"]);
+            //}
         }
 
         private void calNgay_DateTimeCommit(object sender, EventArgs e)
@@ -533,6 +536,74 @@ namespace Vs.TimeAttendance
             {
                 XtraMessageBox.Show(ex.Message.ToString());
             }
+        }
+
+
+        #region chuot phải
+        class RowInfo
+        {
+            public RowInfo(DevExpress.XtraGrid.Views.Grid.GridView view, int rowHandle)
+            {
+                this.RowHandle = rowHandle;
+                this.View = view;
+            }
+            public DevExpress.XtraGrid.Views.Grid.GridView View;
+            public int RowHandle;
+        }
+        public DXMenuItem MCreateMenuCapNhatAll(DevExpress.XtraGrid.Views.Grid.GridView view, int rowHandle)
+        {
+            string sStr = Commons.Modules.ObjLanguages.GetLanguage(Commons.Modules.ModuleName, this.Name, "lblCapNhatAll", Commons.Modules.TypeLanguage);
+            DXMenuItem menuThongTinNS = new DXMenuItem(sStr, new EventHandler(CapNhatAll));
+            menuThongTinNS.Tag = new RowInfo(view, rowHandle);
+            return menuThongTinNS;
+        }
+        public void CapNhatAll(object sender, EventArgs e)
+        {
+            try
+            {
+                try
+                {
+
+                    DataTable dt = new DataTable();
+                    DataTable dt1 = new DataTable();
+                    string sCotCN = grvCDCCNV.FocusedColumn.FieldName;
+                    var data = grvCDCCNV.GetFocusedRowCellValue(sCotCN);
+
+                    dt1 = Commons.Modules.ObjSystems.GetDataTableMultiSelect(grdData, grvCDCCNV);
+                    dt = (DataTable)grdData.DataSource;
+
+                    dt.AsEnumerable().Where(row => dt1.AsEnumerable()
+                                                             .Select(r => r.Field<Int64>("ID_CN"))
+                                                             .Any(x => x == row.Field<Int64>("ID_CN"))
+                                                             ).ToList<DataRow>().ForEach(r => r[sCotCN] = (data));
+                   
+                    dt.AcceptChanges();
+
+                }
+                catch (Exception ex)
+                {
+                }
+            }
+            catch (Exception ex) { }
+        }
+
+        #endregion
+        private void grvCDCCNV_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
+        {
+            try
+            {
+                DevExpress.XtraGrid.Views.Grid.GridView view = sender as DevExpress.XtraGrid.Views.Grid.GridView;
+                if (e.MenuType == DevExpress.XtraGrid.Views.Grid.GridMenuType.Row)
+                {
+                    int irow = e.HitInfo.RowHandle;
+                    e.Menu.Items.Clear();
+                    if (btnALL.Buttons[0].Properties.Visible) return;
+                    DevExpress.Utils.Menu.DXMenuItem itemCapNhatAll = MCreateMenuCapNhatAll(view, irow);
+                    e.Menu.Items.Add(itemCapNhatAll);
+                    //if (flag == false) return;
+                }
+            }
+            catch { }
         }
     }
 }

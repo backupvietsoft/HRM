@@ -33,8 +33,8 @@
             DevExpress.XtraEditors.DXErrorProvider.CompareAgainstControlValidationRule compareAgainstControlValidationRule1 = new DevExpress.XtraEditors.DXErrorProvider.CompareAgainstControlValidationRule();
             DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions1 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
             DevExpress.XtraGrid.GridLevelNode gridLevelNode1 = new DevExpress.XtraGrid.GridLevelNode();
-            this.datTThang = new DevExpress.XtraEditors.DateEdit();
             this.datDThang = new DevExpress.XtraEditors.DateEdit();
+            this.datTThang = new DevExpress.XtraEditors.DateEdit();
             this.windowsUIButton = new DevExpress.XtraBars.Docking2010.WindowsUIButtonPanel();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.popupContainerControl2 = new DevExpress.XtraEditors.PopupContainerControl();
@@ -60,10 +60,11 @@
             this.searchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.dxValidationProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.datTThang.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.datTThang.Properties.CalendarTimeProperties)).BeginInit();
+            this.rdo_LocLaoDong = new DevExpress.XtraEditors.RadioGroup();
             ((System.ComponentModel.ISupportInitialize)(this.datDThang.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.datDThang.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.datTThang.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.datTThang.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.popupContainerControl2)).BeginInit();
@@ -87,32 +88,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rdo_LocLaoDong.Properties)).BeginInit();
             this.SuspendLayout();
-            // 
-            // datTThang
-            // 
-            this.Table.SetColumn(this.datTThang, 4);
-            this.datTThang.EditValue = null;
-            this.datTThang.Location = new System.Drawing.Point(491, 68);
-            this.datTThang.Name = "datTThang";
-            this.datTThang.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.datTThang.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.datTThang.Properties.DisplayFormat.FormatString = "MM/yyyy";
-            this.datTThang.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
-            this.datTThang.Properties.EditFormat.FormatString = "MM/yyyy";
-            this.datTThang.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
-            this.datTThang.Properties.Mask.EditMask = "MM/yyyy";
-            this.datTThang.Properties.VistaCalendarInitialViewStyle = DevExpress.XtraEditors.VistaCalendarInitialViewStyle.YearView;
-            this.datTThang.Properties.VistaCalendarViewStyle = DevExpress.XtraEditors.VistaCalendarViewStyle.YearView;
-            this.Table.SetRow(this.datTThang, 2);
-            this.datTThang.Size = new System.Drawing.Size(147, 24);
-            this.datTThang.TabIndex = 26;
-            compareAgainstControlValidationRule2.CompareControlOperator = DevExpress.XtraEditors.DXErrorProvider.CompareControlOperator.GreaterOrEqual;
-            compareAgainstControlValidationRule2.Control = this.datDThang;
-            compareAgainstControlValidationRule2.ErrorText = "This value is not valid";
-            this.dxValidationProvider1.SetValidationRule(this.datTThang, compareAgainstControlValidationRule2);
             // 
             // datDThang
             // 
@@ -136,10 +113,35 @@
             this.Table.SetRow(this.datDThang, 2);
             this.datDThang.Size = new System.Drawing.Size(145, 24);
             this.datDThang.TabIndex = 5;
-            compareAgainstControlValidationRule1.CompareControlOperator = DevExpress.XtraEditors.DXErrorProvider.CompareControlOperator.Less;
-            compareAgainstControlValidationRule1.Control = this.datTThang;
+            compareAgainstControlValidationRule2.CompareControlOperator = DevExpress.XtraEditors.DXErrorProvider.CompareControlOperator.Less;
+            compareAgainstControlValidationRule2.Control = this.datTThang;
+            compareAgainstControlValidationRule2.ErrorText = "This value is not valid";
+            this.dxValidationProvider1.SetValidationRule(this.datDThang, compareAgainstControlValidationRule2);
+            // 
+            // datTThang
+            // 
+            this.Table.SetColumn(this.datTThang, 4);
+            this.datTThang.EditValue = null;
+            this.datTThang.Location = new System.Drawing.Point(491, 68);
+            this.datTThang.Name = "datTThang";
+            this.datTThang.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.datTThang.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.datTThang.Properties.DisplayFormat.FormatString = "MM/yyyy";
+            this.datTThang.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.datTThang.Properties.EditFormat.FormatString = "MM/yyyy";
+            this.datTThang.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.datTThang.Properties.Mask.EditMask = "MM/yyyy";
+            this.datTThang.Properties.VistaCalendarInitialViewStyle = DevExpress.XtraEditors.VistaCalendarInitialViewStyle.YearView;
+            this.datTThang.Properties.VistaCalendarViewStyle = DevExpress.XtraEditors.VistaCalendarViewStyle.YearView;
+            this.Table.SetRow(this.datTThang, 2);
+            this.datTThang.Size = new System.Drawing.Size(147, 24);
+            this.datTThang.TabIndex = 26;
+            compareAgainstControlValidationRule1.CompareControlOperator = DevExpress.XtraEditors.DXErrorProvider.CompareControlOperator.GreaterOrEqual;
+            compareAgainstControlValidationRule1.Control = this.datDThang;
             compareAgainstControlValidationRule1.ErrorText = "This value is not valid";
-            this.dxValidationProvider1.SetValidationRule(this.datDThang, compareAgainstControlValidationRule1);
+            this.dxValidationProvider1.SetValidationRule(this.datTThang, compareAgainstControlValidationRule1);
             // 
             // windowsUIButton
             // 
@@ -254,6 +256,7 @@
             new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 25F),
             new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 25F),
             new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 28F)});
+            this.Table.Controls.Add(this.rdo_LocLaoDong);
             this.Table.Controls.Add(this.rdo_ChonNam);
             this.Table.Controls.Add(this.datNam);
             this.Table.Controls.Add(this.lblTuThang);
@@ -490,6 +493,21 @@
             this.gridView1.OptionsSelection.EnableAppearanceFocusedCell = false;
             this.gridView1.OptionsView.ShowGroupPanel = false;
             // 
+            // rdo_LocLaoDong
+            // 
+            this.Table.SetColumn(this.rdo_LocLaoDong, 1);
+            this.Table.SetColumnSpan(this.rdo_LocLaoDong, 2);
+            this.rdo_LocLaoDong.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rdo_LocLaoDong.Location = new System.Drawing.Point(31, 131);
+            this.rdo_LocLaoDong.Name = "rdo_LocLaoDong";
+            this.rdo_LocLaoDong.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] {
+            new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Tất cả", true, "rdo_TatCa"),
+            new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Đủ điều kiện", true, "rdo_DuDieuKien"),
+            new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Không đủ điều kiện", true, "rdo_KhongDuDieuKien")});
+            this.Table.SetRow(this.rdo_LocLaoDong, 4);
+            this.rdo_LocLaoDong.Size = new System.Drawing.Size(300, 26);
+            this.rdo_LocLaoDong.TabIndex = 40;
+            // 
             // ucBaoCaoTongHopNam
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -501,10 +519,10 @@
             this.Size = new System.Drawing.Size(987, 559);
             this.Tag = "ucBaoCaoTongHopNam";
             this.Load += new System.EventHandler(this.ucBaoCaoTongHopThang_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.datTThang.Properties.CalendarTimeProperties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.datTThang.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.datDThang.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.datDThang.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.datTThang.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.datTThang.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.popupContainerControl2)).EndInit();
@@ -530,6 +548,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rdo_LocLaoDong.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -563,5 +582,6 @@
         private DevExpress.XtraEditors.DateEdit datNam;
         private DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider dxValidationProvider1;
         private DevExpress.XtraEditors.RadioGroup rdo_ChonNam;
+        private DevExpress.XtraEditors.RadioGroup rdo_LocLaoDong;
     }
 }

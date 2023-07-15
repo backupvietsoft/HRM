@@ -1690,6 +1690,26 @@ namespace Vs.TimeAttendance
                         grvCongNhan_FocusedRowChanged(null, null);
                         break;
                     }
+                case "NB":
+                    {
+                        DataTable dtTmp = new DataTable();
+                        dtTmp = (DataTable)grdCongNhan.DataSource;
+                        //dtTmp = Commons.Modules.ObjSystems.ConvertDatatable(grvTo);
+                        String sMSCN;
+                        try
+                        {
+                            string sDK = "";
+                            sMSCN = "";
+                            sDK = "MS_CN = '" + Convert.ToInt32(srcTimKiem.EditValue) + "'";
+                            dtTmp.DefaultView.RowFilter = sDK;
+                        }
+                        catch (Exception ex)
+                        {
+                            dtTmp.DefaultView.RowFilter = "";
+                        }
+                        grvCongNhan_FocusedRowChanged(null, null);
+                        break;
+                    }
                 default:
                     {
                         break;

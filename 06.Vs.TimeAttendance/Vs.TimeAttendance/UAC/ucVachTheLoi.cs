@@ -30,6 +30,7 @@ namespace Vs.TimeAttendance
                 return _instance;
             }
         }
+        public Int64 ID_DV = -1;
         string sBT = "tabKeHoachDiCa" + Commons.Modules.ModuleName;
         public ucVachTheLoi()
         {
@@ -71,6 +72,7 @@ namespace Vs.TimeAttendance
 
                 if (Commons.Modules.bolLinkCC)
                 {
+                    cboDV.EditValue = ID_DV;
                     Commons.Modules.ObjSystems.MLoadLookUpEdit(cboMSCN, Commons.Modules.ObjSystems.ConvertDatatable(grdCongNhan), "ID_CN", "MS_CN", Commons.Modules.ObjLanguages.GetLanguage(this.Name, "MS_CN"));
                     enableButon(false);
                 }
@@ -182,7 +184,7 @@ namespace Vs.TimeAttendance
                         System.Data.SqlClient.SqlConnection conn;
                         dt = new DataTable();
                         //string sTieuDe = "DANH SÁCH NHÂN VIÊN CHƯA ĐỦ DỮ LIỆU";
-                        frm.rpt = new rptDSNVVachTheLoi(datNgayChamCong.DateTime, datNgayChamCong.DateTime, datNgayChamCong.DateTime,Convert.ToInt32(cboDV.EditValue));
+                        frm.rpt = new rptDSNVVachTheLoi(datNgayChamCong.DateTime, datNgayChamCong.DateTime, datNgayChamCong.DateTime, Convert.ToInt32(cboDV.EditValue));
 
                         try
                         {
@@ -775,6 +777,40 @@ namespace Vs.TimeAttendance
                 }
             }
             catch { }
+        }
+
+        private void searchControl1_EditValueChanged(object sender, EventArgs e)
+        {
+            switch (Commons.Modules.KyHieuDV)
+            {
+
+                case "NB":
+                    {
+                        DataTable dtTmp = new DataTable();
+                        dtTmp = (DataTable)grdCongNhan.DataSource;
+                        //dtTmp = Commons.Modules.ObjSystems.ConvertDatatable(grvTo);
+                        //String sMSCN;
+                        try
+                        {
+                            string sDK = "";
+                            //sMSCN = "";
+                            if (searchControl1.Text != "")
+                                sDK = "MS_CN = '" + searchControl1.Text + "' OR MS_THE_CC = '" + searchControl1.Text + "'";
+                            dtTmp.DefaultView.RowFilter = sDK;
+                        }
+                        catch (Exception ex)
+                        {
+                            dtTmp.DefaultView.RowFilter = "";
+                        }
+                        grvCongNhan_CellValueChanged(null, null);
+
+                        break;
+                    }
+                default:
+                    {
+                        break;
+                    }
+            }
         }
     }
 }

@@ -46,7 +46,9 @@ namespace Vs.Category
 
             if (!AddEdit)
             {
+                Commons.Modules.sLoad = "0Load";
                 LoadText();
+                Commons.Modules.sLoad = "";
             }
             else
             {
@@ -229,6 +231,17 @@ namespace Vs.Category
             return false;
         }
 
-
+        private void DOC_HAICheckEdit_CheckedChanged(object sender, EventArgs e)
+        {
+            if (Commons.Modules.sLoad == "0Load") return;
+            if (DOC_HAICheckEdit.Checked)
+            {
+                PHEP_CTTextEdit.EditValue = 2;
+            }
+            else
+            {
+                PHEP_CTTextEdit.EditValue = 0;
+            }
+        }
     }
 }

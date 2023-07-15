@@ -27,5 +27,12 @@ namespace Vs.Payroll
         {
 
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            ucTinhLuong UC = new ucTinhLuong();
+            this.Controls.Add(UC);
+            UC.Dock = DockStyle.Fill;
+        }
     }
 }

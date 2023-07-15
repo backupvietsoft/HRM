@@ -69,7 +69,7 @@ namespace Vs.Category
         {
             try
             {
-                string sSql = "SELECT ID_DV ,MSDV ,TEN_DV ,TEN_DV_A ,TEN_DV_H ,TEN_NGAN ,DIA_CHI ,MAC_DINH ,CHU_QUAN ,DIEN_THOAI ,FAX ,MS_BHYT ,MS_BHXH ,SO_TAI_KHOAN ,TEN_NGAN_HANG ,KY_HIEU ,NGUOI_DAI_DIEN ,CHUC_VU ,SO_HS,STT_DV, ID_CN, FACEBOOK_TD, TEN_DATA_LINK, DUONG_DAN_DATA_LINK,EMAIL_TD,DIEN_THOAI_TD,HOTLINE_TD, ISNULL(ACTIVE_DV,0) ACTIVE_DV FROM dbo.DON_VI WHERE ID_DV =	" + iIdDV.ToString();
+                string sSql = "SELECT ID_DV ,MSDV ,TEN_DV ,TEN_DV_A ,TEN_DV_H ,TEN_NGAN ,DIA_CHI, DIA_CHI_A ,MAC_DINH ,CHU_QUAN ,DIEN_THOAI ,FAX ,MS_BHYT ,MS_BHXH ,SO_TAI_KHOAN ,TEN_NGAN_HANG ,KY_HIEU ,NGUOI_DAI_DIEN ,CHUC_VU ,SO_HS,STT_DV, ID_CN, FACEBOOK_TD, TEN_DATA_LINK, DUONG_DAN_DATA_LINK,EMAIL_TD,DIEN_THOAI_TD,HOTLINE_TD, ISNULL(ACTIVE_DV,0) ACTIVE_DV FROM dbo.DON_VI WHERE ID_DV =	" + iIdDV.ToString();
                 DataTable dtTmp = new DataTable();
                 dtTmp.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSql));
                 ItemForMSDV.Control.Text = dtTmp.Rows[0]["MSDV"].ToString();
@@ -79,6 +79,7 @@ namespace Vs.Category
                 ItemForTEN_DON_VI_H.Control.Text = dtTmp.Rows[0]["TEN_DV_H"].ToString();
                 ItemForTEN_NGAN.Control.Text = dtTmp.Rows[0]["TEN_NGAN"].ToString();
                 ItemForDIA_CHI.Control.Text = dtTmp.Rows[0]["DIA_CHI"].ToString();
+                txtDIA_CHI_A.Text = dtTmp.Rows[0]["DIA_CHI_A"].ToString();
                 MAC_DINHCheckEdit.EditValue = Convert.ToBoolean(dtTmp.Rows[0]["MAC_DINH"]);
                 ItemForCHU_QUAN.Control.Text = dtTmp.Rows[0]["CHU_QUAN"].ToString();
                 ItemForDIEN_THOAI.Control.Text = dtTmp.Rows[0]["DIEN_THOAI"].ToString();
@@ -123,6 +124,7 @@ namespace Vs.Category
                 ItemForTEN_DON_VI_H.Control.Text = String.Empty;
                 ItemForTEN_NGAN.Control.Text = String.Empty;
                 ItemForDIA_CHI.Control.Text = String.Empty;
+                txtDIA_CHI_A.Text = String.Empty;
                 MAC_DINHCheckEdit.EditValue = false;
                 ItemForCHU_QUAN.Control.Text = String.Empty;
                 ItemForDIEN_THOAI.Control.Text = String.Empty;
@@ -141,7 +143,7 @@ namespace Vs.Category
                 DIEN_THOAI_TDtextEdit.Text = string.Empty;
                 HOTLINE_TDtextEdit.Text = string.Empty;
                 MSDVTextEdit.Focus();
-                chkActive.Checked = false;  
+                chkActive.Checked = false;
 
             }
             catch { }
@@ -164,10 +166,10 @@ namespace Vs.Category
                             Commons.Modules.sId =
                             SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spUpdateDonVi", (bAddEditDV ? -1 : iIdDV), ItemForMSDV.Control.Text,
                                     ItemForTEN_DON_VI.Control.Text, ItemForTEN_DON_VI_A.Control.Text, ItemForTEN_DON_VI_H.Control.Text, ItemForTEN_NGAN.Control.Text,
-                                    ItemForDIA_CHI.Control.Text, Convert.ToBoolean(MAC_DINHCheckEdit.EditValue), ItemForCHU_QUAN.Control.Text, ItemForDIEN_THOAI.Control.Text,
+                                    ItemForDIA_CHI.Control.Text, txtDIA_CHI_A.Text, Convert.ToBoolean(MAC_DINHCheckEdit.EditValue), ItemForCHU_QUAN.Control.Text, ItemForDIEN_THOAI.Control.Text,
                                     ItemForFAX.Control.Text, ItemForMS_BHYT.Control.Text, ItemForMS_BHXH.Control.Text, ItemForSO_TAI_KHOAN.Control.Text,
                                     ItemForTEN_NGAN_HANG.Control.Text, ItemForNGUOI_DAI_DIEN.Control.Text,
-                                     ItemForSTT_DV.Control.Text == "" ? ItemForSTT_DV.Control.Text = null : ItemForSTT_DV.Control.Text, Convert.ToInt64(cboID_CN.Text == "" ? cboID_CN.EditValue = null : cboID_CN.EditValue), ItemForFB.Control.Text, txtTenDataLink.Text, txtDuongDanDataLink.Text,EMAIL_TDTextEdit.Text,DIEN_THOAI_TDtextEdit.Text,HOTLINE_TDtextEdit.Text, chkActive.EditValue).ToString();
+                                     ItemForSTT_DV.Control.Text == "" ? ItemForSTT_DV.Control.Text = null : ItemForSTT_DV.Control.Text, Convert.ToInt64(cboID_CN.Text == "" ? cboID_CN.EditValue = null : cboID_CN.EditValue), ItemForFB.Control.Text, txtTenDataLink.Text, txtDuongDanDataLink.Text, EMAIL_TDTextEdit.Text, DIEN_THOAI_TDtextEdit.Text, HOTLINE_TDtextEdit.Text, chkActive.EditValue).ToString();
 
                             if (bAddEditDV)
                             {

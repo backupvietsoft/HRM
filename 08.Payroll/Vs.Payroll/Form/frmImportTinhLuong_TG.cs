@@ -157,7 +157,7 @@ namespace Vs.Payroll
                         }
                     case "thoat":
                         {
-                            this.DialogResult = DialogResult.OK;
+                           
                             Commons.Modules.ObjSystems.setCheckImport(0); //xoa
                             this.Close();
                             break;
@@ -275,7 +275,7 @@ namespace Vs.Payroll
                     cmd.Parameters.Add("@XN", SqlDbType.Int).Value = iID_XN;
                     cmd.Parameters.Add("@TO", SqlDbType.Int).Value = iID_TO;
                     cmd.Parameters.Add("@TNGAY", SqlDbType.Date).Value = dtThang;
-                    ////cmd.Parameters.Add("@DNGAY", SqlDbType.Date).Value = dtDThang;
+                    cmd.Parameters.Add("@DNGAY", SqlDbType.Date).Value = dtDThang;
                     cmd.Parameters.Add("@SBT", SqlDbType.NVarChar).Value = sbt;
                     cmd.Parameters.Add("@iLoai", SqlDbType.Int).Value = 2;
                     cmd.CommandType = CommandType.StoredProcedure;
@@ -284,7 +284,7 @@ namespace Vs.Payroll
                     sTrans.Commit();
                     XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgImportDuLieuThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                     if (conn.State != ConnectionState.Closed) conn.Close();
-                    DialogResult = DialogResult.OK;
+                    this.DialogResult = DialogResult.OK;
                     this.Close();
                 }
                 catch (Exception ex)
@@ -458,7 +458,7 @@ namespace Vs.Payroll
                 {
                     try
                     {
-                        if (props[i].GetValue(item) == null || props[i].GetValue(item).ToString() == "")
+                        if (props[i].GetValue(item) == null || props[i].GetValue(item).ToString().Trim() == "")
                         {
                             values[i] = null;
                         }
@@ -470,7 +470,7 @@ namespace Vs.Payroll
                     }
                     catch (Exception ex)
                     {
-                        return null;
+                        values[i] = null;
                     }
                 }
                 try
@@ -484,7 +484,6 @@ namespace Vs.Payroll
 
         private void frmImportTinhLuong_TG_FormClosing(object sender, FormClosingEventArgs e)
         {
-            this.DialogResult = DialogResult.OK;
             this.Close();
         }
         //private void ExportUngVien(string sPath)

@@ -38,6 +38,7 @@ namespace Vs.Category
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule3 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             this.btnALL = new DevExpress.XtraBars.Docking2010.WindowsUIButtonPanel();
             this.dataLayoutControl1 = new DevExpress.XtraDataLayout.DataLayoutControl();
+            this.chkActive = new DevExpress.XtraEditors.CheckEdit();
             this.txtDuongDanDataLink = new DevExpress.XtraEditors.TextEdit();
             this.txtTenDataLink = new DevExpress.XtraEditors.TextEdit();
             this.FBtextEdit = new DevExpress.XtraEditors.TextEdit();
@@ -76,8 +77,6 @@ namespace Vs.Category
             this.ItemForNGUOI_DAI_DIEN = new DevExpress.XtraLayout.LayoutControlItem();
             this.ItemForTEN_NGAN = new DevExpress.XtraLayout.LayoutControlItem();
             this.ItemForDIEN_THOAI = new DevExpress.XtraLayout.LayoutControlItem();
-            this.ItemForSTT_DV = new DevExpress.XtraLayout.LayoutControlItem();
-            this.ItemForMAC_DINH = new DevExpress.XtraLayout.LayoutControlItem();
             this.ItemForSO_TAI_KHOAN = new DevExpress.XtraLayout.LayoutControlItem();
             this.ItemForTEN_NGAN_HANG = new DevExpress.XtraLayout.LayoutControlItem();
             this.ItemForTruongDonVi = new DevExpress.XtraLayout.LayoutControlItem();
@@ -87,13 +86,19 @@ namespace Vs.Category
             this.EMAIL_TD = new DevExpress.XtraLayout.LayoutControlItem();
             this.DIEN_THOAI_TD = new DevExpress.XtraLayout.LayoutControlItem();
             this.HOTLINE_TD = new DevExpress.XtraLayout.LayoutControlItem();
+            this.ItemForMAC_DINH = new DevExpress.XtraLayout.LayoutControlItem();
+            this.lblActive = new DevExpress.XtraLayout.LayoutControlItem();
+            this.ItemForSTT_DV = new DevExpress.XtraLayout.LayoutControlItem();
             this.dxValidationProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
             this.tablePanel1 = new DevExpress.Utils.Layout.TablePanel();
             this.behaviorManager1 = new DevExpress.Utils.Behaviors.BehaviorManager(this.components);
-            this.chkActive = new DevExpress.XtraEditors.CheckEdit();
-            this.lblActive = new DevExpress.XtraLayout.LayoutControlItem();
+            this.textEdit2 = new DevExpress.XtraEditors.TextEdit();
+            this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.txtDIA_CHI_A = new DevExpress.XtraEditors.TextEdit();
+            this.lblDIA_CHI_A = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataLayoutControl1)).BeginInit();
             this.dataLayoutControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chkActive.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDuongDanDataLink.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTenDataLink.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.FBtextEdit.Properties)).BeginInit();
@@ -132,8 +137,6 @@ namespace Vs.Category
             ((System.ComponentModel.ISupportInitialize)(this.ItemForNGUOI_DAI_DIEN)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForTEN_NGAN)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForDIEN_THOAI)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemForSTT_DV)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemForMAC_DINH)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForSO_TAI_KHOAN)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForTEN_NGAN_HANG)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForTruongDonVi)).BeginInit();
@@ -143,12 +146,17 @@ namespace Vs.Category
             ((System.ComponentModel.ISupportInitialize)(this.EMAIL_TD)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DIEN_THOAI_TD)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.HOTLINE_TD)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForMAC_DINH)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lblActive)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForSTT_DV)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).BeginInit();
             this.tablePanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.behaviorManager1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chkActive.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lblActive)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textEdit2.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDIA_CHI_A.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lblDIA_CHI_A)).BeginInit();
             this.SuspendLayout();
             // 
             // btnALL
@@ -188,6 +196,8 @@ namespace Vs.Category
             // dataLayoutControl1
             // 
             this.tablePanel1.SetColumn(this.dataLayoutControl1, 1);
+            this.dataLayoutControl1.Controls.Add(this.txtDIA_CHI_A);
+            this.dataLayoutControl1.Controls.Add(this.textEdit2);
             this.dataLayoutControl1.Controls.Add(this.chkActive);
             this.dataLayoutControl1.Controls.Add(this.txtDuongDanDataLink);
             this.dataLayoutControl1.Controls.Add(this.txtTenDataLink);
@@ -222,9 +232,18 @@ namespace Vs.Category
             this.dataLayoutControl1.TabIndex = 6;
             this.dataLayoutControl1.Text = "dataLayoutControl1";
             // 
+            // chkActive
+            // 
+            this.chkActive.Location = new System.Drawing.Point(459, 10);
+            this.chkActive.Name = "chkActive";
+            this.chkActive.Properties.Caption = "";
+            this.chkActive.Size = new System.Drawing.Size(175, 20);
+            this.chkActive.StyleController = this.dataLayoutControl1;
+            this.chkActive.TabIndex = 35;
+            // 
             // txtDuongDanDataLink
             // 
-            this.txtDuongDanDataLink.Location = new System.Drawing.Point(459, 380);
+            this.txtDuongDanDataLink.Location = new System.Drawing.Point(459, 432);
             this.txtDuongDanDataLink.Name = "txtDuongDanDataLink";
             this.txtDuongDanDataLink.Size = new System.Drawing.Size(175, 24);
             this.txtDuongDanDataLink.StyleController = this.dataLayoutControl1;
@@ -232,7 +251,7 @@ namespace Vs.Category
             // 
             // txtTenDataLink
             // 
-            this.txtTenDataLink.Location = new System.Drawing.Point(144, 380);
+            this.txtTenDataLink.Location = new System.Drawing.Point(144, 432);
             this.txtTenDataLink.Name = "txtTenDataLink";
             this.txtTenDataLink.Size = new System.Drawing.Size(175, 24);
             this.txtTenDataLink.StyleController = this.dataLayoutControl1;
@@ -240,7 +259,7 @@ namespace Vs.Category
             // 
             // FBtextEdit
             // 
-            this.FBtextEdit.Location = new System.Drawing.Point(459, 354);
+            this.FBtextEdit.Location = new System.Drawing.Point(459, 406);
             this.FBtextEdit.Name = "FBtextEdit";
             this.FBtextEdit.Size = new System.Drawing.Size(175, 24);
             this.FBtextEdit.StyleController = this.dataLayoutControl1;
@@ -267,7 +286,7 @@ namespace Vs.Category
             // 
             // TEN_NGAN_HANGTextEdit
             // 
-            this.TEN_NGAN_HANGTextEdit.Location = new System.Drawing.Point(144, 302);
+            this.TEN_NGAN_HANGTextEdit.Location = new System.Drawing.Point(144, 354);
             this.TEN_NGAN_HANGTextEdit.Name = "TEN_NGAN_HANGTextEdit";
             this.TEN_NGAN_HANGTextEdit.Size = new System.Drawing.Size(175, 24);
             this.TEN_NGAN_HANGTextEdit.StyleController = this.dataLayoutControl1;
@@ -275,7 +294,7 @@ namespace Vs.Category
             // 
             // MAC_DINHCheckEdit
             // 
-            this.MAC_DINHCheckEdit.Location = new System.Drawing.Point(459, 304);
+            this.MAC_DINHCheckEdit.Location = new System.Drawing.Point(459, 356);
             this.MAC_DINHCheckEdit.Name = "MAC_DINHCheckEdit";
             this.MAC_DINHCheckEdit.Properties.Caption = "";
             this.MAC_DINHCheckEdit.Properties.GlyphVerticalAlignment = DevExpress.Utils.VertAlignment.Bottom;
@@ -331,7 +350,7 @@ namespace Vs.Category
             // TEN_NGANTextEdit
             // 
             this.TEN_NGANTextEdit.EnterMoveNextControl = true;
-            this.TEN_NGANTextEdit.Location = new System.Drawing.Point(149, 184);
+            this.TEN_NGANTextEdit.Location = new System.Drawing.Point(149, 236);
             this.TEN_NGANTextEdit.Name = "TEN_NGANTextEdit";
             this.TEN_NGANTextEdit.Size = new System.Drawing.Size(165, 24);
             this.TEN_NGANTextEdit.StyleController = this.dataLayoutControl1;
@@ -349,7 +368,7 @@ namespace Vs.Category
             // CHU_QUANTextEdit
             // 
             this.CHU_QUANTextEdit.EnterMoveNextControl = true;
-            this.CHU_QUANTextEdit.Location = new System.Drawing.Point(464, 184);
+            this.CHU_QUANTextEdit.Location = new System.Drawing.Point(464, 236);
             this.CHU_QUANTextEdit.Name = "CHU_QUANTextEdit";
             this.CHU_QUANTextEdit.Size = new System.Drawing.Size(165, 24);
             this.CHU_QUANTextEdit.StyleController = this.dataLayoutControl1;
@@ -358,7 +377,7 @@ namespace Vs.Category
             // FAXTextEdit
             // 
             this.FAXTextEdit.EnterMoveNextControl = true;
-            this.FAXTextEdit.Location = new System.Drawing.Point(464, 214);
+            this.FAXTextEdit.Location = new System.Drawing.Point(464, 266);
             this.FAXTextEdit.Name = "FAXTextEdit";
             this.FAXTextEdit.Properties.Mask.EditMask = "\\d{0,15}";
             this.FAXTextEdit.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
@@ -369,7 +388,7 @@ namespace Vs.Category
             // MS_BHYTTextEdit
             // 
             this.MS_BHYTTextEdit.EnterMoveNextControl = true;
-            this.MS_BHYTTextEdit.Location = new System.Drawing.Point(149, 244);
+            this.MS_BHYTTextEdit.Location = new System.Drawing.Point(149, 296);
             this.MS_BHYTTextEdit.Name = "MS_BHYTTextEdit";
             this.MS_BHYTTextEdit.Size = new System.Drawing.Size(165, 24);
             this.MS_BHYTTextEdit.StyleController = this.dataLayoutControl1;
@@ -378,7 +397,7 @@ namespace Vs.Category
             // MS_BHXHTextEdit
             // 
             this.MS_BHXHTextEdit.EnterMoveNextControl = true;
-            this.MS_BHXHTextEdit.Location = new System.Drawing.Point(464, 244);
+            this.MS_BHXHTextEdit.Location = new System.Drawing.Point(464, 296);
             this.MS_BHXHTextEdit.Name = "MS_BHXHTextEdit";
             this.MS_BHXHTextEdit.Size = new System.Drawing.Size(165, 24);
             this.MS_BHXHTextEdit.StyleController = this.dataLayoutControl1;
@@ -387,7 +406,7 @@ namespace Vs.Category
             // SO_TAI_KHOANTextEdit
             // 
             this.SO_TAI_KHOANTextEdit.EnterMoveNextControl = true;
-            this.SO_TAI_KHOANTextEdit.Location = new System.Drawing.Point(464, 274);
+            this.SO_TAI_KHOANTextEdit.Location = new System.Drawing.Point(464, 326);
             this.SO_TAI_KHOANTextEdit.Name = "SO_TAI_KHOANTextEdit";
             this.SO_TAI_KHOANTextEdit.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.RegExpMaskManager));
             this.SO_TAI_KHOANTextEdit.Properties.MaskSettings.Set("allowBlankInput", true);
@@ -399,7 +418,7 @@ namespace Vs.Category
             // NGUOI_DAI_DIENTextEdit
             // 
             this.NGUOI_DAI_DIENTextEdit.EnterMoveNextControl = true;
-            this.NGUOI_DAI_DIENTextEdit.Location = new System.Drawing.Point(149, 274);
+            this.NGUOI_DAI_DIENTextEdit.Location = new System.Drawing.Point(149, 326);
             this.NGUOI_DAI_DIENTextEdit.Name = "NGUOI_DAI_DIENTextEdit";
             this.NGUOI_DAI_DIENTextEdit.Size = new System.Drawing.Size(165, 24);
             this.NGUOI_DAI_DIENTextEdit.StyleController = this.dataLayoutControl1;
@@ -408,7 +427,7 @@ namespace Vs.Category
             // textEdit1
             // 
             this.textEdit1.EnterMoveNextControl = true;
-            this.textEdit1.Location = new System.Drawing.Point(149, 214);
+            this.textEdit1.Location = new System.Drawing.Point(149, 266);
             this.textEdit1.Name = "textEdit1";
             this.textEdit1.Size = new System.Drawing.Size(165, 24);
             this.textEdit1.StyleController = this.dataLayoutControl1;
@@ -433,7 +452,7 @@ namespace Vs.Category
             // 
             // EMAIL_TDTextEdit
             // 
-            this.EMAIL_TDTextEdit.Location = new System.Drawing.Point(144, 328);
+            this.EMAIL_TDTextEdit.Location = new System.Drawing.Point(144, 380);
             this.EMAIL_TDTextEdit.Name = "EMAIL_TDTextEdit";
             this.EMAIL_TDTextEdit.Size = new System.Drawing.Size(175, 24);
             this.EMAIL_TDTextEdit.StyleController = this.dataLayoutControl1;
@@ -441,7 +460,7 @@ namespace Vs.Category
             // 
             // DIEN_THOAI_TDtextEdit
             // 
-            this.DIEN_THOAI_TDtextEdit.Location = new System.Drawing.Point(459, 328);
+            this.DIEN_THOAI_TDtextEdit.Location = new System.Drawing.Point(459, 380);
             this.DIEN_THOAI_TDtextEdit.Name = "DIEN_THOAI_TDtextEdit";
             this.DIEN_THOAI_TDtextEdit.Size = new System.Drawing.Size(175, 24);
             this.DIEN_THOAI_TDtextEdit.StyleController = this.dataLayoutControl1;
@@ -449,7 +468,7 @@ namespace Vs.Category
             // 
             // HOTLINE_TDtextEdit
             // 
-            this.HOTLINE_TDtextEdit.Location = new System.Drawing.Point(144, 354);
+            this.HOTLINE_TDtextEdit.Location = new System.Drawing.Point(144, 406);
             this.HOTLINE_TDtextEdit.Name = "HOTLINE_TDtextEdit";
             this.HOTLINE_TDtextEdit.Size = new System.Drawing.Size(175, 24);
             this.HOTLINE_TDtextEdit.StyleController = this.dataLayoutControl1;
@@ -493,7 +512,9 @@ namespace Vs.Category
             this.HOTLINE_TD,
             this.ItemForMAC_DINH,
             this.lblActive,
-            this.ItemForSTT_DV});
+            this.ItemForSTT_DV,
+            this.layoutControlItem1,
+            this.lblDIA_CHI_A});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "autoGeneratedGroup0";
             this.layoutControlGroup1.Size = new System.Drawing.Size(630, 462);
@@ -555,7 +576,7 @@ namespace Vs.Category
             // ItemForCHU_QUAN
             // 
             this.ItemForCHU_QUAN.Control = this.CHU_QUANTextEdit;
-            this.ItemForCHU_QUAN.Location = new System.Drawing.Point(315, 176);
+            this.ItemForCHU_QUAN.Location = new System.Drawing.Point(315, 228);
             this.ItemForCHU_QUAN.Name = "ItemForCHU_QUAN";
             this.ItemForCHU_QUAN.Padding = new DevExpress.XtraLayout.Utils.Padding(6, 6, 3, 3);
             this.ItemForCHU_QUAN.Size = new System.Drawing.Size(315, 30);
@@ -565,7 +586,7 @@ namespace Vs.Category
             // ItemForMS_BHYT
             // 
             this.ItemForMS_BHYT.Control = this.MS_BHYTTextEdit;
-            this.ItemForMS_BHYT.Location = new System.Drawing.Point(0, 236);
+            this.ItemForMS_BHYT.Location = new System.Drawing.Point(0, 288);
             this.ItemForMS_BHYT.Name = "ItemForMS_BHYT";
             this.ItemForMS_BHYT.Padding = new DevExpress.XtraLayout.Utils.Padding(6, 6, 3, 3);
             this.ItemForMS_BHYT.Size = new System.Drawing.Size(315, 30);
@@ -575,7 +596,7 @@ namespace Vs.Category
             // ItemForMS_BHXH
             // 
             this.ItemForMS_BHXH.Control = this.MS_BHXHTextEdit;
-            this.ItemForMS_BHXH.Location = new System.Drawing.Point(315, 236);
+            this.ItemForMS_BHXH.Location = new System.Drawing.Point(315, 288);
             this.ItemForMS_BHXH.Name = "ItemForMS_BHXH";
             this.ItemForMS_BHXH.Padding = new DevExpress.XtraLayout.Utils.Padding(6, 6, 3, 3);
             this.ItemForMS_BHXH.Size = new System.Drawing.Size(315, 30);
@@ -585,7 +606,7 @@ namespace Vs.Category
             // ItemForFAX
             // 
             this.ItemForFAX.Control = this.FAXTextEdit;
-            this.ItemForFAX.Location = new System.Drawing.Point(315, 206);
+            this.ItemForFAX.Location = new System.Drawing.Point(315, 258);
             this.ItemForFAX.Name = "ItemForFAX";
             this.ItemForFAX.Padding = new DevExpress.XtraLayout.Utils.Padding(6, 6, 3, 3);
             this.ItemForFAX.Size = new System.Drawing.Size(315, 30);
@@ -595,7 +616,7 @@ namespace Vs.Category
             // ItemForNGUOI_DAI_DIEN
             // 
             this.ItemForNGUOI_DAI_DIEN.Control = this.NGUOI_DAI_DIENTextEdit;
-            this.ItemForNGUOI_DAI_DIEN.Location = new System.Drawing.Point(0, 266);
+            this.ItemForNGUOI_DAI_DIEN.Location = new System.Drawing.Point(0, 318);
             this.ItemForNGUOI_DAI_DIEN.Name = "ItemForNGUOI_DAI_DIEN";
             this.ItemForNGUOI_DAI_DIEN.Padding = new DevExpress.XtraLayout.Utils.Padding(6, 6, 3, 3);
             this.ItemForNGUOI_DAI_DIEN.Size = new System.Drawing.Size(315, 30);
@@ -605,7 +626,7 @@ namespace Vs.Category
             // ItemForTEN_NGAN
             // 
             this.ItemForTEN_NGAN.Control = this.TEN_NGANTextEdit;
-            this.ItemForTEN_NGAN.Location = new System.Drawing.Point(0, 176);
+            this.ItemForTEN_NGAN.Location = new System.Drawing.Point(0, 228);
             this.ItemForTEN_NGAN.Name = "ItemForTEN_NGAN";
             this.ItemForTEN_NGAN.Padding = new DevExpress.XtraLayout.Utils.Padding(6, 6, 3, 3);
             this.ItemForTEN_NGAN.Size = new System.Drawing.Size(315, 30);
@@ -615,41 +636,16 @@ namespace Vs.Category
             // ItemForDIEN_THOAI
             // 
             this.ItemForDIEN_THOAI.Control = this.textEdit1;
-            this.ItemForDIEN_THOAI.Location = new System.Drawing.Point(0, 206);
+            this.ItemForDIEN_THOAI.Location = new System.Drawing.Point(0, 258);
             this.ItemForDIEN_THOAI.Name = "ItemForDIEN_THOAI";
             this.ItemForDIEN_THOAI.Padding = new DevExpress.XtraLayout.Utils.Padding(6, 6, 3, 3);
             this.ItemForDIEN_THOAI.Size = new System.Drawing.Size(315, 30);
             this.ItemForDIEN_THOAI.TextSize = new System.Drawing.Size(126, 17);
             // 
-            // ItemForSTT_DV
-            // 
-            this.ItemForSTT_DV.BestFitWeight = 10;
-            this.ItemForSTT_DV.ContentVertAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.ItemForSTT_DV.Control = this.STT_DVTextEdit;
-            this.ItemForSTT_DV.Location = new System.Drawing.Point(315, 120);
-            this.ItemForSTT_DV.MaxSize = new System.Drawing.Size(0, 24);
-            this.ItemForSTT_DV.MinSize = new System.Drawing.Size(166, 24);
-            this.ItemForSTT_DV.Name = "ItemForSTT_DV";
-            this.ItemForSTT_DV.Size = new System.Drawing.Size(315, 26);
-            this.ItemForSTT_DV.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-            this.ItemForSTT_DV.Text = "STT_DV";
-            this.ItemForSTT_DV.TextSize = new System.Drawing.Size(126, 17);
-            // 
-            // ItemForMAC_DINH
-            // 
-            this.ItemForMAC_DINH.ContentVertAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.ItemForMAC_DINH.Control = this.MAC_DINHCheckEdit;
-            this.ItemForMAC_DINH.Location = new System.Drawing.Point(315, 296);
-            this.ItemForMAC_DINH.Name = "ItemForMAC_DINH";
-            this.ItemForMAC_DINH.Size = new System.Drawing.Size(315, 26);
-            this.ItemForMAC_DINH.Text = "MAC_DINH";
-            this.ItemForMAC_DINH.TextLocation = DevExpress.Utils.Locations.Left;
-            this.ItemForMAC_DINH.TextSize = new System.Drawing.Size(126, 17);
-            // 
             // ItemForSO_TAI_KHOAN
             // 
             this.ItemForSO_TAI_KHOAN.Control = this.SO_TAI_KHOANTextEdit;
-            this.ItemForSO_TAI_KHOAN.Location = new System.Drawing.Point(315, 266);
+            this.ItemForSO_TAI_KHOAN.Location = new System.Drawing.Point(315, 318);
             this.ItemForSO_TAI_KHOAN.Name = "ItemForSO_TAI_KHOAN";
             this.ItemForSO_TAI_KHOAN.Padding = new DevExpress.XtraLayout.Utils.Padding(6, 6, 3, 3);
             this.ItemForSO_TAI_KHOAN.Size = new System.Drawing.Size(315, 30);
@@ -659,7 +655,7 @@ namespace Vs.Category
             // ItemForTEN_NGAN_HANG
             // 
             this.ItemForTEN_NGAN_HANG.Control = this.TEN_NGAN_HANGTextEdit;
-            this.ItemForTEN_NGAN_HANG.Location = new System.Drawing.Point(0, 296);
+            this.ItemForTEN_NGAN_HANG.Location = new System.Drawing.Point(0, 348);
             this.ItemForTEN_NGAN_HANG.Name = "ItemForTEN_NGAN_HANG";
             this.ItemForTEN_NGAN_HANG.Size = new System.Drawing.Size(315, 26);
             this.ItemForTEN_NGAN_HANG.Text = "TEN_NGAN_HANG";
@@ -676,7 +672,7 @@ namespace Vs.Category
             // ItemForFB
             // 
             this.ItemForFB.Control = this.FBtextEdit;
-            this.ItemForFB.Location = new System.Drawing.Point(315, 348);
+            this.ItemForFB.Location = new System.Drawing.Point(315, 400);
             this.ItemForFB.Name = "ItemForFB";
             this.ItemForFB.Size = new System.Drawing.Size(315, 26);
             this.ItemForFB.TextSize = new System.Drawing.Size(126, 17);
@@ -684,23 +680,23 @@ namespace Vs.Category
             // lblTenDataLink
             // 
             this.lblTenDataLink.Control = this.txtTenDataLink;
-            this.lblTenDataLink.Location = new System.Drawing.Point(0, 374);
+            this.lblTenDataLink.Location = new System.Drawing.Point(0, 426);
             this.lblTenDataLink.Name = "lblTenDataLink";
-            this.lblTenDataLink.Size = new System.Drawing.Size(315, 88);
+            this.lblTenDataLink.Size = new System.Drawing.Size(315, 36);
             this.lblTenDataLink.TextSize = new System.Drawing.Size(126, 17);
             // 
             // lblDuongDanDataLink
             // 
             this.lblDuongDanDataLink.Control = this.txtDuongDanDataLink;
-            this.lblDuongDanDataLink.Location = new System.Drawing.Point(315, 374);
+            this.lblDuongDanDataLink.Location = new System.Drawing.Point(315, 426);
             this.lblDuongDanDataLink.Name = "lblDuongDanDataLink";
-            this.lblDuongDanDataLink.Size = new System.Drawing.Size(315, 88);
+            this.lblDuongDanDataLink.Size = new System.Drawing.Size(315, 36);
             this.lblDuongDanDataLink.TextSize = new System.Drawing.Size(126, 17);
             // 
             // EMAIL_TD
             // 
             this.EMAIL_TD.Control = this.EMAIL_TDTextEdit;
-            this.EMAIL_TD.Location = new System.Drawing.Point(0, 322);
+            this.EMAIL_TD.Location = new System.Drawing.Point(0, 374);
             this.EMAIL_TD.Name = "EMAIL_TD";
             this.EMAIL_TD.Size = new System.Drawing.Size(315, 26);
             this.EMAIL_TD.TextSize = new System.Drawing.Size(126, 17);
@@ -708,7 +704,7 @@ namespace Vs.Category
             // DIEN_THOAI_TD
             // 
             this.DIEN_THOAI_TD.Control = this.DIEN_THOAI_TDtextEdit;
-            this.DIEN_THOAI_TD.Location = new System.Drawing.Point(315, 322);
+            this.DIEN_THOAI_TD.Location = new System.Drawing.Point(315, 374);
             this.DIEN_THOAI_TD.Name = "DIEN_THOAI_TD";
             this.DIEN_THOAI_TD.Size = new System.Drawing.Size(315, 26);
             this.DIEN_THOAI_TD.TextSize = new System.Drawing.Size(126, 17);
@@ -716,10 +712,44 @@ namespace Vs.Category
             // HOTLINE_TD
             // 
             this.HOTLINE_TD.Control = this.HOTLINE_TDtextEdit;
-            this.HOTLINE_TD.Location = new System.Drawing.Point(0, 348);
+            this.HOTLINE_TD.Location = new System.Drawing.Point(0, 400);
             this.HOTLINE_TD.Name = "HOTLINE_TD";
             this.HOTLINE_TD.Size = new System.Drawing.Size(315, 26);
             this.HOTLINE_TD.TextSize = new System.Drawing.Size(126, 17);
+            // 
+            // ItemForMAC_DINH
+            // 
+            this.ItemForMAC_DINH.ContentVertAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.ItemForMAC_DINH.Control = this.MAC_DINHCheckEdit;
+            this.ItemForMAC_DINH.Location = new System.Drawing.Point(315, 348);
+            this.ItemForMAC_DINH.Name = "ItemForMAC_DINH";
+            this.ItemForMAC_DINH.Size = new System.Drawing.Size(315, 26);
+            this.ItemForMAC_DINH.Text = "MAC_DINH";
+            this.ItemForMAC_DINH.TextLocation = DevExpress.Utils.Locations.Left;
+            this.ItemForMAC_DINH.TextSize = new System.Drawing.Size(126, 17);
+            // 
+            // lblActive
+            // 
+            this.lblActive.ContentVertAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.lblActive.Control = this.chkActive;
+            this.lblActive.Location = new System.Drawing.Point(315, 0);
+            this.lblActive.Name = "lblActive";
+            this.lblActive.Size = new System.Drawing.Size(315, 30);
+            this.lblActive.TextSize = new System.Drawing.Size(126, 17);
+            // 
+            // ItemForSTT_DV
+            // 
+            this.ItemForSTT_DV.BestFitWeight = 10;
+            this.ItemForSTT_DV.ContentVertAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.ItemForSTT_DV.Control = this.STT_DVTextEdit;
+            this.ItemForSTT_DV.Location = new System.Drawing.Point(315, 120);
+            this.ItemForSTT_DV.MaxSize = new System.Drawing.Size(0, 24);
+            this.ItemForSTT_DV.MinSize = new System.Drawing.Size(166, 24);
+            this.ItemForSTT_DV.Name = "ItemForSTT_DV";
+            this.ItemForSTT_DV.Size = new System.Drawing.Size(315, 26);
+            this.ItemForSTT_DV.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            this.ItemForSTT_DV.Text = "STT_DV";
+            this.ItemForSTT_DV.TextSize = new System.Drawing.Size(126, 17);
             // 
             // dxValidationProvider1
             // 
@@ -741,23 +771,37 @@ namespace Vs.Category
             this.tablePanel1.Size = new System.Drawing.Size(807, 505);
             this.tablePanel1.TabIndex = 7;
             // 
-            // chkActive
+            // textEdit2
             // 
-            this.chkActive.Location = new System.Drawing.Point(459, 10);
-            this.chkActive.Name = "chkActive";
-            this.chkActive.Properties.Caption = "";
-            this.chkActive.Size = new System.Drawing.Size(175, 20);
-            this.chkActive.StyleController = this.dataLayoutControl1;
-            this.chkActive.TabIndex = 35;
+            this.textEdit2.Location = new System.Drawing.Point(144, 208);
+            this.textEdit2.Name = "textEdit2";
+            this.textEdit2.Size = new System.Drawing.Size(490, 24);
+            this.textEdit2.StyleController = this.dataLayoutControl1;
+            this.textEdit2.TabIndex = 36;
             // 
-            // lblActive
+            // layoutControlItem1
             // 
-            this.lblActive.ContentVertAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.lblActive.Control = this.chkActive;
-            this.lblActive.Location = new System.Drawing.Point(315, 0);
-            this.lblActive.Name = "lblActive";
-            this.lblActive.Size = new System.Drawing.Size(315, 30);
-            this.lblActive.TextSize = new System.Drawing.Size(126, 17);
+            this.layoutControlItem1.Control = this.textEdit2;
+            this.layoutControlItem1.Location = new System.Drawing.Point(0, 202);
+            this.layoutControlItem1.Name = "layoutControlItem1";
+            this.layoutControlItem1.Size = new System.Drawing.Size(630, 26);
+            this.layoutControlItem1.TextSize = new System.Drawing.Size(126, 17);
+            // 
+            // txtDIA_CHI_A
+            // 
+            this.txtDIA_CHI_A.Location = new System.Drawing.Point(144, 182);
+            this.txtDIA_CHI_A.Name = "txtDIA_CHI_A";
+            this.txtDIA_CHI_A.Size = new System.Drawing.Size(490, 24);
+            this.txtDIA_CHI_A.StyleController = this.dataLayoutControl1;
+            this.txtDIA_CHI_A.TabIndex = 37;
+            // 
+            // lblDIA_CHI_A
+            // 
+            this.lblDIA_CHI_A.Control = this.txtDIA_CHI_A;
+            this.lblDIA_CHI_A.Location = new System.Drawing.Point(0, 176);
+            this.lblDIA_CHI_A.Name = "lblDIA_CHI_A";
+            this.lblDIA_CHI_A.Size = new System.Drawing.Size(630, 26);
+            this.lblDIA_CHI_A.TextSize = new System.Drawing.Size(126, 17);
             // 
             // frmEditDON_VI
             // 
@@ -772,6 +816,7 @@ namespace Vs.Category
             this.Resize += new System.EventHandler(this.frmEditDON_VI_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.dataLayoutControl1)).EndInit();
             this.dataLayoutControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.chkActive.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDuongDanDataLink.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTenDataLink.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.FBtextEdit.Properties)).EndInit();
@@ -810,8 +855,6 @@ namespace Vs.Category
             ((System.ComponentModel.ISupportInitialize)(this.ItemForNGUOI_DAI_DIEN)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForTEN_NGAN)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForDIEN_THOAI)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemForSTT_DV)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemForMAC_DINH)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForSO_TAI_KHOAN)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForTEN_NGAN_HANG)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForTruongDonVi)).EndInit();
@@ -821,12 +864,17 @@ namespace Vs.Category
             ((System.ComponentModel.ISupportInitialize)(this.EMAIL_TD)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DIEN_THOAI_TD)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.HOTLINE_TD)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForMAC_DINH)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lblActive)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForSTT_DV)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).EndInit();
             this.tablePanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.behaviorManager1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chkActive.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lblActive)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textEdit2.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDIA_CHI_A.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lblDIA_CHI_A)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -891,5 +939,9 @@ namespace Vs.Category
         private DevExpress.XtraLayout.LayoutControlItem HOTLINE_TD;
         private DevExpress.XtraEditors.CheckEdit chkActive;
         private DevExpress.XtraLayout.LayoutControlItem lblActive;
+        private DevExpress.XtraEditors.TextEdit txtDIA_CHI_A;
+        private DevExpress.XtraEditors.TextEdit textEdit2;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
+        private DevExpress.XtraLayout.LayoutControlItem lblDIA_CHI_A;
     }
 }

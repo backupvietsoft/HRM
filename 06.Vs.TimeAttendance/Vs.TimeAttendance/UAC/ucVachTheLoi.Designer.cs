@@ -97,8 +97,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit2View)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboTo.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit3View)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.datNgayChamCong.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.datNgayChamCong.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.datNgayChamCong.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForDON_VI)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForXI_NGHIEP)).BeginInit();
@@ -113,11 +113,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.timVe.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboMSCN.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.timDen.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.datNgayDen.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.datNgayDen.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.datNgayDen.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCN.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.datNgayVe.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.datNgayVe.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.datNgayVe.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForMSCN)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForNgayDen)).BeginInit();
@@ -190,6 +190,7 @@
             new DevExpress.XtraEditors.Repository.SearchButton()});
             this.searchControl1.Size = new System.Drawing.Size(220, 24);
             this.searchControl1.TabIndex = 0;
+            this.searchControl1.EditValueChanged += new System.EventHandler(this.searchControl1_EditValueChanged);
             // 
             // grdCongNhan
             // 

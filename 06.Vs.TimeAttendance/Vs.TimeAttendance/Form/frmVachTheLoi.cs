@@ -18,6 +18,7 @@ namespace Vs.TimeAttendance
 {
     public partial class frmVachTheLoi : DevExpress.XtraEditors.XtraForm
     {
+        public Int64 ID_DV = -1;
         public frmVachTheLoi()
         {
             InitializeComponent();
@@ -26,6 +27,7 @@ namespace Vs.TimeAttendance
         private void frmVachTheLoi_Load(object sender, EventArgs e)
         {
             ucVachTheLoi ns = new ucVachTheLoi();
+            ns.ID_DV = ID_DV;
             this.Controls.Clear();
             this.Controls.Add(ns);
             ns.Dock = DockStyle.Fill;

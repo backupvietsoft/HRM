@@ -433,6 +433,7 @@ namespace Vs.HRM
             {
                 SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "DELETE dbo.BAO_HIEM_Y_TE WHERE ID_CN =  " + Commons.Modules.iCongNhan + "");
                 SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "DELETE dbo.BANG_CAP WHERE ID_CN =  " + Commons.Modules.iCongNhan + "");
+                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "UPDATE dbo.CONG_NHAN SET USER_DEL = '" + Commons.Modules.UserName + "' WHERE ID_CN = " + Commons.Modules.iCongNhan);
                 SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "DELETE dbo.CONG_NHAN WHERE ID_CN  =" + Convert.ToInt64(grvDSCongNhan.GetFocusedRowCellValue(grvDSCongNhan.Columns["ID_CN"]) + ""));
                 grvDSCongNhan.DeleteSelectedRows();
             }
@@ -764,5 +765,38 @@ namespace Vs.HRM
         }
 
         #endregion
+
+        private void searchControl2_EditValueChanged(object sender, EventArgs e)
+        {
+            switch (Commons.Modules.KyHieuDV)
+            {
+
+                case "NB":
+                    {
+                        DataTable dtTmp = new DataTable();
+                        dtTmp = (DataTable)grdDSCongNhan.DataSource;
+                        //dtTmp = Commons.Modules.ObjSystems.ConvertDatatable(grvTo);
+                        //String sMSCN;
+                        try
+                        {
+                            string sDK = "";
+                            //sMSCN = "";
+                            if (searchControl2.Text != "")
+                                sDK = "MS_CN = '" + searchControl2.Text + "";
+                            dtTmp.DefaultView.RowFilter = sDK;
+                        }
+                        catch (Exception ex)
+                        {
+                            dtTmp.DefaultView.RowFilter = "";
+                        }
+
+                        break;
+                    }
+                default:
+                    {
+                        break;
+                    }
+            }
+        }
     }
 }

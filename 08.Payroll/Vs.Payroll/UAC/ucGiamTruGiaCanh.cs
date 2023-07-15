@@ -157,7 +157,6 @@ namespace Vs.Payroll
                         }
                         isAdd = false;
                         LoadGrdGTGC();
-
                         EnableButon(isAdd);
                         Commons.Modules.ObjSystems.DeleteAddRow(grvData);
                         break;

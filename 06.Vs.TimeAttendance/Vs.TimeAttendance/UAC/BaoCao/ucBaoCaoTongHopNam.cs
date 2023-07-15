@@ -170,7 +170,8 @@ namespace Vs.TimeAttendance
             int xThang = Convert.ToDateTime(datNam.EditValue).Month;
             datTThang.EditValue = Convert.ToDateTime(datNam.EditValue).AddMonths(-xThang + 1);
             datDThang.EditValue = Convert.ToDateTime(datNam.EditValue).AddMonths(-xThang + 12);
-
+            rdo_LocLaoDong.SelectedIndex = 0;
+            rdo_LocLaoDong.Visible = false;
             Commons.Modules.sLoad = "";
             switch (Commons.Modules.KyHieuDV)
             {
@@ -288,7 +289,13 @@ namespace Vs.TimeAttendance
                         rdo_ChonNam.Visible = true;
                         break;
                     }
+                case 3:
+                    {
+                        rdo_LocLaoDong.Visible = true;
+                        break;
+                    }
                 default:
+                    rdo_LocLaoDong.Visible = false;
                     rdo_ChonNam.Visible = false;
                     break;
             }
@@ -2756,6 +2763,7 @@ namespace Vs.TimeAttendance
                 cmd.Parameters.Add("@TO", SqlDbType.Int).Value = LK_TO.EditValue;
                 cmd.Parameters.Add("@TNgay", SqlDbType.Date).Value = Commons.Modules.ObjSystems.setDate1Month(datTThang.DateTime, 0);
                 cmd.Parameters.Add("@DNgay", SqlDbType.Date).Value = Commons.Modules.ObjSystems.setDate1Month(datDThang.DateTime, 1);
+                cmd.Parameters.Add("@LOC_NHAN_SU", SqlDbType.Int).Value = rdo_LocLaoDong.SelectedIndex;
                 cmd.CommandType = CommandType.StoredProcedure;
                 System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
                 DataSet ds = new DataSet();
@@ -3041,9 +3049,27 @@ namespace Vs.TimeAttendance
 
                     }
 
+                    Microsoft.Office.Interop.Excel.Range formatRangeTest;
+
+                    for (int i = rowBD; i <= oRow; i++)
+                    {
+                        Microsoft.Office.Interop.Excel.FormatCondition condition;
+                        formatRangeTest = oSheet.Range[oSheet.Cells[i, 16], oSheet.Cells[i, 16]];
+                        if (formatRangeTest.Value2 == "NV")
+                        {
+                            formatRangeTest = oSheet.Range[oSheet.Cells[i, 2], oSheet.Cells[i, 2]];
+                            formatRangeTest.Interior.Color = Color.FromArgb(255, 255, 0); // Đặt màu nền của ô B1 thành màu vàng
+                        }
+                    }
+                    formatRangeTest = oSheet.Range[oSheet.Cells[rowBD, 16], oSheet.Cells[oRow, 16]];
+                    formatRangeTest.Value2 = "";
                     BorderAround(oSheet.Range[oSheet.Cells[rowBD - 2, 1], oSheet.Cells[oRow, lastColumn]]);
 
                     oRow = oRow + 4;
+
+
+
+
                     //oSheet = (Excel.Worksheet)oBook.ActiveSheet;
                     //oSheet = oBook.Worksheets.Add(After: oBook.Sheets[oBook.Sheets.Count]);
                 }
@@ -3066,6 +3092,10 @@ namespace Vs.TimeAttendance
                 formatRange2.Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
                 formatRange2.Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
 
+
+
+
+
                 oSheet.PageSetup.FitToPagesWide = 1;
                 oSheet.PageSetup.FitToPagesTall = false;
                 oSheet.PageSetup.Zoom = false;
@@ -3077,6 +3107,8 @@ namespace Vs.TimeAttendance
                 oSheet.PageSetup.HeaderMargin = oApp.InchesToPoints(0.3);
                 oSheet.PageSetup.FooterMargin = oApp.InchesToPoints(0.3);
                 oSheet.PageSetup.Orientation = Excel.XlPageOrientation.xlLandscape;
+
+                oSheet.PageSetup.PrintTitleRows = "$A$9:$" + CharacterIncrement(lastColumn) + "$10";
 
                 this.Cursor = Cursors.Default;
                 oBook.Sheets[1].Activate();

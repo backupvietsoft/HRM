@@ -48,6 +48,8 @@
             this.ItemForDONVI = new DevExpress.XtraLayout.LayoutControlItem();
             this.cboDonVi = new DevExpress.XtraEditors.SearchLookUpEdit();
             this.layoutControl = new DevExpress.XtraLayout.LayoutControl();
+            this.grdCatTC = new DevExpress.XtraGrid.GridControl();
+            this.grvCatTC = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.cboXiNghiep = new DevExpress.XtraEditors.SearchLookUpEdit();
             this.cboNgay = new Commons.MPopupContainerEdit();
             this.cboTo = new DevExpress.XtraEditors.SearchLookUpEdit();
@@ -57,6 +59,8 @@
             this.ItemForTO = new DevExpress.XtraLayout.LayoutControlItem();
             this.ItemForSumNhanVien = new DevExpress.XtraLayout.SimpleLabelItem();
             this.emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
+            this.grpNgayCatTangCa = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.btnALL = new DevExpress.XtraBars.Docking2010.WindowsUIButtonPanel();
             this.searchControl = new DevExpress.XtraEditors.SearchControl();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -80,6 +84,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.cboDonVi.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl)).BeginInit();
             this.layoutControl.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.grdCatTC)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grvCatTC)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboXiNghiep.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboNgay.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboTo.Properties)).BeginInit();
@@ -89,6 +95,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.ItemForTO)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForSumNhanVien)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grpNgayCatTangCa)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             this.btnALL.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.searchControl.Properties)).BeginInit();
             this.panel1.SuspendLayout();
@@ -107,7 +115,8 @@
             this.XINGHIEP,
             this.ItemForTO,
             this.ItemForSumNhanVien,
-            this.emptySpaceItem2});
+            this.emptySpaceItem2,
+            this.grpNgayCatTangCa});
             this.Root.Name = "Root";
             this.Root.Size = new System.Drawing.Size(801, 357);
             this.Root.TextVisible = false;
@@ -115,9 +124,9 @@
             // layoutControlItem2
             // 
             this.layoutControlItem2.Control = this.grpCongNhan;
-            this.layoutControlItem2.Location = new System.Drawing.Point(0, 71);
+            this.layoutControlItem2.Location = new System.Drawing.Point(263, 71);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(791, 266);
+            this.layoutControlItem2.Size = new System.Drawing.Size(528, 266);
             this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem2.TextVisible = false;
             // 
@@ -126,9 +135,9 @@
             this.grpCongNhan.Controls.Add(this.popNgay);
             this.grpCongNhan.Controls.Add(this.popListNgay);
             this.grpCongNhan.Controls.Add(this.grdCongNhan);
-            this.grpCongNhan.Location = new System.Drawing.Point(6, 77);
+            this.grpCongNhan.Location = new System.Drawing.Point(269, 77);
             this.grpCongNhan.Name = "grpCongNhan";
-            this.grpCongNhan.Size = new System.Drawing.Size(789, 264);
+            this.grpCongNhan.Size = new System.Drawing.Size(526, 264);
             this.grpCongNhan.TabIndex = 5;
             this.grpCongNhan.Text = "groupCongNhan";
             // 
@@ -154,6 +163,7 @@
             this.calNgay.ShowClearButton = true;
             this.calNgay.Size = new System.Drawing.Size(436, 395);
             this.calNgay.TabIndex = 1;
+            this.calNgay.VistaCalendarViewStyle = DevExpress.XtraEditors.VistaCalendarViewStyle.YearView;
             this.calNgay.DateTimeCommit += new System.EventHandler(this.calNgay_DateTimeCommit);
             // 
             // popListNgay
@@ -199,7 +209,7 @@
             this.grdCongNhan.Location = new System.Drawing.Point(2, 21);
             this.grdCongNhan.MainView = this.grvCongNhan;
             this.grdCongNhan.Name = "grdCongNhan";
-            this.grdCongNhan.Size = new System.Drawing.Size(785, 241);
+            this.grdCongNhan.Size = new System.Drawing.Size(522, 241);
             this.grdCongNhan.TabIndex = 4;
             this.grdCongNhan.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grvCongNhan,
@@ -244,6 +254,7 @@
             // 
             // layoutControl
             // 
+            this.layoutControl.Controls.Add(this.grdCatTC);
             this.layoutControl.Controls.Add(this.cboXiNghiep);
             this.layoutControl.Controls.Add(this.grpCongNhan);
             this.layoutControl.Controls.Add(this.cboNgay);
@@ -257,6 +268,26 @@
             this.layoutControl.Size = new System.Drawing.Size(801, 357);
             this.layoutControl.TabIndex = 3;
             this.layoutControl.Text = "layoutControl1";
+            // 
+            // grdCatTC
+            // 
+            this.grdCatTC.Location = new System.Drawing.Point(12, 102);
+            this.grdCatTC.MainView = this.grvCatTC;
+            this.grdCatTC.Name = "grdCatTC";
+            this.grdCatTC.Size = new System.Drawing.Size(249, 233);
+            this.grdCatTC.TabIndex = 6;
+            this.grdCatTC.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.grvCatTC});
+            // 
+            // grvCatTC
+            // 
+            this.grvCatTC.GridControl = this.grdCatTC;
+            this.grvCatTC.Name = "grvCatTC";
+            this.grvCatTC.OptionsView.ShowGroupPanel = false;
+            this.grvCatTC.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.grvCatTC_FocusedRowChanged);
+            this.grvCatTC.FocusedColumnChanged += new DevExpress.XtraGrid.Views.Base.FocusedColumnChangedEventHandler(this.grvCatTC_FocusedColumnChanged);
+            this.grvCatTC.CellValueChanged += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.grvCatTC_CellValueChanged);
+            this.grvCatTC.CellValueChanging += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.grvCatTC_CellValueChanging);
             // 
             // cboXiNghiep
             // 
@@ -360,6 +391,23 @@
             this.emptySpaceItem2.Size = new System.Drawing.Size(528, 26);
             this.emptySpaceItem2.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.emptySpaceItem2.TextSize = new System.Drawing.Size(0, 0);
+            // 
+            // grpNgayCatTangCa
+            // 
+            this.grpNgayCatTangCa.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItem1});
+            this.grpNgayCatTangCa.Location = new System.Drawing.Point(0, 71);
+            this.grpNgayCatTangCa.Name = "grpNgayCatTangCa";
+            this.grpNgayCatTangCa.Size = new System.Drawing.Size(263, 266);
+            // 
+            // layoutControlItem1
+            // 
+            this.layoutControlItem1.Control = this.grdCatTC;
+            this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlItem1.Name = "layoutControlItem1";
+            this.layoutControlItem1.Size = new System.Drawing.Size(251, 235);
+            this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem1.TextVisible = false;
             // 
             // btnALL
             // 
@@ -466,6 +514,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.cboDonVi.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl)).EndInit();
             this.layoutControl.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.grdCatTC)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grvCatTC)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboXiNghiep.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboNgay.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboTo.Properties)).EndInit();
@@ -475,6 +525,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.ItemForTO)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForSumNhanVien)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grpNgayCatTangCa)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             this.btnALL.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.searchControl.Properties)).EndInit();
             this.panel1.ResumeLayout(false);
@@ -512,5 +564,9 @@
         private DevExpress.XtraEditors.SearchLookUpEdit cboXiNghiep;
         private DevExpress.XtraLayout.LayoutControlItem XINGHIEP;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem2;
+        private DevExpress.XtraGrid.GridControl grdCatTC;
+        private DevExpress.XtraGrid.Views.Grid.GridView grvCatTC;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
+        private DevExpress.XtraLayout.LayoutControlGroup grpNgayCatTangCa;
     }
 }

@@ -10,15 +10,20 @@ namespace Vs.Payroll
 {
     public partial class rptLuongTienMat_TG : DevExpress.XtraReports.UI.XtraReport
     {
-        public rptLuongTienMat_TG(string ngay, string nx,int iIDNX, string xn, string to,DateTime ngayin)
+        public rptLuongTienMat_TG(string ngay, string nx, int ixn, string to,DateTime ngayin)
         {
 
             InitializeComponent();
-            DataTable dt = Commons.Modules.ObjSystems.DataReportHeader(iIDNX);
-            this.DataSource = dt;
             Commons.Modules.ObjSystems.ThayDoiNN(this);
+            if(ixn == 2)
+            {
+                lblGiamDocXN.Text = "GĐNM CL";
+            }
+            else
+            {
+                lblGDDH_CL.Visible = false;
+            }    
             NONNX.Text = nx;
-            NONXN.Text = xn;
             NONPB.Text = to;
             lblThang.Text += " - " + ngay;
 

@@ -14,6 +14,9 @@ using DevExpress.Map.Native;
 using DevExpress.CodeParser;
 using Aspose.Words;
 using System.IO;
+using OfficeOpenXml;
+using System.Collections.Generic;
+using OfficeOpenXml.Style;
 
 namespace Vs.HRM
 {
@@ -87,6 +90,11 @@ namespace Vs.HRM
                                             case "SB":
                                                 {
                                                     frm.rpt = new rptBCHopDongHetHan_SB(lk_NgayTinh.DateTime, sTieuDe1, lk_NgayIn.DateTime, lk_NgayIn.DateTime);
+                                                    break;
+                                                }
+                                            case "NB":
+                                                {
+                                                    inHetHanHDNB(dTuNgay.DateTime, dDenNgay.DateTime);
                                                     break;
                                                 }
                                             default:
@@ -268,6 +276,11 @@ namespace Vs.HRM
                                             if (Commons.Modules.KyHieuDV == "SB")
                                             {
                                                 BaoCaoHopDongGiaiDoan_SB(1);
+                                                return;
+                                            }
+                                            if (Commons.Modules.KyHieuDV == "NB")
+                                            {
+                                                inKyHD_NB(dTuNgay.DateTime, dDenNgay.DateTime);
                                                 return;
                                             }
                                             System.Data.SqlClient.SqlConnection conn2;
@@ -485,6 +498,240 @@ namespace Vs.HRM
             rdo_ChonBaoCao.Properties.Items.Remove(rdo_ChonBaoCao.Properties.Items.Where(x => x.Tag.ToString() == "rdo_ToiHanKyHDLD").FirstOrDefault());
             Commons.Modules.sLoad = "";
         }
+
+        private void inKyHD_NB(DateTime TNgay, DateTime DNgay)
+        {
+            this.Cursor = Cursors.WaitCursor;
+            try
+            {
+                System.Data.SqlClient.SqlConnection conn;
+                conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                conn.Open();
+                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptBCKyHopDong_NB", conn);
+                cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                cmd.Parameters.Add("@Dvi", SqlDbType.Int).Value = LK_DON_VI.EditValue;
+                cmd.Parameters.Add("@XN", SqlDbType.Int).Value = LK_XI_NGHIEP.EditValue;
+                cmd.Parameters.Add("@TO", SqlDbType.Int).Value = LK_TO.EditValue;
+                cmd.Parameters.Add("@TNgay", SqlDbType.DateTime).Value = Convert.ToDateTime(dTuNgay.EditValue);
+                cmd.Parameters.Add("@DNgay", SqlDbType.DateTime).Value = Convert.ToDateTime(dDenNgay.EditValue);
+
+                cmd.CommandType = CommandType.StoredProcedure;
+                System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+                DataSet ds = new DataSet();
+                adp.Fill(ds);
+                System.Data.DataTable dt = new System.Data.DataTable();
+                dt = ds.Tables[0].Copy();
+
+                string sFileName = DateTime.Now.ToString("yyyyMMddHHmmss") + ".xlsx";
+
+                try
+                {
+                    string sDDFile = Commons.Modules.ObjSystems.CapnhatTL("");
+                    if (sDDFile != "\\")
+                        sFileName = sDDFile + "\\" + sFileName;
+                }
+                catch { }
+
+                FileInfo file = new FileInfo(sFileName);
+                if (file.Exists)
+                {
+                    file.Delete();
+                }
+                ExcelPackage pck = new ExcelPackage(file);
+                var ws1 = pck.Workbook.Worksheets.Add(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "sBCDanhSachKyHopDongLaoDong"));
+
+                Commons.Modules.MExcel.MTTChung(ws1, 1, 1, 0, 0);
+
+                int iDong = 4;
+
+                Commons.Modules.MExcel.MText(ws1, this.Name, "sBCDanhSachKyHopDongLaoDong", iDong, 1, iDong, dt.Columns.Count - 1, true, true, 16, OfficeOpenXml.Style.ExcelHorizontalAlignment.Center, OfficeOpenXml.Style.ExcelVerticalAlignment.Center);
+                iDong++;
+
+                Commons.Modules.MExcel.MText(ws1, "", Commons.Modules.ObjLanguages.GetLanguage(this.Name, "sTNgay") + " " + TNgay.ToString("dd/MM/yyyy") + " " + Commons.Modules.ObjLanguages.GetLanguage(this.Name, "sDNgay") + " " + DNgay.ToString("dd/MM/yyyy"), iDong, 1, iDong, dt.Columns.Count - 1, true, true, 16, OfficeOpenXml.Style.ExcelHorizontalAlignment.Center, OfficeOpenXml.Style.ExcelVerticalAlignment.Center);
+
+                iDong = iDong + 2;
+
+                System.Data.DataTable dtTMP = new System.Data.DataTable();
+                List<List<Object>> WidthColumns = new List<List<Object>>();
+                List<Object> WidthColumnsName = new List<Object>();
+                int iRowBorder = 0;
+                WidthColumnsName = new List<Object>() { "STT", 5 };
+                WidthColumns.Add(WidthColumnsName);
+                WidthColumnsName = new List<Object>() { "SO_HDLD", 15 };
+                WidthColumns.Add(WidthColumnsName);
+                WidthColumnsName = new List<Object>() { "MS_CN", 10, "0.00" };
+                WidthColumns.Add(WidthColumnsName);
+                WidthColumnsName = new List<Object>() { "TEN_TO", 20 };
+                WidthColumns.Add(WidthColumnsName);
+                WidthColumnsName = new List<Object>() { "HO_TEN", 20 };
+                WidthColumns.Add(WidthColumnsName);
+                WidthColumnsName = new List<Object>() { "DIA_CHI_THUONG_TRU", 80 };
+                WidthColumns.Add(WidthColumnsName);
+                WidthColumnsName = new List<Object>() { "SO_CMND", 20 };
+                WidthColumns.Add(WidthColumnsName);
+                WidthColumnsName = new List<Object>() { "NOI_CAP", 25 };
+                WidthColumns.Add(WidthColumnsName);
+                WidthColumnsName = new List<Object>() { "NGAY_CAP", 15, "dd/MM/yyyy" };
+                WidthColumns.Add(WidthColumnsName);
+                WidthColumnsName = new List<Object>() { "NGAY_VAO_LAM", 15, "dd/MM/yyyy" };
+                WidthColumns.Add(WidthColumnsName);
+                WidthColumnsName = new List<Object>() { "NGAY_BAT_DAU_HD", 15, "dd/MM/yyyy" };
+                WidthColumns.Add(WidthColumnsName);
+                WidthColumnsName = new List<Object>() { "TEN_LCV", 25, "dd/MM/yyyy" };
+                WidthColumns.Add(WidthColumnsName);
+                WidthColumnsName = new List<Object>() { "MUC_LUONG_CHINH", 15, Commons.Modules.sSoLeDG };
+                WidthColumns.Add(WidthColumnsName);
+                WidthColumnsName = new List<Object>() { "TEN_LHDLD", 15 };
+                WidthColumns.Add(WidthColumnsName);
+
+                ws1.Cells[iDong, 1].LoadFromDataTable(dt, true);
+                Commons.Modules.MExcel.MFormatExcel(ws1, dt, iDong, "sBCDanhSachKyHopDongLaoDong", WidthColumns, true, true, true);
+
+                iDong = iDong + dtTMP.Rows.Count + 1;
+                iRowBorder = iRowBorder + dtTMP.Rows.Count + 7;
+                var border = ws1.Cells[9, 1, iRowBorder + 3, dt.Columns.Count - 1].Style.Border;
+                border.Top.Style = ExcelBorderStyle.Thin;
+                border.Left.Style = ExcelBorderStyle.Thin;
+                border.Bottom.Style = ExcelBorderStyle.Thin;
+                border.Right.Style = ExcelBorderStyle.Thin;
+
+                ws1.Cells[1, 1, iRowBorder, dt.Columns.Count].Style.Font.Name = "Times New Roman";
+
+                Commons.Modules.MExcel.MText(ws1, "", "Namco , ngày " + lk_NgayIn.DateTime.Day.ToString() + " tháng " + lk_NgayIn.DateTime.Month.ToString() + " năm " + lk_NgayIn.DateTime.Year.ToString() + "", iDong + dt.Rows.Count + 1, 10, iDong + dt.Rows.Count + 1, 12, true, true, 14,
+                    OfficeOpenXml.Style.ExcelHorizontalAlignment.Center, OfficeOpenXml.Style.ExcelVerticalAlignment.Center);
+
+                Commons.Modules.MExcel.MText(ws1, this.Name, "sNguoiLapBieu", iDong + dt.Rows.Count + 2, 2, iDong + dt.Rows.Count + 2, 3, true, true, 13, OfficeOpenXml.Style.ExcelHorizontalAlignment.Center, OfficeOpenXml.Style.ExcelVerticalAlignment.Center);
+
+                Commons.Modules.MExcel.MText(ws1, this.Name, "sPhongHCNS", iDong + dt.Rows.Count + 2, 6, iDong + dt.Rows.Count + 2, 7, true, true, 13, OfficeOpenXml.Style.ExcelHorizontalAlignment.Center, OfficeOpenXml.Style.ExcelVerticalAlignment.Center);
+
+                Commons.Modules.MExcel.MText(ws1, this.Name, "sBanGiamDoc", iDong + dt.Rows.Count + 2, 10, iDong + dt.Rows.Count + 2, 12, true, true, 13, OfficeOpenXml.Style.ExcelHorizontalAlignment.Center, OfficeOpenXml.Style.ExcelVerticalAlignment.Center);
+
+                if (file.Exists)
+                    file.Delete();
+                pck.SaveAs(file);
+                System.Diagnostics.Process.Start(file.FullName);
+
+            }
+            catch (Exception ex) { XtraMessageBox.Show(ex.Message); }
+            finally { this.Cursor = Cursors.Default; }
+        }
+        private void inHetHanHDNB(DateTime TNgay, DateTime DNgay)
+        {
+            this.Cursor = Cursors.WaitCursor;
+            try
+            {
+                System.Data.SqlClient.SqlConnection conn;
+                conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                conn.Open();
+                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptBCHopDongHetHan_NB", conn);
+                cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                cmd.Parameters.Add("@Dvi", SqlDbType.Int).Value = LK_DON_VI.EditValue;
+                cmd.Parameters.Add("@XN", SqlDbType.Int).Value = LK_XI_NGHIEP.EditValue;
+                cmd.Parameters.Add("@TO", SqlDbType.Int).Value = LK_TO.EditValue;
+                cmd.Parameters.Add("@TNgay", SqlDbType.DateTime).Value = Convert.ToDateTime(dTuNgay.EditValue);
+                cmd.Parameters.Add("@DNgay", SqlDbType.DateTime).Value = Convert.ToDateTime(dDenNgay.EditValue);
+
+                cmd.CommandType = CommandType.StoredProcedure;
+                System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+                DataSet ds = new DataSet();
+                adp.Fill(ds);
+                System.Data.DataTable dt = new System.Data.DataTable();
+                dt = ds.Tables[0].Copy();
+
+                string sFileName = DateTime.Now.ToString("yyyyMMddHHmmss") + ".xlsx";
+
+                try
+                {
+                    string sDDFile = Commons.Modules.ObjSystems.CapnhatTL("");
+                    if (sDDFile != "\\")
+                        sFileName = sDDFile + "\\" + sFileName;
+                }
+                catch { }
+
+                FileInfo file = new FileInfo(sFileName);
+                if (file.Exists)
+                {
+                    file.Delete();
+                }
+                ExcelPackage pck = new ExcelPackage(file);
+                var ws1 = pck.Workbook.Worksheets.Add(Commons.Modules.ObjLanguages.GetLanguage(this.Name, "sBCDanhSachCongNhanHetHanHD"));
+
+                Commons.Modules.MExcel.MTTChung(ws1, 1, 1, 0, 0);
+
+                int iDong = 4;
+
+                Commons.Modules.MExcel.MText(ws1, this.Name, "sBCDanhSachCongNhanHetHanHD", iDong, 1, iDong, dt.Columns.Count - 1, true, true, 16, OfficeOpenXml.Style.ExcelHorizontalAlignment.Center, OfficeOpenXml.Style.ExcelVerticalAlignment.Center);
+                iDong++;
+
+                Commons.Modules.MExcel.MText(ws1, "", Commons.Modules.ObjLanguages.GetLanguage(this.Name, "sTNgay") + " " + TNgay.ToString("dd/MM/yyyy") + " " + Commons.Modules.ObjLanguages.GetLanguage(this.Name, "sDNgay") + " " + DNgay.ToString("dd/MM/yyyy"), iDong, 1, iDong, dt.Columns.Count - 1, true, true, 16, OfficeOpenXml.Style.ExcelHorizontalAlignment.Center, OfficeOpenXml.Style.ExcelVerticalAlignment.Center);
+
+                iDong = iDong + 2;
+
+                System.Data.DataTable dtTMP = new System.Data.DataTable();
+                List<List<Object>> WidthColumns = new List<List<Object>>();
+                List<Object> WidthColumnsName = new List<Object>();
+                int iRowBorder = 0;
+                WidthColumnsName = new List<Object>() { "STT", 5 };
+                WidthColumns.Add(WidthColumnsName);
+                WidthColumnsName = new List<Object>() { "SO_HDLD", 15 };
+                WidthColumns.Add(WidthColumnsName);
+                WidthColumnsName = new List<Object>() { "MS_CN", 10, "0.00" };
+                WidthColumns.Add(WidthColumnsName);
+                WidthColumnsName = new List<Object>() { "HO_TEN", 20 };
+                WidthColumns.Add(WidthColumnsName);
+                WidthColumnsName = new List<Object>() { "DIA_CHI_THUONG_TRU", 80 };
+                WidthColumns.Add(WidthColumnsName);
+                WidthColumnsName = new List<Object>() { "SO_CMND", 20 };
+                WidthColumns.Add(WidthColumnsName);
+                WidthColumnsName = new List<Object>() { "NOI_CAP", 25};
+                WidthColumns.Add(WidthColumnsName);
+                WidthColumnsName = new List<Object>() { "NGAY_CAP", 15 , "dd/MM/yyyy" };
+                WidthColumns.Add(WidthColumnsName);
+                WidthColumnsName = new List<Object>() { "NGAY_VAO_LAM", 15, "dd/MM/yyyy" };
+                WidthColumns.Add(WidthColumnsName);
+                WidthColumnsName = new List<Object>() { "NGAY_KY", 15, "dd/MM/yyyy" };
+                WidthColumns.Add(WidthColumnsName);
+                WidthColumnsName = new List<Object>() { "NGAY_HET_HD", 15, "dd/MM/yyyy" };
+                WidthColumns.Add(WidthColumnsName);
+                WidthColumnsName = new List<Object>() { "TEN_LHDLD", 15 };
+                WidthColumns.Add(WidthColumnsName);
+
+                ws1.Cells[iDong, 1].LoadFromDataTable(dt, true);
+                Commons.Modules.MExcel.MFormatExcel(ws1, dt, iDong, "sBCDanhSachCongNhanHetHanHD", WidthColumns, true, true, true);
+
+                iDong = iDong + dtTMP.Rows.Count + 1;
+                iRowBorder = iRowBorder + dtTMP.Rows.Count + 7;
+                var border = ws1.Cells[iRowBorder, 1, iRowBorder + dt.Rows.Count, dt.Columns.Count - 1].Style.Border;
+                border.Top.Style = ExcelBorderStyle.Thin;
+                border.Left.Style = ExcelBorderStyle.Thin;
+                border.Bottom.Style = ExcelBorderStyle.Thin;
+                border.Right.Style = ExcelBorderStyle.Thin;
+
+                ws1.Cells[1, 1, iRowBorder, dt.Columns.Count].Style.Font.Name = "Times New Roman";
+
+                Commons.Modules.MExcel.MText(ws1, "", "Namco , ngày " + lk_NgayIn.DateTime.Day.ToString() + " tháng " + lk_NgayIn.DateTime.Month.ToString() + " năm " + lk_NgayIn.DateTime.Year.ToString() + "", iDong + dt.Rows.Count + 1, 10, iDong + dt.Rows.Count + 1, 12, true, true, 14,
+                    OfficeOpenXml.Style.ExcelHorizontalAlignment.Center, OfficeOpenXml.Style.ExcelVerticalAlignment.Center);
+
+                Commons.Modules.MExcel.MText(ws1, this.Name, "sNguoiLapBieu", iDong + dt.Rows.Count + 2, 2, iDong + dt.Rows.Count + 2, 3, true, true, 13, OfficeOpenXml.Style.ExcelHorizontalAlignment.Center, OfficeOpenXml.Style.ExcelVerticalAlignment.Center);
+
+                Commons.Modules.MExcel.MText(ws1, this.Name, "sPhongHCNS", iDong + dt.Rows.Count + 2, 6, iDong + dt.Rows.Count + 2, 7, true, true, 13, OfficeOpenXml.Style.ExcelHorizontalAlignment.Center, OfficeOpenXml.Style.ExcelVerticalAlignment.Center);
+
+                Commons.Modules.MExcel.MText(ws1, this.Name, "sBanGiamDoc", iDong + dt.Rows.Count + 2, 11, iDong + dt.Rows.Count + 2, 14, true, true, 13, OfficeOpenXml.Style.ExcelHorizontalAlignment.Center, OfficeOpenXml.Style.ExcelVerticalAlignment.Center);
+
+                if (file.Exists)
+                    file.Delete();
+                pck.SaveAs(file);
+                System.Diagnostics.Process.Start(file.FullName);
+
+            }
+            catch (Exception ex) { XtraMessageBox.Show(ex.Message); }
+            finally { this.Cursor = Cursors.Default; }
+
+        }
+
+
         private void LoadCboDonVi()
         {
             try

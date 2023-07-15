@@ -166,6 +166,11 @@ namespace Vs.HRM
             //Mã thẻ cũ
             Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboLaoDongChinhThuc, dtLoaiLaoDong, "ID_LLD", "TEN_LOAI_LD", "TEN_LOAI_LD", true, true);
 
+            //loại hộ nghèo
+            string strLHN = "SELECT ID_LHN,TEN_LHN FROM dbo.LOAI_HO_NGHEO \r\nUNION \r\nSELECT -1,''";
+            DataTable dtLHN = new DataTable();
+            dtLHN.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, strLHN));
+            Commons.Modules.ObjSystems.MLoadLookUpEditN(cboHoNgheo, dtLHN, "ID_LHN", "TEN_LHN", "TEN_LHN", "");
 
             // PHAILookUpEdit
             DataTable dt_Phai = new DataTable();
@@ -173,9 +178,6 @@ namespace Vs.HRM
             Commons.Modules.ObjSystems.MLoadLookUpEditN(PHAILookupEdit, dt_Phai, "ID_PHAI", "PHAI", "PHAI", "");
 
             ItemForKHU_VUC.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
-            ItemForLD_TINH.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
-            ItemForTRUC_TIEP_SX.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
-            ItemForLAO_DONG_CONG_NHAT.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             if (idcn == -1)
             {
                 enableButon(false);
@@ -198,6 +200,10 @@ namespace Vs.HRM
                 case "NB":
                     {
                         ItemForTEN.Text = "   ";
+                        string sSQL = "SELECT DISTINCT ISNULL(MA_THE_ATM,'') THONG_TIN_NH FROM dbo.CONG_NHAN WHERE ISNULL(MA_THE_ATM,'') <> ''";
+                        DataTable dtTTNganHang = new DataTable();
+                        dtTTNganHang.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSQL));
+                        Commons.Modules.ObjSystems.MAutoCompleteTextEdit(MA_THE_ATMTextEdit, dtTTNganHang, "THONG_TIN_NH");
                         break;
                     }
                 case "SB":
@@ -212,6 +218,14 @@ namespace Vs.HRM
                 case "TG":
                     {
                         string sSQL = "SELECT N'Cục cảnh sát QLHC về trật tự xã hội' NOI_CAP\r\nUNION\r\nSELECT N'CA Tiền Giang'\r\nUNION\r\nSELECT N'CA Bến Tre'\r\nUNION\r\nSELECT N'CA Long An'\r\nUNION\r\nSELECT N'CA Vĩnh Long'\r\nUNION\r\nSELECT N'CA TP.HCM'\r\nUNION\r\nSELECT N'CA Bình Dương'\r\nUNION\r\nSELECT N'CA Đồng Tháp'\r\nUNION\r\nSELECT N'CA Sóc Trăng'\r\nUNION\r\nSELECT N'CA Trà Vinh'\r\nUNION\r\nSELECT N'CA Kiên Giang'\r\nUNION\r\nSELECT N'CA Hậu Giang'\r\nUNION\r\nSELECT N'CA Cà Mau'\r\nUNION\r\nSELECT N'CA Cần Thơ'\r\n\r\n";
+                        DataTable dtNoiCap = new DataTable();
+                        dtNoiCap.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSQL));
+                        Commons.Modules.ObjSystems.MAutoCompleteTextEdit(txtNOI_CAP, dtNoiCap, "NOI_CAP");
+                        break;
+                    }
+                case "AP":
+                    {
+                        string sSQL = "SELECT DISTINCT NOI_CAP FROM dbo.CONG_NHAN";
                         DataTable dtNoiCap = new DataTable();
                         dtNoiCap.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSQL));
                         Commons.Modules.ObjSystems.MAutoCompleteTextEdit(txtNOI_CAP, dtNoiCap, "NOI_CAP");
@@ -462,7 +476,9 @@ namespace Vs.HRM
                             {
                                 //Commons.Modules.ObjSystems.LuuDuongDan(strDuongDan, txtTaiLieu.Text);
                                 this.ClearError();
+                                Commons.Modules.sLoad = "0Load";
                                 BinDingData(false);
+                                Commons.Modules.sLoad = "";
                                 enableButon(true);
                             }
                             Commons.Modules.ObjSystems.DeleteAddRow(grvBangCapCN);
@@ -594,6 +610,7 @@ namespace Vs.HRM
             {
                 SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "DELETE dbo.BAO_HIEM_Y_TE WHERE ID_CN =  " + Commons.Modules.iCongNhan + "");
                 SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "DELETE dbo.BANG_CAP WHERE ID_CN =  " + Commons.Modules.iCongNhan + "");
+                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "UPDATE dbo.CONG_NHAN SET USER_DEL = '" + Commons.Modules.UserName + "' WHERE ID_CN = " + Commons.Modules.iCongNhan);
                 SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "DELETE dbo.CONG_NHAN WHERE ID_CN = " + Commons.Modules.iCongNhan + "");
                 try
                 {
@@ -827,6 +844,7 @@ namespace Vs.HRM
 
                 datNgayKTHocViec.EditValue = string.Empty;
                 txtLuongHocViec.EditValue = string.Empty;
+                cboHoNgheo.EditValue = null;
             }
             else
             {
@@ -843,7 +861,7 @@ namespace Vs.HRM
                     MS_CNTextEdit.EditValue = dt.Rows[0]["MS_CN"];
                     try
                     {
-                        if (Commons.Modules.KyHieuDV == "SB" || Commons.Modules.KyHieuDV == "NB")
+                        if (Commons.Modules.KyHieuDV == "SB")
                         {
                             Byte[] data = new Byte[0];
                             data = (Byte[])(dt.Rows[0]["Hinh_CN"]);
@@ -973,6 +991,7 @@ namespace Vs.HRM
                         cboMS_CN_CU.EditValue = dt.Rows[0]["ID_CN_CU"];
                         datNgayKTHocViec.EditValue = dt.Rows[0]["NGAY_KT_HOC_VIEC"];
                         txtLuongHocViec.EditValue = dt.Rows[0]["MUC_LUONG_HV"];
+                        cboHoNgheo.EditValue = dt.Rows[0]["HO_NGHEO"];
                     }
                     catch { }
                 }
@@ -1088,8 +1107,6 @@ namespace Vs.HRM
                 XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgBanKhongCoQuyenTruyCapDD"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgfrmThongBao"), MessageBoxButtons.OK);
             }
         }
-
-
         private void enableButon(bool visible)
         {
             windowsUIButton.Buttons[0].Properties.Visible = visible;
@@ -1202,6 +1219,7 @@ namespace Vs.HRM
             cboMS_CN_CU.Properties.ReadOnly = visible;
             datNgayKTHocViec.Properties.ReadOnly = visible;
             txtLuongHocViec.Properties.ReadOnly = visible;
+            cboHoNgheo.Properties.ReadOnly = visible;
 
         }
         private void LockTheoQTCT()
@@ -1305,7 +1323,7 @@ namespace Vs.HRM
                 }
                 Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sTBTaiLieu, Commons.Modules.ObjSystems.ConvertDatatable(grvTaiLieu), "");
 
-                if (Commons.Modules.KyHieuDV != "SB" && Commons.Modules.KyHieuDV != "NB")
+                if (Commons.Modules.KyHieuDV != "SB")
                 {
                     HINH_CNPictureEdit.EditValue = "";
                 }
@@ -1400,6 +1418,9 @@ namespace Vs.HRM
                 cmd.Parameters.Add("@NGAY_KT_HV", SqlDbType.DateTime).Value = Convert.ToString(datNgayKTHocViec.EditValue) == "" ? DBNull.Value : datNgayKTHocViec.EditValue;
                 cmd.Parameters.Add("@MUC_LUONG_HV", SqlDbType.Float).Value = Convert.ToString(txtLuongHocViec.Text) == "" ? 0 : txtLuongHocViec.EditValue;
                 cmd.Parameters.Add("@ID_LLD", SqlDbType.BigInt).Value = Convert.ToString(cboLaoDongChinhThuc.EditValue) == "" ? DBNull.Value : cboLaoDongChinhThuc.EditValue;
+                cmd.Parameters.Add("@HO_NGHEO", SqlDbType.BigInt).Value = Convert.ToString(cboHoNgheo.EditValue) == "" ? DBNull.Value : cboHoNgheo.EditValue;
+                cmd.Parameters.Add("@UName", SqlDbType.NVarChar).Value = Commons.Modules.UserName;
+                cmd.Parameters.Add("@ID_USER", SqlDbType.BigInt).Value = Commons.Modules.iIDUser;
                 cmd.CommandType = CommandType.StoredProcedure;
                 Commons.Modules.iCongNhan = Convert.ToInt64(cmd.ExecuteScalar());
                 try
@@ -1463,6 +1484,11 @@ namespace Vs.HRM
 
             }
             cmd.CommandType = CommandType.StoredProcedure;
+            if (Convert.ToInt32(cmd.ExecuteScalar()) == 1)
+            {
+                Commons.Modules.ObjSystems.MsgError("Trùng mã");
+                return false;
+            }
             return true;
         }
         #endregion
@@ -1607,17 +1633,7 @@ namespace Vs.HRM
 
         private void THAM_GIA_BHXHCheckEdit_CheckedChanged(object sender, EventArgs e)
         {
-            if (windowsUIButton.Buttons[5].Properties.Visible == false)
-            {
-                bool visible = THAM_GIA_BHXHCheckEdit.Checked;
-                SO_BHXHTextEdit.Properties.ReadOnly = !visible;
-                NGAY_DBHXHDateEdit.ReadOnly = !visible;
-                NGAY_CHAM_DUT_NOP_BHXHDateEdit.ReadOnly = !visible;
-                SO_THE_BHYTTextEdit.Properties.ReadOnly = !visible;
-                NGAY_HET_HANDateEdit.Properties.ReadOnly = !visible;
-                TINH_THANHLookUpEdit.Properties.ReadOnly = !visible;
-                BENH_VIENLookUpEdit.Properties.ReadOnly = !visible;
-            }
+
         }
 
         private void LD_NNCheckEdit_CheckedChanged(object sender, EventArgs e)
@@ -1688,8 +1704,7 @@ namespace Vs.HRM
 
         private void MA_THE_ATMTextEdit_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!Char.IsDigit(e.KeyChar) && !Char.IsControl(e.KeyChar))
-                e.Handled = true;
+
         }
 
         private void cboID_TP_KS_EditValueChanged(object sender, EventArgs e)
@@ -1906,7 +1921,9 @@ namespace Vs.HRM
 
                             iCurrentID = Commons.Modules.iCongNhan;
                             Commons.Modules.iCongNhan = Convert.ToInt64(cboMS_CN_CU.EditValue);
+                            Commons.Modules.sLoad = "0Load";
                             BinDingData(false);
+                            Commons.Modules.sLoad = "";
                             break;
                         }
                     case "undo":
@@ -1915,7 +1932,9 @@ namespace Vs.HRM
                             string sSQL = "SELECT ID_CN FROM dbo.CONG_NHAN WHERE ID_CN_CU = " + Commons.Modules.iCongNhan + "";
                             iCurrentID = Convert.ToInt64(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, sSQL)) == 0 ? iCurrentID : Convert.ToInt64(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, sSQL));
                             Commons.Modules.iCongNhan = iCurrentID;
+                            Commons.Modules.sLoad = "0Load";
                             BinDingData(false);
+                            Commons.Modules.sLoad = "";
                             break;
                         }
                 }
@@ -1934,7 +1953,11 @@ namespace Vs.HRM
         private void NGAY_VAO_LAMDateEdit_EditValueChanged(object sender, EventArgs e)
         {
             if (Commons.Modules.sLoad == "0Load") return;
-            NGAY_HOC_VIECDateEdit.EditValue = NGAY_VAO_LAMDateEdit.EditValue;
+            if (Commons.Modules.KyHieuDV == "TG")
+            {
+                NGAY_HOC_VIECDateEdit.EditValue = NGAY_VAO_LAMDateEdit.EditValue;
+            }
+            NGAY_THU_VIECDateEdit.EditValue = NGAY_VAO_LAMDateEdit.EditValue;
         }
 
         private void cboMS_CN_CU_EditValueChanged(object sender, EventArgs e)

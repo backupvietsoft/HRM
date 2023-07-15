@@ -20,7 +20,6 @@ namespace Vs.HRM
         private int iIDCN_Temp = -1;
         bool isEditor = false;
         bool isNewRow = false;
-        bool isCorrect = true;
         public static ucKeHoachThaiSan _instance;
         public static ucKeHoachThaiSan Instance
         {
@@ -198,8 +197,7 @@ namespace Vs.HRM
             {
                 DataTable dt = new DataTable();
                 dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetDanhSachThaiSanCaNhan", Commons.Modules.UserName, Commons.Modules.TypeLanguage, grvDSCN.GetFocusedRowCellValue("ID_CN")));
-                grdNgay.DataSource = dt;
-                //Commons.Modules.ObjSystems.MLoadXtraGrid(grdNgay, grvNgay, dt, true, true, true, false, true, this.Name);
+                Commons.Modules.ObjSystems.MLoadXtraGrid(grdNgay, grvNgay, dt, true, true, true, false, true, this.Name);
                 //Commons.Modules.ObjSystems.AddCombXtra("ID_LDV", "TEN_LDV", grvNgay, Commons.Modules.ObjSystems.DataLyDoVang(false, -1), "ID_LDV", this.Name);
 
                 RepositoryItemDateEdit dEditN = new RepositoryItemDateEdit();
@@ -346,7 +344,6 @@ namespace Vs.HRM
         }
         private void grvNgay_InvalidValueException(object sender, DevExpress.XtraEditors.Controls.InvalidValueExceptionEventArgs e)
         {
-            isCorrect = false;
             e.ExceptionMode = DevExpress.XtraEditors.Controls.ExceptionMode.Ignore;
             e.WindowCaption = "Input Error";
             XtraMessageBox.Show(e.ErrorText, e.WindowCaption, MessageBoxButtons.OK, MessageBoxIcon.Warning); return;
@@ -354,7 +351,6 @@ namespace Vs.HRM
 
         private void grvNgay_InvalidRowException(object sender, DevExpress.XtraGrid.Views.Base.InvalidRowExceptionEventArgs e)
         {
-            isCorrect = false;
             e.ExceptionMode = DevExpress.XtraEditors.Controls.ExceptionMode.NoAction;
             //e.WindowCaption = "Input Error";
             //XtraMessageBox.Show(e.ErrorText, e.WindowCaption, MessageBoxButtons.OK, MessageBoxIcon.Warning); return;
@@ -425,7 +421,6 @@ namespace Vs.HRM
                 if(e.Valid)
                 {
                     view.ClearColumnErrors();
-                    isCorrect = true;
                     return;
                 }
             }
@@ -514,7 +509,6 @@ namespace Vs.HRM
 
                     if (e.Valid)
                     {
-                        isCorrect = true;
                         View.ClearColumnErrors();
                     }
                 }
@@ -633,7 +627,6 @@ namespace Vs.HRM
                     {
                         isEditor = true;
                         isNewRow = false;
-                        isCorrect = false;
                         iIDCN_Temp = Convert.ToInt32(grvDSCN.GetFocusedRowCellValue("ID_CN"));
                         UpdateKeHoachThaiSan();
 
@@ -643,7 +636,6 @@ namespace Vs.HRM
                     {
                         isNewRow = true;
                         isEditor = false;
-                        isCorrect = false;
                         iIDCN_Temp = Convert.ToInt32(grvDSCN.GetFocusedRowCellValue("ID_CN"));
                         enableButon(false);
                         windowsUIButton.Buttons[1].Properties.Visible = false;
@@ -713,17 +705,14 @@ namespace Vs.HRM
                         {
                             grvNgay.CloseEditor();
                             grvNgay.UpdateCurrentRow();
-                            if(isCorrect)
-                            {
-                                grvNgay.RefreshData();
-                                enableButon(true);
-                                SaveNewRow();
-                                Commons.Modules.ObjSystems.DeleteAddRow(grvNgay);
-                                isEditor = false;
-                                isNewRow = false;
-                                LoadGrdCongNhan(false);
-                                LoadGrdThaiSanCaNhan();
-                            }
+                            grvNgay.RefreshData();
+                            enableButon(true);
+                            SaveNewRow();
+                            Commons.Modules.ObjSystems.DeleteAddRow(grvNgay);
+                            isEditor = false;
+                            isNewRow = false;
+                            LoadGrdCongNhan(false);
+                            LoadGrdThaiSanCaNhan();
                         }
                         catch (Exception ex)
                         {

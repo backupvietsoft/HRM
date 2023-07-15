@@ -500,6 +500,7 @@
             this.tablePanel1.SetRowSpan(this.searchControl2, 2);
             this.searchControl2.Size = new System.Drawing.Size(144, 24);
             this.searchControl2.TabIndex = 2;
+            this.searchControl2.EditValueChanged += new System.EventHandler(this.searchControl2_EditValueChanged);
             // 
             // grdDSCongNhan
             // 

@@ -348,10 +348,10 @@ namespace VietSoftHRM
             //bool bLoad = Convert.ToBoolean(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, sSQL));
             //if (bLoad) { MessageBox.Show("Hết hạn sử dụng"); Application.Exit(); }
 
-            if (!clsMain.CheckServer())
-            {
-                Application.Exit();
-            }
+            //if (!clsMain.CheckServer())
+            //{
+            //    Application.Exit();
+            //}
         }
 
         private void pic_database_DoubleClick(object sender, EventArgs e)

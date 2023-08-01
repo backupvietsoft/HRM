@@ -48,7 +48,8 @@ namespace Vs.Payroll
                 dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboDON_VI", Commons.Modules.UserName, Commons.Modules.TypeLanguage, 0));
                 Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboDonVi, dt, "ID_DV", "TEN_DV", "TEN_DV");
                 Commons.Modules.ObjSystems.LoadCboXiNghiep(cboDonVi, cboXiNghiep);
-                Commons.Modules.ObjSystems.LoadCboTo(cboDonVi, cboXiNghiep, cboTo, true);
+
+                Commons.Modules.ObjSystems.LoadCboTo(cboDonVi, cboXiNghiep, cboTo, Commons.Modules.KyHieuDV =="TG" ? true :false);
                 Commons.Modules.sLoad = "";
             }
             catch { }
@@ -67,6 +68,11 @@ namespace Vs.Payroll
                         case "TG":
                             {
                                 LoadGrdGTGC_TG();
+                                break;
+                            }
+                        case "MT":
+                            {
+                                LoadGrdGTGC_MT();
                                 break;
                             }
                         default:
@@ -263,6 +269,90 @@ namespace Vs.Payroll
 
             }
         }
+        private void LoadGrdGTGC_MT()
+        {
+            try
+            {
+                DataTable dt = new DataTable();
+                DateTime Tngay = Convert.ToDateTime(cboThang.EditValue);
+                DateTime Dngay = Convert.ToDateTime(cboThang.EditValue).AddMonths(1).AddDays(-1);
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetBangLuong_MT", Commons.Modules.UserName, Commons.Modules.TypeLanguage, cboDonVi.EditValue, cboXiNghiep.EditValue, cboTo.EditValue, Tngay, Dngay));
+                dt.Columns["THANH_TOAN_KHAC"].ReadOnly = false;
+                if (grdData.DataSource == null)
+                {
+                    Commons.Modules.ObjSystems.MLoadXtraGrid(grdData, grvData, dt, true, false, false, true, true, this.Name);
+                    grvData.Columns["ID_CN"].Visible = false;
+                    grvData.Columns["ID_CTL"].Visible = false;
+                    grvData.Columns["ID_TO"].Visible = false;
+                    grvData.Columns["MS_CN"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
+                    grvData.Columns["HO_TEN"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
+                    grvData.Columns["TEN_TO"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
+                    grvData.Columns["CACH_TL"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
+                    grvData.Columns["TEN_LCV"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
+
+                    for (int i = 7; i < grvData.Columns.Count - 1; i++)
+                    {
+                        grvData.Columns[i].OptionsColumn.AllowEdit = false;
+                        switch (grvData.Columns[i].FieldName)
+                        {
+                            case "NGAY_CONG":
+                            case "GIO_CONG":
+                            case "NGAY_PHEP":
+                            case "NGAY_LE":
+                            case "TC_THUONG":
+                            case "TC_DEM":
+                            case "TC_CN":
+                            case "NGHI_VIEC_CL":
+                            case "CD_NU":
+                            case "DIEM":
+                                {
+                                    try
+                                    {
+                                        grvData.Columns[grvData.Columns[i].FieldName].DisplayFormat.FormatType = FormatType.Numeric;
+                                        grvData.Columns[grvData.Columns[i].FieldName].DisplayFormat.FormatString = "N1";
+                                    }
+                                    catch
+                                    {
+                                    }
+
+                                    break;
+                                }
+                            default:
+                                {
+                                    try
+                                    {
+                                        grvData.Columns[grvData.Columns[i].FieldName].DisplayFormat.FormatType = FormatType.Numeric;
+                                        grvData.Columns[grvData.Columns[i].FieldName].DisplayFormat.FormatString = "N0";
+                                    }
+                                    catch
+                                    {
+                                    }
+
+                                }
+                                break;
+                        }
+                    }
+
+                    grvData.Columns["MS_CN"].OptionsColumn.AllowEdit = false;
+                    grvData.Columns["HO_TEN"].OptionsColumn.AllowEdit = false;
+                    grvData.Columns["TEN_TO"].OptionsColumn.AllowEdit = false;
+
+                    grvData.Columns["THANH_TOAN_KHAC"].OptionsColumn.AllowEdit = true;
+                   
+
+                    grvData.OptionsSelection.MultiSelect = true;
+                    grvData.OptionsSelection.MultiSelectMode = GridMultiSelectMode.RowSelect;
+                }
+                else
+                {
+                    grdData.DataSource = dt;
+                }
+            }
+            catch
+            {
+
+            }
+        }
 
         private void LoadGrdGTGC_TG()
         {
@@ -286,7 +376,6 @@ namespace Vs.Payroll
                     grvData.Columns["CACH_TL"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
                     grvData.Columns["TEN_LCV"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
 
-
                     for (int i = 7; i < grvData.Columns.Count - 1; i++)
                     {
                         grvData.Columns[i].OptionsColumn.AllowEdit = false;
@@ -308,7 +397,7 @@ namespace Vs.Payroll
                                     catch
                                     {
                                     }
-                                   
+
                                     break;
                                 }
                             default:
@@ -321,7 +410,7 @@ namespace Vs.Payroll
                                     catch
                                     {
                                     }
-                                    
+
                                 }
                                 break;
                         }
@@ -688,8 +777,13 @@ namespace Vs.Payroll
                 switch (Commons.Modules.KyHieuDV)
                 {
                     case "DM":
-                    {
+                        {
                             sSql = "SELECT disTINCT SUBSTRING(CONVERT(VARCHAR(10),THANG,103),4,2) as M, RIGHT(CONVERT(VARCHAR(10),THANG,103),4) AS Y ,RIGHT(CONVERT(VARCHAR(10),THANG,103),7) AS THANG FROM dbo.BANG_LUONG_DM WHERE ID_DV = " + cboDonVi.EditValue + " ORDER BY Y DESC , M DESC";
+                            break;
+                        }
+                    case "MT":
+                        {
+                            sSql = "SELECT disTINCT SUBSTRING(CONVERT(VARCHAR(10),THANG,103),4,2) as M, RIGHT(CONVERT(VARCHAR(10),THANG,103),4) AS Y ,RIGHT(CONVERT(VARCHAR(10),THANG,103),7) AS THANG FROM dbo.BANG_LUONG_MT WHERE ID_DV = " + cboDonVi.EditValue + " ORDER BY Y DESC , M DESC";
                             break;
                         }
                     case "TG":
@@ -749,7 +843,25 @@ namespace Vs.Payroll
                         frm.Size = new Size((int)iW, (int)iH);
                         if (frm.ShowDialog() == DialogResult.OK)
                         {
-                            LoadGrdGTGC_TG();
+
+                            switch (Commons.Modules.KyHieuDV)
+                            {
+                                case "TG":
+                                    {
+                                        LoadGrdGTGC_TG();
+                                        break;
+                                    }
+                                case "MT":
+                                    {
+                                        LoadGrdGTGC_MT();
+                                        break;
+                                    }
+                                default:
+                                    {
+                                        LoadGrdGTGC_BT();
+                                        break;
+                                    }
+                            }
                             TinhLuong();
                         }
                         break;
@@ -864,16 +976,16 @@ namespace Vs.Payroll
                         case "TG":
                             {
                                 //cập nhật trên lướng vào bảng TEXTGIANG
-                                if(grvData.RowCount > 0)
+                                if (grvData.RowCount > 0)
                                 {
                                     dt = new DataTable();
                                     dt = Commons.Modules.ObjSystems.ConvertDatatable(grvData);
-                                    Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, "sBT" + Commons.Modules.iIDUser.ToString(),dt,"");
+                                    Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, "sBT" + Commons.Modules.iIDUser.ToString(), dt, "");
 
-                                    string sSql = "UPDATE A SET A.THUONG_HIEU_SUAT = B.THUONG_HIEU_SUAT, A.THUONG_C_HANH = B.THUONG_C_HANH, A.THUONG_HTNV = B.THUONG_HTNV, A.TRO_CAP_CN = B.TRO_CAP_CN, A.TIEN_XANG = B.TIEN_XANG, A.THUONG = B.THUONG, A.KHAU_TRU_TAM_UNG =  B.KHAU_TRU_TAM_UNG, A.KHAU_TRU = B.KHAU_TRU, A.TINH_BH = B.TINH_BH,A.LUONG_NGAY_CONG = B.LUONG_NGAY_CONG,A.GLT = B.GLT,A.TIEN_THEM_GIO = B.TIEN_THEM_GIO,A.TINH_LUONG = B.TINH_LUONG FROM dbo.BANG_LUONG_TG A INNER JOIN dbo." + "sBT" + Commons.Modules.iIDUser.ToString() + " B ON B.ID_CN = A.ID_CN AND A.THANG = CONVERT(DATE,'"+ Tngay.ToString("MM/dd/yyyy") +"')";
-                                    SqlHelper.ExecuteScalar(Commons.IConnections.CNStr,CommandType.Text,sSql);
+                                    string sSql = "UPDATE A SET A.THUONG_HIEU_SUAT = B.THUONG_HIEU_SUAT, A.THUONG_C_HANH = B.THUONG_C_HANH, A.THUONG_HTNV = B.THUONG_HTNV, A.TRO_CAP_CN = B.TRO_CAP_CN, A.TIEN_XANG = B.TIEN_XANG, A.THUONG = B.THUONG, A.KHAU_TRU_TAM_UNG =  B.KHAU_TRU_TAM_UNG, A.KHAU_TRU = B.KHAU_TRU, A.TINH_BH = B.TINH_BH,A.LUONG_NGAY_CONG = B.LUONG_NGAY_CONG,A.GLT = B.GLT,A.TIEN_THEM_GIO = B.TIEN_THEM_GIO,A.TINH_LUONG = B.TINH_LUONG FROM dbo.BANG_LUONG_TG A INNER JOIN dbo." + "sBT" + Commons.Modules.iIDUser.ToString() + " B ON B.ID_CN = A.ID_CN AND A.THANG = CONVERT(DATE,'" + Tngay.ToString("MM/dd/yyyy") + "')";
+                                    SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, sSql);
                                     Commons.Modules.ObjSystems.XoaTable("sBT" + Commons.Modules.iIDUser.ToString());
-                                }    
+                                }
                                 System.Data.SqlClient.SqlConnection conn;
                                 dt = new DataTable();
                                 conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
@@ -896,6 +1008,43 @@ namespace Vs.Payroll
                                 LoadGrdGTGC_TG();
                                 break;
                             }
+
+                        case "MT":
+                            {
+                                //cập nhật trên lướng vào bảng TEXTGIANG
+                                if (grvData.RowCount > 0)
+                                {
+                                    dt = new DataTable();
+                                    dt = Commons.Modules.ObjSystems.ConvertDatatable(grvData);
+                                    Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, "sBT" + Commons.Modules.iIDUser.ToString(), dt, "");
+
+                                    string sSql = "UPDATE A SET A.THANH_TOAN_KHAC = B.THANH_TOAN_KHAC FROM dbo.BANG_LUONG_MT A INNER JOIN dbo." + "sBT" + Commons.Modules.iIDUser.ToString() + " B ON B.ID_CN = A.ID_CN AND A.THANG = CONVERT(DATE,'" + Tngay.ToString("MM/dd/yyyy") + "')";
+                                    SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, sSql);
+                                    Commons.Modules.ObjSystems.XoaTable("sBT" + Commons.Modules.iIDUser.ToString());
+                                }
+                                System.Data.SqlClient.SqlConnection conn;
+                                dt = new DataTable();
+                                conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                                conn.Open();
+                                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spGetTinhLuongThang_MT", conn);
+                                cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                                cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                                cmd.Parameters.Add("@DVi", SqlDbType.Int).Value = cboDonVi.EditValue;
+                                cmd.Parameters.Add("@XN", SqlDbType.Int).Value = cboXiNghiep.EditValue;
+                                cmd.Parameters.Add("@TO", SqlDbType.Int).Value = cboTo.EditValue;
+                                cmd.Parameters.Add("@NgayCC", SqlDbType.Int).Value = txtNgayCongLV.EditValue;
+                                cmd.Parameters.Add("@NgayCLV", SqlDbType.NVarChar).Value = txtNgayCongChuan.EditValue;
+                                cmd.Parameters.Add("@TNGAY", SqlDbType.Date).Value = Tngay;
+                                cmd.Parameters.Add("@DNGAY", SqlDbType.Date).Value = Dngay;
+                                cmd.Parameters.Add("@NgayBu", SqlDbType.Float).Value = txtNgayBuLuong.EditValue;
+                                cmd.Parameters.Add("@ThuongDoanhThu", SqlDbType.Bit).Value = chkThuongDoanhThu.Checked;
+                                cmd.Parameters.Add("@LOAI", SqlDbType.Int).Value = 1;
+                                cmd.CommandType = CommandType.StoredProcedure;
+                                cmd.ExecuteNonQuery();
+                                LoadGrdGTGC_MT();
+                                break;
+                            }
+
                         case "DM":
                             {
                                 SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetTinhLuongThang_DM", Commons.Modules.UserName, Commons.Modules.TypeLanguage, cboDonVi.EditValue, cboXiNghiep.EditValue, cboTo.EditValue, Convert.ToInt32(txtNgayCongLV.EditValue), Convert.ToInt32(txtNgayCongChuan.EditValue), Tngay, Dngay, iLoaiTL);
@@ -1011,7 +1160,7 @@ namespace Vs.Payroll
                 int iDNgay = 20;
                 int iSoNgay = (iDNgay - iTNgay);
 
-         
+
                 Microsoft.Office.Interop.Excel.Range row4_A = oSheet.get_Range("A1");
                 row4_A.ColumnWidth = 16;
                 row4_A.Value2 = "Mã nhân viên";
@@ -1078,18 +1227,20 @@ namespace Vs.Payroll
                 oSheet.get_Range("A2", "J" + rowCnt.ToString()).Font.Name = fontName;
                 oSheet.get_Range("A2", "J" + rowCnt.ToString()).Font.Size = fontSizeNoiDung;
                 ////Kẻ khung toàn bộ
+                ///
+
                 Microsoft.Office.Interop.Excel.Range formatRange;
-                formatRange = oSheet.get_Range("C2", "J" + rowCnt.ToString());
-                formatRange.Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignRight;
-                formatRange.Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
-                formatRange.NumberFormat = "#,##0;(#,##0); ;";
-                //formatRange = oSheet.get_Range("I6", "I" + rowCnt.ToString());
-                //Commons.Modules.ObjSystems.AddDropDownExcel(oSheet, formatRange, dt, "TEN_TIEN_THUONG");
-                try
+                for (int colFormat = 3; colFormat < dtBCLuong.Columns.Count - 1; colFormat++) // format từ cột t
                 {
-                    formatRange.TextToColumns(Type.Missing, Microsoft.Office.Interop.Excel.XlTextParsingType.xlDelimited, Microsoft.Office.Interop.Excel.XlTextQualifier.xlTextQualifierDoubleQuote);
+                    formatRange = oSheet.Range[oSheet.Cells[2, colFormat], oSheet.Cells[dtBCLuong.Rows.Count + 2, colFormat]];
+                    formatRange.NumberFormat = "#,##0;(#,##0);;";
+                    try
+                    {
+                        formatRange.TextToColumns(Type.Missing, Microsoft.Office.Interop.Excel.XlTextParsingType.xlDelimited, Microsoft.Office.Interop.Excel.XlTextQualifier.xlTextQualifierDoubleQuote);
+                    }
+                    catch { }
+
                 }
-                catch { }
 
                 this.Cursor = Cursors.Default;
 
@@ -1129,7 +1280,7 @@ namespace Vs.Payroll
                 btnALL.Buttons[3].Properties.Visible = Commons.Modules.KyHieuDV == "TG" ? false : true;
                 btnALL.Buttons[5].Properties.Visible = true;
                 btnALL.Buttons[6].Properties.Visible = true;
-                btnALL.Buttons[6].Properties.Visible = true;
+                btnALL.Buttons[7].Properties.Visible = true;
             }
         }
 
@@ -1225,6 +1376,11 @@ namespace Vs.Payroll
                             LoadGrdGTGC_TG();
                             break;
                         }
+                    case "MT":
+                        {
+                            LoadGrdGTGC_MT();
+                            break;
+                        }
                     default:
                         {
                             LoadGrdGTGC_BT();
@@ -1280,6 +1436,11 @@ namespace Vs.Payroll
                             LoadGrdGTGC_TG();
                             break;
                         }
+                    case "MT":
+                        {
+                            LoadGrdGTGC_MT();
+                            break;
+                        }
                     default:
                         {
                             LoadGrdGTGC_BT();
@@ -1312,10 +1473,14 @@ namespace Vs.Payroll
             {
                 switch (Commons.Modules.KyHieuDV)
                 {
-
                     case "TG":
                         {
                             LoadGrdGTGC_TG();
+                            break;
+                        }
+                    case "MT":
+                        {
+                            LoadGrdGTGC_MT();
                             break;
                         }
                     default:
@@ -1352,6 +1517,11 @@ namespace Vs.Payroll
                     case "TG":
                         {
                             LoadGrdGTGC_TG();
+                            break;
+                        }
+                    case "MT":
+                        {
+                            LoadGrdGTGC_MT();
                             break;
                         }
                     default:

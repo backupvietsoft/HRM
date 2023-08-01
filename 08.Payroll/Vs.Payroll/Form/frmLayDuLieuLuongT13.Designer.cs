@@ -34,12 +34,12 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.lblCotLayDL = new DevExpress.XtraEditors.LabelControl();
             this.cboCotLayDL = new DevExpress.XtraEditors.LookUpEdit();
-            this.btnALL = new DevExpress.XtraBars.Docking2010.WindowsUIButtonPanel();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.txtChonFile = new DevExpress.XtraEditors.ButtonEdit();
             this.lblSheet = new DevExpress.XtraEditors.LabelControl();
             this.cboSheet = new DevExpress.XtraEditors.ComboBoxEdit();
+            this.btnALL = new DevExpress.XtraBars.Docking2010.WindowsUIButtonPanel();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cboCotLayDL.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
@@ -51,12 +51,12 @@
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 6;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 7F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 105F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 11F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 165F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.00001F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 105F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 165F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 49.99999F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 17F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 28F));
             this.tableLayoutPanel1.Controls.Add(this.lblCotLayDL, 1, 3);
             this.tableLayoutPanel1.Controls.Add(this.cboCotLayDL, 2, 3);
             this.tableLayoutPanel1.Controls.Add(this.layoutControl1, 0, 0);
@@ -66,26 +66,28 @@
             this.tableLayoutPanel1.Controls.Add(this.btnALL, 1, 5);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 7;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 7F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 12F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 43F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 43F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 43F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 43F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(374, 170);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 66F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 33F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 33F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(588, 280);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // lblCotLayDL
             // 
             this.lblCotLayDL.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblCotLayDL.Location = new System.Drawing.Point(10, 62);
+            this.lblCotLayDL.Location = new System.Drawing.Point(16, 103);
+            this.lblCotLayDL.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.lblCotLayDL.Name = "lblCotLayDL";
-            this.lblCotLayDL.Size = new System.Drawing.Size(99, 20);
+            this.lblCotLayDL.Size = new System.Drawing.Size(155, 33);
             this.lblCotLayDL.TabIndex = 5;
             this.lblCotLayDL.Text = "Cột lấy dữ liệu";
             // 
@@ -93,13 +95,67 @@
             // 
             this.tableLayoutPanel1.SetColumnSpan(this.cboCotLayDL, 3);
             this.cboCotLayDL.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cboCotLayDL.Location = new System.Drawing.Point(115, 62);
+            this.cboCotLayDL.Location = new System.Drawing.Point(181, 103);
+            this.cboCotLayDL.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.cboCotLayDL.Name = "cboCotLayDL";
             this.cboCotLayDL.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cboCotLayDL.Properties.NullText = "";
-            this.cboCotLayDL.Size = new System.Drawing.Size(238, 24);
+            this.cboCotLayDL.Size = new System.Drawing.Size(373, 34);
             this.cboCotLayDL.TabIndex = 9;
+            // 
+            // layoutControl1
+            // 
+            this.layoutControl1.Location = new System.Drawing.Point(5, 5);
+            this.layoutControl1.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.layoutControl1.Name = "layoutControl1";
+            this.layoutControl1.Root = this.Root;
+            this.layoutControl1.Size = new System.Drawing.Size(1, 2);
+            this.layoutControl1.TabIndex = 19;
+            this.layoutControl1.Text = "layoutControl1";
+            // 
+            // Root
+            // 
+            this.Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
+            this.Root.GroupBordersVisible = false;
+            this.Root.Name = "Root";
+            this.Root.Size = new System.Drawing.Size(32, 32);
+            this.Root.TextVisible = false;
+            // 
+            // txtChonFile
+            // 
+            this.tableLayoutPanel1.SetColumnSpan(this.txtChonFile, 4);
+            this.txtChonFile.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtChonFile.Location = new System.Drawing.Point(16, 17);
+            this.txtChonFile.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.txtChonFile.Name = "txtChonFile";
+            this.txtChonFile.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+            this.txtChonFile.Size = new System.Drawing.Size(538, 34);
+            this.txtChonFile.TabIndex = 10;
+            this.txtChonFile.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.txtChonFile_ButtonClick);
+            // 
+            // lblSheet
+            // 
+            this.lblSheet.Location = new System.Drawing.Point(16, 60);
+            this.lblSheet.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.lblSheet.Name = "lblSheet";
+            this.lblSheet.Size = new System.Drawing.Size(122, 28);
+            this.lblSheet.TabIndex = 0;
+            this.lblSheet.Text = "Sheet cần đọc";
+            // 
+            // cboSheet
+            // 
+            this.tableLayoutPanel1.SetColumnSpan(this.cboSheet, 3);
+            this.cboSheet.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cboSheet.Location = new System.Drawing.Point(181, 60);
+            this.cboSheet.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.cboSheet.Name = "cboSheet";
+            this.cboSheet.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cboSheet.Size = new System.Drawing.Size(373, 34);
+            this.cboSheet.TabIndex = 1;
+            this.cboSheet.SelectedIndexChanged += new System.EventHandler(this.cboSheet_SelectedIndexChanged);
             // 
             // btnALL
             // 
@@ -128,71 +184,24 @@
             this.btnALL.ContentAlignment = System.Drawing.ContentAlignment.MiddleRight;
             this.btnALL.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnALL.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnALL.Location = new System.Drawing.Point(10, 114);
+            this.btnALL.Location = new System.Drawing.Point(16, 189);
+            this.btnALL.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.btnALL.Name = "btnALL";
-            this.btnALL.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.btnALL.Padding = new System.Windows.Forms.Padding(6, 5, 6, 5);
             this.tableLayoutPanel1.SetRowSpan(this.btnALL, 2);
-            this.btnALL.Size = new System.Drawing.Size(343, 53);
+            this.btnALL.Size = new System.Drawing.Size(538, 86);
             this.btnALL.TabIndex = 18;
             this.btnALL.Text = "S";
             this.btnALL.UseButtonBackgroundImages = false;
             this.btnALL.ButtonClick += new DevExpress.XtraBars.Docking2010.ButtonEventHandler(this.btnALL_ButtonClick);
             // 
-            // layoutControl1
-            // 
-            this.layoutControl1.Location = new System.Drawing.Point(3, 3);
-            this.layoutControl1.Name = "layoutControl1";
-            this.layoutControl1.Root = this.Root;
-            this.layoutControl1.Size = new System.Drawing.Size(1, 1);
-            this.layoutControl1.TabIndex = 19;
-            this.layoutControl1.Text = "layoutControl1";
-            // 
-            // Root
-            // 
-            this.Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
-            this.Root.GroupBordersVisible = false;
-            this.Root.Name = "Root";
-            this.Root.Size = new System.Drawing.Size(8, 8);
-            this.Root.TextVisible = false;
-            // 
-            // txtChonFile
-            // 
-            this.tableLayoutPanel1.SetColumnSpan(this.txtChonFile, 4);
-            this.txtChonFile.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtChonFile.Location = new System.Drawing.Point(10, 10);
-            this.txtChonFile.Name = "txtChonFile";
-            this.txtChonFile.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.txtChonFile.Size = new System.Drawing.Size(343, 24);
-            this.txtChonFile.TabIndex = 10;
-            this.txtChonFile.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.txtChonFile_ButtonClick);
-            // 
-            // lblSheet
-            // 
-            this.lblSheet.Location = new System.Drawing.Point(10, 36);
-            this.lblSheet.Name = "lblSheet";
-            this.lblSheet.Size = new System.Drawing.Size(82, 17);
-            this.lblSheet.TabIndex = 0;
-            this.lblSheet.Text = "Sheet cần đọc";
-            // 
-            // cboSheet
-            // 
-            this.tableLayoutPanel1.SetColumnSpan(this.cboSheet, 3);
-            this.cboSheet.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cboSheet.Location = new System.Drawing.Point(115, 36);
-            this.cboSheet.Name = "cboSheet";
-            this.cboSheet.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cboSheet.Size = new System.Drawing.Size(238, 24);
-            this.cboSheet.TabIndex = 1;
-            this.cboSheet.SelectedIndexChanged += new System.EventHandler(this.cboSheet_SelectedIndexChanged);
-            // 
             // frmLayDuLieuLuongT13
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 28F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(374, 170);
+            this.ClientSize = new System.Drawing.Size(588, 280);
             this.Controls.Add(this.tableLayoutPanel1);
+            this.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.Name = "frmLayDuLieuLuongT13";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "frmLayDuLieuLuongT13";

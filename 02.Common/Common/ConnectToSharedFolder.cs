@@ -27,7 +27,7 @@ public class ConnectToSharedFolder : IDisposable
          {
              
              result = WNetAddConnection2(
-            netResource,
+            netResource,          
             credentials.Password,
             userName,
             0);

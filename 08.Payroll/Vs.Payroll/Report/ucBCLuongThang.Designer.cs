@@ -188,7 +188,7 @@
             this.lbDonVi.SetColumnSpan(this.rdoChinhThuc, 2);
             this.rdoChinhThuc.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rdoChinhThuc.EditValue = 1;
-            this.rdoChinhThuc.Location = new System.Drawing.Point(504, 200);
+            this.rdoChinhThuc.Location = new System.Drawing.Point(504, 199);
             this.rdoChinhThuc.Margin = new System.Windows.Forms.Padding(6, 4, 6, 4);
             this.rdoChinhThuc.Name = "rdoChinhThuc";
             this.rdoChinhThuc.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] {
@@ -217,11 +217,11 @@
             // lblCachTinhLuong
             // 
             this.lbDonVi.SetColumn(this.lblCachTinhLuong, 5);
-            this.lblCachTinhLuong.Location = new System.Drawing.Point(1574, 102);
+            this.lblCachTinhLuong.Location = new System.Drawing.Point(1049, 68);
             this.lblCachTinhLuong.Margin = new System.Windows.Forms.Padding(44, 11, 6, 4);
             this.lblCachTinhLuong.Name = "lblCachTinhLuong";
             this.lbDonVi.SetRow(this.lblCachTinhLuong, 2);
-            this.lblCachTinhLuong.Size = new System.Drawing.Size(179, 33);
+            this.lblCachTinhLuong.Size = new System.Drawing.Size(119, 26);
             this.lblCachTinhLuong.TabIndex = 46;
             this.lblCachTinhLuong.Text = "labelControl2";
             // 
@@ -256,7 +256,7 @@
             this.popListThang.Margin = new System.Windows.Forms.Padding(6, 4, 6, 4);
             this.popListThang.MinimumSize = new System.Drawing.Size(550, 280);
             this.popListThang.Name = "popListThang";
-            this.popListThang.Size = new System.Drawing.Size(367, 187);
+            this.popListThang.Size = new System.Drawing.Size(550, 280);
             this.popListThang.TabIndex = 44;
             // 
             // popThang
@@ -294,7 +294,7 @@
             this.grdThang.MainView = this.grvThang;
             this.grdThang.Margin = new System.Windows.Forms.Padding(6, 4, 6, 4);
             this.grdThang.Name = "grdThang";
-            this.grdThang.Size = new System.Drawing.Size(551, 281);
+            this.grdThang.Size = new System.Drawing.Size(550, 280);
             this.grdThang.TabIndex = 15;
             this.grdThang.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grvThang,
@@ -337,11 +337,11 @@
             // labelControl2
             // 
             this.lbDonVi.SetColumn(this.labelControl2, 1);
-            this.labelControl2.Location = new System.Drawing.Point(36, 92);
+            this.labelControl2.Location = new System.Drawing.Point(24, 65);
             this.labelControl2.Margin = new System.Windows.Forms.Padding(6, 4, 6, 4);
             this.labelControl2.Name = "labelControl2";
             this.lbDonVi.SetRow(this.labelControl2, 2);
-            this.labelControl2.Size = new System.Drawing.Size(179, 41);
+            this.labelControl2.Size = new System.Drawing.Size(119, 28);
             this.labelControl2.TabIndex = 41;
             this.labelControl2.Text = "labelControl2";
             // 
@@ -349,11 +349,11 @@
             // 
             this.lbNgayIn.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.Horizontal;
             this.lbDonVi.SetColumn(this.lbNgayIn, 3);
-            this.lbNgayIn.Location = new System.Drawing.Point(813, 92);
+            this.lbNgayIn.Location = new System.Drawing.Point(542, 66);
             this.lbNgayIn.Margin = new System.Windows.Forms.Padding(44, 4, 6, 4);
             this.lbNgayIn.Name = "lbNgayIn";
             this.lbDonVi.SetRow(this.lbNgayIn, 2);
-            this.lbNgayIn.Size = new System.Drawing.Size(102, 41);
+            this.lbNgayIn.Size = new System.Drawing.Size(68, 28);
             this.lbNgayIn.TabIndex = 21;
             this.lbNgayIn.Text = "Ngày in";
             // 
@@ -361,7 +361,7 @@
             // 
             this.lbDonVi.SetColumn(this.lk_NgayIn, 4);
             this.lk_NgayIn.EditValue = null;
-            this.lk_NgayIn.Location = new System.Drawing.Point(757, 64);
+            this.lk_NgayIn.Location = new System.Drawing.Point(757, 63);
             this.lk_NgayIn.Margin = new System.Windows.Forms.Padding(6);
             this.lk_NgayIn.Name = "lk_NgayIn";
             this.lk_NgayIn.Properties.Appearance.Options.UseTextOptions = true;
@@ -380,7 +380,7 @@
             this.lbDonVi.SetColumn(this.rdo_ChonBaoCao, 1);
             this.lbDonVi.SetColumnSpan(this.rdo_ChonBaoCao, 2);
             this.rdo_ChonBaoCao.Dock = System.Windows.Forms.DockStyle.Top;
-            this.rdo_ChonBaoCao.Location = new System.Drawing.Point(24, 136);
+            this.rdo_ChonBaoCao.Location = new System.Drawing.Point(24, 135);
             this.rdo_ChonBaoCao.Margin = new System.Windows.Forms.Padding(6, 4, 6, 4);
             this.rdo_ChonBaoCao.Name = "rdo_ChonBaoCao";
             this.rdo_ChonBaoCao.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] {

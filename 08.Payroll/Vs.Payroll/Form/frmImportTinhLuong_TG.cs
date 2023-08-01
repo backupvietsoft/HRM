@@ -28,9 +28,13 @@ namespace Vs.Payroll
         public DateTime dtThang, dtDThang;
         public int iID_DV, iID_XN, iID_TO;
 
+        public int iloai = 1;//1la thang ,2 lam tháng 13
+
+
         public frmImportTinhLuong_TG()
         {
             InitializeComponent();
+            
         }
         private void btnFile_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
@@ -69,6 +73,7 @@ namespace Vs.Payroll
             if (Commons.Modules.sLoad == "0Load") return;
             try
             {
+                Commons.Modules.ObjSystems.ShowWaitForm(this);
                 DataTable dt = new DataTable();
                 var source = new ExcelDataSource();
                 source.FileName = btnFile.Text;
@@ -76,8 +81,15 @@ namespace Vs.Payroll
                 source.SourceOptions = new ExcelSourceOptions(worksheetSettings);
                 source.Fill();
                 dt = new DataTable();
-                dt = ToDataTable(source);
-                dt.Columns["THUONG_HIEU_SUAT"].DataType = typeof(double);
+                if(iloai == 1)
+                {
+                    dt.Columns["THUONG_HIEU_SUAT"].DataType = typeof(double);
+                    dt = ToDataTable(source);
+                }
+                else
+                {
+                    dt = ToDataTable13(source);
+                }
                 dt.Columns.Add("XOA", System.Type.GetType("System.Boolean"));
                 Commons.Modules.ObjSystems.MLoadXtraGrid(grdData, grvData, dt, true, false, false, true, true, this.Name);
 
@@ -86,12 +98,13 @@ namespace Vs.Payroll
                     grvData.Columns[i].DisplayFormat.FormatType = FormatType.Numeric;
                     grvData.Columns[i].DisplayFormat.FormatString = "N0";
                 }
-                
+                Commons.Modules.ObjSystems.HideWaitForm();
 
             }
             catch
             {
                 grdData.DataSource = null;
+                Commons.Modules.ObjSystems.HideWaitForm();
             }
         }
 
@@ -121,7 +134,10 @@ namespace Vs.Payroll
                                 return;
                             }
                             grvData.Columns.View.ClearColumnErrors();
-                            Import(dtSource);
+                            if (iloai == 1)
+                                Import(dtSource);
+                            else
+                                Import13(dtSource);
 
                             break;
                         }
@@ -296,6 +312,52 @@ namespace Vs.Payroll
             }
             //}
         }
+
+        private void Import13(DataTable dtSource)
+        {
+            
+            DialogResult res = XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDuLieuSanSangImport"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (res == DialogResult.Yes)
+            {
+                SqlConnection conn = new SqlConnection(Commons.IConnections.CNStr);
+                if (conn.State != ConnectionState.Open) conn.Open();
+                SqlTransaction sTrans = conn.BeginTransaction();
+                try
+                {
+                    //tạo bảm tạm trên lưới
+                    string sbt = "sBTLuongCN" + Commons.Modules.iIDUser;
+                    Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sbt, Commons.Modules.ObjSystems.ConvertDatatable(grvData), "");
+
+
+                    System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spImportExportLuong13_TG", conn, sTrans);
+                    cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                    cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                    cmd.Parameters.Add("@DVi", SqlDbType.Int).Value = iID_DV;
+                    cmd.Parameters.Add("@XN", SqlDbType.Int).Value = iID_XN;
+                    cmd.Parameters.Add("@TO", SqlDbType.Int).Value = iID_TO;
+                    cmd.Parameters.Add("@Nam", SqlDbType.Int).Value = dtThang.Year;
+                    cmd.Parameters.Add("@SBT", SqlDbType.NVarChar).Value = sbt;
+                    cmd.Parameters.Add("@iLoai", SqlDbType.Int).Value = 2;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.ExecuteNonQuery();
+                    sTrans.Commit();
+                    Commons.Modules.ObjSystems.XoaTable(sbt);
+                    XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgImportDuLieuThanhCong"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    if (conn.State != ConnectionState.Closed) conn.Close();
+                    this.DialogResult = DialogResult.OK;
+                    this.Close();
+                }
+                catch (Exception ex)
+                {
+                    sTrans.Rollback();
+                    XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgImportKhongThanhCong") + " error(" + ex.ToString() + ")", Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+            }
+            //}
+        }
+
+
         #endregion
         private void grvData_ShownEditor(object sender, EventArgs e)
         {
@@ -314,6 +376,10 @@ namespace Vs.Payroll
         }
         private void frmImportTinhLuong_TG_Load(object sender, EventArgs e)
         {
+            if (iloai == 2)
+            {
+                this.Name = "frmImportTinhLuong13_TG";
+            }
             Commons.Modules.ObjSystems.ThayDoiNN(this, Root, windowsUIButton);
         }
         public string SaveFiles(string MFilter)
@@ -481,6 +547,52 @@ namespace Vs.Payroll
             }
             return table;
         }
+
+        public DataTable ToDataTable13(ExcelDataSource excelDataSource)
+        {
+            string nameType = "";
+            IList list = ((IListSource)excelDataSource).GetList();
+            DevExpress.DataAccess.Native.Excel.DataView dataView = (DevExpress.DataAccess.Native.Excel.DataView)list;
+            List<PropertyDescriptor> props = dataView.Columns.ToList<PropertyDescriptor>();
+            DataTable table = new DataTable();
+            for (int i = 0; i < props.Count; i++)
+            {
+                PropertyDescriptor prop = props[i];
+                string sTenCot = "";
+                table.Columns.Add(sTenCot.Trim(), (i == 0 || i == 1) ? typeof(string) : typeof(double));
+            }
+            object[] values = new object[props.Count];
+            foreach (DevExpress.DataAccess.Native.Excel.ViewRow item in list)
+            {
+
+                for (int i = 0; i < values.Length; i++)
+                {
+                    try
+                    {
+                        if (props[i].GetValue(item) == null || props[i].GetValue(item).ToString().Trim() == "")
+                        {
+                            values[i] = null;
+                        }
+                        else
+                        {
+                            values[i] = nameType == "string" ? props[i].GetValue(item).ToString().Trim() : props[i].GetValue(item);
+                        }
+
+                    }
+                    catch (Exception ex)
+                    {
+                        values[i] = null;
+                    }
+                }
+                try
+                {
+                    table.Rows.Add(values);
+                }
+                catch (Exception ex) { }
+            }
+            return table;
+        }
+
 
         private void frmImportTinhLuong_TG_FormClosing(object sender, FormClosingEventArgs e)
         {

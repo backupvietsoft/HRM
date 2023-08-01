@@ -630,12 +630,11 @@ namespace Vs.Payroll
                 DataTable dt = dtMQL.AsEnumerable().Where(x => x["ID_CD"].ToString().Equals(e.Value.ToString())).CopyToDataTable();
                 try
                 {
-
+                    grvCD.SetFocusedRowCellValue("ID_CD", dt.Rows[0]["ID_CD"]);
                     grvCD.SetFocusedRowCellValue("TEN_CD", dt.Rows[0]["TEN_CD"]);
                     grvCD.SetFocusedRowCellValue("DON_GIA", dt.Rows[0]["DON_GIA"]);
                     grvCD.SetFocusedRowCellValue("SO_LUONG", grvPCD.GetFocusedRowCellValue("SL_NGAY"));
                     grvCD.SetFocusedRowCellValue("THANH_TIEN", Convert.ToDouble(grvPCD.GetFocusedRowCellValue("SL_NGAY")) * Convert.ToDouble(dt.Rows[0]["DON_GIA"]));
-                    grvCD.SetFocusedRowCellValue("ID_CD", dt.Rows[0]["ID_CD"]);
                     //grvCD.SetFocusedRowCellValue("ID_CN", grvTo.GetFocusedRowCellValue("ID_CN"));
 
                 }
@@ -703,9 +702,13 @@ namespace Vs.Payroll
             {
                 if (e.Column.FieldName == "SO_LUONG")
                 {
-                    DataTable dt = dtMQL.AsEnumerable().Where(x => x["ID_CD"].ToString().Equals(grvCD.GetFocusedRowCellValue("ID_CD").ToString())).CopyToDataTable();
-                    grvCD.SetFocusedRowCellValue("THANH_TIEN", (Convert.ToDouble(e.Value) * Convert.ToDouble(dt.Rows[0]["DON_GIA"])));
+                    try
+                    {
+                        DataTable dt = dtMQL.AsEnumerable().Where(x => Convert.ToInt64(x["ID_CD"]).Equals(Convert.ToInt64(grvCD.GetFocusedRowCellValue("ID_CD")))).CopyToDataTable();
+                        grvCD.SetFocusedRowCellValue("THANH_TIEN", (Convert.ToDouble(e.Value) * Convert.ToDouble(dt.Rows[0]["DON_GIA"])));
 
+                    }
+                    catch { }
                     //dt = (DataTable)grdCD.DataSource;
                     //DataTable dt1 = new DataTable();
                     //dt1 = Commons.Modules.ObjSystems.ConvertDatatable(grvCD);
@@ -874,10 +877,10 @@ namespace Vs.Payroll
 
         private void grvCD_KeyDown(object sender, KeyEventArgs e)
         {
-            //if (e.KeyCode == Keys.Home)
-            //{
-            //    searchControl2.Focus();
-            //}
+            if (e.KeyCode == Keys.Home)
+            {
+                searchControl2.Focus();
+            }
         }
         //private void cboMSCN_KeyDown(object sender, KeyEventArgs e)
         //{
@@ -1093,12 +1096,12 @@ namespace Vs.Payroll
 
         private void searchControl2_KeyDown(object sender, KeyEventArgs e)
         {
-            //if (e.KeyCode == Keys.Enter)
-            //{
-            //    grvCD.Focus();
-            //    grvCD.FocusedColumn = grvCD.Columns["ID_CD"];
-            //    grvCD.FocusedRowHandle = DevExpress.XtraGrid.GridControl.NewItemRowHandle;
-            //}
+            if (e.KeyCode == Keys.Enter)
+            {
+                grvCD.Focus();
+                grvCD.FocusedColumn = grvCD.Columns["ID_CD"];
+                grvCD.FocusedRowHandle = DevExpress.XtraGrid.GridControl.NewItemRowHandle;
+            }
         }
         private void LoadCboXN()
         {
@@ -1339,8 +1342,8 @@ namespace Vs.Payroll
         {
             try
             {
-                if (Commons.Modules.ObjSystems.DataTinhTrangBangLuong(Convert.ToInt32(cboDV.EditValue), Commons.Modules.ObjSystems.ConvertDateTime(cboNgay.Text)) == 2) return;
-                if (windowsUIButton.Buttons[0].Properties.Visible || Convert.ToString(grvCD.GetFocusedRowCellValue("ID_CD")) == "") return;
+                //if (windowsUIButton.Buttons[0].Properties.Visible || Convert.ToString(grvCD.GetFocusedRowCellValue("ID_CD")) == "") return;
+                if (windowsUIButton.Buttons[0].Properties.Visible) return;
                 DevExpress.XtraGrid.Views.Grid.GridView view = sender as DevExpress.XtraGrid.Views.Grid.GridView;
                 int irow = e.HitInfo.RowHandle;
                 if (e.MenuType == DevExpress.XtraGrid.Views.Grid.GridMenuType.Row)

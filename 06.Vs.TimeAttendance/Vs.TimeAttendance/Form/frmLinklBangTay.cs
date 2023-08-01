@@ -49,7 +49,7 @@ namespace Vs.TimeAttendance
             {
                 ngaylink = DateTime.Now;
             }
- 
+
             datNgayCC.DateTime = ngaylink;
             datNgayDen.DateTime = ngaylink;
             datNgayVe.DateTime = ngaylink;
@@ -82,39 +82,48 @@ namespace Vs.TimeAttendance
 
         private void LoadGridCongNhan()
         {
-            DataTable dt = new DataTable();
-            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetCongLinkChamCongTay", cboDV.EditValue, cboXN.EditValue, cboTo.EditValue, datNgayCC.EditValue, Commons.Modules.UserName, Commons.Modules.TypeLanguage,Commons.Modules.chamCongK));
-            dt.Columns["CHON"].ReadOnly = false;
-            for (int i = 1; i < dt.Columns.Count; i++)
-            {
-                dt.Columns[i].ReadOnly = true;
-            }
-            dt.Columns["GIO_DEN"].ReadOnly = false;
-            dt.Columns["GIO_VE"].ReadOnly = false;
-
-            if (grdChamCongTay.DataSource == null)
-            {
-                Commons.Modules.ObjSystems.MLoadXtraGrid(grdChamCongTay, grvChamCongTay, dt, true, false, true, true, true,this.Name);
-                grvChamCongTay.OptionsSelection.ShowCheckBoxSelectorInColumnHeader = DevExpress.Utils.DefaultBoolean.True;
-                grvChamCongTay.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CheckBoxRowSelect;
-                grvChamCongTay.OptionsSelection.CheckBoxSelectorField = "CHON";
-                grvChamCongTay.Columns["ID_CN"].Visible = false;
-                grvChamCongTay.Columns["CHON"].Visible = false;
-                grvChamCongTay.Columns["ID_NHOM"].Visible = false;
-                grvChamCongTay.Columns["GIO_DEN"].ColumnEdit = this.repositoryItemTimeEdit1;
-                grvChamCongTay.Columns["GIO_VE"].ColumnEdit = this.repositoryItemTimeEdit1;
-            }
-            else
-            {
-                grdChamCongTay.DataSource = dt;
-            }
-
             try
             {
-                grvChamCongTay.OptionsSelection.CheckBoxSelectorField = "CHON";
-                grvChamCongTay.Columns["CHON"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
+
+                DataTable dt = new DataTable();
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetCongLinkChamCongTay", cboDV.EditValue, cboXN.EditValue, cboTo.EditValue, datNgayCC.EditValue, Commons.Modules.UserName, Commons.Modules.TypeLanguage, Commons.Modules.chamCongK));
+                dt.Columns["CHON"].ReadOnly = false;
+                for (int i = 1; i < dt.Columns.Count; i++)
+                {
+                    dt.Columns[i].ReadOnly = true;
+                }
+                dt.Columns["GIO_DEN"].ReadOnly = false;
+                dt.Columns["GIO_VE"].ReadOnly = false;
+
+                if (grdChamCongTay.DataSource == null)
+                {
+                    Commons.Modules.ObjSystems.MLoadXtraGrid(grdChamCongTay, grvChamCongTay, dt, true, false, true, true, true, this.Name);
+                    grvChamCongTay.OptionsSelection.ShowCheckBoxSelectorInColumnHeader = DevExpress.Utils.DefaultBoolean.True;
+                    grvChamCongTay.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CheckBoxRowSelect;
+                    grvChamCongTay.OptionsSelection.CheckBoxSelectorField = "CHON";
+                    grvChamCongTay.Columns["ID_CN"].Visible = false;
+                    grvChamCongTay.Columns["CHON"].Visible = false;
+                    grvChamCongTay.Columns["ID_NHOM"].Visible = false;
+                    grvChamCongTay.Columns["GIO_DEN"].ColumnEdit = this.repositoryItemTimeEdit1;
+                    grvChamCongTay.Columns["GIO_VE"].ColumnEdit = this.repositoryItemTimeEdit1;
+                }
+                else
+                {
+                    grdChamCongTay.DataSource = dt;
+                }
+
+                try
+                {
+                    grvChamCongTay.OptionsSelection.CheckBoxSelectorField = "CHON";
+                    grvChamCongTay.Columns["CHON"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
+                }
+                catch { }
+
             }
-            catch { }
+            catch (Exception ex)
+            {
+                Commons.Modules.ObjSystems.MsgError(ex.Message);
+            }
         }
 
         private void cboDV_EditValueChanged(object sender, EventArgs e)
@@ -218,12 +227,14 @@ namespace Vs.TimeAttendance
                             string sBT = "BTKinkTay" + Commons.Modules.sId;
                             Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBT, Commons.Modules.ObjSystems.ConvertDatatable(grvChamCongTay), "");
 
-                            SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spSaveDuLieuQuetTheTay", datNgayCC.DateTime, sBT,Commons.Modules.chamCongK);
+                            SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spSaveDuLieuQuetTheTay", datNgayCC.DateTime, sBT, Commons.Modules.chamCongK, Commons.Modules.UserName);
 
                             LoadGridCongNhan();
+                            Commons.Modules.ObjSystems.msgCapNhat(1);
                         }
                         catch (Exception ex)
                         {
+                            Commons.Modules.ObjSystems.MsgError(ex.Message);
                         }
                         break;
                     }

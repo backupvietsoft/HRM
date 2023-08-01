@@ -659,7 +659,8 @@ namespace Vs.HRM
                             NGAY_PHEP_NGHITextEdit.EditValue,
                             SoThangPhep,
                             txtTaiLieu.EditValue,
-                            txtTaiLieuQD.EditValue
+                            txtTaiLieuQD.EditValue,
+                            Commons.Modules.UserName
                     )));
                 }
             }

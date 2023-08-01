@@ -1,4 +1,5 @@
-﻿using DevExpress.Map.Dashboard;
+﻿using Aspose.Words;
+using DevExpress.Map.Dashboard;
 using DevExpress.XtraBars.Docking2010;
 using DevExpress.XtraEditors;
 using Microsoft.ApplicationBlocks.Data;
@@ -169,9 +170,16 @@ namespace Vs.HRM
                     // dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSql));
                     // Loadgrvtheoidcn(idhdld);
                     SO_PLHDTextEdit.EditValue = "";
-                    NOI_DUNG_THAY_DOIMemoEdit.EditValue = "";
-                    THOI_GIAN_THUC_HIENMemoEdit.EditValue = "";
                     NGAY_KYDateEdit.EditValue = DateTime.Today;
+                    if (Commons.Modules.KyHieuDV == "BT")
+                    {
+                        NOI_DUNG_THAY_DOIMemoEdit.EditValue = "       -Căn cứ Nghị Định 938/2022/NĐ-CP của Thủ Tướng Chính phủ ngày 12/06/2022 quy định mức  lương tối thiểu vùng năm 2022, Công ty thực hiện tăng lương tối thiểu vùng từ 0đ lên mức  0đ từ ngày " + NGAY_KYDateEdit.Text + ".";
+                    }
+                    else
+                    {
+                        NOI_DUNG_THAY_DOIMemoEdit.EditValue = "";
+                    }
+                    THOI_GIAN_THUC_HIENMemoEdit.EditValue = "";
                     NGUOI_KYLookUpEdit.EditValue = Commons.Modules.ObjSystems.GetNguoiKyMacDinh();
                     GHI_CHUMemoEdit.EditValue = "";
                 }
@@ -247,6 +255,11 @@ namespace Vs.HRM
                             frm.rpt = new rptPhuLucHopDongLaoDong_NB(NGAY_KYDateEdit.DateTime);
                             break;
                         }
+                    case "TG":
+                        {
+                            InPLHD_TG();
+                            break;
+                        }
                     default:
                         {
                             frm.rpt = new rptPhuLucHopDongLaoDong(NGAY_KYDateEdit.DateTime);
@@ -314,6 +327,78 @@ namespace Vs.HRM
             {
             }
         }
+
+
+        private void InPLHD_TG()
+        {
+            try
+            {
+                //lấy data dữ liệu
+
+                System.Data.SqlClient.SqlConnection conn1;
+                DataTable dt = new DataTable();
+
+                conn1 = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                conn1.Open();
+
+                System.Data.SqlClient.SqlCommand cmd1 = new System.Data.SqlClient.SqlCommand("rptPhuLucHD_TG", conn1);
+                cmd1.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                cmd1.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                cmd1.Parameters.Add("@ID_SQD", SqlDbType.Int).Value = grvPLHD.GetFocusedRowCellValue("ID_PLHD");
+                cmd1.CommandType = CommandType.StoredProcedure;
+                System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd1);
+                DataSet ds = new DataSet();
+                adp.Fill(ds);
+                dt = new DataTable();
+                dt = ds.Tables[0].Copy();
+                DataRow row = dt.Rows[0];
+
+                string sPath = "";
+
+                if (!System.IO.Directory.Exists("Report")) // kiểm tra xem forder đã có chưa , nếu chưa có thì tạo 
+                {
+                    System.IO.Directory.CreateDirectory("Report");
+                }
+                sPath = "Report\\" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".docx";
+
+                //fill vào báo cáo
+                Document baoCao = new Document("Template\\TemplateTG\\rptPhuLucHDLD.doc");
+                foreach (DataColumn item in dt.Columns)
+                {
+                    if (Commons.Modules.ObjSystems.IsnullorEmpty(row[item]))
+                    {
+                        baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { "" });
+
+                        continue;
+                    }
+                    switch (item.DataType.Name)
+                    {
+                        case "DateTime":
+                            {
+                                baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { Convert.ToDateTime(row[item]).ToString("dd/MM/yyyy") });
+                                break;
+                            }
+                        case "Double":
+                            {
+                                baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { string.Format("{0:#,##0}", row[item]) });
+                                break;
+                            }
+                        default:
+                            {
+                                baoCao.MailMerge.Execute(new[] { item.ColumnName }, new[] { row[item] });
+                                break;
+
+                            }
+                    }
+                }
+                baoCao.Save(sPath);
+                Process.Start(sPath);
+            }
+            catch (Exception ex)
+            {
+                Commons.Modules.ObjSystems.MsgError(ex.Message);
+            }
+        }
         #endregion hàm load form
 
         #region hàm sử lý data
@@ -360,7 +445,7 @@ namespace Vs.HRM
             //xóa
             try
             {
-                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "DELETE	dbo.PHU_LUC_HDLD WHERE ID_PLHD  = "+grvPLHD.GetFocusedRowCellValue("ID_PLHD")+"");
+                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "DELETE	dbo.PHU_LUC_HDLD WHERE ID_PLHD  = " + grvPLHD.GetFocusedRowCellValue("ID_PLHD") + "");
                 grvPLHD.DeleteSelectedRows();
             }
             catch (Exception ex)

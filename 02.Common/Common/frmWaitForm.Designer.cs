@@ -54,7 +54,6 @@
             // 
             this.progressPanel1.Appearance.BackColor = System.Drawing.Color.Transparent;
             this.progressPanel1.Appearance.Options.UseBackColor = true;
-            this.progressPanel1.BarAnimationElementThickness = 2;
             this.progressPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.progressPanel1.Location = new System.Drawing.Point(3, 17);
             this.progressPanel1.Name = "progressPanel1";

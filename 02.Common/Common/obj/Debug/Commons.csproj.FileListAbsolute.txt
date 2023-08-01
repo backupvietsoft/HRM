@@ -918,7 +918,9 @@ F:\01.HRM\02.Common\Common\obj\Debug\Commons.Form_AlertHtml.resources
 F:\01.HRM\02.Common\Common\obj\Debug\Commons.Form_Alert.resources
 F:\01.HRM\02.Common\Common\obj\Debug\Commons.frmPopUp.resources
 F:\01.HRM\02.Common\Common\obj\Debug\Commons.frmProgressBar.resources
+F:\01.HRM\02.Common\Common\obj\Debug\Commons.frmWaitFormVS.resources
 F:\01.HRM\02.Common\Common\obj\Debug\Commons.frmYKienYC.resources
+F:\01.HRM\02.Common\Common\obj\Debug\Commons.frmWaitFormCustom.resources
 F:\01.HRM\02.Common\Common\obj\Debug\Commons.frmWaitForm.resources
 F:\01.HRM\02.Common\Common\obj\Debug\Commons.Properties.Resources.resources
 F:\01.HRM\02.Common\Common\obj\Debug\Commons.SubReportHeader_DV.resources

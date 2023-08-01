@@ -76,20 +76,26 @@ namespace VietSoftHRM
             try
             {
 
-                DateTime dNgay = DateTime.Now;
-                if (Commons.Modules.ObjSystems.checkVerDemo(-1, -1, -1, out dNgay) && Commons.Modules.KyHieuDV == "DM")
-                {
-                    Commons.Modules.ObjSystems.MsgWarningVer();
-                    Application.Exit();
-                }
-                else
-                {
-                    //Thread.Sleep(1000);
-                    LoadcboDataBase();
-                    LoadUserPass();
-                    Commons.Modules.chamCongK = false;
-                    Commons.Modules.ObjSystems.ThayDoiNN(this);
-                }
+                //Thread.Sleep(1000);
+                LoadcboDataBase();
+                LoadUserPass();
+                Commons.Modules.chamCongK = false;
+                Commons.Modules.ObjSystems.ThayDoiNN(this);
+
+                //DateTime dNgay = DateTime.Now;
+                //if (Commons.Modules.ObjSystems.checkVerDemo(-1, -1, -1, out dNgay) && Commons.Modules.KyHieuDV == "DM")
+                //{
+                //    Commons.Modules.ObjSystems.MsgWarningVer();
+                //    Application.Exit();
+                //}
+                //else
+                //{
+                //    //Thread.Sleep(1000);
+                //    LoadcboDataBase();
+                //    LoadUserPass();
+                //    Commons.Modules.chamCongK = false;
+                //    Commons.Modules.ObjSystems.ThayDoiNN(this);
+                //}
             }
             catch { }
         }

@@ -563,6 +563,7 @@
             this.BAC_LUONGLookUpEdit.Size = new System.Drawing.Size(224, 24);
             this.BAC_LUONGLookUpEdit.StyleController = this.dataLayoutControl1;
             this.BAC_LUONGLookUpEdit.TabIndex = 12;
+            this.BAC_LUONGLookUpEdit.BeforePopup += new System.EventHandler(this.BAC_LUONGLookUpEdit_BeforePopup);
             this.BAC_LUONGLookUpEdit.EditValueChanged += new System.EventHandler(this.BAC_LUONGLookUpEdit_EditValueChanged);
             // 
             // gridView1

@@ -189,8 +189,8 @@ namespace Vs.HRM
                         }
                         else
                         {
-                            qtct.Load_ChuyenTu();
                             qtct.LoadgrdCongTac(Convert.ToInt32(Commons.Modules.iCongNhan));
+                            //qtct.Load_ChuyenTu();
                         }
                         Selecttab(navigationPage2);
                         break;

@@ -11,6 +11,7 @@ using DevExpress.XtraLayout;
 using System.Globalization;
 using DevExpress.Utils.Menu;
 using System.Linq;
+using System.Drawing;
 
 namespace Vs.TimeAttendance
 {
@@ -55,7 +56,8 @@ namespace Vs.TimeAttendance
 
                 LoadNgay();
                 Commons.Modules.ObjSystems.LoadCboDonVi(cboDonVi);
-                Commons.Modules.ObjSystems.LoadCboXiNghiep(cboDonVi, cboXiNghiep);
+
+                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboXiNghiep, Commons.Modules.ObjSystems.DataXiNghiep(Convert.ToInt32(cboDonVi.EditValue), false), "ID_XN", "TEN_XN", "TEN_XN");
 
                 Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboTo, Commons.Modules.ObjSystems.DataTo(Convert.ToInt32(cboDonVi.EditValue), Convert.ToInt32(cboXiNghiep.EditValue), true), "ID_TO", "TEN_TO", "TEN_TO");
                 LoadGridNgayDK();
@@ -171,6 +173,7 @@ namespace Vs.TimeAttendance
                 cmd.Parameters.Add("@ID_XN", SqlDbType.BigInt).Value = Convert.ToInt64(cboXiNghiep.EditValue);
                 cmd.Parameters.Add("@ID_TO", SqlDbType.BigInt).Value = Convert.ToInt64(cboTo.EditValue);
                 cmd.Parameters.Add("@DNgay", SqlDbType.Date).Value = Commons.Modules.ObjSystems.ConvertDateTime(cboNgay.Text);
+                cmd.Parameters.Add("@THEM", SqlDbType.Bit).Value = isAdd;
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
@@ -180,9 +183,9 @@ namespace Vs.TimeAttendance
                 dt = ds.Tables[0].Copy();
 
                 dt.Columns["SO_GIO"].ReadOnly = false;
+                dt.Columns["DA_CTC"].ReadOnly = false;
                 Commons.Modules.ObjSystems.MLoadXtraGrid(grdCatTC, grvCatTC, dt, isAdd ? true : false, true, true, true, true, this.Name);
                 grvCatTC.Columns["NGAY"].OptionsColumn.AllowEdit = false;
-                grvCatTC.Columns["DA_CTC"].OptionsColumn.AllowEdit = false;
                 grvCongNhan.OptionsSelection.MultiSelect = true;
                 Commons.Modules.sLoad = "";
             }
@@ -221,7 +224,7 @@ namespace Vs.TimeAttendance
         {
             if (Commons.Modules.sLoad == "0Load") return;
             Commons.Modules.sLoad = "0Load";
-            Commons.Modules.ObjSystems.LoadCboXiNghiep(cboDonVi, cboXiNghiep);
+            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboXiNghiep, Commons.Modules.ObjSystems.DataXiNghiep(Convert.ToInt32(cboDonVi.EditValue), false), "ID_XN", "TEN_XN", "TEN_XN");
             Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboTo, Commons.Modules.ObjSystems.DataTo(Convert.ToInt32(cboDonVi.EditValue), Convert.ToInt32(cboXiNghiep.EditValue), false), "ID_TO", "TEN_TO", "TEN_TO");
             LoadGridNgayDK();
             LoadGridCongNhan();
@@ -241,7 +244,7 @@ namespace Vs.TimeAttendance
         private void LoadNgay()
         {
             DataTable dt = new DataTable();
-            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT DISTINCT RIGHT(CONVERT(VARCHAR(10),NGAY,103),7) AS THANG FROM dbo.DANG_KY_CAT_TC ORDER BY THANG DESC"));
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT DISTINCT SUBSTRING(CONVERT(VARCHAR(10),NGAY,103),4,2) as M, RIGHT(CONVERT(VARCHAR(10),NGAY,103),4) AS Y ,RIGHT(CONVERT(VARCHAR(10),NGAY,103),7) AS THANG FROM dbo.DANG_KY_CAT_TC ORDER BY Y DESC , M DESC"));
 
             if (grdNgay.DataSource == null)
             {
@@ -250,6 +253,8 @@ namespace Vs.TimeAttendance
             else
                 Commons.Modules.ObjSystems.MLoadXtraGrid(grdNgay, grvNgay, dt, false, false, true, false, false, this.Name);
 
+            grvNgay.Columns["M"].Visible = false;
+            grvNgay.Columns["Y"].Visible = false;
             if (dt.Rows.Count > 0)
             {
                 cboNgay.EditValue = dt.Rows[0]["THANG"];
@@ -293,6 +298,7 @@ namespace Vs.TimeAttendance
                         {
                             isAdd = true;
                             EnableButon();
+                            LoadGridNgayDK();
                             LoadGridCongNhan();
                             break;
                         }
@@ -319,6 +325,7 @@ namespace Vs.TimeAttendance
 
                             if (!Validate()) return;
                             if (grvCongNhan.HasColumnErrors) return;
+                            Commons.Modules.ObjSystems.ShowWaitForm(this);
                             DataTable dt = new DataTable();
                             if (Savedata() == false)
                             {
@@ -328,7 +335,7 @@ namespace Vs.TimeAttendance
                             EnableButon();
                             LoadGridNgayDK();
                             LoadGridCongNhan();
-                            LoadNgay();
+                            Commons.Modules.ObjSystems.HideWaitForm();
                             break;
                         }
                     case "khongghi":
@@ -350,6 +357,7 @@ namespace Vs.TimeAttendance
             catch (Exception ex)
             {
                 this.Cursor = Cursors.Default;
+                Commons.Modules.ObjSystems.HideWaitForm();
             }
         }
         ////chuot phai
@@ -589,7 +597,7 @@ namespace Vs.TimeAttendance
                 {
                     DataTable dt = new DataTable();
                     DataTable dt1 = new DataTable();
-                    var data = e.Value; 
+                    var data = e.Value;
                     //var data = grvCatTC.GetFocusedRowCellValue("SO_GIO");
 
                     dt1 = Commons.Modules.ObjSystems.ConvertDatatable(grvCongNhan);
@@ -599,21 +607,29 @@ namespace Vs.TimeAttendance
                                                              .Select(r => r.Field<DateTime>("NGAY"))
                                                              .Any(x => x == row.Field<DateTime>("NGAY"))
                                                              ).ToList<DataRow>().ForEach(r => r["SO_GIO"] = (data));
+                    dt.AsEnumerable().Where(row => dt1.AsEnumerable()
+                                                             .Select(r => r.Field<DateTime>("NGAY"))
+                                                             .Any(x => x == row.Field<DateTime>("NGAY")) && row.Field<double>("SG_TC") > Convert.ToDouble((data))
+                                                             ).ToList<DataRow>().ForEach(r => r["SG_TC"] = (data));
 
                     dt.AcceptChanges();
+                }
+                if(e.Column.FieldName == "DA_CTC")
+                {
+                    DataTable dt = new DataTable();
+                    DataTable dt1 = new DataTable();
+                    var data = e.Value;
+                    //var data = grvCatTC.GetFocusedRowCellValue("SO_GIO");
 
-                    if (Convert.ToDouble(dt.Compute("Sum(SO_GIO)", "NGAY = '" + dr["NGAY"] + "'")) == 0)
-                    {
-                        //grvCatTC.SetFocusedRowCellValue("DA_CTC", false);
+                    dt1 = Commons.Modules.ObjSystems.ConvertDatatable(grvCongNhan);
+                    dt = (DataTable)grdCongNhan.DataSource;
 
-                        dr["DA_CTC"] = false;
-                    }
-                    else
-                    {
-                        //grvCatTC.SetFocusedRowCellValue("DA_CTC", true);
-                        dr["DA_CTC"] = true;
+                    dt.AsEnumerable().Where(row => dt1.AsEnumerable()
+                                                             .Select(r => r.Field<DateTime>("NGAY"))
+                                                             .Any(x => x == row.Field<DateTime>("NGAY"))
+                                                             ).ToList<DataRow>().ForEach(r => r["DA_CTC"] = (data));
 
-                    }
+                    dt.AcceptChanges();
                 }
             }
             catch { }
@@ -626,6 +642,22 @@ namespace Vs.TimeAttendance
                 grvCatTC.UpdateCurrentRow();
             }
             catch { }
+        }
+
+        private void grvCatTC_RowStyle(object sender, RowStyleEventArgs e)
+        {
+            try
+            {
+                if (Convert.ToDateTime(grvCatTC.GetRowCellValue(e.RowHandle, grvCatTC.Columns["NGAY"]).ToString().Trim()).DayOfWeek.ToString() != "Sunday") return;
+                {
+                    e.Appearance.BackColor = Color.Salmon;
+                    e.Appearance.BackColor2 = Color.SeaShell;
+                    e.HighPriority = true;
+                }
+            }
+            catch
+            {
+            }
         }
     }
 }

@@ -1004,51 +1004,33 @@ namespace Vs.Payroll
                         }
                     case "xoa":
                         {
-                            DialogResult res = XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgDeleteDangKyLamThem"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "msgfrmThongBao"), MessageBoxButtons.YesNoCancel);
-                            if (res == DialogResult.Yes)
-                            {
-                                string sSql = "";
-                                try
-                                {
-                                    if (grvQT.RowCount == 0) { Commons.Modules.ObjSystems.msgChung(Commons.ThongBao.msgKhongCoDuLieuXoa); return; }
-                                    if (Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT COUNT(*) FROM dbo.PHIEU_CONG_DOAN WHERE ID_CD = " + grvQT.GetFocusedRowCellValue("ID_CD") + "")) > 0)
-                                    {
-                                        XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDelDangSuDung"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                                        return;
-                                    }
-                                    string sBT = "sBTQTCN" + Commons.Modules.iIDUser;
-                                    Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBT, Commons.Modules.ObjSystems.ConvertDatatable(grdQT), "");
+                            if (grvQT.RowCount == 0) { Commons.Modules.ObjSystems.msgChung(Commons.ThongBao.msgKhongCoDuLieuXoa); return; }
 
-                                    sSql = "DELETE QUI_TRINH_CONG_NGHE_CHI_TIET FROM dbo.QUI_TRINH_CONG_NGHE_CHI_TIET T1 INNER JOIN "+ sBT +" T2 ON T1.ID = T2.ID_CD";
-                                    SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, sSql);
-                                    Commons.Modules.ObjSystems.XoaTable(sBT);
-                                    LoadData();
-                                }
-                                catch
-                                {
-                                    Commons.Modules.ObjSystems.msgChung(Commons.ThongBao.msgKhongCoDuLieuXoa);
-                                }
-                            }
-                            else if (res == DialogResult.No)
+                            int result = Commons.Modules.ObjSystems.MsgDelete(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgBanCoMuonXoaKhong"));
+                            if (result == 0) return;
+
+                            string sBT = "sBTQTCN" + Commons.Modules.iIDUser;
+                            Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBT, Commons.Modules.ObjSystems.GetDataTableMultiSelect(grdQT, grvQT), "");
+
+                            if (Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT COUNT(*) FROM dbo.PHIEU_CONG_DOAN T1 INNER JOIN " + sBT + " T2 ON T1.ID_CD = T2.ID_CD ")) > 0)
                             {
-                                string sSql = "";
-                                try
-                                {
-                                    if (grvQT.RowCount == 0) { Commons.Modules.ObjSystems.msgChung(Commons.ThongBao.msgKhongCoDuLieuXoa); return; }
-                                    sSql = "DELETE QUI_TRINH_CONG_NGHE_CHI_TIET WHERE ID = " + grvQT.GetFocusedRowCellValue("ID_CD") +"";
-                                    SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, sSql);
-                                    grvQT.DeleteSelectedRows();
-                                }
-                                catch
-                                {
-                                    Commons.Modules.ObjSystems.msgChung(Commons.ThongBao.msgKhongCoDuLieuXoa);
-                                }
-                            }
-                            else
-                            {
+                                Commons.Modules.ObjSystems.XoaTable(sBT);
+                                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDelDangSuDung"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                                 return;
                             }
-
+                            string sSql = "";
+                            try
+                            {
+                                sSql = "DELETE QUI_TRINH_CONG_NGHE_CHI_TIET FROM dbo.QUI_TRINH_CONG_NGHE_CHI_TIET T1 INNER JOIN " + sBT + " T2 ON T1.ID = T2.ID_CD";
+                                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, sSql);
+                                Commons.Modules.ObjSystems.XoaTable(sBT);
+                                LoadData();
+                                Commons.Modules.ObjSystems.Alert(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msg_XoaThanhCong"), Commons.Form_Alert.enmType.Success);
+                            }
+                            catch
+                            {
+                                Commons.Modules.ObjSystems.Alert(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgXoaKhongThanhCong"), Commons.Form_Alert.enmType.Warning);
+                            }
 
                             break;
                         }
@@ -1181,6 +1163,13 @@ namespace Vs.Payroll
         }
         public DataTable ToDataTable(ExcelDataSource excelDataSource)
         {
+            DevExpress.DataAccess.Native.Excel.DataView dv_temp = ((IListSource)excelDataSource).GetList() as DevExpress.DataAccess.Native.Excel.DataView;
+
+            excelDataSource.SourceOptions = new CsvSourceOptions() { CellRange = "A1:" + "L" + (dv_temp.Count + 10) + "" };
+            excelDataSource.SourceOptions.SkipEmptyRows = false;
+            excelDataSource.SourceOptions.UseFirstRowAsHeader = true;
+            excelDataSource.Fill();
+
             IList list = ((IListSource)excelDataSource).GetList();
             DevExpress.DataAccess.Native.Excel.DataView dataView = (DevExpress.DataAccess.Native.Excel.DataView)list;
             List<PropertyDescriptor> props = dataView.Columns.ToList<PropertyDescriptor>();
@@ -1798,9 +1787,9 @@ namespace Vs.Payroll
             try
             {
                 frmCapNhatCDTheoMH frm = new frmCapNhatCDTheoMH();
-                frm.iID_DV = Convert.ToInt32(cboDV.EditValue);
-                frm.iID_CHUYEN_SD = Convert.ToInt32(chkCboEditChuyen.EditValue);
-                frm.iID_ORD = Convert.ToInt32(grvQT.GetFocusedRowCellValue("ID_CD")) == 0 ? Convert.ToInt32(cboMH.EditValue) : -1;
+                frm.iID_DV = Convert.ToInt64(cboDV.EditValue);
+                frm.iID_CHUYEN_SD = Convert.ToInt64(chkCboEditChuyen.EditValue);
+                frm.iID_ORD = Convert.ToInt64(grvQT.GetFocusedRowCellValue("ID_CD")) == 0 ? Convert.ToInt64(cboMH.EditValue) : -1;
                 frm.dtTemp = new DataTable();
                 frm.dtTemp = Commons.Modules.ObjSystems.GetDataTableMultiSelect(grdQT, grvQT);
                 frm.datThang = datThang.DateTime;
@@ -2060,17 +2049,22 @@ namespace Vs.Payroll
 
         private void chkCboEditChuyen_EditValueChanged(object sender, EventArgs e)
         {
-            if (Commons.Modules.sLoad == "0Load") return;
-            Commons.Modules.sLoad = "0Load";
-
-            // Code xử lý khi sự kiện EditValueChanged xảy ra ở đây
-            LoadCboCum();
-            LoadData();
-            datNgayLap.DateTime = Convert.ToDateTime(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT TOP 1 NGAY_LAP FROM dbo.QUI_TRINH_CONG_NGHE_CHI_TIET WHERE ID = " + (grvQT.GetFocusedRowCellValue("ID_CD") == null ? -1 : Convert.ToInt64(grvQT.GetFocusedRowCellValue("ID_CD"))).ToString() + ""));
-            datNgayLap.DateTime = datNgayLap.DateTime == DateTime.MinValue ? DateTime.Now : datNgayLap.DateTime;
-
-
-            Commons.Modules.sLoad = "";
+            try
+            {
+                if (Commons.Modules.sLoad == "0Load") return;
+                Commons.Modules.sLoad = "0Load";
+                // Code xử lý khi sự kiện EditValueChanged xảy ra ở đây
+                LoadCboCum();
+                LoadData();
+                try
+                {
+                    datNgayLap.DateTime = Convert.ToDateTime(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT TOP 1 NGAY_LAP FROM dbo.QUI_TRINH_CONG_NGHE_CHI_TIET WHERE ID = " + (grvQT.GetFocusedRowCellValue("ID_CD") == null ? -1 : Convert.ToInt64(grvQT.GetFocusedRowCellValue("ID_CD"))).ToString() + ""));
+                }
+                catch { }
+                datNgayLap.DateTime = datNgayLap.DateTime == DateTime.MinValue ? DateTime.Now : datNgayLap.DateTime;
+                Commons.Modules.sLoad = "";
+            }
+            catch { }
         }
 
         private void grvQT_RowStyle(object sender, RowStyleEventArgs e)
@@ -2154,11 +2148,18 @@ namespace Vs.Payroll
                 Commons.Modules.sLoad = "0Load";
                 LoadCboCum();
                 LoadData();
-                datNgayLap.DateTime = Convert.ToDateTime(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT TOP 1 NGAY_LAP FROM dbo.QUI_TRINH_CONG_NGHE_CHI_TIET WHERE ID = " + (grvQT.GetFocusedRowCellValue("ID_CD") == null ? -1 : Convert.ToInt64(grvQT.GetFocusedRowCellValue("ID_CD"))).ToString() + ""));
+                try
+                {
+                    datNgayLap.DateTime = Convert.ToDateTime(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT TOP 1 NGAY_LAP FROM dbo.QUI_TRINH_CONG_NGHE_CHI_TIET WHERE ID = " + (grvQT.GetFocusedRowCellValue("ID_CD") == null ? -1 : Convert.ToInt64(grvQT.GetFocusedRowCellValue("ID_CD"))).ToString() + ""));
+                }
+                catch { }
                 datNgayLap.DateTime = datNgayLap.DateTime == DateTime.MinValue ? DateTime.Now : datNgayLap.DateTime;
                 Commons.Modules.sLoad = "";
             }
-            catch { }
+            catch
+            {
+                Commons.Modules.sLoad = "";
+            }
         }
 
         private void grvDSUngVien_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)

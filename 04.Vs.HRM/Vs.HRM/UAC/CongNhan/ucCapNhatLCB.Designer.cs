@@ -28,9 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule1 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
-            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule2 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions1 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
             DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions2 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
             DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions3 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
@@ -67,7 +64,6 @@
             this.ItemForSumNhanVien = new DevExpress.XtraLayout.SimpleLabelItem();
             this.windowsUIButton = new DevExpress.XtraBars.Docking2010.WindowsUIButtonPanel();
             this.searchControl = new DevExpress.XtraEditors.SearchControl();
-            this.dxValidationProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.radBoloc.Properties)).BeginInit();
@@ -79,8 +75,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboXN.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit2View)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NGAY_HIEU_LUCdateEdit.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NGAY_HIEU_LUCdateEdit.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NGAY_HIEU_LUCdateEdit.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.LuongTutextEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.LuongDentextEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.LUONG_CO_BANtextEdit.Properties)).BeginInit();
@@ -101,7 +97,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.ItemForSumNhanVien)).BeginInit();
             this.windowsUIButton.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.searchControl.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
@@ -160,6 +155,7 @@
             this.grvCapNhatLCB.OptionsSelection.MultiSelect = true;
             this.grvCapNhatLCB.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CheckBoxRowSelect;
             this.grvCapNhatLCB.OptionsView.ShowGroupPanel = false;
+            this.grvCapNhatLCB.PopupMenuShowing += new DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler(this.grvCapNhatLCB_PopupMenuShowing);
             this.grvCapNhatLCB.CellValueChanged += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.grvCapNhatLCB_CellValueChanged);
             this.grvCapNhatLCB.RowCountChanged += new System.EventHandler(this.grvCapNhatLCB_RowCountChanged);
             // 
@@ -246,10 +242,6 @@
             this.NGAY_HIEU_LUCdateEdit.Size = new System.Drawing.Size(240, 24);
             this.NGAY_HIEU_LUCdateEdit.StyleController = this.layoutControl1;
             this.NGAY_HIEU_LUCdateEdit.TabIndex = 17;
-            conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule1.ErrorText = "This value is not valid";
-            conditionValidationRule1.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.Critical;
-            this.dxValidationProvider1.SetValidationRule(this.NGAY_HIEU_LUCdateEdit, conditionValidationRule1);
             // 
             // LuongTutextEdit
             // 
@@ -292,11 +284,6 @@
             this.LUONG_CO_BANtextEdit.Size = new System.Drawing.Size(240, 24);
             this.LUONG_CO_BANtextEdit.StyleController = this.layoutControl1;
             this.LUONG_CO_BANtextEdit.TabIndex = 23;
-            conditionValidationRule2.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.Greater;
-            conditionValidationRule2.ErrorText = "This value is not valid";
-            conditionValidationRule2.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.Critical;
-            conditionValidationRule2.Value1 = 0;
-            this.dxValidationProvider1.SetValidationRule(this.LUONG_CO_BANtextEdit, conditionValidationRule2);
             // 
             // NOI_DUNGtextEdit
             // 
@@ -551,7 +538,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.ItemForSumNhanVien)).EndInit();
             this.windowsUIButton.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.searchControl.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -585,7 +571,6 @@
         private DevExpress.XtraEditors.TextEdit LUONG_CO_BANtextEdit;
         private DevExpress.XtraBars.Docking2010.WindowsUIButtonPanel windowsUIButton;
         private DevExpress.XtraLayout.LayoutControlItem ItemForNGAY_HIEU_LUC;
-        private DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider dxValidationProvider1;
         private DevExpress.XtraEditors.SearchControl searchControl;
         private DevExpress.XtraEditors.TextEdit NOI_DUNGtextEdit;
         private DevExpress.XtraLayout.LayoutControlItem ItemForNOI_DUNG;

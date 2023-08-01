@@ -129,6 +129,11 @@ namespace Vs.Payroll
                                                 LSPThangTheoTungCongDoan_BT();
                                                 break;
                                             }
+                                        case "MT":
+                                            {
+                                                LSPThangTheoTungCongDoan_BT();
+                                                break;
+                                            }
                                         default:
                                             {
                                                 System.Data.SqlClient.SqlConnection conn;
@@ -657,13 +662,12 @@ namespace Vs.Payroll
                     }
                 case "rdo_bangluongsnaphamtonghoptheoMH":
                     {
-                        if (Commons.Modules.KyHieuDV == "BT")
-                        {
-                            LoadGrvMaHang();
-                            chkInTheoCongNhan.EditValue = true;
-                            chkInTheoCongNhan.Visible = true;
-                            chkInTheoCongNhan.Text = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "lblInTheoMaHang");
-                        }
+
+                        LoadGrvMaHang();
+                        chkInTheoCongNhan.EditValue = true;
+                        chkInTheoCongNhan.Visible = true;
+                        chkInTheoCongNhan.Text = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "lblInTheoMaHang");
+
                         lblNgayXem.Enabled = false;
                         datNgayXem.Enabled = false;
 
@@ -3707,7 +3711,7 @@ namespace Vs.Payroll
                         formatRange.Font.Bold = true;
 
                         formatRange1 = oSheet.get_Range("F" + rowBD, "F" + rowBD.ToString());
-                        formatRange1.Value2 = "=D8*E8";
+                        formatRange1.Value2 = "=D" + rowBD + "*E" + rowBD + "";
                         formatRange = oSheet.get_Range("F" + rowBD, "F" + oRow.ToString());
 
                         if (dtBCLSP.Rows.Count > 1)
@@ -3732,14 +3736,27 @@ namespace Vs.Payroll
 
                     formatRange = oSheet.get_Range("D" + rowBD, "D" + oRow.ToString());
                     formatRange.NumberFormat = "#,##0;(#,##0);;";
-                    formatRange.TextToColumns(Type.Missing, Microsoft.Office.Interop.Excel.XlTextParsingType.xlDelimited, Microsoft.Office.Interop.Excel.XlTextQualifier.xlTextQualifierDoubleQuote);
-                    formatRange = oSheet.get_Range("E" + rowBD, "E" + oRow.ToString());
-                    formatRange.NumberFormat = "#,##0;(#,##0);;";
-                    formatRange.TextToColumns(Type.Missing, Microsoft.Office.Interop.Excel.XlTextParsingType.xlDelimited, Microsoft.Office.Interop.Excel.XlTextQualifier.xlTextQualifierDoubleQuote);
+                    try
+                    {
+                        formatRange.TextToColumns(Type.Missing, Microsoft.Office.Interop.Excel.XlTextParsingType.xlDelimited, Microsoft.Office.Interop.Excel.XlTextQualifier.xlTextQualifierDoubleQuote);
+                    }
+                    catch { }
+
+                    formatRange = oSheet.get_Range("E" + rowBD, "E" + (oRow + 1).ToString());
+                    formatRange.NumberFormat = "0.00";
+                    try
+                    {
+                        formatRange.TextToColumns(Type.Missing, Microsoft.Office.Interop.Excel.XlTextParsingType.xlDelimited, Microsoft.Office.Interop.Excel.XlTextQualifier.xlTextQualifierDoubleQuote);
+                    }
+                    catch { }
+
                     formatRange = oSheet.get_Range("F" + rowBD, "F" + (oRow + 1).ToString());
                     formatRange.NumberFormat = "#,##0;(#,##0);;";
-                    formatRange.TextToColumns(Type.Missing, Microsoft.Office.Interop.Excel.XlTextParsingType.xlDelimited, Microsoft.Office.Interop.Excel.XlTextQualifier.xlTextQualifierDoubleQuote);
-
+                    try
+                    {
+                        formatRange.TextToColumns(Type.Missing, Microsoft.Office.Interop.Excel.XlTextParsingType.xlDelimited, Microsoft.Office.Interop.Excel.XlTextQualifier.xlTextQualifierDoubleQuote);
+                    }
+                    catch { }
                     //oSheet.get_Range("O" + (rowBD - 2).ToString() + "").Value2 = "=SUBTOTAL(9,O" + rowBD + ":O" + oRow.ToString() + ")";
                     //oSheet.get_Range("O" + (rowBD - 2).ToString() + "").NumberFormat = "#,##0;(#,##0);;";
                     //oSheet.get_Range("O" + (rowBD - 2).ToString() + "").Font.Size = fontSizeNoiDung;

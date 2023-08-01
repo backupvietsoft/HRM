@@ -12,6 +12,7 @@ using DataTable = System.Data.DataTable;
 using System.Drawing;
 using System.Reflection;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace Vs.TimeAttendance
 {
@@ -64,6 +65,11 @@ namespace Vs.TimeAttendance
                                 {
                                     switch (Commons.Modules.KyHieuDV)
                                     {
+                                        case "MT":
+                                            {
+                                                TheoDoiPhepNamThucTe_MT();
+                                                break;
+                                            }
                                         case "SB":
                                             {
                                                 TheoDoiPhepNamThucTe_SB();
@@ -171,7 +177,6 @@ namespace Vs.TimeAttendance
         {
             try
             {
-
                 LoadCboDonVi();
                 LoadCboXiNghiep();
                 LoadCboTo();
@@ -196,7 +201,7 @@ namespace Vs.TimeAttendance
                 lk_NgayIn.Text = DateTime.Now.ToString("MM/yyyy");
                 rdo_DiTreVeSom.SelectedIndex = 2;
 
-                if (Commons.Modules.KyHieuDV == "AP" || Commons.Modules.KyHieuDV == "HN")
+                if (Commons.Modules.KyHieuDV == "AP" || Commons.Modules.KyHieuDV == "HN" || Commons.Modules.KyHieuDV == "BT")
                 {
                     //rdo_ChonBaoCao.Properties.Items.RemoveAt(8);
 
@@ -205,6 +210,11 @@ namespace Vs.TimeAttendance
                     rdo_ChonBaoCao.Properties.Items.Remove(rdo_ChonBaoCao.Properties.Items.Where(x => x.Tag.ToString() == "rdo_TienPhepChuyenKhoanNV").FirstOrDefault());
                     rdo_ChonBaoCao.Properties.Items.Remove(rdo_ChonBaoCao.Properties.Items.Where(x => x.Tag.ToString() == "rdo_TongHopTienPhep").FirstOrDefault());
                     rdo_ChonBaoCao.Properties.Items.Remove(rdo_ChonBaoCao.Properties.Items.Where(x => x.Tag.ToString() == "rdo_PhieuTienPhep").FirstOrDefault());
+                }
+                else if(Commons.Modules.KyHieuDV == "MT")
+                {
+                    rdo_ChonBaoCao.Properties.Items.Remove(rdo_ChonBaoCao.Properties.Items.Where(x => x.Tag.ToString() == "rdo_TienPhepChuyenKhoanCN").FirstOrDefault());
+                    rdo_ChonBaoCao.Properties.Items.Remove(rdo_ChonBaoCao.Properties.Items.Where(x => x.Tag.ToString() == "rdo_TienPhepChuyenKhoanNV").FirstOrDefault());
                 }
                
             }
@@ -567,6 +577,54 @@ namespace Vs.TimeAttendance
             catch (Exception ex)
             {
                 XtraMessageBox.Show(ex.Message);
+            }
+        }
+        private void TheoDoiPhepNamThucTe_MT()
+        {
+            string datetime = "01/01/" + Convert.ToString(lk_Nam.Text);
+            DateTime tungay = Convert.ToDateTime(datetime);
+            try { datetime = "31/12/" + Convert.ToString(lk_Nam.Text); } catch { }
+            DateTime denngay = Convert.ToDateTime(datetime);
+            int iType = rdo_DiTreVeSom.SelectedIndex;
+
+            System.Data.SqlClient.SqlConnection conn;
+            conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+            conn.Open();
+            DataTable dtBCPhep;
+            try
+            {
+
+                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand(Commons.Modules.ObjSystems.returnSps(Commons.Modules.chamCongK, "spGetTheoDoiPhepNam_MT"), conn);
+                cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                cmd.Parameters.Add("@Dvi", SqlDbType.Int).Value = LK_DON_VI.EditValue;
+                cmd.Parameters.Add("@XN", SqlDbType.Int).Value = LK_XI_NGHIEP.EditValue;
+                cmd.Parameters.Add("@TO", SqlDbType.Int).Value = LK_TO.EditValue;
+                cmd.Parameters.Add("@Type", SqlDbType.Int).Value = iType;
+                cmd.Parameters.Add("@TNgay", SqlDbType.Date).Value = tungay;
+                cmd.Parameters.Add("@DNgay", SqlDbType.Date).Value = denngay;
+                cmd.CommandType = CommandType.StoredProcedure;
+                System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+
+                DataSet ds = new DataSet();
+                adp.Fill(ds);
+                ds.Tables[0].TableName = "DATA";
+                ds.Tables[1].TableName = "INFO";
+                string sPath = "";
+                if (!System.IO.Directory.Exists("Report")) // kiểm tra xem forder đã có chưa , nếu chưa có thì tạo 
+                {
+                    System.IO.Directory.CreateDirectory("Report");
+                }
+                sPath = "Report\\" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".xlsx";
+
+                // If the file name is not an empty string open it for saving.
+
+                Commons.TemplateExcel.FillReportSum(sPath, System.Windows.Forms.Application.StartupPath + "\\Template\\TemplateMT\\BaoCaoTheoDoiPhepNam.xlsx", ds, new string[] { "{", "}" }, new string[] { "A5", "A6" });
+                Process.Start(sPath);
+            }
+            catch
+            {
+
             }
         }
         private void TheoDoiPhepNamThucTe_SB()

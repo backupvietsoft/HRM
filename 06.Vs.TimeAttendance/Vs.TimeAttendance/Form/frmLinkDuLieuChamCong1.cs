@@ -17,6 +17,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.OleDb;
 using System.Data.SqlClient;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -41,6 +42,9 @@ namespace Vs.TimeAttendance
             }
         }
         RepositoryItemTimeEdit repositoryItemTimeEdit1;
+
+        private BackgroundWorker bw;
+        
         public frmLinkDuLieuChamCong1()
         {
             InitializeComponent();
@@ -92,6 +96,7 @@ namespace Vs.TimeAttendance
             {
             }
         }
+
         #region Các hàm xử lý
         private void enableButon(bool visible)
         {
@@ -192,12 +197,11 @@ namespace Vs.TimeAttendance
             }
             catch { }
         }
+
         private void windowsUIButton_ButtonClick(object sender, DevExpress.XtraBars.Docking2010.ButtonEventArgs e)
         {
             try
             {
-
-
                 WindowsUIButton btn = e.Button as WindowsUIButton;
                 if (btn == null) return;
                 XtraUserControl ctl = new XtraUserControl();
@@ -314,6 +318,7 @@ namespace Vs.TimeAttendance
                     case "TongHopThongTin":
                         {
                             this.Cursor = Cursors.WaitCursor;
+                            //Commons.Modules.ObjSystems.showWaitFormVietSoft(TongHopDuLieu(dtNgayChamCong.DateTime), this);
                             if (!TongHopDuLieu(dtNgayChamCong.DateTime))
                             {
                                 this.Cursor = Cursors.Default;
@@ -416,13 +421,22 @@ namespace Vs.TimeAttendance
             try
             {
                 string sSql = "";
+                string sSQL1 = "";
                 if (Commons.Modules.chamCongK == false)
                 {
+
+                    sSQL1 = "UPDATE dbo.DU_LIEU_QUET_THE SET USER_DEL = '" + Commons.Modules.UserName + "', SAVE_LOG = 1, FORM_CLICK = N'" + "Xóa" + "', DIEU_KIEN = N'" + "ID_CN: " + idcn + ", NGAY: " + dtNgayChamCong.DateTime.ToString("yyyy/MM/dd") + ", GIO_DEN: " + Convert.ToDateTime(grvChamCong.GetFocusedRowCellValue("GIO_DEN")).ToString("HH:mm:ss") + "" + "' "
+                        + " WHERE ID_CN = " + idcn + " AND NGAY = '" + Convert.ToDateTime(dtNgayChamCong.EditValue).ToString("yyyy/MM/dd") + "' " +
+                        "AND CONVERT(nvarchar(10),GIO_DEN,108) = '" + Convert.ToDateTime(grvChamCong.GetFocusedRowCellValue("GIO_DEN")).ToString("HH:mm:ss") + "'";
+
+
                     sSql = "DELETE dbo.DU_LIEU_QUET_THE WHERE ID_CN = " + idcn +
                                                         " AND NGAY = '"
                                                         + Convert.ToDateTime(dtNgayChamCong.EditValue).ToString("yyyy/MM/dd") +
                                                         "' AND CONVERT(nvarchar(10),GIO_DEN,108) = '"
                                                         + Convert.ToDateTime(grvChamCong.GetFocusedRowCellValue("GIO_DEN")).ToString("HH:mm:ss") + "'";
+
+                    SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, sSQL1);
                 }
                 else
                 {
@@ -450,7 +464,7 @@ namespace Vs.TimeAttendance
             try
             {
                 Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, stbChamCong, Commons.Modules.ObjSystems.ConvertDatatable(grvChamCong), "");
-                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spSaveDuLieuQuetThe", stbChamCong, idcn, Convert.ToDateTime(dtNgayChamCong.EditValue), Commons.Modules.chamCongK);
+                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spSaveDuLieuQuetThe", stbChamCong, idcn, Convert.ToDateTime(dtNgayChamCong.EditValue), Commons.Modules.chamCongK, Commons.Modules.UserName);
                 Commons.Modules.ObjSystems.XoaTable(stbChamCong);
                 return true;
             }
@@ -533,6 +547,9 @@ namespace Vs.TimeAttendance
                                         Commons.Modules.bolLinkCC = true;
                                         Commons.Modules.dLinkCC = dtNgayChamCong.DateTime;
                                         frmVachTheLoi frm = new frmVachTheLoi();
+                                        frm.ID_DV = Convert.ToInt64(cbDonVi.EditValue);
+                                        frm.ID_XN = Convert.ToInt64(cbXiNghiep.EditValue);
+                                        frm.ID_TO = Convert.ToInt64(cbTo.EditValue);
                                         frm.ShowDialog();
 
                                         Commons.Modules.bolLinkCC = false;
@@ -623,6 +640,9 @@ namespace Vs.TimeAttendance
                                     Commons.Modules.bolLinkCC = true;
                                     Commons.Modules.dLinkCC = dtNgayChamCong.DateTime;
                                     frmVachTheLoi frm = new frmVachTheLoi();
+                                    frm.ID_DV = Convert.ToInt64(cbDonVi.EditValue);
+                                    frm.ID_XN = Convert.ToInt64(cbXiNghiep.EditValue);
+                                    frm.ID_TO = Convert.ToInt64(cbTo.EditValue);
                                     frm.ShowDialog();
 
                                     Commons.Modules.bolLinkCC = false;
@@ -686,6 +706,9 @@ namespace Vs.TimeAttendance
                                     Commons.Modules.bolLinkCC = true;
                                     Commons.Modules.dLinkCC = dtNgayChamCong.DateTime;
                                     frmVachTheLoi frm = new frmVachTheLoi();
+                                    frm.ID_DV = Convert.ToInt64(cbDonVi.EditValue);
+                                    frm.ID_XN = Convert.ToInt64(cbXiNghiep.EditValue);
+                                    frm.ID_TO = Convert.ToInt64(cbTo.EditValue);
                                     frm.ShowDialog();
 
                                     Commons.Modules.bolLinkCC = false;
@@ -938,6 +961,9 @@ namespace Vs.TimeAttendance
                                     Commons.Modules.bolLinkCC = true;
                                     Commons.Modules.dLinkCC = dtNgayChamCong.DateTime;
                                     frmVachTheLoi frm = new frmVachTheLoi();
+                                    frm.ID_DV = Convert.ToInt64(cbDonVi.EditValue);
+                                    frm.ID_XN = Convert.ToInt64(cbXiNghiep.EditValue);
+                                    frm.ID_TO = Convert.ToInt64(cbTo.EditValue);
                                     frm.ShowDialog();
 
                                     Commons.Modules.bolLinkCC = false;
@@ -1032,6 +1058,8 @@ namespace Vs.TimeAttendance
                                     Commons.Modules.dLinkCC = dtNgayChamCong.DateTime;
                                     frmVachTheLoi frm = new frmVachTheLoi();
                                     frm.ID_DV = Convert.ToInt64(cbDonVi.EditValue);
+                                    frm.ID_XN = Convert.ToInt64(cbXiNghiep.EditValue);
+                                    frm.ID_TO = Convert.ToInt64(cbTo.EditValue);
                                     frm.ShowDialog();
 
                                     Commons.Modules.bolLinkCC = false;
@@ -1188,6 +1216,9 @@ namespace Vs.TimeAttendance
                                             Commons.Modules.bolLinkCC = true;
                                             Commons.Modules.dLinkCC = dtNgayChamCong.DateTime;
                                             frmVachTheLoi frm = new frmVachTheLoi();
+                                            frm.ID_DV = Convert.ToInt64(cbDonVi.EditValue);
+                                            frm.ID_XN = Convert.ToInt64(cbXiNghiep.EditValue);
+                                            frm.ID_TO = Convert.ToInt64(cbTo.EditValue);
                                             frm.ShowDialog();
 
                                             Commons.Modules.bolLinkCC = false;
@@ -1282,6 +1313,9 @@ namespace Vs.TimeAttendance
                                         Commons.Modules.bolLinkCC = true;
                                         Commons.Modules.dLinkCC = dtNgayChamCong.DateTime;
                                         frmVachTheLoi frm = new frmVachTheLoi();
+                                        frm.ID_DV = Convert.ToInt64(cbDonVi.EditValue);
+                                        frm.ID_XN = Convert.ToInt64(cbXiNghiep.EditValue);
+                                        frm.ID_TO = Convert.ToInt64(cbTo.EditValue);
                                         frm.ShowDialog();
 
                                         Commons.Modules.bolLinkCC = false;
@@ -1519,6 +1553,11 @@ namespace Vs.TimeAttendance
                 cmd.Parameters.AddWithValue("@LamTron", Commons.Modules.iLamTronGio);
                 cmd.Parameters.AddWithValue("@Ngay", dNgayChamCong);
                 cmd.ExecuteNonQuery();
+
+
+                string sSQL = "UPDATE T1 SET [T1].[USER_NAME] = '" + Commons.Modules.UserName + "',T1.FORM_CLICK = N'" + (Commons.Modules.chamCongK ? "Tổng hợp dữ liệu khách" : "Tổng hợp dữ liệu") + "', T1.SAVE_LOG = 1, T1.DIEU_KIEN = N'ID_DV: " + cbDonVi.EditValue + ", ID_XN: " + cbXiNghiep.EditValue + ", ID_TO: " + cbTo.EditValue + ", NGAY: " + dNgayChamCong.ToString("MM/dd/yyyy") + ", ID_CN: " + iIDCN + ", LB: " + iLB + ", LAMTRON: " + Commons.Modules.iLamTronGio + "'" +
+                    "FROM dbo.DU_LIEU_QUET_THE T1 INNER JOIN (SELECT TOP 1 ID_CN, NGAY, GIO_DEN FROM dbo.DU_LIEU_QUET_THE) T2 ON T1.ID_CN = T2.ID_CN AND T1.NGAY = T2.NGAY AND T1.GIO_DEN = T2.GIO_DEN";
+                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, sSQL);
 
                 return true;
             }
@@ -2115,8 +2154,10 @@ namespace Vs.TimeAttendance
 
         private void grvDSCN_RowStyle(object sender, RowStyleEventArgs e)
         {
+            GridView view = sender as GridView;
             try
             {
+                if (view.IsRowVisible(e.RowHandle - 1) != RowVisibleState.Visible && view.IsRowVisible(e.RowHandle + 1) != RowVisibleState.Visible) return;
                 if (Convert.ToBoolean(grvDSCN.GetRowCellValue(e.RowHandle, grvDSCN.Columns["CHINH_SUA"].FieldName)) == false || Commons.Modules.KyHieuDV == "SB") return;
                 e.Appearance.BackColor = System.Drawing.ColorTranslator.FromHtml("#CC99FF");
                 e.HighPriority = true;
@@ -2189,6 +2230,14 @@ namespace Vs.TimeAttendance
                     iIDCN = Convert.ToInt64(grvDSCN.GetFocusedRowCellValue("ID_CN").ToString());
                 }
                 SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spTongHopDuLieu_GiaiDoan", Commons.Modules.UserName, Commons.Modules.TypeLanguage, cbDonVi.EditValue, cbXiNghiep.EditValue, cbTo.EditValue, iIDCN, iLB, Commons.Modules.iLamTronGio, sBT, Commons.Modules.KyHieuDV, Commons.Modules.chamCongK);
+
+                string sSQL = "SELECT STUFF((SELECT DISTINCT ',' + CONVERT(NVARCHAR(10),NGAY,101) FROM " + sBT + " WHERE ISNULL(CHON,0) = 1 FOR XML PATH('') ), 1, 1, '')";
+                string sNgay = Convert.ToString(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, sSQL));
+
+                sSQL = "UPDATE T1 SET [T1].[USER_NAME] = '" + Commons.Modules.UserName + "',T1.FORM_CLICK = N'" + (Commons.Modules.chamCongK ? "Tổng hợp dữ liệu giai đoạn khách" : "Tổng hợp dữ liệu giai đoạn") + "', T1.SAVE_LOG = 1, T1.DIEU_KIEN = N'ID_DV: " + cbDonVi.EditValue + ", ID_XN: " + cbXiNghiep.EditValue + ", ID_TO: " + cbTo.EditValue + ", NGAY: " + sNgay + ", ID_CN: " + iIDCN + ", LB: " + iLB + ", LAMTRON: " + Commons.Modules.iLamTronGio + "'" +
+                  "FROM dbo.DU_LIEU_QUET_THE T1 INNER JOIN (SELECT TOP 1 ID_CN, NGAY, GIO_DEN FROM dbo.DU_LIEU_QUET_THE) T2 ON T1.ID_CN = T2.ID_CN AND T1.NGAY = T2.NGAY AND T1.GIO_DEN = T2.GIO_DEN";
+                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, sSQL);
+
                 LoadLuoiNgay(dtNgayChamCong.DateTime);
                 LoadGridCongNhan(dtNgayChamCong.DateTime);
                 this.Cursor = Cursors.Default;
@@ -2301,7 +2350,7 @@ namespace Vs.TimeAttendance
 
                             try
                             {
-                                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spHoanThanhCong_GiaiDoan", Commons.Modules.UserName, Commons.Modules.TypeLanguage, cbDonVi.EditValue, cbXiNghiep.EditValue, cbTo.EditValue, iIDCN, sBT);
+                                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spLinkDuLieu_K", Commons.Modules.UserName, Commons.Modules.TypeLanguage, cbDonVi.EditValue, cbXiNghiep.EditValue, cbTo.EditValue, iIDCN, dtNgayChamCong.DateTime, sBT, 2);
                                 LoadLuoiNgay(dtNgayChamCong.DateTime);
                                 LoadGridCongNhan(dtNgayChamCong.DateTime);
                                 Commons.Modules.ObjSystems.Alert(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msg_TongHopDL"), Commons.Form_Alert.enmType.Success);
@@ -2435,6 +2484,24 @@ namespace Vs.TimeAttendance
                     grvDSCN_FocusedRowChanged(null, null);
                 }
                 catch { }
+            }
+        }
+
+        private void grvNgay_RowStyle(object sender, RowStyleEventArgs e)
+        {
+            GridView view = sender as GridView;
+            try
+            {
+                if (view.IsRowVisible(e.RowHandle - 1) != RowVisibleState.Visible && view.IsRowVisible(e.RowHandle + 1) != RowVisibleState.Visible) return;
+                if (Convert.ToDateTime(grvNgay.GetRowCellValue(e.RowHandle, grvNgay.Columns["NGAY"]).ToString().Trim()).DayOfWeek.ToString() != "Sunday") return;
+                {
+                    e.Appearance.BackColor = Color.Salmon;
+                    e.Appearance.BackColor2 = Color.SeaShell;
+                    e.HighPriority = true;
+                }
+            }
+            catch
+            {
             }
         }
     }

@@ -14,6 +14,8 @@ using Application = System.Windows.Forms.Application;
 using Microsoft.ApplicationBlocks.Data;
 using Excel;
 using Vs.Report;
+using DevExpress.XtraGrid.Views.Base.ViewInfo;
+using OfficeOpenXml.FormulaParsing.Excel.Functions.Math;
 
 namespace Vs.HRM
 {
@@ -628,8 +630,15 @@ namespace Vs.HRM
                 // Gets data from database
                 conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
                 conn.Open();
-
-                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptDSGiaDinh", conn);
+                System.Data.SqlClient.SqlCommand cmd; 
+                if (Commons.Modules.KyHieuDV == "NB" || Commons.Modules.KyHieuDV == "NC")
+                {
+                    cmd = new System.Data.SqlClient.SqlCommand("rptDSGiaDinh_NB", conn);
+                }
+                else
+                {
+                    cmd = new System.Data.SqlClient.SqlCommand("rptDSGiaDinh", conn);
+                }
 
                 cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
                 cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
@@ -659,6 +668,7 @@ namespace Vs.HRM
                 string lastColumn = String.Empty;
                 lastColumn = CharacterIncrement(dt.Columns.Count - 1);
 
+
                 //Create header of report
                 HeaderReport(ref oSheet, "Times New Roman", 11, lastColumn, 11, dt.Columns.Count - 2);
 
@@ -671,6 +681,8 @@ namespace Vs.HRM
                 int rowCnt = 0;
                 int col_bd = 0;
 
+              
+
                 //Transfer from Data Table class into a 2-dimention array.
                 foreach (DataRow row in dr)
                 {
@@ -681,6 +693,8 @@ namespace Vs.HRM
                     rowCnt++;
                 }
                 rowCnt = rowCnt + 10;
+                oXL.Visible = true;
+
 
                 //Fill data from dt into Data table of Excel
                 oSheet.get_Range("A11", lastColumn + rowCnt.ToString()).Value2 = rowData;
@@ -695,6 +709,32 @@ namespace Vs.HRM
                 formatRangeAll.Font.Name = "Times New Roman";
                 formatRangeAll.Font.Size = 11;
                 formatRangeAll.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
+
+
+                if(Commons.Modules.KyHieuDV == "NB" || Commons.Modules.KyHieuDV == "NC")
+                {
+                    //Commons.Modules.MExcel.MFormatExcel(oSheet, dt, 11, this.Name, false, true, true);
+
+                    Excel.Range formatRange = oSheet.Range[oSheet.Cells[11, 2], oSheet.Cells[dt.Rows.Count, 2]];
+                    formatRange.NumberFormat = "0";
+                    try
+                    {
+                        for (int row = 11; row <= rowCnt; row++)
+                        {
+                            if (int.TryParse(oSheet.Cells[row, 2].Value.ToString(), out int value))
+                            {
+                                oSheet.Cells[row, 2].Value = value;
+                            }
+                        }
+                    }
+                    catch { }
+                    formatRange.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
+                    formatRange.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
+                }
+
+
+
+
 
                 formatRange1.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
                 formatRange1.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
@@ -718,6 +758,9 @@ namespace Vs.HRM
 
                 oXL.Visible = true;
                 oXL.UserControl = true;
+
+
+              
             }
             catch
             { }

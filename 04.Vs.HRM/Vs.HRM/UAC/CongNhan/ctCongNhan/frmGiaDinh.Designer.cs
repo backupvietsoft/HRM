@@ -67,6 +67,12 @@
             this.txtCN = new DevExpress.XtraEditors.TextEdit();
             this.datNGAY_DK = new DevExpress.XtraEditors.DateEdit();
             this.cboID_LHN = new DevExpress.XtraEditors.LookUpEdit();
+            this.cboID_TP = new DevExpress.XtraEditors.SearchLookUpEdit();
+            this.searchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.cboID_QUAN = new DevExpress.XtraEditors.SearchLookUpEdit();
+            this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.cboID_PX = new DevExpress.XtraEditors.SearchLookUpEdit();
+            this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -102,12 +108,6 @@
             this.NGAY_DK = new DevExpress.XtraLayout.LayoutControlItem();
             this.lblCheDoConNho = new DevExpress.XtraLayout.LayoutControlItem();
             this.dxValidationProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
-            this.cboID_TP = new DevExpress.XtraEditors.SearchLookUpEdit();
-            this.searchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.cboID_QUAN = new DevExpress.XtraEditors.SearchLookUpEdit();
-            this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.cboID_PX = new DevExpress.XtraEditors.SearchLookUpEdit();
-            this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.windowsUIButton.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.searchControl.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdGiaDinh)).BeginInit();
@@ -141,6 +141,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.datNGAY_DK.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.datNGAY_DK.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboID_LHN.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cboID_TP.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cboID_QUAN.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cboID_PX.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
@@ -176,12 +182,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.NGAY_DK)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblCheDoConNho)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cboID_TP.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cboID_QUAN.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cboID_PX.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
             this.SuspendLayout();
             // 
             // windowsUIButton
@@ -550,6 +550,65 @@
             this.cboID_LHN.StyleController = this.dataLayoutControl1;
             this.cboID_LHN.TabIndex = 18;
             // 
+            // cboID_TP
+            // 
+            this.cboID_TP.Location = new System.Drawing.Point(184, 135);
+            this.cboID_TP.Name = "cboID_TP";
+            this.cboID_TP.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cboID_TP.Properties.NullText = "";
+            this.cboID_TP.Properties.PopupView = this.searchLookUpEdit1View;
+            this.cboID_TP.Size = new System.Drawing.Size(290, 24);
+            this.cboID_TP.StyleController = this.dataLayoutControl1;
+            this.cboID_TP.TabIndex = 29;
+            this.cboID_TP.EditValueChanged += new System.EventHandler(this.cboID_TP_EditValueChanged);
+            // 
+            // searchLookUpEdit1View
+            // 
+            this.searchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            this.searchLookUpEdit1View.Name = "searchLookUpEdit1View";
+            this.searchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.searchLookUpEdit1View.OptionsView.ShowGroupPanel = false;
+            // 
+            // cboID_QUAN
+            // 
+            this.cboID_QUAN.Location = new System.Drawing.Point(648, 139);
+            this.cboID_QUAN.Name = "cboID_QUAN";
+            this.cboID_QUAN.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cboID_QUAN.Properties.NullText = "";
+            this.cboID_QUAN.Properties.PopupView = this.gridView1;
+            this.cboID_QUAN.Size = new System.Drawing.Size(290, 24);
+            this.cboID_QUAN.StyleController = this.dataLayoutControl1;
+            this.cboID_QUAN.TabIndex = 30;
+            this.cboID_QUAN.EditValueChanged += new System.EventHandler(this.cboID_QUAN_EditValueChanged);
+            // 
+            // gridView1
+            // 
+            this.gridView1.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            this.gridView1.Name = "gridView1";
+            this.gridView1.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.gridView1.OptionsView.ShowGroupPanel = false;
+            // 
+            // cboID_PX
+            // 
+            this.cboID_PX.Location = new System.Drawing.Point(184, 165);
+            this.cboID_PX.Name = "cboID_PX";
+            this.cboID_PX.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cboID_PX.Properties.NullText = "";
+            this.cboID_PX.Properties.PopupView = this.gridView2;
+            this.cboID_PX.Size = new System.Drawing.Size(290, 24);
+            this.cboID_PX.StyleController = this.dataLayoutControl1;
+            this.cboID_PX.TabIndex = 31;
+            // 
+            // gridView2
+            // 
+            this.gridView2.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            this.gridView2.Name = "gridView2";
+            this.gridView2.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.gridView2.OptionsView.ShowGroupPanel = false;
+            // 
             // Root
             // 
             this.Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
@@ -618,6 +677,8 @@
             // 
             // lblMS_HGD
             // 
+            this.lblMS_HGD.AppearanceItemCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.lblMS_HGD.AppearanceItemCaption.Options.UseForeColor = true;
             this.lblMS_HGD.Control = this.txtMS_HGD;
             this.lblMS_HGD.Location = new System.Drawing.Point(0, 0);
             this.lblMS_HGD.Name = "lblMS_HGD";
@@ -626,6 +687,8 @@
             // 
             // lblHO_TEN_CH
             // 
+            this.lblHO_TEN_CH.AppearanceItemCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.lblHO_TEN_CH.AppearanceItemCaption.Options.UseForeColor = true;
             this.lblHO_TEN_CH.Control = this.txtHO_TEN_CH;
             this.lblHO_TEN_CH.Location = new System.Drawing.Point(464, 0);
             this.lblHO_TEN_CH.Name = "lblHO_TEN_CH";
@@ -887,65 +950,6 @@
             this.lblCheDoConNho.Size = new System.Drawing.Size(464, 26);
             this.lblCheDoConNho.TextSize = new System.Drawing.Size(160, 17);
             // 
-            // cboID_TP
-            // 
-            this.cboID_TP.Location = new System.Drawing.Point(184, 135);
-            this.cboID_TP.Name = "cboID_TP";
-            this.cboID_TP.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cboID_TP.Properties.NullText = "";
-            this.cboID_TP.Properties.PopupView = this.searchLookUpEdit1View;
-            this.cboID_TP.Size = new System.Drawing.Size(290, 24);
-            this.cboID_TP.StyleController = this.dataLayoutControl1;
-            this.cboID_TP.TabIndex = 29;
-            this.cboID_TP.EditValueChanged += new System.EventHandler(this.cboID_TP_EditValueChanged);
-            // 
-            // searchLookUpEdit1View
-            // 
-            this.searchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
-            this.searchLookUpEdit1View.Name = "searchLookUpEdit1View";
-            this.searchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
-            this.searchLookUpEdit1View.OptionsView.ShowGroupPanel = false;
-            // 
-            // cboID_QUAN
-            // 
-            this.cboID_QUAN.Location = new System.Drawing.Point(648, 139);
-            this.cboID_QUAN.Name = "cboID_QUAN";
-            this.cboID_QUAN.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cboID_QUAN.Properties.NullText = "";
-            this.cboID_QUAN.Properties.PopupView = this.gridView1;
-            this.cboID_QUAN.Size = new System.Drawing.Size(290, 24);
-            this.cboID_QUAN.StyleController = this.dataLayoutControl1;
-            this.cboID_QUAN.TabIndex = 30;
-            this.cboID_QUAN.EditValueChanged += new System.EventHandler(this.cboID_QUAN_EditValueChanged);
-            // 
-            // gridView1
-            // 
-            this.gridView1.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
-            this.gridView1.Name = "gridView1";
-            this.gridView1.OptionsSelection.EnableAppearanceFocusedCell = false;
-            this.gridView1.OptionsView.ShowGroupPanel = false;
-            // 
-            // cboID_PX
-            // 
-            this.cboID_PX.Location = new System.Drawing.Point(184, 165);
-            this.cboID_PX.Name = "cboID_PX";
-            this.cboID_PX.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cboID_PX.Properties.NullText = "";
-            this.cboID_PX.Properties.PopupView = this.gridView2;
-            this.cboID_PX.Size = new System.Drawing.Size(290, 24);
-            this.cboID_PX.StyleController = this.dataLayoutControl1;
-            this.cboID_PX.TabIndex = 31;
-            // 
-            // gridView2
-            // 
-            this.gridView2.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
-            this.gridView2.Name = "gridView2";
-            this.gridView2.OptionsSelection.EnableAppearanceFocusedCell = false;
-            this.gridView2.OptionsView.ShowGroupPanel = false;
-            // 
             // frmGiaDinh
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -991,6 +995,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.datNGAY_DK.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.datNGAY_DK.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboID_LHN.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cboID_TP.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cboID_QUAN.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cboID_PX.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
@@ -1026,12 +1036,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.NGAY_DK)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblCheDoConNho)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cboID_TP.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cboID_QUAN.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cboID_PX.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView2)).EndInit();
             this.ResumeLayout(false);
 
         }

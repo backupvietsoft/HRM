@@ -218,7 +218,7 @@ namespace Vs.TimeAttendance
 
                                                 rowCnt++;
                                             }
-                                            rowCnt = rowCnt + 5;
+                                            rowCnt = rowCnt + 7;
                                             //oSheet.get_Range("A6", lastColumn + rowCnt.ToString()).Value2 = rowData;
                                             formatRange = oSheet.Range[oSheet.Cells[8, 1], oSheet.Cells[rowCnt, lastColumn]];
                                             formatRange.Value2 = rowData;

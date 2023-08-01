@@ -32,6 +32,9 @@ namespace Vs.Report
             lblNgay.Text = Commons.Modules.ObjSystems.GetNN(dtNgu, "Ngay", "NgayThangNam") + " " + NgayXem.Substring(NgayXem.Length - 2, 2) + " " +
                 Commons.Modules.ObjSystems.GetNN(dtNgu, "Thang", "NgayThangNam") + " " + ThangXem.Substring(ThangXem.Length - 2, 2) + " " +
                 Commons.Modules.ObjSystems.GetNN(dtNgu, "Nam", "NgayThangNam") + " " + NamXem.Substring(NamXem.Length - 4, 4);
+
+            lblXiNghiep.Text = Commons.Modules.ObjLanguages.GetLanguage(this.Tag.ToString(), "lblXiNghiep");
+            lblTo.Text = Commons.Modules.ObjLanguages.GetLanguage(this.Tag.ToString(), "lblTo");
         }
 
     }

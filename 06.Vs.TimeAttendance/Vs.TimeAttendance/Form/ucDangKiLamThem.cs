@@ -965,9 +965,15 @@ namespace Vs.TimeAttendance
                 try
                 {
                     Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, "sBTDKLT" + Commons.Modules.iIDUser, Commons.Modules.ObjSystems.GetDataTableMultiSelect(grdCongNhan, grvCongNhan), "");
+
+
+                    string sSQL1 = "UPDATE T1 SET T1.USER_DEL = '" + Commons.Modules.UserName + "' FROM dbo.DANG_KY_LAM_GIO_LAM_THEM T1 INNER JOIN " + sBT + " T2 ON T1.ID_CN = T2.ID_CN WHERE CONVERT(NVARCHAR(10),NGAY, 112) = '"
+                                                            + Convert.ToDateTime(cboNgay.EditValue).ToString("yyyyMMdd") + "'";
+
                     string sSql = "DELETE dbo.DANG_KY_LAM_GIO_LAM_THEM FROM dbo.DANG_KY_LAM_GIO_LAM_THEM T1 INNER JOIN " + sBT + " T2 ON T1.ID_CN = T2.ID_CN WHERE CONVERT(NVARCHAR(10),NGAY, 112) = '"
                                                             + Convert.ToDateTime(cboNgay.EditValue).ToString("yyyyMMdd") + "'";
 
+                    SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, sSQL1);
                     SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, sSql);
                     Commons.Modules.ObjSystems.XoaTable(sBT);
                     DataTable dt = ((DataTable)grdCongNhan.DataSource);
@@ -997,13 +1003,13 @@ namespace Vs.TimeAttendance
                 grvLamThem.PostEditor();
                 grvLamThem.UpdateCurrentRow();
                 Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, stbLamThemGio, (DataTable)grdLamThem.DataSource, "");
-                Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, "stbCN_temP" + Commons.Modules.UserName, dt, "");
+                Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, "stbCN_temP" + Commons.Modules.iIDUser, dt, "");
 
                 DateTime dNgay;
                 dNgay = DateTime.ParseExact(cboNgay.Text, "dd/MM/yyyy", cultures);
-                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spSaveDangKyLamThemGio", dNgay, stbLamThemGio, "stbCN_temP" + Commons.Modules.UserName);
+                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spSaveDangKyLamThemGio", dNgay, stbLamThemGio, "stbCN_temP" + Commons.Modules.iIDUser, Commons.Modules.UserName);
                 Commons.Modules.ObjSystems.XoaTable(stbLamThemGio);
-                Commons.Modules.ObjSystems.XoaTable("stbCN_temP" + Commons.Modules.UserName);
+                Commons.Modules.ObjSystems.XoaTable("stbCN_temP" + Commons.Modules.iIDUser);
                 return true;
             }
             catch (Exception ex)
@@ -1476,8 +1482,10 @@ namespace Vs.TimeAttendance
 
         private void grvCongNhan_RowStyle(object sender, RowStyleEventArgs e)
         {
+            GridView view = sender as GridView;
             try
             {
+                if (view.IsRowVisible(e.RowHandle - 1) != RowVisibleState.Visible && view.IsRowVisible(e.RowHandle + 1) != RowVisibleState.Visible) return;
                 if (Convert.ToBoolean(grvCongNhan.GetRowCellValue(e.RowHandle, grvCongNhan.Columns["DA_CDL"])) == false) return;
                 e.Appearance.BackColor = System.Drawing.ColorTranslator.FromHtml("#FFFFCC");
                 e.HighPriority = true;

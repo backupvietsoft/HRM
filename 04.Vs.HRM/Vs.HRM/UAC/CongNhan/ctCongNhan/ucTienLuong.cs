@@ -115,9 +115,15 @@ namespace Vs.HRM
         }
         private void Bindingdata(bool bthem)
         {
+            Commons.Modules.sLoad = "0Load";
+            if (windowsUIButton.Buttons[0].Properties.Visible) // nếu ở trạng thái xem
+            {
+                DataTable dtBL = new DataTable();
+                dtBL.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT T1.ID_BL, T1.TEN_BL, T1.MUC_LUONG FROM BAC_LUONG T1"));
+                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(BAC_LUONGLookUpEdit, dtBL, "ID_BL", "TEN_BL", "TEN_BL", true);
+            }
             try
             {
-
                 if (bthem == true)
                 {
                     Loaddatatable();
@@ -169,12 +175,12 @@ namespace Vs.HRM
 
                     HS_LUONGTextEdit_EditValueChanged(null, null);
                 }
-
             }
             catch (Exception ex)
             {
                 Commons.Modules.ObjSystems.MsgError(ex.Message);
             }
+            Commons.Modules.sLoad = "";
         }
         private void SaveData()
         {
@@ -182,10 +188,10 @@ namespace Vs.HRM
             {
 
                 int n = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spUpdateTienLuong",
-                        id_TienLuong, Commons.Modules.iCongNhan, ID_TOLookUpEdit.EditValue, ID_CVLookUpEdit.EditValue, 
+                        id_TienLuong, Commons.Modules.iCongNhan, ID_TOLookUpEdit.EditValue, ID_CVLookUpEdit.EditValue,
                         (Convert.ToString(ID_NKLookUpEdit.EditValue) == "" ? null : ID_NKLookUpEdit.EditValue),
                         NGAY_KYDateEdit.EditValue, SO_QUYET_DINHTextEdit.EditValue, NGAY_HIEU_LUCDateEdit.EditValue,
-                        (Convert.ToString(NGACH_LUONGLookUpEdit.EditValue) == "" ? null : NGACH_LUONGLookUpEdit.EditValue), Convert.ToString(BAC_LUONGLookUpEdit.EditValue) == "" ? null : BAC_LUONGLookUpEdit.EditValue, GHI_CHUTextEdit.EditValue == "",
+                        (Convert.ToString(NGACH_LUONGLookUpEdit.EditValue) == "" ? null : NGACH_LUONGLookUpEdit.EditValue), Convert.ToString(BAC_LUONGLookUpEdit.EditValue) == "" ? null : BAC_LUONGLookUpEdit.EditValue, GHI_CHUTextEdit.EditValue,
                         Convert.ToString(HS_LUONGTextEdit.EditValue) == "" ? 0 : HS_LUONGTextEdit.EditValue,
                         Convert.ToString(LUONG_CO_BANTextEdit.EditValue) == "" ? 0 : LUONG_CO_BANTextEdit.EditValue,
                         Convert.ToString(MUC_LUONG_THUCTextEdit.EditValue) == "" ? 0 : MUC_LUONG_THUCTextEdit.EditValue,
@@ -239,7 +245,7 @@ namespace Vs.HRM
             //xóa
             try
             {
-                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "UPDATE dbo.LUONG_CO_BAN SET USER_DEL = '"+Commons.Modules.UserName+"' WHERE ID_LCB = " + grvTienLuong.GetFocusedRowCellValue("ID_LCB") + "");
+                SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "UPDATE dbo.LUONG_CO_BAN SET USER_DEL = '" + Commons.Modules.UserName + "' WHERE ID_LCB = " + grvTienLuong.GetFocusedRowCellValue("ID_LCB") + "");
                 SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, "DELETE dbo.LUONG_CO_BAN WHERE ID_LCB = " + grvTienLuong.GetFocusedRowCellValue("ID_LCB") + "");
                 grvTienLuong.DeleteSelectedRows();
                 Bindingdata(false);
@@ -273,7 +279,7 @@ namespace Vs.HRM
                     }
                 case "sua":
                     {
-                        if ((Convert.ToInt32(cboTinhTrang.EditValue) == 2 && Commons.Modules.UserName != "admin") || (Convert.ToInt32(cboTinhTrang.EditValue) == 3 && Commons.Modules.UserName != "admin"))
+                        if ((Convert.ToInt32(cboTinhTrang.EditValue) == 2 && !Commons.Modules.bSetUp) || (Convert.ToInt32(cboTinhTrang.EditValue) == 3 && !Commons.Modules.bSetUp))
                         {
                             XtraMessageBox.Show(cboTinhTrang.Text + Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgTinhTrangKhongSuaDuoc"), Commons.Modules.ObjLanguages.GetLanguage("frmChung", "sThongBao"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                             return;
@@ -355,7 +361,7 @@ namespace Vs.HRM
                             {
                                 if (Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT COUNT(*) FROM dbo.LUONG_CO_BAN WHERE ID_CN = " + Commons.Modules.iCongNhan + " AND ID_TT = 1")) > 0)
                                 {
-                                    XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgTatCaHopDongPhaiOTinhTrangDaKy"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgTatCaQuyetDinhPhaiOTinhTrangDaKy"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                                     cboTinhTrang.Focus();
                                     return;
                                 }
@@ -439,7 +445,7 @@ namespace Vs.HRM
 
             Commons.Modules.sLoad = "0Load";
             Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(NGACH_LUONGLookUpEdit, Commons.Modules.ObjSystems.DataNgachLuong(false), "ID_NL", "TEN_NL", "TEN_NL", true);
-            
+
             DataTable dtBL = new DataTable();
             dtBL.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT T1.ID_BL, T1.TEN_BL, T1.MUC_LUONG FROM BAC_LUONG T1"));
             Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(BAC_LUONGLookUpEdit, dtBL, "ID_BL", "TEN_BL", "TEN_BL", true);
@@ -485,7 +491,7 @@ namespace Vs.HRM
         private void NGACH_LUONGLookUpEdit_EditValueChanged(object sender, EventArgs e)
         {
             if (Commons.Modules.sLoad == "0Load") return;
-
+            Commons.Modules.sLoad = "0Load";
             Int64 iID_DV = -1;
             try
             {
@@ -494,10 +500,8 @@ namespace Vs.HRM
             }
             catch { }
             Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(BAC_LUONGLookUpEdit, Commons.Modules.ObjSystems.DataBacLuong(Convert.ToInt32(NGACH_LUONGLookUpEdit.EditValue), iID_DV, Convert.ToDateTime(NGAY_HIEU_LUCDateEdit.EditValue), false), "ID_BL", "TEN_BL", "TEN_BL", true);
-        }
-        private void BAC_LUONGLookUpEdit_EditValueChanged(object sender, EventArgs e)
-        {
-            if (Commons.Modules.sLoad == "0Load") return;
+
+
             if (BAC_LUONGLookUpEdit.EditValue == null || Convert.ToInt32(BAC_LUONGLookUpEdit.EditValue) == -99 || BAC_LUONGLookUpEdit.EditValue.ToString() == "") return;
             DataTable dt = new DataTable();
             try
@@ -516,6 +520,31 @@ namespace Vs.HRM
             }
             catch
             { }
+            Commons.Modules.sLoad = "";
+        }
+        private void BAC_LUONGLookUpEdit_EditValueChanged(object sender, EventArgs e)
+        {
+            if (Commons.Modules.sLoad == "0Load") return;
+            Commons.Modules.sLoad = "0Load";
+            if (BAC_LUONGLookUpEdit.EditValue == null || Convert.ToInt32(BAC_LUONGLookUpEdit.EditValue) == -99 || BAC_LUONGLookUpEdit.EditValue.ToString() == "") return;
+            DataTable dt = new DataTable();
+            try
+            {
+                string sSql = "SELECT * FROM dbo.BAC_LUONG WHERE ID_BL = " + BAC_LUONGLookUpEdit.EditValue + "";
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSql));
+                HS_LUONGTextEdit.EditValue = dt.Rows[0]["MUC_LUONG"];
+                PC_DOC_HAITextEdit.EditValue = dt.Rows[0]["PC_DH"];
+                THUONG_HT_CVTextEdit.EditValue = dt.Rows[0]["THUONG_TC"];
+                THUONG_CHUYEN_CANTextEdit.EditValue = dt.Rows[0]["THUONG_CV_CC"];
+                PC_SINH_HOATTextEdit.EditValue = dt.Rows[0]["PC_SINH_HOAT"];
+                PC_KY_NANGTextEdit.EditValue = dt.Rows[0]["PC_KY_NANG"];
+                LUONG_CO_BANTextEdit.EditValue = Convert.ToDouble(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT [dbo].[funGetLuongToiThieu](" + Commons.Modules.iCongNhan + ",'" + NGAY_HIEU_LUCDateEdit.DateTime.ToString("MM/dd/yyyy") + "')"));
+                //PC_CON_NHOTextEdit
+                PC_CON_NHOTextEdit.EditValue = Convert.ToDouble(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.[funGetPhuCapConNho](" + Commons.Modules.iCongNhan + ")"));
+            }
+            catch
+            { }
+            Commons.Modules.sLoad = "";
         }
         private void GrdTienLuong_ProcessGridKey(object sender, KeyEventArgs e)
         {
@@ -583,6 +612,8 @@ namespace Vs.HRM
 
         private void NGAY_HIEU_LUCDateEdit_EditValueChanged(object sender, EventArgs e)
         {
+            if (Commons.Modules.sLoad == "0Load") return;
+            Commons.Modules.sLoad = "0Load";
             if (NGACH_LUONGLookUpEdit.Text != "")
             {
                 Int64 iID_DV = -1;
@@ -594,6 +625,7 @@ namespace Vs.HRM
                 catch { }
                 Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(BAC_LUONGLookUpEdit, Commons.Modules.ObjSystems.DataBacLuong(Convert.ToInt32(NGACH_LUONGLookUpEdit.EditValue), iID_DV, Convert.ToDateTime(NGAY_HIEU_LUCDateEdit.EditValue), false), "ID_BL", "TEN_BL", "TEN_BL", true);
             }
+            Commons.Modules.sLoad = "";
         }
 
         private void PC_CON_NHOTextEdit_Spin(object sender, DevExpress.XtraEditors.Controls.SpinEventArgs e)
@@ -666,6 +698,24 @@ namespace Vs.HRM
                 {
                 }
             }
+        }
+
+        private void BAC_LUONGLookUpEdit_BeforePopup(object sender, EventArgs e)
+        {
+            try
+            {
+                Commons.Modules.sLoad = "0Load";
+                Int64 iID_DV = -1;
+                try
+                {
+                    string sSQL = "SELECT T1.ID_DV FROM dbo.CONG_NHAN CN INNER JOIN dbo.MGetToUser('" + Commons.Modules.UserName + "',0) T1 ON T1.ID_TO = CN.ID_TO WHERE CN.ID_CN = " + Commons.Modules.iCongNhan;
+                    iID_DV = Convert.ToInt64(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, sSQL));
+                }
+                catch { }
+                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(BAC_LUONGLookUpEdit, Commons.Modules.ObjSystems.DataBacLuong(Convert.ToInt32(NGACH_LUONGLookUpEdit.EditValue), iID_DV, Convert.ToDateTime(NGAY_HIEU_LUCDateEdit.EditValue), false), "ID_BL", "TEN_BL", "TEN_BL", true,true,false);
+                Commons.Modules.sLoad = "";
+            }
+            catch { }
         }
     }
 }

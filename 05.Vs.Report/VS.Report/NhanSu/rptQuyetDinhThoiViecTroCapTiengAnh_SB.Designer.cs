@@ -267,7 +267,7 @@
             this.xrLabel14.AllowMarkupText = true;
             this.xrLabel14.Dpi = 254F;
             this.xrLabel14.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[DATA].[HS_LUONG]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "\'VND \'+FormatString(\'{0:#,#}\',[DATA].[HS_LUONG])")});
             this.xrLabel14.Font = new DevExpress.Drawing.DXFont("Times New Roman", 11.25F, DevExpress.Drawing.DXFontStyle.Regular, DevExpress.Drawing.DXGraphicsUnit.Point, new DevExpress.Drawing.DXFontAdditionalProperty[] {
             new DevExpress.Drawing.DXFontAdditionalProperty("GdiCharSet", ((byte)(0)))});
             this.xrLabel14.LocationFloat = new DevExpress.Utils.PointFloat(698.1003F, 1199.559F);
@@ -563,8 +563,7 @@
             this.lbNgay.AutoWidth = true;
             this.lbNgay.Dpi = 254F;
             this.lbNgay.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "\'Ho Chi Minh City\' + \', \' + GetDay([DATA].[NGAY_KY]) + \' \' + GetMonth([DATA].[NGA" +
-                    "Y_KY])  + \' \' + GetYear([DATA].[NGAY_KY])")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "\'Ho Chi Minh City\' + \', \' + FormatString(\'{0:d MMMM, yyyy}\', [DATA].[NGAY_KY])")});
             this.lbNgay.Font = new DevExpress.Drawing.DXFont("Times New Roman", 11.25F, DevExpress.Drawing.DXFontStyle.Italic);
             this.lbNgay.LocationFloat = new DevExpress.Utils.PointFloat(875.98F, 198.42F);
             this.lbNgay.Multiline = true;

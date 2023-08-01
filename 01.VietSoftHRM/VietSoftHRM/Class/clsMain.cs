@@ -81,6 +81,7 @@ namespace VietSoftHRM
                 Commons.Modules.connect = Commons.Modules.ObjSystems.Decrypt(dt.Rows[0]["CON_NECT"].ToString(), true);
                 Commons.Modules.iGio = Convert.ToDouble(dt.Rows[0]["SG_LV"]);
                 Commons.Modules.iLamTronGio = Convert.ToInt32(dt.Rows[0]["LOAI_LT_CC"]); //0 Khong lam tron giờ//1 làm tròn giờ
+
                 try
                 {
                     Commons.Modules.bKiemPCD = Convert.ToBoolean(dt.Rows[0]["CHECK_PCD"]);
@@ -131,12 +132,10 @@ namespace VietSoftHRM
                     Commons.Modules.sDDTaiLieu = "";
                     Commons.Modules.iLOAI_CN = 0;
                 }
-
-                //System.Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", $"firebase-auth.json");
             }
-            catch
+            catch(Exception ex)
             {
-
+                Commons.Modules.ObjSystems.MsgError(ex.Message);
             }
         }
         public static bool CheckServer()
@@ -245,10 +244,23 @@ namespace VietSoftHRM
                     sVerClient = "200001010001";
                 }
                 #endregion
-                try { if (double.Parse(sVerClient) == double.Parse(sSql)) return; } catch { return; }
+                try
+                {
+                    if (double.Parse(sVerClient) == double.Parse(sSql))
+                    {
+                        
+                        return;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Commons.Modules.ObjSystems.MsgError(ex.Message);
+                    return;
+                }
                 //sSql = "SELECT TOP 1 (CONVERT(NVARCHAR,LOAI_CN) + '!' + isnull(LINK1, '-1') + '!' + isnull(LINK2, '-1') + '!' + isnull(LINK3, '-1') + '!' + isnull(G_LINK_UD, '-1') + '!' + isnull(G_LINK_VERSION, '-1')) AS CAPNHAT FROM THONG_TIN_CHUNG";
                 sSql = "SELECT TOP 1 (CONVERT(NVARCHAR,LOAI_CN) + '!' + isnull(LINK1, '-1') + '!' + isnull(LINK2, '-1') + '!' + isnull(LINK3, '-1')) AS CAPNHAT FROM THONG_TIN_CHUNG";
                 sSql = Convert.ToString(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, System.Data.CommandType.Text, sSql));
+
 
                 string[] sArr = sSql.Split('!');
                 int loai = Convert.ToInt32(sArr[0].ToString());
@@ -291,8 +303,10 @@ namespace VietSoftHRM
                 //MUpdate(loai, g_link_ud, g_link_ver, ".");
                 //Commons.Modules.sInfoSer = Commons.Modules.sInfoClient;
             }
-            catch
-            { }
+            catch (Exception ex)
+            {
+                Commons.Modules.ObjSystems.MsgError(ex.Message);
+            }
         }
         private static void MUpdate(int loai, String link1, String link2, String link3)
         {

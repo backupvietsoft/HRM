@@ -77,7 +77,7 @@ namespace Vs.TimeAttendance
                 {
                     ItemForNgayCongQuyDinh.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
                 }
-                txtNgayCongQD.EditValue = 208;
+                txtNgayCongQD.EditValue = Commons.Modules.KyHieuDV == "MT" ? 26 : 208;
                 LoadThang();
                 DataTable dt = new DataTable();
                 dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboDON_VI", Commons.Modules.UserName, Commons.Modules.TypeLanguage, 0));

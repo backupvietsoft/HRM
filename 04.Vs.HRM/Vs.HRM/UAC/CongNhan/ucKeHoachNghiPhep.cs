@@ -66,8 +66,10 @@ namespace Vs.HRM
                 LoadGrdKHNP();
                 Commons.Modules.ObjSystems.DeleteAddRow(grvKHNP);
                 Commons.Modules.sLoad = "";
-                grvDSCN_FocusedRowChanged(null, null);
                 radTinHTrang.SelectedIndex = 0;
+                radTinHTrang_SelectedIndexChanged(null, null);
+
+                grvDSCN_FocusedRowChanged(null, null);
                 Commons.OSystems.SetDateEditFormat(datTNgay);
                 Commons.OSystems.SetDateEditFormat(datDNgay);
                 Commons.OSystems.SetDateEditFormat(datNVao);
@@ -163,6 +165,8 @@ namespace Vs.HRM
                     grvDSCN.ClearSelection();
                     grvDSCN.SelectRow(index);
                 }
+
+                radTinHTrang_SelectedIndexChanged(null, null);
                 //grvDSCN.OptionsView.ColumnAutoWidth = true;
             }
             catch (Exception ex)
@@ -447,20 +451,17 @@ namespace Vs.HRM
             bool resulst = true;
             foreach (DataRow item in dt.Rows)
             {
-                if (Convert.ToBoolean(item["CHON"]) == true)
+                try
                 {
-                    try
+                    int n = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text,
+                        "SELECT dbo.fuKiemTraKeHoachNghiPhep(" + Convert.ToInt64(item["ID_CN"]) + ",'" + datTNgay.DateTime.ToString("MM/dd/yyyy") + "','" + datDNgay.DateTime.ToString("MM/dd/yyyy") + "')"));
+                    if (n > 0)
                     {
-                        int n = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text,
-                            "SELECT dbo.fuKiemTraKeHoachNghiPhep(" + Convert.ToInt64(item["ID_CN"]) + ",'" + datTNgay.DateTime.ToString("MM/dd/yyyy") + "','" + datDNgay.DateTime.ToString("MM/dd/yyyy") + "')"));
-                        if (n > 0)
-                        {
-                            resulst = false;
-                        }
+                        resulst = false;
                     }
-                    catch
-                    { }
                 }
+                catch
+                { }
             }
             return resulst;
         }
@@ -469,19 +470,17 @@ namespace Vs.HRM
 
             foreach (DataRow item in dt.Rows)
             {
-                if (Convert.ToBoolean(item["CHON"]) == true)
+                try
                 {
-                    try
+                    int n = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.fuKiemTraKeHoachNghiPhep(" + Convert.ToInt64(item["ID_CN"]) + ",'" + datTNgay.DateTime.ToString("MM/dd/yyyy") + "','" + datDNgay.DateTime.ToString("MM/dd/yyyy") + "')"));
+                    if (n == 0)
                     {
-                        int n = Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.fuKiemTraKeHoachNghiPhep(" + Convert.ToInt64(item["ID_CN"]) + ",'" + datTNgay.DateTime.ToString("MM/dd/yyyy") + "','" + datDNgay.DateTime.ToString("MM/dd/yyyy") + "')"));
-                        if (n == 0)
-                        {
-                            SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spInSertKeHoachNghiPhep", cboLDV.EditValue, Convert.ToInt64(item["ID_CN"]), datTNgay.EditValue, datDNgay.EditValue, datNVao.EditValue, numSoGio.Value, cboTINH_TRANG.EditValue, chkNGHI_NUA_NGAY.EditValue, chkKhongTinhChuyenCan.EditValue, memoGhiChu.EditValue);
-                        }
+                        SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spInSertKeHoachNghiPhep", cboLDV.EditValue, Convert.ToInt64(item["ID_CN"]), datTNgay.EditValue, datDNgay.EditValue, datNVao.EditValue, numSoGio.Value, cboTINH_TRANG.EditValue, chkNGHI_NUA_NGAY.EditValue, chkKhongTinhChuyenCan.EditValue, memoGhiChu.EditValue,Commons.Modules.UserName);
                     }
-                    catch
-                    {
-                    }
+                }
+                catch(Exception ex) 
+                {
+                    Commons.Modules.ObjSystems.MsgError(ex.Message);    
                 }
             }
         }
@@ -593,6 +592,7 @@ namespace Vs.HRM
                             grvKHNP.UpdateCurrentRow();
                             int idcn = Convert.ToInt32(grvDSCN.GetFocusedRowCellValue("ID_CN"));
                             if (grvKHNP.HasColumnErrors) return;
+                            if (((DataTable)grdKHNP.DataSource).HasErrors) return;
                             if (!UpdateKeHoachNghiPhep())
                             {
                                 return;
@@ -634,30 +634,27 @@ namespace Vs.HRM
                     {
                         DataTable dt = new DataTable();
                         dt = Commons.Modules.ObjSystems.ConvertDatatable(grdDSCN);
-                        int n = dt.AsEnumerable().Count(x => x.Field<bool>("CHON").Equals(true));
-                        if (n < 1)
+                        dt = dt.AsEnumerable().Where(x => x.Field<bool>("CHON").Equals(true)).CopyToDataTable();
+                        if (dt.Rows.Count == 0)
                         {
                             Commons.Modules.ObjSystems.MsgWarning(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgChuaChonCongNhan")); return;
                         }
                         if (KiemTraCapNhatPhep(dt) == false)
                         {
-                            if (Commons.Modules.ObjSystems.MsgQuestion(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDaBiTrungNgayBanCoMuonCapNhat")) == 1)
+                            if (Commons.Modules.ObjSystems.MsgQuestion(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgDaBiTrungNgayBanCoMuonCapNhat")) == 0)
                             {
-                                InsertCapNhatPhep(dt);
-                                LoadGrdCongNhan(false);
-                                LoadGrdKHNP();
+                                return;
                             }
                         }
-                        else
-                        {
-                            InsertCapNhatPhep(dt);
-                            Commons.Modules.ObjSystems.Alert(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgdacongnhanthanhcong"), Commons.Form_Alert.enmType.Success);
-                            navigationFrame1.SelectedPage = navigationPage1;
-                            LoadGrdCongNhan(false);
-                            LoadGrdKHNP();
-                            enableButon(true);
-                            grvDSCN_FocusedRowChanged(null, null);
-                        }
+                        
+                        InsertCapNhatPhep(dt);
+                        Commons.Modules.ObjSystems.Alert(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgdacongnhanthanhcong"), Commons.Form_Alert.enmType.Success);
+
+                        navigationFrame1.SelectedPage = navigationPage1;
+                        LoadGrdCongNhan(false);
+                        LoadGrdKHNP();
+                        enableButon(true);
+                        grvDSCN_FocusedRowChanged(null, null);
 
                         break;
                     }
@@ -677,6 +674,7 @@ namespace Vs.HRM
         {
             try
             {
+
                 if (bChanKiemTT == true) return;
                 //int ngay = 0;
                 DevExpress.XtraGrid.Views.Grid.GridView View = (DevExpress.XtraGrid.Views.Grid.GridView)sender;
@@ -722,14 +720,15 @@ namespace Vs.HRM
                     }
                 }
 
+                KiemTraLuoi();
                 if (kiemTrung() == 0)
                 {
                     e.Valid = false;
                     View.SetColumnError(tungay, Commons.Modules.ObjLanguages.GetLanguage(this.Name, "lblDuLieuTrung"));
                     View.SetColumnError(denngay, Commons.Modules.ObjLanguages.GetLanguage(this.Name, "lblDuLieuTrung"));
-                    Commons.Modules.ObjSystems.MsgWarning(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "lblDuLieuTrung"));
                     return;
                 }
+
                 //CheckDuplicateKHNP(grvKHNP, (DataTable)grdKHNP.DataSource, e);
                 View.ClearColumnErrors();
             }
@@ -1164,6 +1163,7 @@ namespace Vs.HRM
         {
             this.Cursor = Cursors.WaitCursor;
             string btKHNP = "TMPPRORUN" + Commons.Modules.UserName;
+
             try
             {
                 DataTable dt = new DataTable();
@@ -1176,34 +1176,31 @@ namespace Vs.HRM
 
                 try
                 {
-                    for (int i = 0; i < dt.Rows.Count; i++)
+                    System.Data.SqlClient.SqlConnection conn;
+                    conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                    DataSet ds = new DataSet();
+                    conn.Open();
+                    System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spKiemTraKHNP", conn);
+                    cmd.Parameters.Add("@sBTam", SqlDbType.NVarChar, 50).Value = btKHNP;
+                    cmd.Parameters.Add("@TuNgay", SqlDbType.DateTime).Value = grvKHNP.GetFocusedRowCellValue("TU_NGAY");
+                    cmd.Parameters.Add("@DenNgay", SqlDbType.DateTime).Value = grvKHNP.GetFocusedRowCellValue("DEN_NGAY");
+                    cmd.Parameters.Add("@ID_CN", SqlDbType.BigInt).Value = Convert.ToInt64(grvDSCN.GetFocusedRowCellValue("ID_CN"));
+                    cmd.Parameters.Add("@ID_KHNP", SqlDbType.BigInt).Value = grvKHNP.GetFocusedRowCellValue("ID_KHNP");
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+                    adp.Fill(ds);
+                    conn.Close();
+                    DataTable dt1 = new DataTable();
+                    dt1 = ds.Tables[0].Copy();
+                    if (Convert.ToInt32(dt1.Rows[0][0]) > 1)
                     {
-                        System.Data.SqlClient.SqlConnection conn;
-                        conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
-                        DataSet ds = new DataSet();
-                        conn.Open();
-                        System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spKiemTraKHNP", conn);
-                        cmd.Parameters.Add("@sBTam", SqlDbType.NVarChar, 50).Value = btKHNP;
-                        cmd.Parameters.Add("@TuNgay", SqlDbType.DateTime).Value = dt.Rows[i]["TU_NGAY"];
-                        cmd.Parameters.Add("@DenNgay", SqlDbType.DateTime).Value = dt.Rows[i]["DEN_NGAY"];
-                        cmd.Parameters.Add("@ID_CN", SqlDbType.BigInt).Value = Convert.ToInt64(grvDSCN.GetFocusedRowCellValue("ID_CN"));
-                        cmd.Parameters.Add("@ID_KHNP", SqlDbType.BigInt).Value = dt.Rows[i]["ID_KHNP"];
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
-                        adp.Fill(ds);
-                        conn.Close();
-                        DataTable dt1 = new DataTable();
-                        dt1 = ds.Tables[0].Copy();
-                        if (Convert.ToInt32(dt1.Rows[0][0]) > 1)
-                        {
-                            return 0;
-                        }
-                        dt1 = new DataTable();
-                        dt1 = ds.Tables[1].Copy();
-                        if (Convert.ToInt32(dt1.Rows[0][0]) > 1)
-                        {
-                            return 0;
-                        }
+                        return 0;
+                    }
+                    dt1 = new DataTable();
+                    dt1 = ds.Tables[1].Copy();
+                    if (Convert.ToInt32(dt1.Rows[0][0]) > 1)
+                    {
+                        return 0;
                     }
                     return 1;
                 }
@@ -1222,7 +1219,64 @@ namespace Vs.HRM
                 this.Cursor = Cursors.Default;
             }
         }
+        private bool KiemTraLuoi()
+        {
+            int errorCount = 0;
+            #region kiểm tra dữ liệu
+            this.Cursor = Cursors.WaitCursor;
 
+            string btKHNP = "TMPPRORUN" + Commons.Modules.UserName;
+            DataView dtv = (DataView)grvKHNP.DataSource;
+            DataTable tempt = new DataTable();
+
+            DataTable dt = new DataTable();
+            dt = (DataTable)grdKHNP.DataSource;
+            //Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, btKHNP, tempt, "");
+
+            DataTable dataKiem = new DataTable();
+            dataKiem = Commons.Modules.ObjSystems.ConvertDatatable(grvKHNP);
+
+            //tempt = tempt.AsEnumerable().Where(x => x.Field<Int64>("ID_CN").Equals(Convert.ToInt64(grvDSCN.GetFocusedRowCellValue("ID_CN")))).CopyToDataTable();
+            DateTime TNgay;
+            DateTime DNgay;
+            foreach (DataRow dr in dt.AsEnumerable().Where(x => x.Field<Int64>("ID_CN").Equals(Convert.ToInt64(grvDSCN.GetFocusedRowCellValue("ID_CN")))))
+            {
+                dr.ClearErrors();
+                TNgay = Convert.ToDateTime(dr["TU_NGAY"]);
+                DNgay = Convert.ToDateTime(dr["DEN_NGAY"]);
+
+                try
+                {
+                    tempt = dataKiem.AsEnumerable().Where(x => x.Field<Int64>("ID_CN").Equals(Convert.ToInt64(grvDSCN.GetFocusedRowCellValue("ID_CN")))
+
+                    && (((Convert.ToDateTime(x["TU_NGAY"]) <= TNgay && Convert.ToDateTime(x["TU_NGAY"]) >= DNgay) || (Convert.ToDateTime(x["DEN_NGAY"]) <= TNgay && Convert.ToDateTime(x["DEN_NGAY"]) >= DNgay)) || (TNgay <= Convert.ToDateTime(x["DEN_NGAY"]) && DNgay >= Convert.ToDateTime(x["TU_NGAY"])))
+                    ).CopyToDataTable();
+                }
+                catch
+                {
+                    tempt = dataKiem.Clone();
+                }
+                if (tempt.Rows.Count > 1)
+                {
+                    dr.SetColumnError("TU_NGAY", Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgTrungDL"));
+                    dr.SetColumnError("DEN_NGAY", Commons.Modules.ObjLanguages.GetLanguage(this.Name, "msgTrungDL"));
+                    errorCount++;
+                }
+            }
+            #endregion
+            Commons.Modules.ObjSystems.HideWaitForm();
+            if (errorCount != 0)
+            {
+                this.Cursor = Cursors.Default;
+                Commons.Modules.ObjSystems.MsgError(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "lblDuLieuTrung"));
+                return false;
+            }
+            else
+            {
+                this.Cursor = Cursors.Default;
+                return true;
+            }
+        }
         private void searchControl1_EditValueChanged(object sender, EventArgs e)
         {
             if (Commons.Modules.KyHieuDV != "DM")

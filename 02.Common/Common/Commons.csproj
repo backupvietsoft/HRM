@@ -140,11 +140,23 @@
     <Compile Include="Form\frmPopUp.Designer.cs">
       <DependentUpon>frmPopUp.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form\frmWaitFormVS.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\frmWaitFormVS.Designer.cs">
+      <DependentUpon>frmWaitFormVS.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form\frmYKienYC.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form\frmYKienYC.Designer.cs">
       <DependentUpon>frmYKienYC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmWaitFormCustom.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmWaitFormCustom.Designer.cs">
+      <DependentUpon>frmWaitFormCustom.cs</DependentUpon>
     </Compile>
     <Compile Include="frmWaitForm.cs">
       <SubType>Form</SubType>
@@ -202,8 +214,16 @@
     <EmbeddedResource Include="Form\frmProgressBar.resx">
       <DependentUpon>frmProgressBar.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form\frmWaitFormVS.resx">
+      <DependentUpon>frmWaitFormVS.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form\frmYKienYC.resx">
       <DependentUpon>frmYKienYC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmWaitFormCustom.resx">
+      <DependentUpon>frmWaitFormCustom.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmWaitForm.resx">
       <DependentUpon>frmWaitForm.cs</DependentUpon>
@@ -226,7 +246,10 @@
     <EmbeddedResource Include="SubReport\SubReportHeader.resx">
       <DependentUpon>SubReportHeader.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ThongBao.resx" />
+    <EmbeddedResource Include="ThongBao.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ThongBao1.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="UAC\XtraForm1.resx">
       <DependentUpon>XtraForm1.cs</DependentUpon>
     </EmbeddedResource>

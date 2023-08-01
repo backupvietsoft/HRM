@@ -313,7 +313,7 @@ public class MExcel
         }
         catch (Exception ex) { }
     }
-    public void ColumnWidth(Excel.Worksheet MWsheet, float MColumnWidth, string MNumberFormat, bool MWrapText, int DongBD, int CotBD, int DongKT, int CotKT)
+    public void ColumnWidth(Excel.Worksheet MWsheet, double MColumnWidth, string MNumberFormat, bool MWrapText, int DongBD, int CotBD, int DongKT, int CotKT)
     {
         try
         {

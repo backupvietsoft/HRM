@@ -545,10 +545,11 @@ namespace Vs.HRM
 
                 int iDong = 4;
 
-                Commons.Modules.MExcel.MText(ws1, this.Name, "sBCDanhSachKyHopDongLaoDong", iDong, 1, iDong, dt.Columns.Count - 1, true, true, 16, OfficeOpenXml.Style.ExcelHorizontalAlignment.Center, OfficeOpenXml.Style.ExcelVerticalAlignment.Center);
+                Commons.Modules.MExcel.MText(ws1, this.Name, "sBCDanhSachCongNhanHetHanHD", iDong, 1, iDong, dt.Columns.Count, true, true, 13, OfficeOpenXml.Style.ExcelHorizontalAlignment.Center, OfficeOpenXml.Style.ExcelVerticalAlignment.Center);
                 iDong++;
 
-                Commons.Modules.MExcel.MText(ws1, "", Commons.Modules.ObjLanguages.GetLanguage(this.Name, "sTNgay") + " " + TNgay.ToString("dd/MM/yyyy") + " " + Commons.Modules.ObjLanguages.GetLanguage(this.Name, "sDNgay") + " " + DNgay.ToString("dd/MM/yyyy"), iDong, 1, iDong, dt.Columns.Count - 1, true, true, 16, OfficeOpenXml.Style.ExcelHorizontalAlignment.Center, OfficeOpenXml.Style.ExcelVerticalAlignment.Center);
+                Commons.Modules.MExcel.MText(ws1, "", Commons.Modules.ObjLanguages.GetLanguage(this.Name, "sTNgay") + " " + TNgay.ToString("dd/MM/yyyy") + " " + Commons.Modules.ObjLanguages.GetLanguage(this.Name, "sDNgay") + " " + DNgay.ToString("dd/MM/yyyy"), iDong, 1, iDong, dt.Columns.Count, true, true, 13, OfficeOpenXml.Style.ExcelHorizontalAlignment.Center, OfficeOpenXml.Style.ExcelVerticalAlignment.Center);
+
 
                 iDong = iDong + 2;
 
@@ -558,31 +559,33 @@ namespace Vs.HRM
                 int iRowBorder = 0;
                 WidthColumnsName = new List<Object>() { "STT", 5 };
                 WidthColumns.Add(WidthColumnsName);
-                WidthColumnsName = new List<Object>() { "SO_HDLD", 15 };
+                WidthColumnsName = new List<Object>() { "SO_HDLD", 9 };
                 WidthColumns.Add(WidthColumnsName);
-                WidthColumnsName = new List<Object>() { "MS_CN", 10, "0.00" };
+                WidthColumnsName = new List<Object>() { "MS_CN", 5, "0" };
                 WidthColumns.Add(WidthColumnsName);
-                WidthColumnsName = new List<Object>() { "TEN_TO", 20 };
+                WidthColumnsName = new List<Object>() { "TEN_TO", 10 };
                 WidthColumns.Add(WidthColumnsName);
-                WidthColumnsName = new List<Object>() { "HO_TEN", 20 };
+                WidthColumnsName = new List<Object>() { "HO_TEN", 18 };
                 WidthColumns.Add(WidthColumnsName);
-                WidthColumnsName = new List<Object>() { "DIA_CHI_THUONG_TRU", 80 };
+                WidthColumnsName = new List<Object>() { "NGAY_SINH", 10 };
                 WidthColumns.Add(WidthColumnsName);
-                WidthColumnsName = new List<Object>() { "SO_CMND", 20 };
+                WidthColumnsName = new List<Object>() { "DIA_CHI_THUONG_TRU", 27 };
                 WidthColumns.Add(WidthColumnsName);
-                WidthColumnsName = new List<Object>() { "NOI_CAP", 25 };
+                WidthColumnsName = new List<Object>() { "SO_CMND", 12 };
                 WidthColumns.Add(WidthColumnsName);
-                WidthColumnsName = new List<Object>() { "NGAY_CAP", 15, "dd/MM/yyyy" };
+                WidthColumnsName = new List<Object>() { "NOI_CAP", 16 };
                 WidthColumns.Add(WidthColumnsName);
-                WidthColumnsName = new List<Object>() { "NGAY_VAO_LAM", 15, "dd/MM/yyyy" };
+                WidthColumnsName = new List<Object>() { "NGAY_CAP", 10, "dd/MM/yyyy" };
                 WidthColumns.Add(WidthColumnsName);
-                WidthColumnsName = new List<Object>() { "NGAY_BAT_DAU_HD", 15, "dd/MM/yyyy" };
+                WidthColumnsName = new List<Object>() { "NGAY_VAO_LAM", 10, "dd/MM/yyyy" };
                 WidthColumns.Add(WidthColumnsName);
-                WidthColumnsName = new List<Object>() { "TEN_LCV", 25, "dd/MM/yyyy" };
+                WidthColumnsName = new List<Object>() { "NGAY_BAT_DAU_HD", 10, "dd/MM/yyyy" };
                 WidthColumns.Add(WidthColumnsName);
-                WidthColumnsName = new List<Object>() { "MUC_LUONG_CHINH", 15, Commons.Modules.sSoLeDG };
+                WidthColumnsName = new List<Object>() { "TEN_LCV", 32 };
                 WidthColumns.Add(WidthColumnsName);
-                WidthColumnsName = new List<Object>() { "TEN_LHDLD", 15 };
+                WidthColumnsName = new List<Object>() { "MUC_LUONG_CHINH", 11, Commons.Modules.sSoLeDG };
+                WidthColumns.Add(WidthColumnsName);
+                WidthColumnsName = new List<Object>() { "TEN_LHDLD", 6.5 };
                 WidthColumns.Add(WidthColumnsName);
 
                 ws1.Cells[iDong, 1].LoadFromDataTable(dt, true);
@@ -596,16 +599,17 @@ namespace Vs.HRM
                 border.Bottom.Style = ExcelBorderStyle.Thin;
                 border.Right.Style = ExcelBorderStyle.Thin;
 
-                ws1.Cells[1, 1, iRowBorder, dt.Columns.Count].Style.Font.Name = "Times New Roman";
+                ws1.Cells[1, 1, iRowBorder + dt.Rows.Count + 3, dt.Columns.Count].Style.Font.Name = "Times New Roman";
+                ws1.Cells[7, 1, iRowBorder + dt.Rows.Count + 3, dt.Columns.Count].Style.Font.Size = 10;
 
-                Commons.Modules.MExcel.MText(ws1, "", "Namco , ngày " + lk_NgayIn.DateTime.Day.ToString() + " tháng " + lk_NgayIn.DateTime.Month.ToString() + " năm " + lk_NgayIn.DateTime.Year.ToString() + "", iDong + dt.Rows.Count + 1, 10, iDong + dt.Rows.Count + 1, 12, true, true, 14,
+                Commons.Modules.MExcel.MText(ws1, "", "Namco , ngày " + lk_NgayIn.DateTime.Day.ToString() + " tháng " + lk_NgayIn.DateTime.Month.ToString() + " năm " + lk_NgayIn.DateTime.Year.ToString() + "", iDong + dt.Rows.Count + 1, 11, iDong + dt.Rows.Count + 1, 14, true, true, 10,
                     OfficeOpenXml.Style.ExcelHorizontalAlignment.Center, OfficeOpenXml.Style.ExcelVerticalAlignment.Center);
 
-                Commons.Modules.MExcel.MText(ws1, this.Name, "sNguoiLapBieu", iDong + dt.Rows.Count + 2, 2, iDong + dt.Rows.Count + 2, 3, true, true, 13, OfficeOpenXml.Style.ExcelHorizontalAlignment.Center, OfficeOpenXml.Style.ExcelVerticalAlignment.Center);
+                Commons.Modules.MExcel.MText(ws1, this.Name, "sNguoiLapBieu", iDong + dt.Rows.Count + 2, 2, iDong + dt.Rows.Count + 2, 3, true, true, 10, OfficeOpenXml.Style.ExcelHorizontalAlignment.Center, OfficeOpenXml.Style.ExcelVerticalAlignment.Center);
 
-                Commons.Modules.MExcel.MText(ws1, this.Name, "sPhongHCNS", iDong + dt.Rows.Count + 2, 6, iDong + dt.Rows.Count + 2, 7, true, true, 13, OfficeOpenXml.Style.ExcelHorizontalAlignment.Center, OfficeOpenXml.Style.ExcelVerticalAlignment.Center);
+                Commons.Modules.MExcel.MText(ws1, this.Name, "sPhongHCNS", iDong + dt.Rows.Count + 2, 6, iDong + dt.Rows.Count + 2, 7, true, true, 10, OfficeOpenXml.Style.ExcelHorizontalAlignment.Center, OfficeOpenXml.Style.ExcelVerticalAlignment.Center);
 
-                Commons.Modules.MExcel.MText(ws1, this.Name, "sBanGiamDoc", iDong + dt.Rows.Count + 2, 10, iDong + dt.Rows.Count + 2, 12, true, true, 13, OfficeOpenXml.Style.ExcelHorizontalAlignment.Center, OfficeOpenXml.Style.ExcelVerticalAlignment.Center);
+                Commons.Modules.MExcel.MText(ws1, this.Name, "sBanGiamDoc", iDong + dt.Rows.Count + 2, 11, iDong + dt.Rows.Count + 2, 14, true, true, 10, OfficeOpenXml.Style.ExcelHorizontalAlignment.Center, OfficeOpenXml.Style.ExcelVerticalAlignment.Center);
 
                 if (file.Exists)
                     file.Delete();
@@ -662,10 +666,10 @@ namespace Vs.HRM
 
                 int iDong = 4;
 
-                Commons.Modules.MExcel.MText(ws1, this.Name, "sBCDanhSachCongNhanHetHanHD", iDong, 1, iDong, dt.Columns.Count - 1, true, true, 16, OfficeOpenXml.Style.ExcelHorizontalAlignment.Center, OfficeOpenXml.Style.ExcelVerticalAlignment.Center);
+                Commons.Modules.MExcel.MText(ws1, this.Name, "sBCDanhSachCongNhanHetHanHD", iDong, 1, iDong, dt.Columns.Count, true, true, 13, OfficeOpenXml.Style.ExcelHorizontalAlignment.Center, OfficeOpenXml.Style.ExcelVerticalAlignment.Center);
                 iDong++;
 
-                Commons.Modules.MExcel.MText(ws1, "", Commons.Modules.ObjLanguages.GetLanguage(this.Name, "sTNgay") + " " + TNgay.ToString("dd/MM/yyyy") + " " + Commons.Modules.ObjLanguages.GetLanguage(this.Name, "sDNgay") + " " + DNgay.ToString("dd/MM/yyyy"), iDong, 1, iDong, dt.Columns.Count - 1, true, true, 16, OfficeOpenXml.Style.ExcelHorizontalAlignment.Center, OfficeOpenXml.Style.ExcelVerticalAlignment.Center);
+                Commons.Modules.MExcel.MText(ws1, "", Commons.Modules.ObjLanguages.GetLanguage(this.Name, "sTNgay") + " " + TNgay.ToString("dd/MM/yyyy") + " " + Commons.Modules.ObjLanguages.GetLanguage(this.Name, "sDNgay") + " " + DNgay.ToString("dd/MM/yyyy"), iDong, 1, iDong, dt.Columns.Count, true, true, 13, OfficeOpenXml.Style.ExcelHorizontalAlignment.Center, OfficeOpenXml.Style.ExcelVerticalAlignment.Center);
 
                 iDong = iDong + 2;
 
@@ -673,29 +677,36 @@ namespace Vs.HRM
                 List<List<Object>> WidthColumns = new List<List<Object>>();
                 List<Object> WidthColumnsName = new List<Object>();
                 int iRowBorder = 0;
-                WidthColumnsName = new List<Object>() { "STT", 5 };
+                
+                WidthColumnsName = new List<Object>() { "STT", 4.5 };
                 WidthColumns.Add(WidthColumnsName);
-                WidthColumnsName = new List<Object>() { "SO_HDLD", 15 };
+                WidthColumnsName = new List<Object>() { "SO_HDLD", 10 };
                 WidthColumns.Add(WidthColumnsName);
-                WidthColumnsName = new List<Object>() { "MS_CN", 10, "0.00" };
+                WidthColumnsName = new List<Object>() { "MS_CN", 6.5,"0" };
+                WidthColumns.Add(WidthColumnsName);
+                WidthColumnsName = new List<Object>() { "TEN_TO", 10 };
                 WidthColumns.Add(WidthColumnsName);
                 WidthColumnsName = new List<Object>() { "HO_TEN", 20 };
                 WidthColumns.Add(WidthColumnsName);
-                WidthColumnsName = new List<Object>() { "DIA_CHI_THUONG_TRU", 80 };
+                WidthColumnsName = new List<Object>() { "NGAY_SINH", 10 };
                 WidthColumns.Add(WidthColumnsName);
-                WidthColumnsName = new List<Object>() { "SO_CMND", 20 };
+                WidthColumnsName = new List<Object>() { "DIA_CHI_THUONG_TRU", 29 };
                 WidthColumns.Add(WidthColumnsName);
-                WidthColumnsName = new List<Object>() { "NOI_CAP", 25};
+                WidthColumnsName = new List<Object>() { "SO_CMND", 12 };
                 WidthColumns.Add(WidthColumnsName);
-                WidthColumnsName = new List<Object>() { "NGAY_CAP", 15 , "dd/MM/yyyy" };
+                WidthColumnsName = new List<Object>() { "NOI_CAP", 10};
                 WidthColumns.Add(WidthColumnsName);
-                WidthColumnsName = new List<Object>() { "NGAY_VAO_LAM", 15, "dd/MM/yyyy" };
+                WidthColumnsName = new List<Object>() { "NGAY_CAP", 10 , "dd/MM/yyyy" };
                 WidthColumns.Add(WidthColumnsName);
-                WidthColumnsName = new List<Object>() { "NGAY_KY", 15, "dd/MM/yyyy" };
+                WidthColumnsName = new List<Object>() { "NGAY_VAO_LAM", 10,"dd/MM/yyyy" };
                 WidthColumns.Add(WidthColumnsName);
-                WidthColumnsName = new List<Object>() { "NGAY_HET_HD", 15, "dd/MM/yyyy" };
+                WidthColumnsName = new List<Object>() { "NGAY_KY", 10, "dd/MM/yyyy" };
                 WidthColumns.Add(WidthColumnsName);
-                WidthColumnsName = new List<Object>() { "TEN_LHDLD", 15 };
+                WidthColumnsName = new List<Object>() { "NGAY_HET_HD", 10, "dd/MM/yyyy" };
+                WidthColumns.Add(WidthColumnsName);
+                WidthColumnsName = new List<Object>() { "TEN_LCV", 35, "dd/MM/yyyy" };
+                WidthColumns.Add(WidthColumnsName);
+                WidthColumnsName = new List<Object>() { "TEN_LHDLD", 10 };
                 WidthColumns.Add(WidthColumnsName);
 
                 ws1.Cells[iDong, 1].LoadFromDataTable(dt, true);
@@ -709,16 +720,17 @@ namespace Vs.HRM
                 border.Bottom.Style = ExcelBorderStyle.Thin;
                 border.Right.Style = ExcelBorderStyle.Thin;
 
-                ws1.Cells[1, 1, iRowBorder, dt.Columns.Count].Style.Font.Name = "Times New Roman";
+                ws1.Cells[1, 1, iRowBorder + dt.Rows.Count + 3 ,  dt.Columns.Count].Style.Font.Name = "Times New Roman";
+                ws1.Cells[7, 1, iRowBorder + dt.Rows.Count + 3, dt.Columns.Count].Style.Font.Size = 10;
 
-                Commons.Modules.MExcel.MText(ws1, "", "Namco , ngày " + lk_NgayIn.DateTime.Day.ToString() + " tháng " + lk_NgayIn.DateTime.Month.ToString() + " năm " + lk_NgayIn.DateTime.Year.ToString() + "", iDong + dt.Rows.Count + 1, 10, iDong + dt.Rows.Count + 1, 12, true, true, 14,
+                Commons.Modules.MExcel.MText(ws1, "", "Namco , ngày " + lk_NgayIn.DateTime.Day.ToString() + " tháng " + lk_NgayIn.DateTime.Month.ToString() + " năm " + lk_NgayIn.DateTime.Year.ToString() + "", iDong + dt.Rows.Count + 1, 11, iDong + dt.Rows.Count + 1, 14, true, true, 10,
                     OfficeOpenXml.Style.ExcelHorizontalAlignment.Center, OfficeOpenXml.Style.ExcelVerticalAlignment.Center);
 
-                Commons.Modules.MExcel.MText(ws1, this.Name, "sNguoiLapBieu", iDong + dt.Rows.Count + 2, 2, iDong + dt.Rows.Count + 2, 3, true, true, 13, OfficeOpenXml.Style.ExcelHorizontalAlignment.Center, OfficeOpenXml.Style.ExcelVerticalAlignment.Center);
+                Commons.Modules.MExcel.MText(ws1, this.Name, "sNguoiLapBieu", iDong + dt.Rows.Count + 2, 2, iDong + dt.Rows.Count + 2, 3, true, true, 10, OfficeOpenXml.Style.ExcelHorizontalAlignment.Center, OfficeOpenXml.Style.ExcelVerticalAlignment.Center);
 
-                Commons.Modules.MExcel.MText(ws1, this.Name, "sPhongHCNS", iDong + dt.Rows.Count + 2, 6, iDong + dt.Rows.Count + 2, 7, true, true, 13, OfficeOpenXml.Style.ExcelHorizontalAlignment.Center, OfficeOpenXml.Style.ExcelVerticalAlignment.Center);
+                Commons.Modules.MExcel.MText(ws1, this.Name, "sPhongHCNS", iDong + dt.Rows.Count + 2, 6, iDong + dt.Rows.Count + 2, 7, true, true, 10, OfficeOpenXml.Style.ExcelHorizontalAlignment.Center, OfficeOpenXml.Style.ExcelVerticalAlignment.Center);
 
-                Commons.Modules.MExcel.MText(ws1, this.Name, "sBanGiamDoc", iDong + dt.Rows.Count + 2, 11, iDong + dt.Rows.Count + 2, 14, true, true, 13, OfficeOpenXml.Style.ExcelHorizontalAlignment.Center, OfficeOpenXml.Style.ExcelVerticalAlignment.Center);
+                Commons.Modules.MExcel.MText(ws1, this.Name, "sBanGiamDoc", iDong + dt.Rows.Count + 2, 11, iDong + dt.Rows.Count + 2, 14, true, true, 10, OfficeOpenXml.Style.ExcelHorizontalAlignment.Center, OfficeOpenXml.Style.ExcelVerticalAlignment.Center);
 
                 if (file.Exists)
                     file.Delete();

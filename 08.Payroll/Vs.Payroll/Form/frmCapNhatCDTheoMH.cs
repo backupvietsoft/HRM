@@ -12,10 +12,10 @@ namespace Vs.Payroll
 {
     public partial class frmCapNhatCDTheoMH : DevExpress.XtraEditors.XtraForm
     {
-        public int iID_DV = -1;
-        public int iID_CHUYEN_SD = -1;
-        public int iID_ORD = -1;
-        public int iID_CD = 0; // ID_CD = 0 thêm mới, ngược lại là dữ liệu cũ
+        public Int64 iID_DV = -1;
+        public Int64 iID_CHUYEN_SD = -1;
+        public Int64 iID_ORD = -1;
+        public Int64 iID_CD = 0; // ID_CD = 0 thêm mới, ngược lại là dữ liệu cũ
         public DataTable dtTemp;
         public DateTime datThang = DateTime.Now;
         public frmCapNhatCDTheoMH()

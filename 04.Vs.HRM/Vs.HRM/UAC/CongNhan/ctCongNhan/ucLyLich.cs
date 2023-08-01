@@ -413,65 +413,36 @@ namespace Vs.HRM
                                     }
                                 }
                             }
-                            //kiểm tra khi chọn đã nghĩ việc
-                            try
-                            {
-                                string skHNV = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT ISNULL(KY_HIEU,'') FROM dbo.TINH_TRANG_HT WHERE ID_TT_HT =  " + ID_TT_HTLookUpEdit.EditValue + "").ToString();
-                                if (skHNV.ToLower().Trim() == "nv")
-                                {
-                                    //kiểm tra có hợp đồng lao động hay quá trình công tác chưa
-                                    if (Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT(SELECT COUNT(*) FROM dbo.HOP_DONG_LAO_DONG WHERE ID_CN = " + idcn + ") + (SELECT COUNT(*) FROM dbo.QUA_TRINH_CONG_TAC WHERE ID_CN = " + idcn + ")")) > 0)
-                                    {
-                                        //kiểm tra có quyết định thôi việc chưa.
-                                        if (Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT COUNT(*) FROM dbo.QUYET_DINH_THOI_VIEC WHERE ID_CN = " + idcn + "")) == 0)
-                                        //nếu có phải thông báo bạn phải lập quyết định thôi việc
-                                        {
-                                            XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgBanPhaiLapQuyetDinhThoiViec"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Question);
-                                            return;
-                                        }
-                                    }
-                                    //nếu có kiểm tra có trong nghĩ việc chưa, nếu chưa có thì báo phải làm bên nghĩ việc
-                                    ID_TT_HDLookUpEdit.EditValue = 5;
-                                }
-                            }
-                            catch (Exception ex)
-                            {
+                            #region kiểm tra khi chọn đã nghĩ việc - BỎ
+                            ////kiểm tra khi chọn đã nghĩ việc
+                            //try
+                            //{
+                            //    string skHNV = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT ISNULL(KY_HIEU,'') FROM dbo.TINH_TRANG_HT WHERE ID_TT_HT =  " + ID_TT_HTLookUpEdit.EditValue + "").ToString();
+                            //    if (skHNV.ToLower().Trim() == "nv")
+                            //    {
+                            //        //kiểm tra có hợp đồng lao động hay quá trình công tác chưa
+                            //        if (Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT(SELECT COUNT(*) FROM dbo.HOP_DONG_LAO_DONG WHERE ID_CN = " + idcn + ") + (SELECT COUNT(*) FROM dbo.QUA_TRINH_CONG_TAC WHERE ID_CN = " + idcn + ")")) > 0)
+                            //        {
+                            //            //kiểm tra có quyết định thôi việc chưa.
+                            //            if (Convert.ToInt32(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT COUNT(*) FROM dbo.QUYET_DINH_THOI_VIEC WHERE ID_CN = " + idcn + "")) == 0)
+                            //            //nếu có phải thông báo bạn phải lập quyết định thôi việc
+                            //            {
+                            //                XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgBanPhaiLapQuyetDinhThoiViec"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Question);
+                            //                return;
+                            //            }
+                            //        }
+                            //        //nếu có kiểm tra có trong nghĩ việc chưa, nếu chưa có thì báo phải làm bên nghĩ việc
+                            //        ID_TT_HDLookUpEdit.EditValue = 5;
+                            //    }
+                            //}
+                            //catch (Exception ex)
+                            //{
 
-                            }
+                            //}
 
-                            if (Commons.Modules.iCongNhan == -1)
-                            {
-                                if (Commons.Modules.ObjSystems.kiemTrungMS("CONG_NHAN", "MS_CN", MS_CNTextEdit.Text))
-                                {
-                                    if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgMSCNDaTrungBanCoMuonTaoMaMoi"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) return;
-                                    if (Commons.Modules.KyHieuDV == "DM")
-                                    {
-                                        MS_CNTextEdit.Text = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.AUTO_CREATE_SO_CONG_NHAN(" + (ID_DVLookUpEdit.Text == "" ? -1 : Convert.ToInt32(ID_DVLookUpEdit.EditValue)) + ",1)").ToString();
-                                        MS_THE_CCTextEdit.Text = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.AUTO_CREATE_SO_CONG_NHAN(" + (ID_DVLookUpEdit.Text == "" ? -1 : Convert.ToInt32(ID_DVLookUpEdit.EditValue)) + ",2)").ToString();
-                                    }
-                                    else
-                                    {
-                                        MS_CNTextEdit.Text = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.AUTO_CREATE_MS_CN(" + (ID_DVLookUpEdit.Text == "" ? -1 : Convert.ToInt32(ID_DVLookUpEdit.EditValue)) + ",1)").ToString();
-                                        MS_THE_CCTextEdit.Text = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.AUTO_CREATE_MS_CN(" + (ID_DVLookUpEdit.Text == "" ? -1 : Convert.ToInt32(ID_DVLookUpEdit.EditValue)) + ",2)").ToString();
-                                    }
-                                    return;
-                                }
-                                if (Commons.Modules.ObjSystems.kiemTrungMS("CONG_NHAN", "MS_THE_CC", MS_THE_CCTextEdit.Text))
-                                {
-                                    if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgMSTheCCDaTrungBanCoMuonTaoMaMoi"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) return;
-                                    if (Commons.Modules.KyHieuDV == "DM")
-                                    {
-                                        MS_CNTextEdit.Text = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.AUTO_CREATE_SO_CONG_NHAN(" + (ID_DVLookUpEdit.Text == "" ? -1 : Convert.ToInt32(ID_DVLookUpEdit.EditValue)) + ",1)").ToString();
-                                        MS_THE_CCTextEdit.Text = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.AUTO_CREATE_SO_CONG_NHAN(" + (ID_DVLookUpEdit.Text == "" ? -1 : Convert.ToInt32(ID_DVLookUpEdit.EditValue)) + ",2)").ToString();
-                                    }
-                                    else
-                                    {
-                                        MS_CNTextEdit.Text = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.AUTO_CREATE_MS_CN(" + (ID_DVLookUpEdit.Text == "" ? -1 : Convert.ToInt32(ID_DVLookUpEdit.EditValue)) + ",1)").ToString();
-                                        MS_THE_CCTextEdit.Text = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.AUTO_CREATE_MS_CN(" + (ID_DVLookUpEdit.Text == "" ? -1 : Convert.ToInt32(ID_DVLookUpEdit.EditValue)) + ",2)").ToString();
-                                    }
-                                    return;
-                                }
-                            }
+                            #endregion
+
+
                             if (SaveData())
                             {
                                 //Commons.Modules.ObjSystems.LuuDuongDan(strDuongDan, txtTaiLieu.Text);
@@ -893,7 +864,7 @@ namespace Vs.HRM
                     TEN_KHONG_DAUTextEdit.EditValue = dt.Rows[0]["TEN_KHONG_DAU"];
                     NGAY_SINHDateEdit.EditValue = dt.Rows[0]["NGAY_SINH"];
                     //NAM_SINHDateEdit.EditValue = dt.Rows[0]["NAM_SINH"].ToString();
-                    NAM_SINHDateEdit.EditValue = dt.Rows[0]["NAM_SINH"] == null || dt.Rows[0]["NAM_SINH"].ToString().Trim() == "" ? Convert.ToDateTime(NGAY_SINHDateEdit.EditValue).Year.ToString().Trim() : dt.Rows[0]["NAM_SINH"].ToString();
+                    NAM_SINHDateEdit.EditValue = dt.Rows[0]["NAM_SINH"];
                     PHAILookupEdit.EditValue = Convert.ToInt32(dt.Rows[0]["PHAI"]);
                     ID_DVLookUpEdit.EditValue = dt.Rows[0]["ID_DV"];
                     ID_XNLookUpEdit.EditValue = dt.Rows[0]["ID_XN"];
@@ -1341,7 +1312,7 @@ namespace Vs.HRM
                 cmd.Parameters.Add("@TEN", SqlDbType.NVarChar).Value = TENTextEdit.Text;
                 cmd.Parameters.Add("@TEN_KHONG_DAU", SqlDbType.NVarChar).Value = TEN_KHONG_DAUTextEdit.Text;
                 cmd.Parameters.Add("@NGAY_SINH", SqlDbType.DateTime).Value = Commons.Modules.ObjSystems.ConvertDateTime(NGAY_SINHDateEdit.Text);
-                cmd.Parameters.Add("@NAM_SINH", SqlDbType.Int).Value = NAM_SINHDateEdit.Text == "" ? NAM_SINHDateEdit.EditValue = null : Convert.ToInt32(NAM_SINHDateEdit.EditValue);
+                cmd.Parameters.Add("@NAM_SINH", SqlDbType.Int).Value = NAM_SINHDateEdit.Text == "" ? NGAY_SINHDateEdit.DateTime.Year : Convert.ToInt32(NAM_SINHDateEdit.EditValue);
                 cmd.Parameters.Add("@PHAI", SqlDbType.Bit).Value = PHAILookupEdit.EditValue;
                 cmd.Parameters.Add("@ID_TO", SqlDbType.BigInt).Value = Convert.ToString(ID_TOLookupEdit.EditValue) == "" ? DBNull.Value : ID_TOLookupEdit.EditValue;
                 cmd.Parameters.Add("@ID_CV", SqlDbType.BigInt).Value = Convert.ToString(ID_CVLookUpEdit.EditValue) == "" ? DBNull.Value : ID_CVLookUpEdit.EditValue;
@@ -1537,50 +1508,67 @@ namespace Vs.HRM
 
         private void ID_DVLookUpEdit_EditValueChanged(object sender, EventArgs e)
         {
-            if (Commons.Modules.sLoad == "0Load") return;
-            switch (Commons.Modules.KyHieuDV)
+            try
             {
-                case "DM":
-                    {
-                        if (Commons.Modules.iCongNhan == -1 || idcn == -1)
+                if (Commons.Modules.sLoad == "0Load") return;
+                switch (Commons.Modules.KyHieuDV)
+                {
+                    case "DM":
                         {
-                            try
+                            if (Commons.Modules.iCongNhan == -1 || idcn == -1)
                             {
-                                MS_CNTextEdit.Text = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.AUTO_CREATE_SO_CONG_NHAN(" + ID_DVLookUpEdit.EditValue + ",1)").ToString();
-                                MS_THE_CCTextEdit.Text = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.AUTO_CREATE_SO_CONG_NHAN(" + ID_DVLookUpEdit.EditValue + ",2)").ToString();
-                                //MS_CNTextEdit.Properties.ReadOnly = false;
-                                //MS_THE_CCTextEdit.Properties.ReadOnly = false;
+                                try
+                                {
+                                    MS_CNTextEdit.Text = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.AUTO_CREATE_SO_CONG_NHAN(" + ID_DVLookUpEdit.EditValue + ",1)").ToString();
+                                    MS_THE_CCTextEdit.Text = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.AUTO_CREATE_SO_CONG_NHAN(" + ID_DVLookUpEdit.EditValue + ",2)").ToString();
+                                    //MS_CNTextEdit.Properties.ReadOnly = false;
+                                    //MS_THE_CCTextEdit.Properties.ReadOnly = false;
+                                }
+                                catch { }
                             }
-                            catch { }
+                            break;
                         }
-                        break;
-                    }
-                case "TG":
-                    {
-                        if (Commons.Modules.iCongNhan == -1 || idcn == -1)
+                    case "TG":
                         {
-                            MS_CNTextEdit.Text = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.AUTO_CREATE_MS_CN(" + ID_DVLookUpEdit.EditValue + ",1)").ToString();
-                            MS_THE_CCTextEdit.Text = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.AUTO_CREATE_MS_CN(" + ID_DVLookUpEdit.EditValue + ",2)").ToString();
+                            if (Commons.Modules.iCongNhan == -1 || idcn == -1)
+                            {
+                                MS_CNTextEdit.Text = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.AUTO_CREATE_MS_CN(" + ID_DVLookUpEdit.EditValue + ",1)").ToString();
+                                MS_THE_CCTextEdit.Text = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.AUTO_CREATE_MS_CN(" + ID_DVLookUpEdit.EditValue + ",2)").ToString();
+                            }
+                            break;
                         }
-                        break;
-                    }
 
+                }
+
+                if (isCancel) return;
+                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(ID_XNLookUpEdit, Commons.Modules.ObjSystems.DataXiNghiep(Convert.ToInt32(ID_DVLookUpEdit.EditValue), false), "ID_XN", "TEN_XN", "TEN_XN", true, true);
             }
-
-            if (isCancel) return;
-            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(ID_XNLookUpEdit, Commons.Modules.ObjSystems.DataXiNghiep(Convert.ToInt32(ID_DVLookUpEdit.EditValue), false), "ID_XN", "TEN_XN", "TEN_XN", true, true);
-
+            catch (Exception ex)
+            {
+                Commons.Modules.ObjSystems.MsgError(ex.Message);
+            }
         }
 
         private void ID_XNLookUpEdit_EditValueChanged(object sender, EventArgs e)
         {
             if (Commons.Modules.sLoad == "0Load") return;
-            if (isCancel) return;
-            Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(ID_TOLookupEdit, Commons.Modules.ObjSystems.DataTo(Convert.ToInt32(ID_DVLookUpEdit.EditValue), Convert.ToInt32(ID_XNLookUpEdit.EditValue), false), "ID_TO", "TEN_TO", "TEN_TO", true, true);
-            if (Commons.Modules.bKiemLCVCV)
+            Commons.Modules.sLoad = "0Load";
+            try
             {
-                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(ID_LCVLookUpEdit, Commons.Modules.ObjSystems.DataLoaiCV(false, Convert.ToInt32(ID_XNLookUpEdit.EditValue)), "ID_LCV", "TEN_LCV", "TEN_LCV", true);
+                if (isCancel) return;
+                Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(ID_TOLookupEdit, Commons.Modules.ObjSystems.DataTo(Convert.ToInt32(ID_DVLookUpEdit.EditValue), Convert.ToInt32(ID_XNLookUpEdit.EditValue), false), "ID_TO", "TEN_TO", "TEN_TO", true, true);
+                if (Commons.Modules.bKiemLCVCV)
+                {
+                    Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(ID_LCVLookUpEdit, Commons.Modules.ObjSystems.DataLoaiCV(false, Convert.ToInt32(ID_XNLookUpEdit.EditValue)), "ID_LCV", "TEN_LCV", "TEN_LCV", true);
+                }
+                if (Commons.Modules.KyHieuDV == "BT")
+                {
+                    MS_CNTextEdit.Text = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.AUTO_CREATE_MS_CN_BT(" + ID_XNLookUpEdit.EditValue + ")").ToString();
+                    MS_THE_CCTextEdit.Text = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, "SELECT dbo.AUTO_CREATE_MS_CN_BT(" + ID_XNLookUpEdit.EditValue + ")").ToString();
+                }
             }
+            catch { }
+            Commons.Modules.sLoad = "";
         }
 
         private void ID_LCVLookUpEdit_EditValueChanged(object sender, EventArgs e)

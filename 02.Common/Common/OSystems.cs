@@ -451,6 +451,21 @@ namespace Commons
             //errorSoundPlayer.Play();
             XtraMessageBox.Show(args);
         }
+        public void msgCapNhat(int loai) // 1 success, 2 error
+        {
+            try
+            {
+                if (loai == 1)
+                {
+                    Alert(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgLuuThanhCong"), Commons.Form_Alert.enmType.Success);
+                }
+                else
+                {
+                    Alert(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msg_LuuKhongThanhCong"), Commons.Form_Alert.enmType.Error);
+                }
+            }
+            catch { }
+        }
         public void OpenHinh(string strDuongdan)
         {
             if (strDuongdan.Equals(""))
@@ -6136,10 +6151,23 @@ namespace Commons
             //Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboDV, dt, "ID_DV", "TEN_DV", "TEN_DV");
             return dt;
         }
+        public DataTable DataDonVi(bool coAll, string sUserName) // THEO ADMIN
+        {
+            DataTable dt = new DataTable();
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboDON_VI", sUserName, Commons.Modules.TypeLanguage, coAll));
+            //Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboDV, dt, "ID_DV", "TEN_DV", "TEN_DV");
+            return dt;
+        }
         public DataTable DataXiNghiep(int iddv, bool coAll)
         {
             DataTable dt = new DataTable();
             dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboXI_NGHIEP", iddv, Commons.Modules.UserName, Commons.Modules.TypeLanguage, coAll));
+            return dt;
+        }
+        public DataTable DataXiNghiep(int iddv, bool coAll, string sUserName)
+        {
+            DataTable dt = new DataTable();
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboXI_NGHIEP", iddv, sUserName, Commons.Modules.TypeLanguage, coAll));
             return dt;
         }
         public DataTable DataTo(int iddv, int idxn, bool CoAll)
@@ -6148,7 +6176,12 @@ namespace Commons
             dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboTO", iddv, idxn, Commons.Modules.UserName, Commons.Modules.TypeLanguage, CoAll));
             return dt;
         }
-
+        public DataTable DataTo(int iddv, int idxn, bool CoAll, string sUserName)
+        {
+            DataTable dt = new DataTable();
+            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetComboTO", iddv, idxn, sUserName, Commons.Modules.TypeLanguage, CoAll));
+            return dt;
+        }
         public DataTable DataToTheoLoaiChuyen(int iddv, int idxn, bool CoAll)
         {
             DataTable dt = new DataTable();
@@ -6317,7 +6350,7 @@ namespace Commons
         public SplashScreenManager ShowWaitForm(XtraUserControl a)
         {
             if (splashScreenManager1 != null) splashScreenManager1.Dispose();
-            splashScreenManager1 = new DevExpress.XtraSplashScreen.SplashScreenManager(a.ParentForm, typeof(frmWaitForm), true, true, true);
+            splashScreenManager1 = new DevExpress.XtraSplashScreen.SplashScreenManager(a.ParentForm, typeof(frmWaitFormCustom), true, true, false);
             splashScreenManager1.ShowWaitForm();
             Thread.Sleep(100);
             return splashScreenManager1;
@@ -6325,7 +6358,7 @@ namespace Commons
         public SplashScreenManager ShowWaitForm(XtraForm a)
         {
             if (splashScreenManager1 != null) splashScreenManager1.Dispose();
-            splashScreenManager1 = new DevExpress.XtraSplashScreen.SplashScreenManager(a, typeof(frmWaitForm), true, true, true);
+            splashScreenManager1 = new DevExpress.XtraSplashScreen.SplashScreenManager(a, typeof(frmWaitFormCustom), true, true, false);
             splashScreenManager1.ShowWaitForm();
             Thread.Sleep(100);
             return splashScreenManager1;
@@ -6335,11 +6368,36 @@ namespace Commons
             try
             {
                 splashScreenManager1.CloseWaitForm();
-
             }
             catch
             {
             }
+        }
+
+        public void showWaitFormVietSoft(Action worker, XtraForm a)
+        {
+            try
+            {
+                using(frmWaitFormVS frm = new frmWaitFormVS(worker))
+                {
+                    frm.StartPosition = FormStartPosition.CenterParent; // Hiển thị form chờ đợi ở giữa form chính
+                    frm.Show(a); // Sử dụng phương thức Show thay vì ShowDialog
+                }
+            }
+            catch { }
+        }
+
+        public void showWaitFormVietSoft(Action worker, XtraUserControl a)
+        {
+            try
+            {
+                using (frmWaitFormVS frm = new frmWaitFormVS(worker))
+                {
+                    frm.StartPosition = FormStartPosition.CenterParent; // Hiển thị form chờ đợi ở giữa form chính
+                    frm.ShowDialog(a); // Sử dụng phương thức Show thay vì ShowDialog
+                }
+            }
+            catch { }
         }
     }
 }

@@ -70,6 +70,7 @@ namespace Vs.Payroll
                 cboCachTinhLuong.EditValue = 2;
                 lk_NgayIn.EditValue = DateTime.Today;
                 rdo_ChucVu.Visible = false;
+                rdoChinhThuc.Visible = false;
                 switch (Commons.Modules.KyHieuDV)
                 {
                     case "MT":
@@ -103,7 +104,7 @@ namespace Vs.Payroll
                             rdo_ChucVu.Properties.Items.Insert(0, item);
                             rdo_ChucVu.Visible = true;
                             rdo_ChucVu.SelectedIndex = 1;
-
+                            rdoChinhThuc.Visible = true;
                             break;
                         }
                     default:
@@ -113,12 +114,7 @@ namespace Vs.Payroll
                             rdo_ChonBaoCao.Properties.Items.Remove(rdo_ChonBaoCao.Properties.Items.Where(x => x.Tag.ToString() == "rdo_BangLuongThangThoiGian").FirstOrDefault());
                             rdo_ChonBaoCao.Properties.Items.Remove(rdo_ChonBaoCao.Properties.Items.Where(x => x.Tag.ToString() == "rdo_BangLuongThangCBQLChuyen").FirstOrDefault());
                             rdo_ChonBaoCao.Properties.Items.Remove(rdo_ChonBaoCao.Properties.Items.Where(x => x.Tag.ToString() == "rdo_BangLuongThangNV").FirstOrDefault());
-                            rdo_ChonBaoCao.Properties.Items.Remove(rdo_ChonBaoCao.Properties.Items.Where(x => x.Tag.ToString() == "rdo_BangLuongThangNV").FirstOrDefault());
                             rdo_ChonBaoCao.Properties.Items.Remove(rdo_ChonBaoCao.Properties.Items.Where(x => x.Tag.ToString() == "rdo_BangLuongHotro").FirstOrDefault());
-
-
-
-
                             break;
                         }
                 }

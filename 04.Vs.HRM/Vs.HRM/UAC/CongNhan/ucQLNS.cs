@@ -579,8 +579,10 @@ namespace Vs.HRM
 
         private void grvDSCongNhan_RowStyle(object sender, RowStyleEventArgs e)
         {
+            GridView view = sender as GridView;
             try
             {
+                if (view.IsRowVisible(e.RowHandle - 1) != RowVisibleState.Visible && view.IsRowVisible(e.RowHandle + 1) != RowVisibleState.Visible) return;
                 if (grvDSCongNhan.RowCount == 0)
                     return;
                 if (grvDSCongNhan.GetRowCellValue(e.RowHandle, grvDSCongNhan.Columns["MAU_TT"]).ToString().Trim() == "#FFFFFF") return;
@@ -770,7 +772,7 @@ namespace Vs.HRM
         {
             switch (Commons.Modules.KyHieuDV)
             {
-
+                         
                 case "NB":
                     {
                         DataTable dtTmp = new DataTable();
@@ -782,14 +784,14 @@ namespace Vs.HRM
                             string sDK = "";
                             //sMSCN = "";
                             if (searchControl2.Text != "")
-                                sDK = "MS_CN = '" + searchControl2.Text + "";
+                                sDK = "MS_CN = '" + searchControl2.Text + "'";
                             dtTmp.DefaultView.RowFilter = sDK;
                         }
                         catch (Exception ex)
                         {
                             dtTmp.DefaultView.RowFilter = "";
                         }
-
+                        grvDSCongNhan.ExpandAllGroups();
                         break;
                     }
                 default:
@@ -797,6 +799,7 @@ namespace Vs.HRM
                         break;
                     }
             }
+            grvDSCongNhan.ExpandAllGroups();
         }
     }
 }

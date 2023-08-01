@@ -102,6 +102,9 @@ namespace Vs.HRM
                     }
                 case "luu":
                     {
+                        flag_CH = false;
+                        flag_NT = false;
+
                         DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule1 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
                         conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
                         conditionValidationRule1.ErrorText = "This value is not valid";
@@ -243,23 +246,40 @@ namespace Vs.HRM
                     cboID_DanToc.EditValue = null;
                     cboQH_CH.EditValue = null;
                     txt_GHI_CHU.EditValue = "";
-                    cboGIOI_TINH.EditValue = 0;
+                    cboGIOI_TINH.EditValue = -1;
                     chkCungCongTy.Checked = false;
                     txtCN.EditValue = "";
 
-
-                    txtMS_HGD.EditValue = string.Empty;
-                    txtHO_TEN_CH.EditValue = string.Empty;
-                    txtSO_HO_KHAU.EditValue = string.Empty;
-                    txtDT_LIEN_HE.EditValue = string.Empty;
-                    chkChuHo.Checked = false;
-                    cboID_LHN.EditValue = -1;
-                    cboID_TP.EditValue = null;
-                    cboID_QUAN.EditValue = null;
-                    cboID_PX.EditValue = null;
-                    txtTHON_XOM.EditValue = string.Empty;
-                    txtDIA_CHI_HK.EditValue = string.Empty;
-                    chkCheDoConNho.Checked = false;
+                    if(grvGiaDinh.RowCount == 0)
+                    {
+                        txtMS_HGD.EditValue = string.Empty;
+                        txtHO_TEN_CH.EditValue = string.Empty;
+                        txtSO_HO_KHAU.EditValue = string.Empty;
+                        txtDT_LIEN_HE.EditValue = string.Empty;
+                        chkChuHo.Checked = false;
+                        cboID_LHN.EditValue = -1;
+                        cboID_TP.EditValue = null;
+                        cboID_QUAN.EditValue = null;
+                        cboID_PX.EditValue = null;
+                        txtTHON_XOM.EditValue = string.Empty;
+                        txtDIA_CHI_HK.EditValue = string.Empty;
+                        chkCheDoConNho.Checked = false;
+                    }
+                    else
+                    {
+                        txtMS_HGD.EditValue = Convert.ToString(grvGiaDinh.GetFocusedRowCellValue("MS_HGD"));
+                        txtHO_TEN_CH.EditValue = Convert.ToString(grvGiaDinh.GetFocusedRowCellValue("HO_TEN_CH"));
+                        txtSO_HO_KHAU.EditValue = Convert.ToString(grvGiaDinh.GetFocusedRowCellValue("SO_HO_KHAU"));
+                        txtDT_LIEN_HE.EditValue = Convert.ToString(grvGiaDinh.GetFocusedRowCellValue("DT_LIEN_HE"));
+                        chkChuHo.EditValue = Convert.ToString(grvGiaDinh.GetFocusedRowCellValue("CHU_HO")) == "" ? false : Convert.ToBoolean(grvGiaDinh.GetFocusedRowCellValue("CHU_HO"));
+                        cboID_LHN.EditValue = Convert.ToString(grvGiaDinh.GetFocusedRowCellValue("HO_NGHEO")) == "" ? false : Convert.ToBoolean(grvGiaDinh.GetFocusedRowCellValue("HO_NGHEO"));
+                        cboID_TP.EditValue = Convert.ToString(grvGiaDinh.GetFocusedRowCellValue("ID_TP_CH")) == "" ? (object)null : Convert.ToInt64(grvGiaDinh.GetFocusedRowCellValue("ID_TP_CH"));
+                        cboID_QUAN.EditValue = Convert.ToString(grvGiaDinh.GetFocusedRowCellValue("ID_QUAN_CH")) == "" ? (object)null : Convert.ToInt64(grvGiaDinh.GetFocusedRowCellValue("ID_QUAN_CH"));
+                        cboID_PX.EditValue = Convert.ToString(grvGiaDinh.GetFocusedRowCellValue("ID_PX_CH")) == "" ? (object)null : Convert.ToInt64(grvGiaDinh.GetFocusedRowCellValue("ID_PX_CH"));
+                        txtTHON_XOM.EditValue = Convert.ToString(grvGiaDinh.GetFocusedRowCellValue("THON_XOM_CH"));
+                        txtDIA_CHI_HK.EditValue = Convert.ToString(grvGiaDinh.GetFocusedRowCellValue("DIA_CHI_HK"));
+                        chkCheDoConNho.EditValue = Convert.ToBoolean(grvGiaDinh.GetFocusedRowCellValue("CD_CON_NHO"));
+                    }
                     // chủ hộ
                 }
                 catch (Exception ex)
@@ -283,7 +303,7 @@ namespace Vs.HRM
                     cboID_DanToc.EditValue = Convert.ToString(grvGiaDinh.GetFocusedRowCellValue("ID_DT")) == "" ? (object)null : Convert.ToInt64(grvGiaDinh.GetFocusedRowCellValue("ID_DT"));
                     cboQH_CH.EditValue = string.IsNullOrEmpty(grvGiaDinh.GetFocusedRowCellValue("QH_CH").ToString()) ? -1 : Convert.ToInt64(grvGiaDinh.GetFocusedRowCellValue("QH_CH"));
                     txt_GHI_CHU.EditValue = grvGiaDinh.GetFocusedRowCellValue("GHI_CHU");
-                    cboGIOI_TINH.EditValue = string.IsNullOrEmpty(grvGiaDinh.GetFocusedRowCellValue("GIOI_TINH").ToString()) ? 0 : Convert.ToInt32(grvGiaDinh.GetFocusedRowCellValue("GIOI_TINH"));
+                    cboGIOI_TINH.EditValue = string.IsNullOrEmpty(grvGiaDinh.GetFocusedRowCellValue("GIOI_TINH").ToString()) ? -1 : Convert.ToInt32(grvGiaDinh.GetFocusedRowCellValue("GIOI_TINH"));
                     NGUOI_GHCheckEdit.EditValue = Convert.ToString(grvGiaDinh.GetFocusedRowCellValue("NGUOI_GH")) == "" ? false : Convert.ToBoolean(grvGiaDinh.GetFocusedRowCellValue("NGUOI_GH"));
                     chkCungCongTy.EditValue = Convert.ToString(grvGiaDinh.GetFocusedRowCellValue("CUNG_CONG_TY")) == "" ? false : Convert.ToBoolean(grvGiaDinh.GetFocusedRowCellValue("CUNG_CONG_TY"));
 

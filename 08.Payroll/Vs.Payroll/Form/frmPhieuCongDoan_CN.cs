@@ -330,8 +330,14 @@ namespace Vs.Payroll
         {
             try
             {
+                DataView dt = (DataView)grvCN.DataSource;
+                if (dt == null)
+                {
+                    return;
+                }
                 DataTable dt1 = new DataTable();
-                dt1 = Commons.Modules.ObjSystems.ConvertDatatable(grvCN);
+                dt1 = dt.ToTable();
+
                 lbl.Text = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "lblTongLSP") + " " + (Convert.ToDouble(dt1.Compute("Sum(THANH_TIEN)", "")).ToString("N0") == "" ? "0" : Convert.ToDouble(dt1.Compute("Sum(THANH_TIEN)", "")).ToString("N0")).ToString();
             }
             catch
@@ -635,7 +641,7 @@ namespace Vs.Payroll
 
                 try
                 {
-                    if (Commons.Modules.ObjSystems.ConvertDatatable(grdCN).AsEnumerable().Where(x => x["ID_CD"].ToString().Trim().Equals(grvCD.GetFocusedRowCellValue("ID_CD").ToString().Trim())).Count(x => x["MS_CN"].ToString().Trim().Equals(dt.Rows[0]["MS_CN_4"].ToString().Trim())) >= 1)
+                    if (((DataTable)grdCN.DataSource).AsEnumerable().Where(x => x["ID_CD"].ToString().Trim().Equals(grvCD.GetFocusedRowCellValue("ID_CD").ToString().Trim())).Count(x => x["MS_CN"].ToString().Trim().Equals(dt.Rows[0]["MS_CN_4"].ToString().Trim())) >= 1)
                     {
                         e.Valid = false;
                         e.ErrorText = Commons.Modules.TypeLanguage == 0 ? "Trùng" : "Duplicate";
@@ -647,17 +653,12 @@ namespace Vs.Payroll
 
                 try
                 {
+                    grvCN.SetFocusedRowCellValue("ID_CN", dt.Rows[0]["ID_CN"]);
                     grvCN.SetFocusedRowCellValue("HO_TEN", dt.Rows[0]["HO_TEN"]);
                     grvCN.SetFocusedRowCellValue("SO_LUONG", grvPCD.GetFocusedRowCellValue("SL_NGAY"));
                     grvCN.SetFocusedRowCellValue("DON_GIA", grvCD.GetFocusedRowCellValue("DON_GIA"));
                     grvCN.SetFocusedRowCellValue("THANH_TIEN", Convert.ToDouble(grvPCD.GetFocusedRowCellValue("SL_NGAY")) * Convert.ToDouble(grvCD.GetFocusedRowCellValue("DON_GIA")));
-                    grvCN.SetFocusedRowCellValue("ID_CN", dt.Rows[0]["ID_CN"]);
                     grvCN.SetFocusedRowCellValue("MS_CN", dt.Rows[0]["MS_CN_4"]);
-
-
-                    dt = new DataTable();
-                    dt = Commons.Modules.ObjSystems.ConvertDatatable(grvCN);
-                    grvCD.SetFocusedRowCellValue("TONG_SAN_LUONG", Convert.ToInt32(dt.Compute("Sum(SO_LUONG)", "")));
                 }
                 catch
                 {
@@ -666,6 +667,7 @@ namespace Vs.Payroll
 
             if (chkKT.Checked == false)
             {
+                e.Valid = true;
                 return;
             }
             if (view.FocusedColumn.FieldName == "SO_LUONG")
@@ -692,7 +694,7 @@ namespace Vs.Payroll
                     dt = ds.Tables[0].Copy();
 
                     //Kiểm tra số lượng công đoạn đang nhập có vượt số lượng chốt hay không
-                    if (Convert.ToInt32(dt.Rows[0]["SL_NHAP"]) > Convert.ToInt32(grvPCD.GetFocusedRowCellValue("SL_NGAY")))
+                    if (Convert.ToInt32(dt.Rows[0]["SL_NHAP"]) > Convert.ToInt32(grvPCD.GetFocusedRowCellValue("SL_CHOT")))
                     {
                         if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msg_VuotSLChot"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
                         {
@@ -705,6 +707,10 @@ namespace Vs.Payroll
                         {
                             grvCN.SetFocusedRowCellValue("SO_LUONG", e.Value);
                         }
+                    }
+                    else
+                    {
+                        grvCN.SetFocusedRowCellValue("SO_LUONG", e.Value);
                     }
                     Commons.Modules.ObjSystems.XoaTable(sBT_CD);
                 }
@@ -720,8 +726,19 @@ namespace Vs.Payroll
             {
                 if (e.Column.FieldName == "SO_LUONG")
                 {
+
                     grvCN.SetFocusedRowCellValue("THANH_TIEN", (Convert.ToDouble(e.Value) * Convert.ToDouble(grvCD.GetFocusedRowCellValue("DON_GIA"))));
+
                     LoadTextTongLSP();
+
+                    //DataTable tempt = grdCN.DataSource as DataTable;
+
+                    //Int64 ID_CD = string.IsNullOrEmpty(Convert.ToString(grvPCD.GetFocusedRowCellValue("ID_CD"))) ? 0 : Convert.ToInt64(grvPCD.GetFocusedRowCellValue("ID_CD"));
+                    //Int64 ID_CHUYEN_SD = string.IsNullOrEmpty(Convert.ToString(grvPCD.GetFocusedRowCellValue("ID_CHUYEN_SD"))) ? 0 : Convert.ToInt64(grvPCD.GetFocusedRowCellValue("ID_CHUYEN_SD"));
+                    //int ii = string.IsNullOrEmpty(Convert.ToString(tempt.Compute("Sum(SO_LUONG)", "ID_CD = " + ID_CD + " AND ID_CHUYEN_SD = " + ID_CHUYEN_SD + ""))) ? 0 : Convert.ToInt32(tempt.Compute("Sum(SO_LUONG)", "ID_CD = " + ID_CD + " AND ID_CHUYEN_SD = " + ID_CHUYEN_SD + ""));
+
+                    //grvCD.SetFocusedRowCellValue("TONG_SAN_LUONG", ii);
+
                 }
             }
             catch { }
@@ -877,10 +894,10 @@ namespace Vs.Payroll
 
         private void grvCN_KeyDown(object sender, KeyEventArgs e)
         {
-            //if (e.KeyCode == Keys.Home)
-            //{
-            //    searchControl2.Focus();
-            //}
+            if (e.KeyCode == Keys.Home)
+            {
+                searchControl2.Focus();
+            }
         }
         //private void cboMSCN_KeyDown(object sender, KeyEventArgs e)
         //{
@@ -916,7 +933,11 @@ namespace Vs.Payroll
 
                     DataTable dt = new DataTable();
                     dt = Commons.Modules.ObjSystems.ConvertDatatable(grvCN);
-                    grvCD.SetFocusedRowCellValue("TONG_SAN_LUONG", Convert.ToInt32(dt.Compute("Sum(SO_LUONG)", "")));
+                    try
+                    {
+                        grvCD.SetFocusedRowCellValue("TONG_SAN_LUONG", Convert.ToInt32(dt.Compute("Sum(SO_LUONG)", "")));
+                    }
+                    catch { }
 
                     int currentRow = grvCD.FocusedRowHandle;
                     grvCD.FocusedRowHandle = currentRow + 1;
@@ -952,17 +973,14 @@ namespace Vs.Payroll
             //        iSLNhap = Convert.ToInt32(e.Value);
             //        if (iSLNhap == 0)
             //        {
-            //            //string sError = Commons.Modules.TypeLanguage == 0 ? "Số lượng phải lớn hơn 0" : "The number must be greater than 0";
-            //            //view.SetColumnError(view.Columns["SO_LUONG"], sError);
-            //            bKiemSL = true;
+            //            string sError = Commons.Modules.TypeLanguage == 0 ? "Số lượng phải lớn hơn 0" : "The number must be greater than 0";
+            //            view.SetColumnError(view.Columns["SO_LUONG"], sError);
             //            return;
             //        }
             //    }
-            //    bKiemSL = false;
             //}
             //catch
             //{
-            //    bKiemSL = true;
             //}
         }
 
@@ -983,12 +1001,10 @@ namespace Vs.Payroll
                     try
                     {
 
-                        //DataTable dt1 = new DataTable();
-                        //dt1 = (DataTable)grdTo.DataSource;
-                        //dt1.PrimaryKey = new DataColumn[] { dt1.Columns["STT_CN"] };
-                        //int index = dt1.Rows.IndexOf(dt1.Rows.Find(dr["STT_CN"]));
-                        //DataRow dr1 = dt1.Rows[index];
-                        //dr1.SetColumnError("CDL", "Error");
+                        DataTable dt1 = new DataTable();
+                        dt1 = (DataTable)grdCD.DataSource;
+                        DataRow dr1 = (dt1.AsEnumerable().Where(x => x.Field<Int64>("ID_CD").Equals(Convert.ToInt64(dr["ID_CD"])) && Convert.ToInt64(x["ID_CHUYEN_SD"]) == Convert.ToInt64(dr["ID_CHUYEN_SD"]) && Convert.ToInt64(x["ID_ORD"]) == Convert.ToInt64(dr["ID_ORD"]))).ToList<DataRow>()[0];
+                        dr1.SetColumnError("TEN_CD", "Error");
 
                         DataTable dt2 = new DataTable();
                         dt2 = (DataTable)grdPCD.DataSource;
@@ -1118,12 +1134,12 @@ namespace Vs.Payroll
 
         private void searchControl2_KeyDown(object sender, KeyEventArgs e)
         {
-            //if (e.KeyCode == Keys.Enter)
-            //{
-            //    grvCN.Focus();
-            //    grvCN.FocusedColumn = grvCN.Columns["MS_CN"];
-            //    grvCN.FocusedRowHandle = DevExpress.XtraGrid.GridControl.NewItemRowHandle;
-            //}
+            if (e.KeyCode == Keys.Enter)
+            {
+                grvCN.Focus();
+                grvCN.FocusedColumn = grvCN.Columns["MS_CN"];
+                grvCN.FocusedRowHandle = DevExpress.XtraGrid.GridControl.NewItemRowHandle;
+            }
         }
         private void LoadCboXN()
         {
@@ -1412,6 +1428,8 @@ namespace Vs.Payroll
                 {
                     grvPCD_FocusedRowChanged(null, null);
                 }
+
+                //grvCD_FocusedRowChanged(null, null);
             }
             catch (Exception ex)
             {

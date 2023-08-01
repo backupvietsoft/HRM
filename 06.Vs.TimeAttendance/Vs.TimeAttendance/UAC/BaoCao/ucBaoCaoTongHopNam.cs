@@ -2788,7 +2788,7 @@ namespace Vs.TimeAttendance
                 Excel.Worksheet oSheet;
                 this.Cursor = Cursors.WaitCursor;
                 oApp = new Microsoft.Office.Interop.Excel.Application();
-                oApp.Visible = true;
+                oApp.Visible = false;
                 Commons.Modules.ObjSystems.ShowWaitForm(this);
                 oBook = oApp.Workbooks.Add();
                 oSheet = (Excel.Worksheet)oBook.ActiveSheet;
@@ -2916,10 +2916,28 @@ namespace Vs.TimeAttendance
                     row2_TieuDeCot_BaoCao.WrapText = true;
 
 
+                    oCol++;
+                    row2_TieuDeCot_BaoCao = oSheet.Range[oSheet.Cells[oRow + 1, oCol], oSheet.Cells[oRow + 1, oCol]];
+                    row2_TieuDeCot_BaoCao.Value2 = "Nghỉ khám thai";
+                    row2_TieuDeCot_BaoCao.ColumnWidth = 6;
+                    row2_TieuDeCot_BaoCao.WrapText = true;
 
                     oCol++;
                     row2_TieuDeCot_BaoCao = oSheet.Range[oSheet.Cells[oRow + 1, oCol], oSheet.Cells[oRow + 1, oCol]];
-                    row2_TieuDeCot_BaoCao.Value2 = "Nghỉ thai sản";
+                    row2_TieuDeCot_BaoCao.Value2 = "Nghỉ dưỡng sức";
+                    row2_TieuDeCot_BaoCao.ColumnWidth = 6.5;
+                    row2_TieuDeCot_BaoCao.WrapText = true;
+
+                    oCol++;
+                    row2_TieuDeCot_BaoCao = oSheet.Range[oSheet.Cells[oRow + 1, oCol], oSheet.Cells[oRow + 1, oCol]];
+                    row2_TieuDeCot_BaoCao.Value2 = "Nam nghỉ vợ sanh";
+                    row2_TieuDeCot_BaoCao.ColumnWidth = 6;
+                    row2_TieuDeCot_BaoCao.WrapText = true;
+
+
+                    oCol++;
+                    row2_TieuDeCot_BaoCao = oSheet.Range[oSheet.Cells[oRow + 1, oCol], oSheet.Cells[oRow + 1, oCol]];
+                    row2_TieuDeCot_BaoCao.Value2 = "Nghỉ thai sản + Sảy thai";
                     row2_TieuDeCot_BaoCao.ColumnWidth = 6;
                     row2_TieuDeCot_BaoCao.WrapText = true;
 
@@ -2930,6 +2948,12 @@ namespace Vs.TimeAttendance
                     row2_TieuDeCot_BaoCao.ColumnWidth = 6;
                     row2_TieuDeCot_BaoCao.WrapText = true;
 
+
+                    oCol++;
+                    row2_TieuDeCot_BaoCao = oSheet.Range[oSheet.Cells[oRow + 1, oCol], oSheet.Cells[oRow + 1, oCol]];
+                    row2_TieuDeCot_BaoCao.Value2 = "Tổng  nghỉ";
+                    row2_TieuDeCot_BaoCao.ColumnWidth = 6;
+                    row2_TieuDeCot_BaoCao.WrapText = true;
 
                     oCol++;
                     row2_TieuDeCot_BaoCao = oSheet.Range[oSheet.Cells[oRow, oCol], oSheet.Cells[oRow + 1, oCol]];
@@ -3054,15 +3078,15 @@ namespace Vs.TimeAttendance
                     for (int i = rowBD; i <= oRow; i++)
                     {
                         Microsoft.Office.Interop.Excel.FormatCondition condition;
-                        formatRangeTest = oSheet.Range[oSheet.Cells[i, 16], oSheet.Cells[i, 16]];
+                        formatRangeTest = oSheet.Range[oSheet.Cells[i, 19], oSheet.Cells[i, 19]];
                         if (formatRangeTest.Value2 == "NV")
                         {
                             formatRangeTest = oSheet.Range[oSheet.Cells[i, 2], oSheet.Cells[i, 2]];
                             formatRangeTest.Interior.Color = Color.FromArgb(255, 255, 0); // Đặt màu nền của ô B1 thành màu vàng
                         }
                     }
-                    formatRangeTest = oSheet.Range[oSheet.Cells[rowBD, 16], oSheet.Cells[oRow, 16]];
-                    formatRangeTest.Value2 = "";
+                    //formatRangeTest = oSheet.Range[oSheet.Cells[rowBD, 17], oSheet.Cells[oRow, 17]];
+                    //formatRangeTest.Value2 = "";
                     BorderAround(oSheet.Range[oSheet.Cells[rowBD - 2, 1], oSheet.Cells[oRow, lastColumn]]);
 
                     oRow = oRow + 4;
@@ -3543,7 +3567,7 @@ namespace Vs.TimeAttendance
                 }
 
                 formatRange = oSheet.Range[oSheet.Cells[9, dtBCCongNam.Columns["SO_TIEN_TRA"].Ordinal + 1], oSheet.Cells[9, dtBCCongNam.Columns["SO_TIEN_TRA"].Ordinal + 1]];
-                formatRange.Value2 = "=E9/208*8";
+                formatRange.Value2 = "=(F9/208)*8*U9";
                 formatRange1 = oSheet.Range[oSheet.Cells[9, dtBCCongNam.Columns["SO_TIEN_TRA"].Ordinal + 1], oSheet.Cells[rowCnt, dtBCCongNam.Columns["SO_TIEN_TRA"].Ordinal + 1]];
                 formatRange.AutoFill(formatRange1, Microsoft.Office.Interop.Excel.XlAutoFillType.xlFillCopy);
 
@@ -3577,6 +3601,21 @@ namespace Vs.TimeAttendance
                 formatRange.Font.Size = fontSizeNoiDung;
 
 
+                Microsoft.Office.Interop.Excel.Range formatRangeTest;
+
+                for (int j = 9; j <= rowCnt; j++)
+                {
+                    Microsoft.Office.Interop.Excel.FormatCondition condition;
+                    formatRangeTest = oSheet.Range[oSheet.Cells[j, lastColumn], oSheet.Cells[j, lastColumn]];
+                    if (formatRangeTest.Value2 == "NV")
+                    {
+                        formatRangeTest = oSheet.Range[oSheet.Cells[j, 2], oSheet.Cells[j, 2]];
+                        formatRangeTest.Interior.Color = Color.FromArgb(255, 255, 0); // Đặt màu nền của ô B1 thành màu vàng
+                    }
+                }
+
+                formatRangeTest = oSheet.Range[oSheet.Cells[9, lastColumn], oSheet.Cells[rowCnt, lastColumn]];
+                formatRangeTest.Value2 = "";
                 BorderAround(oSheet.Range[oSheet.Cells[6, 1], oSheet.Cells[rowCnt, lastColumn]]);
 
                 rowCnt++;

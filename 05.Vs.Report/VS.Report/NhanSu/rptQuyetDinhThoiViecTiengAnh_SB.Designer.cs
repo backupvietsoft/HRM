@@ -257,7 +257,7 @@
             this.xrLabel14.AllowMarkupText = true;
             this.xrLabel14.Dpi = 254F;
             this.xrLabel14.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "\'VND \' + [DATA].[HS_LUONG]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "\'VND \' + FormatString(\'{0:#,#}\',[DATA].[HS_LUONG])\n")});
             this.xrLabel14.Font = new DevExpress.Drawing.DXFont("Times New Roman", 11.25F, DevExpress.Drawing.DXFontStyle.Regular, DevExpress.Drawing.DXGraphicsUnit.Point, new DevExpress.Drawing.DXFontAdditionalProperty[] {
             new DevExpress.Drawing.DXFontAdditionalProperty("GdiCharSet", ((byte)(0)))});
             this.xrLabel14.LocationFloat = new DevExpress.Utils.PointFloat(725.2851F, 1276.888F);
@@ -490,14 +490,13 @@
             this.lbNgay.AutoWidth = true;
             this.lbNgay.Dpi = 254F;
             this.lbNgay.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "\'Ho Chi Minh City\' + \', \' + GetDay([DATA].[NGAY_KY]) + \' \' + GetMonth([DATA].[NGA" +
-                    "Y_KY])  + \' \' + GetYear([DATA].[NGAY_KY])")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "\'Ho Chi Minh City\' + \', \' + FormatString(\'{0:d MMMM, yyyy}\', [DATA].[NGAY_KY])")});
             this.lbNgay.Font = new DevExpress.Drawing.DXFont("Times New Roman", 11.25F, DevExpress.Drawing.DXFontStyle.Italic);
             this.lbNgay.LocationFloat = new DevExpress.Utils.PointFloat(875.98F, 198.42F);
             this.lbNgay.Multiline = true;
             this.lbNgay.Name = "lbNgay";
             this.lbNgay.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
-            this.lbNgay.SizeF = new System.Drawing.SizeF(846.0208F, 59.41673F);
+            this.lbNgay.SizeF = new System.Drawing.SizeF(842.3369F, 59.41672F);
             this.lbNgay.StylePriority.UseFont = false;
             this.lbNgay.StylePriority.UseTextAlignment = false;
             this.lbNgay.Text = "Tiền Giang , Ngày     Tháng    Năm";

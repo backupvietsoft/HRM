@@ -31,6 +31,8 @@ namespace Vs.TimeAttendance
             }
         }
         public Int64 ID_DV = -1;
+        public Int64 ID_XN = -1;
+        public Int64 ID_TO = -1;
         string sBT = "tabKeHoachDiCa" + Commons.Modules.ModuleName;
         public ucVachTheLoi()
         {
@@ -66,21 +68,23 @@ namespace Vs.TimeAttendance
                 Commons.Modules.ObjSystems.LoadCboTo(cboDV, cboXN, cboTo);
                 Commons.Modules.ObjSystems.MLoadSearchLookUpEdit(cboID_XNG, Commons.Modules.ObjSystems.DataXacNhanGio(false), "ID_XNG", "TEN_XNG", "", true, true);
                 cboID_XNG.EditValue = -99;
-                LoadGrdCongNhan();
-                Commons.Modules.sLoad = "";
-
 
                 if (Commons.Modules.bolLinkCC)
                 {
                     cboDV.EditValue = ID_DV;
+                    cboXN.EditValue = ID_XN;
+                    cboTo.EditValue = ID_TO;
+                    LoadGrdCongNhan();
                     Commons.Modules.ObjSystems.MLoadLookUpEdit(cboMSCN, Commons.Modules.ObjSystems.ConvertDatatable(grdCongNhan), "ID_CN", "MS_CN", Commons.Modules.ObjLanguages.GetLanguage(this.Name, "MS_CN"));
                     enableButon(false);
+                    grvCongNhan_FocusedRowChanged(null, null);
                 }
                 else
                 {
+                    LoadGrdCongNhan();
                     enableButon(true);
                 }
-
+                Commons.Modules.sLoad = "";
                 searchControl1.Client = grdCongNhan;
                 Commons.Modules.ObjSystems.SetPhanQuyen(windowsUIButton);
             }
@@ -157,16 +161,21 @@ namespace Vs.TimeAttendance
                     {
                         try
                         {
-                            Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, "tabTMPVachTheLoi" + Commons.Modules.UserName, Commons.Modules.ObjSystems.ConvertDatatable(grvCongNhan), "");
-                            try { SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spSaveVachTheLoi", datNgayChamCong.DateTime.Date, "tabTMPVachTheLoi" + Commons.Modules.UserName); } catch (Exception EX) { }
-                            Commons.Modules.ObjSystems.XoaTable("tabTMPVachTheLoi" + Commons.Modules.UserName);
+                            Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, "tabTMPVachTheLoi" + Commons.Modules.iIDUser, Commons.Modules.ObjSystems.ConvertDatatable(grvCongNhan), "");
+                            try { SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, "spSaveVachTheLoi", datNgayChamCong.DateTime.Date, "tabTMPVachTheLoi" + Commons.Modules.iIDUser, Commons.Modules.UserName); }
+                            catch (Exception EX)
+                            {
+                                Commons.Modules.ObjSystems.MsgError(EX.Message);
+                            }
+                            Commons.Modules.ObjSystems.XoaTable("tabTMPVachTheLoi" + Commons.Modules.iIDUser);
                             enableButon(true);
                             LoadGrdCongNhan();
                             Commons.Modules.ObjSystems.DeleteAddRow(grvCongNhan);
                         }
                         catch (Exception ex)
                         {
-                            Commons.Modules.ObjSystems.XoaTable("tabTMPVachTheLoi" + Commons.Modules.UserName);
+                            Commons.Modules.ObjSystems.MsgError(ex.Message);
+                            Commons.Modules.ObjSystems.XoaTable("tabTMPVachTheLoi" + Commons.Modules.iIDUser);
                         }
                         break;
                     }
@@ -444,7 +453,7 @@ namespace Vs.TimeAttendance
                 windowsUIButton.Buttons[2].Properties.Visible = visible;
                 windowsUIButton.Buttons[3].Properties.Visible = visible;
                 windowsUIButton.Buttons[4].Properties.Visible = visible;
-                windowsUIButton.Buttons[5].Properties.Visible = visible;
+                windowsUIButton.Buttons[5].Properties.Visible = Commons.Modules.bolLinkCC ? false : visible;
                 windowsUIButton.Buttons[6].Properties.Visible = !visible;
                 windowsUIButton.Buttons[7].Properties.Visible = !visible;
                 navigationFrame1.SelectedPageIndex = visible == true ? 0 : 1;
@@ -492,22 +501,20 @@ namespace Vs.TimeAttendance
 
                 DataTable dt = new DataTable();
                 dt = (DataTable)grdCongNhan.DataSource;
-                dt.AsEnumerable().ToList<DataRow>().ForEach(r => r["NGAY_DEN"] = NgayDen.Date);
-                dt.AsEnumerable().ToList<DataRow>().ForEach(r => r["NGAY_VE"] = NgayVe.Date);
-                dt.AsEnumerable().ToList<DataRow>().ForEach(r => r["GIO_DEN"] = NgayDen.TimeOfDay.ToString());
-                dt.AsEnumerable().ToList<DataRow>().ForEach(r => r["GIO_VE"] = NgayVe.TimeOfDay.ToString());
-                dt.AsEnumerable().ToList<DataRow>().ForEach(r => r["ID_XNG"] = cboID_XNG.EditValue);
-                dt.AcceptChanges();
+                string sBT = "sBTDLQT" + Commons.Modules.iIDUser;
+                Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBT, dt, "");
+                dt = new DataTable();
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spUpdateGioRanVachTheLoi", Commons.Modules.UserName, Commons.Modules.TypeLanguage, NgayDen, NgayVe, cboID_XNG.EditValue, sBT));
+                grdCongNhan.DataSource = dt;
+
+                //dt.AsEnumerable().ToList<DataRow>().ForEach(r => r["NGAY_DEN"] = NgayDen.Date);
+                //dt.AsEnumerable().ToList<DataRow>().ForEach(r => r["NGAY_VE"] = NgayVe.Date);
+                //dt.AsEnumerable().ToList<DataRow>().ForEach(r => r["GIO_DEN"] = NgayDen.TimeOfDay.ToString());
+                //dt.AsEnumerable().ToList<DataRow>().ForEach(r => r["GIO_VE"] = NgayVe.TimeOfDay.ToString());
+                //dt.AsEnumerable().ToList<DataRow>().ForEach(r => r["ID_XNG"] = cboID_XNG.EditValue);
+                //dt.AcceptChanges();
 
                 Commons.Modules.ObjSystems.Alert(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgLuuThanhCong"), Commons.Form_Alert.enmType.Success);
-                //for (int i = 0; i <= grvCongNhan.RowCount; i++)
-                //{
-                //    grvCongNhan.SetRowCellValue(i, "NGAY_DEN", NgayDen.Date);
-                //    grvCongNhan.SetRowCellValue(i, "NGAY_VE", NgayVe.Date);
-                //    grvCongNhan.SetRowCellValue(i, "GIO_DEN", NgayDen.TimeOfDay.ToString());
-                //    grvCongNhan.SetRowCellValue(i, "GIO_VE", NgayVe.TimeOfDay.ToString());
-                //    grvCongNhan.SetRowCellValue(i, "ID_XNG", cboID_XNG.EditValue);
-                //}
             }
             catch (Exception ex)
             {

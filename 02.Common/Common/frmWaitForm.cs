@@ -8,7 +8,7 @@ namespace Commons
         public frmWaitForm()
         {
             InitializeComponent();
-            this.progressPanel1.AutoHeight = true;
+            //this.progressPanel1.AutoHeight = true;
         }
 
         #region Overrides

@@ -47,7 +47,6 @@ namespace Vs.TimeAttendance.Form
 
         }
 
-
         private void windowsUIButton_ButtonClick(object sender, ButtonEventArgs e)
         {
             WindowsUIButton btn = e.Button as WindowsUIButton;
@@ -77,7 +76,7 @@ namespace Vs.TimeAttendance.Form
                         }
                         catch (Exception ex)
                         {
-                            Commons.Modules.ObjSystems.MsgError(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgCapNhatKhongThanhCong")); return;
+                            Commons.Modules.ObjSystems.MsgError(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgCapNhatKhongThanhCong") + " " + ex.Message); return;
                         }
                         this.Close();
                         break;

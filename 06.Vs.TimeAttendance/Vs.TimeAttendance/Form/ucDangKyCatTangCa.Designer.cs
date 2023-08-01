@@ -284,6 +284,7 @@
             this.grvCatTC.GridControl = this.grdCatTC;
             this.grvCatTC.Name = "grvCatTC";
             this.grvCatTC.OptionsView.ShowGroupPanel = false;
+            this.grvCatTC.RowStyle += new DevExpress.XtraGrid.Views.Grid.RowStyleEventHandler(this.grvCatTC_RowStyle);
             this.grvCatTC.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.grvCatTC_FocusedRowChanged);
             this.grvCatTC.FocusedColumnChanged += new DevExpress.XtraGrid.Views.Base.FocusedColumnChangedEventHandler(this.grvCatTC_FocusedColumnChanged);
             this.grvCatTC.CellValueChanged += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.grvCatTC_CellValueChanged);

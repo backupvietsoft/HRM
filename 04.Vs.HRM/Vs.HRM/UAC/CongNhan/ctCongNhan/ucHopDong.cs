@@ -644,7 +644,7 @@ namespace Vs.HRM
                     case "luu":
                         {
                             int errCount = 0;
-                            if (Convert.ToInt32(ID_LHDLDLookUpEdit.EditValue) != 1)
+                            if ((Commons.Modules.KyHieuDV != "MT" && Convert.ToInt32(ID_LHDLDLookUpEdit.EditValue) != 1) || (Commons.Modules.KyHieuDV == "MT" && Convert.ToInt32(ID_LHDLDLookUpEdit.EditValue) != 2 ))
                             {
                                 if (!dxValidationProvider1.Validate()) return;
                             }
@@ -669,7 +669,7 @@ namespace Vs.HRM
                                 NGAY_BAT_DAU_HDDateEdit.ErrorText = Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgKhongDuocTrong");
                                 errCount++;
                             }
-                            if (NGAY_HET_HDDateEdit.Text == "" && Convert.ToInt32(ID_LHDLDLookUpEdit.EditValue) != 1)
+                            if ((NGAY_HET_HDDateEdit.Text == "" && Convert.ToInt32(ID_LHDLDLookUpEdit.EditValue) != 1 && Commons.Modules.KyHieuDV != "MT") || (NGAY_HET_HDDateEdit.Text == "" && Convert.ToInt32(ID_LHDLDLookUpEdit.EditValue) != 2 && Commons.Modules.KyHieuDV == "MT"))
                             {
                                 NGAY_HET_HDDateEdit.ErrorText = Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgKhongDuocTrong");
                                 errCount++;
@@ -714,7 +714,7 @@ namespace Vs.HRM
                                 MUC_LUONG_CHINHTextEdit.ErrorText = Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgLuongKhongDuocNhoHon0");
                                 errCount++;
                             }
-                            if (getKyHieuHD() != "KXDTH")
+                            if (getKyHieuHD() != "KXDTH" && Commons.Modules.KyHieuDV != "NB")
                             {
                                 if (NGAY_BAT_DAU_HDDateEdit.Text == "" || NGAY_HET_HDDateEdit.Text == "")
                                 {
@@ -1027,7 +1027,7 @@ namespace Vs.HRM
                 Int64 iID_DV = -1;
                 try
                 {
-                    string sSQL = "SELECT T1.ID_DV FROM dbo.CONG_NHAN CN INNER JOIN dbo.MGetToUser(" + Commons.Modules.UserName + ",0) T1 ON T1.ID_TO = CN.ID_TO WHERE CN.ID_CN = " + Commons.Modules.iCongNhan;
+                    string sSQL = "SELECT T1.ID_DV FROM dbo.CONG_NHAN CN INNER JOIN dbo.MGetToUser('" + Commons.Modules.UserName + "',0) T1 ON T1.ID_TO = CN.ID_TO WHERE CN.ID_CN = " + Commons.Modules.iCongNhan;
                     iID_DV = Convert.ToInt64(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, sSQL));
                 }
                 catch { }
@@ -1079,7 +1079,7 @@ namespace Vs.HRM
                 Int64 iID_DV = -1;
                 try
                 {
-                    string sSQL = "SELECT T1.ID_DV FROM dbo.CONG_NHAN CN INNER JOIN dbo.MGetToUser(" + Commons.Modules.UserName + ",0) T1 ON T1.ID_TO = CN.ID_TO WHERE CN.ID_CN = " + Commons.Modules.iCongNhan;
+                    string sSQL = "SELECT T1.ID_DV FROM dbo.CONG_NHAN CN INNER JOIN dbo.MGetToUser('" + Commons.Modules.UserName + "',0) T1 ON T1.ID_TO = CN.ID_TO WHERE CN.ID_CN = " + Commons.Modules.iCongNhan;
                     iID_DV = Convert.ToInt64(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, sSQL));
                 }
                 catch { }

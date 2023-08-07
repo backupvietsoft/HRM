@@ -10,13 +10,20 @@ namespace Vs.Report
 {
     public partial class rptBangCCTheoGD : DevExpress.XtraReports.UI.XtraReport
     {
-        public rptBangCCTheoGD(DateTime tngay,DateTime dngay, DateTime ngayin)
+        public rptBangCCTheoGD(DateTime tngay,DateTime dngay, DateTime ngayin, int ID_DV)
         {
 
 
             InitializeComponent();
             Commons.Modules.ObjSystems.ThayDoiNN(this);
-            xrSubreport1.ReportSource = new SubReportHeader();
+            if (Commons.Modules.loadHeader == 1)
+            {
+                xrSubreport1.ReportSource = new SubReportHeader_DV(ID_DV);
+            }
+            else
+            {
+                xrSubreport1.ReportSource = new SubReportHeader();
+            }
 
             DataTable dtNgu = new DataTable();
             dtNgu.Load(Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT KEYWORD, CASE " + Commons.Modules.TypeLanguage + " WHEN 0 THEN VIETNAM WHEN 1 THEN ENGLISH ELSE CHINESE END AS NN  FROM LANGUAGES WHERE FORM = N'NgayThangNam' "));

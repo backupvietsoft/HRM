@@ -906,6 +906,7 @@ namespace Vs.TimeAttendance
                             else if (Commons.Modules.KyHieuDV == "NC")
                             {
                                 //connect = "Provider = Microsoft.Jet.OLEDB.4.0; Data Source = D:\\HRM_VS\\NamCo\\2023" + @"\" + cboDataLink.Text + "; Persist Security Info = False; Jet OLEDB:Database Password = 12112009; Jet OLEDB:Compact Without Replica Repair = True";
+
                                 connect = "Provider = Microsoft.Jet.OLEDB.4.0; Data Source = " + cboDataLink.Properties.GetDataSourceValue("DUONG_DAN_DATA_LINK", cboDataLink.ItemIndex).ToString().Trim() + "; Persist Security Info = False; Jet OLEDB:Database Password = 12112009; Jet OLEDB:Compact Without Replica Repair = True";
                             }
                             else

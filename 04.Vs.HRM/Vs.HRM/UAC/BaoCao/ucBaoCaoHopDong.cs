@@ -559,15 +559,15 @@ namespace Vs.HRM
                 int iRowBorder = 0;
                 WidthColumnsName = new List<Object>() { "STT", 5 };
                 WidthColumns.Add(WidthColumnsName);
-                WidthColumnsName = new List<Object>() { "SO_HDLD", 9 };
+                WidthColumnsName = new List<Object>() { "SO_HDLD", 15 };
                 WidthColumns.Add(WidthColumnsName);
-                WidthColumnsName = new List<Object>() { "MS_CN", 5, "0" };
+                WidthColumnsName = new List<Object>() { "MS_CN", 8, "0"  };
                 WidthColumns.Add(WidthColumnsName);
                 WidthColumnsName = new List<Object>() { "TEN_TO", 10 };
                 WidthColumns.Add(WidthColumnsName);
                 WidthColumnsName = new List<Object>() { "HO_TEN", 18 };
                 WidthColumns.Add(WidthColumnsName);
-                WidthColumnsName = new List<Object>() { "NGAY_SINH", 10 };
+                WidthColumnsName = new List<Object>() { "NGAY_SINH", 10, "dd/MM/yyyy" };
                 WidthColumns.Add(WidthColumnsName);
                 WidthColumnsName = new List<Object>() { "DIA_CHI_THUONG_TRU", 27 };
                 WidthColumns.Add(WidthColumnsName);
@@ -583,14 +583,12 @@ namespace Vs.HRM
                 WidthColumns.Add(WidthColumnsName);
                 WidthColumnsName = new List<Object>() { "TEN_LCV", 32 };
                 WidthColumns.Add(WidthColumnsName);
-                WidthColumnsName = new List<Object>() { "MUC_LUONG_CHINH", 11, Commons.Modules.sSoLeDG };
+                WidthColumnsName = new List<Object>() { "MUC_LUONG_CHINH", 11, Commons.Modules.sSoLeTT };
                 WidthColumns.Add(WidthColumnsName);
                 WidthColumnsName = new List<Object>() { "TEN_LHDLD", 6.5 };
                 WidthColumns.Add(WidthColumnsName);
-
                 ws1.Cells[iDong, 1].LoadFromDataTable(dt, true);
                 Commons.Modules.MExcel.MFormatExcel(ws1, dt, iDong, "sBCDanhSachKyHopDongLaoDong", WidthColumns, true, true, true);
-
                 iDong = iDong + dtTMP.Rows.Count + 1;
                 iRowBorder = iRowBorder + dtTMP.Rows.Count + 7;
                 var border = ws1.Cells[9, 1, iRowBorder + 3, dt.Columns.Count - 1].Style.Border;
@@ -598,6 +596,8 @@ namespace Vs.HRM
                 border.Left.Style = ExcelBorderStyle.Thin;
                 border.Bottom.Style = ExcelBorderStyle.Thin;
                 border.Right.Style = ExcelBorderStyle.Thin;
+
+                ws1.Cells[8, 3, 8 +  dt.Rows.Count, 3].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
 
                 ws1.Cells[1, 1, iRowBorder + dt.Rows.Count + 3, dt.Columns.Count].Style.Font.Name = "Times New Roman";
                 ws1.Cells[7, 1, iRowBorder + dt.Rows.Count + 3, dt.Columns.Count].Style.Font.Size = 10;
@@ -681,14 +681,14 @@ namespace Vs.HRM
                 WidthColumnsName = new List<Object>() { "STT", 4.5 };
                 WidthColumns.Add(WidthColumnsName);
                 WidthColumnsName = new List<Object>() { "SO_HDLD", 10 };
+                WidthColumns.Add(WidthColumnsName); 
+                WidthColumnsName = new List<Object>() { "MS_CN", 6.5, "0"};
                 WidthColumns.Add(WidthColumnsName);
-                WidthColumnsName = new List<Object>() { "MS_CN", 6.5,"0" };
-                WidthColumns.Add(WidthColumnsName);
-                WidthColumnsName = new List<Object>() { "TEN_TO", 10 };
+                WidthColumnsName = new List<Object>() { "TEN_TO", 11 };
                 WidthColumns.Add(WidthColumnsName);
                 WidthColumnsName = new List<Object>() { "HO_TEN", 20 };
                 WidthColumns.Add(WidthColumnsName);
-                WidthColumnsName = new List<Object>() { "NGAY_SINH", 10 };
+                WidthColumnsName = new List<Object>() { "NGAY_SINH", 10, "dd/MM/yyyy" };
                 WidthColumns.Add(WidthColumnsName);
                 WidthColumnsName = new List<Object>() { "DIA_CHI_THUONG_TRU", 29 };
                 WidthColumns.Add(WidthColumnsName);
@@ -708,6 +708,9 @@ namespace Vs.HRM
                 WidthColumns.Add(WidthColumnsName);
                 WidthColumnsName = new List<Object>() { "TEN_LHDLD", 10 };
                 WidthColumns.Add(WidthColumnsName);
+
+                ws1.Cells[8, 3, 8 + dt.Rows.Count, 3].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+
 
                 ws1.Cells[iDong, 1].LoadFromDataTable(dt, true);
                 Commons.Modules.MExcel.MFormatExcel(ws1, dt, iDong, "sBCDanhSachCongNhanHetHanHD", WidthColumns, true, true, true);

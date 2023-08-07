@@ -5,19 +5,22 @@ using System.ComponentModel;
 using DevExpress.XtraReports.UI;
 using System.Data;
 using Commons;
+using OfficeOpenXml.FormulaParsing.Excel.Functions.DateTime;
 
 namespace Vs.Report
 {
     public partial class rptBCChenhLechTangCa : DevExpress.XtraReports.UI.XtraReport
     {
+        private DateTime tngay;
         public rptBCChenhLechTangCa(string TieuDe, DateTime ngayin, DateTime TNgay, DateTime DNgay, int iddv)
         {
             InitializeComponent();
+            tngay = TNgay;
             DataTable dtNgu = new DataTable();
             dtNgu.Load(Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT KEYWORD, CASE " + Commons.Modules.TypeLanguage + " WHEN 0 THEN VIETNAM WHEN 1 THEN ENGLISH ELSE CHINESE END AS NN  FROM LANGUAGES WHERE FORM = N'NgayThangNam' "));
 
             xrSubreport1.ReportSource = new SubReportHeader(iddv);
-            
+
             string Ngay = "0" + DateTime.Now.Day;
             string Thang = "0" + DateTime.Now.Month;
             string Nam = "00" + DateTime.Now.Year;
@@ -38,12 +41,23 @@ namespace Vs.Report
 
         private void xrTable1_BeforePrint(object sender, CancelEventArgs e)
         {
-           
+
         }
 
         private void rptBCChenhLechTangCa_BeforePrint(object sender, CancelEventArgs e)
         {
-
+            for (int i = 8; i <= 39; i++)
+            {
+                try
+                {
+                    string sDate = xrTableRow1.Cells[i].Text.ToString() + "/" + tngay.ToString("MM/yyyy");
+                    if (Convert.ToDateTime(sDate).DayOfWeek == DayOfWeek.Sunday)
+                    {
+                        xrTableRow1.Cells[i].BackColor = Color.Orange;
+                    }
+                }
+                catch { }
+            }
         }
     }
 }

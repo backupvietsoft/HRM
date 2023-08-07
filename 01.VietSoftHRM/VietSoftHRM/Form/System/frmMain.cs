@@ -149,6 +149,11 @@ namespace VietSoftHRM
         }
         private void tileBar_SelectedItemChanged(object sender, TileItemEventArgs e)
         {
+            if (Commons.Modules.bChangeForm == true)
+            {
+                Commons.Modules.ObjSystems.MsgWarning("Dữ liệu chưa được lưu !");
+                return;
+            }
 
             switch (Convert.ToInt32(e.Item.Tag))
             {
@@ -455,6 +460,40 @@ namespace VietSoftHRM
                     {
                         frmNotification frm = new frmNotification();
                         frm.ShowDialog();
+                        return true;
+                    }
+                case (Keys.Control | Keys.K):
+                    {
+                        if (Commons.Modules.chamCongK)
+                        {
+                            if(Commons.Modules.ObjSystems.MsgQuestion(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "lblBanCoMuonChuyenSangChinh")) == 1)
+                            {
+                                Commons.Modules.chamCongK = false;
+                                Commons.Modules.ChangLanguage = true;
+                                navigationFrame.SelectedPage = navigationPageHome;
+                                btnUserName.Text = Commons.Modules.UserName;
+                            }
+                        }
+                        else
+                        {
+                            if (Commons.Modules.ObjSystems.MsgQuestion(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "lblBanCoMuonChuyenSangKhach")) == 1)
+                            {
+                                string strSQL = "SELECT ISNULL(USER_KHACH,0) USER_KHACH FROM dbo.USERS WHERE [USER_NAME] = '" + Commons.Modules.UserName + "'";
+
+                                if (Convert.ToBoolean(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, strSQL)) == true)
+                                {
+                                    Commons.Modules.chamCongK = true;
+                                    Commons.Modules.ChangLanguage = true;
+                                    navigationFrame.SelectedPage = navigationPageHome;
+                                    btnUserName.Text = Commons.Modules.UserName + "K";
+                                }
+                                else
+                                {
+                                    Commons.Modules.ObjSystems.MsgWarning(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "lblUserKhongPhaiUserK"));
+                                }
+                            }
+                        }
+                        
                         return true;
                     }
                 default: return base.ProcessCmdKey(ref msg, keyData);

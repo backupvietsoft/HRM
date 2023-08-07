@@ -11,7 +11,6 @@ using NPOI.HSSF.UserModel;
 using NPOI.XSSF.UserModel;
 using DevExpress.XtraGrid.Views.Grid;
 
-
 public class MExcel
 {
     //private string sFile = "";
@@ -640,6 +639,8 @@ public class MExcel
         {
         }
     }
+
+   
 
     public void DinhDang(Excel.Worksheet MWsheet, string NoiDung, int Dong, int Cot, String MNumberFormat, float MFontSize, bool MFontBold, Microsoft.Office.Interop.Excel.XlHAlign MHAlign, Microsoft.Office.Interop.Excel.XlVAlign MVAlign, bool MMerge, int MDongMerge, int MCotMerge, bool MFontUnderline, bool MFontItalic)
     {

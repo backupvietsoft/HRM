@@ -580,6 +580,7 @@ namespace Vs.HRM
         private void grvDSCongNhan_RowStyle(object sender, RowStyleEventArgs e)
         {
             GridView view = sender as GridView;
+            grvDSCongNhan.ExpandAllGroups();
             try
             {
                 if (view.IsRowVisible(e.RowHandle - 1) != RowVisibleState.Visible && view.IsRowVisible(e.RowHandle + 1) != RowVisibleState.Visible) return;
@@ -791,11 +792,14 @@ namespace Vs.HRM
                         {
                             dtTmp.DefaultView.RowFilter = "";
                         }
-                        grvDSCongNhan.ExpandAllGroups();
+                      grvDSCongNhan.ExpandAllGroups();
+
                         break;
                     }
                 default:
                     {
+                        grvDSCongNhan.ExpandAllGroups();
+
                         break;
                     }
             }

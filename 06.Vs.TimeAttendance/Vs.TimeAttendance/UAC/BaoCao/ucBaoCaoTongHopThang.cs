@@ -1,12 +1,16 @@
-﻿using DevExpress.XtraBars.Docking2010;
+﻿using DevExpress.DataAccess.ConnectionParameters;
+using DevExpress.Export;
+using DevExpress.XtraBars.Docking2010;
 using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Controls;
+using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraPrinting;
 using DevExpress.XtraRichEdit.Commands.Internal;
 using DevExpress.XtraSpreadsheet.Model;
 using Microsoft.ApplicationBlocks.Data;
 using Microsoft.Office.Interop.Excel;
+using OfficeOpenXml.Style;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -17,6 +21,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Vs.Payroll;
 using Vs.Report;
+using static DevExpress.XtraPrinting.Native.ExportOptionsPropertiesNames;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using DataTable = System.Data.DataTable;
 
@@ -373,19 +378,27 @@ namespace Vs.TimeAttendance
 
                 excelApplication.Visible = false;
                 grvData.ActiveFilter.Clear();
-                XlsxExportOptions xlsxExportOptions = new XlsxExportOptions()
+
+
+                XlsxExportOptionsEx xlsxExportOptions = new XlsxExportOptionsEx()
                 {
-                    ExportMode = XlsxExportMode.SingleFile,
                     ShowGridLines = true,
+                    //ExportMode = XlsxExportMode.SingleFile,
                     TextExportMode = TextExportMode.Value,
-                    FitToPrintedPageHeight = true
+                    FitToPrintedPageHeight = true,
+                    ExportType = ExportType.WYSIWYG
                 };
+
                 grvData.ExportToXlsx(sPath, xlsxExportOptions);
+
+
+
                 System.Globalization.CultureInfo oldCultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture;
                 System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
                 Microsoft.Office.Interop.Excel.Workbooks excelWorkbooks = excelApplication.Workbooks;
                 Microsoft.Office.Interop.Excel.Workbook excelWorkbook = excelWorkbooks.Open(sPath, 0, false, 5, "", "", false, Microsoft.Office.Interop.Excel.XlPlatform.xlWindows, "", false, false, 0, true);
                 Excel.Worksheet excelWorkSheet = (Excel.Worksheet)excelWorkbook.Sheets[1];
+
 
                 excelApplication.Cells.Borders.LineStyle = 0;
                 excelApplication.Cells.Font.Name = "Times New Roman";
@@ -420,6 +433,11 @@ namespace Vs.TimeAttendance
                 Commons.Modules.MExcel.DinhDang(excelWorkSheet, "Tăng ca(H)", DONG + 1, TCot - 10, "@", 10, true, XlHAlign.xlHAlignCenter, XlVAlign.xlVAlignCenter, true, DONG + 1, TCot - 7, 17);
 
                 string[] BP = tbDLEX.AsEnumerable().Select(r => r.Field<string>("BO_PHAN")).Distinct().ToArray();
+
+
+                // tô màu lại tiêu đề
+                title = Commons.Modules.MExcel.GetRange(excelWorkSheet, 6, 1, 8, TCot);
+                title.Interior.Color = System.Drawing.Color.FromArgb(255, 255, 255);
 
                 for (int i = 1; i <= TCot; i++)
                 {
@@ -507,6 +525,7 @@ namespace Vs.TimeAttendance
                     //title.Borders.LineStyle = 1;
                     //Commons.Modules.MExcel.MExportExcel(dtTMP, excelWorkSheet, title, false);
 
+
                     DONG = DONG + dtTMP.Rows.Count * 6;
                     Commons.Modules.MExcel.ThemDong(excelWorkSheet, Microsoft.Office.Interop.Excel.XlInsertShiftDirection.xlShiftDown, 1, DONG);
                     //vẻ dòng cuối
@@ -528,9 +547,9 @@ namespace Vs.TimeAttendance
 
 
 
-                Commons.Modules.MExcel.ColumnWidth(excelWorkSheet, 2.71, "@", true, 9, 1, DONG, 1);
+                Commons.Modules.MExcel.ColumnWidth(excelWorkSheet, 2.71, "0", true, 9, 1, DONG, 1);
                 Commons.Modules.MExcel.ColumnWidth(excelWorkSheet, 17.71, "@", true, 9, 2, DONG, 2);
-                Commons.Modules.MExcel.ColumnWidth(excelWorkSheet, 6, "@", true, 9, 3, DONG, 3);
+                Commons.Modules.MExcel.ColumnWidth(excelWorkSheet, 6, "0", true, 9, 3, DONG, 3);
                 Commons.Modules.MExcel.ColumnWidth(excelWorkSheet, 10.71, "@", true, 9, 4, DONG, 4);
                 Commons.Modules.MExcel.ColumnWidth(excelWorkSheet, 9.14, "dd/MM/yyyy", true, 9, 5, DONG, 5);
 
@@ -538,7 +557,7 @@ namespace Vs.TimeAttendance
                 // chiều cao row 8 
                 excelWorkSheet.Cells[8, 1].RowHeight = 35;
 
-                Commons.Modules.MExcel.ColumnWidth(excelWorkSheet, 3.68, "@", true, 7, 6, 7, TCot - 19);
+                Commons.Modules.MExcel.ColumnWidth(excelWorkSheet, 4, "@", true, 7, 6, 7, TCot - 19);
 
                 Commons.Modules.MExcel.ColumnWidth(excelWorkSheet, 5.75, "#,##0.0;(#,##0.0); ; ", true, DONG - (tbDLEX.Rows.Count + BP.Where(x => x != null).Count()), TCot - 19, DONG, TCot - 3);
 
@@ -560,6 +579,41 @@ namespace Vs.TimeAttendance
                 title = Commons.Modules.MExcel.GetRange(excelWorkSheet, DONG - (tbDLEX.Rows.Count + BP.Where(x => x != null).Count() + 2), 1, DONG - 1, TCot + 1);
                 title.Borders[XlBordersIndex.xlInsideVertical].LineStyle = XlLineStyle.xlContinuous;
 
+                //DataTable dtData = new DataTable();
+                //dtData = (DataTable)grdData.DataSource;
+
+                //for (int i = 5; i <= 35; i++)
+                //{
+                //    for (int j = 0; j < dtData.Rows.Count; j++)
+                //    {
+                //        if (dtData.Rows[j][i].ToString().IndexOf('Z') != -1)
+                //        {
+                //            title = Commons.Modules.MExcel.GetRange(excelWorkSheet, j + 9, i + 1, j + 9, i + 1);
+                //            title.Interior.Color = System.Drawing.Color.Yellow;
+                //        }
+                //    }
+                //}
+
+
+                //for (int i = 6; i <= 36; i++)
+                //{
+                //    for (int j = 9; j < DONG - 1; j++)
+                //    {
+                //        title = Commons.Modules.MExcel.GetRange(excelWorkSheet, j, i, j, i);
+
+                //        if ((string.IsNullOrEmpty(Convert.ToString(title.Value2)) ? -1 : Convert.ToString(title.Value2).IndexOf('Z')) != -1)
+                //        {
+                //            title = Commons.Modules.MExcel.GetRange(excelWorkSheet, j, i, j, i);
+                //            title.Interior.Color = System.Drawing.Color.FromArgb(180, 180, 205);
+                //        }
+                //    }
+                //}
+
+               
+
+                title = Commons.Modules.MExcel.GetRange(excelWorkSheet, 9, 6, DONG, 36);
+                title.Replace("Z", "");
+                title.Style.Borders.Color = Color.Black;
                 //title = Commons.Modules.MExcel.GetRange(excelWorkSheet, DONG - (tbDLEX.Rows.Count + BP.Count() + 2), 1, DONG - 1, TCot);
                 //title.Borders.LineStyle = 1;
 
@@ -659,7 +713,6 @@ namespace Vs.TimeAttendance
                 Commons.Modules.MExcel.DinhDang(excelWorkSheet, "TRƯỞNG BỘ PHẬN", DONG, 23, "@", 13, true);
                 Commons.Modules.MExcel.DinhDang(excelWorkSheet, "QUẢN LÝ XƯỞNG", DONG, 41, "@", 13, true);
                 Commons.Modules.MExcel.DinhDang(excelWorkSheet, "BANG GIÁM ĐỐC", DONG, 48, "@", 13, true, XlHAlign.xlHAlignCenter, XlVAlign.xlVAlignCenter, true, DONG, TCot, 16);
-
 
                 this.Cursor = Cursors.Default;
                 excelWorkbook.Save();
@@ -5882,6 +5935,7 @@ namespace Vs.TimeAttendance
                 row5_TieuDe.Font.Name = fontName;
                 row5_TieuDe.Font.Bold = true;
                 row5_TieuDe.Value2 = "Stt";
+                row5_TieuDe.ColumnWidth = 4;
                 row5_TieuDe.Interior.Color = Color.FromArgb(198, 224, 180);
 
                 Microsoft.Office.Interop.Excel.Range row5_TieuDe1 = oSheet.Range[oSheet.Cells[4, 2], oSheet.Cells[5, 2]];
@@ -5892,6 +5946,7 @@ namespace Vs.TimeAttendance
                 row5_TieuDe1.Font.Bold = true;
                 row5_TieuDe1.Interior.Color = Color.FromArgb(198, 224, 180);
                 row5_TieuDe1.Value2 = "Mã số NV";
+                row5_TieuDe1.ColumnWidth = 9;
 
                 Microsoft.Office.Interop.Excel.Range row5_TieuDe2 = oSheet.Range[oSheet.Cells[4, 3], oSheet.Cells[5, 3]];
                 row5_TieuDe2.Merge();
@@ -5901,6 +5956,7 @@ namespace Vs.TimeAttendance
                 row5_TieuDe2.Font.Bold = true;
                 row5_TieuDe2.Interior.Color = Color.FromArgb(198, 224, 180);
                 row5_TieuDe2.Value2 = "Họ tên";
+                row5_TieuDe2.ColumnWidth = 25;
 
                 //Microsoft.Office.Interop.Excel.Range row5_TieuDe3 = oSheet.Range[oSheet.Cells[4, 4], oSheet.Cells[5, 4]];
                 //row5_TieuDe3.Merge();
@@ -5919,6 +5975,7 @@ namespace Vs.TimeAttendance
                 row5_TieuDe4.Font.Bold = true;
                 row5_TieuDe4.Interior.Color = Color.FromArgb(198, 224, 180);
                 row5_TieuDe4.Value2 = Commons.Modules.ObjLanguages.GetLanguage(this.Name, "lblTo");
+                row5_TieuDe4.ColumnWidth = 22.29;
 
                 Microsoft.Office.Interop.Excel.Range formatRange;
                 int col = 5;
@@ -5945,7 +6002,7 @@ namespace Vs.TimeAttendance
                                 //oSheet.Cells[5, col].Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
                                 //oSheet.Range[oSheet.Cells[5, col], oSheet.Cells[5, col]].Merge();
                                 oSheet.Range[oSheet.Cells[4, col], oSheet.Cells[5, col]].Merge();
-                                oSheet.Range[oSheet.Cells[4, col], oSheet.Cells[5, col]].ColumnWidth = 5;
+                                oSheet.Range[oSheet.Cells[4, col], oSheet.Cells[5, col]].ColumnWidth = 4.57;
                                 col = col + 1;
                                 break;
                             }
@@ -5961,7 +6018,7 @@ namespace Vs.TimeAttendance
 
                                 //oSheet.Range[oSheet.Cells[5, col], oSheet.Cells[5, col]].Merge();
                                 oSheet.Range[oSheet.Cells[4, col], oSheet.Cells[5, col]].Merge();
-                                oSheet.Range[oSheet.Cells[4, col], oSheet.Cells[5, col]].ColumnWidth = 5;
+                                oSheet.Range[oSheet.Cells[4, col], oSheet.Cells[5, col]].ColumnWidth = 4.57;
                                 col = col + 1;
                                 break;
                             }
@@ -6245,7 +6302,7 @@ namespace Vs.TimeAttendance
                 formatRange.Font.Name = fontName;
                 formatRange.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
 
-                formatRange = oSheet.Range[oSheet.Cells[rowCnt, 20], oSheet.Cells[rowCnt, 20]];
+                formatRange = oSheet.Range[oSheet.Cells[rowCnt, 30], oSheet.Cells[rowCnt, 30]];
                 formatRange.Value2 = "Người duyệt";
                 formatRange.Font.Size = 11;
                 formatRange.Font.Name = fontName;
@@ -6262,13 +6319,15 @@ namespace Vs.TimeAttendance
                 oSheet.PageSetup.FitToPagesTall = false;
                 oSheet.PageSetup.Zoom = false;
                 oSheet.PageSetup.PaperSize = Excel.XlPaperSize.xlPaperA4;
-                oSheet.PageSetup.LeftMargin = oXL.InchesToPoints(0.75);
-                oSheet.PageSetup.RightMargin = oXL.InchesToPoints(0.75);
-                oSheet.PageSetup.TopMargin = oXL.InchesToPoints(0.75);
-                oSheet.PageSetup.BottomMargin = oXL.InchesToPoints(0.75);
-                oSheet.PageSetup.HeaderMargin = oXL.InchesToPoints(0.3);
-                oSheet.PageSetup.FooterMargin = oXL.InchesToPoints(0.3);
+                oSheet.PageSetup.LeftMargin = oXL.InchesToPoints(0);
+                oSheet.PageSetup.RightMargin = oXL.InchesToPoints(0);
+                oSheet.PageSetup.TopMargin = oXL.InchesToPoints(0);
+                oSheet.PageSetup.BottomMargin = oXL.InchesToPoints(0);
+                oSheet.PageSetup.HeaderMargin = oXL.InchesToPoints(0);
+                oSheet.PageSetup.FooterMargin = oXL.InchesToPoints(0);
                 oSheet.PageSetup.Orientation = Excel.XlPageOrientation.xlLandscape;
+
+                oSheet.PageSetup.PrintTitleRows = "$A$4:$" + CharacterIncrement(lastColumn) + "$5";
 
                 Commons.Modules.ObjSystems.HideWaitForm();
                 oXL.Visible = true;
@@ -6632,7 +6691,7 @@ namespace Vs.TimeAttendance
             System.Data.SqlClient.SqlConnection conn;
             dt = new DataTable();
             string sTieuDe = "BẢNG CHẤM CÔNG NHÂN VIÊN CHUYỂN CÔNG TÁC THÁNG";
-            frm.rpt = new rptDSChuyenCongTac(lk_DenNgay.DateTime, sTieuDe, Convert.ToDateTime(NgayIn.EditValue));
+            frm.rpt = new rptDSChuyenCongTac(lk_DenNgay.DateTime, sTieuDe, Convert.ToDateTime(NgayIn.EditValue), Convert.ToInt32(LK_DON_VI.EditValue));
 
             try
             {
@@ -6669,6 +6728,7 @@ namespace Vs.TimeAttendance
             frm.ShowDialog();
 
         }
+
         private void DanhSachChuyenCongTac_MT()
         {
 
@@ -9674,6 +9734,35 @@ namespace Vs.TimeAttendance
         {
             if (Commons.Modules.sLoad == "0Load") return;
             LoadGridThongTinNhanVien();
+        }
+
+        private void grvData_RowStyle(object sender, RowStyleEventArgs e)
+        {
+            //try
+            //{
+            //    for (int i = 5; i <= 35; i++)
+            //    {
+            //        if (grvData.GetRowCellValue(e.RowHandle, grvData.Columns[i.ToString()]).ToString().IndexOf('Z') == -1) return;
+            //        {
+            //            e.Appearance.BackColor = Color.Yellow;
+            //            e.HighPriority = true;
+            //        }
+            //    }
+            //}
+            //catch { }
+        }
+
+        private void grvData_RowCellStyle(object sender, RowCellStyleEventArgs e)
+        {
+            try
+            {
+                if (e.CellValue.ToString().IndexOf('Z') == -1) return;
+                {
+                    e.Appearance.BackColor = Color.FromArgb(180, 180, 205);
+                    //e.HighPriority = true;
+                }
+            }
+            catch { }
         }
     }
 }

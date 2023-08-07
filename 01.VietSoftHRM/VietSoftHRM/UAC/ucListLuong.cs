@@ -112,6 +112,11 @@ namespace VietSoftHRM
         //sự kiện click con
         private void Elementchill_Click(object sender, EventArgs e, bool f5)
         {
+            if (Commons.Modules.bChangeForm == true)
+            {
+                Commons.Modules.ObjSystems.MsgWarning("Dữ liệu chưa được lưu !");
+                return;
+            }
             var button = sender as AccordionControlElement;
             if (f5 == false)
             {

@@ -79,7 +79,7 @@ namespace VietSoftHRM
                 //Thread.Sleep(1000);
                 LoadcboDataBase();
                 LoadUserPass();
-                Commons.Modules.chamCongK = false;
+                //Commons.Modules.chamCongK = false;
                 Commons.Modules.ObjSystems.ThayDoiNN(this);
 
                 //DateTime dNgay = DateTime.Now;
@@ -93,7 +93,7 @@ namespace VietSoftHRM
                 //    //Thread.Sleep(1000);
                 //    LoadcboDataBase();
                 //    LoadUserPass();
-                //    Commons.Modules.chamCongK = false;
+                Commons.Modules.chamCongK = false;
                 //    Commons.Modules.ObjSystems.ThayDoiNN(this);
                 //}
             }
@@ -119,20 +119,21 @@ namespace VietSoftHRM
                 {
                     SaveLogin();
                     SaveDatabase();
+                    Commons.Modules.bChangeForm = false;
                     string strSQL = "SELECT ISNULL(USER_KHACH,0) USER_KHACH FROM dbo.USERS WHERE [USER_NAME] = '" + txt_user.Text.Trim() + "'";
                     try
                     {
 
-                        if (Convert.ToBoolean(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, strSQL)) == true)
+                        if (Convert.ToBoolean(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text,strSQL)))
                         {
                             Commons.Modules.chamCongK = true;
                         }
+
                         string sSetUp = "SELECT  ISNULL(N.SET_UP,0) SET_UP,US.ID_NHOM FROM dbo.USERS US INNER JOIN dbo.NHOM N ON N.ID_NHOM = US.ID_NHOM WHERE US.[USER_NAME] = '" + txt_user.Text.Trim().ToLower() + "'";
                         DataTable dt = new DataTable();
                         dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, sSetUp));
                         Commons.Modules.iIDNhom = Convert.ToInt64(dt.Rows[0]["ID_NHOM"]);
                         Commons.Modules.bSetUp = Convert.ToBoolean(dt.Rows[0]["SET_UP"]);
-
 
                         // cập nhật store SQL
                         if (!Commons.Modules.ObjSystems.UpdateSQL("SQL"))
@@ -354,10 +355,10 @@ namespace VietSoftHRM
             //bool bLoad = Convert.ToBoolean(SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, sSQL));
             //if (bLoad) { MessageBox.Show("Hết hạn sử dụng"); Application.Exit(); }
 
-            //if (!clsMain.CheckServer())
-            //{
-            //    Application.Exit();
-            //}
+            if (!clsMain.CheckServer())
+            {
+                Application.Exit();
+            }
         }
 
         private void pic_database_DoubleClick(object sender, EventArgs e)

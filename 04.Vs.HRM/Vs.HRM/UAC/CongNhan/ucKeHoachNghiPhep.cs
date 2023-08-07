@@ -513,6 +513,7 @@ namespace Vs.HRM
             {
                 case "themsua":
                     {
+                        Commons.Modules.bChangeForm = true;
                         iIDCN_Temp = Convert.ToInt32(grvDSCN.GetFocusedRowCellValue("ID_CN"));
                         //if (Convert.ToInt32(grvDSCN.GetFocusedRowCellValue("SPCL")) == 0) return;
                         enableButon(false);
@@ -603,6 +604,8 @@ namespace Vs.HRM
                             grvDSCN_FocusedRowChanged(null, null);
                             Commons.Modules.ObjSystems.DeleteAddRow(grvKHNP);
                             enableButon(true);
+
+                            Commons.Modules.bChangeForm = false;
                         }
                         catch (Exception ex)
                         {
@@ -618,6 +621,7 @@ namespace Vs.HRM
                             grvDSCN_FocusedRowChanged(null, null);
                             Commons.Modules.ObjSystems.DeleteAddRow(grvKHNP);
                             enableButon(true);
+                            Commons.Modules.bChangeForm = false;
                         }
                         catch
                         {

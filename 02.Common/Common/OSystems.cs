@@ -5681,10 +5681,18 @@ namespace Commons
         {
             //ID_CV,TEN_CV
             DataTable dt = new DataTable();
-            dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetThongTinDonVi", Commons.Modules.UserName, Commons.Modules.TypeLanguage, ID_DV));
+            if (Commons.Modules.loadHeader == 1)
+            {
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetHeaderDonVi", Commons.Modules.UserName, Commons.Modules.TypeLanguage, ID_DV));
+            }
+            else
+            {
+                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, "spGetThongTinDonVi", Commons.Modules.UserName, Commons.Modules.TypeLanguage, ID_DV));
+            }
             dt.TableName = "TTC";
             return dt;
         }
+
         public DataTable DataKhenThuongKyLuat(bool coAll)
         {
             DataTable dt = new DataTable();

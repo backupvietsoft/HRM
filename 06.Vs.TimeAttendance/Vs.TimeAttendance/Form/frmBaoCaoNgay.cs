@@ -11,6 +11,7 @@ using System.Drawing;
 using System.Reflection;
 using System.Linq;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Tab;
+using DevExpress.CodeParser;
 
 namespace Vs.TimeAttendance
 {
@@ -35,11 +36,6 @@ namespace Vs.TimeAttendance
             //chkChuaThamGia.Visible = false;
             //chkDaThamGia.Visible = false;
             rdo_ChonBaoCao.SelectedIndex = 0;
-
-            if (Commons.Modules.KyHieuDV != "DM")
-            {
-                rdo_ChonBaoCao.Properties.Items.RemoveAt(4);
-            }
 
             dNgayIn.EditValue = DateTime.Today;
             Commons.OSystems.SetDateEditFormat(dNgayIn);
@@ -68,7 +64,7 @@ namespace Vs.TimeAttendance
                                     DataTable dt;
                                     System.Data.SqlClient.SqlConnection conn;
                                     dt = new DataTable();
-                                    frm.rpt = new rptDSVangDauGioTheoDV(dNgayIn.DateTime, dNgayDL,Convert.ToInt32(ID_DV));
+                                    frm.rpt = new rptDSVangDauGioTheoDV(dNgayIn.DateTime, dNgayDL, Convert.ToInt32(ID_DV));
                                     try
                                     {
                                         conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
@@ -92,7 +88,7 @@ namespace Vs.TimeAttendance
                                         frm.AddDataSource(dt);
                                         frm.AddDataSource(Commons.Modules.ObjSystems.DataThongTinChung(-1));
                                     }
-                                    catch(Exception ex)
+                                    catch (Exception ex)
                                     { }
                                     frm.ShowDialog();
                                     break;
@@ -415,7 +411,29 @@ namespace Vs.TimeAttendance
                                 }
                             case "rdo_BaoCaoNhanSuNgay":
                                 {
-                                    BangChamCongNgay_DM();
+                                    switch (Commons.Modules.KyHieuDV)
+                                    {
+                                        case "DM":
+                                            {
+                                                BangChamCongNgay_DM();
+                                                break;
+                                            }
+                                        default:
+                                            {
+                                                DataTable dt = new DataTable();
+                                                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, Commons.Modules.ObjSystems.returnSps(Commons.Modules.chamCongK, "rptBCDKTangCa"), datTNgay.DateTime, datDNgay.DateTime, ID_DV, ID_XN, ID_TO, Commons.Modules.UserName, Commons.Modules.TypeLanguage));
+                                                frmViewReport frm = new frmViewReport();
+                                                //Convert.ToInt64(grvCongNhan.GetFocusedRowCellValue("ID_CN"))
+                                                string tieuDe = "DANH SÁCH NHÂN VIÊN ĐĂNG KÍ TĂNG CA";
+                                                frm.rpt = new rptDKTangCa(datTNgay.DateTime, datDNgay.DateTime, tieuDe, Convert.ToInt32(ID_DV));
+                                                if (dt == null || dt.Rows.Count == 0) return;
+                                                dt.TableName = "DATA";
+                                                frm.AddDataSource(dt);
+                                                frm.ShowDialog();
+                                                break;
+                                            }
+                                    }
+
                                     break;
                                 }
                         }
@@ -2004,6 +2022,11 @@ namespace Vs.TimeAttendance
                 switch (rdo_ChonBaoCao.Properties.Items[rdo_ChonBaoCao.SelectedIndex].Tag)
                 {
                     case "rdo_DSNhanVienVachTheLoi":
+                        {
+                            tablePanel1.Rows[2].Visible = true;
+                            break;
+                        }
+                    case "rdo_BaoCaoNhanSuNgay":
                         {
                             tablePanel1.Rows[2].Visible = true;
                             break;

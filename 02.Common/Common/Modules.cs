@@ -335,6 +335,21 @@ namespace Commons
             }
         }
 
+        private static int _loadHeader;
+        public static int loadHeader
+        {
+            get
+            {
+                return _loadHeader;
+            }
+            set
+            {
+                _loadHeader = value;
+            }
+        }
+
+
+
         //định nghĩa làm tròn giờ
         private static int _iLamTronGio;
         public static int iLamTronGio
@@ -774,6 +789,19 @@ namespace Commons
             set
             {
                 _sLoad = value;
+            }
+        }
+
+        private static bool _bChangeForm;
+        public static bool bChangeForm
+        {
+            get
+            {
+                return _bChangeForm;
+            }
+            set
+            {
+                _bChangeForm = value;
             }
         }
 

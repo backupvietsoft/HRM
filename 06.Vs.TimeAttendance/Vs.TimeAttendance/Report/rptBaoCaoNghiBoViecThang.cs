@@ -15,7 +15,14 @@ namespace Vs.Payroll
 
             InitializeComponent();
             Commons.Modules.ObjSystems.ThayDoiNN(this);
-            xrSubreport1.ReportSource = new SubReportHeader(iddv);
+            if (Commons.Modules.loadHeader == 1)
+            {
+                xrSubreport1.ReportSource = new SubReportHeader_DV(iddv);
+            }
+            else
+            {
+                xrSubreport1.ReportSource = new SubReportHeader();
+            }
 
             string Thang = "0" + lthang.Month;
             string Nam = "00" + lthang.Year;

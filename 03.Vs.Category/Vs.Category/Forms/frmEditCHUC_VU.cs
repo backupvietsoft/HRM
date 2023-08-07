@@ -111,7 +111,7 @@ namespace Vs.Category
                             if (KiemTrung()) return;
                             Commons.Modules.sId = SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, "spUpdateCHUC_VU", (bAddEditCV ? -1 : Convert.ToInt32(iIdCV)),
                                 MS_CVTextEdit.EditValue, TEN_CVTextEdit.EditValue, TEN_CV_ATextEdit.EditValue,
-                                TEN_CV_HTextEdit.EditValue, ID_LOAI_CVSearchLookUpEdit.EditValue, (STT_IN_CVTextEdit.EditValue == "") ? STT_IN_CVTextEdit.EditValue = null : STT_IN_CVTextEdit.EditValue, Convert.ToString(cboID_CTL.EditValue) == "" ? (object)null : cboID_CTL.EditValue).ToString();
+                                TEN_CV_HTextEdit.EditValue, ID_LOAI_CVSearchLookUpEdit.EditValue, Convert.ToString(STT_IN_CVTextEdit.EditValue) == "" ?  (object)null : STT_IN_CVTextEdit.EditValue, Convert.ToString(cboID_CTL.EditValue) == "" ? (object)null : cboID_CTL.EditValue).ToString();
                             if (bAddEditCV)
                             {
                                 if (XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msg_ThemThanhCongBanCoMuonTiepTuc"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)

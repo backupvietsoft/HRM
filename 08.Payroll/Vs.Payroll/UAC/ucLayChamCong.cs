@@ -51,7 +51,7 @@ namespace Vs.Payroll
                 LoadThang();
                 Commons.Modules.ObjSystems.LoadCboDonVi(cboDonVi);
                 Commons.Modules.ObjSystems.LoadCboXiNghiep(cboDonVi, cboXiNghiep);
-                Commons.Modules.ObjSystems.LoadCboTo(cboDonVi, cboXiNghiep, cboTo, true);
+                Commons.Modules.ObjSystems.LoadCboTo(cboDonVi, cboXiNghiep, cboTo, Commons.Modules.KyHieuDV == "TG" ? true : false);
                 LoadGrdGTGC();
                 EnableButon(isAdd);
                 Commons.Modules.sLoad = "";
@@ -365,7 +365,7 @@ namespace Vs.Payroll
             if (Commons.Modules.sLoad == "0Load") return;
             Commons.Modules.sLoad = "0Load";
             Commons.Modules.ObjSystems.LoadCboXiNghiep(cboDonVi, cboXiNghiep);
-            Commons.Modules.ObjSystems.LoadCboTo(cboDonVi, cboXiNghiep, cboTo,true);
+            Commons.Modules.ObjSystems.LoadCboTo(cboDonVi, cboXiNghiep, cboTo,Commons.Modules.KyHieuDV == "TG" ? true : false);
             LoadGrdGTGC();
 
             EnableButon(false);
@@ -376,7 +376,7 @@ namespace Vs.Payroll
         {
             if (Commons.Modules.sLoad == "0Load") return;
             Commons.Modules.sLoad = "0Load";
-            Commons.Modules.ObjSystems.LoadCboTo(cboDonVi, cboXiNghiep, cboTo,true);
+            Commons.Modules.ObjSystems.LoadCboTo(cboDonVi, cboXiNghiep, cboTo,Commons.Modules.KyHieuDV == "TG" ? true : false);
             LoadGrdGTGC();
             Commons.Modules.sLoad = "";
         }

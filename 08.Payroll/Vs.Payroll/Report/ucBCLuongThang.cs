@@ -17,6 +17,8 @@ using DevExpress.DataProcessing;
 using DevExpress.XtraCharts.Native;
 using OfficeOpenXml;
 using DevExpress.XtraEditors.Controls;
+using DevExpress.DataProcessing.InMemoryDataProcessor;
+using static NPOI.HSSF.Util.HSSFColor;
 
 namespace Vs.Payroll
 {
@@ -1306,6 +1308,11 @@ namespace Vs.Payroll
                                                 PhieuLuongThang_BT();
                                                 break;
                                             }
+                                        case "MT":
+                                            {
+                                                PhieuLuong_MT();
+                                                break;
+                                            }
 
                                         default:
                                             {
@@ -1316,7 +1323,6 @@ namespace Vs.Payroll
                                                 }
                                                 catch
                                                 {
-
                                                 }
                                                 InPhieuNhanLuongCNSP(sMS_CTL);
                                                 break;
@@ -4515,14 +4521,6 @@ namespace Vs.Payroll
                 System.Data.SqlClient.SqlConnection conn;
                 conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
                 conn.Open();
-                DataTable dtChuyen;
-                dtChuyen = new DataTable();
-                dtChuyen.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT ID_TO, TEN_TO FROM dbo.MGetToUser('" + Commons.Modules.UserName + "'," + Commons.Modules.TypeLanguage + ") WHERE (ID_DV = " + LK_DON_VI.EditValue + " OR " + LK_DON_VI.EditValue + " = -1) AND (ID_XN = " + LK_XI_NGHIEP.EditValue + " OR " + LK_XI_NGHIEP.EditValue + " = -1) AND (ID_TO = " + LK_TO.EditValue + " OR " + LK_TO.EditValue + " = -1) ORDER BY STT_DV, STT_XN, STT_TO"));
-                if (dtChuyen.Rows.Count == 0)
-                {
-                    XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgKhongCoDuLieuIn"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return;
-                }
                 ///kiểm tra dữ liệu
                 System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptBangLuongThang_MT", conn);
                 cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
@@ -4565,14 +4563,6 @@ namespace Vs.Payroll
                 System.Data.SqlClient.SqlConnection conn;
                 conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
                 conn.Open();
-                DataTable dtChuyen;
-                dtChuyen = new DataTable();
-                dtChuyen.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT ID_TO, TEN_TO FROM dbo.MGetToUser('" + Commons.Modules.UserName + "'," + Commons.Modules.TypeLanguage + ") WHERE (ID_DV = " + LK_DON_VI.EditValue + " OR " + LK_DON_VI.EditValue + " = -1) AND (ID_XN = " + LK_XI_NGHIEP.EditValue + " OR " + LK_XI_NGHIEP.EditValue + " = -1) AND (ID_TO = " + LK_TO.EditValue + " OR " + LK_TO.EditValue + " = -1) ORDER BY STT_DV, STT_XN, STT_TO"));
-                if (dtChuyen.Rows.Count == 0)
-                {
-                    XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgKhongCoDuLieuIn"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return;
-                }
                 ///kiểm tra dữ liệu
                 System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptBangLuongThang_MT", conn);
                 cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
@@ -4615,14 +4605,6 @@ namespace Vs.Payroll
                 System.Data.SqlClient.SqlConnection conn;
                 conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
                 conn.Open();
-                DataTable dtChuyen;
-                dtChuyen = new DataTable();
-                dtChuyen.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT ID_TO, TEN_TO FROM dbo.MGetToUser('" + Commons.Modules.UserName + "'," + Commons.Modules.TypeLanguage + ") WHERE (ID_DV = " + LK_DON_VI.EditValue + " OR " + LK_DON_VI.EditValue + " = -1) AND (ID_XN = " + LK_XI_NGHIEP.EditValue + " OR " + LK_XI_NGHIEP.EditValue + " = -1) AND (ID_TO = " + LK_TO.EditValue + " OR " + LK_TO.EditValue + " = -1) ORDER BY STT_DV, STT_XN, STT_TO"));
-                if (dtChuyen.Rows.Count == 0)
-                {
-                    XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgKhongCoDuLieuIn"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return;
-                }
                 ///kiểm tra dữ liệu
                 System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptBangLuongThang_MT", conn);
                 cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
@@ -4665,14 +4647,6 @@ namespace Vs.Payroll
                 System.Data.SqlClient.SqlConnection conn;
                 conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
                 conn.Open();
-                DataTable dtChuyen;
-                dtChuyen = new DataTable();
-                dtChuyen.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT ID_TO, TEN_TO FROM dbo.MGetToUser('" + Commons.Modules.UserName + "'," + Commons.Modules.TypeLanguage + ") WHERE (ID_DV = " + LK_DON_VI.EditValue + " OR " + LK_DON_VI.EditValue + " = -1) AND (ID_XN = " + LK_XI_NGHIEP.EditValue + " OR " + LK_XI_NGHIEP.EditValue + " = -1) AND (ID_TO = " + LK_TO.EditValue + " OR " + LK_TO.EditValue + " = -1) ORDER BY STT_DV, STT_XN, STT_TO"));
-                if (dtChuyen.Rows.Count == 0)
-                {
-                    XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgKhongCoDuLieuIn"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return;
-                }
                 ///kiểm tra dữ liệu
                 System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptBangLuongThang_MT", conn);
                 cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
@@ -4716,14 +4690,6 @@ namespace Vs.Payroll
                 System.Data.SqlClient.SqlConnection conn;
                 conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
                 conn.Open();
-                DataTable dtChuyen;
-                dtChuyen = new DataTable();
-                dtChuyen.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT ID_TO, TEN_TO FROM dbo.MGetToUser('" + Commons.Modules.UserName + "'," + Commons.Modules.TypeLanguage + ") WHERE (ID_DV = " + LK_DON_VI.EditValue + " OR " + LK_DON_VI.EditValue + " = -1) AND (ID_XN = " + LK_XI_NGHIEP.EditValue + " OR " + LK_XI_NGHIEP.EditValue + " = -1) AND (ID_TO = " + LK_TO.EditValue + " OR " + LK_TO.EditValue + " = -1) ORDER BY STT_DV, STT_XN, STT_TO"));
-                if (dtChuyen.Rows.Count == 0)
-                {
-                    XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgKhongCoDuLieuIn"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return;
-                }
                 ///kiểm tra dữ liệu
                 System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptBangLuongThang_MT", conn);
                 cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
@@ -4767,14 +4733,6 @@ namespace Vs.Payroll
                 System.Data.SqlClient.SqlConnection conn;
                 conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
                 conn.Open();
-                DataTable dtChuyen;
-                dtChuyen = new DataTable();
-                dtChuyen.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT ID_TO, TEN_TO FROM dbo.MGetToUser('" + Commons.Modules.UserName + "'," + Commons.Modules.TypeLanguage + ") WHERE (ID_DV = " + LK_DON_VI.EditValue + " OR " + LK_DON_VI.EditValue + " = -1) AND (ID_XN = " + LK_XI_NGHIEP.EditValue + " OR " + LK_XI_NGHIEP.EditValue + " = -1) AND (ID_TO = " + LK_TO.EditValue + " OR " + LK_TO.EditValue + " = -1) ORDER BY STT_DV, STT_XN, STT_TO"));
-                if (dtChuyen.Rows.Count == 0)
-                {
-                    XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgKhongCoDuLieuIn"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return;
-                }
                 ///kiểm tra dữ liệu
                 System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptBangLuongThang_MT", conn);
                 cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
@@ -4818,14 +4776,6 @@ namespace Vs.Payroll
                 System.Data.SqlClient.SqlConnection conn;
                 conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
                 conn.Open();
-                DataTable dtChuyen;
-                dtChuyen = new DataTable();
-                dtChuyen.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT ID_TO, TEN_TO FROM dbo.MGetToUser('" + Commons.Modules.UserName + "'," + Commons.Modules.TypeLanguage + ") WHERE (ID_DV = " + LK_DON_VI.EditValue + " OR " + LK_DON_VI.EditValue + " = -1) AND (ID_XN = " + LK_XI_NGHIEP.EditValue + " OR " + LK_XI_NGHIEP.EditValue + " = -1) AND (ID_TO = " + LK_TO.EditValue + " OR " + LK_TO.EditValue + " = -1) ORDER BY STT_DV, STT_XN, STT_TO"));
-                if (dtChuyen.Rows.Count == 0)
-                {
-                    XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgKhongCoDuLieuIn"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return;
-                }
                 ///kiểm tra dữ liệu
                 System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptBangLuongThang_MT", conn);
                 cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
@@ -4860,6 +4810,100 @@ namespace Vs.Payroll
                 XtraMessageBox.Show(ex.Message);
             }
         }
+
+
+        private void PhieuLuong_MT()
+        {
+            try
+            {
+                System.Data.SqlClient.SqlConnection conn;
+                conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+                conn.Open();
+
+                //
+                int iLoaiBC  = 0;
+                string sTenFile ="";
+                string sTenVT = "";
+                switch (SqlHelper.ExecuteScalar(Commons.IConnections.CNStr,CommandType.Text, "SELECT MA_SO FROM dbo.CACH_TINH_LUONG WHERE ID_CTL = "+ cboCachTinhLuong.EditValue +"").ToString())
+                {
+                    case "SP":
+                        {
+                            iLoaiBC = 8;
+                            sTenFile = System.Windows.Forms.Application.StartupPath + "\\Template\\TemplateMT\\PhieuLuongCN.xlsx";
+                            sTenVT = "AV4";
+                            break;
+                        }
+                    case "TT":
+                    case "LCT":
+                    case "LKTC":
+                    case "LKTX":
+                        {
+                            iLoaiBC = 9;
+                            sTenFile = System.Windows.Forms.Application.StartupPath + "\\Template\\TemplateMT\\PhieuLuongCBC.xlsx";
+                            sTenVT = "AP4";
+                            break;
+                        }
+
+                    case "LQC":
+                        {
+                            iLoaiBC = 10;
+                            sTenFile = System.Windows.Forms.Application.StartupPath + "\\Template\\TemplateMT\\PhieuLuongQC.xlsx";
+                            sTenVT = "AM4";
+                            break;
+                        }
+                    case "TG":
+                    case "LK":
+                    case "LN":
+                    case "LTT":
+                        {
+                            iLoaiBC = 10;
+                            sTenFile = System.Windows.Forms.Application.StartupPath + "\\Template\\TemplateMT\\PhieuLuongCAT.xlsx";
+                            sTenVT = "AN4";
+                            break;
+                        }
+
+                    default:
+                        break;
+                }
+
+                // kiểm tra dữ liệu
+                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("rptBangLuongThang_MT", conn);
+                cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                cmd.Parameters.Add("@Dvi", SqlDbType.Int).Value = LK_DON_VI.EditValue;
+                cmd.Parameters.Add("@XN", SqlDbType.Int).Value = LK_XI_NGHIEP.EditValue;
+                cmd.Parameters.Add("@TO", SqlDbType.Int).Value = LK_TO.EditValue;
+                cmd.Parameters.Add("@Thang", SqlDbType.Date).Value = Convert.ToDateTime(cboThang.EditValue).ToString("yyyy-MM-dd");
+                cmd.Parameters.Add("@TinhTrang", SqlDbType.Int).Value = rdo_ChucVu.SelectedIndex;
+                cmd.Parameters.Add("@LoaiBC", SqlDbType.Int).Value = iLoaiBC;
+                cmd.CommandType = CommandType.StoredProcedure;
+                System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+                DataSet ds = new DataSet();
+                adp.Fill(ds);
+                ds.Tables[0].TableName = "Data";
+                ds.Tables[1].TableName = "Info";
+                if (ds.Tables[0].Rows.Count == 0)
+                {
+                    XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgKhongCoDuLieuIn"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+                string sPath = "";
+                sPath = Commons.Modules.MExcel.SaveFiles("Excel file (*.xlsx)|*.xlsx");
+                if (sPath == "") return;
+                // If the file name is not an empty string open it for saving.
+                Commons.TemplateExcel.FillReportSum(sPath, sTenFile, ds, new string[] { "{", "}" }, new string[] { "A3", sTenVT });
+                Process.Start(sPath);
+            }
+            catch (Exception ex)
+            {
+                this.Cursor = Cursors.Default;
+                XtraMessageBox.Show(ex.Message);
+            }
+        }
+
+
+
+
 
 
 

@@ -1468,7 +1468,7 @@ namespace Vs.Payroll
             if (Commons.Modules.sLoad == "0Load") return;
             Commons.Modules.sLoad = "0Load";
             Commons.Modules.ObjSystems.LoadCboXiNghiep(cboDonVi, cboXiNghiep);
-            Commons.Modules.ObjSystems.LoadCboTo(cboDonVi, cboXiNghiep, cboTo, true);
+            Commons.Modules.ObjSystems.LoadCboTo(cboDonVi, cboXiNghiep, cboTo, Commons.Modules.KyHieuDV == "TG" ? true : false);
             if (Commons.Modules.KyHieuDV != "DM")
             {
                 switch (Commons.Modules.KyHieuDV)
@@ -1509,7 +1509,7 @@ namespace Vs.Payroll
         {
             if (Commons.Modules.sLoad == "0Load") return;
             Commons.Modules.sLoad = "0Load";
-            Commons.Modules.ObjSystems.LoadCboTo(cboDonVi, cboXiNghiep, cboTo, true);
+            Commons.Modules.ObjSystems.LoadCboTo(cboDonVi, cboXiNghiep, cboTo, Commons.Modules.KyHieuDV == "TG" ? true : false);
             if (Commons.Modules.KyHieuDV != "DM")
             {
                 switch (Commons.Modules.KyHieuDV)

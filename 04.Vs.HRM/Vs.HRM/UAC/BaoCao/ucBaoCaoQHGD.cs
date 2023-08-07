@@ -630,25 +630,39 @@ namespace Vs.HRM
                 // Gets data from database
                 conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
                 conn.Open();
-                System.Data.SqlClient.SqlCommand cmd; 
+                System.Data.SqlClient.SqlCommand cmd;
+
                 if (Commons.Modules.KyHieuDV == "NB" || Commons.Modules.KyHieuDV == "NC")
                 {
                     cmd = new System.Data.SqlClient.SqlCommand("rptDSGiaDinh_NB", conn);
+                    DateTime denNgayValue = Convert.ToDateTime(denNgay.EditValue);
+                    DateTime ngayDauThang = new DateTime(denNgayValue.Year, denNgayValue.Month, 1);
+                    DateTime ngayCuoiThang = ngayDauThang.AddMonths(1).AddDays(-1);
+                    cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                    cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                    cmd.Parameters.Add("@Type", SqlDbType.Int).Value = rdo_ConCongNhan.SelectedIndex;
+                    cmd.Parameters.Add("@Ngay", SqlDbType.Date).Value = lk_NgayTinh.EditValue;
+                    cmd.Parameters.Add("@TuoiTu", SqlDbType.Int).Value = txt_Tu.Text.ToString() == "" ? 0 : txt_Tu.EditValue;
+                    cmd.Parameters.Add("@TuoiDen", SqlDbType.Int).Value = txt_Den.Text.ToString() == "" ? 99 : txt_Den.EditValue;
+                    cmd.Parameters.Add("@LoaiQH", SqlDbType.Int).Value = lk_QuanHeGD.EditValue;
+                    cmd.Parameters.Add("@TuNgay", SqlDbType.Date).Value = ngayDauThang;
+                    cmd.Parameters.Add("@DenNgay", SqlDbType.Date).Value = ngayCuoiThang;
                 }
                 else
                 {
                     cmd = new System.Data.SqlClient.SqlCommand("rptDSGiaDinh", conn);
+                    cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                    cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                    cmd.Parameters.Add("@Type", SqlDbType.Int).Value = rdo_ConCongNhan.SelectedIndex;
+                    cmd.Parameters.Add("@Ngay", SqlDbType.Date).Value = lk_NgayTinh.EditValue;
+                    cmd.Parameters.Add("@TuoiTu", SqlDbType.Int).Value = txt_Tu.Text.ToString() == "" ? 0 : txt_Tu.EditValue;
+                    cmd.Parameters.Add("@TuoiDen", SqlDbType.Int).Value = txt_Den.Text.ToString() == "" ? 99 : txt_Den.EditValue;
+                    cmd.Parameters.Add("@LoaiQH", SqlDbType.Int).Value = lk_QuanHeGD.EditValue;
+                    cmd.Parameters.Add("@TuNgay", SqlDbType.Date).Value = tuNgay.EditValue;
+                    cmd.Parameters.Add("@DenNgay", SqlDbType.Date).Value = denNgay.EditValue;
                 }
 
-                cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
-                cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
-                cmd.Parameters.Add("@Type", SqlDbType.Int).Value = rdo_ConCongNhan.SelectedIndex;
-                cmd.Parameters.Add("@Ngay", SqlDbType.Date).Value = lk_NgayTinh.EditValue;
-                cmd.Parameters.Add("@TuoiTu", SqlDbType.Int).Value = txt_Tu.Text.ToString() == "" ? 0 : txt_Tu.EditValue;
-                cmd.Parameters.Add("@TuoiDen", SqlDbType.Int).Value = txt_Den.Text.ToString() == "" ? 99 : txt_Den.EditValue;
-                cmd.Parameters.Add("@LoaiQH", SqlDbType.Int).Value = lk_QuanHeGD.EditValue;
-                cmd.Parameters.Add("@TuNgay", SqlDbType.Date).Value = tuNgay.EditValue;
-                cmd.Parameters.Add("@DenNgay", SqlDbType.Date).Value = denNgay.EditValue;
+               
                 cmd.CommandType = CommandType.StoredProcedure;
                 System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
                 adp.Fill(ds);
@@ -715,11 +729,11 @@ namespace Vs.HRM
                 {
                     //Commons.Modules.MExcel.MFormatExcel(oSheet, dt, 11, this.Name, false, true, true);
 
-                    Excel.Range formatRange = oSheet.Range[oSheet.Cells[11, 2], oSheet.Cells[dt.Rows.Count, 2]];
+                    Excel.Range formatRange = oSheet.Range[oSheet.Cells[11, 2], oSheet.Cells[dt.Rows.Count + 10, 2]];
                     formatRange.NumberFormat = "0";
                     try
                     {
-                        for (int row = 11; row <= rowCnt; row++)
+                        for (int row = 11; row <= rowCnt + 10; row++)
                         {
                             if (int.TryParse(oSheet.Cells[row, 2].Value.ToString(), out int value))
                             {

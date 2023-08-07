@@ -624,7 +624,7 @@ namespace Vs.TimeAttendance
                                 frmViewReport frm = new frmViewReport();
                                 //Convert.ToInt64(grvCongNhan.GetFocusedRowCellValue("ID_CN"))
                                 string tieuDe = "DANH SÁCH NHÂN VIÊN ĐĂNG KÍ TĂNG CA";
-                                frm.rpt = new rptDKTangCa(Commons.Modules.ObjSystems.ConvertDateTime(cboNgay.Text), tieuDe, Convert.ToInt32(cboDonVi.EditValue));
+                                frm.rpt = new rptDKTangCa(Commons.Modules.ObjSystems.ConvertDateTime(cboNgay.Text), Commons.Modules.ObjSystems.ConvertDateTime(cboNgay.Text), tieuDe, Convert.ToInt32(cboDonVi.EditValue));
                                 if (dt == null || dt.Rows.Count == 0) return;
                                 dt.TableName = "DATA";
                                 frm.AddDataSource(dt);

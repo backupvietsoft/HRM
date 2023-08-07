@@ -488,7 +488,7 @@ namespace Vs.Payroll
             frmViewReport frm = new frmViewReport();
             //Convert.ToInt64(grvCongNhan.GetFocusedRowCellValue("ID_CN"))
             string tieuDe = "DANH SÁCH NHÂN VIÊN ĐĂNG KÍ TĂNG CA";
-            frm.rpt = new rptDKTangCa(Convert.ToDateTime(cboNgay.EditValue), tieuDe, Convert.ToInt32(cboDonVi.EditValue));
+            frm.rpt = new rptDKTangCa(Convert.ToDateTime(cboNgay.EditValue), Convert.ToDateTime(cboNgay.EditValue), tieuDe, Convert.ToInt32(cboDonVi.EditValue));
             if (dt == null || dt.Rows.Count == 0) return;
             dt.TableName = "DATA";
             frm.AddDataSource(dt);

@@ -570,6 +570,8 @@ namespace Vs.HRM
                                     }
                                 case "MT":
                                     {
+                                        frmInQuyetDinhThoiViec frm = new frmInQuyetDinhThoiViec(Convert.ToInt32(grvCongNhan.GetFocusedRowCellValue("ID_QDTV")), Convert.ToInt32(grvCongNhan.GetFocusedRowCellValue("ID_CN")), Convert.ToDateTime(grvCongNhan.GetFocusedRowCellValue("NGAY_THOI_VIEC")));
+                                        frm.ShowDialog();
                                         break;
                                     }
                                 case "NB":
@@ -863,7 +865,14 @@ namespace Vs.HRM
                     DataRow row = dt.Rows[0];
                     SO_QDTextEdit.EditValue = row["SO_QD"];
                     NGAY_NHAN_DONDateEdit.EditValue = row["NGAY_NHAN_DON"];
-                    LUONG_TINH_TRO_CAPTextEdit.EditValue = row["HS_LUONG"];
+                    if(Commons.Modules.KyHieuDV == "MT")
+                    {
+                        LUONG_TINH_TRO_CAPTextEdit.EditValue = row["MUC_LUONG_THUC"];
+                    }
+                    else
+                    {
+                        LUONG_TINH_TRO_CAPTextEdit.EditValue = row["HS_LUONG"];
+                    }
                     TIEN_TRO_CAPTextEdit.EditValue = row["TIEN_TRO_CAP"].ToString() == "" ? 0 : Convert.ToDouble(row["TIEN_TRO_CAP"]);
                     NGAY_KYDateEdit.EditValue = row["NGAY_KY"];
                     TIEN_PHEPTextEdit.EditValue = row["TIEN_PHEP"].ToString() == "" ? 0 : Convert.ToDouble(row["TIEN_PHEP"]);
@@ -1029,7 +1038,14 @@ namespace Vs.HRM
             try
             {
                 DataTable dt = new DataTable();
-                dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT * FROM dbo.GetTienTroCap('" + Convert.ToDateTime(NGAY_THOI_VIECDateEdit.EditValue).ToString("MM/dd/yyyy") + "'," + Convert.ToInt32(grvCongNhan.GetFocusedRowCellValue("ID_CN")) + "," + Convert.ToInt32(ID_LD_TVLookUpEdit.EditValue) + ")"));
+                if(Commons.Modules.KyHieuDV == "SB")
+                {
+                    dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT * FROM dbo.GetTienTroCap_SB('" + Convert.ToDateTime(NGAY_THOI_VIECDateEdit.EditValue).ToString("MM/dd/yyyy") + "'," + Convert.ToInt32(grvCongNhan.GetFocusedRowCellValue("ID_CN")) + "," + Convert.ToInt32(ID_LD_TVLookUpEdit.EditValue) + ")"));
+                }
+                else
+                {
+                    dt.Load(SqlHelper.ExecuteReader(Commons.IConnections.CNStr, CommandType.Text, "SELECT * FROM dbo.GetTienTroCap('" + Convert.ToDateTime(NGAY_THOI_VIECDateEdit.EditValue).ToString("MM/dd/yyyy") + "'," + Convert.ToInt32(grvCongNhan.GetFocusedRowCellValue("ID_CN")) + "," + Convert.ToInt32(ID_LD_TVLookUpEdit.EditValue) + ")"));
+                }
                 SO_NAM_TRO_CAPTextEdit.EditValue = string.IsNullOrEmpty(dt.Rows[0]["SO_NAM_TC"].ToString()) ? 0 : Convert.ToDecimal(dt.Rows[0]["SO_NAM_TC"]);
                 LUONG_TINH_TRO_CAPTextEdit.EditValue = string.IsNullOrEmpty(dt.Rows[0]["LUONG_TRO_CAP"].ToString()) ? 0 : Convert.ToDecimal(dt.Rows[0]["LUONG_TRO_CAP"]);
                 TIEN_TRO_CAPTextEdit.EditValue = string.IsNullOrEmpty(dt.Rows[0]["TIEN_TRO_CAP"].ToString()) ? 0 : Convert.ToDecimal(dt.Rows[0]["TIEN_TRO_CAP"]);

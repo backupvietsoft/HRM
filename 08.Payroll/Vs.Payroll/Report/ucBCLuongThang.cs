@@ -117,14 +117,27 @@ namespace Vs.Payroll
                             rdo_ChucVu.SelectedIndex = 1;
                             break;
                         }
-
-                    default:
+                    case "BT":
                         {
                             rdo_ChonBaoCao.Properties.Items.Remove(rdo_ChonBaoCao.Properties.Items.Where(x => x.Tag.ToString() == "rdo_BangLuongThangToTruong").FirstOrDefault());
                             rdo_ChonBaoCao.Properties.Items.Remove(rdo_ChonBaoCao.Properties.Items.Where(x => x.Tag.ToString() == "rdo_BangLuongThangQC").FirstOrDefault());
                             rdo_ChonBaoCao.Properties.Items.Remove(rdo_ChonBaoCao.Properties.Items.Where(x => x.Tag.ToString() == "rdo_BangLuongThangThoiGian").FirstOrDefault());
                             rdo_ChonBaoCao.Properties.Items.Remove(rdo_ChonBaoCao.Properties.Items.Where(x => x.Tag.ToString() == "rdo_BangLuongThangCBQLChuyen").FirstOrDefault());
                             rdo_ChonBaoCao.Properties.Items.Remove(rdo_ChonBaoCao.Properties.Items.Where(x => x.Tag.ToString() == "rdo_BangLuongThangNV").FirstOrDefault());
+                            rdo_ChonBaoCao.Properties.Items.Remove(rdo_ChonBaoCao.Properties.Items.Where(x => x.Tag.ToString() == "rdo_BangLuongHotro").FirstOrDefault());
+                            rdoChinhThuc.Visible = false;
+                            cboCachTinhLuong.Visible = false;
+                            lblCachTinhLuong.Visible = false;
+                            break;
+                        }
+
+                    default:
+                        {
+                            rdoChinhThuc.Visible = false;
+                            rdo_ChonBaoCao.Properties.Items.Remove(rdo_ChonBaoCao.Properties.Items.Where(x => x.Tag.ToString() == "rdo_BangLuongThangToTruong").FirstOrDefault());
+                            rdo_ChonBaoCao.Properties.Items.Remove(rdo_ChonBaoCao.Properties.Items.Where(x => x.Tag.ToString() == "rdo_BangLuongThangQC").FirstOrDefault());
+                            rdo_ChonBaoCao.Properties.Items.Remove(rdo_ChonBaoCao.Properties.Items.Where(x => x.Tag.ToString() == "rdo_BangLuongThangThoiGian").FirstOrDefault());
+                            rdo_ChonBaoCao.Properties.Items.Remove(rdo_ChonBaoCao.Properties.Items.Where(x => x.Tag.ToString() == "rdo_BangLuongThangCBQLChuyen").FirstOrDefault());
                             rdo_ChonBaoCao.Properties.Items.Remove(rdo_ChonBaoCao.Properties.Items.Where(x => x.Tag.ToString() == "rdo_BangLuongThangNV").FirstOrDefault());
                             rdo_ChonBaoCao.Properties.Items.Remove(rdo_ChonBaoCao.Properties.Items.Where(x => x.Tag.ToString() == "rdo_BangLuongHotro").FirstOrDefault());
                             break;

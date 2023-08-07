@@ -102,6 +102,11 @@ namespace Vs.HRM
         }
         private void Lb_Click(object sender, EventArgs e)
         {
+            if (Commons.Modules.bChangeForm == true)
+            {
+                Commons.Modules.ObjSystems.MsgWarning("Dữ liệu chưa được lưu !");
+                return;
+            }
             //if (Commons.Modules.bEnabel == true)
             //{
             //    return;

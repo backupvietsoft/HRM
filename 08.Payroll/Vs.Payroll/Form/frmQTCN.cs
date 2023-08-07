@@ -1057,7 +1057,7 @@ namespace Vs.Payroll
                             SetButton(isAdd);
                             grvQT.OptionsBehavior.Editable = true;
                             Commons.Modules.ObjSystems.AddnewRow(grvQT, true);
-
+                            Commons.Modules.bChangeForm = true;
                             break;
                         }
                     case "danhlaiMQL":
@@ -1112,6 +1112,7 @@ namespace Vs.Payroll
                             Commons.Modules.ObjSystems.DeleteAddRow(grvQT);
                             LoadData();
                             LocData();
+                            Commons.Modules.bChangeForm = false;
                             break;
                         }
                     case "khongluu":
@@ -1122,6 +1123,7 @@ namespace Vs.Payroll
                             LoadData();
                             LocData();
                             grvQT.OptionsBehavior.Editable = false;
+                            Commons.Modules.bChangeForm = false;
                             break;
                         }
                     case "thoat":

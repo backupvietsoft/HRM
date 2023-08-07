@@ -1601,7 +1601,7 @@ namespace Vs.HRM
             DataTable dt;
             System.Data.SqlClient.SqlConnection conn2;
             dt = new DataTable();
-            frm.rpt = new rptBangCCTheoGD(lk_TuNgay.DateTime, lk_DenNgay.DateTime, lk_NgayIn.DateTime);
+            frm.rpt = new rptBangCCTheoGD(lk_TuNgay.DateTime, lk_DenNgay.DateTime, lk_NgayIn.DateTime,Convert.ToInt32(LK_DON_VI.EditValue));
 
             try
             {

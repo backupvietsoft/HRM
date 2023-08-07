@@ -78,10 +78,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.grdCNThucHien)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grvCNThucHien)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rdoChonThang.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.datTNgay.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.datTNgay.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.datDNgay.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.datTNgay.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.datDNgay.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.datDNgay.Properties.CalendarTimeProperties)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -334,12 +334,14 @@
             this.grdCNThucHien.TabIndex = 39;
             this.grdCNThucHien.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grvCNThucHien});
+            this.grdCNThucHien.ProcessGridKey += new System.Windows.Forms.KeyEventHandler(this.grdCNThucHien_ProcessGridKey);
             // 
             // grvCNThucHien
             // 
             this.grvCNThucHien.DetailHeight = 297;
             this.grvCNThucHien.GridControl = this.grdCNThucHien;
             this.grvCNThucHien.Name = "grvCNThucHien";
+            this.grvCNThucHien.OptionsSelection.MultiSelect = true;
             this.grvCNThucHien.OptionsView.ShowGroupPanel = false;
             this.grvCNThucHien.CellValueChanged += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.grvCNThucHien_CellValueChanged);
             this.grvCNThucHien.ColumnFilterChanged += new System.EventHandler(this.grvCNThucHien_ColumnFilterChanged);

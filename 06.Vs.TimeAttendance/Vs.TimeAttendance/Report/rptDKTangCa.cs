@@ -10,7 +10,7 @@ namespace Vs.Report
 {
     public partial class rptDKTangCa : DevExpress.XtraReports.UI.XtraReport
     {
-        public rptDKTangCa(DateTime ngay,string tieuDe, int iddv)
+        public rptDKTangCa(DateTime datTNgay, DateTime datDNgay, string tieuDe, int iddv)
         {
 
             InitializeComponent();
@@ -26,16 +26,28 @@ namespace Vs.Report
             string ThangIn = "0" + ngayin.Month;
             string NamIn = "00" + ngayin.Year;
 
-            string Ngay = "0" + ngay.Day;
-            string Thang = "0" + ngay.Month;
-            string Nam = "00" + ngay.Year;
+            string Ngay = "0" + datTNgay.Day;
+            string Thang = "0" + datTNgay.Month;
+            string Nam = "00" + datTNgay.Year;
 
-            lblNgay.Text = Commons.Modules.ObjSystems.GetNN(dtNgu, "Ngay","NgayThangNam") + " " + NgayIn.Substring(NgayIn.Length - 2, 2) + " " +
-                Commons.Modules.ObjSystems.GetNN(dtNgu, "Thang", "NgayThangNam") + " " + ThangIn.Substring(ThangIn.Length - 2, 2) + " " +
-                Commons.Modules.ObjSystems.GetNN(dtNgu, "Nam", "NgayThangNam") + " " + NamIn.Substring(NamIn.Length - 4, 4);
 
-            NONNlbTieuDe2.Text = Commons.Modules.ObjSystems.GetNN(dtNgu, "Ngay", "NgayThangNam") + " " + Ngay.Substring(Ngay.Length - 2, 2) + "/" +
+            lblNgay.Text = Commons.Modules.ObjSystems.GetNN(dtNgu, "Ngay", "NgayThangNam") + " " + NgayIn.Substring(NgayIn.Length - 2, 2) + " " +
+                    Commons.Modules.ObjSystems.GetNN(dtNgu, "Thang", "NgayThangNam") + " " + ThangIn.Substring(ThangIn.Length - 2, 2) + " " +
+                    Commons.Modules.ObjSystems.GetNN(dtNgu, "Nam", "NgayThangNam") + " " + NamIn.Substring(NamIn.Length - 4, 4);
+
+            if (datTNgay == datDNgay)
+            {
+                NONNlbTieuDe2.Text = Commons.Modules.ObjSystems.GetNN(dtNgu, "Ngay", "NgayThangNam") + " " + Ngay.Substring(Ngay.Length - 2, 2) + "/" +
                                                                   Thang.Substring(Thang.Length - 2, 2) + "/" + Nam.Substring(Nam.Length - 4, 4);
+            }
+            else
+            {
+
+
+                NONNlbTieuDe2.Text =  Commons.Modules.ObjLanguages.GetLanguage(this.Tag.ToString(), "lblTuNgay") + " " + datTNgay.ToString("dd/MM/yyyy") + "   đến ngày " + datDNgay.ToString("dd/MM/yyyy");
+            }
+
+            
 
         }
 

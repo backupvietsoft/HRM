@@ -81,7 +81,14 @@ namespace VietSoftHRM
                 Commons.Modules.connect = Commons.Modules.ObjSystems.Decrypt(dt.Rows[0]["CON_NECT"].ToString(), true);
                 Commons.Modules.iGio = Convert.ToDouble(dt.Rows[0]["SG_LV"]);
                 Commons.Modules.iLamTronGio = Convert.ToInt32(dt.Rows[0]["LOAI_LT_CC"]); //0 Khong lam tron giờ//1 làm tròn giờ
-
+                try
+                {
+                    Commons.Modules.loadHeader = Convert.ToInt32(dt.Rows[0]["LOAD_HEADER"]);
+                }
+                catch
+                {
+                    Commons.Modules.loadHeader = 0;
+                }
                 try
                 {
                     Commons.Modules.bKiemPCD = Convert.ToBoolean(dt.Rows[0]["CHECK_PCD"]);
@@ -133,7 +140,7 @@ namespace VietSoftHRM
                     Commons.Modules.iLOAI_CN = 0;
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Commons.Modules.ObjSystems.MsgError(ex.Message);
             }
@@ -248,7 +255,7 @@ namespace VietSoftHRM
                 {
                     if (double.Parse(sVerClient) == double.Parse(sSql))
                     {
-                        
+
                         return;
                     }
                 }

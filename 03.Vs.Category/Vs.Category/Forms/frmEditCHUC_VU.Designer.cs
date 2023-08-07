@@ -38,6 +38,8 @@
             this.btnALL = new DevExpress.XtraBars.Docking2010.WindowsUIButtonPanel();
             this.tablePanel1 = new DevExpress.Utils.Layout.TablePanel();
             this.dataLayoutControl1 = new DevExpress.XtraDataLayout.DataLayoutControl();
+            this.cboID_CTL = new DevExpress.XtraEditors.SearchLookUpEdit();
+            this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.MS_CVTextEdit = new DevExpress.XtraEditors.TextEdit();
             this.TEN_CVTextEdit = new DevExpress.XtraEditors.TextEdit();
             this.TEN_CV_ATextEdit = new DevExpress.XtraEditors.TextEdit();
@@ -48,19 +50,19 @@
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.ItemForTEN_CV_A = new DevExpress.XtraLayout.LayoutControlItem();
-            this.ItemForTEN_CV_H = new DevExpress.XtraLayout.LayoutControlItem();
             this.ItemForMS_CV = new DevExpress.XtraLayout.LayoutControlItem();
             this.ItemForTEN_CV = new DevExpress.XtraLayout.LayoutControlItem();
             this.ItemForSTT_IN_CV = new DevExpress.XtraLayout.LayoutControlItem();
             this.ItemForID_LOAI_CV = new DevExpress.XtraLayout.LayoutControlItem();
-            this.dxValidationProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
-            this.cboID_CTL = new DevExpress.XtraEditors.SearchLookUpEdit();
             this.lblCachTinhLuong = new DevExpress.XtraLayout.LayoutControlItem();
-            this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.ItemForTEN_CV_H = new DevExpress.XtraLayout.LayoutControlItem();
+            this.dxValidationProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).BeginInit();
             this.tablePanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataLayoutControl1)).BeginInit();
             this.dataLayoutControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cboID_CTL.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.MS_CVTextEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.TEN_CVTextEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.TEN_CV_ATextEdit.Properties)).BeginInit();
@@ -71,15 +73,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForTEN_CV_A)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemForTEN_CV_H)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForMS_CV)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForTEN_CV)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForSTT_IN_CV)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForID_LOAI_CV)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cboID_CTL.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblCachTinhLuong)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForTEN_CV_H)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // btnALL
@@ -152,11 +152,30 @@
             this.dataLayoutControl1.TabIndex = 0;
             this.dataLayoutControl1.Text = "dataLayoutControl1";
             // 
+            // cboID_CTL
+            // 
+            this.cboID_CTL.Location = new System.Drawing.Point(118, 124);
+            this.cboID_CTL.Name = "cboID_CTL";
+            this.cboID_CTL.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cboID_CTL.Properties.NullText = "";
+            this.cboID_CTL.Properties.PopupView = this.gridView1;
+            this.cboID_CTL.Size = new System.Drawing.Size(481, 24);
+            this.cboID_CTL.StyleController = this.dataLayoutControl1;
+            this.cboID_CTL.TabIndex = 11;
+            // 
+            // gridView1
+            // 
+            this.gridView1.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            this.gridView1.Name = "gridView1";
+            this.gridView1.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.gridView1.OptionsView.ShowGroupPanel = false;
+            // 
             // MS_CVTextEdit
             // 
-            this.MS_CVTextEdit.Location = new System.Drawing.Point(120, 32);
+            this.MS_CVTextEdit.Location = new System.Drawing.Point(118, 40);
             this.MS_CVTextEdit.Name = "MS_CVTextEdit";
-            this.MS_CVTextEdit.Size = new System.Drawing.Size(184, 24);
+            this.MS_CVTextEdit.Size = new System.Drawing.Size(185, 24);
             this.MS_CVTextEdit.StyleController = this.dataLayoutControl1;
             this.MS_CVTextEdit.TabIndex = 5;
             conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
@@ -165,9 +184,9 @@
             // 
             // TEN_CVTextEdit
             // 
-            this.TEN_CVTextEdit.Location = new System.Drawing.Point(120, 58);
+            this.TEN_CVTextEdit.Location = new System.Drawing.Point(118, 68);
             this.TEN_CVTextEdit.Name = "TEN_CVTextEdit";
-            this.TEN_CVTextEdit.Size = new System.Drawing.Size(485, 24);
+            this.TEN_CVTextEdit.Size = new System.Drawing.Size(481, 24);
             this.TEN_CVTextEdit.StyleController = this.dataLayoutControl1;
             this.TEN_CVTextEdit.TabIndex = 6;
             conditionValidationRule2.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
@@ -176,23 +195,23 @@
             // 
             // TEN_CV_ATextEdit
             // 
-            this.TEN_CV_ATextEdit.Location = new System.Drawing.Point(120, 84);
+            this.TEN_CV_ATextEdit.Location = new System.Drawing.Point(118, 96);
             this.TEN_CV_ATextEdit.Name = "TEN_CV_ATextEdit";
-            this.TEN_CV_ATextEdit.Size = new System.Drawing.Size(184, 24);
+            this.TEN_CV_ATextEdit.Size = new System.Drawing.Size(185, 24);
             this.TEN_CV_ATextEdit.StyleController = this.dataLayoutControl1;
             this.TEN_CV_ATextEdit.TabIndex = 7;
             // 
             // TEN_CV_HTextEdit
             // 
-            this.TEN_CV_HTextEdit.Location = new System.Drawing.Point(420, 84);
+            this.TEN_CV_HTextEdit.Location = new System.Drawing.Point(413, 96);
             this.TEN_CV_HTextEdit.Name = "TEN_CV_HTextEdit";
-            this.TEN_CV_HTextEdit.Size = new System.Drawing.Size(185, 24);
+            this.TEN_CV_HTextEdit.Size = new System.Drawing.Size(186, 24);
             this.TEN_CV_HTextEdit.StyleController = this.dataLayoutControl1;
             this.TEN_CV_HTextEdit.TabIndex = 8;
             // 
             // ID_LOAI_CVSearchLookUpEdit
             // 
-            this.ID_LOAI_CVSearchLookUpEdit.Location = new System.Drawing.Point(120, 6);
+            this.ID_LOAI_CVSearchLookUpEdit.Location = new System.Drawing.Point(118, 12);
             this.ID_LOAI_CVSearchLookUpEdit.Name = "ID_LOAI_CVSearchLookUpEdit";
             this.ID_LOAI_CVSearchLookUpEdit.Properties.Appearance.Options.UseTextOptions = true;
             this.ID_LOAI_CVSearchLookUpEdit.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
@@ -200,7 +219,7 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.ID_LOAI_CVSearchLookUpEdit.Properties.NullText = "";
             this.ID_LOAI_CVSearchLookUpEdit.Properties.PopupView = this.searchLookUpEdit1View;
-            this.ID_LOAI_CVSearchLookUpEdit.Size = new System.Drawing.Size(485, 24);
+            this.ID_LOAI_CVSearchLookUpEdit.Size = new System.Drawing.Size(481, 24);
             this.ID_LOAI_CVSearchLookUpEdit.StyleController = this.dataLayoutControl1;
             this.ID_LOAI_CVSearchLookUpEdit.TabIndex = 9;
             conditionValidationRule3.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
@@ -219,17 +238,17 @@
             // STT_IN_CVTextEdit
             // 
             this.STT_IN_CVTextEdit.EditValue = "";
-            this.STT_IN_CVTextEdit.Location = new System.Drawing.Point(420, 32);
+            this.STT_IN_CVTextEdit.Location = new System.Drawing.Point(413, 40);
             this.STT_IN_CVTextEdit.Name = "STT_IN_CVTextEdit";
             this.STT_IN_CVTextEdit.Properties.Appearance.Options.UseTextOptions = true;
             this.STT_IN_CVTextEdit.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.STT_IN_CVTextEdit.Properties.Mask.EditMask = "\\d{0,5}";
-            this.STT_IN_CVTextEdit.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
             this.STT_IN_CVTextEdit.Properties.Mask.UseMaskAsDisplayFormat = true;
-            this.STT_IN_CVTextEdit.Size = new System.Drawing.Size(185, 24);
+            this.STT_IN_CVTextEdit.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.RegExpMaskManager));
+            this.STT_IN_CVTextEdit.Properties.MaskSettings.Set("allowBlankInput", true);
+            this.STT_IN_CVTextEdit.Properties.MaskSettings.Set("mask", "\\d{0,5}");
+            this.STT_IN_CVTextEdit.Size = new System.Drawing.Size(186, 24);
             this.STT_IN_CVTextEdit.StyleController = this.dataLayoutControl1;
             this.STT_IN_CVTextEdit.TabIndex = 10;
-            conditionValidationRule4.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
             conditionValidationRule4.ErrorText = "This value is not valid";
             this.dxValidationProvider1.SetValidationRule(this.STT_IN_CVTextEdit, conditionValidationRule4);
             // 
@@ -257,34 +276,25 @@
             this.ItemForTEN_CV_H});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "autoGeneratedGroup0";
-            this.layoutControlGroup1.Size = new System.Drawing.Size(601, 284);
+            this.layoutControlGroup1.Size = new System.Drawing.Size(591, 274);
             // 
             // ItemForTEN_CV_A
             // 
             this.ItemForTEN_CV_A.Control = this.TEN_CV_ATextEdit;
-            this.ItemForTEN_CV_A.Location = new System.Drawing.Point(0, 78);
+            this.ItemForTEN_CV_A.Location = new System.Drawing.Point(0, 84);
             this.ItemForTEN_CV_A.Name = "ItemForTEN_CV_A";
-            this.ItemForTEN_CV_A.Size = new System.Drawing.Size(300, 26);
+            this.ItemForTEN_CV_A.Size = new System.Drawing.Size(295, 28);
             this.ItemForTEN_CV_A.Text = "TEN_CV_A";
             this.ItemForTEN_CV_A.TextSize = new System.Drawing.Size(102, 17);
-            // 
-            // ItemForTEN_CV_H
-            // 
-            this.ItemForTEN_CV_H.Control = this.TEN_CV_HTextEdit;
-            this.ItemForTEN_CV_H.Location = new System.Drawing.Point(300, 78);
-            this.ItemForTEN_CV_H.Name = "ItemForTEN_CV_H";
-            this.ItemForTEN_CV_H.Size = new System.Drawing.Size(301, 26);
-            this.ItemForTEN_CV_H.Text = "TEN_CV_H";
-            this.ItemForTEN_CV_H.TextSize = new System.Drawing.Size(102, 17);
             // 
             // ItemForMS_CV
             // 
             this.ItemForMS_CV.AppearanceItemCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.ItemForMS_CV.AppearanceItemCaption.Options.UseForeColor = true;
             this.ItemForMS_CV.Control = this.MS_CVTextEdit;
-            this.ItemForMS_CV.Location = new System.Drawing.Point(0, 26);
+            this.ItemForMS_CV.Location = new System.Drawing.Point(0, 28);
             this.ItemForMS_CV.Name = "ItemForMS_CV";
-            this.ItemForMS_CV.Size = new System.Drawing.Size(300, 26);
+            this.ItemForMS_CV.Size = new System.Drawing.Size(295, 28);
             this.ItemForMS_CV.Text = "MS_CV";
             this.ItemForMS_CV.TextSize = new System.Drawing.Size(102, 17);
             // 
@@ -293,18 +303,18 @@
             this.ItemForTEN_CV.AppearanceItemCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.ItemForTEN_CV.AppearanceItemCaption.Options.UseForeColor = true;
             this.ItemForTEN_CV.Control = this.TEN_CVTextEdit;
-            this.ItemForTEN_CV.Location = new System.Drawing.Point(0, 52);
+            this.ItemForTEN_CV.Location = new System.Drawing.Point(0, 56);
             this.ItemForTEN_CV.Name = "ItemForTEN_CV";
-            this.ItemForTEN_CV.Size = new System.Drawing.Size(601, 26);
+            this.ItemForTEN_CV.Size = new System.Drawing.Size(591, 28);
             this.ItemForTEN_CV.Text = "TEN_CV";
             this.ItemForTEN_CV.TextSize = new System.Drawing.Size(102, 17);
             // 
             // ItemForSTT_IN_CV
             // 
             this.ItemForSTT_IN_CV.Control = this.STT_IN_CVTextEdit;
-            this.ItemForSTT_IN_CV.Location = new System.Drawing.Point(300, 26);
+            this.ItemForSTT_IN_CV.Location = new System.Drawing.Point(295, 28);
             this.ItemForSTT_IN_CV.Name = "ItemForSTT_IN_CV";
-            this.ItemForSTT_IN_CV.Size = new System.Drawing.Size(301, 26);
+            this.ItemForSTT_IN_CV.Size = new System.Drawing.Size(296, 28);
             this.ItemForSTT_IN_CV.Text = "STT_IN_CV";
             this.ItemForSTT_IN_CV.TextSize = new System.Drawing.Size(102, 17);
             // 
@@ -315,40 +325,30 @@
             this.ItemForID_LOAI_CV.Control = this.ID_LOAI_CVSearchLookUpEdit;
             this.ItemForID_LOAI_CV.Location = new System.Drawing.Point(0, 0);
             this.ItemForID_LOAI_CV.Name = "ItemForID_LOAI_CV";
-            this.ItemForID_LOAI_CV.Size = new System.Drawing.Size(601, 26);
+            this.ItemForID_LOAI_CV.Size = new System.Drawing.Size(591, 28);
             this.ItemForID_LOAI_CV.Text = "ID_LOAI_CV";
             this.ItemForID_LOAI_CV.TextSize = new System.Drawing.Size(102, 17);
-            // 
-            // dxValidationProvider1
-            // 
-            this.dxValidationProvider1.ValidationMode = DevExpress.XtraEditors.DXErrorProvider.ValidationMode.Manual;
-            // 
-            // cboID_CTL
-            // 
-            this.cboID_CTL.Location = new System.Drawing.Point(120, 110);
-            this.cboID_CTL.Name = "cboID_CTL";
-            this.cboID_CTL.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cboID_CTL.Properties.NullText = "";
-            this.cboID_CTL.Properties.PopupView = this.gridView1;
-            this.cboID_CTL.Size = new System.Drawing.Size(485, 24);
-            this.cboID_CTL.StyleController = this.dataLayoutControl1;
-            this.cboID_CTL.TabIndex = 11;
             // 
             // lblCachTinhLuong
             // 
             this.lblCachTinhLuong.Control = this.cboID_CTL;
-            this.lblCachTinhLuong.Location = new System.Drawing.Point(0, 104);
+            this.lblCachTinhLuong.Location = new System.Drawing.Point(0, 112);
             this.lblCachTinhLuong.Name = "lblCachTinhLuong";
-            this.lblCachTinhLuong.Size = new System.Drawing.Size(601, 180);
+            this.lblCachTinhLuong.Size = new System.Drawing.Size(591, 162);
             this.lblCachTinhLuong.TextSize = new System.Drawing.Size(102, 17);
             // 
-            // gridView1
+            // ItemForTEN_CV_H
             // 
-            this.gridView1.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
-            this.gridView1.Name = "gridView1";
-            this.gridView1.OptionsSelection.EnableAppearanceFocusedCell = false;
-            this.gridView1.OptionsView.ShowGroupPanel = false;
+            this.ItemForTEN_CV_H.Control = this.TEN_CV_HTextEdit;
+            this.ItemForTEN_CV_H.Location = new System.Drawing.Point(295, 84);
+            this.ItemForTEN_CV_H.Name = "ItemForTEN_CV_H";
+            this.ItemForTEN_CV_H.Size = new System.Drawing.Size(296, 28);
+            this.ItemForTEN_CV_H.Text = "TEN_CV_H";
+            this.ItemForTEN_CV_H.TextSize = new System.Drawing.Size(102, 17);
+            // 
+            // dxValidationProvider1
+            // 
+            this.dxValidationProvider1.ValidationMode = DevExpress.XtraEditors.DXErrorProvider.ValidationMode.Manual;
             // 
             // frmEditCHUC_VU
             // 
@@ -365,6 +365,8 @@
             this.tablePanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataLayoutControl1)).EndInit();
             this.dataLayoutControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.cboID_CTL.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.MS_CVTextEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.TEN_CVTextEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.TEN_CV_ATextEdit.Properties)).EndInit();
@@ -375,15 +377,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForTEN_CV_A)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemForTEN_CV_H)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForMS_CV)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForTEN_CV)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForSTT_IN_CV)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForID_LOAI_CV)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cboID_CTL.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblCachTinhLuong)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForTEN_CV_H)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).EndInit();
             this.ResumeLayout(false);
 
         }

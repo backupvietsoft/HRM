@@ -895,5 +895,33 @@ namespace Vs.Payroll.Form
         {
             LoadTextTongLSP();
         }
+
+        private void grdCNThucHien_ProcessGridKey(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                if (e.KeyCode == Keys.Delete)
+                {
+                    if (Commons.Modules.ObjSystems.MsgQuestion(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgBanCoMuonXoaDuLieu")) != 1) return;
+                    DataTable dt = new DataTable();
+                    string sBT = "sBTThuaThieu" + Commons.Modules.iIDUser;
+                    dt = Commons.Modules.ObjSystems.GetDataTableMultiSelect(grdCNThucHien, grvCNThucHien);
+                    Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, sBT, dt, "");
+                    string sSQL = "DELETE dbo.PHIEU_CONG_DOAN FROM dbo.PHIEU_CONG_DOAN T1 INNER JOIN " + sBT + " T2 ON T1.ID_CHUYEN_SD = T2.ID_CHUYEN_SD AND T1.ID_ORD = T2.ID_ORD AND T1.ID_CD = T2.ID_CD AND T1.ID_CN = T2.ID_CN AND T1.NGAY = T2.NGAY";
+                    SqlHelper.ExecuteNonQuery(Commons.IConnections.CNStr, CommandType.Text, sSQL);
+                    Commons.Modules.ObjSystems.XoaTable(sBT);
+                    Commons.Modules.ObjSystems.msgCapNhat(1);
+                    LoadgrvCDThuaThieu();
+                    LoadgrvCN();
+
+                    grvCDThuaThieu_FocusedRowChanged(null, null);
+                }
+            }
+            catch (Exception ex)
+            {
+                Commons.Modules.ObjSystems.XoaTable("sBTThuaThieu" + Commons.Modules.iIDUser);
+                Commons.Modules.ObjSystems.MsgError(ex.Message);
+            }
+        }
     }
 }

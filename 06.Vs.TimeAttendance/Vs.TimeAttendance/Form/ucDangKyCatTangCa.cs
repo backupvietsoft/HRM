@@ -646,18 +646,18 @@ namespace Vs.TimeAttendance
 
         private void grvCatTC_RowStyle(object sender, RowStyleEventArgs e)
         {
-            try
-            {
-                if (Convert.ToDateTime(grvCatTC.GetRowCellValue(e.RowHandle, grvCatTC.Columns["NGAY"]).ToString().Trim()).DayOfWeek.ToString() != "Sunday") return;
-                {
-                    e.Appearance.BackColor = Color.Salmon;
-                    e.Appearance.BackColor2 = Color.SeaShell;
-                    e.HighPriority = true;
-                }
-            }
-            catch
-            {
-            }
+            //try
+            //{
+            //    if (Convert.ToDateTime(grvCatTC.GetRowCellValue(e.RowHandle, grvCatTC.Columns["NGAY"]).ToString().Trim()).DayOfWeek.ToString() != "Sunday") return;
+            //    {
+            //        e.Appearance.BackColor = Color.Salmon;
+            //        e.Appearance.BackColor2 = Color.SeaShell;
+            //        e.HighPriority = true;
+            //    }
+            //}
+            //catch
+            //{
+            //}
         }
     }
 }

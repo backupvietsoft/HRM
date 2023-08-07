@@ -62,7 +62,11 @@ namespace VietSoftHRM
         //sự kiện click cha
         private void Element_Click(object sender, EventArgs e)
         {
-
+            if (Commons.Modules.bChangeForm == true)
+            {
+                Commons.Modules.ObjSystems.MsgWarning("Dữ liệu chưa được lưu !");
+                return;
+            }
             var button = sender as AccordionControlElement;
             if (sLoad == button.Name) return;
             if (button.Style == DevExpress.XtraBars.Navigation.ElementStyle.Item)
@@ -189,6 +193,11 @@ namespace VietSoftHRM
         //sự kiện click con
         private void Elementchill_Click(object sender, EventArgs e)
         {
+            if (Commons.Modules.bChangeForm == true)
+            {
+                Commons.Modules.ObjSystems.MsgWarning("Dữ liệu chưa được lưu !");
+                return;
+            }
             var button = sender as AccordionControlElement;
             if (sLoad == button.Name) return;
             Commons.Modules.ObjSystems.ShowWaitForm(this);

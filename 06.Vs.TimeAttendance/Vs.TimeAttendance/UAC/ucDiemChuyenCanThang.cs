@@ -294,7 +294,7 @@ namespace Vs.TimeAttendance
 
                     foreach (GridColumn item in grvDiemThang.Columns)
                     {
-                        if (item.FieldName != "TIEN_THUONG")
+                        if (item.FieldName != "TIEN_THUONG" && item.FieldName != "DIEM")
                         {
                             grvDiemThang.Columns[item.FieldName].OptionsColumn.AllowEdit = false;
                         }

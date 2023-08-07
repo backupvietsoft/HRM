@@ -771,6 +771,13 @@ namespace Vs.HRM
                     string fontName = "Times New Roman";
                     int fontSizeTieuDe = 12;
                     int fontSizeNoiDung = 9;
+                    if (Commons.Modules.KyHieuDV == "MT")
+                    {
+                        fontSizeNoiDung = 11;
+                    }else
+                    {
+                        fontSizeNoiDung = 9;
+                    }
 
 
                     int lastColumn = 0;

@@ -336,6 +336,7 @@ namespace Vs.HRM
                 {
                     case "them":
                         {
+                            Commons.Modules.bChangeForm = true;
                             Commons.Modules.sLoad = "0Load";
                             cothem = true;
                             idcn = -1;
@@ -454,6 +455,8 @@ namespace Vs.HRM
                             }
                             Commons.Modules.ObjSystems.DeleteAddRow(grvBangCapCN);
                             Commons.Modules.ObjSystems.DeleteAddRow(grvTaiLieu);
+                            Commons.Modules.bChangeForm = false;
+
                             break;
                         }
                     case "khongluu":
@@ -482,6 +485,7 @@ namespace Vs.HRM
                             Commons.Modules.ObjSystems.DeleteAddRow(grvBangCapCN);
                             Commons.Modules.ObjSystems.DeleteAddRow(grvTaiLieu);
                             Commons.Modules.sLoad = "";
+                            Commons.Modules.bChangeForm = false;
                             this.ClearError();
                             break;
                         }

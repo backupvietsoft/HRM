@@ -170,6 +170,12 @@
     <Compile Include="Form\frmCopyCongDoan.Designer.cs">
       <DependentUpon>frmCopyCongDoan.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form\frmImportTinhLuong_MT.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\frmImportTinhLuong_MT.Designer.cs">
+      <DependentUpon>frmImportTinhLuong_MT.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form\frmImportTinhLuong_TG.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -805,6 +811,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form\frmCopyCongDoan.resx">
       <DependentUpon>frmCopyCongDoan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\frmImportTinhLuong_MT.resx">
+      <DependentUpon>frmImportTinhLuong_MT.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\frmImportTinhLuong_TG.resx">
       <DependentUpon>frmImportTinhLuong_TG.cs</DependentUpon>

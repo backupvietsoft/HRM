@@ -43,7 +43,7 @@
             this.xrLabel5 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel4 = new DevExpress.XtraReports.UI.XRLabel();
             this.lblThang = new DevExpress.XtraReports.UI.XRLabel();
-            this.xrLabel2 = new DevExpress.XtraReports.UI.XRLabel();
+            this.lblCK = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel1 = new DevExpress.XtraReports.UI.XRLabel();
             this.picLogo = new DevExpress.XtraReports.UI.XRPictureBox();
             this.xrTable2 = new DevExpress.XtraReports.UI.XRTable();
@@ -168,7 +168,7 @@
             this.xrLabel5,
             this.xrLabel4,
             this.lblThang,
-            this.xrLabel2,
+            this.lblCK,
             this.xrLabel1,
             this.picLogo,
             this.xrTable2,
@@ -281,18 +281,19 @@
             this.lblThang.Text = "Tháng ";
             this.lblThang.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             // 
-            // xrLabel2
+            // lblCK
             // 
-            this.xrLabel2.Font = new DevExpress.Drawing.DXFont("Times New Roman", 8.25F);
-            this.xrLabel2.LocationFloat = new DevExpress.Utils.PointFloat(209.7223F, 30.99994F);
-            this.xrLabel2.Multiline = true;
-            this.xrLabel2.Name = "xrLabel2";
-            this.xrLabel2.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.xrLabel2.SizeF = new System.Drawing.SizeF(53.61121F, 23F);
-            this.xrLabel2.StylePriority.UseFont = false;
-            this.xrLabel2.StylePriority.UseTextAlignment = false;
-            this.xrLabel2.Text = "CK";
-            this.xrLabel2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
+            this.lblCK.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[DATA].[STK]")});
+            this.lblCK.Font = new DevExpress.Drawing.DXFont("Times New Roman", 8.25F);
+            this.lblCK.LocationFloat = new DevExpress.Utils.PointFloat(209.7223F, 30.99994F);
+            this.lblCK.Multiline = true;
+            this.lblCK.Name = "lblCK";
+            this.lblCK.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.lblCK.SizeF = new System.Drawing.SizeF(53.61121F, 23F);
+            this.lblCK.StylePriority.UseFont = false;
+            this.lblCK.StylePriority.UseTextAlignment = false;
+            this.lblCK.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             // 
             // xrLabel1
             // 
@@ -1538,7 +1539,7 @@
         private DevExpress.XtraReports.UI.XRLabel xrLabel5;
         private DevExpress.XtraReports.UI.XRLabel xrLabel4;
         private DevExpress.XtraReports.UI.XRLabel lblThang;
-        private DevExpress.XtraReports.UI.XRLabel xrLabel2;
+        private DevExpress.XtraReports.UI.XRLabel lblCK;
         private DevExpress.XtraReports.UI.XRTableRow xrTableRow1;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell1;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell2;

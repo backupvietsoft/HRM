@@ -83,8 +83,9 @@ namespace Vs.Payroll
                 dt = new DataTable();
                 if(iloai == 1)
                 {
-                    dt.Columns["THUONG_HIEU_SUAT"].DataType = typeof(double);
+                   
                     dt = ToDataTable(source);
+                    dt.Columns["THUONG_HIEU_SUAT"].DataType = typeof(double);
                 }
                 else
                 {

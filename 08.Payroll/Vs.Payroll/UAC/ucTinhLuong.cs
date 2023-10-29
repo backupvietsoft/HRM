@@ -337,8 +337,10 @@ namespace Vs.Payroll
                     grvData.Columns["HO_TEN"].OptionsColumn.AllowEdit = false;
                     grvData.Columns["TEN_TO"].OptionsColumn.AllowEdit = false;
 
+                    grvData.Columns["TONG_LUONG_NHAP_TAY"].OptionsColumn.AllowEdit = true;
+                    grvData.Columns["LUONG_QC"].OptionsColumn.AllowEdit = true;
                     grvData.Columns["THANH_TOAN_KHAC"].OptionsColumn.AllowEdit = true;
-                   
+
 
                     grvData.OptionsSelection.MultiSelect = true;
                     grvData.OptionsSelection.MultiSelectMode = GridMultiSelectMode.RowSelect;
@@ -821,7 +823,19 @@ namespace Vs.Payroll
             {
                 case "export":
                     {
-                        Export();
+                        switch (Commons.Modules.KyHieuDV)
+                        {
+                            case "TG":
+                                {
+                                    Export_TG();
+                                    break;
+                                }
+                            case "MT":
+                                {
+                                    Export_MT();
+                                    break;
+                                }
+                        }
                         break;
                     }
                 case "import":
@@ -831,39 +845,20 @@ namespace Vs.Payroll
                             XtraMessageBox.Show(Commons.Modules.ObjLanguages.GetLanguage("frmMessage", "msgChuaChonThang"), Commons.Modules.ObjLanguages.GetLanguage("msgThongBao", "msg_Caption"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             return;
                         }
-                        frmImportTinhLuong_TG frm = new frmImportTinhLuong_TG();
-                        frm.iID_DV = Convert.ToInt32(cboDonVi.EditValue);
-                        frm.iID_XN = Convert.ToInt32(cboXiNghiep.EditValue);
-                        frm.iID_TO = Convert.ToInt32(cboTo.EditValue);
-                        frm.dtThang = Convert.ToDateTime(cboThang.EditValue);
-                        frm.dtDThang = Convert.ToDateTime(cboThang.EditValue).AddMonths(1).AddDays(-1);
-                        double iW, iH;
-                        iW = Screen.PrimaryScreen.WorkingArea.Width / 1.5;
-                        iH = Screen.PrimaryScreen.WorkingArea.Height / 1.5;
-                        frm.Size = new Size((int)iW, (int)iH);
-                        if (frm.ShowDialog() == DialogResult.OK)
+                        switch (Commons.Modules.KyHieuDV)
                         {
-
-                            switch (Commons.Modules.KyHieuDV)
-                            {
-                                case "TG":
-                                    {
-                                        LoadGrdGTGC_TG();
-                                        break;
-                                    }
-                                case "MT":
-                                    {
-                                        LoadGrdGTGC_MT();
-                                        break;
-                                    }
-                                default:
-                                    {
-                                        LoadGrdGTGC_BT();
-                                        break;
-                                    }
-                            }
-                            TinhLuong();
+                            case "TG":
+                                {
+                                    Import_TG();
+                                    break;
+                                }
+                            case "MT":
+                                {
+                                    Import_MT();
+                                    break;
+                                }
                         }
+                        TinhLuong();
                         break;
                     }
                 case "khoitao":
@@ -929,6 +924,44 @@ namespace Vs.Payroll
                     }
             }
         }
+
+        private void Import_TG()
+        {
+            frmImportTinhLuong_TG frm = new frmImportTinhLuong_TG();
+            frm.iID_DV = Convert.ToInt32(cboDonVi.EditValue);
+            frm.iID_XN = Convert.ToInt32(cboXiNghiep.EditValue);
+            frm.iID_TO = Convert.ToInt32(cboTo.EditValue);
+            frm.dtThang = Convert.ToDateTime(cboThang.EditValue);
+            frm.dtDThang = Convert.ToDateTime(cboThang.EditValue).AddMonths(1).AddDays(-1);
+            frm.iloai = 1;
+            double iW, iH;
+            iW = Screen.PrimaryScreen.WorkingArea.Width / 1.5;
+            iH = Screen.PrimaryScreen.WorkingArea.Height / 1.5;
+            frm.Size = new Size((int)iW, (int)iH);
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                LoadGrdGTGC_TG();
+            }
+        }
+
+        private void Import_MT()
+        {
+            frmImportTinhLuong_MT frm = new frmImportTinhLuong_MT();
+            frm.iID_DV = Convert.ToInt32(cboDonVi.EditValue);
+            frm.iID_XN = Convert.ToInt32(cboXiNghiep.EditValue);
+            frm.iID_TO = Convert.ToInt32(cboTo.EditValue);
+            frm.dtThang = Convert.ToDateTime(cboThang.EditValue);
+            frm.dtDThang = Convert.ToDateTime(cboThang.EditValue).AddMonths(1).AddDays(-1);
+            double iW, iH;
+            iW = Screen.PrimaryScreen.WorkingArea.Width / 1.5;
+            iH = Screen.PrimaryScreen.WorkingArea.Height / 1.5;
+            frm.Size = new Size((int)iW, (int)iH);
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                LoadGrdGTGC_MT();
+            }
+        }
+
 
         private void TinhLuong()
         {
@@ -1018,7 +1051,7 @@ namespace Vs.Payroll
                                     dt = Commons.Modules.ObjSystems.ConvertDatatable(grvData);
                                     Commons.Modules.ObjSystems.MCreateTableToDatatable(Commons.IConnections.CNStr, "sBT" + Commons.Modules.iIDUser.ToString(), dt, "");
 
-                                    string sSql = "UPDATE A SET A.THANH_TOAN_KHAC = B.THANH_TOAN_KHAC FROM dbo.BANG_LUONG_MT A INNER JOIN dbo." + "sBT" + Commons.Modules.iIDUser.ToString() + " B ON B.ID_CN = A.ID_CN AND A.THANG = CONVERT(DATE,'" + Tngay.ToString("MM/dd/yyyy") + "')";
+                                    string sSql = "UPDATE A SET A.TONG_LUONG_NHAP_TAY = B.TONG_LUONG_NHAP_TAY,A.LUONG_QC = B.LUONG_QC,A.THANH_TOAN_KHAC = B.THANH_TOAN_KHAC FROM dbo.BANG_LUONG_MT A INNER JOIN dbo." + "sBT" + Commons.Modules.iIDUser.ToString() + " B ON B.ID_CN = A.ID_CN AND A.THANG = CONVERT(DATE,'" + Tngay.ToString("MM/dd/yyyy") + "')";
                                     SqlHelper.ExecuteScalar(Commons.IConnections.CNStr, CommandType.Text, sSql);
                                     Commons.Modules.ObjSystems.XoaTable("sBT" + Commons.Modules.iIDUser.ToString());
                                 }
@@ -1110,7 +1143,7 @@ namespace Vs.Payroll
             }
         }
 
-        private void Export()
+        private void Export_TG()
         {
             DateTime Tngay = Commons.Modules.ObjSystems.ConvertDateTime(cboThang.Text);
             DateTime Dngay = Commons.Modules.ObjSystems.ConvertDateTime(cboThang.Text).AddMonths(1).AddDays(-1);
@@ -1257,6 +1290,131 @@ namespace Vs.Payroll
             }
         }
 
+        private void Export_MT()
+        {
+            DateTime Tngay = Commons.Modules.ObjSystems.ConvertDateTime(cboThang.Text);
+            DateTime Dngay = Commons.Modules.ObjSystems.ConvertDateTime(cboThang.Text).AddMonths(1).AddDays(-1);
+
+            System.Data.SqlClient.SqlConnection conn;
+            conn = new System.Data.SqlClient.SqlConnection(Commons.IConnections.CNStr);
+            conn.Open();
+            DataTable dtBCLuong;
+            try
+            {
+                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("spImportExportLuong_MT", conn);
+                cmd.Parameters.Add("@UName", SqlDbType.NVarChar, 50).Value = Commons.Modules.UserName;
+                cmd.Parameters.Add("@NNgu", SqlDbType.Int).Value = Commons.Modules.TypeLanguage;
+                cmd.Parameters.Add("@DVi", SqlDbType.Int).Value = Convert.ToInt32(cboDonVi.EditValue);
+                cmd.Parameters.Add("@XN", SqlDbType.Int).Value = Convert.ToInt32(cboXiNghiep.EditValue);
+                cmd.Parameters.Add("@TO", SqlDbType.Int).Value = Convert.ToInt32(cboTo.EditValue);
+                cmd.Parameters.Add("@TNGAY", SqlDbType.Date).Value = Tngay;
+                cmd.Parameters.Add("@DNGAY", SqlDbType.Date).Value = Dngay;
+                cmd.Parameters.Add("@iLoai", SqlDbType.Int).Value = 1;
+                cmd.CommandType = CommandType.StoredProcedure;
+                System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
+                DataSet ds = new DataSet();
+                adp.Fill(ds);
+                dtBCLuong = new DataTable();
+                dtBCLuong = ds.Tables[0].Copy();
+
+                string SaveExcelFile = SaveFiles("Excel Workbook |*.xlsx|Excel 97-2003 Workbook |*.xls|Word Document |*.docx|Rich Text Format |*.rtf|PDF File |*.pdf|Web Page |*.html|Single File Web Page |*.mht");
+                if (SaveExcelFile == "")
+                {
+                    return;
+                }
+                this.Cursor = Cursors.WaitCursor;
+                Microsoft.Office.Interop.Excel.Application oXL;
+                Microsoft.Office.Interop.Excel._Workbook oWB;
+                Microsoft.Office.Interop.Excel._Worksheet oSheet;
+
+                oXL = new Microsoft.Office.Interop.Excel.Application();
+                oXL.Visible = false;
+
+                oWB = (Microsoft.Office.Interop.Excel._Workbook)(oXL.Workbooks.Add(Missing.Value));
+                oSheet = (Microsoft.Office.Interop.Excel._Worksheet)oWB.ActiveSheet;
+
+                string fontName = "Times New Roman";
+                int fontSizeTieuDe = 12;
+                int fontSizeNoiDung = 12;
+                int iTNgay = 1;
+                int iDNgay = 20;
+                int iSoNgay = (iDNgay - iTNgay);
+
+
+                Microsoft.Office.Interop.Excel.Range row4_A = oSheet.get_Range("A1");
+                row4_A.ColumnWidth = 16;
+                row4_A.Value2 = "Mã nhân viên";
+
+                Microsoft.Office.Interop.Excel.Range row4_B = oSheet.get_Range("B1");
+                row4_B.ColumnWidth = 33;
+                row4_B.Value2 = "Họ tên";
+
+                Microsoft.Office.Interop.Excel.Range row4_C = oSheet.get_Range("C1");
+                row4_C.ColumnWidth = 20;
+                row4_C.Value2 = "Tổng lương CBC";
+
+                Microsoft.Office.Interop.Excel.Range row4_D = oSheet.get_Range("D1");
+                row4_D.ColumnWidth = 20;
+                row4_D.Value2 = "Lương QC";
+                Microsoft.Office.Interop.Excel.Range row4_E = oSheet.get_Range("E1");
+                row4_E.ColumnWidth = 20;
+                row4_E.Value2 = "Thanh toán khác";
+
+                Microsoft.Office.Interop.Excel.Range row4_FormatTieuDe = oSheet.get_Range("A1", "E1");
+                row4_FormatTieuDe.Font.Size = fontSizeTieuDe;
+                row4_FormatTieuDe.Font.Name = fontName;
+                row4_FormatTieuDe.Font.Bold = true;
+                row4_FormatTieuDe.Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                row4_FormatTieuDe.Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+
+
+                DataRow[] dr = dtBCLuong.Select();
+                string[,] rowData = new string[dr.Length, dtBCLuong.Columns.Count];
+
+                int col = 0;
+                int rowCnt = 0;
+                foreach (DataRow row in dr)
+                {
+                    for (col = 0; col < dtBCLuong.Columns.Count; col++)
+                    {
+                        rowData[rowCnt, col] = row[col].ToString();
+                    }
+                    rowCnt++;
+                }
+                rowCnt = rowCnt + 1;
+                oSheet.get_Range("A2", "E" + rowCnt.ToString()).Value2 = rowData;
+                oSheet.get_Range("A2", "E" + rowCnt.ToString()).Font.Name = fontName;
+                oSheet.get_Range("A2", "E" + rowCnt.ToString()).Font.Size = fontSizeNoiDung;
+                ////Kẻ khung toàn bộ
+                ///
+
+                Microsoft.Office.Interop.Excel.Range formatRange;
+                for (int colFormat = 3; colFormat <= dtBCLuong.Columns.Count; colFormat++) // format từ cột t
+                {
+                    formatRange = oSheet.Range[oSheet.Cells[2, colFormat], oSheet.Cells[dtBCLuong.Rows.Count + 2, colFormat]];
+                    formatRange.NumberFormat = "#,##0;(#,##0);;";
+                    try
+                    {
+                        formatRange.TextToColumns(Type.Missing, Microsoft.Office.Interop.Excel.XlTextParsingType.xlDelimited, Microsoft.Office.Interop.Excel.XlTextQualifier.xlTextQualifierDoubleQuote);
+                    }
+                    catch { }
+
+                }
+
+                this.Cursor = Cursors.Default;
+
+                oXL.Visible = true;
+                oXL.UserControl = true;
+
+                oWB.SaveAs(SaveExcelFile,
+                    AccessMode: Microsoft.Office.Interop.Excel.XlSaveAsAccessMode.xlShared);
+            }
+            catch (Exception ex)
+            {
+                this.Cursor = Cursors.Default;
+                MessageBox.Show(ex.Message);
+            }
+        }
 
 
         private void EnableButon()
@@ -1274,10 +1432,10 @@ namespace Vs.Payroll
             }
             else
             {
-                btnALL.Buttons[0].Properties.Visible = Commons.Modules.KyHieuDV == "TG" ? true : false;
-                btnALL.Buttons[1].Properties.Visible = Commons.Modules.KyHieuDV == "TG" ? true : false;
+                btnALL.Buttons[0].Properties.Visible = Commons.Modules.KyHieuDV == "TG" || Commons.Modules.KyHieuDV == "MT" ? true : false;
+                btnALL.Buttons[1].Properties.Visible = Commons.Modules.KyHieuDV == "TG" || Commons.Modules.KyHieuDV == "MT" ? true : false;
                 btnALL.Buttons[2].Properties.Visible = Commons.Modules.KyHieuDV == "DM" ? true : false;
-                btnALL.Buttons[3].Properties.Visible = Commons.Modules.KyHieuDV == "TG" ? false : true;
+                btnALL.Buttons[3].Properties.Visible = Commons.Modules.KyHieuDV == "TG" || Commons.Modules.KyHieuDV == "MT" ? false : true;
                 btnALL.Buttons[5].Properties.Visible = true;
                 btnALL.Buttons[6].Properties.Visible = true;
                 btnALL.Buttons[7].Properties.Visible = true;

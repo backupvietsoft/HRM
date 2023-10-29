@@ -164,8 +164,6 @@ namespace Vs.Recruit
                         string sPath = "";
                         sPath = Commons.Modules.MExcel.SaveFiles("Excel Files (*.xlsx;)|*.xlsx;|" + "All Files (*.*)|*.*");
                         if (sPath == "") return;
-                        //Workbook book = new Workbook();
-                        //Worksheet sheet = book.Worksheets[0];
                         ExportUngVien(sPath);
                         break;
                     }

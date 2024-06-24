@@ -35,23 +35,14 @@ namespace VietSoftHRM
                     //insert vao user
                     //MessageBox.Show(Commons.Modules.UserName + " : " + Commons.Modules.iIDUser.ToString() + " : " + Commons.IConnections.Database + "\n" + Commons.IConnections.CNStr);
                 }
-                Application.Run(new Form1(args));
+                //Application.Run(new Form1(args));
                 //clsMain.setTTC();
                 //clsMain.CheckUpdate();
                 //Application.EnableVisualStyles();
 
-                //if (args.Length > 0) 
-                //{
-
-                //    Commons.Modules.ObjSystems.User(Commons.Modules.UserName, 1);
-                //    t = new Thread(new ThreadStart(MRunInt));
-                //}
-                //else
-                //{
-                //    t = new Thread(new ThreadStart(MRunForm));
-                //}
-                //t.SetApartmentState(ApartmentState.STA);
-                //t.Start();
+                t = new Thread(new ThreadStart(MRunForm));
+                t.SetApartmentState(ApartmentState.STA);
+                t.Start();
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
@@ -63,7 +54,7 @@ namespace VietSoftHRM
                 //Application.Run(new Form1());
                 //Application.Run(new frmMain());
 
-                //Application.Run(new frmLogin());
+                Application.Run(new frmLogin());
                 //Application.Run(new frmNotification());
                 //Application.Run(new XtraForm1());
                 //Application.Run(new frmThongTinChung(1));

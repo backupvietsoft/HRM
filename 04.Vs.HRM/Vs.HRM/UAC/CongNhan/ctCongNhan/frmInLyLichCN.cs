@@ -89,13 +89,11 @@ namespace Vs.HRM
                                                 System.Data.SqlClient.SqlDataAdapter adp = new System.Data.SqlClient.SqlDataAdapter(cmd);
                                                 DataSet ds = new DataSet();
                                                 adp.Fill(ds);
-
                                                 DataTable dt1 = new DataTable();
                                                 dt1 = ds.Tables[1].Copy();
                                                 dt1.TableName = "DATA";
                                                 //frm.rpt = new Vs.Recruit.rptInTheNV_DM(dt1);
                                                 frm.AddDataSource(dt1);
-
                                                 dt = new DataTable();
                                                 dt = ds.Tables[0].Copy();
                                                 dt.TableName = "DATA1";

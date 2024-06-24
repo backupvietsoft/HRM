@@ -30,7 +30,6 @@ namespace Vs.HRM
             Commons.IConnections.Server = @"27.74.240.29,1433";
             Commons.IConnections.Database = "VS_HRM_DM";
             Commons.IConnections.Password = "codaikadaiku";
-
             Commons.Modules.sPrivate = @"PILMICO";
             //Commons.Modules.sPrivate = @"ADC";
             Commons.Modules.iSoLeSL = 1;

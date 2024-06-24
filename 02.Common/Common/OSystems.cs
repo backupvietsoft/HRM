@@ -466,6 +466,7 @@ namespace Commons
             }
             catch { }
         }
+       
         public void OpenHinh(string strDuongdan)
         {
             if (strDuongdan.Equals(""))

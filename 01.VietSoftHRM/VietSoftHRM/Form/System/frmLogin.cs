@@ -232,7 +232,7 @@ namespace VietSoftHRM
                 return true;
             else
             {
-                if (Commons.Modules.ObjSystems.LoadIPLocal() == sSql)
+                if (Commons.Modules.ObjSystems.LoadIPLocal() != sSql)
                     return true;
                 else
                 {

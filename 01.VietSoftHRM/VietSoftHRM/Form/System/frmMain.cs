@@ -539,6 +539,8 @@ namespace VietSoftHRM
 
         private void popupMenu1_CloseUp(object sender, EventArgs e)
         {
+            //WXI
+
             if (Settings.Default["ApplicationSkinName"].ToString() == UserLookAndFeel.Default.SkinName) return;
             Settings.Default["ApplicationSkinName"] = UserLookAndFeel.Default.SkinName;
             Settings.Default.Save();
